@@ -1,0 +1,19 @@
+{&&Language=English}
+
+.variables
+
+;PX      BN     2                                                                                             \
+PPPP    BN     2               $>Other Financial Statement Information<$                                     \OtherFinancialStatementInformation
+PIII    BN     3               $>Gross Capital Expenditure<$                                                 \GrossCapitalExpenditure
+PIII    BN     3               $>Mandatory Capital Expenditure<$                                             \MandatoryCapitalExpenditure
+;PIII    BN     3               $>Receivables from Shareholders<$                                             \ReceivablesFromShareholders
+PIII    BN     3               $>Capitalized Interest<$                                                      \CapitalizedInterest
+PIII    BN     3               =ContingentLiabilities                                                        \=ContingentLiabilities
+PIII    FN     3               $>Annual Operating Lease Payments<$ $>(+)<$                                \AnnualOperatingLeasePayments
+PPPP    FN     4               =RentalAndLeaseProductionExpenses                                             \=RentalAndLeaseProductionExpenses                 ->RentalAndLeaseProductionExpenses
+PPPP    FN     4               =HireAndLeaseFurnitureAndFixtureExpenses                                      \=HireAndLeaseFurnitureAndFixtureExpenses          ->HireAndLeaseFurnitureAndFixtureExpenses
+PPPP    FN     4               =RentOfficeExpenses                                                           \=RentOfficeExpenses                               ->RentOfficeExpenses
+PPPP    FN     4               =LeaseTransportationExpenses                                                  \=LeaseTransportationExpenses                      ->LeaseTransportationExpenses
+PIII    FN  *  4               $>Operational Lease Amounts (not recognized in the Annual Statement)<$        \OperationalLeaseAmountsNotRecognizedInTheAnnualStatement
+PIII   =FN    -4=              =AnnualOperatingLeasePayments                                                 \=AnnualOperatingLeasePayments
+PIII    FN     3               $>Non-present Taxes<$                                                         \NonPresentTaxes

@@ -1,0 +1,1148 @@
+{&&Language=English}
+
+.Variables
+PXXX    PA     1        ?      $>Credit request<$                              \Financieringsaanvraag
+
+PIII    PN T 1 2               $>Date of investment<$                          \BBInvPlanKolom
+PIII    PN C   2               $>Kind of credit request<$                      \BBInvPlan_Soort
+
+PIII    PM   1 2               $>Explanation<$ $>credit request<$              \BBFinInvPlanToelichting
+
+PPPP    PN   1 2        ?      $>Investments<$                                 \BBInvPlan;;=BBFinInvPlanInvTotaal
+
+PIII    PN T 1 3               =BBInvPlanKolom                                 \=BBInvPlanKolom
+PIII    PN C   3 1             =BBInvPlan_Soort                                \=BBInvPlan_Soort
+
+PIII    PN C   3               $>1st investment<$                              \BBInvPlanKeuze1
+PIII    PN C   3               $>2nd investment<$                              \BBInvPlanKeuze2
+PIII    PN C   3               $>3rd investment<$                              \BBInvPlanKeuze3
+
+PII     PN   1-3               =Akt1                                           \BBInvPlanAkt1Inv -> Akt1
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt1
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt1Inv -> Akt1Inv
+PIII M  FN     4           B!  =Akt1Herw                                       \=Akt1Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt1Afs -> Akt1Afs
+PIPI    BN    -4=              =Akt1                                           \=Akt1
+PPP     PA     3                                                               \BBInvPlanAkt1Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt11=Akt1Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt12=Akt1AfsPerc
+
+PII     PN   1-3               =AktH                                           \BBInvPlanAktHInv -> AktH
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktH
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktHInv -> AktHInv
+PIII M  FN     4           B!  =AktHHerw                                       \=AktHHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktHAfs -> AktHAfs
+PIPI    BN    -4=              =AktH                                           \=AktH
+PPP     PA     3                                                               \BBInvPlanAktHOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkth1=AkthTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkth2=AkthAfsPerc
+
+III     PN   1-3               =AktF                                           \BBInvPlanAktFInv -> AktF
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktF
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktFInv -> AktFInv
+PIII M  FN     4           B!  =AktFHerw                                       \=AktFHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktFAfs -> AktFAfs
+PIPI    BN    -4=              =AktF                                           \=AktF
+PPP     PA     3                                                               \BBInvPlanAktFOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktf1=AktfTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktf2=AktfAfsPerc
+
+III     PN   1-3               =Akt2                                           \BBInvPlanAkt2Inv -> Akt2
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt2
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt2Inv -> Akt2Inv
+PIII M  FN     4           B!  =Akt2Herw                                       \=Akt2Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt2Afs -> Akt2Afs
+PIPI    BN    -4=              =Akt2                                           \=Akt2
+PPP     PA     3                                                               \BBInvPlanAkt2Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt21=Akt2Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt22=Akt2AfsPerc
+
+III     PN   1-3               =Akt3                                           \BBInvPlanAkt3Inv -> Akt3
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt3
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt3Inv -> Akt3Inv
+PIII M  FN     4           B!  =Akt3Herw                                       \=Akt3Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt3Afs -> Akt3Afs
+PIPI    BN    -4=              =Akt3                                           \=Akt3
+PPP     PA     3                                                               \BBInvPlanAkt3Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt31=Akt3Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt32=Akt3AfsPerc
+
+
+III     PN   1-3               =Akt4                                           \BBInvPlanAkt4Inv -> Akt4
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt4
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt4Inv -> Akt4Inv
+PIII M  FN     4           B!  =Akt4Herw                                       \=Akt4Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt4Afs -> Akt4Afs
+PIPI    BN    -4=              =Akt4                                           \=Akt4
+PPP     PA     3                                                               \BBInvPlanAkt4Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt41=Akt4Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt42=Akt4AfsPerc
+
+III     PN   1-3               =Akt5                                           \BBInvPlanAkt5Inv -> Akt5
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt5
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt5Inv -> Akt5Inv
+PIII M  FN     4           B!  =Akt5Herw                                       \=Akt5Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt5Afs -> Akt5Afs
+PIPI    BN    -4=              =Akt5                                           \=Akt5
+PPP     PA     3                                                               \BBInvPlanAkt5Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt51=Akt5Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt52=Akt5AfsPerc
+
+III     PN   1-3               =Akt6                                           \BBInvPlanAkt6Inv -> Akt6
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt6
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt6Inv -> Akt6Inv
+PIII M  FN     4           B!  =Akt6Herw                                       \=Akt6Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt6Afs -> Akt6Afs
+PIPI    BN    -4=              =Akt6                                           \=Akt6
+PPP     PA     3                                                               \BBInvPlanAkt6Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt61=Akt6Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt62=Akt6AfsPerc
+
+III     PN   1-3               =Akt7                                           \BBInvPlanAkt7Inv -> Akt7
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt7
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt7Inv -> Akt7Inv
+PIII M  FN     4           B!  =Akt7Herw                                       \=Akt7Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt7Afs -> Akt7Afs
+PIPI    BN    -4=              =Akt7                                           \=Akt7
+PPP     PA     3                                                               \BBInvPlanAkt7Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt71=Akt7Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt72=Akt7AfsPerc
+
+III     PN   1-3               =AktJ                                           \BBInvPlanAktJInv -> AktJ
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktJ
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktJInv -> AktJInv
+PIII M  FN     4           B!  =AktJHerw                                       \=AktJHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktJAfs -> AktJAfs
+PIPI    BN    -4=              =AktJ                                           \=AktJ
+PPP     PA     3                                                               \BBInvPlanAktJOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktj1=AktjTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktj2=AktjAfsPerc
+
+III     PN   1-3               =Akt8                                           \BBInvPlanAkt8Inv -> Akt8
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt8
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt8Inv -> Akt8Inv
+PIII M  FN     4           B!  =Akt8Herw                                       \=Akt8Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt8Afs -> Akt8Afs
+PIPI    BN    -4=              =Akt8                                           \=Akt8
+PPP     PA     3                                                               \BBInvPlanAkt8Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt81=Akt8Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt82=Akt8AfsPerc
+
+PII     PN   1-3               =AktD                                           \BBInvPlanAktDInv -> AktD
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktD
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktDInv -> AktDInv
+PIII M  FN     4           B!  =AktDHerw                                       \=AktDHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktDAfs -> AktDAfs
+PIPI    BN    -4=              =AktD                                           \=AktD
+PPP     PA     3                                                               \BBInvPlanAktDOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktd1=AktdTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktd2=AktdAfsPerc
+
+III     PN   1-3               =AktC                                           \BBInvPlanAktCInv -> AktC
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktC
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktCInv -> AktCInv
+PIII M  FN     4           B!  =AktCHerw                                       \=AktCHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktCAfs -> AktCAfs
+PIPI    BN    -4=              =AktC                                           \=AktC
+PPP     PA     3                                                               \BBInvPlanAktCOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktc1=AktcTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktc2=AktcAfsPerc
+
+III     PN   1-3               =AktP                                           \BBInvPlanAktPInv -> AktP
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktP
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktPInv -> AktPInv
+PIII M  FN     4           B!  =AktPHerw                                       \=AktPHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktPAfs -> AktPAfs
+PIPI    BN    -4=              =AktP                                           \=AktP
+PPP     PA     3                                                               \BBInvPlanAktPOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktp1=AktpTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktp2=AktpAfsPerc
+
+III     PN   1-3               =AktN                                           \BBInvPlanAktNInv -> AktN
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktN
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktNInv -> AktNInv
+PIII M  FN     4           B!  =AktNHerw                                       \=AktNHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktNAfs -> AktNAfs
+PIPI    BN    -4=              =AktN                                           \=AktN
+PPP     PA     3                                                               \BBInvPlanAktNOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktn1=AktnTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktn2=AktnAfsPerc
+
+III     PN   1-3               =AktM                                           \BBInvPlanAktMInv -> AktM
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktM
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktMInv -> AktMInv
+PIII M  FN     4           B!  =AktMHerw                                       \=AktMHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktMAfs -> AktMAfs
+PIPI    BN    -4=              =AktM                                           \=AktM
+PPP     PA     3                                                               \BBInvPlanAktMOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktM1=AktMTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktM2=AktMAfsPerc
+
+III     PN   1-3               =Akt20                                           \BBInvPlanAkt20Inv -> Akt20
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt20
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt20Inv -> Akt20Inv
+PIII M  FN     4           B!  =Akt20Herw                                       \=Akt20Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt20Afs -> Akt20Afs
+PIPI    BN    -4=              =Akt20                                           \=Akt20
+PPP     PA     3                                                               \BBInvPlanAkt20Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt201=Akt20Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt202=Akt20AfsPerc
+
+III     PN   1-3               =Akt21                                           \BBInvPlanAkt21Inv -> Akt21
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt21
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt21Inv -> Akt21Inv
+PIII M  FN     4           B!  =Akt21Herw                                       \=Akt21Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt21Afs -> Akt21Afs
+PIPI    BN    -4=              =Akt21                                           \=Akt21
+PPP     PA     3                                                               \BBInvPlanAkt21Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt211=Akt21Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt212=Akt21AfsPerc
+
+III     PN   1-3               =Akt22                                           \BBInvPlanAkt22Inv -> Akt22
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt22
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt22Inv -> Akt22Inv
+PIII M  FN     4           B!  =Akt22Herw                                       \=Akt22Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt22Afs -> Akt22Afs
+PIPI    BN    -4=              =Akt22                                           \=Akt22
+PPP     PA     3                                                               \BBInvPlanAkt22Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt221=Akt22Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt222=Akt22AfsPerc
+
+III     PN   1-3               =Akt23                                           \BBInvPlanAkt23Inv -> Akt23
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt23
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt23Inv -> Akt23Inv
+PIII M  FN     4           B!  =Akt23Herw                                       \=Akt23Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt23Afs -> Akt23Afs
+PIPI    BN    -4=              =Akt23                                           \=Akt23
+PPP     PA     3                                                               \BBInvPlanAkt23Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt231=Akt23Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt232=Akt23AfsPerc
+
+III     PN   1-3               =Akt24                                           \BBInvPlanAkt24Inv -> Akt24
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt24
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt24Inv -> Akt24Inv
+PIII M  FN     4           B!  =Akt24Herw                                       \=Akt24Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt24Afs -> Akt24Afs
+PIPI    BN    -4=              =Akt24                                           \=Akt24
+PPP     PA     3                                                               \BBInvPlanAkt24Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt241=Akt24Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt242=Akt24AfsPerc
+
+III     PN   1-3               =Akt25                                           \BBInvPlanAkt25Inv -> Akt25
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt25
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt25Inv -> Akt25Inv
+PIII M  FN     4           B!  =Akt25Herw                                       \=Akt25Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt25Afs -> Akt25Afs
+PIPI    BN    -4=              =Akt25                                           \=Akt25
+PPP     PA     3                                                               \BBInvPlanAkt25Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt251=Akt25Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt252=Akt25AfsPerc
+
+III     PN   1-3               =AktQ                                           \BBInvPlanAktQInv -> AktQ
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAktQ
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=AktQInv -> AktQInv
+PIII M  FN     4           B!  =AktQHerw                                       \=AktQHerw
+PIII M -FN     4               $>Depreciation<$                                \=AktQAfs -> AktQAfs
+PIPI    BN    -4=              =AktQ                                           \=AktQ
+PPP     PA     3                                                               \BBInvPlanAktQOpm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAktQ1=AktQTerm
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAktQ2=AktQAfsPerc
+
+III     PN   1-3               =Akt50                                           \BBInvPlanAkt50Inv -> Akt50
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt50
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt50Inv -> Akt50Inv
+PIII M  FN     4           B!  =Akt50Herw                                       \=Akt50Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt50Afs -> Akt50Afs
+PIPI    BN    -4=              =Akt50                                           \=Akt50
+PPP     PA     3                                                               \BBInvPlanAkt50Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt501=Akt50Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt502=Akt50AfsPerc
+
+III     PN   1-3               =Akt51                                           \BBInvPlanAkt51Inv -> Akt51
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt51
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt51Inv -> Akt51Inv
+PIII M  FN     4           B!  =Akt51Herw                                       \=Akt51Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt51Afs -> Akt51Afs
+PIPI    BN    -4=              =Akt51                                           \=Akt51
+PPP     PA     3                                                               \BBInvPlanAkt51Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt511=Akt51Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt512=Akt51AfsPerc
+
+III     PN   1-3               =Akt52                                           \BBInvPlanAkt52Inv -> Akt52
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt52
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt52Inv -> Akt52Inv
+PIII M  FN     4           B!  =Akt52Herw                                       \=Akt52Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt52Afs -> Akt52Afs
+PIPI    BN    -4=              =Akt52                                           \=Akt52
+PPP     PA     3                                                               \BBInvPlanAkt52Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt521=Akt52Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt522=Akt52AfsPerc
+
+III     PN   1-3               =Akt53                                           \BBInvPlanAkt53Inv -> Akt53
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt53
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt53Inv -> Akt53Inv
+PIII M  FN     4           B!  =Akt53Herw                                       \=Akt53Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt53Afs -> Akt53Afs
+PIPI    BN    -4=              =Akt53                                           \=Akt53
+PPP     PA     3                                                               \BBInvPlanAkt53Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt531=Akt53Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt532=Akt53AfsPerc
+
+III     PN   1-3               =Akt54                                           \BBInvPlanAkt54Inv -> Akt54
+PPPP M  CN     4               $>Previous net book value<$                     \=VorigAkt54
+PPIP M  FN     4         +     $>Investments and divestments<$                 \=Akt54Inv -> Akt54Inv
+PIII M  FN     4           B!  =Akt54Herw                                       \=Akt54Herw
+PIII M -FN     4               $>Depreciation<$                                \=Akt54Afs -> Akt54Afs
+PIPI    BN    -4=              =Akt54                                           \=Akt54
+PPP     PA     3                                                               \BBInvPlanAkt54Opm
+PIII  0 PN     3               $>Length of depreciation period (years)<$       \BBInvPlanAkt541=Akt54Term
+PIII    PN %   3               $>Depreciation rate<$                           \BBInvPlanAkt542=Akt54AfsPerc
+
+
+.Choices
+BBInvPlan_Soort = "1: Kredietrevisie|2:Kredietaanvraag in het kader van vervangingsinvesteringen|3:Kredietaanvraag in het kader van uitbreidingsinvesteringen|4: Kredietaanvraag in het kader van éénmalige verliezen"
+BBInvPlanKeuze1 = &"1:"&Akt1[0]&"|3:"&AktH[0]&"|4:"&AktF[0]&"|5:"&Akt2[0]&"|6:"&Akt3[0]&"|7:"&Akt4[0]&"|8:"&Akt5[0]&"|9:"&Akt6[0]&"|10:"&Akt7[0]&"|11:"&AktJ[0]&"|12:"&Akt8[0]&"|13:"&AktD[0]&"|14:"&AktC[0]&"|15:"&AktP[0]&"|16:"&AktN[0]&"|17:"&AktM[0]&"|18:"&AktQ[0]&"|20:"&Akt20[0]&"|21:"&Akt21[0]&"|22:"&Akt22[0]&"|23:"&Akt23[0]&"|24:"&Akt24[0]&"|25:"&Akt25[0]&"|50:"&Akt50[0]&"|51:"&Akt51[0]&"|52:"&Akt52[0]&"|53:"&Akt53[0]&"|54:"&Akt54[0]
+BBInvPlanKeuze2 = BBInvPlanKeuze1
+BBInvPlanKeuze3 = BBInvPlanKeuze1
+
+.Formulas NoTrend,Trend
+
+BBInvPlan        = OnZero(BBInvPlanAkt1Inv+BBInvPlanAktHInv+BBInvPlanAktFInv+BBInvPlanAkt2Inv+BBInvPlanAkt3Inv+BBInvPlanAkt4Inv+BBInvPlanAkt5Inv+BBInvPlanAkt6Inv+BBInvPlanAkt7Inv+BBInvPlanAktJInv+BBInvPlanAkt8Inv+BBInvPlanAktDInv+BBInvPlanAktCInv+BBInvPlanAktPInv+BBInvPlanAktNInv+BBInvPlanAktMInv+BBInvPlanAktQInv+BBInvPlanAkt20Inv+BBInvPlanAkt21Inv+BBInvPlanAkt22Inv+BBInvPlanAkt23Inv+BBInvPlanAkt24Inv+BBInvPlanAkt25Inv+BBInvPlanAkt51Inv+BBInvPlanAkt52Inv+BBInvPlanAkt53Inv+BBInvPlanAkt54Inv,NA)
+
+
+
+BBInvPlanKolom   = FirstTinFormulaSet(Trend,PeriodInSheet)
+BBInvPlanAkt1Opm = &If(DataEntered(BBInvPlanAkt1Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt1Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktHOpm = &If(DataEntered(BBInvPlanAktHInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktHInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktFOpm = &If(DataEntered(BBInvPlanAktFInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktFInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt2Opm = &If(DataEntered(BBInvPlanAkt2Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt2Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt3Opm = &If(DataEntered(BBInvPlanAkt3Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt3Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt4Opm = &If(DataEntered(BBInvPlanAkt4Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt4Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt5Opm = &If(DataEntered(BBInvPlanAkt5Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt5Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt6Opm = &If(DataEntered(BBInvPlanAkt6Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt6Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt7Opm = &If(DataEntered(BBInvPlanAkt7Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt7Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktJOpm = &If(DataEntered(BBInvPlanAktJInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktJInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt8Opm = &If(DataEntered(BBInvPlanAkt8Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt8Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktDOpm = &If(DataEntered(BBInvPlanAktDInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktDInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktCOpm = &If(DataEntered(BBInvPlanAktCInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktCInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktPOpm = &If(DataEntered(BBInvPlanAktPInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktPInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktNOpm = &If(DataEntered(BBInvPlanAktNInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktNInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktMOpm = &If(DataEntered(BBInvPlanAktMInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktMInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAktQOpm = &If(DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAktQInv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+
+BBInvPlanAkt20Opm = &If(DataEntered(BBInvPlanAkt20Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt20Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt21Opm = &If(DataEntered(BBInvPlanAkt21Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt21Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt22Opm = &If(DataEntered(BBInvPlanAkt22Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt22Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt23Opm = &If(DataEntered(BBInvPlanAkt23Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt23Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt24Opm = &If(DataEntered(BBInvPlanAkt24Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt24Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt25Opm = &If(DataEntered(BBInvPlanAkt25Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt25Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt50Opm = &If(DataEntered(BBInvPlanAkt50Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt50Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt51Opm = &If(DataEntered(BBInvPlanAkt51Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt51Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt52Opm = &If(DataEntered(BBInvPlanAkt52Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt52Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt53Opm = &If(DataEntered(BBInvPlanAkt53Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt53Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+BBInvPlanAkt54Opm = &If(DataEntered(BBInvPlanAkt54Inv,FirstTinPeriod(PeriodInSheet)),&"$>The investment of<$ € "&Str(BBInvPlanAkt54Inv[FirstTinPeriod(PeriodInSheet)]*ViewScaleFactor:0:0) &" $>is processed in<$ '"&BBInvPlanKolom[FirstTinPeriod(PeriodInSheet)]&if(PeriodInSheet=1,&"' $>and in SACA<$!",&"'!"),&"")
+
+
+
+.Variable BBInvPlanKeuze2, Visible=(DataEntered(BBInvPlanKeuze1,FirstTinPeriod(PeriodInSheet)) Or DataEntered(Self,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanKeuze3, Visible=(DataEntered(BBInvPlanKeuze2,FirstTinPeriod(PeriodInSheet)) Or DataEntered(Self,FirstTinPeriod(PeriodInSheet)))
+
+.Variable BBInvPlanAkt1Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBInvPlanAkt1Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt1Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBInvPlanAkt1Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt11,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBInvPlanAkt1Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt12,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBInvPlanAkt1Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt13,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1)"
+;.Variable BBInvPlanAkt14,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1)"
+;.Variable BBInvPlanAkt15,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=1)"
+
+.Variable BBInvPlanAktHInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBInvPlanAktHInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktHOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBInvPlanAktHInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktH1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBInvPlanAktHInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktH2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBInvPlanAktHInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktH3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3)"
+;.Variable BBInvPlanAktH4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3)"
+;.Variable BBInvPlanAktH5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=3)"
+
+.Variable BBInvPlanAktFInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBInvPlanAktFInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktFOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBInvPlanAktFInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktF1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBInvPlanAktFInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktF2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBInvPlanAktFInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktF3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4)"
+;.Variable BBInvPlanAktF4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4)"
+;.Variable BBInvPlanAktF5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=4)"
+
+.Variable BBInvPlanAkt2Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBInvPlanAkt2Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt2Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBInvPlanAkt2Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt21,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBInvPlanAkt2Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt22,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBInvPlanAkt2Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt23,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5)"
+;.Variable BBInvPlanAkt24,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5)"
+;.Variable BBInvPlanAkt25,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=5)"
+
+.Variable BBInvPlanAkt3Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBInvPlanAkt3Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt3Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBInvPlanAkt3Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt31,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBInvPlanAkt3Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt32,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBInvPlanAkt3Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt33,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6)"
+;.Variable BBInvPlanAkt34,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6)"
+;.Variable BBInvPlanAkt35,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=6)"
+
+.Variable BBInvPlanAkt4Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBInvPlanAkt4Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt4Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBInvPlanAkt4Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt41,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBInvPlanAkt4Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt42,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBInvPlanAkt4Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt43,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7)"
+;.Variable BBInvPlanAkt44,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7)"
+;.Variable BBInvPlanAkt45,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=7)"
+
+.Variable BBInvPlanAkt5Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBInvPlanAkt5Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt5Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBInvPlanAkt5Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt51,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBInvPlanAkt5Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt52,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBInvPlanAkt5Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt53,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8)"
+;.Variable BBInvPlanAkt54,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8)"
+;.Variable BBInvPlanAkt55,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=8)"
+
+.Variable BBInvPlanAkt6Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBInvPlanAkt6Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt6Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBInvPlanAkt6Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt61,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBInvPlanAkt6Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt62,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBInvPlanAkt6Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt63,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9)"
+;.Variable BBInvPlanAkt64,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9)"
+;.Variable BBInvPlanAkt65,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=9)"
+
+.Variable BBInvPlanAkt7Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBInvPlanAkt7Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt7Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBInvPlanAkt7Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt71,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBInvPlanAkt7Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt72,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBInvPlanAkt7Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt73,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10)"
+;.Variable BBInvPlanAkt74,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10)"
+;.Variable BBInvPlanAkt75,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=10)"
+
+.Variable BBInvPlanAktJInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBInvPlanAktJInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktJOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBInvPlanAktJInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktJ1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBInvPlanAktJInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktJ2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBInvPlanAktJInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktJ3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11)"
+;.Variable BBInvPlanAktJ4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11)"
+;.Variable BBInvPlanAktJ5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=11)"
+
+.Variable BBInvPlanAkt8Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBInvPlanAkt8Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt8Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBInvPlanAkt8Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt81,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBInvPlanAkt8Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt82,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBInvPlanAkt8Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt83,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12)"
+;.Variable BBInvPlanAkt84,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12)"
+;.Variable BBInvPlanAkt85,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=12)"
+
+.Variable BBInvPlanAktDInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBInvPlanAktDInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktDOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBInvPlanAktDInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktD1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBInvPlanAktDInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktD2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBInvPlanAktDInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktD3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13)"
+;.Variable BBInvPlanAktD4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13)"
+;.Variable BBInvPlanAktD5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=13)"
+
+.Variable BBInvPlanAktCInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBInvPlanAktCInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktCOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBInvPlanAktCInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktC1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBInvPlanAktCInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktC2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBInvPlanAktCInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktC3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14)"
+;.Variable BBInvPlanAktC4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14)"
+;.Variable BBInvPlanAktC5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=14)"
+
+.Variable BBInvPlanAktPInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBInvPlanAktPInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktPOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBInvPlanAktPInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktP1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBInvPlanAktPInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktP2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBInvPlanAktPInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktP3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15)"
+;.Variable BBInvPlanAktP4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15)"
+;.Variable BBInvPlanAktP5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=15)"
+
+.Variable BBInvPlanAktNInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16) or DataEntered(BBInvPlanAktNInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktNOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16) or DataEntered(BBInvPlanAktNInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktN1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16) or DataEntered(BBInvPlanAktNInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktN2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16) or DataEntered(BBInvPlanAktNInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktN3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16)"
+;.Variable BBInvPlanAktN4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16)"
+;.Variable BBInvPlanAktN5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=16) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=16)"
+
+.Variable BBInvPlanAktMInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktMInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktMOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktMInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktM1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktMInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktM2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktMInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktM3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+;.Variable BBInvPlanAktM4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+;.Variable BBInvPlanAktM5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+
+.Variable BBInvPlanAktQInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQ1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQ2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktQ3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+;.Variable BBInvPlanAktQ4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+;.Variable BBInvPlanAktQ5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=17) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=17)"
+
+.Variable BBInvPlanAkt20Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20) or DataEntered(BBInvPlanAkt20Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt20Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20) or DataEntered(BBInvPlanAkt20Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt201,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20) or DataEntered(BBInvPlanAkt20Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt202,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20) or DataEntered(BBInvPlanAkt20Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt203,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20)"
+;.Variable BBInvPlanAkt204,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20)"
+;.Variable BBInvPlanAkt205,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=20) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=20)"
+
+.Variable BBInvPlanAkt21Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21) or DataEntered(BBInvPlanAkt21Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt21Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21) or DataEntered(BBInvPlanAkt21Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt211,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21) or DataEntered(BBInvPlanAkt21Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt212,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21) or DataEntered(BBInvPlanAkt21Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt213,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21)"
+;.Variable BBInvPlanAkt214,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21)"
+;.Variable BBInvPlanAkt215,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=21) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=21)"
+
+.Variable BBInvPlanAkt22Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22) or DataEntered(BBInvPlanAkt22Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt22Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22) or DataEntered(BBInvPlanAkt22Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt221,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22) or DataEntered(BBInvPlanAkt22Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt222,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22) or DataEntered(BBInvPlanAkt22Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt223,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22)"
+;.Variable BBInvPlanAkt224,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22)"
+;.Variable BBInvPlanAkt225,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=22) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=22)"
+
+.Variable BBInvPlanAkt23Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23) or DataEntered(BBInvPlanAkt23Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt23Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23) or DataEntered(BBInvPlanAkt23Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt231,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23) or DataEntered(BBInvPlanAkt23Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt232,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23) or DataEntered(BBInvPlanAkt23Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt233,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23)"
+;.Variable BBInvPlanAkt234,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23)"
+;.Variable BBInvPlanAkt235,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=23) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=23)"
+
+.Variable BBInvPlanAkt24Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24) or DataEntered(BBInvPlanAkt24Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt24Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24) or DataEntered(BBInvPlanAkt24Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt241,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24) or DataEntered(BBInvPlanAkt24Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt242,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24) or DataEntered(BBInvPlanAkt24Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt243,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24)"
+;.Variable BBInvPlanAkt244,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24)"
+;.Variable BBInvPlanAkt245,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=24) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=24)"
+
+.Variable BBInvPlanAkt25Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25) or DataEntered(BBInvPlanAkt25Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt25Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25) or DataEntered(BBInvPlanAkt25Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt251,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25) or DataEntered(BBInvPlanAkt25Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt252,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25) or DataEntered(BBInvPlanAkt25Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt253,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25)"
+;.Variable BBInvPlanAkt254,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25)"
+;.Variable BBInvPlanAkt255,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=25) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=25)"
+
+.Variable BBInvPlanAktQInv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQOpm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQ1,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAktQ2,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18) or DataEntered(BBInvPlanAktQInv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAktQ3,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18)"
+;.Variable BBInvPlanAktQ4,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18)"
+;.Variable BBInvPlanAktQ5,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=18) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=18)"
+
+.Variable BBInvPlanAkt50Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50) or DataEntered(BBInvPlanAkt50Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt50Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50) or DataEntered(BBInvPlanAkt50Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt501,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50) or DataEntered(BBInvPlanAkt50Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt502,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50) or DataEntered(BBInvPlanAkt50Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt503,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50)"
+;.Variable BBInvPlanAkt504,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50)"
+;.Variable BBInvPlanAkt505,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=50) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=50)"
+
+.Variable BBInvPlanAkt51Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51) or DataEntered(BBInvPlanAkt51Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt51Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51) or DataEntered(BBInvPlanAkt51Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt511,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51) or DataEntered(BBInvPlanAkt51Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt512,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51) or DataEntered(BBInvPlanAkt51Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt513,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51)"
+;.Variable BBInvPlanAkt514,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51)"
+;.Variable BBInvPlanAkt515,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=51) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=51)"
+
+.Variable BBInvPlanAkt52Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52) or DataEntered(BBInvPlanAkt52Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt52Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52) or DataEntered(BBInvPlanAkt52Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt521,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52) or DataEntered(BBInvPlanAkt52Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt522,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52) or DataEntered(BBInvPlanAkt52Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt523,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52)"
+;.Variable BBInvPlanAkt524,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52)"
+;.Variable BBInvPlanAkt525,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=52) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=52)"
+
+.Variable BBInvPlanAkt53Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53) or DataEntered(BBInvPlanAkt53Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt53Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53) or DataEntered(BBInvPlanAkt53Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt531,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53) or DataEntered(BBInvPlanAkt53Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt532,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53) or DataEntered(BBInvPlanAkt53Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt533,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53)"
+;.Variable BBInvPlanAkt534,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53)"
+;.Variable BBInvPlanAkt535,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=53) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=53)"
+
+.Variable BBInvPlanAkt54Inv, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54) or DataEntered(BBInvPlanAkt54Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt54Opm, Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54) or DataEntered(BBInvPlanAkt54Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt541,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54) or DataEntered(BBInvPlanAkt54Inv,FirstTinPeriod(PeriodInSheet)))
+.Variable BBInvPlanAkt542,   Visible=((BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54) or DataEntered(BBInvPlanAkt54Inv,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBInvPlanAkt543,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54)"
+;.Variable BBInvPlanAkt544,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54)"
+;.Variable BBInvPlanAkt545,   Visible="(BBInvPlanKeuze1[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze2[FirstTinPeriod(PeriodInSheet)]=54) Or (BBInvPlanKeuze3[FirstTinPeriod(PeriodInSheet)]=54)"
+
+; Financieringen
+
+.Variables
+PPPP    PN   1 2               $>Financing<$                                    \BBFinPlan
+
+PIII    PN T 1 3               =BBInvPlanKolom                                  \=BBInvPlanKolom
+PIII    PN C   3               =BBInvPlan_Soort                                 \=BBInvPlan_Soort
+
+PIII    PN C 1 3               $>1st long-term debt<$                           \BBFinKeuze1
+PIII    PN C   3               $>2nd long-term debt<$                           \BBFinKeuze2
+PIII    PN C   3               $>3rd long-term debt<$                           \BBFinKeuze3
+
+.Variable BBFinKeuze2, Visible="DataEntered(BBFinKeuze1) Or DataEntered(Self,FirstTinPeriod(PeriodInSheet))"
+.Variable BBFinKeuze3, Visible="DataEntered(BBFinKeuze2) Or DataEntered(Self,FirstTinPeriod(PeriodInSheet))"
+
+.Choices
+BBFinKeuze1 = &"1:"&LangKred1[0]&"|2:"&LangKredA[0]&"|3:"&LangKredB[0]&"|4:"&LangKredC[0]&"|5:"&LangKred2[0]&"|6:"&LangKredF[0]&"|7:"&LangKred3[0]&"|8:"&LangKred4[0]&"|9:"&LangKred5[0]&"|10:"&LangKred6[0]&"|11:"&LangKred7[0]&"|12:"&LangKred8[0]&"|13:"&LangKredH[0]&"|14:"&LangKred9[0]&"|15:"&LangKredG[0]
+BBFinKeuze2 = BBFinKeuze1
+BBFinKeuze3 = BBFinKeuze1
+
+
+
+
+.Variables
+IIII    PN   1-3               &LangKred1[0]                                    \BBFin_Kred1HoofdSom -> LangKred1
+PPIP M  FN     4               $>New loan<$                                     \=Kred1Fin
+PIII    FN     4               =AflKred1                                        \=AflKred1
+PPPP    BN    -4=              =Kred1                                           \=Kred1
+PIII    PN C 1 4               =Kred1Freq                                       \=Kred1Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred1RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred1Looptijd
+;PIII    PN C   3               =Kred1Freq                                       \BBFin_Kred1FreQ=Kred1Freq
+
+IIII    PN   1-3               &LangKredA[0]                                    \BBFin_KredAHoofdSom -> LangKredA
+PPIP M  FN     4               $>New loan<$                                     \=KredAFin
+PIII    FN     4               =AflKredA                                        \=AflKredA
+PPPP    BN    -4=              =KredA                                           \=KredA
+PIII    PN C 1 4               =KredAFreq                                       \=KredAFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredARentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredALooptijd
+;PIII    PN C   3               =KredAFreq                                       \BBFin_KredAFreQ=KredAFreq
+
+IIII    PN   1-3               &LangKredB[0]                                    \BBFin_KredBHoofdSom -> LangKredB
+PPIP M  FN     4               $>New loan<$                                     \=KredBFin
+PIII    FN     4               =AflKredB                                        \=AflKredB
+PPPP    BN    -4=              =KredB                                           \=KredB
+PIII    PN C 1 4               =KredBFreq                                       \=KredBFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredBRentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredBLooptijd
+;PIII    PN C   3               =KredBFreq                                       \BBFin_KredBFreQ=KredBFreq
+
+IIII    PN   1-3               &LangKredC[0]                                    \BBFin_KredCHoofdSom -> LangKredC
+PPIP M  FN     4               $>New loan<$                                     \=KredCFin
+PIII    FN     4               =AflKredC                                        \=AflKredC
+PPPP    BN    -4=              =KredC                                           \=KredC
+PIII    PN C 1 4               =KredCFreq                                       \=KredCFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredCRentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredCLooptijd
+;PIII    PN C   3               =KredCFreq                                       \BBFin_KredCFreQ=KredCFreq
+
+IIII    PN   1-3               &LangKred2[0]                                    \BBFin_Kred2HoofdSom -> LangKred2
+PPIP M  FN     4               $>New loan<$                                     \=Kred2Fin
+PIII    FN     4               =AflKred2                                        \=AflKred2
+PPPP    BN    -4=              =Kred2                                           \=Kred2
+PIII    PN C 1 4               =Kred2Freq                                       \=Kred2Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred2RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred2Looptijd
+;PIII    PN C   3               =Kred2Freq                                       \BBFin_Kred2FreQ=Kred2Freq
+
+IIII    PN   1-3               &LangKredF[0]                                    \BBFin_KredFHoofdSom -> LangKredF
+PPIP M  FN     4               $>New loan<$                                     \=KredFFin
+PIII    FN     4               =AflKredF                                        \=AflKredF
+PPPP    BN    -4=              =KredF                                           \=KredF
+PIII    PN C 1 4               =KredFFreq                                       \=KredFFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredFRentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredFLooptijd
+;PIII    PN C   3               =KredFFreq                                       \BBFin_KredFFreQ=KredFFreq
+
+IIII    PN   1-3               &LangKred3[0]                                    \BBFin_Kred3HoofdSom -> LangKred3
+PPIP M  FN     4               $>New loan<$                                     \=Kred3Fin
+PIII    FN     4               =AflKred3                                        \=AflKred3
+PPPP    BN    -4=              =Kred3                                           \=Kred3
+PIII    PN C 1 4               =Kred3Freq                                       \=Kred3Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred3RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred3Looptijd
+;PIII    PN C   3               =Kred3Freq                                       \BBFin_Kred3FreQ=Kred3Freq
+
+IIII    PN   1-3               &LangKred4[0]                                    \BBFin_Kred4HoofdSom -> LangKred4
+PPIP M  FN     4               $>New loan<$                                     \=Kred4Fin
+PIII    FN     4               =AflKred4                                        \=AflKred4
+PPPP    BN    -4=              =Kred4                                           \=Kred4
+PIII    PN C 1 4               =Kred4Freq                                       \=Kred4Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred4RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred4Looptijd
+;PIII    PN C   3               =Kred4Freq                                       \BBFin_Kred4FreQ=Kred4Freq
+
+IIII    PN   1-3               &LangKred5[0]                                    \BBFin_Kred5HoofdSom -> LangKred5
+PPIP M  FN     4               $>New loan<$                                     \=Kred5Fin
+PIII    FN     4               =AflKred5                                        \=AflKred5
+PPPP    BN    -4=              =Kred5                                           \=Kred5
+PIII    PN C 1 4               =Kred5Freq                                       \=Kred5Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred5RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred5Looptijd
+;PIII    PN C   3               =Kred5Freq                                       \BBFin_Kred5FreQ=Kred5Freq
+
+IIII    PN   1-3               &LangKred6[0]                                    \BBFin_Kred6HoofdSom -> LangKred6
+PPIP M  FN     4               $>New loan<$                                     \=Kred6Fin
+PIII    FN     4               =AflKred6                                        \=AflKred6
+PPPP    BN    -4=              =Kred6                                           \=Kred6
+PIII    PN C 1 4               =Kred6Freq                                       \=Kred6Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred6RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred6Looptijd
+;PIII    PN C   3               =Kred6Freq                                       \BBFin_Kred6FreQ=Kred6Freq
+
+IIII    PN   1-3               &LangKred7[0]                                    \BBFin_Kred7HoofdSom -> LangKred7
+PPIP M  FN     4               $>New loan<$                                     \=Kred7Fin
+PIII    FN     4               =AflKred7                                        \=AflKred7
+PPPP    BN    -4=              =Kred7                                           \=Kred7
+PIII    PN C 1 4               =Kred7Freq                                       \=Kred7Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred7RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred7Looptijd
+;PIII    PN C   3               =Kred7Freq                                       \BBFin_Kred7FreQ=Kred7Freq
+
+IIII    PN   1-3               &LangKred8[0]                                    \BBFin_Kred8HoofdSom -> LangKred8
+PPIP M  FN     4               $>New loan<$                                     \=Kred8Fin
+PIPI    FN     4               =AflKred8                                        \=AflKred8
+PPPP    BN    -4=              =Kred8                                           \=Kred8
+PIII    PN C 1 4               =Kred8Freq                                       \=Kred8Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred8RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred8Looptijd
+;PIII    PN C   3               =Kred8Freq                                       \BBFin_Kred8FreQ=Kred8Freq
+
+IIII    PN   1-3               &LangKredH[0]                                    \BBFin_KredHHoofdSom -> LangKredH
+PPIP M  FN     4               $>New loan<$                                     \=KredHFin
+PIPI    FN     4               =AflKredH                                        \=AflKredH
+PPPP    BN    -4=              =KredH                                           \=KredH
+PIII    PN C 1 4               =KredHFreq                                       \=KredHFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredHRentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredHLooptijd
+;PIII    PN C   3               =KredHFreq                                       \BBFin_KredHFreQ=KredHFreq
+
+IIII    PN   1-3               &LangKred9[0]                                    \BBFin_Kred9HoofdSom -> LangKred9
+PPIP M  FN     4               $>New loan<$                                     \=Kred9Fin
+PIII    FN     4               =AflKred9                                        \=AflKred9
+PPPP    BN    -4=              =Kred9                                           \=Kred9
+PIII    PN C 1 4               =Kred9Freq                                       \=Kred9Freq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_Kred9RentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_Kred9Looptijd
+;PIII    PN C   3               =Kred9Freq                                       \BBFin_Kred9FreQ=Kred9Freq
+
+IIII    PN   1-3               &LangKredG[0]                                    \BBFin_KredGHoofdSom -> LangKredG
+PPIP M  FN     4               $>New loan<$                                     \=KredGFin
+PIII    FN     4               =AflKredG                                        \=AflKredG
+PPPP    BN    -4=              =KredG                                           \=KredG
+PIII    PN C 1 4               =KredGFreq                                       \=KredGFreq
+PIII  2 PN %   3               $>Interest percentage<$                          \BBFin_KredGRentePercentage
+PIII  0 PN     3               $>Tenor (years)<$                                \BBFin_KredGLooptijd
+;PIII    PN C   3               =KredGFreq                                       \BBFin_KredGFreQ=KredGFreq
+
+
+.Variable BBFin_Kred1HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBFin_Kred1HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred1RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBFin_Kred1HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred1Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=1) or DataEntered(BBFin_Kred1HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred1FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=1) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=1)"
+
+.Variable BBFin_KredAHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=2) or DataEntered(BBFin_KredAHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredARentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=2) or DataEntered(BBFin_KredAHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredALooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=2) or DataEntered(BBFin_KredAHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredAFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=2) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=2)"
+
+.Variable BBFin_KredBHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBFin_KredBHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredBRentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBFin_KredBHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredBLooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=3) or DataEntered(BBFin_KredBHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredBFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=3) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=3)"
+
+.Variable BBFin_KredCHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBFin_KredCHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredCRentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBFin_KredCHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredCLooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=4) or DataEntered(BBFin_KredCHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredCFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=4) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=4)"
+
+.Variable BBFin_Kred2HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBFin_Kred2HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred2RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBFin_Kred2HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred2Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=5) or DataEntered(BBFin_Kred2HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred2FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=5) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=5)"
+
+.Variable BBFin_KredFHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBFin_KredFHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredFRentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBFin_KredFHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredFLooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=6) or DataEntered(BBFin_KredFHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredFFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=6) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=6)"
+
+.Variable BBFin_Kred3HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBFin_Kred3HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred3RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBFin_Kred3HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred3Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=7) or DataEntered(BBFin_Kred3HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred3FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=7) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=7)"
+
+.Variable BBFin_Kred4HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBFin_Kred4HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred4RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBFin_Kred4HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred4Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=8) or DataEntered(BBFin_Kred4HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred4FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=8) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=8)"
+
+.Variable BBFin_Kred5HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBFin_Kred5HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred5RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBFin_Kred5HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred5Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=9) or DataEntered(BBFin_Kred5HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred5FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=9) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=9)"
+
+.Variable BBFin_Kred6HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBFin_Kred6HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred6RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBFin_Kred6HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred6Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=10) or DataEntered(BBFin_Kred6HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred6FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=10) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=10)"
+
+.Variable BBFin_Kred7HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBFin_Kred7HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred7RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBFin_Kred7HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred7Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=11) or DataEntered(BBFin_Kred7HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred7FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=11) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=11)"
+
+.Variable BBFin_Kred8HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBFin_Kred8HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred8RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBFin_Kred8HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred8Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=12) or DataEntered(BBFin_Kred8HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred8FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=12) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=12)"
+
+.Variable BBFin_KredHHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBFin_KredHHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredHRentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBFin_KredHHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredHLooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=13) or DataEntered(BBFin_KredHHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredHFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=13) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=13)"
+
+.Variable BBFin_Kred9HoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBFin_Kred9HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred9RentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBFin_Kred9HoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_Kred9Looptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=14) or DataEntered(BBFin_Kred9HoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_Kred9FreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=14) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=14)"
+
+.Variable BBFin_KredGHoofdSom       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBFin_KredGHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredGRentePercentage, Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBFin_KredGHoofdSom,FirstTinPeriod(PeriodInSheet)))
+.Variable BBFin_KredGLooptijd       , Visible=((BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=15) or DataEntered(BBFin_KredGHoofdSom,FirstTinPeriod(PeriodInSheet)))
+;.Variable BBFin_KredGFreQ           , Visible="(BBFinKeuze1[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze2[FirstTinPeriod(PeriodInSheet)]=15) Or (BBFinKeuze3[FirstTinPeriod(PeriodInSheet)]=15)"
+
+.Variables
+
+PIII    PN   1-3               $>Contribution<$ $>owners' equity<$              \BBFin_EVStorting -> Storting
+PPPP  1 PN %   3               $>Solvency<$ ($>BAC<$)                           \BBFIN_Solvabiliteit
+
+PPPI    PN   1-3               $>Calculated credit limit current account<$      \BBFin_RCHuidig -> BerekendLimietRC
+PIII    PN     3               $>Increase credit limit current account<$        \BBFin_RC -> BerekendLimietRC
+PIII    PN %   3               =RPRekCourNeg                                    \BBFin_RCPerc
+PPPP   =PN    -3               $>New credit limit current account<$             \BBFin_RCNew
+
+
+PPPP    PN   1 3               $>Financing<$                                    \=BBFinPlan
+PPPP   -PN     3               $>Investments<$                                  \=BBInvPlan
+PPPP   =PN    -3               $>Difference<$
+
+
+.Formulas NoTrend,Trend
+BBFIN_Solvabiliteit = SolvBal[FirstTinPeriod(BNKperiod)]
+BBFin_RCHuidig      = BerekendLimietRC[LastTinFormulaSet(NoTrend,MainPeriod)]
+
+.Formulas NoTrend, Trend
+BBFinPlan  = OnZero(BBFin_EVStorting+BBFin_RC+BBFin_Kred1HoofdSom+BBFin_KredAHoofdSom+BBFin_KredBHoofdSom+BBFin_KredCHoofdSom+BBFin_Kred2HoofdSom+BBFin_KredFHoofdSom+BBFin_Kred3HoofdSom+BBFin_Kred4HoofdSom+BBFin_Kred5HoofdSom+BBFin_Kred6HoofdSom+BBFin_Kred7HoofdSom+BBFin_Kred8HoofdSom+BBFin_KredHHoofdSom+BBFin_Kred9HoofdSom+BBFin_KredGHoofdSom,NA)
+
+
+.Variables
+PPPP    PN   1 2               $>Collateral<$                                  \BBDekkingswaarde=BBDEKKING
+
+PIII    PN C   3 1             =BBInvPlan_Soort                                \=BBInvPlan_Soort
+
+PPPP    PN     3               $>Registergoederen<$                            \BBDekkingPanden
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand1;=BBDekkingPand1VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand1Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand1Kadaster
+PIII    PN     5       +       &BBDekkingPand1SoortWaarde[1]                   \BBDekkingPand1VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand1SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand1DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand1NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand2;=BBDekkingPand2VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand2Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand2Kadaster
+PIII    PN     5       +       &BBDekkingPand2SoortWaarde[1]                   \BBDekkingPand2VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand2SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand2DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand2NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand3;=BBDekkingPand3VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand3Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand3Kadaster
+PIII    PN     5       +       &BBDekkingPand3SoortWaarde[1]                   \BBDekkingPand3VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand3SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand3DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand3NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand4
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand4Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand4Kadaster
+PIII    PN     5       +       &BBDekkingPand4SoortWaarde[1]                   \BBDekkingPand4VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand4SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand4DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand4NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand5
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand5Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand5Kadaster
+PIII    PN     5       +       &BBDekkingPand5SoortWaarde[1]                   \BBDekkingPand5VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand5SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand5DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand5NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand6
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand6Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand6Kadaster
+PIII    PN     5       +       &BBDekkingPand6SoortWaarde[1]                   \BBDekkingPand6VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand6SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand6DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand6NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand7
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand7Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand7Kadaster
+PIII    PN     5       +       &BBDekkingPand7SoortWaarde[1]                   \BBDekkingPand7VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand7SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand7DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand7NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand8
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand8Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand8Kadaster
+PIII    PN     5       +       &BBDekkingPand8SoortWaarde[1]                   \BBDekkingPand8VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand8SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand8DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand8NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand9
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand9Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand9Kadaster
+PIII    PN     5       +       &BBDekkingPand9SoortWaarde[1]                   \BBDekkingPand9VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand9SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand9DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand9NaamTaxateur
+
+
+IPPP    PN     4               $>Property<$                                    \BBDekkingPand10
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingPand10Soort
+PIII    PA     5               $>Kadastrale registration<$                     \BBDekkingPand10Kadaster
+PIII    PN     5       +       &BBDekkingPand10SoortWaarde[1]                  \BBDekkingPand10VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingPand10SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingPand10DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingPand10NaamTaxateur
+
+PPPP   =PN    -4               $>Totaal registergoederen<$                     \BBDekkingPanden_Total=BBDekkingPanden
+
+
+PPPP    PN     3               $>Niet-registergoederen<$                       \BBDekkingOverig
+
+IPPP    PN     4               ....                                            \BBDekkingOverig1;=BBDekkingOverig1VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig1Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig1Kadaster
+PIII    PN     5       +       &BBDekkingOverig1SoortWaarde[1]                 \BBDekkingOverig1VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig1SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig1DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig1NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig2;=BBDekkingOverig2VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig2Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig2Kadaster
+PIII    PN     5       +       &BBDekkingOverig2SoortWaarde[1]                 \BBDekkingOverig2VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig2SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig2DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig2NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig3;=BBDekkingOverig3VVW
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig3Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig3Kadaster
+PIII    PN     5       +       &BBDekkingOverig3SoortWaarde[1]                 \BBDekkingOverig3VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig3SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig3DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig3NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig4
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig4Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig4Kadaster
+PIII    PN     5       +       &BBDekkingOverig4SoortWaarde[1]                 \BBDekkingOverig4VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig4SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig4DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig4NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig5
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig5Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig5Kadaster
+PIII    PN     5       +       &BBDekkingOverig5SoortWaarde[1]                 \BBDekkingOverig5VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig5SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig5DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig5NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig6
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig6Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig6Kadaster
+PIII    PN     5       +       &BBDekkingOverig6SoortWaarde[1]                 \BBDekkingOverig6VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig6SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig6DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig6NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig7
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig7Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig7Kadaster
+PIII    PN     5       +       &BBDekkingOverig7SoortWaarde[1]                 \BBDekkingOverig7VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig7SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig7DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig7NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig8
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig8Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig8Kadaster
+PIII    PN     5       +       &BBDekkingOverig8SoortWaarde[1]                 \BBDekkingOverig8VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig8SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig8DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig8NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig9
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig9Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig9Kadaster
+PIII    PN     5       +       &BBDekkingOverig9SoortWaarde[1]                 \BBDekkingOverig9VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig9SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig9DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig9NaamTaxateur
+
+IPPP    PN     4               ....                                            \BBDekkingOverig10
+PIII    PN C   5               $>Kind of<$                                     \BBDekkingOverig10Soort
+PIII    PA     5               $>Registration number<$                         \BBDekkingOverig10Kadaster
+PIII    PN     5       +       &BBDekkingOverig10SoortWaarde[1]                \BBDekkingOverig10VVW
+C $>By changing the variable 'kind of value', the description of this variabele is changed.<$
+PIII    PN C   6               $>Kind of value<$                               \BBDekkingOverig10SoortWaarde
+PIII    PN D   5               $>Appraisal date<$                              \BBDekkingOverig10DatumTaxatie
+PIII    PA     5               $>Appraiser<$                                   \BBDekkingOverig10NaamTaxateur
+
+PPPP   =PN    -4               $>Totaal niet-registergoederen<$                \BBDekkingOverig_Total=BBDekkingOverig
+
+PPPP   =PN    -3               $>Total<$                                       \BBDEKKING
+
+PIII    PM   1 3               $>Explanation<$ $>Collateral<$                  \BBDekkingToelichting
+
+
+PPPP    PN   1 2               &VermBehoefte[0]                                \VermBehoefteBBInvPlanKolom -> VermBehoefte
+
+
+.Choices
+.ReadFile      BB_PAND_CHOICE    = "bank_Dekking_PANDSoort.FIB"
+.ReadFile      BB_Overig_CHOICE  = "bank_Dekking_OverigSoort.FIB"
+.ReadFile      BB_PAND_KINDVALUE   = "bank_Dekking_WaardeSoort_Pand.FIB"
+.ReadFile      BB_OVERIG_KINDVALUE = "bank_Dekking_WaardeSoort_Overig.FIB"
+
+BBDekkingPand1Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand2Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand3Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand4Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand5Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand6Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand7Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand8Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand9Soort           = "#$BB_PAND_CHOICE#"
+BBDekkingPand10Soort          = "#$BB_PAND_CHOICE#"
+
+BBDekkingOverig1Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig2Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig3Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig4Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig5Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig6Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig7Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig8Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig9Soort         = "#$BB_Overig_CHOICE#"
+BBDekkingOverig10Soort        = "#$BB_Overig_CHOICE#"
+
+BBDekkingPand1SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand2SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand3SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand4SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand5SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand6SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand7SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand8SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand9SoortWaarde     = "#$BB_PAND_KINDVALUE#"
+BBDekkingPand10SoortWaarde    = "#$BB_PAND_KINDVALUE#"
+
+BBDekkingOverig1SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig2SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig3SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig4SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig5SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig6SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig7SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig8SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig9SoortWaarde   = "#$BB_OVERIG_KINDVALUE#"
+BBDekkingOverig10SoortWaarde  = "#$BB_OVERIG_KINDVALUE#"
+
+.Formulas NoTrend, Trend
+BBDekkingPand1    =BBDekkingPand1VVW
+BBDekkingPand2    =BBDekkingPand2VVW
+BBDekkingPand3    =BBDekkingPand3VVW
+BBDekkingPand4    = BBDekkingPand4VVW
+BBDekkingPand5    = BBDekkingPand5VVW
+BBDekkingPand6    = BBDekkingPand6VVW
+BBDekkingPand7    = BBDekkingPand7VVW
+BBDekkingPand8    = BBDekkingPand8VVW
+BBDekkingPand9    = BBDekkingPand9VVW
+BBDekkingPand10   = BBDekkingPand10VVW
+
+BBDekkingOverig1  =BBDekkingOverig1VVW
+BBDekkingOverig2  =BBDekkingOverig2VVW
+BBDekkingOverig3  =BBDekkingOverig3VVW
+BBDekkingOverig4  = BBDekkingOverig4VVW
+BBDekkingOverig5  = BBDekkingOverig5VVW
+BBDekkingOverig6  = BBDekkingOverig6VVW
+BBDekkingOverig7  = BBDekkingOverig7VVW
+BBDekkingOverig8  = BBDekkingOverig8VVW
+BBDekkingOverig9  = BBDekkingOverig9VVW
+BBDekkingOverig10 = BBDekkingOverig10VVW
+
+;default waardes van soorten waarden instellen
+BBDekkingPand1SoortWaarde    = 010
+BBDekkingPand2SoortWaarde    = 010
+BBDekkingPand3SoortWaarde    = 010
+BBDekkingPand4SoortWaarde    = 010
+BBDekkingPand5SoortWaarde    = 010
+BBDekkingPand6SoortWaarde    = 010
+BBDekkingPand7SoortWaarde    = 010
+BBDekkingPand8SoortWaarde    = 010
+BBDekkingPand9SoortWaarde    = 010
+BBDekkingPand10SoortWaarde   = 010
+
+BBDekkingOverig1SoortWaarde  = 010
+BBDekkingOverig2SoortWaarde  = 010
+BBDekkingOverig3SoortWaarde  = 010
+BBDekkingOverig4SoortWaarde  = 010
+BBDekkingOverig5SoortWaarde  = 010
+BBDekkingOverig6SoortWaarde  = 010
+BBDekkingOverig7SoortWaarde  = 010
+BBDekkingOverig8SoortWaarde  = 010
+BBDekkingOverig9SoortWaarde  = 010
+BBDekkingOverig10SoortWaarde = 010
+
+VermBehoefteBBInvPlanKolom   = VermBehoefte[BBInvPlanKolom]

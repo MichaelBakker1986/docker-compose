@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document version="0.1" date="09-08-2016" author="Topicus FINAN" title="Basis rating" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <properties>
+    <!-- Data ============================================================= -->
+    <!--General-->
+    <TimelineId>1</TimelineId>
+    <TimelineTitle>MonthTimeline</TimelineTitle>
+    <Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+    <ReportName><data src="chineseRoom" name="BasicRatingReport">Basisrating rapport</data></ReportName>
+    <ReportScale>1</ReportScale>
+    <Disclaimer><data src="chineseRoom" name="Disclaimer basic rating">Disclaimer</data></Disclaimer>
+	</properties>
+  <newpage name="basisrating"></newpage>
+  <p class="section"><data src="chineseRoom" name="Customer data">Klantgegevens</data></p>
+  <table class="twocolumns">
+    <tr class="row"><td><data src="chineseRoom" name="Branch">Branche</data></td><td><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_BIK_Code" /></data> - <data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_BIK_Omschr" /></data></td></tr>
+    <tr class="row"><td><data src="chineseRoom" name="Customer name">Klantnaam</data></td><td><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Naam" /></data></td></tr>
+    <tr class="row"><td><data src="chineseRoom" name="City">Plaats</data></td><td><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Woonplaats" /></data></td></tr>
+    <tr class="row"><td><data src="chineseRoom" name="Legal form">Rechtsvorm</data></td><td><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="Rechtsvorm" /></data></td></tr>
+    <tr class="row"><td><data src="chineseRoom" name="Years">Jaren</data></td><td><data src="fesModel"><columns delta="0" number="1" order="desc" /><variables function="getStartDate" /><presentation format="yyyy" /></data> - <data src="fesModel"><columns delta="0" number="1" order="asc" /><variables function="getEndDate" /><presentation format="yyyy" /></data></td></tr>
+  </table>
+  <p class="section"><data src="chineseRoom" name="Indicatieve URA rating">Indicatieve URA rating</data></p>
+  <graph class="graphBasicRating" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns delta="0" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="RatingGraph"/>
+      <variables var="PrioriGraph" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0">
+       <overrideVarTitle varName="RatingGraph"><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Naam" /></data></overrideVarTitle>
+       <overrideVarTitle varName="PrioriGraph"><data src="chineseRoom" name="A Priori">Nederland</data></overrideVarTitle>
+      </presentation>
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="krPD" />
+      <variables var="krUraRatingKlasse" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showDecoration="false" showHeaderRow="false" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+  </table>
+  <p class="section"><data src="chineseRoom" name="Comment">Toelichting</data></p>
+  <table class="ratingexplanation">
+    <tr class="onecol"><td><data src="chineseRoom" name="BasicRatingComment">De rating geeft een oordeel over de algemene kredietwaardigheid van de onderneming en wordt uitgedrukt in een uitvalwaarschijnlijkheidspercentage. Hierin kan de volgende verdeling worden gemaakt</data>:</td></tr>
+    <tr class="twocol"><td>&lt;1%</td><td><data src="chineseRoom" name="BasicRatingCommentLT1">De onderneming heeft voldoende middelen om aan haar financiele verplichtingen te voldoen en is voldoende bestand tegen bedrijfseconomische invloeden, zoals een recessie.</data></td></tr>
+    <tr class="twocol"><td>1% - 3%</td><td><data src="chineseRoom" name="BasicRatingComment1to3">De onderneming heeft momenteel voldoende middelen om aan haar financiele verplichtingen te voldoen maar is slecht bestand tegen bedrijfseconomische invloeden, zoals een recessie.</data></td></tr>
+    <tr class="twocol"><td>&gt;3%</td><td><data src="chineseRoom" name="BasicRatingCommentGT3">Er is een hoog risico dat de onderneming onder de huidige omstandigheden niet aan haar financiele verplichtingen kan voldoen.</data></td></tr>
+  </table>
+</document>

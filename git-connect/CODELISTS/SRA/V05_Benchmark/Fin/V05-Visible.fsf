@@ -1,0 +1,170 @@
+; File V05-Visible.fsf
+;------------------------------------------------------------------------------
+.SysLog Status=Off  ; EJS 30-12-2008
+
+
+.Variable                      HiddenVars, Visible=AdminMode[1]
+
+; Visibility nav rechtspersoon
+; Balans - EV
+.Variable                      CapitalPartners,  Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      CapitalPartnersUndistributedProfit,  Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      SharedCapital, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      SharePremium,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      StatutoryReserve, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ReservedProfit,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      RevaluationReserve, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      OtherReserve,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      MinorityInterests,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      DefaultSettingsCapitalPartners,  Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+
+; VA
+ .Variable                     SharedProfitOfPartners,  Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+
+; Visiblity Formules m.b.t PriveOpnamen/Winstuitkering
+.Variable                      StructuralProfitPaidOutToClaimants, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      StructuralProfitPaidOutToClaimantsFixed, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      IncidentalProfitPaidOutToClaimants, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+
+.Variable                      PersonalDrawDownOfPartners, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) Or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ShareProfitPaidOutToClaimants, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) Or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ShareProfitEntrepreneur, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) Or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      TaxOnProfitsInProfitPaidOutToClaimants, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) Or (FirstValueT(Self,1,MaxT)>0))
+
+.Variable                      IssueanceSharedCapitalOrdinaryShares, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      IssueanceSharedCapitalPreferenceShares, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ContributionOfCapitalToSharePremium, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ContributionOfCapitalPartners, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ProvisionForRetirementExpensesPartners, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ProvisionForRetirementExpensesPartners2, Visible=( (Not ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      MutationMinorityInterests, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      MutationRevaluationReserve, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      MutationStatutoryReserve, Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ShareResultFromSubsidiaries,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+.Variable                      ShareResultMinorityInterest,  Visible=( (ReportAsLimitedLiabilityCompany[1]) or (FirstValueT(Self,1,MaxT)>0))
+
+.Variable                      BookvalueEquitySold, Visible= (FirstValueT(Self,1,MaxT)>0)
+.Variable                      Product_tpCostOfSalesPayableTerm, Visible= (FirstValueT(Self,1,MaxT)>0)
+.Variable                      Product_tpTradeReceivablesTerm, Visible= (FirstValueT(Self,1,MaxT)>0)
+
+; Variabele ***_tpName woren uitgefaseerd tbv conversie nog wel aanwezig in model, maar onzichtbaar voor gebruiker.
+.Variable                      Goodwill_tpName_ti001, Visible=0
+.Variable                      PatentsTrademarksAndOtherRights_tpName_ti001, Visible=0
+.Variable                      OtherIntangibleFixedAssets_tpName_ti001, Visible=0
+.Variable                      LandAndBuildings_tpName_ti001, Visible=0
+.Variable                      PlantAndEquipment_tpName_ti001, Visible=0
+.Variable                      FurnitureAndFixtures_tpName_ti001, Visible=0
+.Variable                      TransportationEquipment_tpName_ti001, Visible=0
+.Variable                      OtherMaterialFixedAssets_tpName_ti001, Visible=0
+.Variable                      InvestmentInSubsidiaries_tpName_ti001, Visible=0
+.Variable                      LoansToSubsidiaries_tpName_ti001, Visible=0
+.Variable                      LoansToAffiliatedCompanies_tpName_ti001, Visible=0
+.Variable                      OtherSecurities_tpName_ti001, Visible=0
+.Variable                      OtherFinancialFixedAssets_tpName_ti001, Visible=0
+.Variable                      Partner_tpName_ti001, Visible=0
+.Variable                      SubordinatedDebt_tpName_ti001, Visible=0
+.Variable                      LongTermDebt_tpName_ti001, Visible=0
+.Variable                      Product_tpName_ti001, Visible=0
+.Variable                      Department_tpName_ti001, Visible=0
+.Variable                      Department_tpIncreaseWagesNet_ti001, Visible=0
+.Variable                      Department_tpIncreaseSocialSecurities_ti001, Visible=0
+.Variable                      Department_tpIncreasePensionPremiums_ti001, Visible=0
+
+; Variabele ***_tpName woren uitgefaseerd tbv conversie nog wel aanwezig in model, maar onzichtbaar voor gebruiker.
+.Variable                      Goodwill_tpName_ti002, Visible=0
+.Variable                      PatentsTrademarksAndOtherRights_tpName_ti002, Visible=0
+.Variable                      OtherIntangibleFixedAssets_tpName_ti002, Visible=0
+.Variable                      LandAndBuildings_tpName_ti002, Visible=0
+.Variable                      PlantAndEquipment_tpName_ti002, Visible=0
+.Variable                      FurnitureAndFixtures_tpName_ti002, Visible=0
+.Variable                      TransportationEquipment_tpName_ti002, Visible=0
+.Variable                      OtherMaterialFixedAssets_tpName_ti002, Visible=0
+.Variable                      InvestmentInSubsidiaries_tpName_ti002, Visible=0
+.Variable                      LoansToSubsidiaries_tpName_ti002, Visible=0
+.Variable                      LoansToAffiliatedCompanies_tpName_ti002, Visible=0
+.Variable                      OtherSecurities_tpName_ti002, Visible=0
+.Variable                      OtherFinancialFixedAssets_tpName_ti002, Visible=0
+.Variable                      Partner_tpName_ti002, Visible=0
+.Variable                      SubordinatedDebt_tpName_ti002, Visible=0
+.Variable                      LongTermDebt_tpName_ti002, Visible=0
+.Variable                      Product_tpName_ti002, Visible=0
+.Variable                      Department_tpName_ti002, Visible=0
+.Variable                      Department_tpIncreaseWagesNet_ti002, Visible=0
+.Variable                      Department_tpIncreaseSocialSecurities_ti002, Visible=0
+.Variable                      Department_tpIncreasePensionPremiums_ti002, Visible=0
+
+; Variabele ***_tpName woren uitgefaseerd tbv conversie nog wel aanwezig in model, maar onzichtbaar voor gebruiker.
+.Variable                      Goodwill_tpName_ti003, Visible=0
+.Variable                      PatentsTrademarksAndOtherRights_tpName_ti003, Visible=0
+.Variable                      OtherIntangibleFixedAssets_tpName_ti003, Visible=0
+.Variable                      LandAndBuildings_tpName_ti003, Visible=0
+.Variable                      PlantAndEquipment_tpName_ti003, Visible=0
+.Variable                      FurnitureAndFixtures_tpName_ti003, Visible=0
+.Variable                      TransportationEquipment_tpName_ti003, Visible=0
+.Variable                      OtherMaterialFixedAssets_tpName_ti003, Visible=0
+.Variable                      InvestmentInSubsidiaries_tpName_ti003, Visible=0
+.Variable                      LoansToSubsidiaries_tpName_ti003, Visible=0
+.Variable                      LoansToAffiliatedCompanies_tpName_ti003, Visible=0
+.Variable                      OtherSecurities_tpName_ti003, Visible=0
+.Variable                      OtherFinancialFixedAssets_tpName_ti003, Visible=0
+.Variable                      Partner_tpName_ti003, Visible=0
+.Variable                      SubordinatedDebt_tpName_ti003, Visible=0
+.Variable                      LongTermDebt_tpName_ti003, Visible=0
+.Variable                      Product_tpName_ti003, Visible=0
+.Variable                      Department_tpName_ti003, Visible=0
+.Variable                      Department_tpIncreaseWagesNet_ti003, Visible=0
+.Variable                      Department_tpIncreaseSocialSecurities_ti003, Visible=0
+.Variable                      Department_tpIncreasePensionPremiums_ti003, Visible=0
+
+; Variabele ***_tpName woren uitgefaseerd tbv conversie nog wel aanwezig in model, maar onzichtbaar voor gebruiker.
+.Variable                      Goodwill_tpName_ti004, Visible=0
+.Variable                      PatentsTrademarksAndOtherRights_tpName_ti004, Visible=0
+.Variable                      OtherIntangibleFixedAssets_tpName_ti004, Visible=0
+.Variable                      LandAndBuildings_tpName_ti004, Visible=0
+.Variable                      PlantAndEquipment_tpName_ti004, Visible=0
+.Variable                      FurnitureAndFixtures_tpName_ti004, Visible=0
+.Variable                      TransportationEquipment_tpName_ti004, Visible=0
+.Variable                      OtherMaterialFixedAssets_tpName_ti004, Visible=0
+.Variable                      InvestmentInSubsidiaries_tpName_ti004, Visible=0
+.Variable                      LoansToSubsidiaries_tpName_ti004, Visible=0
+.Variable                      LoansToAffiliatedCompanies_tpName_ti004, Visible=0
+.Variable                      OtherSecurities_tpName_ti004, Visible=0
+.Variable                      OtherFinancialFixedAssets_tpName_ti004, Visible=0
+.Variable                      Partner_tpName_ti004, Visible=0
+.Variable                      SubordinatedDebt_tpName_ti004, Visible=0
+.Variable                      LongTermDebt_tpName_ti004, Visible=0
+.Variable                      Product_tpName_ti004, Visible=0
+.Variable                      Department_tpName_ti004, Visible=0
+.Variable                      Department_tpIncreaseWagesNet_ti004, Visible=0
+.Variable                      Department_tpIncreaseSocialSecurities_ti004, Visible=0
+.Variable                      Department_tpIncreasePensionPremiums_ti004, Visible=0
+
+; Variabele ***_tpName woren uitgefaseerd tbv conversie nog wel aanwezig in model, maar onzichtbaar voor gebruiker.
+.Variable                      Goodwill_tpName_ti005, Visible=0
+.Variable                      PatentsTrademarksAndOtherRights_tpName_ti005, Visible=0
+.Variable                      OtherIntangibleFixedAssets_tpName_ti005, Visible=0
+.Variable                      LandAndBuildings_tpName_ti005, Visible=0
+.Variable                      PlantAndEquipment_tpName_ti005, Visible=0
+.Variable                      FurnitureAndFixtures_tpName_ti005, Visible=0
+.Variable                      TransportationEquipment_tpName_ti005, Visible=0
+.Variable                      OtherMaterialFixedAssets_tpName_ti005, Visible=0
+.Variable                      InvestmentInSubsidiaries_tpName_ti005, Visible=0
+.Variable                      LoansToSubsidiaries_tpName_ti005, Visible=0
+.Variable                      LoansToAffiliatedCompanies_tpName_ti005, Visible=0
+.Variable                      OtherSecurities_tpName_ti005, Visible=0
+.Variable                      OtherFinancialFixedAssets_tpName_ti005, Visible=0
+.Variable                      Partner_tpName_ti005, Visible=0
+.Variable                      SubordinatedDebt_tpName_ti005, Visible=0
+.Variable                      LongTermDebt_tpName_ti005, Visible=0
+.Variable                      Product_tpName_ti005, Visible=0
+.Variable                      Department_tpName_ti005, Visible=0
+.Variable                      Department_tpIncreaseWagesNet_ti005, Visible=0
+.Variable                      Department_tpIncreaseSocialSecurities_ti005, Visible=0
+.Variable                      Department_tpIncreasePensionPremiums_ti005, Visible=0
+
+;JB Locking op kolombasis werkt nog niet goed (in GUI?). Voorlopig maar even uitzetten,anders staan deze vars op slot.
+;.Variable                      Department_tpIncreaseWages_ti001, Locked=(Department_tpTotalPersonnelExpenses_ti001[GetT(T,-TsY,0,TsY)]=NA); Or (Department_tpSocialSecurities_ti001[GetT(T,-TsY,0,TsY)]=NA) Or (Department_tpPensionPremiums_ti001[GetT(T,-TsY,0,TsY)]=NA)
+;.Variable                      Department_tpIncreaseWages_ti002, Locked=(Department_tpTotalPersonnelExpenses_ti002[GetT(T,-TsY,0,TsY)]=NA); Or (Department_tpSocialSecurities_ti002[GetT(T,-TsY,0,TsY)]=NA) Or (Department_tpPensionPremiums_ti002[GetT(T,-TsY,0,TsY)]=NA)
+;.Variable                      Department_tpIncreaseWages_ti003, Locked=(Department_tpTotalPersonnelExpenses_ti003[GetT(T,-TsY,0,TsY)]=NA); Or (Department_tpSocialSecurities_ti003[GetT(T,-TsY,0,TsY)]=NA) Or (Department_tpPensionPremiums_ti003[GetT(T,-TsY,0,TsY)]=NA)
+;.Variable                      Department_tpIncreaseWages_ti004, Locked=(Department_tpTotalPersonnelExpenses_ti004[GetT(T,-TsY,0,TsY)]=NA); Or (Department_tpSocialSecurities_ti004[GetT(T,-TsY,0,TsY)]=NA) Or (Department_tpPensionPremiums_ti004[GetT(T,-TsY,0,TsY)]=NA)
+;.Variable                      Department_tpIncreaseWages_ti005, Locked=(Department_tpTotalPersonnelExpenses_ti005[GetT(T,-TsY,0,TsY)]=NA); Or (Department_tpSocialSecurities_ti005[GetT(T,-TsY,0,TsY)]=NA) Or (Department_tpPensionPremiums_ti005[GetT(T,-TsY,0,TsY)]=NA)

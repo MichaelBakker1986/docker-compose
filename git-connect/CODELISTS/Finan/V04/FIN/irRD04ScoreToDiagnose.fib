@@ -1,0 +1,9 @@
+{&&Language=English}
+
+<=0:   "$>The real turnover growth can not be calculated.<$"
+<3.5:  "$>The turnover decrease is exceedingly high.<$"
+<4.5:  "$>The real turnover decrease is very high.<$"
+<5.5:  "$>Real turnover has decreased.<$"
+<6.5:  "$>Real turnover has increased.<$"
+<7.5:  "$>The real turnover has increased strongly.<$"
+>=7.5: "$>The real turnover growth is exceedingly high.<$"

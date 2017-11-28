@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<email>
+  <subject>Uw aanlevering via Fyndoo</subject>
+  <body>Geachte heer/mevrouw,
+	
+Uw aanlevering via Fyndoo is geslaagd! Hieronder vindt u de informatie van uw financieringsaanvraag:
+  
+Naam onderneming: ${customername}
+Fyndoo-kenmerk: ${responsekenmerk}
+
+Heeft u vragen over uw aanvraag, neem dan contact op met de door u gekozen financier(s) en vermeld daarbij bovenstaand Fyndoo-kenmerk.
+
+Met vriendelijke groet,
+
+Team Finan
+
+NB: dit bericht is automatisch gegenereerd. 
+</body>
+</email>

@@ -1,0 +1,2801 @@
+// model "FrcRptWoz2016"
+// created by FINAN 3.2.56.33 (user B.Kottier) on 07-04-2017 13:46
+
+import FinanMath.*;
+import BaseModel.*;
+
+model FrcRptWoz2016 uses BaseModel
+{
+  version: "0.0";
+  root
+  {
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: (Q_STEP01 and Q_STEP02 and Q_STEP03 and Q_STEP04 and Q_STEP05 and Q_STEP06 and Q_STEP07 and Q_STEP08 and Q_STEP09 and Q_STEP10);
+      data_options: saveCalculatedValue,unscalable;
+      displaytype: select;
+      title: "Vragenlijst";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+      options_title: locked;
+      options: locked;
+      variable Q_STEP01
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP01) or (Q_STEP01_ACCEPTED and (Q_STEP01_OPENVALIDATION=0) and (Q_STEP01_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Intermediair";
+        top_blanklines: 1;
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frciNameIntermediary
+        {
+          datatype: none;
+          frequency: none;
+          title: "Naam";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciNameIntermediary
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: NameIntermediary;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Naam";
+            hint: "Naam van het kantoor van de financiële intermediair (accountant, fiscalist, boekhoudkantoor).";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_frciDomicileIntermediary
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vestigingsplaats";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciDomicileIntermediary
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: DomicileIntermediary;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Vestigingsplaats";
+            hint: "De vestigingsplaats van de financiële intermediair (accountant, fiscalist, boekhoudkantoor).";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_frciNameCompiler
+        {
+          datatype: none;
+          frequency: none;
+          title: "Naam opsteller";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciNameCompiler
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: NameCompiler;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Naam opsteller";
+            hint: "De naam van de opsteller (natuurlijk persoon) van de rapportage met toevoeging van (relevante) titels.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_frciEmailAddressIntermediary
+        {
+          datatype: none;
+          frequency: none;
+          title: "E-mailadres";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciEmailAddressIntermediary
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: EmailAddressIntermediary;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "E-mailadres";
+            hint: "Het e-mailadres van de financiële intermediair.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP01_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99%) and (Q_STEP01_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP01_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP01_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP01_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP01_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP01_OPENVALIDATION=1) or (Q_STEP01_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP01_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP01,Q_STEP01_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP01_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP01,Q_STEP01_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP01_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP01_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP02
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP02) or (Q_STEP02_ACCEPTED and (Q_STEP02_OPENVALIDATION=0) and (Q_STEP02_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Informatie over de rechtspersoon [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_venjbw2iChamberOfCommerceRegistrationNumber
+        {
+          datatype: none;
+          frequency: none;
+          title: "Registratienummer bij de Kamer van Koophandel";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iChamberOfCommerceRegistrationNumber
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            pattern: "([1-9][0-9]{7})|([0-9][1-9][0-9]{6})";
+            length: 8;
+            length: >=8 and <= 8;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: ChamberOfCommerceRegistrationNumber;
+            elementtype: venj-types:chamberOfCommerceRegistrationNumberItemType;
+            periodtype: Duration;
+            title: "Registratienummer bij de Kamer van Koophandel";
+            hint: "Het registratienummer bij de kamer van koophandel.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iLegalEntityName
+        {
+          datatype: none;
+          frequency: none;
+          title: "Naam van de rechtspersoon";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iLegalEntityName
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 100000;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: LegalEntityName;
+            elementtype: nl-types:string100000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Naam van de rechtspersoon";
+            hint: "De statutaire naam van de rechtspersoon.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_rjiBusinessNames
+        {
+          datatype: none;
+          frequency: none;
+          title: "Handelsnamen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable rjiBusinessNames
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 100000;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data;
+            namespaceprefix: rj-i;
+            elementname: BusinessNames;
+            elementtype: nl-types:string100000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Handelsnamen";
+            hint: "De vermelding van de verschillende handelsnamen waaronder de rechtspersoon opereert.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_nlcdHouseNumberNL
+        {
+          datatype: none;
+          frequency: none;
+          title: "Huisnummer";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable nlcdHouseNumberNL
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            pattern: "([0-9]{1,20})";
+            range: >=0;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+            namespaceprefix: nl-cd;
+            elementname: HouseNumberNL;
+            elementtype: nl-types:nonNegative20ItemType;
+            periodtype: Duration;
+            displaytype: currency;
+            title: "Huisnummer";
+            hint: "De numerieke aanduiding zoals deze door de gemeente aan het object is toegekend.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_nlcdHouseNumberAddition
+        {
+          datatype: none;
+          frequency: none;
+          title: "Huisnummer toevoeging";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable nlcdHouseNumberAddition
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 1000;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+            namespaceprefix: nl-cd;
+            elementname: HouseNumberAddition;
+            elementtype: nl-types:string1000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Huisnummer toevoeging";
+            hint: "De huisnummertoevoeging zoals deze door de gemeente aan het object is toegekend.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_nlcdPostalCodeNL
+        {
+          datatype: none;
+          frequency: none;
+          title: "Postcode";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable nlcdPostalCodeNL
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            pattern: "([1-9]{1}[0-9]{3}[A-Z]{2})";
+            namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+            namespaceprefix: nl-cd;
+            elementname: PostalCodeNL;
+            elementtype: nl-types:nlzipItemType;
+            periodtype: Duration;
+            title: "Postcode";
+            hint: "De officiële codering van PostNL voor een Nederlands postadres, bestaande uit een numeriek deel en een alfabetisch deel.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_nlcdPlaceOfResidenceNL
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vestigingsplaats";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable nlcdPlaceOfResidenceNL
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 1000;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+            namespaceprefix: nl-cd;
+            elementname: PlaceOfResidenceNL;
+            elementtype: nl-types:string1000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Vestigingsplaats";
+            hint: "De officiële door de gemeente vastgestelde gemeentenaam.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP02_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP02_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99%) and (Q_STEP02_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 2";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP02_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP02_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP02_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP02_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP02_OPENVALIDATION=1) or (Q_STEP02_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP02_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP02,Q_STEP02_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP02_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP02,Q_STEP02_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP02_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP02_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP03
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP03) or (Q_STEP03_ACCEPTED and (Q_STEP03_OPENVALIDATION=0) and (Q_STEP03_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Informatie over de rapportage [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frciReasonDelivery
+        {
+          datatype: none;
+          frequency: none;
+          title: "Reden levering";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciReasonDelivery
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: ReasonDelivery;
+            elementtype: frc-codes:reasonDeliveryItemType;
+            periodtype: Duration;
+            displaytype: select;
+            title: "Reden levering";
+            hint: "De reden waarom de kredietrapportage wordt aangeleverd.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "Bijzonder beheer|Juridische omzetting|Kredietwijziging|Nieuwe aanvraag|Overige redenen voor aflevering|Revisie";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iFinancialReportingPeriodCurrentStartDate
+        {
+          datatype: none;
+          frequency: none;
+          title: "Startdatum van de huidige financiële rapportageperiode";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iFinancialReportingPeriodCurrentStartDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: FinancialReportingPeriodCurrentStartDate;
+            elementtype: xbrli:dateItemType;
+            periodtype: Duration;
+            displaytype: date;
+            title: "Startdatum van de huidige financiële rapportageperiode";
+            hint: "De startdatum van de huidige financiële rapportageperiode.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iFinancialReportingPeriodCurrentEndDate
+        {
+          datatype: none;
+          frequency: none;
+          title: "Einddatum van de huidige financiële rapportageperiode";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iFinancialReportingPeriodCurrentEndDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: FinancialReportingPeriodCurrentEndDate;
+            elementtype: xbrli:dateItemType;
+            periodtype: Duration;
+            displaytype: date;
+            title: "Einddatum van de huidige financiële rapportageperiode";
+            hint: "De einddatum van de huidige financiële rapportageperiode.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iFinancialReportingPeriodPreviousStartDate
+        {
+          datatype: none;
+          frequency: none;
+          title: "Startdatum van de voorgaande financiële rapportageperiode";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iFinancialReportingPeriodPreviousStartDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: FinancialReportingPeriodPreviousStartDate;
+            elementtype: xbrli:dateItemType;
+            periodtype: Duration;
+            displaytype: date;
+            title: "Startdatum van de voorgaande financiële rapportageperiode";
+            hint: "De startdatum van de voorgaande financiële rapportageperiode.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iFinancialReportingPeriodPreviousEndDate
+        {
+          datatype: none;
+          frequency: none;
+          title: "Einddatum van de voorgaande financiële rapportageperiode";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iFinancialReportingPeriodPreviousEndDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: FinancialReportingPeriodPreviousEndDate;
+            elementtype: xbrli:dateItemType;
+            periodtype: Duration;
+            displaytype: date;
+            title: "Einddatum van de voorgaande financiële rapportageperiode";
+            hint: "De einddatum van de voorgaande financiële rapportageperiode.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iBasisOfPreparation
+        {
+          datatype: none;
+          frequency: none;
+          title: "Type grondslag";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iBasisOfPreparation
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data;
+            namespaceprefix: venj-bw2-i;
+            elementname: BasisOfPreparation;
+            elementtype: venj-codes:basisOfPreparationItemType;
+            periodtype: Duration;
+            displaytype: select;
+            title: "Type grondslag";
+            hint: "De benoeming van de toepassing van de commerciële of fiscale grondslagen voor het opstellen van de jaarrekening.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "Commercieel|Fiscaal";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_rjiDocumentPresentationCurrency
+        {
+          datatype: none;
+          frequency: none;
+          title: "Rapporteringsvaluta van het document";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable rjiDocumentPresentationCurrency
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data;
+            namespaceprefix: rj-i;
+            elementname: DocumentPresentationCurrency;
+            elementtype: iso4217-enum-sbr:isoCurrencyCodes4217ItemType;
+            periodtype: Duration;
+            displaytype: select;
+            title: "Rapporteringsvaluta van het document";
+            hint: "De valuta waarin de financiële informatie in het document wordt gepresenteerd.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BOV|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHE|CHF|CHW|CLF|CLP|CNY|COP|COU|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|INR|IQD|IRR|ISK|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LTL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MXV|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SRD|SSP|STD|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TWD|TZS|UAH|UGX|USD|USN|UYI|UYU|UZS|VEF|VND|VUV|WST|XAF|XAG|XAU|XBA|XBB|XBC|XBD|XCD|XDR|XFU|XOF|XPD|XPF|XPT|XSU|XTS|XUA|XXX|YER|ZAR|ZMW";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable frcabstrBankInformationTitle
+        {
+          datatype: none;
+          frequency: none;
+          namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts;
+          namespaceprefix: frc-abstr;
+          elementname: BankInformationTitle;
+          elementtype: xbrli:stringItemType;
+          periodtype: Duration;
+          title: "Bank informatie";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciDestinationBank
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: DestinationBank;
+            elementtype: frc-codes:destinationBankItemType;
+            periodtype: Duration;
+            displaytype: select;
+            title: "Bestemmende bank";
+            hint: "De naam van de bank waarvoor de rapportage bestemd is. Indien de rapportage bestemd is voor een bank waarvan de naam niet is opgenomen in de gespecificeerde lijst dan \"Overig\" invullen.";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "ABN AMRO Bank|ING Bank|Overige|Rabobank";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_nlcdDocumentCreationDate
+        {
+          datatype: none;
+          frequency: none;
+          title: "Datum van opmaak van het document";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable nlcdDocumentCreationDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+            namespaceprefix: nl-cd;
+            elementname: DocumentCreationDate;
+            elementtype: xbrli:dateItemType;
+            periodtype: Duration;
+            displaytype: date;
+            title: "Datum van opmaak van het document";
+            hint: "De datum van opmaak van het document volgens ISO 8601 in het formaat: jjjj-mm-dd";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_kvktContactForDocumentPresentation
+        {
+          datatype: none;
+          frequency: none;
+          title: "Contactpersoon voor deze rapportage";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple kvktContactForDocumentPresentation
+          {
+            frequency: none;
+            neptuple_size: 1;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples;
+            namespaceprefix: kvk-t;
+            elementname: ContactForDocumentPresentation;
+            periodtype: Other;
+            title: "Contactpersoon voor deze rapportage";
+            hint: "Deze tuple is bedoeld voor het opnemen van de contactgegevens van de contactpersoon van deze rapportage. Deze contactpersoon kan van de organisatie zelf zijn of van haar intermediair.";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            tuple_instance_minimum: 1;
+            tuple_instance_maximum: 1;
+            variable kvktContactForDocumentPresentation_tpkvkiContactType
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data;
+              namespaceprefix: kvk-i;
+              elementname: ContactType;
+              elementtype: kvk-codes:contactItemType;
+              periodtype: Duration;
+              displaytype: select;
+              title: "Soort contactpersoon";
+              hint: "Dit concept dient voor het classificeren van de contactpersoon van deze rapportage in de categorie \"ondernemer\" of \"intermediair\".";
+              top_blanklines: 1;
+              visible: 1;
+              choices: "Intermediair|Ondernemer";
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdFirstName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+              namespaceprefix: nl-cd;
+              elementname: FirstName;
+              elementtype: nl-types:string1000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Voornamen";
+              hint: "De verzameling namen die, gescheiden door spaties, aan de geslachtsnaam voorafgaat. Indien aanwezig, wordt het predikaat afgesplitst.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdFamilyName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+              namespaceprefix: nl-cd;
+              elementname: FamilyName;
+              elementtype: nl-types:string1000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Geslachtsnaam";
+              hint: "De (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpkvkiOrganisationName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data;
+              namespaceprefix: kvk-i;
+              elementname: OrganisationName;
+              elementtype: nl-types:string1000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Naam van de organisatie vertegenwoordigd door de contactpersoon";
+              hint: "De naam van de organisatie waartoe de contactpersoon behoort.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdTelephoneNumber
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+              namespaceprefix: nl-cd;
+              elementname: TelephoneNumber;
+              elementtype: nl-types:string1000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Telefoonnummer";
+              hint: "Het nummer waaronder een persoon of organisatie telefonisch te bereiken is, bestaande uit een netnummer en een abonneenummer.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdEmailAddressFull
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              pattern: "[^@]+@[^@]+";
+              length: >=6 and <= 254;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data;
+              namespaceprefix: nl-cd;
+              elementname: EmailAddressFull;
+              elementtype: nl-types:emailItemType;
+              periodtype: Duration;
+              title: "E-mailadres, volledig";
+              hint: "Het adres waaronder een persoon of organisatie via het internet per elektronische post te bereiken is.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP03_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP03_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP03_OPENVALIDATION[1]=0) and (Q_STEP03_PROGRESS[1]>99%) and (Q_STEP03_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 3";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP03_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP03_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP03_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP03_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP03_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP03_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP03_OPENVALIDATION=1) or (Q_STEP03_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP03_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP03,Q_STEP03_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP03_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP03,Q_STEP03_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP03_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP03_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP04
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP04) or (Q_STEP04_ACCEPTED and (Q_STEP04_OPENVALIDATION=0) and (Q_STEP04_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Bankrekening gegevens specificatie";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frcdimPrivateBankAccountSpecificationAxis
+        {
+          datatype: none;
+          frequency: none;
+          title: "Privé bankrekening gegevens specificatie [as]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple frcdimPrivateBankAccountSpecificationAxis
+          {
+            frequency: none;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes;
+            namespaceprefix: frc-dim;
+            elementname: PrivateBankAccountSpecificationAxis;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            title: "Privé bankrekening gegevens specificatie [as]";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            variable frcdimPrivateBankAccountSpecificationAxis_tpfrcdmPrivateBankAccountSpecificationTypedMember
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains;
+              namespaceprefix: frc-dm;
+              elementname: PrivateBankAccountSpecificationTypedMember;
+              elementtype: nl-types:string255;
+              periodtype: Other;
+              displaytype: memo;
+              title: "Privé bankrekening gegevens specificatie [typed member]";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimPrivateBankAccountSpecificationAxis_tpfrciBankName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 100000;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: BankName;
+              elementtype: nl-types:string100000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Naam bank";
+              hint: "De naam van de bank.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP04_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP04_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP04_OPENVALIDATION[1]=0) and (Q_STEP04_PROGRESS[1]>99%) and (Q_STEP04_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 4";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP04_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP04_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP04_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP04_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP04_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP04_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP04_OPENVALIDATION=1) or (Q_STEP04_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP04_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP04_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP04_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP04_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP05
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP05) or (Q_STEP05_ACCEPTED and (Q_STEP05_OPENVALIDATION=0) and (Q_STEP05_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Specificatie of tweede woning(en) [Titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frcdimSecondHouseSpecificationAxis
+        {
+          datatype: none;
+          frequency: none;
+          title: "Tweede woning, specificatie [as]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple frcdimSecondHouseSpecificationAxis
+          {
+            frequency: none;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes;
+            namespaceprefix: frc-dim;
+            elementname: SecondHouseSpecificationAxis;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            title: "Tweede woning, specificatie [as]";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            variable frcdimSecondHouseSpecificationAxis_tpfrcdmObjectNumberTypedMember
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains;
+              namespaceprefix: frc-dm;
+              elementname: ObjectNumberTypedMember;
+              elementtype: frc-types:nonNegInteger12;
+              periodtype: Other;
+              fixed_decimals: 0;
+              title: "WOZ-objectnummer [typed member]";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimSecondHouseSpecificationAxis_tpbdburgSecondHouseAddress
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 70;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+              namespaceprefix: bd-burg;
+              elementname: SecondHouseAddress;
+              elementtype: bd-types:anstring70VItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Adres tweede woning";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimSecondHouseSpecificationAxis_tpbdburgSecondHouseValue
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              range: >=0;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+              namespaceprefix: bd-burg;
+              elementname: SecondHouseValue;
+              elementtype: nl-types:nonNegativeMonetaryNoDecimalsItemType;
+              periodtype: Duration;
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Waarde tweede woning";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP05_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP05_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP05_OPENVALIDATION[1]=0) and (Q_STEP05_PROGRESS[1]>99%) and (Q_STEP05_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 5";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP05_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP05_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP05_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP05_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP05_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP05_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP05_OPENVALIDATION=1) or (Q_STEP05_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP05_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP05,Q_STEP05_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP05_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP05,Q_STEP05_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP05_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP05_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP06
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP06) or (Q_STEP06_ACCEPTED and (Q_STEP06_OPENVALIDATION=0) and (Q_STEP06_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Specificatie van eigen woning [Titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_bdburgOwnHousePrincipalResidenceImmovablePropertyLawObjectNumber
+        {
+          datatype: none;
+          frequency: none;
+          title: "WOZ-objectnummer woning hoofdverblijf";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable bdburgOwnHousePrincipalResidenceImmovablePropertyLawObjectNumber
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            digits: 12;
+            range: >=0;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+            namespaceprefix: bd-burg;
+            elementname: OwnHousePrincipalResidenceImmovablePropertyLawObjectNumber;
+            elementtype: bd-types:nonNegativeInteger12VItemType;
+            periodtype: Duration;
+            fixed_decimals: 0;
+            title: "WOZ-objectnummer woning hoofdverblijf";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_bdburgOwnHousePrincipalResidenceAddress
+        {
+          datatype: none;
+          frequency: none;
+          title: "Adres eigen woning hoofdverblijf";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable bdburgOwnHousePrincipalResidenceAddress
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 60;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+            namespaceprefix: bd-burg;
+            elementname: OwnHousePrincipalResidenceAddress;
+            elementtype: bd-types:anstring60VItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Adres eigen woning hoofdverblijf";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_bdburgOwnHousePrincipalResidenceImmovablePropertyLawValue
+        {
+          datatype: none;
+          frequency: none;
+          title: "WOZ-waarde eigen woning hoofdverblijf";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable bdburgOwnHousePrincipalResidenceImmovablePropertyLawValue
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            range: >=0;
+            namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+            namespaceprefix: bd-burg;
+            elementname: OwnHousePrincipalResidenceImmovablePropertyLawValue;
+            elementtype: nl-types:nonNegativeMonetaryNoDecimalsItemType;
+            periodtype: Duration;
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "WOZ-waarde eigen woning hoofdverblijf";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP06_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP06_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP06_OPENVALIDATION[1]=0) and (Q_STEP06_PROGRESS[1]>99%) and (Q_STEP06_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP06_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP06_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP06_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP06_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP06_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP06_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP06_OPENVALIDATION=1) or (Q_STEP06_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP06_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP06,Q_STEP06_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP06_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP06,Q_STEP06_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP06_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP06_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP07
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP07) or (Q_STEP07_ACCEPTED and (Q_STEP07_OPENVALIDATION=0) and (Q_STEP07_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Specificatie van overige onroerende zaken [Titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frcdimImmovablePropertyOtherSpecificationAxis
+        {
+          datatype: none;
+          frequency: none;
+          title: "Overige onroerende zaken, specificatie [as]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple frcdimImmovablePropertyOtherSpecificationAxis
+          {
+            frequency: none;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes;
+            namespaceprefix: frc-dim;
+            elementname: ImmovablePropertyOtherSpecificationAxis;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            title: "Overige onroerende zaken, specificatie [as]";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            variable frcdimImmovablePropertyOtherSpecificationAxis_tpfrcdmObjectNumberTypedMember
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains;
+              namespaceprefix: frc-dm;
+              elementname: ObjectNumberTypedMember;
+              elementtype: frc-types:nonNegInteger12;
+              periodtype: Other;
+              fixed_decimals: 0;
+              title: "WOZ-objectnummer [typed member]";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimImmovablePropertyOtherSpecificationAxis_tpbdburgImmovablePropertyOtherAddress
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 70;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+              namespaceprefix: bd-burg;
+              elementname: ImmovablePropertyOtherAddress;
+              elementtype: bd-types:anstring70VItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Adres overige onroerende zaak";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimImmovablePropertyOtherSpecificationAxis_tpbdburgImmovablePropertyOtherValue
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              range: >=0;
+              namespaceuri: http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers;
+              namespaceprefix: bd-burg;
+              elementname: ImmovablePropertyOtherValue;
+              elementtype: nl-types:nonNegativeMonetaryNoDecimalsItemType;
+              periodtype: Duration;
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Waarde overige onroerende zaak";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP07_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP07_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP07_OPENVALIDATION[1]=0) and (Q_STEP07_PROGRESS[1]>99%) and (Q_STEP07_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 7";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP07_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP07_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP07_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP07_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP07_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP07_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP07_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP07_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP07_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP07_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP07_OPENVALIDATION=1) or (Q_STEP07_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP07_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP07,Q_STEP07_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP07_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP07,Q_STEP07_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP07_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP07_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP08
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP08) or (Q_STEP08_ACCEPTED and (Q_STEP08_OPENVALIDATION=0) and (Q_STEP08_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Bedrijfsgebouwen en -terreinen, toelichting [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frciPurchaseValueRegisterBoundGoodDisclosure
+        {
+          datatype: none;
+          frequency: none;
+          title: "Informatieverschaffing over de aanschafwaarde registergoed";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciPurchaseValueRegisterBoundGoodDisclosure
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 100000;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: PurchaseValueRegisterBoundGoodDisclosure;
+            elementtype: nl-types:string100000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Informatieverschaffing over de aanschafwaarde registergoed";
+            hint: "Toelichting op de waarde waarvoor een registergoed is aangeschaft, indien de aanschafwaarde niet bekend is per kadastrale nummer. Alleen registergoederen met een aanschafwaarde van €10.000,- of meer behoeven hier te worden ingevuld.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_frciValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure
+        {
+          datatype: none;
+          frequency: none;
+          title: "Informatieverschaffing over WOZ-waarde registergoed";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable frciValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 100000;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+            namespaceprefix: frc-i;
+            elementname: ValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure;
+            elementtype: nl-types:string100000ItemType;
+            periodtype: Duration;
+            displaytype: memo;
+            title: "Informatieverschaffing over WOZ-waarde registergoed";
+            hint: "Toelichting op de waarde van het registergoed zoals het bij het register is geregistreerd indien WOZ waarde geen betrekking heeft op kadastrale nummer.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP08_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP08_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP08_OPENVALIDATION[1]=0) and (Q_STEP08_PROGRESS[1]>99%) and (Q_STEP08_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 8";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP08_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP08_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP08_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP08_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP08_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP08_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP08_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP08_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP08_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP08_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP08_OPENVALIDATION=1) or (Q_STEP08_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP08_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP08,Q_STEP08_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP08_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP08,Q_STEP08_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP08_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP08_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP09
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP09) or (Q_STEP09_ACCEPTED and (Q_STEP09_OPENVALIDATION=0) and (Q_STEP09_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Bedrijfsgebouwen en -terreinen, specificatie [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frcdimLandAndBuildingsSpecificationAxis
+        {
+          datatype: none;
+          frequency: none;
+          title: "Bedrijfsgebouwen en -terreinen, specificatie [as]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple frcdimLandAndBuildingsSpecificationAxis
+          {
+            frequency: none;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes;
+            namespaceprefix: frc-dim;
+            elementname: LandAndBuildingsSpecificationAxis;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            title: "Bedrijfsgebouwen en -terreinen, specificatie [as]";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrcdmRegistryNumberRegisterBoundGoodTypedMember
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains;
+              namespaceprefix: frc-dm;
+              elementname: RegistryNumberRegisterBoundGoodTypedMember;
+              elementtype: nl-types:string255;
+              periodtype: Other;
+              displaytype: memo;
+              title: "Registernummer [typed member]";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciBuildingIndicator
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: BuildingIndicator;
+              elementtype: nl-codes:yesNoItemType;
+              periodtype: Instant;
+              displaytype: select;
+              title: "Gebouw (eventueel inclusief terrein) J/N";
+              hint: "Indicatie of het alhier gespecificeerde registergoed een gebouw is, indien gebouw (eventueel inclusief terrein) dan is de WOZ-waarde verplicht.";
+              visible: 1;
+              choices: "Ja|Nee";
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciPurchaseYearRegisterBoundGood
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: PurchaseYearRegisterBoundGood;
+              elementtype: xbrli:integerItemType;
+              periodtype: Instant;
+              fixed_decimals: 0;
+              title: "Aanschafjaar";
+              hint: "Het aanschafjaar van het registergoed.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciPurchaseValueRegisterBoundGood
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: PurchaseValueRegisterBoundGood;
+              elementtype: nl-types:monetaryNoDecimalsItemType;
+              periodtype: Instant;
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Aanschafwaarde";
+              hint: "De waarde waarvoor een registergoed is aangeschaft. Alleen registergoederen met een aanschafwaarde van €10.000,- of meer behoeven hier te worden ingevuld. Indien de aanschafwaarde niet bekend is per kadastrale nummer, dient dit toegelicht te worden.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciValuePurposesValuationOfImmovablePropertyActRegisterBoundGood
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood;
+              elementtype: nl-types:monetaryNoDecimalsItemType;
+              periodtype: Instant;
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "WOZ-waarde";
+              hint: "De waarde van een onroerende zaak op de laatste peildatum zoals deze in het kader van de Wet Waardering Onroerende Zaken (WOZ) wordt bepaald (Artikel 18, lid 2 van de Wet WOZ).";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciAmortisationMethodRegisterBoundGood
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: AmortisationMethodRegisterBoundGood;
+              elementtype: xbrli:stringItemType;
+              periodtype: Instant;
+              displaytype: memo;
+              title: "Afschrijvingsmethode";
+              hint: "Methode om de waardedaling van het registergoed tot uitdrukking te brengen.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciBalanceSheetValueRegisterBoundGood
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: BalanceSheetValueRegisterBoundGood;
+              elementtype: nl-types:monetaryNoDecimalsItemType;
+              periodtype: Instant;
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Boekwaarde";
+              hint: "De boekwaarde van een goed dat volgens de wet moet worden ingeschreven in de daarvoor bestemde openbare registers: grond, huizen, schepen, vliegtuigen. Door de inschrijving kan iedereen zien aan wie het toebehoort en of er een ander zakelijk recht(bijvoorbeeld een hypotheek) op rust (zie BW 3:10).";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimLandAndBuildingsSpecificationAxis_tpfrciDateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood;
+              elementtype: xbrli:dateItemType;
+              periodtype: Instant;
+              displaytype: date;
+              title: "Datum vaststelling WOZ-waarde";
+              hint: "De datum waarop de WOZ-waarde van het registergoed is vastgesteld.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP09_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP09_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP09_OPENVALIDATION[1]=0) and (Q_STEP09_PROGRESS[1]>99%) and (Q_STEP09_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 9";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP09_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP09_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 9";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP09_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP09_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP09_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 9";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP09_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP09_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP09_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP09_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 9";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP09_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP09_OPENVALIDATION=1) or (Q_STEP09_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP09_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP09,Q_STEP09_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP09_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP09,Q_STEP09_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP09_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP09_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP10
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP10) or (Q_STEP10_ACCEPTED and (Q_STEP10_OPENVALIDATION=0) and (Q_STEP10_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Bankrekening gegevens specificatie";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_frcdimBankAccountSpecificationAxis
+        {
+          datatype: none;
+          frequency: none;
+          title: "Bankrekening gegevens specificatie [as]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple frcdimBankAccountSpecificationAxis
+          {
+            frequency: none;
+            namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes;
+            namespaceprefix: frc-dim;
+            elementname: BankAccountSpecificationAxis;
+            elementtype: xbrli:stringItemType;
+            periodtype: Duration;
+            title: "Bankrekening gegevens specificatie [as]";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            variable frcdimBankAccountSpecificationAxis_tpfrcdmBankAccountSpecificationTypedMember
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains;
+              namespaceprefix: frc-dm;
+              elementname: BankAccountSpecificationTypedMember;
+              elementtype: nl-types:string255;
+              periodtype: Other;
+              displaytype: memo;
+              title: "Bankrekening gegevens specificatie [typed member]";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable frcdimBankAccountSpecificationAxis_tpfrciBankName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 100000;
+              namespaceuri: https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data;
+              namespaceprefix: frc-i;
+              elementname: BankName;
+              elementtype: nl-types:string100000ItemType;
+              periodtype: Duration;
+              displaytype: memo;
+              title: "Naam bank";
+              hint: "De naam van de bank.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP10_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP10_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP10_OPENVALIDATION[1]=0) and (Q_STEP10_PROGRESS[1]>99%) and (Q_STEP10_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 10";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP10_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP10_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 10";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP10_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP10_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP10_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 10";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP10_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP10_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP10_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP10_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 10";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP10_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP10_OPENVALIDATION=1) or (Q_STEP10_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP10_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP10,Q_STEP10_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP10_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP10,Q_STEP10_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP10_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP10_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Resultaat";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Actief|1:Definitief";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Definitief gemaakt";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        title: "Definitief gemaakt door";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Aangemaakt op";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        title: "Aangemaakt door";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_MODIFIED_ON
+      {
+        datatype: number;
+        frequency: document;
+        formula: Now;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Laatste bewerking";
+        visible: 1;
+        options_title: locked;
+      }
+      variable ModelGenerator
+      {
+        datatype: string;
+        frequency: document;
+        formula: "FINAN XBRL Taxonomy Viewer v4.2.10";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Model gegenereeerd door";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable XbrlReport
+      {
+        datatype: string;
+        frequency: document;
+        formula: "frc-rpt-woz-2016";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Rapportage";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

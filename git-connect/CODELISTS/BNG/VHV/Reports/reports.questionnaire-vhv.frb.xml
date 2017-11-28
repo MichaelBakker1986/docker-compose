@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.0.0" date="30-03-2017" author="Topicus Finan" title="VHV Tabellen" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<TimelineId>1</TimelineId>
+	<TimelineTitle>MonthTimeline</TimelineTitle>
+	<DeltaPeriods>0</DeltaPeriods>
+	<Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase" /></data></Periods>
+	<ReportScale>1000</ReportScale>
+	<Period><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="./document/properties/DeltaPeriods" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getStartDate"/><presentation format="d MMMMM yyyy"/></data> <data src="chineseRoom" name="Upto">t/m</data> <data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="./document/properties/DeltaPeriods" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getEndDate"/><presentation format="d MMMMM yyyy"/></data></Period>
+
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<MedewerkerVKO><data src="document" var="./document/properties/currentUser_Fullname/text()"/></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+	<CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+	<CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+	<CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+	<CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+	<PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+	<Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+	<PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+	<Of><data src="chineseRoom" name="Of">van</data></Of>
+	<At><data src="chineseRoom" name="At">te</data></At>
+	<ModelVersionLabel><data src="fesModel"><variables var="ModelVersion" function="getTitle" /></data></ModelVersionLabel>
+	<ModelVersion><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="ModelVersion" /></data></ModelVersion>
+
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy" /></data></CreationDate>
+
+	<CustomerNumberLabel><data src="fesModel"><variables var="BBrelatienummerBank" function="getTitle" /></data></CustomerNumberLabel>
+	<CustomerNumber><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBrelatienummerBank" /></data></CustomerNumber>
+
+	<BBAanvraagOpstellerLabel><data src="fesModel"><variables var="BBAanvraagOpsteller" function="getTitle" /></data></BBAanvraagOpstellerLabel>
+	<BBAanvraagOpsteller><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAanvraagOpsteller" /></data></BBAanvraagOpsteller>
+
+	<BBAanvraagNummerLabel><data src="fesModel"><variables var="BBAanvraagNummer" function="getTitle" /></data></BBAanvraagNummerLabel>
+	<BBAanvraagNummer><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAanvraagNummer" /></data></BBAanvraagNummer>
+
+	<BBRelatieBeheerderLabel><data src="fesModel"><variables var="BBRelatieBeheerder" function="getTitle" /></data></BBRelatieBeheerderLabel>
+	<BBRelatieBeheerder><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBRelatieBeheerder" /></data></BBRelatieBeheerder>
+
+	<BBAccountGroepLabel><data src="fesModel"><variables var="BBAccountGroep" function="getTitle" /></data></BBAccountGroepLabel>
+	<BBAccountGroep><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAccountGroep" /></data></BBAccountGroep>
+
+	<BBRisicoModelLabel><data src="fesModel"><variables var="BBRisicoModel" function="getTitle" /></data></BBRisicoModelLabel>
+	<BBRisicoModel><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBRisicoModel" /></data></BBRisicoModel>
+
+</properties>
+
+
+<newpage name="frontpage">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<section class="section"><data src="fesModel"><variables var="BNG_VHV_Tabel1" function="getTitle"/></data></section>
+
+<table class="datatable">
+<data src="fes">
+	<columns header="" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_1"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_OG"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_Verkoop"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_BedrNB"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_Invest"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_aank"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_VOVVerpl"/>
+	<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+		<overrideStyle old="level1single">choicenoborder</overrideStyle>
+		<overrideStyle old="level1empty">remove</overrideStyle>
+		<overrideStyle old="level0empty">remove</overrideStyle>
+		<overrideStyle old="level0">level1</overrideStyle>
+</presentation>
+</data>
+</table>
+
+<p> </p>
+
+<table class="datatable">
+<data src="fes">
+	<columns header="" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_Bedrijfsw"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_LangVV"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_KortVV"/>
+	  <variables recursiveSkip="false" depth="0" var="BNG_VHV_Tabel1_FinRuimte"/>
+	<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+		<overrideStyle old="level1single">choicenoborder</overrideStyle>
+		<overrideStyle old="level1empty">remove</overrideStyle>
+		<overrideStyle old="level0empty">remove</overrideStyle>
+		<overrideStyle old="level0">level1</overrideStyle>
+</presentation>
+</data>
+</table>
+
+<p> </p>
+
+	<section class="section"><data src="fesModel"><variables var="BNG_VHV_Tabel2" function="getTitle"/></data></section>
+	<table class="datatable">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel2" />
+		<variables recursiveSkip="false" depth="1" var="BNG_VHV_Tabel2" varFrom="BNG_VHV_TabelEigenVerm"/>
+		<variables recursiveSkip="false" depth="1" var="BNG_VHV_Tabel2" varFrom="BNG_VHV_Tabel2_BalPas"/>
+		<variables recursiveSkip="false" depth="1" var="BNG_VHV_Tabel2" varFrom="BNG_VHV_Tabel2_RB3"/>
+
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choicenoborder</overrideStyle>
+			<overrideStyle old="level1empty">remove</overrideStyle>
+			<overrideStyle old="level0empty">remove</overrideStyle>
+
+	</presentation>
+	</data>
+</table>
+
+<p> </p>
+
+	<section class="section"><data src="fesModel"><variables var="BNG_VHV_Tabel3" function="getTitle"/></data></section>
+
+	<table class="datatable">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel3" />
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel3" varFrom="BNG_VHV_Tabel3_BNG_VHV_RtblTotVerm" />
+
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choicenoborder</overrideStyle>
+			<overrideStyle old="level1empty">remove</overrideStyle>
+			<overrideStyle old="level0empty">remove</overrideStyle>
+
+	</presentation>
+	</data>
+</table>
+
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section"><data src="fesModel"><variables var="BNG_VHV_Tabel4" function="getTitle"/></data></section>
+
+	<table class="datatable">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" />
+
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_GebK"/>
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_CFOperAct"/>
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_Rentelasten"/>
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_RenteOntvangsten"/>
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_NietDAEB"/>
+		<variables recursiveSkip="false" depth="2" var="BNG_VHV_Tabel4" varFrom="BNG_VHV_Tabel4_Afl_regulier"/>
+
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choicenoborder</overrideStyle>
+			<overrideStyle old="level1empty">remove</overrideStyle>
+			<overrideStyle old="level0empty">remove</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+
+<!-- =========End============================================================= -->
+</document>

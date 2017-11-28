@@ -7,9 +7,9 @@ var browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
 var bodyParser = require('body-parser')
 var expressStaticGzip = require("express-static-gzip");
-app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
-app.use('/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
-app.use(expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
+app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
+app.use('/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
+app.use(expressStaticGzip(__dirname + "/../git-connect/resources/"));
 app.use(require('compression')())
 app.use(require('cors')())
 app.set('port', port)
@@ -81,7 +81,7 @@ app.get('/models', (req, res) => {
 app.get('*/tmp_model/:model', (req, res) => {
     var name = req.params.model;
     return exec('node ' + __dirname + '/src/exportLME_FFL.js ' + name).then((result) => {
-        var readStream = require('fs').createReadStream(__dirname + '/../ff-ssh-git/resources/' + name + '.js');
+        var readStream = require('fs').createReadStream(__dirname + '/../git-connect/resources/' + name + '.js');
         readStream.pipe(res);
     }).catch((err) => {
         res.status(500).send(err.toString())

@@ -1,0 +1,9 @@
+{&&Language=Deutsch}
+
+0: "0 $>Keine Daten<$"
+1: "1 $>Umsatzänderung von mindestens<$ 10%"
+2: "2 $>Umsatzänderung von mindestens<$ 5%"
+3: "3 $>Umsatzänderung von mindestens<$ 2%"
+4: "4 $>Umsatzänderung von mindestens<$ 0%"
+5: "5 $>Umsatzänderung von mindestens<$ -3%"
+6: "6 $>Umsatzänderung von mindestens<$ -10%"

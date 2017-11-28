@@ -1,0 +1,23 @@
+; FINAN-UraExport.fsf
+; versie 4-5-2010 (EJS)
+;
+{&&Language=Nederlands}
+
+
+;—————————————————————————————————————————————————————————————————————————————
+; Export FINAN XML voor URA Rating Factory
+;
+; let op:
+; - voor de Rating Factory moet het jaarbasis zijn
+; - i.v.m. Rating Coach ook het eerste jaar van de scenario's
+; - parameter "All" van Export-opdracht moet ontbreken, dus geen verdichtingen
+;   in calculatatieboom exporteren (zou import lastig maken)
+;
+{&&If VersionBefore 3.1.25}
+{&&Else}
+.Script Name=ExportFinanXmlScript,Title="$>FINAN XML bestand voor URA Rating Factory<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="XML Files (*.finan.xml)|*.finan.xml"
+  .Export Type="XmlData",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod,1)\TsY=1|FirstTinFormulaSet(Trend,MainPeriod)\TsY=1|FirstTinPeriod(Forecast2Period)\TsY=1|FirstTinPeriod(Forecast3Period)\TsY=1|FirstTinPeriod(Forecast4Period)\TsY=1]",FileName=&SysVar("FileNameVar")
+.EndScript
+{&&EndIf}

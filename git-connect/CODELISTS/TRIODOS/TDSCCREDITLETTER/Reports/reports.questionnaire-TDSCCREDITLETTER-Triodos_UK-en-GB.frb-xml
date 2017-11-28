@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.0.3" date="19-11-2014" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_Relatienummer" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_BY" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_ON" /><presentation format="dd MMMM yyyy"/><presentation showSingleValueVariablesOnce="false" /></data></CreationDate>
+	<CreationDateTitel>Date</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScale>1</ReportScale>
+</properties>
+
+</document>

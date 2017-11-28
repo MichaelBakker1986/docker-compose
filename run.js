@@ -8,5 +8,5 @@ const child = spawn('node . -type f | wc -l', {
 require('./lme-model-api')
 require('./demo-apps')
 require('./lme-data-api')
-require('./ff-ssh-git')
+require('./git-connect')
 require('./proxy')

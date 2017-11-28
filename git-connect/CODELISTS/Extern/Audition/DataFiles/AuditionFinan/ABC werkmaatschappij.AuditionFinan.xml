@@ -1,0 +1,4967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<finanData>
+ <header>
+  <companyName>N.A-0</companyName>
+  <documentDescription>Demo</documentDescription>
+  <documentCode>Demo</documentCode>
+  <codeList>AuditionFinan</codeList>
+  <codeListVersion>3.5</codeListVersion>
+  <buildDate>2010-03-10</buildDate>
+  <buildUser>N.A-0</buildUser>
+  <creator>N.A-0</creator>
+  <creatorVersion/>
+ </header>
+ <timeLines>
+  <timeLine id="MainPeriod">
+   <title>historie</title>
+   <formulaSet>NoTrend</formulaSet>
+   <columns>
+    <column id="1">
+     <title>2008</title>
+     <startDate>2008-01-01</startDate>
+     <endDate>2008-12-31</endDate>
+     <currency>EUR</currency>
+     <scale>1</scale>
+    </column>
+    <column id="2">
+     <title>2009</title>
+     <startDate>2009-01-01</startDate>
+     <endDate>2009-12-31</endDate>
+     <currency>EUR</currency>
+     <scale>1</scale>
+    </column>
+   </columns>
+  </timeLine>
+ </timeLines>
+ <accounts>
+  <account id="bafd">
+   <description>Deelnemingen in groepsmaatschappijen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bafe">
+   <description>Overige effecten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bafo">
+   <description>Overige vorderingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bafp">
+   <description>Participanten en maatschappijen waarin wordt deelgenomen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bafv">
+   <description>Vorderingen groepsmaatschappijen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bafa">
+   <description>Andere deelnemingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baicv">
+   <description>Concessies, vergunningen en intellectuele eigendom</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baigw">
+   <description>Goodwill</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baiie">
+   <description>Goodwill uit eerdere overnames</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baioo">
+   <description>Kosten van onderzoek en ontwikkeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baiua">
+   <description>Kosten van oprichting en van uitgifte van aandelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="baivb">
+   <description>Vooruitbetaald op immateriele vaste activa</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bamdi">
+   <description>Inventaris</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1332</cell>
+    <cell columnId="2">3006</cell>
+   </cells>
+  </account>
+  <account id="bamdv">
+   <description>Voertuigen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">19774</cell>
+    <cell columnId="2">16483</cell>
+   </cells>
+  </account>
+  <account id="bamgt">
+   <description>Bedrijfsgebouwen en -terreinen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">59336</cell>
+    <cell columnId="2">55762</cell>
+   </cells>
+  </account>
+  <account id="bammi">
+   <description>Machines en installaties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bamiu">
+   <description> Vaste bedrijfsmiddelen in uitvoering en vooruitbetaald op materiele vaste activa</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">6807</cell>
+    <cell columnId="2">6807</cell>
+   </cells>
+  </account>
+  <account id="bamnd">
+   <description>Niet aan de bedrijfsuitoefening dienstbaar</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bamnv">
+   <description>Vastgoedbeleggingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bd">
+   <description>Aandeel derden</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bea">
+   <description>Kapitaal firmant 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beb">
+   <description>Kapitaal firmant 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bec">
+   <description>Kapitaal firmant 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bed">
+   <description>Kapitaal firmant 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bee">
+   <description>Kapitaal firmant 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bef">
+   <description>Kapitaal firmant 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beg">
+   <description>Kapitaal firmant 7</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beh">
+   <description>Kapitaal firmant 8</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="behwr">
+   <description>Herwaarderingsreserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bei">
+   <description>Kapitaal firmant 9</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+   <account id="bej">
+   <description>Kapitaal firmant 10</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bek">
+   <description>Kapitaal firmant 11</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beka">
+   <description>Geplaatst kapitaal</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-18151</cell>
+    <cell columnId="2">-18151</cell>
+   </cells>
+  </account>
+  <account id="bel">
+   <description>Kapitaal firmant 12</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beor">
+   <description>Overige reserves</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-40384</cell>
+    <cell columnId="2">-97670</cell>
+   </cells>
+  </account>
+  <account id="beord">
+   <description>Dividenduitkering</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">908</cell>
+   </cells>
+  </account>
+  <account id="beour">
+   <description>Oudedagreserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beowr">
+   <description>Onverdeelde winst</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="berag">
+   <description>Agio</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="beugr">
+   <description>Egalisatiereserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bevvr">
+   <description>Herinvesteringsreserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bevzr">
+   <description>Assurantiereserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bewr">
+   <description>Wettelijke en statutaire reserves</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bexpr">
+   <description>Exportrisicoreserve</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgipr">
+   <description>Achtergestelde lening 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgiqr">
+   <description>Achtergestelde lening 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgirr">
+   <description>Achtergestelde lening 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgisr">
+   <description>Achtergestelde lening 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgitr">
+   <description>Achtergestelde lening 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bgwir">
+   <description>Achtergestelde lening 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-14592</cell>
+    <cell columnId="2">-11668</cell>
+   </cells>
+  </account>
+  <account id="bkbbpb">
+   <description>Bedrijfsvereniging</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-368</cell>
+    <cell columnId="2">-25</cell>
+   </cells>
+  </account>
+  <account id="bkbbpd">
+   <description>Overige belastingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">-227</cell>
+   </cells>
+  </account>
+  <account id="bkbbpl">
+   <description>Loonheffing</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-780</cell>
+    <cell columnId="2">-570</cell>
+   </cells>
+  </account>
+  <account id="bkbbpo">
+   <description>Omzetbelasting</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-7189</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkbbpv">
+   <description>Vennootschapsbelasting</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-8322</cell>
+    <cell columnId="2">-13702</cell>
+   </cells>
+  </account>
+  <account id="bkbpea">
+   <description>Pensioen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-2964</cell>
+    <cell columnId="2">-3844</cell>
+   </cells>
+  </account>
+  <account id="bkcl">
+   <description>Converteerbare leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkcr">
+   <description>Schulden aan leveranciers en handelskredieten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-12921</cell>
+    <cell columnId="2">-14774</cell>
+   </cells>
+  </account>
+  <account id="bkdv">
+   <description>Overige schulden</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-28220</cell>
+    <cell columnId="2">-10137</cell>
+   </cells>
+  </account>
+  <account id="bkdvs">
+   <description>Overige schuld</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-9001</cell>
+    <cell columnId="2">-4508</cell>
+   </cells>
+  </account>
+  <account id="bkgm">
+   <description>Schulden aan groepsmaatschappijen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkiab">
+   <description>Andere obligatieleningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkiac">
+   <description>Converteerbare leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkiaf">
+   <description>Financieringen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkiah">
+   <description>Hypothecaire leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkial">
+   <description>Leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-2995</cell>
+    <cell columnId="2">-2995</cell>
+   </cells>
+  </account>
+  <account id="bkkib">
+   <description>Schulden aan kredietinstellingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">-10532</cell>
+   </cells>
+  </account>
+  <account id="bkoha">
+   <description>Vooruitontvangen op onderhanden werk</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkoo">
+   <description>Andere obligatieleningen en onderhandse leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkop">
+   <description>Overlopende passiva</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkpm">
+   <description>Schulden aan participanten en aan maatschappijen waarin wordt deelgenomen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bktp">
+   <description>Schulden terzake van pensioenen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkvu">
+   <description>Vooruitontvangen op bestellingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkwc">
+   <description>Te betalen wissels en cheques</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blb">
+   <description>Belastingen en premies sociale verzekeringen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blco">
+   <description>Converteerbare leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blcr">
+   <description>Schulden aan leveranciers en handelskredieten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bldo">
+   <description>Overlopende passiva</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bldv">
+   <description>Overige schulden</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blgm">
+   <description>Schulden aan groepsmaatschappijen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifa">
+   <description>Financiering 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifb">
+   <description>Financiering 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifc">
+   <description>Financiering 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifd">
+   <description> Financiering 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkife">
+   <description>Financiering 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkiff">
+   <description>Financiering 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifg">
+   <description>Financiering 7</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifh">
+   <description>Financiering 8</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifi">
+   <description>Financiering 9</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifj">
+   <description>Financiering 10</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifk">
+   <description>Financiering 11</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkifl">
+   <description>Financiering 12</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkiha">
+   <description>Hypotheek 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihb">
+   <description>Hypotheek 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihc">
+   <description>Hypotheek 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihd">
+   <description>Hypotheek 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihe">
+   <description>Hypotheek 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihf">
+   <description>Hypotheek 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihg">
+   <description>Hypotheek 7</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihh">
+   <description>Hypotheek 8</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihi">
+   <description>Hypotheek 9</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihj">
+   <description>Hypotheek 10</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihk">
+   <description>Hypotheek 11</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkihl">
+   <description>Hypotheek 12</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkila">
+   <description>Lening o/g 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-53659</cell>
+    <cell columnId="2">-50664</cell>
+   </cells>
+  </account>
+  <account id="blkilb">
+   <description>Lening o/g 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilc">
+   <description>Lening o/g 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkild">
+   <description>Lening o/g 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkile">
+   <description>Lening o/g 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilf">
+   <description>Lening o/g 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilg">
+   <description>Lening o/g 7</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilh">
+   <description>Lening o/g 8</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkili">
+   <description>Lening o/g 9</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilj">
+   <description>Lening o/g 10</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkilk">
+   <description>Lening o/g 11</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blkill">
+   <description>Lening o/g 12</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blo">
+   <description>Andere obligatieleningen en onderhandse leningen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blpe">
+   <description>Schulden ter zake van pensioenen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blpm">
+   <description>Schulden aan participanten en aan maatschappijen waarin wordt deelgenomen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blvu">
+   <description>Vooruitontvangen op bestellingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="blwc">
+   <description>Te betalen wissels en cheques</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bve">
+   <description>Effecten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvl">
+   <description>Liquide middelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">27735</cell>
+    <cell columnId="2">2607</cell>
+   </cells>
+  </account>
+  <account id="bvoah">
+   <description>Van aandeelhouders opgevraagde stortingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvobpb">
+   <description>Bedrijfsvereniging</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvobpd">
+   <description>Overige belastingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvobpl">
+   <description>Loonheffing</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvobpo">
+   <description>Omzetbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">15050</cell>
+   </cells>
+  </account>
+  <account id="bvobpp">
+   <description>Pensioenen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvobpv">
+   <description>Vennootschapsbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvod">
+   <description>Rekening-courant directie</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvodv">
+   <description>Overige vorderingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvog">
+   <description>Vorderingen op groepsmaatschappijen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvohd">
+   <description>Handelsdebiteuren</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">17453</cell>
+    <cell columnId="2">22109</cell>
+   </cells>
+  </account>
+  <account id="bvohdd">
+   <description>Voorziening dubieuze debiteuren</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">-1743</cell>
+    <cell columnId="2">-2211</cell>
+   </cells>
+  </account>
+  <account id="bvoo">
+   <description>Overlopende activa</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">184</cell>
+    <cell columnId="2">94</cell>
+   </cells>
+  </account>
+  <account id="bvop">
+   <description>Vorderingen op participanten en maatschappijen waarin wordt deelgenomen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvg">
+   <description>Grond- en hulpstoffen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">11224</cell>
+    <cell columnId="2">17994</cell>
+   </cells>
+  </account>
+  <account id="bvvo">
+   <description>Onderhanden werk</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa01">
+   <description>Gereed product</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">96010</cell>
+    <cell columnId="2">138987</cell>
+   </cells>
+  </account>
+  <account id="bvvpa02">
+   <description>Gereed product 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa03">
+   <description>Gereed product 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa04">
+   <description>Gereed product 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa05">
+   <description>Gereed product 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa06">
+   <description>Handelsgoed 1</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa07">
+   <description>Handelsgoed 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa08">
+   <description>Handelsgoed 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa09">
+   <description>Handelsgoed 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvpa10">
+   <description>Handelsgoed 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvphaw">
+   <description>Voorziening gereed product en handelsgoederen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvphaw">
+   <description>Vooruitbetaald op voorraden</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvv">
+   <description>Vooruitbetaald op voorraden</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvx">
+   <description>Vrije rubriek voorraad a</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bvvy">
+   <description>Vrije rubriek voorraad b</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzbe">
+   <description>Belastingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-38566</cell>
+    <cell columnId="2">-38129</cell>
+   </cells>
+  </account>
+  <account id="bzdva">
+   <description>Assurantie eigen risico</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvb">
+   <description>Groot onderhoud gebouwen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvd">
+   <description>Voorziening deelnemingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvg">
+   <description>Garantieverplichtingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvi">
+   <description>Groot onderhoud machines en installaties</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvl">
+   <description>Lijfrente</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvm">
+   <description>Milieu</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvp">
+   <description>Produktaansprakelijkheid</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvr">
+   <description>Reorganisatie</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvs">
+   <description>Stamrechtverplichtingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvy">
+   <description>Voorziening arbeidsongeschiktheid</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzdvz">
+   <description>Vrije overige voorziening 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bzpe">
+   <description>Pensioenen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="radd">
+   <description>Aandeel van derden in het groepsresultaat</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rbrd">
+   <description>Aandeel resultaat deelnemingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfra">
+   <description>Waardeveranderingen van vorderingen die tot de vaste activa behoren en van effecten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrb">
+   <description>Rentebaten en soortgelijke opbrengsten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrc">
+   <description>Overige rentelasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrla">
+   <description>Rentelast</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">3828</cell>
+    <cell columnId="2">4159</cell>
+   </cells>
+  </account>
+  <account id="rfrlc">
+   <description>Rente converteerbare lening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrld">
+   <description>Rente rekening-courant directie</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlf">
+   <description>Rente financiering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlg">
+   <description>Rente schuld groepsmaatschappij</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh01">
+   <description>Rente hypotheek 1</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh02">
+   <description>Rente hypotheek 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh03">
+   <description>Rente hypotheek 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh04">
+   <description>Rente hypotheek 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh05">
+   <description>Rente hypotheek 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlh06">
+   <description>Rente hypotheek 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrll">
+   <description>Rente lening o/g</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlo">
+   <description>Rente onderhandse lening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlp">
+   <description>Rente schuld participant / maatschappi</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfrlz">
+   <description>Overige rentelasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">4999</cell>
+    <cell columnId="2">5605</cell>
+   </cells>
+  </account>
+  <account id="rfvab">
+   <description>Rente vorderingen op groepsmaatschappijen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfvac">
+   <description>Rente vorderingen op participanten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfvad">
+   <description>Rente vorderingen op maatschappijen waarin wordt deelgenomen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfvae">
+   <description>Dividend uit effecten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfvaf">
+   <description>Rente overige vorderingen</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rfvaz">
+   <description>Overige opbrengsten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkaficv">
+   <description>Concessies en vergunningen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafigw">
+   <description>Goodwill</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafiie">
+   <description>Goodwill uit eerdere overnames</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafioo">
+   <description>Kosten van onderzoek en ontwikkeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafiua">
+   <description>Kosten van uitgifte van aandelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafivb">
+   <description>Vooruitbetalingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafm95">
+   <description>Doorberekende afschrijvingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafm96">
+   <description>Doorberekende afschrijvingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafm97">
+   <description>Doorberekende afschrijvingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafmdi">
+   <description>Inventaris</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">908</cell>
+    <cell columnId="2">966</cell>
+   </cells>
+  </account>
+  <account id="rkafmdv">
+   <description>Vervoermiddelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">3416</cell>
+    <cell columnId="2">3290</cell>
+   </cells>
+  </account>
+  <account id="rkafmgt">
+   <description>Bedrijfsgebouwen en -terreinen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">3574</cell>
+    <cell columnId="2">3574</cell>
+   </cells>
+  </account>
+  <account id="rkafmiu">
+   <description>Activa in uitvoering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafmmi">
+   <description>Machines en installaties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafmnd">
+   <description>Niet aan de bedrijfsuitoefening dienstbaar</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafmnv">
+   <description>Vastgoed beleggingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkafmb">
+   <description>Boekwinst /verlies</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">-3028</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkbw">
+   <description>Bijzondere waardeverminderingen van vlottende activa</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkg">
+   <description>Kosten van grond- en hulpstoffen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rklsb">
+   <description>Beheervergoeding</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rklsl">
+   <description>Lonen en salarissen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">202653</cell>
+    <cell columnId="2">205627</cell>
+   </cells>
+  </account>
+  <account id="rklsp">
+   <description>Pensioenlasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">4952</cell>
+   </cells>
+  </account>
+  <account id="rklss">
+   <description>Sociale lasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">28573</cell>
+    <cell columnId="2">28920</cell>
+   </cells>
+  </account>
+  <account id="rklsv">
+   <description>Overige personeelskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba01">
+   <description>Brandstoffen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">2112</cell>
+    <cell columnId="2">2052</cell>
+   </cells>
+  </account>
+  <account id="rkoba02">
+   <description>Onderhoud</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1064</cell>
+    <cell columnId="2">611</cell>
+   </cells>
+  </account>
+  <account id="rkoba03">
+   <description>Leasekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">2496</cell>
+    <cell columnId="2">2496</cell>
+   </cells>
+  </account>
+  <account id="rkoba04">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">601</cell>
+    <cell columnId="2">880</cell>
+   </cells>
+  </account>
+  <account id="rkoba05">
+   <description>Motorrijtuigenbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1010</cell>
+    <cell columnId="2">1046</cell>
+   </cells>
+  </account>
+  <account id="rkoba06">
+   <description>Autokosten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba07">
+   <description>Autokosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba08">
+   <description>Autokosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba09">
+   <description>Autokosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba10">
+   <description>Autokosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba11">
+   <description>Autokosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba12">
+   <description>Autokosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba13">
+   <description>Autokosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba14">
+   <description>Autokosten 14</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba15">
+   <description>Autokosten 15</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba16">
+   <description>Autokosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba17">
+   <description>Autokosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba18">
+   <description>Autokosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba19">
+   <description>Autokosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba20">
+   <description>Autokosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba21">
+   <description>Autokosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba22">
+   <description>Autokosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba23">
+   <description>Autokosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba24">
+   <description>Autokosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba25">
+   <description>Autokosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba89">
+   <description>Overige autokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">836</cell>
+    <cell columnId="2">848</cell>
+   </cells>
+  </account>
+  <account id="rkoba95">
+   <description>Prive gebruik</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">-6809</cell>
+    <cell columnId="2">-7064</cell>
+   </cells>
+  </account>
+  <account id="rkoba97">
+   <description>Doorbelaste autokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba98">
+   <description>Doorbelaste autokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoba99">
+   <description>Doorbelaste autokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd01">
+   <description>Managementvergoeding</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd02">
+   <description>Accountantskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">4146</cell>
+    <cell columnId="2">4024</cell>
+   </cells>
+  </account>
+  <account id="rkobd03">
+   <description>Administratiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd04">
+   <description>Advieskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd05">
+   <description> Juridische kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd06">
+   <description>Notariskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd07">
+   <description>Verzekeringen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd08">
+   <description>Huuropbrengsten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd09">
+   <description>Algemene kosten 09</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd10">
+   <description>Algemene kosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd11">
+   <description>Algemene kosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd12">
+   <description>Algemene kosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd13">
+   <description>Algemene kosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd14">
+   <description>Onderhoud inventarissen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd15">
+   <description>Belastingen en heffingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd16">
+   <description>Algemene kosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd17">
+   <description>Algemene kosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd18">
+   <description>Algemene kosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd19">
+   <description>Dotatie reorganisatievoorziening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd20">
+   <description>Dotatie voorziening afvloeiingsregeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd21">
+   <description>Algemene kosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd22">
+   <description>Bedrijfsbenodigheden</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd23">
+   <description>Algemene kosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd24">
+   <description>Algemene kosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd25">
+   <description>Algemene kosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd26">
+   <description>Algemene kosten 26</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd27">
+   <description>Algemene kosten 27</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd28">
+   <description>Algemene kosten 28</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd29">
+   <description>Algemene kosten 29</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd30">
+   <description>Algemene kosten 30</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd31">
+   <description>Algemene kosten 31</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd32">
+   <description>Algemene kosten 32</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd33">
+   <description>Algemene kosten 33</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd34">
+   <description>Algemene kosten 34</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd35">
+   <description>Vermindering kleine ondernemingsregeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd89">
+   <description>Overige algemene kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">23</cell>
+   </cells>
+  </account>
+  <account id="rkobd97">
+   <description>Doorberekende algemene kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd98">
+   <description>Doorberekende algemene kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobd99">
+   <description>Doorberekende algemene kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe01">
+   <description>Huur machines en installaties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">2950</cell>
+    <cell columnId="2">2950</cell>
+   </cells>
+  </account>
+  <account id="rkobe02">
+   <description>Reparatie en onderhoud</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">937</cell>
+    <cell columnId="2">99</cell>
+   </cells>
+  </account>
+  <account id="rkobe03">
+   <description>Energiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">3447</cell>
+    <cell columnId="2">3932</cell>
+   </cells>
+  </account>
+  <account id="rkobe04">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe05">
+   <description>Kleine aanschaffingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">2157</cell>
+    <cell columnId="2">108</cell>
+   </cells>
+  </account>
+  <account id="rkobe06">
+   <description>Gereedschappen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe07">
+   <description>Exploitatiekosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe08">
+   <description>Exploitatiekosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe09">
+   <description>Exploitatiekosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe10">
+   <description>Exploitatiekosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe11">
+   <description>Exploitatiekosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe12">
+   <description>Exploitatiekosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe13">
+   <description>Exploitatiekosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe14">
+   <description>Exploitatiekosten 14</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe15">
+   <description>Exploitatiekosten 15</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe16">
+   <description>Exploitatiekosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe17">
+   <description>Exploitatiekosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe18">
+   <description>Exploitatiekosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe19">
+   <description>Exploitatiekosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe20">
+   <description>Exploitatiekosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe21">
+   <description>Exploitatiekosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe22">
+   <description>Exploitatiekosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe23">
+   <description>Exploitatiekosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe24">
+   <description>Exploitatiekosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe25">
+   <description>Exploitatiekosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe89">
+   <description>Overige exploitatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe97">
+   <description>Doorbelaste exploitatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe98">
+   <description>Doorbelaste exploitatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobe99">
+   <description>Doorbelaste exploitatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh01">
+   <description>Huur</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh02">
+   <description>Gas, water en elektra</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">-868</cell>
+    <cell columnId="2">-878</cell>
+   </cells>
+  </account>
+  <account id="rkobh03">
+   <description>Onderhoud gebouwen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh04">
+   <description> Belastingen en zakelijke lasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">963</cell>
+    <cell columnId="2">1161</cell>
+   </cells>
+  </account>
+  <account id="rkobh05">
+   <description>Waterschap en zuiveringskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh06">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh07">
+   <description>Schoonmaakkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh08">
+   <description>Bewakingskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh09">
+   <description>Huisvestingskosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh10">
+   <description>Huisvestingskosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh11">
+   <description>Huisvestingskosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh12">
+   <description>Huisvestingskosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh13">
+   <description>Huisvestingskosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh14">
+   <description>Huisvestingskosten 14</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh15">
+   <description>Dotatie voorziening groot onderhoud gebouwen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh16">
+   <description>Huisvestingskosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh17">
+   <description>Huisvestingskosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh18">
+   <description>Huisvestingskosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh19">
+   <description>Huisvestingskosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh20">
+   <description>Huisvestingskosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh21">
+   <description>Huisvestingskosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh22">
+   <description>Huisvestingskosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh23">
+   <description>Huisvestingskosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh24">
+   <description>Huisvestingskosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh25">
+   <description>Huisvestingskosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh89">
+   <description>Overige huisvestingskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh97">
+   <description>Doorbelaste huur</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh98">
+   <description>Doorbelaste energiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobh99">
+   <description> Doorbelaste huisvestingskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk01">
+   <description>Kantoorbehoeften</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">304</cell>
+    <cell columnId="2">250</cell>
+   </cells>
+  </account>
+  <account id="rkobk02">
+   <description>Drukwerk</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk03">
+   <description>Onderhoud inventaris</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk04">
+   <description>Lease kantoorapparatuur</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk05">
+   <description>Automatiseringskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk06">
+   <description>Telefoon</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">408</cell>
+    <cell columnId="2">1218</cell>
+   </cells>
+  </account>
+  <account id="rkobk07">
+   <description>Porti</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">171</cell>
+   </cells>
+  </account>
+  <account id="rkobk08">
+   <description>Contributies en abonnementen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">630</cell>
+    <cell columnId="2">691</cell>
+   </cells>
+  </account>
+  <account id="rkobk09">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1551</cell>
+    <cell columnId="2">1508</cell>
+   </cells>
+  </account>
+  <account id="rkobk10">
+   <description>Kopieerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk11">
+   <description>Kantoorkosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk12">
+   <description>Kantoorkosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk13">
+   <description>Kantoorkosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk14">
+   <description>Kantoorkosten 14</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk15">
+   <description>Kantoorkosten 15</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk16">
+   <description>Kantoorkosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk17">
+   <description>Kantoorkosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk18">
+   <description>Kantoorkosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk19">
+   <description>Kantoorkosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk20">
+   <description>Kantoorkosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk21">
+   <description>Kantoorkosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk22">
+   <description>Kantoorkosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk23">
+   <description>Kantoorkosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk24">
+   <description>Kantoorkosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk25">
+   <description>Kantoorkosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk89">
+   <description>Overige kantoorkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk97">
+   <description>Doorbelaste kantoorkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk98">
+   <description>Doorbelaste kantoorkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobk99">
+   <description>Doorbelaste kantoorkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobp">
+   <description>Overige personeelskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">4829</cell>
+    <cell columnId="2">9337</cell>
+   </cells>
+  </account>
+  <account id="rkobv01">
+   <description>Reclame en advertenties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1912</cell>
+    <cell columnId="2">1386</cell>
+   </cells>
+  </account>
+  <account id="rkobv02">
+   <description>Representatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv03">
+   <description>Relatiegeschenken</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv04">
+   <description>Zegels en waardebonnen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">3954</cell>
+    <cell columnId="2">6367</cell>
+   </cells>
+  </account>
+  <account id="rkobv05">
+   <description>Beurskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">700</cell>
+    <cell columnId="2">295</cell>
+   </cells>
+  </account>
+  <account id="rkobv06">
+   <description>Congreskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">760</cell>
+    <cell columnId="2">1341</cell>
+   </cells>
+  </account>
+  <account id="rkobv07">
+   <description>Reis- en verblijfkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv08">
+   <description>Verteerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv09">
+   <description>Provisies</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv10">
+   <description>Incassokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv11">
+   <description>Winkel-, verpakkings-  en etalagekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">1660</cell>
+    <cell columnId="2">882</cell>
+   </cells>
+  </account>
+  <account id="rkobv12">
+   <description>Transport- en kredietverzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv13">
+   <description>Betalingskortingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv14">
+   <description>Dotatie voorziening dubieuze debiteuren</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv15">
+   <description>Dotatie garantievoorziening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv16">
+   <description>Uitgaande vrachtkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv17">
+   <description>Verkoopkosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv18">
+   <description>Verkoopkosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv19">
+   <description>Verkoopkosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv20">
+   <description>Verkoopkosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv21">
+   <description>Verkoopkosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv22">
+   <description>Verkoopkosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv23">
+   <description>Verkoopkosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv24">
+   <description>Verkoopkosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv25">
+   <description>Oninbare debiteuren</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv89">
+   <description>Overige verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv97">
+   <description>Doorbelaste verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv98">
+   <description>Doorbelaste verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobv99">
+   <description>Doorbelaste verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobx">
+   <description>Vrije rubriek overige bedrijfskosten 1</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkoby">
+   <description>Vrije rubriek overige bedrijfskosten 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkobz">
+   <description>Vrije rubriek overige bedrijfskosten 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa01">
+   <description>Kosten van uitgifte van aandelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa02">
+   <description>Kosten van onderzoek en ontwikkeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa03">
+   <description>Concessies, vergunningen en intellectuele eigendom</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa04">
+   <description>Goodwill</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa05">
+   <description>Bedrijfsgebouwen en -terreinen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa06">
+   <description>Machines en installaties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa07">
+   <description>Andere vaste bedrijfsmiddelen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa08">
+   <description>Niet dienstbaar</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa09">
+   <description>Deelnemingen in groepsmaatschappijen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa10">
+   <description>Groepsmaatschappijen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa11">
+   <description>Andere deelnemingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa12">
+   <description>Vorderingen op participanten en maatschappijen waarin deelname</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa13">
+   <description>Overige effecten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa14">
+   <description>Overige vorderingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa15">
+   <description>Overige waardeverandering 15</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rkowa89">
+   <description>Overige waardeveranderingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rku">
+   <description>Kosten van uitbesteed werk en andere externe kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="robo">
+   <description>Overige bedrijfsopbrengsten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-5445</cell>
+    <cell columnId="2">-5445</cell>
+   </cells>
+  </account>
+  <account id="roeb">
+   <description>Geactiveerde productie eigen bedrijf</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaa">
+   <description>Lonen en salarissen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofab">
+   <description>Sociale lasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofac">
+   <description>Pensioenlasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofad">
+   <description>Overige personeelskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah01">
+   <description>Huur</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah02">
+   <description>Gas, water en elektra</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah03">
+   <description>Onderhoud gebouwen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah04">
+   <description>Belastingen en zakelijke lasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah05">
+   <description>Waterschap en zuiveringskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah06">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah07">
+   <description>Schoonmaakkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah08">
+   <description>Bewakingskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah09">
+   <description>Huisvestingskosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofah10">
+   <description>Huisvestingskosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai01">
+   <description>Huur machines en installaties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai02">
+   <description>Reparatie en onderhoud</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai03">
+   <description> Energiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai04">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai05">
+   <description>Kleine aanschaffingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai06">
+   <description>Gereedschappen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai07">
+   <description>Exploitatiekosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai08">
+   <description>Exploitatiekosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai09">
+   <description>Exploitatiekosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofai10">
+   <description>Exploitatiekosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj01">
+   <description>Brandstoffen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj02">
+   <description>Onderhoud</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+
+  <account id="rofaj03">
+   <description>Leasekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj04">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj05">
+   <description>Motorrijtuigenbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj06">
+   <description>Autokosten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj07">
+   <description>Autokosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj08">
+   <description>Autokosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj09">
+   <description>Autokosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofaj10">
+   <description>Autokosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofak">
+   <description>Kantoorkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao01">
+   <description>Managementvergoeding</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao02">
+   <description>Accountantskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao03">
+   <description>Administratiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao04">
+   <description>Advieskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao05">
+   <description>Juridische kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao06">
+   <description>Notariskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao07">
+   <description>Verzekeringen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao08">
+   <description>Huuropbrengsten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao09">
+   <description>Algemene kosten 09</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao10">
+   <description>Algemene kosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao11">
+   <description>Algemene kosten 11</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao12">
+   <description>Algemene kosten 12</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao13">
+   <description>Algemene kosten 13</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao14">
+   <description>Onderhoud inventarissen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao15">
+   <description>Belastingen en heffingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao16">
+   <description>Algemene kosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao17">
+   <description>Algemene kosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao18">
+   <description>Algemene kosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao19">
+   <description>Dotatie reorganisatievoorziening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao20">
+   <description>Dotatie voorziening afvloeiingsregeling</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao21">
+   <description>Algemene kosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao22">
+   <description>Algemene kosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao23">
+   <description>Algemene kosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao24">
+   <description>Algemene kosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao25">
+   <description>Algemene kosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao26">
+   <description>Algemene kosten 26</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao27">
+   <description>Algemene kosten 27</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao28">
+   <description>Algemene kosten 28</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao29">
+   <description>Algemene kosten 29</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao30">
+   <description>Algemene kosten 30</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao31">
+   <description>Algemene kosten 31</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao32">
+   <description>Algemene kosten 32</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao33">
+   <description>Algemene kosten 33</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao34">
+   <description>Algemene kosten 34</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao35">
+   <description>Algemene kosten 35</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao89">
+   <description>Overige algemene kosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao90">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao91">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao92">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao93">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao94">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofao95">
+   <description>Doorberekende algemene beheerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva01">
+   <description>Brutolonen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva02">
+   <description>Overhevelingstoeslag</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva03">
+   <description>Mutatie vakantiegeldverplichting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva04">
+   <description>Uitzendkrachten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva05">
+   <description>Lonen en salarissen 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva06">
+   <description>Lonen en salarissen 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva07">
+   <description>Lonen en salarissen 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva08">
+   <description>Lonen en salarissen 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva09">
+   <description>Lonen en salarissen 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofva10">
+   <description>Lonen en salarissen 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb01">
+   <description>Bedrijfsvereniging</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb02">
+   <description>Sociale lasten 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb03">
+   <description>Sociale lasten 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb04">
+   <description>Sociale lasten 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb05">
+   <description>Sociale lasten 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb06">
+   <description>Sociale lasten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb07">
+   <description>Sociale lasten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb08">
+   <description>Sociale lasten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb09">
+   <description>Sociale lasten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvb10">
+   <description>Sociale lasten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc01">
+   <description>Pensioenlasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc02">
+   <description>Dotatie voorziening pensioen in eigen beheer</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc03">
+   <description>Dotatie voorziening backservice-pensioenpremie</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc04">
+   <description>Pensioenlasten uit hoofde extra dotatie</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc05">
+   <description>Pensioenlasten 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc06">
+   <description>Pensioenlasten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc07">
+   <description>Pensioenlasten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc08">
+   <description>Pensioenlasten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc09">
+   <description>Pensioenlasten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvc10">
+   <description>Pensioenlasten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd01">
+   <description>Overige personeelskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd02">
+   <description>Studiekosten personeel</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd03">
+   <description>Overige personeelskosten 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd04">
+   <description>Overige personeelskosten 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd05">
+   <description>Overige personeelskosten 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd06">
+   <description>Overige personeelskosten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd07">
+   <description>Overige personeelskosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd08">
+   <description>Overige personeelskosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd09">
+   <description>Overige personeelskosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvd10">
+   <description>Overige personeelskosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj01">
+   <description>Brandstoffen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj02">
+   <description>Onderhoud</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj03">
+   <description>Leasekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj04">
+   <description>Verzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj05">
+   <description>Motorrijtuigenbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj06">
+   <description>Autokosten 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj07">
+   <description>Autokosten 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj08">
+   <description>Autokosten 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj09">
+   <description>Autokosten 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvj10">
+   <description>Autokosten 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv01">
+   <description>Reclame en advertenties</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv02">
+   <description>Representatiekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv03">
+   <description>Relatiegeschenken</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv04">
+   <description>Zegels en waardebonnen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv05">
+   <description>Beurskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv06">
+   <description>Congreskosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv07">
+   <description>Reis- en verblijfkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv08">
+   <description>Verteerkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv09">
+   <description>Provisies</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv10">
+   <description>Incassokosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv11">
+   <description>Winkel-, verpakkings-  en etalagekosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv12">
+   <description>Transport- en kredietverzekering</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv13">
+   <description>Betalingskortingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv14">
+   <description>Dotatie voorziening dubieuze debiteuren</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv15">
+   <description>Dotatie garantievoorziening</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv16">
+   <description>Verkoopkosten 16</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv17">
+   <description>Verkoopkosten 17</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv18">
+   <description>Verkoopkosten 18</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv19">
+   <description>Verkoopkosten 19</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv20">
+   <description>Verkoopkosten 20</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv21">
+   <description>Verkoopkosten 21</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv22">
+   <description>Verkoopkosten 22</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv23">
+   <description>Verkoopkosten 23</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv24">
+   <description>Verkoopkosten 24</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv25">
+   <description>Verkoopkosten 25</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv89">
+   <description>Overige verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv90">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv91">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv92">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv93">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv94">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rofvv95">
+   <description>Doorberekende verkoopkosten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rogh">
+   <description>Grondstoffenverbruik</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rogm">
+   <description>Kosten van materialen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rogoa">
+   <description> Mutatie voorraad gereed produkt</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rogob">
+   <description>Mutatie onderhanden werk</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rogu">
+   <description> Inkopen derden</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpa">
+   <description>Inkopen categorie 1</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">235456</cell>
+    <cell columnId="2">227680</cell>
+   </cells>
+  </account>
+  <account id="rokpb">
+   <description>Inkopen categorie 2</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpc">
+   <description>Inkopen categorie 3</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpd">
+   <description>Inkopen categorie 4</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpe">
+   <description>Inkopen categorie 5</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpf">
+   <description>Inkopen categorie 6</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpg">
+   <description> Inkopen categorie 7</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokph">
+   <description>Inkopen categorie 8</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpi">
+   <description>Inkopen categorie 9</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rokpj">
+   <description>Inkopen categorie 10</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="romo">
+   <description>Managementvergoedingen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoa">
+   <description>Netto omzet categorie 1</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">-529552</cell>
+    <cell columnId="2">-598013</cell>
+   </cells>
+  </account>
+  <account id="ronob">
+   <description>Netto omzet categorie 2</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoc">
+   <description>Netto omzet categorie 3</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronod">
+   <description>Netto omzet categorie 4</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoe">
+   <description>Netto omzet categorie 5</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronof">
+   <description>Netto omzet categorie 6</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronog">
+   <description>Netto omzet categorie 7</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoh">
+   <description>Netto omzet categorie 8</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoi">
+   <description>Netto omzet categorie 9</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="ronoj">
+   <description>Netto omzet categorie 10</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rubb">
+   <description>Buitengewone baten</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">-2766</cell>
+   </cells>
+  </account>
+  <account id="rubl">
+   <description>Buitengewone lasten</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="rvpb">
+   <description>Vennootschapsbelasting</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">8322</cell>
+    <cell columnId="2">29341</cell>
+   </cells>
+  </account>
+  <account id="bkmemo">
+   <description>Memoriaal</description>
+   <bookingSign>Credit</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+  <account id="bkkiao">
+   <description>Onderhandse leningen</description>
+   <bookingSign>Debet</bookingSign>
+   <cells>
+    <cell columnId="1">0</cell>
+    <cell columnId="2">0</cell>
+   </cells>
+  </account>
+ </accounts>
+</finanData>

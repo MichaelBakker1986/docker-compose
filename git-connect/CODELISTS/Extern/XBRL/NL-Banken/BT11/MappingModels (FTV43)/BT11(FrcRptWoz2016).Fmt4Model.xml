@@ -1,0 +1,1714 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>BT11</CodeList>
+    <CodeListVersion></CodeListVersion>
+    <Description>frc-rpt-woz-2016</Description>
+    <CodeTrimmingWhenSource>false</CodeTrimmingWhenSource>
+    <MultilevelDataWhenSource>true</MultilevelDataWhenSource>
+    <LeveledMappingWhenTarget>false</LeveledMappingWhenTarget>
+    <DCSignedValues>false</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FINAN Taxonomy Viewer</Creator>
+    <CreatorVersion>4.3.24</CreatorVersion>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+    <Account>
+      <Description>Presentatie hiërarchie van entrypoint frc-rpt-woz</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>frc-abstr:ReportTitle</Code>
+      <FinanVarName>frcabstrReportTitle</FinanVarName>
+      <Description>Rapportage</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="ReportTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:DocumentEntityInformationBanksTitle</Code>
+      <FinanVarName>frcabstrDocumentEntityInformationBanksTitle</FinanVarName>
+      <Description>Informatie over de rapportage en de rechtspersoon [titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="DocumentEntityInformationBanksTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:EntityInformationBanksTitle</Code>
+      <FinanVarName>frcabstrEntityInformationBanksTitle</FinanVarName>
+      <Description>Informatie over de rechtspersoon [titel]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="EntityInformationBanksTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-lr:EntityInformation</Code>
+      <FinanVarName>frclrEntityInformation</FinanVarName>
+      <Description>Informatie over de rechtspersoon</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="EntityInformation" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ChamberOfCommerceRegistrationNumber</Code>
+      <FinanVarName>venjbw2iChamberOfCommerceRegistrationNumber</FinanVarName>
+      <Description>Registratienummer bij de Kamer van Koophandel</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ChamberOfCommerceRegistrationNumber" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LegalEntityName</Code>
+      <FinanVarName>venjbw2iLegalEntityName</FinanVarName>
+      <Description>Naam van de rechtspersoon</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LegalEntityName" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>rj-i:BusinessNames</Code>
+      <FinanVarName>rjiBusinessNames</FinanVarName>
+      <Description>Handelsnamen</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="BusinessNames" NamespaceURI="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:HouseNumberNL</Code>
+      <FinanVarName>nlcdHouseNumberNL</FinanVarName>
+      <Description>Huisnummer</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="HouseNumberNL" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:HouseNumberAddition</Code>
+      <FinanVarName>nlcdHouseNumberAddition</FinanVarName>
+      <Description>Huisnummer toevoeging</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="HouseNumberAddition" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:PostalCodeNL</Code>
+      <FinanVarName>nlcdPostalCodeNL</FinanVarName>
+      <Description>Postcode NL</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="PostalCodeNL" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:PlaceOfResidenceNL</Code>
+      <FinanVarName>nlcdPlaceOfResidenceNL</FinanVarName>
+      <Description>Woonplaats NL</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="PlaceOfResidenceNL" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc68" RoleURI="urn:frc:linkrole:entity-information"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:DocumentInformationBanksTitle</Code>
+      <FinanVarName>frcabstrDocumentInformationBanksTitle</FinanVarName>
+      <Description>Informatie over de rapportage [titel]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="DocumentInformationBanksTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-lr:DocumentEntityInformation</Code>
+      <FinanVarName>frclrDocumentEntityInformation</FinanVarName>
+      <Description>Informatie ten behoeve van het deponeren van de rapportage bij de bank</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="DocumentEntityInformation" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-i:ReasonDelivery</Code>
+      <FinanVarName>frciReasonDelivery</FinanVarName>
+      <Description>Reden levering</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="ReasonDelivery" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodCurrentStartDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodCurrentStartDate</FinanVarName>
+      <Description>Startdatum van de huidige financiële rapportageperiode</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodCurrentStartDate" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodCurrentEndDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodCurrentEndDate</FinanVarName>
+      <Description>Einddatum van de huidige financiële rapportageperiode</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodCurrentEndDate" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodPreviousStartDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodPreviousStartDate</FinanVarName>
+      <Description>Startdatum van de voorgaande financiële rapportageperiode</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodPreviousStartDate" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodPreviousEndDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodPreviousEndDate</FinanVarName>
+      <Description>Einddatum van de voorgaande financiële rapportageperiode</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodPreviousEndDate" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:BasisOfPreparation</Code>
+      <FinanVarName>venjbw2iBasisOfPreparation</FinanVarName>
+      <Description>Type grondslag</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="BasisOfPreparation" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>rj-i:DocumentPresentationCurrency</Code>
+      <FinanVarName>rjiDocumentPresentationCurrency</FinanVarName>
+      <Description>Rapporteringsvaluta van het document</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="DocumentPresentationCurrency" NamespaceURI="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:BankInformationTitle</Code>
+      <FinanVarName>hc67_frclrDocumentEntityInformation_pfrcabstrBankInformationTitle</FinanVarName>
+      <Description>Bank informatie</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="BankInformationTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-i:DestinationBank</Code>
+      <FinanVarName>frciDestinationBank</FinanVarName>
+      <Description>Bestemmende bank</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="DestinationBank" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:DocumentCreationDate</Code>
+      <FinanVarName>nlcdDocumentCreationDate</FinanVarName>
+      <Description>Datum van opmaak van het document</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="DocumentCreationDate" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>kvk-t:ContactForDocumentPresentation</Code>
+      <FinanVarName>kvktContactForDocumentPresentation</FinanVarName>
+      <Description>Contactpersoon voor deze rapportage</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-t" ElementName="ContactForDocumentPresentation" NamespaceURI="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples"/>
+    </Account>
+    <Account>
+      <Code>kvk-i:ContactType</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpkvkiContactType</FinanVarName>
+      <Description>Soort contactpersoon</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="kvk-i" ElementName="ContactType" NamespaceURI="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:FirstName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdFirstName</FinanVarName>
+      <Description>Voornamen</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="FirstName" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:FamilyName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdFamilyName</FinanVarName>
+      <Description>Geslachtsnaam</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="FamilyName" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>kvk-i:OrganisationName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpkvkiOrganisationName</FinanVarName>
+      <Description>Naam van de organisatie vertegenwoordigd door de contactpersoon</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="kvk-i" ElementName="OrganisationName" NamespaceURI="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:TelephoneNumber</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdTelephoneNumber</FinanVarName>
+      <Description>Telefoonnummer</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="TelephoneNumber" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:EmailAddressFull</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdEmailAddressFull</FinanVarName>
+      <Description>E-mailadres, volledig</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="EmailAddressFull" NamespaceURI="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data"/>
+      <Hypercube alias="hc67" RoleURI="urn:frc:linkrole:document-entity-information"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:IntermediaryTitle</Code>
+      <FinanVarName>frcabstrIntermediaryTitle</FinanVarName>
+      <Description>Intermediair</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="IntermediaryTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-lr:IntermediaryInformation</Code>
+      <FinanVarName>frclrIntermediaryInformation</FinanVarName>
+      <Description>Informatie over de intermediair</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="IntermediaryInformation" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-i:NameIntermediary</Code>
+      <FinanVarName>frciNameIntermediary</FinanVarName>
+      <Description>Naam intermediair</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="NameIntermediary" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc94" RoleURI="urn:frc:linkrole:intermediary-information"/>
+    </Account>
+    <Account>
+      <Code>frc-i:DomicileIntermediary</Code>
+      <FinanVarName>frciDomicileIntermediary</FinanVarName>
+      <Description>Vestigingsplaats intermediair</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="DomicileIntermediary" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc94" RoleURI="urn:frc:linkrole:intermediary-information"/>
+    </Account>
+    <Account>
+      <Code>frc-i:NameCompiler</Code>
+      <FinanVarName>frciNameCompiler</FinanVarName>
+      <Description>Naam opsteller</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="NameCompiler" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc94" RoleURI="urn:frc:linkrole:intermediary-information"/>
+    </Account>
+    <Account>
+      <Code>frc-i:EmailAddressIntermediary</Code>
+      <FinanVarName>frciEmailAddressIntermediary</FinanVarName>
+      <Description>E-mailadres intermediair</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="EmailAddressIntermediary" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc94" RoleURI="urn:frc:linkrole:intermediary-information"/>
+    </Account>
+    <Account>
+      <Code>frc-abstr:BankInformationTitle</Code>
+      <FinanVarName>frcabstrDocumentEntityInformationBanksTitle_pfrcabstrBankInformationTitle</FinanVarName>
+      <Description>Bank informatie</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="BankInformationTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-lr:BankAccountsSpecification</Code>
+      <FinanVarName>frclrBankAccountsSpecification</FinanVarName>
+      <Description>Zakelijke bankrekening gegevens specificatie</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="BankAccountsSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-dim:BankAccountSpecificationAxis</Code>
+      <FinanVarName>frcdimBankAccountSpecificationAxis</FinanVarName>
+      <Description>Bankrekening gegevens specificatie [as]</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-dim" ElementName="BankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes"/>
+      <Hypercube alias="hc17" RoleURI="urn:frc:linkrole:bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="BankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="BankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-dm:BankAccountSpecificationTypedMember</Code>
+      <FinanVarName>frcdimBankAccountSpecificationAxis_tpfrcdmBankAccountSpecificationTypedMember</FinanVarName>
+      <Description>Bankrekening gegevens specificatie [typed member]</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>true</IsTupleKey>
+      <InTuple>frc-dim:BankAccountSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimBankAccountSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-dm" ElementName="BankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+      <Hypercube alias="hc17" RoleURI="urn:frc:linkrole:bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="BankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="BankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:BankName</Code>
+      <FinanVarName>frcdimBankAccountSpecificationAxis_tpfrciBankName</FinanVarName>
+      <Description>Naam bank</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:BankAccountSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimBankAccountSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="BankName" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc17" RoleURI="urn:frc:linkrole:bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="BankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="BankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-lr:PrivateBankAccountsSpecification</Code>
+      <FinanVarName>frclrPrivateBankAccountsSpecification</FinanVarName>
+      <Description>Privé bankrekening gegevens specificatie</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="PrivateBankAccountsSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-dim:PrivateBankAccountSpecificationAxis</Code>
+      <FinanVarName>frcdimPrivateBankAccountSpecificationAxis</FinanVarName>
+      <Description>Privé bankrekening gegevens specificatie [as]</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-dim" ElementName="PrivateBankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes"/>
+      <Hypercube alias="hc339" RoleURI="urn:frc:linkrole:private-bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="PrivateBankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="PrivateBankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-dm:PrivateBankAccountSpecificationTypedMember</Code>
+      <FinanVarName>frcdimPrivateBankAccountSpecificationAxis_tpfrcdmPrivateBankAccountSpecificationTypedMember</FinanVarName>
+      <Description>Privé bankrekening gegevens specificatie [typed member]</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>true</IsTupleKey>
+      <InTuple>frc-dim:PrivateBankAccountSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimPrivateBankAccountSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-dm" ElementName="PrivateBankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+      <Hypercube alias="hc339" RoleURI="urn:frc:linkrole:private-bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="PrivateBankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="PrivateBankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:BankName</Code>
+      <FinanVarName>frcdimPrivateBankAccountSpecificationAxis_tpfrciBankName</FinanVarName>
+      <Description>Naam bank</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:PrivateBankAccountSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimPrivateBankAccountSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="BankName" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc339" RoleURI="urn:frc:linkrole:private-bank-accounts-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="PrivateBankAccountSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="PrivateBankAccountSpecificationTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-abstr:ImmovablePropertyLawTitle</Code>
+      <FinanVarName>frcabstrImmovablePropertyLawTitle</FinanVarName>
+      <Description>WOZ [Titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-abstr" ElementName="ImmovablePropertyLawTitle" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts"/>
+    </Account>
+    <Account>
+      <Code>frc-lr:NotesBanksLandAndBuildingsSpecification</Code>
+      <FinanVarName>frclrNotesBanksLandAndBuildingsSpecification</FinanVarName>
+      <Description>Toelichting op de jaarrekening - Bedrijfsgebouwen en -terreinen, specificatie</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="NotesBanksLandAndBuildingsSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-dim:LandAndBuildingsSpecificationAxis</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis</FinanVarName>
+      <Description>Bedrijfsgebouwen en -terreinen, specificatie [as]</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-dm:RegistryNumberRegisterBoundGoodTypedMember</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrcdmRegistryNumberRegisterBoundGoodTypedMember</FinanVarName>
+      <Description>Registernummer [typed member]</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>true</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:PurchaseValueRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciPurchaseValueRegisterBoundGood</FinanVarName>
+      <Description>Aanschafwaarde registergoed</Description>
+      <Level>6</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="PurchaseValueRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:PurchaseYearRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciPurchaseYearRegisterBoundGood</FinanVarName>
+      <Description>Aanschafjaar registergoed</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="PurchaseYearRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:BuildingIndicator</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciBuildingIndicator</FinanVarName>
+      <Description>Gebouw (eventueel inclusief terrein) J/N</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="BuildingIndicator" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciValuePurposesValuationOfImmovablePropertyActRegisterBoundGood</FinanVarName>
+      <Description>WOZ-waarde registergoed</Description>
+      <Level>6</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciDateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood</FinanVarName>
+      <Description>Datum vaststelling WOZ-waarde registergoed</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:BalanceSheetValueRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciBalanceSheetValueRegisterBoundGood</FinanVarName>
+      <Description>Boekwaarde registergoed</Description>
+      <Level>6</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="BalanceSheetValueRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:AmortisationMethodRegisterBoundGood</Code>
+      <FinanVarName>frcdimLandAndBuildingsSpecificationAxis_tpfrciAmortisationMethodRegisterBoundGood</FinanVarName>
+      <Description>Afschrijvingsmethode registergoed</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:LandAndBuildingsSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimLandAndBuildingsSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="AmortisationMethodRegisterBoundGood" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc122" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="frc-dim" ElementName="LandAndBuildingsSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="RegistryNumberRegisterBoundGoodTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-lr:NotesBanksLandAndBuildings</Code>
+      <FinanVarName>frclrNotesBanksLandAndBuildings</FinanVarName>
+      <Description>Toelichting op de jaarrekening - Bedrijfsgebouwen en -terreinen</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="NotesBanksLandAndBuildings" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-i:PurchaseValueRegisterBoundGoodDisclosure</Code>
+      <FinanVarName>frciPurchaseValueRegisterBoundGoodDisclosure</FinanVarName>
+      <Description>Informatieverschaffing over de aanschafwaarde registergoed</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="PurchaseValueRegisterBoundGoodDisclosure" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc121" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-i:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure</Code>
+      <FinanVarName>frciValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure</FinanVarName>
+      <Description>Informatieverschaffing over WOZ-waarde registergoed</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-i" ElementName="ValuePurposesValuationOfImmovablePropertyActRegisterBoundGoodDisclosure" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data"/>
+      <Hypercube alias="hc121" RoleURI="urn:frc:linkrole:notes-banks-land-and-buildings">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-lr:OwnHousePrincipalResidenceIncomeSpecification</Code>
+      <FinanVarName>frclrOwnHousePrincipalResidenceIncomeSpecification</FinanVarName>
+      <Description>Specificatie van eigen woning</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="OwnHousePrincipalResidenceIncomeSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawObjectNumber</Code>
+      <FinanVarName>bdburgOwnHousePrincipalResidenceImmovablePropertyLawObjectNumber</FinanVarName>
+      <Description>WOZ-objectnummer woning hoofdverblijf</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="OwnHousePrincipalResidenceImmovablePropertyLawObjectNumber" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc330" RoleURI="urn:frc:linkrole:own-house-principal-residence-income-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:OwnHousePrincipalResidenceAddress</Code>
+      <FinanVarName>bdburgOwnHousePrincipalResidenceAddress</FinanVarName>
+      <Description>Adres eigen woning hoofdverblijf</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="OwnHousePrincipalResidenceAddress" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc330" RoleURI="urn:frc:linkrole:own-house-principal-residence-income-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawValue</Code>
+      <FinanVarName>bdburgOwnHousePrincipalResidenceImmovablePropertyLawValue</FinanVarName>
+      <Description>WOZ-waarde eigen woning hoofdverblijf</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="OwnHousePrincipalResidenceImmovablePropertyLawValue" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc330" RoleURI="urn:frc:linkrole:own-house-principal-residence-income-specification">
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-lr:SecondHouseSpecification</Code>
+      <FinanVarName>frclrSecondHouseSpecification</FinanVarName>
+      <Description>Specificatie of tweede woning(en)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="SecondHouseSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-dim:SecondHouseSpecificationAxis</Code>
+      <FinanVarName>frcdimSecondHouseSpecificationAxis</FinanVarName>
+      <Description>Tweede woning, specificatie [as]</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-dim" ElementName="SecondHouseSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes"/>
+      <Hypercube alias="hc342" RoleURI="urn:frc:linkrole:second-house-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="SecondHouseSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-dm:ObjectNumberTypedMember</Code>
+      <FinanVarName>frcdimSecondHouseSpecificationAxis_tpfrcdmObjectNumberTypedMember</FinanVarName>
+      <Description>WOZ-objectnummer [typed member]</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>true</IsTupleKey>
+      <InTuple>frc-dim:SecondHouseSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimSecondHouseSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+      <Hypercube alias="hc342" RoleURI="urn:frc:linkrole:second-house-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="SecondHouseSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:SecondHouseAddress</Code>
+      <FinanVarName>frcdimSecondHouseSpecificationAxis_tpbdburgSecondHouseAddress</FinanVarName>
+      <Description>Adres tweede woning</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:SecondHouseSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimSecondHouseSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="SecondHouseAddress" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc342" RoleURI="urn:frc:linkrole:second-house-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="SecondHouseSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:SecondHouseValue</Code>
+      <FinanVarName>frcdimSecondHouseSpecificationAxis_tpbdburgSecondHouseValue</FinanVarName>
+      <Description>Waarde tweede woning</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:SecondHouseSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimSecondHouseSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="SecondHouseValue" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc342" RoleURI="urn:frc:linkrole:second-house-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="SecondHouseSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-lr:ImmovablePropertyOtherSpecification</Code>
+      <FinanVarName>frclrImmovablePropertyOtherSpecification</FinanVarName>
+      <Description>Specificatie van overige onroerende zaken</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-lr" ElementName="ImmovablePropertyOtherSpecification" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles"/>
+    </Account>
+    <Account>
+      <Code>frc-dim:ImmovablePropertyOtherSpecificationAxis</Code>
+      <FinanVarName>frcdimImmovablePropertyOtherSpecificationAxis</FinanVarName>
+      <Description>Overige onroerende zaken, specificatie [as]</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="frc-dim" ElementName="ImmovablePropertyOtherSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes"/>
+      <Hypercube alias="hc89" RoleURI="urn:frc:linkrole:immovable-property-other-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="ImmovablePropertyOtherSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>frc-dm:ObjectNumberTypedMember</Code>
+      <FinanVarName>frcdimImmovablePropertyOtherSpecificationAxis_tpfrcdmObjectNumberTypedMember</FinanVarName>
+      <Description>WOZ-objectnummer [typed member]</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>true</IsTupleKey>
+      <InTuple>frc-dim:ImmovablePropertyOtherSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimImmovablePropertyOtherSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+      <Hypercube alias="hc89" RoleURI="urn:frc:linkrole:immovable-property-other-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="ImmovablePropertyOtherSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:ImmovablePropertyOtherAddress</Code>
+      <FinanVarName>frcdimImmovablePropertyOtherSpecificationAxis_tpbdburgImmovablePropertyOtherAddress</FinanVarName>
+      <Description>Adres overige onroerende zaak</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:ImmovablePropertyOtherSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimImmovablePropertyOtherSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="ImmovablePropertyOtherAddress" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc89" RoleURI="urn:frc:linkrole:immovable-property-other-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="ImmovablePropertyOtherSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+    <Account>
+      <Code>bd-burg:ImmovablePropertyOtherValue</Code>
+      <FinanVarName>frcdimImmovablePropertyOtherSpecificationAxis_tpbdburgImmovablePropertyOtherValue</FinanVarName>
+      <Description>Waarde overige onroerende zaak</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>frc-dim:ImmovablePropertyOtherSpecificationAxis</InTuple>
+      <InTupleFinanVarName>frcdimImmovablePropertyOtherSpecificationAxis</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="bd-burg" ElementName="ImmovablePropertyOtherValue" NamespaceURI="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers"/>
+      <Hypercube alias="hc89" RoleURI="urn:frc:linkrole:immovable-property-other-specification">
+        <Dimension NameSpaceAlias="frc-dim" ElementName="ImmovablePropertyOtherSpecificationAxis" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" type="typed">
+          <TypedDomainElement NameSpaceAlias="frc-dm" ElementName="ObjectNumberTypedMember" NamespaceURI="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="FinancialStatementsTypeAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="SeparateMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+        <Dimension NameSpaceAlias="venj-bw2-dim" ElementName="BasisOfPreparationAxis" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" type="explicit">
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="CommercialMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+          <ExplicitMember NameSpaceAlias="venj-bw2-dm" ElementName="FiscalMember" NamespaceURI="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains"/>
+        </Dimension>
+      </Hypercube>
+    </Account>
+  </Accounts>
+  <NameSpaces>
+    <NameSpace>
+      <Prefix>bd-burg</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>frc-abstr</Prefix>
+      <URI>https://www.sbrbanken.nl/bt11/frc/20161209/presentation/frc-abstracts</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>frc-dim</Prefix>
+      <URI>https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>frc-dm</Prefix>
+      <URI>https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>frc-i</Prefix>
+      <URI>https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>frc-lr</Prefix>
+      <URI>https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-linkroles</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>kvk-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>kvk-t</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>nl-cd</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>rj-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>venj-bw2-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data</URI>
+    </NameSpace>
+  </NameSpaces>
+</FmtMappingModel>

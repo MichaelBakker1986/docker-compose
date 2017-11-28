@@ -1,0 +1,33 @@
+; inc_Test_SC_Locked.fin
+; EJS maart 2015
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Scorecard Test Paragraph
+; Locked
+
+PPP     BN     3               "Test Locked"                                                       \TestLocked
+
+PII     1A     4               "Dit is een stringvraag (origineel)"                                \tlStrVarOrg
+PII     1A     4               "Idem kopie"                                                        \tlStrVarCopy=tlStrVarOrg
+PII     1A     4               "Idem kopie zonder Locked-formule"                                  \tlStrVarCopy2=tlStrVarOrg
+PII     BN     4               "Dit is een numerieke kolomvraag (origineel)"                       \tlColVarOrg
+PII     BN     4               "Idem kopie"                                                        \tlColVarCopy=tlColVarOrg
+PII     1N C   4               "Locking originelen"                                                \tlOrgsLocked
+PII     1N C   4               "Locking kopieën"                                                   \tlCopiesLocked
+
+.Choices
+tlOrgsLocked= "0:unlocked|1:locked"
+tlCopiesLocked= "0:unlocked|1:locked"
+
+.Formulas NoTrend
+tlOrgsLocked= 1
+tlCopiesLocked= 1
+
+.Formulas Locked
+tlStrVarOrg= tlOrgsLocked
+tlColVarOrg= tlOrgsLocked
+tlStrVarCopy= tlCopiesLocked
+tlColVarCopy= tlCopiesLocked
+
+

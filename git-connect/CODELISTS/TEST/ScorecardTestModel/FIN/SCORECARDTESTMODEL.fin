@@ -1,0 +1,1309 @@
+{&&Language=English}
+;==========================================================================================================================================
+Scorecard Test Model
+
+.ModelVersion          1.19
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=2005,Years=4,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PPP      X     0               "Scorecard Test Model v#CompactModelVersion#"                      \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+;================================================================================================================================
+.Variables
+.Variables
+PPP     1N C   1               Scorecard Test Model                                                 \Q_ROOT
+C Dit is een model om de scorecard applicatie te testen.
+
+.Choices
+Q_ROOT                         = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+.Formulas Notrend
+Q_ROOT                         = If( (Q_Map01[1]=1) And (Q_Map02[1]=1) And (Q_Map03[1]=1) And (Q_Map04[1]=1) And (Q_Map05[1]=1) And (Q_Map06[1]=1) And (Q_Map07[1]=1)And (Q_Map08[1]=1) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0)
+
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 1<$                                                           \Q_Map01
+C Dit is de hinttekst van ' Map 1' (DEZE REGEL WORDT NIET MEER GEBRUIKT!)
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PPP     1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PPP     1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+PPP     1A     3               $>Hinttekst stap 1<$                                                \Q_Map01_HINT
+C Dit is de hinttekst van de variable 'Q_Map01_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)
+
+
+PII     1N     3               $>Paragraaf 1<$                                                     \Q_Map01_Paragraaf01
+C Hinttekst voor paragraaf 1
+PII     1A     4               $>Vraag 1 (String)<$                                                \Q_Map01_Vraag01
+C Hinttekst voor vraag 1
+PII   0 1N     4       +       $>Vraag 2 (Bedrag)<$                                                \Q_Map01_Vraag02
+C Hinttekst voor vraag 2
+PII   0 1N     4               $>Vraag 3 (Getal, dus geen bedrag)<$                                \Q_Map01_Vraag03
+C Hinttekst voor vraag 3
+PII     1N C   4               $>Vraag 4 (Keuzelijst)<$                                            \Q_Map01_Vraag04
+C http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl
+PII     1N C   4               $>Vraag 5 (Keuzelijst J/N)<$                                        \Q_Map01_Vraag05
+PII   0 1N %   4               $>Vraag 6 (Percentage)<$                                            \Q_Map01_Vraag06
+PII     1N D   4               $>Vraag 7 (Datumveld)<$                                             \Q_Map01_Vraag07
+PII     1M     4               $>Vraag 8 (Memoveld)<$                                              \Q_Map01_Vraag08
+PI      1A     4               $>Vraag 9 (Image)<$                                                 \Q_Map01_Vraag09
+
+.Choices
+Q_Map01_Vraag04                = file "ChoiceList.fib"
+Q_Map01_Vraag05                = "1:Ja|0:Nee"
+
+.Formulas NoTrend
+Q_Map01_Vraag08                = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Paragraaf 2<$                                                     \Q_Map01_Paragraaf02
+C Alle vragen in deze paragraaf zijn verplicht afhankelijk van onderstaande schakelaar.
+PII     1N C   4               $>Zijn de vragen in deze paragraaf verplicht?<$                     \Q_Map01_Verplicht
+
+PII     1A     4               $>Vraag 11 (String)<$                                               \Q_Map01_Vraag11
+C http://www.topicus.nl Verplicht veld
+PII   0 1N     4       +       $>Vraag 12 (Bedrag)<$                                               \Q_Map01_Vraag12
+C http://www.topicus.nl Verplicht veld
+PII   0 1N     4               $>Vraag 13 (Getal, dus geen bedrag)<$                               \Q_Map01_Vraag13
+C http://www.topicus.nl Verplicht veld
+PII     1N C   4               $>Vraag 14 (Keuzelijst)<$                                           \Q_Map01_Vraag14
+C http://www.topicus.nl Verplicht veld
+PII     1N C   4               $>Vraag 15 (Keuzelijst J/N)<$                                       \Q_Map01_Vraag15
+C http://www.topicus.nl Verplicht veld
+PII   0 1N %   4               $>Vraag 16 (Percentage)<$                                           \Q_Map01_Vraag16
+C http://www.topicus.nl Verplicht veld
+PII     1N D   4               $>Vraag 17 (Datumveld)<$                                            \Q_Map01_Vraag17
+C http://www.topicus.nl Verplicht veld
+PII     1M     4               $>Vraag 18 (Memoveld)<$                                             \Q_Map01_Vraag18
+C http://www.topicus.nl Verplicht veld
+
+.Choices
+Q_Map01_Vraag14                = file "ChoiceList.fib"
+Q_Map01_Vraag15                = "1:Ja|0:Nee"
+Q_Map01_Verplicht              = "1:Ja|0:Nee"
+
+
+.Variable Q_Map01_Vraag11      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag12      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag13      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag14      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag15      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag16      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag17      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+.Variable Q_Map01_Vraag18      ,InputRequired=(Q_Map01_Verplicht[1]=1)
+
+.Formulas NoTrend
+Q_Map01_Verplicht              = 1
+Q_Map01_HINT = "Dit is de hinttekst van ' Map 1'"
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Paragraaf 3<$                                                     \Q_Map01_Paragraaf03
+C Alle vragen in deze paragraaf zijn verplicht.[br][/br]Echter alle velden bevatten al een default waarde.
+PII     1A     4               $>Vraag 1 (String)<$                                                \Q_Map01_Vraag21
+C Verplicht veld
+PII   0 1N     4       +       $>Vraag 2 (Bedrag)<$                                                \Q_Map01_Vraag22
+C Verplicht veld
+PII   0 1N     4               $>Vraag 3 (Getal, dus geen bedrag)<$                                \Q_Map01_Vraag23
+C Verplicht veld
+PII     1N C   4               $>Vraag 4 (Keuzelijst)<$                                            \Q_Map01_Vraag24
+C Verplicht veld
+PII     1N C   4               $>Vraag 5 (Keuzelijst J/N)<$                                        \Q_Map01_Vraag25
+C Verplicht veld
+PII   0 1N %   4               $>Vraag 6 (Percentage)<$                                            \Q_Map01_Vraag26
+C Verplicht veld
+PII     1N D   4               $>Vraag 7 (Datumveld)<$                                             \Q_Map01_Vraag27
+C Verplicht veld
+PII     1M     4               $>Vraag 8 (Memoveld)<$                                              \Q_Map01_Vraag28
+C Verplicht veld
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Paragraaf 3 (deel 2)<$                                             \Q_Map01_Paragraaf03_2
+C Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]
+PPP     1M     4               $>Vraag 8 (Memoveld) (Copy en ReadOnly)<$                            \=Q_Map01_Vraag28
+C Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]
+PPP     1M     4               Dit is een vraag om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br] \=Q_Map01_Vraag28
+
+.Choices
+Q_Map01_Vraag24                = file "ChoiceList.fib"
+Q_Map01_Vraag25                = "1:Ja|0:Nee"
+
+.Formulas Notrend
+Q_Map01_Vraag21  = 1
+Q_Map01_Vraag22  = 1
+Q_Map01_Vraag23  = 1
+Q_Map01_Vraag24  = 1
+Q_Map01_Vraag25  = 1
+Q_Map01_Vraag26  = 1
+Q_Map01_Vraag27  = DMYtoDate(23,8,1974)
+Q_Map01_Vraag28  = "Vraag 8 (Memoveld)[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]"
+
+.Variable Q_Map01_Vraag21      ,InputRequired=1
+.Variable Q_Map01_Vraag22      ,InputRequired=1
+.Variable Q_Map01_Vraag23      ,InputRequired=1
+.Variable Q_Map01_Vraag24      ,InputRequired=1
+.Variable Q_Map01_Vraag25      ,InputRequired=1
+.Variable Q_Map01_Vraag26      ,InputRequired=1
+.Variable Q_Map01_Vraag27      ,InputRequired=1
+.Variable Q_Map01_Vraag28      ,InputRequired=1
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Paragraaf 4 (Locked)<$                                            \Q_Map01_Paragraaf04
+PPP     1N C   4               Kopie van vraag 4 (alleen readonly)                                 \Q_Map01_Vraag04Copy=Q_Map01_Vraag04
+PPP     1N D   4               Kopie van vraag 7 (alleen readonly)                                 \Q_Map01_Vraag07Copy=Q_Map01_Vraag07
+PPP   0 1N     4               Numerieke waarde van vraag 4 (alleen readonly)                      \=Q_Map01_Vraag04
+PPP     1A     4               Alfanumerieke waarde van vraag 4 (alleen readonly)                  \Q_Map01_Vraag04Tekst
+
+PPP     1N D   4               =Q_STATUS_STARTED_ON                                                \=Q_STATUS_STARTED_ON
+PPP     1A     4               =Q_STATUS_STARTED_BY                                                \=Q_STATUS_STARTED_BY
+PPP     1A     4               =Q_STATUS_STARTED_BY_NAME                                           \=Q_STATUS_STARTED_BY_NAME
+PPP     1N D   4               =Q_STATUS_FINAL_ON                                                  \=Q_STATUS_FINAL_ON
+PPP     1A     4               =Q_STATUS_FINAL_BY                                                  \=Q_STATUS_FINAL_BY
+PPP     1A     4               =Q_STATUS_FINAL_BY_NAME                                             \=Q_STATUS_FINAL_BY_NAME
+PPP     1A     4               FPS_FINAN_USER_ROLES                            					           \=FPS_FINAN_USER_ROLES
+PPP     1A     4               FPS_FINAN_USER													                             \=FPS_FINAN_USER
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Paragraaf 5: Model info<$                                         \Q_Map01_Paragraaf05
+PPP     1A     4               "Modelversie"                                                       \=ModelVersion
+PPP     1A     4               "Gemaakt door"                                                      \WindowsUserName
+PPP     1N D   4               "Gemaakt op"                                                        \CurrentDate
+PPP     1A     4               "Gemaakt met FINAN versie"                                          \FinanFullVersion
+PPP     1A     4               "Modelcode"                                                         \ModelCode
+PII     1A     4               "Parametersversie"                                                  \=MatrixVersion
+
+.Formulas NoTrend
+WindowsUserName                = "#WindowsUserName#"
+CurrentDate                    = #ApplicationStartDateTime#
+FinanFullVersion               = "#FinanFullVersion#"
+ModelCode                      = "#ModelCode#"
+Q_Map01_Vraag04Tekst 					 = &TableLookup("Choicelist",Q_Map01_Vraag04)
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map01_Paragraaf09
+PPP     1N C   4               Status van de stap                                                  \Q_Map01_STATUS
+PPP     1A     4               =Q_Map01_WARNING                                                    =Q_Map01_WARNING
+PPP     1A     4               =Q_Map01_INFO                                                       =Q_Map01_INFO
+PPP     1A     4               =Q_Map01_VALIDATION                                                 =Q_Map01_VALIDATION
+PPP   0 1N     4               =Q_Map01_REQUIREDVARS                                               =Q_Map01_REQUIREDVARS
+PPP   0 1N     4               =Q_Map01_ENTEREDREQUIREDVARS                                        =Q_Map01_ENTEREDREQUIREDVARS
+;==============================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS            = Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X))
+Q_Map01_ENTEREDREQUIREDVARS     = Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map01                         = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map01_VALIDATION             =
+Q_Map01_STATUS								= Q_Map01
+
+.Choices
+Q_Map01                        = Q_ROOT
+Q_Map01_STATUS								= "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 2<$                                                           \Q_Map02
+
+
+PII     1A   1 3               $>Warning voor map 2 <$                                             \Q_Map02_WARNING
+PII     1A     3               $>Info bij stap 2<$                                                 \Q_Map02_INFO
+PII     1A     3               $>Validatie stap 2<$                                                \Q_Map02_VALIDATION
+
+
+PPP     1N     3               $>Paragraaf 1<$                                                     \Q_Map02_Paragraaf01
+C Flipflop voorbeeld. A+B=C[br][/br]Wanneer een waarde wordt ingevuld in C, dan wordt de waarde in B verwijderd. B rekent vervolgens de waarde (C-A = B) uit. De opteling blijft correct.
+PII     1N     4               $>A<$                                                               \Q_Map02_A
+PII     1N     4               $>B<$                                                               \Q_Map02_B
+PII     1N    -4               $>C<$                                                               \Q_Map02_C
+
+.Formulas Notrend
+Q_Map02_C = Q_Map02_A + Q_Map02_B <-> Q_Map02_B
+Q_Map02_B = If( DataEntered(Q_Map02_C), Q_Map02_C - Q_Map02_A, NA)
+
+;------------------------------
+.Variables
+PPP     FN     3               $>Paragraaf 2<$                                                     \Q_Map02_Paragraaf02
+C Flipflop voorbeeld. X+Y=Z[br][/br]Wanneer een waarde wordt ingevuld in Z, dan wordt de waarde in Y verwijderd. Y rekent vervolgens de waarde (Z-X = Y) uit. De opteling blijft correct.
+PII     FN     4               $>X<$                                                               \Q_Map02_X
+PII     FN     4               $>Y<$                                                               \Q_Map02_Y
+PII     FN    -4               $>Z<$                                                               \Q_Map02_Z
+
+.Formulas Notrend, Trend
+Q_Map02_Z = Q_Map02_X + Q_Map02_Y <-> Q_Map02_Y
+Q_Map02_Y = If( DataEntered(Q_Map02_Z), Q_Map02_Z - Q_Map02_X, NA)
+
+;------------------------------
+.Variables
+PPP     FN     3               $>Paragraaf 3<$                                                     \Q_Map02_Paragraaf03
+C Hieronder de tekstvelden die panel boven in beeld verschijnen
+PII     1A     4               =Q_Map02_WARNING                                                    =Q_Map02_WARNING
+PII     1A     4               =Q_Map02_INFO                                                       =Q_Map02_INFO
+PII     1A     4               =Q_Map02_VALIDATION                                                 =Q_Map02_VALIDATION
+
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map02_Paragraaf09
+PPP     1A     4               =Q_Map02_WARNING                                                    =Q_Map02_WARNING
+PPP     1A     4               =Q_Map02_INFO                                                       =Q_Map02_INFO
+PPP     1A     4               =Q_Map02_VALIDATION                                                 =Q_Map02_VALIDATION
+PPP   0 1N     4               =Q_Map02_REQUIREDVARS                                               =Q_Map02_REQUIREDVARS
+PPP   0 1N     4               =Q_Map02_ENTEREDREQUIREDVARS                                        =Q_Map02_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map02_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (2)<$                                    \Q_Map02_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_Map02_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP02_REQUIREDVARS            = Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X))
+Q_MAP02_ENTEREDREQUIREDVARS     = Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP02                         = (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS)
+Q_MAP02_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP02_INFO                   = &If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP02_VALIDATION             =
+
+.Choices
+Q_Map02                        = Q_ROOT
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 3 (Jaarrekening)<$                                            \Q_Map03
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 3<$                                              \Q_Map03_WARNING
+PPP     1A     3               $>Info bij stap 3<$                                                 \Q_Map03_INFO
+PPP     1A     3               $>Validatie stap 3<$                                                \Q_Map03_VALIDATION
+
+
+PPP     BN     3               $>Balans<$                                                          \Q_Map03_Paragraaf01
+PPP     AN     4               "Extra info"														   \HeaderExtra
+PII     BN     4               "Immateriële vaste activa"&" "&"(TEST)"                             \IntangibleFixedAssets
+C Dit is een test om te controleren of alles tussen quotes wordt vertaald.
+PII     BN     4               Materiële vaste activa                                              \MaterialFixedAssets
+PII     BN     4               Financiële vaste activa                                             \FinancialFixedAssets
+PII     BN     4               Voorraden                                                           \Inventories
+PII     BN     4               Vorderingen                                                         \Receivables2
+PII     BN     4               Liquide middelen                                                    \CashAndEquivalents
+PPP    =BN    -4               Totaal activa                                                       \TotalAssets2
+PII     BN   1 4        ?      Eigen vermogen                                                      \NetWorth
+PII     BN     4        ?      Voorzieningen                                                       \Provisions
+PII     BN     4        ?      Langlopende schulden                                                \NonCurrentLiabilities
+PII     BN     4        ?      Kortlopende schulden                                                \CurrentLiabilities
+PPP    =BN    -4               Totaal passiva                                                      \TotalEquityAndLiabilities
+PII     BN   1 4               Off balance                                                         \OffBalance
+PPPP    VN     4               Balans uitevenwicht?                                                \ValCheck
+
+.Formulas NoTrend,Trend
+ValCheck                       = Abs(TotalAssets2-TotalEquityAndLiabilities)
+HeaderExtra = &If(ValueT(T)=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))),&"1e Progn" ,&"!= 1e Progn")          ; werkt ook als model op maandbasis staat!
+;------------------------------
+.Variables
+; Resultaten rekening
+PPP     FN     3        ?      Resultatenrekening                                                  \IncomeStatement
+PII     FN     4        ?      Netto omzet                                                         \NetSales
+PII    -FN     4        ?      Inkoopwaarde                                                        \CostOfSales
+PPP    =FN    -4               Bruto winst                                                         \GrossProfit
+
+PII     FN     3               $>Paragraaf 3 (alle kolommen)<$                                     \Q_MAP03_Paragraaf03
+PII   0 FN     4               =NetSales                                                           \=NetSales
+PII   0-FN     4               =CostOfSales                                                        \=CostOfSales
+PPP   0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+PII     FN     3               $>Paragraaf 4 (alleen historische kolommen)<$                       \Q_MAP03_Paragraaf04
+PI    0 FN     4               =NetSales                                                           \=NetSales
+PI    0-FN     4               =CostOfSales                                                        \=CostOfSales
+PP    0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+PI      FN     3               $>Paragraaf 4 (alleen historische kolommen incl. header)<$          \Q_MAP03_Paragraaf041
+PI    0 FN     4               =NetSales                                                           \=NetSales
+PI    0-FN     4               =CostOfSales                                                        \=CostOfSales
+PP    0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+PII     FN     3               $>Paragraaf 5 (alleen prognose kolommen)<$                          \Q_MAP03_Paragraaf05
+P I   0 FN     4               =NetSales                                                           \=NetSales
+P I   0-FN     4               =CostOfSales                                                        \=CostOfSales
+P P   0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+P I     FN     3               $>Paragraaf 5 (alleen prognose kolommen incl. header)<$             \Q_MAP03_Paragraaf051
+P I   0 FN     4               =NetSales                                                           \=NetSales
+P I   0-FN     4               =CostOfSales                                                        \=CostOfSales
+P P   0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+PPP     FN     3               $>Paragraaf 6 (geen history en prognose kolommen)<$                 \Q_MAP03_Paragraaf06
+P     0 FN     4               =NetSales                                                           \=NetSales
+P     0-FN     4               =CostOfSales                                                        \=CostOfSales
+P     0 FN    -4               =GrossProfit                                                        \=GrossProfit
+
+.Formulas Trend
+NetSales                       = Self[T-1]
+CostOfSales                    = Self[T-1]
+
+
+;##TODO## Prognoseformules uitbreiden
+
+.Variables
+PPI     FN     3               $>Paragraaf 7 (prognose kolommen locken)<$                          \Q_MAP03_Paragraaf07
+C TestLockedVar bepaalt de locking van de variabelen die hier onder staan
+PII   0 BN     4               TestLockedVar                                                       \TestLockedVar
+PII   0 FN     4               NetSalesLock, locked=(TestLockedVar=4)                              \NetSalesLock
+C Eerst getoonde NetSalesLock is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven
+PII   0 FN     4               Kopie NetSalesLock                                                  \=NetSalesLock
+PII   0 FN     4               NetSalesLock2, locked=(TestLockedVar<>4)                            \NetSalesLock2
+C Eerst getoonde NetSalesLock2 is de originele variabele, die eronder is de kopie die de locking-eigenschappen moet overerven
+PII   0 FN     4               Kopie NetSalesLock2                                                 \=NetSalesLock2
+
+.Formulas Trend
+NetSalesLock                   = NetSales
+NetSalesLock2                  = NetSales
+
+.Variable NetSalesLock, Locked = (TestLockedVar=4)
+.Variable NetSalesLock2, Locked= (TestLockedVar<>4)
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map03_Paragraaf09
+PPP     1A     4               =Q_Map03_WARNING                                                    =Q_Map03_WARNING
+PPP     1A     4               =Q_Map03_INFO                                                       =Q_Map03_INFO
+PPP     1A     4               =Q_Map03_VALIDATION                                                 =Q_Map03_VALIDATION
+PPP   0 1N     4               =Q_Map03_REQUIREDVARS                                               =Q_Map03_REQUIREDVARS
+PPP   0 1N     4               =Q_Map03_ENTEREDREQUIREDVARS                                        =Q_Map03_ENTEREDREQUIREDVARS
+
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map03_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                    \Q_Map03_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                          \Q_Map03_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP03_REQUIREDVARS           = Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X))
+Q_MAP03_ENTEREDREQUIREDVARS    = Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP03                        = (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS)
+Q_MAP03_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP03_INFO                   = &If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP03_VALIDATION             =
+
+.Choices
+Q_Map03                        = Q_ROOT
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 4<$ Locking / Visible en Type variabelen                      \Q_Map04
+
+;---------------
+; WARNING PANELS
+PPP     1M   1 3               $>Warning voor map 4<$                                              \Q_Map04_WARNING
+PPP     1A M   3               $>Info bij stap 4<$                                                 \Q_Map04_INFO
+PPP     1A M   3               $>Validatie stap 4<$                                                \Q_Map04_VALIDATION
+
+
+PPP     1N     3               $>Paragraaf 1<$                                                     \Q_Map04_Paragraaf01
+PII     1N C   4               $>Lock variabel Map 5 Vraag 1<$                                     \Q_Map04_Vraag01
+PII     1N C   4               $>Laat variabel Map 5 Vraag 2 zien<$                                \Q_Map04_Vraag02
+PII     1N C   4               $>Laat paragraaf Map 5 Paragraaf 1 zien<$                           \Q_Map04_Vraag03
+PII     1N C   4               $>Laat Map 5 zien<$                                                 \Q_Map04_Vraag04
+
+.Choices
+Q_Map04_Vraag01        = "1:Ja|0:Nee"
+Q_Map04_Vraag02        = "1:Ja|0:Nee"
+Q_Map04_Vraag03        = "1:Ja|0:Nee"
+Q_Map04_Vraag04        = "1:Ja|0:Nee"
+
+.Formulas NoTrend
+Q_Map04_Vraag01        = 0
+Q_Map04_Vraag02        = 1
+Q_Map04_Vraag03        = 1
+Q_Map04_Vraag04        = 1
+
+.Variables
+PII     1N     3               $>Sting types<$                                                      \Q_Map04_Paragraaf03
+PII     1A     4               Alleen getallen                                                      \StringInputpattern
+PII     1A     4               Maximaal 10 karakters                                                \StringInputmax
+PII     1A     4               Minimaal 5 karakters                                                 \StringInputmin
+PII     1A     4               $>Email adres<$                                                      \EmailAdres
+
+
+.Variables
+PII     1N     3               $>Currency types<$                                                   \Q_Map04_Paragraaf04
+PII     1N     4       +       Vul een getal in tussen >=5 en <=10                                  \InputminInclInputMaxIncl
+PII     1N     4       +       Vul een getal in tussen > 5 en < 10                                  \InputminExclInputMaxExcl
+PII     1N     4       +       Vul een getal in tussen >=5 en < 10                                  \InputminInclInputMaxExcl
+PII     1N     4       +       Vul een getal in tussen > 5 en <=10                                  \InputminExclInputMaxIncl
+
+.Hints
+EmailAdres               = Door middel van een reguliere expressie wordt gecontroleerd of het ingevuld veld een emailadres is.$$Pattern=^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$
+StringInputpattern       = Een tekstveld waarin alleen numerieke waarden ingevuld mogen worden$$Pattern=([0-9]*)
+StringInputmax           = Maximaal 10 karakters$$MaxLength=10
+StringInputmin           = Minimaal 5 karakters (incl 5)$$MinLength=5
+
+InputminInclInputMaxIncl = "$$MinInclusive=5|$$MaxInclusive=10"
+InputminExclInputMaxExcl = "$$MinExclusive=5|$$MaxExclusive=10"
+InputminInclInputMaxExcl = "$$MinInclusive=5|$$MaxExclusive=10"
+InputminExclInputMaxIncl = "$$MinExclusive=5|$$MaxInclusive=10"
+
+.Variables
+PII     1N     3               $>Foto type<$                                                        \Q_Map04_Paragraaf05
+PII     1A     4               PhotoUpload                                                          \PhotoUpload
+
+.Variables
+PII     1N     3               $>File upload type<$                                                 \Q_Map04_Paragraaf06
+PII     1A     4               Upload een file                                                      \FileUpload
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map04_Paragraaf09
+PPP     1A     4               =Q_Map04_WARNING                                                    =Q_Map04_WARNING
+PPP     1A     4               =Q_Map04_INFO                                                       =Q_Map04_INFO
+PPP     1A     4               =Q_Map04_VALIDATION                                                 =Q_Map04_VALIDATION
+PPP   0 1N     4               =Q_Map04_REQUIREDVARS                                               =Q_Map04_REQUIREDVARS
+PPP   0 1N     4               =Q_Map04_ENTEREDREQUIREDVARS                                        =Q_Map04_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map04_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (4)<$                                    \Q_Map04_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (4)<$                          \Q_Map04_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP04_REQUIREDVARS            = Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X))
+Q_MAP04_ENTEREDREQUIREDVARS     = Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP04                         = (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS)
+Q_MAP04_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP04_INFO                   = &If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP04_VALIDATION             =
+
+
+.Choices
+Q_Map04                        = Q_ROOT
+
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 5<$ Tuples                                                    \Q_Map05
+.Variable Q_Map05               ,Visible="(Q_Map04_Vraag04[1]=1)"
+
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 5<$                                              \Q_Map05_WARNING
+PPP     1A     3               $>Info bij stap 5<$                                                 \Q_Map05_INFO
+PPP     1A     3               $>Validatie stap 5<$                                                \Q_Map05_VALIDATION
+
+
+PPP     1N     3               $>Paragraaf 1<$                                                     \Q_Map05_Paragraaf01
+C De invoer bij vraag 2 wordt automatisch ook ingevuld bij vraag 1.
+PII   0 1N     4               $>Vraag 1<$                                                         \Q_Map05_Vraag01
+PII   0 1N     4               $>Vraag 2<$                                                         \Q_Map05_Vraag02
+PII     1A     4               $>Vraag 3<$                                                         \Q_Map05_Vraag03
+
+.Variable Q_Map05_Vraag01       ,Locked="(Q_STATUS[1]=1) or (Q_Map04_Vraag01[1]=1)"
+.Variable Q_Map05_Vraag02       ,Visible="(Q_Map04_Vraag02[1]=1)"
+.Variable Q_Map05_Paragraaf01   ,Visible="(Q_Map04_Vraag03[1]=1)"
+
+.Variable Q_Map05_Vraag01      ,InputRequired=(Visible(self))
+
+;-----------------------------
+
+PPP     1N     3               $>Lijstje<$                                                         \Q_Map05_Paragraaf03
+C Hieronder wordt een lijstje getoond. Vul één regel in automatisch verschijnt er een nieuwe regel getoond. Je kunt de omschrijving aanpassen door op het pennetje te klikken.
+II    0 1N     4               $>Omschrijving<$                                                    \Q_Map05_Lijst01
+II    0 1N     4               $>Omschrijving<$                                                    \Q_Map05_Lijst02
+II    0 1N     4               $>Omschrijving<$                                                    \Q_Map05_Lijst03
+PPP   0=1N    =4               $>Totaal<$                                                          \Q_Map05_LijstTotaal
+
+.Variable Q_Map05_Lijst02, Visible= DataEntered(Q_Map05_Lijst01,1)
+.Variable Q_Map05_Lijst03, Visible= DataEntered(Q_Map05_Lijst02,1)
+
+;-----------------------------
+.Variables
+PII     1N     3               $>Tuple $>Onroerend goed<$<$                                         \Q_Map05_Paragraaf04
+PPP   0 1N     4       +       "$>TupleSum<$ $>Aanschafwaarde<$"                                    \OnroerendGoedTupleSum
+PPP   0 1N     4       +       "$>TupleMin<$ $>Aanschafwaarde<$"                                    \OnroerendGoedTupleMin
+PPP   0 1N     4       +       "$>TupleMax<$ $>Aanschafwaarde<$"                                    \OnroerendGoedTupleMax
+PPP   0 1N     4       +       "$>TupleSum<$ $>'Verschil aanschafwaarde <> WOZ'<$"                  \OnroerendGoedTupleSumVerschil
+PPP   0 1N     4               "$>TupleSum<$ '$>Aanschafwaarde registergoed > 0 euro?<$'"           \OnroerendGoedTupleSumGroter0
+PPP   0 1N     4               "$>TupleSum<$ '$>Datum vaststelling WOZ jonger dan 6 maand?<$'"      \OnroerendGoedTupleSumJonger6Mnd
+
+.Formulas Notrend
+OnroerendGoedTupleSum = TupleSum(OnroerendGoed_tpAanschafwaarde)
+OnroerendGoedTupleMin = TupleMin(OnroerendGoed_tpAanschafwaarde)
+OnroerendGoedTupleMax = TupleMax(OnroerendGoed_tpAanschafwaarde)
+OnroerendGoedTupleSumVerschil = TupleSum(OnroerendGoed_tpVerschil)
+OnroerendGoedTupleSumGroter0 = TupleSum(OnroerendGoed_tpGroter0)
+OnroerendGoedTupleSumJonger6Mnd = TupleSum(OnroerendGoed_tpJonger6Mnd)
+
+
+.Variables
+PII     1T     4               "$>Onroerend goed<$"                                                 \OnroerendGoed
+PII     1A     5               "$>Registernummer<$"                                                 \OnroerendGoed_tpRegistratienummer
+PII   0 1N     5       +       "$>Aanschafwaarde registergoed<$"                                    \OnroerendGoed_tpAanschafwaarde
+PII     1A     5               "$>Aanschafjaar registergoed<$"                                      \OnroerendGoed_tpAanschafjaar
+PII   0 1N     5       +       "$>WOZ-waarde registergoed<$"                                        \OnroerendGoed_tpWOZwaarde
+C Wanneer WOZ-waarde wordt ingevuld dan wordt datum ook getoond, anders wordt deze verborgen
+PII     1N D   5               "$>Datum vaststelling WOZ-waarde registergoed<$"                     \OnroerendGoed_tpWOZwaardeDatum
+PII   0 1N     5       +       "$>Boekwaarde registergoed<$"                                        \OnroerendGoed_tpBoekwaarde
+PII     1A     5               "$>Afschrijvingsmethode registergoed<$"                              \OnroerendGoed_tpAfschrijvingsmethode
+PPP   0 1N     5       +       "$>Verschil aanschafwaarde <> WOZ <$"                                \OnroerendGoed_tpVerschil
+PPP     1N C   5               "$>Aanschafwaarde registergoed > 0 euro?<$"                          \OnroerendGoed_tpGroter0
+PPP     1N C   5               "$>Datum vaststelling WOZ jonger dan 6 maand?<$"                     \OnroerendGoed_tpJonger6Mnd
+
+;;.Variable OnroerendGoed_tpWOZwaardeDatum, Visible= (OnroerendGoed_tpWOZwaarde<>0)									;; Dit werkt nog niet (nl.finan.exceptions.FinanException: Operation not supported)
+
+;-----------------------------
+
+PII     1N     3               $>Tuple<$ $>Omzetgroep<$                                             \Q_Map05_Paragraaf05
+PII     FT     4               "$>Omzetgroep<$"                                                     \OmzetGroep
+PII     1A     5               "$>Naam<$"                                                           \Omzetgroep_tpNaam
+PII     FN   1 5               "$>Omzet<$"                                                          \Omzetgroep_tpOmzet
+PII    -FN  *  5               "$>Inkoop<$"                                                         \Omzetgroep_tpInkoop
+PII    =FN    -5               "$>Brutowinst<$"                                                     \Omzetgroep_tpBrutowinst
+PII   0 CN %   5               "$>Brutomarge<$"                                                     \Omzetgroep_tpBrutomarge
+
+PII     FN     4               "$>SOM: Omzet<$"                                                     \SOMOmzetgroepOmzet
+PII     FN     4               "$>SOM: Brutowinst<$"                                                \SOMOmzetgroepBrutowinst
+
+.Choices
+OnroerendGoed_tpGroter0    = "1:Ja|0:Nee"
+OnroerendGoed_tpJonger6Mnd = "1:Ja|0:Nee"
+
+.Formulas Notrend,Trend
+Omzetgroep_tpBrutomarge = OnEr((Omzetgroep_tpOmzet - Omzetgroep_tpInkoop) / Omzetgroep_tpOmzet ,NA)
+
+.Formulas Notrend
+OnroerendGoed_tpVerschil = (OnroerendGoed_tpAanschafwaarde - OnroerendGoed_tpWOZwaarde)
+OnroerendGoed_tpGroter0 = If(OnroerendGoed_tpAanschafwaarde>0,1,0)
+OnroerendGoed_tpJonger6Mnd = If( (OnNA(Q_STATUS_FINAL_ON,Now) - (365/2)) > OnroerendGoed_tpWOZwaardeDatum ,0,1)
+
+.Formulas Notrend, Trend
+SOMOmzetgroepOmzet = TupleSum(Omzetgroep_tpOmzet)
+SOMOmzetgroepBrutowinst = TupleSum(Omzetgroep_tpBrutowinst)
+
+;;	;-----------------------------
+;;	.Variables
+;;	PII     1N     3               $>Zekerheden (Niet gealloceerd)<$                                    \Q_Map05_Paragraaf06a
+;;
+;;	PIXX    1T     4               $>Zekerheid (T)<$                                                    \Zekerheid
+;;	PIXX    1A     5               $>ID<$                                                               \Zekerheid_tpID
+;;	PIXX    1A     5               $>Omschrijving<$                                                     \Zekerheid_tpNaam
+;;	PIXX  0 1N     5       +       $>Waarde<$                                                           \Zekerheid_tpWaarde
+;;	PIXX    1N C   5               $>Soort<$                                                            \Zekerheid_tpType
+;;	PPXX  2 1N %   5               $>Dekkingspercentage percentage<$                                    \Zekerheid_tpDekkingsPercentage
+;;	PIXX  2 1N %   5               $>Allocatie percentage<$                                             \Zekerheid_tpAllocatiePercentage
+;;	PPXX  0 1N     5       +       $>Dekkingswaarde<$                                                   \Zekerheid_tpDekkingsWaarde
+;;	PIXX  0 1N     4       +       $>Totale dekkingswaarde zekerheden<$                                 \Zekerheid_DekkingsWaarde_SUM
+;;
+;;	.Choices
+;;	Zekerheid_tpType = "1:Onroerend Goed|2:Inventaris|3:Bankgarantie"
+;;
+;;	.Formulas Notrend
+;;	Zekerheid_tpDekkingsPercentage     = If(Zekerheid_tpType=1,0.90,If(Zekerheid_tpType=2,0.40,If(Zekerheid_tpType=1,1,NA)))
+;;	Zekerheid_tpAllocatiePercentage    = 1
+;;	Zekerheid_tpDekkingsWaarde         = Zekerheid_tpDekkingsPercentage*Zekerheid_tpAllocatiePercentage*Zekerheid_tpWaarde
+;;	Zekerheid_DekkingsWaarde_SUM       = TupleSum(Zekerheid_tpDekkingsWaarde)
+
+
+;-----------------------------
+.Variables
+PP      1N     3               $>Overeenkomst (Tuple in Tuple in Tuple)<$                               \Q_Map05_Paragraaf06
+
+PIXX    1T     4               $>Overeenkomst (T)<$                                                 \OVK
+PIXX    1A     5               $>ID<$                                                               \OVK_tpID
+PIXX    1A     5               $>Naam<$                                                             \OVK_tpNaam
+
+PIXX    1T     5               $>Lening (T)<$                                                       \OVK_Lening
+PIXX    1A     6               $>ID<$                                                               \OVK_Lening_tpID
+PIXX    1A     6               $>Rekeningnummer<$                                                   \OVK_Lening_tpNummer
+PIXX  0 1N     6       +       $>Hoofdsom<$                                                         \OVK_Lening_tpHoofdsom
+PIXX    1A     6               $>Details<$                                                          \OVK_Lening_tpDetails
+PIXX    1A     7               $>Rente Product<$                                                    \OVK_Lening_tpRenteProduct
+PIXX  2 1N %   7               $>Rente percentage<$                                                 \OVK_Lening_tpRentepercentage
+PIXX  0 1N     7               $>Looptijd<$                                                         \OVK_Lening_tpLooptijd
+
+PIXX    1T     6               $>Zekerheid (T) (Gealloceerd)<$                                      \OVK_Lening_Zekerheid
+PIXX    1A     7               $>ID<$                                                               \OVK_Lening_Zekerheid_tpID
+PIXX    1A     7               $>Omschrijving<$                                                     \OVK_Lening_Zekerheid_tpNaam
+PIXX  0 1N     7       +       $>Waarde<$                                                           \OVK_Lening_Zekerheid_tpWaarde
+PIXX    1N C   7               $>Soort<$                                                            \OVK_Lening_Zekerheid_tpType
+PPXX  2 1N %   7               $>Dekkingspercentage percentage<$                                    \OVK_Lening_Zekerheid_tpDekkingsPercentage
+PIXX  2 1N %   7               $>Allocatie percentage<$                                             \OVK_Lening_Zekerheid_tpAllocatiePercentage
+PPXX  0 1N     7       +       $>Dekkingswaarde<$                                                   \OVK_Lening_Zekerheid_tpDekkingsWaarde
+PIXX  0 1N    -7               $>De looptijd van de onderliggende lening is<$                       \OVK_Lening_Zekerheid_tpLooptijdLening
+C Controle om gegevens op te vragen vanuit bovenliggende tuple
+
+PIXX    1N     6       +       $>Totaal Zekerheid (T) (Gealloceerd)<$                               \OVK_Lening_tpZekerheidGealloceerdTotaal
+PPXX  0 1N     6       +       $>Zekerheid (Niet Gealloceerd)<$                                     \OVK_Lening_tpZekerheidNietGealloceerd
+PIXX  0-1N     6       +       $>Totale dekkingswaarde zekerheden<$                                 \OVK_Lening_tpZekerheidTotaal
+PIXX  0 1N     6       +       $>Totale dekkingspercentage<$                                        \OVK_Lening_tpTotaleDekkinngsPercentage
+
+
+
+PIXX  0 1N     4       +       $>Totaal leningen<$                                                  \OVK_LeningHoofdsomSum
+
+;.Variable OVK_tpID, InputRequired=1
+;.Variable OVK_tpNaam, InputRequired=1
+;
+;.Variable OVK_Lening_tpID, InputRequired=1
+;.Variable OVK_Lening_tpNummer, InputRequired=1
+;
+;.Variable OVK_Lening_Zekerheid_tpID, InputRequired=1
+;.Variable OVK_Lening_Zekerheid_tpNaam, InputRequired=1
+
+.Choices
+OVK_Lening_Zekerheid_tpType = "1:Onroerend Goed|2:Inventaris|3:Bankgarantie"
+
+.Formulas Notrend
+OVK_Lening_Zekerheid_tpLooptijdLening				  = OVK_Lening_tpLooptijd
+
+OVK_Lening_tpZekerheidGealloceerdTotaal       = TupleSum(OVK_Lening_Zekerheid_tpDekkingsWaarde)
+OVK_Lening_Zekerheid_tpDekkingsPercentage     = If(OVK_Lening_Zekerheid_tpType=1,0.90,If(OVK_Lening_Zekerheid_tpType=2,0.40,If(OVK_Lening_Zekerheid_tpType=1,1,NA)))
+OVK_Lening_Zekerheid_tpAllocatiePercentage    = 1
+OVK_Lening_Zekerheid_tpDekkingsWaarde         = OVK_Lening_Zekerheid_tpDekkingsPercentage*OVK_Lening_Zekerheid_tpAllocatiePercentage*OVK_Lening_Zekerheid_tpWaarde
+OVK_Lening_tpZekerheidTotaal                  = OVK_Lening_tpZekerheidGealloceerdTotaal + OVK_Lening_tpZekerheidNietGealloceerd
+OVK_Lening_tpTotaleDekkinngsPercentage        = OnER(OVK_Lening_tpZekerheidTotaal/OVK_Lening_tpHoofdsom,NA)
+OVK_LeningHoofdsomSum                         = TupleSum(OVK_Lening_tpHoofdsom)
+
+OVK_Lening_tpNummer														=&"ID lening van OVK '"&OVK_tpNaam&"'"
+
+;;	OVK_Lening_tpZekerheidNietGealloceerd         = OnEr(Zekerheid_DekkingsWaarde_SUM *(OVK_Lening_tpHoofdsom / OVK_LeningHoofdsomSum),NA)
+
+
+;-----------------------------
+.Variables
+PP      1N     3               $>(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [READONLY]<$        \Q_Map05_Paragraaf07
+
+PPXX    1A     4         T     &OVK_tpNaam[1]                                                       \=OVK_tpID
+PPXX    1A     5               =OVK_tpID                                                            \=OVK_tpID
+PPXX    1A     5               =OVK_tpNaam                                                          \=OVK_tpNaam
+
+PPXX  0 1N     5         T     &OVK_Lening_tpNummer[1]                                              \=OVK_Lening_tpHoofdsom
+PPXX    1A     6               =OVK_Lening_tpNummer                                                 \=OVK_Lening_tpNummer
+PPXX  0 1N     6               =OVK_Lening_tpHoofdsom                                               \=OVK_Lening_tpHoofdsom
+PPXX    1A     6               =OVK_Lening_tpDetails                                                \=OVK_Lening_tpDetails
+PIXX    1A     7               =OVK_Lening_tpRenteProduct                                           \=OVK_Lening_tpRenteProduct
+PIXX  2 1N %   7               =OVK_Lening_tpRentepercentage                                        \=OVK_Lening_tpRentepercentage
+PIXX  0 1N     7               =OVK_Lening_tpLooptijd                                               \=OVK_Lening_tpLooptijd
+
+PPXX  0 1N     6         T     &OVK_Lening_Zekerheid_tpNaam[1]                                      \=OVK_Lening_Zekerheid_tpWaarde
+PPXX    1A     7               =OVK_Lening_Zekerheid_tpNaam                                         \=OVK_Lening_Zekerheid_tpNaam
+PPXX  0 1N     7               =OVK_Lening_Zekerheid_tpWaarde                                       \=OVK_Lening_Zekerheid_tpWaarde
+PPXX    1N C   7               =OVK_Lening_Zekerheid_tpType                                         \=OVK_Lening_Zekerheid_tpType
+PPXX  2 1N %   7               =OVK_Lening_Zekerheid_tpDekkingsPercentage                           \=OVK_Lening_Zekerheid_tpDekkingsPercentage
+PPXX  2 1N %   7               =OVK_Lening_Zekerheid_tpAllocatiePercentage                          \=OVK_Lening_Zekerheid_tpAllocatiePercentage
+PPXX  0 1N     7               =OVK_Lening_Zekerheid_tpDekkingsWaarde                               \=OVK_Lening_Zekerheid_tpDekkingsWaarde
+
+PIXX    1N    -6               =OVK_Lening_tpZekerheidGealloceerdTotaal                             \=OVK_Lening_tpZekerheidGealloceerdTotaal
+PPXX  0 1N     6               =OVK_Lening_tpZekerheidNietGealloceerd                               \=OVK_Lening_tpZekerheidNietGealloceerd
+PPXX  0 1N    -6               =OVK_Lening_tpZekerheidTotaal                                        \=OVK_Lening_tpZekerheidTotaal
+PPXX  0 1N     6               =OVK_Lening_tpTotaleDekkinngsPercentage                              \=OVK_Lening_tpTotaleDekkinngsPercentage
+
+
+;-----------------------------
+.Variables
+II      1N     3               $>(KOPIE) Overeenkomst (Tuple in Tuple in Tuple)  [NIET READONLY]<$ \Q_Map05_Paragraaf08
+
+PPXX    1A     4         T     &OVK_tpNaam[1]                                                       \=OVK_tpID
+PPXX    1A     5               =OVK_tpID                                                            \=OVK_tpID
+PPXX    1A     5               =OVK_tpNaam                                                          \=OVK_tpNaam
+
+;-----------------------------
+.Variables
+PI      1N     3               $>Zekerheid<$												                               \Q_Map05_ParagraafXX
+
+PIXX    1T     4               $>Zekerheid (T)<$                                                	 \Zekerheid
+PIXX    1A     5               $>ID<$                                                              \Zekerheid_tpID
+PIXX    1A     5               $>Type<$               																						 \Zekerheid_tpType
+PIXX    1A     5               $>Beschrijving<$       																						 \Zekerheid_tpBeschrijving
+PIXX    1A     5               $>Status<$             																						 \Zekerheid_tpStatus
+PIXX  0 1N     5       +       $>Waarde<$             																						 \Zekerheid_tpWaarde
+PIXX  0 1N     5       +       $>Dekkingswaarde<$     																						 \Zekerheid_tpDekkingswaarde
+
+PIXX    1T     5               $>Onroerende zaken (T)<$                                            \Zekerheid_OR
+PIXX    1A     6               $>ID<$                                                              \Zekerheid_OR_tpID
+PIXX    1A     6               $>Soort<$                				                                   \Zekerheid_OR_tpSoort
+PIXX    1A     6               $>Vervallen<$                				                               \Zekerheid_OR_tpVervallen
+PIXX    1A     6               $>Taxateur<$                     		                               \Zekerheid_OR_tpTaxateur
+PIXX    1N D   6               $>Taxatiedatum<$                                                    \Zekerheid_OR_tpTaxatiedatum
+PIXX  0 1N     6       +       $>Vrije verkoopwaarde<$                                             \Zekerheid_OR_tpVrijeVerkoopwaarde
+PIXX  0 1N     6       +       $>Executiewaarde<$                                                  \Zekerheid_OR_tpExecutiewaarde
+PIXX  0 1N     6       +       $>Boekwaarde<$                                                      \Zekerheid_OR_tpBoekwaarde
+PIXX    1N D   6               $>Einddatum jaarrapport<$                                           \Zekerheid_OR_tpEinddatumJaarrapport
+PIXX  0 1N     6               $>WOZ waarde<$                                                      \Zekerheid_OR_tpWOZwaarde
+PIXX    1N D   6               $>WOZ waardepeildatum<$                                             \Zekerheid_OR_tpWOZwaardepeildatum
+PIXX    1A     6               $>Vrije tekst<$                                                     \Zekerheid_OR_tpOmschrijving
+
+PIXX    1T     5               $>Partijen (T)<$                                                    \Zekerheid_Party
+PIXX    1A     6               $>ID<$                                                              \Zekerheid_Party_tpID
+PIXX    1A     6               $>Soort<$                                                           \Zekerheid_Party_tpSoort
+PIXX    1A     6               $>Relatienaam<$                                                     \Zekerheid_Party_tpRelatienaam
+PIXX    1A     6               $>Relatienummer<$                                                   \Zekerheid_Party_tpRelatienummer
+
+PIXX  0 1N     4       +       $>Totaal dekkingswaarde<$                                           \Zekerheid_TotaalDekkingswaarde
+
+;-----------------------------
+.Variables
+PI      1N     3               $>Zekerheid (READONLY)<$							                               \Q_Map05_ParagraafXXX
+
+PX      1A    -4               Zekerheden
+PPXX    1N     4         T     &Zekerheid_tpBeschrijving[1]                                         \=Zekerheid_tpWaarde
+PPXX    1A     5               =Zekerheid_tpID																									    \=Zekerheid_tpID
+PPXX    1A     5               =Zekerheid_tpType                                                    \=Zekerheid_tpType
+PPXX    1A     5               =Zekerheid_tpBeschrijving                                            \=Zekerheid_tpBeschrijving
+PPXX    1A     5               =Zekerheid_tpStatus                                                  \=Zekerheid_tpStatus
+PPXX  0 1N     5               =Zekerheid_tpWaarde                                                  \=Zekerheid_tpWaarde
+PPXX  0 1N     5               =Zekerheid_tpDekkingswaarde                                          \=Zekerheid_tpDekkingswaarde
+
+;PPXX    1A     5               =Zekerheid_ORNaam																									  \=Zekerheid_ORNaam
+PPXX  0 1N     5         T     &Zekerheid_OR_tpSoort[1]                                             \=Zekerheid_OR_tpExecutiewaarde
+PPXX    1A     6               =Zekerheid_OR_tpID                    															  \=Zekerheid_OR_tpID
+PPXX    1A     6               =Zekerheid_OR_tpSoort                                                \=Zekerheid_OR_tpSoort
+PPXX    1A     6               =Zekerheid_OR_tpVervallen                                            \=Zekerheid_OR_tpVervallen
+PPXX    1A     6               =Zekerheid_OR_tpTaxateur                                             \=Zekerheid_OR_tpTaxateur
+PPXX    1N D   6               =Zekerheid_OR_tpTaxatiedatum                                         \=Zekerheid_OR_tpTaxatiedatum
+PPXX  0 1N     6               =Zekerheid_OR_tpVrijeVerkoopwaarde                                   \=Zekerheid_OR_tpVrijeVerkoopwaarde
+PPXX  0 1N     6               =Zekerheid_OR_tpExecutiewaarde                                       \=Zekerheid_OR_tpExecutiewaarde
+PPXX  0 1N     6               =Zekerheid_OR_tpBoekwaarde                                           \=Zekerheid_OR_tpBoekwaarde
+PPXX    1N D   6               =Zekerheid_OR_tpEinddatumJaarrapport                                 \=Zekerheid_OR_tpEinddatumJaarrapport
+PPXX  0 1N     6               =Zekerheid_OR_tpWOZwaarde                                            \=Zekerheid_OR_tpWOZwaarde
+PPXX    1N D   6               =Zekerheid_OR_tpWOZwaardepeildatum                                   \=Zekerheid_OR_tpWOZwaardepeildatum
+PPXX    1A     6               =Zekerheid_OR_tpOmschrijving                                         \=Zekerheid_OR_tpOmschrijving
+;
+;PPXX    1A     5               =Zekerheid_PartyNaam																								 \=Zekerheid_PartyNaam
+PPXX    1A     5         T     &Zekerheid_Party_tpSoort[1]																	 			  \=Zekerheid_Party_tpRelatienaam
+PPXX    1A     6               =Zekerheid_Party_tpID																							  \=Zekerheid_Party_tpID
+PPXX    1A     6               =Zekerheid_Party_tpSoort	                                            \=Zekerheid_Party_tpSoort
+PPXX    1A     6               =Zekerheid_Party_tpRelatienaam                                       \=Zekerheid_Party_tpRelatienaam
+PPXX    1A     6               =Zekerheid_Party_tpRelatienummer                                     \=Zekerheid_Party_tpRelatienummer
+
+;-----------------------------
+.Variables
+PPP     1N     3               $>Matrixlookup (numeriek)<$                                          \Q_Map05_Paragraaf08A
+PII     1A     4               $>XLS name<$                                                         \Q_Map05_A_XLS
+PII     1A     4               $>Range name<$                                                       \Q_Map05_A_Range
+PII   0 1N     4               $>Search key (numeriek)<$                                            \Q_Map05_A_SearchKey
+PII   0 1N     4               $>Col index<$                                                        \Q_Map05_A_ColIndex
+PII     1A     4               $>Result<$                                                           \Q_Map05_A_MatrixLookupResult
+
+.Formulas Notrend
+Q_Map05_A_MatrixLookupResult     = &MatrixLookup(&Q_Map05_A_XLS[1],&Q_Map05_A_Range[1],Q_Map05_A_SearchKey[1],Q_Map05_A_ColIndex);
+Q_Map05_A_XLS                    = "ScorecardTestModel.xls"
+Q_Map05_A_Range                  = "ZoekenNumeriek"
+Q_Map05_A_SearchKey              = 2
+Q_Map05_A_ColIndex               = 1
+
+
+;-----------------------------
+.Variables
+PPP     1N     3               $>Matrixlookup (alfanumeriek)<$                                      \Q_Map05_Paragraaf08B
+PII     1A     4               $>XLS name<$                                                         \Q_Map05_B_XLS
+PII     1A     4               $>Range name<$                                                       \Q_Map05_B_Range
+PII     1A     4               $>Search key (alfanumeriek)<$                                        \Q_Map05_B_SearchKey
+PII   0 1N     4               $>Col index<$                                                        \Q_Map05_B_ColIndex
+PII     1A     4               $>Result<$                                                           \Q_Map05_B_MatrixLookupResult
+
+.Formulas Notrend
+Q_Map05_B_MatrixLookupResult     = &MatrixLookup(&Q_Map05_B_XLS[1],&Q_Map05_B_Range[1],Q_Map05_B_SearchKey[1],Q_Map05_B_ColIndex);
+Q_Map05_B_XLS                    = "ScorecardTestModel.xls"
+Q_Map05_B_Range                  = "ZoekenAlfanumeriek"
+Q_Map05_B_SearchKey              = "twee"
+Q_Map05_B_ColIndex               = 1
+
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map05_Paragraaf09
+PPP     1A     4               =Q_Map05_WARNING                                                    =Q_Map05_WARNING
+PPP     1A     4               =Q_Map05_INFO                                                       =Q_Map05_INFO
+PPP     1A     4               =Q_Map05_VALIDATION                                                 =Q_Map05_VALIDATION
+PPP   0 1N     4               =Q_Map05_REQUIREDVARS                                               =Q_Map05_REQUIREDVARS
+PPP   0 1N     4               =Q_Map05_ENTEREDREQUIREDVARS                                        =Q_Map05_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map05_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (5)<$                                    \Q_Map05_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (5)<$                          \Q_Map05_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP05_REQUIREDVARS           = Count(X,SelectDescendants(Q_MAP05, Q_MAP05_Hulpvariabelen),InputRequired(X))
+Q_MAP05_ENTEREDREQUIREDVARS    = Count(X,SelectDescendants(Q_MAP05, Q_MAP05_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP05                        = (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS)
+Q_MAP05_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP05_INFO                   = &If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP05_VALIDATION             =
+
+.Choices
+Q_Map05                        = Q_ROOT
+
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 6<$                                                           \Q_Map06
+
+;---------------
+; WARNING PANELS
+PPP     1M   1 3               $>Warning voor map 6<$                                              \Q_Map06_WARNING
+PPP     1A M   3               $>Info bij stap 6<$                                                 \Q_Map06_INFO
+PPP     1A M   3               $>Validatie stap 6<$                                                \Q_Map06_VALIDATION
+
+
+PPP     1N     3               $>Paragraaf 1: Restrictie en Knockout<$                             \Q_Map06_Paragraaf01
+PII   0 1N   1 4               $>Vraag 1: Vul een getal tussen -10 en 10 in.<$                     \Q_Map06_Vraag01
+PII     1N C   4               $>Vraag 2: Is er een knockout van toepassing?<$                     \Q_Map06_Vraag02
+
+.Choices
+Q_Map06_Vraag02                = "1:Ja|0:Nee"
+
+.Variables
+PPP     1N     3               $>Paragraaf 2:Visibility and Required<$                             \Q_Map06_Paragraaf02
+PII     1N C   4               $>Vraag 1: Naar volgende vraag?<$                                   \Q_Map06_P02Vraag01
+PII     1N C   4               $>Vraag 2: Naar volgende vraag?<$                                   \Q_Map06_P02Vraag02
+PII     1N C   4               $>Vraag 3: Naar volgende vraag?<$                                   \Q_Map06_P02Vraag03
+PII     1N C   4               $>Vraag 4: Naar volgende vraag?<$                                   \Q_Map06_P02Vraag04
+PII     1N C   4               $>Vraag 5: Naar volgende vraag?<$                                   \Q_Map06_P02Vraag05
+.Choices
+Q_Map06_P02Vraag01             = "1:Ja|0:Nee"
+Q_Map06_P02Vraag02             = Q_Map06_P02Vraag01
+Q_Map06_P02Vraag03             = Q_Map06_P02Vraag01
+Q_Map06_P02Vraag04             = Q_Map06_P02Vraag01
+Q_Map06_P02Vraag05             = Q_Map06_P02Vraag01
+
+.Variable Q_Map06_P02Vraag01, InputRequired = 1
+.Variable Q_Map06_P02Vraag01, Visible = InputRequired(Self)
+
+.Variable Q_Map06_P02Vraag02, InputRequired = "(Q_Map06_P02Vraag01=1)"
+.Variable Q_Map06_P02Vraag02, Visible = InputRequired(Self)
+
+.Variable Q_Map06_P02Vraag03, InputRequired = "(Q_Map06_P02Vraag02=1)"
+.Variable Q_Map06_P02Vraag03, Visible = InputRequired(Self)
+
+.Variable Q_Map06_P02Vraag04, InputRequired = "(Q_Map06_P02Vraag03=1)"
+.Variable Q_Map06_P02Vraag04, Visible = InputRequired(Self)
+
+.Variable Q_Map06_P02Vraag05, InputRequired = "(Q_Map06_P02Vraag04=1)"
+.Variable Q_Map06_P02Vraag05, Visible = InputRequired(Self)
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map06_Paragraaf09
+PPP     1A     4               =Q_Map06_WARNING                                                    =Q_Map06_WARNING
+PPP     1A     4               =Q_Map06_INFO                                                       =Q_Map06_INFO
+PPP     1A     4               =Q_Map06_VALIDATION                                                 =Q_Map06_VALIDATION
+XX    0 1N     4               =Q_Map06_REQUIREDVARS                                               =Q_Map06_REQUIREDVARS
+XX    0 1N     4               =Q_Map06_ENTEREDREQUIREDVARS                                        =Q_Map06_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map06_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (6)<$                                    \Q_Map06_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (6)<$                          \Q_Map06_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP06_REQUIREDVARS           = Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X))
+Q_MAP06_ENTEREDREQUIREDVARS    = Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP06                        = (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS)
+Q_MAP06_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP06_INFO                   = &If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP06_VALIDATION             =
+
+.Choices
+Q_Map06                        = Q_ROOT
+
+;================================================================================================================================
+
+.Variables
+PPP     1N C   2               $>Map 7: Rapportage <$                                              \Q_Map07
+
+;---------------
+; WARNING PANELS
+PPP     1M   1 3               $>Warning voor map 7<$                                              \Q_Map07_WARNING
+PPP     1A M   3               $>Info bij stap 7<$                                                 \Q_Map07_INFO
+PPP     1A M   3               $>Validatie stap 7<$                                                \Q_Map07_VALIDATION
+
+PII     1N     3               $>Layout<$                                                          \Q_Map07_Paragraaf01
+PII     1N C   4               $>Welke regels tonen?<$                                             \Q_Map07_Keuze
+
+.Choices
+Q_Map07_Keuze = "0:Alle regels|1:Oneven regels|2:Even regels"
+
+.Formulas Notrend
+Q_Map07_Keuze = 1
+
+;------------------------------
+.Variables
+PII     1N     3               $>Eénkolomsvariabelen<$                                             \Q_Map07_Paragraaf02
+PII   0 1N     4               $>Paragraaf 1<$                                                     \Q_Map07_Par01
+PII   0 1N     5               $>Paragraaf 1 - Vraag 1<$                                           \Q_Map07_Par01_Vr01
+PII   0 1N     5               $>Paragraaf 1 - Vraag 2<$                                           \Q_Map07_Par01_Vr02
+PII   0 1N     4               $>Paragraaf 2<$                                                     \Q_Map07_Par02
+PII   0 1N     5               $>Paragraaf 2 - Vraag 1<$                                           \Q_Map07_Par02_Vr01
+PII   0 1N     5               $>Paragraaf 2 - Vraag 2<$                                           \Q_Map07_Par02_Vr02
+PII   0 1N     4               $>Paragraaf 3<$                                                     \Q_Map07_Par03
+PII   0 1N     5               $>Paragraaf 3 - Vraag 1<$                                           \Q_Map07_Par03_Vr01
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 1<$                                   \Q_Map07_Par03_Vr01_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 2<$                                   \Q_Map07_Par03_Vr01_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 1 - Totaal<$                                  \Q_Map07_Par03_Vr01_totaal
+PII   0 1N     5               $>Paragraaf 3 - Vraag 2<$                                           \Q_Map07_Par03_Vr02
+PII   0 1N     6               $>Paragraaf 3 - Vraag 2 - Sub 1<$                                   \Q_Map07_Par03_Vr02_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 2 - Sub 2<$                                   \Q_Map07_Par03_Vr02_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 2 - Totaal<$                                  \Q_Map07_Par03_Vr02_totaal
+PII   0 1N     4               $>Paragraaf 4<$                                                     \Q_Map07_Par04
+PII   0 1N     5               $>Paragraaf 4 - Vraag 1<$                                           \Q_Map07_Par04_Vr01
+PII   0 1N     5               $>Paragraaf 4 - Vraag 2<$                                           \Q_Map07_Par04_Vr02
+PII   0 1N     4               $>Paragraaf 5<$                                                     \Q_Map07_Par05
+PII   0 1N     5               $>Paragraaf 5 - Vraag 1<$                                           \Q_Map07_Par05_Vr01
+PII   0 1N     5               $>Paragraaf 5 - Vraag 2<$                                           \Q_Map07_Par05_Vr02
+PII   0 1N     4               $>Paragraaf 6 (leeg)<$                                              \Q_Map07_Par06
+PII   0 1N     5               $>Paragraaf 6 - Vraag 1<$                                           \Q_Map07_Par06_Vr01
+PII   0 1N     5               $>Paragraaf 6 - Vraag 2<$                                           \Q_Map07_Par06_Vr02
+PII   0 1N     4               $>Paragraaf 7 (leeg)<$                                              \Q_Map07_Par07
+PII   0 1N     5               $>Paragraaf 7 - Vraag 1<$                                           \Q_Map07_Par07_Vr01
+PII   0 1N     5               $>Paragraaf 7 - Vraag 2<$                                           \Q_Map07_Par07_Vr02
+
+.Formulas Notrend
+Q_Map07_Par01 = 111
+Q_Map07_Par01_Vr01 = 111
+Q_Map07_Par01_Vr02 = 111
+Q_Map07_Par02 = 222
+Q_Map07_Par02_Vr01 = 222
+Q_Map07_Par02_Vr02 = 222
+Q_Map07_Par03 = 333
+Q_Map07_Par03_Vr01 = 333
+Q_Map07_Par03_Vr02 = 333
+Q_Map07_Par04 = 444
+Q_Map07_Par04_Vr01 = 444
+Q_Map07_Par04_Vr02 = 444
+Q_Map07_Par05 = 555
+Q_Map07_Par05_Vr01 = 555
+Q_Map07_Par05_Vr02 = 555
+
+.Variable Q_Map07_Par01, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par02, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par03, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par04, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par05, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par06, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par07, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+
+;------------------------------
+.Variables
+PPP     BN     3               $>Jaarkolomvariabelen<$                                             \Q_Map07_Paragraaf03
+PII   0 BN     4               $>Paragraaf 1<$                                                     \Q_Map07_Par11
+PII   0 BN     5               $>Paragraaf 1 - Vraag 1<$                                           \Q_Map07_Par11_Vr01
+PII   0 BN     5               $>Paragraaf 1 - Vraag 2<$                                           \Q_Map07_Par11_Vr02
+PII   0 BN     4               $>Paragraaf 2<$                                                     \Q_Map07_Par12
+PII   0 BN     5               $>Paragraaf 2 - Vraag 1<$                                           \Q_Map07_Par12_Vr01
+PII   0 BN     5               $>Paragraaf 2 - Vraag 2<$                                           \Q_Map07_Par12_Vr02
+PII   0 BN     4               $>Paragraaf 3<$                                                     \Q_Map07_Par13
+PII   0 BN     5               $>Paragraaf 3 - Vraag 1<$                                           \Q_Map07_Par13_Vr01
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 1<$                                   \Q_Map07_Par13_Vr01_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 2<$                                   \Q_Map07_Par13_Vr01_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 1 - Totaal<$                                  \Q_Map07_Par13_Vr01_totaal
+PII   0 BN     5               $>Paragraaf 3 - Vraag 2<$                                           \Q_Map07_Par13_Vr02
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 1<$                                   \Q_Map07_Par13_Vr02_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 2<$                                   \Q_Map07_Par13_Vr02_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 1 - Totaal<$                                  \Q_Map07_Par13_Vr02_totaal
+PII   0 BN     4               $>Paragraaf 4<$                                                     \Q_Map07_Par14
+PII   0 BN     5               $>Paragraaf 4 - Vraag 1<$                                           \Q_Map07_Par14_Vr01
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 1<$                                   \Q_Map07_Par14_Vr01_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 2<$                                   \Q_Map07_Par14_Vr01_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 1 - Totaal<$                                  \Q_Map07_Par14_Vr01_totaal
+PII   0 BN     5               $>Paragraaf 4 - Vraag 2<$                                           \Q_Map07_Par14_Vr02
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 1<$                                   \Q_Map07_Par14_Vr02_sub1
+PII   0 1N     6               $>Paragraaf 3 - Vraag 1 - Sub 2<$                                   \Q_Map07_Par14_Vr02_sub2
+PPP   0=1N     6               $>Paragraaf 3 - Vraag 1 - Totaal<$                                  \Q_Map07_Par14_Vr02_totaal
+PII   0 BN     4               $>Paragraaf 5<$                                                     \Q_Map07_Par15
+PII   0 BN     5               $>Paragraaf 5 - Vraag 1<$                                           \Q_Map07_Par15_Vr01
+PII   0 BN     5               $>Paragraaf 5 - Vraag 2<$                                           \Q_Map07_Par15_Vr02
+PII   0 BN     4               $>Paragraaf 6 (leeg)<$                                              \Q_Map07_Par16
+PII   0 BN     5               $>Paragraaf 6 (leeg) - Vraag 1<$                                    \Q_Map07_Par16_Vr01
+PII   0 BN     5               $>Paragraaf 6 (leeg) - Vraag 2<$                                    \Q_Map07_Par16_Vr02
+PII   0 BN     4               $>Paragraaf 7 (leeg)<$                                              \Q_Map07_Par17
+PII   0 BN     5               $>Paragraaf 7 (leeg) - Vraag 1<$                                    \Q_Map07_Par17_Vr01
+PII   0 BN     5               $>Paragraaf 7 (leeg) - Vraag 2<$                                    \Q_Map07_Par17_Vr02
+
+.Formulas Notrend, Trend
+Q_Map07_Par11 = 111
+Q_Map07_Par11_Vr01 = 111
+Q_Map07_Par11_Vr02 = 111
+Q_Map07_Par12 = 222
+Q_Map07_Par12_Vr01 = 222
+Q_Map07_Par12_Vr02 = 222
+Q_Map07_Par13 = 333
+Q_Map07_Par13_Vr01 = 333
+Q_Map07_Par13_Vr02 = 333
+Q_Map07_Par14 = 444
+Q_Map07_Par14_Vr01 = 444
+Q_Map07_Par14_Vr02 = 444
+Q_Map07_Par15 = 555
+Q_Map07_Par15_Vr01 = 555
+Q_Map07_Par15_Vr02 = 555
+
+.Variable Q_Map07_Par11, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par12, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par13, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par13_Vr01, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par13_Vr02, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par14, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par14_Vr01, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par14_Vr02, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par15, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+.Variable Q_Map07_Par16, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=2)
+.Variable Q_Map07_Par17, Visible=(Q_Map07_Keuze[1]=0) or (Q_Map07_Keuze[1]=1)
+
+;------------------------------
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map07_Paragraaf09
+PPP     1A     4               =Q_Map07_WARNING                                                    =Q_Map07_WARNING
+PPP     1A     4               =Q_Map07_INFO                                                       =Q_Map07_INFO
+PPP     1A     4               =Q_Map07_VALIDATION                                                 =Q_Map07_VALIDATION
+PPP   0 1N     4               =Q_Map07_REQUIREDVARS                                               =Q_Map07_REQUIREDVARS
+PPP   0 1N     4               =Q_Map07_ENTEREDREQUIREDVARS                                        =Q_Map07_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map07_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (7)<$                                    \Q_Map07_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (7)<$                          \Q_Map07_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP07_REQUIREDVARS           = Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X))
+Q_MAP07_ENTEREDREQUIREDVARS    = Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP07                        = (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS)
+Q_MAP07_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP07_INFO                   = &If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP07_VALIDATION             =
+
+.Choices
+Q_Map07                        = Q_ROOT
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 7,5 <$ Includefiles EJS                                       \Q_Map09
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 9<$                                              \Q_Map09_WARNING
+PPP     1A     3               $>Info bij stap 9<$                                                 \Q_Map09_INFO
+PPP     1A     3               $>Validatie stap 9<$                                                \Q_Map09_VALIDATION
+
+
+; EJS: onderstaande includefiles kan je ook in je eigen scorecard includen om ze in de juiste context te testen:
+
+{&&TryInclude inc_Test_SC_ChoiceVars.fin}
+{&&TryInclude inc_Test_SC_ColumnFunctions.fin}
+{&&TryInclude inc_Test_SC_ColumnLocking.fin}
+
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map09_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (x)<$                                    \Q_Map09_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (x)<$                          \Q_Map09_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP09_REQUIREDVARS           = Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X))
+Q_MAP09_ENTEREDREQUIREDVARS    = Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP09                        = (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS)
+Q_MAP09_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP09_INFO                   = &If(Q_Map09[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP09_VALIDATION             =
+
+.Choices
+Q_Map09                        = Q_ROOT
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 8<$ knopppen                                                 \Q_Map08
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 8<$                                              \Q_Map08_WARNING
+PPP     1A     3               $>Info bij stap 8<$                                                 \Q_Map08_INFO
+PPP     1A     3               $>Validatie stap 8<$                                                \Q_Map08_VALIDATION
+
+PII     1N     3               $>Knoppen<$                                                         \Q_Map08_Paragraaf03
+PII     1N C   4               =Q_PREVIOUS_BUTTON_VISIBLE                                          \=Q_PREVIOUS_BUTTON_VISIBLE
+PII     1N C   4               =Q_NEXT_BUTTON_VISIBLE                                              \=Q_NEXT_BUTTON_VISIBLE
+PII     1N C   4               =Q_CONCEPT_REPORT_VISIBLE                                           \=Q_CONCEPT_REPORT_VISIBLE
+PII     1N C   4               =Q_FINAL_REPORT_VISIBLE                                             \=Q_FINAL_REPORT_VISIBLE
+PII     1N C   4               =Q_MAKE_FINAL_VISIBLE                                               \=Q_MAKE_FINAL_VISIBLE
+
+
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_Map08_Paragraaf09
+PPP     1A     4               =Q_Map08_WARNING                                                    =Q_Map08_WARNING
+PPP     1A     4               =Q_Map08_INFO                                                       =Q_Map08_INFO
+PPP     1A     4               =Q_Map08_VALIDATION                                                 =Q_Map08_VALIDATION
+PPP   0 1N     4               =Q_Map08_REQUIREDVARS                                               =Q_Map08_REQUIREDVARS
+PPP   0 1N     4               =Q_Map08_ENTEREDREQUIREDVARS                                        =Q_Map08_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map08_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (8)<$                                    \Q_Map08_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (8)<$                          \Q_Map08_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP08_REQUIREDVARS           = 1;Count(X,SelectDescendants(Q_MAP08, Q_MAP08_Hulpvariabelen),InputRequired(X))
+Q_MAP08_ENTEREDREQUIREDVARS    = 1;Count(X,SelectDescendants(Q_MAP08, Q_MAP08_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP08                        = (Q_MAP08_ENTEREDREQUIREDVARS=Q_MAP08_REQUIREDVARS)
+Q_MAP08_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP08_INFO                   = &If(Q_Map08[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP08_VALIDATION             =
+
+.Choices
+Q_Map08                        = Q_ROOT
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Map 10:<$ Grafieken                                               \Q_MAP0A
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 8<$                                              \Q_MAP0A_WARNING
+PPP     1A     3               $>Info bij stap 8<$                                                 \Q_MAP0A_INFO
+PPP     1A     3               $>Validatie stap 8<$                                                \Q_MAP0A_VALIDATION
+
+PII     1N     3               $>Grafiek resultatenrekening<$                                      \GraphResRek
+PII     FN     4               =NetSales                                                           \GraphResRek1=NetSales
+PII     FN     4               =CostOfSales                                                        \GraphResRek2=CostOfSales
+
+
+.Variables
+PPP     1N     3               $>Eigenschappen van de stap<$                                       \Q_MAP0A_Paragraaf09
+PPP     1M     4               =Q_MAP0A_WARNING                                                    =Q_MAP0A_WARNING
+PPP     1A M   4               =Q_MAP0A_INFO                                                       =Q_MAP0A_INFO
+PPP     1A M   4               =Q_MAP0A_VALIDATION                                                 =Q_MAP0A_VALIDATION
+PPP   0 1N     4               =Q_MAP0A_REQUIREDVARS                                               =Q_MAP0A_REQUIREDVARS
+PPP   0 1N     4               =Q_MAP0A_ENTEREDREQUIREDVARS                                        =Q_MAP0A_ENTEREDREQUIREDVARS
+
+;==============================
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_MAP0A_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (8)<$                                    \Q_MAP0A_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (8)<$                          \Q_MAP0A_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_MAP0A_REQUIREDVARS           = 1;Count(X,SelectDescendants(Q_MAP0A, Q_MAP0A_Hulpvariabelen),InputRequired(X))
+Q_MAP0A_ENTEREDREQUIREDVARS    = 1;Count(X,SelectDescendants(Q_MAP0A, Q_MAP0A_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_MAP0A                        = (Q_MAP0A_ENTEREDREQUIREDVARS=Q_MAP0A_REQUIREDVARS)
+Q_MAP0A_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_MAP0A_INFO                   = &If(Q_MAP0A[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_MAP0A_VALIDATION             =
+
+.Choices
+Q_MAP0A                        = Q_ROOT
+
+;================================================================================================================================
+
+;------------------------------ Result
+.Variables
+PPP     1A   1 2               Resultaat                                                           \Q_RESULT
+PPP     1A     3               =Q_RESULT                                                           \=Q_RESULT
+
+.Formulas NoTrend
+Q_RESULT                       = &If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+
+;------------------------------- STATUS
+.Variables
+PII     1N C 1 2               "Status"                                                            \Q_STATUS
+PII     1N D   2               "Definitief gemaakt op:"                                            \Q_STATUS_FINAL_ON
+PII     1A     2               "Definitief gemaakt door (gebruikersnaam):"                         \Q_STATUS_FINAL_BY
+PII     1A     2               "Definitief gemaakt door (volledige naam):"                         \Q_STATUS_FINAL_BY_NAME
+PII     1N D   2               "Aangemaakt op:"                                                    \Q_STATUS_STARTED_ON
+PII     1A     2               "Aangemaakt door (gebruikersnaam):"                                 \Q_STATUS_STARTED_BY
+PII     1A     2               "Aangemaakt door (volledige naam):"                                 \Q_STATUS_STARTED_BY_NAME
+
+PPP     1A     2  +            "Modelversie"                                                       \ModelVersion
+PPP     1A     2  +            "Modeltype"                                                         \ModelType
+PII     1A     2  +            "Parametersversie"                                                  \MatrixVersion
+C Bij het definitief maken wordt de waarde 'vastgezet'.
+
+PII     1N C   2               "Vorige"                                                            \Q_PREVIOUS_BUTTON_VISIBLE
+PII     1N C   2               "Volgende"                                                          \Q_NEXT_BUTTON_VISIBLE
+PII     1N C   2               "Concept rapport"                                                   \Q_CONCEPT_REPORT_VISIBLE
+PII     1N C   2               "Definitief maken"                                                  \Q_MAKE_FINAL_VISIBLE
+PII     1N C   2               "Definitief rapport"                                                \Q_FINAL_REPORT_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE       = "1:Ja|0:Nee"
+Q_FINAL_REPORT_VISIBLE         = "1:Ja|0:Nee"
+Q_MAKE_FINAL_VISIBLE           = "1:Ja|0:Nee"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+Q_MAKE_FINAL_VISIBLE           = 1
+
+
+.Formulas NoTrend
+ModelVersion                   = "#ModelVersion#"
+MatrixVersion                  = &MatrixLookup("ScorecardTestModel.xls","Version",1,3)
+Q_STATUS                       = 0
+ModelType                      = "TEST"
+
+.Choices
+Q_STATUS                       = "0:Actief|1:Defintief"
+
+;===========================================================================================================
+
+;------------------------------ Result
+.Variables
+PPP     1A   1 1               Hulpvariabelen                                                      \HULPVARS
+
+
+;------------------------------ Knock-out
+.Variables
+PPP     1M     2               Knock-out(s)?                                                       \Q_WARNING_GLOBAL
+PPP     1A     3               Map6 - Vraag 6                                                      \Q_WARNING_01
+PPP     1M     3               Knock-out tekst                                                     \Q_WARNING_GLOBALTXT
+
+.Formulas NoTrend
+Q_WARNING_01                   = &If( Q_Map06_Vraag02[1]=1,"- Map6 - Vraag 2: Is er een knockout van toepassing? JA","")
+Q_WARNING_GLOBALTXT            = &If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],"")
+Q_WARNING_GLOBAL               = &If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&"")
+
+;------------------------------ Knock-out
+.Variables
+PPP     1M     2               $>Restricties<$                                                     \Q_RESTRICTIES
+PPP     1A     3                                                                                   \Q_RESTRICTIES_01
+PPP     1A     3                                                                                   \Q_RESTRICTIES_02
+PPP     1M   1 3               Restricties tekst                                                   \Q_RESTRICTIESTXT
+
+.Formulas NoTrend
+Q_RESTRICTIES_01               = &If( (Q_Map06_Vraag01>=-10) And (Q_Map06_Vraag01<=10),"","- Getal van [url=Q_Map06_Vraag01] Map 6 Vraag 1[/url] ligt niet tussen -10 en 10")
+Q_RESTRICTIESTXT               = &If( Length(&Q_RESTRICTIES_01[1])>0,&"[br][/br]"&Q_RESTRICTIES_01[1],"")
+Q_RESTRICTIES                  = &If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&"")
+
+.FesEvent Q_STATUS_FINAL_ON, AfterInput= (SetValue(MatrixVersion, MatrixVersion, true)) /Add
+
+.Quit
+
+

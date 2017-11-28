@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+	<Head>
+    <CodeList>Belfirst</CodeList>
+    <CodeListVersion>2.0</CodeListVersion>
+    <Description>Belfirst (BVD)</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>Yes</MultiLevelDataWhenSource>
+    <DCSignedValues>No</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FMT4 Mastermodel Belfirst.xlsx</Creator>
+    <CreatorVersion>1.0</CreatorVersion>
+    <BuildDate>2015-10-25</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes></Notes>
+	</Head>
+  <Accounts>
+    <Account><Code>NoData</Code><Description>Algemeen formaat (Global format)</Description><Level>1</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>2058</Code><Description>Totaal der activa</Description><Level>2</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>2028</Code><Description>Vaste activa</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10701</Code><Description>Immateriële vaste activa</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>2227</Code><Description>Materiële vaste activa</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>28</Code><Description>Financiële vaste activa</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>2958</Code><Description>Vlottende activa</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>3</Code><Description>Voorraden</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10702</Code><Description>Handelsvorderingen</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10771</Code><Description>Overige vlottende activa</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10703</Code><Description>waarvan Geldbeleggingen en liquide middelen</Description><Level>5</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>1049</Code><Description>Totaal der passiva</Description><Level>2</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10764</Code><Description>Eigen vermogen</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10</Code><Description>Kapitaal</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10723</Code><Description>Overig eigen vermogen</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10704</Code><Description>Schulden op meer dan één jaar</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>1704</Code><Description>Financïele schulden</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10714</Code><Description>Overige schulden op meer dan één jaar</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>1605</Code><Description>waarvan voorzieningen</Description><Level>5</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10705</Code><Description>Schulden op ten hoogste één jaar</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>43</Code><Description>Handelskredieten</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>4404</Code><Description>Leveranciers</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10715</Code><Description>Overige schulden op ten hoogste één jaar</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Memo</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10706</Code><Description>Permanent vermogen</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>2028</Code><Description>Vaste activa</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10707</Code><Description>Netto bedrijfskapitaal</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10708</Code><Description>Werkkapitaal</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>90</Code><Description>Gemiddeld personeelsbestand</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Resultatenrekening</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>7074</Code><Description>Bedrijfsopbrengsten</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>70</Code><Description>waarvan Omzet</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10773</Code><Description>Kosten van de verkochten goederen</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10774</Code><Description>Bruto marge</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator>=</SumOperator></Account>
+    <Account><Code>10775</Code><Description>Bedrijfskosten</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>9901</Code><Description>Bedrijfsresultaat (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator>=</SumOperator></Account>
+    <Account><Code>10717</Code><Description>Financieel resultaat</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>75</Code><Description>Financïele opbrengsten</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>65</Code><Description>Financïele kosten</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>9902</Code><Description>Courante resultaat vóór belasting (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator>=</SumOperator></Account>
+    <Account><Code>10711</Code><Description>Belastingen</Description><Level>3</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10712</Code><Description>Courante resultaat na belasting (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator>=</SumOperator></Account>
+    <Account><Code>10718</Code><Description>Uitzonderlijk resultaat (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10765</Code><Description>Uitzonderlijke opbrengsten</Description><Level>4</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10766</Code><Description>Uitzonderlijke kosten</Description><Level>4</Level><DC>D</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>9904</Code><Description>Resultaat van het boekjaar (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree>1</IsInCalcTree><SumOperator>=</SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Memo</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10763</Code><Description>Resultaat van het boekjaar (voor geconsolideerde jrrk.) (+/-)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10730</Code><Description>Bedrijfskosten</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>6061</Code><Description>Handelsgoed., grondst. en diensten</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>60</Code><Description>Handelsgeod., grondstoffen &amp;hulpstukken</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>62</Code><Description>Personeelskosten</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10772</Code><Description>Waardevermindering</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10716</Code><Description>Andere bedrijfskosten</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>650</Code><Description>Kosten van schulden</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10776</Code><Description>O&amp;O-uitgaven</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10710</Code><Description>Cash flow</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10709</Code><Description>Toegevoegde waarde (Excl. BTW)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10777</Code><Description>EBIT</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10778</Code><Description>EBITDA</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10779</Code><Description>EBIT (CNC)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>10780</Code><Description>EBITDA (CNC)</Description><Level>3</Level><DC>C</DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+  </Accounts>
+</FmtMappingModel>

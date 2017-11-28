@@ -1,0 +1,3636 @@
+<FmtMappingModel>
+  <Head>
+    <CodeList>TDSCPRICING</CodeList>
+    <CodeListVersion>1.0.3.4</CodeListVersion>
+    <Description>Loan Pricing Tool</Description>
+    <CodeTrimmingWhenSource>false</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>false</MultiLevelDataWhenSource>
+    <LeveledMappingWhenTarget>true</LeveledMappingWhenTarget>
+    <DCSignedValues>false</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FINAN</Creator>
+    <CreatorVersion>3.2.47.3</CreatorVersion>
+    <BuildDate>01-10-2014 17:25:41</BuildDate>
+    <BuildUser>E.J.Stokking</BuildUser>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+    <Account>
+      <Code>Root</Code>
+      <Description>Presentation model</Description>
+      <Level>0</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RootSub1</Code>
+      <Description>General variables for webclient</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_LAYOUTNR</Code>
+      <Description>Layout</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_EXCHANGE_RATES</Code>
+      <Description>Wisselkoersen</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_LAYOUT</Code>
+      <Description>Layout name</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_FLATINPUT</Code>
+      <Description>Is flat input used? (1=yes)</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_PROJECTION_PROFILE</Code>
+      <Description>Prognoseprofiel</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMN_ORDER</Code>
+      <Description>Column order</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMN_VISIBLE</Code>
+      <Description>Column visible</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_STARTDATEPERIOD</Code>
+      <Description>Start Date Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_ENDDATEPERIOD</Code>
+      <Description>End Date Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_BASECURRENCYPERIOD</Code>
+      <Description>Base Currency Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_VIEWCURRENCYPERIOD</Code>
+      <Description>View Currency Period</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FES_COLUMNTYPE</Code>
+      <Description>Column Type</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RootSub2</Code>
+      <Description>General variables for FPS database</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>None</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Naam</Code>
+      <Description>NAME</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Relatienummer</Code>
+      <Description>CUSTOMERNUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_KVKnr</Code>
+      <Description>CHAMBEROFCOMMERCENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Rechtsvorm_nr</Code>
+      <Description>LEGALSTATUSCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Rechtsvorm_omschr</Code>
+      <Description>LEGALSTATUSDESCRIPTION</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BIK_CODE</Code>
+      <Description>SECTOROFINDUSTRYCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BIK_Omschr</Code>
+      <Description>SECTOROFINDUSTRYDESCRIPTION</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_GridId</Code>
+      <Description>GRIDID</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Accountmanager</Code>
+      <Description>ACCOUNTMANAGER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Kantoor</Code>
+      <Description>OFFICENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Straat</Code>
+      <Description>STREET</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Housenumber</Code>
+      <Description>HOUSENUMBER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Postcode</Code>
+      <Description>ZIPCODE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Woonplaats</Code>
+      <Description>CITY</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Provincie</Code>
+      <Description>STATEORPROVINCE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Land</Code>
+      <Description>COUNTRY</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_BvDID</Code>
+      <Description>Bureau van Dijk ID</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Telefoon</Code>
+      <Description>Telefoonnummer</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_VAR_Emailadres</Code>
+      <Description>Emailadres</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_FINAN_USER_ROLES</Code>
+      <Description>FPS_FINAN_USER_ROLES</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>FPS_FINAN_USER</Code>
+      <Description>FPS_FINAN_USER</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_ROOT</Code>
+      <Description>Loan Pricing Tool</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01</Code>
+      <Description>Rating</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_WARNING</Code>
+      <Description>Warning voor map</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_INFO</Code>
+      <Description>Info bij stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_VALIDATION</Code>
+      <Description>Validatie stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01A_Algemeen</Code>
+      <Description>ID Entry</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_ModelVersion</Code>
+      <Description>Modelversion:</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MatrixVersion</Code>
+      <Description>Parameters version:</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP01_Paragraaf1</Code>
+      <Description>Rating (Calculated)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>IMPORT_Rating</Code>
+      <Description>Rating</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>IMPORT_PD</Code>
+      <Description>Probability of Default</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP01_Paragraaf2</Code>
+      <Description>Rating (Used)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Rating</Code>
+      <Description>Rating</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>PD</Code>
+      <Description>Probability of Default</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RatingMemo</Code>
+      <Description>Explanation</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP01_Hulpvariabelen</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_REQUIREDVARS</Code>
+      <Description>Aantal verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map01_ENTEREDREQUIREDVARS</Code>
+      <Description>Aantal ingevulde verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02</Code>
+      <Description>Facility</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_WARNING</Code>
+      <Description>Warning voor map</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_INFO</Code>
+      <Description>Info bij stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_VALIDATION</Code>
+      <Description>Validatie stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map02_Paragraaf01</Code>
+      <Description>Facility</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpStatus</Code>
+      <Description>Status</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpName</Code>
+      <Description>Naam</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpID</Code>
+      <Description>Accountnumber</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpLender</Code>
+      <Description>Lender</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpType</Code>
+      <Description>Type</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPrincipalLimit</Code>
+      <Description>Principal / Limit</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpMaturity</Code>
+      <Description>Duration (months)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRepaymentType</Code>
+      <Description>Repayment type</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPaymentFrequency</Code>
+      <Description>Interest payments and repayments  each</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpInterestProduct</Code>
+      <Description>Interest product</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpFixedInterestPayment</Code>
+      <Description>Fixed interest period (months)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPD</Code>
+      <Description>Probability of Default (Corrected for maturity)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPD</Code>
+      <Description>Probability of Default (Corrected for maturity)</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEAD</Code>
+      <Description>Exposure At Default</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEL</Code>
+      <Description>Expected Loss</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpLGD</Code>
+      <Description>Loss Given Default</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral</Code>
+      <Description></Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpDiscount</Code>
+      <Description>Discount</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpExecutionValue</Code>
+      <Description>Execution value</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpEconomicCapitalCoverage</Code>
+      <Description>LGD percentage (EC)</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRegulatoryCapitalCoverage</Code>
+      <Description>LGD percentage (RC)</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpAllocationPercentage</Code>
+      <Description>Allocation percentage</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRecoveryValueEC</Code>
+      <Description>Collateral value</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRecoveryValueRC</Code>
+      <Description>Collateral value</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralFacility</Code>
+      <Description>Collaterals allocated to facility</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralNotAllocated</Code>
+      <Description>Collaterals NOT allocated to facility</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>CollateralNotAllocatedTotal</Code>
+      <Description>Total collaterals (not allocated to facilities)</Description>
+      <Level>7</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralTotal</Code>
+      <Description>Total Collaterals in Facility</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_Hulpvariabelen</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_REQUIREDVARS</Code>
+      <Description>Aantal verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP02_ENTEREDREQUIREDVARS</Code>
+      <Description>Aantal ingevulde verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map07</Code>
+      <Description>Interest rates</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_WARNING</Code>
+      <Description>Warning voor map</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_INFO</Code>
+      <Description>Info bij stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_VALIDATION</Code>
+      <Description>Validatie stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map07_Paragraaf01</Code>
+      <Description>System Calculated Interest Rate</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProposedRate</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map07_Paragraaf02</Code>
+      <Description>Interest rates (Real)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRealRate</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpFunding</Code>
+      <Description>Funding</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRiskPremium</Code>
+      <Description>Risk premium</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProcesCostsPercentage</Code>
+      <Description>Process costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpReturnPercentage</Code>
+      <Description>Return</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRealRate</Code>
+      <Description>Real rate</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>FacilityView_Leeg</Code>
+      <Description></Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpInterestMargin</Code>
+      <Description>Interest margin</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProcesCostsAbsolute</Code>
+      <Description>Proces costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEL</Code>
+      <Description>Expected Loss</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpTax</Code>
+      <Description>Taxes</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpCapitalCostsAbsolute</Code>
+      <Description>Capital costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpReturnAbsolute</Code>
+      <Description>Return</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRAROC</Code>
+      <Description>RAROC</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map07_Paragraaf03</Code>
+      <Description>RAROC</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRAROC</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_Hulpvariabelen</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_REQUIREDVARS</Code>
+      <Description>Aantal verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP07_ENTEREDREQUIREDVARS</Code>
+      <Description>Aantal ingevulde verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_Map00</Code>
+      <Description>Data imported from Force</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_WARNING</Code>
+      <Description>Warning voor map</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_INFO</Code>
+      <Description>Info bij stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_VALIDATION</Code>
+      <Description>Validatie stap</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAPRATING</Code>
+      <Description>Rating</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>IMPORT_Rating</Code>
+      <Description>Rating</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>IMPORT_PD</Code>
+      <Description>Probability of Default</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_Paragraaf01</Code>
+      <Description>Collaterals (not allocated to facilities)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpID</Code>
+      <Description>ID</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpStatusName</Code>
+      <Description>Status</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpStatus</Code>
+      <Description>Status</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpName</Code>
+      <Description>Description</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpType</Code>
+      <Description>Type</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpRegistrationValue</Code>
+      <Description>Mortgage registration</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpRank</Code>
+      <Description>Rank</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpDiscount</Code>
+      <Description>Discount</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpExecutionValue</Code>
+      <Description>Execution value</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpEconomicCapitalCoverage</Code>
+      <Description>LGD percentage (EC)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpRegulatoryCapitalCoverage</Code>
+      <Description>LGD percentage (RC)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpAllocationPercentage</Code>
+      <Description>Allocation percentage</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpRecoveryValueEC</Code>
+      <Description>Collateral value (EC)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Collateral_tpRecoveryValueRC</Code>
+      <Description>Collateral value (RC)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>CollateralNotAllocatedTotal</Code>
+      <Description>Total collaterals (not allocated to facilities)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_Paragraaf02</Code>
+      <Description>Facilities</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility</Code>
+      <Description></Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpID</Code>
+      <Description>Accountnumber</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpStatusName</Code>
+      <Description>Status</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpStatus</Code>
+      <Description>Status</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpName</Code>
+      <Description>Naam</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpLender</Code>
+      <Description>Lender</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpType</Code>
+      <Description>Type</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPrincipalLimit</Code>
+      <Description>Principal / Limit</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpMaturity</Code>
+      <Description>Duration (months)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRepaymentType</Code>
+      <Description>Repayment type</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPaymentFrequency</Code>
+      <Description>Interest payments and repayments  each</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpInterestProduct</Code>
+      <Description>Interest product</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpFixedInterestPayment</Code>
+      <Description>Fixed interest period (months)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRisico</Code>
+      <Description>Risk </Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPD1Year</Code>
+      <Description>Probability of Default (1 Year)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpAverageDuration</Code>
+      <Description>Average duration facility</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpPD</Code>
+      <Description>Probability of Default (Corrected for maturity)</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpLGD</Code>
+      <Description>Loss Given Default</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEAD</Code>
+      <Description>Exposure At Default</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEC</Code>
+      <Description>Economic Capital Credit Risk</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpECOperationalRisk</Code>
+      <Description>Economic Capital Operational Risk</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpECTotal</Code>
+      <Description>Economic Capital Total</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRate</Code>
+      <Description>Rate </Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpFunding</Code>
+      <Description>Funding</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRiskPremium</Code>
+      <Description>Risk premium</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProcesCostsPercentage</Code>
+      <Description>Process costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpReturnPercentage</Code>
+      <Description>Return</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProposedRate</Code>
+      <Description>Proposed rate</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRealRate</Code>
+      <Description>Real rate</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRendement2</Code>
+      <Description>Return </Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpInterestMargin</Code>
+      <Description>Interest margin</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpProcesCostsAbsolute</Code>
+      <Description>Proces costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpEL</Code>
+      <Description>Expected Loss</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpTax</Code>
+      <Description>Taxes</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpCapitalCostsAbsolute</Code>
+      <Description>Capital costs</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpReturnAbsolute</Code>
+      <Description>Return</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpRAROC</Code>
+      <Description>RAROC</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpOther</Code>
+      <Description>Overige</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpAverageDurationEC</Code>
+      <Description>Durationfactors EC</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpAverageDurationEL</Code>
+      <Description>Durationfactors EL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_tpTotal</Code>
+      <Description>Total</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral</Code>
+      <Description></Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpID</Code>
+      <Description>ID</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpStatusName</Code>
+      <Description>Status</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpStatus</Code>
+      <Description>Status</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpName</Code>
+      <Description>Description</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpType</Code>
+      <Description>Type</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRegistrationValue</Code>
+      <Description>Mortgage registration</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRank</Code>
+      <Description>Rank</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpDiscount</Code>
+      <Description>Discount</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpExecutionValue</Code>
+      <Description>Execution value</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpEconomicCapitalCoverage</Code>
+      <Description>LGD percentage (EC)</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRegulatoryCapitalCoverage</Code>
+      <Description>LGD percentage (RC)</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpAllocationPercentage</Code>
+      <Description>Allocation percentage</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRecoveryValueEC</Code>
+      <Description>Collateral value</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_Collateral_tpRecoveryValueRC</Code>
+      <Description>Collateral value</Description>
+      <Level>6</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility_Collateral</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralFacility</Code>
+      <Description>Collaterals assigned to facility</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralNotAllocated</Code>
+      <Description>Collaterals NOT allocated to facility</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>Facility_CollateralTotal</Code>
+      <Description>Total Collaterals in Facility</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple>Facility</InTuple>
+    </Account>
+    <Account>
+      <Code>FacilityTotal</Code>
+      <Description>Total</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Assumptions</Code>
+      <Description>Assumptions</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ConfidenceLevel</Code>
+      <Description>Confidence Level</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>HurdleRate</Code>
+      <Description>HurdleRate</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>RendementseisBank</Code>
+      <Description>Rendementseis EV Bank</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Taxrate</Code>
+      <Description>Belasting Tarief</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ProcesCostsModelPercentage</Code>
+      <Description>Proces Kosten</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>LGDMaximum</Code>
+      <Description>LGD Maximum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>LGDMinimum</Code>
+      <Description>LGD Minimum</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>DurationMaximumAverage</Code>
+      <Description>Duration Maximum average</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>MinimumPD</Code>
+      <Description>Minimum PD</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>MaxPD</Code>
+      <Description>Maximum PD</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Correlation</Code>
+      <Description>Correlation</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>DefaultFundingPerc</Code>
+      <Description>Default Funding Percentage</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_Hulpvariabelen</Code>
+      <Description>Hulpvariabelen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_REQUIREDVARS</Code>
+      <Description>Aantal verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAP00_ENTEREDREQUIREDVARS</Code>
+      <Description>Aantal ingevulde verplichte velden (1)</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESULT</Code>
+      <Description>Resultaten</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_RESULT</Code>
+      <Description>Resultaten</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS</Code>
+      <Description>Status</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_FINAL_ON</Code>
+      <Description>Made final on:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_FINAL_BY</Code>
+      <Description>Made final by:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_STARTED_ON</Code>
+      <Description>Created on:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_STARTED_BY</Code>
+      <Description>Created by:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_STATUS_MODIFIED_ON</Code>
+      <Description>Last modification:</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_ModelVersion</Code>
+      <Description>Model version</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_ModelType</Code>
+      <Description>Model type</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MatrixVersion</Code>
+      <Description>Matrix version</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_PREVIOUS_BUTTON_VISIBLE</Code>
+      <Description>Previous</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_NEXT_BUTTON_VISIBLE</Code>
+      <Description>Next</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_CONCEPT_REPORT_VISIBLE</Code>
+      <Description>Draft report</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_FINAL_REPORT_VISIBLE</Code>
+      <Description>Final report</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_MAKE_FINAL_VISIBLE</Code>
+      <Description>Make it final</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Hulpvariabelen</Code>
+      <Description>Overige berekeningen</Description>
+      <Level>1</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>Q_WARNING_GLOBAL</Code>
+      <Description>Knockout(s)?</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>scKnockoutsCombi</Code>
+      <Description>Knockouts tekst</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>scRestricties</Code>
+      <Description>Restricties</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>scRestrictiesCombi</Code>
+      <Description>Restricties tekst</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>COMPLETE</Code>
+      <Description>COMPLETE</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+    <Account>
+      <Code>ShowHiddenFields</Code>
+      <Description>Show Hidden fields</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator> </SumOperator>
+      <Frequency>Single</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <InTuple></InTuple>
+    </Account>
+  </Accounts>
+</FmtMappingModel>

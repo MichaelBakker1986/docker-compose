@@ -1,0 +1,37 @@
+{&&Language=English}
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+;;0:
+1: $>Public limited company (Plc)<$
+2: $>Limited liability company (Ltd)<$
+3: $>Co-operative association<$
+4: $>Onderlinge Waarborgmaatschappij<$
+5: $>Foundation<$
+6: $>Association<$
+7: $>Religious community<$
+;;8:
+;;9:
+;;10:
+11: $>General partnership<$
+12: $>sole proprietorship<$
+13: $>Limited partnership<$
+14: $>Partnership<$
+15: $>n.a.<$

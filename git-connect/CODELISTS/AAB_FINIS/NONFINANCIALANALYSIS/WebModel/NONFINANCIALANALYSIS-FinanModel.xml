@@ -1,0 +1,2488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FinanModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<FormulaSets>
+    <FormulaSet Name="NoTrend">
+      <Caption>hist</Caption>
+    </FormulaSet>
+    <FormulaSet Name="Trend">
+      <Caption>progn</Caption>
+    </FormulaSet>
+  </FormulaSets>
+<Patterns/>
+<Head>
+<Name>NONFINANCIALANALYSIS</Name>
+<Title>ABN AMRO Bank NONFINANCIALANALYSIS</Title>
+<Hint/>
+<BuildDate>13-07-2016 13:22</BuildDate>
+<BuildUser>Sam.Habiboellah</BuildUser>
+<FinanVersion>03.02.056.000</FinanVersion>
+<ModelVersion>00.13.000.000</ModelVersion>
+<EnableNewDocument>Yes</EnableNewDocument>
+<IsSectorModel>No</IsSectorModel>
+</Head>
+<CalculationVariable Name="Root">
+<DataType>NoData</DataType>
+<Frequency>None</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+				<Formula>"NONFINANCIALANALYSIS v0.13"</Formula>
+				<IsLocked>1</IsLocked>
+				<IsVisible>1</IsVisible>
+			</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="Q_ROOT">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>Q_Map01[1]</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+						<Formula>"ABN AMRO Bank NONFINANCIALANALYSIS      (v0.13)"</Formula>
+						<IsLocked>1</IsLocked>
+						<IsVisible>1</IsVisible>
+					</Title>
+<FixedDecimals/>
+<Template>0:Complete|1:Incomplete</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint>ABN AMRO Bank NONFINANCIALANALYSIS</Hint>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="Q_Map01">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+								<Formula>"NONFINANCIALANALYSIS"</Formula>
+								<IsLocked>1</IsLocked>
+								<IsVisible>1</IsVisible>
+							</Title>
+<FixedDecimals/>
+<Template>0:Incomplete|1:Complete</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="ClientAnalysis">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula>"Client Analysis"</Formula>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="BusinessAndOperations">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"[b]Business &amp; Operations[/b]"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ClientAnalysis_CurrentRatio">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Current ratio"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>2</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ClientAnalysis_GrossTurnover">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Gross turnover"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="CompanyAnalysis">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Company Analysis"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint>Please give a extensive analyses on the company</Hint>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ManagementStructure">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"[b]Management Structure[/b]"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ManagementAnalysis_Plan">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is the board able to plan activities and results?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>0</FixedDecimals>
+<Template>0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ManagementAnalysis_Monitor">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is the board able to monitor activities and results?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>0</FixedDecimals>
+<Template>0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ManagementAnalysis_Control">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is the board able to control activities and results?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>0</FixedDecimals>
+<Template>0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ManagementAnalysis">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Management Analysis"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint>Please give a extensive analyses on the management</Hint>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="BusinessRisksAnalysis">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"[b]Business risks analysis[/b]"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="AmountOfSuppliers">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Amount of suppliers"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="SufficientStock">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Sufficient stock is kept to ensure normal supplies?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ObsoleteInventory">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is there any sign of obsolete inventory?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="DependableDebtors">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is there any concentration of dependable debtors?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="EconomicConditions">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"What is the impact of the current economic conditions?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template>1:Negative|2:Neutral|3:Positive</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="CompanyReputation">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Is there reason to doubt the reputation of the company?"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ExecutiveAnalysis">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Executive Analysis"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint>Please give a extensive analyses on the executives</Hint>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="FinancialAnalysis">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula>"Financial Analysis"</Formula>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="NetSalesSection">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Turnover Section"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>Yes</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="NetSales">
+<DataType>Currency</DataType>
+<Frequency>Detail</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>Yes</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>Sum</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+<CalculationFormulaSet Name="Trend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Turnover"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>1</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>Yes</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ReasoningNetSales">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Reasoning"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="NetSalesActive">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Turnover"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="NetSalesMandatory">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula>MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","NetSales",1)</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Turnover"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="SolvencyRatioSection">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Solvency Section"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>Yes</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="SolvencyRatio">
+<DataType>Number</DataType>
+<Frequency>Detail</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>Yes</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>Calc</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+<CalculationFormulaSet Name="Trend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Solvency"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals>1</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>1</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ReasoningSolvencyRatio">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Reasoning"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="SolvencyRatioActive">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Solvency"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="SolvencyRatioMandatory">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula>MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","SolvencyRatio",1)</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Solvency"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="CurrentRatioSection">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Current Ratio Section"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>Yes</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="CurrentRatio">
+<DataType>Number</DataType>
+<Frequency>Detail</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>Calc</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+<CalculationFormulaSet Name="Trend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Current Ratio"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals>2</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>1</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ReasoningCurrentRatio">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Reasoning"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="CurrentRatioActive">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Current Ratio"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="CurrentRatioMandatory">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula>MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","CurrentRatio",1)</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Current Ratio"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="DebtToEBITDASection">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Total Debt to EBITDA Section"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>Yes</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="DebtToEBITDA">
+<DataType>Number</DataType>
+<Frequency>Detail</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>Yes</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>Calc</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+<CalculationFormulaSet Name="Trend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Total Debt to EBITDA"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals>2</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>1</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="ReasoningDebtToEBITDA">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Reasoning"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="DebtToEBITDAActive">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Total Debt to EBITDA"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="DebtToEBITDAMandatory">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula>MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","DebtToEBITDA",1)</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Total Debt to EBITDA"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</FinanModel>

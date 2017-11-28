@@ -1,0 +1,47 @@
+; Inc_BelfirstTitles.fin
+; DY apr 2015
+;
+
+.Formulas Title
+TupleLongTermDebtsOtherCat2       = Suppliers (trade debts)
+LongTermDebtOtherCat2_tpBookValue = Suppliers (trade debts)
+TupleLongTermDebtsOtherCat2Total  = Suppliers (trade debts)
+
+TupleLongTermDebtsOtherCat3       = Advances received on contracts in progress
+LongTermDebtOtherCat3_tpBookValue = Advances received on contracts in progress
+TupleLongTermDebtsOtherCat3Total  = Advances received on contracts in progress
+
+TupleLongTermDebtsOtherCat4       = Other loans (amounts payable after one year)
+LongTermDebtOtherCat4_tpBookValue = Other loans (amounts payable after one year)
+TupleLongTermDebtsOtherCat4Total  = Other loans (amounts payable after one year)
+
+TotalOtherIntangibleFixedAssets              = Formation expenses
+OtherIntangibleFixedAssets_tpBookvalue       = Formation expenses
+TupleOtherIntangibleFixedAssets              = Formation expenses
+
+TradeReceivablesTotal                        = Trade debtors                                                   
+MarketableSecurities                         = Investments and cash at bank and in hand                        
+OperationalCashTotal                         = Cash at bank and in hand                                        
+SharedCapital                                = Capital                                                         
+StatutoryReserve                             = Legal reserve                                                   
+ReservedProfit                               = Accumulated profit (loss)                                       
+OtherReserveCat4                             = Reserves not available for distribution                         
+OtherReserveCat2                             = Investment grants                                               
+OtherReserveCat3                             = Advance to associates on the sharing out of the assets           
+OtherReserveCat5                             = Reserves available for distribution                             
+OtherReserveCat6                             = Untaxed reserves                                                
+Provisions                                   = Provisions and postponed taxes                                  
+OverdraftCurrentAccount                      = Debts in current account (financial debts - credit institutions)
+TradePayablesTotal                           = Suppliers                                                       
+SocialSecuritiesPremiumsPayable              = Remuneration & social security obligations                      
+PersonnelExpenses                            = Remuneration, social security costs and pensions                
+OtherOperatingExpensesUnspecifiedCat2        = Decrease (-) in provisions for liabilities and charges          
+OtherOperatingExpensesUnspecifiedCat3        = Operating charges capitalised as restructuring costs (-)        
+TaxOnProfitsOther                            = Transfer to deferred taxes                                      
+TaxOnProfitsRevision                         = Transfer from untaxed reserves and postponed taxes
+OperatingProvisions                          = Provisions for other liabilities and charges (untaxed)          
+SharedCapitalOrdinaryShares                  = Issued capital                                                  
+TreasuryShares                               = Uncalled capital (-)                                            
+DebtServiceCoverage                          = Free Cashflow (DSC)
+DebtServiceCoverageAnnualized                = Free Cashflow Annualized (DSC)
+.Variables

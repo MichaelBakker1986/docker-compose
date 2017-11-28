@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="make-zipfile" name="Make_ZipFile">
+	<tstamp>
+        <format property="ldt" pattern="yyyy-MM-dd_HHmm" locale="en,UK" />
+	</tstamp>
+
+   	<target name="make-zipfile" description="Make the ZipFile">
+
+        <!-- =========================================================================== -->
+        <!-- ZIP  -->
+		<zip destfile="${basedir}/_ZipFile/MODEL.zip">
+			<mappedresources>
+				<zipfileset file="${basedir}/Lacent/JAR/models.LSM.model"/>
+			</mappedresources>
+		</zip>
+    </target>
+</project>

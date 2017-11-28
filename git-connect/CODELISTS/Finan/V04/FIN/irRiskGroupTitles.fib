@@ -1,0 +1,31 @@
+{&&Language=English}
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+;;0:
+;1: $>Public limited company (Plc)<$
+
+1: 1 - $>Agricultural<$
+2: 2 - $>Industry and construction<$
+3: 3 - $>Non-profit<$
+4: 4 - $>Retail<$
+5: 5 - $>Hotel and catering industry<$
+6: 6 - $>Logistics<$
+7: 7 - $>Services<$

@@ -1,0 +1,9 @@
+; file krPdToIfdRating.fib
+; PD to IFD Rating (Initiative Finanzstandort Deutschland)
+
+<=0.0030: 1  ; "I"
+<=0.0070: 2  ; "II"
+<=0.0150: 3  ; "III"
+<=0.0300: 4  ; "IV"
+<=0.0800: 5  ; "V"
+>0.0800:  6  ; "VI"

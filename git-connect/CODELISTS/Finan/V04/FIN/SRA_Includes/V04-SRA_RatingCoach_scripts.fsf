@@ -1,0 +1,19 @@
+{&&Language=English};99
+;
+; Model             : V02-1.FSF
+; Language          : NL
+; Description       : Aktielijst onder menuitem Action
+;
+;=============================================================================
+;; Scripts SRA Rating Coach 
+
+.Script      Name=SRA_RC_FinanPrognose,Title="Activeren FINAN Prognose"
+.Event       AfterNewData 
+  .InputVar  ForecastDefault[1] = 100 
+.EndScript
+
+.Script      Name=SRA_RC_HideSummary,Title="Map samenvatting verbergen"
+.Event       AfterNewData
+.Event       AfterLoadData 
+  .HideVar   Summary
+.EndScript

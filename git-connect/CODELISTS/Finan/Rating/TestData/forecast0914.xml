@@ -1,0 +1,229 @@
+<?xml version='1.1' encoding='utf-8'?>
+<finanDocument version="1" noNamespaceSchemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <author>FES-null</author>
+    <documentInfo />
+    <modelInfo>
+      <name>RATING</name>
+      <version>0.0.1.0</version>
+    </modelInfo>
+    <userInfo>
+      <name>admin@finan.nl</name>
+    </userInfo>
+    <currencies>
+      <currency context="script" name="EUR" />
+      <currency context="view" name="BASE" />
+    </currencies>
+    <scaleValues>
+      <scaleValue context="script">1</scaleValue>
+      <scaleValue context="view">1</scaleValue>
+    </scaleValues>
+    <creationDate>27-8-2014</creationDate>
+    <updateDate>27-8-2014</updateDate>
+    <firstMonthInYear>1</firstMonthInYear>
+    <nofViewDecimals>0</nofViewDecimals>
+    <mutCalcInFirstCol>false</mutCalcInFirstCol>
+  </header>
+  <columnDefinitions>
+    <columnDefinition locked="false" type="USER">
+      <columnId>1</columnId>
+      <startDate>1-1-2009</startDate>
+      <endDate>31-12-2009</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>2</columnId>
+      <startDate>1-1-2010</startDate>
+      <endDate>31-12-2010</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>3</columnId>
+      <startDate>1-1-2011</startDate>
+      <endDate>31-12-2011</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>4</columnId>
+      <startDate>1-1-2012</startDate>
+      <endDate>31-12-2012</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>5</columnId>
+      <startDate>1-1-2013</startDate>
+      <endDate>31-12-2013</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>6</columnId>
+      <startDate>1-1-2014</startDate>
+      <endDate>31-12-2014</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+  </columnDefinitions>
+  <timeLines highestId="2">
+    <timeLine classType="base" sharedFormulaSet="NoTrend" locked="false" source="DEFAULT" status="NONE" type="USER">
+      <timelineId>1</timelineId>
+      <title>MonthTimeline</title>
+      <columnIds>
+        <columnId isVisible="true">1</columnId>
+        <columnId isVisible="true">2</columnId>
+        <columnId isVisible="true">3</columnId>
+        <columnId isVisible="true">4</columnId>
+        <columnId isVisible="true">5</columnId>
+        <columnId isVisible="true">6</columnId>
+      </columnIds>
+    </timeLine>
+    <timeLine classType="basedataset" sourceTimelineId="1" locked="false" source="DEFAULT" status="NONE" type="USER">
+      <timelineId>2</timelineId>
+      <title></title>
+      <columnIds>
+        <columnId isVisible="true">1</columnId>
+        <columnId isVisible="true">2</columnId>
+        <columnId isVisible="true">3</columnId>
+        <columnId isVisible="true">4</columnId>
+        <columnId isVisible="true">5</columnId>
+        <columnId isVisible="true">6</columnId>
+      </columnIds>
+      <datasetType>ABSOLUTE</datasetType>
+    </timeLine>
+  </timeLines>
+  <ROOT>
+    <FPS_VAR_Naam inReport="true"><columns><column isEntered="true"><value isString="true">Klantnaam</value></column></columns></FPS_VAR_Naam>
+    <FPS_VAR_KVKnr inReport="true"><columns><column isEntered="true"><value isString="true">146772272806</value></column></columns></FPS_VAR_KVKnr>
+    <FPS_VAR_Woonplaats inReport="true"><columns><column isEntered="true"><value isString="true">Ergens</value></column></columns></FPS_VAR_Woonplaats>
+    <FPS_VAR_BIK_Code inReport="true"><columns><column isEntered="true"><value isString="true">4120</value></column></columns></FPS_VAR_BIK_Code>
+    <FPS_VAR_BIK_Omschr inReport="true"><columns><column isEntered="true"><value isString="true">Autoverkoop</value></column></columns></FPS_VAR_BIK_Omschr>
+    <Rechtsvorm inReport="true"><columns><column isEntered="true"><value isString="true">11</value></column></columns></Rechtsvorm>
+    <krInsolvenzquote inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>0.013</value>
+        </column>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>0.016</value>
+        </column>
+        <column isEntered="true">
+          <columnId>3</columnId>
+          <value>0.017</value>
+        </column>
+        <column isEntered="true">
+          <columnId>4</columnId>
+          <value>0.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>5</columnId>
+          <value>0.01</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>0.03</value>
+        </column>
+      </columns>
+    </krInsolvenzquote>
+    <krPD inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>0.0026885459479228085</value>
+        </column>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>0.002679948333113699</value>
+        </column>
+        <column isEntered="true">
+          <columnId>3</columnId>
+          <value>0.0026712850736676595</value>
+        </column>
+        <column isEntered="true">
+          <columnId>4</columnId>
+          <value>1</value>
+        </column>
+        <column isEntered="true">
+          <columnId>5</columnId>
+          <value>0.5</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>0.1</value>
+        </column>
+      </columns>
+    </krPD>
+    <krPDBenchmark inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>0.026885459479228085</value>
+        </column>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>0.02679948333113699</value>
+        </column>
+        <column isEntered="true">
+          <columnId>3</columnId>
+          <value>0.026712850736676595</value>
+        </column>
+        <column isEntered="true">
+          <columnId>4</columnId>
+          <value>0.02662557086751021</value>
+        </column>
+        <column isEntered="true">
+          <columnId>5</columnId>
+          <value>0.02653765291199466</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>0.026449106073984756</value>
+        </column>
+      </columns>
+    </krPDBenchmark>
+  </ROOT>
+  <customerId>6</customerId>
+  <documentId>39</documentId>
+  <mutationDate>2014-08-27T09:18:42</mutationDate>
+</finanDocument>

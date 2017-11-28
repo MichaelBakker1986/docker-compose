@@ -1,0 +1,12 @@
+; V05-LocalScripts
+; EJS 2-3-2012
+;
+
+
+;�����������������������������������������������������������������������������
+; Define calculation tree roots for FINAN Mapping Tool:
+;
+.Variable BNG_BalAkt,CalcTreeRoot=On/Debet
+.Variable BNG_BalPas,CalcTreeRoot=On/Credit
+.Variable BNG_ResNaBel,CalcTreeRoot=On/Credit
+.Variable BNG_MutEigenVerm,CalcTreeRoot=On/Credit

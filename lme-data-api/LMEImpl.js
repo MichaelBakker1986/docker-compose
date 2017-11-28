@@ -1,7 +1,7 @@
 const log = require('ff-log')
 const lmeAPI = require('../lme-core').fesjs;
 const LMEFacade = require('../lme-core/fesjs/FESFacade');
-const ModelListener = require('../ff-ssh-git').ModelListener;
+const ModelListener = require('../git-connect').ModelListener;
 const modelService = new ModelListener();
 const modelNames = []
 const apidef = require(__dirname + '/api/swaggerDef.json');
@@ -34,7 +34,7 @@ modelService.onNewModel = function(model, path) {
  *    - FormulaJS
  *    - Lme-Math
  */
-lmeAPI.addFunctions(require('../ff-math/ff-math').mathJs);
+lmeAPI.addFunctions(require('../math/ff-math').mathJs);
 lmeAPI.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
 var excelPlugin = require('../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 excelPlugin.initComplete.then(function() {

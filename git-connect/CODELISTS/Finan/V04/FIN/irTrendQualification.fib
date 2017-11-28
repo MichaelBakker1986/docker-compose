@@ -1,0 +1,9 @@
+{&&Language=English}
+
+<=-2.0:  "$>deteriorates strongly<$"       ; verslechtert sterk
+<=-0.8:  "$>deteriorates<$"                ; verslechtert
+<=-0.2:  "$>deteriorates slightly<$"       ; verslechtert licht
+<= 0.2:  "$>does not change<$"             ; blijft gelijk
+<= 0.8:  "$>improves slightly<$"           ; verbetert licht
+<= 2.0:  "$>improves<$"                    ; verbetert
+>  2.0:  "$>improves strongly<$"           ; verbetert sterk

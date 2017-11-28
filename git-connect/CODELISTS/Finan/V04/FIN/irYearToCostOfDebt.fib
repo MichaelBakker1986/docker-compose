@@ -1,0 +1,22 @@
+; irYearToCostOfDebt
+
+; 10 jaars rente op staatsleningen in eurogebied.
+; Gemiddelde van de maandcijfers
+; bron nieuwere jaren: http://www.statistics.dnb.nl/popup.cgi?/statistics/excel/gren2n.
+; conform spreadsheet Johnny
+
+
+1995: 0.0873
+1996: 0.0724
+1997: 0.0599
+1998: 0.0471
+1999: 0.0465
+2000: 0.0457
+2001: 0.0590
+2002: 0.0492
+2003: 0.0416
+2004: 0.0414
+2005: 0.0344
+2006: 0.0386
+2007: 0.0433
+2008: 0.0436

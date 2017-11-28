@@ -1,0 +1,87 @@
+{&&Language=Englisch}
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+01:$>1 medewerker<$
+02:$>2-9 werknemers<$
+03:$>10-49 werknemers<$
+04:$>50-99 werknemers <$
+05:$>100-199 werknemers<$
+06:$>200-499 werknemers<$
+07:$>Onbekend<$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+.Variables
+XXXX     X     2               Dummy 3                                                           \Q_STEP03
+XXXX     X     3               Dummy 3 approved                                                  \Q_STEP03_ACCEPTED
+XXXX     X     3               Dummy 3 validation                                                \Q_STEP03_OPENVALIDATION
+XXXX     X     3               Dummy 3 validation message                                        \Q_STEP03_VALIDATIONMESSAGE
+XXXX     X     2               Dummy 4                                                           \Q_STEP04
+XXXX     X     3               Dummy 4 approved                                                  \Q_STEP04_ACCEPTED
+XXXX     X     3               Dummy 4 validation                                                \Q_STEP04_OPENVALIDATION
+XXXX     X     2               Dummy 5                                                           \Q_STEP05
+XXXX     X     3               Dummy 5 approved                                                  \Q_STEP05_ACCEPTED
+XXXX     X     3               Dummy 5 validation                                                \Q_STEP05_OPENVALIDATION
+
+.Variable Q_STEP03, Visible=0
+.Variable Q_STEP04, Visible=0
+.Variable Q_STEP05, Visible=0
+
+{&&Include ../../Includes/IncValidation.fin}
+
+.Formulas NoTrend
+venjbw2iBasisOfPreparation="Fiscaal" 
+kvkiLegalSizeCriteriaClassification = If(T<MaxT,Self[T+1],NA)
+IsFiscaal=1
+IsCommercieel=0
+
+.Formulas Locked
+venjbw2iBasisOfPreparation=On
+
+.Formulas Disabled
+bdabstrTrustCapitalSpecificationTitle=True
+bdburgtupleTrustCapitalSpecification=True
+
+
+.Hints
+frcdimLocationActualActivitiesDescriptionAddressNLSpecificationAxis="$$XbrlMinTupleInstances=1"/Add 

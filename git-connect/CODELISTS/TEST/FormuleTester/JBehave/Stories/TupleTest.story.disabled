@@ -1,0 +1,310 @@
+Tuple test stories
+
+Meta:
+@author Lutske
+
+
+Scenario: test tuple titles
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple AssetsTuple
+
+When the tuple AssetsTuple is 3 times added
+Then the tuple AssetsTuple should have title Aktiva (1) for index 0
+And the tuple AssetsTuple should have title Aktiva (2) for index 1
+And the tuple AssetsTuple should have title Aktiva (3) for index 2
+
+When the tuple AssetsTuple on index 1 is removed
+Then the tuple AssetsTuple should have title Aktiva (1) for index 0
+And the tuple AssetsTuple should have title Aktiva (2) for index 1
+
+When the tuple AssetsTuple title is set to Machine A for index 0
+And the tuple AssetsTuple title is set to Machine B for index 1
+Then the tuple AssetsTuple should have title Machine A for index 0
+And the tuple AssetsTuple should have title Machine B for index 1
+
+
+Scenario: test tuple formulas
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple AssetsTuple
+And the tuple AssetsTuple_tpDescription
+And the tuple AssetsTuple_tpBookvalue
+And the tuple AssetsTuple_tpInvestment
+And the tuple AssetsTuple_tpDepreciation
+
+When the tuple AssetsTuple is 3 times added
+And variable AssetsTuple_tpBookValue on index 0 has value 5 for column with month januari and year 2005
+And variable AssetsTuple_tpBookValue on index 1 has value 500 for column with month januari and year 2005
+And variable AssetsTuple_tpBookValue on index 2 has value 50000 for column with month januari and year 2005
+And variable AssetsTuple_tpDepreciation on index 0 has value 1 for column with month januari and year 2005
+And variable AssetsTuple_tpDepreciation on index 1 has value 100 for column with month januari and year 2005
+And variable AssetsTuple_tpDepreciation on index 2 has value 10000 for column with month januari and year 2005
+And variable AssetsTuple_tpBookValue on index 0 has value 9 for column with month februari and year 2005
+And variable AssetsTuple_tpBookValue on index 1 has value 900 for column with month februari and year 2005
+And variable AssetsTuple_tpBookValue on index 2 has value 90000 for column with month februari and year 2005
+And variable AssetsTuple_tpDepreciation on index 0 has value 3 for column with month februari and year 2005
+And variable AssetsTuple_tpDepreciation on index 1 has value 300 for column with month februari and year 2005
+And variable AssetsTuple_tpDepreciation on index 2 has value 30000 for column with month februari and year 2005
+
+Then variable AssetsTuple_tpInvestment on index 0 should be the value 6 for column with month januari and year 2005
+And variable AssetsTuple_tpInvestment on index 1 should be the value 600 for column with month januari and year 2005
+And variable AssetsTuple_tpInvestment on index 2 should be the value 60000 for column with month januari and year 2005
+And variable AssetsTuple_tpInvestment on index 0 should be the value 7 for column with month februari and year 2005
+And variable AssetsTuple_tpInvestment on index 1 should be the value 700 for column with month februari and year 2005
+And variable AssetsTuple_tpInvestment on index 2 should be the value 70000 for column with month februari and year 2005
+
+And variable SumBookValue should be 50505 for column with month januari and year 2005
+And variable SumBookValue should be 90909 for column with month februari and year 2005
+
+When variable AssetsTuple_tpInvestment on index 1 has value 700 for column with month januari and year 2005
+Then variable AssetsTuple_tpInvestment on index 0 should be the value 6 for column with month januari and year 2005
+And variable AssetsTuple_tpInvestment on index 1 should be the value 700 for column with month januari and year 2005
+And variable AssetsTuple_tpInvestment on index 2 should be the value 60000 for column with month januari and year 2005
+
+When variable AssetsTuple_tpDescription on index 0 has entered value 2 for column with month januari and year 2005
+And variable AssetsTuple_tpDescription on index 1 has entered value 3 for column with month januari and year 2005
+And variable AssetsTuple_tpDescription on index 2 has entered value 4 for column with month januari and year 2005
+And variable AssetsTuple_tpDescription on index 0 has entered value 5 for column with month januari and year 2005
+Then variable SumBookValue should be 50505 for column with month januari and year 2005
+And variable SumBookValue should be 90909 for column with month februari and year 2005
+
+
+Scenario: test nested tuples
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple BedrijvenTuple
+And the tuple NestedAssetsTuple
+And a variable NestedSumBookValueBedrijven
+
+When the tuple BedrijvenTuple is 3 times added
+And the tuple NestedAssetsTuple is added on index 1,0
+And the tuple NestedAssetsTuple is added on index 1,1
+Then the nested tuple NestedAssetsTuple_tpDescription on index 1,0 should be NA
+And the nested tuple NestedAssetsTuple_tpDescription on index 1,1 should be NA
+
+When the nested tuple NestedAssetsTuple_tpBookValue on index 1,0 has value 5 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,1 has value 500 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpDepreciation on index 1,0 has value 1 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpDepreciation on index 1,1 has value 100 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,0 has value 9 for column with month februari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,1 has value 900 for column with month februari and year 2005
+And the nested tuple NestedAssetsTuple_tpDepreciation on index 1,0 has value 3 for column with month februari and year 2005
+And the nested tuple NestedAssetsTuple_tpDepreciation on index 1,1 has value 300 for column with month februari and year 2005
+Then the nested tuple NestedAssetsTuple_tpInvestment on index 1,0 should be 6 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpInvestment on index 1,1 should be 600 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpInvestment on index 1,0 should be 7 for column with month februari and year 2005
+And the nested tuple NestedAssetsTuple_tpInvestment on index 1,1 should be 700 for column with month februari and year 2005
+And the tuple NestedSumBookValueBedrijven on index 1 should be 505 for column with month januari and year 2005
+And the tuple NestedSumBookValueBedrijven on index 1 should be 909 for column with month februari and year 2005
+
+When the tuple NestedAssetsTuple is added on index 0,0
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 9900 for column with month januari and year 2005
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 9900 for column with month januari and year 2005
+And the tuple NestedSumBookValueBedrijven on index 1 should be 505 for column with month januari and year 2005
+And variable SumBookValueBedrijven should be 10405 for column with month januari and year 2005
+
+When the nested tuple NestedAssetsTuple on index 1,0 is removed
+Then the nested tuple NestedAssetsTuple on index 1,0 should be NA
+And the tuple NestedSumBookValueBedrijven on index 1 should be 500 for column with month januari and year 2005
+And variable SumBookValueBedrijven should be 10400 for column with month januari and year 2005
+
+
+Scenario: test tuple diff column
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple AssetsTuple
+And the tuple AssetsTuple_tpBookValue
+And an absolute difference column between the month januari in year 2005 and the month februari in year 2005
+And a relative difference column between the month januari in year 2005 and the month februari in year 2005
+
+When the tuple AssetsTuple is 2 times added
+And variable AssetsTuple_tpBookValue on index 0 has value 10 for column with month januari and year 2005
+And variable AssetsTuple_tpBookValue on index 0 has value 20 for column with month februari and year 2005
+And variable AssetsTuple_tpBookValue on index 1 has value 30 for column with month januari and year 2005
+And variable AssetsTuple_tpBookValue on index 1 has value 40 for column with month februari and year 2005
+Then variable AssetsTuple_tpBookValue on index 0 should be the value 10 for absolute difference column between the month januari in year 2005 and the month februari in year 2005
+And variable AssetsTuple_tpBookValue on index 1 should be the value 10 for absolute difference column between the month januari in year 2005 and the month februari in year 2005
+And variable AssetsTuple_tpBookValue on index 0 should be the value 1 for relative difference column between the month januari in year 2005 and the month februari in year 2005
+And variable AssetsTuple_tpBookValue on index 1 should be the value 0.33 for relative difference column between the month januari in year 2005 and the month februari in year 2005
+
+
+Scenario: test tuple reference variable
+Given a document with timeunit MONTH for the historic year 2005 and the forecast year 2006
+And the tuple AssetsTuple_tpBookValue
+And the tuple BookValueList
+And a variable SumBookValue
+
+When the tuple AssetsTuple_tpBookValue is added
+And the tuple BookValueList is added
+And the tuple AssetsTuple_tpBookValue is added
+And the tuple AssetsTuple_tpBookValue on index 0 has value 5 for column with month januari and year 2005
+And the tuple AssetsTuple_tpBookValue on index 1 has value 500 for column with month januari and year 2005
+And the tuple AssetsTuple_tpBookValue on index 2 has value 50000 for column with month januari and year 2005
+Then variable BookValueList on index 0 should be the value 5 for column with month januari and year 2005
+And variable BookValueList on index 1 should be the value 500 for column with month januari and year 2005
+And variable BookValueList on index 2 should be the value 50000 for column with month januari and year 2005
+
+When the tuple BookValueList on index 1 is removed
+Then variable BookValueList on index 0 should be the value 5 for column with month januari and year 2005
+And variable BookValueList on index 1 should be the value 50000 for column with month januari and year 2005
+And the tuple BookValueList should have title Aktiva (1) for index 0
+And the tuple BookValueList should have title Aktiva (2) for index 1
+
+!-- Tests herverdelen via unspec, vanaf hier faalt de tuple reference variable test, known issue ---------!
+!-- And variable SumBookValue should be the not entered value 5005.0 for column with month januari and year 2005
+
+!-- When variable SumBookValue has entered value 100 for column with month januari and year 2005
+!-- Then variable BookValueList on index 1 should be the value 95 for column with month januari and year 2005
+!-- And variable BookValueList on index 1 for column with month januari and year 2005 should be entered
+!-- And variable SumBookValue should be the entered value 100 for column with month januari and year 2005
+
+!-- When the tuple SumBookValue on index 0 has value NA for column with month januari and year 2005
+!-- Then the tuple BookValueList on index 0 should be NA for column with month januari and year 2005
+!-- And the tuple BookValueList on index 1 should be NA for column with month januari and year 2005
+!-- And the tuple BookValueList on index 2 should be NA for column with month januari and year 2005
+!-- And variable BookValueList on index 0 for column with month januari and year 2005 should be entered
+!-- And variable BookValueList on index 1 for column with month januari and year 2005 should be entered
+!-- And variable BookValueList on index 2 for column with month januari and year 2005 should be entered
+
+!-- When variable SumBookValue has entered value 100 for column with month januari and year 2006
+!-- Then variable BookValueList on index 1 should be the value 100 for column with month januari and year 2006
+!-- And variable BookValueList on index 1 for column with month januari and year 2006 should be entered
+
+!-- When the tuple BookValueList on index 0 has value 10 for column with month januari and year 2006
+!-- And the tuple BookValueList on index 1 has value 10 for column with month januari and year 2006
+!-- And variable SumBookValue has value 40 for column with month januari and year 2006 is entered
+!-- Then the tuple BookValueList on index 0 should be 20 for column with month januari and year 2006
+!-- And the tuple BookValueList on index 1 should be 20 for column with month januari and year 2006
+!-- And variable BookValueList on index 0 for column with month januari and year 2006 should be entered
+!-- And variable BookValueList on index 1 for column with month januari and year 2006 should be entered
+
+Scenario: test nested tuple sum
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple BedrijvenTuple
+And the tuple NestedAssetsTuple
+And a variable NestedSumBookValueBedrijven
+
+When the tuple BedrijvenTuple is added
+And the tuple NestedAssetsTuple is added on index 0,0
+And the tuple NestedAssetsTuple is added on index 0,1
+
+When the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 10 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,1 has value 20 for column with month januari and year 2005
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 30 for column with month januari and year 2005
+
+Scenario: test nested tuple sum with multiple separate instances
+Given a document with timeunit MONTH for the historic year 2005 and the forecast year 2006
+And the tuple BedrijvenTuple
+And the tuple NestedSumBookValueBedrijven
+And the tuple NestedAssetsTuple
+And the tuple BedrijvenTuple_tpBedrijfsnaam
+
+When the tuple BedrijvenTuple is 3 times added
+And the tuple NestedAssetsTuple is added on index 0,0
+And the tuple NestedAssetsTuple is added on index 0,1
+And the tuple NestedAssetsTuple is added on index 0,2
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 5 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,1 has value 10 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,2 has value 15 for column with month december and year 2005
+
+And the tuple NestedAssetsTuple is added on index 1,0
+And the tuple NestedAssetsTuple is added on index 1,1
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,0 has value 1 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,1 has value 2 for column with month december and year 2005
+
+And the tuple NestedAssetsTuple is added on index 2,0
+And the tuple NestedAssetsTuple is added on index 2,1
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 2,0 has value 100 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 2,1 has value 200 for column with month december and year 2005
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 30 for column with month december and year 2005
+And the tuple NestedSumBookValueBedrijven on index 1 should be 3 for column with month december and year 2005
+And the tuple NestedSumRefBookValueBedrijven on index 2 should be 300 for column with month december and year 2005
+
+
+Scenario: test nested tuple reference sum
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple BedrijvenTuple
+And the tuple NestedAssetsTuple
+And a variable NestedSumBookValueBedrijven
+
+And the tuple refNestedSumBookValueBedrijven
+
+When the tuple BedrijvenTuple is added
+And the tuple NestedAssetsTuple is added on index 0,0
+And the tuple NestedAssetsTuple is added on index 0,1
+
+When the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 10 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,1 has value 20 for column with month januari and year 2005
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 30 for column with month januari and year 2005
+And the tuple refNestedSumBookValueBedrijven on index 0 should be 30 for column with month januari and year 2005
+And the tuple NestedSumRefBookValueBedrijven on index 0 should be 30 for column with month januari and year 2005
+
+And variable SumRefsBookValueBedrijven should be 30 for column with month januari and year 2005
+
+Scenario: test nested tuple reference sum with multiple separate instances
+Given a document with timeunit MONTH for the historic year 2005 and the forecast year 2006
+And the tuple BedrijvenTuple
+And the tuple NestedSumBookValueBedrijven
+And the tuple NestedAssetsTuple
+And the tuple BedrijvenTuple_tpBedrijfsnaam
+
+And the tuple refNestedSumBookValueBedrijven
+
+When the tuple BedrijvenTuple is 3 times added
+And the tuple NestedAssetsTuple is added on index 0,0
+And the tuple NestedAssetsTuple is added on index 0,1
+And the tuple NestedAssetsTuple is added on index 0,2
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 5 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,1 has value 10 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,2 has value 15 for column with month december and year 2005
+
+And the tuple NestedAssetsTuple is added on index 1,0
+And the tuple NestedAssetsTuple is added on index 1,1
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,0 has value 1 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 1,1 has value 2 for column with month december and year 2005
+
+And the tuple NestedAssetsTuple is added on index 2,0
+And the tuple NestedAssetsTuple is added on index 2,1
+
+And the nested tuple NestedAssetsTuple_tpBookValue on index 2,0 has value 100 for column with month december and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 2,1 has value 200 for column with month december and year 2005
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 30 for column with month december and year 2005
+And the tuple NestedSumBookValueBedrijven on index 1 should be 3 for column with month december and year 2005
+And the tuple NestedSumBookValueBedrijven on index 2 should be 300 for column with month december and year 2005
+Then the tuple refNestedSumBookValueBedrijven on index 0 should be 30 for column with month december and year 2005
+And the tuple refNestedSumBookValueBedrijven on index 1 should be 3 for column with month december and year 2005
+And the tuple refNestedSumBookValueBedrijven on index 2 should be 300 for column with month december and year 2005
+Then the tuple NestedSumRefBookValueBedrijven on index 0 should be 30 for column with month december and year 2005
+And the tuple NestedSumRefBookValueBedrijven on index 1 should be 3 for column with month december and year 2005
+And the tuple NestedSumRefBookValueBedrijven on index 2 should be 300 for column with month december and year 2005
+
+And variable SumRefsBookValueBedrijven should be 333 for column with month december and year 2005
+
+
+Scenario: test update of tuplesum value after removing a tuple instance 
+Given a document with timeunit MONTH for the historic year 2005
+And the tuple BedrijvenTuple
+And the tuple NestedAssetsTuple
+And a variable NestedSumBookValueBedrijven
+
+When the tuple BedrijvenTuple is added
+And the tuple NestedAssetsTuple is added on index 0,0
+And the tuple NestedAssetsTuple is added on index 0,1
+And the tuple NestedAssetsTuple is added on index 0,2
+
+When the nested tuple NestedAssetsTuple_tpBookValue on index 0,0 has value 10 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,1 has value 20 for column with month januari and year 2005
+And the nested tuple NestedAssetsTuple_tpBookValue on index 0,2 has value 30 for column with month januari and year 2005
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 60 for column with month januari and year 2005
+
+When the nested tuple NestedAssetsTuple on index 0,1 is removed
+
+Then the tuple NestedSumBookValueBedrijven on index 0 should be 40 for column with month januari and year 2005
+

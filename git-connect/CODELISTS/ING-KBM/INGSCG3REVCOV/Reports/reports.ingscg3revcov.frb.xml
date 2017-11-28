@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:fbl="http://www.topicus.nl/z/fbltotaal/2015/2/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saxon="http://icl.com/saxon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fin="http://www.finan.nl/extension/2015/01/fin" xmlns:fes="http://www.finan.nl/extension/2015/01/fes" exclude-result-prefixes="fn saxon xs xsi fin">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes" saxon:indent-spaces="2"/>
+  <xsl:preserve-space elements="*" />
+<!--   <xsl:include href="iterateModel.xslt"/> -->
+
+  <xsl:decimal-format name="euroFormat" decimal-separator="," grouping-separator="."/>
+
+<!--
+  <xsl:param name="tbSeqUrl" select="'totaalbericht.xml'" />
+  <xsl:variable name="tburl" select="$tbSeqUrl" />
+  <xsl:variable name="totaalbericht" select="document($tburl)" />
+ -->
+
+  <xsl:template match="/">
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.2.4" date="15-4-2016" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportVersion>v 1.2.4</ReportVersion>
+	<ModelVersion><data src="fesModel"><columns number="1" /><variables var="ModelVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ModelVersion>
+  <ParameterVersion><data src="fesModel"><columns number="1" /><variables var="MatrixVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ParameterVersion>
+
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_KVKnr" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<KFRNummer><data src="fesModel"><columns number="1" /><variables var="IMPORT_kredfacnr" /><presentation showSingleValueVariablesOnce="false" /></data></KFRNummer>
+	<KFRNummerTitel>KFC nummer</KFRNummerTitel>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY" /><presentation showSingleValueVariablesOnce="false" /></data> <data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY_NAME" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+	<CreationDateTitel>Datum</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScaleDefault>1000</ReportScaleDefault>
+	<Definitief><data src="fesModel"><columns number="1" /><variables depth="1" var="Definitief"/></data></Definitief>
+
+  <visible_Q_Map01_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map01_VISIBLE"/></data></visible_Q_Map01_VISIBLE>   <!--01-->
+  <visible_Q_MapKI_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_MapKI_VISIBLE"/></data></visible_Q_MapKI_VISIBLE>   <!--KI-->
+  <visible_Q_MapEWS_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_MapEWS_VISIBLE"/></data></visible_Q_MapEWS_VISIBLE> <!--EWS-->
+  <visible_Q_Map03_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map03_VISIBLE"/></data></visible_Q_Map03_VISIBLE>   <!--03-->
+  <visible_Q_Map02_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map02_VISIBLE"/></data></visible_Q_Map02_VISIBLE>   <!--02-->
+  <visible_Q_Map04_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map04_VISIBLE"/></data></visible_Q_Map04_VISIBLE>   <!--04-->
+  <visible_Q_Map05_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map05_VISIBLE"/></data></visible_Q_Map05_VISIBLE>   <!--05-->
+  <visible_Q_Map06_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map06_VISIBLE"/></data></visible_Q_Map06_VISIBLE>   <!--06-->
+  <visible_Q_Map08_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map08_VISIBLE"/></data></visible_Q_Map08_VISIBLE>   <!--08-->
+  <visible_Q_Map09_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map09_VISIBLE"/></data></visible_Q_Map09_VISIBLE>   <!--09-->
+
+  <aantaljaren><data src="fesModel"><columns number="1" /><variables depth="1" var="aantaljaren"/></data></aantaljaren>
+
+  <SolvabiliteitConvenantenNormNietGehaald><data src="fesModel"><columns number="1" /><variables depth="1" var="SolvabiliteitConvenantenNormNietGehaald"/></data></SolvabiliteitConvenantenNormNietGehaald>
+  <DSCRConvenantenNormNietGehaald><data src="fesModel"><columns number="1" /><variables depth="1" var="DSCRConvenantenNormNietGehaald"/></data></DSCRConvenantenNormNietGehaald>
+  <EBITDAFloorNormNietGehaald><data src="fesModel"><columns number="1" /><variables depth="1" var="EBITDAFloorNormNietGehaald"/></data></EBITDAFloorNormNietGehaald>
+  <DebtToEBITDAConvenantenNormNietGehaald><data src="fesModel"><columns number="1" /><variables depth="1" var="DebtToEBITDAConvenantenNormNietGehaald"/></data></DebtToEBITDAConvenantenNormNietGehaald>
+  <ICRConvenantenNormNietGehaald><data src="fesModel"><columns number="1" /><variables depth="1" var="ICRConvenantenNormNietGehaald"/></data></ICRConvenantenNormNietGehaald>
+
+</properties>
+
+<!-- ======================================================================== -->
+<newpage name="frontpage">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+
+<newpage name="normal" visible="/*/*/document/properties/Relevant_Q_Map09/text()=1">
+<p   id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========Normken getallen tov historie ============================================================= -->
+
+<section class="section"><data src="fesModel"><variables var="Q_Map05_Paragraaf03" function="getTitle"/></data></section>
+
+<table class="datatable4cols">
+  <tr class="header">
+    <td></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td>Norm</td>
+    <td></td>
+  </tr>
+  <!-- IsZaArrangementNorm ##### -->
+  <!-- Solvabiliteit -->
+  <tr class="level1green" visible="/*/*/document/properties/SolvabiliteitConvenantenNormNietGehaald/text()='Norm gehaald'">
+    <td><data src="fesModel"><variables var="SolvabiliteitConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="SolvabiliteitConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="SolvabiliteitConvenant" /></data></td>
+    <td><data src="fesModel"><highlight operator="Entered" textcolor="#003d7d"/><columns number="1" /><variables var="SolvabiliteitConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+  <tr class="level1red" visible="/*/*/document/properties/SolvabiliteitConvenantenNormNietGehaald/text()='Norm niet gehaald'">
+    <td><data src="fesModel"><variables var="SolvabiliteitConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="SolvabiliteitConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="SolvabiliteitConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="SolvabiliteitConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+
+  <!-- DSCR -->
+  <tr class="level1green" visible="/*/*/document/properties/DSCRConvenantenNormNietGehaald/text()='Norm gehaald'">
+    <td><data src="fesModel"><variables var="DSCRConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DSCRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="DSCRConvenant" /></data></td>
+    <td><data src="fesModel"><highlight operator="Entered" textcolor="#003d7d"/><columns number="1" /><variables var="DSCRConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+  <tr class="level1red" visible="/*/*/document/properties/DSCRConvenantenNormNietGehaald/text()='Norm niet gehaald'">
+    <td><data src="fesModel"><variables var="DSCRConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DSCRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="DSCRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DSCRConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+
+  <!-- EBITDAFloorNormNietGehaald -->
+  <tr class="level1green" visible="/*/*/document/properties/EBITDAFloorNormNietGehaald/text()='Norm gehaald'">
+    <td><data src="fesModel"><variables var="EBITDAFloorConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="EBITDAFloorConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="EBITDAFloorConvenant" /></data></td>
+    <td><data src="fesModel"><highlight operator="Entered" textcolor="#003d7d"/><columns number="1" /><variables var="EBITDAFloorNorm" /></data></td>
+    <td></td>
+  </tr>
+  <tr class="level1red" visible="/*/*/document/properties/EBITDAFloorNormNietGehaald/text()='Norm niet gehaald'">
+    <td><data src="fesModel"><variables var="EBITDAFloorConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="EBITDAFloorConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="EBITDAFloorConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="EBITDAFloorNorm" /></data></td>
+    <td></td>
+  </tr>
+
+  <!-- DebtToEBITDAConvenantenNorm -->
+  <tr class="level1green" visible="/*/*/document/properties/DebtToEBITDAConvenantenNormNietGehaald/text()='Norm gehaald'">
+    <td><data src="fesModel"><variables var="DebtToEBITDAConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DebtToEBITDAConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="DebtToEBITDAConvenant" /></data></td>
+    <td><data src="fesModel"><highlight operator="Entered" textcolor="#003d7d"/><columns number="1" /><variables var="DebtToEBITDAConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+  <tr class="level1red" visible="/*/*/document/properties/DebtToEBITDAConvenantenNormNietGehaald/text()='Norm niet gehaald'">
+    <td><data src="fesModel"><variables var="DebtToEBITDAConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DebtToEBITDAConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="DebtToEBITDAConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="DebtToEBITDAConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+
+  <!-- ICRConvenantenNormNietGehaald -->
+  <tr class="level1green" visible="/*/*/document/properties/ICRConvenantenNormNietGehaald/text()='Norm gehaald'">
+    <td><data src="fesModel"><variables var="ICRConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="ICRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="ICRConvenant" /></data></td>
+    <td><data src="fesModel"><highlight operator="Entered" textcolor="#003d7d"/><columns number="1" /><variables var="ICRConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+  <tr class="level1red" visible="/*/*/document/properties/ICRConvenantenNormNietGehaald/text()='Norm niet gehaald'">
+    <td><data src="fesModel"><variables var="ICRConvenant" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="ICRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="2" /><variables var="ICRConvenant" /></data></td>
+    <td><data src="fesModel"><columns number="1" /><variables var="ICRConvenantenNorm" /></data></td>
+    <td></td>
+  </tr>
+
+  <tr class="level1">
+    <td>&#xA0;</td><td>&#xA0;</td><td>&#xA0;</td>
+  </tr>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/SolvabiliteitConvenantenNormNietGehaald/text()!='nvt'">
+  <data src="fes">
+  <columns delta="0" number="3" order="desc">
+      <highlight operator="Entered" textcolor="#003d7d"/>
+  </columns>
+		<variables depth="2" var="SolvabiliteitConvenanten" recursiveSkip="false" />
+    <variables depth="2" var="SolvabiliteitConvenanten" varFrom="SolvabiliteitConvenantenSub12" recursiveSkip="false" />
+    <presentation  showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerLabel="Solvabiliteit">
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/DSCRConvenantenNormNietGehaald/text()!='nvt'">
+  <data src="fes">
+  <columns delta="0" number="3" order="desc">
+      <highlight operator="Entered" textcolor="#003d7d"/>
+  </columns>
+		<variables depth="2" var="DSCRConvenanten" recursiveSkip="false" />
+    <variables depth="2" var="DSCRConvenanten" varFrom="DSCRConvenantenSub6" recursiveSkip="false" />
+    <presentation  showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerLabel="Debt Service Coverage Ratio ">
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/EBITDAFloorNormNietGehaald/text()!='nvt'">
+  <data src="fes">
+  <columns delta="0" number="3" order="desc">
+      <highlight operator="Entered" textcolor="#003d7d"/>
+  </columns>
+		<variables depth="2" var="EBITDAFloor" recursiveSkip="false" />
+    <presentation  showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerLabel="EBITDA Floor">
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols"  visible="/*/*/document/properties/DebtToEBITDAConvenantenNormNietGehaald/text()!='nvt'">
+  <data src="fes">
+  <columns delta="0" number="3" order="desc">
+      <highlight operator="Entered" textcolor="#003d7d"/>
+  </columns>
+		<variables depth="2" var="DebtToEBITDAConvenanten" recursiveSkip="false" />
+    <variables depth="2" var="DebtToEBITDAConvenanten" varFrom="DebtToEBITDAConvenantenSub6" recursiveSkip="false" />
+    <presentation  showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerLabel="Leverage">
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/ICRConvenantenNormNietGehaald/text()!='nvt'">
+  <data src="fes">
+  <columns delta="0" number="3" order="desc">
+      <highlight operator="Entered" textcolor="#003d7d"/>
+  </columns>
+		<variables depth="2" var="ICRConvenanten" recursiveSkip="false" />
+    <presentation  showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerLabel="Interest Coverage Ratio">
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<p>&#xA0;</p>
+
+<!-- =========Financiele gegevens ============================================================= -->
+<section class="section"><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></section>
+
+<table class="datatablebalans2">
+  <tr class="header">
+    <td>Balans</td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmImmatVastAct" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmImmatVastAct"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmImmatVastAct"/></data></td>
+    <td><data src="fesModel"><variables var="fmEigenVerm" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmEigenVerm"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmEigenVerm"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmMatVastAct" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmMatVastAct"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmMatVastAct"/></data></td>
+    <td><data src="fesModel"><variables var="fmVoorz" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmVoorz"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmVoorz"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmFinVastAct" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmFinVastAct"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmFinVastAct"/></data></td>
+    <td><data src="fesModel"><variables var="fmLangVV" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmLangVV"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmLangVV"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmVrd" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmVrd"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmVrd"/></data></td>
+    <td><data src="fesModel"><variables var="fmKortVV" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmKortVV"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmKortVV"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmVord" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmVord"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmVord"/></data></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmLiqMid" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmLiqMid"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmLiqMid"/></data></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="subtotal">
+    <td><data src="fesModel"><variables var="fmSomAct" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmSomAct"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmSomAct"/></data></td>
+    <td><data src="fesModel"><variables var="fmSomPas" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmSomPas"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmSomPas"/></data></td>
+  </tr>
+  <tr class="empty">
+    <td>&#xA0;</td>
+  </tr>
+  <tr class="header">
+    <td>Resultatenrekening</td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td>Kasstroom</td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables function="getStartDate"/><presentation format="yyyy"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmNettoOmzet" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmNettoOmzet"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmNettoOmzet"/></data></td>
+    <td><data src="fesModel"><variables var="fmEBITDA" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmEBITDA"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmEBITDA"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmMutVrd" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmMutVrd"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmMutVrd"/></data></td>
+    <td><data src="fesModel"><variables var="fmMutWerkKapitaal" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmMutWerkKapitaal"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmMutWerkKapitaal"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmKostprijsOmzet" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmKostprijsOmzet"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmKostprijsOmzet"/></data></td>
+    <td><data src="fesModel"><variables var="fmBuitengewRes" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmBuitengewRes"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmBuitengewRes"/></data></td>
+  </tr>
+
+  <tr class="subtotalR">
+    <td><data src="fesModel"><variables var="fmBrutoWinst" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmBrutoWinst"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmBrutoWinst"/></data></td>
+    <td><data src="fesModel"><variables var="fmWinstBel" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmWinstBel"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmWinstBel"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmExplLasten" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmExplLasten"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmExplLasten"/></data></td>
+    <td><data src="fesModel"><variables var="fmResDerden" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmResDerden"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmResDerden"/></data></td>
+  </tr>
+  <tr class="subtotalR">
+    <td><data src="fesModel"><variables var="fmEBITDA" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmEBITDA"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmEBITDA"/></data></td>
+    <td><data src="fesModel"><variables var="fmMutVoorz" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmMutVoorz"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmMutVoorz"/></data></td>
+  </tr>
+  <tr class="subtotalL">
+    <td><data src="fesModel"><variables var="fmAfs" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmAfs"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmAfs"/></data></td>
+    <td><data src="fesModel"><variables var="fmOpKasstroom" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmOpKasstroom"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmOpKasstroom"/></data></td>
+  </tr>
+  <tr class="subtotalR">
+    <td><data src="fesModel"><variables var="fmEBIT" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmEBIT"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmEBIT"/></data></td>
+    <td><data src="fesModel"><variables var="fmInvesteringen" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmInvesteringen"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmInvesteringen"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmFinRes" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmFinRes"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmFinRes"/></data></td>
+    <td><data src="fesModel"><variables var="fmFinanciering" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmFinanciering"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmFinanciering"/></data></td>
+  </tr>
+  <tr class="subtotalR">
+    <td><data src="fesModel"><variables var="fmGewResVoorBel" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmGewResVoorBel"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmGewResVoorBel"/></data></td>
+    <td><data src="fesModel"><variables var="fmAflossingen" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmAflossingen"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmAflossingen"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmBuitengewRes" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmBuitengewRes"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmBuitengewRes"/></data></td>
+    <td><data src="fesModel"><variables var="fmFinRes" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmFinRes"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmFinRes"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmWinstBel" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmWinstBel"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmWinstBel"/></data></td>
+    <td><data src="fesModel"><variables var="fmPriveOpn" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmPriveOpn"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmPriveOpn"/></data></td>
+  </tr>
+  <tr class="level1">
+    <td><data src="fesModel"><variables var="fmResDerden" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmResDerden"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmResDerden"/></data></td>
+    <td><data src="fesModel"><variables var="fmWinstUitk" function="getTitle"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="1" /><variables var="fmWinstUitk"/></data></td>
+    <td>-<data src="fesModel"><columns delta="0" number="2" /><variables var="fmWinstUitk"/></data></td>
+  </tr>
+  <tr class="subtotalR">
+    <td><data src="fesModel"><variables var="fmNettoWinst" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmNettoWinst"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmNettoWinst"/></data></td>
+    <td><data src="fesModel"><variables var="fmOvVermMut" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmOvVermMut"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmOvVermMut"/></data></td>
+  </tr>
+  <tr class="subtotalL">
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><data src="fesModel"><variables var="fmCashFlowCheck" function="getTitle"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="1" /><variables var="fmCashFlowCheck"/></data></td>
+    <td><data src="fesModel"><columns delta="0" number="2" /><variables var="fmCashFlowCheck"/></data></td>
+  </tr>
+
+-->
+
+</table>
+
+
+<section class="section">Bepalingen</section>																	<!-- Bepalingen -->
+
+<xsl:variable name="doc" select="0" as="xs:integer"/>
+<xsl:variable name="viewCurrency" select="fes:getViewCurrency($doc)"/>
+<xsl:variable name="ConvenantVarName" select="'Convenant'"/>
+
+<xsl:for-each select="fes:getTupleInstances($doc, $ConvenantVarName)">
+  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+  <xsl:variable name="tupleIndices" as="xs:integer *">
+      <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+  </xsl:variable>
+
+  <table class="headertable">
+    <tr class="header">
+      <td>Type</td>
+      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpType', $tupleIndices)"/></td>
+      <td>Status</td>
+      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpStatusPrint', $tupleIndices)"/></td>
+    </tr>
+    <tr class="lefttwocols">
+        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpSoort', $tupleIndices)"/></td>
+        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpSoort', $tupleIndices)"/></td>
+    </tr>
+    <tr class="lefttwocols">
+        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpTekst', $tupleIndices)"/></td>
+        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpTekst', $tupleIndices)" /></td>
+    </tr>
+    <tr class="lefttwocols">
+        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpToelichting', $tupleIndices)"/></td>
+        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpToelichting', $tupleIndices)"/></td>
+    </tr>
+  <tr class="empty">
+    <td>&#xA0;</td>
+  </tr>
+
+  </table>
+</xsl:for-each>
+
+
+
+<!-- =========End============================================================= -->
+</document>
+</xsl:template>
+
+</xsl:stylesheet>

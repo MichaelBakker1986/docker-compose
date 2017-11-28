@@ -1,0 +1,59 @@
+COMPONENT;KEY;EN;NL
+crm;INGSCG3;Kredietaanvraagmodel;Kredietaanvraagmodel
+scorecard;INGSCG3;Kredietaanvraagmodel;Kredietaanvraagmodel
+service;INGSCG3;Kredietaanvraagmodel;Kredietaanvraagmodel
+crm;AABCFKV;AAB CF Credit Application;AAB CF Credit Application
+scorecard;AABCFKV;AAB CF Credit Application;AAB CF Credit Application
+service;AABCFKV;AAB CF Credit Application;AAB CF Credit Application
+crm;INGSCG3REV;Kredietrevisie;Kredietrevisie
+scorecard;INGSCG3REV;Kredietrevisie;Kredietrevisie
+service;INGSCG3REV;Kredietrevisie;Kredietrevisie
+history;General Information;General Information;General Information
+history;Cash Flow (Input);Cash Flow (Input);Cash Flow (Input)
+history;Cash Flow (Derived);Cash Flow (Derived);Cash Flow (Derived)
+history;add_bookyear;Add bookyear ;Voeg boekjaar toe
+history;Balance (expanded view);Balance sheet (expanded view);Balans (platte invoerlijst)
+service;General Information;General Information;General Information
+service;Balans;Balance sheet;Balans
+service;Resultaat;Income statement;Resultaat
+service;Vermogensaansluiting;Net worth reconciliation;Vermogensaansluiting
+service;Zoeken;Zoeken;Zoeken
+service;Cash Flow (Input);Cash Flow (Input);Cash Flow (Input)
+service;Cash Flow (Derived);Cash Flow (Derived);Cash Flow (Derived)
+service;Ratios;Ratios;Ratios
+service;Checks;Checks;Checks
+service;Balance (expanded view);Balance sheet (expanded view);Balans (platte invoerlijst)
+crm;auditionId;GridID;GridID
+crm;auditionId.customer_reference_already_exists;GridID bestaat al;GridID bestaat al
+crm;audition_id;GridID;GridID
+crm;referenceId;GridID;GridID
+crm;referenceid;GridID;GridID
+crm;referenceId.customer_reference_already_exists;Het opgegeven relatienummer (CLP) is al bekend in het systeem;Het opgegeven GridID is al bekend in het systeem
+crm;crm-referenceidtextfield.Required;U dient een GridID in te voeren!;U dient een GridID in te voeren!
+crm;customer_referenceid;GridID;GridID
+history;no_projects_message;No timelines available yet.;Er zijn nog geen tijdlijnen aanwezig.;
+k3;new_history_project;Add timeline;Voeg tijdlijn toe;
+history;new_project;Add timeline;Voeg tijdlijn toe;
+history;start_new_project;Add timeline;Voeg tijdlijn toe;
+history;enter_name_for_project_copy;Enter a name for the timeline copy;Voer een naam in voor de gekopiëerde tijdlijn;
+history;sure_to_delete_project;Are you sure you want to delete this timeline?;Weet u zeker dat u deze tijdlijn wilt verwijderen?;
+history;delete_project;Delete this timeline;Verwijder deze tijdlijn;
+k3;enter_new_name_for_project;Enter a new name for the timeline;Voer een nieuwe naam in voor de tijdlijn;
+k3;history-projects;Timelines;Tijdlijnen;
+history;projects_for_customer;{0,choice,0#No timelines are|1#One timeline is|1<{0,number,integer} timelines are} available for this customer;Er {0,choice,0#zijn geen tijdlijnen|1#is één tijdlijn|1<zijn {0,number,integer} tijdlijnen} beschikbaar voor deze cliënt;
+k3;history-category;Tag 'statement type';Label 'financieel overzicht type';
+k3;category-type;Tag 'statement type';Label 'financieel overzicht type';
+k3;history-classification-type;Tag 'status';Label 'status';
+k3;audit-status-type;Tag 'audit status';Label 'auditstatus';
+k3;classification-type;Tag 'status';Label 'status';
+k3;history-classificationtype-empty;Please select a 'status' tag;Selecteer een 'status' label;
+k3;history-category-empty;Please select a 'statement type' tag;Selecteer een 'financieel overzicht type' label;
+k3;history-auditstatus-empty;Please select an 'audit status' tag;Selecteer een 'auditstatus' label;
+k3;balance;Balance sheet;Balans;
+k3;result;Income statement;Resultaat;
+history;historic_fault_check_failed;The checks (balance sheet out of balance, net worth reconciliation and/or negative book values) in the last financial year of the annual statement failed. Refer to the model tab 'Checks' in the IFRS document for more information;De invoercontroles (balans uit evenwicht, vermogensaansluiting en/of negatieve boekwaarden) in het laatste financiële jaar van de jaaropgave zijn gefaald. Zie het modeltabblad 'Invoercontroles' in het IFRS-document voor meer informatie.;
+history;change_base_currency_hint;Are you sure you want to change the base currency for this customer? Existing annual figures for this customer will not be converted, only the currency label for these figures will be changed. The same applies to all existing timelines: only the currency label will change and the figures will not be changed.;Weet u zeker dat u de valuta voor deze cliënt wilt wijzigen? Bestaande historische cijfers zullen bij het wijzigen van de valuta niet worden omgerekend. Hetzelfde geldt voor cijfers in alle andere tijdlijnen van de huidige cliënt.;
+history;history-project-start-bookyear-hint;Select the start month and day of financial years for this timeline.;Selecteer de startmaand en -dag van boekjaren voor deze tijdlijn.;
+history;riskRaterExportButton;Export to RiskRater;Exporteren naar RiskRater;
+k3;select_main_project;Select timeline;Kies tijdlijn;
+k3;select_reference_project;Relative to timeline;Relatief aan tijdlijn;

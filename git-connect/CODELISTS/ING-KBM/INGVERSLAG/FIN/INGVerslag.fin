@@ -1,0 +1,2240 @@
+{&&Language=English}
+Fiatdocument
+
+.ModelVersion          3.16
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=2005,Years=4,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PP       X     0               "Fiatdocument #CompactModelVersion#"                   \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+.Variables
+PP      1N C   1 1             Fiatdocument                                                       \Q_ROOT
+
+.Choices
+Q_ROOT                         = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+
+.Formulas NoTrend
+Q_ROOT                         = If( (Q_Map01[1]=1) And (Q_Map02[1]=1) And (Q_Map03[1]=1) And (Q_Map04[1]=1) And (Q_Map05[1]=1) And (Q_Map06[1]=1) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0)
+
+
+.Variables
+;================================================================================================== MAP 1
+PP      1N C   2               Intake                                                             \Q_Map01
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PP      1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PP      1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+
+
+PP      1N     3               Behandelaar                                                        \Q_Map01_Paragraaf01
+
+PI      1A     4               Naam relatiemanager                                                \NaamRelatieManager
+PI      1A     4               Naam behandelaar MO                                                \NaamBehandelaarMO
+
+.Variables
+;------------------------------
+PP      1N     3               Klantgegevens                                                      \Q_Map01_Paragraaf02
+PI      1N C   4               Klant of Prospect?                                                 \KlantOfProspect
+PI      1A     4               Bedrijfsnaam klant (hoofdkredietnemer conform Kreta)               \NaamAanvrager=FPS_VAR_Naam
+C Conform inschrijving KvK.
+PI      1A     4               Relatienummer hoofdkredietnemer                                    \Relatienummer
+C Niet verplicht, leeg laten indien niet bekend.
+PP      1A     4               KvK-nummer hoofdkredietnemer                                       \KvKnummer=FPS_VAR_KVKnr
+PP      1N     3               Contactpersoon                                                      \Q_Map01_Paragraaf02a
+PI      1A     4               Contactpersoon klant                                                \ContactPersoon
+PI      1A     4               Telefoonnummer klant                                                \TelefoonNummer
+PI      1A     4               E-mailadres klant (ivm KCM, KTM, bevestigingen rondom kredietproces)\Emailadres
+
+.Choices
+KlantOfProspect = "1:Klant|2:Prospect"
+
+;------------------
+; Verplichte velden
+.Variable KlantOfProspect   , InputRequired = 1
+.Variable Relatienummer     , InputRequired = (KlantOfProspect=1)
+
+.Variables
+;------------------------------
+PP      1N     3               Krediet                                                             \Q_Map01_Paragraaf03
+
+PI      1N C   4               Welk proces is hier van toepassing?                                 \KredietAanvraagOfWijziging
+C Keuze maken uit dropdown menu
+
+PI      1N C   4               Hoeveel investeringsdoelen zijn er?                                 \AantalInvesteringsdoelen
+C Keuze maken uit dropdown menu
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel1
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag1
+
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel2
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag2
+
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel3
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag3
+
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel4
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag4
+
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel5
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag5
+
+
+PI      1N C  -4               Wat is het investeringsdoel?                                        \Investeringsdoel6
+C Keuze maken uit dropdown menu
+PI    0 1N     4               Wat is het bedrag van de investering?                               \Investeringsbedrag6
+
+
+PI    0 1N    -4               Wat is de eigen inbreng van de investering (in euro's)              \EigenInbrengBedrag
+PI      1A     4               Wat is de herkomst van de eigen inbreng?                            \HerkomstEigenInbreng
+PP    0 1N     4               Totaal kredietverzoek                                               \GevraagdKredietbedrag
+C Som van de investeringen minus eigen inbreng
+
+PI      1N C   4               Wordt (een gedeelte van) de aanvraag met lease ingevuld?            \Lease
+PI      1N C   4               Toestemming BKR toets?                                              \BKRCheck
+
+; Verplichte velden
+.Variable Lease        , InputRequired = 1
+.Variable HerkomstEigenInbreng, InputRequired=(EigenInbrengBedrag>0)
+
+.Variables
+PX      1N     3               Wijzigingen                                                         \Q_Map01_Paragraaf04
+PI      1N C   4               Algehele aflossing                                                  \Wijzigingen1
+PI      1N C   4               Limiet herstel                                                      \Wijzigingen2
+PI      1N C   4               Terugdraaien aflossing                                              \Wijzigingen3
+PI      1N C   4               Wijziging aflosschema                                               \Wijzigingen4
+PI      1N C   4               Opschorten aflossing                                                \Wijzigingen5
+PI      1N C   4               Wijzigen zekerheden                                                 \Wijzigingen6
+PI      1N C   4               Vervroegde aflossing op Kredietovereenkomst                         \Wijzigingen7
+PI      1N C   4               Limietverlaging                                                     \Wijzigingen8
+PI      1N C   4               Algeheel Royement hypotheek                                         \Wijzigingen9
+PI      1N C   4               Algeheel Royement om niet hypotheek                                 \Wijzigingen10
+PI      1N C   4               Gedeeltelijk Royement hypotheek                                     \Wijzigingen11
+PI      1N C   4               Gedeeltelijk Royement om niet hypotheek                             \Wijzigingen12
+
+.Choices
+Wijzigingen1                   = "1:Ja|2:nvt"
+Wijzigingen2                   = "1:Ja|2:nvt"
+Wijzigingen3                   = "1:Ja|2:nvt"
+Wijzigingen4                   = "1:Ja|2:nvt"
+Wijzigingen5                   = "1:Ja|2:nvt"
+Wijzigingen6                   = "1:Ja|2:nvt"
+Wijzigingen7                   = "1:Ja|2:nvt"
+Wijzigingen8                   = "1:Ja|2:nvt"
+Wijzigingen9                   = "1:Ja|2:nvt"
+Wijzigingen10                  = "1:Ja|2:nvt"
+Wijzigingen11                  = "1:Ja|2:nvt"
+Wijzigingen12                  = "1:Ja|2:nvt"
+
+.Formulas Visible
+Investeringsdoel1              = (AantalInvesteringsdoelen>=1)
+Investeringsbedrag1            = (AantalInvesteringsdoelen>=1)
+
+Investeringsdoel2              = (AantalInvesteringsdoelen>=2)
+Investeringsbedrag2            = (AantalInvesteringsdoelen>=2)
+
+Investeringsdoel3              = (AantalInvesteringsdoelen>=3)
+Investeringsbedrag3            = (AantalInvesteringsdoelen>=3)
+
+Investeringsdoel4              = (AantalInvesteringsdoelen>=4)
+Investeringsbedrag4            = (AantalInvesteringsdoelen>=4)
+
+Investeringsdoel5              = (AantalInvesteringsdoelen>=5)
+Investeringsbedrag5            = (AantalInvesteringsdoelen>=5)
+
+Investeringsdoel6              = (AantalInvesteringsdoelen>=6)
+Investeringsbedrag6            = (AantalInvesteringsdoelen>=6)
+
+Wijzigingen1                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen2                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen3                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen4                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen5                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen6                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen7                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen8                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen9                   = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen10                  = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen11                  = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+Wijzigingen12                  = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+
+.Choices
+BKRCheck                       = "0:Nee|1:Ja|2:nvt"
+Lease                          = "0:Nee|1:Ja"
+
+KredietAanvraagOfWijziging     = "1:Kredietaanvraag|2:Kredietwijziging|3:Combi aanvraag/wijziging|4:Juridische Omzetting"
+AantalInvesteringsdoelen       = "1:Een|2:Twee|3:Drie|4:Vier|5:Vijf|6:Zes"
+Investeringsdoel1              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+Investeringsdoel2              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+Investeringsdoel3              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+Investeringsdoel4              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+Investeringsdoel5              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+Investeringsdoel6              = "10:Investering in onroerend goed|20:Investering in overige vaste activa|30:Investering in vlottende activa|40:Investering in immateriële activa|50:Investering in combinatie van materiële activa|60:Investering in combinatie van materiële en immateriële activa"
+
+.Formulas NoTrend
+Relatienummer                  = &FPS_VAR_Relatienummer
+BKRCheck                       = If(RechtsvormBV[1],2,-1)
+GevraagdKredietbedrag          = -EigenInbrengBedrag+Investeringsbedrag1+Investeringsbedrag2+Investeringsbedrag3+Investeringsbedrag4+Investeringsbedrag5+Investeringsbedrag6
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map01_Paragraaf01 <$  \Visible_M01P01
+PP      1N     4               $>Zichtbaarheid Q_Map01_Paragraaf02 <$  \Visible_M01P02
+PP      1N     4               $>Zichtbaarheid Q_Map01_Paragraaf02a<$  \Visible_M01P02a
+PP      1N     4               $>Zichtbaarheid Q_Map01_Paragraaf03 <$  \Visible_M01P03
+PP      1N     4               $>Zichtbaarheid Q_Map01_Paragraaf04 <$  \Visible_M01P04
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X))")
+Q_Map01_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map01                         = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map01_INFO                   =
+Q_Map01_VALIDATION             = &If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+Visible_M01P01 = 1
+Visible_M01P02 = 1
+Visible_M01P02a= 1
+Visible_M01P03 = 1
+Visible_M01P04 = 1
+
+.Formulas Visible
+Q_Map01_Paragraaf01  = Visible_M01P01
+Q_Map01_Paragraaf02  = Visible_M01P02
+Q_Map01_Paragraaf02a = Visible_M01P02a
+Q_Map01_Paragraaf03  = Visible_M01P03
+Q_Map01_Paragraaf04  = Visible_M01P04
+
+.Choices
+Q_Map01                        = Q_ROOT
+
+
+.Variables
+;================================================================================================== MAP 2
+PP      1N C   2               Voorbereiding                                                       \Q_Map02
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 2<$                                              \Q_Map02_WARNING
+PP      1A     3               $>Info bij stap 2<$                                                 \Q_Map02_INFO
+PP      1A     3               $>Validatie stap 2<$                                                \Q_Map02_VALIDATION
+
+.Variables
+;------------------------------
+PP      1N     3               Klantgegevens                                                       \Q_Map02_Paragraaf01
+
+PI      1A     4               GRID ID hoofdkredietnemer                                           \GRIDID=FPS_VAR_GridId
+C Niet verplicht, leeg laten indien niet bekend.
+PI      1A     4               KFC nummer hoofdkredietnemer                                        \KFCNummerHoofdkredietNemer
+PI    0 1N     4               KFC belang vóór kredietverlening?                                   \KFCVoorKrediet
+PP    0 1N     4               KFC belang na kredietverlening?                                     \KFCbelang
+C Dit bedrag wordt automatisch berekend.
+PI    0 1N     4               Wat is het Legal One Obligor vóór kredietverlening?                 \LooVoorKrediet
+C Opzoeken in vortex
+PP    0 1N     4               Wat is het Legal One Obligor ná kredietverlening?                   \LooNaKrediet
+C Dit bedrag wordt automatisch berekend.
+
+PI      1N C   4               Wat is de rechtsvorm van de onderneming?                            \Rechtsvorm
+C Keuze maken uit dropdown menu
+PI      1N C   4               Status Kamer van Koophandel                                         \StatusBijKvK
+C Kun je vinden in GRID bovenaan onder het tabblad ‘Details’.
+PI      1N D   4               Oprichtingsdatum bij KvK                                            \OprichtingsdatumKvK
+PI      1N C   4               Is het een starter?                                                 \Starter
+C Wordt automatisch bepaald adhv oprichtingsdatum. Indien wordt afgeweken van de uitkomst, is een toelichting vereist.
+PI      1M     4               Toelichting keuze starter                                           \StarterMemo
+PI      1N C   4               Indien starter, conform richtlijnen BMKB                            \ConformRichtlijnenBMKB
+PI    0 1N     4               Hoeveel organisaties zitten er in de juridische entiteit?           \OndernemingAantalOrganisaties      ; tussen 1 en 100
+C Aantal rechtsvormen in de juridische structuur, waarin de kredietaanvrager zich bevindt.
+PI      1M     4               Relatienummers medekredietnemers                                    \RelatieNummersMedekredietNemers
+PI      1N C   4               Onder welk subsegment valt de klant/prospect?                       \Subsegment
+PP      1A     4               Klantgroep                                                          \KlantGroep
+PI      1N C   4               WID en NAW akkoord in ING systemen                                  \WIDenNAWAkkoord
+
+PI      1N C   4               Doet de onderneming zaken met Ultra High Risk Country landen?       \ZakenMetUHRCLanden
+PI      1N C   4               zijn er signalen die erop wijzen dat er sprake is van Financiële Economische Criminaliteit? \FinEcCriminaliteit
+C Denk hierbij aan witwassen, terrosisme financiering dan wel fraude.
+PI      1N C   4               Is CDD akkoord?                                                     \CIDAkkoord
+
+.Choices
+Starter                       = "0:Nee|1:Ja"
+
+.Formulas Notrend
+KFCNummerHoofdkredietNemer = &IMPORT_kredfacnr[1]
+OprichtingsdatumKvK        = IMPORT_oprchtdat
+
+.Formulas Visible
+StarterMemo                   = DataEntered(Starter,1)
+
+; Verplichte velden
+.Variable GRIDID              , InputRequired = 1
+.Variable KFCVoorKrediet      , InputRequired = 1
+.Variable LooVoorKrediet      , InputRequired = 1
+.Variable Rechtsvorm          , InputRequired = 1
+.Variable StatusBijKvK        , InputRequired = 1
+.Variable OprichtingsdatumKvK , InputRequired = 1
+.Variable StarterMemo         , InputRequired = Visible(StarterMemo)
+
+.Variable WIDenNAWAkkoord     , InputRequired = 1
+.Variable ZakenMetUHRCLanden  , InputRequired = 1
+.Variable FinEcCriminaliteit  , InputRequired = 1
+.Variable CIDAkkoord          , InputRequired = 1
+
+.Hints  ;Patterns
+OndernemingAantalOrganisaties = "$$MinInclusive=1"
+
+
+
+
+.Variables
+;------------------------------
+PP      1N     3               Branche/sector gegevens                                             \Q_Map02_Paragraaf02
+PI      1N C   4               In welke branche/sector is de ondernemer werkzaam?                  \SBICODE2
+C Dit zijn de eerste twee cijfers van de SBI code
+PP      1A     4               Branche omschrijving                                                \NAICSomschrijving
+PI      1N C   4               Staat de branche van de onderneming op business rule 31?            \BrancheOpRestrictedList
+C Deze kun je vinden in het Risk Rater rapport bij het veld Naics code restricted list
+PI      1N C   4               Is er sprake van een seizoensbedrijf?                               \SeizoensBedrijf
+PI      1N C   4               Is er financieringsbeleid van de sector beschikbaar?                \FinancieringsBeleidSectorBeschikbaar
+PI      1N C   4               Is de branche uitgesloten van BSK?                                  \BrancheUitgeslotenBSK
+C bos-, land-, tuinbouw, vee- of visteelt, visserij, bank- of verzekerings- of beleggingsbedrijf, exploitatie van OG, projectontwikkeling, financieren van ondernemingen, gezondheidszorg behalve in vrije markt, dierenartsen, notarissen, advocaten, gerechtsdeurwaarders
+PI    0 1N     4               Aantal fte's                                                        \AantalFTE
+.Variables
+;------------------------------
+PP      1N     3               Interne gegevens                                                    \Q_Map02_Paragraaf03
+
+PI      1A     4               Batch-rating                                                        \BatchRating                                       ;tussen 0 en 20
+C Zoals bijvoorbeeld SH15.2. Leeg laten indien niet beschikbaar.
+PI    0 1N     4               Batch-referentielimiet                                              \BatchReferentieLimiet                             ;tussen 0 en 500000
+C Leeg laten indien niet beschikbaar
+PI      1N C   4               Ratingmodel na kredietverlening?                                    \RatingModel
+PI      1N C   4               Rating na invoering jaarcijfers (indien van toepassing)             \LatereRating
+PI      1N     4               Referentielimiet na invoering jaarcijfers (alleen bij SBF)          \LatereReferentieLimiet
+PI    0 1N     4               Rekeningomzet ING van de afgelopen 12 maanden                       \RekeningOmzetING
+PI    0 1N     4               Bedrijfsomzet per jaar                                              \Bedrijfsomzet
+PI      1N C  -4               Is de rekeningomzet gedaald of gestegen (zelfde Periode)            \ROGedaaldGestegen
+PI      1N C   4               Is deze daling/stijging > 20%                                       \ROStijgingDalingMeerDan20Procent
+PI      1M     4               Toelichting                                                         \ROStijgingDalingMeerDan20ProcentToelichting
+PI      1N C  -4               Is de bedrijfsomzet gedaald of gestegen                             \BOGedaaldGestegen
+PI      1N C   4               Is deze daling/stijging > 20%                                       \BOStijgingDalingMeerDan20Procent
+PI      1M     4               Toelichting                                                         \BOStijgingDalingMeerDan20ProcentToelichting
+PI      1N C  -4               Overstanden/tijdelijke limieten                                     \OverstandenTijdelijkeLimieten
+PI      1M     4               Toelichting                                                         \OverstandenTijdelijkeLimietenToelichting
+PI      1N C  -4               Huisbankierschap 100%	                                             \HuisbankierschapVolledig
+PI      1M     4               Toelichting                                                         \HuisbankierschapVolledigToelichting
+PI      1N C   4               Indien nee, bereid omzet te verleggen                               \BereidOmzetVerleggen
+PI    0 1N %   4               Voor hoeveel procent?                                               \BereidOmzetVerleggenProcent
+PI      1N C  -4               Andere (externe) financiers                                         \AndereExterneFinanciers
+PI      1M     4               Indien ja, welke en belang in Euro's                                \AndereExterneFinanciersToelichting
+
+PP      1N     3               Prospect                                                            \Q_Map02_Paragraaf04
+PI      1M     4               Waarom is er voor ING gekozen?                                      \WaaromVoorINGGekozen
+PI      1N C   4               Welk klant worden proces?                                           \KlantWordenProces
+
+
+.Formulas NoTrend
+KlantGroep          = &If(Starter[1],"Starter",&If(Switcher[1],"Switcher",&If(Klant[1],"Klant",&If(Prospect[1],"Prospect"))))
+LooNaKrediet        = If(GevraagdKredietbedrag=NA, NA,LooVoorKrediet+GevraagdKredietbedrag)
+KFCbelang           = If(GevraagdKredietbedrag=NA, NA,KFCVoorKrediet+GevraagdKredietbedrag)
+NAICSomschrijving   = &IMPORT_naics_prim_industry_desc[1]
+RekeningOmzetING    = IMPORT_sbfbomzc_mm_mm11
+BatchReferentieLimiet = IMPORT_reflimiet_mm
+BatchRating         = &IMPORT_ing_risk_rating_mm[1]
+
+
+.Choices
+WIDenNAWAkkoord                                 = "1:Ja|0:Nee"
+ZakenMetUHRCLanden                              = "1:Ja|0:Nee"
+FinEcCriminaliteit                              = "1:Ja|0:Nee"
+CIDAkkoord                                      = "1:Ja|0:Nee"
+SBICODE2                                        = file "SBI.FIB"
+Rechtsvorm                                      = "5:Eenmanszaak|10:VOF|15:Maatschap|20:CV|25:BV|30:Vereniging|35:Stichting|40:Buitenlandse rechtsvorm|45:Man/vrouw VOF|50:Overig"
+StatusBijKvK                                    = "1:Actief|0:Inactief"
+Subsegment                                      =  "1:MKB|2:MKB Advies"
+BrancheOpRestrictedList                         = "1:Ja|0:Nee"
+BrancheUitgeslotenBSK                           = "1:Ja|0:Nee"
+SeizoensBedrijf                                 = "1:Ja|0:Nee"
+FinancieringsBeleidSectorBeschikbaar            = "1:Ja|0:Nee"
+KlantWordenProces                               = "1:Direct openen|2:Reguliere klant worden proces"
+ConformRichtlijnenBMKB                          = "1:Ja|0:Nee"
+LatereRating                                    = file "Starter-BatchRating.fib"
+ROGedaaldGestegen                               = "2:Gestegen|3:Gedaald"
+ROStijgingDalingMeerDan20Procent                = "1:Ja|0:Nee"
+BOGedaaldGestegen                               = "2:Gestegen|3:Gedaald"
+BOStijgingDalingMeerDan20Procent                = "1:Ja|0:Nee"
+OverstandenTijdelijkeLimieten                   = "1:Ja|0:Nee"
+HuisbankierschapVolledig                        = "1:Ja|0:Nee"
+BereidOmzetVerleggen                            = "1:Ja|0:Nee"
+AndereExterneFinanciers                         = "1:Ja|0:Nee"
+RatingModel                                     = "1:SBF|2:SME|3:Overig"
+
+.Formulas Visible
+RelatieNummersMedekredietNemers                 = FesExpression("(OndernemingAantalOrganisaties>1) Or InputRequired(RelatieNummersMedekredietNemers)")
+ConformRichtlijnenBMKB                          = FesExpression("(Starter=1) Or InputRequired(ConformRichtlijnenBMKB)")
+LatereReferentieLimiet                          = FesExpression("(SBF=1)Or InputRequired(LatereReferentieLimiet)")
+BereidOmzetVerleggen                            = FesExpression("(HuisbankierschapVolledig=0) Or InputRequired(BereidOmzetVerleggen)")
+BereidOmzetVerleggenProcent                     = FesExpression("(HuisbankierschapVolledig=0)Or InputRequired(BereidOmzetVerleggenProcent)")
+AndereExterneFinanciersToelichting              = FesExpression("(AndereExterneFinanciers=1) Or InputRequired(AndereExterneFinanciersToelichting)")
+WIDenNAWAkkoord                                 = FesExpression("(Klant=1) Or InputRequired(WIDenNAWAkkoord)")
+ROGedaaldGestegen                               = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(ROGedaaldGestegen)")
+ROStijgingDalingMeerDan20Procent                = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(ROStijgingDalingMeerDan20Procent)")
+ROStijgingDalingMeerDan20ProcentToelichting     = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(ROStijgingDalingMeerDan20ProcentToelichting)")
+BOGedaaldGestegen                               = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(BOGedaaldGestegen)")
+BOStijgingDalingMeerDan20Procent                = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(BOStijgingDalingMeerDan20Procent)")
+BOStijgingDalingMeerDan20ProcentToelichting     = FesExpression("((Klant=1) And (Starter=0)) Or InputRequired(BOStijgingDalingMeerDan20ProcentToelichting)")
+
+; Verplichte velden
+.Variable WaaromVoorINGGekozen                  , InputRequired = (Prospect[1]=1)
+.Variable BrancheOpRestrictedList               , InputRequired = 1
+.Variable SeizoensBedrijf                       , InputRequired = 1
+.Variable FinancieringsBeleidSectorBeschikbaar  , InputRequired = 1
+.Variable BrancheUitgeslotenBSK                 , InputRequired = 1
+.Variable AantalFTE                             , InputRequired = 1
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map02_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (2)<$                                    \Q_Map02_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_Map02_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map02_Paragraaf01<$  \Visible_M02P01
+PP      1N     4               $>Zichtbaarheid Q_Map02_Paragraaf02<$  \Visible_M02P02
+PP      1N     4               $>Zichtbaarheid Q_Map02_Paragraaf03<$  \Visible_M02P03
+PP      1N     4               $>Zichtbaarheid Q_Map02_Paragraaf04 <$ \Visible_M02P04
+
+.Formulas Notrend
+Q_Map02_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X))")
+Q_Map02_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map02                         = (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS)
+Q_Map02_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map02_INFO                   =
+Q_Map02_VALIDATION             = &If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+Visible_M02P01 = 1
+Visible_M02P02 = 1
+Visible_M02P03 = 1
+Visible_M02P04 = (Prospect=1)
+
+.Formulas Visible
+Q_Map02_Paragraaf01 = Visible_M02P01
+Q_Map02_Paragraaf02 = Visible_M02P02
+Q_Map02_Paragraaf03 = Visible_M02P03
+Q_Map02_Paragraaf04 = Visible_M02P04
+
+.Choices
+Q_Map02                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 3
+PP      1N C   2               Adviesgesprek                                                            \Q_Map03
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 3<$                                              \Q_Map03_WARNING
+PP      1A     3               $>Info bij stap 3<$                                                 \Q_Map03_INFO
+PP      1A     3               $>Validatie stap 3<$                                                \Q_Map03_VALIDATION
+
+.Variables
+;------------------------------
+PX      1N     3               Algemeen                                                            \Q_Map03_Paragraaf01
+PI      1N D   4               Datum adviesgesprek                                                 \DatumAdviesGesprek
+C Invullen nadat gesprek is gevoerd
+
+;Verplichte velden
+.Variable DatumAdviesGesprek                          , InputRequired = 1
+
+.Variables
+;------------------------------
+PX      1N     3               Zorgplicht richting klant                                           \Q_Map03_Paragraaf01c
+PI      1N C   4               Hebben we de zekerheidsverstrekker gewezen op de risico’s van en uitleg gegeven over de door hem te verstrekken zekerheden? \GewezenRisicosZekerheden
+PI      1N D   4               Wanneer getoetst?                                                  \GewezenRisicosZekerhedenWanneerBesproken
+PI      1N C  -4               Indien er sprake is van een HMS/CJMO: hebben we mede o.b.v. de statuten getoetst of de HMS of CJMO partijen deze zekerheid mogen verstrekken? \MagZekerheidWordenVerstrekt
+PI      1N D   4               Wanneer getoetst?                                                  \MagZekerheidWordenVerstrektWanneerBesproken
+PI      1N C  -4               Indien er sprake is van een zekerheidsverstrekker en deze is een derde, hebben we dan o.b.v. de statuten getoetst of deze de zekerheid mag verstrekken? \MagZekerheidStatWordenVerstrekt
+PI      1N D   4               Wanneer getoetst?                                                  \MagZekerheidStatWordenVerstrektWanneerBesproken
+PI      1N C  -4               Indien sprake is van een EOL, zijn alle risico’s rondom dit product in het adviesgesprek met de klant besproken? \ProductRisicosBesproken
+PI      1N D   4               Wanneer getoetst?                                                  \ProductRisicosBesprokenWanneerBesproken
+
+.Choices
+GewezenRisicosZekerheden                       = "1:Ja|0:Nee"
+MagZekerheidWordenVerstrekt                    = "1:Ja|0:Nee|2:nvt"
+MagZekerheidStatWordenVerstrekt                = "1:Ja|0:Nee|2:nvt"
+ProductRisicosBesproken                        = "1:Ja|0:Nee|2:nvt"
+
+.Formulas Visible
+GewezenRisicosZekerhedenWanneerBesproken        = (GewezenRisicosZekerheden=1)       Or (GewezenRisicosZekerheden=0)
+MagZekerheidWordenVerstrektWanneerBesproken     = (MagZekerheidWordenVerstrekt=1)    Or (MagZekerheidWordenVerstrekt=0)
+MagZekerheidStatWordenVerstrektWanneerBesproken = (MagZekerheidStatWordenVerstrekt=1)Or (MagZekerheidStatWordenVerstrekt=0)
+ProductRisicosBesprokenWanneerBesproken         = (ProductRisicosBesproken=1)        Or (ProductRisicosBesproken=0)
+
+;Verplichte velden
+.Variable GewezenRisicosZekerheden                          , InputRequired = 1
+.Variable GewezenRisicosZekerhedenWanneerBesproken          , InputRequired = Visible(Self)
+.Variable MagZekerheidWordenVerstrekt                       , InputRequired = 1
+.Variable MagZekerheidWordenVerstrektWanneerBesproken       , InputRequired = Visible(Self)
+.Variable MagZekerheidStatWordenVerstrekt                   , InputRequired = 1
+.Variable MagZekerheidStatWordenVerstrektWanneerBesproken   , InputRequired = Visible(Self)
+.Variable ProductRisicosBesproken                           , InputRequired = 1
+.Variable ProductRisicosBesprokenWanneerBesproken           , InputRequired = Visible(Self)
+
+.Variables
+;------------------------------
+PX      1N     3               Lease (bij producten)                                               \Q_Map03_Paragraaf02
+PI      1M     4               Omschrijving object                                                 \LeaseOmschrijving
+C Geef een omschrijving van de aanvraag (max 50 karakters)
+PI      1N C   4               Lease object categorie                                              \LeaseObject
+C Selecteer een Leaseobject categorie uit de dropdown list
+PI    0 1N     4               Bouwjaar                                                            \LeaseBouwjaar
+C
+PI    0 1N C   4               Bouwmaand                                                           \LeaseBouwMaand
+C Selecteer een bouwmaand uit de dropdown list
+PI    0 1N     4       +       Objectbedrag                                                        \LeasObjectBedrag
+C Vul het object bedrag in excl. BTW|Let op: bij vervoersmiddelen dienen ook de BPM en Leges hierin te worden opgenomen|Voor het genereren van de overeenkomst kunnen de BPM en Leges van de factuur worden ingevoerd, Hiermee wordt het investeringsbedrag automatisch verlaagd.|Let op: bij een grijs kenteken, geen BPM en Leges opnemen.
+PI    0 1N     4               Looptijd in maanden                                                 \LeaseLooptijdMnd
+C Geef de gewenste looptijd weer in maanden van de aanvraag (mag niet kleiner zijn dan 6)
+PI    0 1N     4       +       Slottermijn                                                         \LeaseSlotTermijn
+C Indien een slottermijn gewenst is, geef het gewenste bedrag aan (mag niet kleiner zijn dan 0)|Uitleg: Indien de klant een slottermijn wenst, wordt het laatste leasetermijn verhoogd met dit bedrag.
+PI    0 1N     4       +       Eigen financiering klant                                            \LeaseEigenMiddelen
+C indien van toepassing kan er een eigen financiering worden ingevoerd
+PI    0 1N     4       +       Inruilwaarde object                                                 \LeaseInruilWaarde
+C indien van toepassing kan er een waarde worden opgevoerd van een in te ruilen object. Hiermee wordt het investeringsbedrag automatisch verlaagd.
+PI    0 1N     4       +       Investeringsbedrag                                                  \LeaseInvestering
+PI      1N C   4               Betaling aan                                                        \LeaseBetalingAan
+C Selecteer uit de “drop down list” aan wie de betaling wordt verricht (Lessee of Leverancier)
+PI      1A     4               Indien leverancier: naam leverancier                                \LeaseLeverancier
+PI      1A     4               Indien leverancier: rekeningnummer leverancier                      \LeaseLeverancierRekNr
+
+.Choices
+LeaseBetalingAan              = "1:lessee|2:Leverancier"
+LeaseObject                   = "11:11 Personenvervoer|12:12 Truck & Trailers|13:13 Overig transport|21:21 Vracht-/Tankcontainer|22:22 Kranen|23:23 Hefwerktuigen|31:31 Agrarische machines|32:32 Grafische assets|33:33 Grondverzet|34:34 Productiemachines|35:35 Opslag/winkel/kantoorinrichting/apparatuur|36:36 Afval/reiniging/recyclingmachines|37:37 Dienstverlenende apparatuur II|41:41 ICT en Telecommunicatie|42:42 Telecommunicatie|43:43 Energie en mileubesparende apparatuur|44:44 Medische apparatuur|51:51 consumentengoederen|99:99 Overige"
+LeaseBouwMaand                = "01: Januari|02: Februari|03: Maart|04: April|05: Mei|06: Juni|07: Juli|08: Augustus|09: September|10: Oktober|11: November|12: December"
+
+.Variables
+;------------------------------
+PX      1N     3               Starter                                                             \Q_Map03_Paragraaf05_Starter
+C Deze paragraaf moet gevuld worden indien het een starter betreft.
+PI      1N C   4               Is de onderneming adequaat verzekerd tegen relevante bedrijfsrisico's?\BedrijfsrisicosVerzekerd
+PI      1N C   4               Is de bestuurder bereid om de persoonlijke borg te stellen?         \PersoonlijkeBorgBestuurderBereidheid      ; Alleen indien BV
+C Voor 25% van het kredietbedrag.
+PI      1N C   4               Wordt de onderneming begeleid door een professional?                \OndernemingProffesioneelBegeleid
+C Onder professional wordt verstaan een ervaren branchegenoot of iemand die beroepsmatig starters begeleidt.
+PI      1N C   4               Hoofdreden voor het starten van de onderneming                      \HoofdredenStartOnderneming
+C Bepaal de hoofdreden o.b.v. je oordeel naar aanleiding van klantcontact.
+PI      1N C   4               Is het eigen deel investering gecorrigeerd voor aanloopverlies en investering in immateriële activa > 35% (BV) of > 25% (overige rechtsvormen)?\ControleEigenDeelInvestering -> Rechtsvorm
+PI      1N C   4               indien te weinig eigen inbreng. Dekking in de vorm van hypotheek?   \DekkingDoorHypotheek
+C indien te weinig eigen inbreng en    alleen bij aanvragen > 50k
+PI      1N C   4               Aanvraag is >50k en eigen inbreng is te laag. Is er dekking uit hypotheek?\DekkingUitHypotheek
+PI    0 1N     4               Aanwending van bestaande liquide middelen                           \BenuttingLiqMiddelen                             ;tussen 0 en 1.000.000
+C Aanwenden van bestaande liquide middelen (of ruimte op bestaande RC faciliteit), voor de huidige investeringsbehoefte.
+PI      1N C   4               Wordt de bedrijfsadministratie uitbesteed?                          \BedrijfsadmUitbesteed
+PI      1N C   4               Heeft de onderneming al geaccepteerde offertes en/of goederen verkocht?\ReedsOmzetGegenereerd
+PI      1N C   4               Beschikt de onderneming over tussentijdse cijfers?                  \TussentijdseCijfersAanwezig
+C Bij ondernemingen die langer dan 6 maanden bestaan
+PI      1N C   4               Wordt het ondernemersplan door een financieel expert ondersteund?   \FinancieleExpert
+C Moet blijken uit meegestuurd ondernemersplan
+
+.Choices
+BedrijfsrisicosVerzekerd                         = "1:Ja|0:Nee"
+PersoonlijkeBorgBestuurderBereidheid             = "1:Ja|0:Nee|10:N.v.t."
+HoofdredenStartOnderneming                       = "1:gedwongen werkloosheid|2:ontevreden over baan in loondienst|3:dreigende werkloosheid|4:gunstige economische conjunctuur|5:beschikbaarheid eigen financiële middelen|6:vanzelf ingegroeid|7:ontdekking gat in de markt|8:meer geld verdienen dan in loondienst|9:combinatie gezin en arbeid|10:eigen baas zijn|11:verrichten specifieke werkzaamheden|12:uitdaging|13:uit nood door privéomstandigheden"
+OndernemingProffesioneelBegeleid                 = "1:Ja|0:Nee"
+BedrijfsadmUitbesteed                            = "1:Ja|0:Nee"
+ReedsOmzetGegenereerd                            = "1:Ja|0:Nee|5:Dit is in deze branche ongebruikelijk"
+TussentijdseCijfersAanwezig                      = "1:Ja|0:Nee|10:N.v.t."
+ControleEigenDeelInvestering                     = "1:Ja|0:Nee"
+DekkingUitHypotheek                              = "1:Ja|0:Nee"
+DekkingDoorHypotheek                             = "1:Ja|0:Nee"
+
+.Formulas Visible
+DekkingUitHypotheek                              = If( (ControleEigenDeelInvestering[1]=0) And  (GevraagdKredietbedrag[1]>50000) , 1 , 0) Or InputRequired(DekkingUitHypotheek)
+
+.Variable BedrijfsrisicosVerzekerd              , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable PersoonlijkeBorgBestuurderBereidheid  , InputRequired = (Starter=1) And (LooNaKrediet<300000) And (RechtsvormBV=1)
+.Variable OndernemingProffesioneelBegeleid      , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable HoofdredenStartOnderneming            , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable ControleEigenDeelInvestering          , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable DekkingDoorHypotheek                  , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable DekkingUitHypotheek                   , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable BenuttingLiqMiddelen                  , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable BedrijfsadmUitbesteed                 , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable ReedsOmzetGegenereerd                 , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable TussentijdseCijfersAanwezig           , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+.Variable FinancieleExpert                      , InputRequired = (Starter=1) And (LooNaKrediet<300000)
+
+.Variables
+;------------------------------
+PX      1N     3               Bestuurders                                                         \Q_Map03_Paragraaf06_Starter
+PI      1N C   4               Aantal bestuurders                                                  \AantalBestuurders
+
+C Deze paragraaf moet gevuld worden indien het een starter betreft.
+PI      1A     4               Naam                                                                \Bestuurders01
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)                            \Bestuurders01ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders01Opleiding
+PI      1N C   4               Heeft bestuurder in afgelopen 36 maanden een onderneming langer dan 36 maanden in stand gehouden?\Bestuurders01BSKvraag             ; Alleen indien Starter en kredietvraag > 50k.
+C ongeacht branche of soort bedrijf. Voorbeeld: als bedrijf 12 maanden bestaat en de bestuurder 24 maanden geleden gestopt is met een eigen bedrijf wat vier jaar heeft bestaan. Antwoord "ja"
+PI      1A    -4               Naam                                                                \Bestuurders02
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)                            \Bestuurders02ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders02Opleiding
+PI      1N C   4               Heeft bestuurder in afgelopen 36 maanden een onderneming langer dan 36 maanden in stand gehouden?\Bestuurders02BSKvraag             ; Alleen indien Starter en
+C ongeacht branche of soort bedrijf. Voorbeeld: als bedrijf 12 maanden bestaat en de bestuurder 24 maanden geleden gestopt is met een eigen bedrijf wat vier jaar heeft bestaan. Antwoord "ja"kredietvraag > 50k.
+PI      1A    -4               Naam                                                                \Bestuurders03
+PI      1N C   4               Arbeidsverleden in de branche (in jaren)                            \Bestuurders03ErvaringInBranche
+PI      1N C   4               Beschikt over relevante vooropleiding en vakdiploma's?              \Bestuurders03Opleiding
+PI      1N C   4               Heeft bestuurder in afgelopen 36 maanden een onderneming langer dan 36 maanden in stand gehouden?\Bestuurders03BSKvraag             ; Alleen indien Starter en kredietvraag > 50k.
+C ongeacht branche of soort bedrijf. Voorbeeld: als bedrijf 12 maanden bestaat en de bestuurder 24 maanden geleden gestopt is met een eigen bedrijf wat vier jaar heeft bestaan. Antwoord "ja"
+
+.Choices
+AantalBestuurders              = "1:Één|2:Twee|3:Drie"
+FinancieleExpert               = "1:Ja|5: Ja, maar is niet aangesloten bij NOAB of is geen RA/AA|3:Nee"
+Bestuurders01ErvaringInBranche = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders02ErvaringInBranche = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders03ErvaringInBranche = "1:0-1 jaar|4:>1 jaar - 4 jaar|5:>4 jaar"
+Bestuurders01Opleiding         = "1:Ja|0:Nee"
+Bestuurders02Opleiding         = "1:Ja|0:Nee"
+Bestuurders03Opleiding         = "1:Ja|0:Nee"
+Bestuurders01BSKvraag          = "1:Ja|0:Nee"
+Bestuurders02BSKvraag          = "1:Ja|0:Nee"
+Bestuurders03BSKvraag          = "1:Ja|0:Nee"
+
+.Formulas Visible
+Bestuurders01                  = (AantalBestuurders>=1)
+Bestuurders01ErvaringInBranche = (AantalBestuurders>=1)
+Bestuurders01Opleiding         = (AantalBestuurders>=1)
+Bestuurders01BSKvraag          = (AantalBestuurders>=1)
+Bestuurders02                  = (AantalBestuurders>=2)
+Bestuurders02ErvaringInBranche = (AantalBestuurders>=2)
+Bestuurders02Opleiding         = (AantalBestuurders>=2)
+Bestuurders02BSKvraag          = (AantalBestuurders>=2)
+Bestuurders03                  = (AantalBestuurders>=3)
+Bestuurders03ErvaringInBranche = (AantalBestuurders>=3)
+Bestuurders03Opleiding         = (AantalBestuurders>=3)
+Bestuurders03BSKvraag          = (AantalBestuurders>=3)
+
+.Variables
+;------------------------------
+PX      1N     3               In geval van meerdere entiteiten en een starter                    \Q_Map03_Paragraaf07A_Starter
+PI      1M     4               Waarom kiest een starter voor een B.V. vorm                        \Q_Map03_Paragraaf07A_Starter1
+PI      1M     4               Waarom kiest een starter ervoor om meerdere entiteiten op te richten \Q_Map03_Paragraaf07A_Starter2
+PI      1M     4               Hoe gaan de verwachte geldstromen per vennootschap lopen (winstuitkering, intercompany) \Q_Map03_Paragraaf07A_Starter3
+PI      1M     4               Hebben wij voldoende inzicht in deze geldstromen? Is er controle hierop mogelijk \Q_Map03_Paragraaf07A_Starter4
+PI      1M     4               Wat zijn de gevolgen van deze geldstromen voor het kredietrisico en voor de verdeling van de kredietbehoefte per vennootschap \Q_Map03_Paragraaf07A_Starter5
+PI      1N C   4               Zijn de andere entiteiten bereid een HMS af te geven                \Q_Map03_Paragraaf07A_Starter6
+PI      1M     4               Toelichting                                                         \Q_Map03_Paragraaf07A_Starter6Toelichting
+
+.Formulas Visible
+
+; Verplichte velden
+.Variable Q_Map03_Paragraaf07A_Starter1               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter2               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter3               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter4               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter5               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter6               , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07A_Starter6Toelichting    , InputRequired =(Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+
+.Variables
+;------------------------------
+PX      1N     3               In geval van tegenvallende cijfers t.o.v. prognose van de starter  \Q_Map03_Paragraaf07B_Starter
+PI      1N C   4               Zijn er tegenvallende cijfers?                                     \Q_Map03_Paragraaf07B_TegenvallendeCijfers
+PI      1M     4               Wat is de oorzaak van de tegenvallende cijfers (realisatie vs begroting). Zit dat bijvoorbeeld in lagere omzet, lagere brutowinstmarge of hogere kosten? \Q_Map03_Paragraaf07B_Starter1
+PI      1M     4               Wat heeft de ondernemer gedaan om de tegenvallende cijfers op te vangen, op korte en lange termijn? \Q_Map03_Paragraaf07B_Starter2
+PI      1N C   4               Is de afloscapaciteit o.b.v. de gerealiseerde cijfers toereikend om de rente- en aflossingsverplichtingen te kunnen voldoen \Q_Map03_Paragraaf07B_Starter3
+PI      1M     4               Toelichting                                                         \Q_Map03_Paragraaf07B_Starter3Toelichting
+PI      1N C   4               Indien Nee, vraag aangepaste begroting en is de afloscapaciteit dan wel voldoende, rekening houdend met een correctie factor van 0,9 \Q_Map03_Paragraaf07B_Starter4
+PI      1M     4               Toelichting                                                         \Q_Map03_Paragraaf07B_Starter4Toelichting
+PI      1N C   4               Indien Ja, is de klant bereid om harde zekerheid zoals een hypotheek te verstrekken? \Q_Map03_Paragraaf07B_Starter5
+C Indien nee, afwijzen
+PI      1M     4               Toelichting                                                         \Q_Map03_Paragraaf07B_Starter5Toelichting
+PI      1N C   4               Is de verhouding eigen vermogen/totaal vermogen nog acceptabel (richtlijn 25% EZ/VOF en 35% BV) \Q_Map03_Paragraaf07B_Starter6
+PI      1M     4               Toelichting                                                         \Q_Map03_Paragraaf07B_Starter6Toelichting
+PI      1N C   4               Is de eventuele afname van het eigen vermogen ontstaan door een exploitatieverlies of door onttrekkingen door de bestuurder of door de holding? \Q_Map03_Paragraaf07B_Starter7
+
+
+.Choices
+Q_Map03_Paragraaf07B_TegenvallendeCijfers = "0:Nee|1:Ja"
+
+.Formulas Visible
+Q_Map03_Paragraaf07B_Starter1               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter2               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter3               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter3Toelichting    = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter4               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter4Toelichting    = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter5               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter5Toelichting    = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter6               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter6Toelichting    = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+Q_Map03_Paragraaf07B_Starter7               = Q_Map03_Paragraaf07B_TegenvallendeCijfers=1
+
+.Variable Q_Map03_Paragraaf07B_TegenvallendeCijfers,InputRequired= (Starter=1) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07B_Starter1            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter2            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter3            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter3Toelichting ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter4            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter4Toelichting ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter5            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter5Toelichting ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter6            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter6Toelichting ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+.Variable Q_Map03_Paragraaf07B_Starter7            ,InputRequired= (Q_Map03_Paragraaf07B_TegenvallendeCijfers=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Indien het een kredietbehoefte betreft 50k en een starter         \Q_Map03_Paragraaf07C_Starter
+PI      1N C   4               Wordt het ondernemersplan Ondersteund door een branche Expert     \Q_Map03_Paragraaf07C_Starter1
+PI      1M     4               Toelichting                                                       \Q_Map03_Paragraaf07C_Starter1Toelichting
+
+PI      1M     4               Beoordeel of de ondernemer een plausibele onderbouwing heeft voor de vestigingsplaats van de onderneming, in vergelijking met soortgelijke bedrijven \Q_Map03_Paragraaf07C_Starter2
+PI      1M     4               Beoordeel of de ondernemer een plausibele onderbouwing heeft ten aanzien van haar positie ten opzichte van haar concurrenten \Q_Map03_Paragraaf07C_Starter3
+PI      1M     4               Beoordeel of de ondernemer een plausibele onderbouwing heeft van het onderscheidende vermogen van de onderneming (prijs, product, promotie, plaats)\Q_Map03_Paragraaf07C_Starter4
+C Vergelijk hierbij het laatst verdiende inkomen in de huishouding van de ondernemer met het inkomen uit onderneming, eventueel aangevuld met een vast inkomen van de partner. Vraag aan de ondernemer hoe reëel het is als er een forse inkomensachteruitgang opgevangen moet worden. Het bruto gezinsinkomen moet minimaal 30.000 euro per jaar bedragen als normatief gezinsinkomen.
+PI      1M     4               Beoordeel de kans dat de ondernemer toe kan met een lager (verwacht) inkomen uit de onderneming, ten opzichte van het inkomen vóór de start van de onderneming. Vergelijk hierbij het laatst verdiende inkomen uit in de huishouding van de ondernemer met het inkomen uit onderneming, eventueel aangevuld met een vast inkomen van de partner. Vraag aan de ondernemer hoe reëel het is als er een forse inkomensachteruitgang opgevangen moet worden. Het bruto gezinsinkomen moet minimaal 30.000 euro per jaar bedragen als normatief gezinsinkomen. \Q_Map03_Paragraaf07C_Starter5
+
+.Choices
+Q_Map03_Paragraaf07A_Starter6     = "1:Ja|0:Nee"
+Q_Map03_Paragraaf07B_Starter3     = "1:Ja|0:Nee"
+Q_Map03_Paragraaf07B_Starter4     = "1:Ja|0:Nee"
+Q_Map03_Paragraaf07B_Starter5     = "1:Ja|0:Nee"
+Q_Map03_Paragraaf07B_Starter6     = "1:Ja|0:Nee"
+Q_Map03_Paragraaf07B_Starter7     = "1:Exploitatie verlies|2:Onttrekking bestuurder|3:nvt"
+Q_Map03_Paragraaf07C_Starter1     = "1:Ja|0:Nee"
+
+.Formulas Visible
+Q_Map03_Paragraaf07C_Starter2     = (Q_Map03_Paragraaf07C_Starter1=0)
+Q_Map03_Paragraaf07C_Starter3     = (Q_Map03_Paragraaf07C_Starter1=0)
+Q_Map03_Paragraaf07C_Starter4     = (Q_Map03_Paragraaf07C_Starter1=0)
+Q_Map03_Paragraaf07C_Starter5     = (Q_Map03_Paragraaf07C_Starter1=0)
+
+; Verplichte velden
+.Variable Q_Map03_Paragraaf07C_Starter1            , InputRequired =(Starter=1) And (LooNaKrediet>50000) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07C_Starter1Toelichting , InputRequired =(Starter=1) And (LooNaKrediet>50000) And (LooNaKrediet<300000)
+.Variable Q_Map03_Paragraaf07C_Starter2            , InputRequired =(Q_Map03_Paragraaf07C_Starter1=0)
+.Variable Q_Map03_Paragraaf07C_Starter3            , InputRequired =(Q_Map03_Paragraaf07C_Starter1=0)
+.Variable Q_Map03_Paragraaf07C_Starter4            , InputRequired =(Q_Map03_Paragraaf07C_Starter1=0)
+.Variable Q_Map03_Paragraaf07C_Starter5            , InputRequired =(Q_Map03_Paragraaf07C_Starter1=0)
+
+.Variables
+;------------------------------
+PX      1N     3               Switcher                                                            \Q_Map03_Paragraaf08_Switcher
+C Deze paragraaf moet gevuld worden indien het een switcher betreft.
+PI    0 1N     4       +       Hoeveel leveranciers heeft de onderneming (aantallen)               \AantalLeveranciers
+PI    0 1N     4       +       Hoeveel klanten heeft de onderneming?                               \AantalKlanten
+PI    0 1N     4       +       Wat is de laatste officiële netto-omzet?                            \LaatsteNettoOmzet                  ; +/- 50.000.000.000
+C In euro's. Terug te vinden in de officiële definitieve recente jaarcijfers
+PI      1N C   4               Sluit de ondernemer tegelijkertijd ook niet-kredietproducten af bij ING?   \NietKredietProductBijING
+C Keuze maken uit dropdown menu
+
+.Choices
+NietKredietProductBijING       = "1:Ja|0:Nee"
+
+.Variables
+;------------------------------
+PX      1N     3               Starter                                                             \Q_Map03_Paragraaf09
+C Deze paragraaf moet gevuld worden indien het een starter betreft.
+PI      1N C   4               Akkoord Startersmodel ?                                             \AkkoordStartersModel
+C Keuze maken uit dropdown menu
+
+.Choices
+AkkoordStartersModel           = "1:Ja|0:Nee"
+
+.Variables
+;------------------------------
+PX      1N     3               Switcher                                                            \Q_Map03_Paragraaf10
+C Deze paragraaf moet gevuld worden indien het een switcher betreft.
+PI      1N C   4               Akkoord Switchersmodel?                                             \AkkoordSwitchersmodel
+C Keuze maken uit dropdown menu
+;
+.Choices
+AkkoordSwitchersmodel          = "1:Ja|0:Nee"
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map03_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (3)<$                                    \Q_Map03_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (3)<$                          \Q_Map03_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf01         <$  \Visible_M03P01
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf01c        <$  \Visible_M03P01c
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf02         <$  \Visible_M03P02
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf05_Starter <$  \Visible_M03P05_St
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf06_Starter <$  \Visible_M03P06_St
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf07A_Starter<$  \Visible_M03P07A_St
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf07B_Starter<$  \Visible_M03P07B_St
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf07C_Starter<$  \Visible_M03P07C_St
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf08_Switcher<$  \Visible_M03P08_Sw
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf09         <$  \Visible_M03P09
+PP      1N     4               $>Zichtbaarheid Q_Map03_Paragraaf10         <$  \Visible_M03P10
+
+.Formulas Notrend
+Q_Map03_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X))")
+Q_Map03_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map03                         = (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS)
+Q_Map03_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map03_INFO                   =
+Q_Map03_VALIDATION             = &If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+Visible_M03P01     = 1
+Visible_M03P01c    = 1
+Visible_M03P02     = (Lease=1)
+Visible_M03P05_St  = (Starter=1) And (LooNaKrediet<300000)
+Visible_M03P06_St  = (Starter=1) And (LooNaKrediet<300000)
+Visible_M03P07A_St = (Starter=1) And (OndernemingAantalOrganisaties>1) And (LooNaKrediet<300000)
+Visible_M03P07B_St = (Starter=1) And (LooNaKrediet<300000)
+Visible_M03P07C_St = (Starter=1) And (LooNaKrediet>50000) And (LooNaKrediet<300000)
+Visible_M03P08_Sw  = (Switcher=1)
+Visible_M03P09     = (Starter=1) And (KFCbelang<=300000)
+Visible_M03P10     = (Switcher=1) And (KFCbelang<=500000)
+
+.Formulas Visible
+Q_Map03_Paragraaf01          = Visible_M03P01
+Q_Map03_Paragraaf01c         = Visible_M03P01c
+Q_Map03_Paragraaf02          = Visible_M03P02
+Q_Map03_Paragraaf05_Starter  = Visible_M03P05_St
+Q_Map03_Paragraaf06_Starter  = Visible_M03P06_St
+Q_Map03_Paragraaf07A_Starter = Visible_M03P07A_St
+Q_Map03_Paragraaf07B_Starter = Visible_M03P07B_St
+Q_Map03_Paragraaf07C_Starter = Visible_M03P07C_St
+Q_Map03_Paragraaf08_Switcher = Visible_M03P08_Sw
+Q_Map03_Paragraaf09          = Visible_M03P09
+Q_Map03_Paragraaf10          = Visible_M03P10
+
+.Choices
+Q_Map03                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 4
+PP      1N C   2               Producten en zekerheden                                             \Q_Map04
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 4<$                                              \Q_Map04_WARNING
+PP      1A     3               $>Info bij stap 4<$                                                 \Q_Map04_INFO
+PP      1A     3               $>Validatie stap 4<$                                                \Q_Map04_VALIDATION
+
+.Variables
+;------------------------------
+
+PX      1N     3               Totaalkrediet na kredietverlening                                   \Q_Map04_Paragraaf01
+PP    0 1N     4               =KFCVoorKrediet                                                     \=KFCVoorKrediet
+PP    0 1N     4               Totaal kredietverzoek (uit intake)                                  \=GevraagdKredietbedrag
+PP    0 1N    -4               =KFCbelang                                                          \=KFCbelang
+
+
+.Variables
+PP    0 1N     3       +       Onderdekking                                                        \BSK_Onderdekking02
+C Alle balans en executiewaardes zijn verplicht. Wanneer er voor de betreffende categorie geen dekking is, vul dan 0 in.
+PP    0 1N     4               Credit-/spaargelden                                                 \Dekking01 = Dekking01Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking01Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking01Waarde
+;PP    0 1N     5               Voorbelasting                                                       \Dekking01Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking01Dekkingwaarde
+
+PP    0 1N     4               Woonhuis                                                            \Dekking02 = Dekking02Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking02Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking02Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking02Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking02Dekkingwaarde
+
+PP    0 1N     4               Nieuwbouw                                                           \Dekking03 = Dekking03Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking03Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking03Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking03Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking03Dekkingwaarde
+
+PP    0 1N     4               Bedrijfs-onr.zaak                                                   \Dekking04 = Dekking04Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking04Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking04Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking04Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking04Dekkingwaarde
+
+PP    0 1N     4               Woon-/winkelpanden                                                  \Dekking05 = Dekking05Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking05Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking05Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking05Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking05Dekkingwaarde
+
+PP    0 1N     4               Schepen                                                             \Dekking06 = Dekking06Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking06Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking06Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking06Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking06Dekkingwaarde
+
+PP    0 1N     4               Verpande polis                                                      \Dekking07 = Dekking07Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking07Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking07Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking07Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking07Dekkingwaarde
+
+PP    0 1N     4               Transportmiddelen                                                   \Dekking10 = Dekking10Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking10Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking10Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking10Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking10Dekkingwaarde
+
+PP    0 1N     4               Bedrijfsuitrusting                                                  \Dekking11 = Dekking11Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking11Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking11Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking11Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking11Dekkingwaarde
+
+PP    0 1N     4               Voorraden                                                           \Dekking12 = Dekking12Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking12Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking12Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking12Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking12Dekkingwaarde
+
+PP    0 1N     4               Debiteuren                                                          \Dekking13 = Dekking13Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking13Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking13Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking13Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking13Dekkingwaarde
+
+PP    0 1N     4               Borgstelling                                                        \Dekking14 = Dekking14Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking14Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking14Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking14Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking14Dekkingwaarde
+
+PP    0 1N     4               (Terug)koopverklaring                                               \Dekking15 = Dekking15Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking15Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking15Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking15Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking15Dekkingwaarde
+
+PP    0 1N     4               Vorderingen in r.c.                                                 \Dekking16 = Dekking16Dekkingwaarde
+PP    0 1N %   5               Dekkingspercentage                                                  \Dekking16Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking16Waarde
+;PI    0 1N     5               Voorbelasting                                                       \Dekking16Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking16Dekkingwaarde
+
+PP    0 1N     4               Additionele dekkingswaarde door derden-omzetting                      \Dekking08 = Dekking08Dekkingwaarde
+PI    0 1N %   5               Dekkingspercentage                                                  \Dekking08Percentage
+PI    0 1N     5               Balans/Executiewaarde                                               \Dekking08Waarde
+PI    0 1N     5               Voorbelasting                                                       \Dekking08Voorbelasting
+PP    0 1N     5               Dekkingswaarde                                                       \Dekking08Dekkingwaarde
+
+PP    0=1N    -4               Totaal dekkingswaarde                                                \TotaalDekkingwaarde
+PP    0 1N     4               =KFCbelang                                                          \=KFCbelang
+PP    0 1N    -4               Onderdekking                                                        \Onderdekking
+PI    0 1N C   4               Onderdekkingsvoorwaarden                                            \OnderdekkingVoorwaarden
+
+.Choices
+OnderdekkingVoorwaarden        = "0:< 200.000 Euro|1:>= 200.000 Euro"
+
+.Formulas NoTrend
+OnderdekkingVoorwaarden        = If(Onderdekking<=-200000,1,0)
+
+Dekking01Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.95, 0.95 )   ; Credit-/spaargelden
+Dekking02Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.63, 0.65 )   ; Woonhuis
+Dekking03Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.63, 0.65 )   ; Nieuwbouw
+Dekking04Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.63, 0.65 )   ; Bedrijfs-Onr.zaak
+Dekking05Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.63, 0.65 )   ; Woon-/winkelpanden
+Dekking06Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.30, 0.14 )   ; Schepen
+Dekking07Percentage            = If(OnderdekkingVoorwaarden[1]=1, NA  , 1    )    ; Verpande polis
+Dekking10Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.30, NA   )   ; Transportmiddelen
+Dekking11Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.30, NA   )   ; Bedrijfsuitrusting
+Dekking12Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.30, NA   )   ; Voorraden
+Dekking13Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.30, NA   )   ; Debiteuren
+Dekking14Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0.40, NA   )   ; Borgstelling
+Dekking15Percentage            = If(OnderdekkingVoorwaarden[1]=1, 1.00, NA   )   ; (Terug)koopverklaring
+Dekking16Percentage            = If(OnderdekkingVoorwaarden[1]=1, 1.00, NA   )   ; Vorderingen in r.c.
+Dekking08Percentage            = If(OnderdekkingVoorwaarden[1]=1, 0   , 0    )   ; Additionele Dekkingwaarde door derden-omzetting
+
+Dekking01Dekkingwaarde        = Dekking01Percentage*(Dekking01Waarde)
+Dekking02Dekkingwaarde        = Dekking02Percentage*(Dekking02Waarde-Dekking02Voorbelasting)
+Dekking03Dekkingwaarde        = Dekking03Percentage*(Dekking03Waarde-Dekking03Voorbelasting)
+Dekking04Dekkingwaarde        = Dekking04Percentage*(Dekking04Waarde-Dekking04Voorbelasting)
+Dekking05Dekkingwaarde        = Dekking05Percentage*(Dekking05Waarde-Dekking05Voorbelasting)
+Dekking06Dekkingwaarde        = Dekking06Percentage*(Dekking06Waarde-Dekking06Voorbelasting)
+Dekking07Dekkingwaarde        = Dekking07Percentage*(Dekking07Waarde-Dekking07Voorbelasting)
+Dekking08Dekkingwaarde        = Dekking08Percentage*(Dekking08Waarde-Dekking08Voorbelasting)
+Dekking10Dekkingwaarde        = Dekking10Percentage*(Dekking10Waarde)
+Dekking11Dekkingwaarde        = Dekking11Percentage*(Dekking11Waarde)
+Dekking12Dekkingwaarde        = Dekking12Percentage*(Dekking12Waarde)
+Dekking13Dekkingwaarde        = Dekking13Percentage*(Dekking13Waarde)
+Dekking14Dekkingwaarde        = Dekking14Percentage*(Dekking14Waarde)
+Dekking15Dekkingwaarde        = Dekking15Percentage*(Dekking15Waarde)
+Dekking16Dekkingwaarde        = Dekking16Percentage*(Dekking16Waarde)
+Onderdekking                  = Min(TotaalDekkingwaarde - KFCbelang,0)
+
+
+.Formulas Visible
+Dekking01 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Credit-/spaargelden
+Dekking02 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Woonhuis
+Dekking03 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Nieuwbouw
+Dekking04 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Bedrijfs-Onr.zaak
+Dekking05 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Woon-/winkelpanden
+Dekking06 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Schepen
+Dekking07 = If(OnderdekkingVoorwaarden[1]=1, 0, 1 )    ; Verpande polis
+Dekking10 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Transportmiddelen
+Dekking11 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Bedrijfsuitrusting
+Dekking12 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Voorraden
+Dekking13 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Debiteuren
+Dekking14 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Borgstelling
+Dekking15 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; (Terug)koopverklaring
+Dekking16 = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Vorderingen in r.c.
+Dekking08 = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Additionele Dekkingwaarde door derden-omzetting
+
+.Variable Dekking01waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Credit-/spaargelden
+.Variable Dekking02waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Woonhuis
+.Variable Dekking03waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Nieuwbouw
+.Variable Dekking04waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Bedrijfs-Onr.zaak
+.Variable Dekking05waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Woon-/winkelpanden
+.Variable Dekking06waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Schepen
+.Variable Dekking07waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 0, 1 )    ; Verpande polis
+.Variable Dekking10waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Transportmiddelen
+.Variable Dekking11waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Bedrijfsuitrusting
+.Variable Dekking12waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Voorraden
+.Variable Dekking13waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Debiteuren
+.Variable Dekking14waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Borgstelling
+.Variable Dekking15waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; (Terug)koopverklaring
+.Variable Dekking16waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 0 )   ; Vorderingen in r.c.
+.Variable Dekking08waarde ,InputRequired = If(OnderdekkingVoorwaarden[1]=1, 1, 1 )   ; Additionele Dekkingwaarde door derden-omzetting
+
+
+.Variables
+
+PX      1N     3               Producten                                                           \Q_Map04_Paragraaf03
+PI      1N C   4               Hoeveel producten worden er aangeboden?                             \HoeveelProducten
+;------------------------------
+PI      1A    -4               Product 1 soort                                                     \Product01_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product01_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product01_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product01_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product01_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product01_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product01_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product01_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product01_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product01_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product01_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product01_IngangsdatumAfloswijze
+
+;------------------------------
+PI      1A    -4               Product 2 soort                                                     \Product02_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product02_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product02_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product02_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product02_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product02_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product02_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product02_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product02_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product02_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product02_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product02_IngangsdatumAfloswijze
+
+;------------------------------
+PI      1A    -4               Product 3 soort                                                     \Product03_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product03_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product03_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product03_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product03_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product03_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product03_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product03_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product03_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product03_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product03_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product03_IngangsdatumAfloswijze
+
+
+PI      1A    -4               Product 4 soort                                                     \Product04_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product04_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product04_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product04_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product04_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product04_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product04_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product04_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product04_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product04_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product04_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product04_IngangsdatumAfloswijze
+
+PI      1A    -4               Product 5 soort                                                     \Product05_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product05_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product05_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product05_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product05_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product05_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product05_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product05_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product05_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product05_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product05_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product05_IngangsdatumAfloswijze
+
+PI      1A    -4               Product 6 soort                                                     \Product06_Soort
+C product conform de PKM vermelden
+PI    0 1N     4       +       Hoofdsom                                                            \Product06_Hoofdsom
+PI    0 1N     4       +       Aflossing per jaar                                                  \Product06_Aflossing
+PI      1N C   4               Vervanging/uitbreidingsinvestering                                  \Product06_VervangingUitbreiding
+PI      1A     4               Eigenaar/kredietnemer                                               \Product06_Eigenaar
+PI      1N C   4               Rentebasis                                                          \Product06_Rentebasis
+C Dit veld hoeft niet te worden ingevuld bij standaardproducten.
+PI    0 1N %   4               Indicatief tarief                                                   \Product06_IndicatiefTarief
+PI    0 1N     4       +       Looptijd (jaar)                                                     \Product06_Looptijd
+PI    0 1N     4       +       Rentevaste Periode (jaar)                                           \Product06_RVPeriode
+PI      1N D   4               Ingangsdatum krediet                                                \Product06_IngangsdatumKrediet
+PI      1N C   4               Afloswijze                                                          \Product06_Afloswijze
+PI      1N D   4               Ingangsdatum afloswijze                                             \Product06_IngangsdatumAfloswijze
+
+.Variables
+PX      1N     3               Checklist berekenen rente, provisie, kosten                         \  Q_Map04_Paragraaf05
+C Doel: checklist dient te worden gebruikt om in één overzicht vast te leggen wat de in rekening gebrachte rente, provisie en kosten. Gebruik: Door onderstaande gegevens in te vullen is het mogelijk om duidelijk aan te tonen wat er aan de klant in rekening gebracht wordt en dat dit door twee medewerkers van is beoordeeld. Let wel op dat je ook alle berekeningen als bijlage in het dossier archiveert.
+
+PI      1N C   4               Voor hoeveel producten moet de RPK ingevuld worden?                   \HoeveelProductenRPK
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product01_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product01_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product01_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product01_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product01_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product01_BehandelingsKosten
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product02_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product02_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product02_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product02_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product02_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product02_BehandelingsKosten
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product03_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product03_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product03_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product03_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product03_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product03_BehandelingsKosten
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product04_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product04_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product04_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product04_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product04_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product04_BehandelingsKosten
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product05_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product05_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product05_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product05_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product05_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product05_BehandelingsKosten
+
+PI      1A    -4               Kredietproductovereenkomst (rekeningnummer)                           \Product06_KredietProductOvereenkomstRN
+PX      1N     4               In rekening te brengen bedragen:                                      \Product06_RekeningBedragen
+PI    0 1N     4               Vergoeding vervroegd aflossen                                         \Product06_VergoedingVervroegdAflossen
+PI    0 1N     4               Lopende rente verplichtingen                                          \Product06_LopendeRenteVerplichtingen
+PI    0 1N     4               Dagrente                                                              \Product06_Dagrente
+PI    0 1N     4               Behandelingskosten                                                    \Product06_BehandelingsKosten
+
+PX      1N    -4               Ingevuld en berekend door:                                            \
+PI      1A     4               Naam medewerker                                                       \IngevuldDoorNaam
+PX      1N     4               Gecontroleerd door:                                                   \
+PI      1A     4               Naam medewerker                                                       \GecontroleerdDoorNaam
+
+.Variable HoeveelProducten , InputRequired = 1
+.Variable HoeveelProductenRPK , InputRequired = 1
+.Variable Product01_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=1)
+.Variable Product02_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=2)
+.Variable Product03_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=3)
+.Variable Product04_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=4)
+.Variable Product05_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=5)
+.Variable Product06_BehandelingsKosten , InputRequired = (HoeveelProductenRPK>=6)
+
+.Choices
+HoeveelProducten                = "1:Één|2:Twee|3:Drie|4:Vier|5:Vijf|6:Zes"
+Product01_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+Product02_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+Product03_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+Product04_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+Product05_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+Product06_VervangingUitbreiding = "1:Vervanging|2:Uitbreiding "
+
+Product01_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+Product02_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+Product03_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+Product04_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+Product05_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+Product06_Rentebasis            = "1:Euribor<3 mnd|2:Euribor=3 mnd|3:Euribor>=3 mnd|4:Rentevast|5:Kasgeld<12 mnd|6:Kasgeld 12 mnd|7:Basisrente"
+
+Product01_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+Product02_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+Product03_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+Product04_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+Product05_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+Product06_Afloswijze            = "1:Lineair|2:Bullet|3:Combi|4:JC"
+
+HoeveelProductenRPK            = "1:Één|2:Twee|3:Drie|4:Vier|5:Vijf|6:Zes"
+
+BSK_VerhoudingLooptijd         = "1:Ja|2:Nee"
+BSK_Verstrekt                  = "1:Ja|2:Nee"
+
+HoeveelProductenRPK             = HoeveelProducten
+
+.Formulas Visible
+Product01_Soort                 = (HoeveelProducten>=1)
+Product01_Hoofdsom              = (HoeveelProducten>=1)
+Product01_Aflossing             = (HoeveelProducten>=1)
+Product01_VervangingUitbreiding = (HoeveelProducten>=1)
+Product01_Eigenaar              = (HoeveelProducten>=1)
+Product01_Rentebasis            = (HoeveelProducten>=1)
+Product01_IndicatiefTarief      = (HoeveelProducten>=1)
+Product01_Looptijd              = (HoeveelProducten>=1)
+Product01_RVPeriode             = (HoeveelProducten>=1)
+Product01_IngangsdatumKrediet   = (HoeveelProducten>=1)
+Product01_Afloswijze            = (HoeveelProducten>=1)
+Product01_IngangsdatumAfloswijze= (HoeveelProducten>=1)
+
+Product02_Soort                 = (HoeveelProducten>=2)
+Product02_Hoofdsom              = (HoeveelProducten>=2)
+Product02_Aflossing             = (HoeveelProducten>=2)
+Product02_VervangingUitbreiding = (HoeveelProducten>=2)
+Product02_Eigenaar              = (HoeveelProducten>=2)
+Product02_Rentebasis            = (HoeveelProducten>=2)
+Product02_IndicatiefTarief      = (HoeveelProducten>=2)
+Product02_Looptijd              = (HoeveelProducten>=2)
+Product02_RVPeriode             = (HoeveelProducten>=2)
+Product02_IngangsdatumKrediet   = (HoeveelProducten>=2)
+Product02_Afloswijze            = (HoeveelProducten>=2)
+Product02_IngangsdatumAfloswijze= (HoeveelProducten>=2)
+
+Product03_Soort                 = (HoeveelProducten>=3)
+Product03_Hoofdsom              = (HoeveelProducten>=3)
+Product03_Aflossing             = (HoeveelProducten>=3)
+Product03_VervangingUitbreiding = (HoeveelProducten>=3)
+Product03_Eigenaar              = (HoeveelProducten>=3)
+Product03_Rentebasis            = (HoeveelProducten>=3)
+Product03_IndicatiefTarief      = (HoeveelProducten>=3)
+Product03_Looptijd              = (HoeveelProducten>=3)
+Product03_RVPeriode             = (HoeveelProducten>=3)
+Product03_IngangsdatumKrediet   = (HoeveelProducten>=3)
+Product03_Afloswijze            = (HoeveelProducten>=3)
+Product03_IngangsdatumAfloswijze= (HoeveelProducten>=3)
+
+Product04_Soort                 = (HoeveelProducten>=4)
+Product04_Hoofdsom              = (HoeveelProducten>=4)
+Product04_Aflossing             = (HoeveelProducten>=4)
+Product04_VervangingUitbreiding = (HoeveelProducten>=4)
+Product04_Eigenaar              = (HoeveelProducten>=4)
+Product04_Rentebasis            = (HoeveelProducten>=4)
+Product04_IndicatiefTarief      = (HoeveelProducten>=4)
+Product04_Looptijd              = (HoeveelProducten>=4)
+Product04_RVPeriode             = (HoeveelProducten>=4)
+Product04_IngangsdatumKrediet   = (HoeveelProducten>=4)
+Product04_Afloswijze            = (HoeveelProducten>=4)
+Product04_IngangsdatumAfloswijze= (HoeveelProducten>=4)
+
+Product05_Soort                 = (HoeveelProducten>=5)
+Product05_Hoofdsom              = (HoeveelProducten>=5)
+Product05_Aflossing             = (HoeveelProducten>=5)
+Product05_VervangingUitbreiding = (HoeveelProducten>=5)
+Product05_Eigenaar              = (HoeveelProducten>=5)
+Product05_Rentebasis            = (HoeveelProducten>=5)
+Product05_IndicatiefTarief      = (HoeveelProducten>=5)
+Product05_Looptijd              = (HoeveelProducten>=5)
+Product05_RVPeriode             = (HoeveelProducten>=5)
+Product05_IngangsdatumKrediet   = (HoeveelProducten>=5)
+Product05_Afloswijze            = (HoeveelProducten>=5)
+Product05_IngangsdatumAfloswijze= (HoeveelProducten>=5)
+
+Product06_Soort                 = (HoeveelProducten>=6)
+Product06_Hoofdsom              = (HoeveelProducten>=6)
+Product06_Aflossing             = (HoeveelProducten>=6)
+Product06_VervangingUitbreiding = (HoeveelProducten>=6)
+Product06_Eigenaar              = (HoeveelProducten>=6)
+Product06_Rentebasis            = (HoeveelProducten>=6)
+Product06_IndicatiefTarief      = (HoeveelProducten>=6)
+Product06_Looptijd              = (HoeveelProducten>=6)
+Product06_RVPeriode             = (HoeveelProducten>=6)
+Product06_IngangsdatumKrediet   = (HoeveelProducten>=6)
+Product06_Afloswijze            = (HoeveelProducten>=6)
+Product06_IngangsdatumAfloswijze= (HoeveelProducten>=6)
+
+Product01_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=1)
+Product01_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=1)
+Product01_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=1)
+Product01_Dagrente                     = (HoeveelProductenRPK>=1)
+Product01_BehandelingsKosten           = (HoeveelProductenRPK>=1)
+Product01_RekeningBedragen             = (HoeveelProductenRPK>=1)
+
+Product02_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=2)
+Product02_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=2)
+Product02_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=2)
+Product02_Dagrente                     = (HoeveelProductenRPK>=2)
+Product02_BehandelingsKosten           = (HoeveelProductenRPK>=2)
+Product02_RekeningBedragen             = (HoeveelProductenRPK>=2)
+
+Product03_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=3)
+Product03_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=3)
+Product03_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=3)
+Product03_Dagrente                     = (HoeveelProductenRPK>=3)
+Product03_BehandelingsKosten           = (HoeveelProductenRPK>=3)
+Product03_RekeningBedragen             = (HoeveelProductenRPK>=3)
+
+Product04_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=4)
+Product04_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=4)
+Product04_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=4)
+Product04_Dagrente                     = (HoeveelProductenRPK>=4)
+Product04_BehandelingsKosten           = (HoeveelProductenRPK>=4)
+Product04_RekeningBedragen             = (HoeveelProductenRPK>=4)
+
+Product05_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=5)
+Product05_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=5)
+Product05_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=5)
+Product05_Dagrente                     = (HoeveelProductenRPK>=5)
+Product05_BehandelingsKosten           = (HoeveelProductenRPK>=5)
+Product05_RekeningBedragen             = (HoeveelProductenRPK>=5)
+
+Product06_KredietProductOvereenkomstRN = (HoeveelProductenRPK>=6)
+Product06_VergoedingVervroegdAflossen  = (HoeveelProductenRPK>=6)
+Product06_LopendeRenteVerplichtingen   = (HoeveelProductenRPK>=6)
+Product06_Dagrente                     = (HoeveelProductenRPK>=6)
+Product06_BehandelingsKosten           = (HoeveelProductenRPK>=6)
+Product06_RekeningBedragen             = (HoeveelProductenRPK>=6)
+
+.Variables
+;------------------------------
+
+PX      1N     3               BSK verhouding en provisie                                            \Q_Map04_Paragraaf06
+PI    1 1N %   4               Provisie                                                              \BSK_Provisie
+C http://commercial.intranet/KnowledgebaseLG/Pages/d99e6f8a0020e3b7c125729700570b95_nl.aspx Actuele tariefinformatie over Borgstellingsprovisie is te vinden via bijgaande link naar de Kennisbank Zakelijke Kredieten.
+PI      1N C   4               Blijft de minimale verhouding (1:3)/(1:1) gedurende de gehele looptijd?\BSK_VerhoudingLooptijd
+PI      1N C   4               Indien Onderdekking, wordt BSK ook verstrekt?                         \BSK_Verstrekt
+C Indien nee, geef een toelichting. Indien ja denk aan de checklist BSK.
+PI      1M     4               Toelichting                                                           \BSK_VerstrektToelichting
+
+.Formulas Visible
+Q_Map04_Paragraaf06   = (Onderdekking<0)
+.Variable BSK_Verstrekt , InputRequired = (Onderdekking<0)
+
+.Variables
+;------------------------------
+PX      1N     3               Nieuw te vestigen zekerheden                                        \Q_Map04_Paragraaf07A
+
+.Variables
+;------------------------------
+PX      1N     3               Algemene verpanding activa                                          \Q_Map04_Paragraaf07B
+PI      1N C   4               Algemene verpanding activa                                          \ZKR_AVA
+
+.Variables
+;------------------------------
+PX      1N     3               Persoonlijke borgstelling                                           \Q_Map04_Paragraaf08
+PI      1N C   4               Persoonlijke borgstelling                                           \ZKR_BorgAkte
+C i.g.v. meerdere zekerheden opnemen in 'toelichting bij zekerheden'
+
+PI    0 1N     4       +       Bedrag                                                              \ZKR_BorgAkte_Bedrag
+PI      1A     4               Onderzetter                                                         \ZKR_BorgAkte_OnderZ
+PI      1N C   4               Burgerlijke staat                                                   \ZKR_BorgAkte_BurgerlijkeStaat
+PI      1A     4               Naam echtgenoot of partner                                          \ZKR_BorgAkte_NaamPartner
+C indien gehuwd of geregistreerd partnerschap
+
+.Choices
+ZKR_BorgAkte_BurgerlijkeStaat  = "0: Ongehuwd|1: Gehuwd|2: Geregistreerd partnerschap"
+
+.Formulas Visible
+ZKR_BorgAkte_Bedrag				= (ZKR_BorgAkte[1]=1)
+ZKR_BorgAkte_OnderZ				= (ZKR_BorgAkte[1]=1)
+ZKR_BorgAkte_BurgerlijkeStaat	= (ZKR_BorgAkte[1]=1)
+ZKR_BorgAkte_NaamPartner		= (ZKR_BorgAkte[1]=1)
+
+
+.Variables
+;------------------------------
+PX      1N     3               Hoofdelijk medeschuldenaarstelling                                  \Q_Map04_Paragraaf09
+PI      1N C   4               Hoofdelijk medeschuldenaarstelling                                  \ZKR_HoofdMede
+C i.g.v. meerdere zekerheden opnemen in 'toelichting bij zekerheden'
+PI      1A     4               HMS partij                                                          \ZKR_HoofdMede_OnderZ
+
+.Formulas Visible
+ZKR_HoofdMede_OnderZ		   = (ZKR_HoofdMede[1]=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Hypotheek                                                           \Q_Map04_Paragraaf10
+PI      1N C   4               Hypotheek                                                           \ZKR_HYP
+C i.g.v. meerdere zekerheden opnemen in 'toelichting bij zekerheden'
+PI    0 1N     4       +       Bedrag                                                              \ZKR_HYP_Bedrag
+PI      1M     4               Omschrijving onderpand                                              \ZKR_HYP_Omschrijving
+PI      1A     4               Onderzetter                                                         \ZKR_HYP_OnderZ
+PI    0 1N     4       +       Taxatie waarde                                                      \ZKR_HYP_Waarde
+PI      1N C   4               Taxatie soort                                                       \ZKR_HYP_TaxatieSoort
+PI      1N D   4               Taxatie datum                                                       \ZKR_HYP_TaxatieDatum
+PI    0 1N     4       +       Voorbelasting                                                       \ZKR_HYP_Voorbelasting
+C De waarde van de voorbelasting in euro's
+PI      1A     4               Voorbelasting begunstigde                                           \ZKR_HYP_VoorbelastingNaam
+
+.Choices
+ZKR_HYP_TaxatieSoort           = "1: Vrije verkoopwaarde/marktwaarde|2: Executiewaarde|3: Taxatierapport|4: WOZ waarde"
+
+.Formulas Visible
+ZKR_HYP_Bedrag				   = (ZKR_Hyp[1]=1)
+ZKR_HYP_Omschrijving           = (ZKR_Hyp[1]=1)
+ZKR_HYP_OnderZ                 = (ZKR_Hyp[1]=1)
+ZKR_HYP_Waarde                 = (ZKR_Hyp[1]=1)
+ZKR_HYP_TaxatieSoort           = (ZKR_Hyp[1]=1)
+ZKR_HYP_TaxatieDatum           = (ZKR_Hyp[1]=1)
+ZKR_HYP_Voorbelasting          = (ZKR_Hyp[1]=1)
+ZKR_HYP_VoorbelastingNaam      = (ZKR_Hyp[1]=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Verpanding creditgeld                                               \Q_Map04_Paragraaf11
+PI      1N C   4               Verpanding creditgeld                                               \ZKR_CreditGeld
+C bij verpanding creditgeld bij ING op naam van derde|i.g.v. meerdere zekerheden opnemen in 'toelichting bij zekerheden'
+PI    0 1N     4       +       Bedrag                                                              \ZKR_CreditGeld_Bedrag
+PI      1M     4               Omschrijving                                                        \ZKR_CreditGeld_Omschrijving
+C Rekeningnummer
+PI      1M     4               Onderzetter                                                         \ZKR_CreditGeld_OnderZ
+
+.Formulas Visible
+ZKR_CreditGeld_Bedrag		       = (ZKR_CreditGeld[1]=1)
+ZKR_CreditGeld_Omschrijving    = (ZKR_CreditGeld[1]=1)
+ZKR_CreditGeld_OnderZ          = (ZKR_CreditGeld[1]=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Verpanding van een vordering                                        \Q_Map04_Paragraaf12
+PI      1N C   4               Verpanding van een vordering                                        \ZKR_Vordering
+C bij verpanding creditgeld bij derden.|i.g.v. meerdere zekerheden opnemen in 'toelichting bij zekerheden'
+PI      1N     4       +       Bedrag                                                              \ZKR_Vordering_Bedrag
+PI      1M     4               Omschrijving                                                        \ZKR_Vordering_Omschrijving
+C Bank en rekeningnummer
+PI      1A     4               Onderzetter                                                         \ZKR_Vordering_OnderZ
+
+.Formulas Visible
+ZKR_Vordering_Bedrag		 = (ZKR_Vordering[1]=1)
+ZKR_Vordering_Omschrijving   = (ZKR_Vordering[1]=1)
+ZKR_Vordering_OnderZ         = (ZKR_Vordering[1]=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Openingsverklaring                                                  \Q_Map04_Paragraaf13
+PI      1N C   4               Openingsverklaring                                                  \ZKR_OpenVerkl
+C Is van toepassing bij VoF, maatschap of CV
+
+.Choices
+ZKR_AVA                        = "1:Ja|0:Nee"
+ZKR_HoofdMede                  = "1:Ja|0:Nee"
+ZKR_BorgAkte                   = "1:Ja|0:Nee"
+ZKR_OpenVerkl                  = "1:Ja|0:Nee"
+ZKR_HYP                        = "1:Ja|0:Nee"
+ZKR_CreditGeld                 = "1:Ja|0:Nee"
+ZKR_Vordering                  = "1:Ja|0:Nee"
+
+.Variables
+;------------------------------
+PX      1N     3               CJMO                                                               \Q_Map04_Paragraaf14
+PI      1M     4               CJMO partners                                                      \ZKR_CJMO
+
+PX      1N     3               Overige zekerheden                                                 \Q_Map04_Paragraaf15
+PI      1M     4               Overige zekerheden                                                 \ZKR_OverigeZekerheden
+
+PX      1N     3               Bijzondere bepalingen                                              \Q_Map04_Paragraaf16
+PI      1M     4               Bijzondere bepalingen                                              \ZKR_BijzondereBepalingen
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map04_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (4)<$                                    \Q_Map04_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (4)<$                          \Q_Map04_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf01  <$  \Visible_M04P01
+PP      1N     4               $>Zichtbaarheid BSK_Onderdekking02   <$  \Visible_BSKOnderdekking
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf03  <$  \Visible_M04P03
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf05  <$  \Visible_M04P05
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf06  <$  \Visible_M04P06
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf07A <$  \Visible_M04P07A
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf07B <$  \Visible_M04P07B
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf08  <$  \Visible_M04P08
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf09  <$  \Visible_M04P09
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf10  <$  \Visible_M04P10
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf11  <$  \Visible_M04P11
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf12  <$  \Visible_M04P12
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf13  <$  \Visible_M04P13
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf14  <$  \Visible_M04P14
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf15  <$  \Visible_M04P15
+PP      1N     4               $>Zichtbaarheid Q_Map04_Paragraaf16  <$  \Visible_M04P16
+
+
+.Formulas Notrend
+Q_Map04_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X))")
+Q_Map04_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map04                         = (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS)
+Q_Map04_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map04_INFO                   =
+Q_Map04_VALIDATION             = &If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+Visible_M04P01          = 1
+Visible_BSKOnderdekking = 1
+Visible_M04P03          = 1
+Visible_M04P05          = 1
+Visible_M04P06          = 1
+Visible_M04P07A         = 1
+Visible_M04P07B         = 1
+Visible_M04P08          = 1
+Visible_M04P09          = 1
+Visible_M04P10          = 1
+Visible_M04P11          = 1
+Visible_M04P12          = 1
+Visible_M04P13          = 1
+Visible_M04P14          = 1
+Visible_M04P15          = 1
+Visible_M04P16          = 1
+
+.Formulas Visible
+Q_Map04_Paragraaf01  = Visible_M04P01
+BSK_Onderdekking02   = Visible_BSKOnderdekking
+Q_Map04_Paragraaf03  = Visible_M04P03
+Q_Map04_Paragraaf05  = Visible_M04P05
+Q_Map04_Paragraaf06  = Visible_M04P06
+Q_Map04_Paragraaf07A = Visible_M04P07A
+Q_Map04_Paragraaf07B = Visible_M04P07B
+Q_Map04_Paragraaf08  = Visible_M04P08
+Q_Map04_Paragraaf09  = Visible_M04P09
+Q_Map04_Paragraaf10  = Visible_M04P10
+Q_Map04_Paragraaf11  = Visible_M04P11
+Q_Map04_Paragraaf12  = Visible_M04P12
+Q_Map04_Paragraaf13  = Visible_M04P13
+Q_Map04_Paragraaf14  = Visible_M04P14
+Q_Map04_Paragraaf15  = Visible_M04P15
+Q_Map04_Paragraaf16  = Visible_M04P16
+
+.Choices
+Q_Map04                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 5
+PP      1N C   2               Fiatdocument                                                        \Q_Map05
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 5<$                                              \Q_Map05_WARNING
+PP      1A     3               $>Info bij stap 5<$                                                 \Q_Map05_INFO
+PP      1A     3               $>Validatie stap 5<$                                                \Q_Map05_VALIDATION
+PP      1A     3               $>Hint stap 5<$                                                     \Q_Map05_HINT
+
+.Formulas Notrend
+Q_Map05_HINT = "Altijd in te vullen door AM en aan te vullen door degene die het adviesgesprek heeft gevoerd met klant"
+
+.Variables
+;------------------------------
+PX      1N     3               Algemeen                                                           \Q_Map05_Paragraaf01
+PI      1M     4               Omschrijving activiteiten klant                                    \OmschrijvingDebiteur
+C Korte omschrijving activiteiten debiteur, incl historie en segment, organogram. Bij BSK starter ook het ondernemersverleden van alle betrokken natuurlijke personen over de afgelopen 5 jaar.
+PI      1M     4               Organogram                                                          \OrganogramMap8
+PI      1M     4               Doel van de aanvraag                                                \DoelVanDeAanvraag
+C Omschrijf het doel van het voorstel en geef toelichting op de rationele van de investeringen en de gekozen kredietopzet. Indien van toepassing ook commentaar leveren op vorige besluitvorming als daarbij nader uit te werken acties zijn gevraagd.
+
+; verplichte velden
+.Variable OmschrijvingDebiteur, InputRequired=1
+.Variable OrganogramMap8      , InputRequired=1
+.Variable DoelVanDeAanvraag   , InputRequired=1
+
+.Variables
+;------------------------------
+PX      1N     3               Financiële Analyse                                                  \Q_Map05_Paragraaf02
+C Altijd invullen bij BSK, LOO > 150/k, SME of bij afwijking advies starters/switchersscorecard.[br]Geef aan welke stukken je hebt gebruikt voor je financiële analyse en of de klant in staat is tussentijds cijfers aan te leveren. Alleen waar nodig toelichting op FINAN rapportages (geen tabellen overnemen)
+PI      1M   1 4               Toelichting op balansposten                                         \Balans
+C Licht de historische balans en na kredietverlening (BNK) toe. Bij BSK BNK uitschrijven. In geval van MBO bij BSK altijd de goodwillberekening vermelden en toelichten waarom wij deze acceptabel vinden.
+PI      1N C   4               Is er recent cijfermateriaal (jaarcijfers) aanwezig in eFINAN (< 6 maanden)  \RecentMateriaalInFinan
+PX      1X   1 4               " "                                                                 \
+PP      1A    -4=              "Balans na kredietverlening (x € 1,-)"                              \BNK
+PI    0 1N   1 4  +    +       "Immateriële vaste activa"                                          \fmImmatVastActBnk
+PI    0 1N     4  +    +       "Materiële vaste activa"                                            \fmMatVastActBnk
+PI    0 1N     4  +    +       "Financiële vaste activa"                                           \fmFinVastActBnk
+PI    0 1N     4  +    +       "Voorraden"                                                         \fmVrdBnk
+PI    0 1N     4  +    +       "Vorderingen"                                                       \fmVordBnk
+PI    0 1N     4  +    +       "Liquide middelen"                                                  \fmLiqMidBnk
+PP    0=1N    -4= +    +       "Totaal activa"                                                     \fmSomActBnk
+PX      1X   1 4               " "                                                                 \
+PI    0 1N     4  +    +       "Eigen vermogen"                                                    \fmEigenVermBnk
+PI    0 1N     4  +    +       "Voorzieningen"                                                     \fmVoorzBnk
+PI    0 1N     4  +    +       "Lang vreemd vermogen"                                              \fmLangVVBnk
+PI    0 1N     4  +    +       "Kort vreemd vermogen"                                              \fmKortVVBnk
+PP    0=1N    -4= +    +       "Totaal passiva"                                                    \fmSomPasBnk
+
+.Formulas Notrend
+BNK  = " "
+
+; verplichte velden
+.Variable Balans                  , InputRequired = Visible_M05P02
+.Variable RecentMateriaalInFinan  , InputRequired = Visible_M05P02
+
+.Variable fmImmatVastActBnk       , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmMatVastActBnk         , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmFinVastActBnk         , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmVrdBnk                , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmVordBnk               , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmLiqMidBnk             , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmEigenVermBnk          , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmVoorzBnk              , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmLangVVBnk             , InputRequired = Visible_M05P02 And BSK_Verstrekt
+.Variable fmKortVVBnk             , InputRequired = Visible_M05P02 And BSK_Verstrekt
+
+.Variables
+;------------------------------
+PX      1N     3               Solvabiliteit, rentabiliteit                                       \Q_Map05_Paragraaf03
+C Altijd invullen bij BSK, LOO > 150/k, SME of bij afwijking advies starters/switchersscorecard.
+
+PI      1M     4               Solvabiliteit                                                      \Solvabiliteit
+C Solvabiliteit toelichten o.b.v. het uit de balans gedestilleerde aansprakelijk vermogen, ook NKV en hoe deze zich verhoudt tov de policypaper. Let op geactiveerde immateriële activa (goodwill, licenties, ontwikkelingskosten). Hoe is de onderneming gefinancierd? Gouden balansregel (kort met kort, lang met lang). Beoordeel de debiteuren-, voorraad-, en crediteurentermijnen (ook t.o.v. de branche). Blijven de noodzakelijke herinvesteringen op niveau?
+PI      1M     4               Rentabiliteit                                                      \Rentabiliteit
+C Is er sprake van een stabiele gang van zaken (omzet/cashflow) en blijft dit de komende periode ook zo. Onderbouw dat de lasten van het gevraagde kunnen worden opgebracht (rekening houdend met vervangingsinvesteringen, privé-uitgaven, mutaties werkkapitaal etc.) Hoe hebben de kasstromen (is wat anders dan cashflow)zich de afgelopen periode ontwikkeld? In hoeverre kan het bedrijf investeringen zelf betalen? Wat zijn opvallende posten in de resultaatrekening. Zijn er (betrouwbare) meerjarenprognoses noodzakelijk/beschikbaar en wat is je visie hierop? Licht de relevante ratio's toe (ICR, DSCR, debt/ebitda)
+PI      1M     4               Privé-inkomen/Privévermogen                                         \PriveInkomenVermogen
+C Zijn er in privé vermogensbestanddelen?
+PI      1M     4               Deelconclusie                                                       \Q_Map05_Paragraaf03Conclusie
+
+; verplichte velden
+.Variable Solvabiliteit                 , InputRequired = Visible_M05P03
+.Variable Rentabiliteit                 , InputRequired = Visible_M05P03
+.Variable PriveInkomenVermogen          , InputRequired = Visible_M05P03
+.Variable Q_Map05_Paragraaf03Conclusie  , InputRequired = Visible_M05P03
+
+.Variables
+;------------------------------
+PX      1N     3               Cashflow berekening                                                 \Q_Map05_Paragraaf03a
+C Altijd invullen bij BSK, LOO > 150/k, SME of bij afwijking advies starters/switchersscorecard.
+
+PI      1M     4               Cashflow                                                            \CashFlowBerekening
+C Is er sprake van een stabiele gang van zaken (omzet/cashflow) en blijft dit de komende periode ook zo. Onderbouw dat de lasten van het gevraagde kunnen worden opgebracht (rekening houdend met vervangingsinvesteringen, privé-uitgaven, mutaties werkkapitaal etc.) Hoe hebben de kasstromen (is wat anders dan cashflow)zich de afgelopen periode ontwikkeld? In hoeverre kan het bedrijf investeringen zelf betalen? Wat zijn opvallende posten in de resultaatrekening. Zijn er (betrouwbare) meerjarenprognoses noodzakelijk/beschikbaar en wat is je visie hierop? Licht de relevante ratio's toe (ICR, DSCR, debt/ebitda).
+PI    0 1N     4       +       Netto Resultaat                                                     \NettoResultaat
+C Bedrag in hele euro's
+PI    0-1N     4       +       Eventuele privé-onttrekkingen bij VOF/1-manszaak (-/-)              \PriveOnttrekking
+C Bedrag in hele euro's
+PI    0 1N     4       +       Afschrijvingen (+)                                                  \Afschrijvingen
+C Bedrag in hele euro's
+PP    0 1N    -4       +       Operationele Cashflow                                               \OperCashflow
+PI    0-1N     4       +       Aflossingen (bestaande en nieuwe faciliteiten) (-/-)                \Aflossingen
+C Bedrag in hele euro's
+PI    0-1N     4       +       (Vervangings-)investeringen (indien niet extern gefinancierd) (-/-) \Vervangingsinvesteringen
+C Bedrag in hele euro's
+PI    0-1N     4       +       Dividenduitkeringen (-/-)                                           \Dividenduitkeringen
+C Bedrag in hele euro's
+PI    0-1N     4       +       Overige onttrekkingen (bijvoorbeeld oploop RC-verhoudingen en/of leningen UG)(-/-) \Overig
+C Bedrag in hele euro's
+PP    0 1N    -4       +       Netto Cashflow                                                      \NettoCashflow
+PI      1M     4               Deelconclusie                                                       \Q_Map05_Paragraaf03aConclusie
+
+; verplichte velden
+.Variable CashFlowBerekening            , InputRequired = Visible_M05P03a
+.Variable NettoResultaat                , InputRequired = Visible_M05P03a
+.Variable Q_Map05_Paragraaf03aConclusie , InputRequired = Visible_M05P03a
+
+.Variables
+;------------------------------
+PX      1N     3               Risico's                                                             \Q_Map05_Paragraaf04
+C Altijd invullen bij BSK, LOO > 150/k, SME of bij afwijking advies starters/switchersscorecard.
+PI      1N C   4               Is er sprake van bedrijfsrisico's?                                   \BedrijfsRisico
+PI      1M     4               Is er sprake van bedrijfsrisico's?                                   \BedrijfsRisicoMemo
+PI      1M     4               Toelichting                                                          \BedrijfsRisicoToelichting
+C Beschrijf de markt (is er sprake van een cyclische markt, seizoensgevoelige exploitatie, oligopolie etc., is toetreding eenvoudig of moeilijk) en  de positie van onze debiteur daarin (is het een belangrijke speler in de markt, is er afhankelijkheid van bepaalde leveranciers of afnemers en is onze klant in staat om tegenvallers op te vangen etc.). Hoe zijn de branchevooruitzichten? Waarin onderscheidt het bedrijf zich? Uiteindelijk dient hier een oordeel te worden gegeven of het risico als laag, gemiddeld/acceptabel of hoog wordt ervaren. Maak gebruik van de sectorinformatie.
+
+PI      1N C   4               Is er sprake van een management-risico?                             \ManagementRisico
+PI      1M     4               Is er sprake van een management-risico?                             \ManagementRisicoMemo
+PI      1M     4               Toelichting                                                         \ManagementRisicoToelichting
+C Stuurt de ondernemer adequaat op management-informatie? Is er een SWOT analyse? benoem in iedergeval de zwakke punten. Is het management in staat gebleken om met de onderneming het gewenste rendement te realiseren? Is er sprake van opvolgingsproblematiek, afhankelijkheid van 1 man. Geef je oordeel hierover.
+
+
+PI      1N C   4  +            "Is/zijn aandeelhouders in staat om kapitaal bij te storten?"       \FinKrachtAandeelh
+C aandeelhouders zijn eigenaren van de aandelen van het bedrijf, inclusief indirecte eigenaren, mits 100%. Bij eenmanszaak, VOF of CV de hoofdelijk aansprakelijken.
+PI      1N C   4  +            "Commitment aandeelhouders"                                         \CommitmentAandeelh
+C geformaliseerd: CJMO/HMS/Borgstelling/achtergestelde lening/derden onderzetting.|Informeel: non-onttrekkingsverklaring/KIV/solvabiliteitsratio bepaling.
+PI      1N C   4  +            "Zijn alle partijen in het concern verbonden met een CJMO of HMS?"  \GroepCJMO
+PI      1N C   4  +            "Wordt > 70% van de Ebitda gerealiseerd door middels een CJMO of HMS meeverbonden Nederlandse vennootschappen?"\GroepEBITDA
+PI      1N C   4  +            "Is er structuur risico uithoofde van internationale aspecten van het bedrijf?"\InternationaalRisico
+C Denk aan grip op de voorraden in het buitenland of op naam van buitenlandse dochter
+PI      1N C   4  +            "Zijn de buitenlandse entiteiten adequaat in de kredietconstructie opgenomen?"\BuitenlandseEntiteiten
+PI      1A M   4               "toelichting structuurrisico"                                       \GroepMemo
+PI      1M     4               Deelconclusie                                                       \Q_Map05_Paragraaf04Conclusie
+
+.Variable Q_Map05_Paragraaf04Conclusie  , InputRequired = Visible_M05P04
+
+.Choices
+FinKrachtAandeelh= "0: nee, (niet of < 10% LOO)|1: beperkt (10 - 25% LOO)|2: redelijk (25 - 50% LOO)|3: goed (> 50% LOO)|99: onbekend"
+CommitmentAandeelh = "1:ja, geformaliseerd door afgegeven zekerheid |2:ja, maar informeel|3:nee (bewust stand alone)|99:onbekend"
+GroepCJMO= "0:Nee|1:Ja|-9:n.v.t."
+GroepEBITDA= "0:Nee|1:Ja|99:Onbekend"
+InternationaalRisico= "0:Nee|1:Ja"
+BuitenlandseEntiteiten= "0:Nee|1:Ja"
+
+.Choices
+RecentMateriaalInFinan         = "1:Ja|0:Nee"
+BedrijfsRisico                 = "1:Ja|0:Nee"
+ManagementRisico               = "1:Ja|0:Nee"
+
+.Formulas NoTrend
+OperCashflow                   = NettoResultaat-PriveOnttrekking+Afschrijvingen
+NettoCashflow                  = VSum(OperCashflow,Overig)
+
+.Formulas Visible
+BedrijfsRisico                 = (KredietAanvraagOfWijziging=2)
+ManagementRisico               = (KredietAanvraagOfWijziging=2)
+BedrijfsRisicoMemo             = (KredietAanvraagOfWijziging=1) Or (KredietAanvraagOfWijziging=3)
+ManagementRisicoMemo           = (KredietAanvraagOfWijziging=1) Or (KredietAanvraagOfWijziging=3)
+BedrijfsRisicoToelichting      = (BedrijfsRisico=1)
+ManagementRisicoToelichting    = (ManagementRisico=1)
+
+.Variables
+;------------------------------
+PX      1N     3               Terugbetalingsrisico                                                 \Q_Map05_Paragraaf05
+C Altijd invullen bij BSK, LOO > 150/k, SME of bij afwijking advies starters/switchersscorecard.
+PI      1M     4               Hoe worden we terugbetaald?                                          \TerugbetalingsRisico
+C De belangrijkste vraag: hoe worden we terugbetaald? Worden we afgelost uit de cashflow of uit een herfinanciering of door de uitwinning van zekerheden? Van belang is om hier aan te geven wat onze primaire bron is van aflossing en of we het waarschijnlijk achten dat deze bron voldoende is voor de rente- en aflossingsverplichtingen. Indien we zekerheden hebben, dan dient hier aangegeven te worden wat we verwachten terug te kunnen krijgen indien we deze zouden moeten uitoefenen. Uiteindelijk dient hier een oordeel geveld te worden of we het take-out-risico wel of niet acceptabel vinden. Benut de mogelijkheden van een garantiefaciliteit (BSK, Groei-, Go Retail) en geef aan wanneer dat niet mogelijk/haalbaar is. Is er (bij B.V.'s) aansprakelijkheid van aandeelhouders, c.q. is dit noodzakelijk/wenselijk? De bij BSK verplichte onderdekkingsberekening kunt u opnemen bij de toelichting op de balans na kredietverlening (zie 3. Financiële Analyse).
+PI      1N C   4               Is er sprake van verlaging van de dekkingswaarde na de wijziging?    \VerlagingDekkingswaarde
+C Alleen bij wijziging of combi
+PI      1M     4               Indien ja, Toelichting waarom dit acceptabel is.                     \VerlagingDekkingswaardeToelichting
+PI      1N C   4               Is de klant eventueel bereid om extra zekerheden te verstrekken?     \ExtraZekerheden
+PI      1M     4               Deelconclusie                                                        \Q_Map05_Paragraaf05Conclusie
+
+.Variable Q_Map05_Paragraaf05Conclusie  , InputRequired = Visible_M05P05
+
+.Choices
+VerlagingDekkingswaarde = "1:Ja|0:Nee"
+ExtraZekerheden         = "1:Ja|0:Nee|3:nvt"
+
+.Formulas Visible
+VerlagingDekkingswaardeToelichting  = (VerlagingDekkingswaarde=1)
+ExtraZekerheden                     = (VerlagingDekkingswaarde=1)
+VerlagingDekkingswaarde             = (KredietAanvraagOfWijziging=2) Or (KredietAanvraagOfWijziging=3)
+
+
+
+.Variables
+;------------------------------
+PX      1N     3               Policy                                                               \Q_Map05_Paragraaf06
+C Wordt aan de normen van de policy paper voldaan? Geef een toelichting op de afwijkingen. De policy papers, sectorstudies en financieringsnormen zijn te vinden op intranet.
+PI      1N C   4               Financieringsbeleid                                                  \Financeringsbeleid
+PI      1M     4               Toelichting                                                          \Q_Map05_Paragraaf07Toelichting
+PI      1N C   4               Voldoet de klant aan de voorwaarden van de branchespecifieke policy-paper?   \PolicyPaperVoldaan
+PI      1M     4               Indien ja, Toelichting waarom dit acceptabel is.                     \PolicyPaperVoldaanToelichting
+PI      1M     4               Deelconclusie                                                        \Q_Map05_Paragraaf06Conclusie
+
+.Variable Financeringsbeleid            , InputRequired = Visible_M05P06
+
+.Choices
+PolicyPaperVoldaan = "1:Ja|0:Nee"
+Financeringsbeleid = "1:Negatief|2:Terughoudend|3:Selectief|4:Positief|5:Onbekend"
+
+.Formulas Visible
+PolicyPaperVoldaanToelichting = (PolicyPaperVoldaan=0)
+
+.Variables
+;------------------------------
+PX      1N     3               Marges, Fees en Cross-Selling                                        \Q_Map05_Paragraaf08
+C Marges, fees en cross-selling toelichten. Eventueel RARoC analyse toelichten. Indien de minimum hurdle niet wordt gehaald, dient te worden besproken waarom en wat er aan gedaan kan worden om dit in de toekomst weer te halen.
+PI      1M     4               Toelichting                                                          \Q_Map05_Paragraaf08Toelichting
+PI      1M     4               Deelconclusie                                                        \Q_Map05_Paragraaf08Conclusie
+
+.Variable Q_Map05_Paragraaf08Conclusie  , InputRequired = Visible_M05P08
+
+.Variables
+;------------------------------
+PX      1N     3               Oordeel/Advies                                                       \Q_Map05_Paragraaf09
+C Bij voorkeur in bullets de belangrijkste positieve en negatieve punten vermelden, die leiden tot de conclusie (3 tot 5 punten is voldoende). Het beste kan worden aangesloten bij de verschillende deelconclusies in het voorgaande verhaal.
+PI      1M     4               Toelichting                                                          \Q_Map05_Paragraaf09Toelichting
+
+.Formulas Notrend
+;;Q_Map05_Paragraaf09Toelichting = &Q_Map05_Paragraaf03[0]&"|"&Q_Map05_Paragraaf03Conclusie[1]&"||"&Q_Map05_Paragraaf03a[0]&"|"&Q_Map05_Paragraaf03aConclusie[1]&"||"&Q_Map05_Paragraaf04[0]&"|"&Q_Map05_Paragraaf04Conclusie[1]&"||"&Q_Map05_Paragraaf05[0]&"|"&Q_Map05_Paragraaf05Conclusie[1]&"||"&Q_Map05_Paragraaf06[0]&"|"&Q_Map05_Paragraaf06Conclusie[1]&"||"&Q_Map05_Paragraaf08[0]&"|"&Q_Map05_Paragraaf08Conclusie[1]&"||"
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map05_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (5)<$                                    \Q_Map05_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (5)<$                          \Q_Map05_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf01 <$  \Visible_M05P01
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf02 <$  \Visible_M05P02
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf03 <$  \Visible_M05P03
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf03a<$  \Visible_M05P03a
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf04 <$  \Visible_M05P04
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf05 <$  \Visible_M05P05
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf06 <$  \Visible_M05P06
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf08 <$  \Visible_M05P08
+PP      1N     4               $>Zichtbaarheid Q_Map05_Paragraaf09 <$  \Visible_M05P09
+
+.Formulas Notrend
+Q_Map05_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X))")
+Q_Map05_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map05                         = (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS)
+Q_Map05_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map05_INFO                   =
+Q_Map05_VALIDATION             =&If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+
+Visible_M05P01  = 1
+Visible_M05P02  = FiatDocumentUitgebreid
+Visible_M05P03  = FiatDocumentUitgebreid
+Visible_M05P03a = FiatDocumentUitgebreid
+Visible_M05P04  = FiatDocumentUitgebreid
+Visible_M05P05  = FiatDocumentUitgebreid
+Visible_M05P06  = FiatDocumentUitgebreid
+Visible_M05P08  = FiatDocumentUitgebreid
+Visible_M05P09  = 1
+
+.Formulas Visible
+Q_Map05_Paragraaf01  = Visible_M05P01
+Q_Map05_Paragraaf02  = Visible_M05P02
+Q_Map05_Paragraaf03  = Visible_M05P03
+Q_Map05_Paragraaf03a = Visible_M05P03a
+Q_Map05_Paragraaf04  = Visible_M05P04
+Q_Map05_Paragraaf05  = Visible_M05P05
+Q_Map05_Paragraaf06  = Visible_M05P06
+Q_Map05_Paragraaf08  = Visible_M05P08
+Q_Map05_Paragraaf09  = Visible_M05P09
+
+.Choices
+Q_Map05                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 6
+PP      1N C   2               Checklist                                                           \Q_Map06
+
+;------------------------------
+.Variables
+PP      1A   1 3               $>Warning voor map 6<$                                              \Q_Map06_WARNING
+PP      1A     3               $>Info bij stap 6<$                                                 \Q_Map06_INFO
+PP      1A     3               $>Validatie stap 6<$                                                \Q_Map06_VALIDATION
+
+PX      1N     3               Samenvatting eigenschappen document                                 \Q_Map06_Paragraaf00
+PP    0 1N     4               =LooNaKrediet                                                       \=LooNaKrediet
+PP      1N C   4               =Prospect                                                           \=Prospect
+PP      1N C   4               =Klant                                                              \=Klant
+PP      1N C   4               =SME                                                                \=SME
+PP      1N C   4               =SBF                                                                \=SBF
+PP      1N C   4               =BSK_Verstrekt                                                      \=BSK_Verstrekt
+PP      1N C   4               =Starter                                                            \=Starter
+PP      1N C   4               =AkkoordStartersModel                                               \=AkkoordStartersModel
+PP      1N C   4               =Switcher                                                           \=Switcher
+PP      1N C   4               =AkkoordSwitchersmodel                                              \=AkkoordSwitchersmodel
+
+
+PX      1N     3               Minimaal benodigde stukken                                          \Q_Map06_Paragraaf01
+PI      1N C  -4               Jaarcijfers (< 18 mnd)                                              \ChecklistJaarcijfers
+C Prospect: laatste drie boekjaren, BSK: laatste 2 jaarcijfers
+PI      1A     4               Boekjaar                                                            \ChecklistJaarcijfersBoekjaar
+PI      1M     4               Toelichting                                                         \ChecklistJaarcijfersToelichting
+
+PI      1N C  -4               Tussentijdse cijfers < 3 mnd                                        \ChecklistTussentijdseCijfers
+C Balans en V&W
+PI      1A     4               Periode                                                             \ChecklistTussentijdseCijfersPeriode
+PI      1M     4               Toelichting                                                         \ChecklistTussentijdseCijfersToelichting
+
+PI      1N C  -4               Aangifte IB (< 18 mnd)                                              \ChecklistIBAangifte
+PI      1A     4               Periode                                                             \ChecklistIBAangiftePeriode
+PI      1M     4               Toelichting                                                         \ChecklistIBAangifteToelichting
+
+PI      1N C  -4               Prognose                                                            \ChecklistPrognose
+C Resultaten en/of liquiditeitsprognose
+PI      1A     4               Periode                                                             \ChecklistPrognosePeriode
+PI      1M     4               Toelichting                                                         \ChecklistPrognoseToelichting
+
+PI      1N C  -4               Investeringsbegroting                                               \ChecklistInvesteringsBegroting
+PI      1M     4               Toelichting                                                         \ChecklistInvesteringsBegrotingToelichting
+PI      1N C  -4               3 jaar prognose (inclusief openingsbalans)                          \Checklist3JaarPrognose
+PI      1M     4               Toelichting                                                         \Checklist3JaarPrognoseToelichting
+
+PI      1N C   4               Ondernemingsplan (igv starter)                                      \ChecklistOndernemingsPlan
+C 3 jaar prognose incl. openingsbalans
+PI      1M     4               Toelichting                                                         \ChecklistOndernemingsPlanToelichting
+
+PI      1N C  -4               Statuten                                                            \ChecklistStatuten
+PI      1M     4               Toelichting                                                         \ChecklistStatutenToelichting
+
+
+.Choices
+ChecklistJaarcijfers            ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistTussentijdseCijfers    ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistIBAangifte             ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistPrognose               ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistInvesteringsBegroting  ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+Checklist3JaarPrognose          ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistOndernemingsPlan       ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistStatuten               ="1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+
+.Variables
+PX      1N     3               Overige noodzakelijkse stukken                                      \Q_Map06_Paragraaf02
+C Conform policy paper danwel eigen inschatting of dekking
+II      1N C   4               ...                                                                 \ChecklistOverige1
+II      1N C   4               ...                                                                 \ChecklistOverige2
+II      1N C   4               ...                                                                 \ChecklistOverige3
+II      1N C   4               ...                                                                 \ChecklistOverige4
+
+.Choices
+ChecklistOverige1              = "1:Aanwezig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistOverige2              = "1:Aanwezig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistOverige3              = "1:Aanwezig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistOverige4              = "1:Aanwezig|3:Niet aanwezig->opvragen|4:Ontvangen"
+
+.Variables
+PX      1N     3               Investeringsafhankelijke stukken                                      \Q_Map06_Paragraaf03
+
+PX      1N    -4               Aankoop OG eigen gebruik                                              \
+PI      1N C   4               Taxatierapport                                                        \ChecklistTaxatieRapport
+PI      1M     4               Toelichting                                                           \ChecklistTaxatieRapportToelichting
+PI      1N C   4               Koop / aannemingsovereenkomst                                         \ChecklistKoopOvereenkomst
+PI      1M     4               Toelichting                                                           \ChecklistKoopOvereenkomstToelichting
+PI      1N C   4               Bouwbegroting                                                         \ChecklistBouwbegroting
+PI      1M     4               Toelichting                                                           \ChecklistBouwbegrotingToelichting
+
+PX      1N    -4               Aankoop beleggings-OG                                                 \
+PI      1N C   4               Taxatierapport verhuurde staat                                        \ChecklistTaxatieRapportVS
+PI      1M     4               Toelichting                                                           \ChecklistTaxatieRapportVSToelichting
+PI      1N C   4               Huurcontracten                                                        \ChecklistHuurcontracten
+PI      1M     4               Toelichting                                                           \ChecklistHuurcontractenToelichting
+
+PX      1N    -4               Overige MVA/Werkkapitaal                                              \
+PI      1N C   4               Liquiditeitsbegroting                                                 \ChecklistLiquiditeitsBegroting
+C Evt incl. overzicht deb/cred ivm concentratie
+
+.Choices
+ChecklistTaxatieRapport       = "1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistKoopOvereenkomst     = "1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistBouwbegroting        = "1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen"
+ChecklistTaxatieRapportVS     = "1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen|5:Nvt"
+ChecklistHuurcontracten       = "1:Aanwezig|2:Niet nodig|3:Niet aanwezig->opvragen|4:Ontvangen|5:Nvt"
+ChecklistLiquiditeitsBegroting= "1:Aanwezig|3:Niet aanwezig->opvragen|4:Ontvangen|5:Nvt"
+
+;------------------------------
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map06_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (6)<$                                    \Q_Map06_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (6)<$                          \Q_Map06_ENTEREDREQUIREDVARS
+PP      1N     4               $>Zichtbaarheid Q_Map06_Paragraaf00<$  \Visible_M06P00
+PP      1N     4               $>Zichtbaarheid Q_Map06_Paragraaf01<$  \Visible_M06P01
+PP      1N     4               $>Zichtbaarheid Q_Map06_Paragraaf02<$  \Visible_M06P02
+PP      1N     4               $>Zichtbaarheid Q_Map06_Paragraaf03<$  \Visible_M06P03
+
+.Formulas Notrend
+Q_Map06_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X))")
+Q_Map06_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) And DataAvailable(X))")
+Q_Map06                         = (Q_Map06_ENTEREDREQUIREDVARS=Q_Map06_REQUIREDVARS)
+Q_Map06_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+;Q_Map06_INFO                   =
+Q_Map06_VALIDATION             = &If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.|Verplichte vragen worden gemarkeerd met een *.",&"")
+Visible_M06P00 = 1
+Visible_M06P01 = 1
+Visible_M06P02 = 1
+Visible_M06P03 = 1
+
+.Formulas Visible
+Q_Map06_Paragraaf00 = Visible_M06P00
+Q_Map06_Paragraaf01 = Visible_M06P01
+Q_Map06_Paragraaf02 = Visible_M06P02
+Q_Map06_Paragraaf03 = Visible_M06P03
+
+.Choices
+Q_Map06                        = Q_ROOT
+
+.Variables
+PX      1N     3               Samenvatting eigenschappen document                                 \Q_Map07_Paragraaf00
+PP    0 1N     4               =LooNaKrediet                                                       \=LooNaKrediet
+PP    0 1N     4               =Prospect                                                           \=Prospect
+PP    0 1N     4               =Klant                                                              \=Klant
+PP    0 1N     4               =SME                                                                \=SME
+PP    0 1N     4               =SBF                                                                \=SBF
+PP    0 1N C   4               =BSK_Verstrekt                                                      \=BSK_Verstrekt
+PP    0 1N C   4               =Starter                                                            \=Starter
+PP    0 1N C   4               =AkkoordStartersModel                                               \=AkkoordStartersModel
+PP    0 1N     4               =Switcher                                                           \=Switcher
+PP    0 1N C   4               =AkkoordSwitchersmodel                                              \=AkkoordSwitchersmodel
+PP      1N     4               =Q_Map01_REQUIREDVARS                                               \=Q_Map01_REQUIREDVARS
+PP      1N     4               =Q_Map01_ENTEREDREQUIREDVARS                                        \=Q_Map01_ENTEREDREQUIREDVARS
+PP      1N     4               =Q_Map02_REQUIREDVARS                                               \=Q_Map02_REQUIREDVARS
+PP      1N     4               =Q_Map02_ENTEREDREQUIREDVARS                                        \=Q_Map02_ENTEREDREQUIREDVARS
+PP      1N     4               =Q_Map03_REQUIREDVARS                                               \=Q_Map03_REQUIREDVARS
+PP      1N     4               =Q_Map03_ENTEREDREQUIREDVARS                                        \=Q_Map03_ENTEREDREQUIREDVARS
+PP      1N     4               =Q_Map04_REQUIREDVARS                                               \=Q_Map04_REQUIREDVARS
+PP      1N     4               =Q_Map04_ENTEREDREQUIREDVARS                                        \=Q_Map04_ENTEREDREQUIREDVARS
+PP      1N     4               =Q_Map05_REQUIREDVARS                                               \=Q_Map05_REQUIREDVARS
+PP      1N     4               =Q_Map05_ENTEREDREQUIREDVARS                                        \=Q_Map05_ENTEREDREQUIREDVARS
+PP      1N     4               =Q_Map06_REQUIREDVARS                                               \=Q_Map06_REQUIREDVARS
+PP      1N     4               =Q_Map06_ENTEREDREQUIREDVARS                                        \=Q_Map06_ENTEREDREQUIREDVARS
+
+
+.Formulas Visible
+Q_Map07_Paragraaf00           = If(ScorecardRobot[1]=1,1,0)
+
+.Variables
+;==================================================================================================
+PP      1A   1 2               Resultaat                                                           \Q_RESULT
+PP      1A     3               $>Results<$                                                         \RESULT
+PP      1A     4               =Q_RESULT                                                           \=Q_RESULT
+
+.Formulas NoTrend
+Q_RESULT                       = &If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.|","De scorecard is definitief gemaakt.") ; &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+
+
+.Variables
+;==================================================================================================
+
+PI      1N C 1 2               "Status"                                                            \Q_STATUS
+PI      1N D   2               "Definitief gemaakt op:"                                            \Q_STATUS_FINAL_ON
+PI      1A     2               "Definitief gemaakt door:"                                          \Q_STATUS_FINAL_BY
+PI      1A     2               "Definitief gemaakt door:"                                          \Q_STATUS_FINAL_BY_NAME
+PI      1N D   2               "Aangemaakt op:"                                                    \Q_STATUS_STARTED_ON
+PI      1A     2               "Aangemaakt door:"                                                  \Q_STATUS_STARTED_BY
+PI      1A     2               "Aangemaakt door:"                                                  \Q_STATUS_STARTED_BY_NAME
+PI      1N D   2  +            "Laatst bewerkt op:"                                                \Q_STATUS_MODIFIED_ON
+PP      1A     2  +            "Modelversie"                                                       \ModelVersion
+PP      1A     2  +            "Modeltype"                                                         \ModelType
+PP      1A     2  +            "Parametersversie"                                                  \MatrixVersion
+
+PI      1N C   2               "Previous"                                                            \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               "Next"                                                                \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               "Concept rapportage"                                                  \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               "Download rapport"                                                    \Q_FINAL_REPORT_VISIBLE
+PI      1N C   2               "Definitief maken"                                                    \Q_MAKE_FINAL_VISIBLE
+
+
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+Q_MAKE_FINAL_VISIBLE           = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+Q_MAKE_FINAL_VISIBLE           = 1
+
+
+.Formulas NoTrend
+ModelVersion                   = "#ModelVersion#"
+MatrixVersion                  = 1 ;&MatrixLookup("INGSC_Parameters.xls","Version",1,3)
+Q_STATUS                       = 0
+Q_STATUS_MODIFIED_ON           = Now
+ModelType                      = "Fiatdocument"
+
+;----------------- Controle volledigheid mappen
+.Choices
+Q_STATUS                       = "0:Actief|1:Defintief"
+;----------------- Visibility
+
+.Variables
+;==================================================================================================
+P       1A   1 1               Toetsen en normen                                                   \Hulpvariabelen
+
+
+.Variables
+;----------------- Hulpvariabelen
+PP       X   1 2               Hulpvariabelen
+PP      1N C   3               RechtsvormBV                                                        \RechtsvormBV -> Rechtsvorm
+PP      1N C   4               Is het een Switcher?                                                \Switcher
+C Wordt automatisch berekend. 1=Ja en 0=Nee
+PP      1N C   4               Is het een Prospect?                                                \Prospect
+C Wordt automatisch berekend. 1=Ja en 0=Nee
+PP      1N C   4               Is het een Klant?                                                   \Klant
+C Wordt automatisch berekend. 1=Ja en 0=Nee
+PP      1N C   4               SME?                                                                \SME
+C Wordt automatisch berekend. 1=Ja en 0=Nee
+PP      1N C   4               SBF?                                                                \SBF
+C Wordt automatisch berekend. 1=Ja en 0=Nee
+PP      1N C   4               FiatDocumentUitgebreid?                                             \FiatDocumentUitgebreid
+
+.Choices
+RechtsvormBV                   = "1:Ja|0:Nee"
+Switcher                       = "1:Ja|0:Nee"
+Prospect                       = "1:Ja|0:Nee"
+Klant                          = "1:Ja|0:Nee"
+SME                            = "1:Ja|0:Nee"
+SBF                            = "1:Ja|0:Nee"
+FiatDocumentUitgebreid         = "1:Ja|0:Nee"
+
+.Formulas NoTrend
+RechtsvormBV                   = If(Rechtsvorm=25,1,0)
+Starter                        = If((OnNA(Q_STATUS_FINAL_ON[1],Now) -OprichtingsdatumKvK)/365>3 ,0,1)
+Switcher                       = Not(Starter) And Prospect
+Klant                          = (KlantOfProspect=1)
+Prospect                       = (KlantOfProspect=2)
+SME                            = (RatingModel=2)
+SBF                            = (RatingModel=1)
+FiatDocumentUitgebreid         = (BSK_VERSTREKT=1) Or (LooNaKrediet>150000) or (SME=1) or (AKKOORDStartersModel=0) or (AkkoordSwitchersmodel=0)
+
+.Variables
+;----------------- Score
+PP    0 1N     3               ScorecardRobot                                               \ScorecardRobot
+
+.Formulas Notrend
+ScorecardRobot = If( (Pos("HLWC03056",&NaamRelatieManager[1])>0) ,1,0)
+
+.Variables
+;----------------- Score
+PP    0 1N   1 2               Eindscore                                                           \EindScore
+
+;------------------------------ Knock-out
+.Variables
+PP      1M     2               Knock-out(s)?                                                       \Q_WARNING_GLOBAL
+PP      1M     3               Knock-out tekst                                                     \Q_WARNING_GLOBALTXT
+
+.Formulas NoTrend
+Q_WARNING_GLOBALTXT            = ""
+Q_WARNING_GLOBAL               = ""
+
+;------------------------------ Knock-out
+.Variables
+PP      1M     2               Restricties                                                         \Q_RESTRICTIES
+PP      1M   1 3               Restricties tekst                                                   \Q_RESTRICTIESTXT
+
+.Formulas NoTrend
+Q_RESTRICTIESTXT               = ""
+Q_RESTRICTIES                  = ""
+
+.StatusVar[NoTrend]     EindScore
+.StatusVar2[NoTrend]    Q_ROOT
+
+;--------------------------------------------------------------------------------------------------  ValCheck
+.Variables
+PPPP    VN     1                                                                                   \ValCheck
+
+;------------------------------ import
+.Variables
+PP    0 1N     1               Import                                                       \IMPORTS
+
+
+;------------------------------ EWS import
+.Variables
+PP    0 1N     2               EWS Import                                                   \IMPORT
+PI    0 1N D   3               periode_ultimo                                               \IMPORT_periode_ultimo                  ;CHAR10    X     - Stand gegevens
+PI      1A     3               relnr                                                        \IMPORT_relnr                           ;NUM             Relatienummer
+;PI      1A     3               reftyp                                                       \IMPORT_reftyp                          ;CHAR3     X     niet tonen
+PI      1A     3               relnr_rr                                                     \IMPORT_relnr_rr                        ;NUM       X     - Relatienummer RR
+PI      1A     3               kredfacnr                                                    \IMPORT_kredfacnr                       ;NUM             KFRNummer
+PI      1A     3               kredfacnr2                                                   \IMPORT_kredfacnr2                      ;NUM             TweedeKFRNummer
+PI      1A     3               relnaam                                                      \IMPORT_relnaam                         ;CHAR35          NaamAanvrager
+;PI    0 1N     3               segmcd                                                       \IMPORT_segmcd                          ;NUM       X     niet tonen
+PI    0 1N D   3               klant_bij_ing_sinds                                          \IMPORT_klant_bij_ing_sinds             ;NUM             KlantINGSinds
+PI      1A     3               kvknummer                                                    \IMPORT_kvknummer                       ;CHAR8           KvKnummer
+PI    0 1N D   3               oprchtdat                                                    \IMPORT_oprchtdat                       ;NUM             OprichtingsdatumKvK
+PI      1A     3               grid_eenh_id                                                 \IMPORT_grid_eenh_id                    ;NUM8            GRIDID
+PI      1A     3               naics_prim_industry_desc                                     \IMPORT_naics_prim_industry_desc        ;CHAR103         Branche
+PI      1A     3               sbf_relatie                                                  \IMPORT_sbf_relatie                     ;CHAR1           SBF
+PI      1A     3               ratinggetal_mm                                               \IMPORT_ratinggetal_mm                  ;CHAR8     X     niet tonen
+PI      1A     3               ratinggetal_mm12                                             \IMPORT_ratinggetal_mm12                ;CHAR8     X     niet tonen
+PI      1A     3               ing_risk_rating_mm                                           \IMPORT_ing_risk_rating_mm              ;CHAR7           Rating
+PI      1A     3               ing_risk_rating_mm12                                         \IMPORT_ing_risk_rating_mm12            ;CHAR7           RatingVorigJaar
+PI    0 1N     3       +       ovsbedr_mm_c                                                 \IMPORT_ovsbedr_mm_c                    ;NUM             OverstandHuidig
+PI    0 1N     3       +       aantal_dagen_overstand_mm_c                                  \IMPORT_aantal_dagen_overstand_mm_c     ;NUM             OverstandAantalDagen
+;PI    0 1N     3       +       sbfbomzc_mm_c                                                \IMPORT_sbfbomzc_mm_c                   ;NUM             OmzetVorigMnd
+;PI    0 1N     3       +       sbfbomzc_mm1_c                                               \IMPORT_sbfbomzc_mm1_c                  ;NUM       X     - Omzet1mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm2_c                                               \IMPORT_sbfbomzc_mm2_c                  ;NUM       X     - Omzet2mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm3_c                                               \IMPORT_sbfbomzc_mm3_c                  ;NUM       X     - Omzet3mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm4_c                                               \IMPORT_sbfbomzc_mm4_c                  ;NUM       X     - Omzet4mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm5_c                                               \IMPORT_sbfbomzc_mm5_c                  ;NUM       X     - Omzet5mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm6_c                                               \IMPORT_sbfbomzc_mm6_c                  ;NUM       X     - Omzet6mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm7_c                                               \IMPORT_sbfbomzc_mm7_c                  ;NUM       X     - Omzet7mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm8_c                                               \IMPORT_sbfbomzc_mm8_c                  ;NUM       X     - Omzet8mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm9_c                                               \IMPORT_sbfbomzc_mm9_c                  ;NUM       X     - Omzet9mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm10_c                                              \IMPORT_sbfbomzc_mm10_c                 ;NUM       X     - Omzet10mndgeleden
+;PI    0 1N     3       +       sbfbomzc_mm11_c                                              \IMPORT_sbfbomzc_mm11_c                 ;NUM       X     - Omzet11mndgeleden
+PI    0 1N     3       +       sbfbomzc_mm_mm11                                             \IMPORT_sbfbomzc_mm_mm11                ;NUM             OmzetVorig12Mnd
+PI    0 1N     3       +       gemomzc_mm_mm11                                              \IMPORT_gemomzc_mm_mm11                 ;NUM       X     - GemOmzet
+PI    0 1N     3       +       ultlim_mm_c                                                  \IMPORT_ultlim_mm_c                     ;NUM       X     - Limiet (KFCBelang_RCK
+PI    0 1N     3       +       reflimiet_mm                                                 \IMPORT_reflimiet_mm                    ;NUM             Referentielimiet
+PI    0 1N     3       +       totlimkredf_exobl_mm                                         \IMPORT_totlimkredf_exobl_mm            ;NUM             KFCBelang
+PI    0 1N     3       +       mk_ultlimbedr_mm                                             \IMPORT_mk_ultlimbedr_mm                ;NUM       X     - MK-belang (KFCBelang_MK)
+;PI    0 1N     3       +       s_omzet_t_punten                                             \IMPORT_s_omzet_t_punten                ;NUM       X     - Signaal_new_1Score
+;PI    0 1N     3       +       s_omzet_t                                                    \IMPORT_s_omzet_t                       ;BOOLEAN   X     - Signaal_new_1Afgegaan
+;PI      1A     3               s_omzet_t_oms                                                \IMPORT_s_omzet_t_oms                   ;CHAR150         Signaal_new_1
+;PI    0 1N     3       +       s_omzetdelta3_punten                                         \IMPORT_s_omzetdelta3_punten            ;NUM       X     - Signaal_new_2Score
+;PI    0 1N     3       +       s_omzetdelta3                                                \IMPORT_s_omzetdelta3                   ;BOOLEAN   X     - Signaal_new_2Afgegaan
+;PI      1A     3               s_omzetdelta3_oms                                            \IMPORT_s_omzetdelta3_oms               ;CHAR150         Signaal_new_2
+;PI    0 1N     3       +       s_omzet_y_punten                                             \IMPORT_s_omzet_y_punten                ;NUM       X     - Signaal_new_3Score
+;PI    0 1N     3       +       s_omzet_y                                                    \IMPORT_s_omzet_y                       ;BOOLEAN   X     - Signaal_new_3Afgegaan
+;PI      1A     3               s_omzet_y_oms                                                \IMPORT_s_omzet_y_oms                   ;CHAR150         Signaal_new_3
+;PI    0 1N     3       +       s_omzet_punten                                               \IMPORT_s_omzet_punten                  ;NUM       X     - Signaal_new_4Score
+;PI    0 1N     3       +       s_omzet                                                      \IMPORT_s_omzet                         ;BOOLEAN   X     - Signaal_new_4Afgegaan
+;PI      1A     3               s_omzet_oms                                                  \IMPORT_s_omzet_oms                     ;CHAR150         Signaal_new_4
+;PI    2 1N     3               disp_t                                                       \IMPORT_disp_t                          ;NUM             LimietVorigMnd
+;PI    2 1N     3       +       disp_t_1                                                     \IMPORT_disp_t_1                        ;NUM             LimietVorig2Mnd
+;PI    2 1N     3       +       disp_t_2                                                     \IMPORT_disp_t_2                        ;NUM       X     - Limietgebruik2Mndgeleden
+;PI    2 1N     3       +       disp_t_3                                                     \IMPORT_disp_t_3                        ;NUM       X     - Limietgebruik3Mndgeleden
+;PI    2 1N     3       +       disp_t_4                                                     \IMPORT_disp_t_4                        ;NUM       X     - Limietgebruik4Mndgeleden
+;PI    2 1N     3       +       disp_t_5                                                     \IMPORT_disp_t_5                        ;NUM       X     - Limietgebruik5Mndgeleden
+;PI    2 1N     3       +       disp_t_6                                                     \IMPORT_disp_t_6                        ;NUM       X     - Limietgebruik6Mndgeleden
+;PI    2 1N     3       +       disp_t_7                                                     \IMPORT_disp_t_7                        ;NUM       X     - Limietgebruik7Mndgeleden
+;PI    2 1N     3       +       disp_t_8                                                     \IMPORT_disp_t_8                        ;NUM       X     - Limietgebruik8Mndgeleden
+;PI    2 1N     3       +       disp_t_9                                                     \IMPORT_disp_t_9                        ;NUM       X     - Limietgebruik9Mndgeleden
+;PI    2 1N     3       +       disp_t_10                                                    \IMPORT_disp_t_10                       ;NUM       X     - Limietgebruik10Mndgeleden
+;PI    2 1N     3       +       disp_t_11                                                    \IMPORT_disp_t_11                       ;NUM       X     - Limietgebruik11Mndgeleden
+;PI    0 1N     3               s_disp_delta_punten                                          \IMPORT_s_disp_delta_punten             ;NUM       X     - Signaal_new_5Score
+;PI    0 1N     3               s_disp_delta                                                 \IMPORT_s_disp_delta                    ;BOOLEAN   X     - Signaal_new_5Afgegaan
+;PI      1A     3               s_disp_delta_oms                                             \IMPORT_s_disp_delta_oms                ;CHAR150         Signaal_new_5
+;PI    0 1N     3               s_disp_punten                                                \IMPORT_s_disp_punten                   ;NUM       X     - Signaal_new_6Score
+;PI    0 1N     3               s_disp                                                       \IMPORT_s_disp                          ;BOOLEAN   X     - Signaal_new_6Afgegaan
+;PI      1A     3               s_disp_oms                                                   \IMPORT_s_disp_oms                      ;CHAR150         Signaal_new_6
+;PI    0 1N     3               s_rlcheck_punten                                             \IMPORT_s_rlcheck_punten                ;NUM       X     - Signaal_new_7Score
+;PI    0 1N     3               s_rlcheck                                                    \IMPORT_s_rlcheck                       ;BOOLEAN   X     - Signaal_new_7Afgegaan
+;PI      1A     3               s_rlcheck_oms                                                \IMPORT_s_rlcheck_oms                   ;CHAR150         Signaal_new_7
+;PI    0 1N     3               s_limiet_punten                                              \IMPORT_s_limiet_punten                 ;NUM       X     - Signaal_new_8Score
+;PI    0 1N     3               s_limiet                                                     \IMPORT_s_limiet                        ;BOOLEAN   X     - Signaal_new_8Afgegaan
+;PI      1A     3               s_limiet_oms                                                 \IMPORT_s_limiet_oms                    ;CHAR150         Signaal_new_8
+;PI    0 1N     3               s_overstand_d_t_punten                                       \IMPORT_s_overstand_d_t_punten          ;NUM       X     - Signaal_new_9Score
+;PI    0 1N     3               s_overstand_d_t                                              \IMPORT_s_overstand_d_t                 ;BOOLEAN   X     - Signaal_new_9Afgegaan
+;PI      1A     3               s_overstand_d_t_oms                                          \IMPORT_s_overstand_d_t_oms             ;CHAR150         Signaal_new_9
+;PI    0 1N     3               s_overstand_s_t_punten                                       \IMPORT_s_overstand_s_t_punten          ;NUM       X     - Signaal_new_10Score
+;PI    0 1N     3               s_overstand_s_t                                              \IMPORT_s_overstand_s_t                 ;BOOLEAN   X     - Signaal_new_10Afgegaan
+;PI      1A     3               s_overstand_s_t_oms                                          \IMPORT_s_overstand_s_t_oms             ;CHAR150         Signaal_new_10
+;PI    0 1N     3               s_overstandenverloop_d_punten                                \IMPORT_s_overstandenverloop_d_punten   ;NUM       X     - Signaal_new_11Score
+;PI    0 1N     3               s_overstandenverloop_d                                       \IMPORT_s_overstandenverloop_d          ;BOOLEAN   X     - Signaal_new_11Afgegaan
+;PI      1A     3               s_overstandenverloop_d_oms                                   \IMPORT_s_overstandenverloop_d_oms      ;CHAR150   X     - Signaal_new_11
+;PI    0 1N     3               overstanden_saldo_6mnd                                       \IMPORT_overstanden_saldo_6mnd          ;NUM             OverstandVorigHalfJaar
+;PI    0 1N     3               s_overstandenverloop_s_punten                                \IMPORT_s_overstandenverloop_s_punten   ;BOOLEAN   X     - Signaal_new_12Score
+;PI    0 1N     3               s_overstandenverloop_s                                       \IMPORT_s_overstandenverloop_s          ;NUM       X     - Signaal_new_12Afgegaan
+;PI      1A     3               s_overstandenverloop_s_oms                                   \IMPORT_s_overstandenverloop_s_oms      ;CHAR150   X     - Signaal_new_12
+;PI    0 1N     3               s_rating_prefix_punten                                       \IMPORT_s_rating_prefix_punten          ;NUM       X     - Signaal_new_13Score
+;PI    0 1N     3               s_rating_prefix                                              \IMPORT_s_rating_prefix                 ;BOOLEAN   X     - Signaal_new_13Afgegaan
+;PI      1A     3               s_rating_prefix_oms                                          \IMPORT_s_rating_prefix_oms             ;CHAR150   X     - Signaal_new_13
+;PI    0 1N     3               s_rating_stijging_punten                                     \IMPORT_s_rating_stijging_punten        ;NUM       X     - Signaal_new_14Score
+;PI    0 1N     3               s_rating_stijging                                            \IMPORT_s_rating_stijging               ;BOOLEAN   X     - Signaal_new_14Afgegaan
+;PI      1A     3               s_rating_stijging_oms                                        \IMPORT_s_rating_stijging_oms           ;CHAR150   X     - Signaal_new_14
+;PI    0 1N     3               s_ratingverloop_punten                                       \IMPORT_s_ratingverloop_punten          ;NUM       X     - Signaal_new_15Score
+;PI    0 1N     3               s_ratingverloop                                              \IMPORT_s_ratingverloop                 ;BOOLEAN   X     - Signaal_new_15Afgegaan
+;PI      1A     3               s_ratingverloop_oms                                          \IMPORT_s_ratingverloop_oms             ;CHAR150   X     - Signaal_new_15
+;PI    0 1N     3               s_br31_punten                                                \IMPORT_s_br31_punten                   ;NUM       X     - Signaal_new_16Score
+;PI    0 1N     3               s_br31                                                       \IMPORT_s_br31                          ;BOOLEAN   X     - Signaal_new_16Afgegaan
+;PI      1A     3               s_br31_oms                                                   \IMPORT_s_br31_oms                      ;CHAR150   X     - Signaal_new_16
+;PI    0 1N     3               s_starter_punten                                             \IMPORT_s_starter_punten                ;NUM       X     - Signaal_new_17Score
+;PI    0 1N     3               s_starter                                                    \IMPORT_s_starter                       ;BOOLEAN   X     - Signaal_new_17Afgegaan
+;PI      1A     3               s_starter_oms                                                \IMPORT_s_starter_oms                   ;CHAR150   X     - Signaal_new_17
+;PI    0 1N     3               s_rl_punten                                                  \IMPORT_s_rl_punten                     ;NUM       X     - Signaal_new_18Score
+;PI    0 1N     3               s_rl                                                         \IMPORT_s_rl                            ;BOOLEAN   X     - Signaal_new_18Afgegaan
+;PI      1A     3               s_rl_oms                                                     \IMPORT_s_rl_oms                        ;CHAR150   X     - Signaal_new_18
+;PI    0 1N     3               s_ina_punten                                                 \IMPORT_s_ina_punten                    ;NUM       X     - Signaal_new_19Score
+;PI    0 1N     3               s_ina                                                        \IMPORT_s_ina                           ;BOOLEAN   X     - Signaal_new_19Afgegaan
+;PI      1A     3               s_ina_oms                                                    \IMPORT_s_ina_oms                       ;CHAR150   X     - Signaal_new_19
+;PI    0 1N D   3               revisiedatum                                                 \IMPORT_revisiedatum                    ;NUM             RevisieDatumKOS
+;PI    0 1N     3               s_revisiedatum_punten                                        \IMPORT_s_revisiedatum_punten           ;BOOLEAN   X     - Signaal_new_20Score
+;PI    0 1N     3               s_revisiedatum                                               \IMPORT_s_revisiedatum                  ;NUM       X     - Signaal_new_20Afgegaan
+;PI      1A     3               s_revisiedatum_oms                                           \IMPORT_s_revisiedatum_oms              ;CHAR150   X     - Signaal_new_20
+;PI    0 1N     3               totaalpunten                                                 \IMPORT_totaalpunten                    ;NUM       X     - EWSTotaalscore
+;PI      1A     3               aflosschema                                                  \IMPORT_aflosschema                     ;BOOLEAN   X     - AflosschemaAanwezig
+
+
+.Quit

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.0.5" date="3-9-2014" author="Topicus Finan" title="SRA KAM Rapportage" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportTimeline>MonthTimeline</ReportTimeline>
+  	<ReportName>SRA Kredietaanvraag</ReportName>
+	<Periods><data src="fesModel"><columns timeline="xpath:./document/properties/ReportTimeline" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+  	<CompanyName><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="OrganisationName" recursiveSkip="false" /></data></CompanyName>
+	<CompanyPlaceOfResidence><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="OrganisationPlace" recursiveSkip="false" /></data></CompanyPlaceOfResidence>
+  	<Email><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ClientEmailAdress" recursiveSkip="false" /></data></Email>
+	<CreationDate><data src="fesModel"><columns header="" number="1" /><variables var="Q_STATUS_MODIFIED_ON" /><presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " format="dd MMMM yyyy" showSingleValueVariablesOnce="false" /></data></CreationDate>
+  <DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+  <CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+	
+  	<EmailLabel><data src="chineseRoom" name="EMailLabel">E-mail</data></EmailLabel>
+
+
+ 	<CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+  	<CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+  	<BalanceFailed><data src="chineseRoom" name="BalanceFailed">Waarschuwing: 1 of meerdere periodes zijn niet in balans</data></BalanceFailed>
+  	<CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+  	<PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+  	<currentUser_FullnameLabel><data src="chineseRoom" name="currentUser_FullnameLabel">Opsteller</data></currentUser_FullnameLabel>
+  	<currentUser_PhonenumberLabel><data src="chineseRoom" name="currentUser_PhonenumberLabel">Telefoonnummer</data></currentUser_PhonenumberLabel>
+  	<currentUser_EmailLabel><data src="chineseRoom" name="currentUser_EmailLabel">Email adres</data></currentUser_EmailLabel>
+  	<Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+  	<PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+  	<Of><data src="chineseRoom" name="Of">van</data></Of>
+  	<At><data src="chineseRoom" name="At">te</data></At>
+                                    
+  	<ReportScaleDefault>1</ReportScaleDefault>  
+  	<ReportScale>1</ReportScale>  
+  	<Disclaimer> </Disclaimer>
+                                           
+		<DefaultFont>Arial</DefaultFont>            
+		<HeaderFont>Arial</HeaderFont>
+		                                    
+		<HeaderTextColor>#5F294F</HeaderTextColor>    
+		<TableHeaderTextColor>#5F294F</TableHeaderTextColor> 
+		<BlockTextColor>#5F294F</BlockTextColor>         
+		    
+		<DefaultTextColor>#000000</DefaultTextColor>
+		<TableTitleTextColor>#000000</TableTitleTextColor>   
+		<TotalTextColor>#000000</TotalTextColor>   		
+		
+		<HighlightTextColor>#FF0000</HighlightTextColor>
+		
+		<LocalTotalBackgroundColor>#f7f7f7</LocalTotalBackgroundColor>
+		<BlockBackgroundColor>#9CC8EE</BlockBackgroundColor>
+		<TableTitleBackgroundColor>#C8C7C7</TableTitleBackgroundColor>
+		<EvenColumnBackgroundColor>#f7f7f7</EvenColumnBackgroundColor>
+		<OddColumnBackgroundColor>#FFFFFF</OddColumnBackgroundColor>
+		<TotalBackgroundColor>#e4f0fb</TotalBackgroundColor>
+		<SubTotalBackgroundColor>#f7f7f7</SubTotalBackgroundColor>
+		<TableHeaderBackgroundColor>#E0E0E0</TableHeaderBackgroundColor> 
+		            
+		<graphColor5>#94a3c8</graphColor5>
+		<graphColor4>#989796</graphColor4>
+		<graphColor3>#ed6e00</graphColor3>
+		<graphColor2>#6fa8dc</graphColor2> 
+		<graphColor1>#ff0000</graphColor1>
+</properties>
+
+
+
+
+
+<newpage name="frontpage">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<!-- =========fp================================================================ -->
+
+
+
+
+
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+<!-- =========toc=============================================================== -->
+<tableofcontents class="split">
+  <title><data src="chineseRoom" name="TOC">Inhoudsopgave</data></title>
+  <tocdepth>2</tocdepth>
+</tableofcontents>
+
+
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+<!-- =========Algemene gegevens=============================================================== -->
+	<section class="section"><data src="fesModel"><variables var="Q_Map01" function="getTitle"/></data></section>
+  
+	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Client" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+  
+  	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Intermediary" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      		</presentation>
+		</data>
+	</table>
+  
+  	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Organisation" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+
+
+
+<!-- ======================================================================= -->
+<!-- Inleiding -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+<section class="section"><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></section>
+<subsection class="subsection"><data src="fesModel"><variables var="DoelEnRedenMemo" function="getTitle"/></data></subsection>
+ <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="DoelEnRedenMemo" recursiveSkip="false" /></data></p>
+<subsection class="subsection"><data src="fesModel"><variables var="HuidigeKredietFaciliteitenMemo" function="getTitle"/></data></subsection>
+ <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="HuidigeKredietFaciliteitenMemo" recursiveSkip="false" /></data></p>
+<subsection class="subsection"><data src="fesModel"><variables var="NieuweKredietbehoefteMemo" function="getTitle"/></data></subsection>
+ <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="NieuweKredietbehoefteMemo" recursiveSkip="false" /></data></p>
+
+  
+<!-- ======================================================================= -->
+<!-- Profiel van de onderneming -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+	<section class="section"><data src="fesModel"><variables var="Q_Map03" function="getTitle"/></data></section>
+
+ <subsection class="subsection"><data src="fesModel"><variables var="DeOnderneming" function="getTitle"/></data></subsection>
+ 	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="DeOnderneming" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+
+ <subsection class="subsection"><data src="fesModel"><variables var="Marktpositie" function="getTitle"/></data></subsection>
+ 	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Marktpositie" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+
+
+  <subsection class="subsection"><data src="fesModel"><variables var="ProductenEnDiensten" function="getTitle"/></data></subsection>
+ 	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="ProductenEnDiensten" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+	      <overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+
+ <subsection class="subsection"><data src="fesModel"><variables var="RisicoProfiel" function="getTitle"/></data></subsection>
+ 	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="RisicoProfiel" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+
+
+  <subsection class="subsection"><data src="fesModel"><variables var="ManagementEnPersoneel" function="getTitle"/></data></subsection>
+ 	<table class="datatable">
+	 	<data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="ManagementEnPersoneel" recursiveSkip="false" />
+			<presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " order="reverse" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" filterEmptyRows="true" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+			</presentation>
+		</data>
+	</table>
+	
+<subsection class="subsection"><data src="fesModel"><variables var="ManagementPriveMemo" function="getTitle"/></data></subsection>
+  <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ManagementPriveMemo" recursiveSkip="false" /></data></p>
+
+<!-- ======================================================================= -->
+<!-- Kredietbehoefte -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+	<section class="section"><data src="fesModel"><variables var="Q_Map04" function="getTitle"/></data></section>
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="2" var="CreditNeed" varTo="pCashflowFromExploitation" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" disableMinusCorrection="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+ <subsection class="subsection"><data src="fesModel"><variables var="ToelichtingKredietBehoefte" function="getTitle"/></data></subsection>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingKredietBehoefteMemo" recursiveSkip="false" /></data></p>
+
+
+<!-- ======================================================================= -->
+<!-- Financiële positie -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map05" function="getTitle"/></data></section>
+<subsection class="subsection"><data src="fesModel"><variables var="BalanceSheetAssets" function="getTitle"/></data></subsection>
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="2" var="BalanceSheetAssets" varFrom="IntangibleFixedAssets" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+ 	
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+ 	
+	<section class="subsection"><data src="fesModel"><variables var="BalanceSheetEquityAndLiabilities" function="getTitle"/></data></section>
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="2" var="BalanceSheetEquityAndLiabilities" varFrom="NetWorth" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+  
+  <subsection class="subsection"><data src="fesModel"><variables var="ToelichtingBalans"  function="getTitle" /></data></subsection> 
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingBalansMemo" recursiveSkip="false" /></data></p>
+
+
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+      
+      <section class="subsection"><data src="fesModel"><variables var="IncomeStatement" function="getTitle"/></data></section>
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="2" var="IncomeStatement" varFrom="pNetSales" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+
+<subsection class="subsection"><data src="fesModel"><variables var="ToelichtingResultatenRekening"  function="getTitle" /></data></subsection>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingResultatenRekeningMemo" recursiveSkip="false" /></data></p>
+
+
+
+
+<!-- ======================================================================= -->
+<!-- Zekerheden en dekking -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map06" function="getTitle"/></data></section>
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+		<variables depth="3" var="AansprakelijkVermogen" />
+      <presentation showBlankLines="true" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+<subsection class="subsection"><data src="fesModel"><variables var="ToelichtingAansprakelijkVermogen"  function="getTitle" /></data></subsection>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingAansprakelijkVermogenMemo" recursiveSkip="false" /></data></p>
+
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+		<variables depth="3" var="KAM_RepaymentCapacity" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+<subsection class="subsection"><data src="fesModel"><variables var="ToelichtingAflossingscapaciteit"  function="getTitle" /></data></subsection>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingAflossingscapaciteitMemo" recursiveSkip="false" /></data></p>
+
+<table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Q_Map06" varFrom="LiquidityRatios" />
+      <presentation showBlankLines="true" overwriteNAValueForCurrencyWith=" " filterEmptyRows="false" titleSuffix="" showHeaderRowOnNewPage="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+
+
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map07" function="getTitle"/></data></section>
+  
+    <table class="datatable">
+    <data src="fes">
+      <columns header="" timeline="xpath:./document/properties/ReportTimeline" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+			<variables depth="4" var="Q_Map07" varFrom="NieuweZekerheden" varTo="NieuweZekerheden" />
+      <presentation showBlankLines="false" overwriteNAValueForCurrencyWith=" " filterEmptyRows="true" titleSuffix="" showHeaderRowOnNewPage="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="true" appendEmptyColumns="1" showSingleValueVariablesOnce="true">
+      		<overrideStyleSingleValueVariable old="level0">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level1">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level2">choicenoborder</overrideStyleSingleValueVariable>
+			<overrideStyleSingleValueVariable old="level3">choicenoborder</overrideStyleSingleValueVariable>
+      </presentation>
+    </data>
+ 	</table>
+
+<subsection class="subsection"><data src="fesModel"><variables var="ToelichtingZekerheden"  function="getTitle" /></data></subsection>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ToelichtingZekerhedenMemo" recursiveSkip="false" /></data></p>
+
+
+<!-- ======================================================================= -->
+<!-- Conclusie -->
+<newpage name="normal">
+  <p   id="watermark"   visible="./document/properties/isFinalReport/text()=0"/></newpage>
+
+	<section class="section">Conclusie</section>
+   <p><data src="fesModel"><columns header="" number="1" order="asc" /><variables depth="1" var="ConclusieToelichting" recursiveSkip="false" /></data></p>  
+ 
+
+
+<!-- =========End=============================================================== -->
+
+
+
+
+
+</document>

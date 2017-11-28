@@ -3,7 +3,7 @@ var fs = require('fs')
 var name = process.argv[2];
 var lmeAPI = require('./lme')
 const lmeApi = new lmeAPI()
-lmeApi.importFFL(fs.readFileSync(__dirname + '/../../ff-ssh-git/resources/' + name + '.ffl', 'utf8'));
+lmeApi.importFFL(fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + '.ffl', 'utf8'));
 var lmeExport = lmeApi.exportLME();
 let done = false;
 let options = {
@@ -28,5 +28,5 @@ let options = {
 let b = browser(options).ignore('escodegen').ignore('esprima');
 b.add(__dirname + '/angularController.js');
 b.transform(require('browserify-fastjson'));
-var res = fs.createWriteStream(__dirname + '/../../ff-ssh-git/resources/ai_' + name + '.js')
+var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/ai_' + name + '.js')
 b.bundle().pipe(res);

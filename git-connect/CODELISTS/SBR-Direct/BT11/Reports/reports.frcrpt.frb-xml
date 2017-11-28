@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="0.1" date="6-6-2012" author="Topicus Finan" title="SBR Direct" xsi:noNamespaceSchemaLocation="../../../src/FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+                
+	<ReportName><data src="fesModel"><variables var="ReportName" function="getTitle"/></data></ReportName>
+  <ReportType><data src="fesModel"><variables var="ReportName" function="getTitle"/></data></ReportType>
+  <NameBusiness><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline" /><variables depth="1" var="JAVA_ENTREPRENEUR_COMPANYNAME"/></data></NameBusiness>
+  
+  <NameEntrepreneur><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline" /><variables depth="1" var="JAVA_ENTREPRENEUR_FULLNAME"/></data></NameEntrepreneur>
+  
+  <RegistrationChamberOfCommerce><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline" /><variables var="JAVA_ENTREPRENEUR_CHAMBEROFCOMMERCENUMBER"/></data></RegistrationChamberOfCommerce>
+	<ReportScaleDefault>1</ReportScaleDefault>
+  <LastHistYear><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline" /><variables function="getEndDate"/><presentation format="yyyy"/></data></LastHistYear>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="dd-MM-yyyy HH:mm"/></data></CreationDate>
+    <sentToBIVformatted><data src="functions" name="getDate" var="./document/properties/sentToBIV/text()"><param key="format" value="dd-MM-yyyy HH:mm"/></data></sentToBIVformatted>
+
+    <hasIntermediair><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline" /><variables depth="1" var="hasIntermediary" /></data></hasIntermediair>
+    
+    <Q_STEP01_visible><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline"  /><variables depth="1" var="Q_STEP01" function="getVisible"/></data></Q_STEP01_visible>
+    <Q_STEP02_visible><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline"  /><variables depth="1" var="Q_STEP02" function="getVisible"/></data></Q_STEP02_visible>
+    <Q_STEP03_visible><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline"  /><variables depth="1" var="Q_STEP03" function="getVisible"/></data></Q_STEP03_visible>
+    <Q_STEP04_visible><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline"  /><variables depth="1" var="Q_STEP04" function="getVisible"/></data></Q_STEP04_visible>
+    <Q_STEP05_visible><data src="fesModel"><columns number="1" order="asc" timeline="MonthTimeline"  /><variables depth="1" var="Q_STEP05" function="getVisible"/></data></Q_STEP05_visible>
+</properties>
+
+<!-- ============================= Version          1.00.002 =============================== -->
+
+<newpage name="frontpage">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<newpage name="main">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+  <p   id="sentInformation"  visible="./document/properties/isFinalReport/text()=1"/>
+  <p   id="conceptInformation"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="tabletemplate">
+  <tr class="General">
+    <td><data src="fesModel"><variables var="Q_STEP01" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="ReportName">
+    <td><data src="document" var="./document/properties/ReportName/text()"/></td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr class="Information">
+    <td><data src="document" var="./document/properties/NameBusiness/text()"/> KVK:<data src="document" var="./document/properties/RegistrationChamberOfCommerce/text()"/> </td>
+    <td> </td> 
+    <td>Printdatum: <data src="document" var="./document/properties/CreationDate/text()"/></td>
+  </tr>
+  <tr class="General" repeat="newpageonly">
+    <td>Vervolg <data src="fesModel"><variables var="Q_STEP01" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="whiterow" repeat="newpage">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <data src="fes">
+    <columns delta="0" number="2" order="asc" timeline="MonthTimeline" />
+    <variables depth="10" var="Q_STEP01" recursiveSkip="false" varToNotInclude="Q_STEP01_WARNING"/>
+    <presentation showSingleValueVariablesOnce="true" filterEmptyRows="false" filterEmptyTrees="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerFunction="endDate" headerFormat="dd-MM-yyyy" showHeaderRowOnNewPage="true" showBlankLines="false">
+      <appendStyleForType variableDataType="Currency">Right</appendStyleForType>
+      
+    </presentation>
+  </data>
+</table>
+<p> </p>
+
+<block visible="./document/properties/Q_STEP02_visible/text()='true'">
+<table class="tabletemplate">
+  <tr class="General">
+    <td><data src="fesModel"><variables var="Q_STEP02" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="General" repeat="newpageonly">
+    <td>Vervolg <data src="fesModel"><variables var="Q_STEP02" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="whiterow" repeat="newpage">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <data src="fes">
+    <columns delta="0" number="2" order="asc" timeline="MonthTimeline" />
+    <variables depth="10" var="Q_STEP02" recursiveSkip="false" varToNotInclude="Q_STEP02_WARNING"/>
+    <presentation showSingleValueVariablesOnce="true" filterEmptyRows="false" filterEmptyTrees="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerFunction="endDate" headerFormat="dd-MM-yyyy" showHeaderRowOnNewPage="true" showBlankLines="false">
+      <appendStyleForType variableDataType="Currency">Right</appendStyleForType>
+      
+    </presentation>
+  </data>
+</table>
+<p> </p>
+</block>
+
+<block visible="./document/properties/Q_STEP03_visible/text()='true'">
+<table class="tabletemplate">
+  <tr class="General">
+    <td><data src="fesModel"><variables var="Q_STEP03" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="General" repeat="newpageonly">
+    <td>Vervolg <data src="fesModel"><variables var="Q_STEP03" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="whiterow" repeat="newpage">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <data src="fes">
+    <columns delta="0" number="2" order="asc" timeline="MonthTimeline" />
+    <variables depth="10" var="Q_STEP03" recursiveSkip="false" varToNotInclude="Q_STEP03_WARNING"/>
+    <presentation showSingleValueVariablesOnce="true" filterEmptyRows="false" filterEmptyTrees="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerFunction="endDate" headerFormat="dd-MM-yyyy" showHeaderRowOnNewPage="true" showBlankLines="false">
+      <appendStyleForType variableDataType="Currency">Right</appendStyleForType>
+      
+    </presentation>
+  </data>
+</table>
+<p> </p>
+</block>
+
+<block visible="./document/properties/Q_STEP04_visible/text()='true'">
+<table class="tabletemplate">
+  <tr class="General">
+    <td><data src="fesModel"><variables var="Q_STEP04" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="General" repeat="newpageonly">
+    <td>Vervolg <data src="fesModel"><variables var="Q_STEP04" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="whiterow" repeat="newpage">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <data src="fes">
+    <columns delta="0" number="2" order="asc" timeline="MonthTimeline" />
+    <variables depth="10" var="Q_STEP04" recursiveSkip="false" varToNotInclude="Q_STEP04_WARNING"/>
+    <presentation showSingleValueVariablesOnce="true" filterEmptyRows="false" filterEmptyTrees="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerFunction="endDate" headerFormat="dd-MM-yyyy" showHeaderRowOnNewPage="true" showBlankLines="false">
+      <appendStyleForType variableDataType="Currency">Right</appendStyleForType>
+      
+    </presentation>
+  </data>
+</table>
+<p> </p>
+</block>
+
+<block visible="./document/properties/Q_STEP05_visible/text()='true'">
+<table class="tabletemplate">
+  <tr class="General">
+    <td><data src="fesModel"><variables var="Q_STEP05" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="General" repeat="newpageonly">
+    <td>Vervolg <data src="fesModel"><variables var="Q_STEP05" function="getTitle"/></data></td>
+    <td> </td>
+    <td>Bedragen in hele euro's</td>
+  </tr>
+  <tr class="whiterow" repeat="newpage">
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <data src="fes">
+    <columns delta="0" number="2" order="asc" timeline="MonthTimeline" />
+    <variables depth="10" var="Q_STEP05" recursiveSkip="false" varToNotInclude="Q_STEP05_WARNING"/>
+    <presentation showSingleValueVariablesOnce="true" filterEmptyRows="false" filterEmptyTrees="true" showHeaderRow="true" scale="./document/properties/ReportScaleDefault/text()" headerFunction="endDate" headerFormat="dd-MM-yyyy" showHeaderRowOnNewPage="true" showBlankLines="false">
+      <appendStyleForType variableDataType="Currency">Right</appendStyleForType>
+      
+    </presentation>
+  </data>
+</table>
+<p> </p>
+</block>
+
+<!-- =========End============================================================= -->
+</document>

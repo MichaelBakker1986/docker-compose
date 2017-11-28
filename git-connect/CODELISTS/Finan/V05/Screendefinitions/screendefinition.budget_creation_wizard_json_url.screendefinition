@@ -1,0 +1,66 @@
+{
+	"viewType":"WIZARD",
+	"name":"Root",
+	"variableName":"Q_ROOT",
+	"metaData":{
+		"onlyMoveForwardIfAllPreviousStepsAreDone":true,
+		"neverShowReportButton":true
+	},
+	"children":[
+		{
+			"viewType":"CONTAINER",
+			"name":"Naam",
+			"description":"wizard_step_name",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel1",
+					"description":"CustomPanel1",
+					"metaData":{
+						"providertype":"BUDGET_NAME_PANEL"
+					}
+					
+				}
+				
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Selection",
+			"description":"wizard_step_base",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel2",
+					"description":"CustomPanel2",
+					"metaData":{
+						"providertype":"BUDGET_SOURCE_PROJECT_SELECTION_PANEL"
+					}
+					
+				}
+				
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Rounding",
+			"description":"wizard_step_rounding",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel3",
+					"description":"CustomPanel3",
+					"metaData":{
+						"providertype":"BUDGET_WIZARD_ROUND_PANEL"
+					}
+					
+				}
+				
+			]
+			
+		}
+		
+	]
+}

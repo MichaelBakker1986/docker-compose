@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:gen="http://xbrl.org/2008/generic" xmlns:label="http://xbrl.org/2008/label" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xbrl.org/2008/generic http://www.xbrl.org/2008/generic-link.xsd http://xbrl.org/2008/label http://www.xbrl.org/2008/generic-label.xsd">
+  <link:roleRef roleURI="http://www.xbrl.org/2008/role/label" xlink:href="http://www.xbrl.org/2008/generic-label.xsd#standard-label" xlink:type="simple"/>
+  <link:roleRef roleURI="http://www.xbrl.org/2008/role/link" xlink:href="http://www.xbrl.org/2008/generic-link.xsd#standard-link-role" xlink:type="simple"/>
+  <link:arcroleRef arcroleURI="http://xbrl.org/arcrole/2008/element-label" xlink:href="http://www.xbrl.org/2008/generic-label.xsd#element-label" xlink:type="simple"/>
+  <gen:link xlink:role="http://www.xbrl.org/2008/role/link" xlink:type="extended">
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_AdimensionalTable_loc" xlink:to="fink-lr_AdimensionalTable_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_BalanceSheet_loc" xlink:to="fink-lr_BalanceSheet_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_Contact_loc" xlink:to="fink-lr_Contact_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_EntityReportInformation_loc" xlink:to="fink-lr_EntityReportInformation_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_Forecast_loc" xlink:to="fink-lr_Forecast_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_FundingRequestInformation_loc" xlink:to="fink-lr_FundingRequestInformation_label_nl" xlink:type="arc"/>
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-lr_IncomeStatement_loc" xlink:to="fink-lr_IncomeStatement_label_nl" xlink:type="arc"/>
+    <label:label id="fink-lr_AdimensionalTable_label_nl" xlink:label="fink-lr_AdimensionalTable_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Adimensioneel [tabel]</label:label>
+    <label:label id="fink-lr_BalanceSheet_label_nl" xlink:label="fink-lr_BalanceSheet_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Balans</label:label>
+    <label:label id="fink-lr_Contact_label_nl" xlink:label="fink-lr_Contact_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Contactpersoon</label:label>
+    <label:label id="fink-lr_FundingRequestInformation_label_nl" xlink:label="fink-lr_FundingRequestInformation_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Financieringsaanvraag gegevens</label:label>
+    <label:label id="fink-lr_EntityReportInformation_label_nl" xlink:label="fink-lr_EntityReportInformation_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Ondernemings- en rapportage gegevens</label:label>
+    <label:label id="fink-lr_Forecast_label_nl" xlink:label="fink-lr_Forecast_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Prognose</label:label>
+    <label:label id="fink-lr_IncomeStatement_label_nl" xlink:label="fink-lr_IncomeStatement_label_nl" xlink:role="http://www.xbrl.org/2008/role/label" xlink:type="resource" xml:lang="nl">Winst- en verliesrekening</label:label>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_AdimensionalTable" xlink:label="fink-lr_AdimensionalTable_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_BalanceSheet" xlink:label="fink-lr_BalanceSheet_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_Contact" xlink:label="fink-lr_Contact_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_EntityReportInformation" xlink:label="fink-lr_EntityReportInformation_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_Forecast" xlink:label="fink-lr_Forecast_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_FundingRequestInformation" xlink:label="fink-lr_FundingRequestInformation_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-linkroles.xsd#fink-lr_IncomeStatement" xlink:label="fink-lr_IncomeStatement_loc" xlink:type="locator"/>
+  </gen:link>
+</link:linkbase>

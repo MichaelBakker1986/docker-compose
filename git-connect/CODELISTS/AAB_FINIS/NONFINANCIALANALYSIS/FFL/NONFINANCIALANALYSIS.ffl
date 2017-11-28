@@ -1,0 +1,444 @@
+// model "ABN AMRO Bank NONFINANCIALANALYSIS"
+// created by FINAN 3.2.56.23 (user Ronald van Aalderen) on 02-02-2017 13:47
+
+import FinanMath.*;
+import BaseModel.*;
+
+model NONFINANCIALANALYSIS uses BaseModel
+{
+  version: "0.13";
+  root
+  {
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: Q_Map01[1];
+      data_options: unscalable;
+      displaytype: select;
+      title: "ABN AMRO Bank NONFINANCIALANALYSIS      (v0.13)";
+      hint: "ABN AMRO Bank NONFINANCIALANALYSIS";
+      top_blanklines: 1;
+      locked: 1;
+      choices: "0:Complete|1:Incomplete";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: select;
+        title: "NONFINANCIALANALYSIS";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 0;
+        choices: "0:Incomplete|1:Complete";
+        options_title: locked;
+        options: locked, invisible;
+        variable ClientAnalysis
+        {
+          datatype: none;
+          title: "Client Analysis";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 0;
+          options_title: locked;
+          options: locked, invisible;
+          variable BusinessAndOperations
+          {
+            datatype: none;
+            title: "[b]Business & Operations[/b]";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable ClientAnalysis_CurrentRatio
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "Current ratio";
+            options_title: locked;
+          }
+          variable ClientAnalysis_GrossTurnover
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Gross turnover";
+            options_title: locked;
+          }
+          variable CompanyAnalysis
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Company Analysis";
+            hint: "Please give a extensive analyses on the company";
+            options_title: locked;
+          }
+          variable ManagementStructure
+          {
+            datatype: none;
+            title: "[b]Management Structure[/b]";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable ManagementAnalysis_Plan
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            fixed_decimals: 0;
+            title: "Is the board able to plan activities and results?";
+            choices: "0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good";
+            options_title: locked;
+          }
+          variable ManagementAnalysis_Monitor
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            fixed_decimals: 0;
+            title: "Is the board able to monitor activities and results?";
+            choices: "0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good";
+            options_title: locked;
+          }
+          variable ManagementAnalysis_Control
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            fixed_decimals: 0;
+            title: "Is the board able to control activities and results?";
+            choices: "0:Poorly|1:Insufficient|2:Sufficient|3:Good|4:Very Good";
+            options_title: locked;
+          }
+          variable ManagementAnalysis
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Management Analysis";
+            hint: "Please give a extensive analyses on the management";
+            options_title: locked;
+          }
+          variable BusinessRisksAnalysis
+          {
+            datatype: none;
+            title: "[b]Business risks analysis[/b]";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable AmountOfSuppliers
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Amount of suppliers";
+            options_title: locked;
+          }
+          variable SufficientStock
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Sufficient stock is kept to ensure normal supplies?";
+            choices: "1:Yes|0:No";
+            options_title: locked;
+          }
+          variable ObsoleteInventory
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Is there any sign of obsolete inventory?";
+            choices: "1:Yes|0:No";
+            options_title: locked;
+          }
+          variable DependableDebtors
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Is there any concentration of dependable debtors?";
+            choices: "1:Yes|0:No";
+            options_title: locked;
+          }
+          variable EconomicConditions
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "What is the impact of the current economic conditions?";
+            choices: "1:Negative|2:Neutral|3:Positive";
+            options_title: locked;
+          }
+          variable CompanyReputation
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Is there reason to doubt the reputation of the company?";
+            choices: "1:Yes|0:No";
+            options_title: locked;
+          }
+          variable ExecutiveAnalysis
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Executive Analysis";
+            hint: "Please give a extensive analyses on the executives";
+            options_title: locked;
+          }
+        }
+        variable FinancialAnalysis
+        {
+          datatype: none;
+          title: "Financial Analysis";
+          locked: 1;
+          visible: 0;
+          options_title: locked;
+          options: locked, invisible;
+          variable NetSalesSection
+          {
+            datatype: none;
+            title: "Turnover Section";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+            variable NetSales
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              data_options: saveCalculatedValue;
+              displaytype: currency;
+              title: "Turnover";
+              top_blanklines: 1;
+              bottom_separator: 1;
+              locked: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked, invisible;
+            }
+            variable ReasoningNetSales
+            {
+              datatype: string;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: memo;
+              title: "Reasoning";
+              options_title: locked;
+            }
+            variable NetSalesActive
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: select;
+              title: "Turnover";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+            variable NetSalesMandatory
+            {
+              datatype: number;
+              frequency: document;
+              formula: MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","NetSales",1);
+              data_options: unscalable;
+              displaytype: select;
+              title: "Turnover";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+          }
+          variable SolvencyRatioSection
+          {
+            datatype: none;
+            title: "Solvency Section";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+            variable SolvencyRatio
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: saveCalculatedValue,calculateAggregation,unscalable;
+              fixed_decimals: 1;
+              title: "Solvency";
+              top_blanklines: 1;
+              bottom_separator: 1;
+              locked: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked, invisible;
+            }
+            variable ReasoningSolvencyRatio
+            {
+              datatype: string;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: memo;
+              title: "Reasoning";
+              options_title: locked;
+            }
+            variable SolvencyRatioActive
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: select;
+              title: "Solvency";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+            variable SolvencyRatioMandatory
+            {
+              datatype: number;
+              frequency: document;
+              formula: MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","SolvencyRatio",1);
+              data_options: unscalable;
+              displaytype: select;
+              title: "Solvency";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+          }
+          variable CurrentRatioSection
+          {
+            datatype: none;
+            title: "Current Ratio Section";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+            variable CurrentRatio
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              fixed_decimals: 2;
+              title: "Current Ratio";
+              top_blanklines: 1;
+              bottom_separator: 1;
+              locked: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked, invisible;
+            }
+            variable ReasoningCurrentRatio
+            {
+              datatype: string;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: memo;
+              title: "Reasoning";
+              options_title: locked;
+            }
+            variable CurrentRatioActive
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: select;
+              title: "Current Ratio";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+            variable CurrentRatioMandatory
+            {
+              datatype: number;
+              frequency: document;
+              formula: MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","CurrentRatio",1);
+              data_options: unscalable;
+              displaytype: select;
+              title: "Current Ratio";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+          }
+          variable DebtToEBITDASection
+          {
+            datatype: none;
+            title: "Total Debt to EBITDA Section";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options: locked, invisible;
+            variable DebtToEBITDA
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: saveCalculatedValue,calculateAggregation,unscalable;
+              fixed_decimals: 2;
+              title: "Total Debt to EBITDA";
+              top_blanklines: 1;
+              bottom_separator: 1;
+              locked: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked, invisible;
+            }
+            variable ReasoningDebtToEBITDA
+            {
+              datatype: string;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: memo;
+              title: "Reasoning";
+              options_title: locked;
+            }
+            variable DebtToEBITDAActive
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: select;
+              title: "Total Debt to EBITDA";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+            variable DebtToEBITDAMandatory
+            {
+              datatype: number;
+              frequency: document;
+              formula: MatrixLookup("NonFinancialAnalysis.xls","MandatoryRatios","DebtToEBITDA",1);
+              data_options: unscalable;
+              displaytype: select;
+              title: "Total Debt to EBITDA";
+              choices: "1:Yes|0:No";
+              options_title: locked;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Testvoorbeeldinstance -->
+<!-- Financiele Rapportages Cooperatief B.A. -->
+<!-- BT2016 (January 14, 2016) -->
+<xbrli:xbrl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xbrl.org/2006/xbrldi http://www.xbrl.org/2006/xbrldi-2006.xsd" xmlns:rpt="https://www.sbrbanken.nl/BT2016/report/bank/entrypoints/bank-rpt-krediet-pp-kl-fisc-categoriaal" xmlns:bank-tuples="https://www.sbrbanken.nl/BT2016/domein/bank/tuples/bank-tuples" xmlns:gen="http://xbrl.org/2008/generic" xmlns:rj-t="http://www.nltaxonomie.nl/10.0/domein/rj/tuples/rj-tuples" xmlns:rj-i="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data" xmlns:bank-dm-bop="https://www.sbrbanken.nl/BT2016/basis/bank/domains/bank-domains-kr-basis-of-preparation" xmlns:bank-cd="https://www.sbrbanken.nl/BT2016/basis/bank/items/bank-common-data" xmlns:bw2-i="http://www.nltaxonomie.nl/10.0/basis/venj/items/bw2-data" xmlns:bank-dm-fst="https://www.sbrbanken.nl/BT2016/basis/bank/domains/bank-domains-kr-financial-statements-type" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:bank="https://www.sbrbanken.nl/BT2016/basis/bank/items/bank" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bw2-t="http://www.nltaxonomie.nl/10.0/domein/venj/tuples/bw2-tuples" xmlns:nl-cd="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:bank-kr-dim="https://www.sbrbanken.nl/BT2016/domein/bank/axes/bank-kr-axes" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:kvk-i="http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data" xmlns:venj-bw2-t="http://www.nltaxonomie.nl/10.0/domein/venj/tuples/venj-bw2-tuples" xmlns:bank-agro="https://www.sbrbanken.nl/BT2016/basis/bank/items/bank-agro" xmlns:bank-agro-tuples="https://www.sbrbanken.nl/BT2016/domein/bank/tuples/bank-agro-tuples" xmlns:kvk-t="http://www.nltaxonomie.nl/10.0/domein/kvk/tuples/kvk-tuples">
+  <link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/BT2016/report/bank/entrypoints/bank-rpt-krediet-pp-kl-fisc-categoriaal.xsd"/>
+  <xbrli:context id="JrEenDur">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2016-01-01</xbrli:startDate>
+      <xbrli:endDate>2016-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="JrEenInst">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2016-12-31</xbrli:instant>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="JrTweeDur">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="JrTweeInst">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2017-12-31</xbrli:instant>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:unit id="eur">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="pure">
+    <xbrli:measure>xbrli:pure</xbrli:measure>
+  </xbrli:unit>
+  <bank-cd:FinancialStatementType contextRef="JrEenDur">Enkelvoudig</bank-cd:FinancialStatementType>
+  <bank-cd:FinancialStatementType contextRef="JrTweeDur">Enkelvoudig</bank-cd:FinancialStatementType>
+  <bank-cd:PeriodicallyForecastReportIndicator contextRef="JrEenDur">false</bank-cd:PeriodicallyForecastReportIndicator>
+  <bank-cd:PeriodicallyForecastReportIndicator contextRef="JrTweeDur">false</bank-cd:PeriodicallyForecastReportIndicator>
+  <nl-cd:StartDateForFinancialPeriod contextRef="JrEenDur">2016-01-01</nl-cd:StartDateForFinancialPeriod>
+  <nl-cd:StartDateForFinancialPeriod contextRef="JrTweeDur">2017-01-01</nl-cd:StartDateForFinancialPeriod>
+  <nl-cd:EndDateForFinancialPeriod contextRef="JrEenDur">2016-12-31</nl-cd:EndDateForFinancialPeriod>
+  <nl-cd:EndDateForFinancialPeriod contextRef="JrTweeDur">2017-12-31</nl-cd:EndDateForFinancialPeriod>
+  <nl-cd:DocumentCreationDate contextRef="JrEenDur">2015-12-31</nl-cd:DocumentCreationDate>
+  <nl-cd:DocumentCreationDate contextRef="JrTweeDur">2015-12-31</nl-cd:DocumentCreationDate>
+  <bank-cd:ExclusiveVAT contextRef="JrEenDur">true</bank-cd:ExclusiveVAT>
+  <bank-cd:ExclusiveVAT contextRef="JrTweeDur">true</bank-cd:ExclusiveVAT>
+  <bank-cd:ReasonDelivery contextRef="JrEenDur">Nieuwe Aanvraag</bank-cd:ReasonDelivery>
+  <bank-cd:ReasonDelivery contextRef="JrTweeDur">Nieuwe Aanvraag</bank-cd:ReasonDelivery>
+  <venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="JrEenDur">12345678</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+  <venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="JrTweeDur">12345678</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+  <venj-bw2-i:LegalEntityName contextRef="JrEenDur">Testonderneming</venj-bw2-i:LegalEntityName>
+  <venj-bw2-i:LegalEntityName contextRef="JrTweeDur">Testonderneming</venj-bw2-i:LegalEntityName>
+  <rj-i:BusinessNames contextRef="JrEenDur">Namen</rj-i:BusinessNames>
+  <rj-i:BusinessNames contextRef="JrTweeDur">Namen</rj-i:BusinessNames>
+  <venj-bw2-i:LegalEntityRegisteredOffice contextRef="JrEenDur">Zetel</venj-bw2-i:LegalEntityRegisteredOffice>
+  <venj-bw2-i:LegalEntityRegisteredOffice contextRef="JrTweeDur">Zetel</venj-bw2-i:LegalEntityRegisteredOffice>
+  <bank-cd:PostalCodeLegalEntityRegisteredOffice contextRef="JrEenDur">1234WQ</bank-cd:PostalCodeLegalEntityRegisteredOffice>
+  <bank-cd:PostalCodeLegalEntityRegisteredOffice contextRef="JrTweeDur">1234WQ</bank-cd:PostalCodeLegalEntityRegisteredOffice>
+  <bank-cd:DateEstablishmentLegalEntity contextRef="JrEenDur">2011-01-01</bank-cd:DateEstablishmentLegalEntity>
+  <bank-cd:DateEstablishmentLegalEntity contextRef="JrTweeDur">2011-01-01</bank-cd:DateEstablishmentLegalEntity>
+  <bank-cd:DateChangeRegulationsLegalEntity contextRef="JrEenDur">2011-01-01</bank-cd:DateChangeRegulationsLegalEntity>
+  <bank-cd:DateChangeRegulationsLegalEntity contextRef="JrTweeDur">2011-01-01</bank-cd:DateChangeRegulationsLegalEntity>
+  <venj-bw2-i:LegalEntityLegalForm contextRef="JrEenDur">Besloten vennootschap</venj-bw2-i:LegalEntityLegalForm>
+  <venj-bw2-i:LegalEntityLegalForm contextRef="JrTweeDur">Besloten vennootschap</venj-bw2-i:LegalEntityLegalForm>
+  <kvk-i:LegalSizeCriteriaClassification contextRef="JrEenDur">Groot</kvk-i:LegalSizeCriteriaClassification>
+  <kvk-i:LegalSizeCriteriaClassification contextRef="JrTweeDur">Groot</kvk-i:LegalSizeCriteriaClassification>
+  <bank-cd:AgriculturalActivities contextRef="JrEenDur">true</bank-cd:AgriculturalActivities>
+  <bank-cd:AgriculturalActivities contextRef="JrTweeDur">true</bank-cd:AgriculturalActivities>
+  <kvk-t:ContactForDocumentPresentation>
+    <kvk-i:ContactType contextRef="JrEenDur">Ondernemer</kvk-i:ContactType>
+    <nl-cd:FirstName contextRef="JrEenDur">Kees</nl-cd:FirstName>
+    <nl-cd:FamilyName contextRef="JrEenDur">Vries</nl-cd:FamilyName>
+    <venj-bw2-i:OrganisationName contextRef="JrEenDur">Vis</venj-bw2-i:OrganisationName>
+    <nl-cd:TelephoneNumber contextRef="JrEenDur">070-1111111</nl-cd:TelephoneNumber>
+    <nl-cd:EmailAddressFull contextRef="JrEenDur">vis@vries.nl</nl-cd:EmailAddressFull>
+  </kvk-t:ContactForDocumentPresentation>
+  <kvk-t:ContactForDocumentPresentation>
+    <kvk-i:ContactType contextRef="JrTweeDur">Ondernemer</kvk-i:ContactType>
+    <nl-cd:FirstName contextRef="JrTweeDur">Kees</nl-cd:FirstName>
+    <nl-cd:FamilyName contextRef="JrTweeDur">Vries</nl-cd:FamilyName>
+    <venj-bw2-i:OrganisationName contextRef="JrTweeDur">Vis</venj-bw2-i:OrganisationName>
+    <nl-cd:TelephoneNumber contextRef="JrTweeDur">070-1111111</nl-cd:TelephoneNumber>
+    <nl-cd:EmailAddressFull contextRef="JrTweeDur">vis@vries.nl</nl-cd:EmailAddressFull>
+  </kvk-t:ContactForDocumentPresentation>
+  <nl-cd:DescriptionLocationAbroad contextRef="JrEenDur">Adres buitenland</nl-cd:DescriptionLocationAbroad>
+  <nl-cd:DescriptionLocationAbroad contextRef="JrTweeDur">Adres buitenland</nl-cd:DescriptionLocationAbroad>
+  <nl-cd:StreetNameAbroad contextRef="JrEenDur">1234 Street</nl-cd:StreetNameAbroad>
+  <nl-cd:StreetNameAbroad contextRef="JrTweeDur">1234 Street</nl-cd:StreetNameAbroad>
+  <nl-cd:HouseNumberAbroad contextRef="JrEenDur">34</nl-cd:HouseNumberAbroad>
+  <nl-cd:HouseNumberAbroad contextRef="JrTweeDur">34</nl-cd:HouseNumberAbroad>
+  <nl-cd:HouseNumberAddition contextRef="JrEenDur">second floor</nl-cd:HouseNumberAddition>
+  <nl-cd:HouseNumberAddition contextRef="JrTweeDur">second floor</nl-cd:HouseNumberAddition>
+  <nl-cd:PostalCodeAbroad contextRef="JrEenDur">87924</nl-cd:PostalCodeAbroad>
+  <nl-cd:PostalCodeAbroad contextRef="JrTweeDur">87924</nl-cd:PostalCodeAbroad>
+  <nl-cd:PlaceOfResidenceAbroad contextRef="JrEenDur">Toronto</nl-cd:PlaceOfResidenceAbroad>
+  <nl-cd:PlaceOfResidenceAbroad contextRef="JrTweeDur">Toronto</nl-cd:PlaceOfResidenceAbroad>
+  <nl-cd:NameRegion contextRef="JrEenDur">Ontario</nl-cd:NameRegion>
+  <nl-cd:NameRegion contextRef="JrTweeDur">Ontario</nl-cd:NameRegion>
+  <nl-cd:CountryName contextRef="JrEenDur">Canada</nl-cd:CountryName>
+  <nl-cd:CountryName contextRef="JrTweeDur">Canada</nl-cd:CountryName>
+  <nl-cd:POBoxNumber contextRef="JrEenDur">79797979</nl-cd:POBoxNumber>
+  <nl-cd:POBoxNumber contextRef="JrTweeDur">79797979</nl-cd:POBoxNumber>
+  <bank-cd:NameIntermediary contextRef="JrEenDur">Account BV</bank-cd:NameIntermediary>
+  <bank-cd:NameIntermediary contextRef="JrTweeDur">Account BV</bank-cd:NameIntermediary>
+  <bank-cd:DomicileIntermediary contextRef="JrEenDur">Den Haag</bank-cd:DomicileIntermediary>
+  <bank-cd:DomicileIntermediary contextRef="JrTweeDur">Den Haag</bank-cd:DomicileIntermediary>
+  <bank-cd:QualificationIntermediary contextRef="JrEenDur">RA</bank-cd:QualificationIntermediary>
+  <bank-cd:QualificationIntermediary contextRef="JrTweeDur">RA</bank-cd:QualificationIntermediary>
+  <bank-cd:NameCompiler contextRef="JrEenDur">Naam opsteller</bank-cd:NameCompiler>
+  <bank-cd:NameCompiler contextRef="JrTweeDur">Naam opsteller</bank-cd:NameCompiler>
+  <bank-cd:TelephoneNumberIntermediary contextRef="JrEenDur">Peter Pieters</bank-cd:TelephoneNumberIntermediary>
+  <bank-cd:TelephoneNumberIntermediary contextRef="JrTweeDur">Peter Pieters</bank-cd:TelephoneNumberIntermediary>
+  <bank-cd:EmailAddressIntermediary contextRef="JrEenDur">701234567</bank-cd:EmailAddressIntermediary>
+  <bank-cd:EmailAddressIntermediary contextRef="JrTweeDur">701234567</bank-cd:EmailAddressIntermediary>
+  <bank-cd:DestinationBank contextRef="JrEenDur">Rabobank</bank-cd:DestinationBank>
+  <bank-cd:SquareMeterSalesSurface decimals="0" contextRef="JrEenDur" unitRef="pure">1000</bank-cd:SquareMeterSalesSurface>
+  <bank-cd:SquareMeterSalesSurface decimals="0" contextRef="JrTweeDur" unitRef="pure">1000</bank-cd:SquareMeterSalesSurface>
+  <bank-cd:NumberLocations decimals="0" contextRef="JrEenDur" unitRef="pure">2</bank-cd:NumberLocations>
+  <bank-cd:NumberLocations decimals="0" contextRef="JrTweeDur" unitRef="pure">2</bank-cd:NumberLocations>
+  <kvk-i:SbiBusinessCode contextRef="JrEenDur">0113</kvk-i:SbiBusinessCode>
+  <kvk-i:SbiBusinessCode contextRef="JrTweeDur">0113</kvk-i:SbiBusinessCode>
+  <bank-cd:DestinationBank contextRef="JrTweeDur">Rabobank</bank-cd:DestinationBank>
+  <venj-bw2-i:CostsIncorporationShareIssue decimals="0" contextRef="JrEenInst" unitRef="eur">3000</venj-bw2-i:CostsIncorporationShareIssue>
+  <venj-bw2-i:CostsIncorporationShareIssue decimals="0" contextRef="JrTweeInst" unitRef="eur">3100</venj-bw2-i:CostsIncorporationShareIssue>
+  <venj-bw2-i:ResearchAndDevelopmentCosts decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:ResearchAndDevelopmentCosts>
+  <venj-bw2-i:ResearchAndDevelopmentCosts decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:ResearchAndDevelopmentCosts>
+  <venj-bw2-i:PatentsTrademarksOtherRights decimals="0" contextRef="JrEenInst" unitRef="eur">7000</venj-bw2-i:PatentsTrademarksOtherRights>
+  <venj-bw2-i:PatentsTrademarksOtherRights decimals="0" contextRef="JrTweeInst" unitRef="eur">7100</venj-bw2-i:PatentsTrademarksOtherRights>
+  <venj-bw2-i:Goodwill decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:Goodwill>
+  <venj-bw2-i:Goodwill decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:Goodwill>
+  <venj-bw2-i:PrepaymentsIntangibleAssets decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:PrepaymentsIntangibleAssets>
+  <venj-bw2-i:PrepaymentsIntangibleAssets decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:PrepaymentsIntangibleAssets>
+  <bank:IntangibleFixedAssetsOther decimals="0" contextRef="JrEenInst" unitRef="eur">2000</bank:IntangibleFixedAssetsOther>
+  <bank:IntangibleFixedAssetsOther decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</bank:IntangibleFixedAssetsOther>
+  <venj-bw2-i:IntangibleAssets decimals="0" contextRef="JrEenInst" unitRef="eur">20000</venj-bw2-i:IntangibleAssets>
+  <venj-bw2-i:IntangibleAssets decimals="0" contextRef="JrTweeInst" unitRef="eur">20600</venj-bw2-i:IntangibleAssets>
+  <bank:Buildings decimals="0" contextRef="JrEenInst" unitRef="eur">30000</bank:Buildings>
+  <bank:Buildings decimals="0" contextRef="JrTweeInst" unitRef="eur">30100</bank:Buildings>
+  <bank:Land decimals="0" contextRef="JrEenInst" unitRef="eur">20000</bank:Land>
+  <bank:Land decimals="0" contextRef="JrTweeInst" unitRef="eur">20100</bank:Land>
+  <venj-bw2-i:LandAndBuildings decimals="0" contextRef="JrEenInst" unitRef="eur">50000</venj-bw2-i:LandAndBuildings>
+  <venj-bw2-i:LandAndBuildings decimals="0" contextRef="JrTweeInst" unitRef="eur">50200</venj-bw2-i:LandAndBuildings>
+  <venj-bw2-i:Machinery decimals="0" contextRef="JrEenInst" unitRef="eur">2500</venj-bw2-i:Machinery>
+  <venj-bw2-i:Machinery decimals="0" contextRef="JrTweeInst" unitRef="eur">2600</venj-bw2-i:Machinery>
+  <bank:TangibleAssetsOther decimals="0" contextRef="JrEenInst" unitRef="eur">5000</bank:TangibleAssetsOther>
+  <bank:TangibleAssetsOther decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</bank:TangibleAssetsOther>
+  <venj-bw2-i:PropertyPlantEquipmentUnderConstructionPrepaymentsPropertyPlantEquipment decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:PropertyPlantEquipmentUnderConstructionPrepaymentsPropertyPlantEquipment>
+  <venj-bw2-i:PropertyPlantEquipmentUnderConstructionPrepaymentsPropertyPlantEquipment decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:PropertyPlantEquipmentUnderConstructionPrepaymentsPropertyPlantEquipment>
+  <rj-i:InvestmentProperties decimals="0" contextRef="JrEenInst" unitRef="eur">10000</rj-i:InvestmentProperties>
+  <rj-i:InvestmentProperties decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</rj-i:InvestmentProperties>
+  <bank:LesseesInvestments decimals="0" contextRef="JrEenInst" unitRef="eur">5000</bank:LesseesInvestments>
+  <bank:LesseesInvestments decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</bank:LesseesInvestments>
+  <bank:AircraftsBalanceSheetValue decimals="0" contextRef="JrEenInst" unitRef="eur">10000</bank:AircraftsBalanceSheetValue>
+  <bank:AircraftsBalanceSheetValue decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</bank:AircraftsBalanceSheetValue>
+  <bank:ShipsBalanceSheetValue decimals="0" contextRef="JrEenInst" unitRef="eur">10000</bank:ShipsBalanceSheetValue>
+  <bank:ShipsBalanceSheetValue decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</bank:ShipsBalanceSheetValue>
+  <bank:FixturesAndFittings decimals="0" contextRef="JrEenInst" unitRef="eur">55000</bank:FixturesAndFittings>
+  <bank:FixturesAndFittings decimals="0" contextRef="JrTweeInst" unitRef="eur">56300</bank:FixturesAndFittings>
+  <bank:CarsAndOtherTransportMeans decimals="0" contextRef="JrEenInst" unitRef="eur">15000</bank:CarsAndOtherTransportMeans>
+  <bank:CarsAndOtherTransportMeans decimals="0" contextRef="JrTweeInst" unitRef="eur">15100</bank:CarsAndOtherTransportMeans>
+  <venj-bw2-i:AssetsNotUsedInOperations decimals="0" contextRef="JrEenInst" unitRef="eur">2500</venj-bw2-i:AssetsNotUsedInOperations>
+  <venj-bw2-i:AssetsNotUsedInOperations decimals="0" contextRef="JrTweeInst" unitRef="eur">2600</venj-bw2-i:AssetsNotUsedInOperations>
+  <venj-bw2-i:PropertyPlantEquipment decimals="0" contextRef="JrEenInst" unitRef="eur">170000</venj-bw2-i:PropertyPlantEquipment>
+  <venj-bw2-i:PropertyPlantEquipment decimals="0" contextRef="JrTweeInst" unitRef="eur">172400</venj-bw2-i:PropertyPlantEquipment>
+  <venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+  <venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+  <venj-bw2-i:InvestmentsOtherRelatedParties decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:InvestmentsOtherRelatedParties>
+  <venj-bw2-i:InvestmentsOtherRelatedParties decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:InvestmentsOtherRelatedParties>
+  <venj-bw2-i:ReceivablesFromGroupCompaniesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:ReceivablesFromGroupCompaniesNoncurrent>
+  <venj-bw2-i:ReceivablesFromGroupCompaniesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:ReceivablesFromGroupCompaniesNoncurrent>
+  <venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+  <venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+  <venj-bw2-i:InvestmentsOther decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:InvestmentsOther>
+  <venj-bw2-i:InvestmentsOther decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:InvestmentsOther>
+  <venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">3000</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+  <venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">3100</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+  <venj-bw2-i:SecuritiesOtherNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:SecuritiesOtherNoncurrent>
+  <venj-bw2-i:SecuritiesOtherNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:SecuritiesOtherNoncurrent>
+  <bank:FinancialFixedAssetsOther decimals="0" contextRef="JrEenInst" unitRef="eur">1000</bank:FinancialFixedAssetsOther>
+  <bank:FinancialFixedAssetsOther decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</bank:FinancialFixedAssetsOther>
+  <venj-bw2-i:FinancialAssets decimals="0" contextRef="JrEenInst" unitRef="eur">15000</venj-bw2-i:FinancialAssets>
+  <venj-bw2-i:FinancialAssets decimals="0" contextRef="JrTweeInst" unitRef="eur">15800</venj-bw2-i:FinancialAssets>
+  <venj-bw2-i:AssetsNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">205000</venj-bw2-i:AssetsNoncurrent>
+  <venj-bw2-i:AssetsNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">208800</venj-bw2-i:AssetsNoncurrent>
+  <venj-bw2-i:InventoryRawMaterialsConsumables decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:InventoryRawMaterialsConsumables>
+  <venj-bw2-i:InventoryRawMaterialsConsumables decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:InventoryRawMaterialsConsumables>
+  <venj-bw2-i:WorkInProgress decimals="0" contextRef="JrEenInst" unitRef="eur">46000</venj-bw2-i:WorkInProgress>
+  <venj-bw2-i:WorkInProgress decimals="0" contextRef="JrTweeInst" unitRef="eur">46100</venj-bw2-i:WorkInProgress>
+  <venj-bw2-i:InventoryFinishedTradeGoods decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:InventoryFinishedTradeGoods>
+  <venj-bw2-i:InventoryFinishedTradeGoods decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:InventoryFinishedTradeGoods>
+  <venj-bw2-i:PrepaymentsInventories decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:PrepaymentsInventories>
+  <venj-bw2-i:PrepaymentsInventories decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:PrepaymentsInventories>
+  <venj-bw2-i:Inventories decimals="0" contextRef="JrEenInst" unitRef="eur">50000</venj-bw2-i:Inventories>
+  <venj-bw2-i:Inventories decimals="0" contextRef="JrTweeInst" unitRef="eur">50400</venj-bw2-i:Inventories>
+  <rj-i:ConstructionContractsAssets decimals="0" contextRef="JrEenInst" unitRef="eur">10000</rj-i:ConstructionContractsAssets>
+  <rj-i:ConstructionContractsAssets decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</rj-i:ConstructionContractsAssets>
+  <venj-bw2-i:TradeReceivables decimals="0" contextRef="JrEenInst" unitRef="eur">1500</venj-bw2-i:TradeReceivables>
+  <venj-bw2-i:TradeReceivables decimals="0" contextRef="JrTweeInst" unitRef="eur">1600</venj-bw2-i:TradeReceivables>
+  <venj-bw2-i:ReceivablesGroupCompaniesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+  <venj-bw2-i:ReceivablesGroupCompaniesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+  <rj-i:ReceivablesOtherRelatedPartiesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</rj-i:ReceivablesOtherRelatedPartiesCurrent>
+  <rj-i:ReceivablesOtherRelatedPartiesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</rj-i:ReceivablesOtherRelatedPartiesCurrent>
+  <venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+  <venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+  <bank:ReceivablesOtherCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1500</bank:ReceivablesOtherCurrent>
+  <bank:ReceivablesOtherCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1600</bank:ReceivablesOtherCurrent>
+  <venj-bw2-i:CalledUpShareCapital decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:CalledUpShareCapital>
+  <venj-bw2-i:CalledUpShareCapital decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:CalledUpShareCapital>
+  <rj-i:PensionReceivables decimals="0" contextRef="JrEenInst" unitRef="eur">1000</rj-i:PensionReceivables>
+  <rj-i:PensionReceivables decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</rj-i:PensionReceivables>
+  <rj-i:TaxReceivables decimals="0" contextRef="JrEenInst" unitRef="eur">1000</rj-i:TaxReceivables>
+  <rj-i:TaxReceivables decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</rj-i:TaxReceivables>
+  <bank:CurrentAccountManagingSupervisoryDirectors decimals="0" contextRef="JrEenInst" unitRef="eur">4500</bank:CurrentAccountManagingSupervisoryDirectors>
+  <bank:CurrentAccountManagingSupervisoryDirectors decimals="0" contextRef="JrTweeInst" unitRef="eur">4000</bank:CurrentAccountManagingSupervisoryDirectors>
+  <venj-bw2-i:AccruedIncome decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:AccruedIncome>
+  <venj-bw2-i:AccruedIncome decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:AccruedIncome>
+  <venj-bw2-i:Receivables decimals="0" contextRef="JrEenInst" unitRef="eur">20500</venj-bw2-i:Receivables>
+  <venj-bw2-i:Receivables decimals="0" contextRef="JrTweeInst" unitRef="eur">20900</venj-bw2-i:Receivables>
+  <venj-bw2-i:Securities decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:Securities>
+  <venj-bw2-i:Securities decimals="0" contextRef="JrTweeInst" unitRef="eur">5600</venj-bw2-i:Securities>
+  <venj-bw2-i:CashInHand decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:CashInHand>
+  <venj-bw2-i:CashInHand decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:CashInHand>
+  <venj-bw2-i:CreditBalancesOnBankAccounts decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:CreditBalancesOnBankAccounts>
+  <venj-bw2-i:CreditBalancesOnBankAccounts decimals="0" contextRef="JrTweeInst" unitRef="eur">3100</venj-bw2-i:CreditBalancesOnBankAccounts>
+  <venj-bw2-i:BillsExchangeCheques decimals="0" contextRef="JrEenInst" unitRef="eur">1500</venj-bw2-i:BillsExchangeCheques>
+  <venj-bw2-i:BillsExchangeCheques decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:BillsExchangeCheques>
+  <venj-bw2-i:CashAndCashEquivalents decimals="0" contextRef="JrEenInst" unitRef="eur">5500</venj-bw2-i:CashAndCashEquivalents>
+  <venj-bw2-i:CashAndCashEquivalents decimals="0" contextRef="JrTweeInst" unitRef="eur">6300</venj-bw2-i:CashAndCashEquivalents>
+  <venj-bw2-i:AssetsCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">91000</venj-bw2-i:AssetsCurrent>
+  <venj-bw2-i:AssetsCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">93300</venj-bw2-i:AssetsCurrent>
+  <venj-bw2-i:Assets decimals="0" contextRef="JrEenInst" unitRef="eur">296000</venj-bw2-i:Assets>
+  <venj-bw2-i:Assets decimals="0" contextRef="JrTweeInst" unitRef="eur">302100</venj-bw2-i:Assets>
+  <venj-bw2-i:StatutoryReserves decimals="0" contextRef="JrEenInst" unitRef="eur">500</venj-bw2-i:StatutoryReserves>
+  <venj-bw2-i:StatutoryReserves decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:StatutoryReserves>
+  <venj-bw2-i:ReinvestmentReserve decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:ReinvestmentReserve>
+  <venj-bw2-i:ReinvestmentReserve decimals="0" contextRef="JrTweeInst" unitRef="eur">2000</venj-bw2-i:ReinvestmentReserve>
+  <venj-bw2-i:ReservesOther decimals="0" contextRef="JrEenInst" unitRef="eur">4000</venj-bw2-i:ReservesOther>
+  <venj-bw2-i:ReservesOther decimals="0" contextRef="JrTweeInst" unitRef="eur">4100</venj-bw2-i:ReservesOther>
+  <venj-bw2-i:RetainedEarnings decimals="0" contextRef="JrEenInst" unitRef="eur">1500</venj-bw2-i:RetainedEarnings>
+  <venj-bw2-i:RetainedEarnings decimals="0" contextRef="JrTweeInst" unitRef="eur">1600</venj-bw2-i:RetainedEarnings>
+  <venj-bw2-i:ResultForTheYear decimals="0" contextRef="JrEenInst" unitRef="eur">20000</venj-bw2-i:ResultForTheYear>
+  <venj-bw2-i:ResultForTheYear decimals="0" contextRef="JrTweeInst" unitRef="eur">20100</venj-bw2-i:ResultForTheYear>
+  <venj-bw2-i:ShareCapital decimals="0" contextRef="JrEenInst" unitRef="eur">100000</venj-bw2-i:ShareCapital>
+  <venj-bw2-i:ShareCapital decimals="0" contextRef="JrTweeInst" unitRef="eur">100100</venj-bw2-i:ShareCapital>
+  <venj-bw2-i:SharePremium decimals="0" contextRef="JrEenInst" unitRef="eur">10000</venj-bw2-i:SharePremium>
+  <venj-bw2-i:SharePremium decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</venj-bw2-i:SharePremium>
+  <venj-bw2-i:RevaluationReserve decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:RevaluationReserve>
+  <venj-bw2-i:RevaluationReserve decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:RevaluationReserve>
+  <venj-bw2-i:LegalReserves decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:LegalReserves>
+  <venj-bw2-i:LegalReserves decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:LegalReserves>
+  <venj-bw2-i:Equity decimals="0" contextRef="JrEenInst" unitRef="eur">145000</venj-bw2-i:Equity>
+  <venj-bw2-i:Equity decimals="0" contextRef="JrTweeInst" unitRef="eur">147300</venj-bw2-i:Equity>
+  <venj-bw2-i:ProvisionPensionObligations decimals="0" contextRef="JrEenInst" unitRef="eur">7000</venj-bw2-i:ProvisionPensionObligations>
+  <venj-bw2-i:ProvisionPensionObligations decimals="0" contextRef="JrTweeInst" unitRef="eur">8400</venj-bw2-i:ProvisionPensionObligations>
+  <venj-bw2-i:ProvisionTaxLiabilities decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:ProvisionTaxLiabilities>
+  <venj-bw2-i:ProvisionTaxLiabilities decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:ProvisionTaxLiabilities>
+  <venj-bw2-i:ProvisionsOther decimals="0" contextRef="JrEenInst" unitRef="eur">52500</venj-bw2-i:ProvisionsOther>
+  <venj-bw2-i:ProvisionsOther decimals="0" contextRef="JrTweeInst" unitRef="eur">52200</venj-bw2-i:ProvisionsOther>
+  <venj-bw2-i:Provisions decimals="0" contextRef="JrEenInst" unitRef="eur">64500</venj-bw2-i:Provisions>
+  <venj-bw2-i:Provisions decimals="0" contextRef="JrTweeInst" unitRef="eur">65700</venj-bw2-i:Provisions>
+  <venj-bw2-i:SubordinatedLoansNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">500</venj-bw2-i:SubordinatedLoansNoncurrent>
+  <venj-bw2-i:SubordinatedLoansNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">600</venj-bw2-i:SubordinatedLoansNoncurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+  <venj-bw2-i:PayablesGroupCompaniesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+  <venj-bw2-i:PayablesGroupCompaniesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+  <rj-i:PayablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">500</rj-i:PayablesOtherRelatedPartiesNoncurrent>
+  <rj-i:PayablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">600</rj-i:PayablesOtherRelatedPartiesNoncurrent>
+  <venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+  <venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+  <venj-bw2-i:PensionPayablesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">6000</venj-bw2-i:PensionPayablesNoncurrent>
+  <venj-bw2-i:PensionPayablesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">6200</venj-bw2-i:PensionPayablesNoncurrent>
+  <bank:PayablesOtherNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</bank:PayablesOtherNoncurrent>
+  <bank:PayablesOtherNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</bank:PayablesOtherNoncurrent>
+  <venj-bw2-i:LiabilitiesNoncurrent decimals="0" contextRef="JrEenInst" unitRef="eur">13000</venj-bw2-i:LiabilitiesNoncurrent>
+  <venj-bw2-i:LiabilitiesNoncurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">13900</venj-bw2-i:LiabilitiesNoncurrent>
+  <venj-bw2-i:SubordinatedLoansCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1500</venj-bw2-i:SubordinatedLoansCurrent>
+  <venj-bw2-i:SubordinatedLoansCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1600</venj-bw2-i:SubordinatedLoansCurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+  <venj-bw2-i:TradePayablesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">2000</venj-bw2-i:TradePayablesCurrent>
+  <venj-bw2-i:TradePayablesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">2100</venj-bw2-i:TradePayablesCurrent>
+  <venj-bw2-i:PayablesGroupCompaniesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:PayablesGroupCompaniesCurrent>
+  <venj-bw2-i:PayablesGroupCompaniesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:PayablesGroupCompaniesCurrent>
+  <venj-bw2-i:PayablesOtherRelatedPartiesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">5000</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+  <venj-bw2-i:PayablesOtherRelatedPartiesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">5100</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+  <venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+  <venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1100</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+  <venj-bw2-i:PensionPayablesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">4000</venj-bw2-i:PensionPayablesCurrent>
+  <venj-bw2-i:PensionPayablesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">4500</venj-bw2-i:PensionPayablesCurrent>
+  <bank:ReceivedAdvancePaymentsWorkInProgress decimals="0" contextRef="JrEenInst" unitRef="eur">20000</bank:ReceivedAdvancePaymentsWorkInProgress>
+  <bank:ReceivedAdvancePaymentsWorkInProgress decimals="0" contextRef="JrTweeInst" unitRef="eur">20100</bank:ReceivedAdvancePaymentsWorkInProgress>
+  <bank:DividendsPayables decimals="0" contextRef="JrEenInst" unitRef="eur">14500</bank:DividendsPayables>
+  <bank:DividendsPayables decimals="0" contextRef="JrTweeInst" unitRef="eur">14600</bank:DividendsPayables>
+  <bank:PayablesOtherCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">10000</bank:PayablesOtherCurrent>
+  <bank:PayablesOtherCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">10100</bank:PayablesOtherCurrent>
+  <venj-bw2-i:AccrualsAndDeferredIncomeCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">8000</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+  <venj-bw2-i:AccrualsAndDeferredIncomeCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">8100</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+  <rj-i:ConstructionContractsLiabilities decimals="0" contextRef="JrEenInst" unitRef="eur">500</rj-i:ConstructionContractsLiabilities>
+  <rj-i:ConstructionContractsLiabilities decimals="0" contextRef="JrTweeInst" unitRef="eur">600</rj-i:ConstructionContractsLiabilities>
+  <venj-bw2-i:LiabilitiesCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">73500</venj-bw2-i:LiabilitiesCurrent>
+  <venj-bw2-i:LiabilitiesCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">75200</venj-bw2-i:LiabilitiesCurrent>
+  <venj-bw2-i:EquityAndLiabilities decimals="0" contextRef="JrEenInst" unitRef="eur">296000</venj-bw2-i:EquityAndLiabilities>
+  <venj-bw2-i:EquityAndLiabilities decimals="0" contextRef="JrTweeInst" unitRef="eur">302100</venj-bw2-i:EquityAndLiabilities>
+  <venj-bw2-i:NetRevenue decimals="0" contextRef="JrEenDur" unitRef="eur">10000</venj-bw2-i:NetRevenue>
+  <venj-bw2-i:NetRevenue decimals="0" contextRef="JrTweeDur" unitRef="eur">10100</venj-bw2-i:NetRevenue>
+  <venj-bw2-i:ChangesInventoriesWorkInProgress decimals="0" contextRef="JrEenDur" unitRef="eur">10000</venj-bw2-i:ChangesInventoriesWorkInProgress>
+  <venj-bw2-i:ChangesInventoriesWorkInProgress decimals="0" contextRef="JrTweeDur" unitRef="eur">10100</venj-bw2-i:ChangesInventoriesWorkInProgress>
+  <rj-i:ChangesConstructionContracts decimals="0" contextRef="JrEenDur" unitRef="eur">2000</rj-i:ChangesConstructionContracts>
+  <rj-i:ChangesConstructionContracts decimals="0" contextRef="JrTweeDur" unitRef="eur">3600</rj-i:ChangesConstructionContracts>
+  <venj-bw2-i:CapitalisedProductionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">21000</venj-bw2-i:CapitalisedProductionCosts>
+  <venj-bw2-i:CapitalisedProductionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">21000</venj-bw2-i:CapitalisedProductionCosts>
+  <bank:OperatingIncomeOther decimals="0" contextRef="JrEenDur" unitRef="eur">1000</bank:OperatingIncomeOther>
+  <bank:OperatingIncomeOther decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</bank:OperatingIncomeOther>
+  <venj-bw2-i:OperatingIncome decimals="0" contextRef="JrEenDur" unitRef="eur">44000</venj-bw2-i:OperatingIncome>
+  <venj-bw2-i:OperatingIncome decimals="0" contextRef="JrTweeDur" unitRef="eur">45900</venj-bw2-i:OperatingIncome>
+  <venj-bw2-i:CostsRawMaterialsConsumables decimals="0" contextRef="JrEenDur" unitRef="eur">1800</venj-bw2-i:CostsRawMaterialsConsumables>
+  <venj-bw2-i:CostsRawMaterialsConsumables decimals="0" contextRef="JrTweeDur" unitRef="eur">1900</venj-bw2-i:CostsRawMaterialsConsumables>
+  <venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">1000</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+  <venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+  <rj-i:WagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">1000</rj-i:WagesSalariesSocialSecurityCharges>
+  <rj-i:WagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</rj-i:WagesSalariesSocialSecurityCharges>
+  <venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets decimals="0" contextRef="JrEenDur" unitRef="eur">2000</venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets>
+  <venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets decimals="0" contextRef="JrTweeDur" unitRef="eur">2100</venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets>
+  <venj-bw2-i:ChangesInValueIntangibleAssetsPropertyPlantEquipment decimals="0" contextRef="JrEenDur" unitRef="eur">1500</venj-bw2-i:ChangesInValueIntangibleAssetsPropertyPlantEquipment>
+  <venj-bw2-i:ChangesInValueIntangibleAssetsPropertyPlantEquipment decimals="0" contextRef="JrTweeDur" unitRef="eur">1600</venj-bw2-i:ChangesInValueIntangibleAssetsPropertyPlantEquipment>
+  <venj-bw2-i:ImpairmentCurrentAssets decimals="0" contextRef="JrEenDur" unitRef="eur">1500</venj-bw2-i:ImpairmentCurrentAssets>
+  <venj-bw2-i:ImpairmentCurrentAssets decimals="0" contextRef="JrTweeDur" unitRef="eur">1600</venj-bw2-i:ImpairmentCurrentAssets>
+  <venj-bw2-i:OperatingExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">1200</venj-bw2-i:OperatingExpensesOther>
+  <venj-bw2-i:OperatingExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">1300</venj-bw2-i:OperatingExpensesOther>
+  <venj-bw2-i:OperatingExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">10000</venj-bw2-i:OperatingExpenses>
+  <venj-bw2-i:OperatingExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">10700</venj-bw2-i:OperatingExpenses>
+  <venj-bw2-i:OperatingResult decimals="0" contextRef="JrEenDur" unitRef="eur">34000</venj-bw2-i:OperatingResult>
+  <venj-bw2-i:OperatingResult decimals="0" contextRef="JrTweeDur" unitRef="eur">35200</venj-bw2-i:OperatingResult>
+  <venj-bw2-i:IncomeReceivablesNoncurrentSecurities decimals="0" contextRef="JrEenDur" unitRef="eur">8000</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+  <venj-bw2-i:IncomeReceivablesNoncurrentSecurities decimals="0" contextRef="JrTweeDur" unitRef="eur">6900</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+  <bank:InvestmentPropertiesRevaluations decimals="0" contextRef="JrEenDur" unitRef="eur">1000</bank:InvestmentPropertiesRevaluations>
+  <bank:InvestmentPropertiesRevaluations decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</bank:InvestmentPropertiesRevaluations>
+  <venj-bw2-i:RevaluationReserveRelease decimals="0" contextRef="JrEenDur" unitRef="eur">1000</venj-bw2-i:RevaluationReserveRelease>
+  <venj-bw2-i:RevaluationReserveRelease decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</venj-bw2-i:RevaluationReserveRelease>
+  <venj-bw2-i:GovernmentGrants decimals="0" contextRef="JrEenDur" unitRef="eur">500</venj-bw2-i:GovernmentGrants>
+  <venj-bw2-i:GovernmentGrants decimals="0" contextRef="JrTweeDur" unitRef="eur">600</venj-bw2-i:GovernmentGrants>
+  <venj-bw2-i:InterestIncomeRelatedIncome decimals="0" contextRef="JrEenDur" unitRef="eur">1000</venj-bw2-i:InterestIncomeRelatedIncome>
+  <venj-bw2-i:InterestIncomeRelatedIncome decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</venj-bw2-i:InterestIncomeRelatedIncome>
+  <venj-bw2-i:ChangesValueFinancialAssetsSecurities decimals="0" contextRef="JrEenDur" unitRef="eur">500</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+  <venj-bw2-i:ChangesValueFinancialAssetsSecurities decimals="0" contextRef="JrTweeDur" unitRef="eur">600</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+  <venj-bw2-i:InterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">8000</venj-bw2-i:InterestExpensesRelatedExpenses>
+  <venj-bw2-i:InterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">8100</venj-bw2-i:InterestExpensesRelatedExpenses>
+  <bank:ForeignCurrencyExchangeDifferences decimals="0" contextRef="JrEenDur" unitRef="eur">1000</bank:ForeignCurrencyExchangeDifferences>
+  <bank:ForeignCurrencyExchangeDifferences decimals="0" contextRef="JrTweeDur" unitRef="eur">1100</bank:ForeignCurrencyExchangeDifferences>
+  <venj-bw2-i:ResultBeforeTaxOrdinaryActivities decimals="0" contextRef="JrEenDur" unitRef="eur">34000</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+  <venj-bw2-i:ResultBeforeTaxOrdinaryActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">34000</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+  <venj-bw2-i:IncomeTaxExpenseOrdinaryActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+  <venj-bw2-i:IncomeTaxExpenseOrdinaryActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+  <venj-bw2-i:ShareInResultsParticipatingInterests decimals="0" contextRef="JrEenDur" unitRef="eur">50000</venj-bw2-i:ShareInResultsParticipatingInterests>
+  <venj-bw2-i:ShareInResultsParticipatingInterests decimals="0" contextRef="JrTweeDur" unitRef="eur">50000</venj-bw2-i:ShareInResultsParticipatingInterests>
+  <venj-bw2-i:ResultAfterTax decimals="0" contextRef="JrEenDur" unitRef="eur">74000</venj-bw2-i:ResultAfterTax>
+  <venj-bw2-i:ResultAfterTax decimals="0" contextRef="JrTweeDur" unitRef="eur">74000</venj-bw2-i:ResultAfterTax>
+  <venj-bw2-i:ResultAttributableNoncontrollingInterest decimals="0" contextRef="JrEenDur" unitRef="eur">120000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+  <venj-bw2-i:ResultAttributableNoncontrollingInterest decimals="0" contextRef="JrTweeDur" unitRef="eur">120000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+  <venj-bw2-i:NetResultAfterTax decimals="0" contextRef="JrEenDur" unitRef="eur">194000</venj-bw2-i:NetResultAfterTax>
+  <venj-bw2-i:NetResultAfterTax decimals="0" contextRef="JrTweeDur" unitRef="eur">194000</venj-bw2-i:NetResultAfterTax>
+  <bank:ShortTermPartLongTermPayablesCreditInstitutions decimals="0" contextRef="JrEenInst" unitRef="eur">400</bank:ShortTermPartLongTermPayablesCreditInstitutions>
+  <bank:ShortTermPartLongTermPayablesCreditInstitutions decimals="0" contextRef="JrTweeInst" unitRef="eur">400</bank:ShortTermPartLongTermPayablesCreditInstitutions>
+  <bank:CurrentAccountCreditInstitutions decimals="0" contextRef="JrEenInst" unitRef="eur">600</bank:CurrentAccountCreditInstitutions>
+  <bank:CurrentAccountCreditInstitutions decimals="0" contextRef="JrTweeInst" unitRef="eur">700</bank:CurrentAccountCreditInstitutions>
+  <bank:ShortTermPartLongTermPayablesGroupCompanies decimals="0" contextRef="JrEenInst" unitRef="eur">2000</bank:ShortTermPartLongTermPayablesGroupCompanies>
+  <bank:ShortTermPartLongTermPayablesGroupCompanies decimals="0" contextRef="JrTweeInst" unitRef="eur">2000</bank:ShortTermPartLongTermPayablesGroupCompanies>
+  <bank:CurrentAccountGroupCompanies decimals="0" contextRef="JrEenInst" unitRef="eur">3000</bank:CurrentAccountGroupCompanies>
+  <bank:CurrentAccountGroupCompanies decimals="0" contextRef="JrTweeInst" unitRef="eur">3100</bank:CurrentAccountGroupCompanies>
+  <bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">1000</bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+  <bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">1000</bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+  <bank:CurrentAccountOtherRelatedParties decimals="0" contextRef="JrEenInst" unitRef="eur">4000</bank:CurrentAccountOtherRelatedParties>
+  <bank:CurrentAccountOtherRelatedParties decimals="0" contextRef="JrTweeInst" unitRef="eur">4100</bank:CurrentAccountOtherRelatedParties>
+  <bank:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent decimals="0" contextRef="JrEenInst" unitRef="eur">300</bank:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+  <bank:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent decimals="0" contextRef="JrTweeInst" unitRef="eur">300</bank:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+  <bank:CurrentAccountShareholdersParticipatingInterests decimals="0" contextRef="JrEenInst" unitRef="eur">700</bank:CurrentAccountShareholdersParticipatingInterests>
+  <bank:CurrentAccountShareholdersParticipatingInterests decimals="0" contextRef="JrTweeInst" unitRef="eur">800</bank:CurrentAccountShareholdersParticipatingInterests>
+  <bank-tuples:OperationSpecification>
+    <bank-cd:IdentificationNumber contextRef="JrEenDur">A1</bank-cd:IdentificationNumber>
+    <bank-cd:NameOperation contextRef="JrEenDur">Naam activiteit</bank-cd:NameOperation>
+    <bank:TurnoverOperation decimals="0" contextRef="JrEenDur" unitRef="eur">1000</bank:TurnoverOperation>
+    <bank:CostPriceTurnoverOperation decimals="0" contextRef="JrEenDur" unitRef="eur">50000</bank:CostPriceTurnoverOperation>
+    <bank:PurchaseCostsOperation decimals="0" contextRef="JrEenDur" unitRef="eur">10000</bank:PurchaseCostsOperation>
+    <bank:WagesSalariesSocialSecurityChargesOperation decimals="0" contextRef="JrEenDur" unitRef="eur">15000</bank:WagesSalariesSocialSecurityChargesOperation>
+    <bank:OtherOperatingExpensesOperation decimals="0" contextRef="JrEenDur" unitRef="eur">25000</bank:OtherOperatingExpensesOperation>
+  </bank-tuples:OperationSpecification>
+  <bank-tuples:OperationSpecification>
+    <bank-cd:IdentificationNumber contextRef="JrTweeDur">A1</bank-cd:IdentificationNumber>
+    <bank-cd:NameOperation contextRef="JrTweeDur">Naam activiteit</bank-cd:NameOperation>
+    <bank:TurnoverOperation decimals="0" contextRef="JrTweeDur" unitRef="eur">2000</bank:TurnoverOperation>
+    <bank:CostPriceTurnoverOperation decimals="0" contextRef="JrTweeDur" unitRef="eur">50000</bank:CostPriceTurnoverOperation>
+    <bank:PurchaseCostsOperation decimals="0" contextRef="JrTweeDur" unitRef="eur">10000</bank:PurchaseCostsOperation>
+    <bank:WagesSalariesSocialSecurityChargesOperation decimals="0" contextRef="JrTweeDur" unitRef="eur">15000</bank:WagesSalariesSocialSecurityChargesOperation>
+    <bank:OtherOperatingExpensesOperation decimals="0" contextRef="JrTweeDur" unitRef="eur">25000</bank:OtherOperatingExpensesOperation>
+  </bank-tuples:OperationSpecification>
+  <venj-bw2-i:AmortisationIntangibleAssets decimals="0" contextRef="JrEenDur" unitRef="eur">600</venj-bw2-i:AmortisationIntangibleAssets>
+  <venj-bw2-i:AmortisationIntangibleAssets decimals="0" contextRef="JrTweeDur" unitRef="eur">650</venj-bw2-i:AmortisationIntangibleAssets>
+  <venj-bw2-i:DepreciationPropertyPlantEquipment decimals="0" contextRef="JrEenDur" unitRef="eur">1400</venj-bw2-i:DepreciationPropertyPlantEquipment>
+  <venj-bw2-i:DepreciationPropertyPlantEquipment decimals="0" contextRef="JrTweeDur" unitRef="eur">1450</venj-bw2-i:DepreciationPropertyPlantEquipment>
+  <rj-i:PersonnelRelatedOtherExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:PersonnelRelatedOtherExpenses>
+  <rj-i:PersonnelRelatedOtherExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:PersonnelRelatedOtherExpenses>
+  <rj-i:AccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:AccommodationCosts>
+  <rj-i:AccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:AccommodationCosts>
+  <rj-i:SalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:SalesRelatedExpenses>
+  <rj-i:SalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:SalesRelatedExpenses>
+  <rj-i:CarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:CarAndTransportCosts>
+  <rj-i:CarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:CarAndTransportCosts>
+  <bank:OperationalLeaseCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:OperationalLeaseCosts>
+  <bank:OperationalLeaseCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:OperationalLeaseCosts>
+  <rj-i:OfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:OfficeRelatedExpenses>
+  <rj-i:OfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:OfficeRelatedExpenses>
+  <rj-i:GeneralExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:GeneralExpenses>
+  <rj-i:GeneralExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:GeneralExpenses>
+  <rj-i:OperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">100</rj-i:OperationalExpenses>
+  <rj-i:OperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">100</rj-i:OperationalExpenses>
+  <venj-bw2-i:ForeignCurrencyExchangeRateResults decimals="0" contextRef="JrEenDur" unitRef="eur">100</venj-bw2-i:ForeignCurrencyExchangeRateResults>
+  <venj-bw2-i:ForeignCurrencyExchangeRateResults decimals="0" contextRef="JrTweeDur" unitRef="eur">100</venj-bw2-i:ForeignCurrencyExchangeRateResults>
+  <bank:ExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:ExpensesResearchAndDevelopment>
+  <bank:ExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:ExpensesResearchAndDevelopment>
+  <bank:FranchiseFee decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:FranchiseFee>
+  <bank:FranchiseFee decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:FranchiseFee>
+  <bank-cd:IntermediaryReport contextRef="JrEenDur">Toelichting intermediair</bank-cd:IntermediaryReport>
+  <bank-cd:IntermediaryReport contextRef="JrTweeDur">Toelichting intermediair</bank-cd:IntermediaryReport>
+  <bank:ManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:ManagementFee>
+  <bank:CostOther decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CostOther>
+  <bank:ManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:ManagementFee>
+  <bank:CostOther decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CostOther>
+  <bank-cd:IntermediaryReportType contextRef="JrEenDur">Overig</bank-cd:IntermediaryReportType>
+  <bank-cd:IntermediaryReportType contextRef="JrTweeDur">Overig</bank-cd:IntermediaryReportType>
+  <bank-agro-tuples:AgricultureSpecification>
+    <bank-agro:AgricultureType contextRef="JrEenDur">Akkerbouw</bank-agro:AgricultureType>
+    <bank-agro:UtilisedFarmlandOwnProperty decimals="0" contextRef="JrEenDur" unitRef="pure">1000</bank-agro:UtilisedFarmlandOwnProperty>
+    <bank-agro:UtilisedFarmlandThirdParties decimals="0" contextRef="JrEenDur" unitRef="pure">200</bank-agro:UtilisedFarmlandThirdParties>
+    <bank-agro:GrossCultivationSurfaceIndoor decimals="0" contextRef="JrEenDur" unitRef="pure">400</bank-agro:GrossCultivationSurfaceIndoor>
+    <bank-agro:PropertyPlantEquipmentMultipleYearsPlantStock decimals="0" contextRef="JrEenDur" unitRef="eur">1200</bank-agro:PropertyPlantEquipmentMultipleYearsPlantStock>
+    <bank-agro:ReceivablesMembersLoans decimals="0" contextRef="JrEenDur" unitRef="eur">1100</bank-agro:ReceivablesMembersLoans>
+    <bank-agro:GrossRevenueProduction decimals="0" contextRef="JrEenDur" unitRef="eur">150000</bank-agro:GrossRevenueProduction>
+    <bank-agro:StockChange decimals="0" contextRef="JrEenDur" unitRef="eur">1500</bank-agro:StockChange>
+    <bank-agro:PackagingFee decimals="0" contextRef="JrEenDur" unitRef="eur">1600</bank-agro:PackagingFee>
+    <bank-agro:GMOGrant decimals="0" contextRef="JrEenDur" unitRef="eur">1700</bank-agro:GMOGrant>
+    <bank-agro:ElectricitySales decimals="0" contextRef="JrEenDur" unitRef="eur">1800</bank-agro:ElectricitySales>
+    <bank-agro:OtherRelatedIncome decimals="0" contextRef="JrEenDur" unitRef="eur">1900</bank-agro:OtherRelatedIncome>
+    <bank-agro:SowingCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2000</bank-agro:SowingCosts>
+    <bank-agro:SubstratumCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2100</bank-agro:SubstratumCosts>
+    <bank-agro:ManuringCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2200</bank-agro:ManuringCosts>
+    <bank-agro:FertilizationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2300</bank-agro:FertilizationCosts>
+    <bank-agro:CropProtectionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2400</bank-agro:CropProtectionCosts>
+    <bank-agro:CropInsuranceCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2500</bank-agro:CropInsuranceCosts>
+    <bank-agro:CultivationDisposalCosts decimals="0" contextRef="JrEenDur" unitRef="eur">2600</bank-agro:CultivationDisposalCosts>
+    <bank-agro:CultivationCostsOther decimals="0" contextRef="JrEenDur" unitRef="eur">2700</bank-agro:CultivationCostsOther>
+    <bank-agro:CultivationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">22000</bank-agro:CultivationCosts>
+    <bank-agro:GasCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3000</bank-agro:GasCosts>
+    <bank-agro:ElectricityCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3100</bank-agro:ElectricityCosts>
+    <bank-agro:CO2OCAPWaterCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3200</bank-agro:CO2OCAPWaterCosts>
+    <bank-agro:WKKMaintenanceCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3300</bank-agro:WKKMaintenanceCosts>
+    <bank-agro:WKKLeaseCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3400</bank-agro:WKKLeaseCosts>
+    <bank-agro:AuctionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3500</bank-agro:AuctionCosts>
+    <bank-agro:SalesPackackingFustCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3600</bank-agro:SalesPackackingFustCosts>
+    <bank-agro:TransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">3700</bank-agro:TransportCosts>
+    <bank-agro:PurchaseCostsPottedPlantsPropagation decimals="0" contextRef="JrEenDur" unitRef="eur">3800</bank-agro:PurchaseCostsPottedPlantsPropagation>
+    <bank-agro:PurchaseCostsPottedPlantsSale decimals="0" contextRef="JrEenDur" unitRef="eur">3900</bank-agro:PurchaseCostsPottedPlantsSale>
+    <bank-agro:PurchaseCostsPots decimals="0" contextRef="JrEenDur" unitRef="eur">4000</bank-agro:PurchaseCostsPots>
+    <bank-agro:PurchaseCostsPottingSoil decimals="0" contextRef="JrEenDur" unitRef="eur">4100</bank-agro:PurchaseCostsPottingSoil>
+    <bank-agro:CompostCosts decimals="0" contextRef="JrEenDur" unitRef="eur">4200</bank-agro:CompostCosts>
+    <bank-agro:MushroomCompostDisposalCosts decimals="0" contextRef="JrEenDur" unitRef="eur">4300</bank-agro:MushroomCompostDisposalCosts>
+    <bank-agro:PurchaseCostsBulbsSale decimals="0" contextRef="JrEenDur" unitRef="eur">4400</bank-agro:PurchaseCostsBulbsSale>
+    <bank-agro:ContractedCultivationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">4500</bank-agro:ContractedCultivationCosts>
+    <bank-agro:ReimbursementWorkOthers decimals="0" contextRef="JrEenDur" unitRef="eur">4600</bank-agro:ReimbursementWorkOthers>
+    <bank-agro:ProductCustomizingCosts decimals="0" contextRef="JrEenDur" unitRef="eur">4700</bank-agro:ProductCustomizingCosts>
+    <bank-agro:AccretionFruitTrellises decimals="0" contextRef="JrEenDur" unitRef="eur">4800</bank-agro:AccretionFruitTrellises>
+    <bank-agro:SortingCostsThirdParties decimals="0" contextRef="JrEenDur" unitRef="eur">4900</bank-agro:SortingCostsThirdParties>
+  </bank-agro-tuples:AgricultureSpecification>
+  <bank-agro-tuples:LivestockBreedingSpecification>
+    <bank-agro:LivestockBreedingType contextRef="JrTweeDur">Varkenshouderij</bank-agro:LivestockBreedingType>
+    <bank-agro:UtilisedFarmlandOwnProperty decimals="0" contextRef="JrTweeDur" unitRef="pure">50000</bank-agro:UtilisedFarmlandOwnProperty>
+    <bank-agro:UtilisedFarmlandThirdParties decimals="0" contextRef="JrTweeDur" unitRef="pure">5000</bank-agro:UtilisedFarmlandThirdParties>
+    <bank-agro:PropertyPlantEquipmentLivestock decimals="0" contextRef="JrTweeDur" unitRef="eur">4500</bank-agro:PropertyPlantEquipmentLivestock>
+    <bank-agro:StockAssetsCurrentNonLivestock decimals="0" contextRef="JrTweeDur" unitRef="eur">4600</bank-agro:StockAssetsCurrentNonLivestock>
+    <bank-agro:RevenueLivestock decimals="0" contextRef="JrTweeDur" unitRef="eur">4700</bank-agro:RevenueLivestock>
+    <bank-agro:AccretionLivestock decimals="0" contextRef="JrTweeDur" unitRef="eur">4800</bank-agro:AccretionLivestock>
+    <bank-agro:SinglePaymentScheme decimals="0" contextRef="JrTweeDur" unitRef="eur">4900</bank-agro:SinglePaymentScheme>
+    <bank-agro:FodderCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5000</bank-agro:FodderCosts>
+    <bank-agro:HealthcareCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5100</bank-agro:HealthcareCosts>
+    <bank-agro:BreedingCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5200</bank-agro:BreedingCosts>
+    <bank-agro:CultivationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5300</bank-agro:CultivationCosts>
+    <bank-agro:LitterCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5400</bank-agro:LitterCosts>
+    <bank-agro:EnergyCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5500</bank-agro:EnergyCosts>
+    <bank-agro:LivestockCostsOther decimals="0" contextRef="JrTweeDur" unitRef="eur">5600</bank-agro:LivestockCostsOther>
+    <bank-agro:ManureDisposalCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5700</bank-agro:ManureDisposalCosts>
+    <bank-agro:ProductionRightsLeaseCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">5800</bank-agro:ProductionRightsLeaseCosts>
+    <bank-agro:AverageNumberPresentSows decimals="0" contextRef="JrTweeDur" unitRef="pure">5900</bank-agro:AverageNumberPresentSows>
+    <bank-agro:AverageNumberPresentSowsContracted decimals="0" contextRef="JrTweeDur" unitRef="pure">6000</bank-agro:AverageNumberPresentSowsContracted>
+    <bank-agro:AverageNumberPresentPorkers decimals="0" contextRef="JrTweeDur" unitRef="pure">6100</bank-agro:AverageNumberPresentPorkers>
+    <bank-agro:AverageNumberPresentPorkersContracted decimals="0" contextRef="JrTweeDur" unitRef="pure">6200</bank-agro:AverageNumberPresentPorkersContracted>
+    <bank-agro:RequirementsDerogation contextRef="JrTweeDur">true</bank-agro:RequirementsDerogation>
+    <bank-agro:AverageNumberPresentMilkcows decimals="0" contextRef="JrTweeDur" unitRef="pure">100</bank-agro:AverageNumberPresentMilkcows>
+    <bank-agro:AverageNumberPresentYoungCattle decimals="0" contextRef="JrTweeDur" unitRef="pure">120</bank-agro:AverageNumberPresentYoungCattle>
+    <bank-agro:MilkMoneyRevenue decimals="0" contextRef="JrTweeDur" unitRef="eur">6300</bank-agro:MilkMoneyRevenue>
+    <bank-agro:MilkUsageQuotum decimals="0" contextRef="JrTweeDur" unitRef="pure">6400</bank-agro:MilkUsageQuotum>
+    <bank-agro:FatReferencePercentage decimals="2" contextRef="JrTweeDur" unitRef="pure">0.10</bank-agro:FatReferencePercentage>
+    <bank-agro:MilkDelivered decimals="0" contextRef="JrTweeDur" unitRef="pure">6500</bank-agro:MilkDelivered>
+    <bank-agro:ActualFatPercentage decimals="2" contextRef="JrTweeDur" unitRef="pure">0.20</bank-agro:ActualFatPercentage>
+    <bank-agro:ActualProteinPercentage decimals="2" contextRef="JrTweeDur" unitRef="pure">0.30</bank-agro:ActualProteinPercentage>
+    <bank-agro:ConcentratesCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">6600</bank-agro:ConcentratesCosts>
+    <bank-agro:RoughageCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">6700</bank-agro:RoughageCosts>
+    <bank-agro:ByproductsCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">6800</bank-agro:ByproductsCosts>
+    <bank-agro:AverageNumberPresentCalves decimals="0" contextRef="JrTweeDur" unitRef="pure">6900</bank-agro:AverageNumberPresentCalves>
+    <bank-agro:NumberBerthsCalves decimals="0" contextRef="JrTweeDur" unitRef="pure">7000</bank-agro:NumberBerthsCalves>
+    <bank-agro:NumberDeliveredCalves decimals="0" contextRef="JrTweeDur" unitRef="pure">7100</bank-agro:NumberDeliveredCalves>
+    <bank-agro:FeedingMoney decimals="0" contextRef="JrTweeDur" unitRef="eur">7200</bank-agro:FeedingMoney>
+    <bank-agro:AverageNumberPresentMilkGoats decimals="0" contextRef="JrTweeDur" unitRef="pure">200</bank-agro:AverageNumberPresentMilkGoats>
+    <bank-agro:AverageNumberPresentBreedingGoats decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank-agro:AverageNumberPresentBreedingGoats>
+    <bank-agro:AverageNumberCageHensConfinedPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">300</bank-agro:AverageNumberCageHensConfinedPerRound>
+    <bank-agro:AverageNumberRangeHensConfinedPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">350</bank-agro:AverageNumberRangeHensConfinedPerRound>
+    <bank-agro:AverageNumberFreeRangeHensConfinedPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">400</bank-agro:AverageNumberFreeRangeHensConfinedPerRound>
+    <bank-agro:AverageNumberBroilersBreedersConfined decimals="0" contextRef="JrTweeDur" unitRef="pure">450</bank-agro:AverageNumberBroilersBreedersConfined>
+    <bank-agro:AverageNumberOrganicHensConfinedPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">500</bank-agro:AverageNumberOrganicHensConfinedPerRound>
+    <bank-agro:AverageNumberHensConfinedPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">550</bank-agro:AverageNumberHensConfinedPerRound>
+    <bank-agro:EggMoneyRevenue decimals="0" contextRef="JrTweeDur" unitRef="eur">6900</bank-agro:EggMoneyRevenue>
+    <bank-agro:NetSquareMeterStableSurface decimals="0" contextRef="JrTweeDur" unitRef="pure">650</bank-agro:NetSquareMeterStableSurface>
+    <bank-agro:AverageNumberBroilersPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">600</bank-agro:AverageNumberBroilersPerRound>
+    <bank-agro:EmptyingCatchLoadingCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">7000</bank-agro:EmptyingCatchLoadingCosts>
+    <bank-agro:AverageNumberMeatTurkeysPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">700</bank-agro:AverageNumberMeatTurkeysPerRound>
+    <bank-agro:AverageNumberMeatDucksPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">800</bank-agro:AverageNumberMeatDucksPerRound>
+    <bank-agro:AverageNumberGuineaFowlsPerRound decimals="0" contextRef="JrTweeDur" unitRef="pure">900</bank-agro:AverageNumberGuineaFowlsPerRound>
+  </bank-agro-tuples:LivestockBreedingSpecification>
+  <bank-tuples:LocationActualActivitiesAddressNLSpecification>
+    <nl-cd:DescriptionLocationNL contextRef="JrEenDur">Kantoor</nl-cd:DescriptionLocationNL>
+    <nl-cd:StreetNameNL contextRef="JrEenDur">Dorpsstraat</nl-cd:StreetNameNL>
+    <nl-cd:HouseNumberNL contextRef="JrEenDur">135</nl-cd:HouseNumberNL>
+    <nl-cd:HouseNumberAddition contextRef="JrEenDur">a</nl-cd:HouseNumberAddition>
+    <nl-cd:POBoxNumber contextRef="JrEenDur">5000</nl-cd:POBoxNumber>
+    <nl-cd:PostalCodeNL contextRef="JrEenDur">2582HH</nl-cd:PostalCodeNL>
+    <nl-cd:PlaceOfResidenceNL contextRef="JrEenDur">Den Haag</nl-cd:PlaceOfResidenceNL>
+    <nl-cd:NameRegion contextRef="JrEenDur">Zuid-Holland</nl-cd:NameRegion>
+    <nl-cd:CountryName contextRef="JrEenDur">Nederland</nl-cd:CountryName>
+  </bank-tuples:LocationActualActivitiesAddressNLSpecification>
+  <bank-tuples:LocationActualActivitiesAddressNLSpecification>
+    <nl-cd:DescriptionLocationNL contextRef="JrTweeDur">Kantoor</nl-cd:DescriptionLocationNL>
+    <nl-cd:StreetNameNL contextRef="JrTweeDur">Dorpsstraat</nl-cd:StreetNameNL>
+    <nl-cd:HouseNumberNL contextRef="JrTweeDur">135</nl-cd:HouseNumberNL>
+    <nl-cd:HouseNumberAddition contextRef="JrTweeDur">a</nl-cd:HouseNumberAddition>
+    <nl-cd:POBoxNumber contextRef="JrTweeDur">5000</nl-cd:POBoxNumber>
+    <nl-cd:PostalCodeNL contextRef="JrTweeDur">2582HH</nl-cd:PostalCodeNL>
+    <nl-cd:PlaceOfResidenceNL contextRef="JrTweeDur">Den Haag</nl-cd:PlaceOfResidenceNL>
+    <nl-cd:NameRegion contextRef="JrTweeDur">Zuid-Holland</nl-cd:NameRegion>
+    <nl-cd:CountryName contextRef="JrTweeDur">Nederland</nl-cd:CountryName>
+  </bank-tuples:LocationActualActivitiesAddressNLSpecification>
+  <bank-tuples:BankAccountsSpecification>
+    <bank-cd:BankName contextRef="JrEenDur">Rabo</bank-cd:BankName>
+    <bank-cd:AccountNumberBank contextRef="JrEenDur">NL12ABCD1234567890</bank-cd:AccountNumberBank>
+  </bank-tuples:BankAccountsSpecification>
+  <bank-tuples:BankAccountsSpecification>
+    <bank-cd:BankName contextRef="JrTweeDur">Rabo</bank-cd:BankName>
+    <bank-cd:AccountNumberBank contextRef="JrTweeDur">NL12ABCD1234567890</bank-cd:AccountNumberBank>
+  </bank-tuples:BankAccountsSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Januari</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">230</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">290</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Februari</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">290</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">350</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Maart</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">360</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">420</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">April</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">420</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">480</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Mei</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">460</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">520</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Juni</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">520</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">580</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Juli</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">580</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">640</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Augustus</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">640</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">700</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">September</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">700</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">760</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">Oktober</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">760</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">820</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">November</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">840</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">900</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrEenDur">December</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrEenDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrEenDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrEenDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrEenDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrEenDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrEenDur" unitRef="eur">12</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrEenDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrEenDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrEenDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrEenDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrEenDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrEenDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrEenDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrEenDur" unitRef="eur">900</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrEenDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrEenDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrEenDur" unitRef="eur">960</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Januari</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">230</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">290</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Februari</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">290</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">350</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Maart</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">360</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">420</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">April</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">420</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">480</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Mei</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">460</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">520</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Juni</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">520</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">580</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Juli</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">580</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">640</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Augustus</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">640</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">700</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">September</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">700</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">760</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">Oktober</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">760</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">820</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">November</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">8</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">840</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">900</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+  <bank-tuples:CashBudgetSpecification>
+    <bank-cd:CashBudgetMonth contextRef="JrTweeDur">December</bank-cd:CashBudgetMonth>
+    <bank:CashBudgetReceipts decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetReceipts>
+    <bank:CashBudgetValueAddedTaxPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetValueAddedTaxPurchases>
+    <bank:CashBudgetPurchases decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetPurchases>
+    <bank:CashBudgetWagesSalaries decimals="0" contextRef="JrTweeDur" unitRef="eur">40</bank:CashBudgetWagesSalaries>
+    <bank:CashBudgetSocialSecurityContributions decimals="0" contextRef="JrTweeDur" unitRef="eur">50</bank:CashBudgetSocialSecurityContributions>
+    <bank:CashBudgetPensionCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">60</bank:CashBudgetPensionCosts>
+    <bank:CashBudgetOtherWagesSalariesSocialSecurityCharges decimals="0" contextRef="JrTweeDur" unitRef="eur">70</bank:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+    <bank:CashBudgetOperationalExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">120</bank:CashBudgetOperationalExpenses>
+    <bank:CashBudgetCarAndTransportCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">100</bank:CashBudgetCarAndTransportCosts>
+    <bank:CashBudgetOfficeRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">110</bank:CashBudgetOfficeRelatedExpenses>
+    <bank:CashBudgetAccommodationCosts decimals="0" contextRef="JrTweeDur" unitRef="eur">12</bank:CashBudgetAccommodationCosts>
+    <bank:CashBudgetExpensesResearchAndDevelopment decimals="0" contextRef="JrTweeDur" unitRef="eur">130</bank:CashBudgetExpensesResearchAndDevelopment>
+    <bank:CashBudgetSalesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">90</bank:CashBudgetSalesRelatedExpenses>
+    <bank:CashBudgetManagementFee decimals="0" contextRef="JrTweeDur" unitRef="eur">140</bank:CashBudgetManagementFee>
+    <bank:CashBudgetExpensesOther decimals="0" contextRef="JrTweeDur" unitRef="eur">200</bank:CashBudgetExpensesOther>
+    <bank:CashBudgetInterestExpensesRelatedExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">160</bank:CashBudgetInterestExpensesRelatedExpenses>
+    <bank:CashBudgetCorporateTax decimals="0" contextRef="JrTweeDur" unitRef="eur">170</bank:CashBudgetCorporateTax>
+    <bank:CashBudgetValueAddedTaxExpenses decimals="0" contextRef="JrTweeDur" unitRef="eur">180</bank:CashBudgetValueAddedTaxExpenses>
+    <bank:CashBudgetTurnoverTax decimals="0" contextRef="JrTweeDur" unitRef="eur">190</bank:CashBudgetTurnoverTax>
+    <bank:CashBudgetLeaseObligationsRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">210</bank:CashBudgetLeaseObligationsRepayments>
+    <bank:CashBudgetMediumtermLoanRepayments decimals="0" contextRef="JrTweeDur" unitRef="eur">220</bank:CashBudgetMediumtermLoanRepayments>
+    <bank:CashBudgetBalanceBeginningMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">900</bank:CashBudgetBalanceBeginningMonth>
+    <bank:CashBudgetCashFlowsOperatingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">10</bank:CashBudgetCashFlowsOperatingActivities>
+    <bank:CashBudgetCashFlowsInvestmentActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">20</bank:CashBudgetCashFlowsInvestmentActivities>
+    <bank:CashBudgetCashFlowsFinancingActivities decimals="0" contextRef="JrTweeDur" unitRef="eur">30</bank:CashBudgetCashFlowsFinancingActivities>
+    <bank:CashBudgetBalanceEndMonth decimals="0" contextRef="JrTweeDur" unitRef="eur">960</bank:CashBudgetBalanceEndMonth>
+  </bank-tuples:CashBudgetSpecification>
+</xbrli:xbrl>

@@ -1,0 +1,54 @@
+<Layouts>
+    <Layout Name="TXDE-DE">
+      <Title>TXDE-DE Layout</Title>
+      <Tabs>
+        <Tab>
+          <Variable>GeneralFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>ShortRatingFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>SimpleDataEntryFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>MasterBalFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>MasterIncFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>CorrectionsFolder</Variable>
+        </Tab>
+      </Tabs>
+    </Layout>
+    <Layout Name="TXDE-NL">
+      <Title>TXDE-NL Layout</Title>
+      <Tabs>
+        <Tab>
+          <Variable>GeneralFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>ShortRatingFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>SimpleDataEntryFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>InputBalFolderNL</Variable>
+        </Tab>
+        <Tab>
+          <Variable>InputIncFolderNL</Variable>
+        </Tab>
+        <Tab>
+          <Variable>CorrectionsFolder</Variable>
+        </Tab>
+        <Tab>
+          <Variable>RA_Kredieten</Variable>
+        </Tab>
+        <Tab>
+          <Variable>BBDekkingswaarde</Variable>
+        </Tab>
+      </Tabs>
+    </Layout>
+  </Layouts>

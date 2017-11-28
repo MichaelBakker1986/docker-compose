@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Testvoorbeeldinstance BT2015.1 (8 mei, 2015) -->
+<xbrli:xbrl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xbrl.org/2006/xbrldi http://www.xbrl.org/2006/xbrldi-2006.xsd" xmlns:rpt="https://www.sbrbanken.nl/BT2015.1/report/bank/entrypoints/bank-rpt-ihz-aangifte-met-winstbijlage-2014" xmlns:bank-tuples="https://www.sbrbanken.nl/BT2015.1/domein/bank/tuples/bank-tuples" xmlns:gen="http://xbrl.org/2008/generic" xmlns:rj-t="http://www.nltaxonomie.nl/9.0/domein/rj/tuples/rj-tuples" xmlns:rj-i="http://www.nltaxonomie.nl/9.0/basis/rj/items/rj-data" xmlns:bd-alg-tuple="http://www.nltaxonomie.nl/9.0/domein/bd/tuples/bd-alg-tuples" xmlns:bd-burg-tuple="http://www.nltaxonomie.nl/9.0/domein/bd/tuples/bd-burg-tuples" xmlns:bank-dm-bop="https://www.sbrbanken.nl/BT2015.1/basis/bank/domains/bank-domains-kr-basis-of-preparation" xmlns:bank-cd="https://www.sbrbanken.nl/BT2015.1/basis/bank/items/bank-common-data" xmlns:bank-pdom="https://www.sbrbanken.nl/BT2015.1/basis/bank/lineitems/bank-primary-domains" xmlns:bw2-i="http://www.nltaxonomie.nl/9.0/basis/venj/items/bw2-data" xmlns:bank-dm-fst="https://www.sbrbanken.nl/BT2015.1/basis/bank/domains/bank-domains-kr-financial-statements-type" xmlns:bank-dm-prt="https://www.sbrbanken.nl/BT2015.1/basis/bank/domains/bank-domains-ihz-party" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:bank-dm-time="https://www.sbrbanken.nl/BT2015.1/basis/bank/domains/bank-domains-ihz-time" xmlns:bank-dm-residence="https://www.sbrbanken.nl/BT2015.1/basis/bank/domains/bank-domains-ihz-residence" xmlns:bank="https://www.sbrbanken.nl/BT2015.1/basis/bank/items/bank" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bw2-t="http://www.nltaxonomie.nl/9.0/domein/venj/tuples/bw2-tuples" xmlns:nl-cd="http://www.nltaxonomie.nl/9.0/basis/sbr/items/nl-common-data" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:bank-ihz-tuples="https://www.sbrbanken.nl/BT2015.1/domein/bank/tuples/bank-ihz-tuples" xmlns:bd-alg="http://www.nltaxonomie.nl/9.0/basis/bd/items/bd-algemeen" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:bank-ihz-dim="https://www.sbrbanken.nl/BT2015.1/domein/bank/axes/bank-ihz-axes" xmlns:bank-kr-dim="https://www.sbrbanken.nl/BT2015.1/domein/bank/axes/bank-kr-axes" xmlns:bd-burg="http://www.nltaxonomie.nl/9.0/basis/bd/items/bd-burgers" xmlns:kvk-i="http://www.nltaxonomie.nl/9.0/basis/kvk/items/kvk-data" xmlns:bank-agro="https://www.sbrbanken.nl/BT2015.1/basis/bank/items/bank-agro" xmlns:bank-agro-tuples="https://www.sbrbanken.nl/BT2015.1/domein/bank/tuples/bank-agro-tuples" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/9.0/basis/venj/items/venj-bw2-data" xmlns:xbrli="http://www.xbrl.org/2003/instance">
+  <link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/BT2015.1/report/bank/entrypoints/bank-rpt-ihz-aangifte-met-winstbijlage-2014.xsd"></link:schemaRef>
+  <xbrli:context id="DitJaarDur">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2014-01-01</xbrli:startDate>
+      <xbrli:endDate>2014-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="DitJaarInst">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2014-12-31</xbrli:instant>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="VorigJaarDur">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2013-01-01</xbrli:startDate>
+      <xbrli:endDate>2013-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="VorigJaarInst">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2013-12-31</xbrli:instant>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-kr-dim:BasisOfPreparationAxis">bank-dm-bop:FiscalMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-kr-dim:FinancialStatementsTypeAxis">bank-dm-fst:SeparateMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="DitJaarDurBIB">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2014-01-01</xbrli:startDate>
+      <xbrli:endDate>2014-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:PartyAxis">bank-dm-prt:DeclarantMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:TimeAxis">bank-dm-time:EndYearMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:ResidenceAxis">bank-dm-residence:NetherlandsMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="DitJaarInstBIB">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2014-12-31</xbrli:instant>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:PartyAxis">bank-dm-prt:DeclarantMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:TimeAxis">bank-dm-time:EndYearMember</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bank-ihz-dim:ResidenceAxis">bank-dm-residence:NetherlandsMember</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:unit id="eur">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="PURE">
+    <xbrli:measure>xbrli:pure</xbrli:measure>
+  </xbrli:unit>
+  <bank-agro-tuples:AgricultureSpecification>
+    <bank-agro:AgricultureType contextRef="DitJaarDur">Akkerbouw</bank-agro:AgricultureType>
+    <bank-agro:UtilisedAgriculturalAreaOwnProperty decimals="0" contextRef="DitJaarDur" unitRef="PURE">1000</bank-agro:UtilisedAgriculturalAreaOwnProperty>
+    <bank-agro:UtilisedAgriculturalAreaThirdParties decimals="0" contextRef="DitJaarDur" unitRef="PURE">200</bank-agro:UtilisedAgriculturalAreaThirdParties>
+    <bank-agro:GrossCultivationSurfaceIndoor decimals="0" contextRef="DitJaarDur" unitRef="PURE">400</bank-agro:GrossCultivationSurfaceIndoor>
+    <bank-agro:PropertyPlantEquipmentMultipleYearsPlantStock decimals="0" contextRef="DitJaarDur" unitRef="eur">1200</bank-agro:PropertyPlantEquipmentMultipleYearsPlantStock>
+    <bank-agro:ReceivablesMembersLoans decimals="0" contextRef="DitJaarDur" unitRef="eur">1100</bank-agro:ReceivablesMembersLoans>
+    <bank-agro:GrossRevenueProduction decimals="0" contextRef="DitJaarDur" unitRef="eur">150000</bank-agro:GrossRevenueProduction>
+    <bank-agro:StockChange decimals="0" contextRef="DitJaarDur" unitRef="eur">1500</bank-agro:StockChange>
+    <bank-agro:PackagingFee decimals="0" contextRef="DitJaarDur" unitRef="eur">1600</bank-agro:PackagingFee>
+    <bank-agro:GMOGrant decimals="0" contextRef="DitJaarDur" unitRef="eur">1700</bank-agro:GMOGrant>
+    <bank-agro:ElectricitySales decimals="0" contextRef="DitJaarDur" unitRef="eur">1800</bank-agro:ElectricitySales>
+    <bank-agro:OtherRelatedIncome decimals="0" contextRef="DitJaarDur" unitRef="eur">1900</bank-agro:OtherRelatedIncome>
+    <bank-agro:SowingCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2000</bank-agro:SowingCosts>
+    <bank-agro:SubstratumCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2100</bank-agro:SubstratumCosts>
+    <bank-agro:ManuringCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2200</bank-agro:ManuringCosts>
+    <bank-agro:FertilizationCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2300</bank-agro:FertilizationCosts>
+    <bank-agro:CropProtectionCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2400</bank-agro:CropProtectionCosts>
+    <bank-agro:CropInsuranceCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2500</bank-agro:CropInsuranceCosts>
+    <bank-agro:CultivationDisposalCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">2600</bank-agro:CultivationDisposalCosts>
+    <bank-agro:CultivationCostsOther decimals="0" contextRef="DitJaarDur" unitRef="eur">2700</bank-agro:CultivationCostsOther>
+    <bank-agro:CultivationCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">22000</bank-agro:CultivationCosts>
+    <bank-agro:GasCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3000</bank-agro:GasCosts>
+    <bank-agro:ElectricityCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3100</bank-agro:ElectricityCosts>
+    <bank-agro:CO2OCAPWaterCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3200</bank-agro:CO2OCAPWaterCosts>
+    <bank-agro:WKKMaintenanceCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3300</bank-agro:WKKMaintenanceCosts>
+    <bank-agro:WKKLeaseCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3400</bank-agro:WKKLeaseCosts>
+    <bank-agro:AuctionCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3500</bank-agro:AuctionCosts>
+    <bank-agro:SalesPackackingFustCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3600</bank-agro:SalesPackackingFustCosts>
+    <bank-agro:TransportCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">3700</bank-agro:TransportCosts>
+    <bank-agro:PurchaseCostsPottedPlantsPropagation decimals="0" contextRef="DitJaarDur" unitRef="eur">3800</bank-agro:PurchaseCostsPottedPlantsPropagation>
+    <bank-agro:PurchaseCostsPottedPlantsSale decimals="0" contextRef="DitJaarDur" unitRef="eur">3900</bank-agro:PurchaseCostsPottedPlantsSale>
+    <bank-agro:PurchaseCostsPots decimals="0" contextRef="DitJaarDur" unitRef="eur">4000</bank-agro:PurchaseCostsPots>
+    <bank-agro:PurchaseCostsPottingSoil decimals="0" contextRef="DitJaarDur" unitRef="eur">4100</bank-agro:PurchaseCostsPottingSoil>
+    <bank-agro:CompostCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">4200</bank-agro:CompostCosts>
+    <bank-agro:MushroomCompostDisposalCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">4300</bank-agro:MushroomCompostDisposalCosts>
+    <bank-agro:PurchaseCostsBulbsSale decimals="0" contextRef="DitJaarDur" unitRef="eur">4400</bank-agro:PurchaseCostsBulbsSale>
+    <bank-agro:ContractedCultivationCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">4500</bank-agro:ContractedCultivationCosts>
+    <bank-agro:ReimbursementWorkOthers decimals="0" contextRef="DitJaarDur" unitRef="eur">4600</bank-agro:ReimbursementWorkOthers>
+    <bank-agro:ProductCustomizingCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">4700</bank-agro:ProductCustomizingCosts>
+    <bank-agro:AccretionFruitTrellises decimals="0" contextRef="DitJaarDur" unitRef="eur">4800</bank-agro:AccretionFruitTrellises>
+    <bank-agro:SortingCostsThirdParties decimals="0" contextRef="DitJaarDur" unitRef="eur">4900</bank-agro:SortingCostsThirdParties>
+  </bank-agro-tuples:AgricultureSpecification>
+  <venj-bw2-i:NetRevenue decimals="0" contextRef="DitJaarDur" unitRef="eur">10000</venj-bw2-i:NetRevenue>
+  <venj-bw2-i:ChangesInventoriesWorkInProgress decimals="0" contextRef="DitJaarDur" unitRef="eur">10000</venj-bw2-i:ChangesInventoriesWorkInProgress>
+  <rj-i:ChangesConstructionContracts decimals="0" contextRef="DitJaarDur" unitRef="eur">2000</rj-i:ChangesConstructionContracts>
+  <venj-bw2-i:CapitalisedProductionCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">20000</venj-bw2-i:CapitalisedProductionCosts>
+  <bank:PrivateUseOwnBusiness decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</bank:PrivateUseOwnBusiness>
+  <bank:OperatingIncomeOther decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</bank:OperatingIncomeOther>
+  <venj-bw2-i:OperatingIncome decimals="0" contextRef="DitJaarDur" unitRef="eur">44000</venj-bw2-i:OperatingIncome>
+  <venj-bw2-i:CostsRawMaterialsConsumables decimals="0" contextRef="DitJaarDur" unitRef="eur">2000</venj-bw2-i:CostsRawMaterialsConsumables>
+  <venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+  <rj-i:EmployeeBenefitsExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</rj-i:EmployeeBenefitsExpenses>
+  <venj-bw2-i:DepreciationTangibleAssetsAmortisationIntangibleAssets decimals="0" contextRef="DitJaarDur" unitRef="eur">2000</venj-bw2-i:DepreciationTangibleAssetsAmortisationIntangibleAssets>
+  <venj-bw2-i:ChangesInValueIntangibleTangibleAssets decimals="0" contextRef="DitJaarDur" unitRef="eur">1500</venj-bw2-i:ChangesInValueIntangibleTangibleAssets>
+  <venj-bw2-i:ImpairmentCurrentAssets decimals="0" contextRef="DitJaarDur" unitRef="eur">1500</venj-bw2-i:ImpairmentCurrentAssets>
+  <venj-bw2-i:OperatingExpensesOther decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</venj-bw2-i:OperatingExpensesOther>
+  <venj-bw2-i:OperatingExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">10000</venj-bw2-i:OperatingExpenses>
+  <venj-bw2-i:NetRevenue decimals="0" contextRef="VorigJaarDur" unitRef="eur">10100</venj-bw2-i:NetRevenue>
+  <venj-bw2-i:ChangesInventoriesWorkInProgress decimals="0" contextRef="VorigJaarDur" unitRef="eur">4200</venj-bw2-i:ChangesInventoriesWorkInProgress>
+  <rj-i:ChangesConstructionContracts decimals="0" contextRef="VorigJaarDur" unitRef="eur">3600</rj-i:ChangesConstructionContracts>
+  <venj-bw2-i:CapitalisedProductionCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">20000</venj-bw2-i:CapitalisedProductionCosts>
+  <bank:PrivateUseOwnBusiness decimals="0" contextRef="VorigJaarDur" unitRef="eur">6900</bank:PrivateUseOwnBusiness>
+  <bank:OperatingIncomeOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</bank:OperatingIncomeOther>
+  <venj-bw2-i:OperatingIncome decimals="0" contextRef="VorigJaarDur" unitRef="eur">45900</venj-bw2-i:OperatingIncome>
+  <venj-bw2-i:CostsRawMaterialsConsumables decimals="0" contextRef="VorigJaarDur" unitRef="eur">2100</venj-bw2-i:CostsRawMaterialsConsumables>
+  <venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+  <rj-i:EmployeeBenefitsExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</rj-i:EmployeeBenefitsExpenses>
+  <venj-bw2-i:DepreciationTangibleAssetsAmortisationIntangibleAssets decimals="0" contextRef="VorigJaarDur" unitRef="eur">2100</venj-bw2-i:DepreciationTangibleAssetsAmortisationIntangibleAssets>
+  <venj-bw2-i:ChangesInValueIntangibleTangibleAssets decimals="0" contextRef="VorigJaarDur" unitRef="eur">1600</venj-bw2-i:ChangesInValueIntangibleTangibleAssets>
+  <venj-bw2-i:ImpairmentCurrentAssets decimals="0" contextRef="VorigJaarDur" unitRef="eur">1600</venj-bw2-i:ImpairmentCurrentAssets>
+  <venj-bw2-i:OperatingExpensesOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</venj-bw2-i:OperatingExpensesOther>
+  <venj-bw2-i:OperatingExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">10700</venj-bw2-i:OperatingExpenses>
+  <bank-tuples:OperationSpecification>
+    <bank-cd:IdentificationNumber contextRef="DitJaarDur">A1</bank-cd:IdentificationNumber>
+    <bank-cd:NameOperation contextRef="DitJaarDur">Naam activiteit</bank-cd:NameOperation>
+    <bank:TurnoverOperation decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</bank:TurnoverOperation>
+    <bank:CostPriceTurnoverOperation decimals="0" contextRef="DitJaarDur" unitRef="eur">50000</bank:CostPriceTurnoverOperation>
+    <bank:PurchaseCostsOperation decimals="0" contextRef="DitJaarDur" unitRef="eur">10000</bank:PurchaseCostsOperation>
+    <bank:EmployeeBenefitsExpensesOperation decimals="0" contextRef="DitJaarDur" unitRef="eur">15000</bank:EmployeeBenefitsExpensesOperation>
+    <bank:OtherOperatingExpensesOperation decimals="0" contextRef="DitJaarDur" unitRef="eur">25000</bank:OtherOperatingExpensesOperation>
+  </bank-tuples:OperationSpecification>
+  <bank-tuples:OperationSpecification>
+    <bank-cd:IdentificationNumber contextRef="VorigJaarDur">A1</bank-cd:IdentificationNumber>
+    <bank-cd:NameOperation contextRef="VorigJaarDur">Naam activiteit</bank-cd:NameOperation>
+    <bank:TurnoverOperation decimals="0" contextRef="VorigJaarDur" unitRef="eur">1000</bank:TurnoverOperation>
+    <bank:CostPriceTurnoverOperation decimals="0" contextRef="VorigJaarDur" unitRef="eur">50000</bank:CostPriceTurnoverOperation>
+    <bank:PurchaseCostsOperation decimals="0" contextRef="VorigJaarDur" unitRef="eur">10000</bank:PurchaseCostsOperation>
+    <bank:EmployeeBenefitsExpensesOperation decimals="0" contextRef="VorigJaarDur" unitRef="eur">15000</bank:EmployeeBenefitsExpensesOperation>
+    <bank:OtherOperatingExpensesOperation decimals="0" contextRef="VorigJaarDur" unitRef="eur">25000</bank:OtherOperatingExpensesOperation>
+  </bank-tuples:OperationSpecification>
+  <bank-tuples:ContractsOperatingLeaseSpecification>
+    <bank-cd:IdentificationNumber contextRef="DitJaarDur">123</bank-cd:IdentificationNumber>
+    <bank-cd:ContractsOperatingLeaseNameCompany contextRef="DitJaarDur">Lease007</bank-cd:ContractsOperatingLeaseNameCompany>
+    <bank:ObligatoryLeaseContractYearly decimals="0" contextRef="DitJaarDur" unitRef="eur">4000</bank:ObligatoryLeaseContractYearly>
+    <bank-cd:FixedMaturityLeaseContracts contextRef="DitJaarDur">true</bank-cd:FixedMaturityLeaseContracts>
+    <bank-cd:MaturityInMonthsContractsOperatingLease decimals="0" contextRef="DitJaarDur" unitRef="PURE">36</bank-cd:MaturityInMonthsContractsOperatingLease>
+    <bank-cd:ClosingDateContractsOperatingLease contextRef="DitJaarDur">2015-12-31</bank-cd:ClosingDateContractsOperatingLease>
+  </bank-tuples:ContractsOperatingLeaseSpecification>
+  <bank-tuples:ContractsOperatingLeaseSpecification>
+    <bank-cd:IdentificationNumber contextRef="VorigJaarDur">123</bank-cd:IdentificationNumber>
+    <bank-cd:ContractsOperatingLeaseNameCompany contextRef="VorigJaarDur">Lease007</bank-cd:ContractsOperatingLeaseNameCompany>
+    <bank:ObligatoryLeaseContractYearly decimals="0" contextRef="VorigJaarDur" unitRef="eur">4100</bank:ObligatoryLeaseContractYearly>
+    <bank-cd:FixedMaturityLeaseContracts contextRef="VorigJaarDur">true</bank-cd:FixedMaturityLeaseContracts>
+    <bank-cd:MaturityInMonthsContractsOperatingLease decimals="0" contextRef="VorigJaarDur" unitRef="PURE">36</bank-cd:MaturityInMonthsContractsOperatingLease>
+    <bank-cd:ClosingDateContractsOperatingLease contextRef="VorigJaarDur">2015-12-31</bank-cd:ClosingDateContractsOperatingLease>
+  </bank-tuples:ContractsOperatingLeaseSpecification>
+  <bank-tuples:RentContractsSpecification>
+    <bank-cd:ObjectIdentificationRentContracts contextRef="DitJaarDur">huur007</bank-cd:ObjectIdentificationRentContracts>
+    <bank-cd:FixedMaturityRentContracts contextRef="DitJaarDur">true</bank-cd:FixedMaturityRentContracts>
+    <bank-cd:MaturityInMonthsRentContracts decimals="0" contextRef="DitJaarDur" unitRef="PURE">36</bank-cd:MaturityInMonthsRentContracts>
+    <bank-cd:ClosingDateRentContracts contextRef="DitJaarDur">2013-12-31</bank-cd:ClosingDateRentContracts>
+    <bank:RentCostsYearlyRentContracts decimals="0" contextRef="DitJaarDur" unitRef="eur">15000</bank:RentCostsYearlyRentContracts>
+  </bank-tuples:RentContractsSpecification>
+  <bank-tuples:RentContractsSpecification>
+    <bank-cd:ObjectIdentificationRentContracts contextRef="VorigJaarDur">huur007</bank-cd:ObjectIdentificationRentContracts>
+    <bank-cd:FixedMaturityRentContracts contextRef="VorigJaarDur">true</bank-cd:FixedMaturityRentContracts>
+    <bank-cd:MaturityInMonthsRentContracts decimals="0" contextRef="VorigJaarDur" unitRef="PURE">36</bank-cd:MaturityInMonthsRentContracts>
+    <bank-cd:ClosingDateRentContracts contextRef="VorigJaarDur">2013-12-31</bank-cd:ClosingDateRentContracts>
+    <bank:RentCostsYearlyRentContracts decimals="0" contextRef="VorigJaarDur" unitRef="eur">16000</bank:RentCostsYearlyRentContracts>
+  </bank-tuples:RentContractsSpecification>
+  <bank-tuples:BankAccountsSpecification>
+    <bank-cd:BankName contextRef="DitJaarDurBIB">ABN AMRO</bank-cd:BankName>
+    <bank-cd:AccountNumberBank contextRef="DitJaarDurBIB">NL12ABCD1234567890</bank-cd:AccountNumberBank>
+    <bank-cd:PrivateAccountNumberBank contextRef="DitJaarDurBIB">NL12ABCD0987654321</bank-cd:PrivateAccountNumberBank>
+  </bank-tuples:BankAccountsSpecification>
+  <bank-tuples:PayablesOtherSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="DitJaarDur">OVER702</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="DitJaarDur">De Buurman</bank-cd:NameCounterpartyPayables>
+    <bank-cd:FamilyFriendsSubordinatedLoansIndicator contextRef="DitJaarDur">true</bank-cd:FamilyFriendsSubordinatedLoansIndicator>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</bank:CapitalSumBorrowingArrangements>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="DitJaarInst" unitRef="eur">150</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.06</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="DitJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="DitJaarDur" unitRef="PURE">24</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="DitJaarDur">false</bank-cd:SecurityPayables>
+  </bank-tuples:PayablesOtherSpecification>
+  <bank-tuples:PayablesOtherSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="VorigJaarDur">OVER702</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="VorigJaarDur">De Buurman</bank-cd:NameCounterpartyPayables>
+    <bank-cd:FamilyFriendsSubordinatedLoansIndicator contextRef="VorigJaarDur">true</bank-cd:FamilyFriendsSubordinatedLoansIndicator>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="VorigJaarInst" unitRef="eur">5000</bank:CapitalSumBorrowingArrangements>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">150</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.06</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="VorigJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="VorigJaarDur" unitRef="PURE">24</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="VorigJaarDur">false</bank-cd:SecurityPayables>
+  </bank-tuples:PayablesOtherSpecification>
+  <bank-tuples:PayablesOtherPartiesSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="DitJaarDur">OVER540</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="DitJaarDur">Dochter2</bank-cd:NameCounterpartyPayables>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="DitJaarInst" unitRef="eur">3500</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:CapitalSumBorrowingArrangements>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="DitJaarInst" unitRef="eur">100</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="DitJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="DitJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="DitJaarDur">false</bank-cd:SecurityPayables>
+  </bank-tuples:PayablesOtherPartiesSpecification>
+  <bank-tuples:PayablesOtherPartiesSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="VorigJaarDur">OVER540</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="VorigJaarDur">Dochter2</bank-cd:NameCounterpartyPayables>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">3600</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="VorigJaarInst" unitRef="eur">1000</bank:CapitalSumBorrowingArrangements>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">100</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="VorigJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="VorigJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="VorigJaarDur">true</bank-cd:SecurityPayables>
+  </bank-tuples:PayablesOtherPartiesSpecification>
+  <bank-tuples:BankOverdraftsSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="DitJaarDur">VK007</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="DitJaarDur">BankABC</bank-cd:NameCounterpartyPayables>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="DitJaarInst" unitRef="eur">3000</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="DitJaarInst" unitRef="eur">20000</bank:CapitalSumBorrowingArrangements>
+    <bank:NominalCreditLimit decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:NominalCreditLimit>
+    <bank:AdditionalCreditLimit decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:AdditionalCreditLimit>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="DitJaarInst" unitRef="eur">200</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="DitJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="DitJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="DitJaarDur">true</bank-cd:SecurityPayables>
+  </bank-tuples:BankOverdraftsSpecification>
+  <bank-tuples:BankOverdraftsSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="VorigJaarDur">VK007</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="VorigJaarDur">BankABC</bank-cd:NameCounterpartyPayables>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">3200</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="VorigJaarInst" unitRef="eur">20000</bank:CapitalSumBorrowingArrangements>
+    <bank:NominalCreditLimit decimals="0" contextRef="VorigJaarInst" unitRef="eur">1000</bank:NominalCreditLimit>
+    <bank:AdditionalCreditLimit decimals="0" contextRef="VorigJaarInst" unitRef="eur">1000</bank:AdditionalCreditLimit>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">200</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="VorigJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="VorigJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="VorigJaarDur">true</bank-cd:SecurityPayables>
+  </bank-tuples:BankOverdraftsSpecification>
+  <bank-tuples:SubordinatedLoansSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="DitJaarDur">ACHTER320</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="DitJaarDur">De Uitlener</bank-cd:NameCounterpartyPayables>
+    <bank-cd:FamilyFriendsSubordinatedLoansIndicator contextRef="DitJaarDur">false</bank-cd:FamilyFriendsSubordinatedLoansIndicator>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</bank:CapitalSumBorrowingArrangements>
+    <bank:NominalCreditLimit decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:NominalCreditLimit>
+    <bank:AdditionalCreditLimit decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</bank:AdditionalCreditLimit>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="DitJaarInst" unitRef="eur">50</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="DitJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="DitJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="DitJaarDur">false</bank-cd:SecurityPayables>
+  </bank-tuples:SubordinatedLoansSpecification>
+  <bank-tuples:SubordinatedLoansSpecification>
+    <bank-cd:IdentificationNumberPayables contextRef="VorigJaarDur">ACHTER320</bank-cd:IdentificationNumberPayables>
+    <bank-cd:NameCounterpartyPayables contextRef="VorigJaarDur">De Uitlener</bank-cd:NameCounterpartyPayables>
+    <bank-cd:FamilyFriendsSubordinatedLoansIndicator contextRef="VorigJaarDur">false</bank-cd:FamilyFriendsSubordinatedLoansIndicator>
+    <bank:BalanceSheetValuePayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">2200</bank:BalanceSheetValuePayables>
+    <bank:CapitalSumBorrowingArrangements decimals="0" contextRef="VorigJaarInst" unitRef="eur">5000</bank:CapitalSumBorrowingArrangements>
+    <bank:NominalCreditLimit decimals="0" contextRef="VorigJaarInst" unitRef="eur">1000</bank:NominalCreditLimit>
+    <bank:AdditionalCreditLimit decimals="0" contextRef="VorigJaarInst" unitRef="eur">2000</bank:AdditionalCreditLimit>
+    <bank:RedemptionYearlyPayables decimals="0" contextRef="VorigJaarInst" unitRef="eur">50</bank:RedemptionYearlyPayables>
+    <bank-cd:InterestRatePayablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRatePayablesIndicator>
+    <bank-cd:InterestRateYearlyPayablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.12</bank-cd:InterestRateYearlyPayablesPercentage>
+    <bank-cd:FixedMaturityPayablesIndicator contextRef="VorigJaarDur">true</bank-cd:FixedMaturityPayablesIndicator>
+    <bank-cd:OriginalMaturityInMonthsBorrowingArrangements decimals="0" contextRef="VorigJaarDur" unitRef="PURE">20</bank-cd:OriginalMaturityInMonthsBorrowingArrangements>
+    <bank-cd:SecurityPayables contextRef="VorigJaarDur">false</bank-cd:SecurityPayables>
+  </bank-tuples:SubordinatedLoansSpecification>
+  <bank-tuples:SecuritiesNotRegisterBoundGoodsSpecification>
+    <bank-cd:IdentificationNumberSecurities contextRef="DitJaarDur">Z540</bank-cd:IdentificationNumberSecurities>
+    <bank:SecuritiesDescription contextRef="DitJaarDur">Omschrijving zekerheid</bank:SecuritiesDescription>
+  </bank-tuples:SecuritiesNotRegisterBoundGoodsSpecification>
+  <bank-tuples:SecuritiesNotRegisterBoundGoodsSpecification>
+    <bank-cd:IdentificationNumberSecurities contextRef="VorigJaarDur">Z540</bank-cd:IdentificationNumberSecurities>
+    <bank:SecuritiesDescription contextRef="VorigJaarDur">Omschrijving zekerheid</bank:SecuritiesDescription>
+  </bank-tuples:SecuritiesNotRegisterBoundGoodsSpecification>
+  <bank-tuples:SecuritiesRegisterBoundGoodsSpecification>
+    <bank-cd:RegistryNumberRegisterBoundGood contextRef="DitJaarDur">Z107</bank-cd:RegistryNumberRegisterBoundGood>
+    <bank-cd:ObjectSecurities contextRef="DitJaarDur">Object Zekerheid</bank-cd:ObjectSecurities>
+    <bank-cd:RankSecurities decimals="0" contextRef="DitJaarDur" unitRef="PURE">1</bank-cd:RankSecurities>
+    <bank:ValueSecurities decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:ValueSecurities>
+  </bank-tuples:SecuritiesRegisterBoundGoodsSpecification>
+  <bank-tuples:SecuritiesRegisterBoundGoodsSpecification>
+    <bank-cd:RegistryNumberRegisterBoundGood contextRef="VorigJaarDur">Z107</bank-cd:RegistryNumberRegisterBoundGood>
+    <bank-cd:ObjectSecurities contextRef="VorigJaarDur">Object Zekerheid</bank-cd:ObjectSecurities>
+    <bank-cd:RankSecurities decimals="0" contextRef="VorigJaarDur" unitRef="PURE">1</bank-cd:RankSecurities>
+    <bank:ValueSecurities decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</bank:ValueSecurities>
+  </bank-tuples:SecuritiesRegisterBoundGoodsSpecification>
+  <bank-agro-tuples:LivestockBreedingSpecification>
+    <bank-agro:LivestockBreedingType contextRef="VorigJaarDur">Varkenshouderij</bank-agro:LivestockBreedingType>
+    <bank-agro:UtilisedAgriculturalAreaOwnProperty decimals="0" contextRef="VorigJaarDur" unitRef="PURE">50000</bank-agro:UtilisedAgriculturalAreaOwnProperty>
+    <bank-agro:UtilisedAgriculturalAreaThirdParties decimals="0" contextRef="VorigJaarDur" unitRef="PURE">5000</bank-agro:UtilisedAgriculturalAreaThirdParties>
+    <bank-agro:PropertyPlantEquipmentLivestock decimals="0" contextRef="VorigJaarDur" unitRef="eur">4500</bank-agro:PropertyPlantEquipmentLivestock>
+    <bank-agro:StockAssetsCurrentNonLivestock decimals="0" contextRef="VorigJaarDur" unitRef="eur">4600</bank-agro:StockAssetsCurrentNonLivestock>
+    <bank-agro:RevenueLivestock decimals="0" contextRef="VorigJaarDur" unitRef="eur">4700</bank-agro:RevenueLivestock>
+    <bank-agro:AccretionLivestock decimals="0" contextRef="VorigJaarDur" unitRef="eur">4800</bank-agro:AccretionLivestock>
+    <bank-agro:SinglePaymentScheme decimals="0" contextRef="VorigJaarDur" unitRef="eur">4900</bank-agro:SinglePaymentScheme>
+    <bank-agro:FodderCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5000</bank-agro:FodderCosts>
+    <bank-agro:HealthcareCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5100</bank-agro:HealthcareCosts>
+    <bank-agro:BreedingCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5200</bank-agro:BreedingCosts>
+    <bank-agro:CultivationCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5300</bank-agro:CultivationCosts>
+    <bank-agro:LitterCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5400</bank-agro:LitterCosts>
+    <bank-agro:EnergyCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5500</bank-agro:EnergyCosts>
+    <bank-agro:LivestockCostsOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">5600</bank-agro:LivestockCostsOther>
+    <bank-agro:ManureDisposalCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5700</bank-agro:ManureDisposalCosts>
+    <bank-agro:ProductionRightsLeaseCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">5800</bank-agro:ProductionRightsLeaseCosts>
+    <bank-agro:AverageNumberPresentSows decimals="0" contextRef="VorigJaarDur" unitRef="PURE">5900</bank-agro:AverageNumberPresentSows>
+    <bank-agro:AverageNumberPresentSowsContracted decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6000</bank-agro:AverageNumberPresentSowsContracted>
+    <bank-agro:AverageNumberPresentPorkers decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6100</bank-agro:AverageNumberPresentPorkers>
+    <bank-agro:AverageNumberPresentPorkersContracted decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6200</bank-agro:AverageNumberPresentPorkersContracted>
+    <bank-agro:RequirementsDerogation contextRef="VorigJaarDur">true</bank-agro:RequirementsDerogation>
+    <bank-agro:AverageNumberPresentMilkcows decimals="0" contextRef="VorigJaarDur" unitRef="PURE">100</bank-agro:AverageNumberPresentMilkcows>
+    <bank-agro:AverageNumberPresentYoungCattle decimals="0" contextRef="VorigJaarDur" unitRef="PURE">120</bank-agro:AverageNumberPresentYoungCattle>
+    <bank-agro:MilkMoneyRevenue decimals="0" contextRef="VorigJaarDur" unitRef="eur">6300</bank-agro:MilkMoneyRevenue>
+    <bank-agro:MilkUsageQuotum decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6400</bank-agro:MilkUsageQuotum>
+    <bank-agro:FatReferencePercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.10</bank-agro:FatReferencePercentage>
+    <bank-agro:MilkDelivered decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6500</bank-agro:MilkDelivered>
+    <bank-agro:ActualFatPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.20</bank-agro:ActualFatPercentage>
+    <bank-agro:ActualProteinPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.30</bank-agro:ActualProteinPercentage>
+    <bank-agro:ConcentratesCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">6600</bank-agro:ConcentratesCosts>
+    <bank-agro:RoughageCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">6700</bank-agro:RoughageCosts>
+    <bank-agro:ByproductsCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">6800</bank-agro:ByproductsCosts>
+    <bank-agro:AverageNumberPresentCalves decimals="0" contextRef="VorigJaarDur" unitRef="PURE">6900</bank-agro:AverageNumberPresentCalves>
+    <bank-agro:NumberBerthsCalves decimals="0" contextRef="VorigJaarDur" unitRef="PURE">7000</bank-agro:NumberBerthsCalves>
+    <bank-agro:NumberDeliveredCalves decimals="0" contextRef="VorigJaarDur" unitRef="PURE">7100</bank-agro:NumberDeliveredCalves>
+    <bank-agro:FeedingMoney decimals="0" contextRef="VorigJaarDur" unitRef="eur">7200</bank-agro:FeedingMoney>
+    <bank-agro:AverageNumberPresentMilkGoats decimals="0" contextRef="VorigJaarDur" unitRef="PURE">200</bank-agro:AverageNumberPresentMilkGoats>
+    <bank-agro:AverageNumberPresentBreedingGoats decimals="0" contextRef="VorigJaarDur" unitRef="eur">20</bank-agro:AverageNumberPresentBreedingGoats>
+    <bank-agro:AverageNumberCageHensConfinedPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">300</bank-agro:AverageNumberCageHensConfinedPerRound>
+    <bank-agro:AverageNumberRangeHensConfinedPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">350</bank-agro:AverageNumberRangeHensConfinedPerRound>
+    <bank-agro:AverageNumberFreeRangeHensConfinedPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">400</bank-agro:AverageNumberFreeRangeHensConfinedPerRound>
+    <bank-agro:AverageNumberBroilersBreedersConfined decimals="0" contextRef="VorigJaarDur" unitRef="PURE">450</bank-agro:AverageNumberBroilersBreedersConfined>
+    <bank-agro:AverageNumberOrganicHensConfinedPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">500</bank-agro:AverageNumberOrganicHensConfinedPerRound>
+    <bank-agro:AverageNumberHensConfinedPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">550</bank-agro:AverageNumberHensConfinedPerRound>
+    <bank-agro:EggMoneyRevenue decimals="0" contextRef="VorigJaarDur" unitRef="eur">6900</bank-agro:EggMoneyRevenue>
+    <bank-agro:NetSquareMeterStableSurface decimals="0" contextRef="VorigJaarDur" unitRef="PURE">650</bank-agro:NetSquareMeterStableSurface>
+    <bank-agro:AverageNumberBroilersPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">600</bank-agro:AverageNumberBroilersPerRound>
+    <bank-agro:EmptyingCatchLoadingCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">7000</bank-agro:EmptyingCatchLoadingCosts>
+    <bank-agro:AverageNumberMeatTurkeysPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">700</bank-agro:AverageNumberMeatTurkeysPerRound>
+    <bank-agro:AverageNumberMeatDucksPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">800</bank-agro:AverageNumberMeatDucksPerRound>
+    <bank-agro:AverageNumberGuineaFowlsPerRound decimals="0" contextRef="VorigJaarDur" unitRef="PURE">900</bank-agro:AverageNumberGuineaFowlsPerRound>
+  </bank-agro-tuples:LivestockBreedingSpecification>
+  <bank-tuples:LandAndBuildingsSpecification>
+    <bank-cd:RegistryNumberRegisterBoundGood contextRef="DitJaarDur">O4643131</bank-cd:RegistryNumberRegisterBoundGood>
+    <bank:PurchaseValueRegisterBoundGood decimals="0" contextRef="DitJaarInst" unitRef="eur">70000</bank:PurchaseValueRegisterBoundGood>
+    <bank-cd:PurchaseYearRegisterBoundGood contextRef="DitJaarDur">2009</bank-cd:PurchaseYearRegisterBoundGood>
+    <bank-cd:BuildingIndicator contextRef="DitJaarDur">true</bank-cd:BuildingIndicator>
+    <bank:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood decimals="0" contextRef="DitJaarInst" unitRef="eur">75000</bank:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood>
+    <bank-cd:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood contextRef="DitJaarDur">2011-01-01</bank-cd:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood>
+    <bank:BalanceSheetValueRegisterBoundGood decimals="0" contextRef="DitJaarInst" unitRef="eur">10000</bank:BalanceSheetValueRegisterBoundGood>
+    <bank-cd:AmortisationMethodRegisterBoundGood contextRef="DitJaarDur">Methode</bank-cd:AmortisationMethodRegisterBoundGood>
+  </bank-tuples:LandAndBuildingsSpecification>
+  <bank-tuples:LandAndBuildingsSpecification>
+    <bank-cd:RegistryNumberRegisterBoundGood contextRef="VorigJaarDur">O4643131</bank-cd:RegistryNumberRegisterBoundGood>
+    <bank:PurchaseValueRegisterBoundGood decimals="0" contextRef="VorigJaarInst" unitRef="eur">70000</bank:PurchaseValueRegisterBoundGood>
+    <bank-cd:PurchaseYearRegisterBoundGood contextRef="VorigJaarDur">2009</bank-cd:PurchaseYearRegisterBoundGood>
+    <bank-cd:BuildingIndicator contextRef="VorigJaarDur">true</bank-cd:BuildingIndicator>
+    <bank:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood decimals="0" contextRef="VorigJaarInst" unitRef="eur">75000</bank:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood>
+    <bank-cd:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood contextRef="VorigJaarDur">2011-01-01</bank-cd:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood>
+    <bank:BalanceSheetValueRegisterBoundGood decimals="0" contextRef="VorigJaarInst" unitRef="eur">10100</bank:BalanceSheetValueRegisterBoundGood>
+    <bank-cd:AmortisationMethodRegisterBoundGood contextRef="VorigJaarDur">Methode</bank-cd:AmortisationMethodRegisterBoundGood>
+  </bank-tuples:LandAndBuildingsSpecification>
+  <bank-tuples:ReceivablesOtherRelatedPartiesSpecification>
+    <bank-cd:IdentificationNumberReceivables contextRef="DitJaarDur">VOR001</bank-cd:IdentificationNumberReceivables>
+    <bank-cd:NameCounterpartyReceivables contextRef="DitJaarDur">Tegenpartij vordering</bank-cd:NameCounterpartyReceivables>
+    <bank:BalanceSheetValueReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:BalanceSheetValueReceivables>
+    <bank:RedemptionYearlyReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">100</bank:RedemptionYearlyReceivables>
+    <bank-cd:InterestRateReceivablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRateReceivablesIndicator>
+    <bank-cd:InterestRateYearlyReceivablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.02</bank-cd:InterestRateYearlyReceivablesPercentage>
+    <bank-cd:SubordinationReceivablesIndicator contextRef="DitJaarDur">true</bank-cd:SubordinationReceivablesIndicator>
+    <bank-cd:SecurityReceivables contextRef="DitJaarDur">false</bank-cd:SecurityReceivables>
+  </bank-tuples:ReceivablesOtherRelatedPartiesSpecification>
+  <bank-tuples:ReceivablesOtherRelatedPartiesSpecification>
+    <bank-cd:IdentificationNumberReceivables contextRef="VorigJaarDur">VOR001</bank-cd:IdentificationNumberReceivables>
+    <bank-cd:NameCounterpartyReceivables contextRef="VorigJaarDur">Tegenpartij vordering</bank-cd:NameCounterpartyReceivables>
+    <bank:BalanceSheetValueReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</bank:BalanceSheetValueReceivables>
+    <bank:RedemptionYearlyReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">100</bank:RedemptionYearlyReceivables>
+    <bank-cd:InterestRateReceivablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRateReceivablesIndicator>
+    <bank-cd:InterestRateYearlyReceivablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.02</bank-cd:InterestRateYearlyReceivablesPercentage>
+    <bank-cd:SubordinationReceivablesIndicator contextRef="VorigJaarDur">true</bank-cd:SubordinationReceivablesIndicator>
+    <bank-cd:SecurityReceivables contextRef="VorigJaarDur">false</bank-cd:SecurityReceivables>
+  </bank-tuples:ReceivablesOtherRelatedPartiesSpecification>
+  <bank-tuples:ReceivablesOtherSpecification>
+    <bank-cd:IdentificationNumberReceivables contextRef="DitJaarDur">Overig023</bank-cd:IdentificationNumberReceivables>
+    <bank-cd:NameCounterpartyReceivables contextRef="DitJaarDur">Tegenpartij vordering</bank-cd:NameCounterpartyReceivables>
+    <bank:BalanceSheetValueReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</bank:BalanceSheetValueReceivables>
+    <bank:RedemptionYearlyReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">100</bank:RedemptionYearlyReceivables>
+    <bank-cd:InterestRateReceivablesIndicator contextRef="DitJaarDur">true</bank-cd:InterestRateReceivablesIndicator>
+    <bank-cd:InterestRateYearlyReceivablesPercentage decimals="2" contextRef="DitJaarDur" unitRef="PURE">0.02</bank-cd:InterestRateYearlyReceivablesPercentage>
+    <bank-cd:SubordinationReceivablesIndicator contextRef="DitJaarDur">true</bank-cd:SubordinationReceivablesIndicator>
+    <bank-cd:SecurityReceivables contextRef="DitJaarDur">false</bank-cd:SecurityReceivables>
+  </bank-tuples:ReceivablesOtherSpecification>
+  <bank-tuples:ReceivablesOtherSpecification>
+    <bank-cd:IdentificationNumberReceivables contextRef="VorigJaarDur">Overig023</bank-cd:IdentificationNumberReceivables>
+    <bank-cd:NameCounterpartyReceivables contextRef="VorigJaarDur">Tegenpartij vordering</bank-cd:NameCounterpartyReceivables>
+    <bank:BalanceSheetValueReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</bank:BalanceSheetValueReceivables>
+    <bank:RedemptionYearlyReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">100</bank:RedemptionYearlyReceivables>
+    <bank-cd:InterestRateReceivablesIndicator contextRef="VorigJaarDur">true</bank-cd:InterestRateReceivablesIndicator>
+    <bank-cd:InterestRateYearlyReceivablesPercentage decimals="2" contextRef="VorigJaarDur" unitRef="PURE">0.02</bank-cd:InterestRateYearlyReceivablesPercentage>
+    <bank-cd:SubordinationReceivablesIndicator contextRef="VorigJaarDur">true</bank-cd:SubordinationReceivablesIndicator>
+    <bank-cd:SecurityReceivables contextRef="VorigJaarDur">false</bank-cd:SecurityReceivables>
+  </bank-tuples:ReceivablesOtherSpecification>
+  <bank:TradeReceivablesThirtyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">600</bank:TradeReceivablesThirtyDays>
+  <bank:TradeReceivablesThirtyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">200</bank:TradeReceivablesThirtyDays>
+  <bank:TradeReceivablesSixtyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">300</bank:TradeReceivablesSixtyDays>
+  <bank:TradeReceivablesSixtyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">800</bank:TradeReceivablesSixtyDays>
+  <bank:TradeReceivablesNinetyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">400</bank:TradeReceivablesNinetyDays>
+  <bank:TradeReceivablesNinetyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">400</bank:TradeReceivablesNinetyDays>
+  <bank:TradeReceivablesAboveNinetyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">500</bank:TradeReceivablesAboveNinetyDays>
+  <bank:TradeReceivablesAboveNinetyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">600</bank:TradeReceivablesAboveNinetyDays>
+  <bank:TradePayablesThirtyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">200</bank:TradePayablesThirtyDays>
+  <bank:TradePayablesThirtyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">1200</bank:TradePayablesThirtyDays>
+  <bank:TradePayablesSixtyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">1100</bank:TradePayablesSixtyDays>
+  <bank:TradePayablesSixtyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">200</bank:TradePayablesSixtyDays>
+  <bank:TradePayablesNinetyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">300</bank:TradePayablesNinetyDays>
+  <bank:TradePayablesNinetyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">300</bank:TradePayablesNinetyDays>
+  <bank:TradePayablesAboveNinetyDays decimals="0" contextRef="DitJaarInst" unitRef="eur">400</bank:TradePayablesAboveNinetyDays>
+  <bank:TradePayablesAboveNinetyDays decimals="0" contextRef="VorigJaarInst" unitRef="eur">400</bank:TradePayablesAboveNinetyDays>
+  <venj-bw2-i:IntangibleAssetsDisclosure contextRef="DitJaarDur">toelichting iva</venj-bw2-i:IntangibleAssetsDisclosure>
+  <venj-bw2-i:IntangibleAssetsDisclosure contextRef="VorigJaarDur">toelichting iva vj</venj-bw2-i:IntangibleAssetsDisclosure>
+  <rj-i:PropertyPlantEquipmentDisclosure contextRef="DitJaarDur">toelichting mva</rj-i:PropertyPlantEquipmentDisclosure>
+  <rj-i:PropertyPlantEquipmentDisclosure contextRef="VorigJaarDur">toelichting mva vj</rj-i:PropertyPlantEquipmentDisclosure>
+  <rj-i:PurchasePropertyPlantAndEquipment decimals="0" contextRef="DitJaarDur" unitRef="eur">1600</rj-i:PurchasePropertyPlantAndEquipment>
+  <rj-i:PurchasePropertyPlantAndEquipment decimals="0" contextRef="VorigJaarDur" unitRef="eur">2000</rj-i:PurchasePropertyPlantAndEquipment>
+  <bank:ReplacementPurchasePropertyPlantAndEquipment decimals="0" contextRef="DitJaarDur" unitRef="eur">400</bank:ReplacementPurchasePropertyPlantAndEquipment>
+  <bank:ReplacementPurchasePropertyPlantAndEquipment decimals="0" contextRef="VorigJaarDur" unitRef="eur">500</bank:ReplacementPurchasePropertyPlantAndEquipment>
+  <bank:ExpansionPurchasePropertyPlantAndEquipment decimals="0" contextRef="DitJaarDur" unitRef="eur">800</bank:ExpansionPurchasePropertyPlantAndEquipment>
+  <bank:ExpansionPurchasePropertyPlantAndEquipment decimals="0" contextRef="VorigJaarDur" unitRef="eur">1500</bank:ExpansionPurchasePropertyPlantAndEquipment>
+  <venj-bw2-i:FinancialAssetsDisclosure contextRef="DitJaarDur">toelichting fva</venj-bw2-i:FinancialAssetsDisclosure>
+  <venj-bw2-i:FinancialAssetsDisclosure contextRef="VorigJaarDur">0</venj-bw2-i:FinancialAssetsDisclosure>
+  <venj-bw2-i:InventoriesDisclosure contextRef="DitJaarDur">toelichting voorraad	</venj-bw2-i:InventoriesDisclosure>
+  <venj-bw2-i:InventoriesDisclosure contextRef="VorigJaarDur">toelichting voorraad vj</venj-bw2-i:InventoriesDisclosure>
+  <bank:ProvisionUnmarketableInventories decimals="0" contextRef="DitJaarInst" unitRef="eur">1200</bank:ProvisionUnmarketableInventories>
+  <bank:ProvisionUnmarketableInventories decimals="0" contextRef="VorigJaarInst" unitRef="eur">1300</bank:ProvisionUnmarketableInventories>
+  <venj-bw2-i:InventoriesInterestCapitalisedDuringPeriod contextRef="DitJaarDur">toelichting geactiveerde rente</venj-bw2-i:InventoriesInterestCapitalisedDuringPeriod>
+  <venj-bw2-i:InventoriesInterestCapitalisedDuringPeriod contextRef="VorigJaarDur">toelichting geactiveerde rente vj</venj-bw2-i:InventoriesInterestCapitalisedDuringPeriod>
+  <rj-i:ConstructionContractsDisclosure contextRef="DitJaarDur">toelichting onderhanden project abc</rj-i:ConstructionContractsDisclosure>
+  <rj-i:ConstructionContractsDisclosure contextRef="VorigJaarDur">toelichting onderhanden project abc vj</rj-i:ConstructionContractsDisclosure>
+  <venj-bw2-i:ReceivablesDisclosure contextRef="DitJaarDur">toelichting vordering</venj-bw2-i:ReceivablesDisclosure>
+  <venj-bw2-i:ReceivablesDisclosure contextRef="VorigJaarDur">toelichting vordering vj</venj-bw2-i:ReceivablesDisclosure>
+  <bank:TradeReceivablesNominal decimals="0" contextRef="DitJaarInst" unitRef="eur">1800</bank:TradeReceivablesNominal>
+  <bank:TradeReceivablesNominal decimals="0" contextRef="VorigJaarInst" unitRef="eur">2000</bank:TradeReceivablesNominal>
+  <rj-i:TradeReceivablesProvisionBadDebts decimals="0" contextRef="DitJaarInst" unitRef="eur">-300</rj-i:TradeReceivablesProvisionBadDebts>
+  <rj-i:TradeReceivablesProvisionBadDebts decimals="0" contextRef="VorigJaarInst" unitRef="eur">-400</rj-i:TradeReceivablesProvisionBadDebts>
+  <venj-bw2-i:SecuritiesDisclosure contextRef="DitJaarDur">toelichting effecten</venj-bw2-i:SecuritiesDisclosure>
+  <venj-bw2-i:SecuritiesDisclosure contextRef="VorigJaarDur">toelichting effecten vj</venj-bw2-i:SecuritiesDisclosure>
+  <venj-bw2-i:CashAndCashEquivalentsDisclosure contextRef="DitJaarDur">toelichting liq middelen</venj-bw2-i:CashAndCashEquivalentsDisclosure>
+  <venj-bw2-i:CashAndCashEquivalentsDisclosure contextRef="VorigJaarDur">toelichting liq middelen vj</venj-bw2-i:CashAndCashEquivalentsDisclosure>
+  <venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure contextRef="DitJaarDur">Toelichting afwijking	</venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure>
+  <venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure contextRef="VorigJaarDur">Toelichting afwijking vj</venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure>
+  <venj-bw2-i:AverageNumberEmployeesDisclosure contextRef="DitJaarDur">Toelichting werknemers</venj-bw2-i:AverageNumberEmployeesDisclosure>
+  <venj-bw2-i:AverageNumberEmployeesDisclosure contextRef="VorigJaarDur">Toelichting werknemers</venj-bw2-i:AverageNumberEmployeesDisclosure>
+  <venj-bw2-i:AverageNumberEmployees decimals="0" contextRef="DitJaarDur" unitRef="PURE">25</venj-bw2-i:AverageNumberEmployees>
+  <venj-bw2-i:AverageNumberEmployees decimals="0" contextRef="VorigJaarDur" unitRef="PURE">25</venj-bw2-i:AverageNumberEmployees>
+  <venj-bw2-i:AverageNumberEmployeesNetherlands decimals="0" contextRef="DitJaarDur" unitRef="PURE">10</venj-bw2-i:AverageNumberEmployeesNetherlands>
+  <venj-bw2-i:AverageNumberEmployeesNetherlands decimals="0" contextRef="VorigJaarDur" unitRef="PURE">11</venj-bw2-i:AverageNumberEmployeesNetherlands>
+  <venj-bw2-i:AverageNumberEmployeesAbroad decimals="0" contextRef="DitJaarDur" unitRef="PURE">15</venj-bw2-i:AverageNumberEmployeesAbroad>
+  <venj-bw2-i:AverageNumberEmployeesAbroad decimals="0" contextRef="VorigJaarDur" unitRef="PURE">14</venj-bw2-i:AverageNumberEmployeesAbroad>
+  <venj-bw2-i:ProvisionsDisclosure contextRef="DitJaarDur">toelichting voorzieningen</venj-bw2-i:ProvisionsDisclosure>
+  <venj-bw2-i:ProvisionsDisclosure contextRef="VorigJaarDur">toelichting voorzieningen vj</venj-bw2-i:ProvisionsDisclosure>
+  <venj-bw2-i:LiabilitiesNoncurrentDisclosure contextRef="DitJaarDur">toelichting ll schulden</venj-bw2-i:LiabilitiesNoncurrentDisclosure>
+  <venj-bw2-i:LiabilitiesNoncurrentDisclosure contextRef="VorigJaarDur">toelichting ll schulden vj</venj-bw2-i:LiabilitiesNoncurrentDisclosure>
+  <venj-bw2-i:LiabilitiesCurrentDisclosure contextRef="DitJaarDur">toelichting kl schulden</venj-bw2-i:LiabilitiesCurrentDisclosure>
+  <venj-bw2-i:LiabilitiesCurrentDisclosure contextRef="VorigJaarDur">toelichting kl schulden vj</venj-bw2-i:LiabilitiesCurrentDisclosure>
+  <bank:ShortTermPartLongTermPayablesCreditInstitutions decimals="0" contextRef="DitJaarInst" unitRef="eur">400</bank:ShortTermPartLongTermPayablesCreditInstitutions>
+  <bank:ShortTermPartLongTermPayablesCreditInstitutions decimals="0" contextRef="VorigJaarInst" unitRef="eur">450</bank:ShortTermPartLongTermPayablesCreditInstitutions>
+  <bank:CurrentAccountCreditInstitutions decimals="0" contextRef="DitJaarInst" unitRef="eur">600</bank:CurrentAccountCreditInstitutions>
+  <bank:CurrentAccountCreditInstitutions decimals="0" contextRef="VorigJaarInst" unitRef="eur">650</bank:CurrentAccountCreditInstitutions>
+  <bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">500</bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+  <bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">600</bank:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+  <bank:CurrentAccountOtherRelatedParties decimals="0" contextRef="DitJaarInst" unitRef="eur">2500</bank:CurrentAccountOtherRelatedParties>
+  <bank:CurrentAccountOtherRelatedParties decimals="0" contextRef="VorigJaarInst" unitRef="eur">2400</bank:CurrentAccountOtherRelatedParties>
+  <venj-bw2-i:FinancialInstrumentsDisclosure contextRef="DitJaarDur">toelichting fin. instrumenten</venj-bw2-i:FinancialInstrumentsDisclosure>
+  <venj-bw2-i:FinancialInstrumentsDisclosure contextRef="VorigJaarDur">toelichting fin. instrumenten vj</venj-bw2-i:FinancialInstrumentsDisclosure>
+  <venj-bw2-i:ContingentLiabilitiesDisclosure contextRef="DitJaarDur">toelichting niet in de lbalans ....</venj-bw2-i:ContingentLiabilitiesDisclosure>
+  <venj-bw2-i:ContingentLiabilitiesDisclosure contextRef="VorigJaarDur">toelichting niet in de lbalans .... vj</venj-bw2-i:ContingentLiabilitiesDisclosure>
+  <venj-bw2-i:ContingentLiabilitiesLiabilityClaim contextRef="DitJaarDur">aansprakelijkheid</venj-bw2-i:ContingentLiabilitiesLiabilityClaim>
+  <venj-bw2-i:ContingentLiabilitiesLiabilityClaim contextRef="VorigJaarDur">aansprakelijkheid vj</venj-bw2-i:ContingentLiabilitiesLiabilityClaim>
+  <rj-i:ContingentLiabilitiesPurchaseCommitments contextRef="DitJaarDur">investering</rj-i:ContingentLiabilitiesPurchaseCommitments>
+  <rj-i:ContingentLiabilitiesPurchaseCommitments contextRef="VorigJaarDur">investering vj</rj-i:ContingentLiabilitiesPurchaseCommitments>
+  <venj-bw2-i:ContingentLiabilitiesGuarantees contextRef="DitJaarDur">garanties</venj-bw2-i:ContingentLiabilitiesGuarantees>
+  <venj-bw2-i:ContingentLiabilitiesGuarantees contextRef="VorigJaarDur">garanties vj</venj-bw2-i:ContingentLiabilitiesGuarantees>
+  <rj-i:InventoriesPurchaseCommitments contextRef="DitJaarDur">voorraden niet in de balans</rj-i:InventoriesPurchaseCommitments>
+  <rj-i:InventoriesPurchaseCommitments contextRef="VorigJaarDur">voorraden niet in de balans vj</rj-i:InventoriesPurchaseCommitments>
+  <bank:ArrangementsNotCompletedDisclosure contextRef="DitJaarDur">niet afgewikkeld</bank:ArrangementsNotCompletedDisclosure>
+  <bank:ArrangementsNotCompletedDisclosure contextRef="VorigJaarDur">niet afgewikkeld vj</bank:ArrangementsNotCompletedDisclosure>
+  <bank:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure contextRef="DitJaarDur">niet verwerkt</bank:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure>
+  <bank:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure contextRef="VorigJaarDur">niet verwerkt vj</bank:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure>
+  <bank:RentContracts decimals="0" contextRef="DitJaarDur" unitRef="eur">15000</bank:RentContracts>
+  <bank:RentContracts decimals="0" contextRef="VorigJaarDur" unitRef="eur">16000</bank:RentContracts>
+  <bank:RentalObligationDisclosure contextRef="DitJaarDur">toelichting huurcontract</bank:RentalObligationDisclosure>
+  <bank:RentalObligationDisclosure contextRef="VorigJaarDur">toelichting huurcontract vj</bank:RentalObligationDisclosure>
+  <bank:ContractsOperatingLease decimals="0" contextRef="DitJaarDur" unitRef="eur">1500</bank:ContractsOperatingLease>
+  <bank:ContractsOperatingLease decimals="0" contextRef="VorigJaarDur" unitRef="eur">1600</bank:ContractsOperatingLease>
+  <bank-cd:NumberOperatingLeaseContracts decimals="0" contextRef="DitJaarDur" unitRef="PURE">12</bank-cd:NumberOperatingLeaseContracts>
+  <bank-cd:NumberOperatingLeaseContracts decimals="0" contextRef="VorigJaarDur" unitRef="PURE">4</bank-cd:NumberOperatingLeaseContracts>
+  <rj-i:OperatingLeasesCommitmentsDisclosure contextRef="DitJaarDur">toelichting lease</rj-i:OperatingLeasesCommitmentsDisclosure>
+  <rj-i:OperatingLeasesCommitmentsDisclosure contextRef="VorigJaarDur">toelichting lease vj</rj-i:OperatingLeasesCommitmentsDisclosure>
+  <bank:MultiannualFinancialLiabilitiesOtherDisclosure contextRef="DitJaarDur">toelichting overig meerjarig</bank:MultiannualFinancialLiabilitiesOtherDisclosure>
+  <bank:MultiannualFinancialLiabilitiesOtherDisclosure contextRef="VorigJaarDur">toelichting overig meerjarig vj</bank:MultiannualFinancialLiabilitiesOtherDisclosure>
+  <bank:ContingentLiabilitiesOther decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</bank:ContingentLiabilitiesOther>
+  <bank:ContingentLiabilitiesOther decimals="0" contextRef="VorigJaarInst" unitRef="eur">5100</bank:ContingentLiabilitiesOther>
+  <rj-i:ContingentAssetsDisclosure contextRef="DitJaarDur">toelichting niet in de balans opgenomen activa</rj-i:ContingentAssetsDisclosure>
+  <rj-i:ContingentAssetsDisclosure contextRef="VorigJaarDur">toelichting niet in de balans opgenomen activa vj</rj-i:ContingentAssetsDisclosure>
+  <venj-bw2-i:ResearchAndDevelopmentCosts decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</venj-bw2-i:ResearchAndDevelopmentCosts>
+  <venj-bw2-i:ResearchAndDevelopmentCosts decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</venj-bw2-i:ResearchAndDevelopmentCosts>
+  <venj-bw2-i:PatentsTrademarksOtherRights decimals="0" contextRef="DitJaarInst" unitRef="eur">7000</venj-bw2-i:PatentsTrademarksOtherRights>
+  <venj-bw2-i:PatentsTrademarksOtherRights decimals="0" contextRef="VorigJaarInst" unitRef="eur">7100</venj-bw2-i:PatentsTrademarksOtherRights>
+  <venj-bw2-i:Goodwill decimals="0" contextRef="DitJaarInst" unitRef="eur">4000</venj-bw2-i:Goodwill>
+  <venj-bw2-i:Goodwill decimals="0" contextRef="VorigJaarInst" unitRef="eur">4200</venj-bw2-i:Goodwill>
+  <venj-bw2-i:PrepaymentsIntangibleAssets decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</venj-bw2-i:PrepaymentsIntangibleAssets>
+  <venj-bw2-i:PrepaymentsIntangibleAssets decimals="0" contextRef="VorigJaarInst" unitRef="eur">5100</venj-bw2-i:PrepaymentsIntangibleAssets>
+  <bank:IntangibleFixedAssetsOther decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</bank:IntangibleFixedAssetsOther>
+  <bank:IntangibleFixedAssetsOther decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</bank:IntangibleFixedAssetsOther>
+  <venj-bw2-i:IntangibleAssets decimals="0" contextRef="DitJaarInst" unitRef="eur">20000</venj-bw2-i:IntangibleAssets>
+  <venj-bw2-i:IntangibleAssets decimals="0" contextRef="VorigJaarInst" unitRef="eur">20600</venj-bw2-i:IntangibleAssets>
+  <bank:RegisterBoundGoods decimals="0" contextRef="DitJaarInst" unitRef="eur">10000</bank:RegisterBoundGoods>
+  <bank:RegisterBoundGoods decimals="0" contextRef="VorigJaarInst" unitRef="eur">10100</bank:RegisterBoundGoods>
+  <bank:TangibleAssetsOtherShortReports decimals="0" contextRef="DitJaarInst" unitRef="eur">160000</bank:TangibleAssetsOtherShortReports>
+  <bank:TangibleAssetsOtherShortReports decimals="0" contextRef="VorigJaarInst" unitRef="eur">160100</bank:TangibleAssetsOtherShortReports>
+  <venj-bw2-i:PropertyPlantEquipment decimals="0" contextRef="DitJaarInst" unitRef="eur">170000</venj-bw2-i:PropertyPlantEquipment>
+  <venj-bw2-i:PropertyPlantEquipment decimals="0" contextRef="VorigJaarInst" unitRef="eur">170200</venj-bw2-i:PropertyPlantEquipment>
+  <venj-bw2-i:FinancialAssets decimals="0" contextRef="DitJaarInst" unitRef="eur">15000</venj-bw2-i:FinancialAssets>
+  <venj-bw2-i:FinancialAssets decimals="0" contextRef="VorigJaarInst" unitRef="eur">18000</venj-bw2-i:FinancialAssets>
+  <venj-bw2-i:AssetsNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">205000</venj-bw2-i:AssetsNoncurrent>
+  <venj-bw2-i:AssetsNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">208800</venj-bw2-i:AssetsNoncurrent>
+  <venj-bw2-i:InventoryRawMaterialsConsumables decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:InventoryRawMaterialsConsumables>
+  <venj-bw2-i:InventoryRawMaterialsConsumables decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</venj-bw2-i:InventoryRawMaterialsConsumables>
+  <venj-bw2-i:WorkInProgress decimals="0" contextRef="DitJaarInst" unitRef="eur">46000</venj-bw2-i:WorkInProgress>
+  <venj-bw2-i:WorkInProgress decimals="0" contextRef="VorigJaarInst" unitRef="eur">46100</venj-bw2-i:WorkInProgress>
+  <venj-bw2-i:InventoryFinishedTradeGoods decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:InventoryFinishedTradeGoods>
+  <venj-bw2-i:InventoryFinishedTradeGoods decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</venj-bw2-i:InventoryFinishedTradeGoods>
+  <venj-bw2-i:PrepaymentsInventories decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</venj-bw2-i:PrepaymentsInventories>
+  <venj-bw2-i:PrepaymentsInventories decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</venj-bw2-i:PrepaymentsInventories>
+  <venj-bw2-i:Inventories decimals="0" contextRef="DitJaarInst" unitRef="eur">50000</venj-bw2-i:Inventories>
+  <venj-bw2-i:Inventories decimals="0" contextRef="VorigJaarInst" unitRef="eur">50400</venj-bw2-i:Inventories>
+  <rj-i:ConstructionContractsAssets decimals="0" contextRef="DitJaarInst" unitRef="eur">10000</rj-i:ConstructionContractsAssets>
+  <rj-i:ConstructionContractsAssets decimals="0" contextRef="VorigJaarInst" unitRef="eur">10100</rj-i:ConstructionContractsAssets>
+  <venj-bw2-i:TradeReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">1500</venj-bw2-i:TradeReceivables>
+  <venj-bw2-i:TradeReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">1600</venj-bw2-i:TradeReceivables>
+  <rj-i:ReceivablesOtherRelatedPartiesCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</rj-i:ReceivablesOtherRelatedPartiesCurrent>
+  <rj-i:ReceivablesOtherRelatedPartiesCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</rj-i:ReceivablesOtherRelatedPartiesCurrent>
+  <bank:ReceivablesOtherCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">6500</bank:ReceivablesOtherCurrent>
+  <bank:ReceivablesOtherCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">6900</bank:ReceivablesOtherCurrent>
+  <rj-i:TaxReceivables decimals="0" contextRef="DitJaarInst" unitRef="eur">6500</rj-i:TaxReceivables>
+  <rj-i:TaxReceivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">6800</rj-i:TaxReceivables>
+  <venj-bw2-i:AccruedIncome decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</venj-bw2-i:AccruedIncome>
+  <venj-bw2-i:AccruedIncome decimals="0" contextRef="VorigJaarInst" unitRef="eur">5100</venj-bw2-i:AccruedIncome>
+  <venj-bw2-i:Receivables decimals="0" contextRef="DitJaarInst" unitRef="eur">20500</venj-bw2-i:Receivables>
+  <venj-bw2-i:Receivables decimals="0" contextRef="VorigJaarInst" unitRef="eur">21500</venj-bw2-i:Receivables>
+  <venj-bw2-i:Securities decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</venj-bw2-i:Securities>
+  <venj-bw2-i:Securities decimals="0" contextRef="VorigJaarInst" unitRef="eur">5000</venj-bw2-i:Securities>
+  <bank:BankCredits decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</bank:BankCredits>
+  <bank:BankCredits decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</bank:BankCredits>
+  <bank:BalanceGBankAccounts decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</bank:BalanceGBankAccounts>
+  <bank:BalanceGBankAccounts decimals="0" contextRef="VorigJaarInst" unitRef="eur">3100</bank:BalanceGBankAccounts>
+  <bank:LiquidAssetsOther decimals="0" contextRef="DitJaarInst" unitRef="eur">1500</bank:LiquidAssetsOther>
+  <bank:LiquidAssetsOther decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</bank:LiquidAssetsOther>
+  <venj-bw2-i:CashAndCashEquivalents decimals="0" contextRef="DitJaarInst" unitRef="eur">5500</venj-bw2-i:CashAndCashEquivalents>
+  <venj-bw2-i:CashAndCashEquivalents decimals="0" contextRef="VorigJaarInst" unitRef="eur">6300</venj-bw2-i:CashAndCashEquivalents>
+  <venj-bw2-i:AssetsCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">91000</venj-bw2-i:AssetsCurrent>
+  <venj-bw2-i:AssetsCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">93300</venj-bw2-i:AssetsCurrent>
+  <venj-bw2-i:Assets decimals="0" contextRef="DitJaarInst" unitRef="eur">296000</venj-bw2-i:Assets>
+  <venj-bw2-i:Assets decimals="0" contextRef="VorigJaarInst" unitRef="eur">302100</venj-bw2-i:Assets>
+  <bank-cd:IntermediaryReportType contextRef="DitJaarDur">Overig</bank-cd:IntermediaryReportType>
+  <bank-cd:IntermediaryReportType contextRef="VorigJaarDur">Samenstel</bank-cd:IntermediaryReportType>
+  <bank-cd:IntermediaryReport contextRef="DitJaarDur">toelichting intermediair</bank-cd:IntermediaryReport>
+  <bank-cd:IntermediaryReport contextRef="VorigJaarDur">toelichting intermediair vj</bank-cd:IntermediaryReport>
+  <venj-bw2-i:EquityDisclosure contextRef="DitJaarDur">toelichting EV</venj-bw2-i:EquityDisclosure>
+  <venj-bw2-i:EquityDisclosure contextRef="VorigJaarDur">toelichting EV vj</venj-bw2-i:EquityDisclosure>
+  <bank:PrivateIntakesNaturalPersons decimals="0" contextRef="DitJaarDur" unitRef="eur">95300</bank:PrivateIntakesNaturalPersons>
+  <bank:PrivateIntakesNaturalPersons decimals="0" contextRef="VorigJaarDur" unitRef="eur">5100</bank:PrivateIntakesNaturalPersons>
+  <bank:PrivateDepositesNaturalPersons decimals="0" contextRef="DitJaarDur" unitRef="eur">4000</bank:PrivateDepositesNaturalPersons>
+  <bank:PrivateDepositesNaturalPersons decimals="0" contextRef="VorigJaarDur" unitRef="eur">4100</bank:PrivateDepositesNaturalPersons>
+  <venj-bw2-i:Equity decimals="0" contextRef="DitJaarInst" unitRef="eur">147000</venj-bw2-i:Equity>
+  <venj-bw2-i:Equity decimals="0" contextRef="VorigJaarInst" unitRef="eur">149300</venj-bw2-i:Equity>
+  <venj-bw2-i:OperatingIncomeDisclosure contextRef="DitJaarDur">toelichting bedrijfsopbrengsten</venj-bw2-i:OperatingIncomeDisclosure>
+  <venj-bw2-i:OperatingIncomeDisclosure contextRef="VorigJaarDur">toelichting bedrijfsopbrengsten vj</venj-bw2-i:OperatingIncomeDisclosure>
+  <bank:RevenuesConstructionContracts decimals="0" contextRef="DitJaarDur" unitRef="eur">200</bank:RevenuesConstructionContracts>
+  <bank:RevenuesConstructionContracts decimals="0" contextRef="VorigJaarDur" unitRef="eur">200</bank:RevenuesConstructionContracts>
+  <bank:RentalRevenues decimals="0" contextRef="DitJaarDur" unitRef="eur">500</bank:RentalRevenues>
+  <bank:RentalRevenues decimals="0" contextRef="VorigJaarDur" unitRef="eur">500</bank:RentalRevenues>
+  <bank:RemainingOperatingIncome decimals="0" contextRef="DitJaarDur" unitRef="eur">300</bank:RemainingOperatingIncome>
+  <bank:RemainingOperatingIncome decimals="0" contextRef="VorigJaarDur" unitRef="eur">300</bank:RemainingOperatingIncome>
+  <venj-bw2-i:OperatingExpensesDisclosure contextRef="DitJaarDur">Toelichting bedrijfslasten</venj-bw2-i:OperatingExpensesDisclosure>
+  <venj-bw2-i:OperatingExpensesDisclosure contextRef="VorigJaarDur">Toelichting bedrijfslasten vj</venj-bw2-i:OperatingExpensesDisclosure>
+  <venj-bw2-i:WagesSalaries decimals="0" contextRef="DitJaarDur" unitRef="eur">400</venj-bw2-i:WagesSalaries>
+  <venj-bw2-i:WagesSalaries decimals="0" contextRef="VorigJaarDur" unitRef="eur">500</venj-bw2-i:WagesSalaries>
+  <venj-bw2-i:SocialSecurityContributions decimals="0" contextRef="DitJaarDur" unitRef="eur">100</venj-bw2-i:SocialSecurityContributions>
+  <venj-bw2-i:SocialSecurityContributions decimals="0" contextRef="VorigJaarDur" unitRef="eur">200</venj-bw2-i:SocialSecurityContributions>
+  <venj-bw2-i:PensionCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">200</venj-bw2-i:PensionCosts>
+  <venj-bw2-i:PensionCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">300</venj-bw2-i:PensionCosts>
+  <bank:EmployeeBenefitsExpensesOther decimals="0" contextRef="DitJaarDur" unitRef="eur">300</bank:EmployeeBenefitsExpensesOther>
+  <bank:EmployeeBenefitsExpensesOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:EmployeeBenefitsExpensesOther>
+  <venj-bw2-i:AmortisationIntangibleAssets decimals="0" contextRef="DitJaarDur" unitRef="eur">150</venj-bw2-i:AmortisationIntangibleAssets>
+  <venj-bw2-i:AmortisationIntangibleAssets decimals="0" contextRef="VorigJaarDur" unitRef="eur">200</venj-bw2-i:AmortisationIntangibleAssets>
+  <venj-bw2-i:DepreciationTangibleAssets decimals="0" contextRef="DitJaarDur" unitRef="eur">250</venj-bw2-i:DepreciationTangibleAssets>
+  <venj-bw2-i:DepreciationTangibleAssets decimals="0" contextRef="VorigJaarDur" unitRef="eur">300</venj-bw2-i:DepreciationTangibleAssets>
+  <bank:ExpensesResearchAndDevelopment decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:ExpensesResearchAndDevelopment>
+  <bank:ExpensesResearchAndDevelopment decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:ExpensesResearchAndDevelopment>
+  <bank:OperationalExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:OperationalExpenses>
+  <bank:OperationalExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:OperationalExpenses>
+  <bank:CarAndTransportCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:CarAndTransportCosts>
+  <bank:CarAndTransportCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:CarAndTransportCosts>
+  <bank:OperationalLeaseCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:OperationalLeaseCosts>
+  <bank:OperationalLeaseCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:OperationalLeaseCosts>
+  <bank:AdministrationCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:AdministrationCosts>
+  <bank:AdministrationCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:AdministrationCosts>
+  <bank:RentalCosts decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:RentalCosts>
+  <bank:RentalCosts decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:RentalCosts>
+  <bank:AccommodationCostsOther decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:AccommodationCostsOther>
+  <bank:AccommodationCostsOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:AccommodationCostsOther>
+  <bank:SalesRelatedExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:SalesRelatedExpenses>
+  <bank:SalesRelatedExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:SalesRelatedExpenses>
+  <bank:FranchiseFee decimals="0" contextRef="DitJaarDur" unitRef="eur">100</bank:FranchiseFee>
+  <bank:FranchiseFee decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:FranchiseFee>
+  <bank:ManagementFee decimals="0" contextRef="DitJaarDur" unitRef="eur">50</bank:ManagementFee>
+  <bank:ManagementFee decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:ManagementFee>
+  <bank:CostOther decimals="0" contextRef="DitJaarDur" unitRef="eur">50</bank:CostOther>
+  <bank:CostOther decimals="0" contextRef="VorigJaarDur" unitRef="eur">100</bank:CostOther>
+  <bank:ResultOrdinaryActivitiesDisclosure contextRef="DitJaarDur">toelichting bedrijfsuitoefening</bank:ResultOrdinaryActivitiesDisclosure>
+  <bank:ResultOrdinaryActivitiesDisclosure contextRef="VorigJaarDur">toelichting bedrijfsuitoefening vj</bank:ResultOrdinaryActivitiesDisclosure>
+  <venj-bw2-i:InterestIncomeRelatedIncomeDisclosure contextRef="DitJaarDur">toelichting rentebaten</venj-bw2-i:InterestIncomeRelatedIncomeDisclosure>
+  <venj-bw2-i:InterestIncomeRelatedIncomeDisclosure contextRef="VorigJaarDur">toelichting rentebaten vj</venj-bw2-i:InterestIncomeRelatedIncomeDisclosure>
+  <venj-bw2-i:InterestExpensesRelatedExpensesDisclosure contextRef="DitJaarDur">toelichting rentebaten</venj-bw2-i:InterestExpensesRelatedExpensesDisclosure>
+  <venj-bw2-i:InterestExpensesRelatedExpensesDisclosure contextRef="VorigJaarDur">toelichting rentebaten vj</venj-bw2-i:InterestExpensesRelatedExpensesDisclosure>
+  <bank:TotalResultDisclosure contextRef="DitJaarDur">toelichting totaal resultaat</bank:TotalResultDisclosure>
+  <bank:TotalResultDisclosure contextRef="VorigJaarDur">toelichting totaal resultaat vj</bank:TotalResultDisclosure>
+  <venj-bw2-i:OperatingResult decimals="0" contextRef="DitJaarDur" unitRef="eur">34000</venj-bw2-i:OperatingResult>
+  <venj-bw2-i:OperatingResult decimals="0" contextRef="VorigJaarDur" unitRef="eur">35200</venj-bw2-i:OperatingResult>
+  <venj-bw2-i:IncomeReceivablesNoncurrentSecurities decimals="0" contextRef="DitJaarDur" unitRef="eur">8000</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+  <venj-bw2-i:IncomeReceivablesNoncurrentSecurities decimals="0" contextRef="VorigJaarDur" unitRef="eur">8100</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+  <bank:InvestmentPropertyRevaluations decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</bank:InvestmentPropertyRevaluations>
+  <bank:InvestmentPropertyRevaluations decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</bank:InvestmentPropertyRevaluations>
+  <venj-bw2-i:RevaluationReserveRelease decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</venj-bw2-i:RevaluationReserveRelease>
+  <venj-bw2-i:RevaluationReserveRelease decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</venj-bw2-i:RevaluationReserveRelease>
+  <bank:GovernmentGrants decimals="0" contextRef="DitJaarDur" unitRef="eur">500</bank:GovernmentGrants>
+  <bank:GovernmentGrants decimals="0" contextRef="VorigJaarDur" unitRef="eur">600</bank:GovernmentGrants>
+  <venj-bw2-i:InterestIncomeRelatedIncome decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</venj-bw2-i:InterestIncomeRelatedIncome>
+  <venj-bw2-i:InterestIncomeRelatedIncome decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</venj-bw2-i:InterestIncomeRelatedIncome>
+  <venj-bw2-i:ChangesValueReceivablesNoncurrentSecurities decimals="0" contextRef="DitJaarDur" unitRef="eur">500</venj-bw2-i:ChangesValueReceivablesNoncurrentSecurities>
+  <venj-bw2-i:ChangesValueReceivablesNoncurrentSecurities decimals="0" contextRef="VorigJaarDur" unitRef="eur">600</venj-bw2-i:ChangesValueReceivablesNoncurrentSecurities>
+  <venj-bw2-i:InterestExpensesRelatedExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">8000</venj-bw2-i:InterestExpensesRelatedExpenses>
+  <venj-bw2-i:InterestExpensesRelatedExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">8100</venj-bw2-i:InterestExpensesRelatedExpenses>
+  <bank:ForeignCurrencyExchangeDifferences decimals="0" contextRef="DitJaarDur" unitRef="eur">1000</bank:ForeignCurrencyExchangeDifferences>
+  <bank:ForeignCurrencyExchangeDifferences decimals="0" contextRef="VorigJaarDur" unitRef="eur">1100</bank:ForeignCurrencyExchangeDifferences>
+  <venj-bw2-i:ShareInResultsParticipatingInterests decimals="0" contextRef="DitJaarDur" unitRef="eur">5000</venj-bw2-i:ShareInResultsParticipatingInterests>
+  <venj-bw2-i:ShareInResultsParticipatingInterests decimals="0" contextRef="VorigJaarDur" unitRef="eur">5000</venj-bw2-i:ShareInResultsParticipatingInterests>
+  <bank:ResultOrdinaryActivities decimals="0" contextRef="DitJaarDur" unitRef="eur">39000</bank:ResultOrdinaryActivities>
+  <bank:ResultOrdinaryActivities decimals="0" contextRef="VorigJaarDur" unitRef="eur">40200</bank:ResultOrdinaryActivities>
+  <venj-bw2-i:ExtraordinaryIncome decimals="0" contextRef="DitJaarDur" unitRef="eur">60000</venj-bw2-i:ExtraordinaryIncome>
+  <venj-bw2-i:ExtraordinaryIncome decimals="0" contextRef="VorigJaarDur" unitRef="eur">60100</venj-bw2-i:ExtraordinaryIncome>
+  <venj-bw2-i:ExtraordinaryExpenses decimals="0" contextRef="DitJaarDur" unitRef="eur">10000</venj-bw2-i:ExtraordinaryExpenses>
+  <venj-bw2-i:ExtraordinaryExpenses decimals="0" contextRef="VorigJaarDur" unitRef="eur">10100</venj-bw2-i:ExtraordinaryExpenses>
+  <bank:ResultExtraordinaryItems decimals="0" contextRef="DitJaarDur" unitRef="eur">50000</bank:ResultExtraordinaryItems>
+  <bank:ResultExtraordinaryItems decimals="0" contextRef="VorigJaarDur" unitRef="eur">50000</bank:ResultExtraordinaryItems>
+  <bank:TotalResult decimals="0" contextRef="DitJaarDur" unitRef="eur">89000</bank:TotalResult>
+  <bank:TotalResult decimals="0" contextRef="VorigJaarDur" unitRef="eur">90200</bank:TotalResult>
+  <venj-bw2-i:ProvisionPensionObligations decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:ProvisionPensionObligations>
+  <venj-bw2-i:ProvisionPensionObligations decimals="0" contextRef="VorigJaarInst" unitRef="eur">1400</venj-bw2-i:ProvisionPensionObligations>
+  <venj-bw2-i:ProvisionTaxLiabilities decimals="0" contextRef="DitJaarInst" unitRef="eur">4000</venj-bw2-i:ProvisionTaxLiabilities>
+  <venj-bw2-i:ProvisionTaxLiabilities decimals="0" contextRef="VorigJaarInst" unitRef="eur">5000</venj-bw2-i:ProvisionTaxLiabilities>
+  <venj-bw2-i:ProvisionsOther decimals="0" contextRef="DitJaarInst" unitRef="eur">57500</venj-bw2-i:ProvisionsOther>
+  <venj-bw2-i:ProvisionsOther decimals="0" contextRef="VorigJaarInst" unitRef="eur">57300</venj-bw2-i:ProvisionsOther>
+  <venj-bw2-i:Provisions decimals="0" contextRef="DitJaarInst" unitRef="eur">62500</venj-bw2-i:Provisions>
+  <venj-bw2-i:Provisions decimals="0" contextRef="VorigJaarInst" unitRef="eur">63700</venj-bw2-i:Provisions>
+  <venj-bw2-i:SubordinatedLoansNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">500</venj-bw2-i:SubordinatedLoansNoncurrent>
+  <venj-bw2-i:SubordinatedLoansNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">600</venj-bw2-i:SubordinatedLoansNoncurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+  <rj-i:PayablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">500</rj-i:PayablesOtherRelatedPartiesNoncurrent>
+  <rj-i:PayablesOtherRelatedPartiesNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">600</rj-i:PayablesOtherRelatedPartiesNoncurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+  <bank:PayablesOtherNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">9000</bank:PayablesOtherNoncurrent>
+  <bank:PayablesOtherNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">9500</bank:PayablesOtherNoncurrent>
+  <venj-bw2-i:LiabilitiesNoncurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">13000</venj-bw2-i:LiabilitiesNoncurrent>
+  <venj-bw2-i:LiabilitiesNoncurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">13900</venj-bw2-i:LiabilitiesNoncurrent>
+  <venj-bw2-i:SubordinatedLoansCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">1500</venj-bw2-i:SubordinatedLoansCurrent>
+  <venj-bw2-i:SubordinatedLoansCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">1600</venj-bw2-i:SubordinatedLoansCurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+  <venj-bw2-i:PayablesCreditInstitutionsCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+  <venj-bw2-i:TradePayablesCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">2000</venj-bw2-i:TradePayablesCurrent>
+  <venj-bw2-i:TradePayablesCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">2100</venj-bw2-i:TradePayablesCurrent>
+  <rj-i:PayablesOtherRelatedPartiesCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">3000</rj-i:PayablesOtherRelatedPartiesCurrent>
+  <rj-i:PayablesOtherRelatedPartiesCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">3000</rj-i:PayablesOtherRelatedPartiesCurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">1000</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+  <venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">1100</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+  <bank:ReceivedAdvancePaymentsWorkInProgress decimals="0" contextRef="DitJaarInst" unitRef="eur">20000</bank:ReceivedAdvancePaymentsWorkInProgress>
+  <bank:ReceivedAdvancePaymentsWorkInProgress decimals="0" contextRef="VorigJaarInst" unitRef="eur">21200</bank:ReceivedAdvancePaymentsWorkInProgress>
+  <bank:PayablesOtherCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">40000</bank:PayablesOtherCurrent>
+  <bank:PayablesOtherCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">40000</bank:PayablesOtherCurrent>
+  <venj-bw2-i:AccrualsCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">5000</venj-bw2-i:AccrualsCurrent>
+  <venj-bw2-i:AccrualsCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">5100</venj-bw2-i:AccrualsCurrent>
+  <venj-bw2-i:LiabilitiesCurrent decimals="0" contextRef="DitJaarInst" unitRef="eur">73500</venj-bw2-i:LiabilitiesCurrent>
+  <venj-bw2-i:LiabilitiesCurrent decimals="0" contextRef="VorigJaarInst" unitRef="eur">75200</venj-bw2-i:LiabilitiesCurrent>
+  <venj-bw2-i:EquityAndLiabilities decimals="0" contextRef="DitJaarInst" unitRef="eur">296000</venj-bw2-i:EquityAndLiabilities>
+  <venj-bw2-i:EquityAndLiabilities decimals="0" contextRef="VorigJaarInst" unitRef="eur">302100</venj-bw2-i:EquityAndLiabilities>
+  <nl-cd:EndDateForFinancialPeriod contextRef="DitJaarDurBIB">2014-12-31</nl-cd:EndDateForFinancialPeriod>
+  <nl-cd:EmailAddressFull contextRef="DitJaarDurBIB">bert.van.dam@dam.nl</nl-cd:EmailAddressFull>
+  <bank-cd:NameIntermediary contextRef="DitJaarDurBIB">Henk de Boekhouder</bank-cd:NameIntermediary>
+  <bank-cd:DomicileIntermediary contextRef="DitJaarDurBIB">Capelle</bank-cd:DomicileIntermediary>
+  <bank-cd:EmailAddressIntermediary contextRef="DitJaarDurBIB">piet.accountant@boekhouder.nl</bank-cd:EmailAddressIntermediary>
+  <bank-cd:RegistrationChamberOfCommerce contextRef="DitJaarDurBIB">12345678</bank-cd:RegistrationChamberOfCommerce>
+  <nl-cd:NameBusiness contextRef="DitJaarDurBIB">Bakkerij van Dam</nl-cd:NameBusiness>
+  <bank-cd:AgriculturalActivities contextRef="DitJaarDurBIB">true</bank-cd:AgriculturalActivities>
+  <nl-cd:TelephoneNumber contextRef="DitJaarDurBIB">0698765432</nl-cd:TelephoneNumber>
+  <bank-cd:NameCompiler contextRef="DitJaarDurBIB">Piet de Accountant</bank-cd:NameCompiler>
+  <bank-cd:NumberLocations decimals="0" contextRef="DitJaarDur" unitRef="PURE">2</bank-cd:NumberLocations>
+  <bank-cd:NumberLocations decimals="0" contextRef="VorigJaarDur" unitRef="PURE">2</bank-cd:NumberLocations>
+  <kvk-i:SbiBusinessCode contextRef="DitJaarDur">0113</kvk-i:SbiBusinessCode>
+  <kvk-i:SbiBusinessCode contextRef="VorigJaarDur">0113</kvk-i:SbiBusinessCode>
+  <bank-ihz-tuples:PartyFilingTaxReturnTitle>
+    <bd-alg:Initials contextRef="DitJaarDurBIB">B.</bd-alg:Initials>
+    <bd-alg:Prefix contextRef="DitJaarDurBIB">van</bd-alg:Prefix>
+    <bd-alg:Surname contextRef="DitJaarDurBIB">Dam</bd-alg:Surname>
+    <nl-cd:DateOfBirth contextRef="DitJaarDurBIB">1978-01-01</nl-cd:DateOfBirth>
+  </bank-ihz-tuples:PartyFilingTaxReturnTitle>
+  <bank-tuples:LocationActualActivitiesAddressNLSpecification>
+    <nl-cd:DescriptionLocationNL contextRef="DitJaarDurBIB">Kantoor </nl-cd:DescriptionLocationNL>
+    <nl-cd:StreetNameNL contextRef="DitJaarDurBIB">Dorpsstraat</nl-cd:StreetNameNL>
+    <nl-cd:HouseNumberNL contextRef="DitJaarDurBIB">135</nl-cd:HouseNumberNL>
+    <nl-cd:HouseNumberAddition contextRef="DitJaarDurBIB">a</nl-cd:HouseNumberAddition>
+    <nl-cd:POBoxNumber contextRef="DitJaarDurBIB">5000</nl-cd:POBoxNumber>
+    <nl-cd:PostalCodeNL contextRef="DitJaarDurBIB">2582HH</nl-cd:PostalCodeNL>
+    <nl-cd:PlaceOfResidenceNL contextRef="DitJaarDurBIB">Den Haag</nl-cd:PlaceOfResidenceNL>
+    <nl-cd:NameRegion contextRef="DitJaarDurBIB">Zuid-Holland</nl-cd:NameRegion>
+    <nl-cd:CountryName contextRef="DitJaarDurBIB">Nederland</nl-cd:CountryName>
+  </bank-tuples:LocationActualActivitiesAddressNLSpecification>
+  <nl-cd:StartDateForFinancialPeriod contextRef="DitJaarDurBIB">2014-01-01</nl-cd:StartDateForFinancialPeriod>
+  <bank-cd:QualificationIntermediary contextRef="DitJaarDurBIB">RA</bank-cd:QualificationIntermediary>
+  <bank-cd:HTCovenantIntermediary contextRef="DitJaarDurBIB">false</bank-cd:HTCovenantIntermediary>
+  <bank-cd:TelephoneNumberIntermediary contextRef="DitJaarDurBIB">012 789456</bank-cd:TelephoneNumberIntermediary>
+  <bank-ihz-tuples:FiscalPartnerDataSpecification>
+    <bd-alg:Prefix contextRef="DitJaarDurBIB">van</bd-alg:Prefix>
+    <bd-alg:Initials contextRef="DitJaarDurBIB">M.</bd-alg:Initials>
+    <bd-alg:Surname contextRef="DitJaarDurBIB">van Dam</bd-alg:Surname>
+    <nl-cd:DateOfBirth contextRef="DitJaarDurBIB">1971-05-19</nl-cd:DateOfBirth>
+  </bank-ihz-tuples:FiscalPartnerDataSpecification>
+  <bd-burg:LivingTogetherSpousesExists contextRef="DitJaarDurBIB">false</bd-burg:LivingTogetherSpousesExists>
+  <bd-burg:MarriedEntireTaxYear contextRef="DitJaarDurBIB">true</bd-burg:MarriedEntireTaxYear>
+  <bd-burg-tuple:PresentWorkSpecification>
+    <bd-burg:PresentWorkEmployerOrBenefitsAgencyName contextRef="DitJaarDurBIB">van Dam Bakkerij</bd-burg:PresentWorkEmployerOrBenefitsAgencyName>
+    <bd-burg:PresentWorkWages decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">39650</bd-burg:PresentWorkWages>
+  </bd-burg-tuple:PresentWorkSpecification>
+  <bank:PreviousWorkIncomeAmountNetherlands decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">45000</bank:PreviousWorkIncomeAmountNetherlands>
+  <bd-burg-tuple:IncomePresentWorkAbroadWithoutDutchWageTaxSpecification>
+    <bd-burg:IncomePresentWorkAbroadWithoutDutchWageTaxAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">14000</bd-burg:IncomePresentWorkAbroadWithoutDutchWageTaxAmount>
+  </bd-burg-tuple:IncomePresentWorkAbroadWithoutDutchWageTaxSpecification>
+  <bd-burg-tuple:IncomePreviousWorkAbroadWithoutDutchWageTaxSpecification>
+    <bd-burg:IncomePreviousWorkAbroadWithoutDutchWageTaxAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">15000</bd-burg:IncomePreviousWorkAbroadWithoutDutchWageTaxAmount>
+  </bd-burg-tuple:IncomePreviousWorkAbroadWithoutDutchWageTaxSpecification>
+  <bd-burg:TravelAllowanceReceivedTotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">400</bd-burg:TravelAllowanceReceivedTotalAmount>
+  <bd-burg:ActivitiesWorkResultsGrossTotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">500</bd-burg:ActivitiesWorkResultsGrossTotalAmount>
+  <bank:FictitiousActivities decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">700</bank:FictitiousActivities>
+  <bd-burg:ImmovablePropertyInConnectionWithResultsFromActivitiesTotal decimals="0" contextRef="DitJaarInstBIB" unitRef="eur">800</bd-burg:ImmovablePropertyInConnectionWithResultsFromActivitiesTotal>
+  <bd-burg:AssetsOtherInConnectionWithResultFromActivitiesTotal decimals="0" contextRef="DitJaarInstBIB" unitRef="eur">900</bd-burg:AssetsOtherInConnectionWithResultFromActivitiesTotal>
+  <bd-burg:DebtsInConnectionWithResultsFromActivitiesTotal decimals="0" contextRef="DitJaarInstBIB" unitRef="eur">1000</bd-burg:DebtsInConnectionWithResultsFromActivitiesTotal>
+  <bd-burg:OwnHouseAcquisitionDebtTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1100</bd-burg:OwnHouseAcquisitionDebtTotal>
+  <bd-burg:OwnHousePrincipalResidenceRentalValueTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1200</bd-burg:OwnHousePrincipalResidenceRentalValueTotal>
+  <bd-burg:OwnHouseTaxableBenefitCapitalInsuranceSavingsAccountParticipatingInterestAccount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1300</bd-burg:OwnHouseTaxableBenefitCapitalInsuranceSavingsAccountParticipatingInterestAccount>
+  <bd-burg:OwnHouseTemporaryLetIncomeTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1400</bd-burg:OwnHouseTemporaryLetIncomeTotal>
+  <bd-burg:OwnHouseInterestLoan decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1500</bd-burg:OwnHouseInterestLoan>
+  <bd-burg:OwnHouseCostLoan decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1600</bd-burg:OwnHouseCostLoan>
+  <bd-burg:OwnHouseGroundLeaseBuildingPeriodicPayments decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1700</bd-burg:OwnHouseGroundLeaseBuildingPeriodicPayments>
+  <bd-burg:OwnHouseDisposedRestDebtInterest decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1800</bd-burg:OwnHouseDisposedRestDebtInterest>
+  <bd-burg:OwnHouseSellingPriceWithoutCosts decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">1900</bd-burg:OwnHouseSellingPriceWithoutCosts>
+  <bd-burg:OwnHouseDebtSoldOwnHouse decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2000</bd-burg:OwnHouseDebtSoldOwnHouse>
+  <bd-burg:OwnHousePurchasePriceIncludingCosts decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2100</bd-burg:OwnHousePurchasePriceIncludingCosts>
+  <bd-burg:OwnHouseRenovationMaintenanceCosts decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2200</bd-burg:OwnHouseRenovationMaintenanceCosts>
+  <bd-burg:OwnHouseExemptionAmountCapitalInsuranceSavingsAccountParticipatingInterestAccount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2300</bd-burg:OwnHouseExemptionAmountCapitalInsuranceSavingsAccountParticipatingInterestAccount>
+  <bd-burg:AlimonyDeductibleCostsTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2400</bd-burg:AlimonyDeductibleCostsTotal>
+  <bd-burg:AlimonyReceivedTotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2500</bd-burg:AlimonyReceivedTotalAmount>
+  <bd-burg:PeriodicPaymentsDeductibleCostsTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2600</bd-burg:PeriodicPaymentsDeductibleCostsTotal>
+  <bd-burg:OwnHousePeriodicContributionsTotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2700</bd-burg:OwnHousePeriodicContributionsTotalAmount>
+  <bd-burg:PeriodicPaymentsOtherTotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2800</bd-burg:PeriodicPaymentsOtherTotalAmount>
+  <bd-burg:IncomeOtherTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">2900</bd-burg:IncomeOtherTotal>
+  <bd-burg:PremiumsConsideredNextYearAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3000</bd-burg:PremiumsConsideredNextYearAmount>
+  <bd-burg:PremiumsAnnuitiesUponUseOfAnnualMarginTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3100</bd-burg:PremiumsAnnuitiesUponUseOfAnnualMarginTotal>
+  <bd-burg:PremiumsAnnuitiesUponUseOfReserveMarginTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3200</bd-burg:PremiumsAnnuitiesUponUseOfReserveMarginTotal>
+  <bd-burg:PremiumsSettlementOldAgeReserveDiscontinuationProfitTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3300</bd-burg:PremiumsSettlementOldAgeReserveDiscontinuationProfitTotal>
+  <bd-burg:PremiumsAnnuitiesForDisabledChildrenTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3400</bd-burg:PremiumsAnnuitiesForDisabledChildrenTotal>
+  <bd-burg:PremiumsPrivateInsurancePoliciesTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3500</bd-burg:PremiumsPrivateInsurancePoliciesTotal>
+  <bd-burg:PersonDependentDeductionNegativeTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">3600</bd-burg:PersonDependentDeductionNegativeTotal>
+  <bd-burg-tuple:SharesSubstantialInterestSpecification>
+    <bd-burg:SharesSubstantialInterestAndSuchDescription contextRef="DitJaarDurBIB">Omschrijving aandelen</bd-burg:SharesSubstantialInterestAndSuchDescription>
+    <bd-burg:SharesSubstantialInterestCount contextRef="DitJaarDurBIB">49</bd-burg:SharesSubstantialInterestCount>
+  </bd-burg-tuple:SharesSubstantialInterestSpecification>
+  <bd-burg-tuple:PreservedIncomeFromSubstantialInterestSpecification>
+    <bd-burg:PreservedIncomeFromSubstantialInterestAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">90</bd-burg:PreservedIncomeFromSubstantialInterestAmount>
+    <bd-burg:PreservedIncomeFromSubstantialInterestDescription contextRef="DitJaarDurBIB">Te conserveren belang1</bd-burg:PreservedIncomeFromSubstantialInterestDescription>
+  </bd-burg-tuple:PreservedIncomeFromSubstantialInterestSpecification>
+  <bd-burg-tuple:PreservedIncomeFromSubstantialInterestSpecification>
+    <bd-burg:PreservedIncomeFromSubstantialInterestAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">200</bd-burg:PreservedIncomeFromSubstantialInterestAmount>
+    <bd-burg:PreservedIncomeFromSubstantialInterestDescription contextRef="DitJaarDurBIB">Te conserveren belang 2</bd-burg:PreservedIncomeFromSubstantialInterestDescription>
+  </bd-burg-tuple:PreservedIncomeFromSubstantialInterestSpecification>
+  <bd-burg:SubstantialInterestRegularBenefitsGrossTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">240</bd-burg:SubstantialInterestRegularBenefitsGrossTotal>
+  <bd-burg:SubstantialInterestRegularBenefitsDeductibleCostsTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">250</bd-burg:SubstantialInterestRegularBenefitsDeductibleCostsTotal>
+  <bd-burg:SubstantialInterestTransferPriceTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">260</bd-burg:SubstantialInterestTransferPriceTotal>
+  <bd-burg:SubstantialInterestAcquisitionPrice decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">270</bd-burg:SubstantialInterestAcquisitionPrice>
+  <bd-burg:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">280</bd-burg:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-burg:PreservedIncomeFromSubstantialInterestTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">290</bd-burg:PreservedIncomeFromSubstantialInterestTotal>
+  <bd-burg:AssetBankAccountSavingsCertificatesEtcBalance decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">300</bd-burg:AssetBankAccountSavingsCertificatesEtcBalance>
+  <bd-burg:StockTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">310</bd-burg:StockTotal>
+  <bd-burg:ValueCashAndReceivablesTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">320</bd-burg:ValueCashAndReceivablesTotal>
+  <bd-burg:SecondHouseTotalValue decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">330</bd-burg:SecondHouseTotalValue>
+  <bd-burg:ImmovablePropertyOtherTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">340</bd-burg:ImmovablePropertyOtherTotal>
+  <bd-burg:CapitalInsuranceNonExemptedPartTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">350</bd-burg:CapitalInsuranceNonExemptedPartTotal>
+  <bd-burg:PeriodicPaymentsRightsValue decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">360</bd-burg:PeriodicPaymentsRightsValue>
+  <bd-burg:AssetsOtherTotalValue decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">370</bd-burg:AssetsOtherTotalValue>
+  <bd-burg:DebtsBox3ThresholdAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">380</bd-burg:DebtsBox3ThresholdAmount>
+  <bd-burg:DebtsBox3TotalAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">390</bd-burg:DebtsBox3TotalAmount>
+  <bd-burg:SavingsAndInvestmentsTaxBasePartyShare decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">400</bd-burg:SavingsAndInvestmentsTaxBasePartyShare>
+  <bd-burg:MaintenanceObligationsPeriodicPaymentsPartyFilingTaxReturnPart decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">410</bd-burg:MaintenanceObligationsPeriodicPaymentsPartyFilingTaxReturnPart>
+  <bd-burg:VentureCapitalLoansInvestmentsLossPartyFilingTaxReturn decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">420</bd-burg:VentureCapitalLoansInvestmentsLossPartyFilingTaxReturn>
+  <bd-burg:GreenInvestmentExemption decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">430</bd-burg:GreenInvestmentExemption>
+  <bd-burg:PreservedIncomeTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">480</bd-burg:PreservedIncomeTotal>
+  <bank:TrustCapital decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">435</bank:TrustCapital>
+  <bank:TaxationElsewhere decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">490</bank:TaxationElsewhere>
+  <bd-burg-tuple:OwnHouseDebtSpecification>
+    <bd-burg:OwnHouseDebtAccountNumber contextRef="DitJaarDurBIB">7671637167</bd-burg:OwnHouseDebtAccountNumber>
+    <bd-burg:OwnHouseDebtBankAccountBalance decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">610</bd-burg:OwnHouseDebtBankAccountBalance>
+  </bd-burg-tuple:OwnHouseDebtSpecification>
+  <bd-burg-tuple:IncomeOtherSpecification>
+    <bd-burg:IncomeOtherAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">650</bd-burg:IncomeOtherAmount>
+  </bd-burg-tuple:IncomeOtherSpecification>
+  <bd-burg-tuple:SubstantialInterestTransferPriceSpecification>
+    <bd-burg:SubstantialInterestTransferPriceValue decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">260</bd-burg:SubstantialInterestTransferPriceValue>
+  </bd-burg-tuple:SubstantialInterestTransferPriceSpecification>
+  <bd-burg-tuple:SubstantialInterestRegularBenefitsSpecification>
+    <bd-burg:SubstantialInterestRegularBenefitsAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">240</bd-burg:SubstantialInterestRegularBenefitsAmount>
+  </bd-burg-tuple:SubstantialInterestRegularBenefitsSpecification>
+  <bd-burg-tuple:SubstantialInterestRegularBenefitsDeductibleCostsSpecification>
+    <bd-burg:SubstantialInterestRegularBenefitsDeductibleCostsAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">250</bd-burg:SubstantialInterestRegularBenefitsDeductibleCostsAmount>
+  </bd-burg-tuple:SubstantialInterestRegularBenefitsDeductibleCostsSpecification>
+  <bd-burg-tuple:DebtBox3Specification>
+    <bd-burg:DebtBox3Amount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">770</bd-burg:DebtBox3Amount>
+    <bd-burg:DebtBox3BankDebtProductID contextRef="DitJaarDurBIB">ID44421456</bd-burg:DebtBox3BankDebtProductID>
+    <bd-burg:DebtBox3DebtAccountNumberBalance decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">760</bd-burg:DebtBox3DebtAccountNumberBalance>
+    <bd-burg:DebtBox3DebtAccountNumberBalanceTaxpayerInterest decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">20</bd-burg:DebtBox3DebtAccountNumberBalanceTaxpayerInterest>
+    <bd-burg:DebtBox3Description contextRef="DitJaarDurBIB">omschrijving schuld box 3</bd-burg:DebtBox3Description>
+    <bd-burg:DebtBox3IdentificationNumber contextRef="DitJaarDurBIB">767671616313</bd-burg:DebtBox3IdentificationNumber>
+  </bd-burg-tuple:DebtBox3Specification>
+  <bd-burg:MaintenanceRelativesPeriodicPaymentsPaidTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">780</bd-burg:MaintenanceRelativesPeriodicPaymentsPaidTotal>
+  <bd-burg:MaintenanceRelativesRedemptionSumPaidTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">790</bd-burg:MaintenanceRelativesRedemptionSumPaidTotal>
+  <bd-burg:MaintenanceRelativesPensionPremiumPaidTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">800</bd-burg:MaintenanceRelativesPensionPremiumPaidTotal>
+  <bd-burg:MaintenanceObligationsPeriodicPaymentsTotal decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">810</bd-burg:MaintenanceObligationsPeriodicPaymentsTotal>
+  <bank:MaintenanceRelativesMaintenanceObligationsPeriodicPaymentsPartyFilingTaxReturnPart decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">820</bank:MaintenanceRelativesMaintenanceObligationsPeriodicPaymentsPartyFilingTaxReturnPart>
+  <bd-burg:OverallIncome decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">850</bd-burg:OverallIncome>
+  <bd-burg:PersonAttachedDeduction decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">860</bd-burg:PersonAttachedDeduction>
+  <bd-burg:IncomeTaxOwed decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">870</bd-burg:IncomeTaxOwed>
+  <bd-burg:IncomeOverallAmount decimals="0" contextRef="DitJaarDurBIB" unitRef="eur">880</bd-burg:IncomeOverallAmount>
+  <bank-cd:ReasonDelivery contextRef="DitJaarDurBIB">Nieuwe Aanvraag</bank-cd:ReasonDelivery>
+</xbrli:xbrl>

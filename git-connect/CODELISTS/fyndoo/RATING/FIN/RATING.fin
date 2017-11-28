@@ -1,0 +1,313 @@
+Rating Scorecard
+
+.MenuHelp ""
+.ModelVersion "1.5.5"
+.FINANversion "3.2"
+
+.Period MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FirstYear=ThisYear-1,Years=1,TsY=12,MaxTsY=12,UserChangeYears=On,DoNotSave=Off,MergeBefore=Off,FormulaSet2=Trend,FormulaSet2Title="progn",DateAtFormulaSet2=DMYtoDate(1,1,ThisYear),TsY2=12,MaxTsY2=12
+
+.Sheet Sheet1,Title="main sheet",Range=[FirstTinPeriod(PeriodInSheet)..LastTinPeriod(PeriodInSheet)],Period=MainPeriod
+
+.BalanceDisAggr Proportional
+
+.Variables
+
+
+.Variables
+;==============================================================================================================
+; Rating Scorecard v1.1.12.7
+;
+
+PP       X     0               &"Rating Scorecard "&SysVar("CompactModelVersion")                                       \Root
+
+
+.Variables
+;==============================================================================================================
+; General variables for webclient
+;
+
+X        X   1 1               "General variables for webclient"                                                       \
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------
+; Layout
+;
+
+PPPPP   1N C 1 2               "Layout"                                                                                \FES_LAYOUTNR
+PIII    BA     2               "Exchange Rates"                                                                        \FES_EXCHANGE_RATES
+PIIII   1A     2               "Layout name"                                                                           \FES_LAYOUT
+PIIII 0 1N     2               "Is flat input used? (1=yes)"                                                           \FES_FLATINPUT
+PIIII 0 1N     2               "Projection Profile"                                                                    \FES_PROJECTION_PROFILE
+PIIII 0 1N     2               "Column order"                                                                          \FES_COLUMN_ORDER
+PIII  0 BN     2               "Column visible"                                                                        \FES_COLUMN_VISIBLE
+PIII  0 BN     2               "Start Date Period"                                                                     \FES_STARTDATEPERIOD
+PIII  0 BN     2               "End Date Period"                                                                       \FES_ENDDATEPERIOD
+PIII  0 BN     2               "Base Currency Period"                                                                  \FES_BASECURRENCYPERIOD
+PIII  0 BN     2               "View Currency Period"                                                                  \FES_VIEWCURRENCYPERIOD
+PIII  0 BN C   2               "Column Type"                                                                           \FES_COLUMNTYPE
+
+.Choices
+FES_LAYOUTNR=                  "0: NA|1: IFRS-EU|2: IFRS|48: Polish"
+FES_COLUMNTYPE=                "0:History|1:Projection"
+
+.Formulas NoTrend
+FES_LAYOUTNR=                  If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)))
+FES_COLUMN_VISIBLE=            1
+
+.Formulas Trend
+FES_COLUMN_VISIBLE=            1
+
+
+.Variables
+;==============================================================================================================
+; General variables for FPS database
+;
+
+X        X     1               "General variables for FPS database"                                                    \
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------
+; NAME
+;
+
+PIIII   1A   1 2               "NAME"                                                                                  \FPS_VAR_Naam
+PIIII   1A     2               "CUSTOMERNUMBER"                                                                        \FPS_VAR_Relatienummer
+PIIII   1A     2               "CHAMBEROFCOMMERCENUMBER"                                                               \FPS_VAR_KVKnr
+PIIII   1A     2               "LEGALSTATUSCODE"                                                                       \FPS_VAR_Rechtsvorm_nr
+PIIII   1A     2               "LEGALSTATUSDESCRIPTION"                                                                \FPS_VAR_Rechtsvorm_omschr
+PIIII   1A     2               "SECTOROFINDUSTRYCODE"                                                                  \FPS_VAR_BIK_CODE
+PIIII   1A     2               "SECTOROFINDUSTRYDESCRIPTION"                                                           \FPS_VAR_BIK_Omschr
+PIIII   1A     2               "GRIDID"                                                                                \FPS_VAR_GridId
+PIIII   1A     2               "ACCOUNTMANAGER"                                                                        \FPS_VAR_Accountmanager
+PIIII   1A     2               "OFFICENUMBER"                                                                          \FPS_VAR_Kantoor
+PIIII   1A     2               "STREET"                                                                                \FPS_VAR_Straat
+PIIII   1A     2               "HOUSENUMBER"                                                                           \FPS_VAR_Housenumber
+PIIII   1A     2               "ZIPCODE"                                                                               \FPS_VAR_Postcode
+PIIII   1A     2               "CITY"                                                                                  \FPS_VAR_Woonplaats
+PIIII   1A     2               "STATEORPROVINCE"                                                                       \FPS_VAR_Provincie
+PIIII   1A     2               "COUNTRY"                                                                               \FPS_VAR_Land
+PIIII   1A     2               "Bureau van Dijk ID"                                                                    \FPS_VAR_BvDID
+PIIII   1A     2               "Telefoonnummer"                                                                        \FPS_VAR_Telefoon
+PIIII   1A     2               "Emailadres"                                                                            \FPS_VAR_Emailadres
+PIIII   1A     2               "FPS_FINAN_USER_ROLES"                                                                  \FPS_FINAN_USER_ROLES
+PIIII   1A     2               "FPS_FINAN_USER"                                                                        \FPS_FINAN_USER
+
+
+.Variables
+;==============================================================================================================
+; Scorecard Rating Scorecard
+;
+
+PPPPP   1N C 1 1  +            "Rating Scorecard"                                                                      \Q_ROOT
+
+.Choices
+Q_ROOT=                        "0:Incomplete filled.|1:Complete filled."
+
+.Formulas NoTrend
+Q_ROOT=                        1 ;todo
+
+.Variables
+;==============================================================================================================
+; Scorecard step
+;
+
+PPPPP   1N C   2  +            "Rating"                                                                                 \Q_Map01
+
+.Choices
+Q_Map01=                      "0:Incomplete filled.|1:Complete filled."
+
+.Formulas NoTrend
+Q_Map01=                      (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------
+; Scorecard paragraph Warning voor map 3
+;
+
+PPPPP   1A   1 3               "Warning voor map 1"                                                                    \Q_Map01_WARNING
+PPPPP   1A     3               "Info bij stap 1"                                                                       \Q_Map01_INFO
+PPPPP   1A     3               "Validatie stap 1"                                                                      \Q_Map01_VALIDATION
+
+.Formulas NoTrend
+Q_Map01_WARNING=              &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO=                 &If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+
+.Variables
+
+P       1N     3               "Rating"                                                                                \Q_Map01_Paragraaf02
+
+PIIII 0 1N C 1 4  +            "Final Rating"                                                                          \FinalRating
+PPPPP 3 1N %   4               "Final PD"                                                                              \FinalAssociatedPD
+PPPP    CA     4      >        "Proposed URA Rating"                                                                   \=krUraRatingKlasse
+
+;Kopie uit URA boom
+
+{&&Language=Deutsch}
+PPXX    BN     4               "$>Rating Kennzahlen<$"                                                                 \Ratios
+PPPP  2 CN %   5               "$>Anteil des ordentlichen Ergebnisses<$"                                               \R1=krAnteilOrdentlichenErgebnisses
+PPPP  2 CN %   5               "$>Bank- und Lieferantenanteil<$"                                                       \R2=krBankUndLieferantenanteil
+PPPP  2 CN %   5               "$>Fremdkapitalzinslast<$"                                                              \R3=krFremdKapitalzinslast
+PPPP  2 CN %   5               "$>Anteil kurzfristige Verbindlichkeiten<$"                                             \R4=krAnteilKurzfristigeVerbindlichkeiten
+PPPP  2 CN %   5               "$>Anteil Eigenmittel<$"                                                                \R5=krAnteilEigenmittel
+
+
+.Formulas NoTrend,Trend
+FinalRating                   =If(krPD[LastTinFormulaSet(NoTrend,MainPeriod)]=NA,NA,TableLookup("PDtoRating",krPD[LastTinFormulaSet(NoTrend,MainPeriod),1]))
+FinalAssociatedPD             =MatrixLookup("fyndoo_Parameters.xls","Rating2PD",FinalRating,1)
+
+.Choices
+FinalRating                   = file "inc_Rating.fib"
+
+.Variables
+PPXX    BN     3               "Kengetallen voor acceptatiekader"                                  \Acceptatiekader
+PIII  2 1N     4               "DSCR"                                                              \DSCR_T
+PIII    1N     4        ?      "Netto omzet"                                                       \NetSales_T
+PIII    1N     4               "Aflossingscapaciteit"                                              \RepaymentCapacity_T
+PIII    1N %   4               "Solvabiliteit aansprakelijk vermogen"                              \EffectiveNetWorthRatio_T
+PIII    1N     4               "Effective net worth"                                               \RatingEffectiveNetWorth_T     
+PIII    1N     4               "Total equity and liabilities"                                      \RatingTotalEquityAndLiabilities_T
+
+PIII    1N     4       +       "Receivables"                                                       \RatingReceivables_T
+PIII    1N     4       +       "Inventories"                                                       \RatingInventories_T
+PIII    1N     4       +       "Accounts payable-trade"                                            \RatingTradePayablesTotal_T
+PPII    1N     4               "Working capital"                                                   \RatingWorkCapital_T
+
+PIII    1N %   4               "Growth in sales"                                                   \RatingNetSalesGrowth_T
+PIII  1 1N     4               "Average period accounts receivable (days) (average total sales)" \RatingTradeReceivablesTermDaysTotal_T
+PIII  1 1N     4               "Average period accounts payable (days)"                        \RatingTradePayablesTermDaysTotal_T
+
+
+PIII  2 BN     4               DSCR                                                                \DSCR
+PIII    BN     4        ?      NetSales                                                            \NetSales
+PIII    BN     4               RepaymentCapacity                                                   \RepaymentCapacity
+PIII    BN %   4               EffectiveNetWorthRatio                                              \EffectiveNetWorthRatio
+
+PIII    BN     4       +       Receivables                                                         \RatingReceivables
+PIII    BN     4       +       Inventories                                                         \RatingInventories
+PIII    BN     4       +       Accounts payable-trade                                              \RatingTradePayablesTotal
+PPII    BN     4               Working capital                                                     \RatingWorkCapital
+
+PIII    CN %   4               Growth in sales                                                     \RatingNetSalesGrowth
+PIII  1 CN     4               Average period accounts receivable (days) (average total sales) \RatingTradeReceivablesTermDaysTotal
+PIII  1 CN     4               Average period accounts payable (days)                        \RatingTradePayablesTermDaysTotal
+PIII    BN     4               Effective net worth                                                 \RatingEffectiveNetWorth
+PIII    BN     4               Total equity and liabilities                                        \RatingTotalEquityAndLiabilities
+
+.Formulas Visible
+DSCR                    =False
+NetSales                =False
+RepaymentCapacity       =False
+EffectiveNetWorthRatio  =False
+RatingReceivables       =False
+RatingInventories       =False
+RatingTradePayablesTotal =False
+RatingWorkCapital       =False
+RatingNetSalesGrowth    =False
+RatingTradeReceivablesTermDaysTotal =False
+RatingTradePayablesTermDaysTotal =False
+RatingEffectiveNetWorth          =False
+RatingTotalEquityAndLiabilities  =False
+
+.Formulas NoTrend
+DSCR_T                   =DSCR[LastT]
+NetSales_T               =NetSales[LastT]
+RepaymentCapacity_T      =RepaymentCapacity[LastT]
+EffectiveNetWorthRatio_T =EffectiveNetWorthRatio[LastT]
+RatingReceivables_T      =RatingReceivables[LastT]
+RatingInventories_T      =RatingInventories[LastT]
+RatingTradePayablesTotal_T =RatingTradePayablesTotal[LastT]
+RatingWorkCapital_T        =RatingWorkCapital[LastT]
+RatingNetSalesGrowth_T   =RatingNetSalesGrowth[LastT]
+RatingTradeReceivablesTermDaysTotal_T =RatingTradeReceivablesTermDaysTotal[LastT]
+RatingTradePayablesTermDaysTotal_T =RatingTradePayablesTermDaysTotal[LastT]
+RatingWorkCapital = (RatingReceivables + RatingInventories) - RatingTradePayablesTotal
+
+RatingTotalEquityAndLiabilities_T      =RatingTotalEquityAndLiabilities[LastT]
+RatingEffectiveNetWorth_T              =RatingEffectiveNetWorth[LastT]
+
+
+.Variables
+.leveloffset 2
+
+; URA Indicatieve Rating:
+{&&Tryinclude "Inc_URA.fin"}
+{&&Language=English}
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------
+; Scorecard paragraph Hulpvariabelen
+;
+
+X       1N     3               "Hulpvariabelen"                                                                        \Q_Map01_Hulpvariabelen
+
+PPPPP   1N   1 4               "Aantal verplichte velden (3)"                                                          \Q_Map01_REQUIREDVARS
+PPPPP   1N     4               "Aantal ingevulde verplichte velden (3)"                                                \Q_Map01_ENTEREDREQUIREDVARS
+
+.Formulas NoTrend
+Q_Map01_REQUIREDVARS=         FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X))")
+Q_Map01_ENTEREDREQUIREDVARS=  FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+
+
+.Variables
+;==============================================================================================================
+; Scorecard step Result
+
+PIIII   1N C 1 2  +            "Status"                                                                                \Q_STATUS
+PIIII 2 1N D   2               "Final:"                                                                                \Q_STATUS_FINAL_ON
+PIIII   1A     2               "Final by:"                                                                             \Q_STATUS_FINAL_BY
+PIIII   1A     2               "Final by:"                                                                             \Q_STATUS_FINAL_BY_NAME
+PIIII 2 1N D   2               "Created:"                                                                              \Q_STATUS_STARTED_ON
+PIIII   1A     2               "Created by:"                                                                           \Q_STATUS_STARTED_BY
+PIIII   1A     2               "Created by:"                                                                           \Q_STATUS_STARTED_BY_NAME
+PIIII 2 1N D   2  +            "Last modified"                                                                         \Q_STATUS_MODIFIED_ON
+PPPPP   1A     2  +            "Modelversion:"                                                                         \Q_ModelVersion
+PPPPP   1A     2  +            "Modeltype:"                                                                            \Q_ModelType
+PPPPP   1A     2  +            "Parameters version:"                                                                   \Q_MatrixVersion
+PIIII   1N C   2               "Previous"                                                                              \Q_PREVIOUS_BUTTON_VISIBLE
+PIIII   1N C   2               "Next"                                                                                  \Q_NEXT_BUTTON_VISIBLE
+PIIII   1N C   2               "Draft report"                                                                          \Q_CONCEPT_REPORT_VISIBLE
+PIIII   1N C   2               "Definitive report"                                                                     \Q_FINAL_REPORT_VISIBLE
+PIIII   1N C   2               "Make it final"                                                                         \Q_MAKE_FINAL_VISIBLE
+
+.Choices
+Q_STATUS=                      "0:Active|1:Final"
+Q_PREVIOUS_BUTTON_VISIBLE=     "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE=         "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE=      "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE=        "0:Nee|1:Ja"
+Q_MAKE_FINAL_VISIBLE=          "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_STATUS=                      0
+Q_STATUS_MODIFIED_ON=          Now
+Q_ModelVersion=                &SysVar("CompactModelVersion")
+Q_ModelType=                   "RATING"
+Q_MatrixVersion=               &MatrixLookup("fyndoo_Parameters.xls","Version",1,3)
+Q_PREVIOUS_BUTTON_VISIBLE=     2
+Q_NEXT_BUTTON_VISIBLE=         1
+Q_CONCEPT_REPORT_VISIBLE=      1
+Q_FINAL_REPORT_VISIBLE=        1
+Q_MAKE_FINAL_VISIBLE=          1
+
+
+.Variables
+;==============================================================================================================
+; Restricties
+;
+
+X       1A M   1               "Restricties"                                                                           \Q_Restricties
+
+.Formulas NoTrend
+Q_Restricties=                 &If(Length(&Q_RestrictiesCombi[1])>0,&"[BR][/BR]Please note: "&Q_RestrictiesCombi,"")
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------
+; Restricties tekst
+;
+
+PPPPP   1A M 1 2               "Restricties tekst"                                                                     \Q_RestrictiesCombi
+PPPPP   1A M   2               "Knockout(s)?"                                                                          \Q_WARNING_GLOBAL
+
+.Quit

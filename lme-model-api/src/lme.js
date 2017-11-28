@@ -9,7 +9,7 @@ if (!global.MATRIX_VALUES) {
 }
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
-require('../../ff-math');
+require('../../math');
 
 var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);

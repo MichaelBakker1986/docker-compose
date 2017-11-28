@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrli:xbrl xmlns:frc-i="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:venj-bw2-dm="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains" xmlns:kvk-t="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples" xmlns:kvk-i="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data" xmlns:venj-bw2-dim="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:rj-i="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:nl-cd="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data" xmlns:frc-dim="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" xmlns:frc-dm="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data" xml:lang="nl">
+	<link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/bt11/frc/20161209/entrypoints/frc-rpt-krediet-prognose-periodiek-klein-functioneel-2016.xsd"/>
+	<xbrli:context id="context0">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+	</xbrli:context>
+	<xbrli:context id="context31">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressNLSpecificationAxis">
+				<frc-dm:DescriptionLocationNLTypedMember>Advies</frc-dm:DescriptionLocationNLTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context37">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressAbroadSpecificationAxis">
+				<frc-dm:DescriptionLocationAbroadTypedMember>Consultancy</frc-dm:DescriptionLocationAbroadTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context42">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BankAccountSpecificationAxis">
+				<frc-dm:BankAccountSpecificationTypedMember>NL12ABCD8754747190</frc-dm:BankAccountSpecificationTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context43">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context44">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context49">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context50">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2015-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context709">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:OperationSpecificationAxis">
+				<frc-dm:IdentificationNumberTypedMember>ZZ001</frc-dm:IdentificationNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context730">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:PotTreeCultivationTypedAxis">
+				<frc-dm:PotTreeCultivationTypedMember>Land- en tuinbouw 001</frc-dm:PotTreeCultivationTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context731">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:PotTreeCultivationTypedAxis">
+				<frc-dm:PotTreeCultivationTypedMember>Land- en tuinbouw 001</frc-dm:PotTreeCultivationTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context796">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:MilkGoatFarmTypedAxes">
+				<frc-dm:MilkGoatFarmTypedMember>melkgeitenhouderij 001</frc-dm:MilkGoatFarmTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context797">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:MilkGoatFarmTypedAxes">
+				<frc-dm:MilkGoatFarmTypedMember>melkgeitenhouderij 001</frc-dm:MilkGoatFarmTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+		<xbrli:context id="context1">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:FebruaryMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context2">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:MarchMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context3">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:AprilMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context4">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:MayMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context5">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:JuneMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context6">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:JulyMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context7">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:AugustMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context8">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:SeptemberMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context9">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:OctoberMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context10">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:NovemberMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context11">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:DecemberMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context12">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:MonthsOfTheYearAxis">frc-dm:JanuaryMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:unit id="pure">
+		<xbrli:measure>xbrli:pure</xbrli:measure>
+	</xbrli:unit>
+	<xbrli:unit id="eur">
+		<xbrli:measure>iso4217:EUR</xbrli:measure>
+	</xbrli:unit>
+	<frc-i:ReasonDelivery contextRef="context0">Nieuwe aanvraag</frc-i:ReasonDelivery>
+	<frc-i:FinancialStatementType contextRef="context0">Geconsolideerd</frc-i:FinancialStatementType>
+	
+	<frc-i:FinancialReportingPeriodFirstPeriodStartDate contextRef="context0">2016-01-01</frc-i:FinancialReportingPeriodFirstPeriodStartDate>
+	<frc-i:FinancialReportingPeriodFirstPeriodEndDate contextRef="context0">2016-12-31</frc-i:FinancialReportingPeriodFirstPeriodEndDate>
+	
+	<frc-i:FinancialReportingPeriodSecondPeriodStartDate contextRef="context0">2015-01-01</frc-i:FinancialReportingPeriodSecondPeriodStartDate>
+	<frc-i:FinancialReportingPeriodSecondPeriodEndDate contextRef="context0">2015-12-31</frc-i:FinancialReportingPeriodSecondPeriodEndDate>
+	
+	<venj-bw2-i:BasisOfPreparation contextRef="context0">Commercieel</venj-bw2-i:BasisOfPreparation>
+	
+	<rj-i:DocumentPresentationCurrency contextRef="context0">EUR</rj-i:DocumentPresentationCurrency>
+	<frc-i:ExclusiveVAT contextRef="context0">Ja</frc-i:ExclusiveVAT>
+	<venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="context0">87547471</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+	<venj-bw2-i:LegalEntityName contextRef="context0">Tulipse</venj-bw2-i:LegalEntityName>
+	<frc-i:LegalEntityLegalFormBanks contextRef="context0">Besloten vennootschap</frc-i:LegalEntityLegalFormBanks>
+	<kvk-i:LegalSizeCriteriaClassification contextRef="context0">Klein</kvk-i:LegalSizeCriteriaClassification>
+	<rj-i:BusinessNames contextRef="context0">Tulipse</rj-i:BusinessNames>
+	<frc-i:DateEstablishmentLegalEntity contextRef="context0">1960-01-01</frc-i:DateEstablishmentLegalEntity>
+	<frc-i:AgriculturalActivities contextRef="context0">Ja</frc-i:AgriculturalActivities>
+	<frc-i:PostalCodeLegalEntityRegisteredOffice contextRef="context0">1234OP</frc-i:PostalCodeLegalEntityRegisteredOffice>
+	<frc-i:DateChangeRegulationsLegalEntity contextRef="context0">2011-01-01</frc-i:DateChangeRegulationsLegalEntity>
+	<frc-i:NameIntermediary contextRef="context0">Tilk</frc-i:NameIntermediary>
+	<frc-i:DomicileIntermediary contextRef="context0">Rotterdam</frc-i:DomicileIntermediary>
+	<frc-i:QualificationIntermediary contextRef="context0">RA</frc-i:QualificationIntermediary>
+	<frc-i:NameCompiler contextRef="context0">Zisje</frc-i:NameCompiler>
+	<frc-i:TelephoneNumberIntermediary contextRef="context0">0609876543</frc-i:TelephoneNumberIntermediary>
+	<frc-i:EmailAddressIntermediary contextRef="context0">z@tadvies.nl</frc-i:EmailAddressIntermediary>
+	<frc-i:DestinationBank contextRef="context0">ING Bank</frc-i:DestinationBank>
+	<nl-cd:DocumentCreationDate contextRef="context0">2017-01-31</nl-cd:DocumentCreationDate>
+	<nl-cd:StreetNameNL contextRef="context31">Ganzenpad</nl-cd:StreetNameNL>
+	<nl-cd:HouseNumberNL contextRef="context31">13</nl-cd:HouseNumberNL>
+	<nl-cd:HouseNumberAddition contextRef="context31">A</nl-cd:HouseNumberAddition>
+	<nl-cd:POBoxNumber contextRef="context31">1234</nl-cd:POBoxNumber>
+	<nl-cd:PostalCodeNL contextRef="context31">1234AQ</nl-cd:PostalCodeNL>
+	<nl-cd:PlaceOfResidenceNL contextRef="context31">Rotterdam</nl-cd:PlaceOfResidenceNL>
+	<nl-cd:StreetNameAbroad contextRef="context37">Bullingstreet</nl-cd:StreetNameAbroad>
+	<nl-cd:HouseNumberAbroad contextRef="context37">14</nl-cd:HouseNumberAbroad>
+	<nl-cd:HouseNumberAddition contextRef="context37">A</nl-cd:HouseNumberAddition>
+	<nl-cd:POBoxNumber contextRef="context37">4321</nl-cd:POBoxNumber>
+	<nl-cd:PlaceOfResidenceAbroad contextRef="context37">United States</nl-cd:PlaceOfResidenceAbroad>
+	<frc-i:BankName contextRef="context42">ING Bank</frc-i:BankName>
+	<frc-i:SquareMeterSalesSurface contextRef="context43" unitRef="pure" decimals="INF">1000</frc-i:SquareMeterSalesSurface>
+	<frc-i:SquareMeterSalesSurface contextRef="context44" unitRef="pure" decimals="INF">1000</frc-i:SquareMeterSalesSurface>
+	<frc-i:NumberLocations contextRef="context43" unitRef="pure" decimals="INF">500</frc-i:NumberLocations>
+	<frc-i:NumberLocations contextRef="context44" unitRef="pure" decimals="INF">500</frc-i:NumberLocations>
+	<kvk-i:SbiBusinessCode contextRef="context43">0113</kvk-i:SbiBusinessCode>
+	<kvk-i:SbiBusinessCode contextRef="context44">0113</kvk-i:SbiBusinessCode>
+	<venj-bw2-i:IntangibleAssets contextRef="context49" unitRef="eur" decimals="INF">6000</venj-bw2-i:IntangibleAssets>
+	<venj-bw2-i:IntangibleAssets contextRef="context50" unitRef="eur" decimals="INF">6000</venj-bw2-i:IntangibleAssets>
+	<venj-bw2-i:PropertyPlantEquipment contextRef="context49" unitRef="eur" decimals="INF">10000</venj-bw2-i:PropertyPlantEquipment>
+	<venj-bw2-i:PropertyPlantEquipment contextRef="context50" unitRef="eur" decimals="INF">9000</venj-bw2-i:PropertyPlantEquipment>
+	<rj-i:InvestmentProperties contextRef="context49" unitRef="eur" decimals="INF">12000</rj-i:InvestmentProperties>
+	<rj-i:InvestmentProperties contextRef="context50" unitRef="eur" decimals="INF">11000</rj-i:InvestmentProperties>
+	<venj-bw2-i:FinancialAssets contextRef="context49" unitRef="eur" decimals="INF">3000</venj-bw2-i:FinancialAssets>
+	<venj-bw2-i:FinancialAssets contextRef="context50" unitRef="eur" decimals="INF">3000</venj-bw2-i:FinancialAssets>
+	<venj-bw2-i:AssetsNoncurrent contextRef="context49" unitRef="eur" decimals="INF">31000</venj-bw2-i:AssetsNoncurrent>
+	<venj-bw2-i:AssetsNoncurrent contextRef="context50" unitRef="eur" decimals="INF">29000</venj-bw2-i:AssetsNoncurrent>
+	<venj-bw2-i:Inventories contextRef="context49" unitRef="eur" decimals="INF">1500</venj-bw2-i:Inventories>
+	<venj-bw2-i:Inventories contextRef="context50" unitRef="eur" decimals="INF">1400</venj-bw2-i:Inventories>
+	<rj-i:ConstructionContractsAssets contextRef="context49" unitRef="eur" decimals="INF">1000</rj-i:ConstructionContractsAssets>
+	<rj-i:ConstructionContractsAssets contextRef="context50" unitRef="eur" decimals="INF">900</rj-i:ConstructionContractsAssets>
+	<venj-bw2-i:Receivables contextRef="context49" unitRef="eur" decimals="INF">1050</venj-bw2-i:Receivables>
+	<venj-bw2-i:Receivables contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:Receivables>
+	<venj-bw2-i:SecuritiesCurrent contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:SecuritiesCurrent>
+	<venj-bw2-i:SecuritiesCurrent contextRef="context50" unitRef="eur" decimals="INF">900</venj-bw2-i:SecuritiesCurrent>
+	<venj-bw2-i:CashAndCashEquivalents contextRef="context49" unitRef="eur" decimals="INF">2000</venj-bw2-i:CashAndCashEquivalents>
+	<venj-bw2-i:CashAndCashEquivalents contextRef="context50" unitRef="eur" decimals="INF">1900</venj-bw2-i:CashAndCashEquivalents>
+	<venj-bw2-i:AssetsCurrent contextRef="context49" unitRef="eur" decimals="INF">6550</venj-bw2-i:AssetsCurrent>
+	<venj-bw2-i:AssetsCurrent contextRef="context50" unitRef="eur" decimals="INF">6100</venj-bw2-i:AssetsCurrent>
+	<venj-bw2-i:Assets contextRef="context49" unitRef="eur" decimals="INF">37550</venj-bw2-i:Assets>
+	<venj-bw2-i:Assets contextRef="context50" unitRef="eur" decimals="INF">35100</venj-bw2-i:Assets>
+	<venj-bw2-i:Equity contextRef="context49" unitRef="eur" decimals="INF">23450</venj-bw2-i:Equity>
+	<venj-bw2-i:Equity contextRef="context50" unitRef="eur" decimals="INF">20270</venj-bw2-i:Equity>
+	<venj-bw2-i:Provisions contextRef="context49" unitRef="eur" decimals="INF">2500</venj-bw2-i:Provisions>
+	<venj-bw2-i:Provisions contextRef="context50" unitRef="eur" decimals="INF">2400</venj-bw2-i:Provisions>
+	<venj-bw2-i:LiabilitiesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">7500</venj-bw2-i:LiabilitiesNoncurrent>
+	<venj-bw2-i:LiabilitiesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">7330</venj-bw2-i:LiabilitiesNoncurrent>
+	<venj-bw2-i:LiabilitiesCurrent contextRef="context49" unitRef="eur" decimals="INF">3000</venj-bw2-i:LiabilitiesCurrent>
+	<venj-bw2-i:LiabilitiesCurrent contextRef="context50" unitRef="eur" decimals="INF">4000</venj-bw2-i:LiabilitiesCurrent>
+	<venj-bw2-i:EquityAndLiabilities contextRef="context49" unitRef="eur" decimals="INF">37550</venj-bw2-i:EquityAndLiabilities>
+	<venj-bw2-i:EquityAndLiabilities contextRef="context50" unitRef="eur" decimals="INF">35100</venj-bw2-i:EquityAndLiabilities>
+	<venj-bw2-i:NetRevenue contextRef="context43" unitRef="eur" decimals="INF">100000</venj-bw2-i:NetRevenue>
+	<venj-bw2-i:NetRevenue contextRef="context44" unitRef="eur" decimals="INF">90000</venj-bw2-i:NetRevenue>
+	<venj-bw2-i:CostOfSales contextRef="context43" unitRef="eur" decimals="INF">10000</venj-bw2-i:CostOfSales>
+	<venj-bw2-i:CostOfSales contextRef="context44" unitRef="eur" decimals="INF">10000</venj-bw2-i:CostOfSales>
+	<venj-bw2-i:GrossOperatingResult contextRef="context43" unitRef="eur" decimals="INF">90000</venj-bw2-i:GrossOperatingResult>
+	<venj-bw2-i:GrossOperatingResult contextRef="context44" unitRef="eur" decimals="INF">80000</venj-bw2-i:GrossOperatingResult>
+	<venj-bw2-i:OperatingIncomeOther contextRef="context43" unitRef="eur" decimals="INF">6000</venj-bw2-i:OperatingIncomeOther>
+	<venj-bw2-i:OperatingIncomeOther contextRef="context44" unitRef="eur" decimals="INF">6000</venj-bw2-i:OperatingIncomeOther>
+	<venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets contextRef="context43" unitRef="eur" decimals="INF">10000</venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets>
+	<venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets contextRef="context44" unitRef="eur" decimals="INF">10000</venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets>
+	<venj-bw2-i:OperatingExpensesOther contextRef="context43" unitRef="eur" decimals="INF">2000</venj-bw2-i:OperatingExpensesOther>
+	<venj-bw2-i:OperatingExpensesOther contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:OperatingExpensesOther>
+	<venj-bw2-i:SellingExpenses contextRef="context43" unitRef="eur" decimals="INF">21500</venj-bw2-i:SellingExpenses>
+	<venj-bw2-i:SellingExpenses contextRef="context44" unitRef="eur" decimals="INF">20500</venj-bw2-i:SellingExpenses>
+	<venj-bw2-i:GeneralAdministrativeExpenses contextRef="context43" unitRef="eur" decimals="INF">10000</venj-bw2-i:GeneralAdministrativeExpenses>
+	<venj-bw2-i:GeneralAdministrativeExpenses contextRef="context44" unitRef="eur" decimals="INF">10000</venj-bw2-i:GeneralAdministrativeExpenses>	
+	<venj-bw2-i:OperatingExpenses contextRef="context43" unitRef="eur" decimals="INF">31500</venj-bw2-i:OperatingExpenses>
+	<venj-bw2-i:OperatingExpenses contextRef="context44" unitRef="eur" decimals="INF">30500</venj-bw2-i:OperatingExpenses>
+	<venj-bw2-i:NetOperatingResult contextRef="context43" unitRef="eur" decimals="INF">58500</venj-bw2-i:NetOperatingResult>
+	<venj-bw2-i:NetOperatingResult contextRef="context44" unitRef="eur" decimals="INF">49500</venj-bw2-i:NetOperatingResult>
+	<venj-bw2-i:OperatingResult contextRef="context43" unitRef="eur" decimals="INF">64500</venj-bw2-i:OperatingResult>
+	<venj-bw2-i:OperatingResult contextRef="context44" unitRef="eur" decimals="INF">55500</venj-bw2-i:OperatingResult>
+	<venj-bw2-i:IncomeReceivablesNoncurrentSecurities contextRef="context43" unitRef="eur" decimals="INF">500</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+	<venj-bw2-i:IncomeReceivablesNoncurrentSecurities contextRef="context44" unitRef="eur" decimals="INF">500</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+	<venj-bw2-i:RevaluationReserveRelease contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:RevaluationReserveRelease>
+	<venj-bw2-i:RevaluationReserveRelease contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:RevaluationReserveRelease>
+	<venj-bw2-i:GovernmentSubsidies contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:GovernmentSubsidies>
+	<venj-bw2-i:GovernmentSubsidies contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:GovernmentSubsidies>
+	<venj-bw2-i:InterestIncomeRelatedIncome contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:InterestIncomeRelatedIncome>
+	<venj-bw2-i:InterestIncomeRelatedIncome contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:InterestIncomeRelatedIncome>
+	<venj-bw2-i:ChangesValueFinancialAssetsSecurities contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+	<venj-bw2-i:ChangesValueFinancialAssetsSecurities contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+	<venj-bw2-i:InterestExpensesRelatedExpenses contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:InterestExpensesRelatedExpenses>
+	<venj-bw2-i:InterestExpensesRelatedExpenses contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:InterestExpensesRelatedExpenses>
+	<venj-bw2-i:ResultBeforeTaxOrdinaryActivities contextRef="context43" unitRef="eur" decimals="INF">66000</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+	<venj-bw2-i:ResultBeforeTaxOrdinaryActivities contextRef="context44" unitRef="eur" decimals="INF">57000</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+	<venj-bw2-i:IncomeTaxExpenseOrdinaryActivities contextRef="context43" unitRef="eur" decimals="INF">3000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+	<venj-bw2-i:IncomeTaxExpenseOrdinaryActivities contextRef="context44" unitRef="eur" decimals="INF">3000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+	<venj-bw2-i:ShareInResultsParticipatingInterests contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:ShareInResultsParticipatingInterests>
+	<venj-bw2-i:ShareInResultsParticipatingInterests contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:ShareInResultsParticipatingInterests>
+	<venj-bw2-i:ResultAfterTax contextRef="context43" unitRef="eur" decimals="INF">64000</venj-bw2-i:ResultAfterTax>
+	<venj-bw2-i:ResultAfterTax contextRef="context44" unitRef="eur" decimals="INF">55000</venj-bw2-i:ResultAfterTax>
+	<venj-bw2-i:ResultAttributableNoncontrollingInterest contextRef="context43" unitRef="eur" decimals="INF">1000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+	<venj-bw2-i:ResultAttributableNoncontrollingInterest contextRef="context44" unitRef="eur" decimals="INF">1000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+	<venj-bw2-i:NetResultAfterTax contextRef="context43" unitRef="eur" decimals="INF">65000</venj-bw2-i:NetResultAfterTax>
+	<venj-bw2-i:NetResultAfterTax contextRef="context44" unitRef="eur" decimals="INF">56000</venj-bw2-i:NetResultAfterTax>
+	<frc-i:NameOperation contextRef="context709">Naam activiteit</frc-i:NameOperation>
+	<frc-i:TurnoverOperation contextRef="context709" unitRef="eur" decimals="INF">100000</frc-i:TurnoverOperation>
+	<venj-bw2-i:CostsIncorporationShareIssue contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:CostsIncorporationShareIssue>
+	<venj-bw2-i:CostsIncorporationShareIssue contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:CostsIncorporationShareIssue>
+	<venj-bw2-i:DevelopmentCosts contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:DevelopmentCosts>
+	<venj-bw2-i:DevelopmentCosts contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:DevelopmentCosts>
+	<venj-bw2-i:PatentsTrademarksOtherRights contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:PatentsTrademarksOtherRights>
+	<venj-bw2-i:PatentsTrademarksOtherRights contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:PatentsTrademarksOtherRights>
+	<venj-bw2-i:Goodwill contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:Goodwill>
+	<venj-bw2-i:Goodwill contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:Goodwill>
+	<venj-bw2-i:PrepaymentsIntangibleAssets contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:PrepaymentsIntangibleAssets>
+	<venj-bw2-i:PrepaymentsIntangibleAssets contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:PrepaymentsIntangibleAssets>
+	<rj-i:IntangibleAssetsOther contextRef="context49" unitRef="eur" decimals="INF">1000</rj-i:IntangibleAssetsOther>
+	<rj-i:IntangibleAssetsOther contextRef="context50" unitRef="eur" decimals="INF">1000</rj-i:IntangibleAssetsOther>
+	<frc-i:Buildings contextRef="context49" unitRef="eur" decimals="INF">1200</frc-i:Buildings>
+	<frc-i:Buildings contextRef="context50" unitRef="eur" decimals="INF">1200</frc-i:Buildings>
+	<frc-i:Land contextRef="context49" unitRef="eur" decimals="INF">1200</frc-i:Land>
+	<frc-i:Land contextRef="context50" unitRef="eur" decimals="INF">1200</frc-i:Land>
+	<venj-bw2-i:LandAndBuildings contextRef="context49" unitRef="eur" decimals="INF">2400</venj-bw2-i:LandAndBuildings>
+	<venj-bw2-i:LandAndBuildings contextRef="context50" unitRef="eur" decimals="INF">2400</venj-bw2-i:LandAndBuildings>
+	<venj-bw2-i:Machinery contextRef="context49" unitRef="eur" decimals="INF">1600</venj-bw2-i:Machinery>
+	<venj-bw2-i:Machinery contextRef="context50" unitRef="eur" decimals="INF">1600</venj-bw2-i:Machinery>
+	<venj-bw2-i:TangibleAssetsOther contextRef="context49" unitRef="eur" decimals="INF">4200</venj-bw2-i:TangibleAssetsOther>
+	<venj-bw2-i:TangibleAssetsOther contextRef="context50" unitRef="eur" decimals="INF">3700</venj-bw2-i:TangibleAssetsOther>
+	<venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment contextRef="context49" unitRef="eur" decimals="INF">800</venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment>
+	<venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment contextRef="context50" unitRef="eur" decimals="INF">800</venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment>
+	<frc-i:LesseesInvestments contextRef="context49" unitRef="eur" decimals="INF">800</frc-i:LesseesInvestments>
+	<frc-i:LesseesInvestments contextRef="context50" unitRef="eur" decimals="INF">800</frc-i:LesseesInvestments>
+	<frc-i:AircraftsBalanceSheetValue contextRef="context49" unitRef="eur" decimals="INF">800</frc-i:AircraftsBalanceSheetValue>
+	<frc-i:AircraftsBalanceSheetValue contextRef="context50" unitRef="eur" decimals="INF">800</frc-i:AircraftsBalanceSheetValue>
+	<frc-i:ShipsBalanceSheetValue contextRef="context49" unitRef="eur" decimals="INF">800</frc-i:ShipsBalanceSheetValue>
+	<frc-i:ShipsBalanceSheetValue contextRef="context50" unitRef="eur" decimals="INF">800</frc-i:ShipsBalanceSheetValue>
+	<frc-i:FixturesAndFittings contextRef="context49" unitRef="eur" decimals="INF">800</frc-i:FixturesAndFittings>
+	<frc-i:FixturesAndFittings contextRef="context50" unitRef="eur" decimals="INF">800</frc-i:FixturesAndFittings>
+	<frc-i:CarsAndOtherTransportMeans contextRef="context49" unitRef="eur" decimals="INF">1000</frc-i:CarsAndOtherTransportMeans>
+	<frc-i:CarsAndOtherTransportMeans contextRef="context50" unitRef="eur" decimals="INF">500</frc-i:CarsAndOtherTransportMeans>
+	<venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations contextRef="context49" unitRef="eur" decimals="INF">1000</venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations>
+	<venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations contextRef="context50" unitRef="eur" decimals="INF">500</venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+	
+	<venj-bw2-i:ReceivablesGroupCompaniesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:ReceivablesGroupCompaniesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsOther contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsOther>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsOther contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsOther>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:SecuritiesOtherNoncurrent contextRef="context49" unitRef="eur" decimals="INF">750</venj-bw2-i:SecuritiesOtherNoncurrent>
+	<venj-bw2-i:SecuritiesOtherNoncurrent contextRef="context50" unitRef="eur" decimals="INF">750</venj-bw2-i:SecuritiesOtherNoncurrent>
+	<venj-bw2-i:ReceivablesOtherNoncurrent contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherNoncurrent>
+	<venj-bw2-i:ReceivablesOtherNoncurrent contextRef="context50" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherNoncurrent>
+	<venj-bw2-i:InventoryRawMaterialsConsumables contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:InventoryRawMaterialsConsumables>
+	<venj-bw2-i:InventoryRawMaterialsConsumables contextRef="context50" unitRef="eur" decimals="INF">350</venj-bw2-i:InventoryRawMaterialsConsumables>
+	<venj-bw2-i:WorkInProgress contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:WorkInProgress>
+	<venj-bw2-i:WorkInProgress contextRef="context50" unitRef="eur" decimals="INF">350</venj-bw2-i:WorkInProgress>
+	<venj-bw2-i:InventoryFinishedTradeGoods contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:InventoryFinishedTradeGoods>
+	<venj-bw2-i:InventoryFinishedTradeGoods contextRef="context50" unitRef="eur" decimals="INF">350</venj-bw2-i:InventoryFinishedTradeGoods>
+	<venj-bw2-i:PrepaymentsInventories contextRef="context49" unitRef="eur" decimals="INF">375</venj-bw2-i:PrepaymentsInventories>
+	<venj-bw2-i:PrepaymentsInventories contextRef="context50" unitRef="eur" decimals="INF">350</venj-bw2-i:PrepaymentsInventories>
+	<venj-bw2-i:TradeReceivables contextRef="context49" unitRef="eur" decimals="INF">100</venj-bw2-i:TradeReceivables>
+	<venj-bw2-i:TradeReceivables contextRef="context50" unitRef="eur" decimals="INF">100</venj-bw2-i:TradeReceivables>
+	<venj-bw2-i:ReceivablesGroupCompaniesCurrent contextRef="context49" unitRef="eur" decimals="INF">190</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+	<venj-bw2-i:ReceivablesGroupCompaniesCurrent contextRef="context50" unitRef="eur" decimals="INF">180</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent contextRef="context49" unitRef="eur" decimals="INF">95</venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent contextRef="context50" unitRef="eur" decimals="INF">90</venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent contextRef="context49" unitRef="eur" decimals="INF">95</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent contextRef="context50" unitRef="eur" decimals="INF">90</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+
+	<rj-i:DeferredTaxAssetsCurrent contextRef="context49" unitRef="eur" decimals="INF">95</rj-i:DeferredTaxAssetsCurrent>
+	<rj-i:DeferredTaxAssetsCurrent contextRef="context50" unitRef="eur" decimals="INF">90</rj-i:DeferredTaxAssetsCurrent>
+	<venj-bw2-i:CalledUpShareCapital contextRef="context49" unitRef="eur" decimals="INF">95</venj-bw2-i:CalledUpShareCapital>
+	<venj-bw2-i:CalledUpShareCapital contextRef="context50" unitRef="eur" decimals="INF">90</venj-bw2-i:CalledUpShareCapital>
+	<rj-i:PensionReceivables contextRef="context49" unitRef="eur" decimals="INF">95</rj-i:PensionReceivables>
+	<rj-i:PensionReceivables contextRef="context50" unitRef="eur" decimals="INF">90</rj-i:PensionReceivables>
+	<rj-i:TaxReceivables contextRef="context49" unitRef="eur" decimals="INF">95</rj-i:TaxReceivables>
+	<rj-i:TaxReceivables contextRef="context50" unitRef="eur" decimals="INF">90</rj-i:TaxReceivables>
+	<frc-i:CurrentAccountManagingSupervisoryDirectors contextRef="context49" unitRef="eur" decimals="INF">95</frc-i:CurrentAccountManagingSupervisoryDirectors>
+	<frc-i:CurrentAccountManagingSupervisoryDirectors contextRef="context50" unitRef="eur" decimals="INF">90</frc-i:CurrentAccountManagingSupervisoryDirectors>
+	<venj-bw2-i:AccruedIncome contextRef="context49" unitRef="eur" decimals="INF">95</venj-bw2-i:AccruedIncome>
+	<venj-bw2-i:AccruedIncome contextRef="context50" unitRef="eur" decimals="INF">90</venj-bw2-i:AccruedIncome>
+	<venj-bw2-i:CashInHand contextRef="context49" unitRef="eur" decimals="INF">600</venj-bw2-i:CashInHand>
+	<venj-bw2-i:CashInHand contextRef="context50" unitRef="eur" decimals="INF">1000</venj-bw2-i:CashInHand>
+	<venj-bw2-i:CreditBalancesOnBankAccounts contextRef="context49" unitRef="eur" decimals="INF">600</venj-bw2-i:CreditBalancesOnBankAccounts>
+	<venj-bw2-i:CreditBalancesOnBankAccounts contextRef="context50" unitRef="eur" decimals="INF">600</venj-bw2-i:CreditBalancesOnBankAccounts>
+	<venj-bw2-i:BillsExchangeCheques contextRef="context49" unitRef="eur" decimals="INF">800</venj-bw2-i:BillsExchangeCheques>
+	<venj-bw2-i:BillsExchangeCheques contextRef="context50" unitRef="eur" decimals="INF">300</venj-bw2-i:BillsExchangeCheques>
+	<venj-bw2-i:ShareCapital contextRef="context49" unitRef="eur" decimals="INF">6702</venj-bw2-i:ShareCapital>
+	<venj-bw2-i:ShareCapital contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:ShareCapital>
+	<venj-bw2-i:SharePremium contextRef="context49" unitRef="eur" decimals="INF">2231</venj-bw2-i:SharePremium>
+	<venj-bw2-i:SharePremium contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:SharePremium>
+	<venj-bw2-i:RevaluationReserve contextRef="context49" unitRef="eur" decimals="INF">2231</venj-bw2-i:RevaluationReserve>
+	<venj-bw2-i:RevaluationReserve contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:RevaluationReserve>
+	<venj-bw2-i:LegalReserves contextRef="context49" unitRef="eur" decimals="INF">2231</venj-bw2-i:LegalReserves>
+	<venj-bw2-i:LegalReserves contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:LegalReserves>
+	<venj-bw2-i:StatutoryReserves contextRef="context49" unitRef="eur" decimals="INF">4462</venj-bw2-i:StatutoryReserves>
+	<venj-bw2-i:StatutoryReserves contextRef="context50" unitRef="eur" decimals="INF">5837</venj-bw2-i:StatutoryReserves>
+	<venj-bw2-i:ReservesOther contextRef="context49" unitRef="eur" decimals="INF">1131</venj-bw2-i:ReservesOther>
+	<venj-bw2-i:ReservesOther contextRef="context50" unitRef="eur" decimals="INF">1119</venj-bw2-i:ReservesOther>
+	<venj-bw2-i:RetainedEarnings contextRef="context49" unitRef="eur" decimals="INF">2231</venj-bw2-i:RetainedEarnings>
+	<venj-bw2-i:RetainedEarnings contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:RetainedEarnings>
+	<venj-bw2-i:ResultForTheYear contextRef="context49" unitRef="eur" decimals="INF">2231</venj-bw2-i:ResultForTheYear>
+	<venj-bw2-i:ResultForTheYear contextRef="context50" unitRef="eur" decimals="INF">2219</venj-bw2-i:ResultForTheYear>
+	<venj-bw2-i:NoncontrollingInterest contextRef="context49" unitRef="eur" decimals="INF">1100</venj-bw2-i:NoncontrollingInterest>
+	<venj-bw2-i:NoncontrollingInterest contextRef="context50" unitRef="eur" decimals="INF">1100</venj-bw2-i:NoncontrollingInterest>
+	<venj-bw2-i:EquityGroup contextRef="context49" unitRef="eur" decimals="INF">24550</venj-bw2-i:EquityGroup>
+	<venj-bw2-i:EquityGroup contextRef="context50" unitRef="eur" decimals="INF">21370</venj-bw2-i:EquityGroup>
+	<venj-bw2-i:ProvisionPensionObligations contextRef="context49" unitRef="eur" decimals="INF">2000</venj-bw2-i:ProvisionPensionObligations>
+	<venj-bw2-i:ProvisionPensionObligations contextRef="context50" unitRef="eur" decimals="INF">2000</venj-bw2-i:ProvisionPensionObligations>
+	<venj-bw2-i:ProvisionTaxLiabilities contextRef="context49" unitRef="eur" decimals="INF">250</venj-bw2-i:ProvisionTaxLiabilities>
+	<venj-bw2-i:ProvisionTaxLiabilities contextRef="context50" unitRef="eur" decimals="INF">200</venj-bw2-i:ProvisionTaxLiabilities>
+	<venj-bw2-i:ProvisionsOther contextRef="context49" unitRef="eur" decimals="INF">250</venj-bw2-i:ProvisionsOther>
+	<venj-bw2-i:ProvisionsOther contextRef="context50" unitRef="eur" decimals="INF">200</venj-bw2-i:ProvisionsOther>
+	<venj-bw2-i:SubordinatedLiabilitiesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:SubordinatedLiabilitiesNoncurrent>
+	<venj-bw2-i:SubordinatedLiabilitiesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:SubordinatedLiabilitiesNoncurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+	<venj-bw2-i:PayablesGroupCompaniesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:PayablesGroupCompaniesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+	<venj-bw2-i:PensionPayablesNoncurrent contextRef="context49" unitRef="eur" decimals="INF">937</venj-bw2-i:PensionPayablesNoncurrent>
+	<venj-bw2-i:PensionPayablesNoncurrent contextRef="context50" unitRef="eur" decimals="INF">916</venj-bw2-i:PensionPayablesNoncurrent>
+	<venj-bw2-i:PayablesOtherNoncurrent contextRef="context49" unitRef="eur" decimals="INF">941</venj-bw2-i:PayablesOtherNoncurrent>
+	<venj-bw2-i:PayablesOtherNoncurrent contextRef="context50" unitRef="eur" decimals="INF">918</venj-bw2-i:PayablesOtherNoncurrent>
+	<venj-bw2-i:SubordinatedLiabilitiesCurrent contextRef="context49" unitRef="eur" decimals="INF">460</venj-bw2-i:SubordinatedLiabilitiesCurrent>
+	<venj-bw2-i:SubordinatedLiabilitiesCurrent contextRef="context50" unitRef="eur" decimals="INF">1460</venj-bw2-i:SubordinatedLiabilitiesCurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+	<venj-bw2-i:TradePayablesCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:TradePayablesCurrent>
+	<venj-bw2-i:TradePayablesCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:TradePayablesCurrent>
+	<venj-bw2-i:PayablesGroupCompaniesCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesGroupCompaniesCurrent>
+	<venj-bw2-i:PayablesGroupCompaniesCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesGroupCompaniesCurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+	<venj-bw2-i:PensionPayablesCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PensionPayablesCurrent>
+	<venj-bw2-i:PensionPayablesCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PensionPayablesCurrent>
+	<venj-bw2-i:AdvancesReceivedCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:AdvancesReceivedCurrent>
+	<venj-bw2-i:AdvancesReceivedCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:AdvancesReceivedCurrent>
+	<venj-bw2-i:PayablesOtherCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherCurrent>
+	<venj-bw2-i:PayablesOtherCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherCurrent>
+	<venj-bw2-i:AccrualsAndDeferredIncomeCurrent contextRef="context49" unitRef="eur" decimals="INF">230</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+	<venj-bw2-i:AccrualsAndDeferredIncomeCurrent contextRef="context50" unitRef="eur" decimals="INF">230</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+	<rj-i:ConstructionContractsLiabilities contextRef="context49" unitRef="eur" decimals="INF">240</rj-i:ConstructionContractsLiabilities>
+	<rj-i:ConstructionContractsLiabilities contextRef="context50" unitRef="eur" decimals="INF">240</rj-i:ConstructionContractsLiabilities>
+	<frc-i:ShortTermPartLongTermPayablesCreditInstitutions contextRef="context49" unitRef="eur" decimals="INF">30</frc-i:ShortTermPartLongTermPayablesCreditInstitutions>
+	<frc-i:ShortTermPartLongTermPayablesCreditInstitutions contextRef="context50" unitRef="eur" decimals="INF">200</frc-i:ShortTermPartLongTermPayablesCreditInstitutions>
+	<frc-i:CurrentAccountCreditInstitutions contextRef="context49" unitRef="eur" decimals="INF">200</frc-i:CurrentAccountCreditInstitutions>
+	<frc-i:CurrentAccountCreditInstitutions contextRef="context50" unitRef="eur" decimals="INF">30</frc-i:CurrentAccountCreditInstitutions>
+	<frc-i:ShortTermPartLongTermPayablesGroupCompanies contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesGroupCompanies>
+	<frc-i:ShortTermPartLongTermPayablesGroupCompanies contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesGroupCompanies>
+	<frc-i:CurrentAccountGroupCompanies contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountGroupCompanies>
+	<frc-i:CurrentAccountGroupCompanies contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountGroupCompanies>
+	<frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+	<frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+	<frc-i:CurrentAccountOtherRelatedParties contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountOtherRelatedParties>
+	<frc-i:CurrentAccountOtherRelatedParties contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountOtherRelatedParties>
+	<frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+	<frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+	<frc-i:CurrentAccountShareholdersParticipatingInterests contextRef="context49" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountShareholdersParticipatingInterests>
+	<frc-i:CurrentAccountShareholdersParticipatingInterests contextRef="context50" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountShareholdersParticipatingInterests>
+	<venj-bw2-i:AmortisationIntangibleAssets contextRef="context43" unitRef="eur" decimals="INF">6000</venj-bw2-i:AmortisationIntangibleAssets>
+	<venj-bw2-i:AmortisationIntangibleAssets contextRef="context44" unitRef="eur" decimals="INF">6000</venj-bw2-i:AmortisationIntangibleAssets>
+	<venj-bw2-i:DepreciationPropertyPlantEquipment contextRef="context43" unitRef="eur" decimals="INF">4000</venj-bw2-i:DepreciationPropertyPlantEquipment>
+	<venj-bw2-i:DepreciationPropertyPlantEquipment contextRef="context44" unitRef="eur" decimals="INF">4000</venj-bw2-i:DepreciationPropertyPlantEquipment>
+	<rj-i:PersonnelRelatedOtherExpenses contextRef="context43" unitRef="eur" decimals="INF">1000</rj-i:PersonnelRelatedOtherExpenses>
+	<rj-i:PersonnelRelatedOtherExpenses contextRef="context44" unitRef="eur" decimals="INF">500</rj-i:PersonnelRelatedOtherExpenses>
+	<rj-i:AccommodationCosts contextRef="context43" unitRef="eur" decimals="INF">200</rj-i:AccommodationCosts>
+	<rj-i:AccommodationCosts contextRef="context44" unitRef="eur" decimals="INF">100</rj-i:AccommodationCosts>
+	<rj-i:SalesRelatedExpenses contextRef="context43" unitRef="eur" decimals="INF">200</rj-i:SalesRelatedExpenses>
+	<rj-i:SalesRelatedExpenses contextRef="context44" unitRef="eur" decimals="INF">100</rj-i:SalesRelatedExpenses>
+	<rj-i:CarAndTransportCosts contextRef="context43" unitRef="eur" decimals="INF">200</rj-i:CarAndTransportCosts>
+	<rj-i:CarAndTransportCosts contextRef="context44" unitRef="eur" decimals="INF">100</rj-i:CarAndTransportCosts>
+	<frc-i:OperationalLeaseCosts contextRef="context43" unitRef="eur" decimals="INF">200</frc-i:OperationalLeaseCosts>
+	<frc-i:OperationalLeaseCosts contextRef="context44" unitRef="eur" decimals="INF">100</frc-i:OperationalLeaseCosts>
+	<rj-i:OfficeRelatedExpenses contextRef="context43" unitRef="eur" decimals="INF">200</rj-i:OfficeRelatedExpenses>
+	<rj-i:OfficeRelatedExpenses contextRef="context44" unitRef="eur" decimals="INF">100</rj-i:OfficeRelatedExpenses>
+	<rj-i:GeneralExpenses contextRef="context43" unitRef="eur" decimals="INF">100</rj-i:GeneralExpenses>
+	<rj-i:GeneralExpenses contextRef="context44" unitRef="eur" decimals="INF">50</rj-i:GeneralExpenses>
+	<rj-i:OperationalExpenses contextRef="context43" unitRef="eur" decimals="INF">100</rj-i:OperationalExpenses>
+	<rj-i:OperationalExpenses contextRef="context44" unitRef="eur" decimals="INF">50</rj-i:OperationalExpenses>
+	<rj-i:ForeignCurrencyExchangeRateResults contextRef="context43" unitRef="eur" decimals="INF">100</rj-i:ForeignCurrencyExchangeRateResults>
+	<rj-i:ForeignCurrencyExchangeRateResults contextRef="context44" unitRef="eur" decimals="INF">50</rj-i:ForeignCurrencyExchangeRateResults>
+	<frc-i:ExpensesResearchAndDevelopment contextRef="context43" unitRef="eur" decimals="INF">200</frc-i:ExpensesResearchAndDevelopment>
+	<frc-i:ExpensesResearchAndDevelopment contextRef="context44" unitRef="eur" decimals="INF">100</frc-i:ExpensesResearchAndDevelopment>
+	<frc-i:FranchiseFee contextRef="context43" unitRef="eur" decimals="INF">100</frc-i:FranchiseFee>
+	<frc-i:FranchiseFee contextRef="context44" unitRef="eur" decimals="INF">50</frc-i:FranchiseFee>
+	<frc-i:ManagementFee contextRef="context43" unitRef="eur" decimals="INF">150</frc-i:ManagementFee>
+	<frc-i:ManagementFee contextRef="context44" unitRef="eur" decimals="INF">75</frc-i:ManagementFee>
+
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context730" unitRef="pure" decimals="INF">1000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context731" unitRef="pure" decimals="INF">1000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context730" unitRef="pure" decimals="INF">1100</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context731" unitRef="pure" decimals="INF">1100</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:GrossCultivationSurfaceIndoor contextRef="context730" unitRef="pure" decimals="INF">1200</frc-i:GrossCultivationSurfaceIndoor>
+	<frc-i:GrossCultivationSurfaceIndoor contextRef="context731" unitRef="pure" decimals="INF">1200</frc-i:GrossCultivationSurfaceIndoor>
+	<frc-i:PropertyPlantEquipmentMultipleYearsPlantStock contextRef="context730" unitRef="eur" decimals="INF">1300</frc-i:PropertyPlantEquipmentMultipleYearsPlantStock>
+	<frc-i:PropertyPlantEquipmentMultipleYearsPlantStock contextRef="context731" unitRef="eur" decimals="INF">1300</frc-i:PropertyPlantEquipmentMultipleYearsPlantStock>
+	<frc-i:ReceivablesMembersLoans contextRef="context730" unitRef="eur" decimals="INF">1400</frc-i:ReceivablesMembersLoans>
+	<frc-i:ReceivablesMembersLoans contextRef="context731" unitRef="eur" decimals="INF">1400</frc-i:ReceivablesMembersLoans>
+	<frc-i:GrossRevenueProduction contextRef="context730" unitRef="eur" decimals="INF">1500</frc-i:GrossRevenueProduction>
+	<frc-i:GrossRevenueProduction contextRef="context731" unitRef="eur" decimals="INF">1500</frc-i:GrossRevenueProduction>
+	<frc-i:StockChange contextRef="context730" unitRef="eur" decimals="INF">1600</frc-i:StockChange>
+	<frc-i:StockChange contextRef="context731" unitRef="eur" decimals="INF">1600</frc-i:StockChange>
+	<frc-i:PackagingFee contextRef="context730" unitRef="eur" decimals="INF">1700</frc-i:PackagingFee>
+	<frc-i:PackagingFee contextRef="context731" unitRef="eur" decimals="INF">1700</frc-i:PackagingFee>
+	<frc-i:GMOGrant contextRef="context730" unitRef="eur" decimals="INF">1800</frc-i:GMOGrant>
+	<frc-i:GMOGrant contextRef="context731" unitRef="eur" decimals="INF">1800</frc-i:GMOGrant>
+	<frc-i:ElectricitySales contextRef="context730" unitRef="eur" decimals="INF">1900</frc-i:ElectricitySales>
+	<frc-i:ElectricitySales contextRef="context731" unitRef="eur" decimals="INF">1900</frc-i:ElectricitySales>
+	<frc-i:OtherRelatedIncome contextRef="context730" unitRef="eur" decimals="INF">2000</frc-i:OtherRelatedIncome>
+	<frc-i:OtherRelatedIncome contextRef="context731" unitRef="eur" decimals="INF">2000</frc-i:OtherRelatedIncome>
+	<frc-i:SowingCosts contextRef="context730" unitRef="eur" decimals="INF">2100</frc-i:SowingCosts>
+	<frc-i:SowingCosts contextRef="context731" unitRef="eur" decimals="INF">2100</frc-i:SowingCosts>
+	<frc-i:SubstratumCosts contextRef="context730" unitRef="eur" decimals="INF">2200</frc-i:SubstratumCosts>
+	<frc-i:SubstratumCosts contextRef="context731" unitRef="eur" decimals="INF">2200</frc-i:SubstratumCosts>
+	<frc-i:ManuringCosts contextRef="context730" unitRef="eur" decimals="INF">2300</frc-i:ManuringCosts>
+	<frc-i:ManuringCosts contextRef="context731" unitRef="eur" decimals="INF">2300</frc-i:ManuringCosts>
+	<frc-i:FertilizationCosts contextRef="context730" unitRef="eur" decimals="INF">2400</frc-i:FertilizationCosts>
+	<frc-i:FertilizationCosts contextRef="context731" unitRef="eur" decimals="INF">2400</frc-i:FertilizationCosts>
+	<frc-i:CropProtectionCosts contextRef="context730" unitRef="eur" decimals="INF">2500</frc-i:CropProtectionCosts>
+	<frc-i:CropProtectionCosts contextRef="context731" unitRef="eur" decimals="INF">2500</frc-i:CropProtectionCosts>
+	<frc-i:CropInsuranceCosts contextRef="context730" unitRef="eur" decimals="INF">2600</frc-i:CropInsuranceCosts>
+	<frc-i:CropInsuranceCosts contextRef="context731" unitRef="eur" decimals="INF">2600</frc-i:CropInsuranceCosts>
+	<frc-i:CultivationDisposalCosts contextRef="context730" unitRef="eur" decimals="INF">2700</frc-i:CultivationDisposalCosts>
+	<frc-i:CultivationDisposalCosts contextRef="context731" unitRef="eur" decimals="INF">2700</frc-i:CultivationDisposalCosts>
+	<frc-i:CO2OCAPWaterCosts contextRef="context730" unitRef="eur" decimals="INF">2800</frc-i:CO2OCAPWaterCosts>
+	<frc-i:CO2OCAPWaterCosts contextRef="context731" unitRef="eur" decimals="INF">2800</frc-i:CO2OCAPWaterCosts>
+	<frc-i:CultivationCostsOther contextRef="context730" unitRef="eur" decimals="INF">2900</frc-i:CultivationCostsOther>
+	<frc-i:CultivationCostsOther contextRef="context731" unitRef="eur" decimals="INF">2900</frc-i:CultivationCostsOther>
+	<frc-i:CultivationCosts contextRef="context730" unitRef="eur" decimals="INF">22500</frc-i:CultivationCosts>
+	<frc-i:CultivationCosts contextRef="context731" unitRef="eur" decimals="INF">22500</frc-i:CultivationCosts>
+	<frc-i:GasCosts contextRef="context730" unitRef="eur" decimals="INF">3000</frc-i:GasCosts>
+	<frc-i:GasCosts contextRef="context731" unitRef="eur" decimals="INF">3000</frc-i:GasCosts>
+	<frc-i:ElectricityCosts contextRef="context730" unitRef="eur" decimals="INF">3100</frc-i:ElectricityCosts>
+	<frc-i:ElectricityCosts contextRef="context731" unitRef="eur" decimals="INF">3100</frc-i:ElectricityCosts>
+	<frc-i:WKKMaintenanceCosts contextRef="context730" unitRef="eur" decimals="INF">3200</frc-i:WKKMaintenanceCosts>
+	<frc-i:WKKMaintenanceCosts contextRef="context731" unitRef="eur" decimals="INF">3200</frc-i:WKKMaintenanceCosts>
+	<frc-i:WKKLeaseCosts contextRef="context730" unitRef="eur" decimals="INF">3300</frc-i:WKKLeaseCosts>
+	<frc-i:WKKLeaseCosts contextRef="context731" unitRef="eur" decimals="INF">3300</frc-i:WKKLeaseCosts>
+	<frc-i:AuctionCosts contextRef="context730" unitRef="eur" decimals="INF">3400</frc-i:AuctionCosts>
+	<frc-i:AuctionCosts contextRef="context731" unitRef="eur" decimals="INF">3400</frc-i:AuctionCosts>
+	<frc-i:SalesPackackingFustCosts contextRef="context730" unitRef="eur" decimals="INF">3500</frc-i:SalesPackackingFustCosts>
+	<frc-i:SalesPackackingFustCosts contextRef="context731" unitRef="eur" decimals="INF">3500</frc-i:SalesPackackingFustCosts>
+	<frc-i:TransportCosts contextRef="context730" unitRef="eur" decimals="INF">3600</frc-i:TransportCosts>
+	<frc-i:TransportCosts contextRef="context731" unitRef="eur" decimals="INF">3600</frc-i:TransportCosts>
+	<frc-i:PurchaseCostsPottedPlantsPropagation contextRef="context730" unitRef="eur" decimals="INF">3700</frc-i:PurchaseCostsPottedPlantsPropagation>
+	<frc-i:PurchaseCostsPottedPlantsPropagation contextRef="context731" unitRef="eur" decimals="INF">3700</frc-i:PurchaseCostsPottedPlantsPropagation>
+	<frc-i:PurchaseCostsPottedPlantsSale contextRef="context730" unitRef="eur" decimals="INF">3800</frc-i:PurchaseCostsPottedPlantsSale>
+	<frc-i:PurchaseCostsPottedPlantsSale contextRef="context731" unitRef="eur" decimals="INF">3800</frc-i:PurchaseCostsPottedPlantsSale>
+	<frc-i:PurchaseCostsPots contextRef="context730" unitRef="eur" decimals="INF">3900</frc-i:PurchaseCostsPots>
+	<frc-i:PurchaseCostsPots contextRef="context731" unitRef="eur" decimals="INF">3900</frc-i:PurchaseCostsPots>
+	<frc-i:PurchaseCostsPottingSoil contextRef="context730" unitRef="eur" decimals="INF">4000</frc-i:PurchaseCostsPottingSoil>
+	<frc-i:PurchaseCostsPottingSoil contextRef="context731" unitRef="eur" decimals="INF">4000</frc-i:PurchaseCostsPottingSoil>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context796" unitRef="pure" decimals="INF">100000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context797" unitRef="pure" decimals="INF">100000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context796" unitRef="pure" decimals="INF">60000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context797" unitRef="pure" decimals="INF">60000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:PropertyPlantEquipmentLivestock contextRef="context796" unitRef="eur" decimals="INF">1000</frc-i:PropertyPlantEquipmentLivestock>
+	<frc-i:PropertyPlantEquipmentLivestock contextRef="context797" unitRef="eur" decimals="INF">1000</frc-i:PropertyPlantEquipmentLivestock>
+	<frc-i:StockAssetsCurrentNonLivestock contextRef="context796" unitRef="eur" decimals="INF">1100</frc-i:StockAssetsCurrentNonLivestock>
+	<frc-i:StockAssetsCurrentNonLivestock contextRef="context797" unitRef="eur" decimals="INF">1100</frc-i:StockAssetsCurrentNonLivestock>
+	<frc-i:RevenueLivestock contextRef="context796" unitRef="eur" decimals="INF">1200</frc-i:RevenueLivestock>
+	<frc-i:RevenueLivestock contextRef="context797" unitRef="eur" decimals="INF">1200</frc-i:RevenueLivestock>
+	
+	<frc-i:RevenueAndAccretionLivestock contextRef="context796" unitRef="eur" decimals="INF">1300</frc-i:RevenueAndAccretionLivestock>
+	<frc-i:RevenueAndAccretionLivestock contextRef="context797" unitRef="eur" decimals="INF">1300</frc-i:RevenueAndAccretionLivestock>
+	
+	<frc-i:RevenuesAndAccretionDisclosure contextRef="context796">Ja</frc-i:RevenuesAndAccretionDisclosure>
+	<frc-i:RevenuesAndAccretionDisclosure contextRef="context797">Ja</frc-i:RevenuesAndAccretionDisclosure>
+	
+	<frc-i:RevenuesAndAccretionBreakdownDisclosure contextRef="context796">Informatieverschaffing</frc-i:RevenuesAndAccretionBreakdownDisclosure>
+	<frc-i:RevenuesAndAccretionBreakdownDisclosure contextRef="context797">Informatieverschaffing</frc-i:RevenuesAndAccretionBreakdownDisclosure>
+	
+	
+	<frc-i:SinglePaymentScheme contextRef="context796" unitRef="eur" decimals="INF">1400</frc-i:SinglePaymentScheme>
+	<frc-i:SinglePaymentScheme contextRef="context797" unitRef="eur" decimals="INF">1400</frc-i:SinglePaymentScheme>
+	<frc-i:FodderCosts contextRef="context796" unitRef="eur" decimals="INF">1500</frc-i:FodderCosts>
+	<frc-i:FodderCosts contextRef="context797" unitRef="eur" decimals="INF">1500</frc-i:FodderCosts>
+	<frc-i:HealthcareCosts contextRef="context796" unitRef="eur" decimals="INF">1600</frc-i:HealthcareCosts>
+	<frc-i:HealthcareCosts contextRef="context797" unitRef="eur" decimals="INF">1600</frc-i:HealthcareCosts>
+	<frc-i:BreedingCosts contextRef="context796" unitRef="eur" decimals="INF">1700</frc-i:BreedingCosts>
+	<frc-i:BreedingCosts contextRef="context797" unitRef="eur" decimals="INF">1700</frc-i:BreedingCosts>
+	<frc-i:CultivationCosts contextRef="context796" unitRef="eur" decimals="INF">1800</frc-i:CultivationCosts>
+	<frc-i:CultivationCosts contextRef="context797" unitRef="eur" decimals="INF">1800</frc-i:CultivationCosts>
+	<frc-i:LitterCosts contextRef="context796" unitRef="eur" decimals="INF">1900</frc-i:LitterCosts>
+	<frc-i:LitterCosts contextRef="context797" unitRef="eur" decimals="INF">1900</frc-i:LitterCosts>
+	<frc-i:EnergyCosts contextRef="context796" unitRef="eur" decimals="INF">2000</frc-i:EnergyCosts>
+	<frc-i:EnergyCosts contextRef="context797" unitRef="eur" decimals="INF">2000</frc-i:EnergyCosts>
+	<frc-i:LivestockCostsOther contextRef="context796" unitRef="eur" decimals="INF">2100</frc-i:LivestockCostsOther>
+	<frc-i:LivestockCostsOther contextRef="context797" unitRef="eur" decimals="INF">2100</frc-i:LivestockCostsOther>
+	<frc-i:ManureDisposalCosts contextRef="context796" unitRef="eur" decimals="INF">2200</frc-i:ManureDisposalCosts>
+	<frc-i:ManureDisposalCosts contextRef="context797" unitRef="eur" decimals="INF">2200</frc-i:ManureDisposalCosts>
+	<frc-i:ProductionRightsLeaseCosts contextRef="context796" unitRef="eur" decimals="INF">2300</frc-i:ProductionRightsLeaseCosts>
+	<frc-i:ProductionRightsLeaseCosts contextRef="context797" unitRef="eur" decimals="INF">2300</frc-i:ProductionRightsLeaseCosts>
+	<frc-i:RequirementsDerogation contextRef="context796">Ja</frc-i:RequirementsDerogation>
+	<frc-i:RequirementsDerogation contextRef="context797">Ja</frc-i:RequirementsDerogation>
+	<frc-i:AverageNumberPresentMilkGoats contextRef="context796" unitRef="pure" decimals="INF">200</frc-i:AverageNumberPresentMilkGoats>
+	<frc-i:AverageNumberPresentMilkGoats contextRef="context797" unitRef="pure" decimals="INF">200</frc-i:AverageNumberPresentMilkGoats>
+	<frc-i:AverageNumberPresentBreedingGoats contextRef="context796" unitRef="pure" decimals="INF">250</frc-i:AverageNumberPresentBreedingGoats>
+	<frc-i:AverageNumberPresentBreedingGoats contextRef="context797" unitRef="pure" decimals="INF">250</frc-i:AverageNumberPresentBreedingGoats>
+	<frc-i:MilkMoneyRevenue contextRef="context796" unitRef="eur" decimals="INF">300</frc-i:MilkMoneyRevenue>
+	<frc-i:MilkMoneyRevenue contextRef="context797" unitRef="eur" decimals="INF">300</frc-i:MilkMoneyRevenue>
+	<frc-i:ActualFatPercentage contextRef="context796" unitRef="pure" decimals="INF">0.20</frc-i:ActualFatPercentage>
+	<frc-i:ActualFatPercentage contextRef="context797" unitRef="pure" decimals="INF">0.20</frc-i:ActualFatPercentage>
+	<frc-i:ActualProteinPercentage contextRef="context796" unitRef="pure" decimals="INF">0.10</frc-i:ActualProteinPercentage>
+	<frc-i:ActualProteinPercentage contextRef="context797" unitRef="pure" decimals="INF">0.10</frc-i:ActualProteinPercentage>
+	<frc-i:MilkDelivered contextRef="context796" unitRef="pure" decimals="INF">650</frc-i:MilkDelivered>
+	<frc-i:MilkDelivered contextRef="context797" unitRef="pure" decimals="INF">650</frc-i:MilkDelivered>
+	<frc-i:ConcentratesCosts contextRef="context796" unitRef="eur" decimals="INF">3100</frc-i:ConcentratesCosts>
+	<frc-i:ConcentratesCosts contextRef="context797" unitRef="eur" decimals="INF">3100</frc-i:ConcentratesCosts>
+	<frc-i:RoughageCosts contextRef="context796" unitRef="eur" decimals="INF">3200</frc-i:RoughageCosts>
+	<frc-i:RoughageCosts contextRef="context797" unitRef="eur" decimals="INF">3200</frc-i:RoughageCosts>
+	<frc-i:ByproductsCosts contextRef="context796" unitRef="eur" decimals="INF">3300</frc-i:ByproductsCosts>
+	<frc-i:ByproductsCosts contextRef="context797" unitRef="eur" decimals="INF">3300</frc-i:ByproductsCosts>
+	<frc-i:IntermediaryReportType contextRef="context0">Overig</frc-i:IntermediaryReportType>
+	<frc-i:IntermediaryReport contextRef="context0">Toelichting intermediair</frc-i:IntermediaryReport>
+	<kvk-t:ContactForDocumentPresentation>
+		<kvk-i:ContactType contextRef="context0">Intermediair</kvk-i:ContactType>
+		<nl-cd:FirstName contextRef="context0">Tilk</nl-cd:FirstName>
+		<nl-cd:FamilyName contextRef="context0">Sup</nl-cd:FamilyName>
+		<kvk-i:OrganisationName contextRef="context0">Tilk Advies</kvk-i:OrganisationName>
+		<nl-cd:TelephoneNumber contextRef="context0">0687547471</nl-cd:TelephoneNumber>
+		<nl-cd:EmailAddressFull contextRef="context0">ts@tsadvies.nl</nl-cd:EmailAddressFull>
+	</kvk-t:ContactForDocumentPresentation>
+		<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetValueAddedTaxPurchases contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxPurchases>
+	<frc-i:CashBudgetReceipts contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetReceipts contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetReceipts>
+	<frc-i:CashBudgetPurchases contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetPurchases contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPurchases>
+	<frc-i:CashBudgetWagesSalaries contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetWagesSalaries contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetWagesSalaries>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetSocialSecurityContributions contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSocialSecurityContributions>
+	<frc-i:CashBudgetPensionCosts contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetPensionCosts contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetPensionCosts>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOtherWagesSalariesSocialSecurityCharges>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetAccommodationCosts contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetAccommodationCosts>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetSalesRelatedExpenses contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetSalesRelatedExpenses>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetCarAndTransportCosts contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCarAndTransportCosts>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOfficeRelatedExpenses contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOfficeRelatedExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetOperationalExpenses contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetOperationalExpenses>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetExpensesResearchAndDevelopment contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesResearchAndDevelopment>
+	<frc-i:CashBudgetManagementFee contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetManagementFee contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetManagementFee>
+	<frc-i:CashBudgetExpensesOther contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetExpensesOther contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetExpensesOther>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetInterestExpensesRelatedExpenses contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetInterestExpensesRelatedExpenses>
+	<frc-i:CashBudgetCorporateTax contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetCorporateTax contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCorporateTax>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetValueAddedTaxExpenses contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetValueAddedTaxExpenses>
+	<frc-i:CashBudgetTurnoverTax contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetTurnoverTax contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetTurnoverTax>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetLeaseObligationsRepayments contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetLeaseObligationsRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetMediumtermLoanRepayments contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetMediumtermLoanRepayments>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context12" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context1" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context2" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context3" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context4" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context5" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context6" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context7" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context8" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context9" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context10" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetBalanceBeginningMonth contextRef="context11" unitRef="eur" decimals="INF">200</frc-i:CashBudgetBalanceBeginningMonth>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsOperatingActivities contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsOperatingActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsInvestmentActivities contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsInvestmentActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context12" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context1" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context2" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context3" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context4" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context5" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context6" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context7" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context8" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context9" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context10" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetCashFlowsFinancingActivities contextRef="context11" unitRef="eur" decimals="INF">10</frc-i:CashBudgetCashFlowsFinancingActivities>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context12" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context1" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context2" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context3" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context4" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context5" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context6" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context7" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context8" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context9" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context10" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	<frc-i:CashBudgetBalanceEndMonth contextRef="context11" unitRef="eur" decimals="INF">230</frc-i:CashBudgetBalanceEndMonth>
+	
+	<frc-i:ConstructionInProgress contextRef="context49" unitRef="eur" decimals="INF">400</frc-i:ConstructionInProgress>
+	<frc-i:PrepaymentsOfPropertyPlantAndEquipment contextRef="context49" unitRef="eur" decimals="INF">400</frc-i:PrepaymentsOfPropertyPlantAndEquipment>
+	
+	<frc-i:ConstructionInProgress contextRef="context50" unitRef="eur" decimals="INF">400</frc-i:ConstructionInProgress>
+	<frc-i:PrepaymentsOfPropertyPlantAndEquipment contextRef="context50" unitRef="eur" decimals="INF">400</frc-i:PrepaymentsOfPropertyPlantAndEquipment>
+</xbrli:xbrl>

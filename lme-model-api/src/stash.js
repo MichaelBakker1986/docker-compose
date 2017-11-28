@@ -18,7 +18,7 @@ class Stash {
 
     preview(name, data, lme) {
         var tempHash = '_tmp_' + uuid() + "_" + name;
-        return write(__dirname + '/../../ff-ssh-git/resources/' + tempHash + '.ffl', data)
+        return write(__dirname + '/../../git-connect/resources/' + tempHash + '.ffl', data)
             .then(function(filename) {
                 return exec('node ' + __dirname + '/exportLME_FFL.js ' + tempHash).then((result) => {
                     let userID = uuid();
@@ -34,7 +34,7 @@ class Stash {
 
     commit(name, data, lme) {
         //transform ffl to JSON canvas file
-        return Promise.all([write(__dirname + '/../../ff-ssh-git/resources/' + name + '.ffl', data)])
+        return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + '.ffl', data)])
             .then(function(filename) {
                 return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name)]).then((result) => {
                     let userID = uuid();

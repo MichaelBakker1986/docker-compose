@@ -1,0 +1,1753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+
+						<!--Report Version 1.0 -->
+
+<!-- ====================================================================== -->
+<document author="Joris Nijboer" title="FINAN Rating Alert Report" xsi:noNamespaceSchemaLocation="FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<font src="font/Sansation_Regular.ttf"/>
+	<properties>
+		<RA_incFac2inReport i="1"><data var="RA_IncFac2InReport" src="model"/></RA_incFac2inReport>
+		<RA_incFac3inReport i="2"><data var="RA_IncFac3InReport" src="model"/></RA_incFac3inReport>
+		<RA_incFac4inReport i="3"><data var="RA_IncFac4InReport" src="model"/></RA_incFac4inReport>
+		<RA_incFac5inReport i="4"><data var="RA_IncFac5InReport" src="model"/></RA_incFac5inReport>
+		<RA_incFac6inReport i="5"><data var="RA_IncFac6InReport" src="model"/></RA_incFac6inReport>
+		<RA_incFac7inReport i="6"><data var="RA_IncFac7InReport" src="model"/></RA_incFac7inReport>
+		<RA_incFac8inReport i="7"><data var="RA_IncFac8InReport" src="model"/></RA_incFac8inReport>
+		<RA_incFac9inReport i="8"><data var="RA_IncFac9InReport" src="model"/></RA_incFac9inReport>
+		<RA_GebruikZekerheid1><data var="RA_GebruikZekerheidGetal1" src="model"/></RA_GebruikZekerheid1>
+		<RA_GebruikZekerheid2><data var="RA_GebruikZekerheidGetal2" src="model"/></RA_GebruikZekerheid2>
+		<RA_GebruikZekerheid3><data var="RA_GebruikZekerheidGetal3" src="model"/></RA_GebruikZekerheid3>
+		<RA_GebruikZekerheid4><data var="RA_GebruikZekerheidGetal4" src="model"/></RA_GebruikZekerheid4>
+		<RA_GebruikZekerheid5><data var="RA_GebruikZekerheidGetal5" src="model"/></RA_GebruikZekerheid5>
+		<RA_GebruikZekerheid6><data var="RA_GebruikZekerheidGetal6" src="model"/></RA_GebruikZekerheid6>
+    	<RA_GebruikZekerheid7><data var="RA_GebruikZekerheidGetal7" src="model"/></RA_GebruikZekerheid7>
+		<RA_GebruikZekerheid8><data var="RA_GebruikZekerheidGetal8" src="model"/></RA_GebruikZekerheid8>
+		<RA_GebruikZekerheid9><data var="RA_GebruikZekerheidGetal9" src="model"/></RA_GebruikZekerheid9>
+		<RA_GebruikZekerheid10><data var="RA_GebruikZekerheidGetal10" src="model"/></RA_GebruikZekerheid10>
+	</properties>
+<!--	<newpage name="frontpage">-->
+<!--		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>-->
+<!--	</newpage>-->
+
+	<newpage name="main">
+		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>
+	</newpage>
+
+
+<!-- =========HIER BEGINT FINAN RATING ALERT RAPPORT============================================================= -->
+
+<table class="ratingheadertable">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+<!-- =========Faciliteit 1============================================================= -->
+
+<columns class="splitcolumns">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet1" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet1" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm1" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred1Looptijd" src="model"/></td>
+				<td>Rentevaste Periode </td>
+				<td><data var="RA_RentevastePeriode1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet1" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred1HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred1Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet1" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet1" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred1RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet1" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet1" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet1" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet1" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet1" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet1" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet1" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet1" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet1" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet1" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet1" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet1" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet1" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet1" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet1" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet1" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable">
+</table>
+
+<!-- =========Faciliteit 2============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac2inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+		<tr class="level0">
+				<td><data var="SoortKrediet2" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet2" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm2" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred2Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet2" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred2HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred2Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet2" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet2" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred2RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet2" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet2" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet2" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet2" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet2" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet2" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet2" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet2" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet2" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet2" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet2" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet2" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet2" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet2" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet2" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet2" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac2inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac3inReport/text()=1) and ((sum(./document/properties/*[@i&lt;3])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac3inReport/text()=1) and ((sum(./document/properties/*[@i&lt;3])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+
+<!-- =========Faciliteit 3============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac3inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet3" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet3" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm3" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred3Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet3" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred3HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred3Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet3" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet3" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred3RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet3" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet3" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet3" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet3" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet3" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet3" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet3" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet3" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet3" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet3" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet3" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet3" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet3" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet3" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet3" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet3" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac3inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac4inReport/text()=1) and ((sum(./document/properties/*[@i&lt;4])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac4inReport/text()=1) and ((sum(./document/properties/*[@i&lt;4])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+<!-- =========Faciliteit 4============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac4inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet4" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet4" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm4" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred4Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet4" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred4HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred4Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet4" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet4" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred4RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet4" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet4" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet4" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet4" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet4" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet4" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet4" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet4" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet4" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet4" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet4" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet4" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet4" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet4" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet4" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet4" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac4inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac5inReport/text()=1) and ((sum(./document/properties/*[@i&lt;5])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac5inReport/text()=1) and ((sum(./document/properties/*[@i&lt;5])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+<!-- =========Faciliteit 5============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac5inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet5" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet5" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm5" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred5Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet5" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred5HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred5Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet5" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet5" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred5RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet5" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet5" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet5" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet5" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet5" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet5" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet5" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet5" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet5" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet5" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet5" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet5" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet5" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet5" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet5" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet5" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac5inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac6inReport/text()=1) and ((sum(./document/properties/*[@i&lt;6])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac6inReport/text()=1) and ((sum(./document/properties/*[@i&lt;6])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+<!-- =========Faciliteit 6============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac6inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet6" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet6" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm6" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred6Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet6" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred6HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred6Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet6" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet6" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred6RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet6" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet6" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet6" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet6" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet6" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet6" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet6" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet6" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet6" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet6" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet6" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet6" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet6" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet6" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet6" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac6inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac7inReport/text()=1) and ((sum(./document/properties/*[@i&lt;7])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac7inReport/text()=1) and ((sum(./document/properties/*[@i&lt;7])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+
+<!-- =========Faciliteit 7============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac7inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet7" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet7" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm7" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred7Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet7" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred7HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred7Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet7" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet7" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred7RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet7" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet7" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet7" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet7" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet7" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet7" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet7" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet7" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet7" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet7" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet7" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet7" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet7" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet7" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet7" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet7" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac7inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac8inReport/text()=1) and ((sum(./document/properties/*[@i&lt;8])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac8inReport/text()=1) and ((sum(./document/properties/*[@i&lt;8])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+<!-- =========Faciliteit 8============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac8inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet8" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet8" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm8" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred8Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet8" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred8HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred8Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet8" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet8" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred8RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet8" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet8" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet8" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet8" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet8" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet8" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet8" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet8" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet8" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet8" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet8" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet8" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet8" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet8" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet8" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet8" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac8inReport/text()=1">
+</table>
+
+<newpage visible="(./document/properties/RA_incFac9inReport/text()=1) and ((sum(./document/properties/*[@i&lt;9])+1) mod 2)"/>
+<table class="ratingheadertable" visible="(./document/properties/RA_incFac9inReport/text()=1) and ((sum(./document/properties/*[@i&lt;9])+1) mod 2)">
+	<tr class="level0">
+		<td><data var="RA_CurrentDate" src="model"/></td>
+		<td>Rating Alert</td>
+		<td> </td>
+	</tr>
+	<tr class="level1">
+		<td>Bedrijfsnaam:</td>
+		<td><data var="FPS_VAR_Naam" src="model"/></td>
+		<td>URA Rating:</td>
+		<td><data var="krUraRatingKlasseLastT" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Straat en huisnummer:</td>
+		<td><data var="FPS_VAR_Straat" src="model"/></td>
+		<td>Jaar van rating:</td>
+		<td><data var="RA_RatingYear" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Postcode:</td>
+		<td><data var="FPS_VAR_Postcode" src="model"/></td>
+		<td>Totaal faciliteiten:</td>
+		<td><data var="RA_TotalLimit" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td>Plaats:</td>
+		<td><data var="FPS_VAR_Woonplaats" src="model"/></td>
+		<td>Totaal zekerheden: </td>
+		<td><data var="BBDEKKING" src="model"/></td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td><data var="RA_ReportScale" src="model"/></td>
+	</tr>
+</table>
+
+<!-- =========Faciliteit 9============================================================= -->
+
+<columns class="splitcolumns" visible="./document/properties/RA_incFac9inReport/text()=1">
+	<col>
+		<table class="ratingtable">
+			<tr class="level0">
+				<td><data var="SoortKrediet9" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data var="RA_NaamBankKrediet9" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td>Faciliteitsgegevens</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr class="level2">
+				<td>Aflossingsvorm</td>
+				<td><data var="RA_AflossingsVorm9" src="model"/></td>
+				<td>Soort Funding</td>
+				<td><data var="RA_SoortFundingKrediet9" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Looptijd</td>
+				<td><data var="BBFin_Kred9Looptijd" src="model"/></td>
+				<td>Rentevaste Periode</td>
+				<td><data var="RA_RentevastePeriode9" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Vaste / Variabele Rente</td>
+				<td><data var="RA_VastVariabelKrediet9" src="model"/></td>
+				<td>Rente begin datum</td>
+				<td><data var="RA_RenteBeginDatum9" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Hoofdsom / Limiet</td>
+				<td><data var="BBFin_Kred9HoofdSom" src="model"/></td>
+				<td>Funding </td>
+				<td><data var="RA_Kred9Funding" src="model"/></td><!-- ERROR -->
+			</tr>
+			<tr class="level2">
+				<td>Uitstaand Obligo</td>
+				<td><data var="RA_UitstaandObligoKrediet9" src="model"/></td>
+				<td>Afsluitdatum</td>
+				<td><data var="RA_AfsluitDatum9" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Pro Resto</td>
+				<td><data var="RA_ProRestoKrediet9" src="model"/></td>
+				<td>Einddatum</td>
+				<td><data var="RA_EindDatum6" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td>Rentepercentage</td>
+				<td><data var="BBFin_Kred9RentePercentage" src="model"/></td>
+				<td>Gebruikte LGD</td>
+				<td><data var="RA_LGDKrediet9" src="model"/></td>
+			</tr>
+			<tr class="level2">
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+		<table class="ratingtable2">
+			<tr class="level5">
+				<td>Rente gegevens</td>
+				<td>Werkelijk Tarief</td>
+				<td> </td>
+				<td>Indicatief tarief</td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Funding</td>
+				<td><data var="RA_FundingWerkKrediet9" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_FundingNormKrediet9" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Risico Opslag</td>
+				<td><data var="RA_RisicoOpslagWerkKrediet9" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_RisicoOpslagNormKrediet9" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level3">
+				<td>Overige opslag</td>
+				<td><data var="RA_OverigeKostenRendementWerkelijkKrediet9" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_OverigeKostenRendementNormKrediet9" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level4">
+				<td>Tarief</td>
+				<td><data var="RA_TariefWerkKrediet9" src="model"/></td>
+				<td> </td>
+				<td><data var="RA_TariefNormKrediet9" src="model"/></td>
+				<td> </td>
+			</tr>
+			<tr class="level1">
+				<td><data var="RA_ToelichtingTekstKrediet9" src="model"/></td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+		</table>
+	</col>
+	<col>
+		<graph class="graphTemplate3">
+			<title>Werkelijk tarief ten opzichte van indicatief tarief</title>
+			<xtitle>xx</xtitle>
+			<legend>
+				<a>labelA</a>
+				<b>labelB</b>
+				<c>labelC</c>
+			</legend>
+			<results>
+				<label>Werkelijk tarief</label>
+				<a><value><data var="RA_FundingWerkKrediet9" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagWerkKrediet9" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementWerkelijkKrediet9" src="model" showDecoration="false"/></value></c>
+			</results>
+			<results>
+				<label>Indicatief tarief</label>
+				<a><value><data var="RA_FundingNormKrediet9" src="model" showDecoration="false"/></value></a>
+				<b><value><data var="RA_RisicoOpslagNormKrediet9" src="model" showDecoration="false"/></value></b>
+				<c><value><data var="RA_OverigeKostenRendementNormKrediet9" src="model" showDecoration="false"/></value></c>
+			</results>
+		</graph>
+	</col>
+</columns>
+<table class="horizontallinetable" visible="./document/properties/RA_incFac9inReport/text()=1">
+</table>
+
+<!--<newpage visible="(sum(./document/properties/*[@i&lt;10])+1) mod 2"/>-->
+
+<!-- =========Zekerheden============================================================= 	-->
+<table class="ratingcollateraltable">
+	<tr class="level0" visible="./document/properties/RA_GebruikZekerheid1/text()=1">
+		<td>Zekerheden</td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+	</tr>
+	<tr class="level2" visible="./document/properties/RA_GebruikZekerheid1/text()=1">
+		<td>Bank</td>
+		<td>Zekerheid</td>
+		<td>Waarde</td>
+		<td>Soort</td>
+		<td>Dekkingspercentage</td>
+		<td>Dekkingswaarde</td>
+		<td> </td>
+	</tr>
+	<tr class="level1" visible="./document/properties/RA_GebruikZekerheid1/text()=1">
+		<td><data var="RA_NaamBankZekerheid1" src="model"/></td>
+		<td><data var="RA_Zekerheid1Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid1" src="model"/></td>
+		<td><data var="RA_Zekerheid1SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid1" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid1" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid2/text()=1">
+		<td><data var="RA_NaamBankZekerheid2" src="model"/></td>
+		<td><data var="RA_Zekerheid2Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid2" src="model"/></td>
+		<td><data var="RA_Zekerheid2SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid2" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid2" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid3/text()=1">
+		<td><data var="RA_NaamBankZekerheid3" src="model"/></td>
+		<td><data var="RA_Zekerheid3Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid3" src="model"/></td>
+		<td><data var="RA_Zekerheid3SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid3" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid3" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid4/text()=1">
+		<td><data var="RA_NaamBankZekerheid4" src="model"/></td>
+		<td><data var="RA_Zekerheid4Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid4" src="model"/></td>
+		<td><data var="RA_Zekerheid4SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid4" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid4" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid5/text()=1">
+		<td><data var="RA_NaamBankZekerheid5" src="model"/></td>
+		<td><data var="RA_Zekerheid5Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid5" src="model"/></td>
+		<td><data var="RA_Zekerheid5SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid5" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid5" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid6/text()=1">
+		<td><data var="RA_NaamBankZekerheid6" src="model"/></td>
+		<td><data var="RA_Zekerheid6Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid6" src="model"/></td>
+		<td><data var="RA_Zekerheid6SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid6" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid6" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid7/text()=1">
+		<td><data var="RA_NaamBankZekerheid7" src="model"/></td>
+		<td><data var="RA_Zekerheid7Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid7" src="model"/></td>
+		<td><data var="RA_Zekerheid7SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid7" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid7" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid8/text()=1">
+		<td><data var="RA_NaamBankZekerheid8" src="model"/></td>
+		<td><data var="RA_Zekerheid8Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid8" src="model"/></td>
+		<td><data var="RA_Zekerheid8SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid8" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid8" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid9/text()=1">
+		<td><data var="RA_NaamBankZekerheid9" src="model"/></td>
+		<td><data var="RA_Zekerheid9Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid9" src="model"/></td>
+		<td><data var="RA_Zekerheid9SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid9" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid9" src="model"/></td>
+		<td> </td>
+	</tr>
+	<tr class="level1"  visible="./document/properties/RA_GebruikZekerheid10/text()=1">
+		<td><data var="RA_NaamBankZekerheid10" src="model"/></td>
+		<td><data var="RA_Zekerheid10Soort" src="model"/></td>
+		<td><data var="RA_WaardeZekerheid10" src="model"/></td>
+		<td><data var="RA_Zekerheid10SoortWaarde" src="model"/></td>
+		<td><data var="RA_DekkingsPercentageZekerheid10" src="model"/></td>
+		<td><data var="RA_DekkingsWaardeZekerheid10" src="model"/></td>
+		<td> </td>
+	</tr>
+</table>
+	<newpage name="backside">
+	</newpage>
+</document>

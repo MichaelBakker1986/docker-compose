@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>CRR</CodeList>
+    <CodeListVersion>1.0</CodeListVersion>
+    <Description>Credit Risk Rating Service</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>No</MultiLevelDataWhenSource>
+    <LeveledMappingWhenTarget>No</LeveledMappingWhenTarget>
+    <DCSignedValues>No</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FMT4 Mastermodel CCR</Creator>
+    <CreatorVersion>1.0</CreatorVersion>
+    <BuildDate>2015-01-28</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+    <Account><Code>import.date</Code><Description>Importdatum</Description><Sort>1</Sort><Level>1</Level><DC></DC><DataType>date</DataType></Account>
+    <Account><Code>rating.rating</Code><Description>Rating</Description><Sort>2</Sort><Level>1</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>rating.ratingAppliedModel</Code><Description>Rating prefix</Description><Sort>3</Sort><Level>1</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>referenceLimit.currency</Code><Description>Currency</Description><Sort>4</Sort><Level>1</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>referenceLimit.amount</Code><Description>Referentielimiet</Description><Sort>5</Sort><Level>1</Level><DC></DC><DataType>number</DataType></Account>
+ </Accounts>
+</FmtMappingModel>

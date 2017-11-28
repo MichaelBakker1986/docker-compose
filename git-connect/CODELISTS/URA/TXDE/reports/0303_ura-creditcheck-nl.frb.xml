@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+
+						<!--Report Version 1.1 -->
+
+<!-- ====================================================================== -->
+
+<document author="Luuk Peters" title="Hello World! Test" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<font src="font/Sansation_Regular.ttf"/>
+<properties>
+	<Note12Visible><data src="instance" var="//question[id='ccScore12']/details/notitie/text()"/></Note12Visible>
+	<Note131Visible><data src="instance" var="//question[id='ccScore131']/details/notitie/text()"/></Note131Visible>
+	<Note132Visible><data src="instance" var="//question[id='ccScore132']/details/notitie/text()"/></Note132Visible>
+	<Note211Visible><data src="instance" var="//question[id='ccScore211']/details/notitie/text()"/></Note211Visible>
+	<Note212Visible><data src="instance" var="//question[id='ccScore212']/details/notitie/text()"/></Note212Visible>
+	<Note213Visible><data src="instance" var="//question[id='ccScore213']/details/notitie/text()"/></Note213Visible>
+	<Note214Visible><data src="instance" var="//question[id='ccScore214']/details/notitie/text()"/></Note214Visible>
+	<Note221Visible><data src="instance" var="//question[id='ccScore221']/details/notitie/text()"/></Note221Visible>
+	<Note222Visible><data src="instance" var="//question[id='ccScore222']/details/notitie/text()"/></Note222Visible>
+	<Note223Visible><data src="instance" var="//question[id='ccScore223']/details/notitie/text()"/></Note223Visible>
+	<Note224Visible><data src="instance" var="//question[id='ccScore224']/details/notitie/text()"/></Note224Visible>
+	<Note225Visible><data src="instance" var="//question[id='ccScore225']/details/notitie/text()"/></Note225Visible>
+	<Note231Visible><data src="instance" var="//question[id='ccScore231']/details/notitie/text()"/></Note231Visible>
+	<Note232Visible><data src="instance" var="//question[id='ccScore232']/details/notitie/text()"/></Note232Visible>
+	<Note233Visible><data src="instance" var="//question[id='ccScore233']/details/notitie/text()"/></Note233Visible>
+	<Note24Visible><data src="instance" var="//question[id='ccScore24']/details/notitie/text()"/></Note24Visible>
+	<Note251Visible><data src="instance" var="//question[id='ccScore251']/details/notitie/text()"/></Note251Visible>
+	<Note252Visible><data src="instance" var="//question[id='ccScore252']/details/notitie/text()"/></Note252Visible>
+	
+	<ShowTableccScore12><data src="instance" var="//question[id='ccScore12']/details/show_table/text()"/></ShowTableccScore12>
+	<ShowTableccScore211><data src="instance" var="//question[id='ccScore211']/details/show_table/text()"/></ShowTableccScore211>
+	<ShowTableccScore212><data src="instance" var="//question[id='ccScore212']/details/show_table/text()"/></ShowTableccScore212>
+	<ShowTableccScore213><data src="instance" var="//question[id='ccScore213']/details/show_table/text()"/></ShowTableccScore213>
+	<ShowTableccScore214><data src="instance" var="//question[id='ccScore214']/details/show_table/text()"/></ShowTableccScore214>
+	<ShowTableccScore225><data src="instance" var="//question[id='ccScore225']/details/show_table/text()"/></ShowTableccScore225>
+	<ShowTableccScore24><data src="instance" var="//question[id='ccScore24']/details/show_table/text()"/></ShowTableccScore24>
+	
+	<Slider11><data var="ccScore11" src="model" showDecoration="false"/></Slider11>
+	<Slider12><data var="ccScore12" src="model" showDecoration="false"/></Slider12>
+	<Slider131><data var="ccScore131" src="model" showDecoration="false"/></Slider131>
+	<Slider132><data var="ccScore132" src="model" showDecoration="false"/></Slider132>
+	<Slider211><data var="ccScore211" src="model" showDecoration="false"/></Slider211>
+	<Slider212><data var="ccScore212" src="model" showDecoration="false"/></Slider212>
+	<Slider213><data var="ccScore213" src="model" showDecoration="false"/></Slider213>
+	<Slider214><data var="ccScore214" src="model" showDecoration="false"/></Slider214>
+	<Slider221><data var="ccScore221" src="model" showDecoration="false"/></Slider221>
+	<Slider222><data var="ccScore222" src="model" showDecoration="false"/></Slider222>
+	<Slider223><data var="ccScore223" src="model" showDecoration="false"/></Slider223>
+	<Slider224><data var="ccScore224" src="model" showDecoration="false"/></Slider224>
+	<Slider225><data var="ccScore225" src="model" showDecoration="false"/></Slider225>
+	<Slider231><data var="ccScore231" src="model" showDecoration="false"/></Slider231>
+	<Slider232><data var="ccScore232" src="model" showDecoration="false"/></Slider232>
+	<Slider233><data var="ccScore233" src="model" showDecoration="false"/></Slider233>
+	<Slider24><data var="ccScore24" src="model" showDecoration="false"/></Slider24>
+	<Slider251><data var="ccScore251" src="model" showDecoration="false"/></Slider251>
+	<Slider252><data var="ccScore252" src="model" showDecoration="false"/></Slider252>
+	
+	<langHeaderPrincipal2><data var ="GenInfoCompanyIdName" src="model">Bedrijfsnaam</data>, <data var ="GenInfoCompanyIdLocationCity" src="model">Plaats</data></langHeaderPrincipal2>
+	<langHeaderTitle2> </langHeaderTitle2>
+</properties>
+	<newpage name="frontpage-nl-ura">
+		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>
+	</newpage>
+	<newpage name="main">
+		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>
+	</newpage>
+
+<!-- =========Inhoudsopgave============================================================= -->
+<tableofcontents class="split">
+	<title>Inhoudsopgave</title>
+	<tocdepth>3</tocdepth>
+</tableofcontents>
+<newpage/>
+
+<!-- =========Opdracht en uitvoering============================================================= -->
+<section class="sectionnum">Opdracht en uitvoering</section>
+<p><b>Opdracht en uitvoering</b></p>
+<p>Conform uw opdracht hebben wij door de URA Rating Agency B.V., gevestigd te Rotterdam, een rating per <data src="functions" name="getEndDate"><param key="format" value="dd-MM-yyyy"/><param key="tDelta" value="0"/></data> van <data var="GenInfoCompanyIdName" src="model"></data> te <data var="GenInfoCompanyIdLocationCity" src="model"></data> laten berekenen. 
+Met behulp van een rating wordt op basis van een berekende statistische uitvalkans van de <data var="GenInfoCompanyIdName" src="model"></data> een uitspraak gedaan over de verwachte krediet-waardigheid ervan voor een periode van 1 jaar na afgifte van deze rating.</p>
+<p><b>Verantwoordelijkheid van het bestuur</b></p>
+<p>Als uitgangspunt voor de berekening van de rating van de vennootschap wordt gebruik gemaakt van de financiële gegevens van de onderneming c.q. de jaarrekening van de vennootschap per <data src="functions" name="getEndDate"><param key="format" value="dd-MM-yyyy"/><param key="tDelta" value="0"/></data>. 
+De verantwoordelijkheid voor de juistheid en de volledigheid van die gegevens berust bij het bestuur van de vennootschap.</p>
+<p><b>Verantwoordelijkheid van de accountant</b></p>
+<p>Het is onze verantwoordelijkheid als accountant om de door u verstrekte opdracht uit te voeren in overeenstemming met Nederlands recht, waaronder de door onze beroepsorganisatie uitgevaardigde gedrag- en beroepsregels.</p>
+<p>In overeenstemming met de voor het accountantsberoep geldende standaard voor samenstellingsopdrachten, bestonden onze werkzaamheden in hoofdzaak uit het verzamelen, het verwerken, het rubriceren en het samenvatten van financiële gegevens, aangevuld met uit het aanbrengen van een aantal waardecorrecties op te komen tot de grondslag, op basis waarvan URA Rating Agency B.V. haar rating baseert. De aard van de werkzaamheden is zodanig dat wij geen zekerheid omtrent de getrouwheid van de rating kunnen verstrekken.</p>
+<p><b>Bevestiging</b></p>
+<p>Op basis van de ons verstrekte gegevens hebben wij de rating van <data var="GenInfoCompanyIdName" src="model"></data> laten berekenen. De hierbij gehanteerde grondslagen en door ons aangebrachte correcties zijn in dit rapport nader toegelicht.</p>
+<p><b>Toelichting</b></p>
+<p>De in dit rapport opgenomen rating is berekend door URA Rating Agency B.V., gevestigd te Rotterdam. Voor een verantwoording van de daarbij gehanteerde systematiek wordt verwezen naar bijlage 2 van dit rapport.</p>
+<p><b>Overige aspecten - beperking in het gebruik (en verspreidingskring)</b></p>
+<p>Dit ratingrapport van <data var="GenInfoCompanyIdName" src="model"></data> te <data var="GenInfoCompanyIdLocationCity" src="model"></data> is uitsluitend bedoeld voor de onderneming en kan derhalve niet voor andere doeleinden worden gebruikt, tenzij met onze uitdrukkelijke toestemming daartoe. </p>
+<p> </p>
+<p><b><data var="FPS_FINAN_USER" src="model"></data></b></p>
+<newpage/>
+
+<!-- =========De onderneming ============================================================= -->
+<section class="sectionnum">De onderneming</section>
+<table class="company">
+	<tr class="level0">
+		<td>Bedrijfsnaam</td>
+		<td><data var="GenInfoCompanyIdName" src="model"></data></td>
+	</tr>
+	<tr class="level0">
+		<td>Rechtsvorm</td>
+		<td><data var="krRechtsvorm" src="model"></data></td>
+	</tr>
+	<tr class="level0">
+		<td>Vestigingsplaats</td>
+		<td><data var="GenInfoCompanyIdLocationCity" src="model"></data></td>
+	</tr>
+	<tr class="level0">
+		<td>Oprichtingsjaar</td>
+		<td><data var="krOprichtingsjaar" src="model"></data></td>
+	</tr>
+	<tr class="level0">
+		<td>Boekjaar</td>
+		<td><data src="functions" name="getEndDate"><param key="format" value="yyyy"/><param key="tDelta" value="0"/></data></td>
+	</tr>
+	<tr class="level0">
+		<td>Doel van de onderneming</td>
+		<td><data var="krDoelOnderneming" src="model"></data></td>
+	</tr>
+</table>
+<newpage/>
+
+<!-- =========Sectie 3============================================================= -->
+<section class="sectionnum">Kredietwaardigheidsbeoordeling</section>
+
+<subsection class="subsectionnum">Doel, achtergrond en betekenis van de cijfers</subsection>
+<p>Dit rapport bevat een analyse van de kredietwaardigheid van uw onderneming per 31 december <data src="functions" name="getEndDate"><param key="format" value="yyyy"/><param key="tDelta" value="0"/></data>. De analyse is opgesteld als voorbereiding op een kredietwaardigheidsbeoordeling door kredietverlenende instanties.</p>
+<p>Een kredietwaardigheidsbeoordeling is gebaseerd op drie belangrijke elementen:</p>
+<p>  -  De rating</p>
+<p>  -  De betalingscapaciteit</p>
+<p>  -  De zekerheden en andere financiële reserves</p>
+<p/>
+<p>Kredietverlenende instanties drukken hun oordeel over de kredietwaardigheid uit in een rating (statistische kans op het niet kunnen voldoen aan verplichtingen), gebaseerd op kwantitatieve en kwalitatieve criteria van de onderneming</p>
+<p/>
+<p>Het beoordelingscijfer zoals opgenomen in dit analyserapport geeft een indicatie in hoeverre de onderneming in staat is om in het jaar volgend op het jaar waarop de analyse is gebaseerd, aan haar rente en aflossingsverplichtingen te voldoen. Dat brengen wij tot uitdrukking op een schaal van 1 (uitmuntend) tot 6 (onvoldoende)</p>
+<p/>
+<p>De analyse van de betalingscapaciteit geeft aan in hoeverre de cashflow van de onderneming toereikend is om daaruit de rente en aflossingen, belastingen, winstuitkeringen, gelden voor privé-bestellingen en de noodzakelijke herinvesteringen te kunnen voldoen.</p>
+<p/>
+<p>Zekerheden en andere financiële reserves vormen het conservatieve element in de kredietwaardigheidsbeoordeling. Daarbij geldt als grondregel dat dit element des te belangrijker wordt, naarmate de beide andere elementen, rating en betalingscapaciteit, ongunstiger zijn.</p>
+<p/>
+<p><b>De cijferwaardering kan als volgt worden verklaard:</b></p>
+
+<table class="twocolumns">
+	<tr class="header">
+		<td>Cijfer</td>
+		<td>Betekenis</td>
+	</tr>
+	<tr class="level0">
+		<td>1</td>
+		<td>Zeer geringe kans op wanbetaling</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Zeer groot vermogen om aan financiële verplichtingen te voldoen</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Zeer grote financiële reserves</td>
+	</tr>
+	<tr class="level0">
+		<td>2</td>
+		<td>Geringe kans op wanbetaling</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Goed vermogen om aan financiële verplichtingen te voldoen</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Goede financiële reserves</td>
+	</tr>
+	<tr class="level0">
+		<td>3</td>
+		<td>Gemiddelde kans op wanbetaling</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Bevredigend vermogen om aan financiële verplichtingen te voldoen</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Voldoende zekerheden</td>
+	</tr>
+	<tr class="level0">
+		<td>4</td>
+		<td>Verhoogde kans op wanbetaling</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Vermogen om aan financiële verplichtingen te voldoen nog net toereikend</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Vrije financiële middelen nog aanwezig</td>
+	</tr>
+	<tr class="level0">
+		<td>5</td>
+		<td>Grote kans op wanbetaling</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Kan niet aan financiële verplichtingen voldoen</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Geen financiële middelen of zekerheden meer beschikbaar; eventueel nog wel privé</td>
+	</tr>
+	<tr class="level0">
+		<td>6</td>
+		<td>Met kans op wanbetaling moet acuut rekening worden gehouden</td>
+	</tr>
+	<tr class="level0">
+		<td> </td>
+		<td>Omvangrijke negatieve cashflow en niet meer in staat om aan financiële verplichtingen te voldoen</td>
+	</tr>
+	<tr class="level1">
+		<td> </td>
+		<td>Geen enkele financiële reserve of zekerheid meer beschikbaar</td>
+	</tr>
+</table>
+<newpage/>
+
+<!-- =========Samenvatting rating waarde ============================================================= -->
+<subsection class="subsectionnum">Uitkomsten van de analyse en berekening van de rating waarde</subsection>
+<p/>
+<p>Uitkomsten van de analyse en berekening van de beoordelingscijfers van zes beoordelingsgebieden.</p>
+<table class="fivecolumns">
+	<tr class="header">		<td>3.3 Financiële situatie</td>							<td>Beoordelingscijfer</td>							<td>x</td>	<td>Gewicht</td>									<td>Resultaat</td>	</tr>
+	<tr class="level0">		<td>3.3.1 Kwantitatieve rating (Ratingklase: <data var="krUraRatingKlasseLastT" src="model"></data>)</td>						<td><data var="ccScore11" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight11" src="model"></data></td>	<td><data var="ccWeightedScore11" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>3.3.2 Gebruik en beheer van de bankrekening</td>		<td><data var="ccScore12" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight12" src="model"></data></td>	<td><data var="ccWeightedScore12" src="model"></data></td>	</tr>
+	<tr class="level0">		<td>3.3.3 Situatie lopend jaar</td>						<td><data var="ccScore13" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight13" src="model"></data></td>	<td><data var="ccWeightedScore13" src="model"></data></td>	</tr>
+	<tr class="level1">		<td>3.3.3.1 Omzetontwikkeling</td>						<td><data var="ccScore131" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight131" src="model"></data></td><td><data var="ccWeightedScore131" src="model"></data></td>	</tr>
+	<tr class="level1">		<td>3.3.3.2 Betrouwbaarheid gegevens</td>					<td><data var="ccScore132" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight132" src="model"></data></td><td><data var="ccWeightedScore132" src="model"></data></td>	</tr>
+    <tr class="level2">		<td>Resultaat boordelingsgebied</td>					<td><data var="ccScore1" src="model"></data></td>   </tr>
+</table>
+<table class="fivecolumns">
+	<tr class="header">		<td>3.4 Kwalitatieve criteria</td>						<td>Beoordelingscijfer</td>							<td>x</td>	<td>Gewicht</td>									<td>Resultaat</td>	</tr>
+	<tr class="level0">		<td>3.4.1 Commercieel</td>								<td><data var="ccScore21" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight21" src="model"></data></td>		<td><data var="ccWeightedScore21" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.1.1 Product en assortiment</td>					<td><data var="ccScore211" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight211" src="model"></data></td>	<td><data var="ccWeightedScore211" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.1.2 Klanten</td>									<td><data var="ccScore212" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight212" src="model"></data></td>	<td><data var="ccWeightedScore212" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.1.3 Concurrentiepositie</td>						<td><data var="ccScore213" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight213" src="model"></data></td>	<td><data var="ccWeightedScore213" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.1.4 Leveranciers</td>								<td><data var="ccScore214" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight214" src="model"></data></td>	<td><data var="ccWeightedScore214" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>3.4.2 Management</td>									<td><data var="ccScore22" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight22" src="model"></data></td>		<td><data var="ccWeightedScore22" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.2.1 Opvolging en vertegenwoordiging</td>			<td><data var="ccScore221" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight221" src="model"></data></td>	<td><data var="ccWeightedScore221" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.2.2 Commerciële capaciteiten</td>					<td><data var="ccScore222" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight222" src="model"></data></td>	<td><data var="ccWeightedScore222" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.2.3 Technische capaciteiten</td>					<td><data var="ccScore223" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight223" src="model"></data></td>	<td><data var="ccWeightedScore223" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.2.4 Beroepservaring</td>							<td><data var="ccScore224" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight224" src="model"></data></td>	<td><data var="ccWeightedScore224" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.2.5 Informatiebeleid</td>							<td><data var="ccScore225" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight225" src="model"></data></td>	<td><data var="ccWeightedScore225" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>3.4.3 Boekhouding</td>								<td><data var="ccScore23" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight23" src="model"></data></td>		<td><data var="ccWeightedScore23" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.3.1 Kwaliteitsrisico</td>							<td><data var="ccScore231" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight231" src="model"></data></td>	<td><data var="ccWeightedScore231" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.3.2 Debiteuren/crediteuren</td>					<td><data var="ccScore232" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight232" src="model"></data></td>	<td><data var="ccWeightedScore232" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.3.3 Calculatie</td>								<td><data var="ccScore233" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight233" src="model"></data></td>	<td><data var="ccWeightedScore233" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>3.4.4 Risicomanagement</td>							<td><data var="ccScore24" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight24" src="model"></data></td>		<td><data var="ccWeightedScore24" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>3.4.5 Planning</td>									<td><data var="ccScore25" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight25" src="model"></data></td>		<td><data var="ccWeightedScore25" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.5.1 Planningsvermogen</td>						<td><data var="ccScore251" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight251" src="model"></data></td>	<td><data var="ccWeightedScore251" src="model"></data> </td>	</tr>
+	<tr class="level1">		<td>3.4.5.2 Realiteitsgehalte</td>						<td><data var="ccScore252" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight252" src="model"></data></td>	<td><data var="ccWeightedScore252" src="model"></data> </td>	</tr>
+	<tr class="level2">		<td>Resultaat boordelingsgebied</td>					<td><data var="ccScore2" src="model"></data></td>   </tr>
+</table>
+<table class="fivecolumns">
+	<tr class="header">		<td>Totaalcijfers</td>									<td>Beoordelingscijfer</td>							<td>x</td>	<td>Gewicht</td>										<td>Resultaat</td>	</tr>
+	<tr class="level0">		<td>Beoordelingsgebied financiële situatie</td>		<td><data var="ccScore1" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight1" src="model"></data></td>		<td><data var="ccWeightedScore1" src="model"></data> </td>	</tr>
+	<tr class="level0">		<td>Beoordelingsgebied kwalitatieve criteria</td>	<td><data var="ccScore2" src="model"></data></td>	<td>x</td>	<td><data var="ccWeight2" src="model"></data></td>		<td><data var="ccWeightedScore2" src="model"></data> </td>	</tr>
+	<tr class="level3">		<td>Eindbeoordelingscijfer</td>							<td><data var="ccScore" src="model"></data></td>   </tr>
+</table>
+<table class="fivecolumns">
+	<tr class="header">		<td>Resultaat</td>										<td></td><td></td><td></td><td></td>					</tr>
+	<tr class="level3">		<td>Uitvalswaarschijnlijkheid (PD)</td>					<td><data var="ccPD" src="model"></data></td>		</tr>
+	<tr class="level3">		<td>Ratingklasse</td>									<td><data var="ccPDTitle" src="model"></data></td>  </tr>
+</table>
+<newpage/>
+
+<!-- =========Analyse van de financiele positie============================================================= -->
+
+<!-- deze is een afwijkend, niet alle informatie staat in de instance -->
+
+<subsection class="subsectionnum">Analyse van de financiële positie</subsection>
+<subsubsection class="subsubsectionnum">Uitkomsten solvency check</subsubsection>
+<p>De rating, gebaseerd op de cijfers van de laatst uitgebrachte jaarrekening, is een belagrijke indicator voor de financiële gezondheid van de onderneming. De uitkomsten van de laatst uitgevoerde rating, opgenomen in de solvency check van 31 december <data src="functions" name="getEndDate"><param key="format" value="yyyy"/><param key="tDelta" value="0"/></data>, zijn als volgt:</p>
+<table class="sixcolumn">	
+	<data src="dataN">
+		<dataN>1</dataN>
+		<numberOfColumns>5</numberOfColumns>
+		<var>RatingFolder</var>
+		<varFrom>krPD</varFrom>
+		<varTo>krUraRatingKlasse</varTo>
+		<filterEmptyRows>false</filterEmptyRows>
+	</data>
+</table>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore11" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider11/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider11/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+<table class="twocolumns">
+	<tr class="header">
+		<td>Cijfer</td>
+		<td>Toelichting</td>
+	</tr>
+	<tr class="level2">
+		<td>1</td>
+		<td>De onderneming heeft een zeer geringe kans van wanbetaling en wordt ingedeeld in een klasse met een zeer goede tot goede kredietwaardigheid. Op korte en middellange termijn blijft de onderneming solvabel.</td>
+	</tr>
+	<tr class="level2">
+		<td>2</td>
+		<td>De onderneming heeft een geringe kans van wanbetaling en wordt ingedeeld in een klasse met een goede kredietwaardigheid. Binnen een jaar worden geen ontwikkelingen verwacht die de kredietwaardigheid in gevaar kunnen brengen.</td>
+	</tr>
+	<tr class="level2">
+		<td>3</td>
+		<td>De onderneming heeft een gemiddelde kans van wanbetaling en wordt ingedeeld in een klasse met een voldoende kredietwaardigheid. Op korte termijn wordt de onderneming als stabiel beschouwd en geringe ongunstige ontwikkel-dingen kunnen worden opgevangen.</td>
+	</tr>
+	<tr class="level2">
+		<td>4</td>
+		<td>De onderneming heeft een verhoogde kans van wanbetaling en wordt ingedeeld in een klasse met een nog acceptabele kredietwaardigheid. Over de termijn van het volgende jaar kan de onderneming de financiële verplichtingen nakomen.</td>
+	</tr>
+	<tr class="level2">
+		<td>5</td>
+		<td>De onderneming heeft een grote kans van wanbetaling en wordt ingedeeld in een klasse met een onvoldoende kredietwaardigheid. Ongunstige economische ontwikkelingen brengen de mogelijkheden van de onderneming in gevaar om aan zijn betalingsverplichtingen te kunnen voldoen.</td>
+	</tr>
+	<tr class="level2">
+		<td>6</td>
+		<td>De onderneming heeft een zeer grote kans van wanbetaling en wordt ingedeeld in een klasse met een zeer onvoldoende kredietwaardigheid. De solvabiliteit komt al bij kortdurende ongunstige economische ontwikkelingen in gevaar.</td>
+	</tr>
+</table>
+
+<newpage/>
+<!-- =========Beheer van bankrekeningen============================================================= -->
+<subsubsection class="subsubsectionnum">Beheer van bankrekeningen en overige liquide middelen</subsubsection>
+<p>De wijze waarop de onderneming met haar bankposities en liquide middelen (meer in het algemeen: haar werkkapitaal) beheert vormt na de balansbeoordeling de tweede belangrijke pijler voor het beoordelen van de financiële situatie. In onderstaande tabel, aanwezig indien data ingevoerd, is de ontwikkeling van de bankpositie weergegeven.</p>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore12']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore12" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider12/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider12/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note12Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore12']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="instancetable" visible="./document/properties/ShowTableccScore12/text()=1">
+<tr class="title">		<td>Toelichting op de rekeningen:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore12']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+	<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore12']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<!-- =========Ontwikkeling lopend jaar============================================================= -->
+<subsubsection class="subsubsectionnum">Ontwikkeling in het lopend boekjaar</subsubsection>
+<p>De ontwikkeling in het lopende boekjaar wordt gemeten aan de hand van de omzetontwikkeling in en de kwaliteit van de administratie in het lopende boekjaar.</p>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 1:</td>			<td><data src="instance" var="//question[@id='ccScore131']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore131" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider131/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider131/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note131Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore131']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='1']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='1']/short/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='2']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='2']/short/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='3']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='3']/short/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='4']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='4']/short/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='5']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='5']/short/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore131']/answers/answer[id='6']/long/text()"/> <data src="instance" var="//question[@id='ccScore131']/answers/answer[id='6']/short/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 2:</td>			<td><data src="instance" var="//question[@id='ccScore132']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore132" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider132/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider132/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note132Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore132']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore132']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Kwalitatieve criteria============================================================= -->
+<subsection class="subsectionnum">Beoordelingsresultaten kwalitatieve criteria</subsection>
+
+<!-- =========Product en assortiment============================================================= -->
+<subsubsection class="subsubsectionnum">Product en assortiment</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore211']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore211" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider211/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider211/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note211Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore211']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="instancetable" visible="./document/properties/ShowTableccScore211/text()=1">
+<tr class="title">		<td>De belangrijkste producten:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore211']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore211']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Klanten============================================================= -->
+<subsubsection class="subsubsectionnum">Klanten</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore212']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore212" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider212/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider212/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note212Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore212']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="instancetable" visible="./document/properties/ShowTableccScore211/text()=1">
+<tr class="title">		<td>De belangrijkste klanten:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore211']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore212']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Concurrentiepositie============================================================= -->
+<subsubsection class="subsubsectionnum">Concurentiepositie</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore213']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore213" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider213/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider213/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note213Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore213']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twoinstancetable" visible="./document/properties/ShowTableccScore213/text()=1">
+<tr class="title">		<td>De belangrijkste concurrenten:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore213']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore213']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Leveranciers============================================================= -->
+<subsubsection class="subsubsectionnum">Leveranciers</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore214']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore214" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider214/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider214/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note214Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore214']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="instancetable" visible="./document/properties/ShowTableccScore214/text()=1">
+<tr class="title">		<td>De belangrijkste leveranciers:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore214']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore214']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Opvolging en vertegenwoordiging============================================================= -->
+<subsubsection class="subsubsectionnum">Opvolging en vertegenwoordiging</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore221']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore221" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider221/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider221/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note221Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore221']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore221']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Ondernemingsleiding============================================================= -->
+<subsubsection class="subsubsectionnum">De ondernemingsleiding</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 1:</td>			<td><data src="instance" var="//question[@id='ccScore222']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore222" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider222/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider222/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note222Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore222']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore222']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 2:</td>			<td><data src="instance" var="//question[@id='ccScore223']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore223" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider223/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider223/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note223Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore223']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore223']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 3:</td>			<td><data src="instance" var="//question[@id='ccScore224']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore224" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider224/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider224/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note224Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore224']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore224']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+
+<newpage/>
+
+<!-- =========Infomatiebeleid kredietinstellingen============================================================= -->
+<subsubsection class="subsubsectionnum">Informatiebeleid richting kredietinstellingen</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore225']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore225" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider225/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider225/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note225Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore225']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="threeinstancetable" visible="./document/properties/ShowTableccScore225/text()=1">
+<tr class="title">		<td>De belangrijkste afspraken/regelingen:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore225']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore225']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+<!-- =========Administratie============================================================= -->
+<subsubsection class="subsubsectionnum">Administratie</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 1:</td>			<td><data src="instance" var="//question[@id='ccScore231']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore231" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider231/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider231/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note231Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore231']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore231']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 2:</td>			<td><data src="instance" var="//question[@id='ccScore232']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore232" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider232/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider232/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note232Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore232']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore232']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 3:</td>			<td><data src="instance" var="//question[@id='ccScore233']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore233" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider233/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider233/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note233Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore233']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore233']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+
+<newpage/>
+
+<!-- =========Risicomanagement============================================================= -->
+<subsubsection class="subsubsectionnum">Risicomanagement</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag:</td>			<td><data src="instance" var="//question[@id='ccScore24']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore24" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider24/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider24/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note24Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore24']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="threeinstancetable" visible="./document/properties/ShowTableccScore24/text()=1">
+<tr class="title">		<td>Risico's:</td>		</tr>
+<tr class="title">		<td> </td>		</tr>
+	<data src="instance" var="//question[id='ccScore24']/details/table/tr"/>
+</table>
+<p/>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore24']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+
+
+<!-- =========Planning============================================================= -->
+<subsubsection class="subsubsectionnum">Planning</subsubsection>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 1:</td>			<td><data src="instance" var="//question[@id='ccScore251']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore251" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider251/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider251/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note251Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore251']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore251']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+<newpage/>
+<p/>
+<table class="twocolumns">
+	<tr class="level3">		<td>Vraag 2:</td>			<td><data src="instance" var="//question[@id='ccScore252']/text/text()"/></td>	</tr>
+	<tr class="level3">		<td>Cijfer:</td>		<td><data var="ccScore252" src="model"></data></td>	</tr>
+</table>
+<p/>
+<graph class="graphTemplate2">
+	<title>Slider</title>
+	<xtitle>by FINAN</xtitle>
+	<legend>
+		<a>label</a>
+		<b>label</b>
+		<c>label</c>
+	</legend>
+	<results>
+<!--		<label>2006</label>-->
+		<a>
+			<value><data src="document" var="number(/document/properties/Slider252/text())-1.05" type="calc"/></value>
+		</a>
+		<b>
+			<value>0.1</value>
+		</b>
+		<c>
+			<value><data src="document" var="number(/document/properties/Slider252/text())*-1 + 5.95" type="calc"/></value>
+		</c>
+	</results>
+	<results>
+<!--		<label>2007</label>-->
+		<a/>
+	</results>
+</graph>
+<p/>
+
+<table class="twocolumns">
+	<tr class="level3" visible="count(./document/properties/Note252Visible/text())>0">		<td>Notitie:</td>		<td><data src="instance" var="//question[id='ccScore252']/details/notitie/text()"/></td>	</tr>
+</table>
+<p/>
+<table class="twocolumns">
+<tr class="header">		<td>Cijfer</td>		<td>Toelichting</td>	</tr>
+	<tr class="level2">		<td>1</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='1']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>2</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='2']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>3</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='3']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>4</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='4']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>5</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='5']/long/text()"/></td>	</tr>
+	<tr class="level2">		<td>6</td>		<td><data src="instance" var="//question[@id='ccScore252']/answers/answer[id='6']/long/text()"/></td>	</tr>
+</table>
+
+
+<!--<newpage/>-->
+
+
+<!-- =========Bijlagen============================================================= -->
+
+<!--<section class="sectionnum">Bijlagen</section>
+
+<subsection class="subsectionnum">Solvency Check</subsection>-->
+
+
+
+<!-- =========Einde============================================================= -->
+
+
+
+</document>

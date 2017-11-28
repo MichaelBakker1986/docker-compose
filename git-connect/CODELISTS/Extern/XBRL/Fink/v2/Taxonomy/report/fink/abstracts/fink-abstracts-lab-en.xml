@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <link:labelLink xlink:role="http://www.xbrl.org/2003/role/link" xlink:type="extended">
+    <link:label id="fink-abstr_EntityReportInformationTitle_label_en" xlink:label="fink-abstr_EntityReportInformationTitle_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Entity and report information [title]</link:label>
+    <link:label id="fink-abstr_EntityInformationTitle_label_en" xlink:label="fink-abstr_EntityInformationTitle_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Entity information [title]</link:label>
+    <link:label id="fink-abstr_ForecastTitle_label_en" xlink:label="fink-abstr_ForecastTitle_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Forecast [title]</link:label>
+    <link:label id="fink-abstr_FundingRequestInformationTitle_label_en" xlink:label="fink-abstr_FundingRequestInformationTitle_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Funding request information [title]</link:label>
+    <link:label id="fink-abstr_FinancialReportingPeriodInformationTitle_label_en" xlink:label="fink-abstr_FinancialReportingPeriodInformationTitle_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Information regarding the financial reporting period [title]</link:label>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-abstr_EntityInformationTitle_loc" xlink:to="fink-abstr_EntityInformationTitle_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-abstr_EntityReportInformationTitle_loc" xlink:to="fink-abstr_EntityReportInformationTitle_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-abstr_FinancialReportingPeriodInformationTitle_loc" xlink:to="fink-abstr_FinancialReportingPeriodInformationTitle_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-abstr_ForecastTitle_loc" xlink:to="fink-abstr_ForecastTitle_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-abstr_FundingRequestInformationTitle_loc" xlink:to="fink-abstr_FundingRequestInformationTitle_label_en" xlink:type="arc"/>
+    <link:loc xlink:href="fink-abstracts.xsd#fink-abstr_EntityInformationTitle" xlink:label="fink-abstr_EntityInformationTitle_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-abstracts.xsd#fink-abstr_EntityReportInformationTitle" xlink:label="fink-abstr_EntityReportInformationTitle_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-abstracts.xsd#fink-abstr_FinancialReportingPeriodInformationTitle" xlink:label="fink-abstr_FinancialReportingPeriodInformationTitle_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-abstracts.xsd#fink-abstr_ForecastTitle" xlink:label="fink-abstr_ForecastTitle_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-abstracts.xsd#fink-abstr_FundingRequestInformationTitle" xlink:label="fink-abstr_FundingRequestInformationTitle_loc" xlink:type="locator"/>
+  </link:labelLink>
+</link:linkbase>

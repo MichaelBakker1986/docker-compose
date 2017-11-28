@@ -1,0 +1,2375 @@
+{&&Language=English};Inc_FunctionsTest.fin
+
+.Variables
+PPP   0 1N     1               =FunctionTestTotaal                        \FunctionTestTotaalCopy=FunctionTestTotaal
+
+;-------------------------------------------------------------------------------------------------------------------------------------- A
+; ABS
+.Variables
+PPP   0 1N     2               "ABS"                                      \Test001
+PII   6 1N     3               "Input"                                    \Test001Input
+PPP   6 1N   1 3               "Calculated"                               \Test001ResultCalc
+PII   6 1N     3               "Correct result"                           \Test001ResultCorrect
+
+.Formulas NoTrend
+Test001ResultCalc              = Abs(Test001Input)
+Test001                        = If(Abs(Test001ResultCalc - Test001ResultCorrect) < MaxDifference ,0,1)
+Test001Input                   = -6   ; de default invoer
+Test001ResultCorrect           = 6   ; het resultaat van de default invoer
+
+;------------------------------
+; AddMonth
+.Variables
+PPP   0 1N     2               "AddMonth"                                 \Test030
+PII   2 1N D   3               "AddMonth(DMYtoDate(31,1,2008),1)"         \Test030ResultCalc
+PII   2 1N D   3               "Correct result"                           \Test030ResultCorrect
+
+.Formulas NoTrend
+Test030              = If(Test030ResultCalc[1]=Test030ResultCorrect[1],0,1)
+Test030ResultCalc    = AddMonth(DMYtoDate(31,1,2008),1)
+Test030ResultCorrect = DMYtoDate(29,2,2008)
+
+;------------------------------
+; AfterStr
+.Variables
+PPP   0 1N     2               "AfterStr"                                 \Test031
+PII     1A     3               AfterStr('abc','123abcFINAN')              \Test031ResultCalc
+PII     1A     3               "Correct result"                           \Test031ResultCorrect
+
+.Formulas NoTrend
+Test031              = If(&Test031ResultCalc[1]=&Test031ResultCorrect[1],0,1)
+Test031ResultCalc    = &AfterStr("abc","123abcFINAN")
+Test031ResultCorrect = "FINAN"
+
+;------------------------------
+; And
+.Variables
+PPP   0 1N     2               "And"                                      \Test032              -> LogicaTest101
+
+.Formulas NoTrend
+Test032                = 0
+
+;-------------------------------------------------------------------------------------------------------------------------------------- B
+;------------------------------
+; BasicRate
+.Variables
+PPP   0 1N     2               "BasicRate"                                \Test033
+.Formulas NoTrend
+Test033  = PM
+
+;------------------------------
+; BeforeStr
+.Variables
+PPP   0 1N     2               "BeforeStr"                                \Test034
+PII     1A     3               BeforeStr('abc','123abcFINAN')             \Test034ResultCalc
+PII     1A     3               "Correct result"                           \Test034ResultCorrect
+
+.Formulas NoTrend
+Test034              = If(&Test034ResultCalc[1]=&Test034ResultCorrect[1],0,1)
+Test034ResultCalc    = &BeforeStr("abc","FINAN123abc")
+Test034ResultCorrect = "FINAN123"
+
+;------------------------------
+; BivarNormal                                                                          ; vanaf FINAN v3.2.49
+.Variables
+PPP   0 1N     2               "BivarNormal"                              \Test183
+PII   2 1N     3               "Alpha"                                    \Test183InputAlpha
+PII   2 1N     3               "Beta"                                     \Test183InputBeta
+PII   2 1N     3               "Rho"                                      \Test183InputRho
+PPP   6 1N   1 3               "Calculated"                               \Test183ResultCalc
+PII   6 1N     3               "Correct result"                           \Test183ResultCorrect
+
+.Formulas NoTrend
+Test183ResultCalc    = BivarNormal(Test183InputAlpha,Test183InputBeta,Test183InputRho)
+Test183              = If(Abs(Test183ResultCalc - Test183ResultCorrect) < MaxDifference ,0,1)
+
+Test183InputAlpha    = -0.1
+Test183InputBeta     = 0.4
+Test183InputRho      = 0.3
+Test183ResultCorrect = 0.345747         ; zie spreadsheet bivar.xls (te vinden via Google)
+
+;-------------------------------------------------------------------------------------------------------------------------------------- C
+;------------------------------
+; Case
+.Variables
+PPP   0 1N     2               "Case"                                     \Test035
+PPP   0 1N     3               "Case with default value"                  \Test035ResultCalc
+PPP   0 1N     3               "Correct result"                           \Test035ResultCorrect
+
+.Formulas NoTrend
+Test035           = If(&Test035ResultCalc[1]=&Test035ResultCorrect[1],0,1)
+Test035ResultCalc = Case(3, [1:55|2:66|Test035ResultCorrect])
+Test035ResultCorrect = 77
+
+;------------------------------
+; CumNormal
+.Variables
+PPP   0 1N     2               "CumNormal"                                \Test004
+PII   2 1N     3               "Input"                                    \Test004Input
+PPP   6 1N   1 3               "Calculated"                               \Test004ResultCalc
+PII   6 1N     3               "Correct result"                           \Test004ResultCorrect
+
+.Formulas NoTrend
+Test004ResultCalc    = CumNormal(Test004Input)
+Test004              = If(Abs(Test004ResultCalc - Test004ResultCorrect) < MaxDifference ,0,1)
+
+Test004Input         = 0.50
+Test004ResultCorrect = 0.6914624677873
+
+;------------------------------
+; CurrenciesAreLinked
+.Variables
+PPP   0 1N     2               "CurrenciesAreLinked"                      \Test036
+.Formulas NoTrend
+Test036 = PM
+
+;------------------------------
+; CurrencyCode
+.Variables
+PPP   0 1N     2               "CurrencyCode"                             \Test187
+
+
+;------------------------------
+; CurrencyFactor
+.Variables
+PPP   0 1N     2               "CurrencyFactor"                           \Test037
+.Formulas NoTrend
+Test037 = 0
+
+;-------------------------------------------------------------------------------------------------------------------------------------- D
+;------------------------------
+; DMYtoDate
+.Variables
+PPP   0 1N     2               "DMYtoDate"                                \Test038
+PII   2 1N     3               "DMYtoDate(31,1,2008)"                     \Test038ResultCalc
+PII   2 1N     3               "Correct result"                           \Test038ResultCorrect
+
+.Formulas NoTrend
+Test038              = If(Test038ResultCalc[1]=Test038ResultCorrect[1],0,1)
+Test038ResultCalc    = DMYtoDate(31,1,2008)
+Test038ResultCorrect = 39478
+
+;------------------------------
+; DataCurrencyCode
+.Variables
+PPP   0 1N     2               "DataCurrencyCode"                         \Test039
+.Formulas NoTrend
+
+;------------------------------
+; DataEntered
+.Variables
+PPP   0 1N     2               "DataEntered"                              \Test041
+
+PII   2 1N     3               "Input"                                    \Test041Input
+PPP   0 1N     4               "DataEntered"                              \Test041_1
+PPP   0 1N     4               "DataEntered"                              \Test041_2
+PPP   0 1N     4               "DataEntered"                              \Test041_3
+PPP   0=1N     4               =Test041Input                              \=Test041Input
+
+
+PPP   6 1N   1 3               "DataEntered"                              \Test041ResultCalc
+PII   6 1N     3               "Correct result"                           \Test041ResultCorrect
+
+.Formulas NoTrend
+Test041_1            = 1
+Test041ResultCalc    = DataEntered(Test041Input)
+Test041              = If(Test041ResultCalc=0,0,1)
+
+.Formulas NoTrend
+
+;------------------------------
+; DataFileIsLocked
+.Variables
+PPP   0 1N     2               "DataFileIsLocked"                         \Test042
+.Formulas NoTrend
+Test042 = PM
+
+
+;------------------------------
+; Date
+.Variables
+PPP   0 1N     2               "Date"                                     \Test015 -> Test083
+C Outdated! Use LastDateInT.
+.Formulas NoTrend
+Test015 = 0
+
+;------------------------------
+; DateToDay
+.Variables
+PPP   0 1N     2               "DateToDay"                                \Test188
+
+
+;------------------------------
+; DateNum
+.Variables
+PPP   0 1N     2               "DateNum"                                  \Test043
+.Formulas NoTrend
+
+;------------------------------
+; DateStr
+.Variables
+PPP   0 1N     2               "DateStr"                                   \Test044
+;PPP     1A   1 3               DateStr(Now)                               \Test044ResultCalc
+;PII     1A     3               "Correct result"                           \Test044ResultCorrect
+;
+;.Formulas NoTrend
+;Test044              = If(&Test044ResultCalc[1]=&Test044ResultCorrect[1],0,1)
+;Test044ResultCalc    = &DateStr(DMYtoDate(3,5,2009))
+;Test044ResultCorrect = "03-05-2009"
+
+;------------------------------
+; DateToMonth
+.Variables
+PPP   0 1N     2               "DateToMonth"                              \Test045
+PII   2 1N D   3               "Input"                                    \Test045Input
+PPP   6 1N   1 3               "DateToMonth"                              \Test045ResultCalc
+PII   6 1N     3               "Correct result"                           \Test045ResultCorrect
+
+.Formulas NoTrend
+Test045Input         = DMYtoDate(3,5,2009)
+Test045ResultCalc    = DateToMonth(Test045Input)
+Test045              = If(Test045ResultCalc[1]=Test045ResultCorrect[1],0,1)
+Test045ResultCorrect = 5
+
+;------------------------------
+; DateToT
+.Variables
+PPP   0 1N     2               "DateToT"                                   \Test046
+;PII   2 1N D   3               "Input"                                    \Test046Input
+;PPP   6 1N   1 3               "DateToT"                                  \Test046ResultCalc
+;PII   6 1N     3               "Correct result"                           \Test046ResultCorrect
+;
+;
+;.Formulas NoTrend
+;Test046Input         = DMYtoDate(3,5,2007)
+;Test046ResultCalc    = ValueOfT(DateToT(Test046Input))
+;Test046              = If(Test046ResultCalc[1]=Test046ResultCorrect[1],0,1)
+;Test046ResultCorrect = 29
+
+
+
+;------------------------------
+; DateToYear
+.Variables
+PPP   0 1N     2               "DateToYear"                               \Test047
+PII   2 1N D   3               "Input"                                    \Test047Input
+PPP   6 1N   1 3               "DateToYear"                               \Test047ResultCalc
+PII   6 1N     3               "Correct result"                           \Test047ResultCorrect
+
+.Formulas NoTrend
+Test047Input         = DMYtoDate(3,5,2009)
+Test047ResultCalc    = DateToYear(Test047Input)
+Test047              = If(Test047ResultCalc[1]=Test047ResultCorrect[1],0,1)
+Test047ResultCorrect = 2009
+
+;------------------------------
+; DateToYearNum
+.Variables
+PPP   0 1N     2               "DateToYearNum"                            \Test048
+PII   2 1N D   3               "Input"                                    \Test048Date
+PPP   2 1N   1 3               "Calculated"                               \Test048ResultCalc
+PII   2 1N     3               "Correct result"                           \Test048ResultCorrect
+
+.Formulas NoTrend,Trend
+Test048              = If(Abs(HSum(Test048ResultCalc,1,MaxT) - HSum(Test048ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test048ResultCorrect = 2009.3388888889
+Test048Date          = DMYToDate(3,5,2009)
+Test048ResultCalc    = DateToYearNum(Test048Date)
+
+;------------------------------
+; Decimals
+.Variables
+PPP   0 1N     2               "Decimals"                                 \Test049
+PPP   2 1N     3               "Calculated"                               \Test049ResultCalc
+PII   2 1N     3               "Correct result"                           \Test049ResultCorrect
+
+.Formulas NoTrend,Trend
+Test049              = If(Abs(HSum(Test049ResultCalc,1,MaxT) - HSum(Test049ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test049ResultCorrect = 0
+Test049ResultCalc    = Decimals
+
+
+;------------------------------
+; DocumentIndex
+.Variables
+PPP   0 1N     2               "DocumentIndex"                            \Test050
+.Formulas NoTrend
+ Test050 = PM
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- E
+
+;------------------------------
+; EnteredValueFoundInT
+.Variables
+PPP   0 1N     2               "EnteredValueFoundInT"                      \Test189
+
+;------------------------------
+; ER
+.Variables
+PPP   0 1N     2               "ER"                                        \Test051 -> LogicaTest001
+.Formulas NoTrend
+Test051                = 0
+
+
+;------------------------------
+; EURRate
+.Variables
+PPP   0 1N     2               "EURRate"                                   \Test190
+
+
+;------------------------------
+; EvaluateAsString
+.Variables
+PPP   0 1N     2               "EvaluateAsString"                          \Test191
+
+
+
+;------------------------------
+; Exp
+.Variables
+PPP   0 1N     2               "Exp"                                       \Test052
+PPP   2 1N     3               "Calculated"                                \Test052ResultCalc
+PII   2 1N     3               "Correct result"                            \Test052ResultCorrect
+
+.Formulas NoTrend,Trend
+Test052              = If(Abs(HSum(Test052ResultCalc,1,MaxT) - HSum(Test052ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test052ResultCorrect = 7.38905
+Test052ResultCalc    = Exp(2)
+
+
+;------------------------------
+; ExpandFraction
+.Variables
+PPP   0 1N     2               "ExpandFraction"                            \Test006
+PII     FN     3               =Sales02                                    \=Sales02 -> Sales02
+PPP     BN     3               =Receivables                                \=Receivables -> Receivables
+PPP   2 CN     3               "Calculated"                                \Test006Result
+
+PPP   2 1N   1 3               "Calculated"                                \Test006ResultCalc
+PII   2 1N     3               "Correct result"                            \Test006ResultCorrect
+
+.Formulas NoTrend,Trend
+Test006Result                  = ExpandFraction(Receivables,Sales02)
+Test006                        = If(Abs(HSum(Test006ResultCalc,1,MaxT) - HSum(Test006ResultCorrect,1,MaxT)) < MaxDifference[1] ,0,1)
+
+Test006ResultCalc              = HSum(Test006Result,1,MaxT)
+Test006ResultCorrect           = Case(TsY(1), [12:606.09064|13:658.09064])
+
+;------------------------------
+; Count
+.Variables
+PPP   0 1N     2               "Count"			                           \TestCount
+
+PPP   2 FN   1 3               "Calculated"                                \TestCountResultCalc
+PII   2 FN     3               "Correct result"                            \TestCountResultCorrect
+
+.Formulas Trend, NoTrend
+TestCountResultCalc   = Count(X, SelectDescendants(Root), DataEntered(X))
+
+;------------------------------
+; Exists
+.Variables
+PPP   0 1N     2               "Exists"			                           \TestExists
+
+PPP   2 FN   1 3               "Calculated"                                \TestExistsResultCalc
+PII   2 FN     3               "Correct result"                            \TestExistsResultCorrect
+
+.Formulas Trend, NoTrend
+TestExistsResultCalc   = Exists(X, SelectDescendants(Root), DataEntered(X))
+
+;------------------------------
+; ForAll
+.Variables
+PPP   0 1N     2               "ForAll"			                           \TestForAll
+
+PPP   2 FN   1 3               "Calculated"                                \TestForAllResultCalc
+PII   2 FN     3               "Correct result"                            \TestForAllResultCorrect
+
+.Formulas Trend, NoTrend
+TestForAllResultCalc   = ForAll(X, SelectDescendants(Root), DataEntered(X)) ; TODO: other variable selection for test purposes, for example sales01 + bookevalue tuple...
+
+;------------------------------
+; Expand
+.Variables
+PPP   0 1N     2               "Expand"			                           \TestExpand
+PII   2 1N     3               "Lookback Method"   			               \TestExpandMethod
+PII   2 1N     3               "Min"                                       \TestExpandMin
+PII   2 1N     3               "Max"                                       \TestExpandMax
+PII   2 1N     3               "W1"                                        \TestExpandW1
+PII   2 1N     3               "W2"                                        \TestExpandW2
+PII   2 1N     3               "W3"                                        \TestExpandW3
+III     FN     3               "ddd"		                                    \TestExpandInput1=Sales01
+PPP   2 FN     3               "Calculated Flow No Growth (ExpandLevel)"            \TestFlowExpandResultNoGrowth
+PPP   2 FN     3               "Calculated Flow Own Growth (ExpandGrowth)"		    \TestFlowExpandResultOwnGrowth
+PIP   2 FN     3               "Calculated Flow Other's Growth (ExpandFraction)"    \TestFlowExpandResultOthersGrowth
+PPP   2 BN     3               "Calculated Balance No Growth (ExpandLevel)"         \TestBalanceExpandResultNoGrowth
+PPP   2 BN     3               "Calculated Balance Own Growth (ExpandGrowth)"		\TestBalanceExpandResultOwnGrowth
+PIP   2 BN     3               "Calculated Balance Other's Growth (ExpandFraction)" \TestBalanceExpandResultOthersGrowth
+
+PPP   2 1N   1 3               "Calculated"                                \TestExpandResultCalc
+PII   2 1N     3               "Correct result"                            \TestExpandResultCorrect
+
+.Formulas Trend
+TestFlowExpandResultNoGrowth   = FesExpression("Expand(None, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+TestBalanceExpandResultNoGrowth= FesExpression("Expand(None, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+TestFlowExpandResultOwnGrowth  = FesExpression("Expand(TestFlowExpandResultOwnGrowth, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+TestBalanceExpandResultOwnGrowth=FesExpression("Expand(TestBalanceExpandResultOwnGrowth, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+
+.Formulas NoTrend
+TestFlowExpandResultNoGrowth   = Sales01
+TestFlowExpandResultOwnGrowth   = Sales01
+TestBalanceExpandResultNoGrowth   = Assets
+TestBalanceExpandResultOwnGrowth   = Assets
+
+.Formulas Trend, NoTrend
+TestFlowExpandResultOthersGrowth   = FesExpression("Expand(Sales01, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+TestBalanceExpandResultOthersGrowth   = FesExpression("Expand(Assets, TestExpandMethod, TestExpandMin, TestExpandMax, TestExpandW1, TestExpandW2, TestExpandW3)")
+
+;------------------------------
+; ExpandGrowth
+.Variables
+PPP   0 1N     2               "ExpandGrowth"                              \Test007
+PII     FN     3               =Sales03                                    \Test007Input1=Sales03
+PII   2 1N %   3               "Min"                                       \Test007Input2
+PII   2 1N %   3               "Max"                                       \Test007Input3
+PPP   2 FN     3               "Calculated"                                \Test007Result
+
+PPP   2 1N   1 3               "Calculated"                                \Test007ResultCalc
+PII   2 1N     3               "Correct result"                            \Test007ResultCorrect
+
+.Formulas NoTrend
+Test007Result                  = ExpandGrowth(Sales03,Test007Input2,Test007Input3)
+Test007                        = If(Abs(Test007ResultCalc - Test007ResultCorrect) < MaxDifference ,0,1)
+
+Test007Input2                  = 0
+Test007Input3                  = 0.10
+
+Test007ResultCalc              = HSum(Test007Result,1,MaxT)
+Test007ResultCorrect           = Case(TsY(1), [12:5273|13:5720.75])
+
+
+;------------------------------
+; ExpandLevel
+.Variables
+PPP   0 1N     2               "ExpandLevel"                               \Test005
+PII     FN     3               =Sales01                                    \=Sales01 -> Sales01
+PPP   2 FN     3               "Calculated"                                \Test005Result
+
+PPP   2 1N   1 3               "Calculated"                                \Test005ResultCalc
+PII   2 1N     3               "Correct result"                            \Test005ResultCorrect
+
+
+.Formulas NoTrend
+Test005Result                  = ExpandLevel(Sales01)
+Test005                        = If(Abs(HSum(Test005ResultCalc,1,MaxT) - HSum(Test005ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+Test005ResultCalc              = HSum(Test005Result,1,MaxT)
+Test005ResultCorrect           = Case(TsY(1), [12:4880|13:5295])
+
+
+;------------------------------
+; ExpandOriginalValue
+.Variables
+PPP   0 1N     2               "ExpandOriginalValue"                      \Test053
+PPP   2 BN     3               "CostPriceVarName"                         \Test053Input1
+PPP   2 FN     3               "InvestmentVarName"                        \Test053Input2
+PPP   2 1N     3               "DepreciationPeriod"                       \Test053Input3
+
+PPP   2 BN   1 3               "Calculated"                               \Test053ResultCalc
+PII   2 BN     3               "Correct result"                           \Test053ResultCorrect
+
+.Formulas NoTrend, Trend
+Test053Input1                  = 1000
+Test053Input2                  = 200
+Test053Input3                  = 5
+Test053                        = If(Abs(HSum(Test053ResultCalc,1,MaxT) - HSum(Test053ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+.Formulas Trend
+Test053ResultCalc              = ExpandOriginalValue(Test053Input1,Test053Input2,Test053Input3)
+Test053ResultCorrect           = Case(TsY(1), [12:1183.33333|13:1184.61538])
+
+;------------------------------
+; ExtractFolder
+.Variables
+PPP   0 1N     2               "ExtractFolder"                             \Test054
+.Formulas NoTrend
+
+;------------------------------
+;-------------------------------------------------------------------------------------------------------------------------------------- F
+;------------------------------
+; False
+.Variables
+PPP   0 1N     2               "False"                                    \Test055 -> LogicaTest101
+.Formulas NoTrend
+Test055                = 0
+
+;------------------------------
+; FileExists
+.Variables
+PPP   0 1N     2               "FileExists"                               \Test056
+.Formulas NoTrend
+Test056 = PM
+
+;------------------------------
+; FindValueT
+.Variables
+PPP   0 1N     2               "FindValueT"                               \Test057
+.Formulas NoTrend
+
+;------------------------------
+; FirstDateInT
+.Variables
+PPP   0 1N     2               "FirstDateInT"                              \Test058
+;PII   2 1N     3               "Input"                                    \Test058Input
+;PPP   2 1N D 1 3               "LastDateInT"                              \Test058ResultCalc
+;PII   2 1N D   3               "Correct result"                           \Test058ResultCorrect
+;
+;.Formulas NoTrend
+;Test058Input         = 14
+;Test058ResultCalc    = FirstDateInT(Test058Input)
+;Test058              = If(Test058ResultCalc[1]=Test058ResultCorrect[1],0,1)
+;Test058ResultCorrect = DMYtoDate(1,2,2006)
+
+;------------------------------
+; FirstLC
+.Variables
+PPP   0 1N     2               "FirstLC"                                  \Test059
+PII     1A     3               FirstLC('ABC')                             \Test059ResultCalc
+PII     1A     3               "Correct result"                           \Test059ResultCorrect
+
+.Formulas NoTrend
+Test059              = If(&Test059ResultCalc[1]=&Test059ResultCorrect[1],0,1)                      ; Always true ivm NOT case sensative
+Test059ResultCalc    = &FirstLC("ABC")
+Test059ResultCorrect = "aBC"
+
+;------------------------------
+; FirstSheetWithPeriod
+.Variables
+PPP   0 1N     2               "FirstSheetWithPeriod"                     \Test060
+.Formulas NoTrend
+Test060 = PM
+
+;------------------------------
+; FirstSheetWithT
+.Variables
+PPP   0 1N     2               "FirstSheetWithT"                          \Test061
+.Formulas NoTrend
+Test061 = PM
+
+;------------------------------
+; FirstTinFormulaSet
+.Variables
+PPP   0 1N     2               "FirstTinFormulaSet"                       \Test062
+PPP   6 1N     3               "FirstTinFormulaSet"                       \Test062ResultCalc
+PII   6 1N     3               "Correct result"                           \Test062ResultCorrect
+
+
+.Formulas NoTrend
+Test062              = If(Test062ResultCalc[1]=Test062ResultCorrect[1],0,1)
+Test062ResultCalc    = KolomT[FirstTinFormulaSet(Trend)]
+Test062ResultCorrect = If(TsY(1) = 12, 49, 53)
+
+;------------------------------
+; FirstTinPeriod
+.Variables
+PPP   0 1N     2               "FirstTinPeriod"                           \Test063
+PPP   6 1N     3               "FirstTinPeriod"                           \Test063ResultCalc
+PII   6 1N     3               "Correct result"                           \Test063ResultCorrect
+
+
+.Formulas NoTrend
+Test063              = If(Test063ResultCalc[1]=Test063ResultCorrect[1],0,1)
+Test063ResultCalc    = KolomT[FirstTinPeriod(MainPeriod)]
+Test063ResultCorrect = 1
+
+;------------------------------
+; FirstTinSheet
+.Variables
+PPP   0 1N     2               "FirstTinSheet"                            \Test064
+.Formulas NoTrend
+Test064 = PM
+
+;------------------------------
+; FirstTinTimeline
+.Variables
+PPP   0 1N     2               "FirstTinTimeline"                         \Test192
+
+
+;------------------------------
+; FirstTinYear
+.Variables
+PPP   0 1N     2               "FirstTinYear"                             \Test065
+PPP   0 BN     3               "FirstTinYear T"                           \Test065ResultCalcT
+PPP   6 1N     3               "FirstTinYear"                             \Test065ResultCalc
+PII   6 1N     3               "Correct result"                           \Test065ResultCorrect
+
+
+.Formulas NoTrend
+Test065              = If(Test065ResultCalc[1]=Test065ResultCorrect[1],0,1)
+Test065ResultCalcT   = ValueOfT(FirstTinYear)
+Test065ResultCalc    = HSum(Test065ResultCalcT,1,MaxT)
+Test065ResultCorrect = If(TsY(1) = 12, 912, 1066)
+
+;------------------------------
+; FirstUC
+.Variables
+PPP   0 1N     2               "FirstUC"                                  \Test066
+PII     1A     3               FirstUC('abc')                             \Test066ResultCalc
+PII     1A     3               "Correct result"                           \Test066ResultCorrect
+
+.Formulas NoTrend
+Test066              = If(&Test066ResultCalc[1]=&Test066ResultCorrect[1],0,1)                      ; Always true ivm NOT case sensative
+Test066ResultCalc    = &FirstUC("abc")
+Test066ResultCorrect = "Abc"
+
+
+;------------------------------
+; FirstValueT
+.Variables
+PPP   0 1N     2               "FirstValueT"                              \Test067
+PPP   0 BN     3               "INPUT"                                    \Test067Input
+PPP   6 1N     3               "FirstValueT(Input,2,10)"                  \Test067ResultCalc
+PII   6 1N     3               "Correct result"                           \Test067ResultCorrect
+
+.Formulas NoTrend
+Test067Input         = Case(KolomT,[1:NA|2:NA|3:NA|4:NA|5:100|6:-5])
+Test067              = If(Test067ResultCalc[1]=Test067ResultCorrect[1],0,1)
+Test067ResultCalc    = ValueOfT(FirstValueT(Test067Input,FirstTinPeriod,LastTinPeriod))
+Test067ResultCorrect = 5
+
+;------------------------------
+; FlowCurrencyFactor
+.Variables
+PPP   0 1N     2               "FlowCurrencyFactor"                       \Test193
+
+
+
+;------------------------------
+; FormulaSetInT
+.Variables
+PPP   0 1N     2               "FormulaSetInT"                            \Test068
+PPP   0 1N     3               "T"                                        \Test068Input
+PPP   0 1N     3               "FormulaSetInT T"                          \Test068ResultCalcT
+PPP   6 1N     3               "FormulaSetInT"                            \Test068ResultCalc
+PII   6 1N     3               "Correct result"                           \Test068ResultCorrect
+
+.Formulas NoTrend
+Test068Input         = 50
+Test068              = If(Test068ResultCalc[1]=Test068ResultCorrect[1],0,1)
+Test068ResultCalcT   = FormulaSetInT(LastTinPeriod)
+Test068ResultCalc    = KolomT[Test068ResultCalcT]
+Test068ResultCorrect = 2
+
+;-------------------------------------------------------------------------------------------------------------------------------------- G
+;------------------------------
+; GetDataStatus
+.Variables
+PPP   0 1N     2               "GetDataStatus"                             \Test069
+.Formulas NoTrend
+
+;------------------------------
+; GetFrac
+.Variables
+PPP   0 1N     2               "GetFrac"                                   \Test008
+PII   2 FN     3               =sales01                                    \Test008Input01=Sales01
+PII   2 BN     3               =Receivables                                \Test008Input02=Receivables
+PPP   2 CN     3               "Calculated"                                \Test008Result
+PPP   2 1N   1 3               "Calculated"                                \Test008ResultCalc
+PII   2 1N     3               "Correct result"                            \Test008ResultCorrect
+
+.Formulas NoTrend,Trend
+Test008Result                  = GetFrac(Sales01,Receivables)*365
+Test008                        = If(Abs(HSum(Test008ResultCalc,1,MaxT) - HSum(Test008ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+Test008ResultCalc              = HSum(Test008Result,1,MaxT)
+Test008ResultCorrect           = 175.45143
+
+;------------------------------
+; GetPoint
+.Variables
+;PPP   0 1N     2               "GetPoint"                                  \Test009
+;PII   2 FN     3               =Sales02                                    \=Sales02
+;PII   2 BN     3               "YearFraction"                              \Test009Input02
+;PPP   2 CN     3               "Calculated"                                \Test009Result
+
+;PPP   2 1N   1 3               "Calculated"                                \Test009ResultCalc
+;PII   2 1N     3               "Correct result"                            \Test009ResultCorrect
+
+
+.Formulas NoTrend,Trend
+;Test009Result        = GetPoint(Sales02,Test009Input02)
+;Test009              = (If(Abs(HSum(Test009ResultCalc,1,MaxT) - HSum(Test009ResultCorrect,1,MaxT)) < MaxDifference ,0,1))+(If(Abs(HSum(GetPointBalVarResultCalc,1,MaxT) - HSum(GetPointResultCorrect,1,MaxT)) < MaxDifference ,0,1))
+;Test009Input02       = OnER(Receivables / Assets,NA)
+
+;Test009ResultCalc              = HSum(Test009Result,1,MaxT)
+;Test009ResultCorrect           = Case(TsY(1), [12:54207.0979|13:63577.9545])
+
+.Variables
+PPP   0 1N     2               "GetPoint"                                  \Test009
+PII   2 FN     3               "Input"                                     \Test009Input
+PPP   2 FN   1 3               "Calculated"                                \Test009Result
+PPP   2 FN     3               "Correct Result"                            \Test009ResultCorrect
+PPP   0 FN    -3               "CompareCalcCorrect"                        \Test009Compare
+
+
+.Formulas NoTrend,Trend
+Test009                  = If(Abs(HSum(Test009Compare,1,maxt))=0,0,1)
+Test009Input             = Case(YearInT, [2005:100|2006:95|2007:90|2008:Case(TsY(1), [12:Case(KolomT, [37:85|38:85|39:85|40:85|41:85|42:85|43:85|44:85|45:85|46:85|47:NA|48:85])|13:Case(KolomT, [40:85|41:85|42:85|43:85|44:85|45:85|46:85|47:85|48:85|49:85|50:85|51:NA|52:85])])])
+Test009Result            = GetPoint(Test009Input,1)
+Test009ResultCorrect     = Case(TsY(1),  [12:Case(KolomT,[1:100|2:200|3:300|4:400|5:500|6:600|7:700|8:800|9:900|10:1000|11:1100|12:1200|13:1195|14:1190|15:1185|16:1180|17:1175|18:1170|19:1165|20:1160|21:1155|22:1150|23:1145|24:1140|25:1135|26:1130|27:1125|28:1120|29:1115|30:1110|31:1105|32:1100|33:1095|34:1090|35:1085|36:1080|37:1075|38:1070|39:1065|40:1060|41:1055|42:1050|43:1045|44:1040|45:1035|46:1030|47:940|48:935|49:850|50:765|51:680|52:595|53:510|54:425|55:340|56:255|57:170|58:85|59:85|60:NA])| 13:Case(KolomT,[1:100|2:200|3:300|4:400|5:500|6:600|7:700|8:800|9:900|10:1000|11:1100|12:1200|13:1300|14:1295|15:1290|16:1285|17:1280|18:1275|19:1270|20:1265|21:1260|22:1255|23:1250|24:1245|25:1240|26:1235|27:1230|28:1225|29:1220|30:1215|31:1210|32:1205|33:1200|34:1195|35:1190|36:1185|37:1180|38:1175|39:1170|40:1165|41:1160|42:1155|43:1150|44:1145|45:1140|46:1135|47:1130|48:1125|49:1120|50:1115|51:1025|52:1020|53:935|54:850|55:765|56:680|57:595|58:510|59:425|60:340|61:255|62:170|63:85|64:85|65:0])])
+Test009Compare           = If(Test009Result - Test009ResultCorrect < MaxDifference,0,1)
+
+
+;------------------------------
+; GetValue
+.Variables
+PPP   0 1N     2               "GetValue"                                  \Test201
+PII   2 FN     3               =Sales02                                    \=Sales02
+PII   2 BN     3               =Assets                                     \=Assets
+PII   2 1N   1 3               GetValue(Sales02,14,1)                      \Test201Result1
+PII   2 1N     3               GetValue(Assets,14,1)                       \Test201Result2
+PPP   2=1N     3               Result                                      \Test201Result
+
+PPP   2 1N   1 3               "Calculated"                                \Test201ResultCalc
+PII   2 1N     3               "Correct result"                            \Test201ResultCorrect
+
+
+.Formulas NoTrend,Trend
+Test201Result1                 = GetValue(Sales02,LastTinFormulaSet(NoTrend),1)
+Test201Result2                 = GetValue(Assets,LastTinFormulaSet(NoTrend),1)
+
+Test201                        = If(Abs(HSum(Test201ResultCalc,1,MaxT) - HSum(Test201ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test201ResultCalc              = Test201Result
+Test201ResultCorrect           = Case(TsY(1), [12:1033|13:1118])
+
+
+;------------------------------
+; GetT
+.Variables
+PPP   0 1N     2               "GetT"                                      \Test070 -> Test070
+PPP   2 FN     3               =Sales                                      \=Sales
+PPP   2 BN     3               =Assets                                     \=Assets
+
+PPP   2 BN   1 3               =KolomT                                     \=KolomT -> KolomT
+PPP   2 BN     3               T-1                                         \Test07001
+PPP   2 BN     3               T-2                                         \Test07002
+PPP   2 BN     3               T+1                                         \Test07003
+PPP   2 BN     3               T+2                                         \Test07004
+;PPP   2 CN     3               Sales[GetT(T,0,0,12)]                      \Test07005
+;PPP   2 CN     3               Sales[GetT(T,-1,0,12)]                     \Test07006
+;PPP   2 CN     3               Assets[GetT(T,0,0,12)]                     \Test07007
+;PPP   2 CN     3               Assets[GetT(T,-1,0,12)]                    \Test07008
+PPP   2=BN    -3               Total                                       \Test070ResultTotal
+PPP   2 1N   1 3               "Calculated"                                \Test070ResultCalc
+PII   2 1N     3               "Correct result"                            \Test070ResultCorrect
+
+.Formulas NoTrend
+Test070              = If(Abs(HSum(Test070ResultCalc,1,MaxT) - HSum(Test070ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test070ResultCalc    = HSum(Test070ResultTotal,1,MaxT)
+Test070ResultCorrect = Case(TsY(1), [12:6535|13:7658])
+
+Test07001            = KolomT[GetT(T,-1)]
+Test07002            = KolomT[GetT(T,-2)]
+Test07003            = KolomT[GetT(T,+1)]
+Test07004            = KolomT[GetT(T,+2)]
+;Test07005            = Sales[GetT(T,0,0,1)]
+;Test07006            = Sales[GetT(T,-1,0,1)]
+;Test07007            = Assets[GetT(T,0,0,1)]
+;Test07008            = Assets[GetT(T,-1,0,1)]
+
+;------------------------------
+; GuessTerm
+.Variables
+PPP   0 1N     2               "GuessTerm"                                \Test071
+PII   0 1N     3               "BookValueVarName"                         \Test071Input1
+PPP   2 1N     3               "DepreciationVarName"                      \Test071Input2
+PPP   2 1N     3               "LowerLimit"                               \Test071Input3
+PPP   2 1N     3               "UpperLimit"                               \Test071Input4
+PPP   2 1N     3               "DefaultValue"                             \Test071Input5
+
+PPP   2 1N   1 3               "Calculated"                               \Test071ResultCalc
+PII   2 1N     3               "Correct result"                           \Test071ResultCorrect
+
+.Formulas NoTrend
+Test071Input1                  = 1000; (T - FirstTinYear(T) + 1) * 10 ;1000 to test FES code
+Test071Input2                  = 150; (T - FirstTinYear(T) + 1) * 10 ;150
+Test071Input3                  = 2
+Test071Input4                  = 20
+Test071Input5                  = 5
+
+Test071                        = If(Abs(Test071ResultCalc - Test071ResultCorrect) < MaxDifference,0,1)
+Test071ResultCalc              = GuessTerm(Test071Input1,Test071Input2,Test071Input3,Test071Input4,Test071Input5)
+Test071ResultCorrect           = 14; 3 ;14
+
+;-------------------------------------------------------------------------------------------------------------------------------------- H
+;------------------------------
+; HAvg
+.Variables
+PPP   0 1N     2               "HAvg"                                     \Test072
+PII     FN     3               =Sales02                                   \=Sales02
+PPP   2 1N   1 3               "HAvg(Sales02,1,MaxT)"                     \Test072ResultCalc
+PII   2 1N     3               "Correct result"                           \Test072ResultCorrect
+
+.Formulas NoTrend,Trend
+Test072              = If(Abs(Test072ResultCalc - Test072ResultCorrect) < MaxDifference ,0,1)
+Test072ResultCorrect = 92.50
+Test072ResultCalc    = HAvg(Sales02,1,MaxT)
+
+;------------------------------
+; HOvr
+.Variables
+PPP   0 1N     2               "HOvr"                                     \Test073                 ; Moeilijk te testen met een leeg dossier, omdat gebruikers input gewenst is.
+PII     FN     3               =Sales02                                   \=Sales02
+PPP   2 1N   1 3               "HOvr(Sales02,1,MaxT)"                     \Test073ResultCalc
+PII   2 1N     3               "Correct result"                           \Test073ResultCorrect
+
+.Formulas NoTrend,Trend
+Test073              = If(Abs(Test073ResultCalc - Test073ResultCorrect) < MaxDifference ,0,1)
+Test073ResultCorrect = 0
+Test073ResultCalc    = HOvr(Sales02,1,MaxT)
+
+;------------------------------
+; HSum
+.Variables
+PPP   0 1N     2               "HSum"                                     \Test074 -> Test012
+.Formulas NoTrend
+Test074 = 0
+;------------------------------
+; HValues
+.Variables
+PPP   0 1N     2               "HValues"                                   \Test075
+;PII     FN     3               =Sales02                                   \=Sales02
+;PPP   2 1N   1 3               "HValues(Sales02,1,MaxT)"                  \Test075ResultCalc
+;PII   2 1N     3               "Correct result"                           \Test075ResultCorrect
+;
+;.Formulas NoTrend,Trend
+;Test075              = If(Abs(Test075ResultCalc - Test075ResultCorrect) < MaxDifference ,0,1)
+;Test075ResultCorrect = 48
+;Test075ResultCalc    = HValues(Sales02,1,MaxT)
+
+;------------------------------
+; HYearOvr
+.Variables
+PPP   0 1N     2               "HYearOvr"                                 \Test076
+.Formulas NoTrend
+
+;------------------------------
+; HYearValues
+.Variables
+PPP   0 1N     2               "HYearValues"                              \Test077
+.Formulas NoTrend
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- I
+
+;------------------------------
+; If
+.Variables
+PPP   0 1N     2               "If"                                       \Test078
+PPP   6 1N     3               "IF(3>4,IF(3>4,10,-10),IF(3>4,10,-10))"    \Test078ResultCalc
+PII   6 1N     3               "Correct result"                           \Test078ResultCorrect
+
+.Formulas NoTrend
+Test078              = If(Test078ResultCalc[1]=Test078ResultCorrect[1],0,1)
+Test078ResultCalc    = IF(3>4,IF(3>4,10,-10),IF(3>4,10,-10))
+Test078ResultCorrect = -10
+
+;------------------------------
+; InHiddenTree
+.Variables
+PPP   0 1N     2               "InHiddenTree"                             \Test186
+PPP   6 FN     3               "Parent Variable"                          \Test186ParentVariable
+PPP   6 FN     4               "Child Variable"                           \Test186ChildVariable
+PII   6 FN     3               "Parent Variable Visible"                  \Test186ParentVariableVisible
+PII   6 FN     3               "Child Variable Visible"                   \Test186ChildVariableVisible
+PPP   6 FN     3               "Calculated"                               \Test186ResultCalc
+PII   6 FN     3               "Correct result"                           \Test186ResultCorrect
+
+.Formulas Visible
+Test186ParentVariable	= Test186ParentVariableVisible
+Test186ChildVariable	= Test186ChildVariableVisible
+
+.Formulas NoTrend,Trend
+Test186ResultCalc  			    = InHiddenTree(Test186ChildVariable)
+Test186              			= If(Abs(Test186ResultCalc - Test186ResultCorrect) < MaxDifference ,0,1)
+Test186ParentVariableVisible 	= 0
+Test186ChildVariableVisible 	= 1
+Test186ResultCorrect 			= 1
+
+;------------------------------
+; IRR
+;------------------------------
+.Variables
+PPP   0 1N     2               "IRR"                                      \Test011
+
+
+;------------------------------
+; IsDate
+.Variables
+PPP   0 1N     2               "IsDate"                                   \Test194
+
+
+;------------------------------
+; IsReadOnly
+.Variables
+PPP   0 1N     2               "IsReadOnly"                               \Test079
+.Formulas NoTrend
+
+;------------------------------
+; IsValue
+.Variables
+PPP   0 1N     2               "IsValue"                                  \Test080
+PII     FN     3               =Sales02                                   \=Sales02
+PPP   2 1N   1 3               "IsValue(1) + IsValue(NA) + IsValue(PM) + IsValue(ER)"\Test080ResultCalc
+PII   2 1N     3               "Correct result"                           \Test080ResultCorrect
+
+.Formulas NoTrend,Trend
+Test080              = If(Abs(Test080ResultCalc - Test080ResultCorrect) < MaxDifference ,0,1)
+Test080ResultCorrect = 1
+Test080ResultCalc    = IsValue(1) + IsValue(NA) + IsValue(PM) + IsValue(ER)
+
+;------------------------------
+; InvNormal
+.Variables
+PPP   0 1N     2               "InvNormal"                                \Test195
+
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- J
+
+;-------------------------------------------------------------------------------------------------------------------------------------- K
+
+;-------------------------------------------------------------------------------------------------------------------------------------- L
+;------------------------------
+; LastDateInMonth
+.Variables
+PPP   0 1N     2               "LastDateInMonth"                          \Test082
+.Formulas NoTrend
+
+;------------------------------
+; LastDateInT
+.Variables
+PPP   0 1N     2               "LastDateInT"                              \Test083
+PII   2 1N     3               "Input"                                    \Test083Input
+PPP   2 1N D 1 3               "LastDateInT"                              \Test083ResultCalc
+PII   2 1N D   3               "Correct result"                           \Test083ResultCorrect
+
+.Formulas NoTrend
+Test083Input         = 13
+Test083ResultCalc    = LastDateInT(Test083Input)
+Test083              = If(Test083ResultCalc[1]=Test083ResultCorrect[1],0,1)
+Test083ResultCorrect = If(TsY(1) = 12, DMYtoDate(31,1,2006), DMYtoDate(31, 12, 2005))
+
+;------------------------------
+; LastHistYear
+.Variables
+PPP   0 1N     2               "LastHistYear"                              \Test196
+
+;------------------------------
+; LastPeriod
+.Variables
+PPP   0 1N     2               "LastPeriod"                                \Test084
+.Formulas NoTrend
+
+;------------------------------
+; LastSheet
+.Variables
+PPP   0 1N     2               "LastSheet"                                 \Test085
+.Formulas NoTrend
+
+;------------------------------
+; LastTinFormulaSet
+.Variables
+PPP   0 1N     2               "LastTinFormulaSet"                        \Test086
+PPP   6 1N     3               "LastTinFormulaSet"                        \Test086ResultCalc
+PII   6 1N     3               "Correct result"                           \Test086ResultCorrect
+
+.Formulas NoTrend
+Test086              = If(Test086ResultCalc[1]=Test086ResultCorrect[1],0,1)
+Test086ResultCalc    = KolomT[LastTinFormulaSet(NoTrend)]
+Test086ResultCorrect = If(TsY(1) = 12, 48, 52)
+
+;------------------------------
+; LastTinPeriod
+.Variables
+PPP   0 1N     2               "LastTinPeriod"                             \Test014
+PPP   2 BN     3               T                                           \=KolomT
+PPP   2 BN     3               LastTinPeriod                               \Test01401
+PPP   2 BN     3               FirstTinPeriod                              \Test01402
+PPP   2 BN     3               FirstTinFormulaSet                          \Test01403
+PPP   2 BN     3               LastTinFormulaSet                           \Test01404
+PPP   2=BN    -3               Total                                       \Test014Result
+PPP   2 1N   1 3               "Calculated"                                \Test014ResultCalc
+PII   2 1N     3               "Correct result"                            \Test014ResultCorrect
+
+.Formulas NoTrend
+Test014              = If(Abs(HSum(Test014ResultCalc,1,MaxT) - HSum(Test014ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test01401       = KolomT[LastTinPeriod]
+Test01402       = KolomT[FirstTinPeriod]
+Test01403       = KolomT[FirstTinFormulaSet]
+Test01404       = KolomT[LastTinFormulaSet]
+Test014ResultCalc              = HSum(Test014Result,1,MaxT)
+Test014ResultCorrect           = Case(TsY(1), [12:7110|13:8333])
+
+
+;------------------------------
+; LastTinSheet
+.Variables
+PPP   0 1N     2               "LastTinSheet"                              \Test087
+.Formulas NoTrend
+Test087 = PM
+
+;------------------------------
+; LastTinTimeline
+.Variables
+PPP   0 1N     2               "LastTinTimeline"                           \Test197
+
+
+;------------------------------
+; LastTinYear
+.Variables
+PPP   0 1N     2               "LastTinYear"                               \Test088
+;PPP   0 BN     3               "LastTinYear T"                            \Test088ResultCalcT
+;PPP   6 1N     3               "LastTinYear"                              \Test088ResultCalc
+;PII   6 1N     3               "Correct result"                           \Test088ResultCorrect
+;
+;
+;.Formulas NoTrend
+;Test088              = If(Test088ResultCalc[1]=Test088ResultCorrect[1],0,1)
+;Test088ResultCalcT   = ValueOfT(LastTinYear)
+;Test088ResultCalc    = HSum(Test088ResultCalcT,1,MaxT)
+;Test088ResultCorrect = 1440
+
+;------------------------------
+; LastValueT
+.Variables
+PPP   0 1N     2               "LastValueT"                               \Test089
+PII     FN     3               =Sales02                                   \=Sales02
+PPP   2 1N   1 3               "LastValueT(Sales02,1,MaxT)"               \Test089ResultCalc
+PII   2 1N     3               "Correct result"                           \Test089ResultCorrect
+
+.Formulas NoTrend,Trend
+Test089              = If(Abs(Test089ResultCalc - Test089ResultCorrect) < MaxDifference ,0,1)
+Test089ResultCorrect = Case(TsY(1), [12:48|13:52])
+Test089ResultCalc    = ValueOfT(LastValueT(Sales02,1,MaxT))
+
+;------------------------------
+; Length
+.Variables
+PPP   0 1N     2               "Length"                                   \Test090
+PII   0 1N     3               Length('123abcFINAN')                      \Test090ResultCalc
+PII   0 1N     3               "Correct result"                           \Test090ResultCorrect
+
+.Formulas NoTrend
+Test090              = If(Test090ResultCalc[1]=Test090ResultCorrect[1],0,1)
+Test090ResultCalc    = Length("123abcFINAN")
+Test090ResultCorrect = 11
+
+;------------------------------
+; Licensed
+.Variables
+PPP   0 1N     2               "Licensed"                                  \Test198
+
+
+
+;------------------------------
+; LN
+.Variables
+PPP   0 1N     2               "LN"                                        \Test081
+PPP   2 1N     3               "Calculated"                                \Test081ResultCalc
+PII   2 1N     3               "Correct result"                            \Test081ResultCorrect
+
+.Formulas NoTrend,Trend
+Test081              = If(Abs(HSum(Test081ResultCalc,1,MaxT) - HSum(Test081ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test081ResultCorrect = 0.6931418
+Test081ResultCalc    = LN(2)
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- M
+
+;------------------------------
+; MatrixLookup
+.Variables
+PPP   0 1N     2               "MatrixLookup"                                                      \Test199
+PI    0 1N     3               $>Zoek criteria (Number)<$                                          \Q_Map05_ZoekNumber
+PP      1A     3               $>MatrixLookup ZoekenNumeriek<$                                     \Q_Map05_MatrixTest01
+PI      1A     3               $>Zoek criteria (Alfanumeriek)<$                                    \Q_Map05_ZoekString
+PP    0 1N     3               $>MatrixLookup ZoekenAlfanumeriek<$                                 \Q_Map05_MatrixTest02
+
+.Formulas NoTrend
+Q_Map05_ZoekNumber             = 1
+Q_Map05_ZoekString             = "Twee"
+Q_Map05_MatrixTest01           = &MatrixLookup("MatrixLookupTest.xls",Q_Map05_ZoekNumber[1],1,1)
+Q_Map05_MatrixTest02           = MatrixLookup("MatrixLookupTest.xls",&Q_Map05_ZoekString[1],"twee",1)
+
+
+;------------------------------
+; Max
+.Variables
+PPP   0 1N     2               "MAX"                                      \Test020
+PII   6 1N     3               "Input"                                    \Test020Input01
+PII   6 1N     3               "Input"                                    \Test020Input02
+PPP   6 1N   1 3               "Calculated"                               \Test020ResultCalc
+PII   6 1N     3               "Correct result"                           \Test020ResultCorrect
+
+.Formulas NoTrend
+Test020ResultCalc              = Max(Test020Input01,Test020Input02)
+Test020                        = If(Abs(Test020ResultCalc - Test020ResultCorrect) < MaxDifference ,0,1)
+Test020Input01                 = -6
+Test020Input02                 = 3
+Test020ResultCorrect           = 3   ; het resultaat van de default invoer
+
+;------------------------------
+; MaxDocumentIndex
+.Variables
+PPP   0 1N     2               "MaxDocumentIndex"                          \Test091
+.Formulas NoTrend
+
+;------------------------------
+; MaxT
+.Variables
+PPP   0 1N     2               "MaxT"                                      \Test092
+PPP   6 1N   1 3               "Calculated"                                \Test092ResultCalc
+PII   6 1N     3               "Correct result"                            \Test092ResultCorrect
+
+.Formulas NoTrend
+Test092ResultCalc              = ValueOfT(MaxT)
+Test092                        = If(Abs(Test092ResultCalc - Test092ResultCorrect) < MaxDifference ,0,1)
+Test092ResultCorrect           = If(TsY(1) = 12, 60, 65) ; windows client calculates 64 for TsY=13
+
+
+;------------------------------
+; MaxValueT
+.Variables
+PPP   0 1N     2               "MaxValueT"                                  \Test093
+;PII     FN     3               =Sales01                                    \=Sales01 -> Sales01
+;PPP   0 BN     3               =Test067Input                               \=Test067Input
+;
+;PPP   2 1N     3               "Calculated 1"                              \Test093ResultCalc1
+;PPP   2 1N     3               "Calculated 2"                              \Test093ResultCalc2
+;
+;PPP   2 1N   1 3               "Calculated"                                \Test093ResultCalc
+;PII   2 1N     3               "Correct result"                            \Test093ResultCorrect
+;
+;.Formulas NoTrend
+;Test093                        = If(Abs(Test093ResultCalc - Test093ResultCorrect) < MaxDifference ,0,1)
+;Test093ResultCalc1             = ValueOfT(MaxValueT(Sales01,1,MaxT))
+;Test093ResultCalc2             = ValueOfT(MaxValueT(Test067Input,1,MaxT))
+;Test093ResultCalc              = Test093ResultCalc1 + Test093ResultCalc2
+;Test093ResultCorrect           = 42
+
+;------------------------------
+; MidDateInT
+.Variables
+PPP   0 1N     2               "MidDateInT"                                \Test094
+.Formulas NoTrend
+
+;------------------------------
+; MidYearNum
+.Variables
+PPP   0 1N     2               "MidYearNum"                                \Test095
+PPP   2 BN     3               MidYearNum                                  \Test095Result
+PPP   2 1N   1 3               "Calculated"                                \Test095ResultCalc
+PII   2 1N     3               "Correct result"                            \Test095ResultCorrect
+
+.Formulas NoTrend
+Test095                        = If(Abs(HSum(Test095ResultCalc,1,MaxT) - HSum(Test095ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test095Result                  = MidYearNum(T)
+Test095ResultCalc              = HSum(Test095Result,1,MaxT)
+Test095ResultCorrect           = Case(TsY(1), [12:96336|13:104364])
+
+;------------------------------
+; Min
+.Variables
+PPP   0 1N     2               "MIN"                                      \Test021
+PII   6 1N     3               "Input"                                    \Test021Input01
+PII   6 1N     3               "Input"                                    \Test021Input02
+PPP   6 1N   1 3               "Calculated"                               \Test021ResultCalc
+PII   6 1N     3               "Correct result"                           \Test021ResultCorrect
+
+.Formulas NoTrend
+Test021ResultCalc              = Min(Test021Input01,Test021Input02)
+Test021                        = If(Abs(Test021ResultCalc - Test021ResultCorrect) < MaxDifference ,0,1)
+Test021Input01                 = -6
+Test021Input02                 = 3
+Test021ResultCorrect           = -6   ; het resultaat van de default invoer
+;------------------------------
+; MinMax
+.Variables
+PPP   0 1N     2               "MINMAX"                                   \Test022
+PII   6 FN     3               "Input"                                    \Test022Input
+PII   6 FN     3               "Min Input"                                \Test022Input01
+PII   6 FN     3               "Max Input"                                \Test022Input02
+PPP   6 1N   1 3               "Calculated"                               \Test022ResultCalc
+PII   6 1N     3               "Correct result"                           \Test022ResultCorrect
+
+.Formulas NoTrend
+Test022ResultCalc              = MinMax(Test022Input,Test022Input01,Test022Input02)
+Test022                        = If(Abs(Test022ResultCalc - Test022ResultCorrect) < MaxDifference ,0,1)
+Test022Input                   = Case(T, [1: 4|0:NA])
+Test022Input01                 = Case(T, [1: -6|0:NA])
+Test022Input02                 = Case(T, [1: 3|0:NA])
+Test022ResultCorrect           = 3   ; het resultaat van de default invoer
+
+;------------------------------
+; MinValueT
+.Variables
+PPP   0 1N     2               "MinValueT"                                 \Test096
+;PII     FN     3               =Sales01                                    \=Sales01 -> Sales01
+;PPP   0 BN     3               =Test067Input                               \=Test067Input
+;
+;PPP   2 1N     3               "Calculated 1"                              \Test096ResultCalc1
+;PPP   2 1N     3               "Calculated 2"                              \Test096ResultCalc2
+;
+;PPP   2 1N   1 3               "Calculated"                                \Test096ResultCalc
+;PII   2 1N     3               "Correct result"                            \Test096ResultCorrect
+;
+;.Formulas NoTrend
+;Test096                        = If(Abs(Test096ResultCalc - Test096ResultCorrect) < MaxDifference ,0,1)
+;Test096ResultCalc1             = ValueOfT(MinValueT(Sales01,1,MaxT))
+;Test096ResultCalc2             = ValueOfT(MinValueT(Test067Input,1,MaxT))
+;Test096ResultCalc              = Test096ResultCalc1 + Test096ResultCalc2
+;Test096ResultCorrect           = 7
+
+
+;------------------------------
+; Mod
+.Variables
+PPP   0 1N     2               "Mod"                                      \Test097
+PII   6 1N     3               "Input"                                    \Test097Input
+PII   6 1N     3               "MOD var"                                  \Test097Input01
+PPP   6 1N   1 3               "Calculated"                               \Test097ResultCalc
+PII   6 1N     3               "Correct result"                           \Test097ResultCorrect
+
+.Formulas NoTrend
+Test097ResultCalc              = Test097Input Mod Test097Input01
+Test097                        = If(Abs(Test097ResultCalc - Test097ResultCorrect) < MaxDifference ,0,1)
+Test097Input                   = 99
+Test097Input01                 = 13
+Test097ResultCorrect           = 8   ; 99 MOD 13 =8
+
+;------------------------------
+; ModifiedAfterCalc
+.Variables
+PPP   0 1N     2               "ModifiedAfterCalc"                        \Test098
+.Formulas NoTrend
+Test098 = PM
+
+;------------------------------
+; ModifiedAfterSave
+.Variables
+PPP   0 1N     2               "ModifiedAfterSave"                        \Test099
+.Formulas NoTrend
+Test099 = PM
+
+;------------------------------
+; Mut
+.Variables
+PPP   0 1N     2               "Mut"                                      \Test172
+PII   6 FN   1 3               =Sales                                     \=Sales
+PII   6 BN     3               =Assets                                    \=Assets
+PPP   6 FN   1 3               MUT(Sales)                                 \Test172Sales
+PII   6 FN     3               MUT(Assets)                                \Test172Assets
+PPP   0=CN    -3               "Totaal"                                   \Test172Totaal
+
+PPP   6 1N   1 3               "Calculated"                               \Test172ResultCalc
+PII   6 1N     3               "Correct result"                           \Test172ResultCorrect
+
+
+.Formulas NoTrend
+Test172Sales                   = Mut(Sales)
+Test172Assets                  = Mut(Assets)
+Test172                        = If(Abs(HSum(Test172ResultCalc,1,MaxT) - HSum(Test172ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test172ResultCalc              = HSum(Test172Totaal,1,MaxT)
+Test172ResultCorrect           = 93
+
+
+;------------------------------
+; MutCalc
+.Variables
+PPP   0 1N     2               "MutCalc"                                  \Test026
+PPP   2 CN     3               "MutCalc x KolomT"                         \Test026Result
+PPP   6 1N   1 3               "Calculated"                               \Test026ResultCalc
+PII   6 1N     3               "Correct result"                           \Test026ResultCorrect
+
+
+.Formulas NoTrend
+Test026Result                  = MutCalc*KolomT
+Test026                        = If(Abs(HSum(Test026ResultCalc,1,MaxT) - HSum(Test026ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+Test026ResultCalc              = HSum(Test026Result,1,MaxT)
+Test026ResultCorrect           = Case(TsY(1), [12:1098|13:1287])
+
+;-------------------------------------------------------------------------------------------------------------------------------------- N
+
+;------------------------------
+; NA
+.Variables
+PPP   0 1N     2               "'NA'"                                     \Test100 -> LogicaTest001
+.Formulas NoTrend
+Test100                = 0
+
+;------------------------------
+; NLGRate
+.Variables
+PPP   0 1N     2               "NLGRate"                                  \Test200
+
+
+;------------------------------
+; No
+.Variables
+PPP   0 1N     2               "No"                                       \Test103 -> LogicaTest101
+.Formulas NoTrend
+Test103                = 0
+
+;------------------------------
+; NoTrend
+.Variables
+PPP   0 1N     2               "NoTrend"                                  \Test104
+.Formulas NoTrend
+
+;------------------------------
+; None
+.Variables
+PPP   0 1N     2               "None"                                     \Test105
+.Formulas NoTrend
+
+;------------------------------
+; Not
+.Variables
+PPP   0 1N     2               "Not"                                      \Test024          ;-> LogicaTest101
+PII   2 1N     3               "Input 1"                                  \Test024Input01
+PII   2 1N     3               "Input 2"                                  \Test024Input02
+PPP   2 1N   1 3               "Calculated 1"                             \Test024ResultCalc01
+PPP   2 1N     3               "Calculated 2"                             \Test024ResultCalc02
+PII   2 1N   1 3               "Correct result 1"                         \Test024ResultCorrect01
+PII   2 1N     3               "Correct result 2"                         \Test024ResultCorrect02
+
+.Formulas NoTrend
+Test024ResultCalc01    = Not(Test024Input01)
+Test024ResultCalc02    = Not(Test024Input02)
+Test024Input01         = 0
+Test024Input02         = 1
+Test024ResultCorrect01 = 1
+Test024ResultCorrect02 = 0
+Test024                = (If(Abs(HSum(Test024ResultCalc01,1,MaxT) - HSum(Test024ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test024ResultCalc02,1,MaxT) - HSum(Test024ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))
+;------------------------------
+; Now
+.Variables
+PPP   0 1N     2               "Now"                                      \Test106
+.Formulas NoTrend
+
+
+;------------------------------
+.Variables
+PPP   0 1N     2               "NPV"                                      \Test010
+PII   2 FN     3               =Sales01                                   \=Sales01
+PPP   2 1N %   3               Rate                                       \Test010Input
+PPP   2 1N   1 3               "Calculated"                               \Test010ResultCalc
+PII   2 1N     3               "Correct result"                           \Test010ResultCorrect
+
+.Formulas NoTrend
+Test010ResultCalc    = NPV(Test010Input,Sales,1, MaxT)
+Test010              = If(Abs(HSum(Test010ResultCalc,1,MaxT) - HSum(Test010ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test010Input         = 0.07
+Test010ResultCorrect = Case(TsY(1), [12:13317.70524|13:14427.51684])
+
+
+;------------------------------
+; NPV2
+.Variables
+PPP   0 1N     2               "NPV2"                                     \Test102
+.Formulas NoTrend
+
+
+
+;------------------------------
+; Off
+.Variables
+PPP   0 1N     2               "Off"                                      \Test107       -> LogicaTest101
+.Formulas NoTrend
+Test107                = 0
+
+;------------------------------
+; On
+.Variables
+PPP   0 1N     2               "On"                                       \Test108      -> LogicaTest101
+.Formulas NoTrend
+Test108                = 0
+
+;------------------------------
+; OnER OnError
+.Variables
+PPP   0 1N     2               "OnER"                                     \Test109
+PPP   2 1N     3               "Calculated OnER(ER,1)"                    \Test109ResultCalc01
+PPP   2 1N     3               "Calculated OnER(12/0,1)"                  \Test109ResultCalc02
+PII   2 1N   1 3               "Correct result 1"                         \Test109ResultCorrect01
+PII   2 1N     3               "Correct result 2"                         \Test109ResultCorrect02
+
+.Formulas NoTrend
+Test109ResultCalc01    = OnER(ER,1)
+Test109ResultCalc02    = OnER(12/0,1)
+Test109ResultCorrect01 = 1
+Test109ResultCorrect02 = 1
+Test109                = (If(Abs(HSum(Test109ResultCalc01,1,MaxT) - HSum(Test109ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test109ResultCalc02,1,MaxT) - HSum(Test109ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))
+
+;------------------------------
+; OnError
+.Variables
+PPP   0 1N     2               "OnError"                                  \Test170
+PPP   2 1N     3               "Calculated OnER(ER,1)"                    \Test170ResultCalc01
+PPP   2 1N     3               "Calculated OnER(12/0,1)"                  \Test170ResultCalc02
+PII   2 1N   1 3               "Correct result 1"                         \Test170ResultCorrect01
+PII   2 1N     3               "Correct result 2"                         \Test170ResultCorrect02
+
+.Formulas NoTrend
+Test170ResultCalc01    = OnError(ER,1)
+Test170ResultCalc02    = OnError(12/0,1)
+Test170ResultCorrect01 = 1
+Test170ResultCorrect02 = 1
+Test170                = (If(Abs(HSum(Test170ResultCalc01,1,MaxT) - HSum(Test170ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test170ResultCalc02,1,MaxT) - HSum(Test170ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))
+
+;------------------------------
+; OnERorNA
+.Variables
+PPP   0 1N     2               "OnERorNA"                                  \Test110
+PPP   2 1N     3               "Calculated OnERorNA(OnERorNA(ER,NA),1)1)"  \Test110ResultCalc01
+PPP   2 1N     3               "Calculated OnERorNA(12/0,1)"               \Test110ResultCalc02
+PPP   2 1N     3               "Calculated OnERorNA(NA,1)"                 \Test110ResultCalc03
+PII   2 1N   1 3               "Correct result 1"                          \Test110ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test110ResultCorrect02
+PII   2 1N     3               "Correct result 3"                          \Test110ResultCorrect03
+
+.Formulas NoTrend
+Test110ResultCalc01    = OnERorNA(OnERorNA(ER,NA),1)
+Test110ResultCalc02    = OnERorNA(12/0,1)
+Test110ResultCalc03    = OnERorNA(NA,1)
+Test110ResultCorrect01 = 1
+Test110ResultCorrect02 = 1
+Test110ResultCorrect03 = 1
+Test110                = (If(Abs(HSum(Test110ResultCalc01,1,MaxT) - HSum(Test110ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test110ResultCalc02,1,MaxT) - HSum(Test110ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))+(If(Abs(HSum(Test110ResultCalc03,1,MaxT) - HSum(Test110ResultCorrect03,1,MaxT)) < MaxDifference ,0,1))
+
+;------------------------------
+; OnNA
+.Variables
+PPP   0 1N     2               "OnNA"                                      \Test111
+PPP   2 1N     3               "Calculated OnNA(NA,1)"                     \Test111ResultCalc01
+PPP   2 1N     3               "Calculated OnNA(12/12,1)"                  \Test111ResultCalc02
+PII   2 1N   1 3               "Correct result 1"                          \Test111ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test111ResultCorrect02
+
+.Formulas NoTrend
+Test111ResultCalc01    = OnNA(NA,1)
+Test111ResultCalc02    = OnNA(12/12,0)
+Test111ResultCorrect01 = 1
+Test111ResultCorrect02 = 1
+Test111                = (If(Abs(HSum(Test111ResultCalc01,1,MaxT) - HSum(Test111ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test111ResultCalc02,1,MaxT) - HSum(Test111ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))
+
+
+;------------------------------
+; OnNeg
+.Variables
+PPP   0 1N     2               "OnNeg"                                     \Test112
+PPP   2 1N     3               "Calculated OnNeg(-1,1)"                    \Test112ResultCalc01
+PPP   2 1N     3               "Calculated OnNeg(100/-0.001,1)"            \Test112ResultCalc02
+PPP   2 1N     3               "Calculated OnNeg(110,0)=110"               \Test112ResultCalc03
+PII   2 1N   1 3               "Correct result 1"                          \Test112ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test112ResultCorrect02
+PII   2 1N     3               "Correct result 3"                          \Test112ResultCorrect03
+
+.Formulas NoTrend
+Test112ResultCalc01    = OnNeg(-1,1)
+Test112ResultCalc02    = OnNeg(100/-0.001,1)
+Test112ResultCalc03    = (OnNeg(110,0)=110)
+Test112ResultCorrect01 = 1
+Test112ResultCorrect02 = 1
+Test112ResultCorrect03 = 1
+Test112                = (If(Abs(HSum(Test112ResultCalc01,1,MaxT) - HSum(Test112ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test112ResultCalc02,1,MaxT) - HSum(Test112ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))+(If(Abs(HSum(Test112ResultCalc03,1,MaxT) - HSum(Test112ResultCorrect03,1,MaxT)) < MaxDifference ,0,1))
+
+
+;------------------------------
+; OnNoValue
+.Variables
+PPP   0 1N     2               "OnNoValue"                                 \Test113
+;PPP   2 1N   1 3               "Calculated OnNoValue(NA,1)+OnNoValue(ER,1)+OnNoValue(PM,1)+OnNoValue(5,0)=8"  \Test113ResultCalc01
+;PII   2 1N     3               "Correct result 1"                          \Test113ResultCorrect01
+;
+;.Formulas NoTrend
+;Test113ResultCalc01    = OnNoValue(NA,1)+OnNoValue(ER,1)+OnNoValue(PM,1)+OnNoValue(5,0)
+;Test113ResultCorrect01 = 8
+;Test113                = (If(Abs(HSum(Test113ResultCalc01,1,MaxT) - HSum(Test113ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))
+
+;;------------------------------
+;; OnNotPos
+.Variables
+PPP   0 1N     2               "OnNotPos"                                  \Test114
+PPP   2 1N     3               "Calculated OnNotPos(-1,1)"                 \Test114ResultCalc01
+PPP   2 1N     3               "Calculated OnNotPos(100/-0.001,1)"         \Test114ResultCalc02
+PPP   2 1N     3               "Calculated OnNotPos(PM,1)+OnNotPos(ER,1)+OnNotPos(NA,1)"\Test114ResultCalc03
+PII   2 1N   1-3               "Correct result 1"                          \Test114ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test114ResultCorrect02
+PII   2 1N     3               "Correct result 3"                          \Test114ResultCorrect03
+
+.Formulas NoTrend
+Test114ResultCalc01    = OnNotPos(-1,1)
+Test114ResultCalc02    = OnNotPos(100/-0.001,1)
+Test114ResultCalc03    = OnNotPos(PM,1)+OnNotPos(ER,1)+OnNotPos(NA,1)
+Test114ResultCorrect01 = 1
+Test114ResultCorrect02 = 1
+Test114ResultCorrect03 = 3
+Test114                = (If(Abs(HSum(Test114ResultCalc01,1,MaxT) - HSum(Test114ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test114ResultCalc02,1,MaxT) - HSum(Test114ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))+(If(Abs(HSum(Test114ResultCalc03,1,MaxT) - HSum(Test114ResultCorrect03,1,MaxT)) < MaxDifference ,0,1))
+
+;------------------------------
+; OnZero
+.Variables
+PPP   0 1N     2               "OnZero"                                    \Test115
+PPP   2 1N     3               "Calculated OnZero(0,1)"                    \Test115ResultCalc01
+PPP   2 1N     3               "Calculated OnZero(0/120,1)"                \Test115ResultCalc02
+PPP   2 1N     3               "Calculated OnZero(5,1)+OnZero(-5,1)=0"     \Test115ResultCalc03
+PII   2 1N   1 3               "Correct result 1"                          \Test115ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test115ResultCorrect02
+PII   2 1N     3               "Correct result 3"                          \Test115ResultCorrect03
+
+.Formulas NoTrend
+Test115ResultCalc01    = OnZero(0,1)
+Test115ResultCalc02    = OnZero(0/120,1)
+Test115ResultCalc03    = (OnZero(5,1)+OnZero(-5,1)=0)
+Test115ResultCorrect01 = 1
+Test115ResultCorrect02 = 1
+Test115ResultCorrect03 = 1
+Test115                = (If(Abs(HSum(Test115ResultCalc01,1,MaxT) - HSum(Test115ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test115ResultCalc02,1,MaxT) - HSum(Test115ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))+(If(Abs(HSum(Test115ResultCalc03,1,MaxT) - HSum(Test115ResultCorrect03,1,MaxT)) < MaxDifference ,0,1))
+
+
+;------------------------------
+; OnZeroOrNA
+.Variables
+PPP   0 1N     2               "OnZeroOrNA"                                \Test116
+PPP   2 1N     3               "Calculated OnZeroOrNA(OnZeroOrNA(NA,0),1)" \Test116ResultCalc01
+PPP   2 1N     3               "Calculated OnZeroOrNA(0/12,1)"             \Test116ResultCalc02
+PII   2 1N   1 3               "Correct result 1"                          \Test116ResultCorrect01
+PII   2 1N     3               "Correct result 2"                          \Test116ResultCorrect02
+
+.Formulas NoTrend
+Test116ResultCalc01    = OnZeroOrNA(OnZeroOrNA(NA,0),1)
+Test116ResultCalc02    = OnZeroOrNA(0/12,1)
+Test116ResultCorrect01 = 1
+Test116ResultCorrect02 = 1
+Test116                = (If(Abs(HSum(Test116ResultCalc01,1,MaxT) - HSum(Test116ResultCorrect01,1,MaxT)) < MaxDifference ,0,1))+((If(Abs(HSum(Test116ResultCalc02,1,MaxT) - HSum(Test116ResultCorrect02,1,MaxT)) < MaxDifference ,0,1)))
+
+
+;------------------------------
+; OpRound
+.Variables
+PPP   0 1N     2               "OpRound"                                   \Test117
+.Formulas NoTrend
+
+;------------------------------
+; Or
+.Variables
+PPP   0 1N     2               "Or"                                        \Test118   -> LogicaTest101
+.Formulas NoTrend
+Test118                = 0
+
+;-------------------------------------------------------------------------------------------------------------------------------------- P
+;------------------------------
+; PM
+.Variables
+PPP   0 1N     2               "PM"                                        \Test119 -> LogicaTest001
+.Formulas NoTrend
+Test119                = 0
+
+;------------------------------
+; PMT
+.Variables
+PPP   0 1N     2               "PMT"                                      \Test120
+PPP   2 1N   1 3               "PMT(6%,6,1000)"                           \Test120ResultCalc
+PII   2 1N     3               "Correct result"                           \Test120ResultCorrect
+
+.Formulas NoTrend
+Test120                        = If(Abs(Test120ResultCalc - Test120ResultCorrect) < MaxDifference ,0,1)
+Test120ResultCalc              = PMT(6%,6,1000)
+Test120ResultCorrect           = -203.362628
+
+;------------------------------
+; PPMT
+.Variables
+PPP   0 1N     2               "PPMT"                                      \Test207
+PII   2 1N     3               "InputInterestRate"                         \Test207InputInterestRate
+PII   2 1N     3               "InputPeriod"                               \Test207InputPeriod
+PII   2 1N     3               "InputNumberOfPayments"                     \Test207InputNumberOfPayments
+PII   2 1N     3               "InputPresentValue"                         \Test207InputPresentValue
+PII   2 1N     3               "InputFutureValue"                          \Test207InputFutureValue
+PII   2 1N     3               "Test207FVCheck"                            \Test207FVCheck
+PPP   2 1N   1 3               "PPMT(6%,3,6, 1000, 150)"                   \Test207ResultCalc
+PII   2 1N     3               "Correct result"                            \Test207ResultCorrect
+
+.Formulas NoTrend
+Test207                        = If(Abs(Test207ResultCalc - Test207ResultCorrect) < MaxDifference ,0,1)
+Test207InputInterestRate       = 6%
+Test207InputPeriod             = 3 
+Test207InputNumberOfPayments   = 6
+Test207InputPresentValue       = -1000
+Test207InputFutureValue        = 150
+Test207FVCheck        		   = PMT(Test207InputInterestRate, Test207InputNumberOfPayments, Test207InputFutureValue)
+Test207ResultCalc              = PPMT(Test207InputInterestRate, Test207InputPeriod, Test207InputNumberOfPayments, Test207InputPresentValue, Test207InputFutureValue)
+Test207ResultCorrect           = 136.919912
+
+;------------------------------
+; GoalSeek
+.Variables
+PPP   0 1N     2               "GoalSeek"                                  \Test208
+PII   2 1N     3               "VariableParameter"                         \Test208VariableParameter
+PII   2 1N     3               "TargetVariable"                            \Test208TargetVariable
+PII   2 1N     3               "TargetValue"                               \Test208TargetValue
+PII   2 1N     3               "RangeStartValue"                           \Test208RangeStartValue
+PII   2 1N     3               "RangeEndValue"                             \Test208RangeEndValue
+PII   2 1N     3               "SmallestDelta"                             \Test208SmallestDelta
+PII   2 1N     3               "MaxRuntimeMs"                              \Test208MaxRuntimeMs
+PPP   2 1N   1 3               "GoalSeek(TargetVariable,3,VariableParameter, 1, 10, 0.000005, 3000)" \Test208ResultCalc
+PII   2 1N     3               "Correct result"                            \Test208ResultCorrect
+
+.Formulas NoTrend
+Test208TargetVariable          = (1.5*Test208VariableParameter)
+Test208TargetValue             = 3
+Test208VariableParameter       = 2 ; deze dummy waarde heeft geen enkel effect, dit is namelijk de parameter die overschreven wordt in het algoritme
+Test208RangeStartValue         = 1
+Test208RangeEndValue           = 10
+Test208SmallestDelta           = 0.000005
+Test208MaxRuntimeMs            = 3000
+Test208ResultCalc              = FesExpression("GoalSeek(Test208TargetVariable, Test208TargetValue, Test208VariableParameter, Test208RangeStartValue, Test208RangeEndValue, Test208SmallestDelta, Test208MaxRuntimeMs)")
+Test208ResultCorrect           = 1.9999983310699463
+
+;------------------------------
+; PeriodInSheet
+.Variables
+PPP   0 1N     2               "PeriodInSheet"                            \Test121
+.Formulas NoTrend
+Test121 = PM
+
+;------------------------------
+; PeriodInT
+.Variables
+PPP   0 1N     2               "PeriodInT"                                 \Test025
+PPP   2 CN     3               "Calculated"                                \Test025Result
+PPP   2 1N   1 3               "Calculated"                                \Test025ResultCalc
+PII   2 1N     3               "Correct result"                            \Test025ResultCorrect
+
+.Formulas NoTrend
+Test025Result                  = PeriodInT(KolomT)
+Test025                        = If(Abs(HSum(Test025ResultCalc,1,MaxT) - HSum(Test025ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test025ResultCalc              = HSum(Test025Result,1,MaxT)
+Test025ResultCorrect           = Case(TsY(1), [12:48|13:52])
+
+;------------------------------
+; PeriodIsVisible
+.Variables
+PPP   0 1N     2               "PeriodIsVisible"                           \Test122
+.Formulas NoTrend
+
+;------------------------------
+; PeriodName
+.Variables
+PPP   0 1N     2               "PeriodName"                                \Test123
+.Formulas NoTrend
+
+;------------------------------
+; Pos
+.Variables
+PPP   0 1N     2               "Pos"                                      \Test016
+PII     1A     3               "Input String"                             \Test016InputString
+PII     1A     3               "Input Part. String"                       \Test016InputPartString
+PPP   2 1N   1 3               "Calculated"                               \Test016ResultCalc
+PII   2 1N     3               "Correct result"                           \Test016ResultCorrect
+
+.Formulas NoTrend
+Test016                = If(Abs(HSum(Test016ResultCalc,1,MaxT) - HSum(Test016ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test016InputString     = "FormulaTester Model"
+Test016InputPartString = "Tester"
+Test016ResultCalc      = Pos(&Test016InputPartString[1],&Test016InputString[1])
+Test016ResultCorrect   = 8.00
+;------------------------------
+; Power
+.Variables
+PPP   0 1N     2               "Power"                                    \Test018
+PII   4 1N     3               "Input Var 1"                              \Test018Input01
+PII   4 1N     3               "Input Var 2"                              \Test018Input02
+PPP   4 1N   1 3               "Calculated"                               \Test018ResultCalc
+PII   4 1N     3               "Correct result"                           \Test018ResultCorrect
+
+.Formulas NoTrend
+Test018Input01       = 2.5
+Test018Input02       = 3.0
+Test018ResultCalc    = (Test018Input01^Test018Input02)
+Test018ResultCorrect = 15.625
+Test018              = If(Abs(HSum(Test018ResultCalc,1,MaxT) - HSum(Test018ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+;-------------------------------------------------------------------------------------------------------------------------------------- Q
+
+;-------------------------------------------------------------------------------------------------------------------------------------- R
+;------------------------------
+; Rate
+.Variables
+PPP   0 1N     2               "Rate"                                       \Test124
+;PPP   2 1N   1 3               "Rate(6,-1000,5000)"                        \Test124ResultCalc
+;PII   2 1N     3               "Correct result"                            \Test124ResultCorrect
+;
+;.Formulas NoTrend
+;Test124                        = If(Abs(Test124ResultCalc - Test124ResultCorrect) < MaxDifference ,0,1)
+;Test124ResultCalc              = Rate(6,-1000,5000)
+;Test124ResultCorrect           = 0.054717925
+
+;------------------------------
+; RateEUR
+.Variables
+PPP   0 1N     2               "RateEUR"                                  \Test125
+.Formulas NoTrend
+Test125 = PM
+
+;------------------------------
+; RateNLG
+.Variables
+PPP   0 1N     2               "RateNLG"                                  \Test126
+.Formulas NoTrend
+Test126 = PM
+
+
+;------------------------------
+; RelMut
+.Variables
+PPP   0 1N     2               "RelMut"                                   \Test173
+PPP   6 FN   1 3               =Sales                                     \=Sales
+PII   6 BN     3               =Assets                                    \=Assets
+PII   2 1N     3               "Lookback Method"   			              \TestRelMutMethod
+PPP   6 FN % 1 3               Flow RelMut(Sales01)        			      \TestFlowRelMutResult
+PII   6 FN %   3               Balance RelMut(Assets)                     \TestBalanceRelMutResult
+PPP   6 FN % 1 3               RelMUT(Sales)                              \Test173Sales
+PII   6 FN %   3               RelMUT(Assets)                             \Test173Assets
+PPP   0=CN %  -3               "Totaal"                                   \Test173Totaal
+PPP   6 1N % 1 3               "Calculated"                               \Test173ResultCalc
+PII   6 1N %   3               "Correct result"                           \Test173ResultCorrect
+
+.Formulas NoTrend
+Test173Sales                   = RelMut(Sales)
+Test173Assets                  = RelMut(Assets)
+Test173                        = If(Abs(HSum(Test173ResultCalc,1,MaxT) - HSum(Test173ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test173ResultCalc              = HSum(Test173Totaal,1,MaxT)
+Test173ResultCorrect           = 0.55648286
+
+.Formulas NoTrend, Trend
+TestFlowRelMutResult				= FesExpression("RelMut(Sales01, TestRelMutMethod)")
+TestBalanceRelMutResult			= FesExpression("RelMut(Assets, TestRelMutMethod)")
+
+;------------------------------
+; Round
+.Variables
+PPP   0 1N     2               "Round"                                    \Test002
+PII   6 1N     3               "Input"                                    \Test002Input1
+PII   0 1N     3               "Digits"                                   \Test002Input2
+PPP   6 1N   1 3               "Calculated"                               \Test002ResultCalc
+PII   6 1N     3               "Correct result"                           \Test002ResultCorrect
+
+.Formulas NoTrend
+Test002ResultCalc    = Round(Test002Input1,Test002Input2)
+Test002              = If(Abs(Test002ResultCalc - Test002ResultCorrect) < MaxDifference ,0,1)
+Test002Input1        = 6.127450
+Test002Input2        = 2
+Test002ResultCorrect  = 6.13
+
+;------------------------------
+; RoundUp
+.Variables
+PPP   0 1N     2               "RoundUp"                                  \Test003
+PII   6 1N     3               "Input"                                    \Test003Input1
+PII   0 1N     3               "Digits"                                   \Test003Input2
+PPP   6 1N   1 3               "Calculated"                               \Test003ResultCalc
+PII   6 1N     3               "Correct result"                           \Test003ResultCorrect
+
+.Formulas NoTrend
+Test003ResultCalc    = RoundUp(Test003Input1,Test003Input2)
+Test003              = If(Abs(Test003ResultCalc - Test003ResultCorrect) < MaxDifference ,0,1)
+
+Test003Input1        =6.123450
+Test003Input2        =2
+Test003ResultCorrect  =6.130000
+;-------------------------------------------------------------------------------------------------------------------------------------- S
+
+;------------------------------
+; ScaleFactor
+.Variables
+PPP   0 1N     2               "ScaleFactor"                              \Test127
+PPP   6 1N     3               "Calculated"                               \Test127ResultCalc
+PII   6 1N     3               "Correct result"                           \Test127ResultCorrect
+
+.Formulas NoTrend
+Test127ResultCalc    = ScaleFactor
+Test127              = If(Abs(Test127ResultCalc - Test127ResultCorrect) < MaxDifference ,0,1)
+Test127ResultCorrect  = 1
+
+;------------------------------
+; ScriptCurrencyCode
+.Variables
+PPP   0 1N     2               "ScriptCurrencyCode"                        \Test128
+.Formulas NoTrend
+
+;------------------------------
+; Sector
+.Variables
+PPP   0 1N     2               "Sector"                                    \Test129
+.Formulas NoTrend
+
+;------------------------------
+; SelectDescendants
+.Variables
+PPP   0 1N     2               "SelectDescendants"			               \Test206
+PPP   0 1N     3               "SelectDescendants Root"			           \Test206Root
+PPP   0 1N     4               "SelectDescendants SubVariable"			   \Test206SubVariable1
+PPP   0 1N     5               "SelectDescendants SubVariable"			   \Test206SubVariable1_1
+PPP   0 1N     5               "SelectDescendants SubVariable"			   \Test206SubVariable1_2
+PPP   0 1N     4               "SelectDescendants SubVariable"			   \Test206SubVariable2
+PPP   0 1N     5               "SelectDescendants SubVariable"			   \Test206SubVariable2_1
+PPP   0 1N     6               "SelectDescendants SubVariable"			   \Test206SubVariable2_1_1
+PPP   0 1N     4               "SelectDescendants SubVariable"			   \Test206SubVariable3
+PPP   0 1N     5               "SelectDescendants SubVariable"			   \Test206SubVariable3_1
+PII   0 1N     3               "SelectDescendants MaxDepth"			       \Test206MaxDepth
+PPP   2 1N   1 3               "Calculated"                                \Test206ResultCalc
+PII   2 1N     3               "Correct result"                            \Test206ResultCorrect
+
+.Formulas Trend, NoTrend
+Test206              = If(Abs(Test206ResultCalc - Test206ResultCorrect) < MaxDifference ,0,1)
+Test206ResultCalc    = FesExpression("Count(X, SelectDescendants(Test206Root, Test206MaxDepth), 1)")
+Test206MaxDepth		 = 2
+Test206ResultCorrect = 7
+
+;------------------------------
+; Self
+.Variables
+PPP   0 1N     2               "Self"                                      \Test130
+.Formulas NoTrend
+
+;------------------------------
+; Set
+.Variables
+PPP   0 1N     2               "Set"                                       \Test131
+.Formulas NoTrend
+Test131 = PM
+
+;------------------------------
+; Sheet
+.Variables
+PPP   0 1N     2               "Sheet"                                     \Test132
+.Formulas NoTrend
+Test132 = PM
+
+;------------------------------
+; SheetTitle
+.Variables
+PPP   0 1N     2               "SheetTitle"                                \Test133
+.Formulas NoTrend
+Test133 = PM
+
+;------------------------------
+; SilentMode
+.Variables
+PPP   0 1N     2               "SilentMode"                                \Test134
+.Formulas NoTrend
+Test134 = PM
+
+;------------------------------
+; Str
+.Variables
+PPP   0 1N     2               "Str"                                      \Test136
+PII     1A     3               Str(0.1428573333,0,6                       \Test136ResultCalc
+PII     1A     3               "Correct result"                           \Test136ResultCorrect
+
+.Formulas NoTrend
+Test136              = If(&Test136ResultCalc[1]=&Test136ResultCorrect[1],0,1)
+Test136ResultCalc    = &Str(0.1428573333,0,6)
+Test136ResultCorrect = "0,142857"
+
+;------------------------------
+; StrField
+.Variables
+PPP   0 1N     2               "StrField"                                  \Test137
+;PII     1A     3               StrField('Amsterdam|Berlin|Paris',2)       \Test137ResultCalc
+;PII     1A     3               "Correct result"                           \Test137ResultCorrect
+;
+;.Formulas NoTrend
+;Test137              = If(&Test137ResultCalc[1]=&Test137ResultCorrect[1],0,1)
+;Test137ResultCalc    = &StrField("Amsterdam|Berlin|Paris",2)
+;Test137ResultCorrect = "Berlin"
+
+;------------------------------
+; SubStr
+.Variables
+PPP   0 1N     2               "SubStr"                                    \Test138
+PII     1A     3               SubStr('Amsterdam',3,4)                     \Test138ResultCalc
+PII     1A     3               "Correct result"                            \Test138ResultCorrect
+
+.Formulas NoTrend
+Test138              = If(&Test138ResultCalc[1]=&Test138ResultCorrect[1],0,1)
+Test138ResultCalc    = &SubStr(&"Amsterdam",3,4)
+Test138ResultCorrect = "ster"
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- T
+;T
+.Variables
+PPP   0 1N     2               "T"                                         \Test012
+PPP   2 BN     3               =KolomT                                     \=KolomT -> KolomT
+PPP   2=BN    -3               Total                                       \Test012ResultTotal
+PPP   2 1N   1 3               "Calculated"                                \Test012ResultCalc
+PII   2 1N     3               "Correct result"                            \Test012ResultCorrect
+
+.Formulas NoTrend
+Test012              = If(Abs(HSum(Test012ResultCalc,1,MaxT) - HSum(Test012ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test012ResultCalc    = HSum(Test012ResultTotal,1,MaxT)
+Test012ResultCorrect = Case(TsY(1), [12:1830|13:2145])
+
+;------------------------------
+; TableKeyLookup
+.Variables
+PPP   0 1N     2               "TableKeyLookup"                           \Test140
+.Formulas NoTrend
+
+;------------------------------
+; TableLookup
+.Variables
+PPP   0 1N     2               "TableLookup"                              \Test150
+.Formulas NoTrend
+
+;------------------------------
+; ThisMonth
+.Variables
+PPP   0 1N     2               "ThisMonth"                                \Test151
+.Formulas NoTrend
+
+;------------------------------
+; ThisQuarter
+.Variables
+PPP   0 1N     2               "ThisQuarter"                              \Test152
+.Formulas NoTrend
+
+;------------------------------
+; ThisYear
+.Variables
+PPP   0 1N     2               "ThisYear"                                 \Test153
+.Formulas NoTrend
+
+;------------------------------
+; TimeAggregated
+.Variables
+PPP   0 1N     2               "TimeAggregated"                           \Test027
+PPP   2 BN     3               "Calculated 1"                             \Test027ResultCalc01
+PPP   2 CN     3               "Calculated 2"                             \Test027ResultCalc02
+PPP   2 FN     3               "Calculated 3"                             \Test027ResultCalc03
+PPP   2 1N     3               "Calculated 4"                             \Test027ResultCalc04
+
+PPP   2 1N   1 3               "HSUM"                                     \Test027Result
+
+PPP   2 1N   1 3               "Calculated"                               \Test027ResultCalc
+PII   2 1N     3               "Correct result"                           \Test027ResultCorrect
+.Formulas NoTrend,Trend
+Test027ResultCalc              = Test027Result
+Test027ResultCorrect           = 1
+Test027                        = If(Abs(HSum(Test027ResultCalc,1,MaxT) - HSum(Test027ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+;
+.Formulas NoTrend
+Test027ResultCalc01    = TimeAggregated
+Test027ResultCalc02    = TimeAggregated
+Test027ResultCalc03    = TimeAggregated
+Test027ResultCalc04    = TimeAggregated
+
+Test027Result          = HSum(Test027ResultCalc01,1,MaxT)+HSum(Test027ResultCalc02,1,MaxT)+HSum(Test027ResultCalc03,1,MaxT)+Test027ResultCalc04
+
+;------------------------------
+; TinPYTT
+.Variables
+PPP   0 1N     2               "TinPYTT"                                  \Test154
+.Formulas NoTrend
+
+;------------------------------
+; Trend
+.Variables
+PPP   0 1N     2               "Trend"                                    \Test155
+.Formulas NoTrend
+
+;------------------------------
+; True
+.Variables
+PPP   0 1N     2               "True"                                     \Test156  -> LogicaTest101
+.Formulas NoTrend
+Test156                = 0
+
+;------------------------------
+; TsPerYear
+.Variables
+PPP   0 1N     2               "TsPerYear"                                \Test157
+.Formulas NoTrend
+
+;------------------------------
+; TsY
+.Variables
+PPP   0 1N     2               "TsY"                                      \Test158
+PPP   6 1N     3               "Calculated"                               \Test158ResultCalc
+PII   6 1N     3               "Correct result"                           \Test158ResultCorrect
+
+.Formulas NoTrend
+Test158ResultCalc    = TsY(1)
+Test158              = If(Abs(Test158ResultCalc - Test158ResultCorrect) < MaxDifference ,0,1)
+Test158ResultCorrect = If(TsY(1) = 12, 12, 13) ; starting point for testing differences between month/fourweek based data
+
+;-------------------------------------------------------------------------------------------------------------------------------------- U
+;------------------------------
+; UltYearNum
+.Variables
+PPP   0 1N     2               "UltYearNum"                                \Test159
+PPP   2 BN     3               UltYearNum                                  \Test159Result
+PPP   2 1N   1 3               "Calculated"                                \Test159ResultCalc
+PII   2 1N     3               "Correct result"                            \Test159ResultCorrect
+
+.Formulas NoTrend
+Test159                        = If(Abs(HSum(Test159ResultCalc,1,MaxT) - HSum(Test159ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test159Result                  = UltYearNum(T)
+Test159ResultCalc              = HSum(Test159Result,1,MaxT)
+Test159ResultCorrect           = Case(TsY(1), [12:96338|13:104366])
+
+;------------------------------
+; UltCurrencyFactor
+.Variables
+PPP   0 1N     2               "UltCurrencyFactor"                         \Test205
+
+
+;------------------------------
+; UpdateDate
+.Variables
+PPP   0 1N     2               "UpdateDate"                                \Test160
+.Formulas NoTrend
+
+;------------------------------
+; User
+.Variables
+PPP   0 1N     2               "User"                                      \Test161
+.Formulas NoTrend
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- V
+
+
+;------------------------------
+; Val
+.Variables
+PPP   0 1N     2               "Val"                                      \Test162
+PII   0 1N     3               Val(&SubStr('Test15',5,2))                 \Test162ResultCalc
+PII   0 1N     3               "Correct result"                           \Test162ResultCorrect
+
+.Formulas NoTrend
+Test162              = If(Test162ResultCalc[1]=Test162ResultCorrect[1],0,1)
+Test162ResultCalc    = Val(&SubStr("Test15",5,2))
+Test162ResultCorrect = 15
+
+;------------------------------
+; VarWithShiftT
+.Variables
+PPP   0 1N     2               "VarWithShiftT"                            \Test181
+PPP   6 1N     3               "Calculated"                               \Test181ResultCalc
+PII   6 1N     3               "Correct result"                           \Test181ResultCorrect
+
+.Formulas NoTrend
+Test181ResultCalc    = ViewScaleFactor
+Test181              = If(Abs(Test181ResultCalc - Test181ResultCorrect) < MaxDifference ,0,1)
+Test181ResultCorrect = 1000
+
+
+;------------------------------
+; VarWithAbsT
+.Variables
+PPP   0 1N     2               "VarWithAbsT"                              \Test182
+PPP   6 1N     3               "Calculated"                               \Test182ResultCalc
+PII   6 1N     3               "Correct result"                           \Test182ResultCorrect
+
+.Formulas NoTrend
+Test182ResultCalc    = ViewScaleFactor
+Test182              = If(Abs(Test182ResultCalc - Test182ResultCorrect) < MaxDifference ,0,1)
+Test182ResultCorrect = 1000
+
+
+
+
+
+
+
+
+;------------------------------
+; ValueOfT
+.Variables
+PPP   0 1N     2               "ValueOfT"                                  \Test202
+
+;------------------------------
+; ViewCurrencyCode
+.Variables
+PPP   0 1N     2               "ViewCurrencyCode"                          \Test163
+.Formulas NoTrend
+
+;------------------------------
+; ViewScaleFactor
+.Variables
+PPP   0 1N     2               "ViewScaleFactor"                          \Test164
+PPP   6 1N     3               "Calculated"                               \Test164ResultCalc
+PII   6 1N     3               "Correct result"                           \Test164ResultCorrect
+
+.Formulas NoTrend
+Test164ResultCalc    = ViewScaleFactor
+Test164              = If(Abs(Test164ResultCalc - Test164ResultCorrect) < MaxDifference ,0,1)
+Test164ResultCorrect = 1000
+;------------------------------
+; Visible
+.Variables
+PPP   0 1N     2               "Visible"                          		  \Test185
+PPP   6 FN     3               "Calculated"                               \Test185ResultCalc
+PII   6 1N     3               "Correct result"                           \Test185ResultCorrect
+
+.Formulas Visible
+Test185ResultCalc	 = 0
+.Formulas NoTrend,Trend
+Test185ResultCalc  	 = Visible(Test185ResultCalc)
+Test185              = If(Abs(Test185ResultCalc - Test185ResultCorrect) < MaxDifference ,0,1)
+Test185ResultCorrect = 0
+;------------------------------
+; VSum
+.Variables
+PPP   0 1N     2               "VSUM"                                      \Test019
+PII   2 1N     3               "Input Var 01"                              \Test019Input01
+PII   2 1N     3               "Input Var 02"                              \Test019Input02
+PII   2 1N     3               "Input Var 03"                              \Test019Input03
+PII   2 1N     3               "Input Var 04"                              \Test019Input04
+PPP   2=1N    -3               "Calculated"                                \Test019ResultCalc
+PII   2 1N     3               "Correct result"                            \Test019ResultCorrect
+
+.Formulas NoTrend
+Test019Input01       = 0.36245
+Test019Input02       = 95000
+Test019Input03       = 2365.3333333333
+Test019Input04       = 1000000
+Test019ResultCorrect = 1097365.6957833333
+Test019              = If(Abs(HSum(Test019ResultCalc,1,MaxT) - HSum(Test019ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+
+
+
+;-------------------------------------------------------------------------------------------------------------------------------------- W
+
+;-------------------------------------------------------------------------------------------------------------------------------------- X
+
+;-------------------------------------------------------------------------------------------------------------------------------------- Y
+
+;------------------------------
+; Year
+.Variables
+PPP   0 1N     2               "Year"                                      \Test203
+
+
+;------------------------------
+; YearInT
+.Variables
+PPP   0 1N     2               "YearInT"                                   \Test013
+PPP   2 BN     3               YearInT                                     \Test013Result
+PPP   2 1N   1 3               "Calculated"                                \Test013ResultCalc
+PII   2 1N     3               "Correct result"                            \Test013ResultCorrect
+
+.Formulas NoTrend
+Test013                        = If(Abs(HSum(Test013ResultCalc,1,MaxT) - HSum(Test013ResultCorrect,1,MaxT)) < MaxDifference ,0,1)
+Test013Result                  = YearInT
+Test013ResultCalc              = HSum(Test013Result,1,MaxT)
+Test013ResultCorrect           = If(TsY(1) = 12, 96312, 104338)
+
+;------------------------------
+; YearNum
+.Variables
+PPP   0 1N     2               "YearNum"                                  \Test204
+
+
+;------------------------------
+; YearNumToDate
+.Variables
+PPP   0 1N     2               "YearNumToDate"                            \Test165
+.Formulas NoTrend
+
+;------------------------------
+; YearToT
+.Variables
+PPP   0 1N     2               "YearToT"                                  \Test166
+PPP   2 1N   1 3               "YearToT(2009,2)"                          \Test166ResultCalc
+PII   2 1N     3               "Correct result"                           \Test166ResultCorrect
+
+.Formulas NoTrend
+Test166                        = If(Abs(Test166ResultCalc - Test166ResultCorrect) < MaxDifference ,0,1)
+Test166ResultCalc              = YearToT(2009,2)
+Test166ResultCorrect           = Case(TsY(1), [12:60|13:65]) ; windows client calculates 64 for tsy=13
+
+;------------------------------
+; Smaller
+.Variables
+PPP   0 1N     2               "Smaller"                                  \Test167
+PPP   2 1N   1 3               "calculated (5 < 2)"                       \Test167ResultCalc
+PII   2 1N     3               "Correct result"                           \Test167ResultCorrect
+
+.Formulas NoTrend
+Test167                        = If(Abs(Test167ResultCalc - Test167ResultCorrect) < MaxDifference ,0,1)
+Test167ResultCalc              = (2 < 5)
+Test167ResultCorrect           = 1
+
+;------------------------------
+; Smaller
+.Variables
+PPP   0 1N     2               "Smaller"                                  \Test168
+PPP   2 1N   1 3               "calculated (5 < 2)"                       \Test168ResultCalc
+PII   2 1N     3               "Correct result"                           \Test168ResultCorrect
+
+.Formulas NoTrend
+Test168                        = If(Abs(Test168ResultCalc - Test168ResultCorrect) < MaxDifference ,0,1)
+Test168ResultCalc              = (2 < 5)
+Test168ResultCorrect           = 1
+;------------------------------
+; SmallerEqual
+.Variables
+PPP   0 1N     2               "SmallerEqual"                             \Test169
+PPP   2 1N   1 3               "calculated (5 <= 5)"                      \Test169ResultCalc
+PII   2 1N     3               "Correct result"                           \Test169ResultCorrect
+
+.Formulas NoTrend
+Test169                        = If(Abs(Test169ResultCalc - Test169ResultCorrect) < MaxDifference ,0,1)
+Test169ResultCalc              = (5 <= 5)
+Test169ResultCorrect           = 1
+;------------------------------
+; Larger
+.Variables
+PPP   0 1N     2               "Larger"                                   \Test171
+PPP   2 1N   1 3               "calculated (5 > 2)"                       \Test171ResultCalc
+PII   2 1N     3               "Correct result"                           \Test171ResultCorrect
+
+.Formulas NoTrend
+Test171                        = If(Abs(Test171ResultCalc - Test171ResultCorrect) < MaxDifference ,0,1)
+Test171ResultCalc              = (5 > 2)
+Test171ResultCorrect           = 1
+
+;------------------------------
+; LargerEqual
+.Variables
+PPP   0 1N     2               "LargerEqual"                              \Test174
+PPP   2 1N   1 3               "calculated (5 >= 5)"                      \Test174ResultCalc
+PII   2 1N     3               "Correct result"                           \Test174ResultCorrect
+
+.Formulas NoTrend
+Test174                        = If(Abs(Test174ResultCalc - Test174ResultCorrect) < MaxDifference ,0,1)
+Test174ResultCalc              = (5 >= 5)
+Test174ResultCorrect           = 1
+;------------------------------
+; Equal
+.Variables
+PPP   0 1N     2               "Equal"                                    \Test175
+PPP   2 1N   1 3               "calculated (2 = 2)"                       \Test175ResultCalc
+PII   2 1N     3               "Correct result"                           \Test175ResultCorrect
+
+.Formulas NoTrend
+Test175                        = If(Abs(Test175ResultCalc - Test175ResultCorrect) < MaxDifference ,0,1)
+Test175ResultCalc              = (2 = 2)
+Test175ResultCorrect           = 1
+;------------------------------
+; NotEqual
+.Variables
+PPP   0 1N     2               "NotEqual"                                 \Test176
+PPP   2 1N   1 3               "calculated (5 <> 2)"                      \Test176ResultCalc
+PII   2 1N     3               "Correct result"                           \Test176ResultCorrect
+
+.Formulas NoTrend
+Test176                        = If(Abs(Test176ResultCalc - Test176ResultCorrect) < MaxDifference ,0,1)
+Test176ResultCalc              = (5 <> 2)
+Test176ResultCorrect           = 1
+
+;------------------------------
+; Plus
+.Variables
+PPP   0 1N     2               "Plus"                                     \Test177
+PPP   2 1N   1 3               "calculated (5 + 2)"                       \Test177ResultCalc
+PII   2 1N     3               "Correct result"                           \Test177ResultCorrect
+
+.Formulas NoTrend
+Test177                        = If(Abs(Test177ResultCalc - Test177ResultCorrect) < MaxDifference ,0,1)
+Test177ResultCalc              = (5 + 2)
+Test177ResultCorrect           = 7
+;------------------------------
+; Minus
+.Variables
+PPP   0 1N     2               "Minus"                                    \Test178
+PPP   2 1N   1 3               "calculated (5 - 2)"                       \Test178ResultCalc
+PII   2 1N     3               "Correct result"                           \Test178ResultCorrect
+
+.Formulas NoTrend
+Test178                        = If(Abs(Test178ResultCalc - Test178ResultCorrect) < MaxDifference ,0,1)
+Test178ResultCalc              = (5 - 2)
+Test178ResultCorrect           = 3
+;------------------------------
+; Divide
+.Variables
+PPP   0 1N     2               "Divide"                                   \Test179
+PPP   2 1N   1 3               "calculated (5 / 2)"                       \Test179ResultCalc
+PII   2 1N     3               "Correct result"                           \Test179ResultCorrect
+
+.Formulas NoTrend
+Test179                        = If(Abs(Test179ResultCalc - Test179ResultCorrect) < MaxDifference ,0,1)
+Test179ResultCalc              = (5 / 2)
+Test179ResultCorrect           = 2.5
+
+;------------------------------
+; Multiply
+.Variables
+PPP   0 1N     2               "Multiply"                                 \Test180
+PPP   2 1N   1 3               "calculated (5 * 2)"                       \Test180ResultCalc
+PII   2 1N     3               "Correct result"                           \Test180ResultCorrect
+
+.Formulas NoTrend
+Test180                        = If(Abs(Test180ResultCalc - Test180ResultCorrect) < MaxDifference ,0,1)
+Test180ResultCalc              = (5 * 2)
+Test180ResultCorrect           = 10
+
+;-------------------------------------------------------------------------------------------------------------------------------------- Z
+
+.Variables
+PPP   0=1N    -2               "Total function tested failed"              \FunctionTestTotaal
+
+;-------------------------------------------------------------------------------------------------------------------------------------- Z
+; Count
+.Variables
+PPP   0 1N     2               "Count on tuples"                           \TestCountOnTuples
+
+PPP   2 1N   1 3               "Calculated on tuple test"                  \TestCountOnTuplesResultCalc1
+PPP   2 1N   1 3               "Calculated on tuple property"              \TestCountOnTuplesResultCalc2
+
+.Formulas Trend, NoTrend
+TestCountOnTuplesResultCalc1 = FesExpression("Count(X,SelectDescendants(TupleTest),InputRequired(X) And DataAvailable(X))")
+TestCountOnTuplesResultCalc2 = FesExpression("Count(X,SelectDescendants(BedrijvenTuple),InputRequired(X) And DataAvailable(X))")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

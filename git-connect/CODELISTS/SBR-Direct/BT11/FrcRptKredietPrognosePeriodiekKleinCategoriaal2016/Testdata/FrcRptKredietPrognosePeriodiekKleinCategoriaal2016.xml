@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='utf-8'?>
+<finanDocument version="1" noNamespaceSchemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <author>FES-1.6.12</author>
+    <documentInfo />
+    <modelInfo>
+      <name>FrcRptKredietPrognosePeriodiekKleinCategoriaal2016</name>
+      <version>00.00.000.000</version>
+    </modelInfo>
+    <userInfo>
+      <name>jeroen.bokkers(otto6)@finan.nl</name>
+    </userInfo>
+    <currencies>
+      <currency context="script" name="EUR" />
+      <currency context="view" name="BASE" />
+    </currencies>
+    <scaleValues>
+      <scaleValue context="script">1</scaleValue>
+      <scaleValue context="view">1</scaleValue>
+    </scaleValues>
+    <creationDate>3-5-2017</creationDate>
+    <updateDate>4-5-2017</updateDate>
+    <firstMonthInYear>1</firstMonthInYear>
+    <nofViewDecimals>0</nofViewDecimals>
+    <mutCalcInFirstCol>false</mutCalcInFirstCol>
+  </header>
+  <columnDefinitions>
+    <columnDefinition locked="false" type="USER">
+      <columnId>2</columnId>
+      <startDate>1-1-2017</startDate>
+      <endDate>31-12-2017</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="USER">
+      <columnId>1</columnId>
+      <startDate>1-1-2018</startDate>
+      <endDate>31-12-2018</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>false</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+  </columnDefinitions>
+  <timeLines>
+    <timeLine locked="false" source="DEFAULT" status="NONE" type="USER">
+      <timelineId>1</timelineId>
+      <title>MonthTimeline</title>
+      <columnIds>
+        <columnId isVisible="true">2</columnId>
+        <columnId isVisible="true">1</columnId>
+      </columnIds>
+    </timeLine>
+  </timeLines>
+  <ROOT>
+    <JAVA_ENTREPRENEUR_NAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Test</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_NAME>
+    <JAVA_ENTREPRENEUR_LASTNAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Jeroen</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_LASTNAME>
+    <JAVA_ENTREPRENEUR_CHAMBEROFCOMMERCENUMBER inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">33221127</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_CHAMBEROFCOMMERCENUMBER>
+    <JAVA_ENTREPRENEUR_EMAILADRESS inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">jeroen.bokkers(otto6)@finan.nl</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_EMAILADRESS>
+    <JAVA_ENTREPRENEUR_PHONENUMBER inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">06-54636467</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_PHONENUMBER>
+    <JAVA_ENTREPRENEUR_COMPANYNAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Test Otto 6</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_ENTREPRENEUR_COMPANYNAME>
+    <JAVA_BANKNAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">ABN AMRO Bank</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </JAVA_BANKNAME>
+    <ModelVersion inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">00.00.000.000</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </ModelVersion>
+    <IsCommercieel inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </IsCommercieel>
+    <IsEnkelvoudig inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </IsEnkelvoudig>
+    <ROM_Status inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </ROM_Status>
+    <Q_ROOT inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_ROOT>
+    <Q_STEP01 inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP01>
+    <frciLegalEntityLegalFormBanks inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">Besloten vennootschap</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">Besloten vennootschap</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciLegalEntityLegalFormBanks>
+    <venjbw2iLegalEntityRegisteredOffice inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">safdsafd</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">fdsafd</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </venjbw2iLegalEntityRegisteredOffice>
+    <frciDateEstablishmentLegalEntity inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>36526.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>36526.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciDateEstablishmentLegalEntity>
+    <frciPostalCodeLegalEntityRegisteredOffice inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">safdd</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">safdfsad</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciPostalCodeLegalEntityRegisteredOffice>
+    <frciReasonDelivery inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">Bijzonder beheer</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">Bijzonder beheer</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciReasonDelivery>
+    <frciFinancialStatementType inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">Enkelvoudig</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciFinancialStatementType>
+    <frciFinancialReportingPeriodFirstPeriodEndDate inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>42370.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>42736.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </frciFinancialReportingPeriodFirstPeriodEndDate>
+    <nlcdDocumentCreationDate inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>43101.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>43466.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </nlcdDocumentCreationDate>
+    <kvktContactForDocumentPresentation_tpnlcdFamilyName inReport="true" tupleInstanceIndices="[0]">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">adsfsafdsfd</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">taefads</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </kvktContactForDocumentPresentation_tpnlcdFamilyName>
+    <kvktContactForDocumentPresentation_tpnlcdEmailAddressFull inReport="true" tupleInstanceIndices="[0]">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">test@test.nl</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">test@test.nl</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </kvktContactForDocumentPresentation_tpnlcdEmailAddressFull>
+    <Q_STEP01_ACCEPTED inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP01_ACCEPTED>
+    <Q_STEP02 inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP02>
+    <Q_STEP03 inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP03>
+    <hc19_frclrBankRatio_pkvkiSbiBusinessCode inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value isString="true">0311</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value isString="true">0311</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </hc19_frclrBankRatio_pkvkiSbiBusinessCode>
+    <hc16_venjbw2iAssetsNoncurrent_pvenjbw2iIntangibleAssets inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </hc16_venjbw2iAssetsNoncurrent_pvenjbw2iIntangibleAssets>
+    <hc16_venjbw2iEquityAndLiabilities_pvenjbw2iEquity inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </hc16_venjbw2iEquityAndLiabilities_pvenjbw2iEquity>
+    <hc92_frclrIncomeExpensesStatementNatureOfExpense_pvenjbw2iNetResultAfterTax inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>2</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2017</year>
+          </columnSpec>
+        </column>
+        <column isEntered="true">
+          <columnId>1</columnId>
+          <value>200.0</value>
+          <columnSpec>
+            <periodID>MonthTimeline</periodID>
+            <year>2018</year>
+          </columnSpec>
+        </column>
+      </columns>
+    </hc92_frclrIncomeExpensesStatementNatureOfExpense_pvenjbw2iNetResultAfterTax>
+    <Q_STEP03_ACCEPTED inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP03_ACCEPTED>
+    <Q_STEP04 inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP04>
+    <Q_STEP04_ACCEPTED inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STEP04_ACCEPTED>
+    <Q_STATUS inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>0.0</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STATUS>
+    <Q_STATUS_MODIFIED_ON inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>42859.723391203705</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </Q_STATUS_MODIFIED_ON>
+    <ModelGenerator inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">FINAN XBRL Taxonomy Viewer v4.3.20</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </ModelGenerator>
+    <XbrlReport inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">frc-rpt-krediet-prognose-periodiek-klein-categoriaal-2016</value>
+          <columnSpec>
+            <periodID>MainPeriod</periodID>
+          </columnSpec>
+        </column>
+      </columns>
+    </XbrlReport>
+  </ROOT>
+  <customerId>391</customerId>
+  <documentId>1951</documentId>
+  <mutationDate>2017-05-04T17:21:41</mutationDate>
+</finanDocument>

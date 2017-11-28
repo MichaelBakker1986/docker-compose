@@ -1,0 +1,35 @@
+{&&Language=English}
+
+.variables
+
+PPPP    BN     2        ?      $>Adjusted Group Equity<$                                                \AdjustedGroupEquity
+
+PPPP    BN     3               =NetWorth                                                                \=NetWorth                              ->  NetWorth                            
+PPPP    BN     4               =SharedCapital                                                           \=SharedCapital                         ->  SharedCapital                 
+PPPP    BN     5               =SharedCapitalPreferenceShares                                           \=SharedCapitalPreferenceShares         ->  SharedCapitalPreferenceShares   
+PPPP    BN     5               =SharedCapitalOrdinaryShares                                             \=SharedCapitalOrdinaryShares           ->  SharedCapitalOrdinaryShares   
+PPPP   -BN     5               =TreasuryShares                                                          \=TreasuryShares                        ->  TreasuryShares                
+PPPP    BN    -5=              =SharedCapital                                                           \=SharedCapital                         ->  SharedCapital                 
+PPPP    BN     4               =StatutoryReserve                                                        \=StatutoryReserve                      ->  StatutoryReserve              
+PPPP    BN     4               =ReservedProfit                                                          \=ReservedProfit                        ->  ReservedProfit                
+PPPP    BN     4               =RevaluationReserve                                                      \=RevaluationReserve                    ->  RevaluationReserve            
+PPPP    BN     4               =OtherReserve                                                            \=OtherReserve                          ->  OtherReserve                  
+PPPP    BN     4               =SharePremium                                                            \=SharePremium                          ->  SharePremium                  
+PPPP    BN     4               =MinorityInterests                                                       \=MinorityInterests                     ->  MinorityInterests             
+PPPP    BN    -4=              =NetWorth                                                                \=NetWorth                              ->  NetWorth                      
+PPPP   -BN     3               =IntangibleFixedAssets                                                   \=IntangibleFixedAssets                 ->  IntangibleFixedAssets         
+PPPP    BN     4               =TotalGoodwill                                                           \=TotalGoodwill                         ->  TotalGoodwill                
+PPPP    BN     4               =TotalGoodwill                                                           \=TotalPatentsTrademarksAndOtherRights  ->  TotalPatentsTrademarksAndOtherRights
+PPPP    BN     4               =TotalOtherIntangibleFixedAssets                                         \=TotalOtherIntangibleFixedAssets       ->  TotalOtherIntangibleFixedAssets
+PPPP    BN    -4=              =IntangibleFixedAssets                                                   \=IntangibleFixedAssets                 ->  IntangibleFixedAssets
+PIII   -BN     3               =ReceivablesAffiliatedCompanies                                          \=ReceivablesAffiliatedCompanies
+PPPP   =BN    -3               $>Tangible Equity<$                                                      \TangibleEquity
+PPPP    BN     3               =TupleSubordinatedDebtsTotal                                             \=SubordinatedDebts                     ->  SubordinatedDebts
+PPPP   =BN    -3=              =AdjustedGroupEquity                                                     \=AdjustedGroupEquity
+
+
+
+
+
+
+

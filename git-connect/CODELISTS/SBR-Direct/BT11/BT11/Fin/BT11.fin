@@ -1,0 +1,324 @@
+{&&Language=nl}
+;==========================================================================================================================================
+
+All-in-one BT11 model
+
+.ModelVersion          1.0
+.FINANversion          3.2
+
+.Period MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FirstYear=2016,Years=1,MaxTsY=1,TsY=1
+
+.Variables
+PP       X     0               "Banken taxonomie rapport selectie v#CompactModelVersion#"                                              \Root
+
+XXX      X     1               Hidden vars                                                                                             \HiddenVars
+{&&TryInclude Inc_FPSVars.fin}
+{&&TryInclude Inc_JavaVars.fin}
+{&&TryInclude Inc_Import.fin}
+
+.Variables
+PP       X     1 1             BT11 Taxonomies                                                                                         \BT11x1
+.LevelOffset -1
+{&&Include Inc_Algemeen.fin}
+.LevelOffset 0
+
+.Variables
+PP      1N C   1 1             BT11 Vragenlijst                                                                                        \Q_ROOT
+
+
+PP      1N C   2 1             Rapportageselectie                                                                                      \Q_STEP01
+PP      1A   1 3               "Info voor stap 1"                                                                                      \Q_STEP01_INFO
+PP      1A   1 3               "Waarschuwing voor stap 1"                                                                              \Q_STEP01_WARNING
+{&&Include Inc_SDRK.fin}
+
+.Variables
+XXX     1N     4               Eigenschappen van de stap                                                                           \Q_STEP01_Hulpvariabelen
+PPP   0 1N     5               Aantal verplichte velden                                                                            \Q_STEP01_REQUIREDVARS
+PPP   0 1N     5               Aantal ingevulde verplichte velden                                                                  \Q_STEP01_ENTEREDREQUIREDVARS
+
+.Formulas NoTrend
+Q_STEP01_REQUIREDVARS                             = Count(X,SelectDescendants(Q_STEP01, Q_STEP01_Hulpvariabelen),InputRequired(X))
+Q_STEP01_ENTEREDREQUIREDVARS                      = Count(X,SelectDescendants(Q_STEP01, Q_STEP01_Hulpvariabelen),InputRequired(X) and DataAvailable(X))
+Q_STEP01                                          = (SelectedReportSupported=1)
+Q_STEP01_WARNING                                  = &If(SelectedReportSupported[1]=0,&"De geselecteerde rapportage wordt niet ondersteund.")
+Q_STEP01_INFO                                     = "Om een SBR aanlevering te doen bepalen we eerst welke rapportage u moet indienen. Op dit moment kunt u alleen aanleveringen doen voor IB, Klein Natuurlijk Persoon, en Klein voor enkelvoudige, niet-agrarische ondernemingen."
+Q_ROOT                                            = (Q_STEP01 and Q_STEP02 and Jaarrekening and IBAangifte and Q_STEP04 and Bestuursverslag) and HSUM(FES_DATAENTEREDINCOLUMN,1,MaxT)
+
+
+.Variables
+;============================================================================================================================================ Stap 2
+; Stap 2: Informatie over de rapportage en de rechtspersoon
+;
+
+PP      1N C   2  +            "Informatie over de rapportage"                                                     \Q_STEP02
+PP      1A   1 3               "Waarschuwing bij stap 1"                                                           \Q_STEP02_WARNING
+
+PP      1A     3               "Info bij stap 1"                                                                   \Q_STEP02_INFO
+                                                                                                                                        
+PP       X     3               "Informatie over de onderneming"                                                    \OndernemingTitle
+PI      1A     4               "Registratienummer bij de Kamer van Koophandel"                                     \venjbw2iChamberOfCommerceRegistrationNumberOneCol
+PP      1A     4               "Naam van de rechtspersoon"                                                         \venjbw2iLegalEntityNameOneCol
+PP      1A     4               "Handelsnamen"                                                                      \rjiBusinessNamesOneCol      
+PI      1A     4               "Postcode"                                                                          \nlcdPostalCodeNLOneCol
+PI      1A     4               "Woonplaats"                                                                        \nlcdPlaceOfResidenceNLOneCol
+PI      1N C   4               "Classificatie van de rechtspersoon op basis van de wettelijke groottecriteria"     \kvkiLegalSizeCriteriaClassificationOneCol     
+PI      1N D   4               "Oprichtingsdatum onderneming"                                                      \frciDateEstablishmentLegalEntityOneCol    
+PI      1N C   4               "Rechtsvorm van de rechtspersoon"                                                   \frciLegalEntityLegalFormBanksOneCol    
+                                                                                                                                                            
+PP       X     3               "Informatie over de ondernemer"                                                     \OndernemerTitle
+PI      1A     4               "Voornamen"                                                                         \hc100_frclrNaturalPersonInformation_pnlcdFirstNameNPOneCol
+PI      1A     4               "Voorvoegsel geslachtsnaam"                                                         \nlcdPrefixNPOneCol
+PI      1A     4               "Geslachtsnaam"                                                                     \hc100_frclrNaturalPersonInformation_pnlcdFamilyNameNPOneCol     
+PI      1A     4               "Postcode"                                                                          \frcdimPartyFilingTaxReturnAxis_tpnlcdPostalCodeNLOneCol
+PI      1A     4               "Woonplaats"                                                                        \frcdimPartyFilingTaxReturnAxis_tpnlcdPlaceOfResidenceNLOneCol
+PI      1A     4               "E-mailadres, volledig"                                                             \tpnlcdEmailAddressFullOneCol
+                                                                    
+PP       X     3               "Contactpersoon"                                                                    \ContactTitle
+PI      1N C   4               "Type"                                                                              \kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol
+PI      1A     4               "Voornamen"                                                                         \kvktContactForDocumentPresentation_tpnlcdFirstNameOneCol
+PI      1A     4               "Geslachtsnaam"                                                                     \kvktContactForDocumentPresentation_tpnlcdFamilyNameOneCol     
+PI      1A     4               "Naam van de organisatie vertegenwoordigd door de contactpersoon"                   \kvktContactForDocumentPresentation_tpkvkiOrganisationNameOneCol
+PI      1A     4               "Telefoonnummer"                                                                    \kvktContactForDocumentPresentation_tpnlcdTelephoneNumberOneCol
+PI      1A     4               "E-mailadres"                                                                       \kvktContactForDocumentPresentation_tpnlcdEmailAddressFullOneCol
+                                                                                                                                             
+PP       X     3               "Informatie over de jaarrekening"                                                   \JaarrekeningTitle
+PI      1N D   4               "Datum van opmaak van het document"                                                 \nlcdDocumentCreationDateOneCol
+PP      1N C   4               "Type jaarrekening"                                                                 \frciFinancialStatementTypeOneCol 
+PI      1N C   4               "Balans voor of na resultaatbestemming"                                             \venjbw2iBalanceSheetBeforeAfterAppropriationResultsOneCol     
+                                                                                                                                                  
+PP       X     3               "Informatie over de aanlevering"                                                    \AanleveringTitle
+PI      1N C   4               "Bestemmende bank"                                                                  \frciDestinationBankOneCol
+PI      1N C   4               "Reden levering"                                                                    \frciReasonDeliveryOneCol
+
+XX       X     3               "Checks"                                                                            \Step02_checks
+PP      1N     4               "Incompleetcontrole"                                                                \IncompleteAlgemeenCheck
+PP      1N     4               "Incorrectcontrole"                                                                 \IncorrectAlgemeenCheck
+
+
+
+.Formulas NoTrend, Trend
+Q_STEP02 = not(IncompleteAlgemeenCheck or IncorrectAlgemeenCheck)
+Q_STEP02_WARNING = &if(HSUM(IncompleteAlgemeenCheck,1,MaxT),"Nog niet alle verplichte gegevens zijn ingevoerd.|","") & if(HSUM(IncorrectAlgemeenCheck,1,MaxT),"De datum gerapporteerd voor Oprichtingsdatum onderneming moet liggen voor het eerste gerapporteerde jaar.","")
+IncompleteAlgemeenCheck = Count(X,SelectDescendants(Q_STEP02),InputRequired(X) and not(DataAvailable(X)))
+IncorrectAlgemeenCheck = DataEntered(frciDateEstablishmentLegalEntityOneCol) and frciDateEstablishmentLegalEntityOneCol > FirstDateInT(1)
+frciFinancialStatementTypeOneCol = 0;
+frciLegalEntityLegalFormBanksOneCol = Case(Rechtsvorm,[1:7|2:26|3:14|4:4|5:0|6:15|7:28|8:25])     
+rjiBusinessNamesOneCol = &FPS_VAR_Naam
+venjbw2iLegalEntityNameOneCol = &FPS_VAR_Naam
+nlcdPlaceOfResidenceNLOneCol = &if(not(LENGTH(FPS_VAR_Woonplaats)=0),&FPS_VAR_Woonplaats,NA)
+venjbw2iChamberOfCommerceRegistrationNumberOneCol = &if(not(LENGTH(FPS_VAR_KVKnr)=0),&SubStr(FPS_VAR_KVKnr,1,8),NA) 
+kvktContactForDocumentPresentation_tpkvkiOrganisationNameOneCol = &if(kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol[1]=1,&if(not(LENGTH(FPS_VAR_Naam)=0),&FPS_VAR_Naam,NA),NA)
+kvkiLegalSizeCriteriaClassificationOneCol = if(Micro,0,if(Klein,1,NA))
+kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol = 0
+
+.Choices
+Q_STEP02=                      "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+frciDestinationBankOneCol=     "0:ABN AMRO Bank|1:ING Bank|9:Overige|2:Rabobank"
+kvkiLegalSizeCriteriaClassificationOneCol="3:Groot|1:Klein|0:Micro|2:Middelgroot"
+frciReasonDeliveryOneCol=            "3:Bijzonder beheer|4:Juridische omzetting|2:Kredietwijziging|1:Nieuwe aanvraag|5:Overige redenen voor aflevering|0:Revisie"
+frciLegalEntityLegalFormBanksOneCol= "0:Besloten vennootschap|1:Buitenlandse NNP als functionaris|2:Buitenlandse rechtsvorm|3:Commanditaire vennootschap met rechtspersoonlijkheid|4:Commanditaire vennootschap|5:Cooperatie|6:Eenmanszaak met meerdere eigenaren|7:Eenmanszaak|8:Europees Economisch Samenwerkingsverband|9:Europese cooperatieve vennootschap (SCE)|10:Europese naamloze vennootschap (SE)|11:Formeel buitenlandse vennootschap|12:Kapitaal vennootschap binnen EER|13:Kerkgenootschap|14:Maatschap|15:Naamloze vennootschap|16:Niet formeel buitenlandse vennootschap|17:Onderlinge waarborg maatschappij|18:Openbare vennootschap met rechtspersoonlijkheid|19:Openbare vennootschap|20:Overige buitenlandse rechtsvorm|21:Overige rechtsvorm|22:Publiekrechtelijke rechtspersoon|23:Rechtspersoon in oprichting|24:Rederij|25:Stichting|26:Vennootschap onder firma|27:Vereniging van eigenaars|28:Vereniging"
+venjbw2iBalanceSheetBeforeAfterAppropriationResultsOneCol="0:Na|1:Voor"
+frciFinancialStatementTypeOneCol=    "0:Enkelvoudig|1:Geconsolideerd en enkelvoudig|2:Geconsolideerd|3:Partieel geconsolideerd"
+kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol="0:Intermediair|1:Ondernemer" 
+                        
+
+.Formulas Visible
+Q_STEP02=Q_STEP01
+OndernemerTitle = NP
+frcdimPartyFilingTaxReturnAxis_tpnlcdPostalCodeNLOneCol = Visible(frcdimPartyFilingTaxReturnAxis_tpnlcdPostalCodeNL)
+frcdimPartyFilingTaxReturnAxis_tpnlcdPlaceOfResidenceNLOneCol = Visible(frcdimPartyFilingTaxReturnAxis_tpnlcdPlaceOfResidenceNL)
+venjbw2iBalanceSheetBeforeAfterAppropriationResultsOneCol= Visible(venjbw2iBalanceSheetBeforeAfterAppropriationResults)
+nlcdDocumentCreationDateOneCol= Visible(nlcdDocumentCreationDate)
+frciFinancialStatementTypeOneCol= Visible(frciFinancialStatementType)
+frciDateEstablishmentLegalEntityOneCol= Visible(frciDateEstablishmentLegalEntity)
+frciLegalEntityLegalFormBanksOneCol= Visible(frciLegalEntityLegalFormBanks)
+JaarrekeningTitle=NP or Klein
+hc100_frclrNaturalPersonInformation_pnlcdFirstNameNPOneCol=NP
+nlcdPrefixNPOneCol=NP
+hc100_frclrNaturalPersonInformation_pnlcdFamilyNameNPOneCol=NP
+
+.Formulas InputRequired   
+nlcdPostalCodeNLOneCol = 1   
+nlcdPlaceOfResidenceNLOneCol = 1
+venjbw2iChamberOfCommerceRegistrationNumberOneCol = Visible(venjbw2iChamberOfCommerceRegistrationNumberOneCol)
+venjbw2iLegalEntityNameOneCol = Visible(venjbw2iLegalEntityNameOneCol)
+rjiBusinessNamesOneCol = Visible(rjiBusinessNamesOneCol)
+frciDestinationBankOneCol = Visible(frciDestinationBankOneCol)
+kvkiLegalSizeCriteriaClassificationOneCol = Visible(kvkiLegalSizeCriteriaClassificationOneCol)
+frciReasonDeliveryOneCol = Visible(frciReasonDeliveryOneCol)          
+frciDateEstablishmentLegalEntityOneCol = Visible(frciDateEstablishmentLegalEntityOneCol)
+
+frciLegalEntityLegalFormBanksOneCol = Visible(frciLegalEntityLegalFormBanksOneCol)
+
+frcdimPartyFilingTaxReturnAxis_tpnlcdPlaceOfResidenceNLOneCol = Visible(OndernemerTitle)            
+frcdimPartyFilingTaxReturnAxis_tpnlcdPostalCodeNLOneCol = Visible(OndernemerTitle)
+hc100_frclrNaturalPersonInformation_pnlcdFamilyNameNPOneCol = Visible(OndernemerTitle)  
+tpnlcdEmailAddressFullOneCol = Visible(OndernemerTitle)  
+                                                               
+kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol = Visible(ContactTitle)
+kvktContactForDocumentPresentation_tpnlcdEmailAddressFullOneCol = visible(ContactTitle)
+kvktContactForDocumentPresentation_tpnlcdFamilyNameOneCol = visible(ContactTitle)
+kvktContactForDocumentPresentation_tpkvkiOrganisationNameOneCol = visible(ContactTitle)
+
+nlcdDocumentCreationDateOneCol= Visible(nlcdDocumentCreationDateOneCol)                             
+frciFinancialStatementTypeOneCol= Visible(frciFinancialStatementTypeOneCol)                           
+venjbw2iBalanceSheetBeforeAfterAppropriationResultsOneCol= Visible(venjbw2iBalanceSheetBeforeAfterAppropriationResultsOneCol)  
+
+.Formulas Locked
+kvktContactForDocumentPresentation_tpkvkiOrganisationNameOneCol = not(kvktContactForDocumentPresentation_tpkvkiContactTypeOneCol[1]=0)
+kvkiLegalSizeCriteriaClassificationOneCol = not(kvkiLegalSizeCriteriaClassificationOneCol=NA) and not(DataEntered(kvkiLegalSizeCriteriaClassificationOneCol))
+nlcdPlaceOfResidenceNLOneCol = DataAvailable(nlcdPlaceOfResidenceNLOneCol) and not(DataEntered(nlcdPlaceOfResidenceNLOneCol))                                                                                     
+venjbw2iChamberOfCommerceRegistrationNumberOneCol = DataAvailable(venjbw2iChamberOfCommerceRegistrationNumberOneCol) and not(DataEntered(venjbw2iChamberOfCommerceRegistrationNumberOneCol)) 
+
+.Hints
+nlcdPostalCodeNLOneCol = "De postcode moet bestaan uit 4 cijfers direct gevolgd door 2 hoofdletters. Het eerste cijfer mag geen 0 zijn.|$$Pattern=([1-9]{1}[0-9]{3}[A-Z]{2})"
+frcdimPartyFilingTaxReturnAxis_tpnlcdPostalCodeNLOneCol = "De postcode moet bestaan uit 4 cijfers direct gevolgd door 2 hoofdletters. Het eerste cijfer mag geen 0 zijn.|$$Pattern=([1-9]{1}[0-9]{3}[A-Z]{2})"
+venjbw2iChamberOfCommerceRegistrationNumberOneCol = "Het Kamer van Koophandel nummer moet bestaan uit 8 cijfers en mag niet beginnen met twee keer een 0.|$$Pattern=([1-9][0-9]{7})|([0-9][1-9][0-9]{6})"
+tpnlcdEmailAddressFullOneCol = "Het e-mail adres moet een @-teken bevatten met andere tekens er voor en achter. De lengte moet tussen de 6 en 254 karakters liggen.|$$Pattern=[^@]+@[^@]+|$$MinLength=6|$$MaxLength=254"
+kvktContactForDocumentPresentation_tpnlcdEmailAddressFullOneCol = "Het e-mail adres moet een @-teken bevatten met andere tekens er voor en achter. De lengte moet tussen de 6 en 254 karakters liggen.|$$Pattern=[^@]+@[^@]+|$$MinLength=6|$$MaxLength=254"
+kvktContactForDocumentPresentation_tpkvkiOrganisationNameOneCol = "$$MinLength=1|$$MaxLength=1000"
+
+.Variables
+PP      1N C   2  +            "Jaarrekening"                                                              \Jaarrekening
+
+;{&&Include Financials-V05.fin}
+{&&Include Inc_Financials.fin}
+
+.Choices
+Jaarrekening=                      "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+
+.Formulas NoTrend
+Jaarrekening= not(Visible(Jaarrekening)) or (frcabstrBankRatioTitleResult and frcabstrBalanceSheetBanksTitleResult and frcabstrFinancialInstrumentsBanksTitleResult and frcabstrOffBalanceSheetCommitmentsDisclosureTitleKleinResult and frcabstrOffBalanceSheetCommitmentsDisclosureTitleNPResult and frcabstrIncomeExpensesStatementTitleResult and frcabstrNotesBanksTitleResult and frcabstrDisclosureIncomeStatementBanksTitleResult and frcabstrDisclosureOtherBanksTitleResult and frcabstrDisclosureOtherBanksTitleNPResult)
+.Formulas Visible
+Jaarrekening=Q_STEP01 and not(IB)
+
+{&&Include Inc_Financials-IB.fin}
+
+.Variables
+;============================================================================================================================================ Stap 4
+; Stap 4: Agro
+
+
+PP      1N C   2  +            "Agro"                                                                      \Q_STEP04
+PP      1A   1 3               "Waarschuwing bij stap 4"                                                           \Q_STEP04_WARNING
+PP      1A     3               "Info bij stap 4"                                                                   \Q_STEP04_INFO
+
+
+;{&&Include Agro.fin}
+
+.Choices
+Q_STEP04=                      "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+
+.Formulas NoTrend
+Q_STEP04=1;                      not(Visible(Q_STEP04)) or (Q_STEP04_ENTEREDREQUIREDVARS[1]=Q_STEP04_REQUIREDVARS[1])
+.Formulas Visible
+Q_STEP04=0;Q_STEP01 and IsAgro
+;
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; Systeem variabelen bij stap 4
+;
+
+XXX     1A     3               "Validatie stap 4"                                                                  \Q_STEP04_VALIDATION
+PP      BN     4               "Aantal verplichte velden"                                                          \Q_STEP04_REQUIREDVARS
+PP      BN     4               "Aantal ingevulde verplichte velden"                                                \Q_STEP04_ENTEREDREQUIREDVARS
+PI      1M C   4               "Validatiemeldingen"                                                                \Q_STEP04_VALIDATIONMESSAGE;
+
+
+.Formulas NoTrend
+Q_STEP04_WARNING=              &If(Q_STEP04_ENTEREDREQUIREDVARS[1]<Q_STEP04_REQUIREDVARS[1],&"Nog niet alle verplichte gegevens zijn ingevoerd.|","")
+Q_STEP04_REQUIREDVARS=         Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X))
+Q_STEP04_ENTEREDREQUIREDVARS=  Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X) and DataAvailable(X))
+
+
+.Variables
+PP      1N C   2  +            "Bestuursverslag"                                                           \Bestuursverslag
+PP      1A   1 3               "Waarschuwing bij stap 5"                                                           \Q_STEP05_WARNING
+PP      1A     3               "Info bij stap 5"                                                                   \Q_STEP05_INFO
+
+.Choices
+Bestuursverslag=                      "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+
+.Formulas NoTrend
+Bestuursverslag=                      not(Visible(Bestuursverslag)) or (frclrIntermediaryReportResult and frclrManagingSupervisoryDirectors and frclrBusinessPartners and frclrReportOfTheSupervisoryBoardResult and frclrOtherInformationResult and frclrResultsAppropriationDisclosureResult)
+.Formulas Visible
+Bestuursverslag=Q_STEP01 and not(IB)
+
+.LevelOffset -1
+{&&Include Inc_Bestuursverslag.fin}
+.LevelOffset 0
+
+.Variables
+XXX     1A     3               "Validatie stap 5"                                                                  \Q_STEP05_VALIDATION
+PP      BN     4               "Aantal verplichte velden"                                                          \Q_STEP05_REQUIREDVARS
+PP      BN     4               "Aantal ingevulde verplichte velden"                                                \Q_STEP05_ENTEREDREQUIREDVARS
+PI      1M C   4               "Validatiemeldingen"                                                                \Q_STEP05_VALIDATIONMESSAGE
+
+.Formulas NoTrend
+Q_STEP05_WARNING=              &If(Q_STEP05_ENTEREDREQUIREDVARS[1]<Q_STEP05_REQUIREDVARS[1],&"Nog niet alle verplichte gegevens zijn ingevoerd.|","")
+Q_STEP05_REQUIREDVARS=         Count(X,SelectDescendants(Bestuursverslag,Q_STEP05_WARNING),InputRequired(X))
+Q_STEP05_ENTEREDREQUIREDVARS=  Count(X,SelectDescendants(Bestuursverslag,Q_STEP05_WARNING),InputRequired(X) and DataAvailable(X))
+
+
+
+
+.Variables
+;-------------------------------------------------------------------------------------------------- STATUS
+
+XX      1A   1 2               "Resultaat"                                                                                         \Q_RESULT
+PI      1N C   3  +            "Status"                                                                                            \Q_STATUS
+PI      1N D   3  +   <        "Definitief gemaakt"                                                                                \Q_STATUS_FINAL_ON
+PI      1A     3  +            "Definitief gemaakt door"                                                                           \Q_STATUS_FINAL_BY
+PI      1N D   3  +   <        "Aangemaakt op"                                                                                     \Q_STATUS_STARTED_ON
+PI      1A     3  +            "Aangemaakt door"                                                                                   \Q_STATUS_STARTED_BY
+PI      1N D   3  +   <        "Laatste bewerking"                                                                                 \Q_STATUS_MODIFIED_ON
+PP      1A     3  +            "Model gegenereeerd door"                                                                           \ModelGenerator
+PP      1A     3               Modelversie                                                                                             \ModelVersion
+PP      1A     3               Modeltype                                                                                               \ModelType
+PP      1A     3               Parametersversie                                                                                        \MatrixVersion
+
+.Choices
+Q_STATUS                                          = "0:Actief|1:Definitief"
+
+.Formulas NoTrend
+Q_STATUS                                          = 0
+Q_STATUS_MODIFIED_ON                              = Now
+ModelGenerator                                    = "FINAN XBRL Taxonomy Viewer v3.20.9 Handmatig"
+ModelVersion                                      = "#ModelVersion#"
+ModelType                                         = "BT11"
+
+
+.Hints
+frcdimLocationActualActivitiesDescriptionAddressNLSpecificationAxis="$$XbrlMinTupleInstances=1"/Add
+
+
+.Variables
+
+XXXX     X     1               SETTINGS                                                            \Q_SETTINGS
+PI      1N C   2               Q_PREVIOUS_BUTTON_VISIBLE                                           \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               Q_NEXT_BUTTON_VISIBLE                                               \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               Q_CONCEPT_REPORT_VISIBLE                                            \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               Q_FINAL_REPORT_VISIBLE                                              \Q_FINAL_REPORT_VISIBLE
+PI      1N C   2               Download XBRL                                                       \Q_XBRL_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+Q_XBRL_VISIBLE                 = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_CONCEPT_REPORT_VISIBLE       = 0
+Q_FINAL_REPORT_VISIBLE         = 0
+Q_XBRL_VISIBLE                 = Q_ROOT
+
+
+.Variables
+PP       X     1 1             BT11 Taxonomies                                                                                         \BT11x2
+
+.Quit

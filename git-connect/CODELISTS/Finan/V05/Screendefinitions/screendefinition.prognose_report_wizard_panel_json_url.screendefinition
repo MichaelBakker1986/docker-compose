@@ -1,0 +1,54 @@
+{
+	"viewType":"WIZARD",
+	"name":"Root",
+	"variableName":"Q_ROOT",
+	"metaData":{
+		"onlyMoveForwardIfAllPreviousStepsAreDone":true,
+		"alwaysShowReportButton":true
+	},
+	"children":[
+		{
+			"viewType":"CONTAINER",
+			"name":"ReportScenarioStep",
+			"description":"Scenario",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel1",
+					"description":"CustomPanel1",
+					"metaData":{
+						"providertype":"REPORT_SCENARIO"
+					}
+					
+				}
+				
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"ReportStep",
+			"description":"Rapportage",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel2",
+					"description":"CustomPanel2",
+					"metaData":{
+						"providertype":"REPORT_PANEL"
+					},
+					"reporttypes":[
+						"5min",
+						"extended",
+						"prognoseveronderstellingen",
+						"uitkeringstoets"
+					]
+					
+				}
+				
+			]
+			
+		}
+		
+	]
+}

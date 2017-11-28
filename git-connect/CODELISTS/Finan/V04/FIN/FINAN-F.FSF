@@ -1,0 +1,55 @@
+{&&OEM}                  ;; IVM vertaalstrings
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : FINAN-F.FSF
+;     Language          : NL
+;     Description       :
+;     Modelgroup(s)     : FMASCRIPT
+;     Key               : 3
+;
+;     Main model        : MainFSF (D:\MAKEFIN\MFS\474\MAIN.MFA)
+;     Release/version BM: 4.7.4
+;     Date BM           : NA
+;
+;     Compile date      : 21-11-2002
+;     Compile time      : 12:43:40
+;     Compiler          : MakeFIN 3.01
+;     Compiled by       : RONALD on FINAN-RVA
+;
+;
+;     Copyright (c) 1995-2000 FINAN, Amersfoort. All rights reserved.
+;=============================================================================
+;
+;—————————————————————————————————————————————————————————————————————————————
+; FINAN-Genereren van de FMA bestanden
+;
+.Script Name=MakeFMAfiles,Title="Genereer FMA-koppeling",Priority=3010
+;;.Event OnToolsMenuClick
+  .AskOk OK ="This will start the generation of the FMA file.|FMA files will be created of all the files in the DATA-folder||#$DataFolder#||the FMA files will be placed in the EXPORT-folder||#$exportFolder#||(Reminder: is EXPORT-folder empty?)",1
+  .If #OK#<>1
+    .Cancel
+  .Else
+    .SysLog Local
+    .CloseDocument
+    .Application BeginSilent
+    .Log File="FMAfiles.log",DateTime
+    .Log "Started on #date# #time#"
+    .FindFirstDocument FileName="*.V0?"
+    .If ("#$FileName#"<>"")
+      .Repeat
+        .OpenDocument Key="#$FileName#"
+        .log " - #$FileName#"
+        .Report "Dio2-FMA",ASCII
+        .Document Modified=Off
+        .CloseDocument
+        .FindNextDocument
+      .Until ("#$FileName#"="")
+    .EndIf
+    .Log "Finished on #date# #time#"
+    .Application EndSilent
+  .EndIf
+
+.EndScript
+
+

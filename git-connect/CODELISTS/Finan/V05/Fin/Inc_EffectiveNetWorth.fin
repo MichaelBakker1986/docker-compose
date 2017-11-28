@@ -1,0 +1,99 @@
+{&&Language=English}
+.Variables
+PPPP    BN     4               $>Effective net worth<$                                             \EffectiveNetWorth
+PPPP    BN     5               =NetWorth                                                           \=NetWorth
+PPPP    BN     5               &"$>Adjustment<$"&" "&FirstLC(&IntangibleFixedAssets[0])            \AdjustmentsIntangibleFixedAssets
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&Goodwill_tpBookValue[0]                       \Goodwill_tpAssessmentAdjustmentList                        =Goodwill_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&PatentsTrademarksAndOtherRights_tpBookValue[0]\PatentsTrademarksAndOtherRights_tpAssessmentAdjustmentList =PatentsTrademarksAndOtherRights_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&OtherIntangibleFixedAssets_tpBookValue[0]     \OtherIntangibleFixedAssets_tpAssessmentAdjustmentList      =OtherIntangibleFixedAssets_tpAssessmentAdjustment
+PPPP   =BN    -6=              =AdjustmentsIntangibleFixedAssets                                   \=AdjustmentsIntangibleFixedAssets
+PPPP    BN     5               &"$>Adjustment<$"&" "&FirstLC(&TotalLandAndBuildings[0])             \AdjustmentsLandAndBuildings
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&LandAndBuildings_tpBookValue[0]               \LandAndBuildings_tpAssessmentAdjustmentList         =LandAndBuildings_tpAssessmentAdjustment
+PPPP   =BN    -6=              =AdjustmentsLandAndBuildings                                        \=AdjustmentsLandAndBuildings
+PPPP    BN     5               &"$>Adjustment<$"&" "&FirstLC(&MaterialFixedAssets[0])              \AdjustmentsMaterialFixedAssetsOther
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&PlantAndEquipment_tpBookValue[0]              \PlantAndEquipment_tpAssessmentAdjustmentList        =PlantAndEquipment_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&FurnitureAndFixtures_tpBookValue[0]           \FurnitureAndFixtures_tpAssessmentAdjustmentList     =FurnitureAndFixtures_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&TransportationEquipment_tpBookValue[0]        \TransportationEquipment_tpAssessmentAdjustmentList  =TransportationEquipment_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&OtherMaterialFixedAssets_tpBookValue[0]       \OtherMaterialFixedAssets_tpAssessmentAdjustmentList =OtherMaterialFixedAssets_tpAssessmentAdjustment
+PPPP   =BN    -6=              &"$>Adjustment<$"&" "&FirstLC(&MaterialFixedAssets[0])              \=AdjustmentsMaterialFixedAssetsOther
+PPPP    BN     5               &"$>Adjustment<$"&" "&FirstLC(&FinancialFixedAssets[0])             \AdjustmentsFinancialFixedAssets
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&InvestmentInSubsidiaries_tpBookValue[0]       \InvestmentInSubsidiaries_tpAssessmentAdjustmentList   =InvestmentInSubsidiaries_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&LoansToSubsidiaries_tpBookValue[0]            \LoansToSubsidiaries_tpAssessmentAdjustmentList        =LoansToSubsidiaries_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&LoansToAffiliatedCompanies_tpBookValue[0]     \LoansToAffiliatedCompanies_tpAssessmentAdjustmentList =LoansToAffiliatedCompanies_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&OtherSecurities_tpBookValue[0]                \OtherSecurities_tpAssessmentAdjustmentList            =OtherSecurities_tpAssessmentAdjustment
+PPPP    BN     6         +     &"$>Adjustment<$"&" "&OtherFinancialFixedAssets_tpBookValue[0]      \OtherFinancialFixedAssets_tpAssessmentAdjustmentList  =OtherFinancialFixedAssets_tpAssessmentAdjustment
+PPPP   =BN    -6=              &"$>Adjustment<$"&" "&FirstLC(&FinancialFixedAssets[0])             \=AdjustmentsFinancialFixedAssets
+PPPP    BN     5         +     &"$>Adjustment<$"&" "&FirstLC(&Inventories[0])                      \AdjustmentsInventories
+PPPP    BN     6               =Inventories                                                        \=Inventories
+PIII    BN     6               $>Assessment value<$                                                \InventoriesAssessmentValue
+PPPP    BN    -6=              &"$>Adjustment<$"&" "&FirstLC(&Inventories[0])                      \=AdjustmentsInventories
+PIII    BN %   6               $>Assessment value<$ ($>percentage of bookvalue<$)                  \InventoriesAssessmentValuePerc
+PPPP    BN     5         +     &"$>Adjustment<$"&" "&"$>Current account management<$"&" ("&"$>debit<$"&")"\AdjustmentsCurrentAccountManagementDebit
+PPPP    BN     6               &CurrentAccountManagementDebit[0]&" ("&"$>debit<$"&")"              \=CurrentAccountManagementDebit -> CurrentAccountManagementDebit
+PIII    BN     6               $>Assessment value<$                                                \CurrentAccountManagementDebitAssessmentValue
+PPPP    BN    -6=              &"$>Adjustment<$"&" "&CurrentAccountManagementDebit[0]              \=AdjustmentsCurrentAccountManagementDebit
+PIII    BN %   6               $>Assessment value<$ ($>percentage of bookvalue<$)                  \CurrentAccountManagementDebitAssessmentValuePerc
+PPPP    BN     5         +     &"$>Adjustment<$"&" "&"$>current account affiliated companies<$"&" ("&"$>debit<$"&")"\AdjustmentsReceivablesAffiliatedCompanies
+PPPP    BN     6               &ReceivablesAffiliatedCompanies[0]&" ("&"$>debit<$"&")"             \=ReceivablesAffiliatedCompanies -> ReceivablesAffiliatedCompanies
+PIII    BN     6               $>Assessment value<$                                                \ReceivablesAffiliatedCompaniesAssessmentValue
+PPPP    BN    -6=              &"$>Adjustment<$"&" "&ReceivablesAffiliatedCompanies[0]             \=AdjustmentsReceivablesAffiliatedCompanies
+PIII    BN %   6               $>Assessment value<$ ($>percentage of bookvalue<$)                  \ReceivablesAffiliatedCompaniesAssessmentValuePerc
+PPPP    BN     5         +     &"$>Adjustment<$"&" "&FirstLC(&Receivables[0])&" "&"("&"$>other<$"&")"\AdjustmentsReceivables
+PPPP    BN     6               &Receivables[0]&" ("&"$>excl. r/c companies<$"&")"                  \ReceivablesTradeRelated
+C $>Receivables excl. receivables related companies and management.<$
+PIII    BN     6               $>Assessment value<$                                                \ReceivablesAssessmentValue
+PPPP    BN    -6=              &"$>Adjustment<$"&" "&FirstLC(&Receivables[0])                      \=AdjustmentsReceivables
+PIII    BN %   6               $>Assessment value<$ ($>percentage of bookvalue<$)                  \ReceivablesAssessmentValuePerc
+IIII    BN     5               $>Other adjustments within balance sheet<$                          \EffectiveNetWorthAdjustments1
+PPPP   =BN    -5               $>Adjusted net worth<$                                              \AdjustedNetWorth
+PPPP    BN     5               =TupleSubordinatedDebtsTotal                                        \SubordinatedDebts2
+PPPP    BN     6               &SubordinatedDebt_tpBookValue[0]                                    \SubordinatedDebtBookValueList2=SubordinatedDebt_tpBookValue
+PPPP   =BN    -6=              =TupleSubordinatedDebtsTotal                                        \=SubordinatedDebts2
+PPPP    BN     5        ?      &"$>Current portion of longterm debt<$"&" "&"("&"$>Subordinated<$"&")"\ShortTermPartOfSubordinatedDebts2
+PPPP    BN     6               &SubordinatedDebt_tpBookValue[0]                                    \SubordinatedDebtShortTermPartList2=SubordinatedDebt_tpShortTermPart
+PPPP   =BN    -6=              =ShortTermPartOfSubordinatedDebts                                   \=ShortTermPartOfSubordinatedDebts2
+PIII    BN     5               =PensionProvisions                                                  \PensionProvisionsOwnersEquity
+PIII    BN     5        ?      =DeferredTaxes                                                      \EffectiveNetWorthDeferredTaxes
+PII     PN C   6               $>Add all deferred taxes on balance sheet<$?                        \UseEffectiveNetWorthDeferredTaxes
+PPPP    BN     5         +     &"$>Other personal capital<$ "&Partner_tpCapital[0]                 \Partner_tpOtherPersonalCapitalList=Partner_tpOtherPersonalCapital
+IIII    BN     5               $>Other adjustments outside balance sheet<$                         \EffectiveNetWorthAdjustments2
+PPPP   =BN    -5               =EffectiveNetWorth                                                  \=EffectiveNetWorth
+PPPP    CN %   4               $>Effective net worth / total liabilities<$                         \EffectiveNetWorthRatio
+
+.Choices
+UseEffectiveNetWorthDeferredTaxes                    = "$>No<$|$>Yes<$"
+
+.Formulas NoTrend,Trend
+PensionProvisionsOwnersEquity                        = If((Not ReportAsLimitedLiabilityCompany[1]),PensionProvisions,NA)
+                                                     
+InventoriesAssessmentValue                           = Inventories*InventoriesAssessmentValuePerc
+ReceivablesAssessmentValue                           = ReceivablesTradeRelated*ReceivablesAssessmentValuePerc
+CurrentAccountManagementDebitAssessmentValue         = CurrentAccountManagementDebit*CurrentAccountManagementDebitAssessmentValuePerc
+ReceivablesAffiliatedCompaniesAssessmentValue        = ReceivablesAffiliatedCompanies*ReceivablesAffiliatedCompaniesAssessmentValuePerc
+ReceivablesTradeRelated                              = OnZero(Receivables-CurrentAccountManagementDebit-ReceivablesAffiliatedCompanies,NA)
+                                                     
+AdjustmentsReceivables                               = OnZero(ReceivablesAssessmentValue-ReceivablesTradeRelated,NA)
+AdjustmentsInventories                               = OnZero(InventoriesAssessmentValue-Inventories,NA)
+AdjustmentsCurrentAccountManagementDebit             = OnZero(CurrentAccountManagementDebitAssessmentValue-CurrentAccountManagementDebit,NA)
+AdjustmentsReceivablesAffiliatedCompanies            = OnZero(ReceivablesAffiliatedCompaniesAssessmentValue-ReceivablesAffiliatedCompanies,NA)
+
+EffectiveNetWorthDeferredTaxes                       = UseEffectiveNetWorthDeferredTaxes*DeferredTaxes
+EffectiveNetWorthRatio                               = OnER(EffectiveNetWorth/(TotalEquityAndLiabilities-(NetWorth-AdjustedNetWorth)),NA)
+
+.Formulas NoTrend
+InventoriesAssessmentValuePerc                       = OnER(If(DataEntered(InventoriesAssessmentValue)                  ,OnER(InventoriesAssessmentValue/Inventories                                    ,NA),If(Inventories<>NA                  ,1,NA)),NA) <-> InventoriesAssessmentValue
+ReceivablesAssessmentValuePerc                       = OnER(If(DataEntered(ReceivablesAssessmentValue)                  ,OnER(ReceivablesAssessmentValue/Receivables                                    ,NA),If(Receivables<>NA                  ,1,NA)),NA) <-> ReceivablesAssessmentValue
+CurrentAccountManagementDebitAssessmentValuePerc     = OnER(If(DataEntered(CurrentAccountManagementDebitAssessmentValue),OnER(CurrentAccountManagementDebitAssessmentValue/CurrentAccountManagementDebit,NA),If(CurrentAccountManagementDebit<>NA,0,NA)),NA) <-> CurrentAccountManagementDebitAssessmentValue
+ReceivablesAffiliatedCompaniesAssessmentValuePerc    = OnER(If(DataEntered(ReceivablesAffiliatedCompaniesAssessmentValue),OnER(ReceivablesAffiliatedCompaniesAssessmentValue/ReceivablesAffiliatedCompanies,NA),If(ReceivablesAffiliatedCompanies<>NA,0,NA)),NA) <-> ReceivablesAffiliatedCompaniesAssessmentValue
+
+.Formulas Trend
+InventoriesAssessmentValuePerc                       = OnER(If(DataEntered(InventoriesAssessmentValue)                  ,OnER(InventoriesAssessmentValue/Inventories                                    ,NA),If(Inventories<>NA                  ,1,Self[T-1])),NA) <-> InventoriesAssessmentValue
+ReceivablesAssessmentValuePerc                       = OnER(If(DataEntered(ReceivablesAssessmentValue)                  ,OnER(ReceivablesAssessmentValue/Receivables                                    ,NA),If(Receivables<>NA                  ,1,Self[T-1])),NA) <-> ReceivablesAssessmentValue
+CurrentAccountManagementDebitAssessmentValuePerc     = OnER(If(DataEntered(CurrentAccountManagementDebitAssessmentValue),OnER(CurrentAccountManagementDebitAssessmentValue/CurrentAccountManagementDebit,NA),If(CurrentAccountManagementDebit<>NA,0,Self[T-1])),NA) <-> CurrentAccountManagementDebitAssessmentValue
+ReceivablesAffiliatedCompaniesAssessmentValuePerc    = OnER(If(DataEntered(ReceivablesAffiliatedCompaniesAssessmentValue),OnER(ReceivablesAffiliatedCompaniesAssessmentValue/ReceivablesAffiliatedCompanies,NA),If(ReceivablesAffiliatedCompanies<>NA,0,Self[T-1])),NA) <-> ReceivablesAffiliatedCompaniesAssessmentValue
+                                                     
+.Hints                                               
+ReceivablesAssessmentValuePerc                       = "$$CalcYearAs=MeanCalc"
+InventoriesAssessmentValuePerc                       = "$$CalcYearAs=MeanCalc"
+CurrentAccountManagementDebitAssessmentValuePerc     = "$$CalcYearAs=MeanCalc"
+ReceivablesAffiliatedCompaniesAssessmentValuePerc    = "$$CalcYearAs=MeanCalc"

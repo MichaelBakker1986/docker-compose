@@ -1,0 +1,24 @@
+{&&Language=Nederlands}
+.Script Name=ExportFinanXmlScript1,Title="$>FINAN XML (Historische jaren)<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="XML Files (*.finan.xml)|*.finan.xml"
+  .Export Type="XmlData",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod,1)\TsY=1]",FileName=&SysVar("FileNameVar")
+.EndScript
+
+.Script Name=ExportFinanXmlScript2,Title="$>FINAN XML (Historische maanden)<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="XML Files (*.finan.xml)|*.finan.xml"
+  .Export Type="XmlData",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod)\TsY=12]",FileName=&SysVar("FileNameVar")
+.EndScript
+
+.Script Name=ExportFinanXmlScript3,Title="$>FINAN XML (Historische kwartalen)<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="XML Files (*.finan.xml)|*.finan.xml"
+  .Export Type="XmlData",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod)\TsY=4]",FileName=&SysVar("FileNameVar")
+.EndScript
+
+.Script Name=ExportFinanXmlScript4,Title="$>FINAN XML (Historische halve jaren)<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="XML Files (*.finan.xml)|*.finan.xml"
+  .Export Type="XmlData",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod)\TsY=2]",FileName=&SysVar("FileNameVar")
+.EndScript

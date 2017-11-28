@@ -1,0 +1,225 @@
+{&&Include ../../Includes/IncValidation.fin}
+
+;.Choices
+;venjbw2iDocumentAdoptionStatus = "0:Nee|1:Ja"
+
+;------------------------------------------------------------------------------------------------------------------------------------------
+; Category IfCheck:
+;.Formulas InputRequired
+;venjbw2iDocumentAdoptionDate = (venjbw2iDocumentAdoptionStatus=1)
+
+;.Formulas Locked
+;venjbw2iDocumentAdoptionDate = not(venjbw2iDocumentAdoptionStatus=1)
+
+
+.Formulas NoTrend
+rjiFinancialReportingPeriodDifferentThanAnnualStatus="Nee"
+frciAgriculturalActivities=If(IsAgro,"Ja","Nee") 
+kvkiLegalSizeCriteriaClassification = If(T<MaxT,Self[T+1],NA)
+IsFiscaal=0
+IsCommercieel=1
+frciFinancialStatementType="Enkelvoudig" 
+IsEnkelvoudig=1
+IsGeconsolideerd=0
+kvkiCashFlowStatementMethodType="Indirect"
+
+hc48_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations=VSUM(hc48_rjiCashFlowFromOperations_prjiOperatingResultCashFlow,hc48_rjiCashFlowFromOperations_prjiChangesWorkingCapital)
+hc25_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations=VSUM(hc25_rjiCashFlowFromOperations_prjiOperatingResultCashFlow,hc25_rjiCashFlowFromOperations_prjiChangesWorkingCapital)
+hc49_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment=hc49_rjiPurchasePropertyPlantEquipment_pfrciReplacementPurchasePropertyPlantEquipment+hc49_rjiPurchasePropertyPlantEquipment_pfrciExpansionPurchasePropertyPlantEquipment
+hc26_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment=hc26_rjiPurchasePropertyPlantEquipment_pfrciReplacementPurchasePropertyPlantEquipment+hc26_rjiPurchasePropertyPlantEquipment_pfrciExpansionPurchasePropertyPlantEquipment
+hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowFinancingActivities=VSUM(hc49_rjiCashFlowFinancingActivities_prjiIncreaseDecreasePayablesCreditInstitutions,hc49_rjiCashFlowFinancingActivities_prjiCashFlowsFinancingActivitiesOther)
+hc26_frclrCashFlowStatement_prjiCashFlowFinancingActivities=VSUM(hc26_rjiCashFlowFinancingActivities_prjiIncreaseDecreasePayablesCreditInstitutions,hc26_rjiCashFlowFinancingActivities_prjiCashFlowsFinancingActivitiesOther)
+hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowInvestingActivities=VSUM(hc49_rjiCashFlowInvestingActivities_prjiPurchaseIntangibleAssets,hc49_rjiCashFlowInvestingActivities_prjiCashFlowsInvestingActivitiesOther)
+hc26_frclrCashFlowStatement_prjiCashFlowInvestingActivities=VSUM(hc26_rjiCashFlowInvestingActivities_prjiPurchaseIntangibleAssets,hc26_rjiCashFlowInvestingActivities_prjiCashFlowsInvestingActivitiesOther)
+hc49_frclrConsolidatedCashFlowStatement_prjiNetCashFlows=hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowInvestingActivities+hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowFinancingActivities+hc48_frclrConsolidatedCashFlowOperatingActivitiesIndirect_prjiCashFlowOperatingActivities
+hc26_frclrCashFlowStatement_prjiNetCashFlows=hc26_frclrCashFlowStatement_prjiCashFlowInvestingActivities+hc26_frclrCashFlowStatement_prjiCashFlowFinancingActivities+hc25_frclrCashFlowOperatingActivitiesIndirect_prjiCashFlowOperatingActivities
+hc49_frclrConsolidatedCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents=hc49_frclrConsolidatedCashFlowStatement_prjiNetCashFlows+hc49_frclrConsolidatedCashFlowStatement_prjiEffectExchangeRateChangesCashAndCashEquivalents
+hc26_frclrCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents=hc26_frclrCashFlowStatement_prjiNetCashFlows+hc26_frclrCashFlowStatement_prjiEffectExchangeRateChangesCashAndCashEquivalents
+
+.Formulas Locked
+frciAgriculturalActivities=On
+hc48_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations=On
+hc25_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations=On
+hc49_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment=On
+hc26_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment=On
+hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowFinancingActivities=On
+hc26_frclrCashFlowStatement_prjiCashFlowFinancingActivities=On
+hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowInvestingActivities=On
+hc26_frclrCashFlowStatement_prjiCashFlowInvestingActivities=On
+hc49_frclrConsolidatedCashFlowStatement_prjiNetCashFlows=On
+hc26_frclrCashFlowStatement_prjiNetCashFlows=On
+hc49_frclrConsolidatedCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents=On
+hc26_frclrCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents=On
+kvkiCashFlowStatementMethodType=On
+ 
+.Formulas Disabled
+;frcabstrConsolidatedCashFlowStatementBanksTitle                                                                           =True
+;frclrConsolidatedCashFlowOperatingActivitiesIndirect                                                                      =True
+;hc48_frclrConsolidatedCashFlowOperatingActivitiesIndirect_prjiCashFlowOperatingActivities                                            =True
+;hc48_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations                                                                       =True
+;hc48_rjiCashFlowFromOperations_prjiOperatingResultCashFlow                                                                           =True
+;hc48_rjiCashFlowFromOperations_prjiAdjustmentsReconcileOperatingResult                                                               =True
+;hc48_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsDepreciationAndAmortisationExpense                                        =True
+;hc48_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsImpairmentLossReversalImpairmentLossRecognisedInProfitLoss=True
+;hc48_rjiAdjustmentsReconcileOperatingResult_prjiIncreaseDecreaseProvisions                                                           =True
+;hc48_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsReconcileOperatingResultOther                                             =True
+;hc48_rjiCashFlowFromOperations_prjiChangesWorkingCapital                                                                             =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInSecurities                                                                       =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInTradeAccountsReceivable                                                          =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInInventories                                                                      =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInTradeAccountsPayable                                                             =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInOtherReceivables                                                                 =True
+;hc48_rjiChangesWorkingCapital_prjiIncreaseDecreaseInOtherPayables                                                                    =True
+;hc48_rjiCashFlowOperatingActivities_prjiInterestReceivedClassifiedAsOperatingActivities                                              =True
+;hc48_rjiCashFlowOperatingActivities_prjiDividendsReceivedClassifiedAsOperatingActivities                                             =True
+;hc48_rjiCashFlowOperatingActivities_prjiIncomeTaxReceivedClassifiedAsOperatingActivities                                             =True
+;hc48_rjiCashFlowOperatingActivities_prjiInterestPaidClassifiedAsOperatingActivities                                                  =True
+;hc48_rjiCashFlowOperatingActivities_prjiDividendsPaidClassifiedAsOperatingActivities                                                 =True
+;hc48_rjiCashFlowOperatingActivities_prjiIncomeTaxPaidClassifiedAsOperatingActivities                                                 =True
+;hc48_rjiCashFlowOperatingActivities_prjiCashFlowsOperatingActivitiesOther                                                          =True
+frclrConsolidatedCashFlowOperatingActivitiesDirect                                                                        =True
+hc47_frclrConsolidatedCashFlowOperatingActivitiesDirect_prjiCashFlowOperatingActivities                                              =True
+hc47_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations                                                                       =True
+hc47_rjiCashFlowFromOperations_prjiReceiptsCustomers                                                                                 =True
+hc47_rjiCashFlowFromOperations_prjiPaymentsEmployees                                                                                 =True
+hc47_rjiCashFlowFromOperations_prjiPaymentsSuppliers                                                                                 =True
+hc47_rjiCashFlowOperatingActivities_prjiInterestReceivedClassifiedAsOperatingActivities                                              =True
+hc47_rjiCashFlowOperatingActivities_prjiDividendsReceivedClassifiedAsOperatingActivities                                             =True
+hc47_rjiCashFlowOperatingActivities_prjiIncomeTaxReceivedClassifiedAsOperatingActivities                                             =True
+hc47_rjiCashFlowOperatingActivities_prjiInterestPaidClassifiedAsOperatingActivities                                                  =True
+hc47_rjiCashFlowOperatingActivities_prjiDividendsPaidClassifiedAsOperatingActivities                                                 =True
+hc47_rjiCashFlowOperatingActivities_prjiIncomeTaxPaidClassifiedAsOperatingActivities                                                 =True
+hc47_rjiCashFlowOperatingActivities_prjiCashFlowsOperatingActivitiesOther                                                            =True
+;frclrConsolidatedCashFlowStatement                                                                                        =True
+;hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowInvestingActivities                                                              =True
+;hc49_rjiCashFlowInvestingActivities_prjiPurchaseIntangibleAssets                                                                     =True
+;hc49_rjiCashFlowInvestingActivities_prjiProceedsSalesIntangibleAssets                                                                =True
+;hc49_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment                                                               =True
+;hc49_rjiPurchasePropertyPlantEquipment_pfrciReplacementPurchasePropertyPlantEquipment                                                =True
+;hc49_rjiPurchasePropertyPlantEquipment_pfrciExpansionPurchasePropertyPlantEquipment                                                  =True
+;hc49_rjiCashFlowInvestingActivities_prjiProceedsSalesPropertyPlantAndEquipment                                                       =True
+;hc49_rjiCashFlowInvestingActivities_pfrciPurchaseInvestmentProperty                                                                  =True
+;hc49_rjiCashFlowInvestingActivities_pfrciProceedsSalesInvestmentProperty                                                             =True
+;hc49_rjiCashFlowInvestingActivities_prjiPurchaseGroupCompanies                                                                       =True
+;hc49_rjiCashFlowInvestingActivities_prjiProceedsSalesGroupCompanies                                                                  =True
+;hc49_rjiCashFlowInvestingActivities_prjiPurchaseNonConsolidatedEntities                                                              =True
+;hc49_rjiCashFlowInvestingActivities_prjiProceedsSalesNonconsolidatedEntities                                                         =True
+;hc49_rjiCashFlowInvestingActivities_prjiPurchaseOtherFinancialAssets                                                                 =True
+;hc49_rjiCashFlowInvestingActivities_prjiProceedsSalesOtherFinancialAssets                                                            =True
+;hc49_rjiCashFlowInvestingActivities_prjiInterestReceivedClassifiedAsInvestingActivities                                              =True
+;hc49_rjiCashFlowInvestingActivities_prjiIncomeTaxReceivedClassifiedAsInvestingActivities                                             =True
+;hc49_rjiCashFlowInvestingActivities_prjiInterestPaidClassifiedAsInvestingActivities                                                  =True
+;hc49_rjiCashFlowInvestingActivities_prjiIncomeTaxPaidClassifiedAsInvestingActivities                                                 =True
+;hc49_rjiCashFlowInvestingActivities_prjiCashFlowsInvestingActivitiesOther                                                            =True
+;hc49_frclrConsolidatedCashFlowStatement_prjiCashFlowFinancingActivities                                                              =True
+;hc49_rjiCashFlowFinancingActivities_prjiIncreaseDecreasePayablesCreditInstitutions                                                   =True
+;hc49_rjiCashFlowFinancingActivities_prjiProceedsIssueShares                                                                          =True
+;hc49_rjiCashFlowFinancingActivities_prjiPaymentsAcquireRedeemEntitysShares                                                           =True
+;hc49_rjiCashFlowFinancingActivities_prjiProceedsFromBorrowings                                                                       =True
+;hc49_rjiCashFlowFinancingActivities_prjiRepaymentsBorrowings                                                                         =True
+;hc49_rjiCashFlowFinancingActivities_prjiInterestReceivedClassifiedAsFinancingActivities                                              =True
+;hc49_rjiCashFlowFinancingActivities_prjiDividendsReceivedClassifiedAsFinancingActivities                                             =True
+;hc49_rjiCashFlowFinancingActivities_prjiIncomeTaxReceivedClassifiedAsFinancingActivities                                             =True
+;hc49_rjiCashFlowFinancingActivities_prjiInterestPaidClassifiedAsFinancingActivities                                                  =True
+;hc49_rjiCashFlowFinancingActivities_prjiDividendsPaidClassifiedAsFinancingActivities                                                 =True
+;hc49_rjiCashFlowFinancingActivities_prjiIncomeTaxPaidClassifiedAsFinancingActivities                                                 =True
+;hc49_rjiCashFlowFinancingActivities_prjiCashFlowsFinancingActivitiesOther                                                            =True
+;hc49_frclrConsolidatedCashFlowStatement_prjiNetCashFlows                                                                             =True
+;hc49_frclrConsolidatedCashFlowStatement_prjiEffectExchangeRateChangesCashAndCashEquivalents                                          =True
+;hc49_frclrConsolidatedCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents =True
+
+
+;frcabstrConsolidatedDisclosureCashFlowStatementBanksTitle                                                                                                                                                                                                                                                                          =True
+;frclrNotesConsolidatedCashFlowStatement                                                                                                                                                                                                                                                                                            =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiCashFlowStatementExemptionDescription                                                                                                                                                                                                                                                       =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiCashFlowStatementDisclosure                                                                                                                                                                                                                                                                 =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiCompoundTransactionsAndOtherTransactionsWithoutTransferOfCashAndCashEquivalentsDisclosure                                                                                                                                                           =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiCompositionOfCashAndCashEquivalentsDisclosure                                                                                                                                                                                                                                               =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiDifferencesBetweenBalanceSheetItemsMovementCashFlowStatementBeginningEndingBalancesDisclosure                                                                              =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiExceptionalItemsCashFlowStatementDisclosure                                                                                                                                                                                                                                           =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiCashAndCashEquivalentsAndTheCashFlowFromOperatingInvestingAndFinancingActivitiesAttributableToThirdPartiesDisclosure                                                                                                =True
+;hc175_frclrNotesConsolidatedCashFlowStatement_prjiReconcileOperatingResultCashFlowFromOperationsDirectMethodDisclosure  =True
+;frcabstrCashFlowStatementBanksTitle                                                                                                                                                                                                                                                                    =True
+;frclrCashFlowOperatingActivitiesIndirect                                                                                                          =True
+;hc25_frclrCashFlowOperatingActivitiesIndirect_prjiCashFlowOperatingActivities                                                                                =True
+;hc25_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations                                                                                               =True
+;hc25_rjiCashFlowFromOperations_prjiOperatingResultCashFlow                                                                                                   =True
+;hc25_rjiCashFlowFromOperations_prjiAdjustmentsReconcileOperatingResult                                                                                       =True
+;hc25_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsDepreciationAndAmortisationExpense                                                                =True
+;hc25_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsImpairmentLossReversalImpairmentLossRecognisedInProfitLoss                        =True
+;hc25_rjiAdjustmentsReconcileOperatingResult_prjiIncreaseDecreaseProvisions                                                                                   =True
+;hc25_rjiAdjustmentsReconcileOperatingResult_prjiAdjustmentsReconcileOperatingResultOther                                                                     =True
+;hc25_rjiCashFlowFromOperations_prjiChangesWorkingCapital                                                                                                     =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInSecurities                                                                                               =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInTradeAccountsReceivable                                                                                  =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInInventories                                                                                              =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInTradeAccountsPayable                                                                                     =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInOtherReceivables                                                                                         =True
+;hc25_rjiChangesWorkingCapital_prjiIncreaseDecreaseInOtherPayables                                                                                            =True
+;hc25_rjiCashFlowOperatingActivities_prjiInterestReceivedClassifiedAsOperatingActivities                                                                      =True
+;hc25_rjiCashFlowOperatingActivities_prjiDividendsReceivedClassifiedAsOperatingActivities                                                                     =True
+;hc25_rjiCashFlowOperatingActivities_prjiIncomeTaxReceivedClassifiedAsOperatingActivities                                                                     =True
+;hc25_rjiCashFlowOperatingActivities_prjiInterestPaidClassifiedAsOperatingActivities                                                                          =True
+;hc25_rjiCashFlowOperatingActivities_prjiDividendsPaidClassifiedAsOperatingActivities                                                                         =True
+;hc25_rjiCashFlowOperatingActivities_prjiIncomeTaxPaidClassifiedAsOperatingActivities                                                                         =True
+;hc25_rjiCashFlowOperatingActivities_prjiCashFlowsOperatingActivitiesOther                                                                                    =True
+frclrCashFlowOperatingActivitiesDirect                                                                                                            =True
+hc24_frclrCashFlowOperatingActivitiesDirect_prjiCashFlowOperatingActivities                                                                                  =True
+hc24_rjiCashFlowOperatingActivities_prjiCashFlowFromOperations                                                                                               =True
+hc24_rjiCashFlowFromOperations_prjiReceiptsCustomers                                                                                                         =True
+hc24_rjiCashFlowFromOperations_prjiPaymentsEmployees                                                                                                         =True
+hc24_rjiCashFlowFromOperations_prjiPaymentsSuppliers                                                                                                         =True
+hc24_rjiCashFlowOperatingActivities_prjiInterestReceivedClassifiedAsOperatingActivities                                                                      =True
+hc24_rjiCashFlowOperatingActivities_prjiDividendsReceivedClassifiedAsOperatingActivities                                                                     =True
+hc24_rjiCashFlowOperatingActivities_prjiIncomeTaxReceivedClassifiedAsOperatingActivities                                                                     =True
+hc24_rjiCashFlowOperatingActivities_prjiInterestPaidClassifiedAsOperatingActivities                                                                          =True
+hc24_rjiCashFlowOperatingActivities_prjiDividendsPaidClassifiedAsOperatingActivities                                                                         =True
+hc24_rjiCashFlowOperatingActivities_prjiIncomeTaxPaidClassifiedAsOperatingActivities                                                                         =True
+hc24_rjiCashFlowOperatingActivities_prjiCashFlowsOperatingActivitiesOther                                                                                    =True
+;frclrCashFlowStatement                                                                                                                            =True
+;hc26_frclrCashFlowStatement_prjiCashFlowInvestingActivities                                                                                                  =True
+;hc26_rjiCashFlowInvestingActivities_prjiPurchaseIntangibleAssets                                                                                             =True
+;hc26_rjiCashFlowInvestingActivities_prjiProceedsSalesIntangibleAssets                                                                                        =True
+;hc26_rjiCashFlowInvestingActivities_prjiPurchasePropertyPlantEquipment                                                                                       =True
+;hc26_rjiPurchasePropertyPlantEquipment_pfrciReplacementPurchasePropertyPlantEquipment                                                                        =True
+;hc26_rjiPurchasePropertyPlantEquipment_pfrciExpansionPurchasePropertyPlantEquipment                                                                          =True
+;hc26_rjiCashFlowInvestingActivities_prjiProceedsSalesPropertyPlantAndEquipment                                                                               =True
+;hc26_rjiCashFlowInvestingActivities_pfrciPurchaseInvestmentProperty                                                                                          =True
+;hc26_rjiCashFlowInvestingActivities_pfrciProceedsSalesInvestmentProperty                                                                                     =True
+;hc26_rjiCashFlowInvestingActivities_prjiPurchaseGroupCompanies                                                                                               =True
+;hc26_rjiCashFlowInvestingActivities_prjiProceedsSalesGroupCompanies                                                                                          =True
+;hc26_rjiCashFlowInvestingActivities_prjiPurchaseNonConsolidatedEntities                                                                                      =True
+;hc26_rjiCashFlowInvestingActivities_prjiProceedsSalesNonconsolidatedEntities                                                                                 =True
+;hc26_rjiCashFlowInvestingActivities_prjiPurchaseOtherFinancialAssets                                                                                         =True
+;hc26_rjiCashFlowInvestingActivities_prjiProceedsSalesOtherFinancialAssets                                                                                    =True
+;hc26_rjiCashFlowInvestingActivities_prjiInterestReceivedClassifiedAsInvestingActivities                                                                      =True
+;hc26_rjiCashFlowInvestingActivities_prjiIncomeTaxReceivedClassifiedAsInvestingActivities                                                                     =True
+;hc26_rjiCashFlowInvestingActivities_prjiInterestPaidClassifiedAsInvestingActivities                                                                          =True
+;hc26_rjiCashFlowInvestingActivities_prjiIncomeTaxPaidClassifiedAsInvestingActivities                                                                         =True
+;hc26_rjiCashFlowInvestingActivities_prjiCashFlowsInvestingActivitiesOther                                                                                    =True
+;hc26_frclrCashFlowStatement_prjiCashFlowFinancingActivities                                                                                                  =True
+;hc26_rjiCashFlowFinancingActivities_prjiIncreaseDecreasePayablesCreditInstitutions                                                                           =True
+;hc26_rjiCashFlowFinancingActivities_prjiProceedsIssueShares                                                                                                  =True
+;hc26_rjiCashFlowFinancingActivities_prjiPaymentsAcquireRedeemEntitysShares                                                                                   =True
+;hc26_rjiCashFlowFinancingActivities_prjiProceedsFromBorrowings                                                                                               =True
+;hc26_rjiCashFlowFinancingActivities_prjiRepaymentsBorrowings                                                                                                 =True
+;hc26_rjiCashFlowFinancingActivities_prjiInterestReceivedClassifiedAsFinancingActivities                                                                      =True
+;hc26_rjiCashFlowFinancingActivities_prjiDividendsReceivedClassifiedAsFinancingActivities                                                                     =True
+;hc26_rjiCashFlowFinancingActivities_prjiIncomeTaxReceivedClassifiedAsFinancingActivities                                                                     =True
+;hc26_rjiCashFlowFinancingActivities_prjiInterestPaidClassifiedAsFinancingActivities                                                                          =True
+;hc26_rjiCashFlowFinancingActivities_prjiDividendsPaidClassifiedAsFinancingActivities                                                                         =True
+;hc26_rjiCashFlowFinancingActivities_prjiIncomeTaxPaidClassifiedAsFinancingActivities                                                                         =True
+;hc26_rjiCashFlowFinancingActivities_prjiCashFlowsFinancingActivitiesOther                                                                                    =True
+;hc26_frclrCashFlowStatement_prjiNetCashFlows                                                                                                                 =True
+;hc26_frclrCashFlowStatement_prjiEffectExchangeRateChangesCashAndCashEquivalents                                                                              =True
+;hc26_frclrCashFlowStatement_prjiIncreaseDecreaseCashAndCashEquivalents=True
+;frcabstrDisclosureCashFlowStatementBanksTitle                                                                                                                                                                                                                                                                                                     =True
+;frclrNotesCashFlowStatement                                                                                                                                                                                                                                =True
+;hc139_frclrNotesCashFlowStatement_prjiCashFlowStatementExemptionDescription                                                                                                                                                                                           =True
+;hc139_frclrNotesCashFlowStatement_prjiCashFlowStatementDisclosure                                                                                                                                                                                                     =True
+;hc139_frclrNotesCashFlowStatement_prjiCompoundTransactionsAndOtherTransactionsWithoutTransferOfCashAndCashEquivalentsDisclosure                                                                                               =True
+;hc139_frclrNotesCashFlowStatement_prjiCompositionOfCashAndCashEquivalentsDisclosure                                                                                                                                                                                   =True
+;hc139_frclrNotesCashFlowStatement_prjiDifferencesBetweenBalanceSheetItemsMovementCashFlowStatementBeginningEndingBalancesDisclosure                  =True
+;hc139_frclrNotesCashFlowStatement_prjiExceptionalItemsCashFlowStatementDisclosure                                                                                                                                                                               =True
+;hc139_frclrNotesCashFlowStatement_prjiCashAndCashEquivalentsAndTheCashFlowFromOperatingInvestingAndFinancingActivitiesAttributableToThirdPartiesDisclosure                                    =True
+;hc139_frclrNotesCashFlowStatement_prjiReconcileOperatingResultCashFlowFromOperationsDirectMethodDisclosure=True                                                                                           

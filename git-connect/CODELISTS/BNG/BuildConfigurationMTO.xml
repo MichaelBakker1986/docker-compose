@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="make-zipfile-default" name="Make_ZipFile">
+	<tstamp>
+		<format property="ldt" pattern="yyyy-MM-dd_HHmm" locale="en,UK"/>
+	</tstamp>
+	<target name="make-zipfile-default" description="Make the ZipFile">
+		<zip destfile="${zipfile}" filesonly="true" update="yes">
+			<fileset file="${basedir}/../../CODELISTS/Finan/V05/Screendefinitions/screendefinition.*"/>
+			<fileset file="${basedir}/../../CODELISTS/Finan/V05/FMT/Master/filters.*"/>
+			<mappedresources>
+				<fileset file="${basedir}/../../CODELISTS/Finan/V05_FinanOnline/_Project/translations.*"/>
+				<globmapper from="translations.ff_prognose_translations.csv" to="translations.ff_prognose_translations.translation"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../../CODELISTS/Finan/V05/Matrices/TaxRates.xls"/>
+				<globmapper from="TaxRates.xls" to="matrices.TaxRates.xls.matrix"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../../CODELISTS/Finan/V05/Matrices/V05_ForecastSettings.xls"/>
+				<globmapper from="V05_ForecastSettings.xls" to="matrices.V05_ForecastSettings.xls.matrix"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../../CODELISTS/Finan/V05/FMT/Master/*.Fmt4Model.xml"/>
+				<globmapper from="V05.Fmt4Model.xml" to="targets.V05.targets"/>
+			</mappedresources>
+		</zip>
+	</target>
+	<target name="make-zipfile-bng" description="Make the ZipFile">
+		<zip destfile="${basedir}/_ZipFile/configurations_bng.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/_Project/Translations/klant_BNG_translations.csv"/>
+				<globmapper from="klant_BNG_translations.csv" to="translations.klant_BNG_translations.translation"/>
+			</mappedresources>
+			<fileset file="${basedir}/_Project/screendefinitions/screendefinition.*.screendefinition"/>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.*.*"/>
+				<globmapper from="reports.financialfactsheet.frb.xml" to="reports.financialfactsheet.frb-xml"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.*.*"/>
+				<globmapper from="reports.reports.frb.rpt" to="reports.reports.frb-rpt"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/FFL/V05.FFL"/>
+				<globmapper from="V05.FFL" to="ffl.V05.ffl"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/FMT/Tables/*.xml"/>
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping"/>
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/_Project/ReportDefinition/*.*"/>
+				<globmapper from="reports.definitions.config" to="reports.definitions.config"/>
+			</mappedresources>
+		</zip>
+		<antcall target="make-zipfile-default">
+	      <param name="zipfile" value="${basedir}/_ZipFile/configurations_bng.zip"/>
+	    </antcall>
+	</target>
+</project>

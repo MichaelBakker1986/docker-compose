@@ -1,0 +1,69 @@
+﻿<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>Collaterals</CodeList>
+    <CodeListVersion>1.0</CodeListVersion>
+    <Description>Collaterals from iCOS</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>No</MultiLevelDataWhenSource>
+    <DCSignedValues>No</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FMT4 Mastermodel Collaterals</Creator>
+    <CreatorVersion>1.0</CreatorVersion>
+    <BuildDate>2015-09-11</BuildDate>
+    <BuildUser>Ronald van Aalderen</BuildUser>
+    <Notes>v1.0</Notes>
+  </Head>
+  <Accounts>
+
+    <Account><Code>import.date</Code><Description>import.date</Description><Level>1</Level><DC></DC><DataType>date</DataType><IsTuple>FALSE</IsTuple><InTuple></InTuple></Account>
+    <Account><Code>Collaterals</Code><Description>Collaterals</Description><Level>1</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple></InTuple></Account>
+    <Account><Code>cfaId</Code><Description>cfaId</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>collateralId</Code><Description>collateralId</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>collateralType</Code><Description>collateralType</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>collateralTypeId</Code><Description>collateralTypeId</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>collateralType</InTuple></Account>
+    <Account><Code>name</Code><Description>name</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>collateralType</InTuple></Account>
+    <Account><Code>compoundDescription</Code><Description>compoundDescription</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>modificationDescription</Code><Description>modificationDescription</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>modificationMotivation</Code><Description>modificationMotivation</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>status</Code><Description>status</Description><Level>2</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>totalAmount</Code><Description>totalAmount</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>currency</Code><Description>currency</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>totalAmount</InTuple></Account>
+    <Account><Code>amount</Code><Description>amount</Description><Level>3</Level><DC></DC><DataType>Monetary</DataType><IsTuple>FALSE</IsTuple><InTuple>totalAmount</InTuple></Account>
+    <Account><Code>totalCover</Code><Description>totalCover</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>currency</Code><Description>currency</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>totalCover</InTuple></Account>
+    <Account><Code>amount</Code><Description>amount</Description><Level>3</Level><DC></DC><DataType>Monetary</DataType><IsTuple>FALSE</IsTuple><InTuple>totalCover</InTuple></Account>
+
+    <Account><Code>ImmovableProperties</Code><Description>ImmovableProperties</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>immovablePropertyId</Code><Description>immovablePropertyId</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>expired</Code><Description>expired</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>appraiser</Code><Description>appraiser</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>liquidationValue</Code><Description>liquidationValue</Description><Level>3</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>currency</Code><Description>currency</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>liquidationValue</InTuple></Account>
+    <Account><Code>amount</Code><Description>amount</Description><Level>4</Level><DC></DC><DataType>Monetary</DataType><IsTuple>FALSE</IsTuple><InTuple>liquidationValue</InTuple></Account>
+    <Account><Code>marketValue</Code><Description>marketValue</Description><Level>3</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>currency</Code><Description>currency</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>marketValue</InTuple></Account>
+    <Account><Code>amount</Code><Description>amount</Description><Level>4</Level><DC></DC><DataType>Monetary</DataType><IsTuple>FALSE</IsTuple><InTuple>marketValue</InTuple></Account>
+    <Account><Code>registerBoundGoodCode</Code><Description>registerBoundGoodCode</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>registerBoundGoodDescription</Code><Description>registerBoundGoodDescription</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>wozValue</Code><Description>wozValue</Description><Level>3</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>currency</Code><Description>currency</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>wozValue</InTuple></Account>
+    <Account><Code>amount</Code><Description>amount</Description><Level>4</Level><DC></DC><DataType>Monetary</DataType><IsTuple>FALSE</IsTuple><InTuple>wozValue</InTuple></Account>
+    <Account><Code>addresses</Code><Description>addresses</Description><Level>3</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>ImmovableProperties</InTuple></Account>
+    <Account><Code>address</Code><Description>address</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>addresses</InTuple></Account>
+    <Account><Code>street</Code><Description>street</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>addresses</InTuple></Account>
+    <Account><Code>housenumber</Code><Description>housenumber</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>addresses</InTuple></Account>
+    <Account><Code>postalCode</Code><Description>postalCode</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>addresses</InTuple></Account>
+    <Account><Code>city</Code><Description>city</Description><Level>4</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>addresses</InTuple></Account>
+
+    <Account><Code>Parties</Code><Description>Parties</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsTuple>TRUE</IsTuple><InTuple>Collaterals</InTuple></Account>
+    <Account><Code>PartyId</Code><Description>PartyId</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Parties</InTuple></Account>
+    <Account><Code>PartyName</Code><Description>PartyName</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Parties</InTuple></Account>
+    <Account><Code>RoleId</Code><Description>RoleId</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Parties</InTuple></Account>
+    <Account><Code>RoleName</Code><Description>RoleName</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsTuple>FALSE</IsTuple><InTuple>Parties</InTuple></Account>
+
+  
+ </Accounts>
+</FmtMappingModel>

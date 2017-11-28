@@ -1,0 +1,1136 @@
+// model "Kwalitatieve analyse"
+// created by FINAN 3.2.56.33 (user Niek Hulsman) on 03/23/2017 15:00
+
+import FinanMath.*;
+import BaseModel.*;
+
+model CREDITPROPOSAL uses BaseModel
+{
+  version: "0.0.2";
+  root
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER_ROLES
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER_ROLES";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER";
+        visible: 1;
+        options_title: locked;
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If(((Q_Map01[1]=1) ) or (Length(&scKnockoutsCombi[1])>0),1,0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "Kwalitatieve analyse";
+      hint: "Please fill in all questions";
+      locked: 1;
+      visible: 1;
+      choices: "0:Incomplete filled.|1:Complete filled.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Kwalitatieve analyse";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Incomplete filled.|1:Complete filled.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable AnalyseView
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Kwalitatieve analyse";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable SectorView refers to Sector
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Sector:";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable SectorUitgeslotenView refers to SectorUitgesloten
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Sector uitgesloten?";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable CijfersAanleverenView refers to CijfersAanleveren
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Kan u tussentijds omzet- en kasstroomcijfers en/of een balans aanleveren?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Dat kan iedere maand|1:Dat kan ieder kwartaal|2:Dat kan ieder halfjaar|3:Alleen de jaarcijfers kunnen aangeleverd worden";
+            options_title: locked;
+            options: locked;
+          }
+          variable PrognoseGemaaktView refers to PrognoseGemaakt
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Werkt u met prognoses?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Maandelijks of per kwartaal wordt er een prognose gemaakt en tussentijds worden de resultaten met de prognose vergeleken|1:Jaarlijks wordt er een prognose gemaakt en achteraf worden de resultaten met deze prognose vergeleken|2:Op verzoek van de bank stelt de onderneming een prognose op|3:Prognoses worden binnen de onderneming niet gebruikt";
+            options_title: locked;
+            options: locked;
+          }
+          variable SpreidingKlantenView refers to SpreidingKlanten
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe is de spreiding in het klantenbestand van uw onderneming?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Het aandeel van de twee grootste klanten in de omzet is 60% of meer|1:Het aandeel van de twee grootste klanten in de omzet is tussen de 30% en 60%|2:Het aandeel van de twee grootste klanten in de omzet is 30% of minder|3:De onderneming is afhankelijk van 1 klant";
+            options_title: locked;
+            options: locked;
+          }
+          variable DebiteurenBeleidView refers to DebiteurenBeleid
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe voert uw onderneming haar facturen-/incassobeleid?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Gefactureerde klanten worden na de betalingstermijn wekelijks benaderd|1:Gefactureerde klanten worden na de betalingstermijn maandelijks benaderd |2:Gefactureerde klanten worden na de betalingstermijn per kwartaal benaderd |3:De onderneming heeft geen actief debiteurenbeleid";
+            options_title: locked;
+            options: locked;
+          }
+          variable AfhankelijkheidLeveranciersView refers to AfhankelijkheidLeveranciers
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "In hoeverre is uw onderneming afhankelijk van bepaalde leveranciers?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Er kan elk moment naar een andere leverancier worden overgestapt of heeft veel verschillende leveranciers|1:Het heeft wat aanpassing nodig indien een van de leveranciers zou wegvallen|2:Het wegvallen van een of meerdere leveranciers heeft grote impact|3:Het wegvallen van de enige leverancier zou betekenen dat de aangeboden diensten of producten niet meer zou kan leveren";
+            options_title: locked;
+            options: locked;
+          }
+          variable BranchErvaringView refers to BrancheErvaring
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoeveel branche ervaring heeft u en/of u mede-ondernemer(s)?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Dit is meer dan 10 jaar|1:Dit ligt tussen de 4 en 10 jaar|2:Dit ligt tussen de 2 en 4 jaar|3:Dit is minder dan 2 jaar";
+            options_title: locked;
+            options: locked;
+          }
+          variable BedrijfsRisicoView refers to BedrijfsRisico
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe heeft u zich verzekerd tegen eventuele bedrijfsrisico’s?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Er is sprake van verzekering tegen verlies van inkomen (arbeidsongeschiktheids- en/of overlijdensrisicoverzekering)|1:Er is sprake van verzekering tegen schade (bedrijfsschade- en/of aansprakelijkheidsverzekering)|2:Er is sprake van verzekering tegen zowel schade als verlies van inkomen|3:Er zijn geen verzekeringen gesloten";
+            options_title: locked;
+            options: locked;
+          }
+          variable AfwezigheidOndernemerView refers to AfwezigheidOndernemer
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Wat is de impact indien u en/of u mede-ondernemer(s) door omstandigheden gedurende een langere periode (meer dan 6 weken) niet werkzaam zou kunnen zijn?";
+            locked: 1;
+            visible: 1;
+            choices: "0:Werknemers zijn in staat de werkzaamheden op te vangen, waardoor de bedrijfsvoering geen hinder ondervindt.|1:Er zal inhuur van extra personeel moeten plaatsvinden om de continuïteit te waarborgen en deze extra kosten kunnen gedragen worden.|2:De werkzaamheden zullen noodgedwongen stil komen te liggen, maar er kan teruggevallen worden op een lopende arbeidsongeschiktheidsverzekering.|3:De continuïteit komt direct in gevaar en mogelijk zal onderneming (tijdelijk) gestaakt moeten worden.";
+            options_title: locked;
+            options: locked;
+          }
+          variable AnalyseViewSub11 refers to Resultaat_Kleur
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Resultaat:";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Analyse
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Kwalitatieve analyse data import";
+          locked: 1;
+          visible: 0;
+          options_title: locked;
+          options: locked;
+          variable Sector
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Sector:";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable SectorUitgesloten
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Sector uitgesloten?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable CijfersAanleveren
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Kan u tussentijds omzet- en kasstroomcijfers en/of een balans aanleveren?";
+            visible: 1;
+            choices: "0:Dat kan iedere maand|1:Dat kan ieder kwartaal|2:Dat kan ieder halfjaar|3:Alleen de jaarcijfers kunnen aangeleverd worden";
+            options_title: locked;
+          }
+          variable PrognoseGemaakt
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Werkt u met prognoses?";
+            visible: 1;
+            choices: "0:Maandelijks of per kwartaal wordt er een prognose gemaakt en tussentijds worden de resultaten met de prognose vergeleken|1:Jaarlijks wordt er een prognose gemaakt en achteraf worden de resultaten met deze prognose vergeleken|2:Op verzoek van de bank stelt de onderneming een prognose op|3:Prognoses worden binnen de onderneming niet gebruikt";
+            options_title: locked;
+          }
+          variable SpreidingKlanten
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe is de spreiding in het klantenbestand van uw onderneming?";
+            visible: 1;
+            choices: "0:Het aandeel van de twee grootste klanten in de omzet is 60% of meer|1:Het aandeel van de twee grootste klanten in de omzet is tussen de 30% en 60%|2:Het aandeel van de twee grootste klanten in de omzet is 30% of minder|3:De onderneming is afhankelijk van 1 klant";
+            options_title: locked;
+          }
+          variable DebiteurenBeleid
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe voert uw onderneming haar facturen-/incassobeleid?";
+            visible: 1;
+            choices: "0:Gefactureerde klanten worden na de betalingstermijn wekelijks benaderd|1:Gefactureerde klanten worden na de betalingstermijn maandelijks benaderd |2:Gefactureerde klanten worden na de betalingstermijn per kwartaal benaderd |3:De onderneming heeft geen actief debiteurenbeleid";
+            options_title: locked;
+          }
+          variable AfhankelijkheidLeveranciers
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "In hoeverre is uw onderneming afhankelijk van bepaalde leveranciers?";
+            visible: 1;
+            choices: "0:Er kan elk moment naar een andere leverancier worden overgestapt of heeft veel verschillende leveranciers|1:Het heeft wat aanpassing nodig indien een van de leveranciers zou wegvallen|2:Het wegvallen van een of meerdere leveranciers heeft grote impact|3:Het wegvallen van de enige leverancier zou betekenen dat de aangeboden diensten of producten niet meer zou kan leveren";
+            options_title: locked;
+          }
+          variable BrancheErvaring
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoeveel branche ervaring heeft u en/of u mede-ondernemer(s)?";
+            visible: 1;
+            choices: "0:Dit is meer dan 10 jaar|1:Dit ligt tussen de 4 en 10 jaar|2:Dit ligt tussen de 2 en 4 jaar|3:Dit is minder dan 2 jaar";
+            options_title: locked;
+          }
+          variable BedrijfsRisico
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Hoe heeft u zich verzekerd tegen eventuele bedrijfsrisico’s?";
+            visible: 1;
+            choices: "0:Er is sprake van verzekering tegen verlies van inkomen (arbeidsongeschiktheids- en/of overlijdensrisicoverzekering)|1:Er is sprake van verzekering tegen schade (bedrijfsschade- en/of aansprakelijkheidsverzekering)|2:Er is sprake van verzekering tegen zowel schade als verlies van inkomen|3:Er zijn geen verzekeringen gesloten";
+            options_title: locked;
+          }
+          variable AfwezigheidOndernemer
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Wat is de impact indien u en/of u mede-ondernemer(s) door omstandigheden gedurende een langere periode (meer dan 6 weken) niet werkzaam zou kunnen zijn?";
+            visible: 1;
+            choices: "0:Werknemers zijn in staat de werkzaamheden op te vangen, waardoor de bedrijfsvoering geen hinder ondervindt.|1:Er zal inhuur van extra personeel moeten plaatsvinden om de continuïteit te waarborgen en deze extra kosten kunnen gedragen worden.|2:De werkzaamheden zullen noodgedwongen stil komen te liggen, maar er kan teruggevallen worden op een lopende arbeidsongeschiktheidsverzekering.|3:De continuïteit komt direct in gevaar en mogelijk zal onderneming (tijdelijk) gestaakt moeten worden.";
+            options_title: locked;
+          }
+          variable ResultaatView_Kleur refers to Resultaat_Kleur
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Resultaat:";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Resultaten
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Resultaat analyse";
+          locked: 1;
+          visible: 0;
+          options_title: locked;
+          options: locked;
+          variable +Resultaat_CijfersAanleveren
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","CijfersAanleveren",CijfersAanleveren,1);
+            displaytype: currency;
+            title: "Kan u tussentijds omzet- en kasstroomcijfers en/of een balans aanleveren?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_PrognoseGemaakt
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","PrognoseGemaakt",PrognoseGemaakt,1);
+            displaytype: currency;
+            title: "Werkt u met prognoses?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_SpreidingKlanten
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","SpreidingKlanten",SpreidingKlanten,1);
+            displaytype: currency;
+            title: "Hoe is de spreiding in het klantenbestand van uw onderneming?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_DebiteurenBeleid
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","DebiteurenBeleid",DebiteurenBeleid,1);
+            displaytype: currency;
+            title: "Hoe voert uw onderneming haar facturen-/incassobeleid?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_AfhankelijkheidLeveranciers
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","AfhankelijkheidLeveranciers",AfhankelijkheidLeveranciers,1);
+            displaytype: currency;
+            title: "In hoeverre is uw onderneming afhankelijk van bepaalde leveranciers?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_BrancheErvaring
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","BrancheErvaring",BrancheErvaring,1);
+            displaytype: currency;
+            title: "Hoeveel branche ervaring heeft u en/of u mede-ondernemer(s)?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_BedrijfsRisico
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","BedrijfsRisico",BedrijfsRisico,1);
+            displaytype: currency;
+            title: "Hoe heeft u zich verzekerd tegen eventuele bedrijfsrisico’s?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Resultaat_AfwezigheidOndernemer
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("QualitativeAnalysis.xls","AfwezigheidOndernemer",AfwezigheidOndernemer,1);
+            displaytype: currency;
+            title: "Wat is de impact indien u en/of u mede-ondernemer(s) door omstandigheden gedurende een langere periode (meer dan 6 weken) niet werkzaam zou kunnen zijn?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Resultaat_Totaal
+          {
+            datatype: number;
+            frequency: document;
+            formula: Resultaat_CijfersAanleveren+Resultaat_PrognoseGemaakt+Resultaat_SpreidingKlanten+Resultaat_DebiteurenBeleid+Resultaat_AfhankelijkheidLeveranciers+Resultaat_BrancheErvaring+Resultaat_BedrijfsRisico+Resultaat_AfwezigheidOndernemer;
+            displaytype: currency;
+            title: "Totaal score";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Resultaat_Kleur
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString(If(Resultaat_Totaal>=25,&"Groen",&"Oranje"));
+            data_options: unscalable;
+            title: "Resultaat";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+            displaytype: currency;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+            displaytype: currency;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Results";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable ResultaatFinal refers to Resultaat_Kleur
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Resultaat:";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Active|1:Final";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Final:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Created:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_MODIFIED_ON
+      {
+        datatype: number;
+        frequency: document;
+        formula: Now;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Last modified";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "0.0.2";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversion:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "Kwalitatieve Analyse";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(MatrixLookup("QualitativeAnalysis.xls","Version",1,3));
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parameters version:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Previous";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Next";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_DOCX_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Draft report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_DOCX_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitive report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Make it final";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+    }
+    variable Hulpvariabelen
+    {
+      datatype: none;
+      frequency: none;
+      title: "Overige berekeningen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked, invisible;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scKnockoutsCombi[1])>0,&"\r\nThere are knock-out criteria:"&scKnockoutsCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockout(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scKnockoutsCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockouts text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scRestrictiesCombi[1])>0,&"\r\n\r\nThe listed variables are not filled correct:"&scRestrictiesCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scRestrictiesCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{&&Language=English}
+
+<=0:     $>The real turnover growth can not be calculated.<$
+<3.5:    $>The scale of turnover decrease requires downsizing measures. Check if these measures have been taken.<$
+<5.5:    $>Check if the turnover decrease has consequences for the profitability.<$
+>=7.5:   $>Check if the financial position and the organizational capacity are alligned with the rapid growth.<$

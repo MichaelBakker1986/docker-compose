@@ -1,0 +1,124 @@
+COMPONENT;KEY;EN;NL
+report;monthly;monthly;maand
+report;two monthly;two monthly;twee maanden
+report;quarterly;quarterly;kwartaal
+report;half yearly;half yearly;half jaar
+report;yearly;yearly;jaar
+report;family house;family house;eengezinswoning
+report;family house with garage;family house with garage;eengezinswoning met garage
+report;flat / appartement;flat / appartement;flat/appartement
+report;flat / appartement with garage;flat / appartement with garage;flat/appartement met garage
+report;store-house;store-house;winkel-woonhuis
+report;house with commercial space;house with commercial space;woonhuis met bedrijfsruimte
+report;shop;shop;winkel
+report;office;office;bedrijfspand
+report;holiday home;holiday home;recreatiewoning
+report;farm;farm;boerderij
+report;business collateral;business collateral;zakelijk onderpand
+report;agricultural land / plot;agricultural land / plot;agrarische grond/bouwgrond
+report;garage;garage;garage
+report;building site;building site;bouwkavel
+report;houseboat;houseboat;woonschip
+report;schip;schip;schip
+report;airplane;airplane;vliegtuig
+report;other;other;anders
+crm;triodoshistoryexportpanel;AQR Report;AQR Rapportage
+prognose;forecast_reset_message;All figures and settings in this project will be reset using the currently available history figures. Are you sure to continue?;Alle cijfers en instellingen van dit project worden hersteld op basis van de huidige beschikbare historische cijfers. Weet u zeker dat u door wilt gaan?
+scorecard;TDSCREVIEWPROPOSAL;Review Proposal;Review Proposal
+k3;result;Results;Resultaten
+k3;no_historic_data_found;No history figures found for this customer. History figures are needed to create a forecast.;Er zijn geen historische cijfers aangetroffen voor deze cliënt. Zonder historische cijfers kan er geen prognose gemaakt worden.
+scorecard;FBL namespace does not match template namespace;FBL namespace does not match template namespace;FBL namespace komt niet overeen met template namespace
+scorecard;Synchronization failed No agreements in Force for this process;No agreements found for this process;Geen process gevonden
+prognose;longtermdebt-liquidity;Longterm debt;Langlopende lening
+prognose;longtermdebt-new;Longterm debt;Nieuwe langlopende lening
+prognose;longtermdebtother-new;Other longterm debt;Nieuwe andere langlopende lening
+prognose;longtermdebtother-prognose;Other longterm debt;Andere langlopende lening
+prognose;longtermdebtother-liquidity;Other longterm debt;Overige langlopende lening
+prognose;longtermdebtothercat2-new;Trade debts;Nieuwe andere langlopende lening (cat2)
+prognose;longtermdebtothercat2-prognose;Trade debts;Andere langlopende lening (cat2)
+prognose;longtermdebtothercat2-liquidity;Trade debts;Overige langlopende lening (cat2)
+prognose;longtermdebtothercat3-new;Unsubordinated debts;Nieuwe andere langlopende lening (cat3)
+prognose;longtermdebtothercat3-prognose;Unsubordinated debts;Andere langlopende lening (cat3)
+prognose;longtermdebtothercat3-liquidity;Unsubordinated debts;Overige langlopende lening (cat3)
+prognose;longtermdebtothercat4-new;Leasing and similar;Nieuwe andere langlopende lening (cat4)
+prognose;longtermdebtothercat4-prognose;Leasing and similar;Andere langlopende lening (cat4)
+prognose;longtermdebtothercat4-liquidity;Leasing and similar;Overige langlopende lening (cat4)
+prognose;longtermdebtother-prognose;Other longterm debt;Andere langlopende lening
+prognose;longtermdebt-prognose;Longterm debt;Langlopende lening
+scorecard;Synchronization failed No source document found;No history found for this process;Geen historie gevonden voor dit proces
+scorecard;Collateral allocated to wrong facility;Collateral wrongly allocated to the top facility. Allocate the collateral to the facility that contains the product.;Zekerheid is gekoppeld aan de top faciliteit. Alloceer de zekerheid aan de faciliteit die het product bevat.
+scorecard;Income Statement;Profit and Loss Account;Winst- en Verliesrekening
+prognose;capital;Capital;Vermogen
+k3;locked_by_other_user_message;This view is being displayed as read-only because user {0} is viewing it with write permissions.;Deze weergave wordt weergegeven als alleen-lezen omdat gebruiker {0} het aan het bekijken is met schrijfrechten.
+proposal;Nieuw;New;New
+proposal;Ongewijzigd;Unchanged;Unchanged
+proposal;TeBeeindigen;To be Ended;To be Ended
+proposal;Gewijzigd;Changed;Changed
+proposal;TeReviseren;To review;To review
+proposal;TeReviserenGewijzigd;To review, changed;To review, changed
+proposal;Beeindigd;Ended;Ended
+budget;select_years;Select the number of years to be added;Selecteer het aantal toe te voegen jaren
+budget;add_new_budget;New client forecast;Nieuwe klantverwachting
+budget;create_budget;New client forecast;Nieuwe klantverwachting
+budget;new_budget;New client forecast;Nieuwe klantverwachting
+budget;new_budget_wizard;New client forecast;Nieuwe klantverwachting
+budget;select_historic_years;Below historical years can be selected, which will be imported into your customer expectation. These figures serve as a guideline for the estimate. It is important that the historical years to be imported, are connected to the years for which the customer expectation will be made. Note: If no historical figures are entered it will not be possible to select anything.;Hieronder kunnen historistorische jaren worden aangevinkt welke zullen worden geïmporteerd in de klantverwachting. Deze gegevens dienen als richtlijn voor de verwachtingsjaren. Het is van belang dat de historische jaren die geïmporteerd worden aansluiten op de klantverwachtingsjaren.
+budget;wizard_step_import;Import historical years;Importeer historische jaren
+budget;import_historic_years;Import historical years;Importeer historische jaren
+budget ;app;Client forecast;Klantverwachting
+k3;budget;Client forecast;Klantverwachting
+budget;budget_supply_name;Enter name and choose the first year to forecast;Voer naam op en kies het eerste verwachtingsjaar
+budget;reporttype_extended;Extended report;Uitgebreide rapportage
+budget;section_declaration;Declaration of composition;Samenstellingsverklaring
+budget;section_offer;Letter of offer;Aanbiedingsbrief
+budget;section_valutiongrounds;Valuation foundations;Waarderingsgrondslagen
+budget;section_graphassets;Graph equity vs payables;Grafiek Vermogen versus verplichtingen
+budget;section_assetsyear;Assets per year;Activa op jaarbasis
+budget;section_equityyear;Equity and liabilities per year;Passiva op jaarbasis
+budget;section_graphliability;Graph short term debts and receivables;Grafiek Kortlopende schulden en vorderingen
+budget;section_graphnetworth;Graph net worth, provisions, debts;Grafiek Eigen vermogen, voorzieningen en vreemd vermogen
+budget;section_assetsquarterfirst;Assets per quarter for first forecast year;Activa op kwartaalbasis van het eerste prognose jaar
+budget;section_assetsquartersecond;Assets per quarter for second forecast year;Activa op kwartaalbasis van het tweede prognose jaar
+budget;section_equityquarterfirst;Equity and liabilities per quarter for first forecast year;Passiva op kwartaalbasis van het eerste prognose jaar
+budget;section_equityquartersecond;Equity and liabilities per quarter for second forecast year;Passiva op kwartaalbasis van het tweede prognose jaar
+budget;section_assetsperiodfirst;Assets per period for first forecast year;Activa op periodebasis van het eerste prognose jaar
+budget;section_equityperiodfirst;Equity and liabilities per period for first forecast year;Passiva op periodebasis van het eerste prognose jaar
+budget;section_assetsperiodsecond;Assets per period for second forecast year;Activa op periodebasis van het tweede prognose jaar
+budget;section_equityperiodsecond;Equity and liabilities per period for second forecast year;Passiva op periodebasis van het tweede prognose jaar
+budget;section_graphbreakeven;Graph break even sales;Grafiek Break even omzet
+budget;section_graphcosts;Graph expenses;Grafiek Kosten
+budget;section_graphresult;Graph result before and after taxes, taxes;Grafiek Resultaat voor en na belasting, belasting
+budget;section_graphsales;Graph sales, costs of purchase, gross profit;Grafiek Omzet, inkoopwaarde, brutowinst
+budget;section_reconciliation;Net worth reconciliation;Vermogensaansluiting
+budget;section_resultperiodfirst;Profit and loss per period for first forecast year;Resultatenrekening op periodebasis van het eerste prognose jaar
+budget;section_resultperiodsecond;Profit and loss per period for second forecast year;Resultatenrekening op periodebasis van het tweede prognose jaar
+budget;section_resultquarterfirst;Profit and loss per quarter for first forecast year;Resultatenrekening op kwartaalbasis van het eerste prognose jaar
+budget;section_resultquartersecond;Profit and loss per quarter for second forecast year;Resultatenrekening op kwartaalbasis van het tweede prognose jaar
+budget;section_resultspecificationperiodfirst;Profit and loss specification per period for first forecast year;Specificatie bij resultatenrekening op periodebasis van het eerste prognose jaar
+budget;section_resultspecificationperiodsecond;Profit and loss specification per period for second forecast year;Specificatie bij resultatenrekening op periodebasis van het tweede prognose jaar
+budget;section_resultspecificationquarterfirst;Profit and loss specification per quarter for first forecast year;Specificatie bij resultatenrekening op kwartaalbasis van het eerste prognose jaar
+budget;section_resultspecificationquartersecond;Profit and loss specification per quarter for second forecast year;Specificatie bij resultatenrekening op kwartaalbasis van het tweede prognose jaar
+budget;section_resultspecificationyear;Profit and loss specification per year;Specificatie bij resultatenrekening
+budget;section_cashflowperiodfirst;Cash flow per period for first forecast year;Kasstroom overzicht op periodebasis van het eerste prognose jaar
+budget;section_cashflowperiodsecond;Cash flow per period for second forecast year;Kasstroom overzicht op periodebasis van het tweede prognose jaar
+budget;section_cashflowquarterfirst;Cash flow per quarter for first forecast year;Kasstroom overzicht op kwartaalbasis van het eerste prognose jaar
+budget;section_cashflowquartersecond;Cash flow per quarter for second forecast year;Kasstroom overzicht op kwartaalbasis van het tweede prognose jaar
+budget;section_graphliquidity;Graph liquidity;Grafiek Liquiditeitspositie t.o.v. rekening courant limiet
+budget;section_investfinanceperiodfirst;Investments and financing per period for first forecast year;Investerings en financieringsplan op periodebasis van het eerste prognose jaar
+budget;section_investfinanceperiodsecond;Investments and financing per period for second forecast year;Investerings en financieringsplan op periodebasis van het tweede prognose jaar
+budget;section_investfinancequarterfirst;Investments and financing per quarter for first forecast year;Investerings en financieringsplan op kwartaalbasis van het eerste prognose jaar
+budget;section_investfinancequartersecond;Investments and financing per quarter for second forecast year;Investerings en financieringsplan op kwartaalbasis van het tweede prognose jaar
+budget;section_liquidityperiodfirst;Liquidity per period for first forecast year;Liquiditeitsoverzicht op periodebasis van het eerste prognose jaar
+budget;section_liquidityperiodsecond;Liquidity per period for second forecast year;Liquiditeitsoverzicht op periodebasis van het tweede prognose jaar
+budget;section_liquidityquarterfirst;Liquidity per quarter for first forecast year;Liquiditeitsoverzicht op kwartaalbasis van het eerste prognose jaar
+budget;section_liquidityquartersecond;Liquidity per quarter for second forecast year;Liquiditeitsoverzicht op kwartaalbasis van het tweede prognose jaar
+budget;chapter_ratios;Ratios;Kengetallen
+budget;section_graphROA;Graph return on assets;Grafiek Rentabiliteit
+budget;section_graphcustomer;Graph customer specific variable;Grafiek Klantspecifieke rubriek
+budget;section_graphrate;Graph inventory turnaround;Grafiek Omloopsnelheid van de voorraad
+budget;section_graphemployee;Graph gross profit per employee;Grafiek Brutowinst per medewerker
+budget;section_graphratios;Graph quick ratio and current ratio;Grafiek Quick ratio en current ratio
+budget;section_graphsolvency;Graph solvency (balance);Grafiek Solvabiliteit (balans)
+budget;section_ratios;Ratios;Kengetallen
+budget;section_importantratios;Most important ratios with description;Belangrijkste kengetallen met toelichting
+k3;viewscale;Currency view scale;Valuta schaalweergave

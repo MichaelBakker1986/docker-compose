@@ -40,7 +40,7 @@ exportJavascript.formulas.forEach((f) => {
     javascript += '\n/* ' + f.name + ':' + f.original + ' */';
     javascript += '\nfunction a' + f.id + '(f,x,y,z,v)\n{\n\treturn ' + formulaA.formatFormula(functionScript) + ';\n}';
 })
-var jsMathA = require('../../ff-math/jsMath.json');
+var jsMathA = require('../../math/jsMath.json');
 
 exportJavascript.formulas.forEach((f) => {
     javascript = javascript.replaceAll('a' + f.id, correctFileName(f.name))

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document version="0.1" date="09-08-2016" author="Topicus FINAN" title="Basis rating" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <properties>
+    <!-- Data ============================================================= -->
+    <!--General-->
+    <TimelineId>1</TimelineId>
+    <TimelineTitle>MonthTimeline</TimelineTitle>
+    <Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+    <NumberOfYears>3</NumberOfYears>
+    <AdditionalYears><data src="fes"><columns addDummyColumnWhenNoColumnsFound="true" stimelineId="xpath:./document/properties/TimelineId" number="99" delta="./document/properties/NumberOfYears/text() * ./document/properties/Periods/text()" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables var="krPD"/><presentation showHeaderRow="false" headerFormat="yyyy" showDecoration="false" prefill="false" prependEmptyColumns="1" filterEmptyRows="false"/></data></AdditionalYears>
+    <AllYears><data src="fes"><columns timelineId="xpath:./document/properties/TimelineId" number="99" delta="0" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables var="krPD"/><presentation showHeaderRow="false" headerFormat="yyyy" showDecoration="false" prefill="false" prependEmptyColumns="0" /></data></AllYears>
+    <AdditionalYearCount><data src="document" var="count(./document/properties/AdditionalYears/data/tr/td[.!='..']) - 1" type="calc" /></AdditionalYearCount>
+    <AvailableYears><data src="document" var="count(./document/properties/AllYears/data/tr/td) - 1" type="calc" /></AvailableYears>
+    <ReportName><data src="chineseRoom" name="BasicRatingReport">Basisrating rapport</data></ReportName>
+    <ReportScale>1</ReportScale>
+    <currentCustomer_Name><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Naam" /></data></currentCustomer_Name>
+    <currentCustomer_SectorOfIndustryCode><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_BIK_Code" /></data></currentCustomer_SectorOfIndustryCode>
+    <currentCustomer_SectorOfIndustryDescription><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_BIK_Omschr" /></data></currentCustomer_SectorOfIndustryDescription>
+    <currentCustomer_LegalStatusDescription><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="Rechtsvorm" /></data></currentCustomer_LegalStatusDescription>
+    <currentCustomer_City><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Woonplaats" /></data></currentCustomer_City>
+    
+    <YearOneDelta><data src="document" var="./document/properties/AdditionalYearCount/text() * ./document/properties/Periods/text()" type="calc" /></YearOneDelta>
+    <YearTwoDelta><data src="document" var="./document/properties/YearOneDelta/text() + ./document/properties/Periods/text()" type="calc" /></YearTwoDelta>
+    <YearThreeDelta><data src="document" var="./document/properties/YearTwoDelta/text() + ./document/properties/Periods/text()" type="calc" /></YearThreeDelta>
+    
+    <!--Peer Group Specific-->
+    <PeerGroupSampleSize> </PeerGroupSampleSize>
+    <PeerGroupSectorCode> </PeerGroupSectorCode>
+    <PeerGroupSectorTitle> </PeerGroupSectorTitle>
+    <PeerGroupLegalform> </PeerGroupLegalform>
+    <PeerGroupRegion> </PeerGroupRegion>
+    <PeerGroupSize> </PeerGroupSize>
+    <PeerGroupStatus> </PeerGroupStatus>
+    <PeerGroupBase> </PeerGroupBase>
+    <PeerGroupSector> </PeerGroupSector>
+    
+    <PeerGroupTitle><data src="chineseRoom" name="Peer group">Referentiegroep</data></PeerGroupTitle>
+    <BrancheTitle><data src="chineseRoom" name="Branch">Branche</data></BrancheTitle>
+    <CityTitle><data src="chineseRoom" name="City">Plaats</data></CityTitle>
+    <PeerGroupSampleSizeTitle><data src="chineseRoom" name="Peer group size">Aantal in groep</data></PeerGroupSampleSizeTitle>
+    <LegalFormTitle><data src="chineseRoom" name="Legal form">Rechtsvorm</data></LegalFormTitle>
+    <LegalTypeTitle><data src="chineseRoom" name="Legal personality">Rechtspersoonlijkheid</data></LegalTypeTitle>
+    <PeerGroupSizeTitle><data src="chineseRoom" name="Size">Omvang</data></PeerGroupSizeTitle>
+    <PeerGroupRegionTitle><data src="chineseRoom" name="Region">Regio</data></PeerGroupRegionTitle>
+    <PeerGroupBaseTitle><data src="chineseRoom" name="Base">Grondslag</data></PeerGroupBaseTitle>
+    <PeerGroupStatusTitle><data src="chineseRoom" name="Status">Status</data></PeerGroupStatusTitle>
+  </properties>
+  <newpage name="basicrating-benchmark"></newpage>
+  <p class="section"><data src="chineseRoom" name="Indicatieve URA rating">Indicatieve URA rating</data></p>
+  <graph class="graphBasicRatingBenchmark" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" number="number(./document/properties/NumberOfYears)" delta="number(./document/properties/YearOneDelta)" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="RatingGraph"/>
+      <variables var="RatingGraphBenchmark"/>
+      <variables var="PrioriGraph"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0">
+       <overrideVarTitle varName="RatingGraph"><data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Naam" /></data></overrideVarTitle>
+       <overrideVarTitle varName="RatingGraphBenchmark"><data src="document" var="./document/properties/PeerGroupSector/text()" /></overrideVarTitle>
+       <overrideVarTitle varName="PrioriGraph"><data src="chineseRoom" name="A Priori">Nederland</data></overrideVarTitle>
+      </presentation>
+    </data>
+  </graph>
+  <table class="fourcol">
+    <tr class="header">
+      <td></td>
+      <td visible="number(./document/properties/AvailableYears) > 0"><data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables function="getEndDate" /><presentation format="yyyy" /></data></td>
+      <td visible="number(./document/properties/AvailableYears) > 1"><data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables function="getEndDate" /><presentation format="yyyy" /></data></td>
+      <td visible="number(./document/properties/AvailableYears) > 2"><data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables function="getEndDate" /><presentation format="yyyy" /></data></td>
+    </tr>
+    <tr class="level0">
+      <td><data src="chineseRoom" name="Rating">Rating</data> <data src="fesModel"><columns document="0" delta="0" number="1" /><variables depth="0" var="FPS_VAR_Naam" /></data></td>
+      <td visible="number(./document/properties/AvailableYears) > 0"><data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPD" /></data> (<data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasse" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 1"><data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPD" /></data> (<data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasse" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 2"><data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPD" /></data> (<data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasse" /></data>)</td>
+    </tr>
+    <tr class="level0">
+      <td><data src="chineseRoom" name="BranchRating">Rating branche</data></td>
+      <td visible="number(./document/properties/AvailableYears) > 0"><data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPDBenchmark" /></data> (<data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasseBenchmark" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 1"><data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPDBenchmark" /></data> (<data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasseBenchmark" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 2"><data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krPDBenchmark" /></data> (<data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krUraRatingKlasseBenchmark" /></data>)</td>
+    </tr>
+    <tr class="level0">
+      <td><data src="chineseRoom" name="PrioriRating">Rating Nederland</data></td>
+      <td visible="number(./document/properties/AvailableYears) > 0"><data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquote" /></data> (<data src="fesModel"><columns delta="./document/properties/YearOneDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquoteUraRatingKlasse" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 1"><data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquote" /></data> (<data src="fesModel"><columns delta="./document/properties/YearTwoDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquoteUraRatingKlasse" /></data>)</td>
+      <td visible="number(./document/properties/AvailableYears) > 2"><data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquote" /></data> (<data src="fesModel"><columns delta="./document/properties/YearThreeDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables var="krInsolvenzquoteUraRatingKlasse" /></data>)</td>
+    </tr>
+  </table>
+  <p class="section"><data src="chineseRoom" name="Comment">Toelichting</data></p>
+  <table class="ratingexplanation">
+    <tr class="onecol"><td><data src="chineseRoom" name="BasicRatingComment">De rating geeft een oordeel over de algemene kredietwaardigheid van de onderneming en wordt uitgedrukt in een uitvalwaarschijnlijkheidspercentage. Hierin kan de volgende verdeling worden gemaakt</data>:</td></tr>
+    <tr class="twocol"><td>&lt;1%</td><td><data src="chineseRoom" name="BasicRatingCommentLT1">De onderneming heeft voldoende middelen om aan haar financiele verplichtingen te voldoen en is voldoende bestand tegen interne en externe invloeden, zoals een recessie.</data></td></tr>
+    <tr class="twocol"><td>1% - 3%</td><td><data src="chineseRoom" name="BasicRatingComment1to3">De onderneming heeft momenteel voldoende middelen om aan haar financiele verplichtingen te voldoen maar is minder bestand tegen interne en externe invloeden, zoals een recessie.</data></td></tr>
+    <tr class="twocol"><td>&gt;3%</td><td><data src="chineseRoom" name="BasicRatingCommentGT3">Er is een hoog risico dat de onderneming onder de huidige omstandigheden niet aan haar financiele verplichtingen kan voldoen.</data></td></tr>
+  </table>
+</document>

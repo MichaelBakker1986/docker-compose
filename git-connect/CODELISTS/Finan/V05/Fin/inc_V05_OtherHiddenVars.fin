@@ -1,0 +1,78 @@
+{&&Language=English}
+;----------------------------
+; Overige verborgen gegevens
+.Variables
+PPPP    1N     2               $>Other hidden vars<$                                               \OtherHiddenVars
+PIII  0 1N     2               $>Administrator mode<$                                              \AdminMode
+PIII    BA     2               $>Import bron<$                                                     \Source                    ; v1.8.4 feature van FIS!, voorkomt melding zie mantis 10002
+PPPP  0 1N     3               $>Report as limited liability company<$                             \ReportAsLimitedLiabilityCompany -> Rechtsvorm
+PPPP  0 BN     3               $>Limited liability company<$                                       \LimitedLiabilityCompany -> NetWorth
+PPPX    1A     3               $>ModelVersion<$                                                    \ModelVersion
+PPPP    1A     3               $>RRR_capital<$                                                     \RRR_capital1
+PPPX    1A     3               $>RRR_capital<$                                                     \RRR_capital2
+PPPX    1A     3               $>MatrixVersion<$                                                   \MatrixVersion
+PPPP    CN     3        ?-     $>Capital shortfall<$                                               \CapitalShortfallInYear
+PPIP    DN     3               $>Payment of dividend<$                                             \DividendPaymentClearingHistory=DividendPayableClearingHistory -> ProfitPaidOutToClaimants
+PPPP    CN     3               $>Dividend payable<$ ($>start of period<$)                          \DividendPayableLastPeriod
+PPPX    1A     3               $>Matrix name<$ $>Tax<$                                             \MatrixNameTax
+PIII  0 1N     2               $>Show impairments<$                                                \ShowImpairments
+PIII  0 1N     2               $>Show FPS Var Land<$                                               \ShowFPSVARLand
+PIII  0 1N     2               $>Projectfinance: activate costs<$                                  \ProjectUseActiveCosts
+PIII    1N C   2               $>Final payment at end of project<$?                                \ProjectFinalPayment
+PPPP    BN     2               $>Accumulated project active costs<$                                \ProjectActiveCostsCumV05org
+PPPP    1N     2               $>Vars for charts<$                                                 \OtherHiddenVars2
+PPPP    FN     3        ?      $>Other expenses<$                                                  \OtherExpenses
+;C $>OperatingExpenses<$ - $>PersonnelExpenses - $>OfficeExpenses<$
+PPPP    FN   1 3        ?      &"$>Operating costs<$"&" ("&"$>excl.<$"&" "&FirstLC("$>Personnel expenses<$")&")"  \OperatingExpensesExPersonnel
+PPPP    BN     3        ?      $>Total liabilities<$                                               \TotalLiabilities
+;C $>CurrentLiabilities<$ + $>SubordinatedDebts<$ + $>LongTermDebts<$
+PPPP    BN     3        ?      $>Cash balance<$                                                    \CashBalance
+;C $>ExcessCash<$ + $>OverdraftCurrentAccount<$ + $>CapitalShortfall<$
+PPPP    Bn     3               $>Actual credit limit current account<$                             \NegativeNetLimitOnCurrentAccount
+;C $>Negative because of reportgraphs<$
+PPPP    FN     3        ?      $>Balance result from subsidiaries and minority interest<$          \BalanceResultSubsidiariesAndMinorityInterest
+;C $>ShareResultFromSubsidiaries<$ - $>ShareResultMinorityInterest<$
+PPPP    FN   1 3               $>Operating expenses<$                                              \OperatingExpensesTotal
+PPPP    1N     2               $>Vars for monitoring app<$                                         \MonitoringAppHiddenVars
+PIII  2 BN %   3               $>Upper boundary<$                                                  \MonitoringAppVar1UpperBound
+PIII  2 BN %   3               $>Lower boundary<$                                                  \MonitoringAppVar1LowerBound
+PIII  2 BN     3               $>Upper boundary<$                                                  \MonitoringAppVar2UpperBound
+PIII  2 BN     3               $>Lower boundary<$                                                  \MonitoringAppVar2LowerBound
+PPII    1N     3  +            End Fiscal Year Date Number                                         \EndFiscalYearDateT
+PPII    1A     3  +            End Year Date                                                       \EndYearDate 
+PPPP  2 1N     3  +            Number of years                                                     \NumberOfYears
+PPPP  2 1N     3  +            Number of complete years                                            \NumberOfCompleteYears
+
+.Choices
+ProjectFinalPayment                          = "$>No<$|$>Pay out all equity end of project.<$"
+
+.Formulas NoTrend, Trend
+OtherExpenses                                = OperatingExpenses - PersonnelExpenses - OfficeExpenses
+OperatingExpensesExPersonnel                 = OperatingExpenses - PersonnelExpenses
+TotalLiabilities                             = CurrentLiabilities + NonCurrentLiabilities
+CashBalance                                  = ExcessCash - OverdraftCurrentAccount - CapitalShortfall
+NegativeNetLimitOnCurrentAccount             = -NetLimitOnCurrentAccount
+BalanceResultSubsidiariesAndMinorityInterest = ShareResultFromSubsidiaries - ShareResultMinorityInterest
+OperatingExpensesTotal                       = OperatingExpenses
+DividendPayableLastPeriod                    = DividendPayable[T-1]
+MatrixNameTax                                = &FPS_VAR_Land[1]&"TaxRates"
+MonitoringAppVar1LowerBound                  = OnER(MatrixLookup("MonitoringApp.xls","BoundariesMonitoringApp",LastDateInT,1),NA)
+MonitoringAppVar1UpperBound                  = OnER(MatrixLookup("MonitoringApp.xls","BoundariesMonitoringApp",LastDateInT,2),NA)
+MonitoringAppVar2LowerBound                  = OnER(MatrixLookup("MonitoringApp.xls","BoundariesMonitoringApp",LastDateInT,3),NA)
+MonitoringAppVar2UpperBound                  = OnER(MatrixLookup("MonitoringApp.xls","BoundariesMonitoringApp",LastDateInT,4),NA)
+EndFiscalYearDateT                           = LastDateInT(LastTinFormulaSet(NoTrend,MainPeriod))
+EndYearDate                                  = &DateStr(EndFiscalYearDateT,2) ;Should be changed back to EndFiscalYearDate
+ProjectFinalPayment                          = 0
+NumberOfYears                                = OnEr((LastTinFormulaSet(NoTrend,MainPeriod)-FirstTinFormulaSet(NoTrend,MainPeriod)+1)/Tsy(FirstTinFormulaSet(NoTrend,MainPeriod)),NA)
+;;Onderstaand beetje rare constructie omdat er geen RoundDown-functie bestaat
+NumberOfCompleteYears                        = OnEr(If((RoundUp(NumberOfYears,0)-NumberOfyears)>0,RoundUp(NumberOfYears,0)-1,NumberOfYears),NA)
+
+.Formulas NoTrend
+AdminMode                                    = (&SectorTitle2[1]="Administrator")
+;MATRIXVERSION                                = MatrixLookup("RiskCube_Parameters.xls","Version",1,3)
+
+.Formulas Visible
+RRR_capital1                                 = (    ReportAsLimitedLiabilityCompany[1])
+RRR_capital2                                 = (Not ReportAsLimitedLiabilityCompany[1])
+MonitoringAppHiddenVars                      = 0
+

@@ -1,0 +1,127 @@
+{&&Language=English}
+
+;  Submodel: Inningplus/Verhoogdrisico
+;  Version:      0.1
+;  Date:         12-01-2014
+;
+
+;------------------------------------------------------------------------------------------------------------------------------
+.Variables
+PP    0 1N     1               $>Verhoogd risico / Inningplus<$                           \
+
+
+PP    0 1N     2               $>Verhoogd risico<$                                         \=VerhoogdRisico
+
+PX    0 1N     3-              $>Voorwaarde voor 'Verhoogd' (=V)<$                    \
+
+PP      1N C   3               $>BKR-Monitorcode<$                                     \VerhoogdRisicoCalc1 -> BKRMON_Monitorcode
+C De rubriek BKR-monitorcode bevat de waarde 1,2,3,4,5,6 of 10 van de laatst ontvangen monitormelding
+
+PP      1N C   3               $>saldo op het rekening overzicht<$                     \VerhoogdRisicoCalc2 -> WH_OPEN_BAL_DEF
+C -	Het saldo op het rekening overzicht is meer dan € 3.000
+
+PP      1N C   3               $>Aantal rekening overzichten<$                         \VerhoogdRisicoCalc3 -> WH_STMT_NO
+C -	Aantal rekening overzichten < 13
+
+PP      1N C   3               $>Kwaliteitscode = 00, 01, 05 of 09 of >39<$            \VerhoogdRisicoCalc4 -> QUALITY_CODE
+
+C -	-	Kwaliteitscode =00, =01, =05 of =09 of Kwaliteitscode >39
+PP      1N C   3               $>Kwaliteitscode = 02 en laatste wijziging kwaliteitscode < 366 dagen geleden<$ \VerhoogdRisicoCalc5 -> QUALITY_CODE
+PP      1N C   3               $>Kwaliteitscode = 04 en laatste wijziging kwaliteitscode < 732 dagen geleden<$ \VerhoogdRisicoCalc6 -> QUALITY_CODE
+PP      1N C   3               $>Kwaliteitscode = 02 en startdatum < 366 dagen geleden.<$                       \VerhoogdRisicoCalc7 -> QUALITY_CODE
+PP      1N C   3               $>Kwaliteitscode = 04 en startdatum < 732 dagen geleden.<$                      \VerhoogdRisicoCalc8 -> QUALITY_CODE
+PP    0=1N    -3               $>Totaal<$                                               \VerhoogdRisicoCalcTotal
+
+PX      1N   1 3-              $>Voorwaarde voor 'Onbepaald' (=O)<$                    \
+PP      1N C   3               $>Aanmaningscode nul en kwaliteitscode < 10<$              \VerhoogdRisicoOnbepaald -> QUALITY_CODE
+
+PP      1A   1-3               $>VerhoogdRisico<$                                         \VerhoogdRisico
+C Indien één van de voorwaarde voor 'verhoogd risico' van toepassing is dan is de uitkomst 'V'.|Indien één van de voorwaarde voor 'onbepaald' van toepassing is dan is de uitkomst 'O' en anders is het 'normaal' (N)
+PP      1N D   3               $>VerhoogdRisico bepaald op<$                              \VerhoogdRisicoDatum
+
+.Formulas Notrend
+VerhoogdRisicoCalc1 = If((BKRMON_Monitorcode=1) or (BKRMON_Monitorcode=2) or (BKRMON_Monitorcode=3) or (BKRMON_Monitorcode=4) or (BKRMON_Monitorcode=5) or (BKRMON_Monitorcode=6) or (BKRMON_Monitorcode=10),1,0)
+VerhoogdRisicoCalc2 = If((WH_OPEN_BAL_DEF[1]>3000) ,1,0)
+VerhoogdRisicoCalc3 = If((WH_STMT_NO[1]<13) ,1,0)
+VerhoogdRisicoCalc4 = If((QUALITY_CODE=0) or (QUALITY_CODE=1) or (QUALITY_CODE=5) or (QUALITY_CODE=9) or (QUALITY_CODE>39),1,0)
+VerhoogdRisicoCalc5 = If((QUALITY_CODE=2) And ((NOW - QUALITY_CODE_DATE) < 366),1,0)
+VerhoogdRisicoCalc6 = If((QUALITY_CODE=4) And ((NOW - QUALITY_CODE_DATE) < 732),1,0)
+VerhoogdRisicoCalc7 = If((QUALITY_CODE=2) And ((NOW - START_DATE) < 366),1,0)
+VerhoogdRisicoCalc8 = If((QUALITY_CODE=4) And ((NOW - START_DATE) < 732),1,0)
+
+VerhoogdRisicoOnbepaald = If((QUALITY_CODE<10) And ((REMINDER_CODE=0) or (REMINDER_CODE=NA)),1,0)
+
+VerhoogdRisico      = &If(VerhoogdRisicoOnbepaald=1,&"O",&If(VerhoogdRisicoCalcTotal>0,&"V",&"N"))
+VerhoogdRisicoDatum = Now
+
+.Choices
+VerhoogdRisicoCalc1 = "0:Nee|1:Ja"
+VerhoogdRisicoCalc2 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc3 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc4 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc5 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc6 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc7 = VerhoogdRisicoCalc1
+VerhoogdRisicoCalc8 = VerhoogdRisicoCalc1
+VerhoogdRisicoOnbepaald = VerhoogdRisicoCalc1
+
+;------------------------------------------------------------------------------------------------------------------------------
+.Variables
+PP    0 1N     2               $>Inningplus<$                                                            \=Inningplus
+
+PP      1A     3               $>Inningplus (Termijn klant)<$                                            \InningplusTermijn
+
+PP      1N C   4               $>Klant heeft in het afgelopen halfjaar minimaal 1 geslaagde (niet gestorneerde) betaling gedaan<$ \InningplusCalc1
+PP    0 BN     5               $>WH_PAYMENTS<$ (Last6M)                                                  \WH_PAYMENTSLast6M -> WH_PAYMENTS
+PP    0-BN     5               $>WH_STORNO<$  (Last6M)                                                   \WH_STORNOLast6M -> WH_STORNO
+PP    0=BN    -5               Saldo (Last6M)                                                            \InningplusCalc1Saldo
+PP    0 BN     5               =Last6M                                                                   \=Last6M -> WH_EXT_DAT
+PP      1N C   4               $>Saldo van klant is > 100 euro (dit is de arbitraire grens)<$            \InningplusCalc2 -> WH_OPEN_BAL_DEF
+;PP      1N C   4               $>Startdatum van klant is meer dan 1 jaar geleden<$                       \InningplusCalc3 -> START_DATE
+;PP      1N C   4               $>Telefoonnummer is bekend	<$                                             \InningplusCalc4 -> AANTALTELEFOONNUMMERS
+PP      1N C   4               $>Er is het laatste halfjaar geen sprake geweest van bijzonder beheer.<$  \InningplusCalc5 -> WH_BIJZONDERBEHEER
+PI    0 BN     5               =Last6M                                                                   \=Last6M -> WH_EXT_DAT
+PP    0 BN     5               =InningplusCalc5                                                          \WH_BIJZONDERBEHEERLast6M -> WH_BIJZONDERBEHEER
+PP      1N C   4               $>Huidige KwK =20<$  																										 \InningplusCalc7 -> QUALITY_CODE
+PP    0=1N    -4               $>Totaal<$                                                                \InningplusTermijnTotaal
+
+PP      1A     3               $>Inningplus (Contant klant)<$                                            \InningplusContant
+PP      1N C   4         +     =InningplusCalc1                                                          \=InningplusCalc1
+PP      1N C   4               $>Saldo van klant is > 50 euro<$                                          \InningplusCalc6 -> WH_OPEN_BAL_DEF
+PP      1N C   4         +     =InningplusCalc5                                                          \=InningplusCalc5 -> WH_BIJZONDERBEHEER
+PP      1N C   4         +     =InningplusCalc6                                                          \=InningplusCalc6
+PP    0=1N    -4               $>Totaal<$                                                                \InningplusContantTotaal
+
+PI      1N C 1 3               =PI_CSH_CRD_IND                                                           \=PI_CSH_CRD_IND      -> WH_CSH_CRD_IND ; 0=Termijn  en 1=Contant
+
+PP      1A   1-3               $>Inningplus<$                                                            \Inningplus
+C Als aan álle voorwaarden voldaan wordt, is er sprake van InningPlus. De uitkomst van de berekening is “J” of “N”. Wanneer de berekening niet is uitgevoerd, dan is de waarde onbepaald “O”.
+
+PP      1N D   3               $>Inningplus bepaald op<$                                                 \InningplusDatum
+
+.Formulas Notrend
+InningplusTermijn        = &If(InningplusTermijnTotaal=4,&"J",&"N")
+InningplusContant        = &If(InningplusContantTotaal=4,&"J",&"N")
+Inningplus               = &If(PI_CSH_CRD_IND[1]=0,&InningplusTermijn[1],&InningplusContant[1]) ; 0=Termijn  en 1=Contant
+
+
+InningplusDatum          = Now
+WH_PAYMENTSLast6M        = If(Last6M,WH_PAYMENTS,NA)
+WH_STORNOLast6M          = If(Last6M,WH_STORNO,NA)
+InningplusCalc1          = If(HSUM(InningplusCalc1Saldo,1,LastTinFormulaSet(NoTrend,MainPeriod))>0,1,0)
+InningplusCalc2          = If((WH_OPEN_BAL_DEF[1]>100) ,1,0)
+;InningplusCalc3          = If(NOW - START_DATE > 365 ,1,0)
+;InningplusCalc4          = If(AANTALTELEFOONNUMMERS>0 ,1 ,0)
+InningplusCalc5          = If(HSUM(WH_BIJZONDERBEHEERLast6M,1,LastTinFormulaSet(NoTrend,MainPeriod))>0,0,1)
+InningplusCalc6          = If((WH_OPEN_BAL_DEF[1]>50) ,1,0)
+InningplusCalc7          = If((QUALITY_CODE[1]=20) ,1,0)
+WH_BIJZONDERBEHEERLast6M = If(last6M=1,WH_BIJZONDERBEHEER,NA)
+
+.Choices
+InningplusCalc1 = "0:Nee|1:Ja"
+InningplusCalc2 = InningplusCalc1
+;nningplusCalc3 = InningplusCalc1
+;nningplusCalc4 = InningplusCalc1
+InningplusCalc5 = InningplusCalc1
+InningplusCalc6 = InningplusCalc1
+InningplusCalc7 = InningplusCalc1

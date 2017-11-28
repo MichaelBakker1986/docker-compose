@@ -1,0 +1,14 @@
+{&&Include ../../Includes/IncValidation.fin}
+{&&Include ../../Includes/IncValidationKlein.fin}
+
+
+.Formulas NoTrend
+rjiFinancialReportingPeriodDifferentThanAnnualStatus="Nee"
+
+;------------------------------------------------------------------------------------------------------------------------------------------
+; Category IfCheck:
+;.Formulas InputRequired
+;venjbw2iDocumentAdoptionDate = (&venjbw2iDocumentAdoptionStatus=&QV_YESVALUE)
+
+;.Formulas Locked
+;venjbw2iDocumentAdoptionDate = not(&venjbw2iDocumentAdoptionStatus=&QV_YESVALUE)

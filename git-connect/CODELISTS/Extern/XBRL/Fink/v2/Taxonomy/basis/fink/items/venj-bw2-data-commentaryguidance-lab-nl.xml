@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <link:labelLink xlink:role="http://www.xbrl.org/2003/role/link" xlink:type="extended">
+    <link:label id="venj-bw2-i_FinancialReportingPeriodCurrentEndDate_commentaryGuidance_nl" xlink:label="venj-bw2-i_FinancialReportingPeriodCurrentEndDate_commentaryGuidance_nl" xlink:role="http://www.xbrl.org/2003/role/commentaryGuidance" xlink:type="resource" xml:lang="nl">De einddatum mag niet ouder zijn dan hondervijfentwintig dagen in het verleden te opzichte van de datum waarop de financieringsaanvraag wordt ingediend.</link:label>
+    <link:label id="venj-bw2-i_FinancialReportingPeriodPreviousStartDate_commentaryGuidance_nl" xlink:label="venj-bw2-i_FinancialReportingPeriodPreviousStartDate_commentaryGuidance_nl" xlink:role="http://www.xbrl.org/2003/role/commentaryGuidance" xlink:type="resource" xml:lang="nl">De periode van de voorgaande financiële rapportageperiode moet minimaal 1 jaar beslaan.</link:label>
+    <link:label id="venj-bw2-i_FinancialReportingPeriodCurrentStartDate_commentaryGuidance_nl" xlink:label="venj-bw2-i_FinancialReportingPeriodCurrentStartDate_commentaryGuidance_nl" xlink:role="http://www.xbrl.org/2003/role/commentaryGuidance" xlink:type="resource" xml:lang="nl">De voorgaande rapportageperiode dient aan te sluiten met de huidige rapportageperiode in de zin dat er geen dag mag zitten tussen de einddatum van de voorgaande rapportageperiode en de startdatum van de huidige rapportageperiode.</link:label>
+    <link:label id="venj-bw2-i_FinancialReportingPeriodPreviousEndDate_commentaryGuidance_nl" xlink:label="venj-bw2-i_FinancialReportingPeriodPreviousEndDate_commentaryGuidance_nl" xlink:role="http://www.xbrl.org/2003/role/commentaryGuidance" xlink:type="resource" xml:lang="nl">De voorgaande rapportageperiode dient aan te sluiten met de huidige rapportageperiode in de zin dat er geen dag mag zitten tussen de einddatum van de voorgaande rapportageperiode en de startdatum van de huidige rapportageperiode.</link:label>
+    <link:label id="venj-bw2-i_ChamberOfCommerceRegistrationNumber_commentaryGuidance_nl" xlink:label="venj-bw2-i_ChamberOfCommerceRegistrationNumber_commentaryGuidance_nl" xlink:role="http://www.xbrl.org/2003/role/commentaryGuidance" xlink:type="resource" xml:lang="nl">Geef het 8 cijferige registratienummer van de kamer van koophandel op.</link:label>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="venj-bw2-i_ChamberOfCommerceRegistrationNumber_loc" xlink:to="venj-bw2-i_ChamberOfCommerceRegistrationNumber_commentaryGuidance_nl" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="venj-bw2-i_FinancialReportingPeriodCurrentEndDate_loc" xlink:to="venj-bw2-i_FinancialReportingPeriodCurrentEndDate_commentaryGuidance_nl" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="venj-bw2-i_FinancialReportingPeriodCurrentStartDate_loc" xlink:to="venj-bw2-i_FinancialReportingPeriodCurrentStartDate_commentaryGuidance_nl" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="venj-bw2-i_FinancialReportingPeriodPreviousEndDate_loc" xlink:to="venj-bw2-i_FinancialReportingPeriodPreviousEndDate_commentaryGuidance_nl" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="venj-bw2-i_FinancialReportingPeriodPreviousStartDate_loc" xlink:to="venj-bw2-i_FinancialReportingPeriodPreviousStartDate_commentaryGuidance_nl" xlink:type="arc"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_ChamberOfCommerceRegistrationNumber" xlink:label="venj-bw2-i_ChamberOfCommerceRegistrationNumber_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_FinancialReportingPeriodCurrentEndDate" xlink:label="venj-bw2-i_FinancialReportingPeriodCurrentEndDate_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_FinancialReportingPeriodCurrentStartDate" xlink:label="venj-bw2-i_FinancialReportingPeriodCurrentStartDate_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_FinancialReportingPeriodPreviousEndDate" xlink:label="venj-bw2-i_FinancialReportingPeriodPreviousEndDate_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_FinancialReportingPeriodPreviousStartDate" xlink:label="venj-bw2-i_FinancialReportingPeriodPreviousStartDate_loc" xlink:type="locator"/>
+  </link:labelLink>
+</link:linkbase>

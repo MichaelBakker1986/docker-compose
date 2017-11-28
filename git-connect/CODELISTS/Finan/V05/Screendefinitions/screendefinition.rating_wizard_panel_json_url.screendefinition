@@ -1,0 +1,44 @@
+{
+	"viewType":"WIZARD",
+	"name":"Root",
+	"variableName":"Q_ROOT",
+	"metaData":{
+		"onlyMoveForwardIfAllPreviousStepsAreDone":true,
+		"alwaysShowReportButton":false
+	},
+	"children":[
+		{
+			"viewType":"CONTAINER",
+			"name":"History",
+			"description":"History",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel1",
+					"description":"CustomPanel1",
+					"metaData":{
+						"providertype":"RATING_HISTORY_PANEL"
+					}
+					
+				}
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Payment",
+			"description":"Payment",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel2",
+					"description":"CustomPanel2",
+					"metaData":{
+						"providertype":"RATING_PAYMENT_PANEL"
+					}
+					
+				}
+			]			
+		}		
+	]	
+}

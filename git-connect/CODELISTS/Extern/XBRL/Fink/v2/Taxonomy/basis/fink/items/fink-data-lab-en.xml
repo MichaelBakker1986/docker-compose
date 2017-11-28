@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <link:labelLink xlink:role="http://www.xbrl.org/2003/role/link" xlink:type="extended">
+    <link:label id="fink-i_FundingRequestShares_label_en" xlink:label="fink-i_FundingRequestShares_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Are entrepreneur(s)/shareholder(s) willing to issue shares? (Y/N)</link:label>
+    <link:label id="fink-i_WillingnessToTransferOngoingFinancingToNewFunder_label_en" xlink:label="fink-i_WillingnessToTransferOngoingFinancingToNewFunder_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Are entrepreneur(s)/shareholder(s) willing to transfer ongoing financing to new funder? (Y/N)</link:label>
+    <link:label id="fink-i_DateEstablishmentEntity_label_en" xlink:label="fink-i_DateEstablishmentEntity_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Date establishment entity</link:label>
+    <link:label id="fink-i_FundingPurposeDescription_label_en" xlink:label="fink-i_FundingPurposeDescription_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Description funding purpose</link:label>
+    <link:label id="fink-i_FundingRequestPartOfPileFunding_label_en" xlink:label="fink-i_FundingRequestPartOfPileFunding_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Description if funding request is part of pile funding</link:label>
+    <link:label id="fink-i_ForecastDetails_label_en" xlink:label="fink-i_ForecastDetails_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Fink forecast details</link:label>
+    <link:label id="fink-i_FundingRequestAmount_label_en" xlink:label="fink-i_FundingRequestAmount_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Funding request amount</link:label>
+    <link:label id="fink-i_FundingRequestDuration_label_en" xlink:label="fink-i_FundingRequestDuration_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Funding request duration</link:label>
+    <link:label id="fink-i_FundingRequestPurpose_label_en" xlink:label="fink-i_FundingRequestPurpose_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Funding request purpose</link:label>
+    <link:label id="fink-i_FundingRequestRejection_label_en" xlink:label="fink-i_FundingRequestRejection_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Funding request rejection within past three years? (Y/N)</link:label>
+    <link:label id="fink-i_FundingRequestForSustainablePurpose_label_en" xlink:label="fink-i_FundingRequestForSustainablePurpose_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Is funding requested to realise a sustainable purpose? (Y/N)</link:label>
+    <link:label id="fink-i_FundingRequestDetails_label_en" xlink:label="fink-i_FundingRequestDetails_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Listing of details of the Fink request</link:label>
+    <link:label id="fink-i_Profitability_label_en" xlink:label="fink-i_Profitability_label_en" xlink:role="http://www.xbrl.org/2003/role/label" xlink:type="resource" xml:lang="en">Profitability</link:label>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_DateEstablishmentEntity_loc" xlink:to="fink-i_DateEstablishmentEntity_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_ForecastDetails_loc" xlink:to="fink-i_ForecastDetails_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingPurposeDescription_loc" xlink:to="fink-i_FundingPurposeDescription_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestAmount_loc" xlink:to="fink-i_FundingRequestAmount_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestDetails_loc" xlink:to="fink-i_FundingRequestDetails_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestDuration_loc" xlink:to="fink-i_FundingRequestDuration_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestForSustainablePurpose_loc" xlink:to="fink-i_FundingRequestForSustainablePurpose_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestPartOfPileFunding_loc" xlink:to="fink-i_FundingRequestPartOfPileFunding_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestPurpose_loc" xlink:to="fink-i_FundingRequestPurpose_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestRejection_loc" xlink:to="fink-i_FundingRequestRejection_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_FundingRequestShares_loc" xlink:to="fink-i_FundingRequestShares_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_Profitability_loc" xlink:to="fink-i_Profitability_label_en" xlink:type="arc"/>
+    <link:labelArc xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="fink-i_WillingnessToTransferOngoingFinancingToNewFunder_loc" xlink:to="fink-i_WillingnessToTransferOngoingFinancingToNewFunder_label_en" xlink:type="arc"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_DateEstablishmentEntity" xlink:label="fink-i_DateEstablishmentEntity_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_ForecastDetails" xlink:label="fink-i_ForecastDetails_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingPurposeDescription" xlink:label="fink-i_FundingPurposeDescription_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestAmount" xlink:label="fink-i_FundingRequestAmount_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestDetails" xlink:label="fink-i_FundingRequestDetails_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestDuration" xlink:label="fink-i_FundingRequestDuration_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestForSustainablePurpose" xlink:label="fink-i_FundingRequestForSustainablePurpose_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestPartOfPileFunding" xlink:label="fink-i_FundingRequestPartOfPileFunding_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestPurpose" xlink:label="fink-i_FundingRequestPurpose_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestRejection" xlink:label="fink-i_FundingRequestRejection_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_FundingRequestShares" xlink:label="fink-i_FundingRequestShares_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_Profitability" xlink:label="fink-i_Profitability_loc" xlink:type="locator"/>
+    <link:loc xlink:href="fink-data.xsd#fink-i_WillingnessToTransferOngoingFinancingToNewFunder" xlink:label="fink-i_WillingnessToTransferOngoingFinancingToNewFunder_loc" xlink:type="locator"/>
+  </link:labelLink>
+</link:linkbase>

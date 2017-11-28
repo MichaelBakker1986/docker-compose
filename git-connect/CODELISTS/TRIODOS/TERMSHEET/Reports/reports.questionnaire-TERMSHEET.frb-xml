@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.0.3" date="19-11-2014" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_Relatienummer" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_BY" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_ON" /><presentation format="dd MMMM yyyy"/><presentation showSingleValueVariablesOnce="false" /></data></CreationDate>
+	<CreationDateTitel>Date</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScale>1</ReportScale>
+</properties>
+
+<!-- =========toc=============================================================== -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!--Status information-->
+	<section class="section"><data src="fesModel"><variables var="Q_STATUS" function="getTitle"/></data></section>
+	<table class="datatable">
+		<data src="fes">
+			<columns number="1" order="asc" />
+			<!--<columns number="3" order="asc"/>-->
+			<variables depth="0" var="Q_STATUS"/>
+			<variables depth="0" var="Q_STATUS_FINAL_ON"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY_NAME"/>
+			<variables depth="0" var="Q_STATUS_STARTED_ON"/>
+			<variables depth="0" var="ModelVersion"/>
+			<variables depth="0" var="MatrixVersion"/>
+			<presentation showHeaderRow="false">
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level-1">remove</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="subtotal">total</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+<!-- =========data============================================================= -->
+
+<p> </p>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map01" function="getTitle"/></data></section>
+	<table class="datatable">
+	 	<data src="fes">
+  			<columns number="1" order="asc" />
+			<variables depth="3" var="Q_Map01" varFrom="Termsheet" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="true" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScale/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<overrideStyle old="level-1">remove</overrideStyle>
+				<overrideStyle old="level3">level2</overrideStyle>
+				<overrideStyle old="level4">level2</overrideStyle>
+				<overrideStyle old="level5">level2</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1empty">localtotal</overrideStyle>
+				<overrideStyle old="level2empty">localtotal</overrideStyle>
+				<overrideStyle old="level3empty">localtotal</overrideStyle>
+				<overrideStyle old="subtotal">total</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========End============================================================= -->
+</document>

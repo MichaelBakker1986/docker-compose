@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FBLTotaalType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://api.topicus.finance/fbl/fbltotaal/2016/8/datatypes">
+	<AanvraagGroep>
+		<AanvraagContractNummer>11</AanvraagContractNummer>
+		<AanvraagDatum>2017-04-03</AanvraagDatum>
+		<AanvraagDatumOrigineel>2017-04-03</AanvraagDatumOrigineel>
+		<AanvraagNummer>11</AanvraagNummer>
+		<BedragHoofdsomGewenst>
+			<Currency>EUR</Currency>
+			<Amount>0.00</Amount>
+		</BedragHoofdsomGewenst>
+		<Behandelaar>Systeem</Behandelaar>
+		<OntvangstWijze xsi:nil="true" />
+		<RetourWijze xsi:nil="true" />
+		<TeamCode>Geen</TeamCode>
+	</AanvraagGroep>
+	<Contractant xsi:type="ZakelijkeContractantType" Volgnummer="1">
+		<Adres Volgnummer="1">
+			<Gemeente>Default import</Gemeente>
+			<Huisnummer>25</Huisnummer>
+			<Plaatsnaam>Deventer</Plaatsnaam>
+			<Postbus xsi:nil="true" />
+			<Postcode>1234 AB</Postcode>
+			<Straatnaam>Singel</Straatnaam>
+			<Toevoeging />
+			<Land>NETHERLANDS</Land>
+			<Verdieping xsi:nil="true" />
+			<Graafschap xsi:nil="true" />
+			<Wijk xsi:nil="true" />
+			<StraatType xsi:nil="true" />
+			<Huisnaam xsi:nil="true" />
+			<Appartementencomplex xsi:nil="true" />
+			<LandAnders xsi:nil="true" />
+			<GegevensBuitenland xsi:nil="true" />
+		</Adres>
+		<GeformatteerdPostAdres />
+		<AfwijkendKlantProfiel>false</AfwijkendKlantProfiel>
+		<Email xsi:nil="true" />
+		<ExternRelatieNummer>12345678</ExternRelatieNummer>
+		<Faillissement>false</Faillissement>
+		<Faxnummer xsi:nil="true" />
+		<KlantIndex>0</KlantIndex>
+		<MobieleTelefoon xsi:nil="true" />
+		<NietVrijwilligeSchuldsanering>false</NietVrijwilligeSchuldsanering>
+		<Telefoon xsi:nil="true" />
+		<TelefoonAlternatief xsi:nil="true" />
+		<Rating>0</Rating>
+		<UitstaandeObligo xsi:nil="true" />
+		<IncassoRekening xsi:nil="true" />
+		<CounterpartyStatus>Customer</CounterpartyStatus>
+		<LaatsteWijzigingsdatum>2017-04-03</LaatsteWijzigingsdatum>
+		<Naam>IBmulti</Naam>
+		<DossierstukKlantIndex>1</DossierstukKlantIndex>
+		<Rol>Borrower</Rol>
+		<Rol>Main borrower</Rol>
+		<Bedrijfsnaam>IBmulti</Bedrijfsnaam>
+		<Handelsnaam xsi:nil="true" />
+		<AantalMedewerkers>25</AantalMedewerkers>
+		<KvKNummer>12345678</KvKNummer>
+		<BuitenlandseActiviteiten>false</BuitenlandseActiviteiten>
+		<NaceSectorCode>0146</NaceSectorCode>
+		<NaceSectorOmschrijving>Raising of swine/pigs</NaceSectorOmschrijving>
+		<SpecifiekeSectorOmschrijving>Raising of swine/pigs</SpecifiekeSectorOmschrijving>
+		<SpecifiekeSectorCode>0146</SpecifiekeSectorCode>
+		<SerCode xsi:nil="true" />
+		<OprichtingsDatum>2015-01-01</OprichtingsDatum>
+		<RechtsVorm>Maatschap</RechtsVorm>
+	</Contractant>
+	<Contractant xsi:type="ParticuliereContractantType" Volgnummer="2">
+		<Adres Volgnummer="1">
+			<Gemeente>Default import</Gemeente>
+			<Huisnummer>12</Huisnummer>
+			<Plaatsnaam />
+			<Postbus xsi:nil="true" />
+			<Postcode>1234 AB</Postcode>
+			<Straatnaam>Singel</Straatnaam>
+			<Toevoeging />
+			<Land>NETHERLANDS</Land>
+			<Verdieping xsi:nil="true" />
+			<Graafschap xsi:nil="true" />
+			<Wijk xsi:nil="true" />
+			<StraatType xsi:nil="true" />
+			<Huisnaam xsi:nil="true" />
+			<Appartementencomplex xsi:nil="true" />
+			<LandAnders xsi:nil="true" />
+			<GegevensBuitenland xsi:nil="true" />
+		</Adres>
+		<GeformatteerdPostAdres />
+		<AfwijkendKlantProfiel>false</AfwijkendKlantProfiel>
+		<Email>bodil@topicus.nl</Email>
+		<ExternRelatieNummer>bdc8bcc2-fa3a-41d0-9f2a-0b230a075cc1</ExternRelatieNummer>
+		<Faillissement>false</Faillissement>
+		<Faxnummer xsi:nil="true" />
+		<KlantIndex>1</KlantIndex>
+		<MobieleTelefoon xsi:nil="true" />
+		<NietVrijwilligeSchuldsanering>false</NietVrijwilligeSchuldsanering>
+		<Telefoon xsi:nil="true" />
+		<TelefoonAlternatief xsi:nil="true" />
+		<Rating xsi:nil="true" />
+		<UitstaandeObligo xsi:nil="true" />
+		<IncassoRekening xsi:nil="true" />
+		<CounterpartyStatus>Customer</CounterpartyStatus>
+		<LaatsteWijzigingsdatum>2017-04-03</LaatsteWijzigingsdatum>
+		<Naam>T TweedeTekenbevoegde</Naam>
+		<DossierstukKlantIndex>2</DossierstukKlantIndex>
+		<Rol>Borrower</Rol>
+		<Achternaam>TweedeTekenbevoegde</Achternaam>
+		<AlimentatieExpartnerDuur xsi:nil="true" />
+		<AlimentatieKinderenDuur xsi:nil="true" />
+		<BedragAlimentatieExPartner xsi:nil="true" />
+		<BedragAlimentatieKinderen xsi:nil="true" />
+		<BedragHuidigeWoonlastenHuur xsi:nil="true" />
+		<BedragMaandlastenBelastingen xsi:nil="true" />
+		<BedragMaandlastenEigenWoning xsi:nil="true" />
+		<BedragMaandlastenLening xsi:nil="true" />
+		<BedragMaandlastenLeningConsumptief xsi:nil="true" />
+		<BedragMaandlastenLevensonderhoud xsi:nil="true" />
+		<BedragMaandlastenOperationeel xsi:nil="true" />
+		<BedragMaandlastenOverigeSchulden xsi:nil="true" />
+		<BedragMaandlastenVermogensRendementsheffing xsi:nil="true" />
+		<BedragTotaalBrutoJaarinkomen>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</BedragTotaalBrutoJaarinkomen>
+		<BedragUitstaandeObligo xsi:nil="true" />
+		<BelastingPlichtigInBuitenland>false</BelastingPlichtigInBuitenland>
+		<Burgerlijkestaat xsi:nil="true" />
+		<DatumGescheidenSinds xsi:nil="true" />
+		<DatumInNederlandSinds xsi:nil="true" />
+		<DatumTijdOverlijden xsi:nil="true" />
+		<Familienaam xsi:nil="true" />
+		<FamilienaamTussenvoegsel xsi:nil="true" />
+		<Geboortedatum>1980-02-11</Geboortedatum>
+		<Geboorteplaats xsi:nil="true" />
+		<Gescheiden>false</Gescheiden>
+		<Geslacht>Male</Geslacht>
+		<Legitimatie xsi:nil="true" />
+		<Legitimatienummer xsi:nil="true" />
+		<LegitimatieVervalDatum xsi:nil="true" />
+		<Nationaliteit>NETHERLANDS</Nationaliteit>
+		<Opleidingsniveau xsi:nil="true" />
+		<OverigeVerplichtingen xsi:nil="true" />
+		<Personeel>false</Personeel>
+		<PersoneelsNummer xsi:nil="true" />
+		<BSN xsi:nil="true" />
+		<SoortOntbonden xsi:nil="true" />
+		<Titel xsi:nil="true" />
+		<Tussenvoegsel />
+		<VerblijfsVergunning xsi:nil="true" />
+		<VolledigeNaam>T TweedeTekenbevoegde</VolledigeNaam>
+		<VolledigeNaamAanhef>Mr. T TweedeTekenbevoegde</VolledigeNaamAanhef>
+		<VolledigeNaamTitel>T TweedeTekenbevoegde</VolledigeNaamTitel>
+		<Voorletters>T</Voorletters>
+		<Werkvergunning xsi:nil="true" />
+		<WoonSituatie xsi:nil="true" />
+		<VolledigeNaamInclAanhef>Mr. T TweedeTekenbevoegde</VolledigeNaamInclAanhef>
+		<Clientnr xsi:nil="true" />
+		<Voornaam xsi:nil="true" />
+		<ExplainBeschikbaarVermogen xsi:nil="true" />
+		<ExplainHuidigeWoonlasten xsi:nil="true" />
+		<ExplainVrijBesteedbaarNibud xsi:nil="true" />
+		<Geboorteland xsi:nil="true" />
+		<KindAantalVijfJaar />
+		<KinderenAantal />
+		<MotivatieAfwijkendOnderpandAdres xsi:nil="true" />
+		<OoitGeregistreerdPartnerschapOntbonden>false</OoitGeregistreerdPartnerschapOntbonden>
+		<OoitGescheidenGeweest>false</OoitGescheidenGeweest>
+		<ToestemmingVoorBKRToetsing>false</ToestemmingVoorBKRToetsing>
+		<VerblijfsVergunningEinddatum xsi:nil="true" />
+	</Contractant>
+	<Contractant xsi:type="ParticuliereContractantType" Volgnummer="3">
+		<Adres Volgnummer="1">
+			<Gemeente>Default import</Gemeente>
+			<Huisnummer>1</Huisnummer>
+			<Plaatsnaam />
+			<Postbus xsi:nil="true" />
+			<Postcode xsi:nil="true" />
+			<Straatnaam />
+			<Toevoeging />
+			<Land>NETHERLANDS</Land>
+			<Verdieping xsi:nil="true" />
+			<Graafschap xsi:nil="true" />
+			<Wijk xsi:nil="true" />
+			<StraatType xsi:nil="true" />
+			<Huisnaam xsi:nil="true" />
+			<Appartementencomplex xsi:nil="true" />
+			<LandAnders xsi:nil="true" />
+			<GegevensBuitenland xsi:nil="true" />
+		</Adres>
+		<GeformatteerdPostAdres />
+		<AfwijkendKlantProfiel>false</AfwijkendKlantProfiel>
+		<Email>bodil@topicus.nl</Email>
+		<ExternRelatieNummer>963a61b9-554e-4b0c-a2ed-8b2cab494266</ExternRelatieNummer>
+		<Faillissement>false</Faillissement>
+		<Faxnummer xsi:nil="true" />
+		<KlantIndex>2</KlantIndex>
+		<MobieleTelefoon xsi:nil="true" />
+		<NietVrijwilligeSchuldsanering>false</NietVrijwilligeSchuldsanering>
+		<Telefoon xsi:nil="true" />
+		<TelefoonAlternatief xsi:nil="true" />
+		<Rating xsi:nil="true" />
+		<UitstaandeObligo xsi:nil="true" />
+		<IncassoRekening xsi:nil="true" />
+		<CounterpartyStatus>Customer</CounterpartyStatus>
+		<LaatsteWijzigingsdatum>2017-04-03</LaatsteWijzigingsdatum>
+		<Naam>P van Partner</Naam>
+		<DossierstukKlantIndex>3</DossierstukKlantIndex>
+		<Rol>Borrower</Rol>
+		<Achternaam>Partner</Achternaam>
+		<AlimentatieExpartnerDuur xsi:nil="true" />
+		<AlimentatieKinderenDuur xsi:nil="true" />
+		<BedragAlimentatieExPartner xsi:nil="true" />
+		<BedragAlimentatieKinderen xsi:nil="true" />
+		<BedragHuidigeWoonlastenHuur xsi:nil="true" />
+		<BedragMaandlastenBelastingen xsi:nil="true" />
+		<BedragMaandlastenEigenWoning xsi:nil="true" />
+		<BedragMaandlastenLening xsi:nil="true" />
+		<BedragMaandlastenLeningConsumptief xsi:nil="true" />
+		<BedragMaandlastenLevensonderhoud xsi:nil="true" />
+		<BedragMaandlastenOperationeel xsi:nil="true" />
+		<BedragMaandlastenOverigeSchulden xsi:nil="true" />
+		<BedragMaandlastenVermogensRendementsheffing xsi:nil="true" />
+		<BedragTotaalBrutoJaarinkomen>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</BedragTotaalBrutoJaarinkomen>
+		<BedragUitstaandeObligo xsi:nil="true" />
+		<BelastingPlichtigInBuitenland>false</BelastingPlichtigInBuitenland>
+		<Burgerlijkestaat xsi:nil="true" />
+		<DatumGescheidenSinds xsi:nil="true" />
+		<DatumInNederlandSinds xsi:nil="true" />
+		<DatumTijdOverlijden xsi:nil="true" />
+		<Familienaam xsi:nil="true" />
+		<FamilienaamTussenvoegsel xsi:nil="true" />
+		<Geboortedatum>1900-02-01</Geboortedatum>
+		<Geboorteplaats xsi:nil="true" />
+		<Gescheiden>false</Gescheiden>
+		<Geslacht>Male</Geslacht>
+		<Legitimatie xsi:nil="true" />
+		<Legitimatienummer xsi:nil="true" />
+		<LegitimatieVervalDatum xsi:nil="true" />
+		<Nationaliteit>NETHERLANDS</Nationaliteit>
+		<Opleidingsniveau xsi:nil="true" />
+		<OverigeVerplichtingen xsi:nil="true" />
+		<Personeel>false</Personeel>
+		<PersoneelsNummer xsi:nil="true" />
+		<BSN xsi:nil="true" />
+		<SoortOntbonden xsi:nil="true" />
+		<Titel xsi:nil="true" />
+		<Tussenvoegsel>van</Tussenvoegsel>
+		<VerblijfsVergunning xsi:nil="true" />
+		<VolledigeNaam>P van Partner</VolledigeNaam>
+		<VolledigeNaamAanhef>Mr. P van Partner</VolledigeNaamAanhef>
+		<VolledigeNaamTitel>P van Partner</VolledigeNaamTitel>
+		<Voorletters>P</Voorletters>
+		<Werkvergunning xsi:nil="true" />
+		<WoonSituatie xsi:nil="true" />
+		<VolledigeNaamInclAanhef>Mr. P van Partner</VolledigeNaamInclAanhef>
+		<Clientnr xsi:nil="true" />
+		<Voornaam xsi:nil="true" />
+		<ExplainBeschikbaarVermogen xsi:nil="true" />
+		<ExplainHuidigeWoonlasten xsi:nil="true" />
+		<ExplainVrijBesteedbaarNibud xsi:nil="true" />
+		<Geboorteland xsi:nil="true" />
+		<KindAantalVijfJaar />
+		<KinderenAantal />
+		<MotivatieAfwijkendOnderpandAdres xsi:nil="true" />
+		<OoitGeregistreerdPartnerschapOntbonden>false</OoitGeregistreerdPartnerschapOntbonden>
+		<OoitGescheidenGeweest>false</OoitGescheidenGeweest>
+		<ToestemmingVoorBKRToetsing>false</ToestemmingVoorBKRToetsing>
+		<VerblijfsVergunningEinddatum xsi:nil="true" />
+	</Contractant>
+	<Contractant xsi:type="ParticuliereContractantType" Volgnummer="4">
+		<Adres Volgnummer="1">
+			<Gemeente>Default import</Gemeente>
+			<Huisnummer>12</Huisnummer>
+			<Plaatsnaam />
+			<Postbus xsi:nil="true" />
+			<Postcode>1234 AB</Postcode>
+			<Straatnaam>Singel</Straatnaam>
+			<Toevoeging />
+			<Land>NETHERLANDS</Land>
+			<Verdieping xsi:nil="true" />
+			<Graafschap xsi:nil="true" />
+			<Wijk xsi:nil="true" />
+			<StraatType xsi:nil="true" />
+			<Huisnaam xsi:nil="true" />
+			<Appartementencomplex xsi:nil="true" />
+			<LandAnders xsi:nil="true" />
+			<GegevensBuitenland xsi:nil="true" />
+		</Adres>
+		<GeformatteerdPostAdres />
+		<AfwijkendKlantProfiel>false</AfwijkendKlantProfiel>
+		<Email>bodil@topicus.nl</Email>
+		<ExternRelatieNummer>d833fad2-7409-41d6-a4bc-ae58973ab8b8</ExternRelatieNummer>
+		<Faillissement>false</Faillissement>
+		<Faxnummer xsi:nil="true" />
+		<KlantIndex>3</KlantIndex>
+		<MobieleTelefoon xsi:nil="true" />
+		<NietVrijwilligeSchuldsanering>false</NietVrijwilligeSchuldsanering>
+		<Telefoon xsi:nil="true" />
+		<TelefoonAlternatief xsi:nil="true" />
+		<Rating xsi:nil="true" />
+		<UitstaandeObligo xsi:nil="true" />
+		<IncassoRekening xsi:nil="true" />
+		<CounterpartyStatus>Customer</CounterpartyStatus>
+		<LaatsteWijzigingsdatum>2017-04-03</LaatsteWijzigingsdatum>
+		<Naam>B Kouwen</Naam>
+		<DossierstukKlantIndex>4</DossierstukKlantIndex>
+		<Rol>Borrower</Rol>
+		<Achternaam>Kouwen</Achternaam>
+		<AlimentatieExpartnerDuur xsi:nil="true" />
+		<AlimentatieKinderenDuur xsi:nil="true" />
+		<BedragAlimentatieExPartner xsi:nil="true" />
+		<BedragAlimentatieKinderen xsi:nil="true" />
+		<BedragHuidigeWoonlastenHuur xsi:nil="true" />
+		<BedragMaandlastenBelastingen xsi:nil="true" />
+		<BedragMaandlastenEigenWoning xsi:nil="true" />
+		<BedragMaandlastenLening xsi:nil="true" />
+		<BedragMaandlastenLeningConsumptief xsi:nil="true" />
+		<BedragMaandlastenLevensonderhoud xsi:nil="true" />
+		<BedragMaandlastenOperationeel xsi:nil="true" />
+		<BedragMaandlastenOverigeSchulden xsi:nil="true" />
+		<BedragMaandlastenVermogensRendementsheffing xsi:nil="true" />
+		<BedragTotaalBrutoJaarinkomen>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</BedragTotaalBrutoJaarinkomen>
+		<BedragUitstaandeObligo xsi:nil="true" />
+		<BelastingPlichtigInBuitenland>false</BelastingPlichtigInBuitenland>
+		<Burgerlijkestaat xsi:nil="true" />
+		<DatumGescheidenSinds xsi:nil="true" />
+		<DatumInNederlandSinds xsi:nil="true" />
+		<DatumTijdOverlijden xsi:nil="true" />
+		<Familienaam xsi:nil="true" />
+		<FamilienaamTussenvoegsel xsi:nil="true" />
+		<Geboortedatum>1982-04-28</Geboortedatum>
+		<Geboorteplaats xsi:nil="true" />
+		<Gescheiden>false</Gescheiden>
+		<Geslacht>Female</Geslacht>
+		<Legitimatie xsi:nil="true" />
+		<Legitimatienummer xsi:nil="true" />
+		<LegitimatieVervalDatum xsi:nil="true" />
+		<Nationaliteit>NETHERLANDS</Nationaliteit>
+		<Opleidingsniveau xsi:nil="true" />
+		<OverigeVerplichtingen xsi:nil="true" />
+		<Personeel>false</Personeel>
+		<PersoneelsNummer xsi:nil="true" />
+		<BSN xsi:nil="true" />
+		<SoortOntbonden xsi:nil="true" />
+		<Titel xsi:nil="true" />
+		<Tussenvoegsel />
+		<VerblijfsVergunning xsi:nil="true" />
+		<VolledigeNaam>B Kouwen</VolledigeNaam>
+		<VolledigeNaamAanhef>Ms. B Kouwen</VolledigeNaamAanhef>
+		<VolledigeNaamTitel>B Kouwen</VolledigeNaamTitel>
+		<Voorletters>B</Voorletters>
+		<Werkvergunning xsi:nil="true" />
+		<WoonSituatie xsi:nil="true" />
+		<VolledigeNaamInclAanhef>Ms. B Kouwen</VolledigeNaamInclAanhef>
+		<Clientnr xsi:nil="true" />
+		<Voornaam xsi:nil="true" />
+		<ExplainBeschikbaarVermogen xsi:nil="true" />
+		<ExplainHuidigeWoonlasten xsi:nil="true" />
+		<ExplainVrijBesteedbaarNibud xsi:nil="true" />
+		<Geboorteland xsi:nil="true" />
+		<KindAantalVijfJaar />
+		<KinderenAantal />
+		<MotivatieAfwijkendOnderpandAdres xsi:nil="true" />
+		<OoitGeregistreerdPartnerschapOntbonden>false</OoitGeregistreerdPartnerschapOntbonden>
+		<OoitGescheidenGeweest>false</OoitGescheidenGeweest>
+		<ToestemmingVoorBKRToetsing>false</ToestemmingVoorBKRToetsing>
+		<VerblijfsVergunningEinddatum xsi:nil="true" />
+	</Contractant>
+	<JuridischeStructuur>
+		<JuridischePartij Volgnummer="1">
+			<JuridischePartijNummer>40</JuridischePartijNummer>
+			<Naam>IBmulti</Naam>
+			<Rechtsvorm>Maatschap</Rechtsvorm>
+			<Geboortedatum xsi:nil="true" />
+			<Geboorteplaats xsi:nil="true" />
+			<HierarchischNiveau xsi:nil="true" />
+			<ExternRelatieNummer>12345678</ExternRelatieNummer>
+		</JuridischePartij>
+		<JuridischePartij Volgnummer="2">
+			<JuridischePartijNummer>41</JuridischePartijNummer>
+			<Naam>T TweedeTekenbevoegde</Naam>
+			<Rechtsvorm xsi:nil="true" />
+			<Geboortedatum>1980-02-11</Geboortedatum>
+			<Geboorteplaats xsi:nil="true" />
+			<HierarchischNiveau xsi:nil="true" />
+			<ExternRelatieNummer>bdc8bcc2-fa3a-41d0-9f2a-0b230a075cc1</ExternRelatieNummer>
+		</JuridischePartij>
+		<JuridischePartij Volgnummer="3">
+			<JuridischePartijNummer>42</JuridischePartijNummer>
+			<Naam>P van Partner</Naam>
+			<Rechtsvorm xsi:nil="true" />
+			<Geboortedatum>1900-02-01</Geboortedatum>
+			<Geboorteplaats xsi:nil="true" />
+			<HierarchischNiveau xsi:nil="true" />
+			<ExternRelatieNummer>963a61b9-554e-4b0c-a2ed-8b2cab494266</ExternRelatieNummer>
+		</JuridischePartij>
+		<JuridischePartij Volgnummer="4">
+			<JuridischePartijNummer>43</JuridischePartijNummer>
+			<Naam>B Kouwen</Naam>
+			<Rechtsvorm xsi:nil="true" />
+			<Geboortedatum>1982-04-28</Geboortedatum>
+			<Geboorteplaats xsi:nil="true" />
+			<HierarchischNiveau xsi:nil="true" />
+			<ExternRelatieNummer>d833fad2-7409-41d6-a4bc-ae58973ab8b8</ExternRelatieNummer>
+		</JuridischePartij>
+		<Relatie Volgnummer="1">
+			<Naam>HasAsPartner</Naam>
+			<VanPartijNummer>40</VanPartijNummer>
+			<NaarPartijNummer>41</NaarPartijNummer>
+		</Relatie>
+		<Relatie Volgnummer="2">
+			<Naam>HasAsPartner</Naam>
+			<VanPartijNummer>40</VanPartijNummer>
+			<NaarPartijNummer>43</NaarPartijNummer>
+		</Relatie>
+		<Relatie Volgnummer="3">
+			<Naam>HasPersonalRelationWith</Naam>
+			<VanPartijNummer>42</VanPartijNummer>
+			<NaarPartijNummer>43</NaarPartijNummer>
+		</Relatie>
+	</JuridischeStructuur>
+	<Procesnummer>11</Procesnummer>
+	<DossierstukBeoordeling xsi:nil="true" />
+	<EersteWerkdagKomendeMaandDatum>2017-05-01</EersteWerkdagKomendeMaandDatum>
+	<EersteWerkdagNaKomendeMaandDatum>2017-06-01</EersteWerkdagNaKomendeMaandDatum>
+	<EffectueringsDatum>2017-04-03</EffectueringsDatum>
+	<OffrerenGroep xsi:nil="true" />
+	<ProcesStartDatum>2017-04-03</ProcesStartDatum>
+	<SysteemDatum>2017-04-06</SysteemDatum>
+	<WijzigingGeldnemerGegevensGroep xsi:nil="true" />
+	<WorkflowProcesNaam>RegioBank Origination</WorkflowProcesNaam>
+	<FinaalAkkoordDatum xsi:nil="true" />
+	<ZakelijkeOvereenkomst Volgnummer="1">
+		<Looptijd />
+		<IngangsDatum>2017-04-03</IngangsDatum>
+		<EindDatum xsi:nil="true" />
+		<OvereenkomstNummer>SNS1_20171603_11</OvereenkomstNummer>
+		<MutatieType>Unchanged</MutatieType>
+		<RevisieDatum xsi:nil="true" />
+		<TotaalBedragActieveVoorzieningen>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</TotaalBedragActieveVoorzieningen>
+		<Faciliteit Volgnummer="1">
+			<Looptijd>60</Looptijd>
+			<IngangsDatum>2017-04-03</IngangsDatum>
+			<EindDatum>2022-04-03</EindDatum>
+			<FaciliteitNummer>SNS1_20171603_11_01</FaciliteitNummer>
+			<Limiet>
+				<Waarde>
+					<Currency>EUR</Currency>
+					<Amount>30000.00000</Amount>
+				</Waarde>
+				<Type>Contractuele limiet</Type>
+				<LimietBlokkering xsi:nil="true" />
+				<VerwachtGebruikLimiet xsi:nil="true" />
+			</Limiet>
+			<UnauthorisedOverdraft xsi:nil="true" />
+			<ProductlijnNaam>RegioBank RC krediet</ProductlijnNaam>
+			<Product Volgnummer="1">
+				<Looptijd>60</Looptijd>
+				<IngangsDatum>2017-04-03</IngangsDatum>
+				<EindDatum>2022-04-03</EindDatum>
+				<Productnummer>SNS1_20171603_11_01_01</Productnummer>
+				<Naam>RegioBank RC krediet</Naam>
+				<MutatieType>Unchanged</MutatieType>
+				<RevisieDatum xsi:nil="true" />
+				<AflossingsVorm>Bullet</AflossingsVorm>
+				<AflossingsPeriodiciteit xsi:nil="true" />
+				<Opname>
+					<OpnameVorm>Revolving</OpnameVorm>
+					<OpnamePeriodiciteit xsi:nil="true" />
+					<UitersteOpnameDatum xsi:nil="true" />
+					<OpnameDatum xsi:nil="true" />
+					<DirectUitbetalen>false</DirectUitbetalen>
+					<DataZijnIndicatief>false</DataZijnIndicatief>
+				</Opname>
+				<RenteProduct>SNS basisrente</RenteProduct>
+				<RenteType>SNS basisrente</RenteType>
+				<RentePeriodiciteit>Monthly</RentePeriodiciteit>
+				<RenteBerekenMethodiek>ActualActual</RenteBerekenMethodiek>
+				<DateRollingConvention>Actual</DateRollingConvention>
+				<EersteAflossingNa />
+				<Kenmerk Volgnummer="1">
+					<KenmerkCategorie>Financial</KenmerkCategorie>
+					<KenmerkNaam>ChangeFacilityStartDate</KenmerkNaam>
+					<KenmerkNiveau>Systeem</KenmerkNiveau>
+					<KenmerkWaarde>NoChange</KenmerkWaarde>
+				</Kenmerk>
+				<Kenmerk Volgnummer="2">
+					<KenmerkCategorie>Financial</KenmerkCategorie>
+					<KenmerkNaam>CompensatingBalanceLimitDefaultPercentage</KenmerkNaam>
+					<KenmerkNiveau>Systeem</KenmerkNiveau>
+					<KenmerkWaarde>150.000</KenmerkWaarde>
+				</Kenmerk>
+				<Kenmerk Volgnummer="3">
+					<KenmerkCategorie>Financial</KenmerkCategorie>
+					<KenmerkNaam>CompensatingBalanceLimitMaximumPercentage</KenmerkNaam>
+					<KenmerkNiveau>Systeem</KenmerkNiveau>
+					<KenmerkWaarde>999.000</KenmerkWaarde>
+				</Kenmerk>
+				<Kenmerk Volgnummer="4">
+					<KenmerkCategorie>Financial</KenmerkCategorie>
+					<KenmerkNaam>CompensatingBalanceLimitMinimumPercentage</KenmerkNaam>
+					<KenmerkNiveau>Systeem</KenmerkNiveau>
+					<KenmerkWaarde>100.000</KenmerkWaarde>
+				</Kenmerk>
+				<Kenmerk Volgnummer="5">
+					<KenmerkCategorie>Applicant</KenmerkCategorie>
+					<KenmerkNaam>CounterpartyStatus</KenmerkNaam>
+					<KenmerkNiveau>Systeem</KenmerkNiveau>
+					<KenmerkWaarde>Customer</KenmerkWaarde>
+				</Kenmerk>
+				<OndergrensRente xsi:nil="true" />
+				<BovengrensRente xsi:nil="true" />
+				<RenteHerzieningsDatum xsi:nil="true" />
+				<NominaleRente>0</NominaleRente>
+				<BasisRente xsi:nil="true" />
+				<OndergrensBasisRente xsi:nil="true" />
+			</Product>
+			<MutatieType>Unchanged</MutatieType>
+			<RevisieDatum xsi:nil="true" />
+			<Kredietnemer xsi:type="ZakelijkeContractantType" Volgnummer="1">
+				<Adres Volgnummer="1">
+					<Gemeente>Default import</Gemeente>
+					<Huisnummer>25</Huisnummer>
+					<Plaatsnaam>Deventer</Plaatsnaam>
+					<Postbus xsi:nil="true" />
+					<Postcode>1234 AB</Postcode>
+					<Straatnaam>Singel</Straatnaam>
+					<Toevoeging />
+					<Land>NETHERLANDS</Land>
+					<Verdieping xsi:nil="true" />
+					<Graafschap xsi:nil="true" />
+					<Wijk xsi:nil="true" />
+					<StraatType xsi:nil="true" />
+					<Huisnaam xsi:nil="true" />
+					<Appartementencomplex xsi:nil="true" />
+					<LandAnders xsi:nil="true" />
+					<GegevensBuitenland xsi:nil="true" />
+				</Adres>
+				<GeformatteerdPostAdres />
+				<AfwijkendKlantProfiel>false</AfwijkendKlantProfiel>
+				<Email xsi:nil="true" />
+				<ExternRelatieNummer>12345678</ExternRelatieNummer>
+				<Faillissement>false</Faillissement>
+				<Faxnummer xsi:nil="true" />
+				<KlantIndex>0</KlantIndex>
+				<MobieleTelefoon xsi:nil="true" />
+				<NietVrijwilligeSchuldsanering>false</NietVrijwilligeSchuldsanering>
+				<Telefoon xsi:nil="true" />
+				<TelefoonAlternatief xsi:nil="true" />
+				<Rating>0</Rating>
+				<UitstaandeObligo xsi:nil="true" />
+				<IncassoRekening xsi:nil="true" />
+				<CounterpartyStatus>Customer</CounterpartyStatus>
+				<LaatsteWijzigingsdatum>2017-04-03</LaatsteWijzigingsdatum>
+				<Naam>IBmulti</Naam>
+				<DossierstukKlantIndex>1</DossierstukKlantIndex>
+				<Rol>Borrower</Rol>
+				<Rol>Main borrower</Rol>
+				<Bedrijfsnaam>IBmulti</Bedrijfsnaam>
+				<Handelsnaam xsi:nil="true" />
+				<AantalMedewerkers>25</AantalMedewerkers>
+				<KvKNummer>12345678</KvKNummer>
+				<BuitenlandseActiviteiten>false</BuitenlandseActiviteiten>
+				<NaceSectorCode>0146</NaceSectorCode>
+				<NaceSectorOmschrijving>Raising of swine/pigs</NaceSectorOmschrijving>
+				<SpecifiekeSectorOmschrijving>Raising of swine/pigs</SpecifiekeSectorOmschrijving>
+				<SpecifiekeSectorCode>0146</SpecifiekeSectorCode>
+				<SerCode xsi:nil="true" />
+				<OprichtingsDatum>2015-01-01</OprichtingsDatum>
+				<RechtsVorm>Maatschap</RechtsVorm>
+			</Kredietnemer>
+			<BetreftSyndicaat>false</BetreftSyndicaat>
+			<Agent xsi:nil="true" />
+			<Currency>EUR</Currency>
+			<EAD xsi:nil="true" />
+			<LGDBerekendNormaal xsi:nil="true" />
+			<LGDBerekendMoc xsi:nil="true" />
+			<LGDBerekendDownturnMoc xsi:nil="true" />
+			<LGDKlasseVoorgesteld xsi:nil="true" />
+			<LGDKlasseGefiatteerd xsi:nil="true" />
+			<IsRevolverend>false</IsRevolverend>
+		</Faciliteit>
+	</ZakelijkeOvereenkomst>
+	<PasserenGroep>
+		<TotaleFinanciering>
+			<Currency>EUR</Currency>
+			<Amount>30000.00</Amount>
+		</TotaleFinanciering>
+		<GeselecteerdeFaciliteiten>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</GeselecteerdeFaciliteiten>
+		<GevraagdDoorNotaris xsi:nil="true" />
+		<Gepasseerd>false</Gepasseerd>
+		<IngangsdatumNieuw xsi:nil="true" />
+		<IngangstijdNieuw xsi:nil="true" />
+		<IngangsdatumHuidig>2017-04-03</IngangsdatumHuidig>
+		<IngangstijdHuidig>0:00:00</IngangstijdHuidig>
+		<Motivatie xsi:nil="true" />
+		<NettoVerstrekkingGewijzigd>false</NettoVerstrekkingGewijzigd>
+		<Notaris xsi:nil="true" />
+		<NotarisRekening xsi:nil="true" />
+		<NotarisType xsi:nil="true" />
+		<BedragUitbetalenOpNotarisrekening>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</BedragUitbetalenOpNotarisrekening>
+		<UitbetalenOpNotarisrekening xsi:nil="true" />
+		<BedragUitbetalenAanKlant xsi:nil="true" />
+		<EigenMiddelenKlant xsi:nil="true" />
+		<GeldverkeerViaNotaris>
+			<Currency>EUR</Currency>
+			<Amount>0</Amount>
+		</GeldverkeerViaNotaris>
+		<PasseerDatum>2017-04-03</PasseerDatum>
+		<PasseerDatumOud xsi:nil="true" />
+		<StatusPasseren xsi:nil="true" />
+		<Taxateur xsi:nil="true" />
+		<VerstrektDoor xsi:nil="true" />
+	</PasserenGroep>
+	<OvereenkomstPerfect>true</OvereenkomstPerfect>
+</FBLTotaalType>

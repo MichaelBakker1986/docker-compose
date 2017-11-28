@@ -1,0 +1,10 @@
+<Layouts>
+  <Layout Name="Standaard">
+    <Title>Standaard</Title>
+    <Tabs>
+      <Tab>
+        <Variable>Root</Variable>
+      </Tab>
+    </Tabs>
+  </Layout>
+</Layouts>

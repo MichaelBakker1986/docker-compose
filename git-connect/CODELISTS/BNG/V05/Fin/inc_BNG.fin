@@ -1,0 +1,2041 @@
+{&&Language=English}
+
+;; ValCheck
+;; Kengetallen controleren
+
+.Variable                      HiddenVars, Visible=AdminMode[1]
+
+.Variables
+PIII  0 1N     2               $>Administrator mode<$                           \AdminMode
+XX       X     2               DocumentStatusVariables                          \DocumentStatusVariables  ;; Level 2, under node HiddenVars
+PI      1N D   3  +            "Definitief gemaakt op:"                         \STATUS_FINAL_ON
+PI      1A     3  +            "Definitief gemaakt door:"                       \STATUS_FINAL_BY
+PI      1A     3  +            "Definitief gemaakt door:"                       \STATUS_FINAL_BY_NAME
+PI      1N C   3  +            "STATUS_REQUIRED_FIELDS_COMPLETE"                \STATUS_REQUIRED_FIELDS_COMPLETE
+PI      1A     3  +            "ProjectCode"                                    \ProjectCode
+PI      1A     3  +            "DocumentCode"                                   \DocumentCode
+
+.Choices
+STATUS_REQUIRED_FIELDS_COMPLETE = "0:False|1:True"
+
+.Variables
+PPPP    1A   1 1               $>Company<$                                      \BNGMAP1
+PPPP    1A     2               $>Company<$                                      \BNGMAP1A
+PPPP    1A     3        ?      =CompanyName                                     \=CompanyName -> CompanyName
+PPPP    1A     3               =CompanyPlaceOfResidence                         \=CompanyPlaceOfResidence -> CompanyPlaceOfResidence
+PP      1A     3               =Rechtsvorm                                      \=FPS_VAR_Rechtsvorm_omschr
+PPPP    1A     3        ?      =SectorTitle                                     \=SectorTitle -> SectorTitle
+
+PPPP    1A     2               $>Accounting<$                                   \BNGMAP1B
+
+PIII    BA     3               $>Name auditor<$                                 \AnnualReportNameAuditor
+PIII    BN C   3  +            $>Audit certificate<$                            \AnnualReportAuditCertificate
+PIII    BN C   3  +            $>Kind of annual report<$                        \AnnualReportType
+PIII    BN C   3  +            $>Status annual report<$                         \AnnualReportStatus
+PIII    BN C   3  +            $>Accounting principles<$                        \AnnualReportAccountingPrinciples
+
+PPPP    1A     2               $>Bancaire gegevens<$                           \BNGMAP1C
+PPPP    1A     3               $>Relatienummer<$                		      	   \BBrelatienummerBank=FPS_VAR_GridId
+PIII    1A     3               $>Accountmanager<$                              \BBRelatieBeheerder
+PIII    1N C   3               $>Accountgroep<$                                \BBAccountGroep
+PIII    1N C   3               $>Relatiesoort<$                                \BBRelatieSoort
+PIII    1N C   3               $>Sector<$                                      \BBRisicoModel
+PPPP    1A     3               $>Samenhangende relatienummers<$                \BBInternSamenhRelaties
+IIII    1A     4               $>Samenhangende relatie<$ 1                     \BBInternSamenhRelaties1
+IIII    1A     4               $>Samenhangende relatie<$ 2                     \BBInternSamenhRelaties2
+IIII    1A     4               $>Samenhangende relatie<$ 3                     \BBInternSamenhRelaties3
+IIII    1A     4               $>Samenhangende relatie<$ 4                     \BBInternSamenhRelaties4
+IIII    1A     4               $>Samenhangende relatie<$ 5                     \BBInternSamenhRelaties5
+IIII    1A     4               $>Samenhangende relatie<$ 6                     \BBInternSamenhRelaties6
+IIII    1A     4               $>Samenhangende relatie<$ 7                     \BBInternSamenhRelaties7
+IIII    1A     4               $>Samenhangende relatie<$ 8                     \BBInternSamenhRelaties8
+IIII    1A     4               $>Samenhangende relatie<$ 9                     \BBInternSamenhRelaties9
+IIII    1A     4               $>Samenhangende relatie<$ 10                    \BBInternSamenhRelaties10
+IIII    1A     4               $>Samenhangende relatie<$ 11                    \BBInternSamenhRelaties11
+IIII    1A     4               $>Samenhangende relatie<$ 12                    \BBInternSamenhRelaties12
+IIII    1A     4               $>Samenhangende relatie<$ 13                    \BBInternSamenhRelaties13
+IIII    1A     4               $>Samenhangende relatie<$ 14                    \BBInternSamenhRelaties14
+IIII    1A     4               $>Samenhangende relatie<$ 15                    \BBInternSamenhRelaties15
+IIII    1A     4               $>Samenhangende relatie<$ 16                    \BBInternSamenhRelaties16
+IIII    1A     4               $>Samenhangende relatie<$ 17                    \BBInternSamenhRelaties17
+IIII    1A     4               $>Samenhangende relatie<$ 18                    \BBInternSamenhRelaties18
+IIII    1A     4               $>Samenhangende relatie<$ 19                    \BBInternSamenhRelaties19
+IIII    1A     4               $>Samenhangende relatie<$ 20                    \BBInternSamenhRelaties20
+
+.Choices
+BBRisicoModel                 = &TableAsChoices("bng_RisicoModel.FIB")
+BBAccountGroep                = &TableAsChoices("bng_AccountGroep.FIB")
+BBRelatieSoort                = &TableAsChoices("bng_RelatieSoort.FIB")
+AnnualReportType              = &TableAsChoices("AnnualReportType")
+AnnualReportStatus            = &TableAsChoices("AnnualReportStatus")
+AnnualReportAccountingPrinciples= &TableAsChoices("BNG_AnnualReportAccountingPrinciples")
+AnnualReportAuditCertificate  = &TableAsChoices("AnnualReportAuditCertificate")
+
+.Formulas NoTrend
+BBRisicoModel           = 10
+BBRelatieSoort          = 1
+BBAccountGroep          = 101
+BBAanvraagOpsteller     = &BBRelatieBeheerder
+
+AnnualReportAuditCertificate     = 0
+AnnualReportType                 = 10
+AnnualReportStatus               = 10
+AnnualReportAccountingPrinciples = 10
+
+
+
+.Formulas NoTrend
+CompanyName                       = &FPS_VAR_Naam[1]
+CompanyPlaceOfResidence           = &FPS_VAR_Woonplaats[1]
+SectorTitle                       = &FPS_VAR_BIK_Omschr
+
+.Templates
+BBrelatienummerBank     = "0000000"
+
+.Variables
+PPPP    1A     1               $>Aanvraag gegevens<$                            \BNGMAP2
+PPPP    1A     2               $>Aanvraag gegevens<$                            \BNGMAP2A
+PIII    1A   1 3      <        $>Docsnr KV/RV<$                                 \BBAanvraagNummer
+PIII    1N D   3      <        $>Aanvraagdatum<$                                \BBAanvraagDatum
+PIII    1A     3               $>Opgesteld door<$                               \BBAanvraagOpsteller
+PIII    1N C   3               $>Soort voorstel<$                               \BBAanvraagSoort
+PIII    1N C   3               $>Startend bedrijf?<$                            \BBStarter
+PIII    1M   1 3               $>Toelichting<$                                  \BBAanvraagMemo
+
+PP      1N     2               $>Status<$                                       \BBAanvraagStatus
+PP      1A     3               =STATUS_FINAL_BY                                 \=STATUS_FINAL_BY
+PP      1A     3               =STATUS_FINAL_BY_NAME                            \=STATUS_FINAL_BY_NAME
+PP      1N D   3               =STATUS_FINAL_ON                                 \=STATUS_FINAL_ON
+
+PP      1N     2               "Controles"                                      \BBAanvraagStatusControles
+PP      1N C   3               "Balans in evenwicht"                            \BBAanvraagStatusControle1
+C In het laatste historische jaar
+PP      1N C   3               &BBAanvraagNummer[0]&" is ingevuld"              \BBAanvraagStatusControle2
+PP      1N C   3               &BBRelatieSoort[0]&" is ingevuld"                \BBAanvraagStatusControle3
+PP      1N C   3               &BBrelatieBeheerder[0]&" is ingevuld"            \BBAanvraagStatusControle5
+PP      1N C   3               &SectorTitle[0]&" is ingevuld"                   \BBAanvraagStatusControle6
+PP      1A    -3                                                                \BBAanvraagStatusControleShow
+C Wanneer alle controles akkoord zijn, kan het document definitief gemaakt worden
+XX      1X     3                                                                \
+PP      1N     4               Aantal controles 'Niet akkoord':                 \BBAanvraagStatusControle
+
+.Variables BBAanvraagStatusControle, Visible=0
+
+
+.Formulas      Notrend
+BBStarter = 0
+BBAanvraagSoort = 50
+BBAanvraagStatusControle1 = If(ValCheck[LastTinFormulaSet(Notrend,MainPeriod)]=NA,0,1)         ; 0 is Akkoord, 1 is Niet Akkoord
+BBAanvraagStatusControle2 = If(DataAvailable(BBAanvraagNummer,1),0,1)                          ; 0 is Akkoord, 1 is Niet Akkoord
+BBAanvraagStatusControle3 = If(DataAvailable(BBRelatieSoort,1),0,1)                            ; 0 is Akkoord, 1 is Niet Akkoord
+BBAanvraagStatusControle5 = If(DataAvailable(BBrelatieBeheerder,1),0,1)                        ; 0 is Akkoord, 1 is Niet Akkoord
+BBAanvraagStatusControle6 = If(DataAvailable(SectorTitle,1),0,1)                               ; 0 is Akkoord, 1 is Niet Akkoord
+STATUS_REQUIRED_FIELDS_COMPLETE = If(BBAanvraagStatusControle<=0,1,0)                          ; Als er alle controles goed zijn, mag document definitief gemaakt worden
+
+BBAanvraagStatusControleShow  = &If(BBAanvraagStatusControle<=0,"Ok","Dossier kan niet definitief gemaakt worden.")
+BBAanvraagStatusControle  = VSUM(BBAanvraagStatusControle1,BBAanvraagStatusControle6)
+
+.Choices
+BBAanvraagSoort = &TableAsChoices("bng_AanvraagSoort")
+BBAanvraagSoort = &TableAsChoices("bng_AanvraagSoort.FIB")
+BBStarter = "0:Nee|1:Ja"
+BBAanvraagStatusControle1 = "0:Ok|1: Niet akkoord"
+BBAanvraagStatusControle2 = BBAanvraagStatusControle1
+BBAanvraagStatusControle3 = BBAanvraagStatusControle1
+BBAanvraagStatusControle5 = BBAanvraagStatusControle1
+BBAanvraagStatusControle6 = BBAanvraagStatusControle1
+
+.Variables
+;============================================================================================================================================
+; Balans
+;
+
+PPPP    BN   1 1               "Balans"                                                                                \BNG_Balans                              ;;=BalAkt
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Immateriële vaste activa
+;
+
+PPPP    BN     2  +            "Immateriële vaste activa"                                                              \BNG_ImmatAkt
+
+PIPI    BN     3               "Goodwill"                                                                              \BNG_ImmatAkt1                           ;;=Akt1
+PIPI    BN     3               " "                                                                                     \BNG_ImmatAkt2                           ;;=AktF
+PPPP   =BN    -3               =BNG_ImmatAkt                                                                           \=BNG_ImmatAkt
+
+.Formulas Visible
+BNG_ImmatAkt1=                 (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans ActivaVHV
+; materiële vaste activa, sociaal vastgoed
+;
+
+PPPP    BN     2  +            "Materiële vaste activa, sociaal vastgoed"                                              \BNG_VHV_MatAkt_I
+
+PIPI    BN     3               =BNG_MatAkt1                                                                            \BNG_VHV_MatAkt1=BNG_MatAkt1       ;;=Akt2
+PIPI    BN     3               " "                                                                                     \BNG_VHV_MatAkt2                   ;;=Akt3
+PIPI    BN     3               =BNG_MatAkt3                                                                            \BNG_VHV_MatAkt3=BNG_MatAkt3       ;;=Akt6
+PPPP   =BN    -3               =BNG_VHV_MatAkt_I                                                                       \=BNG_VHV_MatAkt_I
+
+.Formulas Visible
+BNG_VHV_MatAkt_I=              (BBRisicoModel[1] =20)
+
+;.Formulas Notrend, Trend
+;BNG_VHV_MatAkt_I = If((BBRisicoModel[1] =20),VSum(BNG_VHV_MatAkt1,BNG_VHV_MatAkt3), NA)                                                                   ; Alleen als het VHV is deze optelling uitvoeren.
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans ActivaVHV
+; materiële vaste activa, vastgoedbeleggingen
+;
+
+PPPP    BN     2  +            "Materiële vaste activa, vastgoedbeleggingen"                                           \BNG_VHV_MatAkt_II
+
+PIPI    BN     3               " "                                                                                  \BNG_VHV_MatAkt21                   ;;=Akt21
+PIPI    BN     3               " "                                                                                  \BNG_VHV_MatAkt22                   ;;=Akt22
+PIPI    BN     3               =BNG_MatAkt4                                                                         \BNG_VHV_MatAkt4=BNG_MatAkt4        ;;=Akt20
+PIPI    BN     3               " "                                                                                  \BNG_VHV_MatAkt23                   ;;=Akt23
+PIPI    BN     3               =BNG_MatAkt5                                                                         \=BNG_MatAkt5          ;;=Akt7
+PIPI    BN     3               =BNG_MatAkt6                                                                         \=BNG_MatAkt6          ;;=Akt50
+PIPI    BN     3               =BNG_MatAkt7                                                                         \=BNG_MatAkt7          ;;=Akt51
+PIPI    BN     3               =BNG_MatAkt8                                                                         \=BNG_MatAkt8          ;;=AktC
+PIPI    BN     3               =BNG_MatAkt9                                                                         \=BNG_MatAkt9          ;;=AktM
+PPPP   =BN    -3               =BNG_VHV_MatAkt_II                                                                   \=BNG_VHV_MatAkt_II
+
+.Formulas Visible
+BNG_VHV_MatAkt_II=             (BBRisicoModel[1] =20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans Activa Standaard
+; materiële vaste activa
+;
+
+PPPP    BN     2  +            "Materiële vaste activa"                                                                \BNG_MatAktStandaard
+
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt1          ;;=Akt2
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt3          ;;=Akt6
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt4          ;;=Akt20
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt5          ;;=Akt7
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt6          ;;=Akt50
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt7          ;;=Akt51
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt8          ;;=AktC
+PIPI    BN     3               " "                                                                                     \BNG_MatAkt9          ;;=AktM
+PIPI    BN     3               =BNG_VHV_MatAkt2                                                                        \=BNG_VHV_MatAkt2                   ;;=Akt3
+PIPI    BN     3               =BNG_VHV_MatAkt21                                                                       \=BNG_VHV_MatAkt21                   ;;=Akt21
+PIPI    BN     3               =BNG_VHV_MatAkt22                                                                       \=BNG_VHV_MatAkt22                   ;;=Akt22
+PIPI    BN     3               =BNG_VHV_MatAkt23                                                                       \=BNG_VHV_MatAkt23                   ;;=Akt23
+PPPP   =BN    -3               =BNG_MatAktStandaard                                                                    \=BNG_MatAktStandaard
+
+.Formulas Visible
+BNG_MatAktStandaard=           (BBRisicoModel[1]<>20)
+BNG_MatAkt4=                   (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_MatAkt5=                   (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_MatAkt6=                   (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_MatAkt7=                   (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_MatAkt8=                   (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20) or (BBRisicoModel[1]=30) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40)
+
+BNG_VHV_MatAkt2=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHV_MatAkt21=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHV_MatAkt22=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHV_MatAkt23=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Financiële vaste activa
+;
+
+PPPP    BN     2  +            "Financiële vaste activa"                                                               \BNG_FinVastAkt
+
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt2      ;;=LeningUG
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt12     ;;=Akt12
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt13     ;;=Akt13
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt14     ;;=Akt14
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt3      ;;=DeelnMinderheid
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt4      ;;=WaarborgSom
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt5      ;;=FinAktGM
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt1      ;;=Deeln
+PIII    BN     3               " "                                                                        \BNG_FinVastAkt6      ;;=OvFinVA
+PPPP   =BN    -3               =BNG_FinVastAkt                                                            \=BNG_FinVastAkt
+
+.Formulas Visible
+BNG_FinVastAkt12=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_FinVastAkt13=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_FinVastAkt14=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_FinVastAkt4=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans Vaste activa
+;
+
+PPPP    BN    -2  +            "Vaste activa"                                                                          \BNG_VastAkt
+
+.Formulas NoTrend
+BNG_VastAkt   = BNG_FinVastAkt+BNG_MatAktStandaard+BNG_ImmatAkt
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans Voorraden standaad
+; Voorraden
+;
+
+PPPP    BN   1 2  +            "Voorraden"                                                                        \BNG_Voorraden
+
+PIPI    BN     3               " "                                                                                \BNG_Voorraden1      ;;=HandVrd
+PIII    BN     3               " "                                                                                \BNG_Voorraden2      ;;=OndWerk
+PIII    BN     3               "Overige voorraden"                                                                \BNG_Voorraden4      ;;=OvVrd
+PIII    BN     3               " "                                                                                \BNG_Voorraden5      ;;=DivVrd
+PPPP   =BN    -3               =BNG_Voorraden                                                                     \=BNG_Voorraden
+
+.Formulas Visible
+BNG_Voorraden2=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_Voorraden4=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20) or (BBRisicoModel[1]=30)
+BNG_Voorraden5=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans voorraden
+;
+
+PIII    BN     2  +            "Onderhanden projecten"                                                           \BNG_OnderhandenProjecten  ;;=OndWerk
+
+.Formulas Visible
+BNG_OnderhandenProjecten=      (FirstValueT(Self,1,MaxT)>0) or  (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans vorderingen standaard
+; Vorderingen
+;
+
+PPPP    BN     2  +            "Vorderingen"                                                                 \BNG_Vorderingen
+
+PIII    BN     3               " "                                                                           \BNG_Vorderingen1         ;;=HandDeb
+PIII    BN     3               " "                                                                           \BNG_Vorderingen2         ;;=KortGMVord
+PIII    BN     3               " "                                                                           \BNG_Vorderingen7         ;;=KortPartVord
+PIII    BN     3               " "                                                                           \BNG_Vorderingen8         ;;=TeOntvWIR
+PIII    BN     3               " "                                                                           \BNG_Vorderingen3         ;;=OvVord
+PIII    BN     3               " "                                                                           \BNG_Vorderingen4         ;;=OvVord2
+PIII    BN     3               " "                                                                           \BNG_Vorderingen5         ;;=OvVord3
+PIII    BN     3               " "                                                                           \BNG_Vorderingen6         ;;=OvVord4
+PIII    BN     3               " "                                                                           \BNG_Vorderingen9         ;;=OvOverlAkt
+PPPP   =BN    -3               =BNG_Vorderingen                                                              \=BNG_Vorderingen
+
+.Formulas Visible
+BNG_Vorderingen=               (BBRisicoModel[1]<>20)
+BNG_Vorderingen7=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Vorderingen8=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Vorderingen9=              ((BBRisicoModel[1]=20) And (FirstValueT(Self,1,MaxT)>0))
+BNG_Vorderingen4=              (FirstValueT(Self,1,MaxT)>0) Or (BBRisicoModel[1]=20)
+BNG_Vorderingen5=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Vorderingen6=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans vorderingen VHV
+; Vorderingen
+;
+.Variables
+PPPP    BN     2               "Vorderingen"                                                                 \BNG_VHV_Vorderingen=BNG_Vorderingen
+
+PIII    BN     3               =BNG_Vorderingen1                                                             \=BNG_Vorderingen1         ;;=HandDeb
+PIII    BN     3               =BNG_Vorderingen5                                                             \=BNG_Vorderingen5     ;;=OvVord3
+PIII    BN     3               =BNG_Vorderingen2                                                             \=BNG_Vorderingen2         ;;=KortGMVord
+PIII    BN     3               =BNG_Vorderingen6                                                             \=BNG_Vorderingen6     ;;=OvVord4
+PIII    BN     3               =BNG_Vorderingen7                                                             \=BNG_Vorderingen7         ;;=KortPartVord
+PIII    BN     3               =BNG_Vorderingen8                                                             \=BNG_Vorderingen8         ;;=TeOntvWIR
+PIII    BN     3               =BNG_Vorderingen9                                                             \=BNG_Vorderingen9         ;;=OvOverlAkt
+PIII    BN     3               =BNG_Vorderingen3                                                             \=BNG_Vorderingen3         ;;=OvVord
+PIII    BN     3               =BNG_Vorderingen4                                                             \=BNG_Vorderingen4         ;;=OvVord2
+PPPP    BN    -3               =BNG_Vorderingen                                                              \BNG_VHV_VorderingenSom=BNG_Vorderingen
+
+.Formulas Visible
+BNG_VHV_Vorderingen=           (BBRisicoModel[1]=20)
+BNG_VHV_VorderingenSom=        (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+;
+
+PIII    BN     2               "Overige overlopende activa"                                                              \BNG_OvOverlAkt  ;;=OvOverlAkt
+PIII    BN     2               "Effecten"                                                                                \BNG_LiqEffecten ;;=LiqEffecten
+PIPI    BN     2  +            "Liquide middelen"                                                                        \BNG_LiqMidTotaal
+PIPI    BN  *  3               "Liquide middelen"                                                                        \BNG_LiqMid01    ;;=OvLiqMid
+PPPP    BN     3               "Afrondingsverschillen"                                                                   \BNG_Afrondingsverschillen
+PIPI   =BN    -3               "Totaal liquide middelen"                                                                 \=BNG_LiqMidTotaal
+PPPP    BN    -2  +            "Vlottende activa"                                                                        \BNG_VlotAkt
+PPPP    BN   1=2= +            "Totaal activa"                                                                           \BNG_BalAkt      ;;=BalAkt
+
+.Formulas NoTrend,Trend
+BNG_VlotAkt=                   BNG_Voorraden + BNG_Vorderingen + BNG_OvOverlAkt + BNG_LiqMidTotaal+BNG_LiqEffecten+BNG_OnderhandenProjecten
+BNG_BalAkt=                    BNG_VlotAkt + BNG_VastAkt
+BNG_Afrondingsverschillen=     OnZero(If(Abs(BNG_BalPas-(BNG_VastAkt+BNG_Voorraden+BNG_Vorderingen+BNG_OvOverlAkt+BNG_LiqMid01+BNG_LiqEffecten+BNG_OnderhandenProjecten))>=Max((0.0001*BNG_BalPas),3000),NA,BNG_BalPas-(BNG_VastAkt+BNG_Voorraden+BNG_Vorderingen+BNG_OvOverlAkt+BNG_LiqMid01+BNG_LiqEffecten+BNG_OnderhandenProjecten)),NA)
+
+.Formulas Visible
+BNG_OvOverlAkt=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+BNG_LiqEffecten=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Eigen vermogen
+;
+
+PPPP    BN   1 2  +            " "                                                                                       \BNG_EigenVerm  ;;=EigenVerm
+
+PIII    BN     3               " "                                                                                       \BNG_EigenVerm1  ;;=Kapitaal
+PIII    BN=    3               " "                                                                                       \BNG_EigenVerm2  ;;=AgioReserve
+PIII    BN     3               " "                                                                                       \BNG_EigenVerm3  ;;=OvRes2
+PIII    BN     3               " "                                                                                       \BNG_EigenVerm4  ;;=OvRes
+PIPI    BN     3               " "                                                                                       \BNG_EigenVerm5  ;;=WinstRes
+PIII    BN     3               "Herwaarderingsreserve"                                                                   \BNG_EigenVerm6  ;;=HerwRes
+PIII    BNX    3               "Aandeel van derden"                                                                      \BNG_EigenVerm7  ;;=AandDerd
+PIII    BN     3               " "                                                                                       \BNG_EigenVerm8  ;;=WetRes
+PPPP   =BN    -3               =BNG_EigenVerm                                                                            \=BNG_EigenVerm  ;;EigenVerm
+
+.Formulas Visible
+BNG_EigenVerm1=                (HSum(Self,1,MaxT)>10)  Or (BBRisicoModel[1]<>20)
+BNG_EigenVerm2=                (FirstValueT(Self,1,MaxT)>0)
+BNG_EigenVerm3=                (FirstValueT(Self,1,MaxT)>0)
+BNG_EigenVerm6=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_EigenVerm7=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_EigenVerm8=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+;
+
+PIII    BN     2               " "                                                                               \BNG_ASSVoorz  ;;=AssVoorz
+
+.Formulas Visible
+BNG_ASSVoorz=                  (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Voorzieningen
+;
+
+PPPP    BN     2  +            "Voorzieningen"                                                                  \BNG_Voorz
+
+PIII    BN     3               " "                                                                              \BNG_Voorz1    ;;=PensVoorz
+PIII    BN     3               " "                                                                              \BNG_Voorz2    ;;=OvVoorz2
+PIII    BN     3               " "                                                                              \BNG_Voorz7    ;;=GarVoorz
+PIII    BN     3               " "                                                                              \BNG_Voorz8    ;;=KostVoorz
+PIII    BN     3               " "                                                                              \BNG_Voorz3    ;;=VervVoorz
+PIII    BN     3               " "                                                                              \BNG_Voorz5    ;;=FisVoorz
+PIII    BN     3               " "                                                                              \BNG_Voorz6    ;;=OvVoorz3
+PIII    BN     3               " "                                                                              \BNG_Voorz4    ;;=OvVoorz
+PPPP   =BN    -3               =BNG_Voorz                                                                       \=BNG_Voorz
+
+.Formulas Visible
+BNG_Voorz2=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Voorz7=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Voorz8=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Voorz3=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Voorz5=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_Voorz6=                    (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Langlopende schulden
+;
+
+PPPP    BN     2  +            " "                                                                              \BNG_LangVV      ;;=LangVV
+
+PIPI    BN     3         +     =BNG_LangKredF                                                                   \=BNG_LangKredF  ;;=LangKredF
+PIPI    BN     3         +     =BNG_AchterKred                                                                  \=BNG_AchterKred ;;=AchterKred
+IIPI    BN     4         +     =BNG_LangKred1                                                                   \=BNG_LangKred1  ;;=LangKred1
+IIPI    BN     4         +     =BNG_LangKredA                                                                   \=BNG_LangKredA  ;;=LangKredA
+IIPI    BN     4         +     =BNG_LangKredB                                                                   \=BNG_LangKredB  ;;=LangKredB
+IIPI    BN     4         +     =BNG_LangKredC                                                                   \=BNG_LangKredC  ;;=LangKredC
+PIPI    BN    -4               =BNG_AchterKred                                                                  \=BNG_AchterKred
+PIPI    BN     3         +     =BNG_LangKred4                                                                   \=BNG_LangKred4  ;;=LangKred4
+PIPI    BN     3         +     =BNG_LangKred9                                                                   \=BNG_LangKred9  ;;=LangKred9
+PIPI    BN     3         +     =BNG_LangKred5                                                                   \=BNG_LangKred5  ;;=LangKred5
+PIPI    BN     3         +     =BNG_LangKredG                                                                   \=BNG_LangKredG  ;;=LangKredG
+PIPI    BN     3         +     =BNG_LangKred6                                                                   \=BNG_LangKred6  ;;=LangKred6
+PIPI    BN     3         +     =BNG_LangKred7                                                                   \=BNG_LangKred7  ;;=LangKred7
+PPPP    BN    -3               =BNG_LangVV                                                                      \=BNG_LangVV     ;;=LangVV
+
+.Hints
+BNG_AchterKred=                "Maakt deel uit van het aansprakelijk vermogen"
+
+.Formulas Visible
+BNG_LangKredF=                 (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_AchterKred=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_LangKred9=                 (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_LangKred5=                 (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_LangKredG=                 (HSum(Self,1,MaxT)>10) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+;
+
+PPPP   =BN    -2  +            "Lang vermogen"                                                                         \BNG_LangVermogen
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Kortlopende schulden aan kredietinstellingen
+;
+
+PPPP    BN   1 2  +            "Kortlopende schulden aan kredietinstellingen"                                      \BNG_KortVVBank
+
+PIII    BN     3               "Aflossingen komend jaar"                                                           \BNG_KortVVBank1    ;;=Aflkj
+PIII    BN     4               "Achtergestelde leningen"                                                           \BNG_AflkjAchterKred
+PIII    BN     5               =BNG_LangKred1                                                                      \=BNG_AflkjKred1
+PIII    BN     5               =BNG_LangKredA                                                                      \=BNG_AflkjKredA
+PIII    BN     5               =BNG_LangKredB                                                                      \=BNG_AflkjKredB
+PIII    BN  *  5               =BNG_LangKredC                                                                      \=BNG_AflkjKredC
+PIII   =BN    -5               =BNG_AflkjAchterKred                                                                \=BNG_AflkjAchterKred
+PIII    BN  *  4               "Overige leningen"                                                                  \BNG_AflkjNietAchterKred
+PIII    BN     5               =BNG_LangKredF                                                                      \=BNG_AflkjKredF
+PIII    BN     5               =BNG_LangKred4                                                                      \=BNG_AflkjKred4
+PIII    BN     5               =BNG_LangKred9                                                                      \=BNG_AflkjKred9
+PIII    BN     5               =BNG_LangKred5                                                                      \=BNG_AflkjKred5
+PIII    BN  *  5               =BNG_LangKredG                                                                      \=BNG_AflkjKredG
+PIII    BN     5               =BNG_LangKred6                                                                      \=BNG_AflkjKred6
+PIII    BN     5               =BNG_LangKred7                                                                      \=BNG_AflkjKred7
+PIII   =BN    -5               =BNG_AflkjNietAchterKred                                                            \=BNG_AflkjNietAchterKred
+PIII   =BN    -4               =BNG_KortVVBank1                                                                    \=BNG_KortVVBank1
+PIPI    BN     3  +            " "                                                                                 \BNG_KortVVBank2    ;;=RCbank
+PPPP   =BN    -3               =BNG_KortVVBank                                                                     \=BNG_KortVVBank
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+; Overige kortlopende schulden
+;
+
+PPPP    BN     2  +            "Overige kortlopende schulden"                                                \BNG_OvKortVVBank
+
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank1    ;;=HandCred
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank2    ;;=KortGMKred
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank3    ;;=BelPremies
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank9    ;;=KostCred
+PIII    BN     3        ?      " "                                                                           \BNG_OvKortVVBank4    ;;=KortPensKred
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank5    ;;=OntvVoorBet
+PIII    BN     3        ?      " "                                                                           \BNG_OvKortVVBank6    ;;=OvOverlPas2
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank7    ;;=OvOverlPas3
+PIII    BN     3               " "                                                                           \BNG_OvKortVVBank8    ;;=OvOverlPas
+PPPP   =BN    -3               =BNG_OvKortVVBank                                                             \=BNG_OvKortVVBank
+
+.Formulas Visible
+BNG_OvKortVVBank1=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=30) or (BBRisicoModel[1]=40)
+BNG_OvKortVVBank2=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=20) or (BBRisicoModel[1]=30)
+BNG_OvKortVVBank4=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OvKortVVBank5=             (FirstValueT(Self,1,MaxT)>0)
+BNG_OvKortVVBank6=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OvKortVVBank8=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OvKortVVBank9=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OvKortKred=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Balans
+;
+
+PIII    BN     2               "Overige kortlopende schulden"                                                          \BNG_OvKortKred    ;;=OvKortKred
+PPPP   =BN    -2  +            "Kortlopende schulden"                                                                  \BNG_KortVermogen
+PPPP    BN   1=2= +            "Totaal passiva"                                                                        \BNG_Balpas        ;;=BalPas
+PIII    BN   1 2               "Off-balance correcties"                                                                \BNG_OffBalCorr      ;;=OffBalCorr -> OffBalCorr
+
+PIII    1M     2               $>Toelichting<$                                                                         \BNG_BalansMemo
+PIII    1N C   2               =BalanceCheckDetail                                                                     \=BalanceCheckDetail
+
+.Formulas Notrend, Trend
+BNG_Balpas = BNG_LangVermogen+BNG_KortVermogen
+
+.Formulas Visible
+BNG_OvKortKred=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+
+.Variables
+;============================================================================================================================================
+; Resultatenrekening
+;
+PPPP    FN     1               "Resultatenrekening"                                                            \BNG_ResRek              ;;=BNG_ResNaBel
+
+.Formulas Visible
+BNG_ResRek=                    If(BBRisicoModel[1]=20,0,1)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Bedrijfsopbrengsten
+;
+PPPP    FN     2  +            " "                                                                             \BNG_NettoOmzet
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet1   ;=OmzetGr1 -> GroeiOmzetGr1
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet2   ;=OmzetGr2 -> GroeiOmzetGr2
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet3   ;=OmzetGr3 -> GroeiOmzetGr3
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet4   ;=OmzetGr4 -> GroeiOmzetGr4
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet5   ;=OmzetGr5 -> GroeiOmzetGr5
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet6   ;=OmzetGr6 -> GroeiOmzetGr6
+PIII    FN     3               " "                                                                             \BNG_NettoOmzet7   ;=OmzetGr7 -> GroeiOmzetGr7
+IIII    FN     3               " "                                                                             \BNG_NettoOmzet8   ;=OmzetGr8 -> GroeiOmzetGr8
+PPPP   =FN    -3               =BNG_NettoOmzet                                                                 \=BNG_NettoOmzet
+
+.Formulas Visible
+BNG_NettoOmzet2=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=20)
+BNG_NettoOmzet3=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=20)
+BNG_NettoOmzet4=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=20)
+BNG_NettoOmzet5=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_NettoOmzet6=               (FirstValueT(Self,1,MaxT)>0)
+BNG_NettoOmzet7=               (FirstValueT(Self,1,MaxT)>0)
+BNG_NettoOmzet8=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Voorraadmutaties
+;
+PPPP    FN     2  +            "Voorraadmutaties"                                                             \BNG_VoorraadMut
+PIPI    FN     3               "Mutatie onderhanden werk"                                                     \BNG_VoorraadMut1   ;;=MutOndWerk
+PIII    FN     3               "Geactiveerde eigen productie"                                                 \BNG_VoorraadMut2   ;;=EigenProd
+PPPP   =FN    -3               =BNG_VoorraadMut                                                               \=BNG_VoorraadMut
+
+.Formulas Visible
+BNG_VoorraadMut=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_VoorraadMut1=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_VoorraadMut2=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+;
+PIII    FN     2               " "                                                                          \BNG_OvBedrOpbr    ;;=OvBedrOpbr
+PPPP   =FN    -2  +            "Som der bedrijfsopbrengsten"                                                \BNG_SomBedrOpbr   ;;=SomBedrOpbr
+
+.Formulas Visible
+BNG_OvBedrOpbr=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_SomBedrOpbr=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Inkoopwaarde
+;
+PPPP   -FN     2  +            "Inkoopwaarde"                                                                          \BNG_InkoopWaarde
+PIII    FN     3               "Materiaal- en externe kosten"                                                          \BNG_InkoopWaarde1       ;;=MatVerbr
+PIII    FN     3               " "                                                                                     \BNG_InkoopWaarde2       ;;=WerkDerden
+PIII    FN     3                                                                                                       \BNG_InkoopWaarde3       ;;=OvDirInkK
+PPPP   =FN    -3               =BNG_InkoopWaarde                                                                       \=BNG_InkoopWaarde
+
+.Formulas Visible
+BNG_InkoopWaarde=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+BNG_InkoopWaarde1=             (FirstValueT(Self,1,MaxT)>0)
+BNG_InkoopWaarde2=             (FirstValueT(Self,1,MaxT)>0)
+BNG_InkoopWaarde3=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Bedrijfslasten
+;
+PPPP   -FN     2  +                                                                                                    \BNG_OperKosten
+PIII    FN     3               " "                                                                                     \BNG_OperKosten1         ;;=PersK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten2         ;;=Huurmach
+PIII    FN     3               " "                                                                                     \BNG_OperKosten3         ;;=AssMach
+PIII    FN     3               " "                                                                                     \BNG_OperKosten4         ;;=VerkoopK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten5         ;;=GebK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten6         ;;=AlgK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten13        ;;=MachEnergieK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten7         ;;=KleineInv
+PIII    FN     3               " "                                                                                     \BNG_OperKosten8         ;;=TranspK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten9         ;;=InventOndK
+IIII    FN     3               " "                                                                                     \BNG_OperKosten10        ;;=OngProdK
+PIII    FN     3               " "                                                                                     \BNG_OperKosten11        ;;=OvK
+PPPP   =FN    -3               =BNG_OperKosten                                                                         \=BNG_OperKosten
+
+.Formulas Visible
+BNG_OperKosten1=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_OperKosten2=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_OperKosten3=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten4=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten5=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten6=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten13=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten7=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten8=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_OperKosten9=               (FirstValueT(Self,1,MaxT)>0)
+BNG_OperKosten10=              (FirstValueT(Self,1,MaxT)>0)
+BNG_OperKosten11=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+;
+PIII   -FN     2               " "                                                                                \BNG_AktAfs      ;;=AktAfs
+PPPP   =FN    -2  +            " "                                                                                \BNG_BedrRes     ;;=BedrRes
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Financiële baten
+;
+PPPP    FN     2  +            " "                                                                        \BNG_FinBaten
+PIII    FN     3               " "                                                                        \BNG_FinBaten1          ;;=RVermOverschot
+PIII    FN     3               " "                                                                        \BNG_FinBaten2          ;;=RVord
+PIII    FN     3               " "                                                                        \BNG_FinBaten3          ;;=RFinVastAkt
+PIII    FN     3               " "                                                                        \BNG_FinBaten4          ;;=KoersResEffecten
+PPPP   =FN    -3               =BNG_FinBaten                                                              \=BNG_FinBaten
+
+.Formulas Visible
+BNG_FinBaten3=                 (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_FinBaten4=                 (FirstValueT(Self,1,MaxT)>0)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Financiële lasten
+;
+PPPP   -FN     2  +            " "                                                                                     \BNG_FinLasten
+PIII    FN     3               "Rentelasten"                                                                           \BNG_FinLasten1         ;;=RLangKredLen
+PIII    FN     3               " "                                                                                     \BNG_FinLasten2         ;;=ROvK1
+PIII    FN     3               " "                                                                                     \BNG_FinLasten3         ;;=RRekCour
+PPPP   =FN    -3               =BNG_FinLasten                                                                          \=BNG_FinLasten
+
+.Formulas Visible
+BNG_FinLasten2=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_FinLasten3=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+;
+PPPP   =FN    -2  +            " "                                                                          \BNG_GewResVoorBel       ;;=GewResVoorBel
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Buitengewone baten
+;
+PPPP    FN     2  +            " "                                                                                     \BNG_BuitBaten
+PIII    FN     3               " "                                                                                     \BNG_BuitBaten1      ;;=BoekWinst
+PIII    FN     3               " "                                                                                     \BNG_BuitBaten2      ;;=Schenkingen
+PIII    FN     3               " "                                                                                     \BNG_OvBuitBaten     ;;=OvBuitBaten  ?? zie ook BNG_OvBuitBaten
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten1
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten2
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten3
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten4
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten5
+PIII    FN     3                                                                                                       \BNG_VHVBuitBaten6
+
+PPPP   =FN    -3               =BNG_BuitBaten                                                                          \=BNG_BuitBaten
+
+.Formulas Visible
+BNG_BuitBaten1=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_BuitBaten2=                (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_OvBuitBaten=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_VHVBuitBaten2=             (FirstValueT(Self,1,MaxT)>0)
+BNG_VHVBuitBaten4=             (FirstValueT(Self,1,MaxT)>0)
+BNG_VHVBuitBaten1=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitBaten3=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitBaten5=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitBaten6=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Buitengewone lasten
+;
+PPPP   -FN     2  +            "Buitengewone lasten"                                                                     \BNG_BuitLasten
+PIPI    FN     3               " "                                                                                       \BNG_Afwaardering  ;;=Afwaardering  ?? zie ook =BNG_Afwaardering
+PIII    FN     3               " "                                                                                       \BNG_BuitLasten2  ;;=OvBuitLasten2
+PIII    FN     3                                                                                                         \BNG_VHVBuitLasten1
+PIII    FN     3                                                                                                         \BNG_VHVBuitLasten2
+PIII    FN     3                                                                                                         \BNG_VHVBuitLasten3
+PIII    FN     3                                                                                                         \BNG_VHVBuitLasten4
+PPPP   =FN    -3               =BNG_BuitLasten                                                                           \=BNG_BuitLasten
+
+.Formulas Visible
+BNG_Afwaardering=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_BuitLasten2=               (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_VHVBuitLasten1=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitLasten2=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitLasten3=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHVBuitLasten4=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+;
+PIII   -FN     2               " "                                                                                       \BNG_WinstBel          ;;=WinstBel
+PIII    FN     2               "Belastingen buitengewoon resultaat"                                                      \BNG_BuitBatenBelast=BNG_VHVBuitBatenBelast
+PIIIP   FN     2               " "                                                                                       \BNG_AandeelResDeeln   ;;=AandeelResDeeln
+PIII   -FN     2               " "                                                                                       \BNG_ResAandDerden     ;;=ResAandDerden
+PPPP   =FN    -2= +                                                                                                      \BNG_ResNabel          ;;=ResNaBel
+
+PIII    1M   1 2               $>Toelichting<$                                                                           \BNG_ResRekMemo
+
+.Formulas Visible
+BNG_ResAandDerden=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_BuitBatenBelast=           (FirstValueT(Self,1,MaxT)>0)
+
+.Variables
+;============================================================================================================================================
+; Resultatenrekening
+;
+PPPP    FN     1               "Resultatenrekening"                                                                      \BNG_ResRekVHV           ;;=ResNaBel
+.Formulas Visible
+BNG_ResRekVHV=                 If(BBRisicoModel[1]=20,1,0)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Bedrijfsopbrengsten
+;
+PPPP    FN     2         +     =BNG_NettoOmzet                                                                         \BNG_NettOmzetVHV=BNG_NettoOmzet
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Voorraadmutaties
+;
+PPPP    FN     2         +     =BNG_VoorraadMut                                                                        \=BNG_VoorraadMut
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+;
+PIII    FN     2         +     =BNG_OvBedrOpbr                                                                 \BNG_ResRekVHV_OvBedrOpbr=BNG_OvBedrOpbr ;;=OvBedrOpbr
+PPPP    FN    -2               =BNG_SomBedrOpbr                                                                \BNG_ResRekVHVSomBedrOpbr=BNG_SomBedrOpbr   ;;SomBedrOpbr
+
+.Formulas Visible
+BNG_ResRekVHV_OvBedrOpbr=      (FirstValueT(Self,1,MaxT)>0)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Inkoopwaarde
+;
+PPPP   -FN     2         +     =BNG_InkoopWaarde                                                                       \=BNG_InkoopWaarde
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Bedrijfslasten
+;
+PPPP   -FN     2         +     =BNG_OperKosten                                                                         \=BNG_OperKosten
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Afschrijvingen op immat. en mat. vaste activa
+;
+PIII   -FN     2         +     =BNG_AktAfs                                                                             \=BNG_AktAfs
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+;
+PPPP    FN    -2               =BNG_BedrRes                                                                            \=BNG_BedrRes
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+; Financiele baten en lasten
+;
+PPPP    FN     2  +            "Financiële baten en lasten"                                                            \BNG_FinRes
+PIII    FN     3               =BNG_FinBaten1                                                                          \BNG_VHV_FinBaten1=BNG_FinBaten1     ;;=RVermOverschot
+PIII    FN     3               =BNG_FinBaten2                                                                          \BNG_VHV_FinBaten2=BNG_FinBaten2     ;;=RVord
+PIII    FN     3               =BNG_FinBaten3                                                                          \BNG_VHV_FinBaten3=BNG_FinBaten3     ;;=RFinVastAkt
+PIII    FN     3               =BNG_FinBaten4                                                                          \BNG_VHV_FinBaten4=BNG_FinBaten4     ;;=KoersResEffecten
+PIII   -FN     3               =BNG_FinLasten1                                                                         \BNG_VHV_FinLasten1=BNG_FinLasten1      ;;=RLangKredLen
+PIII   -FN     3               =BNG_FinLasten2                                                                         \BNG_VHV_FinLasten2=BNG_FinLasten2    ;;=ROvK1
+PIII   -FN     3               =BNG_FinLasten3                                                                         \BNG_VHV_FinLasten3=BNG_FinLasten3    ;;=RRekCour
+PPPP   =FN    -3               =BNG_FinRes                                                                             \=BNG_FinRes
+
+.Formulas Visible
+BNG_VHV_FinBaten3=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_VHV_FinBaten4=             (FirstValueT(Self,1,MaxT)>0)
+BNG_VHV_FinLasten2=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+BNG_VHV_FinLasten3=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=10) or (BBRisicoModel[1]=40) or (BBRisicoModel[1]=30)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+;
+PPPP    FN    -2               =BNG_GewResVoorBel                                                                      \BNG_VHVGewResVoorBel=BNG_GewResVoorBel      ;;=GewResVoorBel
+PIII   -FN     2               =BNG_WinstBel                                                                           \=BNG_WinstBel             ;;=WinstBel
+PIIIP   FN     2               =BNG_AandeelResDeeln                                                                    \=BNG_AandeelResDeeln      ;;=AandeelResDeeln
+PIII   -FN     2               =BNG_ResAandDerden                                                                      \=BNG_ResAandDerden        ;;=ResAandDerden
+PPPP   =FN    -2  +            ""                                                                                      \BNG_VHVGewResNaBel
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Buitengewone baten
+;
+PPPP    FN     2         +     " "                                                                                     \BNG_VHVBuitBaten=BNG_BuitBaten
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRek
+; Buitengewone lasten
+;
+PPPP   -FN     2         +     "Buitengewone lasten"                                                                   \BNG_VHVBuitLasten=BNG_BuitLasten
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_ResRekVHV
+;
+
+
+PIII    FN     2               "Belastingen buitengewoon resultaat"                                                    \BNG_VHVBuitBatenBelast
+PPPP    FN    -2=              "Netto resultaat"                                                                       \BNG_VHVResNaBel=BNG_ResNaBel ;;=ResNaBel
+
+PIII    1M     2               =BNG_ResRekMemo                                                                         \=BNG_ResRekMemo
+
+
+.Variables
+;============================================================================================================================================
+; Vermogensaansluiting
+;
+PPP     1N     1        ?      $>Net worth reconciliation<$                    \BNG_VermAansl
+
+PPPP M  FN     2               =BNG_ResNaBel                                   \BNG_VAResNaBel=BNG_ResNaBel
+PIII M -FN     2               $>Goodwill acquired<$                           \KoopGoodwill
+C $>Concerns only non-capitalized goodwill associated with share transactions. This amount is recharged to invested capital. If this is not intended then use the entry "Changes outside result".<$
+IIII M  FN     2               $>Foreign exchange and currency adjustments<$   \BNG_OvResCorr
+IIII M  FN     2               $>Changes outside result<$                      \BNG_OvResCorr2
+PPPP M =FN    -2  +            $>Profit available for distribution<$           \BNG_WinstVoordeling
+PIII M -FN     2               $>Vastgestelde winstuitkering / dividend<$      \BNG_UitWinst
+PPPP M =FN    -2  +            $>Retained profits<$                            \BNG_InWinst
+PPPP M  FN     2  +            $>Kapitaalstortingen<$                          \BNG_Storting
+PPIP M  FN     3  +            $>Proceeds of issue of shares<$                 \BNG_StortingKapitaal
+PPIP M  FN     3  +            $>Payment share premium account<$               \BNG_StortingAgio
+PPPP M =FN    -3               =BNG_Storting                                   \=BNG_Storting
+;;PIII M  FN     2               $>Fiscale Oudedags Reserve (FOR)<$              \BNG_FOR
+PPPP M  FN     2  +            $>Change in minority stockholder's<$            \BNG_MutAandDerd
+PPPP M  FN     2  +            $>Change in revaluation reserve<$               \BNG_MutHerwRes
+PPPP M  FN     2  +            $>Change in statutory reserve<$                 \BNG_MutWetRes
+IPPP M  FN     2  +            $>Other changes in net worth<$                  \BNG_OvMutEigenVerm
+C $>Must be zero, otherwise means that it is likely that profit pay outs, withdrawals or {...} are missing.|An amount can be accepted by entering "yes".<$
+PPPP M  FN    -2= +            $>Changes in net worth<$                        \BNG_MutEigenVerm
+PI I M  VN C 1 2               $>Other changes approved?<$                     \BNG_MaxOvMutEV
+C $>FINAN will not print if "other changes" are larger than 3, unless the entry "yes" is given.<$
+
+;PPPP    PN C 1 3               =ResRekTest1                                     \Verm_ResRekTest1=ResRekTest1
+
+.Choices
+BNG_MaxOvMutEV              = "$>no<$|$>yes<$"
+
+.Formulas Notrend, Trend
+BNG_MaxOvMutEV                = If(PeriodInT<>1,1,0)
+BNG_StortingKapitaal          = Mut(BNG_Eigenverm1)
+BNG_StortingAgio              = Mut(BNG_Eigenverm2)
+BNG_MutAandDerd               = Mut(BNG_Eigenverm7)
+BNG_MutHerwRes                = Mut(BNG_Eigenverm6)
+BNG_MutWetRes                 = Mut(BNG_Eigenverm8)
+BNG_MutEigenVerm              = Mut(BNG_Eigenverm)
+BNG_OvMutEigenVerm            = OnZero(MutCalc*(Mut(BNG_Eigenverm)-BNG_InWinst-BNG_Storting-BNG_MutHerwRes-BNG_MutWetRes-BNG_MutAandDerd),NA)
+;BNG_OvMutEigenVerm            = OnZero(MutCalc*(Mut(BNG_Eigenverm)-BNG_InWinst-BNG_Storting-BNG_FOR-BNG_MutHerwRes-BNG_MutWetRes-BNG_MutAandDerd),NA)
+
+
+.Variables
+;============================================================================================================================================
+; Controle
+
+PPPP    VN     1               =ValCheck                                                           \ValCheckDisplay=ValCheck
+PPPP    VN     2  +            $>No matching between assets and liabilities<$                      \BalanceSheetTest
+PPPP    VN     2  +            $>Net worth reconciliation does not balance<$                       \IncomeStatementTest
+PPPP    VN     2  +            $>Negative bookvalues<$                                             \NegativeBookValue
+PPPP   =VN    -2  +            $>FINAN data input checks<$                                         \ValCheck
+
+XXXX     X     2
+PPPP    BM     3               $>Warning<$                                                         \ValCheckText
+PPPP    BM     3               $>Remarks<$                                                         \RemarksText
+PPPP    CN     3               $>Remarks<$                                                         \Remarks
+
+;De onderstaande variabelen zijn verplicht in V05
+PP P    BN     2               $>Import check<$ $>profit<$                                         \RemarkImportCheckResult
+PP P    VN     2               $>Import check<$ $>balance sheet total<$                            \RemarkImportCheckBalance
+PPPP    BN     2  +            $>Capital shortfall<$                                               \CapitalShortfall      ;-> UseOfOverdraftOverdrawnCurrentAccount
+
+PIII    1N C   2               $>Check balance sheet equilibrium<$                                 \BalanceCheckDetail
+C $>Determines the level of detail used for the balance equilibrium test that results in red warnings when it fails<$.
+
+PP      1N   1 2               BalansTotaal (Activa)                           \BNG_Conv1
+PI      BN     3               Import                                          \BNG_BalansTotaal_Conv
+PP      BN     3               Berekend                                        \=BNG_BalAkt
+
+PP      1N     2               Resultaat Na Belasting                          \BNG_Conv2
+PI      FN     3               Import                                          \BNG_ResNaBel_Conv
+PP      FN     3               Berekend                                        \=BNG_ResNaBel
+
+PP      1N     2               Overige mutaties eigen vermogen                 \BNG_Conv3
+PI      FN     3               Import                                          \BNG_OvMutEigenVerm_Conv
+PP      FN     3               Berekend                                        \=BNG_OvMutEigenVerm
+
+PP      1N     2               $>Operational cash flow<$                       \BNG_Conv4
+PI      FN     3               Import                                          \BNG_JCFOpCF_Conv
+PP      FN     3               Berekend                                        \=BNG_JCFOpCF
+
+PP      1N     2               $>Investeringskasstroom<$                       \BNG_Conv5
+PI      FN     3               Import                                          \BNG_JCFInvCF_Conv
+PP      FN     3               Berekend                                        \=BNG_JCFInvCF
+
+PP      1N     2               $>Financial cash flow<$                         \BNG_Conv6
+PI      FN     3               Import                                          \BNG_JCFFinCF_Conv
+PP      FN     3               Berekend                                        \=BNG_JCFFinCF
+PP     =1N     2               Totaal                                          \=BNG_Conv1
+
+.Formulas NoTrend
+BNG_Conv1 = OnNA(Round(BNG_BalansTotaal_Conv[LastTinFormulaSet(Notrend),1]-BNG_BalAkt[LastTinFormulaSet(Notrend),1],0),0)
+BNG_Conv2 = OnNA(Round(BNG_ResNaBel_Conv[LastTinFormulaSet(Notrend),1]-BNG_ResNaBel[LastTinFormulaSet(Notrend),1],0),0)
+BNG_Conv3 = OnNA(Round(BNG_OvMutEigenVerm_Conv[LastTinFormulaSet(Notrend),1]-BNG_OvMutEigenVerm[LastTinFormulaSet(Notrend),1],0),0)
+BNG_Conv4 = OnNA(Round(BNG_JCFOpCF_Conv[LastTinFormulaSet(Notrend),1]-BNG_JCFOpCF[LastTinFormulaSet(Notrend),1],0),0)
+BNG_Conv5 = OnNA(Round(BNG_JCFInvCF_Conv[LastTinFormulaSet(Notrend),1]-BNG_JCFInvCF[LastTinFormulaSet(Notrend),1],0),0)
+BNG_Conv6 = OnNA(Round(BNG_JCFFinCF_Conv[LastTinFormulaSet(Notrend),1]-BNG_JCFFinCF[LastTinFormulaSet(Notrend),1],0),0)
+
+.Choices
+BalanceCheckDetail             = "0:$>Check all columns<$|1:$>Annual data, just check end of year<$|4:$>Quarterly data, check end of each quarter<$"
+
+.Formulas Visible
+Remarks                        = 0
+NegativeBookValue              = 0
+RemarkImportCheckResult        = 0
+RemarkImportCheckBalance       = 0
+
+.Formulas NoTrend
+BalanceCheckDetail             = 1
+BalanceSheetTest               = OnZero(Abs(Round(BNG_BalAkt,0)-Round(BNG_BalPas,0))*Case(BalanceCheckDetail,[NA:1|0:1|1:T=LastTInYear|4:If(tsy(1)=12,If((Round(T/3,0)-T/3)=0,1,0),1)]),NA)
+
+.Formulas NoTrend,Trend
+IncomeStatementTest            = If((BNG_BalAkt=NA) OR (BNG_BalPas[T-1]=NA) OR (BNG_ResNaBel=NA) OR BNG_MaxOvMutEV OR (Abs(BNG_OvMutEigenVerm)<=Max(0.0001*BNG_NettoOmzet,(3*ViewScaleFactor*10^(-Decimals)))),NA,Abs(BNG_OvMutEigenVerm))
+
+;;.Formulas Trend
+;;BalanceSheetTest               = OnZero(If((TotalAssets=NA) and (TotalEquityAndLiabilities=NetWorth),NA,Round(Abs(TotalAssets-TotalEquityAndLiabilities),5)),NA)
+;;
+.Formulas NoTrend
+ValCheckText                   = &If(BalanceSheetTest<>NA,&"$>No matching between assets and liabilities<$"&"|",&"")&If(IncomeStatementTest<>NA,&"$>Net worth reconciliation does not balance<$"&"|",&"")
+;ValCheckText                   = &If(BalanceSheetTest<>NA,&"$>No matching between assets and liabilities<$"&"|",&"")&If(IncomeStatementTest<>NA,&"$>Net worth reconciliation does not balance<$"&"|",&"")&If(NegativeBookValue<>NA,&"$>Negative bookvalues<$"&"|",&"")&If(LastValCheck<>NA,&"$>Error(s) in preceding columns<$"&"|",&"")
+;;RemarksText                    = &If(CapitalShortfallInYear<>NA,&"$>Capital shortfall<$"&"|",&If(RemarkImportCheck<>NA,&"$>Import check<$ $>difference<$"&"|",&""))
+
+
+.Variables
+;============================================================================================================================================
+; Kasstromenoverzicht BNG
+;
+PPPP M  FN     1        ?      "Kasstromenoverzicht"                                                                   \BNG_CFJaarRek
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_CFJaarRek
+; Operationele kasstroom
+;
+PPPP M  FN     2  +             "Operationele kasstroom"                                                                \BNG_JCFOpCF
+PPPP M  FN     3               =BNG_BedrRes                                                                            \=BNG_BedrRes
+PPPP M  FN     3  +            "Correcties posten"                                                                     \BNG_CFCorrecties
+PPPP M  FN     4               =BNG_AktAfs                                                                             \=BNG_AktAfs
+PPPP M  FN     4  +            "Mutatie voorzieningen"                                                                 \BNG_MutVoorz
+PPPP M  FN     4               =BNG_AandeelResDeeln                                                                    \=BNG_AandeelResDeeln
+PPPP M -FN     4               =BNG_ResAandDerden                                                                      \=BNG_ResAandDerden
+PPPP M -FN     4               =BNG_WinstBel                                                                           \=BNG_WinstBel
+PPPP M  FN     4  +            "Buitengewone baten (cash)"                                                             \BNG_BuitBatenExNonCash
+PPPP M -FN     4  +            "Buitengewone lasten (cash)"                                                            \BNG_BuitLastenExNonCash
+PPPP M  FN     4               =BNG_FinBaten                                                                           \=BNG_FinBaten
+PPPP M -FN     4               =BNG_FinLasten                                                                          \=BNG_FinLasten
+PPPP M  FN     4  +            &"Mutatie "&FirstLC(&BNG_AssVoorz[0])                                                   \BNG_MutAssVoorz
+PPPP M =FN    -4               =BNG_CFCorrecties                                                                       \=BNG_CFCorrecties
+PPPP M  FN     3  +            "Mutatie werkkapitaal"                                                                  \BNG_MutWerkKapCF
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_Voorraden[0])                                                  \BNG_MutVoorraden -> BNG_Voorraden
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_Voorraden2[0])                                                 \BNG_OndWerkInCF
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_OnderhandenProjecten[0])                                       \BNG_MutOnderhandenProjecten
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_Vorderingen[0])                                                \BNG_MutVorderingen -> BNG_Vorderingen
+;;PPPP M -FN     4               &"Mutatie "&FirstLC(&BNG_OvOverlAkt[0])                                                 \BNG_MutOvOverlAkt
+PPPP M  FN     4  +            &"Mutatie "&FirstLC(&BNG_OvKortVVBank[0])                                               \BNG_MutOvKortVVBank -> BNG_OvKortVVBank
+PPPP M =FN    -4=              =BNG_MutWerkKapCF                                                                       \=BNG_MutWerkKapCF
+PPPP M  FN     3  +            "Mut. financieringsverschil"                                                            \BNG_MutFinanTeKort
+PPPP M  FN     4  +            &"Mutatie "&FirstLC(&BNG_OvKortKred[0])                                                 \BNG_JCFOvKortKred ;;=BNG_OvKortKred
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_OvOverlAkt[0])                                                 \BNG_JCFOvOverlAkt ;;=BNG_OvOverlAkt
+PPPP M =FN    -4=              =BNG_MutFinanTeKort                                                                     \=BNG_MutFinanTeKort
+PPPP M =FN    -3=              =BNG_JCFOpCF                                                                            \=BNG_JCFOpCF
+
+.Formulas NoTrend,Trend
+BNG_MutVoorz=                  Mut(BNG_Voorz)
+BNG_BuitBatenExNonCash=        OnZero(BNG_BuitBaten - BNG_OvBuitBaten,NA)
+BNG_BuitLastenExNonCash=       OnZero(BNG_BuitLasten - BNG_Afwaardering,NA)
+BNG_OndWerkInCF=               If(BBRisicoModel=20,Mut(BNG_Voorraden2),NA)
+
+
+.Formulas Visible
+BNG_MutFinanTeKort=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+BNG_JCFOvKortKred=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+BNG_JCFOvOverlAkt=             (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=30)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_CFJaarRek
+; Investeringskasstroom
+;
+PPPP M  FN     2  +            "Investeringskasstroom"                                                                 \BNG_JCFInvCF
+PPPP M -FN     3  +            &"Investering "&FirstLC(&BNG_ImmatAkt[0])                                               \BNG_ImmatAktInv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_ImmatAkt1[0])                                              \=BNG_ImmatAkt1Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_ImmatAkt2[0])                                              \=BNG_ImmatAkt2Inv
+PPPP M =FN    -4               =BNG_ImmatAktInv                                                                        \=BNG_ImmatAktInv
+PPPP M -FN     3  +            &"Investering "&FirstLC(&BNG_MatAkt[0])                                                 \BNG_MatAktInv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt1[0])                                                \=BNG_MatAkt1Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt3[0])                                                \=BNG_MatAkt3Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt4[0])                                                \=BNG_MatAkt4Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt5[0])                                                \=BNG_MatAkt5Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt6[0])                                                \=BNG_MatAkt6Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt7[0])                                                \=BNG_MatAkt7Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt8[0])                                                \=BNG_MatAkt8Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_MatAkt9[0])                                                \=BNG_MatAkt9Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_VHV_MatAkt2[0])                                            \=BNG_VHV_MatAkt2Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_VHV_MatAkt21[0])                                           \=BNG_VHV_MatAkt21Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_VHV_MatAkt22[0])                                           \=BNG_VHV_MatAkt22Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_VHV_MatAkt23[0])                                           \=BNG_VHV_MatAkt23Inv
+PPPP M =FN    -4               =BNG_MatAktInv                                                                          \=BNG_MatAktInv
+PPPP M -FN     3  +            &"Investering "&FirstLC(&BNG_FinVastAkt[0])                                             \BNG_FinVastAktInv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt1[0])                                            \=BNG_FinVastAkt1Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt2[0])                                            \=BNG_FinVastAkt2Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt3[0])                                            \=BNG_FinVastAkt3Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt4[0])                                            \=BNG_FinVastAkt4Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt5[0])                                            \=BNG_FinVastAkt5Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt6[0])                                            \=BNG_FinVastAkt6Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt12[0])                                           \=BNG_FinVastAkt12Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt13[0])                                           \=BNG_FinVastAkt13Inv
+PPPP M  FN     4               &"Investering "&FirstLC(&BNG_FinVastAkt14[0])                                           \=BNG_FinVastAkt14Inv
+PPPP M =FN    -4               =BNG_FinVastAktInv                                                                      \=BNG_FinVastAktInv
+PPPP M -FN     3               =BNG_AktAfs                                                                             \=BNG_AktAfs
+PPPP M  FN     3               =BNG_MutHerwRes                                                                         \=BNG_MutHerwRes   ;;\=HerwResOngespec
+PPPP M -FN     3               =KoopGoodwill                                                                           \BNG_KoopGoodwill=KoopGoodwill      ;;\=KoopGoodwill -> KoopGoodwill
+PPPP M  FN     3               =BNG_OvBuitBaten                                                                        \=BNG_OvBuitBaten       ;;\=OvBuitBaten
+PPPP M -FN     3               =BNG_Afwaardering                                                                       \=BNG_Afwaardering      ;;\=Afwaardering
+PPPP M =FN    -3=              =BNG_JCFInvCF                                                                           \=BNG_JCFInvCF
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_CFJaarRek
+; Financieringskasstroom
+;
+PPPP M  FN     2  +            "Financieringskasstroom"                                                                \BNG_JCFFinCF
+PPPP M  FN     3  +            "Financieringskasstroom vreemd vermogen"                                                \BNG_JCFMutVV
+PPPP M  FN     4  +            "Nieuwe langlopende schulden"                                                           \BNG_VVFinanciering
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKredF[0])                                                   \=BNG_KredFFin ;;\=KredFFin
+PPPP M  FN     5  +            &"Nieuwe "&FirstLC(&BNG_AchterKred[0])                                                  \BNG_AchterKredFin ;;\=AchterKredFin
+PPPP M  FN     6               &"Nieuwe "&FirstLC(&BNG_LangKred1[0])                                                   \=BNG_Kred1Fin ;;\=Kred1Fin
+PPPP M  FN     6               &"Nieuwe "&FirstLC(&BNG_LangKredA[0])                                                   \=BNG_KredAFin ;;\=KredAFin
+PPPP M  FN     6               &"Nieuwe "&FirstLC(&BNG_LangKredB[0])                                                   \=BNG_KredBFin ;;\=KredBFin
+PPPP M  FN     6               &"Nieuwe "&FirstLC(&BNG_LangKredC[0])                                                   \=BNG_KredCFin ;;\=KredCFin
+PPPP M =FN    -6               =BNG_AchterKredFin                                                                      \=BNG_AchterKredFin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKred4[0])                                                   \=BNG_Kred4Fin ;;\=Kred4Fin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKred9[0])                                                   \=BNG_Kred9Fin ;;\=Kred9Fin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKred5[0])                                                   \=BNG_Kred5Fin ;;\=Kred5Fin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKredG[0])                                                   \=BNG_KredGFin ;;\=KredGFin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKred6[0])                                                   \=BNG_Kred6Fin ;;\=Kred6Fin
+PPPP M  FN     5               &"Nieuwe "&FirstLC(&BNG_LangKred7[0])                                                   \=BNG_Kred7Fin ;;\=Kred7Fin
+PPPP M  FN     5  +            "Mutatie overige langlopende schulden"                                                  \BNG_MutOvLangVV
+PPPP M =FN    -5=              =BNG_VVFinanciering                                                                     \=BNG_VVFinanciering
+PPPP M -FN     4  +            "Aflossing langlopende schulden"                                                        \BNG_AflosFinanciering
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKredF[0])                                              \=BNG_AflKredF ;=AflKred=
+PPPP M  FN     5  +            &"Aflossingen "&FirstLC(&BNG_AchterKred[0])                                             \BNG_AflAchterKred ;;\=AflAchterKred
+PPPP M  FN     6               &"Aflossingen "&FirstLC(&BNG_LangKred1[0])                                              \=BNG_AflKred1   ;\=AflKred1
+PPPP M  FN     6               &"Aflossingen "&FirstLC(&BNG_LangKredA[0])                                              \=BNG_AflKredA   ;\=AflKredA
+PPPP M  FN     6               &"Aflossingen "&FirstLC(&BNG_LangKredB[0])                                              \=BNG_AflKredB   ;\=AflKredB
+PPPP M  FN     6               &"Aflossingen "&FirstLC(&BNG_LangKredC[0])                                              \=BNG_AflKredC   ;\=AflKredC
+PPPP M =FN    -6               =BNG_AflAchterKred                                                                      \=BNG_AflAchterKred
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKred4[0])                                              \=BNG_AflKred4   ;\=AflKred4
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKred9[0])                                              \=BNG_AflKred9   ;\=AflKred9
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKred5[0])                                              \=BNG_AflKred5   ;\=AflKred5
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKredG[0])                                              \=BNG_AflKredG   ;\=AflKredG
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKred6[0])                                              \=BNG_AflKred6   ;\=AflKred6
+PPPP M  FN     5               &"Aflossingen "&FirstLC(&BNG_LangKred7[0])                                              \=BNG_AflKred7   ;\=AflKred7
+PPPP M =FN    -5=              =BNG_AflosFinanciering                                                                  \=BNG_AflosFinanciering
+PPPP M  FN     4  +            &"Mutatie "&FirstLC(&BNG_KortVVBank2[0])                                                \BNG_MutRCBank  ;;=RCbank
+PPPP M =FN    -4               =BNG_JCFMutVV                                                                           \=BNG_JCFMutVV
+PPPP M  FN     3  +            "Financieringskasstroom eigen vermogen"                                                 \BNG_JCFMutEV
+PPPP M  FN     4               "Storting aandelenkapitaal"                                                             \=BNG_Storting ;;\=Storting
+PPPP M  FN     4               "Mutatie aandeel derden"                                                                \=BNG_MutAandDerd     ;;\=AandDerd -> MutAandDerd
+PPPP M -FN     4               "Winstuitkering"                                                                        \=BNG_UitWinst ;;\=UitWinst
+PPPP M  FN     4               =BNG_MutWetRes                                                                          \BNG_JCFMUTWETRES=BNG_MutWetRes ;=WetRes
+PPPP M  FN     4  +            "Overige mutatie eigen vermogen"                                                        \BNG_JCFOvMutEV
+PP P M  FN     5               "Overige mutaties eigen vermogen"                                                       \=BNG_OvMutEigenVerm ;;\=OvMutEigenVerm
+PPPP M =FN    -5               =BNG_JCFOvMutEV                                                                         \=BNG_JCFOvMutEV
+PPPP M =FN    -4               =BNG_JCFMutEV                                                                           \=BNG_JCFMutEV
+PPPP M  FN     3  +            "Financieringskasstroom overig"                                                         \BNG_JCFMutOV
+PPPP M  FN     4               "Koers- en valutaverschillen"                                                           \=BNG_OvResCorr  ;;=OvResCorr
+PPPP M  FN     4               "Mutaties buiten resultaat"                                                             \=BNG_OvResCorr2 ;;=OvResCorr2
+PPPP M -FN     4  +            &"Mutatie "&FirstLC(&BNG_LiqEffecten[0])                                                \BNG_JCFLiqEffecten
+PPPP M =FN    -4               =BNG_JCFMutOV                                                                           \=BNG_JCFMutOV
+PPPP M =FN    -3=              =BNG_JCFFinCF                                                                           \=BNG_JCFFinCF
+
+.Formulas NoTrend,Trend
+;BNG_MutOvLangVV=               LangVVFin - (AchterKredFin+Kred4Fin+Kred5Fin+Kred6Fin+Kred7Fin+Kred9Fin+KredFFin+KredGFin) - (AflLangVV -(AflAchterKred +AflKred4+AflKred5+AflKred6+AflKred7+AflKred9+AflKredF+AflKredG))
+BNG_MutAssVoorz                = Mut(BNG_AssVoorz)
+BNG_MutOvKortVVBank            = Mut(BNG_OvKortVVBank)
+BNG_MutVoorraden               = Mut(BNG_Voorraden)
+BNG_MutOnderhandenProjecten    = Mut(BNG_OnderhandenProjecten)
+BNG_MutVorderingen             = Mut(BNG_Vorderingen)
+;;BNG_MutOvOverlAkt              = Mut(BNG_OvOverlAkt)
+BNG_JCFOvKortKred              = Mut(BNG_OvKortKred)
+BNG_JCFOvOverlAkt              = Mut(BNG_OvOverlAkt)
+BNG_MutRCBank                  = Mut(BNG_KortVVBank2)
+BNG_JCFLiqEffecten             = Mut(BNG_LiqEffecten)
+
+
+.Formulas Visible
+BNG_JCFMUTWETRES=              (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+BNG_JCFLiqEffecten=            (FirstValueT(Self,1,MaxT)>0) or (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_CFJaarRek
+;
+PPPP M =FN    -2  +            "Mutatie liquide middelen"                                                              \BNG_JCFMutLiqMid
+PPPP M  FN     2  +            "Mutatie liquide middelen (balans)"                                                     \BNG_MutLiqMid -> BNG_LiqMid01
+PPPP M  FN    -2  +                                                                                                    \BNG_CashFlowDiff
+.Formulas NoTrend,Trend
+BNG_MutLiqMid=                 Mut(BNG_LiqMid01)
+BNG_CashFlowDiff=              OnZero(BNG_JCFMutLiqMid-BNG_MutLiqMid,NA)
+
+.Variables
+;============================================================================================================================================
+; Kengetallen
+;
+PPPP    CN     1               "Kengetallen"                                                                           \BNG_Kengetallen
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; EBITDA conform modellenbibliotheek
+;
+PPPP    FN     2  +            "EBITDA conform modellenbibliotheek"                                                    \BNG_EBITDA
+PPPP    FN     3  +            "EBIT"                                                                                  \BNG_EBIT
+PPPP    FN     4               "Netto resultaat"                                                                       \=BNG_ResNaBel
+PPPP   -FN     4               =BNG_AandeelResDeeln                                                                    \=BNG_AandeelResDeeln
+PPPP    FN     4               =BNG_ResAandDerden                                                                      \=BNG_ResAandDerden
+PPPP    FN     4               =BNG_WinstBel                                                                           \=BNG_WinstBel
+PPPP   -FN     4               =BNG_BuitBaten                                                                          \=BNG_BuitBaten
+PPPP    FN     4               =BNG_BuitLasten                                                                         \=BNG_BuitLasten
+PPPP    FN     4               =BNG_FinLasten                                                                          \=BNG_FinLasten
+PPPP   -FN     4               =BNG_FinBaten                                                                           \=BNG_FinBaten
+PPPP   =FN    -4               =BNG_EBIT                                                                               \=BNG_EBIT
+PPPP    FN     3  +            "Non cash"                                                                              \BNG_EBITNONCASH
+PPPP    FN     4               =BNG_AktAfs                                                                             \=BNG_AktAfs
+PPPP   =FN    -4               =BNG_EBITNONCASH                                                                        \=BNG_EBITNONCASH
+PPPP    FN     3               =BNG_OperKosten2                                                                        \=BNG_OperKosten2      ;=Huurmach
+PPPP   =FN    -3-              =BNG_EBITDA                                                                             \=BNG_EBITDA
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+;
+PPPP     X   1=2 1             "Liquiditeitsratio's"                                                                   \
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Current ratio
+;
+PPPP  2 CN     2  +            $>Current ratio<$                                                                       \BNG_CurrentRatio  ;=CurrentRatio
+PPPP    BN     3               =BNG_VlotAkt                                                                            \=BNG_VlotAkt
+PPPP    BN     3               =BNG_KortVermogen                                                                       \=BNG_KortVermogen
+PPPP  2 CN    =3               =BNG_CurrentRatio                                                                       \=BNG_CurrentRatio
+
+.Formulas Notrend,Trend
+BNG_CurrentRatio               = OnER(BNG_VlotAkt/(BNG_KortVermogen),NA)
+
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Netto werkkapitaal
+;
+PPPPP   BN     2  +            "Netto werkkapitaal"                                                                    \BNG_WerkKap       ;=WerkKap
+PPPP    BN     3               =BNG_VlotAkt                                                                            \=BNG_VlotAkt
+PPPP    BN     3               =BNG_KortVermogen                                                                       \=BNG_KortVermogen
+PPPP    BN    =3               =BNG_WerkKap                                                                            \=BNG_WerkKap
+
+.Formulas Notrend,Trend
+BNG_WerkKap                   = BNG_VlotAkt - BNG_KortVermogen
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Gouden balansratio
+;
+PPPP  1 CN %   2  +            "Gouden balansratio"                                                                    \BNG_GoudenRatio
+PPPP    BN     3               =BNG_EigenVerm                                                                          \=BNG_EigenVerm ;=EigenVerm
+PPPP    BN     3               =BNG_AssVoorz                                                                           \=BNG_AssVoorz  ;=AssVoorz
+PPPP    BN     3               =BNG_Voorz                                                                              \=BNG_Voorz
+PPPP    BN     3               =BNG_LangVV                                                                             \=BNG_LangVV    ;=LangVV
+PPPP   =BN    -3               "Lang vermogen"                                                                         \
+PPPP    BN     3               =BNG_VastAkt                                                                            \=BNG_VastAkt
+PPPP  1 CN %  =3               =BNG_GoudenRatio                                                                        \=BNG_GoudenRatio
+.Formulas NoTrend,Trend
+BNG_GoudenRatio=               OnER((BNG_EigenVerm+BNG_AssVoorz+BNG_Voorz+BNG_LangVV)/BNG_VastAkt,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+;
+P        X   1=2 1             "Solvabiliteitsratio's"                                                                 \
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Solvabiliteit (ongecorrigeerd)
+;
+PPPPP 1 CN %   2  +            "Solvabiliteit (ongecorrigeerd)"                                                            \BNG_SolvBal1  ;=SolvBal
+PPPP    BN     3               =BNG_EigenVerm                                                                              \=BNG_EigenVerm
+PPPP    BN     3               =BNG_BalAkt                                                                                 \=BNG_BalAkt
+PPPP  1 CN %  =3               =BNG_SolvBal1                                                                               \=BNG_SolvBal1
+
+.Formulas NoTrend,Trend
+BNG_SolvBal1=               OnER(BNG_EigenVerm/BNG_BalAkt,NA)
+
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Solvabiliteit (BNG Standaard)
+;
+PPPPP 1 CN %   2  +            "Solvabiliteit (BNG Standaard)"                                                         \BNG_SolvBal2
+PPPP    BN     3  +            "Gecorrigeerd Eigen Vermogen"                                                           \BNG_SolvEigenVerm
+PPPP    BN     4               =BNG_EigenVerm                                                                          \=BNG_EigenVerm
+PPPP   -BN     4               =BNG_ImmatAkt                                                                           \=BNG_ImmatAkt
+PPPP   -BN     4               =BNG_FinVastAkt4                                                                        \=BNG_FinVastAkt4
+PPPP   -BN     4               =BNG_FinVastAkt1                                                                        \=BNG_FinVastAkt1
+PPPP   -BN     4               =BNG_VorderingOpGroepsmij                                                               \=BNG_VorderingOpGroepsmij
+PPPP   -BN     4               =BNG_VorderingOpDeeln                                                                   \=BNG_VorderingOpDeeln
+PPPP   -BN     4               =BNG_LatenteBelastingVord                                                               \=BNG_LatenteBelastingVord
+PPPP   =BN    -4               =BNG_SolvEigenVerm                                                                      \=BNG_SolvEigenVerm
+PPPP    BN     3  +            "Gecorrigeerd Balanstotaal"                                                             \BNG_SolvBalAkt
+PPPP    BN     4               =BNG_BalAkt                                                                             \=BNG_BalAkt
+PPPP   -BN     4  +            "Correctieposten"                                                                       \BNG_SolvBalCorr
+PPPP    BN     5               =BNG_ImmatAkt                                                                           \=BNG_ImmatAkt
+PPPP    BN     5               =BNG_FinVastAkt4                                                                        \=BNG_FinVastAkt4
+PPPP    BN     5               =BNG_FinVastAkt1                                                                        \=BNG_FinVastAkt1
+PPPP    BN     5  +            &Case(BBRisicoModel[1],[20:"Vorderingen op groepsmaatschappijen"|"R/C-vorderingen groepsmaatschappijen/deelnemingen"])\BNG_VorderingOpGroepsmij
+PPPP    BN     5  +            &Case(BBRisicoModel[1],[20:"Vorderingen op maatschappijen waarin wordt deelgenomen"|"Leningen U/G Groepsmaatschappijen/deelnemingen"])\BNG_VorderingOpDeeln
+PPPP    BN     5  +            "Latente belastingvordering(en)"                                                        \BNG_LatenteBelastingVord
+PPPP   =BN    -5               =BNG_SolvBalCorr                                                                        \=BNG_SolvBalCorr
+PPPP   =BN    -4               =BNG_SolvBalAkt                                                                         \=BNG_SolvBalAkt
+PPPP  1 CN %  =3               =BNG_SolvBal2                                                                           \=BNG_SolvBal2
+
+.Formulas NoTrend,Trend
+BNG_SolvBal2=                  OnER(BNG_SolvEigenVerm / BNG_SolvBalAkt,NA)
+BNG_VorderingOpGroepsmij=      Case(BBRisicoModel[1],[20:BNG_FinVastAkt12+BNG_Vorderingen2|BNG_Vorderingen2+BNG_Vorderingen7])
+BNG_VorderingOpDeeln=          Case(BBRisicoModel[1],[20:BNG_FinVastAkt3+BNG_Vorderingen7|BNG_FinVastAkt3])
+BNG_LatenteBelastingVord=      Case(BBRisicoModel[1],[20:BNG_FinVastAkt5+BNG_Vorderingen8|BNG_FinVastAkt5])
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Solvabiliteit (BNG Maatwerk)
+;
+PPPPP 1 CN %   2  +            "Solvabiliteit (BNG Maatwerk)"                                                          \BNG_SolvBal3
+PPPP    BN     3  +            "Gecorrigeerd Garantievermogen"                                                         \BNG_SolvGarantieVerm
+PPPP    BN     4               =BNG_EigenVerm                                                                          \=BNG_EigenVerm
+PPPP    BN     4               "Achtergestelde lening (deel bij lang vermogen)"                                        \=BNG_AchterKred
+PPPP    BN     4               "Achtergestelde lening (deel bij kort vermogen)"                                        \=BNG_AflkjAchterKred   ;;=AflkjAchterKred
+PPPP   =BN    -4  +            "Contractueel achtergesteld vermogen"                                                   \BNG_Achtergesteld
+PPPP   -BN     4               =BNG_ImmatAkt                                                                           \=BNG_ImmatAkt
+PPPP   -BN     4               =BNG_FinVastAkt4                                                                        \=BNG_FinVastAkt4
+PPPP   -BN     4               =BNG_FinVastAkt1                                                                        \=BNG_FinVastAkt1
+PPPP   -BN     4               =BNG_VorderingOpGroepsmij                                                               \=BNG_VorderingOpGroepsmij
+PPPP   -BN     4               =BNG_VorderingOpDeeln                                                                   \=BNG_VorderingOpDeeln
+PPPP   -BN     4               =BNG_LatenteBelastingVord                                                               \=BNG_LatenteBelastingVord
+PPPP   =BN    -4               =BNG_SolvGarantieVerm                                                                   \=BNG_SolvGarantieVerm
+PPPP    BN     3         +     =BNG_SolvBalAkt                                                                         \=BNG_SolvBalAkt
+PPPP    CN %  =3               =BNG_SolvBal3                                                                           \=BNG_SolvBal3
+
+.Formulas NoTrend,Trend
+BNG_SolvBal3=                  OnER(BNG_SolvGarantieVerm / BNG_SolvBalAkt,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Solvabiliteit (Waterbedrijven)
+;
+PPPPP 1 CN %   2  +            "Solvabiliteit (Waterbedrijven)"                                                        \BNG_SolvBalWater
+PPPP    BN     3  +            "Gecorrigeerd Eigen Vermogen"                                                           \BNG_SolvWaterEV
+PPPP    BN     4               =BNG_EigenVerm                                                                          \=BNG_EigenVerm
+PPPP    BN     4               "Achtergestelde lening (deel bij lang vermogen)"                                        \=BNG_AchterKred
+PPPP    BN     4               "Achtergestelde lening (deel bij kort vermogen)"                                        \=BNG_AflkjAchterKred
+PPPP   =BN    -4               "Contractueel achtergesteld vermogen"                                                   \
+PPPP   -BN     4  +            "Correctieposten"                                                                       \BNG_SolvBalWaterCorr
+PPPP    BN     5               =BNG_ImmatAkt                                                                           \=BNG_ImmatAkt
+PPPP    BN     5               =BNG_FinVastAkt1                                                                        \=BNG_FinVastAkt1
+PPPP    BN     5               "Vorderingen op groepsmaatschappijen"                                                   \=BNG_VorderingOpGroepsmij
+PPPP    BN     5               "Vorderingen op maatschappijen waarin wordt deelgenomen"                                \=BNG_VorderingOpDeeln
+PPPP   =BN    -5               =BNG_SolvBalCorr                                                                        \=BNG_SolvBalWaterCorr
+PPPP   =BN    -4               =BNG_SolvWaterEV                                                                        \=BNG_SolvWaterEV
+PPPP    BN     3  +            "Gecorrigeerd Balanstotaal"                                                             \BNG_SolvWaterBalAkt
+PPPP    BN     4               =BNG_BalAkt                                                                                 \=BNG_BalAkt
+PPPP   -BN     4         +     =BNG_SolvBalWaterCorr                                                                   \=BNG_SolvBalWaterCorr -> BNG_SolvBalWaterCorr
+PPPP   =BN    -4               =BNG_SolvWaterBalAkt                                                                    \=BNG_SolvWaterBalAkt
+PPPPP 1 CN %  =3               =BNG_SolvBalWater                                                                       \=BNG_SolvBalWater
+
+.Hints
+BNG_SolvWaterEV=               "Gecorrigeerd Eigen Vermogen: Het (aandelen)kapitaal vermeerderd met alle reserves en jegens BNG Bank contractueel achtergestelde vorderingen van derden, gecorrigeerd met (vorderingen op) niet geconsolideerde deelnemingen, verminderd met immateriële activa."
+BNG_SolvWaterBalAkt=           "Gecorrigeerd Balanstotaal: Balanstotaal, gecorrigeerd met (vorderingen op) niet geconsolideerde deelnemingen, verminderd met de immateriële activa."
+
+.Formulas NoTrend, Trend
+BNG_SolvBalWater=              OnER(BNG_SolvWaterEV/BNG_SolvWaterBalAkt,NA)
+
+.Formulas Visible
+BNG_SolvBalWater=              (BBRisicoModel[1]=10)
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Solvabiliteit (WSW)
+;
+PPPP  1 CN %   2  +            "Solvabiliteit (WSW)"                                                                   \BNG_SolvBalWSW
+PPPP    BN     3  +            "Eigen Vermogen op basis van bedrijfswaarde (WSW)"                                      \BNG_SolvWSWEV
+PPPP    BN     4               =BNG_EigenVerm                                                                          \=BNG_EigenVerm
+PPPP   -BN     4               =BNG_MatAkt1                                                                            \=BNG_MatAkt1
+PPPP   -BN     4               =BNG_VHV_MatAkt21                                                                       \=BNG_VHV_MatAkt21
+PPPP   -BN     4               =BNG_VHV_MatAkt22                                                                       \=BNG_VHV_MatAkt22
+PIPI    BN     4               "Bedrijfswaarde onroerende zaken in exploitatie"                                        \BNG_VHV_BedrijfswaardeOnrZaken
+C "Bedrijfswaarde vastgoed wordt ontleend aan $4.1.5. uit de dVi."
+PPPP   =BN    -4               =BNG_SolvWSWEV                                                                          \=BNG_SolvWSWEV
+PPPP    BN     3  +            "Totaal Vermogen op basis van bedrijfswaarde (WSW)"                                     \BNG_SolvWSWTV
+PPPP    BN     4               =BNG_BalAkt                                                                             \=BNG_BalAkt
+PPPP   -BN     4               =BNG_MatAkt1                                                                            \=BNG_MatAkt1
+PPPP   -BN     4               =BNG_VHV_MatAkt21                                                                       \=BNG_VHV_MatAkt21
+PPPP   -BN     4               =BNG_VHV_MatAkt22                                                                       \=BNG_VHV_MatAkt22
+PIPI    BN     4               =BNG_VHV_BedrijfswaardeOnrZaken                                                         \=BNG_VHV_BedrijfswaardeOnrZaken
+C "Bedrijfswaarde vastgoed wordt ontleend aan $4.1.5. uit de dVi."
+PPPP   =BN    -4               =BNG_SolvWSWTV                                                                          \=BNG_SolvWSWTV
+PPPP  1 CN %  =3               =BNG_SolvBalWSW                                                                         \=BNG_SolvBalWSW
+;
+.Hints
+BNG_SolvWSWEV=               "Eigen vermogen bij waardering op basis van bedrijfswaarde."
+BNG_SolvWSWTV=               "Totaal vermogen bij waardering op basis van bedrijfswaarde."
+
+.Formulas NoTrend
+BNG_SolvBalWSW=              OnER(BNG_SolvWSWEV/BNG_SolvWSWTV,NA)
+
+.Formulas Trend
+BNG_SolvBalWSW=              OnER(BNG_SolvWSWEV/BNG_SolvWSWTV,NA)
+
+.Formulas Visible
+BNG_SolvBalWSW=              (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Loan to value (WSW)
+;
+PPPP  1 CN %   2  +            $>LTV<$ (WSW)                                                                           \BNG_LTVWSW
+PPPP    BN     3               =BNG_LVV_RENTE                                                                          \=BNG_LVV_RENTE
+PPPP    BN     3               "Kortlopende schulden voor LTV"                                                         \BNG_VHV_KVV_LTV
+PIPI    BN     3               =BNG_VHV_BedrijfswaardeOnrZaken                                                         \=BNG_VHV_BedrijfswaardeOnrZaken
+C "Bedrijfswaarde vastgoed wordt ontleend aan $4.1.5. uit de dVi."
+PPPP  1 CN %  -3               =BNG_LTVWSW                                                                             \=BNG_LTVWSW
+
+.Formulas NoTrend, Trend
+BNG_LTVWSW =              OnER((BNG_LVV_RENTE+BNG_VHV_KVV_LTV) / BNG_VHV_BedrijfswaardeOnrZaken,NA)
+BNG_VHV_KVV_LTV=          BNG_KortVVBank+BNG_OvKortVVBank3+BNG_OvKortVVBank9
+
+.Formulas Visible
+BNG_LTVWSW =              (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Debt to EBITDA
+;
+PPPP  1 CN     2  +            $>Debt to EBITDA<$                                                                      \BNG_DebtToEBITDA
+PPPP    BN     3  +            "Rentedragend lang vreemd vermogen"                                                     \BNG_LVV_RENTE
+PPPP    BN     3               =BNG_KortVVBank                                                                         \=BNG_KortVVBank
+PPPP    BN     3               =BNG_EBITDA                                                                             \BNG_EBITDA_Annualized
+PPPP  1 CN    =3               =BNG_DebtToEBITDA                                                                       \=BNG_DebtToEBITDA
+.Formulas NoTrend, Trend
+BNG_DebtToEBITDA=              OnER((BNG_LVV_RENTE+BNG_KortVVBank) / BNG_EBITDA_Annualized,NA)
+BNG_LVV_RENTE=                 BNG_LangVV-BNG_LangKred7
+BNG_EBITDA_Annualized        = GetPoint(BNG_EBITDA,1)
+
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Kapitalisatiefactor
+;
+PPPP  1 BN %   2  +            "Kapitalisatiefactor"                                                                   \BNG_Kapitalisatiefactor
+PPPP    BN     3  +            "Gecorrigeerd Kapitaal"                                                                 \BNG_KapFactorKapitaal
+PPPP    BN     4               =BNG_BalAkt                                                                             \=BNG_BalAkt
+PPPP   -BN     4               =BNG_MatAkt1                                                                            \=BNG_MatAkt1
+PPPP   -BN     4               =BNG_VHV_MatAkt2                                                                        \=BNG_VHV_MatAkt2
+PPPP   =BN    -4               =BNG_KapFactorKapitaal                                                                  \=BNG_KapFactorKapitaal
+PPPP    BN     3  +            "Gecorrigeerde baten"                                                                   \BNG_KapFactorBaten
+PPPP    BN     4  +            =BNG_SomBedrOpbr                                                                        \BNG_SomBedrOpbr_Annualized -> BNG_SomBedrOpbr
+PPPP    BN     4  +            =BNG_FinBaten1                                                                          \BNG_FinBaten1_Annualized -> BNG_FinBaten1
+PPPP   =BN    -4               =BNG_KapFactorBaten                                                                     \=BNG_KapFactorBaten
+PPPP  1 BN %  =3               =BNG_Kapitalisatiefactor                                                                \=BNG_Kapitalisatiefactor
+.Formulas NoTrend, Trend
+BNG_Kapitalisatiefactor=       OnER(BNG_KapFactorKapitaal / BNG_KapFactorBaten,NA)
+BNG_SomBedrOpbr_Annualized   = GetPoint(BNG_SomBedrOpbr,1)
+BNG_FinBaten1_Annualized     = GetPoint(BNG_FinBaten1  ,1)
+
+.Formulas Visible
+BNG_Kapitalisatiefactor=       (BBRisicoModel[1]=40)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Budgetratio
+;
+PPPP  1 BN %   2  +            "Budgetratio"                                                                               \BNG_BudgetRatio
+PPPP    BN     3               =BNG_EigenVerm                                                                              \=BNG_EigenVerm
+PPPP    FN     3               =BNG_SomBedrOpbr                                                                            \=BNG_SomBedrOpbr -> BNG_SomBedrOpbr
+PPPP  1 BN %  =3               =BNG_BudgetRatio                                                                            \=BNG_BudgetRatio
+.Formulas NoTrend, Trend
+BNG_BudgetRatio=               OnER(BNG_EigenVerm / BNG_SomBedrOpbr_Annualized,NA)
+
+.Formulas Visible
+BNG_BudgetRatio=               (BBRisicoModel[1]=30)
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+;
+P        X   1=2 1             "Rentabiliteitsratio's"                                                                 \
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Netto winstmarge
+;
+PPPPP 1 CN %   2  +            "Netto winstmarge"                                                                      \BNG_WMarge
+PPPP    FN     3               =BNG_ResNaBel                                                                           \=BNG_ResNaBel
+PPPP    FN     3               =BNG_SomBedrOpbr                                                                        \=BNG_SomBedrOpbr
+PPPPP 1 CN %  =3               =BNG_WMarge                                                                             \=BNG_WMarge
+.Formulas NoTrend, Trend
+BNG_WMarge=                    OnER(BNG_ResNaBel/BNG_SomBedrOpbr,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Bedrijfsresultaat/Bedrijfsopbrengsten
+;
+PPPPP 1 CN %   2  +            "Bedrijfsresultaat/Bedrijfsopbrengsten"                                                 \BNG_BedrResPerc
+PPPP    FN     3               =BNG_BedrRes                                                                            \=BNG_BedrRes
+PPPP    FN     3               =BNG_SomBedrOpbr                                                                        \=BNG_SomBedrOpbr
+PPPPP 1 CN %  =3               =BNG_BedrResPerc                                                                        \=BNG_BedrResPerc
+.Formulas NoTrend,Trend
+BNG_BedrResPerc=               OnER(BNG_BedrRes/BNG_SomBedrOpbr,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; EBIT-marge
+;
+PPPPP 1 CN %   2  +            "EBIT-marge"                                                                            \BNG_EBITMarge
+PPPP    FN     3               =BNG_EBIT                                                                               \=BNG_EBIT -> BNG_EBIT
+PPPP    FN     3               =BNG_SomBedrOpbr                                                                        \=BNG_SomBedrOpbr
+PPPPP 1 CN %  =3               =BNG_EBITMarge                                                                          \=BNG_EBITMarge
+.Formulas NoTrend,Trend
+BNG_EBITMarge=                 OnER(BNG_EBIT/BNG_SomBedrOpbr,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; EBITDA-marge
+;
+PPPP M1 CN %   2  +            "EBITDA-marge"                                                                          \BNG_EBITDAMarge
+PPPP M  FN     3               =BNG_EBITDA                                                                             \=BNG_EBITDA -> BNG_EBITDA
+PPPP M  FN     3               =BNG_SomBedrOpbr                                                                        \=BNG_SomBedrOpbr
+PPPP M1 CN %  =3               =BNG_EBITDAMarge                                                                        \BNG_EBITDAMarge2=BNG_EBITDAMarge
+.Formulas NoTrend,Trend
+BNG_EBITDAMarge=               OnER(BNG_EBITDA/BNG_SomBedrOpbr,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; DSCR Backward looking (BNG Standaard)
+;
+PPPP M2 CN     2  +            "DSCR Backward looking (BNG Standaard)"                                                 \BNG_DSCR1
+PPPP M  FN     3               =BNG_EBITDA                                                                             \=BNG_EBITDA -> BNG_EBITDA
+PPPP M  FN   1 3               "Rentelasten"                                                                           \BNG_DSCR1Deel2=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP M  FN     3               =BNG_AflosFinanciering                                                                  \=BNG_AflosFinanciering
+PPPP M  FN     3               =BNG_OperKosten2                                                                        \=BNG_OperKosten2
+PPPP M =FN    -3  +            "Financiële verplichtingen"                                                             \BNG_DSCRVerpl1
+PPPP M2 CN    =3               =BNG_DSCR1                                                                              \=BNG_DSCR1
+.Formulas NoTrend, Trend
+BNG_DSCR1=                     OnER(BNG_EBITDA / BNG_DSCRVerpl1,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; DSCR Forward looking (BNG conform modellenbib)
+;
+PPPP M2 CN     2  +            "DSCR Forward looking (BNG conform modellenbib)"                                        \BNG_DSCR2
+PPPP M  BN     3               =BNG_EBITDA                                                                             \=BNG_EBITDA_Annualized
+PPPP M  BN   1 3  +            "Rentelasten"                                                                           \BNG_FinLasten1_Annualized
+PIII M  BN     3               =BNG_KortVVBank1                                                                        \=BNG_KortVVBank1
+PPPP M  BN     3  +            =BNG_OperKosten2                                                                        \BNG_OperKosten2_Annualized
+PPPP M =BN    -3               "Financiële verplichtingen"                                                             \BNG_DSCRVerpl2
+PPPP M2 CN    =3               =BNG_DSCR2                                                                              \=BNG_DSCR2
+.Formulas NoTrend, Trend
+BNG_DSCR2=                     OnER(BNG_EBITDA / BNG_DSCRVerpl2,NA)
+BNG_OperKosten2_Annualized   = GetPoint(BNG_OperKosten2,1)
+BNG_FinLasten1_Annualized    = GetPoint(BNG_FinLasten1,1)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; ICR (BNG conform modellenbibliotheek)
+;
+PPPP  2 CN     2  +            "ICR (BNG conform modellenbibliotheek)"                                                 \BNG_ICR
+PPPP    FN     3               =BNG_EBIT                                                                               \=BNG_EBIT
+PPPP    FN     3               "Rentelasten"                                                                           \=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP  2 CN    =3               =BNG_ICR                                                                                \=BNG_ICR
+.Formulas NoTrend, Trend
+BNG_ICR=                       OnER(BNG_EBIT/BNG_FinLasten1,NA)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; ICR (Water)
+;
+PPPP  2 CN     2  +            "ICR (Water)"                                                                           \BNG_ICRWater
+PPPP    FN     3  +            "EBIT (Water)"                                                                          \BNG_EBITWater
+PPPP    FN     4               =BNG_ResNaBel                                                                           \=BNG_ResNaBel
+PPPP   -FN     4               =BNG_AandeelResDeeln                                                                        \=BNG_AandeelResDeeln
+PPPP    FN     4               =BNG_WinstBel                                                                               \=BNG_WinstBel
+PPPP   -FN     4               =BNG_BuitBaten                                                                              \=BNG_BuitBaten
+PPPP    FN     4               =BNG_BuitLasten                                                                             \=BNG_BuitLasten
+PPPP    FN     4               =BNG_FinLasten                                                                              \=BNG_FinLasten
+PPPP   -FN     4               =BNG_FinBaten                                                                               \=BNG_FinBaten
+PPPP   =FN    -4               =BNG_EBITWater                                                                          \=BNG_EBITWater
+PPPP    FN     3               "Rentelasten"                                                                           \=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP  2 CN    =3               =BNG_ICRWater                                                                           \=BNG_ICRWater
+
+
+.Hints
+BNG_EBITWater=                 "Nettowinst, gecorrigeerd voor (i) het netto resultaat van de Financiële baten en Financiële lasten, (ii) het netto buitengewoon resultaat, (iii) belastingen en (iv) het aandeel van de Cli?nt in de resultaten van nietgeconsolideerde deelnemingen, voor zover deze niet tot uitdrukking komen in de geconsolideerde nettowinst."
+.Formulas NoTrend, Trend
+BNG_ICRWater=                  OnER(BNG_EBITWATER/BNG_FinLasten1,NA)
+
+.Formulas Visible
+BNG_ICRWater=                  (BBRisicoModel[1]=10)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; ICR (WSW)
+;
+PPPP M2 CN     2  +            "ICR (WSW)"                                                                             \BNG_ICRWSW
+PPPP M  FN     3               =BNG_JCFOPCF                                                                            \=BNG_JCFOPCF
+PPPP M  FN     3               =BNG_FinLasten1                                                                         \=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP M -FN     3               =BNG_FinBaten1                                                                          \=BNG_FinBaten1 -> BNG_FinBaten1
+PPPP M =FN    -3  +            "Operationele kasstroom vóór netto renteuitgaven"                                       \BNG_JCFOPCFvoorRente
+PPPP M2 CN    =3               =BNG_ICRWSW                                                                             \=BNG_ICRWSW
+.Formulas NoTrend, Trend
+BNG_ICRWSW=                       OnER(BNG_JCFOPCFvoorRente/BNG_FinLasten1,NA)
+
+.Formulas Visible
+BNG_ICRWSW =              (BBRisicoModel[1]=20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; VHV liquiditeit / rente en aflossingen
+;
+PPPP M  FN     2  +            "VHV liquiditeit / rente en aflossingen"                                                \BNG_VHV_Ratio1
+PPPP M  FN     3               =BNG_EBITDA                                                                             \=BNG_EBITDA -> BNG_EBITDA
+PPPP M -FN     3               "Rentelasten"                                                                           \=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP M -FN     3               =BNG_AflosFinanciering                                                                  \=BNG_AflosFinanciering -> BNG_AflosFinanciering
+PPPP M =FN    =3               =BNG_VHV_Ratio1                                                                         \=BNG_VHV_Ratio1
+.Formulas Visible
+BNG_VHV_Ratio1=                (BBRisicoModel[1]=20)
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; VHV liquiditeit / rente en aflossingsfictie
+;
+PPPP M  CN     2  +            "VHV liquiditeit / rente en aflossingsfictie"                                           \BNG_VHV_Ratio3
+PPPP M  FN     3               =BNG_EBITDA                                                                             \=BNG_EBITDA -> BNG_EBITDA
+PPPP M -FN     3               "Rentelasten"                                                                           \=BNG_FinLasten1 -> BNG_FinLasten1
+PPPP M -CN     3  +            "Aflossingsfictie (2% LVV)"                                                             \BNG_VHV_Ratio2
+PPPP M  CN    =3               =BNG_VHV_Ratio3                                                                         \=BNG_VHV_Ratio3
+.Formulas NoTrend, Trend
+BNG_VHV_Ratio2=                (0.02 * (BNG_LangKred4 + BNG_LangKredF + BNG_KORTVVBank))/TsY
+BNG_VHV_Ratio3=                BNG_EBITDA-BNG_FinLasten1-BNG_VHV_Ratio2
+
+.Formulas Visible
+BNG_VHV_Ratio3=                (BBRisicoModel[1]=20)
+BNG_VHV_Ratio2=                (BBRisicoModel[1]=20)
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- BNG_Kengetallen
+; Personeelskosten ratio
+;
+PPPP  2 CN     2  +            "Personeelskosten ratio"                                                                \BNG_PersKRatio
+PPPP    FN     3               =BNG_OperKosten1                                                                                  \=BNG_OperKosten1 -> BNG_OperKosten1
+PPPP    FN     3               =BNG_SomBedrOpbr                                                                            \=BNG_SomBedrOpbr -> BNG_SomBedrOpbr
+PPPP  2 CN    =3               =BNG_PersKRatio                                                                         \=BNG_PersKRatio
+.Hints
+BNG_PersKRatio=                "Alle personeelskosten van de cli?nt, zowel in loondienst als niet in loondienst, gedeeld door het totaal aan inkomsten uit de normale bedrijfsvoering van de cli?nt"
+.Formulas NoTrend, Trend
+BNG_PersKRatio=                OnER(BNG_OperKosten1/BNG_SomBedrOpbr,NA)
+
+.Formulas Visible
+BNG_PersKRatio=                (BBRisicoModel[1]<>20)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- Specifatie activa
+PPPP    BN     2               Specificatie activa                                                              \BNG_Activa
+
+PPPP    BN     3               =BNG_ImmatAkt                                                                    \=BNG_ImmatAkt
+PIPI    BN     4               =BNG_ImmatAkt1                                                                   \=BNG_ImmatAkt1
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_ImmatAkt1Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_ImmatAkt1Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_ImmatAkt1Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_ImmatAkt1
+PIPI    BN     4               =BNG_ImmatAkt2                                                                   \=BNG_ImmatAkt2
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_ImmatAkt2Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_ImmatAkt2Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_ImmatAkt2Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_ImmatAkt2
+
+PPPP    BN     3  +            "Materiële vaste activa"                                                         \BNG_MatAkt
+PIPI    BN     4               =BNG_MatAkt1                                                                     \=BNG_MatAkt1
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt1Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt1Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt1Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt1
+PIPI    BN     4               =BNG_MatAkt3                                                                     \=BNG_MatAkt3
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt3Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt3Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt3Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt3
+PIPI    BN     4               =BNG_MatAkt4                                                                     \=BNG_MatAkt4
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt4Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt4Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt4Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt4
+PIPI    BN     4               =BNG_MatAkt5                                                                     \=BNG_MatAkt5
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt5Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt5Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt5Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt5
+PIPI    BN     4               =BNG_MatAkt6                                                                     \=BNG_MatAkt6
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt6Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt6Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt6Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt6
+PIPI    BN     4               =BNG_MatAkt7                                                                     \=BNG_MatAkt7
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt7Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt7Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt7Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt7
+PIPI    BN     4               =BNG_MatAkt8                                                                     \=BNG_MatAkt8
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt8Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt8Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt8Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt8
+PIPI    BN     4               =BNG_MatAkt9                                                                     \=BNG_MatAkt9
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_MatAkt9Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_MatAkt9Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_MatAkt9Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_MatAkt9
+PIPI    BN     4               =BNG_VHV_MatAkt2                                                                 \=BNG_VHV_MatAkt2
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_VHV_MatAkt2Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_VHV_MatAkt2Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_VHV_MatAkt2Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_VHV_MatAkt2
+PIPI    BN     4               =BNG_VHV_MatAkt21                                                                \=BNG_VHV_MatAkt21
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_VHV_MatAkt21Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_VHV_MatAkt21Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_VHV_MatAkt21Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_VHV_MatAkt21
+PIPI    BN     4               =BNG_VHV_MatAkt22                                                                \=BNG_VHV_MatAkt22
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_VHV_MatAkt22Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_VHV_MatAkt22Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_VHV_MatAkt22Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_VHV_MatAkt22
+PIPI    BN     4               =BNG_VHV_MatAkt23                                                                \=BNG_VHV_MatAkt23
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_VHV_MatAkt23Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_VHV_MatAkt23Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_VHV_MatAkt23Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_VHV_MatAkt23
+PPPP   =BN    -4               =BNG_MatAkt                                                                      \=BNG_MatAkt
+
+PPPP    BN     3               =BNG_FinVastAkt                                                                  \=BNG_FinVastAkt
+PIII    BN     4               =BNG_FinVastAkt2                                                                 \=BNG_FinVastAkt2
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt2Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt2Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt2Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt2
+PIII    BN     4               =BNG_FinVastAkt12                                                                \=BNG_FinVastAkt12
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt12Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt12Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt12Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt12
+PIII    BN     4               =BNG_FinVastAkt13                                                                \=BNG_FinVastAkt13
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt13Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt13Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt13Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt13
+PIII    BN     4               =BNG_FinVastAkt14                                                                \=BNG_FinVastAkt14
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt14Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt14Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt14Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt14
+PIII    BN     4               =BNG_FinVastAkt3                                                                 \=BNG_FinVastAkt3
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt3Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt3Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt3Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt3
+PIII    BN     4               =BNG_FinVastAkt4                                                                 \=BNG_FinVastAkt4
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt4Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt4Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt4Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt4
+PIII    BN     4               =BNG_FinVastAkt5                                                                 \=BNG_FinVastAkt5
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt5Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt5Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt5Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt5
+PIII    BN     4               =BNG_FinVastAkt1                                                                 \=BNG_FinVastAkt1
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt1Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt1Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt1Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt1
+PIII    BN     4               =BNG_FinVastAkt6                                                                 \=BNG_FinVastAkt6
+PPPP M  CN     5               $>Previous net book value<$                                                      \BNG_FinVastAkt6Vorig
+PPIP M  FN     5               $>Investments and divestments<$                                                  \BNG_FinVastAkt6Inv
+PIII   -FN     5               $>Depreciation<$                                                                 \BNG_FinVastAkt6Afs
+PIPI    BN    -5=              $>Book value<$                                                                   \=BNG_FinVastAkt6
+
+.Formulas NoTrend
+BNG_ImmatAkt1Inv              = OnZero(BNG_ImmatAkt1    - BNG_ImmatAkt1[T-1]    + BNG_ImmatAkt1Afs      ,NA)
+BNG_ImmatAkt2Inv              = OnZero(BNG_ImmatAkt2    - BNG_ImmatAkt2[T-1]    + BNG_ImmatAkt2Afs      ,NA)
+BNG_MatAkt1Inv                = OnZero(BNG_MatAkt1      - BNG_MatAkt1[T-1]      + BNG_MatAkt1Afs        ,NA)
+BNG_MatAkt3Inv                = OnZero(BNG_MatAkt3      - BNG_MatAkt3[T-1]      + BNG_MatAkt3Afs        ,NA)
+BNG_MatAkt4Inv                = OnZero(BNG_MatAkt4      - BNG_MatAkt4[T-1]      + BNG_MatAkt4Afs        ,NA)
+BNG_MatAkt5Inv                = OnZero(BNG_MatAkt5      - BNG_MatAkt5[T-1]      + BNG_MatAkt5Afs        ,NA)
+BNG_MatAkt6Inv                = OnZero(BNG_MatAkt6      - BNG_MatAkt6[T-1]      + BNG_MatAkt6Afs        ,NA)
+BNG_MatAkt7Inv                = OnZero(BNG_MatAkt7      - BNG_MatAkt7[T-1]      + BNG_MatAkt7Afs        ,NA)
+BNG_MatAkt8Inv                = OnZero(BNG_MatAkt8      - BNG_MatAkt8[T-1]      + BNG_MatAkt8Afs        ,NA)
+BNG_MatAkt9Inv                = OnZero(BNG_MatAkt9      - BNG_MatAkt9[T-1]      + BNG_MatAkt9Afs        ,NA)
+BNG_VHV_MatAkt2Inv            = OnZero(BNG_VHV_MatAkt2  - BNG_VHV_MatAkt2[T-1]  + BNG_VHV_MatAkt2Afs    ,NA)
+BNG_VHV_MatAkt21Inv           = OnZero(BNG_VHV_MatAkt21 - BNG_VHV_MatAkt21[T-1] + BNG_VHV_MatAkt21Afs   ,NA)
+BNG_VHV_MatAkt22Inv           = OnZero(BNG_VHV_MatAkt22 - BNG_VHV_MatAkt22[T-1] + BNG_VHV_MatAkt22Afs   ,NA)
+BNG_VHV_MatAkt23Inv           = OnZero(BNG_VHV_MatAkt23 - BNG_VHV_MatAkt23[T-1] + BNG_VHV_MatAkt23Afs   ,NA)
+BNG_FinVastAkt1Inv            = OnZero(BNG_FinVastAkt1  - BNG_FinVastAkt1[T-1]  + BNG_FinVastAkt1Afs    ,NA)
+BNG_FinVastAkt2Inv            = OnZero(BNG_FinVastAkt2  - BNG_FinVastAkt2[T-1]  + BNG_FinVastAkt2Afs    ,NA)
+BNG_FinVastAkt3Inv            = OnZero(BNG_FinVastAkt3  - BNG_FinVastAkt3[T-1]  + BNG_FinVastAkt3Afs    ,NA)
+BNG_FinVastAkt4Inv            = OnZero(BNG_FinVastAkt4  - BNG_FinVastAkt4[T-1]  + BNG_FinVastAkt4Afs    ,NA)
+BNG_FinVastAkt5Inv            = OnZero(BNG_FinVastAkt5  - BNG_FinVastAkt5[T-1]  + BNG_FinVastAkt5Afs    ,NA)
+BNG_FinVastAkt6Inv            = OnZero(BNG_FinVastAkt6  - BNG_FinVastAkt6[T-1]  + BNG_FinVastAkt6Afs    ,NA)
+BNG_FinVastAkt12Inv           = OnZero(BNG_FinVastAkt12 - BNG_FinVastAkt12[T-1] + BNG_FinVastAkt12Afs   ,NA)
+BNG_FinVastAkt13Inv           = OnZero(BNG_FinVastAkt13 - BNG_FinVastAkt13[T-1] + BNG_FinVastAkt13Afs   ,NA)
+BNG_FinVastAkt14Inv           = OnZero(BNG_FinVastAkt14 - BNG_FinVastAkt14[T-1] + BNG_FinVastAkt14Afs   ,NA)
+
+BNG_ImmatAkt1Vorig            = BNG_ImmatAkt1[T-1]
+BNG_ImmatAkt2Vorig            = BNG_ImmatAkt2[T-1]
+BNG_MatAkt1Vorig              = BNG_MatAkt1[T-1]
+BNG_MatAkt3Vorig              = BNG_MatAkt3[T-1]
+BNG_MatAkt4Vorig              = BNG_MatAkt4[T-1]
+BNG_MatAkt5Vorig              = BNG_MatAkt5[T-1]
+BNG_MatAkt6Vorig              = BNG_MatAkt6[T-1]
+BNG_MatAkt7Vorig              = BNG_MatAkt7[T-1]
+BNG_MatAkt8Vorig              = BNG_MatAkt8[T-1]
+BNG_MatAkt9Vorig              = BNG_MatAkt9[T-1]
+BNG_VHV_MatAkt2Vorig          = BNG_VHV_MatAkt2[T-1]
+BNG_VHV_MatAkt21Vorig         = BNG_VHV_MatAkt21[T-1]
+BNG_VHV_MatAkt22Vorig         = BNG_VHV_MatAkt22[T-1]
+BNG_VHV_MatAkt23Vorig         = BNG_VHV_MatAkt23[T-1]
+BNG_FinVastAkt1Vorig          = BNG_FinVastAkt1[T-1]
+BNG_FinVastAkt2Vorig          = BNG_FinVastAkt2[T-1]
+BNG_FinVastAkt3Vorig          = BNG_FinVastAkt3[T-1]
+BNG_FinVastAkt4Vorig          = BNG_FinVastAkt4[T-1]
+BNG_FinVastAkt5Vorig          = BNG_FinVastAkt5[T-1]
+BNG_FinVastAkt6Vorig          = BNG_FinVastAkt6[T-1]
+BNG_FinVastAkt12Vorig         = BNG_FinVastAkt12[T-1]
+BNG_FinVastAkt13Vorig         = BNG_FinVastAkt13[T-1]
+BNG_FinVastAkt14Vorig         = BNG_FinVastAkt14[T-1]
+
+.Formulas Visible
+BNG_Activa         = 0
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------------------------------------- Specifatie leningen
+PPPP    BN     2               Specificatie leningen                                                            \BNG_Leningen
+
+PIPI    BN     3               " "                                                                              \BNG_LangKredF  ;;=LangKredF
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKredF
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKredF
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_KredF
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_KredFFin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKredF
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKredF
+PIPI    BN     3               "Achtergestelde leningen"                                                        \BNG_AchterKred ;;=AchterKred
+IIPI    BN  *  4               "Achtergestelde lening"                                                          \BNG_LangKred1  ;;=LangKred1
+PIPI    BN     5               $>Relating to long term debt<$                                                   \=BNG_LangKred1
+PIII    BN     5               $>Relating to short term debt<$                                                  \BNG_AflkjKred1
+PPPP   =BN    -5=              $>Principal debt<$                                                               \BNG_Kred1
+PPIP M  FN   1 5               $>New loan<$                                                                     \BNG_Kred1Fin
+PIII    FN   1 5               $>Repayment<$                                                                    \BNG_AflKred1
+;;PIII    FN     5               $>Interest expenses<$                                                            \BNG_RKred1
+IIPI    BN     4               "Achtergestelde lening"                                                          \BNG_LangKredA  ;;=LangKredA
+PIPI    BN     5               $>Relating to long term debt<$                                                   \=BNG_LangKredA
+PIII    BN     5               $>Relating to short term debt<$                                                  \BNG_AflkjKredA
+PPPP   =BN    -5=              $>Principal debt<$                                                               \BNG_KredA
+PPIP M  FN   1 5               $>New loan<$                                                                     \BNG_KredAFin
+PIII    FN   1 5               $>Repayment<$                                                                    \BNG_AflKredA
+;;PIII    FN     5               $>Interest expenses<$                                                            \BNG_RKredA
+IIPI    BN     4               "Achtergestelde lening"                                                          \BNG_LangKredB  ;;=LangKredB
+PIPI    BN     5               $>Relating to long term debt<$                                                   \=BNG_LangKredB
+PIII    BN     5               $>Relating to short term debt<$                                                  \BNG_AflkjKredB
+PPPP   =BN    -5=              $>Principal debt<$                                                               \BNG_KredB
+PPIP M  FN   1 5               $>New loan<$                                                                     \BNG_KredBFin
+PIII    FN   1 5               $>Repayment<$                                                                    \BNG_AflKredB
+;;PIII    FN     5               $>Interest expenses<$                                                            \BNG_RKredB
+IIPI    BN     4               "Achtergestelde lening"                                                          \BNG_LangKredC  ;;=LangKredC
+PIPI    BN     5               $>Relating to long term debt<$                                                   \=BNG_LangKredC
+PIII    BN     5               $>Relating to short term debt<$                                                  \BNG_AflkjKredC
+PPPP   =BN    -5=              $>Principal debt<$                                                               \BNG_KredC
+PPIP M  FN   1 5               $>New loan<$                                                                     \BNG_KredCFin
+PIII    FN   1 5               $>Repayment<$                                                                    \BNG_AflKredC
+;;PIII    FN     5               $>Interest expenses<$                                                            \BNG_RKredc
+PIPI   =BN    -4               "Achtergestelde lening"                                                          \=BNG_AchterKred
+PIPI    BN     3               " "                                                                              \BNG_LangKred4  ;;=LangKred4
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKred4
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKred4
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_Kred4
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_Kred4Fin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKred4
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKred4
+PIPI    BN     3               " "                                                                              \BNG_LangKred9  ;;=LangKred9
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKred9
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKred9
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_Kred9
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_Kred9Fin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKred9
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKred9
+PIPI    BN     3               " "                                                                              \BNG_LangKred5  ;;=LangKred5
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKred5
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKred5
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_Kred5
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_Kred5Fin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKred5
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKred5
+PIPI    BN     3               " "                                                                              \BNG_LangKredG  ;;=LangKredG
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKredG
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKredG
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_KredG
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_KredGFin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKredG
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKredG
+PIPI    BN     3               " "                                                                              \BNG_LangKred6  ;;=LangKred6
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKred6
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKred6
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_Kred6
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_Kred6Fin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKred6
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKred6
+PIPI    BN     3               " "                                                                              \BNG_LangKred7  ;;=LangKred7
+PIPI    BN     4               $>Relating to long term debt<$                                                   \=BNG_LangKred7
+PIII    BN     4               $>Relating to short term debt<$                                                  \BNG_AflkjKred7
+PPPP   =BN    -4=              $>Principal debt<$                                                               \BNG_Kred7
+PPIP M  FN   1 4               $>New loan<$                                                                     \BNG_Kred7Fin
+PIII    FN   1 4               $>Repayment<$                                                                    \BNG_AflKred7
+;;PIII    FN     4               $>Interest expenses<$                                                            \BNG_RKred7
+PPPP   =BN    -3               =BNG_LangVV                                                                      \=BNG_LangVV     ;;=LangVV
+
+.Formulas Visible
+BNG_Leningen         = 0
+
+.Formulas NoTrend
+BNG_KredFFin          = MutCalc*OnZero(BNG_KredF-BNG_KredF[T-1]+BNG_AflKredF,NA)
+BNG_Kred1Fin          = MutCalc*OnZero(BNG_Kred1-BNG_Kred1[T-1]+BNG_AflKred1,NA)
+BNG_KredAFin          = MutCalc*OnZero(BNG_KredA-BNG_KredA[T-1]+BNG_AflKredA,NA)
+BNG_KredBFin          = MutCalc*OnZero(BNG_KredB-BNG_KredB[T-1]+BNG_AflKredB,NA)
+BNG_KredCFin          = MutCalc*OnZero(BNG_KredC-BNG_KredC[T-1]+BNG_AflKredC,NA)
+BNG_Kred4Fin          = MutCalc*OnZero(BNG_Kred4-BNG_Kred4[T-1]+BNG_AflKred4,NA)
+BNG_Kred9Fin          = MutCalc*OnZero(BNG_Kred9-BNG_Kred9[T-1]+BNG_AflKred9,NA)
+BNG_Kred5Fin          = MutCalc*OnZero(BNG_Kred5-BNG_Kred5[T-1]+BNG_AflKred5,NA)
+BNG_KredGFin          = MutCalc*OnZero(BNG_KredG-BNG_KredG[T-1]+BNG_AflKredG,NA)
+BNG_Kred6Fin          = MutCalc*OnZero(BNG_Kred6-BNG_Kred6[T-1]+BNG_AflKred6,NA)
+BNG_Kred7Fin          = MutCalc*OnZero(BNG_Kred7-BNG_Kred7[T-1]+BNG_AflKred7,NA)
+BNG_AflKredF          = Max(BNG_KredF[T-1]-BNG_KredF,NA)
+BNG_AflKred1          = Max(BNG_Kred1[T-1]-BNG_Kred1,NA)
+BNG_AflKredA          = Max(BNG_KredA[T-1]-BNG_KredA,NA)
+BNG_AflKredB          = Max(BNG_KredB[T-1]-BNG_KredB,NA)
+BNG_AflKredC          = Max(BNG_KredC[T-1]-BNG_KredC,NA)
+BNG_AflKred4          = Max(BNG_Kred4[T-1]-BNG_Kred4,NA)
+BNG_AflKred9          = Max(BNG_Kred9[T-1]-BNG_Kred9,NA)
+BNG_AflKred5          = Max(BNG_Kred5[T-1]-BNG_Kred5,NA)
+BNG_AflKredG          = Max(BNG_KredG[T-1]-BNG_KredG,NA)
+BNG_AflKred6          = Max(BNG_Kred6[T-1]-BNG_Kred6,NA)
+BNG_AflKred7          = Max(BNG_Kred7[T-1]-BNG_Kred7,NA)
+;
+;
+;======================================================================================================================================= Naamgeving van de variabelen
+.Formulas Title
+;; ;;                                       10:Naam voor B & I  | 20: Naam voor VHV | 30: Naam voor Zorg | 40: Naam voor onderwijs
+;;
+;; CorOndWerk      = &Case(BBRisicoModel[1],[30:"Bevoorschotting Zorgverzekeraars"|"Vooruitbetaald op onderhanden werk"])
+;; ImmatAkt         = "Immateriële vaste activa"
+;; SomOvLiqMid="Liquide middelen"
+BNG_ASSVoorz= &Case(BBRisicoModel[1],[40:"Egalisatierekening investeringssubsidies"|20:"Egalisatierekening"|"Bijdragen derden in materiële vaste activa"])
+BNG_AandeelResDeeln= &Case(BBRisicoModel[1],[40:"Resultaat deelnemingen"|30:"Resultaat deelnemingen"|20:"Resultaat deelnemingen"|"Aandeel resultaat deelnemingen"])
+BNG_Afwaardering = "Afwaardering activa + fictieve kosten (non-cash)"
+BNG_AktAfs = &Case(BBRisicoModel[1],[20:"Afschrijvingen op immat. en mat. vaste activa"|"Afschrijvingen"])
+BNG_BedrRes = "Bedrijfsresultaat"
+BNG_BuitBaten = "Buitengewone baten"
+BNG_BuitBaten1 = "Boekwinst verkoop activa (cash)"
+BNG_BuitBaten2 = "Overige bijzondere baten (cash) "
+BNG_BuitLasten2 = "Overige bijzondere lasten (cash)"
+;;;;BNG_EigenVerm1 = &Case(BBRisicoModel[1],[20:"Kapitaal"|"Gestort en geplaatst kapitaal"])
+BNG_EigenVerm1 = &Case(BBRisicoModel[1],[20:"Kapitaal"|30:"Gestort en geplaatst kapitaal"|40:"Gestort en geplaatst kapitaal"|"Gestort en geplaatst kapitaal/Agioreserve"])
+BNG_EigenVerm2 = "Agioreserve"
+BNG_EigenVerm3 = &Case(BBRisicoModel[1],[30:"Niet collectief gefinancierd vermogen"|"Niet collectief gefinancierd vermogen"])
+BNG_EigenVerm4 = &Case(BBRisicoModel[1],[30:"(Niet) collectief gefinancierd gebonden vermogen"|20:"Resultaat boekjaar"|40:"Algemene reserve"|"Algemene reserve/Onverdeelde winst"])
+;;;;BNG_EigenVerm5 = "Overige reserve"
+BNG_EigenVerm5 = &Case(BBRisicoModel[1],[30:"Overige reserve/Herwaarderingsreserve"|40:"Overige reserve/Herwaarderingsreserve"|"Overige reserve"])
+BNG_EigenVerm8 = &Case(BBRisicoModel[1],[20:"Wettelijke en statutaire reserves"|"Resultaat boekjaar"])
+BNG_EigenVerm="Eigen vermogen"
+BNG_FinBaten = "Financiële baten"
+BNG_FinBaten1 = &Case(BBRisicoModel[1],[20:"Andere rentebaten en soortgelijke opbrengsten"|"Rentebaten"])
+BNG_FinBaten2 = &Case(BBRisicoModel[1],[20:"Waardeveranderingen van financiële vaste activa en van effecten"|"Overige financiële baten"])
+BNG_FinBaten3 = &Case(BBRisicoModel[1],[20:"Opbrengst van vorderingen die tot de vaste activa behoren en van effecten"|"Opbrengsten financiële vaste activa en effecten"])
+BNG_FinBaten4 = "Resultaat deelnemingen"
+BNG_FinLasten = "Financiële lasten"
+BNG_FinLasten1 = &Case(BBRisicoModel[1],[20:"Rentelasten en soortgelijke kosten"|"Rentelasten"])
+BNG_FinLasten2 = "Financieringskosten"
+BNG_FinLasten3 = "Overige financiële lasten"
+BNG_FinVastAkt  = "Financiële vaste activa"
+BNG_FinVastAkt1 = &Case(BBRisicoModel[1],[20:"Andere deelnemingen"|"Deelnemingen"])
+BNG_FinVastAkt12 = &Case(BBRisicoModel[1],[20:"Vorderingen op groepsmaatschappijen"|"$>Investments in securities<$"])
+BNG_FinVastAkt13 = &Case(BBRisicoModel[1],[20:"Te vorderen BWS-subsidies"|"$>Mortgages<$"])
+BNG_FinVastAkt14 = &Case(BBRisicoModel[1],[20:"Overige effecten"|"$>Bankers<$"])
+BNG_FinVastAkt2 = &Case(BBRisicoModel[1],[20:"Leningen U/G"|"Leningen U/G Overig"])
+BNG_FinVastAkt3 = &Case(BBRisicoModel[1],[20:"Vorderingen op maatschappijen waarin wordt deelgenomen"|"Leningen U/G Groepsm./Deelneming/Aandeelh.Bestuurder"])
+BNG_FinVastAkt4 = &Case(BBRisicoModel[1],[20:"Deelnemingen in groepsmaatschappijen"|"Leningen U/G aandeelhouders/bestuurders"])
+BNG_FinVastAkt5 = &Case(BBRisicoModel[1],[20:"Latente belastingvordering(en)"|"Latente belastingvorderingen"])
+BNG_FinVastAkt6 = &Case(BBRisicoModel[1],[20:"Overige vorderingen"|"Overige"])
+BNG_GewResVoorBel = &Case(BBRisicoModel[1],[20:"Resultaat uit gewone bedr. uitoefening voor belast."|"Resultaat uit gewone bedrijfsuitoefening"])
+BNG_ImmatAkt2 = &Case(BBRisicoModel[1],[20:"Bouwclaims"|30:"Totaal Goodwill"|"Totaal immateriële activa"])
+BNG_InkoopWaarde1 = "Materiaal en grondstoffen"
+BNG_InkoopWaarde2 ="Kosten uitbesteed werk"
+BNG_InkoopWaarde3 = &Case(BBRisicoModel[1],[30:"Overige direkte inkoopkosten"|"Totale inkoopwaarde"])
+BNG_InkoopWaarde = "Inkoopwaarde"
+BNG_KortVVBank2 = &Case(BBRisicoModel[1],[20:"Schulden aan kredietinstellingen"|"Rekening-courant/Kasgeld"])
+BNG_KortVVBank="Kortlopende schulden aan kredietinstellingen"
+BNG_KortVermogen  ="Kortlopende schulden"
+BNG_LangKred4 = &Case(BBRisicoModel[1],[20:"Schulden/leningen kredietinstellingen"|"Langlopende leningen kredietinstellingen"])
+BNG_LangKred5 = &Case(BBRisicoModel[1],[20:"Waarborgsommen"|"Langlopende leningen Overig"])
+BNG_LangKred6 = &Case(BBRisicoModel[1],[20:"Overige schulden"|"Financiele lease"])
+BNG_LangKred7 = &Case(BBRisicoModel[1],[20:"Verplichtingen uhv Onroerende Zaken Verkocht Onder Voorwaarden"|"Overige langlopende schulden"])
+BNG_LangKred9 = &Case(BBRisicoModel[1],[20:"Schulden aan groepsmaatschappijen"|"Overig"])
+BNG_LangKredF = &Case(BBRisicoModel[1],[20:"Schulden/leningen overheid"|"Hypothecaire lening"])
+BNG_LangKredG = &Case(BBRisicoModel[1],[20:"Schulden aan maatschappijen waarin wordt deelgenomen"|"Overig"])
+BNG_LangVV = "Langlopende schulden"
+BNG_LangVermogen = "Lang vermogen"
+BNG_LiqEffecten = "Effecten"
+BNG_MatAkt1 = &Case(BBRisicoModel[1],[20:"Sociaal vastgoed in exploitatie"|"Terreinen/Gebouwen"])
+BNG_MatAkt3 = &Case(BBRisicoModel[1],[10:"Leidingen/Installaties/Inventaris"|20:"Onroerende en roerende zaken ten dienste van de exploitatie"|30:"Installaties/Inventaris"|40:"Installaties/Inventaris/Vervoersmiddelen"])
+BNG_MatAkt4 = &Case(BBRisicoModel[1],[20:"Onroerende zaken verkocht onder voorwaarden "|"Leidingen, pompstations en netwerk"])
+BNG_MatAkt5 = "Inventarissen"
+BNG_MatAkt6 = "Automatiseringsapparatuur en software"
+BNG_MatAkt7 = "Vervoermiddelen"
+BNG_MatAkt8 = "Projecten in uitvoering"
+BNG_MatAkt9 = &Case(BBRisicoModel[1],[30:"Overige activa"|"Overige materiële vaste activa"])
+BNG_NettoOmzet = &Case(BBRisicoModel[1],[40:"Totale baten"|30:"Totaal baten"|20:"Bedrijfsopbrengsten"|"Netto omzet"])
+BNG_NettoOmzet1 = &Case(BBRisicoModel[1],[40:"Totale baten"|30:"Totale baten"|20:"Huuropbrengsten"|"Inkomsten uit gereguleerde activiteiten"])
+BNG_NettoOmzet2 = &Case(BBRisicoModel[1],[40:"Subsidies en overige overheidsbijdragenbijdragen"|30:"Correctie voorgaande jaren"|20:"Opbrengsten servicecontracten"|"Inkomsten uit niet-gereguleerde activiteiten"])
+BNG_NettoOmzet3 = &Case(BBRisicoModel[1],[40:"Collegegelden"|30:"Omzet DBC's B-segment"|20:"Overheidsbijdragen"|"Overheidsbijdragen en subsidies"])
+BNG_NettoOmzet4 = &Case(BBRisicoModel[1],[40:"Werk voor derden"|30:"Mutatie onderhanden werk B-segment"|20:"Geactiveerde productie eigen bedrijf"|"Opbrengst werk voor derden"])
+BNG_NettoOmzet5 = &Case(BBRisicoModel[1],[40:"Overige bedrijfsopbrengsten"|30:"Niet gebudgetteerde zorgprestaties"|20:"Overige bedrijfsopbrengsten"|"Overige bedrijfsopbrengsten"])
+BNG_NettoOmzet6 = &Case(BBRisicoModel[1],[30:"Subsidies en bijdragen"|"Subsidies en bijdragen"])
+BNG_NettoOmzet7 = &Case(BBRisicoModel[1],[30:"Overige bedrijfsopbrengsten"|"Overige bedrijfsopbrengsten"])
+BNG_NettoOmzet8=" "
+BNG_OperKosten = &Case(BBRisicoModel[1],[20:"Bedrijfslasten"|"Operationele kosten"])
+BNG_OperKosten = &Case(BBRisicoModel[1],[20:"Bedrijfslasten"|"Operationele kosten"])
+BNG_OperKosten10 = ".."
+BNG_OperKosten11 = &Case(BBRisicoModel[1],[40:"Overige instellingslasten"|"Overig"])
+BNG_OperKosten13 = &Case(BBRisicoModel[1],[20:"Lasten servicecontracten"|"Energie"])
+BNG_OperKosten1="Kosten personeel"
+BNG_OperKosten2="Operationele lease"
+BNG_OperKosten3 = &Case(BBRisicoModel[1],[20:"Erfpacht"|"Huur"])
+BNG_OperKosten4 = &Case(BBRisicoModel[1],[20:"Lonen en salarissen"|"Dotatie voorzieningen"])
+BNG_OperKosten5 = &Case(BBRisicoModel[1],[20:"Sociale lasten / pensioenlasten"|"Huisvestingslasten"])
+BNG_OperKosten6 = &Case(BBRisicoModel[1],[20:"Onderhoudskosten"|"Algemene beheerskosten"])
+BNG_OperKosten7 = &Case(BBRisicoModel[1],[30:"Voedingsmiddelen en hotelmatige kosten"|20:"Overige bedrijfslasten"|"Voedingsmiddelen en hotelmatige kosten"])
+BNG_OperKosten8 = &Case(BBRisicoModel[1],[30:"Patiënt- en bewonersgebonden kosten"|20:"Leefbaarheid"|"Patiënt- en bewonersgebonden kosten"])
+BNG_OperKosten9 = &Case(BBRisicoModel[1],[30:"Onderhoud- en energiekosten"|"Onderhoud- en energiekosten"])
+BNG_OvBedrOpbr="Overige bedrijfsopbrengsten"
+BNG_OvBuitBaten = "Overige bijzondere baten (non-cash)"
+BNG_OvKortKred = &Case(BBRisicoModel[1],[30:"Financieringsoverschot"|"Overige kortlopende schulden"])
+BNG_OvKortVVBank1 = &Case(BBRisicoModel[1],[20:"Schulden aan gemeenten"|"Crediteuren"])
+BNG_OvKortVVBank2 = &Case(BBRisicoModel[1],[20:"Schulden aan leveranciers"|"R/C schulden groepsmaatschappijen/deelnemingen"])
+BNG_OvKortVVBank3 = &Case(BBRisicoModel[1],[40:"Belastingen en premies sociale verzekeringen"|30:"Belastingen en premies sociale verzekeringen"|20:"Schulden aan groepsmaatschappijen"|"Belastingen en premies"])
+BNG_OvKortVVBank4 = &Case(BBRisicoModel[1],[40:"Schulden ter zake van pensioenen"|30:"Schulden ter zake van pensioenen"|20:"Belastingen en premies sociale verzekeringen"|"Schulden ter zake van pensioenen"])
+BNG_OvKortVVBank5 = &Case(BBRisicoModel[1],[40:"Salarissen, vakantiedagen etc."|30:"Salarissen, vakantiedagen etc."|20:"Aangegane verplichtingen inzake (on)roerende zaken"|"Salarissen, vakantiedagen etc."])
+BNG_OvKortVVBank6 = &Case(BBRisicoModel[1],[40:"Ministerie OCW/EL&I"|20:"Schulden ter zake van pensioenen"|"Ministerie OCW/EL&I"])
+BNG_OvKortVVBank7 = &Case(BBRisicoModel[1],[20:"Overige schulden"|"Overige kortlopende schulden"])
+BNG_OvKortVVBank8 = "Overlopende passiva"
+BNG_OvKortVVBank9 = &Case(BBRisicoModel[1],[20:"Schulden aan maatschappijen waarin wordt deelgenomen"|"Kostencrediteuren"])
+BNG_OvKortVVBank="Overige kortlopende schulden"
+BNG_OvOverlAkt  = &Case(BBRisicoModel[1],[30:"Financieringstekort"|"Overige overlopende activa"])
+BNG_ResAandDerden = "Aandeel van derden in resultaat"
+BNG_ResNabel = &Case(BBRisicoModel[1],[20:"Resultaat na belastingen"|"Netto resultaat"])
+BNG_VHVBuitBaten = &Case(BBRisicoModel[1],[20:"Buitengewone baten"|"Buitengewone baten"])
+BNG_VHVBuitBaten1  = &Case(BBRisicoModel[1],[20:"* Netto verkoopresultaat vastgoedportefeuille"|"* Verkoop onroerende zaken"])
+BNG_VHVBuitBaten2 = &Case(BBRisicoModel[1],[20:"* Wijziging onderhanden werk"|"* Wijziging onderhanden werk"])
+BNG_VHVBuitBaten3 = &Case(BBRisicoModel[1],[20:"* Overige waardeveranderingen (im) mat. vaste activa en vastgoedportefeuille"|"* Overige waardeverandering van (im)mat. vaste activa"])
+BNG_VHVBuitBaten4 = &Case(BBRisicoModel[1],[20:"* Bijzondere waardeverand. van vlottende activa"|"* Bijzondere waardeverandering van vlottende activa"])
+BNG_VHVBuitBaten5 = &Case(BBRisicoModel[1],[20:"* Niet gerealiseerde waardeverandering vastgoedportefeuille"|"* Overige buitengewone baten"])
+BNG_VHVBuitBaten6 = &Case(BBRisicoModel[1],[20:"* Overige buitengewone baten"|"* Overige buitengewone baten"])
+BNG_VHVBuitLasten = &Case(BBRisicoModel[1],[20:"Buitengewone lasten"|"Buitengewone lasten"])
+BNG_VHVBuitLasten1 = &Case(BBRisicoModel[1],[20:"* Overige waardeveranderingen (im) mat. vaste activa en vastgoedportefeuille"|"* Overige waardeverandering van (im)mat. vaste activa"])
+BNG_VHVBuitLasten2 = &Case(BBRisicoModel[1],[20:"* Bijzondere waardeverand. van vlottende activa"|"* Bijzondere waardeverandering van vlottende activa"])
+BNG_VHVBuitLasten3 = &Case(BBRisicoModel[1],[20:"* Niet gerealiseerde waardeverandering vastgoedportefeuille"|"* Overige buitengewone lasten"])
+BNG_VHVBuitLasten4 = &Case(BBRisicoModel[1],[20:"* Overige buitengewone lasten"|"* Overige buitengewone lasten"])
+BNG_VHVGewResNaBel = &Case(BBRisicoModel[1],[20:"Resultaat uit gewone bedr. uitoefening na belast."|"Resultaat uit gewone bedr. uitoefening na belast."])
+BNG_VHV_MatAkt2 = &Case(BBRisicoModel[1],[20:"Vastgoed in ontw. bestemd voor eigen exploitatie"|"Gebouwen"])
+BNG_VHV_MatAkt21 = &Case(BBRisicoModel[1],[20:"Commercieel vastgoed in exploitatie"|"Overige onroerende zaken"])
+BNG_VHV_MatAkt22 = &Case(BBRisicoModel[1],[20:"Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging"|"Overige onroerende zaken"])
+BNG_VHV_MatAkt23 = &Case(BBRisicoModel[1],[20:"Vastgoed in ontw. bestemd voor eigen exploitatie"|"Overige onroerende zaken"])
+BNG_Voorraden1 = &Case(BBRisicoModel[1],[40:"Voorraden"|20:"Vastgoed bestemd voor de verkoop"|"Voorraad goederen"])
+BNG_Voorraden2 = &Case(BBRisicoModel[1],[30:"Onderhanden werk DBC's"|"Onderhanden werk"])
+BNG_Voorraden5 = &Case(BBRisicoModel[1],[20:"Vastgoed in ontwikkeling bestemd voor de verkoop"|"Diverse voorraden"])
+BNG_Voorz1 = &Case(BBRisicoModel[1],[20:"Voorziening pensioenen"|"Personeels-/Reorganisatievoorzieningen"])
+BNG_Voorz2 = &Case(BBRisicoModel[1],[20:"Voorziening reorganisatiekosten"|"Reorganisatievoorzieningen"])
+BNG_Voorz3 ="Voorziening onderhoud"
+BNG_Voorz4 = &Case(BBRisicoModel[1],[10:"Onderhoud/Overig/Latente belastingen"|20:"Overige voorzieningen"|30:"Onderhoud/Overig/Latente belastingen"|40:"Onderhoud/Overige voorzieningen"])
+BNG_Voorz5 = &Case(BBRisicoModel[1],[20:"Voorziening latente belastingverplichtingen"|"Voorziening latente belastingverplichtingen"])
+BNG_Voorz6 = &Case(BBRisicoModel[1],[20:"Voorziening in onrendabele investeringen en herstructureringen"|"Voorzieningen onrendabele investeringen nieuwbouw"])
+BNG_Voorz7 = &Case(BBRisicoModel[1],[20:"Voorziening garantieverplichtingen"|"Garantievoorziening"])
+BNG_Voorz8 = &Case(BBRisicoModel[1],[20:"Voorziening deelnemingen"|"Egalisatie/kostenreserve"])
+BNG_Vorderingen1  = &Case(BBRisicoModel[1],[20:"Huurdebiteuren"|"Debiteuren"])
+BNG_Vorderingen2 = &Case(BBRisicoModel[1],[20:"Vorderingen op groepsmaatschappijen"|"R/C-vorderingen groepsmaatschappijen/Deelnemingen"])
+BNG_Vorderingen3 = &Case(BBRisicoModel[1],[30:"Overige vorderingen/overlopende activa"|"Overige vorderingen"])
+BNG_Vorderingen4 = "Overlopende activa"
+BNG_Vorderingen5 = &Case(BBRisicoModel[1],[40:"Ministerie van OCW/EL&I"|20:"Gemeenten"|"Ministerie van OCW/EL&I"])
+BNG_Vorderingen6 = &Case(BBRisicoModel[1],[40:"Studenten/deelnemers Cursisten"|20:"Belastingen en premies sociale verzekeringen"|"Studenten/deelnemers Cursisten"])
+BNG_Vorderingen7 = &Case(BBRisicoModel[1],[20:"Vorderingen op maatschappijen waarin wordt deelgenomen"|"R/C gelieerde partijen"])
+BNG_Vorderingen8 = &Case(BBRisicoModel[1],[20:"Latente belastingvordering(en)"|"Te ontvangen subsidie/premies"])
+BNG_Vorderingen9 = "Overige overlopende activa"
+BNG_WinstBel = &Case(BBRisicoModel[1],[20:"Belastingen resultaat uit gewone bedrijfsuitoefening"|"Winstbelasting"])

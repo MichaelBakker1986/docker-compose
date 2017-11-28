@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.3" date="03-08-2015" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportVersion>v 1.3</ReportVersion>
+	<ModelVersion><data src="fesModel"><columns number="1" /><variables var="ModelVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ModelVersion>
+    <ParameterVersion><data src="fesModel"><columns number="1" /><variables var="MatrixVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ParameterVersion>
+
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_KVKnr" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<KFRNummer><data src="fesModel"><columns number="1" /><variables var="KFCNummerHoofdkredietNemer" /><presentation showSingleValueVariablesOnce="false" /></data></KFRNummer>
+	<KFRNummerTitel>KFC nummer</KFRNummerTitel>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY" /><presentation showSingleValueVariablesOnce="false" /></data> <data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY_NAME" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+	<CreationDateTitel>Datum</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScaleDefault>1</ReportScaleDefault>
+	<visible_Dekking><data src="fesModel"><columns number="1" /><variables depth="1" var="OnderdekkingVoorwaarden"/></data></visible_Dekking>
+
+	<visible_M01P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M01P01"/><presentation  scale="1"/></data></visible_M01P01>
+	<visible_M01P02><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M01P02"/><presentation  scale="1"/></data></visible_M01P02>
+	<visible_M01P02a><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M01P02a"/><presentation  scale="1"/></data></visible_M01P02a>
+	<visible_M01P03><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M01P03"/><presentation  scale="1"/></data></visible_M01P03>
+	<visible_M01P04><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M01P04"/><presentation  scale="1"/></data></visible_M01P04>
+	<visible_M02P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M02P01"/><presentation  scale="1"/></data></visible_M02P01>
+	<visible_M02P02><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M02P02"/><presentation  scale="1"/></data></visible_M02P02>
+	<visible_M02P03><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M02P03"/><presentation  scale="1"/></data></visible_M02P03>
+	<visible_M02P04><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M02P04"/><presentation  scale="1"/></data></visible_M02P04>
+	<visible_M03P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P01"/><presentation  scale="1"/></data></visible_M03P01>
+	<visible_M03P01c><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P01c"/><presentation  scale="1"/></data></visible_M03P01c>
+	<visible_M03P02><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P02"/><presentation  scale="1"/></data></visible_M03P02>
+	<visible_M03P05_St><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P05_St"/><presentation  scale="1"/></data></visible_M03P05_St>
+	<visible_M03P06_St><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P06_St"/><presentation  scale="1"/></data></visible_M03P06_St>
+	<visible_M03P07A_St><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P07A_St"/><presentation  scale="1"/></data></visible_M03P07A_St>
+	<visible_M03P07B_St><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P07B_St"/><presentation  scale="1"/></data></visible_M03P07B_St>
+	<visible_M03P07C_St><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P07C_St"/><presentation  scale="1"/></data></visible_M03P07C_St>
+	<visible_M03P08_Sw><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P08_Sw"/><presentation  scale="1"/></data></visible_M03P08_Sw>
+	<visible_M03P09><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P09"/><presentation  scale="1"/></data></visible_M03P09>
+	<visible_M03P10><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M03P10"/><presentation  scale="1"/></data></visible_M03P10>
+	<visible_M04P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P01"/><presentation  scale="1"/></data></visible_M04P01>
+	<visible_BSKOnderdekking><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_BSKOnderdekking"/><presentation  scale="1"/></data></visible_BSKOnderdekking>
+	<visible_M04P03><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P03"/><presentation  scale="1"/></data></visible_M04P03>
+	<visible_M04P05><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P05"/><presentation  scale="1"/></data></visible_M04P05>
+	<visible_M04P06><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P06"/><presentation  scale="1"/></data></visible_M04P06>
+	<visible_M04P07A><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P07A"/><presentation  scale="1"/></data></visible_M04P07A>
+	<visible_M04P07B><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P07B"/><presentation  scale="1"/></data></visible_M04P07B>
+	<visible_M04P08><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P08"/><presentation  scale="1"/></data></visible_M04P08>
+	<visible_M04P09><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P09"/><presentation  scale="1"/></data></visible_M04P09>
+	<visible_M04P10><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P10"/><presentation  scale="1"/></data></visible_M04P10>
+	<visible_M04P11><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P11"/><presentation  scale="1"/></data></visible_M04P11>
+	<visible_M04P12><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P12"/><presentation  scale="1"/></data></visible_M04P12>
+	<visible_M04P13><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P13"/><presentation  scale="1"/></data></visible_M04P13>
+	<visible_M04P14><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P14"/><presentation  scale="1"/></data></visible_M04P14>
+	<visible_M04P15><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P15"/><presentation  scale="1"/></data></visible_M04P15>
+	<visible_M04P16><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M04P16"/><presentation  scale="1"/></data></visible_M04P16>
+	<visible_M05P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P01"/><presentation  scale="1"/></data></visible_M05P01>
+	<visible_M05P02><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P02"/><presentation  scale="1"/></data></visible_M05P02>
+	<visible_M05P03><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P03"/><presentation  scale="1"/></data></visible_M05P03>
+	<visible_M05P03a><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P03a"/><presentation  scale="1"/></data></visible_M05P03a>
+	<visible_M05P04><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P04"/><presentation  scale="1"/></data></visible_M05P04>
+	<visible_M05P05><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P05"/><presentation  scale="1"/></data></visible_M05P05>
+	<visible_M05P06><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P06"/><presentation  scale="1"/></data></visible_M05P06>
+	<visible_M05P08><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P08"/><presentation  scale="1"/></data></visible_M05P08>
+	<visible_M05P09><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M05P09"/><presentation  scale="1"/></data></visible_M05P09>
+	<visible_M06P00><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M06P00"/><presentation  scale="1"/></data></visible_M06P00>
+  <visible_M06P01><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M06P01"/><presentation  scale="1"/></data></visible_M06P01>
+	<visible_M06P02><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M06P02"/><presentation  scale="1"/></data></visible_M06P02>
+	<visible_M06P03><data src="fesModel"><columns number="1" /><variables depth="1" var="Visible_M06P03"/><presentation  scale="1"/></data></visible_M06P03>
+	<ignoredVariablesWhenFinal>ContactPersoon,TelefoonNummer,Emailadres,LeaseOmschrijving,LeaseObject,LeaseBouwjaar,LeaseBouwMaand,LeaseObjectBedrag,LeaseLooptijdMnd,LeaseSlotTermijn,LeaseEigenMiddelen,LeaseInruilWaarde,LeaseInvestering,LeaseBetalingAan,LeaseLeverancier,LeaseLeverancierRekNr,OndernemingProfessioneelBegeleid,HoofdredenStartOnderneming,ControleEigenDeelInvestering,DekkingDoorHypotheek,BenuttingLiqMiddelen,BedrijfsadmUitbesteed,ReedsOmzetGegenereerd,TussentijdseCijfersAanwezig,FinancieleExpert,AantalBestuurders,Q_Map04_Paragraaf07A,Q_Map04_Paragraaf07B,ZKR_AVA,Q_Map04_Paragraaf08,ZKR_BorgAkte,Q_Map04_Paragraaf09,ZKR_HoofdMede,Q_Map04_Paragraaf10,ZKR_HYP,Q_Map04_Paragraaf11,ZKR_CreditGeld,Q_Map04_Paragraaf13,ZKR_OpenVerkl,Q_Map04_Paragraaf14,ZKR_CJMO,Q_Map04_Paragraaf15,ZKR_OverigeZekerheden,Q_Map04_Paragraaf16,ZKR_BijzondereBepalingen,Q_Map06_Paragraaf01,ChecklistJaarcijfers,ChecklistJaarcijfersBoekjaar,ChecklistJaarcijfersToelichting,ChecklistTussentijdseCijfers,ChecklistTussentijdseCijfersPeriode,ChecklistTussentijdseCijfersToelichting,ChecklistIBAangifte,ChecklistIBAangiftePeriode,ChecklistIBAangifteToelichting,ChecklistPrognose,ChecklistPrognosePeriode,ChecklistPrognoseToelichting,ChecklistInvesteringsBegroting,ChecklistInvesteringsBegrotingToelichting,Checklist3JaarPrognose,Checklist3JaarPrognoseToelichting,ChecklistOndernemingsPlan,ChecklistOndernemingsPlanToelichting,ChecklistStatuten,ChecklistStatutenToelichting,Q_Map06_Paragraaf02,ChecklistOverige1,ChecklistOverige2,ChecklistOverige3,ChecklistOverige4,Q_Map06_Paragraaf03,Q_Map06_Paragraaf03Sub1,ChecklistTaxatieRapport,ChecklistTaxatieRapportToelichting,ChecklistKoopOvereenkomst,ChecklistKoopOvereenkomstToelichting,ChecklistBouwbegroting,ChecklistBouwbegrotingToelichting,Q_Map06_Paragraaf03Sub8,ChecklistTaxatieRapportVS,ChecklistTaxatieRapportVSToelichting,ChecklistHuurcontracten,ChecklistHuurcontractenToelichting,Q_Map06_Paragraaf03Sub13,ChecklistLiquiditeitsBegroting,Q_Map04_Paragraaf03,HoeveelProducten,Product01_Soort,Product01_Hoofdsom,Product01_Aflossing,Product01_VervangingUitbreiding,Product01_Eigenaar,Product01_Rentebasis,Product01_IndicatiefTarief,Product01_Looptijd,Product01_RVPeriode,Product01_IngangsdatumKrediet,Product01_Afloswijze,Product01_IngangsdatumAfloswijze,Product02_Soort,Product02_Hoofdsom,Product02_Aflossing,Product02_VervangingUitbreiding,Product02_Eigenaar,Product02_Rentebasis,Product02_IndicatiefTarief,Product02_Looptijd,Product02_RVPeriode,Product02_IngangsdatumKrediet,Product02_Afloswijze,Product02_IngangsdatumAfloswijze,Product03_Soort,Product03_Hoofdsom,Product03_Aflossing,Product03_VervangingUitbreiding,Product03_Eigenaar,Product03_Rentebasis,Product03_IndicatiefTarief,Product03_Looptijd,Product03_RVPeriode,Product03_IngangsdatumKrediet,Product03_Afloswijze,Product03_IngangsdatumAfloswijze,Product04_Soort,Product04_Hoofdsom,Product04_Aflossing,Product04_VervangingUitbreiding,Product04_Eigenaar,Product04_Rentebasis,Product04_IndicatiefTarief,Product04_Looptijd,Product04_RVPeriode,Product04_IngangsdatumKrediet,Product04_Afloswijze,Product04_IngangsdatumAfloswijze,Product05_Soort,Product05_Hoofdsom,Product05_Aflossing,Product05_VervangingUitbreiding,Product05_Eigenaar,Product05_Rentebasis,Product05_IndicatiefTarief,Product05_Looptijd,Product05_RVPeriode,Product05_IngangsdatumKrediet,Product05_Afloswijze,Product05_IngangsdatumAfloswijze,Product06_Soort,Product06_Hoofdsom,Product06_Aflossing,Product06_VervangingUitbreiding,Product06_Eigenaar,Product06_Rentebasis,Product06_IndicatiefTarief,Product06_Looptijd,Product06_RVPeriode,Product06_IngangsdatumKrediet,Product06_Afloswijze,Product06_IngangsdatumAfloswijze,Q_Map04_Paragraaf05,HoeveelProductenRPK,Product01_KredietProductOvereenkomstRN,Product01_RekeningBedragen,Product01_VergoedingVervroegdAflossen,Product01_LopendeRenteVerplichtingen,Product01_Dagrente,Product01_BehandelingsKosten,Product02_KredietProductOvereenkomstRN,Product02_RekeningBedragen,Product02_VergoedingVervroegdAflossen,Product02_LopendeRenteVerplichtingen,Product02_Dagrente,Product02_BehandelingsKosten,
+	  Product03_KredietProductOvereenkomstRN,Product03_RekeningBedragen,Product03_VergoedingVervroegdAflossen,Product03_LopendeRenteVerplichtingen,Product03_Dagrente,Product03_BehandelingsKosten,Product04_KredietProductOvereenkomstRN,Product04_RekeningBedragen,Product04_VergoedingVervroegdAflossen,Product04_LopendeRenteVerplichtingen,Product04_Dagrente,Product04_BehandelingsKosten,Product05_KredietProductOvereenkomstRN,Product05_RekeningBedragen,Product05_VergoedingVervroegdAflossen,Product05_LopendeRenteVerplichtingen,Product05_Dagrente,Product05_BehandelingsKosten,Product06_KredietProductOvereenkomstRN,Product06_RekeningBedragen,Product06_VergoedingVervroegdAflossen,Product06_LopendeRenteVerplichtingen,Product06_Dagrente,Product06_BehandelingsKosten,Q_Map04_Paragraaf05Sub38,IngevuldDoorNaam,Q_Map04_Paragraaf05Sub40,GecontroleerdDoorNaam,BedrijfsrisicosVerzekerd,PersoonlijkeBorgBestuurderBereidheid,OndernemingProffesioneelBegeleid,DekkingUitHypotheek,Bestuurders01,Bestuurders01ErvaringInBranche,Bestuurders01Opleiding,Bestuurders01BSKvraag,Bestuurders02,Bestuurders02ErvaringInBranche,Bestuurders02Opleiding,Bestuurders02BSKvraag,Bestuurders03,Bestuurders03ErvaringInBranche,Bestuurders03Opleiding,Bestuurders03BSKvraag,ZKR_BorgAkte_Bedrag,ZKR_BorgAkte_OnderZ,ZKR_BorgAkte_BurgerlijkeStaat,ZKR_BorgAkte_NaamPartner,ZKR_HoofdMede_OnderZ,ZKR_HYP_Bedrag,ZKR_HYP_Omschrijving,ZKR_HYP_OnderZ,ZKR_HYP_Waarde,ZKR_HYP_TaxatieSoort,ZKR_HYP_TaxatieDatum,ZKR_HYP_Voorbelasting,ZKR_HYP_VoorbelastingNaam,ZKR_CreditGeld_Bedrag,ZKR_CreditGeld_Omschrijving,ZKR_CreditGeld_OnderZ,ZKR_Vordering,ZKR_Vordering_Bedrag,ZKR_Vordering_Omschrijving,ZKR_Vordering_OnderZ</ignoredVariablesWhenFinal>
+</properties>
+<!-- =========toc=============================================================== -->
+<newpage name="frontpage">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========Q_MAP05============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map05" function="getTitle"/></data></section>
+
+<!-- Q_Map05_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M05P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+        </columns>
+			<variables depth="1" var="Q_Map05_Paragraaf01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true"  showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf02 -->
+	<table class="datatable" visible="./document/properties/visible_M05P02/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf02" varTo="BNK" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+
+  <!-- BNK -->
+
+	<table class="datatablebalans" visible="./document/properties/visible_M05P02/text()='1'">
+		<tr class="total">
+			<td><data src="fesModel"><variables var="BNK" function="getTitle"/></data></td>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmImmatVastActBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmImmatVastActBnk" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><variables var="fmEigenVermBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmEigenVermBnk" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmMatVastActBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmMatVastActBnk" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><variables var="fmVoorzBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmVoorzBnk" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmFinVastActBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmFinVastActBnk" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><variables var="fmLangVVBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmLangVVBnk" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmVrdBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmVrdBnk" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><variables var="fmKortVVBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmKortVVBnk" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmVordBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmVordBnk" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="fmLiqMidBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmLiqMidBnk" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="total">
+			<td><data src="fesModel"><variables var="fmSomActBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmSomActBnk" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><variables var="fmSomPasBnk" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="fmSomPasBnk" /><presentation scale="1"/></data></td>
+		</tr>
+  </table>
+
+<p>&#xA0;</p>
+
+<!-- Q_Map05_Paragraaf03 -->
+	<table class="datatable"  visible="./document/properties/visible_M05P03/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf03" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf03a -->
+	<table class="datatable" visible="./document/properties/visible_M05P03a/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf03a" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf04 -->
+	<table class="datatable" visible="./document/properties/visible_M05P04/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf04" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf05 -->
+	<table class="datatable" visible="./document/properties/visible_M05P05/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf05" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf06 -->
+	<table class="datatable" visible="./document/properties/visible_M05P06/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf06" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true"  filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf07 -->
+	<table class="datatable" visible="./document/properties/visible_M05P07/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf07" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true"  filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+
+<!-- Q_Map05_Paragraaf08 -->
+	<table class="datatable" visible="./document/properties/visible_M05P08/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf08" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map05_Paragraaf09 -->
+	<table class="datatable" visible="./document/properties/visible_M05P09/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map05_Paragraaf09" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========Q_MAP01============================================================= -->
+<clearpage/>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map01" function="getTitle"/></data></section>
+
+<!-- Q_Map01_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M01P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="1" var="Q_Map01_Paragraaf01" recursiveSkip="false" />
+            <presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map01_Paragraaf02 -->
+	<table class="datatable" visible="./document/properties/visible_M01P02/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="1" var="Q_Map01_Paragraaf02" recursiveSkip="false" />
+            <presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map01_Paragraaf02a -->
+	<table class="datatable" visible="./document/properties/visible_M01P02a/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map01_Paragraaf02a" recursiveSkip="false" />
+            <presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map01_Paragraaf03 -->
+	<table class="datatable" visible="./document/properties/visible_M01P03/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map01_Paragraaf03" recursiveSkip="false" />
+            <presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map01_Paragraaf04 -->
+	<table class="datatable" visible="./document/properties/visible_M01P04/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map01_Paragraaf04" recursiveSkip="false" />
+            <presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========Q_MAP02============================================================= -->
+<clearpage/>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></section>
+
+<!-- Q_Map02_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M02P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map02_Paragraaf01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map02_Paragraaf02 -->
+	<table class="datatable" visible="./document/properties/visible_M02P02/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map02_Paragraaf02" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map02_Paragraaf03 -->
+	<table class="datatable" visible="./document/properties/visible_M02P03/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map02_Paragraaf03" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map02_Paragraaf04 -->
+	<table class="datatable" visible="./document/properties/visible_M02P04/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map02_Paragraaf04" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========Q_MAP03============================================================= -->
+<clearpage/>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map03" function="getTitle"/></data></section>
+
+<!-- Q_Map03_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M03P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf01c -->
+	<table class="datatable" visible="./document/properties/visible_M03P01c/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf01c" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf02 -->
+	<table class="datatable" visible="./document/properties/visible_M03P02/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf02" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf05_Starter -->
+	<table class="datatable" visible="./document/properties/visible_M03_P05_St/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf05_Starter" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf06_Starter -->
+	<table class="datatable" visible="./document/properties/visible_M03P06_St/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf06_Starter" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf07A_Starter -->
+	<table class="datatable" visible="./document/properties/visible_M03P07A_St/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf07A_Starter" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf07B_Starter -->
+	<table class="datatable" visible="./document/properties/visible_M03P07B_St/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf07B_Starter" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf07C_Starter -->
+	<table class="datatable" visible="./document/properties/visible_M03P07C_St/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf07C_Starter" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf08_Switcher -->
+	<table class="datatable" visible="./document/properties/visible_M03P08_Sw/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf08_Switcher" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf09 -->
+	<table class="datatable" visible="./document/properties/visible_M03P09/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf09" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map03_Paragraaf10 -->
+	<table class="datatable" visible="./document/properties/visible_M03P10/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map03_Paragraaf10" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========Q_MAP04============================================================= -->
+<clearpage/>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map04" function="getTitle"/></data></section>
+
+<!-- Q_Map04_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M04P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf02 -->
+  <!-- Dekkingstabel -->
+  <p> </p>
+
+	<table class="datatable4cols" visible="./document/properties/visible_BSKOnderdekking/text()='1'">
+			<tr class="title4column">
+			<td><data src="fesModel"><variables var="BSK_Onderdekking02" function="getTitle"/></data></td>
+			<td>Dekkings %</td>
+			<td>Waarde</td>
+			<td>Voobel.</td>
+			<td>Dek.waarde</td>
+		</tr>
+  <!-- Credit-/spaargelden -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking01" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking01Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking01Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking01Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Woonhuis -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking02" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking02Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking02Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking02Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking02Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Nieuwbouw -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking03" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking03Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking03Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking03Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking03Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Bedrijfs-onr.zaak -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking04" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking04Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking04Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking04Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking04Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Woon-/winkelpanden -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking05" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking05Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking05Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking05Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking05Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Schepen -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking06" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking06Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking06Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking06Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking06Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Verpande polis -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking07" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking07Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking07Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking07Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking07Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Transportmiddelen -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking10" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking10Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking10Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking10Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Bedrijfsuitrusting -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking11" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking11Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking11Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking11Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Voorraden -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking12" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking12Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking12Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking12Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Debiteuren -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking13" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking13Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking13Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking13Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Borgstelling -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking14" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking14Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking14Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking14Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- (Terug)koopverklaring -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking15" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking15Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking15Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking15Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Vorderingen in r.c. -->
+		<tr class="level0" visible="./document/properties/visible_Dekking/text()='>= 200.000 Euro'">
+			<td><data src="fesModel"><variables var="Dekking16" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking16Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking16Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td>-</td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking16Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Aditionele Dekkingwaarde door derden-omzetting -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Dekking08" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking08Percentage" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking08Waarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking08Voorbelasting" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Dekking08Dekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+  <!-- Totaal Dekkingwaarde -->
+		<tr class="subtotal">
+			<td><data src="fesModel"><variables var="TotaalDekkingwaarde" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="TotaalDekkingwaarde" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="KFCbelang" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="KFCbelang" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+		<tr class="subtotal">
+			<td><data src="fesModel"><variables var="Onderdekking" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Onderdekking" /><presentation scale="1" filterEmptyOptionalRows="true"/></data></td>
+		</tr>
+	</table>
+
+<!-- Q_Map04_Paragraaf03 -->
+	<table class="datatable" visible="./document/properties/visible_M04P03/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf03" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf04 -->
+	<table class="datatable" visible="./document/properties/visible_M04P04/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf04" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+
+<!-- Q_Map04_Paragraaf05 -->
+	<table class="datatable" visible="./document/properties/visible_M04P05/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf05" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf06 -->
+	<table class="datatable" visible="./document/properties/visible_M04P06/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf06" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf07A -->
+	<table class="datatable" visible="./document/properties/visible_M04P07A/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf07A" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf07B -->
+	<table class="datatable" visible="./document/properties/visible_M04P07B/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf07B" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf08 -->
+	<table class="datatable" visible="./document/properties/visible_M04P08/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf08" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf09 -->
+	<table class="datatable" visible="./document/properties/visible_M04P09/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf09" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf10 -->
+	<table class="datatable" visible="./document/properties/visible_M04P10/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf10" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf11 -->
+	<table class="datatable" visible="./document/properties/visible_M04P11/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf11" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf12 -->
+	<table class="datatable" visible="./document/properties/visible_M04P12/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf12" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf13 -->
+	<table class="datatable" visible="./document/properties/visible_M04P13/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf13" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf14 -->
+	<table class="datatable" visible="./document/properties/visible_M04P14/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf14" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf15 -->
+	<table class="datatable" visible="./document/properties/visible_M04P15/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf15" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map04_Paragraaf16 -->
+	<table class="datatable" visible="./document/properties/visible_M04P16/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map04_Paragraaf16" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========Q_MAP06============================================================= -->
+<clearpage/>
+
+	<section class="section"><data src="fesModel"><variables var="Q_Map06" function="getTitle"/></data></section>
+
+<!-- Q_Map06_Paragraaf00 -->
+	<table class="datatable" visible="./document/properties/visible_M06P00/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map06_Paragraaf00" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map06_Paragraaf01 -->
+	<table class="datatable" visible="./document/properties/visible_M06P01/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map06_Paragraaf01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map06_Paragraaf02 -->
+	<table class="datatable" visible="./document/properties/visible_M06P02/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map06_Paragraaf02" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- Q_Map06_Paragraaf03 -->
+	<table class="datatable" visible="./document/properties/visible_M06P03/text()='1'">
+	 	<data src="fes">
+  			<columns number="1" order="asc" >
+                <highlight operator="Entered" textcolor="#003d7d"/>
+            </columns>
+			<variables depth="3" var="Q_Map06_Paragraaf03" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showInvisibleVariables="false" order="reverse" showSingleValueVariablesOnce="false" disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()" prefill="false" appendEmptyColumns="0" prefillSingleValueVariable="false" >
+				<!--<filterEmptyRowsForClass>header</filterEmptyRowsForClass>-->
+				<overrideStyle old="level0empty">header</overrideStyle>
+				<overrideStyle old="level1single">level1</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========DEKKING============================================================= -->
+
+
+
+
+<!-- =========End============================================================= -->
+</document>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type='text/xsl' href='GdetConfigToDb.xsl'?>
+<!-- Modelversion : Model INGVerslag v3.9
+Gegenereerd op  : 20-11-2013 14:18-->
+<configuration xsi:noNamespaceSchemaLocation="GdetConfiguration.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <description>GDET Configuratie Model INGVerslag v3.9 (KBM 4)</description>
+  <constraint><![CDATA[  (ModelType='VERSLAG') or (ModelType='Fiatdocument') ]]></constraint>
+  <extractionStrategy>INSIDEOUT</extractionStrategy>
+  <filter>
+    <absoluteyears>
+      <year>1</year>
+    </absoluteyears>
+    <period>MainPeriod</period>
+  </filter>
+
+<externalDataSource>                                                        
+<dataSourceJNDI>jdbc/FinanDS</dataSourceJNDI>                             
+  <maximumStringLength>256</maximumStringLength>                             
+  <externalTables>                                                          
+  <externalTable default="true">                                          
+  <uniqueIdColumn>id</uniqueIdColumn>  
+  <documentIdColumn>DOCUMENTID</documentIdColumn>
+  <updateMode>UPDATE</updateMode>                                       
+  <name>EXPORT_FIATDOCUMENT</name>                                              
+</externalTable>                                                        
+</externalTables>                                                         
+</externalDataSource>                                                       
+  <variables>
+
+<variable columnName="AantalKlanten" columnType="DECIMAL">AantalKlanten</variable>
+<variable columnName="AantalLeveranciers" columnType="DECIMAL">AantalLeveranciers</variable>
+<variable columnName="BatchReferentieLimiet" columnType="DECIMAL">BatchReferentieLimiet</variable>
+<variable columnName="BedrijfsadmUitbesteed" columnType="DECIMAL">BedrijfsadmUitbesteed</variable>
+<variable columnName="Bedrijfsomzet" columnType="DECIMAL">Bedrijfsomzet</variable>
+<variable columnName="BedrijfsrisicosVerzekerd" columnType="DECIMAL">BedrijfsrisicosVerzekerd</variable>
+<variable columnName="BenuttingLiqMiddelen" columnType="DECIMAL">BenuttingLiqMiddelen</variable>
+<variable columnName="Bestuurders01" columnType="STRING">Bestuurders01</variable>
+<variable columnName="Bestuurders01BSKvraag" columnType="DECIMAL">Bestuurders01BSKvraag</variable>
+<variable columnName="Bestuurders01ErvaringInBranche" columnType="DECIMAL">Bestuurders01ErvaringInBranche</variable>
+<variable columnName="Bestuurders01Opleiding" columnType="DECIMAL">Bestuurders01Opleiding</variable>
+<variable columnName="Bestuurders02" columnType="STRING">Bestuurders02</variable>
+<variable columnName="Bestuurders02BSKvraag" columnType="DECIMAL">Bestuurders02BSKvraag</variable>
+<variable columnName="Bestuurders02ErvaringInBranche" columnType="DECIMAL">Bestuurders02ErvaringInBranche</variable>
+<variable columnName="Bestuurders02Opleiding" columnType="DECIMAL">Bestuurders02Opleiding</variable>
+<variable columnName="Bestuurders03" columnType="STRING">Bestuurders03</variable>
+<variable columnName="Bestuurders03BSKvraag" columnType="DECIMAL">Bestuurders03BSKvraag</variable>
+<variable columnName="Bestuurders03ErvaringInBranche" columnType="DECIMAL">Bestuurders03ErvaringInBranche</variable>
+<variable columnName="Bestuurders03Opleiding" columnType="DECIMAL">Bestuurders03Opleiding</variable>
+<variable columnName="BKRCheck" columnType="DECIMAL">BKRCheck</variable>
+<variable columnName="BrancheOpRestrictedList" columnType="DECIMAL">BrancheOpRestrictedList</variable>
+<variable columnName="BrancheUitgeslotenBSK" columnType="DECIMAL">BrancheUitgeslotenBSK</variable>
+<variable columnName="BSK_Provisie" columnType="DECIMAL">BSK_Provisie</variable>
+<variable columnName="BSK_VerhoudingLooptijd" columnType="DECIMAL">BSK_VerhoudingLooptijd</variable>
+<variable columnName="ContactPersoon" columnType="STRING">ContactPersoon</variable>
+<variable columnName="ControleEigenDeelInvestering" columnType="DECIMAL">ControleEigenDeelInvestering</variable>
+<variable columnName="DekkingDoorHypotheek" columnType="DECIMAL">DekkingDoorHypotheek</variable>
+<variable columnName="DekkingUitHypotheek" columnType="DECIMAL">DekkingUitHypotheek</variable>
+<variable columnName="FinancieleExpert" columnType="DECIMAL">FinancieleExpert</variable>
+<variable columnName="FPS_VAR_BIK_CODE" columnType="STRING">FPS_VAR_BIK_CODE</variable>
+<variable columnName="FPS_VAR_BIK_Omschr" columnType="STRING">FPS_VAR_BIK_Omschr</variable>
+<variable columnName="FPS_VAR_GridId" columnType="STRING">FPS_VAR_GridId</variable>
+<variable columnName="FPS_VAR_Housenumber" columnType="STRING">FPS_VAR_Housenumber</variable>
+<variable columnName="FPS_VAR_KVKnr" columnType="STRING">FPS_VAR_KVKnr</variable>
+<variable columnName="FPS_VAR_Naam" columnType="STRING">FPS_VAR_Naam</variable>
+<variable columnName="FPS_VAR_Postcode" columnType="STRING">FPS_VAR_Postcode</variable>
+<variable columnName="FPS_VAR_Woonplaats" columnType="STRING">FPS_VAR_Woonplaats</variable>
+<variable columnName="GevraagdKredietbedrag" columnType="DECIMAL">GevraagdKredietbedrag</variable>
+
+<variable columnName="HoofdredenStartOnderneming" columnType="DECIMAL">HoofdredenStartOnderneming</variable>
+<variable columnName="KFCbelang" columnType="DECIMAL">KFCbelang</variable>
+<variable columnName="LaatsteNettoOmzet" columnType="DECIMAL">LaatsteNettoOmzet</variable>
+<variable columnName="Lease" columnType="DECIMAL">Lease</variable>
+<variable columnName="LeaseBetalingAan" columnType="DECIMAL">LeaseBetalingAan</variable>
+<variable columnName="LeaseBouwjaar" columnType="DECIMAL">LeaseBouwjaar</variable>
+<variable columnName="LeaseBouwMaand" columnType="DECIMAL">LeaseBouwMaand</variable>
+<variable columnName="LeaseEigenMiddelen" columnType="DECIMAL">LeaseEigenMiddelen</variable>
+<variable columnName="LeaseInruilWaarde" columnType="DECIMAL">LeaseInruilWaarde</variable>
+<variable columnName="LeaseInvestering" columnType="DECIMAL">LeaseInvestering</variable>
+<variable columnName="LeaseLeverancier" columnType="STRING">LeaseLeverancier</variable>
+<variable columnName="LeaseLeverancierRekNr" columnType="STRING">LeaseLeverancierRekNr</variable>
+<variable columnName="LeaseLooptijdMnd" columnType="DECIMAL">LeaseLooptijdMnd</variable>
+<variable columnName="LeaseObject" columnType="DECIMAL">LeaseObject</variable>
+<variable columnName="LeaseSlotTermijn" columnType="DECIMAL">LeaseSlotTermijn</variable>
+<variable columnName="LeasObjectBedrag" columnType="DECIMAL">LeasObjectBedrag</variable>
+<variable columnName="MatrixVersion" columnType="STRING">MatrixVersion</variable>
+<variable columnName="ModelVersion" columnType="STRING">ModelVersion</variable>
+<variable columnName="NietKredietProductBijING" columnType="DECIMAL">NietKredietProductBijING</variable>
+<variable columnName="OndernemingAantalOrganisaties" columnType="DECIMAL">OndernemingAantalOrganisaties</variable>
+<variable columnName="OndernemingProffesioneelBegele" columnType="DECIMAL">OndernemingProffesioneelBegeleid</variable>
+<variable columnName="OprichtingsdatumKvK" columnType="DATE">OprichtingsdatumKvK</variable>
+<variable columnName="PersoonlijkeBorgBestuurderBere" columnType="DECIMAL">PersoonlijkeBorgBestuurderBereidheid</variable>
+<variable columnName="Product01_Aflossing" columnType="DECIMAL">Product01_Aflossing</variable>
+<variable columnName="Product01_Hoofdsom" columnType="DECIMAL">Product01_Hoofdsom</variable>
+<variable columnName="Product01_Soort" columnType="STRING">Product01_Soort</variable>
+<variable columnName="Product02_Aflossing" columnType="DECIMAL">Product02_Aflossing</variable>
+<variable columnName="Product02_Hoofdsom" columnType="DECIMAL">Product02_Hoofdsom</variable>
+<variable columnName="Product02_Soort" columnType="STRING">Product02_Soort</variable>
+<variable columnName="Product03_Aflossing" columnType="DECIMAL">Product03_Aflossing</variable>
+<variable columnName="Product03_Hoofdsom" columnType="DECIMAL">Product03_Hoofdsom</variable>
+<variable columnName="Product03_Soort" columnType="STRING">Product03_Soort</variable>
+<variable columnName="Q_ROOT" columnType="DECIMAL">Q_ROOT</variable>
+<variable columnName="Q_STATUS" columnType="DECIMAL">Q_STATUS</variable>
+<variable columnName="Q_STATUS_FINAL_BY" columnType="STRING">Q_STATUS_FINAL_BY</variable>
+<variable columnName="Q_STATUS_FINAL_ON" columnType="DATE">Q_STATUS_FINAL_ON</variable>
+<variable columnName="Q_STATUS_MODIFIED_ON" columnType="DATE">Q_STATUS_MODIFIED_ON</variable>
+<variable columnName="Q_STATUS_STARTED_BY" columnType="STRING">Q_STATUS_STARTED_BY</variable>
+<variable columnName="Q_STATUS_STARTED_ON" columnType="DATE">Q_STATUS_STARTED_ON</variable>
+<variable columnName="Rechtsvorm" columnType="DECIMAL">Rechtsvorm</variable>
+<variable columnName="ReedsOmzetGegenereerd" columnType="DECIMAL">ReedsOmzetGegenereerd</variable>
+<variable columnName="Relatienummer" columnType="STRING">Relatienummer</variable>
+<variable columnName="SBICODE2" columnType="DECIMAL">SBICODE2</variable>
+<variable columnName="StatusBijKvK" columnType="DECIMAL">StatusBijKvK</variable>
+<variable columnName="TelefoonNummer" columnType="STRING">TelefoonNummer</variable>
+<variable columnName="TussentijdseCijfersAanwezig" columnType="DECIMAL">TussentijdseCijfersAanwezig</variable>
+<variable columnName="ZKR_AVA" columnType="DECIMAL">ZKR_AVA</variable>
+<variable columnName="ZKR_BorgAkte" columnType="DECIMAL">ZKR_BorgAkte</variable>
+<variable columnName="ZKR_BorgAkte_Bedrag" columnType="DECIMAL">ZKR_BorgAkte_Bedrag</variable>
+<variable columnName="ZKR_BorgAkte_OnderZ" columnType="STRING">ZKR_BorgAkte_OnderZ</variable>
+<variable columnName="ZKR_CreditGeld" columnType="DECIMAL">ZKR_CreditGeld</variable>
+<variable columnName="ZKR_CreditGeld_Bedrag" columnType="DECIMAL">ZKR_CreditGeld_Bedrag</variable>
+<variable columnName="ZKR_HoofdMede" columnType="DECIMAL">ZKR_HoofdMede</variable>
+<variable columnName="ZKR_HoofdMede_OnderZ" columnType="STRING">ZKR_HoofdMede_OnderZ</variable>
+<variable columnName="ZKR_HYP" columnType="DECIMAL">ZKR_HYP</variable>
+<variable columnName="ZKR_HYP_Bedrag" columnType="DECIMAL">ZKR_HYP_Bedrag</variable>
+<variable columnName="ZKR_HYP_OnderZ" columnType="STRING">ZKR_HYP_OnderZ</variable>
+<variable columnName="ZKR_HYP_TaxatieDatum" columnType="DATE">ZKR_HYP_TaxatieDatum</variable>
+<variable columnName="ZKR_HYP_TaxatieSoort" columnType="DECIMAL">ZKR_HYP_TaxatieSoort</variable>
+<variable columnName="ZKR_HYP_Voorbelasting" columnType="DECIMAL">ZKR_HYP_Voorbelasting</variable>
+<variable columnName="ZKR_HYP_VoorbelastingNaam" columnType="STRING">ZKR_HYP_VoorbelastingNaam</variable>
+<variable columnName="ZKR_HYP_Waarde" columnType="DECIMAL">ZKR_HYP_Waarde</variable>
+<variable columnName="ZKR_OpenVerkl" columnType="DECIMAL">ZKR_OpenVerkl</variable>
+<variable columnName="ZKR_Vordering" columnType="DECIMAL">ZKR_Vordering</variable>
+<variable columnName="ZKR_Vordering_Bedrag" columnType="DECIMAL">ZKR_Vordering_Bedrag</variable>
+
+
+
+
+
+
+
+
+
+  </variables>
+</configuration>

@@ -1,0 +1,18 @@
+{&&Language=English}
+; FINAN-BritishPound.fsf
+;
+; British pound
+
+.If #UKPoundRate#<=0
+  .AddCurrency "GBP",Rate=0.61,Symbol="£",Title="$>British Pound<$"
+.Else
+  .AddCurrency "GBP",Rate=#UKPoundRate#,Symbol="£",Title="$>British Pound<$"
+.EndIf
+
+.Script AskUKPoundRate|"$>British Pound<$ $>Exchange Rate<$"
+.Event OnToolsMenuClick
+  .AskReal _UKPoundRate="$>British Pound<$ $>Exchange Rate<$ (EUR/GBP):",0.001,1000,CurrencyFactor("EUR","GBP")
+  .AddCurrency "GBP",Rate=#UKPoundRate#,Symbol="£",Title="$>British Pound<$"
+  .Log "Currency updates.log",&DateStr(Now,15)&"  EUR/GBP="&Str(CurrencyFactor("EUR","GBP"))
+.EndScript
+

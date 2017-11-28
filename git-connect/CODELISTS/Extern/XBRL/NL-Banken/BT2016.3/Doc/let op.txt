@@ -1,0 +1,3 @@
+Let op:
+- BT2016.3 Dit is geen complete bankentaxonomie, alleen een extensie voor microentiteiten bovenop BT2016
+- Dus: BT2016 blijft gewoon geldig!

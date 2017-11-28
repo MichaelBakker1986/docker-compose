@@ -1,0 +1,36 @@
+; Inc_V05-URA.fin
+; EJS aug 2014
+; update november 2015, v4.4.1.64
+;
+.Formulas NoTrend,Trend
+sdeGoodwill= IntangibleFixedAssets                                                                                       ; niet alleen TotalGoodwill
+sdeReceivablesShareholders= NA                                                                                           ; niet: TotalLoansToAffiliatedCompanies+TotalLoansToSubsidiaries+ReceivablesGroupCompanies+ReceivablesAffiliatedCompanies
+sdeDeferredTaxesAssets= NA                                                                                               ; eventueel hier TaxOnProfitsReceivable
+
+sdeEquity= NetWorth
+sdeResultForTheYear= NA                                                                                                  ; niet: ProfitAvailableForDistribution, ook niet DividendPayable! het is nog uit te keren winst van het boekjaar dat nog niet als zodanig op de balans staat (Korrektur24)
+sdeVarCapLimitedPartners= NA
+sdeProvisions= Provisions+TransitionalLiabilities
+sdeLiabilitiesLong= NonCurrentLiabilities
+sdeLiabilitiesBankLong= LongTermDebts+LongTermDebtsOther+LongTermDebtsAnnuity                                            ; v4.4.1.64 EJS: toegevoegd LongTermDebtsOther en LongTermDebtsAnnuity (n.a.v. test volledige ingevuld document)
+sdeLongTradePayables= NA
+sdeLongReceivedAdvanceOrdersCurrent= NA
+sdeLiabilitiesToShareholdersOver5Y= NA
+sdeLiabilitiesShort= CurrentLiabilities-TransitionalLiabilities+CapitalShortfall
+;sdeLiabilitiesBankShort= STPartOfLTDebts+OverdraftCurrentAccount+OtherShortTermDebt+InterestAndRepaymentsPayable
+sdeLiabilitiesBankShort= ShortTermPartOfLongTermDebts+ShortTermPartOfLongTermDebtsAnnuity+ShortTermPartOfLongTermDebtsOther+DeferredInterestLongTermDebtOther+OverdraftCurrentAccount+DeferredInterestLongTermDebt+DeferredInterestLongTermDebtAnnuity  ; v4.4.1.64 EJS
+sdeTradePayables= TradePayablesTotal
+sdeReceivedAdvanceOrdersCurrent= ReceivedPrePaymentsTotal
+sdeShortShareholderPayables= DividendPayable+CurrentAccountGroupCompanies+CurrentAccountAffiliatedCompanies+ShortTermPartOfSubordinatedDebts+DeferredInterestSubordinatedDebt     ; v4.4.1.64 EJS: toegevoegd ShortTermPartOfSubordinatedDebts+DeferredInterestSubordinatedDebt  (n.a.v. test volledige ingevuld document)
+
+sdeSales= NetSales
+sdeDepreciation= DepreciationOfAssets
+sdeResultCorrections= NA                                              ; v4.4.1.60
+sdeEBIT= OperatingIncome                                              ;! v4.4.1.64 EJS niet hier: +FictitiousWageOfEntrepreneur,  v4.4.1.55
+sdeInterestEarnings= FinancialIncome
+sdeInterestExpenses= FinancialExpenses
+sdeParticipationEarnings= ShareResultFromSubsidiaries
+sdeEntrepreneurFeeOutsideResult= ShareProfitEntrepreneur              ; v4.4.1.60
+
+V05krPD             =krPD             
+V05krUraRatingKlasse= &krUraRatingKlasse

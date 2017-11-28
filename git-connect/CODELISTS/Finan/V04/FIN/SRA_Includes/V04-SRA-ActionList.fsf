@@ -1,0 +1,533 @@
+{&&Language=English}
+;
+; Model             : V02-1.FSF
+; Language          : NL
+; Description       : Aktielijst onder menuitem Action
+;
+;=============================================================================
+
+{&&If UserCode=1}  ; SRA
+{&&Else}
+.Quit              ; eruit indien geen SRA
+{&&EndIf}
+
+
+.Script
+.Event AfterLoadData
+.Event AfterNewData
+
+  .Let SRA_Rating_identifyCompany_Result = NA
+  .ShowActionList       SRA_RatingCoach
+
+
+  .If #RatingFactoryACC# = 1
+    .Message "Dit is een acceptatieversie.|Deze versie communiceert met de acceptatie server."
+  .EndIf
+.EndScript
+
+
+
+;; Actielijst SRA Rating Coach
+.ActionList             Name=SRA_RatingCoach, Title = "$>SRA Rating Coach<$"
+.Script                 Name=SRA_RatingCoachScript, Title="$>Actielijst: SRA Rating Coach<$", Hint="$>Actielijst SRA Rating Coach<$", Priority=4001
+.Event                  OnActionMenuClick
+  .ShowActionList       SRA_RatingCoach
+.EndScript
+
+.Script
+.Event                  OnShowActionList SRA_RatingCoach
+  .GridSelectCell       Cell=Title[1]
+.EndScript
+
+.Script
+.Event                  OnCloseActionList SRA_RatingCoach
+  .GridSelectCell       Cell=Title[1]
+  .RevertCols           Off
+  .SupportSheet         Hide
+.EndScript
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.AlgGeg, Title = "? $>Algemene gegevens<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.AlgGeg
+.Event                  OnExecuteAction SRA_RatingCoach.AlgGeg
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_01.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.AlgGeg
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.NAW, Title = &NAWBedr[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.NAW
+  .GridSelectCell       Cell=@Title,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.Krednem, Title = &SRA_TB_10_2[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Krednem
+  .GridSelectCell       Cell=SRA_TB_10_2,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.Acc, Title = &NAWAcc[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Acc
+  .GridSelectCell       Cell=@NAWAcc,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.BkRel, Title = &NAWBank[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.BkRel
+  .GridSelectCell       Cell=@NAWBank,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.OverAlg, Title = &SRA_TB_10_1[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.OverAlg
+  .GridSelectCell       Cell=SRA_TB_10_1,Sheet=Sheet
+.EndScript
+
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.ToelKredAV, Title = "? $>Toelichting kredietaanvraag<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ToelKredAV
+.Event                  OnExecuteAction SRA_RatingCoach.ToelKredAV
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_02.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.ToelKredAV
+  .SupportSheet         Hide
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoOnd, Title = "$>Memo's onderneming (2.1)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoOnd
+  .GridSelectCell       Cell=@SRA_TB_21,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoMar, Title = "$>Memo's markt (2.2)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoMar
+  .GridSelectCell       Cell=@SRA_TB_22,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoPers, Title = "$>Memo's personeel (2.3)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoPers
+  .GridSelectCell       Cell=SRA_TB_23a,Sheet=Sheet
+.EndScript
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.Hist, Title = "? $>Historie<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Hist
+.Event                  OnExecuteAction SRA_RatingCoach.Hist
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_03.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.Hist
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.ImpGeg, Title = "$>Importeren gegevens<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ImpGeg
+.AskChoice              ImportChoice = "$>Welk bestand wilt u importeren?<$","CaseWare|Audition|Anders",0
+.Case                   #ImportChoice#
+  .OnValue 0
+  .DoScript CasewareImportScript
+  .OnValue 1
+  .DoScript AuditionFinanImportScript
+  .OnValue 2
+  .Message "Importeer het bestand van uw keuze via het menu Bestand-Importeren."
+.EndCase
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.AddColumn, Title = "$>Add column<$",CheckBox=No
+.Script                 Name=HistKolom
+.ScriptMode             CancelMode=Off
+.Event                  OnExecuteAction SRA_RatingCoach.AddColumn
+  .RevertCols           Off
+   .AskOk               CHOICE="$>Wilt u een historisch jaar toevoegen?|Let op: hiermee verandert u een prognosekolom in een historische kolom!<$"
+    .If #CHOICE#=1
+     .Period MainPeriod,DateAtFormulaSet2=DMYtoDate(1,#FirstMonthInYear#,YearInT(LastTinFormulaSet(NoTrend,MainPeriod))+If(DateToMonth(FirstDateInT(FirstTinFormulaSet(Trend,MainPeriod)))>#FirstMonthInYear#,1,2))
+       .AskOk             CHOICE="$>Wilt u de oorspronkelijke prognosewaarden in het laatste historische jaar wissen?<$"
+        .If #CHOICE#=1
+         .EraseVars Root[LastTinFormulaSet(NoTrend,MainPeriod),1],AllDown
+         .Application Redraw
+        .EndIf
+    .EndIf
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.Revert, Title = "$>Revert columns<$",Checked=SysVar("RevertedCols"),ManualCheckEnabled=No
+.Script
+.Event                  OnActionCheckOn SRA_RatingCoach.Revert
+  .RevertCols           On
+  .Display              [LastTinFormulaSet(NoTrend,MainPeriod)]||LastTinFormulaSet(NoTrend,MainPeriod)
+.EndScript
+
+.Script
+.Event                  OnActionCheckOff SRA_RatingCoach.Revert
+  .RevertCols           Off
+  .Display              [FirstTinFormulaSet(NoTrend,MainPeriod)]||FirstTinFormulaSet(NoTrend,MainPeriod)
+.EndScript
+
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.Revert
+  .RevertCols           not #RevertedCols#
+  .Application          Redraw
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.InvoerBal, Title = "$>Invoer balans<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvoerBal
+  .GridSelectCell       Cell=@Form4,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.InvoerBalUitg, Title  = "$>Invoer balans uitgebreid<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvoerBalUitg
+  .GridSelectCell       Cell=@Form1,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.InvoerRR, Title = "$>Invoer resultatenrekening<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvoerRR
+  .GridSelectCell       Cell=@Form5,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.InvoerRRUitg, Title = "$>Invoer resultatenrekening uitgebreid<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvoerRRUitg
+  .GridSelectCell       Cell=@Form2,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.InvoerVA, Title = "$>Invoer vermogensaansluiting<$",Checked=HSum(ResRekTest,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))<0,ManualCheckEnabled=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvoerVA
+.Event                  OnActionCheckOn SRA_RatingCoach.InvoerVA
+  .GridSelectCell       Cell=@VAResNaBel,Sheet=Sheet
+.EndScript
+
+.Action                 Fullname=SRA_RatingCoach.HistControle,Title="$>Check history<$",Checked=(HSum(ValCheck,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))<0),ManualCheckEnabled=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.HistControle
+.Event                  OnActionCheckOn SRA_RatingCoach.HistControle
+  .GridSelectCell       Cell=@ControleEssentOpm2,Sheet=Sheet
+.EndScript
+
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.Scen, Title = "? $>Scenario<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Scen
+.Event                  OnExecuteAction SRA_RatingCoach.Scen
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_04.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.Scen
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.SelectScenario, Title = "$>Select scenario<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.SelectScenario
+  .Let                    LijstOndertab = "1:"&SheetTitle(1)&"|2:"&SheetTitle(2)&"|3:"&SheetTitle(3)&"|4:"&SheetTitle(4)
+  .AskChoice              ScenarioTab   = "Selecteer scenario:",#$LijstOndertab#,Sheet-1
+  .Display                |#ScenarioTab#+1
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.CopyScenario, Title = "$>Copy base scenario<$",Enabled=Sheet>1,CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.CopyScenario
+.Event                  OnActionCheckOn SRA_RatingCoach.CopyScenario
+  .Let                  LijstOndertab = "1:"&SheetTitle(1)&"|2:"&SheetTitle(2)&"|3:"&SheetTitle(3)&"|4:"&SheetTitle(4)
+  .Let                  ScenarioTab = Sheet-1
+  .Let                  NaamTabblad = &SheetTitle(#ScenarioTab#+1)
+  .AskOk Vraag="$>Do you want to copy scenario 1 to <$ '#NaamTabblad#'?",1
+  .If #Vraag#=1
+    .If #ScenarioTab#=1
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast2Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+    .If #ScenarioTab#=2
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast3Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+    .If #ScenarioTab#=3
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast4Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+  .EndIf
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.ScenarioNaam, Title = "$>Modify name of scenario<$",Enabled=Sheet>1,CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.ScenarioNaam
+  .Let                  ScenarioNaam = &SheetTitle(Sheet)
+  .AskString            ScenarioNaam="$>Modify name of scenario<$|(Maximaal 20 posities)",#ScenarioNaam#
+  .Sheet                Sheet, Title=&SubStr("#ScenarioNaam#",1,20)
+  .Application          ReDraw
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.Jaren, Title = "$>Instellen tijdhorizon<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.Jaren
+  .PropertiesDialog     Years
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.TijdBasis, Title = "$>Set level of detail<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.TijdBasis
+  .Let CurrentTSY= TsY(LastTinPeriod(PeriodInSheet))
+  .AskChoice NewTsY="$>Set level of detail in forecast<$","|$>year<$|$>half year<$||$>quarter<$||||||||$>month<$|$>13x per year<$",#CurrentTSY#
+  .If PeriodInSheet=MainPeriod
+    .Period PeriodInSheet,TsY2=#NewTsY#
+  .Else
+    .Period PeriodInSheet,TsY=#NewTsY#
+  .EndIf
+  .ZoomToDetail [FirstTinFormulaSet(Trend,PeriodInSheet)..LastTinFormulaSet(Trend,PeriodInSheet)] #NewTsY#
+  .Application ReDraw
+.EndScript
+
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.InvKred, Title = "? $>Investerings- en kredietbehoefte<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.InvKred
+.Event                  OnExecuteAction SRA_RatingCoach.InvKred
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_05.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.InvKred
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.Facil, Title = "$>Faciliteiten<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Facil
+  .GridSelectCell       Cell=@BBFinPlan,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.Invest, Title = "$>Investeringen<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Invest
+  .GridSelectCell       Cell=@BBInvPlan,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.Zekerh, Title = "$>Zekerheden<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Zekerh
+  .GridSelectCell       Cell=@BBDekkingswaarde,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoInvKred, Title = "$>Memo's investerings- en kredietbehoefte (3)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoInvKred
+  .GridSelectCell       Cell=@SRA_TB_30,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoKredVorm, Title = "$>Memo's kredietvorm (4)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoKredVorm
+  .GridSelectCell       Cell=@SRA_TB_40,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoFinGeg, Title = "$>Memo's financiële gegevens (5)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoFinGeg
+  .GridSelectCell       Cell=@SRA_TB_50,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoZekerh, Title = "$>Memo's zekerheden (6)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoZekerh
+  .GridSelectCell       Cell=@SRA_TB_60,Sheet=Sheet
+.EndScript
+
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.ScenAnaly, Title = "? $>Scenario analyse<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenAnaly
+.Event                  OnExecuteAction SRA_RatingCoach.ScenAnaly
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_06.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.ScenAnaly
+  .SupportSheet         Hide
+.EndScript
+
+
+
+.Action                 FullName=SRA_RatingCoach.ScenC, Title = "$>Scenario cockpit<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenC
+  .HideVar              PrognoseSettings
+  .GridSelectCell       Cell=@SRA_SC,Sheet=Sheet
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.ScenC
+  .RestoreTree          PrognoseSettings
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.ScenBal, Title = &Balans[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenBal
+  .Let                  TsYInPrognose = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInPrognose#
+  .GridSelectCell       Cell=@Balans,LeftCol=LastTInFormulaset(1),Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.ScenRR ,Title = &ResRek[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenRR
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)..LastTinFormulaSet(Trend,PeriodinT)] Years
+  .GridSelectCell       Cell=@ResRek,LeftCol=LastTInFormulaset(1),Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.ScenKs, Title = "$>Cash Flow<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenKs
+  .Let                  TsYInPrognose = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInPrognose#
+  .GridSelectCell       Cell=@CashFlows,LeftCol=LastTInFormulaset(1),Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.ScenAV, Title = &AV[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenAV
+  .Let                  TsYInPrognose = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInPrognose#
+  .GridSelectCell       Cell=@AV,LeftCol=LastTInFormulaset(1),Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.ScenKeng, Title = &Ratios[0],CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ScenKeng
+  .Let                  TsYInPrognose = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInPrognose#
+  .GridSelectCell       Cell=@Ratios,LeftCol=LastTInFormulaset(1),Sheet=Sheet
+.EndScript
+
+.Action                 Fullname=SRA_RatingCoach.ContrScen, Title = "$>Controle scenario<$",Checked=ControlePrognose=0,ManualCheckEnabled=yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.ContrScen
+.Event                  OnActionCheckOn SRA_RatingCoach.ContrScen
+  .GridSelectCell       Cell=@ControleFinanAnalyse,Sheet=Sheet
+.EndScript
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.Memo, Title = "? $>Memo's hoofdstuk 5<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Memo
+.Event                  OnExecuteAction SRA_RatingCoach.Memo
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_07.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.Memo
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FullName=SRA_RatingCoach.MemoAct, Title = "$>Memo's activa (5.1)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoAct
+  .GridSelectCell       Cell=@SRA_TB_51A,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoPas, Title = "$>Memo's passiva (5.1)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoPas
+  .GridSelectCell       Cell=@SRA_TB_51P,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoRR, Title = "$>Memo's exploitatie (5.2)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoRR
+  .GridSelectCell       Cell=@SRA_TB_52,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoKs, Title = "$>Memo's kasstroom (5.3)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoKs
+  .GridSelectCell       Cell=@SRA_TB_53,Sheet=Sheet
+.EndScript
+
+;------------------
+
+.Action                 FullName=SRA_RatingCoach.Afr, Title = "? $>Afronding<$",Header=Yes
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.Afr
+.Event                  OnExecuteAction SRA_RatingCoach.Afr
+  .SupportSheet         ChmFileName="V04-SupportSheets_SRA.chm",FileName="supportsheet_srarc_08.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction SRA_RatingCoach.Afr
+  .SupportSheet         Hide
+.EndScript
+
+.Action                 Fullname=SRA_RatingCoach.VerplV, Title = "$>Verplichte velden<$",Checked=(SRA_VV_Teller[FirstTInSheet(Sheet)]=7),ManualCheckEnabled=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.VerplV
+.Event                  OnActionCheckOn SRA_RatingCoach.VerplV
+  .GridSelectCell       Cell=@SRA_VV,Sheet=Sheet
+.EndScript
+
+.Action                 Fullname=SRA_RatingCoach.RatingAv, Title = "$>Rating aanvragen<$", CheckBox=No
+.Script
+;.Event                  OnEnterAction SRA_RatingCoach.RatingAv
+;.Event                  OnActionCheckOn SRA_RatingCoach.RatingAv
+.Event                   OnExecuteAction SRA_RatingCoach.RatingAv
+.If SRA_VV_Teller[1]<7
+  .Message "De rating kan niet worden aangevraagd.|U dient eerst de verplichte velden in te vullen."
+  .GridSelectCell       Cell=@SRA_VV,Sheet=Sheet
+  .Cancel
+.Else
+ .DoScript  GetRating
+ .GridSelectCell Cell=Copy_SRA_Rating_PDLabel,Sheet=Sheet        ; EJS 25-5-2011
+.EndIf
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoSvat, Title = "$>Memo's eindafweging en samenvatting (7)<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoSvat
+  .GridSelectCell       Cell=@SRA_TB_70,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=SRA_RatingCoach.MemoKeuze, Title = "$>Keuze: memo's wel / niet rapporteren<$",CheckBox=No
+.Script
+.Event                  OnEnterAction SRA_RatingCoach.MemoKeuze
+  .GridSelectCell       Cell=@SRA_TB_Rapp,Sheet=Sheet
+.EndScript
+
+.Action                 Fullname=SRA_RatingCoach.Report, Title = "$>Report<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction SRA_RatingCoach.Report
+;; evt. nog stap in de wizard van de frm tonen
+;; call rating factory: betalen
+  .Report               SRA_RatingCoach
+.EndScript
+

@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<finanDocument version="1" noNamespaceSchemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+    <header>
+        <author>FES-null</author>
+        <documentInfo/>
+        <modelInfo>
+            <name>V05</name>
+            <version>04.04.008.000</version>
+        </modelInfo>
+        <userInfo>
+            <name>admin@finan.nl</name>
+        </userInfo>
+        <currencies>
+            <currency context="script" name="EUR"/>
+        </currencies>
+        <creationDate>15-2-2017</creationDate>
+        <updateDate>17-2-2017</updateDate>
+        <firstDayInYear>1</firstDayInYear>
+        <firstMonthInYear>1</firstMonthInYear>
+        <mutCalcInFirstCol>false</mutCalcInFirstCol>
+    </header>
+    <columnDefinitions>
+        <columnDefinition locked="false" type="USER">
+            <columnId>1</columnId>
+            <startDate>1-12-2014</startDate>
+            <endDate>31-12-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>2</columnId>
+            <startDate>1-11-2014</startDate>
+            <endDate>30-11-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>3</columnId>
+            <startDate>1-10-2014</startDate>
+            <endDate>31-10-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>4</columnId>
+            <startDate>1-9-2014</startDate>
+            <endDate>30-9-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>5</columnId>
+            <startDate>1-8-2014</startDate>
+            <endDate>31-8-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>6</columnId>
+            <startDate>1-7-2014</startDate>
+            <endDate>31-7-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>7</columnId>
+            <startDate>1-6-2014</startDate>
+            <endDate>30-6-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>8</columnId>
+            <startDate>1-5-2014</startDate>
+            <endDate>31-5-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>9</columnId>
+            <startDate>1-4-2014</startDate>
+            <endDate>30-4-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>10</columnId>
+            <startDate>1-3-2014</startDate>
+            <endDate>31-3-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>11</columnId>
+            <startDate>1-2-2014</startDate>
+            <endDate>28-2-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>12</columnId>
+            <startDate>1-1-2014</startDate>
+            <endDate>31-1-2014</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>13</columnId>
+            <startDate>1-12-2013</startDate>
+            <endDate>31-12-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>14</columnId>
+            <startDate>1-11-2013</startDate>
+            <endDate>30-11-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>15</columnId>
+            <startDate>1-10-2013</startDate>
+            <endDate>31-10-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>17</columnId>
+            <startDate>1-8-2013</startDate>
+            <endDate>31-8-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>16</columnId>
+            <startDate>1-9-2013</startDate>
+            <endDate>30-9-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>19</columnId>
+            <startDate>1-6-2013</startDate>
+            <endDate>30-6-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>18</columnId>
+            <startDate>1-7-2013</startDate>
+            <endDate>31-7-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>21</columnId>
+            <startDate>1-4-2013</startDate>
+            <endDate>30-4-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>20</columnId>
+            <startDate>1-5-2013</startDate>
+            <endDate>31-5-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>23</columnId>
+            <startDate>1-2-2013</startDate>
+            <endDate>28-2-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>22</columnId>
+            <startDate>1-3-2013</startDate>
+            <endDate>31-3-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>25</columnId>
+            <startDate>1-12-2015</startDate>
+            <endDate>31-12-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>24</columnId>
+            <startDate>1-1-2013</startDate>
+            <endDate>31-1-2013</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>27</columnId>
+            <startDate>1-10-2015</startDate>
+            <endDate>31-10-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>26</columnId>
+            <startDate>1-11-2015</startDate>
+            <endDate>30-11-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>29</columnId>
+            <startDate>1-8-2015</startDate>
+            <endDate>31-8-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>28</columnId>
+            <startDate>1-9-2015</startDate>
+            <endDate>30-9-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>31</columnId>
+            <startDate>1-6-2015</startDate>
+            <endDate>30-6-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>30</columnId>
+            <startDate>1-7-2015</startDate>
+            <endDate>31-7-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>34</columnId>
+            <startDate>1-3-2015</startDate>
+            <endDate>31-3-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>35</columnId>
+            <startDate>1-2-2015</startDate>
+            <endDate>28-2-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>32</columnId>
+            <startDate>1-5-2015</startDate>
+            <endDate>31-5-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>33</columnId>
+            <startDate>1-4-2015</startDate>
+            <endDate>30-4-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+        <columnDefinition locked="false" type="USER">
+            <columnId>36</columnId>
+            <startDate>1-1-2015</startDate>
+            <endDate>31-1-2015</endDate>
+            <nofMonths>1</nofMonths>
+            <baseCurrency>EUR</baseCurrency>
+            <formulaSetId>NoTrend</formulaSetId>
+            <publishable>false</publishable>
+            <imported>false</imported>
+            <userEdited>false</userEdited>
+            <manuallyChanged>false</manuallyChanged>
+            <changedByUser>
+            </changedByUser>
+        </columnDefinition>
+    </columnDefinitions>
+    <timeLines highestId="1">
+        <timeLine classType="standard" locked="false" source="DEFAULT" status="NONE" type="USER">
+            <timelineId>1</timelineId>
+            <title>MonthTimeline</title>
+            <assignedUserPatterns/>
+            <columnIds>
+                <columnId isVisible="true">24</columnId>
+                <columnId isVisible="true">23</columnId>
+                <columnId isVisible="true">22</columnId>
+                <columnId isVisible="true">21</columnId>
+                <columnId isVisible="true">20</columnId>
+                <columnId isVisible="true">19</columnId>
+                <columnId isVisible="true">18</columnId>
+                <columnId isVisible="true">17</columnId>
+                <columnId isVisible="true">16</columnId>
+                <columnId isVisible="true">15</columnId>
+                <columnId isVisible="true">14</columnId>
+                <columnId isVisible="true">13</columnId>
+                <columnId isVisible="true">12</columnId>
+                <columnId isVisible="true">11</columnId>
+                <columnId isVisible="true">10</columnId>
+                <columnId isVisible="true">9</columnId>
+                <columnId isVisible="true">8</columnId>
+                <columnId isVisible="true">7</columnId>
+                <columnId isVisible="true">6</columnId>
+                <columnId isVisible="true">5</columnId>
+                <columnId isVisible="true">4</columnId>
+                <columnId isVisible="true">3</columnId>
+                <columnId isVisible="true">2</columnId>
+                <columnId isVisible="true">1</columnId>
+                <columnId isVisible="true">36</columnId>
+                <columnId isVisible="true">35</columnId>
+                <columnId isVisible="true">34</columnId>
+                <columnId isVisible="true">33</columnId>
+                <columnId isVisible="true">32</columnId>
+                <columnId isVisible="true">31</columnId>
+                <columnId isVisible="true">30</columnId>
+                <columnId isVisible="true">29</columnId>
+                <columnId isVisible="true">28</columnId>
+                <columnId isVisible="true">27</columnId>
+                <columnId isVisible="true">26</columnId>
+                <columnId isVisible="true">25</columnId>
+            </columnIds>
+        </timeLine>
+    </timeLines>
+    <ROOT>
+        <FPS_VAR_Naam inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">/Test BNG Standaard</value>
+                </column>
+            </columns>
+        </FPS_VAR_Naam>
+        <FPS_VAR_KVKnr inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">01010001</value>
+                </column>
+            </columns>
+        </FPS_VAR_KVKnr>
+        <FPS_VAR_Rechtsvorm_nr inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">1</value>
+                </column>
+            </columns>
+        </FPS_VAR_Rechtsvorm_nr>
+        <FPS_VAR_Rechtsvorm_omschr inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">Besloten Vennootschap</value>
+                </column>
+            </columns>
+        </FPS_VAR_Rechtsvorm_omschr>
+        <FPS_VAR_BIK_CODE inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">8411</value>
+                </column>
+            </columns>
+        </FPS_VAR_BIK_CODE>
+        <FPS_VAR_BIK_Omschr inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">Algemeen overheidsbestuur</value>
+                </column>
+            </columns>
+        </FPS_VAR_BIK_Omschr>
+        <FPS_VAR_GridId inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">01010001</value>
+                </column>
+            </columns>
+        </FPS_VAR_GridId>
+        <FPS_VAR_Kantoor inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">0624725343</value>
+                </column>
+            </columns>
+        </FPS_VAR_Kantoor>
+        <FPS_VAR_Straat inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">Hoofdstraat</value>
+                </column>
+            </columns>
+        </FPS_VAR_Straat>
+        <FPS_VAR_Postcode inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">1273AA</value>
+                </column>
+            </columns>
+        </FPS_VAR_Postcode>
+        <FPS_VAR_Woonplaats inReport="true">
+            <columns>
+                <column isEntered="true">
+                    <value isString="true">Huizen</value>
+                </column>
+            </columns>
+        </FPS_VAR_Woonplaats>
+        <ModelVersion inReport="true">
+            <columns>
+                <column isEntered="false">
+                    <value isString="true">v4.4.8</value>
+                </column>
+            </columns>
+        </ModelVersion>
+    </ROOT>
+    <customerId>1652</customerId>
+    <documentId>2303</documentId>
+    <mutationDate>2017-02-17T11:45:31</mutationDate>
+</finanDocument>

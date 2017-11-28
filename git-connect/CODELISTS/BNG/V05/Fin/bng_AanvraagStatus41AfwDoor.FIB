@@ -1,0 +1,26 @@
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+0: ..
+2: Klant
+12: Accountmanager
+14: Hoofd zakelijk
+18: Directie
+10: Kredietcommisie

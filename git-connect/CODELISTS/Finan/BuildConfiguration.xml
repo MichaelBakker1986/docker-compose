@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="make-zipfile-default" name="Make_ZipFile">
+	<tstamp>
+		<format property="ldt" pattern="yyyy-MM-dd_HHmm" locale="en,UK" />
+	</tstamp>
+
+	<target name="make-zipfile-default" description="Make the ZipFile">
+		<copy todir="${todir}" flatten="true" enablemultiplemappings="true" overwrite="false">
+			<fileset file="${basedir}/V05/Reports/*" />
+			<fileset file="${basedir}/V05_FinanOnline/_Project/emails.*" />
+			<fileset file="${basedir}/V05/Screendefinitions/screendefinition.*" />
+			<fileset file="${basedir}/V05/FMT/Master/filters.*" />
+			<fileset file="${basedir}/V05/FMT/Tables/mappings.*.mapping" />
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/_Project/translations.*" />
+				<globmapper from="translations.ff_prognose_translations.csv" to="translations.ff_prognose_translations.translation" />
+			</mappedresources>
+			<mappedresources>
+        <fileset file="${basedir}/../Finan/V05_FinanOnline/_Project/translations.*" />
+        <globmapper from="translations.V05.csv" to="translations.V05.translation" />
+      </mappedresources>
+      <mappedresources>
+        <fileset file="${basedir}/../Finan/V05_FinanOnline/_Project/translations.*" />
+        <globmapper from="translations.finanfinancials.csv" to="translations.finanfinancials.translation" />
+      </mappedresources>			
+			<mappedresources>
+				<fileset file="${basedir}/V05/Matrices/MonitoringApp.xls" />
+				<globmapper from="MonitoringApp.xls" to="matrices.MonitoringApp.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Matrices/TaxRates.xls" />
+				<globmapper from="TaxRates.xls" to="matrices.TaxRates.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Matrices/V05_ForecastSettings.xls" />
+				<globmapper from="V05_ForecastSettings.xls" to="matrices.V05_ForecastSettings.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/FMT/Master/*.Fmt4Model.xml" />
+				<globmapper from="V05.Fmt4Model.xml" to="targets.V05.targets" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/FMT/Tables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Translations/*.csv" />
+				<globmapper from="translations.model_FAM.csv" to="translations.model_FAM.translation" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Reports/*.xml" />
+				<globmapper from="questionnaire-fam.frb.xml" to="reports.questionnaire-fam.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Reports/*.rpt" />
+				<globmapper from="questionnaire-fam.frb.rpt" to="reports.questionnaire-fam.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/KAM/Reports/*.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Matrices/*" />
+				<globmapper from="PRODUCTSELECTION.xls" to="matrices.PRODUCTSELECTION.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/FFL/FAM.ffl" />
+				<globmapper from="*" to="ffl.*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/FMT/Tables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/KAM/FMT/Tables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/KAM/Matrices/KAM_Parameters.xls" />
+				<globmapper from="KAM_Parameters.xls" to="matrices.KAM_Parameters.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/KAM/FFL/KAM*.ffl" />
+				<globmapper from="*" to="ffl.*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/Rating/FFL/RATING.ffl" />
+				<globmapper from="*" to="ffl.*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/FFL/V05.FFL" />
+				<globmapper from="*" to="ffl.V05.ffl" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/Rating/FMT/Tables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/Rating/Reports/*.xml" />
+				<globmapper from="*.frb.xml" to="reports.*.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/Rating/Reports/*.rpt" />
+				<globmapper from="*.frb.rpt" to="reports.*.frb-rpt" />
+			</mappedresources>
+		</copy>
+	</target>
+
+	<target name="make-zipfile-finan" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configurations_finan_*.zip" />
+		</delete>
+		<copy todir="${basedir}/_ZipFile/configuration_finan_${ldt}" flatten="true" enablemultiplemappings="true">
+			<fileset file="${basedir}/KAM/Reports/finan/reports.questionnaire-kam_sra.frb-rpt" />
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/Reports/finan/reports.reports.frb-rpt" />
+				<globmapper from="reports.reports.frb-rpt" to="reports.questionnaire-kam.frb-rpt" />
+			</mappedresources>
+      <mappedresources>
+        <fileset file="${basedir}/../SBR-Direct/BT11/BT11/FFL/BT11.ffl" />
+        <globmapper from="*" to="ffl.BT11.ffl" />
+      </mappedresources>
+      <mappedresources>
+        <fileset file="${basedir}/../SBR-Direct/BT11/BT11/Matrices/Taxonomies.xls" />
+        <globmapper from="Taxonomies.xls" to="matrices.Taxonomies.xls.matrix" />
+      </mappedresources>
+      <mappedresources>
+        <fileset file="${basedir}/../SBR-Direct/BT11/BT11/FMT/Tables/*.xml" />
+        <globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+      </mappedresources>
+			<fileset file="${basedir}/V05_FinanOnline/Reports/finan/*" />
+			<fileset file="${basedir}/V05_FinanOnline/Screendefinitions/*.screendefinition" />
+			<fileset file="${basedir}/V05_FinanOnline/_Project/finan/*.*" />
+		</copy>
+		<antcall target="make-zipfile-default">
+			<param name="todir" value="${basedir}/_ZipFile/configuration_finan_${ldt}" />
+		</antcall>
+		<zip destfile="${basedir}/_ZipFile/configurations_finan_${ldt}.zip">
+			<fileset file="${basedir}/_ZipFile/configuration_finan_${ldt}/*.*" />
+		</zip>
+		<delete dir="${basedir}/_ZipFile/configuration_finan_${ldt}" />
+	</target>
+
+	<target name="make-zipfile-unit4" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configurations_unit4_*.zip" />
+		</delete>
+		<copy todir="${basedir}/_ZipFile/configuration_unit4_${ldt}" flatten="true" enablemultiplemappings="true">
+			<fileset file="${basedir}/KAM/Reports/unit4/reports.questionnaire-kam_sra.frb-rpt" />
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/Reports/unit4/reports.reports.frb-rpt" />
+				<globmapper from="reports.reports.frb-rpt" to="reports.questionnaire-kam.frb-rpt" />
+			</mappedresources>
+			<fileset file="${basedir}/V05_FinanOnline/Reports/unit4/*" />
+			<fileset file="${basedir}/V05_FinanOnline/Screendefinitions/*" />
+			<fileset file="${basedir}/V05_FinanOnline/_Project/unit4/*.text" />
+			<fileset file="${basedir}/V05_FinanOnline/_Project/unit4/*.config" />
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/_Project/unit4/*.csv" />
+				<globmapper from="translations.*.csv" to="translations.*.translation" />
+			</mappedresources>
+		</copy>
+		<antcall target="make-zipfile-default">
+			<param name="todir" value="${basedir}/_ZipFile/configuration_unit4_${ldt}" />
+		</antcall>
+		<zip destfile="${basedir}/_ZipFile/configurations_unit4_${ldt}.zip">
+			<fileset file="${basedir}/_ZipFile/configuration_unit4_${ldt}/*.*" />
+		</zip>
+		<delete dir="${basedir}/_ZipFile/configuration_unit4_${ldt}" />
+	</target>
+
+	<target name="make-zipfile-bdo" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_bdo-finan_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_bdo-finan_${ldt}.zip" filesonly="true">
+			<fileset file="${basedir}/V05_FinanOnline/Reports/bdo/*" />
+			<fileset file="${basedir}/V05_FinanOnline/_Project/bdo/*.*" />
+		</zip>
+	</target>
+
+	<target name="make-zipfile-fam" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_fam_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_fam_${ldt}.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Translations/*.csv" />
+				<globmapper from="translations.model_FAM.csv" to="translations.model_FAM.translation" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Reports/*.xml" />
+				<globmapper from="questionnaire-fam.frb.xml" to="reports.questionnaire-fam.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Reports/*.rpt" />
+				<globmapper from="questionnaire-fam.frb.rpt" to="reports.questionnaire-fam.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/Matrices/*" />
+				<globmapper from="PRODUCTSELECTION.xls" to="matrices.PRODUCTSELECTION.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/FFL/FAM.ffl" />
+				<globmapper from="*" to="ffl.*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/FAM/FMT/Tables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<fileset file="${basedir}/V05/Screendefinitions/screendefinition.overwrite_repository_json.screendefinition" />
+		</zip>
+	</target>
+
+	<target name="make-zipfile-mth" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_mth-unit4_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_mth-unit4_${ldt}.zip" filesonly="true">
+			<fileset file="${basedir}/V05_FinanOnline/_Project/mth/*.*" />
+		</zip>
+	</target>
+
+	<target name="make-zipfile-test" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_test_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_test_${ldt}.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/../TEST/ScorecardTestModel/FFL/*.ffl" />
+				<globmapper from="*" to="ffl.*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../TEST/ScorecardTestModel/Reports/*.xml" />
+				<globmapper from="questionnaire-ScorecardTestModel.frb.xml" to="reports.questionnaire-SCORECARDTESTMODEL.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../TEST/ScorecardTestModel/Reports/*.rpt" />
+				<globmapper from="questionnaire-ScorecardTestModel.frb.rpt" to="reports.questionnaire-SCORECARDTESTMODEL.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/../TEST/ScorecardTestModel/Matrices/ScorecardTestModel.xls" />
+				<globmapper from="ScorecardTestModel.xls" to="matrices.ScorecardTestModel.xls.matrix" />
+			</mappedresources>
+		</zip>
+	</target>
+
+	<target name="make-zipfile-bright" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_bright_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_bright_${ldt}.zip" filesonly="true">
+			<fileset file="${basedir}/V05_FinanOnline/_Project/bright/emails.*" />
+			<fileset file="${basedir}/V05_FinanOnline/Screendefinitions/bright/*" />
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/_Project/translations.*" />
+				<globmapper from="translations.ff_prognose_translations.csv" to="translations.ff_prognose_translations.translation" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05_FinanOnline/_Project/bright/translations.*" />
+				<globmapper from="translations.zz_bright_translations.csv" to="translations.zz_bright_translations.translation" />
+			</mappedresources>
+			<mappedresources>
+        <fileset file="${basedir}/V05/Matrices/BBIScore.xls" />
+				<globmapper from="BBIScore.xls" to="matrices.BBIScore.xls.matrix" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/FMT/Tables/Bright*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+		</zip>
+	</target>
+
+	<target name="make-zipfile-bob" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset file="${basedir}/_ZipFile/configuration_bob_*.zip" />
+		</delete>
+		<zip destfile="${basedir}/_ZipFile/configuration_bob_${ldt}.zip" filesonly="true">
+			<fileset file="${basedir}/_ZipFile/configurations_finan_*.zip" />
+			<fileset file="${basedir}/_ZipFile/configuration_test_*.zip" />
+		</zip>
+	</target>
+</project>

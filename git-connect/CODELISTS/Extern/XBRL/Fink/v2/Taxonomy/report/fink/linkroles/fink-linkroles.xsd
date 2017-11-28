@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<xs:schema xmlns:fink-lr="http://www.financieringslink.nl/2.0/report/fink/linkroles/fink-linkroles" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.financieringslink.nl/2.0/report/fink/linkroles/fink-linkroles">
+  <xs:annotation>
+    <xs:appinfo>
+      <link:linkbaseRef xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="fink-linkroles-generic-lab-en.xml" xlink:role="http://www.xbrl.org/2003/role/link" xlink:type="simple"/>
+      <link:linkbaseRef xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="fink-linkroles-generic-lab-nl.xml" xlink:role="http://www.xbrl.org/2003/role/link" xlink:type="simple"/>
+      <link:roleType id="fink-lr_AdimensionalTable" roleURI="urn:fink:linkrole:adimensional-table">
+        <link:definition>Adimensioneel [tabel]</link:definition>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_BalanceSheet" roleURI="urn:fink:linkrole:balance-sheet">
+        <link:definition>Balans</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_Contact" roleURI="urn:fink:linkrole:contact">
+        <link:definition>Contactpersoon</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_EntityReportInformation" roleURI="urn:fink:linkrole:entity-report-information">
+        <link:definition>Ondernemings- en rapportage gegevens</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_Forecast" roleURI="urn:fink:linkrole:forecast">
+        <link:definition>Prognose</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_FundingRequestInformation" roleURI="urn:fink:linkrole:funding-request-information">
+        <link:definition>Financieringsaanvraag gegevens</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="fink-lr_IncomeStatement" roleURI="urn:fink:linkrole:income-statement">
+        <link:definition>Winst- en verliesrekening</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+</xs:schema>

@@ -1,0 +1,24 @@
+{&&Language=English};Inc_TitleTest.fin
+
+.Variables
+PP    0 1N     1               "Title Test"           				 	  \TitleTest
+
+PIII  6 BN   1 2               Titles     		                      	  \Titles
+IIII  6 BN     3               UnlockedTitle                              \UnlockedTitle
+PIII  6 BN     3               LockedTitle                                \LockedTitle
+PIII  6 BN     3               VisibleTitle                               \VisibleTitle
+XXXX  6 BN     3               InvisibleTitle                             \InvisibleTitle
+
+PIII  6 BN   1 2               "Title Reference variables"     		      \TitleReferenceVariables
+PIII    1A     3               "Title"								 	  \TitleVariable
+PIII    1A     3               "Other Title Reference"					  \IsEnteredTitleVariable
+IIII    1A>    3               &"ref " &IsEnteredTitleVariable      	  \TitleReferenceVariable -> IsEnteredTitleVariable
+
+PIII    1A     3               "GetTitle of TitleVariable (EN)"			  \GetTitleVariable
+
+.Formulas NoTrend,Trend
+IsEnteredTitleVariable = &If(TitleEntered(TitleVariable), "True", "False")
+TitleVariable = &GetTitle(TitleVariable)
+
+.Formulas Title
+GetTitleVariable = &GetTitle(TitleVariable)

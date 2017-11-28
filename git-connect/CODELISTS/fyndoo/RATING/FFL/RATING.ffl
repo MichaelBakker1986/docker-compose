@@ -1,0 +1,1423 @@
+// model "Rating Scorecard"
+// created by FINAN 3.2.56.42 (user bernd.kottier) on 20-07-2017 14:40
+
+import FinanMath.*;
+import BaseModel.*;
+
+model RATING uses BaseModel
+{
+  version: "1.5.5";
+  root
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER_ROLES
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER_ROLES";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER";
+        visible: 1;
+        options_title: locked;
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: 1;
+      data_options: saveCalculatedValue,unscalable;
+      displaytype: select;
+      title: "Rating Scorecard";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      choices: "0:Incomplete filled.|1:Complete filled.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Rating";
+        top_blanklines: 1;
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Incomplete filled.|1:Complete filled.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_Paragraaf02
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Rating";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable FinalRating
+          {
+            datatype: number;
+            frequency: document;
+            formula: If(krPD[LastTinFormulaSet(NoTrend,MainPeriod)]=NA,NA,Case(GetValue(krPD,LastTinFormulaSet(NoTrend,MainPeriod),1),[<=0.00001:1|<=0.00002:2|<=0.00004:3|<=0.00008:4|<=0.00010:5|<=0.00020:6|<=0.00040:7|<=0.00090:8|<=0.00170:9|<=0.00420:10|<=0.00870:11|<=0.01560:12|<=0.02810:13|<=0.04680:14|<=0.07160:15|<=0.11620:16|<=0.15400:17|<=0.17380:18|<=0.21500:19|<=0.26000:20|>0.26000:21]));
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: select;
+            fixed_decimals: 0;
+            title: "Final Rating";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "1:AAA|2:AA+|3:AA|4:AA-|5:A+|6:A|7:A-|8:BBB+|9:BBB|10:BBB-|11:BB+|12:BB|13:BB-|14:B+|15:B|16:B-|17:CCC+|18:CCC|19:CCC-|20:CC|21:D\"";
+            options_title: locked;
+          }
+          variable FinalAssociatedPD
+          {
+            datatype: number;
+            frequency: document;
+            formula: MatrixLookup("fyndoo_Parameters.xls","Rating2PD",FinalRating,1);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 3;
+            title: "Final PD";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf02Sub3 refers to krUraRatingKlasse
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            title: "Proposed URA Rating";
+            top_separator: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable Ratios
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Rating kengetallen";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked, invisible;
+            variable R1 refers to krAnteilOrdentlichenErgebnisses
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              displaytype: percentage;
+              fixed_decimals: 2;
+              title: "Aandeel in het gewone resultaat";
+              top_blanklines: 1;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+            variable R2 refers to krBankUndLieferantenanteil
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              displaytype: percentage;
+              fixed_decimals: 2;
+              title: "Bank en leveranciersaandeel";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+            variable R3 refers to krFremdKapitalzinslast
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              displaytype: percentage;
+              fixed_decimals: 2;
+              title: "Rentevoet vreemd vermogen";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+            variable R4 refers to krAnteilKurzfristigeVerbindlichkeiten
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              displaytype: percentage;
+              fixed_decimals: 2;
+              title: "Aandeel kort vreemd vermogen";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+            variable R5 refers to krAnteilEigenmittel
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: calculateAggregation,unscalable;
+              displaytype: percentage;
+              fixed_decimals: 2;
+              title: "Solvabiliteit voor de rating";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+        }
+        variable Acceptatiekader
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          displaytype: currency;
+          title: "Kengetallen voor acceptatiekader";
+          top_separator: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+          variable DSCR_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: DSCR[LastT];
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "DSCR";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable NetSales_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: NetSales[LastT];
+            displaytype: currency;
+            title: "Netto omzet";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RepaymentCapacity_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RepaymentCapacity[LastT];
+            displaytype: currency;
+            title: "Aflossingscapaciteit";
+            visible: 1;
+            options_title: locked;
+          }
+          variable EffectiveNetWorthRatio_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: EffectiveNetWorthRatio[LastT];
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "Solvabiliteit aansprakelijk vermogen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingEffectiveNetWorth_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingEffectiveNetWorth[LastT];
+            displaytype: currency;
+            title: "Effective net worth";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingTotalEquityAndLiabilities_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingTotalEquityAndLiabilities[LastT];
+            displaytype: currency;
+            title: "Total equity and liabilities";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingReceivables_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingReceivables[LastT];
+            displaytype: currency;
+            title: "Receivables";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingInventories_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingInventories[LastT];
+            displaytype: currency;
+            title: "Inventories";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingTradePayablesTotal_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingTradePayablesTotal[LastT];
+            displaytype: currency;
+            title: "Accounts payable-trade";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingWorkCapital_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingWorkCapital[LastT];
+            displaytype: currency;
+            title: "Working capital";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable RatingNetSalesGrowth_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingNetSalesGrowth[LastT];
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "Growth in sales";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingTradeReceivablesTermDaysTotal_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingTradeReceivablesTermDaysTotal[LastT];
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Average period accounts receivable (days) (average total sales)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RatingTradePayablesTermDaysTotal_T
+          {
+            datatype: number;
+            frequency: document;
+            formula: RatingTradePayablesTermDaysTotal[LastT];
+            data_options: unscalable;
+            fixed_decimals: 1;
+            title: "Average period accounts payable (days)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable DSCR
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "DSCR";
+            top_separator: 1;
+            visible: False;
+            options_title: locked;
+          }
+          variable NetSales
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "NetSales";
+            visible: False;
+            options_title: locked;
+          }
+          variable RepaymentCapacity
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "RepaymentCapacity";
+            visible: False;
+            options_title: locked;
+          }
+          variable EffectiveNetWorthRatio
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "EffectiveNetWorthRatio";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingReceivables
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Receivables";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingInventories
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Inventories";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingTradePayablesTotal
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Accounts payable-trade";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingWorkCapital
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: (RatingReceivables + RatingInventories) - RatingTradePayablesTotal;
+            displaytype: currency;
+            title: "Working capital";
+            visible: False;
+            options_title: locked;
+            options_notrend: locked;
+          }
+          variable RatingNetSalesGrowth
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "Growth in sales";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingTradeReceivablesTermDaysTotal
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 1;
+            title: "Average period accounts receivable (days) (average total sales)";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingTradePayablesTermDaysTotal
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 1;
+            title: "Average period accounts payable (days)";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingEffectiveNetWorth
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Effective net worth";
+            visible: False;
+            options_title: locked;
+          }
+          variable RatingTotalEquityAndLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Total equity and liabilities";
+            visible: False;
+            options_title: locked;
+          }
+        }
+        variable RatingKlassen
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          displaytype: currency;
+          title: "Rating";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options_notrend: locked, invisible;
+          options_trend: locked, invisible;
+          variable sdePD refers to krPD
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 3;
+            title: "Uitvalwaarschijnlijkheid binnen één jaar";
+            top_blanklines: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable sdeURARatingKlasse refers to krUraRatingKlasse
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            title: "URA Ratingklasse";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable RatioFolder
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          displaytype: currency;
+          title: "Rating kengetallen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 0;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+          variable krAnteilOrdentlichenErgebnisses
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Aandeel in het gewone resultaat";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable krBankUndLieferantenanteil
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Bank en leveranciersaandeel";
+            visible: 1;
+            options_title: locked;
+          }
+          variable krFremdKapitalzinslast
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Rentevoet vreemd vermogen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable krAnteilKurzfristigeVerbindlichkeiten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Aandeel kort vreemd vermogen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable krAnteilEigenmittel
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit voor de rating";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable RatingFolder
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          displaytype: currency;
+          title: "Rating";
+          display_options: showColumnTitlesAboveSubVars;
+          bottom_separator: 1;
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options_notrend: locked, invisible;
+          options_trend: locked, invisible;
+          variable ModelConfiguration
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Modelconfiguratie";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "Duits|Nederlands";
+            options_title: locked;
+          }
+          variable krInsolvenzquote
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            formula_notrend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|>=2015:0.019]));
+            formula_trend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|>=2015:0.019]));
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "A-priori uitvalwaarschijnlijkheid";
+            top_separator: 1;
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable krZValue
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,4.03964180885174+9.29864789092051*krAnteilOrdentlichenErgebnisses+2.38051797748078*krAnteilEigenmittel-23.0757849643717*krFremdKapitalzinslast-1.85536265755931*krBankUndLieferantenanteil-0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten);
+            formula_trend: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,4.03964180885174+9.29864789092051*krAnteilOrdentlichenErgebnisses+2.38051797748078*krAnteilEigenmittel-23.0757849643717*krFremdKapitalzinslast-1.85536265755931*krBankUndLieferantenanteil-0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten);
+            data_options: saveCalculatedValue,calculateAggregation,unscalable;
+            fixed_decimals: 5;
+            title: "Z-waarde";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krRDFsample
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            formula_notrend: 0.08223466368715092;
+            formula_trend: 0.08223466368715092;
+            data_options: unscalable;
+            fixed_decimals: 5;
+            title: "Relative Default Frequency (RDF) of sample";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krPD
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+            formula_trend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+            data_options: saveCalculatedValue,calculateAggregation,unscalable;
+            displaytype: percentage;
+            fixed_decimals: 3;
+            title: "Uitvalwaarschijnlijkheid binnen één jaar";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krUraRatingKlasse
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: EvaluateAsString(If(krPD=NA," ",&Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
+            formula_trend: EvaluateAsString(If(krPD=NA," ",&Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
+            data_options: saveCalculatedValue,calculateAggregation,unscalable;
+            title: "URA Ratingklasse";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krUraAmpel
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: NA;
+            formula_trend: NA;
+            data_options: saveCalculatedValue,calculateAggregation,unscalable;
+            fixed_decimals: 0;
+            title: "URA verkeerslicht";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krUraAmpelD
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: "";
+            formula_trend: "";
+            data_options: calculateAggregation,unscalable;
+            title: "URA verkeerslicht";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krUraAmpelDNL
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: "";
+            formula_trend: "";
+            data_options: calculateAggregation,unscalable;
+            title: "URA verkeerslicht";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krIfdRatingKlasse
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: NA;
+            formula_trend: NA;
+            data_options: saveCalculatedValue,calculateAggregation;
+            displaytype: currency;
+            title: "IFD Ratingklasse";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable krIfdRatingKlasseD
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: "";
+            formula_trend: "";
+            data_options: calculateAggregation,unscalable;
+            title: "IFD Ratingklasse";
+            bottom_separator: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable Q_Map01_Hulpvariabelen
+            {
+              datatype: number;
+              frequency: document;
+              displaytype: currency;
+              title: "Hulpvariabelen";
+              top_blanklines: 1;
+              locked: 1;
+              visible: 0;
+              options_title: locked, invisible;
+              options: locked, invisible;
+              variable Q_Map01_REQUIREDVARS
+              {
+                datatype: number;
+                frequency: document;
+                formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+                displaytype: currency;
+                title: "Aantal verplichte velden (3)";
+                top_blanklines: 1;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options: locked;
+              }
+              variable Q_Map01_ENTEREDREQUIREDVARS
+              {
+                datatype: number;
+                frequency: document;
+                formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+                displaytype: currency;
+                title: "Aantal ingevulde verplichte velden (3)";
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options: locked;
+              }
+            }
+          }
+          variable Q_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: 0;
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: select;
+            title: "Status";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Active|1:Final";
+            options_title: locked;
+          }
+          variable Q_STATUS_FINAL_ON
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: date;
+            title: "Final:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_FINAL_BY
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Final by:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_FINAL_BY_NAME
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Final by:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_STARTED_ON
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: date;
+            title: "Created:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_STARTED_BY
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Created by:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_STARTED_BY_NAME
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Created by:";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_STATUS_MODIFIED_ON
+          {
+            datatype: number;
+            frequency: document;
+            formula: Now;
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: date;
+            title: "Last modified";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Q_ModelVersion
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString("1.5.5");
+            data_options: saveCalculatedValue,unscalable;
+            title: "Modelversion:";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_ModelType
+          {
+            datatype: string;
+            frequency: document;
+            formula: "RATING";
+            data_options: saveCalculatedValue,unscalable;
+            title: "Modeltype:";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MatrixVersion
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString(MatrixLookup("fyndoo_Parameters.xls","Version",1,3));
+            data_options: saveCalculatedValue,unscalable;
+            title: "Parameters version:";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_PREVIOUS_BUTTON_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            formula: 2;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Previous";
+            visible: 1;
+            choices: "0:Nooit|2:Altijd";
+            options_title: locked;
+          }
+          variable Q_NEXT_BUTTON_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Next";
+            visible: 1;
+            choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+            options_title: locked;
+          }
+          variable Q_CONCEPT_REPORT_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Draft report";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_FINAL_REPORT_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Definitive report";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_MAKE_FINAL_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Make it final";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+        }
+        variable Q_Restricties
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Length(&Q_RestrictiesCombi[1])>0,&"[BR][/BR]Please note: "&Q_RestrictiesCombi,""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Restricties";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_RestrictiesCombi
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Restricties tekst";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_WARNING_GLOBAL
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Knockout(s)?";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+    }
+  }
+}

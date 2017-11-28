@@ -17,7 +17,7 @@ xlsx.initComplete.then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])
 
     LME = new lmeAPI()
-    LME.importFFL(fs.readFileSync(__dirname + '/../../ff-ssh-git/resources/' + name + '.ffl', 'utf8'));
+    LME.importFFL(fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + '.ffl', 'utf8'));
     var lmeExport = LME.exportLME();
     let options = {
         insertGlobals: true,
@@ -32,10 +32,10 @@ xlsx.initComplete.then(function(matrix) {
         debug: false
     };
     let b = browser(options).ignore('escodegen').ignore('esprima');
-    b.add(__dirname + '/../../ff-fes/exchange_modules/presentation/webexport_with_template.js');
+    b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport_with_template.js');
     b.add(__dirname + '/lmeAPIWrapper.js');
     b.transform(require('browserify-fastjson'));
-    var res = fs.createWriteStream(__dirname + '/../../ff-ssh-git/resources/' + name + '.js')
+    var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/' + name + '.js')
     b.bundle().pipe(res);
 }).catch((err) => {
     console.error(err)

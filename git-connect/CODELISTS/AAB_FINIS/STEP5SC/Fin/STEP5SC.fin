@@ -1,0 +1,77 @@
+{&&Language=English}
+;==========================================================================================================================================
+AAB Step 5 of Sixstepsplan
+
+.ModelVersion          0.07
+.FINANversion          3.2
+ 
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear,Years=2,MaxTsY=1,TsY=1,TsY2=1,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="Step 5",Range=[FirstTinPeriod(MainPeriod)..LastTinPeriod(MainPeriod)],Period=MainPeriod
+
+.Variables
+PP       X     0               $>AAB Step 5 of Sixstepsplan v#CompactModelVersion#<$                                                \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+;-------------------------------------------------------------------------------------------------- Scorecard
+
+.Variables
+PP      1N C 1 1               $>ABN Amro Bank Company Analysis and Company Risk<$ (v#CompactModelVersion#)                       \Q_ROOT
+C $>ABN Amro Bank Company Analysis and Company Risk<$
+
+.formulas NoTrend
+Q_ROOT                         = Q_Map01[1] ;And Q_Map02[1] And Q_Map03[1] ;And Q_Map04
+
+.choices
+Q_ROOT                         = "0:Complete|1:Incomplete"
+;==========================================================================================================================================================
+
+;------------------------------ Map 1
+.Variables
+PX      1N C   2               "$>Credit structure and pricing<$"                                                            \Q_Map01
+PX      1X     3               "$>Structure risk<$"                                                                          \HeaderStructureRisk
+PI      1N C   4               "$>Is there structure risk regarding parts that are not related to the credit base?<$"        \StructureRiskGroup
+PI      1N C   4               "$>Does the credit structure mitigate the identified risks?<$"                                \StructureRiskGroupCreditStructureMitigateRisk
+PI      1M     4               "$>Explanation<$"                                                                             \StructureRiskGroupExplenation
+PI      1N C   4               "$>Other interested?<$"                                                                       \OtherInterested
+PI      1N C   4               "$>Does the credit structure mitigate the identified risks?<$"                                \OtherInterestedCreditStructureMitigateRisk
+PI      1M     4               "$>Explanation<$"                                                                             \OtherInterestedExplenation
+PI      1N C   4               "$>Credit structure and documentation?<$"                                                     \CreditStructureAndDocumentation
+PI      1N C   4               "$>Does the credit structure mitigate the identified risks?<$"                                \CreditStructureAndDocumentationCreditStructureMitigateRisk
+PI      1M     4               "$>Explanation<$"                                                                             \CreditStructureAndDocumentationExplenation
+PI      1N C   4               "$>International activities?<$"                                                               \InternationalActivities
+PI      1N C   4               "$>Does the credit structure mitigate the identified risks?<$"                                \InternationalActivitiesCreditStructureMitigateRisk
+PI      1M     4               "$>Explanation<$"                                                                             \InternationalActivitiesExplenation
+
+.Hints
+;StructureRiskGroup                = [b]Groep[/b]| onderdelen buiten de groep, e.g..| zusterondernemingen,| intercompany, financieringen bij| andere banken, verplaatsingen| activa passiva binnen de groep
+;OtherInterested                   = [b]Andere belanghebbende[/b]|-Andere banken|-Lease maatschappijen|-Factor maatschappijen|-Adviseurs|-Afnemers|-Leveranciers|-Andere crediteuren|-Aandeelhouders|-Belastingdienst|-Medewerkers
+;CreditStructureAndDocumentation   = [b]Kredietstructuur & documentatie[/b]| doel overschrijdingen en zakelijke| belangen
+;InternationalActivities           = [b]Internationale activiteiten[/b]|cashflow uit buitenland, wetgeving |buitenland, waardering zekerheden |in het buitenland
+
+.Choices
+Q_Map01                           = "0:Incomplete|1:Complete"
+StructureRiskGroup                = "1:$>Yes<$|0:$>No<$"
+OtherInterested                   = "1:$>Yes<$|0:$>No<$"
+CreditStructureAndDocumentation   = "1:$>Yes<$|0:$>No<$"
+InternationalActivities           = "1:$>Yes<$|0:$>No<$"
+      
+StructureRiskGroupCreditStructureMitigateRisk = "1:$>Yes<$|0:$>No<$"  
+OtherInterestedCreditStructureMitigateRisk    = "1:$>Yes<$|0:$>No<$"
+CreditStructureAndDocumentationCreditStructureMitigateRisk = "1:$>Yes<$|0:$>No<$"
+InternationalActivitiesCreditStructureMitigateRisk = "1:$>Yes<$|0:$>No<$"
+                
+                     
+                     
+.Formulas NoTrend
+
+
+.Variables
+.Variable StructureRiskGroupCreditStructureMitigateRisk             , Visible = StructureRiskGroup=1
+.Variable OtherInterestedCreditStructureMitigateRisk                , Visible = OtherInterested=1
+.Variable CreditStructureAndDocumentationCreditStructureMitigateRisk, Visible = CreditStructureAndDocumentation=1
+.Variable InternationalActivitiesCreditStructureMitigateRisk        , Visible = InternationalActivities=1
+

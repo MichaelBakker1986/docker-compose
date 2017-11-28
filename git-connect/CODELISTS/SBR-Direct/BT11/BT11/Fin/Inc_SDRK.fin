@@ -1,0 +1,221 @@
+.Variables
+PP      1N     3               Selectie van de correcte rapportage                                                                     \SDRK
+PP      1N C   4               "Welke cijfers wilt u aanleveren?"                                                                      \DeliveryType
+PI      1N C   4               "Over hoeveel jaren wilt u prognosecijfers aanleveren?"                                                 \ForecastYears
+PI      1N C   4               "Wat is de rechtsvorm van de onderneming waarvan u de rapportage gaat aanleveren?"                      \Rechtsvorm
+PI      1N C   4               "Levert u jaarcijfers of een aangifte inkomstenbelasting aan?"                                          \IBofJR
+PI      1N C   4               "Hoe hoog was het balanstotaal in de afgelopen twee boekjaren?"                                         \BalansTotaal
+PI      1N C   4               "Hoe hoog was de netto-omzet van de onderneming in de afgelopen twee boekjaren?"                        \NettoOmzet
+PI      1N C   4               "Hoeveel is het gemiddelde aantal werknemers van de onderneming in de afgelopen twee boekjaren?"        \AantalMedewerkers
+PI      1N D   4               "Wat is de einddatum van de laatste periode waarover u wilt rapporteren?"                               \EndDate
+PI      1N C   4               "Is de ondernememing actief in de agrarische sector?"                                                   \IsAgro
+PP      1N C   4               "Welke indeling van de winst- en verliesrekening is van toepassing op de onderneming?"                  \IsPLFunctional
+PI      1N C   4               "Zijn de cijfers enkelvoudig of geconsolideerd?"                                                        \EnkelvoudigOfGeconsolideerd
+PI      1N C   4               "Zijn de cijfers op fiscale of commerciële grondslag?"                                                  \FiscaalOfCommercieel
+
+.Formulas NoTrend
+Rechtsvorm                                        = Case(Val(FPS_VAR_Rechtsvorm_nr),[12:1|11:2|14:3|13:4|1:5|2:6|6:7|5:8])
+DeliveryType                                      = 0
+IsPLFunctional                                    = 0
+AantalMedewerkers = if(TotalNumberOfEmployees[1]<10 and TotalNumberOfEmployees[MaxT]<10,0,if(TotalNumberOfEmployees[1]<50 and TotalNumberOfEmployees[MaxT]<50,1,if(TotalNumberOfEmployees[1]<250 and TotalNumberOfEmployees[MaxT]<250,2,if(TotalNumberOfEmployees[1]>=250 and TotalNumberOfEmployees[MaxT]>=250,3,NA))))
+
+.Hints
+IBofJR                                            = "Om een beeld te krijgen van de totale financiële situatie van de onderneming en ondernemer(s) gebruikt de bank de jaarrekening en/of aangifte inkomstenbelasting."
+NettoOmzet                                        = "Onder de netto-omzet wordt verstaan de opbrengst uit levering van goederen en diensten uit het bedrijf van de onderneming onder aftrek van kortingen en dergelijke en van over de omzet geheven belastingen."
+IsPLFunctional                                    = "De Categoriale indeling kiest u meestal bij een productiebedrijf om de lasten samen te voegen naar hun aard. Bijvoorbeeld afschrijvingen, aangekochte materialen, transportkosten, personeelsbeloningen of advertentiekosten.De Functionele indeling kiest u meestal bij een handelsbedrijf om de lasten samen te voegen naar hun functie. Bijvoorbeeld distributie- of beheerskosten."
+
+.Choices
+Q_ROOT                                            = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+Q_STEP01                                          = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+DeliveryType                                      = "0:Jaarrekening|1:Prognosecijfers|2:VPB-aangifte"
+ForecastYears                                     = "1:voor één jaar|2:voor twee jaar"
+Rechtsvorm                                        = "1:Eenmanszaak|2:Vennootschap onder firma (Vof)|3:Maatschap|4:Commanditaire vennootschap (CV)|5:Besloten Vennootschap (BV)|6:Naamloze vennootschap (NV)|7:Vereniging|8:Stichting"
+IBofJR                                            = "0:Jaarrekening|1:IB-Aangifte"
+BalansTotaal                                      = "0:Minder dan 350 duizend euro|1:Minder dan 6 miljoen euro|2:Minder dan 20 miljoen euro|3:Meer dan 20 miljoen euro"
+NettoOmzet                                        = "0:Minder dan 700 duizend euro|1:Minder dan 12 miljoen euro|2:Minder dan 40 miljoen euro|3:Meer dan 40 miljoen euro"
+AantalMedewerkers                                 = "0:Minder dan 10|1:Minder dan 50|2:Minder dan 250|3:Meer dan 250"
+EnkelvoudigOfGeconsolideerd                       = "0:Enkelvoudig|1:Geconsolideerd"
+FiscaalOfCommercieel                              = "0:Fiscaal|1:Commercieel"
+IsAgro                                            = "0:Nee|1:Ja"
+IsPLFunctional                                    = "0:Categoriaal|1:Functioneel"
+
+.Formulas Visible
+DeliveryType                                      = 1
+ForecastYears                                     = DataEntered(DeliveryType) and (DeliveryType = 1)
+Rechtsvorm                                        = History or (Forecast and DataEntered(ForecastYears))
+IBofJR                                            = NietRechtspersoon
+BalansTotaal                                      = Rechtspersoon
+NettoOmzet                                        = Rechtspersoon
+AantalMedewerkers                                 = Rechtspersoon
+EndDate                                           = IB or IBPLUS or NP or VerenigingStichting or (Rechtspersoon and (Klein or Micro)) or VPB
+IsAgro                                            = Visible(EndDate) and DataAvailable(EndDate) and not(VPB)
+IsPLFunctional                                    = not(IB) and not(VerenigingStichting) and Visible(IsAgro); and DataEntered(IsAgro)
+EnkelvoudigOfGeconsolideerd                       = (Klein and Visible(IsPLFunctional) and DataAvailable(IsPLFunctional))
+FiscaalOfCommercieel                              = Visible(EnkelvoudigOfGeconsolideerd) and DataAvailable(EnkelvoudigOfGeconsolideerd) and not(VerenigingStichting)
+
+.Variable IsForecast, InputRequired               = Visible(Self)
+.Variable Rechtsvorm, InputRequired               = Visible(Self)
+.Variable IBofJR, InputRequired                   = Visible(Self)
+.Variable BalansTotaal, InputRequired             = Visible(Self)
+.Variable NettoOmzet, InputRequired               = Visible(Self)
+.Variable AantalMedewerkers, InputRequired        = Visible(Self)
+.Variable EnkelvoudigOfGeconsolideerd, InputRequired= Visible(Self)
+.Variable FiscaalOfCommercieel, InputRequired     = Visible(Self)
+.Variable EndDate, InputRequired                  = Visible(Self)
+.Variable IsAgro, InputRequired                   = Visible(Self)
+.Variable IsPLFunctional, InputRequired           = Visible(Self)
+.Variable DeliveryType, InputRequired             = Visible(Self)
+
+.Variable IsForecast, Locked                      = not(Visible(Self))
+.Variable Rechtsvorm, Locked                      = not(Visible(Self)) or DataAvailable(Self)
+.Variable IBofJR, Locked                          = not(Visible(Self))
+.Variable BalansTotaal, Locked                    = not(Visible(Self))
+.Variable NettoOmzet, Locked                      = not(Visible(Self))
+.Variable AantalMedewerkers, Locked               = not(Visible(Self))
+.Variable EnkelvoudigOfGeconsolideerd, Locked     = 1;not(Visible(Self))
+.Variable FiscaalOfCommercieel, Locked            = not(Visible(Self))
+.Variable EndDate, Locked                         = 1;not(Visible(Self))
+.Variable IsAgro, Locked                          = 1;not(Visible(Self))
+.Variable IsPLFunctional, Locked                  = not(Visible(Self))
+
+.LevelOffset -1
+;=================================================================================================================================
+.Variables
+XX    0 1N     5               "Scenario"                                                                                             \Scenario
+
+PP    0 1N     6               "IBPLUS"                                                                                               \IBPLUS
+PP    0 1N     6               "IB"                                                                                                   \IB
+PP    0 1N     6               "NP"                                                                                                   \NP
+PP    0 1N     6               "Micro"                                                                                                \Micro
+PP    0 1N     6               "Klein"                                                                                                \Klein
+PP    0 1N     6               "Klein"                                                                                                \Middel
+
+PP    0 1N     6               "CountMicro"                                                                                           \CountMicro
+PP    0 1N     6               "CountKlein"                                                                                           \CountKlein
+PP    0 1N     6               "CountMiddel"                                                                                          \CountMiddel
+PP    0 1N     6               "Enkelvoudig"                                                                                          \IsEnkelvoudig
+PP    0 1N     6               "Geconsolideerd"                                                                                       \IsGeconsolideerd
+PP    0 1N     6               "Fiscaal"                                                                                              \IsFiscaal
+PP    0 1N     6               "Commercieel"                                                                                          \IsCommercieel
+PP    0 1N     6               "Categoriaal"                                                                                          \IsCategoriaal
+PP    0 1N     6               "Functioneel"                                                                                          \IsFunctioneel
+PP    0 1N     6               "Historical"                                                                                           \History
+PP    0 1N     6               "Forecast"                                                                                             \Forecast
+PP    0 1N     6               "VPB"                                                                                                  \VPB
+PP    0 1N     6               "Eenmanszaak"                                                                                          \Eenmanszaak
+PP    0 1N     6               "Niet rechtspersoon, geen eenmanszaak"                                                                 \NietRechtspersoon
+PP    0 1N     6               "Rechtspersoon"                                                                                        \Rechtspersoon
+PP    0 1N     6               "Vereniging of stichting"                                                                              \VerenigingStichting
+
+.Formulas NoTrend
+CountMicro                                        = (BalansTotaal = 0) + (NettoOmzet = 0) + (AantalMedewerkers = 0)
+CountKlein                                        = (BalansTotaal = 1) + (NettoOmzet = 1) + (AantalMedewerkers = 1)
+CountMiddel                                       = (BalansTotaal = 2) + (NettoOmzet = 2) + (AantalMedewerkers = 2)
+IsEnkelvoudig                                     = not(IsGeconsolideerd)
+IsGeconsolideerd                                  = Visible(EnkelvoudigOfGeconsolideerd) and (EnkelvoudigOfGeconsolideerd=1)
+IsFiscaal                                         = not(IsCommercieel)
+IsCommercieel                                     = VerenigingStichting or (Visible(FiscaalOfCommercieel) and (FiscaalOfCommercieel=1))
+IsCategoriaal                                     = Visible(IsPLFunctional) and (IsPLFunctional=0)
+IsFunctioneel                                     = Visible(IsPLFunctional) and (IsPLFunctional=1)
+History                                           = (DeliveryType = 0)
+Forecast                                          = (DeliveryType = 1)
+VPB                                               = (DeliveryType = 2)
+Eenmanszaak                                       = Visible(Rechtsvorm) and (Rechtsvorm = 1)
+NietRechtspersoon                                 = Visible(Rechtsvorm) and (Rechtsvorm <= 4)
+Rechtspersoon                                     = Visible(Rechtsvorm) and ((Rechtsvorm = 5) or (Rechtsvorm = 6))
+VerenigingStichting                               = Visible(Rechtsvorm) and ((Rechtsvorm = 7) or (Rechtsvorm = 8))
+IsAgro                                            = 0
+EnkelvoudigOfGeconsolideerd                       = 0
+EndDate                                           = LastDateInT(MaxT)
+
+Klein                                             = If(DataEntered(BalansTotaal) and DataEntered(NettoOmzet) and DataAvailable(AantalMedewerkers),((CountKlein + CountMicro)>=2) and Rechtspersoon,0)
+Micro                                             = 0;If(DataEntered(BalansTotaal) and DataEntered(NettoOmzet) and DataAvailable(AantalMedewerkers),(CountMicro>=2) and Rechtspersoon,0)
+Middel                                            = If(DataEntered(BalansTotaal) and DataEntered(NettoOmzet) and DataAvailable(AantalMedewerkers),(CountMiddel>=2) and Rechtspersoon,0)
+
+IBPLUS                                            = 0;Eenmanszaak
+IB                                                = Visible(IBofJR) and (IBofJR=1)
+NP                                                = Visible(IBofJR) and (IBofJR=0)
+
+.Variables
+PP    0 1N     5               ScenarioAvailable                                                                                      \ScenarioAvailable
+
+.Formulas NoTrend, Trend
+ScenarioAvailable = SelectedReport > 0
+
+.Formulas Visible
+ScenarioAvailable = 0
+
+.LevelOffset 0
+;=================================================================================================================================
+.Variables
+XX      1A     4               Reports                                                                                                \Reports
+
+PII     1T     5               Report                                                                                                 \Report
+PPP     1N     6               Selected                                                                                               \Report_tpSelected
+PPP     1N     6               Test IB                                                                                                \Report_tpTestIB
+PPP     1N     6               Test Micro                                                                                             \Report_tpTestMicro
+PPP     1N     6               Test IB Plus                                                                                           \Report_tpTestIBPLUS
+PPP     1N     6               Test NP                                                                                                \Report_tpTestNP
+PPP     1N     6               Test Klein                                                                                             \Report_tpTestKlein
+PPP     1N     6               Test Vereniging of stichting                                                                           \Report_tpTestVerenigingStichting
+PPP     1N     6               Test VPB                                                                                               \Report_tpTestVPB
+PPP     1N     6               Test Functioneel                                                                                       \Report_tpTestIsFunctioneel
+PPP     1N     6               Test Categoriaal                                                                                       \Report_tpTestIsCategoriaal
+PPP     1N     6               Test Historie                                                                                          \Report_tpTestHistory
+PPP     1N     6               Test Prognose                                                                                          \Report_tpTestForecast
+PPP     1N     6               TupleInstanceIndex                                                                                     \Report_tpTupleInstanceIndex
+
+.Hints
+Report = "$$XbrlMinTupleInstances=19"
+
+.Formulas NoTrend
+Report_tpTupleInstanceIndex                       = FesExpression(TupleInstanceIndex())
+Report_tpTestIB                                   = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,2)) or (IB=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,2))
+Report_tpTestMicro                                = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,3)) or (Micro=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,3))
+Report_tpTestIBPLUS                               = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,4)) or (IBPLUS=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,4))
+Report_tpTestNP                                   = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,5)) or (NP=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,5))
+Report_tpTestKlein                                = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,6)) or (Klein=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,6))
+Report_tpTestVerenigingStichting                  = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,7)) or (VerenigingStichting=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,7))
+Report_tpTestVPB                                  = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,8)) or (VPB=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,8))
+Report_tpTestIsFunctioneel                        = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,9)) or (IsFunctioneel=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,9))
+Report_tpTestIsCategoriaal                        = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,10)) or (IsCategoriaal=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,10))
+Report_tpTestHistory                              = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,11)) or (History=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,11))
+Report_tpTestForecast                             = (NA = MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,12)) or (Forecast=MatrixLookup("Taxonomies.xls","TaxonomySelection",Report_tpTupleInstanceIndex,12))
+Report_tpSelected                                 = If(Report_tpTestIB and Report_tpTestMicro and Report_tpTestIBPLUS and Report_tpTestNP and Report_tpTestKlein and Report_tpTestVerenigingStichting and Report_tpTestVPB and Report_tpTestIsFunctioneel and Report_tpTestIsCategoriaal and Report_tpTestHistory and Report_tpTestForecast and (Q_STEP01_ENTEREDREQUIREDVARS=Q_STEP01_REQUIREDVARS),Report_tpTupleInstanceIndex,0)
+Reports                                           = &XbrlReport
+
+
+.Variables
+PP      1N     5               SelectedReport                                                                                          \SelectedReport
+PPP     1A     6               ModelName                                                                                               \SelectedReportModelName
+PPP     1A     6               ModelFunctionalName                                                                                     \SelectedReportModelFunctionalName
+PPP     1A     6               TaxonomyName                                                                                            \SelectedReportTaxonomyName
+PPP     1N     6               NumberOfPeriods                                                                                         \SelectedReportNumberOfPeriods
+PPP     1N     6               Report supported                                                                                        \SelectedReportSupported
+PPP     1N C   6               TsY                                                                                                     \SelectedReportTSY
+PPP     1N D   6               EndDate                                                                                                 \SelectedReportEndDate
+PPP     1N C   6               InterimReport                                                                                           \SelectedReportInterimReport
+PPP     1N C   6               HasRapportageOpMaat                                                                                     \SelectedReportHasRapportageOpMaat
+PPP   0 1N     6               NumberOfInstances                                                                                       \SelectedReportNumberOfInstances
+PP      1A     6  +            "Rapportage"                                                                                        \XbrlReport
+
+.Formulas NoTrend
+SelectedReport                                    = TupleSum(Report_tpSelected)
+SelectedReportModelName                           = &MatrixLookup("Taxonomies.xls","TaxonomyProperties",SelectedReport,1)
+SelectedReportModelFunctionalName                 = &MatrixLookup("Taxonomies.xls","TaxonomyProperties",SelectedReport,2)
+SelectedReportTaxonomyName                        = &MatrixLookup("Taxonomies.xls","TaxonomyProperties",SelectedReport,3)
+SelectedReportNumberOfPeriods                     = OnNA(MatrixLookup("Taxonomies.xls","TaxonomyProperties",SelectedReport,4), ForecastYears)
+SelectedReportSupported                           = &MatrixLookup("Taxonomies.xls","TaxonomyProperties",SelectedReport,5)
+SelectedReportTSY                                 = 1
+SelectedReportEndDate                             = EndDate
+SelectedReportInterimReport                       = 0
+SelectedReportHasRapportageOpMaat                 = 0
+SelectedReportNumberOfInstances                   = 0
+
+XbrlReport                                        = &SelectedReportTaxonomyName
+
+
+.Choices
+SelectedReportTSY                                 = "1:Annually|2:Semi Annually|4:Quarterly"
+SelectedReportInterimReport                       = "0:False|1:True"
+SelectedReportHasRapportageOpMaat                 = "0:False|1:True"

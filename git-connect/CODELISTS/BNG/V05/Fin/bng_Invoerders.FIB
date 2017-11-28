@@ -1,0 +1,81 @@
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+69:Abswoude, Pauline van
+6:Bleijser, Judith de
+7:Boer, Tim de
+2:Bongaarts, Petra
+304:Boogers, Ricardo
+3:Boom, Jaap
+4:Boonekamp, Hans
+70:Borghstijn, Peter
+5:Bouman, Piet
+71:Brommet, Guus
+310:Brunings, Kathy
+303:Dimitrakakis, Evangelos
+13:Dijkstra, Okko
+55:Egmond, Koen van
+15:Elderhorst, Fleur
+56:Es, Steef van
+57:Garderen, Thimmo van
+17:Geernaart, Monique
+;     72:Henksens, Jos (Vervallen)
+306: Hoekstra, Dirk
+73:Huizer, Selma
+305:Hummel, Bert
+21:Janse, Wendy
+9:Jong, Kees de
+25:Kneijber, Tanja
+;     27:Kristelijn, André (Vervallen)
+28:Krul, Namita
+29:Kuijten, John
+;     75:Kwarten, Mascha (Vervallen)
+300:Leem, Gert-Jan van
+54:Linden, Jan van der
+76:Molenaar, Mirjam
+31:Mulder, Jeroen
+;     74:Neijzen, Dick (Vervallen)
+77:Nijhuis, Jeffry
+;     59:Oord, Arie van (Vervallen)
+311:Ooijen, Edwin van
+36:Oppermann, Pieter
+38:Pankras, Ferry
+308:Putker, Chantal
+39:Raasveld, Maurice
+302:Raaijmakers, Rick
+;     40:Reijpert, Ramon (vervallen)
+41:Reynaers, Fred
+78:Roep, Terrence
+42:Roos, Erik
+313:Santoo, Ferdy
+301: Schadee, Laurens
+45:Schreppers, Rob
+44:Schrama, Bob
+46:Sijm, Ilona
+307:Smit, John
+47:Snoeijing, Ellen
+48:Staples, Rob
+49:Stolze, Bert
+79:Tebbens, Jeroen
+51:Valkenburg, Leo
+63:Veenhuizen, Edwin van
+61:Voerman, Sigrid
+12:Waal, Lonneke de
+312:Water, Alex van de
+65:Zwetsloot, Felix

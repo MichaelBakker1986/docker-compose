@@ -1,0 +1,53 @@
+0 :NA	;                                  <- 0 Onbekend
+1 :5  ; Eenmanszaak                      <- 1 Eenmanszaak, een eigenaar
+2 :5  ; Eenmanszaak                      <- 2 Eenmanszaak, meerdere eigenaren
+3 :5  ; Eenmanszaak                      <- 3 Eenmanszaak, NV/BV in oprichting A-form
+5 :NA ;                                  <- 5 Rederij
+6 :NA ;                                  <- 6 Particulier
+7 :6  ; Maatschap                        <- 7 Maatschap
+8 :NA ;                                  <- 8 Publ.recht.lichaam
+9 :NA ;                                  <- 9 Interne relatie
+10:10 ; Vennootschap onder Firma         <- 10 VOF
+11:10 ; Vennootschap onder Firma         <- 11 Vennootschap onder Firma
+12:10 ; Vennootschap onder Firma         <- 12 Vennootschap onder Firma, NV/BV in opricht. B-form
+20:20 ; Commanditaire                    <- 20 Commanditaire vennootschap
+21:20 ; Commanditaire                    <- 21 Commanditaire vennootschap, een beherende vennoot
+22:20 ; Commanditaire                    <- 22 Commanditaire vennootschap, meerdere beh. vennoten|
+23:20 ; Commanditaire                    <- 23 Commanditaire vennootschap, NV/BV in opr. D-form
+40:25 ; BV                               <- 40 BV
+41:25 ; BV                               <- 41 BV, gewone struktuur
+42:25 ; BV                               <- 42 BV, blijkens statuten struktuurvennootschap
+50:26 ; NV                               <- 50 NV
+51:26 ; NV                               <- 51 NV, gewone struktuur
+52:26 ; NV                               <- 52 NV, blijkens statuten struktuurvennootschap
+53:26 ; NV                               <- 53 NV, belegg.maatschappij met veranderlijk kapitaal
+54:26 ; NV                               <- 54 NV, belegg.maatsch veranderlijk kap. strukt. venn.|
+60:NA ;                                  <- 60 Cooperatieve Vereniging
+61:34 ; Cooperatie, UA                   <- 61 Cooperatie, UA gewone struktuur
+62:34 ; Cooperatie, UA                   <- 62 Cooperatie, UA blijkens statuten struktuurcoop.
+63:31 ; Cooperatie, WA                   <- 63 Cooperatie, WA gewone struktuur
+64:31 ; Cooperatie, WA                   <- 64 Cooperatie, WA blijkens statuten struktuurcoop.
+65:33 ; Cooperatie, BA                   <- 65 Cooperatie, BA gewone struktuur
+66:33 ; Cooperatie, BA                   <- 66 Cooperatie, BA blijkens statuten struktuurcoop.
+70:30 ; Vereniging                       <- 70 Vereniging
+71:30 ; Vereniging                       <- 71 Vereniging, volledige rechtsbevoegdheid
+72:30 ; Vereniging                       <- 72 Vereniging, beperkte rechtsbevoegdheid
+73:NA ;                                  <- 73 Kerkgenootschap
+74:35 ; Stichting                        <- 74 Stichting
+80:32 ; Onderlinge                       <- 80 Onderlinge Waarborgmaatschappij
+81:32 ; Onderlinge                       <- 81 Onderlinge Waarborg, UA gewone struktuur
+82:32 ; Onderlinge                       <- 82 Onderlinge Waarborg, UA struktuuronderlinge
+83:32 ; Onderlinge                       <- 83 Onderlinge Waarborg, WA gewone struktuur
+84:32 ; Onderlinge                       <- 84 Onderlinge Waarborg, WA struktuuronderlinge
+85:32 ; Onderlinge                       <- 85 Onderlinge Waarborg, BA gewone struktuur
+86:32 ; Onderlinge                       <- 86 Onderlinge Waarborg, BA struktuuronderlinge
+90:NA ;                                  <- 90 Buitenl. rechtsvorm/onderneming
+91:NA ;                                  <- 91 Buitenlandse rechtsvorm/onderneming
+92:NA ;                                  <- 92 Nevenvestiging met vestiging buiten Nederland
+93:NA ;                                  <- 93 Europees economisch samenwerkingsverband
+94:NA ;                                  <- 94 Buitenl. EG-vennootschap met onderneming in Ned.
+95:NA ;                                  <- 95 Buitenl. EG-vennootschap, hoofdvestiging in Ned.
+96:NA ;                                  <- 96 Btl. op EG-venn. lijkende venn. met ond. in Ned.
+97:NA ;                                  <- 97 Btl. op EG-venn. lijkende venn. hoofdvest. in Ned
+98:NA ;                                  <- 98 Overheidsinstellingen
+99:NA ;                                  <- 99 Overige rechtsvormen

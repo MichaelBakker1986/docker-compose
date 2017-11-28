@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+	<Head>
+    <CodeList>Belfirst</CodeList>
+    <CodeListVersion>2.0</CodeListVersion>
+    <Description>Belfirst (BVD)</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>Yes</MultiLevelDataWhenSource>
+    <DCSignedValues>No</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FMT4 Mastermodel Belfirst.xlsx</Creator>
+    <CreatorVersion>1.0</CreatorVersion>
+    <BuildDate>2015-10-25</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes></Notes>
+	</Head>
+  <Accounts>
+    <Account><Code>NoData</Code><Description>Niet-financiële gegevens</Description><Level>1</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Identification numbers</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>BVDID</Code><Description>BvD ID-nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>VAT</Code><Description>Ondernemingsnummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ESTABLI_NUMBER</Code><Description>Vestigingseenheidsnummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPY_NUMBER_HQ</Code><Description>Ondernemingsnummer van de maatschappelijke zetel</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RC</Code><Description>R.C.-nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LVAT</Code><Description>BTW-nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CODEONSS</Code><Description>RSZ-stamnummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NUMONSS</Code><Description>RSZ-nummers</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>SD_ISIN</Code><Description>ISIN nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>SD_SEDOL</Code><Description>SEDOL nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>SD_TICKER</Code><Description>Ticker nummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Contact details</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NAME</Code><Description>Naam van de onderneming</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ADDRESS</Code><Description>Adres</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>POSTCODE</Code><Description>Postcode</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>TOWN</Code><Description>Gemeente</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>COUNTRY</Code><Description>Land</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CTRYCODE</Code><Description>Landcode</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>PROVINCE</Code><Description>Provincie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ARRON</Code><Description>Arrondissement</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NIELSEN</Code><Description>Nielsen regio</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CIMDET</Code><Description>CIM zones (gedetailleerd)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CIMSYNT</Code><Description>CIM zones (synthetisch)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>PHONE</Code><Description>Telefoon</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>FAX</Code><Description>Fax</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>WEBSITE</Code><Description>Web adres</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>EMAIL</Code><Description>E-mail adres</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>BANKACCOUNT</Code><Description>Bankrek nr.</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LANGEMPL</Code><Description>Voertaal</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>HEAD_OFFICE_ADDRESS</Code><Description>Address of the foreign head office</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>HEAD_OFFICE_POSTCODE</Code><Description>Postcode of the foreign head office</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>HEAD_OFFICE_TOWN</Code><Description>Posttown of the foreign head office</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>HEAD_OFFICE_COUNTRY</Code><Description>Country of the foreign head office</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>HEAD_OFFICE_CTRYCODE</Code><Description>Country ISO code of the foreign head office</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Directors / managers</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_DIFFERENT_PERSONS_CNT</Code><Description>Aantal leden van het bestuur en management</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_DIFFERENT_PERSONS_CNT</Code><Description>Huidige aantal leden van het bestuur en management</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_DIFFERENT_PERSONS_CNT</Code><Description>Aantal voormalige leden van het bestuur en management</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_FullNameOriginalLanguagePreferred</Code><Description>Volledige naam</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_BareTitle</Code><Description>Titel</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_PrefixSalutation</Code><Description>Aanhef</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_FirstNameOriginalLanguagePreferred</Code><Description>Voornaam</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_MiddleNameOriginalLanguagePreferred</Code><Description>2e naam</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_LastNameOriginalLanguagePreferred</Code><Description>Achternaam</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Suffix</Code><Description>Achtervoegsel</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_IdDirector</Code><Description>UCI (Uniek Contact Identificator)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Type</Code><Description>Individu of bedrijf</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Gender</Code><Description>Geslacht</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Birthdate</Code><Description>Geboortedatum</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Age</Code><Description>Leeftijd</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_NationalityCountryLabel</Code><Description>Nationaliteit</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_WorkFullAddress</Code><Description>Adress</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_CountryLabel</Code><Description>Land</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Phone</Code><Description>Telefoonnummer</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Email</Code><Description>E-mail</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Biography</Code><Description>Biografie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_COUNTERS_NrCpyWithCurrentDirectorship</Code><Description>Aantal bedrijven met huidig lidmaatschap</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_FunctionStandardisedHierCodeFall2009</Code><Description>Function code (debug)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_Function</Code><Description>Officiële functietitel</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_FunctionOriginalOriginalLanguagePreferred</Code><Description>Officiële functietitel</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_BoardMnemonic</Code><Description>Type of position</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_Level</Code><Description>Niveau</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_DepartmentFromHierCodeFall2009</Code><Description>Bestuur, commissie of afdeling</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_LevelFromHierCodeFall2009</Code><Description>Verantwoordelijkheidsniveau</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_CurrentPrevious</Code><Description>Huidig of vorige</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_BeginningNominationDate</Code><Description>Benoemingsdatum</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_EndExpirationDate</Code><Description>Ontslagdatum</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_IsAShareholderFormatted</Code><Description>Tevens aandeelhouder</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_Source2LettersAbbrev</Code><Description>IP Source</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_College</Code><Description>Onderwijsinstelling</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_DegreeCode</Code><Description>Diploma code</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_Major</Code><Description>Major</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_GraduationDate</Code><Description>Afstudeerdatum</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_CompensationSalary</Code><Description>Compensatie - Salaris</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_CompensationTotal</Code><Description>Compensatie – Totaal</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_CompensationDate</Code><Description>Compensatie - Datum</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_DisqualificationFrom</Code><Description>Disqualified start date</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_DisqualificationTo</Code><Description>Disqualified end date</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_DisqualificationSection</Code><Description>Disqualification section of act</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_HEADER_NumberOfExemptions</Code><Description>Number of exemptions from disqualification</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_ExemptionFrom</Code><Description>Exemption from disqualification start date</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPYCONTACTS_MEMBERSHIP_ExemptionTo</Code><Description>Exemption from disqualification end date</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Legal &amp; account information</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>PREVIOUSNAME</Code><Description>Oude naam van de onderneming</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>PREVIOUSNAMEDATE</Code><Description>Datum naamsverandering</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ACRONYM</Code><Description>Acroniem</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NOMORE_BCE</Code><Description>&quot;Geen updates meer door de KBO&quot; indicator</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>STATUS</Code><Description>Statuut</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LEGALSIT</Code><Description>Rechtstoestand</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LEGSITDATE</Code><Description>Datum rechtstoestand</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>TYPE</Code><Description>Rechtsvorm</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>INCDATE</Code><Description>Datum van oprichting</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ENTTYPECODE</Code><Description>Aard van de entiteit (code)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ENTTYPE</Code><Description>Aard van de entiteit</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>VATLIABILITY</Code><Description>BTW-Plichtig</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACEBELDES</Code><Description>Hoofdactiviteit</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>MERGERS_DATE</Code><Description>Datum</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>MERGERS_EVENT</Code><Description>Evenement</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>MERGERS_LINKCPY</Code><Description>Verbonden onderneming</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NOSSDATE</Code><Description>Datum van dagvaarding</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRNAME</Code><Description>Naam begunstigde (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRDATE</Code><Description>Datum van protest (protest in werking)</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRAMOUNT</Code><Description>Bedrag van protest (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRCOURT</Code><Description>Griffie van protest (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRIDENT</Code><Description>Referentienummer protest (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRADD</Code><Description>Adres van begunstigde (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRPCO</Code><Description>Postcode van begunstigde (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRTOWN</Code><Description>Woonplaats van begunstigde (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRVAT</Code><Description>Ondernemingsnummer van begunstigde (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRCAUSE</Code><Description>Reden van protest (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>OPRNATURE</Code><Description>Aard van het effect (protest in werking)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRNAME</Code><Description>Naam begunstigde (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRDATE</Code><Description>Datum van protest (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRAMOUNT</Code><Description>Bedrag van protest (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRCOURT</Code><Description>Griffie van protest (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRIDENT</Code><Description>Referentienummer protest (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRADD</Code><Description>Adres van begunstigde (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRPCO</Code><Description>Postcode van begunstigde (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRTOWN</Code><Description>Woonplaats van begunstigde (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRVAT</Code><Description>Ondernemingsnummer van begunstigde (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRCAUSE</Code><Description>Reden van protest (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRNATURE</Code><Description>Aard van het effect (geregulariseerd protest)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRRCAUSE</Code><Description>Reden van de regularisatie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRRDATE</Code><Description>Datum van de regularisatie</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RPRRAMOUNT</Code><Description>Bedrag van de regularisatie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDNBR</Code><Description>Nummer van het vonnis</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDSNBR</Code><Description>Vervolgnummer van het vonnis</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDDATE</Code><Description>Datum van het vonnis</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDNATURE</Code><Description>Aard van het vonnis</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDJURIS</Code><Description>Rechtsgebied</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDCNAME</Code><Description>Naam van de curator of vereffenaar</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDCADD</Code><Description>Adres van de curator of vereffenaar</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDCPCO</Code><Description>Postcode van de curator of vereffenaar</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>JUDCTOWN</Code><Description>Woonplaats van de curator of vereffenaar</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CONSOL</Code><Description>Geconsolideerde rekeningen</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>YEAREND</Code><Description>Afsluitdatum van laatste rekeningen</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LASTYEAR</Code><Description>Laatste jaar</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NUMYEAR</Code><Description>Aantal jaren</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>YEARDEL</Code><Description>Leveringsdatum van de rekening</Description><Level>3</Level><DC></DC><DataType>date</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NORECFLAG</Code><Description>« Geen recente financiële gegevens » indicator</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Size &amp; group information</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACE2_MAIN_SEC</Code><Description>NACE Rev. 2, hoofd sectie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CATEGORY_COMPANY</Code><Description>Ondernemingscategorie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>70</Code><Description>Omzet (Laatste jaar)</Description><Level>3</Level><DC></DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>EMPLOYEE</Code><Description>Personeelsbestand (Laatste jaar)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>EMPLRANGE</Code><Description>Personeelsschijf</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ISSUEDCAPITAL</Code><Description>Geplaatst kapitaal</Description><Level>3</Level><DC></DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>LEASEDCAPITAL</Code><Description>Gestort kapitaal</Description><Level>3</Level><DC></DC><DataType>monetary</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>MARKETCAP</Code><Description>Marktkapitalisatie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>MAINEXCHANGE</Code><Description>Voornaamste effectenbeurs</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>QUOTED_IN_STR</Code><Description>Beursnotatie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>QTDDATE</Code><Description>Datum van beursnotatie</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>-9427</Code><Description>BvD onafhankelijkheidsindicator</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>-9755</Code><Description>Aantal aandeelhouders</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>-9700_UOFiltered</Code><Description>recorded subsidiaries</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Industry classification</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACEBELCOD</Code><Description>NACE BEL 2008, primaire code</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACEBELDES</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACEBELSCOD</Code><Description>NACE BEL 2008, secundaire code(s)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACEBELSDES</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACE2CODE</Code><Description>NACE Rev. 2, primaire code(s)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACE2DESCR</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACESCOD2</Code><Description>NACE Rev. 2, secundaire code(s)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NACESDES2</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NAICSCODE</Code><Description>NAICS 2007, primaire code(s)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NAICSDESCR</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NAICSSCOD2007</Code><Description>NAICS 2007, secundaire code(s)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NAICSSDES2007</Code><Description>Ibid, omschrijving</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Joint commission</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPARDESC</Code><Description>Omschrijving van het paritaire comité</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CPARNBR</Code><Description>Nummer van het paritaire comité</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NoData</Code><Description>Accounts header</Description><Level>2</Level><DC></DC><DataType>abstract</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CONSOLCODE</Code><Description>Consolidatie code</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ENDYEAR</Code><Description>Afsluitdatum</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ENDMONTH</Code><Description>Afsluitmaand van het boekjaar</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>NUMMONTH</Code><Description>Aantal maanden</Description><Level>3</Level><DC></DC><DataType>number</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ACCTYPE</Code><Description>Aard van het schema (code)</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ACCPRACTICE</Code><Description>Boekhoudkundige Normen</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>ACCFORM</Code><Description>Model van de rekening</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CONTRSTAT</Code><Description>Controlestatus van de jaarrekeningen</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>RECORD_UNIT_LABEL</Code><Description>Oorspronkelijke eenheid</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>CURRENCY</Code><Description>Munteenheid eenheid</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+    <Account><Code>EXCHRATE</Code><Description>Exchange Rate from Local Currency</Description><Level>3</Level><DC></DC><DataType>string</DataType><IsInCalcTree></IsInCalcTree><SumOperator></SumOperator></Account>
+  </Accounts>
+</FmtMappingModel>

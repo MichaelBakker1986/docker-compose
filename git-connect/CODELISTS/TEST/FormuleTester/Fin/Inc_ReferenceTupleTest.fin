@@ -1,0 +1,62 @@
+{&&Language=English};Inc_TupleTest.fin
+
+.Variables
+PPPP     X     1               Tuple Reference Tests           		\ReferenceTupleTests
+
+PPPP     X     2               Tuple Reference Test model           \ReferenceTupleTest
+PPPP    BN   1 3               "Totaal van refs naar boekwaardes"  	\SumRefsBookValueBedrijven
+PPPP    1A   1 3         T     =BedrijvenTuple        				\refBedrijvenTuple=BedrijvenTuple_tpBedrijfsnaam
+PPPP    1A     4               =BedrijvenTuple_tpBedrijfsnaam   	\refBedrijvenTuple_tpBedrijfsnaam=BedrijvenTuple_tpBedrijfsnaam
+PPPP    BN   1 4               =NestedSumBookValueBedrijven     	\refNestedSumBookValueBedrijven=NestedSumBookValueBedrijven
+PPPP    BN   1 4               "Som van referenties naar bookvalue" \NestedSumRefBookValueBedrijven
+PPPP    1A   1 4         T     =NestedAssetsTuple         			\refNestedAssetsTuple=NestedAssetsTuple_tpDescription
+PPPP    1A     5               =NestedAssetsTuple_tpDescription 	\refNestedAssetsTuple_tpDescription=NestedAssetsTuple_tpDescription
+PPPP    BN   1 5               =NestedAssetsTuple_tpBookValue   	\refNestedAssetsTuple_tpBookValue=NestedAssetsTuple_tpBookValue
+PPPP    BN     5               =NestedAssetsTuple_tpInvestment  	\refNestedAssetsTuple_tpInvestment=NestedAssetsTuple_tpInvestment
+PPPP    FN     5               =NestedAssetsTuple_tpDepreciation	\refNestedAssetsTuple_tpDepreciation=NestedAssetsTuple_tpDepreciation
+
+   
+PPPP     X     2               Tuple Reference Test Cases           								\ReferenceTupleTestCases
+
+PI      1N     3               "Tuple Reference Test Case 1"                                       	\TupleReferenceTestCase1
+
+PIXX    1T     4               "Tuple Definition 1"                                            		\TRTC1_TupleDefinition1
+PIXX    1A     5               "Tuple Property 1"                                                	\TRTC1_TupleProperty1
+PPXX    1A     4               =TRTC1_TupleProperty1                                                \refTRTC1_TupleProperty1=TRTC1_TupleProperty1
+
+PI      1N     3               "Tuple Reference Test Case 2"                                       	\TupleReferenceTestCase2
+
+PIXX    1T     4               "Tuple Definition 1"                                            		\TRTC2_TupleDefinition1
+PIXX    1A     5               "Tuple Property 1"                                                	\TRTC2_TupleProperty1
+PIXX    1T     4               "Tuple Definition 2"                                            		\TRTC2_TupleDefinition2
+PIXX    1A     5               "Tuple Property 2"                                                	\TRTC2_TupleProperty2
+PPXX    1A     5         T     =TRTC2_TupleDefinition1                                           	\refTRTC2_TupleDefinition1=TRTC2_TupleProperty1
+PPXX    1A     6               =TRTC2_TupleProperty1                                           		\refTRTC2_TupleProperty1=TRTC2_TupleProperty1
+
+PI      1N     3               "Tuple Reference Test Case 3"                                       	\TupleReferenceTestCase3
+
+PIXX    1T     4               "Tuple Definition 1"                                            		\TRTC3_TupleDefinition1
+PIXX    1A     5               "Tuple Property 1"                                                	\TRTC3_TupleProperty1
+PIXX    1T     5               "(Nested) Tuple Definition 2"			                        	\TRTC3_TupleDefinition2
+PIXX    1A     6               "(Nested) Tuple Property 2"                               			\TRTC3_TupleProperty2
+PPXX    1A     4         T     =TRTC3_TupleDefinition1                                            	\refTRTC3_TupleDefinition1=TRTC3_TupleProperty1
+PPXX    1A     5               =TRTC3_TupleProperty1                                            	\refTRTC3_TupleProperty1=TRTC3_TupleProperty1
+;PPXX    1A     4         T     =TRTC3_TupleDefinition2                                            	\refTRTC3_TupleDefinition2=TRTC3_TupleProperty2
+;PPXX    1A     5               =TRTC3_TupleProperty2                                            	\refTRTC3_TupleProperty2=TRTC3_TupleProperty2
+
+PI      1N     3               "Tuple Reference Test Case 4"                                       	\TupleReferenceTestCase4
+
+PIXX    1N     4               "Variable 1"                                            				\TRTC4_Variable1
+PIXX    1T     5               "Tuple Definition 1"                                            		\TRTC4_TupleDefinition1
+PIXX    1N     6               "Tuple Property 1"                                                	\TRTC4_TupleProperty1
+PIXX    1N     6               "Tuple Property 2"                               					\TRTC4_TupleProperty2
+PIXX    1N     4               "Variable 2"                                            				\TRTC4_Variable2
+PPXX    1N     5               =TRTC4_TupleProperty1                                            	\refTRTC4_TupleProperty1=TRTC4_TupleProperty1
+PPXX    1N     5               =TRTC4_TupleProperty2                                            	\refTRTC4_TupleProperty2=TRTC4_TupleProperty2
+
+.Formulas NoTrend,Trend
+SumRefsBookValueBedrijven = TupleSum(refNestedAssetsTuple_tpBookValue)
+NestedSumRefBookValueBedrijven = TupleSum(refNestedAssetsTuple_tpBookValue)
+
+TRTC4_Variable1 = Count(X, SelectDescendants(TRTC4_Variable1), DataEntered(X))
+TRTC4_Variable2 = Count(X, SelectDescendants(TRTC4_Variable2), DataEntered(X))

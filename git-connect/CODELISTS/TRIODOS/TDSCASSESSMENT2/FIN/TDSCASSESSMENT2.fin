@@ -1,0 +1,689 @@
+{&&Language=English}$>Second Assessment<$
+
+.ModelVersion          1.0.3.9
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear-1,Years=3,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)  ; v1.1 "hist" weg op verzoek Jacqueline (kan ook concept zijn)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PP       X     0               "Second Assessment v#CompactModelVersion#"                       \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+.Variables
+;==========================================================================================================================================
+; Q_ROOT Kredietaanvraagmodel
+
+PP      1N C   1               "Second Assessment"                                               \Q_ROOT
+C Please fill in all questions
+
+.Choices
+Q_ROOT                         = "0:Incomplete filled.|1:Complete filled."
+
+.Formulas NoTrend
+Q_ROOT                         = If(((Q_Map01[1]=1) And (Q_Map02[1]=1))  Or (Length(&scKnockoutsCombi[1])>0) ,1,0) 
+
+;==================================================================================================
+.Variables
+PP      1N C   2               "Second Assessment"                                             \Q_Map01
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 1<$                                         \Q_Map01_WARNING
+PP      1A     3               $>Info bij stap 1<$                                            \Q_Map01_INFO
+PP      1A     3               $>Validatie stap 1<$                                           \Q_Map01_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+.Variables
+
+PP      1N     3               $>Branch selection<$                                                                      \BranchParagraph
+
+PI      1N C   4               $>Please select the branch<$                                                              \Branchselection
+PI      1A     4               $>Whitelabel (From force)<$                                                               \whitelabel
+
+.Variable BranchParagraph, Visible = (ShowHiddenFields) Or (Branchselection=NA)
+.Formulas Notrend
+Branchselection = If((&whitelabel="Triodos BE"),0,If((&whitelabel="Triodos NL"),1,If((&whitelabel="Triodos UK") or (&whitelabel="Triodos EN"),2,NA)))
+
+;"0:Belgium|1:The Netherlands|2:United Kingdom"
+
+;---------------------------------------------------------------------------------------------
+
+.Variables
+
+PP      1N     3               $>Second Assessment Questions<$                                                           \Questions
+
+PI      1N C   4               $>Relation is registered in an approved register<$                                        \Register
+C NL: has a Kamer van Koophandel ID (http://www.kvk.nl) [BR][/BR] BE: has an Company Number [BR][/BR] UK: has a Chamber of Commerce Number
+
+;PP      1X     4               ""                                                                                        \Empty31
+
+PI      1N C   4               $>Registered at the Dutch Chamber of Commerce with address or statutory seat abroad<$            \Statutory
+C EU/EER countries: Austria [BR][/BR] Belgium [BR][/BR] Bulgaria [BR][/BR] Croatia [BR][/BR] Cyprus [BR][/BR] Czech Republic [BR][/BR] Denmark [BR][/BR] Estonia [BR][/BR] Finland [BR][/BR] France [BR][/BR] Germany [BR][/BR] Greece [BR][/BR]Hungary [BR][/BR] Iceland [BR][/BR] Ireland [BR][/BR] Italy [BR][/BR] Latvia [BR][/BR] Liechtenstein [BR][/BR] Lithuania [BR][/BR] Luxembourg [BR][/BR] Malta [BR][/BR] Netherlands [BR][/BR] Norway [BR][/BR] Poland [BR][/BR] Portugal [BR][/BR] Romania [BR][/BR] Slovakia [BR][/BR] Slovenia [BR][/BR] Spain[BR][/BR] Sweden [BR][/BR] United Kingdom [BR][/BR]
+
+;PP      1X     4               ""                                                                                        \Empty30
+
+PI      1N C   4               $>Relation has a foreign type or an owner, shareholder or partner of the type Limited (Ltd)<$   \Limited
+C http://www.ondernemersplein.nl/artikel/buitenlandse-vennootschappen/  voor meer info
+
+;PP      1X     4               ""                                                                                        \Empty
+
+
+PI      1N C   4               $>All legal documentation is written in the Dutch, English or German language<$           \Language2
+
+;PP      1X     4               ""                                                                                        \Empty2
+
+
+
+;PP      1X     4               ""                                                                                        \Empty3
+
+PI      1N C   4               $>There is a clear understanding of ultimate beneficial owner(s) UBOs<$                   \UBO
+C A UBO is a natural person with the actual control within a company / institution by: [BR][/BR] a) >25% capital interest [BR][/BR]  b) >25% of voting rights as a shareholder or otherwise [BR][/BR] c) >25% beneficiary of a foundation's equity  [BR][/BR] d) >25% specific control over the equity of the foundation [BR][/BR] [BR][/BR] There are three key questions that will help you to determine the UBO: [BR][/BR] a) Who makes the decisions? Who really pulls the strings? [BR][/BR] b) Who has >25% of capital contributed [BR][/BR] c) Who has >25% of voting rights. [BR][/BR] Beneficial Owners for Unincorporated Trusts are every beneficiary that it has been determined will benefit from at least 25% of the trust property and all Trustees. The 25% rule does not apply to Trustees. [BR][/BR] In the case of a partnership (other than a limited liability partnership), “beneficial owner” means any individual who:[BR][/BR] (a) Ultimately is entitled to or controls (whether the entitlement or control is direct or indirect) more than a 25% share of the capital or profits of the partnership or more than 25% of the voting rights in the partnership, or [BR][/BR] (b) Otherwise exercises control over the management of the partnership.
+
+;PP      1X     4               ""                                                                                        \Empty13
+
+PI      1N C   4               $>The relation and/ or one of the UBOs is a Politically Exposed Person (PEP)<$                 \PEP
+
+;PP      1X     4               ""                                                                                        \Empty25
+
+PI      1N C   4               $>The relation has a complicated structure of ownership<$                                 \Structure
+
+;PP      1X     4               ""                                                                                        \Empty26
+
+PI      1N C   4               $>Relation is a bought up bv<$                                                            \Boughtup
+C This is not easy to find.  [BR][/BR] If you run your internet check and find information that the BV is offered for sale. Then it is immediately apparent.  [BR][/BR] It can also be that the relation itself hands you the deed of shares transfer as an attachment of the statutes. But if you don't have evidence that the BV is bought up, then you don't need to actively ask the client.  [BR][/BR] Why is medium risk?  [BR][/BR] Previously you had to have a 'declaration of no objection' in order to establish a bv. People who were not able to receive such a declaration (e.g. due to a fraud conviction) the only other option was to buy a bv.  [BR][/BR] Nowadays the declaration is no longer needed.
+
+;PP      1X     4               ""                                                                                        \Empty28
+
+PI      1N C   4               $>Relation performs business activities that are excluded by our 'lending criteria'<$     \LendingCriteria
+
+;PP      1X     4               ""                                                                                        \Empty4
+
+PI      1N C   4               $>Relation with activity: purchase and sale of gold as a raw material (not retail)<$      \RawMaterial
+
+;PP      1X     4               ""                                                                                        \Empty5
+
+PI      1N C   4               $>Relation offers the opportunity to invest in a fund that appears on the Triodos non-sustainable list<$   \Sustainable
+
+;PP      1X     4               ""                                                                                        \Empty6
+
+PI      1N C   4               $>Relation with activity: offering investments to retail customers<$                      \Retail
+
+;PP      1X     4               ""                                                                                        \Empty7
+
+PI      1N C   4               $>Real estate development business, finance, investments, regular purchase and sale in the wholesale market with commercial property that generates its own cash flow<$   \CashFlow
+
+;PP      1X     4               ""                                                                                        \Empty8
+
+PI      1N C   4               $>Private real estate development: portfolio contains five or more objects that are not used for own purposes and / or regular purchase and sale<$   \Portfolio
+
+;PP      1X     4               ""                                                                                        \Empty14
+
+PI      1N C   4               $>Relation is a financial services provider and has no required license from the AFM<$    \License
+
+;PP      1X     4               ""                                                                                        \Empty15
+
+PI      1N C   4               $>Relation with activity: Trustoffice with permit / exemption DNB<$                       \Trust
+
+PI      1N C   4               $>Relation with activity: debt counseling with permit / exemption DNB<$                     \Debtservices
+
+PI      1N C   4               $>Relation with activity: zorgkantoor with permit / exemption DNB<$        						 \CareAgency
+
+
+;PP      1X     4               ""                                                                                        \Empty16
+
+PI      1N C   4               $>Relation is charity without ANBI status <$                                              \Charity
+
+;PP      1X     4               ""                                                                                        \Empty17
+
+PI      1N C   4               $>Relation is health care with a legally recognized specialism with registration in the BIG register. <$      \BIG
+
+;PP      1X     4               ""                                                                                        \Empty27
+
+PI      1N C   4               $>Relation is a child care center / Host parent Agency (gastouder bureau) without registration in the 'Register Kinderopvang' <$      \ChildCare
+
+;PP      1X     4               ""                                                                                        \Empty9
+
+PI      1N C   4               $>Relation is a employment agency / staffing agency without registration in the 'Algemene Bond Uitzendondernemingen' <$      \Employment
+
+;PP      1X     4               ""                                                                                        \Empty10
+
+PI      1N C   4               $>Relation is a medium to large travel agency or tour operator without registration in ANVR and SGR  <$      \Travel
+
+;PP      1X     4               ""                                                                                        \Empty11
+
+PI      1N C   4               $>Relation is a Stichting Derdengelden, which does not belong to a notary, lawyers or judicial office <$      \Derden
+
+;PP      1X     4               ""                                                                                        \Empty12
+
+PI      1N C   4               $> Relation is a political party   <$                                                     \Political
+
+
+;PP      1X     4               ""                                                                                        \Empty18
+
+PI      1N C   4               $>Relation has unclear business activities and/or activities are contrary to provisions of the articles of association<$                                             \Unclear
+
+;PP      1X     4               ""                                                                                        \Empty19
+
+PI      1N C   4               $>Relation provides unclear / unknown services and / or products<$                        \Unknown
+
+;PP      1X     4               ""                                                                                        \Empty20
+
+PI      1N C   4               $>Relation is mainly engaged in trading currencies <$                                     \Currencies
+
+;PP      1X     4               ""                                                                                        \Empty21
+
+PI      1N C   4               $>Relation is mainly engaged in the import and export business<$                          \ImportExport
+
+;PP      1X     4               ""                                                                                        \Empty22
+
+PI      1N C   4               $>Relation is mainly engaged in the financing and / or investment business<$              \Financing
+
+
+
+
+
+;PP      1X     4               ""                                                                                        \Empty23
+;PP      1X     4               ""                                                                                        \Empty29
+
+;=====================================free format===========================
+PI      1A M   4               $>Do we invest in real estate? State your findings and judgement.<$            			  	 \Invest
+PI      1A M   4               $>Which representatives were looked at during this assessement<$            		 		       \Representatives
+PI      1A M   4               $>What is the formal business objective in accordance with the articles of association / Chamber of Commerce / Partnership agreement<$    \Objectives
+PI      1A M   4               $>What are the actual business activities? In your own wording, in line with the website, business plan etc<$              \Actualbusiness
+PI      1A M   4               $>Is the relation already related to Triodos Bank? State your findings and judgement.<$  \Triton
+;PI      1A M   4               $>What kind of activities the relation is in? State your findings and judgement. <$        \KindRelation
+PI      1A M   4               $>Does the client have a website? Does it meet our expectations? State your findings and judgement.<$   \Website
+PI      1A M   4               $>Who are the most important clients of the relation and / or who is the target group? State your findings and judgement.<$  \ImportantClients
+PI      1A M   4               $>Googlecheck: check the relation on the internet. What kind of keywords did you use? <$   \Googlecheck
+PI      1A M   4               $>Googlecheck: check the relation on the internet. State your findings and judgment. Make screendumps of the most relevant information.<$ \Screendump
+PI      1A M   4               $>Are there any abnormalities at the address of the client (use google, google streetview, chamber of commerce) State your findings and judgement. <$ \Abnormalities
+PI      1A M   4               $>Did the relation (UBO and borrower) ever gone bankrupt? If so, please explain and give your judgement. <$    \Bankruptcy
+PI      1A M   4               $>In case of a modification of the reassessment flag: What is the reason for this modification? <$ 										    \Reason
+PI      1A M   4               $>Do you have any other remarks, details, etc.? <$  \Assessment
+
+PI      1N D   4               $>Select the date for the next CDD rating review by the business<$  \NextCddDate
+
+PI      1N C   4               $>Regarding the full enquiry, do you agree with the risk analyses? <$                      \Enquiry
+PI      1A M   4               $>Please explain why you like to deviate.<$ 																		  		  	  \Explanation
+PI      1N C   4               $>Please select the proposed rating<$                                                      \SecondRating
+
+PP      1N    -4               $>Second Assessment Rating<$                                                               \ProposedRating
+PP      1A    -4               $>Second Assessment Rating<$                                                               \ProposedRatingAlfa
+
+
+
+PP      1N     4               $>Excluded 99<$                                                                            \Excluded
+PP      1N     4               $>High Risk 10<$                                                                           \HighRisk
+PP      1N     4               $>Medium Risk 5<$                                                                          \MediumRisk
+PP      1N     4               $>Low Risk 0<$                                                                             \LowRisk
+
+
+.Variable ProposedRating, Visible = 0
+.Variable Excluded, Visible = 0
+.Variable HighRisk, Visible = 0
+.Variable MediumRisk, Visible = 0
+.Variable LowRisk, Visible = 0
+
+.Hints
+Reason = Insert up to 120 characters |$$MaxLength=120
+
+
+.Formulas Visible
+;Questions      = (Branchselection<>NA)         Altijd laten zien
+
+;Empty          = (Branchselection=0)
+;Empty1         = (Branchselection=NA)
+;Empty2         = (Branchselection=NA)
+;Empty3         = ((Branchselection=NA) or (Branchselection=1) or (Branchselection=2))
+;Empty14        = (Branchselection=1)
+;Empty15        = (Branchselection=1)
+;Empty16        = (Branchselection=1)
+;Empty17        = (Branchselection=1)
+;Empty27        = ((Branchselection=1) or (Branchselection=0))
+;Empty9         = (Branchselection=1)
+;Empty10        = (Branchselection=1)
+;Empty11        = (Branchselection=1)
+;Empty12        = ((Branchselection=1) or (Branchselection=2))
+;Empty30        = ((Branchselection=0) or (Branchselection=1))
+;Empty1         = (Branchselection<>NA)
+;Empty28        = (Branchselection=1)
+Explanation     = (Enquiry=0)
+SecondRating    = (Enquiry=0)
+Register        = (Branchselection=1)
+Statutory       = (Branchselection=1)
+Limited         = (Branchselection=1)
+Language2       = (Branchselection=1)
+UBO             = ((Branchselection=1) or (Branchselection=2))
+Structure       = ((Branchselection=1) or (Branchselection=2))
+LendingCriteria = ((Branchselection=1) or (Branchselection=2))
+RawMaterial     = (Branchselection=1)
+Sustainable     = (Branchselection=1)
+Retail          = (Branchselection=1)
+CashFlow        = ((Branchselection=0) or (Branchselection=1))
+Portfolio       = ((Branchselection=0) or (Branchselection=1))
+Boughtup        = (Branchselection=1)
+License         = (Branchselection=1)
+Trust           = (Branchselection=1)
+Debtservices    = (Branchselection=1)
+CareAgency      = (Branchselection=1)
+Charity         = (Branchselection=1)
+BIG             = (Branchselection=1)
+ChildCare       = (Branchselection=1)
+Employment      = (Branchselection=1)
+Travel          = (Branchselection=1)
+Derden          = (Branchselection=1)
+Unclear         = ((Branchselection=1) or (Branchselection=2))
+Unknown         = ((Branchselection=1) or (Branchselection=2))
+Currencies      = ((Branchselection=1) or (Branchselection=2))
+ImportExport    = ((Branchselection=1) or (Branchselection=2))
+Financing       = ((Branchselection=1) or (Branchselection=2))
+Googlecheck     = ((Branchselection=1) or (Branchselection=2))
+Screendump      = ((Branchselection=1) or (Branchselection=2))
+Invest					= (Branchselection=0)
+Representatives	= ((Branchselection=1) or (Branchselection=2))
+Objectives			= ((Branchselection=1) or (Branchselection=0))
+Actualbusiness	= (Branchselection=1)
+Abnormalities   = ((Branchselection=1) or (Branchselection=2))
+
+
+
+
+.Formulas NoTrend
+Excluded = If(Register=0,1, If(Statutory=2,1,If(Limited=1,1,If(Language2=0,1,If(UBO=0,1,If(LendingCriteria=1,1,If(RawMaterial=1,1,If(Sustainable=1,1,If(Retail=1,1,If(License=1,1,If(Trust=1,1,If(Debtservices=1,1,If(CareAgency=1,1,If(Derden=1,1,0))))))))))))))
+HighRisk = If(CashFlow=1,1,If(PEP=2,1,If(Portfolio=1,1,If(Unclear=2,1,If(Unknown=2,1,0)))))
+MediumRisk = If(Statutory=1,1,If(PEP=1,1,If(Structure=1,1,If(Boughtup=1,1,If(Trust=2,1,If(Debtservices=2,1,If(CareAgency=2,1,If(Charity=1,1,If(BIG=0,1,If(ChildCare=1,1,If(Employment=1,1,If(Travel=1,1,If(Political=1,1,If(Unclear=1,1,If(Unknown=1,1,If(Currencies=1,1,If(ImportExport=1,1,If(Financing=1,1,0))))))))))))))))))
+LowRisk = If(Register=1,1, If(Statutory=0,1, If(Limited=0,1, If(Language2=1,1, If(UBO=1,1, If(PEP=0,1, If(Structure=0,1, If(Boughtup=0,1, If(LendingCriteria=0,1, If(RawMaterial=0,1, If(Sustainable=0,1, If(Retail=0,1, If(CashFlow=0,1, If(Portfolio=0,1, If(License=0,1, If(BIG=1,1, If(Trust=0,1, If(Debtservices=0,1, If(CareAgency=0,1, If(Charity=0,1, If(BIG=0,1, If(ChildCare=0,1, If(Employment=0,1, If(Travel=0,1, If(Derden=0,1, If(Political=0,1, If(Unclear=0,1, If(Unknown=0,1, If(Currencies=0,1, If(ImportExport=0,1, If(Financing=0,1,0)))))))))))))))))))))))))))))))
+
+ProposedRating = If(Enquiry=0,SecondRating,If(Excluded=1,99, If(HighRisk=1,10, If(MediumRisk=1,5, If(LowRisk=1,1,0)))))
+ProposedRatingAlfa = &If(ProposedRating=99,&"Excluded",&If(ProposedRating=10,&"High Risk",&If(ProposedRating=5,&"Medium Risk",&If(ProposedRating=1,&"Low Risk",&"..."))))
+
+
+;LowRisk = If(Excluded=1,0, If(HighRisk=1,0,If(MediumRisk=1,0,1)))
+   
+
+
+.Choices
+Branchselection = "0:Belgium|1:The Netherlands|2:United Kingdom"
+
+Register       = "1:Yes|0:No"
+Statutory      = "0:No|1:Yes - Europe/EER|2:Yes - Rest of the world "
+Limited        = "1:Yes|0:No"
+Enquiry        = "1:Yes|0:No"
+Language2      = "1:Yes|0:No"
+SecondRating   = file "inc_2ndass.fib"
+
+UBO            = "1:Yes|0:No"
+PEP            = "0:No|1:Yes - Europe/EER|2:Yes - Rest of the world "
+Structure      = "1:Yes|0:No"
+Boughtup       = "1:Yes|0:No"
+
+LendingCriteria= "1:Yes|0:No"
+RawMaterial    = "1:Yes|0:No"
+Sustainable    = "1:Yes|0:No"
+Retail         = "1:Yes|0:No"
+
+CashFlow       = "1:Yes|0:No"
+Portfolio      = "1:Yes|0:No"
+License        = "1:Yes|0:No"
+
+Trust          = "0:No Trustoffice|1:No Permit |2:Yes Permit"
+Debtservices   = "0:No Debt Counseling|1:No Exemption |2:Yes Exemption"
+CareAgency     = "0:Geen zorgkantoor|1:No Exemption |2:Yes Exemption"
+Charity        = "1:Yes|0:No"
+BIG            = "0:No|1:Yes|2:No health care"
+ChildCare      = "1:Yes|0:No"
+Employment     = "1:Yes|0:No"
+Travel         = "1:Yes|0:No"
+
+Derden         = "1:Yes|0:No"
+Political      = "1:Yes|0:No"
+Unclear        = "0:No|1:Yes Medium Risk|2:Yes High Risk"
+Unknown        = "0:No|1:Yes Medium Risk|2:Yes High Risk"
+Currencies     = "1:Yes|0:No"
+ImportExport   = "1:Yes|0:No"
+Financing      = "1:Yes|0:No"
+
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS
+
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X))")
+Q_Map01_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map01                        = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map01_VALIDATION             =
+
+.Choices
+Q_Map01                        = Q_ROOT
+
+
+.Variables
+PP      1N C   2               "Sector"                                        											\Q_Map02
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 1<$                                      					\Q_Map02_WARNING
+PP      1A     3               $>Info bij stap 1<$                                       						\Q_Map02_INFO
+PP      1A     3               $>Validatie stap 1<$                                     						\Q_Map02_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+.Variables
+
+PI      1N     3               $>Sector selection<$                                                  \SectorParagraph
+PP      1N C   4               $>Please select the sector<$         						             			   \SectorselectionUK
+PI      1N C   4               $>Please select the sector<$                 											   \SectorselectionNL
+PI      1N C   4               $>Please select the sector<$                 											   \SectorselectionBE
+
+
+PI      1N     3               $>Other<$                                                              \Other
+PP      1X     4               $>No supplemantary information required<$                              \Supplemantary
+
+PI      1N     3               $>Real Estate<$                                                       \RealEstateParagraph
+PI      1A M   4               $>Can you see any efforts for sustainable constructions or facilities?<$  \Constructions
+PI      1A M   4               $>If the space is rented out: what kind of tenants and what are their activities?<$  \Tenants
+
+PI      1N     3               $>Maisons Médicales<$                                                 \MaisonsMedicalesParagraph
+PI      1A M   4               $>What is the duration of the rental contract?<$                      \Contract
+PI      1A M   4               $>Is there a clear connection between the SCRL and ASBL in the statutes OR a clear connection with an activity in the health care sector?<$  \ClearConnection
+PI      1A M   4               $>Estimation of the rent apart from an estimation of the building value<$  \Estimation
+PI      1A M   4               $>Is the ASBL member of the board of the SCRL?<$                       \BoardMember
+PI      1A M   4               $>What do you sense (subjective) as to the intentions of the relation (a concern about the human being or its portfolio)<$   \Intentions
+
+PI      1N     3               $>Fair Trade<$                                                        \FairTradeParagraph
+PI      1A M   4               $>What is the share of the turnover of  Fair Trade products versus the total turnover<$  \Turnover
+PI      1A M   4               $>What do you know about the quality of the fair trade products (label)?<$  \Quality
+PI      1A M   4               $>To what extent is the management concerned about sustainable criteria?<$  \Concerned
+
+PI      1N     3               $>Innovative Technology<$                                              \InnovativeTechnologyParagraph
+PI      1A M   4               $>How evident is the positive impact on the environment?<$  						\Positive
+PI      1A M   4               $>What is the risk that this environmental profit will not be achieved?<$  \Profit
+PI      1A M   4               $>To what extent is the management concerned about sustainable entrepeneurship?<$  \Entrepeneurship
+PI      1A M   4               $>How big is the environmental impact of the investment itself, and how big is the impact related to the sector and the market?<$  \Environmental
+
+PI      1N     3               $>Cultural Sector - Film<$                                             \CulturalSectorParagraph
+PI      1A M   4               $>What type of movie(s) content wise?<$  															\Movies
+
+PI      1N     3               $>Resthome<$                                                           \ResthomeParagraph
+PI    0 1N     4               $>Number of beds ROB (MR)<$  					             										\BedsROB
+PI    0 1N     4               $>Number of beds RVT (MRS)<$  					             										\BedsRVT
+PI    0 1N     4               $>Number in license but not exploited<$  					             			  \Exploited
+PI    0 1N     4               $>Number of Service Flats<$  					             										\Service
+PI    0 1N     4               $>Surface:  number of m²/ room gross<$  					                      \Surface
+PI    0 1N     4               $>Surface:  number of m²/ room net<$  					             	 					\Surface2
+PI      1A M   4               $>Energy Performance<$  					             								       		\Performance
+PI      1A M   4               $>E level (energy consumption)<$  					             			  				\Energy
+PI      1A M   4               $>K level (isolation coefficient)<$  					             						\Isolation
+PI      1A M   4               $>Social / Local integration plus common spaces plus other comments<$ 	\Spaces
+PI    0 1N     4               $>Net staff cost / bed / day<$ 																				\Staff
+PI    0 1N     4               $>Illness absence (in %)<$  					             								  		\illness
+PI      1A M   4               $>Training sessions for the staff plus other comments<$  					   	\Training
+PI      1A M   4               $>Inspection report plus Answers from management<$  										\Inspection
+PI      1A M   4               $>Activities organized for the residents<$  					            			\Activities
+PI      1A M   4               $>Visit report by Relationship manager Triodos<$  											\Relationship
+PI      1A M   4               $>Dayprice range<$  					             									           	\Dayprice
+PI      1A M   4               $>Riziv (Inami) / bed / day<$  					             						  		\Riziv
+PI      1A M   4               $>Rent/Ebitdar<$  					             									            	\Ebitdar
+
+;PI      1N     3               $>Education<$                                                          \SchoolmapParagraph
+;PI      1N C   4               $>Age school <$                                                        \School
+;PI      1N C   4               $>Number of students <$                                                \Students
+;PI      1N C   4               $>Population growth? <$                                                \Growth
+;PI      1N C   4               $>Is the school owned or long lease? <$                                \Owned
+
+;PI      1N     3               $>Healthcare - Medical Centers<$                                       \MedicalmapParagraph
+;PI      1N C   4               $>Age of medical center? <$                                            \Medical
+;PI      1N C   4               $>Number of patients<$                                                 \Patients
+;PI      1N C   4               $>Population growth? <$                                                \Population
+;PI      1N C   4               $>Do they have forfaits? <$                                            \Forfaits
+;PI      1A M   4               $>What do you know about the pricing of the offered products and services?<$  \Offered
+;PI      1A M   4               $>Who is the target group<$  				                                	\Group
+;PI      1A M   4               $>What kind of products or services are offered to this target group?<$\Products
+
+;PI      1N     3               $>Sustainable Real Estate<$                                            \SusRealEstateParagraph
+;PI      1N C   4               $>Monumental Real Estate. Made sustainable to lable B.<$               \Monumental
+;PI      1N C   4               $>Redevelopment of vacant real estate. Minimum increase of two lables (to B for monuments, to A for non-monuments)<$   \lables
+;PI      1N C   4               $>New development, only if lead position in sustainability. High BREEAM certification, labeled A+ or Green Statement.<$   \BREEAM
+;PI      1N C   4               $>Sustainable usage (only in combination with one of the above). Tenants must be Triodos target group (health, arts and culture etc.)<$    \usage
+;PI      1A M   4               $>Who is the debtor?<$  				                                	      \debtor
+;PI      1A M   4               $>Why chosen for Triodos?<$  				                          	      \Chosen
+;PI      1A M   4               $>Short description of request<$  				                          	  \request
+;PI      1A M   4               $>Who is the tenor, what will be the (future) flow of rent, is it pre-let?<$  \tenor
+;PI      1A M   4               $>Characteristics of the property (monumental, location, state of maintenance)<$  \Characteristics
+;PI      1A M   4               $>Sustainability aspects (e.g. energy, information on tenant / user)<$ \tenant
+;PI      1N C   4               $>Can the borrower be labeled as professional real estate manager?<$   \manager
+;PI      1N C   4               $>Will the owner also be the user of the real estate?<$ 							  \user
+;PI      1N C   4               $>Is the request only for construction financing?<$ 		    					  \construction
+;PI      1N C   4               $>Is the requested amount less than 65% of the market value in rented out condition.<$ 		\requestedamount
+;PI      1A M   4               $>Any other remark/question for IRM<$  				                        \IRM
+
+PI      1N     3               $>Food and Agro<$                                                      \FoodandAgroParagraph
+PI      1N C   4               $>Is the main borrower retailer / health food store<$                  \healthfood
+PI      1N C   4               $>Is the main borrower a dairy farmer (cows/goats)<$                   \dairyfarmer
+PI      1N C   4               $>Is the main borrower an arable farmer (grain/wheat/corn)<$            \arrablearmer
+PI      1A M   4               $>Who is the debtor?<$  				                                        \debtor1
+PI      1A M   4               $>Biological farmer/European quality mark/EKO/SKAL/Conversion to SKAL<$ \SKAL
+PI      1A M   4               $>Why chosen for Triodos<$  				                                    \chosen1
+PI      1A M   4               $>Short description of request<$  				                              \descriptionrequest
+PI      1A M   4               $>How many acres under management (ownership/lease) and how many animals?<$ \acres
+PI      1A M   4               $>Any existing financing other than Triodos? (interest due dates / why switch)?<$ \otherfinancing
+PI      1A M   4               $>When must the finance be available?<$  				                      \availablefinance
+PI      1N C   4               $>Will it be a 100% financing?<$  				                              \Fullfinancing
+PI      1N C   4               $>Do you label the borrower as non biological?<$  				              \nonbiological
+PI      1N C   4               $>Does it involve greenhouse horticulture?<$  				                  \horticulture
+PI      1N C   4               $>Does it involve horses/horse riding school/horse stable?<$ 			    \horses
+PI      1N C   4               $>Does it involve fishery/fishing vessels?<$  				                  \fishery
+PI      1N C   4               $>Does it involve aquaculture/fish farming?<$  				                \aquaculture
+PI      1N C   4               $>Does it involve manure fermentation?<$  				                      \fermentation
+PI      1N C   4               $>Does it involve uncommon activities (like insect farming)<$          \insect
+PI      1A M   4               $>Any other remark/question for IRM<$  				                        \IRM1
+
+PI      1N     3               $>Health and Welfare<$                                                 \HealthandWelfareParagraph
+PI      1N C   4               $>Is the main activity small scale elderly care (private and via AWBZ)?<$  \elderly
+PI      1N C   4               $>Is the main activity small scale housing (family homes, care farm with 24-hours care)<$    \housing
+PI      1N C   4               $>Is the main activity disability care (private and via AWBZ)?<$       \disability
+PI      1A M   4               $>Who is the debtor?<$  				                      							    \debtor2
+PI      1A M   4               $>Why chosen for Triodos<$  				                                    \chosen2
+PI      1A M   4               $>Short description of request<$  				                              \descriptionrequest1
+PI      1A M   4               $>Sustainability aspects: Philosophy / vision of the entrepreneur<$    \Philosophy
+PI      1N C   4               $>Is there over 25% of equity present (or 20% for focus groups)<$     \equity
+PI      1N C   4               $>Does the finance request exceed 10 million euro?<$                  \million
+PI      1N C   4               $>Do you think there are unsufficient collaterals?<$                  \collaterals
+PI      1A M   4               $>Any other remark/question for IRM<$  				                       \IRM2
+
+
+.Formulas NoTrend
+SectorselectionUK = 0
+
+;.Variable SchoolmapParagraph, Visible = (SectorselectionBE=0)
+.Variable ResthomeParagraph, Visible = (SectorselectionBE=1)
+.Variable RealEstateParagraph, Visible = (SectorselectionBE=2)
+;.Variable MedicalmapParagraph, Visible = (SectorselectionBE=3)
+.Variable MaisonsMedicalesParagraph, Visible = (SectorselectionBE=4)
+.Variable FairTradeParagraph, Visible = (SectorselectionBE=5)
+.Variable InnovativeTechnologyParagraph, Visible = (SectorselectionBE=6)
+.Variable CulturalSectorParagraph, Visible = (SectorselectionBE=7)
+
+;.Variable SusRealEstateParagraph, Visible = (SectorselectionNL=0)
+.Variable FoodandAgroParagraph, Visible = (SectorselectionNL=1)
+.Variable HealthandWelfareParagraph, Visible = (SectorselectionNL=2)
+
+
+.Formulas Visible
+SectorselectionBE = (Branchselection=0)
+SectorselectionNL = (Branchselection=1)
+SectorselectionUK = (Branchselection=2)
+Other = ((SectorselectionNL=NA) And (Branchselection=1)) or ((SectorselectionBE=NA) And (Branchselection=0)) or ((SectorselectionUK=0) And (Branchselection=2))
+
+.Choices
+SectorselectionNL ="1:Food and Agro|2:Health and Welfare"
+SectorselectionBE ="1:Resthome|2:Real Estate|4:Maisons Médicales|5:Fair Trade|6:Innovative Technology|7:Cultural Sector - Movie's"
+SectorselectionUK ="0:Not Available"
+
+
+;School        = "0:> 5 year|1: =< 5 year"
+;Students      = "0:Decreasing|1:Equal|2:Rising"
+;Growth        = "0:Decreasing|1:Equal|2:Rising"
+;Owned         = "0:Owned|1:Long lease"
+
+;Medical       = "0:> 3 year|1: =< 3 year"
+;Patients      = "0:Decreasing|1:Equal|2:Rising"
+;Population    = "0:Decreasing|1:Equal|2:Rising"
+;Forfaits      = "1:Yes|0:No"
+
+;Monumental    = "1:Yes|0:No"
+;lables        = "1:Yes|0:No"
+;BREEAM        = "1:Yes|0:No"
+;usage         = "1:Yes|0:No"
+;manager       = "1:Yes|0:No"
+;user          = "1:Yes|0:No"
+;construction  = "1:Yes|0:No"
+;requestedamount = "1:Yes|0:No"
+
+healthfood   = "1:Yes|0:No"
+dairyfarmer  = "1:Yes|0:No"
+arrablearmer = "1:Yes|0:No"
+
+Fullfinancing = "1:Yes|0:No"
+nonbiological = "1:Yes|0:No"
+horticulture  = "1:Yes|0:No"
+horses        = "1:Yes|0:No"
+fishery       = "1:Yes|0:No"
+aquaculture   = "1:Yes|0:No"
+fermentation  = "1:Yes|0:No"
+insect        = "1:Yes|0:No"
+
+elderly       = "1:Yes|0:No"
+housing       = "1:Yes|0:No"
+disability    = "1:Yes|0:No"
+equity        = "1:Yes|0:No"
+million       = "1:Yes|0:No"
+collaterals   = "1:Yes|0:No"
+
+
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 2
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map02_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map02_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map02_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map02_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X))")
+Q_Map02_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map02                        = (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS)
+Q_Map02_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map02_INFO                   = &If(Q_Map02[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map02_VALIDATION             =
+
+.Choices
+Q_Map02                        = Q_ROOT
+
+
+
+
+
+
+.Variables
+;================================================================================================== Result
+; Results
+; wordt pas getoond na definitief maken
+
+PP      1A   1 2               "Results"                                                         \Q_RESULT
+PP      1A     3               =Q_RESULT                                                           \=Q_RESULT
+
+.Variables
+;================================================================================================== Result
+; Q_Status
+;
+
+PI      1N C 1 2  +            Status                                                       \Q_STATUS
+PI      1N D   2               Final:                                                       \Q_STATUS_FINAL_ON
+PI      1A     2               Final by:                                                    \Q_STATUS_FINAL_BY
+PI      1A     2               Final by:                                                    \Q_STATUS_FINAL_BY_NAME
+PI      1N D   2               Created:                                                     \Q_STATUS_STARTED_ON
+PI      1A     2               Created by:                                                  \Q_STATUS_STARTED_BY
+PI      1A     2               Created by:                                                  \Q_STATUS_STARTED_BY_NAME
+PI      1N D   2  +            Last modified                                                \Q_STATUS_MODIFIED_ON
+PP      1A     2  +            Modelversion:                                                \Q_ModelVersion
+PP      1A     2  +            Modeltype:                                                   \Q_ModelType
+PP      1A     2  +            Parameters version:                                          \Q_MatrixVersion
+
+PI      1N C   2               Previous                                                     \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               Next                                                         \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               Draft report                                                 \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               Definitive report                                            \Q_FINAL_REPORT_VISIBLE
+PI      1N C   2               Make it final                                                \Q_MAKE_FINAL_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_STATUS                       = "0:Active|1:Final"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+Q_MAKE_FINAL_VISIBLE           = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_STATUS                       = 0
+Q_STATUS_MODIFIED_ON           = Now
+Q_ModelVersion                 = "#CompactModelVersion#"                                                                                           ; EJS: mooier is (maar kan niet in webversie): &SysVar("ModelVersion")
+Q_MatrixVersion                = NA;&MatrixLookup("TRIODOS_Parameters.xls","Version",1,3)
+Q_ModelType                    = "#ModelCode#"
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+Q_MAKE_FINAL_VISIBLE           = 1
+
+.Variables
+;==========================================================================================================================================
+; Overige berekeningen (buiten Q_ROOT)
+
+PX      1X   1 1               "Overige berekeningen"                                              \Hulpvariabelen
+
+.Variables
+;================================================================================================== Q_HULPVARS
+; Knock-outs
+
+
+.Variables
+PP      1A     2               "Knockout(s)?"                                                      \Q_WARNING_GLOBAL
+PP      1A     3  +            "Knockouts (algemeen)"                                              \scKnockoutAlg
+PP      1A     4               "Knockout: Reason > 120"                                            \scKnockout01
+PP      1A    -4               =scKnockoutAlg                                                      \=scKnockoutAlg
+
+PP      1M     3               "Knockouts text"                                                    \scKnockoutsCombi
+
+.Formulas NoTrend
+scKnockoutAlg                  = &scKnockout01
+scKnockout01                   = &If(Length(&Reason[1])>120, "|This question contains more then the maximum number of characters: In case of a modification of the reassessment flag: What is the reason for this modification?","")
+
+scKnockoutsCombi               = &If(Length(&scKnockoutAlg[1])>1, &scKnockoutAlg[1],&"")
+Q_WARNING_GLOBAL               = &If(Length(&scKnockoutsCombi[1])>0,&"|Attention"&scKnockoutsCombi,"")
+
+
+.Variables
+;================================================================================================== Restricties
+; Restricties
+
+PP      1M     2               "Restricties"                                                      \Q_RESTRICTIES
+PP      1M     2               "Restricties text"                                                 \scRestrictiesCombi
+PP    0 1N     2               "Show Hidden fields"                                               \ShowHiddenFields
+
+.Formulas NoTrend
+Q_RESTRICTIES                  = &If(Length(&scRestrictiesCombi[1])>0,&"||The listed variables are not filled correct:"&scRestrictiesCombi,"")
+ShowHiddenFields               = If( Pos("Tester",&Triton[1])>0 ,1,0)

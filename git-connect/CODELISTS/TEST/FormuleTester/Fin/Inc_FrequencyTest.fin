@@ -1,0 +1,8 @@
+{&&Language=English};Inc_EventTest.fin
+
+.Variables
+PPPP     X     1               Frequency Test model              \FrequencyTest 
+
+PIII    1N   1 2               "Document"             			\DocumentVariable
+PIII    PN   1 2               "Period" 						\PeriodVariable
+PIII    BN   1 2               "Column"             			\ColumnVariable

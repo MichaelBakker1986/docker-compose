@@ -1,0 +1,7 @@
+; file krUraTrafficLightValueToTitleNL
+; URA Traffic Light Value to Title
+; deze is hardcoded Nederlands! Webclient kan data niet vertalen!!
+
+0: "rood"
+1: "oranje"
+2: "groen"

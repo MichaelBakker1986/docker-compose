@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+
+<document version="1.0.1" date="28-02-2017" author="Topicus FINAN" title="onepager" xsi:noNamespaceSchemaLocation="../../../../src/FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <properties>
+        <TimelineId>1</TimelineId>
+        <TimelineTitle>MonthTimeline</TimelineTitle>
+        <Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase" /></data></Periods>
+        <ReportName> </ReportName>
+        <ReportScale>1000</ReportScale>
+        <Period><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables function="getStartDate" /><presentation format="d MMMMM yyyy" /></data><data src="chineseRoom" name="Upto">t/m</data><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables function="getEndDate" /><presentation format="d MMMMM yyyy" /></data></Period>
+        <ReportVersion><data src="document" var="./document/@version" type="calc" /></ReportVersion>
+        <ModelVersion><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="ModelVersion" /></data></ModelVersion>
+        <CompanyName><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="CompanyName" /></data></CompanyName>
+        <CompanyPlaceOfResidence><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="CompanyPlaceOfResidence" /></data></CompanyPlaceOfResidence>
+        <LimitedLiabilityCompany><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="ReportAsLimitedLiabilityCompany" /></data></LimitedLiabilityCompany>
+        <DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency" /></data></DocumentCurrency>
+        <CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in </data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+        <CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+        <CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+        <CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+        <PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+        <Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+        <PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+        <Of><data src="chineseRoom" name="Of">van</data></Of>
+        <At><data src="chineseRoom" name="At">te</data></At>
+        <ChamberOfCommerceNumberLabel><data src="chineseRoom" name="ChamberOfCommerceNumber">Kvk-nummer</data></ChamberOfCommerceNumberLabel>
+
+        <currentUser_Fullname> </currentUser_Fullname>
+        <currentUser_Email> </currentUser_Email>
+        <currentUser_Id> </currentUser_Id>
+        <currentUser_Language> </currentUser_Language>
+        <currentUser_Ntdomain> </currentUser_Ntdomain>
+        <currentUser_Phonenumber> </currentUser_Phonenumber>
+        <currentUser_Ccrmid> </currentUser_Ccrmid>
+        <currentUser_CertificateId> </currentUser_CertificateId>
+
+        <currentCustomer_AccountManager> </currentCustomer_AccountManager>
+        <currentCustomer_BvdId> </currentCustomer_BvdId>
+        <currentCustomer_ChamberOfCommerceNumber> </currentCustomer_ChamberOfCommerceNumber>
+        <currentCustomer_City> </currentCustomer_City>
+        <currentCustomer_Country> </currentCustomer_Country>
+        <currentCustomer_CustomerNumber> </currentCustomer_CustomerNumber>
+        <currentCustomer_CustomerType> </currentCustomer_CustomerType>
+        <currentCustomer_DateOfBirth> </currentCustomer_DateOfBirth>
+        <currentCustomer_HouseNumber> </currentCustomer_HouseNumber>
+        <currentCustomer_Id> </currentCustomer_Id>
+        <currentCustomer_LegalStatusCode> </currentCustomer_LegalStatusCode>
+        <currentCustomer_LegalStatusDescription> </currentCustomer_LegalStatusDescription>
+        <currentCustomer_Name> </currentCustomer_Name>
+        <currentCustomer_OfficeName> </currentCustomer_OfficeName>
+        <currentCustomer_OfficeNumber> </currentCustomer_OfficeNumber>
+        <currentCustomer_ProjectName> </currentCustomer_ProjectName>
+        <currentCustomer_ReferenceId> </currentCustomer_ReferenceId>
+        <currentCustomer_SectorOfIndustryCode> </currentCustomer_SectorOfIndustryCode>
+        <currentCustomer_SectorOfIndustryDescription> </currentCustomer_SectorOfIndustryDescription>
+        <currentCustomer_StateOrProvince> </currentCustomer_StateOrProvince>
+        <currentCustomer_Street> </currentCustomer_Street>
+        <currentCustomer_ZipCode> </currentCustomer_ZipCode>
+
+        <texts_remarks_customer_text>...</texts_remarks_customer_text>
+        <texts_remarks_generalinformation_text>...</texts_remarks_generalinformation_text>
+        <texts_remarks_liabilities_text>...</texts_remarks_liabilities_text>
+        <texts_remarks_materialfixedassets_text>...</texts_remarks_materialfixedassets_text>
+        <texts_remarks_netsales_text>...</texts_remarks_netsales_text>
+        <texts_remarks_operatingexpenses_text>...</texts_remarks_operatingexpenses_text>
+        <texts_remarks_personnel_text>...</texts_remarks_personnel_text>
+        <texts_remarks_workinprogress_text>...</texts_remarks_workinprogress_text>
+        <texts_remarks_otherresult_text>...</texts_remarks_otherresult_text>
+        <texts_remarks_scenario>...</texts_remarks_scenario>
+
+        <CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy" /></data></CreationDate>
+
+        <FirstPage_visible>true</FirstPage_visible>
+        <Details_visible>false</Details_visible>
+        <Preface_visible>false</Preface_visible>
+        <Offer_visible>false</Offer_visible>
+        <TableOfContents_visible>false</TableOfContents_visible>
+        <Introduction_visible>false</Introduction_visible>
+        <Remarks_visible>false</Remarks_visible>
+        <FinancialOverview_visible>false</FinancialOverview_visible>
+
+        <financialfactsheetSection_visible>true</financialfactsheetSection_visible>
+        <financialfactsheetSection_comment> </financialfactsheetSection_comment>
+
+        <Disclaimer> </Disclaimer>
+        <Preface_comment> </Preface_comment>
+        <Offer_comment> </Offer_comment>
+        <Introduction_comment> </Introduction_comment>
+
+        <DeltaPeriods>0</DeltaPeriods>
+
+        <DefaultFont>Arial</DefaultFont>
+        <HeaderFont>Arial</HeaderFont>
+        <AssetsHeader><data src="fesModel"><variables var="BalanceSheet" function="getTitle" /></data> - <data src="chineseRoom" name="Assets">Activa</data></AssetsHeader>
+        <EquityLiabilitiesHeader><data src="chineseRoom" name="EquityLiabilities">Passiva</data></EquityLiabilitiesHeader>
+        <IncomeStatementHeader><data src="fesModel"><variables var="IncomeStatement" function="getTitle" /></data></IncomeStatementHeader>
+        <OtherFiguresHeader><data src="chineseRoom" name="OtherFiguresHeader">Overige gegevens</data></OtherFiguresHeader>
+        <RatiosHeader><data src="fesModel"><variables var="Ratios" function="getTitle" /></data></RatiosHeader>
+        <CashflowHeader><data src="chineseRoom" name="CashflowSummaryHeader">Kasstroom samenvatting</data></CashflowHeader>
+        <InvestmentsAndFinancingPlanHeader><data src="fesModel"><variables var="InvestmentsAndFinancingPlan" function="getTitle" /></data></InvestmentsAndFinancingPlanHeader>
+    </properties>
+
+    <newpage name="landscapetwo">
+        <p id="watermark" visible="./document/properties/isFinalReport/text()=0" />
+    </newpage>
+
+    <!-- Main container -->
+    <columns header="" class="threecolumns">
+        <!-- ========= Col 1 ============================================================= -->
+        <col>
+            <!-- Activa -->
+            <table class="shorttablethree">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="1" var="BalanceSheet" varFrom="IntangibleFixedAssets" recursiveSkip="false" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" headerLabelXPath="xpath:./document/properties/AssetsHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+            <p class="spacer"> </p>
+            <!-- Cashflow -->
+            <table class="shorttabletwo">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="3" var="OperationalCashflow" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" headerLabelXPath="xpath:./document/properties/CashflowHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+            <p class="spacer"> </p>
+            <p class="smallparagraph" visible="./document/properties/financialfactsheetSection_comment/text() != ' '">[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b] <data src="document" var="./document/properties/financialfactsheetSection_comment/text()" /></p>
+        </col>
+        <!-- ========= Col 2 ============================================================= -->
+        <col>
+            <!-- Passiva -->
+            <table class="shorttabletwo">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="1" var="BalanceSheet" varFrom="NetWorth" varTo="CapitalShortfall" recursiveSkip="false" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" headerLabelXPath="xpath:./document/properties/EquityLiabilitiesHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+                <tr class="level0">
+                    <td> </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="1" var="BalanceSheet" varFrom="TotalEquityAndLiabilities" recursiveSkip="false" />
+                    <presentation filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+                </data>
+            </table>
+            <p class="spacer"> </p>
+            <!-- Investment and financingplan -->
+            <table class="shorttabletwo">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="1" var="InvestmentsAndFinancingPlan" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" headerLabelXPath="xpath:./document/properties/InvestmentsAndFinancingPlanHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+        </col>
+        <!-- ========= Col 3 ============================================================= -->
+        <col>
+            <!-- Profit and lost -->
+            <table class="shorttablethree">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="1" var="IncomeStatement" varFrom="NetSales" recursiveSkip="false" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" headerLabelXPath="xpath:./document/properties/IncomeStatementHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+            <p class="spacer"> </p>
+            <!-- Ratio -->
+            <table class="shorttabletwo">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="0" var="CurrentRatio" />
+                    <variables depth="0" var="QuickRatio" />
+                    <variables depth="0" var="InventoryTurnoverRatio" />
+                    <variables depth="0" var="TradeReceivablesTermDaysTotal" />
+                    <variables depth="0" var="TradePayablesTermDaysTotal" />
+                    <variables depth="0" var="DebtToEBITA" />
+                    <variables depth="0" var="SalesToEBITDA" />
+                    <variables depth="0" var="NonPresentTaxes" />
+                    <variables depth="0" var="DSCR" />
+                    <variables depth="0" var="SolvencyRatio" />
+                    <variables depth="0" var="Leverage" />
+                    <variables depth="0" var="InterestCoverageRatio" />
+                    <variables depth="0" var="ReturnOnAssets" />
+                    <variables depth="0" var="NetSalesGrowth" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" headerLabelXPath="xpath:./document/properties/RatiosHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+            <p class="spacer"> </p>
+            <!-- Overige -->
+            <table class="shorttablethree">
+                <data src="fes">
+                    <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/DeltaPeriods" number="3" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+                    <variables depth="0" var="Investments" />
+                    <variables depth="0" var="MandatoryCapitalExpenditure" />
+                    <variables depth="0" var="TotalNumberOfEmployees" />
+                    <variables depth="0" var="CapitalizedInterest" />
+                    <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true"  headerLabelXPath="xpath:./document/properties/OtherFiguresHeader">
+                        <overrideStyle old="level1">level0</overrideStyle>
+                    </presentation>
+                </data>
+            </table>
+        </col>
+    </columns>
+    <!-- =========Einde============================================================= -->
+</document>

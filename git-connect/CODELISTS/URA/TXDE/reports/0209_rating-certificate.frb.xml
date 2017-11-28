@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document author="Luuk Peters" title="Hello World! Test" xsi:noNamespaceSchemaLocation="FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<properties>
+<!--		<var id="GenInfoCompanyIdName">FINAN</var>-->
+		<endDate0><data src="functions" name="getEndDate"><param key="format" value="dd.MM.yyyy"/><param key="tDelta" value="0"/></data></endDate0>
+		<endDate1><data src="functions" name="getEndDate"><param key="format" value=", dd.MM.yyyy"/><param key="tDelta" value="-1"/></data></endDate1>
+		<endDate2><data src="functions" name="getEndDate"><param key="format" value=", dd.MM.yyyy"/><param key="tDelta" value="-2"/></data></endDate2>
+		<endDate3><data src="functions" name="getEndDate"><param key="format" value=", dd.MM.yyyy"/><param key="tDelta" value="-3"/></data></endDate3>
+		<endDate4><data src="functions" name="getEndDate"><param key="format" value=", dd.MM.yyyy"/><param key="tDelta" value="-4"/></data></endDate4>
+	</properties>
+	<newpage name="certificate">
+		<img id="red"        visible="./document/properties/ampelValue/text()=0"/>
+		<img id="orange"     visible="./document/properties/ampelValue/text()=1"/>
+		<img id="green"      visible="./document/properties/ampelValue/text()=2"/>
+		<p   id="redtext"    visible="./document/properties/ampelValue/text()=0"/>
+		<p   id="orangetext" visible="./document/properties/ampelValue/text()=1"/>
+		<p   id="greentext"  visible="./document/properties/ampelValue/text()=2"/>
+		<p   id="solvencycheckname"  visible="false()"/>
+		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>
+	</newpage>
+</document>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrli:xbrl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xbrl.org/2006/xbrldi http://www.xbrl.org/2006/xbrldi-2006.xsd" xml:lang="nl" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:bd-t="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-tuples" xmlns:bd-dim-dim="http://www.nltaxonomie.nl/nt12/bd/20171213.b/validation/bd-axes" xmlns:bd-i="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-data" xmlns:nl-cd="http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/nt12/venj/20171004.b/dictionary/venj-bw2-data" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:bd-dim-mem="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-domain-members" xmlns:frc-dm="https://www.sbrbanken.nl/bt12/frc/20171103.b/dictionary/frc-domains" xmlns:frc-dim="https://www.sbrbanken.nl/bt12/frc/20171103.b/dictionary/frc-axes" xmlns:frc-i="https://www.sbrbanken.nl/bt12/frc/20171103.b/dictionary/frc-data" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/bt12/frc/20171103.b/entrypoints/frc-rpt-ihz-aangifte-2017.xsd"/>
+  
+  
+  <xbrli:context id="context0">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate> 
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+	</xbrli:context>
+	
+	<xbrli:context id="context001">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:NaturalPersonInformationAxis">frc-dm:NaturalPersonInfomationMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="context31">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressNLAxis">
+				<frc-dm:DescriptionLocationNLTypedMember>Advies</frc-dm:DescriptionLocationNLTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+  
+  <xbrli:context id="ContextDurationDeclarantForeign">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate> 
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:TaxpayerDimension">bd-dim-mem:Foreign</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationDeclarantDomestic">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:TaxpayerDimension">bd-dim-mem:Domestic</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationDeclarant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationPartner">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">781041764</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Partner</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationWorldDeclarant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:EarningsSetupDimension">bd-dim-mem:World</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationNationalPartner">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">781041764</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:EarningsSetupDimension">bd-dim-mem:National</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Partner</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationWorldPartner">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">781041764</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:EarningsSetupDimension">bd-dim-mem:World</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Partner</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationNationalDeclarant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:EarningsSetupDimension">bd-dim-mem:National</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationDeclarantNetherlandsDomestic">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:ResidenceDimension">bd-dim-mem:Netherlands</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:TaxpayerDimension">bd-dim-mem:Domestic</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:context id="ContextDurationDeclarantNetherlandsForeign">
+    <xbrli:entity>
+      <xbrli:identifier scheme="www.belastingdienst.nl/identificatie">780064240</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2017-01-01</xbrli:startDate>
+      <xbrli:endDate>2017-12-31</xbrli:endDate>
+    </xbrli:period>
+    <xbrli:scenario>
+      <xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:ResidenceDimension">bd-dim-mem:Netherlands</xbrldi:explicitMember>
+      <xbrldi:explicitMember dimension="bd-dim-dim:TaxpayerDimension">bd-dim-mem:Foreign</xbrldi:explicitMember>
+    </xbrli:scenario>
+  </xbrli:context>
+  <xbrli:unit id="eur">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="PURE">
+    <xbrli:measure>xbrli:pure</xbrli:measure>
+  </xbrli:unit>
+  
+  
+	<venj-bw2-i:FinancialReportingPeriodCurrentStartDate contextRef="context0">2017-01-01</venj-bw2-i:FinancialReportingPeriodCurrentStartDate>
+	<venj-bw2-i:FinancialReportingPeriodCurrentEndDate contextRef="context0">2017-12-31</venj-bw2-i:FinancialReportingPeriodCurrentEndDate>
+	
+	<venj-bw2-i:FinancialReportingPeriodPreviousStartDate contextRef="context0">2016-01-01</venj-bw2-i:FinancialReportingPeriodPreviousStartDate>
+	<venj-bw2-i:FinancialReportingPeriodPreviousEndDate contextRef="context0">2016-12-31</venj-bw2-i:FinancialReportingPeriodPreviousEndDate>
+	
+	<frc-i:LegalEntityLegalFormBanks contextRef="context001">Eenmanszaak</frc-i:LegalEntityLegalFormBanks>
+  
+  <bd-i:DateOfBirth contextRef="ContextDurationDeclarant">1965-05-05</bd-i:DateOfBirth>
+  <bd-i:DateOfBirth contextRef="ContextDurationPartner">1968-02-13</bd-i:DateOfBirth>
+  <bd-i:Initials contextRef="ContextDurationDeclarant">G</bd-i:Initials>
+  <bd-i:Initials contextRef="ContextDurationPartner">S.</bd-i:Initials>
+  <bd-i:SoftwarePackageName contextRef="ContextDurationDeclarant">Pakket CRM</bd-i:SoftwarePackageName>
+  <bd-i:SoftwarePackageVersion contextRef="ContextDurationDeclarant">B2</bd-i:SoftwarePackageVersion>
+  <bd-i:SoftwareSupplierCode contextRef="ContextDurationDeclarant">DIGM</bd-i:SoftwareSupplierCode>
+  <bd-i:SoftwareVendorAccountNumber contextRef="ContextDurationDeclarant">SWO98976</bd-i:SoftwareVendorAccountNumber>
+  <bd-i:Surname contextRef="ContextDurationDeclarant">Houwer</bd-i:Surname>
+  <bd-i:Surname contextRef="ContextDurationPartner">Hoeston</bd-i:Surname>
+  <bd-i:TaxConsultantInitials contextRef="ContextDurationDeclarant">J.</bd-i:TaxConsultantInitials>
+  <bd-i:TaxConsultantNumber contextRef="ContextDurationDeclarant">971923</bd-i:TaxConsultantNumber>
+  <bd-i:TaxConsultantPrefix contextRef="ContextDurationDeclarant">de</bd-i:TaxConsultantPrefix>
+  <bd-i:TaxConsultantSurname contextRef="ContextDurationDeclarant">Vries</bd-i:TaxConsultantSurname>
+  <bd-i:TaxConsultantTelephoneNumber contextRef="ContextDurationDeclarant">(038) 456 8857</bd-i:TaxConsultantTelephoneNumber>
+  <bd-i:TaxReturnMessageType contextRef="ContextDurationDeclarant">63</bd-i:TaxReturnMessageType>
+  <bd-i:NationalityCode contextRef="ContextDurationDeclarant">NLD</bd-i:NationalityCode>
+  <bd-i:TaxableProfit decimals="INF" contextRef="ContextDurationWorldPartner" unitRef="eur">-9800</bd-i:TaxableProfit>
+  <bd-i:BothQualifiedForeignTaxpayerOrQualificationNonDiscrimination contextRef="ContextDurationDeclarant">true</bd-i:BothQualifiedForeignTaxpayerOrQualificationNonDiscrimination>
+  <bd-i:ContributionBaseIncomePresentEmployment decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">78300</bd-i:ContributionBaseIncomePresentEmployment>
+  <bd-i:ContributionBaseIncomeOwnHouse decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">-10478</bd-i:ContributionBaseIncomeOwnHouse>
+  <bd-i:ContributionBasePersonDependentDeduction decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">11900</bd-i:ContributionBasePersonDependentDeduction>
+  <bd-i:ExemptedWagesInternationalOrganisationPresentWork decimals="INF" contextRef="ContextDurationNationalPartner" unitRef="eur">7920</bd-i:ExemptedWagesInternationalOrganisationPresentWork>
+  <bd-i:ExemptedWagesInternationalOrganisationPresentWork decimals="INF" contextRef="ContextDurationWorldPartner" unitRef="eur">19640</bd-i:ExemptedWagesInternationalOrganisationPresentWork>
+  <bd-i:ExemptedWagesInternationalOrganisationTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">0</bd-i:ExemptedWagesInternationalOrganisationTotal>
+  <bd-i:ExemptIncomeRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">19640</bd-i:ExemptIncomeRelatedToThreshold>
+  <bd-i:ForeignerPartTaxYearSocialInsuranceContributionsPayableExists contextRef="ContextDurationDeclarant">true</bd-i:ForeignerPartTaxYearSocialInsuranceContributionsPayableExists>
+  <bd-i:ForeignerPartTaxYearTaxpayerExists contextRef="ContextDurationDeclarant">true</bd-i:ForeignerPartTaxYearTaxpayerExists>
+  <bd-i:GiftsAidSBBITotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">2550</bd-i:GiftsAidSBBITotal>
+  <bd-i:GiftsBalanceDeductibleTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">823</bd-i:GiftsBalanceDeductibleTotal>
+  <bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturn decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">413</bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturn>
+  <bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantForeign" unitRef="eur">172</bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturnMigrationYear>
+  <bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantDomestic" unitRef="eur">241</bd-i:GiftsBalanceDeductibleTotalPartyFilingTaxReturnMigrationYear>
+  <bd-i:GiftsOtherMaximumDeductibleAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">823</bd-i:GiftsOtherMaximumDeductibleAmount>
+  <bd-i:GiftsOtherThreshold decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">1727</bd-i:GiftsOtherThreshold>
+  <bd-i:GiftsOtherTotalAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">2550</bd-i:GiftsOtherTotalAmount>
+  <bd-i:IncomeAfterPersonAttachedDeductionBox1 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">58345</bd-i:IncomeAfterPersonAttachedDeductionBox1>
+  <bd-i:IncomeAfterPersonAttachedDeductionBox2 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">18250</bd-i:IncomeAfterPersonAttachedDeductionBox2>
+  <bd-i:IncomeAfterPersonAttachedDeductionBox3 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">2076</bd-i:IncomeAfterPersonAttachedDeductionBox3>
+  <bd-i:IncomeBeforePersonAttachedDeductionBox1 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">67822</bd-i:IncomeBeforePersonAttachedDeductionBox1>
+  <bd-i:IncomeBeforePersonAttachedDeductionBox2 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">18250</bd-i:IncomeBeforePersonAttachedDeductionBox2>
+  <bd-i:IncomeBeforePersonAttachedDeductionBox3 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">2076</bd-i:IncomeBeforePersonAttachedDeductionBox3>
+  <bd-i:IncomePresentEmploymentMigrationYearTotal decimals="INF" contextRef="ContextDurationDeclarantForeign" unitRef="eur">45675</bd-i:IncomePresentEmploymentMigrationYearTotal>
+  <bd-i:IncomePresentEmploymentMigrationYearTotal decimals="INF" contextRef="ContextDurationDeclarantDomestic" unitRef="eur">32625</bd-i:IncomePresentEmploymentMigrationYearTotal>
+  <bd-i:IncomeRatioJoinedNetherlandsWorld decimals="INF" contextRef="ContextDurationDeclarant" unitRef="PURE">997</bd-i:IncomeRatioJoinedNetherlandsWorld>
+  <bd-i:IncomeRatioNetherlandsWorld decimals="INF" contextRef="ContextDurationDeclarant" unitRef="PURE">999</bd-i:IncomeRatioNetherlandsWorld>
+  <bd-i:IncomeThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">74379</bd-i:IncomeThreshold>
+  <bd-i:IncomeThresholdTaxpayer decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">93568</bd-i:IncomeThresholdTaxpayer>
+  <bd-i:InheritanceDonationSubstantialInterestBusinessInvestmentCapital contextRef="ContextDurationDeclarant">false</bd-i:InheritanceDonationSubstantialInterestBusinessInvestmentCapital>
+  <bd-i:InheritanceDonationSubstantialInterestNoAbalienationRequest contextRef="ContextDurationDeclarant">true</bd-i:InheritanceDonationSubstantialInterestNoAbalienationRequest>
+  <bd-i:ListedBuildingExpensesDeductibleMigrationYearPartyShare decimals="INF" contextRef="ContextDurationDeclarantForeign" unitRef="eur">2026</bd-i:ListedBuildingExpensesDeductibleMigrationYearPartyShare>
+  <bd-i:ListedBuildingExpensesDeductibleMigrationYearPartyShare decimals="INF" contextRef="ContextDurationDeclarantDomestic" unitRef="eur">2836</bd-i:ListedBuildingExpensesDeductibleMigrationYearPartyShare>
+  <bd-i:ListedBuildingExpensesDeductiblePartyShare decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">2439</bd-i:ListedBuildingExpensesDeductiblePartyShare>
+  <bd-i:ListedBuildingExpensesDeductibleTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">4862</bd-i:ListedBuildingExpensesDeductibleTotal>
+  <bd-i:LivingTogetherSpousesExists contextRef="ContextDurationDeclarant">true</bd-i:LivingTogetherSpousesExists>
+  <bd-i:MarriedEntireTaxYear contextRef="ContextDurationDeclarant">true</bd-i:MarriedEntireTaxYear>
+  <bd-i:NotSettledPersonAttachedDeductionTotalAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">0</bd-i:NotSettledPersonAttachedDeductionTotalAmount>
+  <bd-i:OverallIncome decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">78671</bd-i:OverallIncome>
+  <bd-i:OwnHouseAcquisitionDebtTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">622640</bd-i:OwnHouseAcquisitionDebtTotal>
+  <bd-i:OwnHouseBenefitsPartyFilingTaxReturnPart decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">3853</bd-i:OwnHouseBenefitsPartyFilingTaxReturnPart>
+  <bd-i:OwnHouseDeductibleCoststPartyFilingTaxReturnPart decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">14331</bd-i:OwnHouseDeductibleCoststPartyFilingTaxReturnPart>
+  <bd-i:OwnHouseIncomeRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">-2920</bd-i:OwnHouseIncomeRelatedToThreshold>
+  <bd-i:OwnHouseIncomeSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">-10478</bd-i:OwnHouseIncomeSharePartyFilingTaxReturn>
+  <bd-i:OwnHouseIncomeSharePartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantForeign" unitRef="eur">-3779</bd-i:OwnHouseIncomeSharePartyFilingTaxReturnMigrationYear>
+  <bd-i:OwnHouseIncomeSharePartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantDomestic" unitRef="eur">-6699</bd-i:OwnHouseIncomeSharePartyFilingTaxReturnMigrationYear>
+  <bd-i:OwnHouseInterestLoan decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">14331</bd-i:OwnHouseInterestLoan>
+  <bd-i:OwnHousePrincipalResidenceRentalValueTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">3853</bd-i:OwnHousePrincipalResidenceRentalValueTotal>
+  <bd-i:PersonAttachedDeduction decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">9477</bd-i:PersonAttachedDeduction>
+  <bd-i:QualifyingForeignTaxpayer contextRef="ContextDurationDeclarant">true</bd-i:QualifyingForeignTaxpayer>
+  <bd-i:ResidentCountryQualificationForeignTaxpayerOrNonDiscrimination contextRef="ContextDurationDeclarant">true</bd-i:ResidentCountryQualificationForeignTaxpayerOrNonDiscrimination>
+  <bd-i:SavingsAndInvestmentsBenefitsRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">2076</bd-i:SavingsAndInvestmentsBenefitsRelatedToThreshold>
+  <bd-i:SettledAmountPersonAttachedDeductionBox1 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">9477</bd-i:SettledAmountPersonAttachedDeductionBox1>
+  <bd-i:SettledAmountPersonAttachedDeductionBox3 decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">0</bd-i:SettledAmountPersonAttachedDeductionBox3>
+  <bd-i:SettledPersonAttachedDeductionTotalAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">9477</bd-i:SettledPersonAttachedDeductionTotalAmount>
+  <bd-i:StockTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">46666</bd-i:StockTotal>
+  <bd-i:SubstantialInterestBenefitsRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">18250</bd-i:SubstantialInterestBenefitsRelatedToThreshold>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationNationalDeclarant" unitRef="eur">746678</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationNationalPartner" unitRef="eur">+746212</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationWorldDeclarant" unitRef="eur">746189</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationWorldPartner" unitRef="eur">746661</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantForeign" unitRef="eur">7300</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturnMigrationYear>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturnMigrationYear decimals="INF" contextRef="ContextDurationDeclarantDomestic" unitRef="eur">10950</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturnMigrationYear>
+  <bd-i:SubstantialInterestRegularBenefitsGrossTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">36500</bd-i:SubstantialInterestRegularBenefitsGrossTotal>
+  <bd-i:TaxCreditsTaxpayerPeriodEndDate contextRef="ContextDurationDeclarant">2017-12-31</bd-i:TaxCreditsTaxpayerPeriodEndDate>
+  <bd-i:TaxCreditsTaxpayerPeriodStartDate contextRef="ContextDurationDeclarant">2017-01-01</bd-i:TaxCreditsTaxpayerPeriodStartDate>
+  <bd-i:TaxableProfitRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">-9800</bd-i:TaxableProfitRelatedToThreshold>
+  <bd-i:VentureCapitalLoansInvestmentsLossPartyFilingTaxReturn decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">6625</bd-i:VentureCapitalLoansInvestmentsLossPartyFilingTaxReturn>
+  <bd-i:VentureCapitalLoansInvestmentsLossTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">13206</bd-i:VentureCapitalLoansInvestmentsLossTotal>
+  <bd-i:WageHealthInsurancePayments decimals="INF" contextRef="ContextDurationNationalPartner" unitRef="eur">47133</bd-i:WageHealthInsurancePayments>
+  <bd-i:WageHealthInsurancePaymentsAbroad decimals="INF" contextRef="ContextDurationNationalPartner" unitRef="eur">4520</bd-i:WageHealthInsurancePaymentsAbroad>
+  <bd-i:WagesHealthInsuranceLawMaximumContribution contextRef="ContextDurationDeclarant">true</bd-i:WagesHealthInsuranceLawMaximumContribution>
+  <bd-i:WagesPresentWorkRelatedToThreshold decimals="INF" contextRef="ContextDurationPartner" unitRef="eur">47133</bd-i:WagesPresentWorkRelatedToThreshold>
+  <bd-t:GiftAidSBBISpecification>
+    <bd-i:GiftAidSBBIDescription contextRef="ContextDurationDeclarant">SBBI 100</bd-i:GiftAidSBBIDescription>
+    <bd-i:GiftsAidSBBI decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">1200</bd-i:GiftsAidSBBI>
+  </bd-t:GiftAidSBBISpecification>
+  <bd-t:GiftAidSBBISpecification>
+    <bd-i:GiftAidSBBIDescription contextRef="ContextDurationDeclarant">SBBI 200</bd-i:GiftAidSBBIDescription>
+    <bd-i:GiftsAidSBBI decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">1350</bd-i:GiftsAidSBBI>
+  </bd-t:GiftAidSBBISpecification>
+  <bd-t:StockSpecification>
+    <bd-i:StockAccountNumber contextRef="ContextDurationDeclarant">NL00BANK0007878401</bd-i:StockAccountNumber>
+    <bd-i:StockDescription contextRef="ContextDurationDeclarant">Effectenrekening</bd-i:StockDescription>
+    <bd-i:StockValue decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">46666</bd-i:StockValue>
+    <bd-i:StockValueUndividedValue decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">80000</bd-i:StockValueUndividedValue>
+  </bd-t:StockSpecification>
+  <bd-t:SubstantialInterestRegularBenefitsSpecification>
+    <bd-i:SubstantialInterestRegularBenefitsAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">36500</bd-i:SubstantialInterestRegularBenefitsAmount>
+    <bd-i:SubstantialInterestRegularBenefitsDescription contextRef="ContextDurationDeclarant">uitkering dividend</bd-i:SubstantialInterestRegularBenefitsDescription>
+  </bd-t:SubstantialInterestRegularBenefitsSpecification>
+  <bd-t:TaxationElsewhereBox3ImmovablePropertyDeductionSpecification>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionAssets decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">71251</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionAssets>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionCountryCode contextRef="ContextDurationDeclarant">GRC</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionCountryCode>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionDescripton contextRef="ContextDurationDeclarant">Mainstrasse 2</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionDescripton>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionValue decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">32217</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionValue>
+    <bd-i:TaxationElsewhereBox3ReductionAssetImmovablePropertyDebt decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">39034</bd-i:TaxationElsewhereBox3ReductionAssetImmovablePropertyDebt>
+  </bd-t:TaxationElsewhereBox3ImmovablePropertyDeductionSpecification>
+  <bd-t:TaxationElsewhereBox3ImmovablePropertyDeductionSpecification>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionAssets decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">18932</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionAssets>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionCountryCode contextRef="ContextDurationDeclarant">DEU</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionCountryCode>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionDescripton contextRef="ContextDurationDeclarant">Dolfer Allee 3</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionDescripton>
+    <bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionValue decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">11942</bd-i:TaxationElsewhereBox3ImmovablePropertyDeductionValue>
+    <bd-i:TaxationElsewhereBox3ReductionAssetImmovablePropertyDebt decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">6990</bd-i:TaxationElsewhereBox3ReductionAssetImmovablePropertyDebt>
+  </bd-t:TaxationElsewhereBox3ImmovablePropertyDeductionSpecification>
+  <bd-t:TaxpayerHeirsRepresentativePresentation>
+    <bd-t:AddressAbroadPresentation>
+      <nl-cd:CountryCodeISO contextRef="ContextDurationDeclarant">ESP</nl-cd:CountryCodeISO>
+      <bd-i:HouseNumberAbroad contextRef="ContextDurationDeclarant">1761258</bd-i:HouseNumberAbroad>
+      <bd-i:PlaceOfResidenceAbroad contextRef="ContextDurationDeclarant">Woonplaats BTL</bd-i:PlaceOfResidenceAbroad>
+      <bd-i:PostalCodeAbroad contextRef="ContextDurationDeclarant">512522PC</bd-i:PostalCodeAbroad>
+      <bd-i:StreetNameAbroad contextRef="ContextDurationDeclarant">Straat BTL</bd-i:StreetNameAbroad>
+    </bd-t:AddressAbroadPresentation>
+    <bd-i:TaxpayerHeirsRepresentativeInitials contextRef="ContextDurationDeclarant">A.</bd-i:TaxpayerHeirsRepresentativeInitials>
+    <bd-i:TaxpayerHeirsRepresentativePrefix contextRef="ContextDurationDeclarant">van</bd-i:TaxpayerHeirsRepresentativePrefix>
+    <bd-i:TaxpayerHeirsRepresentativeSurname contextRef="ContextDurationDeclarant">Achternaam</bd-i:TaxpayerHeirsRepresentativeSurname>
+    <bd-i:TaxpayerHeirsRepresentativeTelephoneNumber contextRef="ContextDurationDeclarant">0550512524</bd-i:TaxpayerHeirsRepresentativeTelephoneNumber>
+  </bd-t:TaxpayerHeirsRepresentativePresentation>
+  <bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn decimals="INF" contextRef="ContextDurationDeclarant" unitRef="eur">117549</bd-i:SubstantialInterestBenefitsSharePartyFilingTaxReturn>
+  <bd-i:EmigrationDate contextRef="ContextDurationDeclarant">2017-01-01</bd-i:EmigrationDate>
+  <bd-i:ImmigrationDate contextRef="ContextDurationDeclarant">2017-08-01</bd-i:ImmigrationDate>
+  <bd-i:TaxLiabilityNumberOfMonths contextRef="ContextDurationDeclarantForeign">7</bd-i:TaxLiabilityNumberOfMonths>
+  <bd-i:TaxLiabilityNumberOfMonths contextRef="ContextDurationDeclarantDomestic">5</bd-i:TaxLiabilityNumberOfMonths>
+  <bd-i:NoIncomeTaxMinorIncomeResidenceCountry contextRef="ContextDurationWorldDeclarant">true</bd-i:NoIncomeTaxMinorIncomeResidenceCountry>
+  <bd-i:SavingsAndInvestmentsBenefits decimals="INF" contextRef="ContextDurationNationalDeclarant" unitRef="eur">1757325</bd-i:SavingsAndInvestmentsBenefits>
+  <bd-i:SavingsAndInvestmentsPropertiesBenefits decimals="INF" contextRef="ContextDurationDeclarantNetherlandsDomestic" unitRef="eur">1757104</bd-i:SavingsAndInvestmentsPropertiesBenefits>
+  <bd-i:SavingsAndInvestmentsDebts decimals="INF" contextRef="ContextDurationDeclarantNetherlandsDomestic" unitRef="eur">1757105</bd-i:SavingsAndInvestmentsDebts>
+  <bd-i:SavingsAndInvestmentsPropertiesBenefits decimals="INF" contextRef="ContextDurationDeclarantNetherlandsForeign" unitRef="eur">1757784</bd-i:SavingsAndInvestmentsPropertiesBenefits>
+  
+  <frc-i:AuditReportType contextRef="context0">Geen verklaring</frc-i:AuditReportType>
+ 
+  <nl-cd:PostalCodeNL contextRef="context31">1234AQ</nl-cd:PostalCodeNL>
+<nl-cd:PlaceOfResidenceNL contextRef="context31">Rotterdam</nl-cd:PlaceOfResidenceNL>
+<venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="context001">87547471</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+<frc-i:DateEstablishmentLegalEntity contextRef="context001">1960-01-01</frc-i:DateEstablishmentLegalEntity>
+
+</xbrli:xbrl>

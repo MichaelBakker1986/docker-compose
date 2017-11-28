@@ -1,0 +1,78 @@
+{&&Language=English};Inc_UnspecTest.fin
+
+.Variables
+PPPP     X     1               Unspec Test model                \Unspec 
+
+PIII    BN   1 2               "Totaal 1"             			\Unspec1Total -> Unspec1Total
+PIII    BN  *  3               Bedrag 1                  		\Unspec1Amount1
+PIII   -BN     3               Bedrag 2                  		\Unspec1Amount2
+PIII    BN     3               Bedrag 3                  		\Unspec1Amount3
+PIII    BN=    3               Bedrag 4                  		\Unspec1Amount4
+PIII    BNX    3               Bedrag 5                  		\Unspec1Amount5
+PIII    BN>    3               Bedrag 6                  		\Unspec1Amount6 -> Unspec1Amount6ReferencedVariable1
+PIII   =BN    -3=              =Unspec1Total                    \=Unspec1Total
+
+PIII    BN     3               Bedrag 2                  		\Unspec1Amount32
+PIII    BN   2 3 6             Bedrag 3                  		\Unspec1Amount33
+PIII    BN     3               Bedrag 4                  		\Unspec1Amount34
+
+PIII    BN     3               Kopie Bedrag 1                  	\=Unspec1Amount1
+PIII   -BN  *  3               Kopie Bedrag 2                  	\=Unspec1Amount2
+PIII   =BN    -3=              Kopie Totaal  		            \Unspec1TotalOfReferences
+
+PIII    BN   1 2               "Ref van Unspec 1 Bedrag 6 - 1"  \Unspec1Amount6ReferencedVariable1=Unspec1Amount6ReferencedVariable2
+PIII    BN   1 2               "Ref van Unspec 1 Bedrag 6 - 2"  \Unspec1Amount6ReferencedVariable2
+
+PIII    PN   1 2               "Totaal Period"             		\UnspecPeriodTotal -> UnspecPeriodTotal
+PIII    PN  *  3               Bedrag 1                  		\UnspecPeriodAmount1
+PIII   -PN     3               Bedrag 2                  		\UnspecPeriodAmount2
+PIII    PN     3               Bedrag 3                  		\UnspecPeriodAmount3
+PIII    PN=    3               Bedrag 4                  		\UnspecPeriodAmount4
+PIII    PNX    3               Bedrag 5                  		\UnspecPeriodAmount5
+PIII   =PN    -3=              =UnspecPeriodTotal               \=UnspecPeriodTotal
+
+PIII    BN   1 2               "Totaal 2"             			\Unspec2Total -> Unspec1Total
+PIII    BN  *  3               Bedrag 1                  		\Unspec2Amount1
+PIPI   -BN     3               Bedrag 2                  		\Unspec2Amount2
+PIII    BN     3               Bedrag 3                  		\Unspec2Amount3
+PIII    BN=    3               Bedrag 4                  		\Unspec2Amount4
+PIII    BNX    3               Bedrag 5                  		\Unspec2Amount5
+PIII    BN>    3               Bedrag 6                  		\Unspec2Amount6 -> Unspec2Amount6ReferencedVariable
+PIPI    BN>    3               Bedrag 7                  		\Unspec2Amount7 -> Unspec2Amount6ReferencedVariable
+PIII    BN>    3               Bedrag 8                  		\Unspec2Amount8 -> Unspec2Amount8ReferencedVariable
+PIII   =BN    -3=              =Unspec2Total                    \=Unspec2Total
+
+PIII    BN   1 2               "Ref van Unspec 2 Bedrag 6"  	\Unspec2Amount6ReferencedVariable
+PIPI    BN   1 2               "Ref van Unspec 2 Bedrag 8"  	\Unspec2Amount8ReferencedVariable
+
+PIII    FN   1 2        ?      "Head unspec"                    \HeadUnspec
+IIII    FN  *  3               "UnspecSubVariable 1"            \UnspecSubVariable_1
+IIII    FN     3               "UnspecSubVariable 2"            \UnspecSubVariable_2
+IIII    FN     3               "UnspecSubVariable 3"            \UnspecSubVariable_3
+IIII    FN     3               "UnspecSubVariable 4"            \UnspecSubVariable_4
+IIII    FN     3               "UnspecSubVariable 5"            \UnspecSubVariable_5
+IIII    FN     3               "UnspecSubVariable 6"            \UnspecSubVariable_6
+IIII    FN     3               "UnspecSubVariable 7"            \UnspecSubVariable_7
+IIII    FN     3               "UnspecSubVariable 8"            \UnspecSubVariable_8
+IIII    FN     3               "UnspecSubVariable 9"            \UnspecSubVariable_9
+IIII    FN     3               "UnspecSubVariable 10"           \UnspecSubVariable_10
+PIII   =FN  * -3               "Unspec subtotal 1"              \UnspecSubTotal_1
+IIII   -FN     3               "UnspecSubVariable 11"           \UnspecSubVariable_11
+IIII   -FN     3               "UnspecSubVariable 12"           \UnspecSubVariable_12
+PIII   =FN    -3=              =HeadUnspec                      \RefHeadUnspec=HeadUnspec
+
+IIII     T   1 2         T     "Unspec Tuple"             		\UnspecTuple
+PIII    BN  *  3               "Unspec Tuple Amount 1"     		\UnspecTupleAmount1
+PIII   -BN     3               "Unspec Tuple Amount 2"     		\UnspecTupleAmount2
+PIII    BN     3               "Unspec Tuple Amount 3"     		\UnspecTupleAmount3
+PIII   =BN    -3=              "UnspecTupleTotal"               \UnspecTupleTotal
+
+PIII    BN   1 2               "Nested Unspec"             		\NestedUnspecTotal
+PIII    BN  *  3               "Nested Unspec 1"         		\NestedUnspec1
+PIII    BN  *  4               "Nested Unspec 1 Sub 1"   		\NestedUnspec1Sub1
+PIII    BN     4               "Nested Unspec 1 Sub 1"   		\NestedUnspec1Sub2
+PIII   =BN     4               "Nested Unspec 1 Total"   		\NestedUnspec1Total=NestedUnspec1
+PIII    BN     3               "Nested Unspec 2"                \NestedUnspec2
+PIII    BN     3               "Nested Unspec 3"                \NestedUnspec3
+PIII    BN     3               "Nested Unspec 4"                \NestedUnspec4
+PIII   =BN    -3=              =NestedUnspecTotal               \RefNestedUnspecTotal=NestedUnspecTotal

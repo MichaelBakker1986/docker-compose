@@ -1,0 +1,162 @@
+{&&Language=English}
+
+.variables
+
+PPPP    BN     2        ?      $>Cash Flow Statement (CAIAS)<$                                                                       \CashFlowStatementCAIAS
+PPPP M  FN   1 3               =EBITDA                                                                                               \=EBITDA                                           -> EBITDA
+PPPP M  FN     3               $>Annual Operating Lease Payments<$ $>(+)<$                                                           \=AnnualOperatingLeasePayments                     -> AnnualOperatingLeasePayments
+PPPP M -FN     3               $>Taxes<$ (excl. $>Non-present Taxes<$) $>(-)<$                                                               \TaxesExcludingNonPresentTaxes
+PPPP M  CN     3               $>Change in Provisions and Other Liabilities<$                                                        \ChangeInProvisionsAndOtherLiabilities
+
+;SaH: Je wil niet de mutatie van alle voorzieningen maar alleen van de overige voorzieningen, dit omdat we geen een op een overeenkomende balans met AAB hebben. PPPP M  FN     4               =MutationProvisions                                                                                   \=MutationProvisions
+;PPPP M  FN     4               =LongTermDebtOtherFinancing                                                                           \=LongTermDebtOtherFinancing -> LongTermDebtOtherFinancing
+
+PPPP M  FN     4               $>Mutation other provision<$                                                                          \MutationOtherProvision
+PPPP M =CN    -4=              =ChangeInProvisionsAndOtherLiabilities                                                                \=ChangeInProvisionsAndOtherLiabilities
+PPPP M =FN    =3=              $>Cash Profit<$ (C)                                                                                   \CashProfit
+PPPP M  EN    =3=              $>Change in Working Capital<$ (A)                                                                 \ChangeInWorkingCapital
+
+;SaH: Dit moet TradeReceivablesTotal zijn ipv OnBalance, zie regel hieronder. PPPP    BN     4               =TradeReceivablesOnBalance                                                                             \=TradeReceivablesTotal                       -> TradeReceivablesOnBalance
+
+PPPP    BN     4               =TradeReceivablesTotal                                                                                \=TradeReceivablesTotal                    ;   -> TradeReceivablesOnBalance
+PPPP    BN     4               =Inventories                                                                                          \=Inventories                                      -> Inventories
+PPPP   -BN     4               =TradePayables                                                                                        \=TradePayables                                    -> TradePayables
+PPPP   =BN    =4=1             $>Working Capital<$                                                                                   \WorkingCapital
+PPPP M  EN     4               =ChangeInWorkingCapital                                                                               \=ChangeInWorkingCapital -> WorkingCapital
+PPPP M  CN     3=              $>Operational Cash Flow before Investments<$                                                          \OperationalCashFlowBeforeInvestments
+PPPP M -BN     3               $>Mandatory Capital Expenditure<$ (-) (I)                                                             \=MandatoryCapitalExpenditure
+PPPP M  CN    =3=              $>Operational Cash Flow<$ (CAI)                                                                       \OperationalCashFlowCAI
+PPPP M  FN     3               $>(Required) Dividend<$ (-) (A)                                                                       \=ProfitPaidOutToClaimants
+PPPP M  FN     3               $>Gross interest expense and capitalized interest<$ (-) (S)                                                                                    \=FinancialExpenses
+PPPP M  CN     3               $>Repayment this year<$ $>(-) (T minus 1) (S) <$                                                           \STPartOfLTDebtsTMinus1 ;JB/JaB: dit gaat hard mis op maandbasis!!!
+PPPP M  FN     3               $>Annual Operating Lease Payments<$ (-) (S)                                                                   \=AnnualOperatingLeasePayments
+PPPP M  CN    =3=              $>Financing Charges<$ (AS)                                                                            \FinancingChargesAS
+PPPP M  CN    =3=              $>Operational Cash Flow after Financing Charges<$                                                     \OperationalCashFlowAfterFinancingCharges
+PPPP M  FN     3               $>Revenues / Expenses from extraordinary activities<$                                                 \RevenuesExpensesFromExtraordinaryActivities
+PPPP    FN     4               =ShareResultFromSubsidiaries                                                                          \=ShareResultFromSubsidiaries                       -> ShareResultFromSubsidiaries
+PPPP    FN     4               $>Financial result<$ ($>without interest expenses/charges<$)                                          \FinancialResultWithoutInterestExpensesCharges
+PPPP   -FN     4               =ShareResultMinorityInterest                                                                          \=ShareResultMinorityInterest
+PPPP   =FN    -4=              =RevenuesExpensesFromExtraordinaryActivities                                                          \=RevenuesExpensesFromExtraordinaryActivities
+PPPP M -CN     3               $>Change in (Intangible) Fixed Assets and Revaluation Reserve<$ (-)                                   \ChangeInIntangibleAndFixedAssetsCapExp
+
+C$>on top of<$ $>Mandatory Capital Expenditure<$  
+
+PPPP M  FN     4               $>Change in<$ $>Intangible<$ $>and<$ $>Fixed Assets<$                                                 \ChangeInIntangibleAndFixedAssets
+PPPP M -CN     4               =ChangeInRevaluationReserve                                                                           \=ChangeInRevaluationReserve
+PPPP   -BN     4               =MandatoryCapitalExpenditure                                                                          \=MandatoryCapitalExpenditure                     
+PPPP   =CN     4               =ChangeInIntangibleAndFixedAssetsCapExp                                                               \=ChangeInIntangibleAndFixedAssetsCapExp
+
+PPPP M  CN     3               $>Change in Other Current Assets and Current Liabilities<$                                            \ChangeInOtherCurrentAssetsAndCurrentLiabilities
+PPPP M -FN     4               "$>Change in<$"&" "&Inventories                                                                       \ChangeInInventoriesCF                               ->Inventories          
+PPPP M -FN     4               "$>Change in<$"&" "&Receivables                                                                       \ChangeInReceivables                                 ->Receivables
+PPPP M  FN     4               "$>Change in<$"&" "&CurrentLiabilities                                                                \ChangeInCurrentLiabilities                          ->CurrentLiabilities
+;PPPP M  FN     4               "$>Change in<$"&" "&CurrentAccountGroupCompanies                                                      \ChangeInCurrentAccountGroupCompanies                ->CurrentAccountGroupCompanies
+;PPPP M  FN     4               "$>Change in<$"&" "&CurrentAccountAffiliatedCompanies                                                 \ChangeInCurrentAccountAffiliatedCompanies           ->CurrentAccountAffiliatedCompanies
+
+
+
+
+
+PPPP M -CN     4               =ChangeInWorkingCapital                                                                               \=ChangeInWorkingCapital
+PPPP M -EN     4               =ChangeInShortTermDebt                                                                                \=ChangeInShortTermDebt                              
+PPPP M  CN     4               =STPartOfLTDebtsTMinus1                                                                               \=STPartOfLTDebtsTMinus1
+;PPPP M  FN     4               "$>Change in<$"&" "&OtherShortTermDebt                                                                \ChangeInOtherShortTermDebt
+PPPP M =CN    -4=              $>Change in Other Current Assets and Current Liabilities<$                                            \=ChangeInOtherCurrentAssetsAndCurrentLiabilities
+
+;PPPP M  FN     4               $>Change in<$ $>Other Receivables<$                                                                   \ChangeInOtherReceivables                           ->OtherReceivables
+;PPPP M  FN     4               "$>Change in<$"&" "&OtherPayables                                                                     \ChangeInOtherPayables                               ->OtherPayables                          
+;PPPP M  FN     4               $>Change in<$ $>Taxes and social security charges<$                                                   \ChangeInTaxesAndSocialSecurityCharges              ->TaxesAndSocialSecurityCharges
+;PPPP M  FN     4               $>Change in<$ $>Transitional Liabilities<$                                                            \ChangeInTransitionalLiabilities                    ->TransitionalLiabilities
+;PPPP M  FN     4               "$>Change in<$"&" "&InvestmentPayables                                                                \ChangeInInvestmentPayables                          ->InvestmentPayables                     
+;PPPP M  FN     4               "$>Change in<$"&" "&ReceivedPrePayments                                                               \ChangeInReceivedPrePayments                         ->ReceivedPrePayments                    
+;PPPP M  FN     4               "$>Change in<$"&" "&PensionExpensesPayable                                                            \ChangeInPensionExpensesPayable                      ->PensionExpensesPayable                 
+
+
+PPPP M  CN    =3=              $>Change in Cash Flow befor external Financing<$                                                       \ChangeInCashFlowForExternalFinancing
+PPPP M  FN     3               $>Change in Adjusted Group Equity<$                                                                    \ChangeInAdjustedGroupEquityExReservesIntangibleAssets
+C ($>excl. profit- and revaluation reserves & int. assets<$)                        
+PPPP M  CN     4               "$>Change in<$"&" "&AdjustedGroupEquity                                                               \ChangeInAdjustedGroupEquity
+PPPP M -CN     4               "$>Change in<$"&" "&ReservedProfit                                                                    \ChangeInReservedProfit
+PPPP M -CN     4               "$>Change in<$"&" "&RevaluationReserve                                                                \ChangeInRevaluationReserve
+PPPP M  CN     4               "$>Change in<$"&" "&IntangibleFixedAssets                                                             \ChangeInIntangibleFixedAssets
+PPPP M =FN    -4=              =ChangeInAdjustedGroupEquityExReservesIntangibleAssets                                                \=ChangeInAdjustedGroupEquityExReservesIntangibleAssets
+
+PPPP M  CN     3               $>Change in Long Term Debt Other and Non-Cash payments<$                                              \ChangeInLongTermDebtOther
+PPPP M  FN     4               =DeferredTaxes                                                                                        \ChangeDeferredTaxes
+PPPP M =CN    -4=              =ChangeInLongTermDebtOther                                                                            \=ChangeInLongTermDebtOther
+
+PPPP M  FN     3               $>Change in Long Term Debt (Interest-Bearing/Credit institutions)<$                                     \ChangeInLongTermDebt
+PPPP M  EN     3               $>Change in Other Short Term Debt (Credit institutions and Redemption Obl.)<$                         \ChangeInShortTermDebt
+PPPP M  CN     4               =STPartOfLTDebts                                                                                      \STPartOfLTDebtsAsFlow                               ->STPartOfLTDebts                                        
+PPPP M  CN     4               "$>Change in<$"&" "&OverdraftCurrentAccount                                                           \ChangeInOverdraftCurrentAccount                     ->OverdraftCurrentAccount                
+;PPPP M  FN     4               "$>Change in<$"&" "&OtherShortTermDebt                                                                \ChangeInOtherShortTermDebt                          ->OtherShortTermDebt                     
+PPPP M  CN     4               "$>Change in<$"&" "&InterestAndRepaymentsPayable                                                      \ChangeInInterestAndRepaymentsPayable                ->InterestAndRepaymentsPayable           
+PPPP M =EN    -4=              =ChangeInShortTermDebt                                                                                \=ChangeInShortTermDebt                                                
+PPPP M  FN     3               $>Explained mutation retained earnings<$                                                              \OtherMutationsNetWorthCAIAS ;SaH
+PPPP M  FN    =3=              $>CHANGES KAS / BANK / GIRO AND CURRENT SECURITIES<$                                                  \ChangeInCashAndEquivalentsCAIAS ;SaH
+PIIIIM  BA M   3               $>Explanation<$                                                                                       \ExplanationCaias
+
+.formulas NoTrend, Trend
+
+MutationOtherProvision                                   =Mut(OtherProvisions)
+ChangeDeferredTaxes                                      =Mut(DeferredTaxes)
+
+
+TaxesExcludingNonPresentTaxes                            =TaxOnProfits - NonPresentTaxes
+;ChangeInWorkingCapital                                   =(Mut(WorkingCapital)*-1)
+
+ChangeInWorkingCapital                                   =WorkingCapital[GetT(T, -1, 1, 1),1]-WorkingCapital[T, 1]
+
+
+OperationalCashFlowBeforeInvestments                     =OnNA(CashProfit+ChangeInWorkingCapital,NA)
+OperationalCashFlowCAI                                   =OnNA(OperationalCashFlowBeforeInvestments-MandatoryCapitalExpenditure,NA)
+FinancingChargesAS                                       =OnNa(ProfitPaidOutToClaimants+FinancialExpenses+STPartOfLTDebtsTMinus1+AnnualOperatingLeasePayments,NA)
+OperationalCashFlowAfterFinancingCharges                 =OnNA(OperationalCashFlowCAI-FinancingChargesAS,NA)  
+FinancialResultWithoutInterestExpensesCharges            =OnNA(FinancialIncome+ExtraordinaryIncomeAndExpenses,NA) ;OnNA((FinancialResult-OtherInterestIncome)+(FinancialExpenses-TransferOfPaymentExpenses),NA)
+ChangeInIntangibleAndFixedAssets                         =(Mut(IntangibleFixedAssets)) + (Mut(MaterialFixedAssets)) + (Mut(FinancialFixedAssets)) +  DepreciationOfAssets
+
+;(((IntangibleFixedAssets[T-1])+(MaterialFixedAssets[T-1])+(FinancialFixedAssets[T-1]))-((IntangibleFixedAssets+MaterialFixedAssets+FinancialFixedAssets)+DepreciationOfAssets))
+;ChangeInTransitionalLiabilities                          =Mut(TransitionalLiabilities)
+;ChangeInTaxesAndSocialSecurityCharges                    =Mut(TaxesAndSocialSecurityCharges)
+;ChangeInOtherReceivables                                 =Mut(OtherReceivables)*-1
+
+ChangeInRevaluationReserve                               =Mut(RevaluationReserve )
+ChangeInIntangibleFixedAssets                            =Mut(IntangibleFixedAssets)
+
+;ChangeInIntangibleAndFixedAssetsCapExp                   = ChangeInIntangibleAndFixedAssets-ChangeInRevaluationReserve-MandatoryCapitalExpenditure
+ChangeInCashFlowForExternalFinancing                     =(OperationalCashFlowAfterFinancingCharges+RevenuesExpensesFromExtraordinaryActivities-ChangeInIntangibleAndFixedAssetsCapExp+ChangeInOtherCurrentAssetsAndCurrentLiabilities)
+
+;ChangeInAdjustedGroupEquityExReservesIntangibleAssets    =Mut(AdjustedGroupEquity)-(Mut(ReservedProfit)+Mut(RevaluationReserve)+Mut(IntangibleFixedAssets))
+ChangeInLongTermDebtOther                                =Mut(LongTermDebtsOther)+Mut(LongTermDebtsAnnuity)-NonPresentTaxes+Mut(DeferredTaxes)
+ChangeInLongTermDebt                                     =Mut(LongTermDebtsOther)+Mut(LongTermDebts)
+;ChangeInSTPartOfLTDebts                                  =Mut(STPartOfLTDebts                  )          
+ChangeInOverdraftCurrentAccount                          =Mut(OverdraftCurrentAccount          )
+;verhuizen?
+;ChangeInOtherShortTermDebt                               =Mut(OtherShortTermDebt               )
+;ChangeInOtherPayables                                    =Mut(OtherPayables                    )
+;ChangeInInvestmentPayables                               =Mut(InvestmentPayables               )
+;verhuizen?? 
+;ChangeInCurrentAccountGroupCompanies                     =Mut(CurrentAccountGroupCompanies     )
+;verhuizen?? 
+;ChangeInCurrentAccountAffiliatedCompanies                =Mut(CurrentAccountAffiliatedCompanies)
+;ChangeInReceivedPrePayments                              =Mut(ReceivedPrePayments              )
+;ChangeInPensionExpensesPayable                           =Mut(PensionExpensesPayable           )
+;verhuizen??
+ChangeInInterestAndRepaymentsPayable                     =Mut(InterestAndRepaymentsPayable     )
+
+ChangeInAdjustedGroupEquity                              =Mut(AdjustedGroupEquity)
+ChangeInReservedProfit                                   =Mut(ReservedProfit     )
+
+
+STPartOfLTDebtsTMinus1                                   =STPartOfLTDebts[T-1]
+STPartOfLTDebtsAsFlow                                    =STPartOfLTDebts
+
+ChangeInInventoriesCF                                    =Mut(Inventories)
+ChangeInReceivables                                      =(Mut(Receivables))-(Mut(ReceivablesAffiliatedCompanies))
+ChangeInCurrentLiabilities                               =Mut(CurrentLiabilities)
+
+;SaH
+OtherMutationsNetWorthCAIAS                              =(ChangeInCashAndEquivalentsCAIAS) - (ChangeInCashFlowForExternalFinancing+ChangeInAdjustedGroupEquityExReservesIntangibleAssets+ChangeInLongTermDebtOther+ChangeInLongTermDebt+ChangeInShortTermDebt)    ;Mut(OtherReserve) + OtherMutationsNetWorth
+ChangeInCashAndEquivalentsCAIAS                          =Mut(ExcessCash)
+
+.Variables

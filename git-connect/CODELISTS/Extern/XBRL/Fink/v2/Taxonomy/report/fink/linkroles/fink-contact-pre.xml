@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <link:roleRef roleURI="urn:fink:linkrole:contact" xlink:href="fink-linkroles.xsd#fink-lr_Contact" xlink:type="simple"/>
+  <link:presentationLink xlink:role="urn:fink:linkrole:contact" xlink:type="extended">
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data.xsd#kvk-i_ContactType" xlink:label="kvk-i_ContactType_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/domein/kvk/tuples/kvk-tuples.xsd#kvk-t_ContactForDocumentPresentation" xlink:label="kvk-t_ContactForDocumentPresentation_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data.xsd#nl-cd_EmailAddressFull" xlink:label="nl-cd_EmailAddressFull_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data.xsd#nl-cd_FamilyName" xlink:label="nl-cd_FamilyName_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data.xsd#nl-cd_FirstName" xlink:label="nl-cd_FirstName_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data.xsd#nl-cd_TelephoneNumber" xlink:label="nl-cd_TelephoneNumber_loc" xlink:type="locator"/>
+    <link:loc xlink:href="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data.xsd#venj-bw2-i_OrganisationName" xlink:label="venj-bw2-i_OrganisationName_loc" xlink:type="locator"/>
+    <link:presentationArc order="1" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="kvk-i_ContactType_loc" xlink:type="arc"/>
+    <link:presentationArc order="2" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="nl-cd_FirstName_loc" xlink:type="arc"/>
+    <link:presentationArc order="3" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="nl-cd_FamilyName_loc" xlink:type="arc"/>
+    <link:presentationArc order="4" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="venj-bw2-i_OrganisationName_loc" xlink:type="arc"/>
+    <link:presentationArc order="5" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="nl-cd_TelephoneNumber_loc" xlink:type="arc"/>
+    <link:presentationArc order="6" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="kvk-t_ContactForDocumentPresentation_loc" xlink:to="nl-cd_EmailAddressFull_loc" xlink:type="arc"/>
+  </link:presentationLink>
+</link:linkbase>

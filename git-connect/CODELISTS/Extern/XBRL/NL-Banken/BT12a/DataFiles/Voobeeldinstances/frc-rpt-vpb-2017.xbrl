@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrli:xbrl xml:lang="nl" xmlns:frc-i="https://www.sbrbanken.nl/bt12/frc/20171009.a/dictionary/frc-data" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:bd-i="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-data" xmlns:bd-t="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-tuples" xmlns:bd-dim-mem="http://www.nltaxonomie.nl/nt12/bd/20171213.b/dictionary/bd-domain-members" xmlns:bd-dim-dim="http://www.nltaxonomie.nl/nt12/bd/20171213.b/validation/bd-axes" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:frc-dm="https://www.sbrbanken.nl/bt12/frc/20171009.a/dictionary/frc-domains" xmlns:frc-dim="https://www.sbrbanken.nl/bt12/frc/20171009.a/dictionary/frc-axes" xmlns:nl-cd="http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data" xmlns:kvk-i="http://www.nltaxonomie.nl/nt12/kvk/20171004.b/dictionary/kvk-data" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/nt12/venj/20171004.b/dictionary/venj-bw2-data" xmlns:xlink="http://www.w3.org/1999/xlink">
+	
+	<link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/bt12/frc/20171009.a/entrypoints/frc-rpt-vpb-2017.xsd"/>
+	
+	<xbrli:context id="ContextDurationDeclarant">
+		<xbrli:entity>
+			<xbrli:identifier scheme="www.belastingdienst.nl/identificatie">800003512</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="context0">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+	</xbrli:context>
+	
+	<xbrli:context id="context01">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressNLSpecificationAxis">
+				<frc-dm:DescriptionLocationNLTypedMember>Tent2</frc-dm:DescriptionLocationNLTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="context431">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547471</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2017-01-01</xbrli:startDate>
+			<xbrli:endDate>2017-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="frc-dim:ContactForDocumentPresentationAxis">frc-dm:ContactForDocumentPresentationMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="ContextInstantEndDeclarant">
+		<xbrli:entity>
+			<xbrli:identifier scheme="www.belastingdienst.nl/identificatie">800003512</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2017-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="bd-dim-dim:TimeDimension">bd-dim-mem:End</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="bd-dim-dim:PartyDimension">bd-dim-mem:Declarant</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:unit id="EUR">
+		<xbrli:measure>iso4217:EUR</xbrli:measure>
+	</xbrli:unit>
+	<xbrli:unit id="PURE">
+		<xbrli:measure>xbrli:pure</xbrli:measure>
+	</xbrli:unit>
+	
+	<venj-bw2-i:FinancialReportingPeriodCurrentStartDate contextRef="context0">2017-01-01</venj-bw2-i:FinancialReportingPeriodCurrentStartDate>
+	<venj-bw2-i:FinancialReportingPeriodCurrentEndDate contextRef="context0">2017-12-31</venj-bw2-i:FinancialReportingPeriodCurrentEndDate>
+	
+	<venj-bw2-i:FinancialReportingPeriodPreviousStartDate contextRef="context0">2016-01-01</venj-bw2-i:FinancialReportingPeriodPreviousStartDate>
+	<venj-bw2-i:FinancialReportingPeriodPreviousEndDate contextRef="context0">2016-12-31</venj-bw2-i:FinancialReportingPeriodPreviousEndDate>
+	
+	<frc-i:AuditReportType contextRef="context0">Geen verklaring</frc-i:AuditReportType>
+	
+	<nl-cd:PostalCodeNL contextRef="context01">2345AB</nl-cd:PostalCodeNL>
+	<nl-cd:PlaceOfResidenceNL contextRef="context01">Lutjebroek</nl-cd:PlaceOfResidenceNL>
+	
+	<bd-i:SoftwarePackageName contextRef="ContextDurationDeclarant">SoftwarePackage</bd-i:SoftwarePackageName>
+	<bd-i:SoftwarePackageVersion contextRef="ContextDurationDeclarant">V009</bd-i:SoftwarePackageVersion>
+	<bd-i:SoftwareSupplierCode contextRef="ContextDurationDeclarant">LEVC</bd-i:SoftwareSupplierCode>
+	<bd-i:SoftwareVendorAccountNumber contextRef="ContextDurationDeclarant">12345686</bd-i:SoftwareVendorAccountNumber>
+	<bd-i:TaxReturnMessageType contextRef="ContextDurationDeclarant">81</bd-i:TaxReturnMessageType>
+	<bd-i:AccommodationCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">185719</bd-i:AccommodationCostsFiscal>
+	<bd-i:AccountsPayableSuppliersTradeCreditors decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">398069</bd-i:AccountsPayableSuppliersTradeCreditors>
+	<bd-i:AssetsAndOrLiabilitiesValuationSystemChangeCorporationTaxExists contextRef="ContextDurationDeclarant">false</bd-i:AssetsAndOrLiabilitiesValuationSystemChangeCorporationTaxExists>
+	<bd-i:AssetsTotalAmountFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">5105812</bd-i:AssetsTotalAmountFiscal>
+	<bd-i:BalanceProfitCalculationForTaxPurposesFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">326461</bd-i:BalanceProfitCalculationForTaxPurposesFiscal>
+	<bd-i:BalanceProfitComparisonMethod decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">326461</bd-i:BalanceProfitComparisonMethod>
+	<bd-i:BusinessActivitiesChangeExists contextRef="ContextDurationDeclarant">false</bd-i:BusinessActivitiesChangeExists>
+	<bd-i:BusinessActivitiesDescription contextRef="ContextDurationDeclarant">verkoop van industriele batterijen en laders</bd-i:BusinessActivitiesDescription>
+	<bd-i:BusinessAssetsRandomDepreciationNetherlandsCorporationtaxExists contextRef="ContextDurationDeclarant">false</bd-i:BusinessAssetsRandomDepreciationNetherlandsCorporationtaxExists>
+	<bd-i:BusinessCapitalTotalEndFinancialYearForComparisonMethod decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">3140602</bd-i:BusinessCapitalTotalEndFinancialYearForComparisonMethod>
+	<bd-i:BusinessCapitalTotalStartFinancialYearForComparisonMethod decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">2907415</bd-i:BusinessCapitalTotalStartFinancialYearForComparisonMethod>
+	<bd-i:BusinessExpenditureFiscalTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">12601172</bd-i:BusinessExpenditureFiscalTotal>
+	<bd-i:BusinessName contextRef="ContextDurationDeclarant">test 1 (aftrek elders belast)</bd-i:BusinessName>
+	<bd-i:BusinessRevenuesFiscalTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">13126365</bd-i:BusinessRevenuesFiscalTotal>
+	<bd-i:CapitalComparisonDifferenceOfCapitalTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">233187</bd-i:CapitalComparisonDifferenceOfCapitalTotal>
+	<bd-i:CarAndTransportCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">213262</bd-i:CarAndTransportCostsFiscal>
+	<bd-i:CorporationTaxNonDeductibleAmountsTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">93274</bd-i:CorporationTaxNonDeductibleAmountsTotal>
+	<bd-i:CorporationTaxTaxableAmount decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">314239</bd-i:CorporationTaxTaxableAmount>
+	<bd-i:CorporationTaxWithdrawnFromEquityCapital decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">28182</bd-i:CorporationTaxWithdrawnFromEquityCapital>
+	<bd-i:CostOtherFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">305422</bd-i:CostOtherFiscal>
+	<bd-i:CounterEvidenceSchemeLimitationInterestDeductionApplicationExists contextRef="ContextDurationDeclarant">false</bd-i:CounterEvidenceSchemeLimitationInterestDeductionApplicationExists>
+	<bd-i:DeductableLossCurrencyParticipationAndParticipatingInterestExemption contextRef="ContextDurationDeclarant">false</bd-i:DeductableLossCurrencyParticipationAndParticipatingInterestExemption>
+	<bd-i:DisposalSharesParticipatingInterestAtShareMergerOrSplitOffOrMergerExists contextRef="ContextDurationDeclarant">false</bd-i:DisposalSharesParticipatingInterestAtShareMergerOrSplitOffOrMergerExists>
+	<bd-i:DivisionShareCapitalChanged contextRef="ContextDurationDeclarant">false</bd-i:DivisionShareCapitalChanged>
+	<bd-i:EarnOutSchemeExists contextRef="ContextDurationDeclarant">false</bd-i:EarnOutSchemeExists>
+	<bd-i:EquityCapitalBusinessAssetsTotalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">3140602</bd-i:EquityCapitalBusinessAssetsTotalFiscal>
+	<bd-i:ExtraordinaryBusinessResultsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">-198732</bd-i:ExtraordinaryBusinessResultsFiscal>
+	<bd-i:ExtraordinaryExpenditureBusinessOtherFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">230144</bd-i:ExtraordinaryExpenditureBusinessOtherFiscal>
+	<bd-i:ExtraordinaryIncomeBusinessOtherFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">31412</bd-i:ExtraordinaryIncomeBusinessOtherFiscal>
+	<bd-i:FinalAssetsAndCapitalWithdrawalsTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">3140602</bd-i:FinalAssetsAndCapitalWithdrawalsTotal>
+	<bd-i:FixedAssetsOtherFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">12599</bd-i:FixedAssetsOtherFiscal>
+	<bd-i:FixedAssetsOtherPurchaseCostsFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">123232</bd-i:FixedAssetsOtherPurchaseCostsFiscal>
+	<bd-i:FixedAssetsOtherResidualValueFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">12599</bd-i:FixedAssetsOtherResidualValueFiscal>
+	<bd-i:ForeignBusinessProfitSettledCalculated decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">20000</bd-i:ForeignBusinessProfitSettledCalculated>
+	<bd-i:ForeignTaxAmountThisFinancialYearAppliedDoubleTaxAvoidance decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">65092</bd-i:ForeignTaxAmountThisFinancialYearAppliedDoubleTaxAvoidance>
+	<bd-i:FunctionalCurrencySchemeExists contextRef="ContextDurationDeclarant">false</bd-i:FunctionalCurrencySchemeExists>
+	<bd-i:HoldingOrFinancialOrLicenceActivitiesExists contextRef="ContextDurationDeclarant">false</bd-i:HoldingOrFinancialOrLicenceActivitiesExists>
+	<bd-i:InitialCapitalAndCapitalContributionsTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">2907415</bd-i:InitialCapitalAndCapitalContributionsTotal>
+	<bd-i:InnovationBoxUsed contextRef="ContextDurationDeclarant">false</bd-i:InnovationBoxUsed>
+	<bd-i:IntangibleFixedAssetsOtherDepreciation decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">9432</bd-i:IntangibleFixedAssetsOtherDepreciation>
+	<bd-i:InvestmentInstitutionsDecreeApplicationExists contextRef="ContextDurationDeclarant">false</bd-i:InvestmentInstitutionsDecreeApplicationExists>
+	<bd-i:LegalActionForeignShareholderOrLegalPersonExists contextRef="ContextDurationDeclarant">false</bd-i:LegalActionForeignShareholderOrLegalPersonExists>
+	<bd-i:LegalPersonName contextRef="ContextDurationDeclarant">test 1 (aftrek elders belast)</bd-i:LegalPersonName>
+	<bd-i:LiabilitiesTotalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">5105812</bd-i:LiabilitiesTotalFiscal>
+	<bd-i:LiquidAssetsTotalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">595388</bd-i:LiquidAssetsTotalFiscal>
+	<bd-i:LossEngrossmentLowTaxationForeignInvestmentCompany decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">-2222</bd-i:LossEngrossmentLowTaxationForeignInvestmentCompany>
+	<bd-i:MachineryDepreciationFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">17463</bd-i:MachineryDepreciationFiscal>
+	<bd-i:MachineryPurchaseCostsFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">262574</bd-i:MachineryPurchaseCostsFiscal>
+	<bd-i:MachineryResidualValueFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">52347</bd-i:MachineryResidualValueFiscal>
+	<bd-i:MachinesAndInstallationsFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">52347</bd-i:MachinesAndInstallationsFiscal>
+	<bd-i:MaintenanceOtherTangibleFixedAssetsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">8830</bd-i:MaintenanceOtherTangibleFixedAssetsFiscal>
+	<bd-i:NormalBusinessActivitiesBusinessResultTotalFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">525193</bd-i:NormalBusinessActivitiesBusinessResultTotalFiscal>
+	<bd-i:ObjectExemptionForeignBusinessProfit decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">10000</bd-i:ObjectExemptionForeignBusinessProfit>
+	<bd-i:OutsourcedWorkCostsAndOtherExternalCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">1023816</bd-i:OutsourcedWorkCostsAndOtherExternalCostsFiscal>
+	<bd-i:PaidCalledUpCapitalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">227000</bd-i:PaidCalledUpCapitalFiscal>
+	<bd-i:PensionClaimReducedExists contextRef="ContextDurationDeclarant">false</bd-i:PensionClaimReducedExists>
+	<bd-i:PensionCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">105024</bd-i:PensionCostsFiscal>
+	<bd-i:PensionSchemeNewOrChangedExists contextRef="ContextDurationDeclarant">false</bd-i:PensionSchemeNewOrChangedExists>
+	<bd-i:PersonnelCostsOtherFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">7680</bd-i:PersonnelCostsOtherFiscal>
+	<bd-i:ProfitDeterminationAndReserveInsurersDecreeApplicationExists contextRef="ContextDurationDeclarant">false</bd-i:ProfitDeterminationAndReserveInsurersDecreeApplicationExists>
+	<bd-i:QualificationTaxableProfitExists contextRef="ContextDurationDeclarant">false</bd-i:QualificationTaxableProfitExists>
+	<bd-i:RawAncillaryMaterialsPurchasePriceSalesFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">9380222</bd-i:RawAncillaryMaterialsPurchasePriceSalesFiscal>
+	<bd-i:ReceivablesOtherFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1603213</bd-i:ReceivablesOtherFiscal>
+	<bd-i:ReceivablesTotalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">3289849</bd-i:ReceivablesTotalFiscal>
+	<bd-i:RetainedProfitsFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1761878</bd-i:RetainedProfitsFiscal>
+	<bd-i:RevenuesOtherFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">29988</bd-i:RevenuesOtherFiscal>
+	<bd-i:SalesCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">243591</bd-i:SalesCostsFiscal>
+	<bd-i:SharePremiumFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1151724</bd-i:SharePremiumFiscal>
+	<bd-i:ShortTermDebtsOther decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">655478</bd-i:ShortTermDebtsOther>
+	<bd-i:ShortTermDebtsParticipatingInterestCompanies decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">911663</bd-i:ShortTermDebtsParticipatingInterestCompanies>
+	<bd-i:ShortTermDebtsTotal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1965210</bd-i:ShortTermDebtsTotal>
+	<bd-i:ShortTermReceivablesParticipatingInterestCompaniesFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">65054</bd-i:ShortTermReceivablesParticipatingInterestCompaniesFiscal>
+	<bd-i:ShortTermReceivablesParticipatingInterestCompaniesNominal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">65054</bd-i:ShortTermReceivablesParticipatingInterestCompaniesNominal>
+	<bd-i:SocialSecurityCostsFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">156340</bd-i:SocialSecurityCostsFiscal>
+	<bd-i:StockAndWorkInProgressChangeFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">-47745</bd-i:StockAndWorkInProgressChangeFiscal>
+	<bd-i:StockExcludingWorkInProgress decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1155629</bd-i:StockExcludingWorkInProgress>
+	<bd-i:StockTotalFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1155629</bd-i:StockTotalFiscal>
+	<bd-i:TangibleFixedAssetsFiscalTotal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">64946</bd-i:TangibleFixedAssetsFiscalTotal>
+	<bd-i:TangibleFixedAssetsOtherDepreciation decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">6589</bd-i:TangibleFixedAssetsOtherDepreciation>
+	<bd-i:TaxableProfit decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">314239</bd-i:TaxableProfit>
+	<bd-i:TaxAccordingToOrdinaryRate decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">68558</bd-i:TaxAccordingToOrdinaryRate>
+	<bd-i:TaxAmountBalance decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">13892</bd-i:TaxAmountBalance>
+	<bd-i:TaxAmountElsewhereTaxedBalance decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">68558</bd-i:TaxAmountElsewhereTaxedBalance>
+	<bd-i:TaxationElsewhereDeduction decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">34666</bd-i:TaxationElsewhereDeduction>
+	<bd-i:TaxationElsewhereProportionalityMethodAbroadDescription contextRef="ContextDurationDeclarant">Belgie vaste inrichting</bd-i:TaxationElsewhereProportionalityMethodAbroadDescription>
+	<bd-i:TaxationElsewhereProportionalityMethodAbroadTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">34666</bd-i:TaxationElsewhereProportionalityMethodAbroadTotal>
+	<bd-i:TaxationElsewhereTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">34666</bd-i:TaxationElsewhereTotal>
+	<bd-i:TaxForeignBusinessProfitSettled decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">20000</bd-i:TaxForeignBusinessProfitSettled>
+	<bd-i:TaxReductionsTotal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">54666</bd-i:TaxReductionsTotal>
+	<bd-i:TaxReturnConcernsTaxEntity contextRef="ContextDurationDeclarant">false</bd-i:TaxReturnConcernsTaxEntity>
+	<bd-i:TradeAccountsReceivableFiscal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1621582</bd-i:TradeAccountsReceivableFiscal>
+	<bd-i:TradeReceivablesNominal decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">1621582</bd-i:TradeReceivablesNominal>
+	<bd-i:TrustCapitalCreationOrTrustCapitalShareholderExists contextRef="ContextDurationDeclarant">false</bd-i:TrustCapitalCreationOrTrustCapitalShareholderExists>
+	<bd-i:TurnoverNetFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">13144122</bd-i:TurnoverNetFiscal>
+	<bd-i:WagesSalariesFiscal decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">937782</bd-i:WagesSalariesFiscal>
+	<bd-t:ObjectExemptionForeignBusinessProfitsSpecification>
+		<bd-i:CountryForeignCompany contextRef="ContextDurationDeclarant">BEL</bd-i:CountryForeignCompany>
+		<bd-i:ForeignBusinessProfitBalanceCumulative decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">10000</bd-i:ForeignBusinessProfitBalanceCumulative>
+		<bd-i:ForeignBusinessProfitEuroFunctionalCurrency decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">10000</bd-i:ForeignBusinessProfitEuroFunctionalCurrency>
+		<bd-i:ObjectExemptionForeignBusinessProfitPerCountry decimals="INF" contextRef="ContextDurationDeclarant" unitRef="EUR">10000</bd-i:ObjectExemptionForeignBusinessProfitPerCountry>
+	</bd-t:ObjectExemptionForeignBusinessProfitsSpecification>
+	<bd-t:ShareholderSpecification>
+	      <bd-t:AddressPresentation>
+          <bd-i:HouseNumberNL decimals="INF" contextRef="ContextDurationDeclarant" unitRef="PURE">7</bd-i:HouseNumberNL>
+        <bd-i:PlaceOfResidenceNL contextRef="ContextDurationDeclarant">Ede</bd-i:PlaceOfResidenceNL>
+        <bd-i:PostalCodeNL contextRef="ContextDurationDeclarant">5678SD</bd-i:PostalCodeNL>
+        <bd-i:StreetNameNL contextRef="ContextDurationDeclarant">laan</bd-i:StreetNameNL>
+      </bd-t:AddressPresentation>
+		<bd-i:ShareholderIssuedCapitalPercentage decimals="INF" contextRef="ContextDurationDeclarant" unitRef="PURE">100.00</bd-i:ShareholderIssuedCapitalPercentage>
+		<bd-i:ShareholderName contextRef="ContextDurationDeclarant">Aandeelhouder 1</bd-i:ShareholderName>
+		<bd-i:ShareholderOrdinarySharesNominalValue decimals="INF" contextRef="ContextInstantEndDeclarant" unitRef="EUR">227000</bd-i:ShareholderOrdinarySharesNominalValue>
+	</bd-t:ShareholderSpecification>
+	<bd-t:TransitionalArrangementsExemptedDueToForeignProfitsSpecification>
+		<bd-i:TransitionalArrangementsExemptedDueToForeignProfitsCountryCode contextRef="ContextDurationDeclarant">BEL</bd-i:TransitionalArrangementsExemptedDueToForeignProfitsCountryCode>
+	</bd-t:TransitionalArrangementsExemptedDueToForeignProfitsSpecification>
+	<kvk-i:EmailAddressContact contextRef="context431">s@sadvies.nl</kvk-i:EmailAddressContact>
+</xbrli:xbrl>

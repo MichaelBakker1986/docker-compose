@@ -1,0 +1,898 @@
+// model "Credit proposal"
+// created by FINAN 3.2.56.36 (user Tom Bleeker) on 03-10-2017 15:12
+
+import FinanMath.*;
+import BaseModel.*;
+
+model TDSCCREDITPROPOSALCA uses BaseModel
+{
+  version: "1.0.9";
+  ffl_version: "1.0";
+  root
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER_ROLES
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER_ROLES";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER";
+        visible: 1;
+        options_title: locked;
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If(((Q_Map01[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "Remarks by Credit Analyst";
+      hint: "Please fill in all questions";
+      locked: 1;
+      visible: 1;
+      choices: "0:Incomplete filled.|1:Complete filled.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Remarks by Credit Analyst";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Incomplete filled.|1:Complete filled.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01Sub4
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Credit Analyst";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable AccountableCreditAnalystC
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Accountable Credit Analyst";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub5
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Business Description";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BusinessDescriptionC
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion Business Description";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub6
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Facility";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ConclusionFacilityC
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion Facility";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub7
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Financial Analysis";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ConclusionFinancialC
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion Financial Analysis";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub8
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Risk Analysis";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ConclusionRiskC
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion Risk Analysis & Mitigation";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub9
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Collaterals & Conditions";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ConclusionCollateralsC
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion Collaterals & Conditions";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub10
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Overall Conclusion";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Conclusion
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Conclusion";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable ProposalApproved
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Would you approve this proposal?";
+            visible: 1;
+            choices: "0:Yes|1:No";
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+            displaytype: currency;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+            displaytype: currency;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Results";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESULTSub1 refers to Q_RESULT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Results";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Active|1:Final";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Final:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Created:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_MODIFIED_ON
+      {
+        datatype: number;
+        frequency: document;
+        formula: Now;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Last modified";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "1.0.9";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversion:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "TDSCCREDITPROPOSALCA";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "NA";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parameters version:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Previous";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Next";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Draft report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitive report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Make it final";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+    }
+    variable Hulpvariabelen
+    {
+      datatype: none;
+      frequency: none;
+      title: "Overige berekeningen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked, invisible;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scKnockoutsCombi[1])>0,&"\r\nThere are knock-out criteria:"&scKnockoutsCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockout(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scKnockoutsCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockouts text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scRestrictiesCombi[1])>0,&"\r\n\r\nThe listed variables are not filled correct:"&scRestrictiesCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scRestrictiesCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

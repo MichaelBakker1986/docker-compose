@@ -2,7 +2,7 @@ var assert = require('assert')
 var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
 var fs = require('fs')
-require('../../ff-math/ff-math')
+require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>Orbis</CodeList>
+    <CodeListVersion>1.1</CodeListVersion>
+    <Description>BvD Orbis</Description>
+    <CodeTrimmingWhenSource>FALSE</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>TRUE</MultiLevelDataWhenSource>
+    <DCSignedValues>FALSE</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>Excel master model</Creator>
+    <CreatorVersion>2.0</CreatorVersion>
+    <BuildDate>2017-06-13</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes>update juni 2017</Notes>
+  </Head>
+  <Accounts>
+    <Account><Code>TOAS</Code><Description>Total assets </Description><Sort>1</Sort><Level>1</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>0</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>FIAS</Code><Description>Fixed assets </Description><Sort>2</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>IFAS</Code><Description>Intangible fixed assets </Description><Sort>3</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>TFAS</Code><Description>Tangible fixed assets </Description><Sort>4</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>OFAS</Code><Description>Other fixed assets </Description><Sort>5</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CUAS</Code><Description>Current assets </Description><Sort>6</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>STOK</Code><Description>Stock </Description><Sort>7</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>DEBT</Code><Description>Debtors </Description><Sort>8</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>OCAS</Code><Description>Other current assets </Description><Sort>10</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CASH</Code><Description>Cash &amp; cash equivalent </Description><Sort>9</Sort><Level>4</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>TSHF</Code><Description>Total shareh. funds &amp; liab. </Description><Sort>11</Sort><Level>1</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>0</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>SHFD</Code><Description>Shareholders funds </Description><Sort>12</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CAPI</Code><Description>Capital </Description><Sort>13</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>OSFD</Code><Description>Other shareholders funds </Description><Sort>14</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>NCLI</Code><Description>Non-current liabilities </Description><Sort>15</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>LTDB</Code><Description>Long term debt </Description><Sort>17</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>ONCL</Code><Description>Other non-current liabilities </Description><Sort>18</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>PROV</Code><Description>Provisions </Description><Sort>16</Sort><Level>4</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CULI</Code><Description>Current liabilities </Description><Sort>19</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>LOAN</Code><Description>Loans </Description><Sort>20</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CRED</Code><Description>Creditors </Description><Sort>21</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>OCLI</Code><Description>Other current liabilities </Description><Sort>22</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>PL</Code><Description>P/L for period [=Net income] </Description><Sort>23</Sort><Level>1</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator>=</SumOperator></Account>
+    <Account><Code>OPRE</Code><Description>Operating revenue (Turnover) </Description><Sort>24</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>TURN</Code><Description>Sales </Description><Sort>25</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>COST</Code><Description>Costs of goods sold </Description><Sort>26</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>GROS</Code><Description>Gross profit </Description><Sort>27</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator>=</SumOperator></Account>
+    <Account><Code>OOPE</Code><Description>Other operating expenses </Description><Sort>28</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>OPPL</Code><Description>Operating P/L [=EBIT] </Description><Sort>29</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator>=</SumOperator></Account>
+    <Account><Code>FIPL</Code><Description>Financial P/L </Description><Sort>30</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>FIRE</Code><Description>Financial revenue </Description><Sort>31</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>FIEX</Code><Description>Financial expenses </Description><Sort>32</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>PLBT</Code><Description>P/L before tax </Description><Sort>33</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator>=</SumOperator></Account>
+    <Account><Code>TAXA</Code><Description>Taxation </Description><Sort>34</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>PLAT</Code><Description>P/L after tax </Description><Sort>35</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator>=</SumOperator></Account>
+    <Account><Code>EXTR</Code><Description>Extr. and other P/L </Description><Sort>36</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>EXRE</Code><Description>Extr. and other revenue </Description><Sort>37</Sort><Level>3</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>EXEX</Code><Description>Extr. and other expenses </Description><Sort>38</Sort><Level>3</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>Other</Code><Description>Other figures</Description><Sort>39</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>0</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>WKCA</Code><Description>Working capital </Description><Sort>40</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>NCAS</Code><Description>Net current assets </Description><Sort>41</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>ENVA</Code><Description>Enterprise value </Description><Sort>42</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>EMPL</Code><Description>Number of employees </Description><Sort>43</Sort><Level>2</Level><DC></DC><DataType>Number</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>EXPT</Code><Description>Export revenue </Description><Sort>44</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>MATE</Code><Description>Material costs </Description><Sort>45</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>STAF</Code><Description>Costs of employees </Description><Sort>46</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>DEPR</Code><Description>Depreciation &amp; Amortization </Description><Sort>47</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>INTE</Code><Description>Interest paid </Description><Sort>48</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>RD</Code><Description>Research &amp; Development expenses </Description><Sort>49</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CF</Code><Description>Cash flow </Description><Sort>50</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>AV</Code><Description>Added value </Description><Sort>51</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>EBTA</Code><Description>EBITDA </Description><Sort>52</Sort><Level>2</Level><DC>C</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>SOLR</Code><Description>shareholder funds/total assets</Description><Sort>53</Sort><Level>2</Level><DC>D</DC><DataType>Monetary</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+    <Account><Code>CF0001</Code><Description>CF0001</Description><Sort>54</Sort><Level>2</Level><DC></DC><DataType>Number</DataType><IsInCalcTree>1</IsInCalcTree><MappingSource>1</MappingSource><SumOperator></SumOperator></Account>
+  </Accounts>
+</FmtMappingModel>

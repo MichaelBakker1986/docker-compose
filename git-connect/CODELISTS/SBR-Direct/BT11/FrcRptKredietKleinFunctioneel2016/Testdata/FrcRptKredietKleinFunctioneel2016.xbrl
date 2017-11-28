@@ -1,0 +1,1880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrli:xbrl xmlns:frc-i="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:venj-bw2-dm="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains" xmlns:kvk-t="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples" xmlns:kvk-i="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data" xmlns:venj-bw2-dim="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:rj-i="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:nl-cd="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data" xmlns:frc-dim="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" xmlns:frc-dm="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data" xmlns:rj-dm="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-domains" xmlns:ez-ncgc-i="http://www.nltaxonomie.nl/nt11/ez/20161214/dictionary/ez-ncgc-data" xmlns:rj-dim="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-axes" xml:lang="nl">
+
+	<link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/bt11/frc/20161209/entrypoints/frc-rpt-krediet-klein-functioneel-2016.xsd"/>
+	<xbrli:context id="context0">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+	</xbrli:context>
+	<xbrli:context id="context30">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressNLSpecificationAxis">
+				<frc-dm:DescriptionLocationNLTypedMember>001</frc-dm:DescriptionLocationNLTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context35">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LocationActualActivitiesDescriptionAddressAbroadSpecificationAxis">
+				<frc-dm:DescriptionLocationAbroadTypedMember>002</frc-dm:DescriptionLocationAbroadTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context40">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BankAccountSpecificationAxis">
+				<frc-dm:BankAccountSpecificationTypedMember>NL12ABCD8754747690</frc-dm:BankAccountSpecificationTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context41">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context42">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context47">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context48">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2015-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context230">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ParticipatingInterestsSpecificationAxis">
+				<venj-bw2-dm:LegalEntityTypedMember>Bloem</venj-bw2-dm:LegalEntityTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="context231">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="rj-dim:ChangeAccountingPoliciesAxis">
+				<rj-dm:ChangeAccountingPoliciesTypedMember>DT2</rj-dm:ChangeAccountingPoliciesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	
+	<xbrli:context id="context234">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ParticipatingInterestsSpecificationAxis">
+				<venj-bw2-dm:LegalEntityTypedMember>Bloem</venj-bw2-dm:LegalEntityTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context406">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:RentContractsSpecificationAxis">
+				<frc-dm:ObjectIdentificationRentContractsTypedMember>001DD</frc-dm:ObjectIdentificationRentContractsTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context415">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ContractsOperatingLeaseSpecificationAxis">
+				<frc-dm:IdentificationNumberTypedMember>YYTT1</frc-dm:IdentificationNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context423">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:AircraftsSpecificationAxis">
+				<frc-dm:RegistryNumberRegisterBoundGoodTypedMember>ZZZ1</frc-dm:RegistryNumberRegisterBoundGoodTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context427">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ShipsSpecificationAxis">
+				<frc-dm:RegistryNumberRegisterBoundGoodTypedMember>WWW2</frc-dm:RegistryNumberRegisterBoundGoodTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context431">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:SecuritiesRegisterBoundGoodsSpecificationAxis">
+				<frc-dm:RegistryNumberRegisterBoundGoodTypedMember>AAA2</frc-dm:RegistryNumberRegisterBoundGoodTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context434">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:SecuritiesNotRegisterBoundGoodsSpecificationAxis">
+				<frc-dm:IdentificationNumberSecuritiesTypedMember>CCC3</frc-dm:IdentificationNumberSecuritiesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context435">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BanksReceivablesGroupCompaniesSpecificationAxis">
+				<frc-dm:IdentificationNumberReceivablesTypedMember>QW22</frc-dm:IdentificationNumberReceivablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context442">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ReceivablesOtherRelatedPartiesSpecificationAxis">
+				<frc-dm:IdentificationNumberReceivablesTypedMember>CC22</frc-dm:IdentificationNumberReceivablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context449">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BanksReceivablesShareholdersParticipatingInterestsSpecificationAxis">
+				<frc-dm:IdentificationNumberReceivablesTypedMember>DDF</frc-dm:IdentificationNumberReceivablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context456">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ReceivablesOtherSpecificationAxis">
+				<frc-dm:IdentificationNumberReceivablesTypedMember>CDF</frc-dm:IdentificationNumberReceivablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context471">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:SubordinatedLoansSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>VVF</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context483">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BankOverdraftsSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>SS2</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context494">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BanksPayablesGroupCompaniesSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>OK100</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context503">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:PayablesOtherPartiesSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>WW2</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context512">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BanksPayablesShareholdersParticipatingInterestsSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>AA22</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context521">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:PayablesOtherSpecificationAxis">
+				<frc-dm:IdentificationNumberPayablesTypedMember>XX2</frc-dm:IdentificationNumberPayablesTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context540">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:OperationSpecificationAxis">
+				<frc-dm:IdentificationNumberTypedMember>DDE33</frc-dm:IdentificationNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+		<xbrli:context id="context551">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:OperationSpecificationAxis">
+				<frc-dm:IdentificationNumberTypedMember>ZZ001</frc-dm:IdentificationNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:ConsolidatedMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context632">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">rj-dm:PersonnelMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:LoansMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context633">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">rj-dm:PersonnelMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:AdvancesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context634">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">rj-dm:PersonnelMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:GuaranteesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context635">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:LoansMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context636">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:AdvancesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context637">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:GuaranteesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context638">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:LoansMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context639">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:AdvancesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context640">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:GuaranteesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context641">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:LoansMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context642">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:AdvancesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context643">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:GuaranteesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context644">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:LoansMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context645">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:AdvancesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context646">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAndPersonnelAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfLoansAdvancesGuaranteesAxis">venj-bw2-dm:GuaranteesMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+
+	<xbrli:context id="context678">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:ProfitSharingAndBonusPaymentsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context679">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:ProfitSharingAndBonusPaymentsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context680">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:ProfitSharingAndBonusPaymentsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context681">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:ProfitSharingAndBonusPaymentsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context682">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RegularRemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context683">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RegularRemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context684">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RegularRemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context685">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RegularRemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context686">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:LongTermBenefitsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context687">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:LongTermBenefitsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context688">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:LongTermBenefitsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context689">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:LongTermBenefitsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context690">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:BenefitsOnTerminationOfServiceMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context691">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:BenefitsOnTerminationOfServiceMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context692">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:BenefitsOnTerminationOfServiceMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context693">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:BenefitsOnTerminationOfServiceMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context694">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:ManagingDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context695">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:SupervisoryDirectorsMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context696">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerManagingDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context697">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsRemunerationAxis">venj-bw2-dm:RemunerationMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:ClassesOfDirectorsAxis">venj-bw2-dm:FormerSupervisoryDirectorMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context719">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BulbCultivationTypedAxis">
+				<frc-dm:BulbCultivationTypedMember>Dithe</frc-dm:BulbCultivationTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context720">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BulbCultivationTypedAxis">
+				<frc-dm:BulbCultivationTypedMember>Dithe</frc-dm:BulbCultivationTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context781">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:MeatDuckFarmTypedAxes">
+				<frc-dm:MeatDuckFarmTypedMember>JAJ11</frc-dm:MeatDuckFarmTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context782">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2015-01-01</xbrli:startDate>
+			<xbrli:endDate>2015-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:MeatDuckFarmTypedAxes">
+				<frc-dm:MeatDuckFarmTypedMember>JAJ11</frc-dm:MeatDuckFarmTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context821">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">87547476</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="venj-bw2-dim:ManagingOrSupervisoryDirectorNamesAxis">
+				<venj-bw2-dm:ManagingOrSupervisoryDirectorTypedMember>AA11</venj-bw2-dm:ManagingOrSupervisoryDirectorTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:unit id="pure">
+		<xbrli:measure>xbrli:pure</xbrli:measure>
+	</xbrli:unit>
+	<xbrli:unit id="eur">
+		<xbrli:measure>iso4217:EUR</xbrli:measure>
+	</xbrli:unit>
+	<frc-i:ReasonDelivery contextRef="context0">Nieuwe aanvraag</frc-i:ReasonDelivery>
+	<frc-i:FinancialStatementType contextRef="context0">Enkelvoudig</frc-i:FinancialStatementType>
+	
+	<venj-bw2-i:FinancialReportingPeriodCurrentStartDate contextRef="context0">2016-01-01</venj-bw2-i:FinancialReportingPeriodCurrentStartDate>
+	<venj-bw2-i:FinancialReportingPeriodCurrentEndDate contextRef="context0">2016-12-31</venj-bw2-i:FinancialReportingPeriodCurrentEndDate>
+	
+	<venj-bw2-i:FinancialReportingPeriodPreviousStartDate contextRef="context0">2015-01-01</venj-bw2-i:FinancialReportingPeriodPreviousStartDate>
+	<venj-bw2-i:FinancialReportingPeriodPreviousEndDate contextRef="context0">2015-12-31</venj-bw2-i:FinancialReportingPeriodPreviousEndDate>
+	
+	<venj-bw2-i:BasisOfPreparation contextRef="context0">Commercieel</venj-bw2-i:BasisOfPreparation>
+	
+	
+	<venj-bw2-i:BalanceSheetBeforeAfterAppropriationResults contextRef="context0">Na</venj-bw2-i:BalanceSheetBeforeAfterAppropriationResults>
+	<rj-i:DocumentPresentationCurrency contextRef="context0">EUR</rj-i:DocumentPresentationCurrency>
+	<frc-i:ExclusiveVAT contextRef="context0">Ja</frc-i:ExclusiveVAT>
+	<venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="context0">87547476</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+	<venj-bw2-i:LegalEntityName contextRef="context0">ZipBar</venj-bw2-i:LegalEntityName>
+	<frc-i:LegalEntityLegalFormBanks contextRef="context0">Naamloze vennootschap</frc-i:LegalEntityLegalFormBanks>
+	<kvk-i:LegalSizeCriteriaClassification contextRef="context0">Klein</kvk-i:LegalSizeCriteriaClassification>
+	<rj-i:BusinessNames contextRef="context0">ZipBar</rj-i:BusinessNames>
+	<frc-i:DateEstablishmentLegalEntity contextRef="context0">1988-01-01</frc-i:DateEstablishmentLegalEntity>
+	<frc-i:AgriculturalActivities contextRef="context0">Ja</frc-i:AgriculturalActivities>
+	<frc-i:NameIntermediary contextRef="context0">Ipmse</frc-i:NameIntermediary>
+	<frc-i:DomicileIntermediary contextRef="context0">Amsterdam</frc-i:DomicileIntermediary>
+	<frc-i:QualificationIntermediary contextRef="context0">RA</frc-i:QualificationIntermediary>
+	<frc-i:NameCompiler contextRef="context0">Iris</frc-i:NameCompiler>
+	<frc-i:TelephoneNumberIntermediary contextRef="context0">067546215</frc-i:TelephoneNumberIntermediary>
+	<frc-i:EmailAddressIntermediary contextRef="context0">iris@iadvies.nl</frc-i:EmailAddressIntermediary>
+	<frc-i:DestinationBank contextRef="context0">ABN AMRO Bank</frc-i:DestinationBank>
+	<rj-i:FinancialReportingPeriodDifferentThanAnnualStatus contextRef="context0">Nee</rj-i:FinancialReportingPeriodDifferentThanAnnualStatus>
+	<nl-cd:DocumentCreationDate contextRef="context0">2016-12-31</nl-cd:DocumentCreationDate>
+	<venj-bw2-i:DocumentAdoptionStatus contextRef="context0">Nee</venj-bw2-i:DocumentAdoptionStatus>
+	<nl-cd:StreetNameNL contextRef="context30">Ganzenpad</nl-cd:StreetNameNL>
+	<nl-cd:HouseNumberNL contextRef="context30">13</nl-cd:HouseNumberNL>
+	<nl-cd:POBoxNumber contextRef="context30">1234</nl-cd:POBoxNumber>
+	<nl-cd:PostalCodeNL contextRef="context30">1234QA</nl-cd:PostalCodeNL>
+	<nl-cd:PlaceOfResidenceNL contextRef="context30">Rotterdam</nl-cd:PlaceOfResidenceNL>
+	<nl-cd:StreetNameAbroad contextRef="context35">Bullingstraat</nl-cd:StreetNameAbroad>
+	<nl-cd:HouseNumberAbroad contextRef="context35">14</nl-cd:HouseNumberAbroad>
+	<nl-cd:HouseNumberAddition contextRef="context35">A</nl-cd:HouseNumberAddition>
+	<nl-cd:POBoxNumber contextRef="context35">4321</nl-cd:POBoxNumber>
+	<nl-cd:PlaceOfResidenceAbroad contextRef="context35">United States</nl-cd:PlaceOfResidenceAbroad>
+	<frc-i:BankName contextRef="context40">ABN AMRO</frc-i:BankName>
+	<frc-i:SquareMeterSalesSurface contextRef="context41" unitRef="pure" decimals="INF">1000</frc-i:SquareMeterSalesSurface>
+	<frc-i:SquareMeterSalesSurface contextRef="context42" unitRef="pure" decimals="INF">1000</frc-i:SquareMeterSalesSurface>
+	<frc-i:NumberLocations contextRef="context41" unitRef="pure" decimals="INF">500</frc-i:NumberLocations>
+	<frc-i:NumberLocations contextRef="context42" unitRef="pure" decimals="INF">500</frc-i:NumberLocations>
+	<kvk-i:SbiBusinessCode contextRef="context41">0116</kvk-i:SbiBusinessCode>
+	<kvk-i:SbiBusinessCode contextRef="context42">0116</kvk-i:SbiBusinessCode>
+	<venj-bw2-i:IntangibleAssets contextRef="context47" unitRef="eur" decimals="INF">6000</venj-bw2-i:IntangibleAssets>
+	<venj-bw2-i:IntangibleAssets contextRef="context48" unitRef="eur" decimals="INF">5000</venj-bw2-i:IntangibleAssets>
+	<venj-bw2-i:PropertyPlantEquipment contextRef="context47" unitRef="eur" decimals="INF">10000</venj-bw2-i:PropertyPlantEquipment>
+	<venj-bw2-i:PropertyPlantEquipment contextRef="context48" unitRef="eur" decimals="INF">9000</venj-bw2-i:PropertyPlantEquipment>
+	<rj-i:InvestmentProperties contextRef="context47" unitRef="eur" decimals="INF">12000</rj-i:InvestmentProperties>
+	<rj-i:InvestmentProperties contextRef="context48" unitRef="eur" decimals="INF">11000</rj-i:InvestmentProperties>
+	<venj-bw2-i:FinancialAssets contextRef="context47" unitRef="eur" decimals="INF">3000</venj-bw2-i:FinancialAssets>
+	<venj-bw2-i:FinancialAssets contextRef="context48" unitRef="eur" decimals="INF">3000</venj-bw2-i:FinancialAssets>
+	<venj-bw2-i:AssetsNoncurrent contextRef="context47" unitRef="eur" decimals="INF">31000</venj-bw2-i:AssetsNoncurrent>
+	<venj-bw2-i:AssetsNoncurrent contextRef="context48" unitRef="eur" decimals="INF">28000</venj-bw2-i:AssetsNoncurrent>
+	<venj-bw2-i:Inventories contextRef="context47" unitRef="eur" decimals="INF">1500</venj-bw2-i:Inventories>
+	<venj-bw2-i:Inventories contextRef="context48" unitRef="eur" decimals="INF">1400</venj-bw2-i:Inventories>
+	<rj-i:ConstructionContractsAssets contextRef="context47" unitRef="eur" decimals="INF">1000</rj-i:ConstructionContractsAssets>
+	<rj-i:ConstructionContractsAssets contextRef="context48" unitRef="eur" decimals="INF">900</rj-i:ConstructionContractsAssets>
+	<venj-bw2-i:Receivables contextRef="context47" unitRef="eur" decimals="INF">1050</venj-bw2-i:Receivables>
+	<venj-bw2-i:Receivables contextRef="context48" unitRef="eur" decimals="INF">1000</venj-bw2-i:Receivables>
+	<venj-bw2-i:SecuritiesCurrent contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:SecuritiesCurrent>
+	<venj-bw2-i:SecuritiesCurrent contextRef="context48" unitRef="eur" decimals="INF">900</venj-bw2-i:SecuritiesCurrent>
+	<venj-bw2-i:CashAndCashEquivalents contextRef="context47" unitRef="eur" decimals="INF">2000</venj-bw2-i:CashAndCashEquivalents>
+	<venj-bw2-i:CashAndCashEquivalents contextRef="context48" unitRef="eur" decimals="INF">1900</venj-bw2-i:CashAndCashEquivalents>
+	<venj-bw2-i:AssetsCurrent contextRef="context47" unitRef="eur" decimals="INF">6550</venj-bw2-i:AssetsCurrent>
+	<venj-bw2-i:AssetsCurrent contextRef="context48" unitRef="eur" decimals="INF">6100</venj-bw2-i:AssetsCurrent>
+	<venj-bw2-i:Assets contextRef="context47" unitRef="eur" decimals="INF">37550</venj-bw2-i:Assets>
+	<venj-bw2-i:Assets contextRef="context48" unitRef="eur" decimals="INF">34100</venj-bw2-i:Assets>
+	<venj-bw2-i:Equity contextRef="context47" unitRef="eur" decimals="INF">24550</venj-bw2-i:Equity>
+	<venj-bw2-i:Equity contextRef="context48" unitRef="eur" decimals="INF">21370</venj-bw2-i:Equity>
+	<venj-bw2-i:Provisions contextRef="context47" unitRef="eur" decimals="INF">2500</venj-bw2-i:Provisions>
+	<venj-bw2-i:Provisions contextRef="context48" unitRef="eur" decimals="INF">2400</venj-bw2-i:Provisions>
+	<venj-bw2-i:LiabilitiesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">7500</venj-bw2-i:LiabilitiesNoncurrent>
+	<venj-bw2-i:LiabilitiesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">7330</venj-bw2-i:LiabilitiesNoncurrent>
+	<venj-bw2-i:LiabilitiesCurrent contextRef="context47" unitRef="eur" decimals="INF">3000</venj-bw2-i:LiabilitiesCurrent>
+	<venj-bw2-i:LiabilitiesCurrent contextRef="context48" unitRef="eur" decimals="INF">3000</venj-bw2-i:LiabilitiesCurrent>
+	<venj-bw2-i:EquityAndLiabilities contextRef="context47" unitRef="eur" decimals="INF">37550</venj-bw2-i:EquityAndLiabilities>
+	<venj-bw2-i:EquityAndLiabilities contextRef="context48" unitRef="eur" decimals="INF">34100</venj-bw2-i:EquityAndLiabilities>
+	<venj-bw2-i:NetRevenue contextRef="context41" unitRef="eur" decimals="INF">107000</venj-bw2-i:NetRevenue>
+	<venj-bw2-i:NetRevenue contextRef="context42" unitRef="eur" decimals="INF">97000</venj-bw2-i:NetRevenue>
+	<venj-bw2-i:CostOfSales contextRef="context41" unitRef="eur" decimals="INF">10000</venj-bw2-i:CostOfSales>
+	<venj-bw2-i:CostOfSales contextRef="context42" unitRef="eur" decimals="INF">10000</venj-bw2-i:CostOfSales>
+	<venj-bw2-i:GrossOperatingResult contextRef="context41" unitRef="eur" decimals="INF">97000</venj-bw2-i:GrossOperatingResult>
+	<venj-bw2-i:GrossOperatingResult contextRef="context42" unitRef="eur" decimals="INF">87000</venj-bw2-i:GrossOperatingResult>
+	<venj-bw2-i:SellingExpenses contextRef="context41" unitRef="eur" decimals="INF">22500</venj-bw2-i:SellingExpenses>
+	<venj-bw2-i:SellingExpenses contextRef="context42" unitRef="eur" decimals="INF">22500</venj-bw2-i:SellingExpenses>
+	
+	<venj-bw2-i:GeneralAdministrativeExpenses contextRef="context41" unitRef="eur" decimals="INF">1000</venj-bw2-i:GeneralAdministrativeExpenses>
+	<venj-bw2-i:GeneralAdministrativeExpenses contextRef="context42" unitRef="eur" decimals="INF">1000</venj-bw2-i:GeneralAdministrativeExpenses>
+	
+	<venj-bw2-i:OperatingExpenses contextRef="context41" unitRef="eur" decimals="INF">23500</venj-bw2-i:OperatingExpenses>
+	<venj-bw2-i:OperatingExpenses contextRef="context42" unitRef="eur" decimals="INF">23500</venj-bw2-i:OperatingExpenses>
+	<venj-bw2-i:NetOperatingResult contextRef="context41" unitRef="eur" decimals="INF">73500</venj-bw2-i:NetOperatingResult>
+	<venj-bw2-i:NetOperatingResult contextRef="context42" unitRef="eur" decimals="INF">63500</venj-bw2-i:NetOperatingResult>
+	<venj-bw2-i:OperatingIncomeOther contextRef="context41" unitRef="eur" decimals="INF">2000</venj-bw2-i:OperatingIncomeOther>
+	<venj-bw2-i:OperatingIncomeOther contextRef="context42" unitRef="eur" decimals="INF">2000</venj-bw2-i:OperatingIncomeOther>
+	<venj-bw2-i:OperatingResult contextRef="context41" unitRef="eur" decimals="INF">75500</venj-bw2-i:OperatingResult>
+	<venj-bw2-i:OperatingResult contextRef="context42" unitRef="eur" decimals="INF">65500</venj-bw2-i:OperatingResult>
+	<venj-bw2-i:IncomeReceivablesNoncurrentSecurities contextRef="context41" unitRef="eur" decimals="INF">6000</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+	<venj-bw2-i:IncomeReceivablesNoncurrentSecurities contextRef="context42" unitRef="eur" decimals="INF">6000</venj-bw2-i:IncomeReceivablesNoncurrentSecurities>
+	<venj-bw2-i:RevaluationReserveRelease contextRef="context41" unitRef="eur" decimals="INF">3000</venj-bw2-i:RevaluationReserveRelease>
+	<venj-bw2-i:RevaluationReserveRelease contextRef="context42" unitRef="eur" decimals="INF">3000</venj-bw2-i:RevaluationReserveRelease>
+	<venj-bw2-i:GovernmentSubsidies contextRef="context41" unitRef="eur" decimals="INF">2000</venj-bw2-i:GovernmentSubsidies>
+	<venj-bw2-i:GovernmentSubsidies contextRef="context42" unitRef="eur" decimals="INF">2000</venj-bw2-i:GovernmentSubsidies>
+	<venj-bw2-i:InterestIncomeRelatedIncome contextRef="context41" unitRef="eur" decimals="INF">1500</venj-bw2-i:InterestIncomeRelatedIncome>
+	<venj-bw2-i:InterestIncomeRelatedIncome contextRef="context42" unitRef="eur" decimals="INF">1500</venj-bw2-i:InterestIncomeRelatedIncome>
+	<venj-bw2-i:ChangesValueFinancialAssetsSecurities contextRef="context41" unitRef="eur" decimals="INF">8000</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+	<venj-bw2-i:ChangesValueFinancialAssetsSecurities contextRef="context42" unitRef="eur" decimals="INF">8000</venj-bw2-i:ChangesValueFinancialAssetsSecurities>
+	<venj-bw2-i:InterestExpensesRelatedExpenses contextRef="context41" unitRef="eur" decimals="INF">10000</venj-bw2-i:InterestExpensesRelatedExpenses>
+	<venj-bw2-i:InterestExpensesRelatedExpenses contextRef="context42" unitRef="eur" decimals="INF">10000</venj-bw2-i:InterestExpensesRelatedExpenses>
+	<rj-i:ForeignCurrencyExchangeRateResults contextRef="context41" unitRef="eur" decimals="INF">13000</rj-i:ForeignCurrencyExchangeRateResults>
+	<rj-i:ForeignCurrencyExchangeRateResults contextRef="context42" unitRef="eur" decimals="INF">13000</rj-i:ForeignCurrencyExchangeRateResults>
+	<venj-bw2-i:ResultBeforeTaxOrdinaryActivities contextRef="context41" unitRef="eur" decimals="INF">78500</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+	<venj-bw2-i:ResultBeforeTaxOrdinaryActivities contextRef="context42" unitRef="eur" decimals="INF">68500</venj-bw2-i:ResultBeforeTaxOrdinaryActivities>
+	<venj-bw2-i:IncomeTaxExpenseOrdinaryActivities contextRef="context41" unitRef="eur" decimals="INF">2000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+	<venj-bw2-i:IncomeTaxExpenseOrdinaryActivities contextRef="context42" unitRef="eur" decimals="INF">2000</venj-bw2-i:IncomeTaxExpenseOrdinaryActivities>
+	<venj-bw2-i:ShareInResultsParticipatingInterests contextRef="context41" unitRef="eur" decimals="INF">3000</venj-bw2-i:ShareInResultsParticipatingInterests>
+	<venj-bw2-i:ShareInResultsParticipatingInterests contextRef="context42" unitRef="eur" decimals="INF">3000</venj-bw2-i:ShareInResultsParticipatingInterests>
+	<venj-bw2-i:ResultAfterTax contextRef="context41" unitRef="eur" decimals="INF">79500</venj-bw2-i:ResultAfterTax>
+	<venj-bw2-i:ResultAfterTax contextRef="context42" unitRef="eur" decimals="INF">69500</venj-bw2-i:ResultAfterTax>
+	<venj-bw2-i:ResultAttributableNoncontrollingInterest contextRef="context41" unitRef="eur" decimals="INF">10000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+	<venj-bw2-i:ResultAttributableNoncontrollingInterest contextRef="context42" unitRef="eur" decimals="INF">10000</venj-bw2-i:ResultAttributableNoncontrollingInterest>
+	<venj-bw2-i:NetResultAfterTax contextRef="context41" unitRef="eur" decimals="INF">89500</venj-bw2-i:NetResultAfterTax>
+	<venj-bw2-i:NetResultAfterTax contextRef="context42" unitRef="eur" decimals="INF">79500</venj-bw2-i:NetResultAfterTax>
+	<frc-i:NameOperation contextRef="context551">Naam activiteit</frc-i:NameOperation>
+	<frc-i:TurnoverOperation contextRef="context551" unitRef="eur" decimals="INF">150000</frc-i:TurnoverOperation>
+	<frc-i:PurchaseCostsOperation contextRef="context551" unitRef="eur" decimals="INF">5000</frc-i:PurchaseCostsOperation>
+	<frc-i:WagesSalariesSocialSecurityChargesOperation contextRef="context551" unitRef="eur" decimals="INF">5000</frc-i:WagesSalariesSocialSecurityChargesOperation>
+	<frc-i:OtherOperatingExpensesOperation contextRef="context551" unitRef="eur" decimals="INF">5000</frc-i:OtherOperatingExpensesOperation>
+	<frc-i:CostPriceTurnoverOperation contextRef="context551" unitRef="eur" decimals="INF">15000</frc-i:CostPriceTurnoverOperation>
+	<rj-i:DiscontinuedOperationsDisclosure contextRef="context41">Informatieverschaffing over beëindiging van bedrijfsactiviteiten</rj-i:DiscontinuedOperationsDisclosure>
+	<rj-i:MergersAcquisitionsDisclosure contextRef="context41">Informatieverschaffing over fusies en overnames</rj-i:MergersAcquisitionsDisclosure>
+	<venj-bw2-i:GoingConcernDisclosure contextRef="context41">Informatieverschaffing over continuïteit</venj-bw2-i:GoingConcernDisclosure>
+	<venj-bw2-i:GoingConcernUncertaintiesEntitysAbilityToContinueAsGoingConcernDescription contextRef="context41">Ernstige onzekerheden omtrent de continuïteit van de organisatie</venj-bw2-i:GoingConcernUncertaintiesEntitysAbilityToContinueAsGoingConcernDescription>
+	<venj-bw2-i:GoingConcernBasisForPreparationFinancialStatementsWhenNotGoingConcernBasisDescription contextRef="context41">Grondslag van waardering wanneer dit niet op continuïteitsbasis is</venj-bw2-i:GoingConcernBasisForPreparationFinancialStatementsWhenNotGoingConcernBasisDescription>
+	<venj-bw2-i:GoingConcernEffectNotGoingConcernBasisOnEquityAndResultsDescription contextRef="context41">Invloed van het niet waarderen op continuïteitsbasis op het vermogen en resultaat</venj-bw2-i:GoingConcernEffectNotGoingConcernBasisOnEquityAndResultsDescription>
+	<venj-bw2-i:GroupStructureUltimateParentName contextRef="context41">Naam van het hoofd van de groep structuur</venj-bw2-i:GroupStructureUltimateParentName>
+	<venj-bw2-i:GroupStructureUltimateParentLocation contextRef="context41">Woonplaats van het hoofd van de groep structuur</venj-bw2-i:GroupStructureUltimateParentLocation>
+	<rj-i:PoliciesClassificationOtherPresentationAspects contextRef="context41">Grondslagen voor de indeling en andere aspecten van de presentatie</rj-i:PoliciesClassificationOtherPresentationAspects>
+	<venj-bw2-i:ChangeAccountingPoliciesDescription contextRef="context231">Beschrijving van de stelselwijziging</venj-bw2-i:ChangeAccountingPoliciesDescription>
+	<venj-bw2-i:ChangeAccountingPoliciesDisclosure contextRef="context41">Informatieverschaffing over stelselwijzigingen</venj-bw2-i:ChangeAccountingPoliciesDisclosure>
+	<rj-i:ChangeAccountingEstimatesDisclosure contextRef="context41">Informatieverschaffing over schattingswijzigingen</rj-i:ChangeAccountingEstimatesDisclosure>
+	<venj-bw2-i:ForeignCurrencyTranslationPolicy contextRef="context41">Grondslag van omrekening van vreemde valuta</venj-bw2-i:ForeignCurrencyTranslationPolicy>
+	<venj-bw2-i:AccountingStandardsUsedToPrepareFinancialStatementsDescription contextRef="context41">Beschrijving van de standaarden op basis waarvan de jaarrekening is opgesteld</venj-bw2-i:AccountingStandardsUsedToPrepareFinancialStatementsDescription>
+	<venj-bw2-i:AccountingPrinciplesForTheValuationOfAssetsAndEquityAndLiabilities contextRef="context41">Grondslagen voor de waardering van activa en passiva</venj-bw2-i:AccountingPrinciplesForTheValuationOfAssetsAndEquityAndLiabilities>
+	<venj-bw2-i:IntangibleAssetsPolicy contextRef="context41">Grondslag van immateriële vaste activa</venj-bw2-i:IntangibleAssetsPolicy>
+	<venj-bw2-i:PropertyPlantEquipmentPolicy contextRef="context41">Grondslag van materiële vaste activa</venj-bw2-i:PropertyPlantEquipmentPolicy>
+	<venj-bw2-i:FinancialAssetsPolicy contextRef="context41">Grondslag van financiële vaste activa</venj-bw2-i:FinancialAssetsPolicy>
+	<venj-bw2-i:InventoriesPolicy contextRef="context41">Grondslag van voorraden</venj-bw2-i:InventoriesPolicy>
+	<rj-i:ConstructionContractsPolicy contextRef="context41">Grondslag van onderhanden projecten in opdracht van derden</rj-i:ConstructionContractsPolicy>
+	<venj-bw2-i:ReceivablesPolicy contextRef="context41">Grondslag van vorderingen</venj-bw2-i:ReceivablesPolicy>
+	<venj-bw2-i:AccruedIncomePolicy contextRef="context41">Grondslag van overlopende activa</venj-bw2-i:AccruedIncomePolicy>
+	<venj-bw2-i:SecuritiesCurrentPolicy contextRef="context41">Grondslag van effecten (kortlopend)</venj-bw2-i:SecuritiesCurrentPolicy>
+	<venj-bw2-i:CashAndCashEquivalentsPolicy contextRef="context41">Grondslag van liquide middelen</venj-bw2-i:CashAndCashEquivalentsPolicy>
+	<venj-bw2-i:AssetsCurrentPolicy contextRef="context41">Grondslag van vlottende activa</venj-bw2-i:AssetsCurrentPolicy>
+	<venj-bw2-i:AssetsPolicy contextRef="context41">Grondslag van activa</venj-bw2-i:AssetsPolicy>
+	<venj-bw2-i:EquityPolicy contextRef="context41">Grondslag van eigen vermogen</venj-bw2-i:EquityPolicy>
+	<rj-i:ProvisionPensionObligationsDescription contextRef="context41">Beschrijving van de verplichtingen van de voorziening voor pensioenverplichtingen</rj-i:ProvisionPensionObligationsDescription>
+	<rj-i:ProvisionPensionObligationsValuationMethodsDescription contextRef="context41">Methode van waardering van de voorziening voor pensioenverplichtingen</rj-i:ProvisionPensionObligationsValuationMethodsDescription>
+	<rj-i:ProvisionPensionObligationsActuarialAssumptionsDescription contextRef="context41">Actuariële grondslagen gehanteerd voor de voorziening voor pensioenverplichtingen</rj-i:ProvisionPensionObligationsActuarialAssumptionsDescription>
+	<venj-bw2-i:ProvisionsPolicy contextRef="context41">Grondslag van voorzieningen</venj-bw2-i:ProvisionsPolicy>
+	<venj-bw2-i:LiabilitiesNoncurrentPolicy contextRef="context41">Grondslag van langlopende schulden</venj-bw2-i:LiabilitiesNoncurrentPolicy>
+	<venj-bw2-i:LiabilitiesCurrentPolicy contextRef="context41">Grondslag van kortlopende schulden</venj-bw2-i:LiabilitiesCurrentPolicy>
+	<venj-bw2-i:EquityAndLiabilitiesPolicy contextRef="context41">Grondslag van passiva</venj-bw2-i:EquityAndLiabilitiesPolicy>
+	<venj-bw2-i:AccountingPrinciplesForDeterminingTheResult contextRef="context41">Grondslagen voor de bepaling van het resultaat</venj-bw2-i:AccountingPrinciplesForDeterminingTheResult>
+	<venj-bw2-i:OperatingIncomePolicy contextRef="context41">Grondslag van som der bedrijfsopbrengsten</venj-bw2-i:OperatingIncomePolicy>
+	<venj-bw2-i:OperatingExpensesPolicy contextRef="context41">Grondslag van bedrijfskosten</venj-bw2-i:OperatingExpensesPolicy>
+	<venj-bw2-i:ShareInResultsParticipatingInterestsPolicy contextRef="context41">Grondslag van aandeel in resultaat van ondernemingen waarin wordt deelgenomen</venj-bw2-i:ShareInResultsParticipatingInterestsPolicy>
+	<venj-bw2-i:CostsIncorporationShareIssue contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:CostsIncorporationShareIssue>
+	<venj-bw2-i:CostsIncorporationShareIssue contextRef="context48" unitRef="eur" decimals="INF">800</venj-bw2-i:CostsIncorporationShareIssue>
+	<venj-bw2-i:DevelopmentCosts contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:DevelopmentCosts>
+	<venj-bw2-i:DevelopmentCosts contextRef="context48" unitRef="eur" decimals="INF">800</venj-bw2-i:DevelopmentCosts>
+	<venj-bw2-i:PatentsTrademarksOtherRights contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:PatentsTrademarksOtherRights>
+	<venj-bw2-i:PatentsTrademarksOtherRights contextRef="context48" unitRef="eur" decimals="INF">800</venj-bw2-i:PatentsTrademarksOtherRights>
+	<venj-bw2-i:Goodwill contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:Goodwill>
+	<venj-bw2-i:Goodwill contextRef="context48" unitRef="eur" decimals="INF">800</venj-bw2-i:Goodwill>
+	<venj-bw2-i:PrepaymentsIntangibleAssets contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:PrepaymentsIntangibleAssets>
+	<venj-bw2-i:PrepaymentsIntangibleAssets contextRef="context48" unitRef="eur" decimals="INF">800</venj-bw2-i:PrepaymentsIntangibleAssets>
+	<rj-i:IntangibleAssetsOther contextRef="context47" unitRef="eur" decimals="INF">1000</rj-i:IntangibleAssetsOther>
+	<rj-i:IntangibleAssetsOther contextRef="context48" unitRef="eur" decimals="INF">1000</rj-i:IntangibleAssetsOther>
+	<venj-bw2-i:IntangibleAssetsDisclosure contextRef="context41">Informatieverschaffing over immateriële vaste activa</venj-bw2-i:IntangibleAssetsDisclosure>
+	<rj-i:IntangibleAssetsLimitedOwnershipDescription contextRef="context41">Beschrijving van immateriële vaste activa met beperkte eigendomsrechten</rj-i:IntangibleAssetsLimitedOwnershipDescription>
+	<frc-i:Buildings contextRef="context47" unitRef="eur" decimals="INF">1200</frc-i:Buildings>
+	<frc-i:Buildings contextRef="context48" unitRef="eur" decimals="INF">1500</frc-i:Buildings>
+	<frc-i:Land contextRef="context47" unitRef="eur" decimals="INF">1200</frc-i:Land>
+	<frc-i:Land contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:Land>
+	<venj-bw2-i:LandAndBuildings contextRef="context47" unitRef="eur" decimals="INF">2400</venj-bw2-i:LandAndBuildings>
+	<venj-bw2-i:LandAndBuildings contextRef="context48" unitRef="eur" decimals="INF">2250</venj-bw2-i:LandAndBuildings>
+	<venj-bw2-i:Machinery contextRef="context47" unitRef="eur" decimals="INF">1600</venj-bw2-i:Machinery>
+	<venj-bw2-i:Machinery contextRef="context48" unitRef="eur" decimals="INF">1500</venj-bw2-i:Machinery>
+	<venj-bw2-i:TangibleAssetsOther contextRef="context47" unitRef="eur" decimals="INF">4000</venj-bw2-i:TangibleAssetsOther>
+	<venj-bw2-i:TangibleAssetsOther contextRef="context48" unitRef="eur" decimals="INF">3750</venj-bw2-i:TangibleAssetsOther>
+	<venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment contextRef="context47" unitRef="eur" decimals="INF">800</venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment>
+	<venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment contextRef="context48" unitRef="eur" decimals="INF">750</venj-bw2-i:ConstructionInProgressPrepaymentsPropertyPlantEquipment>
+	<frc-i:LesseesInvestments contextRef="context47" unitRef="eur" decimals="INF">800</frc-i:LesseesInvestments>
+	<frc-i:LesseesInvestments contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:LesseesInvestments>
+	<frc-i:AircraftsBalanceSheetValue contextRef="context47" unitRef="eur" decimals="INF">800</frc-i:AircraftsBalanceSheetValue>
+	<frc-i:AircraftsBalanceSheetValue contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:AircraftsBalanceSheetValue>
+	<frc-i:ShipsBalanceSheetValue contextRef="context47" unitRef="eur" decimals="INF">800</frc-i:ShipsBalanceSheetValue>
+	<frc-i:ShipsBalanceSheetValue contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:ShipsBalanceSheetValue>
+	<frc-i:FixturesAndFittings contextRef="context47" unitRef="eur" decimals="INF">800</frc-i:FixturesAndFittings>
+	<frc-i:FixturesAndFittings contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:FixturesAndFittings>
+	<frc-i:CarsAndOtherTransportMeans contextRef="context47" unitRef="eur" decimals="INF">800</frc-i:CarsAndOtherTransportMeans>
+	<frc-i:CarsAndOtherTransportMeans contextRef="context48" unitRef="eur" decimals="INF">750</frc-i:CarsAndOtherTransportMeans>
+	<venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations contextRef="context47" unitRef="eur" decimals="INF">1200</venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations>
+	<venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations contextRef="context48" unitRef="eur" decimals="INF">750</venj-bw2-i:PropertyPlantEquipmentNotUsedInOperations>
+	<frc-i:ReplacementPurchasePropertyPlantEquipment contextRef="context41" unitRef="eur" decimals="INF">1000</frc-i:ReplacementPurchasePropertyPlantEquipment>
+	<frc-i:ReplacementPurchasePropertyPlantEquipment contextRef="context42" unitRef="eur" decimals="INF">1000</frc-i:ReplacementPurchasePropertyPlantEquipment>
+	<frc-i:ExpansionPurchasePropertyPlantEquipment contextRef="context41" unitRef="eur" decimals="INF">1000</frc-i:ExpansionPurchasePropertyPlantEquipment>
+	<frc-i:ExpansionPurchasePropertyPlantEquipment contextRef="context42" unitRef="eur" decimals="INF">1000</frc-i:ExpansionPurchasePropertyPlantEquipment>
+	<rj-i:PurchasePropertyPlantEquipment contextRef="context41" unitRef="eur" decimals="INF">2000</rj-i:PurchasePropertyPlantEquipment>
+	<rj-i:PurchasePropertyPlantEquipment contextRef="context42" unitRef="eur" decimals="INF">2000</rj-i:PurchasePropertyPlantEquipment>
+	<frc-i:ConstructionInProgress contextRef="context47" unitRef="eur" decimals="INF">400</frc-i:ConstructionInProgress>
+	<frc-i:ConstructionInProgress contextRef="context48" unitRef="eur" decimals="INF">375</frc-i:ConstructionInProgress>
+	<frc-i:PrepaymentsOfPropertyPlantAndEquipment contextRef="context47" unitRef="eur" decimals="INF">400</frc-i:PrepaymentsOfPropertyPlantAndEquipment>
+	<frc-i:PrepaymentsOfPropertyPlantAndEquipment contextRef="context48" unitRef="eur" decimals="INF">375</frc-i:PrepaymentsOfPropertyPlantAndEquipment>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsInGroupCompanies>
+	
+	<venj-bw2-i:ReceivablesGroupCompaniesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:ReceivablesGroupCompaniesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsOther contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsOther>
+	<venj-bw2-i:InvestmentsInParticipatingInterestsOther contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:InvestmentsInParticipatingInterestsOther>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:SecuritiesOtherNoncurrent contextRef="context47" unitRef="eur" decimals="INF">750</venj-bw2-i:SecuritiesOtherNoncurrent>
+	<venj-bw2-i:SecuritiesOtherNoncurrent contextRef="context48" unitRef="eur" decimals="INF">750</venj-bw2-i:SecuritiesOtherNoncurrent>
+	<venj-bw2-i:ReceivablesOtherNoncurrent contextRef="context47" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherNoncurrent>
+	<venj-bw2-i:ReceivablesOtherNoncurrent contextRef="context48" unitRef="eur" decimals="INF">375</venj-bw2-i:ReceivablesOtherNoncurrent>
+	<venj-bw2-i:FinancialAssetsDisclosure contextRef="context41">Informatieverschaffing over financiële vaste activa</venj-bw2-i:FinancialAssetsDisclosure>
+	<frc-i:ChamberOfCommerceRegistrationNumberParticipatingInterests contextRef="context230">87547478</frc-i:ChamberOfCommerceRegistrationNumberParticipatingInterests>
+	<venj-bw2-i:LegalEntityLocation contextRef="context230">Rotterdam</venj-bw2-i:LegalEntityLocation>
+	<venj-bw2-i:LegalEntityResultsLastFinancialStatements contextRef="context230" unitRef="eur" decimals="INF">478000</venj-bw2-i:LegalEntityResultsLastFinancialStatements>
+	<venj-bw2-i:LegalEntityDateLastFinancialStatements contextRef="context230">2013-03-24</venj-bw2-i:LegalEntityDateLastFinancialStatements>
+	<venj-bw2-i:LegalEntityInterestInShareCapital contextRef="context234" unitRef="pure" decimals="INF">0.15</venj-bw2-i:LegalEntityInterestInShareCapital>
+	<venj-bw2-i:LegalEntityInterestInVotingRights contextRef="context234" unitRef="pure" decimals="INF">0.13</venj-bw2-i:LegalEntityInterestInVotingRights>
+	<venj-bw2-i:LegalEntityEquityLastFinancialStatements contextRef="context234" unitRef="eur" decimals="INF">2300000</venj-bw2-i:LegalEntityEquityLastFinancialStatements>
+	<rj-i:LegalEntityAccumulatedLosses contextRef="context234" unitRef="eur" decimals="INF">13000</rj-i:LegalEntityAccumulatedLosses>
+	<rj-i:SecuritiesListed contextRef="context47" unitRef="eur" decimals="INF">5000</rj-i:SecuritiesListed>
+	<rj-i:SecuritiesListed contextRef="context48" unitRef="eur" decimals="INF">5000</rj-i:SecuritiesListed>
+	<rj-i:SecuritiesNonListed contextRef="context47" unitRef="eur" decimals="INF">2500</rj-i:SecuritiesNonListed>
+	<rj-i:SecuritiesNonListed contextRef="context48" unitRef="eur" decimals="INF">2500</rj-i:SecuritiesNonListed>
+	<venj-bw2-i:InventoryRawMaterialsConsumables contextRef="context47" unitRef="eur" decimals="INF">300</venj-bw2-i:InventoryRawMaterialsConsumables>
+	<venj-bw2-i:InventoryRawMaterialsConsumables contextRef="context48" unitRef="eur" decimals="INF">280</venj-bw2-i:InventoryRawMaterialsConsumables>
+	<venj-bw2-i:WorkInProgress contextRef="context47" unitRef="eur" decimals="INF">900</venj-bw2-i:WorkInProgress>
+	<venj-bw2-i:WorkInProgress contextRef="context48" unitRef="eur" decimals="INF">840</venj-bw2-i:WorkInProgress>
+	<venj-bw2-i:InventoryFinishedTradeGoods contextRef="context47" unitRef="eur" decimals="INF">300</venj-bw2-i:InventoryFinishedTradeGoods>
+	<venj-bw2-i:InventoryFinishedTradeGoods contextRef="context48" unitRef="eur" decimals="INF">280</venj-bw2-i:InventoryFinishedTradeGoods>
+	<venj-bw2-i:PrepaymentsInventories contextRef="context47" unitRef="eur" decimals="INF">300</venj-bw2-i:PrepaymentsInventories>
+	<venj-bw2-i:PrepaymentsInventories contextRef="context48" unitRef="eur" decimals="INF">280</venj-bw2-i:PrepaymentsInventories>
+	<frc-i:ProvisionUnmarketableInventories contextRef="context47" unitRef="eur" decimals="INF">300</frc-i:ProvisionUnmarketableInventories>
+	<frc-i:ProvisionUnmarketableInventories contextRef="context48" unitRef="eur" decimals="INF">280</frc-i:ProvisionUnmarketableInventories>
+	<venj-bw2-i:InventoriesInterestCapitalisedDuringPeriodDescription contextRef="context41">Beschrijving van gactiveerde rente op voorraden gedurende de verslagperiode</venj-bw2-i:InventoriesInterestCapitalisedDuringPeriodDescription>
+	<venj-bw2-i:InventoriesDisclosure contextRef="context41">Informatieverschaffing over voorraden</venj-bw2-i:InventoriesDisclosure>
+	<venj-bw2-i:TradeReceivables contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:TradeReceivables>
+	<venj-bw2-i:TradeReceivables contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:TradeReceivables>
+	<venj-bw2-i:ReceivablesGroupCompaniesCurrent contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+	<venj-bw2-i:ReceivablesGroupCompaniesCurrent contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:ReceivablesGroupCompaniesCurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:ReceivablesOtherRelatedPartiesCurrent>
+
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:ReceivablesShareholdersParticipatingInterestsCurrent>
+	<rj-i:TaxReceivables contextRef="context47" unitRef="eur" decimals="INF">190</rj-i:TaxReceivables>
+	<rj-i:TaxReceivables contextRef="context48" unitRef="eur" decimals="INF">180</rj-i:TaxReceivables>
+	<venj-bw2-i:AccruedIncome contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:AccruedIncome>
+	<venj-bw2-i:AccruedIncome contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:AccruedIncome>
+	<rj-i:DeferredTaxAssetsCurrent contextRef="context47" unitRef="eur" decimals="INF">95</rj-i:DeferredTaxAssetsCurrent>
+	<rj-i:DeferredTaxAssetsCurrent contextRef="context48" unitRef="eur" decimals="INF">90</rj-i:DeferredTaxAssetsCurrent>
+	<venj-bw2-i:CalledUpShareCapital contextRef="context47" unitRef="eur" decimals="INF">95</venj-bw2-i:CalledUpShareCapital>
+	<venj-bw2-i:CalledUpShareCapital contextRef="context48" unitRef="eur" decimals="INF">90</venj-bw2-i:CalledUpShareCapital>
+	<rj-i:PensionReceivables contextRef="context47" unitRef="eur" decimals="INF">95</rj-i:PensionReceivables>
+	<rj-i:PensionReceivables contextRef="context48" unitRef="eur" decimals="INF">90</rj-i:PensionReceivables>
+	<frc-i:CurrentAccountManagingSupervisoryDirectors contextRef="context47" unitRef="eur" decimals="INF">100</frc-i:CurrentAccountManagingSupervisoryDirectors>
+	<frc-i:CurrentAccountManagingSupervisoryDirectors contextRef="context48" unitRef="eur" decimals="INF">100</frc-i:CurrentAccountManagingSupervisoryDirectors>
+	<rj-i:ReceivablesMaturityExceedingOneYearDisclosure contextRef="context41">Informatieverschaffing over vorderingen met een looptijd langer dan een jaar</rj-i:ReceivablesMaturityExceedingOneYearDisclosure>
+	<venj-bw2-i:ReceivablesDisclosure contextRef="context41">Informatieverschaffing over vorderingen</venj-bw2-i:ReceivablesDisclosure>
+	<venj-bw2-i:AccruedIncomeDisclosure contextRef="context41">Informatieverschaffing over overlopende activa</venj-bw2-i:AccruedIncomeDisclosure>
+	<frc-i:TradeReceivablesNominalBank contextRef="context47" unitRef="eur" decimals="INF">60</frc-i:TradeReceivablesNominalBank>
+	<frc-i:TradeReceivablesNominalBank contextRef="context48" unitRef="eur" decimals="INF">70</frc-i:TradeReceivablesNominalBank>
+	<frc-i:TradeReceivablesIntercompany contextRef="context47" unitRef="eur" decimals="INF">40</frc-i:TradeReceivablesIntercompany>
+	<frc-i:TradeReceivablesIntercompany contextRef="context48" unitRef="eur" decimals="INF">30</frc-i:TradeReceivablesIntercompany>
+	<rj-i:TradeReceivablesGross contextRef="context47" unitRef="eur" decimals="INF">100</rj-i:TradeReceivablesGross>
+	<rj-i:TradeReceivablesGross contextRef="context48" unitRef="eur" decimals="INF">100</rj-i:TradeReceivablesGross>
+	<rj-i:TradeReceivablesProvisionBadDebts contextRef="context47" unitRef="eur" decimals="INF">5</rj-i:TradeReceivablesProvisionBadDebts>
+	<rj-i:TradeReceivablesProvisionBadDebts contextRef="context48" unitRef="eur" decimals="INF">10</rj-i:TradeReceivablesProvisionBadDebts>
+	<venj-bw2-i:SecuritiesCurrentDisclosure contextRef="context41">Informatieverschaffing over effecten (kortlopend)</venj-bw2-i:SecuritiesCurrentDisclosure>
+	<venj-bw2-i:CashInHand contextRef="context47" unitRef="eur" decimals="INF">500</venj-bw2-i:CashInHand>
+	<venj-bw2-i:CashInHand contextRef="context48" unitRef="eur" decimals="INF">1000</venj-bw2-i:CashInHand>
+	<venj-bw2-i:CreditBalancesOnBankAccounts contextRef="context47" unitRef="eur" decimals="INF">500</venj-bw2-i:CreditBalancesOnBankAccounts>
+	<venj-bw2-i:CreditBalancesOnBankAccounts contextRef="context48" unitRef="eur" decimals="INF">300</venj-bw2-i:CreditBalancesOnBankAccounts>
+	<venj-bw2-i:BillsExchangeCheques contextRef="context47" unitRef="eur" decimals="INF">1000</venj-bw2-i:BillsExchangeCheques>
+	<venj-bw2-i:BillsExchangeCheques contextRef="context48" unitRef="eur" decimals="INF">600</venj-bw2-i:BillsExchangeCheques>
+	<venj-bw2-i:CashAndCashEquivalentsDisclosure contextRef="context41">Informatieverschaffing over liquide middelen</venj-bw2-i:CashAndCashEquivalentsDisclosure>
+	<venj-bw2-i:ShareCapital contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:ShareCapital>
+	<venj-bw2-i:ShareCapital contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:ShareCapital>
+	<venj-bw2-i:SharePremium contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:SharePremium>
+	<venj-bw2-i:SharePremium contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:SharePremium>
+	<venj-bw2-i:RevaluationReserve contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:RevaluationReserve>
+	<venj-bw2-i:RevaluationReserve contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:RevaluationReserve>
+	<venj-bw2-i:LegalReserves contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:LegalReserves>
+	<venj-bw2-i:LegalReserves contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:LegalReserves>
+	<venj-bw2-i:StatutoryReserves contextRef="context47" unitRef="eur" decimals="INF">5454</venj-bw2-i:StatutoryReserves>
+	<venj-bw2-i:StatutoryReserves contextRef="context48" unitRef="eur" decimals="INF">4748</venj-bw2-i:StatutoryReserves>
+	<venj-bw2-i:ReservesOther contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:ReservesOther>
+	<venj-bw2-i:ReservesOther contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:ReservesOther>
+	<venj-bw2-i:RetainedEarnings contextRef="context47" unitRef="eur" decimals="INF">2727</venj-bw2-i:RetainedEarnings>
+	<venj-bw2-i:RetainedEarnings contextRef="context48" unitRef="eur" decimals="INF">2374</venj-bw2-i:RetainedEarnings>
+	<venj-bw2-i:ResultForTheYear contextRef="context47" unitRef="eur" decimals="INF">2734</venj-bw2-i:ResultForTheYear>
+	<venj-bw2-i:ResultForTheYear contextRef="context48" unitRef="eur" decimals="INF">2378</venj-bw2-i:ResultForTheYear>
+	<venj-bw2-i:EquityDisclosure contextRef="context41">Informatieverschaffing over eigen vermogen</venj-bw2-i:EquityDisclosure>
+	<venj-bw2-i:EquityWithheldPartResultDescription contextRef="context41">Ingehouden deel van de jaarwinst binnen het eigen vermogen</venj-bw2-i:EquityWithheldPartResultDescription>
+	<venj-bw2-i:PriorityShares contextRef="context47" unitRef="eur" decimals="INF">2000</venj-bw2-i:PriorityShares>
+	<venj-bw2-i:PriorityShares contextRef="context48" unitRef="eur" decimals="INF">2000</venj-bw2-i:PriorityShares>
+	<venj-bw2-i:OrdinaryShares contextRef="context47" unitRef="eur" decimals="INF">700</venj-bw2-i:OrdinaryShares>
+	<venj-bw2-i:OrdinaryShares contextRef="context48" unitRef="eur" decimals="INF">300</venj-bw2-i:OrdinaryShares>
+	<venj-bw2-i:PreferredShares contextRef="context47" unitRef="eur" decimals="INF">27</venj-bw2-i:PreferredShares>
+	<venj-bw2-i:PreferredShares contextRef="context48" unitRef="eur" decimals="INF">74</venj-bw2-i:PreferredShares>
+	<frc-i:DividendExceptParticipatingInterestDividend contextRef="context41" unitRef="eur" decimals="INF">2000</frc-i:DividendExceptParticipatingInterestDividend>
+	<frc-i:DividendExceptParticipatingInterestDividend contextRef="context42" unitRef="eur" decimals="INF">2000</frc-i:DividendExceptParticipatingInterestDividend>
+	<venj-bw2-i:ProvisionPensionObligations contextRef="context47" unitRef="eur" decimals="INF">2000</venj-bw2-i:ProvisionPensionObligations>
+	<venj-bw2-i:ProvisionPensionObligations contextRef="context48" unitRef="eur" decimals="INF">2000</venj-bw2-i:ProvisionPensionObligations>
+	<venj-bw2-i:ProvisionTaxLiabilities contextRef="context47" unitRef="eur" decimals="INF">250</venj-bw2-i:ProvisionTaxLiabilities>
+	<venj-bw2-i:ProvisionTaxLiabilities contextRef="context48" unitRef="eur" decimals="INF">200</venj-bw2-i:ProvisionTaxLiabilities>
+	<venj-bw2-i:ProvisionsOther contextRef="context47" unitRef="eur" decimals="INF">250</venj-bw2-i:ProvisionsOther>
+	<venj-bw2-i:ProvisionsOther contextRef="context48" unitRef="eur" decimals="INF">200</venj-bw2-i:ProvisionsOther>
+	<venj-bw2-i:ProvisionsDisclosure contextRef="context41">Informatieverschaffing over voorzieningen</venj-bw2-i:ProvisionsDisclosure>
+	<frc-i:OperationalProvisionsOther contextRef="context47" unitRef="eur" decimals="INF">150</frc-i:OperationalProvisionsOther>
+	<frc-i:OperationalProvisionsOther contextRef="context48" unitRef="eur" decimals="INF">100</frc-i:OperationalProvisionsOther>
+	<frc-i:NotOperationalProvisionsOther contextRef="context47" unitRef="eur" decimals="INF">100</frc-i:NotOperationalProvisionsOther>
+	<frc-i:NotOperationalProvisionsOther contextRef="context48" unitRef="eur" decimals="INF">100</frc-i:NotOperationalProvisionsOther>
+	<venj-bw2-i:SubordinatedLiabilitiesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:SubordinatedLiabilitiesNoncurrent>
+	<venj-bw2-i:SubordinatedLiabilitiesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:SubordinatedLiabilitiesNoncurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesCreditInstitutionsNoncurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesOtherRelatedPartiesNoncurrent>
+	<venj-bw2-i:PayablesGroupCompaniesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:PayablesGroupCompaniesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesGroupCompaniesNoncurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:TaxesSocialSecurityContributionsPayableNoncurrent>
+	<venj-bw2-i:PayablesOtherNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesOtherNoncurrent>
+	<venj-bw2-i:PayablesOtherNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesOtherNoncurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent contextRef="context47" unitRef="eur" decimals="INF">937</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent contextRef="context48" unitRef="eur" decimals="INF">916</venj-bw2-i:PayablesShareholdersParticipatingInterestsNoncurrent>
+	<venj-bw2-i:PensionPayablesNoncurrent contextRef="context47" unitRef="eur" decimals="INF">941</venj-bw2-i:PensionPayablesNoncurrent>
+	<venj-bw2-i:PensionPayablesNoncurrent contextRef="context48" unitRef="eur" decimals="INF">918</venj-bw2-i:PensionPayablesNoncurrent>
+	<venj-bw2-i:LiabilitiesNoncurrentDisclosure contextRef="context41">Informatieverschaffing over langlopende schulden</venj-bw2-i:LiabilitiesNoncurrentDisclosure>
+	<venj-bw2-i:SubordinatedLiabilitiesCurrent contextRef="context47" unitRef="eur" decimals="INF">460</venj-bw2-i:SubordinatedLiabilitiesCurrent>
+	<venj-bw2-i:SubordinatedLiabilitiesCurrent contextRef="context48" unitRef="eur" decimals="INF">460</venj-bw2-i:SubordinatedLiabilitiesCurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+	<venj-bw2-i:PayablesCreditInstitutionsCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesCreditInstitutionsCurrent>
+	<venj-bw2-i:TradePayablesCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:TradePayablesCurrent>
+	<venj-bw2-i:TradePayablesCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:TradePayablesCurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:PayablesOtherRelatedPartiesCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherRelatedPartiesCurrent>
+	<venj-bw2-i:PayablesGroupCompaniesCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesGroupCompaniesCurrent>
+	<venj-bw2-i:PayablesGroupCompaniesCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesGroupCompaniesCurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+	<venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:TaxesSocialSecurityContributionsPayableCurrent>
+	<venj-bw2-i:AdvancesReceivedCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:AdvancesReceivedCurrent>
+	<venj-bw2-i:AdvancesReceivedCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:AdvancesReceivedCurrent>
+	<venj-bw2-i:PayablesOtherCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherCurrent>
+	<venj-bw2-i:PayablesOtherCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesOtherCurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PayablesShareholdersParticipatingInterestsCurrent>
+	<venj-bw2-i:AccrualsAndDeferredIncomeCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+	<venj-bw2-i:AccrualsAndDeferredIncomeCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:AccrualsAndDeferredIncomeCurrent>
+	<venj-bw2-i:PensionPayablesCurrent contextRef="context47" unitRef="eur" decimals="INF">230</venj-bw2-i:PensionPayablesCurrent>
+	<venj-bw2-i:PensionPayablesCurrent contextRef="context48" unitRef="eur" decimals="INF">230</venj-bw2-i:PensionPayablesCurrent>
+	<rj-i:ConstructionContractsLiabilities contextRef="context47" unitRef="eur" decimals="INF">240</rj-i:ConstructionContractsLiabilities>
+	<rj-i:ConstructionContractsLiabilities contextRef="context48" unitRef="eur" decimals="INF">240</rj-i:ConstructionContractsLiabilities>
+	<venj-bw2-i:LiabilitiesCurrentDisclosure contextRef="context41">Informatieverschaffing over kortlopende schulden</venj-bw2-i:LiabilitiesCurrentDisclosure>
+	<frc-i:ShortTermPartLongTermPayablesCreditInstitutions contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesCreditInstitutions>
+	<frc-i:ShortTermPartLongTermPayablesCreditInstitutions contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesCreditInstitutions>
+	<frc-i:CurrentAccountCreditInstitutions contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountCreditInstitutions>
+	<frc-i:CurrentAccountCreditInstitutions contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountCreditInstitutions>
+	<frc-i:ShortTermPartLongTermPayablesGroupCompanies contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesGroupCompanies>
+	<frc-i:ShortTermPartLongTermPayablesGroupCompanies contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesGroupCompanies>
+	<frc-i:CurrentAccountGroupCompanies contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountGroupCompanies>
+	<frc-i:CurrentAccountGroupCompanies contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountGroupCompanies>
+	<frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+	<frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesOtherRelatedPartiesNonCurrent>
+	<frc-i:CurrentAccountOtherRelatedParties contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountOtherRelatedParties>
+	<frc-i:CurrentAccountOtherRelatedParties contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountOtherRelatedParties>
+	<frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+	<frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:ShortTermPartLongTermPayablesShareholdersParticipatingInterestsNonCurrent>
+	<frc-i:CurrentAccountShareholdersParticipatingInterests contextRef="context47" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountShareholdersParticipatingInterests>
+	<frc-i:CurrentAccountShareholdersParticipatingInterests contextRef="context48" unitRef="eur" decimals="INF">115</frc-i:CurrentAccountShareholdersParticipatingInterests>
+	<venj-bw2-i:FinancialInstrumentsDisclosure contextRef="context41">Informatieverschaffing over financiële instrumenten</venj-bw2-i:FinancialInstrumentsDisclosure>
+	<venj-bw2-i:ContingentLiabilitiesDisclosure contextRef="context41">Informatieverschaffing over voorwaardelijke schulden</venj-bw2-i:ContingentLiabilitiesDisclosure>
+	<rj-i:OffBalanceSheetAssetsDisclosure contextRef="context41">Informatieverschaffing over niet in de balans opgenomen activa</rj-i:OffBalanceSheetAssetsDisclosure>
+	<rj-i:OffBalanceSheetLiabilitiesLiabilityClaimDescription contextRef="context41">Vermelding van aansprakelijkheidsstelling in het kader van niet in de balans opgenomen verplichtingen</rj-i:OffBalanceSheetLiabilitiesLiabilityClaimDescription>
+	<rj-i:OffBalanceSheetCommitmentsPurchaseCommitmentsDescription contextRef="context41">Niet in de balans opgenomen verplichtingen inzake investeringsverplichtingen</rj-i:OffBalanceSheetCommitmentsPurchaseCommitmentsDescription>
+	<rj-i:OffBalanceSheetCommitmentsGuaranteesDescription contextRef="context41">Niet in de balans opgenomen verplichtingen, garanties</rj-i:OffBalanceSheetCommitmentsGuaranteesDescription>
+	<rj-i:InventoriesPurchaseCommitmentsDescription contextRef="context41">Verplichtingen tot aan- of verkoop van voorraden</rj-i:InventoriesPurchaseCommitmentsDescription>
+	<frc-i:ArrangementsNotCompletedDisclosure contextRef="context41">Niet-afgewikkelde overeenkomsten, toelichting</frc-i:ArrangementsNotCompletedDisclosure>
+	<frc-i:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure contextRef="context41">Niet verwerkte latente belastingverplichtingen en -vorderingen, toelichting</frc-i:DeferredTaxReceivablesAndLiabilitiesUnrecognisedDisclosure>
+	<frc-i:RentContracts contextRef="context41" unitRef="eur" decimals="INF">1000</frc-i:RentContracts>
+	<frc-i:RentContracts contextRef="context42" unitRef="eur" decimals="INF">1000</frc-i:RentContracts>
+	<frc-i:RentalObligationDisclosure contextRef="context41">Huurverplichtingen, toelichting</frc-i:RentalObligationDisclosure>
+	<frc-i:FixedMaturityRentContracts contextRef="context406">Ja</frc-i:FixedMaturityRentContracts>
+	<frc-i:MaturityInMonthsRentContracts contextRef="context406" unitRef="pure" decimals="INF">36</frc-i:MaturityInMonthsRentContracts>
+	<frc-i:ClosingDateRentContracts contextRef="context406">2017-12-31</frc-i:ClosingDateRentContracts>
+	<frc-i:RentCostsYearlyRentContracts contextRef="context406" unitRef="eur" decimals="INF">1000</frc-i:RentCostsYearlyRentContracts>
+	<frc-i:ContractsOperatingLease contextRef="context41" unitRef="eur" decimals="INF">1000</frc-i:ContractsOperatingLease>
+	<frc-i:ContractsOperatingLease contextRef="context42" unitRef="eur" decimals="INF">1000</frc-i:ContractsOperatingLease>
+	<frc-i:NumberOperatingLeaseContracts contextRef="context41" unitRef="pure" decimals="INF">1000</frc-i:NumberOperatingLeaseContracts>
+	<frc-i:NumberOperatingLeaseContracts contextRef="context42" unitRef="pure" decimals="INF">1000</frc-i:NumberOperatingLeaseContracts>
+	<rj-i:OperatingLeasesDisclosure contextRef="context41">Informatieverschaffing over operationele leases</rj-i:OperatingLeasesDisclosure>
+	<frc-i:ContractsOperatingLeaseNameCompany contextRef="context415">Lease002</frc-i:ContractsOperatingLeaseNameCompany>
+	<frc-i:ObligatoryLeaseContractYearly contextRef="context415" unitRef="eur" decimals="INF">1500</frc-i:ObligatoryLeaseContractYearly>
+	<frc-i:FixedMaturityLeaseContracts contextRef="context415">Ja</frc-i:FixedMaturityLeaseContracts>
+	<frc-i:MaturityInMonthsContractsOperatingLease contextRef="context415" unitRef="pure" decimals="INF">36</frc-i:MaturityInMonthsContractsOperatingLease>
+	<frc-i:ClosingDateContractsOperatingLease contextRef="context415">2016-12-31</frc-i:ClosingDateContractsOperatingLease>
+	<frc-i:MultiannualFinancialLiabilitiesOtherDisclosure contextRef="context41">Overige meerjarige financiële verplichtingen, toelichting</frc-i:MultiannualFinancialLiabilitiesOtherDisclosure>
+	<venj-bw2-i:ContingentLiabilitiesOther contextRef="context47" unitRef="eur" decimals="INF">5000</venj-bw2-i:ContingentLiabilitiesOther>
+	<venj-bw2-i:ContingentLiabilitiesOther contextRef="context48" unitRef="eur" decimals="INF">5000</venj-bw2-i:ContingentLiabilitiesOther>
+	<frc-i:PurchaseValueRegisterBoundGood contextRef="context423" unitRef="eur" decimals="INF">70100</frc-i:PurchaseValueRegisterBoundGood>
+	<frc-i:PurchaseYearRegisterBoundGood contextRef="context423" unitRef="pure" decimals="INF">2009</frc-i:PurchaseYearRegisterBoundGood>
+	<frc-i:BalanceSheetValueRegisterBoundGood contextRef="context423" unitRef="eur" decimals="INF">800</frc-i:BalanceSheetValueRegisterBoundGood>
+	<frc-i:AmortisationMethodRegisterBoundGood contextRef="context423">Lineaire methode</frc-i:AmortisationMethodRegisterBoundGood>
+	<frc-i:PurchaseValueRegisterBoundGood contextRef="context427" unitRef="eur" decimals="INF">15000</frc-i:PurchaseValueRegisterBoundGood>
+	<frc-i:PurchaseYearRegisterBoundGood contextRef="context427" unitRef="pure" decimals="INF">2009</frc-i:PurchaseYearRegisterBoundGood>
+	<frc-i:BalanceSheetValueRegisterBoundGood contextRef="context427" unitRef="eur" decimals="INF">800</frc-i:BalanceSheetValueRegisterBoundGood>
+	<frc-i:AmortisationMethodRegisterBoundGood contextRef="context427">Lineaire methode</frc-i:AmortisationMethodRegisterBoundGood>
+	<frc-i:ObjectSecurities contextRef="context431">qwerty</frc-i:ObjectSecurities>
+	<frc-i:RankSecurities contextRef="context431" unitRef="pure" decimals="INF">1</frc-i:RankSecurities>
+	<frc-i:ValueSecurities contextRef="context431" unitRef="eur" decimals="INF">1000</frc-i:ValueSecurities>
+	<frc-i:SecuritiesDescription contextRef="context434">Niet register</frc-i:SecuritiesDescription>
+	<frc-i:NameCounterpartyReceivables contextRef="context435">Naam tegenpartij</frc-i:NameCounterpartyReceivables>
+	<frc-i:BalanceSheetValueReceivables contextRef="context435" unitRef="eur" decimals="INF">470</frc-i:BalanceSheetValueReceivables>
+	<frc-i:RedemptionYearlyReceivables contextRef="context435" unitRef="eur" decimals="INF">100</frc-i:RedemptionYearlyReceivables>
+	<frc-i:InterestRateReceivablesIndicator contextRef="context435">Ja</frc-i:InterestRateReceivablesIndicator>
+	<frc-i:InterestRateYearlyReceivablesPercentage contextRef="context435" unitRef="pure" decimals="INF">0.02</frc-i:InterestRateYearlyReceivablesPercentage>
+	<frc-i:SubordinationReceivablesIndicator contextRef="context435">Ja</frc-i:SubordinationReceivablesIndicator>
+	<frc-i:SecurityReceivables contextRef="context435">Nee</frc-i:SecurityReceivables>
+	<frc-i:NameCounterpartyReceivables contextRef="context442">Naam tegenpartij</frc-i:NameCounterpartyReceivables>
+	<frc-i:BalanceSheetValueReceivables contextRef="context442" unitRef="eur" decimals="INF">470</frc-i:BalanceSheetValueReceivables>
+	<frc-i:RedemptionYearlyReceivables contextRef="context442" unitRef="eur" decimals="INF">200</frc-i:RedemptionYearlyReceivables>
+	<frc-i:InterestRateReceivablesIndicator contextRef="context442">Ja</frc-i:InterestRateReceivablesIndicator>
+	<frc-i:InterestRateYearlyReceivablesPercentage contextRef="context442" unitRef="pure" decimals="INF">0.04</frc-i:InterestRateYearlyReceivablesPercentage>
+	<frc-i:SubordinationReceivablesIndicator contextRef="context442">Ja</frc-i:SubordinationReceivablesIndicator>
+	<frc-i:SecurityReceivables contextRef="context442">Nee</frc-i:SecurityReceivables>
+	<frc-i:NameCounterpartyReceivables contextRef="context449">Naam tegenpartij</frc-i:NameCounterpartyReceivables>
+	<frc-i:BalanceSheetValueReceivables contextRef="context449" unitRef="eur" decimals="INF">470</frc-i:BalanceSheetValueReceivables>
+	<frc-i:RedemptionYearlyReceivables contextRef="context449" unitRef="eur" decimals="INF">200</frc-i:RedemptionYearlyReceivables>
+	<frc-i:InterestRateReceivablesIndicator contextRef="context449">Ja</frc-i:InterestRateReceivablesIndicator>
+	<frc-i:InterestRateYearlyReceivablesPercentage contextRef="context449" unitRef="pure" decimals="INF">0.04</frc-i:InterestRateYearlyReceivablesPercentage>
+	<frc-i:SubordinationReceivablesIndicator contextRef="context449">Ja</frc-i:SubordinationReceivablesIndicator>
+	<frc-i:SecurityReceivables contextRef="context449">Nee</frc-i:SecurityReceivables>
+	<frc-i:NameCounterpartyReceivables contextRef="context456">Naam tegenpartij</frc-i:NameCounterpartyReceivables>
+	<frc-i:BalanceSheetValueReceivables contextRef="context456" unitRef="eur" decimals="INF">2100</frc-i:BalanceSheetValueReceivables>
+	<frc-i:RedemptionYearlyReceivables contextRef="context456" unitRef="eur" decimals="INF">200</frc-i:RedemptionYearlyReceivables>
+	<frc-i:InterestRateReceivablesIndicator contextRef="context456">Ja</frc-i:InterestRateReceivablesIndicator>
+	<frc-i:InterestRateYearlyReceivablesPercentage contextRef="context456" unitRef="pure" decimals="INF">0.04</frc-i:InterestRateYearlyReceivablesPercentage>
+	<frc-i:SubordinationReceivablesIndicator contextRef="context456">Ja</frc-i:SubordinationReceivablesIndicator>
+	<frc-i:SecurityReceivables contextRef="context456">Nee</frc-i:SecurityReceivables>
+	<frc-i:TradeReceivablesThirtyDays contextRef="context47" unitRef="eur" decimals="INF">50</frc-i:TradeReceivablesThirtyDays>
+	<frc-i:TradeReceivablesThirtyDays contextRef="context48" unitRef="eur" decimals="INF">50</frc-i:TradeReceivablesThirtyDays>
+	<frc-i:TradeReceivablesSixtyDays contextRef="context47" unitRef="eur" decimals="INF">20</frc-i:TradeReceivablesSixtyDays>
+	<frc-i:TradeReceivablesSixtyDays contextRef="context48" unitRef="eur" decimals="INF">20</frc-i:TradeReceivablesSixtyDays>
+	<frc-i:TradeReceivablesNinetyDays contextRef="context47" unitRef="eur" decimals="INF">20</frc-i:TradeReceivablesNinetyDays>
+	<frc-i:TradeReceivablesNinetyDays contextRef="context48" unitRef="eur" decimals="INF">20</frc-i:TradeReceivablesNinetyDays>
+	<frc-i:TradeReceivablesAboveNinetyDays contextRef="context47" unitRef="eur" decimals="INF">10</frc-i:TradeReceivablesAboveNinetyDays>
+	<frc-i:TradeReceivablesAboveNinetyDays contextRef="context48" unitRef="eur" decimals="INF">10</frc-i:TradeReceivablesAboveNinetyDays>
+	<frc-i:NameCounterpartyPayables contextRef="context471">Naam tegenpartij</frc-i:NameCounterpartyPayables>
+	<frc-i:FamilyFriendsOthersSubordinatedLoansIndicator contextRef="context471">Ja</frc-i:FamilyFriendsOthersSubordinatedLoansIndicator>
+	<frc-i:BalanceSheetValuePayables contextRef="context471" unitRef="eur" decimals="INF">1397</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context471" unitRef="eur" decimals="INF">50000</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:NominalCreditLimit contextRef="context471" unitRef="eur" decimals="INF">1000</frc-i:NominalCreditLimit>
+	<frc-i:AdditionalCreditLimit contextRef="context471" unitRef="eur" decimals="INF">2000</frc-i:AdditionalCreditLimit>
+	<frc-i:RedemptionYearlyPayables contextRef="context471" unitRef="eur" decimals="INF">500</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context471">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context471" unitRef="pure" decimals="INF">0.12</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context471">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context471" unitRef="pure" decimals="INF">25</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context471">Nee</frc-i:SecurityPayables>
+	<frc-i:NameCounterpartyPayables contextRef="context483">Naam tegenpartij</frc-i:NameCounterpartyPayables>
+	<frc-i:BalanceSheetValuePayables contextRef="context483" unitRef="eur" decimals="INF">1167</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context483" unitRef="eur" decimals="INF">10000</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:NominalCreditLimit contextRef="context483" unitRef="eur" decimals="INF">500</frc-i:NominalCreditLimit>
+	<frc-i:AdditionalCreditLimit contextRef="context483" unitRef="eur" decimals="INF">200</frc-i:AdditionalCreditLimit>
+	<frc-i:RedemptionYearlyPayables contextRef="context483" unitRef="eur" decimals="INF">100</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context483">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context483" unitRef="pure" decimals="INF">0.12</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context483">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context483" unitRef="pure" decimals="INF">20</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context483">Nee</frc-i:SecurityPayables>
+	<frc-i:NameCounterpartyPayables contextRef="context494">Naam tegenpartij</frc-i:NameCounterpartyPayables>
+	<frc-i:BalanceSheetValuePayables contextRef="context494" unitRef="eur" decimals="INF">1167</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context494" unitRef="eur" decimals="INF">1500</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:RedemptionYearlyPayables contextRef="context494" unitRef="eur" decimals="INF">150</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context494">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context494" unitRef="pure" decimals="INF">0.06</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context494">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context494" unitRef="pure" decimals="INF">20</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context494">Nee</frc-i:SecurityPayables>
+	<frc-i:NameCounterpartyPayables contextRef="context503">Naam tegenpartij</frc-i:NameCounterpartyPayables>
+	<frc-i:BalanceSheetValuePayables contextRef="context503" unitRef="eur" decimals="INF">1167</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context503" unitRef="eur" decimals="INF">10000</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:RedemptionYearlyPayables contextRef="context503" unitRef="eur" decimals="INF">500</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context503">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context503" unitRef="pure" decimals="INF">0.05</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context503">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context503" unitRef="pure" decimals="INF">36</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context503">Nee</frc-i:SecurityPayables>
+	<frc-i:NameCounterpartyPayables contextRef="context512">Naam tegenparti</frc-i:NameCounterpartyPayables>
+	<frc-i:BalanceSheetValuePayables contextRef="context512" unitRef="eur" decimals="INF">1167</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context512" unitRef="eur" decimals="INF">1500</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:RedemptionYearlyPayables contextRef="context512" unitRef="eur" decimals="INF">150</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context512">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context512" unitRef="pure" decimals="INF">0.06</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context512">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context512" unitRef="pure" decimals="INF">12</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context512">Nee</frc-i:SecurityPayables>
+	<frc-i:NameCounterpartyPayables contextRef="context521">Naam tegenpartij</frc-i:NameCounterpartyPayables>
+	<frc-i:FamilyFriendsOthersSubordinatedLoansIndicator contextRef="context521">Ja</frc-i:FamilyFriendsOthersSubordinatedLoansIndicator>
+	<frc-i:BalanceSheetValuePayables contextRef="context521" unitRef="eur" decimals="INF">9000</frc-i:BalanceSheetValuePayables>
+	<frc-i:CapitalSumBorrowingArrangements contextRef="context521" unitRef="eur" decimals="INF">5000</frc-i:CapitalSumBorrowingArrangements>
+	<frc-i:RedemptionYearlyPayables contextRef="context521" unitRef="eur" decimals="INF">150</frc-i:RedemptionYearlyPayables>
+	<frc-i:InterestRatePayablesIndicator contextRef="context521">Ja</frc-i:InterestRatePayablesIndicator>
+	<frc-i:InterestRateYearlyPayablesPercentage contextRef="context521" unitRef="pure" decimals="INF">0.06</frc-i:InterestRateYearlyPayablesPercentage>
+	<frc-i:FixedMaturityPayablesIndicator contextRef="context521">Ja</frc-i:FixedMaturityPayablesIndicator>
+	<frc-i:OriginalMaturityInMonthsBorrowingArrangements contextRef="context521" unitRef="pure" decimals="INF">25</frc-i:OriginalMaturityInMonthsBorrowingArrangements>
+	<frc-i:SecurityPayables contextRef="context521">Nee</frc-i:SecurityPayables>
+	<frc-i:TradePayablesThirtyDays contextRef="context47" unitRef="eur" decimals="INF">57</frc-i:TradePayablesThirtyDays>
+	<frc-i:TradePayablesThirtyDays contextRef="context48" unitRef="eur" decimals="INF">57</frc-i:TradePayablesThirtyDays>
+	<frc-i:TradePayablesSixtyDays contextRef="context47" unitRef="eur" decimals="INF">57</frc-i:TradePayablesSixtyDays>
+	<frc-i:TradePayablesSixtyDays contextRef="context48" unitRef="eur" decimals="INF">57</frc-i:TradePayablesSixtyDays>
+	<frc-i:TradePayablesNinetyDays contextRef="context47" unitRef="eur" decimals="INF">57</frc-i:TradePayablesNinetyDays>
+	<frc-i:TradePayablesNinetyDays contextRef="context48" unitRef="eur" decimals="INF">57</frc-i:TradePayablesNinetyDays>
+	<frc-i:TradePayablesAboveNinetyDays contextRef="context47" unitRef="eur" decimals="INF">59</frc-i:TradePayablesAboveNinetyDays>
+	<frc-i:TradePayablesAboveNinetyDays contextRef="context48" unitRef="eur" decimals="INF">59</frc-i:TradePayablesAboveNinetyDays>
+	<venj-bw2-i:OperatingIncomeDisclosure contextRef="context41">Informatieverschaffing over bedrijfsopbrengsten</venj-bw2-i:OperatingIncomeDisclosure>
+	<frc-i:NameOperation contextRef="context540">Naam activiteit</frc-i:NameOperation>
+	<frc-i:TurnoverOperation contextRef="context540" unitRef="eur" decimals="INF">107000</frc-i:TurnoverOperation>
+	<frc-i:PurchaseCostsOperation contextRef="context540" unitRef="eur" decimals="INF">1000</frc-i:PurchaseCostsOperation>
+	<frc-i:WagesSalariesSocialSecurityChargesOperation contextRef="context540" unitRef="eur" decimals="INF">1000</frc-i:WagesSalariesSocialSecurityChargesOperation>
+	<frc-i:OtherOperatingExpensesOperation contextRef="context540" unitRef="eur" decimals="INF">1000</frc-i:OtherOperatingExpensesOperation>
+	<frc-i:CostPriceTurnoverOperation contextRef="context540" unitRef="eur" decimals="INF">3000</frc-i:CostPriceTurnoverOperation>
+	<frc-i:RentalRevenues contextRef="context41" unitRef="eur" decimals="INF">1500</frc-i:RentalRevenues>
+	<frc-i:RentalRevenues contextRef="context42" unitRef="eur" decimals="INF">1500</frc-i:RentalRevenues>
+	<frc-i:RemainingOperatingIncome contextRef="context41" unitRef="eur" decimals="INF">500</frc-i:RemainingOperatingIncome>
+	<frc-i:RemainingOperatingIncome contextRef="context42" unitRef="eur" decimals="INF">500</frc-i:RemainingOperatingIncome>
+	<venj-bw2-i:OperatingExpensesDisclosure contextRef="context41">Informatieverschaffing over bedrijfskosten</venj-bw2-i:OperatingExpensesDisclosure>
+	<frc-i:OutsourcedWork contextRef="context41" unitRef="eur" decimals="INF">3000</frc-i:OutsourcedWork>
+	<frc-i:OutsourcedWork contextRef="context42" unitRef="eur" decimals="INF">3000</frc-i:OutsourcedWork>
+	<frc-i:ExternalCostOther contextRef="context41" unitRef="eur" decimals="INF">2000</frc-i:ExternalCostOther>
+	<frc-i:ExternalCostOther contextRef="context42" unitRef="eur" decimals="INF">2000</frc-i:ExternalCostOther>
+	<venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses contextRef="context41" unitRef="eur" decimals="INF">5000</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+	<venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses contextRef="context42" unitRef="eur" decimals="INF">5000</venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses>
+	<venj-bw2-i:WagesSalaries contextRef="context41" unitRef="eur" decimals="INF">1000</venj-bw2-i:WagesSalaries>
+	<venj-bw2-i:WagesSalaries contextRef="context42" unitRef="eur" decimals="INF">1000</venj-bw2-i:WagesSalaries>
+	<venj-bw2-i:SocialSecurityContributions contextRef="context41" unitRef="eur" decimals="INF">1000</venj-bw2-i:SocialSecurityContributions>
+	<venj-bw2-i:SocialSecurityContributions contextRef="context42" unitRef="eur" decimals="INF">1000</venj-bw2-i:SocialSecurityContributions>
+	<venj-bw2-i:PensionCosts contextRef="context41" unitRef="eur" decimals="INF">1000</venj-bw2-i:PensionCosts>
+	<venj-bw2-i:PensionCosts contextRef="context42" unitRef="eur" decimals="INF">1000</venj-bw2-i:PensionCosts>
+	<rj-i:EmployeeBenefitsExpensesOther contextRef="context41" unitRef="eur" decimals="INF">1000</rj-i:EmployeeBenefitsExpensesOther>
+	<rj-i:EmployeeBenefitsExpensesOther contextRef="context42" unitRef="eur" decimals="INF">1000</rj-i:EmployeeBenefitsExpensesOther>
+	<venj-bw2-i:EmployeeBenefitsExpenses contextRef="context41" unitRef="eur" decimals="INF">4000</venj-bw2-i:EmployeeBenefitsExpenses>
+	<venj-bw2-i:EmployeeBenefitsExpenses contextRef="context42" unitRef="eur" decimals="INF">4000</venj-bw2-i:EmployeeBenefitsExpenses>
+	<frc-i:SalariesAndBenefitsManagingSupervisoryDirectors contextRef="context41" unitRef="eur" decimals="INF">2000</frc-i:SalariesAndBenefitsManagingSupervisoryDirectors>
+	<frc-i:SalariesAndBenefitsManagingSupervisoryDirectors contextRef="context42" unitRef="eur" decimals="INF">2000</frc-i:SalariesAndBenefitsManagingSupervisoryDirectors>
+	<frc-i:WagesAndSalariesEmployees contextRef="context41" unitRef="eur" decimals="INF">2000</frc-i:WagesAndSalariesEmployees>
+	<frc-i:WagesAndSalariesEmployees contextRef="context42" unitRef="eur" decimals="INF">2000</frc-i:WagesAndSalariesEmployees>
+	
+	<frc-i:DepreciationsExpensesImmovableProperty contextRef="context41" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesImmovableProperty>
+	<frc-i:DepreciationsExpensesImmovableProperty contextRef="context42" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesImmovableProperty>
+	<frc-i:DepreciationsExpensesMachineriesAndFixturesAndFittings contextRef="context41" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesMachineriesAndFixturesAndFittings>
+	<frc-i:DepreciationsExpensesMachineriesAndFixturesAndFittings contextRef="context42" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesMachineriesAndFixturesAndFittings>
+	<frc-i:DepreciationsExpensesTransportation contextRef="context41" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesTransportation>
+	<frc-i:DepreciationsExpensesTransportation contextRef="context42" unitRef="eur" decimals="INF">10000</frc-i:DepreciationsExpensesTransportation>
+	<frc-i:TangibleAssetsOtherDepreciation contextRef="context41" unitRef="eur" decimals="INF">10000</frc-i:TangibleAssetsOtherDepreciation>
+	<frc-i:TangibleAssetsOtherDepreciation contextRef="context42" unitRef="eur" decimals="INF">10000</frc-i:TangibleAssetsOtherDepreciation>
+	
+	<rj-i:ImpairmentIntangibleAssets contextRef="context41" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentIntangibleAssets>
+	<rj-i:ImpairmentIntangibleAssets contextRef="context42" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentIntangibleAssets>
+	<rj-i:ImpairmentPropertyPlantEquipment contextRef="context41" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentPropertyPlantEquipment>
+	<rj-i:ImpairmentPropertyPlantEquipment contextRef="context42" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentPropertyPlantEquipment>
+	<rj-i:ImpairmentIntangibleAssetsReversal contextRef="context41" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentIntangibleAssetsReversal>
+	<rj-i:ImpairmentIntangibleAssetsReversal contextRef="context42" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentIntangibleAssetsReversal>
+	<rj-i:ImpairmentPropertyPlantEquipmentReversal contextRef="context41" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentPropertyPlantEquipmentReversal>
+	<rj-i:ImpairmentPropertyPlantEquipmentReversal contextRef="context42" unitRef="eur" decimals="INF">1000</rj-i:ImpairmentPropertyPlantEquipmentReversal>
+	
+	<venj-bw2-i:OperatingExpensesOther contextRef="context41" unitRef="eur" decimals="INF">1300</venj-bw2-i:OperatingExpensesOther>
+	<venj-bw2-i:OperatingExpensesOther contextRef="context42" unitRef="eur" decimals="INF">1300</venj-bw2-i:OperatingExpensesOther>
+	
+	<rj-i:PersonnelRelatedOtherExpenses contextRef="context41" unitRef="eur" decimals="INF">700</rj-i:PersonnelRelatedOtherExpenses>
+	<rj-i:PersonnelRelatedOtherExpenses contextRef="context42" unitRef="eur" decimals="INF">700</rj-i:PersonnelRelatedOtherExpenses>
+	<rj-i:AccommodationCosts contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:AccommodationCosts>
+	<rj-i:AccommodationCosts contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:AccommodationCosts>
+	<rj-i:SalesRelatedExpenses contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:SalesRelatedExpenses>
+	<rj-i:SalesRelatedExpenses contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:SalesRelatedExpenses>
+	<rj-i:CarAndTransportCosts contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:CarAndTransportCosts>
+	<rj-i:CarAndTransportCosts contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:CarAndTransportCosts>
+	<frc-i:OperationalLeaseCosts contextRef="context41" unitRef="eur" decimals="INF">100</frc-i:OperationalLeaseCosts>
+	<frc-i:OperationalLeaseCosts contextRef="context42" unitRef="eur" decimals="INF">100</frc-i:OperationalLeaseCosts>
+	<rj-i:OfficeRelatedExpenses contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:OfficeRelatedExpenses>
+	<rj-i:OfficeRelatedExpenses contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:OfficeRelatedExpenses>
+	<rj-i:GeneralExpenses contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:GeneralExpenses>
+	<rj-i:GeneralExpenses contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:GeneralExpenses>
+	<rj-i:OperationalExpenses contextRef="context41" unitRef="eur" decimals="INF">100</rj-i:OperationalExpenses>
+	<rj-i:OperationalExpenses contextRef="context42" unitRef="eur" decimals="INF">100</rj-i:OperationalExpenses>
+	
+	<frc-i:ExpensesResearchAndDevelopment contextRef="context41" unitRef="eur" decimals="INF">100</frc-i:ExpensesResearchAndDevelopment>
+	<frc-i:ExpensesResearchAndDevelopment contextRef="context42" unitRef="eur" decimals="INF">100</frc-i:ExpensesResearchAndDevelopment>
+	<frc-i:FranchiseFee contextRef="context41" unitRef="eur" decimals="INF">100</frc-i:FranchiseFee>
+	<frc-i:FranchiseFee contextRef="context42" unitRef="eur" decimals="INF">100</frc-i:FranchiseFee>
+	<frc-i:ManagementFee contextRef="context41" unitRef="eur" decimals="INF">100</frc-i:ManagementFee>
+	<frc-i:ManagementFee contextRef="context42" unitRef="eur" decimals="INF">100</frc-i:ManagementFee>
+	
+	<venj-bw2-i:InterestIncomeRelatedIncomeDisclosure contextRef="context41">Informatieverschaffing over rentebaten en soortgelijke opbrengsten</venj-bw2-i:InterestIncomeRelatedIncomeDisclosure>
+	<venj-bw2-i:InterestExpensesRelatedExpensesDisclosure contextRef="context41">Informatieverschaffing over rentelasten en soortgelijke kosten</venj-bw2-i:InterestExpensesRelatedExpensesDisclosure>
+	<venj-bw2-i:InterestExpensesInterestCapitalisedDuringPeriodDisclosure contextRef="context41">Informatieverschaffing over geactiveerde rentelasten gedurende de periode</venj-bw2-i:InterestExpensesInterestCapitalisedDuringPeriodDisclosure>
+	<venj-bw2-i:ResultBeforeTaxOrdinaryActivitiesDisclosure contextRef="context41">Informatieverschaffing over resultaat uit gewone bedrijfsuitoefening voor belastingen</venj-bw2-i:ResultBeforeTaxOrdinaryActivitiesDisclosure>
+	<venj-bw2-i:ResultAfterTaxOrdinaryActivitiesDisclosure contextRef="context41">Informatieverschaffing over resultaat uit gewone bedrijfsuitoefening na belastingen</venj-bw2-i:ResultAfterTaxOrdinaryActivitiesDisclosure>
+	<venj-bw2-i:ResultAttributableNoncontrollingInterestDisclosure contextRef="context41">Informatieverschaffing over resultaat aandeel van derden</venj-bw2-i:ResultAttributableNoncontrollingInterestDisclosure>
+	<venj-bw2-i:NetResultAfterTaxDisclosure contextRef="context41">Resultaat na belastingen, toelichting</venj-bw2-i:NetResultAfterTaxDisclosure>
+	<venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure contextRef="context41">Informatieverschaffing over afwijkingen van de voorschriften op basis van het inzichtvereiste</venj-bw2-i:DeviationsRegulationsBasedTrueAndFairViewDisclosure>
+	<venj-bw2-i:AverageNumberEmployeesNetherlands contextRef="context41" unitRef="pure" decimals="INF">300</venj-bw2-i:AverageNumberEmployeesNetherlands>
+	<venj-bw2-i:AverageNumberEmployeesNetherlands contextRef="context42" unitRef="pure" decimals="INF">300</venj-bw2-i:AverageNumberEmployeesNetherlands>
+	<venj-bw2-i:AverageNumberEmployeesAbroad contextRef="context41" unitRef="pure" decimals="INF">150</venj-bw2-i:AverageNumberEmployeesAbroad>
+	<venj-bw2-i:AverageNumberEmployeesAbroad contextRef="context42" unitRef="pure" decimals="INF">150</venj-bw2-i:AverageNumberEmployeesAbroad>
+	<venj-bw2-i:AverageNumberEmployees contextRef="context41" unitRef="pure" decimals="INF">450</venj-bw2-i:AverageNumberEmployees>
+	<venj-bw2-i:AverageNumberEmployees contextRef="context42" unitRef="pure" decimals="INF">450</venj-bw2-i:AverageNumberEmployees>
+	<venj-bw2-i:AverageNumberEmployeesDisclosure contextRef="context41">Informatieverschaffing over gemiddeld aantal werknemers over de periode</venj-bw2-i:AverageNumberEmployeesDisclosure>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context632" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context633" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context634" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context635" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context636" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context637" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context638" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context639" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context640" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context641" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context642" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context643" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context644" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context645" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors contextRef="context646" unitRef="eur" decimals="INF">50000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectors>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context632" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context633" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context634" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context635" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context636" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context637" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context638" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context639" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context640" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context641" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context642" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context643" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context644" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context645" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate contextRef="context646" unitRef="pure" decimals="INF">0.12</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsInterestRate>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context632" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context633" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context634" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context635" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context636" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context637" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context638" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context639" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context640" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context641" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context642" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context643" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context644" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context645" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments contextRef="context646" unitRef="eur" decimals="INF">15000</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsRepayments>
+	<venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsDisclosure contextRef="context41">Informatieverschaffing over leningen, voorschotten en garanties ten behoeve van bestuurders en commissarissen</venj-bw2-i:LoansAdvancesGuaranteesOnBehalfOfManagingSupervisoryDirectorsDisclosure>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context678" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context679" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context680" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context681" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context682" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context683" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context684" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context685" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context686" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context687" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context688" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context689" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context690" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context691" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context692" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context693" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context694" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context695" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context696" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors contextRef="context697" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationManagingDirectorsFormerManagingDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context678" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context679" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context680" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context681" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context682" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context683" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context684" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context685" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context686" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context687" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context688" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context689" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context690" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context691" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context692" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context693" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context694" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context695" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context696" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors contextRef="context697" unitRef="eur" decimals="INF">200000</venj-bw2-i:RemunerationSupervisoryDirectorsFormerSupervisoryDirectors>
+	<venj-bw2-i:RemunerationManagingSupervisoryDirectorsExemptionDescription contextRef="context41">Vrijstelling voor het openbaren van de bezoldiging van bestuurders en commissarissen</venj-bw2-i:RemunerationManagingSupervisoryDirectorsExemptionDescription>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context719" unitRef="pure" decimals="INF">100000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context720" unitRef="pure" decimals="INF">100000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context719" unitRef="pure" decimals="INF">40000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context720" unitRef="pure" decimals="INF">40000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:GrossCultivationSurfaceIndoor contextRef="context719" unitRef="pure" decimals="INF">3100</frc-i:GrossCultivationSurfaceIndoor>
+	<frc-i:GrossCultivationSurfaceIndoor contextRef="context720" unitRef="pure" decimals="INF">3100</frc-i:GrossCultivationSurfaceIndoor>
+	<frc-i:PropertyPlantEquipmentMultipleYearsPlantStock contextRef="context719" unitRef="eur" decimals="INF">3200</frc-i:PropertyPlantEquipmentMultipleYearsPlantStock>
+	<frc-i:PropertyPlantEquipmentMultipleYearsPlantStock contextRef="context720" unitRef="eur" decimals="INF">3200</frc-i:PropertyPlantEquipmentMultipleYearsPlantStock>
+	<frc-i:ReceivablesMembersLoans contextRef="context719" unitRef="eur" decimals="INF">3300</frc-i:ReceivablesMembersLoans>
+	<frc-i:ReceivablesMembersLoans contextRef="context720" unitRef="eur" decimals="INF">3300</frc-i:ReceivablesMembersLoans>
+	<frc-i:GrossRevenueProduction contextRef="context719" unitRef="eur" decimals="INF">3400</frc-i:GrossRevenueProduction>
+	<frc-i:GrossRevenueProduction contextRef="context720" unitRef="eur" decimals="INF">3400</frc-i:GrossRevenueProduction>
+	<frc-i:StockChange contextRef="context719" unitRef="eur" decimals="INF">3500</frc-i:StockChange>
+	<frc-i:StockChange contextRef="context720" unitRef="eur" decimals="INF">3500</frc-i:StockChange>
+	<frc-i:PackagingFee contextRef="context719" unitRef="eur" decimals="INF">3600</frc-i:PackagingFee>
+	<frc-i:PackagingFee contextRef="context720" unitRef="eur" decimals="INF">3600</frc-i:PackagingFee>
+	<frc-i:GMOGrant contextRef="context719" unitRef="eur" decimals="INF">3700</frc-i:GMOGrant>
+	<frc-i:GMOGrant contextRef="context720" unitRef="eur" decimals="INF">3700</frc-i:GMOGrant>
+	<frc-i:ElectricitySales contextRef="context719" unitRef="eur" decimals="INF">3800</frc-i:ElectricitySales>
+	<frc-i:ElectricitySales contextRef="context720" unitRef="eur" decimals="INF">3800</frc-i:ElectricitySales>
+	<frc-i:OtherRelatedIncome contextRef="context719" unitRef="eur" decimals="INF">3900</frc-i:OtherRelatedIncome>
+	<frc-i:OtherRelatedIncome contextRef="context720" unitRef="eur" decimals="INF">3900</frc-i:OtherRelatedIncome>
+	<frc-i:SowingCosts contextRef="context719" unitRef="eur" decimals="INF">4100</frc-i:SowingCosts>
+	<frc-i:SowingCosts contextRef="context720" unitRef="eur" decimals="INF">4100</frc-i:SowingCosts>
+	<frc-i:SubstratumCosts contextRef="context719" unitRef="eur" decimals="INF">4200</frc-i:SubstratumCosts>
+	<frc-i:SubstratumCosts contextRef="context720" unitRef="eur" decimals="INF">4200</frc-i:SubstratumCosts>
+	<frc-i:ManuringCosts contextRef="context719" unitRef="eur" decimals="INF">4300</frc-i:ManuringCosts>
+	<frc-i:ManuringCosts contextRef="context720" unitRef="eur" decimals="INF">4300</frc-i:ManuringCosts>
+	<frc-i:FertilizationCosts contextRef="context719" unitRef="eur" decimals="INF">4400</frc-i:FertilizationCosts>
+	<frc-i:FertilizationCosts contextRef="context720" unitRef="eur" decimals="INF">4400</frc-i:FertilizationCosts>
+	<frc-i:CropProtectionCosts contextRef="context719" unitRef="eur" decimals="INF">4500</frc-i:CropProtectionCosts>
+	<frc-i:CropProtectionCosts contextRef="context720" unitRef="eur" decimals="INF">4500</frc-i:CropProtectionCosts>
+	<frc-i:CropInsuranceCosts contextRef="context719" unitRef="eur" decimals="INF">4600</frc-i:CropInsuranceCosts>
+	<frc-i:CropInsuranceCosts contextRef="context720" unitRef="eur" decimals="INF">4600</frc-i:CropInsuranceCosts>
+	<frc-i:CultivationDisposalCosts contextRef="context719" unitRef="eur" decimals="INF">4700</frc-i:CultivationDisposalCosts>
+	<frc-i:CultivationDisposalCosts contextRef="context720" unitRef="eur" decimals="INF">4700</frc-i:CultivationDisposalCosts>
+	<frc-i:CO2OCAPWaterCosts contextRef="context719" unitRef="eur" decimals="INF">4800</frc-i:CO2OCAPWaterCosts>
+	<frc-i:CO2OCAPWaterCosts contextRef="context720" unitRef="eur" decimals="INF">4800</frc-i:CO2OCAPWaterCosts>
+	<frc-i:CultivationCostsOther contextRef="context719" unitRef="eur" decimals="INF">4900</frc-i:CultivationCostsOther>
+	<frc-i:CultivationCostsOther contextRef="context720" unitRef="eur" decimals="INF">4900</frc-i:CultivationCostsOther>
+	<frc-i:CultivationCosts contextRef="context719" unitRef="eur" decimals="INF">40500</frc-i:CultivationCosts>
+	<frc-i:CultivationCosts contextRef="context720" unitRef="eur" decimals="INF">40500</frc-i:CultivationCosts>
+	<frc-i:GasCosts contextRef="context719" unitRef="eur" decimals="INF">4000</frc-i:GasCosts>
+	<frc-i:GasCosts contextRef="context720" unitRef="eur" decimals="INF">4000</frc-i:GasCosts>
+	<frc-i:ElectricityCosts contextRef="context719" unitRef="eur" decimals="INF">4100</frc-i:ElectricityCosts>
+	<frc-i:ElectricityCosts contextRef="context720" unitRef="eur" decimals="INF">4100</frc-i:ElectricityCosts>
+	<frc-i:WKKMaintenanceCosts contextRef="context719" unitRef="eur" decimals="INF">4200</frc-i:WKKMaintenanceCosts>
+	<frc-i:WKKMaintenanceCosts contextRef="context720" unitRef="eur" decimals="INF">4200</frc-i:WKKMaintenanceCosts>
+	<frc-i:WKKLeaseCosts contextRef="context719" unitRef="eur" decimals="INF">4300</frc-i:WKKLeaseCosts>
+	<frc-i:WKKLeaseCosts contextRef="context720" unitRef="eur" decimals="INF">4300</frc-i:WKKLeaseCosts>
+	<frc-i:AuctionCosts contextRef="context719" unitRef="eur" decimals="INF">4400</frc-i:AuctionCosts>
+	<frc-i:AuctionCosts contextRef="context720" unitRef="eur" decimals="INF">4400</frc-i:AuctionCosts>
+	<frc-i:SalesPackackingFustCosts contextRef="context719" unitRef="eur" decimals="INF">4500</frc-i:SalesPackackingFustCosts>
+	<frc-i:SalesPackackingFustCosts contextRef="context720" unitRef="eur" decimals="INF">4500</frc-i:SalesPackackingFustCosts>
+	<frc-i:TransportCosts contextRef="context719" unitRef="eur" decimals="INF">4600</frc-i:TransportCosts>
+	<frc-i:TransportCosts contextRef="context720" unitRef="eur" decimals="INF">4600</frc-i:TransportCosts>
+	<frc-i:PurchaseCostsBulbsSale contextRef="context719" unitRef="eur" decimals="INF">4700</frc-i:PurchaseCostsBulbsSale>
+	<frc-i:PurchaseCostsBulbsSale contextRef="context720" unitRef="eur" decimals="INF">4700</frc-i:PurchaseCostsBulbsSale>
+	<frc-i:ContractedCultivationCosts contextRef="context719" unitRef="eur" decimals="INF">4800</frc-i:ContractedCultivationCosts>
+	<frc-i:ContractedCultivationCosts contextRef="context720" unitRef="eur" decimals="INF">4800</frc-i:ContractedCultivationCosts>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context781" unitRef="pure" decimals="INF">100000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandOwnProperty contextRef="context782" unitRef="pure" decimals="INF">10000</frc-i:UtilisedFarmlandOwnProperty>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context781" unitRef="pure" decimals="INF">40000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:UtilisedFarmlandThirdParties contextRef="context782" unitRef="pure" decimals="INF">40000</frc-i:UtilisedFarmlandThirdParties>
+	<frc-i:PropertyPlantEquipmentLivestock contextRef="context781" unitRef="eur" decimals="INF">3000</frc-i:PropertyPlantEquipmentLivestock>
+	<frc-i:PropertyPlantEquipmentLivestock contextRef="context782" unitRef="eur" decimals="INF">3000</frc-i:PropertyPlantEquipmentLivestock>
+	<frc-i:StockAssetsCurrentNonLivestock contextRef="context781" unitRef="eur" decimals="INF">3100</frc-i:StockAssetsCurrentNonLivestock>
+	<frc-i:StockAssetsCurrentNonLivestock contextRef="context782" unitRef="eur" decimals="INF">3100</frc-i:StockAssetsCurrentNonLivestock>
+	<frc-i:RevenueLivestock contextRef="context781" unitRef="eur" decimals="INF">3200</frc-i:RevenueLivestock>
+	<frc-i:RevenueLivestock contextRef="context782" unitRef="eur" decimals="INF">3200</frc-i:RevenueLivestock>
+	
+	<frc-i:RevenueAndAccretionLivestock contextRef="context781" unitRef="eur" decimals="INF">3300</frc-i:RevenueAndAccretionLivestock>
+	<frc-i:RevenueAndAccretionLivestock contextRef="context782" unitRef="eur" decimals="INF">3300</frc-i:RevenueAndAccretionLivestock>
+	
+	<frc-i:RevenuesAndAccretionDisclosure contextRef="context781">Ja</frc-i:RevenuesAndAccretionDisclosure>
+	<frc-i:RevenuesAndAccretionBreakdownDisclosure contextRef="context781">Informatieverschaffing</frc-i:RevenuesAndAccretionBreakdownDisclosure>
+	
+	<frc-i:RevenuesAndAccretionDisclosure contextRef="context782">Ja</frc-i:RevenuesAndAccretionDisclosure>
+	<frc-i:RevenuesAndAccretionBreakdownDisclosure contextRef="context782">Informatieverschaffing</frc-i:RevenuesAndAccretionBreakdownDisclosure>
+	
+	<frc-i:SinglePaymentScheme contextRef="context781" unitRef="eur" decimals="INF">3400</frc-i:SinglePaymentScheme>
+	<frc-i:SinglePaymentScheme contextRef="context782" unitRef="eur" decimals="INF">3400</frc-i:SinglePaymentScheme>
+	<frc-i:FodderCosts contextRef="context781" unitRef="eur" decimals="INF">3500</frc-i:FodderCosts>
+	<frc-i:FodderCosts contextRef="context782" unitRef="eur" decimals="INF">3500</frc-i:FodderCosts>
+	<frc-i:HealthcareCosts contextRef="context781" unitRef="eur" decimals="INF">3600</frc-i:HealthcareCosts>
+	<frc-i:HealthcareCosts contextRef="context782" unitRef="eur" decimals="INF">3600</frc-i:HealthcareCosts>
+	<frc-i:BreedingCosts contextRef="context781" unitRef="eur" decimals="INF">3700</frc-i:BreedingCosts>
+	<frc-i:BreedingCosts contextRef="context782" unitRef="eur" decimals="INF">3700</frc-i:BreedingCosts>
+	<frc-i:CultivationCosts contextRef="context781" unitRef="eur" decimals="INF">3800</frc-i:CultivationCosts>
+	<frc-i:CultivationCosts contextRef="context782" unitRef="eur" decimals="INF">3800</frc-i:CultivationCosts>
+	<frc-i:LitterCosts contextRef="context781" unitRef="eur" decimals="INF">3900</frc-i:LitterCosts>
+	<frc-i:LitterCosts contextRef="context782" unitRef="eur" decimals="INF">3900</frc-i:LitterCosts>
+	<frc-i:EnergyCosts contextRef="context781" unitRef="eur" decimals="INF">4000</frc-i:EnergyCosts>
+	<frc-i:EnergyCosts contextRef="context782" unitRef="eur" decimals="INF">4000</frc-i:EnergyCosts>
+	<frc-i:LivestockCostsOther contextRef="context781" unitRef="eur" decimals="INF">4100</frc-i:LivestockCostsOther>
+	<frc-i:LivestockCostsOther contextRef="context782" unitRef="eur" decimals="INF">4100</frc-i:LivestockCostsOther>
+	<frc-i:ManureDisposalCosts contextRef="context781" unitRef="eur" decimals="INF">4200</frc-i:ManureDisposalCosts>
+	<frc-i:ManureDisposalCosts contextRef="context782" unitRef="eur" decimals="INF">4200</frc-i:ManureDisposalCosts>
+	<frc-i:ProductionRightsLeaseCosts contextRef="context781" unitRef="eur" decimals="INF">4300</frc-i:ProductionRightsLeaseCosts>
+	<frc-i:ProductionRightsLeaseCosts contextRef="context782" unitRef="eur" decimals="INF">4300</frc-i:ProductionRightsLeaseCosts>
+	<frc-i:NetSquareMeterStableSurface contextRef="context781" unitRef="pure" decimals="INF">650</frc-i:NetSquareMeterStableSurface>
+	<frc-i:NetSquareMeterStableSurface contextRef="context782" unitRef="pure" decimals="INF">650</frc-i:NetSquareMeterStableSurface>
+	<frc-i:AverageNumberMeatDucksPerRound contextRef="context781" unitRef="pure" decimals="INF">200</frc-i:AverageNumberMeatDucksPerRound>
+	<frc-i:AverageNumberMeatDucksPerRound contextRef="context782" unitRef="pure" decimals="INF">200</frc-i:AverageNumberMeatDucksPerRound>
+	<frc-i:EmptyingCatchLoadingCosts contextRef="context781" unitRef="eur" decimals="INF">300</frc-i:EmptyingCatchLoadingCosts>
+	<frc-i:EmptyingCatchLoadingCosts contextRef="context782" unitRef="eur" decimals="INF">300</frc-i:EmptyingCatchLoadingCosts>
+	<frc-i:ManagingSupervisoryDirectorsRegistrationChamberOfCommerce contextRef="context821">323456789</frc-i:ManagingSupervisoryDirectorsRegistrationChamberOfCommerce>
+	<venj-bw2-i:DirectorType contextRef="context821">Commissaris (huidig)</venj-bw2-i:DirectorType>
+	<nl-cd:DateOfBirth contextRef="context821">1970-05-13</nl-cd:DateOfBirth>
+	<frc-i:HighestEducation contextRef="context821">Wetenschappelijk onderwijs (WO)</frc-i:HighestEducation>
+	<frc-i:SpecificationAndOtherRelevantEducation contextRef="context821">Toelichting en overige relevante opleidingen</frc-i:SpecificationAndOtherRelevantEducation>
+	<frc-i:RelevantWorkExperience contextRef="context821">Relevante werkervaring</frc-i:RelevantWorkExperience>
+	<frc-i:NumberOfManagingDirectorsInFTEs decimals="0" contextRef="context0" unitRef="pure">10</frc-i:NumberOfManagingDirectorsInFTEs>
+	<frc-i:NumberOfSupervisoryDirectorsInFTEs decimals="0" contextRef="context0" unitRef="pure">5</frc-i:NumberOfSupervisoryDirectorsInFTEs>
+	<venj-bw2-i:InformationOther contextRef="context0">Overige gegevens</venj-bw2-i:InformationOther>
+	<venj-bw2-i:ProvisionsArticlesAssociationProfitAppropriation contextRef="context0">Statutaire regeling omtrent de bestemming van de winst</venj-bw2-i:ProvisionsArticlesAssociationProfitAppropriation>
+	<venj-bw2-i:ProvisionsArticlesAssociationSpecialGoverningControlStructureDisclosure contextRef="context0">Informatieverschaffing over bijzonder statutaire rechten inzake zeggenschap</venj-bw2-i:ProvisionsArticlesAssociationSpecialGoverningControlStructureDisclosure>
+	<venj-bw2-i:ProfitCertificatesSimilarRights contextRef="context0">Winstbewijzen en soortgelijke rechten</venj-bw2-i:ProfitCertificatesSimilarRights>
+	<venj-bw2-i:SubsequentEventsDisclosure contextRef="context0">Informatieverschaffing over gebeurtenissen na balansdatum</venj-bw2-i:SubsequentEventsDisclosure>
+	<venj-bw2-i:BranchOffices contextRef="context0">Nevenvestigingen</venj-bw2-i:BranchOffices>
+	<frc-i:IntermediaryReportType contextRef="context0">Overig</frc-i:IntermediaryReportType>
+	<frc-i:IntermediaryReport contextRef="context0">Toelichting intermediair</frc-i:IntermediaryReport>
+	<ez-ncgc-i:SupervisoryBoardReport contextRef="context0">Verslag van de Raad van Commissarissen</ez-ncgc-i:SupervisoryBoardReport>
+	<venj-bw2-i:ResultsAppropriationDisclosure contextRef="context0">Informatieverschaffing over resultaatbestemming</venj-bw2-i:ResultsAppropriationDisclosure>
+	<kvk-t:ContactForDocumentPresentation>
+		<kvk-i:ContactType contextRef="context0">Intermediair</kvk-i:ContactType>
+		<nl-cd:FirstName contextRef="context0">Ipmse</nl-cd:FirstName>
+		<nl-cd:FamilyName contextRef="context0">Ipmse</nl-cd:FamilyName>
+		<kvk-i:OrganisationName contextRef="context0">I Advies</kvk-i:OrganisationName>
+		<nl-cd:TelephoneNumber contextRef="context0">0645678912</nl-cd:TelephoneNumber>
+		<nl-cd:EmailAddressFull contextRef="context0">i@iadvies.nl</nl-cd:EmailAddressFull>
+	</kvk-t:ContactForDocumentPresentation>
+	
+</xbrli:xbrl>

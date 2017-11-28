@@ -1,0 +1,38 @@
+COMPONENT;KEY;EN;NL;FR
+crm;APPROVAL;Approval;Beslissing;Approval
+crm;ASSESSMENT2;Customer due dilligence;Customer due dilligence;Customer due dilligence
+crm;CREDITLETTER;Credit Letter;Offerte;Credit Letter
+crm;CREDITPROPOSAL;Analysis;Analyse;Analysis
+crm;CREDITPROPOSALCA;Feedback credit analyst;Feedback credit analyst;Feedback credit analyst
+crm;CREDITPROPOSALCM;Feedback senior relation manager;Feedback senior relation manager;Feedback senior relation manager
+crm;CREDITPROPOSALLE;Feedback Legal;Feedback Legal;Feedback Legal
+crm;PRICING;Pricing;Prijsbepaling;Pricing
+crm;MOTIVATION;Motivation;Motivatie;Motivation
+crm;IB ;Income tax;Inkomstenbelasting;Income tax
+SCORECARD;IB ;Income tax;Inkomstenbelasting;Income tax
+SCORECARD;Borrower;Borrower;Persoon;Borrower
+SCORECARD;Box 1 Income work and private property;Box 1 Income work and private property;Box 1 inkomen uit werk en eigen woning;Box 1 Income work and private property
+SCORECARD;Private property acquisition debt total;Private property acquisition debt total;Totaal eigenwoningschuld;Private property acquisition debt total
+SCORECARD;Private property immovable property law value;Private property immovable property law value;WOZ-waarde eigen woning hoofdverblijf;Private property immovable property law value
+SCORECARD;Total box 1 Income work and private property;Total box 1 Income work and private property;Totaal box 1 vermogen;Total box 1 Income work and private property
+SCORECARD;Box 3 Income savings stocks;Box 3 Income savings stocks;Box 3, voordeel uit sparen en beleggen;Box 3 Income savings stocks
+SCORECARD;Asset bank accounts and savings accounts;Asset bank accounts and savings accounts;Saldi bankrekeningen, spaartegoeden, -bewijzen etc.;Asset bank accounts and savings accounts
+SCORECARD;Total value of owned shares;Total value of owned shares;Totaal effectenbezit;Total value of owned shares
+SCORECARD;Total value of cash and receivables;Total value of cash and receivables;Totaal waarde contant geld en vorderingen;Total value of cash and receivables
+SCORECARD;Value of secondary private property;Value of secondary private property;Waarde tweede woning(en);Value of secondary private property
+SCORECARD;Total value of other real estate;Total value of other real estate;Totaal waarde overig onroerend goed;Total value of other real estate
+SCORECARD;Total value of capital insurances (not exempt part);Total value of capital insurances (not exempt part);Totaal niet vrijgesteld deel kapitaalverzekeringen;Total value of capital insurances (not exempt part)
+SCORECARD;Periodic payments rights value;Periodic payments rights value;Rechten op periodieke uitkeringen en verstrekkingen;Periodic payments rights value
+SCORECARD;Total box 3 (Assets);Total box 3 (Assets);Totaal box 3 bezittingen;Total box 3 (Assets)
+SCORECARD;Total debt;Total debt;Totaal schulden;Total debt
+SCORECARD;Total box 3 (Capital);Total box 3 (Capital);Totaal box 3 vermogen;Total box 3 (Capital)
+SCORECARD;Total capital entrepreneur;Total capital entrepreneur;Totaal privé vermogen ondernemer;Total capital entrepreneur
+SCORECARD;General;General ;Algemeen;General 
+SCORECARD;Initials;Initial(s);Voorletter(s);Initial(s)
+SCORECARD;Prefix;Prefix;Tussenvoegsel(s);Prefix
+SCORECARD;Surname;Surname;Achternaam;Surname
+SCORECARD;Effective net worth;Effective net worth;Effectieve netto waarde;Effective net worth
+SCORECARD;Total Capital (all borrowers);Total Capital (all borrowers);Totaal aansprakelijk vermogen (alle personen);Total Capital (all borrowers)
+SCORECARD;Total equity and liabilities;Total equity and liabilities;Totaal eigen vermogen en schulden;Total equity and liabilities
+SCORECARD;Number of tax returns;Number of tax returns;Aantal ontvangen IB aangiftes;Number of tax returns
+SCORECARD;Fiscal partner;Fiscal partner;Fiscale partner;Fiscal partner

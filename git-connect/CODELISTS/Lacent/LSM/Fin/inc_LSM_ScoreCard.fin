@@ -1,0 +1,415 @@
+{&&Language=English}
+
+.Variables
+PI    0 1N     1               $>Scorecard<$                                   \LSM_Scorecard
+
+.Formulas NoTrend
+LSM_Scorecard  = MatrixLookup("RiskCube_Parameters.xls","SUBPOP2SCORECARD",LSM_SubPopulatie[1],1)
+
+.Variables
+PP      1N     2 1    <        =SC_TST_GRP                                     \=SC_TST_GRP ->WF_VAL_RAND_NUM_2
+
+
+;---------------------------------------------------------------
+PP    0 1N     2               $>01 - COMPANIES BAD INFO   <$                  \LSM_Scorecard01
+PP    0 1N     3                                                               \LSM_Scorecard01_01
+PP    0=1N    -3                                                               \LSM_Scorecard01_Tot
+.Formulas NoTrend
+LSM_Scorecard01_01 = 0
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>02 - COMPANIES MODERATE INFO<$                \LSM_Scorecard02
+PP    0 1N     3                                                               \LSM_Scorecard02_01
+PP    0=1N    -3                                                               \LSM_Scorecard02_Tot
+.Formulas NoTrend
+LSM_Scorecard02_01 = 0
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>03 - COMPANIES GOOD INFO<$                    \LSM_Scorecard03
+PP    0 1N     3                                                               \LSM_Scorecard03_01
+PP    0=1N    -3                                                               \LSM_Scorecard03_Tot
+.Formulas NoTrend
+LSM_Scorecard03_01 = 0
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>04 - UNEST 0-3 / MASTER<$                     \LSM_Scorecard04
+PP    0 1N     3                                                               \LSM_Scorecard04_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard04_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_SINCE_START                                  \LSM_Scorecard04_03 -> SC_SINCE_START
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard04_04 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard04_05 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard04_06 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard04_07 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard04_08 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard04_09 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard04_10 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard04_11 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard04_12 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard04_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard04_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard04_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard04_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard04_Tot
+
+.Formulas NoTrend
+LSM_Scorecard04_01 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,1)
+LSM_Scorecard04_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],1))
+LSM_Scorecard04_03 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_START",SC_SINCE_START[1],1)
+LSM_Scorecard04_04 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],1)
+LSM_Scorecard04_05 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],1)
+LSM_Scorecard04_06 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],1)
+LSM_Scorecard04_07 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],1)
+LSM_Scorecard04_08 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],1)
+LSM_Scorecard04_09 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],1)
+LSM_Scorecard04_10 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],1)
+LSM_Scorecard04_11 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],1)
+LSM_Scorecard04_12 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],1)
+LSM_Scorecard04_13 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],1)
+LSM_Scorecard04_14 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],1)
+LSM_Scorecard04_15 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],1)
+LSM_Scorecard04_16 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],1)
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>05 - UNEST 0-3 / NICHE CASH<$                 \LSM_Scorecard05
+PP    0 1N     3                                                               \LSM_Scorecard05_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard05_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_SINCE_START                                  \LSM_Scorecard05_03 -> SC_SINCE_START
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard05_04 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard05_05 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard05_06 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard05_07 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard05_08 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard05_09 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard05_10 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard05_11 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard05_12 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard05_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard05_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard05_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard05_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard05_Tot
+.Formulas NoTrend
+LSM_Scorecard05_01 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,2)
+LSM_Scorecard05_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],2))
+LSM_Scorecard05_03 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_START",SC_SINCE_START[1],2)
+LSM_Scorecard05_04 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],2)
+LSM_Scorecard05_05 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],2)
+LSM_Scorecard05_06 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],2)
+LSM_Scorecard05_07 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],2)
+LSM_Scorecard05_08 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],2)
+LSM_Scorecard05_09 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],2)
+LSM_Scorecard05_10 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],2)
+LSM_Scorecard05_11 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],2)
+LSM_Scorecard05_12 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],2)
+LSM_Scorecard05_13 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],2)
+LSM_Scorecard05_14 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],2)
+LSM_Scorecard05_15 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],2)
+LSM_Scorecard05_16 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],2)
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>06 - UNEST 0-3 / NICHE CREDIT<$               \LSM_Scorecard06
+PP    0 1N     3                                                               \LSM_Scorecard06_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard06_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_SINCE_START                                  \LSM_Scorecard06_03 -> SC_SINCE_START
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard06_04 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard06_05 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard06_06 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard06_07 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard06_08 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard06_09 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard06_10 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard06_11 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard06_12 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard06_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard06_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard06_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard06_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard06_Tot
+.Formulas NoTrend
+LSM_Scorecard06_01 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,3)
+LSM_Scorecard06_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],3))
+LSM_Scorecard06_03 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_START",SC_SINCE_START[1],3)
+LSM_Scorecard06_04 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],3)
+LSM_Scorecard06_05 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],3)
+LSM_Scorecard06_06 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],3)
+LSM_Scorecard06_07 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],3)
+LSM_Scorecard06_08 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],3)
+LSM_Scorecard06_09 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],3)
+LSM_Scorecard06_10 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],3)
+LSM_Scorecard06_11 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],3)
+LSM_Scorecard06_12 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],3)
+LSM_Scorecard06_13 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],3)
+LSM_Scorecard06_14 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],3)
+LSM_Scorecard06_15 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],3)
+LSM_Scorecard06_16 = MatrixLookup("RiskCube_Parameters.xls","SC_456_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],3)
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>07 - UNEST 4 + / MASTER<$                     \LSM_Scorecard07
+PP    0 1N     3                                                               \LSM_Scorecard07_01
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard07_02 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard07_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard07_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard07_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_CSH_CRD_IND                                  \LSM_Scorecard07_06 -> SC_CSH_CRD_IND
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard07_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard07_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard07_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard07_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard07_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L3                                \LSM_Scorecard07_12 -> SC_WST_RC_CRD_L3
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard07_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard07_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard07_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard07_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard07_Tot
+.Formulas NoTrend
+LSM_Scorecard07_01 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,1)
+LSM_Scorecard07_02 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],1)
+LSM_Scorecard07_03 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],1)
+LSM_Scorecard07_04 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],1)
+LSM_Scorecard07_05 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],1)
+LSM_Scorecard07_06 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CSH_CRD_IND",SC_CSH_CRD_IND[1],1)
+LSM_Scorecard07_07 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],1)
+LSM_Scorecard07_08 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],1)
+LSM_Scorecard07_09 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],1)
+LSM_Scorecard07_10 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],1)
+LSM_Scorecard07_11 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],1)
+LSM_Scorecard07_12 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L3",SC_WST_RC_CRD_L3[1],1)
+LSM_Scorecard07_13 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],1)
+LSM_Scorecard07_14 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],1)
+LSM_Scorecard07_15 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],1)
+LSM_Scorecard07_16 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],1)
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>08 - UNEST 4 + / NICHE CASH<$                 \LSM_Scorecard08
+PP    0 1N     3                                                               \LSM_Scorecard08_01
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard08_02 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard08_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard08_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard08_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_CSH_CRD_IND                                  \LSM_Scorecard08_06 -> SC_CSH_CRD_IND
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard08_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard08_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard08_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard08_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard08_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L3                                \LSM_Scorecard08_12 -> SC_WST_RC_CRD_L3
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard08_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard08_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard08_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard08_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard08_Tot
+.Formulas NoTrend
+LSM_Scorecard08_01 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,2)
+LSM_Scorecard08_02 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],2)
+LSM_Scorecard08_03 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],2)
+LSM_Scorecard08_04 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],2)
+LSM_Scorecard08_05 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],2)
+LSM_Scorecard08_06 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CSH_CRD_IND",SC_CSH_CRD_IND[1],2)
+LSM_Scorecard08_07 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],2)
+LSM_Scorecard08_08 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],2)
+LSM_Scorecard08_09 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],2)
+LSM_Scorecard08_10 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],2)
+LSM_Scorecard08_11 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],2)
+LSM_Scorecard08_12 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L3",SC_WST_RC_CRD_L3[1],2)
+LSM_Scorecard08_13 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],2)
+LSM_Scorecard08_14 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],2)
+LSM_Scorecard08_15 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],2)
+LSM_Scorecard08_16 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],2)
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>09 - UNEST 4 + / NICHE CREDIT<$               \LSM_Scorecard09
+PP    0 1N     3                                                               \LSM_Scorecard09_01
+PP    0 1N     3               SC_STARTSCORE                                   \LSM_Scorecard09_02 -> SC_STARTSCORE
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard09_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard09_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard09_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_CSH_CRD_IND                                  \LSM_Scorecard09_06 -> SC_CSH_CRD_IND
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard09_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard09_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard09_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard09_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard09_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L3                                \LSM_Scorecard09_12 -> SC_WST_RC_CRD_L3
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard09_13 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard09_14 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_SINCE_REST                                   \LSM_Scorecard09_15 -> SC_SINCE_REST
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard09_16 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard09_Tot
+.Formulas NoTrend
+LSM_Scorecard09_01 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,3)
+LSM_Scorecard09_02 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_STARTSCORE_ID"&Str(SC_StartScorekaartID[1],0,0),SC_STARTSCORE[1],3)
+LSM_Scorecard09_03 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],3)
+LSM_Scorecard09_04 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],3)
+LSM_Scorecard09_05 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],3)
+LSM_Scorecard09_06 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CSH_CRD_IND",SC_CSH_CRD_IND[1],3)
+LSM_Scorecard09_07 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],3)
+LSM_Scorecard09_08 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],3)
+LSM_Scorecard09_09 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],3)
+LSM_Scorecard09_10 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],3)
+LSM_Scorecard09_11 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],3)
+LSM_Scorecard09_12 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L3",SC_WST_RC_CRD_L3[1],3)
+LSM_Scorecard09_13 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],3)
+LSM_Scorecard09_14 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],3)
+LSM_Scorecard09_15 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_SINCE_REST",SC_SINCE_REST[1],3)
+LSM_Scorecard09_16 = MatrixLookup("RiskCube_Parameters.xls","SC_789_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],3)
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>10 - ESTAB / MASTER<$                         \LSM_Scorecard10
+PP    0 1N     3                                                               \LSM_Scorecard10_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard10_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard10_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard10_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard10_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard10_06 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard10_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard10_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard10_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard10_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard10_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard10_12 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard10_13 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_CST_AGE                                      \LSM_Scorecard10_14 -> SC_CST_AGE
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard10_15 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard10_Tot
+.Formulas NoTrend
+LSM_Scorecard10_01 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,1)
+LSM_Scorecard10_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],1))
+LSM_Scorecard10_03 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],1)
+LSM_Scorecard10_04 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],1)
+LSM_Scorecard10_05 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],1)
+LSM_Scorecard10_06 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],1)
+LSM_Scorecard10_07 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],1)
+LSM_Scorecard10_08 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],1)
+LSM_Scorecard10_09 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],1)
+LSM_Scorecard10_10 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],1)
+LSM_Scorecard10_11 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],1)
+LSM_Scorecard10_12 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],1)
+LSM_Scorecard10_13 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],1)
+LSM_Scorecard10_14 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CST_AGE",SC_CST_AGE[1],1)
+LSM_Scorecard10_15 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],1)
+
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>11 - ESTAB / NICHE REACT<$                    \LSM_Scorecard11
+PP    0 1N     3                                                               \LSM_Scorecard11_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard11_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard11_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard11_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard11_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard11_06 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard11_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard11_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard11_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard11_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard11_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard11_12 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard11_13 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_CST_AGE                                      \LSM_Scorecard11_14 -> SC_CST_AGE
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard11_15 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard11_Tot
+.Formulas NoTrend
+LSM_Scorecard11_01 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,2)
+LSM_Scorecard11_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],2))
+LSM_Scorecard11_03 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],2)
+LSM_Scorecard11_04 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],2)
+LSM_Scorecard11_05 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],2)
+LSM_Scorecard11_06 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],2)
+LSM_Scorecard11_07 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],2)
+LSM_Scorecard11_08 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],2)
+LSM_Scorecard11_09 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],2)
+LSM_Scorecard11_10 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],2)
+LSM_Scorecard11_11 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],2)
+LSM_Scorecard11_12 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],2)
+LSM_Scorecard11_13 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],2)
+LSM_Scorecard11_14 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CST_AGE",SC_CST_AGE[1],2)
+LSM_Scorecard11_15 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],2)
+
+.Variables
+;---------------------------------------------------------------
+PP    0 1N     2               $>12 - ESTAB / NICHE NON REACT<$                \LSM_Scorecard12
+PP    0 1N     3                                                               \LSM_Scorecard12_01
+PP    0 1N     3               SC_NO_BAD_BKR                                   \LSM_Scorecard12_02 -> SC_NO_BAD_BKR
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard12_03 -> SC_QUAL_CODE
+PP    0 1N     3               SC_REM_CODE_CR                                  \LSM_Scorecard12_04 -> SC_REM_CODE_CR
+PP    0 1N     3               SC_ARRY_AMT                                     \LSM_Scorecard12_05 -> SC_ARRY_AMT
+PP    0 1N     3               SC_NO_STMTS                                     \LSM_Scorecard12_06 -> SC_NO_STMTS
+PP    0 1N     3               SC_TOT_VAL_LST_3M                               \LSM_Scorecard12_07 -> SC_TOT_VAL_LST_3M
+PP    0 1N     3               SC_VAL_DCL_ORD_L3                               \LSM_Scorecard12_08 -> SC_VAL_DCL_ORD_L3
+PP    0 1N     3               SC_AVE_PAYBAL_CRED                              \LSM_Scorecard12_09 -> SC_AVE_PAYBAL_CRED
+PP    0 1N     3               SC_CURR_COMM_ND                                 \LSM_Scorecard12_10 -> SC_CURR_COMM_ND
+PP    0 1N     3               SC_CURR_COMM_DEL_CRD                            \LSM_Scorecard12_11 -> SC_CURR_COMM_DEL_CRD
+PP    0 1N     3               SC_WST_RC_CRD_L6                                \LSM_Scorecard12_12 -> SC_WST_RC_CRD_L6
+PP    0 1N     3               SC_WST_RC_CSH_L6                                \LSM_Scorecard12_13 -> SC_WST_RC_CSH_L6
+PP    0 1N     3               SC_CST_AGE                                      \LSM_Scorecard12_14 -> SC_CST_AGE
+PP    0 1N     3               SC_REM_CODE_CS                                  \LSM_Scorecard12_15 -> SC_REM_CODE_CS
+PP    0=1N    -3                                                               \LSM_Scorecard12_Tot
+.Formulas NoTrend
+LSM_Scorecard12_01 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,3)
+LSM_Scorecard12_02 = If(WH_CSH_CRD_IND[1]=1,0,MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_BAD_BKR",SC_NO_BAD_BKR[1],3))
+LSM_Scorecard12_03 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],3)
+LSM_Scorecard12_04 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CR",SC_REM_CODE_CR[1],3)
+LSM_Scorecard12_05 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_ARRY_AMT",SC_ARRY_AMT[1],3)
+LSM_Scorecard12_06 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_NO_STMTS",SC_NO_STMTS[1],3)
+LSM_Scorecard12_07 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_TOT_VAL_LST_3M",SC_TOT_VAL_LST_3M[1],3)
+LSM_Scorecard12_08 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_VAL_DCL_ORD_L3",SC_VAL_DCL_ORD_L3[1],3)
+LSM_Scorecard12_09 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_AVE_PAYBAL_CRED",SC_AVE_PAYBAL_CRED[1],3)
+LSM_Scorecard12_10 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_ND",SC_CURR_COMM_ND[1],3)
+LSM_Scorecard12_11 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CURR_COMM_DEL_CRD",SC_CURR_COMM_DEL_CRD[1],3)
+LSM_Scorecard12_12 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CRD_L6",SC_WST_RC_CRD_L6[1],3)
+LSM_Scorecard12_13 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_WST_RC_CSH_L6",SC_WST_RC_CSH_L6[1],3)
+LSM_Scorecard12_14 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_CST_AGE",SC_CST_AGE[1],3)
+LSM_Scorecard12_15 = MatrixLookup("RiskCube_Parameters.xls","SC_101112_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_REM_CODE_CS",SC_REM_CODE_CS[1],3)
+
+;---------------------------------------------------------------
+.Variables
+PP    0 1N     2               $>13 - BRIEVEN<$                                \LSM_Scorecard13
+PP    0 1N     3                                                               \LSM_Scorecard13_01
+PP    0 1N     3               SC_QUAL_CODE                                    \LSM_Scorecard13_02 -> SC_QUAL_CODE
+PP    0=1N    -3                                                               \LSM_Scorecard13_Tot
+
+.Formulas NoTrend
+LSM_Scorecard13_01 = MatrixLookup("RiskCube_Parameters.xls","SC_1351_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,1)
+LSM_Scorecard13_02 = MatrixLookup("RiskCube_Parameters.xls","SC_1351_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_QUAL_CODE",SC_QUAL_CODE[1],1)
+
+
+;---------------------------------------------------------------
+.Variables
+PP    0 1N     2               $>51 - NULL SCORECARD<$                         \LSM_Scorecard51
+PP    0 1N     3                                                               \LSM_Scorecard51_01
+PP    0=1N    -3                                                               \LSM_Scorecard51_Tot
+
+.Formulas NoTrend
+LSM_Scorecard51_01 = MatrixLookup("RiskCube_Parameters.xls","SC_1351_TG"&Str(SC_TST_GRP[1],0,0)&"_SC_INIT",NA,2)
+
+;---------------------------------------------------------------
+.Variables
+PP    0=1N    -2      <        $>Score<$                                       \LSM_SCORE
+
+.Formulas NoTrend
+LSM_Scorecard01 = If(LSM_ScoreCard[1]=01,LSM_Scorecard01_Tot,NA)
+LSM_Scorecard02 = If(LSM_ScoreCard[1]=02,LSM_Scorecard02_Tot,NA)
+LSM_Scorecard03 = If(LSM_ScoreCard[1]=03,LSM_Scorecard03_Tot,NA)
+LSM_Scorecard04 = If(LSM_ScoreCard[1]=04,LSM_Scorecard04_Tot,NA)
+LSM_Scorecard05 = If(LSM_ScoreCard[1]=05,LSM_Scorecard05_Tot,NA)
+LSM_Scorecard06 = If(LSM_ScoreCard[1]=06,LSM_Scorecard06_Tot,NA)
+LSM_Scorecard07 = If(LSM_ScoreCard[1]=07,LSM_Scorecard07_Tot,NA)
+LSM_Scorecard08 = If(LSM_ScoreCard[1]=08,LSM_Scorecard08_Tot,NA)
+LSM_Scorecard09 = If(LSM_ScoreCard[1]=09,LSM_Scorecard09_Tot,NA)
+LSM_Scorecard10 = If(LSM_ScoreCard[1]=10,LSM_Scorecard10_Tot,NA)
+LSM_Scorecard11 = If(LSM_ScoreCard[1]=11,LSM_Scorecard11_Tot,NA)
+LSM_Scorecard12 = If(LSM_ScoreCard[1]=12,LSM_Scorecard12_Tot,NA)
+LSM_Scorecard13 = If(LSM_ScoreCard[1]=13,LSM_Scorecard13_Tot,NA)
+LSM_Scorecard51 = If(LSM_ScoreCard[1]=51,LSM_Scorecard51_Tot,NA)
+
+
+;---------------------------------------------------------------
+.Variables
+PP    0 1N     1      <        $>Score<$                                       \=LSM_SCORE

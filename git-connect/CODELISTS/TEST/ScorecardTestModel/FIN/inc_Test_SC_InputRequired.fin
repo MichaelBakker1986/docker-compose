@@ -1,0 +1,52 @@
+; inc_Test_SC_InputRequired.fin
+; EJS april 2015
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Scorecard Test Paragraph
+; Input Required
+
+PPP     BN     3               "Test Input Required"                                               \TestInputRequired
+
+PII     1A     4               "Dit is een onecol stringvraag (origineel)"                         \tirStrVarOrg
+PII     1A     4               "Idem kopie"                                                        \tirStrVarCopy=tirStrVarOrg
+PII     1A     4               "Idem kopie zonder input required formule"                          \tirStrVarCopy2=tirStrVarOrg
+
+PII     BN   1 4               "Dit is een numerieke kolomvraag (origineel)"                       \tirColVarOrg
+PII     BN     4               "Idem kopie"                                                        \tirColVarCopy=tirColVarOrg
+PII     BN     4               "Idem kopie zonder input required formule"                          \tirColVarCopy2=tirColVarOrg
+
+PXX     1A   1 4               "Tussenkopje dieper niveau"                                         \tirSubLevelTop
+PII     1A     5               "Verplichte variabele dieper niveau"                                \tirSubLevelRequired
+
+PII     1N C 1 4               "Verplicht veld originelen (hele var)"                              \tirOrgsInputRequired
+PII     1N C   4               "Verplicht veld kopieën (hele var)"                                 \tirCopiesInputRequired
+PII     1N C   4               "Verplicht veld originelen (last T in NoTrend)"                     \tirOrgsLastTInputRequired
+PII     1N C   4               "Verplicht veld kopieën (last T in NoTrend)"                        \tirCopiesLastTInputRequired
+PII     1N C   4               "Verplicht veld originelen (first T in NoTrend)"                    \tirOrgsFirstTInputRequired
+PII     1N C   4               "Verplicht veld kopieën (first T in NoTrend)"                       \tirCopiesFirstTInputRequired
+PII     1N C   4               "Zichtbaarheid tussenkopje dieper niveau"                           \tirVisibilitySubLevel
+
+.Choices
+tirOrgsInputRequired= "0:niet verplicht|1:wel verplicht"
+tirCopiesInputRequired= "0:niet verplicht|1:wel verplicht"
+tirOrgsLastTInputRequired= "0:niet verplicht|1:wel verplicht"
+tirCopiesLastTInputRequired= "0:niet verplicht|1:wel verplicht"
+tirOrgsFirstTInputRequired= "0:niet verplicht|1:wel verplicht"
+tirCopiesFirstTInputRequired= "0:niet verplicht|1:wel verplicht"
+tirVisibilitySubLevel= "0:hidden|1:visible"
+
+.Formulas InputRequired
+tirStrVarOrg= tirOrgsInputRequired or (tirOrgsLastTInputRequired and (T=LastTinFormulaSet(NoTrend))) or (tirOrgsFirstTInputRequired and (T=FirstTinFormulaSet(NoTrend)))
+tirColVarOrg= tirOrgsInputRequired or (tirOrgsLastTInputRequired and (T=LastTinFormulaSet(NoTrend))) or (tirOrgsFirstTInputRequired and (T=FirstTinFormulaSet(NoTrend)))
+tirStrVarCopy= tirCopiesInputRequired or (tirCopiesLastTInputRequired and (T=LastTinFormulaSet(NoTrend))) or (tirCopiesFirstTInputRequired and (T=FirstTinFormulaSet(NoTrend)))
+tirColVarCopy= tirCopiesInputRequired or (tirCopiesLastTInputRequired and (T=LastTinFormulaSet(NoTrend))) or (tirCopiesFirstTInputRequired and (T=FirstTinFormulaSet(NoTrend)))
+tirSubLevelRequired= 1
+
+.Formulas Visible
+tirSubLevelTop= tirVisibilitySubLevel
+
+.Formulas NoTrend
+tirSubLevelRequired= 1
+
+

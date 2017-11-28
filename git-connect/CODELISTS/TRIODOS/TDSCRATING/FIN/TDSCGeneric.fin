@@ -1,0 +1,726 @@
+{&&Language=English}
+$>Generic Scorecard<$
+
+.ModelVersion          1.5.3
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear-1,Years=3,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)  ; v1.1 "hist" weg op verzoek Jacqueline (kan ook concept zijn)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PP       X     0               "$>Generic Scorecard<$ v#CompactModelVersion#"                       \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+.Variables
+;==========================================================================================================================================
+; Q_ROOT Kredietaanvraagmodel
+
+PP      1N C 1 1  +            "$>Generic Scorecard<$"                                              \Q_ROOT
+
+.Choices
+Q_ROOT                         = "0:$>Incomplete filled<$.|1:$>Complete filled<$."
+
+.Formulas NoTrend
+Q_ROOT                         = If( Not( (Q_Map01[1]=0) Or (Q_Map02[1]=0) Or (Q_Map03[1]=0) ) Or ( Length(&Q_WARNING_GLOBAL[1])>0)   ,1,0)
+
+.Variables
+;================================================================================================== MAP 1
+; Gekoppelde gegevens (1)
+
+PP      1N C   2  +            "General Data"                                                      \Q_Map01
+;C De gegevens in dit scherm worden automatisch opgehaald en getoond en zijn niet overschrijfbaar. Indien een gegeven niet juist is, laat dit dan in het bronsysteem aanpassen. Gebruik eventueel in de tussentijd het toelichtingen veld.
+
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PP      1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PP      1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Algemene gegevens
+
+
+
+PP      1N     3               "ID Entry"                                                          \Q_Map01_Algemeen
+
+PP      1A     4               "$>Customer Name<$"                                                 \BorrowerLegalName=FPS_VAR_Naam
+PP      1A     4               "$>Relation Number<$"                                               \BorrowerId=FPS_VAR_Relatienummer
+PI      1A     4               "$>Credit Agreement Number<$"              									       \CreditNumber
+PI      1N D   4               "$>Financial as of (Date)<$"       		                             \FinancialAsOfDate
+PI      1A     4               "$>Analyst (Relationship manager)<$"                                \Analyst
+PI      1N C   4               "$>Sector<$"                    								                		 \Industry
+PP      1A     4               $>Modelversion:<$                                                   \=Q_ModelVersion
+PP      1A     4               $>Parameters version:<$                                             \=Q_MatrixVersion
+
+PP      1N     3               "Questions before proceeding "                                      \Q_Map01_Questions
+PI      1N C   4               $>Does the company face competition on the marketplace?<$           \QuestionCompetion
+PI      1N C   4               $>Does the company act like a standard corporate without external support? <$  \QuestionSupport
+PI      1N C   4               $>Does the company rely on any specific contracted source of cash flows?<$     \QuestionCashFlow
+PP      1A     4               "$>Result:<$"                         													     \Result
+
+
+.Variable BorrowerLegalName  , InputRequired=1
+.Variable BorrowerId         , InputRequired=1
+.Variable FinancialAsOfDate  , InputRequired=1
+.Variable Analyst            , InputRequired=1
+.Variable Industry           , InputRequired=1
+.Variable QuestionCompetion  , InputRequired=1
+.Variable QuestionSupport    , InputRequired=1
+.Variable QuestionCashFlow   , InputRequired=1
+
+
+.Choices
+QuestionCompetion        = "1:Yes|0:No"
+QuestionSupport          = "1:Yes|0:No"
+QuestionCashFlow         = "1:Yes|0:No"
+
+
+.Formulas NoTrend
+Result = &If(  ((QuestionCompetion <> NA) And (QuestionSupport <> NA) And (QuestionCashFlow <> NA)) ,    &If( (QuestionCompetion <> 1) or (QuestionSupport <> 1) or (QuestionCashFlow <> 0) , "?", "OK") , na)
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X))")
+Q_Map01_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map01                        = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map01_VALIDATION             =
+
+.Choices
+Q_Map01                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 2
+; Gekoppelde gegevens (2)
+
+PP      1N C   2  +            $>Factor Data<$                                                     \Q_Map02
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 2<$                                              \Q_Map02_WARNING
+PP      1A     3               $>Info bij stap 2<$                                                 \Q_Map02_INFO
+PP      1A     3               $>Validatie stap 2<$                                                \Q_Map02_VALIDATION
+
+;PP      1N     3               $>Factor Entry<$
+PP      1N     3               $>Company<$
+PI      1N C  -4               $>1. Supplier Power<$                                               \VAR01
+C 1. Supplier Power[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Supplier Power refers to the influence the borrower’s suppliers can exert upon the borrower. The more suppliers, the smaller they are, and the larger a typical transaction, the less influence each supplier has over the borrower. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]WEAK: The borrower can exert influence over its suppliers, possibly specifying terms and setting prices with little opportunity for the supplier to dispute this. This situation often occurs where there are many suppliers with few customers, and the customers effectively control the market. Consider, for example, suppliers to the major auto manufacturers.[BR][/BR][BR][/BR]LIMITED: Individual suppliers have very little influence over the borrower. This situation would often occur where the individual ticket price is very high and where there are many suppliers and relatively few customers.[BR][/BR][BR][/BR]SOME: The relationship between each supplier and the borrower tends to be fairly equal. This may occur in situations where there are few suppliers and few customers. Each has a significant interest in maintaining the relationship and working with the other to resolve any issues.[BR][/BR][BR][/BR]SIGNIFICANT: It would be difficult for the borrower to switch suppliers to get better terms. This situation would often occur where there are relatively few suitable suppliers or where the borrower has invested heavily in a product and is reliant on the supplier for maintenance and upgrades.[BR][/BR][BR][/BR]STRANGEHOLD where the supplier is in a position to impose terms on the borrower. This situation may occur where the supplier has a monopoly situation or in markets where there are very few players with high barriers to entry[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How many suppliers available? [BR][/BR]How much borrower depends on specific suppliers? [BR][/BR]How difficult is for the new suppliers to enter the market? [BR][/BR]How many customers in the specific market?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR01Memo
+PI      1N C  -4               $>2. Business / Industry Cycle<$                                    \VAR02
+C 2. Business / Industry Cycle[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]The developmental stage of the industry in which the borrower operates. Typically, an industry goes through the following stages: entrepreneurial, growth, mature, decline. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Entrepreneurial[BR][/BR]Growth[BR][/BR]Mature[BR][/BR]Decline[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How strong is the demand in the industry the borrower operates? [BR][/BR]How strong is sales growth? What is the level of costs?[BR][/BR]How strong is the competition?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR02Memo
+PI      1N C  -4               $>3. Cost Flexibility<$                       											 \VAR03
+C 3. Cost Flexibility[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]This factor considers the extent to which a borrower  can adapt their costs if economic conditions (demand) do not meet expectations. Fix/variable cost mix as well as contractual flexibility should be considered. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY HIGH: Very little fixed costs. Management has full flexibility to adapt costs and can renegotiate costs with suppliers if necessary.[BR][/BR]HIGH: A large proportion of costs are non-fixed and management has a large degree of flexibility to adapt costs.[BR][/BR]MEDIUM: The borrower has a mix of fixed costs and contracts and variable costs with some flexibility to adapt costs. [BR][/BR]LOW: A large proportion of the costs are fixed costs and management has little flexibility to adapt costs.[BR][/BR]VERY LOW: Costs are predominantly fixed costs or contractually fixed. No flexibility to adapt costs.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]What is the level of fixed costs (rent, leases, loan payments, ect.) as compared to variable costs (that changes with level of activity – material, shipping costs, ect.)?[BR][/BR]How much flexibility has management to adapt and renegotiate the costs? Are they bound by contracts?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR03Memo
+PI      1N C  -4               $>4. Conduct of Account<$                       										 \VAR04
+C 4. Conduct of Account[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]This is the track record of the client relationship. This includes factors such as openness, timeliness of information, payment history, track record of keeping to promised plans/targets. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]GOOD: Creditor payments are made on a normal timescale and/or there have been no checks dishonoured within the past 2 years.  [BR][/BR]ACCEPTABLE: All breaches have been less than 2.5% of the value specified in the covenant or loan or account terms, and these have been rectified within three months of occurring.[BR][/BR]NO EXPERIENCE: No breaches of terms, but the borrower has been a customer for less than one year (and you do not have details of any previous business banking).[BR][/BR]POOR: The account works within a tight balance range (this could be a sign that creditor payments are only made once monies are received, a significant warning signal) and/or checks have been dishonoured within the past 2 years.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How timely the payments were made? What is track record of meeting plans and targets?[BR][/BR]Have there been any covenant or loan term breaches?[BR][/BR]How many years of history with the customer?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR04Memo
+PI      1N C  -4               $>5. Credit History<$                       		    								 \VAR05
+C 5. Credit History[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]This is the track record of payment history with all creditors. This may be viewed as an external evaluation of the borrower’s credit history and includes all external and internal sources which provide information regarding the credit history. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]CLEAR if the business has been operational for at least one year, credit records are available, and no problems have been recorded on any of the external sources that you use to check a potential borrower’s credit worthiness.[BR][/BR]NO EXPERIENCE: The customer’s record is clear, but less than one year’s information is available.  [BR][/BR]MINOR PROBLEMS if the customer has had problems (short of bankruptcy), but such problems have not occurred in the last five years.  [BR][/BR]PREVIOUSLY BANKRUPT: The customer has declared bankruptcy in the past (>2y ago), and has emerged from bankruptcy with only minor problems (as defined above).[BR][/BR]MAJOR PROBLEMS/BANKRUPT if the customer is bankrupt or has had significant problems with external creditors or others to which it owes money. Several returned checks (more than two over the last two years) or an adverse legal judgment would indicate major problems.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How long the business has been operational? How much historical information is available?[BR][/BR]Have there been any problems, if so, when?[BR][/BR]Has the obligor been bankrupt? When?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR05Memo
+PI      1N C  -4               $>6. Confidence in Financial Information<$       									 \VAR06
+C 6. Confidence in Financial Information[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Confidence in Financial Information refers to the quality of the financial information available for assessment. It is not unusual for a small business to have both partial and dated accounting information. While Planning refers to the creation of both strategic and business plans with accompanying budgets. Financial reporting refers to the gathering of financial information to determine whether (and how) the borrower is performing against previous plans and budgets.  [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY HIGH CONFIDENCE, EXTENSIVE BUDGETING AND PLANNING: This response should represent the case of a Borrower with financial statements audited by a big international audit firm and without any qualification. The Borrower should also send the Financial Information to the Bank as soon as the information is readily available and including detailed information (for example the General Ledger). It is also expected for the firm to respond to any queries from the bank in a very timely fashion while sharing internal strategic documents as for example a multi-year business plan. Also the borrower should match or exceed the level you identified as appropriate for the business reporting and/or planning and has always complied with its budget.[BR][/BR][BR][/BR]HIGH CONFIDENCE, APPROPRIATE BUDGETING AND PLANNING: This response should represent the case of a Borrower with financial statements audited by a local audit firm and without any qualification. The Borrower should also send the Financial Information to the Bank as soon as the information is readily available and including detailed information (For example the General Ledger). It is also expected for the firm to respond to any queries from the bank in a very timely fashion while sharing some internal documents. Also the borrower should match the level you identified as appropriate for the business reporting and/or planning and has within the last years complied with its budget.[BR][/BR][BR][/BR]MEDIUM CONFIDENCE, SOME BUDGETING AND PLANNING: This response should represent the case of a Borrower with financial statements audited by a chartered accountant and without any qualification. The Borrower should also send the Financial Information to the Bank in a short time frame and including some detailed information. It is also expected for the firm to respond to any queries from the bank in a reasonable timely fashion but there is no sharing of internal documents. Also the borrower should perform both planning and reporting tasks, but you would normally expect more from this type of business. The borrower has mostly complied with its budget.[BR][/BR][BR][/BR]LOW CONFIDENCE, LIMITED BUDGETING OR PLANNING: This response should represent the case of a Borrower with financial statements simply approved by the Tax Office. The Borrower normally delays the delivery of financial information and provides little or no detailed information. The Borrower ignores some of the  queries from the bank and there is no sharing of internal documents. Also the borrower should perform some limited budgeting, reporting and/or planning. The borrower has deviated from previous budgets/plans.[BR][/BR][BR][/BR]VERY LOW CONFIDENCE, NO BUDGETING OR PLANNING: This response should represent the case of a Borrower with financial statements prepared by the Borrower. The Borrower ignores most of the  queries from the bank and there is no sharing of internal documents. Also the borrower does not perform any budgeting, reporting and/or planning. [BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]Who audited financial statements? Any qualification?[BR][/BR]How timely and how detailed information sent? Are internal documents shared with the bank? Timely response to queries?[BR][/BR]Are the budgeting and planning tasks performed by the borrower? Has the borrower deviated from budgets/plans?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR06Memo
+PI      1N C  -4               $>7. Access to Funds<$                         										 \VAR07
+C 7. Access to Funds[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]This question relates to overall capacity of the firm to access funds either for day-to-day activities or for investment financing. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY HIGH: A Borrower ranking Very High is expected to have the full support from the owners, either via a personal guarantee or any other equivalent sort of commitment or proven past experience of support, that have a considerable amount of net worth (should cover at least 30% of total credit). It is also expected for the Borrower to have a relation with more than 4 banks and have a considerable available credit limit in the banking system (enough to cover 1/2 of the operational costs for one year).[BR][/BR][BR][/BR]HIGH: A Borrower ranking High is expected to have the full support from the owners, either via a personal guarantee or any other equivalent sort of commitment or proven past experience of support, that have a considerable amount of net worth (should cover at least 20% of total credit). It is also expected for the Borrower to have a relation with more than 2 banks and have a good available credit limit in the banking system (enough to cover 1/4 of the operational costs for one year).[BR][/BR][BR][/BR]MEDIUM: A Borrower ranking Medium is expected to have the support from the owners that have a considerable amount of net worth (should cover at least 10% of total credit). It is also expected for the Borrower to have a relation with more than 1 bank and have a reasonable available credit limit in the banking system (enough to cover 1/6 of the operational costs for one year).[BR][/BR][BR][/BR]LOW: A Borrower ranking Low is expected to have the low support from the owners that have a reduced amount of net worth (less than 10% of total credit). The borrower typically will have limited access to banks and a very reduced amount of credit limit still available.[BR][/BR][BR][/BR]VERY LOW: A Borrower ranking Very Low is expected to not have any support from the owner (look at past history for evidence of lack of support). The borrower had several banks cancelling on the credit lines on the last months.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]Does the borrower have full support from the owners? Is there a personal guarantee or any other equivalent sort of commitment or proven past experience of support?[BR][/BR]How many banks does the borrower have a relationship with?[BR][/BR]What is the available credit of the borrower?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR07Memo
+PP      1N     3               $>Management<$
+PI      1N C  -4               $>8. Management Quality<$                       										 \VAR08
+C 8. Management Quality[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Management quality is a key driver of the financial strength of a Borrower. This factor considers relevant experience, track record, etc. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY HIGH is associated with management teams with extensive experience (>20 years) and that have very successfully lead the Borrower through good and bad cycles. [BR][/BR]HIGH is associated with management teams with good experience (>10 years) and that have successfully lead the Borrower through good and bad cycles. [BR][/BR]MEDIUM is associated with management teams with reasonable experience (<10 years) and that have successfully lead the Borrower or management teams with longer experience but that had some difficulties leading the team through bad cycles. [BR][/BR]LOW is associated with management teams with limited experience (<5 years) and that have successfully lead the Company or management teams with longer experience but that had  difficulties leading the company through bad cycles..[BR][/BR]VERY LOW is associated with management teams with very  limited experience (<2 years) or management teams with longer experience but that are consistently having difficulties managing the Borrower and ensuring good financial results.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How many years of experience does the management have in the industry?[BR][/BR]What is the track record of the management?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR08Memo
+PI      1N C  -4               $>9. Management Structure<$                     										 \VAR09
+C 9. Management Structure[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Management structure is particularly important for small and growing companies. This factor considers the structure and key person risk. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY GOOD: It is expected for the Borrower to have an excellent management structure with separated teams for the key functions (Ex: Marketing, Finance, Operations, Legal/Compliance) and layers of intermediate manager. This should be Borrowers not dependent on one individual or with a good succession plan in place.[BR][/BR]GOOD: It is expected for the Borrower to have a good management structure with separated teams for the key functions (Ex: Marketing, Finance, Operations, Legal/Compliance) and some layers of intermediate managers. This should be Borrowers not dependent on one individual or with a succession plan in place.[BR][/BR]MEDIUM: It is expected for the Borrower to have a reasonable management structure with some separate teams for any of the key functions (Ex: Marketing, Finance, Operations, Legal/Compliance) and some layers of intermediate managers. Borrowers with dependence on one individual and without a succession plan should not have a response better than medium.[BR][/BR]POOR: Borrowers with some dependence on one individual and without a good management structure to mitigate this risk.[BR][/BR]VERY POOR: Borrowers highly dependent on one individual that is near retirement and without any succession plan should be classified in this category.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]Does the borrower depend on one individual to run the company? If so, is there a good succession plan in place?[BR][/BR]Are there separate teams for key functions?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR09Memo
+PI      1N C  -4               $>10. Financial Policy<$                       										 \VAR10
+C 10. Financial Policy[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]The factors considered are the Borrowers desired capital structure, its financing, liquidity and hedging strategies and its tendency for strategic changes, including acquisitions. Previous adherence to stated commitments, how cash flow has been used in the past are assessed, including the record of balancing shareholder and debt holder interests and level of caution in management of the Borrower’s liquidity profile. Based on the  understanding of past actions, the incentives and pressures on management and its strategic goals, a subjective forward looking view is formed about likely future performance. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]HIGHLY CONSERVATIVE - Expected to have a highly conservative financial policy with an ability and willingness to fund all requirements from internal sources. It is also expected for the Borrower to mitigate nearly all of the exchange risk via hedging contracts. The Borrower considers as a strategic objective maintaining a good credit rating with the Banks.[BR][/BR][BR][/BR]CONSERVATIVE - Expected to have a conservative and balanced financial policy with an ability and willingness to fund main requirements from internal sources. Most of the exchange risk is mitigated via hedging. The Borrower regards a good rating as important but not a strategic objective.[BR][/BR][BR][/BR]BALANCED - Expected to have a balanced financial policy however with potential for the use of internal cash flows to either make acquisitions or pay the Shareholders. The exchange risk is only partial hedged representing a potential source of risk.[BR][/BR][BR][/BR]RISKY - Expected to have a financial policy that is unfavourable to creditors. Alternate sources of liquidity are limited, or might even be unavailable, bank credit facilities maybe be fully secured with just the covenant cushion. Exchange risk is not correctly mitigated and any negative movement in the relevant exchange rates might place the Borrower into financial problems. [BR][/BR][BR][/BR]VERY RISKY - Expected to have financial policies, either by making acquisitions or activity expansions using most of the funds available and by remunerating the shareholders without ensuring a good level of liquidity, that could contribute to a high likelihood of default. Exchange risk is not correctly mitigated and any negative movement in the relevant exchange rates might place the Borrower into financial problems.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How conservative is the policy in respect of the capital structure, its financing and liquidity?[BR][/BR]Is hedging used to mitigate relevant risks?[BR][/BR]How much of available funds are used for expansion and acquisitions? [BR][/BR]How much important is a good rating for a borrower?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR10Memo
+PP      1N     3               $>Market<$
+PI      1N C  -4               $>11. Competitive Position<$                    										 \VAR11
+C 11. Competitive Position[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Competitive Position refers to the standing of the borrower against its peers mainly regarding competitive advantages in product/technology, costs and market power. Competition is not limited to the competition arising from similar assets but from all assets which serve a similar purpose.[BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY GOOD: This response is expected to be associated with the industry leader in market share (>30%) that has a clear competitive advantage in product/technology and cost structure. This overall advantage over its competitors is translated into an expected very low volatility in results going forward.[BR][/BR][BR][/BR]GOOD: This response is expected to be associated with a either an industry leader that is under pressure by other Borrowers that at the moment have a better technology/product/cost structure or by Borrowers that rank in the top competitor group (market share > 15%) and that have a clear advantage in technology or cost structure when compared with the rest of the competitors. A smaller Borrower in market share but that has a clear advantage in technology/product/cost and is conquering market share at a good pace can be included in this response.[BR][/BR][BR][/BR]MEDIUM: This response should be used to describe the average player in the industry that is subject to a strong level of competition but still has a reasonable cost structure and technology base that should ensure the stability of positive results in the next years.[BR][/BR][BR][/BR]POOR: This response is expected to be associate with a Borrower that is under strong competition and that has no competitive advantages in the market place. Borrowers that are consistently losing market share should be placed under this category as well as Borrowers that have been underperforming recently.[BR][/BR][BR][/BR]VERY POOR: This response is associated with a Borrower that is under fierce competition and struggling to sell the product in the market place or to control the associated costs. The expectation is that the Borrower will not survive unless there is a specific turnaround plan to improve either the product/technological solution or the cost structure.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]What is the market share of the borrower?[BR][/BR]How is technology/product/cost structure of the borrower as compared with its peers?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR11Memo
+PI      1N C  -4               $>12. Customer Power<$                         										 \VAR12
+C 12. Customer Power[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Customer Power refers to the reliance of the borrower on its customers. If a few customers provide a significant portion or all of the sales, then there is considerable risk if these customers find alternate suppliers or experience financial difficulties. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]WEAK: The borrower can exert influence over its customers, possibly specifying terms and setting prices with little opportunity for the customer to go elsewhere. This situation may occur in monopoly situations or markets where there are very few players with high barriers to entry.[BR][/BR]LIMITED: Individual customers have very little influence over the borrower. This situation would often occur where there are many customers, making small purchases, or where customers have invested heavily in a product and are then reliant on a supplier for maintenance and upgrades.[BR][/BR]SOME: Relationship between each customer and the borrower tends to be fairly equal. This may occur in situations where there are few customers and few suppliers. Each has a significant interest in maintaining a good relationship and working with the other to resolve any difficulties.[BR][/BR]SIGNIFICANT: Where the loss of a customer would cause the borrower difficulties, but where the borrower could walk away if necessary. This situation would often occur where the individual product price is very high and where there are relatively few customers.[BR][/BR]STRANGLEHOLD: Where the customer is in a position to impose terms on the borrower. This situation often occurs where there are many suppliers with few customers, and the customers effectively control the market. For example consider suppliers to the major auto manufacturers.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How many customers does the borrower have?[BR][/BR]How much borrower depends on specific customers? How difficult is for the new competitors to enter the market?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR12Memo
+PI      1N C  -4               $>13. Earnings Volatility<$                     										 \VAR13
+C 13. Earnings Volatility[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Borrowers earnings and volatility profile in comparison to industry earnings volatility and to its peers, impact of external factors common to the industry, sources of revenue, diversification, stability of supply chain. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]VERY LOW: Earnings are highly predictable and stable. Any volatility has been hedged or mitigated.[BR][/BR]LOW: Earnings are predictable and stable. Some volatility may occur with a very low probability and some mitigation may be in place.[BR][/BR]MEDIUM: Earnings are reasonably predictable and stable. Some volatility may exist but no major fluctuations are expected.[BR][/BR]HIGH: Earnings are somewhat unpredictable. There is little or insufficient mitigation in place.[BR][/BR]VERY HIGH: Earnings are highly unpredictable and there is no mitigation in place.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How stable are the earnings? [BR][/BR]Can the earnings volatility be hedged? [BR][/BR]How is it as compared to its peers?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR13Memo
+PI      1N C  -4               $>14. Market Conditions<$                       										 \VAR14
+C 14. Market Conditions[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]The general economic conditions in the market area (trading area where the company sells its products or services) of the company. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]EXCELLENT: The local market is widely exceeding expectations resulting in significant increases in demand for the product or service supplied.[BR][/BR]ABOVE AVERAGE: The local market is above average and has some positive effect on demand for the product or service supplied.[BR][/BR]AVERAGE: The company is selling its product into a local market where overall conditions are unlikely to affect demand for the product or service negatively or positively.[BR][/BR]BELOW AVERAGE: The company is selling its product into a local market where overall economic conditions have not been good and this is likely to affect demand for the company's product. [BR][/BR]POOR: Overall economic conditions are poor, the market is contracting and customer spending is reduced significantly.[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]What are the economic conditions in the market borrower operates?[BR][/BR]What are the possibilities for demand growth?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR14Memo
+PP      1N     3               $>Activity<$
+PI      1N C  -4               $>15. Total Costs / Total Sales<$               										 \VAR15
+C 15. Total Costs / Total Sales[BR][/BR][BR][/BR]Measures firm's operating efficiency.[BR][/BR][BR][/BR]o Total Sales (Turnover): Turnover are the amounts derived from the provision of goods and services falling within the company's ordinary activities after deduction of trade discounts, value added tax and any other taxes based on amounts to be derived.[BR][/BR]o Total Costs: The item Costs of Goods Sold (COGS) represents all costs directly allocated by the company in generating revenues, such as material, labor and overhead.[BR][/BR]Expenses that belong to Selling, General, and Administrative category, should NOT be included into COGS, i.e.:[BR][/BR]The Selling, General, and Administrative Expense position represents all operating expenses not directly related to production. This item includes salaries and marketing expenses, costs of delivering goods and overhead items allocated to the sales generating process, as well as expenses related to personnel, accounting and financing activities, the operating costs of the company's headquarters and similar items.
+PI      1A M   4               $>Explanation<$                                                     \VAR15Memo
+PP      1N     3               $>Debt Coverage<$
+PI      1N C  -4               $>16. EBITDA / Interest Expense<$               										 \VAR16
+C 16. EBITDA / Interest Expense[BR][/BR][BR][/BR]The Debt Coverage is of particular importance when determining the financial strength of companies, given the potential for cash flow volatility. For many companies, strong and stable cash flow to debt ratios are the best indicators of a healthy credit profile and can also be a competitive advantage by providing greater strategic and financial flexibility during cyclical downturns.[BR][/BR][BR][/BR]o EBITDA: EBIT + Depreciation and Amortisation[BR][/BR][BR][/BR]o EBIT (Operating Profit): The Operating Profit (Loss) is a company's profit or loss derived from its operating activities, i.e. prior to its financial, extraordinary, or other income and charges.[BR][/BR][BR][/BR]o Depreciation and Amortisation: represents the amounts of economic benefit of all tangible and intangible fixed assets consumed in the financial year. [BR][/BR][BR][/BR]o Interest Expense: The item Interest and similar expenses represents finance costs of borrowing, inputted interest elements of financial leases, commitment fees in connection with obtaining credit facilities and the underwriting of a discount related to long-term provisions.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR16Memo
+PP      1N     3               $>Leverage<$
+PI      1N C  -4               $>17. (Liabilities - (Cash & Securities)) / Assets<$  							 \VAR17
+C 17. (Liabilities - (Cash & Securities)) / Assets[BR][/BR][BR][/BR]Leverage is a simple way to compare the capital structures of companies. It also provides some insight into a company’s financial policies, including its tolerance for debt levels.[BR][/BR][BR][/BR]o Cash & Marketable Securities:  measures liquid assets which include cash at bank and in hand, as well as, short term financial investments (excluding short term own shares).[BR][/BR][BR][/BR]o Total Assets: are the sum of the assets of a company.[BR][/BR][BR][/BR]o Total Liabilities: is the sum of current liabilities plus long-term debt.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR17Memo
+PI      1N C  -4               $>18. Equity Ratio (Total Equity / Total Assets)<$    							 \VAR18
+C 18. Equity Ratio (Total Equity / Total Assets)[BR][/BR][BR][/BR]Leverage is a simple way to compare the capital structures of companies. It also provides some insight into a company’s financial policies, including its tolerance for debt levels.[BR][/BR][BR][/BR]o Total Assets: are the sum of the assets of a company.[BR][/BR][BR][/BR]o Total Equity: Equity is what remains after the liabilities and the deferred income taxes and revenues are subtracted from the total assets. It is also represents the value of the company held by shareholders.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR18Memo
+PP      1N     3               $>Liquity<$
+PI      1N C  -4               $>19. Cash Ratio (Cash & Eqv. / Current Liabilities)<$         		 \VAR19
+C 19. Cash Ratio (Cash & Eqv. / Current Liabilities)[BR][/BR][BR][/BR]Liquidity is the ability to have sufficient funds on hand to pay bills or short term obligations when they are due and to meet unexpected needs for cash.[BR][/BR][BR][/BR]o Cash & Equivalents: represents any directly transferable medium of exchange. This item includes legal tender and amount due by banks also as items such as Checks, postal orders, and bank credit card vouchers.[BR][/BR][BR][/BR]o Current Liabilities: are defined as all obligations which are due in the next year. The Amounts payable within one year should comprise the sub-headings Current portion of amounts payable after one year, Financial debts (<1year), Trade debts (<1year), Advances received on contracts in progress (<1year), Taxes, remuneration and social security and the Other amounts payable. [BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR19Memo
+PP      1N     3               $>Profitability<$
+PI      1N C  -4               $>20. Return on Assets (Net Income / Total Assets)<$             	 \VAR20
+C 20. Return on Assets (Net Income / Total Assets)[BR][/BR][BR][/BR]o Total Assets: are the sum of the assets of a company.[BR][/BR][BR][/BR]o Net Income (or Profit attributable to shareholders or the bottom line in the income statement): This item represents the income (or loss) reported by a company after expenses and losses have been subtracted from all revenues and gains for the fiscal period. A loss is represented by a negative sign. Net income includes the operating profit, the financial profit and the extraordinary profit after income and other taxes.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR20Memo
+PP      1N     3               $>Size<$
+PI      1N C  -4               $>21. Total Sales (EURO)<$                     										 \VAR21
+C 21. Total Sales (EURO)[BR][/BR][BR][/BR]Total sales in EURO. It is used as the primary measure for scale, greater scale allows companies to leverage costs and obtain more power in the market. Large firms are less likely to default.[BR][/BR][BR][/BR]o Total Sales (Turnover): Turnover are the amounts derived from the provision of goods and services falling within the company's ordinary activities after deduction of trade discounts, value added tax and any other taxes based on amounts to be derived.[BR][/BR][BR][/BR]If the turnover is in different currency (other than EURO), an average yearly exchange rate should be applied for conversion.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR21Memo
+
+.Choices
+VAR01     =  "1:Weak|2:Limited|3:Some|4:Significant|5:Stranglehold"
+VAR02     =  "1:Mature|2:Growth|3:Decline|4:Entrepreneurial"
+VAR03     =  "1:Very High|2:High|3:Medium|4:Low|5:Very Low|"
+VAR04     =  "1:Good|2:Acceptable|3:No Experience|4:Poor|"
+VAR05     =  "1:Clear|2:No Experience|3:Minor Problems|4:Previously Bankrupt|5:Major Problems / Bankrupt|"
+VAR06     =  "1:Very High Confidence, Extensive Budgeting and Planning|2:High Confidence, Appropriate Budgeting and Planning|3:Medium Confidence, Some Budgeting and Planning|4:Low Confidence, Limited Budgeting or Planning|5:Very Low Confidence, No Budgeting or Planning|"
+VAR07     =  "1:Very High|2:High|3:Medium|4:Low|5:Very Low|"
+VAR08     =  "1:Very High|2:High|3:Medium|4:Low|5:Very Low|"
+VAR09     =  "1:Very Good|2:Good|3:Medium|4:Poor|5:Very Poor|"
+VAR10     =  "1:Highly Conservative|2:Conservative|3:Balanced|4:Risky|5:Very Risky|"
+VAR11     =  "1:Very Good|2:Good|3:Medium|4:Poor|5:Very Poor|"
+VAR12     =  "1:Weak|2:Limited|3:Some|4:Significant|5:Stranglehold|"
+VAR13     =  "1:Very Low|2:Low|3:Medium|4:High|5:Very High|"
+VAR14     =  "1:Excellent|2:Above Average|3:Average|4:Below Average|5:Poor|"
+VAR15     =  "1:< 0.4|2:0.4 - 0.6|3:0.6 - 0.8|4:0.8 - 1|5:>= 1|"
+VAR16     =  "1:< 0.5|2:0.5 - 2|3:2 - 4|4:4 - 6|5:6 - 10|6: >= 10|"
+VAR17     =  "1:< 0.5|2:0.5 - 0.7|3:0.7 - 0.8|4:0.8 - 1|5:> =1|"
+VAR18     =  "1:< 0|2:0 - 0.2|3:0.2 - 0.3|4:0.3 - 0.5|5:>= 0.5|"
+VAR19     =  "1:< 0.05|2:0.05 - 0.15|3:0.15 - 0.3|4:0.3 - 1|5:>= 1|"
+VAR20     =  "1:< 0|2:0 - 0.05|3:0.05 - 0.1|4:0.1 - 0.5|5:>= 0.5|"
+VAR21     =  "1:< 250000|2:250000 - 1000000|3:1000000 - 2500000|4:2500000 - 5000000|5:5000000 - 10000000|6: >= 10000000|"
+Industry  =  file "Triodos-Industy.fib"
+
+.Variable VAR01, InputRequired=1
+.Variable VAR02, InputRequired=1
+.Variable VAR03, InputRequired=1
+.Variable VAR04, InputRequired=1
+.Variable VAR05, InputRequired=1
+.Variable VAR06, InputRequired=1
+.Variable VAR07, InputRequired=1
+.Variable VAR08, InputRequired=1
+.Variable VAR09, InputRequired=1
+.Variable VAR10, InputRequired=1
+.Variable VAR11, InputRequired=1
+.Variable VAR12, InputRequired=1
+.Variable VAR13, InputRequired=1
+.Variable VAR14, InputRequired=1
+.Variable VAR15, InputRequired=1
+.Variable VAR16, InputRequired=1
+.Variable VAR17, InputRequired=1
+.Variable VAR18, InputRequired=1
+.Variable VAR19, InputRequired=1
+.Variable VAR20, InputRequired=1
+.Variable VAR21, InputRequired=1
+
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 2
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map02_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (2)<$                                    \Q_Map02_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_Map02_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map02_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X))")
+Q_Map02_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map02                        = (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS)
+Q_Map02_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map02_INFO                   = &If(Q_Map02[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map02_VALIDATION             =
+
+.Choices
+Q_Map02                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 3
+; Algemene gegevens
+
+PP      1N C   2  +            $>Score<$                                                          \Q_Map03
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 3<$                                              \Q_Map03_WARNING
+PP      1A     3               $>Info bij stap 3<$                                                 \Q_Map03_INFO
+PP      1A     3               $>Validatie stap 3<$                                                \Q_Map03_VALIDATION
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Sector
+
+PX      1N     3               $>Score<$                                                         \Q_Map03_Paragraaf01
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =VAR01                                                             \VAR01_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=VAR01
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \VAR01_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \VAR01_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=VAR01_Contribution
+
+.Formulas Notrend
+VAR01_Contribution   = OnER(VAR01_Score * VAR01_Weight,NA)
+VAR01_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar01",VAR01,1)
+VAR01_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",1,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var02                                                             \Var02_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var02
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var02_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var02_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var02_Contribution
+
+.Formulas Notrend
+Var02_Contribution   = OnER(Var02_Score * Var02_Weight,NA)
+Var02_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar02",VAR02,1)
+Var02_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",2,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var03                                                             \Var03_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var03
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var03_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var03_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var03_Contribution
+
+.Formulas Notrend
+Var03_Contribution   = OnER(Var03_Score * Var03_Weight,NA)
+Var03_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar03",VAR03,1)
+Var03_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",3,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var04                                                             \Var04_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var04
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var04_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var04_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var04_Contribution
+
+.Formulas Notrend
+Var04_Contribution   = OnER(Var04_Score * Var04_Weight,NA)
+Var04_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar04",VAR04,1)
+Var04_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",4,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var05                                                             \Var05_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var05
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var05_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var05_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var05_Contribution
+
+.Formulas Notrend
+Var05_Contribution   = OnER(Var05_Score * Var05_Weight,NA)
+Var05_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar05",VAR05,1)
+Var05_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",5,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var06                                                             \Var06_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var06
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var06_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var06_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var06_Contribution
+
+.Formulas Notrend
+Var06_Contribution   = OnER(Var06_Score * Var06_Weight,NA)
+Var06_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar06",VAR06,1)
+Var06_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",6,1)
+
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var07                                                             \Var07_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var07
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var07_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var07_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var07_Contribution
+
+.Formulas Notrend
+Var07_Contribution   = OnER(Var07_Score * Var07_Weight,NA)
+Var07_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar07",VAR07,1)
+Var07_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",7,1)
+
+
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var08                                                             \Var08_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var08
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var08_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var08_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var08_Contribution
+
+.Formulas Notrend
+Var08_Contribution   = OnER(Var08_Score * Var08_Weight,NA)
+Var08_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar08",VAR08,1)
+Var08_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",8,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var09                                                             \Var09_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var09
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var09_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var09_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var09_Contribution
+
+.Formulas Notrend
+Var09_Contribution   = OnER(Var09_Score * Var09_Weight,NA)
+Var09_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar09",VAR09,1)
+Var09_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",9,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var10                                                             \Var10_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var10
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var10_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var10_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var10_Contribution
+
+.Formulas Notrend
+Var10_Contribution   = OnER(Var10_Score * Var10_Weight,NA)
+Var10_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar10",VAR10,1)
+Var10_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",10,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var11                                                             \Var11_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var11
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var11_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var11_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var11_Contribution
+
+.Formulas Notrend
+Var11_Contribution   = OnER(Var11_Score * Var11_Weight,NA)
+Var11_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar11",VAR11,1)
+Var11_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",11,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var12                                                             \Var12_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var12
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var12_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var12_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var12_Contribution
+
+.Formulas Notrend
+Var12_Contribution   = OnER(Var12_Score * Var12_Weight,NA)
+Var12_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar12",VAR12,1)
+Var12_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",12,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var13                                                             \Var13_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var13
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var13_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var13_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var13_Contribution
+
+.Formulas Notrend
+Var13_Contribution   = OnER(Var13_Score * Var13_Weight,NA)
+Var13_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar13",VAR13,1)
+Var13_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",13,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var14                                                             \Var14_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var14
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var14_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var14_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var14_Contribution
+
+.Formulas Notrend
+Var14_Contribution   = OnER(Var14_Score * Var14_Weight,NA)
+Var14_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar14",VAR14,1)
+Var14_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",14,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var15                                                             \Var15_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var15
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var15_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var15_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var15_Contribution
+
+.Formulas Notrend
+Var15_Contribution   = OnER(Var15_Score * Var15_Weight,NA)
+Var15_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar15",VAR15,1)
+Var15_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",15,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var16                                                             \Var16_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var16
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var16_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var16_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var16_Contribution
+
+.Formulas Notrend
+Var16_Contribution   = OnER(Var16_Score * Var16_Weight,NA)
+Var16_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar16",VAR16,1)
+Var16_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",16,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var17                                                             \Var17_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var17
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var17_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var17_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var17_Contribution
+
+.Formulas Notrend
+Var17_Contribution   = OnER(Var17_Score * Var17_Weight,NA)
+Var17_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar17",VAR17,1)
+Var17_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",17,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var18                                                             \Var18_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var18
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var18_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var18_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var18_Contribution
+
+.Formulas Notrend
+Var18_Contribution   = OnER(Var18_Score * Var18_Weight,NA)
+Var18_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar18",VAR18,1)
+Var18_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",18,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var19                                                             \Var19_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var19
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var19_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var19_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var19_Contribution
+
+.Formulas Notrend
+Var19_Contribution   = OnER(Var19_Score * Var19_Weight,NA)
+Var19_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar19",VAR19,1)
+Var19_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",19,1)
+
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var20                                                             \Var20_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var20
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var20_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var20_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var20_Contribution
+
+.Formulas Notrend
+Var20_Contribution   = OnER(Var20_Score * Var20_Weight,NA)
+Var20_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar20",VAR20,1)
+Var20_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",20,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var21                                                             \Var21_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var21
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var21_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var21_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var21_Contribution
+
+.Formulas Notrend
+Var21_Contribution   = OnER(Var21_Score * Var21_Weight,NA)
+Var21_Score          = MatrixLookup("TRIODOS_Parameters.xls","ScoreVar21",VAR21,1)
+Var21_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightGeneric",21,1)
+
+.Variables
+;------------------------------
+PP    0=1N    -4  +            $>Subtotal<$                                                      \VarSubTotal
+
+PX      1N     3               $>Rating<$                                                         \Q_Map03_Paragraaf02
+PP    0 1N     4  +            $>Internal Rating<$																								\InternalRating
+PP    4 1N %   4  +            $>Associated PD<$		  																						\RatingPD
+
+.Formulas Notrend
+InternalRating      = If(Complete=1,MatrixLookup("TRIODOS_Parameters.xls","Rating",VarSubTotal,1),NA)
+RatingPD						= If(Complete=1,MatrixLookup("TRIODOS_Parameters.xls","Rating",VarSubTotal,2),NA)
+
+.Variables
+;------------------------------
+PX      1N     3               $>Appeal<$                                                         \Q_Map03_Paragraaf03
+;PP    0 1N     4               =InternalRating																										\=InternalRating
+PI      1N C   4  +            $>Management Integrity and change/resignation<$            				\Notch01
+C Management Integrity and Change/Resignation[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Possibility to adjust the final rating for any serious doubts or question marks over the integrity of the management or owner, as well as any imminent changes in management or management structure, and high management turnover, which are not captured in the management factors. May in some circumstances also be positive (e.g. low-performing manager being replaced by a respected industry figure).[BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Downgrade by 2[BR][/BR]Downgrade by 1[BR][/BR]No notch[BR][/BR]Upgrade by 1[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]Have there been any changes recently in the management or management structure?[BR][/BR]Are there any doubts about the integrity of the management?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch01Memo
+PI      1N C   4  +            $>Company Structure<$            	                          			\Notch02
+C Company Structure[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Possibility to adjust the final rating for the effect of complex company structures. Can be notched down for complex, questionable company structures but may also be positive in some cases, e.g. subsidiary senior to other funding vehicles. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Downgrade by 2[BR][/BR]Downgrade by 1[BR][/BR]No notch[BR][/BR]Upgrade by 1[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]What is the Ownership structure of the Company? [BR][/BR]Is it overly complex?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch02Memo
+PI      1N C   4  +            $>Other Risks (legal, regulation)<$                          			\Notch03
+C Other Risks (legal, regulation)[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR][BR][/BR]Possibility to adjust the final rating for any additional risks not captured in the factors above such as an expected change in governing regulation with negative impact. [BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Downgrade by 2[BR][/BR]Downgrade by 1[BR][/BR]No notch[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]Are there any changes in Government regulations expected?[BR][/BR]If so, what kind of impact it could have on the Borrower?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch03Memo
+PI      1N C   4  +            $>Group and Owner Support<$                                  			\Notch04
+C Group and Owner Support[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Possibility to adjust the final rating for any serious doubts or question marks over level of financial commitment and additional financial support that the owners or the Group are able to provide to the business, which are not captured in the management factors. This indicates the owners commitment and trust in the business model support. This may also provide a cushion against bankruptcy in times of adversity and may therefore reduce the likelihood of a default.[BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Downgrade by 2[BR][/BR]Downgrade by 1[BR][/BR]No notch[BR][/BR]Upgrade by 1[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]How likely is the support from the Group or the Owners?[BR][/BR]How much of additional financial support can the borrower expect from the Group or the Owners if needed?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch04Memo
+PI      1N C   4  +            $>Change in Financial Variables<$                             			\Notch05
+C Change in Financial Variables[BR][/BR][BR][/BR]Factor Definition:[BR][/BR][BR][/BR]Possibility to adjust the final rating for high operating inefficiency and any serious doubts for the company to repay its creditors. Companies with very low profitability might have problems to repay their debt and interest obligations, which eventually might lead to a default in the case of very rapid changes from one year to the other on certain financial ratios as for example Operating Margin or Creditor Days. For example a rapid decrease in the operating margin might indicate a quick change in the operating environment of the company.[BR][/BR][BR][/BR][BR][/BR]Factor Response Clarification Text:[BR][/BR][BR][/BR]Downgrade by 2[BR][/BR]Downgrade by 1[BR][/BR]No notch[BR][/BR]Upgrade by 1[BR][/BR][BR][/BR][BR][/BR]Factor Evaluation Criteria:[BR][/BR][BR][/BR]What is the Operating Margin of the Company? What is the historical trend of the profitability?[BR][/BR]What are the Creditor Days of the Borrower?[BR][/BR]How are these measures as compared with its Peers and Industry averages?[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch05Memo
+PI      1N C  -4  +            $>Default<$                                                        \Default
+C Default in Basel II[BR][/BR][BR][/BR]Possibility to adjust the final rating to reflect a default. Defaults have been recognized when either or both of the following have taken place:[BR][/BR][BR][/BR]a. The obligor is past due more than 90 days on any material credit obligation to Triodos Bank. Amounts considered material are larger or equal than 500 EUR. [BR][/BR]b. Triodos Bank is of the opinion that the customer will fail to repay its obligations to the banking group in full, without recourse by the bank to actions such as realizing security. [BR][/BR][BR][/BR]For more details, please consult the Default/Provisioning policy.[BR][/BR]
+PP    0 1N    -4  +            $>FinalRating<$                                                    \FinalRating
+PP    4 1N %   4  +            $>FinalAssociatedPD<$								     													\FinalAssociatedPD
+
+PI      1A M   4               $>Overall explanation<$                                            \OverallExplanation
+
+.Choices
+Notch01 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|-1:Upgrade by 1|"
+Notch02 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|-1:Upgrade by 1|"
+Notch03 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|"
+Notch04 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|-1:Upgrade by 1|"
+Notch05 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|-1:Upgrade by 1|"
+Default =  "1:Yes|0:No"
+
+
+.Formulas Notrend
+Default = 0
+FinalRating = IF(Default = 1, 14, IF(Default = 0,(If(InternalRating = NA, NA, (Min(13, Max(1,InternalRating+Notch01+Notch02+Notch03+Notch04+Notch05))))), NA))
+FinalAssociatedPD = If(Complete=1,MatrixLookup("TRIODOS_Parameters.xls","NewRatingPD",FinalRating,1),NA)
+
+Notch01 = 0
+Notch02 = 0
+Notch03 = 0
+Notch04 = 0
+Notch05 = 0
+
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 3
+
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map03_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (3)<$                                    \Q_Map03_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (3)<$                          \Q_Map03_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map03_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_REQUIREDVARS),InputRequired(X))")
+Q_Map03_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map03                         = (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS)
+Q_Map03_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map03_INFO                   = &If(Q_Map03[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map03_VALIDATION             =
+
+
+.Choices
+Q_Map03                        = Q_ROOT
+
+
+
+.Variables
+;================================================================================================== Result
+; Resultaat
+; wordt pas getoond na definitief maken
+
+PP      1A   1 2               "Result"                                                            \Q_RESULT
+
+PX      1N     3               $>Rating<$                                                          \Q_Map04_Paragraaf01
+PP    0 1N    -4               =FinalRating                                                        \=FinalRating
+PP    4 1N %   4               =FinalAssociatedPD                                                  \=FinalAssociatedPD
+
+
+PX      1N     3               $>Modelversion<$                                                    \Q_Map04_Paragraaf02
+PP      1A     4               =Q_ModelType                                                        \=Q_ModelType
+PP      1A     4               =Q_ModelVersion                                                     \=Q_ModelVersion
+PP      1A     4               =Q_MatrixVersion                                                    \=Q_MatrixVersion
+
+PX      1N     3               $>Users<$                                                           \Q_Map04_Paragraaf03
+PP      1N D   4               =Q_STATUS_STARTED_ON                                                \=Q_STATUS_STARTED_ON
+PP      1A     4               =Q_STATUS_STARTED_BY                                                \=Q_STATUS_STARTED_BY
+PP      1A     4               =Q_STATUS_STARTED_BY_NAME                                           \=Q_STATUS_STARTED_BY_NAME
+PP      1N D   4               =Q_STATUS_FINAL_ON                                                  \=Q_STATUS_FINAL_ON
+PP      1A     4               =Q_STATUS_FINAL_BY                                                  \=Q_STATUS_FINAL_BY
+PP      1A     4               =Q_STATUS_FINAL_BY_NAME                                             \=Q_STATUS_FINAL_BY_NAME
+
+
+.Variables
+;================================================================================================== Result
+; Q_Status
+;
+
+PI      1N C 1 2               $>Status<$                                                       \Q_STATUS
+PI      1N D   2               $>Final:<$                                                       \Q_STATUS_FINAL_ON
+PI      1A     2               $>Final by:<$                                                    \Q_STATUS_FINAL_BY
+PI      1A     2               $>Final by:<$                                                    \Q_STATUS_FINAL_BY_NAME
+PI      1N D   2               $>Created:<$                                                     \Q_STATUS_STARTED_ON
+PI      1A     2               $>Created by:<$                                                  \Q_STATUS_STARTED_BY
+PI      1A     2               $>Created by:<$                                                  \Q_STATUS_STARTED_BY_NAME
+PI      1N D   2  +            $>Last modified<$                                                \Q_STATUS_MODIFIED_ON
+PP      1A     2  +            $>Modelversion:<$                                                \Q_ModelVersion
+PP      1A     2  +            $>Modeltype:<$                                                   \Q_ModelType
+PP      1A     2  +            $>Parameters version:<$                                          \Q_MatrixVersion
+
+PI      1N C   2               $>Previous<$                                                     \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               $>Next<$                                                         \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               $>Draft report<$             	                                  \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               $>Definitive report<$                                            \Q_FINAL_REPORT_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_STATUS                       = "0:$>Active<$|1:$>Final<$"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_STATUS                       = 0
+Q_STATUS_MODIFIED_ON           = Now
+Q_ModelVersion                 = "#CompactModelVersion#"                                                                                           ; EJS: mooier is (maar kan niet in webversie): &SysVar("ModelVersion")
+Q_MatrixVersion                = &MatrixLookup("TRIODOS_Parameters.xls","Version",1,3)
+Q_ModelType                    = "Generic"
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+
+.Variables
+;================================================================================================== Restricties
+; Restricties
+
+XX      1A M   1               "Restricties"                                                       \Q_Restricties
+PP      1A     2               "Mededeling"                                                        \Q_Restrictie01
+PP      1A M 1 2               "Restricties tekst"                                                 \Q_RestrictiesCombi
+
+.Formulas NoTrend
+Q_Restrictie01                 = &If( 1=0 ,"[BR][/BR]- Mededeling","")
+Q_RestrictiesCombi             = &Q_Restrictie01
+Q_Restricties                  = &If(Length(&Q_RestrictiesCombi[1])>0,&"[BR][/BR]|De volgende variabelen zijn niet correct gevuld:"&Q_RestrictiesCombi,"")
+
+
+.Variables
+;================================================================================================== Q_HULPVARS
+; Knock-outs
+
+PP      1A M   2               "Knockout(s)?"                                                      \Q_WARNING_GLOBAL
+PP    0 1N     2               "COMPLETE"                                                          \COMPLETE
+
+.Formulas NoTrend
+Complete = If((Q_MAP01=1) AND (Q_MAP02=1),1,0)
+
+
+.Quit
+

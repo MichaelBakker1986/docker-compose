@@ -1,0 +1,277 @@
+﻿<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>EWSWS</CodeList>
+    <CodeListVersion>1.0</CodeListVersion>
+    <Description>EWS signalen ING</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <MultiLevelDataWhenSource>No</MultiLevelDataWhenSource>
+    <LeveledMappingWhenTarget>No</LeveledMappingWhenTarget>
+    <DCSignedValues>No</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FMT4 Mastermodel EWSWS</Creator>
+    <CreatorVersion>1.0</CreatorVersion>
+    <BuildDate>2015-01-28</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+
+    <Account><Code></Code><Description>Algemeen</Description><Sort>1</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.periodUltimo</Code><Description>periode_ultimo - Datum van de stand van de gegevens in de bronsystemen</Description><Sort>2</Sort><Level>2</Level><DC></DC><DataType>date</DataType></Account>
+    <Account><Code>earlyWarningSignal.customerId</Code><Description>relnr - Dit is het unieke (CLP) relatienummer van klant.</Description><Sort>3</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.referenceType</Code><Description>reftyp - Bronsysteem waaruit het relatienummer uit afkomstig is (RR=oranje, CLP=blauw)</Description><Sort>4</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+
+    <Account><Code>earlyWarningSignal.creditFacilityNumber</Code><Description>kredfacnr - Kredietfaciliteitsnummer (KFC-nummer)</Description><Sort>6</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+
+    <Account><Code>earlyWarningSignal.customerName</Code><Description>relnaam - Naam van klant</Description><Sort>8</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.segmentCode</Code><Description>segmcd - Segmentcode (geeft type klantbediening weer).</Description><Sort>9</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.customerOfIngSince</Code><Description>klant_bij_ing_sinds - Ingangsdatum dat klant bij ING bankiert.(op dit moment leeg)</Description><Sort>10</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.chamberOfCommerceNumber</Code><Description>kvknummer - Nummer bij Kamer van Koophandel</Description><Sort>11</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.foundationDate</Code><Description>oprchtdat - Oprichtingsdatum bij Kamer van Koophandel.</Description><Sort>12</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.gridId</Code><Description>grid_eenh_id - Identificatie van klant in Global Relationship Identifier Database van CCRM-organisatie.</Description><Sort>13</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.naicsPrimaryIndustryDescription</Code><Description>naics_prim_industry_desc - Omschrijving van branche</Description><Sort>14</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.smallBusinessFacilitiesCustomerIndication</Code><Description>sbf_relatie - Indicator of een klant is toegewezen aan het SBF-risicomodel (Small Business Facilities).</Description><Sort>15</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.riskRatingCurrentMonth</Code><Description>ratinggetal_mm - Ratinggetal huidige maand</Description><Sort>16</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.riskRatingLast12Months</Code><Description>ratinggetal_mm12 - Ratinggetal 12 maanden geleden</Description><Sort>17</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.ingRiskRatingCurrentMonth</Code><Description>ing_risk_rating_mm - Rating huidige maand</Description><Sort>18</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.ingRiskRatingLast12Months</Code><Description>ing_risk_rating_mm12 - Rating 12 maanden geleden</Description><Sort>19</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdraftAmountCurrentMonth</Code><Description>ovsbedr_mm_c - Bedrag aan overstand in huidige maand</Description><Sort>20</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+
+    <Account><Code></Code><Description>Omzet over rekening</Description><Sort>22</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenueCurrentMonth</Code><Description>sbfbomzc_mm_c - Omzet over rekening in huidige maand</Description><Sort>23</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenueLastMonth</Code><Description>sbfbomzc_mm1_c - Omzet over rekening vorige maand</Description><Sort>24</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue2MonthAgo</Code><Description>sbfbomzc_mm2_c - Omzet over rekening 2 maanden geleden</Description><Sort>25</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue3MonthAgo</Code><Description>sbfbomzc_mm3_c - Omzet over rekening 3 maanden geleden</Description><Sort>26</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue4MonthAgo</Code><Description>sbfbomzc_mm4_c - Omzet over rekening 4 maanden geleden</Description><Sort>27</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue5MonthAgo</Code><Description>sbfbomzc_mm5_c - Omzet over rekening 5 maanden geleden</Description><Sort>28</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue6MonthAgo</Code><Description>sbfbomzc_mm6_c - Omzet over rekening 6 maanden geleden</Description><Sort>29</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue7MonthAgo</Code><Description>sbfbomzc_mm7_c - Omzet over rekening 7 maanden geleden</Description><Sort>30</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue8MonthAgo</Code><Description>sbfbomzc_mm8_c - Omzet over rekening 8 maanden geleden</Description><Sort>31</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue9MonthAgo</Code><Description>sbfbomzc_mm9_c - Omzet over rekening 9 maanden geleden</Description><Sort>32</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue10MonthAgo</Code><Description>sbfbomzc_mm10_c - Omzet over rekening 10 maanden geleden</Description><Sort>33</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue11MonthAgo</Code><Description>sbfbomzc_mm11_c - Omzet over rekening 11 maanden geleden</Description><Sort>34</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue12MonthAgo</Code><Description>sbfbomzc_mm12_c - Omzet over rekening 12 maanden geleden</Description><Sort>35</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue13MonthAgo</Code><Description>sbfbomzc_mm13_c - Omzet over rekening 13 maanden geleden</Description><Sort>36</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue14MonthAgo</Code><Description>sbfbomzc_mm14_c - Omzet over rekening 14 maanden geleden</Description><Sort>37</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue15MonthAgo</Code><Description>sbfbomzc_mm15_c - Omzet over rekening 15 maanden geleden</Description><Sort>38</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue16MonthAgo</Code><Description>sbfbomzc_mm16_c - Omzet over rekening 16 maanden geleden</Description><Sort>39</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue17MonthAgo</Code><Description>sbfbomzc_mm17_c - Omzet over rekening 17 maanden geleden</Description><Sort>40</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue18MonthAgo</Code><Description>sbfbomzc_mm18_c - Omzet over rekening 18 maanden geleden</Description><Sort>41</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue19MonthAgo</Code><Description>sbfbomzc_mm19_c - Omzet over rekening 19 maanden geleden</Description><Sort>42</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue20MonthAgo</Code><Description>sbfbomzc_mm20_c - Omzet over rekening 20 maanden geleden</Description><Sort>43</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue21MonthAgo</Code><Description>sbfbomzc_mm21_c - Omzet over rekening 21 maanden geleden</Description><Sort>44</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue22MonthAgo</Code><Description>sbfbomzc_mm22_c - Omzet over rekening 22 maanden geleden</Description><Sort>45</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenue23MonthAgo</Code><Description>sbfbomzc_mm23_c - Omzet over rekening 23 maanden geleden</Description><Sort>46</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.accountRevenueLastYear</Code><Description>sbfbomzc_mm_mm11 - Omzet over rekening afgelopen jaar</Description><Sort>47</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageAccountRevenueLastYear</Code><Description>gemomzc_mm_mm11 - Gemiddelde maandelijkse omzet over rekening afgelopen jaar</Description><Sort>48</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code></Code><Description>Limiet en omzetsignalen</Description><Sort>49</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitCurrentMonth</Code><Description>ultlim_mm_c - Hoogte limiet RCK op ultimo huidige maand</Description><Sort>50</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+
+    <Account><Code>earlyWarningSignal.totalCreditLimitCurrentMonthObligoExcluded</Code><Description>totlimkredf_exobl_mm - Totale kredietbelang huidige maand, exclusief obligo limieten. Naam herzien. Interest is geen logische naam (Interest = rente)</Description><Sort>52</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+
+    <Account><Code></Code><Description>Omzetsignalen</Description><Sort>54</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueScore</Code><Description>s_omzet_t_punten - Score op EWS-signaal 1</Description><Sort>55</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueScoreIndication</Code><Description>s_omzet_t - Indicator afgaan EWS-signaal 1</Description><Sort>56</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueScoreDescription</Code><Description>s_omzet_t_oms - Omschrijving EWS-signaal 1</Description><Sort>57</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueDifferenceScore</Code><Description>s_omzetdelta3_punten - Score op EWS-signaal 2</Description><Sort>58</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueDifferenceIndication</Code><Description>s_omzetdelta3 - Indicator afgaan EWS-signaal 2</Description><Sort>59</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueDifferenceDescription</Code><Description>s_omzetdelta3_oms - Omschrijving EWS-signaal 2</Description><Sort>60</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRatioScore</Code><Description>s_omzet_y_punten - Score op EWS-signaal 3</Description><Sort>61</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRatioIndication</Code><Description>s_omzet_y - Indicator afgaan EWS-signaal 3</Description><Sort>62</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRatioDescription</Code><Description>s_omzet_y_oms - Omschrijving EWS-signaal 3</Description><Sort>63</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRCLimitScore</Code><Description>s_omzet_punten - Score op EWS-signaal 4</Description><Sort>64</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRCLimitIndication</Code><Description>s_omzet - Indicator afgaan EWS-signaal 4</Description><Sort>65</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueRCLimitDescription</Code><Description>s_omzet_oms - Omschrijving EWS-signaal 4</Description><Sort>66</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code></Code><Description>Limietgebruik</Description><Sort>67</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateCurrentMonth</Code><Description>disp_t - Limietgebruik huidige maand</Description><Sort>68</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateLastMonth</Code><Description>disp_t_1 - Limietgebruik vorige maand</Description><Sort>69</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate2MonthsAgo</Code><Description>disp_t_2 - Limietgebruik 2 maanden geleden</Description><Sort>70</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate3MonthsAgo</Code><Description>disp_t_3 - Limietgebruik 3 maanden geleden</Description><Sort>71</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate4MonthsAgo</Code><Description>disp_t_4 - Limietgebruik 4 maanden geleden</Description><Sort>72</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate5MonthsAgo</Code><Description>disp_t_5 - Limietgebruik 5 maanden geleden</Description><Sort>73</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate6MonthsAgo</Code><Description>disp_t_6 - Limietgebruik 6 maanden geleden</Description><Sort>74</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate7MonthsAgo</Code><Description>disp_t_7 - Limietgebruik 7 maanden geleden</Description><Sort>75</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate8MonthsAgo</Code><Description>disp_t_8 - Limietgebruik 8 maanden geleden</Description><Sort>76</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate9MonthsAgo</Code><Description>disp_t_9 - Limietgebruik 9 maanden geleden</Description><Sort>77</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate10MonthsAgo</Code><Description>disp_t_10 - Limietgebruik 10 maanden geleden</Description><Sort>78</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate11MonthsAgo</Code><Description>disp_t_11 - Limietgebruik 11 maanden geleden</Description><Sort>79</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate12MonthsAgo</Code><Description>disp_t_12 - Limietgebruik 12 maanden geleden</Description><Sort>80</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate13MonthsAgo</Code><Description>disp_t_13 - Limietgebruik 13 maanden geleden</Description><Sort>81</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate14MonthsAgo</Code><Description>disp_t_14 - Limietgebruik 14 maanden geleden</Description><Sort>82</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate15MonthsAgo</Code><Description>disp_t_15 - Limietgebruik 15 maanden geleden</Description><Sort>83</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate16MonthsAgo</Code><Description>disp_t_16 - Limietgebruik 16 maanden geleden</Description><Sort>84</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate17MonthsAgo</Code><Description>disp_t_17 - Limietgebruik 17 maanden geleden</Description><Sort>85</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate18MonthsAgo</Code><Description>disp_t_18 - Limietgebruik 18 maanden geleden</Description><Sort>86</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate19MonthsAgo</Code><Description>disp_t_19 - Limietgebruik 19 maanden geleden</Description><Sort>87</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate20MonthsAgo</Code><Description>disp_t_20 - Limietgebruik 20 maanden geleden</Description><Sort>88</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate21MonthsAgo</Code><Description>disp_t_21 - Limietgebruik 21 maanden geleden</Description><Sort>89</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate22MonthsAgo</Code><Description>disp_t_22 - Limietgebruik 22 maanden geleden</Description><Sort>90</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRate23MonthsAgo</Code><Description>disp_t_23 - Limietgebruik 23 maanden geleden</Description><Sort>91</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code></Code><Description>Limiet signalen</Description><Sort>92</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateDifferenceScore</Code><Description>s_disp_delta_punten - Score op EWS-signaal 5</Description><Sort>93</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateDifferenceIndication</Code><Description>s_disp_delta - Indicator afgaan EWS-signaal 5</Description><Sort>94</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateDifferenceDescription</Code><Description>s_disp_delta_oms - Omschrijving EWS-signaal 5</Description><Sort>95</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateAbove85Score</Code><Description>s_disp_punten - Score op EWS-signaal 6</Description><Sort>96</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateAbove85Indication</Code><Description>s_disp - Indicator afgaan EWS-signaal 6</Description><Sort>97</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateAbove85Description</Code><Description>s_disp_oms - Omschrijving EWS-signaal 6</Description><Sort>98</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateExtensionScore</Code><Description>s_rlcheck_punten - Score op EWS-signaal 7</Description><Sort>99</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateExtensionIndication</Code><Description>s_rlcheck - Indicator afgaan EWS-signaal 7</Description><Sort>100</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateExtensionDescription</Code><Description>s_rlcheck_oms - Omschrijving EWS-signaal 7</Description><Sort>101</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateOver100000Score</Code><Description>s_limiet_punten - Score op EWS-signaal 8</Description><Sort>102</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateOver100000Indication</Code><Description>s_limiet - Indicator afgaan EWS-signaal 8</Description><Sort>103</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilizationRateOver100000Description</Code><Description>s_limiet_oms - Omschrijving EWS-signaal 8</Description><Sort>104</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code></Code><Description>Overstandsignalen</Description><Sort>105</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftDurationScore</Code><Description>s_overstand_d_t_punten - Score op EWS-signaal 9</Description><Sort>106</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftDurationIndication</Code><Description>s_overstand_d_t - Indicator afgaan EWS-signaal 9</Description><Sort>107</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftDurationDescription</Code><Description>s_overstand_d_t_oms - Omschrijving EWS-signaal 9</Description><Sort>108</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftAmountScore</Code><Description>s_overstand_s_t_punten - Score op EWS-signaal 10</Description><Sort>109</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftAmountIndication</Code><Description>s_overstand_s_t - Indicator afgaan EWS-signaal 10</Description><Sort>110</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.currentOverdraftAmountDescription</Code><Description>s_overstand_s_t_oms - Omschrijving EWS-signaal 10</Description><Sort>111</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.numberOfOverdraftsLast6MonthsScore</Code><Description>s_overstandenverloop_d_punten - Score op EWS-signaal 11</Description><Sort>112</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.numberOfOverdraftsLast6Monthsindication</Code><Description>s_overstandenverloop_d - Indicator afgaan EWS-signaal 11</Description><Sort>113</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.numberOfOverdraftsLast6MonthsDescription</Code><Description>s_overstandenverloop_d_oms - Omschrijving EWS-signaal 11</Description><Sort>114</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdraftBalanceLast6Months</Code><Description>overstanden_saldo_6mnd - Bedrag in overstan afgelopen 6 maanden</Description><Sort>115</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdraftBalanceLast6MonthsScore</Code><Description>s_overstandenverloop_s_punten - Score op EWS-signaal 12</Description><Sort>116</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdraftBalanceLast6MonthsIndication</Code><Description>s_overstandenverloop_s - Indicator afgaan EWS-signaal 12</Description><Sort>117</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdraftBalanceLast6MonthsDescription</Code><Description>s_overstandenverloop_s_oms - Omschrijving EWS-signaal 12</Description><Sort>118</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code></Code><Description>Rating signalen</Description><Sort>119</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingPrefixScore</Code><Description>s_rating_prefix_punten - Score op EWS-signaal 13</Description><Sort>120</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingPrefixIndication</Code><Description>s_rating_prefix - Indicator afgaan EWS-signaal 13</Description><Sort>121</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingPrefixDescription</Code><Description>s_rating_prefix_oms - Omschrijving EWS-signaal 13</Description><Sort>122</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingIncreaseScore</Code><Description>s_rating_stijging_punten - Score op EWS-signaal 14</Description><Sort>123</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingIncreaseIndication</Code><Description>s_rating_stijging - Indicator afgaan EWS-signaal 14</Description><Sort>124</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingIncreaseDescription</Code><Description>s_rating_stijging_oms - Omschrijving EWS-signaal 14</Description><Sort>125</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingHistoryScore</Code><Description>s_ratingverloop_punten - Score op EWS-signaal 15</Description><Sort>126</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingHistoryIndication</Code><Description>s_ratingverloop - Indicator afgaan EWS-signaal 15</Description><Sort>127</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.ratingHistoryDescription</Code><Description>s_ratingverloop_oms - Omschrijving EWS-signaal 15</Description><Sort>128</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code></Code><Description>Diverse signalen</Description><Sort>129</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.businessRule31Score</Code><Description>s_br31_punten - Score op EWS-signaal 16</Description><Sort>130</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.businessRule31Indication</Code><Description>s_br31 - Indicator afgaan EWS-signaal 16</Description><Sort>131</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.businessRule31Description</Code><Description>s_br31_oms - Omschrijving EWS-signaal 16</Description><Sort>132</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.starterScore</Code><Description>s_starter_punten - Score op EWS-signaal 17</Description><Sort>133</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.starterIndication</Code><Description>s_starter - Indicator afgaan EWS-signaal 17</Description><Sort>134</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.starterDescription</Code><Description>s_starter_oms - Omschrijving EWS-signaal 17</Description><Sort>135</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.graydonRatingScore</Code><Description>s_rl_punten - Score op EWS-signaal 18</Description><Sort>136</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.graydonRatingIndication</Code><Description>s_rl - Indicator afgaan EWS-signaal 18</Description><Sort>137</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.graydonRatingDescription</Code><Description>s_rl_oms - Omschrijving EWS-signaal 18</Description><Sort>138</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.chamberOfCommerceMembershipScore</Code><Description>s_ina_punten - Score op EWS-signaal 19</Description><Sort>139</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.chamberOfCommerceMembershipIndication</Code><Description>s_ina - Indicator afgaan EWS-signaal 19</Description><Sort>140</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.chamberOfCommerceMembershipDescription</Code><Description>s_ina_oms - Omschrijving EWS-signaal 19</Description><Sort>141</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revisionDate</Code><Description>revisiedatum - Revisiedatum na vorige revisie</Description><Sort>142</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revisionDateScore</Code><Description>s_revisiedatum_punten - Score op EWS-signaal 20</Description><Sort>143</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.revisionDateIndication</Code><Description>s_revisiedatum - Indicator afgaan EWS-signaal 20</Description><Sort>144</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revisionDateDescription</Code><Description>s_revisiedatum_oms - Omschrijving EWS-signaal 20</Description><Sort>145</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.totalScore</Code><Description>totaalpunten - EWS-totaalscore</Description><Sort>146</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.repaymentSchedule</Code><Description>aflosschema - Indicator aflosschema aanwezig</Description><Sort>147</Sort><Level>2</Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.totalCreditLimitCurrentMonthIntradayExcluded</Code><Description>totlimkredf_exiday_mm - Totale kredietbelang huidige maand exclusief intraday limieten.Naam herzien. Interest is geen logische naam (Interest = rente)</Description><Sort>148</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.legalFormDescription</Code><Description>rechtsvorm omschrijving</Description><Sort>149</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.coverValue</Code><Description>dekkingswaarde - actuele waarde zekerheden incl haircuts</Description><Sort>150</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.netExposure</Code><Description>net_exposure = kredietbelang -/- dekkingswaarde</Description><Sort>151</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.noRevenueLast2MonthIndication</Code><Description>s_revenue2zero - Indicator nieuw EWS-signaal</Description><Sort>152</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.noRevenueLast2MonthDescription</Code><Description>s_revenue2zero_oms - Omzet was afgelopen 2 maanden 0</Description><Sort>153</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueLast3MonthDecreaseOver5000Indication</Code><Description>s_revenue5000 - Indicator nieuw EWS-signaal</Description><Sort>154</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueLast3MonthDecreaseOver5000Description</Code><Description>s_revenue5000_oms - Gemiddelde omzet was afgelopen 3 maanden groter dan 5000 en is met meer dan 50% gedaald</Description><Sort>155</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revenueTrendIndication</Code><Description>trendinrevenue - Gemiddelde omzet van de afgelopen 3 maanden / Gemiddelde omzet van dezelfde periode vorig jaar</Description><Sort>156</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.increaseRevenueLast5MonthsIndication</Code><Description>s_inc_turnover_5m - Indicator nieuw EWS-signaal</Description><Sort>157</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.increaseRevenueLast5MonthsDescription</Code><Description>s_inc_turnover_5m_oms - De gemiddelde omzet van de afgelopen 3 maanden is kleiner dan 5% van de gemiddelde omzet van de 3 maanden daarvoor</Description><Sort>158</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.increaseRevenueLast12MonthsIndication</Code><Description>s_inc_turnover_12m - Indicator nieuw EWS-signaal</Description><Sort>159</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.increaseRevenueLast12MonthsDescription</Code><Description>s_inc_turnover_12m_oms - De gemiddelde omzet van de afgelopen 3 maanden is groter dan 500% van de gemiddelde omzet van de 3 maanden daarvoor</Description><Sort>160</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUseOver70Indication</Code><Description>s_disp_70    - Indicator nieuw EWS-signaal</Description><Sort>161</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUseOver70Description</Code><Description>s_disp_70_oms - Limietgebruik is boven 70% uitgekomen</Description><Sort>162</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUseOver85Indication</Code><Description>s_disp_85 - Indicator nieuw EWS-signaal</Description><Sort>163</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUseOver85Description</Code><Description>s_disp_85_oms - Limietgebruik is boven 85% uitgekomen</Description><Sort>164</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.limitUtilization</Code><Description>disp - Limietgebruik</Description><Sort>165</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.noLimitObligo</Code><Description>nolim_obligo - Indicator nieuw EWS-signaal</Description><Sort>166</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.noLimitObligoDescription</Code><Description>nolim_obligo_oms - Geen obligolimiet aanwezig</Description><Sort>167</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.overdueTrendIndication</Code><Description>trendinoverdue - Gemiddeld aantal dagen in overstand van afgelopen 3 maanden / Gemiddeld aantal dagen in overstand van 4 en 5 maanden geleden</Description><Sort>168</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.frequencyIncreaseUltimoOverdraftOver6Months</Code><Description>num_del_incamt_last6m - Het aantal maal de afgelopen 6 maanden dat het overstandsbedrag op ultimo maand hoger was dan de maand ervoor</Description><Sort>169</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.dueTurnover</Code><Description>due_turnover - De hoogste overstand van de afgelopen 6 maanden op ultimo maand/ Gemiddelde omzet van de afgelopen 6 maanden</Description><Sort>170</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.rating13</Code><Description>rating13 - Indicator nieuw EWS-signaal</Description><Sort>171</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.rating13Description</Code><Description>rating13_oms - Ratinggetal is groter dan 13</Description><Sort>172</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.rating</Code><Description>ratinggetal_mm_num - Ratinggetal (numeriek)</Description><Sort>173</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.sectorCallIndication</Code><Description>s_sectorcall - Indicator nieuw EWS-signaal</Description><Sort>174</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.sectorCallDescription</Code><Description>s_sectorcall_oms - Sector is Bouwnijverheid of Onroerend goed</Description><Sort>175</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.legalCall</Code><Description>s_legalcall - Indicator nieuw EWS-signaal</Description><Sort>176</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.legalCallDescription</Code><Description>s_legalcall_oms - Rechtsvorm is BV</Description><Sort>177</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.priorityCluster</Code><Description>EWS-kleur</Description><Sort>178</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+
+
+    <Account><Code>earlyWarningSignal.officeNumber</Code><Description>Kantoornummer</Description><Sort>181</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.naicsPrimaryIndustryCode</Code><Description>NAICS-code </Description><Sort>182</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.customerMaintenancRelation</Code><Description>Relatiebeheercode</Description><Sort>183</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.revisionProtocol</Code><Description>Recent toegevoegd, nog geen description</Description><Sort>184</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.riskRatingModelCurrentMonth</Code><Description>riskRatingModel huidige maand? (geen export waarden aanwezig in Finan_Mapping_EWS-Revisie_datasample.xlsx) Ratingmodel (dit veld is afgelopen sprint toegevoegd aan het EWS-bestand en daarom wellicht nog niet bekend bij FINAN)</Description><Sort>185</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.watchListIndication</Code><Description>Recent toegevoegd, nog geen description</Description><Sort>186</Sort><Level>2</Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code></Code><Description>NIEUW VELDEN JULI 2017</Description><Sort>186</Sort><Level>1</Level><DC></DC><DataType>Abstract</DataType></Account>
+    <Account><Code>earlyWarningSignal.legalOneObligor</Code><Description></Description><Sort>187</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOverstandenSaldo6Mnd</Code><Description></Description><Sort>188</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelDispositionV2</Code><Description></Description><Sort>189</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelRatinggetalMM</Code><Description></Description><Sort>190</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelNrDisp95Y</Code><Description></Description><Sort>191</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelTrendInRevenue</Code><Description></Description><Sort>192</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelUltimoBoekMMcc</Code><Description></Description><Sort>193</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelNumDelIncamtLast6M</Code><Description></Description><Sort>194</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelDueTurnover</Code><Description></Description><Sort>195</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelSBFOmzcMMmm2VsIndus</Code><Description></Description><Sort>196</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelUltimoBoekSomMM</Code><Description></Description><Sort>197</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelVerloopTot</Code><Description></Description><Sort>198</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelMinBoekMMc</Code><Description></Description><Sort>199</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelNrDisp85YvsIndus</Code><Description></Description><Sort>200</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelSBFOmzcMMmm11</Code><Description></Description><Sort>201</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelUltimoLimitSomMM</Code><Description></Description><Sort>202</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelSBFOmzcMMmm2</Code><Description></Description><Sort>203</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelNrDispIncreaseYvsIndus</Code><Description></Description><Sort>204</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelNettoDekkingswaarde</Code><Description></Description><Sort>205</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelUltimoBoekSomMMvsIndus</Code><Description></Description><Sort>206</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelKlantBijIngSindsDays</Code><Description></Description><Sort>207</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelRatingMigratie12M</Code><Description></Description><Sort>208</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelSBFOmzcMMmm11VsIndus</Code><Description></Description><Sort>209</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelTrendinOverdue</Code><Description></Description><Sort>210</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelSRating13</Code><Description></Description><Sort>211</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOprichtingsdatumEWSdays</Code><Description></Description><Sort>212</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOmzetQ0VsQ1Avg</Code><Description></Description><Sort>213</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelUltimoBoekDebitTrend12M</Code><Description></Description><Sort>214</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOmzetY0VsY1Avg</Code><Description></Description><Sort>215</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOmzetQ0vsRCLim</Code><Description></Description><Sort>216</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelTrendInDispQ</Code><Description></Description><Sort>217</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelTrendInDispMtMH</Code><Description></Description><Sort>218</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOmzetY0vsExposure</Code><Description></Description><Sort>219</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelOmzetQ0vsTotLimitvsIndus</Code><Description></Description><Sort>220</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelTrendinDispH</Code><Description></Description><Sort>221</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelDekkingsRatio</Code><Description></Description><Sort>222</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.modelScore</Code><Description></Description><Sort>223</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM1</Code><Description></Description><Sort>224</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM2</Code><Description></Description><Sort>225</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM3</Code><Description></Description><Sort>226</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM4</Code><Description></Description><Sort>227</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM5</Code><Description></Description><Sort>228</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM6</Code><Description></Description><Sort>229</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM7</Code><Description></Description><Sort>230</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM8</Code><Description></Description><Sort>231</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM9</Code><Description></Description><Sort>232</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM10</Code><Description></Description><Sort>233</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.ultimoRCKLimitMM11</Code><Description></Description><Sort>234</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM0</Code><Description></Description><Sort>235</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM1</Code><Description></Description><Sort>236</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM2</Code><Description></Description><Sort>237</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM3</Code><Description></Description><Sort>238</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM4</Code><Description></Description><Sort>239</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM5</Code><Description></Description><Sort>240</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM6</Code><Description></Description><Sort>241</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM7</Code><Description></Description><Sort>242</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM8</Code><Description></Description><Sort>243</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM9</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM10</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.averageBkDebitMM11</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.prioPDNetExposure</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>earlyWarningSignal.prioRoodOranjeMMmm5Indication</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.prioRoodOranjeMMmm5Description</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.prioIBMMmm23Indication</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>boolean</DataType></Account>
+    <Account><Code>earlyWarningSignal.prioIBMMmm23Description</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType>string</DataType></Account>
+    <Account><Code>earlyWarningSignal.numberNRCCreditFacilities</Code><Description></Description><Sort></Sort><Level></Level><DC></DC><DataType></DataType></Account>
+
+  </Accounts>
+</FmtMappingModel>

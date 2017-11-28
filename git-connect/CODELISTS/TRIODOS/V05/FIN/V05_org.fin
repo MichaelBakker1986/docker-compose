@@ -1,0 +1,55 @@
+{&&Language=English}FINAN Prognose model
+;==========================================================================================================================================
+; V05.fin
+
+.ModelVersion          04.04.017.000                                                                ; Nummering is "externe releasenummer (xx.xx) + oplopende buildnumm (xxx.xxx)
+
+.FINANversion          3.0
+.MenuHelp              Prognose model
+.VarNamePos            76
+.BalanceDisAggr        Proportional
+
+;----------------------------
+; Specificatie periodes
+
+.Period MainPeriod, Title="$>main period<$",FormulaSet=NoTrend,FormulaSetTitle="$>hist<$",FormulaSet2=Trend,FormulaSet2Title="$>forec<$",FirstYear=ThisYear-2,Years=4,MaxTsY=13,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear),Overlap=Off
+.Sheet   1,Title="$>History and scenario<$ 1",Range=[FirstTinPeriod(MainPeriod)..LastTinPeriod(MainPeriod)],Period=MainPeriod
+
+;----------------------------
+; Model root
+.Variables
+PPPPP   BN     0               &"$>Prognose model<$"&" "&"v#CompactModelVersion#"                        \ROOT
+
+.Formulas NoTrend
+ModelVersion                   = "v#CompactModelVersion#"
+
+{&&Language=English}
+;==============================================================================================================
+.Variables
+PPPP    1N     1               $>Hidden vars<$                                                     \HiddenVars
+{&&Include "..\..\..\Finan\V05\Fin\inc_FPSVARS.fin"}
+{&&Include "..\..\..\Finan\V05\Fin\inc_V05_OtherHiddenVars.fin"}
+;==============================================================================================================
+{&&Include "..\..\..\Finan\V05\Fin\inc_CompanySpecification.fin"}       ;VAT rates, M2,
+{&&Include "Inc_ForecastSettings.fin"}                                  ;Forecast default settings
+{&&Include "..\..\..\Finan\V05\Fin\inc_AnnualStatement.fin"}            ;deze bevat ook "Inc_EffectiveNetWorth.fin"
+{&&Include "..\..\..\Finan\V05\Fin\inc_5MinutesWizard.fin"}
+{&&Include "..\..\..\Finan\V05\Fin\inc_Remarks.fin"}
+{&&Include "..\..\..\Finan\V05\Fin\inc_V05Visibility.fin"}
+;==============================================================================================================
+; Test Modules
+{&&Tryinclude "..\..\..\Finan\V05\Fin\inc_controlemodule.fin"}
+{&&Tryinclude "..\..\..\Finan\V05\Fin\inc_test.fin"}
+;==============================================================================================================
+; Waarderingsmodule
+;;{&&TryInclude "..\..\..\Finan\V05\Fin\inc_valuationV05.fin"}
+;==============================================================================================================
+; Projectfinanciering
+{&&TryInclude "..\..\..\Finan\V05\Fin\Inc_projectfinanceV05.fin"}
+;==============================================================================================================
+; Naamgeving volgens Belfirstschema (Belgian GAAP)
+{&&Include "..\..\..\Finan\V05\Fin\Inc_BelfirstTitles.fin"}
+;==============================================================================================================
+{&&Include "Inc_TriodosSettings.fin"}
+
+.Quit

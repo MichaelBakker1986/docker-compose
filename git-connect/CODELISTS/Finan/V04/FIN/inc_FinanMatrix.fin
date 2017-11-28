@@ -1,0 +1,130 @@
+; inc-FinanMatrix.fsf
+; afgeleid van Financial Scoreboard (Mobley matrix)
+; EJS, versie voor V04
+{&&Language=English}
+
+{&&if FEATURE="M"}    ; alleen bij licentie feature letter M
+
+; Klussen
+;
+; Aandachtspunten
+; - mutatie voorzieningen: toevoegingen moeten van resrek!
+; - BTW (omzet, debiteuren...)
+
+.Variables
+XXXXX   BN   1 1               "$>Financial Statements Summary<$"               \FinMatrix
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------
+; Kolom 2
+
+PPPPPM  FN     2               "$>Income Statement<$"                           \FinMatrixC2=FinMatrixR14C2 -> ResNaBel
+
+PXXXXM  FN     3               ""                                               \FinMatrixR01C2
+PPPPPM  FN     3               "$>Sales<$"                                      \FinMatrixR02C2 -> NettoOmzet
+PPPPPM  FN     3               "$>Interest Income<$"                            \FinMatrixR03C2 -> FinBaten
+PPPPPM  FN     3               "$>Costs of Goods Sold<$"                        \FinMatrixR04C2 -> InkW
+PPPPPM  FN     3               "$>Revaluations and income subsidiaries<$"       \FinMatrixR05C2
+PPPPPM  FN     3               "$>Depreciations/revaluations<$"                 \FinMatrixR06C2 -> VorigBedrUitr
+PPPPPM  FN     3               "$>Depreciations/revaluations<$"                 \FinMatrixR07C2 -> VorigImmatAkt
+PXXXXM  FN     3               ""                                               \FinMatrixR08C2
+PPPPPM  FN     3               "$>Transfer to Provisions<$"                     \FinMatrixR09C2 -> Voorz
+PPPPPM  FN     3               "$>Interest Costs<$"                             \FinMatrixR10C2 -> FinLasten
+PPPPPM  FN     3               "$>Operating expenses<$"                         \FinMatrixR11C2 -> BedrK
+PPPPPM  FN     3               "$>Income Tax<$"                                 \FinMatrixR12C2 -> WinstBel
+PPPPPM  FN     3               "$>Interest Costs<$"                             \FinMatrixR13C2 -> FinLasten
+PPPPPM  FN    -3=              "$>Result after revaluations<$"                  \FinMatrixR14C2 -> ResNaBel
+
+.Formulas NoTrend,Trend,User,Sector
+FinMatrixR01C2= NA                                                                         ; resultaat uit LiqMid
+FinMatrixR02C2= NettoOmzet+OvBedrOpbr
+FinMatrixR03C2= FinBaten
+FinMatrixR04C2= -InkW+ProdVrdMut
+FinMatrixR05C2= -(FinVastAkt[T-1]+FinVastAktInv-FinVastAkt)+AandeelResDeeln-ResAandDerden+HerwResOngespec
+FinMatrixR06C2= OnrGoedHerw-OnrGoedAfs+BedrUitrHerw-BedrUitrAfs
+FinMatrixR07C2= ImmatAktHerw-ImmatAktAfs
+FinMatrixR08C2= NA                                                                         ; regel van balanstotaalresultaat uit LiqMid
+FinMatrixR09C2= -Max(PensDotPers+PensDotDir,Voorz-Voorz[T-1])
+FinMatrixR10C2= -(RAchterKred+RLangKredHyp+RLangKredLen+RLangKredLes+RLangKredOv)
+FinMatrixR11C2= -(BedrK-BuitRes)+Max(PensDotPers+PensDotDir,Voorz-Voorz[T-1])
+FinMatrixR12C2= FinMatrixR14C2-VSUM(FinMatrixR01C2,FinMatrixR11C2)-FinMatrixR13C2          ;## dus sluitpost!
+FinMatrixR13C2= -(FinLasten-(RAchterKred+RLangKredHyp+RLangKredLen+RLangKredLes+RLangKredOv))
+FinMatrixR14C2= ResNaBel+MutHerwRes
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------
+; Kolom 3
+
+PPPPPM  FN     2               "$>Cash Statement<$"                             \FinMatrixC3=FinMatrixR14C3   -> CFJaarrek
+
+PPPPPM  FN     3               "$>Cash Change<$"                                \FinMatrixR01C3
+PPPPPM  FN     3               "$>Collections<$ (ocf)"                          \FinMatrixR02C3
+PPPPPM  FN     3               "$>Borrow, Payback, Interest Received<$ (fcf)"   \FinMatrixR03C3
+PPPPPM  FN     3               "$>Paid to Suppliers<$ (ocf)"                    \FinMatrixR04C3
+PPPPPM  FN     3               "$>Investments and income subsidiaries<$ (icf)"  \FinMatrixR05C3 -> FinVastAktInv
+PPPPPM  FN     3               "$>Investments<$ (icf)"                          \FinMatrixR06C3 -> BedrUitrInv
+PPPPPM  FN     3               "$>Investments<$ (icf)"                          \FinMatrixR07C3 -> ImmatAktInv
+PXXXXM  FN     3               ""                                               \FinMatrixR08C3
+PPPPPM  FN     3               "$>Withdrawal from Provisions<$ (ocf)"           \FinMatrixR09C3
+PPPPPM  FN     3               "$>Borrow, Payback, Interest Paid<$ (fcf)"       \FinMatrixR10C3
+PPPPPM  FN     3               "$>Costs Paid<$ (ocf)"                           \FinMatrixR11C3
+PPPPPM  FN     3               "$>Income Tax Paid<$ (ocf)"                      \FinMatrixR12C3
+PPPPPM  FN     3               "$>Borrow, Payback, Interest Paid<$ (fcf)"       \FinMatrixR13C3
+PPPPPM  FN     3               "$>Paid-out/in<$ (fcf)"                          \FinMatrixR14C3 -> EigenVerm
+
+.Formulas NoTrend,Trend,User,Sector
+FinMatrixR01C3= -(FinMatrixR01C4[T-1]+FinMatrixR01C2-FinMatrixR01C4)
+FinMatrixR02C3= FinMatrixR02C4[T-1]+FinMatrixR02C2-FinMatrixR02C4
+FinMatrixR03C3= FinMatrixR03C4[T-1]+FinMatrixR03C2-FinMatrixR03C4
+FinMatrixR04C3= FinMatrixR04C4[T-1]+FinMatrixR04C2-FinMatrixR04C4
+FinMatrixR05C3= FinMatrixR05C4[T-1]+FinMatrixR05C2-FinMatrixR05C4
+FinMatrixR06C3= FinMatrixR06C4[T-1]+FinMatrixR06C2-FinMatrixR06C4
+FinMatrixR07C3= FinMatrixR07C4[T-1]+FinMatrixR07C2-FinMatrixR07C4
+FinMatrixR08C3= FinMatrixR08C4[T-1]+FinMatrixR08C2-FinMatrixR08C4
+FinMatrixR09C3= FinMatrixR09C4[T-1]+FinMatrixR09C2-FinMatrixR09C4
+FinMatrixR10C3= FinMatrixR10C4[T-1]+FinMatrixR10C2-FinMatrixR10C4
+FinMatrixR11C3= FinMatrixR11C4[T-1]+FinMatrixR11C2-FinMatrixR11C4
+FinMatrixR12C3= FinMatrixR12C4[T-1]+FinMatrixR12C2-FinMatrixR12C4
+FinMatrixR13C3= FinMatrixR13C4[T-1]+FinMatrixR13C2-FinMatrixR13C4
+FinMatrixR14C3= -(FinMatrixR14C4[T-1]+FinMatrixR14C2-FinMatrixR14C4)
+
+.Variables
+;-------------------------------------------------------------------------------------------------------------
+; Kolom 4
+
+PPPPP   BN    -2=              "$>Ending Balance Sheet<$"                       \FinMatrixC4=FinMatrixR14C4   -> BalAkt
+
+PPPPP   BN     3               =LiqMid                                          \FinMatrixR01C4 -> LiqMid
+PPPPP   BN     3               =HandDeb                                         \FinMatrixR02C4 -> HandDeb
+PPPPP   BN     3               =OvVord                                          \FinMatrixR03C4 -> OvVord
+PPPPP   BN     3               =Vrd                                             \FinMatrixR04C4 -> Vrd
+PPPPP   BN     3               =FinVastAkt                                      \FinMatrixR05C4 -> FinVastAkt
+PPPPP   BN     3               "$>Tangible fixed assets<$"                      \FinMatrixR06C4 -> BedrUitr
+PPPPP   BN     3               =ImmatAkt                                        \FinMatrixR07C4 -> ImmatAkt
+PPPPP  =BN    -3               =BalAkt                                          \FinMatrixR08C4 -> BalAkt
+PPPPP   BN     3               =Voorz                                           \FinMatrixR09C4 -> Voorz
+PPPPP   BN     3               =LangVV                                          \FinMatrixR10C4 -> LangVV
+PPPPP   BN     3               =KostCred                                        \FinMatrixR11C4 -> KostCred
+PPPPP   BN     3               =KortFisKred                                     \FinMatrixR12C4 -> KortFisKred
+PPPPP   BN     3               "$>Other Debts<$"                                \FinMatrixR13C4 -> KortVV
+PPPPP  =BN    -3=              =EigenVerm                                       \FinMatrixR14C4 -> EigenVerm
+
+
+.Formulas NoTrend,Trend,User,Sector
+FinMatrixR01C4= LiqMid
+FinMatrixR02C4= HandDeb
+FinMatrixR03C4= Vord-HandDeb
+FinMatrixR04C4= Vrd
+FinMatrixR05C4= FinVastAkt
+FinMatrixR06C4= OnrGoed+BedrUitr
+FinMatrixR07C4= ImmatAkt
+FinMatrixR08C4= BalAkt
+FinMatrixR09C4= -Voorz
+FinMatrixR10C4= -LangVV
+FinMatrixR11C4= -KostCred
+FinMatrixR12C4= -KortFisKred
+FinMatrixR13C4= -(KortVV+VermBehoefte-KortFisKred-KostCred)
+
+.Variables
+
+{&&EndIf}  ; einde licentie feature letter M

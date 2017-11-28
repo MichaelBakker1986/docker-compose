@@ -1,0 +1,6 @@
+{&&Language=English}
+
+<=0:    $>The average period trade-accounts payable can not be calculated.<$"
+<3.5:  $>Paying behaviour could lead to tensions with (credit)suppliers. Try to improve this behaviour.<$
+<5.5:   $>The average period of trade-accounts payable exceeds 30 days, try to decrease this average period.<$
+>=7.5:  $>The paying behaviour is excellent. Request rebates for instant payments or make optimal use of supplier credit.<$

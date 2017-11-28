@@ -1,0 +1,31 @@
+{&&Language=Englisch}
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+;
+01: $>Verzekeringen<$
+03: $>Binnenlands Betalingsverkeer<$
+04: $>Buitenlands Betalingsverkeer<$
+05: $>Werkkapitaal Managen<$
+06: $>Financiering<$
+07: $>Risico Afdekken<$
+08: $>Employment Benefits<$
+09: $>Renteswaps<$
+10: $>Niet Gespecificeerde Overige Kosten<$

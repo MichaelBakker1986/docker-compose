@@ -1,0 +1,1945 @@
+{&&Language=English}                                                                                                                        
+;==============================================================================================================
+.Variables
+P       1A     1               $>Valuation<$                                                       \CompanyValuation
+                                                                                                                                            
+;==============================================================================================================
+
+; Geïnvesteerd vermogen
+.Variables
+PPP     BN     2               $>Invested Capital<$                                                \InvCap=OpInvCap
+                                                                                                  
+PPP     BN     3               $>Operating fixed assets<$                                          \OpFixedAsset -> OpFixedAsset
+PPP     BN     4               =IntangibleFixedAssets                                              \=IntangibleFixedAssets -> IntangibleFixedAssets
+PPP     BN     4               =MaterialFixedAssets                                                \=MaterialFixedAssets -> MaterialFixedAssets
+PPP     BN     4               =FinancialFixedAssets                                               \=FinancialFixedAssets -> FinancialFixedAssets
+PPP    =BN    -4=              =OpFixedAsset                                                       \=OpFixedAsset -> OpFixedAsset
+                                                                                                  
+PPP     BN     3               $>Operating net working capital<$                                   \OpWorkCap
+PPP     BN     4               =Inventories                                                        \=Inventories -> Inventories
+PPP     BN     4               =Receivables                                                        \=Receivables -> Receivables
+PPP     BN     4               =OperationalCashTotal                                               \=OperationalCashTotal -> OperationalCashTotal
+PPP    -BN     4               =ProvisionForReorganisation                                         \=ProvisionForReorganisation -> ProvisionForReorganisation
+PPP    -BN     4               =TradePayablesTotal                                                 \=TradePayablesTotal -> TradePayablesTotal
+PPP    -BN     4               =AccountsPayableExpenses                                            \=AccountsPayableExpenses -> AccountsPayableExpenses
+PPP    -BN     4               =AccountsPayableInvestments                                         \=AccountsPayableInvestments -> AccountsPayableInvestments
+PPP    -BN     4               =ReceivedPrePaymentsTotal                                           \=ReceivedPrePaymentsTotal -> ReceivedPrePaymentsTotal
+PPP    -BN     4               =TaxesAndSocialSecurityCharges                                      \=TaxesAndSocialSecurityCharges -> TaxesAndSocialSecurityCharges
+PPP    -BN     4               =PensionExpensesPayable                                             \=PensionExpensesPayable -> PensionExpensesPayable
+PPP    -BN     4               =TransitionalLiabilities                                            \=TransitionalLiabilities -> TransitionalLiabilities
+PPP    =BN    -4=              =OpWorkCap                                                          \=OpWorkCap
+                                                                                                  
+PPP    =BN    -3               $>Operating capital<$                                               \OpInvCap1   ; basis ROIC volgens Copeland
+                                                                                                  
+PPP     BN     3               $>Bookcorrections on invested capital<$                             \CorrOpInvCap
+PPP     BN     4               &"$>Goodwill acquired<$"&" "&"($>accumulated<$)"                    \AcquiredGoodwillAccum -> AcquiredGoodwill
+III     BN     4               $>Other bookcorrections<$                                           \CorrIC
+PPP    =BN    -4=              =CorrOpInvCap                                                       \=CorrOpInvCap
+                                                                                                  
+PPP    =BN    -3               $>Operational invested capital<$                                    \OpInvCap  ; basis ROIC volgens Stuart
+                                                                                                  
+PPP     BN     3               $>Non-operating capital<$                                           \NotOpInvCap
+PPP     BN     4               $>Marketable securities<$                                           \=MarketableSecurities -> MarketableSecurities
+PPP     BN     4               $>Excess cash<$                                                     \=ExcessCash -> ExcessCash
+PII     BN     4               $>Other bookcorrections<$                                           \CorrNotOpInvCap
+C $>Correcties in de waarderingswizard worden automatisch doorgevoerd in dit overzicht als dit hier niet handmatig is aangepast.<$
+III     BN  *  5               $>Other bookcorrections<$                                           \CorrNotOpInvCap1
+III     BN     5               $>Other bookcorrections<$                                           \CorrNotOpInvCap2
+III     BN     5               $>Other bookcorrections<$                                           \CorrNotOpInvCap3
+III     BN     5               $>Other bookcorrections<$                                           \CorrNotOpInvCap4
+PII    =BN    -5=              =CorrNotOpInvCap                                                    \=CorrNotOpInvCap
+PPP    =BN    -4=              =NotOpInvCap                                                        \=NotOpInvCap
+                                                                                                  
+PPP    =BN    -3=              $>Total invested capital (assets)<$                                 \AktInvCap
+                                                                                                  
+PPP     BN   2 3               $>Adjusted shareholders' equity<$                                   \AdjEquity
+PPP     BN     4               $>Net worth<$                                                       \=NetWorth -> NetWorth 
+PPP     BN     4               =AcquiredGoodwillAccum                                              \=AcquiredGoodwillAccum -> AcquiredGoodwill
+III     BN     4               =CorrIC                                                             \=CorrIC
+PII     BN     4         +     $>Other bookcorrections<$ ($>Non-operating capital<$)               \=CorrNotOpInvCap
+PPI     BN     4               $>Dividend payable<$                                                \=DividendPayable -> DividendPayable
+PPP     BN     4               =OperatingProvisions                                                \=OperatingProvisions-> OperatingProvisions
+PPP     BN     4               $>Deferred taxes<$                                                  \=DeferredTaxes -> DeferredTaxes
+PPP    =BN    -4=              =AdjEquity                                                          \=AdjEquity
+                                                                                                  
+PPP     BN     3               $>Adjusted debt<$                                                   \AdjDebt
+PPP     BN     4               =NonCurrentLiabilities                                              \=NonCurrentLiabilities -> NonCurrentLiabilities
+PPP     BN     4               =STPartOfLTDebts                                                    \=STPartOfLTDebts -> STPartOfLTDebts
+PPP     BN     4               =OverdraftCurrentAccount                                            \=OverdraftCurrentAccount -> OverdraftCurrentAccount
+PPP     BN     4               =CurrentAccountGroupCompanies                                       \=CurrentAccountGroupCompanies -> CurrentAccountGroupCompanies
+PPP     BN     4               =CurrentAccountAffiliatedCompanies                                  \=CurrentAccountAffiliatedCompanies -> CurrentAccountAffiliatedCompanies
+PPP     BN     4               =OtherShortTermDebt                                                 \=OtherShortTermDebt -> OtherShortTermDebt
+PPP     Bn     4               =InterestAndRepaymentsPayable                                       \=InterestAndRepaymentsPayable -> InterestAndRepaymentsPayable
+PPP     BN     4               =CapitalShortfall                                                   \=CapitalShortfall -> CapitalShortfall
+PPP    =BN    -4=              =AdjDebt                                                            \=AdjDebt
+                                                                                                  
+PPP    =BN    -3=              $>Total invested capital (liabilities)<$                            \PasInvCap  
+
+.Formulas NoTrend,Trend
+AcquiredGoodwillAccum     = AcquiredGoodwillAccum[T-1]+AcquiredGoodwill
+CorrIC                    = Self[T-1]
+
+CorrNotOpInvCapNu1        = OnZero(CorrNotOpInvCap1[ValDateColumn,TsY(ValDateColumn)],NA)
+CorrNotOpInvCapNu2        = OnZero(CorrNotOpInvCap2[ValDateColumn,TsY(ValDateColumn)],NA)
+CorrNotOpInvCapNu3        = OnZero(CorrNotOpInvCap3[ValDateColumn,TsY(ValDateColumn)],NA)
+CorrNotOpInvCapNu4        = OnZero(CorrNotOpInvCap4[ValDateColumn,TsY(ValDateColumn)],NA)
+
+.Formulas Trend
+CorrNotOpInvCap1          = If(T=ValDateColumn,If(DataEntered(CorrNotOpInvCapNu1),CorrNotOpInvCapNu1,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),CorrNotOpInvCapNu1,Self[T-1]))
+CorrNotOpInvCap2          = If(T=ValDateColumn,If(DataEntered(CorrNotOpInvCapNu2),CorrNotOpInvCapNu2,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),CorrNotOpInvCapNu2,Self[T-1]))
+CorrNotOpInvCap3          = If(T=ValDateColumn,If(DataEntered(CorrNotOpInvCapNu3),CorrNotOpInvCapNu3,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),CorrNotOpInvCapNu3,Self[T-1]))
+CorrNotOpInvCap4          = If(T=ValDateColumn,If(DataEntered(CorrNotOpInvCapNu4),CorrNotOpInvCapNu4,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),CorrNotOpInvCapNu4,Self[T-1]))
+ValuePreferenceShares     = If(T=ValDateColumn,If(DataEntered(ValuePreferenceSharesNu ),ValuePreferenceSharesNu ,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),ValuePreferenceSharesNu ,Self[T-1]))
+ValueWarrants             = If(T=ValDateColumn,If(DataEntered(ValueWarrantsNu         ),ValueWarrantsNu         ,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),ValueWarrantsNu         ,Self[T-1]))
+ValueManagementOptions    = If(T=ValDateColumn,If(DataEntered(ValueManagementOptionsNu),ValueManagementOptionsNu,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),ValueManagementOptionsNu,Self[T-1]))
+ValueOtherEquityClaims    = If(T=ValDateColumn,If(DataEntered(ValueOtherEquityClaimsNu),ValueOtherEquityClaimsNu,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),ValueOtherEquityClaimsNu,Self[T-1]))
+AdjDebtChangesForMarketValue = If(T=ValDateColumn,If(DataEntered(AdjDebtChangesForMarketValueNu),AdjDebtChangesForMarketValueNu,Self[T-1]),If((T>ValDateColumn) and (Self[T-1]=NA),AdjDebtChangesForMarketValueNu,Self[T-1]))
+
+
+;;;==============================================================================================================
+;;; Test stukje voor NPV en IRR functies
+;;.Variables
+;;PP    0 1N     3               "IRR / NPV Tests"              \IRRNPVTests
+;;
+;;;-------------------------------------------------------------------------------------------------------------------------------------- A
+;;; IRR
+;;.Variables
+;;PPP   0 1N     3               "IRR"                                      \IRRVar
+;;PII   2 FN     4               "IRR CashFlow"                             \IRRCashFlow
+;;PII   2 PN     4               "IRR Start Column"                         \IRRStartColumn
+;;PII   2 PN     4-              "IRR End Column"                           \IRREndColumn
+;;PPP   2 PN   1 4               "IRR Result"                               \IRRResult
+;;
+;;.Formulas NoTrend
+;;IRRStartColumn                                                = 1
+;;IRREndColumn                                  = 12
+;;IRRResult                                                             = IRR(IRRCashFlow, IRRStartColumn, IRREndColumn)
+;;
+;;;-------------------------------------------------------------------------------------------------------------------------------------- A
+;;; NPV
+;;.Variables
+;;PPP   0 1N     3               "NPV"                                      \NPVVar
+;;PII   2 PN %   4               "NPV Rate"                                 \NPVRate
+;;PII   2 FN     4               "NPV CashFlow"                             \NPVCashFlow
+;;PII   2 PN     4               "NPV Start Column"                         \NPVStartColumn
+;;PII   2 PN     4               "NPV End Column"                           \NPVEndColumn
+;;PII   2 PN D   4-              "NPV DateTime"                             \NPVDateTime
+;;PPP   2 PN   1 4               "NPV Result"                               \NPVResult
+;;
+;;.Formulas NoTrend
+;;NPVRate                                                                              = 0.01
+;;NPVStartColumn                                              = 1
+;;NPVEndColumn                                                = 12
+;;NPVDateTime                                                   = 38353
+;;NPVResult                                                          = NPV(NPVRate, NPVCashFlow, NPVStartColumn, NPVEndColumn, NPVDateTime)
+;;
+;;;-------------------------------------------------------------------------------------------------------------------------------------- A
+;;; NPV2
+;;.Variables
+;;PPP   0 1N     3               "NPV2"                                      \NPV2Var
+;;PII   2 BN %   4               "NPV2 Rate"                                 \NPV2Rate
+;;PII   2 FN     4               "NPV2 CashFlow"                             \NPV2CashFlow
+;;PII   2 PN     4               "NPV2 Start Column"                         \NPV2StartColumn
+;;PII   2 PN     4               "NPV2 End Column"                           \NPV2EndColumn
+;;PII   2 PN D   4-              "NPV2 DateTime"                             \NPV2DateTime
+;;PPP   2 PN   1 4               "NPV2 Result"                               \NPV2Result
+;;
+;;.Formulas NoTrend,Trend
+;;NPV2Rate                                                           = 0.0
+;;NPV2StartColumn                                           = 1
+;;NPV2EndColumn                                             = 12
+;;NPV2DateTime                                 = 38353
+;;NPV2Result                                                        = NPV2(NPV2Rate, NPV2CashFlow, NPV2StartColumn, NPV2EndColumn, NPV2DateTime)
+
+
+;==============================================================================================================
+; Ondernemingswaardering
+
+.Variables
+PPP  M  FN     2               $>Free cashflow<$                                                  \FreeCashFlow ;-> FreeCashFlow
+                                                                                                 
+PPP  M  FN     3               =OperatingIncome                                                   \=OperatingIncome -> OperatingIncome
+                                                                                                
+PPP  M  FN     3               $>Corrections on operating profit<$                                \CorrOperatingIncome
+PPP  M  FN     4               =ResultFromFinancialFixedAssets                                    \=ResultFromFinancialFixedAssets -> ResultFromFinancialFixedAssets
+PPP  M  FN     4               =ShareResultFromSubsidiaries                                       \=ShareResultFromSubsidiaries -> ShareResultFromSubsidiaries
+PPP  M -FN     4               =ReorganisationExpenses                                            \=ReorganisationExpenses -> ReorganisationExpenses
+PPP  M  MN     4               =OperatingProvisions                                               \=OperatingProvisions -> OperatingProvisions
+PPPP M  FN     4               =FictitiousExpensesTotalExclWages                                  \=FictitiousExpensesTotalExclWages -> FictitiousExpensesTotalExclWages
+PPP  M =FN    -4=              =CorrOperatingIncome                                               \=CorrOperatingIncome
+                                                                                                
+PPP  M =FN    -3               $>Operating profit after corrections<$          				            \EBIT
+                                                                                                
+PPP  M -FN     3               $>Taxes on operating profit<$                                      \TaxesOnEBIT
+PPP  M  FN     4               =TaxOnProfits                                                      \=TaxOnProfits -> TaxOnProfits
+PPP  M -FN     4               =TaxOnInterestIncomeAndExpenses                                    \=TaxOnInterestIncomeAndExpenses -> TaxOnInterestIncomeAndExpenses
+PPP  M -MN     4               $>Change in common deferred taxes<$                                \=DeferredTaxes -> DeferredTaxes
+PPP  M =FN    -4=              =TaxesOnEBIT                                                       \=TaxesOnEBIT
+PPP  M  CN % 1 4               $>Marginal tax rate on profit<$                                    \MargTaxOnProfitsPerc
+PPP  M  CN %   4               $>Effective tax rate<$                                             \TaxRateOnEBIT -> EBIT
+                                                                                                 
+                                                                                                 
+PPP  M =FN    -3               $>Net operating profit<$                                           \NOPLAT
+                                                                                                 
+PPP  M  FN     3               =DepreciationOfAssets                                              \ValDepreciationOfAssets=DepreciationOfAssets -> DepreciationOfAssets
+PPP  M  FN     3               =ImpairmentsOfAssets                                                \ValImpairmentsOfAssets=ImpairmentsOfAssets
+
+PPP  M =FN    -3               $>Operating cash flow<$                                             \GrossCashFlow
+                                                                                                  
+PPP  M -FN     3               $>Gross investments<$                                               \GrossInvestment
+PPP  M  FN     4               $>Change in net working capital<$                                   \MutOpWorkCap -> OpWorkCap
+PPP  M  FN     4               =InvestmentsInIntangibleFixedAssets                                 \=InvestmentsInIntangibleFixedAssets -> InvestmentsInIntangibleFixedAssets
+PPP  M  FN     4               =AcquiredGoodwill                                                   \=AcquiredGoodwill -> AcquiredGoodwill
+PPP  M  FN     4               =InvestmentsInLandAndBuildings                                      \=InvestmentsInLandAndBuildings -> InvestmentsInLandAndBuildings
+PPP  M  FN     4               =InvestmentsInPlantAndEquipment                                     \=InvestmentsInPlantAndEquipment -> InvestmentsInPlantAndEquipment
+PPP  M  FN     4               =InvestmentsInFurnitureAndFixtures                                  \=InvestmentsInFurnitureAndFixtures -> InvestmentsInFurnitureAndFixtures
+PPP  M  FN     4               =InvestmentsInTransportationEquipment                               \=InvestmentsInTransportationEquipment -> InvestmentsInTransportationEquipment
+PPP  M  FN     4               =InvestmentsInOtherMaterialFixedAssets                              \=InvestmentsInOtherMaterialFixedAssets -> InvestmentsInOtherMaterialFixedAssets
+PPP  M  FN     4               =InvestmentsInFinancialFixedAssets                                  \=InvestmentsInFinancialFixedAssets -> InvestmentsInFinancialFixedAssets
+PPP  M =FN    -4=              =GrossInvestment                                                    \=GrossInvestment
+                                                                                                  
+PPP  M =FN    -3=              $>Free cashflow<$                                                   \=FreeCashFlow
+                                                                                                  
+;-----------------------------------------------------------------------------------------------------------
+
+PPP  M  FN   2 3               $>Non-operating cashflow<$                                          \NoOpCashFlow
+PPP  M -FN     4               =ForeignExchangeAndCurrencyAdjustments                              \=ForeignExchangeAndCurrencyAdjustments -> ForeignExchangeAndCurrencyAdjustments
+PPP  M -FN     4               =OtherChangesOutsiteResult                                          \=OtherChangesOutsiteResult -> OtherChangesOutsiteResult
+PPP  M -FN     4               =BookProfits                                                        \=BookProfits -> BookProfits
+PPP  M  FN     4               =BookLosses                                                         \=BookLosses -> BookLosses
+PPP  M -FN     4               =OtherExtraordinaryIncome                                           \=OtherExtraordinaryIncome -> OtherExtraordinaryIncome
+PPP  M  FN     4               =OtherExtraordinaryExpenses                                         \=OtherExtraordinaryExpenses -> OtherExtraordinaryExpenses
+PPP  M  FN     4               =TaxesOnExtraordinaryIncomeAndExpenses                              \=TaxesOnExtraordinaryIncomeAndExpenses -> TaxesOnExtraordinaryIncomeAndExpenses
+PPP  M =FN    -4=              =NoOpCashFlow                                                       \=NoOpCashFlow
+                                                                                                    
+PPP  M  FN     3               $>Cashflow to investors<$                                           \FinancingFlow
+                                                                                                   
+PPP  M  FN     4               $>Excess cash<$                                                     \CFExcesscash
+PPP  M  MN     5               $>Addition in non-operational cash<$                                \=ExcessCash -> ExcessCash
+PPP  M  MN     5               =MarketableSecurities                                               \=MarketableSecurities -> MarketableSecurities
+PPP  M =FN    -5=              =CFExcesscash                                                       \=CFExcesscash
+                                                                                                   
+PPP  M  FN     4               $>Cashflow to shareholders<$                                        \CFshareholders
+PPP  M -FN     5               =ContributionOfCapital                                              \=ContributionOfCapital -> ContributionOfCapital
+PPP  M  FN     5               =BookvalueEquitySold                                                \=BookvalueEquitySold 
+PPP  M -MN     5               $>Changes in minority interests<$                                   \=MinorityInterests -> MinorityInterests
+PPPP M -MN     5               $>Change in statutory reserve<$                                     \=StatutoryReserve -> StatutoryReserve
+PPX  M -FN     5               =OtherMutationsNetWorth                                             \=OtherMutationsNetWorth -> OtherMutationsNetWorth
+PPP  M  FN     5               =ProfitPaidOutToClaimants                                           \=ProfitPaidOutToClaimants -> ProfitPaidOutToClaimants        ;;JB-netto
+PPP  M -MN     5               =DividendPayable                                                    \=DividendPayable -> DividendPayable
+PPP  M  FN     5               =ShareResultMinorityInterest                                        \=ShareResultMinorityInterest -> ShareResultMinorityInterest
+PPP  M =FN    -5=              =CFshareholders                                                     \=CFshareholders
+                                                                                                   
+PPP  M  FN     4               $>Cashflow to debtholders<$                                         \CFDebtholders
+PPP  M -FN     5               $>Debt financing<$                                                  \LongTDebtFin
+PPPP M  FN     6               =TupleSubordinatedDebtsTotal                                        \=SubordinatedDebtFinancing -> SubordinatedDebtFinancing
+PPPP M  FN     6               =TupleLongTermDebtsTotal                                            \=LongTermDebtFinancing -> LongTermDebtFinancing
+PPPP M  FN     6               =TupleLongTermDebtsOtherTotal                                       \=LongTermDebtOtherFinancing -> LongTermDebtOtherFinancing
+PPPP M  FN     6               =TupleLongTermDebtsOtherCat2Total                                   \=LongTermDebtOtherCat2Financing -> LongTermDebtOtherCat2Financing
+PPPP M  FN     6               =TupleLongTermDebtsOtherCat3Total                                   \=LongTermDebtOtherCat3Financing -> LongTermDebtOtherCat3Financing
+PPPP M  FN     6               =TupleLongTermDebtsOtherCat4Total                                   \=LongTermDebtOtherCat4Financing -> LongTermDebtOtherCat3Financing
+PPP  M  FN     6               =LongTermDebtAnnuityFinancing                                       \=LongTermDebtAnnuityFinancing -> LongTermDebtAnnuityFinancing
+PPP  M =FN    -6=              =LongTDebtFin                                                       \=LongTDebtFin
+PPP  M  FN     5               $>Repayment on Long Term Debt<$                                     \RepaymentLTDebt  -> RepaymentLTDebt 
+PPPP M  FN     6               =RepaymentOnSubordinatedDebts                                       \=RepaymentOnSubordinatedDebts -> RepaymentOnSubordinatedDebts
+PPPP M  FN     6               =RepaymentOnLongTermDebts                                           \=RepaymentOnLongTermDebts -> RepaymentOnLongTermDebts
+PPPP M  FN     6               =RepaymentOnLongTermDebtsOther                                      \=RepaymentOnLongTermDebtsOther -> RepaymentOnLongTermDebtsOther
+PPPP M  FN     6               =RepaymentOnLongTermDebtsOtherCat2                                  \=RepaymentOnLongTermDebtsOtherCat2 -> RepaymentOnLongTermDebtsOtherCat2
+PPPP M  FN     6               =RepaymentOnLongTermDebtsOtherCat3                                  \=RepaymentOnLongTermDebtsOtherCat3 -> RepaymentOnLongTermDebtsOtherCat3
+PPPP M  FN     6               =RepaymentOnLongTermDebtsOtherCat4                                  \=RepaymentOnLongTermDebtsOtherCat4 -> RepaymentOnLongTermDebtsOtherCat4
+PPP  M  FN     6               =RepaymentOnLongTermDebtsAnnuity                                    \=RepaymentOnLongTermDebtsAnnuity -> RepaymentOnLongTermDebtsAnnuity
+PPP  M =FN    -6=              =RepaymentLTDebt                                                    \=RepaymentLTDebt  -> RepaymentLTDebt 
+                                                                                                   
+PPP  M  FN     5               =NetFinancialExpenses                                               \=NetFinancialExpenses -> NetFinancialExpenses
+PPP  M  FN     5               =ResultFromFinancialFixedAssets                                     \=ResultFromFinancialFixedAssets -> ResultFromFinancialFixedAssets   ;;RvA wegwerken //###### opnemen in NettoFinLasten hierboven!!!!
+PPP  M -MN     5               &"$>Change<$"&" "&FirstLC(&InterestAndRepaymentsPayable[0])         \=InterestAndRepaymentsPayable -> InterestAndRepaymentsPayable
+PPP  M -MN     5               &"$>Change<$"&" "&FirstLC(&OtherShortTermDebt[0])                   \=OtherShortTermDebt -> OtherShortTermDebt
+PPP  M -MN     5               &"$>Change<$"&" "&FirstLC(&OverdraftCurrentAccount[0])              \=OverdraftCurrentAccount -> OverdraftCurrentAccount
+PPP  M -MN     5               &"$>Change<$"&" "&CurrentAccountGroupCompanies[0]                   \=CurrentAccountGroupCompanies -> CurrentAccountGroupCompanies
+PPP  M -MN     5               &"$>Change<$"&" "&CurrentAccountAffiliatedCompanies[0]              \=CurrentAccountAffiliatedCompanies -> CurrentAccountAffiliatedCompanies
+P P  M -MN     5               $>Change in capital shortfall<$                                     \=CapitalShortfall -> CapitalShortfall
+PPP  M =FN    -5=              =CFDebtholders                                                      \=CFDebtholders
+                                                                                                   
+PPP  M =FN    -4=              =FinancingFlow                                                      \=FinancingFlow
+                                                                                                   
+PPP  M =FN    -3=              $>Free cashflow<$                                                   \FreeCashFlow2
+                                                                                                   
+PPP      X   1 3               $>Ratios<$                                                          \ValueRatio
+PPP  M  CN %   4               $>Growth net operating profit<$                                     \GrNOPLAT -> NOPLAT
+
+
+
+.Formulas NoTrend,Trend
+MutOpWorkCap            = OnZero(GrossCashFlow-VSUM(MutOpWorkCap$N,MutOpWorkCap$L$P)-FinancingFlow-NoOpCashFlow,NA)
+TaxOnInterestIncomeAndExpenses   = OnZero(If((ReportAsLimitedLiabilityCompany)or(TaxOnProfits>0),-MargTaxProfitPerc*(TaxOnProfits<>NA)*((FinancialExpenses-FictitiousInterestExpenses-TransferOfPaymentExpenses)-(ResultFromExcessCash+OtherInterestIncome)),NA),NA)
+
+.Formulas NoTrend
+MargTaxOnProfitsPerc     = TaxProfitPerc
+
+.Formulas Trend
+MargTaxOnProfitsPerc     = If(TaxProfitBaseMKB=TaxableAmountMKB,TaxProfitPercVPB,TaxProfitPercMKB)
+
+.Formulas NoTrend,Trend
+FreeCashFlowAnnual       = If(T=LastTinYear,FesExpression(GetValue(FreeCashFlow,T,1,Bookyear)),NA);JB nog slim maken voor een ncompleet jaar (waarderingsdatum <> einde boekjaar)
+NoOpCashFlowAnnual       = If(T=LastTinYear,FesExpression(GetValue(NoOpCashFlow,T,1,Bookyear)),NA);JB nog slim maken voor een ncompleet jaar (waarderingsdatum <> einde boekjaar)
+TaxShieldAnnual          = If(T=LastTinYear,FesExpression(GetValue(TaxShield,T,1,Bookyear)),NA);JB nog slim maken voor een ncompleet jaar (waarderingsdatum <> einde boekjaar)
+
+.Variables
+;------------------------------------------------------------------------------------------------------------------------------------------
+; Economische winst
+
+PPP  M  FN     2               $>Economic profit<$                                                 \EcProfitTOP=EcProfit
+                                                                                                   
+PPP  M  CN %   3               $>Rate of return on invested capital<$                              \ROIC -> OpInvCap
+PPP  M  CN %   4               $>Operating margin<$                                                \OpMargin -> EBIT
+PPP  M  CN %   5               $>Sales<$                                                           \SalesPNO -> Sales
+PPP  M  CN %   5               $>Change in inventories<$                                           \ChangeInInventoriesPNO -> ChangeInInventories
+PPP  M -CN %   5               =CostOfSales                                                        \CostOfSalesPNO -> CostOfSales
+PPP  M  CN %  -5               $>Gross profit<$                                                    \GrossProfitPNO -> GrossProfit
+PPP  M  CN %   5               $>Other operating income<$                                          \OtherOperatingIncomePNO -> OtherOperatingIncome
+PPP  M -CN %   5               $>Operating expenses<$                                              \OperatingExpensesPNO -> OperatingExpenses
+PPP  M -CN %   5               =DepreciationOfAssets                                               \DepreciationOfAssetsPNO -> DepreciationOfAssets
+PPP  M  CN %  -5               $>Operating income<$                                                \OperatingIncomePNO -> OperatingIncome
+PPP  M  CN %   5               $>Operating profit after corrections<$                              \CorrOperatingIncomePNO -> CorrOperatingIncome
+PPP  M  CN %  -5=              $>EBIT<$                                                            \=OpMargin -> EBIT
+PPP  M1xCN     4               $>Capital turnover<$                                                \CapTurnover -> OpInvCap
+C $>Omloopsnelheid bedrijfsvermogen<$
+PPP  M  CN %   5               $>Operating fixed assets<$                                          \OpFixedAssetPNO -> OpFixedAsset
+PPP  M  CN %   5               $>Operating net working capital<$                                   \OpWorkCapPNO -> OpWorkCap
+PPP  M  CN %  -5=              $>Operating invested capital<$                                      \OpInvCapPNO -> OpInvCap
+PPP  M1 CN   1 5=              =CapTurnOver                                                        \=CapTurnOver -> OpInvCap
+PPP  M  CN %  -4               $>Return before taxes<$                                             \PretaxROIC
+PPP  M  CN %   4               $>Effective tax rate<$                                              \=TaxRateOnEBIT -> TaxesOnEBIT
+PPP  M  CN %  -4=              ROIC                                                                \=ROIC -> OpInvCap
+PPP  M  CN % 1 4               $>Rate of Return (on average capital)<$                             \AvCapROIC -> OpInvCap
+                                                                                                   
+PPP  M -AN %   3               =WACC                                                               \=WACC -> WACC
+                                                                                                   
+PPP  M =CN %  -3               $>Spread<$                                                          \Spread
+PPP  M xBN     3               $>Operational invested capital<$ ($>previous year<$)                \VorigOpInvCap -> OpInvCap
+PPP  M  FN    -3=              $>Economic profit<$                                                 \EcProfit
+;PPP  M  BN   1 3-              =OpInvCap                                                           \=OpInvCap -> OpInvCap
+
+
+
+
+
+
+;;@@——————————————————————————————————————————————————————————————————————————————————————————————————————
+; ROIC tree
+;
+.Formulas NoTrend,Trend
+SalesPNO                = 1
+ChangeInInventoriesPNO  = OnER(ChangeInInventories/Sales,NA)
+CostOfSalesPNO          = OnER(CostOfSales/Sales,NA)
+GrossProfitPNO          = OnER(GrossProfit/Sales,NA)
+OtherOperatingIncomePNO = OnER(OtherOperatingIncome/Sales,NA)
+OperatingExpensesPNO    = OnER(OperatingExpenses/Sales,NA)
+DepreciationOfAssetsPNO = OnER(DepreciationOfAssets/Sales,NA)
+OperatingIncomePNO      = OnER(OperatingIncome/Sales,NA)
+CorrOperatingIncomePNO  = OnER(CorrOperatingIncome/Sales,NA)
+OpMargin                = OnER(EBIT/Sales,NA)
+OpFixedAssetPNO         = MutCalc*OnER(OpFixedAsset[T-1]/(TsY*Sales),NA)
+OpWorkCapPNO            = MutCalc*OnER(OpWorkCap[T-1]/(TsY*Sales),NA)
+OpInvCapPNO             = MutCalc*OnER(OpInvCap[T-1]/(TsY*Sales),NA)
+CapTurnover             = MutCalc*OnER(TsY*Sales/OpInvCap[T-1],NA)
+PretaxROIC              = OpMargin*CapTurnover
+TaxRateOnEBIT           = OnER(TaxesOnEBIT/EBIT,NA)
+ROIC                    = MutCalc*OnER(TsY*NOPLAT/OpInvCap[T-1],NA)
+AvCapROIC               = MutCalc*OnER(TsY*NOPLAT/((OpInvCap[T-1]+OpInvCap)/2),NA)
+
+Spread                  = ROIC-WACC
+VorigOpInvCap           = OpInvCap[T-1]
+EcProfit                = OnEr((ROIC-WACC)/TsY*VorigOpInvCap,NA)
+ROICn                   = WACC[LastTinPeriod(PeriodInT),1]       ;dezelfde formule als LastWACC
+ROICo                   = ROIC[LastTinPeriod(PeriodInT),1]
+LastWACC                = WACC[LastTinPeriod(PeriodInT),1]
+
+;.Formulas Title
+;PremiumOther1           = &GetTitle(PremiumOther1Col)
+;PremiumOther2           = &GetTitle(PremiumOther2Col)
+;PremiumOther3           = &GetTitle(PremiumOther3Col)
+;PremiumOther4           = &GetTitle(PremiumOther4Col)
+;PremiumOther5           = &GetTitle(PremiumOther5Col)
+;PremiumOther6           = &GetTitle(PremiumOther6Col)
+;PremiumOther7           = &GetTitle(PremiumOther7Col)
+;PremiumOther8           = &GetTitle(PremiumOther8Col)
+
+.Variables
+;-----Cost of capital periode variabelen   
+PPP     AN     2               $>Cost of capital<$                                                 \CostOfCapital
+PPP     PN C 1 3               $>Cost of equity base<$                                             \=CostofEquityBase
+PPP     AN %  -3               $>Risk-free interest rate<$                                         \RiskFreeRate -> SourceRiskFreeRate 
+PPP     AN %   3               $>Unlevered equity riskpremium<$ (Beta)                             \MarketRiskPremiumAPV
+PPP     ANX%   4               $>Market riskpremium<$                                              \RiskPremium -> SourceNoteRiskPremium
+C $>Market riskpremium (Rm-Rf)<$                                                                   
+PPP   2 ANX    4               $>Unlevered Beta<$                                                  \BetaAllEq
+PPP   2 ANX    5               $>Levered Beta<$                                                    \LevBetaAllEq -> SourceNoteLevBetaAllEq
+PPP     ANX%   5               $>Debt<$/$>Equity<$ ratio                                           \DebtEquityRatio -> SourceNoteDebtEquityRatio
+PPP   2 ANX    5               $>Unlevered Beta<$                                                  \UnlevBetaAllEq -> SourceNoteUnlevBetaAllEq
+C $>All-equity Beta<$                                                                              
+PPP     PA     5               =SourceNoteDebtEquityRatio                                          \=SourceNoteDebtEquityRatio
+PPP    =ANX%  -4=              =MarketRiskPremiumAPV                                               \=MarketRiskPremiumAPV
+
+PPP     AN %   3               $>Unlevered equity riskpremium<$ (Build up)                         \PremiumUnleveredEq
+PPP     AN %   4               =PremiumOther1Col                                                   \PremiumOther1
+PPP     AN %   4               =PremiumOther2Col                                                   \PremiumOther2
+PPP     AN %   4               =PremiumOther3Col                                                   \PremiumOther3
+PPP     AN %   4               =PremiumOther4Col                                                   \PremiumOther4
+PPP     AN %   4               =PremiumOther5Col                                                   \PremiumOther5
+PPP     AN %   4               =PremiumOther6Col                                                   \PremiumOther6
+PPP     AN %   4               =PremiumOther7Col                                                   \PremiumOther7
+PPP     AN %   4               =PremiumOther8Col                                                   \PremiumOther8
+PPP     AN %  -4=              $>Unlevered equity riskpremium<$ (Build up)                         \=PremiumUnleveredEq
+PPP     ANX%   3               Small firm premium                                                  \Smallfirmpremium
+PPP     ANX%   3               Ongespecificeerde riskpremium                                       \RiskpremiumUnspecified
+PPP   1 AN %  -3=1             $>Required return on equity<$ ($>unlevered<$)                       \CostOfAllEquity 
+PXX     AN     3                                                                                   \CostOfCapitalEmpty1
+PPP     AN % 1 3               $>Ratio Equity / Total value in WACC<$                              \EquityFrac
+PPP   1 AN %   3               $>Required return on equity<$ ($>levered<$)                         \CostOfEquityLevered 
+                                                                                                   
+PPP     AN %   3               =RiskFreeRate                                                       \RiskFreeRate2=RiskFreeRate
+PPP     AN %   3               $>Riskpremium debt<$                                                \PremiumDebt
+PPP     AN %   4               $>Market riskpremium<$                                              \=RiskPremium
+PPP   2 AN     4               $>Debt beta<$                                                       \BetaDebt
+PPP     AN %  -4               =PremiumDebt                                                        \=PremiumDebt
+PPP     AN %  -3=               $>Cost of debt<$                                                   \CostOfDebt
+PPP     CN %   3               =ValuationTaxRate                                                   \ValuationTaxRate2=ValuationTaxRate
+PPP     AN %   3               $>Net cost of debt<$                                                \NetCostOfDebt
+
+
+;PPP     AN % 1 3               $>Ratio Equity / Total value in WACC<$                              \EquityFrac
+PPP     AN % 1 3               $>Calculation of weighted average cost of capital<$                 \CalculatedWACC
+PPP     AN %   3               $>Manual adjustment<$                                               \WACCcorrection
+PPP     AN %  -3=              $>Weigthed average cost of capital<$                                \WACC
+
+PPP     1N D 1 2               $>Valuation date<$                                                  \=ValuationDate
+C $>All forecasted values after this date will be taken in to account in the valuation<$               
+
+.Formulas visible
+;voorlopig zolang er nog geen DCF in gebruik is
+RiskFreeRate2      = 0
+PremiumDebt        = 0
+CostOfDebt         = 0
+ValuationTaxRate2  = 0
+NetCostOfDebt      = 0
+CalculatedWACC     = 0
+WACCcorrection     = 0
+WACC               = 0
+ValImpairmentsOfAssets = ShowImpairments
+
+.Variables
+;==========================================================================================================================================
+; Q_ROOT VALUATION
+
+PPP     PN C   2               &"$>Valuation wizard<$"                                             \Q_ROOT_VALUATION
+C $>Please fill in all questions<$
+
+.Choices
+Q_ROOT_VALUATION                    = "0:Incomplete filled.|1:Complete filled."
+
+.Formulas NoTrend
+Q_ROOT_VALUATION                    = Q_ROOT_VALUATION_STEP01 And Q_ROOT_VALUATION_STEP02 ;And
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               &"$>Valuation methods<$"                                             \Q_ROOT_VALUATION_STEP01
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 1<$                                               \Q_ROOT_VALUATION_STEP01_WARNING
+PPP     PA     4               $>Info bij stap 1<$                                                  \Q_ROOT_VALUATION_STEP01_INFO
+PPP     PA     4               $>Validatie stap 1<$                                                 \Q_ROOT_VALUATION_STEP01_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+
+.Variables
+PPP     1X   1 4               &"$>Valuation methods<$"&" "&"$>and<$"&" "& "$>settings<$"          \Q_ROOT_VALUATION_STEP01_Paragraaf01      
+PPP     1N C   5                                                                                   \ValuationDateCheck
+PPP     1A     5                                                                                   \ValuationYearText
+PII   4 1N D   5               Waardering per ultimo                                               \ValuationYearOf
+PPP     1N D   5               $>Valuation date<$                                                  \ValuationDate
+PPP     PN D   5               Aanvang restwaardeperiode                                           \ValuationStartDateContinuingValue
+PPP     1X   1 4               Market Multiples                                                    \Q_ROOT_VALUATION_STEP01_Paragraaf03      
+PII     PN C   5               $>Company value<$ / $>Net sales<$                                   \EquityValueonNetSalesChoice
+PII     PN C   5               $>Company value<$ / EBITDA                                          \EquityValueonEBITDAChoice
+PII     PN C   5               $>Company value<$ / EBITA                                           \EquityValueonEBITAChoice
+PII     PN C   5               $>Company value<$ / EBIT                                            \EquityValueonEBITChoice
+PII     PN C   5               $>Company value<$ / $>Net worth<$                                   \EquityValueonNetWorthChoice
+PII     PN C   5               $>Value of equity<$ / $>Profit after tax<$                          \EquityValueonProfitAfterTaxChoice 
+                                                                                                                            
+PPP     1X   1 4               Venture Capital Method                                              \Q_ROOT_VALUATION_STEP01_Paragraaf04  
+PII     PN C 1 5               Venture Capital Method                                              \VCMethodChoice
+
+.Choices
+
+ValuationDateCheck                  = "1:Kies een datum die valt tussen het begin van het laatste historisch jaar en eind van het laatste prognosejaar|0:"
+
+APVValueChoice                      = "1:$>Yes<$"
+EquityValueonNetSalesChoice         = "1:$>Yes<$|0:$>No<$"
+EquityValueonEBITDAChoice           = "1:$>Yes<$|0:$>No<$"
+EquityValueonEBITAChoice            = "1:$>Yes<$|0:$>No<$"        
+EquityValueonEBITChoice             = "1:$>Yes<$|0:$>No<$"
+EquityValueonNetWorthChoice         = "1:$>Yes<$|0:$>No<$"
+EquityValueonProfitAfterTaxChoice   = "1:$>Yes<$|0:$>No<$"
+VCMethodChoice                      = "0:$>No<$|2:$>Yes<$ ($>Just company value<$)|1:$>Yes<$ ($>Extended with IRR and captables<$)"
+
+.Formulas Notrend,Trend
+ValuationYearText                   = &"$>Waardering mogelijk tussen eind<$"&" "&Str(YearInT(LastTinFormulaSet(NoTrend)))&" "&"$>en eind<$"&" "&Str(YearInT(LastTinFormulaSet(Trend))) 
+ValuationYearOf                     = LastDateInT(LastTinFormulaSet(NoTrend))
+ValDateColumn                       = If(DataEntered(ValuationYearOf),YearToT(DateToYear(ValuationDate)),ValueT(LastTinFormulaSet(NoTrend)))
+ValuationDate                       = IF(DateToYear(ValuationYearOf)<LastHistYear,NA,LastDateInT(YearToT(DateToYear(ValuationYearOf))))
+ValuationDateCheck                  = IF(ValuationDate>LastDateInT(LastTinFormulaSet(Trend)),1,IF(ValuationDate<LastDateInT(LastTinFormulaSet(NoTrend)),1,0))
+ValuationStartDateContinuingValue   = (LastDateInT(LastTinFormulaSet(Trend))+1)
+APVValueChoice                      = 1
+EquityValueonNetSalesChoice         = 0
+EquityValueonEBITDAChoice           = 0
+EquityValueonEBITAChoice            = 0
+EquityValueonEBITChoice             = 0
+EquityValueonNetWorthChoice         = 0
+EquityValueonProfitAfterTaxChoice   = 0        
+ExpirationOfFlows                   = 0
+VCMethodChoice                      = 0
+
+.Formulas Visible 
+ExpirationOfFlows                   = APVValueChoice[LastTinPeriod(PeriodInT)]
+Q_ROOT_VALUATION_STEP05             = (EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]+EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]+EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)])>0
+Q_ROOT_VALUATION_STEP06             = (VCMethodChoice[LastTinPeriod(PeriodInT)]<>0)
+VCMethod_Paragraaf02                = (VCMethodChoice[LastTinPeriod(PeriodInT)]=1)
+VCMethod_Paragraaf03                = (VCMethodChoice[LastTinPeriod(PeriodInT)]=1)
+VCMethodDilution                    = (VCMethodChoice[LastTinPeriod(PeriodInT)]=1)
+
+.Formulas InputRequired
+ValuationYearOf   =True
+ExpirationOfFlows =True
+
+.Hints
+Q_ROOT_VALUATION_STEP01 = "Kies hieronder welke waarderingsmethodieken je wil gebruiken. Bij gebruik van de APV methode is het van belang keuze te maken of de kasstromen per einde of per medio periode vervallen."
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XXX     PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP01_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (1)<$                                    \Q_ROOT_VALUATION_STEP01_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_ROOT_VALUATION_STEP01_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP01_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP01, Q_ROOT_VALUATION_STEP01_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP01_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP01, Q_ROOT_VALUATION_STEP01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP01                        = (Q_ROOT_VALUATION_STEP01_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP01_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP01_WARNING                = &If(Q_ROOT_VALUATION_STEP01=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP01_INFO                   = &If(Q_ROOT_VALUATION_STEP01=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP01                        = Q_ROOT_VALUATION
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               $>Cost of capital<$                                                  \Q_ROOT_VALUATION_STEP02
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 1<$                                               \Q_ROOT_VALUATION_STEP02_WARNING
+PPP     PA     4               $>Info bij stap 1<$                                                  \Q_ROOT_VALUATION_STEP02_INFO
+PPP     PA     4               $>Validatie stap 1<$                                                 \Q_ROOT_VALUATION_STEP02_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+
+
+
+.Variables
+;;------------------------------------------------------------------------------
+;; Cost of Capital
+;-----Cost of capital periode variabelen
+                                    
+;--Cost of Equity rate
+PPP     1    1 4               $>Cost of Equity<$ (unlevered)                                      \Q_ROOT_VALUATION_STEP02_Paragraaf01
+C De vermogenskostenvoet wordt bepaald op basis van aannames over de financieringsstructuur (hefboom) en het risicoprofiel.
+PII     PN C 1 5               $>Cost of equity base<$                                             \CostofEquityBase
+
+                      
+PII     PN % 1-5               $>Risk-free interest rate<$                                         \RiskFreeRateCol -> SourceRiskFreeRate
+PPP     PN %   5               =MarketRiskPremiumAPVCol                                            \=MarketRiskPremiumAPVCol                       ;1  
+C $>Market riskpremium (Rm-Rf)<$                                                                   
+PII     PNX%   6               $>Market riskpremium<$                                              \RiskPremiumCol -> SourceNoteRiskPremium
+PPP   2 PNX    6               $>Unlevered Beta<$                                                  \BetaAllEqCol                                ;1
+PII   2 PNX    7               $>Levered Beta<$                                                    \LevBetaAllEqCol -> SourceNoteLevBetaAllEq
+PII     PNX%   7               $>Debt<$/$>Equity<$ ratio                                           \DebtEquityRatioCol -> SourceNoteDebtEquityRatio
+C $>Voor het unleveren van een levered beta dient hier de verhouding te worden weergegeven die hoort bij de levered beta<$
+PII   2 PNX    7               $>Unlevered Beta<$                                                  \UnlevBetaAllEqCol -> SourceNoteUnlevBetaAllEq
+C $>All-equity Beta<$                                                                              
+PII     PN C 1 7               $>(Un)lever beta calculation based on<$                             \CalcBaseLeveredBeta
+PPP     PNX%  -6=              $>Unlevered equity riskpremium<$ (Beta)                             \MarketRiskPremiumAPVCol
+
+PII     PN %   5               $>Unlevered equity riskpremium<$ (Build up)                         \=PremiumUnleveredEqCol
+III     PN %   6               ..                                                                  \PremiumOther1Col
+III     PN %   6               ..                                                                  \PremiumOther2Col
+III     PN %   6               ..                                                                  \PremiumOther3Col
+III     PN %   6               ..                                                                  \PremiumOther4Col
+III     PN %   6               ..                                                                  \PremiumOther5Col
+III     PN %   6               ..                                                                  \PremiumOther6Col
+III     PN %   6               ..                                                                  \PremiumOther7Col
+III     PN %   6               ..                                                                  \PremiumOther8Col
+PPP    =PN %  -6=              =PremiumUnleveredEq                                                 \PremiumUnleveredEqCol
+
+
+PII     PNX%   5               Small firm premium                                                  \SmallfirmpremiumCol
+PPP     PNX%   5               Ongespecificeerde riskpremium                                       \RiskpremiumUnspecifiedCol
+PII   1 PN %  -5=1             $>Required return on equity<$ (unlevered)                           \CostOfAllEquityCol 
+
+;--Cost of Debt rate                   
+PPP     1      4               $>Cost of debt<$                                                    \Q_ROOT_VALUATION_STEP02_Paragraaf03                                                                                
+C $>Voor het bepalen van het tax shield worden de berekende rentelasten van vreemd vermogen uit het scenario gebruikt. Hieronder staat het gemiddeld belastingtarief dat wordt gebruikt voor het bepalen van het tax shield.<$
+;PII     PN %   5               =RiskFreeRate                                                       \=RiskFreeRateCol -> SourceRiskFreeRate
+;PII     PN %   5               $>Riskpremium debt<$                                                \PremiumDebtCol
+;PII     PN %   6               $>Market riskpremium<$                                              \=RiskPremiumCol -> SourceNoteRiskPremium
+;PII   2 PN     6               $>Debt beta<$                                                       \BetaDebtCol -> SourceNoteBetaDebtCol
+;PII     PN %  -6               =PremiumDebt                                                        \=PremiumDebtCol
+;PII    =PN %  -5               $>Cost of debt<$                                                    \CostOfDebtCol      
+PII     PN %   5               =MargTaxProfitPerc                                                  \ValuationTaxRateCol -> MargTaxProfitPerc
+;PPP     PN %  -5=              $>Net cost of debt<$                                                \NetCostOfDebtCol       
+
+;--Bronvermeldingen                                                                                                                    
+PPP     1      4               $>Source notification<$ $>Cost of capital<$                         \Q_ROOT_VALUATION_STEP02_Paragraaf04 
+PII     PA     5               $>Source notification<$ Risk free rate:                             \SourceRiskFreeRate
+PII     PA     5               $>Source notification<$ Market risk premium:                        \SourceNoteRiskPremium
+PII     PA     5               $>Source notification<$ Levered Equity Beta:                        \SourceNoteLevBetaAllEq
+PII     PA     5               $>Source notification<$ Debt/Equity ratio:                          \SourceNoteDebtEquityRatio
+PII     PA     5               $>Source notification<$ Unlevered Equity Beta:                      \SourceNoteUnlevBetaAllEq
+PII     PA     5               $>Source notification<$ Build up premium 1:                         \SourceNotePremiumOther1
+PII     PA     5               $>Source notification<$ Build up premium 2:                         \SourceNotePremiumOther2
+PII     PA     5               $>Source notification<$ Build up premium 3:                         \SourceNotePremiumOther3
+PII     PA     5               $>Source notification<$ Build up premium 4:                         \SourceNotePremiumOther4
+PII     PA     5               $>Source notification<$ Build up premium 5:                         \SourceNotePremiumOther5
+PII     PA     5               $>Source notification<$ Build up premium 6:                         \SourceNotePremiumOther6
+PII     PA     5               $>Source notification<$ Build up premium 7:                         \SourceNotePremiumOther7
+PII     PA     5               $>Source notification<$ Build up premium 8:                         \SourceNotePremiumOther8
+PII     PA     5               $>Source notification<$ Small firm premium:                         \SourceNoteSmallfirmpremium
+;PII     PA     5               $>Source notification<$ Levered Debt Beta:                          \SourceNoteBetaDebtCol
+
+
+.Formulas NoTrend,Trend
+
+;EV
+MarketRiskPremiumAPVCol    = OnZero(BetaAllEqCol*RiskPremiumCol,NA)
+BetaAllEqCol               = If(DataEntered(LevBetaAllEqCol),LevBetaAllEqCol/(1+DebtEquityRatioCol),UnlevBetaAllEqCol)
+CalcBaseLeveredBeta        = 0
+LevBetaAllEqCol            = If(CalcBaseLeveredBeta=0,OnNA(UnlevBetaAllEqCol*(1+DebtEquityRatioCol),NA), OnNA(UnlevBetaAllEqCol*(1+(1-ValuationTaxRateCol)*DebtEquityRatioCol),NA)) <-> UnlevBetaAllEqCol
+UnlevBetaAllEqCol          = If(CalcBaseLeveredBeta=0,OnNA(LevBetaAllEqCol  /(1+DebtEquityRatioCol),NA), OnNA(LevBetaAllEqCol  /(1+(1-ValuationTaxRateCol)*DebtEquityRatioCol),NA)) <-> LevBetaAllEqCol
+CostOfAllEquityCol         = IF(CostofEquityBase=0,(RiskFreeRateCol+MarketRiskPremiumAPVCol+SmallfirmpremiumCol),(RiskFreeRateCol+PremiumUnleveredEqCol))
+                           
+;;VV                        
+;BetaDebtCol                = If(DataEntered(PremiumDebtCol),OnER(PremiumDebtCol/RiskPremiumCol,NA),NA) <-> PremiumDebtCol
+;NetCostOfDebtCol           = OnNA((1-ValuationTaxRateCol)*CostOfDebtCol,CostOfDebtCol)
+;PremiumDebtCol             = BetaDebtCol*RiskPremiumCol
+;CostOfDebtCol              = RiskFreeRateCol+PremiumDebtCol
+ValuationTaxRateCol       = MargTaxProfitPerc[FirstTinFormulaSet(Trend),1]
+                          
+.Formulas NoTrend          
+EquityFrac                 = EquityFrac[T-1]
+CostOfEquityLevered        = CostOfEquityLevered[T-1]
+                           
+.Formulas Trend            
+EquityFrac                 = OnER((APV_Annual-AdjDebt)/APV_Annual,NA)
+CostOfEquityLevered        = CostOfAllEquity+(AdjDebt/OnZero((APV_Annual-AdjDebt),NA))*(CostOfAllEquity-CostOfDebt) ;+ku+(D/E)*(ku-kd)
+
+.Formulas NoTrend,Trend
+RiskFreeRate               = IF(T=FirstTinFormulaSet(Trend),RiskFreeRateCol, Self[T-1])
+RiskPremium                = IF(T=FirstTinFormulaSet(Trend),RiskPremiumCol, Self[T-1])
+BetaAllEq                  = IF(T=FirstTinFormulaSet(Trend),BetaAllEqCol, Self[T-1])
+LevBetaAllEq               = IF(T=FirstTinFormulaSet(Trend),BetaAllEqCol, Self[T-1])
+MarketRiskPremiumAPV       = IF(T=FirstTinFormulaSet(Trend),MarketRiskPremiumAPVCol, Self[T-1])
+DebtEquityRatio            = IF(T=FirstTinFormulaSet(Trend),DebtEquityRatioCol, Self[T-1])
+UnlevBetaAllEq             = IF(T=FirstTinFormulaSet(Trend),UnlevBetaAllEqCol, Self[T-1])
+RiskpremiumUnspecifiedCol  = If(DataEntered(CostOfAllEquityCol),If(CostofEquityBase=0,CostOfAllEquityCol-(RiskFreeRateCol+MarketRiskPremiumAPVCol+SmallfirmpremiumCol),CostOfAllEquityCol-(RiskFreeRateCol+PremiumUnleveredEqCol)),NA)
+RiskpremiumUnspecified     = IF(T=FirstTinFormulaSet(Trend),RiskpremiumUnspecifiedCol, Self[T-1])
+                        
+PremiumUnleveredEq         = IF(T=FirstTinFormulaSet(Trend),PremiumUnleveredEqCol, OnNA(PremiumOther1+PremiumOther2+PremiumOther3+PremiumOther4+PremiumOther5+PremiumOther6+PremiumOther7+PremiumOther8,NA))
+PremiumOther1              = IF(T=FirstTinFormulaSet(Trend),PremiumOther1Col, Self[T-1])
+PremiumOther2              = IF(T=FirstTinFormulaSet(Trend),PremiumOther2Col, Self[T-1])
+PremiumOther3              = IF(T=FirstTinFormulaSet(Trend),PremiumOther3Col, Self[T-1])
+PremiumOther4              = IF(T=FirstTinFormulaSet(Trend),PremiumOther4Col, Self[T-1])
+PremiumOther5              = IF(T=FirstTinFormulaSet(Trend),PremiumOther5Col, Self[T-1])
+PremiumOther6              = IF(T=FirstTinFormulaSet(Trend),PremiumOther6Col, Self[T-1])
+PremiumOther7              = IF(T=FirstTinFormulaSet(Trend),PremiumOther7Col, Self[T-1])
+PremiumOther8              = IF(T=FirstTinFormulaSet(Trend),PremiumOther8Col, Self[T-1])
+Smallfirmpremium           = IF(T=FirstTinFormulaSet(Trend),SmallfirmpremiumCol, Self[T-1])
+CostOfAllEquity            = IF(CostofEquityBase=0,(RiskFreeRate+MarketRiskPremiumAPV+Smallfirmpremium),(RiskFreeRate+PremiumUnleveredEq))+RiskpremiumUnspecified
+                           
+;PremiumDebt                = IF(T=FirstTinFormulaSet(Trend),PremiumDebtCol, Self[T-1])
+;BetaDebt                   = IF(T=FirstTinFormulaSet(Trend),BetaDebtCol, Self[T-1])
+;CostOfDebt                 = IF(T=FirstTinFormulaSet(Trend),CostOfDebtCol, Self[T-1])
+;NetCostOfDebt              = IF(T=FirstTinFormulaSet(Trend),NetCostOfDebtCol, Self[T-1])
+
+CalculatedWACC             = OnER(EquityFrac*CostOfEquityLevered+(1-EquityFrac)*NetCostOfDebt,NA)  ;deze uitbreiden met unlevered formule?
+WACCcorrection             = If(DataEntered(WACC),WACC-CalculatedWACC,WACCcorrection[T-1])
+WACC                       = OnEr(CalculatedWACC+WACCcorrection,NA) <-> WACCcorrection
+
+CostofEquityBase           = 0
+                           
+.Choices                   
+CostofEquityBase           = "0:$>Required return on equity<$ (Beta)|1:$>Required return on equity<$ (Build up)"
+CalcBaseLeveredBeta        = "0:$>Tax shields have same risk as assets<$|1:$>Tax shields have same risk as debt<$"
+
+.Formulas Visible
+MarketRiskPremiumAPVCol    = CostofEquityBase[LastTinPeriod(PeriodInT)]=0              
+MarketRiskPremiumAPV       = CostofEquityBase[LastTinPeriod(PeriodInT)]=0              
+SmallfirmpremiumCol        = CostofEquityBase[LastTinPeriod(PeriodInT)]=0              
+Smallfirmpremium           = CostofEquityBase[LastTinPeriod(PeriodInT)]=0              
+PremiumUnleveredEqCol      = CostofEquityBase[LastTinPeriod(PeriodInT)]=1              
+PremiumUnleveredEq         = CostofEquityBase[LastTinPeriod(PeriodInT)]=1              
+PremiumOther2Col           = DataEntered(PremiumOther1Col) Or DataEntered(Self)      
+PremiumOther3Col           = DataEntered(PremiumOther2Col) Or DataEntered(Self)      
+PremiumOther4Col           = DataEntered(PremiumOther3Col) Or DataEntered(Self)
+PremiumOther5Col           = DataEntered(PremiumOther4Col) Or DataEntered(Self)
+PremiumOther6Col           = DataEntered(PremiumOther5Col) Or DataEntered(Self)
+PremiumOther7Col           = DataEntered(PremiumOther6Col) Or DataEntered(Self)
+PremiumOther8Col           = DataEntered(PremiumOther7Col) Or DataEntered(Self)      
+
+;SourceNoteBetaDebtCol      = DataEntered(BetaDebtCol)
+SourceNoteRiskPremium      = CostofEquityBase[LastTinPeriod(PeriodInT)]=0       
+SourceNoteLevBetaAllEq     = CostofEquityBase[LastTinPeriod(PeriodInT)]=0       
+SourceNoteDebtEquityRatio  = CostofEquityBase[LastTinPeriod(PeriodInT)]=0    
+SourceNoteUnlevBetaAllEq   = CostofEquityBase[LastTinPeriod(PeriodInT)]=0     
+SourceNotePremiumOther1    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 Or DataEntered(Self)     
+SourceNotePremiumOther2    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther2Col) Or DataEntered(Self))     
+SourceNotePremiumOther3    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther3Col) Or DataEntered(Self))    
+SourceNotePremiumOther4    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther4Col) Or DataEntered(Self))
+SourceNotePremiumOther5    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther5Col) Or DataEntered(Self))    
+SourceNotePremiumOther6    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther6Col) Or DataEntered(Self))
+SourceNotePremiumOther7    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther7Col) Or DataEntered(Self))
+SourceNotePremiumOther8    = CostofEquityBase[LastTinPeriod(PeriodInT)]=1 And (DataEntered(PremiumOther8Col) Or DataEntered(Self))
+
+SourceNoteSmallfirmpremium = CostofEquityBase[LastTinPeriod(PeriodInT)]=0   
+RiskpremiumUnspecifiedCol  = (FirstValueT(Self,1,MaxT)>0)
+RiskpremiumUnspecified     = (FirstValueT(Self,1,MaxT)>0)
+
+.Formulas InputRequired
+RiskFreeRateCol            = True
+SourceRiskFreeRate         = True
+RiskPremiumCol             = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(RiskPremiumCol)
+SourceNoteRiskPremium      = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SourceNoteRiskPremium)
+LevBetaAllEqCol            = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(LevBetaAllEqCol)
+SourceNoteLevBetaAllEq     = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SourceNoteLevBetaAllEq)              
+DebtEquityRatioCol         = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(DebtEquityRatioCol)
+SourceNoteDebtEquityRatio  = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SourceNoteDebtEquityRatio)
+UnlevBetaAllEqCol          = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(UnlevBetaAllEqCol)
+SourceNoteUnlevBetaAllEq   = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SourceNoteUnlevBetaAllEq)
+SmallfirmpremiumCol        = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SmallfirmpremiumCol)   
+SourceNoteSmallfirmpremium = (CostofEquityBase[LastTinPeriod(PeriodInT)]=0) And Visible(SourceNoteSmallfirmpremium) 
+;SourceNoteBetaDebtCol      = Visible(SourceNoteBetaDebtCol)
+
+.Hints
+;Q_ROOT_VALUATION_STEP01 = "Kies hieronder welke waarderingsmethodieken je wil gebruiken. Bij gebruik van de APV methode is het van belang keuze te maken of de kasstromen per einde of per medio periode vervallen."
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP02_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (2)<$                                    \Q_ROOT_VALUATION_STEP02_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_ROOT_VALUATION_STEP02_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP02_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP02, Q_ROOT_VALUATION_STEP02_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP02_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP02, Q_ROOT_VALUATION_STEP02_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP02                        = (Q_ROOT_VALUATION_STEP02_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP02_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP02_WARNING                = &If(Q_ROOT_VALUATION_STEP02=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP02_INFO                   = &If(Q_ROOT_VALUATION_STEP02=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP02                        = Q_ROOT_VALUATION
+
+
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               $>Continuing value<$ $>settings<$                                    \Q_ROOT_VALUATION_STEP03
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 2<$                                               \Q_ROOT_VALUATION_STEP03_WARNING
+PPP     PA     4               $>Info bij stap 2<$                                                  \Q_ROOT_VALUATION_STEP03_INFO
+PPP     PA     4               $>Validatie stap 2<$                                                 \Q_ROOT_VALUATION_STEP03_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+
+.Variables
+PPP     1X     4               $>Continuing value<$ $>settings<$                                   \Q_ROOT_VALUATION_STEP03_Paragraaf01
+C Voor het bepalen van de restwaarde worden er twee mogelijkheden gegeven. Bij de eerste mogelijkheid wordt de vrije kasstroom bepaald door de in te stellen groeifactor. Bij de tweede mogelijkheid wordt de vrije kasstroom herleid uit het geïnvesteerd vermogen. 
+PII     PN C   5               $>Base used for continuing value<$                                  \CVBase  
+PII  M2 PN % 1 5               $>Growth rate net operating profit<$                                \GrowthRateCompany -> NOPLAT
+
+;------ Gecorrigeerde vrije kasstroom laatste prognosejaar
+
+PII  M  PN %   5               $>ROIC on net new investments<$                                     \ROICn  ;-> LastWACC    ; "return on net investment"
+C $>Default is the WACC in the continung value period, so growth has no net value consequense<$
+PII  M  PN %   5               $>ROIC on replacement investments<$                                 \ROICo      ; "return on assets in place"
+C $>Default is the ROIC of the last forecasting year<$
+
+PPP     PX   1 4               Vrije kasstroom: Restwaarde inclusief groei                         \Q_ROOT_VALUATION_STEP03_Paragraaf02
+PII     PN     5               Gecorrigeerd bedrijfsresultaat laatste prognosejaar                 \CVEBIT -> EBIT
+PII    -PN     5               Belasting bedrijfsresultaat laatste prognosejaar                    \CVTaxesOnEBIT -> TaxesOnEBIT
+PPP    =PN    -5               =NOPLAT                                                             \CVNOPLAT -> NOPLAT
+PPP   2xPN %   5               Groeifactor bedrijfsresultaat                                       \Growthfactor
+PPP     PN    -5               Netto bedrijfsresultaat eerste jaar restwaardeperiode               \CVNOPLATstart
+C $>Default calculated value is the value of the last forecasted year, increased with the given growth rate<$.
+PII     PN     5               =DepreciationOfAssets                                               \CVDepreciationOfAssets -> DepreciationOfAssets
+C $>Default calculated value is the value of the last forecasted year, increased with the given growth rate<$.
+PPP    =PN    -5               =GrossCashFlow                                                      \CVGrossCashFlow -> GrossCashFlow
+PII    -PN     5               $>Replacement investments<$                                         \CVReinvestments -> CVDepreciationOfAssets
+C $>Default calculated value is the total amount of depreciations<$.
+PII    -PN  *  5               Groei van operationeel geïnvesteerd vermogen                        \CVNewInvestments 
+C $>Default calculated value is the increase of invested capital with the given growth rate<$.
+PII    =PN    -5               $>Free cashflow<$                                                   \CVFreeCashFlow -> FreeCashFlow
+
+PII     PN   1 5               $>Invested capital<$ $>during<$ $>Continuing value period<$         \InvCapAtCV 
+PII    XPN %   5               =ROICo                                                              \=ROICo  
+PPP     PN    -5               Vrije kasstroom excl. uitbreidingsinvesteringen                     \FCFexclInvNew
+PPP    -PN     5               Groei van operationeel geïnvesteerd vermogen                        \FCFcorrectionInv
+PPP    -PN     5               $>Correction due changing total ROIC<$                              \FCFcorrectionROIchange
+PPP     PN     5               $>Other corrections<$                                               \FCFcorrectionOther
+PII     PN    -5=              &FreeCashFlow[0]                                                    \CVFreeCashFlow2
+
+PPP     1X   1 4               $>Tax shield<$: $>Continuing value<$                                \TaxShieldContinuingValueSettings_Paragraaf03
+PII     PN %   5               $>Market cost of debt<$ ($>after forecasting period<$)              \LastCostOfDebt -> CostOfDebt
+PII     PN %   6               =RiskFreeRate                                                       \RiskFreeRateContinuingValue 
+PII     PN %*  6               $>Riskpremium debt<$                                                \PremiumDebtContinuingValue 
+PII    =PN %  -6               $>Cost of debt<$                                                    \=LastCostOfDebt
+PII     PN %   6               =LastValuationTaxRate                                               \=LastValuationTaxRate
+PPP     PN %  -6=              $>Net cost of debt<$                                                \NetCostOfDebtContinuingValue 
+
+PPP     PN     5               $>Market value of long term debt (last year)<$                      \LastMarketValueDebt -> AdjDebt
+PII     PN     5               Correctie op $>Market value of long term debt (last year)<$         \CorrMarketValueDebt
+PII  M  PN    -5               &APVInterest[0]&" in restwaardejaar"                                \ContinuingValueInterestExpenses -> APVInterest
+PII     PN %   5               &MargTaxProfitPerc[0] &" $>after forecasting period<$"              \LastValuationTaxRate
+PII     PN    -5               $>Tax shield after forecasting period<$                             \TaxShieldPerYearAfterForecast
+PII     PN %   5               $>Growth debt after forecasting period<$                            \GDebt -> GrowthRateCompany
+
+PPP     1X   1 4               &"$>Correction<$"&" "&"$>due to investmentcyclus<$"                 \ContinuingValueSettings_Paragraaf04
+C Deze correctie is relevant als niet is gekozen om de afschrijvingen te herinvesteren in het scenario. De waarde van geïnvesteerd vermogen (IC) bij aanvang van de restwaardeperiode kan dan aanzienlijk hoger of lager zijn dan gemiddeld. Dit kan leiden tot een over- of onderwaardering.|Hier kan het teveel of tekort aan investeringen worden afgeleid.|Deze correctie wordt bepaald door de ouderdom van de activa bij aanvang van de restwaardeperiode te vergelijken met de gemiddelde duration van het IC (levensduur IC/2). Het aantal jaren verschil maal de afschrijvingen is een solide indicatie van de over-/onderwaardering.
+;PII   1 PN   1 5               Gemiddelde ouderdom invested capital aanvang restwaardeperiode (jaren)\CorrInvestmentCycleAvgDurationICStartCV
+PII   1 PN   1 5               Gemiddelde afschrijvingstermijn invested capital in jaren           \CorrInvestmentCycleDeprPeriodIC
+PII     PN     5               Meer-/minderwaarde geïnvesteerd vermogen t.o.v. gemiddelde          \CorrInvestmentCycleStartCV
+PPP   1 PN     6               Gemiddelde duration van het invested capital                        \CorrInvestmentCycleAvgDurationIC
+PII   1-PN     6               Gemiddelde ouderdom invested capital aanvang restwaardeperiode (jaren)\CorrInvestmentCycleAvgDurationICStartCV
+PPP   1=PN    -6               Aantal jaren verschil t.o.v. gemiddelde duration                    \CorrInvestmentCycleDurationBalance
+PII     PN     6               =DepreciationOfAssets                                               \=CVDepreciationOfAssets -> DepreciationOfAssets
+PII     PN    -6               Verschil in gemidddeld investeringsniveau                           \=CorrInvestmentCycleStartCV
+
+
+.Formulas Visible
+CVEBIT                        = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVTaxesOnEBIT                 = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVNOPLAT                      = (CVBase[LastTinPeriod(PeriodInT)]=1)
+Growthfactor                  = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVNOPLATstart                 = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVDepreciationOfAssets        = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVGrossCashFlow               = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVReinvestments               = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVNewInvestments              = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVFreeCashFlow                = (CVBase[LastTinPeriod(PeriodInT)]=1)
+CVCashFlowAPV                 = (CVBase[LastTinPeriod(PeriodInT)]=1)
+ROICn                         = (CVBase[LastTinPeriod(PeriodInT)]=2)  
+ROICo                         = (CVBase[LastTinPeriod(PeriodInT)]=2)
+InvCapAtCV                    = (CVBase[LastTinPeriod(PeriodInT)]=2)
+FCFexclInvNew                 = (CVBase[LastTinPeriod(PeriodInT)]=2)
+CVFreeCashFlow2               = (CVBase[LastTinPeriod(PeriodInT)]=2)
+FCFcorrectionInv              = (CVBase[LastTinPeriod(PeriodInT)]=2)
+FCFcorrectionROIchange        = (CVBase[LastTinPeriod(PeriodInT)]=2)
+FCFcorrectionOther            = (CVBase[LastTinPeriod(PeriodInT)]=2)
+CVCashFlowAPV2                = (CVBase[LastTinPeriod(PeriodInT)]=2)
+
+
+
+.Choices
+CVBase = "1: Gecorrigeerde vrije kasstroom laatste prognosejaar|2:Rendement op geïnvesteerd vermogen laatste prognosejaar"
+
+.Formulas NoTrend, Trend
+CVBase                      = 1
+CVEBIT                      = FesExpression(GetValue(EBIT,LastTinFormulaSet(Trend,PeriodInT),1,Bookyear))
+CVTaxesOnEBIT               = FesExpression(GetValue(TaxesOnEBIT,LastTinFormulaSet(Trend,PeriodInT),1,Bookyear))
+CVDepreciationOfAssets      = FesExpression(GetValue(DepreciationOfAssets,LastTinFormulaSet(Trend,PeriodInT),1,Bookyear))*(1+GrowthRateCompany)
+InvCapAtCV                  = FesExpression(GetValue(OpInvCap,LastTinFormulaSet(Trend,PeriodInT),1,Bookyear))
+FCFexclInvNew               = InvCapAtCV*ROICo
+CVReinvestments             = CVDepreciationOfAssets 
+FCFcorrectionInv            = GrowthRateCompany*InvCapAtCV
+FCFcorrectionROIchange      = OnER(GrowthRateCompany*InvCapAtCV*(ROICo-ROICn)/ROICn,NA)
+FCFcorrectionOther          = If(DataEntered(CVFreeCashFlow2),CVFreeCashFlow2+FCFcorrectionInv+FCFcorrectionROIchange-FCFexclInvNew,NA)
+CVFreeCashFlow2              = OnZero(FCFexclInvNew-(FCFcorrectionInv+FCFcorrectionROIchange)+FCFcorrectionOther,NA)
+Growthfactor                = 1+GrowthRateCompany
+CVNOPLATstart               = OnZero(CVNOPLAT*(1+GrowthRateCompany),NA) 
+CVNewInvestments            = OnZero(GrowthRateCompany*LastOpInvCap,NA)
+CorrInvestmentCycleAvgDurationIC = OnZero(CorrInvestmentCycleDeprPeriodIC/2,NA)
+CorrInvestmentCycleStartCV       = OnER(OnZero(((CorrInvestmentCycleDeprPeriodIC/2-CorrInvestmentCycleAvgDurationICStartCV)*CVDepreciationOfAssets),NA),NA)
+
+.Formulas InputRequired
+;CVBase =True
+GrowthRateCompany = True
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP03_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (2)<$                                    \Q_ROOT_VALUATION_STEP03_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_ROOT_VALUATION_STEP03_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP03_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP03, Q_ROOT_VALUATION_STEP03_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP03_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP03, Q_ROOT_VALUATION_STEP03_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP03                        = (Q_ROOT_VALUATION_STEP03_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP03_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP03_WARNING                = &If(Q_ROOT_VALUATION_STEP03=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP03_INFO                   = &If(Q_ROOT_VALUATION_STEP03=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP03                        = Q_ROOT_VALUATION
+
+;;------------------------------------------------------------------------------------------------------------------------------------------
+;; Waarderingsmethoden
+;;------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               Adjusted Present Value                                               \Q_ROOT_VALUATION_STEP04
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 4<$                                               \Q_ROOT_VALUATION_STEP04_WARNING
+PPP     PA     4               $>Info bij stap 4<$                                                  \Q_ROOT_VALUATION_STEP04_INFO
+PPP     PA     4               $>Validatie stap 4<$                                                 \Q_ROOT_VALUATION_STEP04_VALIDATION
+;-----------------------------------------------------------------------------------------------------------
+;; Adjusted present value
+
+;Grondslag
+PPP     PN   1 4               Grondslag voor Adjusted Present Value                               \Q_ROOT_VALUATION_STEP04_Paragraaf01
+C De APV- (adjusted present value) method maakt het mogelijk om een waardering op te stellen die onafhankelijk is van de financieringsstructuur. 
+PPP     1N D   5               =ValuationDate                                                      \=ValuationDate->ValuationDate
+PPP     PN C   5               Adjusted Present Value                                              \APVValueChoice
+PII     PN C   5               &"$>Cash flows / profit due<$"&" (mid-year correction)"             \ExpirationOfFlows
+PII     PN %   5               Verhoging kostenvoet EV (ondergrens voor APV in scenario)           \APVValueLowerBoundInput
+C $>De waardering wordt uitgevoerd tegen de ingevoerde vermogenskostenvoet, maar ook voor dit tarief aangepast met dit percentage.|Hiermee wordt inzicht vergroot in de volatiliteit voor veranderingen in de kostenvoet.<$
+PII     PN %   5               Verlaging kostenvoet EV (bovengrens voor APV in scenario)           \APVValueUpperBoundInput
+C $>De waardering wordt uitgevoerd tegen de ingevoerde vermogenskostenvoet, maar ook voor dit tarief aangepast met dit percentage.|Hiermee wordt inzicht vergroot in de volatiliteit voor veranderingen in de kostenvoet.<$                                                                                                    
+PII     PN %   5               Verlaging free cashflow (ondergrens voor APV in scenario)           \APVValueCashflowLower
+C $>De waardering wordt bepaald aan de hand van de berekende free cashflow, maar ook voor de free cashflow aangepast met dit percentage.|Hiermee wordt inzicht vergroot in de volatiliteit voor veranderingen in de free cashflow.<$
+PII     PN %   5               Verhoging free cashflow (bovengrens voor APV in scenario)           \APVValueCashflowHigher
+C $>De waardering wordt bepaald aan de hand van de berekende free cashflow, maar ook voor de free cashflow aangepast met dit percentage.|Hiermee wordt inzicht vergroot in de volatiliteit voor veranderingen in de free cashflow.<$                                                                                                    
+
+;======APV op jaarbasis============================================================================================
+PPP     PN   1 4               $>Adjusted Present Value<$ $>per year<$                             \Q_ROOT_VALUATION_STEP04_Paragraaf02
+C In onderstaand overzicht wordt de waardeontwikkeling per jaar getoond. |In de historische kolommen worden er geen verdisconteerde waarden getoond, omdat historische kolommen geen data kunnen bevatten die zijn gebaseerd op de toekomst. Er kan wel een waardering per einde historie worden gedaan.
+X       FN     5               DummyColumn                                                         \DummyRow04_Paragraaf02
+PPP     BN   1 5               $>Value if all-equity financed<$                                    \APVAllEqVal
+PPP  M  FN     6               =FreeCashFlow                                                       \=FreeCashFlow -> FreeCashFlow
+PPP  M3 BN     6               =DiscountFactorCostOfAllEquity                                      \=DiscountFactorCostOfAllEquity
+PPP  M  FN    -6               $>Discounted cash flows<$                                           \FreeCashFlowDiscountedAPV
+PPP   1 AN %   6               =CostOfAllEquity                                                    \=CostOfAllEquity -> CostOfAllEquity
+PPP     BN    -6               $>Present value in forecasting period<$                             \APVAllEqValCF
+PPP     BN     6               $>Continuing value<$                                                \APVAllEqValCV
+PPP     BN     6               &"$>Correction<$"&" "&"$>due to investmentcyclus<$"                 \CorrInvestmentCycle
+PPP    =BN    -6               =APVAllEqValNu                                                      \=APVAllEqVal
+PPP     BN     5               $>Value of tax shield<$                                             \APVTaxShieldVal
+PPP     FN     6               =InterestExpensesSubordinatedDebt                                   \APVInterestExpensesSubordinatedDebt            =InterestExpensesSubordinatedDebt
+PPP     FN     6               =InterestExpensesLongTermDebt                                       \APVInterestExpensesLongTermDebt                =InterestExpensesLongTermDebt
+PPP     FN     6               =InterestExpensesLongTermDebtOther                                  \APVInterestExpensesLongTermDebtOther           =InterestExpensesLongTermDebtOther
+PPP     FN     6               =InterestExpensesLongTermDebtOtherCat2                              \APVInterestExpensesLongTermDebtOtherCat2       =InterestExpensesLongTermDebtOtherCat2
+PPP     FN     6               =InterestExpensesLongTermDebtOtherCat3                              \APVInterestExpensesLongTermDebtOtherCat3       =InterestExpensesLongTermDebtOtherCat3
+PPP     FN     6               =InterestExpensesLongTermDebtOtherCat4                              \APVInterestExpensesLongTermDebtOtherCat4       =InterestExpensesLongTermDebtOtherCat4
+PPP     FN     6               =InterestExpensesLongTermDebtAnnuity                                \APVInterestExpensesLongTermDebtAnnuity         =InterestExpensesLongTermDebtAnnuity
+PPP     FN     6               =InterestExpensesOnCurrentAccount                                   \APVInterestExpensesOnCurrentAccount            =InterestExpensesOnCurrentAccount
+PPP     FN     6               =InterestExpensesOnOtherShortTermDebt                               \APVInterestExpensesOnOtherShortTermDebt        =InterestExpensesOnOtherShortTermDebt
+PPP     FN     6               =InterestOnTaxesAndSocialSecurityCharges                            \APVInterestOnTaxesAndSocialSecurityCharges     =InterestOnTaxesAndSocialSecurityCharges 
+PPP     FN     6               =InterestOnCurrentAccountGroupCompanies                             \APVInterestOnCurrentAccountGroupCompanies      =InterestOnCurrentAccountGroupCompanies            
+PPP     FN     6               =InterestOnCurrentAccountAffiliatedCompanies                        \APVInterestOnCurrentAccountAffiliatedCompanies =InterestOnCurrentAccountAffiliatedCompanies   
+PPP     FN     6               =OtherInterestExpenses                                              \APVOtherInterestExpenses                       =OtherInterestExpenses 
+PPP    =FN    -6               $>Interest expenses<$                                               \APVInterest
+PII    *CN %   6               Belastingpercentage                                                 \ValuationTaxRate 
+PPP    =FN    -6               $>Tax shield<$                                                      \TaxShield
+PPP  M3 BN     6               =DiscountFactorCostOfAllEquity                                      \=DiscountFactorCostOfAllEquity
+PPP  M  FN    -6               $>Tax shield<$ $>discounted<$                                       \DiscountedTaxShieldAnnual     
+PPP   2 AN %   6               Verdisconteringsvoet Eigen vermogen (unlevered)                     \=CostOfAllEquity -> CostOfAllEquity
+PPP     BN    -6               $>Present value in forecasting period<$                             \TaxShieldForecVal
+PPP     BN     6               $>Continuing value<$                                                \TaxShieldCVVal
+PPP    =BN    -6               $>Value of tax shield<$                                             \=APVTaxShieldVal
+PPP    =BN    -5               Adjusted Present Value                                              \APV_Annual
+PPP    -BN     5               $>Market value debt<$                                               \MarketValDebt
+;Let op: onderstaand overzicht aanpassen als adj debt is aangepast
+PPP     BN     6               =NonCurrentLiabilities                                              \AdjDebtNonCurrentLiabilities        =NonCurrentLiabilities 
+PPP     BN     6               =STPartOfLTDebts                                                    \AdjDebtSTPartOfLTDebts              =STPartOfLTDebts 
+PPP     BN     6               =OverdraftCurrentAccount                                            \AdjDebtOverdraftCurrentAccount      =OverdraftCurrentAccount 
+PPP     BN     6               =CurrentAccountGroupCompanies                                       \AdjDebtCurrentAccountGroupCompanies =CurrentAccountGroupCompanies 
+PPP     BN     6               =CurrentAccountAffiliatedCompanies                                  \AdjDebtCurrentAccountAffiliatedCompanies =CurrentAccountAffiliatedCompanies 
+PPP     BN     6               =OtherShortTermDebt                                                 \AdjDebtOtherShortTermDebt           =OtherShortTermDebt 
+PPP     Bn     6               =InterestAndRepaymentsPayable                                       \AdjDebtInterestAndRepaymentsPayable =InterestAndRepaymentsPayable 
+PPP     BN     6               =CapitalShortfall                                                   \AdjDebtCapitalShortfall             =CapitalShortfall 
+PPP     BN    -6               =AdjDebt                                                            \=AdjDebt
+III    -BN     6               $>Adjustments<$                                                     \AdjDebtChangesForMarketValue
+PPP    =BN    -6=              =MarketValDebt                                                      \=MarketValDebt
+P P    =BN    -5               =GrossAPVValueNu                                                    \GrossAPVValue
+PPP    -BN     5               =ValOtherEqClaimsAPV                                                \ValOtherEqClaims
+PPPP    BN     6               $>Share of third party<$                                            \=MinorityInterests 
+III     BN     6               Waarde preferente aandelen                                          \ValuePreferenceShares
+III     BN     6               Waarde warrants                                                     \ValueWarrants
+III     BN     6               Waarde management opties                                            \ValueManagementOptions
+III     BN     6               $>Other<$                                                           \ValueOtherEquityClaims
+PPP    =BN    -6               =ValOtherEqClaimsAPV                                                \=ValOtherEqClaims
+
+PPP     BN     5               $>Value non-operating capital<$                                     \ValueNonOperatingCap
+PPP     BN     6               =NoOpCashFlow                                                       \ValueNoOpCashFlow
+PPP  M  FN     7               =NoOpCashFlow                                                       \=NoOpCashFlow
+PPP  M3 BN     7               =DiscountFactorCostOfAllEquity                                      \=DiscountFactorCostOfAllEquity
+PPP  M  FN    -7               $>Discounted cash flows<$                                           \NoOpCashFlowDiscountedAPV
+PPP     BN     7               $>Discounted value<$                                                \=ValueNoOpCashFlow
+PPP   2 AN %   7               Verdisconteringsvoet Eigen vermogen (unlevered)                     \=CostOfAllEquity -> CostOfAllEquity
+PPP     BN     6               $>Marketable securities<$                                           \=MarketableSecurities -> MarketableSecurities
+PPP     BN     6               $>Excess cash<$                                                     \=ExcessCash -> ExcessCash
+PII     BN     6         +     $>Other bookcorrections<$                                           \=CorrNotOpInvCap
+PPP    =BN    -6               =ValueNonOperatingCap                                               \=ValueNonOperatingCap
+
+P P    =BN    -5               $>Value of equity<$                                                 \APVValueTotal
+
+;======APV op waarderingsdatum============================================================================================
+.Variables
+PPP     PN   1 4               Adjusted Present Value                                              \Q_ROOT_VALUATION_STEP04_Paragraaf03
+C Hier is de waarde per waarderingsdatum te zien. Voor een uitwerking van de kasstromen per jaar wordt verwezen naar het overzicht per jaar.
+PPP     1N D   5               =ValuationDate                                                      \=ValuationDate
+PPP     PN   1 5               $>Present value in forecasting period<$                             \APVAllEqValCFNu
+PPP     PN     6               =APVAllEqValCFNu                                                    \=APVAllEqValCFNu                                          ;JB overbodig in wizard
+;PPP     PN     6               $>Continuing value<$                                                \APVAllEqValCVTotalNu
+PPP     PN     5               $>Continuing value<$                                                \APVAllEqValCVNu
+PPP     PN     6               "$>Invested capital in last period of explicit forecast<$"          \LastOpInvCap -> OpInvCap  ; basis ROIC volgens Copeland
+PPP     PN %   6               =GrowthRateCompany                                                  \=GrowthRateCompany -> GrowthRateCompany
+PPP     PN %   6               &"$>Unlevered equity riskpremium<$"&" "&"$>after forecasting period<$"  \LastCostOfEquity -> CostOfAllEquity
+PPP     PN %   6               =ROICo                                                              \=ROICo -> ROICo
+PPP     PN %   6               =ROICn                                                              \=ROICn -> ROICn
+PPP     PN     6               Vrije kasstroom in restwaardeperiode                                \CVCashFlowAPV2=CVFreeCashFlow2
+PPP     PN     6               Vrije kasstroom in restwaardeperiode                                \CVCashFlowAPV=CVFreeCashFlow
+PPP     PN    -6               $>Continuing value<$ $>on valuationdate<$                           \=APVAllEqValCVNu
+PPP     PN     5               &"$>Correction<$"&" "&"$>due to investmentcyclus<$"                 \CorrInvestmentCycleNu
+;PPP     PN     6               =CorrInvestmentCycleNu                                              \=CorrInvestmentCycleNu                                    ;JB overbodig in wizard
+;PPP     PN    -7               $>Continuing value<$ $>total<$                                      \=APVAllEqValCVTotalNu
+;PPP     PN C 1 6                                                                                   \ROICCheckB2
+PPP    =PN    -5               $>Value if all-equity financed<$                                    \APVAllEqValNu
+;PPP     PN     6               =APVAllEqValNu                                                      \=APVAllEqValNu                                            ;JB overbodig in wizard
+PPP     PN     5               $>Tax shield<$: $>Present value in forecasting period<$             \TaxShieldForecValNu
+;PPP     PN     6               =TaxShieldForecValNu                                                \=TaxShieldForecValNu                                      ;JB overbodig in wizard
+PPP     PN     5               $>Tax shield<$: $>Continuing value<$                                \TaxShieldCVValNu
+PPP     PN %   6               =LastCostOfDebt                                                     \=LastCostOfDebt 
+PPP     PN     6               =LastMarketValueDebt                                                \=LastMarketValueDebt 
+PPP     PN     6               =CorrMarketValueDebt                                                \=CorrMarketValueDebt
+PPP  M  PN    -6               =ContinuingValueInterestExpenses                                    \=ContinuingValueInterestExpenses 
+PPP     PN %   6               =LastValuationTaxRate                                               \=LastValuationTaxRate
+PPP     PN    -6               =TaxShieldPerYearAfterForecast                                      \=TaxShieldPerYearAfterForecast
+PPP     PN %   6               =GDebt                                                              \=GDebt 
+PPP     PN    -6               =TaxShieldCVValNu                                                   \=TaxShieldCVValNu
+PPP    =PN    -5               $>Value including leverage effect<$                                 \APVLeveredValNu
+;PPP     PN     6               =APVLeveredValNu                                                    \=APVLeveredValNu                                          ;JB overbodig in wizard
+PPP    -PN     5               $>Market value debt<$                                               \MarketValDebtNu
+PPP     1N D 1 6 1             $>Situation on valuation date:<$                                    \=ValuationDate->ValuationDate
+PPP     PN     6               =AdjDebt                                                            \AdjDebtNu -> AdjDebt
+PII     PN     6               =AdjDebtChangesForMarketValue                                       \AdjDebtChangesForMarketValueNu
+PPP    =PN    -6=              =MarketValDebtNu                                                    \=MarketValDebtNu
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossAPVValueNu
+;PPP     PN     6               =GrossAPVValueNu                                                    \=GrossAPVValueNu                                           ;JB overbodig in wizard
+;Overige claims
+PPP    -PN     5               $>Value other claims on equity<$                                    \ValOtherEqClaimsAPV
+PPP     PN     6               =MinorityInterests                                                  \MinorityInterestsNu
+III     PN     6               Waarde preferente aandelen                                          \ValuePreferenceSharesNu
+III     PN     6               Waarde warrants                                                     \ValueWarrantsNu
+III     PN     6               Waarde management opties                                            \ValueManagementOptionsNu
+III     PN     6               $>Other<$                                                           \ValueOtherEquityClaimsNu
+PPP    =PN    -6               $>Value other claims on equity<$                                    \=ValOtherEqClaimsAPV
+;Correcties IC
+;III     PN     5               Boekcorrecties operationeel vermogen                                \CorrICNu
+;III     BN     6               =CorrIC                                                             \=CorrIC
+PPP     PN     5               $>Value non-operating capital<$                                     \ValueNonOpCapAPV
+PPP     PN     6               $>Present value of non-operational cash flow<$                      \ValueNoOpCashFlowNu
+PPP     PN     6               =MarketableSecurities                                               \MarketableSecuritiesNu
+PPP     PN     6               =ExcessCash                                                         \ExcessCashNu
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapNu1
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapNu2
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapNu3
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapNu4
+PPP    =PN    -6               =ValueNonOpCapAPV                                                   \=ValueNonOpCapAPV
+PPP    =PN    -5=              $>Value of equity<$                                                 \APVValue
+;PPP     PN     6               =APVValue                                                           \=APVValue                                      ;JB overbodig in wizard
+.Formulas Visible
+APVValueChoice                                 = 0
+APVInterestExpensesSubordinatedDebt            = (FirstValueT(Self,1,MaxT)>0)
+APVInterestExpensesLongTermDebt                = (FirstValueT(Self,1,MaxT)>0)
+APVInterestExpensesLongTermDebtOther           = (FirstValueT(Self,1,MaxT)>0)
+APVInterestExpensesLongTermDebtAnnuity         = (FirstValueT(Self,1,MaxT)>0)
+APVInterestExpensesOnCurrentAccount            = (FirstValueT(Self,1,MaxT)>0)
+APVInterestExpensesOnOtherShortTermDebt        = (FirstValueT(Self,1,MaxT)>0)
+APVInterestOnTaxesAndSocialSecurityCharges     = (FirstValueT(Self,1,MaxT)>0)
+APVInterestOnCurrentAccountGroupCompanies      = (FirstValueT(Self,1,MaxT)>0)
+APVInterestOnCurrentAccountAffiliatedCompanies = (FirstValueT(Self,1,MaxT)>0)
+APVOtherInterestExpenses                       = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtNonCurrentLiabilities                   = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtSTPartOfLTDebts                         = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtOverdraftCurrentAccount                 = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtCurrentAccountGroupCompanies            = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtCurrentAccountAffiliatedCompanies       = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtOtherShortTermDebt                      = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtInterestAndRepaymentsPayable            = (FirstValueT(Self,1,MaxT)>0)
+AdjDebtCapitalShortfall                        = (FirstValueT(Self,1,MaxT)>0)
+CorrInvestmentCycleNu                          = (FirstValueT(Self,1,MaxT)>0)
+
+.Formulas Trend
+APVAllEqValCV               = OnER( NPV2(CostOfAllEquity,HelpVarAPVfcfCV,T,LastTinPeriod(PeriodInT),LastDateInT-ExpirationFactor) ,NA)
+APVAllEqValCF               = OnER( If(T=LastTinPeriod(PeriodInT)            ,NA,OnEr(NPV2(CostOfAllEquity,FreeCashFlowAnnual              ,T+1,LastTinPeriod(PeriodInT) ,LastDateInT-ExpirationFactor)  ,NA)),NA)
+TaxShieldCVVal              = OnER(NPV2(DiscountRateTaxshield,HelpVarTaxShieldCV,T,LastTinPeriod(PeriodInT),LastDateInT-ExpirationFactor),NA)
+TaxShieldForecVal           = OnER( If(T=LastTinPeriod(PeriodInT)            ,NA,OnEr(NPV2(DiscountRateTaxshield,TaxShieldAnnual           ,T+1,LastTinPeriod(PeriodInT)    ,LastDateInT-ExpirationFactor)  ,NA)),NA)
+CorrInvestmentCycle         = OnER( NPV2(CostOfAllEquity,CorrInvestmentCycleStartCVAnnual,T,LastTinPeriod(PeriodInT)    ,LastDateInT-ExpirationFactor),NA)
+ValueNoOpCashFlow           = OnER( If(T=LastTinPeriod(PeriodInT)            ,NA,OnEr(NPV2(CostOfAllEquity,NoOpCashFlowAnnual              ,T+1,LastTinPeriod(PeriodInT) ,LastDateInT-ExpirationFactor)  ,NA)),NA)
+
+.Formulas NoTrend,Trend
+DiscountRateTaxshieldBasis  = 2
+DiscountRateTaxshield       = Case(DiscountRateTaxshieldBasis,[0:NA|1:CostOfDebt|2:CostOfAllEquity])
+
+.Choices
+DiscountRateTaxshieldBasis = "1:$>Market cost of debt<$|2:$>Cost of Equity<$ (unlevered)"
+
+.Variables
+;-------Verborgen vars-----------------                                                         
+X        X     3               Hulp variabelen                                                    
+PPP   0 PN     4               $>Valuation at the end of<$                                         \ValDateColumn
+PII     PN %   4               $>WACC after forecast period<$                                      \LastWACC -> WACC
+PII     PN C   4               $>Discount rate<$ $>tax shield<$ $>basis<$                          \DiscountRateTaxshieldBasis ;Deze mag bij APV instellingen als deze wordt ontsloten
+PII     PN %   4               $>Cost of debt<$                                                    \CostOfDebtCol      
+PPP     PN %   5               $>Net cost of debt<$                                                \NetCostOfDebtCol       
+PPP  M2 AN %   4               $>Discount rate<$ $>tax shield<$                                    \DiscountRateTaxshield
+;PPP  M2 AN %   4               $>Manual entry of discount rate<$                                   \ManualDiscountRateTaxshield
+;Voorlopig bovenstaande var niet actief (dus daarom locked)
+PPP     PN     4               $>Value of tax shield<$                                             \APVTaxShieldValNu
+
+PII  M  FN     4               $>Free cashflow<$ $>annual<$                                        \FreeCashFlowAnnual
+PPP  M  FN     4               $>Free cashflow<$ $>annual discounted<$                             \DiscountedFreeCashFlowAnnual  
+PII  M  FN     4               $>Tax shield<$ $>annual<$                                           \TaxShieldAnnual
+PII  M  FN     4               $>Non-operating cashflow<$ $>annual<$                               \NoOpCashFlowAnnual
+PPP  M  FN     4               $>Non-operating cashflow<$ $>annual discounted<$                    \DiscountedNoOpCashFlowAnnual  
+PPP   3 BN     4               Discount factor                                                     \DiscountFactorCostOfAllEquity
+PPP  M  FN     4               DF all equity                                                       \DFAllEquity
+PPP     FN     4               Hulpvariabele FCF laatste jaar                                      \HelpVarAPVfcfCV
+PPP     BN     4               Correctie investeringscyclus                                        \CorrInvestmentCycleStartCVAnnual
+;PPP   0 PN     4               Jaartal einddatum onderneming                                       \CompanyEndDateYear
+PPP     PN     4               $>Correction valuation date for NPV2 formula<$                      \ExpirationFactor
+PII     PN %   4               $>Cost of Equity after forecast period<$                            \LastCostOfAllEquity
+PPP     FN     4               Hulpvariabele tax shield FCF laatste jaar                           \HelpVarTaxShieldCV
+PPP     PN   1 5               $>Value of explicit forecast<$                                      \ValueExplicit
+PPP     PN     5               $>Value of continuing value<$                                       \ValueCV
+PPP     PN    -5-              =APVLeveredValNu                                                    \=APVLeveredValNu
+PPP    -PN     5               =MarketValDebtNu                                                    \=MarketValDebtNu
+PPP     PN     5               =ValueNonOpCapAPV                                                   \=ValueNonOpCapAPV
+PPP     PN     5               =ValOtherEqClaimsAPV                                                \=ValOtherEqClaimsAPV
+PPP     PN    -5=              $>Value of equity<$                                                 \=APVValue
+PPP     PN     4               $>Valuation at the end of<$                                         \VCMethodExitValueDateColumn
+;---- lower bound
+PPP     PN %   5               Correction CoE for APV Value lower bound                            \=APVValueLowerBoundInput
+PPP     PN     5               $>Continuing value<$                                                \LowerAPVAllEqValCVTotalNu
+PPP     PN     5               =APVAllEqValCFNu                                                    \LowerAPVAllEqValCFNu      
+PPP     PN     5               =TaxShieldForecValNu                                                \LowerTaxShieldForecValNu  
+PPP     PN     5               =ValueNoOpCashFlowNu                                                \LowerValueNoOpCashFlowNu  
+PPP     PN     5               =APVAllEqValCVNu                                                    \LowerAPVAllEqValCVNu      
+PPP     PN     5               =TaxShieldCVValNu                                                   \LowerTaxShieldCVValNu     
+PPP     FN     5               =HelpVarAPVfcfCV                                                    \LowerHelpVarAPVfcfCV
+PPP     FN     5               =HelpVarTaxShieldCV                                                 \LowerHelpVarTaxShieldCV
+PPP     BN %   5               CoE lowerbound                                                      \LowerCostOfAllEquity     
+PPP     BN %   5               CoD lowerbound                                                      \LowerCostOfDebt
+
+;---- upper bound
+PPP     PN %   5               Correction CoE for APV Value upper bound                            \=APVValueUpperBoundInput
+PPP     PN     5               $>Continuing value<$                                                \UpperAPVAllEqValCVTotalNu
+PPP     PN     5               =APVAllEqValCFNu                                                    \UpperAPVAllEqValCFNu      
+PPP     PN     5               =TaxShieldForecValNu                                                \UpperTaxShieldForecValNu  
+PPP     PN     5               =ValueNoOpCashFlowNu                                                \UpperValueNoOpCashFlowNu  
+PPP     PN     5               =APVAllEqValCVNu                                                    \UpperAPVAllEqValCVNu      
+PPP     PN     5               =TaxShieldCVValNu                                                   \UpperTaxShieldCVValNu     
+PPP     FN     5               =HelpVarAPVfcfCV                                                    \UpperHelpVarAPVfcfCV 
+PPP     FN     5               =HelpVarTaxShieldCV                                                 \UpperHelpVarTaxShieldCV
+PPP     BN %   5               CoE Upperbound                                                      \UpperCostOfAllEquity
+PPP     BN %   5               CoD Upperbound                                                      \UpperCostOfDebt
+
+;----- FCF scenarios
+PPP     PN     5               APV waarde (kostenvoet verhoogd)        	                   \APVValueLowerBound   
+PPP     PN     5               APV waarde (kostenvoet verlaagd)                                    \APVValueUpperBound
+PPP     PN     5               APV waarde (cashflows verlaagd)                                     \APVValueFCFLow
+PPP     PN     5               APV waarde (cashflows verhoogd)                                     \APVValueFCFHigh
+PPP     PN     5               APV waarde (cashflows verlaagd, kostenvoet verhoogd)                \APVValueLowerBoundFCFLow
+PPP     PN     5               APV waarde (cashflows verhoogd, kostenvoet verhoogd)                \APVValueLowerBoundFCFHigh
+PPP     PN     5               APV waarde (cashflows verlaagd, kostenvoet verlaagd)                \APVValueUpperBoundFHFLow
+PPP     PN     5               APV waarde (cashflows verhoogd, kostenvoet verlaagd)                \APVValueUpperBoundFCFHigh
+
+.Hints
+ValuationTaxRate  = "$$CalcYearAs=MeanCalc"
+
+.Formulas Visible
+CorrNotOpInvCapNu3                = (CorrNotOpInvCapNu2[LastTinPeriod(PeriodInT)]<>NA) Or (Self<>NA)
+CorrNotOpInvCapNu4                = (CorrNotOpInvCapNu3[LastTinPeriod(PeriodInT)]<>NA) Or (Self<>NA)
+
+.Formulas NoTrend,Trend
+;GrowthRateCompany                = If(GrNOPLAT[LastTinPeriod(PeriodInT),1]>=LastWACC,NA,GrNOPLAT[LastTinPeriod(PeriodInT),1])  ; CONTROLE G NOT >= LastWACC
+GrowthRateCompany                = If(GrNOPLAT[LastTinPeriod(PeriodInT),1]>=LastCostOfAllEquity,NA,GrNOPLAT[LastTinPeriod(PeriodInT),1])
+APVTaxShieldValNu                = TaxShieldForecValNu+TaxShieldCVValNu
+
+
+.Formulas Trend
+ValuationTaxRate                 = If(TimeAggregated,ValuationTaxRate[LastTinYear,FesExpression(DocumentTsY)],If(T=FirstTinFormulaSet(Trend),ValuationTaxRateCol,Self[T-1]))
+DiscountFactorCostOfAllEquity    = If((T>(ValDateColumn)) And (T<(ValDateColumn+TsY+1)),(1+CostOfAllEquity)^(1/If(ExpirationOfFlows,2,1)),OnZeroOrNA(DiscountFactorCostOfAllEquity[T-TsY]*(1+CostOfAllEquity),1))
+FreeCashFlowDiscountedAPV        = OnER(Onzero(FreeCashFlow/DiscountFactorCostOfAllEquity,NA),NA)
+NoOpCashFlowDiscountedAPV        = OnER(Onzero(NoOpCashFlow/DiscountFactorCostOfAllEquity,NA),NA)
+
+.Formulas NoTrend,Trend
+;JB alles wordt nu nog per einde jaar verdisconteerd, hier moeten we iets slims voor bedenken
+
+MarketableSecuritiesNu           = MarketableSecurities[ValDateColumn,TsY(ValDateColumn)]
+ExcessCashNu                     = ExcessCash[ValDateColumn,TsY(ValDateColumn)]
+MinorityInterestsNu              = MinorityInterests[ValDateColumn,TsY(ValDateColumn)]
+ValuePreferenceSharesNu          = ValuePreferenceShares[ValDateColumn,TsY(ValDateColumn)]
+ValueWarrantsNu                  = ValueWarrants[ValDateColumn,TsY(ValDateColumn)]
+ValueManagementOptionsNu         = ValueManagementOptions[ValDateColumn,TsY(ValDateColumn)]
+ValueOtherEquityClaimsNu         = ValueOtherEquityClaims[ValDateColumn,TsY(ValDateColumn)]
+AdjDebtNu                        = AdjDebt[ValDateColumn,TsY(ValDateColumn)]
+AdjDebtChangesForMarketValueNu   = AdjDebtChangesForMarketValue[ValDateColumn,TsY(ValDateColumn)]
+ExpirationFactor                 = IF(ExpirationOfFlows=0,365/(TsY(LastTinPeriod)*2),-1*(365/2-365/(TsY(LastTinPeriod)*2)))
+DiscountedFreeCashFlowAnnual     = OnER(FreeCashFlowAnnual/DiscountFactorCostOfAllEquity,NA)
+DiscountedTaxShieldAnnual        = OnER(TaxShieldAnnual   /DiscountFactorCostOfAllEquity,NA)
+DiscountedNoOpCashFlowAnnual     = OnER(NoOpCashFlowAnnual/DiscountFactorCostOfAllEquity,NA)
+;APVAllEqValCVTotalNu             = OnZero(APVAllEqValCVNu+CorrInvestmentCycleNu,NA)
+CorrInvestmentCycleNu            = OnER(OnZero(CorrInvestmentCycleStartCV/(DiscountFactorCostOfAllEquity[LastTinFormulaSet(Trend,PeriodInT)]),NA),NA)
+TaxShieldPerYearAfterForecast    = LastValuationTaxRate * ContinuingValueInterestExpenses
+
+;Alternatieve verdisconteringen
+APVAllEqValCFNu                  = OnER(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(CostOfAllEquity,FreeCashFlowAnnual,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+TaxShieldForecValNu              = OnER(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(DiscountRateTaxshield,TaxShieldAnnual   ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+;JB wacc nog bepalen!                                                                                                                                                                                                                            
+ValueNoOpCashFlowNu              = -1*If(ValDateColumn=LastTinPeriod(PeriodInT),  0,OnER(NPV2(CostOfAllEquity,NoOpCashFlowAnnual,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)) 
+APVAllEqValCVNu                  =                                                  OnEr(NPV2(CostOfAllEquity,HelpVarAPVfcfCV   ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+TaxShieldCVValNu                 =                                                  OnEr(NPV2(DiscountRateTaxshield,HelpVarTaxShieldCV,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+HelpVarAPVfcfCV                  = OnEr(If(T=LastTinPeriod(PeriodInT),if(CVBase=1,CVFreeCashFlow,CVFreeCashFlow2)/(CostOfAllEquityCol-GrowthRateCompany),0),NA)
+;HelpVarAPVfcfCV                 = OnEr(If(T=LastTinPeriod(PeriodInT),if(CVBase=1,OnER(CVFreeCashFlow/DiscountFactorCostOfAllEquity,NA),OnER(CVFreeCashFlow2/DiscountFactorCostOfAllEquity,NA)),0),NA)
+CorrInvestmentCycleStartCVAnnual = OnEr(If(T=LastTinPeriod(PeriodInT),CorrInvestmentCycleStartCV,NA),NA)
+
+;formula's voor rapportage doeleinden
+;APV lower bound
+
+APVValueLowerBoundInput          = 0.05
+LowerAPVAllEqValCVTotalNu        = OnZero(LowerAPVAllEqValCVNu+CorrInvestmentCycleNu,NA)
+LowerCostOfAllEquity             = CostOfAllEquity+APVValueLowerBoundInput
+LowerCostOfDebt                  = If(DiscountRateTaxShieldBasis=1,CostOfDebt,CostOfAllEquity+APVValueLowerBoundInput)
+LowerAPVAllEqValCFNu             = OnEr(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(LowerCostOfAllEquity,FreeCashFlowAnnual      ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+LowerTaxShieldForecValNu         = OnEr(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(LowerCostOfDebt     ,TaxShieldAnnual         ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+LowerValueNoOpCashFlowNu         = -1*If(ValDateColumn=LastTinPeriod(PeriodInT),0,  OnEr(NPV2(LowerCostOfAllEquity,NoOpCashFlowAnnual      ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)) 
+LowerAPVAllEqValCVNu             =                                                  OnEr(NPV2(LowerCostOfAllEquity,LowerHelpVarAPVfcfCV    ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+LowerTaxShieldCVValNu            =                                                  OnEr(NPV2(LowerCostOfDebt     ,LowerHelpVarTaxShieldCV ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+LowerHelpVarAPVfcfCV             = OnEr(If(T=LastTinPeriod(PeriodInT),if(CVBase=1,CVFreeCashFlow,CVFreeCashFlow2)/(CostOfAllEquityCol+APVValueLowerBoundInput-GrowthRateCompany),0),NA)
+LowerHelpVarTaxShieldCV          = OnEr(If(T=LastTinPeriod(PeriodInT),(TaxShieldPerYearAfterForecast)/(If(DiscountRateTaxShieldBasis=1,CostOfDebtCol,CostOfAllEquityCol+APVValueLowerBoundInput)-If(GDebt>0,GDebt[1],0)),0),NA)
+APVValueLowerBound               = LowerAPVAllEqValCFNu+LowerAPVAllEqValCVTotalNu+LowerTaxShieldForecValNu+LowerTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV
+
+ ;APV Upper bound
+APVValueUpperBoundInput          = -0.05
+UpperAPVAllEqValCVTotalNu        = OnZero(UpperAPVAllEqValCVNu+CorrInvestmentCycleNu,NA)
+UpperCostOfAllEquity             = CostOfAllEquity+APVValueUpperBoundInput
+UpperCostOfDebt                  = If(DiscountRateTaxShieldBasis=1,CostOfDebt,CostOfAllEquity+APVValueUpperBoundInput)
+UpperAPVAllEqValCFNu             = OnEr(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(UpperCostOfAllEquity,FreeCashFlowAnnual      ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+UpperTaxShieldForecValNu         = OnEr(If(ValDateColumn=LastTinPeriod(PeriodInT),0,OnEr(NPV2(UpperCostOfDebt     ,TaxShieldAnnual         ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)),NA)
+UpperValueNoOpCashFlowNu         = -1*If(ValDateColumn=LastTinPeriod(PeriodInT),  0,OnER(NPV2(UpperCostOfAllEquity,NoOpCashFlowAnnual      ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1)                                                ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)) 
+UpperAPVAllEqValCVNu             =                                                  OnEr(NPV2(UpperCostOfAllEquity,UpperHelpVarAPVfcfCV    ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+UpperTaxShieldCVValNu            =                                                  OnEr(NPV2(UpperCostOfDebt     ,UpperHelpVarTaxShieldCV ,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),Min(ValDateColumn+1,ValueT(LastTinFormulaSet(Trend,PeriodInT)))),LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor),NA)
+UpperHelpVarAPVfcfCV             = OnEr(If(T=LastTinPeriod(PeriodInT),if(CVBase=1,CVFreeCashFlow,CVFreeCashFlow2)/(CostOfAllEquityCol+APVValueUpperBoundInput-GrowthRateCompany),0),NA)
+UpperHelpVarTaxShieldCV          = OnEr(If(T=LastTinPeriod(PeriodInT),(TaxShieldPerYearAfterForecast)/(If(DiscountRateTaxShieldBasis=1,CostOfDebtCol,CostOfAllEquityCol+APVValueUpperBoundInput)-If(GDebt>0,GDebt[1],0)),0),NA)
+APVValueUpperBound               = UpperAPVAllEqValCFNu+UpperAPVAllEqValCVTotalNu+UpperTaxShieldForecValNu+UpperTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV
+   
+; APV FCF changes
+APVValueCashflowLower            = -0.1
+APVValueCashflowHigher           = 0.1
+APVValueLowerBoundFCFLow         = OnZero(LowerAPVAllEqValCFNu*(1+APVValueCashflowLower) +LowerAPVAllEqValCVNu*(1+APVValueCashflowLower) +CorrInvestmentCycleNu +LowerTaxShieldForecValNu+LowerTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+APVValueLowerBoundFCFHigh        = OnZero(LowerAPVAllEqValCFNu*(1+APVValueCashflowHigher)+LowerAPVAllEqValCVNu*(1+APVValueCashflowHigher)+CorrInvestmentCycleNu +LowerTaxShieldForecValNu+LowerTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+APVValueUpperBoundFHFLow         = OnZero(UpperAPVAllEqValCFNu*(1+APVValueCashflowLower) +UpperAPVAllEqValCVNu*(1+APVValueCashflowLower) +CorrInvestmentCycleNu +UpperTaxShieldForecValNu+UpperTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+APVValueUpperBoundFCFHigh        = OnZero(UpperAPVAllEqValCFNu*(1+APVValueCashflowHigher)+UpperAPVAllEqValCVNu*(1+APVValueCashflowHigher)+CorrInvestmentCycleNu +UpperTaxShieldForecValNu+UpperTaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+APVValueFCFLow                   = OnZero(     APVAllEqValCFNu*(1+APVValueCashflowLower) +     APVAllEqValCVNu*(1+APVValueCashflowLower) +CorrInvestmentCycleNu +     TaxShieldForecValNu+     TaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+APVValueFCFHigh                  = OnZero(     APVAllEqValCFNu*(1+APVValueCashflowHigher)+     APVAllEqValCVNu*(1+APVValueCashflowHigher)+CorrInvestmentCycleNu +     TaxShieldForecValNu+     TaxShieldCVValNu-MarketValDebtNu+ValueNonOpCapAPV+ValOtherEqClaimsAPV,NA)
+ 
+GDebt                            = GrowthRateCompany
+LastValuationTaxRate             = ValuationTaxRateCol
+LastMarketValueDebt              = AdjDebt[LastTinPeriod(PeriodInT)] ;OnZero(AdjDebt[LastTinPeriod(PeriodInT)]+CorValueDebt[LastTinPeriod(PeriodInT)],NA)
+ContinuingValueInterestExpenses  = LastCostOfDebt*(LastMarketValueDebt+CorrMarketValueDebt)
+;JB onderstaande berekening maakt geen gebruik van CostOfAllEq lastyear waar deze wel op jaarbasis bepaald wordt
+HelpVarTaxShieldCV               = OnEr(If(T=LastTinPeriod(PeriodInT),(TaxShieldPerYearAfterForecast)/(If(DiscountRateTaxShieldBasis=1,CostOfDebtCol,CostOfAllEquityCol)-If(GDebt>0,GDebt[1],0)),0),NA)
+RiskFreeRateContinuingValue      = RiskFreeRate[LastTinPeriod(PeriodInT),1]
+PremiumDebtContinuingValue       = PremiumDebt[LastTinPeriod(PeriodInT),1]
+NetCostOfDebtContinuingValue     = OnZero((1-LastValuationTaxRate)*LastCostOfDebt,NA)
+
+.Formulas Trend,NoTrend
+LastCostOfEquity                 = CostOfAllEquity[LastTinPeriod(PeriodInT),1] ; JB even controleren... 
+LastCostOfAllEquity              = CostOfAllEquity[LastTinPeriod(PeriodInT),1]
+LastOpInvCap                     = OpInvCap[LastTinPeriod(PeriodInT)]
+                                 
+ValueExplicit                    = APVAllEqValCFNu + TaxShieldForecValNu
+ValueCV                          = APVAllEqValCVNu + TaxShieldCVValNu + CorrInvestmentCycleNu
+
+
+.Hints
+;Q_ROOT_VALUATION_STEP01 = "Kies hieronder welke waarderingsmethodieken je wil gebruiken. Bij gebruik van de APV methode is het van belang keuze te maken of de kasstromen per einde of per medio periode vervallen."
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP04_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (2)<$                                    \Q_ROOT_VALUATION_STEP04_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_ROOT_VALUATION_STEP04_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP04_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP04, Q_ROOT_VALUATION_STEP04_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP04_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP04, Q_ROOT_VALUATION_STEP04_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP04                        = (Q_ROOT_VALUATION_STEP04_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP04_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP04_WARNING                = &If(Q_ROOT_VALUATION_STEP04=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP04_INFO                   = &If(Q_ROOT_VALUATION_STEP04=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP04                        = Q_ROOT_VALUATION
+
+
+;-------------------------Market Multiple Analyse -------------------------
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               Market Multiple Analysis                                             \Q_ROOT_VALUATION_STEP05
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 2<$                                               \Q_ROOT_VALUATION_STEP05_WARNING
+PPP     PA     4               $>Info bij stap 2<$                                                  \Q_ROOT_VALUATION_STEP05_INFO
+PPP     PA     4               $>Validatie stap 2<$                                                 \Q_ROOT_VALUATION_STEP05_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+ 
+PPP     PN     4               Instellingen                                                        \AvgEquityValue_Paragraaf01
+C De geselecteerde multiples geven de waarde weer van het eigen vermogen op de waarderingsdatum. 
+; Financial multiples
+PII     PN C   5               Keuze Waarderingsgrondslag                                          \ChoiceMultipleValuationBase
+PPP     1N D   5               =ValuationDate                                                      \=ValuationDate->ValuationDate  
+PII     PA     5               $>Source notification<$ $>Company value<$ / $>Net sales<$ multiple: \SourceNoteValueonNetSalesMultiple
+PII     PA     5               $>Source notification<$ $>Company value<$ / EBITDA multiple         \SourceNoteValueonEBITDAMultiple
+PII     PA     5               $>Source notification<$ $>Company value<$ / EBITA multiple          \SourceNoteValueonEBITAMultiple
+PII     PA     5               $>Source notification<$ $>Company value<$ / EBIT multiple           \SourceNoteValueonEBITMultiple
+PII     PA     5               $>Source notification<$ $>Company value<$ / $>Net worth<$ multiple  \SourceNoteValueonNetWorthMultiple
+PII     PA     5               $>Source notification<$ $>Value of equity<$ / $>Profit after tax<$ multiple\SourceNoteEquityValueonProfitAfterTaxMultiple
+
+;PPP     1    1 4               $>Multiples on financial data<$                                     \AvgEquityValue_Paragraaf02
+PPP     PN     4               $>Company value<$ / $>Net sales<$                                   \AvgEquityValue_Paragraaf02
+PII   1 PN     5               $>Company value<$ / $>Net sales<$ multiple                          \ValueonNetSalesMultiple
+PPP     PN     5               &NetSales[0]                                                        \NetSalesNu -> NetSales
+PPP     PN    -5               $>Company value<$                                                   \CompanyValueonNetSalesNu
+PPP    -PN     5               =MarketValDebtNu                                                    \MarketValDebtNetSalesNu -> MarketValDebtNu
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossEquityValueonNetSalesNu
+PPP    -PN     5               $>Value other claims on equity<$                                    \ValOtherEqClaimsMultiples
+III     PN     6               $>Other<$ ...                                                       \ValueOtherEquityClaimsMultiples1
+III     PN     6               $>Other<$ ...                                                       \ValueOtherEquityClaimsMultiples2
+III     PN     6               $>Other<$ ...                                                       \ValueOtherEquityClaimsMultiples3
+PPP    =PN    -6               =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5               $>Value non-operating capital<$                                     \ValueNonOpCapMultiples
+PPP     PN     6               =ExcessCash                                                         \=ExcessCashNu
+III     PN     6               $>Other<$ ...                                                       \CorrNotOpInvCapMultiples1
+III     PN     6               $>Other<$ ...                                                       \CorrNotOpInvCapMultiples2
+III     PN     6               $>Other<$ ...                                                       \CorrNotOpInvCapMultiples3
+PPP    =PN    -6               =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonNetSalesNu
+
+PPP     PN     4               $>Company value<$ / EBITDA                                          \AvgEquityValue_Paragraaf03
+PII   1 PN     5               $>Company value<$ / EBITDA multiple                                 \ValueonEBITDAMultiple
+PPP     PN     5               &EBITDA[0]                                                          \EBITDANu -> EBITDA 
+PPP     PN    -5               $>Company value<$                                                   \CompanyValueonEBITDANu
+PPP    -PN     5               =MarketValDebtNu                                                    \MarketValDebtEBITDANu -> MarketValDebtNu      
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossEquityValueonEBITDANu
+PPP    -PN     5         +     =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5         +     =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonEBITDANu
+
+PPP     PN     4               $>Company value<$ / EBITA                                           \AvgEquityValue_Paragraaf04
+PII   1 PN     5               $>Company value<$ / EBITA multiple                                  \ValueonEBITAMultiple
+PPP     PN     5               &EBITA[0]                                                           \EBITANu -> EBITA   
+PPP     PN    -5               $>Company value<$                                                   \CompanyValueonEBITANu
+PPP    -PN     5               =MarketValDebtNu                                                    \MarketValDebtEBITANu -> MarketValDebtNu   
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossEquityValueonEBITANu
+PPP    -PN     5         +     =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5         +     =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonEBITANu
+
+PPP     PN     4               $>Company value<$ / EBIT                                            \AvgEquityValue_Paragraaf05
+PII   1 PN     5               $>Company value<$ / EBIT multiple                                   \ValueonEBITMultiple
+PPP     PN     5               &EBIT[0]                                                            \EBITNu -> EBIT     
+PPP     PN    -5               $>Company value<$                                                   \CompanyValueonEBITNu
+PPP    -PN     5               =MarketValDebtNu                                                    \MarketValDebtEBITNu
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossEquityValueonEBITNu
+PPP    -PN     5         +     =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5         +     =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonEBITNu
+
+PPP     PN     4               $>Company value<$ / $>Net worth<$                                   \AvgEquityValue_Paragraaf06
+PII   1 PN     5               $>Company value<$ / $>Net worth<$ multiple                          \ValueonNetWorthMultiple
+PPP     PN     5               &NetWorth[0]                                                        \NetWorthNu -> NetWorth   
+PPP     PN    -5                $>Company value<$                                                  \CompanyValueonNetWorthNu
+PPP    -PN     5               =MarketValDebtNu                                                    \MarketValDebtNetWorthNu -> MarketValDebtNu   
+PPP    =PN    -5               $>Gross value equity<$                                              \GrossEquityValueonNetWorthNu
+PPP    -PN     5         +     =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5         +     =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonNetWorthNu
+
+PPP     PN     4               $>Value of equity<$ / $>Profit after tax<$                          \AvgEquityValue_Paragraaf07
+PII   1 PN     5               $>Value of equity<$ / $>Profit after tax<$ multiple                 \EquityValueonProfitAfterTaxMultiple
+PPP     PN     5               &ProfitAfterTax[0]                                                  \ProfitAfterTaxNu -> ProfitAfterTax   
+PPP     PN    -5               $>Gross value equity<$                                              \GrossEquityValueProfitAfterTaxNu
+PPP    -PN     5         +     =ValOtherEqClaimsMultiples                                          \=ValOtherEqClaimsMultiples
+PPP     PN     5         +     =ValueNonOpCapMultiples                                             \=ValueNonOpCapMultiples
+PPP    =PN    -5               $>Value of equity<$                                                 \EquityValueonProfitAfterTaxNu
+
+.Formulas Visible
+AvgEquityValue_Paragraaf02          = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]       
+AvgEquityValue_Paragraaf03          = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]         
+AvgEquityValue_Paragraaf04          = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]          
+AvgEquityValue_Paragraaf05          = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]           
+AvgEquityValue_Paragraaf06          = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]       
+AvgEquityValue_Paragraaf07          = EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)] 
+
+ValueonNetSalesMultiple             = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+NetSalesNu                          = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+CompanyValueonNetSalesNu            = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+MarketValDebtNetSalesNu             = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+EquityValueonNetSalesNu             = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+SourceNoteValueonNetSalesMultiple   = EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]
+                                    
+ValueonEBITDAMultiple               = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+EBITDANu                            = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+CompanyValueonEBITDANu              = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+MarketValDebtEBITDANu               = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+EquityValueonEBITDANu               = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+SourceNoteValueonEBITDAMultiple     = EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]
+                                    
+ValueonEBITAMultiple                = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+EBITANu                             = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+CompanyValueonEBITANu               = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+MarketValDebtEBITANu                = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+EquityValueonEBITANu                = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+SourceNoteValueonEBITAMultiple      = EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]
+                                    
+ValueonEBITMultiple                 = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+EBITNu                              = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+CompanyValueonEBITNu                = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+MarketValDebtEBITNu                 = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+EquityValueonEBITNu                 = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+SourceNoteValueonEBITMultiple       = EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]
+                                    
+ValueonNetWorthMultiple             = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+NetWorthNu                          = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+CompanyValueonNetWorthNu            = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+MarketValDebtNetWorthNu             = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+EquityValueonNetWorthNu             = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+SourceNoteValueonNetWorthMultiple   = EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]
+                             
+EquityValueonProfitAfterTaxMultiple = EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]
+ProfitAfterTaxNu                    = EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]
+EquityValueonProfitAfterTaxNu       = EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]
+SourceNoteEquityValueonProfitAfterTaxMultiple = EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]
+
+.Formulas InputRequired
+ValueonNetSalesMultiple             = (EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonNetSalesMultiple)
+ValueonEBITDAMultiple               = (EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITDAMultiple)  
+ValueonEBITAMultiple                = (EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITAMultiple)   
+ValueonEBITMultiple                 = (EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITMultiple)    
+ValueonNetWorthMultiple             = (EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonNetWorthMultiple)
+EquityValueonProfitAfterTaxMultiple = (EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(EquityValueonProfitAfterTaxMultiple)
+SourceNoteValueonNetSalesMultiple   = (EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonNetSalesMultiple)                   
+SourceNoteValueonEBITDAMultiple     = (EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITDAMultiple)                       
+SourceNoteValueonEBITAMultiple      = (EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITAMultiple)                         
+SourceNoteValueonEBITMultiple       = (EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonEBITMultiple)                           
+SourceNoteValueonNetWorthMultiple   = (EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(ValueonNetWorthMultiple)                   
+SourceNoteEquityValueonProfitAfterTaxMultiple = (EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)]=1)  And Visible(EquityValueonProfitAfterTaxMultiple) 
+
+
+.Formulas Trend, NoTrend
+AvgEquityValue                      = (EquityValueonNetSalesNu*EquityValueonNetSalesChoice+EquityValueonEBITDANu*EquityValueonEBITDAChoice+EquityValueonEBITANu*EquityValueonEBITAChoice+EquityValueonEBITNu*EquityValueonEBITChoice+EquityValueonNetWorthNu*EquityValueonNetWorthChoice+EquityValueonProfitAfterTaxNu*EquityValueonProfitAfterTaxChoice)/(EquityValueonNetSalesChoice+EquityValueonEBITDAChoice+EquityValueonEBITAChoice+EquityValueonEBITChoice+EquityValueonNetWorthChoice+EquityValueonProfitAfterTaxChoice) 
+
+NetSalesNu                          = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(NetSales      ,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(NetSales      ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(NetSales      ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(NetSales      ,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+EBITDANu                            = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(EBITDA        ,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(EBITDA        ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(EBITDA        ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(EBITDA        ,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+EBITANu                             = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(EBITA         ,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(EBITA         ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(EBITA         ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(EBITA         ,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+EBITNu                              = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(EBIT          ,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(EBIT          ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(EBIT          ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(EBIT          ,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+NetWorthNu                          = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(NetWorth      ,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(NetWorth      ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(NetWorth      ,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(NetWorth      ,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+ProfitAfterTaxNu                    = Case(ChoiceMultipleValuationBase,[0:FesExpression(GetValue(ProfitAfterTax,ValDateColumn  ,1,Bookyear))|1:FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))|2:FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))|3:(FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)-1),1,Bookyear))+FesExpression(GetValue(ProfitAfterTax,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)+1),1,Bookyear)))/3|4:(FesExpression(GetValue(ProfitAfterTax,ValDateColumn  ,1,Bookyear))+FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)+1),1,Bookyear))+FesExpression(GetValue(ProfitAfterTax,YearToT(DateToYear(ValuationDate)+2),1,Bookyear)))/3])
+
+CompanyValueonNetSalesNu            = OnNA(ValueonNetSalesMultiple*NetSalesNu,NA)
+CompanyValueonEBITDANu              = OnNA(ValueonEBITDAMultiple  *EBITDANu  ,NA)
+CompanyValueonEBITANu               = OnNA(ValueonEBITAMultiple   *EBITANu   ,NA)
+CompanyValueonEBITNu                = OnNA(ValueonEBITMultiple    *EBITNu    ,NA)
+CompanyValueonNetWorthNu            = OnNA(ValueonNetWorthMultiple*NetWorthNu,NA)
+
+MarketValDebtNetSalesNu             = If(CompanyValueonNetSalesNu=NA,NA,MarketValDebtNu)
+MarketValDebtEBITDANu               = If(CompanyValueonEBITDANu=NA  ,NA,MarketValDebtNu)                 
+MarketValDebtEBITANu                = If(CompanyValueonEBITANu=NA   ,NA,MarketValDebtNu)                 
+MarketValDebtEBITNu                 = If(CompanyValueonEBITNu=NA    ,NA,MarketValDebtNu)                 
+MarketValDebtNetWorthNu             = If(CompanyValueonNetWorthNu=NA,NA,MarketValDebtNu)                 
+                                    
+;EquityValueonNetSalesNu             = CompanyValueonNetSalesNu - MarketValDebtNetSalesNu
+;EquityValueonEBITDANu               = CompanyValueonEBITDANu   - MarketValDebtEBITDANu
+;EquityValueonEBITANu                = CompanyValueonEBITANu    - MarketValDebtEBITANu
+;EquityValueonEBITNu                 = CompanyValueonEBITNu     - MarketValDebtEBITNu
+;EquityValueonNetWorthNu             = CompanyValueonNetWorthNu - MarketValDebtEBITNu
+GrossEquityValueProfitAfterTaxNu      = OnNA(EquityValueonProfitAfterTaxMultiple*ProfitAfterTaxNu,NA)
+
+.Choices
+ChoiceMultipleValuationBase         = "0:$>Year of valuation<$|1:$>Year before valuation<$|2:$>Year after valuation<$|3:$>Average on before, of and after valuation<$|4:$>Average the year of valuation and two years after<$"
+ExpirationOfFlows                   = "$>per end of columnperiod<$|$>per half of columnperiod<$"
+                                    
+.Formulas NoTrend,Trend                     
+ChoiceMultipleValuationBase         = If(NetSales[LastTinFormulaSet(NoTrend)]>0,0,2)
+
+.Hints
+;Q_ROOT_VALUATION_STEP01 = "Kies hieronder welke waarderingsmethodieken je wil gebruiken. Bij gebruik van de APV methode is het van belang keuze te maken of de kasstromen per einde of per medio periode vervallen."
+
+
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP05_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (2)<$                                    \Q_ROOT_VALUATION_STEP05_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_ROOT_VALUATION_STEP05_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP05_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP05, Q_ROOT_VALUATION_STEP05_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP05_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP05, Q_ROOT_VALUATION_STEP05_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP05                        = (Q_ROOT_VALUATION_STEP05_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP05_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP05_WARNING                = &If(Q_ROOT_VALUATION_STEP05=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP05_INFO                   = &If(Q_ROOT_VALUATION_STEP05=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP05                        = Q_ROOT_VALUATION
+
+                           
+;----------- Venture Capital Methode
+
+
+
+;==================================================================================================
+.Variables
+PPP     PN C   3               Venture Capital Methode                                              \Q_ROOT_VALUATION_STEP06
+
+;---------------
+; WARNING PANELS
+PPP     PA   1 4               $>Warning voor map 2<$                                               \Q_ROOT_VALUATION_STEP06_WARNING
+PPP     PA     4               $>Info bij stap 2<$                                                  \Q_ROOT_VALUATION_STEP06_INFO
+PPP     PA     4               $>Validatie stap 2<$                                                 \Q_ROOT_VALUATION_STEP06_VALIDATION
+
+;---------------------------------------------------------------------------------------------
+
+;(1)
+PPP     1X     4               Venture Capital Methode                                             \VCMethod_Paragraaf01
+C De Venture Capital methode geeft inzicht in de vereiste aandelenpositie bij een investering. Dit doe je door een keuze te maken in een van de waarderingsmethodieken. Bij de uitgebreide methode dienen de investeringen per investeringsronde met de gewenste rendementen te worden opgegeven. De Internal Rate of Return wordt berekend aan de hand van de investeringen en de opgevoerde tussentijdse ontvangsten. De captables gegeven weer welke aandelenposities vereist zijn om de gewenste rendementen te halen, hierbij is rekening gehouden met de verwatering als er meerdere investeringsronden aanwezig zijn. 
+PPP     PN C   5                                                                                   \VCMethodExitValueDateCheck
+PPP     1A     5                                                                                   \VCMethodExitValueDateText
+PPP     1N D   5               =ValuationDate                                                      \=ValuationDate
+PII     PN D   5               Exit datum per einde                                                \VCMethodExitValueDate
+PII     PN C   5               Grondslag exit waardebepaling                                       \VCMethodExitValueBase
+PII     PN C   5               Multiple grondslag exit restwaardeperiode                           \VCMethodExitValueBaseMultiple
+PPP     PN     5               $>Resulting value of shareholders' equity<$ op exitdatum            \VCMethodValDateValue   -> APVValue
+PII   1 PN     5               Multiple on exit                                                    \VCMethodExitMultiple
+C $>Deze waarde is gebaseerd op de waarde van de comparable per exitdatum (dus geen gemiddelde van diverse grondslagen)<$
+PPP     PN     5               Netto omzet op exitdatum                                            \NetSalesExit 
+PPP     PN     5               EBIT op exitdatum                                                   \EBITExit 
+PPP     PN     5               EBITA op exitdatum                                                  \EBITAExit
+PPP     PN     5               EBITDA op exitdatum                                                 \EBITDAExit
+PPP     PN     5               Eigen vermogen op exitdatum                                         \NetWorthExit
+PPP     PN     5               Bedrijfsresultaat op exitdatum                                      \ProfitAfterTaxExit 
+PPP     PN    -5               Waarde onderneming op exitdatum                                     \VCMethodMultipleGrossValAtExit 
+PPP    -PN     5               $>Market Value of Debt<$ op exitdatum                               \VCMethodMarketValDebtExit = MarketValDebtExit
+PPP    =PN    -5               $>Gross value equity<$                                              \VCMethodGrossEquityValueAtExit 
+;Overige claims
+PPP    -PN     5               $>Value other claims on equity<$                                    \ValOtherEqClaimsAtExit
+PPP     PN     6               =MinorityInterests                                                  \MinorityInterestsAtExit
+III     PN     6               Waarde preferente aandelen                                          \ValuePreferenceSharesAtExit
+III     PN     6               Waarde warrants                                                     \ValueWarrantsAtExit
+III     PN     6               Waarde management opties                                            \ValueManagementOptionsAtExit
+III     PN     6               $>Other<$                                                           \ValueOtherEquityClaimsAtExit
+PPP    =PN    -6               $>Value other claims on equity<$                                    \=ValOtherEqClaimsAtExit
+;Correcties IC
+PPP     PN     5               $>Value non-operating capital<$                                     \ValueNonOpCapAtExit
+PPP     PN     6               $>Present value of non-operational cash flow<$                      \ValueNoOpCashFlowAtExit
+PPP     PN     6               =MarketableSecurities                                               \MarketableSecuritiesAtExit
+PPP     PN     6               =ExcessCash                                                         \ExcessCashAtExit
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapAtExit1
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapAtExit2
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapAtExit3
+III     PN     6               Correctie op niet-operationeel vermogen                             \CorrNotOpInvCapAtExit4
+PPP    =PN    -6               =ValueNonOpCapAPV                                                   \=ValueNonOpCapAtExit
+PPP     PN    -5               $>Resulting value of shareholders' equity<$ op exitdatum            \VCMethodMultipleValAtExit 
+PII     PN     5               Handmatige bepaling resulterende waarde EV                          \VCMethodValueBaseManual   -> VCMethodValueBaseManual 
+PII   1 PN %   5               $>Discount rate<$                                                   \VCMethodDiscountRateCol
+PPP     PN     5               $>Resulting value of shareholders' equity<$ op waarderingsdatum     \VCMethodValueAtValDateColumn
+
+PPP     1X     4               Specificatie van participaties                                      \VCMethod_Paragraaf02
+PII     PN   1 5               Geïnvesteerd bedrag (participatie) eerste ronde                     \VCMethodIC01
+PII     PN D   5               Datum van investering                                               \VCMethodIC01Date
+PII     PN %   5               Verwacht rendement eerste ronde                                     \VCMethodRequiredReturn01
+PII     PN     5               Geïnvesteerd bedrag (participatie) tweede ronde                     \VCMethodIC02
+PII     PN D   5               Datum van investering                                               \VCMethodIC02Date
+PII     PN %   5               Verwacht rendement tweede ronde                                     \VCMethodRequiredReturn02
+PII     PN     5               Geïnvesteerd bedrag (participatie) derde ronde                      \VCMethodIC03
+PII     PN D   5               Datum van investering                                               \VCMethodIC03Date
+PII     PN %   5               Verwacht rendement derde ronde                                      \VCMethodRequiredReturn03
+PPP     PN    -5               Geïnvesteerd bedrag (participatie) totaal                           \VCMethodICTotaal
+PPP     PN %   5               Gewenst rendement gemiddeld                                         \VCMethodAvgRequiredReturn
+PPP     PN %   5               Vereiste positie in het aandelenkapitaal                            \VCMethodRequiredPositionEquityTotal
+
+PII     PN   1 5               $>Number of shares outstanding before investment<$                  \VCMethodSharesBefore
+PPP     PN     5               $>Number of shares outstanding after investment<$                   \VCMethodSharesAfterALL
+PPP     PN     5               Aandelenpositie van investeerder                                    \VCMethodAmountofSharesofParticipationTotal
+PPP   2 PN     5               Eindwaarde per aandeel na alle investeringsrondes                   \VCMethodSharePriceAfterALL
+
+
+PPP     1X     4               Internal Rate of Return                                             \VCMethod_Paragraaf03
+X       FN     5               DummyColumn                                                         \DummyColumnVCMethod_Paragraaf02
+PPP     PN % 1 5               Internal Rate of Return                                             \VCMethodIRR
+PPP     FN     6               Geïnvesteerd bedrag eerste ronde                                    \VCMethodIC01PerT
+PPP     FN     6               Geïnvesteerd bedrag tweede ronde                                    \VCMethodIC02PerT
+PPP     FN     6               Geïnvesteerd bedrag derde ronde                                     \VCMethodIC03PerT
+PII     FN     6               Tussentijdse ontvangsten                                            \VCMethodExtraCashflowPerT
+PPP     FN     6               Exit value                                                          \VCMethodTerminalValuePerT
+PPP    =FN    -6=              Totale kasstromen                                                   \VCMethodTotalCashflowPerT
+PPP     BN   1-6-              =CapitalShortfall                                                   \=CapitalShortfall -> CapitalShortfall
+
+PPP     PN % 1 6               =VCMethodIRR                                                        \=VCMethodIRR
+;PPP     PN   1 6               CW tussentijdse ontvangsten                                         \VCMethodCWExtraCashflow
+;PPP     PN     6               CW exit value                                                       \VCMethodCWTerminalValue
+
+
+PPP     1X     4               Captables                                                           \VCMethodDilution
+PPP     PN C   5               Grondslag exit waardebepaling                                       \=VCMethodExitValueBase
+PPP     PN C   5               Multiple grondslag exit restwaardeperiode                           \=VCMethodExitValueBaseMultiple
+PPP     PN     5               $>Resulting value of shareholders' equity<$                         \=VCMethodMultipleValAtExit 
+PPP     PN     5               Handmatige bepaling grondslag restwaarde eigen vermogen             \=VCMethodValueBaseManual   -> VCMethodValueBaseManual
+PPP     PN     5               Value of firm at exit date                                          \=VCMethodValDateValue
+PPP     PN     5               =VCMethodSharesBefore                                               \=VCMethodSharesBefore
+PPP   2 PN     5               $>Share price before investment<$                                   \VCMethodSharePriceBefore
+
+;captable
+
+; eerste ronde
+PPP     PN   1 5               Geïnvesteerd bedrag (participatie) eerste ronde                     \=VCMethodIC01 
+PPP     PN %   5               =VCMethodRequiredReturn01                                           \=VCMethodRequiredReturn01
+PPP     PN     5               Verwachte eindwaarde van het geinvesteerde vermogen                 \VCMethodParticipationValueAtExit01
+PPP   2 PN %   5               Vereiste positie in het aandelenkapitaal inclusief verwatering      \VCMethodRequiredPositionEquityDiluted01
+PPP     PN     5               $>Number of shares outstanding after investment<$                   \VCMethodSharesAfter01
+PPP     PN     5               Aandelenpositie van investeerder                                    \VCMethodAmountofSharesofParticipation01
+PPP     PN    -5               Pre-money value of positie van investeerder                         \VCMethodPreValueSharesofParticipation01
+PPP     PN     5               Post-money value of positie van investeerder                        \VCMethodPostValueSharesofParticipation01
+PPP   2 PN     5-              $>Share price after investment<$                                    \VCMethodSharePriceAfter01
+               
+; tweede ronde                                                                                                  
+PPP     PN   1 5               Geïnvesteerd bedrag (participatie) tweede ronde                     \VCMethodIC02Dil
+PPP     PN %   5               =VCMethodRequiredReturn02                                           \=VCMethodRequiredReturn02
+PPP     PN     5               Verwachte eindwaarde van het geinvesteerde vermogen                 \VCMethodParticipationValueAtExit02
+PPP   2 PN %   5               Vereiste positie in het aandelenkapitaal inclusief verwatering      \VCMethodRequiredPositionEquityDiluted02
+PPP     PN     5               $>Number of shares outstanding after investment<$                   \VCMethodSharesAfter02
+PPP     PN     5               Aandelenpositie van investeerder                                    \VCMethodAmountofSharesofParticipation02
+PPP     PN    -5               Pre-money value of positie van investeerder                         \VCMethodPreValueSharesofParticipation02
+PPP     PN     5               Post-money value of positie van investeerder                        \VCMethodPostValueSharesofParticipation02
+PPP   2 PN     5-              $>Share price after investment<$                                    \VCMethodSharePriceAfter02
+               
+;derde ronde   
+PPP     PN   1 5               Geïnvesteerd bedrag (participatie) derde ronde                      \VCMethodIC03Dil 
+PPP     PN %   5               =VCMethodRequiredReturn03                                           \=VCMethodRequiredReturn03
+PPP     PN     5               Verwachte eindwaarde van het geinvesteerde vermogen                 \VCMethodParticipationValueAtExit03
+PPP   2 PN %   5               Vereiste positie in het aandelenkapitaal inclusief verwatering      \VCMethodRequiredPositionEquityDiluted03
+PPP     PN     5               $>Number of shares outstanding after investment<$                   \VCMethodSharesAfter03
+PPP     PN     5               Aandelenpositie van investeerder                                    \VCMethodAmountofSharesofParticipation03
+PPP     PN    -5               Pre-money value of positie van investeerder                         \VCMethodPreValueSharesofParticipation03
+PPP     PN     5               Post-money value of positie van investeerder                        \VCMethodPostValueSharesofParticipation03
+PPP   2 PN     5-              $>Share price after investment<$                                    \VCMethodSharePriceAfter03
+
+;hulp variabelen voor dilution
+X       1X     6
+; voor multiples
+PPP    -PN     7               Market Value of Debt op exitdatum                                   \MarketValDebtExit
+               
+PPP   0 PN     7               Datum van investering                                              \VCMethodIC01DateColumn
+PPP   0 PN     7               Datum van investering                                              \VCMethodIC02DateColumn
+PPP   0 PN     7               Datum van investering                                              \VCMethodIC03DateColumn
+PPP   2 PN %   7               Retentiepercentage van positie 01                                  \VCMethodRetention01 
+PPP   2 PN %   7               Retentiepercentage van positie 02                                  \VCMethodRetention02
+PPP   2 PN %   7               Retentiepercentage van positie 03                                  \VCMethodRetention03
+PPP   2 PN %   7               Vereiste positie 01                                                \VCMethodRequiredPositionEquity01
+PPP   2 PN %   7               Vereiste positie 02                                                \VCMethodRequiredPositionEquity02
+PPP   2 PN %   7               Vereiste positie 03                                                \VCMethodRequiredPositionEquity03
+PPP   2 PN     7               Check totale prijs van het aandeel na ronde 01                     \VCMethodCheckSharepriceAfter01   ;wat doet deze variabele? Zie hem verder nergens terugkomen???     
+PPP   2 PN     7               Check totale prijs van het aandeel na ronde 02                     \VCMethodCheckSharepriceAfter02   ;wat doet deze variabele? Zie hem verder nergens terugkomen???     
+PPP   2 PN     7               Check totale prijs van het aandeel na ronde 03                     \VCMethodCheckSharepriceAfter03   ;wat doet deze variabele? Zie hem verder nergens terugkomen???     
+
+PPP     1X     4               $>Source notification<$                                            \VCMethod_Paragraaf05
+PII     PA     5               $>Source notification<$ $>Resulting value of shareholders' equity<$ op exitdatum\SourceNoteVCMethodValAtExit
+
+X        X     3               Hulp variabelen                                                    
+PPP   1 AN %   4               $>Discount rate<$ ($>annual<$)                                      \VCMethodDiscountRate
+
+.Choices
+VCMethodExitValueBase            = "10:APV waarde|20:Multiple waarde|50:Handmatige invoer" 
+VCMethodExitValueBaseMultiple    = "11:$>Company value<$ / $>Net sales<$|12:$>Company value<$ / EBIT|13:$>Company value<$ / EBITA|14:$>Company value<$ / EBITDA|15:$>Company value<$ / $>Net worth<$|16:$>Value of equity<$ / $>Profit after tax<$"
+VCMethodExitValueDateCheck       = "1:Kies een datum die valt tussen het eind van het laatste prognose jaar en het einde van de voorspelperiode|0:"
+
+.Formulas visible
+NetSalesExit                                = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=11) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+EBITExit                                    = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=12) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+EBITAExit                                   = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=13) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+EBITDAExit                                  = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=14) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+NetWorthExit                                = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=15) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+ProfitAfterTaxExit                          = (VCMethodExitValueBaseMultiple[LastTinPeriod(PeriodInT)]=16) And (VCMethodExitValueBase[LastTinPeriod(PeriodInT)]=20)
+
+VCMethodMarketValDebtExit                   = (VCMethodExitValueBase=20) And (VCMethodExitValueBaseMultiple<>16)
+VCMethodMultipleGrossValAtExit              = (VCMethodExitValueBase=20) And (VCMethodExitValueBaseMultiple<>16)
+VCMethodGrossEquityValueAtExit              = (VCMethodExitValueBase=20)
+ValOtherEqClaimsAtExit                      = (VCMethodExitValueBase=20)
+ValueNonOpCapAtExit                         = (VCMethodExitValueBase=20)
+
+VCMethodValDateValue                        = (VCMethodExitValueBase=10)
+VCMethodExitValueBaseMultiple               = (VCMethodExitValueBase=20)
+VCMethodMultipleValAtExit                   = (VCMethodExitValueBase=20)
+VCMethodValueBaseManual                     = (VCMethodExitValueBase=50)
+VCMethodExitMultiple                        = (VCMethodExitValueBase=20)
+                                              
+VCMethodDiscountRateCol                     = (VCMethodChoice=2)
+                                              
+VCMethodIC03                                = DataEntered(VCMethodIC02)
+VCMethodIC03Date                            = DataEntered(VCMethodIC02)
+VCMethodRequiredReturn03                    = DataEntered(VCMethodIC02)
+VCMethodIC02Dil                             = DataEntered(VCMethodIC02)
+VCMethodRequiredReturn02                    = DataEntered(VCMethodIC02)                
+VCMethodParticipationValueAtExit02          = DataEntered(VCMethodIC02)
+VCMethodRequiredPositionEquityDiluted02     = DataEntered(VCMethodIC02)
+VCMethodSharesAfter02                       = DataEntered(VCMethodIC02)
+VCMethodAmountofSharesofParticipation02     = DataEntered(VCMethodIC02)
+VCMethodPreValueSharesofParticipation02     = DataEntered(VCMethodIC02)
+VCMethodPostValueSharesofParticipation02    = DataEntered(VCMethodIC02)
+VCMethodSharePriceAfter02                   = DataEntered(VCMethodIC02)
+VCMethodIC03Dil                             = DataEntered(VCMethodIC03)     
+VCMethodRequiredReturn03                    = DataEntered(VCMethodIC03)     
+VCMethodParticipationValueAtExit03          = DataEntered(VCMethodIC03)     
+VCMethodRequiredPositionEquityDiluted03     = DataEntered(VCMethodIC03)    
+VCMethodSharesAfter03                       = DataEntered(VCMethodIC03)    
+VCMethodAmountofSharesofParticipation03     = DataEntered(VCMethodIC03)    
+VCMethodPreValueSharesofParticipation03     = DataEntered(VCMethodIC03)    
+VCMethodPostValueSharesofParticipation03    = DataEntered(VCMethodIC03)    
+VCMethodSharePriceAfter03                   = DataEntered(VCMethodIC03)
+                                            
+;IRR                                        
+VCMethodIC02PerT                            = DataEntered(VCMethodIC02)    
+VCMethodIC03PerT                            = DataEntered(VCMethodIC03)  
+                                            
+.Formulas NoTrend,Trend                     
+VCMethodExitValueDateText                   = &"$>Waardebepaling mogelijk bij exit tussen eind<$"&" "&Str(YearInT(FirstTinFormulaSet(Trend)))&" "&"$>en eind<$"&" "&Str(YearInT(LastTinFormulaSet(Trend))) 
+VCMethodExitValueDateColumn                 = ValueT(DateToT(VCMethodExitValueDate,PeriodInT))
+;VCMethodExitValueDate                       = LastDateInT(LastTinFormulaSet(Trend,PeriodInT)) 
+VCMethodExitValueDateCheck                  = IF(VCMethodExitValueDate>LastDateInT(LastTinFormulaSet(Trend,PeriodInT)),1,If(VCMethodExitValueDate<FirstDateInT(FirstTinFormulaSet(Trend)),1,0))
+VCMethodExitValueBaseMultiple               = 16 ;Zorgt ervoor dat de keuze die getoond
+
+VCMethodIC01DateColumn                      = If(DataEntered(VCMethodIC01Date),DateToT(VCMethodIC01Date,PeriodInT),ValDateColumn+TsY*1) 
+VCMethodIC02DateColumn                      = If(DataEntered(VCMethodIC02Date),DateToT(VCMethodIC02Date,PeriodInT),ValDateColumn+TsY*2) 
+VCMethodIC03DateColumn                      = If(DataEntered(VCMethodIC03Date),DateToT(VCMethodIC03Date,PeriodInT),ValDateColumn+TsY*3) 
+                                            
+VCMethodIC01PerT                            = If(T=VCMethodIC01DateColumn,-VCMethodIC01,NA)
+VCMethodIC02PerT                            = If(T=VCMethodIC02DateColumn,-VCMethodIC02,NA)
+VCMethodIC03PerT                            = If(T=VCMethodIC03DateColumn,-VCMethodIC03,NA)
+VCMethodExitValueBase                       = 50
+VCMethodValDateValue                        =                                             Case(VCMethodExitValueBase,[10:(APVValueTotal[VCMethodExitValueDateColumn,1])|20:VCMethodMultipleValAtExit|50:VCMethodValueBaseManual])  
+VCMethodTerminalValuePerT                   = OnEr(If(T=VCMethodExitValueDateColumn,(OnER(Case(VCMethodExitValueBase,[10:(APVValueTotal[VCMethodExitValueDateColumn,1])|20:VCMethodMultipleValAtExit|50:VCMethodValueBaseManual]),NA))*If(VCMethodChoice=2,1,VCMethodRequiredPositionEquityTotal),NA),NA)   
+VCMethodExitMultiple                        =                                             Case(VCMethodExitValueBaseMultiple,[11:ValueonNetSalesMultiple|12:ValueonEBITMultiple|13:ValueonEBITAMultiple|14:ValueonEBITDAMultiple|15:ValueonNetWorthMultiple|16:EquityValueonProfitAfterTaxMultiple])  
+
+;----------------------------------
+; multiple berekening at exit 
+VCMethodGrossEquityValueAtExit              = OnZero(VCMethodMultipleGrossValAtExit - MarketValDebtExit,NA)
+MinorityInterestsAtExit                     = FesExpression(GetValue(MinorityInterests     ,VCMethodExitValueDateColumn  ,1,Bookyear))
+ValuePreferenceSharesAtExit                 = FesExpression(GetValue(ValuePreferenceShares ,VCMethodExitValueDateColumn  ,1,Bookyear))
+ValueWarrantsAtExit                         = FesExpression(GetValue(ValueWarrants         ,VCMethodExitValueDateColumn  ,1,Bookyear))
+ValueManagementOptionsAtExit                = FesExpression(GetValue(ValueManagementOptions,VCMethodExitValueDateColumn  ,1,Bookyear))
+ValueOtherEquityClaimsAtExit                = FesExpression(GetValue(ValueOtherEquityClaims,VCMethodExitValueDateColumn  ,1,Bookyear))
+ValueNoOpCashFlowAtExit                     = FesExpression(GetValue(ValueNoOpCashFlow     ,VCMethodExitValueDateColumn  ,1,Bookyear))
+MarketableSecuritiesAtExit                  = FesExpression(GetValue(MarketableSecurities  ,VCMethodExitValueDateColumn  ,1,Bookyear))
+ExcessCashAtExit                            = FesExpression(GetValue(ExcessCash            ,VCMethodExitValueDateColumn  ,1,Bookyear))
+CorrNotOpInvCapAtExit1                      = FesExpression(GetValue(CorrNotOpInvCap1      ,VCMethodExitValueDateColumn  ,1,Bookyear))
+CorrNotOpInvCapAtExit2                      = FesExpression(GetValue(CorrNotOpInvCap2      ,VCMethodExitValueDateColumn  ,1,Bookyear))
+CorrNotOpInvCapAtExit3                      = FesExpression(GetValue(CorrNotOpInvCap3      ,VCMethodExitValueDateColumn  ,1,Bookyear))
+CorrNotOpInvCapAtExit4                      = FesExpression(GetValue(CorrNotOpInvCap4      ,VCMethodExitValueDateColumn  ,1,Bookyear))    
+VCMethodMultipleValAtExit                   =  Max(VCMethodMultipleGrossValAtExit-MarketValDebtExit-ValOtherEqClaimsAtExit+ValueNonOpCapAtExit,NA)
+VCMethodMultipleGrossValAtExit              = VCMethodExitMultiple * Case(VCMethodExitValueBaseMultiple,[11:NetSalesExit|12:EBITExit|13:EBITAExit|14:EBITDAExit|15:NetWorthExit|16:ProfitAfterTaxExit])+MarketValDebtExit*(VCMethodExitValueBaseMultiple=16)
+NetSalesExit                                = FesExpression(GetValue(NetSales       ,VCMethodExitValueDateColumn  ,1,Bookyear))
+EBITDAExit                                  = FesExpression(GetValue(EBITDA         ,VCMethodExitValueDateColumn  ,1,Bookyear))
+EBITAExit                                   = FesExpression(GetValue(EBITA          ,VCMethodExitValueDateColumn  ,1,Bookyear))
+EBITExit                                    = FesExpression(GetValue(EBIT           ,VCMethodExitValueDateColumn  ,1,Bookyear))
+NetWorthExit                                = FesExpression(GetValue(NetWorth       ,VCMethodExitValueDateColumn  ,1,Bookyear))
+ProfitAfterTaxExit                          = FesExpression(GetValue(ProfitAfterTax ,VCMethodExitValueDateColumn  ,1,Bookyear))
+MarketValDebtExit                           = FesExpression(GetValue(MarketValDebt  ,VCMethodExitValueDateColumn  ,1,Bookyear))
+VCMethodDiscountRate                        = If(T=FirstTinFormulaSet(Trend),VCMethodDiscountRateCol, Self[T-1])
+VCMethodValueAtValDateColumn                = OnER( NPV2(VCMethodDiscountRate,VCMethodTerminalValuePerT,Max(ValueT(FirstTinFormulaSet(Trend,PeriodInT)),ValDateColumn+1) ,LastTinPeriod(PeriodInT),ValuationDate-ExpirationFactor) ,NA)
+;------------------------------------
+
+
+;VCMethodExitMultiple                  = Case(VCMethodExitValueBaseMultiple,[11:EquityValueonNetSalesExit|12:EquityValueonEBITDAExit|13:EquityValueonEBITAExit|14:EquityValueonEBITExit|15:EquityValueonNetWorthExit|16:EquityValueonProfitAfterTaxExit])
+;VCMethodPVFrimAtExit                        = VCMethodValDateValue /((1+VCMethodRequiredReturn01)^(VCMethodExitValueDate-ValDateColumn))  
+                                            
+;VCMethodIRR                                 = OnER(IRR(VCMethodTotalCashflowPerT,VCMethodIC01DateColumn,VCMethodExitValueDateColumn),NA)
+VCMethodIRR                                 = OnER(IRR(VCMethodTotalCashflowPerT,1,VCMethodExitValueDateColumn),NA)
+;VCMethodPostMoneyValuation                  = (If(VCMethodExitValueBase=20,VCMethodMultipleValAtValDate,VCMethodValDatePreValue)) + VCMethodIC01
+;VCMethodCWExtraCashflow                     = OnER(NPV(VCMethodRequiredReturn01,VCMethodExtraCashflowPerT,ValDateColumn,VCMethodExitValueDate,ValDateColumn-ExpirationFactor),NA)
+;VCMethodCWTerminalValue                     = OnER(NPV(VCMethodRequiredReturn01,VCMethodTerminalValuePerT,ValDateColumn,VCMethodExitValueDate,ValDateColumn-ExpirationFactor),NA)
+;VCMethodMinimumShare01                      = OnER(VCMethodIC01/(VCMethodPreMoneyValuationAfterDilution01+VCMethodIC01),NA) 
+;VCMethodValueToInvestment01                 = VCMethodMinimumShare01
+;VCMethodTotalInvestment                     = AktInvCap[ValDateColumn] 
+;VCMethodPreMoneyValuationAfterDilution01    = OnZero(VCMethodPreMoneyValuation*(1-VCMethodDilution01),NA)
+                                            
+VCMethodSharePriceBefore                    = OnER(VCMethodValDateValue/VCMethodSharesBefore,NA)
+                                            
+;Eerste ronde, tweede, derde ronde          
+VCMethodRequiredPositionEquity01            = OnER(VCMethodParticipationValueAtExit01/VCMethodValDateValue ,NA)
+VCMethodRequiredPositionEquity02            = OnER(VCMethodParticipationValueAtExit02/VCMethodValDateValue ,NA)
+VCMethodRequiredPositionEquity03            = OnER(VCMethodParticipationValueAtExit03/VCMethodValDateValue ,NA)
+                                            
+VCMethodSharesAfter01                       = OnER(VCMethodSharesBefore  /(1-VCMethodRequiredPositionEquityDiluted01),NA)
+VCMethodSharesAfter02                       = OnER(VCMethodSharesAfter01 /(1-VCMethodRequiredPositionEquityDiluted02),NA)
+VCMethodSharesAfter03                       = OnER(VCMethodSharesAfter02 /(1-VCMethodRequiredPositionEquityDiluted03),NA)
+                                            
+VCMethodParticipationValueAtExit01          = OnER(VCMethodIC01 *((1+VCMethodRequiredReturn01)^((VCMethodExitValueDate-VCMethodIC01Date)/365)),NA)
+VCMethodParticipationValueAtExit02          = OnER(VCMethodIC02 *((1+VCMethodRequiredReturn02)^((VCMethodExitValueDate-VCMethodIC02Date)/365)),NA)
+VCMethodParticipationValueAtExit03          = OnER(VCMethodIC03 *((1+VCMethodRequiredReturn03)^((VCMethodExitValueDate-VCMethodIC03Date)/365)),NA)
+;JB exponentbepaling verbeteren             
+;VCMethodParticipationValueAtExit01          = VCMethodIC01 *((1+VCMethodRequiredReturn01)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC01DateColumn/TsY)))
+;VCMethodParticipationValueAtExit02          = VCMethodIC02 *((1+VCMethodRequiredReturn02)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC02DateColumn/TsY)))
+;VCMethodParticipationValueAtExit03          = VCMethodIC03 *((1+VCMethodRequiredReturn03)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC03DateColumn/TsY)))
+                                            
+VCMethodAmountofSharesofParticipation01     = VCMethodSharesAfter01 - VCMethodSharesBefore
+VCMethodAmountofSharesofParticipation02     = VCMethodSharesAfter02 - VCMethodSharesAfter01
+VCMethodAmountofSharesofParticipation03     = VCMethodSharesAfter03 - VCMethodSharesAfter02
+VCMethodAmountofSharesofParticipationTotal  = VCMethodAmountofSharesofParticipation01+VCMethodAmountofSharesofParticipation02+VCMethodAmountofSharesofParticipation03
+
+VCMethodPostValueSharesofParticipation01    = OnER(VCMethodIC01/VCMethodRequiredPositionEquityDiluted01,NA)
+VCMethodPostValueSharesofParticipation02    = OnER(VCMethodIC02/VCMethodRequiredPositionEquityDiluted02,NA)
+VCMethodPostValueSharesofParticipation03    = OnER(VCMethodIC03/VCMethodRequiredPositionEquityDiluted03,NA)
+                                            
+VCMethodPreValueSharesofParticipation01     = VCMethodPostValueSharesofParticipation01-VCMethodIC01
+VCMethodPreValueSharesofParticipation02     = VCMethodPostValueSharesofParticipation02-VCMethodIC02
+VCMethodPreValueSharesofParticipation03     = VCMethodPostValueSharesofParticipation03-VCMethodIC03
+                                            
+VCMethodSharePriceAfter01                   = OnER(VCMethodIC01/VCMethodAmountofSharesofParticipation01,NA)
+VCMethodSharePriceAfter02                   = OnER(VCMethodIC02/VCMethodAmountofSharesofParticipation02,NA)
+VCMethodSharePriceAfter03                   = OnER(VCMethodIC03/VCMethodAmountofSharesofParticipation03,NA)
+                                            
+;Dilution                                   
+VCMethodRetention01                         = 1-(VCMethodRequiredPositionEquity02+VCMethodRequiredPositionEquity03)
+VCMethodRetention02                         = 1-(VCMethodRequiredPositionEquity03)
+VCMethodRetention03                         = 1
+                                            
+VCMethodRequiredPositionEquityDiluted01     = OnER(VCMethodRequiredPositionEquity01/VCMethodRetention01,NA)
+VCMethodRequiredPositionEquityDiluted02     = OnER(VCMethodRequiredPositionEquity02/VCMethodRetention02,NA)
+VCMethodRequiredPositionEquityDiluted03     = OnER(VCMethodRequiredPositionEquity03/VCMethodRetention03,NA)
+VCMethodRequiredPositionEquityTotal         = OnER(VCMethodAmountofSharesofParticipationTotal/VCMethodSharesAfterALL,NA) 
+                                            
+;JB exponentbepaling controleren/testen!
+VCMethodCheckSharepriceAfter01              = OnER(VCMethodSharePriceAfter01 *((1+VCMethodRequiredReturn01)^((VCMethodExitValueDate-VCMethodIC01Date)/365)),NA)
+VCMethodCheckSharepriceAfter02              = OnER(VCMethodSharePriceAfter02 *((1+VCMethodRequiredReturn02)^((VCMethodExitValueDate-VCMethodIC02Date)/365)),NA)
+VCMethodCheckSharepriceAfter03              = OnER(VCMethodSharePriceAfter03 *((1+VCMethodRequiredReturn03)^((VCMethodExitValueDate-VCMethodIC03Date)/365)),NA)
+;VCMethodCheckSharepriceAfter01              = OnER(VCMethodSharePriceAfter01 *((1+VCMethodRequiredReturn01)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC01DateColumn/TsY))),NA)
+;VCMethodCheckSharepriceAfter02              = OnER(VCMethodSharePriceAfter02 *((1+VCMethodRequiredReturn02)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC02DateColumn/TsY))),NA)
+;VCMethodCheckSharepriceAfter03              = OnER(VCMethodSharePriceAfter03 *((1+VCMethodRequiredReturn03)^((VCMethodExitValueDateColumn/TsY)-(VCMethodIC03DateColumn/TsY))),NA)
+                                            
+VCMethodIC02Dil                             = VCMethodIC02
+VCMethodIC03Dil                             = VCMethodIC03
+VCMethodSharesAfterALL                      = MAX(MAX(VCMethodSharesAfter03,VCMethodSharesAfter02),VCMethodSharesAfter01)
+VCMethodSharePriceAfterALL                  = OnER(VCMethodValDateValue/VCMethodSharesAfterALL,NA)
+VCMethodICTotaal                            = VCMethodIC01+VCMethodIC02+VCMethodIC03
+VCMethodAvgRequiredReturn                   = VCMethodRequiredReturn01*OnER(VCMethodIC01/VCMethodICTotaal,NA)+VCMethodRequiredReturn02*OnER(VCMethodIC02/VCMethodICTotaal,NA)+VCMethodRequiredReturn03*OnER(VCMethodIC03/VCMethodICTotaal,NA)
+
+.Formulas InputRequired
+SourceNoteVCMethodValAtExit                 = (VCMethodChoice<>0)
+VCMethodIC01                                = (VCMethodChoice=1)
+VCMethodIC01Date                            = (VCMethodChoice=1)
+VCMethodRequiredReturn01                    = (VCMethodChoice=1)
+VCMethodIC02Date                            = (VCMethodChoice=1) And DataEntered(VCMethodIC02) And Visible(VCMethodIC02Date)
+VCMethodRequiredReturn02                    = (VCMethodChoice=1) And DataEntered(VCMethodIC02) And Visible(VCMethodRequiredReturn02)
+VCMethodIC03Date                            = (VCMethodChoice=1) And DataEntered(VCMethodIC03) And Visible(VCMethodIC03Date)        
+VCMethodRequiredReturn03                    = (VCMethodChoice=1) And DataEntered(VCMethodIC03) And Visible(VCMethodRequiredReturn03)
+VCMethodSharesBefore                        = (VCMethodChoice=1)
+VCMethodDiscountRateCol                     = (VCMethodChoice=2)
+
+.Hints
+;Q_ROOT_VALUATION_STEP01 = "Kies hieronder welke waarderingsmethodieken je wil gebruiken. Bij gebruik van de APV methode is het van belang keuze te maken of de kasstromen per einde of per medio periode vervallen."
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      PN     3               $>Hulpvariabelen<$                                                  \Q_ROOT_VALUATION_STEP06_Hulpvariabelen
+PPP     PN     4               $>Aantal verplichte velden (2)<$                                    \Q_ROOT_VALUATION_STEP06_REQUIREDVARS
+PPP     PN     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_ROOT_VALUATION_STEP06_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_ROOT_VALUATION_STEP06_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP06, Q_ROOT_VALUATION_STEP06_REQUIREDVARS),InputRequired(X))")
+Q_ROOT_VALUATION_STEP06_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_ROOT_VALUATION_STEP06, Q_ROOT_VALUATION_STEP06_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_ROOT_VALUATION_STEP06                        = (Q_ROOT_VALUATION_STEP06_ENTEREDREQUIREDVARS=Q_ROOT_VALUATION_STEP06_REQUIREDVARS)
+Q_ROOT_VALUATION_STEP06_WARNING                = &If(Q_ROOT_VALUATION_STEP06=0,"Nog niet alle verplichte velden zijn ingevuld","")
+Q_ROOT_VALUATION_STEP06_INFO                   = &If(Q_ROOT_VALUATION_STEP06=1,"Deze stap is compleet","")
+
+.Choices
+Q_ROOT_VALUATION_STEP06                        = Q_ROOT_VALUATION
+
+;------ resultaten--------
+
+.Variables
+PPP     1X   1 3               $>Uitkomsten<$                                  \ValuationResults   
+PPP     1X   1 4               $>Uitkomsten<$                                  \ValuationResults_Paragraaf01   
+PPP     1N D   5               =ValuationDate                                  \=ValuationDate->ValuationDate  
+PPP     1X   1 4               $>Waarde eigen vermogen<$                       \ValuationResults_Paragraaf02 
+PPP     PN     5               $>Value of equity<$ (APV)                       \=APVValue
+PPP     PN     5               Gemiddelde van de multiples                     \AvgEquityValue 
+PPP     PN     5               =ValueonNetSalesMultiple                        \=EquityValueonNetSalesNu
+PPP     PN     5               =ValueonEBITDAMultiple                          \=EquityValueonEBITDANu
+PPP     PN     5               =ValueonEBITAMultiple                           \=EquityValueonEBITANu
+PPP     PN     5               =ValueonEBITMultiple                            \=EquityValueonEBITNu
+PPP     PN     5               =ValueonNetWorthMultiple                        \=EquityValueonNetWorthNu
+PPP     PN     5               =EquityValueonProfitAfterTaxMultiple            \=EquityValueonProfitAfterTaxNu
+PPP     1X   1 4               $>Kengetallen<$                                 \ValuationResults_Paragraaf03 
+X       FN     5               DummyColumn                                     \DummyColumnValuationResults_Paragraaf03 
+PPP  M1 CN %   5               Groei netto bedrijfsresultaat                   \=GrNOPLAT
+PPP  M1 CN %   5               Groei operationeel geïnv. vermogen              \RatioGrowthOperInv
+PPP  M  CN     5               Netto investeringsvoet                          \RatioNetInv
+PPP  M  CN     5               Bruto investeringsvoet                          \RatioGrossNetInv
+PPP  M1 CN %   5               Eigen Vermogen / Geïnv. vermogen                \RatioEquityInv
+PPP  M1 CN %   5               Aangepast EV / Geïnv.vermogen                   \RatioAdjEquityInv
+PPP  M1 CN %   5               Langlopend VV / Geïnv. vermogen                 \RatioVVInv
+PPP  M1 CN %   5               Aangepast VV / Geïnv. vermogen                  \RatioAdjVVInv
+PPP     1X   1 4               Scenario uitkomsten APV                         \ValuationResults_Paragraaf04
+PPP     PN     5               APV waarde basis                                                    \=APVValue
+PPP     PN     5               APV waarde (kostenvoet verhoogd)        	                   \=APVValueLowerBound   
+PPP     PN     5               APV waarde (kostenvoet verlaagd)                                    \=APVValueUpperBound
+PPP     PN     5               APV waarde (cashflows verlaagd)                                     \=APVValueFCFLow
+PPP     PN     5               APV waarde (cashflows verhoogd)                                     \=APVValueFCFHigh
+PPP     PN     5               APV waarde (cashflows verlaagd, kostenvoet verhoogd)                \=APVValueLowerBoundFCFLow
+PPP     PN     5               APV waarde (cashflows verlaagd, kostenvoet verlaagd)                \=APVValueLowerBoundFCFHigh
+PPP     PN     5               APV waarde (cashflows verhoogd, kostenvoet verhoogd)                \=APVValueUpperBoundFHFLow
+PPP     PN     5               APV waarde (cashflows verhoogd, kostenvoet verlaagd)                \=APVValueUpperBoundFCFHigh
+
+
+.Formulas Trend, NoTrend
+;GrNOPLAT                                  = OnER((FesExpression(GetValue(NOPLAT,T,1,Bookyear))/FesExpression(GetValue(NOPLAT,GetT(T,-TsY),1,Bookyear)))-1,NA)
+GrNOPLAT                                  = RelMut(NOPLAT)
+;RatioGrowthOperInv                        = OnER((FesExpression(GetValue(OpInvCap,T,1,Bookyear))/FesExpression(GetValue(OpInvCap,GetT(T,-TsY),1,Bookyear)))-1,NA)    
+RatioGrowthOperInv                        = RelMut(OpInvCap)
+RatioNetInv                               = OnER((FesExpression(GetValue(GrossInvestment,T,1,Backward))-FesExpression(GetValue(DepreciationOfAssets,T,1,Backward)))/FesExpression(GetValue(NOPLAT,T,1,Backward)),NA)    
+RatioGrossNetInv                          = OnER((FesExpression(GetValue(GrossInvestment,T,1,Backward))/FesExpression(GetValue(GrossCashFlow,T,1,Backward))),NA)    
+RatioEquityInv                            = OnER((FesExpression(GetValue(NetWorth,T,1,Backward))/FesExpression(GetValue(PasInvCap,T,1,Backward))),NA)            
+RatioAdjEquityInv                         = OnER((FesExpression(GetValue(AdjEquity,T,1,Backward))/FesExpression(GetValue(PasInvCap,T,1,Backward))),NA)      
+RatioVVInv                                = OnER((FesExpression(GetValue(NonCurrentLiabilities,T,1,Backward))/FesExpression(GetValue(PasInvCap,T,1,Backward))),NA)                 
+RatioAdjVVInv                             = OnER((FesExpression(GetValue(AdjDebt,T,1,Backward))-FesExpression(GetValue(NonCurrentLiabilities,T,1,Backward)))/FesExpression(GetValue(PasInvCap,T,1,Backward)),NA) 
+
+.Formulas Visible
+AvgEquityValue                            = (EquityValueonNetSalesChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITDAChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITAChoice[LastTinPeriod(PeriodInT)]+EquityValueonEBITChoice[LastTinPeriod(PeriodInT)]+EquityValueonNetWorthChoice[LastTinPeriod(PeriodInT)]+EquityValueonProfitAfterTaxChoice[LastTinPeriod(PeriodInT)])>0

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?><finanData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<header>
+<companyName>BOUW FRANCIS BOSTOEN</companyName><documentCode></documentCode>
+<codeList>Belfirst</codeList><creator>XML-kolom toegevoegd aan Excel BVD data spreadsheet</creator>
+<buildDate>2015-12-17</buildDate>
+</header>
+<timeLines><timeLine><columns><column id="1"><startDate>2014-01-01</startDate><endDate>2014-12-31</endDate></column></columns></timeLine></timeLines>
+<accounts>
+
+<account id="2028"><cells><cell columnId="1">4800564</cell></cells></account>
+
+<account id="21"><cells><cell columnId="1">1549710</cell></cells></account>
+<account id="2227"><cells><cell columnId="1">1685409</cell></cells></account>
+<account id="22"><cells><cell columnId="1">128588</cell></cells></account>
+<account id="23"><cells><cell columnId="1">234185</cell></cells></account>
+<account id="24"><cells><cell columnId="1">688672</cell></cells></account>
+<account id="25"><cells><cell columnId="1">579250</cell></cells></account>
+<account id="26"><cells><cell columnId="1">54714</cell></cells></account>
+<account id="27"><cells><cell columnId="1">0</cell></cells></account>
+<account id="28"><cells><cell columnId="1">1565444</cell></cells></account>
+<account id="2801"><cells><cell columnId="1">685437</cell></cells></account>
+<account id="280"><cells><cell columnId="1">685437</cell></cells></account>
+<account id="281"><cells><cell columnId="1">0</cell></cells></account>
+<account id="2823"><cells><cell columnId="1">55250</cell></cells></account>
+<account id="282"><cells><cell columnId="1">55250</cell></cells></account>
+<account id="283"><cells><cell columnId="1">0</cell></cells></account>
+<account id="2848"><cells><cell columnId="1">824757</cell></cells></account>
+<account id="284"><cells><cell columnId="1">15875</cell></cells></account>
+<account id="2858"><cells><cell columnId="1">808882</cell></cells></account>
+
+<account id="2958"><cells><cell columnId="1">102168002</cell></cells></account>
+<account id="29"><cells><cell columnId="1">93593</cell></cells></account>
+<account id="290"><cells><cell columnId="1">0</cell></cells></account>
+<account id="291"><cells><cell columnId="1">93593</cell></cells></account>
+<account id="3"><cells><cell columnId="1">71587815</cell></cells></account>
+<account id="3036"><cells><cell columnId="1">26003433</cell></cells></account>
+<account id="3031"><cells><cell columnId="1">868131</cell></cells></account>
+<account id="32"><cells><cell columnId="1">0</cell></cells></account>
+<account id="33"><cells><cell columnId="1">0</cell></cells></account>
+<account id="34"><cells><cell columnId="1">0</cell></cells></account>
+<account id="35"><cells><cell columnId="1">25135302</cell></cells></account>
+<account id="36"><cells><cell columnId="1">0</cell></cells></account>
+<account id="37"><cells><cell columnId="1">45584383</cell></cells></account>
+<account id="4041"><cells><cell columnId="1">29179607</cell></cells></account>
+<account id="40"><cells><cell columnId="1">5459004</cell></cells></account>
+<account id="41"><cells><cell columnId="1">23720603</cell></cells></account>
+
+<account id="50"><cells><cell columnId="1">0</cell></cells></account>
+<account id="5153"><cells><cell columnId="1">0</cell></cells></account>
+<account id="5458"><cells><cell columnId="1">309402</cell></cells></account>
+<account id="4901"><cells><cell columnId="1">997585</cell></cells></account>
+
+<account id="2058"><cells><cell columnId="1">106968566</cell></cells></account>
+
+
+
+<account id="1015"><cells><cell columnId="1">18201959</cell></cells></account>
+<account id="10"><cells><cell columnId="1">17618576</cell></cells></account>
+<account id="100"><cells><cell columnId="1">17618576</cell></cells></account>
+<account id="101"><cells><cell columnId="1">0</cell></cells></account>
+
+
+<account id="13"><cells><cell columnId="1">3368257</cell></cells></account>
+<account id="130"><cells><cell columnId="1">1741979</cell></cells></account>
+<account id="131"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1310"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1311"><cells><cell columnId="1">0</cell></cells></account>
+<account id="132"><cells><cell columnId="1">150000</cell></cells></account>
+<account id="133"><cells><cell columnId="1">1476279</cell></cells></account>
+<account id="14"><cells><cell columnId="1">-2784874</cell></cells></account>
+
+
+
+<account id="16"><cells><cell columnId="1">2106852</cell></cells></account>
+<account id="1605"><cells><cell columnId="1">2106852</cell></cells></account>
+<account id="160"><cells><cell columnId="1">0</cell></cells></account>
+<account id="161"><cells><cell columnId="1">0</cell></cells></account>
+<account id="162"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1635"><cells><cell columnId="1">2106852</cell></cells></account>
+<account id="168"><cells><cell columnId="1">0</cell></cells></account>
+
+<account id="1749"><cells><cell columnId="1">86659755</cell></cells></account>
+<account id="17"><cells><cell columnId="1">10001910</cell></cells></account>
+<account id="1704"><cells><cell columnId="1">9372406</cell></cells></account>
+<account id="170"><cells><cell columnId="1">8866000</cell></cells></account>
+<account id="171"><cells><cell columnId="1">0</cell></cells></account>
+<account id="172"><cells><cell columnId="1">506406</cell></cells></account>
+<account id="173"><cells><cell columnId="1">0</cell></cells></account>
+<account id="174"><cells><cell columnId="1">0</cell></cells></account>
+<account id="175"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1750"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1751"><cells><cell columnId="1">0</cell></cells></account>
+<account id="176"><cells><cell columnId="1">0</cell></cells></account>
+<account id="1789"><cells><cell columnId="1">629504</cell></cells></account>
+<account id="4248"><cells><cell columnId="1">75674026</cell></cells></account>
+<account id="42"><cells><cell columnId="1">38657</cell></cells></account>
+<account id="43"><cells><cell columnId="1">34986206</cell></cells></account>
+<account id="4308"><cells><cell columnId="1">34986206</cell></cells></account>
+<account id="439"><cells><cell columnId="1">0</cell></cells></account>
+<account id="44"><cells><cell columnId="1">7816405</cell></cells></account>
+<account id="4404"><cells><cell columnId="1">7816405</cell></cells></account>
+<account id="441"><cells><cell columnId="1">0</cell></cells></account>
+<account id="46"><cells><cell columnId="1">11301537</cell></cells></account>
+<account id="45"><cells><cell columnId="1">4288295</cell></cells></account>
+<account id="4503"><cells><cell columnId="1">3750210</cell></cells></account>
+<account id="4549"><cells><cell columnId="1">538085</cell></cells></account>
+<account id="4748"><cells><cell columnId="1">17242926</cell></cells></account>
+<account id="4923"><cells><cell columnId="1">983819</cell></cells></account>
+
+<account id="1049"><cells><cell columnId="1">106968566</cell></cells></account>
+
+
+<account id="9087"><cells><cell columnId="1">136</cell></cells></account>
+
+<account id="7074-60-61"><cells><cell columnId="1">9892399</cell></cells></account>
+
+<account id="7074"><cells><cell columnId="1">56789801</cell></cells></account>
+<account id="70"><cells><cell columnId="1">57207751</cell></cells></account>
+<account id="71"><cells><cell columnId="1">-1266225</cell></cells></account>
+<account id="72"><cells><cell columnId="1">0</cell></cells></account>
+<account id="74"><cells><cell columnId="1">848276</cell></cells></account>
+<account id="6064"><cells><cell columnId="1">56994698</cell></cells></account>
+<account id="60"><cells><cell columnId="1">39538328</cell></cells></account>
+<account id="6008"><cells><cell columnId="1">37051953</cell></cells></account>
+<account id="609"><cells><cell columnId="1">2486375</cell></cells></account>
+<account id="61"><cells><cell columnId="1">7359074</cell></cells></account>
+<account id="62"><cells><cell columnId="1">7567988</cell></cells></account>
+<account id="630"><cells><cell columnId="1">1296961</cell></cells></account>
+<account id="6314"><cells><cell columnId="1">805909</cell></cells></account>
+<account id="6357"><cells><cell columnId="1">-227848</cell></cells></account>
+<account id="6408"><cells><cell columnId="1">654285</cell></cells></account>
+<account id="649"><cells><cell columnId="1">0</cell></cells></account>
+<account id="9901"><cells><cell columnId="1">-204896</cell></cells></account>
+<account id="75"><cells><cell columnId="1">378873</cell></cells></account>
+<account id="750"><cells><cell columnId="1">0</cell></cells></account>
+<account id="751"><cells><cell columnId="1">103480</cell></cells></account>
+<account id="7529"><cells><cell columnId="1">275392</cell></cells></account>
+<account id="65"><cells><cell columnId="1">2867420</cell></cells></account>
+<account id="650"><cells><cell columnId="1">2260516</cell></cells></account>
+<account id="651"><cells><cell columnId="1">275011</cell></cells></account>
+<account id="6529"><cells><cell columnId="1">331893</cell></cells></account>
+<account id="9902"><cells><cell columnId="1">-2693444</cell></cells></account>
+<account id="76"><cells><cell columnId="1">1261</cell></cells></account>
+<account id="760"><cells><cell columnId="1">0</cell></cells></account>
+<account id="761"><cells><cell columnId="1">0</cell></cells></account>
+<account id="762"><cells><cell columnId="1">0</cell></cells></account>
+<account id="763"><cells><cell columnId="1">1261</cell></cells></account>
+<account id="7649"><cells><cell columnId="1">0</cell></cells></account>
+<account id="66"><cells><cell columnId="1">90711</cell></cells></account>
+<account id="660"><cells><cell columnId="1">0</cell></cells></account>
+<account id="661"><cells><cell columnId="1">0</cell></cells></account>
+<account id="662"><cells><cell columnId="1">0</cell></cells></account>
+<account id="663"><cells><cell columnId="1">2499</cell></cells></account>
+<account id="6648"><cells><cell columnId="1">88212</cell></cells></account>
+<account id="669"><cells><cell columnId="1">0</cell></cells></account>
+<account id="9903"><cells><cell columnId="1">-2782893</cell></cells></account>
+
+
+<account id="6777"><cells><cell columnId="1">1980</cell></cells></account>
+<account id="6703"><cells><cell columnId="1">1980</cell></cells></account>
+<account id="77"><cells><cell columnId="1">0</cell></cells></account>
+<account id="9904"><cells><cell columnId="1">-2784874</cell></cells></account>
+
+
+<account id="9905"><cells><cell columnId="1">-2784874</cell></cells></account>
+
+
+
+<account id="9906"><cells><cell columnId="1">-10834679</cell></cells></account>
+<account id="9905"><cells><cell columnId="1">-2784874</cell></cells></account>
+<account id="14P"><cells><cell columnId="1">-8049806</cell></cells></account>
+<account id="7912"><cells><cell columnId="1">8049806</cell></cells></account>
+<account id="791"><cells><cell columnId="1">8049806</cell></cells></account>
+<account id="792"><cells><cell columnId="1">0</cell></cells></account>
+<account id="6912"><cells><cell columnId="1">0</cell></cells></account>
+<account id="691"><cells><cell columnId="1">0</cell></cells></account>
+<account id="6920"><cells><cell columnId="1">0</cell></cells></account>
+<account id="6921"><cells><cell columnId="1">0</cell></cells></account>
+<account id="14"><cells><cell columnId="1">-2784874</cell></cells></account>
+<account id="794"><cells><cell columnId="1">0</cell></cells></account>
+<account id="6946"><cells><cell columnId="1">0</cell></cells></account>
+<account id="694"><cells><cell columnId="1">0</cell></cells></account>
+<account id="695"><cells><cell columnId="1">0</cell></cells></account>
+<account id="696"><cells><cell columnId="1">0</cell></cells></account>
+
+
+
+</accounts></finanData>

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type='text/xsl' href='GdetConfigToDb.xsl'?>
+<!-- Modelversion : Model INGSCG3 v1.7.3
+Gegenereerd op  : 20-11-2013 13:55-->
+<configuration xsi:noNamespaceSchemaLocation="GdetConfiguration.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <description>GDET Configuratie Model INGSCG3 v1.7.3 (KBM4)</description>
+  <constraint><![CDATA[  ModelType ='G3' ]]></constraint>
+  <extractionStrategy>INSIDEOUT</extractionStrategy>
+  <filter>
+    <absoluteyears>
+      <year>1</year>
+    </absoluteyears>
+    <period>MainPeriod</period>
+  </filter>
+
+<externalDataSource>                                                        
+<dataSourceJNDI>jdbc/FinanDS</dataSourceJNDI>                             
+  <maximumStringLength>256</maximumStringLength>                             
+  <externalTables>                                                          
+  <externalTable default="true">                                          
+  <uniqueIdColumn>id</uniqueIdColumn>  
+  <documentIdColumn>DOCUMENTID</documentIdColumn>
+  <updateMode>UPDATE</updateMode>                                       
+  <name>EXPORT_G3</name>                                              
+</externalTable>                                                        
+</externalTables>                                                         
+</externalDataSource>                                                       
+  <variables>
+<variable columnName="AansprVermBnk" columnType="DECIMAL">AansprVermBnk</variable>
+<variable columnName="AantalJaarMgt" columnType="DECIMAL">AantalJaarMgt</variable>
+<variable columnName="AdviesProd_Afw_BSK" columnType="DECIMAL">AdviesProd_Afw_BSK</variable>
+<variable columnName="AdviesProd_Afw_LL" columnType="DECIMAL">AdviesProd_Afw_LL</variable>
+<variable columnName="AdviesProd_Afw_Lease" columnType="DECIMAL">AdviesProd_Afw_Lease</variable>
+<variable columnName="AdviesProd_Afw_ML" columnType="DECIMAL">AdviesProd_Afw_ML</variable>
+<variable columnName="AdviesProd_Afw_OffBalance" columnType="DECIMAL">AdviesProd_Afw_OffBalance</variable>
+<variable columnName="AdviesProd_Afw_WK" columnType="DECIMAL">AdviesProd_Afw_WK</variable>
+<variable columnName="AdviesProd_BSK" columnType="DECIMAL">AdviesProd_BSK</variable>
+<variable columnName="AdviesProd_LL" columnType="DECIMAL">AdviesProd_LL</variable>
+<variable columnName="AdviesProd_Lease" columnType="DECIMAL">AdviesProd_Lease</variable>
+<variable columnName="AdviesProd_ML" columnType="DECIMAL">AdviesProd_ML</variable>
+<variable columnName="AdviesProd_OffBalance" columnType="DECIMAL">AdviesProd_OffBalance</variable>
+<variable columnName="AdviesProd_WK" columnType="DECIMAL">AdviesProd_WK</variable>
+<variable columnName="AflossingenNaKred" columnType="DECIMAL">AflossingenNaKred</variable>
+<variable columnName="BKRToetsUitgevoerd" columnType="DECIMAL">BKRToetsUitgevoerd</variable>
+<variable columnName="BSKOnderDekking" columnType="DECIMAL">BSKOnderDekking</variable>
+<variable columnName="BSKOnderDekkingperc" columnType="DECIMAL">BSKOnderDekkingperc</variable>
+<variable columnName="BalanstotaalAVBnk" columnType="DECIMAL">BalanstotaalAVBnk</variable>
+<variable columnName="BedragHerfinancieringKVV" columnType="DECIMAL">BedragHerfinancieringKVV</variable>
+<variable columnName="BedragHerfinancieringLVV" columnType="DECIMAL">BedragHerfinancieringLVV</variable>
+<variable columnName="BeleidMarktPartij" columnType="DECIMAL">BeleidMarktPartij</variable>
+<variable columnName="BenodigdBedrag" columnType="DECIMAL">BenodigdBedrag</variable>
+<variable columnName="BereidTotBSK" columnType="DECIMAL">BereidTotBSK</variable>
+<variable columnName="BestaandObligo" columnType="DECIMAL">BestaandObligo</variable>
+<variable columnName="BestaandeKlant" columnType="DECIMAL">BestaandeKlant</variable>
+<variable columnName="CommitmentAandeelh" columnType="DECIMAL">CommitmentAandeelh</variable>
+<variable columnName="ContinuiteitMgt" columnType="DECIMAL">ContinuiteitMgt</variable>
+<variable columnName="DaadkrachtManagement" columnType="DECIMAL">DaadkrachtManagement</variable>
+<variable columnName="DeelVanGroep" columnType="DECIMAL">DeelVanGroep</variable>
+<variable columnName="Def_Besluit" columnType="DECIMAL">Def_Besluit</variable>
+<variable columnName="Def_BesluitDatum" columnType="DATE">Def_BesluitDatum</variable>
+<variable columnName="Definitief" columnType="DECIMAL">Definitief</variable>
+<variable columnName="Dekkingsgraad" columnType="DECIMAL">Dekkingsgraad</variable>
+<variable columnName="DominanteSectorMarkt" columnType="DECIMAL">DominanteSectorMarkt</variable>
+<variable columnName="DuurOverstanden" columnType="DECIMAL">DuurOverstanden</variable>
+<variable columnName="EBITDACorrected" columnType="DECIMAL">EBITDACorrected</variable>
+<variable columnName="ESRPolicy" columnType="DECIMAL">ESRPolicy</variable>
+<variable columnName="EigenInbreng" columnType="DECIMAL">EigenInbreng</variable>
+<variable columnName="Eindscore" columnType="DECIMAL">EindScore</variable>
+<variable columnName="FPS_FINAN_USER" columnType="STRING">FPS_FINAN_USER</variable>
+<variable columnName="FPS_FINAN_USER_ROLES" columnType="STRING">FPS_FINAN_USER_ROLES</variable>
+<variable columnName="FPS_VAR_Accountmanager" columnType="STRING">FPS_VAR_Accountmanager</variable>
+<variable columnName="FPS_VAR_BIK_CODE" columnType="STRING">FPS_VAR_BIK_CODE</variable>
+<variable columnName="FPS_VAR_BIK_Omschr" columnType="STRING">FPS_VAR_BIK_Omschr</variable>
+<variable columnName="FPS_VAR_BvDID" columnType="STRING">FPS_VAR_BvDID</variable>
+<variable columnName="FPS_VAR_Emailadres" columnType="STRING">FPS_VAR_Emailadres</variable>
+<variable columnName="FPS_VAR_GridId" columnType="STRING">FPS_VAR_GridId</variable>
+<variable columnName="FPS_VAR_Housenumber" columnType="STRING">FPS_VAR_Housenumber</variable>
+<variable columnName="FPS_VAR_KVKnr" columnType="STRING">FPS_VAR_KVKnr</variable>
+<variable columnName="FPS_VAR_Kantoor" columnType="STRING">FPS_VAR_Kantoor</variable>
+<variable columnName="FPS_VAR_Land" columnType="STRING">FPS_VAR_Land</variable>
+<variable columnName="FPS_VAR_Naam" columnType="STRING">FPS_VAR_Naam</variable>
+<variable columnName="FPS_VAR_Postcode" columnType="STRING">FPS_VAR_Postcode</variable>
+<variable columnName="FPS_VAR_Provincie" columnType="STRING">FPS_VAR_Provincie</variable>
+<variable columnName="FPS_VAR_Rechtsvorm_nr" columnType="STRING">FPS_VAR_Rechtsvorm_nr</variable>
+<variable columnName="FPS_VAR_Rechtsvorm_omschr" columnType="STRING">FPS_VAR_Rechtsvorm_omschr</variable>
+<variable columnName="FPS_VAR_Relatienummer" columnType="STRING">FPS_VAR_Relatienummer</variable>
+<variable columnName="FPS_VAR_Straat" columnType="STRING">FPS_VAR_Straat</variable>
+<variable columnName="FPS_VAR_Telefoon" columnType="STRING">FPS_VAR_Telefoon</variable>
+<variable columnName="FPS_VAR_Woonplaats" columnType="STRING">FPS_VAR_Woonplaats</variable>
+<variable columnName="Fiatteur" columnType="DECIMAL">Fiatteur</variable>
+<variable columnName="FinKrachtAandeelh" columnType="DECIMAL">FinKrachtAandeelh</variable>
+<variable columnName="FinancialFixedAssetsInv" columnType="DECIMAL">FinancialFixedAssetsInv</variable>
+<variable columnName="FinancieringsbeleidDescription" columnType="STRING">FinancieringsbeleidDescription</variable>
+<variable columnName="FinancieringsbeleidId" columnType="DECIMAL">FinancieringsbeleidId</variable>
+<variable columnName="FurnitureAndEquipmentInv" columnType="DECIMAL">FurnitureAndEquipmentInv</variable>
+<variable columnName="FurnitureAndEquipmentInvLease" columnType="DECIMAL">FurnitureAndEquipmentInvLease</variable>
+<variable columnName="GevrProd_Afwijking" columnType="DECIMAL">GevrProd_Afwijking</variable>
+<variable columnName="GevrProd_BSK" columnType="DECIMAL">GevrProd_BSK</variable>
+<variable columnName="GevrProd_LL" columnType="DECIMAL">GevrProd_LL</variable>
+<variable columnName="GevrProd_Lease" columnType="DECIMAL">GevrProd_Lease</variable>
+<variable columnName="GevrProd_ML" columnType="DECIMAL">GevrProd_ML</variable>
+<variable columnName="GevrProd_NTV" columnType="DECIMAL">GevrProd_NTV</variable>
+<variable columnName="GevrProd_OffBalance" columnType="DECIMAL">GevrProd_OffBalance</variable>
+<variable columnName="GevrProd_Totaal" columnType="DECIMAL">GevrProd_Totaal</variable>
+<variable columnName="GevrProd_WK" columnType="DECIMAL">GevrProd_WK</variable>
+<variable columnName="GevraagdBedrag" columnType="DECIMAL">GevraagdBedrag</variable>
+
+<variable columnName="GrondstoffenPrijsontwikkeling" columnType="DECIMAL">GrondstoffenPrijsontwikkeling</variable>
+<variable columnName="Huisbankier" columnType="DECIMAL">Huisbankier</variable>
+<variable columnName="InbrengAandeelhouders" columnType="DECIMAL">InbrengAandeelhouders</variable>
+<variable columnName="InbrengDerden" columnType="DECIMAL">InbrengDerden</variable>
+<variable columnName="InbrengDerdenAchtergesteld" columnType="DECIMAL">InbrengDerdenAchtergesteld</variable>
+<variable columnName="IntangibleFixedAssetsInv" columnType="DECIMAL">IntangibleFixedAssetsInv</variable>
+<variable columnName="IsCyclisch" columnType="DECIMAL">IsCyclisch</variable>
+<variable columnName="IsKapitaalintensief" columnType="DECIMAL">IsKapitaalintensief</variable>
+<variable columnName="IsUitbreidingsInvestering" columnType="DECIMAL">IsUitbreidingsInvestering</variable>
+<variable columnName="Klantgroep" columnType="DECIMAL">Klantgroep</variable>
+<variable columnName="KnockOuts" columnType="DECIMAL">KnockOuts</variable>
+<variable columnName="KvKnummer" columnType="STRING">KvKnummer</variable>
+<variable columnName="LandAndBuildingsInv" columnType="DECIMAL">LandAndBuildingsInv</variable>
+<variable columnName="LeverageRatioBnk" columnType="DECIMAL">LeverageRatioBnk</variable>
+<variable columnName="LimietGebruik" columnType="DECIMAL">LimietGebruik</variable>
+<variable columnName="MargeVerwachting" columnType="DECIMAL">MargeVerwachting</variable>
+<variable columnName="MargeVerwachtingHist" columnType="DECIMAL">MargeVerwachtingHist</variable>
+<variable columnName="Marktaandeel" columnType="DECIMAL">Marktaandeel</variable>
+<variable columnName="MatrixVersion" columnType="STRING">MatrixVersion</variable>
+<variable columnName="MinParagraafScore" columnType="DECIMAL">MinParagraafScore</variable>
+<variable columnName="ModelType" columnType="STRING">ModelType</variable>
+<variable columnName="ModelVersion" columnType="STRING">ModelVersion</variable>
+
+<variable columnName="NaicsSystemDescription" columnType="STRING">NaicsSystemDescription</variable>
+<variable columnName="NieuwObligo" columnType="DECIMAL">NieuwObligo</variable>
+<variable columnName="OffBalanceInv" columnType="DECIMAL">OffBalanceInv</variable>
+<variable columnName="OmzetStijgingVerwachting" columnType="DECIMAL">OmzetStijgingVerwachting</variable>
+<variable columnName="OprichtingsdatumKvK" columnType="DATE">OprichtingsdatumKvK</variable>
+<variable columnName="OrderRapportFreq" columnType="DECIMAL">OrderRapportFreq</variable>
+<variable columnName="OrderportefeuilleMut" columnType="DECIMAL">OrderportefeuilleMut</variable>
+<variable columnName="OrderportefeuilleOordeel" columnType="DECIMAL">OrderportefeuilleOordeel</variable>
+<variable columnName="OvCorrEigenVermBnk" columnType="DECIMAL">OvCorrEigenVermBnk</variable>
+<variable columnName="PassendRekeningVerloop" columnType="DECIMAL">PassendRekeningVerloop</variable>
+<variable columnName="PeildatumRekening" columnType="DATE">PeildatumRekening</variable>
+<variable columnName="PolicyPaperDescription" columnType="STRING">PolicyPaperDescription</variable>
+<variable columnName="PolicyPaperId" columnType="DECIMAL">PolicyPaperId</variable>
+<variable columnName="PolicyPaperIdNAICS" columnType="DECIMAL">PolicyPaperIdNAICS</variable>
+<variable columnName="PolicyPaperNaicsDescription" columnType="STRING">PolicyPaperNaicsDescription</variable>
+<variable columnName="PrognoseManagementOordeel" columnType="DECIMAL">PrognoseManagementOordeel</variable>
+<variable columnName="Q_Map01" columnType="DECIMAL">Q_Map01</variable>
+<variable columnName="Q_Map02" columnType="DECIMAL">Q_Map02</variable>
+<variable columnName="Q_Map03" columnType="DECIMAL">Q_Map03</variable>
+<variable columnName="Q_Map04" columnType="DECIMAL">Q_Map04</variable>
+<variable columnName="Q_Map05" columnType="DECIMAL">Q_Map05</variable>
+<variable columnName="Q_Map06" columnType="DECIMAL">Q_Map06</variable>
+<variable columnName="Q_Map07" columnType="DECIMAL">Q_Map07</variable>
+<variable columnName="Q_Map08" columnType="DECIMAL">Q_Map08</variable>
+<variable columnName="Q_ROOT" columnType="DECIMAL">Q_ROOT</variable>
+<variable columnName="Q_STATUS" columnType="DECIMAL">Q_STATUS</variable>
+<variable columnName="Q_STATUS_FINAL_BY" columnType="STRING">Q_STATUS_FINAL_BY</variable>
+<variable columnName="Q_STATUS_FINAL_BY_NAME" columnType="STRING">Q_STATUS_FINAL_BY_NAME</variable>
+<variable columnName="Q_STATUS_FINAL_ON" columnType="DATE">Q_STATUS_FINAL_ON</variable>
+<variable columnName="Q_STATUS_MODIFIED_ON" columnType="DATE">Q_STATUS_MODIFIED_ON</variable>
+<variable columnName="Q_STATUS_STARTED_BY" columnType="STRING">Q_STATUS_STARTED_BY</variable>
+<variable columnName="Q_STATUS_STARTED_BY_NAME" columnType="STRING">Q_STATUS_STARTED_BY_NAME</variable>
+<variable columnName="Q_STATUS_STARTED_ON" columnType="DATE">Q_STATUS_STARTED_ON</variable>
+<variable columnName="Rating" columnType="DECIMAL">Rating</variable>
+<variable columnName="RatingControle1" columnType="DECIMAL">RatingControle1</variable>
+<variable columnName="RatingControle2" columnType="DECIMAL">RatingControle2</variable>
+<variable columnName="RatingPrefix" columnType="DECIMAL">RatingPrefix</variable>
+<variable columnName="RecenteBrutoMargeMut" columnType="DECIMAL">RecenteBrutoMargeMut</variable>
+
+
+<variable columnName="Rechtsvorm" columnType="DECIMAL">Rechtsvorm</variable>
+
+<variable columnName="ReportAsLimitedLiabilityCompan" columnType="DECIMAL">ReportAsLimitedLiabilityCompany</variable>
+<variable columnName="SQReferentieLimiet" columnType="DECIMAL">SQReferentieLimiet</variable>
+<variable columnName="Score2Result" columnType="DECIMAL">Score2Result</variable>
+<variable columnName="Score2ResultMatrix" columnType="DECIMAL">Score2ResultMatrix</variable>
+<variable columnName="Score2ResultMax1" columnType="DECIMAL">Score2ResultMax1</variable>
+<variable columnName="Score2ResultMax2" columnType="DECIMAL">Score2ResultMax2</variable>
+<variable columnName="Score302" columnType="DECIMAL">Score302</variable>
+<variable columnName="Score303" columnType="DECIMAL">Score303</variable>
+<variable columnName="Score402" columnType="DECIMAL">Score402</variable>
+<variable columnName="Score501" columnType="DECIMAL">Score501</variable>
+<variable columnName="Score502" columnType="DECIMAL">Score502</variable>
+<variable columnName="Score601" columnType="DECIMAL">Score601</variable>
+<variable columnName="Score602" columnType="DECIMAL">Score602</variable>
+<variable columnName="Score603" columnType="DECIMAL">Score603</variable>
+<variable columnName="ScoreBerekening" columnType="DECIMAL">ScoreBerekening</variable>
+<variable columnName="SolvabiliteitsRatio" columnType="DECIMAL">SolvabiliteitsRatio</variable>
+<variable columnName="SomOverstand" columnType="DECIMAL">SomOverstand</variable>
+<variable columnName="SpreidingAfzetMarkt" columnType="DECIMAL">SpreidingAfzetMarkt</variable>
+<variable columnName="SpreidingLeveranciers" columnType="DECIMAL">SpreidingLeveranciers</variable>
+<variable columnName="Starter" columnType="DECIMAL">Starter</variable>
+<variable columnName="StatusBijKvK" columnType="DECIMAL">StatusBijKvK</variable>
+<variable columnName="SystemSectorcode" columnType="DECIMAL">SystemSectorcode</variable>
+<variable columnName="Toetredingsdrempel" columnType="DECIMAL">Toetredingsdrempel</variable>
+<variable columnName="TransportationEquipmentInv" columnType="DECIMAL">TransportationEquipmentInv</variable>
+<variable columnName="UitbreidingsInvestering" columnType="DECIMAL">UitbreidingsInvestering</variable>
+<variable columnName="Volledig" columnType="DECIMAL">Volledig</variable>
+<variable columnName="VoorNaCalculatieOordeel" columnType="DECIMAL">VoorNaCalculatieOordeel</variable>
+<variable columnName="WinstRapportFreq" columnType="DECIMAL">WinstRapportFreq</variable>
+<variable columnName="WorkingCapitalInvLiqMid" columnType="DECIMAL">WorkingCapitalInvLiqMid</variable>
+<variable columnName="WorkingCapitalInvVoorraad" columnType="DECIMAL">WorkingCapitalInvVoorraad</variable>
+<variable columnName="WorkingCapitalInvVordering" columnType="DECIMAL">WorkingCapitalInvVordering</variable>
+<variable columnName="ZekerhedenPrimair" columnType="DECIMAL">ZekerhedenPrimair</variable>
+<variable columnName="ZekerhedenSecundair" columnType="DECIMAL">ZekerhedenSecundair</variable>
+<variable columnName="fmEBITDABnk" columnType="DECIMAL">fmEBITDABnk</variable>
+<variable columnName="fmEigenVermBnk" columnType="DECIMAL">fmEigenVermBnk</variable>
+<variable columnName="fmFinVastActBnk" columnType="DECIMAL">fmFinVastActBnk</variable>
+<variable columnName="fmImmatVastActAfsPerc" columnType="DECIMAL">fmImmatVastActAfsPerc</variable>
+<variable columnName="fmImmatVastActBnk" columnType="DECIMAL">fmImmatVastActBnk</variable>
+<variable columnName="fmKortVVBnk" columnType="DECIMAL">fmKortVVBnk</variable>
+<variable columnName="fmLangVVBnk" columnType="DECIMAL">fmLangVVBnk</variable>
+<variable columnName="fmLiqMidBnk" columnType="DECIMAL">fmLiqMidBnk</variable>
+<variable columnName="fmMatVastActBnk" columnType="DECIMAL">fmMatVastActBnk</variable>
+<variable columnName="fmOnrGoedAfsPerc" columnType="DECIMAL">fmOnrGoedAfsPerc</variable>
+<variable columnName="fmOvBedrmAfsPerc" columnType="DECIMAL">fmOvBedrmAfsPerc</variable>
+<variable columnName="fmRentePerc" columnType="DECIMAL">fmRentePerc</variable>
+<variable columnName="fmSeniorNetDebtBnk" columnType="DECIMAL">fmSeniorNetDebtBnk</variable>
+<variable columnName="fmSomActBnk" columnType="DECIMAL">fmSomActBnk</variable>
+<variable columnName="fmSomPasBnk" columnType="DECIMAL">fmSomPasBnk</variable>
+<variable columnName="fmTranspmAfsPerc" columnType="DECIMAL">fmTranspmAfsPerc</variable>
+<variable columnName="fmVoorzBnk" columnType="DECIMAL">fmVoorzBnk</variable>
+<variable columnName="fmVordBnk" columnType="DECIMAL">fmVordBnk</variable>
+<variable columnName="fmVrdBnk" columnType="DECIMAL">fmVrdBnk</variable>
+<variable columnName="fmWinstBelStaffel1Perc" columnType="DECIMAL">fmWinstBelStaffel1Perc</variable>
+<variable columnName="fmWinstBelStaffel2Perc" columnType="DECIMAL">fmWinstBelStaffel2Perc</variable>
+<variable columnName="fmWinstBelStaffelGrens" columnType="DECIMAL">fmWinstBelStaffelGrens</variable>
+<variable columnName="ptAantalJaarMgt" columnType="DECIMAL">ptAantalJaarMgt</variable>
+<variable columnName="ptBeleidMarktPartij" columnType="DECIMAL">ptBeleidMarktPartij</variable>
+<variable columnName="ptBestaandeKlant" columnType="DECIMAL">ptBestaandeKlant</variable>
+<variable columnName="ptCommitmentAandeelh" columnType="DECIMAL">ptCommitmentAandeelh</variable>
+<variable columnName="ptContinuiteitMgt" columnType="DECIMAL">ptContinuiteitMgt</variable>
+<variable columnName="ptDaadkrachtManagement" columnType="DECIMAL">ptDaadkrachtManagement</variable>
+<variable columnName="ptDeelVanGroep" columnType="DECIMAL">ptDeelVanGroep</variable>
+<variable columnName="ptDekkingsgraad" columnType="DECIMAL">ptDekkingsgraad</variable>
+<variable columnName="ptDuurOverstanden" columnType="DECIMAL">ptDuurOverstanden</variable>
+<variable columnName="ptFinKrachtAandeelh" columnType="DECIMAL">ptFinKrachtAandeelh</variable>
+<variable columnName="ptGroepCJMO" columnType="DECIMAL">ptGroepCJMO</variable>
+
+<variable columnName="ptGrondstoffenPrijsontwikkelin" columnType="DECIMAL">ptGrondstoffenPrijsontwikkeling</variable>
+<variable columnName="ptHuisbankier" columnType="DECIMAL">ptHuisbankier</variable>
+<variable columnName="ptIsCyclisch" columnType="DECIMAL">ptIsCyclisch</variable>
+<variable columnName="ptIsKapitaalintensief" columnType="DECIMAL">ptIsKapitaalintensief</variable>
+<variable columnName="ptLeverageRatio" columnType="DECIMAL">ptLeverageRatio</variable>
+<variable columnName="ptLimietGebruik" columnType="DECIMAL">ptLimietGebruik</variable>
+<variable columnName="ptMarktaandeel" columnType="DECIMAL">ptMarktaandeel</variable>
+<variable columnName="ptOrderRapportFreq" columnType="DECIMAL">ptOrderRapportFreq</variable>
+<variable columnName="ptOrderportefeuilleMut" columnType="DECIMAL">ptOrderportefeuilleMut</variable>
+<variable columnName="ptOrderportefeuilleOordeel" columnType="DECIMAL">ptOrderportefeuilleOordeel</variable>
+<variable columnName="ptPassendRekeningVerloop" columnType="DECIMAL">ptPassendRekeningVerloop</variable>
+<variable columnName="ptPrognoseManagementOordeel" columnType="DECIMAL">ptPrognoseManagementOordeel</variable>
+<variable columnName="ptRating" columnType="DECIMAL">ptRating</variable>
+<variable columnName="ptRatingControle1" columnType="DECIMAL">ptRatingControle1</variable>
+<variable columnName="ptRatingControle2" columnType="DECIMAL">ptRatingControle2</variable>
+<variable columnName="ptRecenteBrutoMargeMut" columnType="DECIMAL">ptRecenteBrutoMargeMut</variable>
+<variable columnName="ptSolvabiliteitsratio" columnType="DECIMAL">ptSolvabiliteitsratio</variable>
+<variable columnName="ptSomOverstand" columnType="DECIMAL">ptSomOverstand</variable>
+<variable columnName="ptSpreidingAfzetMarkt" columnType="DECIMAL">ptSpreidingAfzetMarkt</variable>
+<variable columnName="ptSpreidingLeveranciers" columnType="DECIMAL">ptSpreidingLeveranciers</variable>
+<variable columnName="ptStarter" columnType="DECIMAL">ptStarter</variable>
+<variable columnName="ptToetredingsdrempel" columnType="DECIMAL">ptToetredingsdrempel</variable>
+<variable columnName="ptVoorNaCalculatieOordeel" columnType="DECIMAL">ptVoorNaCalculatieOordeel</variable>
+<variable columnName="ptWinstRapportFreq" columnType="DECIMAL">ptWinstRapportFreq</variable>
+<variable columnName="scAantalJaarMgt" columnType="DECIMAL">scAantalJaarMgt</variable>
+<variable columnName="scBeleidMarktPartij" columnType="DECIMAL">scBeleidMarktPartij</variable>
+<variable columnName="scBestaandeKlant" columnType="DECIMAL">scBestaandeKlant</variable>
+<variable columnName="scCommitmentAandeelh" columnType="DECIMAL">scCommitmentAandeelh</variable>
+<variable columnName="scContinuiteitMgt" columnType="DECIMAL">scContinuiteitMgt</variable>
+<variable columnName="scDaadkrachtManagement" columnType="DECIMAL">scDaadkrachtManagement</variable>
+<variable columnName="scDeelVanGroep" columnType="DECIMAL">scDeelVanGroep</variable>
+<variable columnName="scDekkingsgraad" columnType="DECIMAL">scDekkingsgraad</variable>
+<variable columnName="scDuurOverstanden" columnType="DECIMAL">scDuurOverstanden</variable>
+<variable columnName="scFinKrachtAandeelh" columnType="DECIMAL">scFinKrachtAandeelh</variable>
+<variable columnName="scGroepCJMO" columnType="DECIMAL">scGroepCJMO</variable>
+
+<variable columnName="scGrondstoffenPrijsontwikkelin" columnType="DECIMAL">scGrondstoffenPrijsontwikkeling</variable>
+<variable columnName="scHuisbankier" columnType="DECIMAL">scHuisbankier</variable>
+<variable columnName="scIsCyclisch" columnType="DECIMAL">scIsCyclisch</variable>
+<variable columnName="scIsKapitaalintensief" columnType="DECIMAL">scIsKapitaalintensief</variable>
+<variable columnName="scLeverageRatio" columnType="DECIMAL">scLeverageRatio</variable>
+<variable columnName="scLimietGebruik" columnType="DECIMAL">scLimietGebruik</variable>
+<variable columnName="scMarktaandeel" columnType="DECIMAL">scMarktaandeel</variable>
+<variable columnName="scOrderRapportFreq" columnType="DECIMAL">scOrderRapportFreq</variable>
+<variable columnName="scOrderportefeuilleMut" columnType="DECIMAL">scOrderportefeuilleMut</variable>
+<variable columnName="scOrderportefeuilleOordeel" columnType="DECIMAL">scOrderportefeuilleOordeel</variable>
+<variable columnName="scParMap302" columnType="DECIMAL">scParMap302</variable>
+<variable columnName="scParMap302MinScore" columnType="DECIMAL">scParMap302MinScore</variable>
+<variable columnName="scParMap303" columnType="DECIMAL">scParMap303</variable>
+<variable columnName="scParMap303MinScore" columnType="DECIMAL">scParMap303MinScore</variable>
+<variable columnName="scParMap402" columnType="DECIMAL">scParMap402</variable>
+<variable columnName="scParMap402MinScore" columnType="DECIMAL">scParMap402MinScore</variable>
+<variable columnName="scParMap501" columnType="DECIMAL">scParMap501</variable>
+<variable columnName="scParMap501MinScore" columnType="DECIMAL">scParMap501MinScore</variable>
+<variable columnName="scParMap502" columnType="DECIMAL">scParMap502</variable>
+<variable columnName="scParMap502MinScore" columnType="DECIMAL">scParMap502MinScore</variable>
+<variable columnName="scParMap601" columnType="DECIMAL">scParMap601</variable>
+<variable columnName="scParMap601MinScore" columnType="DECIMAL">scParMap601MinScore</variable>
+<variable columnName="scParMap602" columnType="DECIMAL">scParMap602</variable>
+<variable columnName="scParMap602MinScore" columnType="DECIMAL">scParMap602MinScore</variable>
+<variable columnName="scParMap603" columnType="DECIMAL">scParMap603</variable>
+<variable columnName="scParMap603MinScore" columnType="DECIMAL">scParMap603MinScore</variable>
+<variable columnName="scParMinScore" columnType="DECIMAL">scParMinScore</variable>
+<variable columnName="scPassendRekeningVerloop" columnType="DECIMAL">scPassendRekeningVerloop</variable>
+<variable columnName="scPrognoseManagementOordeel" columnType="DECIMAL">scPrognoseManagementOordeel</variable>
+<variable columnName="scRating" columnType="DECIMAL">scRating</variable>
+<variable columnName="scRatingControle1" columnType="DECIMAL">scRatingControle1</variable>
+<variable columnName="scRatingControle2" columnType="DECIMAL">scRatingControle2</variable>
+<variable columnName="scRecenteBrutoMargeMut" columnType="DECIMAL">scRecenteBrutoMargeMut</variable>
+<variable columnName="scSolvabiliteitsratio" columnType="DECIMAL">scSolvabiliteitsratio</variable>
+<variable columnName="scSomOverstand" columnType="DECIMAL">scSomOverstand</variable>
+<variable columnName="scSpreidingAfzetMarkt" columnType="DECIMAL">scSpreidingAfzetMarkt</variable>
+<variable columnName="scSpreidingLeveranciers" columnType="DECIMAL">scSpreidingLeveranciers</variable>
+<variable columnName="scStarter" columnType="DECIMAL">scStarter</variable>
+<variable columnName="scToetredingsdrempel" columnType="DECIMAL">scToetredingsdrempel</variable>
+<variable columnName="scVoorNaCalculatieOordeel" columnType="DECIMAL">scVoorNaCalculatieOordeel</variable>
+<variable columnName="scWinstRapportFreq" columnType="DECIMAL">scWinstRapportFreq</variable>
+<variable columnName="wgAantalJaarMgt" columnType="DECIMAL">wgAantalJaarMgt</variable>
+<variable columnName="wgAantalJaarMgtPerc" columnType="DECIMAL">wgAantalJaarMgtPerc</variable>
+<variable columnName="wgBeleidMarktPartij" columnType="DECIMAL">wgBeleidMarktPartij</variable>
+<variable columnName="wgBeleidMarktPartijPerc" columnType="DECIMAL">wgBeleidMarktPartijPerc</variable>
+<variable columnName="wgBestaandeKlant" columnType="DECIMAL">wgBestaandeKlant</variable>
+<variable columnName="wgBestaandeKlantPerc" columnType="DECIMAL">wgBestaandeKlantPerc</variable>
+<variable columnName="wgCommitmentAandeelh" columnType="DECIMAL">wgCommitmentAandeelh</variable>
+<variable columnName="wgCommitmentAandeelhPerc" columnType="DECIMAL">wgCommitmentAandeelhPerc</variable>
+<variable columnName="wgContinuiteitMgt" columnType="DECIMAL">wgContinuiteitMgt</variable>
+<variable columnName="wgContinuiteitMgtPerc" columnType="DECIMAL">wgContinuiteitMgtPerc</variable>
+<variable columnName="wgDaadkrachtManagement" columnType="DECIMAL">wgDaadkrachtManagement</variable>
+<variable columnName="wgDaadkrachtManagementPerc" columnType="DECIMAL">wgDaadkrachtManagementPerc</variable>
+<variable columnName="wgDeelVanGroep" columnType="DECIMAL">wgDeelVanGroep</variable>
+<variable columnName="wgDeelVanGroepPerc" columnType="DECIMAL">wgDeelVanGroepPerc</variable>
+<variable columnName="wgDekkingsgraad" columnType="DECIMAL">wgDekkingsgraad</variable>
+<variable columnName="wgDekkingsgraadPerc" columnType="DECIMAL">wgDekkingsgraadPerc</variable>
+<variable columnName="wgDuurOverstanden" columnType="DECIMAL">wgDuurOverstanden</variable>
+<variable columnName="wgDuurOverstandenPerc" columnType="DECIMAL">wgDuurOverstandenPerc</variable>
+<variable columnName="wgFinKrachtAandeelhPerc" columnType="DECIMAL">wgFinKrachtAandeelhPerc</variable>
+<variable columnName="wgFinkrachtAandeelh" columnType="DECIMAL">wgFinkrachtAandeelh</variable>
+<variable columnName="wgGroepCJMO" columnType="DECIMAL">wgGroepCJMO</variable>
+<variable columnName="wgGroepCJMOPerc" columnType="DECIMAL">wgGroepCJMOPerc</variable>
+
+
+<variable columnName="wgGrondstoffenPrijsontw" columnType="DECIMAL">wgGrondstoffenPrijsontwikkeling</variable>
+<variable columnName="wgGrondstoffenPrijsontwPerc" columnType="DECIMAL">wgGrondstoffenPrijsontwikkelingPerc</variable>
+<variable columnName="wgHuisbankier" columnType="DECIMAL">wgHuisbankier</variable>
+<variable columnName="wgHuisbankierPerc" columnType="DECIMAL">wgHuisbankierPerc</variable>
+<variable columnName="wgIsCyclisch" columnType="DECIMAL">wgIsCyclisch</variable>
+<variable columnName="wgIsCyclischPerc" columnType="DECIMAL">wgIsCyclischPerc</variable>
+<variable columnName="wgIsKapitaalintensief" columnType="DECIMAL">wgIsKapitaalintensief</variable>
+<variable columnName="wgIsKapitaalintensiefPerc" columnType="DECIMAL">wgIsKapitaalintensiefPerc</variable>
+<variable columnName="wgLeverageRatio" columnType="DECIMAL">wgLeverageRatio</variable>
+<variable columnName="wgLeverageRatioPerc" columnType="DECIMAL">wgLeverageRatioPerc</variable>
+<variable columnName="wgLimietGebruik" columnType="DECIMAL">wgLimietGebruik</variable>
+<variable columnName="wgLimietGebruikPerc" columnType="DECIMAL">wgLimietGebruikPerc</variable>
+<variable columnName="wgMarktaandeel" columnType="DECIMAL">wgMarktaandeel</variable>
+<variable columnName="wgMarktaandeelPerc" columnType="DECIMAL">wgMarktaandeelPerc</variable>
+<variable columnName="wgOrderRapportFreq" columnType="DECIMAL">wgOrderRapportFreq</variable>
+<variable columnName="wgOrderRapportFreqPerc" columnType="DECIMAL">wgOrderRapportFreqPerc</variable>
+<variable columnName="wgOrderportefeuilleMut" columnType="DECIMAL">wgOrderportefeuilleMut</variable>
+<variable columnName="wgOrderportefeuilleMutPerc" columnType="DECIMAL">wgOrderportefeuilleMutPerc</variable>
+<variable columnName="wgOrderportefeuilleOordeel" columnType="DECIMAL">wgOrderportefeuilleOordeel</variable>
+<variable columnName="wgOrderportefeuilleOordeelPerc" columnType="DECIMAL">wgOrderportefeuilleOordeelPerc</variable>
+<variable columnName="wgParMap302" columnType="DECIMAL">wgParMap302</variable>
+<variable columnName="wgParMap302Perc" columnType="DECIMAL">wgParMap302Perc</variable>
+<variable columnName="wgParMap303" columnType="DECIMAL">wgParMap303</variable>
+<variable columnName="wgParMap303Perc" columnType="DECIMAL">wgParMap303Perc</variable>
+<variable columnName="wgParMap402" columnType="DECIMAL">wgParMap402</variable>
+<variable columnName="wgParMap402Perc" columnType="DECIMAL">wgParMap402Perc</variable>
+<variable columnName="wgParMap501" columnType="DECIMAL">wgParMap501</variable>
+<variable columnName="wgParMap501Perc" columnType="DECIMAL">wgParMap501Perc</variable>
+<variable columnName="wgParMap502" columnType="DECIMAL">wgParMap502</variable>
+<variable columnName="wgParMap502Perc" columnType="DECIMAL">wgParMap502Perc</variable>
+<variable columnName="wgParMap601" columnType="DECIMAL">wgParMap601</variable>
+<variable columnName="wgParMap601Perc" columnType="DECIMAL">wgParMap601Perc</variable>
+<variable columnName="wgParMap602" columnType="DECIMAL">wgParMap602</variable>
+<variable columnName="wgParMap602Perc" columnType="DECIMAL">wgParMap602Perc</variable>
+<variable columnName="wgParMap603" columnType="DECIMAL">wgParMap603</variable>
+<variable columnName="wgParMap603Perc" columnType="DECIMAL">wgParMap603Perc</variable>
+<variable columnName="wgParTotaal" columnType="DECIMAL">wgParTotaal</variable>
+<variable columnName="wgPassendRekeningVerloop" columnType="DECIMAL">wgPassendRekeningVerloop</variable>
+<variable columnName="wgPassendRekeningVerloopPerc" columnType="DECIMAL">wgPassendRekeningVerloopPerc</variable>
+<variable columnName="wgPrognoseManagementOordeel" columnType="DECIMAL">wgPrognoseManagementOordeel</variable>
+<variable columnName="wgPrognoseManagementOordeelPer" columnType="DECIMAL">wgPrognoseManagementOordeelPerc</variable>
+<variable columnName="wgRating" columnType="DECIMAL">wgRating</variable>
+<variable columnName="wgRatingControle1" columnType="DECIMAL">wgRatingControle1</variable>
+<variable columnName="wgRatingControle1Perc" columnType="DECIMAL">wgRatingControle1Perc</variable>
+<variable columnName="wgRatingControle2" columnType="DECIMAL">wgRatingControle2</variable>
+<variable columnName="wgRatingControle2Perc" columnType="DECIMAL">wgRatingControle2Perc</variable>
+<variable columnName="wgRatingPerc" columnType="DECIMAL">wgRatingPerc</variable>
+<variable columnName="wgRecenteBrutoMargeMut" columnType="DECIMAL">wgRecenteBrutoMargeMut</variable>
+<variable columnName="wgRecenteBrutoMargeMutPerc" columnType="DECIMAL">wgRecenteBrutoMargeMutPerc</variable>
+<variable columnName="wgSolvabiliteitsratio" columnType="DECIMAL">wgSolvabiliteitsratio</variable>
+<variable columnName="wgSolvabiliteitsratioPerc" columnType="DECIMAL">wgSolvabiliteitsratioPerc</variable>
+<variable columnName="wgSomOverstand" columnType="DECIMAL">wgSomOverstand</variable>
+<variable columnName="wgSomOverstandPerc" columnType="DECIMAL">wgSomOverstandPerc</variable>
+<variable columnName="wgSpreidingAfzetMarkt" columnType="DECIMAL">wgSpreidingAfzetMarkt</variable>
+<variable columnName="wgSpreidingAfzetMarktPerc" columnType="DECIMAL">wgSpreidingAfzetMarktPerc</variable>
+<variable columnName="wgSpreidingLeveranciers" columnType="DECIMAL">wgSpreidingLeveranciers</variable>
+<variable columnName="wgSpreidingLeveranciersPerc" columnType="DECIMAL">wgSpreidingLeveranciersPerc</variable>
+<variable columnName="wgStarter" columnType="DECIMAL">wgStarter</variable>
+<variable columnName="wgStarterPerc" columnType="DECIMAL">wgStarterPerc</variable>
+<variable columnName="wgToetredingsdrempel" columnType="DECIMAL">wgToetredingsdrempel</variable>
+<variable columnName="wgToetredingsdrempelPerc" columnType="DECIMAL">wgToetredingsdrempelPerc</variable>
+<variable columnName="wgTotaalMap302" columnType="DECIMAL">wgTotaalMap302</variable>
+<variable columnName="wgTotaalMap303" columnType="DECIMAL">wgTotaalMap303</variable>
+<variable columnName="wgTotaalMap402" columnType="DECIMAL">wgTotaalMap402</variable>
+<variable columnName="wgTotaalMap501" columnType="DECIMAL">wgTotaalMap501</variable>
+<variable columnName="wgTotaalMap502" columnType="DECIMAL">wgTotaalMap502</variable>
+<variable columnName="wgTotaalMap601" columnType="DECIMAL">wgTotaalMap601</variable>
+<variable columnName="wgTotaalMap602" columnType="DECIMAL">wgTotaalMap602</variable>
+<variable columnName="wgTotaalMap603" columnType="DECIMAL">wgTotaalMap603</variable>
+<variable columnName="wgVoorNaCalculatieOordeel" columnType="DECIMAL">wgVoorNaCalculatieOordeel</variable>
+<variable columnName="wgVoorNaCalculatieOordeelPerc" columnType="DECIMAL">wgVoorNaCalculatieOordeelPerc</variable>
+<variable columnName="wgWinstRapportFreq" columnType="DECIMAL">wgWinstRapportFreq</variable>
+<variable columnName="wgWinstRapportFreqPerc" columnType="DECIMAL">wgWinstRapportFreqPerc</variable>
+
+
+
+
+
+
+  </variables>
+</configuration>

@@ -1,0 +1,2362 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<xsl:stylesheet version="3.0"    
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:saxon="http://icl.com/saxon" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"   
+    xmlns:fin="http://www.finan.nl/extension/2015/01/fin"   
+    xmlns:fes="http://www.finan.nl/extension/2015/01/fes"  
+    exclude-result-prefixes="fn saxon xs xsi fin">  
+
+	<!-- Eur Decimal format --> 
+	<xsl:decimal-format name="eur_format" decimal-separator="," grouping-separator="."/>	 
+
+	<xsl:output method="xml" encoding="UTF-8" indent="yes" saxon:indent-spaces="2"/> 
+	<xsl:preserve-space elements="*" /> 
+	<xsl:template match="/"> 
+
+
+		<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+		<document version="1.0" date="26 jan. 2015" author="Topicus Finan" title="Creditletter/Termsheet" outputLanguage="fr-BE" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+			<properties>
+			</properties>
+
+			<!-- =========data============================================================= -->
+
+			<!-- GLOBAL VARIABLES -->
+			<xsl:variable name="doc" select="fes:getDocumentIndicesByModelName('FBL')" as="xs:integer"/>
+			<xsl:variable name="docCreditProposal" select="fes:getDocumentIndicesByModelName('TDSCCREDITPROPOSAL')" as="xs:integer"/>
+			<xsl:variable name="currentDate" select="fin:getCurrentDate('d MMMM yyyy', 'fr')"/>	
+			<xsl:variable name="currentMonthDay" select="fin:getCurrentDate('MM-dd', 'fr')"/>	
+			<xsl:variable name="modelCreatedFrom" select="fes:getFormattedValue($doc,'ModelCreatedFrom')"/>
+			<xsl:variable name="zakelijkeOvereenkomsten_variable" select="'ZakelijkeOvereenkomst'"/>
+			<xsl:variable name="kredietnemers_variable" select="'Kredietnemers'"/>
+			<xsl:variable name="faciliteiten_variable" select="'Faciliteiten'"/>
+			<xsl:variable name="productlijncontractantNaam_variable" select="'Productlijnnaam'"/>  
+			<xsl:variable name="limiet_variable" select="'Limiet'"/> 
+			<xsl:variable name="contractanten_variable" select="'Contractanten'"/>
+			<xsl:variable name="aanvraaggroep_variable" select="'Aanvraaggroep'"/>
+			<xsl:variable name="aanvraagnummer_variable" select="'Aanvraagnummer'"/>
+			<xsl:variable name="contractantRollen_variable" select="'Contractant_rollen'"/>
+			<xsl:variable name="contractantRolcontractantNaam_variable" select="'Contractant_rol_naam'"/>
+			<xsl:variable name="contractantBedrijfscontractantNaam_variable" select="'Contractant_bedrijfsnaam'"/>
+			<xsl:variable name="contractantRechtsVorm_variable" select="'Contractant_rechtsvorm'"/>
+			<xsl:variable name="contractantNaam_variable" select="'Contractant_naam'"/> 
+			<xsl:variable name="contractantExternRelatieNummer_variable" select="'Contractant_externRelatieNummer'"/>
+			<xsl:variable name="verstrekkerExternRelatieNummer_variable" select="'Verstrekkers_externRelatieNummer'"/>
+			<xsl:variable name="contractantAdressen_variable" select="'Contractant_adressen'"/>
+			<xsl:variable name="contractantStraatnaam_variable" select="'Contractant_straatnaam'"/>
+			<xsl:variable name="contractantPlaatsnaam_variable" select="'Contractant_plaatsnaam'"/>
+			<xsl:variable name="contractantHuisnummer_variable" select="'Contractant_huisnummer'"/>
+			<xsl:variable name="contractantPostcode_variable" select="'Contractant_postcode'"/>
+			<xsl:variable name="producten_variable" select="'Producten'"/>
+			<xsl:variable name="aflossingsperiodiciteit_variable" select="'Aflossingsperiodiciteit'"/>
+			<xsl:variable name="productEinddatum_variable" select="'Product_einddatum'"/>
+			<xsl:variable name="postAddress_variable" select="'Contractant_geformatteerdpostadres'"/>
+			<xsl:variable name="productIngangsDatum_variable" select="'Product_ingangsDatum'"/>
+			<xsl:variable name="eersteAflossingNa_variable" select="'EersteAflossingNa'"/>                                       
+			<xsl:variable name="verpandingszekerheid_variable" select="'Verpandingszekerheid'"/>
+			<xsl:variable name="verpandingszekerheidZekerheidsType_variable" select="'ZekerheidsType'"/>
+			<xsl:variable name="verpandingszekerheidZekerheidsbedrag_variable" select="'Zekerheidsbedrag'"/>
+			<xsl:variable name="verpandingszekerheidHoogsteRangorde_variable" select="'HoogsteRangorde'"/>
+			<xsl:variable name="verpandingszekerheidOmschrijving_variable" select="'Verpandingszekerheid_omschrijving'"/>
+			<xsl:variable name="verpandingszekerheidOnderpandnummer_variable" select="'Onderpandnummer'"/>
+			<xsl:variable name="onderpand_variable" select="'Onderpand'"/>
+			<xsl:variable name="onderpandNummer_variable" select="'Onderpand_onderpandnummer'"/> 
+			<xsl:variable name="onderpandAdressen_variable" select="'Onderpand_adressen'"/>
+			<xsl:variable name="onderpandStraatnaam_variable" select="'Onderpand_straatnaam'"/>
+			<xsl:variable name="onderpandPlaatsnaam_variable" select="'Onderpand_plaatsnaam'"/>
+			<xsl:variable name="onderpandHuisnummer_variable" select="'Onderpand_huisnummer'"/>
+			<xsl:variable name="onderpandWoningType_variable" select="'WoningType'"/>
+			<xsl:variable name="facilityTpProductInterestmargin_variable" select="'Facility_tpProductInterestmargin'"/>
+			<xsl:variable name="kadasternummers" select="'Kadasternummers'"/>
+			<xsl:variable name="kadasternummerSectie_variable" select="'Kadasternummer_sectie'"/>
+			<xsl:variable name="kadasternummerDeelnummer_variable" select="'Kadasternummer_deelnummer'"/>  
+			<xsl:variable name="kadasternummerGrootte_variable" select="'Kadasternummer_grootte'"/>
+			<xsl:variable name="verstrekkers_variable" select="'Verstrekkers'"/>
+			<xsl:variable name="verstrekkersBedrijfsnaam_variable" select="'Verstrekkers_bedrijfsnaam'"/>
+			<xsl:variable name="verstrekkersNaam_variable" select="'Verstrekker_Naam'"/>
+			<xsl:variable name="bijzondereBepaling_variable" select="'BijzonderePepaling'"/>
+			<xsl:variable name="bijzondereBepalingCode_variable" select="'BijzondereBepalingCode'"/>
+			<xsl:variable name="bijzondereBepalingCategorie_variable" select="'Categorie'"/>
+			<xsl:variable name="bijzondereBepalingFinaalOmschrijving_variable" select="'FinaalOmschrijving'"/>
+			<xsl:variable name="bijzondereBepalingInOfferteJN_variable" select="'InOfferteJN'"/>
+			<xsl:variable name="facilityInterestDetailsFixedInterestPeriod_variable" select="'Facility_tpProductinterestDetailsFixedInterestPeriod'"/>
+			<xsl:variable name="rentetype_variable" select="'Rentetype'"/>
+			<xsl:variable name="printedRate_variable" select="'PrintedRate'"/>
+			<xsl:variable name="facilityTpUsedRate_variable" select="'Facility_tpUsedRate'"/>
+			<xsl:variable name="qStatusFinalByName_variable" select="'Q_STATUS_FINAL_BY_NAME'"/>
+			<xsl:variable name="looptijd_variable" select="'Looptijd'"/>
+			<xsl:variable name="verpadingszekerheidinschrijving_variable" select="'Verpandingszekerheid_inschrijving'"/>
+			<xsl:variable name="totalarrangementfee_variable" select="'TotalArrangementfee'"/>
+			<xsl:variable name="rentetype_variable" select="'Rentetype'"/>
+			<xsl:variable name="aflossingsvorm_variable" select="'Aflossingsvorm'"/>
+			<xsl:variable name="allocatie_variable" select="'Allocatie'"/>
+			<xsl:variable name="faciliteitNummer_variable" select="'FaciliteitNummer'"/>
+			<xsl:variable name="allocatedFaciliteitNummer_variable" select="'Allocatie_Faciliteitnummer'"/>
+			<xsl:variable name="kredietnemerExternRelatieNummer_variable" select="'Kredietnemer_externRelatieNummer'"/>
+
+
+
+			<!-- Value text -->
+			<xsl:variable name="mainBorrower_value" select="'Main borrower'"/>
+			<xsl:variable name="termloan_value" select="'Term Loan Account'"/>  
+			<xsl:variable name="kaskrediet_value" select="'Kas krediet'"/>
+			<xsl:variable name="aflossingsvorm_bullet_value" select="'Bullet'"/> 
+			<xsl:variable name="borgstelling_value" select="'BE_Borgstelling'"/>
+			<xsl:variable name="hypothecaire_inschrijving_residentieel_value" select="'BE_Hypothecaire inschrijving Residentieel'"/> 
+			<xsl:variable name="hypothecaire_inschrijving_niet_residentieel_value" select="'BE_Hypothecaire inschrijving Niet-residentieel'"/> 
+			<xsl:variable name="debenture_subsidy_value" select="'BE_Debenture Subsidies'"/>
+			<xsl:variable name="hypotheek_value" select="'Hypotheek'"/>  
+			<xsl:variable name="hypotheek_met_hypothecair_value " select="'Hypotheek met hypothecair'"/>
+			<xsl:variable name="hypotheek_met_pand_value" select="'Hypotheek met pand'"/> 
+			<xsl:variable name="hypothecair_mandaat_op_onroerend_goed_value" select="'BE_Hypothecair mandaat op onroerend goed'"/>
+			<xsl:variable name="hypothecair_met_mandaat_pand_handelsfonds_value" select="'Hypothecair mandaat met mandaat pand handelsfonds'"/>
+			<xsl:variable name="fonds_de_commerce_value" select="'BE_Pand handelsfonds'"/>
+			<xsl:variable name="pand_handelsfonds_notarieel_value" select="'BE_Pand handelsfonds notarieel'"/>
+			<xsl:variable name="subrogation_value" select="'BE_Subrogatie'"/>
+			<xsl:variable name="privilège_agricole_value" select="'BE_Landbouwvoorrecht'"/>
+			<xsl:variable name="pand_roerende_waarden_value" select="'BE_Pand roerende waarden'"/>
+			<xsl:variable name="nantissement_de_créances_value" select="'BE_Pand schuldvorderingen'"/>
+			<xsl:variable name="fixed_value" select="'Fixed'"/>
+			<xsl:variable name="base_value" select="'Base'" />
+			<xsl:variable name="currentaccount_value" select="'Current account'"/>
+			<xsl:variable name="euribor_value" select="'Euribor'"/> 
+			<xsl:variable name="straightLoanAccount_value" select="'Straight Loan account'"/>
+			<xsl:variable name="bankgarantie_value" select="'Guarantee account'"/>
+			<xsl:variable name="borrower_value" select="'Borrower'"/> 
+			<xsl:variable name="covenant_value" select="'Covenant'"/>
+			<xsl:variable name="FIA_value" select="'BE_(Local) government guarantee-FIA'"/>
+			<xsl:variable name="fonds_garantie_wallon_value" select="'BE_(Local) government guarantee-SOWALFIN'"/>
+			<xsl:variable name="fonds_bruxellois_garantie" select="'BE_(Local) government guarantee-BGF'"/>
+			<xsl:variable name="annuity_value" select="'Annuity'"/>
+			<xsl:variable name="linear_value" select="'Linear'"/>
+			<xsl:variable name="debentureReceivables_value" select="'BE_Debenture Receivables'"/>
+			<xsl:variable name="debentureInventory_value" select="'BE_Debenture Inventory'"/>
+			<xsl:variable name="floorRate_value" select="'InterestRateFloor'"/>
+
+
+			<!-- Mainborrower data initialize --> 
+			<xsl:variable name="mainBorrowerData">
+				<!-- Loop contractanten tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $contractanten_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable> 
+					<!-- Loop rollen tuple -->
+					<xsl:for-each select="fes:getTupleInstances($doc, $contractantRollen_variable, $tupleIndices)">
+						<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="subTupleIndices" as="xs:integer *">
+							<xsl:for-each select="$tupleIndices">
+								<xs:sequence>
+									<xsl:value-of select="."/>
+								</xs:sequence>
+							</xsl:for-each>
+							<xs:sequence>
+								<xsl:value-of select="$subTupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<xsl:variable name="rol_naam_value" select="fes:getFormattedValue($doc, $contractantRolcontractantNaam_variable, $subTupleIndices)" />
+						<!-- Only for Main borrower -->
+						<xsl:if test="$rol_naam_value = $mainBorrower_value">
+							<bedrijfsnaam>
+								<xsl:value-of select="fes:getFormattedValue($doc, $contractantBedrijfscontractantNaam_variable, $tupleIndices)" />
+							</bedrijfsnaam> 
+							<rechtsVorm>
+								<xsl:value-of select="fes:getFormattedValue($doc, $contractantRechtsVorm_variable, $tupleIndices)" />
+							</rechtsVorm>
+							<naam>
+								<xsl:value-of select="fes:getFormattedValue($doc, $contractantNaam_variable, $tupleIndices)" />
+							</naam>
+							<externRelatieNummer>
+								<xsl:value-of select="fes:getFormattedValue($doc, $contractantExternRelatieNummer_variable, $tupleIndices)" />
+							</externRelatieNummer>                       
+
+
+							<!-- Loop Adressen tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, $contractantAdressen_variable ,$tupleIndices)">
+								<xsl:variable name="adresTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="adresTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$tupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$adresTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<straatnaam>
+									<xsl:value-of select="fes:getFormattedValue($doc, $contractantStraatnaam_variable, $adresTupleIndices)" />
+								</straatnaam>
+								<plaatsnaam>
+									<xsl:value-of select="fes:getFormattedValue($doc, $contractantPlaatsnaam_variable, $adresTupleIndices)" />
+								</plaatsnaam> 
+								<huisnummer>
+									<xsl:value-of select="fes:getFormattedValue($doc, $contractantHuisnummer_variable, $adresTupleIndices)" />
+								</huisnummer>
+								<postcode>
+									<xsl:value-of select="fes:getFormattedValue($doc, $contractantPostcode_variable, $adresTupleIndices)" />
+								</postcode>
+							</xsl:for-each>    
+
+
+						</xsl:if>
+					</xsl:for-each>    
+
+
+				</xsl:for-each>
+			</xsl:variable>
+
+			<!-- Initialize Bijzondere bepalingen data (counter can be done on code) -->
+			<xsl:variable name="bijzondereBepalingenData">
+				<!-- Loop Bijzondere bepalingen tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $bijzondereBepaling_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable> 
+
+					<xsl:variable name="bijzondereBepalingCode_value" select="fes:getFormattedValue($doc, $bijzondereBepalingCode_variable, $tupleIndices)" />
+					<xsl:variable name="bijzondereBepalingFinaalOmschrijving_value" select="fes:getFormattedValue($doc, $bijzondereBepalingFinaalOmschrijving_variable, $tupleIndices)" />
+
+					<xsl:choose>
+						<xsl:when test="$bijzondereBepalingCode_value='211'"> 
+							<code-211>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-211>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='212'"> 
+							<code-212>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-212> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='213'"> 
+							<code-213>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-213> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='214'"> 
+							<code-214>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-214> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='215'"> 
+							<code-215>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-215> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='216'"> 
+							<code-216>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-216> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='217'"> 
+							<code-217>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-217> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='218'"> 
+							<code-218>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-218> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='225'"> 
+							<code-225>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-225> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='231'"> 
+							<code-231>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-231> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='237'"> 
+							<code-237>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-237> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='233'"> 
+							<code-233>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-233> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='234'"> 
+							<code-234>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-234> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='219'"> 
+							<code-219>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-219> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='240'"> 
+							<code-240>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-240> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='241'"> 
+							<code-241>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-241> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='243'"> 
+							<code-243>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-243> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='244'"> 
+							<code-244>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-244> 
+						</xsl:when>  
+
+						<xsl:when test="$bijzondereBepalingCode_value='245'"> 
+							<code-245>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-245> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='251'"> 
+							<code-251>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-251> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='252'"> 
+							<code-252>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-252> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='254'"> 
+							<code-254>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-254> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='255'"> 
+							<code-255>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-255> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='256'"> 
+							<code-256>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-256> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='257'"> 
+							<code-257>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-257> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='258'"> 
+							<code-258>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-258> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='261'"> 
+							<code-261>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-261> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='269'"> 
+							<code-269>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-269> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='270'"> 
+							<code-270>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-270> 
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='23'"> 
+							<code-23>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-23>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='332'"> 
+							<code-332>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-332>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='333'"> 
+							<code-333>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-333>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='334'"> 
+							<code-334>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-334>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='335'"> 
+							<code-335>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-335>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='336'"> 
+							<code-336>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-336>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='337'"> 
+							<code-337>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-337>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='338'"> 
+							<code-338>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-338>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='339'"> 
+							<code-339>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-339>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='340'"> 
+							<code-340>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-340>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='341'"> 
+							<code-341>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-341>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='342'"> 
+							<code-342>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-342>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='343'"> 
+							<code-343>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-343>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='344'"> 
+							<code-344>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-344>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='345'"> 
+							<code-345>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-345>
+						</xsl:when>
+
+						<xsl:when test="$bijzondereBepalingCode_value='346'"> 
+							<code-346>
+								<code>1</code>
+								<omschrijving>
+									<xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" />
+								</omschrijving>
+							</code-346>
+						</xsl:when>
+
+					</xsl:choose>
+
+				</xsl:for-each>
+			</xsl:variable>
+
+			<p>[color=#E36C0A][formatted address][/color]</p>
+
+			<table class="Summarytable">
+				<tr class="summary4cols">
+					<td class="Summary" width="25" type="pct">Date:</td>
+					<td class="Summary" width="25" type="pct">Nos références:</td>
+					<td class="Summary" width="25" type="pct">Votre correspondant:</td>  
+					<td class="Summary" width="25" type="pct">Contact direct:</td>
+				</tr>
+				<tr class="summary4cols">
+					<td class="Summary" width="25" type="pct">
+						<xsl:value-of select="$currentDate" />
+					</td>
+					<td class="Summary" width="25" type="pct">
+						<p>
+							<xsl:value-of select="fes:getFormattedValue($doc, $aanvraagnummer_variable)" />-<xsl:value-of select="$currentMonthDay"/>
+						</p>
+					</td>
+					<td class="Summary" width="25" type="pct">
+						<xsl:value-of select="fes:getFormattedValue($docCreditProposal, $qStatusFinalByName_variable)" />
+					</td>
+					<td class="Summary" width="25" type="pct">[color=#E36C0A][phone relationship manager][/color]</td>
+				</tr>
+			</table>
+
+			<p>
+
+[b]Concernés:[/b] <xsl:choose>
+					<xsl:when test="$modelCreatedFrom='QUESTIONNAIRE-TERMSHEET'">
+						<xsl:value-of>Termsheet</xsl:value-of>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of>lettre de crédit</xsl:value-of>
+					</xsl:otherwise>
+				</xsl:choose> 
+
+			</p>
+
+			<p>[color=#E36C0A][salutation main borrower][/color]</p>
+
+			<p>En réponse à votre demande, nous vous confirmons notre accord quant à l'ouverture de crédit de montant 
+			
+			<!-- Loop Zakelijke overeenkomst tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+				
+				<xsl:variable name="TotalAgreementLimit" select="fes:getFormattedValue($doc,'TotalAgreementLimit', $tupleIndices)"/>
+				<xsl:value-of select="$TotalAgreementLimit"/>
+				
+				EUR (EN LETTRES: <xsl:value-of select="fes:convertNumberToText($doc,number(fes:getValue($doc,'TotalAgreementLimit', $tupleIndices)),'fr')" /> euros).
+				
+				</xsl:for-each>
+			
+			 </p>
+
+			<p>[color=#E36C0A][case pari passu condition][/color]
+Ce montant fait partie d’une ouverture globale de [color=#E36C0A][total credit pari passu][/color] EUR financée par le Banque Triodos à concurrence de 
+
+	<!-- Loop Zakelijke overeenkomst tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+				
+				<xsl:variable name="TotalAgreementLimit" select="fes:getFormattedValue($doc,'TotalAgreementLimit', $tupleIndices)"/>
+				<xsl:value-of select="$TotalAgreementLimit"/>
+				</xsl:for-each>
+
+				 EUR et par [color=#E36C0A][third party name pari passu][/color]  à concurrence de [color=#E36C0A][partner amount][/color] EUR. La gestion et l’exécution de sûretés couvrant cette ouverture globale de crédit feront l’objet d’une convention pari passu qui sera conclue entre la Banque Triodos et [color=#E36C0A][third party name pari passu][/color]
+[color=#E36C0A][/case pari passu condition][/color]</p>
+
+			<p>[color=#E36C0A][case given contra account][/color]
+Cette somme sera mise à votre disposition via votre compte-courant numéro [color=#E36C0A][contra account number][/color] [color=#E36C0A][case bic contra account number][/color]- BIC [color=#E36C0A][bic contra account number][/color] [color=#E36C0A][/case bic contra account number][/color]
+[color=#E36C0A][/case given contra account][/color]</p>
+
+			<p>[color=#E36C0A][case not given contra account][/color]
+Cette somme sera mise à votre disposition sur un compte-courant dont le numéro vous sera communiqué dès que vous nous aurez retourné un dossier d'ouverture de compte dument complété et signé. [color=#E36C0A][/case not given contra account][/color]</p>
+
+			<p>Cette ouverture de crédit est utilisable de la façon suivante:</p>
+
+
+			<!-- Loop Zakelijke overeenkomst tuple -->      
+			<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten_variable)">
+				<xsl:variable name="zakelijkeOvereenkomstTupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="zakelijkeOvereenkomstTupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$zakelijkeOvereenkomstTupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>
+
+				<!-- Loop faciliteiten tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten_variable, $zakelijkeOvereenkomstTupleIndices)">
+					<xsl:variable name="zakelijkeOvereenkomstSubTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="zakelijkeOvereenkomstSubTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$zakelijkeOvereenkomstTupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$zakelijkeOvereenkomstSubTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="productlijnnaam_value" select="fes:getFormattedValue($doc, $productlijncontractantNaam_variable, $zakelijkeOvereenkomstSubTupleIndices)"/>
+					<xsl:variable name="limiet_value" select="fes:getFormattedValue($doc, $limiet_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+
+					<xsl:choose>
+						<xsl:when test="$productlijnnaam_value = $termloan_value">
+
+							<!-- Loop Producten tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, $producten_variable, $zakelijkeOvereenkomstSubTupleIndices)"> 
+								<xsl:variable name="productTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="productTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$zakelijkeOvereenkomstSubTupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$productTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<xsl:variable name="aflossingsvorm_value" select="fes:getFormattedValue($doc, $aflossingsvorm_variable, $productTupleIndices)"/>
+								<xsl:choose>
+									<xsl:when test="$aflossingsvorm_value != $aflossingsvorm_bullet_value">
+										<p>CREDIT A TERME de <xsl:value-of select="$limiet_value" /> EUR.</p>
+									</xsl:when>
+									<xsl:when test="$aflossingsvorm_value = $aflossingsvorm_bullet_value">
+										<p>BULLET LOAN de <xsl:value-of select="$limiet_value" /> EUR.</p>
+									</xsl:when>
+
+								</xsl:choose>
+							</xsl:for-each>
+						</xsl:when>
+						<xsl:when test="$productlijnnaam_value = $straightLoanAccount_value">
+							<p>STRAIGHT LOAN de <xsl:value-of select="$limiet_value" /> EUR.</p>
+						</xsl:when>
+						<xsl:when test="$productlijnnaam_value = $bankgarantie_value">
+							<p>GARANTIE BANCAIRE de <xsl:value-of select="$limiet_value" /> EUR.</p>
+						</xsl:when>
+						<xsl:when test="$productlijnnaam_value = $currentaccount_value">
+							<p>CREDIT DE CAISSE de <xsl:value-of select="$limiet_value" /> EUR.</p>
+						</xsl:when>
+						<xsl:otherwise>
+							<p>[color=#E36C0A][b]A facility is missing, enter text manually.[/b][/color]</p>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
+			</xsl:for-each>
+
+			<p>Les modalités d'utilisation de ces formes de crédit sont spécifiées dans les annexes, lesquelles font intégralement partie de cette  <xsl:choose>
+					<xsl:when test="$modelCreatedFrom='QUESTIONNAIRE-TERMSHEET'">
+						<xsl:value-of>Termsheet</xsl:value-of>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of>lettre de crédit</xsl:value-of>
+					</xsl:otherwise>
+				</xsl:choose>.</p>
+
+			<p>Outre les conditions mentionnées ci-dessus, les modalités suivantes seront d'application : </p>
+
+			<section class="section">Sûretés</section>
+
+			<p>[color=#E36C0A][case pari passu condition][/color]
+[color=#E36C0A][pari passu condition][/color]
+[color=#E36C0A][/case pari passu condition][/color]</p>
+
+			<p>Vos engagements envers la Banque Triodos sont garantis par:</p>
+
+			<table class="datatable">
+
+				<!-- Loop Verpandingszekerheid tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable> 
+
+
+
+					<xsl:variable name="inschrijving_value" select="fes:getFormattedValue($doc, $verpadingszekerheidinschrijving_variable, $tupleIndices)" />
+					<xsl:variable name="zekerheidsType_value" select="fes:getFormattedValue($doc, $verpandingszekerheidZekerheidsType_variable, $tupleIndices)" />  
+					<xsl:variable name="zekerheidsBedrag_value" select="fes:getFormattedValue($doc, $verpandingszekerheidZekerheidsbedrag_variable, $tupleIndices)"/>    
+					<xsl:variable name="hoogsteRangorde_value" select="fes:getFormattedValue($doc, $verpandingszekerheidHoogsteRangorde_variable, $tupleIndices)" />
+					<xsl:variable name="omschrijving_value" select="fes:getFormattedValue($doc, $verpandingszekerheidOmschrijving_variable, $tupleIndices)" />
+					<xsl:variable name="verpandingsZekerheidOnderpandnummer" select="fes:getFormattedValue($doc, $verpandingszekerheidOnderpandnummer_variable, $tupleIndices)" />
+
+
+
+					<!-- Intialize Onderpand / Kadaster data -->
+					<xsl:variable name="onderpandData">    
+
+						<!-- Loop Verstrekkers tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $verstrekkers_variable,$tupleIndices)">
+							<xsl:variable name="verstrekkerTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="verstrekkerTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence> 
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$verstrekkerTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<verstrekkerBedrijfsnaam>
+								<xsl:variable name="bedrijfsnaam" select="fes:getFormattedValue($doc, $verstrekkersBedrijfsnaam_variable, $verstrekkerTupleIndices)" />
+								<xsl:variable name="naam" select="fes:getFormattedValue($doc, $verstrekkersNaam_variable, $verstrekkerTupleIndices)" />
+
+								<xsl:choose>
+									<xsl:when test="$bedrijfsnaam != '' and $bedrijfsnaam != '...'" >
+										<xsl:value-of select="$bedrijfsnaam" />
+									</xsl:when> 
+									<xsl:otherwise>
+										<xsl:value-of select="$naam" />
+									</xsl:otherwise>
+								</xsl:choose>
+							</verstrekkerBedrijfsnaam>
+						</xsl:for-each>
+
+
+
+						<xsl:for-each select="fes:getTupleInstances($doc, $onderpand_variable)">
+							<xsl:variable name="onderpandTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="onderpandTupleIndices" as="xs:integer *">
+								<xs:sequence>
+									<xsl:value-of select="$onderpandTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+
+
+							<xsl:variable name="onderpandNummer_value" select="fes:getFormattedValue($doc, $onderpandNummer_variable, $onderpandTupleIndices)"/>
+
+							<xsl:if test="$onderpandNummer_value = $verpandingsZekerheidOnderpandnummer" >
+
+								<woningType>
+									<xsl:value-of select="fes:getFormattedValue($doc, $onderpandWoningType_variable, $onderpandTupleIndices)" />
+								</woningType>
+
+								<xsl:for-each select="fes:getTupleInstances($doc, $onderpandAdressen_variable,$onderpandTupleIndices)">
+									<xsl:variable name="adresTupleIndex" select="." as="xs:integer"/>
+									<xsl:variable name="adresTupleIndices" as="xs:integer *">
+										<xsl:for-each select="$onderpandTupleIndices">
+											<xs:sequence>
+												<xsl:value-of select="."/>
+											</xs:sequence>
+										</xsl:for-each>
+										<xs:sequence>
+											<xsl:value-of select="$adresTupleIndex"/>
+										</xs:sequence>
+									</xsl:variable>
+
+									<straatnaam>
+										<xsl:value-of select="fes:getFormattedValue($doc, $onderpandStraatnaam_variable, $adresTupleIndices)" />
+									</straatnaam>
+									<plaatsnaam>
+										<xsl:value-of select="fes:getFormattedValue($doc, $onderpandPlaatsnaam_variable, $adresTupleIndices)" />
+									</plaatsnaam>
+									<huisnummer>
+										<xsl:value-of select="fes:getFormattedValue($doc, $onderpandHuisnummer_variable, $adresTupleIndices)" />
+									</huisnummer>
+
+								</xsl:for-each>
+
+								<!-- Loop Kadasternummers tuple -->
+								<xsl:for-each select="fes:getTupleInstances($doc, $kadasternummers,$onderpandTupleIndices)">
+									<xsl:variable name="kadasterTupleIndex" select="." as="xs:integer"/>
+									<xsl:variable name="kadasterTupleIndices" as="xs:integer *">
+										<xsl:for-each select="$onderpandTupleIndices">
+											<xs:sequence>
+												<xsl:value-of select="."/>
+											</xs:sequence>
+										</xsl:for-each>
+										<xs:sequence>
+											<xsl:value-of select="$kadasterTupleIndex"/>
+										</xs:sequence>
+									</xsl:variable>
+
+
+									<xsl:variable name="kadasternummer_sectie_value" select="fes:getFormattedValue($doc, $kadasternummerSectie_variable, $kadasterTupleIndices)" />
+									<xsl:variable name="kadasternummer_deelnummer_value" select="fes:getFormattedValue($doc, $kadasternummerDeelnummer_variable, $kadasterTupleIndices)" />
+									<xsl:variable name="kadasternummer_grootte_value" select="fes:getFormattedValue($doc, $kadasternummerGrootte_variable, $kadasterTupleIndices)" />
+
+
+									<xsl:if test="position() = 1 ">
+										<kadasterSectie>
+											<xsl:value-of select="$kadasternummer_sectie_value"/>
+										</kadasterSectie> 
+										<oppervlakte>
+											<xsl:value-of select="$kadasternummer_grootte_value"/>
+										</oppervlakte>             
+									</xsl:if>
+
+									<kadasterDeelnummer>
+										<xsl:value-of select="$kadasternummer_deelnummer_value"/>,</kadasterDeelnummer> 
+								</xsl:for-each>
+
+							</xsl:if>   			  
+						</xsl:for-each>
+					</xsl:variable> 
+
+					<xsl:variable name="collateralData"	>	
+						<!-- Loop Verstrekkers tuple -->
+
+						<xsl:for-each select="fes:getTupleInstances($doc, $verstrekkers_variable,$tupleIndices)">
+							<xsl:variable name="verstrekkerTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="verstrekkerTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence> 
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$verstrekkerTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+
+							<xsl:variable name="verstrekkerNummer" select="fes:getFormattedValue($doc, $verstrekkerExternRelatieNummer_variable, $verstrekkerTupleIndices)" />"
+
+							<!-- Loop contractanten tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, $contractanten_variable)">
+								<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="tupleIndices" as="xs:integer *">
+									<xs:sequence>
+										<xsl:value-of select="$tupleIndex"/>
+									</xs:sequence>
+								</xsl:variable> 
+
+								<xsl:variable name="contractantNummer" select="fes:getFormattedValue($doc, $contractantExternRelatieNummer_variable, $tupleIndices)" />
+
+								<xsl:if test="$contractantNummer = $verstrekkerNummer">
+									<!-- Loop rollen tuple -->
+									<xsl:for-each select="fes:getTupleInstances($doc, $contractantRollen_variable, $tupleIndices)">
+										<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+										<xsl:variable name="subTupleIndices" as="xs:integer *">
+											<xsl:for-each select="$tupleIndices">
+												<xs:sequence>
+													<xsl:value-of select="."/>
+												</xs:sequence>
+											</xsl:for-each>
+											<xs:sequence>
+												<xsl:value-of select="$subTupleIndex"/>
+											</xs:sequence>
+										</xsl:variable>
+
+										<xsl:variable name="rol_naam_value" select="fes:getFormattedValue($doc, $contractantRolcontractantNaam_variable, $subTupleIndices)" />           
+										<xsl:if test="$rol_naam_value = $mainBorrower_value">
+											<mainBorrowerRol>1</mainBorrowerRol>
+										</xsl:if>
+
+										<xsl:if test="$rol_naam_value = $borrower_value">
+											<borrowerRol>1</borrowerRol>
+										</xsl:if>
+
+									</xsl:for-each>                      
+
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:for-each>
+					</xsl:variable>  
+
+					<xsl:choose>
+
+						<xsl:when test="$zekerheidsType_value = $borgstelling_value">
+
+							<tr class="level0">
+								<td>[b]Cautionnements[/b]</td>
+								<td>Un cautionnement signé par [color=#E36C0A][case person][/color]guarantee person[color=#E36C0A][/case person][/color][color=#E36C0A][case institution][/color]Guarantee – Institution[color=#E36C0A][/case institution][/color], pour un montant total de <xsl:value-of select="$zekerheidsBedrag_value"/> EUR, conformes à l’acte de cautionnement en annexe, qui doit être renvoyé complété et dûment signé. </td>
+							</tr>
+
+						</xsl:when>
+
+						<xsl:when test="$zekerheidsType_value = $hypothecaire_inschrijving_residentieel_value or $zekerheidsType_value = $hypothecaire_inschrijving_niet_residentieel_value"> 
+
+							<tr class="level0">
+								<td>[b]Hypothèque[/b]</td>
+								<td>
+
+                      [color=#E36C0A][case not erfpacht][/color]Une hypothèque en pleine propiété en <xsl:value-of select="fes:convertNumberToOrdinalText($doc,number($hoogsteRangorde_value),'fr')" /> rang pour un montant de <xsl:value-of select="$inschrijving_value" /> EUR sur les biens immobiliers suivants:[color=#E36C0A][/case not erfpacht][/color]
+                         [color=#E36C0A][case erfpacht][/color]Une hypothèque en <xsl:value-of select="fes:convertNumberToOrdinalText($doc,number($hoogsteRangorde_value),'fr')" /> rang pour un montant de [color=#E36C0A][deed of priority][/color] EUR sur le droit d'emphytéose sur les biens immobiliers suivants: [color=#E36C0A][/case erfpacht][/color]
+						 [br][/br][br][/br]
+						 Commune <xsl:value-of select="$onderpandData/plaatsnaam" />: un <xsl:value-of select="$onderpandData/woningType" />, situés à <xsl:value-of select="$onderpandData/straatnaam" />
+									<xsl:value-of select="' '" />
+									<xsl:value-of select="$onderpandData/huisnummer" />, cadastré(e) comme suit: sections <xsl:value-of select="$onderpandData/kadasterSectie" /> numéro(s) <xsl:value-of select="$onderpandData/kadasterDeelnummer" /> superficie <xsl:value-of select="$onderpandData/oppervlakte" />.[br][/br][br][/br]
+
+									<xsl:if test="count($collateralData/mainBorrowerRol) = 0 and count($collateralData/borrowerRol) = 0">
+										En signant cette lettre de crédit, vous nous garantissez avoir obtenu l'accord de <xsl:value-of select="$onderpandData/verstrekkerBedrijfsnaam" />, affectant hypothécaire.[br][/br][br][/br]
+									</xsl:if>	
+									L'acte notarié doit être passé, endéans les 3 mois de la signature de la présente lettre de crédit, devant le notaire de votre choix. Veuillez nous communiquer le nom, adresse, numéro de téléphone et fax de votre notaire.				
+								</td>
+							</tr>
+
+						</xsl:when>      
+
+
+
+						<xsl:when test="$zekerheidsType_value = $hypothecair_mandaat_op_onroerend_goed_value">
+							<tr class="level0">
+								<td>[b]Mandat hypothécaire[/b]</td>
+								<td>[color=#E36C0A][case not erfpacht][/color]Un mandat hypothécaire en pleine propriété pour un montant de <xsl:value-of select="$inschrijving_value" /> EUR sur les biens immobiliers suivants:[color=#E36C0A][/case not erfpacht][/color]
+                      [color=#E36C0A][case erfpacht][/color]Un mandat hypothécaire pour un montant de [color=#E36C0A][deed of priority][/color] EUR sur le droit d'emphytéose sur les biens immobiliers suivants:[color=#E36C0A][/case erfpacht][/color]
+					   [br][/br][br][/br]
+					  Commune <xsl:value-of select="$onderpandData/plaatsnaam" />: un <xsl:value-of select="$onderpandData/woningType" />, situés à <xsl:value-of select="$onderpandData/straatnaam" />
+									<xsl:value-of select="' '" />
+									<xsl:value-of select="$onderpandData/huisnummer" />, cadastré(e) comme suit: sections <xsl:value-of select="$onderpandData/kadasterSectie" /> numéro(s) <xsl:value-of select="$onderpandData/kadasterDeelnummer" /> superficie <xsl:value-of select="$onderpandData/oppervlakte" />.
+
+									<xsl:if test="count($collateralData/mainBorrowerRol) = 0 and count($collateralData/borrowerRol) = 0"> 
+										En signant cette lettre de crédit, vous nous garantissez avoir obtenu l'accord de <xsl:value-of select="$onderpandData/verstrekkerBedrijfsnaam" />, affectant hypothécaire.[br][/br][br][/br]
+									</xsl:if>
+									L'acte notarié doit être passé, endéans les 3 mois de la signature de la présente lettre de crédit, devant le notaire de votre choix. Veuillez nous communiquer le nom, adresse, numéro de téléphone et fax de votre notaire.
+
+								</td>
+							</tr>
+						</xsl:when>
+
+
+
+						<xsl:when test="$zekerheidsType_value = $fonds_de_commerce_value">
+
+							<tr class="level0">
+								<td>[b]Gage sur le fonds de commerce[/b]</td>
+								<td>Un gage en <xsl:value-of select="fes:convertNumberToOrdinalText($doc,number($hoogsteRangorde_value),'fr')" /> rang pour un montant de <xsl:value-of select="$zekerheidsBedrag_value" /> EUR sur le fonds de commerce de <xsl:value-of select="$onderpandData/verstrekkerBedrijfsnaam" />, conformément aux contrats en annexe, en triple exemplaire, dont deux exemplaires doivent nous être retourné dûment signés<xsl:if test="$modelCreatedFrom='QUESTIONNAIRE-TDSCCREDITLETTER'">, conjointement à la présente lettre de crédit.</xsl:if>
+								</td>
+							</tr>
+
+						</xsl:when>
+
+						<xsl:when test="$zekerheidsType_value = $pand_handelsfonds_notarieel_value">
+							<tr class="level0">
+								<td>[b]Gage sur le fonds de commerce notarié[/b]</td>
+								<td>Un gage en <xsl:value-of select="fes:convertNumberToOrdinalText($doc,number($hoogsteRangorde_value),'fr')" /> rang pour un montant de <xsl:value-of select="$zekerheidsBedrag_value" /> EUR sur le fonds de commerce de <xsl:value-of select="$onderpandData/verstrekkerBedrijfsnaam" />.
+
+                  L'acte notarié doit être passé, endéans les 3 mois de la signature de la présente lettre de crédit, devant le notaire de votre choix. Veuillez nous communiquer le nom, adresse, numéro de téléphone et fax de votre notaire.</td>
+							</tr> 
+
+						</xsl:when> 
+
+						<xsl:when test="$zekerheidsType_value = $subrogation_value">
+							<tr class="level0">
+								<td>[b]Subrogation[/b]</td>
+								<td>Une subrogation pour un montant de <xsl:value-of select="$zekerheidsBedrag_value" /> EUR dans le privilège du vendeur impayé par le dépôt d'une copie certifiée conforme de la facture ou de l'acte de vente au Greffe du Tribunal de Commerce de votre arrondissement conformément à l'Art. 20.5° de la loi du 16.12.1851 sur les privilèges et hypothèques.</td>
+							</tr>
+						</xsl:when>
+
+						<xsl:when test="$zekerheidsType_value = $privilège_agricole_value" >			  
+							<tr class="level0">
+								<td>[b]Privilège agricole[/b]</td>
+								<td>Un privilège agricole en <xsl:value-of select="fes:convertNumberToOrdinalText($doc,number($hoogsteRangorde_value),'fr')" /> rang pour un montant de <xsl:value-of select="$zekerheidsBedrag_value" />  EUR sur les biens suivants: <xsl:value-of select="$omschrijving_value"/>, tous les biens mobiliers et droits, comme le mobilier, le matériel, les en-cours de culture, les animaux, les réserves, les droits de fermage qui font partie de l’exploitation agricole appartenant à <xsl:value-of select="$onderpandData/verstrekkerBedrijfsnaam" />: et ceci conformément à l’acte de privilège agricole en annexe, qui doit être renvoyé dûment signé.</td>
+							</tr>
+						</xsl:when>
+
+
+						<xsl:when test="$zekerheidsType_value = $pand_roerende_waarden_value" >
+							<tr class="level0">
+								<td>[b]Nantissement valeurs mobiliers[/b]</td>
+								<td>Le nantissement de <xsl:value-of select="$omschrijving_value" /> d’un montant de <xsl:value-of select="$zekerheidsBedrag_value" /> EUR conformément à l'acte de nantissement en annexe, en triple exemplaires, dont deux doivent nous être retournés dûment signés.</td>
+							</tr>
+						</xsl:when>
+
+						<xsl:when test="$zekerheidsType_value = $nantissement_de_créances_value">
+							<tr class="level0">
+								<td>[b]Nantissement de créances[/b]</td>
+								<td>Le nantissement de créance et plus précisément de vos créances sur [color=#E36C0A][subsidy provider][/color] conformément à l'acte de nantissement en annexe, en triple exemplaires, dont deux doivent nous être retournés dûment signés<xsl:if test="$modelCreatedFrom='QUESTIONNAIRE-TDSCCREDITLETTER'">, ensemble avec la présente lettre de crédit.</xsl:if>
+								</td>
+							</tr>
+						</xsl:when>
+						
+						<xsl:otherwise>
+							<xsl:if test="$zekerheidsType_value != $fonds_bruxellois_garantie and $zekerheidsType_value != $fonds_garantie_wallon_value and $zekerheidsType_value != $FIA_value and $zekerheidsType_value != $debenture_subsidy_value and $zekerheidsType_value != $debentureReceivables_value and $zekerheidsType_value != $debentureInventory_value">
+								<p>[color=#E36C0A][b]A collateral is missing, enter text manually[/b][/color]</p>
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>   
+				</xsl:for-each> 
+			</table>
+
+			<p>Les coûts relatifs à la constitution des sûretés sont à votre charge et seront débités de votre compte-courant.</p>
+
+			<section class="section">Conditions suspensives</section>
+
+			<p>Le présent crédit ne peut être utilisé qu'après réception par la Banque Triodos de la présente lettre de crédit et de ses annexes dûment signées par vous et après que toutes les sûretés aient été constituées et rendues opposables aux tiers.
+
+Le présent crédit ne peut être mis à votre disposition qu'après accomplissement des conditions suivantes, et/ou réception et approbation des documents suivants par la Banque: </p>
+
+			<subsection class="subsection">Conditions suspensives - Générale</subsection>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-211/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-211/omschrijving" /></text>
+				</p>        
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-212/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-212/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-213/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-213/omschrijving" /></text>
+				</p>        
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-214/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-214/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-215/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-215/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-216/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-216/omschrijving" /></text>
+				</p>
+			</xsl:if>		  
+
+			<xsl:if test="count($bijzondereBepalingenData/code-217/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-217/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-218/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-218/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-225/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-225/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-337/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-337/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-338/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-338/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-231/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-231/omschrijving" /></text>
+				</p>        
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-233/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-233/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<!-- Loop Bijzondere bepalingen tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $bijzondereBepaling_variable)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable> 
+
+				<xsl:variable name="bijzondereBepalingCode_value" select="fes:getFormattedValue($doc, $bijzondereBepalingCode_variable, $tupleIndices)" />
+				<xsl:variable name="bijzondereBepalingFinaalOmschrijving_value" select="fes:getFormattedValue($doc, $bijzondereBepalingFinaalOmschrijving_variable, $tupleIndices)" />
+				<xsl:variable name="bijzondereBepalingCategorie_value" select="fes:getFormattedValue($doc, $bijzondereBepalingCategorie_variable, $tupleIndices)" />
+
+				<!-- If no code is available it means that its a manual bijzondere bepaling -->
+				<xsl:if test="$bijzondereBepalingCode_value = '' or $bijzondereBepalingCode_value = '...' and $bijzondereBepalingCategorie_value != $covenant_value">
+					<p>
+						<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" /></text>
+					</p>             
+				</xsl:if>
+
+			</xsl:for-each>
+
+
+			<xsl:if test="count($bijzondereBepalingenData/code-234/code) > 0 or count($bijzondereBepalingenData/code-333/code) > 0 or count($bijzondereBepalingenData/code-334/code) > 0 or count($bijzondereBepalingenData/code-335/code) > 0 or count($bijzondereBepalingenData/code-336/code) > 0"> 
+				<subsection class="subsection">Conditions suspensives – Période de construction</subsection>
+				<p>Avant d’autoriser des prélèvements concernant le projet de construction de <xsl:value-of select="$mainBorrowerData/bedrijfsnaam" /> les conditions suivantes doivent être remplies:</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-234/code) > 0 ">
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-234/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-333/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-333/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-334/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-334/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-335/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-335/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-336/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-336/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-332/code) > 0 "> 
+				<subsection class="subsection">Conditions suspensives – Reprise de crédit(s)</subsection>
+				<p>Avant d’autoriser des prélèvements concernant la reprise de crédit(s) les conditions suivantes doivent être remplies:[br][/br]</p>
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-332/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<p>
+[br][/br][br][/br]
+
+L'offre de crédit n'aura pas de suite si les formalités prévues dans les paragraphes précédents ne sont pas remplies endéans les trois  mois. Dans ce cas, la banque se réserve le droit d'annuler l'offre de crédit ou d'en modifier les conditions.
+			</p>
+
+			<section class="section">Conditions particulières</section>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-219/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-219/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-241/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-241/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-243/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-243/omschrijving" /></text>
+				</p>
+
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-244/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-244/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-245/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-245/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-339/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-339/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-251/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-251/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-252/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-252/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-340/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-340/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-341/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-341/omschrijving" /></text>
+				</p>
+			</xsl:if>	 
+
+			<xsl:if test="count($bijzondereBepalingenData/code-342/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-342/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-343/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-343/omschrijving" /></text>
+				</p>
+			</xsl:if>	 
+
+			<xsl:if test="count($bijzondereBepalingenData/code-344/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-344/omschrijving" /></text>
+				</p>
+			</xsl:if>	 
+
+			<xsl:if test="count($bijzondereBepalingenData/code-345/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-345/omschrijving" /></text>
+				</p>
+			</xsl:if>	 
+
+			<xsl:if test="count($bijzondereBepalingenData/code-254/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-254/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-255/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-255/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-256/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-256/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-257/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-257/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-258/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-258/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-261/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-261/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+			<xsl:if test="count($bijzondereBepalingenData/code-346/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-346/omschrijving" /></text>
+				</p>
+			</xsl:if> 
+
+			<xsl:if test="count($bijzondereBepalingenData/code-270/code) > 0 "> 
+				<p>
+					<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingenData/code-270/omschrijving" /></text>
+				</p>
+			</xsl:if>
+
+
+			<!-- Loop Bijzondere bepalingen tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $bijzondereBepaling_variable)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable> 
+
+				<xsl:variable name="bijzondereBepalingCategorie_value" select="fes:getFormattedValue($doc, $bijzondereBepalingCategorie_variable, $tupleIndices)" />
+				<xsl:variable name="bijzondereBepalingCode_value" select="fes:getFormattedValue($doc, $bijzondereBepalingCode_variable, $tupleIndices)" />
+				<xsl:variable name="bijzondereBepalingFinaalOmschrijving_value" select="fes:getFormattedValue($doc, $bijzondereBepalingFinaalOmschrijving_variable, $tupleIndices)" />
+
+				<!-- If no code is available it means that its a manual bijzondere bepaling -->
+				<xsl:if test="$bijzondereBepalingCode_value = '' or $bijzondereBepalingCode_value= '...'">
+
+					<xsl:if test= "$bijzondereBepalingCategorie_value = $covenant_value" >
+						<p>
+							<text preserveWhitespace="true"><xsl:value-of select="$bijzondereBepalingFinaalOmschrijving_value" /></text>
+						</p>
+
+					</xsl:if>       
+
+				</xsl:if>
+
+			</xsl:for-each>
+
+
+
+			<section class="section">Frais de constitution de dossier</section>
+
+
+			<p>Les frais de dossier dus pour l'étude de cette lettre de crédit, s'élèvent à 
+
+				<!-- Loop Zakelijke overeenkomst tuple -->      
+				<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten_variable)">
+					<xsl:variable name="zakelijkeOvereenkomstTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="zakelijkeOvereenkomstTupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$zakelijkeOvereenkomstTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+					<xsl:value-of select="fes:getFormattedValue($doc,$totalarrangementfee_variable, $zakelijkeOvereenkomstTupleIndices)" />
+				</xsl:for-each>
+EUR.
+Cette somme sera débitée de votre compte-courant.
+			</p>
+
+			<!-- Loop Verpandingszekerheid tuple -->
+			<xsl:variable name="zekerheidsTypeData" >
+				<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid_variable)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable> 
+
+					<xsl:variable name="zekerheidsType_value" select="fes:getFormattedValue($doc, $verpandingszekerheidZekerheidsType_variable, $tupleIndices)" />  
+
+					<xsl:if test="$zekerheidsType_value = $FIA_value">
+						<FIA>1</FIA>
+					</xsl:if>
+					<xsl:if test="$zekerheidsType_value = $privilège_agricole_value">
+						<agricole>1</agricole>
+					</xsl:if>
+					<xsl:if test="$zekerheidsType_value = $fonds_garantie_wallon_value">
+						<wallon>1</wallon>
+					</xsl:if>
+					<xsl:if test="$zekerheidsType_value = $fonds_bruxellois_garantie">
+						<bruxellois>1</bruxellois>
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:variable>		
+
+			<xsl:if test="count($zekerheidsTypeData/FIA) > 0 or count($zekerheidsTypeData/agricole) > 0 or count($zekerheidsTypeData/wallon) > 0 or count($zekerheidsTypeData/bruxellois) > 0">
+				<section class="section">Crédits garantis par. </section>
+			</xsl:if>
+
+			<table class="datatable">
+				<xsl:if test="count($zekerheidsTypeData/FIA) > 0 ">
+					<tr class="level0">
+						<td>[b]le FIA et/ou recevant une subvention-intérêt via le FIA[/b]</td>
+						<td>Conformément aux conditions mises par le FIA à son intervention, l'emprunteur s'engage à fournir à première demande du FIA et/ou de la Banque Triodos, tous renseignements d'ordre professionnel ou financier et à autoriser toutes visites ou toutes enquêtes de leurs délégués.[br][/br][br][/br]
+							L'emprunteur s'engage à signaler toute acquisition immobilière à la banque et à lui consentir à première demande l’hypothèque sur celle-ci.[br][/br][br][/br]
+							La banque se réserve le droit de dénoncer en tout temps et sans préavis le crédit :[br][/br][br][/br]
+							-	en cas de déclarations inexactes de l'emprunteur;[br][/br]
+							-	en cas de non-respect des conditions mises à l'octroi du crédit ou de la garantie publique;[br][/br][br][/br]
+							L'emprunteur s'engage à ne pas céder ses quotas de production pendant toute la durée de la garantie sans l'autorisation écrite et préalable du FIA et de la banque.[br][/br][br][/br]
+							L'emprunteur s'engage à informer immédiatement la banque des demandes d'aides introduites auprès d'autorités publiques du chef de diminution volontaire de la production de son exploitation.[br][/br][br][/br]
+							L'emprunteur cède à la banque qui accepte, la quotité cessible de tous salaires, traitements et indemnités pouvant lui revenir ainsi que de toute somme qu'il devrait percevoir consécutivement à une cession de quota ou une diminution volontaire de production de son exploitation. Toutefois cette cession ne sortira ses effets que si les emprunteurs sont en défaut de payer les sommes devenues exigibles en exécution des engagements couverts par le présent crédit.[br][/br][br][/br]
+							Tous montants quelconques perçus ou à percevoir par l'emprunteur consécutivement à une cession de quota ou une diminution volontaire de la production sont affectés de plein droit et prioritairement aux crédits avec garantie publique lorsque ces opérations portent atteinte à la rentabilité de l'exploitation
+						</td>
+					</tr>
+				</xsl:if>
+
+				<xsl:if test="count($zekerheidsTypeData/agricole) > 0">
+					<tr class="level0">
+						<td>[b]Privilège agricole[/b]</td>
+						<td>La Banque aura notamment le droit de mettre fin au présent crédit sans préavis, par simple notification fait au crédité, par lettre recommandée, dans les cas suivants:
+
+a)  en cas de résiliation du bail de la ferme dont l'outillage est constitué en privilège au profit de la Banque
+b)  faute, par le crédité, d'avoir justifié chaque année, du paiement des fermages, dans les trois mois de l'échéance
+						</td>
+					</tr>
+				</xsl:if>
+
+				<xsl:if test="count($zekerheidsTypeData/wallon) > 0 ">
+					<tr class="level0">
+						<td>[b]Fonds de garantie Wallon[/b]</td>
+						<td>Les crédités s'engagent à tenir régulièrement leurs comptes de manière à permettre d'établir les éléments d'actifs à l'activité professionnelle, les dettes qui s'y rapportent ainsi que les résultats, à mettre ces documents à disposition des délégués du Ministre et du Comité du Fonds de Garantie Wallon et à leur fournir tous renseignements et documents propres à la sauvegarde des intérêts du Fonds de garantie Wallon, à la justification de l'utilisation du crédit aux fins prévues et la bonne exécution du programme d'activité approuvé.[br][/br][br][/br]
+							Sauf autorisation écrite du comité du Fonds de Garantie Wallon, les crédités s'interdisent tant que le Fonds de Garantie Wallon ne sera pas dégagé de sa garantie:[br][/br][br][/br]
+							-  de cesser d'utiliser aux fins prévues les bâtiments, matériel et outillage et fonds de commerce acquis ou transformés grâce à la garantie du fonds;[br][/br]
+							-  d'aliéner leurs biens ou de les donner en garantie à des tiers.[br][/br][br][/br]
+							Les crédités sont tenus d'autoriser la visite des immeubles servant à l'exploitation ainsi que de tout immeuble donné en garantie, par les délégués du comité du Fonds de Garantie Wallon et du Ministre des P.M.E.[br][/br][br][/br]
+							Les crédités s'engagent à signaler à l'établissement qui leur accorde le crédit et au Fonds de Garantie Wallon, toute nouvelle acquisition immobilière.[br][/br][br][/br]
+							Sans préjudice aux autres clauses de résiliation au contrat, l'organisme de crédit a le droit de mettre fin au crédit et d'exiger le remboursement immédiat en cas de déclaration inexacte ou incomplète des crédités, ayant entraîné l'octroi de la garantie et au cas où les avances garanties par le Fonds de Garantie Wallon ont été affectées à des fins autres que celles qui ont motivé l'octroi de cette garantie.[br][/br][br][/br]
+						</td>
+					</tr>
+				</xsl:if>
+
+				<xsl:if test="count($zekerheidsTypeData/bruxellois) > 0">
+
+					<tr class="level0">
+						<td>[b]le Fonds Bruxellois de Garantie[/b]</td>
+						<td>Le crédité s'engage à tenir une comptabilité conforme aux dispositions légales permettant d’évaluer le passif et l’actif ainsi que la rentabilité; à autoriser la visite des immeubles servant à l’exploitation ainsi que ceux donnés en garantie. Le crédité s’engage également à autoriser un contrôle par un mandataire habilité à cet effet par le Ministre Bruxellois de l’Economie ou par le Comité de Gestion du Fonds.[br][/br]
+							Le crédité s’interdit de modifier, sans l’accord préalable du Fonds, l’affectation donnée aux immeubles, au fonds de commerce et au matériel acquis grâce à la garantie du Fonds.[br][/br]
+							Le crédité s’engage à ne pas détériorer de manière significative sa situation financière en accomplissant des actes n’entrant pas dans le cadre de l’activité professionnelle normale. Dans ce cadre le crédité s’interdit notamment d’aliéner leurs biens ou de les donner en garantie à des tiers, sans l’autorisation préalable du Fonds.[br][/br][br][/br]
+
+							Le crédité s’engage à  maintenir son investissement dans la Région de Bruxelles-Capitale.[br][/br]
+
+							[color=#E36C0A][case allocated amount > 500.000,00][/color][br][/br]
+							si l’intervention est égale ou supérieure au plafond (actuellement 500.000€), le crédité doit s’engager de maintenir son investissement dans RB pendant minimum 5 ans à compter de la mise en force de la garantie du Fonds. En cas de fausses déclarations ou de non-respect de ce qui précède par les crédités, la Banque Triodos peut, en accord avec le Fonds Bruxellois de Garantie, résilier le contrat.[br][/br]
+							[color=#E36C0A][/case allocated amount > 500.000,00][/color][br][/br][br][/br]
+
+							Une commission sera due au Fonds Bruxellois de Garantie. Cette somme sera débitée de votre compte-courant dès qu’elle nous est communiquée par le Fonds Bruxellois de Garantie. </td>
+					</tr>
+
+				</xsl:if>
+			</table>
+
+			<newpage name="normal">
+				<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+			</newpage>
+
+			<!-- Loop Zakelijke overeenkomst tuple -->      
+			<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten_variable)">
+				<xsl:variable name="zakelijkeOvereenkomstTupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="zakelijkeOvereenkomstTupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$zakelijkeOvereenkomstTupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>
+
+				<!-- Loop faciliteiten tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten_variable, $zakelijkeOvereenkomstTupleIndices)">
+					<xsl:variable name="zakelijkeOvereenkomstSubTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="zakelijkeOvereenkomstSubTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$zakelijkeOvereenkomstTupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$zakelijkeOvereenkomstSubTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="facilityNumber" select="fes:getFormattedValue($doc, $faciliteitNummer_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+					<xsl:variable name="productlijnnaam_value" select="fes:getFormattedValue($doc, $productlijncontractantNaam_variable, $zakelijkeOvereenkomstSubTupleIndices)"/>
+					<xsl:variable name="limiet_value" select="fes:getValue($doc, $limiet_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+					<xsl:variable name="limiet_formatted_value" select="fes:getFormattedValue($doc, $limiet_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+					<xsl:variable name="fixedInterestPeriod" select="fes:getFormattedValue($doc, $facilityInterestDetailsFixedInterestPeriod_variable, $zakelijkeOvereenkomstSubTupleIndices)" /> 
+					<xsl:variable name="usedRate" select="fes:getFormattedValue($doc, $facilityTpUsedRate_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+					<xsl:variable name="printedRate_value" select="fes:getFormattedValue($doc, $printedRate_variable, $zakelijkeOvereenkomstSubTupleIndices)" /> 
+					<xsl:variable name="productMargin" select="fes:getFormattedValue($doc, $facilityTpProductInterestmargin_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+
+					<xsl:variable name="subsidyData">
+						<!-- Loop Verpandingszekerheid tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid_variable)">
+							<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="tupleIndices" as="xs:integer *">
+								<xs:sequence>
+									<xsl:value-of select="$tupleIndex"/>
+								</xs:sequence>
+							</xsl:variable> 
+
+							<xsl:variable name="verpandingsZekerheidsType_value" select="fes:getFormattedValue($doc, $verpandingszekerheidZekerheidsType_variable, $tupleIndices)" />
+
+							<!-- Collateral is case subsidy -->
+							<xsl:if test="$verpandingsZekerheidsType_value = $debenture_subsidy_value">
+								<xsl:variable name="amountOfAllocatie" select="fes:getTupleInstanceCount($doc,$allocatie_variable,$tupleIndices)" />
+
+								<!-- Collateral allocated to agreement -->
+								<xsl:if test="$amountOfAllocatie = 0">
+									<amount>1</amount>
+								</xsl:if>
+
+								<!-- Loop allocatie tuple -->
+								<xsl:for-each select="fes:getTupleInstances($doc, $allocatie_variable,$tupleIndices)">
+									<xsl:variable name="allocatieTupleIndex" select="." as="xs:integer"/>
+									<xsl:variable name="allocatieTupleIndices" as="xs:integer *">
+										<xsl:for-each select="$tupleIndices">
+											<xs:sequence> 
+												<xsl:value-of select="."/>
+											</xs:sequence>
+										</xsl:for-each>
+										<xs:sequence>
+											<xsl:value-of select="$allocatieTupleIndex"/>
+										</xs:sequence>
+									</xsl:variable>
+
+									<xsl:variable name="allocatedFacilityNumber" select="fes:getFormattedValue($doc, $allocatedFaciliteitNummer_variable, $allocatieTupleIndices)" />"
+
+
+									<!-- Collateral allocated to facility -->
+									<xsl:if test="$facilityNumber = $allocatedFacilityNumber">
+										<amount>1</amount>
+									</xsl:if>
+
+								</xsl:for-each>
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:variable>
+
+					<xsl:variable name="borrowingBaseData">
+						<!-- Loop Verpandingszekerheid tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid_variable)">
+							<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="tupleIndices" as="xs:integer *">
+								<xs:sequence>
+									<xsl:value-of select="$tupleIndex"/>
+								</xs:sequence>
+							</xsl:variable> 
+
+							<xsl:variable name="verpandingsZekerheidsType_value" select="fes:getFormattedValue($doc, $verpandingszekerheidZekerheidsType_variable, $tupleIndices)" />
+
+							<!-- Collateral is case borrowing base -->
+							<xsl:if test="$verpandingsZekerheidsType_value = $debentureReceivables_value or $verpandingsZekerheidsType_value = $debentureInventory_value">
+								<xsl:variable name="amountOfAllocatie" select="fes:getTupleInstanceCount($doc,$allocatie_variable,$tupleIndices)" />
+
+								<!-- Collateral allocated to agreement -->
+								<xsl:if test="$amountOfAllocatie = 0">
+									<amount>1</amount>
+								</xsl:if>
+
+								<!-- Loop allocatie tuple -->
+								<xsl:for-each select="fes:getTupleInstances($doc, $allocatie_variable,$tupleIndices)">
+									<xsl:variable name="allocatieTupleIndex" select="." as="xs:integer"/>
+									<xsl:variable name="allocatieTupleIndices" as="xs:integer *">
+										<xsl:for-each select="$tupleIndices">
+											<xs:sequence>
+												<xsl:value-of select="."/>
+											</xs:sequence>
+										</xsl:for-each>
+										<xs:sequence>
+											<xsl:value-of select="$allocatieTupleIndex"/>
+										</xs:sequence>
+									</xsl:variable>
+
+									<xsl:variable name="allocatedFacilityNumber" select="fes:getFormattedValue($doc, $allocatedFaciliteitNummer_variable, $allocatieTupleIndices)" />"
+
+
+									<!-- Collateral allocated to facility -->
+									<xsl:if test="$facilityNumber = $allocatedFacilityNumber">
+										<amount>1</amount>
+									</xsl:if>
+
+								</xsl:for-each>
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:variable>
+
+					<xsl:variable name="productMarginFormatted">  
+						<xsl:choose>
+							<xsl:when test="$productMargin != '...' and $productMargin != ''"> 
+								<xsl:variable name="productMarginMultiplied" select="number($productMargin) * 100" /> 
+								<xsl:variable name="productMarginRounded" select="format-number(round($productMarginMultiplied * 100) div 100, '##0,##', 'eur_format')" />
+								<rounded>
+									<xsl:value-of select="$productMarginRounded" />
+								</rounded>
+							</xsl:when>
+							<xsl:otherwise> 
+								<xsl:value-of select="''" />
+							</xsl:otherwise>
+						</xsl:choose>
+
+					</xsl:variable>
+					<xsl:variable name="looptijd_value" select="fes:getFormattedValue($doc, $looptijd_variable, $zakelijkeOvereenkomstSubTupleIndices)" />
+					<xsl:variable name="counter" as="xs:integer" select="position() - 1" />
+
+					<xsl:choose>
+
+						<xsl:when test="$productlijnnaam_value = $termloan_value" >
+							<xsl:for-each select="fes:getTupleInstances($doc, $producten_variable, $zakelijkeOvereenkomstSubTupleIndices)"> 
+								<xsl:variable name="productTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="productTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$zakelijkeOvereenkomstSubTupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$productTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<xsl:variable name="aflossingsvorm_value" select="fes:getFormattedValue($doc, $aflossingsvorm_variable, $productTupleIndices)"/>
+								<xsl:variable name="rentetype_value" select="fes:getFormattedValue($doc, $rentetype_variable, $productTupleIndices)"/>
+								<xsl:variable name="aflossingsperiodiciteit_value" select="fes:getFormattedValue($doc, $aflossingsperiodiciteit_variable, $productTupleIndices)"/>							
+								<xsl:variable name="eindDatumOrigneel" select="fes:getValue($doc, $productEinddatum_variable, $productTupleIndices)" />
+								<xsl:variable name="floorRate" select="fes:getFormattedValue($doc, $floorRate_value, $productTupleIndices)"/>
+
+								<xsl:variable name="ingangsDatumOrgineel" select="fes:getValue($doc, $productIngangsDatum_variable, $productTupleIndices)" />
+								<xsl:variable name="repayment" >			
+									<xsl:choose>
+										<xsl:when test="$aflossingsperiodiciteit_value = 'Monthly'">
+											<xsl:value-of select="'mensualités'"/>
+										</xsl:when>
+										<xsl:when test="$aflossingsperiodiciteit_value = 'Two monthly'">
+											<xsl:value-of select="'bimestriel'"/>
+										</xsl:when>
+										<xsl:when test="$aflossingsperiodiciteit_value = 'Quarterly'">
+											<xsl:value-of select="'trimestrialités'"/>
+										</xsl:when>
+										<xsl:when test="$aflossingsperiodiciteit_value = 'Half yearly'">
+											<xsl:value-of select="'semestrialités'"/>
+										</xsl:when>
+										<xsl:when test="$aflossingsperiodiciteit_value = 'Yearly'">
+											<xsl:value-of select="'annuités'"/>
+										</xsl:when>
+									</xsl:choose>
+								</xsl:variable>
+
+
+								<xsl:if test="$aflossingsvorm_value != $aflossingsvorm_bullet_value">
+									<xsl:variable name="eersteAflossingNa" select="xs:integer(fes:getFormattedValue($doc, $eersteAflossingNa_variable, $productTupleIndices))" />					
+
+									<newpage name="normal">
+										<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+									</newpage>
+
+
+									<p>[b]ANNEXE du  <xsl:value-of select="$currentDate" />[/b]</p>
+									<p>[b]Cette annexe est régie par les conditions de la lettre de crédit dd. <xsl:value-of select="$currentDate" />, à laquelle elle est annexée et dont elle fait partie intégrante.[/b]</p>
+
+									<p class="Centered">[b](<xsl:value-of select="fin:intToAlphabet($counter)" />) CREDIT A TERME [/b]</p>
+									<br/>
+
+									<table class="datatable">
+										<tr class="level0">
+											<td>[b]Montant[/b]</td>
+											<td>Maximum <xsl:value-of select="$limiet_formatted_value" />  EUR (en lettres: <xsl:value-of select="fes:convertNumberToText($doc,number($limiet_value),'fr')" /> euros).</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]But du crédit[/b]</td>
+											<td>Ce crédit sera utilisé exclusivement pour [color=#E36C0A][facility purpose][/color].[br][/br][br][/br]Ce but est une condition essentielle de cette proposition.</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Prélèvement[/b]</td>
+											<td>Le crédit à terme peut être utilisé selon le plan de prélèvement suivant: après signature de cet accord, sur base [color=#E36C0A][case facturen inclusief BTW][/color] des factures TVA incluse[color=#E36C0A][/case facturen inclusief BTW][/color][color=#E36C0A][case facturen exclusief BTW][/color] des factures hors TVA [color=#E36C0A][/case facturen exclusief BTW][/color][color=#E36C0A][case notaris][/color]du décompte du notaire instrumentant[color=#E36C0A][/case notaris][/color]en rapport avec le but énoncé ci-dessus, suite à la constitution des sûretés et une fois les conditions suspensives remplies.[br][/br][br][/br]
+												Le crédit doit être prélevé avant le [color=#E36C0A][ultimate disbursement date][/color]. Après cette date, le montant non utilisé du crédit ne peut plus être utilisé.</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Remboursement[/b]</td>
+											<td>Le crédit doit être remboursé par <xsl:value-of select="$repayment" /> d'un montant de [color=#E36C0A][repayment amount][/color] EUR, à payer le premier du mois, la première fois le <xsl:if test="$ingangsDatumOrgineel != '' and $ingangsDatumOrgineel!='...'">
+													<xsl:value-of select="fin:datePlus($ingangsDatumOrgineel,'yyyy-mm-dd',0,$eersteAflossingNa,0,'d MMMM yyyy','fr')" />
+												</xsl:if> et la dernière fois <xsl:if test="$eindDatumOrigneel != '' and $eindDatumOrigneel != '...'">
+													<xsl:value-of select="fin:datePlus($eindDatumOrigneel,'yyyy-mm-dd',0,0,0,'d MMMM yyyy','fr')" />
+												</xsl:if>.
+
+											</td>
+										</tr>
+
+
+										<xsl:if test="$eersteAflossingNa != 0">
+											<tr class="level0">
+												<td>[b]Franchise en capital[/b]</td>
+												<td>Une franchise en capital est accordée pour une période de maximum <xsl:value-of select="$eersteAflossingNa" /> mois, et qui prendra fin au plus tard le [color=#E36C0A][ultimate date grace period][/color]. Pendant cette période, seuls les intérêts sur le montant prélevé du crédit seront remboursés. </td>
+											</tr>            
+										</xsl:if> 
+
+										<tr class="level0">
+											<td>[b]Intérêts[/b]</td>
+											<td>
+
+
+												<xsl:choose>
+													<xsl:when test="$rentetype_value = $fixed_value">
+														Un intérêt de <xsl:value-of select="$printedRate_value" /> l'an est dû sur les sommes prélevées, fixe jusqu’au <xsl:value-of select="fin:datePlus($eindDatumOrigneel,'yyyy-mm-dd',0,0,0,'d MMMM yyyy','fr')" />.
+													</xsl:when>
+													<xsl:when test="$rentetype_value = $base_value">
+														Les taux d’intérêts est calculés sur base de 
+														<xsl:value-of select="$rentetype_value"  />
+															sur <xsl:if test="$fixedInterestPeriod != '' and $fixedInterestPeriod != '...'">
+															<xsl:value-of select="fes:convertNumberToText($doc,number($fixedInterestPeriod),'fr')" />
+														</xsl:if> (publié 2 jours ouvrables bancaires avant de prélèvement) majoré d'une marge de <xsl:if test="$productMargin !='' and $productMargin != '...'">
+															<xsl:value-of select="$productMarginFormatted/rounded"/>
+														</xsl:if>% en faveur de la Banque Triodos [color=#E36C0A][case interest at date  greater than floor][/color] (soit à titre indicatif au <xsl:value-of select="$currentDate" /> un intérêt de [color=#E36C0A][interest at date][/color]% l'an, est dû sur les sommes prélevées) [color=#E36C0A][/case interest at date greater than floor][/color]. Le taux ainsi calculé restera fixe jusqu’au <xsl:value-of select="fin:datePlus($eindDatumOrigneel,'yyyy-mm-dd',0,0,0,'d MMMM yyyy','fr')" />. L’intérêt ainsi calculé ne pourra descendre en-dessous du seuil de <xsl:choose><xsl:when test="$floorRate='..' or $floorRate='...'">0</xsl:when><xsl:otherwise><xsl:value-of select="$floorRate"/></xsl:otherwise></xsl:choose>%.
+													</xsl:when>
+												</xsl:choose>
+
+												<p>[br][/br][br][/br]Les intérêts sont calculés à partir du jour du prélèvement jusqu'au jour du remboursement définitif.[br][/br]
+												Pendant la période de prélèvement, les intérêts courus sont payables et exigibles <xsl:value-of select="$repayment"/>.[br][/br]
+												[color=#E36C0A][case interest only period][/color]Après la période de prélèvement, les intérêts sont inclus dans les <xsl:value-of select="$repayment"/>.[color=#E36C0A][/case interest only period][/color][color=#E36C0A][case no interest only period][/color]Les intérêts sont payables simultanément aux remboursements en capital.[color=#E36C0A][/case interest only period][/color][br][/br]
+												La Banque Triodos se réserve le droit de revoir le taux d'intérêt tous les [color=#E36C0A][interest adjustment period][/color] ans.[br][/br]
+												En cas de modification du taux, le bénéficiaire du crédit en est averti et bénéficie d'une période d'un mois pour rembourser le crédit avec une indemnité de remploi limitée à [color=#E36C0A][early repayment interest fee][/color] mois d’intérêt conventionnel sur le montant remboursé anticipativement. Passé ce délai, le nouveau taux d'intérêt sera d'application.</p>
+											</td> 
+										</tr>
+										<tr class="level0">
+											<td>[b]Retard de paiement[/b]</td>
+											<td>Toute somme due à titre d'intérêt ou de principal sera débitée de votre compte à vue sur lequel sera calculé un taux d'intérêt équivalent à celui applicable aux soldes débiteurs en compte-courant. [br][/br][br][/br]
+												Les remboursements en capital non payés à l'échéance seront, de plein droit et sans mise en demeure, majorés d'un montant de 10 % à titre d'indemnisation forfaitaire.[br][/br][br][/br]
+												Ces dispositions s’appliquent sans préjudice du droit de la Banque Triodos de mettre fin au crédit immédiatement et sans préavis. </td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Indemnité de remploi[/b]</td>
+											<td>
+
+
+												<xsl:choose>
+													<xsl:when test="number($limiet_value) &lt; 1000000">
+													Le bénéficiaire du crédit peut renoncer au montant non prélevé du crédit et peut rembourser anticipativement le crédit utilisé. Dans ce cas, une indemnité de remploi sera due ; cette indemnité sera égale à l’équivalent de [color=#E36C0A][early repayment interest period in writing][/color] mois d'intérêt conventionnel calculé sur le montant non-prélevé ou sur le montant du remboursement anticipé.
+													</xsl:when>
+
+													<xsl:when test="number($limiet_value) >= 1000000"> 
+													Le bénéficiaire du crédit peut renoncer au montant non prélevé du crédit et peut rembourser anticipativement le crédit utilisé. Dans ce cas, une indemnité de remploi sera due ; cette indemnité sera égale au montant le plus élevé qui résulte des deux calculs suivants:[br][/br][br][/br]
+													•  l’équivalent de [color=#E36C0A][early repayment interest period in writing][/color] mois d'intérêt conventionnel calculé sur le montant non-prélevé ou sur le montant du remboursement anticipé;[br][/br][br][/br]
+													•  la perte en revenus calculé comme la différence entre le cumul des intérêts que la banque recevrait sur le crédit et le cumul des intérêts que la banque recevrait d’un replacement en OLO belges des montants non prélevés ou remboursés anticipativement, les deux calculés sur une durée qui va jusqu’à la date de la prochaine révision du taux conventionnel.              
+													</xsl:when>
+												</xsl:choose>
+
+
+											</td>
+										</tr>
+									</table>
+								</xsl:if>
+
+
+
+
+								<xsl:if test="$aflossingsvorm_value = $aflossingsvorm_bullet_value">		
+									<newpage name="normal">
+										<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+									</newpage>
+									<p>[b]ANNEX D.D. <xsl:value-of select="$currentDate" />[/b]</p>
+									<p>[b]Cette annexe est régie par les conditions de la lettre de crédit dd. <xsl:value-of select="$currentDate" />, à laquelle elle est annexée et dont elle fait partie intégrante.[/b] </p>
+
+
+									<p class="Centered">[b](<xsl:value-of select="fin:intToAlphabet($counter)" />) BULLET LOAN[/b]</p>
+									<br/>
+
+									<table> 
+										<tr class="level0">
+											<td>[b]Montant[/b]</td>
+											<td>Maximum <xsl:value-of select="$limiet_formatted_value" /> EUR (en lettres: <xsl:value-of select="fes:convertNumberToText($doc,number($limiet_value),'fr')" /> euros). </td>
+										</tr>
+										<tr class="level0">
+											<td>[b]But du crédit[/b]</td>
+											<td>Ce crédit sera affecté exclusivement à [color=#E36C0A][facility purpose][/color].[br][/br][br][/br]
+												Ce but est une condition essentielle de cette proposition. </td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Prélèvement[/b]</td>
+											<td>Le crédit à terme peut être utilisé selon le plan de prélèvement suivant : après signature de cet accord, sur base des factures [color=#E36C0A][case facturen inclusief BTW][/color](TVA inclus)[color=#E36C0A][/case facturen inclusief BTW][/color] [color=#E36C0A][case facturen exclusief BTW][/color](hors TVA)[color=#E36C0A][/case facturen exclusief BTW][/color][color=#E36C0A][case notaris][/color]du décompte du notaire instrumentant[color=#E36C0A][/case notaris][/color]				en rapport avec le but énoncé ci-dessus, suite à la constitution des sûretés et une fois les conditions suspensives remplies.[br][/br]
+												Le crédit doit être prélevé avant le date prélèvement. Après cette date, le montant non utilisé du crédit ne peut plus être utilisé.[br][/br][br][/br]
+												Le crédit doit être prélevé avant le [color=#E36C0A][ultimate disbursement date][/color]. Après cette date, le montant non utilisé du crédit ne peut plus être utilisé.
+											</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Remboursement[/b]</td>
+											<td>Le crédit doit être remboursé par un remboursement en capital d'un montant de <xsl:value-of select="$limiet_formatted_value" /> EUR à payer au plus tard le [color=#E36C0A][ultimate repayment date][/color].[br][/br][br][/br]
+												Par dérogation à ce qui suit, aucune indemnité de remploi ne sera due en cas de remboursement anticipé avec les revenus de [color=#E36C0A][early repayment reason][/color] vente grange.
+											</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Intérêts[/b]</td>
+											<td>
+
+
+												<xsl:choose>
+													<xsl:when test="$rentetype_value = $fixed_value">
+													Un intérêt de <xsl:value-of select="$printedRate_value" /> l'an est dû sur les sommes prélevées, fixe jusqu’au [color=#E36C0A][interest review date][/color].
+													Les intérêts sont calculés à partir du jour du prélèvement jusqu'au jour du remboursement définitif.[br][/br][br][/br]
+													Pendant et après la période de prélèvement, les intérêts courus sont payables et exigibles <xsl:value-of select="$repayment"/>.[br][/br][br][/br]
+													</xsl:when>
+													<xsl:when test="$rentetype_value = $base_value">
+													Pendant et après la période de prélèvement, les intérêts courus sont payables et exigibles selon la périodicité du taux.[br][/br][br][/br]	
+													</xsl:when>
+												</xsl:choose>
+
+												<p>La Banque Triodos se réserve le droit de revoir le taux d'intérêt tous les [color=#E36C0A][interest review period][/color] ans; en cas de modification du taux, le bénéficiaire du crédit en est averti et bénéficie d'une période d'un mois pour rembourser le crédit avec une indemnité de remploi limitée à 6 mois d’intérêt conventionnel sur le montant remboursé anticipativement. Passé ce délai, le nouveau taux d'intérêt sera d'application.[br][/br][br][/br]
+													En cas de modification du taux, le bénéficiaire du crédit en est averti et bénéficie d'une période d'un mois pour rembourser le crédit avec une indemnité de remploi limitée à [color=#E36C0A][early repayment interest fee][/color] mois d’intérêt conventionnel sur le montant remboursé anticipativement. Passé ce délai, le nouveau taux d'intérêt sera d'application.[br][/br][br][/br]</p>
+
+
+
+												<p>Le taux d’intérêts est calculé sur base de <xsl:value-of select="$rentetype_value"/> sur <xsl:if test="$fixedInterestPeriod != '' and $fixedInterestPeriod != '...'">
+														<xsl:value-of select="fes:convertNumberToText($doc,number($fixedInterestPeriod),'fr')" />
+													</xsl:if>  (publié 2 jours ouvrables bancaires avant la date de prélèvement) majoré d'une marge <xsl:if test="$productMargin !='' and $productMargin != '...'">
+														<xsl:value-of select="$productMarginFormatted/rounded"/>
+													</xsl:if>% en faveur de la Banque Triodos [color=#E36C0A][case interest at date  greater than floor][/color] (soit à titre indicatif au <xsl:value-of select="$currentDate" /> un intérêt de [color=#E36C0A][interest][/color]% l'an), est dû sur les sommes prélevées, [color=#E36C0A][/case interest at date  greater than floor][/color] fixe pour <xsl:value-of select="$fixedInterestPeriod"/> mois. L’intérêt ainsi calculé ne pourra descendre en-dessous du seuil de <xsl:choose><xsl:when test="$floorRate='..' or $floorRate='...'">0</xsl:when><xsl:otherwise><xsl:value-of select="$floorRate"/></xsl:otherwise></xsl:choose>%.[br][/br]
+																Les intérêts sont calculés à partir du jour du prélèvement jusqu'au jour du remboursement définitif. Pendant la période de prélèvement, les intérêts courus sont payables et exigibles <xsl:value-of select="$repayment"/>.[br][/br]
+																[color=#E36C0A][case interest only period][/color]Après la période de prélèvement, les intérêts sont inclus dans les <xsl:value-of select="$repayment"/>.[color=#E36C0A][/case interest only period][/color][color=#E36C0A][case no interest only period][/color]Les intérêts sont payables simultanément aux remboursements en capital.[color=#E36C0A][/case interest only period][/color][br][/br]
+																La Banque Triodos se réserve le droit de revoir le taux d'intérêt tous les [color=#E36C0A][interest adjustment period][/color] ans.[br][/br]
+																En cas de modification du taux, le bénéficiaire du crédit en est averti et bénéficie d'une période d'un mois pour rembourser le crédit avec une indemnité de remploi limitée à [color=#E36C0A][early repayment interest fee][/color] mois d’intérêt conventionnel sur le montant remboursé anticipativement. Passé ce délai, le nouveau taux d'intérêt sera d'application.</p>
+											</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Non Utilization Fee[/b]</td>
+											<td>Pendant la période de prélèvement, une commission de réservation sera due sur le montant non  prélevé du crédit à terme à partir du [color=#E36C0A][first date of non utilization fee][/color]jusqu’à la date fin de prélèvement, à concurrence de 1,200% par an. La commission sera payable le premier jour calendrier de chaque trimestre.</td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Retard de paiement[/b]</td>
+											<td>Toute somme due à titre d'intérêt ou de principal sera débitée de votre compte à vue sur lequel sera calculé un taux d'intérêt équivalent à celui applicable aux soldes débiteurs en compte-courant.[br][/br][br][/br]
+												Les remboursements en capital non payés à l'échéance seront, de plein droit et sans mise en demeure, majorés d'un montant de 10 % à titre d'indemnisation forfaitaire.[br][/br][br][/br]
+												Ces dispositions s’appliquent sans préjudice du droit de la Banque Triodos de mettre fin au crédit immédiatement et sans préavis. </td>
+										</tr>
+										<tr class="level0">
+											<td>[b]Indemnité de remploi[/b]</td>
+
+											<xsl:choose>
+												<xsl:when test="number($limiet_value) &lt; 1000000">
+													<td>Le bénéficiaire du crédit peut renoncer au montant non prélevé du crédit et peut rembourser anticipativement le crédit utilisé. Dans ce cas, une indemnité de remploi sera due ; cette indemnité sera égale à l’équivalent de six mois d'intérêt conventionnel calculé sur le montant non-prélevé ou sur le montant du remboursement anticipé.</td>
+												</xsl:when>
+												<xsl:otherwise>
+													<td>Le bénéficiaire du crédit peut renoncer au montant non prélevé du crédit et peut rembourser anticipativement le crédit utilisé. Dans ce cas, une indemnité de remploi sera due ; cette indemnité sera égale au montant le plus élevé qui résulte des deux calculs suivants:[br][/br][br][/br]
+														•  l’équivalent de [color=#E36C0A][early repayment interest period in writing][/color] mois d'intérêt conventionnel calculé sur le montant non-prélevé ou sur le montant du remboursement anticipé;[br][/br][br][/br]
+														•  la perte en revenus calculé comme la différence entre le cumul des intérêts que la banque recevrait sur le crédit et le cumul des intérêts que la banque recevrait d’un replacement en OLO belges des montants non prélevés ou remboursés anticipativement, les deux calculés sur une durée qui va jusqu’à la date de la prochaine révision du taux conventionnel.              
+													</td>
+												</xsl:otherwise>
+											</xsl:choose>
+
+
+										</tr>
+									</table>
+								</xsl:if>
+
+							</xsl:for-each>
+						</xsl:when>
+
+						<xsl:when test="$productlijnnaam_value = $currentaccount_value" >      
+
+							<newpage name="normal">
+								<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+							</newpage>
+
+							<p>[b]ANNEX D.D. <xsl:value-of select="$currentDate" /> [/b]</p>
+							<p>[b]Cette annexe est régie par les conditions de la lettre de crédit dd. <xsl:value-of select="$currentDate" />, à laquelle elle est annexée et dont elle fait partie intégrante[/b].</p>
+
+							<p class="Centered">[b](<xsl:value-of select="fin:intToAlphabet($counter)" />) CREDIT DE CAISSE[/b]</p>
+							<br/>
+
+							<table>
+								<tr class="level0">
+									<td>[b]Montant[/b]</td>
+									<td>
+										<xsl:value-of select="$limiet_formatted_value" />  EUR (en lettres: <xsl:value-of select="fes:convertNumberToText($doc,number($limiet_value),'fr')" /> euros).
+										
+
+										<xsl:if test="count($subsidyData/amount) > 0">
+											[br][/br][br][/br]La limite nette du crédit de caisse [color=#E36C0A][case credit line][/color]et du Straight Loan [color=#E36C0A][/case credit line][/color]ne peut jamais dépasser [color=#E36C0A][maximum subsidy percentage][/color]% du montant total des subsides et/ou contrats octroyés de manière inconditionnelle par des pouvoirs subsidiant et pris en gage par la Banque Triodos  moins les sommes déjà perçues en rapport avec ces subsides et/ou contrats.
+										</xsl:if>
+
+										<xsl:if test="count($borrowingBaseData/amount) > 0 " >
+											[br][/br][br]Le prélèvement du crédit est limité à la somme de maximum 80 % du total des créances sur vos clients acceptées par la banque, et de maximum 50 % de la valeur comptable totale du stock acceptée par la banque. Avant utilisation de l’ouverture de crédit les conditions ci-dessous doivent être accomplies: vous nous soumettez pour approbation une fois par [color=#E36C0A][periodicity proof][/color] la copie signée de la liste de stock et de l'aging list des clients dans un format accepté par la Banque.
+										</xsl:if>
+									</td>
+								</tr>
+								<tr class="level0">
+									<td>[b]But du crédit[/b]</td>
+									<td>Ce crédit sera utilisé exclusivement pour [color=#E36C0A][facility purpose][/color].[br][/br][br][/br]
+										Ce but est une condition essentielle de cette proposition. </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Tarif[/b]</td>
+									<td>Les intérêts et les commissions en faveur de la Banque Triodos seront calculés comme suit:[br][/br]
+										-       un taux d'intérêt de base, actuellement de <xsl:value-of select="$usedRate" /> par an, qui pourra être modifié par la banque en fonction des conditions du marché; ce taux de base sera majoré d'une prime variable, fixée par la Banque Triodos. Cette prime est actuellement fixée à <xsl:if test="$productMargin !='' and $productMargin != '...'">
+											<xsl:value-of select="$productMarginFormatted/rounded"/>
+										</xsl:if>% par an. La Banque se réserve le droit de modifier le montant des intérêts et des commissions par simple avis.[br][/br]
+										-       Une commission de 1% par an, calculée sur le montant du crédit non utilisé.[br][/br]
+										-       Un intérêt complémentaire par an sur tout dépassement. Celui-ci sera égal au taux de base majoré de 4% par an.[br][/br]
+										Les intérêts courants sont payables et exigibles trimestriellement.
+									</td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Durée[/b]</td>
+									<td>
+
+										<!-- Loop Producten tuple -->
+										<xsl:for-each select="fes:getTupleInstances($doc, $producten_variable, $zakelijkeOvereenkomstSubTupleIndices)">
+											<xsl:variable name="productTupleIndex" select="." as="xs:integer"/>
+											<xsl:variable name="productTupleIndices" as="xs:integer *">
+												<xsl:for-each select="$zakelijkeOvereenkomstSubTupleIndices">
+													<xs:sequence>
+														<xsl:value-of select="."/>
+													</xs:sequence>
+												</xsl:for-each>
+												<xs:sequence>
+													<xsl:value-of select="$productTupleIndex"/>
+												</xs:sequence>
+											</xsl:variable>
+
+
+											<xsl:variable name="aflossingsperiodiciteit_value" select="fes:getFormattedValue($doc, $aflossingsperiodiciteit_variable, $productTupleIndices)"/>
+											<xsl:variable name="eersteAflossingNa" select="xs:integer(fes:getFormattedValue($doc, $eersteAflossingNa_variable, $productTupleIndices))" />
+											<xsl:variable name="ingangsDatumOrgineel" select="fes:getValue($doc, $productIngangsDatum_variable, $productTupleIndices)" />
+											<xsl:variable name="eindDatumOrigneel" select="fes:getValue($doc, $productEinddatum_variable, $productTupleIndices)" />
+											<xsl:variable name="rentetype_value" select="fes:getFormattedValue($doc, $rentetype_variable, $productTupleIndices)"/>
+											
+											
+											<xsl:choose>
+												<xsl:when test="$eindDatumOrigneel = '' or $eindDatumOrigneel= '...'" >
+												Le crédit de caisse est mis à votre disposition pour une durée indéterminée.
+												</xsl:when>
+												<xsl:otherwise>
+												Le crédit de caisse est mis à votre disposition pour une durée limitée:[br][/br]
+
+												- périodiquement, une fois par trimestre, la limite diminuera d’un montant de [color=#E36C0A][actual limit reduction amount][/color] EUR[br][/br]
+
+												- Au plus tard le <xsl:value-of select="fin:datePlus($eindDatumOrigneel,'yyyy-mm-dd',0,0,0,'d MMMM yyyy','fr')" />, la facilité de crédit sera clôturée, les sommes mises à votre disposition majorées des intérêts et les frais devront être définitivement remboursés.[br][/br]
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:for-each>
+									</td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Révision[/b]</td>
+									<td>La Banque Triodos se réserve le droit de réexaminer ce crédit de caisse annuellement au jour de l'échéance de cette convention, aussi bien en ce qui concerne la disponibilité qu'en ce qui concerne les conditions. </td>
+								</tr>           
+							</table>
+
+						</xsl:when>
+
+						<xsl:when test="$productlijnnaam_value = $straightLoanAccount_value" >
+
+							<newpage name="normal">
+								<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+							</newpage>
+
+							<p>[b]ANNEX D.D. <xsl:value-of select="$currentDate" />[/b]</p>
+							<p>[b]Cette annexe est régie par les conditions de la lettre de crédit dd. <xsl:value-of select="$currentDate" />, à laquelle elle est annexée et dont elle fait partie intégrante.[/b] </p>
+
+
+							<p class="Centered">[b](<xsl:value-of select="fin:intToAlphabet($counter)" />) STRAIGHT LOAN[/b]</p>
+							<br/>
+
+							<table>
+								<tr class="level0">
+									<td>[b]Montant[/b]</td>
+									<td>Maximum <xsl:value-of select="$limiet_formatted_value" /> EUR  (en lettres: <xsl:value-of select="fes:convertNumberToText($doc,number($limiet_value),'fr')" />  Euros). </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]But du crédit[/b]</td>
+									<td>Ce crédit sera utilisé exclusivement pour [color=#E36C0A][facility purpose][/color][br][/br][br][/br]]
+										Ce but est une condition essentielle de cette proposition. </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Prélèvement[/b]</td>
+									<td>Le straight loan pourra être prélevé par tranche de minimum [color=#E36C0A][minimum disbursement amount][/color] EUR avec des périodicités de [color=#E36C0A][periodicity][/color] mois. Le prélèvement peut être renouvelé à échéance de la périodicité. Le renouvellement doit être demandé par le crédité par une demande écrite et signée par les représentants compétents du crédité au plus tard deux jours ouvrables bancaires avant l’échéance du tirage précédent.
+
+										<xsl:if test="count($subsidyData/amount) > 0">
+             [br][/br][br][/br]La limite nette ne peut jamais dépasser [color=#E36C0A][maximum subsidy percentage][/color]% du montant total des subsides et/ou contrats octroyés de manière inconditionnelle par des pouvoirs subsidiant et pris en gage par la Banque Triodos moins les sommes déjà perçues en rapport avec ces subsides et/ou contrats.
+										</xsl:if> 
+										<xsl:if test="count($borrowingBaseData/amount) > 0">
+            [br][/br][br][/br]Le prélèvement du crédit est limité à la somme de maximum 80 % du total des créances sur vos clients acceptées par la banque, et de maximum 50 % de la valeur comptable totale du stock acceptée par la banque. Avant utilisation de l’ouverture de crédit les conditions ci-dessous doivent être accomplies: vous nous soumettez pour approbation [color=#E36C0A][periodicity proof][/color] la copie signée de la liste de stock et de l'aging list des clients dans un format accepté par la Banque.
+										</xsl:if>
+									</td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Tarif[/b]</td>
+									<xsl:for-each select="fes:getTupleInstances($doc, $producten_variable, $zakelijkeOvereenkomstSubTupleIndices)">
+										<xsl:variable name="productTupleIndex" select="." as="xs:integer"/>
+										<xsl:variable name="productTupleIndices" as="xs:integer *">
+											<xsl:for-each select="$zakelijkeOvereenkomstSubTupleIndices">
+												<xs:sequence>
+													<xsl:value-of select="."/>
+												</xs:sequence>
+											</xsl:for-each>
+											<xs:sequence>
+												<xsl:value-of select="$productTupleIndex"/>
+											</xs:sequence>
+										</xsl:variable> 
+										<xsl:variable name="floorRate" select="fes:getFormattedValue($doc, $floorRate_value, $productTupleIndices)"/>
+										<xsl:variable name="rentetype_value" select="fes:getFormattedValue($doc, $rentetype_variable, $productTupleIndices)"/>  
+										<td>Le taux d’intérêts est calculé sur base de <xsl:value-of select="$rentetype_value"/> sur <xsl:if test="$fixedInterestPeriod != '' and $fixedInterestPeriod != '...'">
+												<xsl:value-of select="fes:convertNumberToText($doc,number($fixedInterestPeriod),'fr')" />
+											</xsl:if> mois (publié 2 jours ouvrables bancaires avant la date de prélèvement) majoré d'une marge <xsl:if test="$productMargin !='' and $productMargin != '...'">
+												<xsl:value-of select="$productMarginFormatted/rounded"/>
+											</xsl:if>% en faveur de la Banque Triodos [color=#E36C0A][case interest at date  greater than floor][/color](soit à titre indicatif au <xsl:value-of select="$currentDate" /> un intérêt de <xsl:value-of select="$printedRate_value" /> l'an), est dû sur les sommes prélevées, [color=#E36C0A][/case interest at date  greater than floor][/color] fixe pour <xsl:value-of select="$fixedInterestPeriod" /> mois. L’intérêt ainsi calculé ne pourra descendre en-dessous du seuil de <xsl:choose><xsl:when test="$floorRate='..' or $floorRate='...'">0</xsl:when><xsl:otherwise><xsl:value-of select="$floorRate"/></xsl:otherwise></xsl:choose>%. Les intérêts sont calculés à partir du jour du prélèvement jusqu'au jour du remboursement définitif. Les intérêts courus sont payables et exigibles selon la périodicité choisie du Straight Loan.</td>  
+									</xsl:for-each>
+								</tr>
+								<tr class="level0">
+									<td>[b]Remboursement[/b]</td>
+									<td>Le crédit doit être remboursé à l'occasion de la réception sur compte du(des) subside(s) de [color=#E36C0A][subsidy provider][/color].
+
+										<xsl:for-each select="fes:getTupleInstances($doc, $producten_variable, $zakelijkeOvereenkomstSubTupleIndices)">
+											<xsl:variable name="productTupleIndex" select="." as="xs:integer"/>
+											<xsl:variable name="productTupleIndices" as="xs:integer *">
+												<xsl:for-each select="$zakelijkeOvereenkomstSubTupleIndices">
+													<xs:sequence>
+														<xsl:value-of select="."/>
+													</xs:sequence>
+												</xsl:for-each>
+												<xs:sequence>
+													<xsl:value-of select="$productTupleIndex"/>
+												</xs:sequence>
+											</xsl:variable>
+
+											<xsl:variable name="eindDatumOrigneel" select="fes:getValue($doc, $productEinddatum_variable, $productTupleIndices)" />
+
+										[br][/br]Le crédit sera totalement remboursé <xsl:value-of select="fin:datePlus($eindDatumOrigneel,'yyyy-mm-dd',0,0,0,'d MMMM yyyy','fr')" />.
+										</xsl:for-each>
+									</td> 
+								</tr>
+								<tr class="level0">
+									<td>[b]Durée[/b]</td>
+									<td>Des durées renouvelables de <xsl:value-of select="$looptijd_value"/> mois, en attendant le versement des subsides susmentionnés.</td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Révision[/b]</td>
+									<td>La Banque se réserve le droit de réexaminer ce straight loan annuellement au jour de l'échéance de cette convention, aussi bien en ce qui concerne la disponibilité qu'en ce qui concerne les conditions.</td>
+								</tr>
+							</table>          
+
+						</xsl:when>
+
+						<xsl:when test="$productlijnnaam_value = $bankgarantie_value"> 
+
+							<newpage name="normal">
+								<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+							</newpage>
+
+							<p>[b]ANNEX D.D. <xsl:value-of select="$currentDate" />[/b]</p>
+							<p>[b]Cette annexe est régie par les conditions de la lettre de crédit dd. <xsl:value-of select="$currentDate" />, à laquelle elle est annexée et dont elle fait partie intégrante.[/b]</p>
+
+
+							<p class="Centered">[b](<xsl:value-of select="fin:intToAlphabet($counter)" />) GARANTIE BANCAIRE[/b]</p>
+							<br/> 
+
+							<table>
+								<tr class="level0">
+									<td>[b]Montant[/b]</td>
+									<td>Maximum <xsl:value-of select="$limiet_formatted_value" /> EUR (en lettres: <xsl:value-of select="fes:convertNumberToText($doc,number($limiet_value),'fr')" /> euros). </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]But du crédit[/b]</td>
+									<td>Cette garantie bancaire sera constituée en faveur de [color=#E36C0A][name beneficiary bank guarantee][/color] afin de garantir vos engagements dans le cadre du contrat [color=#E36C0A][facility purpose][/color][br][/br][br][/br]
+										Ce but est une condition essentielle de cette proposition. </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Durée[/b]</td>
+									<td>Cette garantie prendra fin au moment où vous aurez rempli vos obligations vis-à-vis de [color=#E36C0A][name beneficiary bank guarantee][/color] et que cette dernière nous aura retourné l’original de la garantie bancaire ou qu’il aura confirmé que la garantie est devenue sans objet. </td>
+								</tr>
+								<tr class="level0">
+									<td>[b]Modalités[/b]</td>
+									<td>En signant cette lettre de crédit, vous marquez votre accord quant aux conditions suivantes :
+										 • l’émission d’une garantie bancaire ci-annexée, qui fait intégralement partie de cette déclaration, en faveur de [color=#E36C0A][name beneficiary bank guarantee][/color]; [color=#E36C0A][address beneficiary bank guarantee][/color]. Cette garantie bancaire sera émise par la Banque Triodos, ayant son siège administratif à 1000 Bruxelles, Rue Haute 139/3, TVA BE 0450.507.887 RPM Bruxelles ci-après dénommée ‘la banque’.[br][/br][br][/br]
+										 • le paiement d’une commission pour la gestion de la garantie bancaire qui s’élève à 0,25 % sur le montant de la garantie, avec un minimum de 12,39 EUR par trimestre. Ces frais seront débités du compte du client [color=#E36C0A][contra account number][/color] à la fin de chaque trimestre et seront calculés au pro rata du nombre de jours pendant lesquels la garantie aura été valable.[br][/br][br][/br]
+										 • le paiement de [color=#E36C0A][initial bank guarantee fee][/color] EUR de frais pour l’émission de la garantie bancaire.[br][/br][br][/br]
+										 • le blocage du [color=#E36C0A][current account number][/color]  ouvert à cet effet pendant la durée de la garantie pour un montant égal au montant de cette garantie.[br][/br][br][/br]
+										 • le remboursement immédiat à la banque de chaque montant que le bénéficiaire exigerait à la banque, dans le cadre de cette garantie, ainsi que le remboursement de tous les frais y afférant. Le cas échéant, la banque aura, après le paiement au bénéficiaire des montants exigés, le droit de débiter les comptes du client à concurrence des montants dus.[br][/br][br][/br]
+										 • la validité de cette déclaration de contre-garantie jusqu’au moment où:[br][/br][br][/br]
+										 • la banque aura confirmé par lettre que la garantie a pris fin[br][/br][br][/br]
+										 • en cas de paiement par la banque au bénéficiaire, le client aura remboursé tous les montants dus </td>
+								</tr>
+								<tr class="level0">
+									<td/>
+									<td/>
+								</tr>
+							</table>
+
+						</xsl:when>
+						<xsl:otherwise>
+							<p class="newpageheading">[color=#E36C0A][b]A facility is missing, enter text manually.[/b][/color]</p>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each> 
+			</xsl:for-each>
+
+
+
+			<newpage name="normal">
+				<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+			</newpage>
+
+			<p>[b]Fin:[/b]</p>
+
+			<p>Cette ouverture de crédit est soumise aux conditions générales d'ouverture de crédit et aux conditions générales de la banque, dont vous déclarez avoir pris connaissance et accepté le contenu en signant la présente lettre de crédit.
+Nous vous prions de nous renvoyer cette lettre de crédit dûment signée "pour accord" endéans les 15 jours, au-delà de cette date cette proposition ne sera plus valable.</p>
+			<p>[b]Nous vous prions de bien vouloir nous renvoyer une copie de cette lettre ainsi que les annexes signées "pour accord". Votre paraphe devra être apposé au bas de chaque page; la dernière page de cette lettre de crédit et des annexes doivent être signées en faisant précéder votre signature de la mention manuscrite "pour accord", de votre nom et de votre fonction, si vous signez au nom d'une personne juridique.[/b]</p>
+			<p>
+
+Avec nos salutations distinguées
+
+			</p>
+
+			<p>
+				<xsl:value-of select="fes:getFormattedValue($docCreditProposal, $qStatusFinalByName_variable)" />
+			</p>
+			<p>[color=#E36C0A][role relationship manager][/color]</p>
+			<p>[color=#E36C0A][department relationship manager][/color]</p>
+			<br/> 
+			<p>Banque Triodos</p>
+
+
+
+			<p>Pour <xsl:value-of select="$mainBorrowerData/bedrijfsnaam" />:</p>
+
+
+			<!-- Loop contractanten tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $contractanten_variable)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable> 
+
+				<xsl:variable name="rolData">
+					<!-- Loop rollen tuple -->
+					<xsl:for-each select="fes:getTupleInstances($doc, $contractantRollen_variable, $tupleIndices)">
+						<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="subTupleIndices" as="xs:integer *">
+							<xsl:for-each select="$tupleIndices">
+								<xs:sequence>
+									<xsl:value-of select="."/>
+								</xs:sequence>
+							</xsl:for-each>
+							<xs:sequence>
+								<xsl:value-of select="$subTupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<xsl:variable name="rol_naam_value" select="fes:getFormattedValue($doc, $contractantRolcontractantNaam_variable, $subTupleIndices)" />           
+						<xsl:if test="$rol_naam_value = $mainBorrower_value">
+							<mainBorrowerRol>1</mainBorrowerRol>
+						</xsl:if>
+
+						<xsl:if test="$rol_naam_value = $borrower_value">
+							<borrowerRol>1</borrowerRol>
+						</xsl:if>
+
+					</xsl:for-each>                      
+				</xsl:variable>  
+
+
+				<xsl:if test="count($rolData/mainBorrowerRol) > 0">
+
+					<table class="Styles">
+						<tr class="level0">
+							<td width="4500">[b]“Pour accord”[/b] date:
+
+							………………………………………………… 
+							Signature
+
+							…………………………………………………  
+							[b]Nom[/b]
+
+							…………………………………………………
+							[b]<xsl:value-of select="fes:getFormattedValue($doc, $contractantBedrijfscontractantNaam_variable, $tupleIndices)" />[/b]
+							</td>
+							<td width="5000">
+
+							</td>
+						</tr> 
+					</table>
+
+				</xsl:if>
+			</xsl:for-each>
+
+			<xsl:for-each select="fes:getTupleInstances($doc, $contractanten_variable)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable> 
+
+				<xsl:variable name="rolData">
+					<!-- Loop rollen tuple -->
+					<xsl:for-each select="fes:getTupleInstances($doc, $contractantRollen_variable, $tupleIndices)">
+						<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="subTupleIndices" as="xs:integer *">
+							<xsl:for-each select="$tupleIndices">
+								<xs:sequence>
+									<xsl:value-of select="."/>
+								</xs:sequence>
+							</xsl:for-each>
+							<xs:sequence>
+								<xsl:value-of select="$subTupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<xsl:variable name="rol_naam_value" select="fes:getFormattedValue($doc, $contractantRolcontractantNaam_variable, $subTupleIndices)" />           
+						<xsl:if test="$rol_naam_value = $mainBorrower_value">
+							<mainBorrowerRol>1</mainBorrowerRol>
+						</xsl:if>
+
+						<xsl:if test="$rol_naam_value = $borrower_value">
+							<borrowerRol>1</borrowerRol>
+						</xsl:if>
+
+					</xsl:for-each>                      
+				</xsl:variable>  
+
+
+				<xsl:if test="count($rolData/mainBorrowerRol) = 0 and count($rolData/borrowerRol) > 0">
+
+					<table class="Styles">
+						<tr class="level0">
+							<td width="4500">[b]“Pour accord”[/b] date:
+
+                    ………………………………………………… 
+                    Signature
+
+                    …………………………………………………  
+                    [b]Nom[/b]
+
+                    …………………………………………………
+                    [b]<xsl:value-of select="fes:getFormattedValue($doc, $contractantBedrijfscontractantNaam_variable, $tupleIndices)" />[/b]
+							</td>
+							<td width="5000">
+
+							</td>
+						</tr> 
+					</table>
+
+				</xsl:if>
+			</xsl:for-each>
+
+			<!-- =========End============================================================= -->
+		</document>
+	</xsl:template>
+</xsl:stylesheet>

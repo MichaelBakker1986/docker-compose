@@ -1,0 +1,113 @@
+{&&Language=English}
+; Hidden vars
+.Variables
+;----------------------------
+PPPP    1N     1               $>ABN Amro Gedeelte<$                                               \AAB
+
+.Variables
+
+.Formulas NoTrend
+
+{&&Tryinclude "IncAABCashFlow.fin"}
+{&&Tryinclude "IncAABAdditionalInputFields.fin"}
+{&&Tryinclude "IncAABAdjustedEquity.fin"}
+
+;----------------------------
+; Data for pricing
+;.Variables
+;P       1N     2               "Pricing"                                                 \Tussenberekeningen
+;
+;PPPPP   1N   1 3               "General risk"                                            \Risico
+;PIIII 4 1N % 1 4               "Probability of Default"                                  \PD
+;PPPPP 0 1N     4               "Totale dekkingswaarde"                                   \TotaleDekkingWaarde
+;
+;PIPI    BN     5               =TotalLandAndBuildings                                    \=TotalLandAndBuildings
+;PIPI    1N %   5-              $>Land and Buildings Coverage Rate<$                      \LandAndBuildingsCoverageRate
+;PIPI    1N     5 1             $>Land and Buildings Coverage Value<$                     \LandAndBuildingsCoverageValue
+;PIPI    BN     5               =TotalPlantAndEquipment                                   \=TotalPlantAndEquipment
+;PIPI    1N %   5-              $>Plant and Equipment Coverage Rate<$                     \PlantAndEquipmentCoverageRate
+;PIPI    1N     5 1             $>Plant and Equipment Coverage Value<$                    \PlantAndEquipmentCoverageValue
+;PIPI    BN     5               =TotalFurnitureAndFixtures                                \=TotalFurnitureAndFixtures
+;PIPI    1N %   5-              $>Furniture and Fixtures Coverage Rate<$                  \FurnitureAndFixturesCoverageRate
+;PIPI    1N     5 1             $>Furniture and Fixtures Coverage Value<$                 \FurnitureAndFixturesCoverageValue
+;PIPI    BN     5               =TotalTransportationEquipment                             \=TotalTransportationEquipment
+;PIPI    1N %   5-              $>Transportation Equipment Coverage Rate<$                \TransportationEquipmentCoverageRate
+;PIPI    1N     5 1             $>Transportation Equipment Coverage Value<$               \TransportationEquipmentCoverageValue
+;PIPI    BN     5               =TotalOtherMaterialFixedAssets                            \=TotalOtherMaterialFixedAssets
+;PIPI    1N %   5-              $>Other Material Fixed Assets Coverage Rate<$             \OtherMaterialFixedAssetsCoverageRate
+;PIPI    1N     5 1             $>Other Material Fixed Assets Coverage Value<$            \OtherMaterialFixedAssetsCoverageValue
+;PIPI    BN     5               =Receivables                                              \=Receivables
+;PIPI    1N %   5-              $>Receivables Coverage Rate<$                             \ReceivablesCoverageRate
+;PIPI    1N     5 1             $>Receivables Coverage Value<$                            \ReceivablesCoverageValue
+;PPPPP 0 1N    =4               "Totale dekkingswaarde"                                   \=TotaleDekkingWaarde
+;
+;.Formulas NoTrend, Trend
+;
+;LandAndBuildingsCoverageRate         = 75%
+;PlantAndEquipmentCoverageRate        = 60%
+;FurnitureAndFixturesCoverageRate     = 25%
+;PlantAndEquipmentCoverageRate        = 25%
+;OtherMaterialFixedAssetsCoverageRate = 50%
+;ReceivablesCoverageRate              = 50%
+;
+;LandAndBuildingsCoverageValue        =OnER(TotalLandAndBuildings[LastTinFormulaSet(NoTrend)]         *LandAndBuildingsCoverageRate        ,NA)
+;PlantAndEquipmentCoverageValue       =OnER(TotalPlantAndEquipment[LastTinFormulaSet(NoTrend)]        *PlantAndEquipmentCoverageRate       ,NA)
+;FurnitureAndFixturesCoverageValue    =OnER(TotalFurnitureAndFixtures[LastTinFormulaSet(NoTrend)]     *FurnitureAndFixturesCoverageRate    ,NA)
+;PlantAndEquipmentCoverageValue       =OnER(TotalTransportationEquipment[LastTinFormulaSet(NoTrend)]  *PlantAndEquipmentCoverageRate       ,NA)
+;OtherMaterialFixedAssetsCoverageValue=OnER(TotalOtherMaterialFixedAssets[LastTinFormulaSet(NoTrend)] *OtherMaterialFixedAssetsCoverageRate,NA)
+;ReceivablesCoverageValue             =OnER(Receivables[LastTinFormulaSet(NoTrend)]                   *ReceivablesCoverageRate             ,NA)
+;
+;TotaleDekkingWaarde                  =OnER(LandAndBuildingsCoverageValue+PlantAndEquipmentCoverageValue+FurnitureAndFixturesCoverageValue+PlantAndEquipmentCoverageValue+OtherMaterialFixedAssetsCoverageValue+ReceivablesCoverageValue,NA)
+;
+;.Variables
+;PIIII 0 1N     4               "Total Exposure"                                                    \TotaleExposure
+;
+;
+;PIPI    BN     5               =SubordinatedDebts                                                  \=SubordinatedDebts
+;PIPI    BN     5               =LongTermDebts                                                      \=LongTermDebts
+;PIPI    BN     5               =LongTermDebtsOther                                                 \=LongTermDebtsOther
+;PIPI    BN     5               =LongTermDebtsAnnuity                                               \=LongTermDebtsAnnuity
+;PPPP    BN     5               =NetLimitOnCurrentAccount                                           \=NetLimitOnCurrentAccount
+;PPPP   =BN    -5 1             $>Total Exposure Period<$                                           \TotalExposurePeriod
+;PIIII 0 1N     5               "Total Exposure"                                                    \=TotaleExposure
+;
+;.Formulas NoTrend, Trend
+;
+;TotaleExposure                       =OnER(TotalExposurePeriod[LastTinFormulaSet(NoTrend)],NA)
+;
+;.Variables
+;
+;
+;PPPPP 4 1N %   4               "Loss Given Default"                                      \LGD
+;
+;PPPPP   1N     3               "Assumpties"                                              \Assumptiesverborgen
+;PPPPP 2 1N % 1 4               "Confidence Level"                                        \ConfidenceLevel
+;PPPPP 2 1N %   4               "HurdleRate"                                              \HurdleRate
+;PPPPP 2 1N %   4               "Required return On equity Bank"                          \RendementseisBank
+;PPPPP 2 1N %   4               "Tax Rate"                                                \Taxrate
+;PPPPP 2 1N %   4               "Proces Kosten"                                           \ProcesKostenPerc
+;PPPPP 2 1N %   4               "LGD Default"                                             \LGDDefault
+;PPPPP 2 1N %   4               "LGD Minimum"                                             \LGDMinimum
+;PPPPP 2 1N     4               "Looptijds bovengrens gemiddelde"                         \LooptijdBovengrensGemiddelde
+;PPPPP 2 1N     4               "Minimum PD"                                              \MinimumPD
+;PPPPP 2 1N     4               "Maximum PD"                                              \MaxPD
+;PPPPP 2 1N %   4               "Beta tbv EC Operationeel"                                \BETA
+;PPPPP 2 1N     4               "Correlation"                                             \Correlation
+;
+;.formulas NoTrend, Trend
+;
+;;PD= irPD[LastTinFormulaSet(NoTrend)]
+;LGD = OnER(If(((TotaleExposure-TotaleDekkingWaarde)/TotaleExposure)>=LGDDefault,LGDDefault,If(((TotaleExposure-TotaleDekkingWaarde)/TotaleExposure)<=LGDMinimum,LGDMinimum,((TotaleExposure-TotaleDekkingWaarde)/TotaleExposure))),NA)
+;ConfidenceLevel= 0.9998
+;HurdleRate= 0.14
+;RendementseisBank= 0.22
+;Taxrate= 0
+;ProcesKostenPerc= 0.006
+;LGDDefault= 1
+;LGDMinimum= 0.05
+;LooptijdBovengrensGemiddelde= 5
+;MinimumPD= 0.0003
+;MaxPD= 0.75
+;BETA= 0.18
+;Correlation= 0.12*(1-EXP(-50*PD))/(1-EXP(-50))+0.24*((1-(1-EXP(-50*PD))/(1-EXP(-50))))
+;;----------------------------

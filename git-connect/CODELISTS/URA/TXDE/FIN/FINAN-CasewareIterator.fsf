@@ -1,0 +1,51 @@
+; FINAN TXDE Caseware import Iterator
+; EJS, 5-5-2010
+;
+;
+
+.Script Name=CasewareFileIterator,Title="Process Caseware Files",Priority=2001
+.Event OnToolsMenuClick
+  .Message "NOTE: check XSLT_WhenSilent in ini-file (default=1)!|(selection of Caseware 2.4 or Caseware 2008)"
+  .If Length(&DioStatus("DIO2"))<=2
+    .Message "DIO2 is niet aktief!"
+    .Quit
+  .EndIf
+  .If FileExists(&DioStatus("DIO2DataLocation"))
+    .AskOk Ok="Erase destination file '"&DioStatus("DIO2DataLocation")&"'?",Yes
+    .If SysVar("Ok")
+      .EraseFile &DioStatus("DIO2DataLocation")
+    .EndIf
+  .EndIf
+  .FolderDialog FolderSysVar,Caption="Caseware Folder",Folder="#ImportFolder#"
+  .Application BeginSilent
+  .Application SmartImportMode=Off
+  .FindFirstFile AFileName=&Sysvar("FolderSysVar")&"\*.xml"                                             ; "*.V04"
+  .Log File=&SysVar("FolderSysVar")&"\Iterator.log",Errors,DateTime
+  .If &SysVar("AFileName")=""
+    .Log Message="No documents found!"
+  .Else
+    .Repeat
+      .OpenDocument Key=&SysVar("FolderSysVar")&"\"&SysVar("AFileName"),Model="TXDE",Origin="GENERIC_XML",Overwrite
+      .If SysVar("OpenDocumentResult")
+        .Log Message=&"Unable to open document "&SysVar("AFileName")&"!"
+      .Else
+        .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+        .Calc 1
+        .SaveDocument NoDio1
+        .Log Message=&"Document '"&SysVar("DocumentCode")&"' processed"
+        .Document Modified=Off
+        .CloseDocument
+      .EndIf
+      .FindNextFile
+    .Until &SysVar("AFileName")=""
+  .EndIf
+  .Log Message="ready!"
+  .Application EndSilent
+  .AskOk Ok="Open result file """&DioStatus("DIO2DataLocation")&"""?",Yes
+  .If SysVar("Ok")
+    .Let Dummy=&DioStatus("DIO2DataLocation")
+    .Execute #Dummy#                    ; string expressions not yet allowed here!
+  .EndIf
+.EndScript
+
+

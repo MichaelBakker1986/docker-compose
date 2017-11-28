@@ -1,0 +1,32 @@
+; IncFesVars.fin
+; FINAN Executive Services
+;
+; v1.0
+
+
+XXXX     X     1               $>General variables for webclient<$             \
+
+PPPP    1N C   2               $>Layout<$                                      \FES_LAYOUTNR
+PIII    BA     2               $>Exchange Rates<$                              \FES_EXCHANGE_RATES
+PIII    1A     2               $>Layout name<$                                 \FES_LAYOUT
+PIII  0 1N     2               $>Is flat input used? (1=yes)<$                 \FES_FLATINPUT
+PIII  0 1N     2               $>Projection Profile<$                          \FES_PROJECTION_PROFILE
+PIII  0 1N     2               $>Column order<$                                \FES_COLUMN_ORDER
+PIII  0 BN     2               $>Column visible<$                              \FES_COLUMN_VISIBLE
+PIII  0 BN     2               $>Start Date Period<$                           \FES_STARTDATEPERIOD
+PIII  0 BN     2               $>End Date Period<$                             \FES_ENDDATEPERIOD
+PIII  0 BN     2               $>Base Currency Period<$                        \FES_BASECURRENCYPERIOD
+PIII  0 BN     2               $>View Currency Period<$                        \FES_VIEWCURRENCYPERIOD
+PIII  0 BN C   2               $>Column Type<$                                 \FES_COLUMNTYPE
+
+.Choices
+FES_LAYOUTNR    = "0: NA|1: IFRS-EU|2: IFRS|48: Polish"
+FES_COLUMNTYPE  = "0:History|1:Projection"
+
+.Formulas NoTrend
+FES_LAYOUTNR  = If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)))
+
+.Formulas NoTrend,Trend,User
+FES_COLUMN_VISIBLE  = 1
+
+.Variables    ; weer terugzetten omdat dit een include file is!

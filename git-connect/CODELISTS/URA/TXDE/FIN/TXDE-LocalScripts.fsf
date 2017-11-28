@@ -1,0 +1,348 @@
+; TXDE-LocalScripts.fsf
+;
+{&&Language=Deutsch}
+
+
+;===============================================================================
+; for Mapping Table Target Model: Calculation tree:
+
+.Variable BsAss,CalcTreeRoot=On/Debet
+.Variable BsEqLiab,CalcTreeRoot=On/Credit
+.Variable IsNetIncome,CalcTreeRoot=On/Credit
+.Variable TotalAmountAssetsFiscal,CalcTreeRoot=On/Debet
+.Variable TotalLiabilitiesFiscal,CalcTreeRoot=On/Credit
+.Variable NetResultAfterTax,CalcTreeRoot=On/Credit
+
+
+;===============================================================================
+; Calculated values
+
+.Document SaveCalculatedValuesMaxTsY=1,SaveCalculatedValuesRange="[1..LastTinFormulaset(NoTrend,MainPeriod)]"
+
+;===============================================================================
+; Visible Formulas:
+
+; per hoofdfolder:
+.Variable SystemFolder,Visible= (AdminMode[1]>=90)
+
+.Variable GeneralFolder,Visible= 1
+.Variable krAnnualReportType,Visible=((AdminMode[1]=99) and (ModelConfiguration=1))         ; 1=dutch    v1.7.6
+.Variable RatingWarning,Visible=(not ReportEnabled[1])
+.Variable RatingWarning2,Visible=(ModelConfiguration=1) and ReportEnabled[1] and not TLSC_ReportEnabled[1]  ; v1.7.18 (alleen Nederlands!)
+
+.Variable ShortRatingFolder,Visible= (AdminMode[1]>=10) or (Pos("_RC_",FES_PRODUCT[1])>0)                   ; _RC_ is dus voorwaarde voor het tonen van de rating! (let op: dit is URA_RC_NL, voor Duitsland is er niet zoiets!)
+
+.Variable RatingFolder,Visible= (AdminMode[1]>=10)
+.Variable krInsolvenzquote,Visible=(AdminMode[1]>=10)
+.Variable krZValue,Visible=(AdminMode[1]=99)
+.Variable krRDFsample,Visible=(AdminMode[1]=99)
+.Variable krURARatingKlasseLastT,Visible=Off                                                ; ##
+.Variable krURAAmpel,Visible=Off
+.Variable krURAAmpelLastT,Visible=Off
+.Variable krUraAmpelD,Visible=((AdminMode[1]=99) and (ModelConfiguration=0))                ; 0=german
+.Variable krUraAmpelDNL,Visible=((AdminMode[1]=99) and (ModelConfiguration=1))              ; 1=dutch
+.Variable krIfdRatingKlasse,Visible=Off
+.Variable krIfdRatingKlasseD,Visible=((AdminMode[1]=99) and (ModelConfiguration=0))         ; 0=german
+
+.Variable SimpleDataEntryFolder,Visible=(AdminMode[1]>=10) or ((Pos("_RC_",FES_PRODUCT[1])>0) and (Length(FES_PRODUCT[1])<12))   ; and not sdeInputOutsideEntryForm[1])
+
+.Variable MasterBalFolder,Visible=((AdminMode[1]>90) or ((ModelConfiguration=0) and ((Pos("_BM_",FES_PRODUCT[1])>0) or (Pos("_TLR_",FES_PRODUCT[1])>0))))    ; 0=german  LET OP: de trafic light scorecard moet dus aangevinkt zijn, zie geval Pramhas (mail Sever 3-3-2015) waar _SC_ wel aan stond en _TLR_ niet!
+.Variable MasterIncFolder,Visible=((AdminMode[1]>90) or ((ModelConfiguration=0) and ((Pos("_BM_",FES_PRODUCT[1])>0) or (Pos("_TLR_",FES_PRODUCT[1])>0))))    ; 0=german
+
+.Variable InputBalFolderNL,Visible=((AdminMode[1]>90) or ((ModelConfiguration=1) and ((Pos("_BM_",FES_PRODUCT[1])>0) or (Pos("_TLR_",FES_PRODUCT[1])>0))))    ; 1=dutch
+.Variable InputIncFolderNL,Visible=((AdminMode[1]>90) or ((ModelConfiguration=1) and ((Pos("_BM_",FES_PRODUCT[1])>0) or (Pos("_TLR_",FES_PRODUCT[1])>0))))    ; 1=dutch
+
+.Variable CorrectionsFolder,Visible= ((AdminMode[1]>90) or (Pos("_BM_",FES_PRODUCT[1])>0) or (Pos("_TLR_",FES_PRODUCT[1])>0))
+; onzichtbare Korrekturen na overleg met Doris Wolff 17-12-2009, weer zichtbaargemaakt in Duitsland op verzoek Michael Sever sept 2011:
+.Variable Korrektur04,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+.Variable Korrektur05,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+; .Variable Korrektur08,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                              ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011  EJS v1.8.9: eruit
+.Variable Korrektur07,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+.Variable Korrektur01,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+.Variable Korrektur09,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+.Variable Korrektur02,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+;.Variable Korrektur03,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011, v1.9.2 altijd zichtbaar dus hier in commentaar
+.Variable Korrektur26,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0)                                ; EJS 0=german, toegevoegd op verzoek Michael Sever sept 2011
+;.Variable Korrektur10,Visible=(FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=1)                                ; 1=dutch    v1.7.12  (description is Dutch!)  v1.14.3 altijd zichtbaar, nu ook op korte invulformulier!
+.Variable Korrektur23Basis,Visible=((FirstValueT(Self,1,MaxT)>0) or (ModelConfiguration=0))                         ; 0=german
+.Variable Korrektur23,Visible=((FirstValueT(Korrektur23Basis,1,MaxT)>0) or (ModelConfiguration=0))                  ; 0=german
+.Variable K23,Visible=((FirstValueT(Korrektur23Basis,1,MaxT)>0) or (ModelConfiguration=0))                          ; 0=german
+.Variable KorrekturenMemo,Visible=((AdminMode[1]=99) and (ModelConfiguration=1))            ; 1=dutch    v1.7.6
+
+.Variable ccRootFolder,Visible= (AdminMode[1]>=90)                                          ; Credit Check
+
+; onderstaande Rating Alert folders staan in inc_RatingAlert:
+;.Variable InputBalFolderDE,Visible=(ModelConfiguration=0)          ; 0=german
+;.Variable InputIncFolderDE,Visible=(ModelConfiguration=0)          ; 0=german
+;.Variable RA_Kredieten    ,Visible=((RA_RatingAlertEnabled[1]=1) Or (AdminMode=1))
+;.Variable BBDekkingswaarde,Visible=((RA_RatingAlertEnabled[1]=1) Or (AdminMode=1))
+
+.Application Redraw
+
+;===============================================================================
+; Locking Formulas:
+
+.Variable BsEqLiabEquity,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribed,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedCorp,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedPrivateAccountSP,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedPrivateAccountSPBeginYear,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedPrivateAccountSPIncomeUseDeposits,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedPrivateAccountSPIncomeUseWithdrawals,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedPrivateAccountSPNetIncome,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedUnlimitedLiablePartners,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedUnlimitedLiablePartnersFixed,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedUnlimitedLiablePartnersVariable,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedUnlimitedLiablePartnersAccumLoss,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedLimitedLiablePartners,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedLimitedLiablePartnersFixed,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedLimitedLiablePartnersVariable,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedLimitedLiablePartnersAccumLoss,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedUnpaidCap,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedOwnSharesdeducted,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedCoopPartners,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedCoopPartnersStaying,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedCoopPartnersLeaving,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySubscribedCoopPartnersCancelledShares,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityDueToPartners,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityProfSharing,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityLastrangecapital,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquitySilentPartner,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapRes,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResSharePremium,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResWarrantPremium,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResContrPremShares,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResOther,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResCashRequGmbh,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCapResCapReduction,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityReservesPartnership,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueRes,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResLegal,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResForOwnShares,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResStatutory,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResGoodwill,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResStartUpCost,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResDefTax,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResCurrChange,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResSpecial,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResOther,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRevenueResOtherCoop,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityConsolSurplus,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityRetainedEarnings,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityNetIncome,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityProfitLoss,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityCurrTransl,Locked=(FES_DEMO_USER=1)
+.Variable BsEqLiabEquityMinorityInterest,Locked=(FES_DEMO_USER=1)
+.Variable EquityTotal,Locked=(FES_DEMO_USER=1)
+.Variable PaidAndCalledUpCapitalFiscal,Locked=(FES_DEMO_USER=1)
+.Variable SharePremiumFiscal,Locked=(FES_DEMO_USER=1)
+.Variable RevaluationReserve,Locked=(FES_DEMO_USER=1)
+.Variable LegalStatutoryReserves,Locked=(FES_DEMO_USER=1)
+.Variable StatutoryReserves,Locked=(FES_DEMO_USER=1)
+.Variable OtherLegalReserves,Locked=(FES_DEMO_USER=1)
+.Variable ReinvestmentReserveFiscal,Locked=(FES_DEMO_USER=1)
+.Variable OtherFiscalReserves,Locked=(FES_DEMO_USER=1)
+.Variable OtherReserves,Locked=(FES_DEMO_USER=1)
+.Variable RetainedEarningsAccumulatedLosses,Locked=(FES_DEMO_USER=1)
+.Variable ResultForTheYear,Locked=(FES_DEMO_USER=1)
+
+;===============================================================================
+; Export FINAN XML voor URA Rating Factory
+
+.Script Name=ExportFinanXmlScript,Title="$>FINAN XML Datei<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.xml",Extension="finan.xml",Filter="FINAN XML Files (*.finan.xml)|*.finan.xml"
+  .Let RememberAdminMode= AdminMode[1]
+  .Let RememberModelConfiguration= ModelConfiguration[1]
+  .Let OrgModifiedAfterSave=ModifiedAfterSave
+  .EraseVars AdminMode[1]               ; geen InputVar AdminMode[1]=0! als je zo'n dossier importeert in webversie dan kan je deze niet meer met het wachtwoord in admin mode krijgen!
+  .EraseVars ModelConfiguration[1]      ; geen InputVar ModelConfiguration! als je zo'n dossier importeert in webversie dan krijg je verkeerde lay-out, moet via FES variabele
+  .Export Type="DataAsFinanXml",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod,1)\TsY=1]",FileName=&SysVar("FileNameVar")
+  .If SysVar("RememberAdminMode")>0
+    .InputVar AdminMode[1]=SysVar("RememberAdminMode")
+  .EndIf
+  .If SysVar("RememberModelConfiguration")>0
+    .InputVar ModelConfiguration[1]=SysVar("RememberModelConfiguration")
+  .EndIf
+  .If Not SysVar("OrgModifiedAfterSave")
+    .Document Modified=Off
+  .EndIf
+.EndScript
+
+;-------------------------------------------------------------------------------
+; Export FINAN CSV voor URA Rating Factory
+
+.Script Name=ExportFinanCsvScript,Title="$>FINAN CSV Datei<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.csv",Extension="finan.csv",Filter="FINAN CSV Files (*.finan.csv)|*.finan.csv"
+  .Let RememberAdminMode= AdminMode[1]
+  .Let RememberModelConfiguration= ModelConfiguration[1]
+  .Let OrgModifiedAfterSave=ModifiedAfterSave
+  .EraseVars AdminMode[1]               ; geen InputVar AdminMode[1]=0! als je zo'n dossier importeert in webversie dan kan je deze niet meer met het wachtwoord in admin mode krijgen!
+  .EraseVars ModelConfiguration[1]      ; geen InputVar ModelConfiguration! als je zo'n dossier importeert in webversie dan krijg je verkeerde lay-out, moet via FES variabele
+  .Export Type="DataAsFinanCsv",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod,1)\TsY=1]",FileName=&SysVar("FileNameVar")
+  .If SysVar("RememberAdminMode")>0
+    .InputVar AdminMode[1]=SysVar("RememberAdminMode")
+  .EndIf
+  .If SysVar("RememberModelConfiguration")>0
+    .InputVar ModelConfiguration[1]=SysVar("RememberModelConfiguration")
+  .EndIf
+  .If Not SysVar("OrgModifiedAfterSave")
+    .Document Modified=Off
+  .EndIf
+.EndScript
+
+;-------------------------------------------------------------------------------
+; Export FINAN CSV voor URA Rating Factory
+
+.Script Name=ExportFinanCsvAllScript,Title="$>FINAN CSV Datei (Schablone mit alle Konten)<$"
+.Event OnFileExportMenuClick
+  .FileDialog FileNameVar,Mode=Save,Folder=&SysVar("ExportFolder"),FileName=&SysVar("DocumentCode")&".finan.csv",Extension="finan.csv",Filter="FINAN CSV Files (*.finan.csv)|*.finan.csv"
+  .Let RememberAdminMode= AdminMode[1]
+  .Let RememberModelConfiguration= ModelConfiguration[1]
+  .Let OrgModifiedAfterSave=ModifiedAfterSave
+  .EraseVars AdminMode[1]               ; geen InputVar AdminMode[1]=0! als je zo'n dossier importeert in webversie dan kan je deze niet meer met het wachtwoord in admin mode krijgen!
+  .EraseVars ModelConfiguration[1]      ; geen InputVar ModelConfiguration! als je zo'n dossier importeert in webversie dan krijg je verkeerde lay-out, moet via FES variabele
+  .Export Type="DataAsFinanCsv",Range="[1..LastTinFormulaSet(NoTrend,MainPeriod,1)\TsY=1]",FileName=&SysVar("FileNameVar"),All
+  .If SysVar("RememberAdminMode")>0
+    .InputVar AdminMode[1]=SysVar("RememberAdminMode")
+  .EndIf
+  .If SysVar("RememberModelConfiguration")>0
+    .InputVar ModelConfiguration[1]=SysVar("RememberModelConfiguration")
+  .EndIf
+  .If Not SysVar("OrgModifiedAfterSave")
+    .Document Modified=Off
+  .EndIf
+.EndScript
+
+;===============================================================================
+; Admin mode
+
+.Script Name=SetAdminModeTrue,Title="Admin mode On"
+  .Event OnToolsMenuClick               ; dit komt alleen in de windows-versie voor!
+  .InputVar AdminMode[1]=99
+  .Calc 1
+  .GridSelectCell Cell=GeneralFolder[1]
+  .Application Redraw
+  .RefreshExplorer
+.EndScript
+
+.Script Name=SetAdminModeFalse,Title="Admin mode Off"
+  .Event OnToolsMenuClick               ; dit komt alleen in de windows-versie voor!
+  .EraseVars AdminMode[1]               ; geen InputVar AdminMode[1]=0! als je zo'n dossier importeert in webversie dan kan je deze niet meer met het wachtwoord in admin mode krijgen!
+  .Calc 1
+  .GridSelectCell Cell=GeneralFolder[1]
+  .Application Redraw
+  .RefreshExplorer
+.EndScript
+
+.Script Name=SetConfigurationModeDE,Title="Dutch Configuration"
+  .Event OnToolsMenuClick               ; dit komt alleen in de windows-versie voor!
+; .InputVar FES_LAYOUT[1]="TXDE-NL"     ; Nederlands  LET OP: mag je wel FES variabelen exporteren naar web?
+  .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+  .Calc 1
+  .GridSelectCell Cell=GeneralFolder[1]
+  .Application Redraw
+  .RefreshExplorer
+;  .ModelLanguage "Nederlands"          ; LET OP: kan leiden tot access violation! script moet bovendien global zijn
+.EndScript
+
+.Script Name=SetConfigurationModeNL,Title="German Configuration"
+  .Event OnToolsMenuClick               ; dit komt alleen in de windows-versie voor!
+; .InputVar FES_LAYOUT[1]="TXDE-DE"     ; Duits  LET OP: mag je wel FES variabelen exporteren naar web?
+  .EraseVars ModelConfiguration[1]      ; Duits
+  .Calc 1
+  .GridSelectCell Cell=GeneralFolder[1]
+  .Application Redraw
+  .RefreshExplorer
+;  .ModelLanguage "Deutsch"             ; LET OP: kan leiden tot access violation! script moet bovendien global zijn
+.EndScript
+
+
+;===============================================================================
+; Actielijst
+
+
+.ActionList Name=MainActionList,Title="Aktielijst",EnableManualChecks=On
+
+.Script Name=NewActionListScript,Title="Open aktielijst"
+.Event OnActionMenuClick
+.Event AfterLoadData
+.Event AfterNewData
+  .ActionList Name=MainActionList,Open
+.EndScript
+
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Configuratie
+;
+;.Action FullName=MainActionList.Configuration,Title="$>Konfiguration<$"
+;
+;.Script
+;.Event OnEnterAction MainActionList.Configuration
+;  .GridSelectCell Cell=@Root[1],Sheet=1
+;.EndScript
+;
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Rating folder
+;
+;.Action FullName=MainActionList.Rating,Title=&RatingFolder[0]
+;
+;.Script
+;.Event OnEnterAction MainActionList.Rating
+;  .GridSelectCell Cell=@RatingFolder[0],Sheet=1
+;.EndScript
+;
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Balance sheet input folder NL
+
+.Action FullName=MainActionList.InputBalNL,Title=&InputBalFolderNL[0],Visible=(ModelConfiguration=1)   ; 1=dutch
+
+.Script
+.Event OnEnterAction MainActionList.InputBalNL
+  .GridSelectCell Cell=@InputBalFolderNL[0],Sheet=1
+.EndScript
+
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Income sheet input folder NL
+
+.Action FullName=MainActionList.InputIncNL,Title=&InputIncFolderNL[0],Visible=(ModelConfiguration=1)   ; 1=dutch
+
+.Script
+.Event OnEnterAction MainActionList.InputIncNL
+  .GridSelectCell Cell=@InputIncFolderNL[0],Sheet=1
+.EndScript
+
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Mastertable Balance Sheet folder
+
+.Action FullName=MainActionList.MasterBalFolder,Title=&MasterBalFolder[0],Visible=(ModelConfiguration=0)   ; 0=german
+
+.Script
+.Event OnEnterAction MainActionList.MasterBalFolder
+  .GridSelectCell Cell=@MasterBalFolder[0],Sheet=1
+.EndScript
+
+;
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Mastertable Income Statement folder
+
+.Action FullName=MainActionList.MasterIncFolder,Title=&MasterIncFolder[0],Visible=(ModelConfiguration=0)   ; 0=german
+
+.Script
+.Event OnEnterAction MainActionList.MasterIncFolder
+  .GridSelectCell Cell=@MasterIncFolder[0],Sheet=1
+.EndScript
+
+;----------------------------------------------------------------------------------------------------------------
+; Aktie: Corrections folder
+
+.Action FullName=MainActionList.Corrections,Title=&CorrectionsFolder[0]
+
+.Script
+.Event OnEnterAction MainActionList.Corrections
+  .GridSelectCell Cell=@CorrectionsFolder[0],Sheet=1
+.EndScript
+
+
+
+

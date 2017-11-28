@@ -1,0 +1,269 @@
+import FinanMath.*;
+import BaseModel.*;
+model FINANCINGTARGETSC uses BaseModel
+{
+	version : "00.41.000.000";
+	root
+	{
+		variable Q_ROOT
+		{
+			datatype : number;
+			frequency : document;
+			formula_notrend : Q_Map01;
+			data_options : unscalable;
+			title : "ABN Amro Bank Customer purpose";
+			displaytype : select;
+			choices : "0:Complete|1:Incomplete";
+			hint : "ABN Amro Bank Financing Target";
+			top_blanklines : 1.0;
+			locked : On;
+			visible : 1.0;
+			options_title : locked;
+			options_notrend : locked;
+			options_trend : locked;
+			variable Q_Map01
+			{
+				datatype : number;
+				frequency : document;
+				data_options : unscalable;
+				title : "Customer purpose";
+				displaytype : select;
+				choices : "0:Complete|1:Incomplete";
+				top_blanklines : 1.0;
+				locked : On;
+				visible : 1.0;
+				options_title : locked;
+				options_notrend : locked, invisible;
+				options_trend : locked, invisible;
+				variable FinancingTargetHeader
+				{
+					datatype : none;
+					frequency : document;
+					data_options : unscalable;
+					title : "[Customer purpose]";
+					top_blanklines : 1.0;
+					locked : On;
+					visible : 1.0;
+					options_title : locked;
+					options_notrend : locked;
+					options_trend : locked;
+					tuple FinancingTarget
+					{
+						title : "Category";
+						//visible : 1.0;
+						options_title : locked;
+						tuple_instance_minimum : 1.0;
+						variable FinancingTarget_tpTarget
+						{
+							datatype : string;
+							frequency : document;
+							data_options : unscalable;
+							title : "Goal category";
+							top_blanklines : 1.0;
+							visible : 1.0;
+							options_title : locked;
+						}
+						variable FinancingTarget_tpEffectiveDate
+						{
+							datatype : number;
+							frequency : document;
+							data_options : unscalable;
+							title : "Effective date";
+							displaytype : date;
+							choices : "dd/MM/yyyy";
+							visible : 1.0;
+							options_title : locked;
+						}
+						tuple FinancingTarget_tpSubGoalHeader
+						{
+							title : "Subgoal";
+							//visible : 1.0;
+							options_title : locked;
+							tuple_instance_minimum : 1.0;
+							variable FinancingTarget_tpSpecification
+							{
+								datatype : string;
+								frequency : document;
+								data_options : unscalable;
+								title : "Goal";
+								visible : 1.0;
+								options_title : locked;
+							}
+							variable FinancingTarget_tpSubGoal
+							{
+								datatype : string;
+								frequency : document;
+								data_options : unscalable;
+								title : "Sub goal";
+								top_blanklines : 1.0;
+								visible : 1.0;
+								options_title : locked;
+							}
+							variable FinancingTarget_tpAmountSubGoal
+							{
+								datatype : number;
+								frequency : document;
+								title : "Amount";
+								displaytype : currency;
+								visible : 1.0;
+								options_title : locked;
+							}
+                            variable FinancingTarget_tpSubGoalHeader_UUID
+                            {
+                                datatype : string;
+                                frequency : document;
+                                data_options : unscalable;
+                                title : "SubGoalUUID";
+                                visible : 1.0;
+                            }
+						}
+						variable FinancingTarget_tpAmount
+						{
+							datatype : number;
+							frequency : document;
+							formula : TupleSum (FinancingTarget_tpAmountSubGoal);
+							title : "Subtotal";
+							displaytype : currency;
+							locked : On;
+							visible : 1.0;
+							options_title : locked;
+							options_notrend : locked;
+							options_trend : locked;
+						}
+						variable FinancingTarget_tpDailyOperation
+						{
+							datatype : number;
+							frequency : document;
+							data_options : unscalable;
+							title : "Within daily operation";
+							displaytype : select;
+							choices : "1:Yes|0:No";
+							visible : 1.0;
+							options_title : locked;
+						}
+						variable FinancingTarget_tpExplenation
+						{
+							datatype : string;
+							frequency : document;
+							data_options : unscalable;
+							title : "Explenation";
+							displaytype : memo;
+							visible : 1.0;
+							options_title : locked;
+						}
+                        variable FinancingTarget_UUID
+                        {
+                            datatype : string;
+                            frequency : document;
+                            data_options : unscalable;
+                            title : "UUID";
+                            visible : 1.0;
+                        }
+					}
+					variable FinancingTargetTotal
+					{
+						datatype : number;
+						frequency : document;
+						formula : TupleSum (FinancingTarget_tpAmount);
+						title : "Total";
+						displaytype : currency;
+						locked : On;
+						visible : 1.0;
+						options_title : locked;
+						options_notrend : locked;
+						options_trend : locked;
+					}
+				}
+			}
+			variable Q_Map02
+			{
+				datatype : number;
+				frequency : document;
+				data_options : unscalable;
+				title : "Non-banking sources";
+				displaytype : select;
+				choices : "0:Complete|1:Incomplete";
+				locked : On;
+				visible : 1.0;
+				options_title : locked;
+				options_notrend : locked, invisible;
+				options_trend : locked, invisible;
+				variable FinancingSourceHeader
+				{
+					datatype : none;
+					frequency : document;
+					data_options : unscalable;
+					top_blanklines : 1.0;
+					title : " ";
+					locked : On;
+					visible : 1.0;
+					options_title : locked;
+					options_notrend : locked;
+					options_trend : locked;
+					tuple FinancingSource
+					{
+						title : "Non-banking sources";
+						//visible : 1.0;
+						options_title : locked;
+						variable FinancingSource_tpSource
+						{
+							datatype : string;
+							frequency : document;
+							data_options : unscalable;
+							title : "Source";
+							top_blanklines : 1.0;
+							visible : 1.0;
+							options_title : locked;
+						}
+						variable FinancingSource_tpAmount
+						{
+							datatype : number;
+							frequency : document;
+							data_options : unscalable;
+							//range : <= 9 . 99999999 E8;
+							title : "Amount";
+							displaytype : currency;
+							fixed_decimals : 0.0;
+							visible : 1.0;
+							options_title : locked;
+						}
+						variable FinancingSource_tpFinancingTarget
+						{
+							datatype : string;
+							frequency : document;
+							data_options : unscalable;
+							title : "Financing Target";
+							visible : 1.0;
+							options_title : locked;
+						}
+					}
+					variable FinancingSource_Total
+					{
+						datatype : number;
+						frequency : document;
+						formula : TupleSum (FinancingSource_tpAmount);
+						data_options : unscalable;
+						title : "Total";
+						displaytype : currency;
+						fixed_decimals : 0.0;
+						top_blanklines : 1.0;
+						visible : 1.0;
+						options_title : locked;
+						options_notrend : locked;
+						options_trend : locked;
+					}
+					variable FinancingSource_Explanation
+					{
+						datatype : string;
+						frequency : document;
+						data_options : unscalable;
+						title : "Explanation";
+						displaytype : memo;
+						visible : 1.0;
+						options_title : locked;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1482 @@
+{&&Language=English}
+{&&if INSTALLCODE=4,8,11}  ; Indien Advice, Banking, Franchis dan geen 'Financieringsaanvraag'
+.Quit ; EJS 13-1-2009: hele script cancellen (anders foutmelding op onbekende variabelen)
+{&&endif}
+
+.Script
+.Event AfterInputVar BBInvPlanKeuze1,BBInvPlanKeuze2,BBInvPlanKeuze3
+.Event AfterInputVar BBFinKeuze1,BBFinKeuze2,BBFinKeuze3
+  .Application Redraw
+.EndScript
+
+
+;=============================================================================
+; ActionList FinancieringsAanvraag
+
+.ActionList             Name=FinancieringsAanvraag,Title=&Financieringsaanvraag[0]
+
+.Script                 Name=FinancieringsAanvraagScript, Title="$>Actionlist<$: "&Financieringsaanvraag[0], Hint="$>Financieringsaanvraag Actionlist<$", Priority=2005
+.Event                  OnActionMenuClick
+  .ShowActionList       FinancieringsAanvraag
+  .Sheet                1,MergePeriod=BNKPeriod/Show
+  .Application           Redraw
+.EndScript
+
+.Script
+.Event                  OnCloseActionList FinancieringsAanvraag
+  .GridSelectCell       Cell=Title
+  .SupportSheet         Hide
+  .RevertCols           Off
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+.Action                 FullName=FinancieringsAanvraag.Std_Invoer, Title="? $>Settings<$",Header=Yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Std_Invoer
+.Event                  OnExecuteAction FinancieringsAanvraag.Std_Invoer
+  .SupportSheet         ChmFileName="V04-SupportSheets.chm",FileName="supportsheet_finaanvr_01.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction FinancieringsAanvraag.Std_Invoer
+  .SupportSheet         Hide
+.EndScript
+
+.Action                 FullName=FinancieringsAanvraag.Std_SelectScenario,Title = "$>Select scenario<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.Std_SelectScenario
+  .Let                  LijstOndertab = "1:"&SheetTitle(1)&"|2:"&SheetTitle(2)&"|3:"&SheetTitle(3)&"|4:"&SheetTitle(4)
+  .AskChoice            ScenarioTab   = "Selecteer scenario:",#$LijstOndertab#,Sheet-1
+  .Display              |#ScenarioTab#+1
+.EndScript
+
+.Action                 FullName=FinancieringsAanvraag.Std_CopyScenario,Title = "$>Copy base scenario<$",Enabled=Sheet>1,CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.Std_CopyScenario
+.Event                  OnActionCheckOn FinancieringsAanvraag.Std_CopyScenario
+  .Let                  LijstOndertab = "1:"&SheetTitle(1)&"|2:"&SheetTitle(2)&"|3:"&SheetTitle(3)&"|4:"&SheetTitle(4)
+  .Let                  ScenarioTab = Sheet-1
+  .Let                  NaamTabblad = &SheetTitle(#ScenarioTab#+1)
+
+  .AskOk Vraag="$>Do you want to copy scenario 1 to <$ '#NaamTabblad#'?",1
+  .If #Vraag#=1
+
+    .If #ScenarioTab#=1
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast2Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+    .If #ScenarioTab#=2
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast3Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+    .If #ScenarioTab#=3
+      .CopySubPeriod          SourceSubPeriod="MainPeriod-SP2",TargetSubPeriod="Forecast4Period",EraseBeforeCopy=On,AddSourceColumnsToTarget=On,RemoveUncopiedColumnsFromTarget=On,SourceTsYinTarget=On
+    .EndIf
+  .EndIf
+.EndScript
+
+.Action                 FullName=FinancieringsAanvraag.Std_ScenarioNaam,Title = "$>Modify name of scenario<$",Enabled=Sheet>1,CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.Std_ScenarioNaam
+  .Let                  ScenarioNaam = &SheetTitle(Sheet)
+  .AskString            ScenarioNaam="$>Modify name of scenario|(Maximum 20 positions)<$",#ScenarioNaam#
+  .Sheet                Sheet, Title=&SubStr("#ScenarioNaam#",1,20)
+  .Application          ReDraw
+.EndScript
+
+
+.Action                 FullName=FinancieringsAanvraag.Std_KolomNaam,Title = "$>Modify name of forecast columns<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.Std_KolomNaam
+	 .DoScript            KolomNaamChange
+.EndScript
+
+
+.Action                 Fullname=FinancieringsAanvraag.Std_HistControle,Title="$>Check history<$",Checked=(HSum(ValCheck,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))<0),ManualCheckEnabled=yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Std_HistControle
+.Event                  OnActionCheckOn FinancieringsAanvraag.Std_HistControle
+  .GridSelectCell       Cell=@ControleEssentOpm2[0],Sheet=Sheet
+.EndScript
+
+
+
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.request,Title="? $>Credit request<$",Header=Yes                  ;; RvA 2008-12-03
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.request
+.Event                  OnExecuteAction FinancieringsAanvraag.request
+  .SupportSheet         ChmFileName="V04-SupportSheets.chm",FileName="supportsheet_finaanvr_02.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction FinancieringsAanvraag.request
+  .SupportSheet         Hide
+.EndScript
+
+
+;Tijdbasis wijzigen
+.Action                 FullName=FinancieringsAanvraag.TijdBasis,Title = "$>Set level of detail<$",Checked=(TsY(LastTinPeriod(PeriodInSheet))>1),ManualCheckEnabled=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.TijdBasis
+  .Let CurrentTSY= TsY(LastTinPeriod(PeriodInSheet))
+  .AskChoice NewTsY="$>Set level of detail in forecast<$","|$>year<$|$>half year<$||$>quarter<$||||||||$>month<$|$>13x per year<$",#CurrentTSY#
+  .If PeriodInSheet=MainPeriod
+    .Period PeriodInSheet,TsY2=#NewTsY#
+  .Else
+    .Period PeriodInSheet,TsY=#NewTsY#
+  .EndIf
+  .ZoomToDetail [FirstTinFormulaSet(Trend,PeriodInSheet)..LastTinFormulaSet(Trend,PeriodInSheet)] #NewTsY#
+  .Application ReDraw
+.EndScript
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.Tijdstip,Title = &BBInvPlanKolom[0],Checked=DataEntered(BBInvPlanKolom,1),ManualCheckEnabled=Yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Tijdstip
+.Event                  OnActionCheckOn FinancieringsAanvraag.Tijdstip
+  .GridSelectCell       Cell=@BBInvPlanKolom,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.Toelichting,Title = "$>Explanation<$",Checked=DataEntered(BBFinInvPlanToelichting,1),ManualCheckEnabled=Yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Toelichting
+.Event                  OnActionCheckOn FinancieringsAanvraag.Toelichting
+  .GridSelectCell       Cell=@BBFinInvPlanToelichting,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+
+
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.InvestPlan,Title = &JCFInvCF[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.InvestPlan
+;.Event                  OnActionCheckOn FinancieringsAanvraag.InvestPlan
+  .Let                  TsYInFinancieringsAanvraag = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInFinancieringsAanvraag#
+  .GridSelectCell       Cell=@BBInvPlan,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.Cashflow1,Title = &CashFlows[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Cashflow1
+;.Event                  OnActionCheckOn FinancieringsAanvraag.Cashflow1
+  .Let                  TsYInFinancieringsAanvraag = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInFinancieringsAanvraag#
+  .GridSelectCell       Cell=TeFinCF,LeftCol=LastTinFormulaSet(Trend),Sheet=Sheet
+.EndScript
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.Financiering,Title = &BBFinPlan[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Financiering
+;.Event                  OnActionCheckOn FinancieringsAanvraag.Financiering
+  .Let                  TsYInFinancieringsAanvraag = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInFinancieringsAanvraag#
+  .GridSelectCell       Cell=@BBFinPlan,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.VermBeh,Title = $>Financed (no capital shortfall)<$,Checked=LiquidityCheckB=0,ManualCheckEnabled=yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.VermBeh
+.Event                  OnActionCheckOn FinancieringsAanvraag.VermBeh
+  .Let                  TsYInFinancieringsAanvraag = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInFinancieringsAanvraag#
+  .GridSelectCell       Cell=@Balans,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+.Action                 Fullname=FinancieringsAanvraag.GadgetInvFin,Title = "$>Investment cockpit<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.GadgetInvFin
+  .Gadget               FileName="InvestmentCockpit.xml"
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+
+.Action                 FullName=FinancieringsAanvraag.Zekerheden,Title = &BBDekkingswaarde[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Zekerheden
+;.Event                  OnActionCheckOn FinancieringsAanvraag.Zekerheden
+  .Let                  TsYInFinancieringsAanvraag = TsY(LastTinFormulaSet(Trend,PeriodInSheet))
+  .ZoomToDetail         [FirstTinFormulaSet(Trend,PeriodinT)] #TsYInFinancieringsAanvraag#
+  .GridSelectCell       Cell=@BBDekkingswaarde,LeftCol=LastTinFormulaSet(1),Sheet=Sheet
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+;Rapport
+.Action                 FullName=FinancieringsAanvraag.Result,Title="? $>Result<$",Header=Yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Result
+.Event                  OnExecuteAction FinancieringsAanvraag.Result
+  .SupportSheet         ChmFileName="V04-SupportSheets.chm",FileName="supportsheet_finaanvr_03.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction FinancieringsAanvraag.Result
+  .SupportSheet         Hide
+.EndScript
+
+;-------------------------------------------------------------------------------------------------------
+.Action                 FullName=FinancieringsAanvraag.Balans,Title =&Balans[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Balans
+;.Event                  OnActionCheckOn FinancieringsAanvraag.Balans
+  .GridSelectCell       Cell=@Balans,Sheet=Sheet
+.EndScript
+
+.Action                 FullName=FinancieringsAanvraag.Omzet,Title =&ResRek[0],CheckBox=No
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Omzet
+;.Event                  OnActionCheckOn FinancieringsAanvraag.Omzet
+  .GridSelectCell       Cell=@ResRek,Sheet=Sheet
+.EndScript
+
+.Action                 Fullname=FinancieringsAanvraag.Std_PrognControle,Title=&ControleFinanAnalyse[0],Checked=ControlePrognose=0,ManualCheckEnabled=yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Std_PrognControle
+.Event                  OnActionCheckOn FinancieringsAanvraag.Std_PrognControle
+  .GridSelectCell       Cell=@ControlePrognose[0],Sheet=Sheet
+.EndScript
+
+;------------------
+.Action                 FullName=FinancieringsAanvraag.Report, Title="? $>Report<$",Header=Yes
+.Script
+.Event                  OnEnterAction FinancieringsAanvraag.Report
+.Event                  OnExecuteAction FinancieringsAanvraag.Report
+  .SupportSheet         ChmFileName="V04-SupportSheets.chm",FileName="supportsheet_finaanvr_04.htm",Position="Screen"
+.EndScript
+
+.Script
+.Event                  OnExitAction FinancieringsAanvraag.Report
+  .SupportSheet         Hide
+.EndScript
+
+
+.Action                 FinancieringsAanvraag.ReportFAanvr = "$>Credit request<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.ReportFAanvr
+;.Event                  OnEnterAction FinancieringsAanvraag.ReportFAanvr
+;.Event                  OnActionCheckOn FinancieringsAanvraag.ReportFAanvr
+  .Report               financieringsaanvraag
+.EndScript
+
+.Action                 Fullname=FinancieringsAanvraag.ReportBrief,Title = "$>Brief report<$",CheckBox=No
+.Script
+.Event                  OnExecuteAction FinancieringsAanvraag.ReportBrief
+  .Report               samenvatting
+.EndScript
+
+;;
+
+;------------------------------------------------------------------------------------------------------------------------------------------
+.Script
+.Event BeforeInputvar BBInvPlanKolom
+  .If (#NewValue# > LastTinFormulaSet(NoTrend,Mainperiod)) And (#NewValue# <> FirstTinFormulaSet(User,BNKPeriod))
+    ; akkoord
+  .Else
+    .Message "Selecteer een prognose kolom"
+    .Cancel
+  .EndIf
+
+
+.EndScript
+
+
+
+
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+; Het verdeling van de invoer in het inv-fin scherm
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+
+
+.Script
+.Event AfterInputvar BBInvPlanAkt1Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt1Inv[BBInvPlanKolom] = BBInvPlanAkt1Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt1[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt1[FirstTinPeriod(BNKperiod)]         =  (Akt1[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt1Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt1Inv
+  .EraseVars Akt1Inv[BBInvPlanKolom]
+  .EraseVars Akt1[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktHInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktHInv[BBInvPlanKolom] = BBInvPlanAktHInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktH[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktH[FirstTinPeriod(BNKperiod)]         =  (AktH[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktHInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktHInv
+  .EraseVars AktHInv[BBInvPlanKolom]
+  .EraseVars AktH[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktFInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktFInv[BBInvPlanKolom] = BBInvPlanAktFInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktF[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktF[FirstTinPeriod(BNKperiod)]         =  (AktF[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktFInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktFInv
+  .EraseVars AktFInv[BBInvPlanKolom]
+  .EraseVars AktF[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt2Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt2Inv[BBInvPlanKolom] = BBInvPlanAkt2Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt2[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt2[FirstTinPeriod(BNKperiod)]         =  (Akt2[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt2Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt2Inv
+  .EraseVars Akt2Inv[BBInvPlanKolom]
+  .EraseVars Akt2[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt3Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt3Inv[BBInvPlanKolom] = BBInvPlanAkt3Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt3[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt3[FirstTinPeriod(BNKperiod)]         =  (Akt3[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt3Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt3Inv
+  .EraseVars Akt3Inv[BBInvPlanKolom]
+  .EraseVars Akt3[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt4Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt4Inv[BBInvPlanKolom] = BBInvPlanAkt4Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt4[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt4[FirstTinPeriod(BNKperiod)]         =  (Akt4[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt4Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt4Inv
+  .EraseVars Akt4Inv[BBInvPlanKolom]
+  .EraseVars Akt4[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt5Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt5Inv[BBInvPlanKolom] = BBInvPlanAkt5Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt5[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt5[FirstTinPeriod(BNKperiod)]         =  (Akt5[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt5Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt5Inv
+  .EraseVars Akt5Inv[BBInvPlanKolom]
+  .EraseVars Akt5[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt20Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt20Inv[BBInvPlanKolom] = BBInvPlanAkt20Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt20[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt20[FirstTinPeriod(BNKperiod)]         =  (Akt20[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt20Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt20Inv
+  .EraseVars Akt20Inv[BBInvPlanKolom]
+  .EraseVars Akt20[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt21Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt21Inv[BBInvPlanKolom] = BBInvPlanAkt21Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt21[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt21[FirstTinPeriod(BNKperiod)]         =  (Akt21[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt21Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt21Inv
+  .EraseVars Akt21Inv[BBInvPlanKolom]
+  .EraseVars Akt21[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt22Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt22Inv[BBInvPlanKolom] = BBInvPlanAkt22Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt22[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt22[FirstTinPeriod(BNKperiod)]         =  (Akt22[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt22Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt22Inv
+  .EraseVars Akt22Inv[BBInvPlanKolom]
+  .EraseVars Akt22[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt23Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt23Inv[BBInvPlanKolom] = BBInvPlanAkt23Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt23[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt23[FirstTinPeriod(BNKperiod)]         =  (Akt23[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt23Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt23Inv
+  .EraseVars Akt23Inv[BBInvPlanKolom]
+  .EraseVars Akt23[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt24Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt24Inv[BBInvPlanKolom] = BBInvPlanAkt24Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt24[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt24[FirstTinPeriod(BNKperiod)]         =  (Akt24[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt24Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt24Inv
+  .EraseVars Akt24Inv[BBInvPlanKolom]
+  .EraseVars Akt24[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt25Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt25Inv[BBInvPlanKolom] = BBInvPlanAkt25Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt25[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt25[FirstTinPeriod(BNKperiod)]         =  (Akt25[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt25Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt25Inv
+  .EraseVars Akt25Inv[BBInvPlanKolom]
+  .EraseVars Akt25[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt6Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt6Inv[BBInvPlanKolom] = BBInvPlanAkt6Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt6[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt6[FirstTinPeriod(BNKperiod)]         =  (Akt6[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt6Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt6Inv
+  .EraseVars Akt6Inv[BBInvPlanKolom]
+  .EraseVars Akt6[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt7Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt7Inv[BBInvPlanKolom] = BBInvPlanAkt7Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt7[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt7[FirstTinPeriod(BNKperiod)]         =  (Akt7[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt7Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt7Inv
+  .EraseVars Akt7Inv[BBInvPlanKolom]
+  .EraseVars Akt7[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktJInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktJInv[BBInvPlanKolom] = BBInvPlanAktJInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktJ[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktJ[FirstTinPeriod(BNKperiod)]         =  (AktJ[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktJInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktJInv
+  .EraseVars AktJInv[BBInvPlanKolom]
+  .EraseVars AktJ[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt8Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt8Inv[BBInvPlanKolom] = BBInvPlanAkt8Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt8[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt8[FirstTinPeriod(BNKperiod)]         =  (Akt8[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt8Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt8Inv
+  .EraseVars Akt8Inv[BBInvPlanKolom]
+  .EraseVars Akt8[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktDInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktDInv[BBInvPlanKolom] = BBInvPlanAktDInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktD[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktD[FirstTinPeriod(BNKperiod)]         =  (AktD[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktDInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktDInv
+  .EraseVars AktDInv[BBInvPlanKolom]
+  .EraseVars AktD[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktCInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktCInv[BBInvPlanKolom] = BBInvPlanAktCInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktC[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktC[FirstTinPeriod(BNKperiod)]         =  (AktC[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktCInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktCInv
+  .EraseVars AktCInv[BBInvPlanKolom]
+  .EraseVars AktC[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+
+.Script
+.Event AfterInputvar BBInvPlanAktPInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktPInv[BBInvPlanKolom] = BBInvPlanAktPInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktP[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktP[FirstTinPeriod(BNKperiod)]         =  (AktP[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktPInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktPInv
+  .EraseVars AktPInv[BBInvPlanKolom]
+  .EraseVars AktP[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktNInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktNInv[BBInvPlanKolom] = BBInvPlanAktNInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktN[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktN[FirstTinPeriod(BNKperiod)]         =  (AktN[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktNInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktNInv
+  .EraseVars AktNInv[BBInvPlanKolom]
+  .EraseVars AktN[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktMInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktMInv[BBInvPlanKolom] = BBInvPlanAktMInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktM[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktM[FirstTinPeriod(BNKperiod)]         =  (AktM[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktMInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktMInv
+  .EraseVars AktMInv[BBInvPlanKolom]
+  .EraseVars AktM[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAktQInv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar AktQInv[BBInvPlanKolom] = BBInvPlanAktQInv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars AktQ[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar AktQ[FirstTinPeriod(BNKperiod)]         =  (AktQ[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAktQInv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAktQInv
+  .EraseVars AktQInv[BBInvPlanKolom]
+  .EraseVars AktQ[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt50Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt50Inv[BBInvPlanKolom] = BBInvPlanAkt50Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt50[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt50[FirstTinPeriod(BNKperiod)]         =  (Akt50[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt50Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt50Inv
+  .EraseVars Akt50Inv[BBInvPlanKolom]
+  .EraseVars Akt50[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt51Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt51Inv[BBInvPlanKolom] = BBInvPlanAkt51Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt51[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt51[FirstTinPeriod(BNKperiod)]         =  (Akt51[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt51Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt51Inv
+  .EraseVars Akt51Inv[BBInvPlanKolom]
+  .EraseVars Akt51[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt52Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt52Inv[BBInvPlanKolom] = BBInvPlanAkt52Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt52[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt52[FirstTinPeriod(BNKperiod)]         =  (Akt52[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt52Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt52Inv
+  .EraseVars Akt52Inv[BBInvPlanKolom]
+  .EraseVars Akt52[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt53Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt53Inv[BBInvPlanKolom] = BBInvPlanAkt53Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt53[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt53[FirstTinPeriod(BNKperiod)]         =  (Akt53[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt53Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt53Inv
+  .EraseVars Akt53Inv[BBInvPlanKolom]
+  .EraseVars Akt53[FirstTinPeriod(BNKperiod)]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBInvPlanAkt54Inv
+  ; Investering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Akt54Inv[BBInvPlanKolom] = BBInvPlanAkt54Inv[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  ; Investering in de BNK invullen, investering wordt aan huidige waarde toegevoegd
+  .EraseVars Akt54[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Akt54[FirstTinPeriod(BNKperiod)]         =  (Akt54[FirstTinFormulaSet(User,BNKPeriod)] + BBInvPlanAkt54Inv[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBInvPlanAkt54Inv
+  .EraseVars Akt54Inv[BBInvPlanKolom]
+  .EraseVars Akt54[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;------------------------------------------------------------------------------------------------------------------------------------------ FINANCIERINGEN
+.Script
+.Event AfterInputvar BBFin_Kred1HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred1Fin[BBInvPlanKolom] = BBFin_Kred1HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred1[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred1[FirstTinPeriod(BNKperiod)]         =  (LangKred1[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred1HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred1HoofdSom
+  .EraseVars Kred1Fin[BBInvPlanKolom]
+  .EraseVars LangKred1[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred1RentePercentage
+  .InputVar RPKred1[BBInvPlanKolom] = BBFin_Kred1RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred1RentePercentage
+  .EraseVars RPKred1[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred1Looptijd
+  .InputVar Kred1Tijd[BBInvPlanKolom] = BBFin_Kred1Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred1Looptijd
+  .EraseVars Kred1Tijd[BBInvPlanKolom]
+.EndScript
+
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredAHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredAFin[BBInvPlanKolom] = BBFin_KredAHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredA[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredA[FirstTinPeriod(BNKperiod)]         =  (LangKredA[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredAHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredAHoofdSom
+  .EraseVars KredAFin[BBInvPlanKolom]
+  .EraseVars LangKredA[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredARentePercentage
+  .InputVar RPKredA[BBInvPlanKolom] = BBFin_KredARentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredARentePercentage
+  .EraseVars RPKredA[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredALooptijd
+  .InputVar KredATijd[BBInvPlanKolom] = BBFin_KredALooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredALooptijd
+  .EraseVars KredATijd[BBInvPlanKolom]
+.EndScript
+
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredBHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredBFin[BBInvPlanKolom] = BBFin_KredBHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredB[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredB[FirstTinPeriod(BNKperiod)]         =  (LangKredB[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredBHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredBHoofdSom
+  .EraseVars KredBFin[BBInvPlanKolom]
+  .EraseVars LangKredB[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredBRentePercentage
+  .InputVar RPKredB[BBInvPlanKolom] = BBFin_KredBRentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredBRentePercentage
+  .EraseVars RPKredB[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredBLooptijd
+  .InputVar KredBTijd[BBInvPlanKolom] = BBFin_KredBLooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredBLooptijd
+  .EraseVars KredBTijd[BBInvPlanKolom]
+.EndScript
+
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredCHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredCFin[BBInvPlanKolom] = BBFin_KredCHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredC[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredC[FirstTinPeriod(BNKperiod)]         =  (LangKredC[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredCHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredCHoofdSom
+  .EraseVars KredCFin[BBInvPlanKolom]
+  .EraseVars LangKredC[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredCRentePercentage
+  .InputVar RPKredC[BBInvPlanKolom] = BBFin_KredCRentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredCRentePercentage
+  .EraseVars RPKredC[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredCLooptijd
+  .InputVar KredCTijd[BBInvPlanKolom] = BBFin_KredCLooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredCLooptijd
+  .EraseVars KredCTijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred2HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred2Fin[BBInvPlanKolom] = BBFin_Kred2HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred2[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred2[FirstTinPeriod(BNKperiod)]         =  (LangKred2[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred2HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred2HoofdSom
+  .EraseVars Kred2Fin[BBInvPlanKolom]
+  .EraseVars LangKred2[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred2RentePercentage
+  .InputVar RPKred2[BBInvPlanKolom] = BBFin_Kred2RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred2RentePercentage
+  .EraseVars RPKred2[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred2Looptijd
+  .InputVar Kred2Tijd[BBInvPlanKolom] = BBFin_Kred2Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred2Looptijd
+  .EraseVars Kred2Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredFHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredFFin[BBInvPlanKolom] = BBFin_KredFHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredF[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredF[FirstTinPeriod(BNKperiod)]         =  (LangKredF[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredFHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredFHoofdSom
+  .EraseVars KredFFin[BBInvPlanKolom]
+  .EraseVars LangKredF[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredFRentePercentage
+  .InputVar RPKredF[BBInvPlanKolom] = BBFin_KredFRentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredFRentePercentage
+  .EraseVars RPKredF[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredFLooptijd
+  .InputVar KredFTijd[BBInvPlanKolom] = BBFin_KredFLooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredFLooptijd
+  .EraseVars KredFTijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred3HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred3Fin[BBInvPlanKolom] = BBFin_Kred3HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred3[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred3[FirstTinPeriod(BNKperiod)]         =  (LangKred3[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred3HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred3HoofdSom
+  .EraseVars Kred3Fin[BBInvPlanKolom]
+  .EraseVars LangKred3[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred3RentePercentage
+  .InputVar RPKred3[BBInvPlanKolom] = BBFin_Kred3RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred3RentePercentage
+  .EraseVars RPKred3[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred3Looptijd
+  .InputVar Kred3Tijd[BBInvPlanKolom] = BBFin_Kred3Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred3Looptijd
+  .EraseVars Kred3Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred4HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred4Fin[BBInvPlanKolom] = BBFin_Kred4HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred4[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred4[FirstTinPeriod(BNKperiod)]         =  (LangKred4[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred4HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred4HoofdSom
+  .EraseVars Kred4Fin[BBInvPlanKolom]
+  .EraseVars LangKred4[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred4RentePercentage
+  .InputVar RPKred4[BBInvPlanKolom] = BBFin_Kred4RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred4RentePercentage
+  .EraseVars RPKred4[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred4Looptijd
+  .InputVar Kred4Tijd[BBInvPlanKolom] = BBFin_Kred4Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred4Looptijd
+  .EraseVars Kred4Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred5HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred5Fin[BBInvPlanKolom] = BBFin_Kred5HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred5[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred5[FirstTinPeriod(BNKperiod)]         =  (LangKred5[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred5HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred5HoofdSom
+  .EraseVars Kred5Fin[BBInvPlanKolom]
+  .EraseVars LangKred5[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred5RentePercentage
+  .InputVar RPKred5[BBInvPlanKolom] = BBFin_Kred5RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred5RentePercentage
+  .EraseVars RPKred5[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred5Looptijd
+  .InputVar Kred5Tijd[BBInvPlanKolom] = BBFin_Kred5Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred5Looptijd
+  .EraseVars Kred5Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred6HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred6Fin[BBInvPlanKolom] = BBFin_Kred6HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred6[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred6[FirstTinPeriod(BNKperiod)]         =  (LangKred6[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred6HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred6HoofdSom
+  .EraseVars Kred6Fin[BBInvPlanKolom]
+  .EraseVars LangKred6[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred6RentePercentage
+  .InputVar RPKred6[BBInvPlanKolom] = BBFin_Kred6RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred6RentePercentage
+  .EraseVars RPKred6[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred6Looptijd
+  .InputVar Kred6Tijd[BBInvPlanKolom] = BBFin_Kred6Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred6Looptijd
+  .EraseVars Kred6Tijd[BBInvPlanKolom]
+.EndScript
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred7HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred7Fin[BBInvPlanKolom] = BBFin_Kred7HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred7[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred7[FirstTinPeriod(BNKperiod)]         =  (LangKred7[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred7HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred7HoofdSom
+  .EraseVars Kred7Fin[BBInvPlanKolom]
+  .EraseVars LangKred7[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred7RentePercentage
+  .InputVar RPKred7[BBInvPlanKolom] = BBFin_Kred7RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred7RentePercentage
+  .EraseVars RPKred7[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred7Looptijd
+  .InputVar Kred7Tijd[BBInvPlanKolom] = BBFin_Kred7Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred7Looptijd
+  .EraseVars Kred7Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred8HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred8Fin[BBInvPlanKolom] = BBFin_Kred8HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred8[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred8[FirstTinPeriod(BNKperiod)]         =  (LangKred8[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred8HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred8HoofdSom
+  .EraseVars Kred8Fin[BBInvPlanKolom]
+  .EraseVars LangKred8[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred8RentePercentage
+  .InputVar RPKred8[BBInvPlanKolom] = BBFin_Kred8RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred8RentePercentage
+  .EraseVars RPKred8[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred8Looptijd
+  .InputVar Kred8Tijd[BBInvPlanKolom] = BBFin_Kred8Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred8Looptijd
+  .EraseVars Kred8Tijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredHHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredHFin[BBInvPlanKolom] = BBFin_KredHHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredH[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredH[FirstTinPeriod(BNKperiod)]         =  (LangKredH[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredHHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredHHoofdSom
+  .EraseVars KredHFin[BBInvPlanKolom]
+  .EraseVars LangKredH[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredHRentePercentage
+  .InputVar RPKredH[BBInvPlanKolom] = BBFin_KredHRentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredHRentePercentage
+  .EraseVars RPKredH[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredHLooptijd
+  .InputVar KredHTijd[BBInvPlanKolom] = BBFin_KredHLooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredHLooptijd
+  .EraseVars KredHTijd[BBInvPlanKolom]
+.EndScript
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_Kred9HoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar Kred9Fin[BBInvPlanKolom] = BBFin_Kred9HoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKred9[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKred9[FirstTinPeriod(BNKperiod)]         =  (LangKred9[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_Kred9HoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_Kred9HoofdSom
+  .EraseVars Kred9Fin[BBInvPlanKolom]
+  .EraseVars LangKred9[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred9RentePercentage
+  .InputVar RPKred9[BBInvPlanKolom] = BBFin_Kred9RentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred9RentePercentage
+  .EraseVars RPKred9[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_Kred9Looptijd
+  .InputVar Kred9Tijd[BBInvPlanKolom] = BBFin_Kred9Looptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_Kred9Looptijd
+  .EraseVars Kred9Tijd[BBInvPlanKolom]
+.EndScript
+
+
+;-----------------------
+.Script
+.Event AfterInputvar BBFin_KredGHoofdSom
+  ; Nieuwe financiering in de prognose invullen, oude invoer wordt overschreven
+  .InputVar KredGFin[BBInvPlanKolom] = BBFin_KredGHoofdSom[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars LangKredG[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar LangKredG[FirstTinPeriod(BNKperiod)]         =  (LangKredG[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_KredGHoofdSom[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_KredGHoofdSom
+  .EraseVars KredGFin[BBInvPlanKolom]
+  .EraseVars LangKredG[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredGRentePercentage
+  .InputVar RPKredG[BBInvPlanKolom] = BBFin_KredGRentePercentage[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredGRentePercentage
+  .EraseVars RPKredG[BBInvPlanKolom]
+.EndScript
+
+.Script
+.Event AfterInputvar BBFin_KredGLooptijd
+  .InputVar KredGTijd[BBInvPlanKolom] = BBFin_KredGLooptijd[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+.Script
+.Event AfterErasevar BBFin_KredGLooptijd
+  .EraseVars KredGTijd[BBInvPlanKolom]
+.EndScript
+
+;---------------------------------------------
+.Script
+.Event AfterInputvar BBFin_EVStorting
+  .InputVar StortingKapitaal[BBInvPlanKolom] = BBFin_EVStorting[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .EraseVars Kapitaal[FirstTinPeriod(BNKperiod)]
+  .CalculateT
+  .If PeriodInSheet = 1
+  .InputVar Kapitaal[FirstTinPeriod(BNKperiod)]         =  (Kapitaal[FirstTinFormulaSet(User,BNKPeriod)] + BBFin_EVStorting[1])/ViewScaleFactor
+  .EndIf
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_EVStorting
+  .EraseVars StortingKapitaal[BBInvPlanKolom]
+  .EraseVars Kapitaal[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;---------------------------------------------
+.Script
+.Event AfterInputvar BBFin_RC
+  .InputVar VerhogingLimietRC[BBInvPlanKolom] = BBFin_RC[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+  .InputVar VerhogingLimietRC[FirstTinPeriod(BNKperiod)] = BBFin_RC[FirstTinPeriod(PeriodInSheet)]/ViewScaleFactor
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_RC
+  .EraseVars VerhogingLimietRC[BBInvPlanKolom]
+  .EraseVars VerhogingLimietRC[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;---------------------------------------------
+.Script
+.Event AfterInputvar BBFin_RCPERC
+  .InputVar RPRekCourNeg[BBInvPlanKolom] = BBFin_RCPERC[FirstTinPeriod(PeriodInSheet)]
+  ;.InputVar RPRekCourNeg[FirstTinPeriod(BNKperiod)] = BBFin_RCPERC[FirstTinPeriod(PeriodInSheet)]
+.EndScript
+
+.Script
+.Event AfterErasevar BBFin_RC
+  .EraseVars RPRekCourNeg[BBInvPlanKolom]
+  ;.EraseVars RPRekCourNeg[FirstTinPeriod(BNKperiod)]
+.EndScript
+
+;---------------------------------------------
+.Script FinancieringsAanvraag_BNKkolomUpdate
+.Event OnExitSub BBFinPlan
+.Event OnExitSub BBInvPlan
+  ; Dit script zorgt er voor dat de BNK weer in evenwicht wordt gemaakt!
+  .View Normal
+  .Let &NieuwSaldo = (BalAkt[FirstTinFormulaSet(User,BNKPeriod)]- OvLiqMid[FirstTinPeriod(BNKperiod)] - BalPas[FirstTinFormulaSet(User,BNKPeriod)] + RCBANK[FirstTinPeriod(BNKperiod)] - Afronding[FirstTinFormulaSet(User,BNKPeriod)] )/ViewScaleFactor
+  .If #NieuwSaldo# > 0
+    .InputVar OvLiqMid[FirstTinPeriod(BNKperiod)] =0
+    .GridInputVar RCBANK[FirstTinPeriod(BNKperiod)] =  #NieuwSaldo#
+  .Else
+      .InputVar RCBANK[FirstTinPeriod(BNKperiod)] =  0
+      .GridInputVar OvLiqMid[FirstTinPeriod(BNKperiod)] = -#NieuwSaldo#
+  .EndIf
+  .View Org
+.EndScript
+
+
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+; Het correct weergeven van het Inv-Fin Scherm
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------------------------------------------
+
+
+;---------------------------------------------
+.Script FinancieringsAanvraag_Update
+.Event OnEnterTree BBInvPlan
+.Event OnEnterTree BBFinPlan
+.Event AfterInputVar BBInvPlanKolom
+.Event AfterEraseVar BBInvPlanKolom
+
+  ; Dit script zorgt er voor dat het scherm weer uptodate is met de Balans
+  .View Normal
+
+  .InputVar BBInvPlanAkt1Inv[FirstTinPeriod(PeriodInSheet)]= Akt1Inv[BBInvPlanKolom]/ViewScale
+  ;.InputVar BBInvPlanAktGInv[FirstTinPeriod(PeriodInSheet)]= AktGInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktHInv[FirstTinPeriod(PeriodInSheet)]= AktHInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktFInv[FirstTinPeriod(PeriodInSheet)]= AktFInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt2Inv[FirstTinPeriod(PeriodInSheet)]= Akt2Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt3Inv[FirstTinPeriod(PeriodInSheet)]= Akt3Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt4Inv[FirstTinPeriod(PeriodInSheet)]= Akt4Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt5Inv[FirstTinPeriod(PeriodInSheet)]= Akt5Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt20Inv[FirstTinPeriod(PeriodInSheet)]= Akt20Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt21Inv[FirstTinPeriod(PeriodInSheet)]= Akt21Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt22Inv[FirstTinPeriod(PeriodInSheet)]= Akt22Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt23Inv[FirstTinPeriod(PeriodInSheet)]= Akt23Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt24Inv[FirstTinPeriod(PeriodInSheet)]= Akt24Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt25Inv[FirstTinPeriod(PeriodInSheet)]= Akt25Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt6Inv[FirstTinPeriod(PeriodInSheet)]= Akt6Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt7Inv[FirstTinPeriod(PeriodInSheet)]= Akt7Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktJInv[FirstTinPeriod(PeriodInSheet)]= AktJInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt8Inv[FirstTinPeriod(PeriodInSheet)]= Akt8Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktDInv[FirstTinPeriod(PeriodInSheet)]= AktDInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktCInv[FirstTinPeriod(PeriodInSheet)]= AktCInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktPInv[FirstTinPeriod(PeriodInSheet)]= AktPInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktNInv[FirstTinPeriod(PeriodInSheet)]= AktNInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktMInv[FirstTinPeriod(PeriodInSheet)]= AktMInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAktQInv[FirstTinPeriod(PeriodInSheet)]= AktQInv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt50Inv[FirstTinPeriod(PeriodInSheet)]= Akt50Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt51Inv[FirstTinPeriod(PeriodInSheet)]= Akt51Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt52Inv[FirstTinPeriod(PeriodInSheet)]= Akt52Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt53Inv[FirstTinPeriod(PeriodInSheet)]= Akt53Inv[BBInvPlanKolom]/ViewScale
+  .InputVar BBInvPlanAkt54Inv[FirstTinPeriod(PeriodInSheet)]= Akt54Inv[BBInvPlanKolom]/ViewScale
+
+  .InputVar BBFin_Kred1HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred1Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredAHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredAFin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredBHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredBFin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredCHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredCFin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred2HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred2Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredFHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredFFin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred3HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred3Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred4HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred4Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred5HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred5Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred6HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred6Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred7HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred7Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred8HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred8Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredHHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredHFin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_Kred9HoofdSom[FirstTinPeriod(PeriodInSheet)]= Kred9Fin[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_KredGHoofdSom[FirstTinPeriod(PeriodInSheet)]= KredGFin[BBInvPlanKolom]/ViewScale
+
+  .InputVar BBFin_EVStorting[FirstTinPeriod(PeriodInSheet)]= StortingKapitaal[BBInvPlanKolom]/ViewScale
+  .InputVar BBFin_RC[FirstTinPeriod(PeriodInSheet)]= VerhogingLimietRC[BBInvPlanKolom]/ViewScale
+
+  .View Org
+.EndScript

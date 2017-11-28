@@ -1,0 +1,107 @@
+; FINAN-GlobalScripts.fsf
+;
+{&&Language=Deutsch}
+
+.SetSearchKey Description1="Customer number"
+.SetSearchKey Description2="Name"
+.SetSearchKey Description3="City"
+.SetSearchKey Description4="Regio"
+
+
+.Application HideSilImportMenuItems
+
+
+.Script Name=ImportDatevScript,Title="$>Datev CSV Datei importieren<$"
+.Event  OnFileImportMenuClick
+  .AskInt ImportJaar="$>Welches Jahr?<$",2000,2100,2012
+  .Let &SilImportFirstYear=#ImportJaar#
+  .Let &SilImportLastYear=#ImportJaar#
+  .Application SmartImportMode=On
+  .OpenDocument Model="TXDE",Origin="DATEV_CSV",AsRelatedDocument,Overwrite
+  .Scale 1
+.EndScript
+
+
+.Script Name=ImportXBRLScript,Title="XBRL $>Datei importieren<$"
+.Event  OnFileImportMenuClick
+  .Application SmartImportMode=On
+  .OpenDocument Model="TXDE",Origin="XBRL",AsRelatedDocument,Overwrite
+  .If SysVar("OpenDocumentResult")=0
+    .Scale 1000
+  .EndIf
+  .Calc 1
+  .If FirstValueT(TotalAmountAssetsFiscal)>0
+    .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+    .Application Redraw
+    .RefreshExplorer
+  .EndIf
+.EndScript
+
+
+;.Script Name=ImportClassicDataFile,Title="$>FINAN Dokument importieren<$",
+;.Event OnFileImportMenuClick
+;  .ScriptMode ErrorMode=Simple           ; suppress script name and line number in error messages
+;  .OpenDocument ClassicDataFile,Model="TXDE",RelatedDocuments=No,ExternalLinks=No
+;.EndScript
+
+
+.Script Name=ImportAuditionScript,Title="Audition XML $>Datei importieren<$",
+.Event OnFileImportMenuClick
+  .Application SmartImportMode=Off
+  .OpenDocument Model="TXDE",Origin="AUDITION_XML",AsRelatedDocument,Overwrite
+  .If SysVar("OpenDocumentResult")=0
+    .Scale 1
+  .EndIf
+  .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+  .Application Redraw
+  .RefreshExplorer
+.EndScript
+
+
+.Script Name=ImportCasewareScript,Title="Caseware $>Datei importieren<$",
+.Event OnFileImportMenuClick
+  .Application SmartImportMode=Off
+  .OpenDocument Model="TXDE",Origin="GENERIC_XML",AsRelatedDocument,Overwrite=Off
+  .If SysVar("OpenDocumentResult")=0
+    .Scale 1
+  .EndIf
+  .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+  .Application Redraw
+  .RefreshExplorer
+.EndScript
+
+
+.Script Name=ImportFinanXMLScript,Title="FINAN XML $>Datei importieren<$",
+.Event OnFileImportMenuClick
+  .Application SmartImportMode=On                                                 ;## On of Off?
+  .OpenDocument Model="TXDE",Origin="FINAN_XML",AsRelatedDocument,Overwrite=Off
+  .If SysVar("OpenDocumentResult")=0
+    .Scale 1
+  .EndIf
+  .Calc 1
+  .If FirstValueT(TotalAmountAssetsFiscal)>0
+    .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+    .Application Redraw
+    .RefreshExplorer
+  .EndIf
+.EndScript
+
+
+.Script Name=ImportFinanCSVScript,Title="FINAN CSV $>Datei importieren<$",
+.Event OnFileImportMenuClick
+  .Application SmartImportMode=On                                                 ;## On of Off?
+  .OpenDocument Model="TXDE",Origin="FINAN_CSV",AsRelatedDocument,Overwrite=Off
+  .If SysVar("OpenDocumentResult")=0
+    .Scale 1
+  .EndIf
+  .Calc 1
+  .If FirstValueT(TotalAmountAssetsFiscal)>0
+    .InputVar ModelConfiguration[1]=1     ; Nederlands  LET OP: nu overschreven, in web dus niet meer afhankelijk van FES-variabele!
+    .Application Redraw
+    .RefreshExplorer
+  .EndIf
+.EndScript
+
+
+
+

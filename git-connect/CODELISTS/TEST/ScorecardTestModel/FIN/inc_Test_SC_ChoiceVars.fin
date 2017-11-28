@@ -1,0 +1,35 @@
+; inc_Test_SC_ChoiceVars.fin
+; EJS juli 2014
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Scorecard Test Paragraph
+; Choice variables
+
+PPP     BN     3               "Test Choice Variables"                                             \TestChoiceVars
+
+PII     1N C   4               "Test 1: Choice (zero|one|two|three|four)"                          \tcvTest1
+PII   0 1N     4               "Test 1: Copy as number"                                            \=tcvTest1
+PII     1A     4               "Test 2: Enter a choice string here"                                \tcvTest2String
+PII     1N C   4               "Test 2: Make your choice"                                          \tcvTest2
+PII   0 1N     4               "Test 2: Copy as number"                                            \=tcvTest2
+PII     1N C   4               "Test 3: Choice (zero|one|||four)"                                  \tcvTest3
+PII   0 1N     4               "Test 3: Copy as number"                                            \=tcvTest3
+PII     1N C   4               "Test 4: Choice step 1 Country"                                     \tcvTest4Country
+PII     1N C   4               "Test 4: Choice step 2 City depends on country"                     \tcvTest4City
+PII   0 1N     4               "Test 4: Copy country as number"                                    \=tcvTest4Country
+PII   0 1N     4               "Test 4: Copy city as number"                                       \=tcvTest4City
+PII     1N C   4               "Test 5: Choice (0:zero|10:ten|11:eleven|20:twenty)"                \tcvTest5
+PII   0 1N     4               "Test 5: Copy as number"                                            \=tcvTest5
+
+.Choices
+tcvTest1= "zero|one|two|three|four"
+tcvTest2= &tcvTest2String
+tcvTest3= "zero|one|||four"
+tcvTest4Country= "Unknown|Netherlands|Germany"
+tcvTest4City= &"Unknown|"&If(tcvTest4Country=1,"Zwolle|Amsterdam","Hamburg|Berlin")
+tcvTest5= "0:zero|10:ten|11:eleven|20:twenty"
+
+.Formulas NoTrend
+tcvTest2String= "zero|one|two|three|four"
+

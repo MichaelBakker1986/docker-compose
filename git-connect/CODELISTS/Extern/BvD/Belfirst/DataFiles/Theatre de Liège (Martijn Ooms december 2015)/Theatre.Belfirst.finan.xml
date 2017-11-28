@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<finanData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <header>
+    <companyName>THEATRE LIEGE ASBL CENTRE DRAMATIQUE FED. WALLONIE BXL</companyName>
+    <documentCode></documentCode>
+    <codeList>Belfirst</codeList>
+    <creator>XML-kolom toegevoegd aan Excel BVD data spreadsheet</creator>
+    <buildDate>2015-12-15</buildDate>
+  </header>
+  <timeLines>
+    <timeLine>
+      <columns>
+        <column id="1">
+          <startDate>2014-01-01</startDate>
+          <endDate>2014-12-31</endDate>
+        </column>
+      </columns>
+    </timeLine>
+  </timeLines>
+  <accounts>
+
+
+    <account id="9900">
+      <cells>
+        <cell columnId="1">2540189</cell>
+      </cells>
+    </account>
+    <account id="7074">
+      <cells>
+        <cell columnId="1">5395341</cell>
+      </cells>
+    </account>
+    <account id="70">
+      <cells>
+        <cell columnId="1">1514344</cell>
+      </cells>
+    </account>
+    <account id="73">
+      <cells>
+        <cell columnId="1">3683270</cell>
+      </cells>
+    </account>
+
+    <account id="6061">
+      <cells>
+        <cell columnId="1">2855152</cell>
+      </cells>
+    </account>
+    <account id="62">
+      <cells>
+        <cell columnId="1">2679260</cell>
+      </cells>
+    </account>
+    <account id="630">
+      <cells>
+        <cell columnId="1">154704</cell>
+      </cells>
+    </account>
+    <account id="6314">
+      <cells>
+        <cell columnId="1">4386</cell>
+      </cells>
+    </account>
+    <account id="6358">
+      <cells>
+        <cell columnId="1">-20000</cell>
+      </cells>
+    </account>
+    <account id="6408">
+      <cells>
+        <cell columnId="1">280</cell>
+      </cells>
+    </account>
+    <account id="649">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="9901">
+      <cells>
+        <cell columnId="1">-278441</cell>
+      </cells>
+    </account>
+    <account id="75">
+      <cells>
+        <cell columnId="1">1056</cell>
+      </cells>
+    </account>
+    <account id="65">
+      <cells>
+        <cell columnId="1">46286</cell>
+      </cells>
+    </account>
+    <account id="9902">
+      <cells>
+        <cell columnId="1">-323671</cell>
+      </cells>
+    </account>
+    <account id="76">
+      <cells>
+        <cell columnId="1">4645</cell>
+      </cells>
+    </account>
+    <account id="66">
+      <cells>
+        <cell columnId="1">1770</cell>
+      </cells>
+    </account>
+    <account id="9904">
+      <cells>
+        <cell columnId="1">-320796</cell>
+      </cells>
+    </account>
+
+
+
+
+
+
+
+
+    <account id="2028">
+      <cells>
+        <cell columnId="1">926865</cell>
+      </cells>
+    </account>
+
+    <account id="21">
+      <cells>
+        <cell columnId="1">7315</cell>
+      </cells>
+    </account>
+    <account id="2227">
+      <cells>
+        <cell columnId="1">915425</cell>
+      </cells>
+    </account>
+    <account id="22">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="2291">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="2292">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="23">
+      <cells>
+        <cell columnId="1">179014</cell>
+      </cells>
+    </account>
+    <account id="231">
+      <cells>
+        <cell columnId="1">179014</cell>
+      </cells>
+    </account>
+    <account id="232">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="24">
+      <cells>
+        <cell columnId="1">282905</cell>
+      </cells>
+    </account>
+    <account id="241">
+      <cells>
+        <cell columnId="1">282905</cell>
+      </cells>
+    </account>
+    <account id="242">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="25">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="26">
+      <cells>
+        <cell columnId="1">453506</cell>
+      </cells>
+    </account>
+    <account id="261">
+      <cells>
+        <cell columnId="1">453506</cell>
+      </cells>
+    </account>
+    <account id="262">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="27">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="28">
+      <cells>
+        <cell columnId="1">4125</cell>
+      </cells>
+    </account>
+
+    <account id="2958">
+      <cells>
+        <cell columnId="1">1776707</cell>
+      </cells>
+    </account>
+
+    <account id="290">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="291">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="2915">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+
+    <account id="3036">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="37">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="4041">
+      <cells>
+        <cell columnId="1">1217242</cell>
+      </cells>
+    </account>
+    <account id="40">
+      <cells>
+        <cell columnId="1">379068</cell>
+      </cells>
+    </account>
+    <account id="41">
+      <cells>
+        <cell columnId="1">838174</cell>
+      </cells>
+    </account>
+    <account id="415">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+
+    <account id="5458">
+      <cells>
+        <cell columnId="1">281925</cell>
+      </cells>
+    </account>
+    <account id="4901">
+      <cells>
+        <cell columnId="1">277540</cell>
+      </cells>
+    </account>
+
+    <account id="2058">
+      <cells>
+        <cell columnId="1">2703572</cell>
+      </cells>
+    </account>
+
+
+
+    <account id="1015">
+      <cells>
+        <cell columnId="1">-285050</cell>
+      </cells>
+    </account>
+    <account id="10">
+      <cells>
+        <cell columnId="1">-393198</cell>
+      </cells>
+    </account>
+    <account id="100">
+      <cells>
+        <cell columnId="1">-393198</cell>
+      </cells>
+    </account>
+    <account id="101">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+
+
+    <account id="14">
+      <cells>
+        <cell columnId="1">90148</cell>
+      </cells>
+    </account>
+    <account id="15">
+      <cells>
+        <cell columnId="1">18000</cell>
+      </cells>
+    </account>
+
+
+    <account id="1605">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="168">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+
+    <account id="1749">
+      <cells>
+        <cell columnId="1">2988622</cell>
+      </cells>
+    </account>
+    <account id="17">
+      <cells>
+        <cell columnId="1">230697</cell>
+      </cells>
+    </account>
+    <account id="1704">
+      <cells>
+        <cell columnId="1">230697</cell>
+      </cells>
+    </account>
+    <account id="1723">
+      <cells>
+        <cell columnId="1">230697</cell>
+      </cells>
+    </account>
+    <account id="1740">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="175">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="176">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="179">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="1790">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="1791">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="1792">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="4248">
+      <cells>
+        <cell columnId="1">1200308</cell>
+      </cells>
+    </account>
+    <account id="42">
+      <cells>
+        <cell columnId="1">89236</cell>
+      </cells>
+    </account>
+    <account id="43">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="4308">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="439">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="44">
+      <cells>
+        <cell columnId="1">660755</cell>
+      </cells>
+    </account>
+    <account id="4404">
+      <cells>
+        <cell columnId="1">660755</cell>
+      </cells>
+    </account>
+    <account id="441">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="46">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="45">
+      <cells>
+        <cell columnId="1">399662</cell>
+      </cells>
+    </account>
+    <account id="4503">
+      <cells>
+        <cell columnId="1">93008</cell>
+      </cells>
+    </account>
+    <account id="4549">
+      <cells>
+        <cell columnId="1">306654</cell>
+      </cells>
+    </account>
+    <account id="48">
+      <cells>
+        <cell columnId="1">50655</cell>
+      </cells>
+    </account>
+    <account id="4808">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="4890">
+      <cells>
+        <cell columnId="1">0</cell>
+      </cells>
+    </account>
+    <account id="4891">
+      <cells>
+        <cell columnId="1">50655</cell>
+      </cells>
+    </account>
+    <account id="4923">
+      <cells>
+        <cell columnId="1">1557617</cell>
+      </cells>
+    </account>
+
+    <account id="1049">
+      <cells>
+        <cell columnId="1">2703572</cell>
+      </cells>
+    </account>
+
+
+    <account id="9087">
+      <cells>
+        <cell columnId="1">56</cell>
+      </cells>
+    </account>
+
+
+  </accounts>
+</finanData>

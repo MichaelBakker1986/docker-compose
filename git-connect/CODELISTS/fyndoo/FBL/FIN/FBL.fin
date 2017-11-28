@@ -1,0 +1,288 @@
+{&&Language=English}$>FBL<$ 
+ 
+.ModelVersion          1.13 
+.FINANversion          3.2 
+ 
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear-1,Years=3,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)  ; v1.1 "hist" weg op verzoek Jacqueline (kan ook concept zijn) 
+ 
+.Sheet   1,Title="main sheet",Period=MainPeriod 
+ 
+.Variables 
+PP       X     0               "FBL v#CompactModelVersion#"                       \Root 
+ 
+.Variables 
+{&&Include IncFesVars.fin} 
+{&&Include IncFpsVars.fin} 
+ 
+.Variables 
+;========================================================================================================================================== 
+; Q_ROOT Kredietaanvraagmodel 
+ 
+PP      1N C   1               "FBL"                                                    \Q_ROOT 
+C Please fill in all questions 
+ 
+.Choices 
+Q_ROOT                         = "0:Incomplete filled.|1:Complete filled." 
+ 
+.Formulas NoTrend 
+Q_ROOT                         = If(((Q_Map01[1]=1) ) Or (Length(&scKnockoutsCombi[1])>0),1,0) 
+ 
+;================================================================================================== 
+.Variables 
+PP      1N C   2               "FBL v1.13"                                                    \Q_Map01 
+ 
+;--------------- 
+; WARNING PANELS 
+PP      1A   1 3               $>Warning voor map 1<$                                         \Q_Map01_WARNING 
+PP      1A     3               $>Info bij stap 1<$                                            \Q_Map01_INFO 
+PP      1A     3               $>Validatie stap 1<$                                           \Q_Map01_VALIDATION 
+ 
+;--------------------------------------------------------------------------------------------- 
+.Variables 
+PP      1A     3               "$>FBL<$ v1.13"                      										      \Q_MAP01_Paragraaf 
+ 
+.LevelOffSet 3 
+
+PI      1A     1               $>Model created from<$                                   	\ModelCreatedFrom 
+PI      1T     1               $>Zakelijke overeenkomst<$                                   \ZakelijkeOvereenkomst
+PI      1A     2               $>Overeenkomst nummer<$                                      \ZakelijkeOvereenkomstNummer
+PI      1N     2               $>Total Arrangementfee<$     					       		\TotalArrangementfee
+PI      1N     2               $>Total Agreement Limit<$     					       		\TotalAgreementLimit
+PI      1T     2               $>Faciliteiten<$                                             \Faciliteiten
+PI      1A     3               $>Faciliteit nummer<$                                        \FaciliteitNummer
+PI      1A     3               $>Productlijn naam<$                                         \Productlijnnaam
+PI      1N     3               $>Limiet<$                                                   \Limiet
+PI    0 1N     3               $>ArrangementFee<$                                           \ArrangementFee
+PI      1A     3               $>Looptijd<$                                                 \Looptijd
+PI      1A     3               $>eindDatum<$                                            	\Faciliteit_einddatum
+PI    0 1N     3               $>EAD<$                                                      \EAD
+PI    0 1N     3               $>Collateral total<$                                         \CollateralTotal
+PI    2 1N     3               $>EL<$                                                       \EL 
+PI    2 1N     3               $>Early repay fee<$                                          \EarlyRepayFee
+PI    2 1N     3               $>Legal cost fee<$                                           \LegalCostFee
+PI    2 1N     3               $>Fees<$                                                     \Fees
+PI    2 1N %   3               $>LGD<$                                                      \LGD
+PI    0 1N     3               $>MaxLoss<$                                                  \MaxLoss
+PI      1A     3               $>PrintedRate<$                                              \PrintedRate
+PI    2 1N     3               $>Calculated rate<$                                          \Facility_tpCalculatedRate
+PI      1A     3               $>Product Marge<$                                            \Facility_tpProductInterestmargin
+PI      1A     3               $>Product interest period<$     								\Facility_tpProductinterestDetailsFixedInterestPeriod
+PI      1A     3               $>Product rente periodiciteit<$     							\Facility_Tpproductinterestdetailsperiodicity
+PI    2 1N %   3               $>Used Rate<$                                                \Facility_tpUsedRate
+
+
+PI      1T     3               $>Kredietnemers<$                                           \Kredietnemers
+PI      1A     4               $>Rol<$                                                     \Kredietnemer_rol
+PI      1A     4               $>Naam<$                                                    \Kredietnemer_naam
+PI      1A     4               $>Bedrijfsnaam<$                                            \Kredietnemer_bedrijfsnaam
+PI      1A     4               $>KVK nummer<$                                              \Kredietnemer_kvk
+PI      1A     4               $>Rechtsvorm<$                                              \Kredietnemer_rechtsvorm
+PI      1A     4               $>Extern relatie nummer<$                                   \Kredietnemer_externRelatieNummer
+PI      1A     4               $>Geformatteerdpostadres<$                                  \Kredietnemer_geformatteerdpostadres
+PI      1T     4               $>Adressen<$                                   			   \Kredietnemer_adressen
+PI      1A     5               $>Straatnaam<$                                              \Kredietnemer_straatnaam
+PI      1A     5               $>Plaatsnaam<$                                              \Kredietnemer_plaatsnaam
+PI      1A     5               $>Huisnummer<$                                              \Kredietnemer_huisnummer
+PI      1A     5               $>Postcode<$                                                \Kredietnemer_postcode
+
+
+PI      1T     3               $>Producten<$                                               \Producten
+PI      1A     4               $>Product nummer<$                                          \ProductNummer
+PI      1A     4               $>Productnaam<$                                             \Productnaam
+PI      1A     4               $>Looptijd<$                                                \Product_looptijd
+PI      1A     4               $>Aflossingsvorm<$                                          \Aflossingsvorm
+PI      1A     4               $>Aflossingsperiodiciteit<$                                 \Aflossingsperiodiciteit
+PI      1A     4               $>IngangsDatum<$                                            \Product_ingangsDatum
+PI      1A     4               $>Product eindDatum<$                                       \Product_einddatum
+PI      1A     4               $>Rente type<$                                              \Rentetype
+PI      1A     4               $>Rente Product<$                                           \Product_RenteProduct
+PI      1A     4               $>Rente Periodiciteit<$                                     \Product_RentePeriodiciteit
+PI      1A     4               $>Interest Rate Cap<$                                       \InterestRateCap
+PI      1A     4               $>Interest Rate Floor<$                                     \InterestRateFloor
+PI      1A     4               $>Eersteaflossingna<$                                       \EersteAflossingNa
+PI      1A     4               $>Opname<$                                              	   \Opname
+PI      1A     5               $>Opnamevorm<$                                              \Opname_vorm
+
+PI      1T     1               $>Contractanten<$                                           \Contractanten
+PI      1A     2               $>Extern relatie nummer<$                                   \Contractant_externRelatieNummer
+PI      1A     2               $>Geboortedatum<$                                   		   \Contractant_geboortedatum
+PI      1A     2               $>Geboorteplaats<$                                          \Contractant_geboorteplaats
+PI      1A     2               $>Naam<$                                                    \Contractant_naam
+PI      1A     2               $>Bedrijfsnaam<$                                            \Contractant_bedrijfsnaam
+PI      1A     2               $>KVK nummer<$                                              \Contractant_kvk
+PI      1A     2               $>Rechtsvorm<$                                              \Contractant_rechtsvorm
+PI      1A     2               $>Geformatteerdpostadres<$                                  \Contractant_geformatteerdpostadres
+PI      1T     2               $>Rollen<$                                                  \Contractant_rollen
+PI      1A     3               $>Rol naam<$                                                \Contractant_rol_naam
+PI      1T     2               $>Adressen<$                                                \Contractant_adressen
+PI      1A     3               $>Straatnaam<$                                              \Contractant_straatnaam
+PI      1A     3               $>Plaatsnaam<$                                              \Contractant_plaatsnaam
+PI      1A     3               $>Huisnummer<$                                              \Contractant_huisnummer
+PI      1A     3               $>Postcode<$                                                \Contractant_postcode
+
+PI      1A     1               $>Juridische structuur<$                                    \JurdischeStructuur
+PI      1T     2               $>Juridische partij<$                                       \JurdischePartij
+PI      1A     3               $>Naam<$                                                    \JurdischePartij_naam
+PI      1A     3               $>Rechtsvorm<$                                              \JurdischePartij_rechtsvorm
+PI      1A     3               $>Geboortedatum<$                                           \JurdischePartij_geboortedatum
+PI      1A     3               $>Geboorteplaats<$                                          \JurdischePartij_geboorteplaats
+PI      1A     3               $>Jurdisch Partijnummer<$                                   \JurdischPartijnummer
+PI      1N     3               $>HierarchischNiveau<$                                      \JurdischPartijHierarchischNiveau
+PI      1A     3               $>Extern relatienummer<$                                    \JurdischePartij_externRelatienummer
+
+PI      1T     2               $>Relaties<$                                                \Relaties
+PI      1A     3               $>Naam<$                                        			       \PartijNaam
+PI      1N     3               $>Van partij nummer<$                                       \VanPartijNummer 
+PI      1N     3               $>Naar partij nummer<$                                      \NaarPartijNummer
+
+PI      1T     2               $>Relatievolgnummer<$                                       \Relatievolgnummer_Relaties
+PI      1A     3               $>Naam<$                                             			 \Relatievolgnummer_Naam
+PI      1N D   3               $>Geboortedatum<$                                           \Relatievolgnummer_Geboortedatum
+PI      1A     3               $>Geboorteplaats<$                                          \Relatievolgnummer_Geboorteplaats
+
+PI      1A     1               $>Aanvraag groep<$                                          \AanvraagGroep
+PI      1A     2               $>Aanvraag nummer<$                                          \Aanvraagnummer
+PI      1T     2               $>Bijzondere bepaling<$                                     \BijzonderePepaling
+PI      1A     3               $>Code<$                                     			         \BijzondereBepalingCode
+PI      1A     3               $>Categorie<$                                               \Categorie
+PI      1A     3               $>Finaalomschrijving<$                                   	 \FinaalOmschrijving
+PI      1A     3               $>In offerte<$                                          	 \InOfferteJN
+
+PI      1T     2               $>Aanvraagstuk<$                                            \Aanvraagstuk
+PI      1A     3               $>Finaalomschrijving<$                                   	 \Aanvraagstuk_FinaalOmschrijving
+PI      1A     3               $>In offerte<$                                          	   \Aanvraagstuk_InOfferteJN
+
+PI      1T     1               $>Verpandingszekerheid<$                                    \Verpandingszekerheid
+PI      1A     2               $>Zekerheidsnummer<$                                        \VerpandingszekerheidZekerheidNummer
+PI      1A     2               $>Zekerheids type<$                                         \ZekerheidsType
+PI      1A     2               $>Omschrijving<$                                            \Verpandingszekerheid_omschrijving
+PI      1A     2               $>Inschrijving<$                                            \Verpandingszekerheid_inschrijving  
+PI      1T     2               $>Verstrekkers<$                                            \Verstrekkers
+PI      1A     3               $>ExternRelatieNummer<$                                     \Verstrekkers_externRelatieNummer
+PI      1A     3               $>Naam verstrekker<$                                        \Verstrekker_Naam
+PI      1A     3               $>Bedrijfsnaam<$                                            \Verstrekkers_bedrijfsnaam
+PI    0 1N     2               $>Zekerheidsbedrag<$                                        \Zekerheidsbedrag
+PI      1A     2               $>HoogsteRangorde<$                                         \HoogsteRangorde
+PI      1A     2               $>Onderpandnummer<$                                         \Onderpandnummer
+PI      1T     2               $>Allocatie<$                                               \Allocatie
+PI      1A     3               $>Faciliteit nummer<$                                       \Allocatie_Faciliteitnummer 
+
+PI      1T     1               $>Onderpand<$                                               \Onderpand
+PI      1A     2               $>Onderpandnummer<$                                         \Onderpand_onderpandnummer
+PI      1A     2               $>WoningType<$                                              \WoningType
+PI      1T     2               $>Adressen<$                                                \Onderpand_adressen
+PI      1A     3               $>Straatnaam<$                                              \Onderpand_straatnaam
+PI      1A     3               $>Huisnummer<$                                              \Onderpand_huisnummer
+PI      1A     3               $>Plaatsnaam<$                                              \Onderpand_plaatsnaam
+PI      1T     2               $>Kadasternummers<$                                         \Kadasternummers
+PI      1A     3               $>Sectie<$                                                  \Kadasternummer_sectie
+PI      1A     3               $>Deelnummer<$                                              \Kadasternummer_deelnummer
+PI      1A     3               $>Grootte<$                                                 \Kadasternummer_grootte
+
+
+.LevelOffSet 0 
+.Variables 
+;-------------------------------------------------------------------------------------------------- 
+; Warning voor map 1 
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen 
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS 
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS 
+ 
+.Formulas Notrend 
+TotalAgreementLimit = TupleSum(Limiet)
+Q_Map01_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X))") 
+Q_Map01_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))") 
+Q_Map01                        = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS) 
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1] 
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"") 
+;Q_Map01_VALIDATION             = 
+ 
+.Choices 
+Q_Map01                        = Q_ROOT 
+ 
+ 
+.Variables 
+;================================================================================================== Result 
+; Results 
+; wordt pas getoond na definitief maken 
+ 
+PP      1A   1 2               "Results"                                                         \Q_RESULT 
+PP      1A     3               =Q_RESULT                                                          \=Q_RESULT 
+ 
+.Variables 
+;================================================================================================== Result 
+; Q_Status 
+; 
+ 
+PI      1N C 1 2  +            Status                                                      \Q_STATUS 
+PI      1N D   2               Final:                                                       \Q_STATUS_FINAL_ON 
+PI      1A     2               Final by:                                                    \Q_STATUS_FINAL_BY 
+PI      1A     2               Final by:                                                    \Q_STATUS_FINAL_BY_NAME 
+PI      1N D   2               Created:                                                     \Q_STATUS_STARTED_ON 
+PI      1A     2               Created by:                                                  \Q_STATUS_STARTED_BY 
+PI      1A     2               Created by:                                                  \Q_STATUS_STARTED_BY_NAME 
+PI      1N D   2  +            Last modified                                                \Q_STATUS_MODIFIED_ON 
+PP      1A     2  +            Modelversion:                                                \Q_ModelVersion 
+PP      1A     2  +            Modeltype:                                                   \Q_ModelType 
+PP      1A     2  +            Parameters version:                                          \Q_MatrixVersion 
+ 
+PI      1N C   2               Previous                                                     \Q_PREVIOUS_BUTTON_VISIBLE 
+PI      1N C   2               Next                                                         \Q_NEXT_BUTTON_VISIBLE 
+PI      1N C   2               Draft report                                                \Q_CONCEPT_REPORT_VISIBLE 
+PI      1N C   2               Definitive report                                            \Q_FINAL_REPORT_VISIBLE 
+PI      1N C   2               Make it final                                                \Q_MAKE_FINAL_VISIBLE 
+PI      1N C   2               Draft report                                                 \Q_CONCEPT_REPORT_DOCX_VISIBLE 
+PI      1N C   2               Definitive report                                                                                                                                                                                                                                                                              \Q_FINAL_REPORT_DOCX_VISIBLE                        
+ 
+.Choices 
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd" 
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd" 
+Q_STATUS                       = "0:Active|1:Final" 
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja" 
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja" 
+Q_MAKE_FINAL_VISIBLE           = "0:Nee|1:Ja" 
+Q_FINAL_REPORT_DOCX_VISIBLE    = "0:Nee|1:Ja" 
+Q_CONCEPT_REPORT_DOCX_VISIBLE  = "0:Nee|1:Ja" 
+ 
+.Formulas NoTrend 
+Q_PREVIOUS_BUTTON_VISIBLE      = 2 
+Q_NEXT_BUTTON_VISIBLE          = 2 
+Q_STATUS                       = 0 
+Q_STATUS_MODIFIED_ON           = Now 
+Q_ModelVersion                 = "#CompactModelVersion#"                                                                                            
+Q_MatrixVersion                = NA;&MatrixLookup("TRIODOS_Parameters.xls","Version",1,3) 
+Q_ModelType                    = "#ModelCode#" 
+Q_CONCEPT_REPORT_VISIBLE       = 0 
+Q_FINAL_REPORT_VISIBLE         = 0 
+Q_MAKE_FINAL_VISIBLE           = 1 
+Q_CONCEPT_REPORT_DOCX_VISIBLE  = 1 
+Q_FINAL_REPORT_DOCX_VISIBLE             = 1 
+ 
+.Variables 
+;========================================================================================================================================== 
+; Overige berekeningen (buiten Q_ROOT) 
+ 
+PX      1X   1 1               "Overige berekeningen"                                              \Hulpvariabelen 
+ 
+.Variables 
+;================================================================================================== Q_HULPVARS 
+; Knock-outs 
+ 
+ 
+PP      1M     2               "Knockout(s)?"                                                      \Q_WARNING_GLOBAL 
+PP      1M     2               "Knockouts text"                                                    \scKnockoutsCombi 
+ 
+.Formulas NoTrend 
+Q_WARNING_GLOBAL               = &If(Length(&scKnockoutsCombi[1])>0,&"|There are knock-out criteria:"&scKnockoutsCombi,"") 
+;;scKnockoutsCombi               = 
+ 
+.Variables 
+;================================================================================================== Restricties 
+; Restricties 
+ 
+PP      1M     2               "Restricties"                                                      \Q_RESTRICTIES 
+PP      1M     2               "Restricties text"                                                 \scRestrictiesCombi 
+ 
+.Formulas NoTrend 
+Q_RESTRICTIES                  = &If(Length(&scRestrictiesCombi[1])>0,&"||The listed variables are not filled correct:"&scRestrictiesCombi,"") 
+ 

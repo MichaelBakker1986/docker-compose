@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saxon="http://icl.com/saxon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fin="http://www.finan.nl/extension/2015/01/fin" xmlns:fes="http://www.finan.nl/extension/2015/01/fes" exclude-result-prefixes="fn saxon xs xsi fin">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes" saxon:indent-spaces="2" />
+  <xsl:preserve-space elements="*" />
+
+  <xsl:decimal-format name="euroFormat" decimal-separator="," grouping-separator="." />
+
+  <xsl:template name="getRaroracFormatted">
+    <xsl:param name="value" />
+
+    <xsl:choose>
+      <xsl:when test="$value = 'Negative'">
+        
+        <xsl:value-of select="fin:translate('k3','Negative','EN')" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$value" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="/">
+
+    <xsl:variable name="doc" select="0" as="xs:integer" />
+
+    <document version="1.1" date="16-7-2014" author="Topicus Finan" title="ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+      <properties>
+        <ViewCurrency><data src="fesModel"><variables var="Root" function="getViewCurrency" /></data></ViewCurrency>
+        <ReportName><data src="fesModel" referenceMode="warn"><variables var="Root" function="getTitle" /></data></ReportName>
+        <CreationDate><data src="functions" name="getDate"><param key="format" value="dd-MM-yyyy" /></data></CreationDate>
+        <CreationDateTitle>Generated</CreationDateTitle>
+
+        <ReportScale>1</ReportScale>
+
+        <StartYear><data src="fesModel" referenceMode="warn"><columns number="1" order="desc" /><variables function="getEndDate" /><presentation format="yyyy" /></data></StartYear>
+        <EndYear><data src="fesModel" referenceMode="warn"><columns number="1" order="asc" /><variables function="getEndDate" /><presentation format="yyyy" /></data></EndYear>
+
+
+      </properties>
+
+      <!-- =========data============================================================= -->
+
+      <newpage name="landscape">
+        <p id="watermark" visible="./*/*/document[1]/properties/isFinalReport/text()=0" />
+      </newpage>
+
+      <!-- <p>fin</p> -->
+      <!-- <p>fin:hello: <xsl:value-of select="fin:hello(0)" /></p> -->
+
+      <!-- <p>fes:getTupleInstanceCount for Facility: <xsl:value-of select="fes:getTupleInstanceCount(0, 'Facility')" /></p> -->
+
+
+      <columns class="splitcolumns">
+        <col>
+          <table class="datatableA">
+            <tr class="title">
+              <td>Borrower Information</td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'CurrentDate')" /></td>
+              <td><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy" /></data></td>
+              <!--     <td><xsl:value-of select="fes:getFormattedValue($doc, 'CurrentDate')"/></td> -->
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpName')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpName')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpReferenceNumber')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpReferenceNumber')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'AgreementNumber')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'AgreementNumber')" /></td>
+            </tr>
+            <!-- CR and PM kan helemaal weg -->
+            <!--   <tr class="level0"> -->
+            <!--     <td>[CR and PM]</td> -->
+            <!--     <td>[?]</td> -->
+            <!--   </tr> -->
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpRating')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpRating')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpClientGroupFullName')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientGroupFullName')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpBrancheDescriptionCompactReport')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpBrancheDescriptionCompactReport')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpBaseCurrency')" /></td>
+              <td><data src="fesModel"><variables var="Root" function="getViewCurrency" /></data></td>
+              <!--     <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpBaseCurrency')"/></td> -->
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpPDModelFullName')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpPDModelFullName')" /></td>
+            </tr>
+          </table>
+        </col>
+        <col>
+          <!-- <p>&#xA0;</p> -->
+
+          <table class="datatableB">
+            <tr class="title">
+              <td>Side Business</td>
+              <td></td>
+            </tr>
+            <tr class="header">
+              <td>Next 12 months</td>
+            </tr>
+            <xsl:variable name="nonCreditItemVarName" select="'Borrower_tpNonCredit'" />
+            <xsl:for-each select="fes:getTupleInstances($doc, $nonCreditItemVarName)">
+              <xsl:variable name="tupleIndex" select="." as="xs:integer" />
+              <xsl:variable name="tupleIndices" as="xs:integer *">
+                <xs:sequence>
+                  <xsl:value-of select="$tupleIndex" />
+                </xs:sequence>
+              </xsl:variable>
+              <tr class="level0">
+                <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpNonCredit_tpName', $tupleIndices)" /></td>
+                <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpNonCredit_tpIncome_Amount', $tupleIndices)" /></td>
+              </tr>
+            </xsl:for-each>
+            <tr class="total">
+              <!--     <td>[Total]</td> -->
+              <!--     <td>0,00</td> -->
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpNonCreditIncome_Total')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpNonCreditIncome_Total')" /></td>
+            </tr>
+            <tr class="empty" />
+          </table>
+        </col>
+
+        <!-- <p>&#xA0;</p> -->
+        <col>
+          <table class="datatable_3cols">
+            <tr class="title">
+              <td>Relationship Profitability</td>
+              <td>Credit</td>
+              <td>Client</td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpIncome')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpIncome')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientIncome')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpCrossSellNonCreditNetIncome_Total')" /></td>
+              <td></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpCrossSellNonCreditNetIncome_Total')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpOptionCostsIndLiqPremium')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpOptionCostsIndLiqPremium')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientOptionCostsIndLiqPremium')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpOperationalCosts')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpOperationalCosts')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientOperationalCosts')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpInternalExpectedLoss')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpInternalExpectedLoss')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientInternalExpectedLoss')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpTaxAndOther')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpTaxAndOther')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientTaxAndOther')" /></td>
+            </tr>
+            <tr class="total">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpRiskAdjustedReturn')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpRiskAdjustedReturn')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientRiskAdjustedReturn')" /></td>
+            </tr>
+            <tr class="empty_narrow">
+              <td>&#xA0;</td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select=" fes:getVariableTitle($doc, 'Borrower_tpRaRoRaC')" /></td>
+              <td><xsl:call-template name="getRaroracFormatted"><xsl:with-param name="value" select="fes:getFormattedValue($doc, 'Borrower_tpRaRoRaC_Formatted')" /></xsl:call-template></td>
+              <td><xsl:call-template name="getRaroracFormatted"><xsl:with-param name="value" select="fes:getFormattedValue($doc, 'Borrower_tpClientRaRoRaC_Formatted')" /></xsl:call-template></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpEconomicCapital')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpEconomicCapital')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientEconomicCapital')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpRWA')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpRWA')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientRWA')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpRegulatoryProfit')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpRegulatoryProfit')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientRegulatoryProfit')" /></td>
+            </tr>
+            <tr class="level0">
+              <td><xsl:value-of select="fes:getVariableTitle($doc, 'Borrower_tpReturnOnEquity')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpReturnOnEquity')" /></td>
+              <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpClientReturnOnEquity')" /></td>
+            </tr>
+            <tr class="empty" />
+          </table>
+        </col>
+      </columns>
+
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+      <!-- <p>&#xA0;</p> -->
+
+      <table class="datatable_1col">
+        <tr class="empty">
+          <td>&#xA0;</td>
+        </tr>
+        <tr class="title">
+          <td>Facility Information</td>
+        </tr>
+      </table>
+
+
+      <table class="datatable_1col_rotated" xOffset="309.5" yOffset="-309.5"> <!--  overrideHeight="200" keeptogether="true"  289.5f - 28 + 7.5f -->
+        <tr class="title" overrideHeight="81">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpProductname')" /></td>
+        </tr>
+        <tr class="title_grey" overrideHeight="21">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpBaseCurrency')" /></td>
+        </tr>
+        <tr class="title" overrideHeight="21">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpGuarantorRating')" /></td>
+        </tr>
+        <tr class="title_middle_grey" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpLGD')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="56">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpPrincipalLimit')" /></td>
+        </tr>  <!-- staat niet in excel sheet -->
+        <tr class="title_middle_grey" overrideHeight="46">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpExpectedAverageOutstanding')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="41">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpProductstartDate')" /></td>
+        </tr> <!-- staat niet in excel sheet -->
+        <tr class="title_middle_grey" overrideHeight="41">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpRemainingAverageTenor')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="56">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpEAD')" /></td>
+        </tr>
+        <tr class="title_middle_grey" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpCustomerSpread')" /></td>
+        </tr> <!--  staat zonder bp in sheet -->
+        <tr class="title_middle" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpLiquiditySpreadBps')" /></td>
+        </tr> <!--  Facility_tpDirectLiquidityPremium in sheet ?? -->
+        <tr class="title_middle_grey" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpCommercialMargin')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpCommitmentFeeBp')" /></td>
+        </tr>
+        <tr class="title_middle_grey" overrideHeight="56">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpOptionCostsIndLiqPrem')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpOneOffFeeBp')" /></td>
+        </tr>
+        <tr class="title_middle_grey" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpAnnualFeeBp')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="31">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpRaRoRac')" /></td>
+        </tr>
+        <tr class="title_middle_grey" overrideHeight="56">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpRegulatoryProfit')" /></td>
+        </tr>
+        <tr class="title_middle" overrideHeight="56">
+          <td><xsl:value-of select="fes:getVariableTitle($doc, 'Facility_tpRWA')" /></td>
+        </tr>
+      </table>
+
+      <!-- <p>&#xA0;</p> -->
+      <!-- <clearpage/> -->
+
+      <table class="datatable_19cols">
+        <xsl:variable name="facilityVarName" select="'Facility'" />
+        <xsl:for-each select="fes:getTupleInstances($doc, $facilityVarName)">
+          <xsl:variable name="position" select="position()" as="xs:integer" />
+          <xsl:variable name="tupleIndex" select="." as="xs:integer" />
+          <xsl:variable name="tupleIndices" as="xs:integer *">
+            <xs:sequence>
+              <xsl:value-of select="$tupleIndex" />
+            </xs:sequence>
+          </xsl:variable>
+          <tr>
+            <xsl:choose>
+              <xsl:when test="boolean((position() mod 2) = 1)">
+                <xsl:attribute name="class">
+                  <xsl:text>level0stripe</xsl:text>
+                </xsl:attribute>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:attribute name="class">
+                  <xsl:text>level0</xsl:text>
+                </xsl:attribute>
+              </xsl:otherwise>
+            </xsl:choose>
+
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpProductname', $tupleIndices)" /><xsl:text> </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpProductinterestDetailsInterestProductName', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpBaseCurrency', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpGuarantorRating', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpLGD', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpPrincipalLimit', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpExpectedAverageOutstanding', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpProductstartDate', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpRemainingAverageTenor', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpEAD', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpCustomerSpread', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpLiquiditySpreadBps', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpCommercialMargin', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpCommitmentFeeBp', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpOptionCostsIndLiqPrem', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpOneOffFeeBp', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpAnnualFeeBp', $tupleIndices)" /></td>
+            <td><xsl:call-template name="getRaroracFormatted"><xsl:with-param name="value" select="fes:getFormattedValue($doc, 'Facility_tpRaRoRac_Formatted', $tupleIndices)" /></xsl:call-template></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpRegulatoryProfit', $tupleIndices)" /></td>
+            <td><xsl:value-of select="fes:getFormattedValue($doc, 'Facility_tpRWA', $tupleIndices)" /></td>
+          </tr>
+        </xsl:for-each>
+        <tr class="total">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpPrincipalLimit')" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><xsl:value-of select="fes:getFormattedValue($doc, 'Borrower_tpEAD')" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <!-- <clearpage/> -->
+
+      <!-- =========End============================================================= -->
+    </document>
+  </xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,1719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FinanModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<FormulaSets>
+    <FormulaSet Name="NoTrend">
+      <Caption>hist</Caption>
+    </FormulaSet>
+    <FormulaSet Name="Trend">
+      <Caption>progn</Caption>
+    </FormulaSet>
+  </FormulaSets>
+<Patterns/>
+<Head>
+<Name>FINANCINGTARGETSC</Name>
+<Title>AAB Financing Target</Title>
+<Hint/>
+<BuildDate>02-02-2016 15:23</BuildDate>
+<BuildUser>sam.habiboellah</BuildUser>
+<FinanVersion>03.02.051.001</FinanVersion>
+<ModelVersion>00.33.000.000</ModelVersion>
+<EnableNewDocument>Yes</EnableNewDocument>
+<IsSectorModel>No</IsSectorModel>
+</Head>
+<CalculationVariable Name="Root">
+<DataType>NoData</DataType>
+<Frequency>None</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+				<Formula>"AAB Financing Target v0.33"</Formula>
+				<IsLocked>1</IsLocked>
+				<IsVisible>1</IsVisible>
+			</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="Q_ROOT">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>Q_Map01[1]</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+						<Formula>"ABN Amro Bank Financing Targets (v0.33)"</Formula>
+						<IsLocked>1</IsLocked>
+						<IsVisible>1</IsVisible>
+					</Title>
+<FixedDecimals/>
+<Template>0:Complete|1:Incomplete</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint>ABN Amro Bank Financing Target</Hint>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="Q_Map01">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+								<Formula>"Financing Targets"</Formula>
+								<IsLocked>1</IsLocked>
+								<IsVisible>1</IsVisible>
+							</Title>
+<FixedDecimals/>
+<Template>0:Complete|1:Incomplete</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="FinancingTargetHeader">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula>"Customer purpose"</Formula>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<TupleDefinition Name="FinancingTarget">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Event"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<TupleProperty Name="FinancingTarget_tpTarget">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Event type"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingTarget_tpEffectiveDate">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Effective date"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>dd/MM/yyyy</Template>
+<DisplayAs>Date</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleDefinition Name="FinancingTarget_tpSubGoalHeader">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Subgoal"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<TupleProperty Name="FinancingTarget_tpSubGoal">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+																<Formula>"Subgoal"</Formula>
+																<IsLocked>1</IsLocked>
+																<IsVisible>1</IsVisible>
+															</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingTarget_tpSpecification">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+																<Formula>"Specification of subgoal"</Formula>
+																<IsLocked>1</IsLocked>
+																<IsVisible>1</IsVisible>
+															</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingTarget_tpAmountSubGoal">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+																<Formula>"Amount"</Formula>
+																<IsLocked>1</IsLocked>
+																<IsVisible>1</IsVisible>
+															</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+</SubVariables>
+</TupleDefinition>
+<TupleProperty Name="FinancingTarget_tpAmount">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputMaximumInclusive>999999999</InputMaximumInclusive>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>(TupleSum(FinancingTarget_tpAmountSubGoal))</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Subtotal"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingTarget_tpDailyOperation">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Within daily operation"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template>1:Yes|0:No</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingTarget_tpExplenation">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Explenation"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+</SubVariables>
+</TupleDefinition>
+<CalculationVariable Name="FinancingTargetTotal">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>(TupleSum(FinancingTarget_tpAmount))</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Total"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="Q_Map02">
+<DataType>Number</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+								<Formula>"Non-banking sources"</Formula>
+								<IsLocked>1</IsLocked>
+								<IsVisible>1</IsVisible>
+							</Title>
+<FixedDecimals/>
+<Template>0:Complete|1:Incomplete</Template>
+<DisplayAs>Choice</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="FinancingSourceHeader">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula/>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<TupleDefinition Name="FinancingSource">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Non-banking sources"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<TupleProperty Name="FinancingSource_tpSource">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Source"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingSource_tpAmount">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputMaximumInclusive>999999999</InputMaximumInclusive>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Amount"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals>0</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+<TupleProperty Name="FinancingSource_tpFinancingTarget">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Financing Target"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</TupleProperty>
+</SubVariables>
+</TupleDefinition>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="FinancingSource_TotalHeader">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula>"Total Non-banking sources"</Formula>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="FinancingSource_Total">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula>TupleSum(FinancingSource_tpAmount)</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Total"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>0</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="FinancingSource_Explanation">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Explanation"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Memo</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="OPENFORECAST">
+<DataType>String</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>"Open Forecast"</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula/>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Left</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+<CalculationVariable Name="HeaderTotalCreditNeed">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>Yes</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+										<Formula>"Total Credit Need"</Formula>
+										<IsLocked>1</IsLocked>
+										<IsVisible>1</IsVisible>
+									</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="TotalCreditNeed_Locked">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula>TotalCreditNeed</Formula>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula>"Total Credit Need"</Formula>
+												<IsLocked>1</IsLocked>
+												<IsVisible>1</IsVisible>
+											</Title>
+<FixedDecimals>2</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+<CalculationVariable Name="TotalCreditNeed_Invisible">
+<DataType>NoData</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>Locked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+												<Formula/>
+												<IsLocked>1</IsLocked>
+												<IsVisible>0</IsVisible>
+											</Title>
+<FixedDecimals/>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>0</Visible>
+<Locked>On</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>0</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>0</IsVisible>
+<IsLocked>1</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables>
+<CalculationVariable Name="TotalCreditNeed">
+<DataType>Currency</DataType>
+<Frequency>Single</Frequency>
+<IsScalable>No</IsScalable>
+<SaveCalculatedValues>No</SaveCalculatedValues>
+<UserFormulaAllowed>No</UserFormulaAllowed>
+<FirstNoTrendColIsNAWhenNotStarter>No</FirstNoTrendColIsNAWhenNotStarter>
+<CalcYearAs>None</CalcYearAs>
+<UnspecVariables/>
+<AfterChange/>
+<AfterInput/>
+<InputPattern/>
+<InputRequired>0</InputRequired>
+<XbrlNamespaceURI/>
+<XbrlNamespacePrefix/>
+<XbrlElementName/>
+<XbrlElementType/>
+<Pattern/>
+<CalculationFormulaSets>
+<CalculationFormulaSet Name="NoTrend">
+<Protection>UnLocked</Protection>
+<Formula/>
+<FlipVariable/>
+</CalculationFormulaSet>
+</CalculationFormulaSets>
+<Title>
+														<Formula>"Total Credit Need Copy"</Formula>
+														<IsLocked>1</IsLocked>
+														<IsVisible>1</IsVisible>
+													</Title>
+<FixedDecimals>2</FixedDecimals>
+<Template/>
+<DisplayAs>Default</DisplayAs>
+<Alignment>Right</Alignment>
+<Visible>1</Visible>
+<Locked>0</Locked>
+<HideFirstNoTrendColWhenNotStarter>No</HideFirstNoTrendColWhenNotStarter>
+<DisplayAsSum>No</DisplayAsSum>
+<TopSeparatorWidth>0</TopSeparatorWidth>
+<BottomSeparatorWidth>0</BottomSeparatorWidth>
+<DisplayAsNeg>No</DisplayAsNeg>
+<BlankLines>1</BlankLines>
+<RefVariable/>
+<Hint/>
+<ShowColumnTitlesAboveSubVars>No</ShowColumnTitlesAboveSubVars>
+<HelpAvailable>No</HelpAvailable>
+<PresentationFormulaSets>
+<PresentationFormulaSet Name="NoTrend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+<PresentationFormulaSet Name="Trend">
+<IsVisible>1</IsVisible>
+<IsLocked>0</IsLocked>
+</PresentationFormulaSet>
+</PresentationFormulaSets>
+<SubVariables/>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</SubVariables>
+</CalculationVariable>
+</FinanModel>

@@ -1,0 +1,61 @@
+{&&Language=English}
+;==========================================================================================================================================
+Topicus Exchange
+
+.ModelVersion          1.02
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=2005,Years=4,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PPP      X     0               "Scorecard Test Model v#CompactModelVersion#"                      \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+;================================================================================================================================
+.Variables
+.Variables
+PPP     1N C   1               Topicus Exchange                                                  \Q_ROOT
+C Dit is een model om de scorecard applicatie te testen.
+
+.Choices
+Q_ROOT                         = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+.Formulas Notrend
+Q_ROOT                         = If( (Q_Map01[1]=1) , 1, 0)
+
+
+;================================================================================================================================
+.Variables
+PPP     1N     2               $>Map 1<$                                                           \Q_Map01
+C Dit is de hinttekst van ' Map 1' (DEZE REGEL WORDT NIET MEER GEBRUIKT!)
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PPP     1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PPP     1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+
+PII     1N     3               $>Paragraaf 1<$                                                     \Q_Map01_Paragraaf01
+C Hinttekst voor paragraaf 1
+
+PII     1T     4               $>Buy Order<$                                                       \BuyOrder            
+PII   0 1N     5               $>Buy Quantity<$                                                    \BuyOrder_tpQuantity 
+PII   2 1N     5               $>Buy Limit<$                                                       \BuyOrder_tpLimit    
+PPI     1N     5               $>Actual Price<$                                                    \BuyOrder_tpActualPrice
+PPI     1N     5               $>Best Price<$                                                      \BuyOrder_tpBestPrice
+
+PII     1T     4               $>Sell Order<$                                                      \SellOrder
+PII   0 1N     5               $>Sell Quantity<$                                                   \SellOrder_tpQuantity
+PII   2 1N     5               $>Sell Limit<$                                                      \SellOrder_tpLimit
+PPI     1N     5               $>Actual Price<$                                                    \SellOrder_tpActualPrice
+PPI     1N     5               $>Best Price<$                                                      \SellOrder_tpBestPrice
+
+;PII     1T     4               $>OrderBook<$                                                       \SellOrder            
+;PII     1N     5               $>Sell Quantity<$                                                   \SellOrder_tpQuantity 
+;PII     1N     5               $>Sell Limit<$                                                      \SellOrder_tpLimit    
+;PII     1N     5               $>Actual Price<$                                                    \SellOrder_tpActualPrice
+;PII     1N     5               $>Best Price<$                                                      \SellOrder_tpBestPrice

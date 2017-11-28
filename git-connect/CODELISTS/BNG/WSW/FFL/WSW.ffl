@@ -1,0 +1,4504 @@
+// model "WSW Ratio's"
+// created by FINAN 3.2.57.18
+
+import FinanMath.*;
+import BaseModel.*;
+
+model WSW uses BaseModel
+{
+  version: "0.0.1";
+  ffl_version: "1.2";
+  root
+  {
+    variable ROOTSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable ROOTSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+        variable FPS_FINAN_USER_ROLES
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER_ROLES";
+          top_blanklines: 1;
+          visible: 1;
+          options_title: locked;
+        }
+        variable FPS_FINAN_USER
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+    }
+    variable BNG_Import
+    {
+      datatype: none;
+      frequency: none;
+      title: "Import data uit jaarrekening";
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable BNG_JCFOpCF
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: flow;
+        displaytype: currency;
+        title: "Operationele kasstroom";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_FinBaten1
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: flow;
+        displaytype: currency;
+        title: "Andere rentebaten en soortgelijke opbrengsten";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_FinLasten1
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: flow;
+        displaytype: currency;
+        title: "Rentelasten en soortgelijke kosten";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_OperKosten6
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: flow;
+        displaytype: currency;
+        title: "Onderhoudskosten";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_NettoOmzet4
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: flow;
+        displaytype: currency;
+        title: "Geactiveerde productie eigen bedrijf";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_LanglopendeSchuldenOverheid
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden/leningen overheid";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_LanglopendeSchuldenKredietinstellingen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden/leningen kredietinstellingen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_LanglopendeSchuldenGroepsmaatschappijen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden aan groepsmaatschappijen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_LanglopendeSchuldenDeelnemingen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_KortlopendeSchulden
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Kortlopende schulden";
+        locked: 1;
+        visible: 0;
+        options_title: locked;
+        options_notrend: locked, invisible;
+        options_trend: locked, invisible;
+      }
+      variable BNG_WSW_KortlopendeSchuldenKredietinstellingenKort
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden/leningen kredietinstellingen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_KortlopendeSchuldenGroepsmaatschappijen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden aan groepsmaatschappijen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_KortlopendeSchuldenDeelnemingen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_SolvabiliteitGroepsvermogen
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Eigen vermogen / Groepsvermogen";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\n Totaal Eigen Vermogen";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_TotaalActiva
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Totaal activa";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: Totaal Activa";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_SociaalVastgoedInExploitatie
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Sociaal vastgoed in exploitatie";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_CommercieelVastgoedInExploitatie
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Commercieel vastgoed in exploitatie";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_SociaalVastgoedVastgoedbelegging
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+        hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_BedrijfswaardeVastgoedInExploitatie
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        displaytype: currency;
+        title: "Bedrijfswaarde vastgoed in exploitatie";
+        hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+        visible: 1;
+        options_title: locked;
+      }
+      variable BNG_WSW_AantalVHEBeginPrognoseperiode
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: BNG_WSW_AantalVHEBeginPrognoseperiodeT;
+        formula_trend: BNG_WSW_AantalVHEBeginPrognoseperiodeVT;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode";
+        hint: "Hoofdstuk: dVi 4.1.5 - dPi 2.3\r\n Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options_notrend: locked;
+        options_trend: locked;
+      }
+      variable BNG_WSW_GemLevensduurBeginPrognoseperiode
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode";
+        hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5, betreft jaren";
+        visible: 1;
+        options_title: locked;
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If( (Q_Map01[1]=1) or (Q_Map02[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "WSW Ratio's";
+      locked: 1;
+      visible: 1;
+      choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Cliëntgegevens";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNGMAP1A
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Company";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable CompanyName
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString(FPS_VAR_Naam[1]);
+            data_options: unscalable;
+            title: "Name of company";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable CompanyPlaceOfResidence
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString(FPS_VAR_Woonplaats[1]);
+            data_options: unscalable;
+            title: "City/town";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable SectorTitle
+          {
+            datatype: string;
+            frequency: document;
+            formula: EvaluateAsString(FPS_VAR_BIK_Omschr);
+            data_options: unscalable;
+            title: "Sector of industry";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNGMAP1C
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Bancaire gegevens";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BBrelatienummerBank refers to FPS_VAR_GridId
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Relatienummer";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BBRelatieBeheerder
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Accountmanager";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BBAccountGroep
+          {
+            datatype: number;
+            frequency: document;
+            formula: 102;
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: select;
+            title: "Accountgroep";
+            visible: 1;
+            choices: "101:Cluster 1 - Publieke Sector, Gebiedsontwikkeling|102:Cluster 2 - Wonen, Zorg, Onderwijs|103:Cluster 3 - Utilities, Infrastructuur";
+            options_title: locked;
+          }
+          variable BBRisicoModel
+          {
+            datatype: number;
+            frequency: document;
+            formula: 20;
+            data_options: saveCalculatedValue,unscalable;
+            displaytype: select;
+            title: "Sector";
+            visible: 1;
+            choices: "10:Standaard|20:VHV|30:Gezondheidszorg|40:Onderwijs";
+            options_title: locked;
+          }
+        }
+        variable BNGMAP2A
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Aanvraag gegevens";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ModelVersie
+          {
+            datatype: string;
+            frequency: document;
+            formula: "00.00.001.000";
+            data_options: unscalable;
+            title: "Modelversie";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BBAanvraagNummer
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Docsnr KV/RV";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BBAanvraagOpsteller
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Opgesteld door";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BBAanvraagMemo
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Toelichting";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map01;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map02
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Invoerbladen";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map02_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 2";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map02_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_Kasstroom
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Kasstroomgegevens (o.b.v. Kasstroommodel dPi / dVi)";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_CFOperationeel
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_JCFOpCF;
+            formula_trend: BNG_JCFOpCF;
+            displaytype: currency;
+            title: "Kasstroom uit operationele activiteiten";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: Saldo";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_Renteontvangsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_FinBaten1;
+            formula_trend: BNG_FinBaten1;
+            displaytype: currency;
+            title: "Renteontvangsten";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.5";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_Renteuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_FinLasten1;
+            formula_trend: BNG_FinLasten1;
+            displaytype: currency;
+            title: "Renteuitgaven";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.10";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_Onderhoudsuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_OperKosten6;
+            formula_trend: BNG_OperKosten6;
+            displaytype: currency;
+            title: "Onderhoudsuitgaven";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.8";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Toegerekende renteuitgaven aan investeringen";
+            hint: "Hoofdstuk: dPi 3.2.1\r\nRegel: a";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_GeactiveerdeProductie
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_NettoOmzet4;
+            formula_trend: BNG_NettoOmzet4;
+            displaytype: currency;
+            title: "Geactiveerde productie t.b.v. het eigen bedrijf";
+            hint: "Hoofdstuk: dPi 3.2.1\r\nRegel: b";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_Verkoopopbrengsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopopbrengsten bestaand bezit - MVA ingaande kasstroom";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2";
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked, invisible;
+            options_trend: locked, invisible;
+          }
+          variable BNG_WSW_VerkoopontvangstenHuurA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.1.A";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_VerkoopontvangstenHuurB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.1.B";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_VerkoopontvangstenGrondA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten grond";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.4.A";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_VerkoopontvangstenGrondB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten grond";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.4.B";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_InvesteringsontvangstenOverigA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "(Des)investeringsontvangsten Overig";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.5.A";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_InvesteringsontvangstenOverigB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "(Des)investeringsontvangsten Overig";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.5.B";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_ExterneKostenVerkoopA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Externe kosten bij verkoop";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.15.A";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_ExterneKostenVerkoopB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Externe kosten bij verkoop";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.15.B";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensT
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_VerslagJaarT
+          {
+            datatype: string;
+            frequency: document;
+            formula: "Balans ultimo Verslagjaar T";
+            data_options: unscalable;
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Langlopende schulden";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable BNG_WSW_LanglopendeSchuldenOverheidT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_LanglopendeSchuldenOverheid,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_LanglopendeSchuldenKredietinstellingen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_LanglopendeSchuldenGroepsmaatschappijen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_LanglopendeSchuldenDeelnemingen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Kortlopende schulden";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_KortlopendeSchuldenKredietinstellingenKort,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_KortlopendeSchuldenGroepsmaatschappijen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_KortlopendeSchuldenDeelnemingen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SolvabiliteitGroepsvermogenT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_SolvabiliteitGroepsvermogen,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\n Totaal Eigen Vermogen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_TotaalActivaT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_TotaalActiva,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Totaal activa";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: Totaal Activa";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SociaalVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_SociaalVastgoedInExploitatie,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_CommercieelVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_CommercieelVastgoedInExploitatie,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_SociaalVastgoedVastgoedbelegging,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_BedrijfswaardeVastgoedInExploitatie,LastTinFormulaSet(NoTrend),1);
+            displaytype: currency;
+            title: "Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_AantalVHEBeginPrognoseperiodeT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 2.3\r\n Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_GemLevensduurBeginPrognoseperiodeT
+          {
+            datatype: number;
+            frequency: document;
+            formula: GetValue(BNG_WSW_GemLevensduurBeginPrognoseperiode,LastTinFormulaSet(NoTrend),1);
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5, betreft jaren";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SchuldrestantWSWGeborgdeLeningen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Schuldrestant WSW geborgde leningen";
+            hint: "Het “Schuldrestant WSW geborgde leningen” kan niet afgeleid worden uit de dPi en dVi, dit bedrag wordt jaarlijks met belangenhouders (corporaties en gemeenten) gedeeld in het Schuld-/WOZ-overzicht dat WSW toestuurt.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_WOZwaardeWSWIngezetOnderpand
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "WOZ waarde van bij WSW ingezet onderpand (DAEB + Niet-DAEB)";
+            hint: "Hoofdstuk: dVi 4.3 \r\n Ingezet corporatie";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensVT
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopig lopend boekjaar";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_VerslagJaarVT
+          {
+            datatype: string;
+            frequency: document;
+            formula: "Voorlopige balans ultimo lopend boekjaar (dPi)";
+            data_options: unscalable;
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Langlopende schulden";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable BNG_WSW_LanglopendeSchuldenOverheidVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Kortlopende schulden";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+          }
+          variable BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SolvabiliteitGroepsvermogenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\n Totaal Eigen Vermogen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_TotaalActivaVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal activa";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: Totaal Activa";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SociaalVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_CommercieelVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_AantalVHEBeginPrognoseperiodeVT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 2.3\r\n Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BNG_WSW_GemLevensduurBeginPrognoseperiodeVT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5, betreft jaren";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map02_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map02_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (2)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (2)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map02;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map03
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Berekening ICR";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map03_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 3";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_BerekeningICRHeader1
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Kasstroom ICR";
+          hint: "WSW gaat voor de bepaling van de ICR uit van de geconsolideerde kasstromen en balans . Indien geen geconsolideerde geconsolideerde kasstromen en balans wordt gepubliceerd, dan wordt de enkelvoudige informatie gehanteerd.";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_BerekeningICRHeader1Sub1 refers to BNG_WSW_CFOperationeel
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Kasstroom uit operationele activiteiten";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: Saldo";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_CFOperationeel;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BerekeningICRHeader1Sub2 refers to BNG_WSW_Renteontvangsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: EvaluateAsString("Af: "&GetTitle(BNG_WSW_Renteontvangsten));
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.5";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteontvangsten;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BerekeningICRHeader1Sub3 refers to BNG_WSW_Renteuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: EvaluateAsString("Bij: "&GetTitle(BNG_WSW_Renteuitgaven));
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.10";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteuitgaven;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorRente
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_CFOperationeel-BNG_WSW_Renteontvangsten+BNG_WSW_Renteuitgaven;
+            formula_trend: BNG_WSW_CFOperationeel-BNG_WSW_Renteontvangsten+BNG_WSW_Renteuitgaven;
+            displaytype: currency;
+            title: "Kasstroom vóór renteontvangsten en -uitgaven";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_ICRWegingsfactor
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            formula_notrend: If((LastTinFormulaSet(NoTrend)-T)<=(TsY(T)*3),1,NA);
+            formula_trend: Case(T-LastTinFormulaSet(NoTrend),[<=TsY(T):5|<=(TsY(T)*2):4|<=(TsY(T)*3):3|<=(TsY(T)*4):2|<=(TsY(T)*5):1|>(TsY(T)*5):NA]);
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 0;
+            title: "Wegingsfactor";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable BNG_WSW_BerekeningICRHeader2
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Berekening ICR";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_KasstroomVoorRenteGewogenCumulatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[GetT(T,-1)]+BNG_WSW_KasstroomVoorRente*BNG_WSW_ICRWegingsfactor,NA);
+            formula_trend: OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[GetT(T,-1)]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_KasstroomVoorRente*BNG_WSW_ICRWegingsfactor,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom vóór renteontvangsten en -uitgaven (cumulatief)";
+            top_blanklines: 1;
+            bottom_separator: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorRenteHistorieGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_KasstroomVoorRenteGewogenCumulatief,LastTinFormulaSet(NoTrend),1)/3,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom vóór renteontvangsten en -uitgaven (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_KasstroomVoorRentePrognoseGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_KasstroomVoorRenteGewogenCumulatief,LastTinFormulaSet(Trend),1)/15,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom vóór renteontvangsten en -uitgaven (prognose)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_RenteuitgavenGewogenCumulatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[GetT(T,-1)]+BNG_WSW_Renteuitgaven*BNG_WSW_ICRWegingsfactor,NA);
+            formula_trend: OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[GetT(T,-1)]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_Renteuitgaven*BNG_WSW_ICRWegingsfactor,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven (cumulatief)";
+            top_separator: 1;
+            bottom_separator: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_RenteuitgavenHistorieGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_RenteuitgavenGewogenCumulatief,LastTinFormulaSet(NoTrend),1)/3,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_RenteuitgavenPrognoseGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_RenteuitgavenGewogenCumulatief,LastTinFormulaSet(Trend),1)/15,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven (prognose)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GemiddeldeICRRealisatie
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(If(BNG_WSW_RenteuitgavenHistorieGewogen=0,99999,BNG_WSW_KasstroomVoorRenteHistorieGewogen/BNG_WSW_RenteuitgavenHistorieGewogen),NA);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "Gemiddeld gerealiseerde ICR";
+            hint: "(Gewogen kasstroom vóór renteontvangsten en -uitgaven in historie) / (Gewogen renteuitgaven in historie)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GemiddeldeICRPrognose
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnER(If(BNG_WSW_RenteuitgavenPrognoseGewogen=0,99999,BNG_WSW_KasstroomVoorRentePrognoseGewogen/BNG_WSW_RenteuitgavenPrognoseGewogen),NA);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "Gewogen gemiddeld geprognosticeerde ICR";
+            hint: "(Gewogen kasstroom vóór renteontvangsten en -uitgaven in prognose) / (Gewogen renteuitgaven in prognose)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_ICRtbvRisicoScore
+          {
+            datatype: number;
+            frequency: document;
+            formula: Min(BNG_WSW_GemiddeldeICRRealisatie,BNG_WSW_GemiddeldeICRPrognose);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "ICR t.b.v. WSW Risico Score Model";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_ICRtbvRisicoScoreNorm
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1.4;
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "WSW norm";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_ICRtbvRisicoScoreNormGehaald
+          {
+            datatype: number;
+            frequency: document;
+            formula: (BNG_WSW_ICRtbvRisicoScore>=BNG_WSW_ICRtbvRisicoScoreNorm);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: 1;
+            choices: "1:Voldoet aan WSW norm|0:Voldoet niet aan WSW norm";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map03_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map03;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map04
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Berekening DSCR";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map04_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 4";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_BerekeningDSCR
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Berekening DSCR";
+          hint: "WSW gaat voor de bepaling van de DSCR uit van de geconsolideerde kasstromen en balans . Indien geen geconsolideerde geconsolideerde kasstromen en balans wordt gepubliceerd, dan wordt de enkelvoudige informatie gehanteerd.";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_BerekeningDSCRSub1 refers to BNG_WSW_AantalVHEBeginPrognoseperiode
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 2.3\r\n Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)";
+            top_blanklines: 1;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_AantalVHEBeginPrognoseperiode;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable BNG_WSW_BerekeningDSCRHeader1
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Kasstroom uit operationele activiteiten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_BerekeningDSCRHeader1Sub1 refers to BNG_WSW_CFOperationeel
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Kasstroom uit operationele activiteiten";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: Saldo";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_CFOperationeel;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BerekeningDSCRHeader1Sub2 refers to BNG_WSW_Renteontvangsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: EvaluateAsString("Af: "&GetTitle(BNG_WSW_Renteontvangsten));
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.5";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteontvangsten;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BerekeningDSCRHeader1Sub3 refers to BNG_WSW_Renteuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: EvaluateAsString("Bij: "&GetTitle(BNG_WSW_Renteuitgaven));
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.10";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteuitgaven;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BerekeningDSCRHeader1Sub4 refers to BNG_WSW_KasstroomVoorRente
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Kasstroom vóór renteontvangsten en -uitgaven";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KasstroomVoorRente;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BerekeningDSCRHeader1Sub5 refers to BNG_WSW_Onderhoudsuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Bij: Werkelijke onderhoudsuitgaven";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.8";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Onderhoudsuitgaven;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_OnderhoudsuitgavenNormatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_AantalVHEBeginPrognoseperiode * 700;
+            formula_trend: BNG_WSW_AantalVHEBeginPrognoseperiode * 700;
+            displaytype: currency;
+            title: "Af: Normatieve minimale onderhoudsuitgaven à € 700 per VHE (Woonequivalent)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorRenteMinimaalOnderhoud
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_KasstroomVoorRente+BNG_WSW_Onderhoudsuitgaven-BNG_WSW_OnderhoudsuitgavenNormatief;
+            formula_trend: BNG_WSW_KasstroomVoorRente+BNG_WSW_Onderhoudsuitgaven-BNG_WSW_OnderhoudsuitgavenNormatief;
+            displaytype: currency;
+            title: "Kasstroom vóór renteontvangsten en -uitgaven op basis van 'minimaal onderhoud'";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BerekeningDSCRHeader1Sub8 refers to BNG_WSW_GeactiveerdeProductie
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Bij:Geactiveerde productie t.b.v. het eigen bedrijf";
+            hint: "Hoofdstuk: dPi 3.2.1\r\nRegel: b";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_GeactiveerdeProductie;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorDSCR
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_KasstroomVoorRenteMinimaalOnderhoud+BNG_WSW_GeactiveerdeProductie;
+            formula_trend: BNG_WSW_KasstroomVoorRenteMinimaalOnderhoud+BNG_WSW_GeactiveerdeProductie;
+            displaytype: currency;
+            title: "Kasstroom t.b.v. de DSCR bepaling";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_DSCRWegingsfactor
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            formula_notrend: If((LastTinFormulaSet(NoTrend)-T)<=(TsY(T)*3),1,NA);
+            formula_trend: Case(T-LastTinFormulaSet(NoTrend),[<=TsY(T):5|<=(TsY(T)*2):4|<=(TsY(T)*3):3|<=(TsY(T)*4):2|<=(TsY(T)*5):1|>(TsY(T)*5):NA]);
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 0;
+            title: "Wegingsfactor";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorDSCRCumulatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[GetT(T,-1)]+BNG_WSW_KasstroomVoorDSCR*BNG_WSW_DSCRWegingsfactor,NA);
+            formula_trend: OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[GetT(T,-1)]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_KasstroomVoorDSCR*BNG_WSW_DSCRWegingsfactor,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom t.b.v. de DSCR bepaling (cumulatief)";
+            bottom_separator: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_KasstroomVoorDSCRHistorieGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_KasstroomVoorDSCRCumulatief,LastTinFormulaSet(NoTrend),1)/3,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom t.b.v. de DSCR bepaling (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_KasstroomVoorDSCRPrognoseGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_KasstroomVoorDSCRCumulatief,LastTinFormulaSet(Trend),1)/15,NA);
+            displaytype: currency;
+            title: "Gewogen kasstroom t.b.v. de DSCR bepaling (prognose)";
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_BepalingNettoRenteuitgavenDSCR
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Bepaling netto renteuitgaven";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_BepalingNettoRenteuitgavenDSCRSub1 refers to BNG_WSW_Renteuitgaven
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Renteuitgaven";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.10";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteuitgaven;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BepalingNettoRenteuitgavenDSCRSub2 refers to BNG_WSW_Renteontvangsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: EvaluateAsString("Af: "&GetTitle(BNG_WSW_Renteontvangsten));
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.1\r\nRegel: 1.5";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Renteontvangsten;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BepalingNettoRenteuitgavenDSCRSub3 refers to BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Af: Toegerekende renteuitgaven aan projecten";
+            hint: "Hoofdstuk: dPi 3.2.1\r\nRegel: a";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_RenteuitgavenDSCR
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_Renteuitgaven-BNG_WSW_Renteontvangsten-BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen;
+            formula_trend: BNG_WSW_Renteuitgaven-BNG_WSW_Renteontvangsten-BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen;
+            displaytype: currency;
+            title: "Renteuitgaven t.b.v. de DSCR bepaling";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_BepalingNettoRenteuitgavenDSCRSub5 refers to BNG_WSW_DSCRWegingsfactor
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 0;
+            title: "Wegingsfactor";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_DSCRWegingsfactor;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_RenteuitgavenDSCRGewogenCumulatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[GetT(T,-1)]+BNG_WSW_RenteuitgavenDSCR*BNG_WSW_DSCRWegingsfactor,NA);
+            formula_trend: OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[GetT(T,-1)]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_RenteuitgavenDSCR*BNG_WSW_DSCRWegingsfactor,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven t.b.v. de DSCR bepaling (cumulatief)";
+            bottom_separator: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_RenteuitgavenDSCRHistorieGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief,LastTinFormulaSet(NoTrend),1)/3,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven t.b.v. de DSCR bepaling (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_RenteuitgavenDSCRPrognoseGewogen
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero(GetValue(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief,LastTinFormulaSet(Trend),1)/15,NA);
+            displaytype: currency;
+            title: "Gewogen renteuitgaven t.b.v. de DSCR bepaling (prognose)";
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_BepalingTheoretischeAflossingDSCR
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Bepaling theoretische aflossing per jaar t.b.v. DSCR berekening";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub1 refers to BNG_WSW_Verkoopopbrengsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopopbrengsten bestaand bezit - MVA ingaande kasstroom";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 0;
+            link: BNG_WSW_Verkoopopbrengsten;
+            options_title: locked;
+            options_notrend: locked, invisible;
+            options_trend: locked, invisible;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub2 refers to BNG_WSW_VerkoopontvangstenHuurA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.1.A";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_VerkoopontvangstenHuurA;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub3 refers to BNG_WSW_VerkoopontvangstenHuurB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.1.B";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_VerkoopontvangstenHuurB;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub4 refers to BNG_WSW_VerkoopontvangstenGrondA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten grond";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.4.A";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_VerkoopontvangstenGrondA;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub5 refers to BNG_WSW_VerkoopontvangstenGrondB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Verkoopontvangsten grond";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.4.B";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_VerkoopontvangstenGrondB;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub6 refers to BNG_WSW_InvesteringsontvangstenOverigA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "(Des)investeringsontvangsten Overig";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.5.A";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_InvesteringsontvangstenOverigA;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +BNG_WSW_BepalingTheoretischeAflossingDSCRSub7 refers to BNG_WSW_InvesteringsontvangstenOverigB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "(Des)investeringsontvangsten Overig";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.5.B";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_InvesteringsontvangstenOverigB;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BepalingTheoretischeAflossingDSCRSub8 refers to BNG_WSW_ExterneKostenVerkoopA
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "-/- Externe kosten bij verkoop";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.15.A";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_ExterneKostenVerkoopA;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable -BNG_WSW_BepalingTheoretischeAflossingDSCRSub9 refers to BNG_WSW_ExterneKostenVerkoopB
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "-/- Externe kosten bij verkoop";
+            hint: "Hoofdstuk: dVi 3.1.3 - dPi 3.1.2\r\nRegel: 2.15.B";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_ExterneKostenVerkoopB;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_TotaalVerkoopontvangsten
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: BNG_WSW_Verkoopopbrengsten+BNG_WSW_VerkoopontvangstenHuurA+BNG_WSW_VerkoopontvangstenHuurB+BNG_WSW_VerkoopontvangstenGrondA+BNG_WSW_VerkoopontvangstenGrondB+BNG_WSW_InvesteringsontvangstenOverigA+BNG_WSW_InvesteringsontvangstenOverigB-BNG_WSW_ExterneKostenVerkoopA-BNG_WSW_ExterneKostenVerkoopB;
+            formula_trend: BNG_WSW_Verkoopopbrengsten+BNG_WSW_VerkoopontvangstenHuurA+BNG_WSW_VerkoopontvangstenHuurB+BNG_WSW_VerkoopontvangstenGrondA+BNG_WSW_VerkoopontvangstenGrondB+BNG_WSW_InvesteringsontvangstenOverigA+BNG_WSW_InvesteringsontvangstenOverigB-BNG_WSW_ExterneKostenVerkoopA-BNG_WSW_ExterneKostenVerkoopB;
+            displaytype: currency;
+            title: "Totaal verkoopontvangsten";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_BepalingTheoretischeAflossingDSCRSub11 refers to BNG_WSW_DSCRWegingsfactor
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: average;
+            data_options: calculateAggregation,unscalable;
+            fixed_decimals: 0;
+            title: "Wegingsfactor";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[GetT(T,-1)]+BNG_WSW_TotaalVerkoopontvangsten*BNG_WSW_DSCRWegingsfactor,NA);
+            formula_trend: OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[GetT(T,-1)]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_TotaalVerkoopontvangsten*BNG_WSW_DSCRWegingsfactor,NA);
+            displaytype: currency;
+            title: "Cumulatieve gewogen verkoopopbrengsten t.b.v. de DSCR bepaling";
+            bottom_separator: 1;
+            locked: 1;
+            visible: 0;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefHistorie
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnZero((BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[LastTinFormulaSet(NoTrend)]/HSum(BNG_WSW_DSCRWegingsfactor,1,LastTinFormulaSet(NoTrend)))*5,NA);
+            displaytype: currency;
+            title: "Cumulatieve verkoopopbrengsten over vijf jaren (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefPrognose
+          {
+            datatype: number;
+            frequency: document;
+            formula: Min(OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[LastTinFormulaSet(Trend)]/HSum(BNG_WSW_DSCRWegingsfactor,FirstTinFormulaSet(Trend),LastTinFormulaSet(Trend))*5,NA),HSum(BNG_WSW_TotaalVerkoopontvangsten,FirstTinFormulaSet(Trend),LastTinFormulaSet(Trend)));
+            displaytype: currency;
+            title: "Cumulatieve verkoopopbrengsten over vijf jaren (prognose)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_RestwaardePortefeuilleHistorie
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_AantalVHEBeginPrognoseperiodeT*5000;
+            displaytype: currency;
+            title: "Restwaarde portefeuille  à € 5.000 per VHE (historisch)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_RestwaardePortefeuillePrognose
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_AantalVHEBeginPrognoseperiodeVT*5000;
+            displaytype: currency;
+            title: "Restwaarde portefeuille  à € 5.000 per VHE (prognose)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensTDSCR
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_VermogensgegevensTDSCRSub1 refers to BNG_WSW_LanglopendeSchuldenOverheidT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenOverheidT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub2 refers to BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenKredietinstellingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub3 refers to BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub4 refers to BNG_WSW_LanglopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenDeelnemingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub5 refers to BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub6 refers to BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTDSCRSub7 refers to BNG_WSW_KortlopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenDeelnemingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VreemdVermogenVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_LanglopendeSchuldenOverheidT+BNG_WSW_LanglopendeSchuldenKredietinstellingenT+BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT+BNG_WSW_LanglopendeSchuldenDeelnemingenT+BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT+BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT+BNG_WSW_KortlopendeSchuldenDeelnemingenT;
+            displaytype: currency;
+            title: "Totaal vreemd vermogen gerelateerd aan vastgoed in exploitatie";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTDSCRSub9 refers to BNG_WSW_GemLevensduurBeginPrognoseperiodeT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5, betreft jaren";
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_GemLevensduurBeginPrognoseperiodeT;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensVTDSCR
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub1 refers to BNG_WSW_LanglopendeSchuldenOverheidVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenOverheidVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub2 refers to BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenKredietinstellingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub3 refers to BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub4 refers to BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenDeelnemingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub5 refers to BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub6 refers to BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTDSCRSub7 refers to BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenDeelnemingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VreemdVermogenVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_LanglopendeSchuldenOverheidVT+BNG_WSW_LanglopendeSchuldenKredietinstellingenVT+BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT+BNG_WSW_LanglopendeSchuldenDeelnemingenVT+BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT+BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT+BNG_WSW_KortlopendeSchuldenDeelnemingenVT;
+            displaytype: currency;
+            title: "Totaal vreemd vermogen gerelateerd aan vastgoed in exploitatie";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTDSCRSub9 refers to BNG_WSW_GemLevensduurBeginPrognoseperiodeVT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5, betreft jaren";
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_GemLevensduurBeginPrognoseperiodeVT;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_DSCRtbvRisicoScoreHeader
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "DSCR t.b.v. WSW Risico Score Model";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_TheoretischAflossingsniveauHistorie
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnError(Max(0,(BNG_WSW_VreemdVermogenVastgoedInExploitatieT -BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefHistorie-BNG_WSW_RestwaardePortefeuilleHistorie)/BNG_WSW_GemLevensduurBeginPrognoseperiodeT),0);
+            displaytype: currency;
+            title: "Theoretisch aflossingsniveau gerealiseerd";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_TheoretischAflossingsniveauPrognose
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnError(Max(0,(BNG_WSW_VreemdVermogenVastgoedInExploitatieVT-BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefPrognose-BNG_WSW_RestwaardePortefeuillePrognose)/BNG_WSW_GemLevensduurBeginPrognoseperiodeVT),0);
+            displaytype: currency;
+            title: "Theoretisch aflossingsniveau geprognosticeerd";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GemiddeldGerealiseerdeDSCR
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnError(BNG_WSW_KasstroomVoorDSCRHistorieGewogen/(BNG_WSW_RenteuitgavenDSCRHistorieGewogen+BNG_WSW_TheoretischAflossingsniveauHistorie),0);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "Gemiddeld gerealiseerde DSCR";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DSCRNoemerTest
+          {
+            datatype: number;
+            frequency: document;
+            formula: If(((BNG_WSW_RenteuitgavenDSCRHistorieGewogen+BNG_WSW_TheoretischAflossingsniveauHistorie)<=0) or ((BNG_WSW_RenteuitgavenDSCRPrognoseGewogen+BNG_WSW_TheoretischAflossingsniveauPrognose)<=0),1,0);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: (BNG_WSW_DSCRNoemerTest=1);
+            choices: "1:Noemer <= 0|0:Noemer <> 0";
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GemiddeldGeprognosticeerdeDSCR
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnError(BNG_WSW_KasstroomVoorDSCRPrognoseGewogen/(BNG_WSW_RenteuitgavenDSCRPrognoseGewogen+BNG_WSW_TheoretischAflossingsniveauPrognose),0);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "Gewogen gemiddeld geprognosticeerde DSCR";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DSCRtbvRisicoScore
+          {
+            datatype: number;
+            frequency: document;
+            formula: Min(BNG_WSW_GemiddeldGerealiseerdeDSCR,BNG_WSW_GemiddeldGeprognosticeerdeDSCR);
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "DSCR t.b.v. WSW Risico Score Model";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DSCRtbvRisicoScoreNorm
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            fixed_decimals: 2;
+            title: "WSW norm";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DSCRtbvRisicoScoreNormGehaald
+          {
+            datatype: number;
+            frequency: document;
+            formula: (BNG_WSW_DSCRtbvRisicoScore>=BNG_WSW_DSCRtbvRisicoScoreNorm);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: 1;
+            choices: "1:Voldoet aan WSW norm|0:Voldoet niet aan WSW norm";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map04_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map04;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map05
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Berekening Loan to Value";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map05_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 5";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map05_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map05_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_VermogensgegevensTLTV
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_VermogensgegevensTLTVSub1 refers to BNG_WSW_LanglopendeSchuldenOverheidT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenOverheidT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub2 refers to BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenKredietinstellingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub3 refers to BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub4 refers to BNG_WSW_LanglopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenDeelnemingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub5 refers to BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub6 refers to BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub7 refers to BNG_WSW_KortlopendeSchuldenDeelnemingenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenDeelnemingenT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub8 refers to BNG_WSW_VreemdVermogenVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal vreemd vermogen t.b.v. berekening LTV (A)";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensTLTVSub9 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bedrijfswaarde vastgoed in exploitatie (B)";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LTVHistorie
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnEr(BNG_WSW_VreemdVermogenVastgoedInExploitatieT /BNG_WSW_BedrijfswaardeVastgoedInExploitatieT ,NA);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Loan to Value";
+            hint: "Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensVTLTV
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_VermogensgegevensVTLTVSub1 refers to BNG_WSW_LanglopendeSchuldenOverheidVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen overheid";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.1";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenOverheidVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub2 refers to BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.2";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenKredietinstellingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub3 refers to BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub4 refers to BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: F.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_LanglopendeSchuldenDeelnemingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub5 refers to BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden/leningen kredietinstellingen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.1";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub6 refers to BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan groepsmaatschappijen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.3";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub7 refers to BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "- Kort deel schulden aan maatschappijen waarin wordt deelgenomen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: G.4";
+            locked: 1;
+            visible: 1;
+            link: BNG_WSW_KortlopendeSchuldenDeelnemingenVT;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub8 refers to BNG_WSW_VreemdVermogenVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal vreemd vermogen t.b.v. berekening LTV (A)";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_VermogensgegevensVTLTVSub9 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bedrijfswaarde vastgoed in exploitatie (B)";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LTVPrognose
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnEr(BNG_WSW_VreemdVermogenVastgoedInExploitatieVT/BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT,NA);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Loan to Value";
+            hint: "Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_LTV
+        {
+          datatype: number;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 2;
+          title: "Loan to Value";
+          hint: "Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_LTVtbvRisicoScore
+          {
+            datatype: number;
+            frequency: document;
+            formula: Max(BNG_WSW_LTVHistorie,BNG_WSW_LTVPrognose);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "LTV t.b.v. WSW Risico Score Model";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LTVtbvRisicoScoreNorm
+          {
+            datatype: number;
+            frequency: document;
+            formula: 0.75;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "WSW norm";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_LTVtbvRisicoScoreNormGehaald
+          {
+            datatype: number;
+            frequency: document;
+            formula: (BNG_WSW_LTVtbvRisicoScore<BNG_WSW_LTVtbvRisicoScoreNorm);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: 1;
+            choices: "1:Voldoet aan WSW norm|0:Voldoet niet aan WSW norm";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map05_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map05_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map05;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map06
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map06_ENTEREDREQUIREDVARS=Q_Map06_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Berekening Solvabiliteit";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map06_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map06_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map06_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_VermogensgegevensTSolvabiliteit
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_VermogensgegevensTSolvabiliteitSub1 refers to BNG_WSW_SolvabiliteitGroepsvermogenT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\n Totaal Eigen Vermogen";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub2 refers to BNG_WSW_SociaalVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub3 refers to BNG_WSW_CommercieelVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub4 refers to BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTSolvabiliteitSub5 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bij: Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GroepsvermogenBedrijfswaardeT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_SolvabiliteitGroepsvermogenT-BNG_WSW_SociaalVastgoedInExploitatieT-BNG_WSW_CommercieelVastgoedInExploitatieT-BNG_WSW_SociaalVastgoedVastgoedbeleggingT+BNG_WSW_BedrijfswaardeVastgoedInExploitatieT;
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen o.b.v. Bedrijfswaarde";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTSolvabiliteitSub7 refers to BNG_WSW_TotaalActivaT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal activa";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: Totaal Activa";
+            top_blanklines: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub8 refers to BNG_WSW_SociaalVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub9 refers to BNG_WSW_CommercieelVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensTSolvabiliteitSub10 refers to BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensTSolvabiliteitSub11 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bij: Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_TotaalActivaBedrijfswaardeT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_TotaalActivaT-BNG_WSW_SociaalVastgoedInExploitatieT-BNG_WSW_CommercieelVastgoedInExploitatieT-BNG_WSW_SociaalVastgoedVastgoedbeleggingT+BNG_WSW_BedrijfswaardeVastgoedInExploitatieT;
+            displaytype: currency;
+            title: "Totaal activa o.b.v. Bedrijfswaarde";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_SolvabiliteitT
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnEr(BNG_WSW_GroepsvermogenBedrijfswaardeT /BNG_WSW_TotaalActivaBedrijfswaardeT ,NA);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_VermogensgegevensVTSolvabiliteit
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +BNG_WSW_VermogensgegevensVTSolvabiliteitSub1 refers to BNG_WSW_SolvabiliteitGroepsvermogenVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\n Totaal Eigen Vermogen";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub2 refers to BNG_WSW_SociaalVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub3 refers to BNG_WSW_CommercieelVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub4 refers to BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTSolvabiliteitSub5 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bij: Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_GroepsvermogenBedrijfswaardeVT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_SolvabiliteitGroepsvermogenVT-BNG_WSW_SociaalVastgoedInExploitatieVT-BNG_WSW_CommercieelVastgoedInExploitatieVT-BNG_WSW_SociaalVastgoedVastgoedbeleggingVT+BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT;
+            displaytype: currency;
+            title: "Eigen vermogen / Groepsvermogen o.b.v. Bedrijfswaarde";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTSolvabiliteitSub7 refers to BNG_WSW_TotaalActivaVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal activa";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: Totaal Activa";
+            top_blanklines: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub8 refers to BNG_WSW_SociaalVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: II.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub9 refers to BNG_WSW_CommercieelVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Commercieel vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable -BNG_WSW_VermogensgegevensVTSolvabiliteitSub10 refers to BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging";
+            hint: "Hoofdstuk: dVi 3.1.2 - dPi 3.3.1\r\nRegel: III.2";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable +BNG_WSW_VermogensgegevensVTSolvabiliteitSub11 refers to BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Bij: Bedrijfswaarde vastgoed in exploitatie";
+            hint: "Hoofdstuk: dVi 4.1.5 - dPi 3.4.4\r\nRegel: 4.1.5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_TotaalActivaBedrijfswaardeVT
+          {
+            datatype: number;
+            frequency: document;
+            formula: BNG_WSW_TotaalActivaVT-BNG_WSW_SociaalVastgoedInExploitatieVT-BNG_WSW_CommercieelVastgoedInExploitatieVT-BNG_WSW_SociaalVastgoedVastgoedbeleggingVT+BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT;
+            displaytype: currency;
+            title: "Totaal activa o.b.v. Bedrijfswaarde";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_SolvabiliteitVT
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnEr(BNG_WSW_GroepsvermogenBedrijfswaardeVT/BNG_WSW_TotaalActivaBedrijfswaardeVT,NA);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable BNG_WSW_BerekeningSolvabiliteit
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Berekening Solvabiliteit";
+          hint: "WSW gaat voor de bepaling van de Solvabiliteit uit van de geconsolideerde balans. Indien geen geconsolideerde balans wordt gepubliceerd, dan wordt de enkelvoudige balans gehanteerd.";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_BerekeningSolvabiliteitSub1 refers to BNG_WSW_SolvabiliteitT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit (historisch)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_BerekeningSolvabiliteitSub2 refers to BNG_WSW_SolvabiliteitVT
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit (prognose)";
+            bottom_separator: 2;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_SolvabiliteitRisicoScore
+          {
+            datatype: number;
+            frequency: document;
+            formula: Min(BNG_WSW_SolvabiliteitT,BNG_WSW_SolvabiliteitVT);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Solvabiliteit t.b.v. WSW Risico Score Model";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_SolvabiliteitRisicoScoreNorm
+          {
+            datatype: number;
+            frequency: document;
+            formula: 0.20;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "WSW norm";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_SolvabiliteitRisicoScoreNormGehaald
+          {
+            datatype: number;
+            frequency: document;
+            formula: (BNG_WSW_SolvabiliteitRisicoScore>=BNG_WSW_SolvabiliteitRisicoScoreNorm);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: 1;
+            choices: "1:Voldoet aan WSW norm|0:Voldoet niet aan WSW norm";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map06_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map06_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map06;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map07
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map07_ENTEREDREQUIREDVARS=Q_Map07_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Berekening Dekkingsratio";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map07_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 7";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map07_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map07_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable BNG_WSW_BerekeningDekkingsratio
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Berekening Dekkingsratio";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BNG_WSW_BerekeningDekkingsratioSub1 refers to BNG_WSW_SchuldrestantWSWGeborgdeLeningen
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Schuldrestant WSW geborgde leningen";
+            hint: "Het “Schuldrestant WSW geborgde leningen” kan niet afgeleid worden uit de dPi en dVi, dit bedrag wordt jaarlijks met belangenhouders (corporaties en gemeenten) gedeeld in het Schuld-/WOZ-overzicht dat WSW toestuurt.";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_BerekeningDekkingsratioSub2 refers to BNG_WSW_WOZwaardeWSWIngezetOnderpand
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "WOZ waarde van bij WSW ingezet onderpand (DAEB + Niet-DAEB)";
+            hint: "Hoofdstuk: dVi 4.3 \r\n Ingezet corporatie";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_Dekkingsratio
+          {
+            datatype: number;
+            frequency: document;
+            formula: OnEr(BNG_WSW_SchuldrestantWSWGeborgdeLeningen/BNG_WSW_WOZwaardeWSWIngezetOnderpand,0);
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "Dekkingsratio";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DekkingsratioNorm
+          {
+            datatype: number;
+            frequency: document;
+            formula: 0.5;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 2;
+            title: "WSW norm";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable BNG_WSW_DekkingsratioNormGehaald
+          {
+            datatype: number;
+            frequency: document;
+            formula: (BNG_WSW_DekkingsRatio<=BNG_WSW_DekkingsRatioNorm);
+            data_options: unscalable;
+            displaytype: select;
+            locked: 1;
+            visible: 1;
+            choices: "1:Voldoet aan WSW norm|0:Voldoet niet aan WSW norm";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map07_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map07_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map07;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+        data_options: unscalable;
+        title: "Resultaat";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESULTSub1 refers to Q_RESULT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Resultaat";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Actief|1:Defintief";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Definitief gemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Aangemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "00.00.001.000";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversie";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "WSW";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "None";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parametersversie";
+        hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Vorige";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Volgende";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Concept rapport";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief maken";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief rapport";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+    }
+    variable HULPVARS
+    {
+      datatype: string;
+      frequency: document;
+      data_options: unscalable;
+      title: "Hulpvariabelen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knock-out(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_WARNING_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Map6 - Vraag 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_WARNING_GLOBALTXT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Knock-out tekst";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESTRICTIES_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIES_02
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIESTXT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Restricties tekst";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+    }
+  }
+}

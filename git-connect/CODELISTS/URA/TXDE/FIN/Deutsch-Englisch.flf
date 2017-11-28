@@ -1,0 +1,923 @@
+; FINAN Dictionary Deutsch-Englisch.flf
+;
+
+  Modellkonfiguration -> Model configuration
+  Abschreibungen auf immaterielles Vermögen und Sachanlagen -> Depreciation on intangible and tangible fixed assets
+  Einmalertrag / -aufwand -> One-time profit / cost
+  Unternehmerlohn außerhalb des Betriebsergebnisses           -> Entrepreneur fee outside result
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices131.fib
+;
+- Keine Daten                                                 -> Keine Daten
+- Umsatzänderung von mindestens                               -> Umsatzänderung von mindestens
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices132.fib
+;
+- Sehr gut                                                    -> Sehr gut
+- Gut                                                         -> Gut
+- Befriedigend                                                -> Befriedigend
+- Gerade noch ausreichend                                     -> Gerade noch ausreichend
+- Mangelhaft                                                  -> Mangelhaft
+- Ungenügend                                                  -> Ungenügend
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices221.fib
+;
+- Umfangreiche Regelungen                                     -> Umfangreiche Regelungen
+- Gute Regelungen                                             -> Gute Regelungen
+- Angemessene Regelungen                                      -> Angemessene Regelungen
+- Kurzfristig ausreichend                                     -> Kurzfristig ausreichend
+- Unzureichende Regelungen                                    -> Unzureichende Regelungen
+- Keine Regelungen                                            -> Keine Regelungen
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices225.fib
+;
+- Sehr aktiv                                                  -> Sehr aktiv
+- Aktiv                                                       -> Aktiv
+- Üblich                                                      -> Üblich
+- Nach Aufforderung                                           -> Nach Aufforderung
+- Eingefordert                                                -> Eingefordert
+- Angespannt                                                  -> Angespannt
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices232.fib
+;
+- Mahnungen überflüssig                                       -> Mahnungen überflüssig
+- Außenstände gering                                          -> Außenstände gering
+- Üblicher Rahmen                                             -> Üblicher Rahmen
+- Mängel                                                      -> Mängel
+- Hohe Außenstände                                            -> Hohe Außenstände
+- Existenz gefährdend                                         -> Existenz gefährdend
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices233.fib
+;
+- Sehr aussagekräftige Kalkulationen                          -> Sehr aussagekräftige Kalkulationen
+- Gute Kenntnisse                                             -> Gute Kenntnisse
+- Branchenüblich                                              -> Branchenüblich
+- Nur pauschal                                                -> Nur pauschal
+- Unrealistische Schätzungen                                  -> Unrealistische Schätzungen
+- Keine Kalkulation und Existenz gefährdend                   -> Keine Kalkulation und Existenz gefährdend
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices24.fib
+;
+- Sehr hore Qualität und Intensität                           -> Sehr hore Qualität und Intensität
+- Gute Qualität                                               -> Gute Qualität
+- Angemessen                                                  -> Angemessen
+- Deutliche Schwächen                                         -> Deutliche Schwächen
+- Kein Riskomanagement                                        -> Kein Riskomanagement
+- Kein Management obwohl dringend notwendig                   -> Kein Management obwohl dringend notwendig
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices251.fib
+;
+- Hohes Niveau                                                -> Hohes Niveau
+- Gutes Niveau                                                -> Gutes Niveau
+- Gering ausgeprägt                                           -> Gering ausgeprägt
+- Kein Niveau                                                 -> Kein Niveau
+- Keine Planung                                               -> Keine Planung
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccChoices252.fib
+;
+- Relativ genau                                               -> Relativ genau
+- Durchschnittliche Güte                                      -> Durchschnittliche Güte
+- Muss korrigiert werden                                      -> Muss korrigiert werden
+- Erhebliche Korrekturen                                      -> Erhebliche Korrekturen
+- Wenig Realitätsbezug                                        -> Wenig Realitätsbezug
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccPositionChoices.fib
+;
+- Sehr gute Position                                          -> Sehr gute Position
+- Gute Position                                               -> Gute Position
+- Mittele Position                                            -> Mittele Position
+- Ausreichende Position                                       -> Ausreichende Position
+- Schlechte Position                                          -> Schlechte Position
+- Sehr schlechte Position                                     -> Sehr schlechte Position
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccQualificationChoices.fib
+;
+- Hohe Qualifikation                                          -> Hohe Qualifikation
+- Gute Qualifikation                                          -> Gute Qualifikation
+- Unangemessene Qualifikation                                 -> Unangemessene Qualifikation
+- Bedroht die Entwicklung                                     -> Bedroht die Entwicklung
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccQualityChoices.fib
+;
+- Sehr hohe Qualität                                          -> Sehr hohe Qualität
+- Angemesse Qualität                                          -> Angemesse Qualität
+- Erhebliche Risiken                                          -> Erhebliche Risiken
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file ccRiskChoices.fib
+;
+- Sehr geringe Risiken                                        -> Sehr geringe Risiken
+- Geringe Risiken                                             -> Geringe Risiken
+- Mittele Risiken                                             -> Mittele Risiken
+- Erhöhtes Risiko                                             -> Erhöhtes Risiko
+- Hohe Risiken                                                -> Hohe Risiken
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file FINAN-GlobalScripts.fsf
+;
+  Datev CSV Datei importieren                                 -> Import Datev CSV file
+  Welches Jahr?                                               -> Which year?
+  Datei importieren                                           -> Import file
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file inc_CreditCheck.fin
+;
+- URA Credit Check                                            -> URA Credit Check
+- Zeigt die Kontoführung eine problematische Entwicklung?     -> Zeigt die Kontoführung eine problematische Entwicklung?
+- Hat sich der Umsatz im unterjährigen Bereich positiv entwickelt?-> Hat sich der Umsatz im unterjährigen Bereich positiv entwickelt?
+- Ist die Güte der unterjährigen Daten so beschaffen, dass diese einen Überblick über die tatsächliche aktuelle Lage des Unternehmens vermitteln können?-> Ist die Güte der unterjährigen Daten so beschaffen, dass diese einen Überblick über die tatsächliche aktuelle Lage des Unternehmens vermitteln können?
+- Gibt es Risiken durch die Art der Konzentration auf wenige Produkte?-> Gibt es Risiken durch die Art der Konzentration auf wenige Produkte?
+- Bestehen Risiken durch Abhängigkeiten von Kunden?           -> Bestehen Risiken durch Abhängigkeiten von Kunden?
+- Wie beurteilen Sie die Wettbewerbsposition des Unternehmers?-> Wie beurteilen Sie die Wettbewerbsposition des Unternehmers?
+- Bestehen Risiken durch Abhängigkeiten von Lieferanten?      -> Bestehen Risiken durch Abhängigkeiten von Lieferanten?
+- Sind Nachfolge- und Stellvertretungsregelungen für de Geschäftsführung getroffen?-> Sind Nachfolge- und Stellvertretungsregelungen für de Geschäftsführung getroffen?
+- Wie beurteilen Sie die kaufmännische Qualifikation der Geschäftsführung?-> Wie beurteilen Sie die kaufmännische Qualifikation der Geschäftsführung?
+- Wie beurteilen Sie die technische Qualifikation der Geschäftsführung?-> Wie beurteilen Sie die technische Qualifikation der Geschäftsführung?
+- Wie beurteilen Sie die Berufserfahrung der Geschäftsführung?-> Wie beurteilen Sie die Berufserfahrung der Geschäftsführung?
+- Wie beurteilen Sie die Einhaltung von Absprachen und Regelungen mit Kreditinstituten?-> Wie beurteilen Sie die Einhaltung von Absprachen und Regelungen mit Kreditinstituten?
+- Ergeben sich Risiken aus der Qualität des Rechnungswesens?  -> Ergeben sich Risiken aus der Qualität des Rechnungswesens?
+- Überwacht das Unternehmen seine Debitoren/Kreditoren?       -> Überwacht das Unternehmen seine Debitoren/Kreditoren?
+- Führt das Unternehmen eine aussagekräftige Kalkulation durch?-> Führt das Unternehmen eine aussagekräftige Kalkulation durch?
+- Wie beurteilen Sie Qualität und Umfang des Risikomanagements des Unternehmens?-> Wie beurteilen Sie Qualität und Umfang des Risikomanagements des Unternehmens?
+- Wie beurteilen Sie das Planungsvermögen des Unternehmens?   -> Wie beurteilen Sie das Planungsvermögen des Unternehmens?
+- Wie beurteilen Sie den Realitätsgehalt der Planungen?       -> Wie beurteilen Sie den Realitätsgehalt der Planungen?
+- Gesamtratingnote                                            -> Gesamtratingnote
+- Bilanzrating                                                -> Bilanzrating
+- Ratingnote                                                  -> Ratingnote
+- Gewichtung                                                  -> Gewichtung
+- Kontoführung                                                -> Kontoführung
+- Unterjährige Lage                                           -> Unterjährige Lage
+- Umsatzentwicklung                                           -> Umsatzentwicklung
+- Güte der Daten                                              -> Güte der Daten
+- Ergebnis des Rating-Bereichs                                -> Ergebnis des Rating-Bereichs
+- Absatz und Beschaffung                                      -> Absatz und Beschaffung
+- Produkt und Sortiment                                       -> Produkt und Sortiment
+- Kunden                                                      -> Kunden
+- Wettbewerbsposition                                         -> Wettbewerbsposition
+- Lieferanten                                                 -> Lieferanten
+- Management                                                  -> Management
+- Nachfolge und Stellvertretung                               -> Nachfolge und Stellvertretung
+- Kaufmännische Fähigkeiten                                   -> Kaufmännische Fähigkeiten
+- Technische Fähigkeiten                                      -> Technische Fähigkeiten
+- Berufserfahrung                                             -> Berufserfahrung
+- Informationspolitik                                         -> Informationspolitik
+- Rechnungswesen                                              -> Rechnungswesen
+- Qualitätsrisiken                                            -> Qualitätsrisiken
+- Debitoren/Kreditoren                                        -> Debitoren/Kreditoren
+- Kalkulation                                                 -> Kalkulation
+- Risikomanagement                                            -> Risikomanagement
+- Planungsvermögen                                            -> Planungsvermögen
+- Realitätsgehalt                                             -> Realitätsgehalt
+- Rating Bereich Wirtschaftliche Lage                         -> Rating Bereich Wirtschaftliche Lage
+- Rating Bereich Qualitative Kriterien                        -> Rating Bereich Qualitative Kriterien
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file krUraTrafficLightValueToTitle.fib
+;
+  Rot                                                         -> Red
+  Gelb                                                        -> Yellow
+  Grün                                                        -> Green
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file TXDE.FIN
+;
+  Hauptperiode                                                -> main period
+  Ist                                                         -> actual
+  Planung                                                     -> forecast
+  Deutsch                                                     -> German
+  Niederländisch                                              -> Dutch
+  Informationen zum Unternehmen                               -> General information
+  Firmenname                                                  -> Company name
+  Ort                                                         -> Place
+  Rechtsform                                                  -> Legal form
+  Gründungsjahr                                               -> Year of foundation
+  Gegenstand des Unternehmens                                 -> Goal of the company
+  Geschäftsführung                                            -> Management
+  Zahl der Mitarbeiter                                        -> Number of employees
+- Scenario                                                    -> Scenario
+  Das Rating kann nicht berechnet werden                      -> Unable to calculate the rating
+  Gleichgewichtkontrolle Bilanz (x € 1,-)                     -> Asset and liabilities match (x € 1,-)
+  Rating Kennzahlen                                           -> Rating ratios
+  Apriori-Insolvenzquote                                      -> Default quote (prior)
+  Z-Wert                                                      -> Z-Value
+  Ausfallwahrscheinlichkeit                                   -> Probability of Default
+  Ratingklasse                                                -> Rating class
+  Ampel                                                       -> Traffic light
+  Berechnung der Kennzahlen                                   -> Calculation of ratios
+  Anteil des ordentlichen Ergebnisses                         -> Share of ordinary result
+  Ordentliches Ergebnis                                       -> Ordinary result
+  Netto Bilanzsumme für das Rating                            -> Net balance sheet total for the rating
+  Negatives Kapital                                           -> Negative capital
+  Netto Bilanzsumme                                           -> Net balance sheet total
+  Bank- und Lieferantenanteil                                 -> Quota of bank and suppliers
+  Bank- und Lieferantenverbindlichkeiten                      -> Amounts due to banks and suppliers
+  Fremdkapitalzinslast                                        -> Interest rate on borrowings
+  Verbindlichkeiten                                           -> Liabilities
+  Anteil kurzfristige Verbindlichkeiten                       -> Share of short-term liabilities
+  Kurzfristige Verbindlichkeiten                              -> Short-term liabilities
+  Umsatzerlöse / Erträge                                      -> Sales
+  Anteil Eigenmittel                                          -> Share of own resources
+  Ratingorientiertes, wirtschaftliches Eigenkapital           -> Rating orientated, business equity
+  Bilanzielles Eigenkapital Brutto (ohne Abzug Sonderposten für Verluste etc)-> Gross equity
+  Bilanzielles Eigenkapital Netto                             -> Net Equity
+  Jahresüberschuss                                            -> Net income for the financial year
+  Wirtschaftliches Eigenkapital                               -> Business equity
+  Ratingorientierte Bilanzsumme                               -> Rating orientated balance sheet total
+  Kurzes Eingabeformular                                      -> Short data entry form
+- Goodwill                                                    -> Goodwill
+  Goodwill und selbst geschaffene Schutzrechte                -> Goodwill and internally generated intangibles
+  Forderungen gegenüber Gesellschaftern, Gesellschaftsorganen usw.-> Accounts receivable from shareholders and from management etc.
+  Aktive latente Steuern                                      -> Deferred tax assets
+  Eigenkapital                                                -> Equity
+  Eigenkapital ohne den nicht durch Eigenkapital gedeckten Fehlbetrag -> Equity without deficit not covered by equity
+  >> davon Bilanzgewinn                                       -> >> of which Retained earnings to be distributed
+  >> davon variables Kapital Kommanditisten                   -> >> of which Variable capital of limited partners to be distributed
+  Rückstellungen                                              -> Provisions
+  Rückstellungen, passive latente Steuern und passive Abgrenzungsposten -> Provisions, deferred tax liabilities and deferred income
+  Verbindlichkeiten >1 Jahr                                   -> Long-term liabilities (>1 year)
+  >> davon gegenüber Kreditinstituten                         -> >> of which to Banks
+  >> davon gegenüber Kreditinstituten und aus Anleihen        -> >> of which to Banks and bondholders
+  >> davon aus Lieferungen und Leistungen                     -> >> of which Trade payables
+  >> davon erhaltene Anzahlungen auf Bestellungen             -> >> of which Advances from customers
+  >> davon gegenüber Gesellschaftern und verbundenen Unternehmen >5 Jahre-> >> of which to shareholders and to affiliated companies >5 years
+  >> davon gegenüber Gesellschaftern und verbundenen Unternehmen-> >> of which to shareholders and to affiliated companies
+  >> davon gegenüber Gesellschaftern, verbundenen Unternehmen, Beteiligungen >5 Jahre-> >> of which to shareholders, affiliated companies and investees >5 years
+  >> davon gegenüber Gesellschaftern, verbundenen Unternehmen, Beteiligungen-> >> of which to shareholders, affiliated companies and investees
+  Bilanzsumme                                                 -> Balance sheet total
+  Umsatz                                                      -> Sales
+  Abschreibungen                                              -> Depreciation, amortisation and write-downs
+  Gewinn vor Steuern ohne Zinsergebnis und ohne Beteiligungsergebnis-> Operating result
+  Betriebsergebnis nach sonstigen Steuern                     -> Operating result after other taxes
+  Zinsertrag                                                  -> Interest income
+  Zinsaufwand                                                 -> Interest expense
+  Zinsaufwand ohne Abzinsung von Rückstellungen               -> Interest expense excluding discounting of provisions
+  Beteiligungsergebnis                                        -> Income from participations
+  Sonstiges Finanz- und Beteiligungsergebnis ohne Abschreibung auf Finanzanlagen -> Other financial result without write-downs of financial assets
+  Es wurden zusätzliche Daten außerhalb dieses Eingabeformulars eingegeben-> Additional data were entered outside this data entry form
+  Ja                                                          -> Yes
+  Nein                                                        -> No
+  Bilanz                                                      -> Balance sheet
+  Ausstehende Einlagen / Rückständige Einzahlungen            -> Unpaid contributions to subscribed capital
+  Rückständige fällige Einzahlungen auf Geschäftsanteile      -> Unpaid and due shares in a cooperative
+  Bilanzierungshilfe                                          -> Accounting convenience
+  Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebs-> Business start-up and expansion expenses
+  Aufwendungen für die Währungsumstellung auf Euro            -> Capitalised expenses from conversion to the euro
+  Anlagevermögen                                              -> Fixed assets
+  Immaterielle Vermögensgegenstände                           -> Intangible fixed assets
+  Selbst geschaffene gewerbliche Schutzrechte und ähnliche Rechte und Werte-> Internally generated intangible fixed assets
+  Konzessionen, gewerbliche Schutz- und ähnliche Rechte und Werte sowie Lizenzen an solchen Rechten und Werten-> Concessions, industrial and similar rights and assets, and licences in such rights and assets
+  Konzessionen                                                -> Concessions
+  Gewerbliche Schutzrechte                                    -> Industrial rights
+  Milchlieferrechte                                           -> Tradable milk quotas
+  Sonstige Rechte und Werte                                   -> Other rights and assets
+  EDV-Software                                                -> Computer software
+  Lizenzen an Rechten und Werten                              -> Licences in rights and assets
+  Geschäfts- oder Firmenwert                                  -> Goodwill
+  Derivativer Firmenwert (Goodwill)                           -> Purchased goodwill
+  Geschäfts- oder Firmenwert aus Kapitalkonsolidierung        -> Goodwill from acquisition accounting
+  Geleistete Anzahlungen (immaterielle Vermögensgegenstände)  -> Prepayments (intangible fixed assets)
+  Sonstige immaterielle Vermögensgegenstände                  -> Other intangible fixed assets
+  Sachanlagen                                                 -> Tangible fixed assets
+  Grundstücke, grundstücksgleiche Rechte und Bauten einschließlich der Bauten auf fremden Grundstücken-> Land, land rights and buildings, including buildings on third-party land
+  Unbebaute Grundstücke                                       -> Undeveloped land
+  Grundstücksgleiche Rechte ohne Bauten                       -> Land rights without buildings
+  Bauten auf eigenen Grundstücken und grundstücksgleichen Rechten-> Buildings on own land and land rights
+  Bauten auf fremden Grundstücken                             -> Buildings on third-party land
+  Technische Anlagen und Maschinen                            -> Technical equipment and machinery
+  Technische Anlagen                                          -> Technical equipment
+  Maschinen und maschinengebundene Werkzeuge                  -> Machinery and tools fixed to machinery
+  Betriebsvorrichtungen                                       -> Operating facilities
+  Reserve- und Ersatzteile                                    -> Spare parts
+  Andere Anlagen, Betriebs- und Geschäftsausstattung          -> Other equipment, operating and office equipment
+  Andere Anlagen                                              -> Other equipment
+  Betriebsausstattung                                         -> Operating equipment
+  Geschäftsausstattung                                        -> Office equipment
+  Stehendes Holz                                              -> Standing timber
+  Dauerkulturen                                               -> Permanent crops
+  Geschäfts- und Vorführwagen                                 -> Company cars and demonstration models
+  Geleistete Anzahlungen und Anlagen im Bau                   -> Prepayments and assets under construction
+  Geleistete Anzahlungen auf Sachanlagen                      -> Prepayments for tangible fixed assets
+  Gebäude im Bau                                              -> Buildings under construction
+  Technische Anlagen und Maschinen im Bau                     -> Technical equipment and machinery under construction
+  Sonstige Sachanlagen                                        -> Other tangible fixed assets
+  Vermietete Anlagenwerte                                     -> Leased assets (own assets leased to others)
+  Übrige sonstige Sachanlagen                                 -> Miscellaneous other tangible fixed assets
+  Finanzanlagen                                               -> Long-term financial assets
+  Anteile an verbundenen Unternehmen                          -> Shares in affiliated companies
+  Anteile an herrschender oder an mit Mehrheit beteiligter Gesellschaft-> Shares in parent or in majority investor
+  Anteile an Tochterunternehmen                               -> Shares in subsidiaries
+  Ausleihungen an Gesellschafter                              -> Loans to shareholders
+  Ausleihungen an GmbH-Gesellschafter und stille Gesellschafter-> Loans to shareholders of private limited company (GmbH) and to silent partners
+  Ausleihungen an persönlich haftende Gesellschafter          -> Loans to general partners
+  Ausleihungen an Kommanditisten                              -> Loans to limited partners
+  Ausleihungen an verbundene Unternehmen                      -> Loans to affiliated companies
+  Ausleihungen an herrschende oder an mit Mehrheit beteiligter Gesellschaft-> Loans to parent or to majority shareholder
+  Ausleihungen an Tochterunternehmen                          -> Loans to subsidiaries
+  Beteiligungen                                               -> Other long-term equity investments
+  Beteiligungen an assoziierten Unternehmen                   -> Shares in associates
+  Anteile an Joint Ventures                                   -> Shares in joint ventures
+  Stille Beteiligungen                                        -> Silent partnerships
+  Sonstige Beteiligungen                                      -> Miscellaneous other long-term equity investments
+  Ausleihungen an Unternehmen, mit denen ein Beteiligungsverhältnis besteht-> Loans to other long-term investees and investors
+  Ausleihungen an beteiligte Unternehmen                      -> Loans to other long-term investors
+  Ausleihungen an Beteiligungen                               -> Loans to other long-term investees
+  Ausleihungen an assoziierte Unternehmen                     -> Loans to associates
+  Ausleihungen an Joint Ventures                              -> Loans to joint ventures
+  Wertpapiere des Anlagevermögens                             -> Long-term securities
+  Aktien                                                      -> Shares
+  Optionsscheine                                              -> Warrants
+  Genussscheine                                               -> Profit participation certificates
+  Investmentzertifikate                                       -> Investment fund shares/units
+  Obligationen                                                -> Bonds
+  Wandelschuldverschreibungen                                 -> Convertible bonds
+  Festverzinsliche Wertpapiere                                -> Fixed-income securities
+  Sonstige Wertpapiere des Anlagevermögens                    -> Other long-term securities
+  Sonstige Ausleihungen                                       -> Other loans
+  Ausleihungen an Mitarbeiter                                 -> Loans to employees
+  Übrige sonstige Ausleihungen                                -> Miscellaneous other loans
+  Sonstige Finanzanlagen                                      -> Other long-term financial assets
+  Genussrechte                                                -> Profit participation rights
+  Genossenschaftsanteile (langfristiger Verbleib)             -> Long-term shares in cooperatives
+  Rückdeckungsansprüche aus Lebensversicherungen (langfristiger Verbleib)-> Long-term pension liability claims from life insurance policies
+  Stille Beteiligungen innerhalb der sonstigen Finanzanlagen  -> Silent partnerships included in other loans and long-term financial assets
+  Übrige sonstige Finanzanlagen                               -> Miscellaneous other long-term financial assets
+  Vermögensgegenstände zwischen Anlagevermögen und Umlaufvermögen-> Assets classified between fixed and current assets
+  Kernbrennelemente                                           -> Nuclear fuel assemblies
+  Filmvermögen von Filmverleihern                             -> Film rights and similar rights
+  Vorabraum im Tagebau                                        -> Overburden from open-cast mining
+  Tiervermögen                                                -> Animals
+  Andere Vermögensgegenstände zwischen Anlagevermögen und Umlaufvermögen-> Other assets classified between fixed and current assets
+  Umlaufvermögen                                              -> Current assets
+  Vorräte                                                     -> Inventories
+  Roh-, Hilfs- und Betriebsstoffe                             -> Raw materials, consumables and supplies
+  Rohstoffe                                                   -> Raw materials
+  Hilfsstoffe                                                 -> Supplies
+  Betriebsstoffe                                              -> Consumables
+  Unfertige Erzeugnisse, unfertige Leistungen                 -> Work in progress
+  Unfertige Erzeugnisse                                       -> Unfinished goods
+  Unfertige Leistungen                                        -> Services in progress
+  Noch nicht abgerechnete Leistungen (unfertige Erzeugnisse, unfertige Leistungen)-> Unbilled services rendered (work in progress)
+  In Ausführung befindliche Bauaufträge                       -> Construction contracts in progress
+  In Arbeit befindliche Aufträge                              -> Orders in progress
+  Fertige Erzeugnisse und Waren                               -> Finished goods and merchandise
+  Fertige Erzeugnisse                                         -> Finished goods
+  Waren                                                       -> Merchandise
+  Noch nicht abgerechnete Leistungen (fertige Erzeugnisse, Waren)-> Unbilled services rendered (finished goods and merchandise)
+  Sonstige Vorräte                                            -> Other inventories
+  Geleistete Anzahlungen (Vorräte)                            -> Prepayments (inventories)
+  Vorräte, vor Absetzung von erhaltenen Anzahlungen           -> Inventories gross before deduction of payments received
+  Erhaltene Anzahlungen auf Bestellungen (offen aktivisch abgesetzt)-> Payments received on account of orders (deducted from assets on the face of the balance sheet)
+  Forderungen und sonstige Vermögensgegenstände               -> Receivables and other assets
+  Forderungen aus Lieferungen und Leistungen                  -> Trade receivables
+  Forderungen aus Lieferungen und Leistungen, davon mit Restlaufzeit bis 1 Jahr-> Trade receivables, due within 1 year
+  Forderungen aus Lieferungen und Leistungen, davon mit Restlaufzeit über 1 Jahr-> Trade receivables, due after more than 1 year
+  Forderungen aus dem Zentralregulierungs- und Delkrederegeschäft-> Receivables from central settlement and del credere services
+  Forderungen aus dem Zentralregulierungs- und Delkrederegeschäft, davon mit Restlaufzeit bis zu einem Jahr-> Receivables from central settlement and del credere services, due within 1 year
+  Forderungen aus dem Zentralregulierungs- und Delkrederegeschäft, davon mit einer Restlaufzeit von mehr als einem Jahr-> Receivables from central settlement and del credere services, due after more than 1 year
+  Forderungen gegen Gesellschafter                            -> Receivables from shareholders
+  Forderungen gegen Gesellschafter, davon mit Restlaufzeit bis 1 Jahr-> Receivables from shareholders, due within 1 year
+  Forderungen gegen Gesellschafter, davon mit Restlaufzeit über 1 Jahr-> Receivables from shareholders, due after more than 1 year
+  Einzahlungsverpflichtungen persönlich haftender Gesellschafter und Kommanditisten-> Call obligations of general and limited partners arising from share of loss not covered by capital contributions
+  Einzahlungsverpflichtungen persönlich haftender Gesellschafter-> Call obligations of limited partners arising from share of loss not covered by capital contributions
+  Einzahlungsverpflichtungen von Kommanditisten               -> Call obligations of general partners arising from share of loss not covered by capital contributions
+  Forderungen gegen verbundene Unternehmen                    -> Receivables from affiliated companies
+  Forderungen gegen verbundene Unternehmen, davon mit Restlaufzeit bis 1 Jahr-> Receivables from affiliated companies, due within 1 year
+  Forderungen gegen verbundene Unternehmen, davon mit Restlaufzeit über 1 Jahr-> Receivables from affiliated companies, due after more than 1 year
+  Forderungen gegen Unternehmen, mit denen ein Beteiligungsverhältnis besteht-> Receivables from other long-term investees and investors
+  Forderungen gegen Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit bis 1 Jahr-> Receivables from other long-term investees and investors, due within 1 year
+  Forderungen gegen Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr-> Receivables from other long-term investees and investors, due after more than 1 year
+  Eingeforderte noch ausstehende Kapitaleinlagen              -> Unpaid called capital contributions
+  Eingeforderte noch ausstehende Kapitaleinlagen persönlich haftender Gesellschafter-> Unpaid called capital contributions of general partners
+  Eingeforderte noch ausstehende Kapitaleinlagen Kommanditisten-> Unpaid called capital contributions of limited partners
+  Sonstige Vermögensgegenstände                               -> Other receivables and other assets
+  Sonstige Vermögensgegenstände, davon mit Restlaufzeit bis zu einem Jahr-> Other receivables and other assets, due within 1 year
+  Sonstige  Vermögensgegenstände, davon mit Restlaufzeit mehr als einem  Jahr-> Other receivables and other assets, due after more than 1 year
+  Wertpapiere des Umlaufvermögens                             -> Securities
+  Anteile an verbundenen Unternehmen (Umlaufvermögen)         -> Shares in affiliated companies (current assets)
+  Anteile an herrschender oder an mit Mehrheit beteiligter Gesellschaft (Umlaufvermögen)-> Shares in parent or in majority investor (current assets)
+  Anteile an Tochterunternehmen (Umlaufvermögen)              -> Shares in subsidiaries (current assets)
+  Eigene Anteile                                              -> Treasury shares
+  Sonstige Wertpapiere des Umlaufvermögens                    -> Other securities
+  Aktien innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Shares classified as current securities
+  Optionsscheine innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Warrants classified as current securities
+  Genussscheine innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Profit participation certificates classified as current securities
+  Investmentzertifikate innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Investment fund shares/units classified as current securities
+  Obligationen innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Bonds classified as current securities
+  Wandelschuldverschreibungen innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Convertible bonds classified as current securities
+  Festverzinsliche Wertpapiere innerhalb der sonstigen Wertpapiere des Umlaufvermögens-> Fixed-income securities classified as current securities
+  Übrige sonstige Wertpapiere des Umlaufvermögens             -> Miscellaneous other securities classified as current assets
+  Kassenbestand, Bundesbankguthaben, Guthaben bei Kreditinstituten und Schecks-> Cash-in-hand, central bank balances, bank balances and cheques
+  Schecks                                                     -> Cheques
+  Kasse                                                       -> Cash-in-hand
+  Bundesbankguthaben                                          -> Central bank balances
+  Guthaben bei Kreditinstituten                               -> Bank balances
+  Aktive Rechnungsabgrenzungsposten                           -> Prepaid expenses
+  Disagio/Damnum                                              -> Discount
+  Geldbeschaffungskosten                                      -> Cost of finance
+  Als Aufwand berücksichtigte Zölle und Verbrauchsteuern auf Vorräte-> Customs and excise duties relating to inventories and recognised as expenses
+  Als Aufwand berücksichtigte Umsatzsteuer auf Anzahlungen    -> Value added tax relating to payments on account and recognised as expenses
+  Geleistete Mietvorauszahlungen und verlorene Baukostenzuschüsse-> Prepaid rent and non-recoverable building cost subsidies
+  Sonstige aktive Rechnungsabgrenzung                         -> Other prepaid expenses
+  Aktiver Unterschiedsbetrag aus der Vermögensverrechnung     -> Excess of plan assets over post-employment benefit liability
+  Aktiver Ausgleichsposten für Organschaftsverhältnisse beim Organträger-> Asset-side adjustment item for consolidated tax group at group parent
+  Allgemeiner aktiver steuerlicher Ausgleichsposten           -> General asset-side tax adjustment item
+  Nicht durch Eigenkapital gedeckter Fehlbetrag               -> Deficit not covered by equity
+  Privatkonto (Einzelunternehmen) [Aktivseite]                -> Private account (sole proprietorship), deficit item
+  Anfangskapital [Aktivseite]                                 -> Private account (sole proprietorship), beginning balance, deficit item
+  Einlagen [Aktivseite]                                       -> Capital contributions in reporting period, deficit item
+  Kapitalanpassung nach BilMoG [Aktivseite]                   -> Transitional BilMoG equity corrections (assets)
+  Entnahmen [Aktivseite]                                      -> Capital withdrawals in reporting period, deficit item
+  Jahresüberschuss/-fehlbetrag [ Aktivseite]                  -> Net income/net loss for the financial year, general partner, deficit item
+  Nicht durch Vermögenseinlagen gedeckter Verlustanteil persönlich haftender Gesellschafter-> Share of loss of general partner not covered by capital contributions
+  Nicht durch Vermögenseinlagen gedeckte Entnahmen persönlich haftender Gesellschafter-> Withdrawals by general partners not covered by capital contributions
+  Nicht durch Vermögenseinlagen gedeckter Verlustanteil von Kommanditisten-> Share of loss of limited partner not covered by capital contributions
+  Nicht durch Vermögenseinlagen gedeckte Entnahmen von Kommanditisten-> Withdrawals by limited partners not covered by capital contributions
+  Festkapitalkonto (persönlich haftender Gesellschafter) [Aktivseite]-> Fixed capital account, general partner, deficit item
+  Variables Kapitalkonto (persönlich haftender Gesellschafter) [Aktivseite]-> Variable capital account, general partner, deficit item
+  Verlustvortragskonto (persönlich haftender Gesellschafter) [Aktivseite]-> Accumulated loss carryforward account, deficit item
+  Kommandit-Kapital (Kommanditist) [Aktivseite]               -> Fixed capital account, limited partner, deficit item
+  Variables Kapitalkonto (Kommanditist) [Aktivseite]          -> Variable capital account, limited partner, deficit item
+  Verlustausgleichskonto (Kommanditist) [Aktivseite]          -> Loss adjustment account, deficit item
+  Nicht eingeforderte ausstehende Einlagen (offen passivisch abgesetzt) [Aktivseite]-> Uncalled unpaid contributions to subscribed capital (deducted from equity on the face of the balance sheet)
+  Gesellschafterdarlehen mit Eigenkapital-Charakter [Aktivseite]-> Equity-equivalent partner loans, deficit item
+  Nachrangiges Kapital [Aktivseite]                           -> Subordinated capital, deficit item
+  Einlagen stiller Gesellschafter mit Eigenkapital-Charakter [Aktivseite]-> Equity-equivalent contributions by silent partners, deficit item
+  Rücklagen bei Personengesellschaften [Aktivseite]           -> Reserves (partnerships), deficit item
+  Gewinn-/Verlustvortrag [Aktivseite]                         -> Retained profits/accumulated losses brought forward, deficit item
+  Jahresüberschuss/-fehlbetrag [Aktivseite]                   -> Net income/net loss for the financial year, deficit item
+  Bilanzgewinn / Bilanzverlust [Aktivseite]                   -> Net retained profits/net accumulated losses, deficit item
+  Sonstige Aktiva                                             -> Other assets
+  Bilanzsumme, Summe Aktiva                                   -> Total assets
+  Gezeichnetes Kapital / Kapitalkonto/ Kapitalanteile         -> Subscribed capital/Capital account/Capital shares
+  Gezeichnetes Kapital (Kapitalgesellschaften)                -> Subscribed capital (corporations)
+  Privatkonto (Einzelunternehmen)                             -> Private account (sole proprietorship)
+  Anfangskapital [Privatkonto, Passivseite]                   -> Beginning balance, private account
+  Einlagen [Privatkonto, Passivseite]                         -> Capital contributions in reporting period, private account
+  Entnahmen [Privatkonto, Passivseite]                        -> Capital withdrawals in reporting period, private account
+  Jahresüberschuss/-fehlbetrag [Privatkonto, Passivseite]     -> Net income/net loss for the financial year, private account
+  Kapitalanteile der persönlich haftenden Gesellschafter      -> Capital shares of general partners
+  Festkapitalkonto (Komplementär)                             -> Fixed capital account (general partner)
+  Variables Kapitalkonto (persönlich haftender Gesellschafter)-> Variable capital account, general partner
+  Verlustvortragskonto (persönlich haftender Gesellschafter)  -> Accumulated loss carryforward account
+  Nicht eingeforderte ausstehende Einlagen der persönlich haftenden Gesellschafter-> Unpaid uncalled capital contributions of general partners
+  Kapitalanteile der Kommanditisten                           -> Capital share of limited partners
+  Kommandit-Kapital (Kommanditisten)                          -> Limited partner capital (limited partner)
+  Variables Kapitalkonto (Kommanditisten)                     -> Variable capital account, limited partner
+  Verlustausgleichskonto (Kommanditisten)                     -> Loss adjustment account
+  Nicht eingeforderte ausstehende Einlagen der Kommanditisten -> Unpaid uncalled capital contributions of limited partners
+  Nicht eingeforderte ausstehende Einlagen (offen passivisch abgesetzt)-> Uncalled unpaid contributions to subscribed capital (deducted from equity on the face of the balance sheet)
+  Eigene Anteile - offen vom Gezeichneten Kapital abgesetzt   -> Treasury shares, deducted from subscribed capital on the face of the balance sheet
+  Geschäftsguthaben der Genossen                              -> Paid-up shares in cooperatives
+  Geschäftsguthaben der verbleibende Mitglieder               -> Paid-up shares in cooperatives, remaining members
+  Geschäftsguthaben der mit Ablauf des Geschäftsjahres ausgeschiedenen Mitglieder-> Paid-up shares in cooperatives, withdrawing members
+  Geschäftsguthaben aus gekündigten Geschäftsanteilen         -> Paid-up shares in cooperatives, cancelled capital shares
+  Gesellschafterdarlehen mit EK-Charakter                     -> Equity-equivalent partner loans
+  Genussrechtskapital mit Eigenkapital-Charakter              -> Equity-equivalent profit participation capital
+  Nachrangiges Kapital ( Eigenkapital-Charakter)              -> Subordinated capital (equity equivalent)
+  Einlagen stiller Gesellschafter mit EK-Charakter            -> Equity-equivalent contributions by silent partners
+  Kapitalrücklage                                             -> Capital reserves
+  Agio aus der Ausgabe von Anteilen                           -> Share premium received on the issuance of shares
+  Agio aus der Ausgabe von Options- und Wandlungsrechten      -> Premium received on the issuance of options and conversion rights
+  Zahlung aus der Gewährung eines Vorzugs für Anteile         -> Payments as consideration for preferential rights for shares
+  Andere Zuzahlungen in das Eigenkapital                      -> Other additional capital contributions
+  Eingefordertes Nachschusskapital (bei GmbH)                 -> Unpaid supplementary calls (GmbH/private limited company)
+  Rücklage aus Kapitalherabsetzung (AG)                       -> Reserve from capital decrease (stock corporation)
+  Rücklagen bei Personengesellschaften                        -> Reserves (partnerships)
+  Gewinnrücklagen/Ergebnisrücklagen                           -> Revenue reserves
+  Gesetzliche Rücklage                                        -> Legal reserve
+  Rücklage für Anteile an einem herrschenden oder mehrheitlich beteiligten Unternehmen-> Reserve for shares in a parent or majority investor
+  Rücklage für eigene Anteile (nur Kapitalgesellschaften)     -> Reserve for treasury shares (corporations only)
+  Satzungsmäßige Rücklagen                                    -> Reserves provided for by the articles of association
+  Abgesetzter Geschäfts- oder Firmenwert                      -> Goodwill deducted from reserves
+  Gewinnrücklage mit Ausschüttungssperre für aktivierte Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebs-> Revenue reserve for capitalised business start-up and expansion expenses (restriction on distribution)
+  Gewinnrücklage mit Ausschüttungssperre für einen aktivierten Abgrenzungsposten für latente Steuern-> Revenue reserve for deferred tax assets (restriction on distribution)
+  Gewinnrücklage mit Ausschüttungssperre für aktivierte Aufwendungen im Zusammenhang mit der Euro-Umstellung-> Revenue reserve for capitalised expenses from conversion to the euro (restriction on distribution)
+  Sonderrücklage                                              -> Special reserve
+  Andere Gewinnrücklagen                                      -> Other revenue reserves
+  Andere Ergebnisrücklagen                                    -> Other revenue reserves (cooperatives)
+  Unterschiedsbetrag aus der Kapitalkonsolidierung            -> Negative goodwill
+  Gewinn- /Verlustvortrag                                     -> Retained profits/accumulated losses brought forward
+  Jahresüberschuss/-fehlbetrag (Bilanz)                       -> Net income/net loss for the financial year (balance sheet)
+  Bilanzgewinn / Bilanzverlust (Bilanz)                       -> Net retained profits/net accumulated losses
+  Währungsumrechnungsdifferenzen                              -> Foreign currency translation differences
+  Neubewertungsrücklage                                       -> Revaluation reserve
+  Nicht gedeckter Fehlbetrag (Passivausweis)                  -> Deficit not covered (reported in equity)
+  Nicht durch Eigenkapital gedeckter Fehlbetrag (Passivausweis)-> Deficit not covered by equity (reported in equity)
+  Sonstige Eigenkapitalpositionen                             -> Other equity items
+  Ausgleichsposten für Anteile anderer Gesellschafter, Minderheitenanteile und Anteile Dritter-> Minority interests
+  Sonderposten mit Rücklageanteil                             -> Special tax-allowable reserves
+  Steuerfreie Rücklagen                                       -> Untaxed reserves
+  Rücklage für Veräusserungsgewinne                           -> Reserve for disposal gains
+  Rücklage für Zuschüsse                                      -> Reserve for subsidies
+  Rücklage für Ersatzbeschaffung                              -> Replacement reserve
+  Rücklage durch Vornahme von Ansparabschreibungen            -> Tax-allowable reserve for future capital expenditures
+  Rücklage nach dem Steuerentlastungsgesetz                   -> Reserve under German Tax Relief Act
+  Steuerrechtliche Sonderabschreibungen                       -> Accelerated tax depreciation and write-downs
+  Steuerrechtliche Sonderabschreibungen auf Sachanlagen       -> Accelerated tax depreciation, tangible fixed assets
+  Steuerrechtliche Sonderabschreibungen auf Finanzanlagen     -> Accelerated tax write-downs, long-term financial assets
+  Steuerrechtliche Sonderabschreibungen auf Umlaufvermögen    -> Accelerated tax write-downs, current assets
+  Sonstige Sonderposten                                       -> Other special reserves
+  Einlagen stiller Gesellschafter                             -> Contributions by silent partners
+  Zur Durchführung der Kapitalerhöhung geleistete Einlagen    -> Contributions paid in to implement a capital increase
+  Sonderposten für Investitionszulagen und für Zuschüsse Dritter-> Special reserve for investment grants and subsidies
+  Ausgleichsposten für aktivierte eigene Anteile an Komplementärgesellschaften (Personenhandelsgesellschaften)-> Special reserve for capitalised own shares of general partner companies (commercial partnerships)
+  Ausgleichsposten für aktivierte Bilanzierungshilfen (Personenhandelsgesellschaften)-> Special reserve for recognised accounting conveniences (commercial partnerships)
+  Passiver Ausgleichsposten für Organschaftsverhältnisse beim Organträger-> Liability-side adjustment item for consolidated tax group at group parent
+  Allgemeiner Ausgleichsposten                                -> General liability-side tax adjustment item
+  Noch nicht verbrauchte Spendenmittel                        -> Unused donations
+  Andere Sonderposten                                         -> Other special reserves
+  Rückstellungen für Pensionen und ähnliche Verpflichtungen   -> Provisions for pensions and similar obligations
+  Für Direktzusagen                                           -> Direct pension commitments
+  Zuschussverpflichtungen für Pensionskassen und Lebensversicherungen-> Additional payment obligations to pension funds and life insurance policies
+  Steuerrückstellungen                                        -> Provisions for taxes
+  Gewerbesteuerrückstellung                                   -> Provision for trade tax
+  Körperschaftsteuerrückstellung                              -> Provision for corporate income tax
+  Rückstellung für sonstige Steuern (außer für latente Steuern)-> Provision for other taxes (except deferred tax liabilities)
+  Rückstellungen für latente Steuern                          -> Deferred tax liabilities
+  Sonstige Rückstellungen                                     -> Other provisions
+  Rückstellungen für ungewisse Verbindlichkeiten              -> Provisions for uncertain obligations
+  Rückstellungen für Gewährleistungen                         -> Provisions for warranties
+  Rückstellungen für drohende Verluste aus schwebenden Geschäften-> Provisions for expected losses from executory contracts
+  Aufwandsrückstellungen                                      -> Provisions for internal expenses
+  Rückstellungen für Währungsrisiken                          -> Provisions for foreign currency risks
+  Rückstellungen entsprechend dem Unterschiedsbetrag aus der Kapitalkonsolidierung-> Provisions for negative consolidation difference
+  Übrige sonstige Rückstellungen                              -> Miscellaneous other provisions
+  Anleihen                                                    -> Bonds
+  Anleihen, davon mit Restlaufzeit bis 1 Jahr                 -> Bonds, due within 1 year
+  Anleihen, davon mit Restlaufzeit bis 1 Jahr und Wandelanleihen-> Convertible bonds, due within 1 year
+  Anleihen, davon mit Restlaufzeit bis 1 Jahr und nicht konvertible Anleihen-> Non-convertible bonds, due within 1 year
+  Anleihen, davon mit Restlaufzeit bis 1 Jahr und Genussrechte mit Fremdkapitalcharakter-> Debt-equivalent profit participation rights, due within 1 year
+  Anleihen, davon mit Restlaufzeit über 1 Jahr                -> Bonds, due after more than 1 year
+  Anleihen, davon mit Restlaufzeit über 1 Jahr und Wandelanleihen-> Convertible bonds, due after more than 1 year
+  Anleihen, davon mit Restlaufzeit über 1 Jahr und nicht konvertible Anleihen-> Non-convertible bonds, due after more than 1 year
+  Anleihen, davon mit Restlaufzeit über 1 Jahr und Genussrechte mit Fremdkapitalcharakter-> Debt-equivalent profit participation rights, due after more than 1 year
+  Verbindlichkeiten gegenüber Kreditinstituten                -> Liabilities to banks
+  Verbindlichkeiten gegenüber Kreditinstituten, davon mit Restlaufzeit bis 1 Jahr-> Liabilities to banks, due within 1 year
+  Verbindlichkeiten gegenüber Kreditinstituten, davon mit Restlaufzeit über 1 Jahr-> Liabilities to banks, due after more than 1 year
+  Verbindlichkeiten gegenüber Kreditinstituten, davon mit Restlaufzeit über 1 Jahr bis 5 Jahre-> Liabilities to banks, due between 1 and 5 years
+  Verbindlichkeiten gegenüber Kreditinstituten, davon mit Restlaufzeit über 5 Jahre-> Liabilities to banks, due after more than 5 years
+  Erhaltene Anzahlungen auf Bestellungen                      -> Payments received on account of orders
+  Erhaltene Anzahlungen, davon mit Restlaufzeit bis 1 Jahr    -> Payments received on account of orders, due within 1 year
+  Erhaltene Anzahlungen, davon mit Restlaufzeit über 1 Jahr   -> Payments received on account of orders, due after more than 1 year
+  Erhaltene Anzahlungen, davon mit Restlaufzeit über 1 Jahr bis 5 Jahre-> Payments received on account of orders, due between 1 and 5 years
+  Erhaltene Anzahlungen, davon mit Restlaufzeit über 5 Jahre  -> Payments received on account of orders, due after more than 5 years
+  Verbindlichkeiten aus Lieferungen und Leistungen            -> Trade payables
+  Verbindlichkeiten aus Lieferungen und Leistungen, davon mit Restlaufzeit bis 1 Jahr-> Trade payables, due within 1 year
+  Verbindlichkeiten aus Lieferungen und Leistungen, davon mit Restlaufzeit über 1 Jahr-> Trade payables, due after more than 1 year
+  Verbindlichkeiten aus Lieferungen und Leistungen, davon mit Restlaufzeit über 1 Jahr bis 5 Jahre-> Trade payables, due between 1 and 5 years
+  Verbindlichkeiten aus Lieferungen und Leistungen, davon mit einer Restlaufzeit über 5 Jahre-> Trade payables, due after more than 5 years
+  Verbindlichkeiten aus dem Zentralregulierungs- und Delkrederegeschäft-> Liabilities from central settlement and del credere services
+  Verbindlichkeiten aus dem Zentralregulierungs- und Delkrederegeschäft, davon mit Restlaufzeit bis zu einem Jahr-> Liabilities from central settlement and del credere services, due within 1 year
+  Verbindlichkeiten aus Zentralregulierungs- und Delkredere, davon durch Pfandrechte oder ähnliches gesichert-> Liabilities from central settlement and del credere services, secured by liens or similar rights
+  Verbindlichkeiten aus Zentralregulierungs- und Delkredere, davon mit Restlaufzeit über 1 Jahr-> Liabilities from central settlement and del credere services, due after more than 1 year
+  Verbindlichkeiten aus Zentralregulierungs- und Delkredere, davon mit Restlaufzeit über 1 Jahr bis 5 Jahre-> Liabilities from central settlement and del credere services, due between 1 and 5 years
+  Verbindlichkeiten aus Zentralregulierungs- und Delkredere, davon mit einer Restlaufzeit über 5 Jahre-> Liabilities from central settlement and del credere services, due after more than 5 years
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel-> Liabilities on bills accepted and drawn
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit bis 1 Jahr-> Liabilities on bills accepted and drawn, due within 1 year
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit bis 1 Jahr und aus der Annahme gezogener Wechsel (Akzepte)-> Liabilities on bills accepted
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit bis 1 Jahr und aus der Ausstellung eigener Wechsel (Solawechsel)-> Liabilities on bills drawn (promissory notes)
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit über 1 Jahr-> Liabilities on bills accepted and drawn, due after more than 1 year
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit über 1 Jahr und aus der Annahme gezogener Wechsel (Akzepte)-> Liabilities on bills accepted, due after more than 1 year
+  Verbindlichkeiten aus der Annahme gezogener Wechsel und der Ausstellung eigener Wechsel, davon mit Restlaufzeit über 1 Jahr und aus der Ausstellung eigener Wechsel (Solawechsel)-> Liabilities on bills drawn (promissory notes), due after more than 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern                 -> Liabilities to shareholders
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr-> Liabilities to shareholders, due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr und zur Verteilung beschlossener Gewinn bzw. Dividende-> Liabilities to shareholders, resolved distribution/dividend, due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to shareholders, of which trade payables due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr gegenüber stillen Gesellschaftern-> Liabilities to shareholders of private limited company (GmbH) or to silent partners, due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr und Verbindlichkeiten gegenüber persönlich haftenden Gesellschaftern-> Liabilities to general partners, due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit bis 1 Jahr und Verbindlichkeiten gegenüber Kommanditisten-> Liabilities to limited partners, due within 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit einer Restlaufzeit über 1 Jahr-> Liabilities to shareholders, due after more than 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit über 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to shareholders, of which trade payables due after more than 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit über 1 Jahr gegenüber und stillen Gesellschaftern-> Liabilities to shareholders of private limited company (GmbH) or to silent partners, due after more than 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit über 1 Jahr und Verbindlichkeiten gegenüber persönlich haftenden Gesellschaftern-> Liabilities to general partners, due after more than 1 year
+  Verbindlichkeiten gegenüber Gesellschaftern, davon mit Restlaufzeit über 1 Jahr und Verbindlichkeiten gegenüber Kommanditisten-> Liabilities to limited partners, due after more than 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen         -> Liabilities to affiliated companies
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit einer Restlaufzeit bis zu einem Jahr-> Liabilities to affiliated companies, due within 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit Restlaufzeit bis 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to affiliated companies, of which trade payables due within 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit Restlaufzeit bis 1 Jahr und aus anderen Rechtsverhältnissen-> Liabilities to affiliated companies, under other legal relationships, due within 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit Restlaufzeit über 1 Jahr-> Liabilities to affiliated companies, due after more than 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit Restlaufzeit über 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to affiliated companies, of which trade payables due after more than 1 year
+  Verbindlichkeiten gegenüber verbundenen Unternehmen, davon mit Restlaufzeit über 1 Jahr und aus anderen Rechtsverhältnissen-> Liabilities to affiliated companies, under other legal relationships, due after more than 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht-> Liabilities to other long-term investees and investors
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit zu einem Jahr-> Liabilities to other long-term investees and investors, due within 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit bis 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to other long-term investees and investors, of which trade payables due within 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit bis 1 Jahr und gegenüber assoziierten Unternehmen-> Liabilities to associates, due within 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit bis 1 Jahr und gegenüber beteiligte Unternehmen-> Liabilities to long-term investors, due within 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit bis 1 Jahr und gegenüber Beteiligungen-> Liabilities to other long-term investees, due within 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr-> Liabilities to other long-term investees and investors, due after more than 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr und aus Lieferungen und Leistungen-> Liabilities to other long-term investees and investors, of which trade payables due after more than 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr und gegenüber assoziierte Unternehmen-> Liabilities to associates, due after more than 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr und gegenüber beteiligte Unternehmen-> Liabilities to long-term investors, due after more than 1 year
+  Verbindlichkeiten gegenüber Unternehmen, mit denen ein Beteiligungsverhältnis besteht, davon mit Restlaufzeit über 1 Jahr und gegenüber Beteiligungen-> Liabilities to other long-term investees, due after more than 1 year
+  Sonstige Verbindlichkeiten                                  -> Other liabilities
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit zu einem Jahr-> Other liabilities, due within 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit bis 1 Jahr und gegenüber Finanzbehörden-> Liabilities to tax authorities, due within 1 year
+  Sonstige Verbindlichkeiten, davon Verbindlichkeiten im Rahmen der sozialen Sicherheit mit Restlaufzeit bis 1 Jahr-> Social security obligations, due within 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit bis 1 Jahr und gegenüber Mitarbeitern-> Liabilities to employees, due within 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit bis 1 Jahr und gegenüber Organmitgliedern-> Liabilities to members of executive bodies, due within 1 year
+  Sonstige Verbindlichkeiten, davon partiarische Darlehen mit Restlaufzeit bis 1 Jahr-> Profit participation loans, due within 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit bis 1 Jahr und gegenüber Arbeitsgemeinschaften-> Liabilities to project consortiums, due within 1 year
+  Sonstige Verbindlichkeiten, davon Genussrechte mit Fremdkapitalcharakter mit Restlaufzeit bis 1 Jahr-> Debt-equivalent profit participation rights, due within 1 year
+  Übrige Verbindlichkeiten mit Restlaufzeit bis 1 Jahr        -> Other liabilities, due within 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit über 1 Jahr-> Other liabilities, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit über 1 Jahr und gegenüber Finanzbehörden-> Other liabilities to tax authorities, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon Verbindlichkeiten im Rahmen der sozialen Sicherheit mit Restlaufzeit über 1 Jahr-> Social security obligations, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit über 1 Jahr und gegenüber Mitarbeitern-> Liabilities to employees, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit über 1 Jahr und gegenüber Organmitgliedern-> Liabilities to members of executive bodies, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon partiarische Darlehen mit Restlaufzeit über 1 Jahr-> Profit participation loans, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon mit Restlaufzeit über 1 Jahr und gegenüber Arbeitsgemeinschaften-> Liabilities to project consortiums, due after more than 1 year
+  Sonstige Verbindlichkeiten, davon Genussrechte mit Fremdkapitalcharakter mit Restlaufzeit über 1 Jahr-> Debt-equivalent profit participation rights, due after more than 1 year
+  Übrige Verbindlichkeiten mit Restlaufzeit über 1 Jahr       -> Other liabilities, due after more than 1 year
+  Passive Rechnungsabgrenzungsposten                          -> Deferred income
+  Passive latente Steuern                                     -> Deferred tax liabilities
+  Bilanzsumme, Summe Passiva                                  -> Total equity and liabilities
+  Erfolgsrechnung                                             -> Profit and loss statement
+  Umsatzerlöse (GKV)                                          -> Sales (TC)
+  Erhöhung oder Verminderung des Bestandes an fertigen und unfertigen Erzeugnissen (GKV)-> Increase or decrease in finished goods inventories and work in progress (TC)
+  Veränderung des Bestandes an fertigen Erzeugnissen          -> Increase or decrease in finished goods inventories
+  Veränderung des Bestandes an unfertigen Erzeugnissen und unfertigen Leistungen-> Increase or decrease in work in progress
+  Veränderung des Bestandes an in Arbeit befindlicher Aufträge und in Ausführung befindlicher Bauaufträge-> Increase or decrease in orders in progress and construction contracts in progress
+  Erhöhung oder Verminderung des Bestands an Tieren           -> Increase or decrease in stocks of animals
+  Andere aktivierte Eigenleistungen (GKV)                     -> Other own work capitalised (TC)
+  Selbstgetätigte Großreparaturen                             -> Major repairs carried out internally
+  Selbsterstellte Anlagen                                     -> Internally generated assets
+  Gesamtleistung (GKV)                                        -> Gross revenue for the period (TC)
+  Sonstige betriebliche Erträge (GKV)                         -> Other operating income (TC)
+  Nebenerlöse aus Vermietung und Verpachtung                  -> Incidental rental and lease income
+  Nebenerlöse aus Provisionen, Lizenzen und Patenten          -> Incidental income from commissions, licences and patents
+  Andere Nebenerlöse                                          -> Other incidental income
+  Erträge aus Auflösung des Sonderpostens mit Rücklageanteil  -> Income from reversal of special tax-allowable reserves
+  Erträge aus Abgängen des Anlagevermögens                    -> Income from disposal of fixed assets
+  Erträge aus Zuschreibungen des Anlagevermögens              -> Income from reversal of write-downs of fixed assets
+  Erträge aus Schuldenkonsolidierung                          -> Income from consolidation of intercompany balances
+  Erträge aus Zwischenergebniseliminierung                    -> Income from consolidation of intercompany profits (losses)
+  Erträge aus Abgang/Entkonsolidierung                        -> Income from disposal/deconsolidation
+  Erträge aus der Auflösung von Rückstellungen                -> Income from reversal of provisions
+  Erträge aus Abgängen des Umlaufvermögens                    -> Income from disposal of current assets
+  Erträge aus Zuschreibungen des Umlaufvermögens              -> Income from reversal of write-downs of current assets
+  Erträge aus der Herabsetzung / Auflösung von Einzel- und  Pauschalwertberichtigungen-> Income from reduction in/reversal of specific and global valuation allowances
+  Erträge aus der Aktivierung unentgeltlich erworbener Vermögensgegenstände-> Income from capitalisation of assets acquired free of charge
+  Erträge aus der Herabsetzung von Verbindlichkeiten          -> Income from remission of liabilities
+  Zahlungseingänge auf in früheren Perioden abgeschriebene Forderungen-> Income from recoveries on receivables written off in prior periods
+  Kostenerstattungen, Rückvergütungen und Gutschriften für frühere Jahre-> Reimbursements, refunds and credit entries relating to prior periods
+  Erträge aus Steuerbelastungen an Organgesellschaften        -> Income from taxes charged to consolidated tax group subsidiaries
+  Erträge aus Verwaltungskostenumlagen                        -> Income from administrative expense allocations
+  Zuschüsse und Zulagen                                       -> Investment grants and subsidies
+  Versicherungsentschädigungen und Schadensersatzleistungen   -> Insurance recoveries and compensation payments
+  Kurs-/Währungsgewinne                                       -> Foreign exchange/currency gains
+  Erträge aus Eigenverbrauch                                  -> Income from own consumption
+  Andere sonstige betriebliche Erträge (GKV)                  -> Miscellaneous other operating income (TC)
+  Materialaufwand (GKV)                                       -> Cost of materials (TC)
+  Aufwendungen für Roh-, Hilfs- und Betriebsstoffe und für bezogene Waren-> Cost of raw materials, consumables and supplies, and of purchased merchandise
+  Aufwendungen für bezogene Waren                             -> Cost of purchased merchandise
+  Anschaffungsnebenkosten                                     -> Transaction costs
+  Aufwendungen für bezogene Leistungen                        -> Cost of purchased services
+  Rohergebnis (GKV)                                           -> Gross profit (TC)
+  Personalaufwand (GKV)                                       -> Personnel expenses (TC)
+  Löhne und Gehälter                                          -> Wages and salaries
+  Soziale Abgaben und Aufwendungen für Altersversorgung und für Unterstützung-> Social security, post-employment and other employee benefit costs
+  Abschreibungen (GKV)                                        -> Depreciation, amortisation and write-downs (TC)
+  Abschreibungen auf immaterielle Vermögensgegenstände des Anlagevermögens und Sachanlagen sowie auf aktivierte Aufwendungen für die Ingangsetzung und Erweiterung des Geschäftsbetriebs-> Depreciation on intangible and tangible fixed assets including activated costs related to the foundation of the company
+  Abschreibungen auf Ingangsetzungsaufwendungen               -> Amortisation of capitalised business start-up expenses
+  Abschreibungen auf immaterielle Vermögensgegenstände        -> Amortisation and write-downs of intangible fixed assets
+  Abschreibungen auf Geschäfts- oder Firmenwert               -> Goodwill amortisation and write-downs
+  Abschreibungen auf Sachanlagen                              -> Depreciation and write-downs of tangible fixed assets
+  Außerplanmäßige und Sonderabschreibungen                    -> Write-downs and impairment losses
+  Außerplanmäßige Abschreibungen                              -> Write-downs
+  Sonderabschreibungen                                        -> Impairment losses
+  Abschreibungen auf Vermögensgegenstände des Umlaufvermögens, soweit diese die in der Kapitalgesellschaft üblichen Abschreibungen überschreiten-> Write-downs of current assets to the extent that they exceed the write-downs that are usual for the corporation
+  Sonstige betriebliche Aufwendungen (GKV)                    -> Other operating expenses (TC)
+  Miet- und Pachtaufwendungen für unbewegliche Wirtschaftsgüter-> Rental and lease expenses for immovable assets
+  Aufwendungen für Leasing                                    -> Lease expenses
+  Aufwendungen für Energie                                    -> Energy expenses
+  Miet- und Pachtaufwendungen für bewegliche Wirtschaftsgüter -> Rental and lease expenses for movable assets
+  Aufwand für Fremdreparaturen und Instandhaltung             -> Cost of third-party repairs and maintenance
+  Versicherungsprämien, Gebühren und Beiträge                 -> Insurance premiums, fees and contributions
+  Aufwendungen für den Fuhrpark                               -> Vehicle fleet expenses
+  Werbeaufwand                                                -> Advertising expenses
+  Frachten / Verpackung                                       -> Freight and packaging
+  Provisionen                                                 -> Commissions
+  Aufwendungen für Kommunikation                              -> Communication expenses
+  Sonstige Aufwendungen für Personal                          -> Other personnel expenses
+  Einstellungen in Sonderposten mit Rücklageanteil            -> Transfers to special tax-allowable reserves
+  Übliche Abschreibungen auf Forderungen                      -> Normal bad debt allowances
+  Verluste aus dem Abgang von Vermögensgegenständen des Anlagevermögens-> Losses on disposal of fixed assets
+  Verluste aus dem Abgang von Vermögensgegenständen des Umlaufvermögens-> Losses on disposal of current assets
+  Sonstige Steuern, soweit  in den sonstigen Aufwendungen ausgewiesen-> Other taxes, recognised in other operating expenses
+  Sonstige Steuern, soweit in den sonstigen Aufwendungen ausgewiesen-> Other taxes, recognised in other operating expenses
+  Andere ordentliche sonstige betriebliche Aufwendungen       -> Miscellaneous other ordinary operating expenses
+  Aufwand aus Schuldenkonsolidierung                          -> Expense from consolidation of intercompany balances
+  Aufwand aus Zwischenergebniseliminierung                    -> Expense from consolidation of intercompany profits (losses)
+  Aufwand aus Abgang/Entkonsolidierung                        -> Expense from disposal/deconsolidation
+  Zuführungen zu Aufwandsrückstellungen                       -> Transfers to provisions for internal expenses
+  Kurs- / Währungsverluste                                    -> Foreign exchange/currency losses
+  Andere sonstige betriebliche Aufwendungen (GKV)             -> Miscellaneous other operating expenses (TC)
+  Genossenschaftliche Rückvergütung                           -> Refunds by cooperatives to members
+  Betriebsergebnis (GKV)                                      -> Operating result (TC)
+  Betriebsergebnis (Umsatzkosten)                             -> Operating result (CoS)
+  Bruttoergebnis vom Umsatz (UKV)                             -> Gross profit on sales (CoS)
+  Umsatzerlöse (UKV)                                          -> Sales (CoS)
+  Herstellungskosten der zur Erzielung der Umsatzerlöse erbrachten Leistungen (UKV)-> Cost of sales (CoS)
+  Fertigungsmaterial                                          -> Direct materials
+  Fertigungslöhne und -gehälter                               -> Direct labour
+  Fertigungsfremdleistungen                                   -> Direct third-party services
+  Sondereinzelkosten der Fertigung                            -> Special direct production costs
+  Gemeinkosten des Beschaffungsbereichs                       -> Indirect procurement costs
+  Gemeinkosten des Produktionsbereichs                        -> Indirect production costs
+  Gemeinkosten des Verwaltungsbereichs                        -> Indirect administration expenses attributable to production function
+  Herstellungsbedingte planmäßige Abschreibungen auf Sachanlagen und Vermögensgegenstände des Umlaufvermögens-> Depreciation of tangible fixed assets and write-downs of current assets attributable to production function
+  Herstellungsbedingte außerplanmäßige Abschreibungen auf Sachanlagen und Vermögensgegenstände des Umlaufvermögens-> Write-downs of tangible fixed assets and current assets attributable to production function
+  In die Herstellungskosten einbezogene Aufwandszinsen        -> Interest cost included in production costs
+  Vertriebskosten (UKV)                                       -> Selling expenses (CoS)
+  Vertriebseinzelkosten                                       -> Direct selling expenses
+  Sondereinzelkosten des Vertriebs                            -> Special direct selling expenses
+  Gemeinkosten des Vertriebs                                  -> Indirect selling expenses
+  Verwaltungskosten des Vertriebs                             -> Administrative expenses attributable to selling function
+  Vertriebsbedingte planmäßige Abschreibungen auf Sachanlagen und Vermögensgegenstände des Umlaufvermögens-> Depreciation of tangible fixed assets and write-downs of current assets attributable to selling function
+  Vertriebsbedingte außerplanmäßige Abschreibungen auf Sachanlagen und Vermögensgegenstände des Umlaufvermögens-> Write-downs of tangible fixed assets and current assets attributable to selling function
+  Allgemeine Verwaltungskosten (UKV)                          -> General and administrative expenses (CoS)
+  Kosten der Geschäftsführung und anderer Unternehmensorgane  -> Expenses of management and other executive bodies
+  Kosten für Sozial- und Schulungseinrichtungen               -> Costs of social and training facilities
+  Sonstige Kosten der allgemeinen Verwaltung                  -> Other general and administrative expenses
+  Sonstige betriebliche Erträge (UKV)                         -> Other operating income (CoS)
+  Nebenerlöse aus Vermietung und Verpachtung (UKV)            -> Incidental rental and lease income (CoS)
+  Nebenerlöse aus Provisionen, Lizenzen und Patenten (UKV)    -> Incidental income from commissions, licences and patents (CoS)
+  Andere Nebenerlöse (UKV)                                    -> Other incidental income (CoS)
+  Erträge aus Auflösung des Sonderpostens mit Rücklageanteil (UKV)-> Income from reversal of special tax-allowable reserves (CoS)
+  Erträge aus Abgängen des Anlagevermögens (UKV)              -> Income from disposal of fixed assets (CoS)
+  Erträge aus Zuschreibungen des Anlagevermögens (UKV)        -> Income from reversal of write-downs of fixed assets (CoS)
+  Erträge aus Schuldenkonsolidierung (UKV)                    -> Income from consolidation of intercompany balances (CoS)
+  Erträge aus Zwischenergebniseliminierung (UKV)              -> Income from consolidation of intercompany profits (CoS)
+  Erträge aus Abgang/Entkonsolidierung (UKV)                  -> Income from disposal/deconsolidation (CoS)
+  Erträge aus der Auflösung von Rückstellungen (UKV)          -> Income from reversal of provisions (CoS)
+  Erträge aus Abgängen des Umlaufvermögens (UKV)              -> Income from disposal of current assets (CoS)
+  Erträge aus Zuschreibungen des Umlaufvermögens (UKV)        -> Income from reversal of write-downs of current assets (CoS)
+  Erträge aus der Herabsetzung / Auflösung von Einzel- und Pauschalwertberichtigungen (UKV)-> Income from reduction in/reversal of specific and global valuation allowances (CoS)
+  Erträge aus der Aktivierung unentgeltlich erworbener Vermögensgegenstände (UKV)-> Income from capitalisation of assets acquired free of charge (CoS)
+  Erträge aus der Herabsetzung von Verbindlichkeiten (UKV)    -> Income from remission of liabilities (CoS)
+  Zahlungseingänge auf in früheren Perioden abgeschriebene Forderungen (UKV)-> Income from recoveries on receivables written off in prior periods (CoS)
+  Kostenerstattungen, Rückvergütungen und Gutschriften für frühere Jahre (UKV)-> Reimbursements, refunds and credit entries relating to prior periods (CoS)
+  Erträge aus Steuerbelastungen an Organgesellschaften (UKV)  -> Income from taxes charged to consolidated tax group subsidiaries (CoS)
+  Erträge aus Verwaltungskostenumlagen (UKV)                  -> Income from administrative expense allocations (CoS)
+  Zuschüsse und Zulagen (UKV)                                 -> Investment grants and subsidies (CoS)
+  Versicherungsentschädigungen und Schadensersatzleistungen (UKV)-> Insurance recoveries and compensation payments (CoS)
+  Kurs-/Währungsgewinne (UKV)                                 -> Foreign exchange/currency gains (CoS)
+  Erträge aus Eigenverbrauch (UKV)                            -> Income from own consumption (CoS)
+  Andere sonstige betriebliche Erträge (UKV)                  -> Miscellaneous other operating income (CoS)
+  Sonstige betriebliche Aufwendungen außerhalb des Herstellungs-, Vertriebs- und Verwaltungsbereichs (UKV)-> Other operating expenses not classified as cost of sales, selling and administrative expenses (CoS)
+  Nicht aktivierte Herstellungsaufwendungen (UKV)             -> Production costs not capitalised (CoS)
+  Aufwendungen für die Forschung und Entwicklung (UKV)        -> Research and development costs (CoS)
+  Ordentliche sonstige Aufwendungen (UKV)                     -> Other ordinary operating expenses (CoS)
+  Einstellungen in Sonderposten mit Rücklageanteil (UKV)      -> Transfers to special tax-allowable reserves (CoS)
+  Zuführungen zu Aufwandsrückstellungen (UKV)                 -> Transfers to provisions for internal expenses (CoS)
+  Abschreibungen auf den Geschäfts- oder Firmenwert sowie auf Ingangsetzungsaufwendungen (UKV)-> Amortisation and write-downs of goodwill and capitalised business start-up expenses (CoS)
+  Andere sonstige betriebliche Aufwendungen (UKV)             -> Miscellaneous other operating expenses (CoS)
+  Finanz- und Beteiligungsergebnis                            -> Financial result
+  Erträge aus Beteiligungen                                   -> Income from long-term equity investments
+  Aus Beteiligungen an verbundenen Unternehmen                -> Income from long-term equity investments in affiliated companies
+  Aus Beteiligungen an nicht verbundenen Unternehmen          -> Income from long-term equity investments in non-affiliated companies
+  Auf Grund einer Gewinngemeinschaft, eines Gewinnabführungs- oder Teilgewinnabführungsvertrags erhaltene Gewinne (Mutter)-> Income from profits received under profit pooling, profit and loss transfer, or partial profit transfer agreements (parent)
+  Erhaltene Gewinne aufgrund einer Gewinngemeinschaft         -> Income from profits received under a profit pooling agreement
+  Erhaltene Gewinne aufgrund eines Gewinn- oder Teilgewinnabführungsvertrags-> Income from profits received under a profit and loss transfer or partial profit transfer agreement
+  Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens-> Income from other securities and long-term loans
+  Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens von nicht verbundenen Unternehmen-> Income from other securities and long-term loans, from non-affiliated companies
+  Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens von verbundenen Unternehmen-> Income from other securities and long-term loans, from affiliated companies
+  Zins- und Dividendenerträge                                 -> Interest and dividend income
+  Erhaltene Ausgleichszahlungen (als aussenstehender Aktionär)-> Compensation payments received as an outside shareholder
+  Sonstige Zinsen und ähnliche Erträge                        -> Other interest and similar income
+  Abschreibungen auf Finanzanlagen und auf Wertpapiere des Umlaufvermögens-> Write-downs of long-term financial assets and securities classified as current assets
+  Abschreibungen auf Finanzanlagen                            -> Write-downs of long-term financial assets
+  Einzelwertberichtigungen auf langfristige Ausleihungen      -> Specific valuation allowance on long-term loans
+  Pauschalwertberichtigungen auf langfristige Ausleihungen    -> Global valuation allowances on long-term loans
+  Übliche und unübliche Abschreibungen auf Wertpapiere des Umlaufvermögens-> Normal and unusual write-downs of securities classified as current assets
+  Aufwendungen aus Verlustübernahmen (Mutter)                 -> Cost of loss absorption (parent)
+  Übernommene Verluste aufgrund einer Gewinngemeinschaft      -> Losses absorbed on the basis of a profit pooling agreement
+  Übernommene Verluste aufgrund eines Gewinn- oder Teilgewinnabführungsvertrags-> Losses absorbed on the basis of a profit and loss transfer or partial profit transfer agreement
+  Zinsen und ähnliche Aufwendungen                            -> Interest and similar expenses
+  Zinsaufwendungen aus der Abzinsung von Rückstellungen       -> Interest expenses from the discounting of provisions
+  Zinsaufwand ohne Abzinsung von Rückstellungen               -> Interest expenses excluding expenses from the discounting of provisions
+  Sonstiges Finanzergebnis                                    -> Other financial results
+  Ergebnis der gewöhnlichen Geschäftstätigkeit                -> Result from ordinary activities
+  Außerordentliches Ergebnis                                  -> Extraordinary result
+  Außerordentliche Erträge                                    -> Extraordinary income
+  Erträge durch Stilllegung von Betriebsteilen                -> Gains from discontinued operations
+  Erträge durch Verkauf von bedeutenden Grundstücken          -> Gains from sales of significant land
+  Erträge durch Verkauf von bedeutenden Beteiligungen         -> Gains from sales of significant long-term equity investments
+  Erträge durch Verschmelzung und Umwandlung                  -> Gains from mergers and reorganisations
+  Andere außerordentliche Erträge                             -> Other extraordinary income
+  Außerordentliche Aufwendungen                               -> Extraordinary expense
+  Verluste durch Stilllegung von Betriebsteilen               -> Losses from discontinued operations
+  Verluste durch Verschmelzung und Umwandlung                 -> Losses from mergers and reorganisations
+  Verluste durch außergewöhnliche Schadensfälle               -> Losses from extraordinary damage
+  Aufwendungen für Restrukturierungs- und Sanierungsmaßnahmen -> Restructuring and reorganisation costs
+  Andere außerordentliche Aufwendungen                        -> Other extraordinary expense
+  Steuern vom Einkommen und Ertrag                            -> Taxes on income
+  Körperschaftsteuer                                          -> Corporate income tax
+  Solidaritätszuschlag                                        -> Solidarity surcharge
+  Gewerbesteuer                                               -> Trade tax
+  Kapitalertragsteuer                                         -> Capital gains tax
+  Steuernachzahlungen für Vorjahre (Steuern vom Einkommen und Ertrag)-> Backpayments of taxes for prior years (taxes on income)
+  Steuererstattungen für Vorjahre (Steuern vom Einkommen und Ertrag)-> Tax refunds for prior years (taxes on income)
+  Erträge aus der Auflösung von Steuerrückstellungen (Steuern vom Einkommen und Ertrag)-> Income from reversal of tax provisions (taxes on income)
+  Latente Steuern                                             -> Deferred taxes
+  Ertrag aus der Veränderung latenter Steuern                 -> Income from change in deferred taxes
+  Aufwand aus der Veränderung latenter Steuern                -> Expenses from change in deferred taxes
+  Sonstige Steuern                                            -> Other taxes
+  In den Umsatzerlösen enthaltene Verbrauchsteuern und Monopolabgaben-> Excise duties and monopoly levies included in sales
+  Steuernachzahlungen für Vorjahre (sonstige Steuern)         -> Backpayments of taxes for prior years (other taxes)
+  Steuererstattungen für Vorjahre (sonstige Steuern)          -> Tax refunds for prior years (other taxes)
+  Erträge aus der Auflösung von Steuerrückstellungen (sonstige Steuern)-> Income from reversal of tax provisions (other taxes)
+  Übrige sonstige Steuern                                     -> Miscellaneous other taxes
+  Verlust- bzw. Gewinnabführung (Tochter)                     -> Profit and loss transfer (subsidiary)
+  Erträge aus Verlustübernahme                                -> Loss transfer
+  Verlustabführung aufgrund einer Gewinngemeinschaft          -> Loss transfer on the basis of profit pooling
+  Verlustabführung aufgrund eines Gewinn- oder Teilgewinnabführungsvertrags-> Loss transfer on the basis of a profit and loss transfer or partial profit transfer agreement
+  Erträge auf Grund einer Gewinngemeinschaft, eines Gewinnabführungs- oder Teilgewinnabführungsvertrags abgeführte Gewinne-> Profit transfer
+  Gewinnabführung aufgrund einer Gewinngemeinschaft           -> Profit transfer on the basis of profit pooling
+  Gewinnabführung aufgrund eines Gewinn- oder Teilgewinnabführungsvertrags-> Profit transfer on the basis of a profit and loss transfer or partial profit transfer agreement
+  Vergütungen für Genussrechtskapital                         -> Remuneration for profit participation capital
+  Jahresüberschuss/-fehlbetrag                                -> Net income/net loss for the financial year
+  Korrekturenblatt                                            -> Sheet for corrections
+  Stille Reserven in Immaterielle Vermögensgegenstände        -> Hidden reserves in intangible fixed assets
+  Stille Reserven in Sachanlagen                              -> Hidden reserves in tangible fixed assets
+  Stille Reserven in Beteiligungen                            -> Hidden reserves in investments
+  Stille Reserven in Vorräte                                  -> Hidden reserves in inventories
+  Stille Reserven in Wertpapiere                              -> Hidden reserves in securities
+  Stille Reserven                                             -> Hidden reserves
+  Unterdotierte Rückstellungen                                -> Underfunded provisions
+  Verbindlichkeiten mit Eigenkapitalcharakter                 -> Liabilities with equity characteristics
+  Verbindlichkeiten für Vermögen ausserhalb der Bilanz        -> Liabilities for off-balance sheet assets
+  Zuführung Pensionsrückstellungen                            -> Transfer in provisions for pensions and similar obligations
+  Unternehmerlohn außerhalb des Betriebsgewinnes              -> Fee of entrepreneur outside result
+  % aus zu schütten                                           -> % distributable
+  Bilanzgewinn bei Kapitalgesellschaften, soweit auszuschütten-> Unappropriated profit at companies limited by shares, as far as distributable
+  Variables Kapital, Kommanditisten                           -> Variable capital, limited partners
+  % disponible                                                -> % available
+  Disponibles positives Kapital, Kommanditisten               -> Free available positive capital of limited partners
+  Sonderposten für Zuschüsse und Zulagen                      -> Special account for grants and allowances
+  % Eigenkapitalcharakter                                     -> % equity characteristics
+  Sonderposten für Zuschüsse und Zulagen mit Eigenkapitalcharakter-> Special account for grants and allowances with equity characteristics
+  Verbindlichkeiten gegenüber Gesellschaftern und verbundenen Unternehmen mit Restlaufzeit > 5 Jahr-> Loans to shareholders and affiliated companies due after more than 5 years
+  Unregelmäßige oder ungewöhnlich hohe, disponierbare betriebliche Erträge-> Irregular or extraordinary income
+  Unregelmäßige oder ungewöhnlich hohe, disponierbare betriebliche Aufwendungen-> Irregular or extraordinary expenses
+  Erträge aus dem Abgang von und der Zuschreibung zu Finanzanlagen und Wertpapieren des Umlaufvermögens-> Capital gains/losses on securities outside result
+  Ausleihungen gegenüber Gesellschaftern (Finanzanlagevermögen)-> Loans to shareholders
+  Ausstehende Einlagen und Zuschüsse, soweit eingefordert     -> Called contributions to subscribed capital
+  Darlehen mit Fremdkapitalcharakter in Kapitalanteile Gesellschafter und Kommanditisten-> Capital contributions of participants with debt-equivalent characteristics
+  Stille Lasten                                               -> Off balance costs
+  Bilanzgewinn / Bilanzverlust bei Kapitalgesellschaften      -> Net retained profits/net accumulated losses corporations
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file TXDE-K.frm
+;
+  Berichtsmanager                                             -> Report wizard
+- URA Rating                                                  -> URA Rating
+  Fortsetzung                                                 -> Continuation
+  Basisdaten Ratingkennzahlen                                 -> Underlying values of rating ratios
+  Aktiva                                                      -> Assets
+  Passiva                                                     -> Liabilities
+  Bilanz (kurz)                                               -> Balance sheet (short)
+  Erfolgsrechnung (kurz)                                      -> Income statement (short)
+  Spezifizierung Bilanz                                       -> Specification of Balance sheet
+  Spezifizierung Erfolgsrechnung                              -> Specification of Income statement
+
+
+;--------------------------------------------------------------------------------------------------------------------------------------------
+; file TXDE-LocalScripts.fsf
+;
+  FINAN XML Datei für URA Rating Factory                      -> FINAN XML File for URA Rating Factory
+  FINAN CSV Datei für URA Rating Factory                      -> FINAN CSV File for URA Rating Factory
+  FINAN XML Datei                                             -> FINAN XML File
+  FINAN CSV Datei                                             -> FINAN CSV File
+  FINAN CSV Datei (Schablone mit alle Konten)                 -> FINAN XML File (template with all accounts)
+
+

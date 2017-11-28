@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document version="0.0.1" date="1-6-2016" author="Topicus Finan" title="Fyndoo Rapportage" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+    <PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+    <ReportName><data src="chineseRoom" name="FAMTitle">Financieringsaanvraag</data></ReportName>
+    <Of><data src="chineseRoom" name="Of">van</data></Of>
+    <DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+    <MapRequestType_visible><data src="fesModel"><variables function="isVisible" var="Q_MapRequestType"/></data></MapRequestType_visible>
+    <MapOrganisationType_visible><data src="fesModel"><variables function="isVisible" var="Q_MapOrganisationType"/></data></MapOrganisationType_visible>
+    <MapFinancials_visible><data src="fesModel"><variables function="isVisible" var="Q_MapFinancials"/></data></MapFinancials_visible>
+    <MapFundingOptions_visible><data src="fesModel"><variables function="isVisible" var="Q_MapFundingOptions"/></data></MapFundingOptions_visible>
+    <MapGeneralData_visible><data src="fesModel"><variables function="isVisible" var="Q_MapGeneralData"/></data></MapGeneralData_visible>
+    <MapOrganisationProfile_visible><data src="fesModel"><variables function="isVisible" var="Q_MapOrganisationProfile"/></data></MapOrganisationProfile_visible>
+    <MapCrowdFund_visible><data src="fesModel"><variables function="isVisible" var="Q_MapCrowdFund"/></data></MapCrowdFund_visible>
+    <MapFinancingNeed_visible><data src="fesModel"><variables function="isVisible" var="Q_MapFinancingNeed"/></data></MapFinancingNeed_visible>
+    <MapFinancialPosition_visible><data src="fesModel"><variables function="isVisible" var="Q_MapFinancialPosition"/></data></MapFinancialPosition_visible>
+    <MapCollaterals_visible><data src="fesModel"><variables function="isVisible" var="Q_MapCollaterals"/></data></MapCollaterals_visible>
+    <MapSpecificationAccountsReceivables_visible><data src="fesModel"><variables function="isVisible" var="Q_MapSpecificationAccountsReceivables"/></data></MapSpecificationAccountsReceivables_visible>
+    <MapSpecificationLease_visible><data src="fesModel"><variables function="isVisible" var="Q_MapSpecificationLease"/></data></MapSpecificationLease_visible>
+    <MapSpecificationCommercialRealEstate_visible><data src="fesModel"><variables function="isVisible" var="Q_MapSpecificationCommercialRealEstate"/></data></MapSpecificationCommercialRealEstate_visible>
+    <MapDocuments_visible><data src="fesModel"><variables function="isVisible" var="Q_MapDocuments"/></data></MapDocuments_visible>
+    <MapSpecificationEquityFinance_visible><data src="fesModel"><variables function="isVisible" var="Q_MapSpecificationEquityFinance"/></data></MapSpecificationEquityFinance_visible>
+    <CurrencyText><data src="chineseRoom" name="ScaleLabelFAM">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+    <CompanyName></CompanyName>
+    <CompanyPlaceOfResidence></CompanyPlaceOfResidence>
+    <CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+    <CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+
+    <Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+    <Periods><data src="fesModel"><columns delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+</properties>
+
+<newpage name="frontpage">
+  <img id="logo"><data src="map" var="logo" /></img>
+  <p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<newpage name="normal">
+  <img id="logo"><data src="map" var="logo" /></img>
+  <p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="6coltable" visible="./document/properties/MapRequestType_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapRequestType" varTo="Q_MapRequestType" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<table class="6coltable" visible="./document/properties/MapOrganisationType_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapOrganisationType" varTo="Q_MapOrganisationType" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancials_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancials_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapFinancials" varTo="Q_MapFinancials" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFundingOptions_visible/text()='true'" />
+
+<table class="6coltable">
+  <tr class="level1empty"><td><data src="fesModel"><variables var="Product" function="getTitle"/></data></td><td> </td></tr>
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Product" depth="1" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="level0empty">hidetupleheader</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapGeneralData_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapGeneralData_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapGeneralData" varTo="Q_MapGeneralData" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapOrganisationProfile_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapOrganisationProfile_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapOrganisationProfile" varTo="Q_MapOrganisationProfile" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapCrowdFund_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapCrowdFund_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapCrowdFund" varTo="Q_MapCrowdFund" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancingNeed_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancingNeed_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancingNeed" varFrom="FacilityNeed" varTo="FacilityNeed" depth="3" />
+    <variables var="Q_MapFinancingNeed" varFrom="FacilitySelection" varTo="FacilitySelection" depth="3" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<table class="6coltable" visible="./document/properties/MapFinancingNeed_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancingNeed" depth="3" varFrom="InvestmentPlanExternal" varTo="InvestmentPlanExternal" />
+    <variables var="InvestmentPlanDescription" depth="1" />
+    <variables var="Q_MapFinancingNeed" depth="3" varFrom="FinancingPlanExternal" varTo="FinancingPlanExternal" />
+    <variables var="InvestmentPlanDescription" depth="1" />
+    <presentation prefill="true" disableMinusCorrection="true" titleSuffix="" showHeaderRow="true" showHeaderRowOnNewPage="true" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancingNeed_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancingNeed_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancingNeed" varFrom="ExistingLoans" varTo="ExistingLoans" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancialPosition_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancialPosition_visible/text()='true'">
+  <data src="multidoctable">
+    <columns header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancialPosition" depth="3" varFrom="BalanceSheetAssets" />
+    <presentation prefill="true" filterEmptyRows="false" titleSuffix="" showHeaderRowOnNewPage="true" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancialPosition_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancialPosition_visible/text()='true'">
+  <data src="multidoctable">
+    <columns header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancialPosition" depth="3" varFrom="BalanceSheetEquityAndLiabilities" />
+    <variables var="Q_MapFinancialPosition" depth="1" varFrom="BalanceSheetDescription" />
+    <presentation prefill="true" filterEmptyRows="false" titleSuffix="" showHeaderRowOnNewPage="true" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapFinancialPosition_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapFinancialPosition_visible/text()='true'">
+  <data src="multidoctable">
+    <columns header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_MapFinancialPosition" depth="3" varFrom="IncomeStatement" />
+    <variables var="Q_MapFinancialPosition" depth="1" varFrom="IncomeStatementDescription" />
+    <presentation prefill="true" filterEmptyRows="false" titleSuffix="" showHeaderRowOnNewPage="true" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapCollaterals_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapCollaterals_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapCollaterals" varTo="Q_MapCollaterals" depth="5" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapSpecificationAccountsReceivables_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapSpecificationAccountsReceivables_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapSpecificationAccountsReceivables" varTo="Q_MapSpecificationAccountsReceivables" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapSpecificationLease_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapSpecificationLease_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapSpecificationLease" varTo="Q_MapSpecificationLease" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapSpecificationCommercialRealEstate_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapSpecificationCommercialRealEstate_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapSpecificationCommercialRealEstate" varTo="Q_MapSpecificationCommercialRealEstate" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+<clearpage visible="./document/properties/MapSpecificationEquityFinance_visible/text()='true'" />
+<table class="6coltable" visible="./document/properties/MapSpecificationEquityFinance_visible/text()='true'">
+  <data src="multidoctable">
+    <columns addDummyColumnWhenNoColumnsFound="true" header="" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+    <variables var="Q_ROOT" varFrom="Q_MapSpecificationEquityFinance" varTo="Q_MapSpecificationEquityFinance" depth="4" />
+    <presentation prefill="true" titleSuffix="" showHeaderRow="false" showHeaderRowOnNewPage="true" showBlankLines="true" showSingleValueVariablesOnce="true" showMemoFieldsOnNewLine="true">
+      <overrideStyle old="localtotal">level2single</overrideStyle>
+      <overrideStyle old="level2single">hidewarnings</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+</document>

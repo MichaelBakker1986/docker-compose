@@ -1,0 +1,196 @@
+{&&Language=English}
+
+.SectorList PrimaryTitle="Standaard Bedrijfsindeling 2008",SecondaryTitle="Standaard Bedrijfsindeling 2008"
+.SectorList PrimaryFile="SECTORS-NLD.dat"
+.SectorList SecondaryFile="SECTORS-NLD.dat"
+
+; Koppeling sector bestanden (verborgen)
+.Variables
+
+XXXXX    X     1
+XXXXX    X     2
+PPPPP   FN     3               Schaal factor Overige                           \XOverigeFactor
+PPPPP   FN     3               Schaal factor Balans                            \XBalansFactor
+PPPPP   FN     3               Schaal factor Resultatenrekening                \XResRekFactor
+
+P   I 0 AN   1 2               $>Company quarters area (m2)<$                  \XDakOpv
+P   I 0 AN     3               $>Showroom-space<$                              \XVerkOpv
+P   I 0 AN     3               $>Warehouse-space<$                             \XMagOpv
+P   I 0 AN     3               $>Production-space<$                            \XProdOpv
+P   I 0 AN     3               $>Office-space<$                                \XKantoorOpv
+I   I 0 AN  *  3               $>Other space<$                                 \XOvOpv
+P   I 0=AN    -3-1             $>Total indoor space<$                          \=XDakOpv
+P   I 1 AN     2               $>Number of employees<$                         \XTotKracht
+P   I 1 AN=    3               $>Number of managing directors<$                \XDirKracht
+P   I 1 AN  *  3               $>Number of staff employed<$                    \XPersKracht
+P   I 1=AN  * -3               $>Number of staff paid for<$                    \XBetKracht
+I   I 1 AN=    3               $>Unpaid employees<$                            \XOnbetKracht
+C $>For example family members contributing labour<$
+P   I 1=AN    -3=              =XTotKracht                                     \=XTotKracht
+P   I 0 AN     3               $>Number of files<$                             \XAantalWaarn
+
+X   X    X     4
+P   I   CN C   5               $>Benchmark year approved<$                     \XNormThere
+
+P   P   BN   1 2               $>Balance sheet<$                               \XBalans=XBalAkt
+P   I   BN     3               $>Intangible fixed assets<$                     \XImmatAkt
+P   I   BN     3               $>Real estate<$                                 \XOnrGoed
+P   I   BN     3               $>Plant & equipment<$                           \XBedrUitr
+P   I   BN     3               $>Financial fixed assets<$                      \XFinVastAkt
+P   I   BN     3               $>Inventories<$                                 \XVrd
+P   I   BN     3               $>Receivables<$                                 \XVord
+P   I   BN  *  4               $>Accounts receivable-trade<$                   \XHandDeb
+P   I   BN     4               $>Other receivables<$                           \XOvVord
+P   I  =BN    -4               =XVord                                          \=XVord
+P   I   BN     3               $>Cash and marketable securities<$              \XLiqMid
+P   P  =BN    =3=              $>Total assets<$                                \XBalAkt
+P   I   BN   1 3               $>Net worth<$                                   \XEigenVerm
+P   I   BN     3               $>Provisions<$                                  \XVoorz
+P   I   BN     3               $>Long-term debts<$                             \XLangVV
+P   I   BN     3               $>Current liabilities<$                         \XKortVV
+P   I   BN  *  4               $>Accounts payable-trade<$                      \XHandCred
+P   I   BN     4               $>Other interest bearing debt<$                 \XOvKortCred
+P   I  =BN    -4               =XKortVV                                        \=XKortVV
+P   P  =BN    =3=              $>Total liabilities<$                           \XBalPas
+
+P   P   FN     2               $>Profit and loss account<$                     \XResRek=XResNaBel
+P   I   FN     3               $>Net sales<$                                   \XNettoOmzet
+
+P   I   FN     4               $>Group<$ 1                                     \XOmzetGr1
+P   I   FN     4               $>Group<$ 2                                     \XOmzetGr2
+P   I   FN     4               $>Group<$ 3                                     \XOmzetGr3
+P   I   FN     4               $>Group<$ 4                                     \XOmzetGr4
+P   I   FN     4               $>Group<$ 5                                     \XOmzetGr5
+P   I   FN     4               $>Group<$ 6                                     \XOmzetGr6
+P   I   FN     4               $>Other<$                                       \XOmzetGr10
+P   I   FN    -4               $>Net sales<$                                   \=XNettoOmzet
+
+P   I   FN     3               $>Change in inventories<$                       \XProdVrdMut
+P   I  -FN     3               $>Costs of purchase<$                           \XInkW
+I   P  =FN    -3               $>Gross Profit<$                                \XBrutoWinst
+P   I   FN     3               $>Other operating income<$                      \XOvBedrOpbr
+P   I  -FN     3               $>Operating expenses<$                          \XBedrK
+P   I   FN     4               $>Staff expenses<$                              \XPersK
+P   I   FN     4               $>Costs of production<$                         \XProdK
+P   I   FN     4               $>Costs of furniture and fixtures<$             \XInventK
+P   I   FN     4               $>Office expenses<$                             \XGebK
+P   I   FN     4               $>Transportation expenses<$                     \XTranspK
+P   I   FN     4               $>Selling expenses<$                            \XVerkoopK
+P   I   FN     4               $>Expenses for monitoring/control operations<$  \XAlgK
+P   I   FN  *  4               $>Other operating expenses<$                    \XOvK
+P   I  =FN    -4=              =XBedrK                                         \=XBedrK
+P   I  -FN     3               $>Depreciations<$                               \XAktAfs
+P   I   FN     4               $>Depreciation intangible assets<$              \XImmatAktAfs -> XImmatAkt
+P   I   FN     4               $>Depreciation of real estate<$                 \XOnrGoedAfs -> XOnrGoed
+P   I   FN  *  4               $>Depreciation of equipment<$                   \XBedrUitrAfs -> XBedrUitr
+P   I  =FN    -4=              =XAktAfs                                        \=XAktAfs
+P   P  =FN    -3               $>Operating income<$                            \XBedrRes
+P   I   FN     3               $>Financial result<$                            \XFinRes
+P   I   FN     4               $>Financial income<$                            \XFinBaten
+P   I  -FN  *  4               $>Financial expenses<$                          \XFinLasten
+P   I  =FN    -4=              =XFinRes                                        \=XFinRes
+P   P  =FN    -3               $>Ordinary profit before taxes<$                \XGewResVoorBel
+P   I   FN     3               $>Extraordinary income and expenses<$           \XBuitRes
+P   I  -FN     3               $>Tax on profits<$                              \XWinstBel
+P   I   FN     3               $>Share in result from (non-consolidated) subsidiaries<$\XAandeelResDeeln
+P   P  =FN    -3=              $>Profit after tax<$                            \XResNaBel
+
+;;@@——————————————————————————————————————————————————————————————————————————————————————————————————————
+.Formulas Sector
+XVerkOpv                = If(XNormThere=NA,XVerkOpv[T-1],NA)
+XMagOpv                 = If(XNormThere=NA,XMagOpv[T-1],NA)
+XProdOpv                = If(XNormThere=NA,XProdOpv[T-1],NA)
+XKantoorOpv             = If(XNormThere=NA,XKantoorOpv[T-1],NA)
+XOvOpv                  = If(XNormThere=NA,XOvOpv[T-1],NA)
+XDirKracht              = If(XNormThere=NA,XDirKracht[T-1],NA)
+XPersKracht             = If(XNormThere=NA,XPersKracht[T-1],NA)
+XOnbetKracht            = If(XNormThere=NA,XOnbetKracht[T-1],NA)
+XImmatAkt               = If(XNormThere=NA,XImmatAkt[T-1],NA)
+XOnrGoed                = If(XNormThere=NA,XOnrGoed[T-1],NA)
+XBedrUitr               = If(XNormThere=NA,XBedrUitr[T-1],NA)
+XFinVastAkt             = If(XNormThere=NA,XFinVastAkt[T-1],NA)
+XVrd                    = If(XNormThere=NA,XVrd[T-1],NA)
+XHandDeb                = If(XNormThere=NA,XHandDeb[T-1],NA)
+XOvVord                 = If(XNormThere=NA,XOvVord[T-1],NA)
+XLiqMid                 = If(XNormThere=NA,XLiqMid[T-1],NA)
+XEigenVerm              = If(XNormThere=NA,XEigenVerm[T-1],NA)
+XVoorz                  = If(XNormThere=NA,XVoorz[T-1],NA)
+XLangVV                 = If(XNormThere=NA,XLangVV[T-1],NA)
+XHandCred               = If(XNormThere=NA,XHandCred[T-1],NA)
+XOvKortCred             = If(XNormThere=NA,XOvKortCred[T-1],NA)
+XNettoOmzet             = If(XNormThere=NA,XNettoOmzet[T-1],NA)
+XOmzetGr10              = XNettoOmzet-XOmzetGr1-XOmzetGr2-XOmzetGr3-XOmzetGr4-XOmzetGr5-XOmzetGr6
+XProdVrdMut             = If(XNormThere=NA,XProdVrdMut[T-1],NA)
+XInkW                   = If(XNormThere=NA,XInkW[T-1],NA)
+XOvBedrOpbr             = If(XNormThere=NA,XOvBedrOpbr[T-1],NA)
+XPersK                  = If(XNormThere=NA,XPersK[T-1],NA)
+XProdK                  = If(XNormThere=NA,XProdK[T-1],NA)
+XInventK                = If(XNormThere=NA,XInventK[T-1],NA)
+XGebK                   = If(XNormThere=NA,XGebK[T-1],NA)
+XTranspK                = If(XNormThere=NA,XTranspK[T-1],NA)
+XVerkoopK               = If(XNormThere=NA,XVerkoopK[T-1],NA)
+XAlgK                   = If(XNormThere=NA,XAlgK[T-1],NA)
+XOvK                    = If(XNormThere=NA,XOvK[T-1],NA)
+XImmatAktAfs            = If(XNormThere=NA,XImmatAktAfs[T-1],NA)
+XOnrGoedAfs             = If(XNormThere=NA,XOnrGoedAfs[T-1],NA)
+XBedrUitrAfs            = If(XNormThere=NA,XBedrUitrAfs[T-1],NA)
+XFinBaten               = If(XNormThere=NA,XFinBaten[T-1],NA)
+XFinLasten              = If(XNormThere=NA,XFinLasten[T-1],NA)
+XBuitRes                = If(XNormThere=NA,XBuitRes[T-1],NA)
+XAandeelResDeeln        = If(XNormThere=NA,XAandeelResDeeln[T-1],NA)
+XWinstBel               = If(XNormThere=NA,XWinstBel[T-1],NA)
+XOverigeFactor          = OnER(If(SchaalBasisOverige<=0,NettoOmzet[YearToT(YearInT)]/XNettoOmzet,If(SchaalBasisOverige=1,BalAkt[YearToT(YearInT)]/XBalAkt,If(SchaalBasisOverige=2,EigenVerm[YearToT(YearInT)]/XEigenVerm,If(SchaalBasisOverige=3,BrutoWinst[YearToT(YearInT)]/XBrutoWinst,1)))),NA)
+XBalansFactor           = OnER(If(SchaalBasisBalans <=0,NettoOmzet[YearToT(YearInT)]/XNettoOmzet,If(SchaalBasisBalans =1,BalAkt[YearToT(YearInT)]/XBalAkt,If(SchaalBasisBalans =2,EigenVerm[YearToT(YearInT)]/XEigenVerm,If(SchaalBasisBalans =3,BrutoWinst[YearToT(YearInT)]/XBrutoWinst,1)))),NA)
+XResRekFactor           = OnER(If(SchaalBasisResRek <=0,NettoOmzet[YearToT(YearInT)]/XNettoOmzet,If(SchaalBasisResRek =1,BalAkt[YearToT(YearInT)]/XBalAkt,If(SchaalBasisResRek =2,EigenVerm[YearToT(YearInT)]/XEigenVerm,If(SchaalBasisResRek =3,BrutoWinst[YearToT(YearInT)]/XBrutoWinst,1)))),NA)
+DakOpv                  = If(XNormThere=2,NA,XOverigefactor*XDakOpv)
+VerkOpv                 = If(XNormThere=2,NA,XOverigefactor*XVerkOpv)
+MagOpv                  = If(XNormThere=2,NA,XOverigefactor*XMagOpv)
+ProdOpv                 = If(XNormThere=2,NA,XOverigefactor*XProdOpv)
+KantoorOpv              = If(XNormThere=2,NA,XOverigefactor*XKantoorOpv)
+OvOpv                   = If(XNormThere=2,NA,XOverigefactor*XOvOpv)
+TotKracht               = If(XNormThere=2,NA,XOverigefactor*XTotKracht)
+DirKracht               = If(XNormThere=2,NA,XOverigefactor*XDirKracht)
+AantalPersOv            = If(XNormThere=2,NA,XOverigefactor*XPersKracht)
+BetKracht               = If(XNormThere=2,NA,XOverigefactor*XBetKracht)
+OnbetKracht             = If(XNormThere=2,NA,XOverigefactor*XOnbetKracht)
+Akt1                    = If(XNormThere=2,NA,XBalansfactor*XImmatAkt)       ;; Akt1 -> ImmatAkt : imv * in kolom 13
+Akt3                    = If(XNormThere=2,NA,XBalansfactor*XOnrGoed)        ;; Akt3 -> OnrGoed  : imv * in kolom 13
+AktC                    = If(XNormThere=2,NA,XBalansfactor*XBedrUitr)       ;; AktC -> BedrUitr : imv * in kolom 13
+OvFinVA                 = If(XNormThere=2,NA,XBalansfactor*XFinVastAkt)     ;;        ->       : imv * in kolom 13
+HandVrd1                = If(XNormThere=2,NA,XBalansfactor*XVrd)            ;;        ->       : imv * in kolom 13
+HandDeb                 = If(XNormThere=2,NA,XBalansfactor*XHandDeb)
+OvVord                  = If(XNormThere=2,NA,XBalansfactor*XOvVord)
+OvLiqMid                = If(XNormThere=2,NA,XBalansfactor*XLiqMid)         ;;        ->       : imv * in kolom 13
+WinstRes                = If(XNormThere=2,NA,XBalansfactor*XEigenVerm)      ;;        ->       : imv * in kolom 13
+OVVoorz                 = If(XNormThere=2,NA,XBalansfactor*XVoorz)          ;;        ->       : imv * in kolom 13
+LangKredG               = If(XNormThere=2,NA,XBalansfactor*XLangVV)         ;;        ->       : imv * in kolom 13
+HandCred                = If(XNormThere=2,NA,XBalansfactor*XHandCred)
+OvKortKred              = If(XNormThere=2,NA,XBalansfactor*XOvKortCred)
+;;
+OmzetGr1                = If(XNormThere=2,NA,XResRekfactor*XNettoOmzet)
+;;
+MutProdVrd              = If(XNormThere=2,NA,XResRekfactor*XProdVrdMut)
+InkoopGr1               = If(XNormThere=2,NA,XResRekfactor*XInkW)
+OvBedrOpbr              = If(XNormThere=2,NA,XResRekfactor*XOvBedrOpbr)
+LoonPers                = If(XNormThere=2,NA,XResRekfactor*XPersK)
+OngProdK                = If(XNormThere=2,NA,XResRekfactor*XProdK)
+OngInventK              = If(XNormThere=2,NA,XResRekfactor*XInventK)
+OngGebK                 = If(XNormThere=2,NA,XResRekfactor*XGebK)
+OngTranspK              = If(XNormThere=2,NA,XResRekfactor*XTranspK)
+OvVerkoopK              = If(XNormThere=2,NA,XResRekfactor*XVerkoopK)
+OvOvK5                  = If(XNormThere=2,NA,XResRekfactor*XAlgK)
+OvOvKB                  = If(XNormThere=2,NA,XResRekfactor*XOvK)
+Akt1Afs                 = If(XNormThere=2,NA,XResRekfactor*XImmatAktAfs)
+Akt3Afs                 = If(XNormThere=2,NA,XResRekfactor*XOnrGoedAfs)
+AktCAfs                 = If(XNormThere=2,NA,XResRekfactor*XBedrUitrAfs)
+RVord                   = If(XNormThere=2,NA,XResRekfactor*XFinBaten)
+RKredG                  = If(XNormThere=2,NA,XResRekfactor*XFinLasten)
+OvBuitLasten            = If(XNormThere=2,NA,- XResRekfactor*XBuitRes)
+AandeelResDeeln         = If(XNormThere=2,NA,XResRekfactor*XAandeelResDeeln)
+WinstBel                = If(XNormThere=2,NA,XResRekFactor*XWinstBel)
+
+.Choices
+XNormThere              = "$>none<$|$>Good<$|$>Error<$"
+
+
+

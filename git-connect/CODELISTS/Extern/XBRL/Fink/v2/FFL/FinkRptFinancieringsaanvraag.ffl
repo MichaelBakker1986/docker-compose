@@ -1,0 +1,3381 @@
+// model "FinkRptFinancieringsaanvraag"
+// created by FINAN 3.2.57.14
+
+import FinanMath.*;
+import BaseModel.*;
+
+model FinkRptFinancieringsaanvraag uses BaseModel
+{
+  version: "0.0";
+  ffl_version: "1.2";
+  root
+  {
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: (Q_STEP01 and Q_STEP02 and Q_STEP03 and Q_STEP04 and Q_STEP05 and Q_STEP06);
+      data_options: saveCalculatedValue,unscalable;
+      displaytype: select;
+      title: "Vragenlijst";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+      options_title: locked;
+      options: locked;
+      variable Q_STEP01
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP01) or (Q_STEP01_ACCEPTED and (Q_STEP01_OPENVALIDATION=0) and (Q_STEP01_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Balans [titel]";
+        top_blanklines: 1;
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable kvkabstrAssetsTitle
+        {
+          datatype: none;
+          frequency: none;
+          namespaceuri: "http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts";
+          namespaceprefix: "kvk-abstr";
+          elementname: "AssetsTitle";
+          elementtype: "xbrli:stringItemType";
+          periodtype: "Duration";
+          title: "Activa [titel]";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable kvkabstrAssetsNoncurrentTitle
+          {
+            datatype: none;
+            frequency: none;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts";
+            namespaceprefix: "kvk-abstr";
+            elementname: "AssetsNoncurrentTitle";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            title: "Vaste activa [titel]";
+            top_blanklines: 1;
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+            variable venjbw2iIntangibleAssets
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "IntangibleAssets";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Immateriële vaste activa";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iPropertyPlantEquipment
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "PropertyPlantEquipment";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Materiële vaste activa";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iFinancialAssets
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "FinancialAssets";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Financiële vaste activa";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvkabstrAssetsNoncurrentTitle_pvenjbw2iAssetsNoncurrent
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "AssetsNoncurrent";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Vaste activa";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+          variable kvkabstrAssetsCurrentTitle
+          {
+            datatype: none;
+            frequency: none;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts";
+            namespaceprefix: "kvk-abstr";
+            elementname: "AssetsCurrentTitle";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            title: "Vlottende activa [titel]";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+            variable venjbw2iInventories
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "Inventories";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Voorraden";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjiConstructionContractsAssets
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data";
+              namespaceprefix: "rj-i";
+              elementname: "ConstructionContractsAssets";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Onderhanden projecten in opdracht van derden (activa)";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iReceivables
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "Receivables";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Vorderingen";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iSecurities
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "Securities";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Effecten";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iCashAndCashEquivalents
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "CashAndCashEquivalents";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Liquide middelen";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvkabstrAssetsCurrentTitle_pvenjbw2iAssetsCurrent
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "AssetsCurrent";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Vlottende activa";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+          variable venjbw2iAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "Assets";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Activa";
+            top_separator: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable kvkabstrEquityAndLiabilitiesTitle
+        {
+          datatype: none;
+          frequency: none;
+          namespaceuri: "http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts";
+          namespaceprefix: "kvk-abstr";
+          elementname: "EquityAndLiabilitiesTitle";
+          elementtype: "xbrli:stringItemType";
+          periodtype: "Duration";
+          title: "Passiva [titel]";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable kvkabstrEquityTitle
+          {
+            datatype: none;
+            frequency: none;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts";
+            namespaceprefix: "kvk-abstr";
+            elementname: "EquityTitle";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            title: "Eigen vermogen [titel]";
+            top_blanklines: 1;
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked, invisible;
+            variable venjbw2iShareCapital
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "ShareCapital";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Aandelenkapitaal";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iSharePremium
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "SharePremium";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Agio";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iLegalReserves
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "LegalReserves";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Wettelijke reserves";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iStatutoryReserves
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "StatutoryReserves";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Statutaire reserves";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iReservesOther
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "ReservesOther";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Overige reserves";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iRetainedEarnings
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "RetainedEarnings";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Onverdeelde winst";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable venjbw2iResultForTheYear
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "ResultForTheYear";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Resultaat van het boekjaar";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvkabstrEquityTitle_pvenjbw2iEquity
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              decimals_maximum: 0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "Equity";
+              elementtype: "nl-types:monetaryNoDecimalsItemType";
+              periodtype: "Instant";
+              displaytype: currency;
+              fixed_decimals: 0;
+              title: "Eigen vermogen";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+          variable venjbw2iProvisions
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "Provisions";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Voorzieningen";
+            top_separator: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iLiabilitiesNoncurrent
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "LiabilitiesNoncurrent";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Langlopende schulden (nog voor meer dan een jaar)";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iLiabilitiesCurrent
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "LiabilitiesCurrent";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Kortlopende schulden (ten hoogste 1 jaar)";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable rjiConstructionContractsLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data";
+            namespaceprefix: "rj-i";
+            elementname: "ConstructionContractsLiabilities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Onderhanden projecten in opdracht van derden (passiva)";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable kvkabstrEquityAndLiabilitiesTitle_pvenjbw2iEquityAndLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "EquityAndLiabilities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Passiva";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP01_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99%) and (Q_STEP01_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP01_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP01_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP01_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP01_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP01_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP01_OPENVALIDATION=1) or (Q_STEP01_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP01_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP01,Q_STEP01_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP01_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP01,Q_STEP01_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP01_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP01_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP02
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP02) or (Q_STEP02_ACCEPTED and (Q_STEP02_OPENVALIDATION=0) and (Q_STEP02_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Contactpersoon voor deze rapportage [presentatie]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_kvktContactForDocumentPresentation
+        {
+          datatype: none;
+          frequency: none;
+          title: "Contactpersoon voor deze rapportage [presentatie]";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          tuple kvktContactForDocumentPresentation
+          {
+            frequency: none;
+            neptuple_size: 1;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/domein/kvk/tuples/kvk-tuples";
+            namespaceprefix: "kvk-t";
+            elementname: "ContactForDocumentPresentation";
+            periodtype: "Other";
+            metadata: "<![CDATA[<data><tuplePropertyElements><ref>kvk-i:ContactType</ref><ref>nl-cd:FirstName</ref><ref>nl-cd:FamilyName</ref><ref>venj-bw2-i:OrganisationName</ref><ref>nl-cd:TelephoneNumber</ref><ref>nl-cd:EmailAddressFull</ref></tuplePropertyElements></data>]]>";
+            title: "Contactpersoon voor deze rapportage [presentatie]";
+            hint: "Deze tuple is bedoeld voor het opnemen van de contactgegevens van de contactpersoon van deze rapportage. Deze contactpersoon kan van de organisatie zelf zijn of van haar intermediair.";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            tuple_instance_minimum: 1;
+            tuple_instance_maximum: 1;
+            variable kvktContactForDocumentPresentation_tpkvkiContactType
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              data_options: unscalable;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data";
+              namespaceprefix: "kvk-i";
+              elementname: "ContactType";
+              elementtype: "kvk-codes:contactItemType";
+              periodtype: "Duration";
+              displaytype: select;
+              title: "Soort contactpersoon";
+              hint: "Dit concept dient voor het classificeren van de contactpersoon van deze rapportage in de categorie \"ondernemer\" of \"intermediair\".";
+              top_blanklines: 1;
+              visible: 1;
+              choices: "Intermediair|Ondernemer";
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdFirstName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "FirstName";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Voornamen";
+              hint: "De verzameling namen die, gescheiden door spaties, aan de geslachtsnaam voorafgaat. Indien aanwezig, wordt het predikaat afgesplitst.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdFamilyName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "FamilyName";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Geslachtsnaam";
+              hint: "De (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpvenjbw2iOrganisationName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+              namespaceprefix: "venj-bw2-i";
+              elementname: "OrganisationName";
+              elementtype: "xbrli:stringItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Naam van de organisatie vertegenwoordigd door de ondertekenaar";
+              hint: "Naam van de organisatie of rechtspersoon die in casu wordt vertegenwoordigd.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdTelephoneNumber
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "TelephoneNumber";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Telefoonnummer";
+              hint: "Het nummer waaronder een persoon of organisatie telefonisch te bereiken is, bestaande uit een netnummer en een abonneenummer.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable kvktContactForDocumentPresentation_tpnlcdEmailAddressFull
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              pattern: "[^@]+@[^@]+";
+              length: >=6 and <= 254;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "EmailAddressFull";
+              elementtype: "nl-types:emailItemType";
+              periodtype: "Duration";
+              title: "E-mailadres, volledig";
+              hint: "Het adres waaronder een persoon of organisatie via het internet per elektronische post te bereiken is.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+        }
+        variable Q_STEP02_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP02_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99%) and (Q_STEP02_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 2";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP02_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP02_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP02_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP02_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 2";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP02_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP02_OPENVALIDATION=1) or (Q_STEP02_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP02_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP02,Q_STEP02_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP02_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP02,Q_STEP02_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP02_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP02_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP03
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP03) or (Q_STEP03_ACCEPTED and (Q_STEP03_OPENVALIDATION=0) and (Q_STEP03_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Financieringsaanvraag gegevens [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_finkiFundingRequestAmount
+        {
+          datatype: none;
+          frequency: none;
+          title: "Bedrag financieringsaanvraag";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestAmount
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestAmount";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Bedrag financieringsaanvraag";
+            hint: "Geef het bedrag van de financieringsaanvraag op";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestPartOfPileFunding
+        {
+          datatype: none;
+          frequency: none;
+          title: "Beschrijving indien financieringsaanvraag onderdeel betreft van stapel financiering";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestPartOfPileFunding
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 500;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestPartOfPileFunding";
+            elementtype: "fink-types:string500ItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Beschrijving indien financieringsaanvraag onderdeel betreft van stapel financiering";
+            hint: "Geef een omschrijving indien de financieringsaanvraag onderdeel uitmaakt van een stapel financiering/grotere financieringsaanvraag?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestPurpose
+        {
+          datatype: none;
+          frequency: none;
+          title: "Doel van de financieringsaanvraag";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestPurpose
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestPurpose";
+            elementtype: "fink-codes:fundingRequestPurposeItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Doel van de financieringsaanvraag";
+            hint: "Selecteer het doel welke van toepassing is op de financieringsaanvraag";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "Ander financieringsdoel|Bedrijfsmiddelen|Bedrijfsovername|Bedrijfspand|Debiteuren|Doorstart|Goodwill|Groei van de onderneming|Innovatie|Productie kosten|Start|Verlies|Voorraad";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingPurposeDescription
+        {
+          datatype: none;
+          frequency: none;
+          title: "Omschrijving financieringsdoel";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingPurposeDescription
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 500;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingPurposeDescription";
+            elementtype: "fink-types:string500ItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Omschrijving financieringsdoel";
+            hint: "Geef een tekstuele omschrijving waarvoor de financiering wordt aangewend";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestDuration
+        {
+          datatype: none;
+          frequency: none;
+          title: "Looptijd van de financiering";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestDuration
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestDuration";
+            elementtype: "fink-codes:fundingRequestDurationItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Looptijd van de financiering";
+            hint: "Selecteer de looptijd welke van toepassing is op de aangevraagde financiering op basis van wanneer terugbetaling aan financier plaatsvindt";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "Looptijd korter dan zes maanden|Looptijd langer dan drie jaar en korter dan vijf jaar|Looptijd langer dan een jaar en korter dan drie jaar|Looptijd langer dan vijf jaar|Looptijd langer dan zes maanden en korter dan een jaar";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestShares
+        {
+          datatype: none;
+          frequency: none;
+          title: "Zijn de ondernemer(s)/aandeelhouder(s) bereid aandelen uit te geven? (J/N)";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestShares
+          {
+            datatype: boolean;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestShares";
+            elementtype: "xbrli:booleanItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Zijn de ondernemer(s)/aandeelhouder(s) bereid aandelen uit te geven? (J/N)";
+            hint: "Geef door middel van J/N aan of de ondernemer(s) of aandeelhouder(s) bereid zijn aandelen uit te geven";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiWillingnessToTransferOngoingFinancingToNewFunder
+        {
+          datatype: none;
+          frequency: none;
+          title: "Zijn de ondernemer(s)/aandeelhouder(s) bereid een lopende financiering over te zetten naar de nieuwe financier? (J/N)";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiWillingnessToTransferOngoingFinancingToNewFunder
+          {
+            datatype: boolean;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "WillingnessToTransferOngoingFinancingToNewFunder";
+            elementtype: "xbrli:booleanItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Zijn de ondernemer(s)/aandeelhouder(s) bereid een lopende financiering over te zetten naar de nieuwe financier? (J/N)";
+            hint: "Geef door middel van J/N aan of de ondernemer(s) of aandeelhouder(s) bereid zijn een lopende financiering over te zetten naar de nieuwe financier (J/N)";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestRejection
+        {
+          datatype: none;
+          frequency: none;
+          title: "Is er de afgelopen drie jaar een financieringsaanvraag afgekeurd? (J/N)";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestRejection
+          {
+            datatype: boolean;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestRejection";
+            elementtype: "xbrli:booleanItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Is er de afgelopen drie jaar een financieringsaanvraag afgekeurd? (J/N)";
+            hint: "Geef door middel van J/N aan of er de afgelopen drie jaar een financieringsaanvraag is afgekeurd";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestForSustainablePurpose
+        {
+          datatype: none;
+          frequency: none;
+          title: "Is de financiering bedoeld om een groene/duurzame doelstelling te realiseren? (J/N)";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestForSustainablePurpose
+          {
+            datatype: boolean;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestForSustainablePurpose";
+            elementtype: "xbrli:booleanItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Is de financiering bedoeld om een groene/duurzame doelstelling te realiseren? (J/N)";
+            hint: "Geef door middel van J/N aan of financiering is bedoeld om een groene/duurzame doelstelling te realiseren";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiFundingRequestDetails
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vermelding bijzonderheden bij de Fink aanvraag";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiFundingRequestDetails
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 500;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "FundingRequestDetails";
+            elementtype: "fink-types:string500ItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Vermelding bijzonderheden bij de Fink aanvraag";
+            hint: "Geef hier aan als er nog zaken toelichting behoeven bij uw Fink aanvraag";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP03_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP03_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP03_OPENVALIDATION[1]=0) and (Q_STEP03_PROGRESS[1]>99%) and (Q_STEP03_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 3";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP03_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP03_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP03_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP03_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP03_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP03_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP03_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP03_OPENVALIDATION=1) or (Q_STEP03_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP03_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP03,Q_STEP03_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP03_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP03,Q_STEP03_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP03_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP03_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP04
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP04) or (Q_STEP04_ACCEPTED and (Q_STEP04_OPENVALIDATION=0) and (Q_STEP04_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Ondernemings- en rapportage gegevens [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable finkabstrEntityInformationTitle
+        {
+          datatype: none;
+          frequency: none;
+          namespaceuri: "http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts";
+          namespaceprefix: "fink-abstr";
+          elementname: "EntityInformationTitle";
+          elementtype: "xbrli:stringItemType";
+          periodtype: "Duration";
+          title: "Ondernemingsgegevens [titel]";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iLegalEntityName
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "LegalEntityName";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Naam van de rechtspersoon";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iLegalEntityLegalForm
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "LegalEntityLegalForm";
+            elementtype: "nl-codes:legalItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Rechtsvorm van de rechtspersoon";
+            visible: 1;
+            choices: "Besloten vennootschap|Buitenlandse NNP als functionaris|Buitenlandse rechtsvorm|Commanditaire vennootschap met rechtspersoonlijkheid|Commanditaire vennootschap|Cooperatie|Eenmanszaak met meerdere eigenaren|Eenmanszaak|Europees Economisch Samenwerkingsverband|Europese cooperatieve vennootschap (SCE)|Europese naamloze vennootschap (SE)|Formeel buitenlandse vennootschap|Kapitaal vennootschap binnen EER|Kerkgenootschap|Maatschap|Naamloze vennootschap|Niet formeel buitenlandse vennootschap|Onderlinge waarborg maatschappij|Openbare vennootschap met rechtspersoonlijkheid|Openbare vennootschap|Overige buitenlandse rechtsvorm|Overige rechtsvorm|Publiekrechtelijke rechtspersoon|Rechtspersoon in oprichting|Rederij|Stichting|Vennootschap onder firma|Vereniging van eigenaars|Vereniging";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable rjiBusinessNames
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data";
+            namespaceprefix: "rj-i";
+            elementname: "BusinessNames";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Handelsnamen";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iLegalEntityRegisteredOffice
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "LegalEntityRegisteredOffice";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Zetel van de rechtspersoon";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iChamberOfCommerceRegistrationNumber
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            pattern: "([1-9][0-9]{7})|([0-9][1-9][0-9]{6})";
+            length: >=8 and <= 8;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ChamberOfCommerceRegistrationNumber";
+            elementtype: "venj-types:chamberOfCommerceRegistrationNumberItemType";
+            periodtype: "Duration";
+            title: "Registratienummer bij de Kamer van Koophandel";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable finkiDateEstablishmentEntity
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "DateEstablishmentEntity";
+            elementtype: "xbrli:dateItemType";
+            periodtype: "Duration";
+            displaytype: date;
+            title: "Oprichtingsdatum onderneming";
+            hint: "Oprichtingsdatum van de onderneming";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable kvkiLegalSizeCriteriaClassification
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data";
+            namespaceprefix: "kvk-i";
+            elementname: "LegalSizeCriteriaClassification";
+            elementtype: "kvk-codes:legalSizeCriteriaItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "Classificatie van de rechtspersoon op basis van de wettelijke groottecriteria";
+            visible: 1;
+            choices: "Groot|Klein|Middelgroot";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable kvkiSbiBusinessCode
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data";
+            namespaceprefix: "kvk-i";
+            elementname: "SbiBusinessCode";
+            elementtype: "sbi:sbiItemType";
+            periodtype: "Duration";
+            displaytype: select;
+            title: "SBI-code";
+            hint: "De SBI-code (Standaard Bedrijfsindeling 2008) is een code die de economische activiteit van een rechtspersoon aanduidt.";
+            visible: 1;
+            choices: "0111|0113|0116|0119|0121|0124|0125|0127|0128|0129|0130|0141|0142|0143|0145|0146|0147|0149|0150|0161|0162|0163|0164|0170|0210|0220|0240|0311|0312|0321|0322|0610|0620|0812|0892|0893|0899|0910|0990|1011|1012|1013|1020|1031|1032|1039|1041|1042|1051|1052|1061|1062|1071|1072|1073|1081|10821|10822|1083|1084|1085|1086|1089|1091|1092|1101|1102|1103|1104|1105|1106|1107|1200|1310|1320|1330|1391|1392|1393|1394|1395|1396|1399|1411|1412|1413|1414|1419|1420|1431|1439|1511|1512|1520|16101|16102|1621|1622|16231|16239|1624|1629|1711|17121|17122|17129|17211|17212|1722|1723|1724|1729|1811|18121|18122|18123|18124|18125|18129|1813|1814|1820|1910|19201|19202|2011|2012|2013|20141|20149|2015|2016|2017|2020|2030|2041|2042|2051|2052|2053|2059|2060|2110|2120|2211|2219|2221|2222|2223|2229|2311|2312|2313|2314|2319|2320|2331|2332|2341|2342|2343|2344|2349|2351|2352|23611|23612|2362|2363|2364|2365|2369|2370|2391|2399|2410|2420|2431|2432|2433|2434|2441|2442|2443|2444|2445|2446|2451|2452|2453|2454|2511|2512|2521|2529|2530|2540|2550|2561|2562|2571|2572|2573|2591|2592|2593|2594|2599|2611|2612|2620|2630|2640|2651|2652|2660|2670|2680|2711|2712|2720|2731|2732|2733|2740|2751|2752|2790|2811|2812|2813|2814|2815|2821|2822|2823|2824|2825|2829|2830|2841|2849|2891|2892|2893|2894|2895|2896|2899|2910|29201|29202|2931|2932|3011|3012|3020|3030|3040|3091|3092|3099|31011|31012|3102|3103|3109|3211|3212|3213|3220|3230|3240|32501|32502|3291|32991|32999|3311|33121|33122|33123|3313|3314|3315|3316|3317|3319|3321|33221|33222|33223|3323|3324|3329|35111|35112|35113|3512|3513|3514|3520|3530|3600|3700|3811|3812|3821|3822|3831|3832|3900|4110|4120|42111|42112|4212|4213|4221|4222|4291|4299|4311|4312|4313|4321|43221|43222|4329|4331|4332|4333|4334|4339|4391|43991|43992|43993|43999|45111|45112|45191|45192|45193|45194|45201|45202|45203|45204|45205|45311|45312|4532|45401|45402|4611|4612|4613|4614|4615|4616|4617|4618|4619|46211|46212|46213|46214|46215|46216|46217|46218|46219|4622|46231|46232|46241|46242|46311|46312|4632|46331|46332|4634|4635|4636|4637|46381|46382|46383|46384|46389|4639|46411|46412|46421|46422|46423|46424|46425|46429|46431|46432|46433|46434|46435|46436|46441|46442|4645|46461|46462|46471|46472|46473|4648|46491|46492|46493|46494|46495|46496|46497|46498|46499|4651|4652|4661|4662|4663|4664|4665|4666|46681|46682|46691|46692|46693|46694|46695|46696|46697|46699|46711|46712|46713|46721|46722|46723|46731|46732|46733|46734|46735|46736|46737|46738|46739|46741|46742|46751|46752|46761|46762|46769|46771|46772|46779|46901|46902|4711|47191|47192|4721|47221|47222|4723|47241|47242|4725|4726|47291|47292|47293|47299|4730|4741|4742|47431|47432|47511|47512|47513|47521|47522|47523|47524|47525|47526|47527|47528|4753|47541|47542|47543|47544|47591|47592|47593|47594|47595|47596|47597|4761|4762|4763|47641|47642|47643|47644|4765|47711|47712|47713|47714|47715|47716|47717|47718|47721|47722|4773|47741|47742|4775|47761|47762|47763|4777|47781|47782|47783|47789|47791|47792|47793|47811|47819|4782|47891|47892|47899|47911|47912|47913|47914|47915|47916|47918|47919|47991|47992|47999|4910|4920|4931|4932|49391|49392|49393|4941|4942|4950|5010|50201|50202|5030|50401|50402|50403|5110|5121|52101|52102|52109|5221|5222|5223|52241|52242|52291|52292|5310|53201|53202|55101|55102|55201|55202|5530|5590|56101|56102|5621|5629|5630|5811|5813|5814|5819|5821|5829|59111|59112|5912|5913|5914|5920|6010|6020|6110|6120|6130|6190|6201|6202|6203|6209|6311|6312|6391|6399|6411|64191|64192|64193|64194|6420|64301|64302|64303|6491|64921|64922|64923|64924|6499|65111|65112|65113|6512|6520|65301|65302|65303|65309|6611|6612|66191|66192|66193|6621|6622|66291|66292|66293|66299|6630|6810|68201|68202|68203|68204|6831|6832|69101|69102|69103|69104|69105|69201|69202|69203|69204|69209|70101|70102|7021|70221|70222|71111|71112|7112|71201|71202|71203|72111|72112|72113|72191|72192|72193|72199|7220|7311|7312|7320|74101|74102|74103|74201|74202|74203|7430|7490|7500|77111|77112|7712|7721|7722|77291|77292|77299|7731|7732|7733|7734|7735|77391|77399|7740|7810|78201|78202|78203|7830|7911|7912|7990|8010|8020|8030|8110|8121|81221|81222|81229|8129|8130|8211|8219|8220|8230|8291|8292|82991|82992|82999|8411|8412|8413|8421|8422|84231|84232|8424|8425|8430|85201|85202|85203|85311|85312|85313|85314|85321|85322|85323|8541|8542|85511|85519|85521|85522|8553|85591|85592|85599|8560|86101|86102|86103|86104|8621|86221|86222|86231|86232|86911|86912|86913|86919|86921|86922|86923|86924|86925|86929|8710|8720|87301|87302|87901|87902|88101|88102|88103|88911|88912|88991|88992|88993|88999|90011|90012|90013|9002|9003|90041|90042|91011|91012|91019|91021|91022|9103|91041|91042|92001|92009|93111|93112|93113|93119|93121|93122|93123|93124|93125|93126|93127|93128|93129|9313|93141|93142|93143|93144|93145|93146|93149|93151|93152|93191|93192|93193|93194|93195|93196|93199|93211|93212|93291|93299|9411|9412|9420|94911|94919|9492|94991|94992|94993|94994|94995|94996|94997|9511|9512|9521|9522|9523|9524|9525|9529|96011|96012|96013|96021|96022|96031|96032|9604|9609|9700|9810|9820|9900";
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable rjiMostImportantActivitiesEntityDescription
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data";
+            namespaceprefix: "rj-i";
+            elementname: "MostImportantActivitiesEntityDescription";
+            elementtype: "xbrli:stringItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Beschrijving van belangrijkste activiteiten van rechtspersoon";
+            bottom_separator: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          tuple rjtEntityAddressPresentation
+          {
+            frequency: none;
+            neptuple_size: 1;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/domein/rj/tuples/rj-tuples";
+            namespaceprefix: "rj-t";
+            elementname: "EntityAddressPresentation";
+            periodtype: "Other";
+            metadata: "<![CDATA[<data><tuplePropertyElements><ref>nl-cd:DescriptionLocationNL</ref><ref>nl-cd:StreetNameNL</ref><ref>nl-cd:HouseNumberNL</ref><ref>nl-cd:HouseNumberAddition</ref><ref>nl-cd:POBoxNumber</ref><ref>nl-cd:PostalCodeNL</ref><ref>nl-cd:PlaceOfResidenceNL</ref><ref>nl-cd:NameRegion</ref><ref>nl-cd:CountryName</ref></tuplePropertyElements></data>]]>";
+            title: "Adres van de rechtspersoon [presentatie]";
+            hint: "Deze tuple is bedoeld voor het opnemen van het adres van de rechtspersoon.";
+            display_options: showColumnTitlesAboveSubVars;
+            visible: 1;
+            options_title: locked;
+            tuple_instance_minimum: 1;
+            tuple_instance_maximum: 1;
+            variable rjtEntityAddressPresentation_tpnlcdDescriptionLocationNL
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "DescriptionLocationNL";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Locatieomschrijving NL";
+              hint: "Een nadere aanduiding bij de adresgegevens om de plaats aan te duiden waar de persoon dan wel een organisatie bereikbaar is.";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdStreetNameNL
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "StreetNameNL";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Straatnaam NL";
+              hint: "De officiële door de gemeente vastgestelde naam van een straat.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdHouseNumberNL
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              pattern: "([0-9]{1,20})";
+              range: >=0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "HouseNumberNL";
+              elementtype: "nl-types:nonNegative20ItemType";
+              periodtype: "Duration";
+              title: "Huisnummer NL";
+              hint: "De numerieke aanduiding zoals deze door de gemeente aan het object is toegekend.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdHouseNumberAddition
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "HouseNumberAddition";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Huisnummer toevoeging";
+              hint: "De huisnummertoevoeging zoals deze door de gemeente aan het object is toegekend.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdPOBoxNumber
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              pattern: "([0-9]{1,20})";
+              range: >=0;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "POBoxNumber";
+              elementtype: "nl-types:nonNegative20ItemType";
+              periodtype: "Duration";
+              title: "Postbusnummer";
+              hint: "De numerieke aanduiding zoals vastgesteld voor een Nederlandse postbus.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdPostalCodeNL
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              pattern: "([1-9]{1}[0-9]{3}[A-Z]{2})";
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "PostalCodeNL";
+              elementtype: "nl-types:nlzipItemType";
+              periodtype: "Duration";
+              title: "Postcode NL";
+              hint: "De officiële codering van PostNL voor een Nederlands postadres, bestaande uit een numeriek deel en een alfabetisch deel.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdPlaceOfResidenceNL
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              inputRequired: 1;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "PlaceOfResidenceNL";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Vestigingsplaats NL";
+              hint: "De officiële door de gemeente vastgestelde gemeentenaam.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdNameRegion
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "NameRegion";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Regionaam";
+              hint: "Adres element dat het geografische of administratieve gebied specificeert waarin een stad is opgenomen.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+            variable rjtEntityAddressPresentation_tpnlcdCountryName
+            {
+              datatype: string;
+              frequency: column;
+              aggregation: flow;
+              data_options: unscalable;
+              length: >=1 and <= 1000;
+              namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data";
+              namespaceprefix: "nl-cd";
+              elementname: "CountryName";
+              elementtype: "nl-types:string1000ItemType";
+              periodtype: "Duration";
+              displaytype: memo;
+              title: "Landnaam, ISO";
+              hint: "Adres element gebruik makend van de ISO 3166-1 code voor landen, territorium of gebied met geopolitieke belangen, waarin een leveringspunt is gelokaliseerd of hoe het leveringspunt bereikt kan worden.";
+              visible: 1;
+              options_title: locked;
+              options_trend: locked, invisible;
+            }
+          }
+          variable venjbw2iAverageNumberEmployees
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            range: >=0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "AverageNumberEmployees";
+            elementtype: "venj-types:nonNegativeDecimalItemType";
+            periodtype: "Duration";
+            fixed_decimals: 1;
+            title: "Gemiddeld aantal werknemers over de periode";
+            top_separator: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable finkabstrFinancialReportingPeriodInformationTitle
+        {
+          datatype: none;
+          frequency: none;
+          namespaceuri: "http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts";
+          namespaceprefix: "fink-abstr";
+          elementname: "FinancialReportingPeriodInformationTitle";
+          elementtype: "xbrli:stringItemType";
+          periodtype: "Duration";
+          title: "Informatie over de financiële rapportageperiode [titel]";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iFinancialReportingPeriodCurrentStartDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "FinancialReportingPeriodCurrentStartDate";
+            elementtype: "xbrli:dateItemType";
+            periodtype: "Duration";
+            displaytype: date;
+            title: "Startdatum van de huidige financiële rapportageperiode";
+            hint: "Dit concept is bedoeld om de startdatum van de huidige rapportageperiode te beschrijven ten behoeven van de rendering van de rapportage. Dit dient ingevuld te worden in de vorm {DD-MM-YYYY}";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iFinancialReportingPeriodCurrentEndDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "FinancialReportingPeriodCurrentEndDate";
+            elementtype: "xbrli:dateItemType";
+            periodtype: "Duration";
+            displaytype: date;
+            title: "Einddatum van de huidige financiële rapportageperiode";
+            hint: "Dit concept is bedoeld om de einddatum van de huidige rapportageperiode te beschrijven ten behoeven van de rendering van de rapportage. Dit dient ingevuld te worden in de vorm {DD-MM-YYYY}";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iFinancialReportingPeriodPreviousStartDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "FinancialReportingPeriodPreviousStartDate";
+            elementtype: "xbrli:dateItemType";
+            periodtype: "Duration";
+            displaytype: date;
+            title: "Startdatum van de voorgaande financiële rapportageperiode";
+            hint: "Dit concept is bedoeld om de startdatum van de voorgaande rapportageperiode te beschrijven ten behoeven van de rendering van de rapportage. Dit dient ingevuld te worden in de vorm {DD-MM-YYYY}";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+          variable venjbw2iFinancialReportingPeriodPreviousEndDate
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "FinancialReportingPeriodPreviousEndDate";
+            elementtype: "xbrli:dateItemType";
+            periodtype: "Duration";
+            displaytype: date;
+            title: "Einddatum van de voorgaande financiële rapportageperiode";
+            hint: "Dit concept is bedoeld om de einddatum van de voorgaande rapportageperiode te beschrijven ten behoeven van de rendering van de rapportage. Dit dient ingevuld te worden in de vorm {DD-MM-YYYY}";
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP04_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP04_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP04_OPENVALIDATION[1]=0) and (Q_STEP04_PROGRESS[1]>99%) and (Q_STEP04_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 4";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP04_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP04_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP04_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP04_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP04_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP04_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP04_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP04_OPENVALIDATION=1) or (Q_STEP04_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP04_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP04_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP04,Q_STEP04_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP04_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP04_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP05
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP05) or (Q_STEP05_ACCEPTED and (Q_STEP05_OPENVALIDATION=0) and (Q_STEP05_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Prognose [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iNetResultAfterTax
+        {
+          datatype: none;
+          frequency: none;
+          title: "Nettoresultaat na belastingen";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iNetResultAfterTax
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "NetResultAfterTax";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Nettoresultaat na belastingen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iNetRevenue
+        {
+          datatype: none;
+          frequency: none;
+          title: "Netto-omzet";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iNetRevenue
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "NetRevenue";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Netto-omzet";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiProfitability
+        {
+          datatype: none;
+          frequency: none;
+          title: "Winstgevendheid";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiProfitability
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "Profitability";
+            elementtype: "num:percentItemType";
+            periodtype: "Duration";
+            displaytype: percentage;
+            fixed_decimals: 1;
+            title: "Winstgevendheid";
+            hint: "Winstgevendheid berekend op basis van nettoresultaat gedeeld door omzet";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iAssetsNoncurrent
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vaste activa";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iAssetsNoncurrent
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "AssetsNoncurrent";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Vaste activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iAssetsCurrent
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vlottende activa";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iAssetsCurrent
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "AssetsCurrent";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Vlottende activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iEquity
+        {
+          datatype: none;
+          frequency: none;
+          title: "Eigen vermogen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iEquity
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "Equity";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Eigen vermogen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkabstrForecastTitle_pvenjbw2iEquityAndLiabilities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Passiva";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkabstrForecastTitle_pvenjbw2iEquityAndLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "EquityAndLiabilities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Instant";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Passiva";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_finkiForecastDetails
+        {
+          datatype: none;
+          frequency: none;
+          title: "Toelichting bij de Fink Prognose";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable finkiForecastDetails
+          {
+            datatype: string;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            length: >=1 and <= 500;
+            namespaceuri: "http://www.financieringslink.nl/2.0/basis/fink/items/fink-data";
+            namespaceprefix: "fink-i";
+            elementname: "ForecastDetails";
+            elementtype: "fink-types:string500ItemType";
+            periodtype: "Duration";
+            displaytype: memo;
+            title: "Toelichting bij de Fink Prognose";
+            hint: "Geef hier aan als er nog zaken toelichting behoeven bij uw prognose";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP05_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP05_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP05_OPENVALIDATION[1]=0) and (Q_STEP05_PROGRESS[1]>99%) and (Q_STEP05_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 5";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP05_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP05_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP05_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP05_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP05_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP05_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP05_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP05_OPENVALIDATION=1) or (Q_STEP05_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP05_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP05,Q_STEP05_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP05_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP05,Q_STEP05_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP05_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP05_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_STEP06
+      {
+        datatype: number;
+        frequency: document;
+        formula: not Visible(Q_STEP06) or (Q_STEP06_ACCEPTED and (Q_STEP06_OPENVALIDATION=0) and (Q_STEP06_PROGRESS>99%));
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Winst- en verliesrekening [titel]";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable LevelAdded_kvkabstrIncomeStatementTitle_pvenjbw2iNetRevenue
+        {
+          datatype: none;
+          frequency: none;
+          title: "Netto-omzet";
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable kvkabstrIncomeStatementTitle_pvenjbw2iNetRevenue
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "NetRevenue";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Netto-omzet";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iChangesInventoriesWorkInProgress
+        {
+          datatype: none;
+          frequency: none;
+          title: "Wijziging in voorraden gereed product en onderhanden werk";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iChangesInventoriesWorkInProgress
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ChangesInventoriesWorkInProgress";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Wijziging in voorraden gereed product en onderhanden werk";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_rjiChangesConstructionContracts
+        {
+          datatype: none;
+          frequency: none;
+          title: "Wijziging in onderhanden projecten in opdracht van derden";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable rjiChangesConstructionContracts
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data";
+            namespaceprefix: "rj-i";
+            elementname: "ChangesConstructionContracts";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Wijziging in onderhanden projecten in opdracht van derden";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iCapitalisedProductionCosts
+        {
+          datatype: none;
+          frequency: none;
+          title: "Geactiveerde productie voor het eigen bedrijf";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iCapitalisedProductionCosts
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "CapitalisedProductionCosts";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Geactiveerde productie voor het eigen bedrijf";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iOperatingIncomeOther
+        {
+          datatype: none;
+          frequency: none;
+          title: "Overige bedrijfsopbrengsten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iOperatingIncomeOther
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "OperatingIncomeOther";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Overige bedrijfsopbrengsten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iOperatingIncome
+        {
+          datatype: none;
+          frequency: none;
+          title: "Som der bedrijfsopbrengsten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iOperatingIncome
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "OperatingIncome";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Som der bedrijfsopbrengsten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iCostsRawMaterialsConsumables
+        {
+          datatype: none;
+          frequency: none;
+          title: "Kosten van grond- en hulpstoffen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iCostsRawMaterialsConsumables
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "CostsRawMaterialsConsumables";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Kosten van grond- en hulpstoffen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iCostsOutsourcedWorkOtherExternalExpenses
+        {
+          datatype: none;
+          frequency: none;
+          title: "Kosten uitbesteed werk en andere externe kosten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iCostsOutsourcedWorkOtherExternalExpenses
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "CostsOutsourcedWorkOtherExternalExpenses";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Kosten uitbesteed werk en andere externe kosten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iEmployeeBenefitsAndOtherAdministrativeExpenses
+        {
+          datatype: none;
+          frequency: none;
+          title: "Personeels- en andere beheerskosten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iEmployeeBenefitsAndOtherAdministrativeExpenses
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "EmployeeBenefitsAndOtherAdministrativeExpenses";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Personeels- en andere beheerskosten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iDepreciationPropertyPlantEquipmentAmortisationIntangibleAssets
+        {
+          datatype: none;
+          frequency: none;
+          title: "Afschrijvingen op immateriële en materiële vaste activa";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iDepreciationPropertyPlantEquipmentAmortisationIntangibleAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Afschrijvingen op immateriële en materiële vaste activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iChangesInValueIntangibleAssetsPropertyPlantEquipment
+        {
+          datatype: none;
+          frequency: none;
+          title: "Overige waardeveranderingen van immateriële en materiële vaste activa";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iChangesInValueIntangibleAssetsPropertyPlantEquipment
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ChangesInValueIntangibleAssetsPropertyPlantEquipment";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Overige waardeveranderingen van immateriële en materiële vaste activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iImpairmentCurrentAssets
+        {
+          datatype: none;
+          frequency: none;
+          title: "Bijzondere waardevermindering van vlottende activa";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iImpairmentCurrentAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ImpairmentCurrentAssets";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Bijzondere waardevermindering van vlottende activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iOperatingExpensesOther
+        {
+          datatype: none;
+          frequency: none;
+          title: "Overige bedrijfskosten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iOperatingExpensesOther
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "OperatingExpensesOther";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Overige bedrijfskosten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iOperatingExpenses
+        {
+          datatype: none;
+          frequency: none;
+          title: "Som der bedrijfslasten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iOperatingExpenses
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "OperatingExpenses";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Som der bedrijfslasten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iIncomeReceivablesNoncurrentSecurities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Opbrengst van vorderingen die tot de vaste activa behoren en van effecten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iIncomeReceivablesNoncurrentSecurities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "IncomeReceivablesNoncurrentSecurities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Opbrengst van vorderingen die tot de vaste activa behoren en van effecten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iRevaluationReserveRelease
+        {
+          datatype: none;
+          frequency: none;
+          title: "Vrijval uit herwaarderingsreserve";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iRevaluationReserveRelease
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "RevaluationReserveRelease";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Vrijval uit herwaarderingsreserve";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iInterestIncomeRelatedIncome
+        {
+          datatype: none;
+          frequency: none;
+          title: "Andere rentebaten en soortgelijke opbrengsten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iInterestIncomeRelatedIncome
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "InterestIncomeRelatedIncome";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Andere rentebaten en soortgelijke opbrengsten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iChangesValueFinancialAssetsSecurities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Waardeveranderingen van financiële vaste activa en van effecten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iChangesValueFinancialAssetsSecurities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ChangesValueFinancialAssetsSecurities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Waardeveranderingen van financiële vaste activa en van effecten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iInterestExpensesRelatedExpenses
+        {
+          datatype: none;
+          frequency: none;
+          title: "Rentelasten en soortgelijke kosten";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iInterestExpensesRelatedExpenses
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "InterestExpensesRelatedExpenses";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Rentelasten en soortgelijke kosten";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iResultBeforeTaxOrdinaryActivities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Resultaat uit gewone bedrijfsuitoefening voor belastingen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iResultBeforeTaxOrdinaryActivities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ResultBeforeTaxOrdinaryActivities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Resultaat uit gewone bedrijfsuitoefening voor belastingen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iIncomeTaxExpenseOrdinaryActivities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Belastingen resultaat uit gewone bedrijfsuitoefening";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iIncomeTaxExpenseOrdinaryActivities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "IncomeTaxExpenseOrdinaryActivities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Belastingen resultaat uit gewone bedrijfsuitoefening";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iShareInResultsParticipatingInterests
+        {
+          datatype: none;
+          frequency: none;
+          title: "Aandeel in winst (verlies) van ondernemingen waarin wordt deelgenomen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iShareInResultsParticipatingInterests
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ShareInResultsParticipatingInterests";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Aandeel in winst (verlies) van ondernemingen waarin wordt deelgenomen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_venjbw2iResultAfterTaxOrdinaryActivities
+        {
+          datatype: none;
+          frequency: none;
+          title: "Resultaat uit gewone bedrijfsuitoefening na belastingen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable venjbw2iResultAfterTaxOrdinaryActivities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "ResultAfterTaxOrdinaryActivities";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Resultaat uit gewone bedrijfsuitoefening na belastingen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable LevelAdded_kvkabstrIncomeStatementTitle_pvenjbw2iNetResultAfterTax
+        {
+          datatype: none;
+          frequency: none;
+          title: "Nettoresultaat na belastingen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked, invisible;
+          variable kvkabstrIncomeStatementTitle_pvenjbw2iNetResultAfterTax
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            data_options: unscalable;
+            decimals_maximum: 0;
+            namespaceuri: "http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data";
+            namespaceprefix: "venj-bw2-i";
+            elementname: "NetResultAfterTax";
+            elementtype: "nl-types:monetaryNoDecimalsItemType";
+            periodtype: "Duration";
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Nettoresultaat na belastingen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+            options_trend: locked, invisible;
+          }
+        }
+        variable Q_STEP06_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If((Q_STEP06_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP06_OPENVALIDATION[1]=0) and (Q_STEP06_PROGRESS[1]>99%) and (Q_STEP06_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          data_options: unscalable;
+          title: "Waarschuwing bij stap 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP06_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          data_options: unscalable;
+          title: "Info bij stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_STEP06_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP06_VALIDATIONMESSAGE[1],""));
+          data_options: unscalable;
+          title: "Validatie stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_PROGRESS
+        {
+          datatype: number;
+          frequency: document;
+          formula: If(HSum(Q_STEP06_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP06_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP06_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
+          data_options: unscalable;
+          displaytype: percentage;
+          fixed_decimals: 1;
+          title: "Voortgang van stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_STEP06_ACCEPTED
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Akkoord";
+          locked: ((Q_STEP06_OPENVALIDATION=1) or (Q_STEP06_PROGRESS<100%));
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP06_REQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP06,Q_STEP06_WARNING),InputRequired(X));
+          displaytype: currency;
+          title: "Aantal verplichte velden";
+          top_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP06_ENTEREDREQUIREDVARS
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          formula_notrend: Count(X,SelectDescendants(Q_STEP06,Q_STEP06_WARNING),InputRequired(X) and DataAvailable(X));
+          displaytype: currency;
+          title: "Aantal ingevulde verplichte velden";
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked, invisible;
+        }
+        variable Q_STEP06_OPENVALIDATION
+        {
+          datatype: number;
+          frequency: document;
+          formula: 0;
+          data_options: unscalable;
+          displaytype: select;
+          title: "Openstaande validatiemeldingen";
+          visible: 1;
+          choices: "0:Nee|1:Ja";
+          options_title: locked;
+        }
+        variable Q_STEP06_VALIDATIONMESSAGE
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatiemeldingen";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Resultaat";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Actief|1:Definitief";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Definitief gemaakt";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        title: "Definitief gemaakt door";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Aangemaakt op";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: saveCalculatedValue,unscalable;
+        title: "Aangemaakt door";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_MODIFIED_ON
+      {
+        datatype: number;
+        frequency: document;
+        formula: Now;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Laatste bewerking";
+        visible: 1;
+        options_title: locked;
+      }
+      variable ModelGenerator
+      {
+        datatype: string;
+        frequency: document;
+        formula: "FINAN XBRL Taxonomy Viewer v4.4.1";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Model gegenereeerd door";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable XbrlReport
+      {
+        datatype: string;
+        frequency: document;
+        formula: "fink-rpt-financieringsaanvraag";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Rapportage";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

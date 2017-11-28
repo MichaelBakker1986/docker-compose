@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="3.3.6" date="23-10-2014" author="Topicus FINAN" title="Realisatie" xsi:noNamespaceSchemaLocation="../../../../src/FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<TimelineTitle>MonthTimeline</TimelineTitle>
+	<Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+  <ReportName><data src="chineseRoom" name="Realisation-title">Realisatie rapportage</data></ReportName>
+	<ReportScale>1000</ReportScale>
+	<Period><data src="fesModel"><columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header=""/><variables function="getStartDate"/><presentation format="d MMMMM yyyy"/></data> <data src="chineseRoom" name="Upto">t/m</data> <data src="fesModel"><columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header=""/><variables function="getEndDate"/><presentation format="d MMMMM yyyy"/></data></Period>
+	<ReportVersion><data src="document" var="./document/@version" type="calc"/></ReportVersion>
+	<ModelVersion><data src="fesModel"><columns timeline="xpath:./document/properties/TimelineTitle" delta="0" number="1" order="desc" virtualColumns="true" withMonths="1"/><variables depth="1" var="ModelVersion"/></data></ModelVersion>
+	<CompanyName><data src="fesModel"><columns timeline="xpath:./document/properties/TimelineTitle" delta="0" number="1" order="asc" virtualColumns="true" withMonths="1"/><variables depth="1" var="CompanyName"/></data></CompanyName>
+	<CompanyPlaceOfResidence><data src="fesModel"><columns timeline="xpath:./document/properties/TimelineTitle" delta="0" number="1" order="asc" virtualColumns="true" withMonths="1"/><variables depth="1" var="CompanyPlaceOfResidence"/></data></CompanyPlaceOfResidence>
+	<LimitedLiabilityCompany><data src="fesModel"><columns timeline="xpath:./document/properties/TimelineTitle" delta="0" number="1" order="asc" virtualColumns="true" withMonths="1"/><variables depth="1" var="ReportAsLimitedLiabilityCompany"/></data></LimitedLiabilityCompany>
+	<PreviousRealisationDelta><data src="document" var="number(./document/properties/RealisationDelta/text()) - number(./document/properties/Periods)" type="calc"/></PreviousRealisationDelta>
+	<PreviousRealisationDeltaPeriod><data src="document" var="number(./document/properties/RealisationDelta/text()) - number(./document/properties/RealisationMonths/text())" type="calc"/></PreviousRealisationDeltaPeriod>
+	<DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+	<CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+	<CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+	<CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+	<BalanceFailed><data src="chineseRoom" name="BalanceFailed">Waarschuwing: 1 of meerdere periodes zijn niet in balans</data></BalanceFailed>
+	<CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+	<PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+	<currentUser_FullnameLabel><data src="chineseRoom" name="CurrentUser_FullnameLabel">Opsteller</data></currentUser_FullnameLabel>
+	<currentUser_PhonenumberLabel><data src="chineseRoom" name="CurrentUser_PhonenumberLabel">Telefoonnummer</data></currentUser_PhonenumberLabel>
+	<currentUser_EmailLabel><data src="chineseRoom" name="CurrentUser_EmailLabel">Email adres</data></currentUser_EmailLabel>
+	<Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+	<PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+	<Of><data src="chineseRoom" name="Of">van</data></Of>
+	<At><data src="chineseRoom" name="At">te</data></At>
+	<BudgetHeader><data src="chineseRoom" name="BudgetHeader">Begroting</data> </BudgetHeader>
+	<RealisationHeader><data src="chineseRoom" name="RealisationHeader">Realisatie</data> </RealisationHeader>
+	<PreviousYearHeader><data src="chineseRoom" name="PreviousYearHeader">Vorig jaar</data> </PreviousYearHeader>
+  
+	<HighlightBaseValue>40</HighlightBaseValue>
+	<HighlightBasePercentageValue>.1</HighlightBasePercentageValue>
+	<HighlightTextColor>#000099</HighlightTextColor>
+
+	<BudgetMonths>3</BudgetMonths>  <!-- Wordt niet gebruikt -->
+	<BudgetDelta>3</BudgetDelta>
+
+	<RealisationMonths>3</RealisationMonths>
+	<RealisationDelta>15</RealisationDelta>
+	
+	<PeriodStart><data src="fesModel"><columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="1" header=""/><variables function="getPeriodStart"/><presentation format="MMM"/></data></PeriodStart>
+	<PeriodEnd><data src="fesModel"><columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text() + ./document/properties/RealisationMonths/text() - 1" number="1" order="desc" virtualColumns="true" withMonths="1" header=""/><variables function="getPeriodStart"/><presentation format="MMM"/></data> <data src="fesModel"><columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header=""/><variables function="getEndDate"/><presentation format="yyyy"/></data></PeriodEnd>
+
+	
+	<currentUser_Fullname> </currentUser_Fullname>
+	<currentUser_Email> </currentUser_Email>
+	<currentUser_Id> </currentUser_Id>
+	<currentUser_Language> </currentUser_Language>
+	<currentUser_Ntdomain> </currentUser_Ntdomain>
+	<currentUser_Phonenumber> </currentUser_Phonenumber>
+	<currentUser_Ccrmid> </currentUser_Ccrmid>
+	<currentUser_CertificateId> </currentUser_CertificateId>
+
+	<currentCustomer_AccountManager> </currentCustomer_AccountManager>
+	<currentCustomer_BvdId> </currentCustomer_BvdId>
+	<currentCustomer_ChamberOfCommerceNumber> </currentCustomer_ChamberOfCommerceNumber>
+	<currentCustomer_City> </currentCustomer_City>
+	<currentCustomer_Country> </currentCustomer_Country>
+	<currentCustomer_CustomerNumber> </currentCustomer_CustomerNumber>
+	<currentCustomer_CustomerType> </currentCustomer_CustomerType>
+	<currentCustomer_DateOfBirth> </currentCustomer_DateOfBirth>
+	<currentCustomer_HouseNumber> </currentCustomer_HouseNumber>
+	<currentCustomer_Id> </currentCustomer_Id>
+	<currentCustomer_LegalStatusCode> </currentCustomer_LegalStatusCode>
+	<currentCustomer_LegalStatusDescription> </currentCustomer_LegalStatusDescription>
+	<currentCustomer_Name> </currentCustomer_Name>
+	<currentCustomer_OfficeName> </currentCustomer_OfficeName>
+	<currentCustomer_OfficeNumber> </currentCustomer_OfficeNumber>
+	<currentCustomer_ProjectName> </currentCustomer_ProjectName>
+	<currentCustomer_ReferenceId> </currentCustomer_ReferenceId>
+	<currentCustomer_SectorOfIndustryCode> </currentCustomer_SectorOfIndustryCode>
+	<currentCustomer_SectorOfIndustryDescription> </currentCustomer_SectorOfIndustryDescription>
+	<currentCustomer_StateOrProvince> </currentCustomer_StateOrProvince>
+	<currentCustomer_Street> </currentCustomer_Street>
+	<currentCustomer_ZipCode> </currentCustomer_ZipCode>
+
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+
+<!-- ALGEMEEN -->
+	<FirstPage_visible>true</FirstPage_visible>
+	<Details_visible>false</Details_visible>
+	<Preface_visible>false</Preface_visible>
+	<TableOfContents_visible>false</TableOfContents_visible>
+	<Introduction_visible>false</Introduction_visible>
+
+<!-- RESULTATENREKENING -->
+	<IncomeStatementSummary_visible>false</IncomeStatementSummary_visible>
+	<IncomeStatement_visible>false</IncomeStatement_visible>
+	<IncomeStatementHeadlines_visible>false</IncomeStatementHeadlines_visible>
+	<IncomeStatementDetail_visible>false</IncomeStatementDetail_visible>
+
+<!-- BALANS -->
+	<BalanceSheetSummary_visible>false</BalanceSheetSummary_visible>
+	<BalanceSheetHeadlines_visible>false</BalanceSheetHeadlines_visible>
+	<BalanceSheetAssets_visible>false</BalanceSheetAssets_visible>
+	<BalanceSheetEquityAndLiabilities_visible>false</BalanceSheetEquityAndLiabilities_visible>
+
+<!-- LIQUIDITEIT -->
+	<LiquidityStatementSummary_visible>false</LiquidityStatementSummary_visible>
+	
+	<CashflowStatement_visible>false</CashflowStatement_visible>
+	
+	<InvestmentsAndFinancingPlan_visible>false</InvestmentsAndFinancingPlan_visible>
+	
+	<LiquidityStatement_visible>false</LiquidityStatement_visible>
+
+	<Disclaimer> </Disclaimer>
+	<Preface_comment> </Preface_comment>
+	<Introduction_comment> </Introduction_comment>
+
+<!-- RESULTATENREKENING -->
+	<IncomeStatementTitle><data src="fesModel"><variables var="IncomeStatement" function="getTitle"/></data></IncomeStatementTitle>
+	<IncomeStatementSummary_comment> </IncomeStatementSummary_comment>
+	<IncomeStatementHeadlines_comment> </IncomeStatementHeadlines_comment>
+	<IncomeStatement_comment> </IncomeStatement_comment>
+	<IncomeStatementDetail_comment> </IncomeStatementDetail_comment>
+
+<!-- BALANS -->
+	<BalanceSheetTitle><data src="fesModel"><variables var="BalanceSheet" function="getTitle"/></data></BalanceSheetTitle>
+	<BalanceSheetSummary_comment> </BalanceSheetSummary_comment>
+	<BalanceSheetHeadlines_comment> </BalanceSheetHeadlines_comment>
+	<BalanceSheetAssets_comment> </BalanceSheetAssets_comment>
+	<BalanceSheetEquityAndLiabilities_comment> </BalanceSheetEquityAndLiabilities_comment>
+
+<!-- LIQUIDITEIT -->
+	<LiquidityTitle><data src="chineseRoom" name="Liquidity">Liquiditeit</data></LiquidityTitle>
+	<LiquidityStatementSummary_comment> </LiquidityStatementSummary_comment>
+	<CashflowStatement_comment> </CashflowStatement_comment>
+	<InvestmentsAndFinancingPlan_comment> </InvestmentsAndFinancingPlan_comment>
+	<LiquidityStatement_comment> </LiquidityStatement_comment>
+
+</properties>
+
+<!-- ALGEMEEN -->
+
+<!-- Voorpagina -->
+<newpage name="frontpage" visible="./document/properties/FirstPage_visible/text()='true'">
+	<img id="logo"><data src="map" var="logo" /></img>
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- Voorwoord -->
+<newpage name="preface" visible="./document/properties/Details_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<newpage name="normal" visible="./document/properties/Details_visible/text()!='true' and ./document/properties/Preface_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="section" visible="./document/properties/Preface_visible/text()='true'"><data src="chineseRoom" name="Preface">Voorwoord</data></p>
+<p class="normal" visible="./document/properties/Preface_visible/text()='true'"><data src="document" var="./document/properties/Preface_comment/text()"/></p>
+
+
+<!-- Inhoudsopgave -->
+<newpage name="normal" visible="./document/properties/TableOfContents_visible/text()='true'">
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="normal" visible="./document/properties/TableOfContents_visible/text()='true'"> </p>
+<tableofcontents class="split" visible="./document/properties/TableOfContents_visible/text()='true'">
+	<title><data src="chineseRoom" name="TOC">Inhoudsopgave</data></title>
+	<tocdepth>3</tocdepth>
+</tableofcontents>
+
+<!-- Inleiding -->
+<newpage name="normal" visible="./document/properties/Introduction_visible/text()='true'">
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="normal" visible="./document/properties/Introduction_visible/text()='true'"> </p>
+<section class="sectionnum" visible="./document/properties/Introduction_visible/text()='true'"><data src="chineseRoom" name="Introduction">Inleiding</data></section>
+<p class="normal" visible="./document/properties/Introduction_visible/text()='true'"><data src="document" var="./document/properties/Introduction_comment/text()"/></p>
+
+
+
+
+
+
+
+
+
+
+<!-- RESULTATENREKENING -->
+<newpage name="normal" visible="./document/properties/IncomeStatementHeadlines_visible/text()='true' or ./document/properties/IncomeStatement_visible/text()='true' or ./document/properties/IncomeStatementDetail_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/IncomeStatementHeadlines_visible/text()='true' or ./document/properties/IncomeStatement_visible/text()='true' or ./document/properties/IncomeStatementDetail_visible/text()='true'"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+
+<!-- Resultatenrekening  op hoofdlijnen-->
+<p visible="./document/properties/IncomeStatementHeadlines_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/IncomeStatementHeadlines_visible/text()='true'"><data src="chineseRoom" name="CompareProfitLossSummary">Vergelijking resultatenrekening op hoofdlijnen</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/IncomeStatementHeadlines_visible/text()='true'">
+	<data src="multidoctable">
+		<columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+		<columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader"/>
+		<diffcolumns header="Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<diffcolumns percentage="true" header="% Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+ 		</diffcolumns>
+		<variables recursiveSkip="false" depth="1" var="IncomeStatement" varFrom="NetSales"/>
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" />
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1" />
+	</data>
+</table>
+<p class="normal" visible="(./document/properties/IncomeStatementHeadlines_visible/text()='true') and (./document/properties/IncomeStatementHeadlines_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/IncomeStatementHeadlines_comment/text()"/>
+</p>
+    
+<!-- Vergelijking resultatenrekening -->
+<newpage name="normal" visible="./document/properties/IncomeStatement_visible/text()='true' and ./document/properties/IncomeStatementHeadlines_visible/text()='true'">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="./document/properties/IncomeStatement_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/IncomeStatement_visible/text()='true'"><data src="chineseRoom" name="CompareProfitLoss">Vergelijking resultatenrekening</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/IncomeStatement_visible/text()='true'">
+ 	<data src="multidoctable">
+		<columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+		<columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+	    <diffcolumns header="Verschil" number="1">
+		    <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true"/>
+		    <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true"/>
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+	    <diffcolumns percentage="true" header="% Verschil" number="1">
+		    <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true"/>
+		    <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true"/>
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+	    </diffcolumns>
+		<variables recursiveSkip="false" depth="2" var="IncomeStatement" varFrom="NetSales"/>
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" />
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1" />
+	</data>
+</table>
+<p class="normal" visible="(./document/properties/IncomeStatement_visible/text()='true') and (./document/properties/IncomeStatement_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/IncomeStatement_comment/text()"/>
+</p>
+
+<!-- Uitgebreide vergelijking resultatenrekening -->
+<newpage name="normal" visible="./document/properties/IncomeStatementDetail_visible/text()='true' and (./document/properties/IncomeStatementHeadlines_visible/text()='true' or ./document/properties/IncomeStatement_visible/text()='true')">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="(./document/properties/IncomeStatementDetail_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/IncomeStatementDetail_visible/text()='true'"><data src="chineseRoom" name="CompareProfitLossExtended">Uitgebreide vergelijking resultatenrekening</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="(./document/properties/IncomeStatementDetail_visible/text()='true')">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+		<variables recursiveSkip="false" depth="2" var="Products" varFrom="Product_ti001" />
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<table class="datatableDiff" visible="(./document/properties/IncomeStatementDetail_visible/text()='true')">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <variables recursiveSkip="false" depth="2" var="OperatingExpenses" varFrom="PersonnelExpenses"/>
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<table class="datatableDiff" visible="(./document/properties/IncomeStatementDetail_visible/text()='true')">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <variables recursiveSkip="false" depth="0" var="OrdinaryProfitBeforeTaxes" />
+		<variables recursiveSkip="false" depth="0" var="ExtraordinaryIncomeAndExpenses" />
+		<variables recursiveSkip="false" depth="0" var="TaxableAmountAdditions" />
+		<variables recursiveSkip="false" depth="0" var="TaxableAmountExtractions" />
+		<variables recursiveSkip="false" depth="0" var="TaxableProfit" />
+		<variables recursiveSkip="false" depth="0" var="TaxableLossesCarriedForward" />
+		<variables recursiveSkip="false" depth="0" var="TaxableAmount" />
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<p class="normal" visible="(./document/properties/IncomeStatementDetail_visible/text()='true') and (./document/properties/IncomeStatementDetail_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/IncomeStatementDetail_comment/text()"/>
+</p>
+    
+
+
+
+
+
+
+
+
+
+<!-- BALANS -->
+<newpage name="normal" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true' or ./document/properties/BalanceSheetAssets_visible/text()='true' or ./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true'">
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true' or ./document/properties/BalanceSheetAssets_visible/text()='true' or ./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true'"><data src="document" var="./document/properties/BalanceSheetTitle/text()"/></section>
+
+<!-- Vergelijking balans op hoofdlijnen -->
+<p visible="./document/properties/BalanceSheetHeadlines_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true'"><data src="chineseRoom" name="CompareBalanceSummary">Vergelijking balans op hoofdlijnen</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true'">
+	<data src="multidoctable">
+		<columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+		<columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+		<diffcolumns header="Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<diffcolumns percentage="true" header="% Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<variables recursiveSkip="false" depth="1" var="BalanceSheet" varFrom="IntangibleFixedAssets" varTo="TotalAssets" />
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true'"> </p>
+<table class="datatableDiff" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true'">
+	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+		<variables recursiveSkip="false" depth="1" var="BalanceSheet" varFrom="NetWorth" varTo="TotalEquityAndLiabilities" />
+        <presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>    
+<p class="normal" visible="./document/properties/BalanceSheetHeadlines_visible/text()='true' and ./document/properties/BalanceSheetHeadlines_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetHeadlines_comment/text()"/>
+</p>
+    
+<!-- Vergelijking Balans -->
+<!-- Vergelijking Activa -->
+<newpage name="normal" visible="./document/properties/BalanceSheetAssets_visible/text()='true' and ./document/properties/BalanceSheetHeadlines_visible/text()='true'">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="./document/properties/BalanceSheetAssets_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetAssets_visible/text()='true'"><data src="chineseRoom" name="CompareBalanceAssets">Vergelijking balans - activa</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+
+<table class="datatableDiff" visible="./document/properties/BalanceSheetAssets_visible/text()='true'">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+ 	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+   		<variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="IntangibleFixedAssets" varTo="TotalAssets" />
+       	<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true"  showHeaderRowShowYear="false" />
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1" />
+	</data>
+</table> 		
+<p class="normal" visible="./document/properties/BalanceSheetAssets_visible/text()='true' and ./document/properties/BalanceSheetAssets_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetAssets_comment/text()"/>
+</p>
+    
+<!-- Vergelijking passiva -->
+<newpage name="normal" visible="./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true' and (./document/properties/BalanceSheetHeadlines_visible/text()='true' or ./document/properties/BalanceSheetAssets_visible/text()='true')">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true'"><data src="chineseRoom" name="CompareBalanceEquityLiabilities">Vergelijking balans - passiva</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true'">
+ 	<data src="multidoctable">
+    <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+		<columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+		<diffcolumns header="Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<diffcolumns percentage="true" header="% Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="NetWorth" varTo="TotalEquityAndLiabilities" />
+    	<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" headerLabel="Passiva" showHeaderRowShowYear="false" />
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" headerLabel="Passiva" showHeaderRowShowYear="false" prependEmptyColumns="1" />
+	</data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetEquityAndLiabilities_visible/text()='true' and ./document/properties/BalanceSheetEquityAndLiabilities_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetEquityAndLiabilities_comment/text()"/>
+</p>
+
+
+
+
+
+
+
+
+
+
+<!-- LIQUIDITEIT -->
+<newpage name="normal" visible="./document/properties/CashflowStatement_visible/text()='true'
+or ./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'
+or ./document/properties/LiquidityStatement_visible/text()='true'">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/CashflowStatement_visible/text()='true'
+or ./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'
+or ./document/properties/LiquidityStatement_visible/text()='true'"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+
+<!-- Vergelijking kasstroomoverzicht -->
+<p visible="./document/properties/CashflowStatement_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/CashflowStatement_visible/text()='true'"><data src="chineseRoom" name="CompareCashflow">Vergelijking kasstroomoverzicht</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/CashflowStatement_visible/text()='true'">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <variables recursiveSkip="false" depth="2" var="CashFlowStatementIndirect" varFrom="OperationalCashflow"/>
+        <presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<p class="normal" visible="(./document/properties/CashflowStatement_visible/text()='true') and (./document/properties/CashflowStatement_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/CashflowStatement_comment/text()"/>
+</p>
+    
+<!-- Vergelijking investerings- en financieringsplan  -->
+<newpage name="normal" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true' and ./document/properties/CashflowStatement_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'"><data src="chineseRoom" name="CompareInvestmentFinancing">Vergelijking investerings- en financieringsplan</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'">
+ 	<data src="multidoctable">
+        <columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+        <columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+        <diffcolumns header="Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <diffcolumns percentage="true" header="% Verschil" number="1">
+	        <columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+	        <columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+        </diffcolumns>
+        <variables recursiveSkip="false" depth="2" var="InvestmentsAndFinancingPlan" varFrom="CashflowFromOperatingActivities"/>
+        <presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<p class="normal" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true' and ./document/properties/InvestmentsAndFinancingPlan_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/InvestmentsAndFinancingPlan_comment/text()"/>
+</p>
+    
+<!-- Vergelijking liquiditeitsoverzicht -->
+<newpage name="normal" visible="./document/properties/LiquidityStatement_visible/text()='true' and (./document/properties/CashflowStatement_visible/text()='true' or ./document/properties/InvestmentsAndFinancingPlan_visible/text()='true')">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p visible="./document/properties/LiquidityStatement_visible/text()='true'"> </p>
+<subsection class="subsectionnum" visible="./document/properties/LiquidityStatement_visible/text()='true'"><data src="chineseRoom" name="CompareLiquidity">Vergelijking liquiditeitsoverzicht</data> (<data src="document" var="./document/properties/PeriodStart"/>-<data src="document" var="./document/properties/PeriodEnd"/>)</subsection>
+<table class="datatableDiff" visible="./document/properties/LiquidityStatement_visible/text()='true'">
+	<data src="multidoctable">
+		<columns visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:round(./document/properties/PreviousRealisationDelta/text())" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/PreviousYearHeader"/>
+		<columns document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/BudgetHeader" />
+		<columns document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" number="1" order="desc" virtualColumns="true" withMonths="xpath:./document/properties/RealisationMonths/text()" header="xpath:./document/properties/RealisationHeader" />
+		<diffcolumns header="Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBaseValue/text()* -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<diffcolumns percentage="true" header="% Verschil" number="1">
+			<columns number="1" header="" document="1" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/RealisationDelta/text()" order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<columns number="1" header="" document="0" timeline="xpath:./document/properties/TimelineTitle" delta="xpath:./document/properties/BudgetDelta/text()"  order="desc" withMonths="xpath:./document/properties/RealisationMonths/text()" virtualColumns="true" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text()" operator="Greater" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+			<highlight visible="./document/properties/HighlightIndication/text() = 'COLOR'" baseValue="xpath:./document/properties/HighlightBasePercentageValue/text() * -1" operator="SmallerEquals" textcolor="xpath:./document/properties/HighlightTextColor/text()" />
+		</diffcolumns>
+		<variables recursiveSkip="false" depth="2" var="StatementOfLiquidity" varFrom="BeginningBalanceCurrentAccount" />
+		<presentation visible="number(./document/properties/PreviousRealisationDelta/text()) >= 0" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+		<presentation visible="0 > number(./document/properties/PreviousRealisationDelta/text())" filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" showHeaderRowShowYear="false" prependEmptyColumns="1">
+			<overrideStyle old="level0">level1</overrideStyle>
+		</presentation>
+	</data>
+</table>
+<p class="normal" visible="./document/properties/LiquidityStatement_visible/text()='true' and ./document/properties/LiquidityStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/LiquidityStatement_comment/text()"/>
+</p>
+</document>

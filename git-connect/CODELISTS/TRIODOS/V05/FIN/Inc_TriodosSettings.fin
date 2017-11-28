@@ -1,0 +1,3 @@
+;; Controle op balansevenwicht standaard op jaarbasis
+.Formulas NoTrend,Trend
+BalanceCheckDetail             = 1

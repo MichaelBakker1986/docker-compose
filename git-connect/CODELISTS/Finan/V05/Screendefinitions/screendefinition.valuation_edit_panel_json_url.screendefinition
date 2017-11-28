@@ -1,0 +1,8 @@
+{
+	"name":"valuation-scorecard",
+	"viewType":"SCORECARD",
+	"variableName":"Q_ROOT_VALUATION",
+	"metaData":{
+		"noLastStepCompensation": true
+	}
+}

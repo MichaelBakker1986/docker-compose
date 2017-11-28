@@ -1,0 +1,16 @@
+.Formulas NoTrend
+kvkiLegalSizeCriteriaClassification="Klein"
+frciAgriculturalActivities=If(IsAgro,"Ja","Nee") 
+venjbw2iBasisOfPreparation = If(T<MaxT,Self[T+1],If(IsFiscaal,"Fiscaal","Commercieel"))
+frciFinancialStatementType = If(IsEnkelvoudig,"Enkelvoudig","Geconsolideerd")
+
+.Choices
+kvkiLegalSizeCriteriaClassification="Klein|Micro"
+
+.Formulas Locked
+kvkiLegalSizeCriteriaClassification=On
+frciAgriculturalActivities=On
+
+
+.Hints
+frcdimLocationActualActivitiesDescriptionAddressNLSpecificationAxis="$$XbrlMinTupleInstances=1"/Add

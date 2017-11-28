@@ -1,0 +1,15 @@
+;—————————————————————————————————————————————————————————————————————————————
+; Define calculation tree roots in FINAN Mapping Tool:
+;
+{&&If VersionBefore 3.1.7}
+{&&Else}
+.Variable AssetsTotal,CalcTreeRoot=On/Debet
+.Variable EquityAndLiabilitiesTotal,CalcTreeRoot=On/Credit
+.Variable NetProfit,CalcTreeRoot=On/Credit
+.Variable ChangesInEquity,CalcTreeRoot=On/Credit
+.Variable CFi_EndOfPeriodCashAndCashEquiv,CalcTreeRoot=On/Debet   ;!!! EJS december 2013
+.Variable CashAndCashEquivalentsRounding,CalcTreeRoot=Off         ;!!! EJS maart 2014 (deze uitsluiten van CalcTree ivm ongewenste verdichting in FMT4!)
+
+.Variable ImportCheck,CalcTreeRoot=On/Credit                      ; EJS november 2017
+
+{&&EndIf}

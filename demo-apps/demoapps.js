@@ -19,7 +19,7 @@ app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
 app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
-app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../ff-ssh-git/resources/"));
+app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 
 //IDE proxies
 app.get('*/excelide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))

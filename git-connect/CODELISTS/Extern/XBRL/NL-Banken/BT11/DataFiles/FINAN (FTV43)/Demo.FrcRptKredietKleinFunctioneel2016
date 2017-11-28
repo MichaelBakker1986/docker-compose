@@ -1,0 +1,44 @@
+; FINAN Data Script
+; created by FINAN 03.02.057.014 on 12-09-2017 14:36
+;
+.FINANversion 03.02.057.014
+.DataKey "Demo"
+.DataModel "FrcRptKredietKleinFunctioneel2016"
+.DataTitle ""
+.DataModelVersion 00.00.000.000
+.UserName ""
+.UserFirm "FINAN"
+.UserPlace "Zwolle"
+.Author "Evert Jan Stokking"
+.FirstMonthInYear 1
+.CreationDate DMYtoDate(12,9,2017)
+.UpdateDate DMYtoDate(12,9,2017)
+.SetDataFeatures ""
+.SetCurrency "EUR",Script
+.ScriptScale 1
+
+.SetPeriod MainPeriod,Title="main period",FirstYear=2016,Years=1,UserChangeYears=On,FormulaSet=NoTrend,FormulaSetTitle="",TsY1=1,MaxTsY1=1
+
+
+
+.SetCurrency "EUR",View
+.ViewScale 1000
+.Decimals 0
+.MutCalcInFirstCol No
+.ViewTsY 1
+.ReportDialogRange ""
+.ActionChecks
+
+; Calculated values:
+.CalculatedVar Q_ROOT[MainPeriod:]=0
+.CalculatedVar Q_STEP01[MainPeriod:]=0
+.CalculatedVar Q_STEP02[MainPeriod:]=0
+.CalculatedVar Q_STEP03[MainPeriod:]=0
+.CalculatedVar Q_STEP04[MainPeriod:]=0
+.CalculatedVar Q_STEP05[MainPeriod:]=0
+.CalculatedVar Q_STATUS[MainPeriod:]=0
+.CalculatedVar Q_STATUS_MODIFIED_ON[MainPeriod:]=42990.608475521
+.CalculatedVar ModelGenerator[MainPeriod:]="FINAN XBRL Taxonomy Viewer v4.3.24"
+.CalculatedVar XbrlReport[MainPeriod:]="frc-rpt-krediet-klein-functioneel-2016"
+
+.Quit

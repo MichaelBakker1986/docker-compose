@@ -1,0 +1,35 @@
+{&&Language=English}
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+; NaBoBalans_JaarrekAccountVerkl.fib
+;
+0: Geen - Geen verklaring
+10: Sv. - Samenstellingsverklaring
+20: Sv con. - Samenstellingsverklaring met continuïteitsdreiging
+30: Gk bv. - Goedkeurende beoordelingsverklaring
+40: Bv con. - Beoordelingsverklaring met vermelding van continuïteitsdreiging
+50: Bv bep. - Beoordelingsverklaring met beperking
+60: Afk bv. - Afkeurende beoordelingsverklaring
+70: Gk av. - Goedkeurende accountantsverklaring
+80: Gk av con. - Goedkeurende accountantsverklaring met vermelding van continuïteitsdreiging
+90: Av bep. - Accountantsverklaring met beperking
+100:Av oord. - Accountantsverklaring met oordeelsonthouding
+110:Afk acc. - Afkeurende accountantsverklaring

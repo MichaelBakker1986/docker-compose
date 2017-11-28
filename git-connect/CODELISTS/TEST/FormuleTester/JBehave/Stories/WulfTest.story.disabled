@@ -1,0 +1,17 @@
+Fes test stories
+
+Meta:
+@author Wulf
+
+Scenario: test tuple titles
+Given a document with timeunit MONTH for the historic year 2005 and the forecast year 2007 
+When the tuple AssetsTuple is 3 times added
+And the title of variable AssetsTuple is set to blub for index 1
+And the title of variable AssetsTuple is set to blub2 for index 2
+Then the tuple AssetsTuple should have title blub for index 1
+And the tuple AssetsTuple should have title blub2 for index 2
+
+Scenario: iets met Omzet
+Given a document with timeunit MONTH for the historic years 2011,2012 and the forecast years 2013,2014
+When variable Product_tpSales_ti003 has value 50000 for column with month january in year 2013
+Then variable Product_tpSalesInvoiced_ti003 should be 50000 for column with month january in year 2013

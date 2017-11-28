@@ -10,7 +10,7 @@ var WorkBook = require('../../lme-core/fesjs/JSWorkBook')
 var FESContext = require('../../lme-core/fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-require('../../ff-math/ff-math')
+require('../../math/ff-math')
 var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup

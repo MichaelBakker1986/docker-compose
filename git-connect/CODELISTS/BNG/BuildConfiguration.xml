@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="make-zipfile-bng-all" name="Make_ZipFile">
+	<tstamp>
+		<format property="ldt" pattern="yyyy-MM-dd_HHmm" locale="en,UK" />
+	</tstamp>
+
+	<target name="make-zipfile-bng-all" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset dir="${basedir}/_ZipFile/" includes="**/*.zip" />
+		</delete>
+		<antcall target="make-zipfile-default" />
+		<antcall target="make-zipfile-models" />
+
+		<zip destfile="${basedir}/_ZipFile/configurations_bng_all_${ldt}.zip">
+			<fileset dir="${basedir}/_ZipFile" includes="*.zip" excludes="configurations_bng_all*.zip" />
+		</zip>
+	</target>
+
+	<target name="make-zipfile-bng-test" description="Make the ZipFile">
+		<mkdir dir="${basedir}/_ZipFile" />
+		<delete>
+			<fileset dir="${basedir}/_ZipFile/" includes="**/*.zip" />
+		</delete>
+		<antcall target="make-zipfile-default" />
+		<antcall target="make-zipfile-ffl" />
+
+		<zip destfile="${basedir}/_ZipFile/configurations_bng_test_${ldt}.zip">
+			<fileset dir="${basedir}/_ZipFile" includes="*.zip" excludes="configurations_bng_test_*.zip" />
+		</zip>
+	</target>
+
+	<target name="make-zipfile-models">
+		<zip destfile="${basedir}/_ZipFile/configuration_bng_models_${ldt}.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/V05/JAR/*.model" />
+				<globmapper from="*" to="*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/WSW/JAR/*.model" />
+				<globmapper from="*" to="*" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/VHV/JAR/*.model" />
+				<globmapper from="*" to="*" />
+			</mappedresources>
+
+		</zip>
+	</target>
+
+	<target name="make-zipfile-ffl">
+		<zip destfile="${basedir}/_ZipFile/configuration_bng_ffl_${ldt}.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/V05/FFL/V05.FFL" />
+				<globmapper from="V05.FFL" to="ffl.V05.ffl" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/WSW/FFL/WSW.FFL" />
+				<globmapper from="VHV.FFL" to="ffl.WSW.ffl" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/VHV/FFL/VHV.FFL" />
+				<globmapper from="VHV.FFL" to="ffl.VHV.ffl" />
+			</mappedresources>
+		</zip>
+	</target>
+
+	<target name="make-zipfile-default" description="Make the ZipFile">
+		<zip destfile="${basedir}/_ZipFile/configuration_bng_${ldt}.zip" filesonly="true">
+			<mappedresources>
+				<fileset file="${basedir}/../../CODELISTS/Finan/V05_FinanOnline/_Project/translations.*" />
+				<globmapper from="translations.ff_prognose_translations.csv" to="translations.ff_prognose_translations.translation" />
+			</mappedresources>
+			<mappedresources>
+        <fileset file="${basedir}/../Finan/V05_FinanOnline/_Project/translations.*" />
+        <globmapper from="translations.V05.csv" to="translations.V05.translation" />
+      </mappedresources>
+      <mappedresources>
+        <fileset file="${basedir}/../Finan/V05_FinanOnline/_Project/translations.*" />
+        <globmapper from="translations.finanfinancials.csv" to="translations.finanfinancials.translation" />
+      </mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/_Project/Translations/klant_BNG_translations.csv" />
+				<globmapper from="klant_BNG_translations.csv" to="translations.klant_BNG_translations.translation" />
+			</mappedresources>
+			<fileset file="${basedir}/_Project/screendefinitions/screendefinition.*.screendefinition" />
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.financialfactsheet.frb.xml" />
+				<globmapper from="reports.financialfactsheet.frb.xml" to="reports.financialfactsheet.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.reports.frb.rpt" />
+				<globmapper from="reports.reports.frb.rpt" to="reports.reports.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/MappingTables/*.xml" />
+				<globmapper from="*.Fmt4Table.xml" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/WSW/MappingTables/*.mapping" />
+				<globmapper from="*.mapping" to="mappings.*.mapping" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/_Project/ReportDefinition/reports.definitions.config" />
+				<globmapper from="reports.definitions.config" to="reports.definitions.config" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/WSW/Reports/reports.questionnaire-wsw.frb.xml" />
+				<globmapper from="reports.questionnaire-wsw.frb.xml" to="reports.questionnaire-wsw.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/VHV/Reports/reports.questionnaire-vhv.frb.xml" />
+				<globmapper from="reports.questionnaire-vhv.frb.xml" to="reports.questionnaire-vhv.frb-xml" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.reports.frb.rpt" />
+				<globmapper from="reports.reports.frb.rpt" to="reports.questionnaire-wsw.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/V05/Reports/reports.reports.frb.rpt" />
+				<globmapper from="reports.reports.frb.rpt" to="reports.questionnaire-vhv.frb-rpt" />
+			</mappedresources>
+			<mappedresources>
+				<fileset file="${basedir}/_Project/Mail/*.*" />
+				<globmapper from="*" to="*" />
+			</mappedresources>
+		</zip>
+	</target>
+</project>

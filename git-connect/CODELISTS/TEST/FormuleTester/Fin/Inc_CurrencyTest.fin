@@ -1,0 +1,52 @@
+{&&Language=English};Inc_CurrencyTest.fin
+
+.Variables
+PPP   0 1N     1               "Currency"                                			\CurrencyTest
+
+PIII    1N     2               "OneCol test variable"								\TestCurrencyOneColBasic
+PIII    PN     2               "Period test variable"								\TestCurrencyPeriodBasic
+
+PIII    1N     2               "Test Currency Flow(F)"                           	\TestCurrencyFlow
+PIII    FN     3               "Basic Flow"              			          		\TestCurrencyFlowBasic
+PIII    FN     3  +            "Flow with [T-1] Formula"                      		\TestCurrencyFlowFormula ;also saved as calculated variable ('+' mark)
+PIII    FN     3               "Reference to Flow with [T-1] Formula"               \TestCurrencyFlowFormulaReference=TestCurrencyFlowFormula
+
+PIII    1N     2               "Test Currency Balance (B)"                          \TestCurrencyBalance
+PIII    BN     3               "Basic Balance"              			          	\TestCurrencyBalanceBasic
+PIII    BN     3  +            "Balance with [T-1] Formula"                      	\TestCurrencyBalanceFormula	;also saved as calculated variable ('+' mark)
+PIII    BN     3               "Reference to Balance with [T-1] Formula"            \TestCurrencyBalanceFormulaReference=TestCurrencyBalanceFormula
+
+PIII    1N     2               "Test Currency OneCol"                           	\TestCurrencyOneCol
+PIII    1N     3       -       "Test Currency Flow Col for onecol formulas" 		\TestCurrencyFlowCol
+PIII    1N     3       -       "Test Currency Balance Col for onecol formulas" 		\TestCurrencyBalanceCol
+PIII    1N     3               "OneCol var using flow in formula"                   \TestCurrencyOneColWithFlow
+PIII    FN     3               "Flow var using oneCol in formula" 					\TestCurrencyFlowWithOneCol
+PIII    1N     3               "OneCol var using balance in formula"                \TestCurrencyOneColWithBalance
+PIII    BN     3               "Balance var using oneCol in formula" 				\TestCurrencyBalanceWithOneCol
+PIII    1N     3               "OneCol var using oneCol in formula"     			\TestCurrencyOneColWithOneCol
+
+PIII    1N     2               "Test Currency OneCol Unspec"                        \TestCurrencyOneColUnspecTotal
+PIII    1N  *  3               "Test Currency OneCol Unspec Preferred" 				\TestCurrencyOneColUnspecPreferred
+PIII    1N     3               "Test Currency OneCol Unspec Sub 2" 					\TestCurrencyOneColUnspecSub2
+PIII   =1N    -3=              =TestCurrencyOneColUnspecTotal						\=TestCurrencyOneColUnspecTotal
+
+IIII     T   1 2               "Test Currency OneCol Tuple"        					\TestCurrencyOneColBaseTuple
+PIII    1N     3               "Test Currency OneCol Value 1"   		        	\TestCurrencyOneColTupleValue1
+PIII    1N     3               "Test Currency OneCol Value 2"   		        	\TestCurrencyOneColTupleValue2
+IIII    1N   1 3               "Test Currency OneCol Total"             			\TestCurrencyOneColTupleTotal
+
+.Formulas NoTrend,Trend
+TestCurrencyOneColWithFlow		= FesExpression("GetValue(TestCurrencyFlowBasic, TestCurrencyFlowCol, TsY(TestCurrencyFlowCol), BOOKYEAR)")
+TestCurrencyFlowWithOneCol		= TestCurrencyOneColBasic
+TestCurrencyOneColWithBalance	= FesExpression("GetValue(TestCurrencyBalanceBasic, TestCurrencyBalanceCol, TsY(TestCurrencyBalanceCol), BOOKYEAR)")
+TestCurrencyBalanceWithOneCol	= TestCurrencyOneColBasic
+TestCurrencyOneColWithOneCol	= TestCurrencyOneColBasic
+TestCurrencyOneColTupleTotal	= TestCurrencyOneColTupleValue1 + TestCurrencyOneColTupleValue2
+
+.Formulas NoTrend
+TestCurrencyFlowFormula			= (T - FirstTinYear(T) + 1) * 10	; 10, 20, 30, 40...
+TestCurrencyBalanceFormula		= (T - FirstTinYear(T) + 1) * 10	; 10, 20, 30, 40...
+
+.Formulas Trend
+TestCurrencyFlowFormula			= FesExpression("GetValue(TestCurrencyFlowFormula, T-1, TsY, BOOKYEAR)")
+TestCurrencyBalanceFormula		= FesExpression("GetValue(TestCurrencyBalanceFormula, T-1, TsY, BOOKYEAR)")

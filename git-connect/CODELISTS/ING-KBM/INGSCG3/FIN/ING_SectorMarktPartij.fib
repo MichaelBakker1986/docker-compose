@@ -1,0 +1,20 @@
+; Keuzetabel bij vraag DominanteSectorMarkt
+; Mantis #47176 (EJS 8-2-2015)
+;
+0:   Onbekend
+10:  Detailhandel – traditioneel
+11:  Detailhandel – internet
+20:  Groothandel – Bouw
+21:  Groothandel – Overig
+30:  Handel – Automotive
+40:  Transport & Logistiek – Land
+41:  Zee-, Kust- &/ Binnenvaart
+50:  Dienstverlening Business to Consumer
+51:  Dienstverlening Business to Business
+60:  Publieke sector
+70:  Zorginstellingen/Ziekenhuizen
+80:  Bouw
+90:  Industrie
+100: Agrarisch excl. Glastuinbouw
+101: Glastuinbouw
+110: Consument

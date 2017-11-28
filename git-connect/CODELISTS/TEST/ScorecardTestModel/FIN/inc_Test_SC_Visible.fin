@@ -1,0 +1,35 @@
+; inc_Test_SC_Visible.fin
+; EJS februari 2015
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Scorecard Test Paragraph
+; Visible
+
+PPP     BN     3               "Test Visible"                                                      \TestVisible
+
+PII     1A     4               "Dit is een stringvraag (origineel)"                                \tvStrVarOrg
+PII     1A     4               "Idem kopie"                                                        \tvStrVarCopy=tvStrVarOrg
+PII     1A     4               "Idem kopie zonder visible-formule"                                 \tvStrVarCopy2=tvStrVarOrg
+PII     BN     4               "Dit is een numerieke kolomvraag (origineel)"                       \tvColVarOrg
+PII     BN     4               "Idem kopie"                                                        \tvColVarCopy=tvColVarOrg
+PII     BN     4               "Idem kopie (blijft zichtbaar indien waarde)"                       \tvColVarCopy2=tvColVarOrg
+PII     1N C   4               "Zichtbaarheid originelen"                                          \tvOrgsVisible
+PII     1N C   4               "Zichtbaarheid kopieën"                                             \tvCopiesVisible
+
+.Choices
+tvOrgsVisible= "0:onzichtbaar|1:zichtbaar"
+tvCopiesVisible= "0:onzichtbaar|1:zichtbaar"
+
+.Formulas NoTrend
+tvOrgsVisible= 1
+tvCopiesVisible= 1
+
+.Formulas Visible
+tvStrVarOrg= tvOrgsVisible
+tvColVarOrg= tvOrgsVisible
+tvStrVarCopy= tvCopiesVisible
+tvColVarCopy= tvCopiesVisible
+tvColVarCopy2= tvCopiesVisible or (FirstValueT(tvColVarOrg)>0)
+
+

@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--FINAN Data file created by Ronald van Aalderen with FINAN version 03.02.056.023 on 09-03-2017 21:34-->
+<finanData>
+  <header>
+    <companyName></companyName>
+    <documentDescription>Zakelijke aanvraag (06-03-2017)</documentDescription>
+    <documentCode>test RN-SN100002</documentCode>
+    <codeList>V04</codeList>
+    <codeListVersion>4.3.24.30</codeListVersion>
+    <buildDate>2017-03-09</buildDate>
+    <buildUser>Ronald van Aalderen</buildUser>
+    <creator>FINAN</creator>
+    <creatorVersion>3.2.56.23</creatorVersion>
+  </header>
+  <timeLines>
+    <timeLine id="MainPeriod_SP1">
+      <title>hist</title>
+      <formulaSet>NoTrend</formulaSet>
+      <columns>
+        <column id="1">
+          <title>2015</title>
+          <startDate>2015-01-01</startDate>
+          <endDate>2015-12-31</endDate>
+          <currency>EUR</currency>
+          <scale>1</scale>
+        </column>
+        <column id="2">
+          <title>2016</title>
+          <startDate>2016-01-01</startDate>
+          <endDate>2016-12-31</endDate>
+          <currency>EUR</currency>
+          <scale>1</scale>
+        </column>
+      </columns>
+    </timeLine>
+  </timeLines>
+  <accounts>
+    <account id="LastModifyDate">
+      <cells>
+        <cell columnId="1" isEntered="true">42803.889749826</cell>
+      </cells>
+    </account>
+    <account id="LastModifyUser">
+      <cells>
+        <cell columnId="1" isEntered="true">Ronald van Aalderen</cell>
+      </cells>
+    </account>
+    <account id="BBStatusBasisDossier">
+      <cells>
+        <cell columnId="1" isEntered="true">30</cell>
+      </cells>
+    </account>
+    <account id="SN1">
+      <cells>
+        <cell columnId="1" isEntered="true">SN100002</cell>
+      </cells>
+    </account>
+    <account id="OndWerk_Standaard">
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagOpstellerString">
+      <cells>
+        <cell columnId="1" isEntered="true">Es, Steef van</cell>
+      </cells>
+    </account>
+    <account id="BBRelatieBeheerderString">
+      <cells>
+        <cell columnId="1" isEntered="true">Abswoude, Pauline van</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagNummer">
+      <cells>
+        <cell columnId="1" isEntered="true">Test RN 6-3 14:41</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagDatum">
+      <cells>
+        <cell columnId="1" isEntered="true">42800.611604155</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagOpsteller">
+      <cells>
+        <cell columnId="1" isEntered="true">56</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagSoort">
+      <cells>
+        <cell columnId="1" isEntered="true">10</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagStatus15">
+      <cells>
+        <cell columnId="1" isEntered="true">42800.611604155</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagStatusHULP">
+      <cells>
+        <cell columnId="1" isEntered="true">15</cell>
+      </cells>
+    </account>
+    <account id="BBAanvraagMemo">
+      <cells>
+        <cell columnId="1" isEntered="true">Test Test test</cell>
+      </cells>
+    </account>
+    <account id="BBrelatienummerBank">
+      <cells>
+        <cell columnId="1" isEntered="true">74</cell>
+      </cells>
+    </account>
+    <account id="BBRelatieBeheerder">
+      <cells>
+        <cell columnId="1" isEntered="true">102</cell>
+      </cells>
+    </account>
+    <account id="BBAccountGroep">
+      <cells>
+        <cell columnId="1" isEntered="true">102</cell>
+      </cells>
+    </account>
+    <account id="BBRelatieSoort">
+      <cells>
+        <cell columnId="1" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="BBInternSamenhRelaties1">
+      <cells>
+        <cell columnId="1" isEntered="true">test</cell>
+      </cells>
+    </account>
+    <account id="BBInternSamenhRelaties2">
+      <cells>
+        <cell columnId="1" isEntered="true">test 2</cell>
+      </cells>
+    </account>
+    <account id="BBInternSamenhRelaties3">
+      <cells>
+        <cell columnId="1" isEntered="true">test3</cell>
+      </cells>
+    </account>
+    <account id="NaamBedr">
+      <cells>
+        <cell columnId="1" isEntered="true">Test RN</cell>
+      </cells>
+    </account>
+    <account id="SectorTitle">
+      <cells>
+        <cell columnId="1" isEntered="true">Winning van delfstoffen</cell>
+      </cells>
+    </account>
+    <account id="SectorCode">
+      <cells>
+        <cell columnId="1" isEntered="true">0</cell>
+      </cells>
+    </account>
+    <account id="SectorTitle2">
+      <cells>
+        <cell columnId="1" isEntered="true">Lagere Overheid</cell>
+      </cells>
+    </account>
+    <account id="SectorCode2">
+      <cells>
+        <cell columnId="1" isEntered="true">09</cell>
+      </cells>
+    </account>
+    <account id="Rechtsvorm">
+      <cells>
+        <cell columnId="1" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="AktF">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="Akt2">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">4000</cell>
+      </cells>
+    </account>
+    <account id="Akt6">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">4000</cell>
+      </cells>
+    </account>
+    <account id="AktC">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">4000</cell>
+      </cells>
+    </account>
+    <account id="AktM">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="Deeln">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="Deeln3">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="FinAktGM">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LeningUG">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="OvFinVA">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">3000</cell>
+      </cells>
+    </account>
+    <account id="HandVrd1">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">10000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OndWerk">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="HandDebOther">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="KortGMVord">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvVord">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvLiqMid">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">4000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="KapitaalGewoon">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">5000</cell>
+        <cell columnId="2" isEntered="true">5000</cell>
+      </cells>
+    </account>
+    <account id="OvRes">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="WinstRes">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="HerwRes">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="AandDerd">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="PensVoorz">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="AssVoorz">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">4000</cell>
+        <cell columnId="2" isEntered="true">4000</cell>
+      </cells>
+    </account>
+    <account id="OvVoorz">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">3000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LangKredC">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LangKred4">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LangKred5">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="LangKred6">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LangKred7">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="RCbank">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="HandCred">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="KortGMKred">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="SocLastKred">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvOverlPas3">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OmzetGr1">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="OmzetGr2">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="OmzetGr3">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OmzetGr4">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OmzetGr8">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="MutOndWerk">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="EigenProd">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvDirInkK">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">2000</cell>
+      </cells>
+    </account>
+    <account id="OvBedrOpbr">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="LoonPers">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="Huurmach">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">2000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvOvKB">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="AktCAfs">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="RVermOverschot">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="RVord">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">5000</cell>
+        <cell columnId="2" isEntered="true">4000</cell>
+      </cells>
+    </account>
+    <account id="RKred5">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="RRekCour">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="ROvK1">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="BoekWinst">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="Schenkingen">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvBuitBaten">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="AfwaarderingOverig">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="OvBuitLasten2">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="WinstBelOverig">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="AandeelResDeeln">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="ResAandDerden">
+      <bookingSign>Debet</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+    <account id="MaxOvMutEV">
+      <cells>
+        <cell columnId="2" isEntered="true">1</cell>
+      </cells>
+    </account>
+    <account id="JaarrekSoort">
+      <cells>
+        <cell columnId="1" isEntered="true">10</cell>
+        <cell columnId="2" isEntered="true">10</cell>
+      </cells>
+    </account>
+    <account id="JaarrekDefinitief">
+      <cells>
+        <cell columnId="1" isEntered="true">10</cell>
+        <cell columnId="2" isEntered="true">20</cell>
+      </cells>
+    </account>
+    <account id="JaarrekAccountPrinciples">
+      <cells>
+        <cell columnId="1" isEntered="true">10</cell>
+        <cell columnId="2" isEntered="true">30</cell>
+      </cells>
+    </account>
+    <account id="JaarrekAccountVerkl">
+      <cells>
+        <cell columnId="1" isEntered="true">30</cell>
+        <cell columnId="2" isEntered="true">20</cell>
+      </cells>
+    </account>
+    <account id="JaarrekNaamAcc">
+      <cells>
+        <cell columnId="1" isEntered="true">EY</cell>
+        <cell columnId="2" isEntered="true">EY</cell>
+      </cells>
+    </account>
+    <account id="AflkjKredG">
+      <bookingSign>Credit</bookingSign>
+      <cells>
+        <cell columnId="1" isEntered="true">1000</cell>
+        <cell columnId="2" isEntered="true">1000</cell>
+      </cells>
+    </account>
+  </accounts>
+</finanData>

@@ -1,0 +1,9 @@
+{&&Language=Deutsch}
+
+0: "0 $>Keine Daten<$"
+1: "1 $>Sehr geringe Risiken<$"
+2: "2 $>Geringe Risiken<$"
+3: "3 $>Mittele Risiken<$"
+4: "4 $>Erhöhtes Risiko<$"
+5: "5 $>Hohe Risiken<$"
+6: "6 $>Existenz gefährdend<$"

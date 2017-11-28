@@ -1,0 +1,34 @@
+{&&Language=English}
+
+.Variables
+
+PIII    1M     1               $>Description<$                                                     \ControleMemo
+PPPP  0 1N C   1               $>Controle<$                                                        \Controle
+PIII  4 1N   1 2               $>Controle balans<$                                                 \Controle001Input
+PPPP  4 1N     2               $>HSum TotalAssets<$                                                \Controle001Calc -> TotalAssets
+PIII  0 1N    -2                                                                                   \Controle001Result
+
+PIII  4 1N   1 2               $>Controle resultaten rekening<$                                    \Controle002Input
+PPPPP 4 1N     2               $>HSum ProfitAfterTax<$                                             \Controle002Calc -> ProfitAfterTax
+PIII  0 1N    -2                                                                                   \Controle002Result
+
+PIII  4 1N   1 2               $>Controle liquiditeitsoverzicht<$                                  \Controle003Input
+PPPPP 4 1N     2               $>HSum NetCash<$                                                    \Controle003Calc -> ProfitAfterTax
+PIII  0 1N    -2                                                                                   \Controle003Result
+
+PII   6 1N   1 2               $>Max. accepted difference<$                                        \MaxDifference
+
+.Formulas NoTrend
+Controle                       = Controle001Result + Controle002Result + Controle003Result
+Controle001Calc                = HSum(TotalAssets,1,LastTinPeriod(MainPeriod))
+Controle002Calc                = HSum(ProfitAfterTax,1,LastTinPeriod(MainPeriod))
+Controle003Calc                = HSum(NetCash,1,LastTinPeriod(MainPeriod))
+
+Controle001Result              = If(Abs(Controle001Calc - Controle001Input) < MaxDifference ,0,1)
+Controle002Result              = If(Abs(Controle002Calc - Controle002Input) < MaxDifference ,0,1)
+Controle003Result              = If(Abs(Controle003Calc - Controle003Input) < MaxDifference ,0,1)
+
+MaxDifference                  = 0.01
+
+.Choices
+Controle                       = "0: Ok|1: 1 foutje |2: 2 fouten|3: Alles fout"

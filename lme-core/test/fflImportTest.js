@@ -1,6 +1,6 @@
 require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
-require('../../ff-math/ff-math');//just let it inject into the FESFacade
+require('../../math/ff-math');//just let it inject into the FESFacade
 var JSWorkBook = require('../fesjs/JSWorkBook');
 var JUNIT = require('./JUNIT');
 var FESFacade = require('../fesjs/FESFacade');

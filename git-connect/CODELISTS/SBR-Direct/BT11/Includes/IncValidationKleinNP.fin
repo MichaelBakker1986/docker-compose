@@ -1,0 +1,16 @@
+.Formulas NoTrend
+venjbw2iEquityAndLiabilities=(venjbw2iEquityAndLiabilities_pvenjbw2iEquity+venjbw2iEquityAndLiabilities_pvenjbw2iProvisions+venjbw2iEquityAndLiabilities_pvenjbw2iLiabilitiesNoncurrent+venjbw2iEquityAndLiabilities_pvenjbw2iLiabilitiesCurrent)
+frciAgriculturalActivities=If(IsAgro,"Ja","Nee") 
+venjbw2iBasisOfPreparation = "Fiscaal"
+IsFiscaal=1
+IsCommercieel=0
+IsEnkelvoudig=1
+IsGeconsolideerd=0
+frciFinancialStatementType="Enkelvoudig"
+
+.Formulas Locked
+frciAgriculturalActivities=On
+
+
+.Hints
+frcdimLocationActualActivitiesDescriptionAddressNLSpecificationAxis="$$XbrlMinTupleInstances=1"/Add

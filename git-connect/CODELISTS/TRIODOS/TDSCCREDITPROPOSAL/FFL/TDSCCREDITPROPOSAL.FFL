@@ -1,0 +1,1680 @@
+// model "Credit proposal"
+// created by FINAN 3.2.56.36 (user Tom Bleeker) on 03-10-2017 15:12
+
+import FinanMath.*;
+import BaseModel.*;
+
+model TDSCCREDITPROPOSAL uses BaseModel
+{
+  version: "1.2.6";
+  ffl_version: "1.0";
+  root
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER_ROLES
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER_ROLES";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_FINAN_USER
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "FPS_FINAN_USER";
+        visible: 1;
+        options_title: locked;
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If(((Q_Map01[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "Credit Proposal";
+      hint: "Please fill in all questions";
+      locked: 1;
+      visible: 1;
+      choices: "0:Incomplete filled.|1:Complete filled.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Relationship Manager";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Incomplete filled.|1:Complete filled.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_MAP01_Type
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Proposal type";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Q_MAP01_TypeSub1 refers to ScorecardType
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Proposal type";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            choices: "0:Credit proposal|1:Review proposal";
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_MAP01_Match
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Triodos Fit";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable ActivityDescriptionA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Summary - Brief Description of Activity";
+            hint: "The day-to-day activities of the client. This will appear in the credit proposal summary.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable SummaryActivityDescriptionPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Summary Brief Description (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable LendingCriteriaA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Summary - Lending Criteria";
+            hint: "How does the client match with Triodos Values ?    Are our lending criteria met ( as per Sector Papers - if applicable). N.B.  If outside of our Lending Criteria - please explain mitigants.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ComplyFlcA
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: select;
+            title: "Does the Proposal Comply with the Financial Lending Criteria?";
+            visible: 1;
+            choices: "1:Yes|0:No";
+            options_title: locked;
+          }
+          variable ComplyWhat
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ComplyFlcA=1,0,if(ScorecardType=0,1,0));
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Explain What Part of the Policy Is Not Met";
+            visible: If(ComplyFlcA=1,0,1);
+            options_title: locked;
+          }
+          variable ComplyWhy
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ComplyFlcA=1,0,if(ScorecardType=0,1,0));
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Explain Why This Is Needed";
+            visible: If(ComplyFlcA=1,0,1);
+            options_title: locked;
+          }
+          variable SummaryLendingCriteriaPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Summary Lending Criteria (image)";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub6
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Business Description";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable DescriptionofactivityA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.1 - Description of Activity";
+            hint: "Describe the products,  activities and services that the client performs and if applicable the way the products are manufactured.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable ActivityDescriptionPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Description of Activity (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ManagementKeyPersonA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.2 - Management and Key Person(s)";
+            hint: "The key people of the company with their qualities necessary to realise the earning model, their specific tasks, experience relevant to the scope of the project and their successors and/or the age of the key people in relation to the term of the loan(s).";
+            visible: 1;
+            options_title: locked;
+          }
+          variable OrganizationalA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.3.1 - Legal Entity and Organisational Structure";
+            hint: "The details of the legal structure with the focus on financial liability. Include any risks and/or any anomalies identified.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable OrganizationalAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Legal Entity and Organisational Structure (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable LegalCounterpartiesA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.3.2 - Legal Entity Notes";
+            hint: "Any comments about a specific legal entity.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable IncomeSourceA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.4.1 - Credit Base During Realisation Phase";
+            hint: "If applicable, describe the sources of income during the start-up and building phase. If applicable, describe the parties required to achieve the goal of the total funding when they are not a borrower and, if known, their financial stability.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable IncomeSourceAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Credit Base During Realisation Phase (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable EarningsmodelA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.4.2 - Credit Base Post Realisation";
+            hint: "Describe the revenues post realisation of the total funding goal. Describe the complete sources of income from which the loan will be repaid. [BR][/BR] Identify all major parties needed to realise the revenues if there are additional parties to the borrowers who are involved.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable EarnigsModelAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Credit Base Post Realisation (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BusinessDescriptionA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "1.5 - Conclusion Business Description";
+            hint: "Overall summary of business activity / management.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BusinessDescriptionAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Conclusion Business Description (image)";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub7
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Facility";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable SummaryDescriptionofuseA
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Summary - Summary of Description of Use";
+            hint: "Brief description of the credit need of the client to be displayed in the credit proposal summary.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable SummaryDescriptionOfUsePicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Summary of Description of Use (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable CreditneededA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.1.1 - Total Funding Needed";
+            hint: "The total amount that is needed for each of the funding goals ( this is the total need including funds from other sources, not only the funding needed from Triodos).";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FundingSourcesA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.1.1 - Overview Uses & Sources";
+            hint: "An overview of all the funding providers contributing to the total funding goal with each of the amounts they are contrbuting.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FundingSourcesAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Overview Uses & Sources (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable RequestedFfinanceA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.1.2 - Description of the Sources from Triodos Bank";
+            hint: "Please provide a rationale for the drawdown period, amounts, term of loan, repayment schedule of the loan. [BR][/BR] In terms of staged drawdown/development funding:  detail how we will monitor drawdown of funds and the correct use of borrowed monies ie. Drawdown against architects certs, Invoices etc.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable DescriptionofuseA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.1.3 - Description of Use";
+            hint: "The purpose of the total needed funding.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ThirdPartyFinancesA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.1.4 - Description of the Sources from Third Parties";
+            hint: "If any funding is received from a third party, describe the terms & conditions of that funding -  whether there are any clawbacks/refinancing risk and impact upon our collateral position.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ThirdPartyFinancesAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Description of the Sources from Third Parties (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionFacility
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "2.2 - Conclusion Facility";
+            hint: "Please provide a summary / Rationale for providing the requested Facility/Facilities. [BR][/BR] This information will appear in the summary of the credit proposal.";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub8
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Financial Analysis";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable FinancialDocA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.1 - Financial Documents";
+            hint: "Describe the financial documents provided by the client e.g Management Accounts or Annual Accounts, Cashflow forecast etc. If applicable include the statement of the external auditor.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable FinancialDocAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Financial Documents (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable HistoricalAccA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.1.1 - Historical Accounts";
+            hint: "General remarks concerning the historical balance sheet accounts.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ManagementA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.1.2 - Profit and Loss - Historic Summary";
+            hint: "General remarks concerning the historical Profit and loss figures.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ManagementAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Profit and Loss - Historic Summary (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BankcaseA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.1.3 - Profit and Loss - Projected Summary";
+            hint: "General remarks concerning the projected Profit and Loss figures  provided (including various forecast options used).";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BankcaseAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Profit and Loss - Projected Summary (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable WorseA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.1.4 - Profit and Loss - Sensitivity Analysis";
+            hint: "Identify the signficant differences between the worse case, management case and the historical accounts.  Discuss the main forecast options in relation to income generation, profit and cashflow.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable WorseAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Profit and Loss - Sensitivity Analysis (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable HistoricalAccAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Historical Accounts (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BalanceA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.2.1 - Balance - Historic Summary";
+            hint: "General remarks concerning the historical balance sheet data. Identify any unexpected/unusual items.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BalanceAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Balance - Historic Summary (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FutureDevelopmentA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.2.2 - Projected Balance Sheet Movements";
+            hint: "Describe and explain the main changes in the balances over the previous years and describe the scenarios used for the forecast of the balances. [BR][/BR] In particular with regard to the development of the debt portfolio - debts in relation to the assets and the equity.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FutureDevelopmentAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Projected Balance Sheet Movements (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BalanceSensitivity
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.2.3 - Balance - Sensitivity Analysis";
+            hint: "Discuss the main forecast options in relation to the balance.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable BalanceSensitivityPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Balance - Sensitivity Analysis (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable PaymentCapacityA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.3 - Payment Capacity/Liquidity Requirements/Cashflow";
+            hint: "Describe and explain the significant changes in cashflow over the past years. [BR][/BR] Validate the longterm development of the Debt Service Coverage Ratio (DSCR),  the liquidity position and describe the scenarios and outcome of the forecast.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable PaymentCapacityAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Payment Capacity/Liquidity Requirements/Cashflow (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionFinancialA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "3.4 - Conclusion Financial Analysis";
+            hint: "Overall summary of Historic / Projected Financial Performance - including capacity to service debt. This will be displayed in the management summary of the credit proposal.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionFinancialAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Conclusion Financial Analysis (image)";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub9
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Risk Analysis";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable BusinessRiskA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.1 - Business Risk Analysis & Mitigation";
+            hint: "Analyse the main risks that are embedded in the business e.g. changes in the credit base, future funding need, management, market etc. [BR][/BR]  What controls are in place to mitigate these risks?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable BusinessRiskAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Business Risk Analysis & Mitigation (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Specificrisks
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.2 - Technical & Project Specific Risks";
+            hint: "Analyse the technical risks ( if any) within the project.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable SpecificrisksPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Technical & Project Specific Risks (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FinancialRiskA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.3 - Financial Risk Analysis & Mitigation";
+            hint: "Analyse the main risks embedded in the development of the financials and the expected earnings model.  [BR][/BR] What controls are in place to mitigate these risks?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FinancialRiskAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Financial Risk Analysis & Mitigation (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable StructureRiskA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.4 - Structure Risk Analysis & Mitigation";
+            hint: "Analyse the main risks embedded in the group structure of the borrowers and their direct environment. [BR][/BR] Take into account the group structure, intercompany transactions, intercompany relationships, transfer pricing and management fees. [BR][/BR] What controls are in place to mitigate these risks?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable StructureRiskAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Structure Risk Analysis & Mitigation (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ScorecardA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.5 - Scorecard";
+            hint: "Describe the outcome of the PD-scorecards, compare the result with peer data and describe the expected development in the future. [BR][/BR] If notching is applied, describe why.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable CreditRatingInA
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "4.5.1 - Credit Rating Institution";
+            hint: "If an external rating is avaiable, identify the relevant rating institution.";
+            visible: 1;
+            choices: "0:Fitch|1:Moody's|2:Standard & Poors";
+            options_title: locked;
+          }
+          variable CreditRatingA
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "4.5.2 - Credit Rating";
+            hint: "The external credit rating.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionRiskA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.7 - Conclusion Risk Analysis & Mitigation";
+            hint: "Describe briefly in your own words the conclusion of all the risk analysis  and mitigations.  This will be displayed in the management summary of the credit proposal.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionRiskAPicture
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Conclusion Risk Analysis & Mitigation (image)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ReviewDateA
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,0);
+            data_options: unscalable;
+            displaytype: date;
+            title: "4.6 - Next Review Date";
+            hint: "The proposed next review date of the credit agreement.";
+            visible: 0;
+            options_title: locked;
+          }
+          variable ExplanationDateA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,0);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "4.6 - Explanation Next Review Date";
+            hint: "State your reasoning of the proposed next review date.";
+            visible: 0;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub10
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Collaterals & Conditions";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable CollateralsA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.1 - Collaterals";
+            hint: "Assess the collaterals and collateral objects. Explain why you (dis)agree with the values.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable CollateralsAPictureOne
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Collaterals (image 1)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable CollateralsAPictureTwo
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Collaterals (image 2)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable CollateralsAPictureThree
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Collaterals (image 3)";
+            visible: 1;
+            options_title: locked;
+          }
+          variable CollRatingA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.2 - Collateral Rating";
+            hint: "Propose the collateral rating (A,B,C) based on facts like a valuation report.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable GuaranteesA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.3 - Guarantees";
+            hint: "Assess the credit worthiness of the guarantors and describe your findings.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ActualContractualRightsA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.4 - Contractual Rights";
+            hint: "Give an explanation of the contractual rights.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ContractualrightsA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.5 - Conditions & Covenants";
+            hint: "Give an explanation of the chosen conditions and undertakings (covenants).";
+            visible: 1;
+            options_title: locked;
+          }
+          variable FeesA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.7 - Pricing & Fees";
+            hint: "Detail proposed pricing - including interest margin and lending fee.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable ConclusionCollateralsA
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "5.8 - Conclusion Collaterals & Conditions";
+            hint: "Describe briefly in your own words the conclusion of all the collaterals & undertakings.";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01Sub11
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Recommendations";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable MandateA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "6 - Requested Mandate to Grant the Loan and to Differ from Policies";
+            hint: "Describe specific deviations from the standard request you want to have approved. e.g. an interest rate below the target RAROC or conditions or undertakings that overrule the standard terms and conditions.";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable RecommendationA
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            displaytype: memo;
+            title: "6 - Overall Conclusion & Recommendation Relationship Manager";
+            hint: "Summarise the strengths and weaknesses of the proposal and the overall recommendation. This will be displayed in the management summary of the credit proposal.";
+            visible: 1;
+            options_title: locked;
+          }
+          variable AccountableRelationshipManager
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: If(ScorecardType=1,0,1);
+            data_options: unscalable;
+            title: "Summary - Accountable Relationship Manager";
+            hint: "The full name of the accountable relationship manager.";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+            displaytype: currency;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+            displaytype: currency;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable ScorecardType
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Proposal type";
+            visible: 1;
+            choices: "0:Credit proposal|1:Review proposal";
+            options_title: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Results";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESULTSub1 refers to Q_RESULT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Results";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Active|1:Final";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Final:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Final by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Created:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Created by:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_MODIFIED_ON
+      {
+        datatype: number;
+        frequency: document;
+        formula: Now;
+        data_options: saveCalculatedValue,unscalable;
+        displaytype: date;
+        title: "Last modified";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "1.2.6";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversion:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "TDSCCREDITPROPOSAL";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "NA";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parameters version:";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Previous";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Next";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Draft report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitive report";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Make it final";
+        visible: 1;
+        choices: "0:Nee|1:Ja";
+        options_title: locked;
+      }
+    }
+    variable Hulpvariabelen
+    {
+      datatype: none;
+      frequency: none;
+      title: "Overige berekeningen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked, invisible;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scKnockoutsCombi[1])>0,&"\r\nThere are knock-out criteria:"&scKnockoutsCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockout(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scKnockoutsCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knockouts text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Length(&scRestrictiesCombi[1])>0,&"\r\n\r\nThe listed variables are not filled correct:"&scRestrictiesCombi,""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable scRestrictiesCombi
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties text";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

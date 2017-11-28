@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document author="Luuk Peters" title="Hello World! Test" xsi:noNamespaceSchemaLocation="FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<properties>
+<!--		<var id="GenInfoCompanyIdName">FINAN</var>-->
+	</properties>
+	<newpage name="certificate">
+		<img id="red"        visible="./document/properties/ampelValue/text()=0"/>
+		<img id="orange"     visible="./document/properties/ampelValue/text()=1"/>
+		<img id="green"      visible="./document/properties/ampelValue/text()=2"/>
+		<p   id="redtext"    visible="./document/properties/ampelValue/text()=0"/>
+		<p   id="orangetext" visible="./document/properties/ampelValue/text()=1"/>
+		<p   id="greentext"  visible="./document/properties/ampelValue/text()=2"/>
+		<p   id="solvencycheckname"  visible="false()"/>
+		<p   id="watermark"  visible="./document/properties/isInProduction/text()=0"/>
+	</newpage>
+</document>

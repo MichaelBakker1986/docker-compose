@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 
+  This file is part of the FINK taxonomy
+  Intellectual Property State Ministry of Economic Affairs Pilot Fink
+  Version 2.0
+  Released by FINK
+  Release date Tue Apr 5 12:00:00 2016
+-->
+<link:linkbase xmlns:gen="http://xbrl.org/2008/generic" xmlns:label="http://xbrl.org/2008/label" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xbrl.org/2008/generic http://www.xbrl.org/2008/generic-link.xsd http://xbrl.org/2008/label http://www.xbrl.org/2008/generic-label.xsd">
+  <link:roleRef roleURI="http://www.xbrl.org/2008/role/documentation" xlink:href="http://www.xbrl.org/2008/generic-label.xsd#documentation" xlink:type="simple"/>
+  <link:roleRef roleURI="http://www.xbrl.org/2008/role/link" xlink:href="http://www.xbrl.org/2008/generic-link.xsd#standard-link-role" xlink:type="simple"/>
+  <link:arcroleRef arcroleURI="http://xbrl.org/arcrole/2008/element-label" xlink:href="http://www.xbrl.org/2008/generic-label.xsd#element-label" xlink:type="simple"/>
+  <gen:link xlink:role="http://www.xbrl.org/2008/role/link" xlink:type="extended">
+    <gen:arc xlink:arcrole="http://xbrl.org/arcrole/2008/element-label" xlink:from="fink-codes_fundingRequestDurationItemType_loc" xlink:to="fink-codes_fundingRequestDurationItemType_documentation_nl" xlink:type="arc"/>
+    <label:label id="fink-codes_fundingRequestDurationItemType_documentation_nl" xlink:label="fink-codes_fundingRequestDurationItemType_documentation_nl" xlink:role="http://www.xbrl.org/2008/role/documentation" xlink:type="resource" xml:lang="nl">Looptijd van de financieringsaanvraag [domein]</label:label>
+    <link:loc xlink:href="fink-codes.xsd#fink-codes_fundingRequestDurationItemType" xlink:label="fink-codes_fundingRequestDurationItemType_loc" xlink:type="locator"/>
+  </gen:link>
+</link:linkbase>

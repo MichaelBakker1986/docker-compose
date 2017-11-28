@@ -1,0 +1,145 @@
+{&&Language=English}
+.Variables
+XX      1A     2                Hidden wizard                                                      \HiddenWizard
+PP      1N C   3 1             5-minuten-wizard                                                    \Q_ROOT
+C In 5 minuten langs de belangrijkste stuurvariabelen voor de prognose.
+
+;------------------------------
+.Variables
+PP      1N C   4               $>Sales group<$                                                     \Q_MapSales
+;C Aanpassen van bestaande omzetgroepen
+PP      1N     5               $>Sales group<$                                                     \Q_MapSales_Paragraaf01
+PIIP    PN C   6 1             =Projection_NetSales                                                \=Projection_NetSales
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.
+
+PPPP    FN     6               =Product_tpSales                                                    \=Product_tpSales
+PPPP    FN     7               =Product_tpSales                                                    \=Product_tpSales
+PIII    PN C   7               =Product_tpForecast                                                 \=Product_tpForecast
+PPIP M  CN %   7               =Product_tpGrowth                                                   \=Product_tpGrowth
+PPIP    CN %   7               =Product_tpMargin                                                   \=Product_tpMargin
+PPPP    FN   1 6               $>Total<$                                                           \=Sales
+;------------------------------
+PP      1N C   4               =PersonnelExpenses                                                  \Q_MapDepartment
+PP      1N     5               =PersonnelExpenses                                                  \Q_MapDepartment_Paragraaf01
+PIII    PN C   6        ?      =Projection_TotalNumberOfEmployees                                  \=Projection_TotalNumberOfEmployees
+PIII  1 PN %   6 1             =DefaultWagesIncreaseTrend                                          \=DefaultWagesIncreaseTrend
+PPPP    FN     6               =Department_tpTotalPersonnelExpenses                                \VMZ_Department_tpTotalPersonnelExpenses=Department_tpTotalPersonnelExpenses
+;PPPP M  CN %   7               =Department_tpGrowthNumberOfEmployees                               \=Department_tpGrowthNumberOfEmployees
+;C $>op jaarbasis<$
+PPPP    FN     7               =Department_tpTotalPersonnelExpenses                                \=Department_tpTotalPersonnelExpenses
+PIII  1 AN     7               $>Number of employees<$                                             \=Department_tpNumberOfEmployees
+PPIP M  CN %   7               =Department_tpIncreaseWages                                         \=Department_tpIncreaseWages
+C $>This is the wage increase percentage for the forecast. Enter the percentages per month<$.
+PPPP    FN    -6               =DepartmentsTotal                                                   \=DepartmentsTotal
+;------------------------------
+PP      1N C   4               $>Operating expenses<$                                             \Q_MapOperatingExpenses
+PP      1N     5               $>Operating expenses<$                                             \Q_MapOperatingExpenses_Paragraaf01
+
+PIIP    PN C   6               =ContractedOut                                                      \=Projection_ContractedOut
+PIIP    PN C   6         +     =Projection_PersonnelExpenses                                       \=Projection_PersonnelExpenses
+C $>Other personnel expenses (excl. departments)<$:|$>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.
+PIIP    PN C   6         +     =ProductionExpenses                                                 \=Projection_ProductionExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =FurnitureAndFixtureExpenses                                        \=Projection_FurnitureAndFixtureExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =OfficeExpenses                                                     \=Projection_OfficeExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =TransportationExpenses                                             \=Projection_TransportationExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =SellingExpenses                                                    \=Projection_SellingExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =MonitoringAndControlExpenses                                       \=Projection_MonitoringAndControlExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+PIIP    PN C   6         +     =OtherOperatingExpenses                                             \=Projection_OtherOperatingExpenses
+C $>Continuation growth previous period<$|-     $>Annual growth % is continued, season patterns are continued<$.||$>Growth related to inflation rate<$|-     $>Growth equals the Inflation Rate, season patterns are continued<$.||$>No Growth (Use Value Previous Year)<$|-     $>Values equal last year큦 amount, season patterns are continued<$.||$>Repeat Value Previous Column (of most detailed timescale)<$|-     $>Repeats the value of the previous column in the most detailed timescale available.<$|-     $>All values equal the last entered value, season patterns are discontinued<$.||$>Link to revenues<$ ($>including season pattern behaviour of revenues<$)|-     $>Complete behaviour of Total Revenues in that period will be copied<$||$>Growth related to revenues<$ ($>keeps existing Season Pattern intact<$)|-     $>Growth % of Total Revenues in used, season pattern of Revenues is ignored<$
+
+PP      1N     5               $>Operating expenses<$                                              \Q_MapOperatingExpenses_Paragraaf02
+PPIP    FN     6               =ContractedOut                                                      \=ContractedOut
+PPIP    FN     6         +     =TotalOtherStaffExpenses                                            \=TotalOtherStaffExpenses
+PPPP    FN     6               &"$>Personnel expenses<$"&" $>excl<$. "&FirstLC("$>Other staff exp.<$")\PersonnelExpensesExlOther
+IIII    FN     6         +     =ProductionExpenses                                                 \=ProductionExpenses
+IIII    FN     6         +     =FurnitureAndFixtureExpenses                                        \=FurnitureAndFixtureExpenses
+IIIIP   FN     6         +     =OfficeExpenses                                                     \=OfficeExpenses
+IIIIP   FN     6         +     =TransportationExpenses                                             \=TransportationExpenses
+IIIIP   FN     6         +     =SellingExpenses                                                    \=SellingExpenses
+IIIIP   FN     6               =MonitoringAndControlExpenses                                       \=MonitoringAndControlExpenses
+PIII    FN   1 7               =ProvisionForRetirementExpensesPartners                             \=ProvisionForRetirementExpensesPartners
+IIII    FN     7        ?      =MonitoringAndControlExpense                                        \=MonitoringAndControlExpense
+IIII    FN     7        ?      =InsuranceMonitoringAndControlExpenses                              \=InsuranceMonitoringAndControlExpenses
+IIII    FN     7        ?      =ContributionsMonitoringAndControlExpenses                          \=ContributionsMonitoringAndControlExpenses
+IIII    FN     7        ?      =AdvisoryMonitoringAndControlExpenses                               \=AdvisoryMonitoringAndControlExpenses
+IIII    FN     7        ?  B!  =MonitoringAndControlExpensesToGroupCompanies                       \=MonitoringAndControlExpensesToGroupCompanies
+IIII    FN     7        ?      =MonitoringAndControlExpensesUnspecified                            \=MonitoringAndControlExpensesUnspecified
+PIII    FN     7        ?      =OtherMonitoringAndControlExpenses                                  \=OtherMonitoringAndControlExpenses
+IIII    FN    -7=              =MonitoringAndControlExpenses                                       \=MonitoringAndControlExpenses
+IIIIP   FN     6         +     =OtherOperatingExpenses                                             \=OtherOperatingExpenses
+PPPP    FN    =6-        +     =OperatingExpensesTotal                                             \=OperatingExpensesTotal
+;------------------------------
+PP      1N C   4               $>Net worth<$                                                       \Q_MapEquity
+PPP     1A     5               $>Contribution of capital<$                                         \VMZ_ContributionOfCapital01
+PIII M  FN     6               &"$>Contribution of capital<$"&" "&Partner_tpCapital[0]             \VMZ_ContributionOfCapitalPartnersList=Partner_tpContributionOfCapital
+PPPP M  FN    -6               =ContributionOfCapitalPartners                                      \=ContributionOfCapitalPartners
+PP      1A     5               $>Personal draw down<$                                              \PersonalDrawDown
+PIII M  FN     6         +     &"$>Personal draw down<$"&" "&Partner_tpCapital[0]                  \VMZ_PersonalDrawDownOfPartnersList=Partner_tpPersonalDrawDown
+PIII M  FN    -6 1             =PersonalDrawDownOfPartners                                         \=PersonalDrawDownOfPartners
+
+PPP     1A     5               $>Contribution of capital<$                                         \VMZ_ContributionOfCapital02
+PPIP M  FN     6               =IssueanceSharedCapitalOrdinaryShares                               \=IssueanceSharedCapitalOrdinaryShares
+PPIP M  FN     6               =IssueanceSharedCapitalPreferenceShares                             \=IssueanceSharedCapitalPreferenceShares
+PPIP M  FN     6               =ContributionOfCapitalToSharePremium                                \=ContributionOfCapitalToSharePremium
+;PPIP M -FN>    6               &"$>Change in<$ "&FirstLC(&TreasuryShares[0])                       \=ChangeInTreasuryShares
+PPPP M  FN    -6               =ContributionOfCapital                                              \=ContributionOfCapital
+PPP     1A     5               $>Profit to be paid out to claimants<$                              \VMZ_ProfitPaidOutToClaimants
+PPIP M  CN %   6               =PercentageStructuralProfitPaidOutToClaimants                       \=PercentageStructuralProfitPaidOutToClaimants
+PIII M  FN     6               =StructuralProfitPaidOutToClaimants                                 \=StructuralProfitPaidOutToClaimants
+PIII M  FN     6               =IncidentalProfitPaidOutToClaimants                                 \=IncidentalProfitPaidOutToClaimants
+PIII M  FN    -6 1             &If(ReportAsLimitedLiabilityCompany[1],"$>Profit to be paid out to claimants<$","$>Personal draw down<$")\=ProfitPaidOutToClaimants
+PPPP M  FN     6               =ProfitAvailableForDistribution                                     \=ProfitAvailableForDistribution
+
+;------------------------------
+PPP     1N C   4               $>Company<$                                                         \Q_MapCompany
+PPP     1N     5               $>Company<$                                                         \Q_MapCompany_Paragraaf01
+C sbi_placeholder
+PPPP    1A     6        ?      =SectorTitle                                                        \=SectorTitle -> SectorTitle
+PPP     1N     5               $>User specific ratio<$                                             \Q_MapCompany_Paragraaf02
+C custom_selection_message
+PII     1A     6               =DescriptionOfVariableSingular                                      \=DescriptionOfVariableSingular
+PII     1A     6               =DescriptionOfVariablePlural                                        \=DescriptionOfVariablePlural
+PIII  0 AN     6               =UserSpecificVariable                                               \=UserSpecificVariable
+
+PP      1N     5               $>Naming of sections<$                                            \Q_MapCompany_Paragraaf03
+C $>Click on the pencil to customize the name of the following sections<$
+IPPP    1A     6               =DefaultDescription_NetSales                                        \=DefaultDescription_NetSales
+IPPP    1A     6               =DefaultDescription_Grossprofit                                     \=DefaultDescription_Grossprofit
+IPPP    1A     6               =DefaultDescription_OperatingExpenses                               \=DefaultDescription_OperatingExpenses
+IPPP    1A     6               =DefaultDescription_ProfitAfterTax                                  \=DefaultDescription_ProfitAfterTax
+
+;-------------------------------------------------------------------------------------------------- STATUS
+PII     1N C 1 4               Q_PREVIOUS_BUTTON_VISIBLE                                           \Q_PREVIOUS_BUTTON_VISIBLE
+PII     1N C   4               Q_NEXT_BUTTON_VISIBLE                                               \Q_NEXT_BUTTON_VISIBLE
+PII     1N C   4               QQ_Concept_Report_Visible                                           \Q_Concept_Report_Visible
+
+.Choices
+Q_ROOT                         = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+Q_MapSales                     = Q_ROOT
+Q_MapDepartment                = Q_ROOT
+Q_MapOperatingExpenses         = Q_ROOT
+Q_MapEquity                    = Q_ROOT
+Q_MapCompany                   = Q_ROOT
+Q_Concept_Report_Visible       = "0:Nooit|1:Altijd"
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+
+.Formulas Title
+VMZ_Department_tpTotalPersonnelExpenses  = &"$>Total personnel and benefit expenses<$"&" "&If(FesExpression(TitleEntered(Department_tpNumberOfEmployees)),&Department_tpNumberOfEmployees[0],&"$>Department<$")
+
+.Formulas NoTrend,Trend
+PersonnelExpensesExlOther      = OnZero(PersonnelExpenses-TotalOtherStaffExpenses,NA)
+
+.Formulas NoTrend
+;Q_Map01                        = DataEntered(Projection_NetSales)
+;Q_Map02                        = DataEntered(Projection_TotalNumberOfEmployees)
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_Concept_Report_Visible       = 0
+

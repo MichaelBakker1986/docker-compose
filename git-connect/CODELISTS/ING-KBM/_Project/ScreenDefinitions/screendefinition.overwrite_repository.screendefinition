@@ -1,0 +1,38 @@
+{
+  "viewType": "CONTAINER",
+  "name": "OverwriteRepository",
+  "children": [
+    {
+      "viewType": "VARIABLE",
+      "name": "LimietgebruikGraph",
+      "dataType": "CHART",
+      "variableName": "LimietgebruikGraph",
+      "metaData": {
+        "chartType": "line",
+                                "viewDurationInterval":"1",
+                                "select-year":"NONE"
+
+      }
+    }
+    ,
+    {           "viewType":"VARIABLE",
+               "name":"GraphResRek1",
+                "variableName":"GraphResRek1",
+                "dataType":"CHART",
+                "metaData":{
+                                "chartType":"line",
+                                "select-year":"NONE"
+                            }
+    },
+    {           "viewType":"VARIABLE",
+                "name":"GraphResRek2",
+                "variableName":"GraphResRek2",
+                "dataType":"CHART",
+                "metaData":{
+                                "chartType":"line",
+                                "select-year":"NONE"
+                }
+    }
+    
+  ]
+ }

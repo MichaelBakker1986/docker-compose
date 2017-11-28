@@ -1,0 +1,2120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="3.0"    
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:saxon="http://icl.com/saxon" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"   
+    xmlns:fin="http://www.finan.nl/extension/2015/01/fin"   
+    xmlns:fes="http://www.finan.nl/extension/2015/01/fes"  
+    exclude-result-prefixes="fn saxon xs xsi fin">  
+  
+	<!-- NL Decimal format -->
+    <xsl:decimal-format name="nl_format" decimal-separator="," grouping-separator="."/>
+
+	<xsl:template name="substring-count">
+		<xsl:param name="String"/>
+		<xsl:param name="Substring"/>
+		<xsl:choose>
+		<xsl:when test="contains($String, $Substring) and $String and $Substring">
+			<xsl:variable name="count">
+				<xsl:call-template name="substring-count">
+					<xsl:with-param name="String" select="substring-after($String, $Substring)"/>
+					<xsl:with-param name="Substring" select="$Substring"/>
+				</xsl:call-template>
+			</xsl:variable>
+			<xsl:value-of select="number($count + 1)"/>
+			</xsl:when>
+			<xsl:otherwise><xsl:value-of select="0"/></xsl:otherwise> 
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:output method="xml" encoding="UTF-8" indent="yes" saxon:indent-spaces="2"/> 
+	<xsl:preserve-space elements="*" />
+	<xsl:decimal-format name="euroFormat" decimal-separator="," grouping-separator="."/>
+	<xsl:template match="/"> 
+	<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+	<document version="2.0.0" date="07-07-2015" author="Topicus Finan" title="Fyndoo" outputLanguage="nl-NL" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  
+
+	
+	<!-- Global variables  -->
+	<!-- Finan variables -->
+	<xsl:variable name="doc" select="fes:getDocumentIndicesByModelName('FBL')" as="xs:integer"/>
+	<xsl:variable name="contractanten" select="'Contractanten'"/>
+	<xsl:variable name="amountOfBorrowers" select="fes:getTupleInstanceCount($doc, $contractanten)" />
+	<xsl:variable name="zakelijkeOvereenkomsten" select="'ZakelijkeOvereenkomst'"/>
+	<xsl:variable name="faciliteiten" select="'Faciliteiten'"/>
+	<xsl:variable name="kredietnemers" select="'Kredietnemers'"/>
+	<xsl:variable name="kredietnemer_externRelatieNummer" select="'Kredietnemer_externRelatieNummer'"/>
+	<xsl:variable name="kredietnemer_bedrijfsnaam" select="'Kredietnemer_bedrijfsnaam'"/>
+	<xsl:variable name="modelCreatedFrom" select="fes:getFormattedValue($doc,'ModelCreatedFrom')"/>
+	<xsl:variable name="aanvraaggroep" select="'AanvraagGroep'"/>
+	<xsl:variable name="contractant_rollen" select="'Contractant_rollen'"/>
+	<xsl:variable name="contractant_adressen" select="'Contractant_adressen'"/>
+	<xsl:variable name="contractant_externRelatieNummer" select="'Contractant_externRelatieNummer'"/>	
+	<xsl:variable name="productlijnnaam_variable" select="'Productlijnnaam'"/>	
+	<xsl:variable name="zekerheidsType_variable" select="'ZekerheidsType'"/>
+	<xsl:variable name="hoogsteRangorde_variable" select="'HoogsteRangorde'"/>
+	<xsl:variable name="zekerheidsBedrag_variable" select="'Zekerheidsbedrag'"/>
+	<xsl:variable name="verstrekkerNaam_variable" select="'Verstrekker_Naam'"/>	
+	<xsl:variable name="finaalOmschrijving_variable" select="'FinaalOmschrijving'"/>	
+	<xsl:variable name="inOfferteJN_variable" select="'InOfferteJN'"/>	
+	
+	<!-- Values variables -->
+	<xsl:variable name="BV" select="'B.V.'"/>
+	<xsl:variable name="NV" select="'N.V.'"/>
+	<xsl:variable name="stichting" select="'Stichting'"/>
+	<xsl:variable name="vereniging" select="'Vereniging'"/>
+	<xsl:variable name="VOF" select="'V.O.F.'"/>
+	<xsl:variable name="maatschap" select="'Maatschap'"/>
+	<xsl:variable name="eenmanszaak" select="'Eenmanszaak'"/>
+	<xsl:variable name="individual" select="'Individual'"/>
+	<xsl:variable name="commanditaireVennootschap" select="'Commanditaire Vennootschap'"/>
+	<xsl:variable name="currentAccount" select="'Current account'"/>
+	<xsl:variable name="staatsGarantie" select="'Staatsgarantie'"/>
+	<xsl:variable name="loanAccount" select="'Loan account'"/>
+	<xsl:variable name="bankGuarantee" select="'Guarantee account'"/>
+	<xsl:variable name="productNaam" select="'Productnaam'"/>
+	<xsl:variable name="renteType_fixed_value" select="'Fixed'"/>
+	<xsl:variable name="renteType_IRS_value" select="'weighted IRS'"/>
+	<xsl:variable name="scheme" select="'Scheme'"/>
+	<xsl:variable name="euribor" select="'Euribor'"/>
+
+	<xsl:variable name="baseRate" select="'Base'"/>
+	<xsl:variable name="mainBorrower" select="'Main borrower'"/>
+	<xsl:variable name="verpandingszekerheid" select="'Verpandingszekerheid'"/>
+	<xsl:variable name="pandrecht_Zaken_value" select="'NL_Verpanding Zaken losse akte'"/>
+	<xsl:variable name="pandrecht_LevendeHave_value" select="'NL_Verpanding levende have'"/>
+	<xsl:variable name="pandrecht_Btw_value" select="'NL_Verpanding BTW'"/>
+	<xsl:variable name="pandrecht_Subsidie_value" select="'NL_Verpanding Vorderingen Subsidie'"/>
+	<xsl:variable name="pandrecht_Overeenkomst_value" select="'NL_Verpanding Aanneemovereenkomst'"/>
+	<xsl:variable name="pandrecht_Huur_value" select="'NL_Verpanding huurpenningen'"/>
+	<xsl:variable name="pandrecht_Saldo_value" select="'NL_Verpanding Saldi-Saldo'"/>
+	<xsl:variable name="zekerheid_Hypotheek_Bedrijfshypotheek_value" select="'NL_Bedrijfshypotheek'"/>
+	<xsl:variable name="zekerheid_Hypotheek_Woninghypotheek_value" select="'NL_Woninghypotheek'"/>
+	<xsl:variable name="zekerheid_Overlijdensrisicoverzekering_value" select="'NL_Verpanding Vorderingen uit levensverzekeringen'"/>
+	<xsl:variable name="zekerheid_Pandrecht_value" select="'NL_Verpanding'"/>
+	<xsl:variable name="zekerheid_PosNegVerklaring_value" select="'NL_Positief/Negatief verklaring Hypotheek'"/>
+	<xsl:variable name="zekerheid_EffectenAandelen_value" select="'NL_Verpanding effectenportefeuille bij derde bank'"/>
+	<xsl:variable name="zekerheid_Bankgarantie_value" select="'NL_Bankgarantie (huur/koop/overig)'"/>
+	<xsl:variable name="zekerheid_MKBBorgstelling_value" select="'NL_Borg BMKB'"/>
+	<xsl:variable name="zekerheid_GarantstellingLandbouw_value" select="'NL_Garantstelling Landbouw'"/>
+	<xsl:variable name="zekerheid_BorgstellingKunstenaars_value" select="'NL_Akte van borgtocht Borgstellingsfonds Kunstenaars'"/>
+	<xsl:variable name="zekerheid_BorgstellingWaarborgfondsKinderopvang_value" select="'NL_Borgstelling afgegeven door Stg. Waarborgfonds Kinderopvang'"/>
+	<xsl:variable name="zekerheid_BorgstellingBureauBroedplaatsen_value" select="'NL_Akte van Borgtocht Gemeente Amsterdam Fonds Broedplaatsen'"/>
+	<xsl:variable name="zekerheid_BorgstellingOther_AkteVanBorgtochtBeroepOfBedrijf_value" select="'NL_Akte van borgtocht (beroep of bedrijf)'"/>
+	<xsl:variable name="zekerheid_BorgstellingOther_AkteVanBorgtochtParticulier_value" select="'NL_Akte van borgtocht (particulier)'"/>
+	<xsl:variable name="zekerheid_VerpandingVorderingen_value" select="'NL_Verpanding Vorderingen'" /> 
+	<xsl:variable name="onderpand" select="'Onderpand'" /> 
+	<xsl:variable name="floorRate_value" select="'InterestRateFloor'"/>
+					
+	<!-- Set variable pandrecht vorderingen -->	
+    			
+	<xsl:variable name="pandrechtData">						
+    	<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid)">
+        	<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+        	<xsl:variable name="tupleIndices" as="xs:integer *">
+        		<xs:sequence>
+        			<xsl:value-of select="$tupleIndex"/>
+        		</xs:sequence>
+        	</xsl:variable>
+        								
+        	<xsl:variable name="zekerheidsType" select="fes:getFormattedValue($doc, $zekerheidsType_variable, $tupleIndices)" />	
+        		<xsl:if test="$zekerheidsType=$zekerheid_VerpandingVorderingen_value">
+        			<amount>1</amount>		
+        		</xsl:if>
+    	</xsl:for-each>
+    </xsl:variable>
+					
+	<!-- Set variable collateral allocated to groenfonds -->
+    <xsl:variable name="collateralAllocated">
+	<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid)">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+									
+			<xsl:variable name="zekerheidsType" select="fes:getFormattedValue($doc, $zekerheidsType_variable, $tupleIndices)" />
+			<xsl:variable name="zekerheidsBedrag" select="fes:getFormattedValue($doc, $zekerheidsBedrag_variable, $tupleIndices)" />						
+						
+						<!-- Loop allocatie tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, 'Allocatie',$tupleIndices)">
+							<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="tupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$tupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+							
+	
+							<xsl:variable name="verstrekker_faciliteit_allocatienummer" select="fes:getFormattedValue($doc, 'Allocatie_Faciliteitnummer', $tupleIndices)"/>
+			
+							
+							<!-- Loop Zakelijke overeenkomst tuple -->			
+							<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+							  <xsl:variable name="zakelijkeOvereenkomstTupleIndex" select="." as="xs:integer"/>
+							  <xsl:variable name="zakelijkeOvereenkomstTupleIndices" as="xs:integer *">
+								<xs:sequence>
+									<xsl:value-of select="$zakelijkeOvereenkomstTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+					  
+								<!-- Loop faciliteiten tuple -->
+								<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $zakelijkeOvereenkomstTupleIndices)">
+								  <xsl:variable name="zakelijkeOvereenkomstSubTupleIndex" select="." as="xs:integer"/>
+								  <xsl:variable name="zakelijkeOvereenkomstSubTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$zakelijkeOvereenkomstTupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$zakelijkeOvereenkomstSubTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+								  
+									<xsl:variable name="faciliteit_nummer" select="fes:getFormattedValue($doc, 'FaciliteitNummer', $zakelijkeOvereenkomstSubTupleIndices)"/>
+									<xsl:variable name="faciliteit_productlijnnaam_value" select="fes:getFormattedValue($doc, $productlijnnaam_variable, $zakelijkeOvereenkomstSubTupleIndices)"/>
+									
+									<xsl:if test="$verstrekker_faciliteit_allocatienummer = $faciliteit_nummer ">
+                                      
+                                          <amountOther>1</amountOther>
+                                        
+                                    </xsl:if>
+                                                         
+							</xsl:for-each>
+						</xsl:for-each>	
+			</xsl:for-each>                        
+	</xsl:for-each>
+  </xsl:variable>	
+	
+					
+    <xsl:variable name="mainBorrowerData">
+      <!-- Loop Contractanten tuple -->
+      <xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+        <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+        <xsl:variable name="tupleIndices" as="xs:integer *">
+          <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+        </xsl:variable>
+        
+        
+        <xsl:variable name="contractant_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$tupleIndices)" />
+        <xsl:variable name="contractant_naam_value" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam',$tupleIndices)" /> 
+          
+        <!-- Loop rollen tuple -->
+          <xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+            <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+            <xsl:variable name="subTupleIndices" as="xs:integer *">
+              <xsl:for-each select="$tupleIndices">
+                <xs:sequence>
+                  <xsl:value-of select="."/>
+                </xs:sequence>
+              </xsl:for-each>
+              <xs:sequence>
+                <xsl:value-of select="$subTupleIndex"/>
+              </xs:sequence>
+            </xsl:variable>
+            <xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+            
+            <!-- Only for Main borrower -->
+            <xsl:if test="$rol_naam = $mainBorrower">
+              <naam><xsl:value-of select="$contractant_naam_value" /></naam>
+              <externRelatienummer><xsl:value-of select="$contractant_externRelatieNummer_value" /></externRelatienummer>           
+              
+              
+              
+              <xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+                  <xsl:variable name="zakelijkeOvereenkomstTupleIndex" select="." as="xs:integer"/>
+                  <xsl:variable name="zakelijkeOvereenkomstTupleIndices" as="xs:integer *">
+                    <xs:sequence><xsl:value-of select="$zakelijkeOvereenkomstTupleIndex"/></xs:sequence>
+                  </xsl:variable>
+              
+                  <!-- Loop faciliteiten tuple -->
+                  <xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $zakelijkeOvereenkomstTupleIndices)">
+                    <xsl:variable name="faciliteitenTupleIndex" select="." as="xs:integer"/>
+                    <xsl:variable name="faciliteitenTupleIndices" as="xs:integer *">
+                      <xsl:for-each select="$zakelijkeOvereenkomstTupleIndices">
+                      <xs:sequence><xsl:value-of select="."/></xs:sequence>
+                      </xsl:for-each>
+                      <xs:sequence><xsl:value-of select="$faciliteitenTupleIndex"/></xs:sequence>
+                    </xsl:variable>
+                    
+                    <!-- Loop kredietnemers tuple -->
+                    <xsl:for-each select="fes:getTupleInstances($doc, $kredietnemers, $faciliteitenTupleIndices)">
+                      <xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+                      <xsl:variable name="subSubTupleIndices" as="xs:integer *">
+                        <xsl:for-each select="$faciliteitenTupleIndices"> 
+                        <xs:sequence><xsl:value-of select="."/></xs:sequence>
+                        </xsl:for-each>
+                        <xs:sequence><xsl:value-of select="$subSubTupleIndex"/></xs:sequence>
+                      </xsl:variable>
+                    
+                      <xsl:variable name="kredietnemer_externRelatieNummer_value" select="fes:getFormattedValue($doc, $kredietnemer_externRelatieNummer, $subSubTupleIndices)" />
+                     
+                      <xsl:if test="$kredietnemer_externRelatieNummer_value = $contractant_externRelatieNummer_value">
+                        <allocatedToFacility>1</allocatedToFacility>
+                      </xsl:if>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </xsl:for-each>     
+            </xsl:if>
+        </xsl:for-each> 
+      </xsl:for-each>   
+    </xsl:variable>
+			
+      	
+	<xsl:variable name="isBankguarantee">
+		<!-- Loop Zakelijke overeenkomst tuple -->
+		<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+
+			<!-- Loop faciliteiten tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+				<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="subTupleIndices" as="xs:integer *">
+					<xsl:for-each select="$tupleIndices">
+						<xs:sequence>
+							<xsl:value-of select="."/>
+						</xs:sequence>
+					</xsl:for-each>
+					<xs:sequence>
+						<xsl:value-of select="$subTupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>								
+				<xsl:variable name="productlijnnaam" select="fes:getFormattedValue($doc, 'Productlijnnaam', $subTupleIndices)" />
+				<xsl:if test="$productlijnnaam = $bankGuarantee">
+					<xsl:value-of select="'true'"/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:for-each>				
+	</xsl:variable>
+		
+	
+	
+	
+	
+	
+	<xsl:variable name="isPandrecht">
+	
+			<!-- Loop Verpandingszekerheid tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>
+				 
+				<xsl:value-of select="'true'"/>
+				
+			</xsl:for-each>
+	</xsl:variable>
+
+	<xsl:variable name="isCurrentAccount">			
+		<!-- Loop Zakelijke overeenkomst tuple -->			
+		<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+		  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+		  <xsl:variable name="tupleIndices" as="xs:integer *">
+			  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+		  </xsl:variable>
+  
+			<!-- Loop faciliteiten tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+			  <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+			  <xsl:variable name="subTupleIndices" as="xs:integer *">
+				  <xsl:for-each select="$tupleIndices">
+					<xs:sequence><xsl:value-of select="."/></xs:sequence>
+				  </xsl:for-each>
+				  <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+			  </xsl:variable>
+				
+			   <xsl:variable name="productlijnnaam" select="fes:getFormattedValue($doc, 'Productlijnnaam', $subTupleIndices)" />
+		
+				<xsl:if test="$productlijnnaam = $currentAccount">
+					<xsl:value-of select="'true'"/>
+			   </xsl:if>	
+			</xsl:for-each>
+		</xsl:for-each>	
+	</xsl:variable>
+	
+	
+	<xsl:variable name="isStaatsGarantie">				
+	     <!-- Loop Verpandingszekerheid tuple -->
+		<xsl:for-each select="fes:getTupleInstances($doc, $verpandingszekerheid)">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+				
+		   <xsl:variable name="zekerheidsType_variable" select="fes:getFormattedValue($doc, 'ZekerheidsType', $tupleIndices)" />
+	
+			<xsl:if test="$zekerheidsType_variable = $staatsGarantie">
+				<xsl:value-of select="'true'"/>
+		   </xsl:if>	
+		</xsl:for-each>
+	</xsl:variable>
+	
+	<xsl:variable name="isLoanAccount">			
+		<!-- Loop Zakelijke overeenkomst tuple -->			
+		<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+		  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+		  <xsl:variable name="tupleIndices" as="xs:integer *">
+			  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+		  </xsl:variable>
+  
+			<!-- Loop faciliteiten tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+			  <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+			  <xsl:variable name="subTupleIndices" as="xs:integer *">
+				  <xsl:for-each select="$tupleIndices">
+					<xs:sequence><xsl:value-of select="."/></xs:sequence>
+				  </xsl:for-each>
+				  <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+			  </xsl:variable>
+				
+			   <xsl:variable name="productlijnnaam" select="fes:getFormattedValue($doc, 'Productlijnnaam', $subTupleIndices)" />
+		
+				<xsl:if test="$productlijnnaam = $loanAccount">
+					<xsl:value-of select="'true'"/>
+			   </xsl:if>	
+			</xsl:for-each>
+		</xsl:for-each>	
+	</xsl:variable>			
+	
+	<!-- Loop contractanten tuple -->
+	<xsl:variable name="borrowersWithBorrowerRole" >
+		<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+		  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+		  <xsl:variable name="tupleIndices" as="xs:integer *">
+			  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+		  </xsl:variable>
+		
+				<xsl:for-each select="fes:getTupleInstances($doc,$contractant_rollen,$tupleIndices)">
+					<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="subTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$tupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$subTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+							
+					<xsl:variable name="rol" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)"/>
+					<xsl:if test="$rol = 'Borrower' ">
+						<xsl:value-of select="'true'" />
+					</xsl:if>				
+				</xsl:for-each> 
+			</xsl:for-each>
+			</xsl:variable>
+
+			
+			
+	<xsl:variable name="amountOfBorrowersWithBorrowerRole">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$borrowersWithBorrowerRole" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template> 
+	</xsl:variable>
+	
+	
+	<xsl:variable name="amountOfCurrentAccount">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$isCurrentAccount" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template> 
+	</xsl:variable>
+	
+	<xsl:variable name="amountOfLoanAccounts">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$isLoanAccount" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template> 
+	</xsl:variable>
+	
+	<xsl:variable name="amountOfPandrecht">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$isPandrecht" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template> 
+	</xsl:variable>
+	
+	<xsl:variable name="amountOfBankGuarantee">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$isBankguarantee" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template> 
+	</xsl:variable>
+	
+	<xsl:variable name="currentDate" select="fin:getCurrentDate('dd MMMM yyyy', 'nl')"/>
+	
+	
+<properties>
+  <ModelType><data src="fesModel" referenceMode="warn"><columns number="1"/><variables depth="0" var="Q_ModelType" /><presentation scale="1"/></data></ModelType>
+  <ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+  <RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_Relatienummer" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+  <RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+  <MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_BY" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+  <MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+  <CreationDate><data src="functions" name="getDate"><param key="format" value="dd-MM-yyyy"/></data></CreationDate> 
+  <CreationDateTitel>Date</CreationDateTitel>
+  <CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+  <ReportScale>1</ReportScale>
+</properties>
+<outputDocumentProperties>
+  
+  <!-- FRONT PAGE PROPERTIES -->
+  <!--  Title frontpage -->
+  <documentTitle><xsl:choose><xsl:when test="$modelCreatedFrom='QUESTIONNAIRE-TERMSHEET'"><xsl:value-of>Termsheet</xsl:value-of></xsl:when><xsl:otherwise><xsl:value-of>Kredietovereenkomst</xsl:value-of></xsl:otherwise></xsl:choose></documentTitle> 
+  <documentSubtitle visible="document/properties/ModelType[./text()='TDSCCREDITLETTER']">tevens akte van verpanding</documentSubtitle>
+
+  <currentDate><xsl:value-of select="$currentDate"/></currentDate>
+  
+	
+  <!-- Name of borrowers -->
+  <BORROWERS>
+	  <!-- Loop contractanten tuple -->
+		<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+		  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+		  <xsl:variable name="tupleIndices" as="xs:integer *">
+			  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+		  </xsl:variable>
+		  
+			<xsl:variable name="companyNameBorrowers" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam', $tupleIndices)"/>
+			
+			<xsl:variable name="hasBorrowerRole">
+				<xsl:for-each select="fes:getTupleInstances($doc,$contractant_rollen,$tupleIndices)">
+					<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="subTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$tupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$subTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+							
+					<xsl:variable name="rol" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)"/>
+					<xsl:if test="$rol = 'Borrower' ">
+						<xsl:value-of select="'true'" />
+					</xsl:if>				
+				</xsl:for-each>
+			</xsl:variable>
+
+			<xsl:variable name="amountOfBorrowerRol">
+				<xsl:call-template name="substring-count">
+					<xsl:with-param name="String" select="$hasBorrowerRole" />
+					<xsl:with-param name="Substring" select="'true'" />
+				</xsl:call-template> 
+			</xsl:variable>
+			
+			<xsl:if test="$amountOfBorrowerRol > 0 ">
+				<xsl:choose>
+					<xsl:when test="$companyNameBorrowers != '...'">
+						<xsl:value-of select="$companyNameBorrowers" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="fes:getFormattedValue($doc, 'Contractant_naam', $tupleIndices)"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:value-of select="', '" />
+			</xsl:if>				  		
+		</xsl:for-each>	
+   </BORROWERS>			
+			 
+   <!-- Lender -->
+
+   
+		
+</outputDocumentProperties>
+
+			<p class="normal">[b]LEESWIJZER[/b]</p>
+
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>	
+			<p >[b]DEZE KREDIETOVEREENKOMST D.D. <xsl:value-of select="fin:getCurrentDate('dd MMMM yyyy', 'nl')"/> IS AANGEGAAN DOOR:[/b]</p>
+
+			<ol class="OrderedListNumbersRoundBrackets">
+			
+			
+			<!-- Loop contractanten tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>
+
+				<!-- Loop adressen tuple and get the first item in the list of adressen. -->
+				<xsl:variable name="plaatsnaam">
+					<xsl:for-each select="fes:getTupleInstances($doc, $contractant_adressen, $tupleIndices)">
+						<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="subTupleIndices" as="xs:integer *">
+							<xsl:for-each select="$tupleIndices">
+								<xs:sequence>
+									<xsl:value-of select="."/>
+								</xs:sequence>
+							</xsl:for-each>
+							<xs:sequence>
+								<xsl:value-of select="$subTupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<xsl:value-of select="fes:getFormattedValue($doc, 'Contractant_plaatsnaam', $subTupleIndices)"/>		 
+					</xsl:for-each>
+				</xsl:variable>
+
+				<xsl:variable name="externRelatienummer" select="fes:getFormattedValue($doc, 'Contractant_externRelatieNummer', $tupleIndices)" />
+
+				<!-- Loop facilities and see if contractant is allocated to a facility -->
+				<xsl:variable name="contractantAllocatedToFacility">
+					<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+						<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="tupleIndices" as="xs:integer *">
+							<xs:sequence>
+								<xsl:value-of select="$tupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<!-- Loop faciliteiten tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+							<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<!-- Loop kredietnemers tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, 'Kredietnemers', $subTupleIndices)">
+								<xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="subSubTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$subTupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$subSubTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<xsl:variable name="kredietnemerExternalRelatieNummer" select="fes:getFormattedValue($doc, 'Kredietnemer_externRelatieNummer', $subSubTupleIndices)" />
+								<xsl:if test="$externRelatienummer = $kredietnemerExternalRelatieNummer">
+									<xsl:value-of select="'true'"/>
+								</xsl:if>
+							</xsl:for-each>	
+						</xsl:for-each>	
+					</xsl:for-each>	
+				</xsl:variable>
+				
+				<xsl:variable name="amountOfContractantAllocatedToFacility">
+					<xsl:call-template name="substring-count">
+						<xsl:with-param name="String" select="$contractantAllocatedToFacility" />
+						<xsl:with-param name="Substring" select="'true'" />
+					</xsl:call-template> 
+				</xsl:variable>
+
+				<!-- Loop rollen tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+					<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="subTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$tupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$subTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+					<xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+
+					<!-- Only for Main borrower -->
+					<xsl:if test="$rol_naam='Main borrower'">
+
+						<!-- delcare variables -->
+						<xsl:variable name="rechtsvorm" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm', $tupleIndices)" />
+						<xsl:variable name="naam" select="fes:getFormattedValue($doc, 'Contractant_naam', $tupleIndices)" />
+						<xsl:variable name="bedrijfsnaam" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam', $tupleIndices)" />
+						<xsl:variable name="geboorteplaats" select="fes:getFormattedValue($doc, 'Contractant_geboorteplaats', $tupleIndices)" />
+						<xsl:variable name="geboortedatum" select="fes:getFormattedValue($doc, 'Contractant_geboortedatum', $tupleIndices)" />			
+						<xsl:variable name="kvk" select="fes:getFormattedValue($doc, 'Contractant_kvk', $tupleIndices)" />
+
+						<!-- If rechtsvorm equals ... -->
+						<xsl:choose>
+							<xsl:when test="$rechtsvorm = $BV">
+								<li>
+									<xsl:value-of select="$bedrijfsnaam"/> een besloten vennootschap  statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>); 	
+								</li>
+								
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm = $NV">
+								<li >
+									<xsl:value-of select="$bedrijfsnaam"/> een naamloze vennootschap statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>); 	 
+								</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm = $stichting">
+								<li>
+									<xsl:value-of select="$bedrijfsnaam"/> een stichting statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>); 	
+								</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm = $vereniging">
+								<li >
+										<xsl:value-of select="$bedrijfsnaam"/> een vereniging statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>); 	
+								</li>
+							</xsl:when> 
+
+							<xsl:when test="$rechtsvorm = $VOF or $rechtsvorm = $commanditaireVennootschap">
+								<li >			
+									
+									<!--  Owners / UBO -->
+									<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+									  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+									  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+										  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+									  </xsl:variable>
+											
+											<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />	
+											<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />		
+											<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />	
+		
+											<xsl:if test="$externRelatienummer = $jurdischPartij_externrelatienummer"> 
+											
+												<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+												  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+												  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+													  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+												  </xsl:variable>
+
+														<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />	
+														<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+														<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+														
+														<xsl:variable name="isOwnerOrUBO">
+															<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+																<xsl:value-of select="'true'" />
+															</xsl:if>
+														</xsl:variable>
+														
+
+														<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+																														
+														<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+															  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+															  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+																  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+															  </xsl:variable>
+																	
+																	<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />																
+																		<xsl:variable name="juridisch2DateOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboortedatum',$jurdisch2TupleIndices)" />
+																	<xsl:variable name="juridisch2PlaceOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboorteplaats',$jurdisch2TupleIndices)" />
+
+																	<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer"> 
+																		<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																		
+																			<xsl:value-of select="$jurdisch2PartijNaam" />, geboren te <xsl:value-of select="$juridisch2PlaceOfBirth" /> op <xsl:value-of select="$juridisch2DateOfBirth" />;<p>[br][/br]</p>
+
+																	</xsl:if>
+																</xsl:for-each>
+															</xsl:if>
+														</xsl:for-each>
+													</xsl:if>
+												</xsl:for-each>
+								<p>[br][/br]</p>
+								Hierbij handelende als enige vennoten van <xsl:value-of select="$bedrijfsnaam"/>, een <xsl:if test="$rechtsvorm=$VOF">Vennootschap onder Firma</xsl:if>
+											<xsl:if test="$rechtsvorm = $commanditaireVennootschap">Commanditaire Vennootschap</xsl:if> gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>, worden ieder afzonderlijk en ook gezamenlijk aangeduid als Kredietnemer.
+											<p>[br][/br][br][/br]</p>
+								Indien in uitingen tussen Kredietgever en <xsl:choose>
+												<xsl:when test="$amountOfContractantAllocatedToFacility > 0">Kredietnemer</xsl:when>
+												<xsl:otherwise>Schuldenaar</xsl:otherwise>
+											</xsl:choose> de naam van <xsl:value-of select="$naam"/> wordt gebezigd, worden hiermee tevens de afzonderlijke vennoten bedoeld.
+																	
+							 </li>	
+							</xsl:when>     
+
+							<xsl:when test="$rechtsvorm = $maatschap">
+								<li >	
+								
+							<!--  Owners / UBO -->
+							<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+							  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+							  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+								  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+							  </xsl:variable>
+									
+									<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />	
+									<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />		
+									<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />	
+
+									<xsl:if test="$externRelatienummer = $jurdischPartij_externrelatienummer"> 
+										
+										<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+										  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+										  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+											  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+										  </xsl:variable>
+												
+												<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />	
+												<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+												<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+												
+												<xsl:variable name="isOwnerOrUBO">
+													<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+														<xsl:value-of select="'true'" />
+													</xsl:if>
+												</xsl:variable>
+																											
+												<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+																		
+												<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+													  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+													  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+														  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+													  </xsl:variable>
+															
+															<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+															<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />	
+															<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />																
+															<xsl:variable name="juridisch2DateOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboortedatum',$jurdisch2TupleIndices)" />
+															<xsl:variable name="juridisch2PlaceOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboorteplaats',$jurdisch2TupleIndices)" />
+
+															<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer"> 
+																<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />								
+																	<xsl:value-of select="$jurdisch2PartijNaam" />, geboren te <xsl:value-of select="$juridisch2PlaceOfBirth" /> op <xsl:value-of select="$juridisch2DateOfBirth" />; <p>[br][/br]</p>
+															</xsl:if>
+														</xsl:for-each>
+													</xsl:if>
+												</xsl:for-each>
+											</xsl:if>
+										</xsl:for-each>
+														
+									<p>[br][/br]</p>
+									Hierbij handelende als enige maten van <xsl:value-of select="$bedrijfsnaam"/>, een maatschap gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>, alsmede voor zichzelf in privé, worden ieder afzonderlijk en ook gezamenlijk aangeduid als Kredietnemer.
+									<p>[br][/br][br][/br]</p>
+									Indien in uitingen tussen Kredietgever en <xsl:choose>
+													<xsl:when test="$amountOfContractantAllocatedToFacility > 0">Kredietnemer</xsl:when>
+													<xsl:otherwise>Schuldenaar</xsl:otherwise>
+												</xsl:choose> de naam van <xsl:value-of select="$naam"/> wordt gebezigd, worden hiermee tevens de afzonderlijke maten bedoeld.
+								</li>
+							</xsl:when>  
+
+							<xsl:when test="$rechtsvorm = $eenmanszaak">
+								<li>
+									<xsl:value-of select="$naam"/>, geboren te <xsl:value-of select="$geboorteplaats"/> op <xsl:value-of select="$geboortedatum"/>, handelende onder de naam <xsl:value-of select="$bedrijfsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>); 	 
+								</li>
+							</xsl:when>  
+
+							<xsl:when test="$rechtsvorm = $individual">    
+								<li >
+									<xsl:value-of select="$bedrijfsnaam"/>, geboren te <xsl:value-of select="$plaatsnaam"/> op <xsl:value-of select="$geboortedatum"/> (Kredietnemer <xsl:if test="$amountOfBorrowers > 1" > 1</xsl:if>)
+								</li>
+							</xsl:when> 
+							<xsl:otherwise>
+								<li>
+									[color=#E36C0A][b]A relation is missing, enter text manually.[/b][/color]
+								</li>
+							</xsl:otherwise>
+
+						</xsl:choose>
+					</xsl:if>			
+				</xsl:for-each>     
+			</xsl:for-each>
+
+			<!-- More then 1 borrower available -->
+			<xsl:if test="$amountOfBorrowers > 1" >
+
+				<!-- Loop contractanten tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="tuples" select="fes:getTupleInstanceCount($doc, $contractant_adressen)" />
+
+					<!-- check if borrower is a mainborrower -->
+					<xsl:variable name="isMainBorrower">
+						<!-- Loop rollen tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+							<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+
+							<xsl:if test="$rol_naam='Main borrower'">
+								<xsl:value-of select="'true'"/>
+							</xsl:if>
+
+						</xsl:for-each>
+					</xsl:variable>
+					
+					<!-- check if borrower is a borrower -->
+					<xsl:variable name="isBorrower">
+						<!-- Loop rollen tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+							<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+
+							<xsl:if test="$rol_naam='Borrower'">
+								<xsl:value-of select="'true'"/>
+							</xsl:if>
+
+						</xsl:for-each>
+					</xsl:variable>
+					
+
+					<xsl:variable name="externRelatienummer" select="fes:getFormattedValue($doc, 'Contractant_externRelatieNummer', $tupleIndices)" />
+
+					<!-- Loop facilities and see if contractant is allocated to a facility -->
+					<xsl:variable name="contractantAllocatedToFacility">
+						<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+							<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="tupleIndices" as="xs:integer *">
+								<xs:sequence>
+									<xsl:value-of select="$tupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<!-- Loop faciliteiten tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+								<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="subTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$tupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$subTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<!-- Loop kredietnemers tuple -->
+								<xsl:for-each select="fes:getTupleInstances($doc, 'Kredietnemers', $subTupleIndices)">
+									<xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+									<xsl:variable name="subSubTupleIndices" as="xs:integer *">
+										<xsl:for-each select="$subTupleIndices">
+											<xs:sequence>
+												<xsl:value-of select="."/>
+											</xs:sequence>
+										</xsl:for-each>
+										<xs:sequence>
+											<xsl:value-of select="$subSubTupleIndex"/>
+										</xs:sequence>
+									</xsl:variable>
+
+									<xsl:variable name="kredietnemerExternalRelatieNummer" select="fes:getFormattedValue($doc, 'Kredietnemer_externRelatieNummer', $subSubTupleIndices)" />
+									<xsl:if test="$externRelatienummer = $kredietnemerExternalRelatieNummer">
+										<xsl:value-of select="'true'"/>
+									</xsl:if>
+								</xsl:for-each>	
+							</xsl:for-each>	
+						</xsl:for-each>	
+					</xsl:variable>
+
+					<!-- Loop adressen tuple and get the first item in the list of adressen. -->
+					<xsl:variable name="plaatsnaam">
+						<xsl:for-each select="fes:getTupleInstances($doc, $contractant_adressen, $tupleIndices)">
+							<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<xsl:value-of select="fes:getFormattedValue($doc, 'Contractant_plaatsnaam', $subTupleIndices)"/>
+
+						</xsl:for-each>
+					</xsl:variable>
+
+					<!-- Borrower is not a main borrower -->
+					<xsl:if test="$isMainBorrower!='true' and $isBorrower='true'">
+
+						<xsl:variable name="rechtsvorm" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm', $tupleIndices)" />
+						<xsl:variable name="naam" select="fes:getFormattedValue($doc, 'Contractant_naam', $tupleIndices)" />
+						<xsl:variable name="bedrijfsnaam" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam', $tupleIndices)" />	
+						<xsl:variable name="kvk" select="fes:getFormattedValue($doc, 'Contractant_kvk', $tupleIndices)" />
+						<xsl:variable name="geboortedatum" select="fes:getFormattedValue($doc, 'Contractant_geboortedatum', $tupleIndices)" />
+						<xsl:variable name="geboorteplaats" select="fes:getFormattedValue($doc, 'Contractant_geboorteplaats', $tupleIndices)" />
+
+						<xsl:choose>
+
+
+							<xsl:when test="$rechtsvorm=$BV">
+								<li> <xsl:value-of select="$bedrijfsnaam"/>, een besloten vennootschap  statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>);</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$NV">
+								<li><xsl:value-of select="$bedrijfsnaam"/>, een naamloze vennootschap statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>  (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>);</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$stichting">
+								<li><xsl:value-of select="$bedrijfsnaam"/>, stichting  statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>  (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>); </li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$vereniging">
+								<li>	<xsl:value-of select="$bedrijfsnaam"/>, een vereniging  statutair gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>  (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>); </li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$VOF or $rechtsvorm=$commanditaireVennootschap">
+								<li>
+									<!--  Owners / UBO -->
+									<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+									  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+									  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+										  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+									  </xsl:variable>
+											
+											<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />	
+											<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />		
+											<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />	
+		
+											<xsl:if test="$externRelatienummer = $jurdischPartij_externrelatienummer"> 
+												
+												<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+												  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+												  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+													  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+												  </xsl:variable>
+														
+														<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />	
+														<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+														<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+														
+														<xsl:variable name="isOwnerOrUBO">
+															<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+																<xsl:value-of select="'true'" />
+															</xsl:if>
+														</xsl:variable>
+																													
+														<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+																				
+														<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+															  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+															  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+																  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+															  </xsl:variable>
+																	
+																	<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />																
+																	<xsl:variable name="juridisch2DateOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboortedatum',$jurdisch2TupleIndices)" />
+																	<xsl:variable name="juridisch2PlaceOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboorteplaats',$jurdisch2TupleIndices)" />
+
+																	<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer"> 
+																		<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																		
+																			<xsl:value-of select="$jurdisch2PartijNaam" />, geboren te <xsl:value-of select="$juridisch2PlaceOfBirth" /> op <xsl:value-of select="$juridisch2DateOfBirth" />;<p>[br][/br]</p>
+																	</xsl:if>
+																</xsl:for-each>
+															</xsl:if>
+														</xsl:for-each>
+													</xsl:if>
+												</xsl:for-each>
+
+								<p>[br][/br]</p>
+								Hierbij handelende als enige vennoten van <xsl:value-of select="$bedrijfsnaam"/>, een <xsl:choose><xsl:when test="$rechtsvorm=$VOF">vennootschap onder firma</xsl:when><xsl:otherwise>Commanditaire Vennootschap</xsl:otherwise></xsl:choose>
+								gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>, worden ieder afzonderlijk en ook gezamenlijk aangeduid als Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>.
+									<p>[br][/br][br][/br]</p>
+										Indien in uitingen tussen Kredietgever en  <xsl:choose>
+										<xsl:when test="$contractantAllocatedToFacility = 'true'">Kredietnemer</xsl:when>
+										<xsl:otherwise>Schuldenaar</xsl:otherwise>
+									</xsl:choose> de naam van  <xsl:value-of select="$bedrijfsnaam"/>, wordt gebezigd, worden hiermee tevens de afzonderlijke vennoten bedoeld.
+								</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$maatschap">
+								<li>
+									<!--  Owners / UBO -->
+									<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+									  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+									  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+										  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+									  </xsl:variable>
+											
+											<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />	
+											<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />		
+											<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />	
+		
+											<xsl:if test="$externRelatienummer = $jurdischPartij_externrelatienummer"> 
+												
+												<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+												  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+												  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+													  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+												  </xsl:variable>
+														
+														<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />	
+														<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+														<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+														
+														<xsl:variable name="isOwnerOrUBO">
+															<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+																<xsl:value-of select="'true'" />
+															</xsl:if>
+														</xsl:variable> 
+																													
+														<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+																				
+														<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+															  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+															  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+																  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+															  </xsl:variable>
+																	
+																	<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />	
+																	<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />																
+																	<xsl:variable name="juridisch2DateOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboortedatum',$jurdisch2TupleIndices)" />
+																	<xsl:variable name="juridisch2PlaceOfBirth" select="fes:getFormattedValue($doc, 'JurdischePartij_geboorteplaats',$jurdisch2TupleIndices)" />
+
+																	<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer"> 
+																		<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />	
+																		
+																			<xsl:value-of select="$jurdisch2PartijNaam" />, geboren te <xsl:value-of select="$juridisch2PlaceOfBirth" /> op <xsl:value-of select="$juridisch2DateOfBirth" />; <p>[br][/br]</p>
+																	</xsl:if>
+																</xsl:for-each>
+															</xsl:if>
+														</xsl:for-each>
+													</xsl:if>
+												</xsl:for-each>
+								<p>[br][/br]</p>
+								Hierbij handelende als enige maten van <xsl:value-of select="$bedrijfsnaam"/>, een maatschap gevestigd te <xsl:value-of select="$plaatsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/>, alsmede voor zichzelf in privé, worden ieder afzonderlijk en ook gezamenlijk aangeduid als Overig Schuldenaar <countNo>
+												<xsl:value-of select="position() + 1" />
+											</countNo>.
+								<p>[br][/br][br][/br]</p>
+								Indien in uitingen tussen Kredietgever en <xsl:choose>
+												<xsl:when test="$contractantAllocatedToFacility = 'true'">Kredietnemer</xsl:when>
+												<xsl:otherwise>Schuldenaar</xsl:otherwise>
+											</xsl:choose> de naam van <xsl:value-of select="$bedrijfsnaam"/> wordt gebezigd, worden hiermee tevens de afzonderlijke maten bedoeld.
+				
+								</li> 
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$eenmanszaak">
+								<li>	<xsl:value-of select="$naam"/>, geboren te <xsl:value-of select="$geboorteplaats"/> op <xsl:value-of select="$geboortedatum"/>, handelende onder de naam <xsl:value-of select="$bedrijfsnaam"/>, ingeschreven in het handelsregister van de Kamers van Koophandel onder nummer <xsl:value-of select="$kvk"/> (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>);</li>
+							</xsl:when>
+
+							<xsl:when test="$rechtsvorm=$individual">
+								<li >
+									<xsl:value-of select="$naam"/>, geboren te <xsl:value-of select="$geboorteplaats"/> op <xsl:value-of select="$geboortedatum"/> (Overig Schuldenaar <countNo>
+										<xsl:value-of select="position() + 1" />
+									</countNo>). Kredietnemer en Overige Schuldena(a)r(en) worden hierna zowel ieder afzonderlijk als gezamenlijk ook Schuldenaar genoemd;
+								</li>
+							</xsl:when>
+							
+							<xsl:otherwise>
+								<li>
+									[color=#E36C0A][b]A relation is missing, enter text manually.[/b][/color]
+								</li>
+							</xsl:otherwise>
+			
+						</xsl:choose>
+						
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:if>
+			</ol>
+			<br/>
+			
+			
+			
+				
+								
+								
+
+			<p >[b]PARTIJEN KOMEN HET VOLGENDE OVEREEN:[/b]</p>
+
+			<section class="section">FINANCIERING EN DOEL</section>
+			<subsection class="subsection">Kredietfaciliteiten</subsection>
+
+			<p>Onder de opschortende en overige voorwaarden van deze Kredietovereenkomst, wordt aan <xsl:choose>
+					<xsl:when test="$amountOfBorrowers &lt; 2">Kredietnemer</xsl:when>
+					<xsl:otherwise>de volgende Kredietnemers</xsl:otherwise>
+					<!--TODO: Add when this becomes available in FTB -->
+				</xsl:choose>
+				
+				een totale financiering van €
+				<!-- Loop Zakelijke overeenkomst tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+				
+				<xsl:variable name="TotalAgreementLimit" select="fes:getFormattedValue($doc,'TotalAgreementLimit', $tupleIndices)"/>
+				<xsl:value-of select="$TotalAgreementLimit"/>
+				</xsl:for-each>
+				
+				verstrekt in de vorm van:</p>
+   				<!-- Loop Zakelijke overeenkomst tuple  voor het tonen van faciliteiten en onderliggende producten en  rente-->
+
+
+
+                <xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+                  <xsl:variable name="tupleIndex" select="." as="xs:integer" />
+                  <xsl:variable name="tupleIndices" as="xs:integer *">
+                    <xs:sequence>
+                      <xsl:value-of select="$tupleIndex" />
+                    </xs:sequence>
+                  </xsl:variable>
+
+
+
+                  <!-- Loop faciliteiten tuple -->
+
+                  <xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+                    <xsl:variable name="subTupleIndex" select="." as="xs:integer" />
+                    <xsl:variable name="subTupleIndices" as="xs:integer *">
+                      <xsl:for-each select="$tupleIndices">
+                        <xs:sequence>
+                          <xsl:value-of select="." />
+                        </xs:sequence>
+                      </xsl:for-each>
+                      <xs:sequence>
+                        <xsl:value-of select="$subTupleIndex" />
+                      </xs:sequence>
+                    </xsl:variable>
+                    <table>
+                    <tr> <td> Productnaam: </td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'Productlijnnaam', $subTupleIndices)" /> </td></tr>
+                    <tr> <td> Limiet:      </td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'Limiet', $subTupleIndices)" /> </td></tr>
+                    <tr> <td> Looptijd:    </td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'Looptijd', $subTupleIndices)" /> maand(en) </td></tr>
+                    <tr> <td> Rente:       </td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'PrintedRate', $subTupleIndices)" /> </td></tr>
+                     </table>
+                    <!-- Loop kredietnemers tuple -->
+                    <xsl:for-each select="fes:getTupleInstances($doc, 'Producten', $subTupleIndices)">
+                      <xsl:variable name="subSubTupleIndex" select="." as="xs:integer" />
+                      <xsl:variable name="subSubTupleIndices" as="xs:integer *">
+                        <xsl:for-each select="$subTupleIndices">
+                          <xs:sequence>
+                            <xsl:value-of select="." />
+                          </xs:sequence>
+                        </xsl:for-each>
+                        <xs:sequence>
+                          <xsl:value-of select="$subSubTupleIndex" />
+                        </xs:sequence>
+                      </xsl:variable>
+                       <table>
+                       <tr> <td>Renteproduct:           </td>           <td>     <xsl:value-of select="fes:getFormattedValue($doc, 'Product_RenteProduct', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Renteperiodiciteit:     </td>           <td>     <xsl:value-of select="fes:getFormattedValue($doc, 'Product_RentePeriodiciteit', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Opnamevorm:             </td>           <td>     <xsl:value-of select="fes:getFormattedValue($doc, 'Opname_vorm', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Opname:                 </td>           <td>     <xsl:value-of select="fes:getFormattedValue($doc, 'Opname', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Aflossingsvorm:         </td>           <td>     <xsl:value-of select="fes:getFormattedValue($doc, 'Aflossingsvorm', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Aflossingsperiodiciteit:</td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'Aflossingsperiodiciteit', $subSubTupleIndices)" /> </td></tr>
+                       <tr> <td>Grace period:           </td>           <td> <xsl:value-of select="fes:getFormattedValue($doc, 'EersteAflossingNa', $subSubTupleIndices)" /> maand(en) </td></tr>
+                       </table>
+
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </xsl:for-each>
+
+
+			<section class="section">OPSCHORTENDE VOORWAARDEN</section>
+			<p >Kredietgever stelt het Krediet ter beschikking aan Kredietnemer zodra:</p>
+			<ol class="OrderedList">
+				<li>alle in artikel 5 genoemde zekerheden zijn gevestigd;</li>
+				<li>Kredietgever alle documenten heeft ontvangen die zijn genoemd in Bijlage 1 onder A;</li>
+				<li>Kredietgever akkoord is met de in Bijlage 1 onder A genoemde documenten.</li>
+			</ol>
+
+			<p >Voldoet Kredietnemer niet vóór <xsl:value-of select="fin:datePlus($currentDate,'dd MMMM yyyy',0,3,0,'dd MMMM yyyy','nl')" /> aan deze opschortende voorwaarden, dan kan Kredietgever de voorwaarden van deze Kredietovereenkomst wijzigen.</p>
+
+			<xsl:variable name="hasCovenant">
+				<!-- Loop Bijzondere bepalingen tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, 'BijzonderePepaling')">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="categorie" select="fes:getFormattedValue($doc, 'Categorie', $tupleIndices)" />
+
+					<xsl:if test="$categorie='Covenant'">
+						<xsl:value-of select="'true'"/>
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:variable>
+
+			<xsl:if test="$hasCovenant='true'">
+				<p>Voldoet Kredietnemer niet vóór de in Bijlage 1 onder B genoemde termijn aan deze voorwaarden dan levert dit een Opeisingsgrond op in de zin van artikel 22 van de Algemene Voorwaarden.</p>
+			</xsl:if>
+			<p>Indien de plicht vervalt van Kredietgever om het Krediet ter beschikking te stellen, dan heeft Kredietgever eveneens het recht om deze overeenkomst onmiddellijk op te zeggen. De opzegging laat de verplichting van Kredietnemer onverlet om aan Kredietgever al hetgeen te voldoen waartoe Kredietnemer verplicht is op grond van dit artikel.</p>
+
+			<section class="section">OPNAME</section>
+
+
+
+
+			<section class="section">ZEKERHEDEN</section>
+
+<!--              Oplijsting van zekerheidsgegevens per zekerheid -->
+          <xsl:for-each select="fes:getTupleInstances($doc, 'Verpandingszekerheid')">
+                  <xsl:variable name="tupleIndex" select="." as="xs:integer" />
+                  <xsl:variable name="tupleIndices" as="xs:integer *">
+                    <xs:sequence>
+                      <xsl:value-of select="$tupleIndex" />
+                    </xs:sequence>
+                  </xsl:variable>
+                    <p> </p>
+                    <p> Een <xsl:value-of select="fes:getFormattedValue($doc, 'HoogsteRangorde', $tupleIndices)" />e inschrijving, ten bedrage van <xsl:value-of select="fes:getFormattedValue($doc, 'Verpandingszekerheid_inschrijving', $tupleIndices)" />
+                    op het volgende <xsl:value-of select="fes:getFormattedValue($doc, 'ZekerheidsType', $tupleIndices)" /> : <xsl:value-of select="fes:getFormattedValue($doc, 'Verpandingszekerheid_omschrijving', $tupleIndices)" />
+                    </p>
+
+                     <p>
+                     </p>
+
+
+                </xsl:for-each>
+
+
+
+
+			<section class="section">BIJZONDERE VOORWAARDEN </section>
+
+			<!-- Loop Bijzondere bepalingen tuple -->
+			<xsl:for-each select="fes:getTupleInstances($doc, 'BijzonderePepaling')">
+				<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+				<xsl:variable name="tupleIndices" as="xs:integer *">
+					<xs:sequence>
+						<xsl:value-of select="$tupleIndex"/>
+					</xs:sequence>
+				</xsl:variable>
+
+				<xsl:variable name="categorie" select="fes:getFormattedValue($doc, 'Categorie', $tupleIndices)" />
+				<xsl:variable name="finaalOmschrijving" select="fes:getFormattedValue($doc, $finaalOmschrijving_variable, $tupleIndices)" />
+				<xsl:variable name="inOfferteJN" select="fes:getFormattedValue($doc, $inOfferteJN_variable, $tupleIndices)" />
+
+				<xsl:if test="$categorie!='Covenant' and $inOfferteJN = 'true'">
+					<p><xsl:value-of select="$finaalOmschrijving" /></p>
+				</xsl:if>
+
+			</xsl:for-each>
+
+
+              <section class="section">COVENANTEN </section>
+
+              <!-- Loop Bijzondere bepalingen tuple -->
+              <xsl:for-each select="fes:getTupleInstances($doc, 'BijzonderePepaling')">
+                <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+                <xsl:variable name="tupleIndices" as="xs:integer *">
+                  <xs:sequence>
+                    <xsl:value-of select="$tupleIndex"/>
+                  </xs:sequence>
+                </xsl:variable>
+
+                <xsl:variable name="categorie" select="fes:getFormattedValue($doc, 'Categorie', $tupleIndices)" />
+                <xsl:variable name="finaalOmschrijving" select="fes:getFormattedValue($doc, $finaalOmschrijving_variable, $tupleIndices)" />
+                <xsl:variable name="inOfferteJN" select="fes:getFormattedValue($doc, $inOfferteJN_variable, $tupleIndices)" />
+
+                <xsl:if test="$categorie ='Covenant' and $inOfferteJN = 'true'">
+                  <p><xsl:value-of select="$finaalOmschrijving" /></p>
+                </xsl:if>
+
+      </xsl:for-each>
+
+			<section class="section">ALGEMENE VOORWAARDEN</section>
+			<subsection class="subsection">Algemene Voorwaarden</subsection>
+
+			<p >De Algemene Voorwaarden, zoals van tijd tot tijd gewijzigd of aangevuld, maken onlosmakelijk deel uit van deze Kredietovereenkomst. De Algemene Voorwaarden die gelden op de datum van deze Kredietovereenkomst, zijn aan <xsl:choose><xsl:when test="count($mainBorrowerData/allocatedToFacility) > 0">Kredietnemer</xsl:when><xsl:otherwise>Schuldenaar</xsl:otherwise></xsl:choose> ter hand gesteld. Door ondertekening van deze Kredietovereenkomst verklaart <xsl:choose><xsl:when test="count($mainBorrowerData/allocatedToFacility) > 0">Kredietnemer</xsl:when><xsl:otherwise>Schuldenaar</xsl:otherwise></xsl:choose> dat hij voorafgaand aan het sluiten van deze Kredietovereenkomst een exemplaar van deze Algemene Voorwaarden heeft ontvangen en dat hij eveneens voorafgaand aan het sluiten van deze Kredietovereenkomst van de inhoud van die voorwaarden heeft kennisgenomen.</p>
+            <br/>
+
+
+
+
+			<section class="section">MACHTIGING</section>
+
+			<p >Door ondertekening van deze Kredietovereenkomst machtigt Kredietnemer Kredietgever onherroepelijk om alle bedragen die hij onder de Kredietovereenkomst aan Kredietgever moet betalen, op het moment dat deze bedragen opeisbaar worden, van de Betaalrekening te incasseren. Kredietnemer moet ervoor zorgen dat er voldoende saldo op de Betaalrekening staat op het moment van incasseren, bij gebreke waarvan Kredietnemer onmiddellijk in verzuim is zonder dat daartoe enige ingebrekestelling is vereist.</p>
+
+
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+	<p>[b]HANDTEKENINGEN[/b]</p>
+
+	<p>
+		Aldus overeengekomen op de datum zoals vermeld in het hoofd van deze overeenkomst, door:
+		<xsl:choose>
+			<xsl:when test="count($mainBorrowerData/allocatedToFacility) > 0">[b]Kredietnemer[/b]</xsl:when>
+			<xsl:otherwise>[b]Schuldenaar[/b]</xsl:otherwise>
+		</xsl:choose>
+	</p>
+
+
+  <xsl:variable name="uboData">
+    <xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+      <xsl:variable name="tupleIndex" select="." as="xs:integer" />
+      <xsl:variable name="tupleIndices" as="xs:integer *">
+        <xs:sequence>
+          <xsl:value-of select="$tupleIndex" />
+        </xs:sequence>
+      </xsl:variable>
+
+      <xsl:variable name="contractant_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$tupleIndices)" />
+      <xsl:variable name="contractant_rechtsvorm_value" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm',$tupleIndices)" />
+
+      <xsl:if test="$mainBorrowerData/externRelatienummer = $contractant_externRelatieNummer_value">
+
+        <xsl:variable name="contractant_bedrijfsnaam_value" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam',$tupleIndices)" />
+
+        <xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+          <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer" />
+          <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+            <xs:sequence>
+              <xsl:value-of select="$jurdischTupleIndex" />
+            </xs:sequence>
+          </xsl:variable>
+
+          <xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />
+          <xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />
+          <xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />
+
+          <xsl:if test="$contractant_externRelatieNummer_value = $jurdischPartij_externrelatienummer">
+
+            <xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+              <xsl:variable name="relatieTupleIndex" select="." as="xs:integer" />
+              <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+                <xs:sequence>
+                  <xsl:value-of select="$relatieTupleIndex" />
+                </xs:sequence>
+              </xsl:variable>
+
+              <xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />
+              <xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+              <xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+
+              <xsl:variable name="isOwnerOrUBO">
+                <xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'">
+                  <xsl:value-of select="'true'" />
+                </xsl:if>
+              </xsl:variable>
+
+              <xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+                <xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+                  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer" />
+                  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+                    <xs:sequence>
+                      <xsl:value-of select="$jurdisch2TupleIndex" />
+                    </xs:sequence>
+                  </xsl:variable>
+
+                  <xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />
+                  <xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />
+                  <xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />
+
+                  <xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer">
+                    <amount>1</amount>
+                  </xsl:if>
+                </xsl:for-each>
+
+              </xsl:if>
+            </xsl:for-each>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:variable>
+
+	<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+	  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+	  <xsl:variable name="tupleIndices" as="xs:integer *">
+		  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+	  </xsl:variable>
+
+		<xsl:variable name="contractant_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$tupleIndices)" />
+		<xsl:variable name="contractant_rechtsvorm_value" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm',$tupleIndices)" />
+
+		<xsl:if test="$mainBorrowerData/externRelatienummer = $contractant_externRelatieNummer_value" >
+
+			<xsl:variable name="contractant_bedrijfsnaam_value" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam',$tupleIndices)" />
+
+			<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+			  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+			  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+				  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+			  </xsl:variable>
+
+					<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />
+					<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />
+					<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />
+
+					<xsl:if test="$contractant_externRelatieNummer_value = $jurdischPartij_externrelatienummer">
+
+						<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+						  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+						  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+							  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+						  </xsl:variable>
+
+								<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />
+								<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+								<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+
+								<xsl:variable name="isOwnerOrUBO">
+									<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+										<xsl:value-of select="'true'" />
+									</xsl:if>
+								</xsl:variable>
+
+								<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+
+										<table>
+
+
+										<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+										  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+										  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+											  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+										  </xsl:variable>
+
+												<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />
+												<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />
+												<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />
+
+												<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer">
+
+													<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />
+
+													<!--  name main borrower -->
+													<tr>
+														<td colspan="2"><xsl:value-of select="$contractant_bedrijfsnaam_value" /></td>
+													</tr>
+
+														<tr>
+															<td colspan="2">____________________________</td>
+														</tr>
+
+														<tr>
+															<td>Naam: </td>
+															<td><xsl:value-of select="$jurdisch2PartijNaam" /></td>
+														</tr>
+
+															<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+															  <xsl:variable name="uboTupleIndex" select="." as="xs:integer"/>
+															  <xsl:variable name="uboTupleIndices" as="xs:integer *">
+																  <xs:sequence><xsl:value-of select="$uboTupleIndex"/></xs:sequence>
+															  </xsl:variable>
+
+																<xsl:variable name="ubo_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$uboTupleIndices)" />
+																<xsl:variable name="ubo_rechtsvorm_value" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm',$uboTupleIndices)" />
+
+															<!-- 	Only show when ubo has rechtsvorm BV or NV -->
+																<xsl:if test="$ubo_externRelatieNummer_value = $jurdisch2ExternRelatienummer" >
+																	<xsl:if test="$ubo_rechtsvorm_value = $BV or $ubo_rechtsvorm_value = $NV">
+																		<tr>
+																			<td colspan="2">Functie: ……………………………..</td>
+																		</tr>
+																	</xsl:if>
+																</xsl:if>
+															</xsl:for-each>
+
+														<tr>
+															<td colspan="2">Datum en plaats:……………………</td>
+														</tr>
+
+														<tr>
+															<td colspan="2">[color=#E36C0A][case signature spouse needed][/color]</td>
+														</tr>
+
+														<tr>
+															<td colspan="2"><xsl:value-of select="$contractant_bedrijfsnaam_value" /></td>
+														</tr>
+
+														<tr>
+															<td colspan="2">____________________________</td>
+														</tr>
+
+														<tr>
+															<td>Naam Partner:</td>
+															<td>[color=#E36C0A][name spouse owner][/color]</td>
+														</tr>
+
+														<tr>
+															<td colspan="2">……………………………..</td>
+														</tr>
+
+														<tr>
+															<td>Datum en plaats:</td>
+															<td>……………………</td>
+														</tr>
+
+														<tr>
+															<td colspan="2">[color=#E36C0A][/case signature spouse needed][/color]</td>
+														</tr>
+												</xsl:if>
+										</xsl:for-each>
+									</table>
+								</xsl:if>
+						</xsl:for-each>
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:if>
+	</xsl:for-each>
+
+	<!--IF no UBO specified show this block -->
+	<xsl:if test="count($uboData/amount)= 0">
+	<table>
+		<tr>
+			<td colspan="2">[color=#E36C0A][per owner/ubo][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][name main borrower][/color]	</td>
+		</tr>
+		<tr>
+			<td colspan="2">___________________________</td>
+		</tr>
+		<tr>
+			<td>Naam:</td>
+			<td>[color=#E36C0A][name owner1][/color]	</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][case bv, nv][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">Functie: ……………………………..</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][/case bv, nv][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">Datum en plaats:……………………………..</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][case signature spouse needed][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][name main borrower][/color]	</td>
+		</tr>
+		<tr>
+			<td colspan="2">____________________________</td>
+		</tr>
+		<tr>
+			<td>Naam Partner:</td>
+			<td>[color=#E36C0A][name owner1][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">……………………………..</td>
+		</tr>
+		<tr>
+			<td>Datum en plaats:</td>
+			<td>[color=#E36C0A][name owner1][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][/case signature spouse needed][/color]</td>
+		</tr>
+		<tr>
+			<td colspan="2">[color=#E36C0A][/per owner/ubo][/color]</td>
+		</tr>
+	</table>
+
+	</xsl:if>
+
+	<!--  For all other borrowers  -->
+	<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+	  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+	  <xsl:variable name="tupleIndices" as="xs:integer *">
+		  <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+	  </xsl:variable>
+
+		<xsl:variable name="contractant_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$tupleIndices)" />
+		<xsl:variable name="contractant_rechtsvorm_value" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm',$tupleIndices)" />
+		<xsl:variable name="contractant_bedrijfsnaam_value" select="fes:getFormattedValue($doc, 'Contractant_bedrijfsnaam',$tupleIndices)" />
+		<xsl:variable name="contractant_naam_value" select="fes:getFormattedValue($doc, 'Contractant_naam',$tupleIndices)" />
+
+
+			<!-- check if borrower is a mainborrower -->
+			<xsl:variable name="isMainBorrower">
+				<!-- Loop rollen tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+					<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="subTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$tupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$subTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+
+					<xsl:if test="$rol_naam='Main borrower'">
+						<xsl:value-of select="'true'"/>
+					</xsl:if>
+
+				</xsl:for-each>
+			</xsl:variable>
+
+			<!-- check if borrower is a borrower -->
+			<xsl:variable name="isBorrower">
+				<!-- Loop rollen tuple -->
+				<xsl:for-each select="fes:getTupleInstances($doc, $contractant_rollen, $tupleIndices)">
+					<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="subTupleIndices" as="xs:integer *">
+						<xsl:for-each select="$tupleIndices">
+							<xs:sequence>
+								<xsl:value-of select="."/>
+							</xs:sequence>
+						</xsl:for-each>
+						<xs:sequence>
+							<xsl:value-of select="$subTupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<xsl:variable name="rol_naam" select="fes:getFormattedValue($doc, 'Contractant_rol_naam', $subTupleIndices)" />
+
+					<xsl:if test="$rol_naam='Borrower'">
+						<xsl:value-of select="'true'"/>
+					</xsl:if>
+
+				</xsl:for-each>
+			</xsl:variable>
+
+			<xsl:variable name="externRelatienummer" select="fes:getFormattedValue($doc, 'Contractant_externRelatieNummer', $tupleIndices)" />
+
+			<!-- Loop facilities and see if contractant is allocated to a facility -->
+			<xsl:variable name="contractantAllocatedToFacility">
+				<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+					<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+					<xsl:variable name="tupleIndices" as="xs:integer *">
+						<xs:sequence>
+							<xsl:value-of select="$tupleIndex"/>
+						</xs:sequence>
+					</xsl:variable>
+
+					<!-- Loop faciliteiten tuple -->
+					<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+						<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="subTupleIndices" as="xs:integer *">
+							<xsl:for-each select="$tupleIndices">
+								<xs:sequence>
+									<xsl:value-of select="."/>
+								</xs:sequence>
+							</xsl:for-each>
+							<xs:sequence>
+								<xsl:value-of select="$subTupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<!-- Loop kredietnemers tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, 'Kredietnemers', $subTupleIndices)">
+							<xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subSubTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$subTupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subSubTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<xsl:variable name="kredietnemerExternalRelatieNummer" select="fes:getFormattedValue($doc, 'Kredietnemer_externRelatieNummer', $subSubTupleIndices)" />
+							<xsl:if test="$externRelatienummer = $kredietnemerExternalRelatieNummer">
+								<xsl:value-of select="'true'"/>
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:for-each>
+				</xsl:for-each>
+			</xsl:variable>
+
+			<!-- Borrower is not a main borrower -->
+			<xsl:if test="$isMainBorrower!='true' and $isBorrower='true'">
+
+
+				  <!-- Borrower allocated to Facility -->
+				 	<!-- Loop facilities and see if contractant is allocated to a facility -->
+				<xsl:variable name="contractantAllocatedToFacility">
+					<xsl:for-each select="fes:getTupleInstances($doc, $zakelijkeOvereenkomsten)">
+						<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+						<xsl:variable name="tupleIndices" as="xs:integer *">
+							<xs:sequence>
+								<xsl:value-of select="$tupleIndex"/>
+							</xs:sequence>
+						</xsl:variable>
+
+						<!-- Loop faciliteiten tuple -->
+						<xsl:for-each select="fes:getTupleInstances($doc, $faciliteiten, $tupleIndices)">
+							<xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+							<xsl:variable name="subTupleIndices" as="xs:integer *">
+								<xsl:for-each select="$tupleIndices">
+									<xs:sequence>
+										<xsl:value-of select="."/>
+									</xs:sequence>
+								</xsl:for-each>
+								<xs:sequence>
+									<xsl:value-of select="$subTupleIndex"/>
+								</xs:sequence>
+							</xsl:variable>
+
+							<!-- Loop kredietnemers tuple -->
+							<xsl:for-each select="fes:getTupleInstances($doc, 'Kredietnemers', $subTupleIndices)">
+								<xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+								<xsl:variable name="subSubTupleIndices" as="xs:integer *">
+									<xsl:for-each select="$subTupleIndices">
+										<xs:sequence>
+											<xsl:value-of select="."/>
+										</xs:sequence>
+									</xsl:for-each>
+									<xs:sequence>
+										<xsl:value-of select="$subSubTupleIndex"/>
+									</xs:sequence>
+								</xsl:variable>
+
+								<xsl:variable name="kredietnemerExternalRelatieNummer" select="fes:getFormattedValue($doc, 'Kredietnemer_externRelatieNummer', $subSubTupleIndices)" />
+								<xsl:if test="$externRelatienummer = $kredietnemerExternalRelatieNummer">
+									<xsl:value-of select="'true'"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:for-each>
+					</xsl:for-each>
+				</xsl:variable>
+
+				<xsl:variable name="amountOfContractantAllocatedToFacility">
+					<xsl:call-template name="substring-count">
+						<xsl:with-param name="String" select="$contractantAllocatedToFacility" />
+						<xsl:with-param name="Substring" select="'true'" />
+					</xsl:call-template>
+				</xsl:variable>
+
+
+				<xsl:choose><xsl:when test="$amountOfContractantAllocatedToFacility > 0">[b]Kredietnemer[/b]</xsl:when><xsl:otherwise>[b]Schuldenaar[/b]</xsl:otherwise></xsl:choose>
+				<table>
+
+
+				<!--  Owners / UBO -->
+				<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+				  <xsl:variable name="jurdischTupleIndex" select="." as="xs:integer"/>
+				  <xsl:variable name="jurdischTupleIndices" as="xs:integer *">
+					  <xs:sequence><xsl:value-of select="$jurdischTupleIndex"/></xs:sequence>
+				  </xsl:variable>
+
+						<xsl:variable name="jurdischPartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdischTupleIndices)" />
+						<xsl:variable name="jurdischPartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdischTupleIndices)" />
+						<xsl:variable name="jurdischPartij_externrelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdischTupleIndices)" />
+
+
+						<xsl:if test="$contractant_externRelatieNummer_value = $jurdischPartij_externrelatienummer">
+
+							<xsl:for-each select="fes:getTupleInstances($doc, 'Relaties')">
+							  <xsl:variable name="relatieTupleIndex" select="." as="xs:integer"/>
+							  <xsl:variable name="relatieTupleIndices" as="xs:integer *">
+								  <xs:sequence><xsl:value-of select="$relatieTupleIndex"/></xs:sequence>
+							  </xsl:variable>
+
+									<xsl:variable name="relatiePartijNaam" select="fes:getFormattedValue($doc, 'PartijNaam',$relatieTupleIndices)" />
+									<xsl:variable name="relatieVanPartij" select="fes:getValue($doc, 'VanPartijNummer',$relatieTupleIndices)" />
+									<xsl:variable name="relatieNaarPartij" select="fes:getValue($doc, 'NaarPartijNummer',$relatieTupleIndices)" />
+
+									<xsl:variable name="isOwnerOrUBO">
+										<xsl:if test="$relatiePartijNaam='IsOwnerOf' or $relatiePartijNaam='IsUltimateBenificialOwnerOf'" >
+											<xsl:value-of select="'true'" />
+										</xsl:if>
+									</xsl:variable>
+
+									<xsl:if test="$jurdischPartijNummer=$relatieNaarPartij and $isOwnerOrUBO='true'">
+
+									<tr>
+										<td colspan="2"><xsl:value-of select="$contractant_bedrijfsnaam_value"	 /></td>
+									</tr>
+
+									<tr>
+										<td colspan="2">___________________________</td>
+									</tr>
+
+									<xsl:for-each select="fes:getTupleInstances($doc, 'JurdischePartij')">
+										  <xsl:variable name="jurdisch2TupleIndex" select="." as="xs:integer"/>
+										  <xsl:variable name="jurdisch2TupleIndices" as="xs:integer *">
+											  <xs:sequence><xsl:value-of select="$jurdisch2TupleIndex"/></xs:sequence>
+										  </xsl:variable>
+
+												<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />
+												<xsl:variable name="jurdisch2PartijNummer" select="fes:getFormattedValue($doc, 'JurdischPartijnummer',$jurdisch2TupleIndices)" />
+												<xsl:variable name="jurdisch2ExternRelatienummer" select="fes:getFormattedValue($doc, 'JurdischePartij_externRelatienummer',$jurdisch2TupleIndices)" />
+
+
+												<xsl:if test="$relatieVanPartij=$jurdisch2PartijNummer">
+													<xsl:variable name="jurdisch2PartijNaam" select="fes:getFormattedValue($doc, 'JurdischePartij_naam',$jurdisch2TupleIndices)" />
+
+														<tr>
+															<td>Naam:</td>
+															<td><xsl:value-of select="$jurdisch2PartijNaam" /></td>
+														</tr>
+
+
+
+
+													<xsl:for-each select="fes:getTupleInstances($doc, $contractanten)">
+													  <xsl:variable name="uboTupleIndex" select="." as="xs:integer"/>
+													  <xsl:variable name="uboTupleIndices" as="xs:integer *">
+														  <xs:sequence><xsl:value-of select="$uboTupleIndex"/></xs:sequence>
+													  </xsl:variable>
+
+														<xsl:variable name="ubo_externRelatieNummer_value" select="fes:getFormattedValue($doc, $contractant_externRelatieNummer,$uboTupleIndices)" />
+														<xsl:variable name="ubo_rechtsvorm_value" select="fes:getFormattedValue($doc, 'Contractant_rechtsvorm',$uboTupleIndices)" />
+
+														 <!--  Only show when ubo has rechtsvorm BV or NV -->
+														<xsl:if test="$ubo_externRelatieNummer_value = $jurdisch2ExternRelatienummer" >
+
+															<xsl:if test="$ubo_rechtsvorm_value = $BV or $ubo_rechtsvorm_value = $NV">
+																<tr>
+																	<td colspan="2">Functie: ……………………………..</td>
+																</tr>
+															</xsl:if>
+														</xsl:if>
+													</xsl:for-each>
+
+												<tr>
+													<td>Datum en plaats:</td>
+													<td>……………………</td>
+												</tr>
+
+												<tr>
+													<td colspan="2">[color=#E36C0A][case signature spouse needed][/color]</td>
+												</tr>
+
+												<tr>
+													<td colspan="2"><xsl:value-of select="$contractant_bedrijfsnaam_value"	 /></td>
+												</tr>
+
+												<tr>
+													<td colspan="2">____________________________</td>
+												</tr>
+
+												<tr>
+													<td>Naam Partner:</td>
+													<td>[color=#E36C0A][name spouse owner][/color]</td>
+												</tr>
+
+												<tr>
+													<td colspan="2">……………………………..</td>
+												</tr>
+
+												<tr>
+													<td>Datum en plaats:</td>
+													<td>……………………</td>
+												</tr>
+											</xsl:if>
+									</xsl:for-each>
+
+									</xsl:if>
+
+							</xsl:for-each>
+						</xsl:if>
+				</xsl:for-each>
+				</table>
+
+			</xsl:if>
+	</xsl:for-each>
+
+	<p>
+		Ten bewijze van toestemming als bedoeld in artikel 1:88 van het Burgerlijk Wetboek.
+	</p>
+
+	<table>
+		<tr>
+			<td>____________________________</td>
+		</tr>
+
+		<tr>
+			<td>Naam:</td>
+		</tr>
+
+		<tr>
+			<td>Datum en plaats:</td>
+		</tr>
+
+		<tr>
+			<td>[b]Kredietgever[/b]</td>
+		</tr>
+	</table>
+
+
+
+   <p><xsl:value-of select="'[b]Kredietgever[/b]'"/></p>
+
+   <table>
+		<tr>
+			<td>________________________</td>
+			<td></td>
+			<td>________________________</td>
+		</tr>
+
+		<tr>
+			<td>Naam:</td>
+			<td></td>
+			<td>Naam:</td>
+		</tr>
+
+		<tr>
+			<td>Datum: ……………………. te ……………………. </td>
+			<td></td>
+			<td>Datum: ……………………. te ……………………. </td>
+		</tr>
+	</table>
+
+
+
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+
+<p>
+[b]BIJLAGE 1: OPSCHORTENDE VOORWAARDEN
+(CONFORM ARTIKEL 2 LID 2 VAN DE KREDIETOVEREENKOMST)[/b]
+</p>
+<br/>
+<p>
+A:	De volgende documenten dienen door Kredietgever te zijn ontvangen en acceptabel
+ 	bevonden voordat Kredietgever het Krediet ter beschikking stelt:
+</p>
+	<ol class="OrderedList">
+		<xsl:for-each select="fes:getTupleInstances($doc, 'Aanvraagstuk')">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+
+			<xsl:variable name="aanvraagstuk_finaalomschrijving" select="fes:getFormattedValue($doc, 'Aanvraagstuk_FinaalOmschrijving',$tupleIndices)" />
+			<xsl:variable name="aanvraagstuk_inoffertejn" select="fes:getFormattedValue($doc, 'Aanvraagstuk_InOfferteJN',$tupleIndices)" />
+
+			<xsl:if test="$aanvraagstuk_inoffertejn='true'" >
+				<li preserveWhitespace="true"><xsl:value-of select="$aanvraagstuk_finaalomschrijving" /><br/></li>
+			</xsl:if>
+		</xsl:for-each>
+	</ol>
+
+	<xsl:variable name="covenantAndTrue">
+		<xsl:for-each select="fes:getTupleInstances($doc, 'BijzonderePepaling')">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+
+			<xsl:variable name="bijzondere_inoffertejn" select="fes:getFormattedValue($doc, 'InOfferteJN',$tupleIndices)" />
+			<xsl:variable name="bijzondere_categorie" select="fes:getFormattedValue($doc, 'Categorie',$tupleIndices)" />
+
+
+			<xsl:if test="$bijzondere_inoffertejn='true' and $bijzondere_categorie='Covenant'" >
+				<xsl:value-of select="'true'" />
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:variable>
+
+
+	<xsl:variable name="amountOfCovenantAndTrue">
+		<xsl:call-template name="substring-count">
+			<xsl:with-param name="String" select="$covenantAndTrue" />
+			<xsl:with-param name="Substring" select="'true'" />
+		</xsl:call-template>
+	</xsl:variable>
+	<br/>
+	<xsl:if test="$amountOfCovenantAndTrue > 0" >
+		<p>B: 	De volgende documenten dienen door Kredietgever te zijn ontvangen en acceptabel bevonden uiterlijk op de in de betreffende voorwaarde aangegeven datum welke kan liggen na de datum dat Kredietgever het Krediet ter beschikking heeft gesteld:</p>
+	</xsl:if>
+	<br/>
+	<ol class="OrderedList">
+		<xsl:for-each select="fes:getTupleInstances($doc, 'BijzonderePepaling')">
+			<xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+			<xsl:variable name="tupleIndices" as="xs:integer *">
+				<xs:sequence>
+					<xsl:value-of select="$tupleIndex"/>
+				</xs:sequence>
+			</xsl:variable>
+
+			<xsl:variable name="bijzondere_finaalomschrijving" select="fes:getFormattedValue($doc, 'Finaalomschrijving',$tupleIndices)" />
+			<xsl:variable name="bijzondere_inoffertejn" select="fes:getFormattedValue($doc, 'InOfferteJN',$tupleIndices)" />
+			<xsl:variable name="bijzondere_categorie" select="fes:getFormattedValue($doc, 'Categorie',$tupleIndices)" />
+
+			<xsl:if test="$bijzondere_inoffertejn='true' and $bijzondere_categorie='Covenant'" >
+				<li preserveWhitespace="true"><xsl:value-of select="$bijzondere_finaalomschrijving" /><br/></li>
+			</xsl:if>
+
+		</xsl:for-each>
+	</ol>
+
+			<!-- =========End============================================================= -->
+		</document>
+	</xsl:template>
+</xsl:stylesheet>

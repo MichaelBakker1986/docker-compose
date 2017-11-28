@@ -1,0 +1,9 @@
+{&&Language=English}
+
+.Script Name=ShowVersionInfo,Title="$>Version information<$",Priority=5005
+.Event OnToolsMenuClick
+.ScriptMode CancelMode=Off
+  .Message "$>Version information<$||FINAN version: #FinanFullVersion#|Model version: #ModelVersion#"
+  .Quit  ; Voor de Veiligheid
+.EndScript
+.Quit

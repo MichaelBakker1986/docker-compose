@@ -1,0 +1,10 @@
+{&&Language=English}
+
+<=0:   "$>The average period trade accounts payable can not be calculated.<$"
+<3.5:  "$>Payment delays to suppliers are very high.<$"
+<4.5:  "$>The average period trade accounts payable is very long.<$"
+<5.5:  "$>The average period accounts payable has exceeded 30 days.<$"
+<6.0:  "$>The average period accounts payable is not too long.<$"
+<6.8:  "$>The average period accounts payable is short.<$"
+<7.5:  "$>The average period accounts payable is very short.<$"
+>=7.5: "$>Supplier credit is hardly used.<$"

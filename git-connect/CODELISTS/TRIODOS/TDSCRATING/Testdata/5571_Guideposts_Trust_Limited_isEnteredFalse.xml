@@ -1,0 +1,1953 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<finanDocument version="1" noNamespaceSchemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <author>FES-2.13.4.0</author>
+    <documentInfo />
+    <modelInfo>
+      <name>TDSCRATING</name>
+      <version>01.01.013.009</version>
+    </modelInfo>
+    <userInfo>
+      <name>pbijl</name>
+    </userInfo>
+    <currencies>
+      <currency context="script" name="EUR" />
+    </currencies>
+    <scaleValues>
+      <scaleValue context="script">1</scaleValue>
+      <scaleValue context="view">1</scaleValue>
+    </scaleValues>
+    <creationDate>28-1-2016</creationDate>
+    <updateDate>10-5-2017</updateDate>
+    <firstDayInYear>1</firstDayInYear>
+    <firstMonthInYear>4</firstMonthInYear>
+    <nofViewDecimals>0</nofViewDecimals>
+    <mutCalcInFirstCol>false</mutCalcInFirstCol>
+  </header>
+  <columnDefinitions>
+    <columnDefinition locked="false" type="IMPORT">
+      <columnId>6</columnId>
+      <startDate>1-4-2014</startDate>
+      <endDate>31-3-2015</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>true</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+    <columnDefinition locked="false" type="IMPORT">
+      <columnId>7</columnId>
+      <startDate>1-4-2015</startDate>
+      <endDate>31-3-2016</endDate>
+      <nofMonths>12</nofMonths>
+      <baseCurrency>EUR</baseCurrency>
+      <formulaSetId>NoTrend</formulaSetId>
+      <publishable>false</publishable>
+      <imported>true</imported>
+      <userEdited>false</userEdited>
+      <manuallyChanged>false</manuallyChanged>
+      <changedByUser></changedByUser>
+    </columnDefinition>
+  </columnDefinitions>
+  <timeLines highestId="1">
+    <timeLine classType="standard" locked="false" source="DEFAULT" status="NONE" type="USER">
+      <timelineId>1</timelineId>
+      <title>MonthTimeline</title>
+      <assignedUserPatterns />
+      <columnIds>
+        <columnId isVisible="true">6</columnId>
+        <columnId isVisible="true">7</columnId>
+      </columnIds>
+    </timeLine>
+  </timeLines>
+  <ROOT>
+    <FPS_VAR_Naam inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Guideposts Trust Limited</value>
+        </column>
+      </columns>
+    </FPS_VAR_Naam>
+    <FPS_VAR_Relatienummer inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">0104009001</value>
+        </column>
+      </columns>
+    </FPS_VAR_Relatienummer>
+    <FPS_VAR_KVKnr inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">01282361</value>
+        </column>
+      </columns>
+    </FPS_VAR_KVKnr>
+    <FPS_VAR_Rechtsvorm_nr inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Company Limited by Guarantee</value>
+        </column>
+      </columns>
+    </FPS_VAR_Rechtsvorm_nr>
+    <FPS_VAR_Rechtsvorm_omschr inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Rechtsvorm_omschr>
+    <FPS_VAR_BIK_CODE inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_BIK_CODE>
+    <FPS_VAR_BIK_Omschr inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_BIK_Omschr>
+    <FPS_VAR_GridId inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_GridId>
+    <FPS_VAR_Accountmanager inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Accountmanager>
+    <FPS_VAR_Kantoor inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Kantoor>
+    <FPS_VAR_Straat inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Straat>
+    <FPS_VAR_Housenumber inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Housenumber>
+    <FPS_VAR_Postcode inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Postcode>
+    <FPS_VAR_Woonplaats inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Woonplaats>
+    <FPS_VAR_Land inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">UNKNOWN</value>
+        </column>
+      </columns>
+    </FPS_VAR_Land>
+    <FPS_VAR_Telefoon inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true" />
+        </column>
+      </columns>
+    </FPS_VAR_Telefoon>
+    <FPS_VAR_Emailadres inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">conversion_user@finan.nl</value>
+        </column>
+      </columns>
+    </FPS_VAR_Emailadres>
+    <FPS_FINAN_USER inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">conversion_user</value>
+        </column>
+      </columns>
+    </FPS_FINAN_USER>
+    <Q_ROOT inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_ROOT>
+    <Q_Map01A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_Map01A>
+    <FinancialAsOfDate inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>42460.0</value>
+        </column>
+      </columns>
+    </FinancialAsOfDate>
+    <ScorecardType inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </ScorecardType>
+    <AnnualAccountsRequired inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </AnnualAccountsRequired>
+    <NextAnnualAccountsYear inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">2017</value>
+        </column>
+      </columns>
+    </NextAnnualAccountsYear>
+    <NextAnnualAccountsDate inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>42978.0</value>
+        </column>
+      </columns>
+    </NextAnnualAccountsDate>
+    <FullReviewDate inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>43008.0</value>
+        </column>
+      </columns>
+    </FullReviewDate>
+    <ManagementIntensity inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </ManagementIntensity>
+    <NumberOfEmployees inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </NumberOfEmployees>
+    <Q_Map01B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_Map01B>
+    <IntangibleFixedAssets inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>434474.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>265794.0</value>
+        </column>
+      </columns>
+    </IntangibleFixedAssets>
+    <MaterialFixedAssets inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>520355.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>671707.0</value>
+        </column>
+      </columns>
+    </MaterialFixedAssets>
+    <Inventories inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>14511.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>30312.0</value>
+        </column>
+      </columns>
+    </Inventories>
+    <Receivables inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>1223000.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>1576955.0</value>
+        </column>
+      </columns>
+    </Receivables>
+    <CashAndEquivalents inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>19767.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>260987.0</value>
+        </column>
+      </columns>
+    </CashAndEquivalents>
+    <TotalAssets inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>2212107.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>2805755.0</value>
+        </column>
+      </columns>
+    </TotalAssets>
+    <NetWorth inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>1527012.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>1815012.0</value>
+        </column>
+      </columns>
+    </NetWorth>
+    <NonCurrentLiabilities inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>260464.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>281103.0</value>
+        </column>
+      </columns>
+    </NonCurrentLiabilities>
+    <CurrentLiabilities inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>424631.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>709640.0</value>
+        </column>
+      </columns>
+    </CurrentLiabilities>
+    <TotalEquityAndLiabilities inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>2212107.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>2805755.0</value>
+        </column>
+      </columns>
+    </TotalEquityAndLiabilities>
+    <BalanceCheck inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>0.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>0.0</value>
+        </column>
+      </columns>
+    </BalanceCheck>
+    <SourceCurrency inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">GBP</value>
+        </column>
+      </columns>
+    </SourceCurrency>
+    <NetSales inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>9750874.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>1.0854494E7</value>
+        </column>
+      </columns>
+    </NetSales>
+    <GrossProfit inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>9750874.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>1.0854494E7</value>
+        </column>
+      </columns>
+    </GrossProfit>
+    <OperatingExpenses inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>9834705.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>1.0601637E7</value>
+        </column>
+      </columns>
+    </OperatingExpenses>
+    <DepreciationOfAssets inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>197597.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>185904.0</value>
+        </column>
+      </columns>
+    </DepreciationOfAssets>
+    <Operatingincome inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>-281428.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>66953.0</value>
+        </column>
+      </columns>
+    </Operatingincome>
+    <FinancialResult inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>-6572.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>-7052.0</value>
+        </column>
+      </columns>
+    </FinancialResult>
+    <FinancialExpenses inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>6572.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>7052.0</value>
+        </column>
+      </columns>
+    </FinancialExpenses>
+    <OrdinaryProfitBeforeTaxes inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>-288000.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>59901.0</value>
+        </column>
+      </columns>
+    </OrdinaryProfitBeforeTaxes>
+    <ProfitAfterTax inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>-288000.0</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>59901.0</value>
+        </column>
+      </columns>
+    </ProfitAfterTax>
+    <FinancialExpensesAnnualized inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>6572.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>7052.0</value>
+        </column>
+      </columns>
+    </FinancialExpensesAnnualized>
+    <RepaymentsOnLongTermDebtsTotal inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>20180.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>19732.0</value>
+        </column>
+      </columns>
+    </RepaymentsOnLongTermDebtsTotal>
+    <RepaymentsOnLongTermDebtsTotalAnnualized inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>20180.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>19732.0</value>
+        </column>
+      </columns>
+    </RepaymentsOnLongTermDebtsTotalAnnualized>
+    <GainsOnSalesOfProperty inReport="true">
+      <columns>
+        <column isEntered="true">
+          <columnId>7</columnId>
+          <value>134579.0</value>
+        </column>
+        <column isEntered="true">
+          <columnId>6</columnId>
+          <value>108075.0</value>
+        </column>
+      </columns>
+    </GainsOnSalesOfProperty>
+    <DSCR inReport="true">
+      <columns>
+        <column isEntered="false">
+          <columnId>7</columnId>
+          <value>-3.1336348684210527</value>
+        </column>
+        <column isEntered="false">
+          <columnId>6</columnId>
+          <value>9.440598864994026</value>
+        </column>
+      </columns>
+    </DSCR>
+    <AverageDSCR inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>3.1534819982864866</value>
+        </column>
+      </columns>
+    </AverageDSCR>
+    <CostsVolumeRatio inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0295358139178088</value>
+        </column>
+      </columns>
+    </CostsVolumeRatio>
+    <DebtCoverageRatio inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>-12.755782105903835</value>
+        </column>
+      </columns>
+    </DebtCoverageRatio>
+    <DebtRatio inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.30076664465145675</value>
+        </column>
+      </columns>
+    </DebtRatio>
+    <EquityRatio inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.6902975308156432</value>
+        </column>
+      </columns>
+    </EquityRatio>
+    <CashRatio inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.04655100546121221</value>
+        </column>
+      </columns>
+    </CashRatio>
+    <ReturnonAssets inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>-0.13019261726489723</value>
+        </column>
+      </columns>
+    </ReturnonAssets>
+    <TotalAssetsReport inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2212107.0</value>
+        </column>
+      </columns>
+    </TotalAssetsReport>
+    <AnnualTurnoverReport inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>9750874.0</value>
+        </column>
+      </columns>
+    </AnnualTurnoverReport>
+    <BalanceSheetTotalAmount inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2212107.0</value>
+        </column>
+      </columns>
+    </BalanceSheetTotalAmount>
+    <Q_Map02A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Q_Map02A>
+    <HistoryManual inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </HistoryManual>
+    <Q_Map02B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Q_Map02B>
+    <Map02C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Map02C>
+    <Q_Map02D inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_Map02D>
+    <VAR01D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>2.0</value>
+        </column>
+      </columns>
+    </VAR01D>
+    <VAR02D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>2.0</value>
+        </column>
+      </columns>
+    </VAR02D>
+    <VAR03D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR03D>
+    <VAR04D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR04D>
+    <VAR05D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>4.0</value>
+        </column>
+      </columns>
+    </VAR05D>
+    <VAR06D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR06D>
+    <VAR07D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>2.0</value>
+        </column>
+      </columns>
+    </VAR07D>
+    <VAR08D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>2.0</value>
+        </column>
+      </columns>
+    </VAR08D>
+    <VAR09D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR09D>
+    <VAR10D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR10D>
+    <VAR11D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </VAR11D>
+    <VAR12D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </VAR12D>
+    <VAR13D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </VAR13D>
+    <VAR14D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>3.0</value>
+        </column>
+      </columns>
+    </VAR14D>
+    <VAR15D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>4.0</value>
+        </column>
+      </columns>
+    </VAR15D>
+    <VAR16D inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2.0</value>
+        </column>
+      </columns>
+    </VAR16D>
+    <Q_Map03A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Q_Map03A>
+    <VAR01A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0661</value>
+        </column>
+      </columns>
+    </VAR01A_Weight>
+    <Var02A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0693</value>
+        </column>
+      </columns>
+    </Var02A_Weight>
+    <Var03A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0193</value>
+        </column>
+      </columns>
+    </Var03A_Weight>
+    <Var04A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0147</value>
+        </column>
+      </columns>
+    </Var04A_Weight>
+    <Var05A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0138</value>
+        </column>
+      </columns>
+    </Var05A_Weight>
+    <Var06A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.1006</value>
+        </column>
+      </columns>
+    </Var06A_Weight>
+    <Var07A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0726</value>
+        </column>
+      </columns>
+    </Var07A_Weight>
+    <Var08A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0634</value>
+        </column>
+      </columns>
+    </Var08A_Weight>
+    <Var09A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0205</value>
+        </column>
+      </columns>
+    </Var09A_Weight>
+    <Var10A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0325</value>
+        </column>
+      </columns>
+    </Var10A_Weight>
+    <Var11A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0996</value>
+        </column>
+      </columns>
+    </Var11A_Weight>
+    <Var12A_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>14.99</value>
+        </column>
+      </columns>
+    </Var12A_Contribution>
+    <Var12A_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </Var12A_Score>
+    <Var12A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.1499</value>
+        </column>
+      </columns>
+    </Var12A_Weight>
+    <Var13A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.1447</value>
+        </column>
+      </columns>
+    </Var13A_Weight>
+    <Var14A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0291</value>
+        </column>
+      </columns>
+    </Var14A_Weight>
+    <Var15A_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.1033</value>
+        </column>
+      </columns>
+    </Var15A_Weight>
+    <VarSubTotalA inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>14.99</value>
+        </column>
+      </columns>
+    </VarSubTotalA>
+    <Notch01A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch01A>
+    <Notch02A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch02A>
+    <Notch03A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch03A>
+    <Notch04A inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch04A>
+    <DefaultA inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </DefaultA>
+    <Q_Map03B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Q_Map03B>
+    <VAR01B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.027767163578362893</value>
+        </column>
+      </columns>
+    </VAR01B_Weight>
+    <Var02B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.027848565053186277</value>
+        </column>
+      </columns>
+    </Var02B_Weight>
+    <Var03B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.027567504007004452</value>
+        </column>
+      </columns>
+    </Var03B_Weight>
+    <Var04B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.03873895085256735</value>
+        </column>
+      </columns>
+    </Var04B_Weight>
+    <Var05B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.020035584321989302</value>
+        </column>
+      </columns>
+    </Var05B_Weight>
+    <Var06B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.029299700083780144</value>
+        </column>
+      </columns>
+    </Var06B_Weight>
+    <Var07B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.05723340569946605</value>
+        </column>
+      </columns>
+    </Var07B_Weight>
+    <VAR08B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.07861557010940982</value>
+        </column>
+      </columns>
+    </VAR08B_Weight>
+    <VAR09B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.07172143430573716</value>
+        </column>
+      </columns>
+    </VAR09B_Weight>
+    <VAR10B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.07843535477979197</value>
+        </column>
+      </columns>
+    </VAR10B_Weight>
+    <VAR11B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0460488046341281</value>
+        </column>
+      </columns>
+    </VAR11B_Weight>
+    <VAR12B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.04356109638377858</value>
+        </column>
+      </columns>
+    </VAR12B_Weight>
+    <VAR13B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.03361036983922714</value>
+        </column>
+      </columns>
+    </VAR13B_Weight>
+    <VAR14B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0200174144700953</value>
+        </column>
+      </columns>
+    </VAR14B_Weight>
+    <VAR15B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR15B_Contribution>
+    <VAR15B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR15B_Score>
+    <VAR15B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.04634879915294971</value>
+        </column>
+      </columns>
+    </VAR15B_Weight>
+    <VAR16B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR16B_Contribution>
+    <VAR16B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR16B_Score>
+    <VAR16B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.10423140538059558</value>
+        </column>
+      </columns>
+    </VAR16B_Weight>
+    <VAR17B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2.93609550885937</value>
+        </column>
+      </columns>
+    </VAR17B_Contribution>
+    <VAR17B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </VAR17B_Score>
+    <VAR17B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.029360955088593703</value>
+        </column>
+      </columns>
+    </VAR17B_Weight>
+    <VAR18B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>4.291380088444705</value>
+        </column>
+      </columns>
+    </VAR18B_Contribution>
+    <VAR18B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </VAR18B_Score>
+    <VAR18B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.04291380088444705</value>
+        </column>
+      </columns>
+    </VAR18B_Weight>
+    <VAR19B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR19B_Contribution>
+    <VAR19B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR19B_Score>
+    <VAR19B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.07661222202381847</value>
+        </column>
+      </columns>
+    </VAR19B_Weight>
+    <VAR20B_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR20B_Contribution>
+    <VAR20B_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR20B_Score>
+    <VAR20B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.06077975601357281</value>
+        </column>
+      </columns>
+    </VAR20B_Weight>
+    <VAR21B_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.039252143337497915</value>
+        </column>
+      </columns>
+    </VAR21B_Weight>
+    <VarSubTotalB inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>7.227475597304075</value>
+        </column>
+      </columns>
+    </VarSubTotalB>
+    <Notch01B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch01B>
+    <Notch02B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch02B>
+    <Notch03B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch03B>
+    <Notch04B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch04B>
+    <Notch05B inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch05B>
+    <DefaultB inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </DefaultB>
+    <Q_Map03C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Q_Map03C>
+    <VAR01C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.053042</value>
+        </column>
+      </columns>
+    </VAR01C_Weight>
+    <VAR02C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.053063</value>
+        </column>
+      </columns>
+    </VAR02C_Weight>
+    <VAR03C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.090095</value>
+        </column>
+      </columns>
+    </VAR03C_Weight>
+    <VAR04C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.023203</value>
+        </column>
+      </columns>
+    </VAR04C_Weight>
+    <VAR05C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0329</value>
+        </column>
+      </columns>
+    </VAR05C_Weight>
+    <VAR06C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.053187</value>
+        </column>
+      </columns>
+    </VAR06C_Weight>
+    <VAR07C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.033829</value>
+        </column>
+      </columns>
+    </VAR07C_Weight>
+    <VAR08C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.03293</value>
+        </column>
+      </columns>
+    </VAR08C_Weight>
+    <VAR09C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.060005</value>
+        </column>
+      </columns>
+    </VAR09C_Weight>
+    <VAR10C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.042073</value>
+        </column>
+      </columns>
+    </VAR10C_Weight>
+    <VAR11C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.032206</value>
+        </column>
+      </columns>
+    </VAR11C_Weight>
+    <VAR12C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.021766</value>
+        </column>
+      </columns>
+    </VAR12C_Weight>
+    <VAR13C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.020737</value>
+        </column>
+      </columns>
+    </VAR13C_Weight>
+    <VAR14C_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>17.069799999999997</value>
+        </column>
+      </columns>
+    </VAR14C_Contribution>
+    <VAR14C_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </VAR14C_Score>
+    <VAR14C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.170698</value>
+        </column>
+      </columns>
+    </VAR14C_Weight>
+    <VAR15C_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR15C_Contribution>
+    <VAR15C_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR15C_Score>
+    <VAR15C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.078967</value>
+        </column>
+      </columns>
+    </VAR15C_Weight>
+    <VAR16C_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR16C_Contribution>
+    <VAR16C_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR16C_Score>
+    <VAR16C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.102935</value>
+        </column>
+      </columns>
+    </VAR16C_Weight>
+    <VAR17C_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.098362</value>
+        </column>
+      </columns>
+    </VAR17C_Weight>
+    <VarSubTotalC inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>17.069799999999997</value>
+        </column>
+      </columns>
+    </VarSubTotalC>
+    <Notch01C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch01C>
+    <Notch02C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch02C>
+    <Notch03C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch03C>
+    <Notch04C inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch04C>
+    <DefaultC inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </DefaultC>
+    <Q_Map03D inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_Map03D>
+    <VAR01D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>5.999595757300515</value>
+        </column>
+      </columns>
+    </VAR01D_Contribution>
+    <VAR01D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>75.0</value>
+        </column>
+      </columns>
+    </VAR01D_Score>
+    <VAR01D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0799946100973402</value>
+        </column>
+      </columns>
+    </VAR01D_Weight>
+    <VAR02D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>3.472258040659132</value>
+        </column>
+      </columns>
+    </VAR02D_Contribution>
+    <VAR02D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>75.0</value>
+        </column>
+      </columns>
+    </VAR02D_Score>
+    <VAR02D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0462967738754551</value>
+        </column>
+      </columns>
+    </VAR02D_Weight>
+    <VAR03D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>4.663425117622465</value>
+        </column>
+      </columns>
+    </VAR03D_Contribution>
+    <VAR03D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>50.0</value>
+        </column>
+      </columns>
+    </VAR03D_Score>
+    <VAR03D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0932685023524493</value>
+        </column>
+      </columns>
+    </VAR03D_Weight>
+    <VAR04D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2.821845406539675</value>
+        </column>
+      </columns>
+    </VAR04D_Contribution>
+    <VAR04D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>50.0</value>
+        </column>
+      </columns>
+    </VAR04D_Score>
+    <VAR04D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0564369081307935</value>
+        </column>
+      </columns>
+    </VAR04D_Weight>
+    <VAR05D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.5985139302867526</value>
+        </column>
+      </columns>
+    </VAR05D_Contribution>
+    <VAR05D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>25.0</value>
+        </column>
+      </columns>
+    </VAR05D_Score>
+    <VAR05D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0639405572114701</value>
+        </column>
+      </columns>
+    </VAR05D_Weight>
+    <VAR06D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.5795858785773949</value>
+        </column>
+      </columns>
+    </VAR06D_Contribution>
+    <VAR06D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>50.0</value>
+        </column>
+      </columns>
+    </VAR06D_Score>
+    <VAR06D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0315917175715479</value>
+        </column>
+      </columns>
+    </VAR06D_Weight>
+    <VAR07D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>4.987121137168582</value>
+        </column>
+      </columns>
+    </VAR07D_Contribution>
+    <VAR07D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>75.0</value>
+        </column>
+      </columns>
+    </VAR07D_Score>
+    <VAR07D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0664949484955811</value>
+        </column>
+      </columns>
+    </VAR07D_Weight>
+    <VAR08D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>3.719062189246223</value>
+        </column>
+      </columns>
+    </VAR08D_Contribution>
+    <VAR08D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>75.0</value>
+        </column>
+      </columns>
+    </VAR08D_Score>
+    <VAR08D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0495874958566163</value>
+        </column>
+      </columns>
+    </VAR08D_Weight>
+    <VAR09D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2.35238936114815</value>
+        </column>
+      </columns>
+    </VAR09D_Contribution>
+    <VAR09D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>50.0</value>
+        </column>
+      </columns>
+    </VAR09D_Score>
+    <VAR09D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.047047787222963</value>
+        </column>
+      </columns>
+    </VAR09D_Weight>
+    <VAR10D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>3.77849301179743</value>
+        </column>
+      </columns>
+    </VAR10D_Contribution>
+    <VAR10D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>50.0</value>
+        </column>
+      </columns>
+    </VAR10D_Score>
+    <VAR10D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0755698602359486</value>
+        </column>
+      </columns>
+    </VAR10D_Weight>
+    <VAR11D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>5.44326939149094</value>
+        </column>
+      </columns>
+    </VAR11D_Contribution>
+    <VAR11D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </VAR11D_Score>
+    <VAR11D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0544326939149094</value>
+        </column>
+      </columns>
+    </VAR11D_Weight>
+    <VAR12D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>3.52684531918555</value>
+        </column>
+      </columns>
+    </VAR12D_Contribution>
+    <VAR12D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>100.0</value>
+        </column>
+      </columns>
+    </VAR12D_Score>
+    <VAR12D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0352684531918555</value>
+        </column>
+      </columns>
+    </VAR12D_Weight>
+    <VAR13D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR13D_Contribution>
+    <VAR13D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </VAR13D_Score>
+    <VAR13D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.117710986526901</value>
+        </column>
+      </columns>
+    </VAR13D_Weight>
+    <VAR14D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>5.169285765946908</value>
+        </column>
+      </columns>
+    </VAR14D_Contribution>
+    <VAR14D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>60.0</value>
+        </column>
+      </columns>
+    </VAR14D_Score>
+    <VAR14D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0861547627657818</value>
+        </column>
+      </columns>
+    </VAR14D_Weight>
+    <VAR15D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>2.902553051149035</value>
+        </column>
+      </columns>
+    </VAR15D_Contribution>
+    <VAR15D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>75.0</value>
+        </column>
+      </columns>
+    </VAR15D_Score>
+    <VAR15D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0387007073486538</value>
+        </column>
+      </columns>
+    </VAR15D_Weight>
+    <VAR16D_Contribution inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.43758088004334</value>
+        </column>
+      </columns>
+    </VAR16D_Contribution>
+    <VAR16D_Score inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>25.0</value>
+        </column>
+      </columns>
+    </VAR16D_Score>
+    <VAR16D_Weight inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0575032352017336</value>
+        </column>
+      </columns>
+    </VAR16D_Weight>
+    <VarSubTotalD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>53.45182423816209</value>
+        </column>
+      </columns>
+    </VarSubTotalD>
+    <InternalRatingD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>8.0</value>
+        </column>
+      </columns>
+    </InternalRatingD>
+    <RatingPDD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0468</value>
+        </column>
+      </columns>
+    </RatingPDD>
+    <Notch01D inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </Notch01D>
+    <DefaultD inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>0.0</value>
+        </column>
+      </columns>
+    </DefaultD>
+    <FinalRatingD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>8.0</value>
+        </column>
+      </columns>
+    </FinalRatingD>
+    <FinalRating inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>8.0</value>
+        </column>
+      </columns>
+    </FinalRating>
+    <FinalAssociatedPDD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0468</value>
+        </column>
+      </columns>
+    </FinalAssociatedPDD>
+    <FinalAssociatedPD inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>0.0468</value>
+        </column>
+      </columns>
+    </FinalAssociatedPD>
+    <Q_Map03E inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_Map03E>
+    <Q_STATUS inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>1.0</value>
+        </column>
+      </columns>
+    </Q_STATUS>
+    <Q_STATUS_FINAL_ON inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>42614.0</value>
+        </column>
+      </columns>
+    </Q_STATUS_FINAL_ON>
+    <Q_STATUS_FINAL_BY inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">dlamb</value>
+        </column>
+      </columns>
+    </Q_STATUS_FINAL_BY>
+    <Q_STATUS_FINAL_BY_NAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">dlamb</value>
+        </column>
+      </columns>
+    </Q_STATUS_FINAL_BY_NAME>
+    <Q_STATUS_STARTED_ON inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value>41821.0</value>
+        </column>
+      </columns>
+    </Q_STATUS_STARTED_ON>
+    <Q_STATUS_STARTED_BY inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">hsarikaya</value>
+        </column>
+      </columns>
+    </Q_STATUS_STARTED_BY>
+    <Q_STATUS_STARTED_BY_NAME inReport="true">
+      <columns>
+        <column isEntered="true">
+          <value isString="true">Initial Data Load</value>
+        </column>
+      </columns>
+    </Q_STATUS_STARTED_BY_NAME>
+    <Q_STATUS_MODIFIED_ON inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value>42865.52601851852</value>
+        </column>
+      </columns>
+    </Q_STATUS_MODIFIED_ON>
+    <Q_ModelVersion inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">1.1.13.9</value>
+        </column>
+      </columns>
+    </Q_ModelVersion>
+    <Q_ModelType inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">TDSCRATING</value>
+        </column>
+      </columns>
+    </Q_ModelType>
+    <Q_MatrixVersion inReport="true">
+      <columns>
+        <column isEntered="false">
+          <value isString="true">3.4</value>
+        </column>
+      </columns>
+    </Q_MatrixVersion>
+  </ROOT>
+  <customerId>151</customerId>
+  <documentId>3498</documentId>
+  <mutationDate>2017-05-10T12:37:28</mutationDate>
+</finanDocument>

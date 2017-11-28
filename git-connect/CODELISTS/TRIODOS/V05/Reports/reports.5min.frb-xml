@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+
+<document version="3.3.8" date="26-07-2016" author="Topicus FINAN" title="Beknopte rapportage" xsi:noNamespaceSchemaLocation="../../../../src/FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+  <TimelineId>1</TimelineId>
+  <TimelineTitle>MonthTimeline</TimelineTitle>
+  <Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+  <ReportName><data src="chineseRoom" name="5min-title">Beknopte rapportage</data></ReportName>
+  <ReportScale>1000</ReportScale>
+  <Period><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getStartDate"/><presentation format="d MMMMM yyyy"/></data> <data src="chineseRoom" name="Upto">t/m</data> <data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getEndDate"/><presentation format="d MMMMM yyyy"/></data></Period>
+  <ReportVersion><data src="document" var="./document/@version" type="calc"/></ReportVersion>
+  <ModelVersion><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables depth="1" var="ModelVersion"/></data></ModelVersion>
+  <CompanyName><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables depth="1" var="CompanyName"/></data></CompanyName>
+  <CompanyPlaceOfResidence><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables depth="1" var="CompanyPlaceOfResidence"/></data></CompanyPlaceOfResidence>
+  <LimitedLiabilityCompany><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables depth="1" var="ReportAsLimitedLiabilityCompany"/></data></LimitedLiabilityCompany>
+  <DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+  <CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+  <CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+  <CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+  <BalanceFailed><data src="chineseRoom" name="BalanceFailed">Waarschuwing: 1 of meerdere periodes zijn niet in balans</data></BalanceFailed>
+  <CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+  <PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+  <currentUser_FullnameLabel><data src="chineseRoom" name="CurrentUser_FullnameLabel">Opsteller</data></currentUser_FullnameLabel>
+  <currentUser_PhonenumberLabel><data src="chineseRoom" name="CurrentUser_PhonenumberLabel">Telefoonnummer</data></currentUser_PhonenumberLabel>
+  <currentUser_EmailLabel><data src="chineseRoom" name="CurrentUser_EmailLabel">Email adres</data></currentUser_EmailLabel>
+  <Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+  <PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+  <Of><data src="chineseRoom" name="Of">van</data></Of>
+  <At><data src="chineseRoom" name="At">te</data></At>
+
+  <currentUser_Fullname> </currentUser_Fullname>
+  <currentUser_Email> </currentUser_Email>
+  <currentUser_Id> </currentUser_Id>
+  <currentUser_Language> </currentUser_Language>
+  <currentUser_Ntdomain> </currentUser_Ntdomain>
+  <currentUser_Phonenumber> </currentUser_Phonenumber>
+  <currentUser_Ccrmid> </currentUser_Ccrmid>
+  <currentUser_CertificateId> </currentUser_CertificateId>
+
+  <currentCustomer_AccountManager> </currentCustomer_AccountManager>
+  <currentCustomer_BvdId> </currentCustomer_BvdId>
+  <currentCustomer_ChamberOfCommerceNumber> </currentCustomer_ChamberOfCommerceNumber>
+  <currentCustomer_City> </currentCustomer_City>
+  <currentCustomer_Country> </currentCustomer_Country>
+  <currentCustomer_CustomerNumber> </currentCustomer_CustomerNumber>
+  <currentCustomer_CustomerType> </currentCustomer_CustomerType>
+  <currentCustomer_DateOfBirth> </currentCustomer_DateOfBirth>
+  <currentCustomer_HouseNumber> </currentCustomer_HouseNumber>
+  <currentCustomer_Id> </currentCustomer_Id>
+  <currentCustomer_LegalStatusCode> </currentCustomer_LegalStatusCode>
+  <currentCustomer_LegalStatusDescription> </currentCustomer_LegalStatusDescription>
+  <currentCustomer_Name> </currentCustomer_Name>
+  <currentCustomer_OfficeName> </currentCustomer_OfficeName>
+  <currentCustomer_OfficeNumber> </currentCustomer_OfficeNumber>
+  <currentCustomer_ProjectName> </currentCustomer_ProjectName>
+  <currentCustomer_ReferenceId> </currentCustomer_ReferenceId>
+  <currentCustomer_SectorOfIndustryCode> </currentCustomer_SectorOfIndustryCode>
+  <currentCustomer_SectorOfIndustryDescription> </currentCustomer_SectorOfIndustryDescription>
+  <currentCustomer_StateOrProvince> </currentCustomer_StateOrProvince>
+  <currentCustomer_Street> </currentCustomer_Street>
+  <currentCustomer_ZipCode> </currentCustomer_ZipCode>
+
+  <texts_remarks_customer_text>...</texts_remarks_customer_text>
+  <texts_remarks_generalinformation_text>...</texts_remarks_generalinformation_text>
+  <texts_remarks_liabilities_text>...</texts_remarks_liabilities_text>
+  <texts_remarks_materialfixedassets_text>...</texts_remarks_materialfixedassets_text>
+  <texts_remarks_netsales_text>...</texts_remarks_netsales_text>
+  <texts_remarks_operatingexpenses_text>...</texts_remarks_operatingexpenses_text>
+  <texts_remarks_personnel_text>...</texts_remarks_personnel_text>
+  <texts_remarks_workinprogress_text>...</texts_remarks_workinprogress_text>
+  <texts_remarks_otherresult_text>...</texts_remarks_otherresult_text>  
+  <texts_remarks_scenario>...</texts_remarks_scenario>
+
+  <CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+
+  <FirstPage_visible>true</FirstPage_visible>
+	<Details_visible>false</Details_visible>
+  <Preface_visible>false</Preface_visible>
+  <Offer_visible>false</Offer_visible>
+  <TableOfContents_visible>false</TableOfContents_visible>
+  <Introduction_visible>false</Introduction_visible>
+  <Remarks_visible>false</Remarks_visible>
+  <Block1A_visible>false</Block1A_visible>
+  <Block1B_visible>false</Block1B_visible>
+  <Block1C_visible>false</Block1C_visible>
+  <Block1D_visible>false</Block1D_visible>
+  <Block1E_visible>false</Block1E_visible>
+  <Block2A_visible>false</Block2A_visible>
+  <Block2B_visible>false</Block2B_visible>
+  <Block2C_visible>false</Block2C_visible>
+  <Block3A_visible>false</Block3A_visible>
+  <Block3D_visible>false</Block3D_visible>
+  <Block3E_visible>false</Block3E_visible>
+  <Block3F_visible>false</Block3F_visible>
+  <Block3G_visible>false</Block3G_visible>
+  <Block3I_visible>false</Block3I_visible>
+  <FinancialOverview_visible>false</FinancialOverview_visible>
+
+  <Disclaimer> </Disclaimer>
+  <Preface_comment> </Preface_comment>
+  <Offer_comment> </Offer_comment>
+  <Introduction_comment> </Introduction_comment>
+	<Block1A_comment> </Block1A_comment>
+  <Block1B_comment> </Block1B_comment>
+  <Block1C_comment> </Block1C_comment>
+  <Block1D_comment> </Block1D_comment>
+  <Block1E_comment> </Block1E_comment>
+  <Block2A_comment> </Block2A_comment>
+  <Block2B_comment> </Block2B_comment>
+  <Block2C_comment> </Block2C_comment>
+  <Block3A_comment> </Block3A_comment>
+  <Block3D_comment> </Block3D_comment>
+  <Block3E_comment> </Block3E_comment>
+  <Block3F_comment> </Block3F_comment>
+  <Block3G_comment> </Block3G_comment>
+  <Block3I_comment> </Block3I_comment>
+
+<DefaultFont>Arial</DefaultFont>
+<HeaderFont>Arial</HeaderFont>
+
+</properties>
+
+<newpage name="frontpage" visible="./document/properties/FirstPage_visible/text()='true'">
+  <img id="logo"><data src="map" var="logo" /></img>
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<newpage name="preface" visible="./document/properties/Details_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<newpage name="normal" visible="./document/properties/Details_visible/text()!='true' and ./document/properties/Preface_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="section" visible="./document/properties/Preface_visible/text()='true'"><data src="chineseRoom" name="Preface">Voorwoord</data></p>
+<p class="normal" visible="./document/properties/Preface_visible/text()='true'"><data src="document" var="./document/properties/Preface_comment/text()"/></p>
+
+<!-- ========= Aanbiedingsbrief ========= -->
+<newpage name="normal" visible="./document/properties/Offer_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="normal" visible="./document/properties/Offer_visible/text()='true'"><data src="document" var="./document/properties/Offer_comment/text()"/></p>
+
+<!-- =========Inhoudsopgave============================================================= -->
+<newpage name="normal" visible="./document/properties/TableOfContents_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<tableofcontents class="split" visible="./document/properties/TableOfContents_visible/text()='true'">
+  <title><data src="chineseRoom" name="TOC">Inhoudsopgave</data></title>
+  <tocdepth>3</tocdepth>
+</tableofcontents>
+
+<newpage name="normal" visible="./document/properties/Introduction_visible/text()='true' or ./document/properties/Remarks_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========Inleiding============================================================= -->
+<section class="sectionnum" visible="./document/properties/Introduction_visible/text()='true'"><data src="chineseRoom" name="Introduction">Inleiding</data></section>
+<p class="normal" visible="./document/properties/Introduction_visible/text()='true'"><data src="document" var="./document/properties/Introduction_comment/text()"/></p>
+<p visible="./document/properties/Introduction_visible/text()='true'"> </p>
+
+
+<!-- =========Toelichting============================================================= -->
+
+<section class="sectionnum" visible="./document/properties/Remarks_visible/text()='true'"><data src="chineseRoom" name="Background">Onderbouwing</data></section>
+<p class="normal" visible="./document/properties/Remarks_visible/text()='true'"><data src="document" var="./document/properties/Remarks_comment/text()"/></p>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_scenario/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Scenario">Scenario</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_scenario/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_netsales_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Sales">Omzet</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_netsales_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_personnel_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="fesModel"><variables var="PersonnelExpenses" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_personnel_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_operatingexpenses_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="fesModel"><variables var="OperatingExpenses" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_operatingexpenses_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_otherresult_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Other_result">Overig resultaat</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_otherresult_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_materialfixedassets_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="fesModel"><variables var="FixedAssets" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_materialfixedassets_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_liabilities_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Equity">Vermogen / verplichtingen</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_liabilities_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_workinprogress_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Working_capital">Werkkapitaal</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_workinprogress_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_generalinformation_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="General_info">Algemene informatie</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_generalinformation_text/text()"/></p>
+</block>
+<block visible="./document/properties/Remarks_visible/text()='true' and ./document/properties/texts_remarks_customer_text/text()!='...'">
+	<subsection class="subsectionnum"><data src="chineseRoom" name="Company">Bedrijf</data></subsection>
+  <p class="normal"><data src="document" var="./document/properties/texts_remarks_customer_text/text()"/></p>
+</block>
+
+<!-- =========data============================================================= -->
+<newpage name="normal" visible="./document/properties/Block1A_visible/text()='true' or ./document/properties/Block1B_visible/text()='true' or ./document/properties/Block1C_visible/text()='true' or ./document/properties/Block1D_visible/text()='true' or ./document/properties/Block1E_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="(./document/properties/Block1A_visible/text()='true') or (./document/properties/Block1B_visible/text()='true') or (./document/properties/Block1C_visible/text()='true') or (./document/properties/Block1D_visible/text()='true') or (./document/properties/Block1E_visible/text()='true')"><data src="chineseRoom" name="Block1">Omzet, marge, kosten, belasting en resultaat</data></section>
+<block visible="./document/properties/Block1A_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="NetSales" function="getTitle"/></data>, <data src="fesModel"><variables var="CostOfSales" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="GrossProfit" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="NetSales" function="getTitle"/><presentation lowercase="true"/></data>, <data src="fesModel"><variables var="CostOfSales" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="GrossProfit" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate7" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="NetSales"/>
+      <variables var="CostOfSales"/>
+      <variables var="GrossProfit"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0"/>
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="NetSales" />
+      <variables var="CostOfSales" />
+      <variables var="GrossProfit" />
+      <variables var="GrossProfitMargin" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showDecoration="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+        <overrideStyle old="subtotal">level0</overrideStyle>
+      </presentation>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+<p class="normal" visible="./document/properties/Block1A_visible/text()='true' and ./document/properties/Block1A_comment/text()!=' ' and ./document/properties/Block1A_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block1A_comment"/>
+</p>
+
+<block visible="./document/properties/Block1B_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="PersonnelExpenses" function="getTitle"/></data>, <data src="fesModel"><variables var="OfficeExpenses" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="OtherExpenses" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="PersonnelExpenses" function="getTitle"/><presentation lowercase="true"/></data>, <data src="fesModel"><variables var="OfficeExpenses" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"> <variables var="OtherExpenses" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate10" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="PersonnelExpenses"/>
+      <variables var="OfficeExpenses"/>
+      <variables var="OtherExpenses"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables depth="0" var="PersonnelExpenses" recursiveSkip="false"/>
+      <variables depth="0" var="OfficeExpenses" recursiveSkip="false"/>
+      <variables depth="0" var="OtherExpenses" recursiveSkip="false"/>
+      <variables depth="0" var="OperatingExpenses" recursiveSkip="false"/>
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block1B_visible/text()='true' and ./document/properties/Block1B_comment/text()!=' ' and ./document/properties/Block1B_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block1B_comment"/>
+</p>
+
+<block visible="./document/properties/Block1C_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="OrdinaryProfitBeforeTaxes" function="getTitle"/></data>, <data src="fesModel"><variables var="TaxOnProfits" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ProfitAfterTax" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van het</data> <data src="fesModel"><variables var="OrdinaryProfitBeforeTaxes" function="getTitle"/><presentation lowercase="true"/></data>, de <data src="fesModel"><variables var="TaxOnProfits" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ProfitAfterTax" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate7" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="OrdinaryProfitBeforeTaxes"/>
+      <variables var="ExtraordinaryIncomeAndExpenses"/>
+      <variables var="TaxOnProfits"/>
+      <variables var="BalanceResultSubsidiariesAndMinorityInterest"/>
+      <variables var="ProfitAfterTax"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0"/>
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables depth="0" var="OrdinaryProfitBeforeTaxes" recursiveSkip="false"/>
+      <variables depth="0" var="ExtraordinaryIncomeAndExpenses" recursiveSkip="false"/>
+      <variables depth="0" var="TaxOnProfits" recursiveSkip="false"/>
+      <variables depth="0" var="BalanceResultSubsidiariesAndMinorityInterest" recursiveSkip="false"/>
+      <variables depth="0" var="ProfitAfterTax" recursiveSkip="false"/>
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+        <overrideStyle old="subtotal">level0</overrideStyle>
+        <overrideStyle old="localtotal">level0</overrideStyle>
+      </presentation>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block1C_visible/text()='true' and ./document/properties/Block1C_comment/text()!=' ' and ./document/properties/Block1C_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block1C_comment"/>
+</p>
+
+<block visible="./document/properties/Block1D_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="ReturnOnAssets" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ReturnOnEquity" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="ReturnOnAssets" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ReturnOnEquity" function="getTitle"/><presentation lowercase="true"/></data> gepresenteerd.</p>
+  <graph class="graphTemplate6" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="ReturnOnAssets"/>
+      <variables var="ReturnOnEquity"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" prefill="true" prependEmptyColumns="0"/>
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables depth="0" var="ReturnOnAssets" recursiveSkip="false"/>
+      <variables depth="0" var="ReturnOnEquity" recursiveSkip="false"/>
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="1" prefill="true" appendEmptyColumns="1"/>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block1D_visible/text()='true' and ./document/properties/Block1D_comment/text()!=' ' and ./document/properties/Block1D_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block1D_comment"/>
+</p>
+
+<block visible="./document/properties/Block1E_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="BreakEvenSales" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="BreakEvenSales" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate1">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+      <variables var="BreakEvenSales"/>
+      <variables var="NetSales"/>
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prependEmptyColumns="0" prefill="true" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="BreakEvenSales" recursiveSkip="false" />
+      <variables depth="0" var="NetSales" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block1E_visible/text()='true' and ./document/properties/Block1E_comment/text()!=' ' and ./document/properties/Block1E_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block1E_comment"/>
+</p>
+<!--<clearpage visible="(./document/properties/Block2A_visible/text()='true') or (./document/properties/Block2B_visible/text()='true') or (./document/properties/Block2C_visible/text()='true')"/>-->
+
+<newpage name="normal" visible="(./document/properties/Block2A_visible/text()='true') or (./document/properties/Block2B_visible/text()='true') or (./document/properties/Block2C_visible/text()='true')">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<section class="sectionnum" visible="(./document/properties/Block2A_visible/text()='true') or (./document/properties/Block2B_visible/text()='true') or (./document/properties/Block2C_visible/text()='true')"><data src="chineseRoom" name="Block2">Activiteit &amp; productiviteit ratio's</data></section>
+<block visible="./document/properties/Block2A_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="SalesToUserSpecificVariable" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ExpensesToUserSpecificVariable" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="SalesToUserSpecificVariable" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="ExpensesToUserSpecificVariable" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+    <p class="normal" visible="./document/properties/ReportScale/text() != '1'"><data src="chineseRoom" name="Unscaled">De bedragen van dit onderdeel zijn niet geschaald.</data></p>
+		<graph class="graphTemplate7" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="SalesToUserSpecificVariable" />
+      <variables var="ExpensesToUserSpecificVariable" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="1" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="SalesToUserSpecificVariable" recursiveSkip="false" />
+      <variables depth="0" var="ExpensesToUserSpecificVariable" recursiveSkip="false" />
+      <variables depth="0" var="UserSpecificVariable" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="1" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block2A_visible/text()='true' and ./document/properties/Block2A_comment/text()!=' ' and ./document/properties/Block2A_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block2A_comment"/>
+</p>
+
+<block visible="./document/properties/Block2B_visible/text()='true'">
+<subsection class="subsectionnum"><data src="fesModel"><variables var="InventoryTurnoverRatio" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="InventoryTurnoverRatio" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate8" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="InventoryTurnoverRatio" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="InventoryTurnoverRatio" recursiveSkip="false" />
+      <variables depth="0" var="AverageInventory" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block2B_visible/text()='true' and ./document/properties/Block2B_comment/text()!=' ' and ./document/properties/Block2B_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block2B_comment"/>
+</p>
+
+<block visible="./document/properties/Block2C_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="GrossProfitToNumberOfEmployees" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="GrossProfitToNumberOfEmployees" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate7" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="GrossProfitToNumberOfEmployees" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="GrossProfitToNumberOfEmployees" recursiveSkip="false" />
+      <variables depth="0" var="TotalNumberOfEmployees" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block2C_visible/text()='true' and ./document/properties/Block2C_comment/text()!=' ' and ./document/properties/Block2C_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block2C_comment"/>
+</p>
+
+<newpage name="normal" visible="(./document/properties/Block3A_visible/text()='true') or (./document/properties/Block3D_visible/text()='true') or (./document/properties/Block3E_visible/text()='true') or (./document/properties/Block3F_visible/text()='true') or (./document/properties/Block3G_visible/text()='true') or (./document/properties/Block3I_visible/text()='true')">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!--<clearpage visible="(./document/properties/Block3A_visible/text()='true') or (./document/properties/Block3D_visible/text()='true') or (./document/properties/Block3E_visible/text()='true') or (./document/properties/Block3F_visible/text()='true') or (./document/properties/Block3G_visible/text()='true') or (./document/properties/Block3I_visible/text()='true')"/>-->
+<section class="sectionnum" visible="(./document/properties/Block3A_visible/text()='true') or (./document/properties/Block3D_visible/text()='true') or (./document/properties/Block3E_visible/text()='true') or (./document/properties/Block3F_visible/text()='true') or (./document/properties/Block3G_visible/text()='true') or (./document/properties/Block3I_visible/text()='true')"><data src="chineseRoom" name="Block3">Kengetallen liquiditeit, solvabiliteit</data></section>
+<block visible="./document/properties/Block3A_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="QuickRatio" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="CurrentRatio" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="QuickRatio" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="CurrentRatio" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate8" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="QuickRatio" />
+      <variables var="CurrentRatio" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="QuickRatio" recursiveSkip="false" />
+      <variables depth="0" var="CurrentRatio" recursiveSkip="false" />
+      <variables depth="0" var="NetWorkingCapital" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3A_visible/text()='true' and ./document/properties/Block3A_comment/text()!=' ' and ./document/properties/Block3A_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3A_comment"/>
+</p>
+
+<block visible="./document/properties/Block3D_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="TotalAssets" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="TotalLiabilities" function="getTitle"/><presentation lowercase="true"/></data> </subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="TotalAssets" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="TotalLiabilities" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate1">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="TotalAssets" />
+      <variables var="TotalLiabilities" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="TotalAssets" recursiveSkip="false" />
+      <variables depth="0" var="TotalLiabilities" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+        <overrideStyle old="localtotal">level0</overrideStyle>
+      </presentation>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3D_visible/text()='true' and ./document/properties/Block3D_comment/text()!=' ' and ./document/properties/Block3D_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3D_comment"/>
+</p>
+
+<block visible="./document/properties/Block3E_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="NetWorth" function="getTitle"/></data>, <data src="fesModel"><variables var="Provisions" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="TotalLiabilities" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van het</data> <data src="fesModel"><variables var="NetWorth" function="getTitle"/><presentation lowercase="true"/></data>, de <data src="fesModel"><variables var="Provisions" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="TotalLiabilities" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate1">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="NetWorth" />
+      <variables var="Provisions" />
+      <variables var="TotalLiabilities" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="NetWorth" recursiveSkip="false" />
+      <variables depth="0" var="Provisions" recursiveSkip="false" />
+      <variables depth="0" var="TotalLiabilities" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+        <overrideStyle old="localtotal">level0</overrideStyle>
+      </presentation>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3E_visible/text()='true' and ./document/properties/Block3E_comment/text()!=' ' and ./document/properties/Block3E_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3E_comment"/>
+</p>
+
+<block visible="./document/properties/Block3F_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="CurrentLiabilities" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="Receivables" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="CurrentLiabilities" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="Receivables" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate1">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="CurrentLiabilities" />
+      <variables var="Receivables" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="CurrentLiabilities" recursiveSkip="false" />
+      <variables depth="0" var="Receivables" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3F_visible/text()='true' and ./document/properties/Block3F_comment/text()!=' ' and ./document/properties/Block3F_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3F_comment"/>
+</p>
+
+<block visible="./document/properties/Block3G_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="SolvencyRatio" function="getTitle"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="SolvencyRatio" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate6" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="SolvencyRatio" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="SolvencyRatio" recursiveSkip="false" />
+      <variables depth="0" var="NetWorth" recursiveSkip="false" />
+      <variables depth="0" var="TotalEquityAndLiabilities" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+        <overrideStyle old="localtotal">level0</overrideStyle>
+      </presentation>
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3G_visible/text()='true' and ./document/properties/Block3G_comment/text()!=' ' and ./document/properties/Block3G_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3G_comment"/>
+</p>
+
+<block visible="./document/properties/Block3I_visible/text()='true'">
+  <subsection class="subsectionnum"><data src="fesModel"><variables var="CashBalance" function="getTitle"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="NegativeNetLimitOnCurrentAccount" function="getTitle"/><presentation lowercase="true"/></data></subsection>
+  <p class="normal"><data src="chineseRoom" name="ThisGraphShows">Deze grafiek toont de ontwikkeling van de</data> <data src="fesModel"><variables var="CashBalance" function="getTitle"/><presentation lowercase="true"/></data> <data src="chineseRoom" name="And">en</data> <data src="fesModel"><variables var="NegativeNetLimitOnCurrentAccount" function="getTitle"/><presentation lowercase="true"/></data>.</p>
+  <graph class="graphTemplate7" trim="true">
+    <title> </title>
+    <xtitle></xtitle>
+    <data src="fesGraph">
+      <columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables var="CashBalance" />
+      <variables var="NegativeNetLimitOnCurrentAccount" />
+      <presentation headerFunction="endDate" headerFormat="yyyy" showDecoration="false" scale="./document/properties/ReportScale/text()" prefill="true" prependEmptyColumns="0" />
+    </data>
+  </graph>
+  <table class="sevencol">
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="CashBalance" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+    </data>
+    <data src="fes">
+      <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+      <variables depth="0" var="NegativeNetLimitOnCurrentAccount" recursiveSkip="false" />
+      <presentation disableMinusCorrection="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScale/text()" prefill="true" />
+    </data>
+    <tr class="line"><td/><td/><td/><td/><td/><td/><td/><td/></tr>
+  </table>
+</block>
+  <p class="normal" visible="./document/properties/Block3I_visible/text()='true' and ./document/properties/Block3I_comment/text()!=' ' and ./document/properties/Block3I_comment/text()!=''">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/Block3I_comment"/>
+</p>
+
+<newpage name="landscape"  visible="./document/properties/FinancialOverview_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<section class="sectionnum" visible="./document/properties/FinancialOverview_visible/text()='true'"><data src="chineseRoom" name="FinancialOverview">Balans, resultatenrekening en kengetallen</data></section>
+<columns header="" class="twocolumns" visible="./document/properties/FinancialOverview_visible/text()='true'">
+  <col>
+    <table class="shorttable">
+      <tr class="totalheader">
+        <td><data src="fesModel"><variables var="BalanceSheet" function="getTitle"/></data> - <data src="chineseRoom" name="Assets">Activa</data></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <data src="fes">
+        <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+        <variables depth="1" var="BalanceSheet" varFrom="IntangibleFixedAssets" recursiveSkip="false" />
+        <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1">
+          <overrideStyle old="level1">level0</overrideStyle>
+        </presentation>
+      </data>
+    </table>
+  </col>
+  <col>
+    <table class="shorttable">
+      <tr class="totalheader">
+        <td><data src="chineseRoom" name="EquityLiabilities">Passiva</data></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <data src="fes">
+        <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+        <variables depth="1" var="BalanceSheet" varFrom="NetWorth" varTo="CapitalShortfall" recursiveSkip="false"/>
+        <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" >
+          <overrideStyle old="level1">level0</overrideStyle>
+        </presentation>
+      </data>
+      <tr class="level0">
+        <td> </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <data src="fes">
+        <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+        <variables depth="1" var="BalanceSheet" varFrom="TotalEquityAndLiabilities" recursiveSkip="false"/>
+        <presentation filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" />
+      </data>
+    </table>
+  </col>
+</columns>
+
+<p visible="./document/properties/FinancialOverview_visible/text()='true'"> </p>
+
+<columns header="" class="twocolumns" visible="./document/properties/FinancialOverview_visible/text()='true'">
+  <col>
+    <table class="shorttable">
+      <tr class="totalheader">
+        <td><data src="fesModel"><variables var="IncomeStatement" function="getTitle"/></data></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <data src="fes">
+        <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+        <variables depth="1" var="IncomeStatement" varFrom="NetSales" recursiveSkip="false"/>
+        <presentation filterEmptyRows="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" appendEmptyColumns="1" >
+          <overrideStyle old="level1">level0</overrideStyle>
+        </presentation>
+      </data>
+    </table>
+  </col>
+  <col>
+    <table class="shorttable">
+      <tr class="totalheader">
+        <td><data src="fesModel"><variables var="Ratios" function="getTitle"/></data></td>
+        <td> </td>
+        <td></td>
+        <td></td>
+      </tr>
+      <data src="fes">
+        <columns header="" timelineId="xpath:./document/properties/TimelineId" delta="0" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/>
+        <variables depth="0" var="TotalNumberOfEmployees"/>
+        <variables depth="0" var="UserSpecificVariable"/>
+        <variables depth="0" var="QuickRatio"/>
+        <variables depth="0" var="CurrentRatio"/>
+        <variables depth="0" var="SolvencyRatio"/>
+        <variables depth="0" var="ReturnOnEquity"/>
+        <variables depth="0" var="ReturnOnAssets"/>
+        <variables depth="0" var="EBITDA"/>
+        <variables depth="0" var="Leverage"/>
+        <variables depth="0" var="SalesToNumberOfEmployees"/>
+        <variables depth="0" var="SalesToUserSpecificVariable"/>
+        <presentation filterEmptyRows="true" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true" >
+          <overrideStyle old="level1">level0</overrideStyle>
+        </presentation>
+      </data>
+    </table>
+  </col>
+</columns>
+
+
+<!-- =========Einde============================================================= -->
+</document>

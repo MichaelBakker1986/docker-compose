@@ -1,0 +1,28 @@
+<Layouts>
+  <Layout Name="Standaard">
+    <Title>Standaard</Title>
+    <Tabs>
+      <Tab>
+        <Variable>IncomeStatement</Variable>
+      </Tab>
+      <Tab>
+        <Variable>BalanceSheet</Variable>
+      </Tab>
+      <Tab>
+        <Variable>NetWorthReconciliation</Variable>
+      </Tab>
+      <Tab>
+        <Variable>StatementOfLiquidity</Variable>
+      </Tab>
+      <Tab>
+        <Variable>Ratios</Variable>
+      </Tab>
+      <Tab>
+        <Variable>PrognoseCockpit</Variable>
+      </Tab>
+      <Tab>
+        <Variable>Tuples</Variable>
+      </Tab>
+    </Tabs>
+  </Layout>
+</Layouts>

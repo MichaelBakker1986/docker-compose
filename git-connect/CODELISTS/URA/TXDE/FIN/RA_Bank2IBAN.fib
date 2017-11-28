@@ -1,0 +1,31 @@
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+;
+;
+01:ABNANL2A    ; ABN Amro
+02:DEUTNL2A    ; Deutsche Bank
+03:DSSBNL22    ; DSB Bank
+04:FRBKNL2L    ; Frieslandbank
+05:FTSBNL2R    ; Fortis
+06:FVBNL22     ; F. van Lanscho
+07:INGBNL2A    ; ING
+08:RABONL2U    ; Rabonbank
+09:SNSBNL2A    ; SNS Bank
+10:STALNL2G    ; Staal Bankiers
+11:HBUANL2R    ; HBU
+12:KREDBEBB100 ; KBC

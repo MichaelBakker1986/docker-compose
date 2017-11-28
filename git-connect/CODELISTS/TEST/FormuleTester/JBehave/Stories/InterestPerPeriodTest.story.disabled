@@ -1,0 +1,387 @@
+Calculate interest per period, both individually and as an accrued value (overlopende rente).
+
+Meta:
+@author Kevin van der Lei
+
+!-- Test for years divided into months (12 periods total)
+Scenario: testInterestPerPeriodMonths
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 50, 100, 100, 87.50, 75, 75, 62.50, 50, 50, 37.50, 25, 25 for column 2008
+And variable InterestPerPeriod should be the values 12.50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 50, 150, 250, 37.50, 112.50, 187.50, 25, 75, 125, 12.50, 37.50, 62.50 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test for various starting times
+Scenario: testInterestPerPeriodMonthsStartingTime1
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000, 0 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 100, 100, 100, 75, 75, 75, 50, 50, 50, 25, 25, 25 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 100, 200, 300, 75, 150, 225, 50, 100, 150, 25, 50, 75 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodMonthsStartingTime2
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 1
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 100, 100, 100, 75, 75, 75, 50, 50, 50, 25, 25 for column 2008
+And variable InterestPerPeriod should be the values 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 100, 200, 0, 75, 150, 0, 50, 100, 0, 25, 50 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test for invalid starting times
+Scenario: testInterestPerPeriodMonthsStartingTime3
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 1.01
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+Scenario: testInterestPerPeriodMonthsStartingTime4
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value -0.01
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+Scenario: testInterestPerPeriodMonthStartingTimeNA
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value NA
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+!-- Test with high frequencies
+Scenario: testInterestPerPeriodMonthsFrequencyHigh1
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 12
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable AccruedInterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodMonthsFrequencyHigh2
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 12
+And variable InterestStartingTime has value 1
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodMonthsFrequencyHigh3
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000 for column 2008
+And variable InterestStartPeriod has value 2
+And variable InterestFrequency has value 12
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable AccruedInterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test with a low frequency
+Scenario: testInterestPerPeriodMonthsFrequencyLow
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000, 12000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 1
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200 for column 2008
+And variable AccruedInterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2009
+
+!-- Test with a frequency of zero
+Scenario: testInterestPerPeriodMonthsFrequencyZero
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 0
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+
+!-- Test with an NA frequency
+Scenario: testInterestPerPeriodMonthFrequencyNA
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value NA
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable AccruedInterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+
+!-- Test with an interest rate of zero
+Scenario: testInterestPerPeriodMonthsInterestZero
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.0
+Then variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test with an NA interest rate
+Scenario: testInterestPerPeriodMonthInterestNA
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value NA
+Then variable InterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+
+!-- Test with NA values in the source
+Scenario: testInterestPerPeriodMonthsSourceNAMedio
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, NA, 9000, 9000, 9000, 6000, 6000, 6000, NA, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 50, 100, 100, 37.50, 75, 75, 62.50, 50, 50, 25, 0, 25 for column 2008
+And variable InterestPerPeriod should be the values 12.50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 50, 150, 250, 37.50, 112.50, 187.50, 25, 75, 125, 0, 0, 25 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodMonthsSourceNAPrimo
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, NA, 9000, 9000, 6000, 6000, 6000, 3000, 3000, 3000, 0 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 100, 100, 100, 0, 75, 75, 50, 50, 50, 25, 25, 25 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 100, 200, 300, 0, 75, 150, 50, 100, 150, 25, 50, 75 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+
+
+
+
+
+!-- Tests for years divided into periods of 4 weeks (13 periods total)
+Scenario: testInterestPerPeriod4Weeks
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 46.15, 92.31, 92.31, 86.54, 69.23, 69.23, 69.23, 46.15, 46.15, 46.15, 28.85, 23.08, 23.08 for column 2008
+And variable InterestPerPeriod should be the values 11.54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 46.15, 138.46, 230.77, 17.31, 86.54, 155.77, 0, 46.15, 92.31, 138.46, 17.31, 40.38, 63.46 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test for various starting times
+Scenario: testInterestPerPeriod4WeeksStartingTime1
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000, 0 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 92.31, 92.31, 92.31, 69.23, 69.23, 69.23, 46.15, 46.15, 46.15, 40.38, 23.08, 23.08, 23.08 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 92.31, 184.62, 276.92, 51.92, 121.15, 190.38, 23.08, 69.23, 115.38, 5.77, 28.85, 51.92, 75.0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriod4WeeksStartingTime2
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 1
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 92.31, 92.31, 92.31, 69.23, 69.23, 69.23, 46.15, 46.15, 46.15, 40.38, 23.08, 23.08 for column 2008
+And variable InterestPerPeriod should be the values 23.08, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 92.31, 184.62, 276.92, 51.92, 121.15, 190.38, 23.08, 69.23, 115.38, 5.77, 28.85, 51.92 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test for invalid starting times
+Scenario: testInterestPerPeriod4WeeksStartingTime3
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 1.01
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+Scenario: testInterestPerPeriod4WeeksStartingTime4
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value -0.01
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+Scenario: testInterestPerPeriod4WeeksStartingTimeNA
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value NA
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be NA for column with month January and year 2008
+And variable AccruedInterestPerPeriod should be NA for column with month January and year 2008
+
+!-- Test with high frequencies
+Scenario: testInterestPerPeriodFourWeeksFrequencyHigh1
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 13
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable AccruedInterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodFourWeeksFrequencyHigh2
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 13
+And variable InterestStartingTime has value 1
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriodFourWeeksFrequencyHigh3
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000 for column 2008
+And variable InterestStartPeriod has value 2
+And variable InterestFrequency has value 13
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable InterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 for column 2008
+And variable AccruedInterestPerPeriod should be the values 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test with a frequency of zero
+Scenario: testInterestPerPeriod4WeeksFrequencyZero
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 0
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+
+!-- Test with an NA frequency
+Scenario: testInterestPerPeriod4WeeksFrequencyNA
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value NA
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable AccruedInterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+
+!-- Test with an interest rate of zero
+Scenario: testInterestPerPeriod4WeeksInterestZero
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.0
+Then variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Test with an NA interest rate
+Scenario: testInterestPerPeriod4WeeksInterestNA
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, 12000, 9000, 9000, 9000, 6000, 6000, 6000, 6000, 3000, 3000, 3000 for column 2008
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value NA
+Then variable InterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable AccruedInterestPerPeriod should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+
+!-- Test with NA values in the source
+Scenario: testInterestPerPeriod4WeeksSourceNAMedio
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, NA, 9000, 9000, 9000, 6000, 6000, 6000, 6000, NA, 3000, 3000 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0.5
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 46.15, 92.31, 92.31, 17.31, 69.23, 69.23, 69.23, 46.15, 46.15, 46.15, 11.54, 0, 23.08 for column 2008
+And variable InterestPerPeriod should be the values 11.54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 46.15, 138.46, 230.77, 17.31, 86.54, 155.77, 0, 46.15, 92.31, 138.46, 0, 0, 23.08 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+Scenario: testInterestPerPeriod4WeeksSourceNAPrimo
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestSource has values 12000, 12000, NA, 9000, 9000, 6000, 6000, 6000, 6000, 3000, NA, 3000, 0 for column 2008
+And variable InterestSource has values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable InterestStartPeriod has value 1
+And variable InterestFrequency has value 4
+And variable InterestStartingTime has value 0
+And variable InterestRate has value 0.10
+Then variable InterestPerPeriod should be the values 92.31, 92.31, 92.31, 51.92, 69.23, 69.23, 46.15, 46.15, 46.15, 40.38, 23.08, 0, 23.08 for column 2008
+And variable InterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+And variable AccruedInterestPerPeriod should be the values 92.31, 184.62, 276.92, 51.92, 121.15, 190.38, 23.08, 69.23, 115.38, 5.77, 28.85, 28.85, 51.92 for column 2008
+And variable AccruedInterestPerPeriod should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009

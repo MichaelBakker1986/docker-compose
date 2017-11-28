@@ -1,0 +1,50 @@
+{&&Language=English}
+.ModelLanguage "Nederlands"=Default
+
+.Script Name="ValidModels"
+.Event BeforeCommandLine
+  .Model Name="A01",EnableNewData=Off
+  .Model Name="B01",EnableNewData=Off
+  .Model Name="X01",EnableNewData=Off
+  .Model Name="X03",EnableNewData=Off
+  .Model Name="V03",EnableNewData=Off
+.EndScript
+
+;—————————————————————————————————————————————————————————————————————————————
+
+.Script Name=FINANMappingTool,Title="$>Start FINAN Mapping Tool<$",,Priority=3005
+.Event OnToolsMenuClick
+  .ScriptMode ErrorMode=Simple           ; suppress script name and line number in error messages
+  .execute "#ApplicationFolder#\FMT.EXE"
+.EndScript
+
+
+.Script Name=ExportClassicData,Title="$>FINAN Classic Data File<$"
+.Event OnFileExportMenuClick
+  .SaveDocument ClassicDataFile,KeyDialog,ActiveDocument
+.EndScript
+
+.Script Name=ExportBank_ING,Title="$>Export voor ING Bank<$", Priority=4000
+.Event OnFileExportMenuClick
+  .SaveDocument ClassicDataFile,KeyDialog,ActiveDocument
+.EndScript
+
+.Script Name=ExportBank_SNS,Title="$>Export voor SNS Bank<$", Priority=4005
+.Event OnFileExportMenuClick
+  .SaveDocument ClassicDataFile,KeyDialog,ActiveDocument
+.EndScript
+
+.Script Name=ExportBank_FB,Title="$>Export voor Friesland bank<$", Priority=4010
+.Event OnFileExportMenuClick
+  .SaveDocument ClassicDataFile,KeyDialog,ActiveDocument
+.EndScript
+
+.Script Name=ExportBank_FVS,Title="$>Export voor F. van Lanschot Bankiers<$", Priority=4020
+.Event OnFileExportMenuClick
+  .SaveDocument ClassicDataFile,KeyDialog,ActiveDocument
+.EndScript
+
+
+
+
+

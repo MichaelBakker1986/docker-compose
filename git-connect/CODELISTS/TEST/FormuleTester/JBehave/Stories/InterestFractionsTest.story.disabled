@@ -1,0 +1,312 @@
+Calculate cumulative fractions per period.
+
+Meta:
+@author Kevin van der Lei 
+	
+!-- Tests for MONTH periods
+!-- Test varying starting periods
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonth
+Given a document with timeunit MONTH for the historic years 2008, 2009
+Then variable InterestFractions should be the values 0.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83 for column 2008
+And variable InterestFractions should be the values 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83 for column 2009
+
+!-- Fraction for starting period = 3, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingPeriod1
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+Then variable InterestFractions should be the values 0, 0, 0.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17 for column 2008
+And variable InterestFractions should be the values 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17 for column 2009
+
+!-- Fraction for starting period = 8, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingPeriod2
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 8
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0.17, 0.50, 0.83, 1.17, 0.50 for column 2008
+And variable InterestFractions should be the values 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50 for column 2009
+
+!-- Fraction for starting period = 12, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingPeriod3
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 12
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.17 for column 2008
+And variable InterestFractions should be the values 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17 for column 2009
+
+!-- Fraction for starting period = 15, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingPeriod4
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 15
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestFractions should be the values 0, 0, 0.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17 for column 2009
+
+
+!-- Test varying frequencies
+!-- Fraction for starting period = 1, frequency = 1, starting time within period = 0.5
+Scenario: testFractionsMonthFrequency1
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value 1
+Then variable InterestFractions should be the values 0.04, 0.13, 0.21, 0.29, 0.38, 0.46, 0.54, 0.63, 0.71, 0.79, 0.88, 0.96 for column 2008
+And variable InterestFractions should be the values 1.04, 0.13, 0.21, 0.29, 0.38, 0.46, 0.54, 0.63, 0.71, 0.79, 0.88, 0.96 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 5, starting time within period = 0.5
+Scenario: testFractionsMonthFrequency2
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value 5
+Then variable InterestFractions should be the values 0.21, 0.63, 1.04, 0.46, 0.88, 1.29, 0.71, 1.13, 0.54, 0.96, 1.38, 0.79 for column 2008
+And variable InterestFractions should be the values 1.21, 0.63, 1.04, 0.46, 0.88, 1.29, 0.71, 1.13, 0.54, 0.96, 1.38, 0.79 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 6, starting time within period = 0.5
+Scenario: testFractionsMonthFrequency3
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartingTime has value 0
+When variable InterestFrequency has value 2
+Then variable InterestFractions should be the values 0.17, 0.33, 0.5, 0.66, 0.83, 1.0, 0.17, 0.33, 0.5, 0.66, 0.83, 1.0 for column 2008
+And variable InterestFractions should be the values 0.17, 0.33, 0.5, 0.66, 0.83, 1.0, 0.17, 0.33, 0.5, 0.66, 0.83, 1.0 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 12, starting time within period = 0.5
+Scenario: testFractionsMonthFrequency4
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value 12
+Then variable InterestFractions should be the values 0.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5 for column 2008
+And variable InterestFractions should be the values 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 0, starting time within period = 0.5
+Scenario: testFractionsMonthFrequencyZero
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value 0
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 13, starting time within period = 0.5
+Scenario: testFractionsMonthFrequencyHigherThanTsY
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value 13
+Then variable InterestFractions should be the values 0.54, 1.63, 1.71, 1.79, 1.88, 1.96, 2.04, 1.13, 1.21, 1.29, 1.38, 1.46 for column 2008
+And variable InterestFractions should be the values 1.54, 1.63, 1.71, 1.79, 1.88, 1.96, 2.04, 1.13, 1.21, 1.29, 1.38, 1.46 for column 2009
+
+!-- Fraction for starting period = 3, frequency = 5, starting time within period = 0.5
+Scenario: testFractionsMonthFrequencyAndStartingPeriod
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+When variable InterestFrequency has value 5
+Then variable InterestFractions should be the values 0, 0, 0.21, 0.63, 1.04, 0.46, 0.88, 1.29, 0.71, 1.13, 0.54, 0.96 for column 2008
+And variable InterestFractions should be the values 1.38, 0.79, 1.21, 0.63, 1.04, 0.46, 0.88, 1.29, 0.71, 1.13, 0.54, 0.96 for column 2009
+
+
+!-- Test varying starting times
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.0
+Scenario: testFractionsMonthStartingTimeUltimo
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartingTime has value 1
+Then variable InterestFractions should be the values 0.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67 for column 2008
+And variable InterestFractions should be the values 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingTimeMedio
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartingTime has value 0.5
+Then variable InterestFractions should be the values 0.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83 for column 2008
+And variable InterestFractions should be the values 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83, 1.17, 0.50, 0.83 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 1.0
+Scenario: testFractionsMonthStartingTimeStart
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartingTime has value 0
+Then variable InterestFractions should be the values 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0 for column 2008
+And variable InterestFractions should be the values 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0, 0.33, 0.67, 1.0 for column 2009
+		
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = -0.01
+Scenario: testFractionsMonthStartingTimeNegative
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestStartingTime has value -0.01
+Then variable InterestFractions should be NA for column with month January and year 2008
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 1.01
+Scenario: testFractionsMonthStartingTimeTooHigh
+Given a document with timeunit MONTH for the historic year 2008
+When variable InterestStartingTime has value 1.01
+Then variable InterestFractions should be NA for column with month January and year 2008
+
+!-- Fraction for starting period = 3, frequency = 5, starting time within period = 0.0
+Scenario: testFractionsMonthCombination
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+When variable InterestFrequency has value 5
+When variable InterestStartingTime has value 1
+Then variable InterestFractions should be the values 0, 0, 0, 0.42, 0.83, 1.25, 0.67, 1.08, 0.5, 0.92, 1.33, 0.75 for column 2008
+And variable InterestFractions should be the values 1.17, 0.58, 1.0, 0.42, 0.83, 1.25, 0.67, 1.08, 0.5, 0.92, 1.33, 0.75 for column 2009
+
+
+!-- Test unexpected input values
+!-- Fraction for starting period = NA, frequency = 4, starting time within period = 0.5
+Scenario: testFractionsMonthStartingPeriod5
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartPeriod has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+
+!-- Fraction for starting period = 1, frequency = NA, starting time within period = 0.5
+Scenario: testFractionsMonthFrequencyNA
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestFrequency has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = NA
+Scenario: testFractionsMonthStartingTimeNA
+Given a document with timeunit MONTH for the historic years 2008, 2009
+When variable InterestStartingTime has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+
+
+
+
+!-- Tests for four week periods
+!-- Test varying starting periods
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4Weeks
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+Then variable InterestFractions should be the values 0.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85 for column 2008
+And variable InterestFractions should be the values 1.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85 for column 2009
+
+!-- Fraction for starting period = 3, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingPeriod1
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+Then variable InterestFractions should be the values 0, 0, 0.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23 for column 2008
+And variable InterestFractions should be the values 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23 for column 2009
+
+!-- Fraction for starting period = 8, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingPeriod2
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 8
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0.15, 0.46, 0.77, 1.08, 0.38, 0.69 for column 2008
+And variable InterestFractions should be the values 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69 for column 2009
+
+!-- Fraction for starting period = 13, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingPeriod3
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 13
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.15 for column 2008
+And variable InterestFractions should be the values 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15 for column 2009
+
+!-- Fraction for starting period = 16, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingPeriod4
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 16
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestFractions should be the values 0, 0, 0.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23 for column 2009
+
+
+!-- Test varying frequencies
+!-- Fraction for starting period = 1, frequency = 1, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequency1
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value 1
+Then variable InterestFractions should be the values 0.04, 0.12, 0.19, 0.27, 0.35, 0.42, 0.5, 0.58, 0.65, 0.73, 0.81, 0.88, 0.96 for column 2008
+And variable InterestFractions should be the values 1.04, 0.12, 0.19, 0.27, 0.35, 0.42, 0.5, 0.58, 0.65, 0.73, 0.81, 0.88, 0.96 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 5, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequency2
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value 5
+Then variable InterestFractions should be the values 0.19, 0.58, 0.96, 1.35, 0.73, 1.12, 0.5, 0.88, 1.27, 0.65, 1.04, 0.42, 0.81 for column 2008
+And variable InterestFractions should be the values 1.19, 0.58, 0.96, 1.35, 0.73, 1.12, 0.5, 0.88, 1.27, 0.65, 1.04, 0.42, 0.81 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 13, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequency3
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value 13
+Then variable InterestFractions should be the values 0.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5 for column 2008
+And variable InterestFractions should be the values 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 0, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequencyZero
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value 0
+Then variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2008
+And variable InterestFractions should be the values 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 14, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequencyHigherThanTsY
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value 14
+Then variable InterestFractions should be the values 0.54, 1.62, 1.70, 1.77, 1.85, 1.92, 2.0, 1.08, 1.15, 1.23, 1.31, 1.38, 1.46 for column 2008
+And variable InterestFractions should be the values 1.54, 1.62, 1.70, 1.77, 1.85, 1.92, 2.0, 1.08, 1.15, 1.23, 1.31, 1.38, 1.46 for column 2009
+
+!-- Fraction for starting period = 3, frequency = 5, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequencyAndStartingPeriod
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+When variable InterestFrequency has value 5
+Then variable InterestFractions should be the values 0, 0, 0.19, 0.58, 0.96, 1.35, 0.73, 1.12, 0.5, 0.88, 1.27, 0.65, 1.04 for column 2008
+And variable InterestFractions should be the values 0.42, 0.81, 1.19, 0.58, 0.96, 1.35, 0.73, 1.12, 0.5, 0.88, 1.27, 0.65, 1.04 for column 2009
+
+
+!-- Test varying starting times
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.0
+Scenario: testFractions4WeeksStartingTimeUltimo
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartingTime has value 1
+Then variable InterestFractions should be the values 0.0, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69 for column 2008
+And variable InterestFractions should be the values 1.0, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingTimeMedio
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartingTime has value 0.5
+Then variable InterestFractions should be the values 0.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85 for column 2008
+And variable InterestFractions should be the values 1.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.00, 0.31, 0.62, 0.92, 1.23, 0.54, 0.85 for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 1.0
+Scenario: testFractions4WeeksStartingTimeStart
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartingTime has value 0
+Then variable InterestFractions should be the values 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.0 for column 2008
+And variable InterestFractions should be the values 0.31, 0.62, 0.92, 1.23, 0.54, 0.85, 1.15, 0.46, 0.77, 1.08, 0.38, 0.69, 1.0 for column 2009
+		
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 1.0
+Scenario: testFractions4WeeksStartingTimeNegative
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestStartingTime has value -0.01
+Then variable InterestFractions should be NA for column with index 1 and year 2008
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = 1.01
+Scenario: testFractions4WeeksStartingTimeTooHigh
+Given a document with timeunit FOURWEEKS for the historic year 2008
+When variable InterestStartingTime has value 1.01
+Then variable InterestFractions should be NA for column with index 1 and year 2008
+
+!-- Fraction for starting period = 3, frequency = 5, starting time within period = 0.0
+Scenario: testFractions4WeeksCombination
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value 3
+When variable InterestFrequency has value 5
+When variable InterestStartingTime has value 1
+Then variable InterestFractions should be the values 0, 0, 0, 0.38, 0.77, 1.15, 0.54, 0.92, 1.31, 0.69, 1.08, 0.46, 0.85 for column 2008
+And variable InterestFractions should be the values 1.23, 0.62, 1.0, 0.38, 0.77, 1.15, 0.54, 0.92, 1.31, 0.69, 1.08, 0.46, 0.85 for column 2009
+
+
+!-- Test unexpected input values
+!-- Fraction for starting period = NA, frequency = 4, starting time within period = 0.5
+Scenario: testFractions4WeeksStartingPeriod5
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartPeriod has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+
+!-- Fraction for starting period = 1, frequency = NA, starting time within period = 0.5
+Scenario: testFractions4WeeksFrequencyNA
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestFrequency has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+
+!-- Fraction for starting period = 1, frequency = 4, starting time within period = NA
+Scenario: testFractions4WeeksStartingTimeNA
+Given a document with timeunit FOURWEEKS for the historic years 2008, 2009
+When variable InterestStartingTime has value NA
+Then variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2008
+And variable InterestFractions should be the values NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA for column 2009
+	

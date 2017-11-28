@@ -1,0 +1,62 @@
+; FINAN Include File
+;=============================================================================
+;
+;DO NOT MODIFY THIS FILE WITHOUT EXTENSIVE KNOWLEDGE OF THE FINAN STRUCTURE!!
+;       ** FINAN IS NOT RESPONSIBLE FOR UNAUTHORIZED MODIFICATIONS **
+;
+;PAS DIT BESTAND NIET AAN ALS U NIET PRECIES WEET WAT DE GEVOLGEN KUNNEN ZIJN!!
+;      ** FINAN IS NIET AANSPRAKELIJK VOOR ONDESKUNDIGE AANPASSINGEN **
+;
+;=== COMPILER INFO ===========================================================
+;
+;     Model             : Banking Model V03 model
+;     Language          : NL
+;     Description       : FINAN Include File
+;     Modelgroup(s)     : n.v.t.
+;
+;     Copyright (c) 1995-2003 FINAN, Groningen. All rights reserved.
+;=============================================================================
+;
+;
+102:Abswoude, Pauline van
+117:Bleijser, Judith de
+; 111:Boom, Jaap (Vervallen)
+305:Boogers, Ricardo
+204:Boonekamp, Hans
+205:Borghstijn, Peter
+201:Bouman, Piet
+306:Dimitrakakis, Evangelos
+214:Dijkstra, Okko
+114:Elderhorst, Fleur
+205:Es, Steef van
+;104:Fijter (Vervallen)
+103:Garderen, Thimmo van
+;	206:Hamelynck (Vervallen)
+213:Henksens, Jos
+209:Huizer, Selma
+217:Hummel, Bert
+;     108:Kristelijn, André (vervallen)
+215:Kuijten, John
+204:Linden, Jan van der
+;	101:Man (Vervallen)
+109:Mulder, Jeroen
+;     107:Neijzen, Dick (vervallen)
+;	115:Nooijen (Vervallen)
+;	207:Odding (Vervallen)
+208:Nijhuis, Jeffry
+113:Oppermann, Pieter
+;	202:Panhuijzen (Vervallen)
+209:Pankras, Ferry
+;     208:Reynaers, Fred (vervallen)
+218:Putker, Chantal
+216:Reynaers, Fred
+;	116:Roos (Vervallen)
+211:Schreppers, Rob
+106:Schrama, Bob
+212:Sijm, Ilona
+210:Snoeijing, Ellen
+118:Tebbens, Jeroen
+105:Valkenburg, Leo
+112:Veenhuizen, Edwin van
+;	110:Vermeulen (Vervallen)
+203:Waal, Lonneke de

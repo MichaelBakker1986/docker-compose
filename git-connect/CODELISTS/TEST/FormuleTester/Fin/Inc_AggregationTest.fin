@@ -1,0 +1,163 @@
+{&&Language=English};Inc_AggregationTest.fin
+
+.Variables
+PPP   0 1N     1               "Aggregation"                        \AggregationTestTotaal
+
+PIP   0 1N     2               "TsY"                                      \AggregationTsY
+; TODO: AggregationTsY1, AggregationTsY4, AggregationTsY12 protected met hardcoded tsy, corresponderende calculated/correctresults voor elk aggregatietype aanmaken
+
+; list all types to test differences with dessagregation of user input
+PPP     1N     2               "Average (A)"                                      \TestAggAverage
+PII     AN     3               "Input"                                      \TestAggAverageInput
+PIP     1N     3               "Calculated"                                      \TestAggAverageResultCalc
+
+PPP     1N     2               "Index (U)"                                      \TestAggIndex
+PII     UN     3               "Input"                                      \TestAggIndexInput
+PIP     1N     3               "Calculated"                                      \TestAggIndexResultCalc
+
+PIP     1N     2               "Flow (F)"                                      \TestAggFlow
+PII     FN     3               "Input"                                      \TestAggFlowInput
+PIP     1N     3               "Calculated"                                      \TestAggFlowResultCalc
+
+PIP     1N     2               "Balance (B)"                                      \TestAggBalance
+PII     BN     3               "Input"                                      \TestAggBalanceInput
+PIP     1N     3               "Calculated"                                      \TestAggBalanceResultCalc
+
+PIP     1N     2               "Max (V)"                                      \TestAggMax
+PII     VN     3               "Input"                                      \TestAggMaxInput
+PIP     1N     3               "Calculated"                                      \TestAggMaxResultCalc
+
+PIP     1N     2               "Min"	                                      \TestAggMin
+PII     VN     3               "Input"                                      \TestAggMinInput
+PIP     1N     3               "Calculated"                                      \TestAggMinResultCalc
+
+PIP     1N     2               "PointCalc (C)"                                      \TestAggPointCalc
+PII     CN     3               "Input"                                      \TestAggPointCalcInput
+PIP     1N     3               "Calculated"                                      \TestAggPointCalcResultCalc
+
+PIP     1N     2               "FlowCalc (E)"                                      \TestAggFlowCalc
+PII     EN     3               "Input"                                      \TestAggFlowCalcInput
+PIP     1N     3               "Calculated"                                      \TestAggFlowCalcResultCalc
+
+PIP     1N     2               "MeanCalc"                                      \TestAggMeanCalc
+PII     EN     3               "Input"                                      \TestAggMeanCalcInput
+PIP     1N     3               "Calculated"                                      \TestAggMeanCalcResultCalc
+
+PIP     1N     2               "V05 Specific"                                      \TestAggV05Specific
+PIP     BN     3               "ChangesInEquityApproved "                   \ChangesInEquityApproved
+PIP     BN     3               "tpInterestRate"                                      \TesttpInterestRate
+
+PIP     FA     2               "Text (F)"                                      \TestAggText
+
+PIP     1N     2               "FindColumns/BestColumns"                             \TestAggFindColumns
+PIP     FN     3               "Input"                                      \TestAggFindColumnsInput
+PIP     1N     3               "T=13, TsY=2"                                      \TestAggFCResultCalc1
+PIP     1N     3               "T=14, TsY=2"                                      \TestAggFCResultCalc2
+PIP     1N     3               "T=15, TsY=2"                                      \TestAggFCResultCalc3
+PIP     1N     3               "T=16, TsY=2"                                      \TestAggFCResultCalc4
+PIP     1N     3               "T=17, TsY=2"                                      \TestAggFCResultCalc5
+PIP     1N     3               "T=18, TsY=2"                                      \TestAggFCResultCalc6
+PIP     1N     3               "T=19, TsY=2"                                      \TestAggFCResultCalc7
+PIP     1N     3               "T=20, TsY=2"                                      \TestAggFCResultCalc8
+PIP     1N     3               "T=21, TsY=2"                                      \TestAggFCResultCalc9
+PIP     1N     3               "T=22, TsY=2"                                      \TestAggFCResultCalc10
+PIP     1N     3               "T=23, TsY=2"                                      \TestAggFCResultCalc11
+PIP     1N     3               "T=24, TsY=2"                                      \TestAggFCResultCalc12
+PIP     1N     3               "T=25, TsY=2"                                      \TestAggFCResultCalc13
+PIP     1N     3               "T=13, TsY=4"                                      \TestAggFCResultCalc14
+PIP     1N     3               "T=14, TsY=4"                                      \TestAggFCResultCalc15
+PIP     1N     3               "T=15, TsY=4"                                      \TestAggFCResultCalc16
+PIP     1N     3               "T=16, TsY=4"                                      \TestAggFCResultCalc17
+PIP     1N     3               "T=17, TsY=4"                                      \TestAggFCResultCalc18
+PIP     1N     3               "T=18, TsY=4"                                      \TestAggFCResultCalc19
+PIP     1N     3               "T=19, TsY=4"                                      \TestAggFCResultCalc20
+PIP     1N     3               "T=20, TsY=4"                                      \TestAggFCResultCalc21
+PIP     1N     3               "T=21, TsY=4"                                      \TestAggFCResultCalc22
+PIP     1N     3               "T=22, TsY=4"                                      \TestAggFCResultCalc23
+PIP     1N     3               "T=23, TsY=4"                                      \TestAggFCResultCalc24
+PIP     1N     3               "T=24, TsY=4"                                      \TestAggFCResultCalc25
+PIP     1N     3               "T=25, TsY=4"                                      \TestAggFCResultCalc26
+PPP    =1N     3               "Calculated"			                              \TestAggFCResultCalc
+PPP     1N     3               "Correct Result"			                          \TestAggFCCorrectResult
+;PIP     1N     3               "T=20, TsY=4"                                      \TestAggFCResultCalc13
+;PIP     1N     3               "T=21, TsY=3"                                      \TestAggFCResultCalc14
+
+.Hints
+TestAggMinInput		   = "$$CalcYearAs=Min"
+TestAggMeanCalcInput   = "$$CalcYearAs=MeanCalc"
+
+.Formulas NoTrend, Trend
+TestAggAverageResultCalc = FesExpression("GetValue(TestAggAverageInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)") ;TODO: also test for other aggregation methods!
+TestAggIndexResultCalc = FesExpression("GetValue(TestAggIndexInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggFlowResultCalc = FesExpression("GetValue(TestAggFlowInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggBalanceResultCalc = FesExpression("GetValue(TestAggBalanceInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggMaxResultCalc = FesExpression("GetValue(TestAggMaxInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggMinResultCalc = FesExpression("GetValue(TestAggMinInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggPointCalcResultCalc = FesExpression("GetValue(TestAggPointCalcInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggFlowCalcResultCalc = FesExpression("GetValue(TestAggFlowCalcInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggMeanCalcResultCalc = FesExpression("GetValue(TestAggMeanCalcInput, FirstTinFormulaSet(NoTrend), AggregationTsY, BOOKYEAR)")
+TestAggFCCorrectResult = If(TsY(1)=12, 242001, 262340)
+
+; fill historical data: 10, 20, 30, 40 ......
+.Formulas NoTrend
+TestAggFlowInput			= (T - FirstTinYear(T) + 1) * 10
+TestAggAverageInput			= (T - FirstTinYear(T) + 1) * 10
+TestAggIndexInput			= (T - FirstTinYear(T) + 1) * 10
+TestAggBalanceInput			= (T - FirstTinYear(T) + 1) * 10
+TestAggMaxInput				= (T - FirstTinYear(T) + 1) * 10
+TestAggMinInput				= (T - FirstTinYear(T) + 1) * 10
+TestAggPointCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+TestAggFlowCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+TestAggMeanCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+TestAggFindColumnsInput		= YearInT + (T - FirstTinYear(T) + 1) * 10
+TestAggFCResultCalc1		= FesExpression("GetValue(TestAggFindColumnsInput, 13, 2, BOOKYEAR)")
+TestAggFCResultCalc2		= FesExpression("GetValue(TestAggFindColumnsInput, 14, 2, BOOKYEAR)")
+TestAggFCResultCalc3		= FesExpression("GetValue(TestAggFindColumnsInput, 15, 2, BOOKYEAR)")
+TestAggFCResultCalc4		= FesExpression("GetValue(TestAggFindColumnsInput, 16, 2, BOOKYEAR)")
+TestAggFCResultCalc5		= FesExpression("GetValue(TestAggFindColumnsInput, 17, 2, BOOKYEAR)")
+TestAggFCResultCalc6		= FesExpression("GetValue(TestAggFindColumnsInput, 18, 2, BOOKYEAR)")
+TestAggFCResultCalc7		= FesExpression("GetValue(TestAggFindColumnsInput, 19, 2, BOOKYEAR)")
+TestAggFCResultCalc8		= FesExpression("GetValue(TestAggFindColumnsInput, 20, 2, BOOKYEAR)")
+TestAggFCResultCalc9		= FesExpression("GetValue(TestAggFindColumnsInput, 21, 2, BOOKYEAR)")
+TestAggFCResultCalc10		= FesExpression("GetValue(TestAggFindColumnsInput, 22, 2, BOOKYEAR)")
+TestAggFCResultCalc11		= FesExpression("GetValue(TestAggFindColumnsInput, 23, 2, BOOKYEAR)")
+TestAggFCResultCalc12		= FesExpression("GetValue(TestAggFindColumnsInput, 24, 2, BOOKYEAR)")
+TestAggFCResultCalc13		= FesExpression("GetValue(TestAggFindColumnsInput, 25, 2, BOOKYEAR)")
+TestAggFCResultCalc14		= FesExpression("GetValue(TestAggFindColumnsInput, 13, 4, BOOKYEAR)")
+TestAggFCResultCalc15		= FesExpression("GetValue(TestAggFindColumnsInput, 14, 4, BOOKYEAR)")
+TestAggFCResultCalc16		= FesExpression("GetValue(TestAggFindColumnsInput, 15, 4, BOOKYEAR)")
+TestAggFCResultCalc17		= FesExpression("GetValue(TestAggFindColumnsInput, 16, 4, BOOKYEAR)")
+TestAggFCResultCalc18		= FesExpression("GetValue(TestAggFindColumnsInput, 17, 4, BOOKYEAR)")
+TestAggFCResultCalc19		= FesExpression("GetValue(TestAggFindColumnsInput, 18, 4, BOOKYEAR)")
+TestAggFCResultCalc20		= FesExpression("GetValue(TestAggFindColumnsInput, 19, 4, BOOKYEAR)")
+TestAggFCResultCalc21		= FesExpression("GetValue(TestAggFindColumnsInput, 20, 4, BOOKYEAR)")
+TestAggFCResultCalc22		= FesExpression("GetValue(TestAggFindColumnsInput, 21, 4, BOOKYEAR)")
+TestAggFCResultCalc23		= FesExpression("GetValue(TestAggFindColumnsInput, 22, 4, BOOKYEAR)")
+TestAggFCResultCalc24		= FesExpression("GetValue(TestAggFindColumnsInput, 23, 4, BOOKYEAR)")
+TestAggFCResultCalc25		= FesExpression("GetValue(TestAggFindColumnsInput, 24, 4, BOOKYEAR)")
+TestAggFCResultCalc26		= FesExpression("GetValue(TestAggFindColumnsInput, 25, 4, BOOKYEAR)")
+ChangesInEquityApproved		= (T - FirstTinYear(T) + 1) * 10
+TesttpInterestRate			= (T - FirstTinYear(T) + 1) * 10
+
+.Formulas Trend
+TestAggFlowInput			= FesExpression("GetValue(TestAggFlowInput, T-1, TsY, BOOKYEAR)") ;TODO: also test for other aggregation methods!
+TestAggAverageInput			= FesExpression("GetValue(TestAggAverageInput, T-1, TsY, BOOKYEAR)")
+TestAggIndexInput			= FesExpression("GetValue(TestAggIndexInput, T-1, TsY, BOOKYEAR)")
+TestAggBalanceInput			= FesExpression("GetValue(TestAggBalanceInput, T-1, TsY, BOOKYEAR)")
+TestAggMaxInput				= FesExpression("GetValue(TestAggMaxInput, T-1, TsY, BOOKYEAR)")
+TestAggMinInput				= FesExpression("GetValue(TestAggMinInput, T-1, TsY, BOOKYEAR)")
+TestAggPointCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+TestAggFlowCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+TestAggMeanCalcInput		= If(TimeAggregated, 666, (T - FirstTinYear(T) + 1) * 10)
+
+.Variables
+PII     CN     2               "Mean Point Calc (C)"                        	\TestAggMeanPointCalc
+
+.Hints
+TestAggMeanPointCalc   = "$$CalcYearAs=MeanCalc"
+
+.Formulas NoTrend
+TestAggMeanPointCalc = 1000
+
+.Formulas Trend
+TestAggMeanPointCalc= If(TimeAggregated,TestAggMeanPointCalc[LastTinYear,FesExpression(DocumentTsY)],20)

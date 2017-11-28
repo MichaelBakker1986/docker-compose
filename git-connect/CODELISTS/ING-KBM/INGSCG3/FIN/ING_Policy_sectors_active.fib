@@ -1,0 +1,34 @@
+; Sectoren
+
+1:Overig/Geen: KAM Algemeen (zonder scores)
+7:Landbouw >> Akkerbouw
+9:Landbouw >> Intensieve veehouderij
+10:Landbouw >> Melkveehouderij
+14:Bouwnijverheid >> Bouw&Utiliteitsbouw / GWW&Infra
+15:Bouwnijverheid >> Bouw Services & Architecten
+16:Bouwnijverheid >> Bouwindustrie
+17:Bouwnijverheid >> Installatie, Renovatie, Onderhoud
+20:Bouwnijverheid >> (Groot)Handel in Bouwmaterialen
+23:Leisure >> Horeca
+24:Leisure >> Hotels
+25:Leisure >> Leisure Overig
+26:Leisure >> Verblijfsrecreatie
+32:Handel >> Automotive
+38:Handel >> Food >> Food Speciaalzaken
+40:Handel >> Food >> Supermarkten
+45:Handel >> Groothandel
+49:Handel >> Non Food >> Detailhandel
+53:Industrie >> Chemie
+54:Industrie >> Food
+55:Industrie >> Grafimedia en Uitgeverijen
+56:Industrie >> Maakindustrie
+57:Industrie >> Overig
+85:Transport en Logistiek >> Algemeen
+87:Zakelijke Dienstverlening >> Accountancy
+88:Zakelijke Dienstverlening >> Advocatuur
+90:Zakelijke Dienstverlening >> Notariaat
+92:Zakelijke Dienstverlening >> Flexbranche
+93:Zakelijke Dienstverlening >> Assurantie Tussenpersonen
+97:Sports clubs
+98:Zakelijke Dienstverlening >> Overige Zakelijke Dienstverlening
+99:Zakelijke Dienstverlening >> ICT

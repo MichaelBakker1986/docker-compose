@@ -1,0 +1,15 @@
+.Variables
+XXXX     X     2               Dummy 5                                                           \Q_STEP05
+XXXX     X     3               Dummy 5 approved                                                  \Q_STEP05_ACCEPTED
+XXXX     X     3               Dummy 5 validation                                                \Q_STEP05_OPENVALIDATION
+
+.Variable Q_STEP05, Visible=0
+
+{&&Include ../../Includes/IncValidation.fin}
+{&&Include ../../Includes/IncValidationKlein.fin}
+
+.Formulas NoTrend
+frciPeriodicallyForecastReportIndicator="Nee" 
+
+.Formulas Disabled
+venjbw2iReinvestmentReserve=True

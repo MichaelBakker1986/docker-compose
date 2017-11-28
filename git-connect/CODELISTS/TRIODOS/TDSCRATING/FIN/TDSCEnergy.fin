@@ -1,0 +1,587 @@
+{&&Language=English}
+$>Renewable Energy Scorecard<$
+
+.ModelVersion          1.5.3
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear-1,Years=3,MaxTsY=12,TsY=12,TsY2=12,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)  ; v1.1 "hist" weg op verzoek Jacqueline (kan ook concept zijn)
+
+.Sheet   1,Title="main sheet",Period=MainPeriod
+
+.Variables
+PP       X     0               "$>Renewable Energy Scorecard<$ v#CompactModelVersion#"                       \Root
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+.Variables
+;==========================================================================================================================================
+; Q_ROOT Kredietaanvraagmodel
+
+PP      1N C 1 1  +            "$>Renewable Energy Scorecard<$"                                              \Q_ROOT
+
+.Choices
+Q_ROOT                         = "0:$>Incomplete filled<$.|1:$>Complete filled<$."
+
+.Formulas NoTrend
+Q_ROOT                         = If( Not( (Q_Map01[1]=0) Or (Q_Map02[1]=0) Or (Q_Map03[1]=0) ) Or ( Length(&Q_WARNING_GLOBAL[1])>0)   ,1,0)
+
+.Variables
+;================================================================================================== MAP 1
+; Gekoppelde gegevens (1)
+
+PP      1N C   2  +            "General data"                                                      \Q_Map01
+;C De gegevens in dit scherm worden automatisch opgehaald en getoond en zijn niet overschrijfbaar. Indien een gegeven niet juist is, laat dit dan in het bronsysteem aanpassen. Gebruik eventueel in de tussentijd het toelichtingen veld.
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 1<$                                              \Q_Map01_WARNING
+PP      1A     3               $>Info bij stap 1<$                                                 \Q_Map01_INFO
+PP      1A     3               $>Validatie stap 1<$                                                \Q_Map01_VALIDATION
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Algemene gegevens
+
+PP      1N     3               "ID Entry"                                                          \Q_Map01_Algemeen
+
+PP      1A     4               "$>Customer Name<$"                                                 \BorrowerLegalName=FPS_VAR_Naam
+PP      1A     4               "$>Relation Number<$"                                               \BorrowerId=FPS_VAR_Relatienummer
+PI      1A     4               "$>Credit Agreement Number<$"              									       \CreditNumber
+PI      1N D   4               "$>Financial as of (Date)<$"              									         \FinancialAsOfDate
+PI      1A     4               "$>Analyst (Relationship manager)<$"                                \Analyst
+PP      1N C   4               "$>Sector<$"                         													     \Industry
+PP      1A     4               $>Modelversion:<$                                                   \=Q_ModelVersion
+PP      1A     4               $>Parameters version:<$                                             \=Q_MatrixVersion
+
+.Variable BorrowerLegalName  , InputRequired=1
+.Variable BorrowerId         , InputRequired=1
+.Variable FinancialAsOfDate  , InputRequired=1
+.Variable Analyst            , InputRequired=1
+.Variable Industry           , InputRequired=1
+
+.Formulas Notrend
+Industry = 18
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 1
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map01_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (1)<$                                    \Q_Map01_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (1)<$                          \Q_Map01_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X))")
+Q_Map01_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map01                        = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map01_VALIDATION             =
+
+
+.Choices
+Q_Map01                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 2
+; Gekoppelde gegevens (2)
+
+PP      1N C   2  +            $>Factor Data<$                                                     \Q_Map02
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 2<$                                              \Q_Map02_WARNING
+PP      1A     3               $>Info bij stap 2<$                                                 \Q_Map02_INFO
+PP      1A     3               $>Validatie stap 2<$                                                \Q_Map02_VALIDATION
+
+;PP      1N     3               $>Factor Entry<$
+PP      1N     3               $>Sponsor<$
+PI      1N C  -4               $>Sponsor Financial Strength<$                                      \VAR01
+C Sponsor Financial Strength[BR][/BR]The strength of the sponsors financial capacity. [BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Strong:  Highly diversified portfolio and with enough returns to more than compensate the potential loss of this project. In case of a corporation a rating above investment grade is expected[BR][/BR]2. Adequate:  Strong portfolio (individual) or Balance Sheet (Corporation) that allows some maneuver capacity to support the project. A good rating although below the investment grade is expected (Ba equivalent range in Moody’s rating scale)[BR][/BR]3. Weak:  Sponsor with low creditworthiness or with very low extra resources[BR][/BR]4. Very Weak:  All the Sponsors resources are committed to  this project or the returns of this project are essential to the financial capacity of the Sponsor[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR01Memo
+PI      1N C  -4               $>Management Quality<$                                              \VAR02
+C Management Quality[BR][/BR]How does the quality of management rate, taking into account if there is a separated management team, or if the sponsor is also managing the day to day operations.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Very High:  Sponsor is managing directly the day to day operations of the project and his management skills are very high[BR][/BR]2. High:  High management skills, above market average standard, by the management team or the sponsor[BR][/BR]3. Medium:  Average management quality team or Sponsor when compared the remaining market participants[BR][/BR]4. Low:  Low management skills, below market average standard, by the management team or the sponsor[BR][/BR]5. Very Low:  Inexperienced or very low skilled management Team / Sponsor[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR02Memo
+PP      1N     3               $>Legal<$
+PI      1N C  -4               $>Enforceability of Contracts<$                       							 \VAR03
+C Enforceability of Contracts [BR][/BR]Are the contracts clear and considered to comprehensively cover all the relevant aspects, including all the Project Finance third parties and not only the Off Taker, and what is the corresponding enforceability given the legal framework of the relevant country.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Excellent:  Easily enforceable in a short period[BR][/BR]2. Good:  Easily enforceable in a reasonable period[BR][/BR]3. Adequate:  Moderately enforceable in a reasonable period[BR][/BR]4. Poor:  Difficult to enforce[BR][/BR]5. Nonexistent:  Not enforceable[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR03Memo
+PP      1N     3               $>Economics<$
+PI      1N C  -4               $>Cash Flow Predictability<$                       								 \VAR04
+C Cash Flow Predictability[BR][/BR]Determine the degree of exposure to movements in price and volume for both revenues and costs, and the nature and extent of any mismatch between costs and revenues.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. High:  Extremely high predictability of net cash flows. No mismatch. [BR][/BR]2. Medium:  High degree of predictability of net cash flows. Minor mismatches.[BR][/BR]3. Low:  Good degree of predictability. Mismatches are manageable and/or relatively short lived.[BR][/BR]4. Very Low:  Some degree of uncertainty and predictability of net cash flows. Mismatches can be material and/or prolonged.[BR][/BR]5. Uncertain:  Highly uncertain net cash flows[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR04Memo
+PI      1N C  -4               $>Price Agreement<$                       		    							  	 \VAR05
+C Price Agreement[BR][/BR]Assess if a pre-established price agreement exists and the strength of that contract. Mainly the duration of the contract, the price associated (if it is above market rate or not) and how much of the total project production it covers.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Excellent:  Profitable price agreement, well above market rate, (Subsidy or FIT) for entire life project[BR][/BR]2. Good:  Good price agreement, above market rate, (Subsidy or FIT) for loan term + 3 yrs[BR][/BR]3. Adequate:  Committed price agreement (Subsidy or FIT), in line with market rate, for loan term[BR][/BR]4. Poor:  Price agreements do not cover the total of production volume or the do not cover the entire loan term[BR][/BR]5. Nonexistent:  No price agreement in place and totally dependent of merchant price[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR05Memo
+PI      1N C  -4               $>Resource Risk<$       																						 \VAR06
+C Resource Risk[BR][/BR]Assess the intrinsic risk associated (volatility) with the resource used for power generation, taking the location of the resource also into consideration.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Low:  Good location with the expectation for low volatility of resource availability[BR][/BR]2. Medium:  Average volatility expected[BR][/BR]3. High:  High volatility resource[BR][/BR]4. Dependent:  High volatility of the resource and there are periods of possible shortage of resource[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR06Memo
+PP      1N     3               $>Operation and Maintenance<$
+PI      1N C  -4               $>Quality of Suppliers<$                         									 \VAR07
+C Quality of Suppliers[BR][/BR]Assess the quality of the suppliers of the project, taking into consideration both qualitative and financial aspects.[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Very High:  Suppliers are ranked among the best in their fields[BR][/BR]2. Medium:  Average market standard suppliers[BR][/BR]3. Low:  Below market standard suppliers[BR][/BR]4. Inexperienced:  Suppliers are new in this market[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR07Memo
+PI      1N C  -4               $>Warranty Package<$                       										     \VAR08
+C Warranty Package[BR][/BR]Measure the quality of the Warranty Package and the extent of the coverage. [BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. High:  Extensive coverage by high quality insurers/suppliers that is above industry standards[BR][/BR]2. Medium:  Normal standards that are in line with the Industry standards[BR][/BR]3. Low:  Reduced coverage and/or below average quality[BR][/BR]4. Very Low:  Clearly below the industry standards and that can put the project at risk in the case something goes wrong[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR08Memo
+PI      1N C  -4               $>Availability of O&M<$                     												 \VAR09
+C Availability of O&M[BR][/BR]Measure the availability of O&M, the length of the contracts in place and what would be the likelihood of getting a new O&M in case the current terminates. [BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. High:  The O&M necessities are straightforward and there are several other players on the market that can give similar coverage[BR][/BR]2. Medium:  Although it would be very difficult to maintain current service quality there are possibilities on the market[BR][/BR]3. Low:  Very difficult to get another O&M provider[BR][/BR]4. Very Low:  The project, due to is complexity, is highly dependent on the current O&M scheme[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR09Memo
+PI      1N C  -4               $>Technology Track Record<$                       									 \VAR10
+C Technology Track Record[BR][/BR]Measure technology track record and the complexity of the final solution in place (interconnection of all the project components).[BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Very High:  Proven technology with reliable performance. Examples of failure are rare[BR][/BR]2. High:  Proven technology with reliable performance but the existence of some new interconnections between components increases the risk. Some examples of failure[BR][/BR]3. Medium:  Technology with good performance but without sufficient track record to fully attest it’s reliability[BR][/BR]4. Low:  Technology with some cases of underperformance or were doubts on the interconnection of components increases severely the risk. More examples of failure than success[BR][/BR]5. Very Low:  Poor performance or high doubts in terms of Technology complexity and the interconnection between the several components. Few known examples of success[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR10Memo
+PP      1N     3               $>Regulation<$
+PI      1N C  -4               $>Regulation Impact<$                    													 \VAR11
+C Regulation Impact[BR][/BR]Assess the potential impact to the project of changes in regulation/taxes, especially the impact in the subsidies that the project currently receives. [BR][/BR][BR][/BR]Clarification on the factors responses are as follows:[BR][/BR]1. Positive:  The outlined changes to regulation/tax are expected to have a positive impact in the project cash flows[BR][/BR]2. Residual:  The final energy price has a very reduced amount of subsidies/tax benefits and any eventual change will not affect the project cash flows[BR][/BR]3. Negative:  The final energy price has a significant amount of subsidies/tax benefits and the cash flow of the project will be negatively affected[BR][/BR]4. Very Negative:  The final energy price has a very high percentage of subsidies/tax benefits and the economics of the project will be severely affected [BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR11Memo
+PP      1N     3               $>Quantitative Factors<$
+PI      1N C  -4               $>DSCR (average)<$                         												 \VAR12
+C DSCR (average)[BR][/BR]The DSCR is defined as Cash Flow Available for Debt Service (CFADS), divided by the scheduled forward interest and principal payments, taking in account the last projection for the project and calculated over the term of the debt. The ratio captures the level of cash flow cushion available to meet the project’s ongoing debt service obligations taking into consideration the intrinsic cash flow generation ability of a project. For more information, please consult the ‘Cashflow_Model_Business_ Requirements’ document.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR12Memo
+PI      1N C  -4               $>DSCR (minimum)<$                     														 \VAR13
+C DSCR (minimum)[BR][/BR]The DSCR is defined as Cash Flow Available for Debt Service (CFADS), divided by the scheduled forward interest and principal payments, taking in account the last projection for the project and calculated over the term of the debt. The ratio captures the level of cash flow cushion available to meet the project’s ongoing debt service obligations taking into consideration the intrinsic cash flow generation ability of a project. For more information, please consult the ‘Cashflow_Model_Business_ Requirements’ document.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR13Memo
+PI      1N C  -4               $>IRR<$                       																			 \VAR14
+C IRR[BR][/BR]Incorporate the Internal Rate of Return for the project into the scorecard. For more information, please consult the ‘Cashflow_Model_Business_Requirements’ document.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR14Memo
+PI      1N C  -4               $>PLCR<$               																						 \VAR15
+C PLCR[BR][/BR]The project life coverage ratio is the ratio of the net present value of the CFADS available over the remaining full life of the project to the outstanding debt balance in the period. We define as ‘full life’ the technical life of the project. For uniformity purposes, we consider the remaining technical life of the project a general rule to be 15 years for wind projects and 25 years for solar projects. Exceptions to this rule are possible if applicable for any particular case. For more information, please consult the ‘Cashflow_Model_Business_Requirements’ document.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                     \VAR15Memo
+
+
+.Choices
+VAR01     =  "1:Strong|2:Adequate|3:Weak|4:Very Weak|"
+VAR02     =  "1:Very High|2:High|3:Medium|4:Low|5:Very Low|"
+VAR03     =  "1:Excellent|2:Good|3:Adequate|4:Poor|5:Nonexistent|"
+VAR04     =  "1:High|2:Medium|3:Low|4:Very Low|5:Uncertain|"
+VAR05     =  "1:Excellent|2:Good|3:Adequate|4:Poor|5:Nonexistent|"
+VAR06     =  "1:Low|2:Medium|3:High|4:Dependent|"
+VAR07     =  "1:Very High|2:Medium|3:Low|4:Inexperienced|"
+VAR08     =  "1:High|2:Medium|3:Low|4:Very Low|"
+VAR09     =  "1:High|2:Medium|3:Low|4:Very Low|"
+VAR10     =  "1:Very High|2:High|3:Medium|4:Low|5:Very Low|"
+VAR11     =  "1:Positive|2:Residual|3:Negative|4:Very Negative|"
+VAR12     =  "1:< 1.11|2:1.11 – 1.20|3:1.21 – 1.30|4:1.31 – 1.40|5:1.41 – 1.80|6:>1.80|"
+VAR13     =  "1:< 1.00|2:1.00 – 1.10|3:1.10 – 1.20|4:1.21 – 1.30|5:1.31 – 1.40|6:1.41 – 1.80|7:>1.80|"
+VAR14     =  "1:< 2.5%|2:2.5% - 6.0%|3:6.1% - 8.0%|4:8.1% - 10.0%|5:> 10.0%|"
+VAR15     =  "1:< 1.10|2:1.10 – 1.25|3:1.26 – 1.40|4:1.41 – 1.60|5:1.61 – 1.90|6:>1.90|"
+
+.Variable VAR01, InputRequired=1
+.Variable VAR02, InputRequired=1
+.Variable VAR03, InputRequired=1
+.Variable VAR04, InputRequired=1
+.Variable VAR05, InputRequired=1
+.Variable VAR06, InputRequired=1
+.Variable VAR07, InputRequired=1
+.Variable VAR08, InputRequired=1
+.Variable VAR09, InputRequired=1
+.Variable VAR10, InputRequired=1
+.Variable VAR11, InputRequired=1
+.Variable VAR12, InputRequired=1
+.Variable VAR13, InputRequired=1
+.Variable VAR14, InputRequired=1
+.Variable VAR15, InputRequired=1
+
+
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 2
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map02_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (2)<$                                    \Q_Map02_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (2)<$                          \Q_Map02_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map02_REQUIREDVARS           = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X))")
+Q_Map02_ENTEREDREQUIREDVARS    = FesExpression("Count(X,SelectDescendants(Q_Map02, Q_Map02_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map02                        = (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS)
+Q_Map02_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map02_INFO                   = &If(Q_Map02[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map02_VALIDATION             =
+
+.Choices
+Q_Map02                        = Q_ROOT
+
+.Variables
+;================================================================================================== MAP 3
+; Algemene gegevens
+
+PP      1N C   2  +            $>Score<$                                                          \Q_Map03
+
+;---------------
+; WARNING PANELS
+PP      1A   1 3               $>Warning voor map 3<$                                              \Q_Map03_WARNING
+PP      1A     3               $>Info bij stap 3<$                                                 \Q_Map03_INFO
+PP      1A     3               $>Validatie stap 3<$                                                \Q_Map03_VALIDATION
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Sector
+
+PX      1N     3               $>Score<$                                                         \Q_Map03_Paragraaf01
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =VAR01                                                             \VAR01_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=VAR01
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \VAR01_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \VAR01_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=VAR01_Contribution
+
+.Formulas Notrend
+VAR01_Contribution   = OnER(VAR01_Score * VAR01_Weight,NA)
+VAR01_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar01",VAR01,1)
+VAR01_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",1,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var02                                                             \Var02_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var02
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var02_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var02_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var02_Contribution
+
+.Formulas Notrend
+Var02_Contribution   = OnER(Var02_Score * Var02_Weight,NA)
+Var02_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar02",VAR02,1)
+Var02_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",2,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var03                                                             \Var03_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var03
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var03_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var03_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var03_Contribution
+
+.Formulas Notrend
+Var03_Contribution   = OnER(Var03_Score * Var03_Weight,NA)
+Var03_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar03",VAR03,1)
+Var03_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",3,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var04                                                             \Var04_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var04
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var04_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var04_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var04_Contribution
+
+.Formulas Notrend
+Var04_Contribution   = OnER(Var04_Score * Var04_Weight,NA)
+Var04_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar04",VAR04,1)
+Var04_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",4,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var05                                                             \Var05_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var05
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var05_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var05_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var05_Contribution
+
+.Formulas Notrend
+Var05_Contribution   = OnER(Var05_Score * Var05_Weight,NA)
+Var05_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar05",VAR05,1)
+Var05_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",5,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var06                                                             \Var06_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var06
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var06_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var06_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var06_Contribution
+
+.Formulas Notrend
+Var06_Contribution   = OnER(Var06_Score * Var06_Weight,NA)
+Var06_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar06",VAR06,1)
+Var06_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",6,1)
+
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var07                                                             \Var07_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var07
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var07_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var07_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var07_Contribution
+
+.Formulas Notrend
+Var07_Contribution   = OnER(Var07_Score * Var07_Weight,NA)
+Var07_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar07",VAR07,1)
+Var07_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",7,1)
+
+
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var08                                                             \Var08_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var08
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var08_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var08_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var08_Contribution
+
+.Formulas Notrend
+Var08_Contribution   = OnER(Var08_Score * Var08_Weight,NA)
+Var08_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar08",VAR08,1)
+Var08_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",8,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var09                                                             \Var09_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var09
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var09_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var09_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var09_Contribution
+
+.Formulas Notrend
+Var09_Contribution   = OnER(Var09_Score * Var09_Weight,NA)
+Var09_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar09",VAR09,1)
+Var09_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",9,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var10                                                             \Var10_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var10
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var10_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var10_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var10_Contribution
+
+.Formulas Notrend
+Var10_Contribution   = OnER(Var10_Score * Var10_Weight,NA)
+Var10_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar10",VAR10,1)
+Var10_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",10,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var11                                                             \Var11_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var11
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var11_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var11_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var11_Contribution
+
+.Formulas Notrend
+Var11_Contribution   = OnER(Var11_Score * Var11_Weight,NA)
+Var11_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar11",VAR11,1)
+Var11_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",11,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var12                                                             \Var12_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var12
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var12_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var12_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var12_Contribution
+
+.Formulas Notrend
+Var12_Contribution   = OnER(Var12_Score * Var12_Weight,NA)
+Var12_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar12",VAR12,1)
+Var12_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",12,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var13                                                             \Var13_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var13
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var13_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var13_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var13_Contribution
+
+.Formulas Notrend
+Var13_Contribution   = OnER(Var13_Score * Var13_Weight,NA)
+Var13_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar13",VAR13,1)
+Var13_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",13,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var14                                                             \Var14_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var14
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var14_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var14_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var14_Contribution
+
+.Formulas Notrend
+Var14_Contribution   = OnER(Var14_Score * Var14_Weight,NA)
+Var14_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar14",VAR14,1)
+Var14_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",14,1)
+
+.Variables
+;------------------------------
+PP    0 1N     4  +            =Var15                                                             \Var15_Contribution
+PP      1N C   5               $>Assessment<$                                                     \=Var15
+PP    0 1N     5  +            $>Sub-Factor Score<$                                               \Var15_Score
+PP    2 1N %   5  +            $>Default Weight<$                                                 \Var15_Weight
+PP    2 1N     5               $>Contribution<$                                                   \=Var15_Contribution
+
+.Formulas Notrend
+Var15_Contribution   = OnER(Var15_Score * Var15_Weight,NA)
+Var15_Score          = MatrixLookup("TRIODOS_Parameters.xls","EnergyVar15",VAR15,1)
+Var15_Weight         = MatrixLookup("TRIODOS_Parameters.xls","WeightEnergy",15,1)
+
+
+.Variables
+;------------------------------
+PP    0=1N    -4  +            $>Subtotal<$                                                      \VarSubTotal
+
+PX      1N     3               $>Rating<$                                                         \Q_Map03_Paragraaf02
+PP    0 1N     4  +            $>Internal Rating<$																								\InternalRating
+PP    4 1N %   4  +            $>Associated PD<$		  																						\RatingPD
+
+.Formulas Notrend
+InternalRating      = If(Complete=1,MatrixLookup("TRIODOS_Parameters.xls","RatingEnergy",VarSubTotal,1),NA)
+RatingPD						= If(Complete=1,MatrixLookup("TRIODOS_Parameters.xls","RatingEnergy",VarSubTotal,2),NA)
+
+.Variables
+;------------------------------
+PX      1N     3               $>Notching Factors<$                                               \Q_Map03_Paragraaf03
+;PP    0 1N     4               =InternalRating																										\=InternalRating
+PI      1N C   4  +            $>Construction Risk<$           														 				\Notch01
+C Construction Risk[BR][/BR]Possibility to adjust the final rating to recognise cases where there is construction risk. This should be done by analysing the raw construction risk, the engineering and procurement contract (EPC) and the construction period liquidity. 0 = no construction risks, 1 = standard construction risk, 2 = increased construction risk. When using this notching factor, it should be explained what is considered as the standard and why the construction risk for a particular case deviates from the standard.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch01Memo
+PI      1N C   4  +            $>Liquidity Risk<$            			                          			\Notch02
+C Liquidity Risk[BR][/BR]Possibility to adjust the final rating to recognise a stronger or weaker liquidity position than average. This should be done by comparing the Debt Service Reserve and other liquidity reserve accounts with what is typically expected for such projects. When adjusting the rating with this notching factor, it should be clearly specified what is an average liquidity position, and when the liquidity risk is consider stronger or weaker than the average.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch02Memo
+PI      1N C   4  +            $>Extra Covenants<$            								              			\Notch03
+C Extra Covenants[BR][/BR]Possibility to adjust the final rating to recognise the extra covenants provided by the sponsor, that allows an extra protection against default. When using this notching factor, it should be clearly specified what is/are the extra covenant/s and what is the ‘standard’, i.e. no extra covenants.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch03Memo
+PI      1N C   4  +            $>Regulation Stability<$               		                   			\Notch04
+C Regulation Stability[BR][/BR]Possibility to adjust the stability in the regulation. It does not connect to an individual project, but rather to the overall risk level in each regulatory environment, and especially the possibility of occurring changes in the near future. To be filled only centrally at the EB CC.[BR][/BR]
+PI      1A M   4               $>Explanation<$                                                    \Notch04Memo
+PI      1N C  -4  +            $>Default<$                                                        \Default
+PP    0 1N    -4  +            $>FinalRating<$                                                   \FinalRating
+PP    4 1N %   4  +            $>FinalAssociatedPD<$				  																	\FinalAssociatedPD
+
+PI      1A M   4               $>Overall explanation<$                                            \OverallExplanation
+
+.Choices
+Notch01 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|"
+Notch02 =  "1:Downgrade by 1|0:No notch|-1:Upgrade by 1|"
+Notch03 =  "0:No notch|-1:Upgrade by 1|-2:Upgrade by 2|"
+Notch04 =  "2:Downgrade by 2|1:Downgrade by 1|0:No notch|"
+Industry  =  file "Triodos-Industy.fib"
+Default =  "1:Yes|0:No"
+
+
+.Formulas Notrend
+Default = 0
+FinalRating = IF(Default = 1, 14, IF(Default = 0,(If(InternalRating = NA, NA, (Min(13, Max(1,InternalRating+Notch01+Notch02+Notch03+Notch04))))), NA))
+FinalAssociatedPD = If(Complete=1, MatrixLookup("TRIODOS_Parameters.xls","NewRatingPDEnergy",FinalRating,1),NA)
+
+Notch01 = 0
+Notch02 = 0
+Notch03 = 0
+Notch04 = 0
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Warning voor map 3
+
+.Variables
+XX      1N     3               $>Hulpvariabelen<$                                                  \Q_Map03_Hulpvariabelen
+PP      1N     4               $>Aantal verplichte velden (3)<$                                    \Q_Map03_REQUIREDVARS
+PP      1N     4               $>Aantal ingevulde verplichte velden (3)<$                          \Q_Map03_ENTEREDREQUIREDVARS
+
+.Formulas Notrend
+Q_Map03_REQUIREDVARS            = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_REQUIREDVARS),InputRequired(X))")
+Q_Map03_ENTEREDREQUIREDVARS     = FesExpression("Count(X,SelectDescendants(Q_Map03, Q_Map03_REQUIREDVARS),InputRequired(X) And DataAvailable(X))")
+Q_Map03                         = (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS)
+Q_Map03_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map03_INFO                   = &If(Q_Map03[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&"")
+;Q_Map03_VALIDATION             =
+
+.Choices
+Q_Map03                        = Q_ROOT
+
+
+
+.Variables
+;================================================================================================== Result
+; Resultaat
+; wordt pas getoond na definitief maken
+
+PP      1A   1 2               "Result"                                                            \Q_RESULT
+
+PX      1N     3               $>Rating<$                                                          \Q_Map04_Paragraaf01
+PP    0 1N    -4               =FinalRating                                                        \=FinalRating
+PP    4 1N %   4               =FinalAssociatedPD                                                  \=FinalAssociatedPD
+
+
+PX      1N     3               $>Modelversion<$                                                    \Q_Map04_Paragraaf02
+PP      1A     4               =Q_ModelType                                                        \=Q_ModelType
+PP      1A     4               =Q_ModelVersion                                                     \=Q_ModelVersion
+PP      1A     4               =Q_MatrixVersion                                                    \=Q_MatrixVersion
+
+PX      1N     3               $>Users<$                                                           \Q_Map04_Paragraaf03
+PP      1N D   4               =Q_STATUS_STARTED_ON                                                \=Q_STATUS_STARTED_ON
+PP      1A     4               =Q_STATUS_STARTED_BY                                                \=Q_STATUS_STARTED_BY
+PP      1A     4               =Q_STATUS_STARTED_BY_NAME                                           \=Q_STATUS_STARTED_BY_NAME
+PP      1N D   4               =Q_STATUS_FINAL_ON                                                  \=Q_STATUS_FINAL_ON
+PP      1A     4               =Q_STATUS_FINAL_BY                                                  \=Q_STATUS_FINAL_BY
+PP      1A     4               =Q_STATUS_FINAL_BY_NAME                                             \=Q_STATUS_FINAL_BY_NAME
+
+.Variables
+;================================================================================================== Result
+; Q_Status
+;
+
+PI      1N C 1 2               $>Status<$                                                       \Q_STATUS
+PI      1N D   2               $>Final:<$                                                       \Q_STATUS_FINAL_ON
+PI      1A     2               $>Final by:<$                                                    \Q_STATUS_FINAL_BY
+PI      1A     2               $>Final by:<$                                                    \Q_STATUS_FINAL_BY_NAME
+PI      1N D   2               $>Created:<$                                                     \Q_STATUS_STARTED_ON
+PI      1A     2               $>Created by:<$                                                  \Q_STATUS_STARTED_BY
+PI      1A     2               $>Created by:<$                                                  \Q_STATUS_STARTED_BY_NAME
+PI      1N D   2  +            $>Last modified<$                                                \Q_STATUS_MODIFIED_ON
+PP      1A     2  +            $>Modelversion:<$                                                \Q_ModelVersion
+PP      1A     2  +            $>Modeltype:<$                                                   \Q_ModelType
+PP      1A     2  +            $>Parameters version:<$                                          \Q_MatrixVersion
+
+PI      1N C   2               $>Previous<$                                                     \Q_PREVIOUS_BUTTON_VISIBLE
+PI      1N C   2               $>Next<$                                                         \Q_NEXT_BUTTON_VISIBLE
+PI      1N C   2               $>Draft report<$                                                 \Q_CONCEPT_REPORT_VISIBLE
+PI      1N C   2               $>Definitive report<$                                            \Q_FINAL_REPORT_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_STATUS                       = "0:$>Active<$|1:$>Final<$"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_STATUS                       = 0
+Q_STATUS_MODIFIED_ON           = Now
+Q_ModelVersion                 = "#CompactModelVersion#"                                                                                           ; EJS: mooier is (maar kan niet in webversie): &SysVar("ModelVersion")
+Q_MatrixVersion                = &MatrixLookup("TRIODOS_Parameters.xls","Version",1,3)
+Q_ModelType                    = "Energy"
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+
+.Variables
+;================================================================================================== Restricties
+; Restricties
+
+XX      1A M   1               "Restricties"                                                       \Q_Restricties
+PP      1A     2               "Mededeling"                                                        \Q_Restrictie01
+PP      1A M 1 2               "Restricties tekst"                                                 \Q_RestrictiesCombi
+
+.Formulas NoTrend
+Q_Restrictie01                 = &If( 1=0 ,"[BR][/BR]- Mededeling","")
+Q_RestrictiesCombi             = &Q_Restrictie01
+Q_Restricties                  = &If(Length(&Q_RestrictiesCombi[1])>0,&"[BR][/BR]De volgende variabelen zijn niet correct gevuld:"&Q_RestrictiesCombi,"")
+
+
+.Variables
+;================================================================================================== Q_HULPVARS
+; Knock-outs
+
+PP      1A M   2               "Knockout(s)?"                                                      \Q_WARNING_GLOBAL
+PP    0 1N     2               "COMPLETE"                                                          \COMPLETE
+
+.Formulas NoTrend
+Complete = If((Q_MAP01=1) AND (Q_MAP02=1),1,0)
+
+
+.Quit
+

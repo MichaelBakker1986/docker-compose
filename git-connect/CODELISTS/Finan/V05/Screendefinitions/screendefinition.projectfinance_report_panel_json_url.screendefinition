@@ -1,0 +1,33 @@
+{
+	"viewType":"WIZARD",
+	"name":"Root",
+	"variableName":"Q_ROOT",
+	"metaData":{
+		"onlyMoveForwardIfAllPreviousStepsAreDone":true,
+		"alwaysShowReportButton":true
+	},
+	"children":[
+		{
+			"viewType":"CONTAINER",
+			"name":"ReportStep",
+			"description":"Rapportage",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel1",
+					"description":"CustomPanel1",
+					"metaData":{
+						"providertype":"REPORT_PANEL"
+					},
+					"reporttypes":[
+						"projectfinanciering"
+					]
+
+				}
+
+			]
+
+		}
+
+	]
+}

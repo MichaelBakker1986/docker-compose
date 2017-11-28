@@ -1,0 +1,209 @@
+{&&Language=English}
+
+.Variables
+
+PI    0 1N     1               $>Subpopulatie<$                                \LSM_SubPopulatie
+
+PP    0 1N     2               $>3 SANDERS & STAFF EST<$                       \LSM_SubPop_VW01
+PP    0 1N     2               $>6 COMPANIES<$                                 \LSM_SubPop_VW02
+PP    0 1N     2               $>7 RUNNING SK SB HY<$                          \LSM_SubPop_VW03
+PP    0 1N     2               $>8 AUTOM. AFHAndELING KS<$                     \LSM_SubPop_VW04
+PP    0 1N     2               $>9 SC_QUAL_CODE>=10 UNEST 03<$                 \LSM_SubPop_VW05
+PP    0 1N     2               $>10 SC_QUAL_CODE>=10 UNEST 4+<$                \LSM_SubPop_VW06
+PP    0 1N     2               $>11 SC_QUAL_CODE>=10 EST<$                     \LSM_SubPop_VW07
+PP    0 1N     2               $>14 QC=05 07 09<$                              \LSM_SubPop_VW08
+PP    0 1N     2               $>17 REM CODE 3+ UNEST 0-3<$                    \LSM_SubPop_VW09
+PP    0 1N     2               $>18 REM CODE 3+ UNEST 4+<$                     \LSM_SubPop_VW10
+PP    0 1N     2               $>19 REM CODE 3+ EST<$                          \LSM_SubPop_VW11
+PP    0 1N     2               $>23 REM CODE 2 UNEST 0-3<$                     \LSM_SubPop_VW12
+PP    0 1N     2               $>24 REM CODE 2 UNEST 4+ CASH<$                 \LSM_SubPop_VW13
+PP    0 1N     2               $>25 REM CODE 2 UNEST 4+ CRED<$                 \LSM_SubPop_VW14
+PP    0 1N     2               $>26 REM CODE 2 EST REACT<$                     \LSM_SubPop_VW15
+PP    0 1N     2               $>27 REM CODE 2 EST NON REACT<$                 \LSM_SubPop_VW16
+PP    0 1N     2               $>20 BAD BKR UNEST 0-3<$                        \LSM_SubPop_VW17
+PP    0 1N     2               $>21 BAD BKR UNEST 4+<$                         \LSM_SubPop_VW18
+PP    0 1N     2               $>22 BAD BKR EST<$                              \LSM_SubPop_VW19
+PP    0 1N     2               $>28 REJECTS UNEST 0-3 CASH<$                   \LSM_SubPop_VW20
+PP    0 1N     2               $>29 REJECTS UNEST 0-3 CREDIT<$                 \LSM_SubPop_VW21
+PP    0 1N     2               $>30 REJECTS UNEST 4+ CASH<$                    \LSM_SubPop_VW22
+PP    0 1N     2               $>31 REJECTS UNEST 4+ CREDIT<$                  \LSM_SubPop_VW23
+PP    0 1N     2               $>32 REJECTS ESTABLISHED<$                      \LSM_SubPop_VW24
+PP    0 1N     2               $>33 QC 02 04-UNEST 0-3 PAYM=0<$                \LSM_SubPop_VW25
+PP    0 1N     2               $>34 QC 02 04-UNEST 0-3 PAYM>0<$                \LSM_SubPop_VW26
+PP    0 1N     2               $>35 QC 02 04 - UNEST 4+ CASH<$                 \LSM_SubPop_VW27
+PP    0 1N     2               $>36 QC 02 04 - UNEST 4+ CRED<$                 \LSM_SubPop_VW28
+PP    0 1N     2               $>37 QC 02 04 - EST REACT<$                     \LSM_SubPop_VW29
+PP    0 1N     2               $>38 QC 02 04 - EST NON REACT<$                 \LSM_SubPop_VW30
+PP    0 1N     2               $>39 UNEST 0-1 RO PAY=0 CASH<$                  \LSM_SubPop_VW31
+PP    0 1N     2               $>40 UNEST 0-1 RO PAY=0 CREDIT<$                \LSM_SubPop_VW32
+PP    0 1N     2               $>41 UNEST 2-3 RO AK>0 CASH<$                   \LSM_SubPop_VW33
+PP    0 1N     2               $>42 UNEST 2-3 RO AK>0 CREDIT<$                 \LSM_SubPop_VW34
+PP    0 1N     2               $>43 UNEST 0-3 RO PAY>0 CASH<$                  \LSM_SubPop_VW35
+PP    0 1N     2               $>44 UNEST 0-3 RO PAY>0 CREDIT<$                \LSM_SubPop_VW36
+PP    0 1N     2               $>45 UNEST 4+ RO CASH<$                         \LSM_SubPop_VW37
+PP    0 1N     2               $>46 UNEST 4+ RO CREDIT<$                       \LSM_SubPop_VW38
+PP    0 1N     2               $>1 REACT CASH TSR<6 & PAYM=0<$                 \LSM_SubPop_VW39
+PP    0 1N     2               $>47 REACTIVATORS CASH<$                        \LSM_SubPop_VW40
+PP    0 1N     2               $>2 REACT CRED TSR<6 & PAYM=0<$                 \LSM_SubPop_VW41
+PP    0 1N     2               $>48 REACTIVATOrS CREDIT<$                      \LSM_SubPop_VW42
+PP    0 1N     2               $>49 NON REACTIVATOrS CASH<$                    \LSM_SubPop_VW43
+PP    0 1N     2               $>50 N-REACT CRED -18 PAY<200<$                 \LSM_SubPop_VW44
+PP    0 1N     2               $>4 N-REACT L>5000 WBS EN AI<$                  \LSM_SubPop_VW45
+PP    0 1N     2               $>5 N-REACT L>5000 AI<$                         \LSM_SubPop_VW46
+PP    0 1N     2               $>12 N-REACT L>5000 WBS<$                       \LSM_SubPop_VW47
+PP    0 1N     2               $>13 N-REACT L>5000<$                           \LSM_SubPop_VW48
+PP    0 1N     2               $>15 N-REACT CRED 18+ PAYM>200<$                \LSM_SubPop_VW49
+PP    0 1N     2               $>99 CATCH-ALL SUB-POPULATION<$                 \LSM_SubPop_VW50
+
+.Formulas NoTrend
+LSM_SubPopulatie =If(LSM_SubPop_VW01 <> NA,LSM_SubPop_VW01,If(LSM_SubPop_VW02 <> NA,LSM_SubPop_VW02,If(LSM_SubPop_VW03 <> NA,LSM_SubPop_VW03,If(LSM_SubPop_VW04 <> NA,LSM_SubPop_VW04,If(LSM_SubPop_VW05 <> NA,LSM_SubPop_VW05,If(LSM_SubPop_VW06 <> NA,LSM_SubPop_VW06,If(LSM_SubPop_VW07 <> NA,LSM_SubPop_VW07,If(LSM_SubPop_VW08 <> NA,LSM_SubPop_VW08,If(LSM_SubPop_VW09 <> NA,LSM_SubPop_VW09,If(LSM_SubPop_VW10 <> NA,LSM_SubPop_VW10,If(LSM_SubPop_VW11 <> NA,LSM_SubPop_VW11,If(LSM_SubPop_VW12 <> NA,LSM_SubPop_VW12,If(LSM_SubPop_VW13 <> NA,LSM_SubPop_VW13,If(LSM_SubPop_VW14 <> NA,LSM_SubPop_VW14,If(LSM_SubPop_VW15 <> NA,LSM_SubPop_VW15,If(LSM_SubPop_VW16 <> NA,LSM_SubPop_VW16,If(LSM_SubPop_VW17 <> NA,LSM_SubPop_VW17,If(LSM_SubPop_VW18 <> NA,LSM_SubPop_VW18,If(LSM_SubPop_VW19 <> NA,LSM_SubPop_VW19,If(LSM_SubPop_VW20 <> NA,LSM_SubPop_VW20,If(LSM_SubPop_VW21 <> NA,LSM_SubPop_VW21,If(LSM_SubPop_VW22 <> NA,LSM_SubPop_VW22,If(LSM_SubPop_VW23 <> NA,LSM_SubPop_VW23,If(LSM_SubPop_VW24 <> NA,LSM_SubPop_VW24,If(LSM_SubPop_VW25 <> NA,LSM_SubPop_VW25,If(LSM_SubPop_VW26 <> NA,LSM_SubPop_VW26,If(LSM_SubPop_VW27 <> NA,LSM_SubPop_VW27,If(LSM_SubPop_VW28 <> NA,LSM_SubPop_VW28,If(LSM_SubPop_VW29 <> NA,LSM_SubPop_VW29,If(LSM_SubPop_VW30 <> NA,LSM_SubPop_VW30,If(LSM_SubPop_VW31 <> NA,LSM_SubPop_VW31,If(LSM_SubPop_VW32 <> NA,LSM_SubPop_VW32,If(LSM_SubPop_VW33 <> NA,LSM_SubPop_VW33,If(LSM_SubPop_VW34 <> NA,LSM_SubPop_VW34,If(LSM_SubPop_VW35 <> NA,LSM_SubPop_VW35,If(LSM_SubPop_VW36 <> NA,LSM_SubPop_VW36,If(LSM_SubPop_VW37 <> NA,LSM_SubPop_VW37,If(LSM_SubPop_VW38 <> NA,LSM_SubPop_VW38,If(LSM_SubPop_VW39 <> NA,LSM_SubPop_VW39,If(LSM_SubPop_VW40 <> NA,LSM_SubPop_VW40,If(LSM_SubPop_VW41 <> NA,LSM_SubPop_VW41,If(LSM_SubPop_VW42 <> NA,LSM_SubPop_VW42,If(LSM_SubPop_VW43 <> NA,LSM_SubPop_VW43,If(LSM_SubPop_VW44 <> NA,LSM_SubPop_VW44,If(LSM_SubPop_VW45 <> NA,LSM_SubPop_VW45,If(LSM_SubPop_VW46 <> NA,LSM_SubPop_VW46,If(LSM_SubPop_VW47 <> NA,LSM_SubPop_VW47,If(LSM_SubPop_VW48 <> NA,LSM_SubPop_VW48,If(LSM_SubPop_VW49 <> NA,LSM_SubPop_VW49,NA)))))))))))))))))))))))))))))))))))))))))))))))))
+
+; 3 SAndERS & STAFF EST
+LSM_SubPop_VW01 = NA                                ;; If( (SC_QUAL_CODE = 8) ,3,NA)
+
+; 6 COMPANIES
+LSM_SubPop_VW02 = If( (SC_QUAL_CODE = 6) ,6  ,NA)
+
+; 7 RUNNING SK SB HY
+LSM_SubPop_VW03 = If( (SC_NO_SK_SB_HY > 0) And (SC_NO_SK_SB_HY < 99998),7  ,NA)
+
+; 8 AUTOM. AFHAndELING KS
+LSM_SubPop_VW04 = If( (SC_QUAL_CODE = 10) Or (SC_QUAL_CODE = 12) Or (SC_QUAL_CODE = 13) Or (SC_QUAL_CODE = 14) Or (SC_QUAL_CODE = 16) Or (SC_QUAL_CODE = 22) Or (SC_QUAL_CODE = 23) Or (SC_QUAL_CODE = 24) Or (SC_QUAL_CODE = 25) Or (SC_QUAL_CODE = 26) Or (SC_QUAL_CODE = 30) Or (SC_QUAL_CODE = 40) Or (SC_QUAL_CODE = 44) Or (SC_QUAL_CODE = 62) Or (SC_QUAL_CODE = 68) Or (SC_QUAL_CODE = 71) Or (SC_QUAL_CODE = 31) Or (SC_QUAL_CODE = 32) Or (SC_QUAL_CODE = 33) Or (SC_QUAL_CODE = 34) Or (SC_QUAL_CODE = 35) Or (SC_QUAL_CODE = 36) Or (SC_QUAL_CODE = 48) Or (SC_QUAL_CODE = 57) Or (SC_QUAL_CODE = 60) Or (SC_QUAL_CODE = 64) Or (SC_QUAL_CODE = 65) Or (SC_QUAL_CODE = 20) Or (SC_QUAL_CODE = 52) Or (SC_QUAL_CODE = 58) Or (SC_QUAL_CODE = 90) Or (SC_QUAL_CODE = 91) Or (SC_QUAL_CODE = 93) Or (SC_QUAL_CODE = 94) Or (SC_QUAL_CODE = 97) Or (SC_QUAL_CODE = 99),8  ,NA)
+
+; 9 SC_QUAL_CODE>=10 UNEST 03
+LSM_SubPop_VW05 = If( ((SC_QUAL_CODE >= 10) And (SC_CST_TYP = 4) And (SC_NO_STMTS < 2)) Or ((SC_QUAL_CODE >= 10) And (SC_CST_TYP <> 4) And (SC_NO_STMTS < 4)),9  ,NA)
+
+; 10 SC_QUAL_CODE>=10 UNEST 4+
+LSM_SubPop_VW06 = If( ((SC_QUAL_CODE >= 10) And (SC_NO_STMTS < 7) And (SC_CST_TYP <> 4)) Or ((SC_QUAL_CODE >= 10) And (SC_SINCE_START < 13) And (SC_CST_TYP <> 4)),10 ,NA)
+
+; 11 SC_QUAL_CODE>=10 EST
+LSM_SubPop_VW07 = If( (SC_QUAL_CODE >= 10),11 ,NA)
+
+; 14 QC=05 07 09
+LSM_SubPop_VW08 = If( (SC_QUAL_CODE = 5) Or (SC_QUAL_CODE = 7) Or (SC_QUAL_CODE = 9),14 ,NA)
+
+; 17 REM CODE 3+ UNEST 0-3
+LSM_SubPop_VW09 = If( ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR >= 3) And (SC_REM_CODE_CR < 99999)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR >= 3) And (SC_REM_CODE_CR < 99999)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS >= 3) And (SC_REM_CODE_CS < 99999)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS >= 3) And (SC_REM_CODE_CS < 99999)),17 ,NA)
+
+; 18 REM CODE 3+ UNEST 4+
+LSM_SubPop_VW10 = If( ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR >= 3) And (SC_REM_CODE_CR < 99999)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR >= 3) And (SC_REM_CODE_CR < 99999)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS >= 3) And (SC_REM_CODE_CS < 99999)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS >= 3) And (SC_REM_CODE_CS < 99999)),18 ,NA)
+
+; 19 REM CODE 3+ EST
+LSM_SubPop_VW11 = If( ((SC_REM_CODE_CR >= 3) And (SC_REM_CODE_CR < 99999) And (SC_ARRY_AMT >= 11)) Or ((SC_REM_CODE_CS >= 3) And (SC_REM_CODE_CS < 99999) And (SC_ARRY_AMT >= 11)),19 ,NA)
+
+; 23 REM CODE 2 UNEST 0-3
+LSM_SubPop_VW12 = If( ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)),23 ,NA)
+
+; 24 REM CODE 2 UNEST 4+ CASH
+LSM_SubPop_VW13 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_CSH_CRD_IND = 1) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)),24 ,NA)
+
+; 25 REM CODE 2 UNEST 4+ CRED
+LSM_SubPop_VW14 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)),25 ,NA)
+
+; 26 REM CODE 2 EST REACT
+LSM_SubPop_VW15 = If(  ((SC_CST_TYP = 4) And (SC_SINCE_START < 13) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)) Or ((SC_SINCE_START < 13) And (SC_CST_TYP = 4) And (SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)),26 ,NA)
+
+; 27 REM CODE 2 EST NON REACT
+LSM_SubPop_VW16 = If(  ((SC_ARRY_AMT >= 11) And (SC_REM_CODE_CR = 2)) Or ((SC_ARRY_AMT >= 11) And (SC_REM_CODE_CS = 2)),27 ,NA)
+
+; 20 BAD BKR UNEST 0-3
+LSM_SubPop_VW17 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997)),20 ,NA)
+
+; 21 BAD BKR UNEST 4+
+LSM_SubPop_VW18 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 4) And (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997)),21 ,NA)
+
+; 22 BAD BKR EST
+LSM_SubPop_VW19 = If(  (SC_NO_BAD_BKR > 0) And (SC_NO_BAD_BKR < 99997),22 ,NA)
+
+; 28 REJECTS UNEST 0-3 CASH
+LSM_SubPop_VW20 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE <= 1)),28 ,NA)
+
+; 29 REJECTS UNEST 0-3 CREDIT
+LSM_SubPop_VW21 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_QUAL_CODE <= 1)),29 ,NA)
+
+; 30 REJECTS UNEST 4+ CASH
+LSM_SubPop_VW22 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE <= 1)),30 ,NA)
+
+; 31 REJECTS UNEST 4+ CREDIT
+LSM_SubPop_VW23 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_QUAL_CODE <= 1)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 4) And (SC_QUAL_CODE <= 1)),31 ,NA)
+
+; 32 REJECTS ESTABLISHED
+LSM_SubPop_VW24 = If(  (SC_QUAL_CODE <= 1),32 ,NA)
+
+; 33 QC 02 04-UNEST 0-3 PAYM=0
+LSM_SubPop_VW25 = If(  ((SC_QUAL_CODE = 2) And (SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0)) Or ((SC_QUAL_CODE = 4) And (SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0)) Or ((SC_QUAL_CODE = 2) And (SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 99998)) Or ((SC_QUAL_CODE = 4) And (SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 99998)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997) And (SC_QUAL_CODE = 2)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_DEL_CSH > 0) And (SC_CURR_COMM_DEL_CSH < 99997) And (SC_QUAL_CODE = 2)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997) And (SC_QUAL_CODE = 4)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_DEL_CSH > 0) And (SC_CURR_COMM_DEL_CSH < 99997) And (SC_QUAL_CODE = 4)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997) And (SC_QUAL_CODE = 2)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_DEL_CRD > 0) And (SC_CURR_COMM_DEL_CRD < 99997) And (SC_QUAL_CODE = 2)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997) And (SC_QUAL_CODE = 4)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_DEL_CRD > 0) And (SC_CURR_COMM_DEL_CRD < 99997) And (SC_QUAL_CODE = 4)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_REM_CODE_CS > 0) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_REM_CODE_CS > 0) And (SC_QUAL_CODE = 4)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 0) And (SC_REM_CODE_CR > 0) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 0) And (SC_REM_CODE_CR > 0) And (SC_QUAL_CODE = 4)) Or ((SC_AVE_PAYBAL_CRED = 99998) And (SC_CSH_CRD_IND <> 1) And (SC_NO_STMTS = 0) And (SC_QUAL_CODE = 4)) Or ((SC_AVE_PAYBAL_CRED = 99998) And (SC_CSH_CRD_IND <> 1) And (SC_NO_STMTS = 0) And (SC_QUAL_CODE = 2)) Or ((SC_AVE_PAYBAL_CRED = 0) And (SC_CSH_CRD_IND <> 1) And (SC_NO_STMTS = 0) And (SC_QUAL_CODE = 4)) Or ((SC_AVE_PAYBAL_CRED = 0) And (SC_CSH_CRD_IND <> 1) And (SC_NO_STMTS = 0) And (SC_QUAL_CODE = 2)),33 ,NA)
+
+; 34 QC 02 04-UNEST 0-3 PAYM>0
+LSM_SubPop_VW26 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_QUAL_CODE = 4)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_QUAL_CODE = 4)),34 ,NA)
+
+; 35 QC 02 04 - UNEST 4+ CASH
+LSM_SubPop_VW27 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE = 4)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1) And (SC_QUAL_CODE = 4)),35 ,NA)
+
+; 36 QC 02 04 - UNEST 4+ CRED
+LSM_SubPop_VW28 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_QUAL_CODE = 4)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_QUAL_CODE = 4)),36 ,NA)
+
+; 37 QC 02 04 - EST REACT
+LSM_SubPop_VW29 = If(  ((SC_CST_TYP = 4) And (SC_SINCE_START < 13) And (SC_QUAL_CODE = 2)) Or ((SC_CST_TYP = 4) And (SC_SINCE_START < 13) And (SC_QUAL_CODE = 4)),37 ,NA)
+
+; 38 QC 02 04 - EST NON REACT<
+LSM_SubPop_VW30 = If( (SC_QUAL_CODE = 2) Or (SC_QUAL_CODE = 4), 38, NA)
+
+; 39 UNEST 0-1 RO PAY=0 CASH
+LSM_SubPop_VW31 = If(  ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_CURR_COMM_DEL_CSH > 0) And (SC_CURR_COMM_DEL_CSH < 99997)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 99998) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997)) Or ((SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 99998) And (SC_CURR_COMM_DEL_CSH > 0) And (SC_CURR_COMM_DEL_CSH < 99997)) Or ((SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0)) Or ((SC_NO_STMTS = 0) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 99998)),39 ,NA)
+
+; 40 UNEST 0-1 RO PAY=0 CREDIT
+LSM_SubPop_VW32 = If(  ((SC_NO_STMTS < 2) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997)) Or ((SC_NO_STMTS < 2) And (SC_AVE_PAYBAL_CRED = 0) And (SC_CURR_COMM_DEL_CRD > 0) And (SC_CURR_COMM_DEL_CRD < 99997)) Or ((SC_NO_STMTS < 2) And (SC_AVE_PAYBAL_CRED = 99998) And (SC_CURR_COMM_ND > 0) And (SC_CURR_COMM_ND < 99997)) Or ((SC_NO_STMTS < 2) And (SC_AVE_PAYBAL_CRED = 99998) And (SC_CURR_COMM_DEL_CRD > 0) And (SC_CURR_COMM_DEL_CRD < 99997)) Or ((SC_NO_STMTS = 0) And (SC_AVE_PAYBAL_CRED = 0)) Or ((SC_NO_STMTS = 0) And (SC_AVE_PAYBAL_CRED = 99998)),40 ,NA)
+
+; 41 UNEST 2-3 RO AK>0 CASH
+LSM_SubPop_VW33 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_REM_CODE_CS > 0)) Or ((SC_CST_TYP = 4) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1) And (SC_REM_CODE_CS > 0)),41 ,NA)
+
+; 42 UNEST 2-3 RO AK>0 CREDIT
+LSM_SubPop_VW34 = If(  ((SC_CST_TYP <> 4) And (SC_CSH_CRD_IND = 0) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_REM_CODE_CR > 0)) Or ((SC_CST_TYP = 4) And (SC_CSH_CRD_IND = 0) And (SC_NO_STMTS > 1) And (SC_NO_STMTS < 4) And (SC_REM_CODE_CR > 0)),42 ,NA)
+
+; 43 UNEST 0-3 RO PAY>0 CASH
+LSM_SubPop_VW35 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2) And (SC_CSH_CRD_IND = 1)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4) And (SC_CSH_CRD_IND = 1)),43 ,NA)
+
+; 44 UNEST 0-3 RO PAY>0 CREDIT
+LSM_SubPop_VW36 = If(  ((SC_CST_TYP = 4) And (SC_NO_STMTS < 2)) Or ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 4)),44 ,NA)
+
+; 45 UNEST 4+ RO CASH
+LSM_SubPop_VW37 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7) And (SC_CSH_CRD_IND = 1)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1)),45 ,NA)
+
+; 46 UNEST 4+ RO CREDIT
+LSM_SubPop_VW38 = If(  ((SC_CST_TYP <> 4) And (SC_NO_STMTS < 7)) Or ((SC_CST_TYP <> 4) And (SC_SINCE_START < 13)),46 ,NA)
+
+; 1 REACT CASH TSR<6 & PAYM=0
+LSM_SubPop_VW39 = If(  ((SC_CST_TYP = 4) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH = 0) And (SC_SINCE_START <= 6)) Or ((SC_CST_TYP = 4) And (SC_CSH_CRD_IND = 1) And (SC_AVE_PAYBAL_CASH >= 99997) And (SC_SINCE_START <= 6)),1  ,NA)
+
+; 47 REACTIVATOrS CASH
+LSM_SubPop_VW40 = If(  (SC_CST_TYP = 4) And (SC_SINCE_START < 13) And (SC_CSH_CRD_IND = 1),47 ,NA)
+
+; 2 REACT CRED TSR<6 & PAYM=0
+LSM_SubPop_VW41 = If( ((SC_CST_TYP = 4) And (SC_SINCE_START <= 6) And (SC_AVE_PAYBAL_CRED = 0)) Or ((SC_CST_TYP = 4) And (SC_SINCE_START <= 6) And (SC_AVE_PAYBAL_CRED >= 99997)) ,2 ,NA)
+
+; 48 REACTIVATOrS CREDIT
+LSM_SubPop_VW42 = If(  (SC_SINCE_START < 13) And (SC_CST_TYP = 4),48 ,NA)
+
+; 49 NON REACTIVATOrS CASH
+LSM_SubPop_VW43 = If(  (SC_CSH_CRD_IND = 1),49 ,NA)
+
+; 50 N-REACT CRED -18 PAY<200
+LSM_SubPop_VW44 = If( ((SC_CSH_CRD_IND <> 1) And (SC_NO_STMTS <= 18)) Or ((SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED <= 100)) Or ((SC_CSH_CRD_IND <> 1) And (SC_AVE_PAYBAL_CRED >= 99997)),50 ,NA)
+
+; 4 N-REACT L>5000 WBS EN AI
+LSM_SubPop_VW45 = If( ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = -4)) Or ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = 4)),4  ,NA)
+
+; 5 N-REACT L>5000 AI
+LSM_SubPop_VW46 = If( ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = 3)) Or ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = -3)),5  ,NA)
+
+; 12 N-REACT L>5000 WBS
+LSM_SubPop_VW47 = If( ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = 2)) Or ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = -2)),12 ,NA)
+
+; 13 N-REACT L>5000
+LSM_SubPop_VW48 = If( ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = 1)) Or ((SC_CSH_CRD_IND <> 1) And (SC_CURR_COMM_ND > 1150) And (SC_LAST_CB > 2) And (SC_LAST_CB < 9) And (SC_LAST_CB_TYP = -1)),13 ,NA)
+
+; 15 N-REACT CRED 18+ PAYM>200
+LSM_SubPop_VW49 = If( (SC_CSH_CRD_IND <> 1),15 ,NA)
+
+; 99 CATCH-ALL SUB-POPULATION
+LSM_SubPop_VW50 = If( (SC_CST_AGE <> 0) Or (SC_CST_AGE = 0),99 ,NA)

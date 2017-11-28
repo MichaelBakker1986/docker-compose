@@ -1,0 +1,542 @@
+{&&Language=English}
+
+.Variables
+PP      1A     1      <        $>MODEL VERSION<$                               \MODELVERSION
+PP      1A     1      <        $>MATRIX VERSION<$                              \MATRIXVERSION
+PI      1N D   1      <        $>CLEX_RUN_DATE<$                               \CLEX_RUN_DATE
+PI      1A     1      <        $>CLEX_RUN_TYPE<$                               \CLEX_RUN_TYPE
+PI    0 1N     1      <        $>CLEX_RUN_REC_TYPE<$                           \CLEX_RUN_REC_TYPE
+
+
+.Formulas NoTrend
+
+CLEX_RUN_DATE                  = Now
+CLEX_RUN_TYPE                  = &If((CLEX_RUN_REC_TYPE[1]=1) or (CLEX_RUN_REC_TYPE[1]=2),"W","D")                                            ; W - Weekly  / P - Priority / D - Dayly
+CLEX_RUN_REC_TYPE              = 0
+MODELVERSION                   = "#ModelVersion#"
+MATRIXVERSION                  = &MatrixLookup("RiskCube_Parameters.xls","Version",1,3)
+
+.Variables
+PX       X   1 1               $>Data (input)<$                                \LSM_Data
+
+
+;------------------------------------------------------------------------------ CUSTOMER
+PX       X     2               $>CUSTOMER<$                                    \LSM_Data_CUSTOMER
+PI      1N D   3               CREATIONDATE                                    \CREATIONDATE
+PI      1N D   3               MODIFICATIONDATE                                \MODIFICATIONDATE
+PI    0 1N     3               CLNT_NO                                         \CLNT_NO
+PI    0 1N     3               POSTALCODE_NUMERIC_PART                         \POSTALCODE_NUMERIC_PART
+PI      1A     3               POSTALCODE_ALPHABETIC_PART                      \POSTALCODE_ALPHABETIC_PART
+PI      1A     3               STREET_NUMBER                                   \STREET_NUMBER
+PI      1A     3               STREET_NUMBER_SUFFIX                            \STREET_NUMBER_SUFFIX
+PI      1A     3               GENDER                                          \GENDER
+PI      1N D   3               DATE_OF_BIRTH                                   \DATE_OF_BIRTH
+PI    0 1N     3               QUALITY_CODE                                    \QUALITY_CODE
+PI    0 1N     3               QUALITY_CODE_DATE                               \QUALITY_CODE_DATE
+PP    0 1N     3               PI_POPULATION		                               \=PI_POPULATION                  ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(1,0)
+PP    0 1N     3               PI_SCORE		                                     \=PI_SCORE                       ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(3,0)
+PI    0 1N     3               RESTART_SCORE                                   \RESTART_SCORE                   ;
+PI    0 1N     4               RESTART_SCORE_CALC                              \CALC_RESTART_SCORE              ; =1, dan is er een event binnen gekomen om de herstartscore opnieuwe te bepalen
+
+.Formulas Notrend
+
+RESTART_SCORE = If(CALC_RESTART_SCORE=1, LSM_RESTART_SCORE ,NA)
+
+
+.Variables
+PI      1N D   3               RESTART_DATE                                    \RESTART_DATE
+PI      1N D   3               DATE_OF_ZERO_BALANCE_O_RESTART                  \DATE_OF_ZERO_BALANCE_O_RESTART  ;
+PI      1N D   3               DATE_OF_LAST_ORDER                              \DATE_OF_LAST_ORDER              ;
+;-----
+.Variables
+PI    0 1N     3               BALANCE_MONTHLY_OVERVIEW                        \BALANCE_MONTHLY_OVERVIEW        ;
+PP    0 1N     3               BALANCE_MONTHLY_OVERVIEW (RO contantklant)      \BALANCE_MONTHLY_OVERVIEW_ROCONTANT
+C Alleen van toepassing als een 'fictief RO' wordt bepaald voor een contantklant
+PP    0 1N     3               BALANCE_MONTHLY_OVERVIEW (DEF)                  \BALANCE_MONTHLY_OVERVIEW_DEF
+C Afh. van de 'fictief RO' één van de twee BALANCE_MONTHLY_OVERVIEW gebruiken
+
+.Formulas Notrend
+BALANCE_MONTHLY_OVERVIEW_DEF = If((AantRekOverzichtContant_NEW=AantRekOverzichtContant), BALANCE_MONTHLY_OVERVIEW , BALANCE_MONTHLY_OVERVIEW_ROCONTANT)
+
+;-----
+.Variables
+PI    0 1N     3               BALANCE_ACCOUNT                                 \BALANCE_ACCOUNT                 ;
+PI    0 1N     3               BALANCE_MUTATION                                \BALANCE_MUTATION                ;
+PI    0 1N     3               BALANCE_MUTATION (RO contantklant)              \BALANCE_MUTATION_ROCONTANT
+C Alleen van toepassing als een 'fictief RO' wordt bepaald voor een contantklant
+PP    0 1N     3               BALANCE_MUTATION (DEF)                          \BALANCE_MUTATION_DEF
+C Afh. van de 'fictief RO' één van de twee BALANCE_MUTATION gebruiken
+
+.Formulas Notrend
+BALANCE_MUTATION_DEF = If( BETAALVOORKEUR=1 , BALANCE_MUTATION_ROCONTANT, BALANCE_MUTATION)
+
+
+;-----
+.Variables
+PI    0 1N     3               REMINDER_CODE                                   \REMINDER_CODE                   ;
+PI      1N D   3               START_DATE                                      \START_DATE                      ;
+PP    0 1N     3               SUBPOPULATION	  	                             \SUBPOPULATION	  	              ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(3,0)
+PP    0 1N     3               TEST_GROUP		                                   \TEST_GROUP		                  ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(3,0)
+PP    0 1N     3               SCORECARD_1_ID	  	                             \SCORECARD_1_ID	  	            ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(3,0)
+PP    0 1N     3               SCORE_1		                                     \SCORE_1		                      ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(5,0)
+PP    0 1N     3               EVENT_1		                                     \EVENT_1		                      ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(2,0)
+PP    0 1N     3               CREDIT_SET		                                   \CREDIT_SET		                  ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(1,0)
+PP      1A     3               BKR_FLAG		                                     \BKR_FLAG		                    ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	VARCHAR2(4 BYTE)
+PP    0 1N     3               SHADOW_LIMIT_1	  	                             \SHADOW_LIMIT_1	  	            ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(5,0)
+PP    0 1N     3               MAX_CREDIT		                                   \MAX_CREDIT		                  ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(10,0)
+PP    0 1N     3               TOLERANCE_1		                                 \TOLERANCE_1		                  ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(3,0)
+PP    0 1N     3               DECISION_CODE_1		                             \DECISION_CODE_1		              ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(1,0)
+PP      1A     3               GOOD_BAD_INDICATOR		                           \GOOD_BAD_INDICATOR		          ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	VARCHAR2(4 BYTE)
+PP      1A     3               MODELVERSION		                                 \=MODELVERSION		                ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	VARCHAR2(40 BYTE)
+PP      1A     3               MATRIXVERSION		                               \=MATRIXVERSION		              ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	VARCHAR2(40 BYTE)
+PP      1A     3               RISKCUBEVERSION  		                           \RISKCUBEVERSION  		            ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	VARCHAR2(80 BYTE)
+PP      1A     3               VERSION		                                     \VERSION		                      ;<<wordt bepaald tijdens scoren klant - PostcodeIndex>>	NUMBER(10,0)
+PI    0 1N     3               STARTSCORE                                      \STARTSCORE                      ;
+PI    0 1N     3               STARTSCOREKAART_ID                              \STARTSCOREKAART_ID              ;
+PI    0 1N     3               VRAGENFORMULIERCODE                             \VRAGENFORMULIERCODE             ;
+PI    0 1N     3               BETAALVOORKEUR                                  \BETAALVOORKEUR                  ; 0=Termijn  en 1=Contant
+C 0=Termijn  en 1=Contant
+
+.Formulas Notrend
+SUBPOPULATION	  	  = SC_SUB_POP
+TEST_GROUP		      = SC_TST_GRP
+SCORECARD_1_ID	  	= SC_SCD_1_ID
+SCORE_1		          = SC_SCORE_1
+EVENT_1		          = SC_EVENT_1
+CREDIT_SET		      = ST_CRED_SET
+BKR_FLAG		        = &ST_BKR_FLAG
+SHADOW_LIMIT_1	  	= ST_SHADOW_LIMIT_1
+MAX_CREDIT		      = PI_MAX_KRED
+TOLERANCE_1		      = ST_TOL_ONE
+DECISION_CODE_1		  = ST_DEC_ONE
+GOOD_BAD_INDICATOR	= &PI_GD_SL_INDI
+RISKCUBEVERSION  		= 0
+VERSION		          = 0
+
+;--------------------
+.Variables
+PP      1A     3               CENDRISSCORE                                    \CENDRISSCORE                    ;
+PI      1N C   4               Percentage naam gelijk                          \CENDRISpercGelijk                                   ; CendrisValidatie.percentageNaamGelijk
+PI      1N C   4               Intern telefoonnummer bekend                    \CENDRISInternTel  -> AANTALTELEFOONNUMMERS          ; AANTALTELEFOONNUMMERS
+PI      1N C   4               Extern telefoonnummer bekend                    \CENDRISExternTel                                    ; CendrisValidatie.telefoonnummerBekendBijCendris
+PI      1N C   4               Telefoonnummer gelijk                           \CENDRISTelgelijk  -> CENDRISVALIDATIECODE           ; CendrisValidatie.validatieCode
+PP      1A     4               =CENDRISSCORE                                   \=CENDRISSCORE
+
+PP    0 1N   1 4                                                               \CENDRISSearchValue
+PI      1A     4               PERCENTAGE_NAAM_GELIJK                          \CENDRISPERCENTAGE_NAAM_GELIJK   ; CendrisValidatie.percentageNaamGelijk
+PP    0 1N     4               PERCENTAGE_NAAM_GELIJK (#)                      \CENDRISPERCENTAGE_NAAM_GELIJKN  ; CendrisValidatie.percentageNaamGelijk (numeriek)
+C De waarde -1 geeft aan dat de gegevens niet numeriek zijn en dus onbekend.
+PI      1A     4               VALIDATIECODE                                   \CENDRISVALIDATIECODE            ; CendrisValidatie.validatieCode (Als "TPHN", "TPN", "TPH" en "TP" dan 1, anders 0. Indien leeg van 2)
+PI      1A     4               CENDRISNETNUMMER                                \CENDRISNETNUMMER                ; CendrisValidatie.Netnummer
+PI      1A     4               CENDRISABONNEENUMMER                            \CENDRISABONNEENUMMER            ; CendrisValidatie.Abonneenummer
+
+
+.Choices
+CENDRISpercGelijk = "0:74% – 99 % |1:< 74%|2:Onbekend"
+CENDRISInternTel  = "0:Nee|1:Ja|2:Onbekend"
+CENDRISExternTel  = "0:Nee|1:Ja|2:Onbekend"
+CENDRISTelgelijk  = "0:Nee|1:Ja|2:Onbekend"
+
+.Formulas Notrend
+CENDRISPERCENTAGE_NAAM_GELIJKN = OnER(VAL(&CENDRISPERCENTAGE_NAAM_GELIJK),-1)
+CENDRISSearchValue = If(DataEntered(CENDRISVALIDATIECODE,1), 90000+(1000*CENDRISpercGelijk)+(100*CENDRISInternTel)+(10*CENDRISExternTel)+(CENDRISTelgelijk) , If(AANTALTELEFOONNUMMERS>0,91000,90000))
+CENDRISpercGelijk  = IF(DataEntered(CENDRISPERCENTAGE_NAAM_GELIJK), If(CENDRISPERCENTAGE_NAAM_GELIJKN <-1,2,If(CENDRISPERCENTAGE_NAAM_GELIJKN <75,1,0)),2)
+CENDRISInternTel   = IF(AANTALTELEFOONNUMMERS>0,1,IF(AANTALTELEFOONNUMMERS=0,0,2))
+CENDRISExternTel   = If( (DataEntered(CENDRISNETNUMMER,1) and DataEntered(CENDRISABONNEENUMMER,1)) ,1,0)
+CENDRISTelgelijk   = If( (&CENDRISVALIDATIECODE="TPHN") or (&CENDRISVALIDATIECODE="TPN") or (&CENDRISVALIDATIECODE="TPH") or (&CENDRISVALIDATIECODE="TP"), 1 , If( DataEntered(CENDRISVALIDATIECODE,1),0,2) )
+CENDRISSCORE       = &MatrixLookup("RiskCube_Parameters.xls","CENDRISSCORE",CENDRISSearchValue,1)
+
+
+.Variables
+PI    0 1N     3               DUURSTE_ART                                     \DUURSTE_ART                     ;
+PI    0 1N     3               VERZEKERING                                     \VERZEKERING                     ;
+PI    0 1N     3               MANDAAT                                         \MANDAAT                         ;
+PI    0 1N     3               WCKCONTRACT                                     \WCKCONTRACT                     ;
+PI      1N D   3               NEXT_CYCLE_DATE (IN)                            \NEXT_CYCLE_DATE		              ;
+PI    0 1N     3               NEXT_CYCLE_DATE_COUNTER (IN)                    \NEXT_CYCLE_DATE_COUNTER		      ;
+PI    0 1N     3               RANDOMNUMBER                                    \RANDOMNUMBER
+PI    0 1N     3               AANTALTELEFOONNUMMERS                           \AANTALTELEFOONNUMMERS
+PI    0 1N     3               MAILKODE                                        \MAILKODE
+C Dit is de oude MAILKODE (E970XMAILKODE) uit de Extractfile. Oude gegevens worden geconverteerd, nieuwe klanten krijgen de waarde 80
+
+;--------------------
+.Variables
+PP      1N D 1 3               NEXT_CYCLE_DATE (OUT)                           \NEXT_CYCLE_DATE_NEW		          ;<<wordt bepaald tijdens scoren klant >>	DATE
+PP    0 1N     3               NEXT_CYCLE_DATE_COUNTER (OUT)                   \NEXT_CYCLE_DATE_COUNTER_NEW     ;<<wordt bepaald tijdens scoren klant >>	NUMBER(2,0)
+
+.Formulas Notrend
+NEXT_CYCLE_DATE_NEW           = If( ((&CLEX_RUN_TYPE[1]="W") And (CLEX_RUN_REC_TYPE[1]=1)) or (NEXT_CYCLE_DATE_COUNTER_NEW[1] > 8) , DMYtoDate(31,12,2099),CLEX_RUN_DATE[1]+28)
+NEXT_CYCLE_DATE_COUNTER_NEW   = If(CLEX_RUN_REC_TYPE[1]=0, NEXT_CYCLE_DATE_COUNTER[1] + 1 , 0)
+
+;--------------------
+.Variables
+PP      1N C   3               Moet er een nieuwe virtueel RO worden gengeneerd voor contantklant? \NewROContantKlant
+PI      1N D 1 4               ROTriggerDatum (IN)                             \ROTriggerDatum    		          ; <INPUT>
+PI      1N D   4               ROTriggerDatum (OUT)                            \ROTriggerDatum_NEW 		          ; <OUTPUT>
+PI    0 1N     4               AantalRekeningOverzichtenContantKlanten (IN)    \AantRekOverzichtContant         ; <INPUT>
+PP    0 1N     4               AantalRekeningOverzichtenContantKlanten (OUT)   \AantRekOverzichtContant_NEW     ; <OUTPUT>
+
+PP      1N    -4               LastT info 'financielestatus'                    \LastInfoFinancielestatus
+PI    0 1N     4               actueelSaldoOpenstaandeVorderingenAchterafBetalen\LASTFS_VORDERINGACHTERAFBETALEN
+C LASTFS_VORDERINGACHTERAFBETALEN
+PI    0 1N     4               financielestatus.waardeSuspenseRekening          \LASTFS_SUSPENSEREKENING
+C LASTFS_SUSPENSEREKENING
+
+.Formulas Notrend
+NewROContantKlant                  = If(BETAALVOORKEUR=1 , If(ROTriggerDatum<=Now,1,0),0)
+ROTriggerDatum_NEW                 = If(NewROContantKlant, If( (OnNA(WH_SUSPENSEREKENING[1],0)<>0) OR (OnNA(WH_VORDERINGACHTERAFBETALEN[1],0)<>0) , If(ROTriggerDatum=NA, Max(Now,ROTriggerDatum)+7 ,Max(Now,ROTriggerDatum)+21 )  , NA), ROTriggerDatum)
+AantRekOverzichtContant_NEW        = If(NewROContantKlant, If(ROTriggerDatum=NA,AantRekOverzichtContant,AantRekOverzichtContant+1) , AantRekOverzichtContant)
+
+BALANCE_MONTHLY_OVERVIEW_ROCONTANT = If(NewROContantKlant, LASTFS_VORDERINGACHTERAFBETALEN ,NA)
+BALANCE_MUTATION_ROCONTANT         = If(NewROContantKlant, 0 ,LASTFS_VORDERINGACHTERAFBETALEN + LASTFS_SUSPENSEREKENING - WH_OPEN_BAL[1])
+WH_OPEN_BAL_ROCONTANT              = If(NewROContantKlant, LASTFS_VORDERINGACHTERAFBETALEN ,NA)
+WH_PIPE_BAL_ROCONTANT              = If(NewROContantKlant, 0 ,NA)
+
+.Choices
+NewROContantKlant = "0:Nee|1:Ja"
+;--------------------
+.Variables
+
+PP    0 1N   1 3               $>CB_BE_RPT_TYP<$                               \=CB_BE_RPT_TYP
+C Dit is een combinatie van Geactiveerd WCK-contract?	Actieve automatische incasso?	Saldoverzekering afgesloten?	Resultaat||WCK INC Ver Res|J	N	N	1|J	N	J	2|J	J	N	3|J	J	J	4|N	N	J	5|N	J	N	6|N	J	J	7|N	N	N	8
+PP    0 1N     3               $>ScoreCard_ID<$                                \ScoreCard_ID
+
+.Formulas Notrend
+CB_BE_RPT_TYP                 = Case( WCKCONTRACT*100+MANDAAT*10+VERZEKERING , [100:1|101:2|110:3|111:4|001:5|010:6|011:7|000:8])
+ScoreCard_ID                  = STARTSCOREKAART_ID
+
+.Variables
+;------------------------------------------------------------------------------ FIXED
+PX       X     2               $>FIXED<$ (afgeleid uit FLS_CUSTOMER)            \LSM_Data_FIXED
+;PI    0 1N     3               $>WF_CTRY_CODE<$                                \WF_CTRY_CODE
+PI    0 1N     3               $>WF_CLNT_No<$                                  \WF_CLNT_No
+;PI      1N     3               $>WF_SEQ_NO<$                                   \WF_SEQ_NO
+PI    2 1N D   3               $>WF_EXT_DAT<$                                  \WF_EXT_DAT
+PI      1A     3               $>WF_REC_TYP<$                                  \WF_REC_TYP
+;PI    0 1N     3               $>WF_VAL_RAND_NUM_1<$                           \WF_VAL_RAND_NUM_1
+PI    0 1N     3               $>WF_VAL_RAND_NUM_2<$                           \WF_VAL_RAND_NUM_2
+;PI    0 1N     3               $>WF_VAL_RAND_NUM_3<$                           \WF_VAL_RAND_NUM_3
+;PI    0 1N     3               $>WF_VAL_RAND_NUM_4<$                           \WF_VAL_RAND_NUM_4
+PI    2 1N D   3               $>WF_START_DAT<$                                \WF_START_DAT
+PI    0 1N     3               $>WF_START_SCORE<$                              \WF_START_SCORE
+;PI    0 1N     3               $>WF_START_SCARD<$                              \WF_START_SCARD
+PI    0 1N     3               $>WF_RESTART_SCORE<$                            \WF_RESTART_SCORE
+;PI    0 1N     3               $>WF_RESTART_SCARD<$                            \WF_RESTART_SCARD
+;PI    0 1N     3               $>WF_QUEST_CODE<$                               \WF_QUEST_CODE
+;PI    0 1N     3               $>WF_DOB<$                                      \WF_DOB
+;PI    0 1N     3               $>WF_CLNT_ORIGIN<$                              \WF_CLNT_ORIGIN
+;PI    0 1N     3               $>WF_MLG_COD<$                                  \WF_MLG_COD
+PI    0 1N     3               $>WF_CSH_CRD_IND<$                              \WF_CSH_CRD_IND ;JN moet weer uit.
+;PI    0 1N     3               $>WF_QUAL_COD<$                                 \WF_QUAL_COD
+;PI      1A     3               $>WF_DLVRY_PREF<$                               \WF_DLVRY_PREF
+;PI      1A     3               $>WF_SEX<$                                      \WF_SEX
+;PI    0 1N     3               $>WF_POST_CODE_NUM<$                            \WF_POST_CODE_NUM
+;PI      1A     3               $>WF_POST_CODE_ALPHA<$                          \WF_POST_CODE_ALPHA
+;PI    0 1N     3               $>WF_POSTAL_GROUP<$                             \WF_POSTAL_GROUP
+;PI    0 1N     3               $>WF_HOUSE_NO<$                                 \WF_HOUSE_NO
+;PI      1A     3               $>WF_SUFF<$                                     \WF_SUFF
+;PI      1A     3               $>WF_PHONE<$                                    \WF_PHONE
+;PI      1A     3               $>WF_HOUSE_TYP<$                                \WF_HOUSE_TYP
+;PI      1A     3               $>WF_STREET_IND<$                               \WF_STREET_IND
+;PI    0 1N     3               $>WF_ORD_LNS_CNT<$                              \WF_ORD_LNS_CNT
+;PI      1A     3               $>WF_BNK_ACC<$                                  \WF_BNK_ACC
+PI    0 1N     3               $>WF_EXP_ART<$                                  \WF_EXP_ART
+;PI    0 1N     3               $>WF_NXT_ART<$                                  \WF_NXT_ART
+;PI    0 1N     3               $>WF_EXP_ART_GRP<$                              \WF_EXP_ART_GRP
+;PI    0 1N     3               $>WF_NXT_ART_GRP<$                              \WF_NXT_ART_GRP
+;PI    0 1N     3               $>WF_ORDS_PLACED<$                              \WF_ORDS_PLACED
+;PI    0 1N     3               $>WF_ORDS_ACCEPT<$                              \WF_ORDS_ACCEPT
+
+.Formulas Notrend
+; Deze tabel wordt niet meer ingelezen. De gegevens worden nu uit FLS_CUSTOMER opgehaald
+WF_CLNT_No        = CLNT_NO[1]
+WF_EXT_DAT        = If(RESTART_SCORE[1]=NA,START_DATE[1],RESTART_DATE)           ; Als er geen herstartscore is dan geen herstarter (3), anders starter (4)
+WF_REC_TYP        = &If(RESTART_SCORE[1]=NA,3,4)                                 ; Als er geen herstartscore is dan geen herstarter (3), anders starter (4)
+WF_VAL_RAND_NUM_2 = RANDOMNUMBER[1]
+WF_START_DAT      = START_DATE[1]
+WF_START_SCORE    = STARTSCORE[1]
+WF_RESTART_SCORE  = RESTART_SCORE[1]
+WF_CSH_CRD_IND    = BETAALVOORKEUR[1]
+WF_EXP_ART        = DUURSTE_ART[1]
+
+.Variables
+;------------------------------------------------------------------------------ CURRENT
+PX       X     2               $>CURRENT<$ (afgeleid uit FLS_CUSTOMER)         \LSM_Data_CURRENT
+;PI    0 1N     3               $>WC_CTRY_CODE<$                                \WC_CTRY_CODE
+PI    0 1N     3               $>WC_CLNT_NO<$                                  \WC_CLNT_NO
+PI    2 1N D   3               $>WC_EXT_DAT<$                                  \WC_EXT_DAT
+;PI    0 1N     3               $>WC_QUEST_CODE<$                               \WC_QUEST_CODE
+PI    2 1N D   3               $>WC_DOB<$                                      \WC_DOB
+;PI      1A     3               $>WC_DLVRY_PREF<$                               \WC_DLVRY_PREF
+PI      1A     3               $>WC_SEX<$                                      \WC_SEX
+PI    0 1N     3               $>WC_POST_CODE_NUM<$                            \WC_POST_CODE_NUM
+PI      1A     3               $>WC_POST_CODE_ALPHA<$                          \WC_POST_CODE_ALPHA
+;PI    0 1N     3               $>WC_POSTAL_GROUP<$                             \WC_POSTAL_GROUP
+PI    0 1N     3               $>WC_HOUSE_NO<$                                 \WC_HOUSE_NO
+PI      1A     3               $>WC_SUFF<$                                     \WC_SUFF
+PI      1A     3               $>WC_PHONE<$                                    \WC_PHONE
+;PI    0 1N     3               $>WC_CSH_CRD_IND<$                              \WC_CSH_CRD_IND       ; 0=Termijn  en 1=Contant
+PI    2 1N D   3               $>WC_NEXT_CYCLE_DAT<$                           \WC_NEXT_CYCLE_DAT
+PI    2 1N D   3               $>WC_NEXT_CYCLE_DAT_NEW<$                       \WC_NEXT_CYCLE_DAT_NEW
+
+.Formulas NoTrend
+WC_CLNT_NO          = CLNT_NO[1]
+WC_EXT_DAT          = START_DATE[1]
+WC_DOB              = DATE_OF_BIRTH[1]
+WC_SEX              = &GENDER[1]
+WC_POST_CODE_NUM    = POSTALCODE_NUMERIC_PART[1]
+WC_POST_CODE_ALPHA  = &POSTALCODE_ALPHABETIC_PART[1]
+WC_HOUSE_NO         = Val(&STREET_NUMBER[1])
+WC_SUFF             = &STREET_NUMBER_SUFFIX[1]
+WC_PHONE            = &CENDRISSCORE[1]
+WC_NEXT_CYCLE_DAT   = NEXT_CYCLE_DATE[1]
+
+.Variables
+;------------------------------------------------------------------------------ HISTORY
+PX       X     2               $>HISTORY<$                                     \LSM_Data_HISTORY
+;PI    0 BN     3               $>WH_CTRY_CODE<$                                \WH_CTRY_CODE
+PI    0 BN     3               $>WH_CLNT_NO<$                                  \WH_CLNT_NO
+PI    2 BN D   3               $>WH_EXT_DAT<$                                  \WH_EXT_DAT
+PI      BA     3               $>WH_STMT_TYPE<$                                \WH_STMT_TYPE
+PI    2 BN D   3               $>WH_LAST_STAT_DAT<$                            \WH_LAST_STAT_DAT
+PI    2 BN D   3               $>WH_LAST_ORD_DAT<$                             \WH_LAST_ORD_DAT
+PI    2 BN D   3               $>WH_LAST_ZERO_DAT<$                            \WH_LAST_ZERO_DAT
+;PI    0 BN     3               $>WH_MLG_COD<$                                  \WH_MLG_COD
+;PI    0 BN     3               $>WH_STMT_REVIEW<$                              \WH_STMT_REVIEW
+PI    0 BN     3               $>WH_CSH_CRD_IND<$                              \WH_CSH_CRD_IND
+PI    0 BN     3               $>WH_QUAL_COD<$                                 \WH_QUAL_COD
+;PI    0 BN     3               $>WH_PRV_QUAL_COD<$                             \WH_PRV_QUAL_COD
+;PI    0 BN     3               $>WH_PRV_STMT_QC<$                              \WH_PRV_STMT_QC
+PI    0 BN     3               $>WH_STMT_NO<$                                  \WH_STMT_NO
+;PI    0 BN     3               $>WH_CRD_LIM<$                                  \WH_CRD_LIM
+;----
+PI    0 BN     3               $>WH_OPEN_BAL<$                                 \WH_OPEN_BAL
+PI    0 1N     3               $>WH_OPEN_BAL<$ (RO contantklant)               \WH_OPEN_BAL_ROCONTANT
+C Alleen van toepassing als een 'fictief RO' wordt bepaald voor een contantklant
+PP    0 BN     3               $>WH_OPEN_BAL<$ (DEF)                            \WH_OPEN_BAL_DEF
+C Afh. van de 'fictief RO' één van de twee WH_OPEN_BAL gebruiken
+;----
+PI    0 BN     3               $>WH_PIPE_BAL<$                                  \WH_PIPE_BAL
+PI    0 1N     3               $>WH_PIPE_BAL<$ (RO contantklant)                \WH_PIPE_BAL_ROCONTANT
+C Alleen van toepassing als een 'fictief RO' wordt bepaald voor een contantklant
+PP    0 BN     3               $>WH_PIPE_BAL<$ (DEF)                            \WH_PIPE_BAL_DEF
+C Afh. van de 'fictief RO' één van de twee WH_PIPE_BAL gebruiken
+;----
+PI    0 BN     3               $>WH_BACK_BAL<$                                 \WH_BACK_BAL
+;PI    0 BN     3               $>WH_REVW_BAL<$                                 \WH_REVW_BAL
+PI    0 BN     3               $>WH_CURR_BAL<$                                 \WH_CURR_BAL
+PI    0 BN     3               $>WH_CURR_COM<$                                 \WH_CURR_COM
+PI    0 BN     3               $>WH_INST<$                                     \WH_INST
+PI    0 BN     3               $>WH_ARR_AMT<$                                  \WH_ARR_AMT
+PI    0 BN     3               $>WH_REM_COD<$                                  \WH_REM_COD
+PI    0 BN     3               $>WH_ORDS_PLACED<$                              \WH_ORDS_PLACED
+PI    0 BN     3               $>WH_ORDS_PLACED_EOS<$                          \WH_ORDS_PLACED_EOS
+;PI    0 BN     3               $>WH_ORDS_ACCEPT<$                              \WH_ORDS_ACCEPT
+;PI    0 BN     3               $>WH_ORDS_ACCEPT_EOS<$                          \WH_ORDS_ACCEPT_EOS
+PI    0 BN     3               $>WH_ORDS_DECLINE<$                             \WH_ORDS_DECLINE
+;PI    0 BN     3               $>WH_ORDS_CANC<$                                \WH_ORDS_CANC
+PI    0 BN     3               $>WH_PAYMENTS<$                                 \WH_PAYMENTS
+PI    0 BN     3               $>WH_RETURNS<$                                  \WH_RETURNS
+;PI    0 BN     3               $>WH_SHIPMENTS<$                                \WH_SHIPMENTS
+;PI    0 BN     3               $>WH_EOS_SHIPMENTS<$                            \WH_EOS_SHIPMENTS
+;PI    0 BN     3               $>WH_INTEREST<$                                 \WH_INTEREST
+;PI    0 BN     3               $>WH_COSTS<$                                    \WH_COSTS
+;PI    0 BN     3               $>WH_WRITE_OFFS<$                               \WH_WRITE_OFFS
+;PI    0 BN     3               $>WH_DEBITS<$                                   \WH_DEBITS
+;PI    0 BN     3               $>WH_CREDITS<$                                  \WH_CREDITS
+;PI    0 BN     3               $>WH_PRE_PMTS<$                                 \WH_PRE_PMTS
+;PI    0 BN     3               $>WH_SHADOW_LIMIT_1<$                           \WH_SHADOW_LIMIT_1
+PI    0 BN     3               $>WH_STORNO<$                                    \WH_STORNO
+PI    0 BN     3               $>WH_BIJZONDERBEHEER<$                           \WH_BIJZONDERBEHEER
+PI    0 BN     3               $>Waarde Suspense Rekening<$                     \WH_SUSPENSEREKENING
+PI    0 BN     3               $>Vordering achteraf betalen<$                   \WH_VORDERINGACHTERAFBETALEN
+
+.Formulas Notrend
+WH_PIPE_BAL_DEF = If((AantRekOverzichtContant_NEW<>AantRekOverzichtContant) AND (T=1), WH_PIPE_BAL_ROCONTANT, WH_PIPE_BAL)
+WH_OPEN_BAL_DEF = If((AantRekOverzichtContant_NEW<>AantRekOverzichtContant) AND (T=1), WH_OPEN_BAL_ROCONTANT, WH_OPEN_BAL)
+
+.Variables
+;------------------------------------------------------------------------------ BKR
+PX       X     2               $>BKR<$                                         \LSM_Data_BKR
+;PI    0 1N     3               $>WB_CTRY_CODE<$                                \WB_CTRY_CODE
+PI    0 1N     3               $>WB_CLNT_NO<$                                  \WB_CLNT_NO
+;PI      1N     3               $>WB_SEQ_NO<$                                   \WB_SEQ_NO
+PI    2 1N D   3               $>WB_BKR_LAST_REP_DAT<$                         \WB_BKR_LAST_REP_DAT -> LSM_BKR_FLAG_MND
+;PI    0 1N     3               $>WB_BKR_SCR<$                                  \WB_BKR_SCR
+PI      1A     3               $>WB_BKR_KNOWN<$                                \WB_BKR_KNOWN
+;PI    0 1N     3               $>WB_BKR_ACCS<$                                 \WB_BKR_ACCS
+;PI    0 1N     3               $>WB_BKR_GOODS<$                                \WB_BKR_GOODS
+;PI    0 1N     3               $>WB_BKR_RUNNING<$                              \WB_BKR_RUNNING
+;PI    0 1N     3               $>WB_BKR_HP<$                                   \WB_BKR_HP
+;PI    0 1N     3               $>WB_BKR_PERS_LOAN<$                            \WB_BKR_PERS_LOAN
+;PI    0 1N     3               $>WB_BKR_RVLG<$                                 \WB_BKR_RVLG
+;PI    0 1N     3               $>WB_BKR_CARDS<$                                \WB_BKR_CARDS
+;PI    0 1N     3               $>WB_BKR_FOA<$                                  \WB_BKR_FOA
+;PI    0 1N     3               $>WB_BKR_ROA<$                                  \WB_BKR_ROA
+PI    0 1N     3               $>WB_BKR_FEX<$                                  \WB_BKR_FEX
+PI    0 1N     3               $>WB_BKR_REX<$                                  \WB_BKR_REX
+PI    0 1N     3               $>WB_BKR_RMT<$                                  \WB_BKR_RMT
+;PI    0 1N     3               $>WB_BKR_FOV<$                                  \WB_BKR_FOV
+PI    0 1N     3               $>WB_BKR_ROV<$                                  \WB_BKR_ROV
+;PI    0 1N     3               $>WB_BKR_FINL<$                                 \WB_BKR_FINL
+;PI    0 1N     3               $>WB_BKR_FINE<$                                 \WB_BKR_FINE
+;PI    0 1N     3               $>WB_BKR_FIN_ACODE<$                            \WB_BKR_FIN_ACODE
+PI    0 1N     3               $>WB_BKR_RUN_ACODE<$                            \WB_BKR_RUN_ACODE
+PI    0 1N     3               $>WB_BKR_FIN_ACODED<$                           \WB_BKR_FIN_ACODED
+PI    0 1N     3               $>WB_BKR_RUN_ACODED<$                           \WB_BKR_RUN_ACODED
+;PI    0 1N     3               $>WB_BKR_TIME_TO_RUN<$                          \WB_BKR_TiME_TO_RUN
+
+;------------------------------------------------------------------------------ BKR
+PX       X     2               $>BKRMONITORING<$                               \LSM_Data_BKRMONITORING
+PI    0 1N     3               $>Debiteurnummer<$                              \BKRMON_Debiteurnummer
+PI    2 1N D   3               $>Aanmaakdatum<$                                \BKRMON_Aanmaakdatum
+PI      1A     3               $>MonitorIdentificatie<$                        \BKRMON_MonitorIdentificatie
+PI      1A     3               $>CorrectieOpBKRMonitormelding<$                \BKRMON_CorrectieOpBKRMonitormelding
+PI      1A     3               $>Monitornummer<$                               \BKRMON_Monitornummer
+PI    0 1N     3               $>Monitorvolgnummer<$                           \BKRMON_Monitorvolgnummer
+PI    0 1N     3               $>Monitorcode<$                                 \BKRMON_Monitorcode
+PI      1A     3               $>MonitorcodeOmschrijving<$                     \BKRMON_MonitorcodeOmschrijving
+
+.Variables
+;------------------------------------------------------------------------------ BUREAU
+PX       X     2               $>BUREAU<$ (afgeleid uit FLS_CUSTOMER)          \LSM_Data_BUREAU
+;PI    0 1N     3               $>CB_CTRY_CODE<$                                \CB_CTRY_CODE
+PI    0 1N     3               $>CB_CLNT_NO<$                                  \CB_CLNT_NO
+;PI      1A     3               $>CB_SEQ_NO<$                                   \CB_SEQ_NO
+PI    2 1N D   3               $>CB_BE_DATE<$                                  \CB_BE_DATE
+PI    0 1N     3               $>CB_BE_RPT_TYP<$                               \CB_BE_RPT_TYP
+
+;------------------------------------------------------------------------------ AtAge
+PX       X     2               $>AtAge (input)<$                               \LSM_DATA_ATAGE_IN
+;PI    0 1N     3               $>AG_CTRY_CODE<$	                               \IN_AG_CTRY_CODE
+PI    0 1N     3               $>AG_CLNT_NO<$	                                 \IN_AG_CLNT_NO
+;PI    0 1N     3               $>AG_SEQ_NO<$	                                 \IN_AG_SEQ_NO
+PI    0 1N     3               $>AG_AGE_OF_ACCOUNT<$	                         \IN_AG_AGE_OF_ACCOUNT
+PI    0 1N     3               $>AG_TS_START_REACT<$	                         \IN_AG_TS_START_REACT
+PI    0 1N     3               $>AG_DORMANCY_COUNTER<$	                       \IN_AG_DORMANCY_COUNTER
+PI    2 1N D   3               $>AG_PERIOD_OF_UPDATE<$	                       \IN_AG_PERIOD_OF_UPDATE
+PI    0 1N     3               $>AG_REM_COD<$                                  \IN_AG_REM_COD
+PI      1A     3               $>AG_GOOD_BAD_FLAG<$                            \IN_AG_GOOD_BAD_FLAG
+PI    0 1N     3               $>AG_GOOD_BAD_IND<$	                           \IN_AG_GOOD_BAD_IND
+PI    0 1N     3               $>AG_HIGHEST_BAL_EVER<$	                       \IN_AG_HIGHEST_BAL_EVER
+PI    0 1N     3               $>AG_TOTAL_INTEREST<$	                         \IN_AG_TOTAL_INTEREST
+PI    0 1N     3               $>AG_HIGHEST_EVER_REM<$                         \IN_AG_HIGHEST_EVER_REM
+PI    0 1N     3               $>AG_ARR_AMT<$                                  \IN_AG_ARR_AMT
+PI    0 1N     3               $>AG_HIGHEST_ARR_EVER<$	                       \IN_AG_HIGHEST_ARR_EVER
+PI    0 1N     3               $>AG_RECORD_NUMBER<$                            \IN_AG_RECORD_NUMBER
+
+PX       X     2               $>AtAge (output)<$                              \LSM_DATA_ATAGE_OUT
+PP    0 1N     3               $>AG_CTRY_CODE<$	                               \OUT_AG_CTRY_CODE
+PP    0 1N     3               $>AG_CLNT_NO<$	                                 \OUT_AG_CLNT_NO
+PP    0 1N     3               $>AG_SEQ_NO<$	                                 \OUT_AG_SEQ_NO
+PP    0 1N     3               $>AG_AGE_OF_ACCOUNT<$	                         \OUT_AG_AGE_OF_ACCOUNT
+PP    0 1N     3               $>AG_TS_START_REACT<$	                         \OUT_AG_TS_START_REACT
+PP    0 1N     3               $>AG_DORMANCY_COUNTER<$	                       \OUT_AG_DORMANCY_COUNTER
+PP    2 1N D   3               $>AG_PERIOD_OF_UPDATE<$	                       \OUT_AG_PERIOD_OF_UPDATE
+PP    0 1N     3               $>AG_REM_COD<$                                  \OUT_AG_REM_COD -> WH_REM_COD
+PP      1A     3               $>AG_GOOD_BAD_FLAG<$                            \OUT_AG_GOOD_BAD_FLAG
+PP    0 1N     3               $>AG_GOOD_BAD_IND<$	                           \OUT_AG_GOOD_BAD_IND
+PP    0 1N     3               $>AG_HIGHEST_BAL_EVER<$	                       \OUT_AG_HIGHEST_BAL_EVER -> IN_AG_HIGHEST_BAL_EVER
+PP    0 BN     4               (Uit HISTORY)                                   \OUT_AG_HIGHEST_BAL_HULP -> WH_OPEN_BAL_DEF
+
+PP    0 1N     3               $>AG_TOTAL_INTEREST<$	                         \OUT_AG_TOTAL_INTEREST
+PP    0 1N     3               $>AG_HIGHEST_EVER_REM<$                         \OUT_AG_HIGHEST_EVER_REM -> IN_AG_HIGHEST_EVER_REM
+PP    0 BN     4               (Uit HISTORY)                                   \OUT_AG_HIGHEST_REM_HULP -> WH_REM_COD
+
+PP    0 1N     3               $>AG_ARR_AMT<$                                  \OUT_AG_ARR_AMT
+PP    0 1N     3               $>AG_HIGHEST_ARR_EVER<$	                       \OUT_AG_HIGHEST_ARR_EVER -> IN_AG_HIGHEST_ARR_EVER
+PP    0 BN     4               (Uit HISTORY)                                   \OUT_AG_HIGHEST_ARR_HULP -> WH_ARR_AMT
+
+PP    0 1N     3               $>AG_RECORD_NUMBER<$                            \OUT_AG_RECORD_NUMBER
+
+PP    0 1N     3               $>Save AtAge<$  	                               \AtAgeSave
+C Het AtAge record wordt opgeslagen indien CLEX_RUN_TYPE is 'P' of 'W'
+
+.Formulas NoTrend
+
+AtAgeSave                      = If( (&CLEX_RUN_TYPE[1]="W") Or (&CLEX_RUN_TYPE[1]="P"), 1 ,0)
+
+OUT_AG_CTRY_CODE               = 1
+OUT_AG_CLNT_NO                 = &IN_AG_CLNT_NO[1]
+OUT_AG_SEQ_NO                  = 0
+OUT_AG_AGE_OF_ACCOUNT          = 0
+OUT_AG_TS_START_REACT          = 0
+OUT_AG_DORMANCY_COUNTER        = 0
+OUT_AG_PERIOD_OF_UPDATE        = DMYtoDate(1,DateToMonth(CLEX_RUN_DATE[1]),DateToYear(CLEX_RUN_DATE[1]))
+OUT_AG_REM_COD                 = REMINDER_CODE[1]
+OUT_AG_GOOD_BAD_FLAG           = &LSM_GOOD_BAD_FLAG[1]
+OUT_AG_GOOD_BAD_IND            = LSM_GOOD_BAD_FLAG_IND[1]
+OUT_AG_TOTAL_INTEREST          = IN_AG_TOTAL_INTEREST
+OUT_AG_ARR_AMT                 = WH_ARR_AMT[1]
+OUT_AG_HIGHEST_BAL_HULP        = If(WH_OPEN_BAL[T] > OUT_AG_HIGHEST_BAL_HULP[GetT(T,-1)], WH_OPEN_BAL_DEF[T], OUT_AG_HIGHEST_BAL_HULP[GetT(T,-1)])
+OUT_AG_HIGHEST_BAL_EVER        = Max(IN_AG_HIGHEST_BAL_EVER[1], OUT_AG_HIGHEST_BAL_HULP[LastTinFormulaSet(NoTrend,MainPeriod)])
+OUT_AG_HIGHEST_REM_HULP        = If(WH_REM_COD[T] > OUT_AG_HIGHEST_REM_HULP[GetT(T,-1)], WH_REM_COD[T], OUT_AG_HIGHEST_REM_HULP[GetT(T,-1)])
+OUT_AG_HIGHEST_EVER_REM        = Max(IN_AG_HIGHEST_EVER_REM[1], OUT_AG_HIGHEST_REM_HULP[LastTinFormulaSet(NoTrend,MainPeriod)])
+OUT_AG_HIGHEST_ARR_HULP        = If(WH_ARR_AMT[T] > OUT_AG_HIGHEST_ARR_HULP[GetT(T,-1)], WH_ARR_AMT[T], OUT_AG_HIGHEST_ARR_HULP[GetT(T,-1)])
+OUT_AG_HIGHEST_ARR_EVER        = Max(IN_AG_HIGHEST_ARR_EVER[1], OUT_AG_HIGHEST_ARR_HULP[LastTinFormulaSet(NoTrend,MainPeriod)])
+OUT_AG_RECORD_NUMBER           = 0
+
+.Variables
+PP      1A     2               Good/Bad Flag                                   \LSM_GOOD_BAD_FLAG
+PP    0 1N     3               Good/Bad Flag 14                                \LSM_GOOD_BAD_FLAG14
+PP    0 1N     3               Good/Bad Flag 15                                \LSM_GOOD_BAD_FLAG15
+PP    0 1N     3               Good/Bad Flag 1                                 \LSM_GOOD_BAD_FLAG1
+PP    0 1N     3               Good/Bad Flag 2                                 \LSM_GOOD_BAD_FLAG2
+PP    0 1N     3               Good/Bad Flag 3                                 \LSM_GOOD_BAD_FLAG3
+PP    0 1N     3               Good/Bad Flag 4                                 \LSM_GOOD_BAD_FLAG4
+PP    0 1N     3               Good/Bad Flag 5                                 \LSM_GOOD_BAD_FLAG5
+PP    0 1N     3               Good/Bad Flag 6                                 \LSM_GOOD_BAD_FLAG6
+PP    0 1N     3               Good/Bad Flag 7                                 \LSM_GOOD_BAD_FLAG7
+PP    0 1N     3               Good/Bad Flag 8                                 \LSM_GOOD_BAD_FLAG8
+PP    0 1N     3               Good/Bad Flag 9                                 \LSM_GOOD_BAD_FLAG9
+PP    0 1N     3               Good/Bad Flag 10                                \LSM_GOOD_BAD_FLAG10
+PP    0 1N     3               Good/Bad Flag 11                                \LSM_GOOD_BAD_FLAG11
+PP    0 1N     3               Good/Bad Flag 12                                \LSM_GOOD_BAD_FLAG12
+PP    0 1N     3               Good/Bad Flag 13                                \LSM_GOOD_BAD_FLAG13
+
+PP    0 1N   1 3               History Kolom (STMT_TYPE Not 0)                 \LSM_HistKolNotNull -> WH_STMT_TYPE
+PP      1N     3               Good/Bad Flag (IND)                             \LSM_GOOD_BAD_FLAG_IND
+
+PP    0 1N     3               WH_STMT_NO                                      \LSM_GB_WH_STMT_NO
+PP    0 1N     3               WH_CURR_BAL                                     \LSM_GB_WH_CURR_BAL
+PP    0 1N     3               WH_REM_COD                                      \LSM_GB_WH_REM_COD
+PP    0 1N     3               WH_QUAL_COD                                     \LSM_GB_WH_QUAL_COD
+
+.Formulas NoTrend
+LSM_GOOD_BAD_FLAG14            = If((WH_STMT_NO[LSM_HistKolNotNull] = 0) And  (WH_ORDS_DECLINE[LSM_HistKolNotNull]>0),14,NA)
+LSM_GOOD_BAD_FLAG15            = If((WH_STMT_NO[LSM_HistKolNotNull] = 0) And  (WH_ORDS_DECLINE[LSM_HistKolNotNull]=0),15,NA)
+
+LSM_GOOD_BAD_FLAG1             = If((WH_CURR_BAL[LSM_HistKolNotNull] = 0) And (WH_REM_COD[LSM_HistKolNotNull]<=1) And (OUT_AG_HIGHEST_EVER_REM[1]<=2) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) , 1,NA)
+LSM_GOOD_BAD_FLAG2             = If((WH_CURR_BAL[LSM_HistKolNotNull] = 0) And (WH_REM_COD[LSM_HistKolNotNull]<=1) And (OUT_AG_HIGHEST_EVER_REM[1]>=3) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] >= 12) ,2 ,NA)
+LSM_GOOD_BAD_FLAG3             = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]<=1) And (OUT_AG_HIGHEST_EVER_REM[1]<=2) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) , 3 ,NA)
+LSM_GOOD_BAD_FLAG4             = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]<=1) And (OUT_AG_HIGHEST_EVER_REM[1]>=3) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] >= 12), 4 ,NA)
+LSM_GOOD_BAD_FLAG5             = If(                                          (WH_REM_COD[LSM_HistKolNotNull]<=1) And (OUT_AG_HIGHEST_EVER_REM[1]>=3) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] <= 11), 5 ,NA)
+LSM_GOOD_BAD_FLAG6             = If((WH_CURR_BAL[LSM_HistKolNotNull] = 0) And (WH_REM_COD[LSM_HistKolNotNull]>=2) And                                     (WH_QUAL_COD[LSM_HistKolNotNull]<10) , 6 ,NA)
+LSM_GOOD_BAD_FLAG7             = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]=2 ) And (OUT_AG_HIGHEST_EVER_REM[1]<=2) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] >= 12) ,7 ,NA)
+LSM_GOOD_BAD_FLAG8             = If(                                                                                                                      ((WH_QUAL_COD[LSM_HistKolNotNull]>=11) And (WH_QUAL_COD[LSM_HistKolNotNull]<=13)) Or (WH_QUAL_COD[LSM_HistKolNotNull]=17) Or (WH_QUAL_COD[LSM_HistKolNotNull]=18) Or (WH_QUAL_COD[LSM_HistKolNotNull]=21) Or (WH_QUAL_COD[LSM_HistKolNotNull]=27) Or (WH_QUAL_COD[LSM_HistKolNotNull]=28) Or (WH_QUAL_COD[LSM_HistKolNotNull]=29) Or (WH_QUAL_COD[LSM_HistKolNotNull]=38) Or (WH_QUAL_COD[LSM_HistKolNotNull]=39) Or (WH_QUAL_COD[LSM_HistKolNotNull]=41) Or (WH_QUAL_COD[LSM_HistKolNotNull]=45) Or (WH_QUAL_COD[LSM_HistKolNotNull]=47) Or (WH_QUAL_COD[LSM_HistKolNotNull]=49) Or (WH_QUAL_COD[LSM_HistKolNotNull]=50) Or (WH_QUAL_COD[LSM_HistKolNotNull]=53) Or (WH_QUAL_COD[LSM_HistKolNotNull]=54) Or (WH_QUAL_COD[LSM_HistKolNotNull]=58) Or (WH_QUAL_COD[LSM_HistKolNotNull]=59) Or (WH_QUAL_COD[LSM_HistKolNotNull]=61) Or (WH_QUAL_COD[LSM_HistKolNotNull]=63) Or (WH_QUAL_COD[LSM_HistKolNotNull]=66) Or (WH_QUAL_COD[LSM_HistKolNotNull]=67) Or ((WH_QUAL_COD[LSM_HistKolNotNull]>=72) And (WH_QUAL_COD[LSM_HistKolNotNull]<=99)) ,8 ,NA)
+LSM_GOOD_BAD_FLAG9             = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]=2)  And (OUT_AG_HIGHEST_EVER_REM[1]>=3) And (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] >= 12) ,9 ,NA)
+LSM_GOOD_BAD_FLAG10            = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]>=3) And                                     (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] >= 12),10,NA)
+LSM_GOOD_BAD_FLAG11            = If((WH_CURR_BAL[LSM_HistKolNotNull] >=1) And (WH_REM_COD[LSM_HistKolNotNull]>=2) And                                     (WH_QUAL_COD[LSM_HistKolNotNull]<10) And (WH_STMT_NO[LSM_HistKolNotNull] <= 11),11,NA)
+LSM_GOOD_BAD_FLAG12            = If(                                                                                                                      (WH_QUAL_COD[LSM_HistKolNotNull]>=10),12,NA)
+LSM_GOOD_BAD_FLAG13            = If(                                                                                                                      (WH_QUAL_COD[LSM_HistKolNotNull]>=0) ,13,NA)
+
+LSM_GOOD_BAD_FLAG_IND          = If(LSM_GOOD_BAD_FLAG14 <> NA,LSM_GOOD_BAD_FLAG14,If(LSM_GOOD_BAD_FLAG15 <> NA,LSM_GOOD_BAD_FLAG15,If(LSM_GOOD_BAD_FLAG1 <> NA,LSM_GOOD_BAD_FLAG1,If(LSM_GOOD_BAD_FLAG2 <> NA,LSM_GOOD_BAD_FLAG2, If(LSM_GOOD_BAD_FLAG3 <> NA,LSM_GOOD_BAD_FLAG3, If(LSM_GOOD_BAD_FLAG4 <> NA,LSM_GOOD_BAD_FLAG4, If(LSM_GOOD_BAD_FLAG5 <> NA,LSM_GOOD_BAD_FLAG5,If(LSM_GOOD_BAD_FLAG6 <> NA,LSM_GOOD_BAD_FLAG6, If(LSM_GOOD_BAD_FLAG7 <> NA,LSM_GOOD_BAD_FLAG7, If(LSM_GOOD_BAD_FLAG8 <> NA,LSM_GOOD_BAD_FLAG8, If(LSM_GOOD_BAD_FLAG9 <> NA,LSM_GOOD_BAD_FLAG9, If(LSM_GOOD_BAD_FLAG10 <> NA,LSM_GOOD_BAD_FLAG10, If(LSM_GOOD_BAD_FLAG11 <> NA,LSM_GOOD_BAD_FLAG11, If(LSM_GOOD_BAD_FLAG12 <> NA,LSM_GOOD_BAD_FLAG12, If(LSM_GOOD_BAD_FLAG13 <> NA,LSM_GOOD_BAD_FLAG13,16 )))))))))))))))
+
+LSM_HistKolNotNull             = If(Val(&WH_STMT_TYPE[1])>0,1,If(Val(&WH_STMT_TYPE[2])>0,2,If(Val(&WH_STMT_TYPE[3])>0,3,If(Val(&WH_STMT_TYPE[4])>0,4,1))))
+LSM_GOOD_BAD_FLAG              = &MatrixLookup("RiskCube_Parameters.xls","GOODBADFLAG",LSM_GOOD_BAD_FLAG_IND,1)
+
+LSM_GB_WH_STMT_NO              = WH_STMT_NO[LSM_HistKolNotNull]
+LSM_GB_WH_CURR_BAL             = WH_CURR_BAL[LSM_HistKolNotNull]
+LSM_GB_WH_REM_COD              = WH_REM_COD[LSM_HistKolNotNull]
+LSM_GB_WH_QUAL_COD             = WH_QUAL_COD[LSM_HistKolNotNull]
+
+;------------------------------------------------------------------------------ POSTALCODE INDEX
+.Variables
+PP      1A     2               PC INDEX (Input)                                \PC_INDEX_INPUT_FOR_REACTIVATOR
+PI    2 1N     3               PC_INDEX                                        \PC_INDEX
+PI    2 1N     3               PC_INDEX_PC5                                    \PC_INDEX_PC5
+PI    2 1N     3               PC_INDEX_PC6                                    \PC_INDEX_PC6
+PP    0 1N     3               $>Berekende herstartscore<$                     \LSM_RESTART_SCORE
+
+.Formulas NoTrend
+LSM_RESTART_SCORE              = MatrixLookup("RiskCube_Parameters.xls","PostCodeIndex2HerstartScore",PC_INDEX,1)

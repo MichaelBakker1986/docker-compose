@@ -1,0 +1,280 @@
+{
+	"viewType": "GROUP",
+	"name": "Root",
+	"variableName": "Root",
+	"settings_buttons": [{
+		"name": "GEARS",
+		"subButtons": [
+		"ADD_CLIENT_EXPECTATION_YEAR",
+		"BUDGET_IMPORT_BUTTON"]
+	},
+	{
+		"name": "VIEW",
+		"subButtons": ["EMPTY_ROWS",
+		"REVERSED_COLUMNS",
+		"CHOP_TITLES"]
+	}],
+	"children": [{
+		"viewType": "CONTAINER",
+		"name": "Balans",
+		"description": "balance",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "BalanceSheet",
+			"variableName": "BalanceSheet",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Resultaat",
+		"description": "result",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "inkomen",
+			"variableName": "IncomeStatement",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Liquiditeit",
+		"description": "liquidity",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "inkomen",
+			"variableName": "StatementOfLiquidity",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Kengetallen",
+		"description": "ratios",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "inkomen",
+			"variableName": "Ratios",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Zoeken",
+		"description": "search",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "SearchBar",
+			"description": "Zoekenbar",
+			"searchBar": true
+		},
+		{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Vermogensaansluiting",
+		"description": "networthreconciliation",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "NetWorthReconciliation",
+			"variableName": "NetWorthReconciliation",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Kasstromenoverzicht",
+		"description": "cashflowstatement",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "CashFlowStatementIndirect",
+			"variableName": "CashFlowStatementIndirect",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Investerings-enfinancieringsplan",
+		"description": "investmentsandfinancingplan",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "InvestmentsAndFinancingPlan",
+			"variableName": "InvestmentsAndFinancingPlan",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Specificaties",
+		"description": "specifications",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "Tuples",
+			"variableName": "Tuples",
+			"metaData": {
+				"viewType": "SCORECARD",
+				"expandStrategy": "ALL"
+			}
+		}]
+	},
+	{
+		"viewType": "CONTAINER",
+		"name": "Klantspecifiek",
+		"description": "customerspecific",
+		"metaData": {
+			"pill-navigation": "true"
+		},
+		"children": [{
+			"viewType": "CONTAINER",
+			"name": "Columnheader",
+			"description": "Header",
+			"columnHeader": true
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DescriptionOfVariableSingular",
+			"variableName": "DescriptionOfVariableSingular"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DescriptionOfVariablePlural",
+			"variableName": "DescriptionOfVariablePlural"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DefaultDescription_NetSales",
+			"variableName": "DefaultDescription_NetSales"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DefaultDescription_Grossprofit",
+			"variableName": "DefaultDescription_Grossprofit"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DefaultDescription_OperatingExpenses",
+			"variableName": "DefaultDescription_OperatingExpenses"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "DefaultDescription_ProfitAfterTax",
+			"variableName": "DefaultDescription_ProfitAfterTax"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "SectorTitle",
+			"variableName": "SectorTitle"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "SectorCode",
+			"variableName": "SectorCode"
+		},
+		{
+			"viewType": "VARIABLE",
+			"name": "UserSpecificVariable",
+			"variableName": "UserSpecificVariable"
+		}]
+	}]
+}

@@ -1,0 +1,15 @@
+{&&Language=English}
+;----------------------------
+
+.Variables
+PIII    1N C   2               $>Sector of industry<$ ($>Forecast template<$)                      \CompanySectorTemplate
+PIII    1N C   2               $>Phase in life cycle<$                                             \CompanyLifeCyclePhase
+PIII    1N C   2               $>Forecast template<$                                               \CompanyProjectionTemplate
+
+.Choices
+CompanySectorTemplate              = "100:$>General<$|101:$>Retail<$|102:$>Industry<$|103:$>Services<$|103:$>Other<$"
+CompanyLifeCyclePhase              = "1:$>Starter<$|2:$>Steady<$|3:$>Decline<$"
+CompanyProjectionTemplate          = "NA:$>Default settings<$|1:$>No forecast<$"
+
+.Formulas NoTrend,Trend
+CompanyProjectionTemplate         = OnER(MatrixLookup("V05_ForecastSettings.xls","SectorAndLifeCyclePhase",CompanySectorTemplate[1],CompanyLifeCyclePhase[1]),NA)

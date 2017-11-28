@@ -1,0 +1,4231 @@
+<?xml version="1.0"?>
+<ConversionTable>
+  <!--
+
+MappingTable: AuditionFinan2-V05.Fmt4Table.xml
+Version:      1.0.0
+Date:         4-5-2016
+Created with: FinanMappingTool v4.3.19
+User:         B.Kottier
+
+VersionLog:
+01.00.000  05-04-2016  E.J.Stokking         Created
+
+Notes:
+EJS april 2016
+Dit is de mapping naar V05-Benchmark
+Enige correctie is mapping naar ReceibedPrePayments (is in nieuwe V05 naar hoger niveau)
+
+====Added from table "AuditionFinan2-V05.Fmt4Table":
+Deze codelijst is veel gedetailleerder dan de vorige codelijst die we gebruikten voor AuditionFinan2!
+
+Zie de Mastertabel in Excel die is afgeleid van de codelijst van UNIT4 (najaar 2015)
+
+- in de datafiles AuditionFinan2 (finan.xml) is gekozen voor verdichtingen volgens de
+  rekeningcode, dat is niet gelijk aan rekenkundige verdichtingsboom
+  Daarom bij veel codes AcceptSource uitgezet! Dit wordt in de Mastertabel automatisch   ingesteld.
+  bijvoorbeeld:
+  - bamd op zelfde level als bamdi (zie ondertab OrgBalans)
+  - bh (levende have) zit onder vaste activa (ba)
+  - Kapitaal firmant 8 (beh) terwijl behwr herwaarderingsreserve is
+  - Kapitaal firmant 11 (bek) terwijl geplaatst kapitaal beka is
+- levels in codelijst niet altijd logisch (vb achterstelde leningen bg) onder
+  aandeel van derden
+- soms komen dubbel codes voor, bijvoorbeeld bij blkihac. Dat verstoort de rekenkundige verdichting. Opgelost door daar IsInCalcTree uit te zetten. Dubbele getallen blijven dus buiten rekenkundige verdichting.
+
+
+LET OP:
+- in bronmodel is nog niet alle debet/credit correct! Dit maakt echter niet uit omdat credit-data een min-teken hebben. (DCSigned=true)
+- CodeTrimming niet mogelijk omdat de sortering niet geheel gelijkop gaat met de hiërarchie (desondanks is codetrimming toegepast bij de export uit Audition!)
+- Er zijn ruim 30.000 accounts, het is dus onmogelijk alles te mappen. Maak gebruik van de data in hogere niveau's ook al is die data op basis van code-hiërarche en niet op basis van rekenkundige verdichting gegenereerd door Audition in finan.xml. Waar conflicten zijn is in deze tabel de AcceptSource false.
+-->
+  <Head>
+    <SourceName>AUDITIONFINAN2</SourceName>
+    <SourceDescription>Audition (update september 2015)</SourceDescription>
+    <TargetName>V05</TargetName>
+    <TargetDescription>FINAN Prognose model</TargetDescription>
+    <TargetFileName></TargetFileName>
+  </Head>
+  <AccountInfo/>
+  <Entries>
+    <DefaultEntry Formulaset="NoTrend">
+      <TargetCode>ChangesInEquityApproved</TargetCode>
+      <Value>1</Value>
+    </DefaultEntry>
+    <Entry depth="5">
+      <SourceCode>baigw</SourceCode>
+      <TargetCode>Goodwill_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baiie</SourceCode>
+      <TargetCode>Goodwill_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baicv</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baiua</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baioo</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baivb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamgt</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bammi</SourceCode>
+      <TargetCode>PlantAndEquipment_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamiu</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamnd</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamnv</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafd</SourceCode>
+      <TargetCode>InvestmentInSubsidiaries_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafv</SourceCode>
+      <TargetCode>LoansToAffiliatedCompanies_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafa</SourceCode>
+      <TargetCode>InvestmentInSubsidiaries_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafe</SourceCode>
+      <TargetCode>OtherSecurities_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvohdd</SourceCode>
+      <TargetCode>ProvisionDoubtfulAccountsReceivable</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvog</SourceCode>
+      <TargetCode>ReceivablesGroupCompanies</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvop</SourceCode>
+      <TargetCode>ReceivablesAffiliatedCompanies</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvod</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvoah</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bve</SourceCode>
+      <TargetCode>MarketableSecurities</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rubb</SourceCode>
+      <TargetCode>ExtraordinaryIncome</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>radd</SourceCode>
+      <TargetCode>ShareResultMinorityInterest</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baicvop</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baicvfb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baicvai</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiuaop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiuafb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiuaai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiooop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baioofb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiooai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiieop</SourceCode>
+      <TargetCode>Goodwill_tpHistoricalCosts_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiiefb</SourceCode>
+      <TargetCode>Goodwill_tpCummulativeDepreciation_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiieai</SourceCode>
+      <TargetCode>Goodwill_tpNewInvestments_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baigwop</SourceCode>
+      <TargetCode>Goodwill_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baigwfb</SourceCode>
+      <TargetCode>Goodwill_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baigwai</SourceCode>
+      <TargetCode>Goodwill_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baivbop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baivbfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baivbai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgtab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgtfb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamgtai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bammiab</SourceCode>
+      <TargetCode>PlantAndEquipment_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bammifb</SourceCode>
+      <TargetCode>PlantAndEquipment_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bammiai</SourceCode>
+      <TargetCode>PlantAndEquipment_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdvab</SourceCode>
+      <TargetCode>TransportationEquipment_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdvfb</SourceCode>
+      <TargetCode>TransportationEquipment_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamdvai</SourceCode>
+      <TargetCode>TransportationEquipment_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamiuab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamiufb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamiuai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamndab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamndfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamndai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamnvab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamnvfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamnvai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafo</SourceCode>
+      <TargetCode>OtherFinancialFixedAssets_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamdv</SourceCode>
+      <TargetCode>TransportationEquipment_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rvpb</SourceCode>
+      <TargetCode>TaxOnProfits</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvvpa06</SourceCode>
+      <TargetCode>Product_tpInventory_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvvpa07</SourceCode>
+      <TargetCode>Product_tpInventory_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvvpa08</SourceCode>
+      <TargetCode>Product_tpInventory_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvvpa09</SourceCode>
+      <TargetCode>Product_tpInventory_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rbrd</SourceCode>
+      <TargetCode>ShareResultFromSubsidiaries</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamdi</SourceCode>
+      <TargetCode>FurnitureAndFixtures_tpBookValue_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdiab</SourceCode>
+      <TargetCode>FurnitureAndFixtures_tpHistoricalCosts_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdifb</SourceCode>
+      <TargetCode>FurnitureAndFixtures_tpCummulativeDepreciation_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamdiai</SourceCode>
+      <TargetCode>FurnitureAndFixtures_tpNewInvestments_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>xresult</SourceCode>
+      <TargetCode>RemarkImportCheckResultImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpd</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpp</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpb</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpl</SourceCode>
+      <TargetCode>OtherReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpo</SourceCode>
+      <TargetCode>VATReceivable</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvobpv</SourceCode>
+      <TargetCode>TaxOnProfitsReceivable</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvvpa10</SourceCode>
+      <TargetCode>Product_tpInventory_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvphaw</SourceCode>
+      <TargetCode>ProvisionObsoleteInventories</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamdh</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bvp</SourceCode>
+      <TargetCode>ProjectsInProgress</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvo</SourceCode>
+      <TargetCode>WorkInProgress</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvl</SourceCode>
+      <TargetCode>ExcessCash</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bai</SourceCode>
+      <TargetCode>IntangibleFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafl</SourceCode>
+      <TargetCode>OtherFinancialFixedAssets_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafu</SourceCode>
+      <TargetCode>OtherSecurities_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafw</SourceCode>
+      <TargetCode>OtherFinancialFixedAssets_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baiwa</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiwafb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiwaai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiwaop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baiwb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiwbop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiwbfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiwbai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baipm</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baipb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baipo</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baimp</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipmop</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpHistoricalCosts_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baipmai</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpNewInvestments_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipmfb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpCummulativeDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipbfb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpCummulativeDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baipbai</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpNewInvestments_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipbop</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpHistoricalCosts_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipoop</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpHistoricalCosts_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baipofb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpCummulativeDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baipoai</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpNewInvestments_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baimpop</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baimpfb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baimpai</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baioq</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baior</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baios</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>baiot</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baioqop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiorop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiosop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiotop</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baioqfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiorfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiosfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>baiotfb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baioqai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiorai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiosai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>baiotai</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdhab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdhfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamdhai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamgr</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgrab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgrfb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamgrai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamgi</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgiab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamgifb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamgiai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamgl</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamglab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamglfb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamglai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bam</SourceCode>
+      <TargetCode>MaterialFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvva</SourceCode>
+      <TargetCode>CorrectionWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bampo</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bampoab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bampofb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bampoai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bampi</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamdg</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamwa</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamwb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bamwc</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bampiab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdgab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwaab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwbab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwcab</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bampifb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamdgfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwafb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwbfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bamwcfb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bampiai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamdgai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamwaai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamwbai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bamwcai</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bav</SourceCode>
+      <TargetCode>LandAndBuildings_tpBookValue_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavaaab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavbaab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavcaab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavdaab</SourceCode>
+      <TargetCode>LandAndBuildings_tpHistoricalCosts_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavaafb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavbafb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavcafb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bavdafb</SourceCode>
+      <TargetCode>LandAndBuildings_tpCummulativeDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bavaaai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bavbaai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bavcaai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="8">
+      <SourceCode>bavdaai</SourceCode>
+      <TargetCode>LandAndBuildings_tpNewInvestments_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafn</SourceCode>
+      <TargetCode>InvestmentInSubsidiaries_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bh</SourceCode>
+      <TargetCode>OtherFinancialFixedAssets_tpBookValue_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpa01</SourceCode>
+      <TargetCode>InventoryFinishedProducts</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpa02</SourceCode>
+      <TargetCode>InventoryFinishedProducts</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpa03</SourceCode>
+      <TargetCode>InventoryFinishedProducts</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpa04</SourceCode>
+      <TargetCode>InventoryFinishedProducts</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpa05</SourceCode>
+      <TargetCode>InventoryFinishedProducts</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvid</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvia</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvit</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvig</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvviv</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvrv</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvhv</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvvd</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvlb</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvlh</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvpl</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvlw</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvva</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvb</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvx</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvy</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvow</SourceCode>
+      <TargetCode>OtherAccountsReceivable</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvov</SourceCode>
+      <TargetCode>OtherAccountsReceivable</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvohd01</SourceCode>
+      <TargetCode>TradeReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvohd02</SourceCode>
+      <TargetCode>TradeReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvohd03</SourceCode>
+      <TargetCode>TradeReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvohd04</SourceCode>
+      <TargetCode>TradeReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bvohd05</SourceCode>
+      <TargetCode>TradeReceivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvon</SourceCode>
+      <TargetCode>ReceivablesAffiliatedCompanies</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvoo</SourceCode>
+      <TargetCode>TransitionalAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beka</SourceCode>
+      <TargetCode>SharedCapitalOrdinaryShares</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beki</SourceCode>
+      <TargetCode>SharedCapitalOrdinaryShares</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beral</SourceCode>
+      <TargetCode>ReservedProfit</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>berco</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>berbp</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>berba</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>berag</SourceCode>
+      <TargetCode>SharePremium</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>behwr</SourceCode>
+      <TargetCode>RevaluationReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bewr</SourceCode>
+      <TargetCode>StatutoryReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bevvr</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bewgr</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beugr</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bevzr</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bexpr</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beor</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beowr</SourceCode>
+      <TargetCode>ReservedProfit</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beour</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bea</SourceCode>
+      <TargetCode>Partner_tpCapital_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>beb</SourceCode>
+      <TargetCode>Partner_tpCapital_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bec</SourceCode>
+      <TargetCode>Partner_tpCapital_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bed</SourceCode>
+      <TargetCode>Partner_tpCapital_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bee</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bef</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>beg</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bei</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bej</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bel</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behbopx</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behbopb</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behxxxx</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behrsl</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behpcor</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bekbopx</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bekbopb</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bekxxxx</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bekrsl</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>bekpcor</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bet</SourceCode>
+      <TargetCode>OtherReserve</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bd</SourceCode>
+      <TargetCode>MinorityInterests</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bg</SourceCode>
+      <TargetCode>SubordinatedDebts</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgwir</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgipr</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgiqr</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgirr</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgisr</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bgitr</SourceCode>
+      <TargetCode>SubordinatedDebt_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>bw</SourceCode>
+      <TargetCode>OtherProvisions</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bzp</SourceCode>
+      <TargetCode>PensionProvisions</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bzw</SourceCode>
+      <TargetCode>ProvisionForReorganisation</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bzb</SourceCode>
+      <TargetCode>DeferredTaxes</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bzd</SourceCode>
+      <TargetCode>OtherProvisions</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bl</SourceCode>
+      <TargetCode>NonCurrentLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blco</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blo</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blkih</SourceCode>
+      <TargetCode>LongTermDebtsAnnuity</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkiha</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihb</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihc</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihd</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihe</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihf</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihg</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihh</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihi</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihj</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihk</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkihl</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkil</SourceCode>
+      <TargetCode>LongTermDebt_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkif</SourceCode>
+      <TargetCode>LongTermDebt_tpBookValue_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkio</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkig</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkip</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blkii</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blrv</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpBookValue_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blgm</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpBookValue_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blgn</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpBookValue_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blpm</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpBookValue_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blwb</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blwd</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blb</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blpe</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bldv</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bldo</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blcr</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat4</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blvu</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>blwc</SourceCode>
+      <TargetCode>LongTermDebtsOtherCat3</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bk</SourceCode>
+      <TargetCode>CurrentLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkcr</SourceCode>
+      <TargetCode>TradePayablesTotal</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkwc</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkkiah</SourceCode>
+      <TargetCode>ShortTermPartOfLongTermDebtsAnnuity</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkkiaa</SourceCode>
+      <TargetCode>ShortTermPartOfSubordinatedDebts</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkkial</SourceCode>
+      <TargetCode>ShortTermPartOfLongTermDebts</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkkiaf</SourceCode>
+      <TargetCode>ShortTermPartOfLongTermDebts</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkkia</SourceCode>
+      <TargetCode>STPartOfLTDebts</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiac</SourceCode>
+      <TargetCode>LongTermDebtOther_tpShortTermPart_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiab</SourceCode>
+      <TargetCode>LongTermDebtOther_tpShortTermPart_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiao</SourceCode>
+      <TargetCode>LongTermDebtOther_tpShortTermPart_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiag</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpShortTermPart_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkian</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpShortTermPart_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiap</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpShortTermPart_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiad</SourceCode>
+      <TargetCode>LongTermDebtOther_tpShortTermPart_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiae</SourceCode>
+      <TargetCode>LongTermDebtOther_tpShortTermPart_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiai</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpShortTermPart_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>bkkiav</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpShortTermPart_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkcl</SourceCode>
+      <TargetCode>OtherShortTermDebt</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkoo</SourceCode>
+      <TargetCode>OtherShortTermDebt</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkkib</SourceCode>
+      <TargetCode>OverdraftCurrentAccount</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkgm</SourceCode>
+      <TargetCode>CurrentAccountGroupCompanies</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkgn</SourceCode>
+      <TargetCode>CurrentAccountAffiliatedCompanies</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkpm</SourceCode>
+      <TargetCode>CurrentAccountAffiliatedCompanies</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbbpv</SourceCode>
+      <TargetCode>TaxOnProfitsPayable</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbbpo</SourceCode>
+      <TargetCode>VATPayable</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbbpl</SourceCode>
+      <TargetCode>OtherTaxesAndSocialSecurityCharges</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbbpb</SourceCode>
+      <TargetCode>OtherTaxesAndSocialSecurityCharges</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbpea</SourceCode>
+      <TargetCode>OtherTaxesAndSocialSecurityCharges</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkbbpd</SourceCode>
+      <TargetCode>OtherTaxesAndSocialSecurityCharges</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bktp</SourceCode>
+      <TargetCode>PensionExpensesPayable</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkdv</SourceCode>
+      <TargetCode>OtherShortTermDebt</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkop</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkmemo</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bkob</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>ron</SourceCode>
+      <TargetCode>NetSales</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoo</SourceCode>
+      <TargetCode>Product_tpSales_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronr</SourceCode>
+      <TargetCode>Product_tpSales_ti010</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronv</SourceCode>
+      <TargetCode>Product_tpSales_ti010</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronp</SourceCode>
+      <TargetCode>Product_tpSales_ti010</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronk</SourceCode>
+      <TargetCode>Product_tpSales_ti009</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronl</SourceCode>
+      <TargetCode>Product_tpSales_ti009</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronm</SourceCode>
+      <TargetCode>Product_tpSales_ti009</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ront</SourceCode>
+      <TargetCode>Product_tpSales_ti009</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rogo</SourceCode>
+      <TargetCode>ChangeInInventories</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogoa01</SourceCode>
+      <TargetCode>ChangeInFinishedProduct</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogoa02</SourceCode>
+      <TargetCode>ChangeInFinishedProduct</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogoa03</SourceCode>
+      <TargetCode>ChangeInFinishedProduct</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogoa04</SourceCode>
+      <TargetCode>ChangeInFinishedProduct</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogoa05</SourceCode>
+      <TargetCode>ChangeInFinishedProduct</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogob01</SourceCode>
+      <TargetCode>ChangeInWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogob02</SourceCode>
+      <TargetCode>ChangeInWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogob03</SourceCode>
+      <TargetCode>ChangeInWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogob04</SourceCode>
+      <TargetCode>ChangeInWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogob05</SourceCode>
+      <TargetCode>ChangeInWorkInProgress</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rob</SourceCode>
+      <TargetCode>OtherOperatingIncome</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>ros</SourceCode>
+      <TargetCode>OtherOperatingIncome</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogh</SourceCode>
+      <TargetCode>CostOfMaterials</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogm</SourceCode>
+      <TargetCode>CostOfMaterials</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rogu</SourceCode>
+      <TargetCode>OtherCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rom</SourceCode>
+      <TargetCode>OtherCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rok</SourceCode>
+      <TargetCode>TradeCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>roe</SourceCode>
+      <TargetCode>OtherCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rki</SourceCode>
+      <TargetCode>TradeCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>baf</SourceCode>
+      <TargetCode>FinancialFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bvo</SourceCode>
+      <TargetCode>Receivables</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bvv</SourceCode>
+      <TargetCode>Inventories</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>be</SourceCode>
+      <TargetCode>NetWorth</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>bz</SourceCode>
+      <TargetCode>Provisions</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rofv</SourceCode>
+      <TargetCode>SellingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkt</SourceCode>
+      <TargetCode>OtherCostOfSales</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkg</SourceCode>
+      <TargetCode>CostOfMaterials</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rku</SourceCode>
+      <TargetCode>ContractedOutPurchase</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkl</SourceCode>
+      <TargetCode>PersonnelExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklal</SourceCode>
+      <TargetCode>DepartmentTotalWages</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklas</SourceCode>
+      <TargetCode>DepartmentTotalSocialSecurities</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklap</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklab</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklac</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklav</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklsl</SourceCode>
+      <TargetCode>DepartmentTotalWages</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklss</SourceCode>
+      <TargetCode>DepartmentTotalSocialSecurities</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklsp</SourceCode>
+      <TargetCode>DepartmentTotalPensionPremiums</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklsb</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rklsv</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkwb</SourceCode>
+      <TargetCode>MaintenanceFurnitureAndFixtureExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkwc</SourceCode>
+      <TargetCode>MaintenanceFurnitureAndFixtureExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkwd</SourceCode>
+      <TargetCode>MaintenanceFurnitureAndFixtureExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkwl</SourceCode>
+      <TargetCode>MaintenanceFurnitureAndFixtureExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafiua</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafioo</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkaficv</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafiie</SourceCode>
+      <TargetCode>Goodwill_tpDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafigw</SourceCode>
+      <TargetCode>Goodwill_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafivb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafipm</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafipb</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafipo</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafimp</SourceCode>
+      <TargetCode>PatentsTrademarksAndOtherRights_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafioq</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafior</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafios</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafiot</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafiwa</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafiwb</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi90</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi91</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi92</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi93</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi94</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi95</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi96</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi97</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi98</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafi99</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafib</SourceCode>
+      <TargetCode>OtherIntangibleFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkafi</SourceCode>
+      <TargetCode>DepreciationOfIntangibleFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkafai</SourceCode>
+      <TargetCode>DepreciationOfIntangibleFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmgt</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmgr</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmgi</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmgl</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmpo</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmmi</SourceCode>
+      <TargetCode>PlantAndEquipment_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmdi</SourceCode>
+      <TargetCode>FurnitureAndFixtures_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmdv</SourceCode>
+      <TargetCode>TransportationEquipment_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmpi</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmdg</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmwa</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmdh</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmwb</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmwc</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmiu</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm90</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm91</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm92</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm93</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm94</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm95</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm96</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm97</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm98</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafm99</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkafm</SourceCode>
+      <TargetCode>DepreciationOfMaterialFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkafam</SourceCode>
+      <TargetCode>DepreciationOfMaterialFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkafv</SourceCode>
+      <TargetCode>LandAndBuildings_tpDepreciation_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkaf</SourceCode>
+      <TargetCode>DepreciationOfAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkow</SourceCode>
+      <TargetCode>ImpairmentsOfFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkbw</SourceCode>
+      <TargetCode>ImpairmentsOfCurrentAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobi</SourceCode>
+      <TargetCode>FurnitureAndFixtureExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkoba</SourceCode>
+      <TargetCode>TransportationExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkobv</SourceCode>
+      <TargetCode>SellingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rwn</SourceCode>
+      <TargetCode>ImpairmentsOfFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rwh</SourceCode>
+      <TargetCode>ImpairmentsOfFixedAssets</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfva</SourceCode>
+      <TargetCode>ResultFromFinancialFixedAssets</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrb</SourceCode>
+      <TargetCode>OtherInterestIncome</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfra</SourceCode>
+      <TargetCode>OtherInterestIncome</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>blwa</SourceCode>
+      <TargetCode>LongTermDebtOther_tpBookValue_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc01</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc02</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc03</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc04</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc05</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc06</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc07</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc08</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc09</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc10</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc11</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlc12</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo01</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo02</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo03</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo04</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo05</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo06</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo07</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo08</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo09</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo10</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo11</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlo12</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh01</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh02</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh03</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh04</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh06</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh07</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh08</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh09</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh10</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh11</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh12</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlh05</SourceCode>
+      <TargetCode>LongTermDebtAnnuity_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf01</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf02</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf03</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf04</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf05</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf06</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf07</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf08</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf09</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf10</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf11</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlf12</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll01</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll02</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll03</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll04</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll05</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll06</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll07</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll08</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll09</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll10</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll11</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrll12</SourceCode>
+      <TargetCode>LongTermDebt_tpInterestExpenses_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli01</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli02</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli03</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli04</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli05</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrli06</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj01</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj02</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj03</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj04</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj05</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlj06</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk01</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk02</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk03</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk04</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk05</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlk06</SourceCode>
+      <TargetCode>LongTermDebtOther_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg01</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg02</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg03</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg04</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg05</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg06</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg07</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg08</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg09</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg10</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg11</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg12</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg13</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg14</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg15</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg16</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg17</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg18</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg19</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg20</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg21</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg22</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg23</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg24</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg25</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg26</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg27</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg28</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg29</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg30</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg31</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg32</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg33</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg34</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg35</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlg36</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp01</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp02</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp03</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp04</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp05</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp06</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp07</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp08</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp09</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp10</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp11</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp12</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp13</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp14</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp15</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp16</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp17</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp18</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp19</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp20</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp21</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp22</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp23</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp24</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp25</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp26</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp27</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp28</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp29</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp30</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp31</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp32</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp33</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp34</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp35</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rfrlp36</SourceCode>
+      <TargetCode>LongTermDebtOtherCat2_tpInterestExpenses_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla01</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla02</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla03</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla04</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla05</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla06</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla07</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla08</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla09</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla10</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla11</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla12</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla13</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla14</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrla15</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb01</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb02</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb03</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb04</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb05</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlb06</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrld06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrle06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm01</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm02</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm03</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm04</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm05</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlm06</SourceCode>
+      <TargetCode>InterestExpensesLongTermDebtOtherCat3</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrln06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlq06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlr06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrls06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz01</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz02</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz03</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz04</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz05</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz06</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz07</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz08</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz09</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz10</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz11</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz12</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz89</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz90</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz91</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz92</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz93</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz94</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz95</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz96</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz97</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz98</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rfrlz99</SourceCode>
+      <TargetCode>InterestExpensesOnOtherShortTermDebt</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rfrl</SourceCode>
+      <TargetCode>FinancialExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="1">
+      <SourceCode>b</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>beord</SourceCode>
+      <TargetCode>ProfitPaidOutToClaimants</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>bai</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>bam</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>bav</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>baf</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>bh</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="7">
+      <SourceCode>bv</SourceCode>
+      <TargetCode>RemarkImportCheckBalanceImport</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="1">
+      <SourceCode>rkmemo</SourceCode>
+      <TargetCode>TransitionalLiabilities</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafm</SourceCode>
+      <TargetCode>LoansToAffiliatedCompanies_tpBookValue_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bafp</SourceCode>
+      <TargetCode>LoansToAffiliatedCompanies_tpBookValue_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bvvg</SourceCode>
+      <TargetCode>MaterialsInventory</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>behs</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>beho</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>beks</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5" obfuscation-mode="title">
+      <SourceCode>beko</SourceCode>
+      <TargetCode>Partner_tpCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beao</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bebo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beco</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bedo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beeo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>befo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bego</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beho</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beio</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bejo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beko</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>belo</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beas</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bebs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>becs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beds</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bees</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>befs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>begs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>behs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beis</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bejs</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>beks</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bels</SourceCode>
+      <TargetCode>Partner_tpContributionOfCapital_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beapcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bebpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>becpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bedpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beepcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>befpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>begpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>behpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>beipcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bejpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bekpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>belpcor</SourceCode>
+      <TargetCode>Partner_tpPersonalDrawDown_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bzdvs</SourceCode>
+      <TargetCode>StandingRight</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bzdvs</SourceCode>
+      <TargetCode>OtherProvisions</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>bzdvr</SourceCode>
+      <TargetCode>DeferredTaxes</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bzdvr</SourceCode>
+      <TargetCode>OtherProvisions</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>fte</SourceCode>
+      <TargetCode>TotalNumberOfEmployees</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmnd</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmnv</SourceCode>
+      <TargetCode>OtherMaterialFixedAssets_tpDepreciation_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="6">
+      <SourceCode>rkafmb</SourceCode>
+      <TargetCode>PlantAndEquipment_tpDepreciation_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpo</SourceCode>
+      <TargetCode>Product_tpCost_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpa</SourceCode>
+      <TargetCode>Product_tpCost_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpb</SourceCode>
+      <TargetCode>Product_tpCost_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpc</SourceCode>
+      <TargetCode>Product_tpCost_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpd</SourceCode>
+      <TargetCode>Product_tpCost_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpe</SourceCode>
+      <TargetCode>Product_tpCost_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpf</SourceCode>
+      <TargetCode>Product_tpCost_ti006</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpg</SourceCode>
+      <TargetCode>Product_tpCost_ti007</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokph</SourceCode>
+      <TargetCode>Product_tpCost_ti008</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpi</SourceCode>
+      <TargetCode>Product_tpCost_ti009</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokpj</SourceCode>
+      <TargetCode>Product_tpCost_ti010</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokw</SourceCode>
+      <TargetCode>Product_tpCost_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>roks</SourceCode>
+      <TargetCode>Product_tpCost_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokg</SourceCode>
+      <TargetCode>Product_tpCost_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokb</SourceCode>
+      <TargetCode>Product_tpCost_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>roke</SourceCode>
+      <TargetCode>Product_tpCost_ti006</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rokl</SourceCode>
+      <TargetCode>Product_tpCost_ti007</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>roko</SourceCode>
+      <TargetCode>Product_tpCost_ti008</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioa</SourceCode>
+      <TargetCode>Product_tpCost_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkiob</SourceCode>
+      <TargetCode>Product_tpCost_ti002</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioc</SourceCode>
+      <TargetCode>Product_tpCost_ti003</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkiod</SourceCode>
+      <TargetCode>Product_tpCost_ti004</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkiof</SourceCode>
+      <TargetCode>Product_tpCost_ti006</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioh</SourceCode>
+      <TargetCode>Product_tpCost_ti008</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioe</SourceCode>
+      <TargetCode>Product_tpCost_ti005</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkiog</SourceCode>
+      <TargetCode>Product_tpCost_ti007</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioi</SourceCode>
+      <TargetCode>Product_tpCost_ti009</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioj</SourceCode>
+      <TargetCode>Product_tpCost_ti010</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkioo</SourceCode>
+      <TargetCode>Product_tpCost_ti001</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkoba01</SourceCode>
+      <TargetCode>FuelTransportationExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkoba02</SourceCode>
+      <TargetCode>CarTransportationExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkoba03</SourceCode>
+      <TargetCode>LeaseTransportationExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkoba04</SourceCode>
+      <TargetCode>InsuranceTransportationExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkobh</SourceCode>
+      <TargetCode>OfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobh01</SourceCode>
+      <TargetCode>RentOfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobh02</SourceCode>
+      <TargetCode>EnergyOfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobh03</SourceCode>
+      <TargetCode>OperatingOfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobh06</SourceCode>
+      <TargetCode>InsuranceOfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobh07</SourceCode>
+      <TargetCode>MaintenanceOfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkobo</SourceCode>
+      <TargetCode>OfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkwa</SourceCode>
+      <TargetCode>OfficeExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="3">
+      <SourceCode>rkobp</SourceCode>
+      <TargetCode>TotalOtherStaffExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="4">
+      <SourceCode>rkobe</SourceCode>
+      <TargetCode>ProductionExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkd</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkf</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rksg</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobx</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkoby</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobz</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobr</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobn</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobb</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobq</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobs</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobl</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobw</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobc</SourceCode>
+      <TargetCode>OtherOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobf</SourceCode>
+      <TargetCode>InsuranceOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobj</SourceCode>
+      <TargetCode>ContributionsOtherOperatingExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobk</SourceCode>
+      <TargetCode>OtherOperatingExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rofa</SourceCode>
+      <TargetCode>OtherMonitoringAndControlExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobm</SourceCode>
+      <TargetCode>MonitoringAndControlExpense</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobg</SourceCode>
+      <TargetCode>MonitoringAndControlExpensesUnspecified</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rkobd</SourceCode>
+      <TargetCode>MonitoringAndControlExpense</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="2">
+      <SourceCode>row</SourceCode>
+      <TargetCode>Product_tpSales_ti007</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoa</SourceCode>
+      <TargetCode>Product_tpSales_ti001</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronob</SourceCode>
+      <TargetCode>Product_tpSales_ti002</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoc</SourceCode>
+      <TargetCode>Product_tpSales_ti003</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronod</SourceCode>
+      <TargetCode>Product_tpSales_ti004</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoe</SourceCode>
+      <TargetCode>Product_tpSales_ti005</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronof</SourceCode>
+      <TargetCode>Product_tpSales_ti006</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronog</SourceCode>
+      <TargetCode>Product_tpSales_ti007</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoh</SourceCode>
+      <TargetCode>Product_tpSales_ti008</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoi</SourceCode>
+      <TargetCode>Product_tpSales_ti009</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>ronoj</SourceCode>
+      <TargetCode>Product_tpSales_ti010</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rubl</SourceCode>
+      <TargetCode>OtherExtraordinaryExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>rube</SourceCode>
+      <TargetCode>OtherExtraordinaryExpenses</TargetCode>
+      <WeightValue>1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkvu</SourceCode>
+      <TargetCode>ReceivedPrePayments</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkoha</SourceCode>
+      <TargetCode>ReceivedPrePayments</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+    <Entry depth="5">
+      <SourceCode>bkn</SourceCode>
+      <TargetCode>ReceivedPrePayments</TargetCode>
+      <WeightValue>-1</WeightValue>
+    </Entry>
+  </Entries>
+</ConversionTable>

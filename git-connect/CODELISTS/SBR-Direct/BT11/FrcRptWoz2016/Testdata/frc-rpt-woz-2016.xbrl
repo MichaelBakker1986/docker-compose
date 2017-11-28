@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrli:xbrl xmlns:kvk-t="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-tuples" xmlns:venj-bw2-dm="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-domains" xmlns:venj-bw2-dim="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-axes" xmlns:frc-i="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-data" xmlns:kvk-i="http://www.nltaxonomie.nl/nt11/kvk/20161214/dictionary/kvk-data" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:rj-i="http://www.nltaxonomie.nl/nt11/rj/20161214/dictionary/rj-data" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xbrldi="http://xbrl.org/2006/xbrldi" xmlns:nl-cd="http://www.nltaxonomie.nl/nt11/sbr/20160610/dictionary/nl-common-data" xmlns:frc-dim="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-axes" xmlns:frc-dm="https://www.sbrbanken.nl/bt11/frc/20161209/dictionary/frc-domains" xmlns:venj-bw2-i="http://www.nltaxonomie.nl/nt11/venj/20161214/dictionary/venj-bw2-data" xmlns:bd-burg="http://www.nltaxonomie.nl/nt11/bd/20161207/dictionary/bd-burgers" xml:lang="nl">
+	<link:schemaRef xlink:type="simple" xlink:href="https://www.sbrbanken.nl/bt11/frc/20161209/entrypoints/frc-rpt-woz-2016.xsd"/>
+	<xbrli:context id="context0">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+	</xbrli:context>
+	<xbrli:context id="context19">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BankAccountSpecificationAxis">
+				<frc-dm:BankAccountSpecificationTypedMember>NL31INGB0000142536</frc-dm:BankAccountSpecificationTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context21">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:BankAccountSpecificationAxis">
+				<frc-dm:BankAccountSpecificationTypedMember>NL31INGB1234567890</frc-dm:BankAccountSpecificationTypedMember>
+			</xbrldi:typedMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context23">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:instant>2016-12-31</xbrli:instant>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:LandAndBuildingsSpecificationAxis">
+				<frc-dm:RegistryNumberRegisterBoundGoodTypedMember>86546546</frc-dm:RegistryNumberRegisterBoundGoodTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context30">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context33">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:SecondHouseSpecificationAxis">
+				<frc-dm:ObjectNumberTypedMember>654465464</frc-dm:ObjectNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:context id="context36">
+		<xbrli:entity>
+			<xbrli:identifier scheme="http://www.bank.nl/bank-id">12345678</xbrli:identifier>
+		</xbrli:entity>
+		<xbrli:period>
+			<xbrli:startDate>2016-01-01</xbrli:startDate>
+			<xbrli:endDate>2016-12-31</xbrli:endDate>
+		</xbrli:period>
+		<xbrli:scenario>
+			<xbrldi:typedMember dimension="frc-dim:ImmovablePropertyOtherSpecificationAxis">
+				<frc-dm:ObjectNumberTypedMember>123</frc-dm:ObjectNumberTypedMember>
+			</xbrldi:typedMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:BasisOfPreparationAxis">venj-bw2-dm:CommercialMember</xbrldi:explicitMember>
+			<xbrldi:explicitMember dimension="venj-bw2-dim:FinancialStatementsTypeAxis">venj-bw2-dm:SeparateMember</xbrldi:explicitMember>
+		</xbrli:scenario>
+	</xbrli:context>
+	<xbrli:unit id="pure">
+		<xbrli:measure>xbrli:pure</xbrli:measure>
+	</xbrli:unit>
+	<xbrli:unit id="EUR">
+		<xbrli:measure>iso4217:EUR</xbrli:measure>
+	</xbrli:unit>
+<frc-i:ReasonDelivery contextRef="context0">Nieuwe aanvraag</frc-i:ReasonDelivery>
+	<nl-cd:DocumentCreationDate contextRef="context0">2016-08-01</nl-cd:DocumentCreationDate>
+	<venj-bw2-i:ChamberOfCommerceRegistrationNumber contextRef="context0">12345678</venj-bw2-i:ChamberOfCommerceRegistrationNumber>
+	<venj-bw2-i:LegalEntityName contextRef="context0">Voorbeeld rechtpersoonnaam</venj-bw2-i:LegalEntityName>
+	<rj-i:BusinessNames contextRef="context0">Bakkerij van Dam</rj-i:BusinessNames>
+	<nl-cd:HouseNumberNL contextRef="context0">6</nl-cd:HouseNumberNL>
+	<nl-cd:PostalCodeNL contextRef="context0">2345AB</nl-cd:PostalCodeNL>
+	<nl-cd:PlaceOfResidenceNL contextRef="context0">Lutjebroek</nl-cd:PlaceOfResidenceNL>
+	<frc-i:NameIntermediary contextRef="context0">Henk de Boekhouder</frc-i:NameIntermediary>
+	<frc-i:DomicileIntermediary contextRef="context0">Capelle</frc-i:DomicileIntermediary>
+	<frc-i:NameCompiler contextRef="context0">Henk B</frc-i:NameCompiler>
+	<frc-i:EmailAddressIntermediary contextRef="context0">henk@boekhouder.nl</frc-i:EmailAddressIntermediary>
+	<frc-i:DestinationBank contextRef="context0">ABN AMRO Bank</frc-i:DestinationBank>
+	<frc-i:BankName contextRef="context19">ABN AMRO Bank</frc-i:BankName>
+	<frc-i:BankName contextRef="context21">ABN AMRO Bank</frc-i:BankName>
+	<frc-i:PurchaseValueRegisterBoundGood contextRef="context23" unitRef="EUR" decimals="INF">450000</frc-i:PurchaseValueRegisterBoundGood>
+	<frc-i:PurchaseYearRegisterBoundGood contextRef="context23" unitRef="pure" decimals="INF">1987</frc-i:PurchaseYearRegisterBoundGood>
+	<frc-i:BuildingIndicator contextRef="context23">Ja</frc-i:BuildingIndicator>
+	<frc-i:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood contextRef="context23" unitRef="EUR" decimals="INF">585000</frc-i:ValuePurposesValuationOfImmovablePropertyActRegisterBoundGood>
+	<frc-i:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood contextRef="context23">2014-02-14</frc-i:DateOfAdoptionForValueOfImmovablePropertyActRegisterBoundGood>
+	<frc-i:BalanceSheetValueRegisterBoundGood contextRef="context23" unitRef="EUR" decimals="INF">502500</frc-i:BalanceSheetValueRegisterBoundGood>
+	<frc-i:AmortisationMethodRegisterBoundGood contextRef="context23">lineair</frc-i:AmortisationMethodRegisterBoundGood>
+	<bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawObjectNumber decimals="0" contextRef="context30" unitRef="pure">646646</bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawObjectNumber>
+	<bd-burg:OwnHousePrincipalResidenceAddress contextRef="context30">Dorpstraat 21, Lutjebroek</bd-burg:OwnHousePrincipalResidenceAddress>
+	<bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawValue contextRef="context30" unitRef="EUR" decimals="INF">554000</bd-burg:OwnHousePrincipalResidenceImmovablePropertyLawValue>
+	<bd-burg:SecondHouseAddress contextRef="context33">De achterhoek 1, Het Oosten</bd-burg:SecondHouseAddress>
+	<bd-burg:SecondHouseValue contextRef="context33" unitRef="EUR" decimals="INF">345000</bd-burg:SecondHouseValue>
+	<bd-burg:ImmovablePropertyOtherAddress contextRef="context36">En route, Carcasonne, France</bd-burg:ImmovablePropertyOtherAddress>
+	<bd-burg:ImmovablePropertyOtherValue contextRef="context36" unitRef="EUR" decimals="INF">120000</bd-burg:ImmovablePropertyOtherValue>
+	<kvk-t:ContactForDocumentPresentation>
+		<kvk-i:ContactType contextRef="context0">Intermediair</kvk-i:ContactType>
+		<nl-cd:FirstName contextRef="context0">Kees</nl-cd:FirstName>
+		<nl-cd:FamilyName contextRef="context0">Vries</nl-cd:FamilyName>
+		<kvk-i:OrganisationName contextRef="context0">VIS</kvk-i:OrganisationName>
+		<nl-cd:TelephoneNumber contextRef="context0">070-11111111</nl-cd:TelephoneNumber>
+		<nl-cd:EmailAddressFull contextRef="context0">vries@vis.nl</nl-cd:EmailAddressFull>
+	</kvk-t:ContactForDocumentPresentation>
+</xbrli:xbrl>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>finan-models</artifactId>
+    <groupId>finan</groupId>
+    <version>4.0.3</version>
+  </parent>
+
+  <artifactId>fes-model-KAM</artifactId>
+  <version>00.00.1.60</version>
+
+  <properties>
+    <modelname>KAM</modelname>
+    <matricesDir>Matrices</matricesDir>
+    <rptFilename>Reports\reports.questionnaire-kam.frb-rpt</rptFilename>
+    <xmlTemplateFilename>Reports\reports.questionnaire-kam.frb-xml</xmlTemplateFilename>
+    <fesDocumentFilename>TestData\empty.xml</fesDocumentFilename>
+    <outputIdentifier>KAM</outputIdentifier>
+  </properties>
+</project>

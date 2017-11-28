@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="3.3.4" date="3-9-2014" author="Topicus FINAN" title="Begroting" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<TimelineId>1</TimelineId>
+	<TimelineTitle>MonthTimeline</TimelineTitle>
+	<Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase"/></data></Periods>
+  <PeriodsTable>datatable<data src="document" var="./document/properties/Periods/text()" /></PeriodsTable>
+	<PeriodsYearTable>datatable<data src="document" var="./document/properties/Periods/text()" />Year</PeriodsYearTable>
+	<ReportName><data src="chineseRoom" name="Budget-title">Begrotingsrapportage</data></ReportName>
+	<ReportScale>1000</ReportScale>
+	<ReportVersion><data src="document" var="./document/@version" type="calc"/></ReportVersion>
+	<ModelVersion><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="1"/><variables depth="1" var="ModelVersion"/></data></ModelVersion>
+	<CompanyName><data src="fesModel"><variables var="CompanyName"/></data></CompanyName>
+	<CompanyPlaceOfResidence><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="asc" virtualColumns="true" withMonths="1"/><variables depth="1" var="CompanyPlaceOfResidence"/></data></CompanyPlaceOfResidence>
+	<Period><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="1"/><variables function="getStartDate"/><presentation format="d MMMMM yyyy"/></data> <data src="chineseRoom" name="Upto">t/m</data> <data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getEndDate"/><presentation format="d MMMMM yyyy"/></data></Period>
+	<LimitedLiabilityCompany><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="asc" virtualColumns="true" withMonths="1"/><variables depth="1" var="ReportAsLimitedLiabilityCompany"/></data></LimitedLiabilityCompany>
+	<DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+	<CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+	<CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+	<CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+	<BalanceFailed><data src="chineseRoom" name="BalanceFailed">Waarschuwing: 1 of meerdere periodes zijn niet in balans</data></BalanceFailed>
+	<CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+	<PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+	<currentUser_FullnameLabel><data src="chineseRoom" name="CurrentUser_FullnameLabel">Opsteller</data></currentUser_FullnameLabel>
+	<currentUser_PhonenumberLabel><data src="chineseRoom" name="CurrentUser_PhonenumberLabel">Telefoonnummer</data></currentUser_PhonenumberLabel>
+	<currentUser_EmailLabel><data src="chineseRoom" name="CurrentUser_EmailLabel">Email adres</data></currentUser_EmailLabel>
+	<Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+	<PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+	<Of><data src="chineseRoom" name="Of">van</data></Of>
+	<At><data src="chineseRoom" name="At">te</data></At>
+	<BudgetPrefix><data src="chineseRoom" name="BudgetPrefix">B </data></BudgetPrefix>
+	<HistoryHeader><data src="document" var="./document/properties/HistoryHeader/text()"/></HistoryHeader>
+	<ForecastHeader><data src="chineseRoom" name="ForecastHeader">H</data></ForecastHeader>
+	<BudgetDelta>1</BudgetDelta>
+	
+	<currentUser_Fullname> </currentUser_Fullname>
+	<currentUser_Email> </currentUser_Email>
+	<currentUser_Id> </currentUser_Id>
+	<currentUser_Language> </currentUser_Language>
+	<currentUser_Ntdomain> </currentUser_Ntdomain>
+	<currentUser_Phonenumber> </currentUser_Phonenumber>
+	<currentUser_Ccrmid> </currentUser_Ccrmid>
+	<currentUser_CertificateId> </currentUser_CertificateId>
+
+	<currentCustomer_AccountManager> </currentCustomer_AccountManager>
+	<currentCustomer_BvdId> </currentCustomer_BvdId>
+	<currentCustomer_ChamberOfCommerceNumber> </currentCustomer_ChamberOfCommerceNumber>
+	<currentCustomer_City> </currentCustomer_City>
+	<currentCustomer_Country> </currentCustomer_Country>
+	<currentCustomer_CustomerNumber> </currentCustomer_CustomerNumber>
+	<currentCustomer_CustomerType> </currentCustomer_CustomerType>
+	<currentCustomer_DateOfBirth> </currentCustomer_DateOfBirth>
+	<currentCustomer_HouseNumber> </currentCustomer_HouseNumber>
+	<currentCustomer_Id> </currentCustomer_Id>
+	<currentCustomer_LegalStatusCode> </currentCustomer_LegalStatusCode>
+	<currentCustomer_LegalStatusDescription> </currentCustomer_LegalStatusDescription>
+	<currentCustomer_Name> </currentCustomer_Name>
+	<currentCustomer_OfficeName> </currentCustomer_OfficeName>
+	<currentCustomer_OfficeNumber> </currentCustomer_OfficeNumber>
+	<currentCustomer_ProjectName> </currentCustomer_ProjectName>
+	<currentCustomer_ReferenceId> </currentCustomer_ReferenceId>
+	<currentCustomer_SectorOfIndustryCode> </currentCustomer_SectorOfIndustryCode>
+	<currentCustomer_SectorOfIndustryDescription> </currentCustomer_SectorOfIndustryDescription>
+	<currentCustomer_StateOrProvince> </currentCustomer_StateOrProvince>
+	<currentCustomer_Street> </currentCustomer_Street>
+	<currentCustomer_ZipCode> </currentCustomer_ZipCode>
+
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+
+<!-- ALGEMEEN -->
+	<FirstPage_visible>true</FirstPage_visible>
+	<Details_visible>false</Details_visible>
+	<Preface_visible>false</Preface_visible>
+	<TableOfContents_visible>false</TableOfContents_visible>
+	<Introduction_visible>false</Introduction_visible>
+
+<!-- RESULTATENREKENING -->
+	<IncomeStatementSummary_visible>false</IncomeStatementSummary_visible>
+	<IncomeStatement_visible>false</IncomeStatement_visible>
+	<QuarterlyIncomeStatement_visible>false</QuarterlyIncomeStatement_visible>
+	<QuarterlyIncomeStatementDetail_visible>false</QuarterlyIncomeStatementDetail_visible>
+	<MonthlyIncomeStatement_visible>false</MonthlyIncomeStatement_visible>
+	<MonthlyIncomeStatementDetail_visible>false</MonthlyIncomeStatementDetail_visible>
+
+<!-- BALANS -->
+	<BalanceSheetSummary_visible>false</BalanceSheetSummary_visible>
+	<BalanceSheetYears_visible>false</BalanceSheetYears_visible>
+	<BalanceSheetQuarters_visible>false</BalanceSheetQuarters_visible>
+	<BalanceSheetMonths_visible>false</BalanceSheetMonths_visible>
+
+<!-- LIQUIDITEIT -->
+	<LiquidityStatementSummary_visible>false</LiquidityStatementSummary_visible>
+	
+	<CashflowStatement_visible>false</CashflowStatement_visible>
+	<QuarterlyCashflowStatement_visible>false</QuarterlyCashflowStatement_visible>  
+	<MonthlyCashflowStatement_visible>false</MonthlyCashflowStatement_visible>
+  
+	<InvestmentsAndFinancingPlan_visible>false</InvestmentsAndFinancingPlan_visible>
+	<QuarterlyInvestmentsAndFinancingPlan_visible>false</QuarterlyInvestmentsAndFinancingPlan_visible>
+	<MonthlyInvestmentsAndFinancingPlan_visible>false</MonthlyInvestmentsAndFinancingPlan_visible>
+  
+	<LiquidityStatement_visible>false</LiquidityStatement_visible>
+	<QuarterlyLiquidityStatement_visible>false</QuarterlyLiquidityStatement_visible>  
+	<MonthlyLiquidityStatement_visible>false</MonthlyLiquidityStatement_visible>  
+
+	<Disclaimer> </Disclaimer>
+	<Preface_comment> </Preface_comment>
+	<Introduction_comment> </Introduction_comment>
+
+<!-- RESULTATENREKENING -->
+	<IncomeStatementTitle><data src="chineseRoom" name="ProfitLoss">Resultatenrekening</data></IncomeStatementTitle>
+	<IncomeStatementSummary_comment> </IncomeStatementSummary_comment>
+	<IncomeStatement_comment> </IncomeStatement_comment>
+
+	<QuarterlyIncomeStatement_comment> </QuarterlyIncomeStatement_comment>
+	<QuarterlyIncomeStatementDetail_comment> </QuarterlyIncomeStatementDetail_comment>
+
+	<MonthlyIncomeStatement_comment> </MonthlyIncomeStatement_comment>
+	<MonthlyIncomeStatementDetail_comment> </MonthlyIncomeStatementDetail_comment>
+
+<!-- BALANS -->
+	<BalanceSheetTitle><data src="chineseRoom" name="Balance">Balans</data></BalanceSheetTitle>
+	<BalanceSheetSummary_comment> </BalanceSheetSummary_comment>
+	<BalanceSheetYears_comment> </BalanceSheetYears_comment>
+	<BalanceSheetQuarters_comment> </BalanceSheetQuarters_comment>
+	<BalanceSheetMonths_comment> </BalanceSheetMonths_comment>
+
+<!-- LIQUIDITEIT -->
+	<LiquidityTitle><data src="chineseRoom" name="Liquidity">Liquiditeit</data></LiquidityTitle>
+	<LiquidityStatementSummary_comment> </LiquidityStatementSummary_comment>
+  
+	<CashflowStatement_comment> </CashflowStatement_comment>
+	<QuarterlyCashflowStatement_comment> </QuarterlyCashflowStatement_comment>  
+	<MonthlyCashflowStatement_comment> </MonthlyCashflowStatement_comment>
+  
+	<InvestmentsAndFinancingPlan_comment> </InvestmentsAndFinancingPlan_comment>
+	<LiquidityStatement_comment> </LiquidityStatement_comment>
+	<QuarterlyInvestmentsAndFinancingPlan_comment> </QuarterlyInvestmentsAndFinancingPlan_comment>
+	<MonthlyInvestmentsAndFinancingPlan_comment> </MonthlyInvestmentsAndFinancingPlan_comment>
+  
+	<QuarterlyLiquidityStatement_comment> </QuarterlyLiquidityStatement_comment>  
+	<MonthlyLiquidityStatement_comment> </MonthlyLiquidityStatement_comment>  
+  
+</properties>
+
+<!-- ALGEMEEN -->
+
+<!-- Voorpagina -->
+<newpage name="frontpage" visible="./document/properties/FirstPage_visible/text()='true'">
+	<img id="logo"><data src="map" var="logo" /></img>
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- Voorwoord -->
+<newpage name="preface" visible="./document/properties/Details_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<newpage name="normal" visible="./document/properties/Details_visible/text()!='true' and ./document/properties/Preface_visible/text()='true'">
+	<p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="section" visible="./document/properties/Preface_visible/text()='true'"><data src="chineseRoom" name="Preface">Voorwoord</data></p>
+<p class="normal" visible="./document/properties/Preface_visible/text()='true'"><data src="document" var="./document/properties/Preface_comment/text()"/></p>
+
+
+<!-- Inhoudsopgave -->
+<newpage name="normal" visible="./document/properties/TableOfContents_visible/text()='true'">
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="normal" visible="./document/properties/TableOfContents_visible/text()='true'"> </p>
+<tableofcontents class="split" visible="./document/properties/TableOfContents_visible/text()='true'">
+	<title><data src="chineseRoom" name="TOC">Inhoudsopgave</data></title>
+	<tocdepth>3</tocdepth>
+</tableofcontents>
+
+<!-- Inleiding -->
+<newpage name="normal" visible="./document/properties/Introduction_visible/text()='true'">
+	<p id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<p class="normal" visible="./document/properties/Introduction_visible/text()='true'"> </p>
+<section class="sectionnum" visible="./document/properties/Introduction_visible/text()='true'"><data src="chineseRoom" name="Introduction">Inleiding</data></section>
+<p class="normal" visible="./document/properties/Introduction_visible/text()='true'"><data src="document" var="./document/properties/Introduction_comment/text()"/></p>
+
+
+<!-- RESULTATENREKENING -->
+<!-- Samenvatting resultatenrekening-->
+  <newpage name="normal" visible="./document/properties/IncomeStatementSummary_visible/text()='true'">
+    <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+  </newpage>
+  <section class="sectionnum" visible="./document/properties/IncomeStatementSummary_visible/text()='true'"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+  <p class="normal" visible="./document/properties/IncomeStatementSummary_visible/text()='true'"> </p>
+  <subsection class="subsectionnum" visible="./document/properties/IncomeStatementSummary_visible/text()='true'"><data src="chineseRoom" name="SummaryIncome">Samenvatting resultatenrekening</data></subsection>
+  <table class="datatableBudget" visible="./document/properties/IncomeStatementSummary_visible/text()='true'">
+    <data src="multidoctable">
+      <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+      <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+      <variables recursiveSkip="false" depth="1" var="IncomeStatement" varFrom="NetSales"/>
+      <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+    	  <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+        <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+      </presentation>
+    </data>
+  </table>
+<p class="normal" visible="./document/properties/IncomeStatementSummary_visible/text()='true' and ./document/properties/IncomeStatementSummary_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/IncomeStatementSummary_comment/text()"/>
+</p>
+  
+<!-- Resultatenrekening op jaarbasis -->
+  <newpage name="normal" visible="./document/properties/IncomeStatement_visible/text()='true'">
+    <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+  </newpage>
+  <section class="sectionnum"  visible="./document/properties/IncomeStatement_visible/text()='true' and ./document/properties/IncomeStatementSummary_visible/text()='false'"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+  <p class="normal" visible="./document/properties/IncomeStatement_visible/text()='true'"> </p>
+  <subsection class="subsectionnum" visible="./document/properties/IncomeStatement_visible/text()='true'"><data src="chineseRoom" name="ProfitLoss">Resultatenrekening</data> <data src="chineseRoom" name="YearBased">op jaarbasis</data></subsection>
+  <table class="datatableBudget" visible="./document/properties/IncomeStatement_visible/text()='true'">
+    <data src="multidoctable">
+      <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+      <variables recursiveSkip="false" depth="2" var="IncomeStatement" varFrom="NetSales"/>
+      <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+        <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+        <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+      </presentation>
+    </data>
+  </table>
+<p class="normal" visible="./document/properties/IncomeStatement_visible/text()='true' and ./document/properties/IncomeStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/IncomeStatement_comment/text()"/>
+</p>
+
+<!-- Resultatenrekening begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/QuarterlyIncomeStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/QuarterlyIncomeStatement_visible/text()='true' and (./document/properties/IncomeStatementSummary_visible/text()='false')
+and (./document/properties/IncomeStatement_visible/text()='false')"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatement_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/QuarterlyIncomeStatement_visible/text()='true')"><data src="chineseRoom" name="ProfitLoss">Resultatenrekening</data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<table class="datatableQuarter" visible="(./document/properties/QuarterlyIncomeStatement_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="IncomeStatement" varFrom="NetSales"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatement_visible/text()='true') and (./document/properties/QuarterlyIncomeStatement_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/QuarterlyIncomeStatement_comment/text()"/>
+</p>
+
+<!-- Uitgebreide resultatenrekening begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true' and (./document/properties/IncomeStatementSummary_visible/text()='false')
+and (./document/properties/IncomeStatement_visible/text()='false')
+and (./document/properties/QuarterlyIncomeStatement_visible/text()='false')"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')"><data src="chineseRoom" name="ProfitLossDetail">Uitgebreide resultatenrekening</data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<table class="datatableQuarter" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="Products" varFrom="Product_ti001" />
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideStyle old="level0">level1</overrideStyle>
+    	<overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<table class="datatableQuarter" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="OperatingExpenses" varFrom="PersonnelExpenses"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<table class="datatableQuarter" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="OrdinaryProfitBeforeTaxes" />
+    <variables recursiveSkip="false" depth="0" var="ExtraordinaryIncomeAndExpenses" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmountAdditions" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmountExtractions" />
+    <variables recursiveSkip="false" depth="0" var="TaxableProfit" />
+    <variables recursiveSkip="false" depth="0" var="TaxableLossesCarriedForward" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmount" />    
+    <presentation filterEmptyRows="false" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideStyle old="level0">level1</overrideStyle>
+    	<overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/QuarterlyIncomeStatementDetail_visible/text()='true') and (./document/properties/QuarterlyIncomeStatementDetail_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/QuarterlyIncomeStatementDetail_comment/text()"/>
+</p>
+
+<!-- Resultatenrekening begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/MonthlyIncomeStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/MonthlyIncomeStatement_visible/text()='true' and (./document/properties/IncomeStatementSummary_visible/text()='false')
+and (./document/properties/IncomeStatement_visible/text()='false')
+and (./document/properties/QuarterlyIncomeStatement_visible/text()='false')
+and (./document/properties/QuarterlyIncomeStatementDetail_visible/text()='false')"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatement_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/MonthlyIncomeStatement_visible/text()='true')"><data src="chineseRoom" name="ProfitLoss">Resultatenrekening</data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyIncomeStatement_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="IncomeStatement" varFrom="NetSales"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatement_visible/text()='true') and (./document/properties/MonthlyIncomeStatement_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/MonthlyIncomeStatement_comment/text()"/>
+</p>
+
+<!-- Uitgebreide resultatenrekening begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/MonthlyIncomeStatementDetail_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/MonthlyIncomeStatementDetail_visible/text()='true' and (./document/properties/IncomeStatementSummary_visible/text()='false')
+and (./document/properties/IncomeStatement_visible/text()='false')
+and (./document/properties/QuarterlyIncomeStatement_visible/text()='false')
+and (./document/properties/QuarterlyIncomeStatementDetail_visible/text()='false')
+and (./document/properties/MonthlyIncomeStatement_visible/text()='false')"><data src="document" var="./document/properties/IncomeStatementTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/MonthlyIncomeStatementDetail_visible/text()='true'"><data src="chineseRoom" name="ProfitLossDetail">Uitgebreide resultatenrekening</data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="Products" varFrom="Product_ti001" />
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="OperatingExpenses" varFrom="PersonnelExpenses"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')"> </p> 
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="0" var="OrdinaryProfitBeforeTaxes" />
+    <variables recursiveSkip="false" depth="0" var="ExtraordinaryIncomeAndExpenses" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmountAdditions" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmountExtractions" />
+    <variables recursiveSkip="false" depth="0" var="TaxableProfit" />
+    <variables recursiveSkip="false" depth="0" var="TaxableLossesCarriedForward" />
+    <variables recursiveSkip="false" depth="0" var="TaxableAmount" />    
+    <presentation filterEmptyRows="false" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="true" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideStyle old="level0">level1</overrideStyle>
+    	<overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/MonthlyIncomeStatementDetail_visible/text()='true') and (./document/properties/MonthlyIncomeStatementDetail_comment/text() != ' ')">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/MonthlyIncomeStatementDetail_comment/text()"/>
+</p>
+
+
+
+
+
+
+
+
+
+
+<!-- BALANS -->
+<!-- Samenvatting balans-->
+<newpage name="normal" visible="./document/properties/BalanceSheetSummary_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section visible="./document/properties/BalanceSheetSummary_visible/text()='true'" class="sectionnum"><data src="document" var="./document/properties/BalanceSheetTitle/text()"/></section>
+<subsection visible="./document/properties/BalanceSheetSummary_visible/text()='true'" class="subsectionnum"><data src="chineseRoom" name="BalanceSummary">Samenvatting balans</data></subsection>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetSummary_visible/text()='true'"><data src="chineseRoom" name="Assets">Activa</data></subsubsection>
+<table visible="./document/properties/BalanceSheetSummary_visible/text()='true'" class="datatableBudget">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="1" var="BalanceSheet" varFrom="IntangibleFixedAssets" varTo="TotalAssets" />
+    <presentation filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideStyle old="level0">level1</overrideStyle>
+    	<overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetSummary_visible/text()='true'"> </p> 
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetSummary_visible/text()='true'"><data src="chineseRoom" name="EquityLiabilities">Passiva</data></subsubsection>
+<table class="datatableBudget" visible="./document/properties/BalanceSheetSummary_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="1" var="BalanceSheet" varFrom="NetWorth" varTo="TotalEquityAndLiabilities" />
+    <presentation filterEmptyRows="true" showBlankLines="false" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideStyle old="level0">level1</overrideStyle>
+    	<overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetSummary_visible/text()='true' and ./document/properties/BalanceSheetSummary_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetSummary_comment/text()"/>
+</p>
+
+<!-- Balans op jaarbasis -->
+<newpage name="normal" visible="./document/properties/BalanceSheetYears_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/BalanceSheetYears_visible/text()='true' and ./document/properties/BalanceSheetSummary_visible/text()='false'"><data src="document" var="./document/properties/BalanceSheetTitle/text()"/></section>
+<p class="normal" visible="./document/properties/BalanceSheetYears_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetYears_visible/text()='true'"><data src="fesModel"><variables var="BalanceSheet" function="getTitle"/></data> <data src="chineseRoom" name="YearBased">op jaarbasis</data></subsection>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetYears_visible/text()='true'"><data src="chineseRoom" name="Assets">Activa</data></subsubsection>
+<table class="datatableBudget" visible="./document/properties/BalanceSheetYears_visible/text()='true'">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="IntangibleFixedAssets"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<newpage name="normal" visible="./document/properties/BalanceSheetYears_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetYears_visible/text()='true'"><data src="chineseRoom" name="EquityLiabilities">Passiva</data></subsubsection>
+<table class="datatableBudget" visible="./document/properties/BalanceSheetYears_visible/text()='true'">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="NetWorth"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetYears_visible/text()='true' and ./document/properties/BalanceSheetYears_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetYears_comment/text()"/>
+</p>
+
+<!-- Balans begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/BalanceSheetQuarters_visible/text()='true' and (./document/properties/BalanceSheetSummary_visible/text()='false')
+and (./document/properties/BalanceSheetYears_visible/text()='false')"><data src="document" var="./document/properties/BalanceSheetTitle/text()"/></section>
+<p class="normal" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'"><data src="fesModel"><variables var="BalanceSheet" function="getTitle"/></data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'"><data src="chineseRoom" name="Assets">Activa</data></subsubsection>
+<table class="datatableQuarter" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="IntangibleFixedAssets"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<newpage name="normal" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'"><data src="chineseRoom" name="EquityLiabilities">Passiva</data></subsubsection>
+<table class="datatableQuarter" visible="./document/properties/BalanceSheetQuarters_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="NetWorth"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetQuarters_visible/text()='true' and ./document/properties/BalanceSheetQuarters_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetQuarters_comment/text()"/>
+</p>
+
+<!-- Balans begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/BalanceSheetMonths_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/BalanceSheetMonths_visible/text()='true' and (./document/properties/BalanceSheetSummary_visible/text()='false')
+and (./document/properties/BalanceSheetYears_visible/text()='false')
+and (./document/properties/BalanceSheetQuarters_visible/text()='false')"><data src="document" var="./document/properties/BalanceSheetTitle/text()"/></section>
+<p class="normal" visible="./document/properties/BalanceSheetMonths_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/BalanceSheetMonths_visible/text()='true'"><data src="fesModel"><variables var="BalanceSheet" function="getTitle"/></data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetMonths_visible/text()='true'"><data src="chineseRoom" name="Assets">Activa</data></subsubsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="./document/properties/BalanceSheetMonths_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="IntangibleFixedAssets"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetMonths_visible/text()='true'"> </p>         
+<subsubsection class="subsubsectionnum" visible="./document/properties/BalanceSheetMonths_visible/text()='true'"><data src="chineseRoom" name="EquityLiabilities">Passiva</data></subsubsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="./document/properties/BalanceSheetMonths_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="BalanceSheet" varFrom="NetWorth"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/BalanceSheetMonths_visible/text()='true' and ./document/properties/BalanceSheetMonths_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/BalanceSheetMonths_comment/text()"/>
+</p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!-- LIQUIDITEIT -->
+<!-- Samenvatting liquiditeit-->
+<newpage name="normal" visible="./document/properties/LiquidityStatementSummary_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/LiquidityStatementSummary_visible/text()='true'"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/LiquidityStatementSummary_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/LiquidityStatementSummary_visible/text()='true'"><data src="chineseRoom" name="LiquiditySummary">Samenvatting liquiditeit</data></subsection>
+<table class="datatableBudget" visible="./document/properties/LiquidityStatementSummary_visible/text()='true'">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="StatementOfLiquidity" varFrom="BeginningBalanceCurrentAccount"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/LiquidityStatementSummary_visible/text()='true' and ./document/properties/LiquidityStatementSummary_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/LiquidityStatementSummary_comment/text()"/>
+</p>
+
+<!-- Kasstroomoverzicht op jaarbasis -->
+<newpage name="normal" visible="./document/properties/CashflowStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/CashflowStatement_visible/text()='true' and ./document/properties/LiquidityStatementSummary_visible/text()='false'"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/CashflowStatement_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/CashflowStatement_visible/text()='true'"><data src="fesModel"><variables var="CashFlowStatementIndirect" function="getTitle"/></data> <data src="chineseRoom" name="YearBased">op jaarbasis</data></subsection>
+<table class="datatableBudget" visible="./document/properties/CashflowStatement_visible/text()='true'">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="CashFlowStatementIndirect" varFrom="OperationalCashflow"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/CashflowStatement_visible/text()='true' and ./document/properties/CashflowStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/CashflowStatement_comment/text()"/>
+</p>
+
+<!-- Kasstroomoverzicht begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true' and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true'"><data src="fesModel"><variables var="CashFlowStatementIndirect" function="getTitle"/></data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<table class="datatableQuarter" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="CashFlowStatementIndirect" varFrom="OperationalCashflow"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/QuarterlyCashflowStatement_visible/text()='true' and ./document/properties/QuarterlyCashflowStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/QuarterlyCashflowStatement_comment/text()"/>
+</p>
+
+<!-- Kasstroomoverzicht begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true' and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='true')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true'"><data src="fesModel"><variables var="CashFlowStatementIndirect" function="getTitle"/></data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1"  header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="CashFlowStatementIndirect" varFrom="OperationalCashflow"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/MonthlyCashflowStatement_visible/text()='true' and ./document/properties/MonthlyCashflowStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/MonthlyCashflowStatement_comment/text()"/>
+</p>
+
+<!-- Investering en financieringsplan op jaarbasis -->
+<newpage name="normal" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'">
+  <p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true' and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'"><data src="fesModel"><variables var="InvestmentsAndFinancingPlan" function="getTitle"/></data> <data src="chineseRoom" name="YearBased">op jaarbasis</data></subsection>
+<table class="datatableBudget" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true'">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="InvestmentsAndFinancingPlan" varFrom="CashflowFromOperatingActivities"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/InvestmentsAndFinancingPlan_visible/text()='true' and ./document/properties/InvestmentsAndFinancingPlan_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/InvestmentsAndFinancingPlan_comment/text()"/>
+</p>
+
+<!-- Investering en financieringsplan begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true' and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')
+and (./document/properties/InvestmentsAndFinancingPlan_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true'"> </p> 
+<subsection class="subsectionnum" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true'"><data src="fesModel"><variables var="InvestmentsAndFinancingPlan" function="getTitle"/></data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<table class="datatableQuarter" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true'">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="InvestmentsAndFinancingPlan" varFrom="CashflowFromOperatingActivities"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='true' and ./document/properties/QuarterlyInvestmentsAndFinancingPlan_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/QuarterlyInvestmentsAndFinancingPlan_comment/text()"/>
+</p>
+
+<!-- Investering en financieringsplan begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="(./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true') and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')
+and (./document/properties/InvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true')"><data src="fesModel"><variables var="InvestmentsAndFinancingPlan" function="getTitle"/></data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="InvestmentsAndFinancingPlan" varFrom="CashflowFromOperatingActivities"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='true') and ./document/properties/MonthlyInvestmentsAndFinancingPlan_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/MonthlyInvestmentsAndFinancingPlan_comment/text()"/>
+</p>
+
+<!-- Liquiditeitsoverzicht op jaarbasis -->
+<newpage name="normal" visible="./document/properties/LiquidityStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="(./document/properties/LiquidityStatement_visible/text()='true') and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')
+and (./document/properties/InvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='false')
+"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/LiquidityStatement_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/LiquidityStatement_visible/text()='true')"><data src="fesModel"><variables var="StatementOfLiquidity" function="getTitle"/></data> <data src="chineseRoom" name="YearBased">op jaarbasis</data></subsection>
+<table class="datatableBudget" visible="(./document/properties/LiquidityStatement_visible/text()='true')">
+  <data src="multidoctable">
+    <!--columns header="" document="1" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="5" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/-->
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="6" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="StatementOfLiquidity" varFrom="BeginningBalanceCurrentAccount"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="(./document/properties/LiquidityStatement_visible/text()='true') and ./document/properties/LiquidityStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/LiquidityStatement_comment/text()"/>
+</p>
+
+<!-- Liquiditeitsoverzicht begroting op kwartaalbasis -->
+<newpage name="normal" visible="./document/properties/QuarterlyLiquidityStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/QuarterlyLiquidityStatement_visible/text()='true'
+and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')
+and (./document/properties/InvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/LiquidityStatement_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/QuarterlyLiquidityStatement_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/QuarterlyLiquidityStatement_visible/text()='true')"><data src="fesModel"><variables var="StatementOfLiquidity" function="getTitle"/></data> <data src="chineseRoom" name="PerQuarter">per kwartaal</data></subsection>
+<table class="datatableQuarter" visible="(./document/properties/QuarterlyLiquidityStatement_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="4" order="desc" virtualColumns="true" withMonths="3" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" header="xpath:./document/properties/BudgetPrefix/text()" />  
+    <variables recursiveSkip="false" depth="2" var="StatementOfLiquidity" varFrom="BeginningBalanceCurrentAccount"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/QuarterlyLiquidityStatement_visible/text()='true' and ./document/properties/QuarterlyLiquidityStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/QuarterlyLiquidityStatement_comment/text()"/>
+</p>
+
+<!-- Liquiditeitsoverzicht begroting op maandbasis -->
+<newpage name="landscape" visible="./document/properties/MonthlyLiquidityStatement_visible/text()='true'">
+  <p id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+<section class="sectionnum" visible="./document/properties/MonthlyLiquidityStatement_visible/text()='true'
+and (./document/properties/LiquidityStatementSummary_visible/text()='false')
+and (./document/properties/CashflowStatement_visible/text()='false')
+and (./document/properties/QuarterlyCashflowStatement_visible/text()='false')
+and (./document/properties/MonthlyCashflowStatement_visible/text()='false')
+and (./document/properties/InvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/QuarterlyInvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/MonthlyInvestmentsAndFinancingPlan_visible/text()='false')
+and (./document/properties/LiquidityStatement_visible/text()='false')
+and (./document/properties/QuarterlyLiquidityStatement_visible/text()='false')"><data src="document" var="./document/properties/LiquidityTitle/text()"/></section>
+<p class="normal" visible="(./document/properties/MonthlyLiquidityStatement_visible/text()='true')"> </p> 
+<subsection class="subsectionnum" visible="(./document/properties/MonthlyLiquidityStatement_visible/text()='true')"><data src="fesModel"><variables var="StatementOfLiquidity" function="getTitle"/></data> <data src="chineseRoom" name="PerMonth">per periode</data></subsection>
+<table class="xpath:./document/properties/PeriodsYearTable" visible="(./document/properties/MonthlyLiquidityStatement_visible/text()='true')">
+  <data src="multidoctable">
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="number(./document/properties/Periods)" order="desc" withMonths="1" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <columns document="0" timelineId="xpath:./document/properties/TimelineId" delta="xpath:./document/properties/BudgetDelta" number="1" order="desc" withMonths="number(./document/properties/Periods)" virtualColumns="true" header="xpath:./document/properties/BudgetPrefix/text()" />
+    <variables recursiveSkip="false" depth="2" var="StatementOfLiquidity" varFrom="BeginningBalanceCurrentAccount"/>
+    <presentation filterEmptyRows="true" overwriteNAValueForCurrencyWith=" " disableMinusCorrection="false" showHeaderRow="true" scale="./document/properties/ReportScale/text()" prefill="true">
+      <overrideHeaderTitle formulaset="HISTORY"><data src="document" var="./document/properties/HistoryHeader/text()"/></overrideHeaderTitle>
+      <overrideHeaderTitle formulaset="FORECAST"><data src="document" var="./document/properties/ForecastHeader/text()"/></overrideHeaderTitle>
+    </presentation>
+  </data>
+</table>
+<p class="normal" visible="./document/properties/MonthlyLiquidityStatement_visible/text()='true' and ./document/properties/MonthlyLiquidityStatement_comment/text() != ' '">
+[b]<data src="chineseRoom" name="Comment">Toelichting</data>:[/b]
+<data src="document" var="./document/properties/MonthlyLiquidityStatement_comment/text()"/>
+</p>
+</document>

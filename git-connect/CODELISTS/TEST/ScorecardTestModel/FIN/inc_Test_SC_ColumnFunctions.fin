@@ -1,0 +1,41 @@
+; inc_Test_SC_ColumnFunctions.fin
+; EJS juli 2014
+
+.Variables
+;--------------------------------------------------------------------------------------------------
+; Scorecard Test Paragraph
+; Column Functions
+
+PPP     BN     3               "Test column functions"                                             \TestColumnFunctions
+
+PPP   0 BN     4               "ValueT(T)"                                                         \tplT
+PPP   0 BN     4               "TsY(T)"                                                            \tplTsY
+PPP   0 1N     4               "MaxT"                                                              \tplMaxT
+PPP   0 1N     4               "FirstTInFormulaSet(NoTrend,MainPeriod)"                            \tplFirstTInFormaSetNoTrend
+PPP   0 1N     4               "LastTInFormulaSet(NoTrend,MainPeriod)"                             \tplLastTInFormaSetNoTrend
+PPP   0 1N     4               "FirstTInFormulaSet(Trend,MainPeriod)"                              \tplFirstTInFormaSetTrend
+PPP   0 1N     4               "LastTInFormulaSet(Trend,MainPeriod)"                               \tplLastTInFormaSetTrend
+PPP   0 1N     4               "FirstTInPeriod(MainPeriod)"                                        \tplFirstTInPeriod
+PPP   0 1N     4               "LastTInPeriod(MainPeriod)"                                         \tplLastTInPeriod
+PPP   0 BN     4               "LastTinYear"                                                       \tplLastTinYear
+PII   0 BN     4               "Values"                                                            \tplValues
+PII   0 1N     4               "FirstT"                                                            \tplFirstT
+PII   0 1N     4               "LastT"                                                             \tplLastT
+PPP   0 BN     4               "FirstValueT(Values,FirstT,LastT)"                                  \tplFirstValueT
+PPP   0 BN     4               "LastValueT(Values,FirstT,LastT)"                                   \tplLastValueT
+
+.Formulas NoTrend,Trend
+tplT= ValueT(T)
+tplTsY= TsY(T)
+tplMaxT= ValueT(MaxT)
+tplFirstTInFormaSetNoTrend= ValueT(FirstTInFormulaSet(NoTrend,MainPeriod))
+tplLastTInFormaSetNoTrend= ValueT(LastTInFormulaSet(NoTrend,MainPeriod))
+tplFirstTInFormaSetTrend= ValueT(FirstTInFormulaSet(Trend,MainPeriod))
+tplLastTInFormaSetTrend= ValueT(LastTInFormulaSet(Trend,MainPeriod))
+tplFirstTInPeriod= ValueT(FirstTinPeriod(MainPeriod))
+tplLastTInPeriod= ValueT(LastTinPeriod(MainPeriod))
+tplLastTinYear= ValueT(LastTinYear(T))
+tplFirstT= ValueT(1)
+tplLastT= ValueT(MaxT)
+tplFirstValueT= ValueT(FirstValueT(tplValues,tplFirstT,tplLastT))
+tplLastValueT= ValueT(FirstValueT(tplValues,tplFirstT,tplLastT))

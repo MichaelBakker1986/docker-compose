@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>bt11-models</artifactId>
+    <groupId>finan</groupId>
+    <version>1.0.0</version>
+  </parent>
+  <properties>
+    <modelname>FrcRptKredietPrognosePeriodiekMicroCategoriaal2016</modelname>
+  </properties>
+  <artifactId>fes-model-FrcRptKredietPrognosePeriodiekMicroCategoriaal2016</artifactId>
+  <version>1.0.0.0</version>
+</project>

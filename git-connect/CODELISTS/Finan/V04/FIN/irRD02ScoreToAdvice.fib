@@ -1,0 +1,6 @@
+{&&Language=English}
+
+<=0:   $>The liquidity can not be calculated.<$ 
+<3.5:  $>The liquidity position is critical. The liquidity position needs to be improved.<$
+<5.5:  $>Short term liabilities may be too high to repay. The liquidity position should be improved.<$
+>=7.5: $>The current ratio is very high. The current assets and the short term debt require further analysis.<$

@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+	<Head>
+    <CodeList>URA</CodeList>
+    <CodeListVersion>1.0</CodeListVersion>
+    <Description>Datev Company Check</Description>
+    <CodeTrimmingWhenSource>No</CodeTrimmingWhenSource>
+    <LowestLevelInputWhenSource>No</LowestLevelInputWhenSource>
+    <LeveledSummations>No</LeveledSummations>
+    <LeveledMappingWhenTarget>No</LeveledMappingWhenTarget>
+    <ErrorOnUnmappedCodesWhenSource>Yes</ErrorOnUnmappedCodesWhenSource>
+    <DCSignedValues>No</DCSignedValues>
+    <Creator>FMT4 Mastermodel DatevCC</Creator>
+    <CreatorVersion>0.9</CreatorVersion>
+    <BuildDate>2014-05-19</BuildDate>
+    <BuildUser>Evert Jan Stokking</BuildUser>
+    <Notes></Notes>
+	</Head>
+  <Accounts>
+    <Account><Code>NoCode</Code><Description>Bilanz</Description><Sort>1</Sort><Level>1</Level><DC></DC><DataType>abstract</DataType></Account>
+    <Account><Code>10000</Code><Description>Aktiva</Description><Sort>2</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10048</Code><Description>Ausstehende Einlagen</Description><Sort>3</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10049</Code><Description>Ausstehende Einlagen</Description><Sort>4</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10050</Code><Description>Ausstehende Einlagen</Description><Sort>5</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10051</Code><Description>davon auf Komplementäre</Description><Sort>6</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10052</Code><Description>davon auf Kommanditisten</Description><Sort>7</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10053</Code><Description>davon gegen Voll- und Teilhafter</Description><Sort>8</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10054</Code><Description>davon eingefordert</Description><Sort>9</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10055</Code><Description>davon eingefordert</Description><Sort>10</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>10999</Code><Description>Anlagevermögen</Description><Sort>11</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11000</Code><Description>Immaterielles Anlagevermögen und Bilanzierungshilfen</Description><Sort>12</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11049</Code><Description>Aufwendungen für die Kosten der Ingangsetzung und Erweiterung des Geschaeftsbetriebes</Description><Sort>13</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11050</Code><Description>Aufwendungen für die Kosten der Ingangsetzung und Erweiterung des Geschäftsbetriebs</Description><Sort>14</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11069</Code><Description>Aufwendungen für Forschung, Entwicklung und Werbung</Description><Sort>15</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11070</Code><Description>Aufwendungen für Forschung, Entwicklung und Werbung</Description><Sort>16</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11089</Code><Description>Sonstige Bilanzierungshilfen</Description><Sort>17</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11090</Code><Description>Sonstige Bilanzierungshilfen</Description><Sort>18</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11099</Code><Description>Konzessionen und Schutzrechte</Description><Sort>19</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11100</Code><Description>Konzessionen, gewerbliche Schutzrechte und ähnliche Rechte und Werte sowie Lizenzen an Rechten und Werten</Description><Sort>20</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11110</Code><Description>davon eigenerstellt</Description><Sort>21</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11120</Code><Description>davon Rechte aus gewerblichen Patenten, Rechte auf Nutzung geistiger Werke</Description><Sort>22</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11130</Code><Description>davon Konzessionen, Lizenzen, Marken und ähnliche Rechte</Description><Sort>23</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11199</Code><Description>Geschäfts- und Firmenwert</Description><Sort>24</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11200</Code><Description>Geschäfts- und Firmenwert Einzelabschluss</Description><Sort>25</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11299</Code><Description>geleistete Anzahlungen auf immaterielles Anlagevermögen</Description><Sort>26</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11300</Code><Description>Geleistete Anzahlungen auf immaterielles AV</Description><Sort>27</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11399</Code><Description>Verschmelzungsmehrwert</Description><Sort>28</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11400</Code><Description>Verschmelzungsmehrwert</Description><Sort>29</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11499</Code><Description>Geschäfts- und Firmenwert aus Konsolidierung</Description><Sort>30</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11500</Code><Description>Geschäfts- und Firmenwert aus der Konsolidierung</Description><Sort>31</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11599</Code><Description>Sonstiges immaterielles Anlagevermögen</Description><Sort>32</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11600</Code><Description>Sonstiges immaterielles Anlagevermögen</Description><Sort>33</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>11610</Code><Description>davon eigenerstellt</Description><Sort>34</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12000</Code><Description>Sachanlagevermögen</Description><Sort>35</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12099</Code><Description>Grundstücke und Gebäude</Description><Sort>36</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12100</Code><Description>Grundstücke und Gebäude</Description><Sort>37</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12199</Code><Description>Technische Anlagen und Maschinen</Description><Sort>38</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12200</Code><Description>Technische Anlagen und Maschinen</Description><Sort>39</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12299</Code><Description>andere Anlagen, Betriebs- und Geschäftsausstattung</Description><Sort>40</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12300</Code><Description>Andere Anlagen Betriebs- und Geschäftsausstattung</Description><Sort>41</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12399</Code><Description>Geleistete Anzahlungen aus Sachanlagevermögen</Description><Sort>42</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12400</Code><Description>Geleistete Anzahlungen, Anlagen im Bau</Description><Sort>43</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12499</Code><Description>Sonstiges Sachanlagevermögen</Description><Sort>44</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12500</Code><Description>Sonstiges Sachanlagevermögen</Description><Sort>45</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12599</Code><Description>Besondere Erläuterung</Description><Sort>46</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12600</Code><Description>Werterhöhung durch Neubewertung</Description><Sort>47</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12610</Code><Description>Aktiviertes Finanzleasing</Description><Sort>48</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>12620</Code><Description>Grundwert der Grundstücke</Description><Sort>49</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13000</Code><Description>Finanzanlagevermögen</Description><Sort>50</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13100</Code><Description>Kapitalbeteiligungen</Description><Sort>51</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13110</Code><Description>Anteile an verbundenen Unternehmen</Description><Sort>52</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13120</Code><Description>Beteiligungen</Description><Sort>53</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13130</Code><Description>andere Kapitalbeteiligungen</Description><Sort>54</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13140</Code><Description>Eigene Anteile</Description><Sort>55</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13150</Code><Description>Anteile an herrschenden oder mit Mehrheit beteiligten Unternehmen</Description><Sort>56</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13200</Code><Description>Forderungen</Description><Sort>57</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13210</Code><Description>davon im folgenden Geschäftsjahr fällig</Description><Sort>58</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13220</Code><Description>Ausleihungen an verbundene Unternehmen</Description><Sort>59</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13230</Code><Description>Ausleihungen an Unternehmen mit denen ein Beteiligungsverhältnis besteht</Description><Sort>60</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13240</Code><Description>Forderungen gegenüber beherrschenden Personen</Description><Sort>61</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13250</Code><Description>Sonstige Ausleihungen</Description><Sort>62</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13260</Code><Description>davon gegenüber Gesellschaftern</Description><Sort>63</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13270</Code><Description>davon an Gesellschaftern nahestehende Personen</Description><Sort>64</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13280</Code><Description>davon Rückdeckungsansprüche an Versicherungen</Description><Sort>65</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13290</Code><Description>davon Rückkaufswerte Lebensversicherungen</Description><Sort>66</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13295</Code><Description>davon Ansprüche an Pensionskassen</Description><Sort>67</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13299</Code><Description>Wertpapiere des Anlagevermögens</Description><Sort>68</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13300</Code><Description>Wertpapiere des Anlagevermögens</Description><Sort>69</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13499</Code><Description>Sonstige Finanzanlagen</Description><Sort>70</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>13500</Code><Description>Sonstige Finanzanlagen</Description><Sort>71</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>15999</Code><Description>Umlaufvermögen</Description><Sort>72</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16000</Code><Description>Vorräte</Description><Sort>73</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16099</Code><Description>Unterschiedsbetrag IAS zu nationalem Recht</Description><Sort>74</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16100</Code><Description>Unterschiedsbetrag IAS zu nationalem Recht</Description><Sort>75</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16199</Code><Description>Roh-, Hilfs- und Betriebsstoffe</Description><Sort>76</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16200</Code><Description>Roh-, Hilfs- und Betriebsstoffe</Description><Sort>77</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16299</Code><Description>unfertige Erzeugnisse, unfertige Leistungen</Description><Sort>78</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16300</Code><Description>Unfertige Erzeugnisse, Arbeiten</Description><Sort>79</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16399</Code><Description>In Ausführung befindliche Arbeiten auf Bestellung</Description><Sort>80</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16400</Code><Description>In Ausführung befindliche Arbeiten auf Bestellung</Description><Sort>81</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16499</Code><Description>Fertigerzeugnisse und Waren</Description><Sort>82</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16500</Code><Description>Fertigerzeugnisse</Description><Sort>83</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16600</Code><Description>Waren</Description><Sort>84</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16699</Code><Description>noch nicht abrechenbare Leistung</Description><Sort>85</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16700</Code><Description>noch nicht abrechenbare Leistungen</Description><Sort>86</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16799</Code><Description>Geleistete Anzahlungen auf Vorräte</Description><Sort>87</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16800</Code><Description>Geleistete Anzahlungen</Description><Sort>88</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16899</Code><Description>Erhaltene Anzahlungen von den Vorräten offen abgesetzt</Description><Sort>89</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>16900</Code><Description>Erhaltene Anzahlungen, von den Vorräten offen abgesetzt</Description><Sort>90</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17000</Code><Description>Forderungen und sonstige Vermögensgegenstände</Description><Sort>91</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17049</Code><Description>Forderungen aus Lieferungen und Leistungen</Description><Sort>92</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17050</Code><Description>Forderungen aus Lieferungen und Leistungen</Description><Sort>93</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17075</Code><Description>davon mit Restlaufzeit bis ein Jahr</Description><Sort>94</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17100</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>95</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17149</Code><Description>Forderungen an verbundene Unternehmen</Description><Sort>96</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17150</Code><Description>Forderungen an verbundene Unternehmen</Description><Sort>97</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17175</Code><Description>davon mit Restlaufzeit bis ein Jahr</Description><Sort>98</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17200</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>99</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17249</Code><Description>Forderung geg. Unternehmen mit Beteiligung</Description><Sort>100</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17250</Code><Description>Forderungen gegenüber Unternehmen mit denen ein Beteiligungsverhältnis besteht</Description><Sort>101</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17275</Code><Description>davon mit Restlaufzeit bis ein Jahr</Description><Sort>102</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17300</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>103</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17349</Code><Description>Forderung gegen beherrschende Personen</Description><Sort>104</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17350</Code><Description>Forderungen gegen beherrschende Personen</Description><Sort>105</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17375</Code><Description>davon mit Restlaufzeit bis ein Jahr</Description><Sort>106</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17400</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>107</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17449</Code><Description>Einzahlungsverpflichtungen</Description><Sort>108</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17450</Code><Description>Einzahlungsverpflichtungen persönlich haftender Gesellschafter</Description><Sort>109</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17500</Code><Description>Einzahlungsverpflichtungen von Kommanditisten</Description><Sort>110</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17549</Code><Description>Forderungen an Gesellschafter</Description><Sort>111</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17550</Code><Description>Forderungen an Gesellschafter</Description><Sort>112</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17600</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>113</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17649</Code><Description>Ausstehende Einlagen</Description><Sort>114</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17650</Code><Description>Ausstehende Einlagen und Nachschüsse,soweit eingefordert</Description><Sort>115</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17699</Code><Description>Forderungen gegenüber Gesellschaftsorganen</Description><Sort>116</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17700</Code><Description>Forderungen gegenüber Gesellschaftsorganen</Description><Sort>117</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17750</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>118</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17799</Code><Description>Sonderposten</Description><Sort>119</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17800</Code><Description>Sonderposten</Description><Sort>120</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17850</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>121</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17899</Code><Description>Sonstige Vermögensgegenstände, Sonstige Forderungen</Description><Sort>122</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17900</Code><Description>Sonstige Vermögensgegenstände, sonstige Forderungen</Description><Sort>123</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17925</Code><Description>davon mit Restlaufzeit bis ein Jahr</Description><Sort>124</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>17950</Code><Description>davon mit Restlaufzeit über ein Jahr</Description><Sort>125</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18000</Code><Description>Wertpapiere und Anteile des Umlaufvermögens</Description><Sort>126</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18099</Code><Description>Anteile an verbundenen Unternehmen</Description><Sort>127</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18100</Code><Description>Anteile an verbundenen Unternehmen</Description><Sort>128</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18199</Code><Description>Beteiligungen</Description><Sort>129</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18200</Code><Description>Beteiligungen</Description><Sort>130</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18299</Code><Description>Andere Kapitalbeteiligungen</Description><Sort>131</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18300</Code><Description>Andere Kapitalbeteiligungen</Description><Sort>132</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18399</Code><Description>eigene Anteile</Description><Sort>133</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18400</Code><Description>Eigene Anteile</Description><Sort>134</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18500</Code><Description>davon Gesamtnennwert</Description><Sort>135</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18599</Code><Description>Anteil an herrschende oder mit Mehrheit beteiligten Unternehmen</Description><Sort>136</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18600</Code><Description>Anteile an herrschenden oder mit Mehrheit beteiligten Unternehmen</Description><Sort>137</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18699</Code><Description>sonstige Wertpapiere</Description><Sort>138</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18700</Code><Description>sonstige Wertpapiere</Description><Sort>139</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18750</Code><Description>Schecks, Kasse, Bank</Description><Sort>140</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18800</Code><Description>Kasse</Description><Sort>141</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18850</Code><Description>Bank</Description><Sort>142</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18899</Code><Description>Kasse und Bankguthaben</Description><Sort>143</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>18900</Code><Description>Schecks</Description><Sort>144</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19000</Code><Description>Rechnungsabgrenzungsposten, Sonderposten</Description><Sort>145</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19050</Code><Description>Rechnungsabgrenzungsposten</Description><Sort>146</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19100</Code><Description>Disagio</Description><Sort>147</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19150</Code><Description>Sonstige Rechnungsabgrenzungen</Description><Sort>148</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19199</Code><Description>Latente Steuern</Description><Sort>149</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19250</Code><Description>Sonderposten für Verluste bzw. negative Kapitalien</Description><Sort>150</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19300</Code><Description>Nicht durch Eigenkapital gedeckter Fehlbetrag</Description><Sort>151</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19350</Code><Description>Verlustsonderkonten</Description><Sort>152</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19400</Code><Description>Nicht gedeckte Verlustanteile/Entnahmen VH</Description><Sort>153</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19450</Code><Description>Nicht gedeckte Verlustanteile/Entnahmen TH</Description><Sort>154</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19500</Code><Description>Negatives Eigenkapital Personengesellschaft</Description><Sort>155</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19599</Code><Description>Aktiver Unterschiedsbetrag aus Vermögensverrechnung</Description><Sort>156</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19600</Code><Description>Aktiver Unterschiedsbetrag a. Vermögensverrechnung</Description><Sort>157</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>19999</Code><Description>Passiva</Description><Sort>158</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20000</Code><Description>Eigenkapital</Description><Sort>159</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20500</Code><Description>Eingefordertes Kapital</Description><Sort>160</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20599</Code><Description>Gezeichnetes Kapital, Nennkapital, Gesellschaftkapital</Description><Sort>161</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20600</Code><Description>Gezeichnetes Kapital, Nennkapital, Gesellschaftskapital</Description><Sort>162</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20699</Code><Description>Ausstehende Einlagen, offen abgesetzt</Description><Sort>163</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20700</Code><Description>Ausstehende Einlagen, offen abgesetzt</Description><Sort>164</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>20800</Code><Description>Eigene Anteile - offen vom Gezeichneten Kapital abgesetzt</Description><Sort>165</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21000</Code><Description>Kapitalrücklage</Description><Sort>166</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21099</Code><Description>Kapitalrücklage aus dem Aufpreis von Aktien</Description><Sort>167</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21100</Code><Description>Kapitalrücklage aus dem Aufpreis von Aktien</Description><Sort>168</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21199</Code><Description>Sonstige Kapitalrücklagen</Description><Sort>169</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21200</Code><Description>Sonstige Kapitalrücklagen</Description><Sort>170</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21300</Code><Description>davon gebundene Kapitalrücklagen</Description><Sort>171</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21399</Code><Description>Ausstehende Nachschüsse, offen abgesetzt</Description><Sort>172</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21400</Code><Description>Ausstehende Nachschüsse, offen abgesetzt</Description><Sort>173</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21500</Code><Description>Rücklagen für Aufwertungen</Description><Sort>174</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21599</Code><Description>Aufwertungsrücklagen</Description><Sort>175</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21600</Code><Description>Aufwertungsrücklagen</Description><Sort>176</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21699</Code><Description>Neubewertungsrücklagen</Description><Sort>177</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>21700</Code><Description>Neubewertungsrücklagen</Description><Sort>178</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22000</Code><Description>Gewinnrücklagen</Description><Sort>179</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22049</Code><Description>Gesetzliche Rücklagen</Description><Sort>180</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22050</Code><Description>Gesetzliche Rücklage</Description><Sort>181</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22099</Code><Description>Satzungsmässige Rücklagen</Description><Sort>182</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22100</Code><Description>Satzungsmässige Rücklage</Description><Sort>183</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22149</Code><Description>Rücklagen für eigene Anteile</Description><Sort>184</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22150</Code><Description>Rücklagen für eigene Anteile</Description><Sort>185</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22199</Code><Description>Wertaufholungsrücklage</Description><Sort>186</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22200</Code><Description>Wertaufholungsrücklage</Description><Sort>187</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22249</Code><Description>Rücklage für Anteile an herrschenden oder mit Mehrheit beteiligten Unternehmen</Description><Sort>188</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22250</Code><Description>Rücklage für Anteile an herrschenden oder mit Mehrheit beteiligten Unternehmen</Description><Sort>189</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22299</Code><Description>Sonderrücklagen</Description><Sort>190</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22300</Code><Description>Sonderrücklagen</Description><Sort>191</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22349</Code><Description>Andere Gewinnrücklagen</Description><Sort>192</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22350</Code><Description>Andere Gewinnrücklagen</Description><Sort>193</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22500</Code><Description>Kapitalanteile persönlich haftender Gesellschafter</Description><Sort>194</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22524</Code><Description>Festkapital</Description><Sort>195</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22525</Code><Description>Festkapital</Description><Sort>196</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22549</Code><Description>Ausstehende Einlagen</Description><Sort>197</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22550</Code><Description>Ausstehende Einlagen</Description><Sort>198</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22574</Code><Description>Variables Kapital, falls positiv</Description><Sort>199</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22575</Code><Description>Variables Kapital, falls positiv</Description><Sort>200</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22599</Code><Description>Variables Kapital, falls negativ</Description><Sort>201</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22600</Code><Description>Variables Kapital, falls negativ</Description><Sort>202</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22624</Code><Description>Darlehen mit Eigenkapitalcharakter</Description><Sort>203</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22625</Code><Description>Darlehen mit Eigenkapitalcharakter</Description><Sort>204</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22649</Code><Description>Verlustvortragskonto</Description><Sort>205</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22650</Code><Description>Verlustvortragskonto</Description><Sort>206</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22674</Code><Description>Verechnungskto für Einzahlungsverpfl/Entnahmen</Description><Sort>207</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22675</Code><Description>Verrechnungskonto für Einzahlungsverpfl./Entnahmen</Description><Sort>208</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22699</Code><Description>Darlehen mit Fremdkapitalcharakter</Description><Sort>209</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22700</Code><Description>Darlehen mit Fremdkapitalcharakter</Description><Sort>210</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22724</Code><Description>Forderungen an Gesellschafter</Description><Sort>211</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22725</Code><Description>Forderungen an Gesellschafter</Description><Sort>212</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22749</Code><Description>Einlagen persönlich haftender Gesellschafter</Description><Sort>213</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22750</Code><Description>Einlagen persönlich haftender Gesellschafter</Description><Sort>214</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22774</Code><Description>Entnahmen persönlich haftender Gesellschafter</Description><Sort>215</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>22775</Code><Description>Entnahmen persönlich haftender Gesellschafter</Description><Sort>216</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23000</Code><Description>Kapitalanteile von Kommanditisten</Description><Sort>217</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23024</Code><Description>Haftkapital</Description><Sort>218</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23025</Code><Description>Haftkapital</Description><Sort>219</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23049</Code><Description>Ausstehende Einlagen</Description><Sort>220</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23050</Code><Description>Ausstehende Einlagen</Description><Sort>221</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23074</Code><Description>Variables Kapital, falls positiv</Description><Sort>222</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23075</Code><Description>Variables Kapital, falls positiv</Description><Sort>223</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23099</Code><Description>Variables Kapital, falls negativ</Description><Sort>224</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23100</Code><Description>variables Kapital, falls negativ</Description><Sort>225</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23124</Code><Description>Darlehen mit Eigenkapitalcharakter</Description><Sort>226</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23125</Code><Description>Darlehen mit Eigenkapitalcharakter</Description><Sort>227</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23149</Code><Description>Verlustsonderkonto</Description><Sort>228</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23150</Code><Description>Verlustvortragskonto</Description><Sort>229</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23174</Code><Description>Verrechnungskonto für Einzahlungsverpflichtungen</Description><Sort>230</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23175</Code><Description>Verrechnungskonto für Einzahlungsverpfl./Entnahmen</Description><Sort>231</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23199</Code><Description>Darlehen mit Fremdkapitalcharakter</Description><Sort>232</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23200</Code><Description>Darlehen mit Fremdkapitalcharakter</Description><Sort>233</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23224</Code><Description>Forderungen an Gesellschafter</Description><Sort>234</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23225</Code><Description>Forderungen an Gesellschafter</Description><Sort>235</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23249</Code><Description>Einlagen von Kommanditisten</Description><Sort>236</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23250</Code><Description>Einlagen von Kommanditisten</Description><Sort>237</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23274</Code><Description>Entnahmen von Kommanditisten</Description><Sort>238</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23275</Code><Description>Entnahmen von Kommanditisten</Description><Sort>239</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23499</Code><Description>Rücklagen bei Personengesellschaften</Description><Sort>240</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>23500</Code><Description>Rücklagen bei Personengesellschaften</Description><Sort>241</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24000</Code><Description>Kapitalkonten des Einzelunternehmens</Description><Sort>242</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24099</Code><Description>Anfangskapital</Description><Sort>243</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24100</Code><Description>Anfangskapital</Description><Sort>244</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24199</Code><Description>Einlagen</Description><Sort>245</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24200</Code><Description>Einlagen</Description><Sort>246</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24299</Code><Description>Entnahmen</Description><Sort>247</Sort><Level>5</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24300</Code><Description>Entnahmen</Description><Sort>248</Sort><Level>6</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24399</Code><Description>Direkte Kapitalbuchungen</Description><Sort>249</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24400</Code><Description>Direkte Kapitaländerungen</Description><Sort>250</Sort><Level>6</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24499</Code><Description>Bilanzergebnis bei Kapitalgesellschaften</Description><Sort>251</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24500</Code><Description>Bilanzgewinn/Bilanzverlust bei Kapitalgesellschaften</Description><Sort>252</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24549</Code><Description>Nicht verteilter Gewinn/Verlust Personengesellschaften</Description><Sort>253</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24550</Code><Description>Nicht verteilter Gewinn/Verlust Personenges.</Description><Sort>254</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24599</Code><Description>Bilanzergebnis Einzelunternehmen</Description><Sort>255</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24600</Code><Description>Gewinn/Verlust bei Einzelunternehmen</Description><Sort>256</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24649</Code><Description>Vortrag auf neue Rechnung</Description><Sort>257</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24650</Code><Description>Vortrag auf neue Rechnung</Description><Sort>258</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24699</Code><Description>Ausgleichsposten für Anteile im Fremdbesitz</Description><Sort>259</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24700</Code><Description>Ausgleichsposten für Anteile im Fremdbesitz</Description><Sort>260</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24749</Code><Description>Andere Sonderposten</Description><Sort>261</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>24750</Code><Description>Andere Sonderposten</Description><Sort>262</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25000</Code><Description>Sonderposten</Description><Sort>263</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25100</Code><Description>Steuerfreie Rücklagen</Description><Sort>264</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25200</Code><Description>Sonderabschreibungen</Description><Sort>265</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25300</Code><Description>Sonderposten für Zuschüsse und Zulagen</Description><Sort>266</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25400</Code><Description>Sonstige Sonderposten</Description><Sort>267</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>25999</Code><Description>Konsolidierungsausgleichsposten</Description><Sort>268</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>26000</Code><Description>Konsolidierungsausgleichposten</Description><Sort>269</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>26100</Code><Description>davon mit Eigenkapitalcharakter</Description><Sort>270</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27000</Code><Description>Rückstellungen/Fonds für Risiken und Lasten</Description><Sort>271</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27049</Code><Description>Rückstellungen für Abfertigung</Description><Sort>272</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27050</Code><Description>Rückstellungen für Abfertigungen</Description><Sort>273</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27099</Code><Description>Für Pensionen und ähnliche Verpflichtungen</Description><Sort>274</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27100</Code><Description>Rückstellungen für Pensionen und ähnliche Verpflichtungen</Description><Sort>275</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27199</Code><Description>Steuerrückstellungen</Description><Sort>276</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27200</Code><Description>Steuerrückstellungen</Description><Sort>277</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27300</Code><Description>davon gewinnabhängige Steuern</Description><Sort>278</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27400</Code><Description>davon latente Steuern</Description><Sort>279</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27499</Code><Description>Sonstige Rückstellungen</Description><Sort>280</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>27500</Code><Description>Sonstige Rückstellungen</Description><Sort>281</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28000</Code><Description>Verbindlichkeiten</Description><Sort>282</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28049</Code><Description>Anleihen</Description><Sort>283</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28050</Code><Description>Anleihen</Description><Sort>284</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28100</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>285</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28150</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>286</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28200</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>287</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28249</Code><Description>Schuldverschreibung</Description><Sort>288</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28250</Code><Description>Schuldverschreibungen</Description><Sort>289</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28300</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>290</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28350</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>291</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28400</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>292</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28449</Code><Description>Wandelschuldverschreibung</Description><Sort>293</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28450</Code><Description>Wandelschuldverschreibungen</Description><Sort>294</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28500</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>295</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28550</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>296</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28600</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>297</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28649</Code><Description>Verbindlichkeiten gegenüber Kreditinstituten</Description><Sort>298</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28650</Code><Description>Verbindlichkeiten gegenüber Kreditinstituten</Description><Sort>299</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28700</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>300</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28750</Code><Description>davon Kontokorrent</Description><Sort>301</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28800</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>302</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28850</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>303</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28899</Code><Description>Verbindlichkeiten gegenüber anderen Kreditgebern</Description><Sort>304</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28900</Code><Description>Verbindlichkeiten gegenüber anderen Kreditgebern</Description><Sort>305</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>28950</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>306</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29000</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>307</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29050</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>308</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29099</Code><Description>Erhaltene Anzahlungen auf Bestellungen</Description><Sort>309</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29100</Code><Description>Erhaltene Anzahlungen auf Bestellungen</Description><Sort>310</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29150</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>311</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29200</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>312</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29250</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>313</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29299</Code><Description>Verbindlichkeiten aus Lieferungen und Leistungen</Description><Sort>314</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29300</Code><Description>Verbindlichkeiten aus Lieferungen und Leistungen</Description><Sort>315</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29350</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>316</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29400</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>317</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29450</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>318</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29499</Code><Description>Verbindlichkeiten aus Wertpapieren</Description><Sort>319</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29500</Code><Description>Verbindlichkeiten aus Wertpapieren</Description><Sort>320</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29550</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>321</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29600</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>322</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29650</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>323</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29699</Code><Description>Verbindlichkeiten gegenüber abhängigen Unternehmen</Description><Sort>324</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29700</Code><Description>Verbindlichkeiten gegenüber abhängigen Unternehmen</Description><Sort>325</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29750</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>326</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29800</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>327</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29850</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>328</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29899</Code><Description>Verbindlichkeiten aus der Annahme von Wechsel</Description><Sort>329</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29900</Code><Description>Verbindlichkeiten aus der Annahme von Wechseln</Description><Sort>330</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>29950</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>331</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30000</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>332</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30050</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>333</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30099</Code><Description>Verbindlichkeiten gegenüber verbundenen Unternehmen</Description><Sort>334</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30100</Code><Description>Verbindlichkeiten gegenüber verbundenen Unternehmen</Description><Sort>335</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30150</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>336</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30200</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>337</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30250</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>338</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30299</Code><Description>Verbindlichkeiten gegenüber beherrschenden Personen</Description><Sort>339</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30300</Code><Description>Verbindlichkeiten gegenüber beherrschenden Personen</Description><Sort>340</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30350</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>341</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30400</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>342</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30450</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>343</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30499</Code><Description>Verbindlichkeiten gegen Unternehmen mit denen ein Beteiligungsverhältnis besteht</Description><Sort>344</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30500</Code><Description>Verbindlichkeiten gegenüber Unternehmen mit denen ein Beteiligungsverhältnis besteht</Description><Sort>345</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30550</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>346</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30600</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>347</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30650</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>348</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30699</Code><Description>Verbindlichkeiten gegenüber Gesellschaftern</Description><Sort>349</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30700</Code><Description>Verbindlichkeiten gegenüber Gesellschaftern</Description><Sort>350</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30750</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>351</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30800</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>352</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30850</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>353</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30899</Code><Description>Verbindlichkeiten gegenüber Vollhaftern</Description><Sort>354</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30900</Code><Description>Verbindlichkeiten gegenüber Vollhaftern</Description><Sort>355</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>30999</Code><Description>Verbindlichkeiten gegenüber Kommanditisten</Description><Sort>356</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31000</Code><Description>Verbindlichkeiten gegenüber Kommanditisten</Description><Sort>357</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31149</Code><Description>Verbindlichkeiten aus Abgaben</Description><Sort>358</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31150</Code><Description>Verbindlichkeiten aus Abgaben</Description><Sort>359</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31155</Code><Description>Verbindlichkeiten aus Abgaben: bis 1 Jahr</Description><Sort>360</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31160</Code><Description>Verbindlichkeiten aus Abgaben: &gt; 1 Jahr</Description><Sort>361</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31165</Code><Description>Verbindlichkeiten aus Abgaben: &gt; 5 Jahr</Description><Sort>362</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31349</Code><Description>Vbl. gegen Vorsorgeeinrichtungen &amp; Einrichtungen der soz. Sicherheit</Description><Sort>363</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31350</Code><Description>Verbindlichkeiten gegenüber Vorsorgeeinrichtungen und Einrichtungen der sozialen Sicherheit</Description><Sort>364</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31355</Code><Description>Verb.ggü.Vorsorgeeinrichtungen bis 1 Jahr</Description><Sort>365</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31360</Code><Description>Verb.ggü.Vorsorgeeinrichtungen &gt; 1 Jahr</Description><Sort>366</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31365</Code><Description>Verb.ggü.Vorsorgeeinrichtungen &gt; 5 Jahre</Description><Sort>367</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31549</Code><Description>Verbindlichkeitssonderkonten</Description><Sort>368</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31550</Code><Description>Verbindlichkeitssonderkonten</Description><Sort>369</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31749</Code><Description>Sonstige Verbindlichkeiten</Description><Sort>370</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31750</Code><Description>Sonstige Verbindlichkeiten</Description><Sort>371</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31800</Code><Description>davon mit einer Restlaufzeit bis zu einem Jahr</Description><Sort>372</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31850</Code><Description>davon mit einer Restlaufzeit &gt; 1 Jahr</Description><Sort>373</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>31900</Code><Description>davon mit einer Laufzeit &gt; 5 Jahre</Description><Sort>374</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>38999</Code><Description>Rechnungsabgrenzungsposten</Description><Sort>375</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39000</Code><Description>Rechnungsabgrenzungsposten</Description><Sort>376</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39010</Code><Description>davon Aggio auf Anleihen</Description><Sort>377</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39020</Code><Description>davon andere (rap, passiva)</Description><Sort>378</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39099</Code><Description>Latente Steuern</Description><Sort>379</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39100</Code><Description>Latente Steuern</Description><Sort>380</Sort><Level>5</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>NoCode</Code><Description>Gewinn und Verlustrechnung</Description><Sort>381</Sort><Level>1</Level><DC></DC><DataType>abstract</DataType></Account>
+    <Account><Code>39998</Code><Description>Umsatzerlöse</Description><Sort>382</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>39999</Code><Description>Erlöse</Description><Sort>383</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>40000</Code><Description>Umsatzerlöse</Description><Sort>384</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41000</Code><Description>davon Erlösschmälerungen</Description><Sort>385</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41600</Code><Description>Umsatzerlöse, davon zu konsolidieren</Description><Sort>386</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41900</Code><Description>davon Änderung Leistungsforderung u.ä. Korrekturen</Description><Sort>387</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41950</Code><Description>davon Umsatzsteuer</Description><Sort>388</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41998</Code><Description>Aktivierte Eigenleistungen</Description><Sort>389</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>41999</Code><Description>Bestandsänderung der Erzeugnisse, Leistungen</Description><Sort>390</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>42000</Code><Description>Veränderung des Bestands an fertigen und unfertigen Erzeugnissen</Description><Sort>391</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>42499</Code><Description>Andere aktivierte Eigenleistungen</Description><Sort>392</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>42500</Code><Description>Andere aktivierte Eigenleistungen</Description><Sort>393</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>42998</Code><Description>Bestandsänderungen Erzeugnisse</Description><Sort>394</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>42999</Code><Description>Veränderung der in Arbeit befindlichen Arbeiten auf Bestellung</Description><Sort>395</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43000</Code><Description>Veränderung der in Ausführung befindlichen Arbeiten auf Bestellung</Description><Sort>396</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43500</Code><Description>Sonstige betriebliche Erträge</Description><Sort>397</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43524</Code><Description>Laufende betriebliche Erträge</Description><Sort>398</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43525</Code><Description>Laufende betriebliche Erträge</Description><Sort>399</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43624</Code><Description>Laufende neutrale Erträge</Description><Sort>400</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43625</Code><Description>Laufende neutrale Erträge</Description><Sort>401</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43750</Code><Description>Eher unregelmäßige oder ungewöhnlich hohe, disponierbare Erträge</Description><Sort>402</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43825</Code><Description>Verkaufserlöse aus dem Verkauf von Anlagevermögen</Description><Sort>403</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43850</Code><Description>Buchwert aus dem Verkauf von Anlagevermögen</Description><Sort>404</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43900</Code><Description>Zuschreibungen zu Gegenständen des Anlagevermögens</Description><Sort>405</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>43950</Code><Description>Andere nicht ordentliche Erträge</Description><Sort>406</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44000</Code><Description>Materialaufwand</Description><Sort>407</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44099</Code><Description>Roh- Hilfs- Betriebsstoffe und bezogene Waren</Description><Sort>408</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44100</Code><Description>Roh-, Hilfs- Betriebsstoffe und bezogene Waren</Description><Sort>409</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44199</Code><Description>Bezogene Fremdleistungen</Description><Sort>410</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44200</Code><Description>Bezogene Fremdleistungen/Dienstleistungen</Description><Sort>411</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44300</Code><Description>davon Änderungen Leistungsverbindlichkeiten u.ä. Korrekturen</Description><Sort>412</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>44350</Code><Description>davon Vorsteuer</Description><Sort>413</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48000</Code><Description>Personalaufwand</Description><Sort>414</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48099</Code><Description>Löhne und Gehälter</Description><Sort>415</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48100</Code><Description>Löhne und Gehälter</Description><Sort>416</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48200</Code><Description>davon Geschäftsführer/Gesellschafter</Description><Sort>417</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48300</Code><Description>Soziale Abgaben und Aufwendungen für Altersversorgung und Unterstützung</Description><Sort>418</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48400</Code><Description>Aufwendungen für Abfertigung</Description><Sort>419</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48500</Code><Description>Ruhegeldzahlungen und ähnliche Zahlungen</Description><Sort>420</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48600</Code><Description>Aufwendungen für gesetzlich vorgeschriebene S</Description><Sort>421</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>48700</Code><Description>sonstige Aufwendungen</Description><Sort>422</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54000</Code><Description>Abschreibungen</Description><Sort>423</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54099</Code><Description>Abschr. auf Sachanlagevermögen und immaterielles AV</Description><Sort>424</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54100</Code><Description>Abschreibungen auf immaterielle Vermögensgegenstände des Anlagevermögens und auf Sachanlagen sowie auf aktivierte Kosten der Ingangsetzung und Erweiterung ...</Description><Sort>425</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54200</Code><Description>davon ausserplanmässige Abschreibungen</Description><Sort>426</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54300</Code><Description>davon planmässig auf Geschäfts- und Firmenwert</Description><Sort>427</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54400</Code><Description>davon Abschreibungen des immateriellen Anlagevermögens</Description><Sort>428</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54599</Code><Description>sonstige Wertminderung des Anlagevermögens</Description><Sort>429</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54600</Code><Description>sonstige Wertminderung des Anlagevermögens</Description><Sort>430</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54699</Code><Description>Abschr. auf Umlaufvermögen, soweit unüblich hoch</Description><Sort>431</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54700</Code><Description>Abschreibungen auf Vermögensgegenstände des Umlaufvermögens, soweit diese die üblichen Abschreibungen überschreiten</Description><Sort>432</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54799</Code><Description>Wertminderung der im Umlaufvermögen enth. Ford. und flüssigen Mitteln</Description><Sort>433</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>54800</Code><Description>Wertminderungen der im Umlaufvermögen enthaltenen Forderungen und flüssigen Mittel</Description><Sort>434</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55000</Code><Description>Sonstige betriebliche Aufwendungen</Description><Sort>435</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55025</Code><Description>Aufwendungen für die Nutzung von Gütern Dritter</Description><Sort>436</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55050</Code><Description>Raumkosten, Miete und Pacht</Description><Sort>437</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55075</Code><Description>Leasing</Description><Sort>438</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55099</Code><Description>Veränderung der Vorräte an RHB-Stoffen sowie Waren</Description><Sort>439</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55100</Code><Description>Veränderung der Vorräte an RHB-Stoffen sowie Waren</Description><Sort>440</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55124</Code><Description>Rückstellungen für Risiken</Description><Sort>441</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55125</Code><Description>Rückstellungen für Risiken</Description><Sort>442</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55149</Code><Description>sonstige Rückstellungen</Description><Sort>443</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55150</Code><Description>Sonstige Rücksstellungen</Description><Sort>444</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55175</Code><Description>andere betriebliche Aufwendungen</Description><Sort>445</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55200</Code><Description>Versicherung und Beiträge</Description><Sort>446</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55225</Code><Description>Instandhaltungen und Reparaturen</Description><Sort>447</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55250</Code><Description>KFZ-Kosten</Description><Sort>448</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55275</Code><Description>Werbe- und Reisekosten</Description><Sort>449</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55300</Code><Description>Kosten der Warenabgabe</Description><Sort>450</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55325</Code><Description>sonstige Kosten</Description><Sort>451</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55350</Code><Description>Abschreibungen auf das Umlaufvermögen</Description><Sort>452</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55375</Code><Description>Neutrale Aufwendungen</Description><Sort>453</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55400</Code><Description>Unregelmässige, eher disponierbare Aufwendungen</Description><Sort>454</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55425</Code><Description>Buchwert aus dem Verkauf von Anlagevermögen</Description><Sort>455</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55450</Code><Description>Erlöse aus dem Anlagenabgang</Description><Sort>456</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55475</Code><Description>Sonstige unregelmäßige Aufwendungen</Description><Sort>457</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>55999</Code><Description>Erträge aus Gewinngemeinschaften</Description><Sort>458</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56000</Code><Description>Erträge aus Gewinngemeinschaften</Description><Sort>459</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56199</Code><Description>Erträge aus Beteiligungen</Description><Sort>460</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56200</Code><Description>Erträge aus Beteiligungen</Description><Sort>461</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56210</Code><Description>davon Erträge aus beherrschten UN</Description><Sort>462</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56300</Code><Description>davon aus verbundenen Unternehmen</Description><Sort>463</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56310</Code><Description>davon Erträge aus anderen UN</Description><Sort>464</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56400</Code><Description>Finanzerträge, soweit keine Beteiligungen und Gewinngemeinschaften</Description><Sort>465</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56449</Code><Description>Erträge aus anderen Wertpapieren und Ausleihungen</Description><Sort>466</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56450</Code><Description>Erträge aus anderen Wertpapieren und Ausleihungen des Finanzanlagevermögens</Description><Sort>467</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56500</Code><Description>davon aus verbundenen Unternehmen</Description><Sort>468</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56550</Code><Description>davon aus im Anlagevermögen ausgewiesenen Wertpapiere, die keine Beteiligung darstellen</Description><Sort>469</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56600</Code><Description>davon aus im Anlagevermögen ausgewiesenen Forderungen, die keine Beteiligung darstellen</Description><Sort>470</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56649</Code><Description>Sonstige Zinsen und ähnliche Erträge</Description><Sort>471</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56650</Code><Description>Sonstige Zinsen und ähnliche Erträge</Description><Sort>472</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56700</Code><Description>davon aus verbundenen Unternehmen</Description><Sort>473</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56750</Code><Description>davon aus im Umlaufvermögen ausgewiesene Wertpapiere, die keine Beteiligung darstellen</Description><Sort>474</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>56800</Code><Description>davon andere Einnahmen als die vorhergehenden unter gesonderter Angabe jener, die von abhängigen und verbundenen Unternehmen und beherrschenden Personen herrühren</Description><Sort>475</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57000</Code><Description>Erträge aus dem Abgang von und der Zuschreibung zu Finanzanlagen und Wertpapieren des Umlaufvermögens</Description><Sort>476</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57210</Code><Description>Erträge aus dem Abgang von Finanzanlagen und Wertpapieren des Umlaufvermögens</Description><Sort>477</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57220</Code><Description>Verkaufserlöse aus dem Verkauf von Finanzanlagever</Description><Sort>478</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57230</Code><Description>Buchwert aus dem Verkauf von Finanzanlagevermögen</Description><Sort>479</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57240</Code><Description>Erträge aus dem Verkauf von Wertpapieren des Umlaufvermögens</Description><Sort>480</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57250</Code><Description>Zuschreibungen zu Gegenständen des Anlagevermögens</Description><Sort>481</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57260</Code><Description>Zuschreibungen zu Beteiligungen</Description><Sort>482</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57270</Code><Description>Zuschreibungen zu Finanz-AV, nicht Beteiligungen</Description><Sort>483</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57280</Code><Description>Zuschreibungen zu Wertpapieren des UV, nicht Beteiligungen</Description><Sort>484</Sort><Level>4</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57300</Code><Description>Aufwendungen aus Finanzanlagen und aus Wertpapieren des Umlaufvermögens</Description><Sort>485</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57324</Code><Description>Aufwendungen aus verbundenen Unternehmen</Description><Sort>486</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57325</Code><Description>Aufwendungen aus verbundenen Unternehmen</Description><Sort>487</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57349</Code><Description>Abschreibungen auf Beteiligungen</Description><Sort>488</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57350</Code><Description>Abschreibungen auf Beteiligungen</Description><Sort>489</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57399</Code><Description>Abschreibungen auf Finanzanlagen, nicht Beteiligungen</Description><Sort>490</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57400</Code><Description>Abschreibungen auf Finanzanlagen, nicht Beteiligungen</Description><Sort>491</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57449</Code><Description>Abschreibung auf Wertpapiere des Umlaufvermögens</Description><Sort>492</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57450</Code><Description>Abschreibungen auf Wertpapiere des Umlaufvermögens</Description><Sort>493</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57499</Code><Description>zur Vorwegnahme von Wertschwankungen des Umlaufvermögens</Description><Sort>494</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57500</Code><Description>zur Vorwegnahme von Wertschwankungen des Umlaufvermögens</Description><Sort>495</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57550</Code><Description>davon von verbundenen Unternehmen</Description><Sort>496</Sort><Level>4</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57699</Code><Description>Steuern vom Einkommen und Ertrag</Description><Sort>497</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>57999</Code><Description>Zinsen und ähnliche Aufwendungen</Description><Sort>498</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58000</Code><Description>Zinsaufwand ohne Abzinsung von Rückstellungen</Description><Sort>499</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58010</Code><Description>davon an beherrschte Unternehmen</Description><Sort>500</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58020</Code><Description>davon an beherrschende Unternehmen</Description><Sort>501</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58040</Code><Description>davon andere Aufwendungen, Zinsen</Description><Sort>502</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58050</Code><Description>davon an verbundene Unternehmen</Description><Sort>503</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58100</Code><Description>Zinsaufwendungen aus der Abzinsung von Rückstellungen</Description><Sort>504</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58299</Code><Description>Ausserordentliche Erträge</Description><Sort>505</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58300</Code><Description>Ausserordentliche Erträge</Description><Sort>506</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58350</Code><Description>davon Einnahmen unter gesonderter Angabe des Mehrwerts aus Veräußerungen</Description><Sort>507</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58400</Code><Description>davon finanzunwirksam</Description><Sort>508</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58450</Code><Description>Ausserordentliche Erträge, davon andere</Description><Sort>509</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58499</Code><Description>Ausserordentliche Aufwendungen</Description><Sort>510</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58500</Code><Description>Ausserordentliche Aufwendungen</Description><Sort>511</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58550</Code><Description>davon Aufwendungen unter gesonderter Angabe des Minderwerts aus Veräußerungen</Description><Sort>512</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58600</Code><Description>davon finanzunwirksam</Description><Sort>513</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58620</Code><Description>Ausserordentliche Aufwendungen, davon andere</Description><Sort>514</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58700</Code><Description>Steuern vom Einkommen und Ertrag</Description><Sort>515</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58710</Code><Description>St vom EE, davon laufende</Description><Sort>516</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>58720</Code><Description>St vom EE, davon latente und St.vorauszahlungen</Description><Sort>517</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>59999</Code><Description>Sonstige Steuern</Description><Sort>518</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>60000</Code><Description>Sonstige Steuern</Description><Sort>519</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>60999</Code><Description>Erträge aus Verlustübernahme</Description><Sort>520</Sort><Level>2</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>61000</Code><Description>Erträge aus Verlustübernahme</Description><Sort>521</Sort><Level>3</Level><DC>Credit</DC><DataType>monetary</DataType></Account>
+    <Account><Code>61499</Code><Description>Aufwendungen aus Verlustübernahme</Description><Sort>522</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>61500</Code><Description>Aufwendungen aus Verlustübernahme</Description><Sort>523</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>61999</Code><Description>Abgeführte Gewinne</Description><Sort>524</Sort><Level>2</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>62000</Code><Description>Abgeführte Gewinne</Description><Sort>525</Sort><Level>3</Level><DC>Debet</DC><DataType>monetary</DataType></Account>
+    <Account><Code>62500</Code><Description>Jahresüberschuss/Jahresfehlbetrag</Description><Sort>526</Sort><Level>1</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63000</Code><Description>Ergebnisverwendung</Description><Sort>527</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63049</Code><Description>Gewinnvortrag (Bilanz)</Description><Sort>528</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63050</Code><Description>Gewinnvortrag (Bilanz)</Description><Sort>529</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63099</Code><Description>Verlustvortrag (Bilanz)</Description><Sort>530</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63100</Code><Description>Verlustvortrag (Bilanz)</Description><Sort>531</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63149</Code><Description>Gewinnvortrag aus der Vorperiode (GuV)</Description><Sort>532</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63150</Code><Description>Gewinnvortrag aus der Vorperiode</Description><Sort>533</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63199</Code><Description>Verlustvortrag aus der Vorperiode (GuV)</Description><Sort>534</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63200</Code><Description>Verlustvortrag aus der Vorperiode</Description><Sort>535</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63249</Code><Description>Ertrag aus Kapitalherabsetzung</Description><Sort>536</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63250</Code><Description>Erträge aus Kapitalherabsetzung</Description><Sort>537</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63300</Code><Description>Einstellung in Kapitalrücklagen</Description><Sort>538</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63349</Code><Description>Einstellung in Rücklagen</Description><Sort>539</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63350</Code><Description>Einstellung in Gewinnrücklagen</Description><Sort>540</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63400</Code><Description>Auflösung von Kapitalrücklagen</Description><Sort>541</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63449</Code><Description>Auflösung von Rücklagen</Description><Sort>542</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63450</Code><Description>Auflösung von Gewinnrücklagen</Description><Sort>543</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63500</Code><Description>Auflösung/Einstellung unverst. RL und Sonderposten</Description><Sort>544</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63549</Code><Description>Vortrag auf neue Rechnung</Description><Sort>545</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63550</Code><Description>Vortrag auf neue Rechnung</Description><Sort>546</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63599</Code><Description>Vorabausschüttung</Description><Sort>547</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63600</Code><Description>Vorabausschüttung</Description><Sort>548</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63649</Code><Description>Umsatz-/Warenrückvergütung</Description><Sort>549</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63650</Code><Description>Umsatz-/Warenrückvergütung</Description><Sort>550</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63699</Code><Description>Gewinnanteile stiller und fremder Gesellschafter</Description><Sort>551</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63700</Code><Description>Gewinnanteile stiller und fremder Gesellschafter</Description><Sort>552</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>63999</Code><Description>Verrechnungskonten Vollhafter</Description><Sort>553</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>64000</Code><Description>auf Verrechnungskonten Vollhafter verteiltes Ergebnis</Description><Sort>554</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>64099</Code><Description>Verrechnungskonten Kommanditisten</Description><Sort>555</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>64100</Code><Description>auf Verrechnungskonten Kommanditisten verteiltes Ergebnis</Description><Sort>556</Sort><Level>4</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrekturen</Code><Description>Korrekturenblatt</Description><Sort>557</Sort><Level>1</Level><DC></DC><DataType>abstract</DataType></Account>
+    <Account><Code>Korrektur01</Code><Description>Ausleihungen gegenüber Gesellschaftern (Finanzanlagevermögen)</Description><Sort>558</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur02</Code><Description>Darlehen mit Fremdkapitalcharakter in Kapitalanteile Gesellschafter und Kommanditisten</Description><Sort>559</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur03</Code><Description>Verbindlichkeiten gegenüber Gesellschaftern und verbundenen Unternehmen mit Restlaufzeit &gt; 5 Jahr</Description><Sort>560</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur04</Code><Description>Unregelmäßige oder ungewöhnlich hohe, disponierbare betriebliche Erträge</Description><Sort>561</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur05</Code><Description>Unregelmäßige oder ungewöhnlich hohe, disponierbare betriebliche Aufwendungen</Description><Sort>562</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur06</Code><Description>Bilanzgewinn / Bilanzverlust bei Kapitalgesellschaften</Description><Sort>563</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur07</Code><Description>Erträge aus dem Abgang von und der Zuschreibung zu Finanzanlagen und Wertpapieren des Umlaufvermögens</Description><Sort>564</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur08</Code><Description>Aufwendungen aus Verlustübernahme</Description><Sort>565</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur09</Code><Description>Ausstehende Einlagen und Zuschüsse, soweit eingefordert</Description><Sort>566</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur10</Code><Description>Unternehmerlohn außerhalb des Betriebsgewinnes</Description><Sort>567</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur20</Code><Description>Zuführung Pensionsrückstellungen</Description><Sort>568</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur21</Code><Description>Verbindlichkeiten mit Eigenkapitalcharakter</Description><Sort>569</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur22</Code><Description>Sonstige Korrekturen in netto Bilanzsumme für das Rating</Description><Sort>570</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur23</Code><Description>Disponsibles positives Kapital, Kommanditisten</Description><Sort>571</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur24</Code><Description>Bilanzgewinn bei Kapitalgesellschaften, soweit auszuschütten</Description><Sort>572</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur25</Code><Description>Unterdotierte Rückstellungen</Description><Sort>573</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur26</Code><Description>Stille Lasten</Description><Sort>574</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur27</Code><Description>Sonderposten für Zuschüsse und Zulagen mit Eigenkapitalcharakter</Description><Sort>575</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur29</Code><Description>Verbindlichkeiten für Vermögen ausserhalb der Bilanz</Description><Sort>576</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30</Code><Description>Stille reserven</Description><Sort>577</Sort><Level>2</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30A</Code><Description>Stille Reserven in Immaterielle Vermögensgegenstände</Description><Sort>578</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30B</Code><Description>Stille Reserven in Sachanlagen</Description><Sort>579</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30C</Code><Description>Stille Reserven in Beteiligungen</Description><Sort>580</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30D</Code><Description>Stille Reserven in Vorräte</Description><Sort>581</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>Korrektur30E</Code><Description>Stille Reserven in Wertpapiere</Description><Sort>582</Sort><Level>3</Level><DC></DC><DataType>monetary</DataType></Account>
+    <Account><Code>ccRootFolder</Code><Description>URA Credit Check</Description><Sort>583</Sort><Level>1</Level><DC></DC><DataType>abstract</DataType></Account>
+    <Account><Code>ccScore12</Code><Description>Zeigt die Kontoführung eine problematische Entwicklung?</Description><Sort>584</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore131</Code><Description>Hat sich der Umsatz im unterjährigen Bereich positiv entwickelt?</Description><Sort>585</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore132</Code><Description>Ist die Güte der unterjährigen Daten so beschaffen, dass diese einen Überblick über die tatsächliche aktuelle Lage des Unternehmens vermitteln können?</Description><Sort>586</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore211</Code><Description>Gibt es Risiken durch die Art der Konzentration auf wenige Produkte?</Description><Sort>587</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore212</Code><Description>Bestehen Risiken durch Abhängigkeiten von Kunden?</Description><Sort>588</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore213</Code><Description>Wie beurteilen Sie die Wettbewerbsposition des Unternehmers?</Description><Sort>589</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore214</Code><Description>Bestehen Risiken durch Abhängigkeiten von Lieferanten?</Description><Sort>590</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore221</Code><Description>Sind Nachfolge- und Stellvertretungsregelungen für de Geschäftsführung getroffen?</Description><Sort>591</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore222</Code><Description>Wie beurteilen Sie die kaufmännische Qualifikation der Geschäftsführung?</Description><Sort>592</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore223</Code><Description>Wie beurteilen Sie die technische Qualifikation der Geschäftsführung?</Description><Sort>593</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore224</Code><Description>Wie beurteilen Sie die Berufserfahrung der Geschäftsführung?</Description><Sort>594</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore225</Code><Description>Wie beurteilen Sie die Einhaltung von Absprachen und Regelungen mit Kreditinstituten?</Description><Sort>595</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore231</Code><Description>Ergeben sich Risiken aus der Qualität des Rechnungswesens?</Description><Sort>596</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore232</Code><Description>Überwacht das Unternehmen seine Debitoren/Kreditoren?</Description><Sort>597</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore233</Code><Description>Führt das Unternehmen eine aussagekräftige Kalkulation durch?</Description><Sort>598</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore24</Code><Description>Wie beurteilen Sie Qualität und Umfang des Risikomanagements des Unternehmens?</Description><Sort>599</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore251</Code><Description>Wie beurteilen Sie das Planungsvermögen des Unternehmens?</Description><Sort>600</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+    <Account><Code>ccScore252</Code><Description>Wie beurteilen Sie den Realitätsgehalt der Planungen?</Description><Sort>601</Sort><Level>2</Level><DC></DC><DataType>number</DataType></Account>
+  </Accounts>
+</FmtMappingModel>

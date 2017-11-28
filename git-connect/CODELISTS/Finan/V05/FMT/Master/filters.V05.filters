@@ -1,0 +1,19 @@
+[
+	{
+		"code":"Tuples",
+		"action":"DELETE"
+	},
+	{
+		"code":"MutationNetWorth",
+		"action":"DELETE"
+	},            
+	{
+		"code":"ProfitAfterTax",
+		"action":"RENAME",
+		"content":"Resultaat"
+	},
+	{
+		"code":"CurrentPeriodResult",
+		"action":"KEEP"
+	}
+]

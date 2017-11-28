@@ -1,0 +1,102 @@
+{
+	"viewType":"WIZARD",
+	"name":"Root",
+	"variableName":"Q_ROOT",
+	"metaData":{
+		"onlyMoveForwardIfAllPreviousStepsAreDone":true,
+		"alwaysShowReportButton":true
+	},
+	"children":[
+		{
+			"viewType":"CONTAINER",
+			"name":"Name",
+			"description":"Name",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel1",
+					"description":"CustomPanel1",
+					"metaData":{
+						"providertype":"REALIZATION_NAME_PANEL"
+					}
+					
+				}
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Budget",
+			"description":"Budget",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel2",
+					"description":"CustomPanel2",
+					"metaData":{
+						"providertype":"REALIZATION_BUDGET_PANEL"
+					}
+					
+				}
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"History",
+			"description":"History",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel3",
+					"description":"CustomPanel3",
+					"metaData":{
+						"providertype":"REALIZATION_HISTORY_PANEL"
+					}
+					
+				}
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Indication",
+			"description":"Indication",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel4",
+					"description":"CustomPanel4",
+					"metaData":{
+						"providertype":"REALIZATION_INDICATION_PANEL"
+					}
+					
+				}
+			]
+			
+		},
+		{
+			"viewType":"CONTAINER",
+			"name":"Report",
+			"description":"Report",
+			"children":[
+				{
+					"viewType":"CONTAINER",
+					"name":"CustomPanel5",
+					"description":"CustomPanel5",
+					"metaData":{
+						"providertype":"REPORT_PANEL"
+					},
+					"reporttypes":[
+						"realisatie"
+					]
+					
+				}
+				
+			]
+			
+		}
+		
+	]
+	
+}

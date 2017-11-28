@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Modelversion : 3.1.1.406
+Gegenereerd op  : 26-07-2016 -->
+<configuration xsi:noNamespaceSchemaLocation="GdetConfiguration.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <description>V05 Benchmark configuratie (Based on modelversion : 3.1.1.406)</description>
+  <filter>
+    <absoluteYears/>
+    <period>MainPeriod</period>
+  </filter>
+  <externalDataSource>
+    <dataSourceJNDI>FinanGdetDS</dataSourceJNDI>
+    <externalTables>
+      <externalTable default="true">
+        <name>bm_generic_data</name>
+        <uniqueIdColumn>GdetID</uniqueIdColumn>
+        <documentIdColumn>DocID</documentIdColumn>
+        <yearColumn>Year</yearColumn>
+        <periodColumn>Period</periodColumn>
+        <currencyColumn>Currency</currencyColumn>
+        <customerIdColumn>CustomerID</customerIdColumn>
+        <emptyRecordsIgnored>true</emptyRecordsIgnored>
+        <ignoredColumnsForEmptyCheck>raw_data_id,raw_data_source_platform_id,raw_data_date_received</ignoredColumnsForEmptyCheck>
+        <updateMode>UPDATE</updateMode>
+      </externalTable>
+    </externalTables>
+  </externalDataSource>
+
+  <variables>
+
+    <!-- Variables below are specified by model builders -->
+
+    <variable columnName="ModelVersion" columnType="STRING" tableName="bm_generic_data">ModelVersion</variable>
+    <variable columnName="ChamberOfCommerceNumber" columnType="STRING" tableName="bm_generic_data">FPS_VAR_KVKnr</variable>
+    <variable columnName="SectorCode" columnType="STRING" tableName="bm_generic_data">SectorCode</variable>
+    <variable columnName="SectorCode2" columnType="STRING" tableName="bm_generic_data">SectorCode2</variable>
+    <variable columnName="SectorTitle" columnType="STRING" tableName="bm_generic_data">SectorTitle</variable>
+    <variable columnName="SectorTitle2" columnType="STRING" tableName="bm_generic_data">SectorTitle2</variable>
+    <variable columnName="Benchmark_IntangibleFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_IntangibleFixedAssets</variable>
+    <variable columnName="TotalGoodwill" columnType="DECIMAL" tableName="bm_generic_data">TotalGoodwill</variable>
+    <variable columnName="TotalPatentsTrademarksAndOtherRights" columnType="DECIMAL" tableName="bm_generic_data">TotalPatentsTrademarksAndOtherRights</variable>
+    <variable columnName="TotalOtherIntangibleFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">TotalOtherIntangibleFixedAssets</variable>
+    <variable columnName="Benchmark_MaterialFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_MaterialFixedAssets</variable>
+    <variable columnName="TotalLandAndBuildings" columnType="DECIMAL" tableName="bm_generic_data">TotalLandAndBuildings</variable>
+    <variable columnName="TotalPlantAndEquipment" columnType="DECIMAL" tableName="bm_generic_data">TotalPlantAndEquipment</variable>
+    <variable columnName="TotalFurnitureAndFixtures" columnType="DECIMAL" tableName="bm_generic_data">TotalFurnitureAndFixtures</variable>
+    <variable columnName="TotalTransportationEquipment" columnType="DECIMAL" tableName="bm_generic_data">TotalTransportationEquipment</variable>
+    <variable columnName="TotalOtherMaterialFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">TotalOtherMaterialFixedAssets</variable>
+    <variable columnName="Benchmark_FinancialFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_FinancialFixedAssets</variable>
+    <variable columnName="TotalInvestmentInSubsidiaries" columnType="DECIMAL" tableName="bm_generic_data">TotalInvestmentInSubsidiaries</variable>
+    <variable columnName="Benchmark_FixedAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_FixedAssets</variable>
+    <variable columnName="TotalLoansToSubsidiaries" columnType="DECIMAL" tableName="bm_generic_data">TotalLoansToSubsidiaries</variable>
+    <variable columnName="TotalLoansToAffiliatedCompanies" columnType="DECIMAL" tableName="bm_generic_data">TotalLoansToAffiliatedCompanies</variable>
+    <variable columnName="TotalOtherSecurities" columnType="DECIMAL" tableName="bm_generic_data">TotalOtherSecurities</variable>
+    <variable columnName="TotalOtherFinancialFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">TotalOtherFinancialFixedAssets</variable>
+    <variable columnName="ProjectsInProgress" columnType="DECIMAL" tableName="bm_generic_data">ProjectsInProgress</variable>
+    <variable columnName="Benchmark_Inventories" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_Inventories</variable>
+    <variable columnName="MerchandiseInventory" columnType="DECIMAL" tableName="bm_generic_data">MerchandiseInventory</variable>
+    <variable columnName="ProvisionObsoleteInventories" columnType="DECIMAL" tableName="bm_generic_data">ProvisionObsoleteInventories</variable>
+    <variable columnName="MaterialsInventory" columnType="DECIMAL" tableName="bm_generic_data">MaterialsInventory</variable>
+    <variable columnName="WorkInProgress" columnType="DECIMAL" tableName="bm_generic_data">WorkInProgress</variable>
+    <variable columnName="CorrectionWorkInProgress" columnType="DECIMAL" tableName="bm_generic_data">CorrectionWorkInProgress</variable>
+    <variable columnName="InventoryFinishedProducts" columnType="DECIMAL" tableName="bm_generic_data">InventoryFinishedProducts</variable>
+    <variable columnName="Benchmark_Receivables" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_Receivables</variable>
+    <variable columnName="TradeReceivablesTotal" columnType="DECIMAL" tableName="bm_generic_data">TradeReceivablesTotal</variable>
+    <variable columnName="ProvisionDoubtfulAccountsReceivable" columnType="DECIMAL" tableName="bm_generic_data">ProvisionDoubtfulAccountsReceivable</variable>
+    <variable columnName="OtherAccountsReceivable" columnType="DECIMAL" tableName="bm_generic_data">OtherAccountsReceivable</variable>
+    <variable columnName="ReceivablesGroupCompanies" columnType="DECIMAL" tableName="bm_generic_data">ReceivablesGroupCompanies</variable>
+    <variable columnName="ReceivablesAffiliatedCompanies" columnType="DECIMAL" tableName="bm_generic_data">ReceivablesAffiliatedCompanies</variable>
+    <variable columnName="TaxOnProfitsReceivable" columnType="DECIMAL" tableName="bm_generic_data">TaxOnProfitsReceivable</variable>
+    <variable columnName="VATReceivable" columnType="DECIMAL" tableName="bm_generic_data">VATReceivable</variable>
+    <variable columnName="OtherReceivables" columnType="DECIMAL" tableName="bm_generic_data">OtherReceivables</variable>
+    <variable columnName="Benchmark_CashAndEquivalents" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CashAndEquivalents</variable>
+    <variable columnName="MarketableSecurities" columnType="DECIMAL" tableName="bm_generic_data">MarketableSecurities</variable>
+    <variable columnName="ExcessCash" columnType="DECIMAL" tableName="bm_generic_data">ExcessCash</variable>
+    <variable columnName="OperationalCashTotal" columnType="DECIMAL" tableName="bm_generic_data">OperationalCashTotal</variable>
+    <variable columnName="Benchmark_CurrentAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CurrentAssets</variable>
+    <variable columnName="Benchmark_TotalAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_TotalAssets</variable>
+    <variable columnName="Benchmark_NetWorth" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_NetWorth</variable>
+    <variable columnName="CapitalPartners" columnType="DECIMAL" tableName="bm_generic_data">CapitalPartners</variable>
+    <variable columnName="Benchmark_CapitalPartnersUndistributedProfit" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CapitalPartnersUndistributedProfit</variable>
+    <variable columnName="SharedCapital" columnType="DECIMAL" tableName="bm_generic_data">SharedCapital</variable>
+    <variable columnName="SharePremium" columnType="DECIMAL" tableName="bm_generic_data">SharePremium</variable>
+    <variable columnName="StatutoryReserve" columnType="DECIMAL" tableName="bm_generic_data">StatutoryReserve</variable>
+    <variable columnName="ReservedProfit" columnType="DECIMAL" tableName="bm_generic_data">ReservedProfit</variable>
+    <variable columnName="RevaluationReserve" columnType="DECIMAL" tableName="bm_generic_data">RevaluationReserve</variable>
+    <variable columnName="OtherReserve" columnType="DECIMAL" tableName="bm_generic_data">OtherReserve</variable>
+    <variable columnName="MinorityInterests" columnType="DECIMAL" tableName="bm_generic_data">MinorityInterests</variable>
+    <variable columnName="Benchmark_Provisions" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_Provisions</variable>
+    <variable columnName="PensionProvisions" columnType="DECIMAL" tableName="bm_generic_data">PensionProvisions</variable>
+    <variable columnName="StandingRight" columnType="DECIMAL" tableName="bm_generic_data">StandingRight</variable>
+    <variable columnName="OtherProvisions" columnType="DECIMAL" tableName="bm_generic_data">OtherProvisions</variable>
+    <variable columnName="DeferredTaxes" columnType="DECIMAL" tableName="bm_generic_data">DeferredTaxes</variable>
+    <variable columnName="ProvisionForReorganisation" columnType="DECIMAL" tableName="bm_generic_data">ProvisionForReorganisation</variable>
+    <variable columnName="Benchmark_NonCurrentLiabilities" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_NonCurrentLiabilities</variable>
+    <variable columnName="SubordinatedDebts" columnType="DECIMAL" tableName="bm_generic_data">SubordinatedDebts</variable>
+    <variable columnName="LongTermDebts" columnType="DECIMAL" tableName="bm_generic_data">LongTermDebts</variable>
+    <variable columnName="LongTermDebtsOther" columnType="DECIMAL" tableName="bm_generic_data">LongTermDebtsOther</variable>
+    <variable columnName="LongTermDebtsAnnuity" columnType="DECIMAL" tableName="bm_generic_data">LongTermDebtsAnnuity</variable>
+    <variable columnName="Benchmark_CurrentLiabilities" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CurrentLiabilities</variable>
+    <variable columnName="STPartOfLTDebts" columnType="DECIMAL" tableName="bm_generic_data">STPartOfLTDebts</variable>
+    <variable columnName="OverdraftCurrentAccount" columnType="DECIMAL" tableName="bm_generic_data">OverdraftCurrentAccount</variable>
+    <variable columnName="OtherShortTermDebt" columnType="DECIMAL" tableName="bm_generic_data">OtherShortTermDebt</variable>
+    <variable columnName="TradePayablesTotal" columnType="DECIMAL" tableName="bm_generic_data">TradePayables</variable>
+    <variable columnName="AccountsPayableExpenses" columnType="DECIMAL" tableName="bm_generic_data">AccountsPayableExpenses</variable>
+    <variable columnName="AccountsPayableInvestments" columnType="DECIMAL" tableName="bm_generic_data">AccountsPayableInvestments</variable>
+    <variable columnName="DividendPayable" columnType="DECIMAL" tableName="bm_generic_data">DividendPayable</variable>
+    <variable columnName="CurrentAccountGroupCompanies" columnType="DECIMAL" tableName="bm_generic_data">CurrentAccountGroupCompanies</variable>
+    <variable columnName="CurrentAccountAffiliatedCompanies" columnType="DECIMAL" tableName="bm_generic_data">CurrentAccountAffiliatedCompanies</variable>
+    <variable columnName="Benchmark_ReceivedPrePaymentsTotal" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_ReceivedPrePaymentsTotal</variable>
+    <variable columnName="TaxesAndSocialSecurityCharges" columnType="DECIMAL" tableName="bm_generic_data">TaxesAndSocialSecurityCharges</variable>
+    <variable columnName="PensionExpensesPayable" columnType="DECIMAL" tableName="bm_generic_data">PensionExpensesPayable</variable>
+    <variable columnName="InterestAndRepaymentsPayable" columnType="DECIMAL" tableName="bm_generic_data">InterestAndRepaymentsPayable</variable>
+    <variable columnName="TransitionalLiabilities" columnType="DECIMAL" tableName="bm_generic_data">TransitionalLiabilities</variable>
+    <variable columnName="Benchmark_CapitalShortfall" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CapitalShortfall</variable>
+    <variable columnName="Benchmark_TotalEquityAndLiabilities" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_TotalEquityAndLiabilities</variable>
+    <variable columnName="Benchmark_NetSales" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_NetSales</variable>
+    <variable columnName="Sales" columnType="DECIMAL" tableName="bm_generic_data">Sales</variable>
+    <variable columnName="SalesDiscount" columnType="DECIMAL" tableName="bm_generic_data">SalesDiscount</variable>
+    <variable columnName="SalesCorrections" columnType="DECIMAL" tableName="bm_generic_data">SalesCorrections</variable>
+    <variable columnName="ChangeInProjectsInProgress" columnType="DECIMAL" tableName="bm_generic_data">ChangeInProjectsInProgress</variable>
+    <variable columnName="Benchmark_ChangeInInventories" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_ChangeInInventories</variable>
+    <variable columnName="ChangeInWorkInProgress" columnType="DECIMAL" tableName="bm_generic_data">ChangeInWorkInProgress</variable>
+    <variable columnName="ChangeInFinishedProduct" columnType="DECIMAL" tableName="bm_generic_data">ChangeInFinishedProduct</variable>
+    <variable columnName="CapitalizedOwnProduction" columnType="DECIMAL" tableName="bm_generic_data">CapitalizedOwnProduction</variable>
+    <variable columnName="Benchmark_CostOfSales" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_CostOfSales</variable>
+    <variable columnName="TradeCostOfSales" columnType="DECIMAL" tableName="bm_generic_data">TradeCostOfSales</variable>
+    <variable columnName="CostOfMaterials" columnType="DECIMAL" tableName="bm_generic_data">CostOfMaterials</variable>
+    <variable columnName="PurchaseDiscountsAndBonuses" columnType="DECIMAL" tableName="bm_generic_data">PurchaseDiscountsAndBonuses</variable>
+    <variable columnName="CarriageAndForwardingCharges" columnType="DECIMAL" tableName="bm_generic_data">CarriageAndForwardingCharges</variable>
+    <variable columnName="OtherCostOfSales" columnType="DECIMAL" tableName="bm_generic_data">OtherCostOfSales</variable>
+    <variable columnName="ContractedOutPurchase" columnType="DECIMAL" tableName="bm_generic_data">ContractedOutPurchase</variable>
+    <variable columnName="Benchmark_GrossProfit" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_GrossProfit</variable>
+    <variable columnName="OtherOperatingIncome" columnType="DECIMAL" tableName="bm_generic_data">OtherOperatingIncome</variable>
+    <variable columnName="Benchmark_OperatingExpenses" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_OperatingExpenses</variable>
+    <variable columnName="ContractedOut" columnType="DECIMAL" tableName="bm_generic_data">ContractedOut</variable>
+    <variable columnName="Benchmark_PersonnelExpenses" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_PersonnelExpenses</variable>
+    <variable columnName="DepartmentTotalWages" columnType="DECIMAL" tableName="bm_generic_data">DepartmentTotalWages</variable>
+    <variable columnName="DepartmentTotalSocialSecurities" columnType="DECIMAL" tableName="bm_generic_data">DepartmentTotalSocialSecurities</variable>
+    <variable columnName="DepartmentTotalPensionPremiums" columnType="DECIMAL" tableName="bm_generic_data">DepartmentTotalPensionPremiums</variable>
+    <variable columnName="TotalOtherStaffExpenses" columnType="DECIMAL" tableName="bm_generic_data">TotalOtherStaffExpenses</variable>
+    <variable columnName="ProductionExpenses" columnType="DECIMAL" tableName="bm_generic_data">ProductionExpenses</variable>
+    <variable columnName="FurnitureAndFixtureExpenses" columnType="DECIMAL" tableName="bm_generic_data">FurnitureAndFixtureExpenses</variable>
+    <variable columnName="OfficeExpenses" columnType="DECIMAL" tableName="bm_generic_data">OfficeExpenses</variable>
+    <variable columnName="TransportationExpenses" columnType="DECIMAL" tableName="bm_generic_data">TransportationExpenses</variable>
+    <variable columnName="SellingExpenses" columnType="DECIMAL" tableName="bm_generic_data">SellingExpenses</variable>
+    <variable columnName="MonitoringAndControlExpenses" columnType="DECIMAL" tableName="bm_generic_data">MonitoringAndControlExpenses</variable>
+    <variable columnName="OtherOperatingExpenses" columnType="DECIMAL" tableName="bm_generic_data">OtherOperatingExpenses</variable>
+    <variable columnName="Benchmark_DepreciationOfAssets" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_DepreciationOfAssets</variable>
+    <variable columnName="DepreciationOfIntangibleFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">DepreciationOfIntangibleFixedAssets</variable>
+    <variable columnName="DepreciationOfMaterialFixedAssets" columnType="DECIMAL" tableName="bm_generic_data">DepreciationOfMaterialFixedAssets</variable>
+    <variable columnName="Benchmark_OperatingIncome" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_OperatingIncome</variable>
+    <variable columnName="Benchmark_FinancialResult" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_FinancialResult</variable>
+    <variable columnName="FinancialIncome" columnType="DECIMAL" tableName="bm_generic_data">FinancialIncome</variable>
+    <variable columnName="FinancialExpenses" columnType="DECIMAL" tableName="bm_generic_data">FinancialExpenses</variable>
+    <variable columnName="Benchmark_OrdinaryProfitBeforeTaxes" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_OrdinaryProfitBeforeTaxes</variable>
+    <variable columnName="Benchmark_ExtraordinaryIncomeAndExpenses" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_ExtraordinaryIncomeAndExpenses</variable>
+    <variable columnName="ExtraordinaryIncome" columnType="DECIMAL" tableName="bm_generic_data">ExtraordinaryIncome</variable>
+    <variable columnName="ExtraordinaryExpenses" columnType="DECIMAL" tableName="bm_generic_data">ExtraordinaryExpenses</variable>
+    <variable columnName="TaxOnProfits" columnType="DECIMAL" tableName="bm_generic_data">TaxOnProfits</variable>
+    <variable columnName="ShareResultFromSubsidiaries" columnType="DECIMAL" tableName="bm_generic_data">ShareResultFromSubsidiaries</variable>
+    <variable columnName="ShareResultMinorityInterest" columnType="DECIMAL" tableName="bm_generic_data">ShareResultMinorityInterest</variable>
+    <variable columnName="Benchmark_ProfitAfterTax" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_ProfitAfterTax</variable>
+    <variable columnName="BenchmarkGrossProfitMargin" columnType="DECIMAL" tableName="bm_generic_data">GrossProfitMargin</variable>
+    <variable columnName="BenchmarkReturnOnEquity" columnType="DECIMAL" tableName="bm_generic_data">ReturnOnEquity</variable>
+    <variable columnName="BenchmarkReturnOnAssets" columnType="DECIMAL" tableName="bm_generic_data">ReturnOnAssets</variable>
+    <variable columnName="BenchmarkSolvencyRatio" columnType="DECIMAL" tableName="bm_generic_data">SolvencyRatio</variable>
+    <variable columnName="BenchmarkInterestCoverageRatio" columnType="DECIMAL" tableName="bm_generic_data">InterestCoverageRatio</variable>
+    <variable columnName="BenchmarkDebtToEBITDA" columnType="DECIMAL" tableName="bm_generic_data">DebtToEBITDA</variable>
+    <variable columnName="BenchmarkCurrentRatio" columnType="DECIMAL" tableName="bm_generic_data">CurrentRatio</variable>
+    <variable columnName="BenchmarkQuickRatio" columnType="DECIMAL" tableName="bm_generic_data">QuickRatio</variable>
+    <variable columnName="BenchmarkDefensiveInterval" columnType="DECIMAL" tableName="bm_generic_data">DefensiveInterval</variable>
+    <variable columnName="BenchmarkNetProfitMarginBeforeTaxes" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkNetProfitMarginBeforeTaxes</variable>
+    <variable columnName="BenchmarkNetProfitMarginAfterTaxes" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkNetProfitMarginAfterTaxes</variable>
+
+    <!-- Variables below are added in RFC aug/sep 2013	-->
+    <variable columnName="BenchmarkTotalWagesToSales" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkTotalWagesToSales</variable>
+    <variable columnName="BenchmarkInventoryTurnoverRatio" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkInventoryTurnoverRatio</variable>
+    <variable columnName="BenchmarkInventoryTermDays" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkInventoryTermDays</variable>
+    <variable columnName="BenchmarkOperatingIncomeRatio" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkOperatingIncomeRatio</variable>
+    <variable columnName="BenchmarkReturnOnDebt" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkReturnOnDebt</variable>
+    <variable columnName="BenchmarkTradeReceivablesToSales" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkTradeReceivablesToSales</variable>
+
+    <variable columnName="Benchmark_PersonnelExpensesToSales" columnType="DECIMAL" tableName="bm_generic_data">Benchmark_PersonnelExpensesToSales</variable>
+
+    <!-- Variables below are added in RFC jan 2013	-->
+    <variable columnName="KvKSectorCode" columnType="STRING" tableName="bm_generic_data">KvKSectorCode</variable>
+    <variable columnName="KvKSectorTitle" columnType="STRING" tableName="bm_generic_data">KvKSectorTitle</variable>
+    <variable columnName="LegalForm" columnType="STRING" tableName="bm_generic_data">Rechtsvorm</variable>
+    <variable columnName="DateFounded" columnType="DECIMAL" tableName="bm_generic_data">DateFounded</variable>
+    <variable columnName="ZipCode" columnType="STRING" tableName="bm_generic_data">CompanyZipCode</variable>
+    <variable columnName="Employees" columnType="DECIMAL" tableName="bm_generic_data">TotalNumberOfEmployees</variable>
+    <variable columnName="KvKEmployees" columnType="DECIMAL" tableName="bm_generic_data">KvKTotalNumberOfEmployees</variable>
+
+	<!-- Variables below are added in RFC jun/aug 2016 -->  
+    <variable columnName="BenchmarkRating" columnType="DECIMAL" tableName="bm_generic_data">BenchmarkRating</variable>
+
+    <!-- Variables below are added by java developers -->
+    <variable columnName="raw_data_id" columnType="INTEGER">DeliveryId</variable>
+    <variable columnName="process_id" columnType="INTEGER">ProcessId</variable>
+    <variable columnName="raw_data_source_platform_id" columnType="INTEGER">DeliverySourceId</variable>
+    <variable columnName="raw_data_source_platform" columnType="STRING">DeliverySource</variable>
+    <variable columnName="raw_data_date_received" type="DATE" columnType="DATE">DeliveryReceived</variable>
+  </variables>
+</configuration>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><finanData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<header>
+<companyName>BARRY CALLEBAUT BELGIUM</companyName><documentCode>BE0438950833</documentCode>
+<codeList>Belfirst</codeList><creator>XML-kolom toegevoegd aan Excel BVD data spreadsheet</creator>
+<buildDate>2015-10-21</buildDate>
+</header>
+
+<timeLines><timeLine><columns><column id="1"><startDate>2014-01-01</startDate><endDate>2014-12-31</endDate></column></columns></timeLine></timeLines>
+<accounts>
+<account id="2028"><cells><cell columnId="1">873614913</cell></cells></account>
+<account id="10701"><cells><cell columnId="1">78474504</cell></cells></account>
+<account id="2227"><cells><cell columnId="1">60267836</cell></cells></account>
+<account id="28"><cells><cell columnId="1">734872573</cell></cells></account>
+<account id="2958"><cells><cell columnId="1">384145005</cell></cells></account>
+<account id="3"><cells><cell columnId="1">148660907</cell></cells></account>
+<account id="10702"><cells><cell columnId="1">181532847</cell></cells></account>
+<account id="10771"><cells><cell columnId="1">53951249</cell></cells></account>
+<account id="10703"><cells><cell columnId="1">2854434</cell></cells></account>
+<account id="2058"><cells><cell columnId="1">1257759917</cell></cells></account>
+
+
+<account id="10764"><cells><cell columnId="1">154618655</cell></cells></account>
+<account id="10"><cells><cell columnId="1">61537705</cell></cells></account>
+<account id="10723"><cells><cell columnId="1">93080950</cell></cells></account>
+<account id="10704"><cells><cell columnId="1">462712025</cell></cells></account>
+<account id="1704"><cells><cell columnId="1">436900290</cell></cells></account>
+<account id="10714"><cells><cell columnId="1">25811735</cell></cells></account>
+<account id="1605"><cells><cell columnId="1">25808416</cell></cells></account>
+<account id="10705"><cells><cell columnId="1">640429238</cell></cells></account>
+<account id="43"><cells><cell columnId="1">319763369</cell></cells></account>
+<account id="4404"><cells><cell columnId="1">228990503</cell></cells></account>
+<account id="10715"><cells><cell columnId="1">91675365</cell></cells></account>
+<account id="1049"><cells><cell columnId="1">1257759917</cell></cells></account>
+
+
+<account id="10706"><cells><cell columnId="1">617330680</cell></cells></account>
+<account id="2028"><cells><cell columnId="1">873614913</cell></cells></account>
+<account id="10707"><cells><cell columnId="1">-256284233</cell></cells></account>
+<account id="10708"><cells><cell columnId="1">101203251</cell></cells></account>
+
+<account id="90"><cells><cell columnId="1">889</cell></cells></account>
+
+
+
+<account id="7074"><cells><cell columnId="1">2101942354</cell></cells></account>
+<account id="70"><cells><cell columnId="1">2064989437</cell></cells></account>
+
+
+
+<account id="9901"><cells><cell columnId="1">26422577</cell></cells></account>
+<account id="10717"><cells><cell columnId="1">-31510027</cell></cells></account>
+<account id="75"><cells><cell columnId="1">85466875</cell></cells></account>
+<account id="65"><cells><cell columnId="1">116976902</cell></cells></account>
+<account id="9902"><cells><cell columnId="1">-5087451</cell></cells></account>
+<account id="10711"><cells><cell columnId="1">23555</cell></cells></account>
+<account id="10712"><cells><cell columnId="1">-5111006</cell></cells></account>
+
+
+
+<account id="9904"><cells><cell columnId="1">-5111005</cell></cells></account>
+
+
+<account id="10709"><cells><cell columnId="1">146285773</cell></cells></account>
+<account id="6061"><cells><cell columnId="1">1955656581</cell></cells></account>
+<account id="60"><cells><cell columnId="1">1746560157</cell></cells></account>
+<account id="62"><cells><cell columnId="1">69702141</cell></cells></account>
+<account id="10772"><cells><cell columnId="1">33903985</cell></cells></account>
+<account id="10716"><cells><cell columnId="1">16257070</cell></cells></account>
+<account id="650"><cells><cell columnId="1">35269387</cell></cells></account>
+
+<account id="10710"><cells><cell columnId="1">28792980</cell></cells></account>
+<account id="10709"><cells><cell columnId="1">146285773</cell></cells></account>
+<account id="10777"><cells><cell columnId="1">26422577</cell></cells></account>
+<account id="10778"><cells><cell columnId="1">60326562</cell></cells></account>
+<account id="10779"><cells><cell columnId="1">32955945</cell></cells></account>
+<account id="10780"><cells><cell columnId="1">67915316</cell></cells></account>
+
+</accounts></finanData>

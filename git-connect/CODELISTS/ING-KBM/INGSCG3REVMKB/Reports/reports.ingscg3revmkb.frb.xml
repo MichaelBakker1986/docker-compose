@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:fbl="http://www.topicus.nl/z/fbltotaal/2015/2/" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saxon="http://icl.com/saxon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fin="http://www.finan.nl/extension/2015/01/fin" xmlns:fes="http://www.finan.nl/extension/2015/01/fes" exclude-result-prefixes="fn saxon xs xsi fin">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes" saxon:indent-spaces="2"/>
+  <xsl:preserve-space elements="*" />
+<!--   <xsl:include href="iterateModel.xslt"/> -->
+
+  <xsl:decimal-format name="euroFormat" decimal-separator="," grouping-separator="."/>
+
+<!--
+  <xsl:param name="tbSeqUrl" select="'totaalbericht.xml'" />
+  <xsl:variable name="tburl" select="$tbSeqUrl" />
+  <xsl:variable name="totaalbericht" select="document($tburl)" />
+ -->
+
+  <xsl:template match="/">
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.2.4" date="15-4-2016" author="Topicus Finan" title="ING-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportVersion>v 1.2.4</ReportVersion>
+	<ModelVersion><data src="fesModel"><columns number="1" /><variables var="ModelVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ModelVersion>
+    <ParameterVersion><data src="fesModel"><columns number="1" /><variables var="MatrixVersion" /><presentation showSingleValueVariablesOnce="false" /></data></ParameterVersion>
+
+
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_KVKnr" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<RelatieNummerTitel>KvK nummer</RelatieNummerTitel>
+	<KFRNummer><data src="fesModel"><columns number="1" /><variables var="IMPORT_kredfacnr" /><presentation showSingleValueVariablesOnce="false" /></data></KFRNummer>
+	<KFRNummerTitel>KFC nummer</KFRNummerTitel>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY" /><presentation showSingleValueVariablesOnce="false" /></data> <data src="fesModel"><columns number="1" /><variables var="Q_STATUS_STARTED_BY_NAME" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+	<CreationDateTitel>Datum</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScaleDefault>1</ReportScaleDefault>
+	<Definitief><data src="fesModel"><columns number="1" /><variables depth="1" var="Definitief"/></data></Definitief>
+
+  <visible_Q_Map01_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map01_VISIBLE"/></data></visible_Q_Map01_VISIBLE>   <!--01-->
+  <visible_Q_MapKI_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_MapKI_VISIBLE"/></data></visible_Q_MapKI_VISIBLE>   <!--KI-->
+  <visible_Q_MapEWS_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_MapEWS_VISIBLE"/></data></visible_Q_MapEWS_VISIBLE> <!--EWS-->
+  <visible_Q_Map03_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map03_VISIBLE"/></data></visible_Q_Map03_VISIBLE>   <!--03-->
+  <visible_Q_Map02_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map02_VISIBLE"/></data></visible_Q_Map02_VISIBLE>   <!--02-->
+  <visible_Q_Map04_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map04_VISIBLE"/></data></visible_Q_Map04_VISIBLE>   <!--04-->
+  <visible_Q_Map05_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map05_VISIBLE"/></data></visible_Q_Map05_VISIBLE>   <!--05-->
+  <visible_Q_Map06_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map06_VISIBLE"/></data></visible_Q_Map06_VISIBLE>   <!--06-->
+  <visible_Q_Map08_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map08_VISIBLE"/></data></visible_Q_Map08_VISIBLE>   <!--08-->
+  <visible_Q_Map09_VISIBLE><data src="fesModel"><columns number="1" /><variables depth="1" var="Q_Map09_VISIBLE"/></data></visible_Q_Map09_VISIBLE>   <!--09-->
+
+  <aantaljaren><data src="fesModel"><columns number="1" /><variables depth="1" var="aantaljaren"/></data></aantaljaren>
+
+
+</properties>
+
+
+<!-- ======================================================================== -->
+<newpage name="frontpage">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========data============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<p></p>
+<!--Samenvatting-->
+	<section class="section">Samenvatting</section>
+	<table class="datatable">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="0" var="PolicyPaperDescription"/>
+			<variables depth="0" var="FinancieringsbeleidDescription"/>
+			<variables depth="0" var="BesluitMemo"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+				<overrideStyle old="level0single">level1</overrideStyle>
+            </presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+<!--Status-->
+	<section class="section">Status</section>
+	<table class="datatable">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc"/>
+			<variables depth="0" var="Q_STATUS"/>
+			<variables depth="0" var="Q_STATUS_FINAL_ON"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY"/>
+			<variables depth="0" var="Q_STATUS_FINAL_BY_NAME"/>
+			<variables depth="0" var="Q_STATUS_STARTED_ON"/>
+			<variables depth="0" var="ModelVersion"/>
+			<variables depth="0" var="MatrixVersion"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+				<overrideStyle old="level0single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<clearpage/>
+
+<!-- =========data=============================================================  MAP 09-->
+
+	<section class="section" visible="/*/*/document/properties/visible_Q_Map09_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map09" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map09_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="2" var="Q_Map09" recursiveSkip="false"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+
+<!-- =========data============================================================= MAP 01-->
+<clearpage/>
+
+  <section class="section" visible="/*/*/document/properties/visible_Q_Map01_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map01" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map01_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+ 			<variables depth="4" var="Q_Map01" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+    <p>&#xA0;</p>
+<!-- =========data============================================================= MAP KI-->
+
+  <section class="section" visible="/*/*/document/properties/visible_Q_MapKI_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_MapKI" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_MapKI_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+
+  			<variables depth="3" var="Q_MapKI" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+
+<!-- =========data============================================================= MAP Financiele gegevens -->
+
+<!--Statement information-->
+
+
+<section class="section"><data src="fesModel"><variables var="Q_Map02" function="getTitle"/></data></section>
+
+<p>&#xA0;</p>
+
+<table class="datatable4cols" visible="/*/*/document/properties/aantaljaren/text()='4'">
+  <data src="fes">
+    <columns delta="0" number="2" order="desc"/>
+    <variables depth="1" var="Q_Map02Sub1" recursiveSkip="false" />
+    <presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="true" scale="1000" headerLabel="Balans beknopt (x € 1.000,-)">
+      <overrideStyle old="header">title4column</overrideStyle>
+	  <overrideStyle old="empty">remove</overrideStyle>
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/aantaljaren/text()='5'">
+  <data src="fes">
+    <columns delta="0" number="3" order="desc"/>
+    <variables depth="1" var="Q_Map02Sub1" recursiveSkip="false" />
+    <presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="true" scale="1000" headerLabel="Balans beknopt (x € 1.000,-)">
+      <overrideStyle old="header">title4column</overrideStyle>
+	  <overrideStyle old="empty">remove</overrideStyle>
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+
+<p>&#xA0;</p>
+
+<table class="datatable4cols" visible="/*/*/document/properties/aantaljaren/text()='4'">
+  <data src="fes">
+    <columns delta="0" number="2" order="desc"/>
+    <variables depth="1" var="Q_Map02Sub2" recursiveSkip="false" />
+    <presentation showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="false" scale="1000" >
+	    <overrideStyle old="header">title4column</overrideStyle>
+		<overrideStyle old="empty">remove</overrideStyle>
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<table class="datatable4cols" visible="/*/*/document/properties/aantaljaren/text()='5'">
+  <data src="fes">
+    <columns delta="0" number="3" order="desc"/>
+    <variables depth="1" var="Q_Map02Sub2" recursiveSkip="false" />
+    <presentation showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="false" scale="1000" >
+	    <overrideStyle old="header">title4column</overrideStyle>
+		<overrideStyle old="empty">remove</overrideStyle>
+      <overrideStyle old="level0empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<p>&#xA0;</p>
+<table class="datatable4cols">
+  <data src="fes">
+    <columns delta="0" number="4" order="desc"/>
+    <variables depth="1" var="Q_Map08_05" recursiveSkip="false" />
+    <presentation showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="true" scale="1000" headerLabel="Resultatenrekening met klantprognose (x € 1.000,-)">
+      <overrideStyle old="header">title4column</overrideStyle>
+	  <overrideStyle old="empty">remove</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<p>&#xA0;</p>
+
+<table class="datatable4cols">
+  <data src="fes">
+    <columns delta="0" number="4" order="desc"/>
+    <variables depth="1" var="Q_Map08_04" recursiveSkip="false" />
+    <presentation showSingleValueVariablesOnce="true" prefill="true" showInvisibleVariables="false" filterEmptyRows="true" showHeaderRow="true" scale="1000" headerLabel="Kasstromen (x € 1.000,-)">
+      <overrideStyle old="header">title4column</overrideStyle>
+	  <overrideStyle old="empty">remove</overrideStyle>
+      <overrideStyle old="level1single">level1</overrideStyle>
+    </presentation>
+  </data>
+</table>
+
+<p>&#xA0;</p>
+
+	<table class="datatable">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+  			<variables depth="2" var="Q_Map02" varFrom="Q_Map02_Toelichtingen" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<!-- =========data============================================================= Map 08-->
+
+<p>&#xA0;</p>
+
+<!--Statement information-->
+<section class="section" visible="/*/*/document/properties/visible_Q_Map08_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map08" function="getTitle"/></data></section>
+
+<p visible="/*/*/document/properties/visible_Q_Map08_VISIBLE/text()=1"> </p>
+
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map08_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="0" var="KlantprognoseMemo"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+				<overrideStyle old="level0single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map08_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+      <variables depth="2" var="Q_Map08_SubConclusie" recursiveSkip="false" />
+  			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+				<overrideStyle old="level1single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+
+<!-- =========data============================================================= MAP EWS-->
+
+<p>&#xA0;</p>
+
+  <section class="section" visible="/*/*/document/properties/visible_Q_MapEWS_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_MapEWS" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_MapEWS_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+  			<variables depth="3" var="Q_MapEWS" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+
+<!-- =========data=============================================================  MAP 03 -->
+    <p>&#xA0;</p>
+
+	<section class="section" visible="/*/*/document/properties/visible_Q_Map03_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map03" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map03_VISIBLE/text()=1">
+
+    <!-- Paragraaf 01 -->
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+  			<variables depth="4" var="Q_Map03" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+	<!-- =========data=============================================================  MAP 04-->
+    <p>&#xA0;</p>
+
+	<section class="section" visible="/*/*/document/properties/visible_Q_Map04_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map04" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map04_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="4" var="Q_Map04" varTo="LimietGebruikMemo" recursiveSkip="false" />
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+	<!-- =========data=============================================================  MAP 05-->
+    <p>&#xA0;</p>
+
+    <section class="section" visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map05" function="getTitle"/></data></section>
+  	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1">
+		<data src="fes">
+			<columns delta="0" number="1" order="desc">
+				<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="1" var="Q_Map05_Paragraaf01" recursiveSkip="false"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()">
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+	<p visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1"> </p>
+
+	<table class="datatable3cols" visible="/*/*/document/properties/aantaljaren/text()='4' and ./document/properties/visible_Q_Map05_VISIBLE/text()=1">
+		<data src="fes">
+			<columns delta="0" number="2" order="desc">
+				<highlight operator="Entered" textcolor="#003d7d"/>
+			</columns>
+			<variables depth="1" var="fmSolvabiliteitHist"/>
+			<variables depth="1" var="fmLeverageHist"/>
+			<variables depth="1" var="fmLeverageTLHist"/>
+			<variables depth="1" var="fmLeverageAccNotAdvHist"/>
+			<variables depth="1" var="fmLeverageinclpartnersHist"/>
+			<variables depth="1" var="fmDSCRAccNotAdvHist"/>
+			<variables depth="1" var="fmLeverageZDVHist"/>
+			<variables depth="1" var="fmEBITDAHist"/>
+			<variables depth="1" var="fmEBITDAOmzetRatioHist"/>
+			<variables depth="1" var="fmQuickRatioHist"/>
+			<variables depth="1" var="fmLoonkostenOmzetRatioHist"/>
+			<variables depth="1" var="fmDSCRHist"/>
+			<variables depth="1" var="fmICRHist"/>
+			<variables depth="1" var="fmRentabiliteitVoorBelHist"/>
+			<variables depth="1" var="fmWinstJaaromzetHist"/>
+			<variables depth="1" var="fmEBITDAvoorHuurOmzetHist"/>
+			<variables depth="1" var="fmCurrentRatioHist"/>
+			<variables depth="1" var="fmGoodwillRatioHist"/>
+			<presentation showMemoFieldsOnNewLine="true"  showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="/*/*/document/properties/ReportScaleDefault/text()" headerLabel="Kengetallen op basis van historische cijfers">
+				<overrideStyleSingleValueVariable old="level1">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level2">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level3">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyle old="header">title4column</overrideStyle>
+				<overrideStyle old="subtotal">level2</overrideStyle>
+				<overrideStyle old="level1">level2</overrideStyle>
+				<overrideStyle old="level0">total</overrideStyle>
+                <overrideStyle old="level0empty">total</overrideStyle>
+                <overrideStyle old="level0single">total</overrideStyle>
+            </presentation>
+		</data>
+	</table>
+
+	<table class="datatable3cols" visible="/*/*/document/properties/aantaljaren/text()='5' and ./document/properties/visible_Q_Map05_VISIBLE/text()=1">
+		<data src="fes">
+			<columns delta="0" number="3" order="desc">
+				<highlight operator="Entered" textcolor="#003d7d"/>
+			</columns>
+			<variables depth="1" var="fmSolvabiliteitHist"/>
+			<variables depth="1" var="fmLeverageHist"/>
+			<variables depth="1" var="fmLeverageTLHist"/>
+			<variables depth="1" var="fmLeverageAccNotAdvHist"/>
+			<variables depth="1" var="fmLeverageinclpartnersHist"/>
+			<variables depth="1" var="fmDSCRAccNotAdvHist"/>
+			<variables depth="1" var="fmLeverageZDVHist"/>
+			<variables depth="1" var="fmEBITDAHist"/>
+			<variables depth="1" var="fmEBITDAOmzetRatioHist"/>
+			<variables depth="1" var="fmQuickRatioHist"/>
+			<variables depth="1" var="fmLoonkostenOmzetRatioHist"/>
+			<variables depth="1" var="fmDSCRHist"/>
+			<variables depth="1" var="fmICRHist"/>
+			<variables depth="1" var="fmRentabiliteitVoorBelHist"/>
+			<variables depth="1" var="fmWinstJaaromzetHist"/>
+			<variables depth="1" var="fmEBITDAvoorHuurOmzetHist"/>
+			<variables depth="1" var="fmCurrentRatioHist"/>
+			<variables depth="1" var="fmGoodwillRatioHist"/>
+			<presentation showMemoFieldsOnNewLine="true"  showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" prefill="true" showHeaderRow="true" scale="/*/*/document/properties/ReportScaleDefault/text()" headerLabel="Kengetallen op basis van historische cijfers">
+				<overrideStyleSingleValueVariable old="level1">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level2">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyleSingleValueVariable old="level3">choicelevel2</overrideStyleSingleValueVariable>
+				<overrideStyle old="header">title4column</overrideStyle>
+				<overrideStyle old="subtotal">level2</overrideStyle>
+				<overrideStyle old="level1">level2</overrideStyle>
+				<overrideStyle old="level0">total</overrideStyle>
+                <overrideStyle old="level0empty">total</overrideStyle>
+                <overrideStyle old="level0single">total</overrideStyle>
+            </presentation>
+		</data>
+	</table>
+
+
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1">
+		<data src="fes">
+			<columns delta="0" number="1" order="desc">
+				<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="0" var="HistKengetallenMemo"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()">
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+            </presentation>
+		</data>
+	</table>
+
+	<p visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1"> </p>
+	<table class="datatable"  visible="/*/*/document/properties/visible_Q_Map05_VISIBLE/text()=1">
+		<data src="fes">
+			<columns delta="0" number="1" order="desc">
+				<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="3" var="Q_Map05" recursiveSkip="false" varFrom="Q_Map05_Paragraaf022"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()">
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+	<!-- =========data=============================================================  MAP 06-->
+    <p>&#xA0;</p>
+
+	<section class="section" visible="/*/*/document/properties/visible_Q_Map06_VISIBLE/text()=1"><data src="fesModel"><variables var="Q_Map06" function="getTitle"/></data></section>
+	<table class="datatable" visible="/*/*/document/properties/visible_Q_Map06_VISIBLE/text()=1">
+	 	<data src="fes">
+   		<columns delta="0" number="1" order="desc">
+			<highlight operator="Entered" textcolor="#003d7d"/>
+		</columns>
+			<variables depth="4" var="Q_Map06" recursiveSkip="false" varTo="ToelichtingKredietvorm"/>
+			<presentation showMemoFieldsOnNewLine="true" showSingleValueVariablesOnce="true" showInvisibleVariables="false" filterEmptyRows="false" showHeaderRow="false" scale="/*/*/document/properties/ReportScaleDefault/text()" >
+                <overrideStyle old="level0empty">remove</overrideStyle>
+                <overrideStyle old="level1empty">header</overrideStyle>
+				<overrideStyle old="level1single">remove</overrideStyle>
+				<overrideStyle old="level2single">level1</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+<p>&#xA0;</p>
+
+	<!-- =========Zekerheden ============================================================= -->
+	<newpage name="normal" visible="/*/*/document/properties/Relevant_Q_Map09/text()=1">
+	<p   id="watermark" visible="./document/properties/isFinalReport/text()=0"/>
+	</newpage>
+
+	<section class="section">Zekerheden</section>															<!-- Zekerheden -->
+
+	<xsl:variable name="doc" select="0" as="xs:integer"/>
+	<xsl:variable name="viewCurrency" select="fes:getViewCurrency($doc)"/>
+	<xsl:variable name="collateralVarName" select="'Zekerheid'"/>
+	<xsl:variable name="collateralRealtyVarName" select="'Zekerheid_OR'"/>
+	<xsl:variable name="collateralPartyVarName" select="'Zekerheid_Party'"/>
+
+	<xsl:for-each select="fes:getTupleInstances($doc, $collateralVarName)">
+	  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+	  <xsl:variable name="tupleIndices" as="xs:integer *">
+	      <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+	  </xsl:variable>
+
+	  <table class="headertable">
+	    <tr class="header">
+	      <td>Type</td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_tpType', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_tpDekkingswaarde', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="$viewCurrency" /><xsl:text> </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_tpDekkingswaarde', $tupleIndices)" /></td>
+	    </tr>
+	    <tr class="normal">
+	      <td>Status</td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_tpStatusPrint', $tupleIndices)"/></td>
+	      <td>Waarde</td>
+	      <td><xsl:value-of select="$viewCurrency" /><xsl:text> </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_tpWaarde', $tupleIndices)" /></td>
+	    </tr>
+	    <tr class="lefttwocols">
+	      <td>Beschrijving</td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_tpBeschrijving', $tupleIndices)"/></td>
+	    </tr>
+
+	    <xsl:variable name="collaterals" select="fes:getTupleInstances($doc, $collateralRealtyVarName, $tupleIndices)" as="xs:integer *"/>
+			<xsl:if test="count($collaterals)!=0">
+				<tr class="subtitle">
+					<td>Onroerende zaken</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</xsl:if>
+			<xsl:for-each select="$collaterals">
+
+	      <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+	      <xsl:variable name="subTupleIndices" as="xs:integer *">
+	          <xsl:for-each select="$tupleIndices">
+	            <xs:sequence><xsl:value-of select="."/></xs:sequence>
+	          </xsl:for-each>
+	          <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+	      </xsl:variable>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpSoort', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpSoort', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpVervallen', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpVervallenPrint', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="lefttwocols">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpTaxateur', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpTaxateur', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpVrijeVerkoopwaarde', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="$viewCurrency" /><xsl:text>&#xA0;</xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpVrijeVerkoopwaarde', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpTaxatiedatum', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpTaxatiedatum', $subTupleIndices)" /></td>
+	      </tr>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpBoekwaarde', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="$viewCurrency" /><xsl:text>&#xA0; </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpBoekwaarde', $subTupleIndices)" /></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpEinddatumJaarrapport', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpEinddatumJaarrapport', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpWOZwaarde', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="$viewCurrency" /><xsl:text>&#xA0; </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpWOZwaarde', $subTupleIndices)" /></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Zekerheid_OR_tpWOZwaardepeildatum', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpWOZwaardepeildatum', $subTupleIndices)"/></td>
+	      </tr>
+
+	      <tr class="lefttwocols">
+	        <td> </td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpOmschrijving', $subTupleIndices)"/></td>
+	      </tr>
+
+	      <xsl:variable name="collateralAddresses" select="fes:getTupleInstances($doc, 'Zekerheid_OR_Adres', $subTupleIndices)" as="xs:integer *"/>
+	      <xsl:for-each select="$collateralAddresses">
+	        <xsl:variable name="subSubTupleIndex" select="." as="xs:integer"/>
+	        <xsl:variable name="subSubTupleIndices" as="xs:integer *">
+	            <xsl:for-each select="$subTupleIndices">
+	              <xs:sequence><xsl:value-of select="."/></xs:sequence>
+	            </xsl:for-each>
+	            <xs:sequence><xsl:value-of select="$subSubTupleIndex"/></xs:sequence>
+	        </xsl:variable>
+	        <tr class="lefttwocols">
+	          <td> </td>
+	          <td>
+	            <xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpAdres1', $subSubTupleIndices)"/>&#xA0;<xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpAdres2', $subSubTupleIndices)"/>,&#xA0;<xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_OR_tpAdres3', $subSubTupleIndices)"/>
+	          </td>
+	        </tr>
+	      </xsl:for-each>
+	    </xsl:for-each>
+
+	    <tr class="onecolindented">
+	      <td> </td>
+	    </tr>
+
+	    <xsl:variable name="Partijen" select="fes:getTupleInstances($doc, $collateralPartyVarName, $tupleIndices)" as="xs:integer *"/>
+			<xsl:if test="count($Partijen)!=0">
+	    	<tr class="middlethreecols_subtitle">
+	    	  <td>Partijen</td>
+	    	  <td>Relatienaam</td>
+	    	  <td>Relatienummer</td>
+	    	</tr>
+			</xsl:if>
+			<xsl:for-each select="$Partijen">
+
+	      <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+	      <xsl:variable name="subTupleIndices" as="xs:integer *">
+	          <xsl:for-each select="$tupleIndices">
+	            <xs:sequence><xsl:value-of select="."/></xs:sequence>
+	          </xsl:for-each>
+	          <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+	      </xsl:variable>
+	      <tr class="middlethreecols">
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_Party_tpSoort', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_Party_tpRelatienaam', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Zekerheid_Party_tpRelatienummer', $subTupleIndices)"/></td>
+	      </tr>
+	    </xsl:for-each>
+
+	  <tr class="empty">
+	    <td>&#xA0;</td>
+	  </tr>
+
+	  </table>
+	</xsl:for-each>
+
+
+	<section class="section">Bepalingen</section>																	<!-- Bepalingen -->
+
+	<xsl:variable name="doc" select="0" as="xs:integer"/>
+	<xsl:variable name="viewCurrency" select="fes:getViewCurrency($doc)"/>
+	<xsl:variable name="ConvenantVarName" select="'Convenant'"/>
+
+	<xsl:for-each select="fes:getTupleInstances($doc, $ConvenantVarName)">
+	  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+	  <xsl:variable name="tupleIndices" as="xs:integer *">
+	      <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+	  </xsl:variable>
+
+	  <table class="headertable">
+	    <tr class="header">
+	      <td>Type</td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpType', $tupleIndices)"/></td>
+	      <td>Status</td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpStatusPrint', $tupleIndices)"/></td>
+	    </tr>
+	    <tr class="lefttwocols">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpSoort', $tupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpSoort', $tupleIndices)"/></td>
+	    </tr>
+	    <tr class="lefttwocols">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpTekst', $tupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpTekst', $tupleIndices)" /></td>
+	    </tr>
+	    <tr class="lefttwocols">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'Convenant_tpToelichting', $tupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'Convenant_tpToelichting', $tupleIndices)"/></td>
+	    </tr>
+	  <tr class="empty">
+	    <td>&#xA0;</td>
+	  </tr>
+
+	  </table>
+	</xsl:for-each>
+
+
+	<section class="section">Overeenkomsten</section>															<!-- Overeenkomsten -->
+
+	<xsl:variable name="doc" select="0" as="xs:integer"/>
+	<xsl:variable name="viewCurrency" select="fes:getViewCurrency($doc)"/>
+	<xsl:variable name="CreditProductVarName" select="'CreditProduct'"/>
+	<xsl:variable name="CreditProductAflVarName" select="'CreditProduct_Aflossing'"/>
+	<xsl:variable name="CreditProductReknrVarName" select="'CreditProduct_Rekeningnummer'"/>
+
+	<xsl:for-each select="fes:getTupleInstances($doc, $CreditProductVarName)">
+	  <xsl:variable name="tupleIndex" select="." as="xs:integer"/>
+	  <xsl:variable name="tupleIndices" as="xs:integer *">
+	      <xs:sequence><xsl:value-of select="$tupleIndex"/></xs:sequence>
+	  </xsl:variable>
+
+	  <table class="headertable">
+	    <tr class="header">
+	      <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpCode', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpCode', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpActualAmount', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="$viewCurrency" /><xsl:text> </xsl:text><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpActualAmount', $tupleIndices)" /></td>
+	    </tr>
+	    <tr class="normal">
+	      <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpCommercialName', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpCommercialName', $tupleIndices)" /></td>
+	      <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpRenteherzieningsdatum', $tupleIndices)"/></td>
+	      <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpRenteherzieningsdatum', $tupleIndices)"/></td>
+	    </tr>
+
+	    <xsl:variable name="CreditProduct_Rekeningnummer" select="fes:getTupleInstances($doc, $CreditProductReknrVarName, $tupleIndices)" as="xs:integer *"/>
+			<xsl:if test="count($CreditProduct_Rekeningnummer)!=0">
+				<tr class="subtitle">
+					<td>Rekeningnummers</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</xsl:if>
+		<xsl:for-each select="$CreditProduct_Rekeningnummer">
+
+	      <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+	      <xsl:variable name="subTupleIndices" as="xs:integer *">
+	          <xsl:for-each select="$tupleIndices">
+	            <xs:sequence><xsl:value-of select="."/></xs:sequence>
+	          </xsl:for-each>
+	          <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+	      </xsl:variable>
+	      <tr class="lefttwocols">
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpRekeningnummerAccount', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpRekeningnummerRolePrint', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="middlethreecols">
+	        <td> </td>
+	        <td> </td>
+	        <td> </td>
+	      </tr>
+	    </xsl:for-each>
+
+	    <xsl:variable name="CreditProduct_Aflossing" select="fes:getTupleInstances($doc, $CreditProductAflVarName, $tupleIndices)" as="xs:integer *"/>
+			<xsl:if test="count($CreditProduct_Aflossing)!=0">
+				<tr class="subtitle">
+					<td>Aflossingen</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</xsl:if>
+		<xsl:for-each select="$CreditProduct_Aflossing">
+
+	      <xsl:variable name="subTupleIndex" select="." as="xs:integer"/>
+	      <xsl:variable name="subTupleIndices" as="xs:integer *">
+	          <xsl:for-each select="$tupleIndices">
+	            <xs:sequence><xsl:value-of select="."/></xs:sequence>
+	          </xsl:for-each>
+	          <xs:sequence><xsl:value-of select="$subTupleIndex"/></xs:sequence>
+	      </xsl:variable>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpAflossingswijze', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpAflossingswijzeTxt', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpIngangsdatumaflossing', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpIngangsdatumaflossing', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpGrenslimiet', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpGrenslimietPrint', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpEinddatumaflossing', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpEinddatumaflossing', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="normal">
+	        <td><xsl:value-of select="fes:getVariableTitle($doc, 'CreditProduct_tpAflossingsbedrag', $subTupleIndices)"/></td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpAflossingsbedragCurrency', $subTupleIndices)"/>&#xA0;<xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpAflossingsbedrag', $subTupleIndices)"/></td>
+	        <td>Aflossingsfrequentie</td>
+	        <td><xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpAflossingsfrequentiePeriodSize', $subTupleIndices)"/>&#xA0; <xsl:value-of select="fes:getFormattedValue($doc, 'CreditProduct_tpAflossingsfrequentieTimePrint', $subTupleIndices)"/></td>
+	      </tr>
+	      <tr class="middlethreecols">
+	        <td> </td>
+	        <td> </td>
+	        <td> </td>
+	      </tr>
+	      </xsl:for-each>
+
+
+	  <tr class="empty">
+	    <td>&#xA0;</td>
+	  </tr>
+
+	  </table>
+	</xsl:for-each>
+
+
+<!-- =========End============================================================= -->
+</document>
+</xsl:template>
+
+</xsl:stylesheet>

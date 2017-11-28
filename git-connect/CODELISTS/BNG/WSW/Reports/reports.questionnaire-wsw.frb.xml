@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.0.0" date="30-03-2017" author="Topicus Finan" title="WSW" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<TimelineId>1</TimelineId>
+	<TimelineTitle>MonthTimeline</TimelineTitle>
+	<DeltaPeriods>0</DeltaPeriods>
+	<Periods><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="desc" virtualColumns="false" /><variables function="getTimebase" /></data></Periods>
+	<ReportScale>1000</ReportScale>
+	<Period><data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="./document/properties/DeltaPeriods" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getStartDate"/><presentation format="d MMMMM yyyy"/></data> <data src="chineseRoom" name="Upto">t/m</data> <data src="fesModel"><columns header="" timelineId="xpath:./document/properties/TimelineId" delta="./document/properties/DeltaPeriods" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)"/><variables function="getEndDate"/><presentation format="d MMMMM yyyy"/></data></Period>
+
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<MedewerkerVKO><data src="document" var="./document/properties/currentUser_Fullname/text()"/></MedewerkerVKO>
+	<MedewerkerVKOTitel>Medewerker</MedewerkerVKOTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<DocumentCurrency><data src="fesModel"><variables function="getBaseCurrency"/></data></DocumentCurrency>
+	<CurrencyText><data src="chineseRoom" name="ScaleLabel">alle bedragen in</data> <data src="chineseRoom" name="xpath:./document/properties/DocumentCurrency/text()" /></CurrencyText>
+
+	<CompanyNameLabel><data src="chineseRoom" name="CompanyNameLabel">Bedrijfsnaam</data></CompanyNameLabel>
+	<CreationDateLabel><data src="chineseRoom" name="CreationDateLabel">Opsteldatum</data></CreationDateLabel>
+	<PeriodLabel><data src="chineseRoom" name="PeriodLabel">Periode</data></PeriodLabel>
+	<Concept><data src="chineseRoom" name="Concept">concept</data></Concept>
+	<PageLabel><data src="chineseRoom" name="PageLabel">Pagina</data></PageLabel>
+	<Of><data src="chineseRoom" name="Of">van</data></Of>
+	<At><data src="chineseRoom" name="At">te</data></At>
+	<ModelVersionLabel><data src="fesModel"><variables var="ModelVersion" function="getTitle" /></data></ModelVersionLabel>
+	<ModelVersion><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="ModelVersion" /></data></ModelVersion>
+
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy" /></data></CreationDate>
+
+	<CustomerNumberLabel><data src="fesModel"><variables var="BBrelatienummerBank" function="getTitle" /></data></CustomerNumberLabel>
+	<CustomerNumber><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBrelatienummerBank" /></data></CustomerNumber>
+
+	<BBAanvraagOpstellerLabel><data src="fesModel"><variables var="BBAanvraagOpsteller" function="getTitle" /></data></BBAanvraagOpstellerLabel>
+	<BBAanvraagOpsteller><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAanvraagOpsteller" /></data></BBAanvraagOpsteller>
+
+	<BBAanvraagNummerLabel><data src="fesModel"><variables var="BBAanvraagNummer" function="getTitle" /></data></BBAanvraagNummerLabel>
+	<BBAanvraagNummer><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAanvraagNummer" /></data></BBAanvraagNummer>
+
+	<BBRelatieBeheerderLabel><data src="fesModel"><variables var="BBRelatieBeheerder" function="getTitle" /></data></BBRelatieBeheerderLabel>
+	<BBRelatieBeheerder><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBRelatieBeheerder" /></data></BBRelatieBeheerder>
+
+	<BBAccountGroepLabel><data src="fesModel"><variables var="BBAccountGroep" function="getTitle" /></data></BBAccountGroepLabel>
+	<BBAccountGroep><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBAccountGroep" /></data></BBAccountGroep>
+
+	<BBRisicoModelLabel><data src="fesModel"><variables var="BBRisicoModel" function="getTitle" /></data></BBRisicoModelLabel>
+	<BBRisicoModel><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="BBRisicoModel" /></data></BBRisicoModel>
+
+	<CompanyPlaceOfResidenceLabel><data src="chineseRoom" name="CompanyPlaceOfResidenceLabel">Vestigingsplaats</data></CompanyPlaceOfResidenceLabel>
+	<CompanyPlaceOfResidence><data src="fesModel"><columns timelineId="xpath:./document/properties/TimelineId" delta="0" number="1" order="asc" virtualColumns="true" withMonths="number(./document/properties/Periods)" /><variables depth="1" var="CompanyPlaceOfResidence" /></data></CompanyPlaceOfResidence>
+</properties>
+
+
+<newpage name="frontpage">
+	<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =========Klantgegevens============================================================= -->
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="Q_Map01" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level2single">choicenoborder</overrideStyle>
+			<overrideStyle old="level1single">remove</overrideStyle>
+			<overrideStyle old="empty">remove</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+<!-- =========data Invoer============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_Kasstroom" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="empty">remove</overrideStyle>
+
+	</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensT" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+  	</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensVT" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+
+<!-- =========data Ratio 1============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningICRHeader1" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningICRHeader2" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+<!-- =========data Ratio 2============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningDSCR" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningDSCRHeader1" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BepalingNettoRenteuitgavenDSCR" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BepalingTheoretischeAflossingDSCR" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensTDSCR" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensVTDSCR" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="8" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_DSCRtbvRisicoScoreHeader" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+<!-- =========data Ratio 3============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensTLTV" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_VermogensgegevensVTLTV" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="3" var="BNG_WSW_LTV" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+<!-- =========data Ratio 4============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_VermogensgegevensTSolvabiliteit" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_VermogensgegevensVTSolvabiliteit" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningSolvabiliteit" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="false" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+			<overrideStyle old="level1single">choice</overrideStyle>
+	</presentation>
+	</data>
+</table>
+
+
+<!-- =========data Ratio 5============================================================= -->
+<newpage name="landscape">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<table class="datatable12.0">
+	<data src="fes">
+		<columns header="" timelineId="xpath:./document/properties/TimelineId" number="1" order="desc" virtualColumns="true" withMonths="number(./document/properties/Periods)" />
+		<variables recursiveSkip="false" depth="2" var="BNG_WSW_BerekeningDekkingsratio" />
+		<presentation order="reverse" showBlankLines="true" filterEmptyRows="false" overwriteNAValueForCurrencyWith="0" showHeaderRow="true" showHeaderRowOnNewPage="true" scale="./document/properties/ReportScale/text()" prefill="true" prefillSingleValueVariable="false" showSingleValueVariablesOnce="true">
+				<overrideStyle old="level1single">choice</overrideStyle>
+		</presentation>
+	</data>
+</table>
+
+
+<!-- =========End============================================================= -->
+</document>

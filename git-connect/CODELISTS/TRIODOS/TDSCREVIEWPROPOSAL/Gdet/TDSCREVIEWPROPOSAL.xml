@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet href="GdetConfigToDB.xsl" type="text/xsl"?>
+<!-- Modelversion : Model TDSCREVIEWPROPOSAL v1.0
+Gegenereerd op  : 01-12-jjjj uu:12-->
+<configuration xsi:noNamespaceSchemaLocation="GdetConfiguration.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <description>GDET Configuratie Model TDSCREVIEWPROPOSAL v1.0</description>
+  <constraint><![CDATA[  Q_ModelType ='TDSCREVIEWPROPOSAL' ]]></constraint>
+  <filter>
+    <absoluteyears>
+      <year>1</year>
+    </absoluteyears>
+    <period>MainPeriod</period>
+  </filter>
+
+<externalDataSource>                                                        
+<dataSourceJNDI>jdbc/FinanDS</dataSourceJNDI>                             
+  <maximumStringLength>256</maximumStringLength>                             
+  <externalTables>                                                          
+  <externalTable default="true">                                          
+  <updateMode>UPDATE</updateMode>                                       
+<uniqueIdColumn>UNIQUEID</uniqueIdColumn>
+  <documentIdColumn>DOCUMENTID</documentIdColumn>
+  <name>EXPORT_TDSCREVIEWPROPOSAL</name>                                              
+</externalTable>                                                        
+</externalTables>                                                         
+</externalDataSource>                                                       
+  <variables>
+<variable columnName="FES_EXCHANGE_RATES" orientation="document" columnTypee="STRING">FES_EXCHANGE_RATES</variable>
+<variable columnName="FES_LAYOUT" orientation="document" columnTypee="STRING">FES_LAYOUT</variable>
+<variable columnName="FES_FLATINPUT" orientation="document" columnTypee="DECIMAL">FES_FLATINPUT</variable>
+<variable columnName="FES_PROJECTION_PROFILE" orientation="document" columnTypee="DECIMAL">FES_PROJECTION_PROFILE</variable>
+<variable columnName="FES_COLUMN_ORDER" orientation="document" columnTypee="DECIMAL">FES_COLUMN_ORDER</variable>
+<variable columnName="FES_COLUMN_VISIBLE" orientation="document" columnTypee="DECIMAL">FES_COLUMN_VISIBLE</variable>
+<variable columnName="FES_STARTDATEPERIOD" orientation="document" columnTypee="DECIMAL">FES_STARTDATEPERIOD</variable>
+<variable columnName="FES_ENDDATEPERIOD" orientation="document" columnTypee="DECIMAL">FES_ENDDATEPERIOD</variable>
+<variable columnName="FES_BASECURRENCYPERIOD" orientation="document" columnTypee="DECIMAL">FES_BASECURRENCYPERIOD</variable>
+<variable columnName="FES_VIEWCURRENCYPERIOD" orientation="document" columnTypee="DECIMAL">FES_VIEWCURRENCYPERIOD</variable>
+<variable columnName="FPS_VAR_Naam" orientation="document" columnTypee="STRING">FPS_VAR_Naam</variable>
+<variable columnName="FPS_VAR_Relatienummer" orientation="document" columnTypee="STRING">FPS_VAR_Relatienummer</variable>
+<variable columnName="FPS_VAR_KVKnr" orientation="document" columnTypee="STRING">FPS_VAR_KVKnr</variable>
+<variable columnName="FPS_VAR_Rechtsvorm_nr" orientation="document" columnTypee="STRING">FPS_VAR_Rechtsvorm_nr</variable>
+<variable columnName="FPS_VAR_Rechtsvorm_omschr" orientation="document" columnTypee="STRING">FPS_VAR_Rechtsvorm_omschr</variable>
+<variable columnName="FPS_VAR_BIK_CODE" orientation="document" columnTypee="STRING">FPS_VAR_BIK_CODE</variable>
+<variable columnName="FPS_VAR_BIK_Omschr" orientation="document" columnTypee="STRING">FPS_VAR_BIK_Omschr</variable>
+<variable columnName="FPS_VAR_GridId" orientation="document" columnTypee="STRING">FPS_VAR_GridId</variable>
+<variable columnName="FPS_VAR_Accountmanager" orientation="document" columnTypee="STRING">FPS_VAR_Accountmanager</variable>
+<variable columnName="FPS_VAR_Kantoor" orientation="document" columnTypee="STRING">FPS_VAR_Kantoor</variable>
+<variable columnName="FPS_VAR_Straat" orientation="document" columnTypee="STRING">FPS_VAR_Straat</variable>
+<variable columnName="FPS_VAR_Housenumber" orientation="document" columnTypee="STRING">FPS_VAR_Housenumber</variable>
+<variable columnName="FPS_VAR_Postcode" orientation="document" columnTypee="STRING">FPS_VAR_Postcode</variable>
+<variable columnName="FPS_VAR_Woonplaats" orientation="document" columnTypee="STRING">FPS_VAR_Woonplaats</variable>
+<variable columnName="FPS_VAR_Provincie" orientation="document" columnTypee="STRING">FPS_VAR_Provincie</variable>
+<variable columnName="FPS_VAR_Land" orientation="document" columnTypee="STRING">FPS_VAR_Land</variable>
+<variable columnName="FPS_VAR_BvDID" orientation="document" columnTypee="STRING">FPS_VAR_BvDID</variable>
+<variable columnName="FPS_VAR_Telefoon" orientation="document" columnTypee="STRING">FPS_VAR_Telefoon</variable>
+<variable columnName="FPS_VAR_Emailadres" orientation="document" columnTypee="STRING">FPS_VAR_Emailadres</variable>
+<variable columnName="FPS_FINAN_USER_ROLES" orientation="document" columnTypee="STRING">FPS_FINAN_USER_ROLES</variable>
+<variable columnName="FPS_FINAN_USER" orientation="document" columnTypee="STRING">FPS_FINAN_USER</variable>
+<variable columnName="Q_Map01_WARNING" orientation="document" columnTypee="STRING">Q_Map01_WARNING</variable>
+<variable columnName="Q_Map01_INFO" orientation="document" columnTypee="STRING">Q_Map01_INFO</variable>
+<variable columnName="Q_Map01_VALIDATION" orientation="document" columnTypee="STRING">Q_Map01_VALIDATION</variable>
+<variable columnName="Q_Map01Sub4" orientation="document" columnTypee="STRING">Q_Map01Sub4</variable>
+<variable columnName="BusinessDescription" orientation="document" columnTypee="STRING">BusinessDescription</variable>
+<variable columnName="BusinessDescriptionApproved" orientation="document" columnTypee="STRING">BusinessDescriptionApproved</variable>
+<variable columnName="Q_Map01Sub5" orientation="document" columnTypee="STRING">Q_Map01Sub5</variable>
+<variable columnName="ConclusionFacility" orientation="document" columnTypee="STRING">ConclusionFacility</variable>
+<variable columnName="FacilityApproved" orientation="document" columnTypee="STRING">FacilityApproved</variable>
+<variable columnName="Q_Map01Sub6" orientation="document" columnTypee="STRING">Q_Map01Sub6</variable>
+<variable columnName="ConclusionFinancial" orientation="document" columnTypee="STRING">ConclusionFinancial</variable>
+<variable columnName="FinancialFactsApproved" orientation="document" columnTypee="STRING">FinancialFactsApproved</variable>
+<variable columnName="Q_Map01Sub7" orientation="document" columnTypee="STRING">Q_Map01Sub7</variable>
+<variable columnName="ConclusionRisk" orientation="document" columnTypee="STRING">ConclusionRisk</variable>
+<variable columnName="RiskAnalysisApproved" orientation="document" columnTypee="STRING">RiskAnalysisApproved</variable>
+<variable columnName="Q_Map01Sub8" orientation="document" columnTypee="STRING">Q_Map01Sub8</variable>
+<variable columnName="ConclusionCollaterals" orientation="document" columnTypee="STRING">ConclusionCollaterals</variable>
+<variable columnName="CollateralsApproved" orientation="document" columnTypee="STRING">CollateralsApproved</variable>
+<variable columnName="Q_Map01Sub9" orientation="document" columnTypee="STRING">Q_Map01Sub9</variable>
+<variable columnName="Attendees" orientation="document" columnTypee="STRING">Attendees</variable>
+<variable columnName="Conclusion" orientation="document" columnTypee="STRING">Conclusion</variable>
+<variable columnName="ProposalApproved" orientation="document" columnTypee="DECIMAL">ProposalApproved</variable>
+<variable columnName="Q_Map01_Hulpvariabelen" orientation="document" columnTypee="STRING">Q_Map01_Hulpvariabelen</variable>
+<variable columnName="Q_Map01_REQUIREDVARS" orientation="document" columnTypee="DECIMAL">Q_Map01_REQUIREDVARS</variable>
+<variable columnName="Q_Map01_ENTEREDREQUIREDVARS" orientation="document" columnTypee="DECIMAL">Q_Map01_ENTEREDREQUIREDVARS</variable>
+<variable columnName="Q_RESULT" orientation="document" columnTypee="STRING">Q_RESULT</variable>
+<variable columnName="Q_STATUS" orientation="document" columnTypee="STRING">Q_STATUS</variable>
+<variable columnName="Q_STATUS_FINAL_ON" orientation="document" columnTypee="DATE">Q_STATUS_FINAL_ON</variable>
+<variable columnName="Q_STATUS_FINAL_BY" orientation="document" columnTypee="STRING">Q_STATUS_FINAL_BY</variable>
+<variable columnName="Q_STATUS_FINAL_BY_NAME" orientation="document" columnTypee="STRING">Q_STATUS_FINAL_BY_NAME</variable>
+<variable columnName="Q_STATUS_STARTED_ON" orientation="document" columnTypee="DATE">Q_STATUS_STARTED_ON</variable>
+<variable columnName="Q_STATUS_STARTED_BY" orientation="document" columnTypee="STRING">Q_STATUS_STARTED_BY</variable>
+<variable columnName="Q_STATUS_STARTED_BY_NAME" orientation="document" columnTypee="STRING">Q_STATUS_STARTED_BY_NAME</variable>
+<variable columnName="Q_STATUS_MODIFIED_ON" orientation="document" columnTypee="DATE">Q_STATUS_MODIFIED_ON</variable>
+<variable columnName="Q_ModelVersion" orientation="document" columnTypee="STRING">Q_ModelVersion</variable>
+<variable columnName="Q_ModelType" orientation="document" columnTypee="STRING">Q_ModelType</variable>
+<variable columnName="Q_MatrixVersion" orientation="document" columnTypee="STRING">Q_MatrixVersion</variable>
+<variable columnName="Q_WARNING_GLOBAL" orientation="document" columnTypee="STRING">Q_WARNING_GLOBAL</variable>
+<variable columnName="scKnockoutsCombi" orientation="document" columnTypee="STRING">scKnockoutsCombi</variable>
+<variable columnName="Q_RESTRICTIES" orientation="document" columnTypee="STRING">Q_RESTRICTIES</variable>
+<variable columnName="scRestrictiesCombi" orientation="document" columnTypee="STRING">scRestrictiesCombi</variable>
+  </variables>
+</configuration>

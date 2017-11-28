@@ -1,0 +1,818 @@
+{&&Language=English}
+;==========================================================================================================================================
+WSW Ratio's
+
+.ModelVersion          0.0.1
+.FINANversion          3.2
+
+.Period  MainPeriod,Title="main period",FormulaSet=NoTrend,FormulaSetTitle="hist",FormulaSet2=Trend,FormulaSet2Title="progn",FirstYear=ThisYear-3,Years=8,MaxTsY=1,TsY=1,TsY2=1,DateAtFormulaSet2=DMYtoDate(1,1,ThisYear)
+
+.Sheet   1,Title="WSW ratios",Range=[FirstTinPeriod(MainPeriod)..LastTinPeriod(MainPeriod)],Period=MainPeriod
+
+;-------------------------------------------------------------------------------------------------- Scorecard
+.Variables
+PP      1N     0               $>WSW Ratio's<$                                                                         \ROOT
+
+
+.Variables
+{&&TryInclude IncFesVars.fin}
+{&&TryInclude IncFpsVars.fin}
+
+;================================================================================================================================
+XXXX     X     1               $>Import data uit jaarrekening<$                                                        \BNG_Import
+PII     FN     2               "Operationele kasstroom"                                                                \BNG_JCFOpCF
+PII     FN     2               "Andere rentebaten en soortgelijke opbrengsten"                                         \BNG_FinBaten1
+PII     FN     2               "Rentelasten en soortgelijke kosten"                                                    \BNG_FinLasten1
+PII     FN     2               "Onderhoudskosten"                                                                      \BNG_OperKosten6
+PII     FN     2               "Geactiveerde productie eigen bedrijf"                                                  \BNG_NettoOmzet4
+
+PII     BN     2               $>- Schulden/leningen overheid<$                                                        \BNG_WSW_LanglopendeSchuldenOverheid
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.1<$
+PII     BN     2               $>- Schulden/leningen kredietinstellingen<$                                             \BNG_WSW_LanglopendeSchuldenKredietinstellingen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.2<$
+PII     BN     2               $>- Schulden aan groepsmaatschappijen<$                                                 \BNG_WSW_LanglopendeSchuldenGroepsmaatschappijen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.3<$
+PII     BN     2               $>- Schulden aan maatschappijen waarin wordt deelgenomen<$                              \BNG_WSW_LanglopendeSchuldenDeelnemingen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.4<$
+P       BN     2               $>Kortlopende schulden<$                                                                \BNG_WSW_KortlopendeSchulden
+PII     BN     2               $>- Schulden/leningen kredietinstellingen<$                                             \BNG_WSW_KortlopendeSchuldenKredietinstellingenKort
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.1<$
+PII     BN     2               $>- Schulden aan groepsmaatschappijen<$                                                 \BNG_WSW_KortlopendeSchuldenGroepsmaatschappijen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.3<$
+PII     BN     2               $>- Schulden aan maatschappijen waarin wordt deelgenomen<$                              \BNG_WSW_KortlopendeSchuldenDeelnemingen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.4<$
+PII     BN     2               $>Eigen vermogen / Groepsvermogen<$                                                     \BNG_WSW_SolvabiliteitGroepsvermogen
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1| Totaal Eigen Vermogen<$
+PII     BN     2               $>Totaal activa<$                                                                       \BNG_WSW_TotaalActiva
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: Totaal Activa<$
+PII     BN     2               $>Sociaal vastgoed in exploitatie<$                                                     \BNG_WSW_SociaalVastgoedInExploitatie
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: II.1<$
+PII     BN     2               $>Commercieel vastgoed in exploitatie<$                                                 \BNG_WSW_CommercieelVastgoedInExploitatie
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.1<$
+PII     BN     2               $>Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$                \BNG_WSW_SociaalVastgoedVastgoedbelegging
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.2<$
+PII     BN     2               $>Bedrijfswaarde vastgoed in exploitatie<$                                              \BNG_WSW_BedrijfswaardeVastgoedInExploitatie
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5<$
+;Voor berekeningen
+PPP   0 BN     2               $>Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode<$                  \BNG_WSW_AantalVHEBeginPrognoseperiode
+C $>Hoofdstuk: dVi 4.1.5 - dPi 2.3| Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)<$
+PII   0 BN     2               $>Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode<$\BNG_WSW_GemLevensduurBeginPrognoseperiode
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5, betreft jaren<$
+;================================================================================================================================
+.Variables
+PPP     1N C   1               $>WSW Ratio's<$                                                                         \Q_ROOT
+
+.Choices
+Q_ROOT                         = "0:Onvolledig ingevuld.|1:Volledig ingevuld."
+.Formulas Notrend
+Q_ROOT                         = If( (Q_Map01[1]=1) Or (Q_Map02[1]=1) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0)
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Cliëntgegevens<$                                                                      \Q_Map01
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 1<$                                                                  \Q_Map01_WARNING
+PPP     1A     3               $>Info bij stap 1<$                                                                     \Q_Map01_INFO
+PPP     1A     3               $>Validatie stap 1<$                                                                    \Q_Map01_VALIDATION
+
+.Variables
+PP      1A     3               $>Company<$                                                                             \BNGMAP1A
+PP      1A     4               $>Name of company<$                                                                     \CompanyName
+PP      1A     4               $>City/town<$                                                                           \CompanyPlaceOfResidence
+PP      1A     4               $>Sector of industry<$                                                                  \SectorTitle
+
+PP      1A     3               $>Bancaire gegevens<$                                                                   \BNGMAP1C
+PP      1A     4               $>Relatienummer<$                		      	                                           \BBrelatienummerBank=FPS_VAR_GridId
+PI      1A     4               $>Accountmanager<$                                                                      \BBRelatieBeheerder
+PI      1N C   4  +            $>Accountgroep<$                                                                        \BBAccountGroep
+PI      1N C   4  +            $>Sector<$                                                                              \BBRisicoModel
+
+
+PP      1A     3               $>Aanvraag gegevens<$                                                                   \BNGMAP2A
+PP      1A     4               $>Modelversie<$                                                                         \ModelVersie
+PI      1A     4      <        $>Docsnr KV/RV<$                                                                        \BBAanvraagNummer
+PI      1A     4               $>Opgesteld door<$                                                                      \BBAanvraagOpsteller
+PI      1M     4               $>Toelichting<$                                                                         \BBAanvraagMemo
+
+.Choices
+BBAccountGroep                = &TableAsChoices("bng_AccountGroep.FIB")
+BBRisicoModel                 = &TableAsChoices("bng_RisicoModel.FIB")
+
+.Formulas NoTrend
+ModelVersie                   = #ModelVersion#
+CompanyName                   = &FPS_VAR_Naam[1]
+CompanyPlaceOfResidence       = &FPS_VAR_Woonplaats[1]
+SectorTitle                   = &FPS_VAR_BIK_Omschr
+BBRisicoModel                 = 20
+BBAccountGroep                = 102
+;==============================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map01_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (1)<$                                                        \Q_Map01_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (1)<$                                              \Q_Map01_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map01_STATUS
+
+.Formulas Notrend
+Q_Map01_REQUIREDVARS            = Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X))
+Q_Map01_ENTEREDREQUIREDVARS     = Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map01                         = (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS)
+Q_Map01_WARNING                = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map01_INFO                   = &If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map01_VALIDATION             =
+Q_Map01_STATUS			    	= Q_Map01
+
+.Choices
+Q_Map01                        = Q_ROOT
+Q_Map01_STATUS		    	= "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+
+
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Invoerbladen<$                                                                        \Q_Map02
+
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 2<$                                                                  \Q_Map02_WARNING
+PPP     1A     3               $>Info bij stap 2<$                                                                     \Q_Map02_INFO
+PPP     1A     3               $>Validatie stap 2<$                                                                    \Q_Map02_VALIDATION
+
+PPP     1N     3               $>Kasstroomgegevens (o.b.v. Kasstroommodel dPi / dVi)<$                                 \BNG_WSW_Kasstroom
+PII     FN     4               $>Kasstroom uit operationele activiteiten<$                                             \BNG_WSW_CFOperationeel
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.1|Regel: Saldo<$
+PII     FN     4               $>Renteontvangsten<$                                                                    \BNG_WSW_Renteontvangsten
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.1|Regel: 1.5<$
+PII     FN     4               $>Renteuitgaven<$                                                                       \BNG_WSW_Renteuitgaven
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.1|Regel: 1.10<$
+PII     FN     4               $>Onderhoudsuitgaven<$                                                                  \BNG_WSW_Onderhoudsuitgaven
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.1|Regel: 1.8<$
+PII     FN     4               $>Toegerekende renteuitgaven aan investeringen<$                                        \BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen
+C $>Hoofdstuk: dPi 3.2.1|Regel: a<$
+PII     FN     4               $>Geactiveerde productie t.b.v. het eigen bedrijf<$                                     \BNG_WSW_GeactiveerdeProductie
+C $>Hoofdstuk: dPi 3.2.1|Regel: b<$
+P       FN     4               $>Verkoopopbrengsten bestaand bezit - MVA ingaande kasstroom<$                          \BNG_WSW_Verkoopopbrengsten
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2<$
+PII     FN     4               $>Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden<$                   \BNG_WSW_VerkoopontvangstenHuurA
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.1.A<$
+PII     FN     4               $>Verkoopontvangsten bestaande huur, woon- en niet-woongelegenheden<$                   \BNG_WSW_VerkoopontvangstenHuurB
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.1.B<$
+PII     FN     4               $>Verkoopontvangsten grond<$                                                            \BNG_WSW_VerkoopontvangstenGrondA
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.4.A<$
+PII     FN     4               $>Verkoopontvangsten grond<$                                                            \BNG_WSW_VerkoopontvangstenGrondB
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.4.B<$
+PII     FN     4               $>(Des)investeringsontvangsten Overig<$                                                 \BNG_WSW_InvesteringsontvangstenOverigA
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.5.A<$
+PII     FN     4               $>(Des)investeringsontvangsten Overig<$                                                 \BNG_WSW_InvesteringsontvangstenOverigB
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.5.B<$
+PII     FN     4               $>Externe kosten bij verkoop<$                                                          \BNG_WSW_ExterneKostenVerkoopA
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.15.A<$
+PII     FN     4               $>Externe kosten bij verkoop<$                                                          \BNG_WSW_ExterneKostenVerkoopB
+C $>Hoofdstuk: dVi 3.1.3 - dPi 3.1.2|Regel: 2.15.B<$
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T<$ \BNG_WSW_VermogensgegevensT
+PPP     1A     4      >                                                                                                \BNG_WSW_VerslagJaarT
+P       1N     4               $>Langlopende schulden<$                                                                \BNG_WSW_LanglopendeSchuldenT
+PII     1N     4               $>- Schulden/leningen overheid<$                                                        \BNG_WSW_LanglopendeSchuldenOverheidT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.1<$
+PII     1N     4               $>- Schulden/leningen kredietinstellingen<$                                             \BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.2<$
+PII     1N     4               $>- Schulden aan groepsmaatschappijen<$                                                 \BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.3<$
+PII     1N     4               $>- Schulden aan maatschappijen waarin wordt deelgenomen<$                              \BNG_WSW_LanglopendeSchuldenDeelnemingenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.4<$
+P       1N     4               $>Kortlopende schulden<$                                                                \BNG_WSW_KortlopendeSchuldenT
+PII     1N     4               $>- Kort deel schulden/leningen kredietinstellingen<$                                   \BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.1<$
+PII     1N     4               $>- Kort deel schulden aan groepsmaatschappijen<$                                       \BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.3<$
+PII     1N     4               $>- Kort deel schulden aan maatschappijen waarin wordt deelgenomen<$                    \BNG_WSW_KortlopendeSchuldenDeelnemingenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.4<$
+PII     1N     4               $>Eigen vermogen / Groepsvermogen<$                                                     \BNG_WSW_SolvabiliteitGroepsvermogenT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1| Totaal Eigen Vermogen<$
+PII     1N     4               $>Totaal activa<$                                                                       \BNG_WSW_TotaalActivaT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: Totaal Activa<$
+PII     1N     4               $>Sociaal vastgoed in exploitatie<$                                                     \BNG_WSW_SociaalVastgoedInExploitatieT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: II.1<$
+PII     1N     4               $>Commercieel vastgoed in exploitatie<$                                                 \BNG_WSW_CommercieelVastgoedInExploitatieT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.1<$
+PII     1N     4               $>Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$                \BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.2<$
+PII     1N     4               $>Bedrijfswaarde vastgoed in exploitatie<$                                              \BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5<$
+PII   0 1N     4               $>Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode<$                  \BNG_WSW_AantalVHEBeginPrognoseperiodeT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 2.3| Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)<$
+PII   0 1N     4               $>Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode<$\BNG_WSW_GemLevensduurBeginPrognoseperiodeT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5, betreft jaren<$
+
+PII     1N     4               $>Schuldrestant WSW geborgde leningen<$                                                 \BNG_WSW_SchuldrestantWSWGeborgdeLeningen
+C $>Het “Schuldrestant WSW geborgde leningen” kan niet afgeleid worden uit de dPi en dVi, dit bedrag wordt jaarlijks met belangenhouders (corporaties en gemeenten) gedeeld in het Schuld-/WOZ-overzicht dat WSW toestuurt.<$
+PII     1N     4               $>WOZ waarde van bij WSW ingezet onderpand (DAEB + Niet-DAEB)<$                         \BNG_WSW_WOZwaardeWSWIngezetOnderpand
+C $>Hoofdstuk: dVi 4.3 | Ingezet corporatie<$
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopig lopend boekjaar<$\BNG_WSW_VermogensgegevensVT
+PPP     1A     4      >                                                                                                \BNG_WSW_VerslagJaarVT
+P       1N     4               $>Langlopende schulden<$                                                                \BNG_WSW_LanglopendeSchuldenVT
+PII     1N     4               $>- Schulden/leningen overheid<$                                                        \BNG_WSW_LanglopendeSchuldenOverheidVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.1<$
+PII     1N     4               $>- Schulden/leningen kredietinstellingen<$                                             \BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.2<$
+PII     1N     4               $>- Schulden aan groepsmaatschappijen<$                                                 \BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.3<$
+PII     1N     4               $>- Schulden aan maatschappijen waarin wordt deelgenomen<$                              \BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: F.4<$
+P       1N     4               $>Kortlopende schulden<$                                                                \BNG_WSW_KortlopendeSchuldenVT
+PII     1N     4               $>- Kort deel schulden/leningen kredietinstellingen<$                                   \BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.1<$
+PII     1N     4               $>- Kort deel schulden aan groepsmaatschappijen<$                                       \BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.3<$
+PII     1N     4               $>- Kort deel schulden aan maatschappijen waarin wordt deelgenomen<$                    \BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: G.4<$
+PII     1N     4               $>Eigen vermogen / Groepsvermogen<$                                                     \BNG_WSW_SolvabiliteitGroepsvermogenVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1| Totaal Eigen Vermogen<$
+PII     1N     4               $>Totaal activa<$                                                                       \BNG_WSW_TotaalActivaVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: Totaal Activa<$
+PII     1N     4               $>Sociaal vastgoed in exploitatie<$                                                     \BNG_WSW_SociaalVastgoedInExploitatieVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: II.1<$
+PII     1N     4               $>Commercieel vastgoed in exploitatie<$                                                 \BNG_WSW_CommercieelVastgoedInExploitatieVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.1<$
+PII     1N     4               $>Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$                \BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+C $>Hoofdstuk: dVi 3.1.2 - dPi 3.3.1|Regel: III.2<$
+PII     1N     4               $>Bedrijfswaarde vastgoed in exploitatie<$                                              \BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5<$
+PII   0 1N     4               $>Aantal VHE (Woonequivalenten) aan het begin van de prognoseperiode<$                  \BNG_WSW_AantalVHEBeginPrognoseperiodeVT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 2.3| Het aantal woonequivalenten is een gewogen som van de verhuureenheden in de opgave dVi en dPi, volgens de weging: woningen (1), bedrijfsruimten en winkels (1), maatschappelijk vastgoed (2), garages (0,2) en overig bezit (0,2)<$
+PII   0 1N     4               $>Gemiddelde restant levensduur van de portefeuille aan het begin van de prognoseperiode<$\BNG_WSW_GemLevensduurBeginPrognoseperiodeVT
+C $>Hoofdstuk: dVi 4.1.5 - dPi 3.4.4|Regel: 4.1.5, betreft jaren<$
+
+.Formulas NoTrend,Trend
+BNG_WSW_CFOperationeel                              = BNG_JCFOpCF
+BNG_WSW_Renteontvangsten                            = BNG_FinBaten1
+BNG_WSW_Renteuitgaven                               = BNG_FinLasten1
+BNG_WSW_Onderhoudsuitgaven                          = BNG_OperKosten6
+BNG_WSW_GeactiveerdeProductie                       = BNG_NettoOmzet4
+BNG_WSW_VerslagJaarT                                = Balans ultimo Verslagjaar T
+BNG_WSW_VerslagJaarVT                               = Voorlopige balans ultimo lopend boekjaar (dPi)
+BNG_WSW_LanglopendeSchuldenOverheidT                = BNG_WSW_LanglopendeSchuldenOverheid[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_LanglopendeSchuldenKredietinstellingenT     = BNG_WSW_LanglopendeSchuldenKredietinstellingen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT    = BNG_WSW_LanglopendeSchuldenGroepsmaatschappijen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_LanglopendeSchuldenDeelnemingenT            = BNG_WSW_LanglopendeSchuldenDeelnemingen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT = BNG_WSW_KortlopendeSchuldenKredietinstellingenKort[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT    = BNG_WSW_KortlopendeSchuldenGroepsmaatschappijen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_KortlopendeSchuldenDeelnemingenT            = BNG_WSW_KortlopendeSchuldenDeelnemingen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_SolvabiliteitGroepsvermogenT                = BNG_WSW_SolvabiliteitGroepsvermogen[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_TotaalActivaT                               = BNG_WSW_TotaalActiva[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_SociaalVastgoedInExploitatieT               = BNG_WSW_SociaalVastgoedInExploitatie[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_CommercieelVastgoedInExploitatieT           = BNG_WSW_CommercieelVastgoedInExploitatie[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_SociaalVastgoedVastgoedbeleggingT           = BNG_WSW_SociaalVastgoedVastgoedbelegging[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_BedrijfswaardeVastgoedInExploitatieT        = BNG_WSW_BedrijfswaardeVastgoedInExploitatie[LastTinFormulaSet(NoTrend),1]
+BNG_WSW_GemLevensduurBeginPrognoseperiodeT          = BNG_WSW_GemLevensduurBeginPrognoseperiode[LastTinFormulaSet(NoTrend),1]
+
+.Formulas NoTrend
+BNG_WSW_AantalVHEBeginPrognoseperiode               = BNG_WSW_AantalVHEBeginPrognoseperiodeT
+
+.Formulas Trend
+BNG_WSW_AantalVHEBeginPrognoseperiode               = BNG_WSW_AantalVHEBeginPrognoseperiodeVT
+;================================================================================================================================
+
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map02_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (2)<$                                                        \Q_Map02_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (2)<$                                              \Q_Map02_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map02_STATUS
+
+.Formulas Notrend
+Q_Map02_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X))
+Q_Map02_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map02                                     = (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS)
+Q_Map02_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map02_INFO                                = &If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map02_VALIDATION                          =
+Q_Map02_STATUS			    	                  = Q_Map02
+
+.Choices
+Q_Map02                                     = Q_ROOT
+Q_Map02_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Berekening ICR<$                                                                      \Q_Map03
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 3<$                                                                  \Q_Map03_WARNING
+PPP     1A     3               $>Info bij stap 3<$                                                                     \Q_Map03_INFO
+PPP     1A     3               $>Validatie stap 3<$                                                                    \Q_Map03_VALIDATION
+;================================================================================================================================
+PPP     1N     3               $>Kasstroom ICR <$                                                                      \BNG_WSW_BerekeningICRHeader1
+C $>WSW gaat voor de bepaling van de ICR uit van de geconsolideerde kasstromen en balans . Indien geen geconsolideerde geconsolideerde kasstromen en balans wordt gepubliceerd, dan wordt de enkelvoudige informatie gehanteerd.<$
+PPP     FN     4               =BNG_WSW_CFOperationeel                                                                 \=BNG_WSW_CFOperationeel   -> BNG_WSW_CFOperationeel
+PPP    -FN     4               &"$>Af<$: "&BNG_WSW_Renteontvangsten[0]                                                 \=BNG_WSW_Renteontvangsten -> BNG_WSW_Renteontvangsten
+PPP     FN     4               &"$>Bij<$: "&BNG_WSW_Renteuitgaven[0]                                                   \=BNG_WSW_Renteuitgaven    -> BNG_WSW_Renteuitgaven
+PPP    =FN    -4               $>Kasstroom vóór renteontvangsten en -uitgaven<$                                        \BNG_WSW_KasstroomVoorRente
+PPP   0 CN     4               $>Wegingsfactor<$                                                                       \BNG_WSW_ICRWegingsfactor
+PPP     1N     3               $>Berekening ICR<$                                                                      \BNG_WSW_BerekeningICRHeader2
+PPP     BN     4               $>Gewogen kasstroom vóór renteontvangsten en -uitgaven<$ ($>cumulatief<$)               \BNG_WSW_KasstroomVoorRenteGewogenCumulatief
+PPP     1N     4               $>Gewogen kasstroom vóór renteontvangsten en -uitgaven<$ ($>historisch<$)               \BNG_WSW_KasstroomVoorRenteHistorieGewogen
+PPP     1N     4               $>Gewogen kasstroom vóór renteontvangsten en -uitgaven<$ ($>prognose<$)                 \BNG_WSW_KasstroomVoorRentePrognoseGewogen
+PPP     BN     4               $>Gewogen renteuitgaven<$ ($>cumulatief<$)                                              \BNG_WSW_RenteuitgavenGewogenCumulatief
+PPP     1N     4               $>Gewogen renteuitgaven<$ ($>historisch<$)                                              \BNG_WSW_RenteuitgavenHistorieGewogen
+PPP     1N     4               $>Gewogen renteuitgaven<$ ($>prognose<$)                                                \BNG_WSW_RenteuitgavenPrognoseGewogen
+PPP   2 1N     4               $>Gemiddeld gerealiseerde ICR<$                                                         \BNG_WSW_GemiddeldeICRRealisatie
+C $>(Gewogen kasstroom vóór renteontvangsten en -uitgaven in historie) / (Gewogen renteuitgaven in historie)<$
+PPP   2 1N     4               $>Gewogen gemiddeld geprognosticeerde ICR<$                                             \BNG_WSW_GemiddeldeICRPrognose
+C $>(Gewogen kasstroom vóór renteontvangsten en -uitgaven in prognose) / (Gewogen renteuitgaven in prognose)<$
+PPP   2 1N     4               $>ICR t.b.v. WSW Risico Score Model<$                                                   \BNG_WSW_ICRtbvRisicoScore
+PPP   2 1N     4               $>WSW norm<$                                                                            \BNG_WSW_ICRtbvRisicoScoreNorm
+PPP     1N C   4                                                                                                       \BNG_WSW_ICRtbvRisicoScoreNormGehaald
+
+.Hints
+BNG_WSW_ICRWegingsfactor                    = "$$CalcYearAs=MeanCalc"
+
+.Choices
+BNG_WSW_ICRtbvRisicoScoreNormGehaald        = "1:$>Voldoet aan WSW norm<$|0:$>Voldoet niet aan WSW norm<$"
+
+.Formulas Visible
+BNG_WSW_KasstroomVoorRenteGewogenCumulatief = 0
+BNG_WSW_RenteuitgavenGewogenCumulatief      = 0
+
+.Formulas NoTrend, Trend
+BNG_WSW_KasstroomVoorRenteHistorieGewogen   = OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[LastTinFormulaSet(NoTrend),1]/3,NA)
+BNG_WSW_KasstroomVoorRentePrognoseGewogen   = OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[LastTinFormulaSet(Trend),1]/15,NA)
+BNG_WSW_RenteuitgavenHistorieGewogen        = OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[LastTinFormulaSet(NoTrend),1]/3,NA)
+BNG_WSW_RenteuitgavenPrognoseGewogen        = OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[LastTinFormulaSet(Trend),1]/15,NA)
+BNG_WSW_GemiddeldeICRRealisatie             = OnER(If(BNG_WSW_RenteuitgavenHistorieGewogen=0,99999,BNG_WSW_KasstroomVoorRenteHistorieGewogen/BNG_WSW_RenteuitgavenHistorieGewogen),NA)
+BNG_WSW_GemiddeldeICRPrognose               = OnER(If(BNG_WSW_RenteuitgavenPrognoseGewogen=0,99999,BNG_WSW_KasstroomVoorRentePrognoseGewogen/BNG_WSW_RenteuitgavenPrognoseGewogen),NA)
+BNG_WSW_ICRtbvRisicoScore                   = Min(BNG_WSW_GemiddeldeICRRealisatie,BNG_WSW_GemiddeldeICRPrognose)
+BNG_WSW_ICRtbvRisicoScoreNorm               = 1.4
+BNG_WSW_ICRtbvRisicoScoreNormGehaald        = (BNG_WSW_ICRtbvRisicoScore>=BNG_WSW_ICRtbvRisicoScoreNorm)
+
+.Formulas NoTrend
+BNG_WSW_ICRWegingsfactor			              = If((LastTinFormulaSet(NoTrend)-T)<=(TsY(T)*3),1,NA)
+BNG_WSW_KasstroomVoorRenteGewogenCumulatief = OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[T-1]+BNG_WSW_KasstroomVoorRente*BNG_WSW_ICRWegingsfactor,NA)
+BNG_WSW_RenteuitgavenGewogenCumulatief      = OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[T-1]+BNG_WSW_Renteuitgaven*BNG_WSW_ICRWegingsfactor,NA)
+
+.Formulas Trend
+BNG_WSW_ICRWegingsfactor			              = Case(T-LastTinFormulaSet(NoTrend),[<=TsY(T):5|<=(TsY(T)*2):4|<=(TsY(T)*3):3|<=(TsY(T)*4):2|<=(TsY(T)*5):1|>(TsY(T)*5):NA])
+BNG_WSW_KasstroomVoorRenteGewogenCumulatief = OnZero(BNG_WSW_KasstroomVoorRenteGewogenCumulatief[T-1]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_KasstroomVoorRente*BNG_WSW_ICRWegingsfactor,NA)
+BNG_WSW_RenteuitgavenGewogenCumulatief      = OnZero(BNG_WSW_RenteuitgavenGewogenCumulatief[T-1]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_Renteuitgaven*BNG_WSW_ICRWegingsfactor,NA)
+
+;================================================================================================================================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map03_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                                        \Q_Map03_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                                              \Q_Map03_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map03_STATUS
+
+.Formulas Notrend
+Q_Map03_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X))
+Q_Map03_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map03                                     = (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS)
+Q_Map03_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map03_INFO                                = &If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map03_VALIDATION             =
+Q_Map03_STATUS			    	                  = Q_Map03
+
+.Choices
+Q_Map03                                     = Q_ROOT
+Q_Map03_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Berekening DSCR<$                                                                     \Q_Map04
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 4<$                                                                  \Q_Map04_WARNING
+PPP     1A     3               $>Info bij stap 4<$                                                                     \Q_Map04_INFO
+PPP     1A     3               $>Validatie stap 4<$                                                                    \Q_Map04_VALIDATION
+;================================================================================================================================
+PPP     1N     3               $>Berekening DSCR<$                                                                     \BNG_WSW_BerekeningDSCR
+C $>WSW gaat voor de bepaling van de DSCR uit van de geconsolideerde kasstromen en balans . Indien geen geconsolideerde geconsolideerde kasstromen en balans wordt gepubliceerd, dan wordt de enkelvoudige informatie gehanteerd.<$
+PPP   0 BN     4=              =BNG_WSW_AantalVHEBeginPrognoseperiode                                                  \=BNG_WSW_AantalVHEBeginPrognoseperiode -> BNG_WSW_AantalVHEBeginPrognoseperiode
+PPP     1N     3               =BNG_WSW_CFOperationeel                                                                 \BNG_WSW_BerekeningDSCRHeader1
+PPP     FN     4               =BNG_WSW_CFOperationeel                                                                 \=BNG_WSW_CFOperationeel   -> BNG_WSW_CFOperationeel
+PPP    -FN     4               &"$>Af<$: "&BNG_WSW_Renteontvangsten[0]                                                 \=BNG_WSW_Renteontvangsten -> BNG_WSW_Renteontvangsten
+PPP     FN     4               &"$>Bij<$: "&BNG_WSW_Renteuitgaven[0]                                                   \=BNG_WSW_Renteuitgaven    -> BNG_WSW_Renteuitgaven
+PPP     FN    -4               =BNG_WSW_KasstroomVoorRente                                                             \=BNG_WSW_KasstroomVoorRente -> BNG_WSW_KasstroomVoorRente
+PPP     FN     4               $>Bij: Werkelijke onderhoudsuitgaven<$                                                  \=BNG_WSW_Onderhoudsuitgaven -> BNG_WSW_Onderhoudsuitgaven
+PPP    -FN     4               $>Af: Normatieve minimale onderhoudsuitgaven à € 700 per VHE (Woonequivalent)<$         \BNG_WSW_OnderhoudsuitgavenNormatief
+PPP    =FN    -4               $>Kasstroom vóór renteontvangsten en -uitgaven op basis van 'minimaal onderhoud'<$      \BNG_WSW_KasstroomVoorRenteMinimaalOnderhoud
+PPP     FN     4               $>Bij:Geactiveerde productie t.b.v. het eigen bedrijf<$                                 \=BNG_WSW_GeactiveerdeProductie -> BNG_WSW_GeactiveerdeProductie
+PPP    =FN    -4               $>Kasstroom t.b.v. de DSCR bepaling<$                                                   \BNG_WSW_KasstroomVoorDSCR
+PPP   0 CN     4               $>Wegingsfactor<$                                                                       \BNG_WSW_DSCRWegingsfactor
+PPP     BN     4               $>Gewogen kasstroom t.b.v. de DSCR bepaling<$ ($>cumulatief<$)                          \BNG_WSW_KasstroomVoorDSCRCumulatief
+PPP     1N     4               $>Gewogen kasstroom t.b.v. de DSCR bepaling<$ ($>historisch<$)                          \BNG_WSW_KasstroomVoorDSCRHistorieGewogen
+PPP     1N     4=              $>Gewogen kasstroom t.b.v. de DSCR bepaling<$ ($>prognose<$)                            \BNG_WSW_KasstroomVoorDSCRPrognoseGewogen
+
+PPP     1N     3               $>Bepaling netto renteuitgaven<$                                                        \BNG_WSW_BepalingNettoRenteuitgavenDSCR
+PPP     FN     4               =BNG_WSW_Renteuitgaven                                                                  \=BNG_WSW_Renteuitgaven    -> BNG_WSW_Renteuitgaven
+PPP    -FN     4               &"$>Af<$: "&BNG_WSW_Renteontvangsten[0]                                                 \=BNG_WSW_Renteontvangsten -> BNG_WSW_Renteontvangsten
+PPP    -FN     4               $>Af: Toegerekende renteuitgaven aan projecten<$                                        \=BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen -> BNG_WSW_Tabel1_ToegerekendeRenteInvesteringen
+PPP    =FN    -4=              $>Renteuitgaven t.b.v. de DSCR bepaling<$                                               \BNG_WSW_RenteuitgavenDSCR
+PPP   0 CN     4               =BNG_WSW_DSCRWegingsfactor                                                              \=BNG_WSW_DSCRWegingsfactor -> BNG_WSW_DSCRWegingsfactor
+PPP     BN     4               $>Gewogen renteuitgaven t.b.v. de DSCR bepaling<$ ($>cumulatief<$)                      \BNG_WSW_RenteuitgavenDSCRGewogenCumulatief
+PPP     1N     4               $>Gewogen renteuitgaven t.b.v. de DSCR bepaling<$ ($>historisch<$)                      \BNG_WSW_RenteuitgavenDSCRHistorieGewogen
+PPP     1N     4=              $>Gewogen renteuitgaven t.b.v. de DSCR bepaling<$ ($>prognose<$)                        \BNG_WSW_RenteuitgavenDSCRPrognoseGewogen
+
+PPP     1N     3               $>Bepaling theoretische aflossing per jaar t.b.v. DSCR berekening<$                     \BNG_WSW_BepalingTheoretischeAflossingDSCR
+P       FN     4               =BNG_WSW_Verkoopopbrengsten                                                             \=BNG_WSW_Verkoopopbrengsten             -> BNG_WSW_Verkoopopbrengsten
+PPP     FN     4               =BNG_WSW_VerkoopontvangstenHuurA                                                        \=BNG_WSW_VerkoopontvangstenHuurA        -> BNG_WSW_VerkoopontvangstenHuurA
+PPP     FN     4               =BNG_WSW_VerkoopontvangstenHuurB                                                        \=BNG_WSW_VerkoopontvangstenHuurB        -> BNG_WSW_VerkoopontvangstenHuurB
+PPP     FN     4               =BNG_WSW_VerkoopontvangstenGrondA                                                       \=BNG_WSW_VerkoopontvangstenGrondA       -> BNG_WSW_VerkoopontvangstenGrondA
+PPP     FN     4               =BNG_WSW_VerkoopontvangstenGrondB                                                       \=BNG_WSW_VerkoopontvangstenGrondB       -> BNG_WSW_VerkoopontvangstenGrondB
+PPP     FN     4               =BNG_WSW_InvesteringsontvangstenOverigA                                                 \=BNG_WSW_InvesteringsontvangstenOverigA -> BNG_WSW_InvesteringsontvangstenOverigA
+PPP     FN     4               =BNG_WSW_InvesteringsontvangstenOverigB                                                 \=BNG_WSW_InvesteringsontvangstenOverigB -> BNG_WSW_InvesteringsontvangstenOverigB
+PPP    -FN     4               $>-/-<$ $>Externe kosten bij verkoop<$                                                  \=BNG_WSW_ExterneKostenVerkoopA          -> BNG_WSW_ExterneKostenVerkoopA
+PPP    -FN     4               $>-/-<$ $>Externe kosten bij verkoop<$                                                  \=BNG_WSW_ExterneKostenVerkoopB          -> BNG_WSW_ExterneKostenVerkoopB
+PPP    =FN    -4               $>Totaal verkoopontvangsten<$                                                           \BNG_WSW_TotaalVerkoopontvangsten
+PPP   0 CN     4               =BNG_WSW_DSCRWegingsfactor                                                              \=BNG_WSW_DSCRWegingsfactor
+PPP     BN     4               $>Cumulatieve gewogen verkoopopbrengsten t.b.v. de DSCR bepaling<$                      \BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief
+PPP     1N     4               $>Cumulatieve verkoopopbrengsten over vijf jaren<$ ($>historisch<$)                     \BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefHistorie
+PPP     1N     4               $>Cumulatieve verkoopopbrengsten over vijf jaren<$ ($>prognose<$)                       \BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefPrognose
+PPP     1N     4               $>Restwaarde portefeuille  à € 5.000 per VHE<$ ($>historisch<$)                         \BNG_WSW_RestwaardePortefeuilleHistorie
+PPP     1N     4               $>Restwaarde portefeuille  à € 5.000 per VHE<$ ($>prognose<$)                           \BNG_WSW_RestwaardePortefeuillePrognose
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T<$ \BNG_WSW_VermogensgegevensTDSCR
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarT                                -> BNG_WSW_VerslagJaarT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenOverheidT                                                   \=BNG_WSW_LanglopendeSchuldenOverheidT                -> BNG_WSW_LanglopendeSchuldenOverheidT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenKredietinstellingenT                                        \=BNG_WSW_LanglopendeSchuldenKredietinstellingenT     -> BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT    -> BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenDeelnemingenT                                               \=BNG_WSW_LanglopendeSchuldenDeelnemingenT            -> BNG_WSW_LanglopendeSchuldenDeelnemingenT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT                                    \=BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT -> BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT    -> BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenDeelnemingenT                                               \=BNG_WSW_KortlopendeSchuldenDeelnemingenT            -> BNG_WSW_KortlopendeSchuldenDeelnemingenT
+PPP    =1N    -4               $>Totaal vreemd vermogen gerelateerd aan vastgoed in exploitatie<$                      \BNG_WSW_VreemdVermogenVastgoedInExploitatieT
+PPP   0 1N     4=              =BNG_WSW_GemLevensduurBeginPrognoseperiodeT                                             \=BNG_WSW_GemLevensduurBeginPrognoseperiodeT          -> BNG_WSW_GemLevensduurBeginPrognoseperiodeT
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar<$\BNG_WSW_VermogensgegevensVTDSCR
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarVT                                -> BNG_WSW_VerslagJaarVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenOverheidT                                                   \=BNG_WSW_LanglopendeSchuldenOverheidVT                -> BNG_WSW_LanglopendeSchuldenOverheidVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenKredietinstellingenT                                        \=BNG_WSW_LanglopendeSchuldenKredietinstellingenVT     -> BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT    -> BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenDeelnemingenT                                               \=BNG_WSW_LanglopendeSchuldenDeelnemingenVT            -> BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT                                    \=BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT -> BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT    -> BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenDeelnemingenT                                               \=BNG_WSW_KortlopendeSchuldenDeelnemingenVT            -> BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+PPP    =1N    -4               $>Totaal vreemd vermogen gerelateerd aan vastgoed in exploitatie<$                      \BNG_WSW_VreemdVermogenVastgoedInExploitatieVT
+PPP   0 1N     4=              =BNG_WSW_GemLevensduurBeginPrognoseperiodeVT                                            \=BNG_WSW_GemLevensduurBeginPrognoseperiodeVT          -> BNG_WSW_GemLevensduurBeginPrognoseperiodeVT
+
+PPP     1N     3               $>DSCR t.b.v. WSW Risico Score Model<$                                                  \BNG_WSW_DSCRtbvRisicoScoreHeader
+PPP     1N     4               $>Theoretisch aflossingsniveau gerealiseerd<$                                           \BNG_WSW_TheoretischAflossingsniveauHistorie
+PPP     1N     4               $>Theoretisch aflossingsniveau geprognosticeerd<$                                       \BNG_WSW_TheoretischAflossingsniveauPrognose
+PPP   2 1N     4               $>Gemiddeld gerealiseerde DSCR<$                                                        \BNG_WSW_GemiddeldGerealiseerdeDSCR
+PPP     1N C   4                                                                                                       \BNG_WSW_DSCRNoemerTest
+PPP   2 1N     4               $>Gewogen gemiddeld geprognosticeerde DSCR<$                                            \BNG_WSW_GemiddeldGeprognosticeerdeDSCR
+PPP   2 1N     4               $>DSCR t.b.v. WSW Risico Score Model<$                                                  \BNG_WSW_DSCRtbvRisicoScore
+PPP   2 1N     4               $>WSW norm<$                                                                            \BNG_WSW_DSCRtbvRisicoScoreNorm
+PPP     1N C   4                                                                                                       \BNG_WSW_DSCRtbvRisicoScoreNormGehaald
+
+.Hints
+BNG_WSW_DSCRWegingsfactor                   = "$$CalcYearAs=MeanCalc"
+
+.Choices
+BNG_WSW_DSCRNoemerTest                      = "1:$>Noemer <= 0<$|0:$>Noemer <> 0<$"
+BNG_WSW_DSCRtbvRisicoScoreNormGehaald       = "1:$>Voldoet aan WSW norm<$|0:$>Voldoet niet aan WSW norm<$"
+
+.Formulas Visible
+BNG_WSW_DSCRNoemerTest                      = (Self=1)
+BNG_WSW_RenteuitgavenDSCRGewogenCumulatief  = 0
+BNG_WSW_KasstroomVoorDSCRCumulatief         = 0
+BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief = 0
+
+.Formulas NoTrend, Trend
+BNG_WSW_OnderhoudsuitgavenNormatief         = BNG_WSW_AantalVHEBeginPrognoseperiode * 700
+BNG_WSW_KasstroomVoorDSCRHistorieGewogen    = OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[LastTinFormulaSet(NoTrend),1]/3,NA)
+BNG_WSW_KasstroomVoorDSCRPrognoseGewogen    = OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[LastTinFormulaSet(Trend),1]/15,NA)
+BNG_WSW_RenteuitgavenDSCRHistorieGewogen    = OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[LastTinFormulaSet(NoTrend),1]/3,NA)
+BNG_WSW_RenteuitgavenDSCRPrognoseGewogen    = OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[LastTinFormulaSet(Trend),1]/15,NA)
+BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefHistorie = OnZero((BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[LastTinFormulaSet(NoTrend)]/HSum(BNG_WSW_DSCRWegingsfactor,1,LastTinFormulaSet(NoTrend)))*5,NA)
+BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefPrognose = Min(OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[LastTinFormulaSet(Trend)]/HSum(BNG_WSW_DSCRWegingsfactor,FirstTinFormulaSet(Trend),LastTinFormulaSet(Trend))*5,NA),HSum(BNG_WSW_TotaalVerkoopontvangsten,FirstTinFormulaSet(Trend),LastTinFormulaSet(Trend)))
+
+BNG_WSW_RestwaardePortefeuilleHistorie      = BNG_WSW_AantalVHEBeginPrognoseperiodeT*5000
+BNG_WSW_RestwaardePortefeuillePrognose      = BNG_WSW_AantalVHEBeginPrognoseperiodeVT*5000
+BNG_WSW_TheoretischAflossingsniveauHistorie = OnError(Max(0,(BNG_WSW_VreemdVermogenVastgoedInExploitatieT -BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefHistorie-BNG_WSW_RestwaardePortefeuilleHistorie)/BNG_WSW_GemLevensduurBeginPrognoseperiodeT),0)
+BNG_WSW_TheoretischAflossingsniveauPrognose = OnError(Max(0,(BNG_WSW_VreemdVermogenVastgoedInExploitatieVT-BNG_WSW_VerkoopopbrDSCR5jrsCumulatiefPrognose-BNG_WSW_RestwaardePortefeuillePrognose)/BNG_WSW_GemLevensduurBeginPrognoseperiodeVT),0)
+BNG_WSW_GemiddeldGerealiseerdeDSCR          = OnError(BNG_WSW_KasstroomVoorDSCRHistorieGewogen/(BNG_WSW_RenteuitgavenDSCRHistorieGewogen+BNG_WSW_TheoretischAflossingsniveauHistorie),0)
+BNG_WSW_GemiddeldGeprognosticeerdeDSCR      = OnError(BNG_WSW_KasstroomVoorDSCRPrognoseGewogen/(BNG_WSW_RenteuitgavenDSCRPrognoseGewogen+BNG_WSW_TheoretischAflossingsniveauPrognose),0)
+BNG_WSW_DSCRNoemerTest                      = If(((BNG_WSW_RenteuitgavenDSCRHistorieGewogen+BNG_WSW_TheoretischAflossingsniveauHistorie)<=0) Or ((BNG_WSW_RenteuitgavenDSCRPrognoseGewogen+BNG_WSW_TheoretischAflossingsniveauPrognose)<=0),1,0)
+BNG_WSW_DSCRtbvRisicoScore                  = Min(BNG_WSW_GemiddeldGerealiseerdeDSCR,BNG_WSW_GemiddeldGeprognosticeerdeDSCR)
+BNG_WSW_DSCRtbvRisicoScoreNorm              = 1
+BNG_WSW_DSCRtbvRisicoScoreNormGehaald       = (BNG_WSW_DSCRtbvRisicoScore>=BNG_WSW_DSCRtbvRisicoScoreNorm)
+
+.Formulas NoTrend
+BNG_WSW_DSCRWegingsfactor                   = If((LastTinFormulaSet(NoTrend)-T)<=(TsY(T)*3),1,NA)
+BNG_WSW_KasstroomVoorDSCRCumulatief         = OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[T-1]+BNG_WSW_KasstroomVoorDSCR*BNG_WSW_DSCRWegingsfactor,NA)
+BNG_WSW_RenteuitgavenDSCRGewogenCumulatief  = OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[T-1]+BNG_WSW_RenteuitgavenDSCR*BNG_WSW_DSCRWegingsfactor,NA)
+BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief = OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[T-1]+BNG_WSW_TotaalVerkoopontvangsten*BNG_WSW_DSCRWegingsfactor,NA)
+
+.Formulas Trend
+BNG_WSW_DSCRWegingsfactor			              = Case(T-LastTinFormulaSet(NoTrend),[<=TsY(T):5|<=(TsY(T)*2):4|<=(TsY(T)*3):3|<=(TsY(T)*4):2|<=(TsY(T)*5):1|>(TsY(T)*5):NA])
+BNG_WSW_KasstroomVoorDSCRCumulatief         = OnZero(BNG_WSW_KasstroomVoorDSCRCumulatief[T-1]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_KasstroomVoorDSCR*BNG_WSW_DSCRWegingsfactor,NA)
+BNG_WSW_RenteuitgavenDSCRGewogenCumulatief  = OnZero(BNG_WSW_RenteuitgavenDSCRGewogenCumulatief[T-1]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_RenteuitgavenDSCR*BNG_WSW_DSCRWegingsfactor,NA)
+BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief = OnZero(BNG_WSW_VerkoopopbrengstenDSCRGewogenCumulatief[T-1]*(T>FirstTinFormulaSet(Trend))+BNG_WSW_TotaalVerkoopontvangsten*BNG_WSW_DSCRWegingsfactor,NA)
+
+;================================================================================================================================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map04_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                                        \Q_Map04_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                                              \Q_Map04_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map04_STATUS
+
+.Formulas Notrend
+Q_Map04_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X))
+Q_Map04_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map04                                     = (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS)
+Q_Map04_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map04_INFO                                = &If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map04_VALIDATION             =
+Q_Map04_STATUS			    	                  = Q_Map04
+
+.Choices
+Q_Map04                                     = Q_ROOT
+Q_Map04_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Berekening Loan to Value<$                                                            \Q_Map05
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 5<$                                                                  \Q_Map05_WARNING
+PPP     1A     3               $>Info bij stap 5<$                                                                     \Q_Map05_INFO
+PPP     1A     3               $>Validatie stap 5<$                                                                    \Q_Map05_VALIDATION
+;================================================================================================================================
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T<$ \BNG_WSW_VermogensgegevensTLTV
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarT                                -> BNG_WSW_VerslagJaarT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenOverheidT                                                   \=BNG_WSW_LanglopendeSchuldenOverheidT                -> BNG_WSW_LanglopendeSchuldenOverheidT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenKredietinstellingenT                                        \=BNG_WSW_LanglopendeSchuldenKredietinstellingenT     -> BNG_WSW_LanglopendeSchuldenKredietinstellingenT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT    -> BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenDeelnemingenT                                               \=BNG_WSW_LanglopendeSchuldenDeelnemingenT            -> BNG_WSW_LanglopendeSchuldenDeelnemingenT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT                                    \=BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT -> BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT    -> BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenDeelnemingenT                                               \=BNG_WSW_KortlopendeSchuldenDeelnemingenT            -> BNG_WSW_KortlopendeSchuldenDeelnemingenT
+PPP     1N    -4=              $>Totaal vreemd vermogen t.b.v. berekening LTV<$ (A)                                    \=BNG_WSW_VreemdVermogenVastgoedInExploitatieT
+PPP     1N     4               $>Bedrijfswaarde vastgoed in exploitatie<$ (B)                                          \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+PPP   2 1N % 1 4               $>Loan to Value<$                                                                       \BNG_WSW_LTVHistorie
+C $>Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)<$
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar<$\BNG_WSW_VermogensgegevensVTLTV
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarVT                                -> BNG_WSW_VerslagJaarVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenOverheidT                                                   \=BNG_WSW_LanglopendeSchuldenOverheidVT                -> BNG_WSW_LanglopendeSchuldenOverheidVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenKredietinstellingenT                                        \=BNG_WSW_LanglopendeSchuldenKredietinstellingenVT     -> BNG_WSW_LanglopendeSchuldenKredietinstellingenVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT    -> BNG_WSW_LanglopendeSchuldenGroepsmaatschappijenVT
+PPP     1N     4               =BNG_WSW_LanglopendeSchuldenDeelnemingenT                                               \=BNG_WSW_LanglopendeSchuldenDeelnemingenVT            -> BNG_WSW_LanglopendeSchuldenDeelnemingenVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenKredietinstellingenKortT                                    \=BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT -> BNG_WSW_KortlopendeSchuldenKredietinstellingenKortVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenT                                       \=BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT    -> BNG_WSW_KortlopendeSchuldenGroepsmaatschappijenVT
+PPP     1N     4               =BNG_WSW_KortlopendeSchuldenDeelnemingenT                                               \=BNG_WSW_KortlopendeSchuldenDeelnemingenVT            -> BNG_WSW_KortlopendeSchuldenDeelnemingenVT
+PPP     1N    -4=              $>Totaal vreemd vermogen t.b.v. berekening LTV<$ (A)                                    \=BNG_WSW_VreemdVermogenVastgoedInExploitatieVT
+PPP     1N     4               $>Bedrijfswaarde vastgoed in exploitatie<$ (B)                                          \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+PPP   2 1N % 1 4               $>Loan to Value<$                                                                       \BNG_WSW_LTVPrognose
+C $>Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)<$
+
+PPP   2 1N %   3               $>Loan to Value<$                                                                       \BNG_WSW_LTV
+C $>Totaal vreemd vermogen t.b.v. berekening LTV (A) / Bedrijfswaarde vastgoed in exploitatie (B)<$
+PPP   2 1N %   4               $>LTV t.b.v. WSW Risico Score Model<$                                                   \BNG_WSW_LTVtbvRisicoScore
+PPP   2 1N %   4               $>WSW norm<$                                                                            \BNG_WSW_LTVtbvRisicoScoreNorm
+PPP     1N C   4                                                                                                       \BNG_WSW_LTVtbvRisicoScoreNormGehaald
+
+.Choices
+BNG_WSW_LTVtbvRisicoScoreNormGehaald        = "1:$>Voldoet aan WSW norm<$|0:$>Voldoet niet aan WSW norm<$"
+
+.Formulas NoTrend, Trend
+BNG_WSW_LTVHistorie                         = OnEr(BNG_WSW_VreemdVermogenVastgoedInExploitatieT /BNG_WSW_BedrijfswaardeVastgoedInExploitatieT ,NA)
+BNG_WSW_LTVPrognose                         = OnEr(BNG_WSW_VreemdVermogenVastgoedInExploitatieVT/BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT,NA)
+BNG_WSW_LTVtbvRisicoScore                   = Max(BNG_WSW_LTVHistorie,BNG_WSW_LTVPrognose)
+BNG_WSW_LTVtbvRisicoScoreNorm               = 0.75
+BNG_WSW_LTVtbvRisicoScoreNormGehaald        = (BNG_WSW_LTVtbvRisicoScore<BNG_WSW_LTVtbvRisicoScoreNorm)
+
+;================================================================================================================================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map05_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                                        \Q_Map05_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                                              \Q_Map05_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map05_STATUS
+
+.Formulas Notrend
+Q_Map05_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X))
+Q_Map05_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map05                                     = (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS)
+Q_Map05_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map05_INFO                                = &If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map05_VALIDATION             =
+Q_Map05_STATUS			    	                  = Q_Map05
+
+.Choices
+Q_Map05                                     = Q_ROOT
+Q_Map05_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Berekening Solvabiliteit<$                                                            \Q_Map06
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 6<$                                                                  \Q_Map06_WARNING
+PPP     1A     3               $>Info bij stap 6<$                                                                     \Q_Map06_INFO
+PPP     1A     3               $>Validatie stap 6<$                                                                    \Q_Map06_VALIDATION
+;================================================================================================================================
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Verslagjaar T<$ \BNG_WSW_VermogensgegevensTSolvabiliteit
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarT                                -> BNG_WSW_VerslagJaarT
+PPP     1N     4               =BNG_WSW_SolvabiliteitGroepsvermogen                                                    \=BNG_WSW_SolvabiliteitGroepsvermogenT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie<$                                                 \=BNG_WSW_SociaalVastgoedInExploitatieT
+PPP    -1N     4               $>Af: Commercieel vastgoed in exploitatie<$                                             \=BNG_WSW_CommercieelVastgoedInExploitatieT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$            \=BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+PPP     1N     4               $>Bij: Bedrijfswaarde vastgoed in exploitatie<$                                         \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+PPP    =1N    -4=              $>Eigen vermogen / Groepsvermogen o.b.v. Bedrijfswaarde<$                               \BNG_WSW_GroepsvermogenBedrijfswaardeT
+PPP     1N   2 4               =BNG_WSW_TotaalActiva                                                                   \=BNG_WSW_TotaalActivaT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie<$                                                 \=BNG_WSW_SociaalVastgoedInExploitatieT
+PPP    -1N     4               $>Af: Commercieel vastgoed in exploitatie<$                                             \=BNG_WSW_CommercieelVastgoedInExploitatieT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$            \=BNG_WSW_SociaalVastgoedVastgoedbeleggingT
+PPP     1N     4               $>Bij: Bedrijfswaarde vastgoed in exploitatie<$                                         \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieT
+PPP    =1N    -4=              $>Totaal activa o.b.v. Bedrijfswaarde<$                                                 \BNG_WSW_TotaalActivaBedrijfswaardeT
+PPP   2 1N %   4               $>Solvabiliteit<$                                                                       \BNG_WSW_SolvabiliteitT
+
+PPP     1N     3               $>Vermogensgegevens (o.b.v. Geconsolideerde Balans en Bedrijfswaarde) - Voorlopige balans ultimo lopend boekjaar<$\BNG_WSW_VermogensgegevensVTSolvabiliteit
+;PPP     1A     4      >                                                                                                \=BNG_WSW_VerslagJaarVT                                -> BNG_WSW_VerslagJaarVT
+PPP     1N     4               =BNG_WSW_SolvabiliteitGroepsvermogen                                                    \=BNG_WSW_SolvabiliteitGroepsvermogenVT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie<$                                                 \=BNG_WSW_SociaalVastgoedInExploitatieVT
+PPP    -1N     4               $>Af: Commercieel vastgoed in exploitatie<$                                             \=BNG_WSW_CommercieelVastgoedInExploitatieVT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$            \=BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+PPP     1N     4               $>Bij: Bedrijfswaarde vastgoed in exploitatie<$                                         \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+PPP    =1N    -4=              $>Eigen vermogen / Groepsvermogen o.b.v. Bedrijfswaarde<$                               \BNG_WSW_GroepsvermogenBedrijfswaardeVT
+PPP     1N   2 4               =BNG_WSW_TotaalActiva                                                                   \=BNG_WSW_TotaalActivaVT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie<$                                                 \=BNG_WSW_SociaalVastgoedInExploitatieVT
+PPP    -1N     4               $>Af: Commercieel vastgoed in exploitatie<$                                             \=BNG_WSW_CommercieelVastgoedInExploitatieVT
+PPP    -1N     4               $>Af: Sociaal vastgoed in exploitatie gekwalificeerd als vastgoedbelegging<$            \=BNG_WSW_SociaalVastgoedVastgoedbeleggingVT
+PPP     1N     4               $>Bij: Bedrijfswaarde vastgoed in exploitatie<$                                         \=BNG_WSW_BedrijfswaardeVastgoedInExploitatieVT
+PPP    =1N    -4=              $>Totaal activa o.b.v. Bedrijfswaarde<$                                                 \BNG_WSW_TotaalActivaBedrijfswaardeVT
+PPP   2 1N %   4               $>Solvabiliteit<$                                                                       \BNG_WSW_SolvabiliteitVT
+
+PPP     1N     3               $>Berekening Solvabiliteit<$                                                            \BNG_WSW_BerekeningSolvabiliteit
+C $>WSW gaat voor de bepaling van de Solvabiliteit uit van de geconsolideerde balans. Indien geen geconsolideerde balans wordt gepubliceerd, dan wordt de enkelvoudige balans gehanteerd.<$
+PPP   2 1N %   4               $>Solvabiliteit<$ ($>historisch<$)                                                      \=BNG_WSW_SolvabiliteitT
+PPP   2 1N %   4=              $>Solvabiliteit<$ ($>prognose<$)                                                        \=BNG_WSW_SolvabiliteitVT
+PPP   2 1N %   4               $>Solvabiliteit t.b.v. WSW Risico Score Model<$                                         \BNG_WSW_SolvabiliteitRisicoScore
+PPP   2 1N %   4               $>WSW norm<$                                                                            \BNG_WSW_SolvabiliteitRisicoScoreNorm
+PPP     1N C   4                                                                                                       \BNG_WSW_SolvabiliteitRisicoScoreNormGehaald
+
+.Choices
+BNG_WSW_SolvabiliteitRisicoScoreNormGehaald = "1:$>Voldoet aan WSW norm<$|0:$>Voldoet niet aan WSW norm<$"
+
+.Formulas NoTrend, Trend
+BNG_WSW_SolvabiliteitT                      = OnEr(BNG_WSW_GroepsvermogenBedrijfswaardeT /BNG_WSW_TotaalActivaBedrijfswaardeT ,NA)
+BNG_WSW_SolvabiliteitVT                     = OnEr(BNG_WSW_GroepsvermogenBedrijfswaardeVT/BNG_WSW_TotaalActivaBedrijfswaardeVT,NA)
+BNG_WSW_SolvabiliteitRisicoScore            = Min(BNG_WSW_SolvabiliteitT,BNG_WSW_SolvabiliteitVT)
+BNG_WSW_SolvabiliteitRisicoScoreNorm        = 0.20
+BNG_WSW_SolvabiliteitRisicoScoreNormGehaald = (BNG_WSW_SolvabiliteitRisicoScore>=BNG_WSW_SolvabiliteitRisicoScoreNorm)
+
+;================================================================================================================================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map06_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                                        \Q_Map06_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                                              \Q_Map06_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map06_STATUS
+
+.Formulas Notrend
+Q_Map06_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X))
+Q_Map06_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map06                                     = (Q_Map06_ENTEREDREQUIREDVARS=Q_Map06_REQUIREDVARS)
+Q_Map06_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map06_INFO                                = &If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map06_VALIDATION             =
+Q_Map06_STATUS			    	                  = Q_Map06
+
+.Choices
+Q_Map06                                     = Q_ROOT
+Q_Map06_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+.Variables
+PPP     1N C   2               $>Berekening Dekkingsratio<$                                                            \Q_Map07
+;---------------
+; WARNING PANELS
+PPP     1A   1 3               $>Warning voor map 7<$                                                                  \Q_Map07_WARNING
+PPP     1A     3               $>Info bij stap 7<$                                                                     \Q_Map07_INFO
+PPP     1A     3               $>Validatie stap 7<$                                                                    \Q_Map07_VALIDATION
+;================================================================================================================================
+PPP     1N     3               $>Berekening Dekkingsratio<$                                                            \BNG_WSW_BerekeningDekkingsratio
+PPP     1N     4               =BNG_WSW_SchuldrestantWSWGeborgdeLeningen                                               \=BNG_WSW_SchuldrestantWSWGeborgdeLeningen
+PPP     1N     4               =BNG_WSW_WOZwaardeWSWIngezetOnderpand                                                   \=BNG_WSW_WOZwaardeWSWIngezetOnderpand
+PPP   2 1N %   4               $>Dekkingsratio<$                                                                       \BNG_WSW_Dekkingsratio
+PPP   2 1N %   4               $>WSW norm<$                                                                            \BNG_WSW_DekkingsratioNorm
+PPP     1N C   4                                                                                                       \BNG_WSW_DekkingsratioNormGehaald
+
+.Choices
+BNG_WSW_DekkingsRatioNormGehaald            = "1:$>Voldoet aan WSW norm<$|0:$>Voldoet niet aan WSW norm<$"
+
+.Formulas NoTrend, Trend
+BNG_WSW_DekkingsRatio                       = OnEr(BNG_WSW_SchuldrestantWSWGeborgdeLeningen/BNG_WSW_WOZwaardeWSWIngezetOnderpand,0)
+BNG_WSW_DekkingsRatioNorm                   = 0.5
+BNG_WSW_DekkingsRatioNormGehaald            = (BNG_WSW_DekkingsRatio<=BNG_WSW_DekkingsRatioNorm)
+
+;================================================================================================================================
+.Variables
+
+XX      1N     3               $>Hulpvariabelen<$                                                                      \Q_Map07_Hulpvariabelen
+PPP   0 1N     4               $>Aantal verplichte velden (3)<$                                                        \Q_Map07_REQUIREDVARS
+PPP   0 1N     4               $>Aantal ingevulde verplichte velden (3)<$                                              \Q_Map07_ENTEREDREQUIREDVARS
+PPP     1N C   4               $>Status van de stap<$                                                                  \Q_Map07_STATUS
+
+.Formulas Notrend
+Q_Map07_REQUIREDVARS                        = Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X))
+Q_Map07_ENTEREDREQUIREDVARS                 = Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X) And DataAvailable(X))
+Q_Map07                                     = (Q_Map07_ENTEREDREQUIREDVARS=Q_Map07_REQUIREDVARS)
+Q_Map07_WARNING                             = &Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+Q_Map07_INFO                                = &If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&"")
+;Q_Map07_VALIDATION             =
+Q_Map07_STATUS			    	                  = Q_Map07
+
+.Choices
+Q_Map07                                     = Q_ROOT
+Q_Map07_STATUS		    	                    = "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)"
+
+;================================================================================================================================
+
+;------------------------------ Result
+.Variables
+PPP     1A   1 2               Resultaat                                                           \Q_RESULT
+PPP     1A     3               =Q_RESULT                                                           \=Q_RESULT
+
+.Formulas NoTrend
+Q_RESULT                       = &If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]
+
+;------------------------------- STATUS
+.Variables
+PII     1N C 1 2               "Status"                                                            \Q_STATUS
+PII     1N D   2               "Definitief gemaakt op:"                                            \Q_STATUS_FINAL_ON
+PII     1A     2               "Definitief gemaakt door (gebruikersnaam):"                         \Q_STATUS_FINAL_BY
+PII     1A     2               "Definitief gemaakt door (volledige naam):"                         \Q_STATUS_FINAL_BY_NAME
+PII     1N D   2               "Aangemaakt op:"                                                    \Q_STATUS_STARTED_ON
+PII     1A     2               "Aangemaakt door (gebruikersnaam):"                                 \Q_STATUS_STARTED_BY
+PII     1A     2               "Aangemaakt door (volledige naam):"                                 \Q_STATUS_STARTED_BY_NAME
+
+PPP     1A     2  +            "Modelversie"                                                       \ModelVersion
+PPP     1A     2  +            "Modeltype"                                                         \ModelType
+PII     1A     2  +            "Parametersversie"                                                  \MatrixVersion
+C Bij het definitief maken wordt de waarde 'vastgezet'.
+
+PII     1N C   2               "Vorige"                                                            \Q_PREVIOUS_BUTTON_VISIBLE
+PII     1N C   2               "Volgende"                                                          \Q_NEXT_BUTTON_VISIBLE
+PII     1N C   2               "Concept rapport"                                                   \Q_CONCEPT_REPORT_VISIBLE
+PII     1N C   2               "Definitief maken"                                                  \Q_MAKE_FINAL_VISIBLE
+PII     1N C   2               "Definitief rapport"                                                \Q_FINAL_REPORT_VISIBLE
+
+.Choices
+Q_PREVIOUS_BUTTON_VISIBLE      = "0:Nooit|2:Altijd"
+Q_NEXT_BUTTON_VISIBLE          = "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd"
+Q_CONCEPT_REPORT_VISIBLE       = "0:Nee|1:Ja"
+Q_FINAL_REPORT_VISIBLE         = "0:Nee|1:Ja"
+Q_MAKE_FINAL_VISIBLE           = "0:Nee|1:Ja"
+
+.Formulas NoTrend
+Q_PREVIOUS_BUTTON_VISIBLE      = 2
+Q_NEXT_BUTTON_VISIBLE          = 2
+Q_CONCEPT_REPORT_VISIBLE       = 1
+Q_FINAL_REPORT_VISIBLE         = 1
+Q_MAKE_FINAL_VISIBLE           = 1
+
+
+.Formulas NoTrend
+ModelVersion                   = "#ModelVersion#"
+MatrixVersion                  = "None"
+Q_STATUS                       = 0
+ModelType                      = "WSW"
+
+.Choices
+Q_STATUS                       = "0:Actief|1:Defintief"
+
+;===========================================================================================================
+
+;------------------------------ Result
+.Variables
+PPP     1A   1 1               Hulpvariabelen                                                      \HULPVARS
+
+
+;------------------------------ Knock-out
+.Variables
+PPP     1M     2               Knock-out(s)?                                                       \Q_WARNING_GLOBAL
+PPP     1A     3               Map6 - Vraag 6                                                      \Q_WARNING_01
+PPP     1M     3               Knock-out tekst                                                     \Q_WARNING_GLOBALTXT
+
+;.Formulas NoTrend
+;Q_WARNING_01                   = &If( Q_Map06_Vraag02[1]=1,"- Map6 - Vraag 2: Is er een knockout van toepassing? JA","")
+;Q_WARNING_GLOBALTXT            = &If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],"")
+;Q_WARNING_GLOBAL               = &If( Length(&Q_WARNING_GLOBALTXT[1])>0 ,&"[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT ,&"")
+
+;------------------------------ Knock-out
+.Variables
+PPP     1M     2               $>Restricties<$                                                     \Q_RESTRICTIES
+PPP     1A     3                                                                                   \Q_RESTRICTIES_01
+PPP     1A     3                                                                                   \Q_RESTRICTIES_02
+PPP     1M   1 3               Restricties tekst                                                   \Q_RESTRICTIESTXT
+
+.Quit

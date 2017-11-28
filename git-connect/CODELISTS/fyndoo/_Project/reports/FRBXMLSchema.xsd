@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>Created by Luuk Peters on Wed Jun 03 16:30:00
+			CEST 2009</xs:documentation>
+	</xs:annotation>
+	<xs:element name="document">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="font">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="src" type="xs:string" />
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="properties" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<!--
+								<xs:element name="var" minOccurs="0" maxOccurs="unbounded">
+							-->
+							<!--								<xs:complexType>-->
+							<!--									<xs:simpleContent>-->
+							<!--										<xs:extension base="xs:string">-->
+							<!--											<xs:attribute name="id" type="xs:string"/>-->
+							<!--										</xs:extension>-->
+							<!--									</xs:simpleContent>-->
+							<!--								</xs:complexType>-->
+							<!--							</xs:element>-->
+							<xs:any minOccurs="0" maxOccurs="unbounded"
+								processContents="skip" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="outputDocumentProperties" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:any minOccurs="0" maxOccurs="unbounded"
+								processContents="skip" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="newpage">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="img">
+								<xs:complexType mixed="true">
+									<xs:choice minOccurs="0" maxOccurs="unbounded">
+										<xs:element ref="data" />
+									</xs:choice>
+									<xs:attribute name="id" type="xs:string" />
+									<xs:attribute name="visible" type="xs:string" />
+									<xs:attribute name="x" type="xs:string" />
+									<xs:attribute name="y" type="xs:string" />
+									<xs:attribute name="width" type="xs:string" />
+									<xs:attribute name="height" type="xs:string" />
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="p">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="id" type="xs:string" />
+											<xs:attribute name="visible" type="xs:string" />
+											<xs:attribute name="x" type="xs:string" />
+											<xs:attribute name="y" type="xs:string" />
+											<xs:attribute name="width" type="xs:string" />
+											<xs:attribute name="height" type="xs:string" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="div">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="id" type="xs:string" />
+											<xs:attribute name="visible" type="xs:string" />
+											<xs:attribute name="x" type="xs:string" />
+											<xs:attribute name="y" type="xs:string" />
+											<xs:attribute name="width" type="xs:string" />
+											<xs:attribute name="height" type="xs:string" />
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:attribute name="name" type="xs:string" />
+						<xs:attribute name="visible" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="sectionBreak">
+					<xs:complexType>
+						<xs:attribute name="columns" type="xs:integer" />
+						<xs:attribute name="visible" type="xs:string" />
+						<xs:attribute name="type">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="nextPage" />
+									<xs:enumeration value="nextColumn" />
+									<xs:enumeration value="continuous" />
+									<xs:enumeration value="evenPage" />
+									<xs:enumeration value="oddPage" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="section" type="Heading" />
+				<xs:element name="subsection" type="Heading" />
+				<xs:element name="subsubsection" type="Heading" />
+				<xs:element name="subsubsubsection" type="Heading" />
+				<xs:element name="table" type="Table" />
+				<xs:element name="graph" type="Graph" />
+				<xs:element name="tableofcontents" type="TOC" />
+				<xs:element name="p" type="Paragraph" />
+				<xs:element name="ul" type="Ul" />
+				<xs:element name="ol" type="Ul" />
+				<xs:element name="clearpage" />
+				<xs:element name="columns" type="Columns"/>
+				<xs:element name="block">
+					<xs:complexType>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="section" type="Heading" />
+							<xs:element name="subsection" type="Heading" />
+							<xs:element name="subsubsection" type="Heading" />
+							<xs:element name="subsubsubsection" type="Heading" />
+							<xs:element name="table" type="Table" />
+							<xs:element name="graph" type="Graph" />
+							<xs:element name="tableofcontents" type="TOC" />
+							<xs:element name="p" type="Paragraph" />
+							<xs:element name="ul" type="Ul" />
+							<xs:element name="columns" type="Columns"/>
+						</xs:choice>
+						<xs:attribute name="visible" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="img">
+					<xs:complexType>
+						<xs:attribute name="id" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="author" type="xs:string" />
+			<xs:attribute name="title" type="xs:string" />
+			<xs:attribute name="version" type="xs:string" />
+			<xs:attribute name="date" type="xs:string" />
+			<xs:attribute name="outputLanguage" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="data">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="columns" type="dataColumns" minOccurs="0" maxOccurs="10"/>
+				<xs:element name="diffcolumns" type="dataDiffColumns" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="variables" type="dataVariables" minOccurs="0" />
+				<xs:element name="presentation" type="dataPresentation" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="cutoff" type="dataCutoff" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="param">
+					<xs:complexType>
+						<xs:attribute name="key" type="xs:string" />
+						<xs:attribute name="value" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="setting" type="DynamicContextTableSetting" minOccurs="0" maxOccurs="1"/> <!-- ForceTotaalZakelijkDatasource -->
+				<xs:element name="row" type="DynamicContextTableRow" minOccurs="0" maxOccurs="1"/> <!-- ForceTotaalZakelijkDatasource -->
+			</xs:choice>
+			<xs:attribute name="src" type="xs:string" />
+			<xs:attribute name="name" type="xs:string" />
+			<xs:attribute name="var" type="xs:string" />
+			<xs:attribute name="referenceMode" >
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="fail" />
+					<xs:enumeration value="warn" />
+				</xs:restriction>
+			</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="method" type="xs:string" /> <!-- ForceTotaalZakelijkDatasource -->
+			<xs:attribute name="select" type="xs:string" /> <!-- ForceTotaalZakelijkDatasource -->
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DynamicContextTableSetting">
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="path" type="xs:string" />
+		<xs:attribute name="context" type="xs:string" />
+		<xs:attribute name="function" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="DynamicContextTableRow">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="setting" type="DynamicContextTableSetting" minOccurs="0" maxOccurs="1"/> <!-- ForceTotaalZakelijkDatasource -->
+			<xs:element name="row" type="DynamicContextTableRow" minOccurs="0" maxOccurs="1"/> <!-- ForceTotaalZakelijkDatasource -->
+		</xs:choice>
+		<xs:attribute name="context" type="xs:string" />
+		<xs:attribute name="label" type="xs:string" />
+		<xs:attribute name="labelSpecial" type="xs:string" />
+		<xs:attribute name="select" type="xs:string" />
+		<xs:attribute name="selectSpecial" type="xs:string" />
+		<xs:attribute name="className" type="xs:string" />
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="dataColumns">
+		<xs:attribute name="timeline" type="xs:string" />
+		<xs:attribute name="activeTimelineOnly" type="xs:boolean" />
+		<xs:attribute name="timelineType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="USER" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="document" type="xs:integer" />
+		<xs:attribute name="delta" type="xs:string" />
+		<xs:attribute name="number" type="xs:string" />
+		<xs:attribute name="order">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="desc" />
+					<xs:enumeration value="asc" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="USER" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="withMonths" type="xs:string" />
+		<xs:attribute name="header" type="xs:string" />
+		<xs:attribute name="formulaset">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="HISTORY" />
+					<xs:enumeration value="FORECAST" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="virtualColumns" type="xs:boolean"/>
+	</xs:complexType>
+	
+	<xs:complexType name="dataDiffColumns">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="columns" type="dataColumns" minOccurs="2" maxOccurs="2"/>
+		</xs:choice>
+		<xs:attribute name="timeline" type="xs:string" />
+		<xs:attribute name="timelineType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="USER" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="document" type="xs:integer" />
+		<xs:attribute name="delta" type="xs:integer" />
+		<xs:attribute name="number" type="xs:integer" />
+		<xs:attribute name="order">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="desc" />
+					<xs:enumeration value="asc" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="USER" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="withMonths" type="xs:string" />
+		<xs:attribute name="header" type="xs:string" />
+		<xs:attribute name="withTsY" type="xs:double" />
+		<xs:attribute name="formulaset">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="HISTORY" />
+					<xs:enumeration value="FORECAST" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="virtualColumns" type="xs:boolean"/>
+		<xs:attribute name="percentage" type="xs:boolean"/>
+		<xs:attribute name="showSource" type="xs:boolean"/>
+	</xs:complexType>
+	
+	<xs:complexType name="dataVariables">
+		<xs:attribute name="var" type="xs:string" />
+		<xs:attribute name="varFrom" type="xs:string" />
+		<xs:attribute name="varTo" type="xs:string" />
+		<xs:attribute name="varLabel" type="xs:string" />
+		<xs:attribute name="depth" type="xs:integer" />
+		<xs:attribute name="recursiveSkip" type="xs:boolean" />
+		<xs:attribute name="function">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="getStartDate" />
+					<xs:enumeration value="getEndDate" />
+					<xs:enumeration value="getTitle" />
+					<xs:enumeration value="getMonths" />
+					<xs:enumeration value="getTsY" />
+					<xs:enumeration value="getCurrency" />
+					<xs:enumeration value="getFormulaSet" />
+					<xs:enumeration value="getTimelineTitle" />
+					<xs:enumeration value="getTimelineType" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="dataCutoff">
+		<xs:attribute name="absolute" type="xs:string" />
+		<xs:attribute name="percentage" type="xs:string" />
+		<xs:attribute name="indication" type="xs:string" />
+		<xs:attribute name="color" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="dataPresentation">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="overrideStyle">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="old" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="overrideHeaderTitle">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="formulaset" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="overrideStyleSingleValueVariable">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="old" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="overridePrefill">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:boolean">
+							<xs:attribute name="class" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="overrideVarTitle">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="varName" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="overrideVarTitleXPath">
+				<xs:complexType>
+					<xs:attribute name="varName" type="xs:string"/>
+					<xs:attribute name="xpath" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="filterEmptyRowsForClass" type="xs:string"/>
+		</xs:choice>
+		<xs:attribute name="scale" type="xs:string" />                    <!-- Vertel het formatModel in welke schaal (geld)waardes getoond moeten worden -->
+		<xs:attribute name="showBlankLines" type="xs:boolean" />           <!-- Sla witregels niet over. -->
+		<xs:attribute name="showHeaderRow" type="xs:boolean" />            <!-- Laat de hele header regel zien -->
+		<xs:attribute name="showHeaderRowShowTitle" type="xs:boolean" />   <!-- Laat van 'hist 2008' het eerste deel 'hist' zien -->
+		<xs:attribute name="showHeaderRowShowYear" type="xs:boolean" />    <!-- Laat van 'hist 2008' het tweede deel '2008' zien -->
+		<xs:attribute name="showHeaderRowShowVarName" type="xs:boolean" />
+		<xs:attribute name="showHeaderRowOnNewPage" type="xs:boolean" />   <!-- Herhaal header als tabel niet op de pagina past -->
+		<xs:attribute name="filterEmptyRows" type="xs:boolean" />             <!-- Laat regels met alleen 0 waarden niet zien      -->
+		<xs:attribute name="disableMinusCorrection" type="xs:boolean" />      <!-- Indien true pas dan geen minus ( - ) correcties toe (J.Bos)  -->
+		<xs:attribute name="prefill" type="xs:boolean" />                     <!-- Als er 7 kolommen worden gevraagd, maar er voldoen er maar 5 aan de selectie, voeg dan eerst 2 lege kolommen toe -->
+		<xs:attribute name="prefillSingleValueVariable" type="xs:boolean"/>   <!-- Ook bekend als OneCol variable. Als er 7 kolommen worden gevraagd, maar er voldoen er maar 5 aan de selectie, voeg dan eerst 2 lege kolommen toe -->
+		<xs:attribute name="showSingleValueVariablesOnce" type="xs:boolean"/> <!-- Ook bekend als OneCol variable.-->
+		<xs:attribute name="showDecoration" type="xs:boolean" />           <!--  -->
+		<xs:attribute name="lowercase" type="xs:boolean" />                <!--  -->
+		<xs:attribute name="format" type="xs:string" />                    <!-- format in case of for example dates -->
+		<xs:attribute name="headerFunction" type="xs:string" />            <!-- title, endDate, startDate -->
+		<xs:attribute name="headerFormat" type="xs:string" />              <!-- dd-MM-yyyy -->
+		<xs:attribute name="headerLabel" type="xs:string" />               <!-- e.g. Balansdatum -->
+		<xs:attribute name="headerLabelXPath" type="xs:string" />          <!-- e.g. /document/properties/Balansdatum/text() , N.B. moet resulteren in 1 tekst waarde, mag geen lijst opleveren. -->
+		<xs:attribute name="prependEmptyColumns" type="xs:integer" />      <!-- add empty columns before presenting actual columns -->
+		<xs:attribute name="appendEmptyColumns" type="xs:integer" />       <!-- add empty columns after presenting actual columns -->
+		<xs:attribute name="overwriteNAValueForCurrencyWith" type="xs:string" />               <!-- if there is an NAValue for a currency replace it with string -->
+		<xs:attribute name="titleSuffix" type="xs:string" />               <!-- String to append to titles in the model (default = ":") -->
+		<xs:attribute name="titleFunction" type="xs:string" />             <!-- Replace title with variable name -->
+		<xs:attribute name="showInvisibleVariables" type="xs:boolean"/>    <!-- -->
+		<xs:attribute name="order">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit" />
+					<xs:enumeration value="reverse" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<!--		<xs:complexType mixed="true">-->
+	<!--			<xs:choice minOccurs="0" maxOccurs="unbounded">-->
+	<!--				<xs:element name="param">-->
+	<!--					<xs:complexType>-->
+	<!--						<xs:attribute name="key" type="xs:string"/>-->
+	<!--						<xs:attribute name="value" type="xs:string"/>-->
+	<!--					</xs:complexType>-->
+	<!--				</xs:element>-->
+	<!--			</xs:choice>-->
+	<!--			<xs:attribute name="var" type="xs:string"/>-->
+	<!--			<xs:attribute name="src" type="xs:string"/>-->
+	<!--			<xs:attribute name="name" type="xs:string"/>-->
+	<!--			<xs:attribute name="showDecoration" type="xs:boolean"/>-->
+	<!--			<xs:attribute name="type" type="xs:string"/>-->
+	<!--		</xs:complexType>-->
+	<!--	<xs:complexType name="DataN">-->
+	<!--		<xs:choice minOccurs="0" maxOccurs="unbounded">-->
+	<!--			<xs:element name="dataN" type="xs:decimal"/>-->
+	<!--			<xs:element name="numberOfColumns" type="xs:decimal"/>-->
+	<!--			<xs:element name="var" type="xs:string"/>-->
+	<!--			<xs:element name="varTo" type="xs:string"/>-->
+	<!--			<xs:element name="varFrom" type="xs:string"/>-->
+	<!--			<xs:element name="varLabel" type="xs:string"/>-->
+	<!--			<xs:element name="filterEmptyRows" type="xs:boolean"/>-->
+	<!--			<xs:element name="showHeaderRow" type="xs:boolean"/>-->
+	<!--			<xs:element name="showBlankLines" type="xs:boolean"/>-->
+	<!--			<xs:element name="showTitleRow" type="xs:boolean"/>-->
+	<!--			<xs:element name="procedure" type="xs:string"/>-->
+	<!--			<xs:element name="type" type="xs:string"/>-->
+	<!--			<xs:element name="overrideStyle">-->
+	<!--				<xs:complexType>-->
+	<!--					<xs:simpleContent>-->
+	<!--						<xs:extension base="xs:string">-->
+	<!--							<xs:attribute name="old" type="xs:string"/>-->
+	<!--						</xs:extension>-->
+	<!--					</xs:simpleContent>-->
+	<!--				</xs:complexType>-->
+	<!--			</xs:element>-->
+	<!--		</xs:choice>-->
+	<!--		<xs:attribute name="src" type="xs:string"/>-->
+	<!--		<xs:attribute name="var" type="xs:string"/>-->
+	<!--	</xs:complexType>-->
+	<xs:complexType name="Heading" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="data" />
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="Columns">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="col">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="table" type="Table" />
+						<xs:element name="graph" type="Graph" />
+						<xs:element name="p" type="Paragraph" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+		<xs:attribute name="percentage" type="xs:boolean" />
+	</xs:complexType>
+	<xs:complexType name="Table">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="tr">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="th" type="TDTH" />
+						<xs:element name="td" type="TDTH" />
+					</xs:choice>
+					<xs:attribute name="class" type="xs:string" />
+					<xs:attribute name="visible" type="xs:string" />
+					<xs:attribute name="repeat">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="newpage" />
+								<xs:enumeration value="newpageonly" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="data" />
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+		<xs:attribute name="width" type="xs:integer" />
+		<xs:attribute name="type" type="docxWidthType"/>
+	</xs:complexType>
+	<xs:complexType name="TOC">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="tocdepth" type="xs:integer" />
+			<xs:element name="title" type="xs:string" />
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="TDTH" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="data" />
+			<xs:element name="graph" type="Graph" minOccurs="0" maxOccurs="1" />
+			<xs:element name="b" type="ubi" />
+			<xs:element name="i" type="ubi" />
+			<xs:element name="u" type="ubi" />
+			<xs:element name="p" type="Paragraph" />
+		</xs:choice>
+		<xs:attribute name="textcolor" type="xs:string" />
+		<xs:attribute name="colspan" type="xs:integer" />
+		<xs:attribute name="class" type="xs:string"/>
+		<xs:attribute name="width" type="xs:integer" />
+		<xs:attribute name="type" type="docxWidthType"/>
+	</xs:complexType>
+	<xs:simpleType name="docxWidthType">
+		<xs:annotation>
+			<xs:documentation>pct: percentage of. dxa: twentieths of a point</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pct" />
+			<xs:enumeration value="dxa" />
+			<xs:enumeration value="auto" />
+			<xs:enumeration value="nil" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="graphelement" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="value">
+				<xs:complexType mixed="true">
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="data" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="value" type="xs:string" />
+		<xs:attribute name="label" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="Graph">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="data" />
+			<xs:element name="tr">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="th" type="TDTH" />
+						<xs:element name="td" type="TDTH" />
+					</xs:choice>
+					<xs:attribute name="class" type="xs:string" />
+					<xs:attribute name="visible" type="xs:string" />
+					<xs:attribute name="repeat">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="newpage" />
+								<xs:enumeration value="newpageonly" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="title" type="xs:string" />
+			<xs:element name="xtitle" type="xs:string" />
+			<xs:element name="legend">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="a">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="b">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="c">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="d">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="e">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="f">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="results">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="label">
+							<xs:complexType mixed="true">
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element ref="data" />
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="a" type="graphelement" />
+						<xs:element name="b" type="graphelement" />
+						<xs:element name="c" type="graphelement" />
+						<xs:element name="d" type="graphelement" />
+						<xs:element name="e" type="graphelement" />
+						<xs:element name="f" type="graphelement" />
+						<xs:element name="g" type="graphelement" />
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" />
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+		<xs:attribute name="trim" type="xs:boolean" />
+	</xs:complexType>
+	<xs:complexType name="ubi" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="data" />
+			<xs:element name="b" type="ubi" />
+			<xs:element name="i" type="ubi" />
+			<xs:element name="u" type="ubi" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="Paragraph" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="data" />
+			<xs:element name="b" type="ubi" />
+			<xs:element name="i" type="ubi" />
+			<xs:element name="u" type="ubi" />
+			<xs:element name="tab" />
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+		<xs:attribute name="xpos" type="xs:string" />
+		<xs:attribute name="ypos" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="Ul">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="li">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="visible" type="xs:string" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="class" type="xs:string" />
+		<xs:attribute name="visible" type="xs:string" />
+	</xs:complexType>
+</xs:schema>

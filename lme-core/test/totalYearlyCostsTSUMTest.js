@@ -2,7 +2,7 @@ var WorkBook = require('../fesjs/JSWorkBook')
 var FESContext = require('../fesjs/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-require('../../ff-math/ff-math')
+require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
 var JUNIT = require('./JUNIT');
 fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
@@ -11,7 +11,7 @@ var excelPlugin = require('../../ff-fes-xlsx/ff-fes-xlsx').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function() {
     var wb = new WorkBook(new FESContext());
-    wb.importSolution(JUNIT.getFile('../../ff-ssh-git/resources/gyllion_KSP.ffl'), 'ffl');
+    wb.importSolution(JUNIT.getFile('../../git-connect/resources/gyllion_KSP.ffl'), 'ffl');
 // List of all children to be tested
     var children = [
         // Child 1

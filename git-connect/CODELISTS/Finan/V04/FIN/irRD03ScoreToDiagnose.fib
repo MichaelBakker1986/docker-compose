@@ -1,0 +1,9 @@
+{&&Language=English}
+
+<=0:   "$>The profitability surplus can not be calculated.<$"
+<3.5:  "$>Exceedingly much value is being destroyed.<$"
+<4.5:  "$>Much value is being destroyed.<$"
+<5.5:  "$>Value is slightly being destroyed.<$"
+<6.5:  "$>Value is slightly being created.<$"
+<7.5:  "$>Much value is being created.<$"
+>=7.5: "$>Exceedingly much value is being created.<$"

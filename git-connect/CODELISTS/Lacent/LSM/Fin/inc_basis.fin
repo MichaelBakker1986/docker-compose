@@ -1,0 +1,33 @@
+{&&Language=English}
+
+.Variables
+;------------------------------------------------------------------------------ FPS Settings
+
+XXXX     A     1                                                               \
+PP       X     2               $>General information for webclient <$          \
+PPPP    1N C   3               $>Layout<$                                      \FES_LAYOUTNR
+PIII    BA     3               $>Exchange Rates<$                              \FES_EXCHANGE_RATES
+PIII    1A     3               $>Layout name<$                                 \FES_LAYOUT
+PIII  0 1N     3               $>Is flat input used? (1=yes)<$                 \FES_FLATINPUT
+PIII  0 1N C   3               $>Projection Profile<$                          \FES_PROJECTION_PROFILE
+PIII  0 1N     3               $>Column order<$                                \FES_COLUMN_ORDER
+PIII  0 BN     3               $>Column visible<$                              \FES_COLUMN_VISIBLE
+PIII  0 BN     3               $>Start Date Period<$                           \FES_STARTDATEPERIOD
+PIII  0 BN     3               $>End Date Period<$                             \FES_ENDDATEPERIOD
+PIII  0 BN     3               $>Base Currency Period<$                        \FES_BASECURRENCYPERIOD
+PIII  0 BN     3               $>View Currency Period<$                        \FES_VIEWCURRENCYPERIOD
+PIII  0 BN C   3               $>Column Type<$                                 \FES_COLUMNTYPE
+PIII    BN     3               $>ValCheck<$                                    \ValCheck                ; Case Sensative !
+
+.Choices
+FES_LAYOUTNR                   = "0: NA"
+FES_COLUMNTYPE                 = "0: History"
+FES_PROJECTION_PROFILE         = "0: NA"
+
+.Formulas NoTrend
+FES_LAYOUTNR                   = 0
+FES_COLUMN_VISIBLE             = 1
+
+
+
+

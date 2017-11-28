@@ -1,0 +1,67 @@
+{&&Language=English}
+.Variables
+
+
+PIII  6 1N D   2               $>Last modification<$                                               \LastModifyDate
+PIII    1A     2               $>Last modification User<$                                          \LastModifyUser
+;----------------------------
+; FES vars
+.Variables
+PPPP    1N     2               $>FES_VARS<$                                                        \FES_VARS
+PPPP    1N     3               $>Layout<$                                                          \FES_LAYOUTNR
+PIII    BA     3               $>Exchange Rates<$                                                  \FES_EXCHANGE_RATES
+PIII    1A     3               $>Layout name<$                                                     \FES_LAYOUT
+PIII  0 1N     3               $>Is flat input used? (1=yes)<$                                     \FES_FLATINPUT
+PIII  0 1N     3               $>Projection Profile<$                                              \FES_PROJECTION_PROFILE
+PIII  0 1N     3               $>Column order<$                                                    \FES_COLUMN_ORDER
+PIII  0 BN     3               $>Column visible<$                                                  \FES_COLUMN_VISIBLE
+PIII  0 BN     3               $>Start Date Period<$                                               \FES_STARTDATEPERIOD
+PIII  0 BN     3               $>End Date Period<$                                                 \FES_ENDDATEPERIOD
+PIII  0 BN     3               $>Base Currency Period<$                                            \FES_BASECURRENCYPERIOD
+PIII  0 BN     3               $>View Currency Period<$                                            \FES_VIEWCURRENCYPERIOD
+PIII  0 BN C   3               $>Column Type<$                                                     \FES_COLUMNTYPE
+PIII  0 BN     3               $>XBRL TYPE<$                                                       \XBRL_TYPE
+PIII  0 BN     3               $>XBRL STATUS<$                                                     \XBRL_STATUS
+
+
+.Choices
+FES_COLUMNTYPE                 = "0:History|1:Projection"
+
+
+;----------------------------
+; FPS vars
+
+.Variables
+PPPP    1N     2               $>FPS_VARS<$                                                        \FPS_VARS
+PI      1A     3               NAME                                                                \FPS_VAR_Naam
+PI      1A     3               CUSTOMERNUMBER                                                      \FPS_VAR_Relatienummer
+PI      1A     3               CHAMBEROFCOMMERCENUMBER                                             \FPS_VAR_KVKnr
+PI      1A     3               LEGALSTATUSCODE                                                     \FPS_VAR_Rechtsvorm_nr
+PI      1A     3               LEGALSTATUSDESCRIPTION                                              \FPS_VAR_Rechtsvorm_omschr
+PI      1A     3               SECTOROFINDUSTRYCODE                                                \FPS_VAR_BIK_CODE
+PI      1A     3               SECTOROFINDUSTRYDESCRIPTION                                         \FPS_VAR_BIK_Omschr
+PI      1A     3               GRIDID                                                              \FPS_VAR_GridId
+PI      1A     3               ACCOUNTMANAGER                                                      \FPS_VAR_Accountmanager
+PI      1A     3               OFFICENUMBER                                                        \FPS_VAR_Kantoor
+PI      1A     3               STREET                                                              \FPS_VAR_Straat
+PI      1A     3               HOUSENUMBER                                                         \FPS_VAR_Huisnummer
+PI      1A     3               ZIPCODE                                                             \FPS_VAR_Postcode
+PI      1A     3               CITY                                                                \FPS_VAR_Woonplaats
+PI      1A     3               STATEORPROVINCE                                                     \FPS_VAR_Provincie
+PI      1A     3               COUNTRY                                                             \FPS_VAR_Land
+PI      1A     3               Bureau van Dijk ID                                                  \FPS_VAR_BvDID
+PI      1A     3               Customertype                                                        \FPS_VAR_customertype
+PI      1A     3               MEDIATOR_ID                                                         \FPS_VAR_MEDIATOR_ID
+PI      1A     3               LOCATION_ID                                                         \FPS_VAR_LOCATION_ID
+PI      1A     3               ACTIVE                                                              \FPS_VAR_ACTIVE
+PI      1A     3               CORRESPONDENCECITY                                                  \FPS_VAR_CORRESPONDENCECITY
+PI      1A     3               CORRESPONDENCEZIPCODE                                               \FPS_VAR_CORRESPONDENCEZIPCODE
+PI      1A     3               CORRESPONDENCEHOUSENUMBER                                           \FPS_VAR_CORRESPONDENCEHOUSENUMBER
+PI      1A     3               CORRESPONDENCESTREET                                                \FPS_VAR_CORRESPONDENCESTREET
+PI      1A     3               EMAILADDRESS                                                        \FPS_VAR_EMAILADDRESS
+PI      1A     3               PHONENUMBER                                                         \FPS_VAR_PHONENUMBER
+PI      1A     3               BANKCITY                                                            \FPS_VAR_BANKCITY
+PI      1A     3               BANKNAME                                                            \FPS_VAR_BANKNAME
+PI      1A     3               BANKACCOUNT                                                         \FPS_VAR_BANKACCOUNT
+PI      1A     3               FPS_FINAN_USER_ROLES                                                \FPS_FINAN_USER_ROLES
+PI      1A     3               FPS_FINAN_USER                                                      \FPS_FINAN_USER

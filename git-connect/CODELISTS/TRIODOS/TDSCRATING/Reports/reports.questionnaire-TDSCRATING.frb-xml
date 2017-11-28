@@ -1,0 +1,1520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--LET OP ONDERSTAAND VERSIENUMMER OPHOGEN-->
+
+<document version="1.2" date="12-9-2017" author="Topicus Finan" title="Triodos-ScoreCard" xsi:noNamespaceSchemaLocation="../FRBXMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<properties>
+	<ReportName><data src="fesModel"><variables var="Root" function="getTitle"/></data></ReportName>
+	<RelatieNummer><data src="fesModel"><columns number="1" /><variables var="FPS_VAR_Relatienummer" /><presentation showSingleValueVariablesOnce="false" /></data></RelatieNummer>
+	<MedewerkerVKO><data src="fesModel"><columns number="1" /><variables var="Q_STATUS_FINAL_BY" /><presentation showSingleValueVariablesOnce="false" /></data></MedewerkerVKO>
+	<MedewerkerVKOTitel>User</MedewerkerVKOTitel>
+	<CreationDate><data src="functions" name="getDate"><param key="format" value="d MMMMM yyyy"/></data></CreationDate>
+	<CreationDateTitel>Date</CreationDateTitel>
+	<CompanyName><data src="fesModel"><columns number="1" /><variables depth="1" var="FPS_VAR_Naam"/></data></CompanyName>
+	<ReportScaleDefault>1</ReportScaleDefault>
+
+	<visible_Declaration><data src="fesModel"><columns number="1" /><variables depth="1" var="Declaration"/></data></visible_Declaration>
+	<visible_ScorecardType><data src="fesModel"><columns number="1" /><variables depth="1" var="ScorecardType"/></data></visible_ScorecardType>
+	</properties>
+
+<!-- =========data============================================================= -->
+
+<newpage name="normal" visible="./document/properties/visible_Declaration/text()='No'">>
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- ======================================= Energy============== -->
+
+<!--Score berekening-->
+	<table class="datatable4cols" visible="./document/properties/visible_ScorecardType/text()='Renewable Energy' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="level0empty"><td> </td><td></td><td></td><td></td><td></td></tr>
+		<tr class="title4column">
+			<td>Sub-Factor</td>
+			<td>Assessment</td>
+			<td>Score</td>
+			<td>Weight</td>
+			<td>Contribution</td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var01A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var02A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var03A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var04A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var05A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var06A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var07A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var08A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var09A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var10A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var11A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var12A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var13A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var14A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+    <tr class="level0">
+			<td><data src="fesModel"><variables var="Var15A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+<!--<tr class="level0">
+			<td><data src="fesModel"><variables var="Var16A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var17A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var18A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var19A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var20A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var21A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21A" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21A_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21A_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21A_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+		<tr class="total">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="VarSubTotalA" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="InternalRatingA" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="InternalRatingA" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="RatingPDA" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="RatingPDA" /><presentation scale="1"/></data></td>
+		</tr>
+
+<!-- notches -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01A" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02A" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03A" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04A" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05A" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
+<!-- notches -->
+
+<tr class="level0">
+			<td><data src="fesModel"><variables var="DefaultA" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="DefaultA" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalRatingA" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalRatingA" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalAssociatedPDA" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalAssociatedPDA" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+<!-- ======================================= Generic============== -->
+
+<!--Score berekening-->
+	<table class="datatable4cols" visible="./document/properties/visible_ScorecardType/text()='Generic' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="level0empty"><td> </td><td></td><td></td><td></td><td></td></tr>
+		<tr class="title4column">
+			<td>Sub-Factor</td>
+			<td>Assessment</td>
+      <td>Score</td>
+			<td>Weight</td>
+			<td>Contribution</td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var01B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var02B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var03B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var04B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var05B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var06B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var07B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var08B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var09B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var10B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var11B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var12B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var13B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var14B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+    <tr class="level0">
+			<td><data src="fesModel"><variables var="Var15B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var16B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var17B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var18B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var19B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var20B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var21B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21B" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21B_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21B_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21B_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="total">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="VarSubTotalB" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="InternalRatingB" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="InternalRatingB" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="RatingPDB" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="RatingPDB" /><presentation scale="1"/></data></td>
+		</tr>
+		<!-- notches -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06B" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		
+<!-- notches -->
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="DefaultB" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="DefaultB" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalRatingB" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalRatingB" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalAssociatedPDB" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalAssociatedPDB" /><presentation scale="1"/></data></td>
+		</tr>
+
+	</table>
+
+
+<!-- ======================================= Project============== -->
+
+
+<!--Score berekening-->
+	<table class="datatable4cols" visible="./document/properties/visible_ScorecardType/text()='Project' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="level0empty"><td> </td><td></td><td></td><td></td><td></td></tr>
+		<tr class="title4column">
+			<td>Sub-Factor</td>
+			<td>Assessment</td>
+			<td>Score</td>
+			<td>Weight</td>
+			<td>Contribution</td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var01C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var02C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var03C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var04C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var05C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var06C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var07C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var08C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var09C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var10C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var11C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var12C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var13C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var14C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var15C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var16C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var17C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+<!--<tr class="level0">
+			<td><data src="fesModel"><variables var="Var18C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var19C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var20C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var21C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21C" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21C_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21C_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21C_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+		<tr class="total">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="VarSubTotalC" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="InternalRatingC" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="InternalRatingC" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="RatingPDC" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="RatingPDC" /><presentation scale="1"/></data></td>
+		</tr>
+
+<!-- notches -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01C" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02C" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03C" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04C" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+        <tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05C" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+<!-- notches -->
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="DefaultC" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="DefaultC" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalRatingC" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalRatingC" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalAssociatedPDC" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalAssociatedPDC" /><presentation scale="1"/></data></td>
+		</tr>
+
+	</table>
+
+
+
+<!--======================================= Social==============-->
+
+<!--Score berekening-->
+	<table class="datatable4cols" visible="./document/properties/visible_ScorecardType/text()='Cultural and Social' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="level0empty"><td> </td><td></td><td></td><td></td><td></td></tr>
+		<tr class="title4column">
+			<td>Sub-Factor</td>
+			<td>Assessment</td>
+			<td>Score</td>
+			<td>Weight</td>
+			<td>Contribution</td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var01D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var01D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var02D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var02D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var03D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var03D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var04D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var04D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var05D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var05D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var06D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var06D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var07D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var07D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var08D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var08D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var09D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var09D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var10D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var10D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var11D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var11D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var12D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var12D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var13D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var13D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var14D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var14D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var15D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var15D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var16D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var16D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+<!--<tr class="level0">
+			<td><data src="fesModel"><variables var="Var17D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var17D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var18D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var18D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var19D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var19D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var20D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var20D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Var21D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21D" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21D_Score" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21D_Weight" /><presentation scale="1"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Var21D_Contribution" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+		<tr class="total">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="VarSubTotalD" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="InternalRatingD" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="InternalRatingD" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="RatingPDD" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="RatingPDD" /><presentation scale="1"/></data></td>
+		</tr>
+
+<!-- notches -->
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01D" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+        <tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02D" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+<!--		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03D" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04D" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05D" /><presentation scale="1"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+-->
+<!-- notches -->
+
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="DefaultD" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="DefaultD" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalRatingD" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalRatingD" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalAssociatedPDD" function="getTitle"/></data></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalAssociatedPDD" /><presentation scale="1"/></data></td>
+		</tr>
+
+	</table>
+
+
+
+<!-- =================New page================= -->
+
+<newpage name="normal">
+<p   id="watermark"  visible="./document/properties/isFinalReport/text()=0"/>
+</newpage>
+
+<!-- =================Renewable Energy 2 =============== -->
+
+
+<!-- ModelVersions -->	
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Renewable Energy' and ./document/properties/visible_Declaration/text()='No'">
+			<tr class="header">
+				<td>ID Entry</td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FinancialAsOfDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinancialAsOfDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ScorecardType" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ScorecardType" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="AnnualAccountsRequired" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="AnnualAccountsRequired" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsYear" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsYear" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ManagementIntensity" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ManagementIntensity" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FullReviewDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FullReviewDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Declaration" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Declaration" /><presentation scale="1"/></data></td>
+			</tr>			
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_ModelVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_ModelVersion" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_MatrixVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_MatrixVersion" /><presentation scale="1"/></data></td>
+			</tr>			
+	</table>
+	
+<!-- USERS -->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Renewable Energy'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="1" var="Q_Map04_Paragraaf03" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level-1">header</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Renewable Energy' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Notches</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+<!--		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06A" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06AMemo" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Renewable Energy' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Overall</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="OverallExplanation" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="OverallExplanation" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+
+<!-- =========Generic 2==================================================== -->
+
+<!-- ModelVersions -->	
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Generic' and ./document/properties/visible_Declaration/text()='No'">
+			<tr class="header">
+				<td>ID Entry</td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FinancialAsOfDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinancialAsOfDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ScorecardType" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ScorecardType" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="AnnualAccountsRequired" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="AnnualAccountsRequired" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsYear" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsYear" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ManagementIntensity" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ManagementIntensity" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FullReviewDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FullReviewDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Declaration" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Declaration" /><presentation scale="1"/></data></td>
+			</tr>			
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_ModelVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_ModelVersion" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_MatrixVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_MatrixVersion" /><presentation scale="1"/></data></td>
+			</tr>			
+	</table>	
+
+<!-- USERS -->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Generic'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="1" var="Q_Map04_Paragraaf03" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level-1">header</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Generic' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Notches</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06B" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06BMemo" /><presentation scale="1"/></data></td>
+		</tr>
+<!--		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06Memo" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Generic' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Overall</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="OverallExplanation" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="OverallExplanation" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+
+
+<!-- =========Project================================================ -->
+
+
+<!-- ModelVersions -->	
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Project' and ./document/properties/visible_Declaration/text()='No'">
+			<tr class="header">
+				<td>ID Entry</td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FinancialAsOfDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinancialAsOfDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ScorecardType" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ScorecardType" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="AnnualAccountsRequired" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="AnnualAccountsRequired" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsYear" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsYear" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ManagementIntensity" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ManagementIntensity" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FullReviewDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FullReviewDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Declaration" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Declaration" /><presentation scale="1"/></data></td>
+			</tr>			
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_ModelVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_ModelVersion" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_MatrixVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_MatrixVersion" /><presentation scale="1"/></data></td>
+			</tr>			
+	</table>	
+	
+<!-- USERS -->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Project'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="1" var="Q_Map04_Paragraaf03" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level-1">header</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Project' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Notches</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+    	<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+<!--		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06C" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06CMemo" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Project' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Overall</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="OverallExplanation" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="OverallExplanation" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+<!-- =========Social 2========================================= -->
+
+
+<!-- ModelVersions -->	
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Cultural and Social' and ./document/properties/visible_Declaration/text()='No'">
+			<tr class="header">
+				<td>ID Entry</td>
+				<td> </td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FinancialAsOfDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinancialAsOfDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ScorecardType" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ScorecardType" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="AnnualAccountsRequired" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="AnnualAccountsRequired" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsYear" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsYear" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="NextAnnualAccountsDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NextAnnualAccountsDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="ManagementIntensity" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="ManagementIntensity" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="FullReviewDate" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FullReviewDate" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Declaration" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Declaration" /><presentation scale="1"/></data></td>
+			</tr>			
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_ModelVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_ModelVersion" /><presentation scale="1"/></data></td>
+			</tr>
+			<tr class="level0">
+				<td><data src="fesModel"><variables var="Q_MatrixVersion" function="getTitle"/></data></td>
+				<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Q_MatrixVersion" /><presentation scale="1"/></data></td>
+			</tr>			
+	</table>
+	
+<!-- USERS -->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Cultural and Social'">
+	 	<data src="fes">
+			<columns number="1" order="asc" />
+  			<variables depth="1" var="Q_Map04_Paragraaf03" recursiveSkip="false" />
+			<presentation showInvisibleVariables="false" showSingleValueVariablesOnce="true" filterEmptyRows="false" showHeaderRow="false" scale="./document/properties/ReportScaleDefault/text()">
+				<overrideStyle old="level-1">header</overrideStyle>
+				<overrideStyle old="level0empty">header</overrideStyle>
+			</presentation>
+		</data>
+	</table>
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Cultural and Social' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Notches</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch01D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch01DMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch02D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch02DMemo" /><presentation scale="1"/></data></td>
+		</tr>
+<!--		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch03D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch03DMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch04D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch04DMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch05D" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch05DMemo" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="Notch06" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="Notch06Memo" /><presentation scale="1"/></data></td>
+		</tr>
+-->
+	</table>
+
+
+
+
+<!-- Toelichtingen Notches-->
+	<table class="datatable" visible="./document/properties/visible_ScorecardType/text()='Cultural and Social' and ./document/properties/visible_Declaration/text()='No'">
+		<tr class="header">
+			<td>Explanation Overall</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="OverallExplanation" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="OverallExplanation" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+
+
+
+
+
+
+
+<!-- Rating -->
+
+	<table class="datatable" visible="./document/properties/visible_Declaration/text()='Yes'">
+		<tr class="header">
+			<td>Rating (403 declaration)</td>
+			<td> </td>
+		</tr>
+			<tr class="level0">
+			<td><data src="fesModel"><variables var="NameParentCompany" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="NameParentCompany" /><presentation scale="1"/></data></td>
+		</tr>
+	<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalRatingE" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalRatingE" /><presentation scale="1"/></data></td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="FinalAssociatedPD" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="FinalAssociatedPD" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+  <table class="datatable" visible="./document/properties/visible_Declaration/text()='Yes'">
+		<tr class="header">
+			<td>Explanation Overall</td>
+			<td> </td>
+		</tr>
+		<tr class="level0">
+			<td><data src="fesModel"><variables var="OverallExplanation" function="getTitle"/></data></td>
+			<td><data src="fesModel"><columns number="1"/><variables depth="0" var="OverallExplanation" /><presentation scale="1"/></data></td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- =========End============================================================= -->
+</document>

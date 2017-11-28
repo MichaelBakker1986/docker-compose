@@ -1,0 +1,2065 @@
+<?xml version="1.0"?>
+<FmtMappingModel>
+  <Head>
+    <CodeList>FinkRptFinancieringsaanvraag</CodeList>
+    <CodeListVersion></CodeListVersion>
+    <Description>fink-rpt-financieringsaanvraag</Description>
+    <CodeTrimmingWhenSource>false</CodeTrimmingWhenSource>
+    <MultilevelDataWhenSource>true</MultilevelDataWhenSource>
+    <LeveledMappingWhenTarget>false</LeveledMappingWhenTarget>
+    <DCSignedValues>false</DCSignedValues>
+    <ImportToUnmappedSources>Ignore</ImportToUnmappedSources>
+    <ImportToLockedTargets>Warning</ImportToLockedTargets>
+    <ImportToUnknownTargets>Warning</ImportToUnknownTargets>
+    <Creator>FINAN Taxonomy Viewer</Creator>
+    <CreatorVersion>4.4.1</CreatorVersion>
+    <Notes></Notes>
+  </Head>
+  <Accounts>
+    <Account>
+      <Description>Balans</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:BalanceSheetTitle</Code>
+      <FinanVarName>kvkabstrBalanceSheetTitle</FinanVarName>
+      <Description>Balans [titel]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="BalanceSheetTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:AssetsTitle</Code>
+      <FinanVarName>kvkabstrAssetsTitle</FinanVarName>
+      <Description>Activa [titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="AssetsTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:AssetsNoncurrentTitle</Code>
+      <FinanVarName>kvkabstrAssetsNoncurrentTitle</FinanVarName>
+      <Description>Vaste activa [titel]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="AssetsNoncurrentTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:IntangibleAssets</Code>
+      <FinanVarName>venjbw2iIntangibleAssets</FinanVarName>
+      <Description>Immateriële vaste activa</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="IntangibleAssets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:PropertyPlantEquipment</Code>
+      <FinanVarName>venjbw2iPropertyPlantEquipment</FinanVarName>
+      <Description>Materiële vaste activa</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="PropertyPlantEquipment" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialAssets</Code>
+      <FinanVarName>venjbw2iFinancialAssets</FinanVarName>
+      <Description>Financiële vaste activa</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialAssets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:AssetsNoncurrent</Code>
+      <FinanVarName>kvkabstrAssetsNoncurrentTitle_pvenjbw2iAssetsNoncurrent</FinanVarName>
+      <Description>Vaste activa</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="AssetsNoncurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:AssetsCurrentTitle</Code>
+      <FinanVarName>kvkabstrAssetsCurrentTitle</FinanVarName>
+      <Description>Vlottende activa [titel]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="AssetsCurrentTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Inventories</Code>
+      <FinanVarName>venjbw2iInventories</FinanVarName>
+      <Description>Voorraden</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Inventories" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>rj-i:ConstructionContractsAssets</Code>
+      <FinanVarName>rjiConstructionContractsAssets</FinanVarName>
+      <Description>Onderhanden projecten in opdracht van derden (activa)</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="ConstructionContractsAssets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Receivables</Code>
+      <FinanVarName>venjbw2iReceivables</FinanVarName>
+      <Description>Vorderingen</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Receivables" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Securities</Code>
+      <FinanVarName>venjbw2iSecurities</FinanVarName>
+      <Description>Effecten</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Securities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:CashAndCashEquivalents</Code>
+      <FinanVarName>venjbw2iCashAndCashEquivalents</FinanVarName>
+      <Description>Liquide middelen</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="CashAndCashEquivalents" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:AssetsCurrent</Code>
+      <FinanVarName>kvkabstrAssetsCurrentTitle_pvenjbw2iAssetsCurrent</FinanVarName>
+      <Description>Vlottende activa</Description>
+      <Level>5</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="AssetsCurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Assets</Code>
+      <FinanVarName>venjbw2iAssets</FinanVarName>
+      <Description>Activa</Description>
+      <Level>4</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Assets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:EquityAndLiabilitiesTitle</Code>
+      <FinanVarName>kvkabstrEquityAndLiabilitiesTitle</FinanVarName>
+      <Description>Passiva [titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="EquityAndLiabilitiesTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:EquityTitle</Code>
+      <FinanVarName>kvkabstrEquityTitle</FinanVarName>
+      <Description>Eigen vermogen [titel]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="EquityTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ShareCapital</Code>
+      <FinanVarName>venjbw2iShareCapital</FinanVarName>
+      <Description>Aandelenkapitaal</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ShareCapital" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:SharePremium</Code>
+      <FinanVarName>venjbw2iSharePremium</FinanVarName>
+      <Description>Agio</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="SharePremium" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LegalReserves</Code>
+      <FinanVarName>venjbw2iLegalReserves</FinanVarName>
+      <Description>Wettelijke reserves</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LegalReserves" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:StatutoryReserves</Code>
+      <FinanVarName>venjbw2iStatutoryReserves</FinanVarName>
+      <Description>Statutaire reserves</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="StatutoryReserves" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ReservesOther</Code>
+      <FinanVarName>venjbw2iReservesOther</FinanVarName>
+      <Description>Overige reserves</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ReservesOther" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:RetainedEarnings</Code>
+      <FinanVarName>venjbw2iRetainedEarnings</FinanVarName>
+      <Description>Onverdeelde winst</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="RetainedEarnings" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ResultForTheYear</Code>
+      <FinanVarName>venjbw2iResultForTheYear</FinanVarName>
+      <Description>Resultaat van het boekjaar</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ResultForTheYear" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Equity</Code>
+      <FinanVarName>kvkabstrEquityTitle_pvenjbw2iEquity</FinanVarName>
+      <Description>Eigen vermogen</Description>
+      <Level>5</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Equity" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Provisions</Code>
+      <FinanVarName>venjbw2iProvisions</FinanVarName>
+      <Description>Voorzieningen</Description>
+      <Level>4</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Provisions" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LiabilitiesNoncurrent</Code>
+      <FinanVarName>venjbw2iLiabilitiesNoncurrent</FinanVarName>
+      <Description>Langlopende schulden (nog voor meer dan een jaar)</Description>
+      <Level>4</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LiabilitiesNoncurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LiabilitiesCurrent</Code>
+      <FinanVarName>venjbw2iLiabilitiesCurrent</FinanVarName>
+      <Description>Kortlopende schulden (ten hoogste 1 jaar)</Description>
+      <Level>4</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LiabilitiesCurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>rj-i:ConstructionContractsLiabilities</Code>
+      <FinanVarName>rjiConstructionContractsLiabilities</FinanVarName>
+      <Description>Onderhanden projecten in opdracht van derden (passiva)</Description>
+      <Level>4</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="ConstructionContractsLiabilities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:EquityAndLiabilities</Code>
+      <FinanVarName>kvkabstrEquityAndLiabilitiesTitle_pvenjbw2iEquityAndLiabilities</FinanVarName>
+      <Description>Passiva</Description>
+      <Level>4</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="EquityAndLiabilities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Description>Contactpersoon</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>kvk-t:ContactForDocumentPresentation</Code>
+      <FinanVarName>kvktContactForDocumentPresentation</FinanVarName>
+      <Description>Contactpersoon voor deze rapportage [presentatie]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-t" ElementName="ContactForDocumentPresentation" NamespaceURI="http://www.nltaxonomie.nl/10.0/domein/kvk/tuples/kvk-tuples"/>
+    </Account>
+    <Account>
+      <Code>kvk-i:ContactType</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpkvkiContactType</FinanVarName>
+      <Description>Soort contactpersoon</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="kvk-i" ElementName="ContactType" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:FirstName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdFirstName</FinanVarName>
+      <Description>Voornamen</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="FirstName" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:FamilyName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdFamilyName</FinanVarName>
+      <Description>Geslachtsnaam</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="FamilyName" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:OrganisationName</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpvenjbw2iOrganisationName</FinanVarName>
+      <Description>Naam van de organisatie vertegenwoordigd door de ondertekenaar</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="OrganisationName" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:TelephoneNumber</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdTelephoneNumber</FinanVarName>
+      <Description>Telefoonnummer</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="TelephoneNumber" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:EmailAddressFull</Code>
+      <FinanVarName>kvktContactForDocumentPresentation_tpnlcdEmailAddressFull</FinanVarName>
+      <Description>E-mailadres, volledig</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>kvk-t:ContactForDocumentPresentation</InTuple>
+      <InTupleFinanVarName>kvktContactForDocumentPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="EmailAddressFull" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Description>Financieringsaanvraag gegevens</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>fink-abstr:FundingRequestInformationTitle</Code>
+      <FinanVarName>finkabstrFundingRequestInformationTitle</FinanVarName>
+      <Description>Financieringsaanvraag gegevens [titel]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-abstr" ElementName="FundingRequestInformationTitle" NamespaceURI="http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestAmount</Code>
+      <FinanVarName>finkiFundingRequestAmount</FinanVarName>
+      <Description>Bedrag financieringsaanvraag</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestAmount" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestPartOfPileFunding</Code>
+      <FinanVarName>finkiFundingRequestPartOfPileFunding</FinanVarName>
+      <Description>Beschrijving indien financieringsaanvraag onderdeel betreft van stapel financiering</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestPartOfPileFunding" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestPurpose</Code>
+      <FinanVarName>finkiFundingRequestPurpose</FinanVarName>
+      <Description>Doel van de financieringsaanvraag</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestPurpose" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingPurposeDescription</Code>
+      <FinanVarName>finkiFundingPurposeDescription</FinanVarName>
+      <Description>Omschrijving financieringsdoel</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingPurposeDescription" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestDuration</Code>
+      <FinanVarName>finkiFundingRequestDuration</FinanVarName>
+      <Description>Looptijd van de financiering</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestDuration" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestShares</Code>
+      <FinanVarName>finkiFundingRequestShares</FinanVarName>
+      <Description>Zijn de ondernemer(s)/aandeelhouder(s) bereid aandelen uit te geven? (J/N)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestShares" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:WillingnessToTransferOngoingFinancingToNewFunder</Code>
+      <FinanVarName>finkiWillingnessToTransferOngoingFinancingToNewFunder</FinanVarName>
+      <Description>Zijn de ondernemer(s)/aandeelhouder(s) bereid een lopende financiering over te zetten naar de nieuwe financier? (J/N)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="WillingnessToTransferOngoingFinancingToNewFunder" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestRejection</Code>
+      <FinanVarName>finkiFundingRequestRejection</FinanVarName>
+      <Description>Is er de afgelopen drie jaar een financieringsaanvraag afgekeurd? (J/N)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestRejection" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestForSustainablePurpose</Code>
+      <FinanVarName>finkiFundingRequestForSustainablePurpose</FinanVarName>
+      <Description>Is de financiering bedoeld om een groene/duurzame doelstelling te realiseren? (J/N)</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Boolean</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestForSustainablePurpose" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:FundingRequestDetails</Code>
+      <FinanVarName>finkiFundingRequestDetails</FinanVarName>
+      <Description>Vermelding bijzonderheden bij de Fink aanvraag</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="FundingRequestDetails" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Description>Ondernemings- en rapportage gegevens</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>fink-abstr:EntityReportInformationTitle</Code>
+      <FinanVarName>finkabstrEntityReportInformationTitle</FinanVarName>
+      <Description>Ondernemings- en rapportage gegevens [titel]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-abstr" ElementName="EntityReportInformationTitle" NamespaceURI="http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts"/>
+    </Account>
+    <Account>
+      <Code>fink-abstr:EntityInformationTitle</Code>
+      <FinanVarName>finkabstrEntityInformationTitle</FinanVarName>
+      <Description>Ondernemingsgegevens [titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-abstr" ElementName="EntityInformationTitle" NamespaceURI="http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LegalEntityName</Code>
+      <FinanVarName>venjbw2iLegalEntityName</FinanVarName>
+      <Description>Naam van de rechtspersoon</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LegalEntityName" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LegalEntityLegalForm</Code>
+      <FinanVarName>venjbw2iLegalEntityLegalForm</FinanVarName>
+      <Description>Rechtsvorm van de rechtspersoon</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LegalEntityLegalForm" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>rj-i:BusinessNames</Code>
+      <FinanVarName>rjiBusinessNames</FinanVarName>
+      <Description>Handelsnamen</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="BusinessNames" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:LegalEntityRegisteredOffice</Code>
+      <FinanVarName>venjbw2iLegalEntityRegisteredOffice</FinanVarName>
+      <Description>Zetel van de rechtspersoon</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="LegalEntityRegisteredOffice" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ChamberOfCommerceRegistrationNumber</Code>
+      <FinanVarName>venjbw2iChamberOfCommerceRegistrationNumber</FinanVarName>
+      <Description>Registratienummer bij de Kamer van Koophandel</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ChamberOfCommerceRegistrationNumber" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:DateEstablishmentEntity</Code>
+      <FinanVarName>finkiDateEstablishmentEntity</FinanVarName>
+      <Description>Oprichtingsdatum onderneming</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="DateEstablishmentEntity" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>kvk-i:LegalSizeCriteriaClassification</Code>
+      <FinanVarName>kvkiLegalSizeCriteriaClassification</FinanVarName>
+      <Description>Classificatie van de rechtspersoon op basis van de wettelijke groottecriteria</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-i" ElementName="LegalSizeCriteriaClassification" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data"/>
+    </Account>
+    <Account>
+      <Code>kvk-i:SbiBusinessCode</Code>
+      <FinanVarName>kvkiSbiBusinessCode</FinanVarName>
+      <Description>SBI-code</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Enumeration</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-i" ElementName="SbiBusinessCode" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data"/>
+    </Account>
+    <Account>
+      <Code>rj-i:MostImportantActivitiesEntityDescription</Code>
+      <FinanVarName>rjiMostImportantActivitiesEntityDescription</FinanVarName>
+      <Description>Beschrijving van belangrijkste activiteiten van rechtspersoon</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="MostImportantActivitiesEntityDescription" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data"/>
+    </Account>
+    <Account>
+      <Code>rj-t:EntityAddressPresentation</Code>
+      <FinanVarName>rjtEntityAddressPresentation</FinanVarName>
+      <Description>Adres van de rechtspersoon [presentatie]</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>true</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-t" ElementName="EntityAddressPresentation" NamespaceURI="http://www.nltaxonomie.nl/10.0/domein/rj/tuples/rj-tuples"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:DescriptionLocationNL</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdDescriptionLocationNL</FinanVarName>
+      <Description>Locatieomschrijving NL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="DescriptionLocationNL" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:StreetNameNL</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdStreetNameNL</FinanVarName>
+      <Description>Straatnaam NL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="StreetNameNL" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:HouseNumberNL</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdHouseNumberNL</FinanVarName>
+      <Description>Huisnummer NL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="HouseNumberNL" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:HouseNumberAddition</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdHouseNumberAddition</FinanVarName>
+      <Description>Huisnummer toevoeging</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="HouseNumberAddition" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:POBoxNumber</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdPOBoxNumber</FinanVarName>
+      <Description>Postbusnummer</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="POBoxNumber" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:PostalCodeNL</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdPostalCodeNL</FinanVarName>
+      <Description>Postcode NL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="PostalCodeNL" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:PlaceOfResidenceNL</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdPlaceOfResidenceNL</FinanVarName>
+      <Description>Vestigingsplaats NL</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="PlaceOfResidenceNL" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:NameRegion</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdNameRegion</FinanVarName>
+      <Description>Regionaam</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="NameRegion" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>nl-cd:CountryName</Code>
+      <FinanVarName>rjtEntityAddressPresentation_tpnlcdCountryName</FinanVarName>
+      <Description>Landnaam, ISO</Description>
+      <Level>5</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple>rj-t:EntityAddressPresentation</InTuple>
+      <InTupleFinanVarName>rjtEntityAddressPresentation</InTupleFinanVarName>
+      <XbrlElement NameSpaceAlias="nl-cd" ElementName="CountryName" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:AverageNumberEmployees</Code>
+      <FinanVarName>venjbw2iAverageNumberEmployees</FinanVarName>
+      <Description>Gemiddeld aantal werknemers over de periode</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="AverageNumberEmployees" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>fink-abstr:FinancialReportingPeriodInformationTitle</Code>
+      <FinanVarName>finkabstrFinancialReportingPeriodInformationTitle</FinanVarName>
+      <Description>Informatie over de financiële rapportageperiode [titel]</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-abstr" ElementName="FinancialReportingPeriodInformationTitle" NamespaceURI="http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodCurrentStartDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodCurrentStartDate</FinanVarName>
+      <Description>Startdatum van de huidige financiële rapportageperiode</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodCurrentStartDate" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodCurrentEndDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodCurrentEndDate</FinanVarName>
+      <Description>Einddatum van de huidige financiële rapportageperiode</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodCurrentEndDate" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodPreviousStartDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodPreviousStartDate</FinanVarName>
+      <Description>Startdatum van de voorgaande financiële rapportageperiode</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodPreviousStartDate" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:FinancialReportingPeriodPreviousEndDate</Code>
+      <FinanVarName>venjbw2iFinancialReportingPeriodPreviousEndDate</FinanVarName>
+      <Description>Einddatum van de voorgaande financiële rapportageperiode</Description>
+      <Level>4</Level>
+      <DC></DC>
+      <DataType>Date</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="FinancialReportingPeriodPreviousEndDate" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Description>Prognose</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>fink-abstr:ForecastTitle</Code>
+      <FinanVarName>finkabstrForecastTitle</FinanVarName>
+      <Description>Prognose [titel]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-abstr" ElementName="ForecastTitle" NamespaceURI="http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:NetResultAfterTax</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iNetResultAfterTax</FinanVarName>
+      <Description>Nettoresultaat na belastingen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="NetResultAfterTax" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:NetRevenue</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iNetRevenue</FinanVarName>
+      <Description>Netto-omzet</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="NetRevenue" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:Profitability</Code>
+      <FinanVarName>finkiProfitability</FinanVarName>
+      <Description>Winstgevendheid</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>Number</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="Profitability" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:AssetsNoncurrent</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iAssetsNoncurrent</FinanVarName>
+      <Description>Vaste activa</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="AssetsNoncurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:AssetsCurrent</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iAssetsCurrent</FinanVarName>
+      <Description>Vlottende activa</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="AssetsCurrent" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:Equity</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iEquity</FinanVarName>
+      <Description>Eigen vermogen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="Equity" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:EquityAndLiabilities</Code>
+      <FinanVarName>finkabstrForecastTitle_pvenjbw2iEquityAndLiabilities</FinanVarName>
+      <Description>Passiva</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="EquityAndLiabilities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>fink-i:ForecastDetails</Code>
+      <FinanVarName>finkiForecastDetails</FinanVarName>
+      <Description>Toelichting bij de Fink Prognose</Description>
+      <Level>3</Level>
+      <DC></DC>
+      <DataType>String</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="fink-i" ElementName="ForecastDetails" NamespaceURI="http://www.financieringslink.nl/2.0/basis/fink/items/fink-data"/>
+    </Account>
+    <Account>
+      <Description>Winst- en verliesrekening</Description>
+      <Level>1</Level>
+      <DataType>Abstract</DataType>
+    </Account>
+    <Account>
+      <Code>kvk-abstr:IncomeStatementTitle</Code>
+      <FinanVarName>kvkabstrIncomeStatementTitle</FinanVarName>
+      <Description>Winst- en verliesrekening [titel]</Description>
+      <Level>2</Level>
+      <DC></DC>
+      <DataType>Abstract</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>false</MappingSource>
+      <MappingTarget>false</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="kvk-abstr" ElementName="IncomeStatementTitle" NamespaceURI="http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:NetRevenue</Code>
+      <FinanVarName>kvkabstrIncomeStatementTitle_pvenjbw2iNetRevenue</FinanVarName>
+      <Description>Netto-omzet</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="NetRevenue" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ChangesInventoriesWorkInProgress</Code>
+      <FinanVarName>venjbw2iChangesInventoriesWorkInProgress</FinanVarName>
+      <Description>Wijziging in voorraden gereed product en onderhanden werk</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ChangesInventoriesWorkInProgress" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>rj-i:ChangesConstructionContracts</Code>
+      <FinanVarName>rjiChangesConstructionContracts</FinanVarName>
+      <Description>Wijziging in onderhanden projecten in opdracht van derden</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="rj-i" ElementName="ChangesConstructionContracts" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:CapitalisedProductionCosts</Code>
+      <FinanVarName>venjbw2iCapitalisedProductionCosts</FinanVarName>
+      <Description>Geactiveerde productie voor het eigen bedrijf</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="CapitalisedProductionCosts" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:OperatingIncomeOther</Code>
+      <FinanVarName>venjbw2iOperatingIncomeOther</FinanVarName>
+      <Description>Overige bedrijfsopbrengsten</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="OperatingIncomeOther" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:OperatingIncome</Code>
+      <FinanVarName>venjbw2iOperatingIncome</FinanVarName>
+      <Description>Som der bedrijfsopbrengsten</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="OperatingIncome" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:CostsRawMaterialsConsumables</Code>
+      <FinanVarName>venjbw2iCostsRawMaterialsConsumables</FinanVarName>
+      <Description>Kosten van grond- en hulpstoffen</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="CostsRawMaterialsConsumables" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:CostsOutsourcedWorkOtherExternalExpenses</Code>
+      <FinanVarName>venjbw2iCostsOutsourcedWorkOtherExternalExpenses</FinanVarName>
+      <Description>Kosten uitbesteed werk en andere externe kosten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="CostsOutsourcedWorkOtherExternalExpenses" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:EmployeeBenefitsAndOtherAdministrativeExpenses</Code>
+      <FinanVarName>venjbw2iEmployeeBenefitsAndOtherAdministrativeExpenses</FinanVarName>
+      <Description>Personeels- en andere beheerskosten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="EmployeeBenefitsAndOtherAdministrativeExpenses" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets</Code>
+      <FinanVarName>venjbw2iDepreciationPropertyPlantEquipmentAmortisationIntangibleAssets</FinanVarName>
+      <Description>Afschrijvingen op immateriële en materiële vaste activa</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="DepreciationPropertyPlantEquipmentAmortisationIntangibleAssets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ChangesInValueIntangibleAssetsPropertyPlantEquipment</Code>
+      <FinanVarName>venjbw2iChangesInValueIntangibleAssetsPropertyPlantEquipment</FinanVarName>
+      <Description>Overige waardeveranderingen van immateriële en materiële vaste activa</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ChangesInValueIntangibleAssetsPropertyPlantEquipment" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ImpairmentCurrentAssets</Code>
+      <FinanVarName>venjbw2iImpairmentCurrentAssets</FinanVarName>
+      <Description>Bijzondere waardevermindering van vlottende activa</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ImpairmentCurrentAssets" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:OperatingExpensesOther</Code>
+      <FinanVarName>venjbw2iOperatingExpensesOther</FinanVarName>
+      <Description>Overige bedrijfskosten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="OperatingExpensesOther" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:OperatingExpenses</Code>
+      <FinanVarName>venjbw2iOperatingExpenses</FinanVarName>
+      <Description>Som der bedrijfslasten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="OperatingExpenses" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:IncomeReceivablesNoncurrentSecurities</Code>
+      <FinanVarName>venjbw2iIncomeReceivablesNoncurrentSecurities</FinanVarName>
+      <Description>Opbrengst van vorderingen die tot de vaste activa behoren en van effecten</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="IncomeReceivablesNoncurrentSecurities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:RevaluationReserveRelease</Code>
+      <FinanVarName>venjbw2iRevaluationReserveRelease</FinanVarName>
+      <Description>Vrijval uit herwaarderingsreserve</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="RevaluationReserveRelease" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:InterestIncomeRelatedIncome</Code>
+      <FinanVarName>venjbw2iInterestIncomeRelatedIncome</FinanVarName>
+      <Description>Andere rentebaten en soortgelijke opbrengsten</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="InterestIncomeRelatedIncome" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ChangesValueFinancialAssetsSecurities</Code>
+      <FinanVarName>venjbw2iChangesValueFinancialAssetsSecurities</FinanVarName>
+      <Description>Waardeveranderingen van financiële vaste activa en van effecten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ChangesValueFinancialAssetsSecurities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:InterestExpensesRelatedExpenses</Code>
+      <FinanVarName>venjbw2iInterestExpensesRelatedExpenses</FinanVarName>
+      <Description>Rentelasten en soortgelijke kosten</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="InterestExpensesRelatedExpenses" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ResultBeforeTaxOrdinaryActivities</Code>
+      <FinanVarName>venjbw2iResultBeforeTaxOrdinaryActivities</FinanVarName>
+      <Description>Resultaat uit gewone bedrijfsuitoefening voor belastingen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ResultBeforeTaxOrdinaryActivities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:IncomeTaxExpenseOrdinaryActivities</Code>
+      <FinanVarName>venjbw2iIncomeTaxExpenseOrdinaryActivities</FinanVarName>
+      <Description>Belastingen resultaat uit gewone bedrijfsuitoefening</Description>
+      <Level>3</Level>
+      <DC>D</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="IncomeTaxExpenseOrdinaryActivities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ShareInResultsParticipatingInterests</Code>
+      <FinanVarName>venjbw2iShareInResultsParticipatingInterests</FinanVarName>
+      <Description>Aandeel in winst (verlies) van ondernemingen waarin wordt deelgenomen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ShareInResultsParticipatingInterests" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:ResultAfterTaxOrdinaryActivities</Code>
+      <FinanVarName>venjbw2iResultAfterTaxOrdinaryActivities</FinanVarName>
+      <Description>Resultaat uit gewone bedrijfsuitoefening na belastingen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="ResultAfterTaxOrdinaryActivities" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+    <Account>
+      <Code>venj-bw2-i:NetResultAfterTax</Code>
+      <FinanVarName>kvkabstrIncomeStatementTitle_pvenjbw2iNetResultAfterTax</FinanVarName>
+      <Description>Nettoresultaat na belastingen</Description>
+      <Level>3</Level>
+      <DC>C</DC>
+      <DataType>Monetary</DataType>
+      <IsInCalcTree>false</IsInCalcTree>
+      <SumOperator></SumOperator>
+      <Frequency>Detail</Frequency>
+      <MappingSource>true</MappingSource>
+      <MappingTarget>true</MappingTarget>
+      <IsUnSpec>false</IsUnSpec>
+      <IsTuple>false</IsTuple>
+      <IsTupleKey>false</IsTupleKey>
+      <InTuple></InTuple>
+      <XbrlElement NameSpaceAlias="venj-bw2-i" ElementName="NetResultAfterTax" NamespaceURI="http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data"/>
+    </Account>
+  </Accounts>
+  <NameSpaces>
+    <NameSpace>
+      <Prefix>fink-abstr</Prefix>
+      <URI>http://www.financieringslink.nl/2.0/report/fink/abstracts/fink-abstracts</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>fink-i</Prefix>
+      <URI>http://www.financieringslink.nl/2.0/basis/fink/items/fink-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>kvk-abstr</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/report/kvk/abstracts/kvk-abstracts</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>kvk-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/basis/kvk/items/kvk-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>kvk-t</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/domein/kvk/tuples/kvk-tuples</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>nl-cd</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/basis/sbr/items/nl-common-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>rj-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/basis/rj/items/rj-data</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>rj-t</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/domein/rj/tuples/rj-tuples</URI>
+    </NameSpace>
+    <NameSpace>
+      <Prefix>venj-bw2-i</Prefix>
+      <URI>http://www.nltaxonomie.nl/10.0/basis/venj/items/venj-bw2-data</URI>
+    </NameSpace>
+  </NameSpaces>
+</FmtMappingModel>
