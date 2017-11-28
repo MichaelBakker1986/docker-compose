@@ -4,15 +4,12 @@ var log = require('ff-log')
 var assert = require('assert')
 require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
-var JUNIT = require('./JUNIT');
-fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
-//add excel-lookup, MatrixLookup
+fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function() {
     var wb = new WorkBook(new FESContext());
-    wb.importSolution(JUNIT.getFile('../../git-connect/resources/gyllion_KSP.ffl'), 'ffl');
-// List of all children to be tested
+    wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl'), 'ffl');
     var children = [
         // Child 1
         {

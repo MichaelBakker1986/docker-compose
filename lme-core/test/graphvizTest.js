@@ -12,7 +12,7 @@ var FESContext = require('../fesjs/fescontext');
 var FormulaService = require('../fesjs/FormulaService');
 var SolutionFacade = require('../fesjs/SolutionFacade');
 var JUNIT = require('../test/JUNIT');
-fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
 fesjsApi.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
 var log = require('ff-log');
 var WorkBook = require('../fesjs/JSWorkBook.js');

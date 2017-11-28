@@ -4,7 +4,7 @@ var FESContext = require('../fesjs/fescontext')
 var fs = require('fs')
 require('../../math/ff-math')
 var fesjsApi = require('../').fesjs;
-fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);

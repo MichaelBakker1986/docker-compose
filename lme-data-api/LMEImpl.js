@@ -35,7 +35,7 @@ modelService.onNewModel = function(model, path) {
  *    - Lme-Math
  */
 lmeAPI.addFunctions(require('../math/ff-math').mathJs);
-lmeAPI.addFunctions(require('../ff-formulajs/ff-formulajs').formulajs);
+lmeAPI.addFunctions(require('../formulajs-connect/ff-formulajs').formulajs);
 var excelPlugin = require('../excel-connect/excel-connect').xlsxLookup;
 excelPlugin.initComplete.then(function() {
     modelService.initializeModels();

@@ -12,7 +12,7 @@ require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../math');
 
 var fesjsApi = require('../../lme-core').fesjs;
-fesjsApi.addFunctions(require("../../ff-formulajs/ff-formulajs").formulajs);
+fesjsApi.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
     let FESContext = require('../../lme-core/fesjs/fescontext');

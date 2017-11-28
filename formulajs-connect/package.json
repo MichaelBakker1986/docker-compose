@@ -1,8 +1,8 @@
 {
-  "name": "ff-formulajs",
+  "name": "formulajs-connect",
   "version": "1.0.4",
-  "main": "ff-formulajs.js",
-  "description": "binding between ff-fes and formulajs",
+  "main": "formulajs.js",
+  "description": "binding between core and formulajs",
   "scripts": {
     "test": "node ff-formulasjs-test.js"
   },

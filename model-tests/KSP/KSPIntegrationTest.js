@@ -15,7 +15,7 @@ var assert = require('assert')
 require('../../math/ff-math')
 var fesjsApi = require('../../lme-core/ff-fes').fesjs;
 var fs = require('fs');
-fesjsApi.addFunctions(require('../../ff-formulajs/ff-formulajs').formulajs);
+fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
