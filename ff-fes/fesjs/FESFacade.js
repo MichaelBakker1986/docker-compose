@@ -54,7 +54,6 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         throw Error('Cannot find variable')
     }
     if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
-    logger.info('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
     context.audit.push({
         saveToken: context.saveToken,
