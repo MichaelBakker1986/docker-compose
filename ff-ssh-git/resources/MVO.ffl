@@ -4,7 +4,7 @@
 import FinanMath.*;
 import BaseModel.*;
 
-WRAP:$1+$2;
+WRAP:$1+$2+200;
 TESTMETHOD2:$1+$2;
 
 model MVO uses BaseModel

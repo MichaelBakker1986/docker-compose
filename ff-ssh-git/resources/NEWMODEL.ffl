@@ -1,0 +1,26 @@
+// model "Scorecard Test Model"
+// created by FINAN 3.2.56.19 (user Ronald van Aalderen) on 20-01-2017 20:57
+
+import FinanMath.*;
+import BaseModel.*;
+
+TESTMETHOD:$1+1000;
+
+model NEWMODEL uses BaseModel
+{
+ version: "1.37";
+ root
+ {
+  variable Q_ROOT
+  {
+   displaytype: scorecard;
+   variable NEWMODELVariable
+   {
+    title: "NEWMODELVariable";
+    formula: TESTMETHOD(100);
+    datatype: number;
+    frequency: document;
+   }
+  }
+ }
+}

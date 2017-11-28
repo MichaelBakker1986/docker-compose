@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular-include-extended-demo</title>
-    <script type="application/javascript" src="/id/DEMO/resources/ai_KSP.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script>
-        angular.module('lmeapp').controller('extendedController', function($scope) {
-            $scope.showTitle = function(figure) {
-                alert(figure.title)
-            }
-            $scope.TEST = "Extended Controller"
+        angular.module('lmeapp', []).controller('lmeController', function($scope, $http) {
+            $http.get('resources/KSP.js').then(function(data) {
+                eval(data.data)
+                var LME = LMEMETA.exportWebModel();
+                for (var name in LME.nodes) {
+                    $scope[name] = LME.nodes[name]
+                }
+                $scope.name = LME.name
+            }).catch(function(err) {
+                console.error("failed loading " + err);
+            });
         });
     </script>
 </head>
-<body ng-controller="extendedController">
+<body>
 <div ng-controller="lmeController">
-    <h1>Show all titles in model {{MODEL.name}}</h1>
-    <span>{{TEST}}</span>
+    <h1>Show all titles in model {{name}}</h1>
+    <h3>{{name}}</h3>
     <div ng-repeat="figure in this">
-        <button ng-click="showTitle(figure)">Button</button>
         <span>{{figure.title}}</span>
-
     </div>
 </div>
 </body>

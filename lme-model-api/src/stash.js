@@ -17,7 +17,6 @@ class Stash {
     }
 
     preview(name, data, lme) {
-
         var tempHash = '_tmp_' + uuid() + "_" + name;
         return write(__dirname + '/../../ff-ssh-git/resources/' + tempHash + '.ffl', data)
             .then(function(filename) {
@@ -37,7 +36,7 @@ class Stash {
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../ff-ssh-git/resources/' + name + '.ffl', data)])
             .then(function(filename) {
-                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name), exec('node ' + __dirname + '/exportLME_FFL_angular.js ' + name)]).then((result) => {
+                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name)]).then((result) => {
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');

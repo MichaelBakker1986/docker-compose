@@ -1,11 +1,12 @@
-var SolutionFacade = require('../../fesjs/SolutionFacade.js')
-var FormulaService = require('../../fesjs/FormulaService.js')
-var PropertiesAssembler = require('../../fesjs/PropertiesAssembler.js')
-var FunctionMap = require('../../fesjs/FunctionMap.js')
+var SolutionFacade = require('../../fesjs/SolutionFacade')
+var FormulaService = require('../../fesjs/FormulaService')
+var PropertiesAssembler = require('../../fesjs/PropertiesAssembler')
+var FunctionMap = require('../../fesjs/FunctionMap')
 var log = require('ff-log');
 
 function FormulaInfo(data, schema, modelName) {
     this.formulas = [];
+    this.variables = []
     var self = this;
     var data = [];
     this.data = data;
@@ -79,12 +80,13 @@ LMEParser.prototype.headername = '.finance lme';
 LMEParser.prototype.parseData = function(data, workbook) {
     const solution = SolutionFacade.createSolution(data.name);
     solution.nodes = data.nodes;
+    FormulaService.initVariables(data.variables)
     PropertiesAssembler.bulkInsert(solution);
     FormulaService.bulkInsertFormula(data.formulas)
     data.formulas.forEach(function(formula) {
         FunctionMap.initializeFormula(formula);
     })
-    if (log.DEBUG) log.debug('Done import ' + data.name)
+    if (log.DEBUG) log.info('Done import ' + data.name)
     return solution;
 }
 var unwantedKeys = {
@@ -100,6 +102,9 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
     PropertiesAssembler.findAllInSolution(modelName, function(property) {
         info.nodes.push(property)
     })
+    FormulaService.getVariables(function(variable) {
+        info.variables.push(variable)
+    });
     return JSON.stringify(info, function(key, value) {
         return unwantedKeys[key] ? undefined : value;
     }, 0);

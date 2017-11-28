@@ -1,6 +1,11 @@
 Error.prototype.stack = Error.prototype.stack || "";
-MatrixLookup = function() {
-    return 1;
+if (!global.MatrixLookup) {
+    MatrixLookup = function() {
+        return 1;
+    }
+}
+if (!global.MATRIX_VALUES) {
+    MATRIX_VALUES = {}
 }
 require('../../ff-fes/exchange_modules/lme/lmeparser');
 require('../../ff-fes/exchange_modules/jsonvalues/jsonvalues');
@@ -30,6 +35,9 @@ LmeAPI.prototype.importLME = function(json) {
 LmeAPI.prototype.exportJavaScript = function() {
     return this.lme.export('js')
 }
+/**
+ * Not used in Client UI input rendering
+ */
 LmeAPI.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }

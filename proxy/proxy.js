@@ -52,6 +52,6 @@ app.listen(port, () => {
         app.use('*/models', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
         app.use('*/branches', proxy({target: 'http://' + add + ':8080', changeOrigin: true}));
         app.all('*/data', proxy({target: 'http://' + add + ':8085', changeOrigin: true}));
-        app.use('*/resources', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
+        app.use('*/resources/*', proxy({target: 'http://' + add + ':8083', changeOrigin: true}));
     })
-});// Listen for the `error` event on `proxy`.
+});

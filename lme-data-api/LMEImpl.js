@@ -6,6 +6,14 @@ const modelService = new ModelListener();
 const modelNames = []
 const apidef = require(__dirname + '/api/swaggerDef.json');
 var lastModelName;// = modelNames[0]
+if (!global.MatrixLookup) {
+    MatrixLookup = function() {
+        return 1;
+    }
+}
+if (!global.MATRIX_VALUES) {
+    MATRIX_VALUES = {}
+}
 modelService.onNewModel = function(model, path) {
     let modelName = lmeAPI.init(model);
     modelNames.push(modelName);

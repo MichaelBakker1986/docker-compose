@@ -146,11 +146,11 @@ SolutionFacade.prototype.properties = {
 };
 SolutionFacade.prototype.functions = {}
 SolutionFacade.prototype.addFunction = function(solution, functionName, functionBody) {
-    console.info('function ' + functionName + "=" + functionBody)
     var node = this.createUIFormulaLink(solution, functionName, 'function', functionBody, 'number');
     const findFormulaByIndex = FormulaService.findFormulaByIndex(node.ref);
     findFormulaByIndex.params = "$1,$2"
 }
+SolutionFacade.prototype.addVariables = FormulaService.addVariables
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;

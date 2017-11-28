@@ -11,7 +11,21 @@
     <div ng-repeat="figure in this">
         <span>{{figure.title}}</span>
     </div>
-    <script type="application/javascript" src="/id/DEMO/resources/ai_KSP.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <script>
+        angular.module('lmeapp', []).controller('lmeController', function($scope, $http) {
+            $http.get('resources/KSP.js').then(function(data) {
+                eval(data.data)
+                var LME = LMEMETA.exportWebModel();
+                for (var name in LME.nodes) {
+                    $scope[name] = LME.nodes[name]
+                }
+                $scope.name = LME.name
+            }).catch(function(err) {
+                console.error("failed loading " + err);
+            });
+        });
+    </script>
 </div>
 </body>
 </html>

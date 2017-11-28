@@ -1,14 +1,12 @@
 /**
  * Bridge between excel files and LME
  */
-//TODO: find out if this is the best xlsx tool to find the tables..
 var Excel = require('exceljs');
 var log = require('ff-log');
 var Promise = require('promise')
-var matrix = {};
 var workbook = new Excel.Workbook();
 var fileName = __dirname + '/resources/ScorecardKSP1.xlsx';
-var fileName2 = __dirname + '/resources/AAB_Parameters.xlsx';
+let succes;
 var initComplete = new Promise(function(succesArg) {
     succes = succesArg;
 }, function(err) {
@@ -38,27 +36,6 @@ function getDefinedNames(wb) {
         names[name] = {name: name, sheet: wb.getWorksheet(sheetName), ranges: matrixMapDefinedName.sheets[sheetName]};
     }
     return names;
-}
-
-function printValues(range) {
-    var namedRangeSheet = range.ranges;
-    for (var i = 0; i < namedRangeSheet.length; i++) {
-        var obj1 = namedRangeSheet[i];
-        if (obj1 !== undefined) {
-            log.trace('[%s]row:[%s]', i, i)
-            for (var columnId = 0; columnId < obj1.length; columnId++) {
-                var namedRangeAdressCell = obj1[columnId];
-                if (namedRangeAdressCell !== undefined) {
-                    var value = getCellValueFromRangeCell(range, namedRangeAdressCell);
-                    if (value !== null && value !== undefined) {
-                        log.trace('[%s]:[%s]', columnId, namedRangeAdressCell);
-                        matrix[range.name].table[namedRangeAdressCell.row + '_' + namedRangeAdressCell.col] = value
-                        log.trace('found excel value: %s [%s:%s]=[%s]', range.name, range.sheet.name, namedRangeAdressCell.address, value)
-                    }
-                }
-            }
-        }
-    }
 }
 
 /**
@@ -121,6 +98,7 @@ function findXasValues(range, yasNames, bounds) {
 }
 
 function readFunction(wb) {
+    var matrix = {};
     var definedNames = getDefinedNames(wb);
     for (definedName in definedNames) {
         var range = definedNames[definedName];
@@ -136,26 +114,40 @@ function readFunction(wb) {
         };
     }
     // use workbook
-    succes(matrix);
+    // This variable should be available in the client.
+   return matrix
+}
+//workbook.xlsx.readFile(fileName2).then(readFunction)
+Promise.all([workbook.xlsx.readFile(fileName).then(readFunction)]).then(function(ok) {
+   var totalMatrix = {};
+    for (var excelFileIndex = 0; excelFileIndex < ok.length; excelFileIndex++) {
+        var excelFile = ok[excelFileIndex];
+        for (let tableName in excelFile){
+            totalMatrix[tableName] = excelFile[tableName]
+        }
+    }
+    succes(totalMatrix);
+}).catch(function(err) {
+    log.error(err);
+});
+
+/**
+ * MATRIX_VALUES is global declared with table names.
+ * See @FormulaService
+ */
+function doMatrixLookup(xlsfileName, tableName, row, col) {
+    if (log.TRACE)
+        if (!MATRIX_VALUES[tableName]) log.trace('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
+    var table = MATRIX_VALUES[tableName];
+    if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col]) {
+        if (log.TRACE) log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, table.xasValues[row][col]);
+        return table.xasValues[row][col];
+    }
+    return NA;
 }
 
-Promise.all([workbook.xlsx.readFile(fileName).then(readFunction), workbook.xlsx.readFile(fileName2).then(readFunction)]).then(function(ok) {
-}).catch(function(err) {
-        log.error(err);
-    }
-);
 var entries = {
-    'MatrixLookup': function(xlsfileName, tableName, row, col) {
-        if (!matrix[tableName]) {
-            if (log.TRACE) log.trace('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
-
-        }
-        if (matrix[tableName] && matrix[tableName].xasValues && matrix[tableName].xasValues[row] && matrix[tableName].xasValues[row][col]) {
-            if (log.TRACE) log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, matrix[tableName].xasValues[row][col]);
-            return matrix[tableName].xasValues[row][col];
-        }
-        return NA;
-    }
+    'MatrixLookup': doMatrixLookup
 };
 entries.Matrixlookup = entries.MatrixLookup;
 MatrixLookup = entries.MatrixLookup

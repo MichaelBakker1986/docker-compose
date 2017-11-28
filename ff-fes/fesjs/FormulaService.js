@@ -5,6 +5,7 @@ var escodegen = require('escodegen')
 /**
  * * FormulaId '0' is not a valid ID!
  */
+var variables = []
 //the array index is used to be next formulaId
 var formulas = [];
 //make 100.000 entries, we start counting here for temporally formula's
@@ -16,9 +17,11 @@ formulas[100000] = null;
  * When another formula with the same modelFormula String is presented its checked with cache
  */
 var cache = {};
+
 function FormulaService() {
 }
-FormulaService.prototype.visitFormulas = function (visitFunctionArg) {
+
+FormulaService.prototype.visitFormulas = function(visitFunctionArg) {
     for (var i = 0; i < formulas.length; i++) {
         var formula = formulas[i];
         if (formula !== null && formula !== undefined) {
@@ -30,7 +33,7 @@ FormulaService.prototype.visitFormulas = function (visitFunctionArg) {
         }
     }
 }
-FormulaService.prototype.addFormulaDependency = function (formulaInfo, referenceFormulaIndex, referenceName) {
+FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceFormulaIndex, referenceName) {
     //we want do know if we can all the value straight away or we have to invoke a function for it
     //in future we want to check here if its a dynamic formula, or plain value.
     //also inherited functions are nice to play around with.
@@ -82,11 +85,12 @@ function addAssociation(index, property, associationType) {
     }
     formula[associationType][property.name] = true;
 }
+
 /**
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-FormulaService.prototype.addModelFormula = function (property, groupName, row, col, locked, body) {
+FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body) {
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
     var key = escodegen.generate(AST.EXPRESSION(body));
@@ -138,25 +142,49 @@ function newFormula(locked, body, index, propertyName) {
     formulas.push(formula);
     return formula;
 }
-FormulaService.prototype.findFormulaByIndex = function (index) {
+
+FormulaService.prototype.findFormulaByIndex = function(index) {
     return formulas[index];
 }
 /**
  * used with javascript models, they are pre-parsed
  */
-FormulaService.prototype.bulkInsertFormula = function (formulasArg) {
+FormulaService.prototype.bulkInsertFormula = function(formulasArg) {
     for (var i = 0; i < formulasArg.length; i++) {
         var formula = formulasArg[i];
         formulas[formula.id] = formula;
     }
 };
-FormulaService.prototype.moveFormula = function (old, newFormula) {
+FormulaService.prototype.moveFormula = function(old, newFormula) {
     if (old.index !== newFormula.id) {
         formulas[newFormula.id] = formulas[old.index];
         formulas[newFormula.id].id = newFormula.id;
         delete formulas[newFormula.id].index;
         //we can make the ID final.
         delete formulas[old.index];
+    }
+}
+FormulaService.prototype.addVariables = function(variablesArg) {
+    for (var i = 0; i < variablesArg.length; i++) {
+        var variable = variablesArg[i];
+        if (variables[variable.name] !== undefined) {
+            throw Error('already declared variable [' + variable.name + ']')
+        }
+        variables.push({
+            name: variable.name,
+            expression: variable.expression
+        })
+    }
+}
+FormulaService.prototype.getVariables = function(visit) {
+    for (var i = 0; i < variables.length; i++) {
+        visit(variables[i]);
+    }
+}
+FormulaService.prototype.initVariables = function(variables) {
+    for (var i = 0; i < variables.length; i++) {
+        const variable = variables[i];
+        global[variable.name] = variable.expression;
     }
 }
 module.exports = FormulaService.prototype;
