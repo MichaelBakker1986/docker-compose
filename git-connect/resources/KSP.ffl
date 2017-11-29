@@ -706,7 +706,7 @@ model KSP uses BaseModel
      locked: 1;
      hint: "per maand";
      frequency: document;
-     formula: OnNA(MAX(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
+     formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
      fixed_decimals: 0;
      displaytype: currency;
      datatype: currency;
