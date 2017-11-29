@@ -13,7 +13,6 @@ model KSP uses BaseModel
   variable Q_ROOT
   {
    title: "Costs of child raising (v1.27)";
-   options_title: locked;
    locked: 1;
    hint: "This module enables you to gain insight in the costs involved for raising a child";
    frequency: document;
@@ -25,9 +24,7 @@ model KSP uses BaseModel
    variable Q_MAP00
    {
     visible: 0;
-    top_blanklines: 1;
     title: "Intro";
-    options_title: locked;
     locked: 1;
     frequency: document;
     formula: 1;
@@ -36,16 +33,13 @@ model KSP uses BaseModel
     variable Q_MAP00_INTRO
     {
      title: "Intro";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
      datatype: number;
      variable Q_MAP00_INTROMEMO
      {
-      top_blanklines: 1;
       title: "[b]Intro[/b]";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: "Why do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhy do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
@@ -59,7 +53,6 @@ model KSP uses BaseModel
    {
     valid:[AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered),AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required)];
     title: "Basic Information";
-    options_title: locked;
     locked: 1;
     inputRequired:IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     frequency: document;
@@ -70,7 +63,6 @@ model KSP uses BaseModel
     variable Situation
     {
      title: "Situation";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -78,7 +70,6 @@ model KSP uses BaseModel
      variable IncomeSection
      {
       title: "[b]Income[/b]";
-      options_title: locked;
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -87,7 +78,6 @@ model KSP uses BaseModel
      variable IncomeParent01
      {
       title: "Gross Income Parent 1";
-      options_title: locked;
       inputRequired: 1;
       frequency: document;
       fixed_decimals: 2;
@@ -97,7 +87,6 @@ model KSP uses BaseModel
      variable IncomeParent02
      {
       title: "Gross Income Parent 2";
-      options_title: locked;
       inputRequired: 1;
       frequency: document;
       fixed_decimals: 2;
@@ -106,7 +95,6 @@ model KSP uses BaseModel
      variable WorkingHoursWeeklyParent01
      {
       title: "Working hours parent 1";
-      options_title: locked;
       inputRequired: 1;
       frequency: document;
       fixed_decimals: 1;
@@ -115,7 +103,6 @@ model KSP uses BaseModel
      variable WorkingHoursWeeklyParent02
      {
       title: "Working hours parent 2";
-      options_title: locked;
       inputRequired: 1;
       frequency: document;
       fixed_decimals: 1;
@@ -124,7 +111,6 @@ model KSP uses BaseModel
      variable WorkingHoursWeeklyOfLeastWorkingParent
      {
       title: "Working hours (weekly) of least working Parent";
-      options_title: locked;
       inputRequired: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
       frequency: document;
@@ -135,7 +121,6 @@ model KSP uses BaseModel
      variable Child
      {
       title: "Child";
-      options_title: locked;
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -143,7 +128,6 @@ model KSP uses BaseModel
       variable ChildGender
       {
        title: "Gender";
-       options_title: locked;
        inputRequired: 1;
        hint: "Weetje. jongs zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo'n 18 euro per maand.";
        frequency: document;
@@ -155,7 +139,6 @@ model KSP uses BaseModel
       variable NrOfDaysChildcareWeek
       {
        title: "Nr. of days childcare per week";
-       options_title: locked;
        inputRequired: 1;
        frequency: document;
        formula: NA;
@@ -165,7 +148,6 @@ model KSP uses BaseModel
       variable NrOfDaysChildcareMonth
       {
        title: "Nr. of hours childcare per month";
-       options_title: locked;
        locked: 1;
        frequency: document;
        formula: OnER(10.5*NrOfDaysChildcareWeek[1]*4,NA);
@@ -176,7 +158,6 @@ model KSP uses BaseModel
       variable NrOfDaysOutOfSchoolCareWeek
       {
        title: "Nr. of days out-of-school care per week";
-       options_title: locked;
        inputRequired: 1;
        frequency: document;
        fixed_decimals: 1;
@@ -186,7 +167,6 @@ model KSP uses BaseModel
       variable NrOfDaysOutOfSchoolCareMonth
       {
        title: "Nr. of hours out-of-school care per month";
-       options_title: locked;
        locked: 1;
        frequency: document;
        formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
@@ -197,7 +177,6 @@ model KSP uses BaseModel
       variable HourlyFeeChildCare
       {
        title: "Hourly fee childcare";
-       options_title: locked;
        frequency: document;
        formula: 6.8;
        fixed_decimals: 1;
@@ -207,7 +186,6 @@ model KSP uses BaseModel
       variable HourlyFeeOutOfSchoolCare
       {
        title: "Hourly fee out-of-school care";
-       options_title: locked;
        frequency: document;
        formula: 6.8;
        fixed_decimals: 1;
@@ -217,7 +195,6 @@ model KSP uses BaseModel
       variable ParentalContributionPrimaryEducation
       {
        title: "Parental contribution primary education";
-       options_title: locked;
        frequency: document;
        formula: 80;
        fixed_decimals: 1;
@@ -227,7 +204,6 @@ model KSP uses BaseModel
       variable CostsUnspecified
       {
        title: "Costs unspecified per month";
-       options_title: locked;
        frequency: document;
        formula: 180;
        fixed_decimals: 1;
@@ -237,7 +213,6 @@ model KSP uses BaseModel
       variable SecondaryEducationProfile
       {
        title: "secondary education (profile)";
-       options_title: locked;
        inputRequired: 1;
        frequency: document;
        formula: 1;
@@ -249,9 +224,7 @@ model KSP uses BaseModel
       }
       variable TotalyYearlyCostsChild
       {
-       top_separator: 1;
        title: "Total (yearly) costs regarding child";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
@@ -270,7 +243,6 @@ model KSP uses BaseModel
      variable Memo1
      {
       title: "Toelichting";
-      options_title: locked;
       frequency: document;
       displaytype: memo;
       datatype: string;
@@ -281,7 +253,6 @@ model KSP uses BaseModel
    variable Q_MAP02
    {
     title: "Calculations Care";
-    options_title: locked;
     locked: 1;
     frequency: document;
     displaytype: select;
@@ -291,7 +262,6 @@ model KSP uses BaseModel
     variable FiscalParameters
     {
      title: "Fiscal parameters";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -299,14 +269,12 @@ model KSP uses BaseModel
      variable ChildcareContribution
      {
       title: "Childcare Contribution";
-      options_title: locked;
       locked: 1;
       datatype: none;
      }
      variable MaximumNrOfHoursOfChildcareAllowancePerMonth
      {
       title: "Maximum nr of hours of childcare allowance per month";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 230;
@@ -317,7 +285,6 @@ model KSP uses BaseModel
      variable MultiplierDaycare
      {
       title: "Multiplier daycare";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 1.4;
@@ -329,7 +296,6 @@ model KSP uses BaseModel
      variable MultiplierOutOfSchoolCare
      {
       title: "Multiplier out-of-school care";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 0.7;
@@ -341,7 +307,6 @@ model KSP uses BaseModel
      variable MaxHourlyRateChildcare
      {
       title: "Max. hourly rate childcare";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 7.18;
@@ -352,7 +317,6 @@ model KSP uses BaseModel
      variable MaxHourlyRateOutOfSchoolCare
      {
       title: "Max. hourly rate out-of-school care";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 6.69;
@@ -363,7 +327,6 @@ model KSP uses BaseModel
      variable MaxHourlyRateGuestParent
      {
       title: "Max. hourly rate guest parent";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 5.75;
@@ -374,7 +337,6 @@ model KSP uses BaseModel
      variable MaxHourlyRateGuestParentOutOfSchoolCare
      {
       title: "Max. hourly rate guest parent out-of-school care";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 5.75;
@@ -386,7 +348,6 @@ model KSP uses BaseModel
     variable CombinationDiscount
     {
      title: "Combination Discount";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -394,7 +355,6 @@ model KSP uses BaseModel
      variable LowerBoundaryIncome
      {
       title: "Lower boundary Income";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 4895;
@@ -405,7 +365,6 @@ model KSP uses BaseModel
      variable Base
      {
       title: "Base";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 1043;
@@ -416,7 +375,6 @@ model KSP uses BaseModel
      variable CombinationDiscountPercentage
      {
       title: "Combination Discount Percentage";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 0.06159;
@@ -428,7 +386,6 @@ model KSP uses BaseModel
      variable MaximumDiscount
      {
       title: "Maximum Discount";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 2778;
@@ -440,7 +397,6 @@ model KSP uses BaseModel
     variable ChildRelatedBudget
     {
      title: "Child-related budget";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -448,7 +404,6 @@ model KSP uses BaseModel
      variable MaxBudgetOneToTwelveYears
      {
       title: "Max Budget (1 - 12 yrs)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 1142;
@@ -459,7 +414,6 @@ model KSP uses BaseModel
      variable MaxBudgetTwelveToFifteenYears
      {
       title: "Max Budget (12 - 15 yrs)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 1376;
@@ -470,7 +424,6 @@ model KSP uses BaseModel
      variable MaxBudgetSixteenToSeventeenYears
      {
       title: "Max Budget (16 - 17 yrs)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 1559;
@@ -481,7 +434,6 @@ model KSP uses BaseModel
      variable UpperBoundaryIncome
      {
       title: "Upper boundary Income";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 20109;
@@ -492,7 +444,6 @@ model KSP uses BaseModel
      variable DecreasingPercentage
      {
       title: "Decreasing Percentage";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: 0.0675;
@@ -505,7 +456,6 @@ model KSP uses BaseModel
     variable Fees
     {
      title: "Fees";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -513,7 +463,6 @@ model KSP uses BaseModel
      variable MaxNrCompensatedHoursChildcare
      {
       title: "Max. nr of compensated hours childcare ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
@@ -523,7 +472,6 @@ model KSP uses BaseModel
      variable MaxNrCompensatedHoursOutofSchoolCare
      {
       title: "Max. nr of compensated hours out-of-school care ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
@@ -532,14 +480,12 @@ model KSP uses BaseModel
      }
      variable FeesSub3
      {
-      options_title: locked;
       locked: 1;
       datatype: none;
      }
      variable NrCompensatedHoursChildcare
      {
       title: "Nr. of compensated hours childcare ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
@@ -549,7 +495,6 @@ model KSP uses BaseModel
      variable NrCompensatedHoursOutofSchoolCare
      {
       title: "Nr. of compensated hours out-of-school care ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
@@ -558,14 +503,12 @@ model KSP uses BaseModel
      }
      variable FeesSub6
      {
-      options_title: locked;
       locked: 1;
       datatype: none;
      }
      variable MaxCompensatedAmountChildcare
      {
       title: "Max. compensated amount childcare";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
@@ -576,7 +519,6 @@ model KSP uses BaseModel
      variable MaxCompensatedAmountOutofSchoolCare
      {
       title: "Max. compensated amount out-of-school care ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
@@ -586,14 +528,12 @@ model KSP uses BaseModel
      }
      variable FeesSub9
      {
-      options_title: locked;
       locked: 1;
       datatype: none;
      }
      variable TotalIncome
      {
       title: "Total Income";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: OnER(IncomeParent01+IncomeParent02,NA);
@@ -603,7 +543,6 @@ model KSP uses BaseModel
      variable PercentagePremiumFirstChild
      {
       title: "Percentage premium first child ";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: MatrixLookup(null,"Opvangtoeslaginkomenstabel",TotalIncome,1);
@@ -614,14 +553,12 @@ model KSP uses BaseModel
      }
      variable FeesSub12
      {
-      options_title: locked;
       locked: 1;
       datatype: none;
      }
      variable PremiumForChildcare
      {
       title: "Premium for childcare";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
@@ -632,7 +569,6 @@ model KSP uses BaseModel
      variable PremiumForOutofSchoolCare
      {
       title: "Premium for out-of-school care";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
@@ -644,7 +580,6 @@ model KSP uses BaseModel
     variable CostsSecondaryEducation
     {
      title: "Costs (Secondary Education)";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -652,7 +587,6 @@ model KSP uses BaseModel
      variable CostsYearOneFour
      {
       title: "Costs year 1 - 4";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Case(SecondaryEducationProfile,[0: 576 | 1: 906 | 2: 535 | 3: 535]);
@@ -663,7 +597,6 @@ model KSP uses BaseModel
      variable CostsYearFiveSixSeven
      {
       title: "Costs year 5, 6, 7";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
@@ -675,7 +608,6 @@ model KSP uses BaseModel
     variable Q_MAP02SUB10
     {
      title: "Budget";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -683,7 +615,6 @@ model KSP uses BaseModel
      variable Q_MAP02SUB10SUB1 refers to TotalIncome
      {
       title: "Income";
-      options_title: locked;
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -692,7 +623,6 @@ model KSP uses BaseModel
      variable ChildRelatedBudgetDecrease
      {
       title: "Decrease";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
@@ -702,7 +632,6 @@ model KSP uses BaseModel
      variable ChildRelatedBudgetUpToTwelve
      {
       title: "Childrelated budget (per month, up to yr 12)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
@@ -713,7 +642,6 @@ model KSP uses BaseModel
      variable ChildRelatedBudgetTwelveUpToAndInclFifteen
      {
       title: "Childrelated budget (per month, 12 up to and incl yr 15)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
@@ -724,7 +652,6 @@ model KSP uses BaseModel
      variable ChildRelatedBudgetSixteenUpToAndIncSeventeen
      {
       title: "Childrelated budget (per month, 16 up to and incl yr 17)";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
@@ -736,7 +663,6 @@ model KSP uses BaseModel
     variable Q_MAP02SUB11
     {
      title: "Combination Discount";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -744,7 +670,6 @@ model KSP uses BaseModel
      variable CombinationDiscountLowestIncome
      {
       title: "LowestIncome";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: Min(IncomeParent01,IncomeParent02);
@@ -755,7 +680,6 @@ model KSP uses BaseModel
      variable CombinationDiscountTotal
      {
       title: "CombinationDiscountTotal";
-      options_title: locked;
       locked: 1;
       frequency: document;
       formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
@@ -835,7 +759,6 @@ model KSP uses BaseModel
    {
     visible: (Q_ROOT=1);
     title: "Your Personal situation";
-    options_title: locked;
     locked: 1;
     frequency: document;
     displaytype: select;
@@ -845,7 +768,6 @@ model KSP uses BaseModel
     variable Q_MAP06SUB5
     {
      title: "Your Personal Situation";
-     options_title: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -853,7 +775,6 @@ model KSP uses BaseModel
      variable GraphResRek1
      {
       title: "Total Net Costs (-)";
-      options_title: locked;
       locked: 1;
       frequency: column;
       formula: TotalYearlyBalance;
@@ -865,7 +786,6 @@ model KSP uses BaseModel
      variable Q_MAP06SUB5SUB2 refers to TotalYearlyCosts
      {
       title: "Total (yearly) costs";
-      options_title: locked;
       locked: 1;
       frequency: column;
       fixed_decimals: 2;
@@ -875,7 +795,6 @@ model KSP uses BaseModel
       variable Age
       {
        title: "Age";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: (ValueT(T))-1;
@@ -885,7 +804,6 @@ model KSP uses BaseModel
        variable PeriodeInFormulaset
        {
         title: "PeriodeInFormulaset";
-        options_title: locked;
         locked: 1;
         frequency: column;
         formula: ValueT(T);
@@ -897,7 +815,6 @@ model KSP uses BaseModel
       variable Furniture
       {
        title: "Furniture";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: If(ValueT(T)=1,1800,0);
@@ -909,7 +826,6 @@ model KSP uses BaseModel
       variable ActualChildCareCosts
       {
        title: "Childcare costs";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: If((ValueT(T))<=4,1,0);
@@ -921,7 +837,6 @@ model KSP uses BaseModel
       variable ActualDiapers
       {
        title: "Diapers";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
        fixed_decimals: 2;
@@ -932,7 +847,6 @@ model KSP uses BaseModel
       variable ActualFood
       {
        title: "Food";
-       options_title: locked;
        frequency: column;
        formula:If(ChildGender=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
        fixed_decimals: 2;
@@ -943,7 +857,6 @@ model KSP uses BaseModel
       variable ActualClothingCosts
       {
        title: "Clothing";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
        fixed_decimals: 2;
@@ -954,7 +867,6 @@ model KSP uses BaseModel
       variable ActualPersonalCareCosts
       {
        title: "Personal care";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
        fixed_decimals: 2;
@@ -965,7 +877,6 @@ model KSP uses BaseModel
       variable Hairdresser
       {
        title: "Hairdresser";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
        fixed_decimals: 2;
@@ -976,7 +887,6 @@ model KSP uses BaseModel
       variable Inventory
       {
        title: "Inventory";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
        fixed_decimals: 2;
@@ -987,7 +897,6 @@ model KSP uses BaseModel
       variable Allowance
       {
        title: "Allowance";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
        fixed_decimals: 2;
@@ -998,7 +907,6 @@ model KSP uses BaseModel
       variable Contributions
       {
        title: "Contributions";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
        fixed_decimals: 2;
@@ -1009,7 +917,6 @@ model KSP uses BaseModel
       variable Transport
       {
        title: "Transport";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
        fixed_decimals: 2;
@@ -1020,7 +927,6 @@ model KSP uses BaseModel
       variable MobilePhone
       {
        title: "MobilePhone";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
        fixed_decimals: 2;
@@ -1031,7 +937,6 @@ model KSP uses BaseModel
       variable DrivingLicense
       {
        title: "DrivingLicense";
-       options_title: locked;
        frequency: column;
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
        fixed_decimals: 2;
@@ -1042,7 +947,6 @@ model KSP uses BaseModel
       variable CostsForOutOfSchoolCare
       {
        title: "Kosten BSO";
-       options_title: locked;
        frequency: column;
        formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
        fixed_decimals: 2;
@@ -1053,7 +957,6 @@ model KSP uses BaseModel
       variable CostsForPrimaryEducation
       {
        title: "Costs for Primary Education";
-       options_title: locked;
        frequency: column;
        formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
        fixed_decimals: 2;
@@ -1064,7 +967,6 @@ model KSP uses BaseModel
       variable CostsForSecondaryEducation
       {
        title: "Costs for Secondary Education";
-       options_title: locked;
        frequency: column;
        formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
        fixed_decimals: 2;
@@ -1075,7 +977,6 @@ model KSP uses BaseModel
       variable CostsUnspecifiedOverview
       {
        title: "Costs unspecified";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: CostsUnspecified*12;
@@ -1086,9 +987,7 @@ model KSP uses BaseModel
       }
       variable TotalYearlyCosts
       {
-       top_separator: 1;
        title: "Total (yearly) costs";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
@@ -1101,7 +1000,6 @@ model KSP uses BaseModel
      variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
      {
       title: "[b]Child-related Income[/b]";
-      options_title: locked;
       locked: 1;
       frequency: column;
       fixed_decimals: 2;
@@ -1111,7 +1009,6 @@ model KSP uses BaseModel
       variable +ChildBenefits
       {
        title: "Child benefits";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
@@ -1123,7 +1020,6 @@ model KSP uses BaseModel
       variable +ChildCarePremiumOverview
       {
        title: "Childcare premium";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
@@ -1135,7 +1031,6 @@ model KSP uses BaseModel
       variable +ChildcareBudgetOverview
       {
        title: "Childcare budget";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
@@ -1147,7 +1042,6 @@ model KSP uses BaseModel
       variable +CombinationDiscountOverview
       {
        title: "Combination Discount";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: If(Age<12,CombinationDiscountTotal,0);
@@ -1158,9 +1052,7 @@ model KSP uses BaseModel
       }
       variable =TotalYearlyIncome
       {
-       top_separator: 1;
        title: "Total (yearly) Income";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
@@ -1173,7 +1065,6 @@ model KSP uses BaseModel
      variable TotalYearlyBalance
      {
       title: "Total Net Costs (-)";
-      options_title: locked;
       locked: 1;
       frequency: column;
       formula: TotalYearlyCosts-TotalYearlyIncome;
@@ -1183,9 +1074,7 @@ model KSP uses BaseModel
       aggregation: flow;
       variable TotalMonthlyBalanceAverage
       {
-       top_blanklines: 1;
        title: "Total monthly Net Costs, monthly()";
-       options_title: locked;
        locked: 1;
        frequency: column;
        formula: TotalYearlyBalance/12;
@@ -1198,7 +1087,6 @@ model KSP uses BaseModel
      variable ChildCareCosts
      {
       title: "Childcare costs";
-      options_title: locked;
       frequency: column;
       formula: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
       fixed_decimals: 2;
@@ -1211,18 +1099,14 @@ model KSP uses BaseModel
    variable Q_RESULT
    {
     visible: 0;
-    top_blanklines: 1;
     title: "Resultaat";
-    options_title: locked;
     locked: 1;
     frequency: document;
     datatype: string;
     data_options: unscalable;
     variable Q_RESULTSUB1
     {
-     top_blanklines: 1;
      title: "Resultaat";
-     options_title: locked;
      locked: 1;
      frequency: document;
      datatype: string;
