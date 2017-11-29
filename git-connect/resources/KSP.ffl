@@ -862,7 +862,7 @@ model KSP uses BaseModel
      frequency: document;
      datatype: number;
      locked: 1;
-     formula: (18-EducationAgeChild) * 12;
+     formula: (17-EducationAgeChild) * 12;
     }
     variable RentePerJaar
     {
@@ -881,7 +881,7 @@ model KSP uses BaseModel
      datatype: currency;
      displaytype: currency;
      fixed_decimals: 0;
-     formula: MAX(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48)))));
+     formula: OnNA(MAX(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
     }
    }
    variable Q_MAP06
