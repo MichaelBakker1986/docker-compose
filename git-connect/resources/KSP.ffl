@@ -267,8 +267,6 @@ model KSP uses BaseModel
        top_separator: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
      }
      variable TupleSumTest
