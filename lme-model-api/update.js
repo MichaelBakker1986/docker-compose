@@ -34,7 +34,7 @@ function spawnChild(appname, args) {
     promise.then(function() {
         console.info('done');
     }).catch(function(err) {
-        //console.error('ERROR: ', err);
+        //NO-OP
     });
 }
 

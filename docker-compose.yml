@@ -22,7 +22,7 @@ services:
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
                 HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
         build: .
-        image: lme:1.0.28
+        image: lme:1.0.32
         restart: always
         ports:
             - 8080:8080

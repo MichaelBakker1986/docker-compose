@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "proxy.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

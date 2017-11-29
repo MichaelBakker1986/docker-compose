@@ -7,8 +7,7 @@
   "main": "lme-model-app.js",
   "author": "Michael Bakker",
   "scripts": {
-    "test": "node test/TESTMODEL.js",
-    "start": "npm install --no-optional && npm test && node lme-model-app.js"
+    "test": "node test/TESTMODEL.js"
   },
   "dependencies": {
     "angular": "^1.6.6",
