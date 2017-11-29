@@ -20,17 +20,20 @@ services:
         environment:
                 ENV: info
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
+                HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
         build: .
-        image: lme:1.0.25
+        image: lme:1.0.26
         restart: always
         ports:
             - 8080:8080
+            - 8081:8081
             - 8082:8082
             - 8083:8083
             - 8084:8084
             - 8085:8085
         expose:
             - 8080
+            - 8081
             - 8082
             - 8083
             - 8084
