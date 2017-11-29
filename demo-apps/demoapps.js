@@ -9,12 +9,14 @@ app.use(nofavicon());
 app.use(require('cors')());
 app.use(compression())
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
 app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
+app.use('/', expressStaticGzip(__dirname + "/monli/"));
 
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
@@ -46,6 +48,7 @@ app.listen(port, function() {
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/SlimmeOuder/monli.html">Monli Kinderspaarplan</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/SlimmeOuder/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
             /*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*/
             '<br><span>IDE apps: </span>\n' +

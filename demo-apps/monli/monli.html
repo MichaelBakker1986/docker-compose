@@ -2,6 +2,8 @@
 <head>
     <meta charset="utf-8">
     <title>Hoeveel kost een studie voor mijn kind?</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="monli.js"></script>
     <base href="/">
@@ -9,6 +11,9 @@
     <link rel="icon" type="image/x-icon" href="monli.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <link rel="stylesheet" href="monli.css"></link>
 </head>
 <body ng-controller="lmeController">
@@ -17,7 +22,7 @@
         <sui-sidebar-container _ngcontent-c1="" _nghost-c3="" class="pushable">
             <sui-sidebar _ngcontent-c1="" class="ui left fixed vertical menu overlay sidebar">
                 <div _ngcontent-c0="" class="item">
-                    <img _ngcontent-c0="" class="ui tiny image" src="logo-monli.svg">
+                    <img _ngcontent-c0="" class="ui tiny image" src="../angular-demo/logo-monli.svg">
                 </div>
                 <a _ngcontent-c0="" class="item" href="https://www.monli.nl/over-monli">
                     over Monli
@@ -32,7 +37,7 @@
                         <i _ngcontent-c1="" class="sidebar icon margin-0"></i>
                     </a>
                     <div _ngcontent-c0="" class="item">
-                        <img _ngcontent-c0="" class="ui tiny image" src="logo-monli.svg">
+                        <img _ngcontent-c0="" class="ui tiny image" src="../angular-demo/logo-monli.svg">
                     </div>
                     <a _ngcontent-c0="" class="item mobile-hidden" href="https://www.monli.nl/over-monli">
                         over Monli
@@ -46,7 +51,7 @@
                     <app-landing-page _nghost-c5="">
                         <div _ngcontent-c5="" class="ui one column mobile only grid">
                             <div _ngcontent-c5="" class="column">
-                                <app-main-image _ngcontent-c5="" _nghost-c6=""><img _ngcontent-c6="" class="ui fluid image rounded" src="wat_kost_een_studie_header.jpg">
+                                <app-main-image _ngcontent-c5="" _nghost-c6=""><img _ngcontent-c6="" class="ui fluid image rounded" src="../angular-demo/wat_kost_een_studie_header.jpg">
                                     <h1 _ngcontent-c6="" class="ui inverted header">Hoeveel kost een studie voor<br _ngcontent-c6=""> mijn kind?</h1>
                                 </app-main-image>
                             </div>
@@ -87,7 +92,7 @@
                                                 <div _ngcontent-c9="" class="field ng-untouched ng-pristine ng-valid">
                                                     <label _ngcontent-c9="">Leeftijd kind</label>
                                                     <div _ngcontent-c9="" class="ui right labeled fluid input">
-                                                        <input _ngcontent-c9="" ng-model="Age.value" formcontrolname="age" placeholder="0" class="ng-untouched ng-pristine ng-valid">
+                                                        <input _ngcontent-c9="" ng-model="EducationAgeChild.value" formcontrolname="age" placeholder="0" class="ng-untouched ng-pristine ng-valid">
                                                         <div _ngcontent-c9="" class="ui basic label">
                                                             jaar
                                                         </div>
@@ -100,7 +105,7 @@
                                                         <div _ngcontent-c9="" class="ui teal label">
                                                             €
                                                         </div>
-                                                        <input _ngcontent-c9="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
+                                                        <input ng-model="SavedMoney.value" _ngcontent-c9="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +126,7 @@
                                                 <label _ngcontent-c10="" class="sub">Gemiddeld € 409 p/m</label>
                                                 <div _ngcontent-c10="" class="ui right labeled fluid input">
                                                     <label _ngcontent-c10="" class="ui teal label">€</label>
-                                                    <input _ngcontent-c10="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
+                                                    <input ng-model="MonthlyIncomeBijBaan.value" _ngcontent-c10="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
                                                     <div _ngcontent-c10="" class="ui basic label">per maand</div>
                                                 </div>
                                             </div>
@@ -136,7 +141,7 @@
                                                 <label _ngcontent-c10="" class="sub">In 2017 gemiddeld € 559 p/m</label>
                                                 <div _ngcontent-c10="" class="ui right labeled fluid input">
                                                     <label _ngcontent-c10="" class="ui teal label">€</label>
-                                                    <input _ngcontent-c10="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
+                                                    <input ng-model="MonthlyDUOLoan.value" _ngcontent-c10="" currencymask="" placeholder="0" class="ng-untouched ng-pristine ng-valid" style="text-align: right;">
                                                     <div _ngcontent-c10="" class="ui basic label">per maand</div>
                                                 </div>
                                             </div>
@@ -190,7 +195,7 @@
                                                             <div _ngcontent-c11="" class="field">
                                                                 <label _ngcontent-c11="">Spaar dit bedrag om je spaardoel te bereiken:</label>
                                                                 <div _ngcontent-c11="" class="ui basic large label indication-label">
-                                                                    € {{Age.value}}
+                                                                    € {{MonthlySavingGoal.value}}
                                                                 </div>
                                                                 <span _ngcontent-c11="">per maand</span>
                                                             </div>
@@ -243,7 +248,7 @@
                         </div>
                         <div _ngcontent-c5="" class="ui one column tablet only computer only grid text container">
                             <div _ngcontent-c5="" class="column no-top-padding">
-                                <app-main-image _ngcontent-c5="" _nghost-c6=""><img _ngcontent-c6="" class="ui fluid image rounded" src="wat_kost_een_studie_header.jpg">
+                                <app-main-image _ngcontent-c5="" _nghost-c6=""><img _ngcontent-c6="" class="ui fluid image rounded" src="../angular-demo/wat_kost_een_studie_header.jpg">
                                     <h1 _ngcontent-c6="" class="ui inverted header">Hoeveel kost een studie voor<br _ngcontent-c6=""> mijn kind?</h1>
                                 </app-main-image>
                             </div>
@@ -336,7 +341,7 @@
                                                                 <div _ngcontent-c9="" class="field ng-valid ng-dirty ng-touched">
                                                                     <label _ngcontent-c9="">Leeftijd kind</label>
                                                                     <div _ngcontent-c9="" class="ui right labeled fluid input">
-                                                                        <input ng-model="Age.value" _ngcontent-c9="" formcontrolname="age" placeholder="0" class="ng-valid ng-dirty ng-touched">
+                                                                        <input ng-model="EducationAgeChild.value" _ngcontent-c9="" formcontrolname="age" placeholder="0" class="ng-valid ng-dirty ng-touched">
                                                                         <div _ngcontent-c9="" class="ui basic label">
                                                                             jaar
                                                                         </div>
@@ -348,7 +353,7 @@
                                                                         <div _ngcontent-c9="" class="ui teal label">
                                                                             €
                                                                         </div>
-                                                                        <input _ngcontent-c9="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
+                                                                        <input ng-model="SavedMoney.value" _ngcontent-c9="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -367,7 +372,7 @@
                                                                 <label _ngcontent-c10="" class="sub">Gemiddeld € 409 p/m</label>
                                                                 <div _ngcontent-c10="" class="ui right labeled fluid input">
                                                                     <label _ngcontent-c10="" class="ui teal label">€</label>
-                                                                    <input _ngcontent-c10="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
+                                                                    <input ng-model="MonthlyIncomeBijBaan.value" _ngcontent-c10="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
                                                                     <div _ngcontent-c10="" class="ui basic label">per maand</div>
                                                                 </div>
                                                             </div>
@@ -382,7 +387,7 @@
                                                                 <label _ngcontent-c10="" class="sub">In 2017 gemiddeld € 559 p/m</label>
                                                                 <div _ngcontent-c10="" class="ui right labeled fluid input">
                                                                     <label _ngcontent-c10="" class="ui teal label">€</label>
-                                                                    <input _ngcontent-c10="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
+                                                                    <input ng-model="MonthlyDUOLoan.value" _ngcontent-c10="" currencymask="" placeholder="0" class="ng-valid ng-dirty ng-touched" style="text-align: right;">
                                                                     <div _ngcontent-c10="" class="ui basic label">per maand</div>
                                                                 </div>
                                                             </div>
@@ -435,7 +440,7 @@
                                                                             <div _ngcontent-c11="" class="field">
                                                                                 <label _ngcontent-c11="">Spaar dit bedrag om je spaardoel te bereiken:</label>
                                                                                 <div _ngcontent-c11="" class="ui basic large label indication-label">
-                                                                                    € {{Age.value}}
+                                                                                    € {{MonthlySavingGoal.value}}
                                                                                 </div>
                                                                                 <span _ngcontent-c11="">per maand</span>
                                                                             </div>

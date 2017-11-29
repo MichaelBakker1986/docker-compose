@@ -150,6 +150,7 @@ model KSP uses BaseModel
       variable ChildGender
       {
        datatype: number;
+       hint: "Weetje. jongs zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo'n 18 euro per maand.";
        frequency: document;
        inputRequired: 1;
        displaytype: select;

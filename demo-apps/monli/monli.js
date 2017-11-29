@@ -1,6 +1,9 @@
 angular
-    .module('angapp', [])
+    .module('angapp', ["highcharts-ng"])
     .controller('lmeController', function($scope, $http) {
+        $scope.changeChoice = function(variable, value) {
+            variable.value = value.name
+        }
         $http.get('id/DEMO/resources/KSP.js').then(function(data) {
             eval(data.data)
             var LME = LMEMETA.exportWebModel();
@@ -10,5 +13,8 @@ angular
             $scope.name = LME.name
         }).catch(function(err) {
             console.error("failed loading " + err);
+        });
+        $('body').popover({
+            selector: '[data-toggle="popover"]'
         });
     });
