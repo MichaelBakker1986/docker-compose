@@ -12,1282 +12,1275 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   datatype: number;
-   frequency: document;
-   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered) = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
-   data_options: unscalable;
-   displaytype: scorecard;
    title: "Costs of child raising (v1.27)";
-   hint: "This module enables you to gain insight in the costs involved for raising a child";
-   locked: 1;
-   choices: "0:Complete|1:Incomplete";
    options_title: locked;
    options: locked;
+   locked: 1;
+   hint: "This module enables you to gain insight in the costs involved for raising a child";
+   frequency: document;
+   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered) = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
+   displaytype: scorecard;
+   datatype: number;
+   data_options: unscalable;
+   choices: "0:Complete|1:Incomplete";
    variable Q_MAP00
    {
-    datatype: number;
+    visible: 0;
+    top_blanklines: 1;
+    title: "Intro";
+    options_title: locked;
+    options: locked;
+    locked: 1;
     frequency: document;
     formula: 1;
     displaytype: currency;
-    title: "Intro";
-    visible: 0;
-    top_blanklines: 1;
-    locked: 1;
-    options_title: locked;
-    options: locked;
+    datatype: number;
     variable Q_MAP00_INTRO
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Intro";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable Q_MAP00_INTROMEMO
      {
-      datatype: string;
-      frequency: document;
-      formula: "Why do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhy do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
-      data_options: unscalable;
-      displaytype: memo;
-      title: "[b]Intro[/b]";
       top_blanklines: 1;
-      locked: 1;
+      title: "[b]Intro[/b]";
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: "Why do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhy do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
+      displaytype: memo;
+      datatype: string;
+      data_options: unscalable;
      }
     }
    }
    variable Q_MAP01
    {
     valid:[AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered),AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required)];
-    inputRequired:IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: select;
     title: "Basic Information";
-    locked: 1;
-    choices: "0:Complete|1:Incomplete";
     options_title: locked;
-    options: locked;
+    locked: 1;
+    inputRequired:IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    frequency: document;
+    displaytype: select;
+    datatype: number;
+    data_options: unscalable;
+    choices: "0:Complete|1:Incomplete";
     variable Situation
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Situation";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable IncomeSection
      {
-      datatype: number;
-      frequency: document;
-      displaytype: currency;
       title: "[b]Income[/b]";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      displaytype: currency;
+      datatype: number;
      }
      variable IncomeParent01
      {
-      datatype: number;
-      frequency: document;
-      inputRequired: 1;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Gross Income Parent 1";
       options_title: locked;
+      inputRequired: 1;
+      frequency: document;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable IncomeParent02
      {
-      datatype: number;
-      frequency: document;
-      inputRequired: 1;
-      fixed_decimals: 2;
       title: "Gross Income Parent 2";
       options_title: locked;
+      inputRequired: 1;
+      frequency: document;
+      fixed_decimals: 2;
+      datatype: number;
      }
      variable WorkingHoursWeeklyParent01
      {
-      datatype: number;
-      frequency: document;
-      inputRequired: 1;
-      fixed_decimals: 1;
       title: "Working hours parent 1";
       options_title: locked;
+      inputRequired: 1;
+      frequency: document;
+      fixed_decimals: 1;
+      datatype: number;
      }
      variable WorkingHoursWeeklyParent02
      {
-      datatype: number;
-      frequency: document;
-      inputRequired: 1;
-      fixed_decimals: 1;
       title: "Working hours parent 2";
       options_title: locked;
+      inputRequired: 1;
+      frequency: document;
+      fixed_decimals: 1;
+      datatype: number;
      }
      variable WorkingHoursWeeklyOfLeastWorkingParent
      {
-      datatype: number;
+      title: "Working hours (weekly) of least working Parent";
+      options_title: locked;
+      inputRequired: 1;
+      hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
       frequency: document;
       formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
-      inputRequired: 1;
       fixed_decimals: 1;
-      title: "Working hours (weekly) of least working Parent";
-      hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
-      options_title: locked;
+      datatype: number;
      }
      variable Child
      {
-      datatype: number;
+      title: "Child";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       displaytype: currency;
-      title: "Child";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
       variable ChildGender
       {
-       datatype: number;
+       title: "Gender";
+       options_title: locked;
+       inputRequired: 1;
        hint: "Weetje. jongs zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo'n 18 euro per maand.";
        frequency: document;
-       inputRequired: 1;
-       displaytype: select;
        fixed_decimals: 0;
-       title: "Gender";
+       displaytype: select;
+       datatype: number;
        choices: "0:Boy|1:Girl";
-       options_title: locked;
       }
       variable NrOfDaysChildcareWeek
       {
-       datatype: number;
-       formula: NA;
-       frequency: document;
-       inputRequired: 1;
-       fixed_decimals: 1;
        title: "Nr. of days childcare per week";
        options_title: locked;
+       inputRequired: 1;
+       frequency: document;
+       formula: NA;
+       fixed_decimals: 1;
+       datatype: number;
       }
       variable NrOfDaysChildcareMonth
       {
-       datatype: number;
+       title: "Nr. of hours childcare per month";
+       options_title: locked;
+       locked: 1;
        frequency: document;
        formula: OnER(10.5*NrOfDaysChildcareWeek[1]*4,NA);
-       data_options: unscalable;
        fixed_decimals: 1;
-       title: "Nr. of hours childcare per month";
-       locked: 1;
-       options_title: locked;
+       datatype: number;
+       data_options: unscalable;
       }
       variable NrOfDaysOutOfSchoolCareWeek
       {
-       datatype: number;
-       frequency: document;
-       inputRequired: 1;
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Nr. of days out-of-school care per week";
        options_title: locked;
+       inputRequired: 1;
+       frequency: document;
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable NrOfDaysOutOfSchoolCareMonth
       {
-       datatype: number;
-       frequency: document;
-       formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Nr. of hours out-of-school care per month";
-       locked: 1;
        options_title: locked;
        options: locked;
+       locked: 1;
+       frequency: document;
+       formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable HourlyFeeChildCare
       {
-       datatype: number;
-       frequency: document;
-       formula: 6.8;
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Hourly fee childcare";
        options_title: locked;
+       frequency: document;
+       formula: 6.8;
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable HourlyFeeOutOfSchoolCare
       {
-       datatype: number;
-       frequency: document;
-       formula: 6.8;
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Hourly fee out-of-school care";
        options_title: locked;
+       frequency: document;
+       formula: 6.8;
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable ParentalContributionPrimaryEducation
       {
-       datatype: number;
-       frequency: document;
-       formula: 80;
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Parental contribution primary education";
        options_title: locked;
+       frequency: document;
+       formula: 80;
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable CostsUnspecified
       {
-       datatype: number;
-       frequency: document;
-       formula: 180;
-       data_options: unscalable;
-       fixed_decimals: 1;
        title: "Costs unspecified per month";
        options_title: locked;
+       frequency: document;
+       formula: 180;
+       fixed_decimals: 1;
+       datatype: number;
+       data_options: unscalable;
       }
       variable SecondaryEducationProfile
       {
-       datatype: number;
-       formula: 1;
-       frequency: document;
-       inputRequired: 1;
-       data_options: unscalable;
-       displaytype: select;
-       fixed_decimals: 1;
        title: "secondary education (profile)";
-       choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
        options_title: locked;
+       inputRequired: 1;
+       frequency: document;
+       formula: 1;
+       fixed_decimals: 1;
+       displaytype: select;
+       datatype: number;
+       data_options: unscalable;
+       choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
       }
       variable TotalyYearlyCostsChild
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
-       data_options: unscalable;
-       fixed_decimals: 2;
-       title: "Total (yearly) costs regarding child";
        top_separator: 1;
-       locked: 1;
+       title: "Total (yearly) costs regarding child";
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
      }
      variable TupleSumTest
      {
-      datatype: number;
       frequency: document;
       formula: NrOfDaysChildcareWeek;
+      datatype: number;
      }
      variable Memo1
      {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      displaytype: memo;
       title: "Toelichting";
       options_title: locked;
+      frequency: document;
+      displaytype: memo;
+      datatype: string;
+      data_options: unscalable;
      }
     }
    }
    variable Q_MAP02
    {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: select;
     title: "Calculations Care";
-    locked: 1;
-    choices: "0:Complete|1:Incomplete";
     options_title: locked;
     options: locked;
+    locked: 1;
+    frequency: document;
+    displaytype: select;
+    datatype: number;
+    data_options: unscalable;
+    choices: "0:Complete|1:Incomplete";
     variable FiscalParameters
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Fiscal parameters";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable ChildcareContribution
      {
-      datatype: none;
       title: "Childcare Contribution";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      datatype: none;
      }
      variable MaximumNrOfHoursOfChildcareAllowancePerMonth
      {
-      datatype: number;
-      frequency: document;
-      formula: 230;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Maximum nr of hours of childcare allowance per month";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 230;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MultiplierDaycare
      {
-      datatype: number;
-      frequency: document;
-      formula: 1.4;
-      data_options: unscalable;
-      displaytype: percentage;
-      fixed_decimals: 1;
       title: "Multiplier daycare";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 1.4;
+      fixed_decimals: 1;
+      displaytype: percentage;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MultiplierOutOfSchoolCare
      {
-      datatype: number;
-      frequency: document;
-      formula: 0.7;
-      data_options: unscalable;
-      displaytype: percentage;
-      fixed_decimals: 1;
       title: "Multiplier out-of-school care";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 0.7;
+      fixed_decimals: 1;
+      displaytype: percentage;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxHourlyRateChildcare
      {
-      datatype: number;
-      frequency: document;
-      formula: 7.18;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. hourly rate childcare";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 7.18;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxHourlyRateOutOfSchoolCare
      {
-      datatype: number;
-      frequency: document;
-      formula: 6.69;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. hourly rate out-of-school care";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 6.69;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxHourlyRateGuestParent
      {
-      datatype: number;
-      frequency: document;
-      formula: 5.75;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. hourly rate guest parent";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 5.75;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxHourlyRateGuestParentOutOfSchoolCare
      {
-      datatype: number;
-      frequency: document;
-      formula: 5.75;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. hourly rate guest parent out-of-school care";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 5.75;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable CombinationDiscount
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Combination Discount";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable LowerBoundaryIncome
      {
-      datatype: number;
-      frequency: document;
-      formula: 4895;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Lower boundary Income";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 4895;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable Base
      {
-      datatype: number;
-      frequency: document;
-      formula: 1043;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Base";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 1043;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable CombinationDiscountPercentage
      {
-      datatype: number;
-      frequency: document;
-      formula: 0.06159;
-      data_options: unscalable;
-      displaytype: percentage;
-      fixed_decimals: 3;
       title: "Combination Discount Percentage";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 0.06159;
+      fixed_decimals: 3;
+      displaytype: percentage;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaximumDiscount
      {
-      datatype: number;
-      frequency: document;
-      formula: 2778;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Maximum Discount";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 2778;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable ChildRelatedBudget
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Child-related budget";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable MaxBudgetOneToTwelveYears
      {
-      datatype: number;
+      title: "Max Budget (1 - 12 yrs)";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       formula: 1142;
-      data_options: unscalable;
       fixed_decimals: 1;
-      title: "Max Budget (1 - 12 yrs)";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxBudgetTwelveToFifteenYears
      {
-      datatype: number;
-      frequency: document;
-      formula: 1376;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Max Budget (12 - 15 yrs)";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 1376;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxBudgetSixteenToSeventeenYears
      {
-      datatype: number;
-      frequency: document;
-      formula: 1559;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Max Budget (16 - 17 yrs)";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 1559;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable UpperBoundaryIncome
      {
-      datatype: number;
-      frequency: document;
-      formula: 20109;
-      data_options: unscalable;
-      fixed_decimals: 1;
       title: "Upper boundary Income";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 20109;
+      fixed_decimals: 1;
+      datatype: number;
+      data_options: unscalable;
      }
      variable DecreasingPercentage
      {
-      datatype: number;
-      frequency: document;
-      formula: 0.0675;
-      data_options: unscalable;
-      displaytype: percentage;
-      fixed_decimals: 2;
       title: "Decreasing Percentage";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: 0.0675;
+      fixed_decimals: 2;
+      displaytype: percentage;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable Fees
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Fees";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable MaxNrCompensatedHoursChildcare
      {
-      datatype: number;
+      title: "Max. nr of compensated hours childcare ";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
       displaytype: currency;
-      title: "Max. nr of compensated hours childcare ";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
      }
      variable MaxNrCompensatedHoursOutofSchoolCare
      {
-      datatype: number;
+      title: "Max. nr of compensated hours out-of-school care ";
+      options_title: locked;
+      options: locked;
+      locked: 1;
       frequency: document;
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
       displaytype: currency;
-      title: "Max. nr of compensated hours out-of-school care ";
-      locked: 1;
-      options_title: locked;
-      options: locked;
+      datatype: number;
      }
      variable FeesSub3
      {
-      datatype: none;
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      datatype: none;
      }
      variable NrCompensatedHoursChildcare
      {
-      datatype: number;
+      title: "Nr. of compensated hours childcare ";
+      options_title: locked;
+      options: locked;
+      locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
       displaytype: currency;
-      title: "Nr. of compensated hours childcare ";
-      locked: 1;
-      options_title: locked;
-      options: locked;
+      datatype: number;
      }
      variable NrCompensatedHoursOutofSchoolCare
      {
-      datatype: number;
+      title: "Nr. of compensated hours out-of-school care ";
+      options_title: locked;
+      options: locked;
+      locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
       displaytype: currency;
-      title: "Nr. of compensated hours out-of-school care ";
-      locked: 1;
-      options_title: locked;
-      options: locked;
+      datatype: number;
      }
      variable FeesSub6
      {
-      datatype: none;
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      datatype: none;
      }
      variable MaxCompensatedAmountChildcare
      {
-      datatype: number;
-      frequency: document;
-      formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. compensated amount childcare";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable MaxCompensatedAmountOutofSchoolCare
      {
-      datatype: number;
-      frequency: document;
-      formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Max. compensated amount out-of-school care ";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable FeesSub9
      {
-      datatype: none;
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      datatype: none;
      }
      variable TotalIncome
      {
-      datatype: number;
+      title: "Total Income";
+      options_title: locked;
+      options: locked;
+      locked: 1;
       frequency: document;
       formula: OnER(IncomeParent01+IncomeParent02,NA);
       displaytype: currency;
-      title: "Total Income";
-      locked: 1;
-      options_title: locked;
-      options: locked;
+      datatype: number;
      }
      variable PercentagePremiumFirstChild
      {
-      datatype: number;
-      frequency: document;
-      formula: MatrixLookup(null,"Opvangtoeslaginkomenstabel",TotalIncome,1);
-      data_options: unscalable;
-      displaytype: percentage;
-      fixed_decimals: 2;
       title: "Percentage premium first child ";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: MatrixLookup(null,"Opvangtoeslaginkomenstabel",TotalIncome,1);
+      fixed_decimals: 2;
+      displaytype: percentage;
+      datatype: number;
+      data_options: unscalable;
      }
      variable FeesSub12
      {
-      datatype: none;
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      datatype: none;
      }
      variable PremiumForChildcare
      {
-      datatype: number;
-      frequency: document;
-      formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Premium for childcare";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable PremiumForOutofSchoolCare
      {
-      datatype: number;
-      frequency: document;
-      formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Premium for out-of-school care";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable CostsSecondaryEducation
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Costs (Secondary Education)";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable CostsYearOneFour
      {
-      datatype: number;
+      title: "Costs year 1 - 4";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       formula: Case(SecondaryEducationProfile,[0: 576 | 1: 906 | 2: 535 | 3: 535]);
-      data_options: unscalable;
       fixed_decimals: 2;
-      title: "Costs year 1 - 4";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
+      data_options: unscalable;
      }
      variable CostsYearFiveSixSeven
      {
-      datatype: number;
-      frequency: document;
-      formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Costs year 5, 6, 7";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable Q_MAP02SUB10
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Budget";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable Q_MAP02SUB10SUB1 refers to TotalIncome
      {
-      datatype: number;
+      title: "Income";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       displaytype: currency;
-      title: "Income";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
      }
      variable ChildRelatedBudgetDecrease
      {
-      datatype: number;
+      title: "Decrease";
+      options_title: locked;
+      options: locked;
+      locked: 1;
       frequency: document;
       formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
       displaytype: currency;
-      title: "Decrease";
-      locked: 1;
-      options_title: locked;
-      options: locked;
+      datatype: number;
      }
      variable ChildRelatedBudgetUpToTwelve
      {
-      datatype: number;
-      frequency: document;
-      formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Childrelated budget (per month, up to yr 12)";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable ChildRelatedBudgetTwelveUpToAndInclFifteen
      {
-      datatype: number;
-      frequency: document;
-      formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Childrelated budget (per month, 12 up to and incl yr 15)";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
      variable ChildRelatedBudgetSixteenUpToAndIncSeventeen
      {
-      datatype: number;
-      frequency: document;
-      formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Childrelated budget (per month, 16 up to and incl yr 17)";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
     }
     variable Q_MAP02SUB11
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Combination Discount";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable CombinationDiscountLowestIncome
      {
-      datatype: number;
+      title: "LowestIncome";
+      options_title: locked;
+      locked: 1;
       frequency: document;
       formula: Min(IncomeParent01,IncomeParent02);
-      data_options: unscalable;
       fixed_decimals: 2;
-      title: "LowestIncome";
-      locked: 1;
-      options_title: locked;
+      datatype: number;
+      data_options: unscalable;
      }
      variable CombinationDiscountTotal
      {
-      datatype: number;
-      frequency: document;
-      formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "CombinationDiscountTotal";
-      locked: 1;
       options_title: locked;
       options: locked;
+      locked: 1;
+      frequency: document;
+      formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
      }
     }
    }
    variable Q_MAP_STUDIEKOSTEN
    {
-    frequency: document;
-    displaytype: string;
     title: "Hoeveel kost een studie voor mijn kind?";
     hint: "Studiekosten";
+    frequency: document;
+    displaytype: string;
     variable EducationAgeChild
     {
      title: "Leeftijd kind";
      frequency: document;
-     datatype: number;
      formula: 17;
+     datatype: number;
     }
     variable SavedMoney
     {
-     frequency: document;
      title: "Al gespaard voor kind";
-     datatype: currency;
-     displaytype: currency;
+     frequency: document;
      formula: 100;
+     displaytype: currency;
+     datatype: currency;
     }
     variable MonthlyIncomeBijBaan
     {
-     frequency: document;
      title: "Bijbaantje tijdens studie. Gemiddeld € 409 p/m";
-     datatype: number;
-     displaytype: currency;
+     frequency: document;
      formula: 409;
+     displaytype: currency;
+     datatype: number;
     }
     variable MonthlyDUOLoan
     {
      title:"Geld lenen bij DUO";
      hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
      frequency: document;
-     datatype: currency;
-     displaytype: currency;
      formula :559;
+     displaytype: currency;
+     datatype: currency;
     }
     variable AantalMaandenTeSparen
     {
      title: "Aantal maanden in tot einde opleiding";
-     frequency: document;
-     datatype: number;
      locked: 1;
+     frequency: document;
      formula: (18-EducationAgeChild) * 12;
+     datatype: number;
     }
     variable RentePerJaar
     {
      title: "Jaarlijkse rente";
-     frequency: document;
-     datatype: currency;
      locked: 1;
+     frequency: document;
      formula: RENTE_PER_JAAR();
+     datatype: currency;
     }
     variable MonthlySavingGoal
     {
-     frequency: document;
      title: "Spaar dit bedrag om je spaardoel te bereiken:";
-     hint: "per maand";
      locked: 1;
-     datatype: currency;
-     displaytype: currency;
-     fixed_decimals: 0;
+     hint: "per maand";
+     frequency: document;
      formula: OnNA(MAX(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
+     fixed_decimals: 0;
+     displaytype: currency;
+     datatype: currency;
     }
    }
    variable Q_MAP06
    {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Your Personal situation";
-    locked: 1;
     visible: (Q_ROOT=1);
-    choices: "0:Complete|1:Incomplete";
+    title: "Your Personal situation";
     options_title: locked;
     options: locked;
+    locked: 1;
+    frequency: document;
+    displaytype: select;
+    datatype: number;
+    data_options: unscalable;
+    choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
     {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
      title: "Your Personal Situation";
-     locked: 1;
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     datatype: number;
      variable GraphResRek1
      {
-      datatype: number;
-      frequency: column;
-      aggregation: balance;
-      formula: TotalYearlyBalance;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Total Net Costs (-)";
-      locked: 1;
       options_title: locked;
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyBalance;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
+      aggregation: balance;
      }
      variable Q_MAP06SUB5SUB2 refers to TotalYearlyCosts
      {
-      datatype: number;
-      frequency: column;
-      aggregation: flow;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Total (yearly) costs";
-      locked: 1;
       options_title: locked;
-      options_notrend: locked;
-      options_trend: locked;
+      locked: 1;
+      frequency: column;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
+      aggregation: flow;
       variable Age
       {
-       datatype: number;
+       title: "Age";
+       options_title: locked;
+       locked: 1;
        frequency: column;
-       aggregation: flow;
        formula: (ValueT(T))-1;
        fixed_decimals: 0;
-       title: "Age";
-       locked: 1;
-       options_title: locked;
+       datatype: number;
+       aggregation: flow;
        variable PeriodeInFormulaset
        {
-        datatype: number;
+        title: "PeriodeInFormulaset";
+        options_title: locked;
+        locked: 1;
         frequency: column;
-        aggregation: balance;
         formula: ValueT(T);
         fixed_decimals: 0;
-        title: "PeriodeInFormulaset";
-        locked: 1;
-        options_title: locked;
+        datatype: number;
+        aggregation: balance;
        }
       }
       variable Furniture
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If(ValueT(T)=1,1800,0);
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Furniture";
-       locked: 1;
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: If(ValueT(T)=1,1800,0);
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable ActualChildCareCosts
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If((ValueT(T))<=4,1,0);
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Childcare costs";
-       locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
+       locked: 1;
+       frequency: column;
+       formula: If((ValueT(T))<=4,1,0);
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable ActualDiapers
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Diapers";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable ActualFood
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula:If(ChildGender=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Food";
        options_title: locked;
+       frequency: column;
+       formula:If(ChildGender=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable ActualClothingCosts
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Clothing";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable ActualPersonalCareCosts
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Personal care";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable Hairdresser
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Hairdresser";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable Inventory
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Inventory";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable Allowance
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Allowance";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable Contributions
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Contributions";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable Transport
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Transport";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable MobilePhone
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "MobilePhone";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable DrivingLicense
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "DrivingLicense";
        options_title: locked;
+       frequency: column;
+       formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable CostsForOutOfSchoolCare
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Kosten BSO";
        options_title: locked;
+       frequency: column;
+       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable CostsForPrimaryEducation
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Costs for Primary Education";
        options_title: locked;
+       frequency: column;
+       formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable CostsForSecondaryEducation
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Costs for Secondary Education";
        options_title: locked;
+       frequency: column;
+       formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable CostsUnspecifiedOverview
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: CostsUnspecified*12;
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Costs unspecified";
-       locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
+       locked: 1;
+       frequency: column;
+       formula: CostsUnspecified*12;
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable TotalYearlyCosts
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
-       data_options: unscalable;
-       fixed_decimals: 2;
-       title: "Total (yearly) costs";
        top_separator: 1;
-       locked: 1;
+       title: "Total (yearly) costs";
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
      }
      variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
      {
-      datatype: number;
-      frequency: column;
-      aggregation: flow;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "[b]Child-related Income[/b]";
-      locked: 1;
       options_title: locked;
+      locked: 1;
+      frequency: column;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
+      aggregation: flow;
       variable +ChildBenefits
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Child benefits";
-       locked: 1;
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable +ChildCarePremiumOverview
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Childcare premium";
-       locked: 1;
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable +ChildcareBudgetOverview
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Childcare budget";
-       locked: 1;
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable +CombinationDiscountOverview
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: If(Age<12,CombinationDiscountTotal,0);
-       data_options: unscalable;
-       fixed_decimals: 2;
        title: "Combination Discount";
-       locked: 1;
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: If(Age<12,CombinationDiscountTotal,0);
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
       variable =TotalYearlyIncome
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
-       data_options: unscalable;
-       fixed_decimals: 2;
-       title: "Total (yearly) Income";
        top_separator: 1;
-       locked: 1;
+       title: "Total (yearly) Income";
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
      }
      variable TotalYearlyBalance
      {
-      datatype: number;
-      frequency: column;
-      aggregation: flow;
-      formula: TotalYearlyCosts-TotalYearlyIncome;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Total Net Costs (-)";
-      locked: 1;
       options_title: locked;
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyCosts-TotalYearlyIncome;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
+      aggregation: flow;
       variable TotalMonthlyBalanceAverage
       {
-       datatype: number;
-       frequency: column;
-       aggregation: flow;
-       formula: TotalYearlyBalance/12;
-       data_options: unscalable;
-       fixed_decimals: 2;
-       title: "Total monthly Net Costs, monthly()";
        top_blanklines: 1;
-       locked: 1;
+       title: "Total monthly Net Costs, monthly()";
        options_title: locked;
+       locked: 1;
+       frequency: column;
+       formula: TotalYearlyBalance/12;
+       fixed_decimals: 2;
+       datatype: number;
+       data_options: unscalable;
+       aggregation: flow;
       }
      }
      variable ChildCareCosts
      {
-      datatype: number;
-      frequency: column;
-      aggregation: balance;
-      formula: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
-      data_options: unscalable;
-      fixed_decimals: 2;
       title: "Childcare costs";
       options_title: locked;
+      frequency: column;
+      formula: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
+      fixed_decimals: 2;
+      datatype: number;
+      data_options: unscalable;
+      aggregation: balance;
      }
     }
    }
    variable Q_RESULT
    {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Resultaat";
-    top_blanklines: 1;
-    locked: 1;
     visible: 0;
+    top_blanklines: 1;
+    title: "Resultaat";
     options_title: locked;
     options: locked;
+    locked: 1;
+    frequency: document;
+    datatype: string;
+    data_options: unscalable;
     variable Q_RESULTSUB1
     {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Resultaat";
      top_blanklines: 1;
-     locked: 1;
+     title: "Resultaat";
      options_title: locked;
      options: locked;
+     locked: 1;
+     frequency: document;
+     datatype: string;
+     data_options: unscalable;
     }
    }
   }
