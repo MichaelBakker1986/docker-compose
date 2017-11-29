@@ -47,7 +47,7 @@ app.listen(port, function() {
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
-            '<a href="http://' + domain + '/id/SlimmeOuder/monli.html">Monli Kinderspaarplan</a><span> | </span>\n' +
+            '<a href="http://' + domain + '/id/SlimmeOuder/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/SlimmeOuder/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
             '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
             /*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*/

@@ -93,6 +93,41 @@
                     <div class="two ui buttons">
                         <button ng-click="changeChoice(ChildGender,sex)" class="ui button {{ChildGender.value == sex.name ? 'active' : ''}}" ng-repeat="sex in ChildGender.choices">{{sex.value}}</button>
                     </div>
+                    <div class="field">
+                        <div class="chart-responsive">
+                            <highchart config="{
+                    chart: {
+                     type: 'column'
+                    },
+                    title: false,
+                    tooltip: {
+                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    credits:false,
+                    xAxis: {
+                        categories: ['a','b']
+                    },
+                    series: [{
+                        name : 'Quantity',
+                        data : [{name:'a',y:1},{name:'b',y:3}]
+                    }]
+                }"></highchart>
+                        </div>
+                    </div>
                 </div>
                 <div class="column">
                 </div>
