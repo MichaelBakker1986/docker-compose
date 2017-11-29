@@ -14,7 +14,6 @@ model KSP uses BaseModel
   {
    title: "Costs of child raising (v1.27)";
    options_title: locked;
-   options: locked;
    locked: 1;
    hint: "This module enables you to gain insight in the costs involved for raising a child";
    frequency: document;
@@ -29,7 +28,6 @@ model KSP uses BaseModel
     top_blanklines: 1;
     title: "Intro";
     options_title: locked;
-    options: locked;
     locked: 1;
     frequency: document;
     formula: 1;
@@ -39,7 +37,6 @@ model KSP uses BaseModel
     {
      title: "Intro";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -49,7 +46,6 @@ model KSP uses BaseModel
       top_blanklines: 1;
       title: "[b]Intro[/b]";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: "Why do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhy do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
@@ -75,7 +71,6 @@ model KSP uses BaseModel
     {
      title: "Situation";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -84,7 +79,6 @@ model KSP uses BaseModel
      {
       title: "[b]Income[/b]";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -193,7 +187,6 @@ model KSP uses BaseModel
       {
        title: "Nr. of hours out-of-school care per month";
        options_title: locked;
-       options: locked;
        locked: 1;
        frequency: document;
        formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
@@ -289,7 +282,6 @@ model KSP uses BaseModel
    {
     title: "Calculations Care";
     options_title: locked;
-    options: locked;
     locked: 1;
     frequency: document;
     displaytype: select;
@@ -300,7 +292,6 @@ model KSP uses BaseModel
     {
      title: "Fiscal parameters";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -309,7 +300,6 @@ model KSP uses BaseModel
      {
       title: "Childcare Contribution";
       options_title: locked;
-      options: locked;
       locked: 1;
       datatype: none;
      }
@@ -317,7 +307,6 @@ model KSP uses BaseModel
      {
       title: "Maximum nr of hours of childcare allowance per month";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 230;
@@ -329,7 +318,6 @@ model KSP uses BaseModel
      {
       title: "Multiplier daycare";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 1.4;
@@ -342,7 +330,6 @@ model KSP uses BaseModel
      {
       title: "Multiplier out-of-school care";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 0.7;
@@ -355,7 +342,6 @@ model KSP uses BaseModel
      {
       title: "Max. hourly rate childcare";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 7.18;
@@ -367,7 +353,6 @@ model KSP uses BaseModel
      {
       title: "Max. hourly rate out-of-school care";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 6.69;
@@ -379,7 +364,6 @@ model KSP uses BaseModel
      {
       title: "Max. hourly rate guest parent";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 5.75;
@@ -391,7 +375,6 @@ model KSP uses BaseModel
      {
       title: "Max. hourly rate guest parent out-of-school care";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 5.75;
@@ -404,7 +387,6 @@ model KSP uses BaseModel
     {
      title: "Combination Discount";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -413,7 +395,6 @@ model KSP uses BaseModel
      {
       title: "Lower boundary Income";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 4895;
@@ -425,7 +406,6 @@ model KSP uses BaseModel
      {
       title: "Base";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 1043;
@@ -437,7 +417,6 @@ model KSP uses BaseModel
      {
       title: "Combination Discount Percentage";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 0.06159;
@@ -450,7 +429,6 @@ model KSP uses BaseModel
      {
       title: "Maximum Discount";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 2778;
@@ -463,7 +441,6 @@ model KSP uses BaseModel
     {
      title: "Child-related budget";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -483,7 +460,6 @@ model KSP uses BaseModel
      {
       title: "Max Budget (12 - 15 yrs)";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 1376;
@@ -495,7 +471,6 @@ model KSP uses BaseModel
      {
       title: "Max Budget (16 - 17 yrs)";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 1559;
@@ -507,7 +482,6 @@ model KSP uses BaseModel
      {
       title: "Upper boundary Income";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 20109;
@@ -519,7 +493,6 @@ model KSP uses BaseModel
      {
       title: "Decreasing Percentage";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: 0.0675;
@@ -533,7 +506,6 @@ model KSP uses BaseModel
     {
      title: "Fees";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -552,7 +524,6 @@ model KSP uses BaseModel
      {
       title: "Max. nr of compensated hours out-of-school care ";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
@@ -562,7 +533,6 @@ model KSP uses BaseModel
      variable FeesSub3
      {
       options_title: locked;
-      options: locked;
       locked: 1;
       datatype: none;
      }
@@ -570,7 +540,6 @@ model KSP uses BaseModel
      {
       title: "Nr. of compensated hours childcare ";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
@@ -581,7 +550,6 @@ model KSP uses BaseModel
      {
       title: "Nr. of compensated hours out-of-school care ";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(NrOfDaysOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
@@ -591,7 +559,6 @@ model KSP uses BaseModel
      variable FeesSub6
      {
       options_title: locked;
-      options: locked;
       locked: 1;
       datatype: none;
      }
@@ -599,7 +566,6 @@ model KSP uses BaseModel
      {
       title: "Max. compensated amount childcare";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
@@ -611,7 +577,6 @@ model KSP uses BaseModel
      {
       title: "Max. compensated amount out-of-school care ";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
@@ -622,7 +587,6 @@ model KSP uses BaseModel
      variable FeesSub9
      {
       options_title: locked;
-      options: locked;
       locked: 1;
       datatype: none;
      }
@@ -630,7 +594,6 @@ model KSP uses BaseModel
      {
       title: "Total Income";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: OnER(IncomeParent01+IncomeParent02,NA);
@@ -641,7 +604,6 @@ model KSP uses BaseModel
      {
       title: "Percentage premium first child ";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: MatrixLookup(null,"Opvangtoeslaginkomenstabel",TotalIncome,1);
@@ -653,7 +615,6 @@ model KSP uses BaseModel
      variable FeesSub12
      {
       options_title: locked;
-      options: locked;
       locked: 1;
       datatype: none;
      }
@@ -661,7 +622,6 @@ model KSP uses BaseModel
      {
       title: "Premium for childcare";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
@@ -673,7 +633,6 @@ model KSP uses BaseModel
      {
       title: "Premium for out-of-school care";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
@@ -686,7 +645,6 @@ model KSP uses BaseModel
     {
      title: "Costs (Secondary Education)";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -706,7 +664,6 @@ model KSP uses BaseModel
      {
       title: "Costs year 5, 6, 7";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
@@ -719,7 +676,6 @@ model KSP uses BaseModel
     {
      title: "Budget";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -737,7 +693,6 @@ model KSP uses BaseModel
      {
       title: "Decrease";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
@@ -748,7 +703,6 @@ model KSP uses BaseModel
      {
       title: "Childrelated budget (per month, up to yr 12)";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
@@ -760,7 +714,6 @@ model KSP uses BaseModel
      {
       title: "Childrelated budget (per month, 12 up to and incl yr 15)";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
@@ -772,7 +725,6 @@ model KSP uses BaseModel
      {
       title: "Childrelated budget (per month, 16 up to and incl yr 17)";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
@@ -785,7 +737,6 @@ model KSP uses BaseModel
     {
      title: "Combination Discount";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -805,7 +756,6 @@ model KSP uses BaseModel
      {
       title: "CombinationDiscountTotal";
       options_title: locked;
-      options: locked;
       locked: 1;
       frequency: document;
       formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
@@ -886,7 +836,6 @@ model KSP uses BaseModel
     visible: (Q_ROOT=1);
     title: "Your Personal situation";
     options_title: locked;
-    options: locked;
     locked: 1;
     frequency: document;
     displaytype: select;
@@ -897,7 +846,6 @@ model KSP uses BaseModel
     {
      title: "Your Personal Situation";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -1266,7 +1214,6 @@ model KSP uses BaseModel
     top_blanklines: 1;
     title: "Resultaat";
     options_title: locked;
-    options: locked;
     locked: 1;
     frequency: document;
     datatype: string;
@@ -1276,7 +1223,6 @@ model KSP uses BaseModel
      top_blanklines: 1;
      title: "Resultaat";
      options_title: locked;
-     options: locked;
      locked: 1;
      frequency: document;
      datatype: string;
