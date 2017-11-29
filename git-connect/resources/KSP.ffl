@@ -19,7 +19,6 @@ model KSP uses BaseModel
    formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered) = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
    displaytype: scorecard;
    datatype: number;
-   data_options: unscalable;
    choices: "0:Complete|1:Incomplete";
    variable Q_MAP00
    {
@@ -45,7 +44,6 @@ model KSP uses BaseModel
       formula: "Why do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhy do we use it?\r\n\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
       displaytype: memo;
       datatype: string;
-      data_options: unscalable;
      }
     }
    }
@@ -58,7 +56,6 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    data_options: unscalable;
     choices: "0:Complete|1:Incomplete";
     variable Situation
     {
@@ -82,7 +79,6 @@ model KSP uses BaseModel
       frequency: document;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable IncomeParent02
      {
@@ -153,7 +149,6 @@ model KSP uses BaseModel
        formula: OnER(10.5*NrOfDaysChildcareWeek[1]*4,NA);
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable NrOfDaysOutOfSchoolCareWeek
       {
@@ -162,7 +157,6 @@ model KSP uses BaseModel
        frequency: document;
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable NrOfDaysOutOfSchoolCareMonth
       {
@@ -172,7 +166,6 @@ model KSP uses BaseModel
        formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable HourlyFeeChildCare
       {
@@ -181,7 +174,6 @@ model KSP uses BaseModel
        formula: 6.8;
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable HourlyFeeOutOfSchoolCare
       {
@@ -190,7 +182,6 @@ model KSP uses BaseModel
        formula: 6.8;
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable ParentalContributionPrimaryEducation
       {
@@ -199,7 +190,6 @@ model KSP uses BaseModel
        formula: 80;
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable CostsUnspecified
       {
@@ -208,7 +198,6 @@ model KSP uses BaseModel
        formula: 180;
        fixed_decimals: 1;
        datatype: number;
-       data_options: unscalable;
       }
       variable SecondaryEducationProfile
       {
@@ -219,7 +208,6 @@ model KSP uses BaseModel
        fixed_decimals: 1;
        displaytype: select;
        datatype: number;
-       data_options: unscalable;
        choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
       }
       variable TotalyYearlyCostsChild
@@ -230,7 +218,6 @@ model KSP uses BaseModel
        formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
      }
@@ -246,7 +233,6 @@ model KSP uses BaseModel
       frequency: document;
       displaytype: memo;
       datatype: string;
-      data_options: unscalable;
      }
     }
    }
@@ -257,7 +243,6 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    data_options: unscalable;
     choices: "0:Complete|1:Incomplete";
     variable FiscalParameters
     {
@@ -280,7 +265,6 @@ model KSP uses BaseModel
       formula: 230;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable MultiplierDaycare
      {
@@ -291,7 +275,6 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       displaytype: percentage;
       datatype: number;
-      data_options: unscalable;
      }
      variable MultiplierOutOfSchoolCare
      {
@@ -302,7 +285,6 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       displaytype: percentage;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxHourlyRateChildcare
      {
@@ -312,7 +294,6 @@ model KSP uses BaseModel
       formula: 7.18;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxHourlyRateOutOfSchoolCare
      {
@@ -322,7 +303,6 @@ model KSP uses BaseModel
       formula: 6.69;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxHourlyRateGuestParent
      {
@@ -332,7 +312,6 @@ model KSP uses BaseModel
       formula: 5.75;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxHourlyRateGuestParentOutOfSchoolCare
      {
@@ -342,7 +321,6 @@ model KSP uses BaseModel
       formula: 5.75;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable CombinationDiscount
@@ -360,7 +338,6 @@ model KSP uses BaseModel
       formula: 4895;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable Base
      {
@@ -370,7 +347,6 @@ model KSP uses BaseModel
       formula: 1043;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable CombinationDiscountPercentage
      {
@@ -381,7 +357,6 @@ model KSP uses BaseModel
       fixed_decimals: 3;
       displaytype: percentage;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaximumDiscount
      {
@@ -391,7 +366,6 @@ model KSP uses BaseModel
       formula: 2778;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable ChildRelatedBudget
@@ -409,7 +383,6 @@ model KSP uses BaseModel
       formula: 1142;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxBudgetTwelveToFifteenYears
      {
@@ -419,7 +392,6 @@ model KSP uses BaseModel
       formula: 1376;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxBudgetSixteenToSeventeenYears
      {
@@ -429,7 +401,6 @@ model KSP uses BaseModel
       formula: 1559;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable UpperBoundaryIncome
      {
@@ -439,7 +410,6 @@ model KSP uses BaseModel
       formula: 20109;
       fixed_decimals: 1;
       datatype: number;
-      data_options: unscalable;
      }
      variable DecreasingPercentage
      {
@@ -450,7 +420,6 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       displaytype: percentage;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable Fees
@@ -514,7 +483,6 @@ model KSP uses BaseModel
       formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable MaxCompensatedAmountOutofSchoolCare
      {
@@ -524,7 +492,6 @@ model KSP uses BaseModel
       formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable FeesSub9
      {
@@ -549,7 +516,6 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       displaytype: percentage;
       datatype: number;
-      data_options: unscalable;
      }
      variable FeesSub12
      {
@@ -564,7 +530,6 @@ model KSP uses BaseModel
       formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable PremiumForOutofSchoolCare
      {
@@ -574,7 +539,6 @@ model KSP uses BaseModel
       formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable CostsSecondaryEducation
@@ -592,7 +556,6 @@ model KSP uses BaseModel
       formula: Case(SecondaryEducationProfile,[0: 576 | 1: 906 | 2: 535 | 3: 535]);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable CostsYearFiveSixSeven
      {
@@ -602,7 +565,6 @@ model KSP uses BaseModel
       formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable Q_MAP02SUB10
@@ -637,7 +599,6 @@ model KSP uses BaseModel
       formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable ChildRelatedBudgetTwelveUpToAndInclFifteen
      {
@@ -647,7 +608,6 @@ model KSP uses BaseModel
       formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable ChildRelatedBudgetSixteenUpToAndIncSeventeen
      {
@@ -657,7 +617,6 @@ model KSP uses BaseModel
       formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
     }
     variable Q_MAP02SUB11
@@ -675,7 +634,6 @@ model KSP uses BaseModel
       formula: Min(IncomeParent01,IncomeParent02);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
      variable CombinationDiscountTotal
      {
@@ -685,7 +643,6 @@ model KSP uses BaseModel
       formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(UpperBoundaryIncome,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
      }
     }
    }
@@ -763,7 +720,6 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    data_options: unscalable;
     choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
     {
@@ -780,7 +736,6 @@ model KSP uses BaseModel
       formula: TotalYearlyBalance;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
       aggregation: balance;
      }
      variable Q_MAP06SUB5SUB2 refers to TotalYearlyCosts
@@ -790,7 +745,6 @@ model KSP uses BaseModel
       frequency: column;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
       aggregation: flow;
       variable Age
       {
@@ -820,7 +774,6 @@ model KSP uses BaseModel
        formula: If(ValueT(T)=1,1800,0);
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable ActualChildCareCosts
@@ -831,7 +784,6 @@ model KSP uses BaseModel
        formula: If((ValueT(T))<=4,1,0);
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable ActualDiapers
@@ -841,7 +793,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable ActualFood
@@ -851,7 +802,6 @@ model KSP uses BaseModel
        formula:If(ChildGender=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",(ValueT(T))),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",(ValueT(T))));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable ActualClothingCosts
@@ -861,7 +811,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable ActualPersonalCareCosts
@@ -871,7 +820,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","PersonalCare",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable Hairdresser
@@ -881,7 +829,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Hairdresser",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable Inventory
@@ -891,7 +838,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Inventory",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable Allowance
@@ -901,7 +847,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Allowance",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable Contributions
@@ -911,7 +856,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Contributions",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable Transport
@@ -921,7 +865,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Transport",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable MobilePhone
@@ -931,7 +874,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","MobilePhone",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable DrivingLicense
@@ -941,7 +883,6 @@ model KSP uses BaseModel
        formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","DrivingLicense",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable CostsForOutOfSchoolCare
@@ -951,7 +892,6 @@ model KSP uses BaseModel
        formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable CostsForPrimaryEducation
@@ -961,7 +901,6 @@ model KSP uses BaseModel
        formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable CostsForSecondaryEducation
@@ -971,7 +910,6 @@ model KSP uses BaseModel
        formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable CostsUnspecifiedOverview
@@ -982,7 +920,6 @@ model KSP uses BaseModel
        formula: CostsUnspecified*12;
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable TotalYearlyCosts
@@ -993,7 +930,6 @@ model KSP uses BaseModel
        formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
      }
@@ -1004,7 +940,6 @@ model KSP uses BaseModel
       frequency: column;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
       aggregation: flow;
       variable +ChildBenefits
       {
@@ -1014,7 +949,6 @@ model KSP uses BaseModel
        formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ChildBenefits",(ValueT(T)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable +ChildCarePremiumOverview
@@ -1025,7 +959,6 @@ model KSP uses BaseModel
        formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable +ChildcareBudgetOverview
@@ -1036,7 +969,6 @@ model KSP uses BaseModel
        formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable +CombinationDiscountOverview
@@ -1047,7 +979,6 @@ model KSP uses BaseModel
        formula: If(Age<12,CombinationDiscountTotal,0);
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
       variable =TotalYearlyIncome
@@ -1058,7 +989,6 @@ model KSP uses BaseModel
        formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
      }
@@ -1070,7 +1000,6 @@ model KSP uses BaseModel
       formula: TotalYearlyCosts-TotalYearlyIncome;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
       aggregation: flow;
       variable TotalMonthlyBalanceAverage
       {
@@ -1080,7 +1009,6 @@ model KSP uses BaseModel
        formula: TotalYearlyBalance/12;
        fixed_decimals: 2;
        datatype: number;
-       data_options: unscalable;
        aggregation: flow;
       }
      }
@@ -1091,7 +1019,6 @@ model KSP uses BaseModel
       formula: (NrOfDaysChildcareMonth*HourlyFeeChildCare)*12;
       fixed_decimals: 2;
       datatype: number;
-      data_options: unscalable;
       aggregation: balance;
      }
     }
@@ -1103,14 +1030,12 @@ model KSP uses BaseModel
     locked: 1;
     frequency: document;
     datatype: string;
-    data_options: unscalable;
     variable Q_RESULTSUB1
     {
      title: "Resultaat";
      locked: 1;
      frequency: document;
      datatype: string;
-     data_options: unscalable;
     }
    }
   }
