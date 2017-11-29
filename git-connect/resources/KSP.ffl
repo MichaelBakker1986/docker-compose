@@ -9,6 +9,24 @@ model KSP uses BaseModel
  version: "1.37";
  root
  {
+  variable Education
+  {
+   variable MonthlyIncome
+   {
+    datatype: number;
+    formula: 1;
+   }
+   variable MonthlyEducationLoan
+   {
+    datatype: number;
+    formula:1;
+   }
+   variable AgeChild
+   {
+    datatype: number;
+    formula:1;
+   }
+  }
   variable Q_ROOT
   {
    datatype: number;
