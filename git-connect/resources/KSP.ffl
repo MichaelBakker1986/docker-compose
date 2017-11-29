@@ -1023,21 +1023,6 @@ model KSP uses BaseModel
      }
     }
    }
-   variable Q_RESULT
-   {
-    visible: 0;
-    title: "Resultaat";
-    locked: 1;
-    frequency: document;
-    datatype: string;
-    variable Q_RESULTSUB1
-    {
-     title: "Resultaat";
-     locked: 1;
-     frequency: document;
-     datatype: string;
-    }
-   }
   }
  }
 }
