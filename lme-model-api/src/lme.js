@@ -8,6 +8,7 @@ if (!global.MATRIX_VALUES) {
     MATRIX_VALUES = {}
 }
 require('../../lme-core/exchange_modules/lme/lmeparser');
+require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../math');
 

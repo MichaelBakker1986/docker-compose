@@ -1,6 +1,9 @@
 import FinanMath.*;
 import BaseModel.*;
 
+EDUCATION_DURATION:48;
+EDUCATION_COST:70000;
+
 model KSP uses BaseModel
 {
  version: "1.37";
@@ -10,7 +13,7 @@ model KSP uses BaseModel
   {
    datatype: number;
    frequency: document;
-   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered)  = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
+   formula:AMMOUNT(IncomeParent01.required and IncomeParent01.entered,IncomeParent02.required and IncomeParent02.entered,WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent01.entered,WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyParent02.entered,WorkingHoursWeeklyOfLeastWorkingParent.required and WorkingHoursWeeklyOfLeastWorkingParent.entered,ChildGender.required and ChildGender.entered,NrOfDaysChildcareWeek.required and NrOfDaysChildcareWeek.entered,NrOfDaysOutOfSchoolCareWeek.required and NrOfDaysOutOfSchoolCareWeek.entered,SecondaryEducationProfile.required and SecondaryEducationProfile.entered,Q_MAP01.required and Q_MAP01.entered) = AMMOUNT(IncomeParent01.required,IncomeParent02.required,WorkingHoursWeeklyParent01.required,WorkingHoursWeeklyParent02.required,WorkingHoursWeeklyOfLeastWorkingParent.required,ChildGender.required,NrOfDaysChildcareWeek.required,NrOfDaysOutOfSchoolCareWeek.required,SecondaryEducationProfile.required,Q_MAP01.required);
    data_options: unscalable;
    displaytype: scorecard;
    title: "Costs of child raising (v1.27)";
@@ -1103,6 +1106,66 @@ model KSP uses BaseModel
      visible: 0;
      options_title: locked, invisible;
      options: locked, invisible;
+    }
+   }
+   variable Q_MAP_STUDIEKOSTEN
+   {
+    frequency: document;
+    displaytype: string;
+    title: "Hoeveel kost een studie voor \nmijn kind?";
+    hint: "Studiekosten";
+    variable Education
+    {
+     frequency: none;
+     title: "Hoeveel kost een studie voor mijn kind?";
+     hint: "“58% van de ouders draagt bij aan de studiekosten van hun kind door een financiële bijdrage te geven. De hoogte van deze bijdrage is wisselend.” - NIBU";
+    }
+    variable MonthlyIncomeBijBaan
+    {
+     frequency: document;
+     title: "Bijbaantje tijdens studie <br>Gemiddeld € 409 p/m";
+     datatype: number;
+     displaytype: currency;
+     formula: 0;
+    }
+    variable MonthlyEducationLoan
+    {
+     frequency: document;
+     datatype: number;
+     displaytype: currency;
+     formula:1;
+    }
+    variable MonthlyDUOLoan
+    {
+     frequency: document;
+     hint: "In 2017 gemiddeld € 559 p/m";
+     datatype: number;
+     displaytype: currency;
+     formula:1;
+    }
+    variable AgeChild
+    {
+     frequency: document;
+     datatype: number;
+     displaytype: string;
+     formula:1;
+    }
+    variable SavedMoney
+    {
+     frequency: document;
+     title: "Al gespaard voor kind";
+     datatype: number;
+     displaytype: string;
+     formula:100;
+    }
+    variable MonthlySavingGoal
+    {
+     frequency: document;
+     title: "Spaar dit bedrag om je spaardoel te bereiken:";
+     hint: "per maand";
+     datatype: number;
+     displaytype: string;
+     formula: PPMT(2.75,1,48,0, EDUCATION_COST());
     }
    }
    variable Q_MAP06

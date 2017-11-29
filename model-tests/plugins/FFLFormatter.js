@@ -168,7 +168,7 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
             //var format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
             var format = '{1}{2}{3}{{4}{5}}';
             if (self.props) {
-                format = '{1}{2}{3}{{4}{5}}';
+                format = '{1}{2}' + (" ".repeat(70 - refId)) + '{3}{{4}{5}}';
             } else {
                 format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
             }
@@ -176,6 +176,9 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
             //varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
             return ''
         });
+    }
+    if (self.props) {
+        parts.sort().reverse()
     }
     var lb = self.props ? ';' : ';\n'
     var r;
@@ -197,12 +200,12 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
 
 function Factory() {
     this.on = false;
-    this.props = true;
+    this.props = false;
 }
 
 Factory.prototype.create = function(input) {
     const lexialParser = new LexialParser(input);
-    //lexialParser.props = this.props;
+    //  lexialParser.props = this.props;
     return {
         visit: function(visitor) {
             return lexialParser.walk(visitor)
@@ -228,7 +231,7 @@ Factory.prototype.create = function(input) {
 }
 Factory.prototype.parse = function(input) {
     let lexialParser = new LexialParser(input);
-    //lexialParser.props = this.props;
+    lexialParser.props = this.props;
     lexialParser.buildTree();
     return {
         toString: function() {

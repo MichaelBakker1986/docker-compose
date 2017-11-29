@@ -29,7 +29,7 @@ angular
     })
     .controller('lmeController', function($scope, $http, $rootScope) {
         $scope.changeSearch = function(node) {
-            if (node.visible && node.children.length > 1) {
+            if (node.visible && node.children.length > 0) {
                 $scope.search = node
             }
         }

@@ -32,94 +32,114 @@
         </a>
         <nav class="navbar navbar-static-top">
             <div class="navbar-custom-menu">
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <a class="sidebar-toggle col-xs-1" data-toggle="push-menu" role="button">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <div class="input-group" style="padding-top: 5px">
-                        <span class="input-group-addon"><i class="fa fa-code-fork"></i></span>
-                        <input id="tags" type="email" class="form-control" placeholder="refs/head/master">
-                    </div>
+                    <!-- <div class="input-group" style="padding-top: 5px">
+                         <span class="input-group-addon"><i class="fa fa-code-fork"></i></span>
+                         <input id="tags" type="email" class="form-control" placeholder="refs/head/master">
+                     </div>-->
                 </div>
-                <div class="col-xs-4" style="padding-top: 5px;">
-                    <div class="input-group">
-                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="KSP.ffl">
+                <div class="col-xs-6" style="padding-top: 5px;">
+                    <div class="input-group" ng-switch="currentView">
+                        <span ng-switch-when="FFLModelEditorView" class="input-group-btn">
+                             <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
+                        </span>
+                        <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode" class="input-group-btn">
+                              <button ng-click="toggleProperties()" type="button" data-toggle="tooltip" title="show visible, locked, required" class="btn btn-info btn-flat"><i class="fa fa-sliders"></i></button>
+                        </span>
+                        <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
+                            <button ng-click="toggleFormatter()" type="button" data-toggle="tooltip" title="format" class="btn btn-info btn-flat"><i class="fa fa-indent"></i></button>
+                        </span>
+                        <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
+                            <button ng-click="toggleScorecardTool()" type="button" data-toggle="tooltip" title="Add InputRequired Formulas to Scorecard variables" class="btn btn-info btn-flat"><i class="fa fa-question"></i></button>
+                        </span>
+                        <span ng-switch-when="jbehaveView" class="input-group-btn">
+                            <button ng-click="runJBehaveTest()" type="button" data-toggle="tooltip" title="run jBehave tests" class="btn btn-info btn-flat"><i class="fa fa-repeat"></i></button>
+                        </span>
+                        <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
+                            <button ng-click="toggleWrapLines()" type="button" data-toggle="tooltip" title="toggle wrapped view" class="btn btn-info btn-flat"><i class="fa fa-hand-rock-o"></i></button>
+                        </span>
+                        <!--    <div class="box-tools pull-right">
+                                <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm" data-toggle="tooltip" title="Expand"><i class="fa fa-expand"></i></button>
+                            </div>-->
+
+                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="KSP">
                         <span class="input-group-btn">
                                 <button id="saveFFLModel" type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip"
-                                        title="Save {{session.fflModelPath}}"
-                                        data-target="#modal-success" class="btn btn-info btn-flat"><i
-                                        class="fa fa-save"></i></button>
+                                        title="Save {{session.fflModelPath}}" data-target="#modal-success" class="btn btn-info btn-flat"><i class="fa fa-save"></i></button>
                                 <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}"
                                         class="btn btn-info btn-flat"><i
                                         class="fa fa-window-restore"></i></button>
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <ul class="nav navbar-nav" style="float: right">
-                        <li class="dropdown messages-menu">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">1</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 1 message</li>
-                                <li>
-                                    <a>
-                                        <h4>
-                                            LME bot
-                                            <small><i class="fa fa-clock-o"></i> 1 sec</small>
-                                        </h4>
-                                        <p>Try out jBehave tests</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown notifications-menu">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">{{ session.messages.data.length }}</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have {{ session.messages.data.length }} messages.</li>
-                                <li ng-repeat="message in session.messages.data">
-                                    <ul class="menu">
-                                        <li>
-                                            <a>
-                                                <i class="fa fa-users text-aqua"></i> {{message.text}}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a></a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown user user-menu">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs chop" style="max-width: 150px;max-height: 15px; overflow: hidden">{{session.user.name}} user</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="user-header">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                    <p>
-                                        {{session.user.name}}
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
+                        <!--     <li class="dropdown messages-menu">
+                                 <a class="dropdown-toggle" data-toggle="dropdown">
+                                     <i class="fa fa-envelope-o"></i>
+                                     <span class="label label-success">1</span>
+                                 </a>
+                                 <ul class="dropdown-menu">
+                                     <li class="header">You have 1 message</li>
+                                     <li>
+                                         <a>
+                                             <h4>
+                                                 LME bot
+                                                 <small><i class="fa fa-clock-o"></i> 1 sec</small>
+                                             </h4>
+                                             <p>Try out jBehave tests</p>
+                                         </a>
+                                     </li>
+                                 </ul>
+                             </li>
+                             <li class="dropdown notifications-menu">
+                                 <a class="dropdown-toggle" data-toggle="dropdown">
+                                     <i class="fa fa-bell-o"></i>
+                                     <span class="label label-warning">{{ session.messages.data.length }}</span>
+                                 </a>
+                                 <ul class="dropdown-menu">
+                                     <li class="header">You have {{ session.messages.data.length }} messages.</li>
+                                     <li ng-repeat="message in session.messages.data">
+                                         <ul class="menu">
+                                             <li>
+                                                 <a>
+                                                     <i class="fa fa-users text-aqua"></i> {{message.text}}
+                                                 </a>
+                                             </li>
+                                         </ul>
+                                     </li>
+                                     <li class="footer"><a></a></li>
+                                 </ul>
+                             </li>-->
+                        <!--  <li class="dropdown user user-menu">
+                              <a class="dropdown-toggle" data-toggle="dropdown">
+                                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                  <span class="hidden-xs chop" style="max-width: 150px;max-height: 15px; overflow: hidden">{{session.user.name}} user</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li class="user-header">
+                                      <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                      <p>
+                                          {{session.user.name}}
+                                          <small>Member since Nov. 2012</small>
+                                      </p>
+                                  </li>
+                                  <li class="user-footer">
+                                      <div class="pull-right">
+                                          <a class="btn btn-default btn-flat">Sign out</a>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </li>-->
+                        <!-- <li>
+                             <a  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                         </li>-->
                     </ul>
                 </div>
             </div>
@@ -133,7 +153,7 @@
                 </div>
                 <div class="pull-left info">
                     <p>{{session.user.name}}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
             <ul class="sidebar-menu" data-widget="tree">
@@ -150,28 +170,8 @@
         </section>
     </aside>
     <div class="content-wrapper">
-        <section class="content" style="max-height: 90vh;">
+        <section id="editor-container" class="content" style="max-height: 90vh;">
             <div class="box" style="max-height: 90vh;">
-                <div class="box-header with-border" ng-switch="currentView">
-                    <h3 class="box-title" ng-switch-when="FFLModelEditorView">
-                        <button ng-click="toggleAceEditorMode()" type="button" class="toggle-info-btn btn bg-green btn-sm" data-toggle="tooltip" title="Toggle economic / FFL"><i class="fa fa-cubes"></i></button>
-                    </h3>
-                    <h3 class="box-title" ng-switch-when="FFLModelEditorView" ng-show="!fflmode">
-                        <button type="button" class="toggle-properties-btn btn bg-green btn-sm" data-toggle="tooltip" title="show visible, locked, required"><i class="fa fa-sliders"></i></button>
-                    </h3>
-                    <h3 class="box-title" ng-switch-when="FFLModelEditorView">
-                        <button ng-click="toggleFormatter()" type="button" class="toggle-formatter-btn btn bg-green btn-sm" data-toggle="tooltip" title="format"><i class="fa fa-indent"></i></button>
-                    </h3>
-                    <h3 class="box-title" ng-switch-when="FFLModelEditorView">
-                        <button ng-click="toggleScorecardTool()" type="button" class="toggle-scorecard-btn btn bg-green btn-sm" data-toggle="tooltip" title="Toggle Scorecard"><i class="fa fa-question"></i></button>
-                    </h3>
-                    <h3 class="box-title" ng-switch-when="jbehaveView">
-                        <button ng-click="runJBehaveTest()" type="button" class="toggle-test-btn btn bg-green btn-sm" data-toggle="tooltip" title="run jBehave tests"><i class="fa fa-repeat"></i></button>
-                    </h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="toggle-expand-btn btn bg-yellow btn-sm" data-toggle="tooltip" title="Expand"><i class="fa fa-expand"></i></button>
-                    </div>
-                </div>
                 <div class="box-body" style="max-height: 90vh;">
                     <pre id="editor"></pre>
                 </div>
@@ -180,14 +180,14 @@
     </div>
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 0.0.2
+            <b>Version</b> 0.0.3
         </div>
         <strong>Copyright &copy; 2014-2017 <a>Michael Bakker</a>.</strong> All rights reserved.
     </footer>
     <aside class="control-sidebar control-sidebar-dark">
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            <li><a data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane" id="control-sidebar-home-tab">

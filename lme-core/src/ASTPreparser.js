@@ -197,6 +197,9 @@ var simplified = {
             "type": "Identifier",
             "name": "1"
         }];
+    },
+    NPV2: function(formulaInfo, node) {
+        node.callee.name = 'NPV';
     }
 }
 simplified.ForAll = simplified.Count

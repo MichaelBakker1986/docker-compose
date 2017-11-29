@@ -223,14 +223,6 @@
     "args": "one",
     "body": "{ return 1 }"
   },
-  "PMT": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "NPV2": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
   "GetT": {
     "args": "one",
     "body": "{ return 1 }"
@@ -398,14 +390,6 @@
   "MinMax": {
     "args": "value,min,max,fallback",
     "body": "return value < min ? fallback : value > max ? fallback : value"
-  },
-  "PPMT": {
-    "args": "one",
-    "body": "return 1"
-  },
-  "IRR": {
-    "args": "one",
-    "body": "return 1"
   },
   "LN": {
     "args": "one",

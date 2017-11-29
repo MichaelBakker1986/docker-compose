@@ -253,7 +253,7 @@
                     <ul class="pagination">
                         <!--paginate-->
                         <li class="paginate_button previous"  ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i class="fa fa-arrow-left"></i> </a></li>
-                        <li ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
+                        <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
                             <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
                         </li>
                         <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
@@ -268,7 +268,7 @@
                 <li>
                     <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
                 </li>
-                <li style="margin-left: 10px" ng-repeat="f in nav | pick:'children.length > 1'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
+                <li style="margin-left: 10px" ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
                     <div>
                         <span ng-bind="f.title"></span>
                         <span ng-if="f.valid[0] != f.valid[1]" class="fa-stack fa-1x has-badge yellow" data-count="{{f.valid[0]}}/{{f.valid[1]}}">

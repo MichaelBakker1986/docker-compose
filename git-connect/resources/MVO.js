@@ -20389,7 +20389,7 @@ exports.format = function(f) {
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var assert = require("assert")
 var log = require('ff-log')
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var escodegen = require('escodegen');
 
 // some variables we shall use..
@@ -20497,7 +20497,7 @@ var simplified = {
     },
     OnER: function(formulaInfo, node) {
         assert.equal(node.arguments.length, 2, formulaInfo.original);
-        //TODO: for now we fix in ff-math. but its better to compile this in the JS code
+        //TODO: for now we fix in math. but its better to compile this in the JS code
     },
     //wants horizontale aggregation from values in between two given columns
     Hsum: function(formulaInfo, node) {
@@ -20586,6 +20586,9 @@ var simplified = {
             "type": "Identifier",
             "name": "1"
         }];
+    },
+    NPV2: function(formulaInfo, node) {
+        node.callee.name = 'NPV';
     }
 }
 simplified.ForAll = simplified.Count
@@ -20600,7 +20603,7 @@ simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ASTPreparser.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],59:[function(require,module,exports){
+},{"../../ast-node-utils":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],59:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
@@ -20819,7 +20822,7 @@ function FormulaBootstrap() {
 
 var log = require('ff-log');
 var assert = require('assert');
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var esprima = require('esprima')
 var escodegen = require('escodegen')
 var simplified = require('./ASTPreparser')
@@ -21317,10 +21320,10 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
 };
 module.exports = FormulaBootstrap.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaBootstrap.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils/index":3,"./ASTPreparser":58,"_process":79,"assert":73,"buffer":76,"escodegen":75,"esprima":75,"ff-log":48}],61:[function(require,module,exports){
+},{"../../ast-node-utils":3,"./ASTPreparser":58,"_process":79,"assert":73,"buffer":76,"escodegen":75,"esprima":75,"ff-log":48}],61:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log');
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var assert = require('assert')
 var escodegen = require('escodegen')
 /**
@@ -21510,7 +21513,7 @@ FormulaService.prototype.initVariables = function(variables) {
 }
 module.exports = FormulaService.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaService.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils/index":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],62:[function(require,module,exports){
+},{"../../ast-node-utils":3,"_process":79,"assert":73,"buffer":76,"escodegen":75,"ff-log":48}],62:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var log = require('ff-log')
 
@@ -21780,7 +21783,7 @@ module.exports = {
 
 var SolutionFacade = require('./SolutionFacade');
 var FESFacade = require('./FESFacade');
-var AST = require('../../ast-node-utils/index').ast;
+var AST = require('../../ast-node-utils').ast;
 var log = require('ff-log')
 var XAxis = require('./XAxis')
 var YAxis = require('./YAxis')
@@ -22076,7 +22079,7 @@ JSWorkBook.prototype.getAllValues = function() {
 };
 module.exports = JSWorkBook;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\JSWorkBook.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils/index":3,"./FESFacade":59,"./SolutionFacade":68,"./XAxis":70,"./YAxis":71,"_process":79,"buffer":76,"ff-log":48}],65:[function(require,module,exports){
+},{"../../ast-node-utils":3,"./FESFacade":59,"./SolutionFacade":68,"./XAxis":70,"./YAxis":71,"_process":79,"buffer":76,"ff-log":48}],65:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  register/resolve echange modules e.g. ffl,screendefinition,presentation
@@ -26600,6 +26603,7 @@ if (!global.MATRIX_VALUES) {
     MATRIX_VALUES = {}
 }
 require('../../lme-core/exchange_modules/lme/lmeparser');
+require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../math');
 
@@ -26726,7 +26730,7 @@ LME = LMEMETA.exportWebModel();
 },{"./lme":83,"_process":79,"buffer":76}],85:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const logger = require('../ff-log')
-const jsMath = {"Length":{"args":"v1","body":"return String(v1).length"},"OnER":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnEr":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnZero":{"args":"v,onzerov","body":"{ if (v <= 0) { return onzerov; } return v;}"},"If":{"args":"o,v1,v2","body":"{ if (o) { return v1; } else { return v2; }}"},"SUM":{"args":"values","body":"{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"},"OnNeg":{"args":"arg0,arg1","body":"{ if (arg0 < 0) { return arg1; } return arg0;}"},"OnZeroOrNA":{"args":"arg0,arg1","body":"{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"},"OnZeroOrNa":{"args":"v,arg1","body":"{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"},"Exp":{"args":"v","body":"{ return Math.pow(v, 2);}"},"OnERorNA":{"args":"v,onerrornav","body":"{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"},"Round":{"args":"v,decimals","body":"{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"{ return v === undefined? false : v.match(p); }"},"ZeroOnNaN":{"args":"v","body":"{ return parseFloat(isNaN(v) ? 0 : v); }"},"VALIDDATE":{"args":"d","body":"{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"},"LOOKUP":{"args":"key","body":"{ return CACHE[key]; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"TupleCount":{"args":"x","body":"{ return 1; }"},"TupleSum":{"args":"value","body":"{ return value; }"},"EvaluateAsString":{"args":"value","body":"{ return String(value) }"},"FirstUC":{"args":"value","body":"{ return value }"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"Visible":{"args":"variableOrValue","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"GetTitle":{"args":"one","body":"{ return 'tst' }"},"Pos":{"args":"one,two","body":"{ if (two===undefined){return -1};return two.indexOf(one) }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"TupleMin":{"args":"one","body":"{ return 1 }"},"TupleMax":{"args":"one","body":"{ return 1 }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"{ return new Date(d,m,y).toLocaleString(); }"},"DataEntered":{"args":"one","body":"{ return one }"},"LastTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"LastTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaset":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinYear":{"args":"x","body":"{ return x }"},"FirstDateInT":{"args":"one","body":"{ return 1 }"},"FirstT":{"args":"one","body":"{ return 1 }"},"LastT":{"args":"one","body":"{ return 1 }"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"HINT":{"args":"one","body":"{ return 1 }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"one","body":"{ return 1 }"},"YearToT":{"args":"one","body":"{ return 1 }"},"PMT":{"args":"one","body":"{ return 1 }"},"NPV2":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"TsY":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"{ return 1 }"},"GetValue":{"args":"one","body":"{ return 1 }"},"FesExpression":{"args":"one","body":"{ return one }"},"RoundUp":{"args":"num,precision","body":"return Math.ceil(num * precision) / precision"},"Mut":{"args":"one","body":"{ return 1 }"},"HSum":{"args":"one","body":"{ return 1 }"},"HSUM":{"args":"one","body":"{ return 1 }"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"one","body":"return one"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"TitleEntered":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"one","body":"return 1"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return x"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return ''+one;"},"DateToYear":{"args":"one","body":"return new Date(one)"},"DateToDay":{"args":"one","body":"return 1"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"value,from,to","body":"return String(value).substring(from,to)"},"Val":{"args":"one","body":"return 1"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"value,min,max,fallback","body":"return value < min ? fallback : value > max ? fallback : value"},"PPMT":{"args":"one","body":"return 1"},"IRR":{"args":"one","body":"return 1"},"LN":{"args":"one","body":"return 1"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"TupleInstanceIndex":{"args":"","body":"return 1"},"OnNEG":{"args":"a,b","body":"{ if (a < 0) { return a; } return b;}"},"OnError":{"args":"a,b","body":"{ if (isNaN(a)) { return b; } return a;}"},"DateStr":{"args":"string","body":"{ return string }"},"DateToYearNum":{"args":"string","body":"{ return string }"},"VAL":{"args":"string","body":"{ return string }"},"BeforeStr":{"args":"string","body":"{ return string }"},"AfterStr":{"args":"string","body":"{ return string }"},"MutCalc":1,"CalculatedInBaseCurrency":1,"PeriodinT":1,"TimeAggregated":false,"Bookyear":1,"ScaleFactor":1,"Self":1,"Notrend":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"MainPeriod":3,"X":1,"MaxT":1,"FAM":1,"Now":1,"NA":1e-10,"On":1,"No":0,"Off":0,"True":1,"False":0,"SETTINGS":{"LANGUAGE":"en"},"ViewScaleFactor":1,"Backward":1,"Decimals":2,"CACHE":{}}
+const jsMath = {"Length":{"args":"v1","body":"return String(v1).length"},"OnER":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnEr":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnZero":{"args":"v,onzerov","body":"{ if (v <= 0) { return onzerov; } return v;}"},"If":{"args":"o,v1,v2","body":"{ if (o) { return v1; } else { return v2; }}"},"SUM":{"args":"values","body":"{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"},"OnNeg":{"args":"arg0,arg1","body":"{ if (arg0 < 0) { return arg1; } return arg0;}"},"OnZeroOrNA":{"args":"arg0,arg1","body":"{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"},"OnZeroOrNa":{"args":"v,arg1","body":"{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"},"Exp":{"args":"v","body":"{ return Math.pow(v, 2);}"},"OnERorNA":{"args":"v,onerrornav","body":"{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"},"Round":{"args":"v,decimals","body":"{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"{ return v === undefined? false : v.match(p); }"},"ZeroOnNaN":{"args":"v","body":"{ return parseFloat(isNaN(v) ? 0 : v); }"},"VALIDDATE":{"args":"d","body":"{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"},"LOOKUP":{"args":"key","body":"{ return CACHE[key]; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"TupleCount":{"args":"x","body":"{ return 1; }"},"TupleSum":{"args":"value","body":"{ return value; }"},"EvaluateAsString":{"args":"value","body":"{ return String(value) }"},"FirstUC":{"args":"value","body":"{ return value }"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"Visible":{"args":"variableOrValue","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"GetTitle":{"args":"one","body":"{ return 'tst' }"},"Pos":{"args":"one,two","body":"{ if (two===undefined){return -1};return two.indexOf(one) }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"TupleMin":{"args":"one","body":"{ return 1 }"},"TupleMax":{"args":"one","body":"{ return 1 }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"{ return new Date(d,m,y).toLocaleString(); }"},"DataEntered":{"args":"one","body":"{ return one }"},"LastTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"LastTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaset":{"args":"x,x2","body":"{ return x }"},"FirstTInFormulaSet":{"args":"x,x2","body":"{ return x }"},"FirstTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinPeriod":{"args":"x,x2","body":"{ return x }"},"LastTinYear":{"args":"x","body":"{ return x }"},"FirstDateInT":{"args":"one","body":"{ return 1 }"},"FirstT":{"args":"one","body":"{ return 1 }"},"LastT":{"args":"one","body":"{ return 1 }"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"HINT":{"args":"one","body":"{ return 1 }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"one","body":"{ return 1 }"},"YearToT":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"TsY":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"{ return 1 }"},"GetValue":{"args":"one","body":"{ return 1 }"},"FesExpression":{"args":"one","body":"{ return one }"},"RoundUp":{"args":"num,precision","body":"return Math.ceil(num * precision) / precision"},"Mut":{"args":"one","body":"{ return 1 }"},"HSum":{"args":"one","body":"{ return 1 }"},"HSUM":{"args":"one","body":"{ return 1 }"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"one","body":"return one"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"TitleEntered":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"one","body":"return 1"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return x"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return ''+one;"},"DateToYear":{"args":"one","body":"return new Date(one)"},"DateToDay":{"args":"one","body":"return 1"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"value,from,to","body":"return String(value).substring(from,to)"},"Val":{"args":"one","body":"return 1"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"value,min,max,fallback","body":"return value < min ? fallback : value > max ? fallback : value"},"LN":{"args":"one","body":"return 1"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"TupleInstanceIndex":{"args":"","body":"return 1"},"OnNEG":{"args":"a,b","body":"{ if (a < 0) { return a; } return b;}"},"OnError":{"args":"a,b","body":"{ if (isNaN(a)) { return b; } return a;}"},"DateStr":{"args":"string","body":"{ return string }"},"DateToYearNum":{"args":"string","body":"{ return string }"},"VAL":{"args":"string","body":"{ return string }"},"BeforeStr":{"args":"string","body":"{ return string }"},"AfterStr":{"args":"string","body":"{ return string }"},"MutCalc":1,"CalculatedInBaseCurrency":1,"PeriodinT":1,"TimeAggregated":false,"Bookyear":1,"ScaleFactor":1,"Self":1,"Notrend":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"MainPeriod":3,"X":1,"MaxT":1,"FAM":1,"Now":1,"NA":1e-10,"On":1,"No":0,"Off":0,"True":1,"False":0,"SETTINGS":{"LANGUAGE":"en"},"ViewScaleFactor":1,"Backward":1,"Decimals":2,"CACHE":{}}
 const Solver = require('js-solver')
 const entries = {};
 

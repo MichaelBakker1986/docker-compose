@@ -33,6 +33,9 @@ function setValue(fflModel) {
     if (EconomicEditorView.on) {
         fflModel = EconomicEditorView.parse(fflModel);
     }
+    if (FFLFormatter.props) {
+        fflModel = FFLFormatter.parse(fflModel).toString();
+    }
     aceEditor.setValue(fflModel);
 }
 
@@ -125,12 +128,20 @@ angular.module('lmeapp', []).controller('ideController', function($scope, $http)
         });
     }
     $scope.toggleFormatter = function() {
-        FFLFormatter.props = !FFLFormatter.props
         const row = aceEditor.selection.getCursor().row
         const col = aceEditor.selection.getCursor().column
         fflModel = FFLFormatter.parse(aceEditor.session.getValue()).toString();
         setValue(fflModel);
         aceEditor.gotoLine(row + 1, col)
+    }
+    $scope.toggleWrapLines = function() {
+        FFLFormatter.props = !FFLFormatter.props
+        this.toggleFormatter()
+    }
+    $scope.toggleProperties = function() {
+        EconomicEditorView.properties = !EconomicEditorView.properties;
+        setValue(fflModel)
+        scrollTop()
     }
     $scope.toggleScorecardTool = function() {
         ScorecardTool.props = !ScorecardTool.props
@@ -188,11 +199,6 @@ $(document).ready(function() {
             aceEditor.session.setValue(data)
         })
     });
-    $(".toggle-properties-btn").click(function(e) {
-        EconomicEditorView.properties = !EconomicEditorView.properties;
-        setValue(fflModel)
-        scrollTop()
-    });
     $(".data-toggle-ide").click(function(e) {
         aceEditor.setValue(fflModel);
         scrollTop()
@@ -211,20 +217,50 @@ $(document).ready(function() {
         aceEditor.session.insert(customPosition, text);
     });
 
+    //just an dummy-template to quickly create a model
+    var newModelTemplate = "model $1 uses BaseModel\n" +
+        "{\n" +
+        " version: \"1.0\";\n" +
+        " root\n" +
+        " {\n" +
+        "  variable Q_ROOT\n" +
+        "  {\n" +
+        "   title: \"Stap 1\";\n" +
+        "   displaytype: scorecard;\n" +
+        "   variable Q_MAP01\n" +
+        "   {\n" +
+        "    title: \"Stap 1\";\n" +
+        "    hint: \"Informatie over de stap\";\n" +
+        "    variable Q_MAP01_VRAAG0\n" +
+        "    {\n" +
+        "     title: \"TestVraag\";\n" +
+        "     frequency: document;\n" +
+        "     datatype: number;\n" +
+        "     formula: 100+100;\n" +
+        "    }\n" +
+        "   }\n" +
+        "  }\n" +
+        " }\n" +
+        "}"
+
     function handleModelChange() {
         Pace.track(function() {
-            var modelName = $("#models").val();
+            windowModelName = $("#models").val();
+            window.location.href = "#" + windowModelName + "&" + userID;
             var xhr = new XMLHttpRequest();
             xhr.addEventListener('progress', function(e) {
                 aceEditor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
             });
             xhr.addEventListener('load', function(e) {
-                fflModel = this.responseText;
+                if (this.responseText.startsWith("<!DOCTYPE html>")) {
+                    fflModel = newModelTemplate.replace('$1', windowModelName)
+                } else {
+                    fflModel = this.responseText;
+                }
                 setValue(fflModel)
-
                 scrollTop();
             });
-            xhr.open('GET', 'resources/' + modelName + '.ffl');
+            xhr.open('GET', 'resources/' + windowModelName + '.ffl');
             return xhr.send();
         });
     }
@@ -232,9 +268,17 @@ $(document).ready(function() {
     $.getJSON("/models", function(data, status, xhr) {
         $("#models").autocomplete({
             source: data,
+            autoFocus: true,
             change: handleModelChange
         });
     })
+    $("#models").keydown(function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            handleModelChange()
+            return false;
+        }
+    });
     handleModelChange(windowModelName)
 
     aceEditor = ace.edit("editor");
@@ -250,7 +294,12 @@ $(document).ready(function() {
     });
     aceEditor.setAutoScrollEditorIntoView(true);
     aceEditor.setOption("maxLines", 60);
-    aceEditor.setOption("minLines", 46);
     aceEditor.$blockScrolling = Infinity
     aceEditor.resize(true)
+    $(window).resize(function() {
+        aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
+        aceEditor.resize()
+    });
+    aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
+    aceEditor.resize()
 });
