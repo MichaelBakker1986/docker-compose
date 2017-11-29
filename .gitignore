@@ -10,7 +10,7 @@ restapi/dbSettings.js
 *package-lock.json
 *.scssc
 
-ff-ssh-git/resources/_tmp_*
-ff-ssh-git/CODELISTS/**.pom
-ff-ssh-git/CODELISTS/*.pom
-ff-ssh-git/CODELISTS/*
+git-connect/resources/_tmp_*
+git-connect/CODELISTS/**.pom
+git-connect/CODELISTS/*.pom
+git-connect/CODELISTS/*

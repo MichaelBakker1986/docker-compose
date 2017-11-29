@@ -227,6 +227,7 @@
                         <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
                             <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
                                 <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
                                 <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
                                     <option ng-repeat="choice in f.choices" value="{{choice.name}}" ng-selected="choice.name == cv.value">{{choice.value}}</option>
                                 </select>

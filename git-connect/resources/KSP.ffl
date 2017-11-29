@@ -3,30 +3,13 @@ import BaseModel.*;
 
 EDUCATION_DURATION:48;
 EDUCATION_COST:70000;
+RENTE_PER_JAAR:2.75;
 
 model KSP uses BaseModel
 {
  version: "1.37";
  root
  {
-  variable Education
-  {
-   variable MonthlyIncome
-   {
-    datatype: number;
-    formula: 1;
-   }
-   variable MonthlyEducationLoan
-   {
-    datatype: number;
-    formula:1;
-   }
-   variable AgeChild
-   {
-    datatype: number;
-    formula:1;
-   }
-  }
   variable Q_ROOT
   {
    datatype: number;
@@ -47,51 +30,11 @@ model KSP uses BaseModel
     formula: 1;
     displaytype: currency;
     title: "Intro";
+    visible: 0;
     top_blanklines: 1;
     locked: 1;
     options_title: locked;
     options: locked;
-    variable Q_MAP00_WARNING
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Warning voor map 221";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP00_INFO
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Info bij stap 1";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP00_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie stap 1";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP00_HINT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Hinttekst stap 1";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
     variable Q_MAP00_INTRO
     {
      datatype: number;
@@ -129,50 +72,6 @@ model KSP uses BaseModel
     choices: "0:Complete|1:Incomplete";
     options_title: locked;
     options: locked;
-    variable Q_MAP01_WARNING
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-     data_options: unscalable;
-     title: "Warning voor map 1";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_INFO
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If(Q_MAP01[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-     data_options: unscalable;
-     title: "Info bij stap 1";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie stap 1";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_HINT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Hinttekst stap 1";
-     hint: "Dit is de hinttekst van de variable 'Q_MAP01_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
     variable Situation
     {
      datatype: number;
@@ -188,7 +87,6 @@ model KSP uses BaseModel
       frequency: document;
       displaytype: currency;
       title: "[b]Income[/b]";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
       options: locked;
@@ -208,7 +106,6 @@ model KSP uses BaseModel
       datatype: number;
       frequency: document;
       inputRequired: 1;
-      data_options: unscalable;
       fixed_decimals: 2;
       title: "Gross Income Parent 2";
       options_title: locked;
@@ -218,7 +115,6 @@ model KSP uses BaseModel
       datatype: number;
       frequency: document;
       inputRequired: 1;
-      data_options: unscalable;
       fixed_decimals: 1;
       title: "Working hours parent 1";
       options_title: locked;
@@ -228,7 +124,6 @@ model KSP uses BaseModel
       datatype: number;
       frequency: document;
       inputRequired: 1;
-      data_options: unscalable;
       fixed_decimals: 1;
       title: "Working hours parent 2";
       options_title: locked;
@@ -239,7 +134,6 @@ model KSP uses BaseModel
       frequency: document;
       formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
       inputRequired: 1;
-      data_options: unscalable;
       fixed_decimals: 1;
       title: "Working hours (weekly) of least working Parent";
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
@@ -253,13 +147,11 @@ model KSP uses BaseModel
       title: "Child";
       locked: 1;
       options_title: locked;
-      options: locked;
       variable ChildGender
       {
        datatype: number;
        frequency: document;
        inputRequired: 1;
-       data_options: unscalable;
        displaytype: select;
        fixed_decimals: 0;
        title: "Gender";
@@ -272,7 +164,6 @@ model KSP uses BaseModel
        formula: NA;
        frequency: document;
        inputRequired: 1;
-       data_options: unscalable;
        fixed_decimals: 1;
        title: "Nr. of days childcare per week";
        options_title: locked;
@@ -287,7 +178,6 @@ model KSP uses BaseModel
        title: "Nr. of hours childcare per month";
        locked: 1;
        options_title: locked;
-       options: locked;
       }
       variable NrOfDaysOutOfSchoolCareWeek
       {
@@ -396,84 +286,6 @@ model KSP uses BaseModel
       options_title: locked;
      }
     }
-    variable Q_MAP01_PARAGRAAF09
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Eigenschappen van de stap";
-     locked: 1;
-     visible: (DEBUG=1);
-     options_title: locked;
-     options: locked;
-     variable Q_MAP01_STATUS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Q_MAP01;
-      data_options: unscalable;
-      displaytype: select;
-      title: "Status van de stap";
-      top_blanklines: 1;
-      locked: 1;
-      choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_PARAGRAAF09SUB2 refers to Q_MAP01_WARNING
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Warning voor map 1";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_PARAGRAAF09SUB3 refers to Q_MAP01_INFO
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Info bij stap 1";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_PARAGRAAF09SUB4 refers to Q_MAP01_VALIDATION
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Validatie stap 1";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-    }
-    variable Q_MAP01_HULPVARIABELEN
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Hulpvariabelen";
-     locked: 1;
-     visible: 0;
-     options_title: locked, invisible;
-     options: locked, invisible;
-     variable DEBUG
-     {
-      datatype: number;
-      frequency: document;
-      formula: If(Pos("Negro" , Memo1[1])>0,1,0);
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Debug";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-    }
    }
    variable Q_MAP02
    {
@@ -483,54 +295,9 @@ model KSP uses BaseModel
     displaytype: select;
     title: "Calculations Care";
     locked: 1;
-    visible: (DEBUG=1);
     choices: "0:Complete|1:Incomplete";
     options_title: locked;
     options: locked;
-    variable Q_MAP02_WARNING
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-     data_options: unscalable;
-     title: "Warning voor map 2";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP02_INFO
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If(Q_MAP02[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-     data_options: unscalable;
-     title: "Info bij stap 2";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP02_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie stap 2";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP02_HINT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Hinttekst stap 2";
-     hint: "Dit is de hinttekst van de variable 'Q_MAP02_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
     variable FiscalParameters
     {
      datatype: number;
@@ -544,7 +311,6 @@ model KSP uses BaseModel
      {
       datatype: none;
       title: "Childcare Contribution";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
       options: locked;
@@ -653,7 +419,6 @@ model KSP uses BaseModel
       data_options: unscalable;
       fixed_decimals: 1;
       title: "Lower boundary Income";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
       options: locked;
@@ -713,10 +478,8 @@ model KSP uses BaseModel
       data_options: unscalable;
       fixed_decimals: 1;
       title: "Max Budget (1 - 12 yrs)";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options: locked;
      }
      variable MaxBudgetTwelveToFifteenYears
      {
@@ -784,10 +547,8 @@ model KSP uses BaseModel
       formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
       displaytype: currency;
       title: "Max. nr of compensated hours childcare ";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options: locked;
      }
      variable MaxNrCompensatedHoursOutofSchoolCare
      {
@@ -940,10 +701,8 @@ model KSP uses BaseModel
       data_options: unscalable;
       fixed_decimals: 2;
       title: "Costs year 1 - 4";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options: locked;
      }
      variable CostsYearFiveSixSeven
      {
@@ -973,10 +732,8 @@ model KSP uses BaseModel
       frequency: document;
       displaytype: currency;
       title: "Income";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options: locked;
      }
      variable ChildRelatedBudgetDecrease
      {
@@ -1043,10 +800,8 @@ model KSP uses BaseModel
       data_options: unscalable;
       fixed_decimals: 2;
       title: "LowestIncome";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options: locked;
      }
      variable CombinationDiscountTotal
      {
@@ -1061,129 +816,71 @@ model KSP uses BaseModel
       options: locked;
      }
     }
-    variable Q_MAP02_PARAGRAAF09
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Eigenschappen van de stap";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-     variable Q_MAP02_STATUS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Q_MAP02;
-      data_options: unscalable;
-      displaytype: select;
-      title: "Status van de stap";
-      top_blanklines: 1;
-      locked: 1;
-      choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_PARAGRAAF09SUB2 refers to Q_MAP02_WARNING
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Warning voor map 2";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_PARAGRAAF09SUB3 refers to Q_MAP02_INFO
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP02_PARAGRAAF09SUB4 refers to Q_MAP02_VALIDATION
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Validatie stap 2";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-    }
-    variable Q_MAP02_HULPVARIABELEN
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Hulpvariabelen";
-     locked: 1;
-     visible: 0;
-     options_title: locked, invisible;
-     options: locked, invisible;
-    }
    }
    variable Q_MAP_STUDIEKOSTEN
    {
     frequency: document;
     displaytype: string;
-    title: "Hoeveel kost een studie voor \nmijn kind?";
+    title: "Hoeveel kost een studie voor mijn kind?";
     hint: "Studiekosten";
-    variable Education
+    variable EducationAgeChild
     {
-     frequency: none;
-     title: "Hoeveel kost een studie voor mijn kind?";
-     hint: "“58% van de ouders draagt bij aan de studiekosten van hun kind door een financiële bijdrage te geven. De hoogte van deze bijdrage is wisselend.” - NIBU";
-    }
-    variable MonthlyIncomeBijBaan
-    {
-     frequency: document;
-     title: "Bijbaantje tijdens studie <br>Gemiddeld € 409 p/m";
-     datatype: number;
-     displaytype: currency;
-     formula: 0;
-    }
-    variable MonthlyEducationLoan
-    {
+     title: "Leeftijd kind";
      frequency: document;
      datatype: number;
-     displaytype: currency;
-     formula:1;
-    }
-    variable MonthlyDUOLoan
-    {
-     frequency: document;
-     hint: "In 2017 gemiddeld € 559 p/m";
-     datatype: number;
-     displaytype: currency;
-     formula:1;
-    }
-    variable AgeChild
-    {
-     frequency: document;
-     datatype: number;
-     displaytype: string;
-     formula:1;
+     formula: 17;
     }
     variable SavedMoney
     {
      frequency: document;
      title: "Al gespaard voor kind";
+     datatype: currency;
+     displaytype: currency;
+     formula: 100;
+    }
+    variable MonthlyIncomeBijBaan
+    {
+     frequency: document;
+     title: "Bijbaantje tijdens studie. Gemiddeld € 409 p/m";
      datatype: number;
-     displaytype: string;
-     formula:100;
+     displaytype: currency;
+     formula: 409;
+    }
+    variable MonthlyDUOLoan
+    {
+     title:"Geld lenen bij DUO";
+     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
+     frequency: document;
+     datatype: currency;
+     displaytype: currency;
+     formula :559;
+    }
+    variable AantalMaandenTeSparen
+    {
+     title: "Aantal maanden in tot einde opleiding";
+     frequency: document;
+     datatype: number;
+     locked: 1;
+     formula: (17-EducationAgeChild) * 12;
+    }
+    variable RentePerJaar
+    {
+     title: "Jaarlijkse rente";
+     frequency: document;
+     datatype: currency;
+     locked: 1;
+     formula: RENTE_PER_JAAR();
     }
     variable MonthlySavingGoal
     {
      frequency: document;
      title: "Spaar dit bedrag om je spaardoel te bereiken:";
      hint: "per maand";
-     datatype: number;
-     displaytype: string;
-     formula: PPMT(2.75,1,48,0, EDUCATION_COST());
+     locked: 1;
+     datatype: currency;
+     displaytype: currency;
+     fixed_decimals: 0;
+     formula: MAX(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(EDUCATION_COST() - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48)))));
     }
    }
    variable Q_MAP06
@@ -1198,50 +895,6 @@ model KSP uses BaseModel
     choices: "0:Complete|1:Incomplete";
     options_title: locked;
     options: locked;
-    variable Q_MAP06_WARNING
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-     data_options: unscalable;
-     title: "Warning voor map 6";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP06_INFO
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If(Q_MAP06[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-     data_options: unscalable;
-     title: "Info bij stap 6";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP06_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie stap 6";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP06_HINT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Hinttekst stap 6";
-     hint: "Dit is de hinttekst van de variable 'Q_MAP06_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
     variable Q_MAP06SUB5
     {
      datatype: number;
@@ -1260,11 +913,8 @@ model KSP uses BaseModel
       data_options: unscalable;
       fixed_decimals: 2;
       title: "Total Net Costs (-)";
-      top_blanklines: 1;
       locked: 1;
       options_title: locked;
-      options_notrend: locked;
-      options_trend: locked;
      }
      variable Q_MAP06SUB5SUB2 refers to TotalYearlyCosts
      {
@@ -1284,28 +934,20 @@ model KSP uses BaseModel
        frequency: column;
        aggregation: flow;
        formula: (ValueT(T))-1;
-       data_options: unscalable;
        fixed_decimals: 0;
        title: "Age";
-       top_blanklines: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
        variable PeriodeInFormulaset
        {
         datatype: number;
         frequency: column;
         aggregation: balance;
         formula: ValueT(T);
-        data_options: unscalable;
         fixed_decimals: 0;
         title: "PeriodeInFormulaset";
-        top_blanklines: 1;
         locked: 1;
         options_title: locked;
-        options_notrend: locked;
-        options_trend: locked;
        }
       }
       variable Furniture
@@ -1317,11 +959,8 @@ model KSP uses BaseModel
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Furniture";
-       top_blanklines: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
       variable ActualChildCareCosts
       {
@@ -1517,12 +1156,6 @@ model KSP uses BaseModel
        top_separator: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
-      }
-      variable TotalYearlyCostTSUM
-      {
-       formula: TotalYearlyCosts;
       }
      }
      variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
@@ -1535,8 +1168,6 @@ model KSP uses BaseModel
       title: "[b]Child-related Income[/b]";
       locked: 1;
       options_title: locked;
-      options_notrend: locked;
-      options_trend: locked;
       variable +ChildBenefits
       {
        datatype: number;
@@ -1546,11 +1177,8 @@ model KSP uses BaseModel
        data_options: unscalable;
        fixed_decimals: 2;
        title: "Child benefits";
-       top_blanklines: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
       variable +ChildCarePremiumOverview
       {
@@ -1563,8 +1191,6 @@ model KSP uses BaseModel
        title: "Childcare premium";
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
       variable +ChildcareBudgetOverview
       {
@@ -1577,8 +1203,6 @@ model KSP uses BaseModel
        title: "Childcare budget";
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
       variable +CombinationDiscountOverview
       {
@@ -1591,8 +1215,6 @@ model KSP uses BaseModel
        title: "Combination Discount";
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
       variable =TotalYearlyIncome
       {
@@ -1606,8 +1228,6 @@ model KSP uses BaseModel
        top_separator: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
      }
      variable TotalYearlyBalance
@@ -1621,8 +1241,6 @@ model KSP uses BaseModel
       title: "Total Net Costs (-)";
       locked: 1;
       options_title: locked;
-      options_notrend: locked;
-      options_trend: locked;
       variable TotalMonthlyBalanceAverage
       {
        datatype: number;
@@ -1635,8 +1253,6 @@ model KSP uses BaseModel
        top_blanklines: 1;
        locked: 1;
        options_title: locked;
-       options_notrend: locked;
-       options_trend: locked;
       }
      }
      variable ChildCareCosts
@@ -1651,333 +1267,24 @@ model KSP uses BaseModel
       options_title: locked;
      }
     }
-    variable Q_MAP06_PARAGRAAF09
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Eigenschappen van de stap";
-     locked: 1;
-     visible: (DEBUG=1);
-     options_title: locked;
-     options: locked;
-     variable Q_MAP06_STATUS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Q_MAP06;
-      data_options: unscalable;
-      displaytype: select;
-      title: "Status van de stap";
-      top_blanklines: 1;
-      locked: 1;
-      choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_PARAGRAAF09SUB2 refers to Q_MAP06_WARNING
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Warning voor map 6";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_PARAGRAAF09SUB3 refers to Q_MAP06_INFO
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Info bij stap 6";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP06_PARAGRAAF09SUB4 refers to Q_MAP06_VALIDATION
-     {
-      datatype: string;
-      frequency: document;
-      data_options: unscalable;
-      title: "Validatie stap 6";
-      locked: 1;
-      options_title: locked;
-      options: locked;
-     }
-    }
-    variable Q_MAP06_HULPVARIABELEN
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Hulpvariabelen";
-     locked: 1;
-     visible: 0;
-     options_title: locked, invisible;
-     options: locked, invisible;
-    }
    }
    variable Q_RESULT
    {
     datatype: string;
     frequency: document;
-    formula: String(If(Q_ROOT[1]=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
     data_options: unscalable;
     title: "Resultaat";
     top_blanklines: 1;
     locked: 1;
+    visible: 0;
     options_title: locked;
     options: locked;
-    variable Q_RESULTSUB1 refers to Q_RESULT
+    variable Q_RESULTSUB1
     {
      datatype: string;
      frequency: document;
      data_options: unscalable;
      title: "Resultaat";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-   }
-   variable Q_STATUS
-   {
-    datatype: number;
-    frequency: document;
-    formula: 0;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Status";
-    top_blanklines: 1;
-    choices: "0:Actief|1:Defintief";
-    options_title: locked;
-   }
-   variable Q_STATUS_FINAL_ON
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
-    displaytype: date;
-    title: "Definitief gemaakt op";
-    options_title: locked;
-   }
-   variable Q_STATUS_FINAL_BY
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Definitief gemaakt door (gebruikersnaam)";
-    options_title: locked;
-   }
-   variable Q_STATUS_FINAL_BY_NAME
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Definitief gemaakt door (volledige naam)";
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_ON
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: date;
-    title: "Aangemaakt op";
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_BY
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Aangemaakt door (gebruikersnaam)";
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_BY_NAME
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Aangemaakt door (volledige naam)";
-    options_title: locked;
-   }
-   variable ModelVersion
-   {
-    datatype: string;
-    frequency: document;
-    formula: "01.27.000.000";
-    data_options: saveCalculatedValue,unscalable;
-    title: "Modelversie";
-    locked: 1;
-    options_title: locked;
-    options: locked;
-   }
-   variable ModelType
-   {
-    datatype: string;
-    frequency: document;
-    formula: "TEST";
-    data_options: saveCalculatedValue,unscalable;
-    title: "Modeltype";
-    locked: 1;
-    options_title: locked;
-    options: locked;
-   }
-   variable MatrixVersion
-   {
-    datatype: string;
-    frequency: document;
-    formula: "None";
-    data_options: saveCalculatedValue,unscalable;
-    title: "Parametersversie";
-    hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
-    options_title: locked;
-   }
-   variable Q_PREVIOUS_BUTTON_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 2;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Vorige";
-    choices: "0:Nooit|2:Altijd";
-    options_title: locked;
-   }
-   variable Q_NEXT_BUTTON_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 2;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Volgende";
-    choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
-    options_title: locked;
-   }
-   variable Q_CONCEPT_REPORT_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 1;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Concept rapport";
-    choices: "0:Nee|1:Ja";
-    options_title: locked;
-   }
-   variable Q_MAKE_FINAL_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 0;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Definitief maken";
-    choices: "0:Nee|1:Ja";
-    options_title: locked;
-   }
-   variable Q_FINAL_REPORT_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 0;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Definitief rapport";
-    choices: "0:Nee|1:Ja";
-    options_title: locked;
-   }
-  }
-  variable HULPVARS
-  {
-   datatype: string;
-   frequency: document;
-   data_options: unscalable;
-   title: "Hulpvariabelen";
-   top_blanklines: 1;
-   locked: 1;
-   options_title: locked;
-   options: locked;
-   variable Q_WARNING_GLOBAL
-   {
-    datatype: string;
-    frequency: document;
-    formula: String(If( Length ( Q_WARNING_GLOBALTXT[1])>0 , "[br][/br]Er zijn knockouts van toepassing"&Q_WARNING_GLOBALTXT , ""));
-    data_options: unscalable;
-    displaytype: memo;
-    title: "Knock-out(s)?";
-    top_blanklines: 1;
-    locked: 1;
-    options_title: locked;
-    options: locked;
-    variable Q_WARNING_01
-    {
-     datatype: string;
-     frequency: document;
-     formula: String("");
-     data_options: unscalable;
-     title: "Map6 - Vraag 6";
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_WARNING_GLOBALTXT
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If( Length ( Q_WARNING_01[1])>0 , "[br][/br]"&Q_WARNING_01[1],""));
-     data_options: unscalable;
-     displaytype: memo;
-     title: "Knock-out tekst";
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-   }
-   variable Q_RESTRICTIES
-   {
-    datatype: string;
-    frequency: document;
-    formula: String(If( Length ( Q_RESTRICTIESTXT[1])>0 , "[br][/br]De volgende variabelen zijn niet correct gevuld"&Q_RESTRICTIESTXT , ""));
-    data_options: unscalable;
-    displaytype: memo;
-    title: "Restricties";
-    locked: 1;
-    options_title: locked;
-    options: locked;
-    variable Q_RESTRICTIES_01
-    {
-     datatype: string;
-     frequency: document;
-     formula: String("");
-     data_options: unscalable;
-     top_blanklines: 1;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_RESTRICTIES_02
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     locked: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_RESTRICTIESTXT
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If( Length ( Q_RESTRICTIES_01[1])>0 , "[br][/br]"&Q_RESTRICTIES_01[1],""));
-     data_options: unscalable;
-     displaytype: memo;
-     title: "Restricties tekst";
      top_blanklines: 1;
      locked: 1;
      options_title: locked;
