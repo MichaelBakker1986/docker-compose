@@ -28,7 +28,6 @@
     "express-favicon": "^2.0.0",
     "express-static-gzip": "^0.3.0",
     "ff-log": "file:../ff-log",
-    "ff-math": "file:../math",
     "fs-writefile-promise": "^2.0.0",
     "http-proxy": "^1.16.2",
     "http-ssh-agent": "^1.0.4",
