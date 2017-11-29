@@ -5,8 +5,9 @@ const child = spawn('node . -type f | wc -l', {
     cwd: '/Users/samer/Downloads'
 });*/
 
-require('./lme-model-api')
-require('./demo-apps')
-require('./lme-data-api')
-require('./git-connect')
+//require('./lme-model-api')
+//require('./demo-apps')
+//require('./lme-data-api')
+//require('./git-connect')
+require('./lme-model-api/update')
 require('./proxy')
