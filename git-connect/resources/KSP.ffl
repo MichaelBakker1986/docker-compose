@@ -862,7 +862,7 @@ model KSP uses BaseModel
      frequency: document;
      datatype: number;
      locked: 1;
-     formula: (17-EducationAgeChild) * 12;
+     formula: (18-EducationAgeChild) * 12;
     }
     variable RentePerJaar
     {
