@@ -22,7 +22,7 @@ const levels = {
 }
 
 function spawnChild(appname, args) {
-    var promise = spawn('node', [appname + '.js'], {capture: ['stdout', 'stderr']})
+    var promise = spawn('node', [appname], {capture: ['stdout', 'stderr']})
     var childProcess = promise.childProcess;
     childProcesses[appname] = childProcess;
     childProcess.stdout.on('data', function(data) {
@@ -108,9 +108,9 @@ function testAndDeploy() {
     exec(command).then(function(result) {
         log('Successful deploy stack in ' + ((now() - start) / 1000).toFixed(3) + 's');
         //start sub processes
-        spawnChild('../demo-apps/demoapps')
-        spawnChild('lme-model-app')
-        spawnChild('../lme-data-api/lme-data-app')
+        spawnChild('../demo-apps')
+        spawnChild('../lme-model-api')
+        spawnChild('../lme-data-api')
 
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
