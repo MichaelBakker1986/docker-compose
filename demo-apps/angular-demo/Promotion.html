@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Promotion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD8fwAA/H8AAPxjAAD/4wAA/+MAAMY/AADGPwAAxjEAAP/xAAD/8QAA4x8AAOMfAADjHwAA//8AAP//AAA="
+          rel="icon" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="bundle.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
+    <script src="promotion.js"></script>
+
+</head>
+<body ng-controller="promotionController">
+<section class="content">
+    <!-- <div class="row">
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box">
+                 <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Messages</span>
+                     <span class="info-box-number">1,410</span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box">
+                 <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Bookmarks</span>
+                     <span class="info-box-number">410</span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box">
+                 <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Uploads</span>
+                     <span class="info-box-number">13,648</span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box">
+                 <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Likes</span>
+                     <span class="info-box-number">93,139</span>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="row">
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-aqua">
+                 <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Bookmarks</span>
+                     <span class="info-box-number">41,410</span>
+                     <div class="progress">
+                         <div class="progress-bar" style="width: 70%"></div>
+                     </div>
+                     <span class="progress-description">
+                     70% Increase in 30 Days
+                   </span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-green">
+                 <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Likes</span>
+                     <span class="info-box-number">41,410</span>
+                     <div class="progress">
+                         <div class="progress-bar" style="width: 70%"></div>
+                     </div>
+                     <span class="progress-description">
+                     70% Increase in 30 Days
+                   </span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-yellow">
+                 <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Events</span>
+                     <span class="info-box-number">41,410</span>
+                     <div class="progress">
+                         <div class="progress-bar" style="width: 70%"></div>
+                     </div>
+                     <span class="progress-description">
+                     70% Increase in 30 Days
+                   </span>
+                 </div>
+             </div>
+         </div>
+         <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-red">
+                 <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                 <div class="info-box-content">
+                     <span class="info-box-text">Comments</span>
+                     <span class="info-box-number">41,410</span>
+                     <div class="progress">
+                         <div class="progress-bar" style="width: 70%"></div>
+                     </div>
+                     <span class="progress-description">
+                     70% Increase in 30 Days
+                   </span>
+                 </div>
+             </div>
+         </div>
+     </div>-->
+    <div class="container">
+        <h3 class="page-"></h3>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12" ng-repeat="widget in widgets">
+                <div class="small-box bg-{{['aqua','green','yellow','red','gray'][$index % 5]}}">
+                    <div class="inner">
+                        <h3>{{widget.name}}</h3>
+                        <p>{{widget.description}}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <a href="{{widget.href}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -117,6 +117,9 @@ LexialParser.prototype.walk = function(visit) {
 }
 LexialParser.prototype.walkTree = function(visit, var_desc, depth, index) {
     var self = this;
+    if (this.vars[index] == undefined) {
+        console.info('')
+    }
     const parts = this.vars[index].trim().split(';')
     const children = [];
     if (parts[parts.length - 1] == '') {

@@ -3230,8 +3230,8 @@ model KAM uses BaseModel
 					title : "Gegevens van de tussenpersoon";
 					displaytype : currency;
 					hint : "De gegevens van de tussenpersoon.";
-					locked : On; //					visible : (UserRole = 2.0);
- visible : 1.0;
+					locked : On;
+                    visible : 1.0;
 					options_title : locked;
 					options_notrend : locked;
 					options_trend : locked;
@@ -3243,8 +3243,7 @@ model KAM uses BaseModel
 						title : "Initialen";
 						top_blanklines : 1.0;
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
-
+						options_title : locked;
 					}
 					variable IntermediaryName
 					{
@@ -3253,7 +3252,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "Achternaam";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryFunction
@@ -3263,7 +3262,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "Functie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryTitle
@@ -3282,7 +3281,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "Naam organisatie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked; 
 
 					}
 					variable IntermediaryPlace
@@ -3292,7 +3291,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "Vestigingsplaats organisatie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked; 
 
 					}
 					variable IntermediaryPhoneNumber
@@ -3302,7 +3301,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "Telefoonnummer";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked; 
 
 					}
 					variable IntermediaryEmailAdress
@@ -3312,7 +3311,7 @@ model KAM uses BaseModel
 						data_options : unscalable;
 						title : "E-mailadres";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked; 
 
 					}
 				}
@@ -5120,7 +5119,7 @@ model KAM uses BaseModel
 						data_options : hideFirstNoTrendColumn;
 						}
 					}
-					//					variable = pTotaalInvesteringen
+					
 					variable pTotaalInvesteringen
 					{
 						datatype : number;
@@ -5445,7 +5444,7 @@ model KAM uses BaseModel
 						formula : ExcessCash-MutationExcessCash;
 						title : "Saldo liquide middelen vorig jaar";
 						displaytype : currency;
-						//top_separator: 1;
+						
 						visible : 1.0;
 						options_title : locked;
 						options_notrend : locked;
@@ -5459,14 +5458,14 @@ model KAM uses BaseModel
 						formula: CapitalShortfall-MutationCapitalShortfall;
 						title : "Vermogensbehoefte vorig jaar";
 						displaytype : currency;
-						//top_separator: 1;
+						
 						visible : 1.0;
 						options_title : locked;
 						options_notrend : locked;
 						options_trend : locked;
 					}
 
-					//					variable = pFinancieringsBehoefte
+					
 					variable pFinancieringsBehoefte
 					{
 						datatype : number;
@@ -6154,7 +6153,7 @@ model KAM uses BaseModel
 						data_options : hideFirstNoTrendColumn;
 						}
 					}
-					//					variable = pFinancieringsOverschot
+					
 					variable pFinancieringsTekort
 					{
 						datatype : number;
@@ -7538,7 +7537,7 @@ model KAM uses BaseModel
 							options_trend : locked;
 						}
 					}
-					//variable = OrdinaryProfitBeforeTaxes
+					
 					variable OrdinaryProfitBeforeTaxes
 					{
 						datatype : number;
@@ -7625,7 +7624,7 @@ model KAM uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-					//					variable = ProfitAfterTax
+					
 					variable ProfitAfterTax
 					{
 						datatype : number;
@@ -8207,16 +8206,16 @@ model KAM uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-			//		variable KAM_DefensiveInterval refers to DefensiveInterval
-				//	{
-					//	title : "Defensive interval (weken)";
-					//	fixed_decimals : 1.0;
+			
+				
+					
+					
 
-					//	visible : 1.0;
-					//	options_title : locked;
-					//	options_notrend : locked;
-					//	options_trend : locked;
-					//}
+					
+					
+					
+					
+					
 				}
 				variable LeverageRatios
 				{
@@ -8260,16 +8259,16 @@ model KAM uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-//					variable KAM_DebtToEBITDA refers to DebtToEBITDA
-//					{
-//						title : "Debt To EBITDA";
-//						fixed_decimals : 2.0;
 
-						//visible : 1.0;
-						//options_title : locked;
-						//options_notrend : locked;
-						//options_trend : locked;
-//					}
+
+
+
+
+						
+						
+						
+						
+
 				}
 				variable ProfitabilityRatios
 				{

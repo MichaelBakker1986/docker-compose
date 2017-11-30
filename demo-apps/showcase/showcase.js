@@ -3,7 +3,7 @@ var angularApplication = angular.module('angularapp', ['angular.filter']);
 
 //create an angular controller
 angularApplication.controller('myController', function($scope, $http, $interval) {
-    $http.get('../resources/MVO.js').then(function(data) {
+    $http.get('resources/MVO.js').then(function(data) {
         //load sync dynamic javascript file
         eval(data.data)
         //create a tree from current loaded model
@@ -83,7 +83,6 @@ var chart;
 
 function chartSpider(json) {
 
-    console.log(json.series[0].data);
     chart = Highcharts.chart('container1', {
 
         chart: {

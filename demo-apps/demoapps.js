@@ -9,7 +9,10 @@ app.use(nofavicon());
 app.use(require('cors')());
 app.use(compression())
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
+app.use('/', expressStaticGzip(__dirname + "/node_modules/"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies

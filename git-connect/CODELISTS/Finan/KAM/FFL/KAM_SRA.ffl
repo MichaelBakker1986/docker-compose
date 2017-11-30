@@ -3190,7 +3190,7 @@ model KAM_SRA uses BaseModel
 					frequency : document;
 					title : "Gegevens van de contactpersoon (aanvrager)";
 					displaytype : currency;
-//					hint : "Voer de gegevens van de aanvrager in.";
+
 					locked : On;
 					visible : 1.0;
 					options_title : locked;
@@ -3340,9 +3340,8 @@ model KAM_SRA uses BaseModel
 					frequency : document;
 					title : "Gegevens van de SRA-accountant";
 					displaytype : currency;
-//					hint : "De gegevens van de SRA-accountant.";
-					locked : On; //					visible : (UserRole = 2.0);
-          visible : 1.0;
+					locked : On;
+                    visible : 1.0;
 					options_title : locked;
 					options_notrend : locked;
 					options_trend : locked;
@@ -3354,7 +3353,7 @@ model KAM_SRA uses BaseModel
 						title : "Initialen";
 						top_blanklines : 1.0;
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryName
@@ -3364,7 +3363,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "Achternaam";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryFunction
@@ -3374,7 +3373,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "Functie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryTitle
@@ -3393,7 +3392,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "Naam organisatie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryPlace
@@ -3403,7 +3402,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "Vestigingsplaats organisatie";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryPhoneNumber
@@ -3413,7 +3412,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "Telefoonnummer";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+						options_title : locked;
 
 					}
 					variable IntermediaryEmailAdress
@@ -3423,7 +3422,7 @@ model KAM_SRA uses BaseModel
 						data_options : unscalable;
 						title : "E-mailadres";
 						visible : 1.0;
-						options_title : locked; //inputRequired: (UserRole = 2.0);
+                    options_title : locked;
 					}
 				}
 			}
@@ -3489,7 +3488,7 @@ model KAM_SRA uses BaseModel
 						options_title : locked;
 						inputRequired : true;
 					}
-					variable HuidigeKredietFaciliteitenMemo                           // EJS: nieuw
+					variable HuidigeKredietFaciliteitenMemo
 					{
 						datatype : string;
 						frequency : document;
@@ -3503,7 +3502,7 @@ model KAM_SRA uses BaseModel
 						options_title : locked;
 						inputRequired : true;
 					}
-					variable NieuweKredietbehoefteMemo                               // EJS: nieuw
+					variable NieuweKredietbehoefteMemo
 					{
 						datatype : string;
 						frequency : document;
@@ -5112,7 +5111,6 @@ model KAM_SRA uses BaseModel
 						data_options : hideFirstNoTrendColumn;
 						}
 					}
-					//					variable = pTotaalInvesteringen
 					variable pTotaalInvesteringen
 					{
 						datatype : number;
@@ -5437,7 +5435,6 @@ model KAM_SRA uses BaseModel
 						formula : ExcessCash-MutationExcessCash;
 						title : "Saldo liquide middelen vorig jaar";
 						displaytype : currency;
-						//top_separator: 1;
 						visible : 1.0;
 						options_title : locked;
 						options_notrend : locked;
@@ -5451,14 +5448,14 @@ model KAM_SRA uses BaseModel
 						formula : CapitalShortfall-MutationCapitalShortfall;
 						title : "Vermogensbehoefte vorig jaar";
 						displaytype : currency;
-						//top_separator: 1;
+						
 						visible : 1.0;
 						options_title : locked;
 						options_notrend : locked;
 						options_trend : locked;
 					}
 
-					//					variable = pFinancieringsBehoefte
+					
 					variable pFinancieringsBehoefte
 					{
 						datatype : number;
@@ -6146,7 +6143,7 @@ model KAM_SRA uses BaseModel
 						data_options : hideFirstNoTrendColumn;
 						}
 					}
-					//					variable = pFinancieringsOverschot
+					
 					variable pFinancieringsTekort
 					{
 						datatype : number;
@@ -6168,7 +6165,7 @@ model KAM_SRA uses BaseModel
 					datatype : string;
 					aggregation : balance;
 					title : "Toelichting op de financieringen";
-// [p] kan nog niet:					hint : "[p]Denk hierbij onder meer aan:[/p] [p]Gouden balansregel: lang met lang en kort met kort[/p] [p]Bij financiering van bedrijfsuitrusting zijn de aflossingen minimaal gelijk aan de afschrijvingen[/p] [p]Waar kan bij financiering in rekening-courant ten behoeve van voorraden en debiteuren de limiet aan worden gekoppeld?[/p] [p]Borgstellingskrediet[/p] [p]Garantiestelling (overheidsgarantie, etc.)[/p] [p]Groeifaciliteit[/p]";
+
 					hint : "Denk hierbij onder meer aan: Gouden balansregel: lang met lang en kort met kort; Bij financiering van bedrijfsuitrusting zijn de aflossingen minimaal gelijk aan de afschrijvingen; Waar kan bij financiering in rekening-courant ten behoeve van voorraden en debiteuren de limiet aan worden gekoppeld?; Borgstellingskrediet; Garantiestelling (overheidsgarantie, etc.); Groeifaciliteit";
 					top_separator : 1.0;
 					visible : 1.0;
@@ -7543,7 +7540,7 @@ model KAM_SRA uses BaseModel
 							options_trend : locked;
 						}
 					}
-					//variable = OrdinaryProfitBeforeTaxes
+					
 					variable OrdinaryProfitBeforeTaxes
 					{
 						datatype : number;
@@ -7630,7 +7627,7 @@ model KAM_SRA uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-					//					variable = ProfitAfterTax
+					
 					variable ProfitAfterTax
 					{
 						datatype : number;
@@ -8212,16 +8209,16 @@ model KAM_SRA uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-			//		variable KAM_DefensiveInterval refers to DefensiveInterval
-				//	{
-					//	title : "Defensive interval (weken)";
-					//	fixed_decimals : 1.0;
+			
+				
+					
+					
 
-					//	visible : 1.0;
-					//	options_title : locked;
-					//	options_notrend : locked;
-					//	options_trend : locked;
-					//}
+					
+					
+					
+					
+					
 				}
 				variable RatingRatios
 				{
@@ -8295,16 +8292,16 @@ model KAM_SRA uses BaseModel
 						options_notrend : locked;
 						options_trend : locked;
 					}
-//					variable KAM_DebtToEBITDA refers to DebtToEBITDA
-//					{
-//						title : "Debt To EBITDA";
-//						fixed_decimals : 2.0;
 
-						//visible : 1.0;
-						//options_title : locked;
-						//options_notrend : locked;
-						//options_trend : locked;
-//					}
+
+
+
+
+						
+						
+						
+						
+
 				}
 				variable ProfitabilityRatios
 				{

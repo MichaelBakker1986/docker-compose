@@ -47,11 +47,11 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
         oop.inherits(DocCommentHighlightRules, TextHighlightRules);
         var ExampleHighlightRules = function() {
             var keywordMapper = this.createKeywordMapper({
-                "variable.language": "SumFor|MinMax|Now|Round|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
-                "keyword": "Implies|variable|tuple|formula|and|or|formula_notrend|formula_trend",
+                "variable.language": "unscalable|scorecard|boolean|document|column|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
+                "keyword": "Implies|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|model|valid|hint",
                 "comment": "#",
                 "storage.type": "&",
-                "support.function": "+",
+                "support.function": "+|and|or|entered|visible",
                 "constant.language": "NA|T|X|0|1|2|3|4|5|6|7|8|9|."
             }, "text", true);
 
