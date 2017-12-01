@@ -1,13 +1,5 @@
 /**
  * find displaytype = scorecard
- * add validation to all steps
- * fix input required
- * parse back to ffl
- * TODO: skip the part where formula's are parsed
- * When parsing, remove all default formula.
- * While de-parsing, put all default formula back
- * So a line in result can be multiple lines original
- * First milestone could be a formatting tool
  */
 var LexialParser = require('./plugins/FFLFormatter').LexialParser
 
@@ -61,9 +53,7 @@ Indexer.prototype.print = function() {
         }
     }
 }
-var formulaMapping = {
-    inputRequired: 'required'
-}
+var formulaMapping = {nputRequired: 'required'}
 ScorecardTool.prototype.parse = function(input) {
     var indexer = new Indexer();
     var model = LexialParser.create(input);

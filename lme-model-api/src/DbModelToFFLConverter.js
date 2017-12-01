@@ -1,6 +1,23 @@
 /**
  * Used in front-end to reassemble the FFL file when needed.
  */
+var StringBuffer = function() {
+    this.buffer = [];
+    this.index = 0;
+};
+
+StringBuffer.prototype = {
+    append: function(s) {
+        this.buffer[this.index] = s;
+        this.index += 1;
+        return this;
+    },
+
+    toString: function() {
+        return this.buffer.join("");
+    }
+}
+
 function DbToFFLIndexer(model) {
     this.schema = model.schema;
     this.nodes = model.nodes;
@@ -18,11 +35,11 @@ DbToFFLIndexer.prototype.addNode = function(name, index, node, parentName) {
     this.child[parentName][index] = name
 }
 DbToFFLIndexer.prototype.toGeneratedCommaSeperated = function() {
-    let output = "";//reset output
+    let output = new StringBuffer();
     this.walk('root', 0, function(variable, depth) {
         output += " ".repeat(depth) + variable.join(',') + "\n";
     })
-    this.output = output;
+    this.output = output.toString();
     return output;
 }
 DbToFFLIndexer.prototype.walk = function(variableName, depth, visitor) {

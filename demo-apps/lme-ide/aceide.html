@@ -18,13 +18,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <script src="engineonly.js"></script>
     <script src="aceide.js"></script>
     <link rel="stylesheet" href="aceide.css">
 </head>
-<body class="hold-transition skin-blue sidebar-collapse sidebar-mini fixed" ng-controller="ideController">
-<div class="wrapper">
+<body class="controlsidebar hold-transition sidebar-mini skin-blue sidebar-collapse fixed" ng-controller="ideController">
+<div id="pagewrapper" class="wrapper">
     <header class="main-header">
         <a class="logo">
             <span class="logo-mini"><b>l</b>me</span>
@@ -49,7 +50,7 @@
                         <span ng-switch-when="FFLModelEditorView" class="input-group-btn">
                              <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
                         </span>
-                        <span  class="input-group-btn">
+                        <span class="input-group-btn">
                              <button type="button" ng-click="dbModelConvert()" data-toggle="tooltip" title="Load model from database" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
                         </span>
                         <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode" class="input-group-btn">
@@ -140,9 +141,9 @@
                                   </li>
                               </ul>
                           </li>-->
-                        <!-- <li>
-                             <a  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                         </li>-->
+                        <li>
+                            <a ng-click="togglePropertiesSidebar()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -188,25 +189,10 @@
         <strong>Copyright &copy; 2014-2017 <a>Michael Bakker</a>.</strong> All rights reserved.
     </footer>
     <aside class="control-sidebar control-sidebar-dark">
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li><a data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <div ng-repeat="p in activeVariable">
+            <label>{{p.name}}</label>
+            <div>
+                <input placeholder="enter value" class="form-control" ng-model="p.value">
             </div>
         </div>
     </aside>

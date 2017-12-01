@@ -1,38 +1,4 @@
-if (!String.prototype.repeat) {
-    String.prototype.repeat = function(count) {
-        'use strict';
-        if (this == null) {
-            throw new TypeError('can\'t convert ' + this + ' to object');
-        }
-        var str = '' + this;
-        count = +count;
-        if (count != count) {
-            count = 0;
-        }
-        if (count < 0) {
-            throw new RangeError('repeat count must be non-negative');
-        }
-        if (count == Infinity) {
-            throw new RangeError('repeat count must be less than infinity');
-        }
-        count = Math.floor(count);
-        if (str.length == 0 || count == 0) {
-            return '';
-        }
-        // Ensuring count is a 31-bit integer allows us to heavily optimize the
-        // main part. But anyway, most current (August 2014) browsers can't handle
-        // strings 1 << 28 chars or longer, so:
-        if (str.length * count >= 1 << 28) {
-            throw new RangeError('repeat count must not overflow maximum string size');
-        }
-        var rpt = '';
-        for (var i = 0; i < count; i++) {
-            rpt += str;
-        }
-        return rpt;
-    }
-}
-
+require('../StringUtils')//inject .Repeat into String object
 function LexialParser(data) {
     this.original = data;
     this.data = data;
@@ -163,24 +129,12 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
         var temp = parts[parts.length - 1];
         parts.length--
         temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
-            //here should go tuple/modifier/refer-to extraction.
             const refId = $1.indexOf('___');
-            //var format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
-            var format = '{1}{2}{3}{{4}{5}}';
-            if (self.props) {
-                format = '{1}{2}' + (" ".repeat(70 - refId)) + '{3}{{4}{5}}';
-            } else {
-                format = '{1}{2}\n{3}{\n{4}\n{5}}'.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent)
-            }
-            varparts.push(format.format(null, indent, $1.substring(0, refId - 1), indent, self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))), indent))
-            //varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
+            varparts.push(indent + $1.substring(0, refId - 1) + "\n" + indent + "{\n" + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + "\n" + indent + "}")
             return ''
         });
     }
-    if (self.props) {
-        parts.sort().reverse()
-    }
-    var lb = self.props ? ';' : ';\n'
+    var lb = ';\n'
     var r;
     if (parts.length == 0) {
         if (varparts.length == 0) {
@@ -205,7 +159,6 @@ function Factory() {
 
 Factory.prototype.create = function(input) {
     const lexialParser = new LexialParser(input);
-    //  lexialParser.props = this.props;
     return {
         visit: function(visitor) {
             return lexialParser.walk(visitor)

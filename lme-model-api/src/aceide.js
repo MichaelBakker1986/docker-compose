@@ -47,7 +47,8 @@ function scrollTop() {
     aceEditor.selection.moveTo(0, 0)
 }
 
-angular.module('lmeapp', []).controller('ideController', function($scope, $http) {
+angular.module('lmeapp', ['angular.filter']).controller('ideController', function($scope, $http) {
+    let currentIndexer;//current modelindexer
     $http.get('resources/' + windowModelName + '.js').then(function(data) {
         eval(data.data)
         LME = LMEMETA.exportWebModel();
@@ -77,12 +78,15 @@ angular.module('lmeapp', []).controller('ideController', function($scope, $http)
             ]
         }
     }
+    $scope.togglePropertiesSidebar = function() {
+        $('#pagewrapper').toggleClass('control-sidebar-open')
+    }
     $scope.dbModelConvert = function(name) {
         Pace.track(function() {
             $.getJSON("model?model=" + windowModelName, function(data) {
-                const dbToFFLIndexer = new DbToFFLIndexer(data.data);
-                dbToFFLIndexer.indexProperties();
-                aceEditor.setValue(dbToFFLIndexer.toGeneratedCommaSeperated())
+                currentIndexer = new DbToFFLIndexer(data.data);
+                currentIndexer.indexProperties();
+                aceEditor.setValue(currentIndexer.toGeneratedCommaSeperated())
             });
         });
     }
@@ -208,9 +212,7 @@ angular.module('lmeapp', []).controller('ideController', function($scope, $http)
             }
         }
     });
-});
-//LME-Model stuff
-$(document).ready(function() {
+
     $.getJSON("/branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
@@ -268,7 +270,6 @@ $(document).ready(function() {
 
     function handleModelChange() {
         Pace.track(function() {
-            windowModelName = $("#models").val();
             window.location.href = "#" + windowModelName + "&" + userID;
             var xhr = new XMLHttpRequest();
             xhr.addEventListener('progress', function(e) {
@@ -292,7 +293,10 @@ $(document).ready(function() {
         $("#models").autocomplete({
             source: data,
             autoFocus: true,
-            change: handleModelChange
+            change: function() {
+                windowModelName = $('#models').val();
+                handleModelChange()
+            }
         });
     })
     $("#models").keydown(function(event) {
@@ -302,7 +306,7 @@ $(document).ready(function() {
             return false;
         }
     });
-    handleModelChange(windowModelName)
+
 
     aceEditor = ace.edit("editor");
     var langTools = ace.require("ace/ext/language_tools");
@@ -325,19 +329,54 @@ $(document).ready(function() {
     });
     aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
     aceEditor.resize()
+    aceEditor.on("changeCursor", function(e) {
+        console.info(e)
+    });
     aceEditor.on("change", function(e) {
-        if (aceEditor.curOp && aceEditor.curOp.command.name) console.log(e);
-
+        var fflAnnotations = []
+        if (aceEditor.curOp && aceEditor.curOp.command.name) {
+            console.info('look at row :' + e.start.row)
+            console.info('look at row :' + e.end.row)
+            console.log(e);
+            fflAnnotations.push({
+                row: e.start.row,
+                column: 0,
+                text: 'Changed', // Or the Json reply from the parser
+                type: 'info' // also warning and information
+            })
+            aceEditor.session.setAnnotations(fflAnnotations);
+        }
         else console.log("other change")
     })
-    /* editor.commands.addCommand({
-         name: 'replace',
-         bindKey: {win: 'Ctrl-R', mac: 'Command-Option-F'},
-         exec: function(editor) {
-             ace.config.loadModule("ace/ext/searchbox", function(e) {
-                 e.Search(editor, true)
-             });
-         },
-         readOnly: true
-     });*/
+    $scope.activeVariable = [{name: 'b', value: 'b'}];
+
+    function setActiveVariable() {
+        const row = aceEditor.selection.getCursor().row
+        const variableLine = aceEditor.session.getLine(row);
+        const variableName = variableLine.split(',')[0].trim();
+        console.info(variableName)
+        console.info(currentIndexer.vars[variableName])
+
+        $scope.$apply(function() {
+            var variable = [];
+            for (var paramIndex = 0; paramIndex < currentIndexer.schema.length; paramIndex++) {
+                var propertyName = currentIndexer.schema[paramIndex];
+                variable.push({name: propertyName, value: currentIndexer.vars[variableName][paramIndex] || ""})
+            }
+            $scope.activeVariable = variable;
+        })
+    }
+
+    aceEditor.commands.on("afterExec", function(e) {
+        if (e.command.name == 'golinedown') {
+            setActiveVariable();
+        }
+        else if (e.command.name == 'golineup') {
+            setActiveVariable();
+        }
+        console.info({name: e.command.name, args: e.args})
+    });
+    // $('#pagewrapper').toggleClass('control-sidebar-open')
+    //  $scope.dbModelConvert(windowModelName)
+    handleModelChange(windowModelName)
 });
