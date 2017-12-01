@@ -19,11 +19,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     limit: '50mb'
 }));
 var stash = require('./src/stash').Stash;
+var DBModel = require('../git-connect/ModelAssembler');
 
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-    app.use('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
+app.use('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
@@ -51,6 +52,15 @@ app.post('*/preview', (req, res) => {
         res.json({status: 'ok', link: data});
     }).catch((err) => {
         log.debug('Failed to write ' + req.body.model + '.ffl file.', err)
+        res.json({status: 'fail', reason: err.toString()});
+    })
+});
+app.get('*/model', (req, res) => {
+    var name = req.query.model;
+    DBModel.getModel(name).then((data) => {
+        res.json({status: 'succes', data: data});
+    }).catch((err) => {
+        log.debug('Failed to fetch model from database', err)
         res.json({status: 'fail', reason: err.toString()});
     })
 });

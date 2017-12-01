@@ -49,6 +49,9 @@
                         <span ng-switch-when="FFLModelEditorView" class="input-group-btn">
                              <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
                         </span>
+                        <span  class="input-group-btn">
+                             <button type="button" ng-click="dbModelConvert()" data-toggle="tooltip" title="Load model from database" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
+                        </span>
                         <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode" class="input-group-btn">
                               <button ng-click="toggleProperties()" type="button" data-toggle="tooltip" title="show visible, locked, required" class="btn btn-info btn-flat"><i class="fa fa-sliders"></i></button>
                         </span>

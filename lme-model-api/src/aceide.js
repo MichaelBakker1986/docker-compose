@@ -9,6 +9,7 @@ var EconomicEditorView = require('../../model-tests/EconomicEditorView').Economi
 var StoryParser = require('../../model-tests/StoryParser').StoryParser
 var FFLFormatter = require('../../model-tests/plugins/FFLFormatter').LexialParser
 var ScorecardTool = require('../../model-tests/ScorecardTool').ScorecardTool
+var DbToFFLIndexer = require('../../lme-model-api/src/DbModelToFFLConverter').DbToFFLIndexer
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -75,6 +76,15 @@ angular.module('lmeapp', []).controller('ideController', function($scope, $http)
                 {text: 'Make bigdata analyses from all models to find generics'}
             ]
         }
+    }
+    $scope.dbModelConvert = function(name) {
+        Pace.track(function() {
+            $.getJSON("model?model=" + windowModelName, function(data) {
+                const dbToFFLIndexer = new DbToFFLIndexer(data.data);
+                dbToFFLIndexer.indexProperties();
+                aceEditor.setValue(dbToFFLIndexer.toGeneratedCommaSeperated())
+            });
+        });
     }
     $scope.runJBehaveTest = function() {
         var annotations = []
@@ -156,6 +166,19 @@ angular.module('lmeapp', []).controller('ideController', function($scope, $http)
         EconomicEditorView.on = !EconomicEditorView.on;
         setValue(fflModel)
     }
+    window.addEventListener("keydown", function(e) {
+        if (e.ctrlKey && e.shiftKey) {
+            return;
+        }
+        if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+            e.preventDefault();
+            aceEditor.execCommand("find")
+        }
+        else if ((e.ctrlKey && e.keyCode === 82)) {
+            e.preventDefault();
+            aceEditor.execCommand("replace")
+        }
+    })
     $(window).bind('keydown', function(evt) {
         if (evt.ctrlKey || evt.metaKey) {
             switch (String.fromCharCode(evt.which).toLowerCase()) {
@@ -302,4 +325,19 @@ $(document).ready(function() {
     });
     aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
     aceEditor.resize()
+    aceEditor.on("change", function(e) {
+        if (aceEditor.curOp && aceEditor.curOp.command.name) console.log(e);
+
+        else console.log("other change")
+    })
+    /* editor.commands.addCommand({
+         name: 'replace',
+         bindKey: {win: 'Ctrl-R', mac: 'Command-Option-F'},
+         exec: function(editor) {
+             ace.config.loadModule("ace/ext/searchbox", function(e) {
+                 e.Search(editor, true)
+             });
+         },
+         readOnly: true
+     });*/
 });

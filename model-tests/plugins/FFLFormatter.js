@@ -113,13 +113,11 @@ LexialParser.prototype.walk = function(visit) {
     this.removeWhite();
     this.extractVars();
     var firstVar = this.findRootVariable();
-    this.walkTree(visit, [firstVar, 'root', null, null, false, null, this.vars[firstVar].trim()], 1, firstVar)
+    this.vars[firstVar] = this.vars[firstVar].replace(/;root/i, ';variable root')
+    this.walkTree(visit, ['root', firstVar, null, null, false, null, this.vars[firstVar].trim()], 1, firstVar)
 }
 LexialParser.prototype.walkTree = function(visit, var_desc, depth, index) {
     var self = this;
-    if (this.vars[index] == undefined) {
-        console.info('')
-    }
     const parts = this.vars[index].trim().split(';')
     const children = [];
     if (parts[parts.length - 1] == '') {
@@ -129,18 +127,18 @@ LexialParser.prototype.walkTree = function(visit, var_desc, depth, index) {
         parts.length--;
         temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
             //here should go tuple/modifier/refer-to extraction.
-            const refId = $1.indexOf('___');
-            const varDesc = $1.substring(0, refId - 1)
+            const refIdStartIndex = $1.indexOf('___');
+            const varDesc = $1.substring(0, refIdStartIndex - 1)
             const tuple = varDesc.startsWith('tuple');
             const referIdx = varDesc.toLowerCase().indexOf('refers to')
-            const varname = tuple ? referIdx == -1 ? varDesc.substring(4) : varDesc.substring(4, referIdx) : referIdx == -1 ? varDesc.substring(9) : varDesc.substring(9, referIdx);
+            const referstoVariableName = referIdx != -1 ? varDesc.substring(referIdx + 10) : null;
+            const varname = tuple ? referIdx == -1 ? varDesc.substring(6) : varDesc.substring(6, referIdx) : referIdx == -1 ? varDesc.substring(9) : varDesc.substring(9, referIdx);
             const modifier = varname.startsWith('+') ? '+' : varname.startsWith('=') ? '=' : varname.startsWith('-') ? '-' : null;
             let name = varname.substring(modifier ? 1 : 0);
-            let varRef = parseInt($1.substring(refId + 3));
-
-            let variable = [name, varRef, modifier, var_desc[1], tuple, 'referstovariablename', varDesc];
+            let varRefIndex = parseInt($1.substring(refIdStartIndex + 3));
+            let variable = [name, varRefIndex, modifier, var_desc[0], tuple, referstoVariableName, varDesc, children.length];
             children.push(variable)
-            self.walkTree(visit, variable, depth + 1, varRef)
+            self.walkTree(visit, variable, depth + 1, varRefIndex)
             return ''
         });
     }
@@ -164,7 +162,6 @@ LexialParser.prototype.prettyFormatFFL = function(depth, index) {
     } else {
         var temp = parts[parts.length - 1];
         parts.length--
-
         temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
             //here should go tuple/modifier/refer-to extraction.
             const refId = $1.indexOf('___');
