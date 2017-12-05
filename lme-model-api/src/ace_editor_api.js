@@ -1,8 +1,8 @@
-var ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
-var AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
-var ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
-var V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
-var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
+const ConvertEvaluateAsString = require('../../model-tests/plugins/ConvertEvaluateAsString').ConvertEvaluateAsString
+const AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter').AmpersandConverter
+const ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
+const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
+const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 
 
 function AceEditor() {

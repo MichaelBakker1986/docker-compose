@@ -2,11 +2,11 @@
  * editor variable is set to the window.
  */
 
-var EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-var FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
-var ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
-var StoryParser = require('../../model-tests/StoryParser').StoryParser
-var RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
+const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
+const FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
+const ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
+const StoryParser = require('../../model-tests/StoryParser').StoryParser
+const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
 var Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
 
 var fflModel = '';
@@ -307,14 +307,14 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     function reindex(start, end) {
         for (var lineNumber = start; lineNumber <= end; lineNumber++) {
             const textInLine = aceEditor.aceEditor.session.getLine(lineNumber);
-            if (currentIndexer.validate(textInLine)) {
-                console.info(textInLine)
-                var variable = currentIndexer.createInformationObject(textInLine)
-                //right side-bar toggle
-                $scope.$apply(function() {
-                    $scope.activeVariable = variable;
-                })
-            }
+            /*   if (currentIndexer.validate(textInLine)) {
+                   console.info(textInLine)
+                   var variable = currentIndexer.createInformationObject(textInLine)
+                   //right side-bar toggle
+                   $scope.$apply(function() {
+                       $scope.activeVariable = variable;
+                   })
+               }*/
         }
     }
 
