@@ -25,7 +25,7 @@ model PFM uses BaseModel
       {
         datatype: number;
         frequency: document;
-        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        formula: If(Pos("IFRS-EU" , FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL" , FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT[1])>0,2,0)));
         data_options: unscalable;
         displaytype: select;
         title: "Layout";
@@ -101,7 +101,7 @@ model PFM uses BaseModel
         visible: 1;
         options_title: locked;
       }
-      variable FES_STARTDATEPERIOD
+      variable FES_StartDatePERIOD
       {
         datatype: number;
         frequency: column;
@@ -364,20 +364,20 @@ model PFM uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1) and (Q_Map02[1]=1) and (Q_Map03[1]=1) and (Q_Map04[1]=1) and (Q_Map05[1]=1) and (Q_Map06[1]=1) and (Q_Map07[1]=1)and (Q_Map08[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      formula: If( (Q_MAP01[1]=1) and (Q_MAP02[1]=1) and (Q_MAP03[1]=1) and (Q_MAP04[1]=1) and (Q_MAP05[1]=1) and (Q_MAP06[1]=1) and (Q_MAP07[1]=1)and (Q_MAP08[1]=1) or (Length ( Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
       data_options: unscalable;
-      displaytype: select;
+      displaytype: scorecard;
       title: "Personal Finance";
       locked: 1;
       visible: 1;
       choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Jouw gegevens";
@@ -388,11 +388,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 1";
           top_blanklines: 1;
@@ -401,11 +401,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP01[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -413,7 +413,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -424,13 +424,13 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_HINT
+        variable Q_MAP01_HINT
         {
           datatype: string;
           frequency: document;
           data_options: unscalable;
           title: "Hinttekst stap 1";
-          hint: "Dit is de hinttekst van de variable 'Q_Map01_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
+          hint: "Dit is de hinttekst van de variable 'Q_MAP01_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -441,7 +441,7 @@ model PFM uses BaseModel
           datatype: string;
           frequency: document;
           data_options: unscalable;
-          title: EvaluateAsString(Partner01Naam[1]);
+          title: String(Partner01Naam[1]);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
@@ -507,7 +507,7 @@ model PFM uses BaseModel
           datatype: string;
           frequency: document;
           data_options: unscalable;
-          title: EvaluateAsString(Partner02Naam[1]);
+          title: String(Partner02Naam[1]);
           locked: 1;
           visible: (Partner01BurgerlijkeStaat>=10);
           options_title: locked;
@@ -544,7 +544,7 @@ model PFM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -554,11 +554,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -568,11 +568,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -582,7 +582,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map01_Paragraaf05
+        variable Q_MAP01_PARAGRAAF05
         {
           datatype: number;
           frequency: document;
@@ -592,7 +592,7 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_Paragraaf05Sub1 refers to ModelVersion
+          variable Q_MAP01_PARAGRAAF05SUB1 refers to ModelVersion
           {
             datatype: string;
             frequency: document;
@@ -653,7 +653,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf05Sub6 refers to MatrixVersion
+          variable Q_MAP01_PARAGRAAF05SUB6 refers to MatrixVersion
           {
             datatype: string;
             frequency: document;
@@ -664,7 +664,7 @@ model PFM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01_Paragraaf09
+        variable Q_MAP01_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -674,11 +674,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_STATUS
+          variable Q_MAP01_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map01;
+            formula: Q_MAP01;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -689,7 +689,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf09Sub2 refers to Q_Map01_WARNING
+          variable Q_MAP01_PARAGRAAF09SUB2 refers to Q_MAP01_WARNING
           {
             datatype: string;
             frequency: document;
@@ -700,7 +700,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf09Sub3 refers to Q_Map01_INFO
+          variable Q_MAP01_PARAGRAAF09SUB3 refers to Q_MAP01_INFO
           {
             datatype: string;
             frequency: document;
@@ -711,7 +711,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf09Sub4 refers to Q_Map01_VALIDATION
+          variable Q_MAP01_PARAGRAAF09SUB4 refers to Q_MAP01_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -722,7 +722,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf09Sub5 refers to Q_Map01_REQUIREDVARS
+          variable Q_MAP01_PARAGRAAF09SUB5 refers to Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -734,7 +734,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf09Sub6 refers to Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_PARAGRAAF09SUB6 refers to Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -748,7 +748,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map02
+      variable Q_MAP02
       {
         datatype: number;
         frequency: document;
@@ -762,28 +762,28 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map02_WARNING
+        variable Q_MAP02_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 2";
           top_blanklines: 1;
           visible: 1;
           options_title: locked;
         }
-        variable Q_Map02_INFO
+        variable Q_MAP02_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP02[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 2";
           visible: 1;
           options_title: locked;
         }
-        variable Q_Map02_VALIDATION
+        variable Q_MAP02_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -800,7 +800,7 @@ model PFM uses BaseModel
           formula_notrend: Partner1Box1Inkomenloon+Partner1TotaalAlimentatie+Partner1Afkooplijfrente+Partner1EigenWoning+Partner1ReiskostenAftrek;
           formula_trend: Partner1Box1Inkomenloon+Partner1TotaalAlimentatie+Partner1Afkooplijfrente+Partner1EigenWoning+Partner1ReiskostenAftrek;
           displaytype: currency;
-          title: EvaluateAsString("Inkomen "&GetTitle(Partner01));
+          title: String("Inkomen "&GetTitle(Partner01));
           top_separator: 1;
           top_blanklines: 1;
           display_options: showColumnTitlesAboveSubVars;
@@ -1293,7 +1293,7 @@ model PFM uses BaseModel
           formula_notrend: Partner2Box1Inkomenloon+Partner2Box1Resultaat+Partner2TotaalAlimentatie+Partner2Afkooplijfrente+Partner2EigenWoning;
           formula_trend: Partner2Box1Inkomenloon+Partner2Box1Resultaat+Partner2TotaalAlimentatie+Partner2Afkooplijfrente+Partner2EigenWoning;
           displaytype: currency;
-          title: EvaluateAsString("Inkomen "&GetTitle(Partner02));
+          title: String("Inkomen "&GetTitle(Partner02));
           display_options: showColumnTitlesAboveSubVars;
           locked: 1;
           visible: 1;
@@ -1794,7 +1794,7 @@ model PFM uses BaseModel
           options_notrend: locked;
           options_trend: locked;
         }
-        variable Q_Map02_Hulpvariabelen
+        variable Q_MAP02_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1804,11 +1804,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map02_REQUIREDVARS
+          variable Q_MAP02_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (2)";
@@ -1818,11 +1818,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_ENTEREDREQUIREDVARS
+          variable Q_MAP02_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (2)";
@@ -1833,7 +1833,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map03
+      variable Q_MAP03
       {
         datatype: number;
         frequency: document;
@@ -1847,11 +1847,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map03_WARNING
+        variable Q_MAP03_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 3";
           top_blanklines: 1;
@@ -1860,11 +1860,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_INFO
+        variable Q_MAP03_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP03[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 3";
           locked: 1;
@@ -1872,7 +1872,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_VALIDATION
+        variable Q_MAP03_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -1883,7 +1883,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_Paragraaf01
+        variable Q_MAP03_PARAGRAAF01
         {
           datatype: number;
           frequency: column;
@@ -2115,7 +2115,7 @@ model PFM uses BaseModel
             options_trend: locked;
           }
         }
-        variable Q_Map03_Paragraaf09
+        variable Q_MAP03_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -2125,7 +2125,7 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map03_Paragraaf09Sub1 refers to Q_Map03_WARNING
+          variable Q_MAP03_PARAGRAAF09SUB1 refers to Q_MAP03_WARNING
           {
             datatype: string;
             frequency: document;
@@ -2137,7 +2137,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_Paragraaf09Sub2 refers to Q_Map03_INFO
+          variable Q_MAP03_PARAGRAAF09SUB2 refers to Q_MAP03_INFO
           {
             datatype: string;
             frequency: document;
@@ -2148,7 +2148,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_Paragraaf09Sub3 refers to Q_Map03_VALIDATION
+          variable Q_MAP03_PARAGRAAF09SUB3 refers to Q_MAP03_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -2159,7 +2159,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_Paragraaf09Sub4 refers to Q_Map03_REQUIREDVARS
+          variable Q_MAP03_PARAGRAAF09SUB4 refers to Q_MAP03_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2171,7 +2171,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_Paragraaf09Sub5 refers to Q_Map03_ENTEREDREQUIREDVARS
+          variable Q_MAP03_PARAGRAAF09SUB5 refers to Q_MAP03_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2184,7 +2184,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map03_Hulpvariabelen
+        variable Q_MAP03_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -2194,11 +2194,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map03_REQUIREDVARS
+          variable Q_MAP03_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -2208,11 +2208,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_ENTEREDREQUIREDVARS
+          variable Q_MAP03_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -2223,7 +2223,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map04
+      variable Q_MAP04
       {
         datatype: number;
         frequency: document;
@@ -2236,11 +2236,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map04_WARNING
+        variable Q_MAP04_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 4";
           top_blanklines: 1;
@@ -2249,11 +2249,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_INFO
+        variable Q_MAP04_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP04[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 4";
           locked: 1;
@@ -2261,7 +2261,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_VALIDATION
+        variable Q_MAP04_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -2440,7 +2440,7 @@ model PFM uses BaseModel
             }
           }
         }
-        variable Q_Map04_Paragraaf09
+        variable Q_MAP04_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -2450,7 +2450,7 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map04_Paragraaf09Sub1 refers to Q_Map04_WARNING
+          variable Q_MAP04_PARAGRAAF09SUB1 refers to Q_MAP04_WARNING
           {
             datatype: string;
             frequency: document;
@@ -2462,7 +2462,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_Paragraaf09Sub2 refers to Q_Map04_INFO
+          variable Q_MAP04_PARAGRAAF09SUB2 refers to Q_MAP04_INFO
           {
             datatype: string;
             frequency: document;
@@ -2473,7 +2473,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_Paragraaf09Sub3 refers to Q_Map04_VALIDATION
+          variable Q_MAP04_PARAGRAAF09SUB3 refers to Q_MAP04_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -2484,7 +2484,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_Paragraaf09Sub4 refers to Q_Map04_REQUIREDVARS
+          variable Q_MAP04_PARAGRAAF09SUB4 refers to Q_MAP04_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2496,7 +2496,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_Paragraaf09Sub5 refers to Q_Map04_ENTEREDREQUIREDVARS
+          variable Q_MAP04_PARAGRAAF09SUB5 refers to Q_MAP04_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2509,7 +2509,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map04_Hulpvariabelen
+        variable Q_MAP04_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -2519,11 +2519,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map04_REQUIREDVARS
+          variable Q_MAP04_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (4)";
@@ -2533,11 +2533,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_ENTEREDREQUIREDVARS
+          variable Q_MAP04_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (4)";
@@ -2548,11 +2548,11 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map05
+      variable Q_MAP05
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS);
+        formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Je oude woning";
@@ -2561,11 +2561,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map05_WARNING
+        variable Q_MAP05_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 5";
           top_blanklines: 1;
@@ -2574,11 +2574,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_INFO
+        variable Q_MAP05_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP05[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 5";
           locked: 1;
@@ -2586,7 +2586,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_VALIDATION
+        variable Q_MAP05_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -2597,18 +2597,18 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_HINT
+        variable Q_MAP05_HINT
         {
           datatype: string;
           frequency: document;
           data_options: unscalable;
           title: "Hinttekst stap 5";
-          hint: "Dit is de hinttekst van de variable 'Q_Map05_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
+          hint: "Dit is de hinttekst van de variable 'Q_MAP05_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_Map05_Vraag01
+          variable Q_MAP05_VRAAG01
           {
             datatype: number;
             frequency: document;
@@ -2621,88 +2621,88 @@ model PFM uses BaseModel
             choices: "0:Nee|1:Ja";
             options_title: locked;
           }
-          variable Q_Map05_Vraag02
+          variable Q_MAP05_VRAAG02
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             displaytype: date;
             title: "Wat was de datum van overdracht?";
-            visible: (Q_Map05_Vraag01=1);
+            visible: (Q_MAP05_VRAAG01=1);
             options_title: locked;
           }
-          variable Q_Map05_Vraag03
+          variable Q_MAP05_VRAAG03
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Wat was de verkooprpijs?";
-            visible: (Q_Map05_Vraag01=1);
+            visible: (Q_MAP05_VRAAG01=1);
             options_title: locked;
           }
-          variable Q_Map05_Vraag04
+          variable Q_MAP05_VRAAG04
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Welke kosten heb je gemaakt voor verkoop?";
-            visible: (Q_Map05_Vraag01=1);
+            visible: (Q_MAP05_VRAAG01=1);
             options_title: locked;
           }
-          variable Q_Map05_Vraag05
+          variable Q_MAP05_VRAAG05
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Wat was de hoogte van je oude hypotheek?";
-            visible: (Q_Map05_Vraag01=1);
+            visible: (Q_MAP05_VRAAG01=1);
             options_title: locked;
           }
-          variable Q_Map05_Vraag06
+          variable Q_MAP05_VRAAG06
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Wat verwacht je te krijgen voor je woning?";
-            visible: (Q_Map05_Vraag01=0);
+            visible: (Q_MAP05_VRAAG01=0);
             options_title: locked;
           }
-          variable Q_Map05_Vraag07
+          variable Q_MAP05_VRAAG07
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Wanneer verwacht je de wonin verkocht te hebben?";
-            visible: (Q_Map05_Vraag01=0);
+            visible: (Q_MAP05_VRAAG01=0);
             options_title: locked;
           }
-          variable Q_Map05_Vraag08
+          variable Q_MAP05_VRAAG08
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Welke verkoopkosten verwacht je te maken?";
-            visible: (Q_Map05_Vraag01=0);
+            visible: (Q_MAP05_VRAAG01=0);
             options_title: locked;
           }
-          variable Q_Map05_Vraag09
+          variable Q_MAP05_VRAAG09
           {
             datatype: number;
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Wat is de hoogte van je huidige hypothhek?";
-            visible: (Q_Map05_Vraag01=0);
+            visible: (Q_MAP05_VRAAG01=0);
             options_title: locked;
           }
         }
-        variable Q_Map05_Hulpvariabelen
+        variable Q_MAP05_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -2712,11 +2712,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map05_REQUIREDVARS
+          variable Q_MAP05_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -2726,11 +2726,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_ENTEREDREQUIREDVARS
+          variable Q_MAP05_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -2740,7 +2740,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map05_Paragraaf09
+        variable Q_MAP05_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -2750,11 +2750,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map05_STATUS
+          variable Q_MAP05_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map05;
+            formula: Q_MAP05;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -2765,7 +2765,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_Paragraaf09Sub2 refers to Q_Map05_WARNING
+          variable Q_MAP05_PARAGRAAF09SUB2 refers to Q_MAP05_WARNING
           {
             datatype: string;
             frequency: document;
@@ -2776,7 +2776,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_Paragraaf09Sub3 refers to Q_Map05_INFO
+          variable Q_MAP05_PARAGRAAF09SUB3 refers to Q_MAP05_INFO
           {
             datatype: string;
             frequency: document;
@@ -2787,7 +2787,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_Paragraaf09Sub4 refers to Q_Map05_VALIDATION
+          variable Q_MAP05_PARAGRAAF09SUB4 refers to Q_MAP05_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -2798,7 +2798,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_Paragraaf09Sub5 refers to Q_Map05_REQUIREDVARS
+          variable Q_MAP05_PARAGRAAF09SUB5 refers to Q_MAP05_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2810,7 +2810,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_Paragraaf09Sub6 refers to Q_Map05_ENTEREDREQUIREDVARS
+          variable Q_MAP05_PARAGRAAF09SUB6 refers to Q_MAP05_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -2824,7 +2824,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map06
+      variable Q_MAP06
       {
         datatype: number;
         frequency: document;
@@ -2837,11 +2837,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map06_WARNING
+        variable Q_MAP06_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 6";
           top_blanklines: 1;
@@ -2850,11 +2850,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_INFO
+        variable Q_MAP06_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP06[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 6";
           locked: 1;
@@ -2862,7 +2862,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_VALIDATION
+        variable Q_MAP06_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -2873,7 +2873,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_Woning
+        variable Q_MAP06_WONING
         {
           datatype: number;
           frequency: document;
@@ -3015,7 +3015,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map05_Paragraaf01
+        variable Q_MAP05_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -3026,7 +3026,7 @@ model PFM uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable leningAnn refers to leningAnnHoofdsom
+          variable leningAnn refers to LeningAnnHoofdsom
           {
             datatype: number;
             frequency: column;
@@ -3040,7 +3040,7 @@ model PFM uses BaseModel
             options_title: locked;
             options_notrend: locked;
             options_trend: locked;
-            variable leningAnnHoofdsomORG
+            variable LeningAnnHoofdsomORG
             {
               datatype: number;
               frequency: document;
@@ -3051,7 +3051,7 @@ model PFM uses BaseModel
               visible: 1;
               options_title: locked;
             }
-            variable leningAnnLooptijd
+            variable LeningAnnLooptijd
             {
               datatype: number;
               frequency: document;
@@ -3061,7 +3061,7 @@ model PFM uses BaseModel
               visible: 1;
               options_title: locked;
             }
-            variable leningAnnRenteTarief
+            variable LeningAnnRenteTarief
             {
               datatype: number;
               frequency: document;
@@ -3072,11 +3072,11 @@ model PFM uses BaseModel
               visible: 1;
               options_title: locked;
             }
-            variable leningAnnAnnuiteitORG
+            variable LeningAnnAnnuiteitORG
             {
               datatype: number;
               frequency: document;
-              formula: -Oner(PMT(LeningAnnRenteTarief,LeningAnnLooptijd,LeningAnnHoofdsomORG),NA);
+              formula: -OnEr(PMT(LeningAnnRenteTarief,LeningAnnLooptijd,LeningAnnHoofdsomORG),NA);
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Annuiteit";
@@ -3085,12 +3085,12 @@ model PFM uses BaseModel
               options_title: locked;
               options: locked;
             }
-            variable leningAnnHoofdsom
+            variable LeningAnnHoofdsom
             {
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningAnnHoofdsomORG,LeningAnnHoofdsom[GetT(T,-1)] - LeningAnnAflossing[GetT(T,-1)]);
+              formula_trend: If(ValueT(T)=FirstTinFormulaSet(trend),LeningAnnHoofdsomORG,LeningAnnHoofdsom[GetT(T,-1)] - LeningAnnAflossing[GetT(T,-1)]);
               displaytype: currency;
               title: "Huidige hoofdsom";
               top_separator: 1;
@@ -3120,7 +3120,7 @@ model PFM uses BaseModel
               visible: 1;
               options_title: locked;
             }
-            variable leningAnnAnnuiteit
+            variable LeningAnnAnnuiteit
             {
               datatype: number;
               frequency: column;
@@ -3133,7 +3133,7 @@ model PFM uses BaseModel
               visible: 1;
               options_title: locked;
             }
-            variable leningAnnAnnuiteitNetto
+            variable LeningAnnAnnuiteitNetto
             {
               datatype: number;
               frequency: column;
@@ -3157,7 +3157,7 @@ model PFM uses BaseModel
               options_title: locked, invisible;
               options_notrend: locked, invisible;
               options_trend: locked, invisible;
-              variable leningAnnAnnuiteitActief
+              variable LeningAnnAnnuiteitActief
               {
                 datatype: number;
                 frequency: column;
@@ -3237,7 +3237,7 @@ model PFM uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningLinHoofdsomORG,LeningLinHoofdsom[GetT(T,-1)] - LeningLinAflossing[GetT(T,-1)]);
+              formula_trend: If(ValueT(T)=FirstTinFormulaSet(trend),LeningLinHoofdsomORG,LeningLinHoofdsom[GetT(T,-1)] - LeningLinAflossing[GetT(T,-1)]);
               displaytype: currency;
               title: "Huidige hoofdsom";
               top_separator: 1;
@@ -3384,7 +3384,7 @@ model PFM uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningAflHoofdsomORG,LeningAflHoofdsom[GetT(T,-1)] - LeningAflAflossing[GetT(T,-1)]);
+              formula_trend: If(ValueT(T)=FirstTinFormulaSet(trend),LeningAflHoofdsomORG,LeningAflHoofdsom[GetT(T,-1)] - LeningAflAflossing[GetT(T,-1)]);
               displaytype: currency;
               title: "Huidige hoofdsom";
               top_separator: 1;
@@ -3518,7 +3518,7 @@ model PFM uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningOVERBHoofdsomORG,LeningOVERBHoofdsom[GetT(T,-1)] - LeningOVERBAflossing[GetT(T,-1)]);
+              formula_trend: If(ValueT(T)=FirstTinFormulaSet(trend),LeningOVERBHoofdsomORG,LeningOVERBHoofdsom[GetT(T,-1)] - LeningOVERBAflossing[GetT(T,-1)]);
               displaytype: currency;
               title: "Huidige hoofdsom";
               top_separator: 1;
@@ -3664,7 +3664,7 @@ model PFM uses BaseModel
             options_trend: locked;
           }
         }
-        variable Q_Map06_Paragraaf09
+        variable Q_MAP06_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -3674,7 +3674,7 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map06_Paragraaf09Sub1 refers to Q_Map06_WARNING
+          variable Q_MAP06_PARAGRAAF09SUB1 refers to Q_MAP06_WARNING
           {
             datatype: string;
             frequency: document;
@@ -3686,7 +3686,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_Paragraaf09Sub2 refers to Q_Map06_INFO
+          variable Q_MAP06_PARAGRAAF09SUB2 refers to Q_MAP06_INFO
           {
             datatype: string;
             frequency: document;
@@ -3697,7 +3697,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_Paragraaf09Sub3 refers to Q_Map06_VALIDATION
+          variable Q_MAP06_PARAGRAAF09SUB3 refers to Q_MAP06_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -3708,7 +3708,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_Paragraaf09Sub4 refers to Q_Map06_REQUIREDVARS
+          variable Q_MAP06_PARAGRAAF09SUB4 refers to Q_MAP06_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -3720,7 +3720,7 @@ model PFM uses BaseModel
             options_title: locked, invisible;
             options: locked, invisible;
           }
-          variable Q_Map06_Paragraaf09Sub5 refers to Q_Map06_ENTEREDREQUIREDVARS
+          variable Q_MAP06_PARAGRAAF09SUB5 refers to Q_MAP06_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -3733,7 +3733,7 @@ model PFM uses BaseModel
             options: locked, invisible;
           }
         }
-        variable Q_Map06_Hulpvariabelen
+        variable Q_MAP06_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3743,11 +3743,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map06_REQUIREDVARS
+          variable Q_MAP06_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (6)";
@@ -3757,11 +3757,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_ENTEREDREQUIREDVARS
+          variable Q_MAP06_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (6)";
@@ -3772,7 +3772,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map07
+      variable Q_MAP07
       {
         datatype: number;
         frequency: document;
@@ -3785,11 +3785,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map07_WARNING
+        variable Q_MAP07_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           displaytype: memo;
           title: "Warning voor map 7";
@@ -3799,11 +3799,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_INFO
+        variable Q_MAP07_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP07[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           displaytype: memo;
           title: "Info bij stap 7";
@@ -3812,7 +3812,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_VALIDATION
+        variable Q_MAP07_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -3824,7 +3824,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_Paragraaf01
+        variable Q_MAP07_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -3832,7 +3832,7 @@ model PFM uses BaseModel
           title: "Layout";
           visible: 1;
           options_title: locked;
-          variable Q_Map07_Keuze
+          variable Q_MAP07_KEUZE
           {
             datatype: number;
             frequency: document;
@@ -3843,7 +3843,7 @@ model PFM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map07_Paragraaf09
+        variable Q_MAP07_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -3853,7 +3853,7 @@ model PFM uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_Map07_Paragraaf09Sub1 refers to Q_Map07_WARNING
+          variable Q_MAP07_PARAGRAAF09SUB1 refers to Q_MAP07_WARNING
           {
             datatype: string;
             frequency: document;
@@ -3865,7 +3865,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_Paragraaf09Sub2 refers to Q_Map07_INFO
+          variable Q_MAP07_PARAGRAAF09SUB2 refers to Q_MAP07_INFO
           {
             datatype: string;
             frequency: document;
@@ -3876,7 +3876,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_Paragraaf09Sub3 refers to Q_Map07_VALIDATION
+          variable Q_MAP07_PARAGRAAF09SUB3 refers to Q_MAP07_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -3887,7 +3887,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_Paragraaf09Sub4 refers to Q_Map07_REQUIREDVARS
+          variable Q_MAP07_PARAGRAAF09SUB4 refers to Q_MAP07_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -3899,7 +3899,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_Paragraaf09Sub5 refers to Q_Map07_ENTEREDREQUIREDVARS
+          variable Q_MAP07_PARAGRAAF09SUB5 refers to Q_MAP07_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -3912,7 +3912,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map07_Hulpvariabelen
+        variable Q_MAP07_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3922,11 +3922,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map07_REQUIREDVARS
+          variable Q_MAP07_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (7)";
@@ -3936,11 +3936,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_ENTEREDREQUIREDVARS
+          variable Q_MAP07_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (7)";
@@ -3951,7 +3951,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map09
+      variable Q_MAP09
       {
         datatype: number;
         frequency: document;
@@ -3964,11 +3964,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map09_WARNING
+        variable Q_MAP09_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 9";
           top_blanklines: 1;
@@ -3977,11 +3977,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_INFO
+        variable Q_MAP09_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map09[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP09[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 9";
           locked: 1;
@@ -3989,7 +3989,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_VALIDATION
+        variable Q_MAP09_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -4000,7 +4000,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_Hulpvariabelen
+        variable Q_MAP09_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4010,11 +4010,11 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map09_REQUIREDVARS
+          variable Q_MAP09_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (x)";
@@ -4024,11 +4024,11 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map09_ENTEREDREQUIREDVARS
+          variable Q_MAP09_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (x)";
@@ -4039,7 +4039,7 @@ model PFM uses BaseModel
           }
         }
       }
-      variable Q_Map08
+      variable Q_MAP08
       {
         datatype: number;
         frequency: document;
@@ -4052,11 +4052,11 @@ model PFM uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map08_WARNING
+        variable Q_MAP08_WARNING
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 8";
           top_blanklines: 1;
@@ -4065,11 +4065,11 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map08_INFO
+        variable Q_MAP08_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map08[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP08[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 8";
           locked: 1;
@@ -4077,7 +4077,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map08_VALIDATION
+        variable Q_MAP08_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -4088,7 +4088,7 @@ model PFM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map08_Paragraaf03
+        variable Q_MAP08_PARAGRAAF03
         {
           datatype: number;
           frequency: document;
@@ -4096,7 +4096,7 @@ model PFM uses BaseModel
           title: "Knoppen";
           visible: 1;
           options_title: locked;
-          variable Q_Map08_Paragraaf03Sub1 refers to Q_PREVIOUS_BUTTON_VISIBLE
+          variable Q_MAP08_PARAGRAAF03SUB1 refers to Q_PREVIOUS_BUTTON_VISIBLE
           {
             datatype: number;
             frequency: document;
@@ -4108,7 +4108,7 @@ model PFM uses BaseModel
             choices: "0:Nooit|2:Altijd";
             options_title: locked;
           }
-          variable Q_Map08_Paragraaf03Sub2 refers to Q_NEXT_BUTTON_VISIBLE
+          variable Q_MAP08_PARAGRAAF03SUB2 refers to Q_NEXT_BUTTON_VISIBLE
           {
             datatype: number;
             frequency: document;
@@ -4119,7 +4119,7 @@ model PFM uses BaseModel
             choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
             options_title: locked;
           }
-          variable Q_Map08_Paragraaf03Sub3 refers to Q_CONCEPT_REPORT_VISIBLE
+          variable Q_MAP08_PARAGRAAF03SUB3 refers to Q_CONCEPT_REPORT_VISIBLE
           {
             datatype: number;
             frequency: document;
@@ -4130,7 +4130,7 @@ model PFM uses BaseModel
             choices: "1:Ja|0:Nee";
             options_title: locked;
           }
-          variable Q_Map08_Paragraaf03Sub4 refers to Q_FINAL_REPORT_VISIBLE
+          variable Q_MAP08_PARAGRAAF03SUB4 refers to Q_FINAL_REPORT_VISIBLE
           {
             datatype: number;
             frequency: document;
@@ -4141,7 +4141,7 @@ model PFM uses BaseModel
             choices: "1:Ja|0:Nee";
             options_title: locked;
           }
-          variable Q_Map08_Paragraaf03Sub5 refers to Q_MAKE_FINAL_VISIBLE
+          variable Q_MAP08_PARAGRAAF03SUB5 refers to Q_MAKE_FINAL_VISIBLE
           {
             datatype: number;
             frequency: document;
@@ -4153,7 +4153,7 @@ model PFM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map08_Paragraaf09
+        variable Q_MAP08_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -4163,7 +4163,7 @@ model PFM uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_Map08_Paragraaf09Sub1 refers to Q_Map08_WARNING
+          variable Q_MAP08_PARAGRAAF09SUB1 refers to Q_MAP08_WARNING
           {
             datatype: string;
             frequency: document;
@@ -4175,7 +4175,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map08_Paragraaf09Sub2 refers to Q_Map08_INFO
+          variable Q_MAP08_PARAGRAAF09SUB2 refers to Q_MAP08_INFO
           {
             datatype: string;
             frequency: document;
@@ -4186,7 +4186,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map08_Paragraaf09Sub3 refers to Q_Map08_VALIDATION
+          variable Q_MAP08_PARAGRAAF09SUB3 refers to Q_MAP08_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -4197,7 +4197,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map08_Paragraaf09Sub4 refers to Q_Map08_REQUIREDVARS
+          variable Q_MAP08_PARAGRAAF09SUB4 refers to Q_MAP08_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4209,7 +4209,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map08_Paragraaf09Sub5 refers to Q_Map08_ENTEREDREQUIREDVARS
+          variable Q_MAP08_PARAGRAAF09SUB5 refers to Q_MAP08_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4222,7 +4222,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map08_Hulpvariabelen
+        variable Q_MAP08_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4232,7 +4232,7 @@ model PFM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map08_REQUIREDVARS
+          variable Q_MAP08_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4246,7 +4246,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map08_ENTEREDREQUIREDVARS
+          variable Q_MAP08_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4278,7 +4278,7 @@ model PFM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
           data_options: unscalable;
           title: "Warning voor map 8";
           top_blanklines: 1;
@@ -4291,7 +4291,7 @@ model PFM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MAP0A[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: String(If(Q_MAP0A[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
           data_options: unscalable;
           title: "Info bij stap 8";
           locked: 1;
@@ -4341,7 +4341,7 @@ model PFM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MAP0A_Paragraaf09
+        variable Q_MAP0A_PARAGRAAF09
         {
           datatype: number;
           frequency: document;
@@ -4351,7 +4351,7 @@ model PFM uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_MAP0A_Paragraaf09Sub1 refers to Q_MAP0A_WARNING
+          variable Q_MAP0A_PARAGRAAF09SUB1 refers to Q_MAP0A_WARNING
           {
             datatype: string;
             frequency: document;
@@ -4364,7 +4364,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP0A_Paragraaf09Sub2 refers to Q_MAP0A_INFO
+          variable Q_MAP0A_PARAGRAAF09SUB2 refers to Q_MAP0A_INFO
           {
             datatype: string;
             frequency: document;
@@ -4376,7 +4376,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP0A_Paragraaf09Sub3 refers to Q_MAP0A_VALIDATION
+          variable Q_MAP0A_PARAGRAAF09SUB3 refers to Q_MAP0A_VALIDATION
           {
             datatype: string;
             frequency: document;
@@ -4388,7 +4388,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP0A_Paragraaf09Sub4 refers to Q_MAP0A_REQUIREDVARS
+          variable Q_MAP0A_PARAGRAAF09SUB4 refers to Q_MAP0A_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4400,7 +4400,7 @@ model PFM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP0A_Paragraaf09Sub5 refers to Q_MAP0A_ENTEREDREQUIREDVARS
+          variable Q_MAP0A_PARAGRAAF09SUB5 refers to Q_MAP0A_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
@@ -4413,7 +4413,7 @@ model PFM uses BaseModel
             options: locked;
           }
         }
-        variable Q_MAP0A_Hulpvariabelen
+        variable Q_MAP0A_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4456,7 +4456,7 @@ model PFM uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+        formula: String(If(Q_ROOT[1]=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
         data_options: unscalable;
         title: "Resultaat";
         top_blanklines: 1;
@@ -4464,7 +4464,7 @@ model PFM uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -4575,7 +4575,7 @@ model PFM uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
+        formula: String(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
         data_options: saveCalculatedValue,unscalable;
         title: "Parametersversie";
         hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
@@ -4658,7 +4658,7 @@ model PFM uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(MaxHypotheek>0,&"Je maximale hypotheek is "&MaxHypotheek[1],&""));
+        formula: String(If(MaxHypotheek>0 , "Je maximale hypotheek is "&MaxHypotheek[1] , ""));
         data_options: unscalable;
         displaytype: memo;
         title: "Knock-out(s)?";
@@ -4683,7 +4683,7 @@ model PFM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],""));
+          formula: String(If( Length ( Q_WARNING_01[1])>0 , "[br][/br]"&Q_WARNING_01[1],""));
           data_options: unscalable;
           displaytype: memo;
           title: "Knock-out tekst";
@@ -4697,7 +4697,7 @@ model PFM uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+        formula: String(If( Length ( Q_RESTRICTIESTXT[1])>0  , "[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT  , ""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";
@@ -4730,7 +4730,7 @@ model PFM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If( Length(&Q_RESTRICTIES_01[1])>0,&"[br][/br]"&Q_RESTRICTIES_01[1],""));
+          formula: String(If( Length ( Q_RESTRICTIES_01[1])>0 , "[br][/br]"&Q_RESTRICTIES_01[1],""));
           data_options: unscalable;
           displaytype: memo;
           title: "Restricties tekst";

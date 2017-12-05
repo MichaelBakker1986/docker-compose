@@ -122,7 +122,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
      * values can either be saved with the indexer, or by plain ffl.
      */
     $scope.saveFFLModel = function() {
-        const type = $scope.fflType;
+        const type = '.ffl';//= $scope.fflType;
         if (type == '.ffl2') {
             console.info({schema: currentIndexer.schema, nodes: currentIndexer.nodes});
         }
@@ -131,16 +131,16 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             $scope.saveFeedbackTitle = "Working on it...";
             let data;
             //convert ffl into index file
-            if (type == '.ffl') {
-
-                aceEditor.getValue()
-            }
-
-            data = JSON.stringify({
-                schema: currentIndexer.schema,
-                nodes: currentIndexer.nodes
-            });
-
+            /*if (type == '.ffl') {
+*/
+            data = aceEditor.getValue()
+            /*}
+            else {
+                data = JSON.stringify({
+                    schema: currentIndexer.schema,
+                    nodes: currentIndexer.nodes
+                });
+            }*/
             $.post("saveFFL_LME", {
                 model: $scope.session.fflModelPath,
                 data: data,

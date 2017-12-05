@@ -7,6 +7,10 @@
     "args": "v,onerrv",
     "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
   },
+  "Oner": {
+    "args": "v,onerrv",
+    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
+  },
   "OnEr": {
     "args": "v,onerrv",
     "body": "{ if (isNaN(v)) { return onerrv; } return v; }"

@@ -5,8 +5,8 @@
 var browser = require('browserify');
 var fs = require('fs')
 var name = process.argv[2];
-var fflType = (process.argv[3] == 'FFL2' ? 'importFFL2' : 'importFFl');
-const fileType = (process.argv[3] == 'FFL2' ? '.ffl2' : '.ffl');
+var fflType = 'importFFL';// (process.argv[3] == 'FFL2' ? 'importFFL2' : 'importFFL');
+const fileType = '.ffl';// (process.argv[3] == 'FFL2' ? '.ffl2' : '.ffl');
 
 var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
