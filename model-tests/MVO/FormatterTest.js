@@ -11,5 +11,5 @@ const register = new Register();
 const parse = Formatter.create(register, fflFile).toString();
 const doubleparse = Formatter.create(register, parse).toString();
 const time = (now() - start).toFixed(0);
-assert(time < 8, "formatting KSP twice may never take longer than 8ms")
+assert(time < 20, "formatting KSP twice may never take longer than 20ms")
 assert(parse.length == doubleparse.length, "Formatting twice, always returns into same results")
