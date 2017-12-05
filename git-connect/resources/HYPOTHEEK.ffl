@@ -1102,7 +1102,7 @@ model HYPOTHEEK uses BaseModel
      visible: 1;
      options_title: locked;
      options: locked;
-    }w
+    }
    }
   }
  }
