@@ -42,6 +42,9 @@ LmeAPI.prototype.exportJavaScript = function() {
 LmeAPI.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
+LmeAPI.prototype.importFFL2 = function(ffl) {
+    this.lme.importSolution(ffl, 'ffl2')
+}
 LmeAPI.prototype.exportFFL = function() {
     return this.lme.export('ffl')
 }

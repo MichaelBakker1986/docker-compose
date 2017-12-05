@@ -113,7 +113,7 @@ PropertiesAssembler.prototype.bulkInsert = function(solution) {
             var obj = nodes[i];
             if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName]) {
                 obj.ref = obj.formulaId || obj.ref;
-                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName === null ? undefined : obj.parentName);
+                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName == null ? undefined : obj.parentName);
             }
             else {
                 leftOver.push(obj);

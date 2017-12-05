@@ -239,6 +239,14 @@
     "args": "one",
     "body": "{ return 1 }"
   },
+  "tsy": {
+    "args": "one",
+    "body": "{ return 1 }"
+  },
+  "Tsy": {
+    "args": "one",
+    "body": "{ return 1 }"
+  },
   "FirstTinformulaset": {
     "args": "one",
     "body": "{ return 1 }"
@@ -450,6 +458,7 @@
   "MainPeriod": 3,
   "X": 1,
   "MaxT": 1,
+  "NumberOfyears": 17,
   "FAM": 1,
   "Now": 1,
   "NA": 1e-10,

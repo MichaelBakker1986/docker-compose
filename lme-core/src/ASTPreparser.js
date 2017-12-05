@@ -16,6 +16,9 @@ var simplified = {
             "raw": "1.1"
         }];
     },
+    IRR: function(formulaInfo, node) {
+        node.arguments[0].name = "[1,2]";
+    },
     Min: function(formulaInfo, node) {
         node.callee.name = 'Math.min'
     },

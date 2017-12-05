@@ -34,8 +34,6 @@ function JSWorkBook(context) {
 
 JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
-    //TODO: getSolutionName() should return this.solution.getName();
-    //or Don't use JSWorkBook for solution imports at all.
     this.solution = solution;
     this.modelName = solution.getName();
     this.updateValues();

@@ -1,8 +1,8 @@
 var JSVisitor = require('../../src/JSVisitor');
-var SolutionFacade = require('../../src/SolutionFacade.js')
+var SolutionFacade = require('../../src/SolutionFacade')
 var AST = require('../../../ast-node-utils/index').ast;
 var FflToJsonConverter = require('./FflToJsonConverter');
-var FinFormula = require('./FinFormula.js');
+var FinFormula = require('./FinFormula');
 var esprima = require('esprima');
 var log = require('ff-log');
 //DisplayAs require a Date object, need to add Converter for DisplayTypes.
@@ -37,12 +37,6 @@ FFLParser.prototype.headername = '.finance ffl';
 FFLParser.prototype.parseData = function(data, workbook) {
     var logVars = {variables: []};
     //convert FFL into JSON (Generic)
-    //This case-fix takes too long to perform
-    /* var names = data.split(/(?:(variable|tuple) (?:\=|\+|-){0,1}(\w+))/gmi);
-     for (var nameIdx = 2; nameIdx < names.length; nameIdx + 3) {
-         var name = names[nameIdx];
-         data = data.replace(new RegExp(name, 'gmi'), name)
-     }*/
     var json = FflToJsonConverter.parseFFL(data);
     //lookup  modelName, we need this in the process;
     //all nodes will be given the SolutionName member as ID of its corresponding SolutionName

@@ -1,0 +1,4867 @@
+// model "Personal Finance"
+// created by FINAN 3.2.57.18
+
+import FinanMath.*;
+import BaseModel.*;
+
+model PFM uses BaseModel
+{
+  version: "1.19";
+  ffl_version: "1.2";
+  root
+  {
+    variable RootSub1
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for webclient";
+      top_blanklines: 1;
+      display_options: showColumnTitlesAboveSubVars;
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FES_LAYOUTNR
+      {
+        datatype: number;
+        frequency: document;
+        formula: If(Pos("IFRS-EU",&FES_LAYOUT[1])>0,1,If(Pos("IFRS-PL",&FES_LAYOUT[1])>0,48,If(Pos("IFRS-Intl",&FES_LAYOUT[1])>0,2,0)));
+        data_options: unscalable;
+        displaytype: select;
+        title: "Layout";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+        options_title: locked;
+        options: locked;
+      }
+      variable FES_EXCHANGE_RATES
+      {
+        datatype: string;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        title: "Exchange Rates";
+        top_separator: 1;
+        bottom_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_LAYOUT
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Layout name";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_FLATINPUT
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Is flat input used? (1=yes)";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_PROJECTION_PROFILE
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Projection Profile";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_ORDER
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column order";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMN_VISIBLE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        formula_notrend: 1;
+        formula_trend: 1;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Column visible";
+        top_separator: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_STARTDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Start Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_ENDDATEPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "End Date Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_BASECURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "Base Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_VIEWCURRENCYPERIOD
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "View Currency Period";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FES_COLUMNTYPE
+      {
+        datatype: number;
+        frequency: column;
+        aggregation: balance;
+        data_options: unscalable;
+        displaytype: select;
+        fixed_decimals: 0;
+        title: "Column Type";
+        visible: 1;
+        choices: "0:History|1:Projection";
+        options_title: locked;
+      }
+    }
+    variable RootSub2
+    {
+      datatype: none;
+      frequency: none;
+      title: "General variables for FPS database";
+      locked: 1;
+      visible: 0;
+      options_title: locked, invisible;
+      options: locked, invisible;
+      variable FPS_VAR_Naam
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "NAME";
+        top_blanklines: 1;
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Relatienummer
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CUSTOMERNUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_KVKnr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CHAMBEROFCOMMERCENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_nr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Rechtsvorm_omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "LEGALSTATUSDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_CODE
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BIK_Omschr
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "SECTOROFINDUSTRYDESCRIPTION";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_GridId
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "GRIDID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Accountmanager
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ACCOUNTMANAGER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Kantoor
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "OFFICENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Straat
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STREET";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Housenumber
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "HOUSENUMBER";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Postcode
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "ZIPCODE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Woonplaats
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "CITY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Provincie
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "STATEORPROVINCE";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Land
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "COUNTRY";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_BvDID
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Bureau van Dijk ID";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Telefoon
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Telefoonnummer";
+        visible: 1;
+        options_title: locked;
+      }
+      variable FPS_VAR_Emailadres
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Emailadres";
+        visible: 1;
+        options_title: locked;
+        variable FPS_FINAN_USER_ROLES
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER_ROLES";
+          top_blanklines: 1;
+          visible: 1;
+          options_title: locked;
+        }
+        variable FPS_FINAN_USER
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "FPS_FINAN_USER";
+          visible: 1;
+          options_title: locked;
+        }
+      }
+    }
+    variable Q_ROOT
+    {
+      datatype: number;
+      frequency: document;
+      formula: If( (Q_Map01[1]=1) and (Q_Map02[1]=1) and (Q_Map03[1]=1) and (Q_Map04[1]=1) and (Q_Map05[1]=1) and (Q_Map06[1]=1) and (Q_Map07[1]=1)and (Q_Map08[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      data_options: unscalable;
+      displaytype: select;
+      title: "Personal Finance";
+      locked: 1;
+      visible: 1;
+      choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+      options_title: locked;
+      options: locked;
+      variable Q_Map01
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Jouw gegevens";
+        hint: "Dit is de hinttekst van ' Map 1' (DEZE REGEL WORDT NIET MEER GEBRUIKT!)";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map01_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 1";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 1";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map01_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 1";
+          hint: "Dit is de hinttekst van de variable 'Q_Map01_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Partner01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: EvaluateAsString(Partner01Naam[1]);
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Partner01Naam
+          {
+            datatype: string;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            title: "Wat is je naam?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable Partner01Leeftijd
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Hoe oud ben je?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Partner01BurgerlijkeStaat
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Burgerlijke staat";
+            visible: 1;
+            choices: "1:Alleenstaand|2:Alleenstaand met kinderen|11:Gehuwd/samenwonend|12:Gehuwd/samenwonend met kinderen";
+            options_title: locked;
+          }
+          variable Partner01ZZP
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Ben je een ZZP-er?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Parnter01woning
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Heb je te maken met een vorige hypotheek?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+        }
+        variable Partner02
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: EvaluateAsString(Partner02Naam[1]);
+          locked: 1;
+          visible: (Partner01BurgerlijkeStaat>=10);
+          options_title: locked;
+          options: locked;
+          variable Partner02Naam
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Wat is je naam?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable Partner02Leeftijd
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Hoe oud ben je?";
+            visible: 1;
+            options_title: locked;
+          }
+          variable Partner02ZZP
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Ben je een ZZP-er?";
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf05
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Paragraaf 5: Model info";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_Paragraaf05Sub1 refers to ModelVersion
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Modelversie";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable WindowsUserName
+          {
+            datatype: string;
+            frequency: document;
+            formula: "Ronald van Aalderen";
+            data_options: unscalable;
+            title: "Gemaakt door";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable CurrentDate
+          {
+            datatype: number;
+            frequency: document;
+            formula: 43035.616382014;
+            data_options: unscalable;
+            displaytype: date;
+            title: "Gemaakt op";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable FinanFullVersion
+          {
+            datatype: string;
+            frequency: document;
+            formula: "03.02.057.018";
+            data_options: unscalable;
+            title: "Gemaakt met FINAN versie";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable ModelCode
+          {
+            datatype: string;
+            frequency: document;
+            formula: "PFM";
+            data_options: unscalable;
+            title: "Modelcode";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf05Sub6 refers to MatrixVersion
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Parametersversie";
+            hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map01_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map01_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map01;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub2 refers to Q_Map01_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub3 refers to Q_Map01_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub4 refers to Q_Map01_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 1";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub5 refers to Q_Map01_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map01_Paragraaf09Sub6 refers to Q_Map01_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map02
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Jouw situatie";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map02_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 2";
+          top_blanklines: 1;
+          visible: 1;
+          options_title: locked;
+        }
+        variable Q_Map02_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 2";
+          visible: 1;
+          options_title: locked;
+        }
+        variable Q_Map02_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 2";
+          visible: 1;
+          options_title: locked;
+        }
+        variable +InkomenPartner01
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: flow;
+          formula_notrend: Partner1Box1Inkomenloon+Partner1TotaalAlimentatie+Partner1Afkooplijfrente+Partner1EigenWoning+Partner1ReiskostenAftrek;
+          formula_trend: Partner1Box1Inkomenloon+Partner1TotaalAlimentatie+Partner1Afkooplijfrente+Partner1EigenWoning+Partner1ReiskostenAftrek;
+          displaytype: currency;
+          title: EvaluateAsString("Inkomen "&GetTitle(Partner01));
+          top_separator: 1;
+          top_blanklines: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked;
+          variable +InkomenPartner01Sub1 refers to Partner1Box1Inkomenloon
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Loon, uitkeringen en afkoopsommen e.d.";
+            top_blanklines: 1;
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable InkomenPartner01Sub1Sub1 refers to Partner1Box1Inkomenloon
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Inkomsten die onder de loonheffing vielen";
+              top_blanklines: 1;
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable +Partner1Box1arbeidskorting
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Arbeidskorting";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner1Box1Ingehoudenloonhef
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Ingehouden loonheffing";
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner1Box1Loon
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Loon e.d.";
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner1Box1Levensloonkorting
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Levensverloopkorting";
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner1Box1Inkomenloon
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner1Box1arbeidskorting+Partner1Box1Ingehoudenloonhef+Partner1Box1Loon+Partner1Box1Levensloonkorting;
+                formula_trend: Partner1Box1arbeidskorting+Partner1Box1Ingehoudenloonhef+Partner1Box1Loon+Partner1Box1Levensloonkorting;
+                range: >=0;
+                displaytype: currency;
+                title: "Subtotaal inkomsten uit loondienst";
+                top_separator: 1;
+                display_options: displayAsSummation;
+                bottom_separator: 2;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+            variable InkomenPartner01Sub1Sub2 refers to Partner1Box1Resultaat
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Resultaat uit overige werkzaamheden";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable +Partner1Box1OverigWerk
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Opbrengsten uit overig werk";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable -Partner1Box1Aftrekbarekosten
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Aftrekbare kosten";
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner1Box1Resultaat
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner1Box1OverigWerk-Partner1Box1Aftrekbarekosten;
+                formula_trend: Partner1Box1OverigWerk-Partner1Box1Aftrekbarekosten;
+                range: >=0;
+                displaytype: currency;
+                title: "Totaal bruto resultaat uit overige werkzaamheden, arbeid";
+                top_separator: 1;
+                display_options: displayAsSummation;
+                bottom_separator: 2;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable +InkomenPartner01Sub2 refers to Partner1TotaalAlimentatie
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Alimentatie";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner1TotaalOntvangenAleimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal ontvangen alimentatie";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable -Partner1AftrekbareKostenAlimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal aftrekbare kosten in verband met alimentatie";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner1TotaalAlimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner1TotaalOntvangenAleimentatie-Partner1AftrekbareKostenAlimentatie;
+              formula_trend: Partner1TotaalOntvangenAleimentatie-Partner1AftrekbareKostenAlimentatie;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal alimentatie en afkoopsommen daarvan";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable +InkomenPartner01Sub3 refers to Partner1Afkooplijfrente
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Afkoop lijfrenten die onder de loonheffing vallen";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner1Loonheffing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Loonheffing over lijfrente";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable +Partner1AfkoopsomLijfRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Afkoopsom van lijfrente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner1Afkooplijfrente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner1Loonheffing+Partner1AfkoopsomLijfRente;
+              formula_trend: Partner1Loonheffing+Partner1AfkoopsomLijfRente;
+              range: >=0;
+              displaytype: currency;
+              title: "Afkoop lijfrenten die onder de loonheffing vallen";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable +InkomenPartner01Sub4 refers to Partner1EigenWoning
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Eigen woning";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable Partner1InkomstenEigenWoning
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Inkomsten uit eigen woning";
+              top_blanklines: 1;
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable Partner1WozWaarde
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "WOZ-waarde eigen woning";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner1Percentage
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: 0.75%;
+                data_options: unscalable;
+                range: >=0;
+                fixed_decimals: 2;
+                title: "Forfaitprecentage";
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable Partner1Eigenwoningforfait
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner1Percentage * Partner1WozWaarde;
+                range: >=0;
+                displaytype: currency;
+                title: "Eigenwoningforfait";
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable Partner1InkomstenEigenWoningSub4 refers to Partner1Eigenwoningschuld
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                displaytype: currency;
+                title: "Inkomsten -/- rente";
+                display_options: showColumnTitlesAboveSubVars;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+                variable +Partner1VerhuurEigenWoning
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Inkomsten uit tijdelijke verhuur eigen woning";
+                  top_blanklines: 1;
+                  visible: 1;
+                  options_title: locked;
+                }
+                variable -Partner1RenteSchulden
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Rente schulden/kosten geldleningen eindwaarde";
+                  visible: 1;
+                  options_title: locked;
+                }
+                variable Partner1Eigenwoningschuld
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  formula_notrend: Partner1VerhuurEigenWoning-Partner1RenteSchulden;
+                  formula_trend: Partner1VerhuurEigenWoning-Partner1RenteSchulden;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Inkomsten -/- rente";
+                  top_separator: 1;
+                  display_options: displayAsSummation;
+                  bottom_separator: 2;
+                  locked: 1;
+                  visible: 1;
+                  options_title: locked;
+                  options_notrend: locked;
+                  options_trend: locked;
+                }
+                variable Partner1EigenWoning
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  formula_notrend: Partner1Eigenwoningschuld +  Partner1Eigenwoningforfait;
+                  displaytype: currency;
+                  title: "Eigen woning";
+                  locked: 1;
+                  visible: 1;
+                  options_title: locked;
+                  options_notrend: locked;
+                  options_trend: locked;
+                }
+              }
+            }
+          }
+          variable +InkomenPartner01Sub5 refers to Partner1ReiskostenAftrek
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Reiskosten en vergoedingen";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner1ReiskosteAftrek
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Reiskosten aftrek";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable -Partner1OntvangenReiskostenVergoeding
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal ontvangen reiskostenvergoeding";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner1ReiskostenAftrek
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner1ReiskosteAftrek-Partner1OntvangenReiskostenVergoeding;
+              formula_trend: Partner1ReiskosteAftrek-Partner1OntvangenReiskostenVergoeding;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal reiskostenaftrek";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable Partner1Box1BelastbaarInkomen refers to InkomenPartner01
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Belastbaar inkomen";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable +InkomenPartner02
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: flow;
+          formula_notrend: Partner2Box1Inkomenloon+Partner2Box1Resultaat+Partner2TotaalAlimentatie+Partner2Afkooplijfrente+Partner2EigenWoning;
+          formula_trend: Partner2Box1Inkomenloon+Partner2Box1Resultaat+Partner2TotaalAlimentatie+Partner2Afkooplijfrente+Partner2EigenWoning;
+          displaytype: currency;
+          title: EvaluateAsString("Inkomen "&GetTitle(Partner02));
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked;
+          variable +InkomenPartner02Sub1 refers to Partner2Box1Inkomenloon
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Loon, uitkeringen en afkoopsommen e.d.";
+            top_blanklines: 1;
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable InkomenPartner02Sub1Sub1 refers to Partner2Box1Inkomenloon
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Inkomsten die onder de loonheffing vielen";
+              top_blanklines: 1;
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable +Partner2Box1arbeidskorting
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Arbeidskorting";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner2Box1Ingehoudenloonhef
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Ingehouden loonheffing";
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner2Box1Loon
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Loon e.d.";
+                visible: 1;
+                options_title: locked;
+              }
+              variable +Partner2Box1Levensloonkorting
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Levensverloopkorting";
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner2Box1Inkomenloon
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner2Box1arbeidskorting+Partner2Box1Ingehoudenloonhef+Partner2Box1Loon+Partner2Box1Levensloonkorting;
+                formula_trend: Partner2Box1arbeidskorting+Partner2Box1Ingehoudenloonhef+Partner2Box1Loon+Partner2Box1Levensloonkorting;
+                range: >=0;
+                displaytype: currency;
+                title: "Subtotaal inkomsten uit loondienst";
+                top_separator: 1;
+                display_options: displayAsSummation;
+                bottom_separator: 2;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable +InkomenPartner02Sub2 refers to Partner2Box1Resultaat
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Resultaat uit overige werkzaamheden";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner2Box1OverigWerk
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Opbrengsten uit overig werk";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable -Partner2Box1Aftrekbarekosten
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Aftrekbare kosten";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner2Box1Resultaat
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner2Box1OverigWerk-Partner2Box1Aftrekbarekosten;
+              formula_trend: Partner2Box1OverigWerk-Partner2Box1Aftrekbarekosten;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal bruto resultaat uit overige werkzaamheden, arbeid";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable +InkomenPartner02Sub3 refers to Partner2TotaalAlimentatie
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Alimentatie";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner2TotaalOntvangenAleimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal ontvangen alimentatie";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable -Partner2AftrekbareKostenAlimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal aftrekbare kosten in verband met alimentatie";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner2TotaalAlimentatie
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner2TotaalOntvangenAleimentatie-Partner2AftrekbareKostenAlimentatie;
+              formula_trend: Partner2TotaalOntvangenAleimentatie-Partner2AftrekbareKostenAlimentatie;
+              range: >=0;
+              displaytype: currency;
+              title: "Totaal alimentatie en afkoopsommen daarvan";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable +InkomenPartner02Sub4 refers to Partner2Afkooplijfrente
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Afkoop lijfrenten die onder de loonheffing vallen";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable +Partner2Loonheffing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Loonheffing over lijfrente";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable +Partner2AfkoopsomLijfRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              range: >=0;
+              displaytype: currency;
+              title: "Afkoopsom van lijfrente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable Partner2Afkooplijfrente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              formula_notrend: Partner2Loonheffing+Partner2AfkoopsomLijfRente;
+              formula_trend: Partner2Loonheffing+Partner2AfkoopsomLijfRente;
+              range: >=0;
+              displaytype: currency;
+              title: "Afkoop lijfrenten die onder de loonheffing vallen";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              bottom_separator: 2;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+            }
+          }
+          variable +InkomenPartner02Sub5 refers to Partner2EigenWoning
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Eigen woning";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable Partner2InkomstenEigenWoning
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Inkomsten uit eigen woning";
+              top_blanklines: 1;
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable Partner2WozWaarde
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "WOZ-waarde eigen woning";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner2Percentage
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: 0.75%;
+                data_options: unscalable;
+                range: >=0;
+                fixed_decimals: 2;
+                title: "Forfaitprecentage";
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable Partner2Eigenwoningforfait
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner2Percentage * Partner2WozWaarde;
+                range: >=0;
+                displaytype: currency;
+                title: "Eigenwoningforfait";
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+              variable Partner2InkomstenEigenWoningSub4 refers to Partner2Eigenwoningschuld
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                displaytype: currency;
+                title: "Inkomsten -/- rente";
+                display_options: showColumnTitlesAboveSubVars;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+                variable +Partner2VerhuurEigenWoning
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Inkomsten uit tijdelijke verhuur eigen woning";
+                  top_blanklines: 1;
+                  visible: 1;
+                  options_title: locked;
+                }
+                variable -Partner2RenteSchulden
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Rente schulden/kosten geldleningen eindwaarde";
+                  visible: 1;
+                  options_title: locked;
+                }
+                variable Partner2Eigenwoningschuld
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  formula_notrend: Partner2VerhuurEigenWoning-Partner2RenteSchulden;
+                  formula_trend: Partner2VerhuurEigenWoning-Partner2RenteSchulden;
+                  range: >=0;
+                  displaytype: currency;
+                  title: "Inkomsten -/- rente";
+                  top_separator: 1;
+                  display_options: displayAsSummation;
+                  bottom_separator: 2;
+                  locked: 1;
+                  visible: 1;
+                  options_title: locked;
+                  options_notrend: locked;
+                  options_trend: locked;
+                }
+                variable Partner2EigenWoning
+                {
+                  datatype: number;
+                  frequency: column;
+                  aggregation: flow;
+                  formula_notrend: Partner2Eigenwoningschuld +  Partner2Eigenwoningforfait;
+                  displaytype: currency;
+                  title: "Eigen woning";
+                  locked: 1;
+                  visible: 1;
+                  options_title: locked;
+                  options_notrend: locked;
+                  options_trend: locked;
+                }
+              }
+            }
+            variable InkomenPartner02Sub5Sub2 refers to Partner2ReiskostenAftrek
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: flow;
+              displaytype: currency;
+              title: "Reiskosten en vergoedingen";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options_notrend: locked;
+              options_trend: locked;
+              variable +Partner2ReiskosteAftrek
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Reiskosten aftrek";
+                top_blanklines: 1;
+                visible: 1;
+                options_title: locked;
+              }
+              variable -Partner2OntvangenReiskostenVergoeding
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                range: >=0;
+                displaytype: currency;
+                title: "Totaal ontvangen reiskostenvergoeding";
+                visible: 1;
+                options_title: locked;
+              }
+              variable Partner2ReiskostenAftrek
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: flow;
+                formula_notrend: Partner2ReiskosteAftrek-Partner2OntvangenReiskostenVergoeding;
+                formula_trend: Partner2ReiskosteAftrek-Partner2OntvangenReiskostenVergoeding;
+                range: >=0;
+                displaytype: currency;
+                title: "Totaal reiskostenaftrek";
+                top_separator: 1;
+                display_options: displayAsSummation;
+                bottom_separator: 2;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable Partner2Box1BelastbaarInkomen refers to InkomenPartner02
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Belastbaar inkomen";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable InkomenPartners
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: flow;
+          formula_notrend: InkomenPartner01+InkomenPartner02;
+          formula_trend: InkomenPartner01+InkomenPartner02;
+          displaytype: currency;
+          title: "Totaal inkomen";
+          top_separator: 1;
+          display_options: displayAsSummation;
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked;
+        }
+        variable Q_Map02_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map02_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (2)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map02_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (2)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map03
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Jaarrekening";
+        display_options: showColumnTitlesAboveSubVars;
+        locked: 1;
+        visible: ((Partner01ZZP=1) or (Partner02ZZP=1));
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map03_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 3";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 3";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map03_Paragraaf01
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: balance;
+          displaytype: currency;
+          title: "Balans";
+          top_separator: 1;
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked;
+          variable +IntangibleFixedAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Immateriële vaste activa";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable +MaterialFixedAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Materiéle vaste activa";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +FinancialFixedAssets
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Financiéle vaste activa";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Inventories
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Voorraden";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Receivables2
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Vorderingen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +CashAndEquivalents
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Liquide middelen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable TotalAssets2
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: IntangibleFixedAssets+MaterialFixedAssets+FinancialFixedAssets+Inventories+Receivables2+CashAndEquivalents;
+            formula_trend: IntangibleFixedAssets+MaterialFixedAssets+FinancialFixedAssets+Inventories+Receivables2+CashAndEquivalents;
+            displaytype: currency;
+            title: "Totaal activa";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable +NetWorth
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Eigen vermogen";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Provisions
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Voorzieningen";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +NonCurrentLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Langlopende schulden";
+            visible: 1;
+            options_title: locked;
+          }
+          variable +CurrentLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Kortlopende schulden";
+            visible: 1;
+            options_title: locked;
+          }
+          variable TotalEquityAndLiabilities
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: NetWorth+Provisions+NonCurrentLiabilities+CurrentLiabilities;
+            formula_trend: NetWorth+Provisions+NonCurrentLiabilities+CurrentLiabilities;
+            displaytype: currency;
+            title: "Totaal passiva";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable OffBalance
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Off balance";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable ValCheck
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: maximum;
+            formula_notrend: OnEr(Abs(TotalAssets2-TotalEquityAndLiabilities),NA);
+            formula_trend: OnEr(Abs(TotalAssets2-TotalEquityAndLiabilities),NA);
+            displaytype: currency;
+            title: "Balans uitevenwicht?";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable IncomeStatement
+        {
+          datatype: number;
+          frequency: column;
+          aggregation: flow;
+          displaytype: currency;
+          title: "Resultatenrekening";
+          display_options: showColumnTitlesAboveSubVars;
+          bottom_separator: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options_notrend: locked;
+          options_trend: locked;
+          variable +NetSales
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_trend: NetSales[GetT(T,-1)];
+            displaytype: currency;
+            title: "Netto omzet";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable -CostOfSales
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_trend: CostOfSales[GetT(T,-1)];
+            displaytype: currency;
+            title: "Inkoopwaarde";
+            visible: 1;
+            options_title: locked;
+          }
+          variable GrossProfit
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            formula_notrend: NetSales-CostOfSales;
+            formula_trend: NetSales-CostOfSales;
+            displaytype: currency;
+            title: "Bruto winst";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable Q_Map03_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map03_Paragraaf09Sub1 refers to Q_Map03_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 3";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub2 refers to Q_Map03_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 3";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub3 refers to Q_Map03_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 3";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub4 refers to Q_Map03_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_Paragraaf09Sub5 refers to Q_Map03_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map03_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map03_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (3)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map03_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (3)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map04
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Jouw maximale hypotheek";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map04_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 4";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map04_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 4";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable MaxHypotheek
+        {
+          datatype: number;
+          frequency: document;
+          formula: (Financieringslastpercentage*InkomenPartnersLastT)/Annuiteitenfactor;
+          displaytype: currency;
+          title: "Maximale hypotheek";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable MaxHypotheekSub1 refers to InkomenPartnersLastT
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Totaal inkomen";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+            variable +InkomenPartner01LastT
+            {
+              datatype: number;
+              frequency: document;
+              formula: InkomenPartner01[LastTinFormulaset(Notrend)];
+              displaytype: currency;
+              title: "InkomenPartner01";
+              top_blanklines: 1;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable +InkomenPartner02LastT
+            {
+              datatype: number;
+              frequency: document;
+              formula: InkomenPartner02[LastTinFormulaset(Notrend)];
+              displaytype: currency;
+              title: "InkomenPartner02";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable InkomenPartnersLastT
+            {
+              datatype: number;
+              frequency: document;
+              formula: InkomenPartner01LastT+InkomenPartner02LastT;
+              displaytype: currency;
+              title: "Totaal inkomen";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+          }
+          variable LooptijdRenteVast
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Looptijd rentevast periode";
+            visible: 1;
+            options_title: locked;
+          }
+          variable MaxHypotheekToetsRente
+          {
+            datatype: number;
+            frequency: document;
+            formula: WettelijkeToetsRente;
+            data_options: unscalable;
+            displaytype: percentage;
+            fixed_decimals: 3;
+            title: "Toetsrente";
+            hint: "Als looptijd < 10 jaar dan het wettelijke toetsrente gebruiken, anders werkelijk rente tarief";
+            locked: (LooptijdRenteVast<10);
+            visible: 1;
+            options_title: locked;
+            variable MaxHypotheekToetsRenteIndex
+            {
+              datatype: number;
+              frequency: document;
+              formula: If(MaxHypotheekToetsRente<=0.01,1,If(MaxHypotheekToetsRente<= 0.015,2,If(MaxHypotheekToetsRente<= 0.02,3,If(MaxHypotheekToetsRente<= 0.025,4,If(MaxHypotheekToetsRente<= 0.03,5,If(MaxHypotheekToetsRente<= 0.035,6,If(MaxHypotheekToetsRente<= 0.04,7,If(MaxHypotheekToetsRente<= 0.045,8,If(MaxHypotheekToetsRente<= 0.05,9,If(MaxHypotheekToetsRente<= 0.055,10,If(MaxHypotheekToetsRente<= 0.06,11,If(MaxHypotheekToetsRente>0.06,12,0))))))))))));
+              data_options: unscalable;
+              displaytype: select;
+              title: "Toetsrente (index)";
+              top_blanklines: 1;
+              visible: 1;
+              choices: "1:<= 1%|2:<=  1,5%|3:<= 2%|4:<= 2,5%|5:<= 3%|6:<= 3,5%|7:<= 4%|8:<= 4,5%|9:<= 5%|10:<= 5,5%|11:<= 6%|12:>6,00%";
+              options_title: locked;
+            }
+          }
+          variable MaxHypotheekSub4 refers to MaxHypotheek
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            fixed_decimals: 0;
+            title: "Maximale hypotheek";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+            variable Financieringslastpercentage
+            {
+              datatype: number;
+              frequency: document;
+              formula: MatrixLookup("PFM.xls","Financieringslastpercentages",Toetsinkomen,MaxHypotheekToetsRenteIndex);
+              data_options: unscalable;
+              displaytype: percentage;
+              fixed_decimals: 3;
+              title: "Financieringslastpercentage (Woonqoute)";
+              top_blanklines: 1;
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable DebetRenteFiscaalAftrekbaar
+            {
+              datatype: number;
+              frequency: document;
+              formula: 1;
+              data_options: unscalable;
+              displaytype: select;
+              title: "Debet rente fiscaal aftrekbaar";
+              locked: 1;
+              visible: 1;
+              choices: "0:Nee|1:Ja";
+              options_title: locked;
+              options: locked;
+            }
+            variable Toetsinkomen
+            {
+              datatype: number;
+              frequency: document;
+              formula: If(InkomenPartner01LastT<InkomenPartner02LastT,InkomenPartner02LastT*1+InkomenPartner01LastT*0.50,InkomenPartner01LastT*1+InkomenPartner02LastT*0.50);
+              displaytype: currency;
+              title: "Toetsinkomen";
+              hint: "100% van hoogste inkomen en 50% van het laagste inkomen";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable Annuiteitenfactor
+            {
+              datatype: number;
+              frequency: document;
+              formula: -OnEr(PMT(MaxHypotheekToetsRente/12,30*12,1)*12,NA);
+              data_options: unscalable;
+              fixed_decimals: 6;
+              title: "Annuiteitenfactor";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+          }
+        }
+        variable Q_Map04_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_Paragraaf09Sub1 refers to Q_Map04_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 4";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub2 refers to Q_Map04_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 4";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub3 refers to Q_Map04_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 4";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub4 refers to Q_Map04_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (4)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_Paragraaf09Sub5 refers to Q_Map04_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (4)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map04_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map04_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (4)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map04_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (4)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map05
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Je oude woning";
+        locked: 1;
+        visible: (Parnter01woning=1);
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map05_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 5";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map05_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map05_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 5";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map05_HINT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Hinttekst stap 5";
+          hint: "Dit is de hinttekst van de variable 'Q_Map05_HINT' (DEZE REGEL WORDT NIET GEBRUIKT!)";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Q_Map05_Vraag01
+          {
+            datatype: number;
+            frequency: document;
+            inputRequired: 1;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Heb je je woning al verkocht?";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nee|1:Ja";
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag02
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: date;
+            title: "Wat was de datum van overdracht?";
+            visible: (Q_Map05_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag03
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Wat was de verkooprpijs?";
+            visible: (Q_Map05_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag04
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Welke kosten heb je gemaakt voor verkoop?";
+            visible: (Q_Map05_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag05
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Wat was de hoogte van je oude hypotheek?";
+            visible: (Q_Map05_Vraag01=1);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag06
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Wat verwacht je te krijgen voor je woning?";
+            visible: (Q_Map05_Vraag01=0);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag07
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Wanneer verwacht je de wonin verkocht te hebben?";
+            visible: (Q_Map05_Vraag01=0);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag08
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Welke verkoopkosten verwacht je te maken?";
+            visible: (Q_Map05_Vraag01=0);
+            options_title: locked;
+          }
+          variable Q_Map05_Vraag09
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Wat is de hoogte van je huidige hypothhek?";
+            visible: (Q_Map05_Vraag01=0);
+            options_title: locked;
+          }
+        }
+        variable Q_Map05_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map05_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map05_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map05_STATUS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Q_Map05;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Status van de stap";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_Paragraaf09Sub2 refers to Q_Map05_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_Paragraaf09Sub3 refers to Q_Map05_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_Paragraaf09Sub4 refers to Q_Map05_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 5";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_Paragraaf09Sub5 refers to Q_Map05_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map05_Paragraaf09Sub6 refers to Q_Map05_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (1)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map06
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Je nieuwe woning";
+        locked: 1;
+        visible: 1;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map06_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map06_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map06_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 6";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map06_Woning
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Aan te kopen woning";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable +Aanschafwaarde
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aanschafwaarde";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable +Aankoopkosten
+          {
+            datatype: number;
+            frequency: document;
+            formula: AankoopKosten1+AankoopKosten2+AankoopKosten3+AankoopKosten4+AankoopKosten5+AankoopKosten6+AankoopKosten7+AankoopKosten8;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aankoopkosten";
+            visible: 1;
+            options_title: locked;
+            variable +AankoopKosten1
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Leveringsakte ";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten2
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Overdrachtsbelasting";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten3
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Hypotheekakte  ";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten4
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Afhandelingskosten  ";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten5
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Advieskosten    ";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten6
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Taxatiekosten ";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten7
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Nationale Hypotheek Garantie";
+              visible: 1;
+              options_title: locked;
+            }
+            variable +AankoopKosten8
+            {
+              datatype: number;
+              frequency: document;
+              unspecified: preferred;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Overige";
+              visible: 1;
+              options_title: locked;
+            }
+            variable =AankoopkostenSub9 refers to Aankoopkosten
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Aankoopkosten";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              visible: 1;
+              options_title: locked;
+            }
+          }
+          variable TeFinancieren
+          {
+            datatype: number;
+            frequency: document;
+            formula: Aanschafwaarde+Aankoopkosten;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Totaal te financieren";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map05_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Lening delen";
+          display_options: showColumnTitlesAboveSubVars;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable leningAnn refers to leningAnnHoofdsom
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Annuiteiten lening";
+            top_blanklines: 1;
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable leningAnnHoofdsomORG
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Originele hoofdsom";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnLooptijd
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Looptijd";
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnRenteTarief
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: percentage;
+              fixed_decimals: 3;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnAnnuiteitORG
+            {
+              datatype: number;
+              frequency: document;
+              formula: -Oner(PMT(LeningAnnRenteTarief,LeningAnnLooptijd,LeningAnnHoofdsomORG),NA);
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Annuiteit";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable leningAnnHoofdsom
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningAnnHoofdsomORG,LeningAnnHoofdsom[GetT(T,-1)] - LeningAnnAflossing[GetT(T,-1)]);
+              displaytype: currency;
+              title: "Huidige hoofdsom";
+              top_separator: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnAflossing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAnnAnnuiteitActief,LeningAnnAnnuiteit-LeningAnnRente,NA);
+              displaytype: currency;
+              title: "Aflossing";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAnnAnnuiteitActief,LeningAnnRenteTarief*LeningAnnHoofdsom,NA);
+              displaytype: currency;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnAnnuiteit
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAnnAnnuiteitActief,LeningAnnAnnuiteitORG,NA);
+              displaytype: currency;
+              title: "Annuiteit (Bruto last)";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnAnnuiteitNetto
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAnnAnnuiteitActief,LeningAnnRente*(1-BelastSchijf2Perc)+LeningAnnAflossing,NA);
+              displaytype: currency;
+              title: "Netto last";
+              visible: 1;
+              options_title: locked;
+            }
+            variable leningAnnSub10
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              displaytype: currency;
+              title: "Actief";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 0;
+              options_title: locked, invisible;
+              options_notrend: locked, invisible;
+              options_trend: locked, invisible;
+              variable leningAnnAnnuiteitActief
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: balance;
+                formula_trend: If(LeningAnnHoofdsom<=0,0,1);
+                displaytype: currency;
+                title: "Actief";
+                top_blanklines: 1;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable LeningLin refers to LeningLinHoofdsom
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Lineaire lening";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable LeningLinHoofdsomORG
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Originele hoofdsom";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinLooptijd
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Looptijd";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinRenteTarief
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: percentage;
+              fixed_decimals: 3;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinAnnuiteitORG
+            {
+              datatype: number;
+              frequency: document;
+              formula: -OnEr(PMT(LeningLinRenteTarief,LeningLinLooptijd,LeningLinHoofdsomORG),NA);
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Annuiteit";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable LeningLinHoofdsom
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningLinHoofdsomORG,LeningLinHoofdsom[GetT(T,-1)] - LeningLinAflossing[GetT(T,-1)]);
+              displaytype: currency;
+              title: "Huidige hoofdsom";
+              top_separator: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinAflossing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningLinAnnuiteitActief,LeningLinAnnuiteit-LeningLinRente,NA);
+              displaytype: currency;
+              title: "Aflossing";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningLinAnnuiteitActief,LeningLinRenteTarief*LeningLinHoofdsom,NA);
+              displaytype: currency;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinAnnuiteit
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningLinAnnuiteitActief,LeningLinAnnuiteitORG,NA);
+              displaytype: currency;
+              title: "Annuiteit (Bruto last)";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinAnnuiteitNetto
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningLinAnnuiteitActief,LeningLinRente*(1-BelastSchijf2Perc)+LeningLinAflossing,NA);
+              displaytype: currency;
+              title: "Netto last";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningLinSub10
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              displaytype: currency;
+              title: "Actief";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 0;
+              options_title: locked, invisible;
+              options_notrend: locked, invisible;
+              options_trend: locked, invisible;
+              variable LeningLinAnnuiteitActief
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: balance;
+                formula_trend: If(LeningLinHoofdsom<=0,0,1);
+                displaytype: currency;
+                title: "Actief";
+                top_blanklines: 1;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable LeningAfl refers to LeningAflHoofdsom
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Aflossingsvrije lening";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable LeningAflHoofdsomORG
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Originele hoofdsom";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflLooptijd
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Looptijd";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflRenteTarief
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: percentage;
+              fixed_decimals: 3;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflAnnuiteitORG
+            {
+              datatype: number;
+              frequency: document;
+              formula: -OnEr(PMT(LeningAflRenteTarief,LeningAflLooptijd,LeningAflHoofdsomORG),NA);
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Annuiteit";
+              locked: 1;
+              visible: 1;
+              options_title: locked;
+              options: locked;
+            }
+            variable LeningAflHoofdsom
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningAflHoofdsomORG,LeningAflHoofdsom[GetT(T,-1)] - LeningAflAflossing[GetT(T,-1)]);
+              displaytype: currency;
+              title: "Huidige hoofdsom";
+              top_separator: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflAflossing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAflAnnuiteitActief,LeningAflAnnuiteit-LeningAflRente,NA);
+              displaytype: currency;
+              title: "Aflossing";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAflAnnuiteitActief,LeningAflRenteTarief*LeningAflHoofdsom,NA);
+              displaytype: currency;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflAnnuiteit
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAflAnnuiteitActief,LeningAflAnnuiteitORG,NA);
+              displaytype: currency;
+              title: "Annuiteit (Bruto last)";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflAnnuiteitNetto
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningAflAnnuiteitActief,LeningAflRente*(1-BelastSchijf2Perc)+LeningAflAflossing,NA);
+              displaytype: currency;
+              title: "Netto last";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningAflSub10
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              displaytype: currency;
+              title: "Actief";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 0;
+              options_title: locked, invisible;
+              options_notrend: locked, invisible;
+              options_trend: locked, invisible;
+              variable LeningAflAnnuiteitActief
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: balance;
+                formula_trend: If(LeningAflHoofdsom<=0,0,1);
+                displaytype: currency;
+                title: "Actief";
+                top_blanklines: 1;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable LeningOVERB refers to LeningOVERBHoofdsom
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            displaytype: currency;
+            title: "Overbruggingskrediet";
+            display_options: showColumnTitlesAboveSubVars;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+            variable LeningOVERBHoofdsomORG
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Originele hoofdsom";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBLooptijd
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              fixed_decimals: 0;
+              title: "Looptijd";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBRenteTarief
+            {
+              datatype: number;
+              frequency: document;
+              data_options: unscalable;
+              displaytype: percentage;
+              fixed_decimals: 3;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBHoofdsom
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(Valuet(T)=FirstTinFormulaSet(trend),LeningOVERBHoofdsomORG,LeningOVERBHoofdsom[GetT(T,-1)] - LeningOVERBAflossing[GetT(T,-1)]);
+              displaytype: currency;
+              title: "Huidige hoofdsom";
+              top_separator: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBAflossing
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningOVERBAnnuiteitActief,LeningOVERBAnnuiteit-LeningOVERBRente,NA);
+              displaytype: currency;
+              title: "Aflossing";
+              top_blanklines: 1;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBRente
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningOVERBAnnuiteitActief,LeningOVERBRenteTarief*LeningOVERBHoofdsom,NA);
+              displaytype: currency;
+              title: "Rente";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBAnnuiteit
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              displaytype: currency;
+              title: "Bruto last";
+              top_separator: 1;
+              display_options: displayAsSummation;
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBAnnuiteitNetto
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              formula_trend: If(LeningOVERBAnnuiteitActief,LeningOVERBRente*(1-BelastSchijf2Perc)+LeningOVERBAflossing,NA);
+              displaytype: currency;
+              title: "Netto last";
+              visible: 1;
+              options_title: locked;
+            }
+            variable LeningOVERBSub9
+            {
+              datatype: number;
+              frequency: column;
+              aggregation: balance;
+              displaytype: currency;
+              title: "Actief";
+              display_options: showColumnTitlesAboveSubVars;
+              locked: 1;
+              visible: 0;
+              options_title: locked, invisible;
+              options_notrend: locked, invisible;
+              options_trend: locked, invisible;
+              variable LeningOVERBAnnuiteitActief
+              {
+                datatype: number;
+                frequency: column;
+                aggregation: balance;
+                formula_trend: If(LeningOVERBHoofdsom<=0,0,1);
+                displaytype: currency;
+                title: "Actief";
+                top_blanklines: 1;
+                locked: 1;
+                visible: 1;
+                options_title: locked;
+                options_notrend: locked;
+                options_trend: locked;
+              }
+            }
+          }
+          variable EigenInbreng
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: If(ValueT(T)=FirstTinFormulaSet(Trend),Max(0,TeFinancieren- (LeningAnnHoofdsom+LeningLinHoofdsom+LeningAflHoofdsom+LeningOVERBHoofdsom)),NA);
+            formula_trend: If(ValueT(T)=FirstTinFormulaSet(Trend),Max(0,TeFinancieren- (LeningAnnHoofdsom+LeningLinHoofdsom+LeningAflHoofdsom+LeningOVERBHoofdsom)),NA);
+            displaytype: currency;
+            title: "Eigen inbreng";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable LeningTotaal
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: LeningAnnHoofdsom+LeningLinHoofdsom+LeningAflHoofdsom+LeningOVERBHoofdsom+EigenInbreng;
+            formula_trend: LeningAnnHoofdsom+LeningLinHoofdsom+LeningAflHoofdsom+LeningOVERBHoofdsom+EigenInbreng;
+            displaytype: currency;
+            title: "Totaal leningen";
+            top_separator: 1;
+            display_options: displayAsSummation;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable LeningTotaalBrutoLast
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: LeningAnnAnnuiteit+LeningLinAnnuiteit+LeningAflAnnuiteit+LeningOVERBAnnuiteit;
+            formula_trend: LeningAnnAnnuiteit+LeningLinAnnuiteit+LeningAflAnnuiteit+LeningOVERBAnnuiteit;
+            displaytype: currency;
+            title: "Totale bruto last";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+          variable LeningTotaalNettoLast
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: balance;
+            formula_notrend: LeningAnnAnnuiteitNetto+LeningLinAnnuiteitNetto+LeningAflAnnuiteitNetto+LeningOVERBAnnuiteitNetto;
+            formula_trend: LeningAnnAnnuiteitNetto+LeningLinAnnuiteitNetto+LeningAflAnnuiteitNetto+LeningOVERBAnnuiteitNetto;
+            displaytype: currency;
+            title: "Totale netto last";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options_notrend: locked;
+            options_trend: locked;
+          }
+        }
+        variable Q_Map06_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map06_Paragraaf09Sub1 refers to Q_Map06_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 6";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_Paragraaf09Sub2 refers to Q_Map06_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 6";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_Paragraaf09Sub3 refers to Q_Map06_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 6";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_Paragraaf09Sub4 refers to Q_Map06_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (6)";
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+          variable Q_Map06_Paragraaf09Sub5 refers to Q_Map06_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (6)";
+            locked: 1;
+            visible: 0;
+            options_title: locked, invisible;
+            options: locked, invisible;
+          }
+        }
+        variable Q_Map06_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map06_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (6)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map06_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (6)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map07
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Map 7: Rapportage";
+        locked: 1;
+        visible: 0;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map07_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Warning voor map 7";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map07_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Info bij stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map07_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Validatie stap 7";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map07_Paragraaf01
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Layout";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map07_Keuze
+          {
+            datatype: number;
+            frequency: document;
+            displaytype: currency;
+            title: "Welke regels tonen?";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_Map07_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Q_Map07_Paragraaf09Sub1 refers to Q_Map07_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 7";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_Paragraaf09Sub2 refers to Q_Map07_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 7";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_Paragraaf09Sub3 refers to Q_Map07_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 7";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_Paragraaf09Sub4 refers to Q_Map07_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (7)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_Paragraaf09Sub5 refers to Q_Map07_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (7)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map07_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map07_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (7)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map07_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (7)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map09
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Map 7,5 Includefiles EJS";
+        locked: 1;
+        visible: 0;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map09_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 9";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map09_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map09[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 9";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map09_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 9";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map09_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map09_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (x)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map09_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (x)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_Map08
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP08_ENTEREDREQUIREDVARS=Q_MAP08_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Map 8 knopppen";
+        locked: 1;
+        visible: 0;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_Map08_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 8";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map08_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_Map08[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map08_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_Map08_Paragraaf03
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Knoppen";
+          visible: 1;
+          options_title: locked;
+          variable Q_Map08_Paragraaf03Sub1 refers to Q_PREVIOUS_BUTTON_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Vorige";
+            top_blanklines: 1;
+            visible: 1;
+            choices: "0:Nooit|2:Altijd";
+            options_title: locked;
+          }
+          variable Q_Map08_Paragraaf03Sub2 refers to Q_NEXT_BUTTON_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Volgende";
+            visible: 1;
+            choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+            options_title: locked;
+          }
+          variable Q_Map08_Paragraaf03Sub3 refers to Q_CONCEPT_REPORT_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Concept rapport";
+            visible: 1;
+            choices: "1:Ja|0:Nee";
+            options_title: locked;
+          }
+          variable Q_Map08_Paragraaf03Sub4 refers to Q_FINAL_REPORT_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Definitief rapport";
+            visible: 1;
+            choices: "1:Ja|0:Nee";
+            options_title: locked;
+          }
+          variable Q_Map08_Paragraaf03Sub5 refers to Q_MAKE_FINAL_VISIBLE
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: select;
+            title: "Definitief maken";
+            visible: 1;
+            choices: "1:Ja|0:Nee";
+            options_title: locked;
+          }
+        }
+        variable Q_Map08_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Q_Map08_Paragraaf09Sub1 refers to Q_Map08_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Warning voor map 8";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map08_Paragraaf09Sub2 refers to Q_Map08_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Info bij stap 8";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map08_Paragraaf09Sub3 refers to Q_Map08_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            title: "Validatie stap 8";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map08_Paragraaf09Sub4 refers to Q_Map08_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map08_Paragraaf09Sub5 refers to Q_Map08_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_Map08_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_Map08_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (8)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_Map08_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_MAP0A
+      {
+        datatype: number;
+        frequency: document;
+        formula: (Q_MAP0A_ENTEREDREQUIREDVARS=Q_MAP0A_REQUIREDVARS);
+        data_options: unscalable;
+        displaytype: select;
+        title: "Map 10: Grafieken";
+        locked: 1;
+        visible: 0;
+        choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
+        options_title: locked;
+        options: locked;
+        variable Q_MAP0A_WARNING
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+          data_options: unscalable;
+          title: "Warning voor map 8";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_MAP0A_INFO
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If(Q_MAP0A[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          data_options: unscalable;
+          title: "Info bij stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_MAP0A_VALIDATION
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Validatie stap 8";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable GraphResRek
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Grafiek resultatenrekening";
+          display_options: showColumnTitlesAboveSubVars;
+          visible: 1;
+          options_title: locked;
+          variable GraphResRek1 refers to NetSales
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Netto omzet";
+            top_blanklines: 1;
+            visible: 1;
+            options_title: locked;
+          }
+          variable GraphResRek2 refers to CostOfSales
+          {
+            datatype: number;
+            frequency: column;
+            aggregation: flow;
+            displaytype: currency;
+            title: "Inkoopwaarde";
+            visible: 1;
+            options_title: locked;
+          }
+        }
+        variable Q_MAP0A_Paragraaf09
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Eigenschappen van de stap";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+          variable Q_MAP0A_Paragraaf09Sub1 refers to Q_MAP0A_WARNING
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Warning voor map 8";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MAP0A_Paragraaf09Sub2 refers to Q_MAP0A_INFO
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Info bij stap 8";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MAP0A_Paragraaf09Sub3 refers to Q_MAP0A_VALIDATION
+          {
+            datatype: string;
+            frequency: document;
+            data_options: unscalable;
+            displaytype: memo;
+            title: "Validatie stap 8";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MAP0A_Paragraaf09Sub4 refers to Q_MAP0A_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MAP0A_Paragraaf09Sub5 refers to Q_MAP0A_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+        variable Q_MAP0A_Hulpvariabelen
+        {
+          datatype: number;
+          frequency: document;
+          displaytype: currency;
+          title: "Hulpvariabelen";
+          locked: 1;
+          visible: 0;
+          options_title: locked, invisible;
+          options: locked, invisible;
+          variable Q_MAP0A_REQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal verplichte velden (8)";
+            top_blanklines: 1;
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+          variable Q_MAP0A_ENTEREDREQUIREDVARS
+          {
+            datatype: number;
+            frequency: document;
+            formula: 1;
+            data_options: unscalable;
+            fixed_decimals: 0;
+            title: "Aantal ingevulde verplichte velden (8)";
+            locked: 1;
+            visible: 1;
+            options_title: locked;
+            options: locked;
+          }
+        }
+      }
+      variable Q_RESULT
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(Q_ROOT[1]=0,&"Nog niet alle vragen zijn ingevuld.[br][/br]",&"Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
+        data_options: unscalable;
+        title: "Resultaat";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESULTSub1 refers to Q_RESULT
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Resultaat";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_STATUS
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Status";
+        top_blanklines: 1;
+        visible: 1;
+        choices: "0:Actief|1:Defintief";
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
+        displaytype: date;
+        title: "Definitief gemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_FINAL_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Definitief gemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_ON
+      {
+        datatype: number;
+        frequency: document;
+        data_options: unscalable;
+        displaytype: date;
+        title: "Aangemaakt op:";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (gebruikersnaam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_STATUS_STARTED_BY_NAME
+      {
+        datatype: string;
+        frequency: document;
+        data_options: unscalable;
+        title: "Aangemaakt door (volledige naam):";
+        visible: 1;
+        options_title: locked;
+      }
+      variable ModelVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: "01.19.000.000";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modelversie";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable ModelType
+      {
+        datatype: string;
+        frequency: document;
+        formula: "TEST";
+        data_options: saveCalculatedValue,unscalable;
+        title: "Modeltype";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable MatrixVersion
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
+        data_options: saveCalculatedValue,unscalable;
+        title: "Parametersversie";
+        hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
+        visible: 1;
+        options_title: locked;
+      }
+      variable Q_PREVIOUS_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Vorige";
+        visible: 1;
+        choices: "0:Nooit|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_NEXT_BUTTON_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 2;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Volgende";
+        visible: 1;
+        choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
+        options_title: locked;
+      }
+      variable Q_CONCEPT_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Concept rapport";
+        visible: 1;
+        choices: "1:Ja|0:Nee";
+        options_title: locked;
+      }
+      variable Q_MAKE_FINAL_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief maken";
+        visible: 1;
+        choices: "1:Ja|0:Nee";
+        options_title: locked;
+      }
+      variable Q_FINAL_REPORT_VISIBLE
+      {
+        datatype: number;
+        frequency: document;
+        formula: 1;
+        data_options: unscalable;
+        displaytype: select;
+        title: "Definitief rapport";
+        visible: 1;
+        choices: "1:Ja|0:Nee";
+        options_title: locked;
+      }
+    }
+    variable HULPVARS
+    {
+      datatype: string;
+      frequency: document;
+      data_options: unscalable;
+      title: "Hulpvariabelen";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked;
+      variable Q_WARNING_GLOBAL
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If(MaxHypotheek>0,&"Je maximale hypotheek is "&MaxHypotheek[1],&""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Knock-out(s)?";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_WARNING_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          title: "Map6 - Vraag 6";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_WARNING_GLOBALTXT
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If( Length(&Q_WARNING_01[1])>0,&"[br][/br]"&Q_WARNING_01[1],""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Knock-out tekst";
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+      variable Q_RESTRICTIES
+      {
+        datatype: string;
+        frequency: document;
+        formula: EvaluateAsString(If( Length(&Q_RESTRICTIESTXT[1])>0 ,&"[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT ,&""));
+        data_options: unscalable;
+        displaytype: memo;
+        title: "Restricties";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+        variable Q_RESTRICTIES_01
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIES_02
+        {
+          datatype: string;
+          frequency: document;
+          data_options: unscalable;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+        variable Q_RESTRICTIESTXT
+        {
+          datatype: string;
+          frequency: document;
+          formula: EvaluateAsString(If( Length(&Q_RESTRICTIES_01[1])>0,&"[br][/br]"&Q_RESTRICTIES_01[1],""));
+          data_options: unscalable;
+          displaytype: memo;
+          title: "Restricties tekst";
+          top_blanklines: 1;
+          locked: 1;
+          visible: 1;
+          options_title: locked;
+          options: locked;
+        }
+      }
+    }
+    variable Constanten
+    {
+      datatype: number;
+      frequency: document;
+      displaytype: currency;
+      title: "Constanten";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options: locked;
+      variable WettelijkeToetsRente
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0.05;
+        data_options: unscalable;
+        displaytype: percentage;
+        fixed_decimals: 3;
+        title: "Wettelijke toetsrente";
+        top_blanklines: 1;
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf1
+      {
+        datatype: number;
+        frequency: document;
+        formula: 19922;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "BelastSchijf1";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf2
+      {
+        datatype: number;
+        frequency: document;
+        formula: 33715;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "BelastSchijf2";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf3
+      {
+        datatype: number;
+        frequency: document;
+        formula: 66421;
+        data_options: unscalable;
+        fixed_decimals: 0;
+        title: "BelastSchijf3";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf1Perc
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0.3655;
+        data_options: unscalable;
+        displaytype: percentage;
+        fixed_decimals: 3;
+        title: "BelastSchijf1Perc";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf2Perc
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0.4085;
+        data_options: unscalable;
+        displaytype: percentage;
+        fixed_decimals: 3;
+        title: "BelastSchijf2Perc";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf3Perc
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0.4085;
+        data_options: unscalable;
+        displaytype: percentage;
+        fixed_decimals: 3;
+        title: "BelastSchijf3Perc";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+      variable BelastSchijf4Perc
+      {
+        datatype: number;
+        frequency: document;
+        formula: 0.5195;
+        data_options: unscalable;
+        displaytype: percentage;
+        fixed_decimals: 3;
+        title: "BelastSchijf4Perc";
+        locked: 1;
+        visible: 1;
+        options_title: locked;
+        options: locked;
+      }
+    }
+  }
+}

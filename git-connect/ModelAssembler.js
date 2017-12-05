@@ -5,6 +5,7 @@ exports.started = ORM.orm.then(function() {
         return ORM.ModelProperty.getModel(modelName).then(function(ok) {
             var schemaIndex = {}
             var schema = []
+            var constants = []
             var nodes = []
             var index = {};
             ok.map((row) => {
@@ -25,7 +26,8 @@ exports.started = ORM.orm.then(function() {
             }
             return {
                 schema: schema,
-                nodes: nodes
+                nodes: nodes,
+                constants: constants
             }
         }).catch(function(err) {
             console.error(err)

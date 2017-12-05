@@ -17,23 +17,24 @@ function Solution(solutionName) {
     this.formulas = new Set();
     this.root = {};
 }
-Solution.prototype.preparser = function (input) {
+
+Solution.prototype.preparser = function(input) {
     return input;
 }
-Solution.prototype.getFormulas = function (iterator) {
+Solution.prototype.getFormulas = function(iterator) {
     return this.formulas.forEach(iterator);
 }
-Solution.prototype.hasNode = function (rowId) {
+Solution.prototype.hasNode = function(rowId) {
     var has = this.addedRowIds.has(rowId);
     this.addedRowIds.add(rowId);
     return has;
 }
-Solution.prototype.setParentName = function (uiNode, parentId) {
+Solution.prototype.setParentName = function(uiNode, parentId) {
     uiNode.parentName = (parentId === undefined ? 'root_value' : parentId + '_value');
 }
 //just be able to retrieve all data of the original
 //delegate can be anything, only the one who created it knows it
-Solution.prototype.setDelegate = function (uiNode, node) {
+Solution.prototype.setDelegate = function(uiNode, node) {
     var originalproperties = {};
     for (var key in node) {
         var property = node[key];
@@ -47,38 +48,39 @@ Solution.prototype.setDelegate = function (uiNode, node) {
     node.originalproperties = originalproperties;
     uiNode.delegate = node;
 }
-Solution.prototype.getName = function () {
+Solution.prototype.getName = function() {
     return this.name;
 }
 //should not allow duplicates.
 //Save UI- names only
-Solution.prototype.createNode = function (rowId, colId, formulaId, displayAs) {
+Solution.prototype.createNode = function(rowId, colId, formulaId, displayAs) {
     var uiNode = {
         name: this.name + "_" + rowId + "_" + colId,
         rowId: rowId,
         colId: colId,
         refId: formulaId,
-        displayAs: displayAs || 'PropertyType'
+        displayAs: displayAs || 'string'
     };
     if (formulaId !== undefined) {
         uiNode.ref = formulaId;
         this.formulas.add(formulaId);
     }
+    this.displayTypes[uiNode.displayAs] = true;
     this.nodes.push(uiNode);
     return uiNode;
 }
 
-Solution.prototype.addDisplayType = function (displayType) {
+Solution.prototype.addDisplayType = function(displayType) {
     if (displayType === undefined) {
         throw new Error('undefined displaytype, make sure to use valid displayTypes');
     }
     this.displayTypes[displayType] = true;
 }
-Solution.prototype.getDisplayTypes = function (displayType) {
+Solution.prototype.getDisplayTypes = function(displayType) {
     return this.displayTypes;
 }
-Solution.prototype.stringify = function () {
-    return this.preparser(JSON.stringify(this.root, function (key, val) {
+Solution.prototype.stringify = function() {
+    return this.preparser(JSON.stringify(this.root, function(key, val) {
             if (key === 'originalproperties') {
                 return undefined;
             }
@@ -87,16 +89,16 @@ Solution.prototype.stringify = function () {
     ));
 }
 //add to global list of found variables
-Solution.prototype.addNode = function (rowId, node) {
+Solution.prototype.addNode = function(rowId, node) {
     this.nodes[rowId] = node
 }
-Solution.prototype.setPreparser = function (parser) {
+Solution.prototype.setPreparser = function(parser) {
     this.preparser = parser;
 }
 //'uielem' the Object of which the properties need to be set
 //'elem' the Object of which the properties can be found
 //set all properties of the elem in uielem
-Solution.prototype.restoreDelegateProperties = function (newObject, orginalObject) {
+Solution.prototype.restoreDelegateProperties = function(newObject, orginalObject) {
     var delegate = orginalObject.delegate;
     if (delegate !== undefined && delegate.originalproperties !== undefined) {
         for (var key in delegate.originalproperties) {
@@ -110,7 +112,7 @@ Solution.prototype.restoreDelegateProperties = function (newObject, orginalObjec
 }
 //add node to root node if it has no parent
 //else add the node to the children of is parent
-Solution.prototype.addNodeToCorrespondingPlaceInHierarchie = function (parentrowId, rowId, node) {
+Solution.prototype.addNodeToCorrespondingPlaceInHierarchie = function(parentrowId, rowId, node) {
     if (parentrowId === undefined) {
         this.root = node;
     }
@@ -123,7 +125,7 @@ Solution.prototype.addNodeToCorrespondingPlaceInHierarchie = function (parentrow
         foundVariable.children.push(node);
     }
 }
-Solution.prototype.size = function () {
+Solution.prototype.size = function() {
     return this.nodes.length;
 }
 module.exports = Solution;

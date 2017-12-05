@@ -21,17 +21,20 @@ function finFormulaGeneric(buf) {
     /**
      * Here are all time references
      */
-    buf = buf.replace(/\[1]/gm, '[doc]');
-    buf = buf.replace(/\[T]/gm, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
-    buf = buf.replace(/\[GetT\(T,-1\)]/gm, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
-    buf = buf.replace(/\[LastT\]/gm, '');
-    buf = buf.replace(/ValueT\(1\)/gm, 'x.firstdetail');
-    buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gm, 'x.prevbkyr');
-    buf = buf.replace(/GetT\(T,-1\)/gm, 'x.prev');
-    buf = buf.replace(/GetT(T,-1,1,1)/gm, 'x.prev');
-    buf = buf.replace(/FirstTInFormulaset\(Trend\)/gm, 'x.firsttrend');
-    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gm, 'x.lastnotrend');
-    buf = buf.replace(/\[0\]/gm, '.title ');
+    buf = buf.replace(/\[1]/g, '[doc]');
+    buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
+    buf = buf.replace(/\[GetT\(T,-1\)]/gi, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
+    buf = buf.replace(/\[LastT\]/gi, '');
+    buf = buf.replace(/ValueT\(1\)/gi, 'x.firstdetail');
+    buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gi, 'x.prevbkyr');
+    buf = buf.replace(/GetT\(T,-1\)/gi, 'x.prev');
+    buf = buf.replace(/GetT(T,-1,1,1)/gi, 'x.prev');
+    buf = buf.replace(/FirstTInFormulaset\(Trend\)/gi, 'x.firsttrend');
+    buf = buf.replace(/LastTinFormulaSet\(NoTrend\)/gi, 'x.lastnotrend');
+    //TODO: same as TSY?
+    buf = buf.replace(/TsY\(LastTinPeriod\)/gi, 'TsY');
+    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gi, 'x.lastnotrend');
+    buf = buf.replace(/\[0\]/g, '.title ');
 
     //(& types
     buf = buf.replace(/(=|,|\()\s{0,4}\&/gm, ' $1 ');// replace all '=   &' and '(  &'   with = or ( respectively

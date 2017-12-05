@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
     limit: '50mb'
 }));
-var stash = require('./src/stash').Stash;
-var DBModel = require('../git-connect/ModelAssembler');
+const stash = require('./src/stash').Stash;
+const DBModel = require('../git-connect/ModelAssembler');
 
 browserify.settings({
     transform: [require('browserify-fastjson')]
@@ -65,7 +65,7 @@ app.get('*/model', (req, res) => {
     })
 });
 app.post('*/saveFFL_LME', (req, res) => {
-    stash.commit(req.body.model, req.body.data).then((data) => {
+    stash.commit(req.body.model, req.body.data, req.body.type).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
         log.debug('Failed to write ' + req.body.model + '.ffl file.', err)

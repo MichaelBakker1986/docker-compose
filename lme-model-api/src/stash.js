@@ -6,7 +6,7 @@ const develop = hostname == 'michael';
 let host;
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
-const write = require('fs-writefile-promise/lib/node7')
+const write = require('node-fs-writefile-promise')
 const uuid = require('uuid4');
 
 class Stash {
@@ -32,11 +32,11 @@ class Stash {
             })
     }
 
-    commit(name, data, lme) {
+    commit(name, data, type) {
         //transform ffl to JSON canvas file
-        return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + '.ffl', data)])
+        return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {
-                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name)]).then((result) => {
+                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name + ' ' + (type == '.ffl2' ? 'FFL2' : 'FFL'))]).then((result) => {
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');

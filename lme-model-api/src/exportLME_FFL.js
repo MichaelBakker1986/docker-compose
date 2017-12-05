@@ -5,7 +5,8 @@
 var browser = require('browserify');
 var fs = require('fs')
 var name = process.argv[2];
-
+var fflType = (process.argv[3] == 'FFL2' ? 'importFFL2' : 'importFFl');
+const fileType = (process.argv[3] == 'FFL2' ? '.ffl2' : '.ffl');
 
 var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
@@ -17,7 +18,12 @@ xlsx.initComplete.then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])
 
     LME = new lmeAPI()
-    LME.importFFL(fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + '.ffl', 'utf8'));
+    LME.lme.modelName = name
+    let rawData = fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + fileType, 'utf8');
+    if (fileType == '.ffl2') {
+        rawData = JSON.parse(rawData)
+    }
+    LME[fflType](rawData);
     var lmeExport = LME.exportLME();
     let options = {
         insertGlobals: true,
