@@ -321,7 +321,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     aceEditor.aceEditor.on("change", function(e) {
         var fflAnnotations = []
         if (aceEditor.aceEditor.curOp && aceEditor.aceEditor.curOp.command.name) {
-            reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
+            // reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
             console.log(e);
             fflAnnotations.push({
                 row: e.start.row,
