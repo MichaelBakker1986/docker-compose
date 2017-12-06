@@ -8,29 +8,35 @@ const StringBuffer = require('../../../model-tests/StringUtils').StringBuffer
 //schema and nodes
 //re-use over implementations
 
-function RegisterToFFL(register, model) {
-    this.schema = model.schema;
-    this.nodes = model.nodes;
-    this.vars = {};
+function RegisterToFFL(register) {
+    this.schema = register.schema;
+    register.createIndex('name')
+    //this.nodes = register.getIndex('name');
+    this.vars = register.getIndex('name');
     this.child = {}
-    this.nameIndex = this.schema.indexOf('name');
-    this.treeIndex = this.schema.indexOf('treeindex');
-    this.parentNameIndex = this.schema.indexOf('parentId');
-    this.stringIndex = this.schema.indexOf('index');
-    this.modifierIndex = this.schema.indexOf('modifier');
-    this.referstoIndex = this.schema.indexOf('refersto');
-    this.tupleIndex = this.schema.indexOf('tuple');
-    this.displaytypeIndex = this.schema.indexOf('displaytype');
-    this.visibleIndex = this.schema.indexOf('visible');
-    this.decimalsIndex = this.schema.indexOf('fixed_decimals');
-    this.datatypeIndex = this.schema.indexOf('datatype');
-    this.frequencyIndex = this.schema.indexOf('frequency');
+    this.nameIndex = register.schemaIndexes.name;
+    this.descIndex = register.schemaIndexes.desc;
+    this.treeIndex = register.schemaIndexes.treeindex;
+    this.parentNameIndex = register.schemaIndexes.parentId;
+    this.stringIndex = register.schemaIndexes.index;
+    this.modifierIndex = register.schemaIndexes.modifier;
+    this.referstoIndex = register.schemaIndexes.refersto;
+    this.tupleIndex = register.schemaIndexes.tuple;
+    this.displaytypeIndex = register.schemaIndexes.displaytype;
+    this.visibleIndex = register.schemaIndexes.visible;
+    this.decimalsIndex = register.schemaIndexes.fixed_decimals;
+    this.datatypeIndex = register.schemaIndexes.datatype;
+    this.frequencyIndex = register.schemaIndexes.frequency;
+    this.formulaindex = register.schemaIndexes.formula;
+    this.lockedIndex = register.schemaIndexes.locked;
+    this.requiredIndex = register.schemaIndexes.required;
+    this.childIndex = register.schemaIndexes.children;
     this.output = "";
     this.delimiter = ';'
     this.line_delimiter = '\n'
     //some properties are generated for the tree structure, and cannot be changes manually
     this.variableProperties = [this.nameIndex, this.modifierIndex, this.referstoIndex, this.tupleIndex]
-    this.hiddenProperties = [this.treeIndex, this.stringIndex, this.schema.indexOf('version'), this.parentNameIndex]
+    this.hiddenProperties = [this.treeIndex, this.stringIndex, this.schema.indexOf('version'), this.parentNameIndex, this.childIndex, this.descIndex]
     this.indents = [];
     const depth = 30
     for (var i = 0; i < depth; i++) {
@@ -55,15 +61,15 @@ function RegisterToFFL(register, model) {
             shiftindent[i][j] = item.join("")
         }
     }
-    this.formulaindex = this.schema.indexOf('formula');
+
     this.shiftindent = shiftindent;
     this.formulaIndexes = []
     var formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']
     for (var i = 0; i < formulas.length; i++) {
-        this.formulaIndexes.push(this.schema.indexOf(formulas[i]))
+        this.formulaIndexes.push(register.schemaIndexes[formulas[i]])
     }
     this.defaultValues = [];
-    this.defaultValues[this.schema.indexOf('visible')] = {
+    this.defaultValues[this.visibleIndex] = {
         undefined: true,
         null: true,
         '1.0': true,
@@ -71,7 +77,7 @@ function RegisterToFFL(register, model) {
         'true': true,
         'On': true
     }
-    this.defaultValues[this.schema.indexOf('locked')] = {
+    this.defaultValues[this.lockedIndex] = {
         undefined: true,
         null: true,
         '0.0': true,
@@ -80,7 +86,7 @@ function RegisterToFFL(register, model) {
         'Off': true,
         'No': true
     }
-    this.defaultValues[this.schema.indexOf('required')] = {
+    this.defaultValues[this.requiredIndex] = {
         undefined: true,
         null: true,
         '0.0': true,
@@ -91,16 +97,12 @@ function RegisterToFFL(register, model) {
     }
 }
 
-RegisterToFFL.prototype.addNode = function(name, index, node, parentName) {
-    this.vars[name] = node;
-    this.child[parentName] = this.child[parentName] || []
-    this.child[parentName][index] = name
-}
 RegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName) {
     const delimiter = this.delimiter;
     const hidden = this.hiddenProperties;
     const lines = []
-    this.walk(rooNodeName || 'root', 0, function(variable, depth) {
+    const rootNode = this.vars[rooNodeName || 'root']
+    this.walk(rootNode, 0, function(variable, depth) {
         lines.push(new StringBuffer().append(" ".repeat(depth)).append(variable.filter(function(value, index) {
             return hidden.indexOf(index) == -1;
         }).join(delimiter)).toString());
@@ -108,21 +110,11 @@ RegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName) {
     this.output = lines.join(this.line_delimiter);
     return this.output;
 }
-RegisterToFFL.prototype.walk = function(variableName, depth, visitor) {
-    visitor(this.vars[variableName], depth)
-    if (this.child[variableName]) {
-        for (var i = 0; i < this.child[variableName].length; i++) {
-            var childName = this.child[variableName][i];
-            if (childName) {
-                this.walk(childName, depth + 1, visitor)
-            }
-        }
-    }
-}
-RegisterToFFL.prototype.indexProperties = function() {
-    for (var i = 0; i < this.nodes.length; i++) {
-        const node = this.nodes[i];
-        this.addNode(node[this.nameIndex], node[this.treeIndex], node, node[this.parentNameIndex])
+RegisterToFFL.prototype.walk = function(node, depth, visitor) {
+    visitor(node, depth)
+    const childs = node[this.childIndex];
+    for (var i = 0; i < childs.length; i++) {
+        this.walk(childs[i], depth + 1, visitor)
     }
 }
 RegisterToFFL.prototype.validate = function(line) {
@@ -156,7 +148,7 @@ RegisterToFFL.prototype.createInformationObject = function(variableLine) {
 /**
  * TODO: internationalization should happen here, inject constants on placeholders
  */
-RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName) {
+RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     const formattedFFL = []
     const midx = this.modifierIndex;
     const nidx = this.nameIndex;
@@ -172,11 +164,12 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName) {
     const shiftindent = this.shiftindent;
 
     let cdept = 0;
-    this.walk(rootVariableName || 'root', 3, function(node, depth) {
+    const rootNode = this.vars[rootVariableName || 'root'];
+    this.walk(rootNode, 1, function(node, depth) {
         const items = [];
         if (cdept >= depth) items.push(shiftindent[cdept][(cdept - depth)])
         items.push(indents[depth])
-        items.push(node[tidx][0] == "f" ? variable : tuple)//TODO: make either integer or single char
+        items.push(node[tidx] ? tuple : variable)
         items.push(node[midx] || "")
         items.push(node[nidx])
         if (ridx != -1 && node[ridx]) {
@@ -185,7 +178,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName) {
         }
         items.push("\n")
         items.push(indents[depth])
-        items.push("{\n")
+
         const props = []
         for (var i = 0; i < relevant.length; i++) {
             const real = relevant[i]
@@ -193,12 +186,20 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName) {
                 props.push([indents[depth + 1], schema[real], ": ", node[real], ";"].join(""))
             }
         }
-        items.push(props.join("\n"))
+        if (props.length > 0) {
+            items.push("{\n")
+            items.push(props.join("\n"))
+        } else {
+            items.push("{")
+        }
         cdept = depth;
         formattedFFL.push(items.join(""));
     })
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
-
+    if (!rootVariableName) {
+        formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
+        formattedFFL[1] = " root\n {"
+    }
     return formattedFFL;
 }
 exports.RegisterToFFL = RegisterToFFL;

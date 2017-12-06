@@ -9,6 +9,7 @@ exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
 const uuid = require('uuid4');
 
+//git remote update && git status -uno
 class Stash {
     constructor() {
         dns.lookup(hostname, (err, add, fam) => {

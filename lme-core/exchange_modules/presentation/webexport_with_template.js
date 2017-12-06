@@ -18,7 +18,7 @@ function LMETree(name, workbook) {
     this.names = {};
 }
 
-function noChange(workbook, rowId, col, index) {
+function noChange(workbook, rowId, col, index, type) {
     let r;//return value
     let c = -1;//calculation counter
     return {
@@ -32,7 +32,7 @@ function noChange(workbook, rowId, col, index) {
     }
 }
 
-function changeAble(workbook, rowId, col, index) {
+function changeAble(workbook, rowId, col, index, type) {
     let r;//return value
     let c = -1;//calculation counter
     return {
@@ -46,7 +46,7 @@ function changeAble(workbook, rowId, col, index) {
     }
 }
 
-function changeAndCache(workbook, rowId, col, index) {
+function changeAndCache(workbook, rowId, col, index, type) {
     let r;//return value
     let c = -1;//calculation counter
     return {
@@ -58,7 +58,12 @@ function changeAndCache(workbook, rowId, col, index) {
             return r;
         },
         set: function(v) {
-            var value = (v == null || v == '') ? null : (isNaN(v) ? v : parseFloat(v))
+            var value;
+            if (type == 'number') {
+                value = (v == null || v == '') ? null : (isNaN(v) ? v : parseFloat(v))
+            } else {
+                value = (v == null || v == '') ? null : v
+            }
             workbook.set(rowId, value, col, index, 0);
         }
     }
@@ -93,6 +98,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     var rowId = node.rowId;
     var amount = repeats[node.frequency][0]
     var colspan = repeats[node.frequency][1];
+    const type = node.displayAs;
     var rv = {
         id: rowId,
         index: index,
@@ -118,7 +124,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     }
     for (var index = 0; index < amount; index++) {
         var r = {
-            type: node.displayAs,
+            type: type,
             value: null,
             visible: null,
             entered: null,
@@ -126,18 +132,18 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
             locked: null
         }
         rv.cols.push(r);
-        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index));
-        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index));
-        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index));
-        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index));
-        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index));
+        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, type));
+        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index, type));
+        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, type));
+        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index, type));
+        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index, type));
     }
     /**
      * Proxy properties to the row object
      */
     columns.forEach(function(col) {
         rv[col] = null;
-        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0));
+        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, type));
     });
     const parent = this.nodes[treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);

@@ -1,6 +1,5 @@
-const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
-const Register = require('./Register').Register
 const SolutionFacade = require('../../src/SolutionFacade')
+const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
 const FinFormula = require('../ffl/FinFormula')
 const AST = require('../../../ast-node-utils/index').ast
 const log = require('ff-log')
@@ -13,67 +12,86 @@ var esprima = require('esprima');
  * TODO: choices not work correctly
  */
 function RegisterToLMEParser() {
+
 }
 
 RegisterToLMEParser.prototype.name = 'ffl2'
 RegisterToLMEParser.prototype.status = 'green';
 RegisterToLMEParser.prototype.headername = '.finance ffl2';
-
+RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
+    visitor(node, depth)
+    const childs = node[this.childIndex];
+    for (var i = 0; i < childs.length; i++) {
+        this.walk(childs[i], depth + 1, visitor)
+    }
+}
 RegisterToLMEParser.prototype.parseData = function(data, workbook) {
-    const indexer = new RegisterToFFL(new Register(), data);
+    const indexer = data;
+    const fflRegister = new RegisterToFFL(indexer)
+    const register = data.getIndex('name');
     const modelName = workbook.modelName || indexer.name;
     const solution = SolutionFacade.createSolution(modelName || "NEW");
-    indexer.indexProperties()
-
+    const nameIndex = indexer.schemaIndexes.name;
+    const referstoIndex = indexer.schemaIndexes.refersto;
+    const displayTypeIndex = indexer.schemaIndexes.displaytype;
+    this.childIndex = indexer.schemaIndexes.children;
+    this.formulaIndexes = []
+    const formulaIndexes = this.formulaIndexes
+    var formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']
+    for (var i = 0; i < formulas.length; i++) {
+        this.formulaIndexes.push(data.schemaIndexes[formulas[i]])
+    }
     //only inherit properties once.
     const inherited = {}
 
     //INFO: inheritance could also be possible via database
     function inheritProperties(node) {
-        if (!inherited[node[indexer.nameIndex]] && node[indexer.referstoIndex]) {
-            inherited[node[indexer.nameIndex]] = true
-            const supertype = indexer.vars[node[indexer.referstoIndex]]
+        if (!inherited[node[nameIndex]] && node[referstoIndex]) {
+            inherited[node[nameIndex]] = true
+            const supertype = register[node[referstoIndex]]
+            if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
             //first inherit from parents of parents.
-            if (supertype[indexer.referstoIndex]) inheritProperties(supertype)
+            if (supertype[fflRegister.referstoIndex]) inheritProperties(supertype)
             for (var i = 0; i < supertype.length; i++) {
                 if (node[i] == null) node[i] = supertype[i];
             }
         }
     }
 
-    indexer.walk('root', 3, function(node, depth) {
-        const nodeName = node[indexer.nameIndex];
-        let type = node[indexer.displaytypeIndex]
+    const rootNode = register['root']
+    this.walk(rootNode, 3, function(node, depth) {
+        const nodeName = node[nameIndex];
+        let type = node[displayTypeIndex]
         inheritProperties(node)
 
-        const parentId = node[indexer.parentNameIndex];
+        const parentId = node[fflRegister.parentNameIndex];
 
         //TODO: quick-fix move into IDE ScorecardTool-addon
         if (nodeName.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
-            if (indexer.defaultValues[indexer.visibleIndex][node[indexer.visibleIndex]]) {
-                node[indexer.visibleIndex] = 'Length(' + nodeName + ')'
-                node[indexer.frequencyIndex] = 'none'
+            if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
+                node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
+                node[fflRegister.frequencyIndex] = 'none'
             }
         } else if (nodeName.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
-            node[indexer.frequencyIndex] = 'none'
+            node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
         }
 
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', parseFFLFormula(node[indexer.formulaindex], nodeName, 'value', type), type);
+        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', parseFFLFormula(node[fflRegister.formulaindex], nodeName, 'value', type), type);
         //hierarchical visibility
-        const visibleFormula = node[indexer.visibleIndex];
-        if (visibleFormula && parentId) node[indexer.visibleIndex] = indexer.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible && ' + visibleFormula
+        const visibleFormula = node[fflRegister.visibleIndex];
+        if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible && ' + visibleFormula
 
-        if (node[indexer.decimalsIndex]) uiNode.decimals = parseInt(node[indexer.decimalsIndex]);
-        uiNode.frequency = node[indexer.frequencyIndex] || 'column';
-        uiNode.datatype = node[indexer.datatypeIndex] || 'number';
+        if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
+        uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';
+        uiNode.datatype = node[displayTypeIndex] || 'number';
 
         if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
 
-        for (var i = 0; i < indexer.formulaIndexes.length; i++) {
-            const index = indexer.formulaIndexes[i];
+        for (var i = 0; i < formulaIndexes.length; i++) {
+            const index = formulaIndexes[i];
             if (node[index]) {
-                if (!indexer.defaultValues[index] || !indexer.defaultValues[index][node[index]])
+                if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]])
                     SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], parseFFLFormula(node[index], nodeName, indexer.schema[index], null));
             }
         }

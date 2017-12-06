@@ -33,123 +33,76 @@ var defaultValue = {
     }
 }
 var variables = {}
-
-function Indexer() {
-}
-
-Indexer.prototype.find = function(key, value) {
-    if (!this[key] || !this[key][value]) return []
-    return this[key][value];
-}
-Indexer.prototype.index = function(key, value, index) {
-    if (key == '') throw Error('Invalid FFL. [' + value + ']');
-    if (!this[key]) this[key] = {}
-    if (!this[key][value]) this[key][value] = []
-    this[key][value].push(index)
-}
-Indexer.prototype.print = function() {
-    for (var key in this) {
-        for (var value in this[key]) {
-            console.info(key + "." + value + ":" + this[key][value].length)
-        }
-    }
-}
 var formulaMapping = {nputRequired: 'required'}
 ScorecardTool.prototype.parse = function(input) {
-    var indexer = new Indexer();
-    var model = FFLFormatter.create(new Register(), input);
+    //TODO: move radio-choice / VALIDATION names into here..
+    var indexer = new Register();
+    var model = FFLFormatter.create(indexer, input);
+    model.indexProperties();
+    this.childIndex = indexer.schemaIndexes.children
+    const requiredIndex = indexer.schemaIndexes.required
+    const nameIndex = indexer.schemaIndexes.name
+    const formulaIndex = indexer.schemaIndexes.formula
+    const rIndex = indexer.schemaIndexes.index
     //index and parse everything
-    model.visit(function(variable, raw_properties, children) {
-        const varChildren = [];
-        for (let i = 0; i < children.length; i++) {
-            varChildren.push(variables[children[i][1]])
-        }
-        const properties = {
-            name: variable[0],
-            index: variable[1],
-            modifier: variable[2],
-            parentId: variable[3],
-            tuple: variable[4],
-            refersto: variable[5],
-            children: varChildren
-        }
-        variables[variable[1]] = properties;
-        for (let i = 0; i < raw_properties.length; i++) {
-            const p = raw_properties[i];
-            const p_seperator_index = p.indexOf(':');//can't use split. some properties use multiple :
-            let key = p.substring(0, p_seperator_index).trim();
-            key = formulaMapping[key] || key
-            const value = p.substring(p_seperator_index + 1).trim();
-            properties[key] = value
-            indexer.index(key, value, variable[1])
-        }
-    })
     //find scorecard types
-    const scorecardsIndexes = indexer.find('displaytype', 'scorecard');
-    const scorecards = []
-    for (var i = 0; i < scorecardsIndexes.length; i++) {
-        scorecards.push(variables[scorecardsIndexes[i]]);
-    }
+    const scorecards = indexer.find('displaytype', 'scorecard');
     const adjustments = []
     for (var i = 0; i < scorecards.length; i++) {
         let completeFilledIn = [];
         const scorecard = scorecards[i];
-        for (var j = 0; j < scorecard.children.length; j++) {
-
+        const steps = scorecard[indexer.schemaIndexes.children];
+        //CONVERT A LOT OF THIS INTO SELECT_DECENDANTS
+        for (var j = 0; j < steps.length; j++) {
             const requiredvars = []
-
-            const mapVar = scorecard.children[j];
-            walkDepthFirst(mapVar, function(node, depth) {
-
-                if (!defaultValue.required[node.required]) {
+            const mapVar = steps[j];
+            this.walkDepthFirst(mapVar, function(node, depth) {
+                if (!defaultValue.required[node[requiredIndex]]) {
                     requiredvars.push(node)
                 }
-
             }, 0)
-
             if (requiredvars.length > 0) {
                 const validFormula = '[AMMOUNT(' + requiredvars.map(function(variable) {
-                    return variable.name + '.required and ' + variable.name + '.entered'
+                    return variable[nameIndex] + '.required and ' + variable[nameIndex] + '.entered'
                 }).join(',') + '),AMMOUNT(' + requiredvars.map(function(variable) {
-                    return variable.name + '.required'
+                    return variable[nameIndex] + '.required'
                 }).join(',') + ')]';
 
                 adjustments.push({
-                    index: mapVar.index,
+                    index: mapVar[nameIndex],
                     property: 'valid',
                     value: validFormula
                 })
-                mapVar.valid = validFormula;
                 completeFilledIn = completeFilledIn.concat(requiredvars)
             }
         }
         if (completeFilledIn.length > 0) {
             const validFormula = 'AMMOUNT(' + completeFilledIn.map(function(variable) {
-                return variable.name + '.required and ' + variable.name + '.entered'
+                return variable[nameIndex] + '.required and ' + variable[nameIndex] + '.entered'
             }).join(',') + ')  = AMMOUNT(' + completeFilledIn.map(function(variable) {
-                return variable.name + '.required'
+                return variable[nameIndex] + '.required'
             }).join(',') + ')';
 
             adjustments.push({
-                index: scorecard.index,
+                index: scorecard[nameIndex],
                 property: 'formula',
                 value: validFormula
             })
-            scorecard.formula = validFormula;
         }
     }
+    var names = indexer.getIndex('name')
     for (var adjindex = 0; adjindex < adjustments.length; adjindex++) {
         var adjustment = adjustments[adjindex];
-        model.change(adjustment.index, adjustment.property, adjustment.value)
+        indexer.value(names[adjustment.index][rIndex], adjustment.property, adjustment.value)
     }
-    return model.toFFL();
+    return indexer;
 }
-
-function walkDepthFirst(node, visitor, depth) {
-    for (var i = 0; i < node.children.length; i++) {
-        walkDepthFirst(node.children[i], visitor, depth + 1)
+ScorecardTool.prototype.walkDepthFirst = function(node, visitor, depth) {
+    const children = node[this.childIndex]
+    for (var i = 0; i < children.length; i++) {
+        this.walkDepthFirst(children[i], visitor, depth + 1)
     }
     visitor(node, depth)
 }
 
-exports.ScorecardTool = new ScorecardTool();
+exports.ScorecardTool = ScorecardTool;

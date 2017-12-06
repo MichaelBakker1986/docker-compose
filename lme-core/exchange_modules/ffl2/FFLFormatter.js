@@ -1,14 +1,20 @@
-require('../../../model-tests/StringUtils')//inject .Repeat into String object
+/**
+ * Is a FFL quick-formatter (V05 '3.1m chars' 90ms) and is FFL to indexed formatter
+ */
 function FFLFormatter(register, data) {
     this.register = register;
+    register.addColumn('desc')
+    this.vars = register.getIndex('i')
     this.original = data;
     this.data = data;
     this.reassembled = '';
     this.constants = [];
     this.comments = [];
     this.header = '';
-    //schema and vars are part of the Register
-    this.vars = [];
+    this.indents = [];
+    for (var i = 0; i < 30; i++) {
+        this.indents[i] = new Array(i).join(" ")
+    }
 }
 
 /**
@@ -60,20 +66,22 @@ FFLFormatter.prototype.extractVars = function() {
     let noneexit = true;
     var data = this.data;
     var index = 0;
-    var vars = [];
+    const vars = [];
+    const register = this.register;
     while (noneexit) {
         noneexit = false;
         data = data.replace(/{([^}{]*?)}/gm, function($0, $1) {
             //this happens to many times...
             noneexit = true;
-            vars[++index] = $1
+            const index = register.addRow([$1])
             return '___' + index
         })
     }
-    this.vars = vars;
+    //  this.vars = vars;
 }
 FFLFormatter.prototype.findRootVariable = function() {
-    return this.vars.length - 1
+    return this.register.lastRowIndex()
+
 }
 FFLFormatter.prototype.buildTree = function() {
     this.extractHeader();
@@ -91,14 +99,18 @@ FFLFormatter.prototype.walk = function(visit) {
     this.extractComments();
     this.removeWhite();
     this.extractVars();
-    var firstVar = this.findRootVariable();
-    this.vars[firstVar] = this.vars[firstVar].replace(/root /gi, 'variable root ')
-    this.walkTree(visit, ['root', firstVar, null, null, false, null, this.vars[firstVar].trim()], 1, firstVar)
+    var firstVar = this.register.lastRowIndex();
+    const firstRow = this.vars[firstVar];
+    firstRow[0] = firstRow[0].replace(/root /gi, 'variable root ').trim()
+
+    //this is a trick, not wrong!. parent and child index are the same to start with root.
+    firstRow.push('root', firstVar, null, null, null, null, 0, [])
+    this.walkTree(visit, firstVar, 1)
 }
-FFLFormatter.prototype.walkTree = function(visit, var_desc, depth, index) {
+FFLFormatter.prototype.walkTree = function(visit, parentId, depth) {
     var self = this;
-    const parts = this.vars[index].trim().split(';')
-    const children = [];
+    const parts = this.vars[parentId][0].trim().split(';')
+    let children = 0;
     if (parts[parts.length - 1] == '') {
         parts.length--;
     } else {
@@ -115,20 +127,23 @@ FFLFormatter.prototype.walkTree = function(visit, var_desc, depth, index) {
             const modifier = varname.startsWith('+=') ? "+=" : varname.startsWith('+') ? '+' : varname.startsWith('=') ? '=' : varname.startsWith('-') ? '-' : null;
             const name = varname.substring(modifier ? modifier.length : 0).trim();//it might be a double space in the end. its too easy to trim.
             const varRefIndex = parseInt($1.substring(refIdStartIndex + 3));
-            const variable = [name, varRefIndex, modifier, var_desc[0], tuple, referstoVariableName, varDesc, children.length];
-            children.push(variable)
-            self.walkTree(visit, variable, depth + 1, varRefIndex)
+
+            const variable = self.vars[varRefIndex];
+            variable.push(name, varRefIndex, modifier, parentId, tuple, referstoVariableName, ++children, [])
+
+            self.vars[parentId][8].push(variable)
+            self.walkTree(visit, varRefIndex, depth + 1)
             return ''
         });
     }
-    visit(var_desc, parts, children)
+    visit(parentId, parts)
 }
 //test if this is quicker than indexing, and recreate FFL
 //scorecardTool is using this, internally
 FFLFormatter.prototype.prettyFormatFFL = function(depth, index) {
     var self = this;
-    const indent = " ".repeat(depth);
-    const variable = this.vars[index].trim()
+    const indent = this.indents[depth];
+    const variable = this.vars[index][0].trim()
     const parts = variable.split(';')
     const varparts = [];
     if (parts[parts.length - 1] == '') {
@@ -159,17 +174,43 @@ FFLFormatter.prototype.prettyFormatFFL = function(depth, index) {
     }
     return r;
 }
+var formulaMapping = {inputRequired: 'required'}
+FFLFormatter.prototype.lookupConstant = function(index) {
+    return this.constants[parseInt(index.substring(2))].replace(/'/g, "\\'").replace(/(?:\\r\\n|\\r|\\n)/g, "[br]")
+}
 FFLFormatter.prototype.parseProperties = function() {
-
+    const register = this.register;
+    const index = register.getIndex('i');
+    const formatter = this;
+    this.walk(function(v, raw_properties) {
+            for (let i = 0; i < raw_properties.length; i++) {
+                const p = raw_properties[i];
+                const p_seperator_index = p.indexOf(':');//can't use split. some properties use multiple :
+                let key = p.substring(0, p_seperator_index).trim();
+                key = formulaMapping[key] || key
+                register.addColumn(key)
+                let value = p.substring(p_seperator_index + 1).trim();
+                //TODO: internationalization should not happen here:
+                //TODO: But to introduce Internationalization will take a day.
+                //TODO: So thats why we are injecting constant Strings here.
+                //TODO: making the model one language only for now
+                if (value.startsWith('__')) value = formatter.lookupConstant(value)
+                register.value(v, key, value)
+            }
+        }
+    )
 }
 
 function Factory() {
     this.on = false;
 }
-
+//TODO: remove this factory.
 Factory.prototype.create = function(register, input) {
     const lexialParser = new FFLFormatter(register, input);
     return {
+        indexProperties: function() {
+            lexialParser.parseProperties()
+        },
         visit: function(visitor) {
             return lexialParser.walk(visitor)
         },

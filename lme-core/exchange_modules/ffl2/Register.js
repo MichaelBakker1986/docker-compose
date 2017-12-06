@@ -6,43 +6,49 @@ function Register() {
     this.schema = []
     this.i = []
     this.schemaIndexes = {}
+
+    var schema = ['desc', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children']
+    for (var j = 0; j < schema.length; j++) {
+        this.addColumn(schema[j]);
+    }
 }
 
-Register.prototype.setSchema = function(columns) {
-}
 Register.prototype.getIndex = function(name) {
+    if (!this[name]) this.createIndex(name)
     return this[name]
 }
+Register.prototype.lastRowIndex = function() {
+    return this.i.length - 1
+}
 Register.prototype.addColumn = function(name) {
-    this.schemaIndexes[name] = this.schema.length
-    this.schema.push(name)
-    const a = this.i
-    for (var i = 0; i < a.length; i++) a[i].length++
+    if (this.schemaIndexes[name] == null) {
+        this.schemaIndexes[name] = this.schema.length
+        this.schema.push(name)
+    }
+}
+Register.prototype.value = function(idx, key, value) {
+    this.i[idx][this.schemaIndexes[key]] = value
+}
+Register.prototype.find = function(key, value) {
+    const idx = this.schemaIndexes[key]
+    const result = []
+    for (var i = 0; i < this.i.length; i++) {
+        if (this.i[i][idx] === value) result.push(this.i[i])
+    }
+    return result;
 }
 //can only be unique indexes, string based.
-Register.prototype.addIndex = function(name) {
-    const index = {}
-    const sindex = this.schemaIndexes[name]
-    const a = this.i
-    for (var i = 0; i < a.length; i++) index[a[i][sindex]] = a[i]
-    this[name] = index
+Register.prototype.createIndex = function(name) {
+    if (!this[name]) {
+        const index = {}
+        const sindex = this.schemaIndexes[name]
+        const a = this.i
+        for (var i = 0; i < a.length; i++) index[a[i][sindex]] = a[i]
+        this[name] = index
+    }
 }
-Register.prototype.addrow = function(row) {
+Register.prototype.addRow = function(row) {
     this.i.push(row)
     return this.i.length - 1
 }
-/*const register = new Register();
-register.addColumn('name')
-register.addColumn('visible')
-register.addColumn('locked')
-register.addColumn('required')
-let idx = register.addrow(['test0', 1, 2, 3])
-register.addrow(['test1', 1, 2, 3])
-register.addrow(['test2', 1, 2, 3])
-console.info(register.getIndex('i')[idx])
-
-register.addIndex('name')
-register.addColumn('testC')
-register.getIndex('name').test0.push([1, 2, 3]);
-console.info(register.getIndex('name').test0)*/
 exports.Register = Register

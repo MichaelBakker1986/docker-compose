@@ -2793,7 +2793,7 @@ model MVO uses BaseModel
     title: "Widgets";
     locked: 1;
     visible: 1;
-    variable POLARBENCHMARK refers to GRAPH01
+    variable POLARBENCHMARK
     {
      datatype: matrix;
      frequency: none;
@@ -2804,7 +2804,7 @@ model MVO uses BaseModel
      fixed_decimals: 2;
      title: "Maatschappelijk Verantwoord Ondernemen";
     }
-    variable THEMAS_GRAPH refers to GRAPH01
+    variable THEMAS_GRAPH
     {
      datatype: matrix;
      frequency: none;
