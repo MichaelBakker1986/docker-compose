@@ -8,7 +8,7 @@ model HYPOTHEEK uses BaseModel
 {
  version: "0.1";
  ffl_version: "1.2";
- variable root
+ root
  {
   variable RootSub1
   {
