@@ -150,6 +150,8 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                     $scope.saveFeedbackTitle = "Finished"
                     $scope.saveFeedback = 'Done work..'
                     $scope.session.disablePreviewButton = false;
+                    window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
+                    $('#modal-success').modal('hide')
                 })
             });
         });
