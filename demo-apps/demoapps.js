@@ -23,6 +23,10 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-
 app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/', expressStaticGzip(__dirname + "/monli/"));
 
+//Update proxies
+app.get('/update/git/notifyCommit', proxy('http://' + require('os').hostname() + ':8081/update/git/notifyCommit'));
+app.get('/hasUpdates', proxy('http://' + require('os').hostname() + ':8081/hasUpdates'));
+
 //proxies
 app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
 app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));

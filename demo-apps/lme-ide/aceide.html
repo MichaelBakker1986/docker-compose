@@ -173,6 +173,12 @@
                     <a class="data-story" ng-click="currentView = 'jbehaveView'" data-toggle="tooltip" title="jBehave tests">
                         <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
+                </li>
+                <li class="treeview">
+                    <a class="data-story" ng-click="update()" data-toggle="tooltip" title="Update">
+                        <i class="fa fa-cloud-download"></i> <span>Update</span>
+                    </a>
+                </li>
             </ul>
         </section>
     </aside>
@@ -180,7 +186,16 @@
         <section id="editor-container" class="content" style="max-height: 90vh;">
             <div class="box" style="max-height: 90vh;">
                 <div class="box-body" style="max-height: 90vh;">
-                    <pre id="editor"></pre>
+                    <pre ng-show="currentView !== 'updateView'" id="editor"></pre>
+                    <div ng-show="currentView === 'updateView'">
+                        <div ng-show="hasChanges">
+                            <p>Update</p>
+                            <p>{{changes}}</p>
+                        </div>
+                        <div ng-show="!hasChanges">
+                            <p>No update found</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

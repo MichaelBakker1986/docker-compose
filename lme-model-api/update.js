@@ -82,6 +82,35 @@ app.get('/update/git/notifyCommit', function(req, res) {
     })
 });
 
+app.get('/hasUpdates', function(req, res){
+    checkForUpdates().then((result) => {
+        res.end("" + result);
+    }).catch((err) => {
+        res.end("" + err);
+    })
+});
+
+function checkForUpdates() {
+    return new Promise((fulfill, reject) => {
+        var command =  'git diff --stat origin/master';
+        exec(command).then((result) => {
+            var hasChanges = false;
+            if(result.stdout !== ''){
+                console.info('no changes')
+                hasChanges = true;
+            }
+            fulfill(JSON.stringify({
+                hasChanges: hasChanges,
+                changes: result.stdout
+            }))
+        }).catch((err) => {
+            log(err.toString(), 'red')
+            reject('Fail restarting ' + err)
+        });
+    });
+
+}
+
 function send(text, level) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
