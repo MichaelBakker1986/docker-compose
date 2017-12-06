@@ -196,6 +196,13 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         EconomicEditorView.on = !EconomicEditorView.on;
         aceEditor.setParsedValue(fflModel)
     }
+    $scope.update = function() {
+        $scope.currentView = 'updateView';
+        $http.get('http://10.0.75.1:8081/update/git/notifyCommit').then(function(data) {
+            console.log(data);
+        });
+    }
+
     window.addEventListener("keydown", function(e) {
         if (e.ctrlKey && e.shiftKey) {
             return;
