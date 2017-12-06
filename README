@@ -18,4 +18,3 @@ npm install -g concurrently
 npm install
 docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
 npm start
-
