@@ -185,7 +185,13 @@
                 <div class="box-body" style="max-height: 90vh;">
                     <pre ng-show="currentView !== 'updateView'" id="editor"></pre>
                     <div ng-show="currentView === 'updateView'">
-                        <p>Update</p>
+                        <div ng-show="hasChanges">
+                            <p>Update</p>
+                            <p>{{changes}}</p>
+                        </div>
+                        <div ng-show="!hasChanges">
+                            <p>No update found</p>
+                        </div>
                     </div>
                 </div>
             </div>
