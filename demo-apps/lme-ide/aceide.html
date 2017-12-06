@@ -50,9 +50,9 @@
                         <span ng-switch-when="FFLModelEditorView" class="input-group-btn">
                              <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
                         </span>
-                       <!-- <span class="input-group-btn">
-                             <button type="button" ng-click="dbModelConvert()" data-toggle="tooltip" title="Load model from database" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
-                        </span>-->
+                        <!-- <span class="input-group-btn">
+                              <button type="button" ng-click="dbModelConvert()" data-toggle="tooltip" title="Load model from database" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
+                         </span>-->
                         <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode" class="input-group-btn">
                               <button ng-click="toggleProperties()" type="button" data-toggle="tooltip" title="show visible, locked, required" class="btn btn-info btn-flat"><i class="fa fa-sliders"></i></button>
                         </span>
@@ -79,6 +79,9 @@
                                 <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}"
                                         class="btn btn-info btn-flat"><i
                                         class="fa fa-window-restore"></i></button>
+                                <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView' && error)" data-toggle="tooltip" title="Preview {{error}}"
+                                        class="btn btn-info btn-flat"><i
+                                        class="fa fa-info-circle"></i></button>
                         </span>
                     </div>
                 </div>

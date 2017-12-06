@@ -68,6 +68,17 @@ function fixAll() {
  */
 var mostcommon = {}
 
+function logErrorWithVariableName(variableName) {
+    return function() {
+        try {
+            log.debug(formulaInfo.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
+            workbook.createFormula(1, variableName);
+        } catch (err) {
+            log.error('Fatal error in variable [' + variableName + ']', err);
+        }
+    }
+}
+
 function validateImportedSolution() {
     var validateResponse = {
         succes: [],
@@ -94,14 +105,7 @@ function validateImportedSolution() {
                         canFix: true,
                         variableName: variableName,
                         fixMessage: 'Add',
-                        fix: function() {
-                            try {
-                                log.debug(formulaInfo.name + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
-                                workbook.createFormula(1, variableName);
-                            } catch (err) {
-                                log.error('Fatal error', err);
-                            }
-                        }
+                        fix: logErrorWithVariableName(variableName)
                     };
                 }
                 else {

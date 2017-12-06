@@ -20,11 +20,10 @@
    visible: 1;
    options_title: locked;
    options: locked;
-   variable Q_JOUWGEGEVENS
+   variable Q_MAP01
    {
     datatype: number;
     frequency: document;
-    formula: (Q_JOUWGEGEVENS_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
     displaytype: currency;
     title: "Jouw gegevens";
     top_blanklines: 1;
@@ -288,7 +287,6 @@
    {
     datatype: number;
     frequency: document;
-    formula: (Q_PARTNER_GEGEVENS_ENTEREDREQUIREDVARS=Q_PARTNER_GEGEVENS_REQUIREDVARS);
     displaytype: currency;
     title: "Gegevens van jou partner";
     top_blanklines: 1;

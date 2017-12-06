@@ -333,17 +333,52 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             })
             aceEditor.setAnnotations(fflAnnotations);
         }
-        //else console.log("other change")
     })
     $scope.activeVariable = [];
 
     function setActiveVariable() {
+        //
+        //find a previous variable name
+        //
         const variableLine = aceEditor.getCurrentLine()
         var variable = currentIndexer.createInformationObject(variableLine)
         //right side-bar toggle
         $scope.$apply(function() {
             $scope.activeVariable = variable;
         })
+    }
+
+    function extractName(lines) {
+        return lines.replace(/(?:variable|tuple)\s*(\w+).*/i, "$1")
+    }
+
+    function syntaxCheck() {
+        try {
+            const fflRegister = new Register();
+            const newFile = aceEditor.getValue();
+            currentIndexer = FFLFormatter.create(fflRegister, newFile)
+            currentIndexer.indexProperties()
+            currentIndexer.visit(function() {
+            })
+
+            const lines = newFile.split('\n')
+            for (var i = aceEditor.getCursor().row; i > 0; i--) {
+                if (lines[i].match(/\s*(variable |tuple |root)/)) {
+                    console.info(extractName(lines[i]))
+                    break;
+                }
+            }
+            console.info(fflRegister)
+            $scope.$apply(function() {
+                $scope.error = null
+            })
+        } catch (err) {
+            $scope.$apply(function() {
+                $scope.error = err.toString()
+                console.info(err)
+            })
+        }
+        console.info($scope.error)
     }
 
     aceEditor.aceEditor.commands.on("afterExec", function(e) {
@@ -354,8 +389,9 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             setActiveVariable();
         }
         console.info({name: e.command.name, args: e.args})
+        syntaxCheck();
     });
-    // $scope.dbModelConvert(windowModelName)
+
     $scope.togglePropertiesSidebar();
     handleModelChange()
 });
