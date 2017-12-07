@@ -121,30 +121,6 @@ RegisterToFFL.prototype.validate = function(line) {
     return (this.schema.length - this.hiddenProperties.length) == ((line.match(/;/g) || []).length + 1)
 }
 
-RegisterToFFL.prototype.doProx = function doProx(name, metaData, paramIndex) {
-    const variable = this.vars[name];
-    Object.defineProperty(metaData, 'value', {
-        set: function(value) {
-            variable[paramIndex] = value;
-        },
-        get: function() {
-            return variable[paramIndex] || "";
-        }
-    });
-}
-RegisterToFFL.prototype.createInformationObject = function(variableLine) {
-    const variableName = variableLine.split(this.delimiter)[0].trim();
-    const variable = [];
-    for (var paramIndex = 0; paramIndex < this.schema.length; paramIndex++) {
-        var propertyName = this.schema[paramIndex];
-
-        if (this.hiddenProperties.indexOf(paramIndex) != -1) continue
-        const metaData = {name: propertyName};
-        this.doProx(variableName, metaData, paramIndex)
-        variable.push(metaData)
-    }
-    return variable;
-}
 /**
  * TODO: internationalization should happen here, inject constants on placeholders
  */
@@ -197,8 +173,10 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     })
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
     if (!rootVariableName) {
-        formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
+        //formattedFFL.shift()
         formattedFFL[1] = " root\n {"
+        //formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
+        formattedFFL.shift()
     }
     return formattedFFL;
 }

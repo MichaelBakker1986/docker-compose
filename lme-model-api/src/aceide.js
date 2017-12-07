@@ -1,13 +1,14 @@
 /**
  * editor variable is set to the window.
  */
-
+console.info("tuple test ".replace(/(?:variable|tuple)\s*(\w+).*/i, "$1"))
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
 var Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
+var ChangeManager = require('../../lme-core/exchange_modules/ffl2/ChangeManager').ChangeManager
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -58,8 +59,10 @@ const user_session = {
 
 angular.module('lmeapp', ['angular.filter']).controller('ideController', function($scope, $http) {
     let register = new Register();
+    $scope.register = register;
     const AceEditor = require('./ace_editor_api').AceEditor
     const aceEditor = new AceEditor();
+    const changeManager = new ChangeManager(register)
     $scope.fflmode = true;
     $scope.currentView = 'FFLModelEditorView';
     $scope.session = user_session;
@@ -91,10 +94,6 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                 currentIndexer.indexProperties();
                 const lines = currentIndexer.toGeneratedCommaSeperated()
                 aceEditor.setValue(lines)
-                /*     lines[0] = 'model ' + windowModelName + ' uses BaseModel\n{\n  root \n  {\n'
-                     aceEditor.setValue(lines.join("\n").replace(/__(\d+)/gm, function($1, $2) {
-                         return "\"translated\""//TODO: make international
-                     }))*/
             });
         });
     }
@@ -118,29 +117,12 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         storyParser.start();
         storyParser.call();
     }
-    /**
-     * values can either be saved with the indexer, or by plain ffl.
-     */
     $scope.saveFFLModel = function() {
-        const type = '.ffl';//= $scope.fflType;
-        if (type == '.ffl2') {
-            console.info({schema: currentIndexer.schema, nodes: currentIndexer.nodes});
-        }
+        const type = '.ffl';
         Pace.track(function() {
             $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + " …"
             $scope.saveFeedbackTitle = "Working on it...";
-            let data;
-            //convert ffl into index file
-            /*if (type == '.ffl') {
-*/
-            data = aceEditor.getValue()
-            /*}
-            else {
-                data = JSON.stringify({
-                    schema: currentIndexer.schema,
-                    nodes: currentIndexer.nodes
-                });
-            }*/
+            let data = aceEditor.getValue()
             $.post("saveFFL_LME", {
                 model: $scope.session.fflModelPath,
                 data: data,
@@ -207,7 +189,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             $scope.hasChanges = data.data.hasChanges;
             $scope.changes = data.data.changes;
 
-            if($scope.hasChanges){
+            if ($scope.hasChanges) {
                 $http.get('/update/git/notifyCommit').then(function(data) {
                     location.reload();
                 });
@@ -325,25 +307,10 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
     });
 
-    function reindex(start, end) {
-        for (var lineNumber = start; lineNumber <= end; lineNumber++) {
-            const textInLine = aceEditor.aceEditor.session.getLine(lineNumber);
-            /*   if (currentIndexer.validate(textInLine)) {
-                   console.info(textInLine)
-                   var variable = currentIndexer.createInformationObject(textInLine)
-                   //right side-bar toggle
-                   $scope.$apply(function() {
-                       $scope.activeVariable = variable;
-                   })
-               }*/
-        }
-    }
-
     aceEditor.aceEditor.on("change", function(e) {
         var fflAnnotations = []
         if (aceEditor.aceEditor.curOp && aceEditor.aceEditor.curOp.command.name) {
             // reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
-            console.log(e);
             fflAnnotations.push({
                 row: e.start.row,
                 column: 0,
@@ -354,63 +321,36 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
     })
     $scope.activeVariable = [];
-
-    function setActiveVariable() {
-        //
-        //find a previous variable name
-        //
-        const variableLine = aceEditor.getCurrentLine()
-        var variable = currentIndexer.createInformationObject(variableLine)
-        //right side-bar toggle
-        $scope.$apply(function() {
-            $scope.activeVariable = variable;
-        })
-    }
-
-    function extractName(lines) {
-        return lines.replace(/(?:variable|tuple)\s*(\w+).*/i, "$1")
-    }
-
-    function syntaxCheck() {
-        try {
-            const fflRegister = new Register();
-            const newFile = aceEditor.getValue();
-            currentIndexer = FFLFormatter.create(fflRegister, newFile)
-            currentIndexer.indexProperties()
-            currentIndexer.visit(function() {
-            })
-
-            const lines = newFile.split('\n')
-            for (var i = aceEditor.getCursor().row; i > 0; i--) {
-                if (lines[i].match(/\s*(variable |tuple |root)/)) {
-                    console.info(extractName(lines[i]))
-                    break;
-                }
-            }
-            console.info(fflRegister)
-            $scope.$apply(function() {
-                $scope.error = null
-            })
-        } catch (err) {
-            $scope.$apply(function() {
-                $scope.error = err.toString()
-                console.info(err)
-            })
-        }
-        console.info($scope.error)
-    }
-
+    $scope.schema = register.schema
     aceEditor.aceEditor.commands.on("afterExec", function(e) {
         if (e.command.name == 'golinedown') {
-            setActiveVariable();
         }
         else if (e.command.name == 'golineup') {
-            setActiveVariable();
         }
         console.info({name: e.command.name, args: e.args})
-        syntaxCheck();
+        changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
+        $scope.$apply(function() {
+            $scope.error = changeManager.error
+            $scope.activeVariable = changeManager.currentVariable
+            console.info(changeManager.error)
+        })
     });
-
+    $scope.$watch(function(scope) {
+            if (scope.register.changes.length > 0) {
+                for (var i = 0; i < scope.register.changes.length; i++) {
+                    var obj = scope.register.changes[i];
+                    console.info(obj)
+                }
+                scope.register.changes.length = 0
+                const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n') + '\n}'
+                aceEditor.setValue(newValue)
+            }
+            return scope.register.changes
+        },
+        function() {
+            console.info('change made')
+        }
+    );
     $scope.togglePropertiesSidebar();
     handleModelChange()
 });

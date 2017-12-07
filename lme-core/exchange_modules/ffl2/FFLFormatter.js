@@ -22,6 +22,8 @@ function FFLFormatter(register, data) {
  */
 FFLFormatter.prototype.extractHeader = function() {
     this.header = this.original.substring(0, this.original.indexOf('{'))
+    //INFO: the header is not indexed.
+    this.register.header = this.header;
     const headerLines = this.header.split('\n');
     for (var i = 0; i < headerLines.length; i++) {
         var headerLine = headerLines[i].trim();
@@ -90,7 +92,7 @@ FFLFormatter.prototype.buildTree = function() {
     this.removeWhite();
     this.extractVars();
     var firstVar = this.findRootVariable();
-    this.reassembled = this.prettyFormatFFL(1, firstVar)
+    this.reassembled = this.prettyFormatFFL(2, firstVar)
     this.insertConstants();
 }
 FFLFormatter.prototype.walk = function(visit) {
@@ -204,6 +206,7 @@ FFLFormatter.prototype.parseProperties = function() {
 function Factory() {
     this.on = false;
 }
+
 //TODO: remove this factory.
 Factory.prototype.create = function(register, input) {
     const lexialParser = new FFLFormatter(register, input);
@@ -244,4 +247,5 @@ Factory.prototype.create = function(register, input) {
         }
     }
 }
+exports.Formatter = FFLFormatter;
 exports.FFLFormatter = new Factory();
