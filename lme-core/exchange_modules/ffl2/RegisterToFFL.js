@@ -10,6 +10,7 @@ const StringBuffer = require('../../../model-tests/StringUtils').StringBuffer
 
 function RegisterToFFL(register) {
     this.schema = register.schema;
+    this.constants = register.constants;
     register.createIndex('name')
     //this.nodes = register.getIndex('name');
     this.vars = register.getIndex('name');
@@ -125,6 +126,7 @@ RegisterToFFL.prototype.validate = function(line) {
  * TODO: internationalization should happen here, inject constants on placeholders
  */
 RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
+    const constants = this.constants;
     const formattedFFL = []
     const midx = this.modifierIndex;
     const nidx = this.nameIndex;
@@ -177,6 +179,12 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
         formattedFFL[1] = " root\n {"
         //formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
         formattedFFL.shift()
+    }
+    for (var i = 0; i < formattedFFL.length; i++) {
+        var obj = formattedFFL[i];
+        formattedFFL[i] = obj.replace(/__(\d+)/gm, function($1, $2) {
+            return constants[parseInt($1.substring(2))]
+        })
     }
     return formattedFFL;
 }

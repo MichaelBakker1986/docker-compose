@@ -342,7 +342,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                     console.info(obj)
                 }
                 scope.register.changes.length = 0
-                const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n') + '\n}'
+                const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n')
                 aceEditor.setValue(newValue)
             }
             return scope.register.changes

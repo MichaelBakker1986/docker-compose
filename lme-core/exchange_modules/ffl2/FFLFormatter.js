@@ -9,6 +9,7 @@ function FFLFormatter(register, data) {
     this.data = data;
     this.reassembled = '';
     this.constants = [];
+    register.constants = this.constants
     this.comments = [];
     this.header = '';
     this.indents = [];
@@ -35,13 +36,12 @@ FFLFormatter.prototype.extractHeader = function() {
     }
 }
 FFLFormatter.prototype.extractConstants = function() {
-    var constants = {};
     let index = 0;
+    const constants = this.constants;
     this.data = this.data.replace(/"(.*?)"/gm, function($0) {
         constants[++index] = $0
         return '__' + index
     })
-    this.constants = constants;
 }
 FFLFormatter.prototype.insertConstants = function() {
     var constants = this.constants;

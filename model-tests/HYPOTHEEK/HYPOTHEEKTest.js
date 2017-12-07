@@ -4,6 +4,7 @@ var excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const ChangeManager = require('../../lme-core/exchange_modules/ffl2/ChangeManager').ChangeManager
 const Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
+const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
 const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
@@ -22,5 +23,5 @@ assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
 changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})
 assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
 
-
+new RegisterToFFL(register).toGeneratedFFL(undefined, 'HYPOTHEEK')
 

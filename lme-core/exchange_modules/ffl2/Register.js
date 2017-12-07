@@ -11,6 +11,7 @@ function Register() {
 
 Register.prototype.clean = function() {
     this.header = null;
+    this.constants = []
     for (var j = 0; j < this.createdIndexes.length; j++) {
         delete this[this.createdIndexes[j]];
     }
