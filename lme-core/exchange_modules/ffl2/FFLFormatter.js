@@ -72,10 +72,10 @@ FFLFormatter.prototype.extractVars = function() {
     const register = this.register;
     while (noneexit) {
         noneexit = false;
-        data = data.replace(/{([^}{]*?)}/gm, function($0, $1) {
+        data = data.replace(/{([^}{]*?)}/gm, function($0, $1, $2) {
             //this happens to many times...
             noneexit = true;
-            const index = register.addRow([$1])
+            const index = register.addRow([$1, $2, $0.length + $2])
             return '___' + index
         })
     }
@@ -133,7 +133,7 @@ FFLFormatter.prototype.walkTree = function(visit, parentId, depth) {
             const variable = self.vars[varRefIndex];
             variable.push(name, varRefIndex, modifier, parentId, tuple, referstoVariableName, ++children, [])
 
-            self.vars[parentId][8].push(variable)
+            self.vars[parentId][10].push(variable)
             self.walkTree(visit, varRefIndex, depth + 1)
             return ''
         });

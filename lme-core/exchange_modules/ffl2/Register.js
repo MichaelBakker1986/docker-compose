@@ -19,7 +19,7 @@ Register.prototype.clean = function() {
     this.schema.length = 0
     this.i = []
     this.schemaIndexes = {}
-    var schema = ['desc', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children']
+    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children']
     for (var j = 0; j < schema.length; j++) {
         this.addColumn(schema[j]);
     }

@@ -15,7 +15,6 @@ MVO.importFFL(mvoFLLFile);
 const nodes = MVO.exportWebModel()
 MVO.lme.fixProblemsInImportedSolution()
 
-
 const register = new Register();
 const changeManager = new ChangeManager(register)
 changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})

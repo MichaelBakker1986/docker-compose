@@ -17,6 +17,8 @@ function RegisterToFFL(register) {
     this.child = {}
     this.nameIndex = register.schemaIndexes.name;
     this.descIndex = register.schemaIndexes.desc;
+    this.startIndex = register.schemaIndexes.start;
+    this.endIndex = register.schemaIndexes.end;
     this.treeIndex = register.schemaIndexes.treeindex;
     this.parentNameIndex = register.schemaIndexes.parentId;
     this.stringIndex = register.schemaIndexes.index;
@@ -37,7 +39,7 @@ function RegisterToFFL(register) {
     this.line_delimiter = '\n'
     //some properties are generated for the tree structure, and cannot be changes manually
     this.variableProperties = [this.nameIndex, this.modifierIndex, this.referstoIndex, this.tupleIndex]
-    this.hiddenProperties = [this.treeIndex, this.stringIndex, this.schema.indexOf('version'), this.parentNameIndex, this.childIndex, this.descIndex]
+    this.hiddenProperties = [this.startIndex, this.endIndex, this.treeIndex, this.stringIndex, this.schema.indexOf('version'), this.parentNameIndex, this.childIndex, this.descIndex]
     this.indents = [];
     const depth = 30
     for (var i = 0; i < depth; i++) {
