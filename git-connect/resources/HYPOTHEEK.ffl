@@ -84,6 +84,7 @@
      }
      variable Partner01VoorNaam
      {
+      valid: If(Partner01VoorNaam.entered and Length(Partner01VoorNaam) < 3,"Te kort","");
       datatype: string;
       frequency: document;
       inputRequired: 1;

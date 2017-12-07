@@ -51,21 +51,21 @@
     </div>
 </nav>
 <div class="container-fluid">
-     <div class="row page-header">
-                <div class="dataTables_paginate paging_simple_numbers" style="float: right">
-                    <ul class="pagination">
-                        <!--paginate-->
-                        <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
-                                class="fa fa-arrow-left"></i> </a></li>
-                        <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
-                            <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
-                        </li>
-                        <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2"
-                                                                                                                                                                                                              data-dt-idx="7" tabindex="0"><i
-                                class="fa fa-arrow-right"></i> </a></li>
-                    </ul>
-                </div>
-            </div>
+    <div class="row page-header">
+        <div class="dataTables_paginate paging_simple_numbers" style="float: right">
+            <ul class="pagination">
+                <!--paginate-->
+                <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
+                        class="fa fa-arrow-left"></i> </a></li>
+                <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
+                    <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
+                </li>
+                <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2"
+                                                                                                                                                                                                      data-dt-idx="7" tabindex="0"><i
+                        class="fa fa-arrow-right"></i> </a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-2">
             <div style="margin: 40px 0 20px;"></div>
@@ -236,6 +236,7 @@
                         <!--Calculate the width by 6/length-1-->
                         <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
                             <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
+                                <label ng-if="cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
                                 <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                                 <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
                                 <input type="date" ng-switch-when="date" class="form-control" ng-model="cv.value" placeholder="Pick value">
@@ -261,7 +262,7 @@
 
 
             </div>
-         
+
         </div>
         <div class="col-md-1">
             <div style="margin: 40px 0 20px;"></div>

@@ -119,7 +119,8 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
             value: null,
             entered: null,
             type: 'title',
-            locked: null
+            locked: null,
+            valid: null
         });
     }
     for (var index = 0; index < amount; index++) {
@@ -129,7 +130,8 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
             visible: null,
             entered: null,
             required: null,
-            locked: null
+            locked: null,
+            valid: null
         }
         rv.cols.push(r);
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, type));
@@ -137,6 +139,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
         Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, type));
         Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index, type));
         Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index, type));
+        Object.defineProperty(r, 'valid', properties.locked.prox(workbook, rowId, 'valid', index, type));
     }
     /**
      * Proxy properties to the row object
