@@ -81,9 +81,17 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }).catch(function(err) {
         console.error("failed loading " + err);
     });
-
-    $scope.togglePropertiesSidebar = function() {
+    let sidebaropen = false;
+    $scope.togglePropertiesSidebar = function(open) {
+        if (sidebaropen && open) {
+            return;
+        }
+        if ($scope.activeVariable.length == 0 && !sidebaropen) {
+            return;
+        }
+        sidebaropen = !sidebaropen;
         $('#pagewrapper').toggleClass('control-sidebar-open')
+        $('#sidebar').toggleClass('control-sidebar')
     }
     $scope.fflType = '.ffl'
     $scope.dbModelConvert = function() {
@@ -332,6 +340,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         $scope.$apply(function() {
             $scope.error = changeManager.error
             $scope.activeVariable = changeManager.currentVariable
+            $scope.togglePropertiesSidebar(true)
             console.info(changeManager.error)
         })
     });
