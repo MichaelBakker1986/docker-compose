@@ -22,6 +22,3 @@ changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})
 assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
 changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})
 assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
-
-new RegisterToFFL(register).toGeneratedFFL(undefined, 'HYPOTHEEK')
-
