@@ -22,6 +22,7 @@ class Stash {
         return write(__dirname + '/../../git-connect/resources/' + tempHash + '.ffl', data)
             .then(function(filename) {
                 return exec('node ' + __dirname + '/exportLME_FFL.js ' + tempHash).then((result) => {
+                    if (result.stderr) throw Error(result.stderr)
                     let userID = uuid();
                     console.info('<span>Temporary model update:</span><a href="http://' + host + ':8083/id/' + userID + '/grid_bootstrap.html#' + tempHash + '&' + userID + '">' + name + '</a><span></span>');
                     return tempHash;
@@ -38,6 +39,7 @@ class Stash {
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {
                 return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name + ' ' + (type == '.ffl2' ? 'FFL2' : 'FFL'))]).then((result) => {
+                    if (result[0].stderr) throw Error(result[0].stderr)
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');

@@ -136,12 +136,15 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                 data: data,
                 type: type
             }, function(data) {
+                console.info(data)
                 $scope.$apply(function() {
                     $scope.saveFeedbackTitle = "Finished"
-                    $scope.saveFeedback = 'Done work..'
+                    $scope.saveFeedback = data.status == 'fail' ? 'Failed compiling model:' + data.reason : 'Done work..'
                     $scope.session.disablePreviewButton = false;
-                    window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
-                    $('#modal-success').modal('hide')
+                    if (data.status == 'succes') {
+                        window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
+                        $('#modal-success').modal('hide')
+                    }
                 })
             });
         });

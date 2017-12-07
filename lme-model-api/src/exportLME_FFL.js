@@ -45,4 +45,5 @@ xlsx.initComplete.then(function(matrix) {
     b.bundle().pipe(res);
 }).catch((err) => {
     console.error(err)
+    throw err
 })
