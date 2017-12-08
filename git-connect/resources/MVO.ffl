@@ -6,7 +6,7 @@ import BaseModel.*;
 
 model MVO uses BaseModel
 {
- version: "0.1";
+ version: "0.2";
  ffl_version: "1.2";
  root
  {
