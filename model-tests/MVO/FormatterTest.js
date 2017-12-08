@@ -15,5 +15,5 @@ const parse = register3.toString();
 register2.indexProperties()*/
 /*const doubleparse = register2.toString();*/
 const time = (now() - start).toFixed(0);
-assert(time < 40, "formatting KSP twice may never take longer than 40ms")
+assert(time < 60, "formatting KSP twice may never take longer than 40ms")
 //assert(parse.length == doubleparse.length, "Formatting twice, always returns into same results")
