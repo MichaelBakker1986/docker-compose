@@ -13,6 +13,7 @@ function ChangeManager(register) {
     this.currentVariable = []
     this.currentVariableName = null
     this.error = null;
+    this.warnings = []
 }
 
 function extractName(line) {
@@ -35,8 +36,10 @@ ChangeManager.prototype.syntaxCheck = function(ffl) {
  * When cursor is changed in file, adept state. Set active variable
  */
 ChangeManager.prototype.updateCursor = function(ffl, cursor) {
+    this.warnings.length = 0;
     //will also update the register
     this.syntaxCheck(ffl, cursor);
+
     const lines = ffl.split('\n')
     let currentVariable;
     for (var i = cursor.row; i > 0; i--) {
@@ -45,12 +48,27 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
             break;
         }
     }
-    if (currentVariable && this.register.getIndex('name')[currentVariable]) {
+    const namedIndex = this.register.getIndex('name');
+    const idIndex = this.register.getIndex('i');
+    const names = this.register.getAll('name')
+    const doubles = {}
+    for (var i = 0; i < names.length; i++) {
+        if (doubles[names[i]]) {
+            this.warnings.push({
+                pos: doubles[names[i]],
+                message: "duplicate variablename" + names[i]
+            })
+            doubles[names[i]].push(i);
+        }
+        doubles[names[i]] = [i];
+    }
+    /* console.info(namedIndex)
+     console.info(idIndex)
+     console.info(doubles)*/
+    if (currentVariable && namedIndex[currentVariable]) {
         this.currentVariableName = currentVariable
         var variable = this.register.createInformationObject(this.currentVariableName, new RegisterToFFL(this.register).hiddenProperties)
         this.currentVariable = variable
     }
 }
-
-
 exports.ChangeManager = ChangeManager

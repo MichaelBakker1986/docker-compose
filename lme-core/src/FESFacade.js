@@ -60,7 +60,16 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         hash: xas.hash + yas.hash + 0,
         formulaId: localFormula.id || localFormula.index
     })
-    FunctionMap.apiSet(localFormula, xas, yas, 0, value, context.values);
+    let returnValue = value;
+    var variable = fetchSolutionNode(row, (col || 'value'));
+    if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
+        if (returnValue != null) {
+            const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
+            returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
+            returnValue = choices.lookup('value', String(returnValue)).name
+        }
+    }
+    FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
 };
 /**
  * Generic default values, formatter transformers
@@ -97,42 +106,41 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     }
     if (variable) {
         if (colType === 'value') {
-            /* TODO: return real-name instead of internal value if (FESFacade.fetchSolutionNode(row, 'choices')) {
-                  const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
-                  var choiceValue = choices.lookup('value', returnValue);
-                  if (choiceValue === undefined) {
-                      logger.debug('Could not find [%s] choice [%s] in %s. using [%s] to be value', row, returnValue, JSON.stringify(choices), returnValue);
-                  } else {
-                      returnValue = isNaN(choiceValue.name) ? choiceValue.name : parseInt(choiceValue.name);
-                  }
-              }*/
-            if (variable.decimals !== undefined) {
-                if (variable.datatype == 'matrix') {
-                    for (var i = 0; i < returnValue.length; i++) {
-                        var innerx = returnValue[i];
-                        if (!isNaN(innerx)) {
-                            var level = Math.pow(10, variable.decimals);
-                            returnValue[i] = (Math.round(innerx * level) / level)
-                        }
-                        for (var y = 0; y < returnValue[i].length; y++) {
-                            var innery = returnValue[i][y];
-                            if (!isNaN(innery)) {
+            if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
+                if (returnValue != null) {
+                    const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
+                    returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
+                    returnValue = choices.lookup('name', String(returnValue)).value
+                }
+            } else {
+                if (variable.decimals !== undefined) {
+                    if (variable.datatype == 'matrix') {
+                        for (var i = 0; i < returnValue.length; i++) {
+                            var innerx = returnValue[i];
+                            if (!isNaN(innerx)) {
                                 var level = Math.pow(10, variable.decimals);
-                                returnValue[i][y] = (Math.round(innery * level) / level)
+                                returnValue[i] = (Math.round(innerx * level) / level)
+                            }
+                            for (var y = 0; y < returnValue[i].length; y++) {
+                                var innery = returnValue[i][y];
+                                if (!isNaN(innery)) {
+                                    var level = Math.pow(10, variable.decimals);
+                                    returnValue[i][y] = (Math.round(innery * level) / level)
+                                }
                             }
                         }
                     }
+                    else if (!isNaN(returnValue)) {
+                        var level = Math.pow(10, variable.decimals);
+                        returnValue = (Math.round(returnValue * level) / level)
+                    }
                 }
-                else if (!isNaN(returnValue)) {
-                    var level = Math.pow(10, variable.decimals);
-                    returnValue = (Math.round(returnValue * level) / level)
+                if (variable.datatype == 'number') {
+                    returnValue = OnNA(returnValue, '')
                 }
-            }
-            if (variable.datatype == 'number') {
-                returnValue = OnNA(returnValue, '')
-            }
-            if (variable.displayAs == 'piechart') {
-                returnValue = PIECHART(returnValue)
+                if (variable.displayAs == 'piechart') {
+                    returnValue = PIECHART(returnValue)
+                }
             }
         } else if (colType == 'locked') {
             return Boolean(returnValue)

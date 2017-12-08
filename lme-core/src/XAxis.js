@@ -170,7 +170,6 @@ function calculateCalculationDocument(data) {
     // be aware the values from child in here are temporally from transitive nature. U cannot keep references since
     // they will change in future. Presumably to the last one...
     nestRecursive(data.layout, data.layout.children, 0, function(child) {
-        // console.info(child.no);
         // actual element
         var newElement = {
             // type : child.name,

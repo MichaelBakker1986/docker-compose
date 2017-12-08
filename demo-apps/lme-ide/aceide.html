@@ -139,10 +139,12 @@
         <strong>Copyright &copy; 2014-2017 <a>Michael Bakker</a>.</strong> All rights reserved.
     </footer>
     <aside id="sidebar" class="control-sidebar-dark">
-        <div ng-repeat="p in activeVariable">
-            <label>{{p.name}}</label>
-            <div>
-                <input placeholder="enter value" class="form-control" ng-model="p.value">
+        <div class="container">
+            <div ng-repeat="p in activeVariable">
+                <div class="form-group">
+                    <label>{{p.name}}</label>
+                    <input placeholder="enter value" class="form-control" ng-model="p.value">
+                </div>
             </div>
         </div>
     </aside>

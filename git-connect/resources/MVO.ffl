@@ -155,7 +155,7 @@ model MVO uses BaseModel
       frequency: document;
       inputRequired: Visible(Q_MAP01_VRAAG01_MEMO);
       data_options: unscalable;
-      displaytype: memo;
+      displaytype: wisihtml;
       title: "Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag";
       visible: (Q_MAP01_VRAAG01=1);
       options_title: locked;

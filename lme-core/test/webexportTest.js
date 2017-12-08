@@ -55,5 +55,4 @@ var objectNoChange = {}
 Object.defineProperty(object, 'value', doProxNoCacheAndChange());
 Object.defineProperty(objectNoChange, 'value', doProxNoChange());
 
-console.info(object.value);
 objectNoChange.value = 1

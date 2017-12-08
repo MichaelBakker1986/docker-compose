@@ -42,7 +42,6 @@ app.all('*', function(req, res, next) {
     function(reqFromFacebook, res) {
         var url = "http://localhost:" + 7080 + reqFromFacebook._parsedUrl.pathname.substring('/id'.length);
         var url2 = "http://localhost:" + 7080 + '/id/DEMO/ui/grid_example.html#MVO&DEMO';
-        console.info('forward proxy: ' + url2)
         res.redirect(url2);
     }
 )

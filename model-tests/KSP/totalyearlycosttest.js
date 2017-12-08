@@ -22,9 +22,10 @@ var fesGetValue = fesjsApi.fesGetValue({
     values: wbKSP.context.values
 }, 'KSP_IncomeParent01', 0);
 assert(fesGetValue[0].value === 25000)
+var choices = wbKSP.get('Q_FINAL_REPORT_VISIBLE', 'choices')
 var fesGetValue2 = fesjsApi.fesGetValue({
     columns: 3,
     properties: {value: true, title: true},
     values: wbKSP.context.values
 }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
-assert(fesGetValue2[0].value === 1)
+assert(fesGetValue2[0].value === "Ja")

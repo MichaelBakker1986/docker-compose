@@ -10,6 +10,7 @@ function redefineParaments() {
 }
 
 redefineParaments()
+
 function MatrixLookup(xlsfileName, tableName, row, col) {
     var table = MATRIX_VALUES[tableName];
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col]) {
@@ -17,6 +18,7 @@ function MatrixLookup(xlsfileName, tableName, row, col) {
     }
     return NA;
 }
+
 angular
     .module('angapp', ['angular.filter', "highcharts-ng"])
     .filter("filterByPrefix", function() {

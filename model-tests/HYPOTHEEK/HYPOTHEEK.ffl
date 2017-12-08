@@ -1,11 +1,11 @@
- // model "Personal Finance"
- // created by FINAN 3.2.57.19
+// model "Personal Finance"
+// created by FINAN 3.2.57.19
 
- import FinanMath.*;
- import BaseModel.*;
+import FinanMath.*;
+import BaseModel.*;
 
- model HYPOTHEEK uses BaseModel
- {
+model HYPOTHEEK uses BaseModel
+{
  version: "0.1";
  ffl_version: "1.2";
  root
@@ -84,6 +84,7 @@
      }
      variable Partner01VoorNaam
      {
+      valid: If(Partner01VoorNaam.entered and Length(Partner01VoorNaam) < 3,"Te kort","");
       datatype: string;
       frequency: document;
       inputRequired: 1;

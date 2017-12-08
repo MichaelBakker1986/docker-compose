@@ -340,11 +340,28 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
         console.info({name: e.command.name, args: e.args})
         changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
+        var annotations = [];
         $scope.$apply(function() {
             $scope.error = changeManager.error
             $scope.activeVariable = changeManager.currentVariable
             $scope.togglePropertiesSidebar(true)
-            console.info(changeManager.error)
+            console.info('..' + changeManager.warnings.length)
+            if (changeManager.warnings.length > 0) {
+                for (var i = 0; i < changeManager.warnings.length; i++) {
+                    var warning = changeManager.warnings[i];
+                    for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
+                        var obj = changeManager.warnings[i].pos[j];
+                        annotations.push({
+                            row: fflModel.substring(0, obj.char).split('\n').length,
+                            column: 0,
+                            text: warning.message, // Or the Json reply from the parser
+                            type: 'error' // also warning and information
+                        })
+                    }
+                }
+
+            }
+            aceEditor.setAnnotations(annotations);
         })
     });
     $scope.$watch(function(scope) {

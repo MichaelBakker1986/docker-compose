@@ -164,7 +164,6 @@ FflToJsonConverter.prototype.parseFFL = function(contents) {
     assert.equal(0, stack.peek()._start, "there are more open or close brackets in file");//_end scope must be _start scope, else invalid data
     assert.equal(1, stack.size());//_end scope must be _start scope, else invalid _data
     //presumably upper part can be rewritten with some regex
-    // console.info(JSON.stringify(stack.peek(), null, 2));
     var formulaType = {
         formula: true,
         valid: true,

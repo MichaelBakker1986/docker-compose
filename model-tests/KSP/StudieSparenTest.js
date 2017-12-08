@@ -21,4 +21,3 @@ const rentePerMaand = RentePercentagePerJaar / 1200;// 0.00229166666666667;
 const referentieMaandPunt = 1;
 
 var ENG = formulaJS.PPMT(rentePerMaand, referentieMaandPunt, Aantalmaandentesparen, 0, Spaardoel)
-console.info(ENG)

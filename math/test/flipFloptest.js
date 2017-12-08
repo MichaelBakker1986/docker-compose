@@ -26,7 +26,3 @@ var mySolver = SOLVER({
 test = function(c) {
     return c;
 }
-console.info(mySolver.solve({
-    a: 300,
-    c: 100
-}))

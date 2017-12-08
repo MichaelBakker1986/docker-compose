@@ -174,10 +174,8 @@ FormulaService.visitFormulas(function(formula) {
 log.debug('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
 wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
-var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices').filter(function(choice) {
-    return parseInt(choice.name) === layoutNR;
-});
-assert(layoutNRChoice[0].value === ' Polish');
+var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices')
+assert(layoutNR == ' Polish');
 assert(wbKSP.get('Q_RESTRICTIES_01') == "");
 assert(wbKSP.get('CombinationDiscountPercentage') == .062);
 assert(wbKSP.get('DecreasingPercentage') == 0.07);
@@ -195,13 +193,12 @@ assert(wbKSP.get('Q_RESTRICTIES_01') === '');
 assert(wbKSP.get('Q_RESTRICTIESTXT') === '');
 assert(wbKSP.get('Q_WARNING_01') === '');
 assert(wbKSP.get('Q_WARNING_GLOBALTXT') === '');
-assert(wbKSP.get('Q_MAP01') == 1);
-assert(wbKSP.get('Q_ROOT') === 1);
+assert(wbKSP.get('Q_MAP01') == "Incomplete");
+assert(wbKSP.get('Q_ROOT') === "Incomplete");
 assert(wbKSP.get('Q_WARNING_GLOBAL') == '');
 assert(wbKSP.get('Q_RESULT') == 'Deze vragenlijst is definitief gemaakt.[br][/br]');
 assert(wbKSP.get('Q_MAP06', 'visible') == true);
-assert(wbKSP.get('Q_MAP06') == true);
-assert(wbKSP.get('Q_MAP06_STATUS') == wbKSP.get('Q_MAP06') == true);
+assert(wbKSP.get('Q_MAP06') == "Incomplete");
 
 var pad = '            '
 wbKSP.get('CostsYearFiveSixSeven', 'value', 12)

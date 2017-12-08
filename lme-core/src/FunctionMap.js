@@ -15,7 +15,6 @@ function fm() {
 
 //don't directly use this method, use JSWorkBook instead.
 fm.prototype.apiGet = function(formula, x, y, z, v) {
-    // console.info('API call for formula: ' + formula.name);
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
     var id = formula.id || formula.index;

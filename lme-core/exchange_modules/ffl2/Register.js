@@ -91,5 +91,10 @@ Register.prototype.createInformationObject = function(name, hidden) {
     }
     return variable;
 }
+Register.prototype.getAll = function(name) {
+    const r = [], index = this.i, indexpos = this.schemaIndexes[name];
+    for (var i = 0; i < index.length; i++) r[i] = index[i][indexpos]
+    return r;
+}
 
 exports.Register = Register

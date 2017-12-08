@@ -8,16 +8,20 @@ const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFF
 const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
-const MVO = new LME();
-MVO.addFunctions(excelPlugin);
-let mvoFLLFile = fs.readFileSync(__dirname + '/HYPOTHEEK.ffl', 'utf8');
-MVO.importFFL(mvoFLLFile);
-const nodes = MVO.exportWebModel()
-MVO.lme.fixProblemsInImportedSolution()
-
+const HYPOTHEEK = new LME();
+HYPOTHEEK.addFunctions(excelPlugin);
+let HYPOTHEEKFFLFile = fs.readFileSync(__dirname + '/HYPOTHEEK.ffl', 'utf8');
+HYPOTHEEK.importFFL(HYPOTHEEKFFLFile);
+const nodes = HYPOTHEEK.exportWebModel().nodes
+HYPOTHEEK.lme.fixProblemsInImportedSolution()
 const register = new Register();
 const changeManager = new ChangeManager(register)
-changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})
+changeManager.updateCursor(HYPOTHEEKFFLFile, {row: 40, col: 0})
 assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
-changeManager.updateCursor(mvoFLLFile, {row: 40, col: 0})
+changeManager.updateCursor(HYPOTHEEKFFLFile, {row: 40, col: 0})
 assert(changeManager.currentVariableName == 'Q_MAP01_WARNING')
+
+assert(nodes.Partner01Geslacht.value == undefined)
+nodes.Partner01Geslacht.value = "Vrouw"
+assert(nodes.Partner01Geslacht.value == "Vrouw")
+

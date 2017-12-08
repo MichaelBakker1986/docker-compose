@@ -21,4 +21,3 @@ HiddenVars.visible;
 HiddenVars.value;
 
 let fixProblemsInImportedSolution = LME.lme.fixProblemsInImportedSolution();
-console.info(fixProblemsInImportedSolution)

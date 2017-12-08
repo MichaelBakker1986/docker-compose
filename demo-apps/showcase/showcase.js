@@ -15,7 +15,7 @@ angularApplication.controller('myController', function($scope, $http, $interval)
         $scope.initChart();
 
     }).catch(function(err) {
-        console.info(err);
+        console.error('failed to load model: ' + err.toString());
     });
 
     $scope.showHint = function(show, question, event) {

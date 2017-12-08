@@ -112,12 +112,14 @@ function finChoice(formula) {
     }
     //HIGH:1|LOW:2|UNKNOWN:3
     else {
+        formula = formula.trim().slice(1, -1);
         var choices = formula.replace(/'/gmi, '');
         choices = choices.replace(/:/gmi, '\" , \"value\" : \"');
         choices = choices.replace(/\|/gmi, '\"} , { \"name\" :\"');
         return "[{ \"name\" : \"" + choices + "\" }]";
     }
 }
+
 function FinFormula() {
 }
 

@@ -5,6 +5,7 @@
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
 var assert = require('assert')
 var modelAPI = require('../src/lme')
+var log = require('ff-log')
 require('../../lme-core/exchange_modules/presentation/webexport');
 var rp = require('request-promise');
 var newModel = new modelAPI();
@@ -13,7 +14,7 @@ LME = newModel.exportWebModel()
 var uuid = require('uuid')
 var saveToken = uuid();
 var [VariableOne, VariableTwo, TestNULL] = [LME.nodes.VariableOne, LME.nodes.VariableTwo, LME.nodes.TotalConfusedMore]
-//console.info(newModel.exportLME())
+
 window = {
     location: {
         href: "http://10.0.75.1:8083/id/DEMO/grid_example.html#MVO&" + saveToken
@@ -78,7 +79,7 @@ class LmeApiTester {
 
     testLoad() {
         newModel.loadData(function() {
-            console.info(JSON.parse(this.responseText))
+            log.info("model log: " + JSON.parse(this.responseText))
         });
     }
 }

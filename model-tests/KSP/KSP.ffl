@@ -328,7 +328,7 @@ model KSP uses BaseModel
       frequency: document;
       formula: If( (Q_Map01[1]=1) Or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
       data_options: unscalable;
-      displaytype: select;
+      displaytype: radio;
       title: "Costs of child raising (v1.27)";
       hint: "This module enables you to gain insight in the costs involved for raising a child";
       locked: 1;
@@ -2283,7 +2283,7 @@ model KSP uses BaseModel
         frequency: document;
         formula: 0;
         data_options: unscalable;
-        displaytype: select;
+        displaytype: radio;
         title: "Definitief rapport";
         choices: "0:Nee|1:Ja";
         options_title: locked;

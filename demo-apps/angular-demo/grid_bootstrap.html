@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <script src="bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
@@ -22,7 +23,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
-
     <script src="grid_bootstrap.js"></script>
     <link rel="stylesheet" type="text/css" href="bundle.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
@@ -51,21 +51,6 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="row page-header">
-        <div class="dataTables_paginate paging_simple_numbers" style="float: right">
-            <ul class="pagination">
-                <!--paginate-->
-                <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
-                        class="fa fa-arrow-left"></i> </a></li>
-                <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
-                    <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
-                </li>
-                <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2"
-                                                                                                                                                                                                      data-dt-idx="7" tabindex="0"><i
-                        class="fa fa-arrow-right"></i> </a></li>
-            </ul>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-2">
             <div style="margin: 40px 0 20px;"></div>
@@ -91,6 +76,9 @@
             <div class="row">
                 <div ng-repeat="f in LME_MODEL | toArray | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
                     <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'quest    ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                        <div ng-switch-when="wisihtml" class="col-md-12">
+                            <textarea class="form-control" ng-model="cv.value"></textarea>
+                        </div>
                         <div ng-switch-when="paragraph" class="col-md-12">
                             <h2>{{f.title}}</h2>
                             <span ng-if="f.hint">{{f.hint}}<p></p><br></span>
@@ -242,12 +230,12 @@
                                 <input type="date" ng-switch-when="date" class="form-control" ng-model="cv.value" placeholder="Pick value">
                                 </input>
                                 <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                    <option ng-repeat="choice in f.choices" value="{{choice.name}}" ng-selected="choice.name == cv.value">{{choice.value}}</option>
+                                    <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>
                                 </select>
                                 <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
-                                    <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.name == cv.value?'active':''">
-                                        <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.name">
-                                        <i ng-class="choice.name == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
+                                    <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.value == cv.value?'active':''">
+                                        <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.value">
+                                        <i ng-class="choice.value == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
                                         <span>{{choice.value}}</span>
                                     </label>
                                 </div>
@@ -261,6 +249,21 @@
                 </div>
 
 
+            </div>
+            <div class="row page-header">
+                <div class="dataTables_paginate paging_simple_numbers" style="float: right">
+                    <ul class="pagination">
+                        <!--paginate-->
+                        <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
+                                class="fa fa-arrow-left"></i> </a></li>
+                        <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
+                            <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
+                        </li>
+                        <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2"
+                                                                                                                                                                                                              data-dt-idx="7" tabindex="0"><i
+                                class="fa fa-arrow-right"></i> </a></li>
+                    </ul>
+                </div>
             </div>
 
         </div>
