@@ -56,10 +56,10 @@ class Stash {
                         throw Error('GIT commit failed while pushing file to repository:', err)
                     })
                 }).catch((err) => {
-                    throw Error('Failed to write or compile javascript', err);
+                    throw Error('Failed to write or compile javascript. [' + err.toString() + ']');
                 })
             }).catch(function(err) {
-                throw Error('Failed to write file to resources folder', err);
+                throw Error('Failed to write file to resources folder. [' + err.toString() + ']');
             })
     }
 
