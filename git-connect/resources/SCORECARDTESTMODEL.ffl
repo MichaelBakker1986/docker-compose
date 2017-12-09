@@ -3916,7 +3916,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       visible: 1;
       options_title: locked;
      }
-     variable Q_MAP05_A_MatrixLookupRESULT
+     variable Q_MAP05_A_MATRIXLOOKUPRESULT
      {
       datatype: string;
       frequency: document;
@@ -3980,7 +3980,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       visible: 1;
       options_title: locked;
      }
-     variable Q_MAP05_B_MatrixLookupRESULT
+     variable Q_MAP05_B_MATRIXLOOKUPRESULT
      {
       datatype: string;
       frequency: document;

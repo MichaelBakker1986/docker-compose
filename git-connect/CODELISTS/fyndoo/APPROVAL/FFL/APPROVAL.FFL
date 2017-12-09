@@ -362,7 +362,7 @@ model APPROVAL uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If(((Q_Map01[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
+      formula: If(((Q_MAP01[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
       data_options: unscalable;
       displaytype: select;
       title: "Credit Proposal";
@@ -372,11 +372,11 @@ model APPROVAL uses BaseModel
       choices: "0:Incomplete filled.|1:Complete filled.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Regional credit committee";
@@ -386,7 +386,7 @@ model APPROVAL uses BaseModel
         choices: "0:Incomplete filled.|1:Complete filled.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -399,11 +399,11 @@ model APPROVAL uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -411,7 +411,7 @@ model APPROVAL uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -422,7 +422,7 @@ model APPROVAL uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01Sub4
+        variable Q_MAP01SUB4
         {
           datatype: number;
           frequency: document;
@@ -456,7 +456,7 @@ model APPROVAL uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01Sub5
+        variable Q_MAP01SUB5
         {
           datatype: number;
           frequency: document;
@@ -490,7 +490,7 @@ model APPROVAL uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01Sub6
+        variable Q_MAP01SUB6
         {
           datatype: number;
           frequency: document;
@@ -524,7 +524,7 @@ model APPROVAL uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01Sub7
+        variable Q_MAP01SUB7
         {
           datatype: number;
           frequency: document;
@@ -558,7 +558,7 @@ model APPROVAL uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01Sub8
+        variable Q_MAP01SUB8
         {
           datatype: number;
           frequency: document;
@@ -602,7 +602,7 @@ model APPROVAL uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -612,11 +612,11 @@ model APPROVAL uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_REQUIREDVARS),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -625,11 +625,11 @@ model APPROVAL uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -650,7 +650,7 @@ model APPROVAL uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -743,7 +743,7 @@ model APPROVAL uses BaseModel
         visible: 1;
         options_title: locked;
       }
-      variable Q_ModelVersion
+      variable Q_MODELVERSION
       {
         datatype: string;
         frequency: document;
@@ -755,7 +755,7 @@ model APPROVAL uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_ModelType
+      variable Q_MODELTYPE
       {
         datatype: string;
         frequency: document;
@@ -767,7 +767,7 @@ model APPROVAL uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MatrixVersion
+      variable Q_MATRIXVERSION
       {
         datatype: string;
         frequency: document;

@@ -335,7 +335,7 @@ model AABPRICING uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1)  or (Length(&scKnockoutsCombi[1])>0),1,0);
+      formula: If( (Q_MAP01[1]=1)  or (Length(&scKnockoutsCombi[1])>0),1,0);
       data_options: unscalable;
       displaytype: select;
       title: "FiNiS Pricing";
@@ -344,11 +344,11 @@ model AABPRICING uses BaseModel
       choices: "0:Complete.|1:Not complete.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "AAB Pricing";
@@ -357,7 +357,7 @@ model AABPRICING uses BaseModel
         choices: "0:Complete.|1:Not complete.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -369,7 +369,7 @@ model AABPRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
@@ -379,11 +379,11 @@ model AABPRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"Not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
           data_options: unscalable;
           title: "Validatie stap";
           locked: 1;
@@ -7915,7 +7915,7 @@ model AABPRICING uses BaseModel
           {
             datatype: string;
             frequency: document;
-            formula: EvaluateAsString(Q_ModelType&" "&Q_ModelVersion&" (Matrix "&Q_MatrixVersion&")");
+            formula: EvaluateAsString(Q_MODELTYPE&" "&Q_MODELVERSION&" (Matrix "&Q_MATRIXVERSION&")");
             data_options: unscalable;
             title: "Versions";
             top_blanklines: 1;
@@ -7959,7 +7959,7 @@ model AABPRICING uses BaseModel
             }
           }
         }
-        variable Q_MAP01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -7969,11 +7969,11 @@ model AABPRICING uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -7981,18 +7981,18 @@ model AABPRICING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_SUMFOR
+          variable Q_MAP01_SUMFOR
           {
             datatype: number;
             frequency: document;
@@ -8015,7 +8015,7 @@ model AABPRICING uses BaseModel
         locked: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -8110,7 +8110,7 @@ model AABPRICING uses BaseModel
         title: "Last modification:";
         options_title: locked;
       }
-      variable Q_ModelVersion
+      variable Q_MODELVERSION
       {
         datatype: string;
         frequency: document;
@@ -8121,7 +8121,7 @@ model AABPRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_ModelType
+      variable Q_MODELTYPE
       {
         datatype: string;
         frequency: document;
@@ -8132,7 +8132,7 @@ model AABPRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MatrixVersion
+      variable Q_MATRIXVERSION
       {
         datatype: string;
         frequency: document;

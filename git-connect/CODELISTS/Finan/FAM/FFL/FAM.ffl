@@ -3708,7 +3708,7 @@ model FAM uses BaseModel
       choices: "0:Incomplete.|1:Complete.";
       options_title: locked;
       options: locked;
-      variable Q_GroupProductSelection
+      variable Q_GROUPPRODUCTSELECTION
       {
         datatype: number;
         frequency: document;
@@ -3722,11 +3722,11 @@ model FAM uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MapRequestType
+      variable Q_MAPREQUESTTYPE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapRequestType_ENTEREDREQUIREDVARS=Q_MapRequestType_REQUIREDVARS);
+        formula: (Q_MAPREQUESTTYPE_ENTEREDREQUIREDVARS=Q_MAPREQUESTTYPE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Type request";
@@ -3735,26 +3735,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapRequestType_WARNING
+        variable Q_MAPREQUESTTYPE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapRequestType);
+          title: "Warning for folder " & GetTitle(Q_MAPREQUESTTYPE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapRequestType_INFO
+        variable Q_MAPREQUESTTYPE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapRequestType[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPREQUESTTYPE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapRequestType);
+          title: "Info for folder " & GetTitle(Q_MAPREQUESTTYPE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -3774,7 +3774,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapFinancingNeed);
+            inputRequired: Visible (Q_MAPFINANCINGNEED);
             data_options: unscalable;
             displaytype: select;
             title: "Financing target(s)";
@@ -3852,7 +3852,7 @@ model FAM uses BaseModel
             options: locked;
           }
         }
-        variable Q_MapRequestType_Hulpvariabelen
+        variable Q_MAPREQUESTTYPE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3862,11 +3862,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapRequestType_REQUIREDVARS
+          variable Q_MAPREQUESTTYPE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapRequestType, Q_MapRequestType_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPREQUESTTYPE, Q_MAPREQUESTTYPE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -3876,11 +3876,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapRequestType_ENTEREDREQUIREDVARS
+          variable Q_MAPREQUESTTYPE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapRequestType, Q_MapRequestType_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPREQUESTTYPE, Q_MAPREQUESTTYPE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -3891,11 +3891,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapOrganisationType
+      variable Q_MAPORGANISATIONTYPE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapOrganisationType_ENTEREDREQUIREDVARS=Q_MapOrganisationType_REQUIREDVARS);
+        formula: (Q_MAPORGANISATIONTYPE_ENTEREDREQUIREDVARS=Q_MAPORGANISATIONTYPE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Type organisation";
@@ -3905,26 +3905,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapOrganisationType_WARNING
+        variable Q_MAPORGANISATIONTYPE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapOrganisationType);
+          title: "Warning for folder " & GetTitle(Q_MAPORGANISATIONTYPE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapOrganisationType_INFO
+        variable Q_MAPORGANISATIONTYPE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapOrganisationType[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPORGANISATIONTYPE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapOrganisationType);
+          title: "Info for folder " & GetTitle(Q_MAPORGANISATIONTYPE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -3998,7 +3998,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: Val(FPS_VAR_Rechtsvorm_nr);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Legal form";
@@ -4226,7 +4226,7 @@ model FAM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MapOrganisationType_Hulpvariabelen
+        variable Q_MAPORGANISATIONTYPE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4236,11 +4236,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapOrganisationType_REQUIREDVARS
+          variable Q_MAPORGANISATIONTYPE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapOrganisationType, Q_MapOrganisationType_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPORGANISATIONTYPE, Q_MAPORGANISATIONTYPE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -4250,11 +4250,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapOrganisationType_ENTEREDREQUIREDVARS
+          variable Q_MAPORGANISATIONTYPE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapOrganisationType, Q_MapOrganisationType_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPORGANISATIONTYPE, Q_MAPORGANISATIONTYPE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -4265,11 +4265,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapFinancials
+      variable Q_MAPFINANCIALS
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapFinancials_ENTEREDREQUIREDVARS=Q_MapFinancials_REQUIREDVARS);
+        formula: (Q_MAPFINANCIALS_ENTEREDREQUIREDVARS=Q_MAPFINANCIALS_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Financial";
@@ -4279,26 +4279,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapFinancials_WARNING
+        variable Q_MAPFINANCIALS_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapFinancials);
+          title: "Warning for folder " & GetTitle(Q_MAPFINANCIALS);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapFinancials_INFO
+        variable Q_MAPFINANCIALS_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapFinancials[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPFINANCIALS[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapFinancials);
+          title: "Info for folder " & GetTitle(Q_MAPFINANCIALS);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -4488,7 +4488,7 @@ model FAM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MapFinancials_Hulpvariabelen
+        variable Q_MAPFINANCIALS_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4498,11 +4498,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapFinancials_REQUIREDVARS
+          variable Q_MAPFINANCIALS_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancials, Q_MapFinancials_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCIALS, Q_MAPFINANCIALS_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -4512,11 +4512,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapFinancials_ENTEREDREQUIREDVARS
+          variable Q_MAPFINANCIALS_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancials, Q_MapFinancials_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCIALS, Q_MAPFINANCIALS_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -4527,11 +4527,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapFundingOptions
+      variable Q_MAPFUNDINGOPTIONS
       {
         datatype: number;
         frequency: document;
-        formula: ((Q_MapFundingOptions_ENTEREDREQUIREDVARS=Q_MapFundingOptions_REQUIREDVARS) and (TupleSum(Product_tpInvalid)=0)) and ProductActive;
+        formula: ((Q_MAPFUNDINGOPTIONS_ENTEREDREQUIREDVARS=Q_MAPFUNDINGOPTIONS_REQUIREDVARS) and (TupleSum(Product_tpInvalid)=0)) and ProductActive;
         data_options: unscalable;
         displaytype: select;
         title: "Funding options";
@@ -4541,26 +4541,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapFundingOptions_WARNING
+        variable Q_MAPFUNDINGOPTIONS_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapFundingOptions);
+          title: "Warning for folder " & GetTitle(Q_MAPFUNDINGOPTIONS);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapFundingOptions_INFO
+        variable Q_MAPFUNDINGOPTIONS_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapFundingOptions[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPFUNDINGOPTIONS[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapFundingOptions);
+          title: "Info for folder " & GetTitle(Q_MAPFUNDINGOPTIONS);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -5620,7 +5620,7 @@ model FAM uses BaseModel
             }
           }
         }
-        variable Q_MapFundingOptions_Hulpvariabelen
+        variable Q_MAPFUNDINGOPTIONS_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -5630,11 +5630,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapFundingOptions_REQUIREDVARS
+          variable Q_MAPFUNDINGOPTIONS_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFundingOptions, Q_MapFundingOptions_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPFUNDINGOPTIONS, Q_MAPFUNDINGOPTIONS_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -5644,11 +5644,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapFundingOptions_ENTEREDREQUIREDVARS
+          variable Q_MAPFUNDINGOPTIONS_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFundingOptions, Q_MapFundingOptions_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPFUNDINGOPTIONS, Q_MAPFUNDINGOPTIONS_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -5659,7 +5659,7 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_GroupProductRequest
+      variable Q_GROUPPRODUCTREQUEST
       {
         datatype: number;
         frequency: document;
@@ -5672,11 +5672,11 @@ model FAM uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MapGeneralData
+      variable Q_MAPGENERALDATA
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapGeneralData_ENTEREDREQUIREDVARS=Q_MapGeneralData_REQUIREDVARS);
+        formula: (Q_MAPGENERALDATA_ENTEREDREQUIREDVARS=Q_MAPGENERALDATA_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "General data";
@@ -5686,26 +5686,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapGeneralData_WARNING
+        variable Q_MAPGENERALDATA_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapGeneralData);
+          title: "Warning for folder " & GetTitle(Q_MAPGENERALDATA);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapGeneralData_INFO
+        variable Q_MAPGENERALDATA_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapGeneralData[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPGENERALDATA[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapGeneralData);
+          title: "Info for folder " & GetTitle(Q_MAPGENERALDATA);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -5728,7 +5728,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_ContactFirstname);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Initials";
             top_blanklines: 1;
@@ -5740,7 +5740,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_ContactSurnamePrefix & If(&FPS_VAR_ContactSurnamePrefix="",""," ") &FPS_VAR_ContactSurname);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Last name";
             visible: 1;
@@ -5751,7 +5751,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_ContactFunction);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Function";
             visible: 1;
@@ -5762,7 +5762,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: If(&FPS_VAR_ContactSex="Male",0,If(&FPS_VAR_ContactSex="Female",1,NA));
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Gender";
@@ -5774,7 +5774,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: date;
             title: "Date of birth";
@@ -5786,7 +5786,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: 528;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Nationality";
@@ -5798,7 +5798,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Street name";
             visible: 1;
@@ -5808,7 +5808,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Housenumber";
             visible: 1;
@@ -5827,7 +5827,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Zip code";
             visible: 1;
@@ -5837,7 +5837,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "City";
             visible: 1;
@@ -5848,7 +5848,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: 528;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Country";
@@ -5861,7 +5861,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_ContactPhoneWork);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Phone number";
             visible: 1;
@@ -5872,7 +5872,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_ContactEmail);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Email address";
             visible: 1;
@@ -5895,7 +5895,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Naam);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Name organisation";
             top_blanklines: 1;
@@ -5906,7 +5906,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Legal form";
@@ -5930,7 +5930,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "COC status";
@@ -5967,7 +5967,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Straat);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Street name";
             visible: 1;
@@ -5978,7 +5978,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Housenumber);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Housenumber";
             visible: 1;
@@ -5998,7 +5998,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Postcode);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Zip code";
             visible: 1;
@@ -6009,7 +6009,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Woonplaats);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "City";
             visible: 1;
@@ -6020,7 +6020,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: 528;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             displaytype: select;
             title: "Country";
@@ -6033,7 +6033,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Telefoon);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Phone number";
             visible: 1;
@@ -6044,7 +6044,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Emailadres);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Email address";
             visible: 1;
@@ -6055,7 +6055,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_Website);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Website";
             visible: 1;
@@ -6562,7 +6562,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Initials";
             top_blanklines: 1;
@@ -6574,7 +6574,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_UserFullName);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Last name";
             visible: 1;
@@ -6584,7 +6584,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Function";
             visible: 1;
@@ -6603,7 +6603,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Name organisation";
             visible: 1;
@@ -6613,7 +6613,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "City";
             visible: 1;
@@ -6624,7 +6624,7 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_UserPhonenumber);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Phone number";
             visible: 1;
@@ -6635,14 +6635,14 @@ model FAM uses BaseModel
             datatype: string;
             frequency: document;
             formula: EvaluateAsString(FPS_VAR_UserEmail);
-            inputRequired: Visible (Q_MapGeneralData);
+            inputRequired: Visible (Q_MAPGENERALDATA);
             data_options: unscalable;
             title: "Email address";
             visible: 1;
             options_title: locked;
           }
         }
-        variable Q_MapGeneralData_Hulpvariabelen
+        variable Q_MAPGENERALDATA_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -6652,11 +6652,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapGeneralData_REQUIREDVARS
+          variable Q_MAPGENERALDATA_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapGeneralData, Q_MapGeneralData_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPGENERALDATA, Q_MAPGENERALDATA_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -6666,11 +6666,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapGeneralData_ENTEREDREQUIREDVARS
+          variable Q_MAPGENERALDATA_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapGeneralData, Q_MapGeneralData_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPGENERALDATA, Q_MAPGENERALDATA_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -6681,11 +6681,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapOrganisationProfile
+      variable Q_MAPORGANISATIONPROFILE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapOrganisationProfile_ENTEREDREQUIREDVARS=Q_MapOrganisationProfile_REQUIREDVARS);
+        formula: (Q_MAPORGANISATIONPROFILE_ENTEREDREQUIREDVARS=Q_MAPORGANISATIONPROFILE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Profile of the organisation";
@@ -6695,26 +6695,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapOrganisationProfile_WARNING
+        variable Q_MAPORGANISATIONPROFILE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapOrganisationProfile);
+          title: "Warning for folder " & GetTitle(Q_MAPORGANISATIONPROFILE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapOrganisationProfile_INFO
+        variable Q_MAPORGANISATIONPROFILE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapOrganisationProfile[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPORGANISATIONPROFILE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapOrganisationProfile);
+          title: "Info for folder " & GetTitle(Q_MAPORGANISATIONPROFILE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -6734,7 +6734,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Mission, vision and strategy";
@@ -6746,7 +6746,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "History";
@@ -6769,7 +6769,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Which products and/or services does the organisation deliver?";
@@ -6781,7 +6781,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the revenue model";
@@ -6792,7 +6792,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "What is the uniqueness of the products and/or services?";
@@ -6804,7 +6804,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the uniqueness";
@@ -6827,7 +6827,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "In which market does the organisation operate?";
@@ -6839,7 +6839,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "Does the organisation serve a new market?";
@@ -6851,7 +6851,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the expected market development";
@@ -6874,7 +6874,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "How strong is the competitive positioning?";
@@ -6887,7 +6887,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the competitive positioning";
@@ -6910,7 +6910,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "Is the organisation sensitive to economic fluctuations?";
@@ -6923,7 +6923,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the sensitivity to economic fluctuations";
@@ -6946,7 +6946,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "How dependent is the organisation from their suppliers?";
@@ -6959,7 +6959,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the dependency of suppliers";
@@ -6970,7 +6970,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: select;
             title: "How dependent is the organisation from their customers?";
@@ -6982,7 +6982,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the dependency of customers";
@@ -7005,7 +7005,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Strengths";
@@ -7017,7 +7017,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Weaknesses";
@@ -7028,7 +7028,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Opportunities";
@@ -7039,7 +7039,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Threats";
@@ -7062,7 +7062,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the organisation's risk profile";
@@ -7086,7 +7086,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile) and if(OrganisationLegalForm=12,False,True);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE) and if(OrganisationLegalForm=12,False,True);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the legal structure";
@@ -7098,7 +7098,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile) and if(OrganisationLegalForm=12,False,True);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE) and if(OrganisationLegalForm=12,False,True);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the stakeholders";
@@ -7122,7 +7122,7 @@ model FAM uses BaseModel
             datatype: number;
             frequency: document;
             formula: OrganisationFTELastYear;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             fixed_decimals: 1;
             title: "How many FTE employees does the organisation have?";
@@ -7136,7 +7136,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the age structure of the employees";
@@ -7147,7 +7147,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the level of education of the employees";
@@ -7170,7 +7170,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the composition of the management";
@@ -7182,7 +7182,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the quality of the management";
@@ -7193,7 +7193,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description how the management is supported";
@@ -7222,7 +7222,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               title: "Initials";
               top_blanklines: 1;
@@ -7233,7 +7233,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               title: "Name";
               visible: 1;
@@ -7243,7 +7243,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               displaytype: date;
               title: "Date of birth";
@@ -7254,7 +7254,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               title: "Function";
               visible: 1;
@@ -7264,7 +7264,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Number of years of service";
@@ -7275,7 +7275,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               displaytype: memo;
               title: "Education";
@@ -7286,7 +7286,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapOrganisationProfile);
+              inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
               data_options: unscalable;
               displaytype: memo;
               title: "Track record";
@@ -7309,7 +7309,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapOrganisationProfile);
+            inputRequired: Visible (Q_MAPORGANISATIONPROFILE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the sustainability in the organisation";
@@ -7318,7 +7318,7 @@ model FAM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MapOrganisationProfile_Hulpvariabelen
+        variable Q_MAPORGANISATIONPROFILE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -7328,11 +7328,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapOrganisationProfile_REQUIREDVARS
+          variable Q_MAPORGANISATIONPROFILE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapOrganisationProfile, Q_MapOrganisationProfile_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPORGANISATIONPROFILE, Q_MAPORGANISATIONPROFILE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -7342,11 +7342,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapOrganisationProfile_ENTEREDREQUIREDVARS
+          variable Q_MAPORGANISATIONPROFILE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapOrganisationProfile, Q_MapOrganisationProfile_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPORGANISATIONPROFILE, Q_MAPORGANISATIONPROFILE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -7357,11 +7357,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapCrowdFund
+      variable Q_MAPCROWDFUND
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapCrowdFund_ENTEREDREQUIREDVARS=Q_MapCrowdFund_REQUIREDVARS);
+        formula: (Q_MAPCROWDFUND_ENTEREDREQUIREDVARS=Q_MAPCROWDFUND_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Crowdfunding";
@@ -7370,25 +7370,25 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapCrowdFund_WARNING
+        variable Q_MAPCROWDFUND_WARNING
         {
           datatype: string;
           frequency: document;
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapCrowdFund);
+          title: "Warning for folder " & GetTitle(Q_MAPCROWDFUND);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapCrowdFund_INFO
+        variable Q_MAPCROWDFUND_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapCrowdFund[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPCROWDFUND[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapCrowdFund);
+          title: "Info for folder " & GetTitle(Q_MAPCROWDFUND);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -7408,7 +7408,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapCrowdFund);
+            inputRequired: Visible(Q_MAPCROWDFUND);
             data_options: unscalable;
             displaytype: memo;
             title: "Why entrepreneur";
@@ -7420,7 +7420,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapCrowdFund);
+            inputRequired: Visible(Q_MAPCROWDFUND);
             data_options: unscalable;
             displaytype: memo;
             title: "Why crowdfunding";
@@ -7431,7 +7431,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapCrowdFund);
+            inputRequired: Visible(Q_MAPCROWDFUND);
             data_options: unscalable;
             displaytype: memo;
             title: "How to repay crowdfunding";
@@ -7448,7 +7448,7 @@ model FAM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MapCrowdFund_Hulpvariabelen
+        variable Q_MAPCROWDFUND_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -7458,11 +7458,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapCrowdFund_REQUIREDVARS
+          variable Q_MAPCROWDFUND_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapCrowdFund, Q_MapCrowdFund_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPCROWDFUND, Q_MAPCROWDFUND_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -7472,11 +7472,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapCrowdFund_ENTEREDREQUIREDVARS
+          variable Q_MAPCROWDFUND_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapCrowdFund, Q_MapCrowdFund_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPCROWDFUND, Q_MAPCROWDFUND_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -7487,40 +7487,40 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapForecast
+      variable Q_MAPFORECAST
       {
         datatype: number;
         frequency: document;
-        formula: not(Visible (Q_MapFinancialPosition) and (Q_STATUS_SYNCED_ON = NA));
+        formula: not(Visible (Q_MAPFINANCIALPOSITION) and (Q_STATUS_SYNCED_ON = NA));
         data_options: unscalable;
         displaytype: select;
         title: "Select scenario";
         hint: "Kies een prognoseproject.";
         locked: 1;
-        visible: ProductActive and Visible (Q_MapFinancialPosition) and not (Q_STATUS[1]);
+        visible: ProductActive and Visible (Q_MAPFINANCIALPOSITION) and not (Q_STATUS[1]);
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapForecast_WARNING
+        variable Q_MAPFORECAST_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapForecast);
+          title: "Warning for folder " & GetTitle(Q_MAPFORECAST);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapForecast_INFO
+        variable Q_MAPFORECAST_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapForecast[1]=0,&"Er zijn nog geen financiële data gesynchroniseerd. Selecteer hieronder een prognoseproject waarvan u de cijfers wilt gebruiken.",&"Laatste synchronisatie met cijfers uit Prognose op " & Str(DateToDay(Q_STATUS_SYNCED_ON),0,0) & " " & DateStr(Q_STATUS_SYNCED_ON,7) & "."));
+          formula: EvaluateAsString(If(Q_MAPFORECAST[1]=0,&"Er zijn nog geen financiële data gesynchroniseerd. Selecteer hieronder een prognoseproject waarvan u de cijfers wilt gebruiken.",&"Laatste synchronisatie met cijfers uit Prognose op " & Str(DateToDay(Q_STATUS_SYNCED_ON),0,0) & " " & DateStr(Q_STATUS_SYNCED_ON,7) & "."));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapForecast);
+          title: "Info for folder " & GetTitle(Q_MAPFORECAST);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -7536,11 +7536,11 @@ model FAM uses BaseModel
           options_title: locked;
         }
       }
-      variable Q_MapFinancingNeed
+      variable Q_MAPFINANCINGNEED
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapFinancingNeed_ENTEREDREQUIREDVARS=Q_MapFinancingNeed_REQUIREDVARS);
+        formula: (Q_MAPFINANCINGNEED_ENTEREDREQUIREDVARS=Q_MAPFINANCINGNEED_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Financing need";
@@ -7550,26 +7550,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapFinancingNeed_WARNING
+        variable Q_MAPFINANCINGNEED_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapFinancingNeed);
+          title: "Warning for folder " & GetTitle(Q_MAPFINANCINGNEED);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapFinancingNeed_INFO
+        variable Q_MAPFINANCINGNEED_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapFinancingNeed[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPFINANCINGNEED[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapFinancingNeed);
+          title: "Info for folder " & GetTitle(Q_MAPFINANCINGNEED);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -10900,7 +10900,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               data_options: unscalable;
               title: "Please give a description of the existing loan";
               top_blanklines: 1;
@@ -10911,7 +10911,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               data_options: unscalable;
               title: "Funding organisation";
               visible: 1;
@@ -10921,7 +10921,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               displaytype: currency;
               title: "Total amount";
               visible: 1;
@@ -10931,7 +10931,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               displaytype: currency;
               title: "Amount due";
               visible: 1;
@@ -10941,7 +10941,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               data_options: unscalable;
               displaytype: date;
               title: "Date of closing";
@@ -10952,7 +10952,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Duration in months";
@@ -10975,7 +10975,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapFinancingNeed);
+              inputRequired: Visible (Q_MAPFINANCINGNEED);
               data_options: unscalable;
               displaytype: percentage;
               fixed_decimals: 1;
@@ -11135,7 +11135,7 @@ model FAM uses BaseModel
             }
           }
         }
-        variable Q_MapFinancingNeed_Hulpvariabelen
+        variable Q_MAPFINANCINGNEED_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -11145,11 +11145,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapFinancingNeed_REQUIREDVARS
+          variable Q_MAPFINANCINGNEED_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancingNeed, Q_MapFinancingNeed_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCINGNEED, Q_MAPFINANCINGNEED_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -11159,11 +11159,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapFinancingNeed_ENTEREDREQUIREDVARS
+          variable Q_MAPFINANCINGNEED_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancingNeed, Q_MapFinancingNeed_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCINGNEED, Q_MAPFINANCINGNEED_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -11174,11 +11174,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapFinancialPosition
+      variable Q_MAPFINANCIALPOSITION
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapFinancialPosition_ENTEREDREQUIREDVARS=Q_MapFinancialPosition_REQUIREDVARS);
+        formula: (Q_MAPFINANCIALPOSITION_ENTEREDREQUIREDVARS=Q_MAPFINANCIALPOSITION_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Financial position";
@@ -11189,26 +11189,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapFinancialPosition_WARNING
+        variable Q_MAPFINANCIALPOSITION_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapFinancialPosition);
+          title: "Warning for folder " & GetTitle(Q_MAPFINANCIALPOSITION);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapFinancialPosition_INFO
+        variable Q_MAPFINANCIALPOSITION_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapFinancialPosition[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPFINANCIALPOSITION[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapFinancialPosition);
+          title: "Info for folder " & GetTitle(Q_MAPFINANCIALPOSITION);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -12744,7 +12744,7 @@ model FAM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          inputRequired: Visible (Q_MapFinancialPosition);
+          inputRequired: Visible (Q_MAPFINANCIALPOSITION);
           data_options: unscalable;
           displaytype: memo;
           title: EvaluateAsString(FirstUC("description"));
@@ -13487,7 +13487,7 @@ model FAM uses BaseModel
         {
           datatype: string;
           frequency: document;
-          inputRequired: Visible (Q_MapFinancialPosition);
+          inputRequired: Visible (Q_MAPFINANCIALPOSITION);
           data_options: unscalable;
           displaytype: memo;
           title: EvaluateAsString(FirstUC("description"));
@@ -13495,7 +13495,7 @@ model FAM uses BaseModel
           visible: 1;
           options_title: locked;
         }
-        variable Q_MapFinancialPosition_Hulpvariabelen
+        variable Q_MAPFINANCIALPOSITION_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -13505,11 +13505,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapFinancialPosition_REQUIREDVARS
+          variable Q_MAPFINANCIALPOSITION_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancialPosition, Q_MapFinancialPosition_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCIALPOSITION, Q_MAPFINANCIALPOSITION_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -13519,11 +13519,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapFinancialPosition_ENTEREDREQUIREDVARS
+          variable Q_MAPFINANCIALPOSITION_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapFinancialPosition, Q_MapFinancialPosition_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPFINANCIALPOSITION, Q_MAPFINANCIALPOSITION_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -13534,11 +13534,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapCollaterals
+      variable Q_MAPCOLLATERALS
       {
         datatype: number;
         frequency: document;
-        formula: ((Q_MapCollaterals_ENTEREDREQUIREDVARS=Q_MapCollaterals_REQUIREDVARS) and not(Q_MapCollaterals_TotalCalculation)) or not(Visible(Q_MapCollaterals));
+        formula: ((Q_MAPCOLLATERALS_ENTEREDREQUIREDVARS=Q_MAPCOLLATERALS_REQUIREDVARS) and not(Q_MAPCOLLATERALS_TOTALCALCULATION)) or not(Visible(Q_MAPCOLLATERALS));
         data_options: unscalable;
         displaytype: select;
         title: "Collaterals";
@@ -13547,38 +13547,38 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapCollaterals_WARNING
+        variable Q_MAPCOLLATERALS_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapCollaterals);
+          title: "Warning for folder " & GetTitle(Q_MAPCOLLATERALS);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapCollaterals_INFO
+        variable Q_MAPCOLLATERALS_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapCollaterals[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPCOLLATERALS[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapCollaterals);
+          title: "Info for folder " & GetTitle(Q_MAPCOLLATERALS);
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapCollaterals_VALIDATION
+        variable Q_MAPCOLLATERALS_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapCollaterals_TotalCalculation,&"Het totaalbedrag aan inschrijvingen mag niet hoger zijn dan de markt- of garantiewaarde."));
+          formula: EvaluateAsString(If(Q_MAPCOLLATERALS_TOTALCALCULATION,&"Het totaalbedrag aan inschrijvingen mag niet hoger zijn dan de markt- of garantiewaarde."));
           data_options: unscalable;
-          title: "Validation for folder " & GetTitle(Q_MapCollaterals);
+          title: "Validation for folder " & GetTitle(Q_MAPCOLLATERALS);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -13955,7 +13955,7 @@ model FAM uses BaseModel
             }
           }
         }
-        variable Q_MapCollaterals_Hulpvariabelen
+        variable Q_MAPCOLLATERALS_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -13965,11 +13965,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapCollaterals_REQUIREDVARS
+          variable Q_MAPCOLLATERALS_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapCollaterals, Q_MapCollaterals_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPCOLLATERALS, Q_MAPCOLLATERALS_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -13979,11 +13979,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapCollaterals_ENTEREDREQUIREDVARS
+          variable Q_MAPCOLLATERALS_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapCollaterals, Q_MapCollaterals_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPCOLLATERALS, Q_MAPCOLLATERALS_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -13992,7 +13992,7 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapCollaterals_TotalCalculation
+          variable Q_MAPCOLLATERALS_TOTALCALCULATION
           {
             datatype: number;
             frequency: document;
@@ -14007,11 +14007,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapSpecificationAccountsReceivables
+      variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapSpecificationAccountsReceivables_ENTEREDREQUIREDVARS=Q_MapSpecificationAccountsReceivables_REQUIREDVARS);
+        formula: (Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_ENTEREDREQUIREDVARS=Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Specification accounts receivables";
@@ -14020,26 +14020,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapSpecificationAccountsReceivables_WARNING
+        variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapSpecificationAccountsReceivables);
+          title: "Warning for folder " & GetTitle(Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapSpecificationAccountsReceivables_INFO
+        variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapSpecificationAccountsReceivables[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapSpecificationAccountsReceivables);
+          title: "Info for folder " & GetTitle(Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -14101,7 +14101,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationAccountsReceivables);
+            inputRequired: Visible (Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
             data_options: unscalable;
             displaytype: select;
             title: "Are the accounts receivables insured?";
@@ -14113,7 +14113,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationAccountsReceivables);
+            inputRequired: Visible (Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
             data_options: unscalable;
             displaytype: select;
             title: "Are the accounts receivables already pledged?";
@@ -14143,7 +14143,7 @@ model FAM uses BaseModel
             {
               datatype: string;
               frequency: document;
-              inputRequired: Visible (Q_MapSpecificationAccountsReceivables);
+              inputRequired: Visible (Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
               data_options: unscalable;
               title: "Name debtor";
               top_blanklines: 1;
@@ -14154,7 +14154,7 @@ model FAM uses BaseModel
             {
               datatype: number;
               frequency: document;
-              inputRequired: Visible (Q_MapSpecificationAccountsReceivables);
+              inputRequired: Visible (Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES);
               data_options: unscalable;
               displaytype: currency;
               fixed_decimals: 0;
@@ -14164,7 +14164,7 @@ model FAM uses BaseModel
             }
           }
         }
-        variable Q_MapSpecificationAccountsReceivables_Hulpvariabelen
+        variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -14174,11 +14174,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapSpecificationAccountsReceivables_REQUIREDVARS
+          variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationAccountsReceivables, Q_MapSpecificationAccountsReceivables_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES, Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -14188,11 +14188,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapSpecificationAccountsReceivables_ENTEREDREQUIREDVARS
+          variable Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationAccountsReceivables, Q_MapSpecificationAccountsReceivables_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES, Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -14203,11 +14203,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapSpecificationLease
+      variable Q_MAPSPECIFICATIONLEASE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapSpecificationLease_ENTEREDREQUIREDVARS=Q_MapSpecificationLease_REQUIREDVARS);
+        formula: (Q_MAPSPECIFICATIONLEASE_ENTEREDREQUIREDVARS=Q_MAPSPECIFICATIONLEASE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Specification Lease";
@@ -14216,26 +14216,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapSpecificationLease_WARNING
+        variable Q_MAPSPECIFICATIONLEASE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapSpecificationLease);
+          title: "Warning for folder " & GetTitle(Q_MAPSPECIFICATIONLEASE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapSpecificationLease_INFO
+        variable Q_MAPSPECIFICATIONLEASE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapSpecificationLease[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPSPECIFICATIONLEASE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapSpecificationLease);
+          title: "Info for folder " & GetTitle(Q_MAPSPECIFICATIONLEASE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -14255,7 +14255,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             data_options: unscalable;
             title: "Lease object";
             top_blanklines: 1;
@@ -14266,7 +14266,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             data_options: unscalable;
             displaytype: memo;
             title: "Description of the lease object";
@@ -14277,7 +14277,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             data_options: unscalable;
             displaytype: select;
             title: "Marketability of lease object";
@@ -14289,7 +14289,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Duration in months";
@@ -14300,7 +14300,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             displaytype: currency;
             title: "Depreciation object per month";
             visible: 1;
@@ -14310,7 +14310,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             displaytype: currency;
             title: "Final instalment";
             visible: 1;
@@ -14320,14 +14320,14 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationLease);
+            inputRequired: Visible (Q_MAPSPECIFICATIONLEASE);
             displaytype: currency;
             title: "Deposit";
             visible: 1;
             options_title: locked;
           }
         }
-        variable Q_MapSpecificationLease_Hulpvariabelen
+        variable Q_MAPSPECIFICATIONLEASE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -14337,11 +14337,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapSpecificationLease_REQUIREDVARS
+          variable Q_MAPSPECIFICATIONLEASE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationLease, Q_MapSpecificationLease_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONLEASE, Q_MAPSPECIFICATIONLEASE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -14351,11 +14351,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapSpecificationLease_ENTEREDREQUIREDVARS
+          variable Q_MAPSPECIFICATIONLEASE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationLease, Q_MapSpecificationLease_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONLEASE, Q_MAPSPECIFICATIONLEASE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -14366,11 +14366,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapSpecificationCommercialRealEstate
+      variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapSpecificationCommercialRealEstate_ENTEREDREQUIREDVARS=Q_MapSpecificationCommercialRealEstate_REQUIREDVARS);
+        formula: (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_ENTEREDREQUIREDVARS=Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Specification commercial real estate";
@@ -14379,26 +14379,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapSpecificationCommercialRealEstate_WARNING
+        variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapSpecificationCommercialRealEstate);
+          title: "Warning for folder " & GetTitle(Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapSpecificationCommercialRealEstate_INFO
+        variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapSpecificationCommercialRealEstate[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPSPECIFICATIONCOMMERCIALREALESTATE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapSpecificationCommercialRealEstate);
+          title: "Info for folder " & GetTitle(Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -14418,7 +14418,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             data_options: unscalable;
             displaytype: select;
             title: "Existing or new property?";
@@ -14431,7 +14431,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             data_options: unscalable;
             displaytype: memo;
             title: "Description of the property";
@@ -14442,7 +14442,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             data_options: unscalable;
             displaytype: select;
             title: "Marketability of the property";
@@ -14454,7 +14454,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             displaytype: currency;
             title: "WOZ value of the property";
             visible: 1;
@@ -14464,7 +14464,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             displaytype: currency;
             title: "Amount of the rental income per year";
             visible: 1;
@@ -14474,7 +14474,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             displaytype: currency;
             title: "Number of rental contracts";
             visible: 1;
@@ -14484,14 +14484,14 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationCommercialRealEstate);
+            inputRequired: Visible (Q_MAPSPECIFICATIONCOMMERCIALREALESTATE);
             displaytype: currency;
             title: "Amount of maintenance costs per year";
             visible: 1;
             options_title: locked;
           }
         }
-        variable Q_MapSpecificationCommercialRealEstate_Hulpvariabelen
+        variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -14501,11 +14501,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapSpecificationCommercialRealEstate_REQUIREDVARS
+          variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationCommercialRealEstate, Q_MapSpecificationCommercialRealEstate_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONCOMMERCIALREALESTATE, Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -14515,11 +14515,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapSpecificationCommercialRealEstate_ENTEREDREQUIREDVARS
+          variable Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationCommercialRealEstate, Q_MapSpecificationCommercialRealEstate_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONCOMMERCIALREALESTATE, Q_MAPSPECIFICATIONCOMMERCIALREALESTATE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -14530,11 +14530,11 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapSpecificationEquityFinance
+      variable Q_MAPSPECIFICATIONEQUITYFINANCE
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapSpecificationEquityFinance_ENTEREDREQUIREDVARS=Q_MapSpecificationEquityFinance_REQUIREDVARS);
+        formula: (Q_MAPSPECIFICATIONEQUITYFINANCE_ENTEREDREQUIREDVARS=Q_MAPSPECIFICATIONEQUITYFINANCE_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Specification Equity Finance";
@@ -14543,26 +14543,26 @@ model FAM uses BaseModel
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapSpecificationEquityFinance_WARNING
+        variable Q_MAPSPECIFICATIONEQUITYFINANCE_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapSpecificationEquityFinance);
+          title: "Warning for folder " & GetTitle(Q_MAPSPECIFICATIONEQUITYFINANCE);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapSpecificationEquityFinance_INFO
+        variable Q_MAPSPECIFICATIONEQUITYFINANCE_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapSpecificationEquityFinance[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPSPECIFICATIONEQUITYFINANCE[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapSpecificationEquityFinance);
+          title: "Info for folder " & GetTitle(Q_MAPSPECIFICATIONEQUITYFINANCE);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -14595,7 +14595,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationEquityFinance);
+            inputRequired: Visible (Q_MAPSPECIFICATIONEQUITYFINANCE);
             data_options: unscalable;
             displaytype: select;
             title: "Are there new shares issued?";
@@ -14607,7 +14607,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: SpecificationEquityFinanceNewShares and Visible (Q_MapSpecificationEquityFinance);
+            inputRequired: SpecificationEquityFinanceNewShares and Visible (Q_MAPSPECIFICATIONEQUITYFINANCE);
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Number of newly issued shares of the company";
@@ -14618,7 +14618,7 @@ model FAM uses BaseModel
           {
             datatype: number;
             frequency: document;
-            inputRequired: not(SpecificationEquityFinanceNewShares) and Visible (Q_MapSpecificationEquityFinance);
+            inputRequired: not(SpecificationEquityFinanceNewShares) and Visible (Q_MAPSPECIFICATIONEQUITYFINANCE);
             data_options: unscalable;
             displaytype: percentage;
             fixed_decimals: 1;
@@ -14630,7 +14630,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationEquityFinance);
+            inputRequired: Visible (Q_MAPSPECIFICATIONEQUITYFINANCE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the dividend policy";
@@ -14641,7 +14641,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible (Q_MapSpecificationEquityFinance);
+            inputRequired: Visible (Q_MAPSPECIFICATIONEQUITYFINANCE);
             data_options: unscalable;
             displaytype: memo;
             title: "Please give a description of the exit strategies";
@@ -14649,7 +14649,7 @@ model FAM uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MapSpecificationEquityFinance_Hulpvariabelen
+        variable Q_MAPSPECIFICATIONEQUITYFINANCE_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -14659,11 +14659,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapSpecificationEquityFinance_REQUIREDVARS
+          variable Q_MAPSPECIFICATIONEQUITYFINANCE_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationEquityFinance, Q_MapSpecificationEquityFinance_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONEQUITYFINANCE, Q_MAPSPECIFICATIONEQUITYFINANCE_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -14673,11 +14673,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapSpecificationEquityFinance_ENTEREDREQUIREDVARS
+          variable Q_MAPSPECIFICATIONEQUITYFINANCE_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapSpecificationEquityFinance, Q_MapSpecificationEquityFinance_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPSPECIFICATIONEQUITYFINANCE, Q_MAPSPECIFICATIONEQUITYFINANCE_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -14688,39 +14688,39 @@ model FAM uses BaseModel
           }
         }
       }
-      variable Q_MapDocuments
+      variable Q_MAPDOCUMENTS
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapDocuments_ENTEREDREQUIREDVARS=Q_MapDocuments_REQUIREDVARS);
+        formula: (Q_MAPDOCUMENTS_ENTEREDREQUIREDVARS=Q_MAPDOCUMENTS_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Documents";
         locked: 1;
-        visible: DataEntered(Q_MapDocuments) or TupleSum(Product_tpQ_MapVisibilityDocumenten)>0;
+        visible: DataEntered(Q_MAPDOCUMENTS) or TupleSum(Product_tpQ_MapVisibilityDocumenten)>0;
         choices: "0:Incomplete.|1:Complete.";
         options_title: locked;
         options: locked;
-        variable Q_MapDocuments_WARNING
+        variable Q_MAPDOCUMENTS_WARNING
         {
           datatype: string;
           frequency: document;
           formula: EvaluateAsString( scRestricties  &Q_WARNING_GLOBAL);
           data_options: unscalable;
-          title: "Warning for folder " & GetTitle(Q_MapDocuments);
+          title: "Warning for folder " & GetTitle(Q_MAPDOCUMENTS);
           top_blanklines: 1;
           locked: 1;
           visible: 1;
           options_title: locked;
           options: locked;
         }
-        variable Q_MapDocuments_INFO
+        variable Q_MAPDOCUMENTS_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_MapDocuments[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAPDOCUMENTS[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
-          title: "Info for folder " & GetTitle(Q_MapDocuments);
+          title: "Info for folder " & GetTitle(Q_MAPDOCUMENTS);
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -14740,7 +14740,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_COC)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_COC)>0;
             data_options: unscalable;
             title: "COC";
             top_blanklines: 1;
@@ -14751,7 +14751,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_OrgChart)>0 and if(OrganisationLegalForm=12,False,True);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_OrgChart)>0 and if(OrganisationLegalForm=12,False,True);
             data_options: unscalable;
             title: "OrgChart";
             visible: DataEntered(DOC_OrgChart) or InputRequired(DOC_OrgChart);
@@ -14761,7 +14761,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_Signatures)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_Signatures)>0;
             data_options: unscalable;
             title: "Signatures";
             hint: "http://www.fyndoo.com/wp-content/uploads/2016/07/Signatures.pdf Download the template from www.fyndoo.com";
@@ -14772,7 +14772,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_Passport)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_Passport)>0;
             data_options: unscalable;
             title: "Passport";
             visible: DataEntered(DOC_Passport) or InputRequired(DOC_Passport);
@@ -14782,7 +14782,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_ShareRegister)>0 and if(OrganisationLegalForm=1 or OrganisationLegalForm=2,True,False);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_ShareRegister)>0 and if(OrganisationLegalForm=1 or OrganisationLegalForm=2,True,False);
             data_options: unscalable;
             title: "ShareRegister";
             visible: DataEntered(DOC_ShareRegister) or InputRequired(DOC_ShareRegister);
@@ -14792,7 +14792,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_AnnualStatement)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_AnnualStatement)>0;
             data_options: unscalable;
             title: "AnnualStatement";
             visible: DataEntered(DOC_AnnualStatement) or InputRequired(DOC_AnnualStatement);
@@ -14811,7 +14811,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_MemorandumOfAssociation)>0 and if(OrganisationLegalForm=11 or OrganisationLegalForm=12,False,True);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_MemorandumOfAssociation)>0 and if(OrganisationLegalForm=11 or OrganisationLegalForm=12,False,True);
             data_options: unscalable;
             title: "MemorandumOfAssociation";
             visible: DataEntered(DOC_MemorandumOfAssociation) or InputRequired(DOC_MemorandumOfAssociation);
@@ -14821,7 +14821,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_GeneralTermsAndConditions)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_GeneralTermsAndConditions)>0;
             data_options: unscalable;
             title: "GeneralTermsAndConditions";
             visible: DataEntered(DOC_GeneralTermsAndConditions) or InputRequired(DOC_GeneralTermsAndConditions);
@@ -14831,7 +14831,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_BankAccounts)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_BankAccounts)>0;
             data_options: unscalable;
             title: "BankAccounts";
             visible: DataEntered(DOC_BankAccounts) or InputRequired(DOC_BankAccounts);
@@ -14841,7 +14841,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_UBODeclaration)>0 and if(OrganisationLegalForm=1 or OrganisationLegalForm=2,True,False);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_UBODeclaration)>0 and if(OrganisationLegalForm=1 or OrganisationLegalForm=2,True,False);
             data_options: unscalable;
             title: "UBODeclaration";
             hint: "http://www.fyndoo.com/wp-content/uploads/2016/07/UBODeclaration.pdf Download the template from www.fyndoo.com";
@@ -14861,7 +14861,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_CertificateOfGoodConduct)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_CertificateOfGoodConduct)>0;
             data_options: unscalable;
             title: "CertificateOfGoodConduct";
             visible: DataEntered(DOC_CertificateOfGoodConduct) or InputRequired(DOC_CertificateOfGoodConduct);
@@ -14880,7 +14880,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_InvoiceExample)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_InvoiceExample)>0;
             data_options: unscalable;
             title: "InvoiceExample";
             visible: DataEntered(DOC_InvoiceExample) or InputRequired(DOC_InvoiceExample);
@@ -14890,7 +14890,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_Logo)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_Logo)>0;
             data_options: unscalable;
             title: "Logo";
             visible: DataEntered(DOC_Logo) or InputRequired(DOC_Logo);
@@ -14900,7 +14900,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and (FacilityTarget=8) and (FacilityTarget=9);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and (FacilityTarget=8) and (FacilityTarget=9);
             data_options: unscalable;
             title: "RealEstatePurchaseAgreement";
             visible: DataEntered(DOC_RealEstatePurchaseAgreement) or TupleSum(Product_tpQ_MapVisibilityDOC_RealEstatePurchaseAgreement)>0;
@@ -14910,7 +14910,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and (FacilityTarget=9);
+            inputRequired: Visible(Q_MAPDOCUMENTS) and (FacilityTarget=9);
             data_options: unscalable;
             title: "RealEstateRentalAgreement";
             visible: DataEntered(DOC_RealEstateRentalAgreement) or TupleSum(Product_tpQ_MapVisibilityDOC_RealEstateRentalAgreement)>0;
@@ -14920,7 +14920,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_DebtorList)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_DebtorList)>0;
             data_options: unscalable;
             title: "List of debtors";
             visible: DataEntered(DOC_DebtorList) or InputRequired(DOC_DebtorList);
@@ -14948,7 +14948,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_CreditorList)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_CreditorList)>0;
             data_options: unscalable;
             title: "List of creditors";
             visible: DataEntered(DOC_CreditorList) or InputRequired(DOC_CreditorList);
@@ -14958,7 +14958,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_RevenueByWEBPIN)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_RevenueByWEBPIN)>0;
             data_options: unscalable;
             title: "Revenue by card transactions or webshop";
             visible: DataEntered(DOC_RevenueByWEBPIN) or InputRequired(DOC_RevenueByWEBPIN);
@@ -14977,7 +14977,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_ProofOfResidence)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_ProofOfResidence)>0;
             data_options: unscalable;
             title: "Proof of Dutch residence owner";
             hint: "I.E. copy of the payment of the utity bills";
@@ -14997,7 +14997,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_MT940BankFile)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_MT940BankFile)>0;
             data_options: unscalable;
             title: "MT 940 bankfile last 12 months";
             visible: DataEntered(DOC_MT940BankFile) or InputRequired(DOC_MT940BankFile);
@@ -15007,7 +15007,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_VATDeclaration)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_VATDeclaration)>0;
             data_options: unscalable;
             title: "VAT declaration last 4 quarters";
             visible: DataEntered(DOC_VATDeclaration) or InputRequired(DOC_VATDeclaration);
@@ -15026,7 +15026,7 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_Entrepreneur)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_Entrepreneur)>0;
             data_options: unscalable;
             title: "Photo of entrepreneur or company";
             visible: DataEntered(DOC_Entrepreneur) or InputRequired(DOC_Entrepreneur);
@@ -15036,14 +15036,14 @@ model FAM uses BaseModel
           {
             datatype: string;
             frequency: document;
-            inputRequired: Visible(Q_MapDocuments) and TupleSum(Product_tpQ_MapVisibilityDOC_Financinggoal)>0;
+            inputRequired: Visible(Q_MAPDOCUMENTS) and TupleSum(Product_tpQ_MapVisibilityDOC_Financinggoal)>0;
             data_options: unscalable;
             title: "Photo of financinggoal";
             visible: DataEntered(DOC_Financinggoal) or InputRequired(DOC_Financinggoal);
             options_title: locked;
           }
         }
-        variable Q_MapDocuments_Hulpvariabelen
+        variable Q_MAPDOCUMENTS_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -15053,11 +15053,11 @@ model FAM uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_MapDocuments_REQUIREDVARS
+          variable Q_MAPDOCUMENTS_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapDocuments, Q_MapDocuments_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAPDOCUMENTS, Q_MAPDOCUMENTS_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal verplichte velden<$";
@@ -15067,11 +15067,11 @@ model FAM uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MapDocuments_ENTEREDREQUIREDVARS
+          variable Q_MAPDOCUMENTS_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MapDocuments, Q_MapDocuments_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAPDOCUMENTS, Q_MAPDOCUMENTS_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "$>Aantal ingevulde verplichte velden<$";
@@ -15092,7 +15092,7 @@ model FAM uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_ResultTitle
+        variable Q_RESULTTITLE
         {
           datatype: string;
           frequency: document;
@@ -15103,7 +15103,7 @@ model FAM uses BaseModel
           visible: TupleSum(Product_tpManualProduct);
           options_title: locked;
           options: locked;
-          variable Q_ResultTitleSub1
+          variable Q_RESULTTITLESUB1
           {
             datatype: string;
             frequency: document;
@@ -15116,7 +15116,7 @@ model FAM uses BaseModel
             options: locked, invisible;
           }
         }
-        variable Q_ResultTitleDownloadOnly
+        variable Q_RESULTTITLEDOWNLOADONLY
         {
           datatype: string;
           frequency: document;
@@ -15126,7 +15126,7 @@ model FAM uses BaseModel
           visible: TupleSum(Product_tpManualProduct)=0;
           options_title: locked;
           options: locked;
-          variable Q_ResultTitleDownloadOnlySub1
+          variable Q_RESULTTITLEDOWNLOADONLYSUB1
           {
             datatype: string;
             frequency: document;
@@ -15150,7 +15150,7 @@ model FAM uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -15159,7 +15159,7 @@ model FAM uses BaseModel
           top_blanklines: 1;
           locked: 1;
           visible: 1;
-          link: Q_RESULTSub1;
+          link: Q_RESULTSUB1;
           options_title: locked;
           options: locked;
         }
@@ -15221,7 +15221,7 @@ model FAM uses BaseModel
       {
         datatype: number;
         frequency: document;
-        formula: (Q_MapRequestType + Q_MapOrganisationType + Q_MapFinancials + Q_MapFundingOptions + Q_MapGeneralData + Q_MapOrganisationProfile + Q_MapCrowdFund + Q_MapForecast + Q_MapFinancingNeed + Q_MapFinancialPosition + Q_MapCollaterals + Q_MapSpecificationAccountsReceivables + Q_MapSpecificationLease + Q_MapSpecificationCommercialRealEstate + Q_MapSpecificationEquityFinance + Q_MapDocuments = 16);
+        formula: (Q_MAPREQUESTTYPE + Q_MAPORGANISATIONTYPE + Q_MAPFINANCIALS + Q_MAPFUNDINGOPTIONS + Q_MAPGENERALDATA + Q_MAPORGANISATIONPROFILE + Q_MAPCROWDFUND + Q_MAPFORECAST + Q_MAPFINANCINGNEED + Q_MAPFINANCIALPOSITION + Q_MAPCOLLATERALS + Q_MAPSPECIFICATIONACCOUNTSRECEIVABLES + Q_MAPSPECIFICATIONLEASE + Q_MAPSPECIFICATIONCOMMERCIALREALESTATE + Q_MAPSPECIFICATIONEQUITYFINANCE + Q_MAPDOCUMENTS = 16);
         displaytype: currency;
         title: "Make final";
         visible: 1;
@@ -15286,7 +15286,7 @@ model FAM uses BaseModel
         visible: 1;
         options_title: locked;
       }
-      variable Q_ModelVersion
+      variable Q_MODELVERSION
       {
         datatype: string;
         frequency: document;
@@ -15298,7 +15298,7 @@ model FAM uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_ModelType
+      variable Q_MODELTYPE
       {
         datatype: string;
         frequency: document;
@@ -15310,7 +15310,7 @@ model FAM uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MatrixVersion
+      variable Q_MATRIXVERSION
       {
         datatype: string;
         frequency: document;

@@ -364,7 +364,7 @@ model INGSCG3 uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: not( ( (Q_Map01[1]=0) or (Q_Map02[1]=0) or (Q_Map03[1]=0) or (Q_Map04[1]=0) or (Q_Map05[1]=0) or (Q_Map06[1]=0) or (Q_Map09[1]=0))) or (Length(&scKnockoutsCombi[1])>2);
+      formula: not( ( (Q_MAP01[1]=0) or (Q_MAP02[1]=0) or (Q_MAP03[1]=0) or (Q_MAP04[1]=0) or (Q_MAP05[1]=0) or (Q_MAP06[1]=0) or (Q_MAP09[1]=0))) or (Length(&scKnockoutsCombi[1])>2);
       data_options: saveCalculatedValue,unscalable;
       displaytype: select;
       title: "Kredietaanvraagmodel";
@@ -374,11 +374,11 @@ model INGSCG3 uses BaseModel
       choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Gekoppelde gegevens";
@@ -388,7 +388,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -401,7 +401,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
@@ -412,11 +412,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -424,7 +424,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_HINT
+        variable Q_MAP01_HINT
         {
           datatype: string;
           frequency: document;
@@ -436,7 +436,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_Algemeen
+        variable Q_MAP01_ALGEMEEN
         {
           datatype: number;
           frequency: document;
@@ -592,7 +592,7 @@ model INGSCG3 uses BaseModel
             visible: not (RatingPrefix[1]>0);
             options_title: locked;
           }
-          variable Q_Map01_AlgemeenSub13 refers to Rating
+          variable Q_MAP01_ALGEMEENSUB13 refers to Rating
           {
             datatype: number;
             frequency: document;
@@ -632,7 +632,7 @@ model INGSCG3 uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -642,11 +642,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -655,11 +655,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -669,11 +669,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map03
+      variable Q_MAP03
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS);
+        formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Algemene gegevens";
@@ -682,7 +682,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map03_WARNING
+        variable Q_MAP03_WARNING
         {
           datatype: string;
           frequency: document;
@@ -695,7 +695,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_INFO
+        variable Q_MAP03_INFO
         {
           datatype: string;
           frequency: document;
@@ -706,11 +706,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_VALIDATION
+        variable Q_MAP03_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP03[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -718,7 +718,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_Paragraaf01
+        variable Q_MAP03_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -728,7 +728,7 @@ model INGSCG3 uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          variable Q_Map03_Paragraaf01Sub1 refers to PolicyPaperNaicsDescription
+          variable Q_MAP03_PARAGRAAF01SUB1 refers to PolicyPaperNaicsDescription
           {
             datatype: string;
             frequency: document;
@@ -740,7 +740,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_Paragraaf01Sub2 refers to PolicyPaperId
+          variable Q_MAP03_PARAGRAAF01SUB2 refers to PolicyPaperId
           {
             datatype: number;
             frequency: document;
@@ -779,7 +779,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map03_Paragraaf04
+        variable Q_MAP03_PARAGRAAF04
         {
           datatype: number;
           frequency: document;
@@ -826,7 +826,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map03_Paragraaf05
+        variable Q_MAP03_PARAGRAAF05
         {
           datatype: number;
           frequency: document;
@@ -849,7 +849,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map03_Paragraaf03
+        variable Q_MAP03_PARAGRAAF03
         {
           datatype: number;
           frequency: document;
@@ -1939,7 +1939,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map06_Paragraaf01
+        variable Q_MAP06_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -2947,7 +2947,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map03_Paragraaf02
+        variable Q_MAP03_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -3111,7 +3111,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map03_Hulpvariabelen
+        variable Q_MAP03_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3121,11 +3121,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map03_REQUIREDVARS
+          variable Q_MAP03_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -3134,11 +3134,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_ENTEREDREQUIREDVARS
+          variable Q_MAP03_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -3148,11 +3148,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map04
+      variable Q_MAP04
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS);
+        formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Kredietstructuur en dekking";
@@ -3161,7 +3161,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map04_WARNING
+        variable Q_MAP04_WARNING
         {
           datatype: string;
           frequency: document;
@@ -3174,7 +3174,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_INFO
+        variable Q_MAP04_INFO
         {
           datatype: string;
           frequency: document;
@@ -3185,11 +3185,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_VALIDATION
+        variable Q_MAP04_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP04[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -3197,7 +3197,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_Paragraaf01
+        variable Q_MAP04_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -3509,7 +3509,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map04_Paragraaf03
+        variable Q_MAP04_PARAGRAAF03
         {
           datatype: number;
           frequency: document;
@@ -3818,7 +3818,7 @@ model INGSCG3 uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map04_Paragraaf04
+        variable Q_MAP04_PARAGRAAF04
         {
           datatype: number;
           frequency: document;
@@ -3839,7 +3839,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map04_Paragraaf999
+        variable Q_MAP04_PARAGRAAF999
         {
           datatype: number;
           frequency: document;
@@ -3888,7 +3888,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map04_Paragraaf02
+        variable Q_MAP04_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -4171,7 +4171,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map04_Hulpvariabelen
+        variable Q_MAP04_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4181,11 +4181,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map04_REQUIREDVARS
+          variable Q_MAP04_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -4194,11 +4194,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_ENTEREDREQUIREDVARS
+          variable Q_MAP04_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -4208,11 +4208,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map02
+      variable Q_MAP02
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS) and (RFMap02[1]<=0);
+        formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS) and (RFMap02[1]<=0);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Financiële analyse";
@@ -4222,7 +4222,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map02_WARNING
+        variable Q_MAP02_WARNING
         {
           datatype: string;
           frequency: document;
@@ -4235,7 +4235,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_INFO
+        variable Q_MAP02_INFO
         {
           datatype: string;
           frequency: document;
@@ -4246,11 +4246,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_VALIDATION
+        variable Q_MAP02_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP02[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -4258,7 +4258,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_HINT
+        variable Q_MAP02_HINT
         {
           datatype: string;
           frequency: document;
@@ -4270,7 +4270,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_Balans
+        variable Q_MAP02_BALANS
         {
           datatype: number;
           frequency: column;
@@ -4301,7 +4301,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub2 refers to fmImmatVastAct
+          variable Q_MAP02_BALANSSUB2 refers to fmImmatVastAct
           {
             datatype: number;
             frequency: column;
@@ -4317,7 +4317,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub3 refers to fmMatVastAct
+          variable Q_MAP02_BALANSSUB3 refers to fmMatVastAct
           {
             datatype: number;
             frequency: column;
@@ -4332,7 +4332,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub4 refers to fmFinVastAct
+          variable Q_MAP02_BALANSSUB4 refers to fmFinVastAct
           {
             datatype: number;
             frequency: column;
@@ -4347,7 +4347,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub5 refers to fmVrd
+          variable Q_MAP02_BALANSSUB5 refers to fmVrd
           {
             datatype: number;
             frequency: column;
@@ -4362,7 +4362,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub6 refers to fmVord
+          variable Q_MAP02_BALANSSUB6 refers to fmVord
           {
             datatype: number;
             frequency: column;
@@ -4377,7 +4377,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub7 refers to fmLiqMid
+          variable Q_MAP02_BALANSSUB7 refers to fmLiqMid
           {
             datatype: number;
             frequency: column;
@@ -4392,7 +4392,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub8 refers to fmSomAct
+          variable Q_MAP02_BALANSSUB8 refers to fmSomAct
           {
             datatype: number;
             frequency: column;
@@ -4411,7 +4411,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub9
+          variable Q_MAP02_BALANSSUB9
           {
             datatype: number;
             frequency: column;
@@ -4425,7 +4425,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked, invisible;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_BalansSub10 refers to fmEigenVerm
+          variable Q_MAP02_BALANSSUB10 refers to fmEigenVerm
           {
             datatype: number;
             frequency: column;
@@ -4440,7 +4440,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub11 refers to fmVoorz
+          variable Q_MAP02_BALANSSUB11 refers to fmVoorz
           {
             datatype: number;
             frequency: column;
@@ -4455,7 +4455,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub12 refers to fmLangVV
+          variable Q_MAP02_BALANSSUB12 refers to fmLangVV
           {
             datatype: number;
             frequency: column;
@@ -4470,7 +4470,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub13 refers to fmKortVV
+          variable Q_MAP02_BALANSSUB13 refers to fmKortVV
           {
             datatype: number;
             frequency: column;
@@ -4485,7 +4485,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub14 refers to fmSomPas
+          variable Q_MAP02_BALANSSUB14 refers to fmSomPas
           {
             datatype: number;
             frequency: column;
@@ -4503,7 +4503,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked;
           }
-          variable Q_Map02_BalansSub15 refers to fmBalanceCheck
+          variable Q_MAP02_BALANSSUB15 refers to fmBalanceCheck
           {
             datatype: number;
             frequency: column;
@@ -4542,7 +4542,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map02_EBITDA
+        variable Q_MAP02_EBITDA
         {
           datatype: number;
           frequency: column;
@@ -4595,7 +4595,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map02_ResRek
+        variable Q_MAP02_RESREK
         {
           datatype: number;
           frequency: column;
@@ -4608,7 +4608,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options_notrend: locked;
           options_trend: locked;
-          variable Q_Map02_ResRekSub1 refers to HeaderExtra
+          variable Q_MAP02_RESREKSUB1 refers to HeaderExtra
           {
             datatype: number;
             frequency: column;
@@ -5016,7 +5016,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map02_Kasstroom
+        variable Q_MAP02_KASSTROOM
         {
           datatype: number;
           frequency: column;
@@ -5030,7 +5030,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options_notrend: locked;
           options_trend: locked, invisible;
-          variable Q_Map02_KasstroomSub1 refers to fmEBITDA
+          variable Q_MAP02_KASSTROOMSUB1 refers to fmEBITDA
           {
             datatype: number;
             frequency: column;
@@ -5048,7 +5048,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub2 refers to fmMutWerkKapitaal
+          variable -Q_MAP02_KASSTROOMSUB2 refers to fmMutWerkKapitaal
           {
             datatype: number;
             frequency: column;
@@ -5064,7 +5064,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub3 refers to fmBuitengewRes
+          variable Q_MAP02_KASSTROOMSUB3 refers to fmBuitengewRes
           {
             datatype: number;
             frequency: column;
@@ -5080,7 +5080,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub4 refers to fmWinstBel
+          variable -Q_MAP02_KASSTROOMSUB4 refers to fmWinstBel
           {
             datatype: number;
             frequency: column;
@@ -5096,7 +5096,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub5 refers to fmResDerden
+          variable Q_MAP02_KASSTROOMSUB5 refers to fmResDerden
           {
             datatype: number;
             frequency: column;
@@ -5112,7 +5112,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub6 refers to fmMutVoorz
+          variable Q_MAP02_KASSTROOMSUB6 refers to fmMutVoorz
           {
             datatype: number;
             frequency: column;
@@ -5127,7 +5127,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub7 refers to fmOpKasstroom
+          variable Q_MAP02_KASSTROOMSUB7 refers to fmOpKasstroom
           {
             datatype: number;
             frequency: column;
@@ -5145,7 +5145,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub8 refers to fmInvesteringen
+          variable -Q_MAP02_KASSTROOMSUB8 refers to fmInvesteringen
           {
             datatype: number;
             frequency: column;
@@ -5161,7 +5161,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub9 refers to fmFinanciering
+          variable Q_MAP02_KASSTROOMSUB9 refers to fmFinanciering
           {
             datatype: number;
             frequency: column;
@@ -5177,7 +5177,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub10 refers to fmAflossingen
+          variable -Q_MAP02_KASSTROOMSUB10 refers to fmAflossingen
           {
             datatype: number;
             frequency: column;
@@ -5192,7 +5192,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub11 refers to fmFinRes
+          variable Q_MAP02_KASSTROOMSUB11 refers to fmFinRes
           {
             datatype: number;
             frequency: column;
@@ -5208,7 +5208,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub12 refers to fmPriveOpn
+          variable -Q_MAP02_KASSTROOMSUB12 refers to fmPriveOpn
           {
             datatype: number;
             frequency: column;
@@ -5225,7 +5225,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable -Q_Map02_KasstroomSub13 refers to fmWinstUitk
+          variable -Q_MAP02_KASSTROOMSUB13 refers to fmWinstUitk
           {
             datatype: number;
             frequency: column;
@@ -5241,7 +5241,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub14 refers to fmOvVermMut
+          variable Q_MAP02_KASSTROOMSUB14 refers to fmOvVermMut
           {
             datatype: number;
             frequency: column;
@@ -5257,7 +5257,7 @@ model INGSCG3 uses BaseModel
             options_notrend: locked;
             options_trend: locked, invisible;
           }
-          variable Q_Map02_KasstroomSub15 refers to fmCashFlowCheck
+          variable Q_MAP02_KASSTROOMSUB15 refers to fmCashFlowCheck
           {
             datatype: number;
             frequency: column;
@@ -5276,7 +5276,7 @@ model INGSCG3 uses BaseModel
             options_trend: locked, invisible;
           }
         }
-        variable Q_Map02_Hulpvariabelen
+        variable Q_MAP02_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -5286,11 +5286,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map02_REQUIREDVARS
+          variable Q_MAP02_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -5299,11 +5299,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_ENTEREDREQUIREDVARS
+          variable Q_MAP02_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -5313,11 +5313,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map05
+      variable Q_MAP05
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS) and (Length(&Q_Map05_INFO[1])<4);
+        formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS) and (Length(&Q_MAP05_INFO[1])<4);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Kengetallen";
@@ -5327,7 +5327,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map05_WARNING
+        variable Q_MAP05_WARNING
         {
           datatype: string;
           frequency: document;
@@ -5340,11 +5340,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_INFO
+        variable Q_MAP05_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_Map05_AflossingControle[1]&Q_Map05_SeniorDebt[1]);
+          formula: EvaluateAsString(Q_MAP05_AFLOSSINGCONTROLE[1]&Q_MAP05_SENIORDEBT[1]);
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -5352,11 +5352,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_VALIDATION
+        variable Q_MAP05_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP05[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -5364,7 +5364,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_Paragraaf03
+        variable Q_MAP05_PARAGRAAF03
         {
           datatype: number;
           frequency: document;
@@ -5761,7 +5761,7 @@ model INGSCG3 uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map05_Paragraaf02
+        variable Q_MAP05_PARAGRAAF02
         {
           datatype: number;
           frequency: column;
@@ -5776,7 +5776,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options_notrend: locked;
           options_trend: locked;
-          variable Q_Map05_Paragraaf02Sub1 refers to HeaderExtra
+          variable Q_MAP05_PARAGRAAF02SUB1 refers to HeaderExtra
           {
             datatype: number;
             frequency: column;
@@ -7669,7 +7669,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map05_Paragraaf021
+        variable Q_MAP05_PARAGRAAF021
         {
           datatype: number;
           frequency: document;
@@ -8268,7 +8268,7 @@ model INGSCG3 uses BaseModel
               options_title: locked;
             }
           }
-          variable Q_Map05_Paragraaf021Sub10 refers to LoonkostenOmzetRatioBnk
+          variable Q_MAP05_PARAGRAAF021SUB10 refers to LoonkostenOmzetRatioBnk
           {
             datatype: number;
             frequency: document;
@@ -8857,7 +8857,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map05_Paragraaf01
+        variable Q_MAP05_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -9029,7 +9029,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map05_Hulpvariabelen
+        variable Q_MAP05_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -9039,11 +9039,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map05_REQUIREDVARS
+          variable Q_MAP05_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -9052,11 +9052,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_ENTEREDREQUIREDVARS
+          variable Q_MAP05_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -9064,7 +9064,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_AflossingControle
+          variable Q_MAP05_AFLOSSINGCONTROLE
           {
             datatype: string;
             frequency: document;
@@ -9076,7 +9076,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_SeniorDebt
+          variable Q_MAP05_SENIORDEBT
           {
             datatype: string;
             frequency: document;
@@ -9090,11 +9090,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map06
+      variable Q_MAP06
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map06_ENTEREDREQUIREDVARS=Q_Map06_REQUIREDVARS);
+        formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Kwalitatieve criteria";
@@ -9103,7 +9103,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map06_WARNING
+        variable Q_MAP06_WARNING
         {
           datatype: string;
           frequency: document;
@@ -9116,7 +9116,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_INFO
+        variable Q_MAP06_INFO
         {
           datatype: string;
           frequency: document;
@@ -9127,11 +9127,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_VALIDATION
+        variable Q_MAP06_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP06[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -9139,7 +9139,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_Paragraaf02
+        variable Q_MAP06_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -9480,7 +9480,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map06_Paragraaf03
+        variable Q_MAP06_PARAGRAAF03
         {
           datatype: number;
           frequency: document;
@@ -9669,7 +9669,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map06_Hulpvariabelen
+        variable Q_MAP06_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -9679,11 +9679,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map06_REQUIREDVARS
+          variable Q_MAP06_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -9692,11 +9692,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_ENTEREDREQUIREDVARS
+          variable Q_MAP06_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -9706,11 +9706,11 @@ model INGSCG3 uses BaseModel
           }
         }
       }
-      variable Q_Map09
+      variable Q_MAP09
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map09_ENTEREDREQUIREDVARS=Q_Map09_REQUIREDVARS) and (Volledig);
+        formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS) and (Volledig);
         data_options: unscalable;
         displaytype: select;
         title: "Conclusie";
@@ -9719,7 +9719,7 @@ model INGSCG3 uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map09_WARNING
+        variable Q_MAP09_WARNING
         {
           datatype: string;
           frequency: document;
@@ -9732,7 +9732,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_INFO
+        variable Q_MAP09_INFO
         {
           datatype: string;
           frequency: document;
@@ -9743,11 +9743,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_VALIDATION
+        variable Q_MAP09_VALIDATION
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map09[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
+          formula: EvaluateAsString(If(Q_MAP09[1]=0,&"Nog niet alle verplichte vragen in deze stap zijn ingevuld.\r\nVerplichte vragen zijn gemarkeerd met een *.",&""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -9755,7 +9755,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map09_Paragraaf01
+        variable Q_MAP09_PARAGRAAF01
         {
           datatype: string;
           frequency: document;
@@ -9765,7 +9765,7 @@ model INGSCG3 uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_Map09_Paragraaf01Sub1 refers to PolicyPaperDescription
+          variable Q_MAP09_PARAGRAAF01SUB1 refers to PolicyPaperDescription
           {
             datatype: string;
             frequency: document;
@@ -9777,7 +9777,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map09_Paragraaf01Sub2 refers to FinancieringsbeleidDescription
+          variable Q_MAP09_PARAGRAAF01SUB2 refers to FinancieringsbeleidDescription
           {
             datatype: string;
             frequency: document;
@@ -9792,7 +9792,7 @@ model INGSCG3 uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: (Q_Map01) and (Q_Map02) and (Q_Map03) and (Q_Map04) and (Q_Map05) and (Q_Map06);
+            formula: (Q_MAP01) and (Q_MAP02) and (Q_MAP03) and (Q_MAP04) and (Q_MAP05) and (Q_MAP06);
             data_options: saveCalculatedValue,unscalable;
             displaytype: select;
             title: "Is dossier volledig?";
@@ -9830,7 +9830,7 @@ model INGSCG3 uses BaseModel
               options: locked;
             }
           }
-          variable Q_Map09_Paragraaf01Sub5 refers to ScoreBerekening
+          variable Q_MAP09_PARAGRAAF01SUB5 refers to ScoreBerekening
           {
             datatype: number;
             frequency: document;
@@ -9842,56 +9842,56 @@ model INGSCG3 uses BaseModel
             visible: 1;
             options_title: locked;
             options: locked;
-            variable Q_Map09_Paragraaf01Sub5Sub1 refers to scParMap302
+            variable Q_MAP09_PARAGRAAF01SUB5SUB1 refers to scParMap302
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub2 refers to scParMap303
+            variable Q_MAP09_PARAGRAAF01SUB5SUB2 refers to scParMap303
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub3 refers to scParMap402
+            variable Q_MAP09_PARAGRAAF01SUB5SUB3 refers to scParMap402
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub4 refers to scParMap501
+            variable Q_MAP09_PARAGRAAF01SUB5SUB4 refers to scParMap501
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub5 refers to scParMap502
+            variable Q_MAP09_PARAGRAAF01SUB5SUB5 refers to scParMap502
             {
               datatype: number;
               frequency: document;
@@ -9903,43 +9903,43 @@ model INGSCG3 uses BaseModel
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub6 refers to scParMap601
+            variable Q_MAP09_PARAGRAAF01SUB5SUB6 refers to scParMap601
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub7 refers to scParMap602
+            variable Q_MAP09_PARAGRAAF01SUB5SUB7 refers to scParMap602
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub8 refers to scParMap603
+            variable Q_MAP09_PARAGRAAF01SUB5SUB8 refers to scParMap603
             {
               datatype: number;
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
               locked: 1;
               visible: 1;
               options_title: locked;
               options: locked;
             }
-            variable Q_Map09_Paragraaf01Sub5Sub9 refers to EindScore
+            variable Q_MAP09_PARAGRAAF01SUB5SUB9 refers to EindScore
             {
               datatype: number;
               frequency: document;
@@ -10054,7 +10054,7 @@ model INGSCG3 uses BaseModel
             visible: 1;
             options_title: locked;
           }
-          variable Q_Map09_Paragraaf01Sub8 refers to Q_STATUS_FINAL_ON
+          variable Q_MAP09_PARAGRAAF01SUB8 refers to Q_STATUS_FINAL_ON
           {
             datatype: number;
             frequency: document;
@@ -10067,7 +10067,7 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map09_Paragraaf01Sub9 refers to Q_STATUS_FINAL_BY
+          variable Q_MAP09_PARAGRAAF01SUB9 refers to Q_STATUS_FINAL_BY
           {
             datatype: string;
             frequency: document;
@@ -10080,7 +10080,7 @@ model INGSCG3 uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map09_Paragraaf02
+        variable Q_MAP09_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -10160,7 +10160,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
               top_blanklines: 1;
               locked: 1;
               visible: (wgParMap302[1]>=0);
@@ -10172,7 +10172,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10213,7 +10213,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
               locked: 1;
               visible: (wgParMap303[1]>=0);
               options_title: locked;
@@ -10224,7 +10224,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10265,7 +10265,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
               locked: 1;
               visible: (wgParMap601[1]>=0);
               options_title: locked;
@@ -10276,7 +10276,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10317,7 +10317,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
               locked: 1;
               visible: (wgParMap402[1]>=0);
               options_title: locked;
@@ -10328,7 +10328,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10369,7 +10369,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
               locked: 1;
               visible: (wgParMap501[1]>=0);
               options_title: locked;
@@ -10380,7 +10380,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10473,7 +10473,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
               locked: 1;
               visible: (wgParMap602[1]>=0);
               options_title: locked;
@@ -10484,7 +10484,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10525,7 +10525,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: saveCalculatedValue,unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
               locked: 1;
               visible: (wgParMap603[1]>=0);
               options_title: locked;
@@ -10536,7 +10536,7 @@ model INGSCG3 uses BaseModel
                 frequency: document;
                 data_options: unscalable;
                 fixed_decimals: 1;
-                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+                title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
                 top_blanklines: 1;
                 locked: 1;
                 visible: 1;
@@ -10715,7 +10715,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -11189,7 +11189,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -11352,7 +11352,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -12792,7 +12792,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -13183,7 +13183,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -13497,7 +13497,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -13624,7 +13624,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf999));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF999));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -13786,7 +13786,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf999));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF999));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -13877,7 +13877,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -14093,7 +14093,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -16063,7 +16063,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -18727,7 +18727,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -19406,7 +19406,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -20387,7 +20387,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -20670,7 +20670,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
             locked: 1;
             visible: 1;
             options_title: locked;
@@ -21192,7 +21192,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
               top_separator: 1;
               display_options: displayAsSummation;
               locked: 1;
@@ -21556,7 +21556,7 @@ model INGSCG3 uses BaseModel
             }
           }
         }
-        variable Q_Map09_Hulpvariabelen
+        variable Q_MAP09_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -21566,11 +21566,11 @@ model INGSCG3 uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map09_REQUIREDVARS
+          variable Q_MAP09_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map09, Q_Map09_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -21579,11 +21579,11 @@ model INGSCG3 uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map09_ENTEREDREQUIREDVARS
+          variable Q_MAP09_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map09, Q_Map09_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -21597,7 +21597,7 @@ model INGSCG3 uses BaseModel
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(Score2ResultTekst&"\r\n\r\n"&scParMinScoreTotaal[1]&"\r\n\r\n"&Q_Restricties[1]&"\r\n\r\n"&Q_WARNING_GLOBAL[1]);
+        formula: EvaluateAsString(Score2ResultTekst&"\r\n\r\n"&scParMinScoreTotaal[1]&"\r\n\r\n"&Q_RESTRICTIES[1]&"\r\n\r\n"&Q_WARNING_GLOBAL[1]);
         data_options: unscalable;
         title: "Resultaat";
         top_blanklines: 1;
@@ -23461,7 +23461,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap302*wgParMap302Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
             top_blanklines: 1;
             locked: 1;
             visible: (wgParMap302[1]>=0);
@@ -23473,7 +23473,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23515,7 +23515,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap303*wgParMap303Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
             locked: 1;
             visible: (wgParMap303[1]>=0);
             options_title: locked;
@@ -23526,7 +23526,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23568,7 +23568,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap601*wgParMap601Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
             locked: 1;
             visible: (wgParMap601[1]>=0);
             options_title: locked;
@@ -23579,7 +23579,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23621,7 +23621,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap402*wgParMap402Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
             locked: 1;
             visible: (wgParMap402[1]>=0);
             options_title: locked;
@@ -23632,7 +23632,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23674,7 +23674,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap501*wgParMap501Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
             locked: 1;
             visible: (wgParMap501[1]>=0);
             options_title: locked;
@@ -23685,7 +23685,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23780,7 +23780,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap602*wgParMap602Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
             locked: 1;
             visible: (wgParMap602[1]>=0);
             options_title: locked;
@@ -23791,7 +23791,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -23833,7 +23833,7 @@ model INGSCG3 uses BaseModel
             formula: scParMap603*wgParMap603Perc;
             data_options: saveCalculatedValue,unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
             locked: 1;
             visible: (wgParMap603[1]>=0);
             options_title: locked;
@@ -23844,7 +23844,7 @@ model INGSCG3 uses BaseModel
               frequency: document;
               data_options: unscalable;
               fixed_decimals: 1;
-              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+              title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
               top_blanklines: 1;
               locked: 1;
               visible: 1;
@@ -24035,7 +24035,7 @@ model INGSCG3 uses BaseModel
           formula: ptRating+ptBestaandeKlant+ptHuisbankier+ptStarter+ptRatingControle1+ptRatingControle2+ptStarterPrognose1+ptStarterPrognose2+ptStarterPrognose3;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -24536,7 +24536,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF02));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -24712,7 +24712,7 @@ model INGSCG3 uses BaseModel
           formula: ptVerdienmodelZDV1+ptVerdienmodelZDV2+ptTyperingKlant+ptIsCyclisch+ptIsKapitaalintensief+ptIsOnderdeelKeten+ptIsVoorraadHoudend+ptAantalKlantSectoren+ptSpreidingAandachtsgebieden+ptDeelOmzetRegulier+ptSchaalEnSpreiding+ptLeeftijdEigenGeb+ptLeeftijdPachtGeb+ptOmvangObvMelkvee+ptOmvangObvOppervlakte+ptOmvangTypering+ptBedrijfTypering+ptDeelGrondInEigendom+ptOuderdomMelkveestal+ptOuderdomEigenOpslag+ptIsOGinEigendom+ptIsVastgoedBelegging+ptLocatieOG+ptIsDagAttractie+ptIsGesubsidieerd+ptIsAfhvanWeerSeizoen+ptProjectOntwikkeling+ptTypeBouwBedrijf;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -26236,7 +26236,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map03_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP03_PARAGRAAF03));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -26659,7 +26659,7 @@ model INGSCG3 uses BaseModel
           formula: ptDekkingsgraad+ptIsRCLimietInLijn+ptIsRCLimietTovWeekOmzet+ptIsKredietBehoefteOnderbouwd+ptRestLooptijdConformBeleid+ptFosfaatrechtenAangekocht;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -26991,7 +26991,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF02));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -27128,7 +27128,7 @@ model INGSCG3 uses BaseModel
           formula: ptDeriskingVr1+ptDeriskingVr2+ptGLCfiataanwezig;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf999));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF999));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -27299,7 +27299,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map04_Paragraaf999));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP04_PARAGRAAF999));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -27395,7 +27395,7 @@ model INGSCG3 uses BaseModel
           formula: ptDuurOverstanden+ptSomOverstand+ptLimietGebruik+ptPassendRekeningVerloop;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -27623,7 +27623,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map05_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP05_PARAGRAAF01));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -29715,7 +29715,7 @@ model INGSCG3 uses BaseModel
           formula: ptDominanteSectorMarkt+ptSpreidingAfzetMarkt+ptMarktaandeel+ptToetredingsdrempel+ptOrderportefeuilleOordeel+ptOrderportefeuilleMut+ptRecenteBrutoMargeMut+ptSpreidingLeveranciers+ptGrondstoffenPrijsontwikkeling+ptEigendomsvoorbehoud+ptVoorraadHoudend+ptStrategieVisieManagement+ptRendementInternetActiviteiten+ptGebruikVreemdeValuta+ptVestigingsOnderzoek+ptParkeergelegenheid+ptVestigingsOnderzoekDoor+ptFoodSpecAssortiment+ptBevoorschottingBinnenPerc+ptLTVPercentage+ptGroeiEnPrijsStrategie+ptDoorberekeningBrandstof+ptUitbesteedWerk+ptMutatieEbitOmzet+ptWarehouseVerhuurDerden+ptOmvangKantoor+ptSpecialismesKantoor+ptArbeidsproductiviteit+ptLeeftijdsopbouwPersoneel+ptAandeelDigitaleAanlevering+ptAantalAktesPerNotaris+ptInternationaalNetwerk+ptDeelOudeDebiteuren+ptAandeelB2B+ptDeelProvisieSchadeVerz+ptProvisieOmzet+ptAandeelVariabeleKosten+ptAfzetMelkBestemming+ptAfzetHoofdgewas+ptMestverwerking+ptVoorzieningenDierwelzijn+ptAfzetstrategie+ptMelkquotumVersusCapaciteit+ptVergunningenAanwezig+ptOndernemingsplanOpgesteld+ptBoekingscentrale+ptEigenWebsite+ptBeoordelingZoover+ptBeoordelingTripadvisor+ptFlexibeleHuur+ptOnderhandenwerkVerlies+ptOnderhandenwerkDekking;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -32535,7 +32535,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf01));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF01));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -33270,7 +33270,7 @@ model INGSCG3 uses BaseModel
           formula: ptDaadkrachtManagement+ptPrognoseManagementOordeel+ptOrderRapportFreq+ptWinstRapportFreq+ptVoorNaCalculatieOordeel+ptEfficiencyMutatie+ptContinuiteitMgt+ptAantalJaarMgt+ptSparringPartner+ptLeeftijdPartners+ptPartnersMedewerkersRatio+ptNieuweMedia+ptCertificeringenVakbekwaamheid+ptStrategischeKeuzes+ptBrancheOrganisatie+ptSectorEvaringAdviseur+ptContinuiteitBedrijf+ptDeelNetwerk+ptKWINPrijsinformatie;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -34308,7 +34308,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf02));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF02));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -34614,7 +34614,7 @@ model INGSCG3 uses BaseModel
           formula: ptFinKrachtAandeelh+ptDeelVanGroep+ptGroepCJMO+ptGroepEBITDA+ptCommitmentAandeelh+ptInternationaalRisico+ptBuitenlandseEntiteiten+ptZekerhedenDerden+ptVerplichtingenDeeln+ptBorgstellingHoogte;
           data_options: saveCalculatedValue,unscalable;
           fixed_decimals: 1;
-          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+          title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
           locked: 1;
           visible: 1;
           options_title: locked;
@@ -35166,7 +35166,7 @@ model INGSCG3 uses BaseModel
             frequency: document;
             data_options: unscalable;
             fixed_decimals: 1;
-            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_Map06_Paragraaf03));
+            title: EvaluateAsString("Paragraaf: "&GetTitle(Q_MAP06_PARAGRAAF03));
             top_separator: 1;
             display_options: displayAsSummation;
             locked: 1;
@@ -39673,11 +39673,11 @@ model INGSCG3 uses BaseModel
           options: locked;
         }
       }
-      variable Q_Restricties
+      variable Q_RESTRICTIES
       {
         datatype: string;
         frequency: document;
-        formula: EvaluateAsString(If(Length(&Q_RestrictiesCombi[1])>0,&"\r\n\r\nDe volgende variabelen zijn niet correct gevuld:"&Q_RestrictiesCombi,""));
+        formula: EvaluateAsString(If(Length(&Q_RESTRICTIESCOMBI[1])>0,&"\r\n\r\nDe volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESCOMBI,""));
         data_options: unscalable;
         displaytype: memo;
         title: "Restricties";
@@ -39685,7 +39685,7 @@ model INGSCG3 uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_Restrictie01
+        variable Q_RESTRICTIE01
         {
           datatype: string;
           frequency: document;
@@ -39698,7 +39698,7 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Restrictie02
+        variable Q_RESTRICTIE02
         {
           datatype: string;
           frequency: document;
@@ -39710,11 +39710,11 @@ model INGSCG3 uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_RestrictiesCombi
+        variable Q_RESTRICTIESCOMBI
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(Q_Restrictie01&Q_Restrictie02);
+          formula: EvaluateAsString(Q_RESTRICTIE01&Q_RESTRICTIE02);
           data_options: unscalable;
           displaytype: memo;
           title: "Restricties tekst";

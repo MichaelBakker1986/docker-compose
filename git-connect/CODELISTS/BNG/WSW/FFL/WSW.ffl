@@ -611,7 +611,7 @@ model WSW uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1) or (Q_Map02[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      formula: If( (Q_MAP01[1]=1) or (Q_MAP02[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
       data_options: unscalable;
       displaytype: select;
       title: "WSW Ratio's";
@@ -620,11 +620,11 @@ model WSW uses BaseModel
       choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Cliëntgegevens";
@@ -634,7 +634,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -647,11 +647,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -659,7 +659,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -826,7 +826,7 @@ model WSW uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -836,11 +836,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -850,11 +850,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -863,11 +863,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_STATUS
+          variable Q_MAP01_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map01;
+            formula: Q_MAP01;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -879,11 +879,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map02
+      variable Q_MAP02
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS);
+        formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Invoerbladen";
@@ -892,7 +892,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map02_WARNING
+        variable Q_MAP02_WARNING
         {
           datatype: string;
           frequency: document;
@@ -905,11 +905,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_INFO
+        variable Q_MAP02_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 2";
           locked: 1;
@@ -917,7 +917,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_VALIDATION
+        variable Q_MAP02_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -1547,7 +1547,7 @@ model WSW uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map02_Hulpvariabelen
+        variable Q_MAP02_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1557,11 +1557,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map02_REQUIREDVARS
+          variable Q_MAP02_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (2)";
@@ -1571,11 +1571,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_ENTEREDREQUIREDVARS
+          variable Q_MAP02_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (2)";
@@ -1584,11 +1584,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_STATUS
+          variable Q_MAP02_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map02;
+            formula: Q_MAP02;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -1600,11 +1600,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map03
+      variable Q_MAP03
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map03_ENTEREDREQUIREDVARS=Q_Map03_REQUIREDVARS);
+        formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Berekening ICR";
@@ -1613,7 +1613,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map03_WARNING
+        variable Q_MAP03_WARNING
         {
           datatype: string;
           frequency: document;
@@ -1626,11 +1626,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_INFO
+        variable Q_MAP03_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP03[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 3";
           locked: 1;
@@ -1638,7 +1638,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map03_VALIDATION
+        variable Q_MAP03_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -1902,7 +1902,7 @@ model WSW uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map03_Hulpvariabelen
+        variable Q_MAP03_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1912,11 +1912,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map03_REQUIREDVARS
+          variable Q_MAP03_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -1926,11 +1926,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_ENTEREDREQUIREDVARS
+          variable Q_MAP03_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map03, Q_Map03_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -1939,11 +1939,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map03_STATUS
+          variable Q_MAP03_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map03;
+            formula: Q_MAP03;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -1955,11 +1955,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map04
+      variable Q_MAP04
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map04_ENTEREDREQUIREDVARS=Q_Map04_REQUIREDVARS);
+        formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Berekening DSCR";
@@ -1968,7 +1968,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map04_WARNING
+        variable Q_MAP04_WARNING
         {
           datatype: string;
           frequency: document;
@@ -1981,11 +1981,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_INFO
+        variable Q_MAP04_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP04[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 4";
           locked: 1;
@@ -1993,7 +1993,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map04_VALIDATION
+        variable Q_MAP04_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -2998,7 +2998,7 @@ model WSW uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map04_Hulpvariabelen
+        variable Q_MAP04_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3008,11 +3008,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map04_REQUIREDVARS
+          variable Q_MAP04_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -3022,11 +3022,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_ENTEREDREQUIREDVARS
+          variable Q_MAP04_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map04, Q_Map04_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -3035,11 +3035,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map04_STATUS
+          variable Q_MAP04_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map04;
+            formula: Q_MAP04;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -3051,11 +3051,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map05
+      variable Q_MAP05
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map05_ENTEREDREQUIREDVARS=Q_Map05_REQUIREDVARS);
+        formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Berekening Loan to Value";
@@ -3064,7 +3064,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map05_WARNING
+        variable Q_MAP05_WARNING
         {
           datatype: string;
           frequency: document;
@@ -3077,11 +3077,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_INFO
+        variable Q_MAP05_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP05[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 5";
           locked: 1;
@@ -3089,7 +3089,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_VALIDATION
+        variable Q_MAP05_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -3446,7 +3446,7 @@ model WSW uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map05_Hulpvariabelen
+        variable Q_MAP05_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3456,11 +3456,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map05_REQUIREDVARS
+          variable Q_MAP05_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -3470,11 +3470,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_ENTEREDREQUIREDVARS
+          variable Q_MAP05_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map05, Q_Map05_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -3483,11 +3483,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map05_STATUS
+          variable Q_MAP05_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map05;
+            formula: Q_MAP05;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -3499,11 +3499,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map06
+      variable Q_MAP06
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map06_ENTEREDREQUIREDVARS=Q_Map06_REQUIREDVARS);
+        formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Berekening Solvabiliteit";
@@ -3512,7 +3512,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map06_WARNING
+        variable Q_MAP06_WARNING
         {
           datatype: string;
           frequency: document;
@@ -3525,11 +3525,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_INFO
+        variable Q_MAP06_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP06[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 6";
           locked: 1;
@@ -3537,7 +3537,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map06_VALIDATION
+        variable Q_MAP06_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -3983,7 +3983,7 @@ model WSW uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map06_Hulpvariabelen
+        variable Q_MAP06_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3993,11 +3993,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map06_REQUIREDVARS
+          variable Q_MAP06_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -4007,11 +4007,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_ENTEREDREQUIREDVARS
+          variable Q_MAP06_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -4020,11 +4020,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map06_STATUS
+          variable Q_MAP06_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map06;
+            formula: Q_MAP06;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -4036,11 +4036,11 @@ model WSW uses BaseModel
           }
         }
       }
-      variable Q_Map07
+      variable Q_MAP07
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map07_ENTEREDREQUIREDVARS=Q_Map07_REQUIREDVARS);
+        formula: (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Berekening Dekkingsratio";
@@ -4049,7 +4049,7 @@ model WSW uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map07_WARNING
+        variable Q_MAP07_WARNING
         {
           datatype: string;
           frequency: document;
@@ -4062,11 +4062,11 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_INFO
+        variable Q_MAP07_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP07[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 7";
           locked: 1;
@@ -4074,7 +4074,7 @@ model WSW uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_VALIDATION
+        variable Q_MAP07_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -4162,7 +4162,7 @@ model WSW uses BaseModel
             options: locked;
           }
         }
-        variable Q_Map07_Hulpvariabelen
+        variable Q_MAP07_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -4172,11 +4172,11 @@ model WSW uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map07_REQUIREDVARS
+          variable Q_MAP07_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (3)";
@@ -4186,11 +4186,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_ENTEREDREQUIREDVARS
+          variable Q_MAP07_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map07, Q_Map07_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (3)";
@@ -4199,11 +4199,11 @@ model WSW uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map07_STATUS
+          variable Q_MAP07_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map07;
+            formula: Q_MAP07;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -4227,7 +4227,7 @@ model WSW uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;

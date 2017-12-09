@@ -364,7 +364,7 @@ model VHV uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If( (Q_Map01[1]=1) or (Q_Map02[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
+      formula: If( (Q_MAP01[1]=1) or (Q_MAP02[1]=1) or (Length(&Q_WARNING_GLOBALTXT[1])>0) , 1, 0);
       data_options: unscalable;
       displaytype: select;
       title: "VHV Tabellen";
@@ -373,11 +373,11 @@ model VHV uses BaseModel
       choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Cliëntgegevens";
@@ -387,7 +387,7 @@ model VHV uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -400,11 +400,11 @@ model VHV uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -412,7 +412,7 @@ model VHV uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -567,7 +567,7 @@ model VHV uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Map01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -577,11 +577,11 @@ model VHV uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -591,11 +591,11 @@ model VHV uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -604,11 +604,11 @@ model VHV uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_STATUS
+          variable Q_MAP01_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map01;
+            formula: Q_MAP01;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -620,11 +620,11 @@ model VHV uses BaseModel
           }
         }
       }
-      variable Q_Map02
+      variable Q_MAP02
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map02_ENTEREDREQUIREDVARS=Q_Map02_REQUIREDVARS);
+        formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "VHV Tabellen";
@@ -634,7 +634,7 @@ model VHV uses BaseModel
         choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
         options_title: locked;
         options: locked;
-        variable Q_Map02_WARNING
+        variable Q_MAP02_WARNING
         {
           datatype: string;
           frequency: document;
@@ -647,11 +647,11 @@ model VHV uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_INFO
+        variable Q_MAP02_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
+          formula: EvaluateAsString(If(Q_MAP02[1]=0,&"Nog niet alle verplichte vragen zijn ingevuld.",&""));
           data_options: unscalable;
           title: "Info bij stap 2";
           locked: 1;
@@ -659,7 +659,7 @@ model VHV uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_VALIDATION
+        variable Q_MAP02_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -1476,7 +1476,7 @@ model VHV uses BaseModel
             options_trend: locked;
           }
         }
-        variable Q_Map02_Hulpvariabelen
+        variable Q_MAP02_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1486,11 +1486,11 @@ model VHV uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map02_REQUIREDVARS
+          variable Q_MAP02_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (2)";
@@ -1500,11 +1500,11 @@ model VHV uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_ENTEREDREQUIREDVARS
+          variable Q_MAP02_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map02, Q_Map02_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (2)";
@@ -1513,11 +1513,11 @@ model VHV uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map02_STATUS
+          variable Q_MAP02_STATUS
           {
             datatype: number;
             frequency: document;
-            formula: Q_Map02;
+            formula: Q_MAP02;
             data_options: unscalable;
             displaytype: select;
             title: "Status van de stap";
@@ -1541,7 +1541,7 @@ model VHV uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;

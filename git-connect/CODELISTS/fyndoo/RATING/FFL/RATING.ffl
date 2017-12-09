@@ -372,11 +372,11 @@ model RATING uses BaseModel
       choices: "0:Incomplete filled.|1:Complete filled.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: saveCalculatedValue,unscalable;
         displaytype: select;
         title: "Rating";
@@ -387,7 +387,7 @@ model RATING uses BaseModel
         choices: "0:Incomplete filled.|1:Complete filled.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -400,11 +400,11 @@ model RATING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -412,7 +412,7 @@ model RATING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -423,7 +423,7 @@ model RATING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_Paragraaf02
+        variable Q_MAP01_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -462,7 +462,7 @@ model RATING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_Paragraaf02Sub3 refers to krUraRatingKlasse
+          variable Q_MAP01_PARAGRAAF02SUB3 refers to krUraRatingKlasse
           {
             datatype: string;
             frequency: column;
@@ -1164,7 +1164,7 @@ model RATING uses BaseModel
             options_title: locked;
             options_notrend: locked;
             options_trend: locked;
-            variable Q_Map01_Hulpvariabelen
+            variable Q_MAP01_HULPVARIABELEN
             {
               datatype: number;
               frequency: document;
@@ -1175,11 +1175,11 @@ model RATING uses BaseModel
               visible: 0;
               options_title: locked, invisible;
               options: locked, invisible;
-              variable Q_Map01_REQUIREDVARS
+              variable Q_MAP01_REQUIREDVARS
               {
                 datatype: number;
                 frequency: document;
-                formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X));
+                formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_REQUIREDVARS),InputRequired(X));
                 displaytype: currency;
                 title: "Aantal verplichte velden (3)";
                 top_blanklines: 1;
@@ -1188,11 +1188,11 @@ model RATING uses BaseModel
                 options_title: locked;
                 options: locked;
               }
-              variable Q_Map01_ENTEREDREQUIREDVARS
+              variable Q_MAP01_ENTEREDREQUIREDVARS
               {
                 datatype: number;
                 frequency: document;
-                formula: Count(X,SelectDescendants(Q_Map01, Q_Map01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
+                formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_REQUIREDVARS),InputRequired(X) and DataAvailable(X));
                 displaytype: currency;
                 title: "Aantal ingevulde verplichte velden (3)";
                 locked: 1;
@@ -1282,7 +1282,7 @@ model RATING uses BaseModel
             visible: 1;
             options_title: locked;
           }
-          variable Q_ModelVersion
+          variable Q_MODELVERSION
           {
             datatype: string;
             frequency: document;
@@ -1294,7 +1294,7 @@ model RATING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_ModelType
+          variable Q_MODELTYPE
           {
             datatype: string;
             frequency: document;
@@ -1306,7 +1306,7 @@ model RATING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MatrixVersion
+          variable Q_MATRIXVERSION
           {
             datatype: string;
             frequency: document;
@@ -1379,11 +1379,11 @@ model RATING uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_Restricties
+        variable Q_RESTRICTIES
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Length(&Q_RestrictiesCombi[1])>0,&"[BR][/BR]Please note: "&Q_RestrictiesCombi,""));
+          formula: EvaluateAsString(If(Length(&Q_RESTRICTIESCOMBI[1])>0,&"[BR][/BR]Please note: "&Q_RESTRICTIESCOMBI,""));
           data_options: unscalable;
           displaytype: memo;
           title: "Restricties";
@@ -1391,7 +1391,7 @@ model RATING uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_RestrictiesCombi
+          variable Q_RESTRICTIESCOMBI
           {
             datatype: string;
             frequency: document;

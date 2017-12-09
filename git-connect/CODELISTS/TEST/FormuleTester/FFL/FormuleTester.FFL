@@ -3951,7 +3951,7 @@ model FormuleTester uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_Map05_ZoekNumber
+        variable Q_MAP05_ZOEKNUMBER
         {
           datatype: number;
           frequency: document;
@@ -3963,11 +3963,11 @@ model FormuleTester uses BaseModel
           visible: 1;
           options_title: locked;
         }
-        variable Q_Map05_MatrixTest01
+        variable Q_MAP05_MATRIXTEST01
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(MatrixLookup("MatrixLookupTest.xls",Q_Map05_ZoekNumber[1],1,1));
+          formula: EvaluateAsString(MatrixLookup("MatrixLookupTest.xls",Q_MAP05_ZOEKNUMBER[1],1,1));
           data_options: unscalable;
           title: "MatrixLookup ZoekenNumeriek";
           locked: 1;
@@ -3975,7 +3975,7 @@ model FormuleTester uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map05_ZoekString
+        variable Q_MAP05_ZOEKSTRING
         {
           datatype: string;
           frequency: document;
@@ -3985,11 +3985,11 @@ model FormuleTester uses BaseModel
           visible: 1;
           options_title: locked;
         }
-        variable Q_Map05_MatrixTest02
+        variable Q_MAP05_MATRIXTEST02
         {
           datatype: number;
           frequency: document;
-          formula: MatrixLookup("MatrixLookupTest.xls",&Q_Map05_ZoekString[1],"twee",1);
+          formula: MatrixLookup("MatrixLookupTest.xls",&Q_MAP05_ZOEKSTRING[1],"twee",1);
           data_options: unscalable;
           fixed_decimals: 0;
           title: "MatrixLookup ZoekenAlfanumeriek";

@@ -8043,7 +8043,7 @@ model BT11 uses BaseModel
               }
             }
           }
-          variable Q_STEP01_Hulpvariabelen
+          variable Q_STEP01_HULPVARIABELEN
           {
             datatype: number;
             frequency: document;
@@ -8057,7 +8057,7 @@ model BT11 uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: Count(X,SelectDescendants(Q_STEP01, Q_STEP01_Hulpvariabelen),InputRequired(X));
+              formula: Count(X,SelectDescendants(Q_STEP01, Q_STEP01_HULPVARIABELEN),InputRequired(X));
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Aantal verplichte velden";
@@ -8071,7 +8071,7 @@ model BT11 uses BaseModel
             {
               datatype: number;
               frequency: document;
-              formula: Count(X,SelectDescendants(Q_STEP01, Q_STEP01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+              formula: Count(X,SelectDescendants(Q_STEP01, Q_STEP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
               data_options: unscalable;
               fixed_decimals: 0;
               title: "Aantal ingevulde verplichte velden";

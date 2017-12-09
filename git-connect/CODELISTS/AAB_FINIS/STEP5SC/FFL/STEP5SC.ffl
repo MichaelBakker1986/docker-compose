@@ -327,7 +327,7 @@ model STEP5SC uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: Q_Map01[1];
+      formula: Q_MAP01[1];
       data_options: unscalable;
       displaytype: select;
       title: "ABN Amro Bank Company Analysis and Company Risk (v0.7)";
@@ -337,7 +337,7 @@ model STEP5SC uses BaseModel
       choices: "0:Complete|1:Incomplete";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;

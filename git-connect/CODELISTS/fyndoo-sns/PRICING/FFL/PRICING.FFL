@@ -363,7 +363,7 @@ model PRICING uses BaseModel
     {
       datatype: number;
       frequency: document;
-      formula: If(((Q_Map01[1]=1) and (Q_Map02[1]=1) and (Q_Map07[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
+      formula: If(((Q_MAP01[1]=1) and (Q_MAP02[1]=1) and (Q_MAP07[1]=1)) or (Length(&scKnockoutsCombi[1])>0),1,0);
       data_options: unscalable;
       displaytype: select;
       title: "Loan Pricing Tool";
@@ -373,11 +373,11 @@ model PRICING uses BaseModel
       choices: "0:Complete.|1:Not complete.";
       options_title: locked;
       options: locked;
-      variable Q_Map01
+      variable Q_MAP01
       {
         datatype: number;
         frequency: document;
-        formula: (Q_Map01_ENTEREDREQUIREDVARS=Q_Map01_REQUIREDVARS);
+        formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
         data_options: unscalable;
         displaytype: select;
         title: "Rating";
@@ -387,7 +387,7 @@ model PRICING uses BaseModel
         choices: "0:Complete.|1:Not complete.";
         options_title: locked;
         options: locked;
-        variable Q_Map01_WARNING
+        variable Q_MAP01_WARNING
         {
           datatype: string;
           frequency: document;
@@ -400,11 +400,11 @@ model PRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_INFO
+        variable Q_MAP01_INFO
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_Map01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
+          formula: EvaluateAsString(If(Q_MAP01[1]=0,&"not all required questions in this step are completed. [BR][/BR]Mandatory questions are marked with a *.",&""));
           data_options: unscalable;
           title: "Info bij stap";
           locked: 1;
@@ -412,7 +412,7 @@ model PRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01_VALIDATION
+        variable Q_MAP01_VALIDATION
         {
           datatype: string;
           frequency: document;
@@ -423,7 +423,7 @@ model PRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map01A_Algemeen
+        variable Q_MAP01A_ALGEMEEN
         {
           datatype: number;
           frequency: document;
@@ -433,7 +433,7 @@ model PRICING uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_Map01A_AlgemeenSub1 refers to Q_ModelVersion
+          variable Q_MAP01A_ALGEMEENSUB1 refers to Q_MODELVERSION
           {
             datatype: string;
             frequency: document;
@@ -445,7 +445,7 @@ model PRICING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01A_AlgemeenSub2 refers to Q_MatrixVersion
+          variable Q_MAP01A_ALGEMEENSUB2 refers to Q_MATRIXVERSION
           {
             datatype: string;
             frequency: document;
@@ -479,7 +479,7 @@ model PRICING uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MAP01_Paragraaf1
+        variable Q_MAP01_PARAGRAAF1
         {
           datatype: number;
           frequency: document;
@@ -489,7 +489,7 @@ model PRICING uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked;
-          variable Q_MAP01_Paragraaf1Sub1 refers to IMPORT_Rating
+          variable Q_MAP01_PARAGRAAF1SUB1 refers to IMPORT_Rating
           {
             datatype: number;
             frequency: document;
@@ -504,7 +504,7 @@ model PRICING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_MAP01_Paragraaf1Sub2 refers to IMPORT_PD
+          variable Q_MAP01_PARAGRAAF1SUB2 refers to IMPORT_PD
           {
             datatype: number;
             frequency: document;
@@ -519,7 +519,7 @@ model PRICING uses BaseModel
             options: locked;
           }
         }
-        variable Q_MAP01_Paragraaf2
+        variable Q_MAP01_PARAGRAAF2
         {
           datatype: number;
           frequency: document;
@@ -568,7 +568,7 @@ model PRICING uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MAP01_Hulpvariabelen
+        variable Q_MAP01_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -578,11 +578,11 @@ model PRICING uses BaseModel
           visible: 0;
           options_title: locked, invisible;
           options: locked, invisible;
-          variable Q_Map01_REQUIREDVARS
+          variable Q_MAP01_REQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -591,11 +591,11 @@ model PRICING uses BaseModel
             options_title: locked;
             options: locked;
           }
-          variable Q_Map01_ENTEREDREQUIREDVARS
+          variable Q_MAP01_ENTEREDREQUIREDVARS
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_Map01, Q_MAP01_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -605,7 +605,7 @@ model PRICING uses BaseModel
           }
         }
       }
-      variable Q_Map02
+      variable Q_MAP02
       {
         datatype: number;
         frequency: document;
@@ -654,7 +654,7 @@ model PRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map02_Paragraaf01
+        variable Q_MAP02_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -945,7 +945,7 @@ model PRICING uses BaseModel
             }
           }
         }
-        variable Q_Map02_Paragraaf02
+        variable Q_MAP02_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -1103,7 +1103,7 @@ model PRICING uses BaseModel
               options: locked;
             }
           }
-          variable Q_Map02_Paragraaf02Sub2 refers to CollateralNotAllocatedTotal
+          variable Q_MAP02_PARAGRAAF02SUB2 refers to CollateralNotAllocatedTotal
           {
             datatype: number;
             frequency: document;
@@ -1119,7 +1119,7 @@ model PRICING uses BaseModel
             options: locked;
           }
         }
-        variable Q_MAP02_Hulpvariabelen
+        variable Q_MAP02_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1156,7 +1156,7 @@ model PRICING uses BaseModel
           }
         }
       }
-      variable Q_Map07
+      variable Q_MAP07
       {
         datatype: number;
         frequency: document;
@@ -1205,7 +1205,7 @@ model PRICING uses BaseModel
           options_title: locked;
           options: locked;
         }
-        variable Q_Map07_Paragraaf01
+        variable Q_MAP07_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -1395,7 +1395,7 @@ model PRICING uses BaseModel
             }
           }
         }
-        variable Q_Map07_Paragraaf02
+        variable Q_MAP07_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -1699,7 +1699,7 @@ model PRICING uses BaseModel
             }
           }
         }
-        variable Q_Map07_Paragraaf05
+        variable Q_MAP07_PARAGRAAF05
         {
           datatype: number;
           frequency: document;
@@ -1756,7 +1756,7 @@ model PRICING uses BaseModel
             }
           }
         }
-        variable Q_MAP07_Hulpvariabelen
+        variable Q_MAP07_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -1770,7 +1770,7 @@ model PRICING uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -1783,7 +1783,7 @@ model PRICING uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_Hulpvariabelen),InputRequired(X) and DataAvailable(X));
+            formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;
@@ -1793,7 +1793,7 @@ model PRICING uses BaseModel
           }
         }
       }
-      variable Q_Map00
+      variable Q_MAP00
       {
         datatype: number;
         frequency: document;
@@ -1881,7 +1881,7 @@ model PRICING uses BaseModel
             options: locked;
           }
         }
-        variable Q_MAP00_Paragraaf01
+        variable Q_MAP00_PARAGRAAF01
         {
           datatype: number;
           frequency: document;
@@ -2069,7 +2069,7 @@ model PRICING uses BaseModel
             options: locked;
           }
         }
-        variable Q_MAP00_Paragraaf02
+        variable Q_MAP00_PARAGRAAF02
         {
           datatype: number;
           frequency: document;
@@ -3773,7 +3773,7 @@ model PRICING uses BaseModel
             visible: 1;
             options_title: locked;
           }
-          variable Q_MatrixVersion_FIXED
+          variable Q_MATRIXVERSION_FIXED
           {
             datatype: string;
             frequency: document;
@@ -3782,7 +3782,7 @@ model PRICING uses BaseModel
             visible: 1;
             options_title: locked;
           }
-          variable Q_ModelVersion_FIXED
+          variable Q_MODELVERSION_FIXED
           {
             datatype: string;
             frequency: document;
@@ -3792,7 +3792,7 @@ model PRICING uses BaseModel
             options_title: locked;
           }
         }
-        variable Q_MAP00_Hulpvariabelen
+        variable Q_MAP00_HULPVARIABELEN
         {
           datatype: number;
           frequency: document;
@@ -3840,7 +3840,7 @@ model PRICING uses BaseModel
         visible: 1;
         options_title: locked;
         options: locked;
-        variable Q_RESULTSub1 refers to Q_RESULT
+        variable Q_RESULTSUB1 refers to Q_RESULT
         {
           datatype: string;
           frequency: document;
@@ -3871,7 +3871,7 @@ model PRICING uses BaseModel
         datatype: number;
         frequency: document;
         data_options: unscalable;
-        afterinput: (SetValue(PD_FIXED, PD, true)),(SetValue(IMPORT_PD_FIXED , IMPORT_PD, true)),(SetValue(Facility_tpPD_FIXED, Facility_tpPD, true)),(SetValue(Facility_tpProductInterestRateFunding_FIXED, Facility_tpProductInterestRateFunding, true)),(SetValue(ConfidenceLevel_FIXED, ConfidenceLevel, true)),(SetValue(Branch_FIXED, Branch, true)),(SetValue(LGDMaximum_FIXED, LGDMaximum, true)),(SetValue(LGDMinimum_FIXED, LGDMinimum, true)),(SetValue(HurdleRate_FIXED, HurdleRate, true)),(SetValue(RendementseisBank_FIXED, RendementseisBank, true)),(SetValue(Taxrate_FIXED, Taxrate, true)),(SetValue(ProcessCostsModelPercentage_FIXED, ProcessCostsModelPercentage, true)),(SetValue(DurationMaximumAverage_FIXED, DurationMaximumAverage, true)),(SetValue(MinimumPD_FIXED, MinimumPD, true)),(SetValue(MaxPD_FIXED, MaxPD, true)),(SetValue(Correlation_FIXED, Correlation, true)),(SetValue(Q_MatrixVersion_FIXED, Q_MatrixVersion, true)),(SetValue(Q_ModelVersion_FIXED, Q_ModelVersion, true)),(SetValue(CureRate_FIXED, CureRate, true)),(SetValue(UnsecuredRecoveryRate_FIXED, UnsecuredRecoveryRate, true)),(SetValue(IndirectCost_FIXED, IndirectCost, true)),(SetValue(AverageTimeDefault_FIXED, AverageTimeDefault, true)),(SetValue(AverageContractRate_FIXED, AverageContractRate, true));
+        afterinput: (SetValue(PD_FIXED, PD, true)),(SetValue(IMPORT_PD_FIXED , IMPORT_PD, true)),(SetValue(Facility_tpPD_FIXED, Facility_tpPD, true)),(SetValue(Facility_tpProductInterestRateFunding_FIXED, Facility_tpProductInterestRateFunding, true)),(SetValue(ConfidenceLevel_FIXED, ConfidenceLevel, true)),(SetValue(Branch_FIXED, Branch, true)),(SetValue(LGDMaximum_FIXED, LGDMaximum, true)),(SetValue(LGDMinimum_FIXED, LGDMinimum, true)),(SetValue(HurdleRate_FIXED, HurdleRate, true)),(SetValue(RendementseisBank_FIXED, RendementseisBank, true)),(SetValue(Taxrate_FIXED, Taxrate, true)),(SetValue(ProcessCostsModelPercentage_FIXED, ProcessCostsModelPercentage, true)),(SetValue(DurationMaximumAverage_FIXED, DurationMaximumAverage, true)),(SetValue(MinimumPD_FIXED, MinimumPD, true)),(SetValue(MaxPD_FIXED, MaxPD, true)),(SetValue(Correlation_FIXED, Correlation, true)),(SetValue(Q_MATRIXVERSION_FIXED, Q_MATRIXVERSION, true)),(SetValue(Q_MODELVERSION_FIXED, Q_MODELVERSION, true)),(SetValue(CureRate_FIXED, CureRate, true)),(SetValue(UnsecuredRecoveryRate_FIXED, UnsecuredRecoveryRate, true)),(SetValue(IndirectCost_FIXED, IndirectCost, true)),(SetValue(AverageTimeDefault_FIXED, AverageTimeDefault, true)),(SetValue(AverageContractRate_FIXED, AverageContractRate, true));
         displaytype: date;
         title: "Made final on:";
         visible: 1;
@@ -3916,7 +3916,7 @@ model PRICING uses BaseModel
         visible: 1;
         options_title: locked;
       }
-      variable Q_ModelVersion
+      variable Q_MODELVERSION
       {
         datatype: string;
         frequency: document;
@@ -3928,7 +3928,7 @@ model PRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_ModelType
+      variable Q_MODELTYPE
       {
         datatype: string;
         frequency: document;
@@ -3940,7 +3940,7 @@ model PRICING uses BaseModel
         options_title: locked;
         options: locked;
       }
-      variable Q_MatrixVersion
+      variable Q_MATRIXVERSION
       {
         datatype: string;
         frequency: document;

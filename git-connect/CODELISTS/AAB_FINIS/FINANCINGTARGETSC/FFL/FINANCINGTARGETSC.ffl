@@ -9,7 +9,7 @@ model FINANCINGTARGETSC uses BaseModel
 		{
 			datatype : number;
 			frequency : document;
-			formula_notrend : Q_Map01;
+			formula_notrend : Q_MAP01;
 			data_options : unscalable;
 			title : "ABN Amro Bank Customer purpose";
 			displaytype : select;
@@ -21,7 +21,7 @@ model FINANCINGTARGETSC uses BaseModel
 			options_title : locked;
 			options_notrend : locked;
 			options_trend : locked;
-			variable Q_Map01
+			variable Q_MAP01
 			{
 				datatype : number;
 				frequency : document;
@@ -175,7 +175,7 @@ model FINANCINGTARGETSC uses BaseModel
 					}
 				}
 			}
-			variable Q_Map02
+			variable Q_MAP02
 			{
 				datatype : number;
 				frequency : document;

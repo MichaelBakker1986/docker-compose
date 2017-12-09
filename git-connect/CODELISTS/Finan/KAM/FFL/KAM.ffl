@@ -2905,8 +2905,8 @@ model KAM uses BaseModel
 			options_title : locked;
 			options_notrend : locked;
 			options_trend : locked;
-			formula : Q_Map01 and Q_Map02 and Q_Map03 and Q_Map04 and Q_Map05 and Q_Map06 and Q_Map07 and Q_Map08;
-			variable Q_Map00
+			formula : Q_MAP01 and Q_MAP02 and Q_MAP03 and Q_MAP04 and Q_MAP05 and Q_MAP06 and Q_MAP07 and Q_MAP08;
+			variable Q_MAP00
 			{
 				bottom_separator : 0.0;
 				top_separator : 0.0;
@@ -2926,7 +2926,7 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map00_INFO
+				variable Q_MAP00_INFO
 				{
 					top_separator : 0.0;
 					bottom_blanklines : 0.0;
@@ -2974,7 +2974,7 @@ model KAM uses BaseModel
 				}
 			}
 
-			variable Q_Map01
+			variable Q_MAP01
 			{
 				bottom_separator : 0.0;
 				top_separator : 0.0;
@@ -2984,7 +2984,7 @@ model KAM uses BaseModel
 				fixed_decimals : - 1.0;
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map01), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP01), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Algemene inleiding";
 				displaytype : select;
@@ -2994,11 +2994,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map01_WARNING
+				variable Q_MAP01_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map01  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP01  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 1";
@@ -3037,7 +3037,7 @@ model KAM uses BaseModel
 					}
 				}
 			}
-			variable Q_Map02
+			variable Q_MAP02
 			{
 				bottom_separator : 0.0;
 				top_separator : 0.0;
@@ -3047,7 +3047,7 @@ model KAM uses BaseModel
 				fixed_decimals : - 1.0;
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map02), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP02), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Algemene gegevens";
 				displaytype : select;
@@ -3058,11 +3058,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map02_WARNING
+				variable Q_MAP02_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map02 = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties &
+					formula : EvaluateAsString (If (Q_MAP02 = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 1";
@@ -3484,11 +3484,11 @@ model KAM uses BaseModel
 					}
 				}
 			}
-			variable Q_Map03
+			variable Q_MAP03
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map03), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP03), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Profiel van de onderneming";
 				displaytype : select;
@@ -3500,11 +3500,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map03_WARNING
+				variable Q_MAP03_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map03  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP03  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 2";
@@ -4005,11 +4005,11 @@ model KAM uses BaseModel
 					}
 				}
 			}
-			variable Q_Map04
+			variable Q_MAP04
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map04), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP04), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Financieringsbehoefte";
 				displaytype : select;
@@ -4021,11 +4021,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map04_WARNING
+				variable Q_MAP04_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map04  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP04  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 3";
@@ -6195,11 +6195,11 @@ model KAM uses BaseModel
 					}
 				}
 			}
-			variable Q_Map05
+			variable Q_MAP05
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map05), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP05), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Financiële positie";
 				displaytype : select;
@@ -6209,11 +6209,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map05_WARNING
+				variable Q_MAP05_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map05  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP05  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 4";
@@ -7667,11 +7667,11 @@ model KAM uses BaseModel
 
 			}
 
-			variable Q_Map06
+			variable Q_MAP06
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map06), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP06), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Aansprakelijk vermogen en kengetallen";
 				displaytype : select;
@@ -7681,11 +7681,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map06_WARNING
+				variable Q_MAP06_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map06 = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP06 = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 6";
@@ -8316,11 +8316,11 @@ model KAM uses BaseModel
 				}
 		  }
 
-			variable Q_Map07
+			variable Q_MAP07
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map07), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP07), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Zekerheden";
 				hint :
@@ -8332,11 +8332,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map07_WARNING
+				variable Q_MAP07_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map07  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP07  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 5";
@@ -8503,11 +8503,11 @@ model KAM uses BaseModel
 					}
 				}
 			}
-			variable Q_Map08
+			variable Q_MAP08
 			{
 				datatype : number;
 				frequency : document;
-				formula : ForAll (X, SelectDescendants (Q_Map08), InputRequired (X) implies DataAvailable (X));
+				formula : ForAll (X, SelectDescendants (Q_MAP08), InputRequired (X) implies DataAvailable (X));
 				data_options : unscalable;
 				title : "Afronding en conclusie";
 				displaytype : select;
@@ -8517,11 +8517,11 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_Map08_WARNING
+				variable Q_MAP08_WARNING
 				{
 					datatype : string;
 					frequency : document;
-					formula : EvaluateAsString (If (Q_Map08  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
+					formula : EvaluateAsString (If (Q_MAP08  = 0.0, & "Nog niet alle vragen zijn beantwoord.", & "") & scRestricties  &
 					Q_WARNING_GLOBAL );
 					data_options : unscalable;
 					title : "Warning for folder 6";
@@ -8572,7 +8572,7 @@ model KAM uses BaseModel
 				options_title : locked;
 				options_notrend : locked;
 				options_trend : locked;
-				variable Q_RESULTSub1 refers to Q_RESULT
+				variable Q_RESULTSUB1 refers to Q_RESULT
 				{
 					title : "U bent klaar met het opstellen van uw kredietaanvraag. U kunt de rapportage nu downloaden en versturen naar uw financier.";
 
@@ -8699,7 +8699,7 @@ model KAM uses BaseModel
 				visible : 1.0;
 				options_title : locked;
 			}
-			variable Q_ModelVersion
+			variable Q_MODELVERSION
 			{
 				datatype : string;
 				frequency : document;
@@ -8712,7 +8712,7 @@ model KAM uses BaseModel
 				options_notrend : locked;
 				options_trend : locked;
 			}
-			variable Q_ModelType
+			variable Q_MODELTYPE
 			{
 				datatype : string;
 				frequency : document;
@@ -8725,7 +8725,7 @@ model KAM uses BaseModel
 				options_notrend : locked;
 				options_trend : locked;
 			}
-			variable Q_MatrixVersion
+			variable Q_MATRIXVERSION
 			{
 				datatype : string;
 				frequency : document;
