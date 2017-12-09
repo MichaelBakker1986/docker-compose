@@ -14,6 +14,8 @@ function ChangeManager(register) {
     this.currentVariableName = null
     this.error = null;
     this.warnings = []
+    this.changed = true;
+    this.lines = []
 }
 
 function extractName(line) {
@@ -38,37 +40,42 @@ ChangeManager.prototype.syntaxCheck = function(ffl) {
 ChangeManager.prototype.updateCursor = function(ffl, cursor) {
     this.warnings.length = 0;
     //will also update the register
-    this.syntaxCheck(ffl, cursor);
+    if (this.changed) {
+        console.info('Changed content in FFL, reparsing all data')
+        this.syntaxCheck(ffl, cursor);
+        this.lines = ffl.split('\n')
+        this.namedIndex = this.register.getIndex('name');
+        const idIndex = this.register.getIndex('i');
+        const names = this.register.getAll('name')
+        const doubles = {}
+        for (var i = 0; i < names.length; i++) {
+            if (doubles[names[i]]) {
+                this.warnings.push({
+                    pos: doubles[names[i]],
+                    message: "duplicate variablename" + names[i]
+                })
+                doubles[names[i]].push(i);
+            }
+            doubles[names[i]] = [i];
+        }
+    }
 
-    const lines = ffl.split('\n')
     let currentVariable;
     for (var i = cursor.row; i > 0; i--) {
-        if (lines[i].match(/(variable |tuple |root|model )/)) {
-            currentVariable = extractName(lines[i].trim())
+        if (this.lines[i].match(/(variable |tuple |root|model )/)) {
+            currentVariable = extractName(this.lines[i].trim())
             break;
         }
     }
-    const namedIndex = this.register.getIndex('name');
-    const idIndex = this.register.getIndex('i');
-    const names = this.register.getAll('name')
-    const doubles = {}
-    for (var i = 0; i < names.length; i++) {
-        if (doubles[names[i]]) {
-            this.warnings.push({
-                pos: doubles[names[i]],
-                message: "duplicate variablename" + names[i]
-            })
-            doubles[names[i]].push(i);
-        }
-        doubles[names[i]] = [i];
-    }
+    const changedCurrentVariable = this.currentVariableName != currentVariable;
     /* console.info(namedIndex)
      console.info(idIndex)
      console.info(doubles)*/
-    if (currentVariable && namedIndex[currentVariable]) {
+    if ((this.changed || changedCurrentVariable) && currentVariable && this.namedIndex[currentVariable]) {
         this.currentVariableName = currentVariable
         var variable = this.register.createInformationObject(this.currentVariableName, new RegisterToFFL(this.register).hiddenProperties)
         this.currentVariable = variable
     }
+    this.changed = false;
 }
 exports.ChangeManager = ChangeManager

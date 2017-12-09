@@ -14,7 +14,7 @@
     "body-parser": "^1.18.2",
     "child-process-promise": "^2.2.1",
     "cors": "^2.8.4",
-    "express": "^4.14.1",
+    "express": "^4.16.2",
     "express-prettify": "0.0.9",
     "ff-log": "^1.0.23",
     "glob": "^7.1.2",

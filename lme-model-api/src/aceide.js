@@ -7,8 +7,9 @@ const FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter'
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
-var Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
-var ChangeManager = require('../../lme-core/exchange_modules/ffl2/ChangeManager').ChangeManager
+const Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
+const DebugManager = require('../../lme-core/exchange_modules/ffl2/DebugManager').DebugManager
+const ChangeManager = require('../../lme-core/exchange_modules/ffl2/ChangeManager').ChangeManager
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -44,6 +45,7 @@ var newModelTemplate = "model $1 uses BaseModel\n" +
 const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
+    page: 'grid_bootstrap',
     user: {
         name: userID
     },
@@ -57,30 +59,28 @@ const user_session = {
 }
 
 
-angular.module('lmeapp', ['angular.filter']).controller('ideController', function($scope, $http) {
+angular.module('lmeapp', ['angular.filter']).controller('ideController', function($scope, $http, $timeout) {
+    $scope.session = user_session;
     let register = new Register();
+    const debugManager = new DebugManager();
     $scope.register = register;
     const AceEditor = require('./ace_editor_api').AceEditor
     const aceEditor = new AceEditor();
     const changeManager = new ChangeManager(register)
     $scope.fflmode = true;
     $scope.currentView = 'FFLModelEditorView';
-    $scope.session = user_session;
-    let currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+    $scope.fflType = '.ffl'
 
-    $http.get('resources/' + windowModelName + '.js').then(function(data) {
-        eval(data.data)
+    let currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+    $.getScript('resources/' + windowModelName + '.js', function(data, textStatus, jqxhr) {
         LME = LMEMETA.exportWebModel();
         $scope.LME_MODEL = LME.nodes
         $scope.name = LME.name
         $scope.LMEMETA = LMEMETA;
-
         LMEMETA.loadData(function(response) {
             $scope.$digest()
         })
-    }).catch(function(err) {
-        console.error("failed loading " + err);
-    });
+    })
     let sidebaropen = false;
     $scope.togglePropertiesSidebar = function(open) {
         if (sidebaropen && open) {
@@ -93,7 +93,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         $('#pagewrapper').toggleClass('control-sidebar-open')
         $('#sidebar').toggleClass('control-sidebar')
     }
-    $scope.fflType = '.ffl'
+
     $scope.dbModelConvert = function() {
         $scope.fflType = '.ffl2'
         Pace.track(function() {
@@ -142,7 +142,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                     $scope.saveFeedback = data.status == 'fail' ? 'Failed compiling model:' + data.reason : 'Done work..'
                     $scope.session.disablePreviewButton = false;
                     if (data.status == 'succes') {
-                        window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
+                        window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
                         $('#modal-success').modal('hide')
                     }
                 })
@@ -151,16 +151,63 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }
     $scope.goToPreviewPage = function() {
         $scope.session.disablePreviewButton = true;
-        window.open('/id/' + userID + '/grid_bootstrap.html#' + $scope.session.fflModelPath + '&' + userID)
+        window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
         $('#modal-success').modal('toggle');
     }
+
+    /**
+     * DEBUG FUNCTIONALITY, deep dive- pilot
+     */
+    /* $scope.breakpoints = []
+     aceEditor.aceEditor.on("guttermousedown", function(e) {
+         var target = e.domEvent.target;
+         if (target.className.indexOf("ace_gutter-cell") == -1)
+             return;
+         if (!aceEditor.aceEditor.isFocused())
+             return;
+         if (e.clientX > 25 + target.getBoundingClientRect().left)
+             return;
+
+         var row = e.getDocumentPosition().row;
+
+         e.editor.session.setBreakpoint(row);
+         $scope.$apply(function() {
+             $scope.breakpoints = aceEditor.aceEditor.session.$breakpoints;
+         })
+         e.stop();
+     })
+
+     function doStep() {
+         console.info(debugManager.getCurrentLine())
+         edit.gotoLine(debugManager.getCurrentLine())
+         debugManager.nextStep()
+     }
+
+     $scope.callDebug = function() {
+         const breaks = $scope.breakpoints
+         debugManager.initVariables(fflModel)
+         for (var i = 0; i < breaks.length; i++) {
+             var obj = breaks[i];
+             if (obj) {
+                 changeManager.updateCursor(fflModel, {row: i, col: 0})
+                 var property = aceEditor.aceEditor.session.getLine(i).trim().split(':')[0].trim()
+                 property = property == 'formula' ? 'value' : property
+             }
+         }
+         //once call is done, we reproduce the steps.
+         debugManager.active = true;
+         doStep()
+     }*/
+    /**
+     * END DEBUG FUNCTIONALITY
+     */
     $scope.sneakPreviewModel = function() {
         Pace.track(function() {
             $.post("preview", {
                 model: $scope.session.fflModelPath,
                 data: aceEditor.getValue()
             }, function(data) {
-                window.open('/id/' + userID + '/grid_bootstrap.html#' + data.link + '&' + userID);
+                window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + data.link + '&' + userID);
             });
         });
     }
@@ -195,7 +242,6 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
 
     $scope.update = function() {
         $scope.currentView = 'updateView';
-
         $http.get('/hasUpdates').then(function(data) {
             $scope.hasChanges = data.data.hasChanges;
             $scope.changes = data.data.changes;
@@ -211,6 +257,11 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     window.addEventListener("keydown", function(e) {
         if (e.ctrlKey && e.shiftKey) {
             return;
+        }
+        if (e.key == 'F5' && debugManager.active) {
+            console.info(e)
+            doStep()
+            e.preventDefault();
         }
         if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
             e.preventDefault();
@@ -267,9 +318,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         aceEditor.scrollTop()
     });
     $(".toggle-debug-btn").click(function(e) {
-
         var wholelinetxt = aceEditor.getCurrentLine()
-
         var customPosition = {
             row: aceEditor.getCursor().row,
             column: 500
@@ -333,10 +382,19 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     })
     $scope.activeVariable = [];
     $scope.schema = register.schema
+
+
     aceEditor.aceEditor.commands.on("afterExec", function(e) {
         if (e.command.name == 'golinedown') {
-        }
-        else if (e.command.name == 'golineup') {
+        } else if (e.command.name == 'golineup') {
+        } else if (e.command.name == 'gotoright') {
+        } else if (e.command.name == 'gotoleft') {
+        } else if (e.command.name == 'selectwordright') {
+        } else if (e.command.name == 'replace') {
+        } else if (e.command.name == 'find') {
+        } else if (e.command.name == 'selectwordleft') {
+        } else {
+            changeManager.changed = true;
         }
         console.info({name: e.command.name, args: e.args})
         changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
@@ -345,31 +403,30 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             $scope.error = changeManager.error
             $scope.activeVariable = changeManager.currentVariable
             $scope.togglePropertiesSidebar(true)
-            console.info('..' + changeManager.warnings.length)
             if (changeManager.warnings.length > 0) {
-                for (var i = 0; i < changeManager.warnings.length; i++) {
-                    var warning = changeManager.warnings[i];
-                    for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
-                        var obj = changeManager.warnings[i].pos[j];
-                        annotations.push({
-                            row: fflModel.substring(0, obj.char).split('\n').length,
-                            column: 0,
-                            text: warning.message, // Or the Json reply from the parser
-                            type: 'error' // also warning and information
-                        })
-                    }
-                }
-
+                console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
             }
-            aceEditor.setAnnotations(annotations);
         })
+        if (changeManager.warnings.length > 0) {
+            for (var i = 0; i < changeManager.warnings.length; i++) {
+                var warning = changeManager.warnings[i];
+                for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
+                    var obj = changeManager.warnings[i].pos[j];
+                    annotations.push({
+                        row: fflModel.substring(0, obj.char).split('\n').length,
+                        column: 0,
+                        text: warning.message, // Or the Json reply from the parser
+                        type: 'error' // also warning and information
+                    })
+                }
+            }
+
+        }
+        aceEditor.setAnnotations(annotations)
     });
     $scope.$watch(function(scope) {
             if (scope.register.changes.length > 0) {
-                for (var i = 0; i < scope.register.changes.length; i++) {
-                    var obj = scope.register.changes[i];
-                    console.info(obj)
-                }
+                console.info("Changes been made")
                 scope.register.changes.length = 0
                 const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n')
                 aceEditor.setValue(newValue)

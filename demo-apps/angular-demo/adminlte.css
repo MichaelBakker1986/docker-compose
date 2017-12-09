@@ -5249,3 +5249,9 @@ table.text-center, table.text-center td, table.text-center th {
         white-space: normal !important
     }
 }
+
+.input-xsm > .form-control {
+    padding: 0px 0px;
+    height: 20px;
+    border-radius: 0px;
+}

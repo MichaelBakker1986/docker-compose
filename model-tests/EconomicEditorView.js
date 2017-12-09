@@ -40,7 +40,7 @@ EconomicEditorView.prototype.parse = function(input) {
     var JSVisitor = require('../lme-core/src/JSVisitor')
     var result = parser.parseFFL(input)
     var solutionName = findSolutionNameFromFFLFile(result);
-    let objectModel = result['model ' + solutionName + ' uses BaseModel'][''];
+    let objectModel = result['model ' + solutionName.toUpperCase() + ' uses BaseModel'][''];
     var output = [];
     JSVisitor.travelOne(objectModel, null, function(keyArg, node, context) {
         if (keyArg === null) {

@@ -32,10 +32,14 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
         if (log.DEBUG) log.debug('[%s] does not exist', id);
     }
 }
+if (!global.DEBUGMODUS) {
+    global.DEBUGMODUS = false
+}
 fm.prototype.initializeFormula = function(newFormula) {
-    var id = newFormula.id || newFormula.index;
+    const id = newFormula.id || newFormula.index;
     if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    var modelFunction = Function(newFormula.params || 'f, x, y, z, v', 'return ' + newFormula.parsed + " /*\n" + newFormula.name + ":" + newFormula.original + "*/ ").bind(global);
+    const stringFunction = global.DEBUGMODUS ? "debug('" + newFormula.name + "'); return " + newFormula.parsed + " /*\n" + newFormula.name + ":" + newFormula.original + "*/ " : "return " + newFormula.parsed
+    const modelFunction = Function(newFormula.params || 'f, x, y, z, v', stringFunction).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of

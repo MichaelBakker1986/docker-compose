@@ -35,7 +35,9 @@ angular
                 $scope.search = node
             }
         }
-
+        $scope.addTuple = function(variable) {
+            variable.add()
+        }
         $scope.saveData = function() {
             Pace.start();
             LMEMETA.persistData(function(response) {

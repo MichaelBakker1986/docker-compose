@@ -1,8 +1,9 @@
+#install git
 #create SSH to repository
-mkdir .ssh
-vim id_rsa = {SSH key for Stash}
+#if already have ssh key u can skip this part
+ssh-keygen -t rsa
+
 vim id_rsa.pub = {Public SSH key for Stash}
-//git preinstalled
 
 #----- VIA DOCKER
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
@@ -11,11 +12,20 @@ docker-compose up
 
 #----- VIA NODEJS
 #expose ports
+#set environment parameter FIGURE_DB_STRING postgresql://postgres:postgres@localhost/lme
 sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
 npm install -g concurrently
 npm install
-docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
+docker-compose -f docker-compose-db.yml up
 npm start
 
+#Release 1.0
+#DOCS
+#Authentication via property role: VIEWER|ADMIN....
+#Identification via proxy.js
+#Debug via injnection in FunctionMap.js
+#Inheriterd properties in overview IDE
+#Rapportages via HTML5 just like creating a front-end by the designer
+#CICD via internal update mechanism

@@ -66,7 +66,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         if (returnValue != null) {
             const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
             returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
-            returnValue = choices.lookup('value', String(returnValue)).name
+            returnValue = (choices.lookup('value', String(returnValue)) || choices.lookup('name', String(returnValue))).name
         }
     }
     FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);

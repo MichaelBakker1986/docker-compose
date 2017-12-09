@@ -1,0 +1,40 @@
+import FinanMath.*;
+import BaseModel.*;
+
+model TUPLETEST uses BaseModel
+{
+ root
+ {
+  variable Q_ROOT
+  {
+   displaytype: scorecard;
+   variable Q_MAP01
+   {
+    title: "Test";
+    datatype: number;
+    tuple Tuple
+    {
+     title: "TupleDefinition";
+     hint: "test";
+     formula: 101;
+     datatype: number;
+     frequency: document;
+     variable TupleVar1
+     {
+      title: "TupleVar1";
+      formula: 123;
+      datatype: number;
+      frequency: document;
+     }
+     variable TupleVar2
+     {
+      title: "TupleVar2";
+      formula: 1234;
+      datatype: number;
+      frequency: document;
+     }
+    }
+   }
+  }
+ }
+}

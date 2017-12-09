@@ -1,5 +1,6 @@
 var StoryParser = require('../StoryParser').StoryParser
 var MVO = require('./MVO')
+
 function MVOStory(story) {
     this.story = story;
 }
@@ -15,3 +16,4 @@ MVOStory.prototype.startTest = function() {
     storyParser.call()
 }
 exports.MVOStory = MVOStory;
+new MVOStory(__dirname + '/mvo.story').startTest()

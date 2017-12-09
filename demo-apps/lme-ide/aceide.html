@@ -23,6 +23,7 @@
     <script src="engineonly.js"></script>
     <script src="aceide.js"></script>
     <link rel="stylesheet" href="aceide.css">
+
 </head>
 <body class="controlsidebar hold-transition sidebar-mini skin-blue sidebar-collapse fixed" ng-controller="ideController">
 <div id="pagewrapper" class="wrapper">
@@ -43,6 +44,9 @@
                 </div>
                 <div class="col-xs-6" style="padding-top: 5px;">
                     <div class="input-group" ng-switch="currentView">
+                        <span ng-switch-when="FFLModelEditorView" ng-if="breakpoints.length>0" class="input-group-btn">
+                             <button type="button" ng-click="callDebug()" data-toggle="tooltip" title="Debug breakpoints" class="btn btn-info btn-flat bg-gray"><i class="fa fa-play"></i></button>
+                        </span>
                         <span ng-switch-when="FFLModelEditorView" class="input-group-btn">
                              <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat"><i class="fa fa-cubes"></i></button>
                         </span>
@@ -61,7 +65,7 @@
                         <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
                             <button ng-click="toggleWrapLines()" type="button" data-toggle="tooltip" title="toggle wrapped view" class="btn btn-info btn-flat"><i class="fa fa-hand-rock-o"></i></button>
                         </span>
-                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="KSP">
+                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
                         <span class="input-group-btn">
                                 <button id="saveFFLModel" type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip"
                                         title="Save {{session.fflModelPath}}" data-target="#modal-success" class="btn btn-info btn-flat"><i class="fa fa-save"></i></button>
@@ -72,6 +76,7 @@
                                         class="btn btn-info btn-flat" style="background-color: orange"><i
                                         class="fa fa-info-circle"></i></button>
                         </span>
+                        <input id="page" ng-model="session.page" type="text" class="form-control" placeholder="grid_bootstrap">
                     </div>
                 </div>
                 <div class="col-xs-3">
@@ -138,13 +143,11 @@
         </div>
         <strong>Copyright &copy; 2014-2017 <a>Michael Bakker</a>.</strong> All rights reserved.
     </footer>
-    <aside id="sidebar" class="control-sidebar-dark">
-        <div class="container">
-            <div ng-repeat="p in activeVariable">
-                <div class="form-group">
-                    <label>{{p.name}}</label>
-                    <input placeholder="enter value" class="form-control" ng-model="p.value">
-                </div>
+    <aside id="sidebar" class="control-sidebar-dark container">
+        <div ng-repeat="p in activeVariable">
+            <div class="input-group input-xsm">
+                <label>{{p.name}}</label>
+                <input placeholder="enter value" class="input-xsm form-control" ng-model="p.value">
             </div>
         </div>
     </aside>

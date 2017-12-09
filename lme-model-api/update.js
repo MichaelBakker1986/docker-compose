@@ -55,7 +55,7 @@ function update() {
             var start = now();
             busy = true;
             //npm install && bower install
-            var command = developer ? 'echo a' : 'git reset --hard origin/master && git pull && cd .. && npm install && npm test';
+            var command = developer ? 'echo a' : 'git clean -f -x && git pull && cd .. && npm install && npm test';
             exec(command).then((result) => {
                 reDeploy()
                 fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');

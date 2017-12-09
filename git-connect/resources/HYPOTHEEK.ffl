@@ -316,15 +316,6 @@
      visible: 1;
      options_title: locked;
     }
-    variable Q_MAP01_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie";
-     visible: 1;
-     options_title: locked;
-    }
     variable Partner02
     {
      datatype: number;

@@ -6,6 +6,7 @@ define('ace/mode/ffl', function(require, exports, module) {
     var CStyleFoldMode = require("ace/mode/folding/cstyle").FoldMode;
     var Mode = function() {
         this.HighlightRules = ExampleHighlightRules;
+        this.keywordMapper = ExampleHighlightRules.keywordMapper;
         this.foldingRules = new CStyleFoldMode();
     };
     oop.inherits(Mode, TextMode);
@@ -47,14 +48,20 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
         oop.inherits(DocCommentHighlightRules, TextHighlightRules);
         var ExampleHighlightRules = function() {
             var keywordMapper = this.createKeywordMapper({
-                "variable.language": "unscalable|scorecard|boolean|document|column|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
-                "keyword": "Implies|top_separator|options_trend|options_notrend|link|bottom_separator|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|model|valid|hint",
-                "comment": "#",
+                "variable.language": "unscalable|scorecard|model|boolean|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
+                "keyword": "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
+                "comment": "#|Memo1",
                 "storage.type": "&",
-                "support.function": "+|and|or|entered|visible",
+                "support.function": "+|-|=|none|and|or|entered|visible",
                 "constant.language": "NA|T|X|0|1|2|3|4|5|6|7|8|9|."
             }, "text", true);
-
+            this.keywordMapper = keywordMapper;
+            this.keywordRule = {
+                regex: "\\w+",
+                onMatch: function() {
+                    return "text"
+                }
+            }
             this.$rules = {
                 "start": [
                     {
@@ -67,9 +74,18 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
                     {
                         defaultToken: "comment.doc",
                         caseInsensitive: true
-                    }
+                    }, {
+                        token: "string",
+                        start: '"',
+                        end: '"',
+                        next: [{token: "language.escape", regex: /\\[tn"\\]/}]
+                    },
+                    this.keywordRule
                 ]
             };
+            this.setKeywords = function(kwMap) {
+                this.keywordRule.onMatch = this.createKeywordMapper(kwMap, "identifier")
+            }
 
             this.addRules(new DocCommentHighlightRules().getRules(), "comment-");
             this.addRules(new TextHighlightRules().getRules(), "defaultrules-");

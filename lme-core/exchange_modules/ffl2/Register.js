@@ -63,6 +63,12 @@ Register.prototype.addRow = function(row) {
     this.i.push(row)
     return this.i.length - 1
 }
+Register.prototype.inheritProperty = function(name, paramIndex) {
+    const variable = this.getIndex('name')[name]
+    if (variable[paramIndex]) return variable[paramIndex]
+    if (variable[this.schemaIndexes.refersto]) return this.inheritProperty(variable[this.schemaIndexes.refersto], paramIndex)
+    return "";
+}
 Register.prototype.doProx = function doProx(name, metaData, paramIndex) {
     const register = this;
     const variable = this.getIndex('name')[name];
@@ -75,7 +81,7 @@ Register.prototype.doProx = function doProx(name, metaData, paramIndex) {
             })
         },
         get: function() {
-            return variable[paramIndex] || "";
+            return register.inheritProperty(name, paramIndex);
         }
     });
 }

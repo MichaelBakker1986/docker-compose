@@ -282,6 +282,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
         node.frequency = 'none'
         mappedDisplayType = 'paragraph'
     }
+    if (tupleDefinition) {
+        mappedDisplayType = 'tuple_add'
+    }
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : (mappedDisplayType == 'string' ? AST.STRING('') : AST.UNDEFINED()), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
     if (!supportedFrequencies[node.frequency || 'document']) {//default frequency is document
