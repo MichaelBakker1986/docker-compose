@@ -85,7 +85,7 @@ model KSP uses BaseModel
       formula: OnER((IncomeParent01*12)*1.08+ Case(ExtraMonthParent01,[true: IncomeParent01 | false: 0]),NA);
       required: 1;
       fixed_decimals: 2;
-      visible: 0;
+      visible: 1;
      }
      variable IncomeParent02
      {
