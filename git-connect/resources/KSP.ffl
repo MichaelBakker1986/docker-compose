@@ -85,7 +85,7 @@ model KSP uses BaseModel
       formula: OnER((IncomeParent01*12)*1.08+ Case(ExtraMonthParent01,[true: IncomeParent01 | false: 0]),NA);
       required: 1;
       fixed_decimals: 2;
-      visible: 1;
+      visible: 0;
      }
      variable IncomeParent02
      {
@@ -121,7 +121,7 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
-     tuple Child
+     variable Child
      {
       title: "Child";
       locked: 1;
