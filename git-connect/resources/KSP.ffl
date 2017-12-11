@@ -80,7 +80,7 @@ model KSP uses BaseModel
      }
      variable YearlyIncomeParent01
      {
-      title: "Gross Yearly Income Parent 1 including vacation allowance";
+      title: "Gross Yearly Income Parent 1 including vac7478144917841ation allowance";
       frequency: document;
       datatype: number;
       formula: OnER((IncomeParent01*12)*1.08+ Case(ExtraMonthParent01,[1: IncomeParent01 | 0: 0]),NA);
