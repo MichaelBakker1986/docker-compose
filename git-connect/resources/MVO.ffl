@@ -30,7 +30,7 @@ model MVO uses BaseModel
     frequency: document;
     data_options: unscalable;
     displaytype: select;
-    title: "Principes1";
+    title: "Principes";
     top_blanklines: 1;
     locked: 1;
     visible: 1;
