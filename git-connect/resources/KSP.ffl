@@ -74,7 +74,8 @@ model KSP uses BaseModel
      {
       title: "Extra month parent 1";
       frequency: document;
-      datatype: boolean;
+      datatype: number;
+      choices: "0: Nee|1:Ja"
       required: 1;
      }
      variable YearlyIncomeParent01
@@ -82,10 +83,10 @@ model KSP uses BaseModel
       title: "Gross Yearly Income Parent 1 including vacation allowance";
       frequency: document;
       datatype: number;
-      formula: OnER((IncomeParent01*12)*1.08+ Case(ExtraMonthParent01,[true: IncomeParent01 | false: 0]),NA);
+      formula: OnER((IncomeParent01*12)*1.08+ Case(ExtraMonthParent01,[1: IncomeParent01 | 0: 0]),NA);
       required: 1;
       fixed_decimals: 2;
-      visible: 0;
+      visible: 1;
      }
      variable IncomeParent02
      {
@@ -121,7 +122,7 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
-     variable Child
+     tuple Child
      {
       title: "Child";
       locked: 1;
