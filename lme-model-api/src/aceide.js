@@ -1,7 +1,6 @@
 /**
  * editor variable is set to the window.
  */
-console.info("tuple test ".replace(/(?:variable|tuple)\s*(\w+).*/i, "$1"))
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
@@ -63,6 +62,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.session = user_session;
     let register = new Register();
     const debugManager = new DebugManager();
+    DEBUGGER = debugManager
     $scope.register = register;
     const AceEditor = require('./ace_editor_api').AceEditor
     const aceEditor = new AceEditor();
@@ -158,46 +158,46 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     /**
      * DEBUG FUNCTIONALITY, deep dive- pilot
      */
-    /* $scope.breakpoints = []
-     aceEditor.aceEditor.on("guttermousedown", function(e) {
-         var target = e.domEvent.target;
-         if (target.className.indexOf("ace_gutter-cell") == -1)
-             return;
-         if (!aceEditor.aceEditor.isFocused())
-             return;
-         if (e.clientX > 25 + target.getBoundingClientRect().left)
-             return;
+    /*$scope.breakpoints = []
+    aceEditor.aceEditor.on("guttermousedown", function(e) {
+        var target = e.domEvent.target;
+        if (target.className.indexOf("ace_gutter-cell") == -1)
+            return;
+        if (!aceEditor.aceEditor.isFocused())
+            return;
+        if (e.clientX > 25 + target.getBoundingClientRect().left)
+            return;
 
-         var row = e.getDocumentPosition().row;
+        var row = e.getDocumentPosition().row;
 
-         e.editor.session.setBreakpoint(row);
-         $scope.$apply(function() {
-             $scope.breakpoints = aceEditor.aceEditor.session.$breakpoints;
-         })
-         e.stop();
-     })
+        e.editor.session.setBreakpoint(row);
+        $scope.$apply(function() {
+            $scope.breakpoints = aceEditor.aceEditor.session.$breakpoints;
+        })
+        e.stop();
+    })
 
-     function doStep() {
-         console.info(debugManager.getCurrentLine())
-         edit.gotoLine(debugManager.getCurrentLine())
-         debugManager.nextStep()
-     }
+    function doStep() {
+        console.info(debugManager.getCurrentLine())
+        edit.gotoLine(debugManager.getCurrentLine())
+        debugManager.nextStep()
+    }
 
-     $scope.callDebug = function() {
-         const breaks = $scope.breakpoints
-         debugManager.initVariables(fflModel)
-         for (var i = 0; i < breaks.length; i++) {
-             var obj = breaks[i];
-             if (obj) {
-                 changeManager.updateCursor(fflModel, {row: i, col: 0})
-                 var property = aceEditor.aceEditor.session.getLine(i).trim().split(':')[0].trim()
-                 property = property == 'formula' ? 'value' : property
-             }
-         }
-         //once call is done, we reproduce the steps.
-         debugManager.active = true;
-         doStep()
-     }*/
+    $scope.callDebug = function() {
+        const breaks = $scope.breakpoints
+        debugManager.initVariables(fflModel)
+        for (var i = 0; i < breaks.length; i++) {
+            var obj = breaks[i];
+            if (obj) {
+                changeManager.updateCursor(fflModel, {row: i, col: 0})
+                var property = aceEditor.aceEditor.session.getLine(i).trim().split(':')[0].trim()
+                property = property == 'formula' ? 'value' : property
+            }
+        }
+        //once call is done, we reproduce the steps.
+        debugManager.active = true;
+        doStep()
+    }
     /**
      * END DEBUG FUNCTIONALITY
      */
@@ -210,6 +210,9 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                 window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + data.link + '&' + userID);
             });
         });
+    }
+    global.debug = function(name) {
+        debugManager.addStep(name)
     }
     $scope.toggleFormatter = function() {
         const cursor = aceEditor.getCursor()

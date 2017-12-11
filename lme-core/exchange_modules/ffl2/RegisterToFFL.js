@@ -30,6 +30,7 @@ function RegisterToFFL(register) {
     this.decimalsIndex = register.schemaIndexes.fixed_decimals;
     this.datatypeIndex = register.schemaIndexes.datatype;
     this.frequencyIndex = register.schemaIndexes.frequency;
+    this.options_titleIndex = register.schemaIndexes.options_title;
     this.formulaindex = register.schemaIndexes.formula;
     this.lockedIndex = register.schemaIndexes.locked;
     this.requiredIndex = register.schemaIndexes.required;

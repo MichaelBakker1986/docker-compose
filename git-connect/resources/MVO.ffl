@@ -147,7 +147,6 @@ model MVO uses BaseModel
       top_blanklines: 1;
       visible: 1;
       choices: "0:Nee|1:Ja";
-      options_title: locked;
      }
      variable Q_MAP01_VRAAG01_MEMO
      {

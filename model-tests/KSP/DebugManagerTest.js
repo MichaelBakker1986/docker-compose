@@ -8,7 +8,6 @@ global.debug = function(name) {
 let ffl = require('fs').readFileSync('./KSP.ffl', 'utf-8')
 var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
-
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
 MVO.importFFL(ffl);

@@ -45,6 +45,9 @@ LmeAPI.prototype.importFFL = function(ffl) {
 LmeAPI.prototype.importFFL2 = function(ffl) {
     this.lme.importSolution(ffl, 'ffl2')
 }
+LmeAPI.prototype.importFFL2Backwards = function(ffl) {
+    this.lme.importSolution(ffl, 'ffl2_backwards')
+}
 LmeAPI.prototype.exportFFL = function() {
     return this.lme.export('ffl')
 }

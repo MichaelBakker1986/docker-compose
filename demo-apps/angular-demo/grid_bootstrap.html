@@ -79,6 +79,9 @@
                         <div ng-switch-when="wisihtml" class="col-md-12">
                             <textarea class="form-control" ng-model="cv.value"></textarea>
                         </div>
+                        <div ng-switch-when="tuple_add" class="col-md-12">
+                            <div ng-click="addTuple(f)">TUPLE ADD HERE</div>
+                        </div>
                         <div ng-switch-when="paragraph" class="col-md-12">
                             <h2>{{f.title}}</h2>
                             <span ng-if="f.hint">{{f.hint}}<p></p><br></span>
@@ -215,7 +218,7 @@
                             </div>
                         </div>
                         <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
-                            <span contenteditable="true" class="title" ng-bind="f.title"></span>
+                            <span contenteditable="{{f.title_locked?'false':'true'}}" class="title" ng-bind="f.title"></span>
                             <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
                             <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
                                      data-content="{{f.original}}"></i></span>

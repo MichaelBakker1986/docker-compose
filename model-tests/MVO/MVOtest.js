@@ -1,4 +1,5 @@
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
@@ -6,8 +7,9 @@ const assert = require('assert');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
 let mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
+//require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
 MVO.importFFL(mvoFLLFile);
+//MVO.importFFL2Backwards(mvoFLLFile)
 const nodes = MVO.exportWebModel().nodes;
 global.debug = function(name) {
    // console.info(name)

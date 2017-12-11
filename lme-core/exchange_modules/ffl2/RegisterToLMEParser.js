@@ -64,7 +64,8 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         let type = node[displayTypeIndex]
         inheritProperties(node)
 
-        const parentId = node[fflRegister.parentNameIndex];
+        // expecting an parentName..
+        const parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
 
         //TODO: quick-fix move into IDE ScorecardTool-addon
         if (nodeName.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
@@ -84,6 +85,9 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
         uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';
+
+        if (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true
+
         uiNode.datatype = node[displayTypeIndex] || 'number';
 
         if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
@@ -132,5 +136,5 @@ function parseFFLFormula(formula, nodeName, col, type) {
     return formulaReturn;
 }
 
-exports = RegisterToLMEParser;
+exports.RegisterToLMEParser = RegisterToLMEParser;
 SolutionFacade.addParser(RegisterToLMEParser.prototype);

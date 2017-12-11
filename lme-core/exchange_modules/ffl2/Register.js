@@ -1,5 +1,6 @@
 /**
- * All indexed will be linked to a array of values,
+ * All indexed will be linked to a array of values, like a DB structure
+ * Lightweigt data-model
  * @constructor
  */
 function Register() {

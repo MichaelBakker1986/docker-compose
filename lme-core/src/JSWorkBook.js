@@ -271,12 +271,14 @@ JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     var yax = resolveY(this, y)
     var wb = this;
     FESFacade.visit(startProperty, function(node, treeDepth) {
-        //find out how many of nodes there are in current yas
-        //given y
         //for max tuplecount in current node loop visitor node
         var maxTupleCountForTupleDefinition = maxTupleCountForRow(wb, node);
         for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
             visitor(node, resolveY(wb, tupleCounter), treeDepth)
+        }
+        //tuple add function
+        if (node.tupleDefinition) {
+            visitor(node, resolveY(wb, 0), treeDepth)
         }
     });
 }

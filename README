@@ -10,10 +10,10 @@ git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
 docker-compose up
 
-#----- VIA NODEJS
+#----- VIA NODEJS latest LTS or higher
 #expose ports
-#set environment parameter FIGURE_DB_STRING postgresql://postgres:postgres@localhost/lme
-sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
+#set environment parameter to configure DB endpoint FIGURE_DB_STRING postgresql://postgres:postgres@localhost/lme
+#?LINUX:sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
 npm install -g concurrently
@@ -23,9 +23,16 @@ npm start
 
 #Release 1.0
 #DOCS
-#Authentication via property role: VIEWER|ADMIN....
-#Identification via proxy.js
+#Dynamic assembling models via DB, like data, but also including dependencies to make subselects from models.
+#Authorization via property role: VIEWER|APPROVER|ADMIN Will generate the model dynamically from database. (only required and depending)
+ #!Authorization will include combining model and aggregated data.
+#Identification via proxy.js, Using latest HEAD resolve current uuid
 #Debug via injnection in FunctionMap.js
 #Inheriterd properties in overview IDE
 #Rapportages via HTML5 just like creating a front-end by the designer
-#CICD via internal update mechanism
+#CICD via internal update mechanisme
+#Webhook module, broadcast events when state of data/model changes.
+#Internationalization via constants
+#Overview via hint icons in propertie-view
+#Functionverview in IDE
+

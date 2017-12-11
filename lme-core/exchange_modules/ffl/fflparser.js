@@ -287,6 +287,9 @@ function addnode(logVars, solution, rowId, node, parentId, tupleDefinition, tupl
     }
     var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', valueFormula ? parseFFLFormula(valueFormula, 'none', rowId) : (mappedDisplayType == 'string' ? AST.STRING('') : AST.UNDEFINED()), mappedDisplayType);
     uiNode.displayAs = mappedDisplayType;
+
+    if (node.options_title == 'locked') uiNode.title_locked = true
+
     if (!supportedFrequencies[node.frequency || 'document']) {//default frequency is document
         throw Error('Invalid frequency [' + node + ']');
     }
