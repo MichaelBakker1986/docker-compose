@@ -79,6 +79,16 @@ model KSP uses BaseModel
       displaytype: select;
       choices: "0:Nee|1:Ja";
       required: 1;
+      variable ValueExtraMonth
+        {
+        title: "ValueExtraMonth";
+        frequency: document;
+        datatype: number;
+        formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
+        required: 1;
+        fixed_decimals: 2;
+        visible: 1;
+        }
      }
      variable YearlyIncomeParent01
      {
@@ -90,9 +100,9 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       visible: 1;
      }
-     variable YearlyIncomeParent01IncExtraMonth
+     variable ValueExtraMonth
      {
-      title: "Gross Yearly Income Parent 1 including vacation allowance and extra month";
+      title: "ValueExtraMonth";
       frequency: document;
       datatype: number;
       formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
