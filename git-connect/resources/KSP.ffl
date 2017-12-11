@@ -96,7 +96,7 @@ model KSP uses BaseModel
       frequency: document;
       datatype: number;
       formula: OnER(((IncomeParent01*12)*1.08)+Case(ExtraMonthParent01,[0:0|1:2]),NA);
-      formula: Case(ExtraMonthParent01,[0:0|1:IncomeParent01]);
+      formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
       required: 1;
       fixed_decimals: 2;
       visible: 1;
