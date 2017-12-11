@@ -12,7 +12,7 @@ var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
-MVO.importFFL2Backwards(ffl);
+MVO.importFFL2BackwardsCompatible(ffl);
 const nodes = MVO.exportWebModel().nodes;
 log.info(nodes.Q_MAP01_WARNING.value)
 log.info(debugManager.active)

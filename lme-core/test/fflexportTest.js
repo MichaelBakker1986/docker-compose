@@ -1,6 +1,7 @@
 var assert = require('assert');
 var log = require('ff-log')
-var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');//just let it inject into the FESFacade
+require('../exchange_modules/ffl2/RegisterToFFL');//just let it inject into the FESFacade
 var WorkBook = require('../src/JSWorkBook');
 var JUNIT = require('./JUNIT');
 var FESContext = require('../src/fescontext')
@@ -11,11 +12,11 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var data = JUNIT.getFile(fflModelName + '.ffl');
     var wb = new WorkBook(new FESContext());
 
-    wb.importSolution(data, 'ffl');
+    wb.importSolution(data, 'ffl2_backwards');
     var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
     assert.ok(wb.validateImportedSolution().valid);
-    var fflExport = wb.export('ffl');
+    var fflExport = wb.export('ffl2_backwards').join('\n');
     //debugging..
     if (log.TRACE) {
         log.trace(fflExport);

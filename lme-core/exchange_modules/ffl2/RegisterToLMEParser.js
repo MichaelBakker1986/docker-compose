@@ -25,6 +25,10 @@ RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
         this.walk(childs[i], depth + 1, visitor)
     }
 }
+RegisterToLMEParser.prototype.deParse = function(data, workbook) {
+    if (!this.indexer) return null;
+    return new RegisterToFFL(this.indexer).toGeneratedFFL(undefined, workbook.modelName)
+}
 RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const indexer = data;
     const self = this;
@@ -34,6 +38,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const modelName = workbook.modelName || indexer.name;
     const solution = SolutionFacade.createSolution(modelName || "NEW");
     const nameIndex = indexer.schemaIndexes.name;
+    const tupleIndex = indexer.schemaIndexes.tuple;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
@@ -118,7 +123,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
         uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';
-
+        if (node[tupleIndex]) {
+            uiNode.tupleDefinition = true;
+            uiNode.tuple = true;
+        }
         if (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true
 
         uiNode.datatype = node[dataTypeIndex] || 'number';

@@ -5,13 +5,33 @@ var Excel = require('exceljs');
 var log = require('ff-log');
 var Promise = require('promise')
 var workbook = new Excel.Workbook();
+var fs = require('fs');
 var fileName = __dirname + '/resources/KSPParams.xlsx';
-let succes;
-var initComplete = new Promise(function(succesArg) {
-    succes = succesArg;
-}, function(err) {
-    log.error(err)
-});
+
+var initComplete = function(excelFileName) {
+    return new Promise(function(succes) {
+        //check if an file exists
+        const xlsxPath = __dirname + '/resources/' + excelFileName + '.xlsx';
+        if (!fs.existsSync(xlsxPath)) {
+            succes(null)
+        } else {
+            Promise.all([workbook.xlsx.readFile(xlsxPath).then(readFunction)]).then(function(ok) {
+                var totalMatrix = {};
+                for (var excelFileIndex = 0; excelFileIndex < ok.length; excelFileIndex++) {
+                    var excelFile = ok[excelFileIndex];
+                    for (let tableName in excelFile) {
+                        totalMatrix[tableName] = excelFile[tableName]
+                    }
+                }
+                succes(totalMatrix);
+            }).catch(function(err) {
+                log.error(err);
+            });
+        }
+    }, function(err) {
+        log.error(err)
+    });
+}
 
 function getDefinedNames(wb) {
     var names = {};
@@ -115,21 +135,9 @@ function readFunction(wb) {
     }
     // use workbook
     // This variable should be available in the client.
-   return matrix
+    return matrix
 }
-//workbook.xlsx.readFile(fileName2).then(readFunction)
-Promise.all([workbook.xlsx.readFile(fileName).then(readFunction)]).then(function(ok) {
-   var totalMatrix = {};
-    for (var excelFileIndex = 0; excelFileIndex < ok.length; excelFileIndex++) {
-        var excelFile = ok[excelFileIndex];
-        for (let tableName in excelFile){
-            totalMatrix[tableName] = excelFile[tableName]
-        }
-    }
-    succes(totalMatrix);
-}).catch(function(err) {
-    log.error(err);
-});
+
 
 /**
  * MATRIX_VALUES is global declared with table names.

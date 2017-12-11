@@ -1,4 +1,4 @@
-require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');//just let it inject into the FESFacade
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../../math');//just let it inject into the FESFacade
 var JSWorkBook = require('../src/JSWorkBook');
@@ -13,9 +13,8 @@ var esprima = require('esprima');
 var data = JUNIT.getFile('hierarchyTest.ffl');
 var FESContext = require('../src/fescontext')
 var wb = new JSWorkBook(new FESContext());
-//wb.importSolution(data, 'ffl');
 var singleVariable = JUNIT.getFile('testFFLVariable.ffl');
-wb.importSolution(singleVariable, 'ffl');
+wb.importSolution(singleVariable, 'ffl2_backwards');
 //@formatter:off
 /* corresponsing FFL file:
  model TEST uses BaseModel
@@ -121,7 +120,7 @@ JUNIT.validateTree(expectedFFLTree, actual, 'children', 'children', function (ex
         return true;
     }
 )
-var fflSolution = wb.export('ffl');
+var fflSolution = wb.export('ffl2_backwards');
 assert.notStrictEqual(fflSolution, undefined, 'should return A value');
 assert.notStrictEqual(fflSolution, 'should return A value');
 //'/KAM/FFL/KAM',

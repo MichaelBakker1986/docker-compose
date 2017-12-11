@@ -1,11 +1,19 @@
 require('../../lme-core/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 const LME = require('../../lme-model-api/src/lme');
 const log = require('ff-log');
 const fs = require('fs');
 const assert = require('assert');
+
+const excelPlugin = require('../../excel-connect').xlsxLookup;
 const SCORECARDTESTMODEL = new LME();
-SCORECARDTESTMODEL.importFFL("" + fs.readFileSync(__dirname + '/SCORECARDTESTMODEL.ffl'));
-fs.writeFileSync(__dirname + '/SCORECARDTESTMODEL.json', SCORECARDTESTMODEL.exportLME());
-const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
-SCORECARDTESTMODEL.lme.validateImportedSolution()
-const [Q_Map03] = [nodes.Q_Map03];
+SCORECARDTESTMODEL.addFunctions(excelPlugin);
+excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
+    SCORECARDTESTMODEL.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/SCORECARDTESTMODEL.ffl', 'utf8'));
+    const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
+    assert(SCORECARDTESTMODEL.lme.validateImportedSolution())
+}).catch((err) => {
+    throw err;
+})
+
+

@@ -151,6 +151,7 @@ SolutionFacade.prototype.addFunction = function(solution, functionName, function
     findFormulaByIndex.params = "$1,$2"
 }
 SolutionFacade.prototype.addVariables = FormulaService.addVariables
+SolutionFacade.prototype.initVariables = FormulaService.initVariables
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;

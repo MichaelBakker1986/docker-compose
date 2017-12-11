@@ -6,7 +6,7 @@ const LME = require('../../lme-model-api/src/lme');
 const assert = require('assert');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
-MVO.importFFL2Backwards(require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8'))
+MVO.importFFL2BackwardsCompatible(require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8'))
 const nodes = MVO.exportWebModel().nodes;
 global.debug = function(name) {
     // console.info(name)

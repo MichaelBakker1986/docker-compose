@@ -10,7 +10,7 @@ const assert = require('assert');
 const HYPOTHEEK = new LME();
 HYPOTHEEK.addFunctions(excelPlugin);
 let HYPOTHEEKFFLFile = require('fs').readFileSync(__dirname + '/HYPOTHEEK.ffl', 'utf8');
-HYPOTHEEK.importFFL2Backwards(HYPOTHEEKFFLFile);
+HYPOTHEEK.importFFL2BackwardsCompatible(HYPOTHEEKFFLFile);
 const nodes = HYPOTHEEK.exportWebModel().nodes
 HYPOTHEEK.lme.fixProblemsInImportedSolution()
 const register = new Register();

@@ -5,7 +5,7 @@ const SolutionFacade = require('../../lme-core/src/SolutionFacade');
 const MVO = new LME();
 const log = require('ff-log')
 MVO.addFunctions(excelPlugin);
-excelPlugin.initComplete.then(function() {
+excelPlugin.initComplete().then(function() {
     try {
         const mvoFLLFile = require('fs').readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8');
         // require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
@@ -14,7 +14,9 @@ excelPlugin.initComplete.then(function() {
         const exportWebModel = MVO.exportWebModel();
         log.info(exportWebModel.nodes.TestContainerChild.value)
         log.info(functions)
-    } catch (err){
+    } catch (err) {
         log.error(err)
     }
+}).catch((err) => {
+    throw err;
 })

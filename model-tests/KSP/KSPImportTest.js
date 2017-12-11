@@ -10,8 +10,8 @@ require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 const model = new LMEapi();
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
-excelPlugin.initComplete.then(function(matrix) {
-    model.importFFL2Backwards(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
+excelPlugin.initComplete().then(function(matrix) {
+    model.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
 }).catch(function(err) {
     throw err
 })

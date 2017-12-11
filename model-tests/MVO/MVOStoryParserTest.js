@@ -22,9 +22,11 @@ MVOStory.prototype.startTest = function() {
     storyParser.start()
     storyParser.call()
 }
-excelPlugin.initComplete.then(function() {
-    model.importFFL2Backwards(mvoFLLFile)
+excelPlugin.initComplete('MVO').then(function(matrix) {
+    model.importFFL2BackwardsCompatible(mvoFLLFile)
     LME = model.exportWebModel();
     new MVOStory(__dirname + '/mvo.story').startTest()
+}).catch((err) => {
+    throw err;
 })
 exports.MVOStory = MVOStory;

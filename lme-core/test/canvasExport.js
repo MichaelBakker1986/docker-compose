@@ -4,7 +4,7 @@
  * @type {ok}
  */
 var assert = require('assert');
-var parser = require('../exchange_modules/ffl/fflparser');
+require('../exchange_modules/ffl/fflparser');
 require('../exchange_modules/lme/lmeparser');
 require('../exchange_modules/presentation/presentation');
 require('../../math')

@@ -1,5 +1,6 @@
 var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
+var SolutionFacade = require('../src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math')
@@ -7,9 +8,10 @@ var fesjsApi = require('../').fesjs;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-excelPlugin.initComplete.then(function() {
+excelPlugin.initComplete('KSP').then(function(matrix) {
+    SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new FESContext());
-    wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl'), 'ffl');
+    wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl', 'utf8'), 'ffl');
     var children = [
         // Child 1
         {
@@ -29,13 +31,13 @@ excelPlugin.initComplete.then(function() {
                 9149.90,  // 9
                 9540.45,  // 10
                 9660.45,  // 11
-                6080.05,  // 12
-                6458.05,  // 13
-                6494.05,  // 14
-                7069.20,  // 15
-                7081.20,  // 16
-                7593.20,  // 17
-                9129.20   // 18
+                5174.05,  // 12
+                5552.05,  // 13
+                5588.05,  // 14
+                6163.20,  // 15
+                6175.20,  // 16
+                6687.20,  // 17
+                8223.20   // 18
             ]
         },
         // Child 2
@@ -56,13 +58,13 @@ excelPlugin.initComplete.then(function() {
                 10618.70, // 9
                 11009.25, // 10
                 11129.25, // 11
-                5709.05,  // 12
-                6087.05,  // 13
-                6123.05,  // 14
-                6486.50,  // 15
-                6498.50,  // 16
-                7010.50,  // 17
-                8546.50   // 18
+                5174.05,  // 12
+                5552.05,  // 13
+                5588.05,  // 14
+                5951.50,  // 15
+                5963.50,  // 16
+                6475.50,  // 17
+                8011.50   // 18
             ]
         },
         // Child 3
@@ -83,13 +85,13 @@ excelPlugin.initComplete.then(function() {
                 6212.30, // 9
                 6602.85, // 10
                 6722.85, // 11
-                5709.05,  // 12
-                6087.05,  // 13
-                6123.05,  // 14
-                6698.20,  // 15
-                6710.20,  // 16
-                7222.20,  // 17
-                8758.20   // 18
+                5174.05,  // 12
+                5552.05,  // 13
+                5588.05,  // 14
+                6163.20,  // 15
+                6175.20,  // 16
+                6687.20,  // 17
+                8223.20   // 18
             ]
         }
     ];
@@ -106,13 +108,13 @@ excelPlugin.initComplete.then(function() {
         25980.90,   // 9
         27152.55,   // 10
         27512.55,   // 11
-        17498.15,   // 12
-        18632.15,   // 13
-        18740.15,   // 14
-        20253.90,   // 15
-        20289.90,   // 16
-        21825.90,   // 17
-        26433.90    // 18
+        15522.15,   // 12
+        16656.15,   // 13
+        16764.15,   // 14
+        18277.90,   // 15
+        18313.90,   // 16
+        19849.90,   // 17
+        24457.90    // 18
     ];
 
 
@@ -140,13 +142,17 @@ excelPlugin.initComplete.then(function() {
 
         // Testing all the TotalYearlyCostsChild columns
         for (var j = 0; j < children[i].TotalYearlyCosts.length; j++) {
-            assert(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)) == children[i].TotalYearlyCosts[j]);
+            log.trace(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)) + " should be " + children[i].TotalYearlyCosts[j])
+            assert(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)).toFixed(2) == children[i].TotalYearlyCosts[j].toFixed(2));
         }
     }
 
 //TotalYearlyCosts test
     for (var i = 0; i < totalYearlyCosts.length; i++) {
         log.trace(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
-        assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)) == totalYearlyCosts[i]);
+        assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i].toFixed(2));
     }
+}).catch((err) => {
+    console.error(err)
+    throw err;
 })

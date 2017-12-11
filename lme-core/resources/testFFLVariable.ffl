@@ -4,11 +4,11 @@ variable TupleReferenceVariable
 {
 	title : "reference variable";
 }
-variable TupleReferenceVariable2 refers to NestedTupleProperty2
-{
+variable TupleReferenceVariable2
+ {
 	title : "nested reference variable";
 }
-variable ReferenceToTupleDefinition refers to TupleVariable
+variable ReferenceToTupleDefinition
 {
   title : "reference to tuple test";
 }

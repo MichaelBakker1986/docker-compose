@@ -2,8 +2,9 @@ const fs = require('fs');
 
 exports.ModelWalker = class {
 
-    constructor(basePath) {
+    constructor(basePath, patterns) {
         this.paths = {}
+        this.patterns = patterns || ['*', '*/FFL/*', '*/*/FFL/*', '*/*/*/FFL/*', '*/*/*/*/FFL/*']
         this.basePath = basePath || __dirname + '/CODELISTS/'
     }
 
@@ -22,7 +23,7 @@ exports.ModelWalker = class {
     }
 
     walk(visit) {
-        this.multiple(['*', '*/FFL/*', '*/*/FFL/*', '*/*/*/FFL/*', '*/*/*/*/FFL/*'])
+        this.multiple(this.patterns)
         for (var path in this.paths) {
             this.readFile(path, visit)
         }

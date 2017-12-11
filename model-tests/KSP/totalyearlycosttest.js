@@ -8,11 +8,9 @@ var fesjsApi = require('../../lme-core').fesjs;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-excelPlugin.initComplete.then(function(matrix) {
+excelPlugin.initComplete().then(function(matrix) {
     var wbKSP = new WorkBook(new FESContext());
-    var fs = require("fs");
-    var buf = fs.readFileSync(__dirname + '/KSP.ffl', "utf8");
-    wbKSP.importSolution((buf), 'ffl2_backwards')
+    wbKSP.importSolution(require("fs").readFileSync(__dirname + '/KSP.ffl', "utf8"), 'ffl2_backwards')
     wbKSP.set('IncomeParent01', 25000)
     assert(wbKSP.get('IncomeParent01') === 25000)
 //same response from restApi

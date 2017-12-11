@@ -1,10 +1,6 @@
-global.loglevel = 'debug'
 var assert = require('assert')
-var parser = require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var WorkBook = require('../src/JSWorkBook');
-var JSMATH = require('../../math')
-var JUNIT = require('./JUNIT');
-var log = require('ff-log');
+require('../../math')
 var FESContext = require('../src/fescontext');
 var wb = new WorkBook(new FESContext());
 wb.updateValues();
@@ -14,7 +10,6 @@ wb.createFormula('abc12a.entered', 'DATAAVAILABLE2')
 assert.equal(wb.get('DATAAVAILABLE2'), false);
 wb.set('abc12a', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE2'), true);
-
 
 
 wb.createFormula("0", 'caseselect');
