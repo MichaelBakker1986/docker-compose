@@ -5,13 +5,13 @@
 var browser = require('browserify');
 var fs = require('fs')
 var name = process.argv[2];
-var fflType = 'importFFL';// (process.argv[3] == 'FFL2' ? 'importFFL2' : 'importFFL');
+var fflType = 'importFFL2Backwards';// (process.argv[3] == 'FFL2' ? 'importFFL2' : 'importFFL');
 const fileType = '.ffl';// (process.argv[3] == 'FFL2' ? '.ffl2' : '.ffl');
 
 var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
 var fesjsApi = require('../../lme-core/ff-fes').fesjs;
-
 const xlsx = require('../../excel-connect/excel-connect').xlsxLookup;
 fesjsApi.addFunctions(xlsx)
 xlsx.initComplete.then(function(matrix) {

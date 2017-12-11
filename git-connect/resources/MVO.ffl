@@ -7,7 +7,7 @@ import BaseModel.*;
 model MVO uses BaseModel
 {
  version: "0.4";
- ffl_version: "1.2";
+ ffl_version: "1.3";
  root
  {
   variable Q_ROOT
@@ -142,7 +142,7 @@ model MVO uses BaseModel
       frequency: document;
       inputRequired: (Q_MAP01_VERPLICHT[1]=1);
       data_options: unscalable;
-      displaytype: select;
+      displaytype: radio;
       title: "U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn";
       top_blanklines: 1;
       visible: 1;
@@ -154,7 +154,7 @@ model MVO uses BaseModel
       frequency: document;
       inputRequired: Visible(Q_MAP01_VRAAG01_MEMO);
       data_options: unscalable;
-      displaytype: wisihtml;
+      displaytype: memo;
       title: "Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag";
       visible: (Q_MAP01_VRAAG01=1);
       options_title: locked;
@@ -165,7 +165,7 @@ model MVO uses BaseModel
       frequency: document;
       inputRequired: (Q_MAP01_VERPLICHT[1]=1);
       data_options: unscalable;
-      displaytype: select;
+      displaytype: radio;
       title: "U bent bereid verantwoording af te leggen over gemaakte keuzes";
       visible: 1;
       choices: "0:Nee|1:Ja";

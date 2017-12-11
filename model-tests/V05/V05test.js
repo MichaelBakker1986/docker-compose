@@ -10,11 +10,10 @@ V05ffl = V05ffl.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaft
 V05ffl = V05ffl.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
 V05ffl = V05ffl.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
 
-const FF2Parser = require('../../lme-core/exchange_modules/ffl2/FFL2Parser').FFL2Parser
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
 
 
-
-LME.importFFL(V05ffl);
+LME.importFFL2Backwards(V05ffl);
 var model = LME.exportWebModel();
 var [HiddenVars] = [model.nodes.HiddenVars];
 HiddenVars.visible;

@@ -6,13 +6,11 @@ const LME = require('../../lme-model-api/src/lme');
 const assert = require('assert');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
-let mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-MVO.importFFL2Backwards(mvoFLLFile)
+MVO.importFFL2Backwards(require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8'))
 const nodes = MVO.exportWebModel().nodes;
 global.debug = function(name) {
-   // console.info(name)
+    // console.info(name)
 }
-
 nodes.Q_FINAL_REPORT_VISIBLE.value = true
 const [Q_MAP01_VRAAG01_MEMO, FES_LAYOUTNR, RootSub1, FES_COLUMN_VISIBLE] = [nodes.Q_MAP01_VRAAG01_MEMO, nodes.FES_LAYOUTNR, nodes.RootSub1, nodes.FES_COLUMN_VISIBLE];
 const [Q_MAP01, Q_MAP01_ENTEREDREQUIREDVARS, Q_MAP01_REQUIREDVARS, Q_MAP01_PARAGRAAF00, Q_MAP01_VRAAG01] = [nodes.Q_MAP01, nodes.Q_MAP01_ENTEREDREQUIREDVARS, nodes.Q_MAP01_REQUIREDVARS, nodes.Q_MAP01_PARAGRAAF00, nodes.Q_MAP01_VRAAG01];
@@ -34,6 +32,3 @@ nodes.Q_MAP02_VRAAG01.value = choices[1].value
 assert(nodes.Q_MAP02_VRAAG01.value == choices[1].value)
 nodes.Q_MAP02_VRAAG01.value = choices[0].value
 MVO.lme.fixProblemsInImportedSolution()
-
-
-

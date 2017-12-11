@@ -794,7 +794,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -807,7 +806,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -1506,7 +1504,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -1519,7 +1516,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";
@@ -2091,7 +2087,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal verplichte velden (1)";
@@ -2104,7 +2099,6 @@ model KSP uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
             data_options: unscalable;
             fixed_decimals: 0;
             title: "Aantal ingevulde verplichte velden (1)";

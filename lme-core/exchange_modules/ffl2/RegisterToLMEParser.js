@@ -27,6 +27,8 @@ RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
 }
 RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const indexer = data;
+    const self = this;
+    this.indexer = data;
     const fflRegister = new RegisterToFFL(indexer)
     const register = data.getIndex('name');
     const modelName = workbook.modelName || indexer.name;
@@ -34,7 +36,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const nameIndex = indexer.schemaIndexes.name;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
+    const dataTypeIndex = indexer.schemaIndexes.datatype;
     this.childIndex = indexer.schemaIndexes.children;
+    const choiceIndex = indexer.schemaIndexes.choices;
+    const trend_formulaIndex = indexer.schemaIndexes.formula_trend;
+    const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
     this.formulaIndexes = []
     const formulaIndexes = this.formulaIndexes
     var formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']
@@ -64,11 +70,36 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         let type = node[displayTypeIndex]
         inheritProperties(node)
 
+
         // expecting an parentName..
         let parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
         if (parentId == 'root') {
             parentId = undefined;
         }
+
+        /**
+         * This is where formula-sets are combined.
+         * if the node has and trend and notrend formula, the target formula will be x.trend ? node.formula_trend : valueFormula
+         * Ofcourse this will be for every formulaset that exists in the node
+         * Document formulaset is notrend, formula = notrend
+         * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
+         */
+        let trendformula = node[trend_formulaIndex];
+        let valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
+        if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
+            valueFormula = 'x.istrend ? ' + trendformula + ':' + valueFormula;
+        }
+
+        if (type == 'select') {
+            if (!node[choiceIndex]) {
+                if (log.debug) log.debug('Row [' + rowId + '] is type [select], but does not have choices')
+            } else if (node[choiceIndex].split('|').length == 2) {
+                type = 'radio'
+            } else {
+                if (log.TRACE) log.trace('[' + rowId + '] ' + node.choices)
+            }
+        }
+
         //TODO: quick-fix move into IDE ScorecardTool-addon
         if (nodeName.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
             if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
@@ -80,7 +111,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             type = 'paragraph'
         }
 
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', parseFFLFormula(node[fflRegister.formulaindex], nodeName, 'value', type), type);
+        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(valueFormula, nodeName, 'value', type), type);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
@@ -90,7 +121,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true
 
-        uiNode.datatype = node[displayTypeIndex] || 'number';
+        uiNode.datatype = node[dataTypeIndex] || 'number';
 
         if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
 
@@ -98,7 +129,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             const index = formulaIndexes[i];
             if (node[index]) {
                 if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]])
-                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], parseFFLFormula(node[index], nodeName, indexer.schema[index], null));
+                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(node[index], nodeName, indexer.schema[index], null));
             }
         }
     });
@@ -120,12 +151,15 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 const displaytypes = {
     default: 'string'
 }
-
-function parseFFLFormula(formula, nodeName, col, type) {
+RegisterToLMEParser.prototype.parseFFLFormula = function(formula, nodeName, col, type) {
+    /*    if (valueFormula.indexOf('__') > -1) {
+            console.info(indexer.constants[])
+        }*/
+    const indexer = this.indexer;
     if (!formula) return type == 'string' ? AST.STRING("") : AST.UNDEFINED()
     let finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
     finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
-        return '"international' + $2 + '"'
+        return indexer.constants[parseInt($2)]
     })
     var formulaReturn = 'undefined';
     try {

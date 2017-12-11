@@ -41,7 +41,7 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
     this.warnings.length = 0;
     //will also update the register
     if (this.changed) {
-        console.info('Changed content in FFL, reparsing all data')
+        //console.info('Changed content in FFL, reparsing all data')
         this.syntaxCheck(ffl, cursor);
         this.lines = ffl.split('\n')
         this.namedIndex = this.register.getIndex('name');

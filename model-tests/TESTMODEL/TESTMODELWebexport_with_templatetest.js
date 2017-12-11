@@ -24,14 +24,7 @@ for (var i = 0; i < lines.length; i++) {
         vars[name] = i
     }
 }
-
-//var webDesignGrammer = fs.readFileSync(__dirname + '/TESTMODEL.wdn', 'utf8');
-//const lmeDisplayGrammer = new LmeDisplayGrammer(webDesignGrammer);
-
-/*const lmeDisplayGrammer = new LmeDisplayGrammer('Uses TESTMODEL\nQ_ROOT');
-const grammerModel = lmeDisplayGrammer.parseGrammer();*/
 MVO.importWebModel('Uses MVO\nQ_ROOT')
-
 const nodes = MVO.exportWebModel().nodes;
 
 
