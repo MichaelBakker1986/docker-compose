@@ -9,7 +9,7 @@ require('../lme-core/exchange_modules/ffl2/RegisterToLMEParser')//should not be 
 
 const ScorecardTool = require('../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
 const FFLFormatter = require('../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
-const ffl = require('fs').readFileSync('../git-connect/resources/MVO.ffl', 'utf-8')
+const ffl = require('fs').readFileSync(__dirname + '/MVO/MVO.ffl', 'utf-8')
 //const fllToIndex = new PropertiesModuleFFLFormat(modelRegister).parse(ffl);
 
 var now = require('performance-now')
