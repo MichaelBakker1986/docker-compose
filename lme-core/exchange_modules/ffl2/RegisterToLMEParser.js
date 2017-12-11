@@ -65,8 +65,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         inheritProperties(node)
 
         // expecting an parentName..
-        const parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
-
+        let parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
+        if (parentId == 'root') {
+            parentId = undefined;
+        }
         //TODO: quick-fix move into IDE ScorecardTool-addon
         if (nodeName.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
             if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
@@ -81,7 +83,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', parseFFLFormula(node[fflRegister.formulaindex], nodeName, 'value', type), type);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
-        if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible && ' + visibleFormula
+        if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
         uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';

@@ -1871,9 +1871,8 @@ model KSP uses BaseModel
             }
             variable TotalYearlyCostTSUM
             {
-                formula: TSUM(TotalYearlyCosts)
+                formula: TSUM(TotalYearlyCosts);
             }
-
           }
           variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
           {

@@ -17,6 +17,7 @@ RegisterPlainFFLToLMEParser.prototype.parseData = function(data, workbook) {
     const register = new Register()
     const fflFormatter = new FFLFormatter(register, data)
     fflFormatter.parseProperties();
+    workbook.modelName = fflFormatter.name || workbook.modelName;
     return new RegisterToLMEParser().parseData(register, workbook)
 }
 exports.RegisterPlainFFLToLMEParser = RegisterPlainFFLToLMEParser;

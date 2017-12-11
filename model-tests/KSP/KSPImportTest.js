@@ -5,19 +5,13 @@
  *
  */
 const fs = require('fs')
-var FormulaService = require('../../lme-core/src/FormulaService')
-var WorkBook = require('../../lme-core/src/JSWorkBook')
-var FESContext = require('../../lme-core/src/fescontext')
-var log = require('ff-log')
-var assert = require('assert')
-require('../../math/ff-math')
-var fesjsApi = require('../../lme-core').fesjs;
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
-//add excel-lookup, MatrixLookup
+const LMEapi = require('../../lme-model-api/src/lme');
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+const model = new LMEapi();
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
+model.addFunctions(excelPlugin);
 excelPlugin.initComplete.then(function(matrix) {
-    var wb = new WorkBook(new FESContext());
-    wb.importSolution("" + fs.readFileSync(__dirname + '/KSP.ffl'), 'ffl')
-
+    model.importFFL2Backwards(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
+}).catch(function(err) {
+    throw err
 })

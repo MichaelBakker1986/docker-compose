@@ -12,4 +12,4 @@ const register3 = new Formatter(register, fflFile);
 register3.parseProperties()
 const parse = register3.toString();
 const time = (now() - start).toFixed(0);
-assert(time < 60, "formatting KSP twice may never take longer than 40ms")
+assert(time < 120, "formatting KSP twice may never take longer than 120ms")

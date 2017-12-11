@@ -114,6 +114,7 @@ function finChoice(formula) {
     else {
         formula = formula.trim().slice(1, -1);
         var choices = formula.replace(/'/gmi, '');
+        choices = choices.replace(/: /g, ":")
         choices = choices.replace(/:/gmi, '\" , \"value\" : \"');
         choices = choices.replace(/\|/gmi, '\"} , { \"name\" :\"');
         return "[{ \"name\" : \"" + choices + "\" }]";
