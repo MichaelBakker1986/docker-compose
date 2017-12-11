@@ -4,7 +4,7 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Costs of child raising (v1.27)";
+   title: "Costs of child raising (v1.29)";
    locked: 1;
    frequency: document;
    displaytype: scorecard;
@@ -123,7 +123,7 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
-     tuple Child
+     variable Child
      {
       title: "Child";
       locked: 1;
