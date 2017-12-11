@@ -76,7 +76,7 @@ model KSP uses BaseModel
       frequency: document;
       datatype: number;
       displaytype: select;
-      choices: "0: Nee|1:Ja"
+      choices: "0: Nee|1: Ja"
       required: 1;
      }
      variable YearlyIncomeParent01
