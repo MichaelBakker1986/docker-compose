@@ -4,7 +4,7 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Costs of child raising (v1.29)";
+   title: "Costs of child raising (v1.27)";
    locked: 1;
    frequency: document;
    displaytype: scorecard;
@@ -45,7 +45,7 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfDaysChildcareWeek.required and NrOfDaysOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Situation
     {
@@ -75,16 +75,37 @@ model KSP uses BaseModel
       title: "Extra month parent 1";
       frequency: document;
       datatype: number;
+      formula: 0;
       displaytype: select;
       choices: "0:Nee|1:Ja";
       required: 1;
+      variable ValueExtraMonth
+        {
+        title: "ValueExtraMonth";
+        frequency: document;
+        datatype: number;
+        formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
+        required: 1;
+        fixed_decimals: 2;
+        visible: 1;
+        }
      }
      variable YearlyIncomeParent01
      {
-      title: "Gross Yearly Income Parent 1 including vac allowance";
+      title: "Gross Yearly Income Parent 1 including vacation allowance";
       frequency: document;
       datatype: number;
-      formula: OnER((IncomeParent01*12)*1.08+Case(ExtraMonthParent01,[1: IncomeParent01 | 0: 0]),NA);
+      formula: OnER(((IncomeParent01*12)*1.08),NA);
+      required: 1;
+      fixed_decimals: 2;
+      visible: 1;
+     }
+     variable ValueExtraMonth
+     {
+      title: "ValueExtraMonth";
+      frequency: document;
+      datatype: number;
+      formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
       required: 1;
       fixed_decimals: 2;
       visible: 1;
@@ -123,7 +144,7 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
-     variable Child
+     tuple Child
      {
       title: "Child";
       locked: 1;
@@ -141,25 +162,25 @@ model KSP uses BaseModel
        hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo'n 18 euro per maand.";
        choices: "0:Boy|1:Girl";
       }
-      variable NrOfDaysChildcareWeek
+      variable NrOfHoursChildcareWeek
       {
-       title: "Nr. of days childcare per week";
+       title: "Nr. of hours childcare per week";
        frequency: document;
        formula: NA;
        datatype: number;
        required: 1;
        fixed_decimals: 1;
       }
-      variable NrOfDaysChildcareMonth
+      variable NrOfHoursChildcareMonth
       {
        title: "Nr. of hours childcare per month";
        locked: 1;
        frequency: document;
-       formula: OnER(10.5*NrOfDaysChildcareWeek[1]*4,NA);
+       formula: OnER(NrOfHoursChildcareWeek[1]*4,NA);
        datatype: number;
        fixed_decimals: 1;
       }
-      variable NrOfDaysOutOfSchoolCareWeek
+      variable NrOfHourssOutOfSchoolCareWeek
       {
        title: "Nr. of days out-of-school care per week";
        frequency: document;
@@ -167,12 +188,12 @@ model KSP uses BaseModel
        required: 1;
        fixed_decimals: 1;
       }
-      variable NrOfDaysOutOfSchoolCareMonth
+      variable NrOfHoursOutOfSchoolCareMonth
       {
        title: "Nr. of hours out-of-school care per month";
        locked: 1;
        frequency: document;
-       formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,NA);
+       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.5,NA);
        datatype: number;
        fixed_decimals: 1;
       }
@@ -233,7 +254,7 @@ model KSP uses BaseModel
      variable TupleSumTest
      {
       frequency: document;
-      formula: NrOfDaysChildcareWeek;
+      formula: NrOfHoursChildcareWeek;
       datatype: number;
      }
      variable Memo1
