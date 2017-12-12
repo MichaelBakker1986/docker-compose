@@ -19,7 +19,7 @@ model KSP uses BaseModel
     formula: 1;
     displaytype: currency;
     datatype: number;
-    visible: 1;
+    visible: 0;
     variable Q_MAP00_INTRO
     {
      title: "Intro";
