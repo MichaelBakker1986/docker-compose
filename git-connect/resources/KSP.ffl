@@ -4,7 +4,7 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Costs of child raising (v1.27)";
+   title: "Costs of child raising (v1.28)";
    locked: 1;
    frequency: document;
    displaytype: scorecard;
@@ -85,7 +85,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth Parent 1";
        locked: 1;
        frequency: document;
-       formula: If(ExtraMonthParent01=0,0,IncomeParent01);
+       formula: Case(ExtraMonthParent01,[0:0|1:IncomeParent01]);
        datatype: number;
        visible: 1;
        required: 1;
@@ -126,7 +126,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth Parent 2";
        locked: 1;
        frequency: document;
-       formula: If(ExtraMonthParent02=0,0,IncomeParent02);
+       formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
        datatype: number;
        visible: 1;
        required: 1;
