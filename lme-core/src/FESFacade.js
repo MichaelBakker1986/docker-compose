@@ -47,7 +47,7 @@ function fetchSolutionNode(row, col) {
 }
 
 FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
-    var rowId = row + '_' + ( col || 'value');
+    var rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
@@ -67,6 +67,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
             const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
             returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
             returnValue = (choices.lookup('value', String(returnValue)) || choices.lookup('name', String(returnValue))).name
+            if (!isNaN(returnValue)) {
+                returnValue = parseFloat(returnValue)
+            }
         }
     }
     FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
