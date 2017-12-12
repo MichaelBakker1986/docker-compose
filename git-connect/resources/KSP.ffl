@@ -80,9 +80,9 @@ model KSP uses BaseModel
       datatype: number;
       required: 1;
       choices: "0:Nee|1:Ja";
-      variable ValueExtraMonth
+      variable ValueExtraMonthParent01
       {
-       title: "ValueExtraMonth";
+       title: "ValueExtraMonth Parent 1";
        locked: 1;
        frequency: document;
        formula: If(ExtraMonthParent01=0,0,IncomeParent01);
@@ -96,17 +96,50 @@ model KSP uses BaseModel
      {
       title: "Gross Yearly Income Parent 1 including vacation allowance";
       frequency: document;
-      formula: OnER(((IncomeParent01)*12*1.08)+parseInt(ValueExtraMonth),NA);
+      formula: OnER(((IncomeParent01)*12*1.08)+parseInt(ValueExtraMonthParent01),NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
+
      variable IncomeParent02
      {
-      title: "Gross Income Parent 2";
+      title: "Gross Monthly Income Parent 2";
       frequency: document;
       datatype: number;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable ExtraMonthParent02
+     {
+      title: "Extra month parent 2";
+      frequency: document;
+      formula: 0;
+      displaytype: select;
+      datatype: number;
+      required: 1;
+      choices: "0:Nee|1:Ja";
+      variable ValueExtraMonthParent02
+      {
+       title: "ValueExtraMonth Parent 2";
+       locked: 1;
+       frequency: document;
+       formula: If(ExtraMonthParent02=0,0,IncomeParent02);
+       datatype: number;
+       visible: 1;
+       required: 1;
+       fixed_decimals: 2;
+      }
+     }
+     variable YearlyIncomeParent02
+     {
+      title: "Gross Yearly Income Parent 2 including vacation allowance";
+      frequency: document;
+      formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
+      datatype: number;
+      visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
