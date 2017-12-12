@@ -38,7 +38,7 @@ modelService.onNewModel = function(model, path) {
  */
 
 var excelPlugin = require('../excel-connect').xlsxLookup;
-excelPlugin.initComplete().then(function() {
+excelPlugin.initComplete('KSP').then(function() {
     modelService.initializeModels();
 })
 lmeAPI.addFunctions(excelPlugin);
