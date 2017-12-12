@@ -4,7 +4,6 @@ require('../exchange_modules/screendefinition/screendefparser');//just let it in
 require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
 var JSWorkBook = require('../src/JSWorkBook');
 var assert = require('assert');
-//var data = JUNIT.getFile('scorecardtemplate.json');
 var data = require('../resources/scorecardtemplate.json');
 JUNIT.print(data)
 var FESContext = require('../src/fescontext')
@@ -15,9 +14,6 @@ assert.ok(wb.validateImportedSolution().valid);
 var screenDefexport = wb.export('screendefinition');
 assert.notStrictEqual(screenDefexport, undefined);
 assert.notStrictEqual(screenDefexport, null);
-/*var node = wb.getNode('Balans')
- assert.equal(node.rowId, 'Balans');
- assert.equal(node.name, 'BUDGETMODEL_Balans_value');*/
 var actual = JSON.parse(wb.export('screendefinition'));
 var expected = JSON.parse(JSON.stringify(data, null, 2));
 JUNIT.validateTree(expected, actual, 'children', 'children', function(expected, actual) {

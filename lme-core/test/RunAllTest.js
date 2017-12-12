@@ -8,7 +8,6 @@ var tests = [
     './MathTest',
     './FflToJsonConverterTest',
     './fflexportTest',//.FFL Language
-    /*'./fflImportTest',//.FFL Language*/
     './screendefinitionTest',//.screen definition
     './jsonValuesTest',
     './tupleTest',
