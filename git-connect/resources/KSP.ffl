@@ -100,16 +100,6 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       visible: 1;
      }
-     variable ValueExtraMonth
-     {
-      title: "ValueExtraMonth";
-      frequency: document;
-      datatype: number;
-      formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
-      required: 1;
-      fixed_decimals: 2;
-      visible: 1;
-     }
      variable IncomeParent02
      {
       title: "Gross Income Parent 2";
