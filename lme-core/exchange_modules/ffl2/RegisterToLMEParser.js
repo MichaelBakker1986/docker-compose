@@ -26,13 +26,13 @@ RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
     }
 }
 RegisterToLMEParser.prototype.deParse = function(data, workbook) {
-    if (!this.indexer) return null;
-    return new RegisterToFFL(this.indexer).toGeneratedFFL(undefined, workbook.modelName)
+    if (!workbook.indexer) return null;
+    return new RegisterToFFL(workbook.indexer).toGeneratedFFL(undefined, workbook.modelName)
 }
 RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const indexer = data;
+    workbook.indexer = indexer;
     const self = this;
-    this.indexer = data;
     const fflRegister = new RegisterToFFL(indexer)
     const register = data.getIndex('name');
     const modelName = workbook.modelName || indexer.name;
@@ -116,7 +116,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             type = 'paragraph'
         }
 
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(valueFormula, nodeName, 'value', type), type);
+        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
@@ -137,7 +137,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             const index = formulaIndexes[i];
             if (node[index]) {
                 if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]])
-                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(node[index], nodeName, indexer.schema[index], null));
+                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null));
             }
         }
     });
@@ -156,14 +156,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
  * Easy way to implement refers-to (inheritance)
  * @param {optional} modelName
  */
-const displaytypes = {
-    default: 'string'
-}
-RegisterToLMEParser.prototype.parseFFLFormula = function(formula, nodeName, col, type) {
-    /*    if (valueFormula.indexOf('__') > -1) {
-            console.info(indexer.constants[])
-        }*/
-    const indexer = this.indexer;
+RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type) {
     if (!formula) return type == 'string' ? AST.STRING("") : AST.UNDEFINED()
     let finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
     finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
