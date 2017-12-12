@@ -126,7 +126,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth Parent 2";
        locked: 1;
        frequency: document;
-       formula: If(ExtraMonthParent02=0,0,IncomeParent02);
+       formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
        datatype: number;
        visible: 1;
        required: 1;
