@@ -45,6 +45,7 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
+    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Situation
     {
@@ -83,7 +84,7 @@ model KSP uses BaseModel
         title: "ValueExtraMonth";
         frequency: document;
         datatype: number;
-        formula: Case(ExtraMonthParent01,[0:0|1:2|2:3]);
+        formula: Case(ExtraMonthParent01,[0:0|1:2]);
         required: 1;
         fixed_decimals: 2;
         visible: 1;
@@ -143,7 +144,7 @@ model KSP uses BaseModel
       fixed_decimals: 1;
       hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
-     variable Child
+     tuple Child
      {
       title: "Child";
       locked: 1;
@@ -488,12 +489,6 @@ model KSP uses BaseModel
       frequency: document;
       formula: OnER(Min(NrOfDaysChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
       displaytype: currency;
-      datatype: number;
-     }
-     variable NrOfDaysOutOfSchoolCareMonth
-     {
-      title: "Temp created";
-      formula: 1;
       datatype: number;
      }
      variable NrCompensatedHoursOutofSchoolCare
@@ -1055,20 +1050,6 @@ model KSP uses BaseModel
       datatype: number;
       fixed_decimals: 2;
       aggregation: balance;
-     }
-     variable NrOfDaysChildcareMonth
-     {
-      title: "NrOfDaysChildcareMonth costs";
-      formula: 0;
-      datatype: number;
-      fixed_decimals: 2;
-     }
-     variable NrOfHoursOutOfSchoolCareWeek
-     {
-      title: "NrOfHoursOutOfSchoolCareWeek costs";
-      formula: 0;
-      datatype: number;
-      fixed_decimals: 2;
      }
     }
    }
