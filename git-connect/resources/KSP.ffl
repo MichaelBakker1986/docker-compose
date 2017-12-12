@@ -84,7 +84,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth";
        frequency: document;
        datatype: number;
-       formula: If(ExtraMonthParent01=0,12,43);
+       formula: If(ExtraMonthParent01=0,0,IncomeParent01);
        required: 1;
        fixed_decimals: 2;
        visible: 1;
@@ -172,7 +172,7 @@ model KSP uses BaseModel
       }
       variable NrOfHoursOutOfSchoolCareWeek
       {
-       title: "Nr. of days out-of-school care per week";
+       title: "Nr. of hours out-of-school care per week";
        frequency: document;
        datatype: number;
        required: 1;
@@ -486,7 +486,7 @@ model KSP uses BaseModel
       title: "Nr. of compensated hours out-of-school care ";
       locked: 1;
       frequency: document;
-      formula: OnER(Min(NrOfDaysOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
+      formula: OnER(Min(NrOfHoursOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
       displaytype: currency;
       datatype: number;
      }
@@ -909,7 +909,7 @@ model KSP uses BaseModel
       {
        title: "Kosten BSO";
        frequency: column;
-       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfDaysOutOfSchoolCareMonth)*12, NA);
+       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12, NA);
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -1037,15 +1037,6 @@ model KSP uses BaseModel
       title: "Childcare costs";
       frequency: column;
       formula: (NrOfHoursChildcareMonth*HourlyFeeChildCare)*12;
-      datatype: number;
-      fixed_decimals: 2;
-      aggregation: balance;
-     }
-     variable NrOfDaysOutOfSchoolCareMonth
-     {
-      title: "NrOfDaysOutOfSchoolCareMonth costs";
-      frequency: column;
-      formula: 1;
       datatype: number;
       fixed_decimals: 2;
       aggregation: balance;
