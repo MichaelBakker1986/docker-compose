@@ -1,4 +1,4 @@
-const port = 8085;
+const port = process.env.PORT;
 let express = require('express');
 const app = express();
 var pretty = require('express-prettify');
