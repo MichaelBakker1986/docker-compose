@@ -9,8 +9,8 @@ model KSP uses BaseModel
    frequency: document;
    displaytype: scorecard;
    datatype: number;
-   hint: "This module enables you to gain insight in the costs involved for raising a child";
    choices: "0:Complete|1:Incomplete";
+   hint: "This module enables you to gain insight in the costs involved for raising a child";
    variable Q_MAP00
    {
     title: "Intro";
@@ -67,6 +67,7 @@ model KSP uses BaseModel
       title: "Gross Monthly Income Parent 1";
       frequency: document;
       datatype: number;
+      formula: 0;
       required: 1;
       fixed_decimals: 2;
      }
@@ -74,31 +75,32 @@ model KSP uses BaseModel
      {
       title: "Extra month parent 1";
       frequency: document;
-      datatype: number;
       formula: 0;
       displaytype: select;
-      choices: "0:Nee|1:Ja";
+      datatype: number;
       required: 1;
+      choices: "0:Nee|1:Ja";
       variable ValueExtraMonth
       {
        title: "ValueExtraMonth";
+       locked: 1;
        frequency: document;
-       datatype: number;
        formula: If(ExtraMonthParent01=0,0,IncomeParent01);
+       datatype: number;
+       visible: 1;
        required: 1;
        fixed_decimals: 2;
-       visible: 1;
       }
      }
      variable YearlyIncomeParent01
      {
       title: "Gross Yearly Income Parent 1 including vacation allowance";
       frequency: document;
+      formula: OnER(((IncomeParent01)*12*1.08)+parseInt(ValueExtraMonth),NA);
       datatype: number;
-      formula: OnER(((IncomeParent01*12)*1.08)+ValueExtraMonth,NA);
+      visible: 1;
       required: 1;
       fixed_decimals: 2;
-      visible: 1;
      }
      variable IncomeParent02
      {
@@ -149,8 +151,8 @@ model KSP uses BaseModel
        datatype: number;
        required: 1;
        fixed_decimals: 0;
-       hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo'n 18 euro per maand.";
        choices: "0:Boy|1:Girl";
+       hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\'n 18 euro per maand.";
       }
       variable NrOfHoursChildcareWeek
       {
@@ -702,7 +704,7 @@ model KSP uses BaseModel
      formula: 559;
      displaytype: currency;
      datatype: currency;
-     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
+     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
     }
     variable AantalMaandenTeSparen
     {
@@ -739,8 +741,8 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    choices: "0:Complete|1:Incomplete";
     visible: (Q_ROOT=1);
+    choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
     {
      title: "Your Personal Situation";
