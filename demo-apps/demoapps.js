@@ -39,6 +39,7 @@ app.get('/model-docs', function(req, res) {
     res.redirect('http://' + require('os').hostname() + ':8080/docs/?url=%2Fapi-docs#/default/idRetrieveModels');
 });
 //IDE proxies
+app.get('*/excel/*', proxy('http://' + require('os').hostname() + ':8086', {limit: '50mb'}))
 app.get('*/excelide.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/model', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))
 app.get('*/ui_showcase.js', proxy('http://' + require('os').hostname() + ':8080', {limit: '50mb'}))

@@ -102,6 +102,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     var rv = {
         id: rowId,
         index: index,
+        title_locked: node.title_locked,
         type: node.displayAs,
         path: treePath.join('.'),
         ammount: amount,

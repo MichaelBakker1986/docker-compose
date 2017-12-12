@@ -82,6 +82,11 @@
                 <div class="col-xs-3">
                     <ul class="nav navbar-nav" style="float: right">
                         <li>
+                            <a class="data-story" ng-click="update()" data-toggle="tooltip" title="Update">
+                                <i class="fa fa-refresh"></i> <span></span>
+                            </a>
+                        </li>
+                        <li>
                             <a ng-click="togglePropertiesSidebar()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li>
                     </ul>
@@ -111,9 +116,10 @@
                         <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
                 </li>
+                </li>
                 <li class="treeview">
-                    <a class="data-story" ng-click="update()" data-toggle="tooltip" title="Update">
-                        <i class="fa fa-cloud-download"></i> <span>Update</span>
+                    <a ng-click="downloadMatrix()" data-toggle="tooltip" title="Download matrix">
+                        <i class="fa fa-cloud-download"></i> <span>Excel matrix</span>
                     </a>
                 </li>
             </ul>

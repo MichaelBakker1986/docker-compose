@@ -21,11 +21,11 @@ ModelListener.prototype.initializeModels = function() {
         } else {
             res.forEach(function(file) {
                 if (file.toLowerCase().endsWith('.ffl') && file.toLowerCase().indexOf('_tmp_') == -1) {
-                    fs.readFile(file, function read(err, data) {
+                    fs.readFile(file, 'utf8', function read(err, data) {
                         if (err) {
                             throw err;
                         }
-                        var modelData = "" + new Buffer(data, 'binary').toString('utf-8');
+                        var modelData = data;
                         modelData = modelData.replace(/amount/gmi, 'Amount');
                         modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
                         modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
