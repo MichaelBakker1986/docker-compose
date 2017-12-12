@@ -22327,7 +22327,7 @@ function fetchSolutionNode(row, col) {
 }
 
 FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
-    var rowId = row + '_' + ( col || 'value');
+    var rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
         //don't give away variable name here.
@@ -22347,6 +22347,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
             const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
             returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
             returnValue = (choices.lookup('value', String(returnValue)) || choices.lookup('name', String(returnValue))).name
+            if (!isNaN(returnValue)) {
+                returnValue = parseFloat(returnValue)
+            }
         }
     }
     FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
@@ -23237,8 +23240,9 @@ if (!global.DEBUGMODUS) {
 }
 fm.prototype.initializeFormula = function(newFormula) {
     const id = newFormula.id || newFormula.index;
+    //"debug('" + newFormula.name + "');
     if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    const stringFunction = global.DEBUGMODUS ? "debug('" + newFormula.name + "'); return " + newFormula.parsed + " /*\n" + newFormula.name + ":" + newFormula.original + "*/ " : "return " + newFormula.parsed
+    const stringFunction = "return " + newFormula.parsed + " /*\n" + newFormula.nam + ":" + newFormula.original + "*/ ";// : "return " + newFormula.parsed
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v', stringFunction).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
