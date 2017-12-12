@@ -80,15 +80,15 @@ model KSP uses BaseModel
       choices: "0:Nee|1:Ja";
       required: 1;
       variable ValueExtraMonth
-        {
-        title: "ValueExtraMonth";
-        frequency: document;
-        datatype: number;
-        formula: If(ExtraMonthParent01=0,0,IncomeParent01);
-        required: 1;
-        fixed_decimals: 2;
-        visible: 1;
-        }
+      {
+       title: "ValueExtraMonth";
+       frequency: document;
+       datatype: number;
+       formula: If(ExtraMonthParent01=0,12,43);
+       required: 1;
+       fixed_decimals: 2;
+       visible: 1;
+      }
      }
      variable YearlyIncomeParent01
      {
@@ -1047,6 +1047,15 @@ model KSP uses BaseModel
       title: "Childcare costs";
       frequency: column;
       formula: (NrOfHoursChildcareMonth*HourlyFeeChildCare)*12;
+      datatype: number;
+      fixed_decimals: 2;
+      aggregation: balance;
+     }
+     variable NrOfDaysOutOfSchoolCareMonth
+     {
+      title: "NrOfDaysOutOfSchoolCareMonth costs";
+      frequency: column;
+      formula: 1;
       datatype: number;
       fixed_decimals: 2;
       aggregation: balance;
