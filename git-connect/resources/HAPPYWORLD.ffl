@@ -10,7 +10,7 @@ model HAPPYWORLD uses BaseModel
    variable Q_MAP01
    {
     title: "Stap 1";
-    hint: "Informatie over de stap";
+    hint: "Informatie over de stap1";
     variable Ofhier
     {
      title: "Zonderiets";
