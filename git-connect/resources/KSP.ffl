@@ -4,7 +4,7 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Costs of child raising (v1.29)";
+   title: "Costs of child raising (v1.28)";
    locked: 1;
    frequency: document;
    displaytype: scorecard;
@@ -85,9 +85,9 @@ model KSP uses BaseModel
        title: "ValueExtraMonth Parent 1";
        locked: 1;
        frequency: document;
-       formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
+       formula: Case(ExtraMonthParent01,[0:0|1:IncomeParent01]);
        datatype: number;
-       visible: 1;
+       visible: 0;
        required: 1;
        fixed_decimals: 2;
       }
@@ -95,12 +95,22 @@ model KSP uses BaseModel
      variable YearlyIncomeParent01
      {
       title: "Gross Yearly Income Parent 1 including vacation allowance";
+      locked: 1;
       frequency: document;
-      formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
+      formula: OnER(((IncomeParent01)*12*1.08)+parseInt(ValueExtraMonthParent01),NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
+     }
+     variable WorkingHoursWeeklyParent01
+     {
+      title: "Working hours parent 1";
+      frequency: document;
+      formula: 0;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 1;
      }
      variable IncomeParent02
      {
@@ -127,7 +137,7 @@ model KSP uses BaseModel
        frequency: document;
        formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
        datatype: number;
-       visible: 1;
+       visible: 0;
        required: 1;
        fixed_decimals: 2;
       }
@@ -135,6 +145,7 @@ model KSP uses BaseModel
      variable YearlyIncomeParent02
      {
       title: "Gross Yearly Income Parent 2 including vacation allowance";
+      locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
       datatype: number;
@@ -142,18 +153,11 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 2;
      }
-     variable WorkingHoursWeeklyParent01
-     {
-      title: "Working hours parent 1";
-      frequency: document;
-      datatype: number;
-      required: 1;
-      fixed_decimals: 1;
-     }
      variable WorkingHoursWeeklyParent02
      {
       title: "Working hours parent 2";
       frequency: document;
+      formula: 0;
       datatype: number;
       required: 1;
       fixed_decimals: 1;
@@ -719,16 +723,7 @@ model KSP uses BaseModel
      frequency: document;
      formula: 100;
      displaytype: currency;
-     datatype: number;
-    }
-    variable SavedMoneyTest
-    {
-     title: "Al gespaard voor kindtest";
-     frequency: document;
-     formula: 100+SavedMoney;
-     displaytype: currency;
-     datatype: number;
-     locked:1;
+     datatype: currency;
     }
     variable MonthlyIncomeBijBaan
     {
@@ -744,7 +739,7 @@ model KSP uses BaseModel
      frequency: document;
      formula: 559;
      displaytype: currency;
-     datatype: number;
+     datatype: currency;
      hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
     }
     variable AantalMaandenTeSparen
