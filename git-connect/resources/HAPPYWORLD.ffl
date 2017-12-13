@@ -1,0 +1,25 @@
+model HAPPYWORLD uses BaseModel
+{
+ version: "1.0";
+ root
+ {
+  variable Q_ROOT
+  {
+   title: "Stap 1";
+   displaytype: scorecard;
+   variable Q_MAP01
+   {
+    title: "Stap 1";
+    hint: "Informatie over de stap";
+    variable Ofhier
+    {
+     title: "Zonderiets";
+    }
+    variable SpeelHiermee
+    {
+     title: "OfIetsAnders";
+    }
+   }
+  }
+ }
+}
