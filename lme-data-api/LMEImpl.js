@@ -25,6 +25,48 @@ modelService.onNewModel = function(model, path) {
      * Update API-definition with variable names
      */
     LMEFacade.findAllInSolution(modelName, function(node) {
+        //PROTOTYPE SWAGGER-DEF GENERATE!
+        if (node.solutionName == 'KSP') {
+            if (node.colId === 'value') {
+                if (node.nodes.length > 1) {
+                    const params = [{
+                        "$ref": "#/parameters/ContextId"
+                    }, {
+                        "$ref": "#/parameters/FigureName"
+                    }]
+                    for (var i = 0; i < node.nodes.length; i++) {
+                        params.push({
+                            "name": node.nodes[i].rowId,
+                            "required": true,
+                            "type": "string"
+                        })
+                    }
+                    apidef.paths["/id/{id}/" + node.rowId] = {
+                        "post": {
+                            "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
+                            "operationId": "figure",
+                            "produces": [
+                                "application/json"
+                            ],
+                            "parameters": params,
+                            "responses": {
+                                "200": {
+                                    "description": "OK",
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "$ref": "#/definitions/Value"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //console.info(node.nodes)
+                }
+            }
+        }
         if (node.colId === 'value') {
             apidef.parameters.FigureName.enum.push(node.solutionName + '_' + node.rowId)
         }
