@@ -117,9 +117,14 @@
                     </a>
                 </li>
                 </li>
-                <li class="treeview">
-                    <a ng-click="downloadMatrix()" data-toggle="tooltip" title="Download matrix">
+                <li>
+                    <a href="excel/{{session.fflModelPath}}" data-toggle="tooltip" title="Download matrix" download>
                         <i class="fa fa-cloud-download"></i> <span>Excel matrix</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://wiki.findesk.com/index.php/Calculation_functions" target="_blank" data-toggle="tooltip" title="Formula information">
+                        <i class="fa fa-question-circle-o"></i> <span>Formula information</span>
                     </a>
                 </li>
             </ul>

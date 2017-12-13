@@ -32,10 +32,10 @@ app.get('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:
 app.post('/id/:id/data', proxy('http://' + require('os').hostname() + ':8085/id/:id/data'));
 app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 
-app.get('/data-docs', function(req, res) {
+app.get('*/data-docs', function(req, res) {
     res.redirect('http://' + require('os').hostname() + ':8085/docs/?url=%2Fapi-docs%3Fabc%3D1#/default/idRetrieveFigures');
 });
-app.get('/model-docs', function(req, res) {
+app.get('*/model-docs', function(req, res) {
     res.redirect('http://' + require('os').hostname() + ':8080/docs/?url=%2Fapi-docs#/default/idRetrieveModels');
 });
 //IDE proxies
