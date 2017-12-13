@@ -5,6 +5,7 @@ ssh-keygen -t rsa
 
 vim id_rsa.pub = {Public SSH key for Stash}
 
+set environment variable HOST={{your_host_name}} : defaults to 'localhost'
 #----- VIA DOCKER
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
