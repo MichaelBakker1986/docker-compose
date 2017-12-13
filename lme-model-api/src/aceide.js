@@ -242,6 +242,10 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.hasChanges = false;
     $scope.changes = '';
 
+    $http.get('/hasUpdates').then(function(data) {
+        $scope.hasChanges = data.data.hasChanges;
+        $scope.changes = data.data.changes;
+    })
     $scope.update = function() {
         $scope.currentView = 'updateView';
         $http.get('/hasUpdates').then(function(data) {
