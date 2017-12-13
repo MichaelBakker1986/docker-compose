@@ -69,8 +69,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     }
 
+    let nestedTupleDepth = 0
+    const tuples = []
     const rootNode = register['root']
     this.walk(rootNode, 3, function(node, depth) {
+        if (depth < tuples.length) {
+            while (!tuples[depth] && tuples.length > 0) tuples.length--
+        }
         const nodeName = node[nameIndex];
         let type = node[displayTypeIndex]
         inheritProperties(node)
@@ -97,7 +102,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (type == 'select') {
             if (!node[choiceIndex]) {
-                if (log.debug) log.debug('Row [' + rowId + '] is type [select], but does not have choices')
+                if (log.debug) log.debug('Row [' + nodeName + '] is type [select], but does not have choices')
             } else if (node[choiceIndex].split('|').length == 2) {
                 type = 'radio'
             } else {
@@ -123,10 +128,23 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
         uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';
-        if (node[tupleIndex]) {
-            uiNode.tupleDefinition = true;
+
+        /**
+         * Tuple properties
+         */
+        if (node[tupleIndex] || tuples.length > 0) {
             uiNode.tuple = true;
+            uiNode.nestedTupleDepth = 0
+            for (var i = 0; i < tuples.length; i++)
+                if (tuples[i]) uiNode.nestedTupleDepth++
+            if (node[tupleIndex]) {
+                tuples[depth] = uiNode
+            } else {
+                uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
+                uiNode.tupleProperty = true
+            }
         }
+
         if (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true
 
         uiNode.datatype = node[dataTypeIndex] || 'number';

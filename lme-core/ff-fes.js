@@ -4,6 +4,7 @@
  */
 require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
 require("./exchange_modules/ffl2/RegisterToLMEParser");//just let it inject into the FESFacade
+require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
 //require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
@@ -15,7 +16,7 @@ function FESApi() {
 
 FESApi.prototype.init = function(data) {
     var JSWorkBook = new WorkBook(new FESContext());
-    JSWorkBook.importSolution(data, "ffl");
+    JSWorkBook.importSolution(data, "ffl2_backwards");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validateImportedSolution();

@@ -2,7 +2,14 @@ const logger = require('../ff-log')
 const jsMath = require('./jsMath.json')
 const Solver = require('js-solver')
 const entries = {};
-
+if (!global.MatrixLookup) {
+    MatrixLookup = function() {
+        return 1;
+    }
+}
+if (!global.MATRIX_VALUES) {
+    MATRIX_VALUES = {}
+}
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
     for (var func in jsMath) {

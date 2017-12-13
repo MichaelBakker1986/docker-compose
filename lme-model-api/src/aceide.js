@@ -70,9 +70,6 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.fflmode = true;
     $scope.currentView = 'FFLModelEditorView';
     $scope.fflType = '.ffl'
-    $scope.downloadMatrix = function() {
-        window.open('excel/' + $scope.session.fflModelPath)
-    }
     let currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
     $.getScript('resources/' + windowModelName + '.js', function(data, textStatus, jqxhr) {
         LME = LMEMETA.exportWebModel();

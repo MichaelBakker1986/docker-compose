@@ -31,14 +31,12 @@ modelService.onNewModel = function(model, path) {
                 if (node.nodes.length > 1) {
                     const params = [{
                         "$ref": "#/parameters/ContextId"
-                    }, {
-                        "$ref": "#/parameters/FigureName"
                     }]
                     for (var i = 0; i < node.nodes.length; i++) {
                         params.push({
                             "name": node.nodes[i].rowId,
                             "required": true,
-                            "type": "string"
+                            "type": node.datatype
                         })
                     }
                     apidef.paths["/id/{id}/" + node.rowId] = {
@@ -63,7 +61,6 @@ modelService.onNewModel = function(model, path) {
                             }
                         }
                     }
-                    //console.info(node.nodes)
                 }
             }
         }
