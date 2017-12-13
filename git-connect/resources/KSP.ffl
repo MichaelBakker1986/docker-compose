@@ -719,7 +719,7 @@ model KSP uses BaseModel
      frequency: document;
      formula: 100;
      displaytype: currency;
-     datatype: currency;
+     datatype: number;
     }
     variable MonthlyIncomeBijBaan
     {
