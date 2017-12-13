@@ -102,7 +102,6 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 2;
      }
-
      variable IncomeParent02
      {
       title: "Gross Monthly Income Parent 2";
