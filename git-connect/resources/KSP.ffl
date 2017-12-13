@@ -45,7 +45,7 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Situation
     {
@@ -176,7 +176,7 @@ model KSP uses BaseModel
      }
      variable Child
      {
-      variable ChildGender
+      variable Gender
       {
        title: "Gender";
        frequency: document;
@@ -850,7 +850,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
-       formula: If(ChildGender=0,MatrixLookup(null,"Allowance","Contributions",(ValueT(T))),MatrixLookup("Transport","MobilePhone","DrivingLicense",(ValueT(T))));
+       formula: If(Gender=0,MatrixLookup(null,"Allowance","Contributions",(ValueT(T))),MatrixLookup("Transport","MobilePhone","DrivingLicense",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
