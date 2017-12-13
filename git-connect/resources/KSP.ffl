@@ -206,9 +206,9 @@ model KSP uses BaseModel
        title: "Nr. of hours childcare per month";
        locked: 1;
        frequency: document;
-       formula: OnER(NrOfHoursChildcareWeek[1]*4,NA);
+       formula: OnER(NrOfHoursChildcareWeek*4.333,NA);
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable NrOfHoursOutOfSchoolCareWeek
       {
@@ -223,33 +223,34 @@ model KSP uses BaseModel
        title: "Nr. of hours out-of-school care per month";
        locked: 1;
        frequency: document;
-       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.5,NA);
+       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.333,NA);
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable HourlyFeeChildCare
       {
        title: "Hourly fee childcare";
        frequency: document;
-       formula: 6.8;
+       formula: 7.18;
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
+       }
       }
       variable HourlyFeeOutOfSchoolCare
       {
        title: "Hourly fee out-of-school care";
        frequency: document;
-       formula: 6.8;
+       formula: 6.69;
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable ParentalContributionPrimaryEducation
       {
        title: "Parental contribution primary education";
        frequency: document;
-       formula: 80;
+       formula: 30;
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable CostsUnspecified
       {
