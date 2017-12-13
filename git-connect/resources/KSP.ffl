@@ -769,7 +769,6 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    visible: (Q_ROOT=1);
     choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
     {
