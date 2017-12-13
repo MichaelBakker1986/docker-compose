@@ -805,7 +805,7 @@ model KSP uses BaseModel
       {
        title: "Diapers";
        frequency: column;
-       formula: MatrixLookup(null,"Personal care","Hairdresser",(ValueT(T)));
+       formula: MatrixLookup(null,"PersonalCare","Diapers",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -814,7 +814,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
-       formula: If(Gender=0,MatrixLookup(null,"Allowance","Contributions",(ValueT(T))),MatrixLookup("Transport","MobilePhone","DrivingLicense",(ValueT(T))));
+       formula: If(Gender=0,MatrixLookup(null,"PersonalCare","FoodCostsBoy",(ValueT(T))),MatrixLookup("PersonalCare","FoodCostsGirl",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -830,7 +830,7 @@ model KSP uses BaseModel
       }
       variable ActualPersonalCareCosts
       {
-       title: "Personal care";
+       title: "PersonalCare";
        frequency: column;
        formula: MatrixLookup(null,"Total (yearly) costs","[b]Child-related Income[/b]",(ValueT(T)));
        datatype: number;
