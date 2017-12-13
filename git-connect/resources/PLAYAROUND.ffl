@@ -29,7 +29,7 @@ model PLAYAROUND uses BaseModel
     {
      title: "TestVraag";
      formula: Q_MAP01_VRAAG01 + Q_MAP01_VRAAG02;
-     fixed_decimals:2;
+     fixed_decimals:0;
     }
    }
   }
