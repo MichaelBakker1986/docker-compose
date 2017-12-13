@@ -229,62 +229,61 @@ model KSP uses BaseModel
        formula: 7.18;
        datatype: number;
        fixed_decimals: 2;
-       }
-      }
-      variable HourlyFeeOutOfSchoolCare
-      {
-       title: "Hourly fee out-of-school daycare";
-       frequency: document;
-       formula: 6.69;
-       datatype: number;
-       fixed_decimals: 2;
-      }
-      variable ParentalContributionPrimaryEducation
-      {
-       title: "Parental contribution primary education";
-       frequency: document;
-       formula: 30;
-       datatype: number;
-       fixed_decimals: 2;
-      }
-      variable CostsUnspecified
-      {
-       title: "Costs unspecified per month";
-       frequency: document;
-       visible: 0;
-       formula: 50;
-       datatype: number;
-       fixed_decimals: 1;
-      }
-      variable SecondaryEducationProfile
-      {
-       title: "secondary education (profile)";
-       frequency: document;
-       formula: 1;
-       displaytype: select;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 1;
-       choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
-      }
-      variable TotalYearlyCostsChild
-      {
-       title: "Total (yearly) costs regarding child";
-       locked: 1;
-       frequency: column;
-       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
-       datatype: number;
-       fixed_decimals: 2;
-       aggregation: flow;
       }
      }
-     variable Memo1
+     variable HourlyFeeOutOfSchoolCare
      {
-      title: "Toelichting";
+      title: "Hourly fee out-of-school daycare";
       frequency: document;
-      displaytype: memo;
-      datatype: string;
+      formula: 6.69;
+      datatype: number;
+      fixed_decimals: 2;
      }
+     variable ParentalContributionPrimaryEducation
+     {
+      title: "Parental contribution primary education";
+      frequency: document;
+      formula: 30;
+      datatype: number;
+      fixed_decimals: 2;
+     }
+     variable CostsUnspecified
+     {
+      title: "Costs unspecified per month";
+      frequency: document;
+      visible: 0;
+      formula: 50;
+      datatype: number;
+      fixed_decimals: 1;
+     }
+     variable SecondaryEducationProfile
+     {
+      title: "secondary education (profile)";
+      frequency: document;
+      formula: 1;
+      displaytype: select;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 1;
+      choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+     }
+     variable TotalYearlyCostsChild
+     {
+      title: "Total (yearly) costs regarding child";
+      locked: 1;
+      frequency: column;
+      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
+      datatype: number;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+    }
+    variable Memo1
+    {
+     title: "Toelichting";
+     frequency: document;
+     displaytype: memo;
+     datatype: string;
     }
    }
    variable Q_MAP02
