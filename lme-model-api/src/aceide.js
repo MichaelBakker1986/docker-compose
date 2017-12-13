@@ -247,7 +247,6 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         $http.get('/hasUpdates').then(function(data) {
             $scope.hasChanges = data.data.hasChanges;
             $scope.changes = data.data.changes;
-
             if ($scope.hasChanges) {
                 $http.get('/update/git/notifyCommit').then(function(data) {
                     location.reload();

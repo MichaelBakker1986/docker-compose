@@ -1,14 +1,12 @@
 const exec = require('child-process-promise').exec;
 const log = require('ff-log');
-const dns = require('dns');
-const host = require('os').hostname();
-const develop = host == 'michael';
+const host = process.env.HOST || 'localhost'
+const develop = (host == 'localhost');
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
 const uuid = require('uuid4');
 
-//git remote update && git status -uno
 class Stash {
     constructor() {
     }
@@ -60,7 +58,7 @@ class Stash {
     }
 
     models(branch, path) {
-        let command = develop ? "git ls-files-root *." + path : "git checkout " + branch + " -q && git pull -q && git ls-files-root *." + path;
+        let command = "git ls-files-root *." + path;
         //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
