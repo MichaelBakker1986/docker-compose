@@ -101,18 +101,18 @@ function checkForUpdates() {
                 exec('git diff --stat origin/master').then((result) => {
                     fulfill(JSON.stringify({
                         hasChanges: hasChanges,
-                        changes: result.stdout
+                        changes: result.stdout.toString()
                     }))
                 })
             } else {
                 fulfill(JSON.stringify({
                     hasChanges: hasChanges,
-                    changes: result.stdout
+                    changes: result.stdout.toString()
                 }))
             }
         }).catch((err) => {
             log(err.toString(), 'red')
-            reject('Fail restarting ' + err)
+            reject('Fail restarting ' + err.toString())
         });
     });
 }

@@ -258,10 +258,12 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                     location.reload();
                 }).catch(function(err) {
                     $scope.changes = err.toString();
+                    location.reload();
                 });
             }
         }).catch(function(err) {
             $scope.changes = err.toString()
+            location.reload();
         });
     }
 
