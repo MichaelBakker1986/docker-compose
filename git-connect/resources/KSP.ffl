@@ -251,13 +251,6 @@ model KSP uses BaseModel
       aggregation: flow;
      }
     }
-    variable Memo1
-    {
-     title: "Toelichting";
-     frequency: document;
-     displaytype: memo;
-     datatype: string;
-    }
    }
    variable Q_MAP02
    {
@@ -379,7 +372,7 @@ model KSP uses BaseModel
       formula: 0.06159;
       displaytype: percentage;
       datatype: number;
-      fixed_decimals: 3;
+      fixed_decimals: 5;
      }
      variable MaximumDiscount
      {
@@ -393,7 +386,7 @@ model KSP uses BaseModel
     }
     variable ChildRelatedBudget
     {
-     title: "Child-related budget";
+     title: "Child-related budget 1 child";
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -442,7 +435,7 @@ model KSP uses BaseModel
       formula: 0.0675;
       displaytype: percentage;
       datatype: number;
-      fixed_decimals: 2;
+      fixed_decimals: 4;
      }
     }
     variable Fees
