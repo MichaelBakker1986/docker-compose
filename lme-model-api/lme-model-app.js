@@ -1,18 +1,21 @@
-var express = require('express');
 const exec = require('child-process-promise').exec;
-var port = 8080;
-var app = express();
-var log = require('ff-log')
-var browserify = require('browserify-middleware');
+const host = process.env.HOST || 'localhost'
+const port = 8080;
+const domain = 'http://' + host + ':' + port + '/';
+const express = require('express');
+const app = express();
+const log = require('ff-log')
+const browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
-var bodyParser = require('body-parser')
-var expressStaticGzip = require("express-static-gzip");
+const bodyParser = require('body-parser')
+const expressStaticGzip = require("express-static-gzip");
 app.use('/id/:id/transformFFL_LME/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 app.use('/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 app.use(expressStaticGzip(__dirname + "/../git-connect/resources/"));
 app.use(require('compression')())
 app.use(require('cors')())
 app.set('port', port)
+app.set('host', host)
 app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
@@ -20,7 +23,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
-
+const fileUpload = require('express-fileupload');
+const fs = require('fs')
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
@@ -98,11 +102,43 @@ app.get('*/tmp_model/:model', (req, res) => {
     })
 });
 
-require('./api-def').setup(app)
 
-app.listen(port, () => {
-    require('dns').lookup(require('os').hostname(), (err, add, fam) => {
-        let domain = 'http://' + add + ':' + port + '/';
-        console.info('<span>LME model: </span><a href="' + domain + 'docs">model-api</a>')
+// default options
+app.use(fileUpload());
+const path = require('path')
+app.get('*/excel/:model', function(req, res) {
+    const modelName = req.params.model;
+    fs.exists(__dirname + '/../git-connect/resources/' + modelName + '.xlsx', function(result, err) {
+        const targetFilePath = __dirname + '/../git-connect/resources/' + modelName + '.xlsx';
+        const sampleFilePath = __dirname + '/../git-connect/SAMPLE.xlsx';
+        if (!result) {
+            fs.createReadStream(sampleFilePath).pipe(fs.createWriteStream(targetFilePath));
+            res.sendFile(path.resolve(sampleFilePath));
+        } else {
+            res.sendFile(path.resolve(targetFilePath));
+        }
     })
+})
+app.post('*/excel/:model', function(req, res) {
+    const modelName = req.params.model;
+    if (!req.files) {
+        log.debug('Failed to write ' + modelName + '.xlsx file.', err)
+        return res.status(400).json({status: 'fail', reason: 'No files were uploaded.'});
+    }
+
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    let excelfile = req.files.excelfile;
+
+    // Use the mv() method to place the file somewhere on your server
+    excelfile.mv(__dirname + '/../git-connect/resources/' + modelName + '.xlsx', function(err) {
+        if (err) {
+            log.debug('Failed to write ' + modelName + '.xlsx file.', err)
+            return res.status(400).json({status: 'fail', reason: 'No files were uploaded.'});
+        }
+        res.json({status: 'ok'});
+    });
+});
+require('./api-def').setup(app)
+app.listen(port, () => {
+    console.info('<span>LME model: </span><a href="' + domain + 'docs">model-api</a>')
 });

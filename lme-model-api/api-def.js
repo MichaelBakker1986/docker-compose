@@ -1,5 +1,4 @@
 const swaggerUi = require('swaggerize-ui');
-const hostname = require('os').hostname();
 
 module.exports.setup = function(app) {
     //swagger
@@ -9,10 +8,9 @@ module.exports.setup = function(app) {
     // swagger definition
     app.get('/api-docs', function(req, res) {
         let port = app.get('port');
+        let host = app.get('host');
         let swaggerData = require(__dirname + '/apidef.json');
-        require('dns').lookup(hostname, (err, add, fam) => {
-            swaggerData.host = add + ':' + port;
-            res.json(swaggerData)
-        })
+        swaggerData.host = host + ':' + port;
+        res.json(swaggerData)
     });
 };

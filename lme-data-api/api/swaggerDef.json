@@ -14,6 +14,56 @@
   "host": "::8085",
   "basePath": "/",
   "paths": {
+    "/test/data": {
+      "get": {
+        "summary": "Retrieve all values identified by {id}.",
+        "operationId": "test123",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Store all values identified by {id}.",
+        "operationId": "idStoreFigures",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ContextId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/id/{id}/data": {
       "get": {
         "summary": "Retrieve all values identified by {id}.",

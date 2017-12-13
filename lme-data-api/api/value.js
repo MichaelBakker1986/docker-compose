@@ -4,6 +4,7 @@ const lmeAPI = require('../LMEImpl').lmeAPI
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
+
     function defaultResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
@@ -11,6 +12,32 @@ module.exports.setup = function(app) {
                 var context = ds.getOrCreate(req.params.id);
                 //resolve context key to stored values
                 var columncontext = parseInt(req.params.columncontext || "0");
+                var tupleindex = req.params.tupleindex;
+                var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
+                var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
+
+                success(lmeAPI.fesGetValue(context, variablename, columncontext, value, undefined))
+            } catch (err) {
+                fail(err);
+            }
+        }).then(function(answer) {
+            res.json(answer)
+        }).catch(function(err) {
+            log.error(err);
+        });
+    }
+
+    function defaultPostResponse(req, res) {
+        //handle request Async by default, create Promise, result when done.
+        new Promise(function(success, fail) {
+            try {
+                //resolve context key to stored values
+                var columncontext = parseInt(req.params.columncontext || "0");
+                var context = ds.getOrCreate(req.params.id);
+                for (var q in req.query) {
+                    lmeAPI.fesGetValue(context, "KSP_" + q, columncontext, req.query[q], undefined)
+                }
+
                 var tupleindex = req.params.tupleindex;
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
@@ -36,4 +63,5 @@ module.exports.setup = function(app) {
      */
     app.get('/id/:id/figure/:figureName', defaultResponse);
     app.post('/id/:id/figure/:figureName/value/:value', defaultResponse);
+    app.post('/id/:id/figure/:figureName', defaultPostResponse);
 };

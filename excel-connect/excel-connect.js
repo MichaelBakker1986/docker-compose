@@ -6,7 +6,6 @@ var log = require('ff-log');
 var Promise = require('promise')
 var workbook = new Excel.Workbook();
 var fs = require('fs');
-var fileName = __dirname + '/resources/KSPParams.xlsx';
 
 var initComplete = function(excelFileName) {
     return new Promise(function(succes) {

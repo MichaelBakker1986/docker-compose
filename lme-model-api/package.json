@@ -23,6 +23,7 @@
     "express": "^4.16.2",
     "express-browserify": "^1.0.2",
     "express-favicon": "^2.0.0",
+    "express-fileupload": "^0.3.0",
     "express-static-gzip": "^0.3.1",
     "ff-log": "file:../ff-log",
     "fs-writefile-promise": "^2.0.0",

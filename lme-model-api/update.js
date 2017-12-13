@@ -140,7 +140,6 @@ function testAndDeploy() {
         spawnChild('../demo-apps')
         spawnChild('../lme-model-api')
         spawnChild('../lme-data-api')
-        spawnChild('../excel-connect/excel-connect-api')
 
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
