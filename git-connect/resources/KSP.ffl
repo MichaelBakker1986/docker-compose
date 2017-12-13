@@ -271,7 +271,7 @@ model KSP uses BaseModel
        fixed_decimals: 1;
        choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
       }
-      variable TotalyYearlyCostsChild
+      variable TotalYearlyCostsChild
       {
        title: "Total (yearly) costs regarding child";
        locked: 1;
