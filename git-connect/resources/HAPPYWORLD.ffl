@@ -5,7 +5,7 @@ model HAPPYWORLD uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Stap 1";
+   title: "Stap 2";
    displaytype: scorecard;
    variable Q_MAP01
    {
