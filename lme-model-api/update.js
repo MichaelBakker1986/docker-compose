@@ -77,9 +77,9 @@ function update() {
 
 app.get('/update/git/notifyCommit', function(req, res) {
     update().then((result) => {
-        res.end("" + result);
+        res.end(result.toString());
     }).catch((err) => {
-        res.end("" + err);
+        res.end(err.toString());
     })
 });
 
@@ -97,16 +97,26 @@ function checkForUpdates() {
         //'git diff --stat origin/master';
         exec(command).then((result) => {
             var hasChanges = result.stdout.indexOf('Your branch is behind') > -1;
-            fulfill(JSON.stringify({
-                hasChanges: hasChanges,
-                changes: result.stdout
-            }))
+            if (hasChanges) {
+                exec('git diff --stat origin/master').then((result) => {
+                    fulfill(JSON.stringify({
+                        hasChanges: hasChanges,
+                        changes: result.stdout
+                    }))
+                })
+            } else {
+                fulfill(JSON.stringify({
+                    hasChanges: hasChanges,
+                    changes: result.stdout
+                }))
+            }
         }).catch((err) => {
             log(err.toString(), 'red')
             reject('Fail restarting ' + err)
         });
     });
 }
+
 function send(text, level) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
