@@ -138,6 +138,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             for (var i = 0; i < tuples.length; i++)
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
+                uiNode.tupleDefinition = true;
                 tuples[depth] = uiNode
             } else {
                 uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
