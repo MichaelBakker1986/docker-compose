@@ -11,9 +11,25 @@ model PLAYAROUND uses BaseModel
    {
     title: "Stap 1";
     hint: "Informatie over de stap";
-    variable Q_MAP01_VRAAG0
+    variable Q_MAP01_VRAAG01
     {
      title: "TestVraag";
+     formula: 1.05;
+     datatype: number;
+     displaytype: number;
+    }
+    variable Q_MAP01_VRAAG02
+    {
+     title: "TestVraag";
+     formula: 1.05;
+     datatype: number;
+     displaytype: number;
+    }
+    variable Q_MAP01_VRAAG03
+    {
+     title: "TestVraag";
+     formula: Q_MAP01_VRAAG01 + Q_MAP01_VRAAG02;
+     fixed_decimals:0;
     }
    }
   }

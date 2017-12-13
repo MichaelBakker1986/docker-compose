@@ -11,52 +11,25 @@ model KSP uses BaseModel
    datatype: number;
    choices: "0:Complete|1:Incomplete";
    hint: "This module enables you to gain insight in the costs involved for raising a child";
-   variable Q_MAP00
-   {
-    title: "Intro";
-    locked: 1;
-    frequency: document;
-    formula: 1;
-    displaytype: currency;
-    datatype: number;
-    visible: 0;
-    variable Q_MAP00_INTRO
-    {
-     title: "Intro";
-     locked: 1;
-     frequency: document;
-     displaytype: currency;
-     datatype: number;
-     variable Q_MAP00_INTROMEMO
-     {
-      title: "[b]Intro[/b]";
-      locked: 1;
-      frequency: document;
-      formula: "Why do we use it?[br][br]It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).[br][br][br]Why do we use it?[br][br]It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
-      displaytype: memo;
-      datatype: string;
-     }
-    }
-   }
    variable Q_MAP01
    {
-    title: "Basic Information";
+    title: "Input";
     locked: 1;
     frequency: document;
     displaytype: select;
     datatype: number;
-    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and ChildGender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
-    variable Situation
+    variable Parents
     {
-     title: "Situation";
+     title: "Parents";
      locked: 1;
      frequency: document;
      displaytype: currency;
      datatype: number;
-     variable IncomeSection
+     variable ParentalIncomes
      {
-      title: "[b]Income[/b]";
+      title: "Parental incomes";
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -64,7 +37,7 @@ model KSP uses BaseModel
      }
      variable IncomeParent01
      {
-      title: "Gross Monthly Income Parent 1";
+      title: "Gross monthly income of 1st parent";
       frequency: document;
       datatype: number;
       displaytype: currency;
@@ -74,7 +47,7 @@ model KSP uses BaseModel
      }
      variable ExtraMonthParent01
      {
-      title: "Extra month parent 1";
+      title: "Extra month of 1st parent";
       frequency: document;
       formula: 0;
       displaytype: select;
@@ -83,7 +56,7 @@ model KSP uses BaseModel
       choices: "0:Nee|1:Ja";
       variable ValueExtraMonthParent01
       {
-       title: "ValueExtraMonth Parent 1";
+       title: "ValueExtraMonth of 1st parent";
        locked: 1;
        frequency: document;
        formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
@@ -96,7 +69,7 @@ model KSP uses BaseModel
      }
      variable YearlyIncomeParent01
      {
-      title: "Gross Yearly Income Parent 1 including vacation allowance";
+      title: "Gross yearly income of 1st parent including vacation allowance";
       locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
@@ -107,7 +80,7 @@ model KSP uses BaseModel
      }
      variable WorkingHoursWeeklyParent01
      {
-      title: "Working hours parent 1";
+      title: "Working hours of 1st parent";
       frequency: document;
       formula: 0;
       datatype: number;
@@ -116,7 +89,7 @@ model KSP uses BaseModel
      }
      variable IncomeParent02
      {
-      title: "Gross Monthly Income Parent 2";
+      title: "Gross monthly income of 2nd parent";
       frequency: document;
       datatype: number;
       formula: 0;
@@ -125,7 +98,7 @@ model KSP uses BaseModel
      }
      variable ExtraMonthParent02
      {
-      title: "Extra month parent 2";
+      title: "Extra month of 2nd parent";
       frequency: document;
       formula: 0;
       displaytype: select;
@@ -134,7 +107,7 @@ model KSP uses BaseModel
       choices: "0:Nee|1:Ja";
       variable ValueExtraMonthParent02
       {
-       title: "ValueExtraMonth Parent 2";
+       title: "ValueExtraMonth of 2nd parent";
        locked: 1;
        frequency: document;
        formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
@@ -146,7 +119,7 @@ model KSP uses BaseModel
      }
      variable YearlyIncomeParent02
      {
-      title: "Gross Yearly Income Parent 2 including vacation allowance";
+      title: "Gross yearly income of 2nd parent including vacation allowance";
       locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
@@ -157,7 +130,7 @@ model KSP uses BaseModel
      }
      variable WorkingHoursWeeklyParent02
      {
-      title: "Working hours parent 2";
+      title: "Working hours of 2nd parent";
       frequency: document;
       formula: 0;
       datatype: number;
@@ -176,12 +149,7 @@ model KSP uses BaseModel
      }
      variable Child
      {
-      title: "Child";
-      locked: 1;
-      frequency: document;
-      displaytype: currency;
-      datatype: number;
-      variable ChildGender
+      variable Gender
       {
        title: "Gender";
        frequency: document;
@@ -206,9 +174,9 @@ model KSP uses BaseModel
        title: "Nr. of hours childcare per month";
        locked: 1;
        frequency: document;
-       formula: OnER(NrOfHoursChildcareWeek[1]*4,NA);
+       formula: OnER(NrOfHoursChildcareWeek*4.333,NA);
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable NrOfHoursOutOfSchoolCareWeek
       {
@@ -223,76 +191,64 @@ model KSP uses BaseModel
        title: "Nr. of hours out-of-school care per month";
        locked: 1;
        frequency: document;
-       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.5,NA);
+       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.333,NA);
        datatype: number;
-       fixed_decimals: 1;
+       fixed_decimals: 2;
       }
       variable HourlyFeeChildCare
       {
-       title: "Hourly fee childcare";
+       title: "Hourly fee child daycare";
        frequency: document;
-       formula: 6.8;
-       datatype: number;
-       fixed_decimals: 1;
-      }
-      variable HourlyFeeOutOfSchoolCare
-      {
-       title: "Hourly fee out-of-school care";
-       frequency: document;
-       formula: 6.8;
-       datatype: number;
-       fixed_decimals: 1;
-      }
-      variable ParentalContributionPrimaryEducation
-      {
-       title: "Parental contribution primary education";
-       frequency: document;
-       formula: 80;
-       datatype: number;
-       fixed_decimals: 1;
-      }
-      variable CostsUnspecified
-      {
-       title: "Costs unspecified per month";
-       frequency: document;
-       formula: 180;
-       datatype: number;
-       fixed_decimals: 1;
-      }
-      variable SecondaryEducationProfile
-      {
-       title: "secondary education (profile)";
-       frequency: document;
-       formula: 1;
-       displaytype: select;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 1;
-       choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
-      }
-      variable TotalyYearlyCostsChild
-      {
-       title: "Total (yearly) costs regarding child";
-       locked: 1;
-       frequency: column;
-       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+       formula: 7.18;
        datatype: number;
        fixed_decimals: 2;
-       aggregation: flow;
       }
      }
-     variable TupleSumTest
+     variable HourlyFeeOutOfSchoolCare
      {
+      title: "Hourly fee out-of-school daycare";
       frequency: document;
-      formula: NrOfHoursChildcareWeek;
+      formula: 6.69;
       datatype: number;
+      fixed_decimals: 2;
      }
-     variable Memo1
+     variable ParentalContributionPrimaryEducation
      {
-      title: "Toelichting";
+      title: "Parental contribution primary education";
       frequency: document;
-      displaytype: memo;
-      datatype: string;
+      formula: 30;
+      datatype: number;
+      fixed_decimals: 2;
+     }
+     variable CostsUnspecified
+     {
+      title: "Costs unspecified per month";
+      frequency: document;
+      visible: 0;
+      formula: 50;
+      datatype: number;
+      fixed_decimals: 1;
+     }
+     variable SecondaryEducationProfile
+     {
+      title: "secondary education (profile)";
+      frequency: document;
+      formula: 1;
+      displaytype: select;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 1;
+      choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+     }
+     variable TotalYearlyCostsChild
+     {
+      title: "Total (yearly) costs regarding child";
+      locked: 1;
+      frequency: column;
+      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
+      datatype: number;
+      fixed_decimals: 2;
+      aggregation: flow;
      }
     }
    }
@@ -416,7 +372,7 @@ model KSP uses BaseModel
       formula: 0.06159;
       displaytype: percentage;
       datatype: number;
-      fixed_decimals: 3;
+      fixed_decimals: 5;
      }
      variable MaximumDiscount
      {
@@ -430,7 +386,7 @@ model KSP uses BaseModel
     }
     variable ChildRelatedBudget
     {
-     title: "Child-related budget";
+     title: "Child-related budget 1 child";
      locked: 1;
      frequency: document;
      displaytype: currency;
@@ -479,7 +435,7 @@ model KSP uses BaseModel
       formula: 0.0675;
       displaytype: percentage;
       datatype: number;
-      fixed_decimals: 2;
+      fixed_decimals: 4;
      }
     }
     variable Fees
@@ -779,7 +735,6 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    visible: (Q_ROOT=1);
     choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
     {
@@ -850,7 +805,7 @@ model KSP uses BaseModel
       {
        title: "Diapers";
        frequency: column;
-       formula: MatrixLookup(null,"Personal care","Hairdresser",(ValueT(T)));
+       formula: MatrixLookup(null,"PersonalCare","Diapers",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -859,7 +814,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
-       formula: If(ChildGender=0,MatrixLookup(null,"Allowance","Contributions",(ValueT(T))),MatrixLookup("Transport","MobilePhone","DrivingLicense",(ValueT(T))));
+       formula: If(Gender=0,MatrixLookup(null,"PersonalCare","FoodCostsBoy",(ValueT(T))),MatrixLookup("PersonalCare","FoodCostsGirl",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -875,7 +830,7 @@ model KSP uses BaseModel
       }
       variable ActualPersonalCareCosts
       {
-       title: "Personal care";
+       title: "PersonalCare";
        frequency: column;
        formula: MatrixLookup(null,"Total (yearly) costs","[b]Child-related Income[/b]",(ValueT(T)));
        datatype: number;
@@ -972,9 +927,9 @@ model KSP uses BaseModel
        fixed_decimals: 2;
        aggregation: flow;
       }
-      variable CostsUnspecifiedOverview
+      variable CostsUnspecifiedPerYear
       {
-       title: "Costs unspecified";
+       title: "Costs unspecified per year";
        locked: 1;
        frequency: column;
        formula: CostsUnspecified*12;
@@ -987,7 +942,7 @@ model KSP uses BaseModel
        title: "Total (yearly) costs";
        locked: 1;
        frequency: column;
-       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+       formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
