@@ -67,6 +67,7 @@ model KSP uses BaseModel
       title: "Gross Monthly Income Parent 1";
       frequency: document;
       datatype: number;
+      displaytype: currency;
       formula: 0;
       required: 1;
       fixed_decimals: 2;
@@ -87,7 +88,8 @@ model KSP uses BaseModel
        frequency: document;
        formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
        datatype: number;
-       visible: 1;
+       displaytype: currency;
+       visible: 0;
        required: 1;
        fixed_decimals: 2;
       }
@@ -95,6 +97,7 @@ model KSP uses BaseModel
      variable YearlyIncomeParent01
      {
       title: "Gross Yearly Income Parent 1 including vacation allowance";
+      locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
       datatype: number;
@@ -102,7 +105,15 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 2;
      }
-
+     variable WorkingHoursWeeklyParent01
+     {
+      title: "Working hours parent 1";
+      frequency: document;
+      formula: 0;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 1;
+     }
      variable IncomeParent02
      {
       title: "Gross Monthly Income Parent 2";
@@ -128,7 +139,7 @@ model KSP uses BaseModel
        frequency: document;
        formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
        datatype: number;
-       visible: 1;
+       visible: 0;
        required: 1;
        fixed_decimals: 2;
       }
@@ -136,6 +147,7 @@ model KSP uses BaseModel
      variable YearlyIncomeParent02
      {
       title: "Gross Yearly Income Parent 2 including vacation allowance";
+      locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
       datatype: number;
@@ -143,18 +155,11 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 2;
      }
-     variable WorkingHoursWeeklyParent01
-     {
-      title: "Working hours parent 1";
-      frequency: document;
-      datatype: number;
-      required: 1;
-      fixed_decimals: 1;
-     }
      variable WorkingHoursWeeklyParent02
      {
       title: "Working hours parent 2";
       frequency: document;
+      formula: 0;
       datatype: number;
       required: 1;
       fixed_decimals: 1;
