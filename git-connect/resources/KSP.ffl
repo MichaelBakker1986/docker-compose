@@ -20,16 +20,16 @@ model KSP uses BaseModel
     datatype: number;
     required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
-    variable Situation
+    variable Parents
     {
-     title: "Situation";
+     title: "Parents";
      locked: 1;
      frequency: document;
      displaytype: currency;
      datatype: number;
-     variable IncomeSection
+     variable ParentalIncomes
      {
-      title: "[b]Income[/b]";
+      title: "Parental incomes";
       locked: 1;
       frequency: document;
       displaytype: currency;
@@ -37,7 +37,7 @@ model KSP uses BaseModel
      }
      variable IncomeParent01
      {
-      title: "Gross Monthly Income Parent 1";
+      title: "Gross monthly income of 1st parent";
       frequency: document;
       datatype: number;
       displaytype: currency;
@@ -47,7 +47,7 @@ model KSP uses BaseModel
      }
      variable ExtraMonthParent01
      {
-      title: "Extra month parent 1";
+      title: "Extra month of 1st parent";
       frequency: document;
       formula: 0;
       displaytype: select;
@@ -56,7 +56,7 @@ model KSP uses BaseModel
       choices: "0:Nee|1:Ja";
       variable ValueExtraMonthParent01
       {
-       title: "ValueExtraMonth Parent 1";
+       title: "ValueExtraMonth of 1st parent";
        locked: 1;
        frequency: document;
        formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
@@ -69,7 +69,7 @@ model KSP uses BaseModel
      }
      variable YearlyIncomeParent01
      {
-      title: "Gross Yearly Income Parent 1 including vacation allowance";
+      title: "Gross yearly income of 1st parent including vacation allowance";
       locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
@@ -80,7 +80,7 @@ model KSP uses BaseModel
      }
      variable WorkingHoursWeeklyParent01
      {
-      title: "Working hours parent 1";
+      title: "Working hours of 1st parent";
       frequency: document;
       formula: 0;
       datatype: number;
@@ -89,7 +89,7 @@ model KSP uses BaseModel
      }
      variable IncomeParent02
      {
-      title: "Gross Monthly Income Parent 2";
+      title: "Gross monthly income of 2nd parent";
       frequency: document;
       datatype: number;
       formula: 0;
@@ -98,7 +98,7 @@ model KSP uses BaseModel
      }
      variable ExtraMonthParent02
      {
-      title: "Extra month parent 2";
+      title: "Extra month of 2nd parent";
       frequency: document;
       formula: 0;
       displaytype: select;
@@ -107,7 +107,7 @@ model KSP uses BaseModel
       choices: "0:Nee|1:Ja";
       variable ValueExtraMonthParent02
       {
-       title: "ValueExtraMonth Parent 2";
+       title: "ValueExtraMonth of 2nd parent";
        locked: 1;
        frequency: document;
        formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
@@ -119,7 +119,7 @@ model KSP uses BaseModel
      }
      variable YearlyIncomeParent02
      {
-      title: "Gross Yearly Income Parent 2 including vacation allowance";
+      title: "Gross yearly income of 2nd parent including vacation allowance";
       locked: 1;
       frequency: document;
       formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
@@ -130,7 +130,7 @@ model KSP uses BaseModel
      }
      variable WorkingHoursWeeklyParent02
      {
-      title: "Working hours parent 2";
+      title: "Working hours of 2nd parent";
       frequency: document;
       formula: 0;
       datatype: number;
