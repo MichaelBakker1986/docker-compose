@@ -22,6 +22,5 @@
     "express-prettify": "0.0.10",
     "ff-log": "file:../ff-log",
     "lme-data-app": "file:../lme-data-api"
-  },
-  "bundledDependencies":["ff-log","lme-data-app"]
+  }
 }
