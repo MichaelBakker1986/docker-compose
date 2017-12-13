@@ -75,7 +75,7 @@ function update() {
     });
 }
 
-app.get('/update/git/notifyCommit', function(req, res) {
+app.get('*/update/git/notifyCommit', function(req, res) {
     update().then((result) => {
         res.end(result.toString());
     }).catch((err) => {
@@ -83,7 +83,7 @@ app.get('/update/git/notifyCommit', function(req, res) {
     })
 });
 
-app.get('/hasUpdates', function(req, res) {
+app.get('*/hasUpdates', function(req, res) {
     checkForUpdates().then((result) => {
         res.end(result.toString());
     }).catch((err) => {

@@ -25,8 +25,8 @@ app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/', expressStaticGzip(__dirname + "/monli/"));
 
 //Update proxies
-app.get('/update/git/notifyCommit', proxy('http://' + host + ':8081/update/git/notifyCommit'));
-app.get('/hasUpdates', proxy('http://' + host + ':8081/hasUpdates'));
+app.get('*/update/git/notifyCommit', proxy('http://' + host + ':8081/update/git/notifyCommit'));
+app.get('*/hasUpdates', proxy('http://' + host + ':8081/hasUpdates'));
 
 //proxies
 app.get('/id/:id/data', proxy('http://' + host + ':8085/id/:id/data'));
