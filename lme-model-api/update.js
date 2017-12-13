@@ -1,5 +1,6 @@
 const port = 8081;
 const express = require('express');
+const host = process.env.HOST || 'localhost'
 var now = require("performance-now")
 const app = express();
 const httpServer = require('http').createServer(app);
@@ -9,7 +10,7 @@ const spawn = require('child-process-promise').spawn;
 let busy = false;
 var childProcesses = {}
 const hostname = require('os').hostname();
-const developer = hostname === 'michael';
+const developer = (hostname === 'localhost');
 const levels = {
     info: {
         level: 'info',
@@ -82,23 +83,20 @@ app.get('/update/git/notifyCommit', function(req, res) {
     })
 });
 
-app.get('/hasUpdates', function(req, res){
+app.get('/hasUpdates', function(req, res) {
     checkForUpdates().then((result) => {
-        res.end("" + result);
+        res.end(result.toString());
     }).catch((err) => {
-        res.end("" + err);
+        res.end(err.toString());
     })
 });
 
 function checkForUpdates() {
     return new Promise((fulfill, reject) => {
-        var command =  'git diff --stat origin/master';
+        var command = 'git remote update && git status -uno'
+        //'git diff --stat origin/master';
         exec(command).then((result) => {
-            var hasChanges = false;
-            if(result.stdout !== ''){
-                console.info('no changes')
-                hasChanges = true;
-            }
+            var hasChanges = result.stdout.indexOf('Your branch is behind') > -1;
             fulfill(JSON.stringify({
                 hasChanges: hasChanges,
                 changes: result.stdout
@@ -108,9 +106,7 @@ function checkForUpdates() {
             reject('Fail restarting ' + err)
         });
     });
-
 }
-
 function send(text, level) {
     request.post({
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
@@ -125,9 +121,7 @@ function send(text, level) {
 }
 
 httpServer.listen(port, () => {
-    require('dns').lookup(hostname, (err, add, fam) => {
-        log('<span>Auto update </span><a href="http://' + add + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
-    })
+    log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
 });
 
 function testAndDeploy() {
@@ -150,7 +144,7 @@ function testAndDeploy() {
 testAndDeploy();
 
 function log(message, levelArg) {
-    if (message && hostname !== 'michael') {
+    if (message && !developer) {
         send(message, levelArg || 'green');
     }
     console.info(message);

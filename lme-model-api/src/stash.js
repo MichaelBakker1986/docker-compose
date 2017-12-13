@@ -1,9 +1,8 @@
 const exec = require('child-process-promise').exec;
 const log = require('ff-log');
 const dns = require('dns');
-const hostname = require('os').hostname();
-const develop = hostname == 'michael';
-let host;
+const host = require('os').hostname();
+const develop = host == 'michael';
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
@@ -12,9 +11,6 @@ const uuid = require('uuid4');
 //git remote update && git status -uno
 class Stash {
     constructor() {
-        dns.lookup(hostname, (err, add, fam) => {
-            host = add;
-        })
     }
 
     preview(name, data, lme) {
@@ -46,7 +42,7 @@ class Stash {
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = 'git pull &&  git commit -a -m "Update ' + name + ' by DEMO" && git push && git rev-parse HEAD';
+                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + require('os').hostname() + '" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
                         var output = ok.stdout.split('\n');
                         const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
