@@ -12,8 +12,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "gulp": "gulp"
+    "start": "node index.js"
   },
   "dependencies": {
     "abbrev": "^1.1.1",
@@ -23,9 +22,5 @@
     "express-prettify": "0.0.10",
     "ff-log": "file:../ff-log",
     "lme-data-app": "file:../lme-data-api"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-zip": "^4.0.0"
   }
 }
