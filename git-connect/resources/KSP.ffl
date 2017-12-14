@@ -563,10 +563,10 @@ model KSP uses BaseModel
      }
      variable PremiumForChildcare
      {
-      title: "Premium for childcare per year";
+      title: "Premium for childcare";
       locked: 1;
       frequency: document;
-      formula: (NrCompensatedHoursChildcare*12)*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
+      formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -575,7 +575,7 @@ model KSP uses BaseModel
       title: "Premium for out-of-school care";
       locked: 1;
       frequency: document;
-      formula: (NrCompensatedHoursOutofSchoolCare*12)*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
+      formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
       datatype: number;
       fixed_decimals: 2;
      }
