@@ -8,7 +8,7 @@ var fesjsApi = require('../').fesjs;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);
-excelPlugin.initComplete('KSP').then(function(matrix) {
+excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new FESContext());
     wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl', 'utf8'), 'ffl');
