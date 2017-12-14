@@ -1009,10 +1009,10 @@ model KSP uses BaseModel
       aggregation: flow;
       variable +ChildBenefits
       {
-       title: "Child benefits TODO";
+       title: "Child benefits";
        locked: 1;
        frequency: column;
-       formula: If((Age<=5),200.59,If((Age>=6) and (Age<=11),243.57,286.55));
+       formula: If((Age<=5),200.59*4,If((Age>=6) and (Age<=11),243.57*4,286.55*4));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
