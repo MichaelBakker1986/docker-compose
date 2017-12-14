@@ -12,9 +12,11 @@ excelPlugin.initComplete('KSP').then(function(matrix) {
     wb.createFormula("MatrixLookup('','YearlyChildCosts','Diapers',1)", 'MatrixLookupTest')
     wb.createFormula("MatrixLookup('','PremiumOutOfSchoolCare',18486,1)", 'MatrixLookupPremiumOutOfSchoolCare')
     wb.createFormula("MatrixLookup('','PremiumOutOfSchoolCare',23410,1)", 'MatrixLookupPremiumOutOfSchoolCare2')
+    wb.createFormula("MatrixLookup('','YearlyChildCosts','Allowance',1)", 'YearlyChildCosts')
     assert(wb.get('MatrixLookupTest'), 300)
     assert(wb.get('MatrixLookupPremiumOutOfSchoolCare'), 0.94)
     assert(wb.get('MatrixLookupPremiumOutOfSchoolCare2'), 0.938)
+    assert(wb.get('YearlyChildCosts') == 0, 0)
 }).catch((err) => {
     log.error(err)
     throw err

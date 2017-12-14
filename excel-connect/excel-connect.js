@@ -146,7 +146,7 @@ function doMatrixLookup(xlsfileName, tableName, row, col) {
     if (log.TRACE)
         if (!MATRIX_VALUES[tableName]) log.trace('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
     var table = MATRIX_VALUES[tableName];
-    if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col]) {
+    if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         if (log.TRACE) log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, table.xasValues[row][col]);
         return table.xasValues[row][col];
     } else if (table && table.xasValues) {
