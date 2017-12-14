@@ -87,6 +87,16 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 1;
      }
+      variable 2ndWorkingParent
+      {
+       title: "Person has 2nd working parent";
+       frequency: document;
+       displaytype: select;
+       datatype: number;
+       required: 1;
+       fixed_decimals: 0;
+       choices: "0:False|1:True";
+      }
      variable MonthlyIncomeParent02
      {
       title: "Gross monthly income of 2nd parent";
