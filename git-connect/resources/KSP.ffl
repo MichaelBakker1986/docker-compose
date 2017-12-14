@@ -1078,15 +1078,6 @@ model KSP uses BaseModel
        aggregation: flow;
       }
      }
-     variable ChildCareCosts
-     {
-      title: "Childcare costs";
-      frequency: column;
-      formula: (NrOfHoursChildcareMonth*HourlyFeeChildCare)*12;
-      datatype: number;
-      fixed_decimals: 2;
-      aggregation: balance;
-     }
     }
    }
   }
