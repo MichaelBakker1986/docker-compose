@@ -149,6 +149,15 @@ model KSP uses BaseModel
      }
      variable Child
      {
+      variable ChildAge
+      {
+       title: "ChildAge";
+       frequency: document;
+       formula: 0;
+       datatype: number;
+       required: 1;
+       fixed_decimals: 0;
+      }
       variable Gender
       {
        title: "Gender";
@@ -164,7 +173,7 @@ model KSP uses BaseModel
       {
        title: "Nr. of hours childcare per week";
        frequency: document;
-       formula: NA;
+       formula: 0;
        datatype: number;
        required: 1;
        fixed_decimals: 1;
@@ -745,7 +754,7 @@ model KSP uses BaseModel
      datatype: number;
      variable GraphResRek1
      {
-      title: "Total Net Costs (-)";
+      title: "Total Net Costs";
       locked: 1;
       frequency: column;
       formula: TotalYearlyBalance;
@@ -850,7 +859,7 @@ model KSP uses BaseModel
       {
        title: "Inventory";
        frequency: column;
-       formula: MatrixLookup(null,"Total (yearly) Income","Total Net Costs (-)",(ValueT(T)));
+       formula: MatrixLookup(null,"Total (yearly) Income","Total Net Costs",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -1009,7 +1018,7 @@ model KSP uses BaseModel
      }
      variable TotalYearlyBalance
      {
-      title: "Total Net Costs (-)";
+      title: "Total Net Costs";
       locked: 1;
       frequency: column;
       formula: TotalYearlyCosts-TotalYearlyIncome;
