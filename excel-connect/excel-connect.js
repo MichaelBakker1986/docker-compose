@@ -10,7 +10,7 @@ var fs = require('fs');
 var initComplete = function(excelFileName) {
     return new Promise(function(succes) {
         //check if an file exists
-        const xlsxPath = __dirname + '/resources/' + excelFileName + '.xlsx';
+        const xlsxPath = __dirname + '/../git-connect/resources/' + excelFileName + '.xlsx';
         if (!fs.existsSync(xlsxPath)) {
             succes(null)
         } else {
