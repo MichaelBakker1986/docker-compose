@@ -16,7 +16,7 @@ model KSP uses BaseModel
     title: "Input";
     locked: 1;
     frequency: document;
-    displaytype: select;
+    displaytype: Input;
     datatype: number;
     required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
@@ -87,15 +87,16 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 1;
      }
-      variable 2ndWorkingParent
+      variable SecondWorkingParent
       {
-       title: "Person has 2nd working parent";
+       title: "Child has 2nd working parent";
        frequency: document;
        displaytype: select;
+       formula: 0;
        datatype: number;
        required: 1;
        fixed_decimals: 0;
-       choices: "0:False|1:True";
+       choices: "0:Nee|1:Ja";
       }
      variable MonthlyIncomeParent02
      {
@@ -151,11 +152,11 @@ model KSP uses BaseModel
      {
       title: "Working hours (weekly) of least working Parent";
       frequency: document;
-      formula: Min(WeeklyWorkingHoursParent01, WeeklyWorkingHoursParent02);
+      formula: If(SecondWorkingParent=1,Min(WeeklyWorkingHoursParent01,WeeklyWorkingHoursParent02),WeeklyWorkingHoursParent01);
+      locked: 1;
       datatype: number;
       required: 1;
       fixed_decimals: 1;
-      hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
      variable Child
      {
@@ -752,7 +753,7 @@ model KSP uses BaseModel
     title: "Your Personal situation";
     locked: 1;
     frequency: document;
-    displaytype: select;
+    displaytype: Output;
     datatype: number;
     choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
