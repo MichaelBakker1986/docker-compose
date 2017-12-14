@@ -45,6 +45,9 @@ LmeAPI.prototype.importFFL = function(ffl) {
 LmeAPI.prototype.importFFL2 = function(ffl) {
     this.lme.importSolution(ffl, 'ffl2')
 }
+LmeAPI.prototype.setColumnOffset = function(index) {
+    this.lme.offset = parseInt(index);
+}
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
     this.lme.importSolution(ffl, 'ffl2_backwards')
 }
@@ -62,6 +65,10 @@ LmeAPI.prototype.importWebModel = function(webDesign) {
 }
 LmeAPI.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
+}
+LmeAPI.prototype.exportScreenDefinition = function(nodeId) {
+    const rootNode = this.lme.getRootSolutionProperty()
+    return this.lme.export('screendefinition', rootNode)
 }
 LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')

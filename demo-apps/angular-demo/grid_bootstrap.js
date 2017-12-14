@@ -35,6 +35,10 @@ angular
                 $scope.search = node
             }
         }
+        $scope.columnoffset = 0;
+        $scope.setColumnOffset = function() {
+            LMEMETA.setColumnOffset($scope.columnoffset)
+        }
         $scope.addTuple = function(variable) {
             variable.add()
         }

@@ -24,6 +24,7 @@ var YAxis = require('./YAxis')
 
 function JSWorkBook(context) {
     this.context = context;
+    this.offset = 0;
     //default modelname
     this.modelName = 'NEW';
     //tuple axis
@@ -206,6 +207,7 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
+    x = x + this.offset;
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
@@ -215,6 +217,7 @@ JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
+    x = x + this.offset;
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {

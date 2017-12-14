@@ -72,6 +72,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
             }
         }
     }
+    if (variable.frequency == 'document') {
+        xas = xas.doc
+    }
     FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
 };
 /**
@@ -105,6 +108,9 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         returnValue = context.propertyDefaults[colType];
     }
     else {
+        if (variable.frequency == 'document') {
+            xas = xas.doc
+        }
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
     if (variable) {

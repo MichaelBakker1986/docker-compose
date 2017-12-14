@@ -46,6 +46,9 @@
                 <li>
                     <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
                 </li>
+                <li>
+                    <input class="form-control" ng-model="columnoffset" ng-change="setColumnOffset()">
+                </li>
             </ul>
         </div>
     </div>

@@ -86,11 +86,11 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 var repeats = {
-    undefined: [3, 1],
+    undefined: [6, 1],
     none: [1, 1],
-    column: [3, 1],
-    document: [1, 3],
-    timeline: [1, 3]
+    column: [6, 1],
+    document: [1, 6],
+    timeline: [1, 6]
 }
 
 LMETree.prototype.addWebNode = function(node, treePath, index) {
@@ -195,6 +195,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             lmeTree.addWebNode(node, treePath, index)
         }
     })
+    lmeTree.offset = 0;
     /*  }*/
     return lmeTree;
 }
