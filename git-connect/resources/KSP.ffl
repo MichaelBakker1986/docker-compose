@@ -149,6 +149,15 @@ model KSP uses BaseModel
      }
      variable Child
      {
+      variable Age
+      {
+       title: "Age";
+       frequency: document;
+       datatype: number;
+       formula: 0;
+       required: 1;
+       fixed_decimals: 0;
+      }
       variable Gender
       {
        title: "Gender";
@@ -164,7 +173,7 @@ model KSP uses BaseModel
       {
        title: "Nr. of hours childcare per week";
        frequency: document;
-       formula: NA;
+       formula: 0;
        datatype: number;
        required: 1;
        fixed_decimals: 1;
