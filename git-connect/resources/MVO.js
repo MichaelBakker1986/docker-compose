@@ -20840,11 +20840,11 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 var repeats = {
-    undefined: [3, 1],
+    undefined: [6, 1],
     none: [1, 1],
-    column: [3, 1],
-    document: [1, 3],
-    timeline: [1, 3]
+    column: [6, 1],
+    document: [1, 6],
+    timeline: [1, 6]
 }
 
 LMETree.prototype.addWebNode = function(node, treePath, index) {
@@ -20949,6 +20949,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             lmeTree.addWebNode(node, treePath, index)
         }
     })
+    lmeTree.offset = 0;
     /*  }*/
     return lmeTree;
 }
@@ -22768,6 +22769,9 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
             }
         }
     }
+    if (variable.frequency == 'document') {
+        xas = xas.doc
+    }
     FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
 };
 /**
@@ -22801,6 +22805,9 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         returnValue = context.propertyDefaults[colType];
     }
     else {
+        if (variable.frequency == 'document') {
+            xas = xas.doc
+        }
         returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
     }
     if (variable) {
@@ -23907,6 +23914,7 @@ var YAxis = require('./YAxis')
 
 function JSWorkBook(context) {
     this.context = context;
+    this.offset = 0;
     //default modelname
     this.modelName = 'NEW';
     //tuple axis
@@ -24089,6 +24097,7 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
+    x = x + this.offset;
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
@@ -24098,6 +24107,7 @@ JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
+    x = x + this.offset;
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
@@ -28752,6 +28762,9 @@ LmeAPI.prototype.importFFL = function(ffl) {
 LmeAPI.prototype.importFFL2 = function(ffl) {
     this.lme.importSolution(ffl, 'ffl2')
 }
+LmeAPI.prototype.setColumnOffset = function(index) {
+    this.lme.offset = parseInt(index);
+}
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
     this.lme.importSolution(ffl, 'ffl2_backwards')
 }
@@ -28769,6 +28782,10 @@ LmeAPI.prototype.importWebModel = function(webDesign) {
 }
 LmeAPI.prototype.exportData = function() {
     return this.lme.export('jsonvalues')
+}
+LmeAPI.prototype.exportScreenDefinition = function(nodeId) {
+    const rootNode = this.lme.getRootSolutionProperty()
+    return this.lme.export('screendefinition', rootNode)
 }
 LmeAPI.prototype.importData = function(valueAsJSON) {
     this.lme.importSolution(valueAsJSON, 'jsonvalues')
