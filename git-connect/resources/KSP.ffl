@@ -939,7 +939,7 @@ model KSP uses BaseModel
        title: "Kosten BSO";
        frequency: column;
        locked: 1;
-       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,If(Age>11,0,0));
+       formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
