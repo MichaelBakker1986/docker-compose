@@ -16,9 +16,9 @@ model KSP uses BaseModel
     title: "Input";
     locked: 1;
     frequency: document;
-    displaytype: Input;
+    displaytype: select;
     datatype: number;
-    required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Parents
     {
@@ -35,7 +35,7 @@ model KSP uses BaseModel
       displaytype: currency;
       datatype: number;
      }
-     variable MonthlyIncomeParent01
+     variable IncomeParent01
      {
       title: "Gross monthly income of 1st parent";
       frequency: document;
@@ -59,7 +59,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth of 1st parent";
        locked: 1;
        frequency: document;
-       formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
+       formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
        datatype: number;
        displaytype: currency;
        visible: 0;
@@ -72,13 +72,13 @@ model KSP uses BaseModel
       title: "Gross yearly income of 1st parent including vacation allowance";
       locked: 1;
       frequency: document;
-      formula: OnER(((MonthlyIncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
+      formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
-     variable WeeklyWorkingHoursParent01
+     variable WorkingHoursWeeklyParent01
      {
       title: "Working hours of 1st parent";
       frequency: document;
@@ -87,18 +87,7 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 1;
      }
-      variable SecondWorkingParent
-      {
-       title: "Child has 2nd working parent";
-       frequency: document;
-       displaytype: select;
-       formula: 0;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 0;
-       choices: "0:Nee|1:Ja";
-      }
-     variable MonthlyIncomeParent02
+     variable IncomeParent02
      {
       title: "Gross monthly income of 2nd parent";
       frequency: document;
@@ -121,7 +110,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth of 2nd parent";
        locked: 1;
        frequency: document;
-       formula: Case(ExtraMonthParent02,[0:0|1:MonthlyIncomeParent02]);
+       formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
        datatype: number;
        visible: 0;
        required: 1;
@@ -133,13 +122,13 @@ model KSP uses BaseModel
       title: "Gross yearly income of 2nd parent including vacation allowance";
       locked: 1;
       frequency: document;
-      formula: OnER(((MonthlyIncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
+      formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
-     variable WeeklyWorkingHoursParent02
+     variable WorkingHoursWeeklyParent02
      {
       title: "Working hours of 2nd parent";
       frequency: document;
@@ -152,23 +141,14 @@ model KSP uses BaseModel
      {
       title: "Working hours (weekly) of least working Parent";
       frequency: document;
-      formula: If(SecondWorkingParent=1,Min(WeeklyWorkingHoursParent01,WeeklyWorkingHoursParent02),WeeklyWorkingHoursParent01);
-      locked: 1;
+      formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
       datatype: number;
       required: 1;
       fixed_decimals: 1;
+      hint: "Here, you have to enter the number of hours (on weekly basis) of the parent who has the smallest employment contract. This data is required to determine the maximum nr. of hours per month for childcare for which a public contribution can be claimed";
      }
      variable Child
      {
-      variable ChildAge
-      {
-       title: "ChildAge";
-       frequency: document;
-       formula: 0;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 0;
-      }
       variable Gender
       {
        title: "Gender";
@@ -184,7 +164,7 @@ model KSP uses BaseModel
       {
        title: "Nr. of hours childcare per week";
        frequency: document;
-       formula: 0;
+       formula: NA;
        datatype: number;
        required: 1;
        fixed_decimals: 1;
@@ -539,7 +519,7 @@ model KSP uses BaseModel
       title: "Total Income";
       locked: 1;
       frequency: document;
-      formula: OnER(MonthlyIncomeParent01+MonthlyIncomeParent02,NA);
+      formula: OnER(IncomeParent01+IncomeParent02,NA);
       displaytype: currency;
       datatype: number;
      }
@@ -548,7 +528,7 @@ model KSP uses BaseModel
       title: "Percentage premium first child ";
       locked: 1;
       frequency: document;
-      formula: MatrixLookup(null,"Premium for out-of-school care",TotalIncome,1);
+      formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
       displaytype: percentage;
       datatype: number;
       fixed_decimals: 2;
@@ -667,7 +647,7 @@ model KSP uses BaseModel
       title: "LowestIncome";
       locked: 1;
       frequency: document;
-      formula: Min(MonthlyIncomeParent01,MonthlyIncomeParent02);
+      formula: Min(IncomeParent01,IncomeParent02);
       datatype: number;
       fixed_decimals: 2;
      }
@@ -753,7 +733,7 @@ model KSP uses BaseModel
     title: "Your Personal situation";
     locked: 1;
     frequency: document;
-    displaytype: Output;
+    displaytype: select;
     datatype: number;
     choices: "0:Complete|1:Incomplete";
     variable Q_MAP06SUB5
@@ -765,7 +745,7 @@ model KSP uses BaseModel
      datatype: number;
      variable GraphResRek1
      {
-      title: "Total Net Costs";
+      title: "Total Net Costs (-)";
       locked: 1;
       frequency: column;
       formula: TotalYearlyBalance;
@@ -825,7 +805,7 @@ model KSP uses BaseModel
       {
        title: "Diapers";
        frequency: column;
-       formula: MatrixLookup(null,"PersonalCare","Diapers",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Diapers",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -834,7 +814,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
-       formula: If(Gender=0,MatrixLookup(null,"PersonalCare","FoodCostsBoy",(ValueT(T))),MatrixLookup("PersonalCare","FoodCostsGirl",(ValueT(T))));
+       formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",(ValueT(T))),MatrixLookup("YearlyChildCosts","FoodCostsGirl",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -843,7 +823,7 @@ model KSP uses BaseModel
       {
        title: "Clothing";
        frequency: column;
-       formula: MatrixLookup(null,"Costs for Primary Education","Costs for Secondary Education",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -852,7 +832,7 @@ model KSP uses BaseModel
       {
        title: "PersonalCare";
        frequency: column;
-       formula: MatrixLookup(null,"Total (yearly) costs","[b]Child-related Income[/b]",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -861,7 +841,7 @@ model KSP uses BaseModel
       {
        title: "Hairdresser";
        frequency: column;
-       formula: MatrixLookup(null,"Childcare premium","Childcare budget",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -870,7 +850,7 @@ model KSP uses BaseModel
       {
        title: "Inventory";
        frequency: column;
-       formula: MatrixLookup(null,"Total (yearly) Income","Total Net Costs",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Inventory",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -879,7 +859,7 @@ model KSP uses BaseModel
       {
        title: "Allowance";
        frequency: column;
-       formula: MatrixLookup(null,"Childcare costs",undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Allowance",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -888,7 +868,7 @@ model KSP uses BaseModel
       {
        title: "Contributions";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Contributions",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -897,7 +877,7 @@ model KSP uses BaseModel
       {
        title: "Transport";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Transport",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -906,7 +886,7 @@ model KSP uses BaseModel
       {
        title: "MobilePhone";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -915,7 +895,7 @@ model KSP uses BaseModel
       {
        title: "DrivingLicense";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -924,7 +904,7 @@ model KSP uses BaseModel
       {
        title: "Kosten BSO";
        frequency: column;
-       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12, NA);
+       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,0);
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -1029,7 +1009,7 @@ model KSP uses BaseModel
      }
      variable TotalYearlyBalance
      {
-      title: "Total Net Costs";
+      title: "Total Net Costs (-)";
       locked: 1;
       frequency: column;
       formula: TotalYearlyCosts-TotalYearlyIncome;
