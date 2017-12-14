@@ -828,6 +828,7 @@ model KSP uses BaseModel
       {
        title: "Diapers";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Diapers",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -837,6 +838,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
+       locked: 1;
        formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",(ValueT(T))),MatrixLookup("YearlyChildCosts","FoodCostsGirl",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
@@ -846,6 +848,7 @@ model KSP uses BaseModel
       {
        title: "Clothing";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -855,6 +858,7 @@ model KSP uses BaseModel
       {
        title: "PersonalCare";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -864,6 +868,7 @@ model KSP uses BaseModel
       {
        title: "Hairdresser";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -873,6 +878,7 @@ model KSP uses BaseModel
       {
        title: "Inventory";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Inventory",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -882,6 +888,7 @@ model KSP uses BaseModel
       {
        title: "Allowance";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Allowance",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -891,6 +898,7 @@ model KSP uses BaseModel
       {
        title: "Contributions";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Contributions",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -900,6 +908,7 @@ model KSP uses BaseModel
       {
        title: "Transport";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","Transport",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -909,6 +918,7 @@ model KSP uses BaseModel
       {
        title: "MobilePhone";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -918,6 +928,7 @@ model KSP uses BaseModel
       {
        title: "DrivingLicense";
        frequency: column;
+       locked: 1;
        formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
@@ -927,6 +938,7 @@ model KSP uses BaseModel
       {
        title: "Kosten BSO";
        frequency: column;
+       locked: 1;
        formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12, 0);
        datatype: number;
        fixed_decimals: 2;
@@ -936,6 +948,7 @@ model KSP uses BaseModel
       {
        title: "Costs for Primary Education";
        frequency: column;
+       locked: 1;
        formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
        datatype: number;
        fixed_decimals: 2;
@@ -945,6 +958,7 @@ model KSP uses BaseModel
       {
        title: "Costs for Secondary Education";
        frequency: column;
+       locked: 1;
        formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
        datatype: number;
        fixed_decimals: 2;
