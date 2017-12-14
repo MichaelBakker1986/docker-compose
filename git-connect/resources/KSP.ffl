@@ -18,7 +18,7 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: select;
     datatype: number;
-    required: IncomeParent01.required and IncomeParent02.required and WorkingHoursWeeklyParent01.required and WorkingHoursWeeklyParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Parents
     {
@@ -35,7 +35,7 @@ model KSP uses BaseModel
       displaytype: currency;
       datatype: number;
      }
-     variable IncomeParent01
+     variable MonthlyIncomeParent01
      {
       title: "Gross monthly income of 1st parent";
       frequency: document;
@@ -59,7 +59,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth of 1st parent";
        locked: 1;
        frequency: document;
-       formula: Number(Case(ExtraMonthParent01,[0:0|1:IncomeParent01]));
+       formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
        datatype: number;
        displaytype: currency;
        visible: 0;
@@ -72,13 +72,13 @@ model KSP uses BaseModel
       title: "Gross yearly income of 1st parent including vacation allowance";
       locked: 1;
       frequency: document;
-      formula: OnER(((IncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
+      formula: OnER(((MonthlyIncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
-     variable WorkingHoursWeeklyParent01
+     variable WeeklyWorkingHoursParent01
      {
       title: "Working hours of 1st parent";
       frequency: document;
@@ -87,7 +87,7 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 1;
      }
-     variable IncomeParent02
+     variable MonthlyIncomeParent02
      {
       title: "Gross monthly income of 2nd parent";
       frequency: document;
@@ -110,7 +110,7 @@ model KSP uses BaseModel
        title: "ValueExtraMonth of 2nd parent";
        locked: 1;
        frequency: document;
-       formula: Case(ExtraMonthParent02,[0:0|1:IncomeParent02]);
+       formula: Case(ExtraMonthParent02,[0:0|1:MonthlyIncomeParent02]);
        datatype: number;
        visible: 0;
        required: 1;
@@ -122,13 +122,13 @@ model KSP uses BaseModel
       title: "Gross yearly income of 2nd parent including vacation allowance";
       locked: 1;
       frequency: document;
-      formula: OnER(((IncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
+      formula: OnER(((MonthlyIncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
       datatype: number;
       visible: 1;
       required: 1;
       fixed_decimals: 2;
      }
-     variable WorkingHoursWeeklyParent02
+     variable WeeklyWorkingHoursParent02
      {
       title: "Working hours of 2nd parent";
       frequency: document;
@@ -141,7 +141,7 @@ model KSP uses BaseModel
      {
       title: "Working hours (weekly) of least working Parent";
       frequency: document;
-      formula: Min(WorkingHoursWeeklyParent01, WorkingHoursWeeklyParent02);
+      formula: Min(WeeklyWorkingHoursParent01, WeeklyWorkingHoursParent02);
       datatype: number;
       required: 1;
       fixed_decimals: 1;
@@ -528,7 +528,7 @@ model KSP uses BaseModel
       title: "Total Income";
       locked: 1;
       frequency: document;
-      formula: OnER(IncomeParent01+IncomeParent02,NA);
+      formula: OnER(MonthlyIncomeParent01+MonthlyIncomeParent02,NA);
       displaytype: currency;
       datatype: number;
      }
@@ -656,7 +656,7 @@ model KSP uses BaseModel
       title: "LowestIncome";
       locked: 1;
       frequency: document;
-      formula: Min(IncomeParent01,IncomeParent02);
+      formula: Min(MonthlyIncomeParent01,MonthlyIncomeParent02);
       datatype: number;
       fixed_decimals: 2;
      }
