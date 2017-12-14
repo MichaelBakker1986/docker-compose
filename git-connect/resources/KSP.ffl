@@ -214,7 +214,7 @@ model KSP uses BaseModel
        title: "Nr. of hours out-of-school care per month";
        locked: 1;
        frequency: document;
-       formula: OnER(NrOfHoursOutOfSchoolCareWeek*4.333,NA);
+       formula: NrOfHoursOutOfSchoolCareWeek*4.333;
        datatype: number;
        fixed_decimals: 2;
       }
