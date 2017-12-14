@@ -1,8 +1,7 @@
-#npm install --production
-#npm update --production
-#npm prune --production
+npm install --production
+npm update --production
 
-#Compress-Archive -Path .\server.js, .\package.json, .\node_modules -DestinationPath deploy.zip -Force
+Compress-Archive -Path .\server.js, .\package.json, .\node_modules -DestinationPath deploy.zip -Force
 
 $user = 'lme-pilot-deploy-user'
 $pass = 'w9rZTM5G4RyG86sFpQxDcLQJ7g5p8v7u'
