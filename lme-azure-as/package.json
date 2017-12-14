@@ -1,5 +1,5 @@
 {
-  "name": "lme-ksp-api-as",
+  "name": "lme-azure-as",
   "version": "1.0.0",
   "description": "LME Api for KSP hosted on Azure App Service",
   "author": "Topicus",
@@ -15,7 +15,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "abbrev": "^1.1.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
