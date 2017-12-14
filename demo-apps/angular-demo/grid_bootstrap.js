@@ -15,6 +15,16 @@ function MatrixLookup(xlsfileName, tableName, row, col) {
     var table = MATRIX_VALUES[tableName];
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col]) {
         return table.xasValues[row][col];
+    } else if (table && table.xasValues) {
+        let lastidx = null;
+        for (var key in table.xasValues) {
+            if (key <= row) {
+                lastidx = key;
+            } else {
+                break;
+            }
+        }
+        if (lastidx) return table.xasValues[lastidx][col];
     }
     return NA;
 }
