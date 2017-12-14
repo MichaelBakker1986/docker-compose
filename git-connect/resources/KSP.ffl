@@ -149,12 +149,12 @@ model KSP uses BaseModel
      }
      variable Child
      {
-      variable Age
+      variable ChildAge
       {
-       title: "Age";
+       title: "ChildAge";
        frequency: document;
-       datatype: number;
        formula: 0;
+       datatype: number;
        required: 1;
        fixed_decimals: 0;
       }
