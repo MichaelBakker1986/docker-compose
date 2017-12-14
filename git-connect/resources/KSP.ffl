@@ -988,10 +988,20 @@ model KSP uses BaseModel
        fixed_decimals: 2;
        aggregation: flow;
       }
+      variable TotalMonthlyCosts
+      {
+       title: "Total (monthly) costs";
+       locked: 1;
+       frequency: column;
+       formula: TotalYearlyCosts/12;
+       datatype: number;
+       fixed_decimals: 2;
+       aggregation: flow;
+      }
      }
-     variable Q_MAP06SUB5SUB3 refers to TotalYearlyIncome
+     variable Q_MAP06SUB5SUB3 refers to TotalYearlyAllowance
      {
-      title: "[b]Child-related Income[/b]";
+      title: "Child-related Income";
       locked: 1;
       frequency: column;
       datatype: number;
@@ -999,7 +1009,7 @@ model KSP uses BaseModel
       aggregation: flow;
       variable +ChildBenefits
       {
-       title: "Child benefits";
+       title: "Child benefits TODO";
        locked: 1;
        frequency: column;
        formula: MatrixLookup(undefined,undefined,undefined,(ValueT(T)));
@@ -1012,7 +1022,7 @@ model KSP uses BaseModel
        title: "Childcare premium";
        locked: 1;
        frequency: column;
-       formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
+       formula: If(Age<4,(PremiumForChildcare[doc]*12),If(Age<11,(PremiumForOutofSchoolCare[doc]*12),0));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -1022,7 +1032,7 @@ model KSP uses BaseModel
        title: "Childcare budget";
        locked: 1;
        frequency: column;
-       formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
+       formula: If(Age<12,ChildRelatedBudgetUpToTwelve[doc]*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen[doc]*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventee[doc]n*12,0)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -1032,14 +1042,14 @@ model KSP uses BaseModel
        title: "Combination Discount";
        locked: 1;
        frequency: column;
-       formula: If(Age<12,CombinationDiscountTotal,0);
+       formula: If(Age<12,CombinationDiscountTotal[doc],0);
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
       }
-      variable =TotalYearlyIncome
+      variable =TotalYearlyAllowance
       {
-       title: "Total (yearly) Income";
+       title: "Total (yearly) allowance";
        locked: 1;
        frequency: column;
        formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
@@ -1053,7 +1063,7 @@ model KSP uses BaseModel
       title: "Total Net Costs";
       locked: 1;
       frequency: column;
-      formula: TotalYearlyCosts-TotalYearlyIncome;
+      formula: TotalYearlyCosts-TotalYearlyAllowance;
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
