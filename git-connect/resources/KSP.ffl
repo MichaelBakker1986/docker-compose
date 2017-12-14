@@ -275,7 +275,7 @@ model KSP uses BaseModel
    }
    variable Q_MAP02
    {
-    title: "Calculations Care";
+    title: "Calculations childcare allowances";
     locked: 1;
     frequency: document;
     displaytype: select;
@@ -540,7 +540,7 @@ model KSP uses BaseModel
       title: "Total Income";
       locked: 1;
       frequency: document;
-      formula: OnER(MonthlyIncomeParent01+MonthlyIncomeParent02,NA);
+      formula: OnER(parseInt(MonthlyIncomeParent01)+parseInt(MonthlyIncomeParent02),NA);
       displaytype: currency;
       datatype: number;
      }
@@ -590,7 +590,7 @@ model KSP uses BaseModel
       title: "Costs year 1 - 4";
       locked: 1;
       frequency: document;
-      formula: Case(SecondaryEducationProfile,[0: 576 | 1: 906 | 2: 535 | 3: 535]);
+      formula: Case(SecondaryEducationProfile,[0: 576 | 1: 394 | 2: 394 | 3: 535]);
       datatype: number;
       fixed_decimals: 2;
      }
