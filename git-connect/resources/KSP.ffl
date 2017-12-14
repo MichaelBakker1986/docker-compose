@@ -548,7 +548,7 @@ model KSP uses BaseModel
       title: "Percentage premium first child ";
       locked: 1;
       frequency: document;
-      formula: MatrixLookup(null,"Premium for out-of-school care",TotalIncome,1);
+      formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
       displaytype: percentage;
       datatype: number;
       fixed_decimals: 2;
@@ -825,7 +825,7 @@ model KSP uses BaseModel
       {
        title: "Diapers";
        frequency: column;
-       formula: MatrixLookup(null,"PersonalCare","Diapers",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Diapers",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -834,7 +834,7 @@ model KSP uses BaseModel
       {
        title: "Food";
        frequency: column;
-       formula: If(Gender=0,MatrixLookup(null,"PersonalCare","FoodCostsBoy",(ValueT(T))),MatrixLookup("PersonalCare","FoodCostsGirl",(ValueT(T))));
+       formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",(ValueT(T))),MatrixLookup("YearlyChildCosts","FoodCostsGirl",(ValueT(T))));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -843,7 +843,7 @@ model KSP uses BaseModel
       {
        title: "Clothing";
        frequency: column;
-       formula: MatrixLookup(null,"Costs for Primary Education","Costs for Secondary Education",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Clothing",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -852,7 +852,7 @@ model KSP uses BaseModel
       {
        title: "PersonalCare";
        frequency: column;
-       formula: MatrixLookup(null,"Total (yearly) costs","[b]Child-related Income[/b]",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -861,7 +861,7 @@ model KSP uses BaseModel
       {
        title: "Hairdresser";
        frequency: column;
-       formula: MatrixLookup(null,"Childcare premium","Childcare budget",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -870,7 +870,7 @@ model KSP uses BaseModel
       {
        title: "Inventory";
        frequency: column;
-       formula: MatrixLookup(null,"Total (yearly) Income","Total Net Costs",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Inventory",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -879,7 +879,7 @@ model KSP uses BaseModel
       {
        title: "Allowance";
        frequency: column;
-       formula: MatrixLookup(null,"Childcare costs",undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Allowance",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -888,7 +888,7 @@ model KSP uses BaseModel
       {
        title: "Contributions";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Contributions",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -897,7 +897,7 @@ model KSP uses BaseModel
       {
        title: "Transport";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","Transport",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -906,7 +906,7 @@ model KSP uses BaseModel
       {
        title: "MobilePhone";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
@@ -915,7 +915,7 @@ model KSP uses BaseModel
       {
        title: "DrivingLicense";
        frequency: column;
-       formula: MatrixLookup(null,undefined,undefined,(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
