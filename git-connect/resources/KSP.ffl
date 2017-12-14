@@ -160,6 +160,7 @@ model KSP uses BaseModel
      }
      variable Child
      {
+      locked: 1;
       variable ChildAge
       {
        title: "ChildAge";
