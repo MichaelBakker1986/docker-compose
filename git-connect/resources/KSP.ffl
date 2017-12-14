@@ -176,6 +176,7 @@ model KSP uses BaseModel
        title: "Gender";
        frequency: document;
        displaytype: select;
+       formula: 0;
        datatype: number;
        required: 1;
        fixed_decimals: 0;
