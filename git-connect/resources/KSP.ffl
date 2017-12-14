@@ -846,7 +846,7 @@ model KSP uses BaseModel
       {
        title: "Clothing";
        frequency: column;
-       formula: MatrixLookup(null,"YearlyChildCosts","Clothing",(ValueT(T)));
+       formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",(ValueT(T)));
        datatype: number;
        fixed_decimals: 2;
        aggregation: flow;
