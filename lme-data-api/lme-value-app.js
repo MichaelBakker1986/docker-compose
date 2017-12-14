@@ -6,6 +6,8 @@ const app = express();
 const bodyParser = require('body-parser');
 app.set('port', port)
 app.set('host', host)
+
+const pretty = require('express-prettify');
 app.use(require('cors')())
 app.use(bodyParser.json()); // To support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
