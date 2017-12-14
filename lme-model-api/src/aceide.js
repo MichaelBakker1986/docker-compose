@@ -242,17 +242,28 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.hasChanges = false;
     $scope.changes = '';
 
-    $scope.update = function() {
+    $http.get('/hasUpdates').then(function(data) {
+        $scope.hasChanges = data.data.hasChanges;
+        $scope.changes = data.data.changes;
+    })
+    $scope.gotoUpdateScreen = function() {
         $scope.currentView = 'updateView';
+    }
+    $scope.update = function() {
         $http.get('/hasUpdates').then(function(data) {
             $scope.hasChanges = data.data.hasChanges;
             $scope.changes = data.data.changes;
-
             if ($scope.hasChanges) {
                 $http.get('/update/git/notifyCommit').then(function(data) {
                     location.reload();
+                }).catch(function(err) {
+                    $scope.changes = err.toString();
+                    location.reload();
                 });
             }
+        }).catch(function(err) {
+            $scope.changes = err.toString()
+            location.reload();
         });
     }
 

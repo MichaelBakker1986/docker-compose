@@ -3,6 +3,8 @@ const lmeAPI = require('../lme-core').fesjs;
 lmeAPI.addFunctions(require('../math').mathJs);
 lmeAPI.addFunctions(require('../formulajs-connect').formulajs);
 const LMEFacade = require('../lme-core/src/FESFacade');
+const WorkBook = require('../lme-core/src/JSWorkBook');
+const FESContext = require('../lme-core/src/fescontext');
 const ModelListener = require('../git-connect').ModelListener;
 const modelService = new ModelListener();
 const modelNames = []
@@ -21,6 +23,13 @@ modelService.onNewModel = function(model, path) {
     modelNames.push(modelName);
     lastModelName = modelName;
 
+    if (modelName !== 'KSP') {
+        return;
+    }
+
+    var JSWorkBook = new WorkBook(new FESContext());
+    JSWorkBook.modelName = "KSP"
+    JSWorkBook.updateValues();
     /**
      * Update API-definition with variable names
      */
@@ -29,20 +38,33 @@ modelService.onNewModel = function(model, path) {
         if (node.solutionName == 'KSP') {
             if (node.colId === 'value') {
                 if (node.nodes.length > 1) {
-                    const params = [{
+                    let params = [{
                         "$ref": "#/parameters/ContextId"
                     }]
+                    let param = params;
+                    /*     if (node.tupleDefinition) {
+                             param = []
+                             params.push({
+                                 type: "array",
+                                 items: param
+                             })
+
+                         }*/
                     for (var i = 0; i < node.nodes.length; i++) {
-                        params.push({
-                            "name": node.nodes[i].rowId,
+                        const n = JSWorkBook.getNode(node.nodes[i].rowId)
+                        param.push({
+                            "name": n.rowId,
                             "required": true,
-                            "type": node.datatype
+                            "in": "query",
+                            "type": n.datatype == 'percentage' ? 'number' : n.datatype,
+                            "description": JSWorkBook.get(n.rowId, 'title')
                         })
                     }
-                    apidef.paths["/id/{id}/" + node.rowId] = {
+
+                    apidef.paths["/id/{id}/figure/" + node.rowId] = {
                         "post": {
-                            "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
-                            "operationId": "figure",
+                            "summary": JSWorkBook.get(node.rowId, 'title'),
+                            "operationId": node.rowId,
                             "produces": [
                                 "application/json"
                             ],
@@ -52,6 +74,7 @@ modelService.onNewModel = function(model, path) {
                                     "description": "OK",
                                     "content": {
                                         "application/json": {
+                                            "type": "array",
                                             "schema": {
                                                 "$ref": "#/definitions/Value"
                                             }

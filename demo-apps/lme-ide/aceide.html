@@ -82,7 +82,7 @@
                 <div class="col-xs-3">
                     <ul class="nav navbar-nav" style="float: right">
                         <li>
-                            <a class="data-story" ng-click="update()" data-toggle="tooltip" title="Update">
+                            <a ng-show="hasChanges" ng-click="gotoUpdateScreen()" data-toggle="tooltip" title="Update server">
                                 <i class="fa fa-refresh"></i> <span></span>
                             </a>
                         </li>
@@ -140,9 +140,11 @@
                             <p>Update</p>
                             <p>{{changes}}</p>
                         </div>
+                        <a class="form-control" ng-click="update()">Do update</a>
                         <div ng-show="!hasChanges">
                             <p>No update found</p>
                         </div>
+
                     </div>
                 </div>
             </div>
