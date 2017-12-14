@@ -531,7 +531,7 @@ model KSP uses BaseModel
       formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
       displaytype: percentage;
       datatype: number;
-      fixed_decimals: 1;
+      fixed_decimals: 2;
      }
      variable FeesSub12
      {
