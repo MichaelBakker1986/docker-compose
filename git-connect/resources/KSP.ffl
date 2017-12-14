@@ -541,7 +541,7 @@ model KSP uses BaseModel
       title: "Total Income";
       locked: 1;
       frequency: document;
-      formula: OnER(MonthlyIncomeParent01+MonthlyIncomeParent02,NA);
+      formula: OnER(YearlyIncomeParent01+YearlyIncomeParent02,NA);
       displaytype: currency;
       datatype: number;
      }
