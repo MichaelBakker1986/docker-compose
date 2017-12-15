@@ -134,11 +134,11 @@ httpServer.listen(port, () => {
 });
 
 function testAndDeploy() {
-    log('Running tests.', 'info')
+    log('Running integration tests on server ' + host, 'info')
     var start = now();
     const command = 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
-        log('Successful deploy stack in ' + ((now() - start) / 1000).toFixed(3) + 's');
+        log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
         //start sub processes
         spawnChild('../demo-apps')
         spawnChild('../lme-model-api')
