@@ -7,7 +7,7 @@ import BaseModel.*;
 model MVO uses BaseModel
 {
  version: "0.4";
- ffl_version: "1.4";
+ ffl_version: "1.5";
  root
  {
   variable Q_ROOT
