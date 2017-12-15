@@ -7,62 +7,6 @@ const Register = require('../ffl2/Register').Register
 
 function SwaggerParser() {
 }
-
-const preview = {
-    "type": "object",
-    "properties": {
-        "graph": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "year": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "totalCosts": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "allowance": {
-                        "type": "object",
-                        "properties": {
-                            "childBenefit": {
-                                "format": "double",
-                                "type": "number"
-                            },
-                            "childcareAllowance": {
-                                "format": "double",
-                                "type": "number"
-                            },
-                            "combinationDiscount": {
-                                "format": "double",
-                                "type": "number"
-                            },
-                            "childRelatedBudget": {
-                                "format": "double",
-                                "type": "number"
-                            }
-                        }
-                    },
-                    "totalYearlyCosts": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "totalMonthlyCosts": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "totalMonthlySavings": {
-                        "format": "double",
-                        "type": "number"
-                    }
-                }
-            }
-        }
-    }
-}
-
 SwaggerParser.prototype.name = 'swagger'
 SwaggerParser.prototype.status = 'green';
 SwaggerParser.prototype.headername = '.swagger';
