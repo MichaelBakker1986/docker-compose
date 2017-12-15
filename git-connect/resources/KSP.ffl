@@ -1046,16 +1046,16 @@ model KSP uses BaseModel
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
-      variable TotalMonthlyBalanceAverage
-      {
-       title: "Total monthly Net Costs, monthly()";
-       locked: 1;
-       frequency: column;
-       formula: TotalYearlyBalance/12;
-       datatype: number;
-       fixed_decimals: 2;
-       aggregation: flow;
-      }
+     }
+     variable TotalMonthlyBalanceAverage
+     {
+      title: "Total monthly Net Costs, monthly()";
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyBalance/12;
+      datatype: number;
+      fixed_decimals: 2;
+      aggregation: flow;
      }
     }
    }
