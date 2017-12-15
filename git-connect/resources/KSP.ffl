@@ -217,6 +217,16 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 0;
      }
+     variable ChildAgeInTime
+     {
+      title: "Age";
+      locked: 1;
+      frequency: column;
+      formula: ValueT(T);
+      datatype: number;
+      fixed_decimals: 0;
+      aggregation: flow;
+     }
      variable Gender
      {
       title: "Gender";
@@ -783,7 +793,7 @@ model KSP uses BaseModel
       title: "Age";
       locked: 1;
       frequency: column;
-      formula: (ValueT(T))-1;
+      formula: ChildAgeInTime-1;
       datatype: number;
       fixed_decimals: 0;
       aggregation: flow;
@@ -793,7 +803,7 @@ model KSP uses BaseModel
       title: "Furniture";
       locked: 1;
       frequency: column;
-      formula: If(ValueT(T)=1,1800,0);
+      formula: If(ChildAgeInTime=1,1800,0);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -803,7 +813,7 @@ model KSP uses BaseModel
       title: "Childcare costs";
       locked: 1;
       frequency: column;
-      formula: If((Age<=3),(HourlyFeeChildCare[doc]*NrOfHoursChildcareMonth[doc])*12, 0);
+      formula: If((Age<=3),(HourlyFeeChildCare*NrOfHoursChildcareMonth)*12, 0);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -813,7 +823,7 @@ model KSP uses BaseModel
       title: "Diapers";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Diapers",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Diapers",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -823,7 +833,7 @@ model KSP uses BaseModel
       title: "Food";
       frequency: column;
       locked: 1;
-      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",(ValueT(T))),MatrixLookup("YearlyChildCosts","FoodCostsGirl",(ValueT(T))));
+      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup("YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -833,7 +843,7 @@ model KSP uses BaseModel
       title: "Clothing";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -843,7 +853,7 @@ model KSP uses BaseModel
       title: "PersonalCare";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -853,7 +863,7 @@ model KSP uses BaseModel
       title: "Hairdresser";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -863,7 +873,7 @@ model KSP uses BaseModel
       title: "Inventory";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Inventory",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Inventory",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -873,7 +883,7 @@ model KSP uses BaseModel
       title: "Allowance";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Allowance",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Allowance",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -883,7 +893,7 @@ model KSP uses BaseModel
       title: "Contributions";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Contributions",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Contributions",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -893,7 +903,7 @@ model KSP uses BaseModel
       title: "Transport";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","Transport",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","Transport",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -903,7 +913,7 @@ model KSP uses BaseModel
       title: "MobilePhone";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -913,7 +923,7 @@ model KSP uses BaseModel
       title: "DrivingLicense";
       frequency: column;
       locked: 1;
-      formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",(ValueT(T)));
+      formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",ChildAgeInTime);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -923,7 +933,7 @@ model KSP uses BaseModel
       title: "Kosten BSO";
       frequency: column;
       locked: 1;
-      formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare[doc]*NrOfHoursOutOfSchoolCareMonth[doc])*12,0);
+      formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,0);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -933,7 +943,7 @@ model KSP uses BaseModel
       title: "Costs for Primary Education";
       frequency: column;
       locked: 1;
-      formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation[doc],0);
+      formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -943,7 +953,7 @@ model KSP uses BaseModel
       title: "Costs for Secondary Education";
       frequency: column;
       locked: 1;
-      formula: If((Age>=12)and(Age<16),CostsYearOneFour[doc],If(Age>=16,CostsYearFiveSixSeven[doc],0));
+      formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -1002,7 +1012,7 @@ model KSP uses BaseModel
       title: "Childcare premium";
       locked: 1;
       frequency: column;
-      formula: If(Age<4,(PremiumForChildcare[doc]*12),If(Age<11,(PremiumForOutofSchoolCare[doc]*12),0));
+      formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -1012,7 +1022,7 @@ model KSP uses BaseModel
       title: "Childcare budget";
       locked: 1;
       frequency: column;
-      formula: If(Age<12,ChildRelatedBudgetUpToTwelve[doc]*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen[doc]*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen[doc]*12,0)));
+      formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
@@ -1022,7 +1032,7 @@ model KSP uses BaseModel
       title: "Combination Discount";
       locked: 1;
       frequency: column;
-      formula: If(Age<12,CombinationDiscountTotal[doc],0);
+      formula: If(Age<12,CombinationDiscountTotal,0);
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
