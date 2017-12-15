@@ -28,6 +28,13 @@ for (var i = 0; i < fflTestModels.length; i++) {
         "required": false,
         "schema": swaggerDefinition
     }
-
-    log.info(JSON.stringify(result, null, 2))
+    var swaggerDefinitionOutput = wb.export('swagger', {
+        rowId: 'Q_MAP06',
+        type: 'output'
+    })
+    var outputResult = {
+        "type": "array",
+        "items": swaggerDefinitionOutput
+    }
+    log.info(JSON.stringify(outputResult, null, 2))
 }

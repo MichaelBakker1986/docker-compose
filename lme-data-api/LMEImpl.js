@@ -49,7 +49,14 @@ modelService.onNewModel = function(model, path) {
             rowId: node[indexer.schemaIndexes.name],
             type: 'output'
         });
-        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"].schema = swaggerSchema
+
+        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"] = {
+            "description": "Success",
+            "schema": {
+                "type": "array",
+                "items": swaggerSchema
+            }
+        }
     }
 }
 /**
