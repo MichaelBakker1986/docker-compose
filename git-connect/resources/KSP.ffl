@@ -16,7 +16,7 @@ model KSP uses BaseModel
     frequency: document;
     displaytype: Input;
     datatype: number;
-    required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    required: MonthlyIncomeParent01.required and MonthlyIncofAgemeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
     choices: "0:Complete|1:Incomplete";
     variable Parents
     {
@@ -768,7 +768,7 @@ model KSP uses BaseModel
      frequency: document;
      displaytype: Output;
      datatype: number;
-     variable GraphResRek1
+     variable TotalNetCosts
      {
       title: "Total Net Costs";
       locked: 1;
