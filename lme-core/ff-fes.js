@@ -27,7 +27,7 @@ FESApi.prototype.init = function(data) {
         log.error(validateFeedback);
         throw Error("unable to initialize");
     }
-    return JSWorkBook.getRootSolutionProperty().solutionName;
+     return JSWorkBook;
 };
 FESApi.prototype.addFunctions = function(plugin) {
     var functions = [];

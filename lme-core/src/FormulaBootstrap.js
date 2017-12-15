@@ -168,6 +168,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
     xapendix = xapendix || '';
     var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property == 4 ? 0 : property]);
     var yAppendix = 'y';
+    if (referenceProperty.frequency == 'document') xapendix = '.doc'
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
     if (!referenceProperty.tuple) {

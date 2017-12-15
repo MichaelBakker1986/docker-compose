@@ -23,6 +23,7 @@ var YAxis = require('./YAxis')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
 function JSWorkBook(context) {
+    this.indexer = null;//preserved to store the indexer
     this.context = context;
     this.offset = 0;
     //default modelname

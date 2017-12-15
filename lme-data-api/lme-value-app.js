@@ -1,4 +1,4 @@
-const port = process.env.PORT;
+const port = process.env.PORT || 8006;
 const host = process.env.HOST;
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');

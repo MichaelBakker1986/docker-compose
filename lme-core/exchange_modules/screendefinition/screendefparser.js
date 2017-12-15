@@ -27,7 +27,7 @@ var parser = {
     deParse: function (rowId, workbook) {
         var screenSolution = SolutionFacade.createSolution(workbook.getSolutionName());
 
-        PropertiesAssembler.visitProperty(undefined, function (elem) {
+        PropertiesAssembler.visitProperty(rowId, function (elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,

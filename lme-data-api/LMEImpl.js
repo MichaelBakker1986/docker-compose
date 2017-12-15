@@ -3,94 +3,40 @@ const lmeAPI = require('../lme-core').fesjs;
 lmeAPI.addFunctions(require('../math').mathJs);
 lmeAPI.addFunctions(require('../formulajs-connect').formulajs);
 const LMEFacade = require('../lme-core/src/FESFacade');
+require('../lme-core/exchange_modules/swagger/swaggerParser');
 const WorkBook = require('../lme-core/src/JSWorkBook');
 const FESContext = require('../lme-core/src/fescontext');
 const ModelListener = require('../git-connect').ModelListener;
 const modelService = new ModelListener();
 const modelNames = []
 const apidef = require(__dirname + '/api/swaggerDef.json');
-var lastModelName;// = modelNames[0]
-if (!global.MatrixLookup) {
-    MatrixLookup = function() {
-        return 1;
-    }
-}
-if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
-}
-modelService.onNewModel = function(model, path) {
-    let modelName = lmeAPI.init(model);
-    modelNames.push(modelName);
-    lastModelName = modelName;
 
-    if (modelName !== 'KSP') {
+var lastModelName;// = modelNames[0]
+modelService.onNewModel = function(model, path) {
+    const lmeModel = lmeAPI.init(model);
+    const modelname = lmeModel.modelName;
+    modelNames.push(modelname);
+    lastModelName = lmeModel;
+
+    //apidef.parameters.FigureName.enum.push(modelname + '_' + node.rowId)
+    if (modelname !== 'KSP') {
         return;
     }
-
-    var JSWorkBook = new WorkBook(new FESContext());
-    JSWorkBook.modelName = "KSP"
-    JSWorkBook.updateValues();
+    const indexer = lmeModel.indexer
     /**
      * Update API-definition with variable names
      */
-    LMEFacade.findAllInSolution(modelName, function(node) {
-        //PROTOTYPE SWAGGER-DEF GENERATE!
-        if (node.solutionName == 'KSP') {
-            if (node.colId === 'value') {
-                if (node.nodes.length > 1) {
-                    let params = [{
-                        "$ref": "#/parameters/ContextId"
-                    }]
-                    let param = params;
-                    /*     if (node.tupleDefinition) {
-                             param = []
-                             params.push({
-                                 type: "array",
-                                 items: param
-                             })
-
-                         }*/
-                    for (var i = 0; i < node.nodes.length; i++) {
-                        const n = JSWorkBook.getNode(node.nodes[i].rowId)
-                        param.push({
-                            "name": n.rowId,
-                            "required": true,
-                            "in": "query",
-                            "type": n.datatype == 'percentage' ? 'number' : n.datatype,
-                            "description": JSWorkBook.get(n.rowId, 'title')
-                        })
-                    }
-
-                    apidef.paths["/id/{id}/figure/" + node.rowId] = {
-                        "post": {
-                            "summary": JSWorkBook.get(node.rowId, 'title'),
-                            "operationId": node.rowId,
-                            "produces": [
-                                "application/json"
-                            ],
-                            "parameters": params,
-                            "responses": {
-                                "200": {
-                                    "description": "OK",
-                                    "content": {
-                                        "application/json": {
-                                            "type": "array",
-                                            "schema": {
-                                                "$ref": "#/definitions/Value"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (node.colId === 'value') {
-            apidef.parameters.FigureName.enum.push(node.solutionName + '_' + node.rowId)
-        }
-    })
+    const inputNodes = indexer.find('displaytype', 'Input')
+    for (var i = 0; i < inputNodes.length; i++) {
+        var node = inputNodes[i];
+        apidef.paths["/id/{id}/figure/{figureName}"].post.parameters[0].schema = lmeModel.export('swagger', node[indexer.schemaIndexes.name])
+    }
+    const outputNodes = indexer.find('displaytype', 'Output')
+    var output = {}
+    for (var i = 0; i < outputNodes.length; i++) {
+        var node = outputNodes[i];
+        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"].schema = lmeModel.export('swagger', node[indexer.schemaIndexes.name])
+    }
 }
 /**
  * Add modules

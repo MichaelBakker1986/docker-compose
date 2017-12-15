@@ -15,30 +15,6 @@
   "basePath": "/",
   "paths": {
     "/test/data": {
-      "get": {
-        "summary": "Retrieve all values identified by {id}.",
-        "operationId": "test123",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ContextId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Value"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "summary": "Store all values identified by {id}.",
         "operationId": "idStoreFigures",
@@ -47,16 +23,64 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ContextId"
+            "description": "Map 1",
+            "in": "body"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Value"
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "graph": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "year": {
+                        "format": "int32",
+                        "type": "integer"
+                      },
+                      "totalCosts": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "allowance": {
+                        "type": "object",
+                        "properties": {
+                          "childBenefit": {
+                            "format": "double",
+                            "type": "number"
+                          },
+                          "childcareAllowance": {
+                            "format": "double",
+                            "type": "number"
+                          },
+                          "combinationDiscount": {
+                            "format": "double",
+                            "type": "number"
+                          },
+                          "childRelatedBudget": {
+                            "format": "double",
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "totalYearlyCosts": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "totalMonthlyCosts": {
+                        "format": "double",
+                        "type": "number"
+                      },
+                      "totalMonthlySavings": {
+                        "format": "double",
+                        "type": "number"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -141,6 +165,34 @@
       }
     },
     "/id/{id}/figure/{figureName}": {
+      "post": {
+        "summary": "KSP",
+        "operationId": "KSP",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+
+            }
+          }
+        }
+      },
       "get": {
         "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
         "operationId": "figure",

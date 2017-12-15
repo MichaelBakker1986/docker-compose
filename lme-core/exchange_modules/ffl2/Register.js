@@ -103,5 +103,11 @@ Register.prototype.getAll = function(name) {
     for (var i = 0; i < index.length; i++) r[i] = index[i][indexpos]
     return r;
 }
-
+Register.prototype.walk = function(node, depth, visitor) {
+    visitor(node, depth)
+    const childs = node[this.schemaIndexes.children];
+    for (var i = 0; i < childs.length; i++) {
+        this.walk(childs[i], depth + 1, visitor)
+    }
+}
 exports.Register = Register

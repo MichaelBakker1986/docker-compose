@@ -8,13 +8,19 @@ const fs = require('fs')
 const LMEapi = require('../../lme-model-api/src/lme');
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/screendefinition/screendefparser');
 const model = new LMEapi();
 const assert = require('assert')
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
+
+
     model.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/../../git-connect/resources/KSP.ffl', 'utf8'))
+    const index = model.lme.indexer
+
     const nodes = model.exportWebModel().nodes
+    
     /*    nodes.ValueExtraMonth.value = 10;
         nodes.IncomeParent01.value = 1;
         console.info(nodes.YearlyIncomeParent01.value)
