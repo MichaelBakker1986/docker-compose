@@ -90,69 +90,6 @@
         }
       }
     },
-    "/id/{id}/figure/{figureName}": {
-      "post": {
-        "summary": "KSP",
-        "operationId": "KSP",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "schema": {
-              "name": "years",
-              "description": "ammount of years",
-              "in": "body",
-              "required": true,
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-            }
-          }
-        }
-      },
-      "get": {
-        "summary": "Get all values traversing down the Figure tree from given {figureName} in context {id}.",
-        "operationId": "figure",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ContextId"
-          },
-          {
-            "$ref": "#/parameters/FigureName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/Value"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/id/{id}/figure/{figureName}/value/{value}": {
       "post": {
         "summary": "Set a value given {figureName} in context {context}.",
@@ -199,9 +136,17 @@
   "parameters": {
     "ContextId": {
       "name": "id",
+      "description": "Unique ID",
       "in": "path",
       "required": true,
       "type": "string"
+    },
+    "Times": {
+      "name": "times",
+      "description": "ammount of years",
+      "in": "body",
+      "required": true,
+      "type": "number"
     },
     "ContextIds": {
       "name": "ids",

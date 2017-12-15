@@ -28,23 +28,28 @@ module.exports.setup = function(app) {
         });
     }
 
-    //should return 18 columns
+    //should return 17 columns
     function defaultPostResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
             try {
+                const body = req.body;
                 //resolve context key to stored values
                 var columncontext = parseInt(req.params.columncontext || "0");
                 var context = ds.getOrCreate(req.params.id);
-                for (var q in req.query) {
-                    lmeAPI.fesGetValue(context, "KSP_" + q, columncontext, req.query[q], undefined)
+                for (var q in body) {
+                    for (var c in body[q]) {
+                        if (typeof(body[q][c]) != 'object') {
+                            lmeAPI.fesGetValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
+                        }
+                    }
                 }
 
                 var tupleindex = req.params.tupleindex;
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
-                success(lmeAPI.fesGetValue(context, variablename, columncontext, value, undefined))
+                success(lmeAPI.fesGetValue(context, "KSP_" + variablename, 17, value, undefined))
             } catch (err) {
                 fail(err);
             }

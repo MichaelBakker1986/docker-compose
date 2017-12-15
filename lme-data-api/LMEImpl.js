@@ -17,24 +17,59 @@ modelService.onNewModel = function(model, path) {
     const modelname = lmeModel.modelName;
     modelNames.push(modelname);
     lastModelName = lmeModel;
-
-    //apidef.parameters.FigureName.enum.push(modelname + '_' + node.rowId)
+    const indexer = lmeModel.indexer
+    const names = indexer.getIndex('name')
+    for (var name in names) {
+        apidef.parameters.FigureName.enum.push(modelname + '_' + name)
+    }
     if (modelname !== 'KSP') {
         return;
     }
-    const indexer = lmeModel.indexer
+
     /**
      * Update API-definition with variable names
      */
     const inputNodes = indexer.find('displaytype', 'Input')
+    let endPointname;
+
     for (var i = 0; i < inputNodes.length; i++) {
         var node = inputNodes[i];
+        endPointname = node[indexer.schemaIndexes.name]
+        const operation = "/id/{id}/figure/" + endPointname;
         const schema = lmeModel.export('swagger', {
-            rowId: node[indexer.schemaIndexes.name],
+            rowId: endPointname,
             type: 'input'
         });
-        apidef.paths["/id/{id}/figure/{figureName}"].post.parameters.push({
-            "name": "request",
+        if (!apidef.paths[operation]) {
+            apidef.paths[operation] = {
+                "post": {
+                    "summary": endPointname,
+                    "operationId": endPointname,
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "$ref": "#/parameters/ContextId"
+                        },
+                        {
+                            "$ref": "#/parameters/Times"
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Success",
+                            "schema": {}
+                        }
+                    }
+                }
+            }
+        }
+        apidef.paths[operation].post.parameters.push({
+            "name": endPointname,
             "in": "body",
             "description": "",
             "required": false,
@@ -50,7 +85,7 @@ modelService.onNewModel = function(model, path) {
             type: 'output'
         });
 
-        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"] = {
+        apidef.paths["/id/{id}/figure/" + endPointname].post.responses["200"] = {
             "description": "Success",
             "schema": {
                 "type": "array",
