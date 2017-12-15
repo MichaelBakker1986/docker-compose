@@ -10,7 +10,7 @@ model KSP uses BaseModel
    datatype: number;
    choices: "0:Complete|1:Incomplete";
    hint: "This module enables you to gain insight in the costs involved for raising a child";
-   variable Q_MAP01
+   variable KinderSpaarPlan
    {
     title: "Input";
     frequency: document;
