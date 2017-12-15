@@ -5,7 +5,6 @@ model KSP uses BaseModel
   variable Q_ROOT
   {
    title: "Costs of child raising (v1.28)";
-   locked: 1;
    frequency: document;
    displaytype: scorecard;
    datatype: number;
@@ -14,7 +13,6 @@ model KSP uses BaseModel
    variable Q_MAP01
    {
     title: "Input";
-    locked: 1;
     frequency: document;
     displaytype: Input;
     datatype: number;
@@ -177,7 +175,7 @@ model KSP uses BaseModel
        frequency: document;
        displaytype: select;
        formula: 0;
-       datatype: number;
+       datatype: string;
        required: 1;
        fixed_decimals: 0;
        choices: "0:Boy|1:Girl";

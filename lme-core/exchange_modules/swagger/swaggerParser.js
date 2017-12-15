@@ -67,7 +67,9 @@ SwaggerParser.prototype.name = 'swagger'
 SwaggerParser.prototype.status = 'green';
 SwaggerParser.prototype.headername = '.swagger';
 
-SwaggerParser.prototype.deParse = function(rowId, workbook) {
+SwaggerParser.prototype.deParse = function(metaData, workbook) {
+    const rowId = metaData.rowId
+    const type = metaData.type
     const register = workbook.indexer;
     const startnode = register.getIndex('name')[rowId]
     const nameIndex = register.schemaIndexes.name;
@@ -78,12 +80,35 @@ SwaggerParser.prototype.deParse = function(rowId, workbook) {
     const names = register.getIndex('i')
     register.walk(startnode, 0, function(node, depth) {
         const nodeName = node[nameIndex];
+        if (type == 'input' && workbook.get(nodeName, 'locked') && node[childrenIndex].length == 0) {
+            return;
+        }
+        let nodeType = 'string';
         const currentNode = {
-            type: node[childrenIndex].length > 0 ? "object" : (node[datatypeIndex] || 'string'),
+            type: nodeType,
             description: workbook.get(nodeName, 'title')
+        }
+        let choices;
+        ///		"format": "double",
+        //"type": "number"
+        if (node[childrenIndex].length > 0) {
+            currentNode.type = "object"
+        } else if (choices = workbook.get(nodeName, 'choices')) {
+            currentNode.enum = []
+            for (var i = 0; i < choices.length; i++) {
+                var obj = choices[i];
+                currentNode.enum.push(obj.value)
+            }
+        } else {
+            if (node[datatypeIndex]) {
+                currentNode.type = (node[datatypeIndex])
+            } else {
+                currentNode.type = 'string'
+            }
         }
         variables[nodeName] = currentNode
         if (currentNode.type == 'object') currentNode.properties = {}
+        if (currentNode.type == 'number') currentNode.format = "double"
     })
     register.walk(startnode, 0, function(node, depth) {
         if (node[parentIdIndex]) {

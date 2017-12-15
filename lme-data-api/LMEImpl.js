@@ -29,13 +29,27 @@ modelService.onNewModel = function(model, path) {
     const inputNodes = indexer.find('displaytype', 'Input')
     for (var i = 0; i < inputNodes.length; i++) {
         var node = inputNodes[i];
-        apidef.paths["/id/{id}/figure/{figureName}"].post.parameters[0].schema = lmeModel.export('swagger', node[indexer.schemaIndexes.name])
+        const schema = lmeModel.export('swagger', {
+            rowId: node[indexer.schemaIndexes.name],
+            type: 'input'
+        });
+        apidef.paths["/id/{id}/figure/{figureName}"].post.parameters.push({
+            "name": "request",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": schema
+        })
     }
     const outputNodes = indexer.find('displaytype', 'Output')
     var output = {}
     for (var i = 0; i < outputNodes.length; i++) {
         var node = outputNodes[i];
-        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"].schema = lmeModel.export('swagger', node[indexer.schemaIndexes.name])
+        const swaggerSchema = lmeModel.export('swagger', {
+            rowId: node[indexer.schemaIndexes.name],
+            type: 'output'
+        });
+        apidef.paths["/id/{id}/figure/{figureName}"].post.responses["200"].schema = swaggerSchema
     }
 }
 /**

@@ -23,7 +23,7 @@
         ],
         "parameters": [
           {
-            "description": "Map 1",
+              "description": "Map 1",
             "in": "body"
           }
         ],
@@ -181,14 +181,20 @@
         ],
         "parameters": [
           {
-            "in": "body"
+            "in": "body",
+            "schema": {
+              "name": "years",
+              "description": "ammount of years",
+              "in": "body",
+              "required": true,
+              "type": "number"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-
             }
           }
         }
