@@ -27,7 +27,7 @@ FESApi.prototype.init = function(data) {
         log.error(validateFeedback);
         throw Error("unable to initialize");
     }
-     return JSWorkBook;
+    return JSWorkBook;
 };
 FESApi.prototype.addFunctions = function(plugin) {
     var functions = [];
@@ -43,8 +43,9 @@ FESApi.prototype.addFunctions = function(plugin) {
  * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
 // Convert tuple index to tuple number
-FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex) {
+FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex, columns) {
     columncontext = columncontext || 0;
+    columns = columns || 1;
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
@@ -83,6 +84,45 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
         return values;
     }
 };
+
+FESApi.prototype.getObjectValues = function(context, rowId, columncontext, value, tupleindex, columns) {
+    columncontext = columncontext || 0;
+    columns = columns || 1;
+    if (tupleindex !== undefined) {
+        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
+    }
+    var fesContext = new FESContext();
+    fesContext.values = context.values;
+    var JSWorkBook = new WorkBook(fesContext);
+    JSWorkBook.columns = context.columns || 2;
+    JSWorkBook.properties = context.properties || JSWorkBook.properties;
+    //getValue
+    const values = [];
+    var rootNode = JSWorkBook.getSolutionNode(rowId);
+    if (rootNode) {
+        for (var i = 0; i < 17; i++) {
+            const result = {}
+            JSWorkBook.visitProperties(rootNode, function(node, yax) {
+                const nodeName = node.solutionName + '_' + node.rowId;
+                result[nodeName] = getValueObject(JSWorkBook, nodeName, i, yax)
+            });
+            values.push(result)
+        }
+    } else {
+        values.push({
+            variable: rowId
+        });
+    }
+    return values;
+}
+
+function getValueObject(workbook, rowId, columncontext, yAxis) {
+    const dataEnty = {}
+    for (var type in workbook.properties) {
+        dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, columncontext, yAxis);
+    }
+    return dataEnty;
+}
 
 /**
  * Given properties in workbook return all values for given columns

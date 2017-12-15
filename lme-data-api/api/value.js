@@ -49,7 +49,8 @@ module.exports.setup = function(app) {
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
-                success(lmeAPI.fesGetValue(context, "KSP_" + variablename, 17, value, undefined))
+                const result = lmeAPI.getObjectValues(context, "KSP_PersonalSituation", columncontext, value, undefined, 17);
+                success(result)
             } catch (err) {
                 fail(err);
             }
