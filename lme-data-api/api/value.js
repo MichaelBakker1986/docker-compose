@@ -6,7 +6,6 @@ const lmeAPI = require('../LMEImpl').lmeAPI
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
 
-
     function defaultResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
