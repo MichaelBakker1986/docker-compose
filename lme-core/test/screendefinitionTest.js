@@ -5,7 +5,6 @@ require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFa
 var JSWorkBook = require('../src/JSWorkBook');
 var assert = require('assert');
 var data = require('../resources/scorecardtemplate.json');
-JUNIT.print(data)
 var FESContext = require('../src/fescontext')
 var wb = new JSWorkBook(new FESContext());
 

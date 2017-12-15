@@ -24,7 +24,7 @@
 //Document can only refer to itsself
 //can easy be refactored for better performance
 var importData = require('../resources/CustomImport.json');
-var tracer = require('ff-log');
+var log = require('ff-log');
 var headers = {
     title: {
         title: 'title'
@@ -378,8 +378,7 @@ function calculateCalculationDocument(data) {
     }
     this.indexed = indexed;
     templateindexed = undefined;
-    tracer.debug('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
-
+    if (log.DEBUG) log.debug('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
     /**
      * Assign references to the infinit column
      */

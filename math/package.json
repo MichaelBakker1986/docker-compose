@@ -6,6 +6,7 @@
   "main": "ff-math.js",
   "dependencies": {
     "algebra.js": "^0.2.6",
+    "ff-log": "^1.0.24",
     "js-solver": "0.0.2"
   },
   "scripts": {

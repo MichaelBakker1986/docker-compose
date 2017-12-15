@@ -9,7 +9,7 @@
     "bessel": "^1.0.2",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",
-    "ff-log": "^1.0.23",
+    "ff-log": "^1.0.24",
     "formulajs": "^1.0.8",
     "js-solver": "0.0.2",
     "source-map-support": "^0.5.0",

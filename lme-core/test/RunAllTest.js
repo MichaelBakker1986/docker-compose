@@ -12,7 +12,10 @@ var tests = [
     './jsonValuesTest',
     './tupleTest',
     './apiTest',
+    './RegisterTest',
     './FinChoiceTest',
+    './SwaggerDefinitionParserTest',
+    './TupleSumTest',
     './TupleIndexConverterTest',
     './totalYearlyCostsTSUMTest'
 ];

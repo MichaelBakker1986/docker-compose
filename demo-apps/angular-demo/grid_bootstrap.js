@@ -59,8 +59,8 @@ angular
                 $scope.$digest()
             });
         }
-        $http.get('resources/' + modelName + '.js').then(function(data) {
-            eval(data.data)
+
+        $.getScript('resources/' + modelName + '.js', function(data, textStatus, jqxhr) {
             //after this we can import the user-data....
             LMEMETA.importWebModel('Q_ROOT')
             LME = LMEMETA.exportWebModel();
@@ -80,9 +80,7 @@ angular
             LMEMETA.loadData(function(response) {
                 $scope.$digest()
             })
-        }).catch(function(err) {
-            console.error("failed loading " + err);
-        });
+        })
         $(window).bind('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {

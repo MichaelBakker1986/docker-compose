@@ -50,7 +50,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
     var rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
-        //don't give away variable name here.
+        //because only Formula's are known here, we cannot give away variable name here.
         throw Error('Cannot find variable')
     }
     if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);

@@ -1,6 +1,5 @@
 var SolutionFacade = require('../../src/SolutionFacade');
 var PropertiesAssembler = require('../../src/PropertiesAssembler');
-var LmeDisplayGrammer = require('./LmeDisplayGrammer').LmeDisplayGrammer
 var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid']
 
 function WebExport() {
@@ -154,15 +153,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     if (parent) parent.children.push(rv);
     this.nodes[rowId] = rv;
 }
-
-var webDesign = {
-    nodes: [
-        {rowId: 'root'}
-    ]
-}
 WebExport.prototype.parseData = function(webExport, workbook) {
-    webDesign = new LmeDisplayGrammer(webExport, workbook.modelName).parseGrammer()
-    webDesign.nodes[0].rowId = workbook.modelName + '_root'
     return SolutionFacade.createSolution(workbook.modelName);
 }
 

@@ -36,5 +36,5 @@ for (var i = 0; i < fflTestModels.length; i++) {
         "type": "array",
         "items": swaggerDefinitionOutput
     }
-    log.info(JSON.stringify(outputResult, null, 2))
+    assert(JSON.stringify(outputResult, null, 2).length == 5623)
 }

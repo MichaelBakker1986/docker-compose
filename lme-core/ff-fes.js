@@ -22,9 +22,9 @@ FESApi.prototype.init = function(data) {
     var validateFeedback = JSWorkBook.validateImportedSolution();
     if (validateFeedback.valid) {
         //valid
-        log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
+        if (log.DEBUG) log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
     } else {
-        log.error(validateFeedback);
+        if (log.DEBUG) log.error(validateFeedback);
         throw Error("unable to initialize");
     }
     return JSWorkBook;
@@ -35,7 +35,7 @@ FESApi.prototype.addFunctions = function(plugin) {
         functions.push(functionName);
         global[functionName] = plugin.entries[functionName];
     }
-    log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
+    if (log.DEBUG) log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
 };
 /**
  * rowId - VariableName
