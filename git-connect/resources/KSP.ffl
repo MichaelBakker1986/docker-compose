@@ -758,15 +758,15 @@ model KSP uses BaseModel
     title: "Your Personal situation";
     locked: 1;
     frequency: document;
-    displaytype: Output;
+    displaytype:string;
     datatype: number;
     choices: "0:Complete|1:Incomplete";
-    variable Q_MAP06SUB5
+    variable PersonalSituation
     {
      title: "Your Personal Situation";
      locked: 1;
      frequency: document;
-     displaytype: currency;
+     displaytype: Output;
      datatype: number;
      variable GraphResRek1
      {
