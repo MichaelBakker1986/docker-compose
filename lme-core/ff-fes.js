@@ -104,7 +104,7 @@ FESApi.prototype.getObjectValues = function(context, rowId, columncontext, value
             const result = {}
             JSWorkBook.visitProperties(rootNode, function(node, yax) {
                 const nodeName = node.solutionName + '_' + node.rowId;
-                result[nodeName] = getValueObject(JSWorkBook, nodeName, i, yax)
+                result[node.rowId] = getValueObject(JSWorkBook, nodeName, i, yax)
             });
             values.push(result)
         }

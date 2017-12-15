@@ -44,11 +44,9 @@ module.exports.setup = function(app) {
                         }
                     }
                 }
-
                 var tupleindex = req.params.tupleindex;
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
-
                 const result = lmeAPI.getObjectValues(context, "KSP_PersonalSituation", columncontext, value, undefined, 17);
                 success(result)
             } catch (err) {
