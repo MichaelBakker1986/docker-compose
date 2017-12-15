@@ -978,7 +978,7 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       aggregation: flow;
      }
-     variable Q_MAP06SUB5SUB3 refers to TotalYearlyAllowance
+     variable TotalYearlyAllowancePoint refers to TotalYearlyAllowance
      {
       title: "Child-related Income";
       locked: 1;
