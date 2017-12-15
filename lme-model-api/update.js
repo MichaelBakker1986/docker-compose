@@ -9,8 +9,7 @@ const exec = require('child-process-promise').exec;
 const spawn = require('child-process-promise').spawn;
 let busy = false;
 var childProcesses = {}
-const hostname = require('os').hostname();
-const developer = (hostname === 'localhost');
+const developer = (host === 'localhost');
 const levels = {
     info: {
         level: 'info',
@@ -144,6 +143,7 @@ function testAndDeploy() {
         spawnChild('../demo-apps')
         spawnChild('../lme-model-api')
         spawnChild('../lme-data-api')
+        spawnChild('../proxy')
 
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
