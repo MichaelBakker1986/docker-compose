@@ -55,7 +55,7 @@ module.exports.setup = function(app) {
         }).then(function(answer) {
             res.json(answer)
         }).catch(function(err) {
-            log.error(err);
+            res.json(err.toString())
         });
     }
 
