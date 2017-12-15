@@ -151,11 +151,15 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                     returnValue = PIECHART(returnValue)
                 }
             }
+            if (variable.displayAs == 'date') {
+                returnValue = new Date(returnValue)
+            }
         } else if (colType == 'locked') {
             return Boolean(returnValue)
         } else if (colType == 'visible') {
             return Boolean(returnValue)
         }
+
     }
     return returnValue;
 }

@@ -4,6 +4,7 @@ require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const assert = require('assert');
 const model = new LMEapi();
+LMEMETA = model;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
 let mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');

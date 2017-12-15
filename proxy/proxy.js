@@ -29,9 +29,9 @@ function clientErrorHandler(err, req, res, next) {
 }
 
 app.listen(port, () => {
-    app.use('*/showcase', proxy({target: 'http://' + host + ':8083', changeOrigin: true}));
+    app.use('*/showcase', proxy({target: 'http://' + host + ':8083', changeOrigin: true, logLevel: 'silent'}));
     app.all('*/ide/*', proxy({
-        toProxy: true,
+        toProxy: true, logLevel: 'silent',
         target: 'http://' + host + ':8083',
         changeOrigin: false,
         pathRewrite: {
@@ -39,15 +39,15 @@ app.listen(port, () => {
         }
     }));
     app.use('*/ui/*', proxy({
-        toProxy: true,
+        toProxy: true, logLevel: 'silent',
         target: 'http://' + host + ':8083',
         changeOrigin: false,
         pathRewrite: {
             '/ui/': '/'
         }
     }));
-    app.use('*/models', proxy({target: 'http://' + host + ':8080', changeOrigin: true}));
-    app.use('*/branches', proxy({target: 'http://' + host + ':8080', changeOrigin: true}));
-    app.all('*/data', proxy({target: 'http://' + host + ':8085', changeOrigin: true}));
-    app.use('*/resources/*', proxy({target: 'http://' + host + ':8083', changeOrigin: true}));
+    app.use('*/models', proxy({target: 'http://' + host + ':8080', logLevel: 'silent', changeOrigin: true}));
+    app.use('*/branches', proxy({target: 'http://' + host + ':8080', logLevel: 'silent', changeOrigin: true}));
+    app.all('*/data', proxy({target: 'http://' + host + ':8085', logLevel: 'silent', changeOrigin: true}));
+    app.use('*/resources/*', proxy({target: 'http://' + host + ':8083', logLevel: 'silent', changeOrigin: true}));
 });
