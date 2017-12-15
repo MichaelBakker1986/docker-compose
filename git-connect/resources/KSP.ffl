@@ -795,16 +795,6 @@ model KSP uses BaseModel
        datatype: number;
        fixed_decimals: 0;
        aggregation: flow;
-       variable PeriodeInFormulaset
-       {
-        title: "PeriodeInFormulaset";
-        locked: 1;
-        frequency: column;
-        formula: ValueT(T);
-        datatype: number;
-        fixed_decimals: 0;
-        aggregation: balance;
-       }
       }
       variable Furniture
       {
