@@ -157,77 +157,6 @@ model KSP uses BaseModel
       required: 1;
       fixed_decimals: 1;
      }
-     variable Child
-     {
-      locked: 1;
-      variable ChildAge
-      {
-       title: "ChildAge";
-       frequency: document;
-       formula: 0;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 0;
-      }
-      variable Gender
-      {
-       title: "Gender";
-       frequency: document;
-       displaytype: select;
-       formula: 0;
-       datatype: string;
-       required: 1;
-       fixed_decimals: 0;
-       choices: "0:Boy|1:Girl";
-       hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\'n 18 euro per maand.";
-      }
-      variable NrOfHoursChildcareWeek
-      {
-       title: "Nr. of hours childcare per week";
-       frequency: document;
-       formula: 0;
-       datatype: number;
-       required: 1;
-       fixed_decimals: 1;
-      }
-      variable NrOfHoursChildcareMonth
-      {
-       title: "Nr. of hours childcare per month";
-       locked: 1;
-       frequency: document;
-       formula: OnER(NrOfHoursChildcareWeek*4.333,NA);
-       datatype: number;
-       fixed_decimals: 2;
-      }
-      variable NrOfHoursOutOfSchoolCareWeek
-      {
-       title: "Nr. of hours out-of-school care per week";
-       frequency: document;
-       formula: 0;
-       datatype: number;
-       displaytype: number;
-       required: 1;
-       fixed_decimals: 1;
-      }
-      variable NrOfHoursOutOfSchoolCareMonth
-      {
-       title: "Nr. of hours out-of-school care per month";
-       locked: 1;
-       frequency: document;
-       formula: NrOfHoursOutOfSchoolCareWeek*4.333;
-       displaytype: number;
-       datatype: number;
-       fixed_decimals: 2;
-      }
-      variable HourlyFeeChildCare
-      {
-       title: "Hourly fee child daycare";
-       frequency: document;
-       formula: 7.18;
-       datatype: number;
-       fixed_decimals: 2;
-      }
-     }
      variable HourlyFeeOutOfSchoolCare
      {
       title: "Hourly fee out-of-school daycare";
@@ -274,6 +203,77 @@ model KSP uses BaseModel
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
+     }
+    }
+    variable Child
+    {
+     locked: 1;
+     variable ChildAge
+     {
+      title: "ChildAge";
+      frequency: document;
+      formula: 0;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 0;
+     }
+     variable Gender
+     {
+      title: "Gender";
+      frequency: document;
+      displaytype: select;
+      formula: 0;
+      datatype: string;
+      required: 1;
+      fixed_decimals: 0;
+      choices: "0:Boy|1:Girl";
+      hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\'n 18 euro per maand.";
+     }
+     variable NrOfHoursChildcareWeek
+     {
+      title: "Nr. of hours childcare per week";
+      frequency: document;
+      formula: 0;
+      datatype: number;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable NrOfHoursChildcareMonth
+     {
+      title: "Nr. of hours childcare per month";
+      locked: 1;
+      frequency: document;
+      formula: OnER(NrOfHoursChildcareWeek*4.333,NA);
+      datatype: number;
+      fixed_decimals: 2;
+     }
+     variable NrOfHoursOutOfSchoolCareWeek
+     {
+      title: "Nr. of hours out-of-school care per week";
+      frequency: document;
+      formula: 0;
+      datatype: number;
+      displaytype: number;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable NrOfHoursOutOfSchoolCareMonth
+     {
+      title: "Nr. of hours out-of-school care per month";
+      locked: 1;
+      frequency: document;
+      formula: NrOfHoursOutOfSchoolCareWeek*4.333;
+      displaytype: number;
+      datatype: number;
+      fixed_decimals: 2;
+     }
+     variable HourlyFeeChildCare
+     {
+      title: "Hourly fee child daycare";
+      frequency: document;
+      formula: 7.18;
+      datatype: number;
+      fixed_decimals: 2;
      }
     }
    }
