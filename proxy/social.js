@@ -10,7 +10,7 @@ var socialLoginClass = require("social-login");
 var socialLogin = new socialLoginClass({
     //    returnRaw: true,
     app: app,    // ExpressJS instance
-    url: "http://94.213.30.5:8091",  // Your root url
+    url: "http://" + host + ":" + port,  // Your root url
     onAuth: function(req, type, uniqueProperty, accessToken, refreshToken, profile, done) {
 
         // This is the centralized method that is called when the user is logged in using any of the supported social site.
@@ -43,12 +43,10 @@ socialLogin.use({
 app.get('/auth/facebook', function(req, res) {
     res.end('<html><body><a href="/auth/facebook">Login with facebook</a></body></html>')
 })
-app.get('/interest', socialLogin.authenticate('faceboog'), function(res, req) {
+app.get('/interest', function(req, res) {
     res.end('interest' + res.user)
 });
 
 app.listen(port, function() {
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('<a href="http://94.213.30.5:8091/auth/facebook">AUTH Server</a><span> deployed.</span>');
-    })
+    console.log('<a href="http://' + host + ':' + port + '/auth/facebook">AUTH Server</a><span> deployed.</span>');
 });

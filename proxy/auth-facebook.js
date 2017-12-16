@@ -40,16 +40,12 @@ app.all('*', function(req, res, next) {
         }
     },
     function(reqFromFacebook, res) {
-        var url = "http://localhost:" + 7080 + reqFromFacebook._parsedUrl.pathname.substring('/id'.length);
-        var url2 = "http://localhost:" + 7080 + '/id/DEMO/ui/grid_example.html#MVO&DEMO';
-        res.redirect(url2);
+        reqFromFacebook.pipe(request("http://localhost:" + 7080 + reqFromFacebook.params["0"])).pipe(res);
     }
 )
 app.listen(port, function() {
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log('<a href="http://' + host + ':' + port + '/">AUTH Server</a><span> deployed.</span>');
-        console.log('<a href="http://' + host + ':' + port + '/login/facebook">AUTH Server</a><span> deployed.</span>');
-        console.log('<a href="http://' + host + ':' + port + '/profile">AUTH Server</a><span> deployed.</span>');
-        console.log('<a href="http://' + host + ':' + port + '/id/DEMO/ui/grid_example.html#MVO&DEMO">AUTH Server</a><span> deployed.</span>');
-    })
+    console.log('<a href="http://' + host + ':' + port + '/">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + host + ':' + port + '/login/facebook">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + host + ':' + port + '/profile">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + host + ':' + port + '/id/DEMO/ui/grid_example.html#MVO&DEMO">AUTH Server</a><span> deployed.</span>');
 });
