@@ -122,8 +122,25 @@ exports.orm = Promise.all([
         exports.FigureCommit = FigureCommit;
         exports.FigureTree = FigureTree;
 
-        return db.sync(async (err) => {
+        return db.sync(async (err, other) => {
             if (err) throw err;
+            const dbSchema = {
+                figure: ['uuid', 'var', 'col', 'val'],
+                figure_commit: ['uuid', 'create_time'],
+                figure_tree: ['uuid', 'uuid_parent']
+            }
+            //create indexes on psql databases
+            if (db.driver.dialect != 'mysql') {
+                for (var table in dbSchema) {
+                    for (var i = 0; i < dbSchema[table].length; i++) {
+                        var column = dbSchema[table][i];
+                        const sql = "CREATE INDEX IF NOT EXISTS idx_" + table + "_" + column + " ON " + table + " (" + column + ");";
+                        db.driver.execQuery(sql, [], function(err, result) {
+                            if (err) throw err
+                        })
+                    }
+                }
+            }
             return await "";
         })
     }).catch((err) => {
