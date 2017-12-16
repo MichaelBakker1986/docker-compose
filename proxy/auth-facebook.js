@@ -6,6 +6,7 @@ var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var port = 8091;
 var host = "94.213.30.5";
+const domain = 'appmodel.nl'
 passport.use(new Strategy({
         clientID: '180467995863988',
         clientSecret: 'b10828749578d1bd1402e8c57b72b01d'
@@ -35,7 +36,7 @@ app.all('*', function(req, res, next) {
         } else {
             passport.authenticate('facebook', {
                 failureRedirect: '/fail',
-                callbackURL: "http://" + host + ":" + port + req.originalUrl
+                callbackURL: "http://" + domain + req.originalUrl
             })(req, res, next);
         }
     },
@@ -44,8 +45,8 @@ app.all('*', function(req, res, next) {
     }
 )
 app.listen(port, function() {
-    console.log('<a href="http://' + host + ':' + port + '/">AUTH Server</a><span> deployed.</span>');
-    console.log('<a href="http://' + host + ':' + port + '/login/facebook">AUTH Server</a><span> deployed.</span>');
-    console.log('<a href="http://' + host + ':' + port + '/profile">AUTH Server</a><span> deployed.</span>');
-    console.log('<a href="http://' + host + ':' + port + '/id/DEMO/ui/grid_example.html#MVO&DEMO">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + domain + '/">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + domain + '/login/facebook">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + domain + '/profile">AUTH Server</a><span> deployed.</span>');
+    console.log('<a href="http://' + domain + '/id/DEMO/ui/grid_example.html#MVO&DEMO">AUTH Server</a><span> deployed.</span>');
 });
