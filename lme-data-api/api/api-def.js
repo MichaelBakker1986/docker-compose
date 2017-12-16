@@ -8,7 +8,7 @@ module.exports.setup = function(app) {
         const port = app.get('port');
         const host = app.get('host');
         let swaggerData = require(__dirname + '/swaggerDef.json');
-        swaggerData.host = host + ':' + port;
+        swaggerData.host = process.env.DOMAIN || (host + ':' + port);
         res.json(swaggerData)
     });
 };
