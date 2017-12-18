@@ -17,7 +17,8 @@ var tests = [
     './SwaggerDefinitionParserTest',
     './TupleSumTest',
     './TupleIndexConverterTest',
-    './totalYearlyCostsTSUMTest'
+    './totalYearlyCostsTSUMTest',
+    './TimeTest'
 ];
 var testResults = [];
 var failure = [];

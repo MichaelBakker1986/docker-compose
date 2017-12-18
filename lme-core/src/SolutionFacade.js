@@ -65,25 +65,26 @@ SolutionFacade.prototype.gatherFormulaProperties = function(modelName, propertie
  * Creates Formula/Property if not exists
  * Initialize Functionmap
  */
-SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId) {
+SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId, displaytype) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
     //create Solution if not exists.
     var solution = this.createSolution(solutionName);
     //integrate Property with Formula
-    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, undefined);
+    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype);
     //integrate one formula from just created Solution
     this.initFormulaBootstrap(solution.formulas);
 };
 /**
  * Called by parsers
  */
-SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displayAs) {
+SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
+    if (displaytype) property.displaytype = displaytype;
     var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body);
-    return solution.createNode(rowId, colId, formulaId, displayAs);
+    return solution.createNode(rowId, colId, formulaId, displaytype);
 };
 
 SolutionFacade.prototype.mergeFormulas = function(formulasArg) {

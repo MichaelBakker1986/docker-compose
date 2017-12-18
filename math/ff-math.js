@@ -10,6 +10,7 @@ if (!global.MatrixLookup) {
 if (!global.MATRIX_VALUES) {
     MATRIX_VALUES = {}
 }
+
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
     for (var func in jsMath) {
@@ -31,6 +32,7 @@ function initJSMath(jsMath) {
     }
 }
 
+//TODO: add these functions as internal functions
 SOLVER = function(args) {
     return new Solver(args || arguments)
 }
@@ -67,12 +69,19 @@ PIECHART = function(points) {
     }
     return result;
 }
-HSUM = function(fId, func, v, x, y, z, start, end) {
+HSUM = function(values, start, end) {
     var returnValue = 0;
-    for (var i = start || x.first.index; i < end || x.last.index; i++) {
-        returnValue += func(fId, x[i], y, z, v);
+    for (var i = (start || 0); i <= (end || values.length); i++) {
+        returnValue += values[i];
     }
     return returnValue;
+}
+VALUES = function(func, fId, x, y, z, v) {
+    var result = []
+    for (var i = 0; i < x.aggcols.length; i++) {
+        result.push(func(fId, x.aggcols[i], y, z, v))
+    }
+    return result;
 }
 initJSMath(jsMath);
 exports.mathJs = {

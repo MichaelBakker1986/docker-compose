@@ -113,8 +113,11 @@ var simplified = {
         assert.equal(node.arguments.length, 2, formulaInfo.original);
         //TODO: for now we fix in math. but its better to compile this in the JS code
     },
+    //HSUM = function(fId, func, v, x, y, z, start, end) {
     //wants horizontale aggregation from values in between two given columns
-    Hsum: function(formulaInfo, node) {
+    HSUM: function(formulaInfo, node) {
+        node.callee.name = "HSUM";
+      /*  console.info('test')*/
         /* node.arguments = [{
          "type": "Identifier",
          "name": "1"
@@ -209,6 +212,8 @@ simplified.ForAll = simplified.Count
 simplified.Exists = simplified.ForAll;
 simplified.TupleSum = simplified.TSUM;
 simplified.IF = simplified.If;
+simplified.Hsum = simplified.HSUM;
+simplified.HSum = simplified.HSUM;
 simplified.if = simplified.If;
 simplified.MAX = simplified.Max;
 simplified.MIN = simplified.Min;

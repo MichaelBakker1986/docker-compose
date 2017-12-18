@@ -283,14 +283,6 @@
     "args": "one",
     "body": "{ return 1 }"
   },
-  "HSum": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "HSUM": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
   "VSUM": {
     "args": "one",
     "body": "{ return 1 }"

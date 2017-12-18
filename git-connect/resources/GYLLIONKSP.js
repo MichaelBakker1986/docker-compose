@@ -22174,6 +22174,7 @@ var simplified = {
     },
     //wants horizontale aggregation from values in between two given columns
     Hsum: function(formulaInfo, node) {
+        console.info('test')
         /* node.arguments = [{
          "type": "Identifier",
          "name": "1"

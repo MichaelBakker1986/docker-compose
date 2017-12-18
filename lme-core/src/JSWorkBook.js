@@ -287,8 +287,8 @@ JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     });
 }
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
-JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency) {
-    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value');
+JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
+    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype);
     var orCreateProperty = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
     orCreateProperty.tuple = tuple;
     orCreateProperty.frequency = frequency;

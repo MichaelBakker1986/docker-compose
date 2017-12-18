@@ -168,7 +168,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
     xapendix = xapendix || '';
     var referenceProperty = addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property == 4 ? 0 : property]);
     var yAppendix = 'y';
-    if (referenceProperty.frequency == 'document') xapendix = '.doc'
+    if (xapendix == '' && referenceProperty.frequency == 'document') xapendix = '.doc'
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
     if (!referenceProperty.tuple) {
@@ -202,7 +202,12 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
             if (property == 4) {
                 node.name = 'v[' + (referenceFormulaId) + '][x.hash + y.hash + z] !=null';
             } else {
-                node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
+                if (xapendix == '.all') {
+                    //HSUM = function(fId, func, v, x, y, z, start, end) {
+                    node.name = "VALUES(a" + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
+                } else {
+                    node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
+                }
             }
         }
     }
