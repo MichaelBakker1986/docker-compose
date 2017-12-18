@@ -3,6 +3,7 @@ const lmeAPI = require('../lme-core').fesjs;
 lmeAPI.addFunctions(require('../math').mathJs);
 lmeAPI.addFunctions(require('../formulajs-connect').formulajs);
 const LMEFacade = require('../lme-core/src/FESFacade');
+const SolutionFacade = require('../lme-core/src/SolutionFacade');
 require('../lme-core/exchange_modules/swagger/swaggerParser');
 const WorkBook = require('../lme-core/src/JSWorkBook');
 const FESContext = require('../lme-core/src/fescontext');
@@ -102,7 +103,8 @@ modelService.onNewModel = function(model, path) {
  */
 
 var excelPlugin = require('../excel-connect').xlsxLookup;
-excelPlugin.initComplete('KSP').then(function() {
+excelPlugin.initComplete('KSP').then(function(matrix) {
+    SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     modelService.initializeModels();
 })
 lmeAPI.addFunctions(excelPlugin);

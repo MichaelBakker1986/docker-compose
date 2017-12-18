@@ -100,7 +100,7 @@ FESApi.prototype.getObjectValues = function(context, rowId, columncontext, value
     const values = [];
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     if (rootNode) {
-        for (var i = 0; i < 17; i++) {
+        for (var i = 0; i <= columns; i++) {
             const result = {}
             JSWorkBook.visitProperties(rootNode, function(node, yax) {
                 const nodeName = node.solutionName + '_' + node.rowId;
