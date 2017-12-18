@@ -4,7 +4,7 @@ var httpProxy = require('http-proxy');
 var proxy = httpProxy.createProxyServer({});
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
-var port = 8091;
+var port = process.env.FACEBOOK_PROXY_PORT || 8091;
 const internalRedirectUrl = "http://localhost:" + 7080;
 const domain = 'appmodel.org'
 passport.use(new Strategy({
@@ -38,7 +38,7 @@ app.get('/fail', function(req, res) {
     res.send(401);
 });
 app.all('*', function(req, res, next) {
-    if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             if (req.user.id == 1683958891676092 || req.user.id == 1747137275360424) {
                 proxy.web(req, res, {
                     target: internalRedirectUrl + '/id/' + req.user.id + req.originalUrl,
@@ -47,9 +47,8 @@ app.all('*', function(req, res, next) {
                     limit: '50mb',
                     ignorePath: true
                 });
-                //request("http://localhost:" + 7080 + '/id/' + req.user.id + req.originalUrl).pipe(res);
             } else {
-                res.send(400, 'Unauthorized facebook user');
+                res.send(400, 'Unauthorized facebook user [' + req.user.name + ']');
                 res.send(401);
             }
         } else {
