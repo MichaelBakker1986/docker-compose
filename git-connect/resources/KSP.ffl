@@ -1067,6 +1067,24 @@ model KSP uses BaseModel
       fixed_decimals: 2;
       aggregation: flow;
      }
+     variable TotalGrossCostsChildTillEighteen
+     {
+      title: "Total Gross costs of a child from 0 to 18 years old";
+      locked: 1;
+      frequency: document;
+      formula: HSUM(TotalYearlyCosts[all],0,17);
+      datatype: number;
+      fixed_decimals: 2;
+     }
+     variable TotalNettCostsChildTillEighteen
+     {
+      title: "Total Gross costs of a child from 0 to 18 years old";
+      locked: 1;
+      frequency: document;
+      formula: HSUM(TotalYearlyBalance[all],0,17);
+      datatype: number;
+      fixed_decimals: 2;
+     }
     }
    }
   }
