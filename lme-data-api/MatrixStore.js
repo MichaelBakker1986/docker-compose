@@ -1,19 +1,12 @@
-//simple database mock.
-/**
- * The goal is to directly insert and pull(renamed) data from internal used data
- * @type {exports.MatrixStore}
- */
-const storedValues = {}
+//No state version, every request will return new instance.
 exports.MatrixStore = class {
-    //should call database
     getOrCreate(id) {
-        storedValues[id] = storedValues[id] || {
+        return {
             id: id,
             values: {},
             parents: {},
             create_date: new Date().getTime()
             // properties: { column: true,  variable: true,  value: true }
         };
-        return storedValues[id];
     }
 }
