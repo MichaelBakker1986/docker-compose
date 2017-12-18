@@ -167,6 +167,7 @@ model KSP uses BaseModel
     variable CostsUnspecified
     {
      title: "Costs unspecified per month";
+     locked: 1;
      frequency: document;
      visible: 0;
      formula: 50;
