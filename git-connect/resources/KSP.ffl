@@ -239,11 +239,11 @@ model KSP uses BaseModel
      required: 1;
      fixed_decimals: 1;
     }
-    variable HourlyFeeOutOfSchoolCare
+    variable HourlyFeeChildCare
     {
-     title: "Hourly fee out-of-school daycare";
+     title: "Hourly fee child daycare";
      frequency: document;
-     formula: 6.69;
+     formula: 7.18;
      datatype: number;
      fixed_decimals: 2;
     }
@@ -266,14 +266,14 @@ model KSP uses BaseModel
      required: 1;
      fixed_decimals: 1;
     }
-    variable HourlyFeeChildCare
+    variable HourlyFeeOutOfSchoolCare
     {
-     title: "Hourly fee child daycare";
+     title: "Hourly fee out-of-school daycare";
      frequency: document;
-     formula: 7.18;
+     formula: 6.69;
      datatype: number;
      fixed_decimals: 2;
-    }
+    }    
     variable NrOfHoursOutOfSchoolCareMonth
     {
      title: "Nr. of hours out-of-school care per month";
