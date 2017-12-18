@@ -1,11 +1,14 @@
-const port = process.env.PORT || 8006;
-const host = process.env.HOST;
+const port = process.env.KSP_APP_PORT || 8006;
+const host = process.env.KSP_APP_HOST;
+const domain = process.env.KSP_APP_DOMAIN
+
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 app.set('port', port)
 app.set('host', host)
+app.set('domain', domain)
 
 const pretty = require('express-prettify');
 app.use(require('cors')())
