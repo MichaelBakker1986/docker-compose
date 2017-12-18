@@ -121,7 +121,7 @@ function send(text, level) {
             url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
             json: {
                 "color": level,
-                "message": text
+                "message": "[" + host + "] " + text
             }
         }, (err, res, body) => {
             console.info(err ? "" + err : 'Hipchat post ok')
