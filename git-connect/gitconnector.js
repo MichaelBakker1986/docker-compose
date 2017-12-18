@@ -40,8 +40,7 @@ ModelListener.prototype.initializeModels = function() {
                             ffls.push(modelData);
                             modelListener.onNewModel(modelData)
                         } catch (err) {
-                            log.warn("Could not initalize model [path] \n", file.toLowerCase(), modelData);
-                            log.error(err)
+                            log.warn("Could not initalize model [path] \n", file.toLowerCase());
                             if (log.DEBUG) log.error(err)
                         }
                     });
