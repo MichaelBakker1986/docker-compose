@@ -56,10 +56,10 @@ module.exports.setup = function(app) {
         })
     }
 
-    app.get('/scenario/:ids', function(req, res) {
+    app.get('*/scenario/:ids', function(req, res) {
         goDo(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res);
     });
-    app.get('/id/:id/data', function(req, res) {
+    app.get('*/id/:userId/data/:id', function(req, res) {
         if (req.params.id.indexOf(',') > -1) {
             goDo(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res);
         } else {
@@ -69,7 +69,7 @@ module.exports.setup = function(app) {
     /**
      * Store entered values supplied by the client
      */
-    app.post('/id/:id/data', function(req, res) {
+    app.post('*/id/:userId/data/:id', function(req, res) {
         var now = new Date();
         let newChildId = uuid()
         var parentUuid = req.params.id;

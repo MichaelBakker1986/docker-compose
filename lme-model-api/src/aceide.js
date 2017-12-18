@@ -242,15 +242,19 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.hasChanges = false;
     $scope.changes = '';
 
-    $http.get('/hasUpdates').then(function(data) {
+    $http.get('hasUpdates').then(function(data) {
         $scope.hasChanges = data.data.hasChanges;
         $scope.changes = data.data.changes;
+    }).catch(function(err) {
+        $scope.hasChanges = ""
+        $scope.changes = undefined
+
     })
     $scope.gotoUpdateScreen = function() {
         $scope.currentView = 'updateView';
     }
-    $scope.update = function() {
-        $http.get('/hasUpdates').then(function(data) {
+    $scope.update = function(hasUpdates) {
+        $http.get('hasUpdates').then(function(data) {
             $scope.hasChanges = data.data.hasChanges;
             $scope.changes = data.data.changes;
             if ($scope.hasChanges) {
@@ -315,7 +319,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
     });
 
-    $.getJSON("/branches", function(data, status, xhr) {
+    $.getJSON("branches", function(data, status, xhr) {
         $("#tags").autocomplete({source: data});
     })
     $(".toggle-expand-btn").click(function(e) {
@@ -362,7 +366,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         });
     }
 
-    $.getJSON("/models", function(data, status, xhr) {
+    $.getJSON("models", function(data, status, xhr) {
         $("#models").autocomplete({
             source: data,
             autoFocus: true,

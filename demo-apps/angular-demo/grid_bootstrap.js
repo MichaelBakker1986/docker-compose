@@ -98,7 +98,7 @@ angular
     .controller('timelineController', function($scope, $http, $rootScope) {
         $scope.timeline_items = [];
         $scope.rebuildTimeline = function() {
-            $http.get('/id/' + hash + '/data').then(function(data) {
+            $http.get('data/' + hash).then(function(data) {
                 var timeline_items = [];
                 var now = new Date().getTime();
                 for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {

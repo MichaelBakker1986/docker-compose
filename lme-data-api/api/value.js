@@ -67,7 +67,7 @@ module.exports.setup = function(app) {
      * @:tupleindex    - (string name of tuple object)
      * @:value         - (new user value)
      */
-    app.get('/id/:id/figure/:figureName', defaultResponse);
-    app.post('/id/:id/figure/:figureName/value/:value', defaultResponse);
-    app.post('/id/:id/figure/:figureName', defaultPostResponse);
+    app.get('*/id/:id/figure/:figureName', defaultResponse);
+    app.post('*/id/:id/figure/:figureName/value/:value', defaultResponse);
+    app.post('*/id/:id/figure/:figureName', defaultPostResponse);
 };

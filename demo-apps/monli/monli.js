@@ -4,7 +4,8 @@ angular
         $scope.changeChoice = function(variable, value) {
             variable.value = value.name
         }
-        $http.get('id/DEMO/resources/KSP.js').then(function(data) {
+
+        $.getScript('resources/KSP.js', function(data, textStatus, jqxhr) {
             eval(data.data)
             var LME = LMEMETA.exportWebModel();
             for (var name in LME.nodes) {
@@ -12,7 +13,7 @@ angular
             }
             $scope.name = LME.name
         }).catch(function(err) {
-            console.error("failed loading " + err);
+            console.error("failed loading " + err.toString());
         });
         $('body').popover({
             selector: '[data-toggle="popover"]'

@@ -29,8 +29,8 @@ function clientErrorHandler(err, req, res, next) {
 }
 
 app.listen(port, () => {
-
     app.all('*', function(req, res, next) {
         res.end(req.originalUrl)
     })
+    console.info('Listening on ' + domain)
 });

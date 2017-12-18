@@ -3,10 +3,8 @@ const host = process.env.HOST || 'localhost'
 var proxy = require('express-http-proxy');
 var compression = require('compression')
 var expressStaticGzip = require("express-static-gzip");
-var browserify = require('browserify-middleware');
-var nofavicon = require("express-no-favicons")
 var app = require('express')();
-app.use(nofavicon());
+app.use(require("express-no-favicons")());
 app.use(require('cors')());
 app.use(compression())
 
@@ -15,6 +13,7 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
+app.use('/', expressStaticGzip(__dirname + "/monli/"));
 app.use('/', expressStaticGzip(__dirname + "/node_modules/"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 
@@ -26,12 +25,11 @@ app.use('/', expressStaticGzip(__dirname + "/monli/"));
 
 //Update proxies
 app.get('*/update/git/notifyCommit', proxy('http://' + host + ':8081/update/git/notifyCommit'));
-app.get('*/hasUpdates', proxy('http://' + host + ':8081/hasUpdates'));
+app.get('*/hasUpdates', proxy('http://' + host + ':8081'));
 
 //proxies
-app.get('/id/:id/data', proxy('http://' + host + ':8085/id/:id/data'));
-app.post('/id/:id/data', proxy('http://' + host + ':8085/id/:id/data'));
-app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
+app.all('*/id/:id/data/:dataid', proxy('http://' + host + ':8085'));
+app.use('*/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 
 app.get('*/data-docs', function(req, res) {
     res.redirect('http://' + host + ':8085/docs/?url=%2Fapi-docs%3Fabc%3D1#/default/idRetrieveFigures');
@@ -49,8 +47,8 @@ app.get('*/tmp_model/*', proxy('http://' + host + ':8080', {limit: '50mb'}))
 app.get('*/aceide.js', proxy('http://' + host + ':8080', {limit: '50mb'}))
 app.post('*/saveFFL_LME', proxy('http://' + host + ':8080', {limit: '50mb'}));
 app.post('*/preview', proxy('http://' + host + ':8080', {limit: '50mb'}));
-app.get('/models', proxy('http://' + host + ':8080/models'));
-app.get('/branches', proxy('http://' + host + ':8080/branches'));
+app.get('*/models', proxy('http://' + host + ':8080/models'));
+app.get('*/branches', proxy('http://' + host + ':8080/branches'));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
 

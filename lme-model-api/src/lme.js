@@ -87,7 +87,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + '/id/' + (id || userID) + '/data';
+    var url = self.urlPrefix + 'data/' + (id || userID);
     http.open("GET", url, true);
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.
@@ -117,7 +117,7 @@ LmeAPI.prototype.persistData = function(callBack) {
     let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + '/id/' + self.lme.context.saveToken + '/data';
+    var url = self.urlPrefix + 'data/' + self.lme.context.saveToken;
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.

@@ -30,10 +30,23 @@ function clientErrorHandler(err, req, res, next) {
 
 app.listen(port, () => {
     app.use('*/showcase', proxy({target: 'http://' + host + ':8083', changeOrigin: true, logLevel: 'silent'}));
+    app.post('*/preview', proxy({
+        target: 'http://' + host + ':8083',
+        logLevel: 'silent',
+        changeOrigin: true,
+        limit: '50mb',
+    }));
+    app.all('*/id/:id/data/:dataId', proxy({
+        target: 'http://' + host + ':8085',
+        logLevel: 'silent',
+        changeOrigin: true,
+        limit: '50mb',
+    }));
     app.all('*/ide/*', proxy({
         toProxy: true, logLevel: 'silent',
         target: 'http://' + host + ':8083',
         changeOrigin: false,
+        limit: '50mb',
         pathRewrite: {
             '/ide/': '/'
         }
@@ -42,12 +55,30 @@ app.listen(port, () => {
         toProxy: true, logLevel: 'silent',
         target: 'http://' + host + ':8083',
         changeOrigin: false,
+        limit: '50mb',
         pathRewrite: {
             '/ui/': '/'
         }
     }));
-    app.use('*/models', proxy({target: 'http://' + host + ':8080', logLevel: 'silent', changeOrigin: true}));
-    app.use('*/branches', proxy({target: 'http://' + host + ':8080', logLevel: 'silent', changeOrigin: true}));
-    app.all('*/data', proxy({target: 'http://' + host + ':8085', logLevel: 'silent', changeOrigin: true}));
-    app.use('*/resources/*', proxy({target: 'http://' + host + ':8083', logLevel: 'silent', changeOrigin: true}));
+    app.use('*/models', proxy({
+        target: 'http://' + host + ':8080',
+        logLevel: 'silent',
+        changeOrigin: true,
+        limit: '50mb',
+    }));
+
+    app.use('*/branches', proxy({
+        target: 'http://' + host + ':8080',
+        logLevel: 'silent',
+        changeOrigin: true,
+        limit: '50mb',
+    }));
+
+    app.use('*/resources/*', proxy({
+        target: 'http://' + host + ':8083',
+        logLevel: 'silent',
+        changeOrigin: true,
+        limit: '50mb'
+    }));
+    app.all('*', proxy({target: 'http://' + host + ':8083', logLevel: 'silent', changeOrigin: true, limit: '50mb',}));
 });

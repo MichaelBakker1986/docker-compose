@@ -76,7 +76,7 @@ app.post('*/saveFFL_LME', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.get('/branches', (req, res) => {
+app.get('*/branches', (req, res) => {
     stash.branches().then((data) => {
         res.json(data);
     }).catch((err) => {
@@ -84,7 +84,7 @@ app.get('/branches', (req, res) => {
         res.json([]);
     })
 });
-app.get('/models', (req, res) => {
+app.get('*/models', (req, res) => {
     stash.models('master', 'ffl').then((data) => {
         res.json(data);
     }).catch((err) => {
