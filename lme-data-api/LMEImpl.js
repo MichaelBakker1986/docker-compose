@@ -11,8 +11,8 @@ const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
 const APIDefinition = require(__dirname + '/api/swaggerDef.json');
 
-modelLoadListener.onNewModel = function(model, path) {
-    const lmeModel = CalculationFacade.init(model);
+modelLoadListener.onNewModel = function(fflModelData, path) {
+    const lmeModel = CalculationFacade.initializeFFlModelData(fflModelData);
     const modelname = lmeModel.modelName;
     const indexer = lmeModel.indexer
     const names = indexer.getIndex('name')

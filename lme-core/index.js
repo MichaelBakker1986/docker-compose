@@ -1,5 +1,6 @@
 /**
  * user friendly API
+ * TODO: Move tuple related work to FESFacade
  */
 require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
 require("./exchange_modules/ffl2/RegisterToLMEParser");//just let it inject into the FESFacade
@@ -12,7 +13,7 @@ var TupleIndexConverter = require("./src/TupleIndexConverter");
 function LMEService() {
 }
 
-LMEService.prototype.init = function(data) {
+LMEService.prototype.initializeFFlModelData = function(data) {
     var JSWorkBook = new WorkBook(new Context());
     JSWorkBook.importSolution(data, "ffl2_backwards");
     var validate = JSWorkBook.validateImportedSolution();

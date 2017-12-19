@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "lme-core",
   "devDependencies": {},
-  "main": "ff-fes.js",
+  "main": "index.js",
   "dependencies": {
     "ast-node-utils": "file:../ast-node-utils",
     "bessel": "^1.0.2",

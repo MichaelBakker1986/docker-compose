@@ -11,7 +11,7 @@ const fileType = '.ffl';
 var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
-var CalculationFacade = require('../../lme-core/ff-fes').CalculationFacade;
+var CalculationFacade = require('../../lme-core').CalculationFacade;
 const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(ExcelLookup)
 //quick-fix resolve XSLX name

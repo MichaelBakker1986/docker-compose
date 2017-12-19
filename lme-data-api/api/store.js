@@ -14,7 +14,7 @@ module.exports.setup = function(app) {
      */
     Figure.orm.then((data) => {
     }).catch((err) => {
-        throw Error('Fail db init', err)
+        throw Error('Fail db initializeFFlModelData', err)
     });
 
 
