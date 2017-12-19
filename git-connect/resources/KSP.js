@@ -18363,7 +18363,7 @@ var TupleIndexConverter = require("./src/TupleIndexConverter");
 function FESApi() {
 }
 
-FESApi.prototype.init = function(data) {
+FESApi.prototype.initializeFFlModelData = function(data) {
     var JSWorkBook = new WorkBook(new FESContext());
     JSWorkBook.importSolution(data, "ffl2_backwards");
     var validate = JSWorkBook.validateImportedSolution();
@@ -18522,7 +18522,7 @@ exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
 exports.fesjs = FESApi.prototype;
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../lme-core/ff-fes.js","/../lme-core",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../lme-core/index.js","/../lme-core",undefined)
 },{"./exchange_modules/ffl/fflparser":11,"./exchange_modules/ffl2/RegisterPlainFFLDecorator":14,"./exchange_modules/ffl2/RegisterToLMEParser":16,"./src/JSWorkBook":28,"./src/TupleIndexConverter":33,"./src/fescontext":36,"_process":42,"buffer":40,"ff-log":39}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!

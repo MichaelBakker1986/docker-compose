@@ -7,13 +7,12 @@ var assert = require('assert');
 require('../exchange_modules/ffl/fflparser.js');
 require('../exchange_modules/presentation/presentation.js');
 require('../../math')
-var fesjsApi = require('../').fesjs;
-var FESContext = require('../src/fescontext');
+var CalculationFacade = require('../').CalculationFacade;
+var Context = require('../src/Context');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
-var JUNIT = require('../test/JUNIT');
-fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
-fesjsApi.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
+CalculationFacade.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
+CalculationFacade.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
 var log = require('ff-log');
 var WorkBook = require('../src/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');
@@ -28,7 +27,7 @@ function correctFileName(name) {
 for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
     var data = JUNIT.getFile(fflModelName + '.ffl');
-    var wb = new WorkBook(new FESContext());
+    var wb = new WorkBook(new Context());
 
     wb.importSolution(data, 'ffl');
     var validate = wb.validateImportedSolution();

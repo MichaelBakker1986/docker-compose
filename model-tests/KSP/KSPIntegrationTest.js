@@ -10,17 +10,17 @@ global.loglevel = 'debug'
 var FormulaService = require('../../lme-core/src/FormulaService')
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
 var WorkBook = require('../../lme-core/src/JSWorkBook')
-var FESContext = require('../../lme-core/src/fescontext')
+var Context = require('../../lme-core/src/Context')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math')
-var fesjsApi = require('../../lme-core').fesjs;
+var CalculationFacade = require('../../lme-core').CalculationFacade;
 var fs = require('fs');
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
-var wbTest = new WorkBook(new FESContext());
+CalculationFacade.addFunctions(excelPlugin);
+var wbTest = new WorkBook(new Context());
 assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)
 wbTest.createFormula("'IFRS-EU'", 'FES_LAYOUT')
 wbTest.createFormula("Pos('IFRS-EU',FES_LAYOUT)", "POS_LAYOUT");
@@ -147,7 +147,7 @@ function modelVariableName(name) {
     return name.replace(/(^KSP_)/gmi, '').replace(/_value$/gmi, '');
 }
 
-var wbKSP = new WorkBook(new FESContext());
+var wbKSP = new WorkBook(new Context());
 wbKSP.importSolution(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'), 'ffl2_backwards')
 var untestedformulas = 0;
 var totalformulas = 0;

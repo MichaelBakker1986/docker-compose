@@ -1,8 +1,8 @@
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook');
-var FESContext = require('../src/fescontext');
+var Context = require('../src/Context');
 require('../../math')
-var wb = new WorkBook(new FESContext());
+var wb = new WorkBook(new Context());
 wb.modelName = "TIMETEST"
 wb.updateValues();
 

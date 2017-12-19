@@ -1,20 +1,19 @@
-var assert = require('assert');
-var log = require('ff-log')
+const assert = require('assert');
 require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../exchange_modules/swagger/swaggerParser');
 require('../../math/ff-math');
 PPMT = function() {
     return 1;
 }
-var WorkBook = require('../src/JSWorkBook');
-var JUNIT = require('./JUNIT');
-var FESContext = require('../src/fescontext')
-var fflTestModels = ['KSP'];
+const WorkBook = require('../src/JSWorkBook');
+const Context = require('../src/Context')
+const fflTestModels = ['KSP'];
+const fs = require('fs')
 
 for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
-    var data = JUNIT.getFile(fflModelName + '.ffl');
-    var wb = new WorkBook(new FESContext());
+    var data = fs.readFileSync(__dirname + '/../resources/' + fflModelName + '.ffl', 'utf8');
+    var wb = new WorkBook(new Context());
     wb.importSolution(data, 'ffl2_backwards');
     var swaggerDefinition = wb.export('swagger', {
         rowId: 'Q_MAP01',

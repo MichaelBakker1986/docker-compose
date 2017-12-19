@@ -5,7 +5,7 @@ require('../../math')
 const excelplugin = require('../../excel-connect').xlsxLookup;
 const assembler = require('../../git-connect/ModelAssembler');
 const JSWorkbook = require('../../lme-core/src/JSWorkBook')
-const Context = require('../../lme-core/src/fescontext')
+const Context = require('../../lme-core/src/Context')
 const log = require('ff-log')
 const LME = require('../../lme-model-api/src/lme');
 const lmeModel = new LME()

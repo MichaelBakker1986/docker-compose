@@ -12,13 +12,13 @@ require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../math');
 
-var fesjsApi = require('../../lme-core').fesjs;
-fesjsApi.addFunctions(require("../../formulajs-connect").formulajs);
+var CalculationFacade = require('../../lme-core').CalculationFacade;
+CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../lme-core/src/fescontext');
+    let Context = require('../../lme-core/src/Context');
     let WorkBook = require('../../lme-core/src/JSWorkBook');
-    this.lme = new WorkBook(new FESContext());
+    this.lme = new WorkBook(new Context());
     this.modelName = undefined;
     this.urlPrefix = '';
 }
@@ -26,7 +26,7 @@ function LmeAPI() {
 LmeAPI.prototype.hasChanges = function() {
     return this.lme.context.hasChanges();
 }
-LmeAPI.prototype.addFunctions = fesjsApi.addFunctions;
+LmeAPI.prototype.addFunctions = CalculationFacade.addFunctions;
 LmeAPI.prototype.exportLME = function() {
     return this.lme.export('lme')
 }

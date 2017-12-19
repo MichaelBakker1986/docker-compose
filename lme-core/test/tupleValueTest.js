@@ -1,14 +1,14 @@
 //TODO: convert into .story file
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook')
-var FESContext = require('../src/fescontext')
+var Context = require('../src/Context')
 require('../../math')
-var fesjsApi = require('../').fesjs;
+var CalculationFacade = require('../').CalculationFacade;
 var JUNIT = require('./JUNIT')
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
-var wb = new WorkBook(new FESContext());
+CalculationFacade.addFunctions(excelPlugin);
+var wb = new WorkBook(new Context());
 wb.importSolution(JUNIT.getFile('KSP.ffl'), 'ffl');
 
 // Tuple 1

@@ -2,8 +2,6 @@
  * Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.
  */
 const SolutionFacade = require('../../src/SolutionFacade')
-const FFLFormatter = require('../ffl2/FFLFormatter').Formatter
-const Register = require('../ffl2/Register').Register
 
 function SwaggerParser() {
 }
@@ -33,8 +31,6 @@ SwaggerParser.prototype.deParse = function(metaData, workbook) {
             description: workbook.get(nodeName, 'title')
         }
         let choices;
-        ///		"format": "double",
-        //"type": "number"
         if (node[childrenIndex].length > 0) {
             currentNode.type = "object"
         } else if (choices = workbook.get(nodeName, 'choices')) {
