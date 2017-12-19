@@ -2,7 +2,7 @@ model KSP uses BaseModel
 {
  variable Q_ROOT
  {
-  title: "Costs of child raising (v1.29)";
+  title: "Costs of child raising (v1.32)";
   frequency: document;
   displaytype: scorecard;
   datatype: number;
@@ -273,7 +273,7 @@ model KSP uses BaseModel
      formula: 6.69;
      datatype: number;
      fixed_decimals: 2;
-    }    
+    }
     variable NrOfHoursOutOfSchoolCareMonth
     {
      title: "Nr. of hours out-of-school care per month";
@@ -767,15 +767,14 @@ model KSP uses BaseModel
    title: "Your Personal situation";
    locked: 1;
    frequency: document;
-   displaytype:string;
+   displaytype:Output;
    datatype: number;
    choices: "0:Complete|1:Incomplete";
    variable PersonalSituation
    {
     title: "Your Personal Situation";
     locked: 1;
-    frequency: document;
-    displaytype: Output;
+    frequency: column;
     datatype: number;
     variable TotalNetCosts
     {
@@ -1066,24 +1065,24 @@ model KSP uses BaseModel
      fixed_decimals: 2;
      aggregation: flow;
     }
-    variable TotalGrossCostsChildTillEighteen
-    {
-     title: "Total Gross costs of a child from 0 to 18 years old";
-     locked: 1;
-     frequency: document;
-     formula: HSUM(TotalYearlyCosts[all],0,17);
-     datatype: number;
-     fixed_decimals: 2;
-    }
-    variable TotalNettCostsChildTillEighteen
-    {
-     title: "Total Gross costs of a child from 0 to 18 years old";
-     locked: 1;
-     frequency: document;
-     formula: HSUM(TotalYearlyBalance[all],0,17);
-     datatype: number;
-     fixed_decimals: 2;
-    }
+   }
+   variable TotalGrossCostsChildTillEighteen
+   {
+    title: "Total Gross costs of a child from 0 to 18 years old";
+    locked: 1;
+    frequency: document;
+    formula: HSUM(TotalYearlyCosts[all],0,17);
+    datatype: number;
+    fixed_decimals: 2;
+   }
+   variable TotalNettCostsChildTillEighteen
+   {
+    title: "Total Gross costs of a child from 0 to 18 years old";
+    locked: 1;
+    frequency: document;
+    formula: HSUM(TotalYearlyBalance[all],0,17);
+    datatype: number;
+    fixed_decimals: 2;
    }
   }
  }
