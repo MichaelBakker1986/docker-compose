@@ -84,9 +84,7 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
     }
 };
 
-LMEService.prototype.getObjectValues = function(context, rowId, columncontext, value, tupleindex, columns) {
-    columncontext = columncontext || 0;
-    columns = columns || 1;
+LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
@@ -95,24 +93,50 @@ LMEService.prototype.getObjectValues = function(context, rowId, columncontext, v
     var JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
-    //getValue
     const values = [];
     var rootNode = JSWorkBook.getSolutionNode(rowId);
+    const flattenValues = {}
     if (rootNode) {
-        for (var i = 0; i <= columns; i++) {
-            const result = {}
-            JSWorkBook.visitProperties(rootNode, function(node, yax) {
-                const nodeName = node.solutionName + '_' + node.rowId;
-                result[node.rowId] = getValueObject(JSWorkBook, nodeName, i, yax)
-            });
-            values.push(result)
+
+        JSWorkBook.visitProperties(rootNode, function(node, yax) {
+            const nodeName = node.rowId;
+            const parentName = node.parentName.split("_").slice(0, -1).join("_")
+            const columns = node.frequency == 'document' ? 0 : context.columns;
+            for (var i = 0; i <= columns; i++) {
+                const appendix = columns == 0 ? "" : "$" + i
+                flattenValues[node.rowId + appendix] = {
+                    parent: parentName + appendix,
+                    name: nodeName,
+                    value: getValueObject(JSWorkBook, node.solutionName + "_" + node.rowId, i, yax),
+                    data: []
+                }
+            }
+        })
+        //reassemble results
+        for (var key in flattenValues) {
+            if (flattenValues[flattenValues[key].parent]) {
+                flattenValues[flattenValues[key].parent][flattenValues[key].name] = (flattenValues[key].value)
+            } else {
+                //array variants
+                const parentName = flattenValues[key].parent.split("$")[0];
+                if (flattenValues[parentName]) {
+                    flattenValues[parentName].data.push(flattenValues[key])
+                } else {
+                    console.info('root:' + key)
+                }
+            }
+        }
+        for (var key in flattenValues) {
+            delete flattenValues[key].parent
+            delete flattenValues[key].name
+            if (flattenValues[key].data.length == 0) delete flattenValues[key].data
         }
     } else {
         values.push({
             variable: rowId
         });
     }
-    return values;
+    return flattenValues[rowId.split("_").slice(1).join("_")];
 }
 
 function getValueObject(workbook, rowId, columncontext, yAxis) {

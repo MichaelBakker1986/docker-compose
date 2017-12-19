@@ -1,7 +1,7 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('ff-log')
-const LMECalculationFacade = require('../LMEImpl').LMECalculationFacade
-
+const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFacade
+var flattenObject = require('flatten-object');
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -34,20 +34,17 @@ module.exports.setup = function(app) {
         new Promise(function(success, fail) {
             try {
                 const body = req.body;
+                const flatten = flattenObject(body, undefined, "$")
                 //resolve context key to stored values
-                var columncontext = parseInt(req.params.columncontext || "0");
                 var context = ds.getOrCreate(req.params.id);
-                for (var q in body) {
-                    for (var c in body[q]) {
-                        if (typeof(body[q][c]) != 'object') {
-                            LMECalculationFacade.getValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
-                        }
-                    }
+                context.columns = 17;
+                //set all values in the context.
+                for (var q in flatten) {
+                    const varname = q.split('$')[0]
+                    LMECalculationFacade.getValue(context, "KSP_" + varname, 0, flatten[q], undefined)
                 }
-                var tupleindex = req.params.tupleindex;
-                var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
-                var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
-                const result = LMECalculationFacade.getObjectValues(context, "KSP_PersonalSituation", columncontext, value, undefined, 18);
+
+                const result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
                 success(result)
             } catch (err) {
                 fail(err);
