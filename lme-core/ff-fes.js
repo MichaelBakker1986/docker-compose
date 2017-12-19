@@ -1,11 +1,9 @@
-/* jshint node: true */
 /**
  * user friendly API
  */
 require("./exchange_modules/ffl/fflparser");//just let it inject into the FESFacade
 require("./exchange_modules/ffl2/RegisterToLMEParser");//just let it inject into the FESFacade
 require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
-//require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
 var Context = require("./src/Context");

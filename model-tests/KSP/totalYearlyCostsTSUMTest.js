@@ -1,17 +1,17 @@
-var WorkBook = require('../src/JSWorkBook')
-var Context = require('../src/Context')
-var SolutionFacade = require('../src/SolutionFacade')
+var WorkBook = require('../../lme-core/src/JSWorkBook')
+var Context = require('../../lme-core/src/Context')
+var SolutionFacade = require('../../lme-core/src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')
-require('../../math')
-var CalculationFacade = require('../').CalculationFacade;
-CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
-var excelPlugin = require('../../excel-connect').xlsxLookup;
+require('../../math/ff-math')
+var CalculationFacade = require('../../lme-core').CalculationFacade;
+CalculationFacade.addFunctions(require('../../formulajs-connect/formulajs').formulajs);
+var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new Context());
-    wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl', 'utf8'), 'ffl');
+    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl');
     var children = [
         // Child 1
         {
