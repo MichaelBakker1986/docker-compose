@@ -19,13 +19,12 @@ excelPlugin.initComplete().then(function(matrix) {
         values: wb.context.values
     }, 'KSP_IncomeParent01', 0);
     assert(fesGetValue[0].value === 25000)
-    var choices = wb.get('Q_FINAL_REPORT_VISIBLE', 'choices')
-    var fesGetValue2 = CalculationFacade.getValue({
+    var valueResponse = CalculationFacade.getValue({
         columns: 3,
         properties: {value: true, title: true},
         values: wb.context.values
     }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
-    assert(fesGetValue2[0].value === "Ja")
+    assert(valueResponse[0].value === "Ja")
 }).catch(function(err) {
     throw err;
 })

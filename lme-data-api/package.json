@@ -16,7 +16,9 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-prettify": "0.0.9",
+    "express-test": "^0.1.2",
     "ff-log": "^1.0.23",
+    "flatten-object": "^1.2.0",
     "glob": "^7.1.2",
     "mysql": "^2.15.0",
     "orm": "^4.0.1",
@@ -30,6 +32,8 @@
     "uuid4": "^1.0.0",
     "xhr2": "^0.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "should": "^13.1.3"
+  },
   "license": "MIT"
 }

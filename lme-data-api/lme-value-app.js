@@ -21,3 +21,4 @@ require('./api/api-def').setup(app)
 app.listen(port, function() {
     console.info('<span>LME DATA: </span><a href="http://' + domain + '/docs/?url=%2Fapi-docs#!/default/value">data-api</a>\n');
 });
+exports.app = app;
