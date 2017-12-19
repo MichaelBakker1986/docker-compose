@@ -1,7 +1,6 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('ff-log')
 const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFacade
-var flattenObject = require('flatten-object');
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -34,14 +33,16 @@ module.exports.setup = function(app) {
         new Promise(function(success, fail) {
             try {
                 const body = req.body;
-                const flatten = flattenObject(body, undefined, "$")
                 //resolve context key to stored values
                 var context = ds.getOrCreate(req.params.id);
                 context.columns = 17;
                 //set all values in the context.
-                for (var q in flatten) {
-                    const varname = q.split('$')[0]
-                    LMECalculationFacade.getValue(context, "KSP_" + varname, 0, flatten[q], undefined)
+                for (var q in body) {
+                    for (var c in body[q]) {
+                        if (typeof(body[q][c]) != 'object') {
+                            LMECalculationFacade.getValue(context, "KSP_" + c, 0, body[q][c], undefined)
+                        }
+                    }
                 }
 
                 const result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);

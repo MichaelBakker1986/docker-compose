@@ -42,9 +42,8 @@ LMEService.prototype.addFunctions = function(plugin) {
  * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
 // Convert tuple index to tuple number
-LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex, columns) {
+LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
-    columns = columns || 1;
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
