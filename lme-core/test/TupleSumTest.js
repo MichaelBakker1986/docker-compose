@@ -3,11 +3,11 @@ var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
 var fs = require('fs')
 require('../../math')
-var fesjsApi = require('../').fesjs;
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+var CalculationFacade = require('../').CalculationFacade;
+CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
+CalculationFacade.addFunctions(excelPlugin);
 var wb = new WorkBook(new FESContext());
 wb.importSolution(fs.readFileSync(__dirname + '/../../model-tests/KSP/KSP.ffl', 'utf8'), 'ffl');
 wb.set('NrOfDaysChildcareWeek', 2, 'value', 0, 0)

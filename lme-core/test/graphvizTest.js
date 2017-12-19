@@ -7,13 +7,13 @@ var assert = require('assert');
 require('../exchange_modules/ffl/fflparser.js');
 require('../exchange_modules/presentation/presentation.js');
 require('../../math')
-var fesjsApi = require('../').fesjs;
+var CalculationFacade = require('../').CalculationFacade;
 var FESContext = require('../src/fescontext');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
 var JUNIT = require('../test/JUNIT');
-fesjsApi.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
-fesjsApi.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
+CalculationFacade.addFunctions(require('../../formulajs-connect/ff-formulajs').formulajs);
+CalculationFacade.addFunctions(require('../../excel-connect/excel-connect').xlsxLookup);
 var log = require('ff-log');
 var WorkBook = require('../src/JSWorkBook.js');
 var JUNIT = require('./JUNIT.js');

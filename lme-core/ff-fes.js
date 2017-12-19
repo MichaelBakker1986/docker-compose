@@ -8,14 +8,14 @@ require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it injec
 //require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
-var FESContext = require("./src/fescontext");
+var Context = require("./src/fescontext");
 var TupleIndexConverter = require("./src/TupleIndexConverter");
 
-function FESApi() {
+function LMEService() {
 }
 
-FESApi.prototype.init = function(data) {
-    var JSWorkBook = new WorkBook(new FESContext());
+LMEService.prototype.init = function(data) {
+    var JSWorkBook = new WorkBook(new Context());
     JSWorkBook.importSolution(data, "ffl2_backwards");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
@@ -29,7 +29,7 @@ FESApi.prototype.init = function(data) {
     }
     return JSWorkBook;
 };
-FESApi.prototype.addFunctions = function(plugin) {
+LMEService.prototype.addFunctions = function(plugin) {
     var functions = [];
     for (var functionName in plugin.entries) {
         functions.push(functionName);
@@ -43,13 +43,13 @@ FESApi.prototype.addFunctions = function(plugin) {
  * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
 // Convert tuple index to tuple number
-FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex, columns) {
+LMEService.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex, columns) {
     columncontext = columncontext || 0;
     columns = columns || 1;
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
-    var fesContext = new FESContext();
+    var fesContext = new Context();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 2;
@@ -85,13 +85,13 @@ FESApi.prototype.fesGetValue = function(context, rowId, columncontext, value, tu
     }
 };
 
-FESApi.prototype.getObjectValues = function(context, rowId, columncontext, value, tupleindex, columns) {
+LMEService.prototype.getObjectValues = function(context, rowId, columncontext, value, tupleindex, columns) {
     columncontext = columncontext || 0;
     columns = columns || 1;
     if (tupleindex !== undefined) {
         tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
     }
-    var fesContext = new FESContext();
+    var fesContext = new Context();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 2;
@@ -171,4 +171,4 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 
 exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
-exports.fesjs = FESApi.prototype;
+exports.CalculationFacade = LMEService.prototype;

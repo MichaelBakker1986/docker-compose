@@ -1,6 +1,6 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('ff-log')
-const lmeAPI = require('../LMEImpl').lmeAPI
+const LMECalculationFacade = require('../LMEImpl').LMECalculationFacade
 
 
 module.exports.setup = function(app) {
@@ -17,7 +17,7 @@ module.exports.setup = function(app) {
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
-                success(lmeAPI.fesGetValue(context, variablename, columncontext, value, undefined))
+                success(LMECalculationFacade.fesGetValue(context, variablename, columncontext, value, undefined))
             } catch (err) {
                 fail(err);
             }
@@ -40,14 +40,14 @@ module.exports.setup = function(app) {
                 for (var q in body) {
                     for (var c in body[q]) {
                         if (typeof(body[q][c]) != 'object') {
-                            lmeAPI.fesGetValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
+                            LMECalculationFacade.fesGetValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
                         }
                     }
                 }
                 var tupleindex = req.params.tupleindex;
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
-                const result = lmeAPI.getObjectValues(context, "KSP_PersonalSituation", columncontext, value, undefined, 18);
+                const result = LMECalculationFacade.getObjectValues(context, "KSP_PersonalSituation", columncontext, value, undefined, 18);
                 success(result)
             } catch (err) {
                 fail(err);

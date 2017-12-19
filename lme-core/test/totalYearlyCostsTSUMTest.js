@@ -4,10 +4,10 @@ var SolutionFacade = require('../src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math')
-var fesjsApi = require('../').fesjs;
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+var CalculationFacade = require('../').CalculationFacade;
+CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
+CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new FESContext());
@@ -123,12 +123,12 @@ excelPlugin.initComplete('KSP_test').then(function(matrix) {
         values: {},
         tupleIndexList: []
     };
-    var result = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
+    var result = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
     assert(result[0].value === 0);
-    var BobEntry = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+    var BobEntry = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
     var bobResult = BobEntry[0];
     assert(bobResult.value === 3);
-    var LisaEntry = fesjsApi.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
+    var LisaEntry = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
     var LisaResult = LisaEntry[1];
     assert(LisaResult.value == 1);
 

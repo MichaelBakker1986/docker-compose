@@ -3,9 +3,9 @@ var SolutionFacade = require('../../lme-core/src/SolutionFacade')
 var FESContext = require('../../lme-core/src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
-var fesjsApi = require('../../lme-core').fesjs;
+var CalculationFacade = require('../../lme-core').CalculationFacade;
 var excelPlugin = require('../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
+CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new FESContext());

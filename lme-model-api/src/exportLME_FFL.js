@@ -11,12 +11,12 @@ const fileType = '.ffl';
 var lmeAPI = require('./lme')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
-var fesjsApi = require('../../lme-core/ff-fes').fesjs;
-const xlsx = require('../../excel-connect/excel-connect').xlsxLookup;
-fesjsApi.addFunctions(xlsx)
+var CalculationFacade = require('../../lme-core/ff-fes').CalculationFacade;
+const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
+CalculationFacade.addFunctions(ExcelLookup)
 //quick-fix resolve XSLX name
 var xlsxname = name.substring(0, 5) == "_tmp_" ? name.split('_')[name.split('_').length - 1] : name
-xlsx.initComplete(xlsxname).then(function(matrix) {
+ExcelLookup.initComplete(xlsxname).then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])
 
     LME = new lmeAPI()

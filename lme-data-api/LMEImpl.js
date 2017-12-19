@@ -1,96 +1,91 @@
-const log = require('ff-log')
-const lmeAPI = require('../lme-core').fesjs;
-lmeAPI.addFunctions(require('../math').mathJs);
-lmeAPI.addFunctions(require('../formulajs-connect').formulajs);
-const LMEFacade = require('../lme-core/src/FESFacade');
+/**
+ * Load FFL models, update Dynamic Swagger docs
+ * TODO: concat the matrix files into one
+ */
+const CalculationFacade = require('../lme-core').CalculationFacade;
+CalculationFacade.addFunctions(require('../math').mathJs);
+CalculationFacade.addFunctions(require('../formulajs-connect').formulajs);
 const SolutionFacade = require('../lme-core/src/SolutionFacade');
 require('../lme-core/exchange_modules/swagger/swaggerParser');
-const WorkBook = require('../lme-core/src/JSWorkBook');
-const FESContext = require('../lme-core/src/fescontext');
 const ModelListener = require('../git-connect').ModelListener;
-const modelService = new ModelListener();
-const modelNames = []
-const apidef = require(__dirname + '/api/swaggerDef.json');
+const modelLoadListener = new ModelListener();
+const APIDefinition = require(__dirname + '/api/swaggerDef.json');
 
-var lastModelName;// = modelNames[0]
-modelService.onNewModel = function(model, path) {
-    const lmeModel = lmeAPI.init(model);
+modelLoadListener.onNewModel = function(model, path) {
+    const lmeModel = CalculationFacade.init(model);
     const modelname = lmeModel.modelName;
-    modelNames.push(modelname);
-    lastModelName = lmeModel;
     const indexer = lmeModel.indexer
     const names = indexer.getIndex('name')
     for (var name in names) {
-        apidef.parameters.FigureName.enum.push(modelname + '_' + name)
+        APIDefinition.parameters.FigureName.enum.push(modelname + '_' + name)
     }
-    if (modelname !== 'KSP') {
-        return;
-    }
-
     /**
      * Update API-definition with variable names
+     * Is only used for KSP
+     * TODO: make more generic solution
      */
     const inputNodes = indexer.find('displaytype', 'Input')
-    let endPointname;
+    if (inputNodes.length > 0) {
+        let endPointname;
 
-    for (var i = 0; i < inputNodes.length; i++) {
-        var node = inputNodes[i];
-        endPointname = node[indexer.schemaIndexes.name]
-        const operation = "/id/{id}/figure/" + endPointname;
-        const schema = lmeModel.export('swagger', {
-            rowId: endPointname,
-            type: 'input'
-        });
-        if (!apidef.paths[operation]) {
-            apidef.paths[operation] = {
-                "post": {
-                    "summary": endPointname,
-                    "operationId": endPointname,
-                    "consumes": [
-                        "application/json"
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "parameters": [
-                        {
-                            "$ref": "#/parameters/ContextId"
-                        },
-                        {
-                            "$ref": "#/parameters/Times"
-                        }
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "Success",
-                            "schema": {}
+        for (var i = 0; i < inputNodes.length; i++) {
+            var node = inputNodes[i];
+            endPointname = node[indexer.schemaIndexes.name]
+            const operation = "/id/{id}/figure/" + endPointname;
+            const schema = lmeModel.export('swagger', {
+                rowId: endPointname,
+                type: 'input'
+            });
+            if (!APIDefinition.paths[operation]) {
+                APIDefinition.paths[operation] = {
+                    "post": {
+                        "summary": endPointname,
+                        "operationId": endPointname,
+                        "consumes": [
+                            "application/json"
+                        ],
+                        "produces": [
+                            "application/json"
+                        ],
+                        "parameters": [
+                            {
+                                "$ref": "#/parameters/ContextId"
+                            },
+                            {
+                                "$ref": "#/parameters/Times"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Success",
+                                "schema": {}
+                            }
                         }
                     }
                 }
             }
+            APIDefinition.paths[operation].post.parameters.push({
+                "name": endPointname,
+                "in": "body",
+                "description": "",
+                "required": false,
+                "schema": schema
+            })
         }
-        apidef.paths[operation].post.parameters.push({
-            "name": endPointname,
-            "in": "body",
-            "description": "",
-            "required": false,
-            "schema": schema
-        })
-    }
-    const outputNodes = indexer.find('displaytype', 'Output')
-    var output = {}
-    for (var i = 0; i < outputNodes.length; i++) {
-        var node = outputNodes[i];
-        const swaggerSchema = lmeModel.export('swagger', {
-            rowId: node[indexer.schemaIndexes.name],
-            type: 'output'
-        });
-
-        apidef.paths["/id/{id}/figure/" + endPointname].post.responses["200"] = {
-            "description": "Success",
-            "schema": {
-                "type": "array",
-                "items": swaggerSchema
+        const outputNodes = indexer.find('displaytype', 'Output')
+        var output = {}
+        for (var i = 0; i < outputNodes.length; i++) {
+            var node = outputNodes[i];
+            const swaggerSchema = lmeModel.export('swagger', {
+                rowId: node[indexer.schemaIndexes.name],
+                type: 'output'
+            });
+            APIDefinition.paths["/id/{id}/figure/" + endPointname].post.responses["200"] = {
+                "description": "Success",
+                "schema": {
+                    "type": "array",
+                    "items": swaggerSchema
+                }
             }
         }
     }
@@ -101,11 +96,10 @@ modelService.onNewModel = function(model, path) {
  *    - FormulaJS
  *    - Lme-Math
  */
-
 var excelPlugin = require('../excel-connect').xlsxLookup;
 excelPlugin.initComplete('KSP').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
-    modelService.initializeModels();
+    modelLoadListener.initializeModels();
 })
-lmeAPI.addFunctions(excelPlugin);
-exports.lmeAPI = lmeAPI
+CalculationFacade.addFunctions(excelPlugin);
+exports.LMECalculationFacade = CalculationFacade

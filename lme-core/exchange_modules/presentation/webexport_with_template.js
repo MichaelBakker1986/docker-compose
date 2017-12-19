@@ -98,7 +98,8 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     var amount = repeats[node.frequency][0]
     var colspan = repeats[node.frequency][1];
     const type = node.displayAs;
-    const dataType = type;// node.datatype;
+    const datatype = node.datatype
+    const displaytype = type;// node.datatype;
     var rv = {
         id: rowId,
         index: index,
@@ -135,19 +136,19 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
             valid: null
         }
         rv.cols.push(r);
-        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, dataType));
-        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index, dataType));
-        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, dataType));
-        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index, dataType));
-        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index, dataType));
-        Object.defineProperty(r, 'valid', properties.locked.prox(workbook, rowId, 'valid', index, dataType));
+        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, displaytype));
+        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index, displaytype));
+        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, displaytype));
+        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index, displaytype));
+        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index, displaytype));
+        Object.defineProperty(r, 'valid', properties.locked.prox(workbook, rowId, 'valid', index, displaytype));
     }
     /**
      * Proxy properties to the row object
      */
     columns.forEach(function(col) {
         rv[col] = null;
-        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, dataType));
+        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype));
     });
     const parent = this.nodes[treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);

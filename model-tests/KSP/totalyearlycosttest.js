@@ -4,7 +4,7 @@ var FESContext = require('../../lme-core/src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math')
-var fesjsApi = require('../../lme-core').fesjs;
+var fesjsApi = require('../../lme-core').CalculationFacade;
 fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 fesjsApi.addFunctions(excelPlugin);

@@ -14,12 +14,12 @@ var FESContext = require('../../lme-core/src/fescontext')
 var log = require('ff-log')
 var assert = require('assert')
 require('../../math')
-var fesjsApi = require('../../lme-core').fesjs;
+var CalculationFacade = require('../../lme-core').CalculationFacade;
 var fs = require('fs');
-fesjsApi.addFunctions(require('../../formulajs-connect').formulajs);
+CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-fesjsApi.addFunctions(excelPlugin);
+CalculationFacade.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new FESContext());
 assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)
 wbTest.createFormula("'IFRS-EU'", 'FES_LAYOUT')

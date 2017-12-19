@@ -1,5 +1,4 @@
-var fesjsApi = require('../').fesjs;
-var log = require('ff-log')
+var CalculationFacade = require('../').CalculationFacade;
 var WorkBook = require('../src/JSWorkBook')
 var FESContext = require('../src/fescontext')
 var wb = new WorkBook(new FESContext());
@@ -7,7 +6,7 @@ wb.modelName = 'APITEST'
 //choices require value functions..
 wb.createFormula("''", "CHOICE_TEST")
 wb.createFormula("[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]", "CHOICE_TEST", "choices")
-var fesGetValue = fesjsApi.fesGetValue({
+var fesGetValue = CalculationFacade.fesGetValue({
     properties: {
         choices: true,
         value: true
@@ -25,7 +24,7 @@ assert(wb.get('TimeTest') == 10)
 assert(wb.get('TimeTest', 'value', 1) == 20)
 wb.set('TimeTest', 30, 'value', 2, 1)
 assert(wb.get('TimeTest', 'value', 2, 1) == 30)
-var timeTestValues = fesjsApi.fesGetValue({
+var timeTestValues = CalculationFacade.fesGetValue({
     properties: {
         value: true
     },
@@ -34,7 +33,7 @@ var timeTestValues = fesjsApi.fesGetValue({
 assert(timeTestValues[0].value === 10)
 assert(timeTestValues[1].value === 20)
 assert(timeTestValues[2].value === 2)
-fesjsApi.fesGetValue({
+CalculationFacade.fesGetValue({
     properties: {
         value: true
     },
