@@ -156,7 +156,6 @@
     },
     "Value": {
       "name": "value",
-      "in": "path",
       "required": true,
       "type": "string"
     },

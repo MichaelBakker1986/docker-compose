@@ -16,7 +16,7 @@ model.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
 
 
-    model.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/../../git-connect/resources/KSP.ffl', 'utf8'))
+    model.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
     const index = model.lme.indexer
 
     const nodes = model.exportWebModel().nodes

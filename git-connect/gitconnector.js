@@ -1,54 +1,70 @@
-var glob = require('glob')
-var log = require('ff-log')
-var fs = require('fs');
+const glob = require('glob')
+const log = require('ff-log')
+const fs = require('fs');
+const fileSystemFFLModelsSearchPath = __dirname + '/resources/**';
+const enabledModels = (process.env.ENABLED_MODELS || '.*').split(',')
 
 /**
- * Prefer parsed JSON file above FFL.
- * TODO: change into canvas_json files which is way faster to parse.
+ * Find FFL models from filesystem and load them.
+ * Filtered by {@enabledModels}
  */
 function ModelListener() {
 }
 
+function enabledModel(caseInsensitiveFileName) {
+    for (var i = 0; i < enabledModels.length; i++) {
+        const enabledModelName = "/" + enabledModels[i] + "\\.";
+        if (caseInsensitiveFileName.match(new RegExp(enabledModelName, 'i'))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+ModelListener.prototype.loadModel = function(file) {
+    const self = this;
+    return function(err, data) {
+        if (err) throw err;
+        var modelData = data;
+        /**
+         * Windows client is case insensitive.
+         * To load the models directly into linux some case-fixes are required.
+         */
+        modelData = modelData.replace(/amount/gmi, 'Amount');
+        modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
+        modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
+        modelData = modelData.replace(/Startdate/gmi, 'StartDate');
+        modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
+        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
+        modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
+        modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
+        modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
+        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
+        try {
+            self.onNewModel(modelData)
+        } catch (err) {
+            log.warn("Failed to load model on path [%s] \nSee DEBUG logging to see why it has failed to load the model.", file.toString());
+            if (log.DEBUG) log.error(err)
+        }
+    }
+}
 ModelListener.prototype.initializeModels = function() {
-    var modelListener = this;
-    var ffls = [];
-    var fetFileNames = function(src, callback) {
-        glob(src + '**', callback);
-    };
-    var modelCallback = function(err, res) {
-        if (err) {
-            log.warn('Error', err);
-        } else {
-            res.forEach(function(file) {
-                if (file.toLowerCase().endsWith('.ffl') && file.toLowerCase().indexOf('_tmp_') == -1) {
-                    fs.readFile(file, 'utf8', function read(err, data) {
-                        if (err) {
-                            throw err;
-                        }
-                        var modelData = data;
-                        modelData = modelData.replace(/amount/gmi, 'Amount');
-                        modelData = modelData.replace(/GoodWill/gmi, 'GoodWill');
-                        modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup');
-                        modelData = modelData.replace(/Startdate/gmi, 'StartDate');
-                        modelData = modelData.replace(/Bookvalue/gmi, 'BookValue');
-                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses');
-                        modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
-                        modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
-                        modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
-                        modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
-                        try {
-                            ffls.push(modelData);
-                            modelListener.onNewModel(modelData)
-                        } catch (err) {
-                            log.warn("Could not initalize model [path] \n", file.toLowerCase());
-                            if (log.DEBUG) log.error(err)
-                        }
-                    });
+    const self = this;
+    const fileLookupCallback = function(err, files) {
+        if (err) log.warn('Error', err);
+        else {
+            files.forEach(function(file) {
+                const caseInsensitiveFileName = file.toLowerCase()
+                //filter files other than *.ffl or containing _tmp_
+                if (caseInsensitiveFileName.endsWith('.ffl') && caseInsensitiveFileName.indexOf('_tmp_') == -1) {
+                    if (enabledModel(caseInsensitiveFileName)) {
+                        fs.readFile(file, 'utf8', self.loadModel(file));
+                    }
                 }
             })
         }
     };
-    fetFileNames(__dirname + '/resources/', modelCallback);
+    glob(fileSystemFFLModelsSearchPath, fileLookupCallback);
 }
 ModelListener.prototype.onNewModel = function(modeldata) {
     log.info(modeldata)
