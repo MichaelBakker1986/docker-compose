@@ -11,10 +11,6 @@ var propertyDefaults = {
     'valid': true,
     'validation': false
 }
-
-function MockValues() {
-}
-
 //request scope context
 function Context() {
     //reference to the ApplicationContext context

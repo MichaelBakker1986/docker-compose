@@ -1,8 +1,8 @@
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook');
 require('../../math')
-var FESContext = require('../src/fescontext');
-var wb = new WorkBook(new FESContext());
+var Context = require('../src/Context');
+var wb = new WorkBook(new Context());
 wb.updateValues();
 
 wb.createFormula('abra', 'abc12a')

@@ -17,7 +17,7 @@ module.exports.setup = function(app) {
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
-                success(LMECalculationFacade.fesGetValue(context, variablename, columncontext, value, undefined))
+                success(LMECalculationFacade.getValue(context, variablename, columncontext, value, undefined))
             } catch (err) {
                 fail(err);
             }
@@ -40,7 +40,7 @@ module.exports.setup = function(app) {
                 for (var q in body) {
                     for (var c in body[q]) {
                         if (typeof(body[q][c]) != 'object') {
-                            LMECalculationFacade.fesGetValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
+                            LMECalculationFacade.getValue(context, "KSP_" + c, columncontext, body[q][c], undefined)
                         }
                     }
                 }

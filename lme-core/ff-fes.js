@@ -8,7 +8,7 @@ require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it injec
 //require('./exchange_modules/presentation/presentation');//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
-var Context = require("./src/fescontext");
+var Context = require("./src/Context");
 var TupleIndexConverter = require("./src/TupleIndexConverter");
 
 function LMEService() {
@@ -43,7 +43,7 @@ LMEService.prototype.addFunctions = function(plugin) {
  * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
 // Convert tuple index to tuple number
-LMEService.prototype.fesGetValue = function(context, rowId, columncontext, value, tupleindex, columns) {
+LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex, columns) {
     columncontext = columncontext || 0;
     columns = columns || 1;
     if (tupleindex !== undefined) {

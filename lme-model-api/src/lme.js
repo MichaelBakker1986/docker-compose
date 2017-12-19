@@ -16,9 +16,9 @@ var CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
-    let FESContext = require('../../lme-core/src/fescontext');
+    let Context = require('../../lme-core/src/Context');
     let WorkBook = require('../../lme-core/src/JSWorkBook');
-    this.lme = new WorkBook(new FESContext());
+    this.lme = new WorkBook(new Context());
     this.modelName = undefined;
     this.urlPrefix = '';
 }

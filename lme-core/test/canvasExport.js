@@ -9,7 +9,7 @@ require('../exchange_modules/lme/lmeparser');
 require('../exchange_modules/presentation/presentation');
 require('../../math')
 var CalculationFacade = require('../').CalculationFacade;
-var Context = require('../src/fescontext');
+var Context = require('../src/Context');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
 CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);

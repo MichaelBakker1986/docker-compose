@@ -3,7 +3,7 @@ var TUPLEVALUETEST = "TestTupleValues";
 
 //test for calls within tuples using same tuple, and calls outside tuples use base tuple
 var WorkBook = require('../src/JSWorkBook');
-var FESContext = require('../src/fescontext');
+var Context = require('../src/Context');
 require('../../math');
 var assert = require('assert');
 /*var ARGUMENT_NAMES = /([^\s,]+)/g;
@@ -13,7 +13,7 @@ var assert = require('assert');
  }*/
 
 //var test = getParamNames(TSUM);
-var wb = new WorkBook(new FESContext());
+var wb = new WorkBook(new Context());
 wb.createFormula("10", "DocumentValue", DEFAULT, false, 'document');
 wb.createFormula("1", "TupleSibling1", DEFAULT, true, 'document');
 wb.createFormula("2+DocumentValue", "TupleSibling2", DEFAULT, true, 'document');

@@ -1,5 +1,5 @@
 var WorkBook = require('../src/JSWorkBook')
-var FESContext = require('../src/fescontext')
+var Context = require('../src/Context')
 var SolutionFacade = require('../src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')
@@ -10,7 +10,7 @@ var excelPlugin = require('../../excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
-    var wb = new WorkBook(new FESContext());
+    var wb = new WorkBook(new Context());
     wb.importSolution(require('fs').readFileSync(__dirname + '/../../git-connect/resources/gyllion_KSP.ffl', 'utf8'), 'ffl');
     var children = [
         // Child 1
@@ -123,12 +123,12 @@ excelPlugin.initComplete('KSP_test').then(function(matrix) {
         values: {},
         tupleIndexList: []
     };
-    var result = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
+    var result = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
     assert(result[0].value === 0);
-    var BobEntry = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+    var BobEntry = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
     var bobResult = BobEntry[0];
     assert(bobResult.value === 3);
-    var LisaEntry = CalculationFacade.fesGetValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
+    var LisaEntry = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
     var LisaResult = LisaEntry[1];
     assert(LisaResult.value == 1);
 
