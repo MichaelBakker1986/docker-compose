@@ -5,6 +5,7 @@ require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const assert = require('assert');
 const model = new LMEapi();
+const log = require('ff-log')
 LMEMETA = model;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
@@ -32,7 +33,7 @@ excelPlugin.initComplete('KSP').then(function(matrix) {
     LME = model.exportWebModel();
     new KSPStory(__dirname + '/KSP.story').startTest()
 }).catch((err) => {
-    console.error(err)
-    throw err;
+    log.error(err)
+    process.exit(1);
 })
 exports.KSPStory = KSPStory;

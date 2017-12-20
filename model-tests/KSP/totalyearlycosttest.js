@@ -6,6 +6,7 @@ require('../../math')
 var CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
+const log = require('ff-log')
 CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete().then(function(matrix) {
     var wb = new WorkBook(new Context());
@@ -26,5 +27,6 @@ excelPlugin.initComplete().then(function(matrix) {
     }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
     assert(valueResponse[0].value === "Ja")
 }).catch(function(err) {
-    throw err;
+    log.error(err)
+    process.exit(1);
 })

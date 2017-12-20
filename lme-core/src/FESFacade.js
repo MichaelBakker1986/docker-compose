@@ -60,22 +60,32 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
         hash: xas.hash + yas.hash + 0,
         formulaId: localFormula.id || localFormula.index
     })
-    let returnValue = value;
+    let userValue = value;
     var variable = fetchSolutionNode(row, (col || 'value'));
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
-        if (returnValue != null) {
+        if (userValue != null) {
             const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
-            returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
-            returnValue = (choices.lookup('value', String(returnValue)) || choices.lookup('name', String(returnValue))).name
-            if (!isNaN(returnValue)) {
-                returnValue = parseFloat(returnValue)
+            userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
+            userValue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue))).name
+            if (!isNaN(userValue)) {
+                userValue = parseFloat(userValue)
             }
         }
     }
     if (variable.frequency == 'document') {
         xas = xas.doc
     }
-    FunctionMap.apiSet(localFormula, xas, yas, 0, returnValue, context.values);
+    //NULL values are allowed, and should not be parsed into a real data type.
+    if (userValue != null) {
+        if (variable.datatype == 'number') {
+            userValue = Number(userValue)
+        } else if (variable.datatype == 'string') {
+            userValue = String(userValue)
+        } else if (variable.datatype == 'boolean') {
+            userValue = Boolean(userValue)
+        }
+    }
+    FunctionMap.apiSet(localFormula, xas, yas, 0, userValue, context.values);
 };
 /**
  * Generic default values, formatter transformers

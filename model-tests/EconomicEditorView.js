@@ -1,13 +1,9 @@
+const FFLFormatter = require('../lme-core/exchange_modules/ffl2/FFLFormatter').Formatter
+const Register = require('../lme-core/exchange_modules/ffl2/Register').Register
+
 function EconomicEditorView() {
     this.on = false;
     this.properties = true;
-}
-
-function getdepth(node, depth) {
-    if (node && node._parent == undefined) {
-        return depth;
-    }
-    return getdepth(node._parent, 1 + depth)
 }
 
 var defaultValue = {
@@ -34,90 +30,77 @@ var defaultValue = {
     }
 }
 
-EconomicEditorView.prototype.parse = function(input) {
-    var props = this.properties;
-    return input;
-    var solutionName;//findSolutionNameFromFFLFile(result);
-    let objectModel = result['model ' + solutionName.toUpperCase() + ' uses BaseModel'][''];
+EconomicEditorView.prototype.parse = function(input, rootNodeName) {
+    const indexer = new Register()
+    const fflFormatter = new FFLFormatter(indexer, input)
+    fflFormatter.parseProperties();
+
+    const props = this.properties;
+    const solutionName = fflFormatter.name;
+    const nameIndex = indexer.schemaIndexes.name;
+    const tupleIndex = indexer.schemaIndexes.tuple;
+    const referstoIndex = indexer.schemaIndexes.refersto;
+    const displayTypeIndex = indexer.schemaIndexes.displaytype;
+    const dataTypeIndex = indexer.schemaIndexes.datatype;
+    const childIndex = indexer.schemaIndexes.children;
+    const choiceIndex = indexer.schemaIndexes.choices;
+    const trend_formulaIndex = indexer.schemaIndexes.formula_trend;
+    const lockedIndex = indexer.schemaIndexes.locked;
+    const visibleIndex = indexer.schemaIndexes.visible;
+    const modifierIndex = indexer.schemaIndexes.modifier;
+    const requiredIndex = indexer.schemaIndexes.required;
+    const formulaIndex = indexer.schemaIndexes.formula;
+    const hintIndex = indexer.schemaIndexes.hint;
+    const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
     var output = [];
-    JSVisitor.travelOne(objectModel, null, function(keyArg, node, context) {
-        if (keyArg === null) {
+    const names = indexer.getIndex('name')
+    const rootNode = names[rootNodeName || 'root']
+    indexer.walk(rootNode, 0, function(node, depth) {
+        if (depth == 0) return//skip fr
+        const nodeName = node[nameIndex]
+        const locked = node[lockedIndex];
+        const isLocked = locked || false
+        const visible = node[visibleIndex];
+        const isVisible = visible || false
+        const required = node[requiredIndex];
+        const isRequired = required || false
+        const formula = node[formulaIndex];
+        const hasFormula = formula || false
+        const hint = node[hintIndex] || false
+        if (hasFormula || node[childIndex].length > 0) {
+            var spaces = [];
+            let total = (node[modifierIndex] || '') + nodeName + (props ? " is " + ((isLocked ? 'locked  ' : '') + (isVisible ? 'visible ' : '') + (isRequired ? 'required ' : '')) : '');
+            spaces.length = Math.max((80 - total.length) - depth, 0);
+            let prefix = [];
+            prefix.length = depth;
+            output.push(prefix.join(' ') + total + (hasFormula ? spaces.join(' ') + '=' + formula : ''));
         }
-        else {
-            var tupleDefiniton = keyArg.startsWith('tuple ');
-            if ((keyArg.startsWith('variable ') || tupleDefiniton)) {
-                var nodeName = stripVariableOrtuple(keyArg, node);
-
-
-                var parent = JSVisitor.findPredicate(node, StartWithVariableOrTuplePredicate)
-                var parentId = (parent === undefined ? undefined : stripVariableOrtuple(parent._name, parent));
-                if (tupleDefiniton) {
-                    context.nestTupleDepth++;
-                }
-                var locked = node.locked || false
-                var visible = node.visible || false
-                var required = node.inputRequired || false
-                var formula = node.formula || false
-                var hint = node.hint || false
-                if (formula) {
-                    var spaces = [];
-                    let depth = getdepth(node, 0);
-                    let total = (node.modifier || '') + nodeName + " " + (props ? ((locked ? 'locked ' : ' ') + (visible ? 'visible ' : ' ') + (required ? 'required ' : ' ')) : '');
-                    spaces.length = Math.max((80 - total.length) - depth, 0);
-                    let prefix = [];
-                    prefix.length = depth;
-                    output.push(prefix.join(' ') + total + spaces.join(' ') + '=' + node.formula);
-
-                    if (hint) {
-                        // output.push(' hint:' + spaces.join(' ') + "=" + node.hint)
-                    }
-                }
-                if (props && required && !defaultValue.required[required]) {
-                    var spaces = [];
-                    let depth = getdepth(node, 0);
-                    let total3 = (node.modifier || '') + nodeName + ".required";
-                    spaces.length = Math.max((80 - total3.length) - depth, 0);
-                    let prefix = [];
-                    prefix.length = depth;
-                    output.push(prefix.join(' ') + total3 + spaces.join(' ') + '=' + node.inputRequired);
-                }
-                if (props && visible && !defaultValue.visible[visible]) {
-                    var spaces = [];
-                    let depth = getdepth(node, 0);
-                    let total6 = (node.modifier || '') + nodeName + ".visible";
-                    spaces.length = Math.max((80 - total6.length) - depth, 0);
-                    let prefix = [];
-                    prefix.length = depth;
-                    output.push(prefix.join(' ') + total6 + spaces.join(' ') + '=' + node.visible);
-                }
-                if (props && locked && !defaultValue.locked[locked]) {
-                    var spaces = [];
-                    let depth = getdepth(node, 0);
-                    let total2 = (node.modifier || '') + nodeName + ".locked";
-                    spaces.length = Math.max((80 - total2.length) - depth, 0);
-                    let prefix = [];
-                    prefix.length = depth;
-                    output.push(prefix.join(' ') + total2 + spaces.join(' ') + '=' + node.visible);
-                }
-                // addnode(logVars, solution, nodeName, node, parentId, tupleDefiniton, !tupleDefiniton && context.tupleDefinition, context.tupleDefinition, context.nestTupleDepth);
-                if (tupleDefiniton) {
-                    context.tupleDefinition = nodeName;
-                }
-            }
+        if (props && isRequired && !defaultValue.required[required]) {
+            var spaces = [];
+            let total3 = (node[modifierIndex] || '') + nodeName + ".required";
+            spaces.length = Math.max((80 - total3.length) - depth, 0);
+            let prefix = [];
+            prefix.length = depth;
+            output.push(prefix.join(' ') + total3 + spaces.join(' ') + '=' + required);
         }
-    }, {nestTupleDepth: 0});
-
-
+        if (props && isVisible && !defaultValue.visible[visible]) {
+            var spaces = [];
+            let total6 = (node.modifier || '') + nodeName + ".visible";
+            spaces.length = Math.max((80 - total6.length) - depth, 0);
+            let prefix = [];
+            prefix.length = depth;
+            output.push(prefix.join(' ') + total6 + spaces.join(' ') + '=' + visible);
+        }
+        if (props && isLocked && !defaultValue.locked[locked]) {
+            var spaces = [];
+            let total2 = (node.modifier || '') + nodeName + ".locked";
+            spaces.length = Math.max((80 - total2.length) - depth, 0);
+            let prefix = [];
+            prefix.length = depth;
+            output.push(prefix.join(' ') + total2 + spaces.join(' ') + '=' + locked);
+        }
+    })
     return output.join('\n');
-}
-
-function findSolutionNameFromFFLFile(json) {
-    for (var key in json) {
-        if (key.toLowerCase().startsWith('model ')) {
-            return key.split(' ')[1].toUpperCase();
-        }
-    }
-    return undefined;
 }
 
 exports.EconomicEditorView = new EconomicEditorView();

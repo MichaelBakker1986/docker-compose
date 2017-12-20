@@ -10,6 +10,7 @@ if (!global.MATRIX_VALUES) {
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../math');
 
 var CalculationFacade = require('../../lme-core').CalculationFacade;

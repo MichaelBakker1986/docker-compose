@@ -1,3 +1,4 @@
+//TODO: convert into JBehave story
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
@@ -154,6 +155,6 @@ excelPlugin.initComplete('KSP_test').then(function(matrix) {
         assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i].toFixed(2));
     }
 }).catch((err) => {
-    console.error(err)
-    throw err;
+    log.error(err)
+    process.exit(1);
 })

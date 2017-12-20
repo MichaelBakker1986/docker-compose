@@ -26,6 +26,7 @@ Promise.all([assembler.started, excelplugin.initComplete]).then(function() {
 
     }).catch((err) => {
         log.error(err)
+        process.exit(1);
     })
 });
 

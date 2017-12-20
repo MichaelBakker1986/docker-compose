@@ -1,13 +1,13 @@
-var StoryParser = require('../StoryParser').StoryParser
+const StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const assert = require('assert');
+const log = require('ff-log')
 const model = new LMEapi();
 LMEMETA = model;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
-let mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
+const mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
 
 function MVOStory(story) {
     this.story = story;
@@ -28,6 +28,7 @@ excelPlugin.initComplete().then(function(matrix) {
     LME = model.exportWebModel();
     new MVOStory(__dirname + '/mvo.story').startTest()
 }).catch((err) => {
-    throw err;
+    log.error(err)
+    process.exit(1);
 })
 exports.MVOStory = MVOStory;

@@ -10,7 +10,7 @@ require('../lme-core/exchange_modules/swagger/swaggerParser');
 const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
 const APIDefinition = require(__dirname + '/api/swaggerDef.json');
-
+const log = require('ff-log')
 modelLoadListener.onNewModel = function(fflModelData, path) {
     const lmeModel = CalculationFacade.initializeFFlModelData(fflModelData);
     const modelname = lmeModel.modelName;
@@ -100,6 +100,8 @@ var excelPlugin = require('../excel-connect').xlsxLookup;
 excelPlugin.initComplete('KSP').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     modelLoadListener.initializeModels();
+}).catch(function(err) {
+    log.error(err)
 })
 CalculationFacade.addFunctions(excelPlugin);
 exports.LMECalculationFacade = CalculationFacade

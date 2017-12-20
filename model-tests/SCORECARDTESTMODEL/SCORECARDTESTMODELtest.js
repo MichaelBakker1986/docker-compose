@@ -13,8 +13,8 @@ excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
     const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
     assert(SCORECARDTESTMODEL.lme.validateImportedSolution())
 }).catch((err) => {
-    console.error(err)
-    throw err;
+    log.error(err)
+    process.exit(1);
 })
 
 

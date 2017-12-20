@@ -19,5 +19,5 @@ excelPlugin.initComplete('KSP').then(function(matrix) {
     assert(wb.get('YearlyChildCosts') == 0, 0)
 }).catch((err) => {
     log.error(err)
-    throw err
+    process.exit(1);
 })

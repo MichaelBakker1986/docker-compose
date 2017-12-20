@@ -39,7 +39,7 @@ fm.prototype.initializeFormula = function(newFormula) {
     const id = newFormula.id || newFormula.index;
     //"debug('" + newFormula.name + "');
     if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    const stringFunction = "return " + newFormula.parsed + " /*\n" + newFormula.nam + ":" + newFormula.original + "*/ ";// : "return " + newFormula.parsed
+    const stringFunction = "return " + newFormula.parsed + " /*\n" + newFormula.name + ":" + newFormula.original + "*/ ";// : "return " + newFormula.parsed
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v', stringFunction).bind(global);
     global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };

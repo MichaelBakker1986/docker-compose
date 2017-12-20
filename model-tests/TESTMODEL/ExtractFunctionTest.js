@@ -18,5 +18,6 @@ excelPlugin.initComplete().then(function() {
         log.error(err)
     }
 }).catch((err) => {
-    throw err;
+    log.error(err)
+    process.exit(1);
 })

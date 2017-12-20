@@ -2,16 +2,16 @@
  * Convert Model into front-end distrobution
  * node exportLME_FFL {modelName}
  */
-var browser = require('browserify');
-var fs = require('fs')
-var name = process.argv[2];
-var fflType = 'importFFL2BackwardsCompatible';
+const browser = require('browserify');
+const fs = require('fs')
+const name = process.argv[2];
+const fflType = 'importFFL2BackwardsCompatible';
 const fileType = '.ffl';
-
-var lmeAPI = require('./lme')
+const lmeAPI = require('./lme')
+const log = require('ff-log')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
-var CalculationFacade = require('../../lme-core').CalculationFacade;
+const CalculationFacade = require('../../lme-core').CalculationFacade;
 const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(ExcelLookup)
 //quick-fix resolve XSLX name
@@ -46,6 +46,6 @@ ExcelLookup.initComplete(xlsxname).then(function(matrix) {
     var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/' + name + '.js')
     b.bundle().pipe(res);
 }).catch((err) => {
-    console.error(err)
-    throw err
+    log.error(err)
+    process.exit(1);
 })

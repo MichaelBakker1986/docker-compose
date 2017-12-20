@@ -1,14 +1,14 @@
 /**
  * Bridge between excel files and LME
  */
-var Excel = require('exceljs');
-var log = require('ff-log');
-var Promise = require('promise')
-var workbook = new Excel.Workbook();
-var fs = require('fs');
+const Excel = require('exceljs');
+const log = require('ff-log');
+const Promise = require('promise')
+const workbook = new Excel.Workbook();
+const fs = require('fs');
 
-var initComplete = function(excelFileName) {
-    return new Promise(function(succes) {
+const loadExcelFile = function(excelFileName) {
+    return new Promise(function(succes, fail) {
         //check if an file exists
         const xlsxPath = __dirname + '/../git-connect/resources/' + excelFileName + '.xlsx';
         if (!fs.existsSync(xlsxPath)) {
@@ -24,11 +24,9 @@ var initComplete = function(excelFileName) {
                 }
                 succes(totalMatrix);
             }).catch(function(err) {
-                log.error(err);
+                fail(err)
             });
         }
-    }, function(err) {
-        log.error(err)
     });
 }
 
@@ -96,7 +94,7 @@ function getCellValueFromRangeCell(range, rangeCell) {
 }
 
 function findYasNames(range, bounds) {
-    var yAsNames = {};
+    const yAsNames = {};
     for (var y = bounds.yStart; y < range.ranges.length; y++) {
         yAsNames[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = range.ranges[y][bounds.xStart];
     }
@@ -145,7 +143,7 @@ function readFunction(wb) {
 function doMatrixLookup(xlsfileName, tableName, row, col) {
     if (log.TRACE)
         if (!MATRIX_VALUES[tableName]) log.trace('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
-    var table = MATRIX_VALUES[tableName];
+    const table = MATRIX_VALUES[tableName];
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         if (log.TRACE) log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, table.xasValues[row][col]);
         return table.xasValues[row][col];
@@ -171,5 +169,5 @@ MatrixLookup = entries.MatrixLookup
 exports.xlsxLookup = {
     name: 'xlsx-lookup',
     entries: entries,
-    initComplete: initComplete
+    initComplete: loadExcelFile
 }
