@@ -8,6 +8,7 @@ const functionMapper = {
                 LME.nodes[$1].value = $2
                 return {
                     status: 'info',
+                    regeex: /variable (\w+) is set to (\d+) for document/,
                     message: 'set variable ' + $1 + ' to ' + $2
                 }
             }]
@@ -43,7 +44,7 @@ function StoryParser(story) {
         failed: 0,
         total: 0,
         rate: function() {
-            return (100 / this.total  ) * (this.passed)
+            return (100 / this.total) * (this.passed)
         }
     };
 }
@@ -106,7 +107,7 @@ StoryParser.prototype.on = function(event) {
         this.message(event)
     }
     else if (event.type == 'done') {
-       // this.then(event)
+        // this.then(event)
     }
 }
 exports.StoryParser = StoryParser;

@@ -1,5 +1,6 @@
 var StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
+const SolutionFacade = require('../../lme-core/src/SolutionFacade');
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const assert = require('assert');
@@ -7,27 +8,31 @@ const model = new LMEapi();
 LMEMETA = model;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
-let mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
+let mvoFLLFile = require('fs').readFileSync(__dirname + '/KSP_experience.ffl', 'utf8');
 
-function MVOStory(story) {
+function KSPStory(story) {
     this.story = story;
 }
 
-MVOStory.prototype.startTest = function() {
+KSPStory.prototype.startTest = function() {
     let storyParser = new StoryParser(require('fs').readFileSync(this.story, 'utf8'));
     storyParser.message = function(event) {
         if (event.result.status == 'fail' || event.result.status == 'error') {
             throw Error('Story failed' + JSON.stringify(event))
+        } else {
+            console.info(event)
         }
     }
     storyParser.start()
     storyParser.call()
 }
-excelPlugin.initComplete().then(function(matrix) {
+excelPlugin.initComplete('KSP').then(function(matrix) {
+    SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     model.importFFL2BackwardsCompatible(mvoFLLFile)
     LME = model.exportWebModel();
-    new MVOStory(__dirname + '/mvo.story').startTest()
+    new KSPStory(__dirname + '/KSP.story').startTest()
 }).catch((err) => {
+    console.error(err)
     throw err;
 })
-exports.MVOStory = MVOStory;
+exports.KSPStory = KSPStory;

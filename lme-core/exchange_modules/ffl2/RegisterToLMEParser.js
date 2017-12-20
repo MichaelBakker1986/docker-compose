@@ -106,7 +106,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             } else if (node[choiceIndex].split('|').length == 2) {
                 type = 'radio'
             } else {
-                if (log.TRACE) log.trace('[' + rowId + '] ' + node.choices)
+                if (log.TRACE) log.trace('[' + nodeName + '] ' + node.choices)
             }
         }
 
