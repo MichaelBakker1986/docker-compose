@@ -1,11 +1,11 @@
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
  */
-var logger = require('ff-log');
-var FESFacade = {}
-var PropertiesAssembler = require('./PropertiesAssembler');
-var FunctionMap = require('./FunctionMap');
-var FormulaService = require('./FormulaService')
+const log = require('ff-log');
+const ValueFacade = {}
+const PropertiesAssembler = require('./PropertiesAssembler');
+const FunctionMap = require('./FunctionMap');
+const FormulaService = require('./FormulaService')
 /**
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
  * Just iterate the shabang and test the property
@@ -46,14 +46,14 @@ function fetchSolutionNode(row, col) {
     return PropertiesAssembler.fetch(row + '_' + col);
 }
 
-FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
+ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
     var rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
     if (localFormula === undefined) {
         //because only Formula's are known here, we cannot give away variable name here.
         throw Error('Cannot find variable')
     }
-    if (logger.DEBUG) logger.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    if (log.DEBUG) log.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
     context.audit.push({
         saveToken: context.saveToken,
@@ -64,7 +64,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
     var variable = fetchSolutionNode(row, (col || 'value'));
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
         if (userValue != null) {
-            const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
+            const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
             userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
             userValue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue))).name
             if (!isNaN(userValue)) {
@@ -92,7 +92,7 @@ FESFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas
  * TODO: introduce data-masks to keep these checks quick
  * - every variable has one mask, this one includes display and data types.
  */
-FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
+ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
 
     if (colType === 'entered') {
@@ -127,7 +127,7 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         if (colType === 'value') {
             if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
                 if (returnValue != null) {
-                    const choices = FESFacade.fetchSolutionPropertyValue(context, row, 'choices');
+                    const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
                     returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
                     returnValue = choices.lookup('name', String(returnValue)).value
                 }
@@ -173,13 +173,13 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     }
     return returnValue;
 }
-FESFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
-FESFacade.fetchSolutionNode = fetchSolutionNode;
-FESFacade.apiGetValue = FunctionMap.apiGet;
-FESFacade.getAllValues = function(docValues) {
+ValueFacade.fetchRootSolutionProperty = PropertiesAssembler.getRootProperty;
+ValueFacade.fetchSolutionNode = fetchSolutionNode;
+ValueFacade.apiGetValue = FunctionMap.apiGet;
+ValueFacade.getAllValues = function(docValues) {
     return this.getValuesFromFormulaIds(Object.keys(docValues), docValues);
 }
-FESFacade.getValuesFromFormulaIds = function(keys, docValues) {
+ValueFacade.getValuesFromFormulaIds = function(keys, docValues) {
     //we cannot just return everything here, Because for now all formula's have a user-entered value cache.
     //Also Functions themSelves are bound to this object.
     //So we have to strip them out here.
@@ -202,8 +202,7 @@ FESFacade.getValuesFromFormulaIds = function(keys, docValues) {
     return values;
 }
 //when new formula's arrive, we have to update the user-entered map so we don't get NPE
-//just a quick-fix..
-FESFacade.updateValueMap = function(values) {
+ValueFacade.updateValueMap = function(values) {
     FormulaService.visitFormulas(function(formula) {
         //later will add values['_'+key] for the cache
         //for unlocked add values[key] here will user entered values stay
@@ -215,6 +214,6 @@ FESFacade.updateValueMap = function(values) {
         }
     });
 };
-FESFacade.visit = PropertiesAssembler.visitProperty;
-FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
-module.exports = FESFacade;
+ValueFacade.visit = PropertiesAssembler.visitProperty;
+ValueFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
+module.exports = ValueFacade;

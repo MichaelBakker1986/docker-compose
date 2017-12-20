@@ -2,7 +2,7 @@ global.DEBUGMODUS = true;
 const log = require('ff-log')
 const DebugManager = require('../../lme-core/exchange_modules/ffl2/DebugManager').DebugManager
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
-require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport');
 const debugManager = new DebugManager()
 global.debug = function(name) {
     debugManager.addStep(name)

@@ -2,7 +2,7 @@
  * Never include this in frond-end-dist for evaluation purpose
  * lme.js is the front-end opponent
  */
-require('../lme-core/exchange_modules/presentation/webexport_with_template');
+require('./presentation/webexport');
 const FormulaService = require('../lme-core/src/FormulaService');
 var esprima = require('esprima')
 var escodegen = require('escodegen')

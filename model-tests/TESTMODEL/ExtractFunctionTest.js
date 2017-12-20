@@ -1,4 +1,4 @@
-require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport');
 const excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');

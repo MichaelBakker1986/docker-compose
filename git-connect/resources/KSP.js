@@ -17742,7 +17742,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\presentation\\webexport_with_template.js","/lme-core\\exchange_modules\\presentation",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\presentation\\webexport.js","/lme-core\\exchange_modules\\presentation",undefined)
 },{"../../src/PropertiesAssembler":27,"../../src/SolutionFacade":29,"_process":38,"buffer":36}],18:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -18412,7 +18412,7 @@ FESFacade.updateValueMap = function(values) {
 FESFacade.visit = PropertiesAssembler.visitProperty;
 FESFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = FESFacade;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FESFacade.js","/lme-core\\src",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ValueFacade.js","/lme-core\\src",undefined)
 },{"./FormulaService":23,"./FunctionMap":24,"./PropertiesAssembler":27,"_process":38,"buffer":36,"ff-log":35}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**

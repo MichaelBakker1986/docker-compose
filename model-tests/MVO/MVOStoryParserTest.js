@@ -1,6 +1,6 @@
 const StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
-require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport');
 const assert = require('assert');
 const log = require('ff-log')
 const model = new LMEapi();

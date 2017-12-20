@@ -1,6 +1,6 @@
 const SolutionFacade = require('../../src/SolutionFacade')
 const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
-const FinFormula = require('../ffl/FinFormula')
+const FinFormula = require('./FinFormula')
 const AST = require('../../../ast-node-utils/index').ast
 const log = require('ff-log')
 var esprima = require('esprima');

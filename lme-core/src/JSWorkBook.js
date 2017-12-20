@@ -1,15 +1,15 @@
 /*
  This class should have less business logic,
- Its the state wrapper around the stateless FESFacade
- Remove All dependencies besides FESFacade,ff-log. Even XAxis should be inside the Context Object
+ Its the state wrapper around the stateless ValueFacade
+ Remove All dependencies besides ValueFacade,ff-log. Even XAxis should be inside the Context Object
  */
 
-var SolutionFacade = require('./SolutionFacade');
-var FESFacade = require('./FESFacade');
-var AST = require('../../ast-node-utils').ast;
-var log = require('ff-log')
-var XAxis = require('./XAxis')
-var YAxis = require('./YAxis')
+const SolutionFacade = require('./SolutionFacade');
+const ValueFacade = require('./ValueFacade');
+const AST = require('../../ast-node-utils').ast;
+const log = require('ff-log')
+const XAxis = require('./XAxis')
+const YAxis = require('./YAxis')
 
 //user friendly stable API
 //importSolution(data,'type') : Solution          ; See Solution class for definiton
@@ -94,7 +94,7 @@ function validateImportedSolution() {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
             //iterate all formula-sets to test 100%
-            FESFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+            ValueFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -129,7 +129,7 @@ function validateImportedSolution() {
                         formulaInfo.formulaDependencys.forEach(function(dependency) {
                             const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                             try {
-                                FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                                ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
                             } catch (e) {
                                 // log.error(e)
                                 //NOOP
@@ -153,7 +153,7 @@ function validateImportedSolution() {
                     if (dependency.association === 'deps') {
                         const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                         try {
-                            FESFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                            ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
                         } catch (e) {
                             log.error(e)
                             //NOOP
@@ -194,9 +194,9 @@ JSWorkBook.prototype.getNode = function(name) {
     return this.getSolutionNode(this.getSolutionName() + "_" + name);
 }
 JSWorkBook.prototype.getSolutionNode = function(name) {
-    return FESFacade.fetchSolutionNode(name, 'value')
+    return ValueFacade.fetchSolutionNode(name, 'value')
 };
-JSWorkBook.prototype.fetchSolutionNode = FESFacade.fetchSolutionNode
+JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 
 function resolveX(wb, x) {
     return x ? wb.xaxis[x] : wb.xaxis[0];
@@ -214,7 +214,7 @@ JSWorkBook.prototype.get = function(row, col, x, y) {
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y)
-    return FESFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
+    return ValueFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
@@ -224,15 +224,15 @@ JSWorkBook.prototype.set = function(row, value, col, x, y) {
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
     var xas = resolveX(this, x);
     var yas = resolveY(this, y);
-    return FESFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
+    return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.updateValues = function() {
-    FESFacade.updateValueMap(this.context.values);
+    ValueFacade.updateValueMap(this.context.values);
 };
 JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 //should return the solution instead. So its deprecated
 JSWorkBook.prototype.getRootSolutionProperty = function() {
-    return FESFacade.fetchRootSolutionProperty(this.getSolutionName());
+    return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
 
 function maxTupleCountForRow(wb, node) {
@@ -261,7 +261,7 @@ JSWorkBook.prototype.tupleIndexForName = function(node, name) {
         return 0;
     }
     var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    FESFacade.visit(tupleDefinition, function(child, depth) {
+    ValueFacade.visit(tupleDefinition, function(child, depth) {
         if (child.tuple) {
             maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
         }
@@ -274,7 +274,7 @@ JSWorkBook.prototype.tupleIndexForName = function(node, name) {
 JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     var yax = resolveY(this, y)
     var wb = this;
-    FESFacade.visit(startProperty, function(node, treeDepth) {
+    ValueFacade.visit(startProperty, function(node, treeDepth) {
         //for max tuplecount in current node loop visitor node
         var maxTupleCountForTupleDefinition = maxTupleCountForRow(wb, node);
         for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
@@ -303,9 +303,9 @@ JSWorkBook.prototype.getAllChangedValues = function() {
             formulaIds.push(audit.formulaId)
         }
     }
-    return FESFacade.getValuesFromFormulaIds(formulaIds, this.context.values);
+    return ValueFacade.getValuesFromFormulaIds(formulaIds, this.context.values);
 }
 JSWorkBook.prototype.getAllValues = function() {
-    return FESFacade.getAllValues(this.context.values);
+    return ValueFacade.getAllValues(this.context.values);
 };
 module.exports = JSWorkBook;

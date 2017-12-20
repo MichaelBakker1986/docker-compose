@@ -10,16 +10,6 @@ const spawn = require('child-process-promise').spawn;
 let busy = false;
 var childProcesses = {}
 const developer = (host === 'localhost');
-const levels = {
-    info: {
-        level: 'info',
-        color: 'green'
-    },
-    error: {
-        levels: 'error',
-        color: 'red'
-    }
-}
 
 function spawnChild(appname, args) {
     var promise = spawn('node', [appname], {capture: ['stdout', 'stderr']})
@@ -136,10 +126,9 @@ httpServer.listen(port, () => {
 function testAndDeploy() {
     log('Running integration tests on server ' + host, 'info')
     var start = now();
-    const command = 'cd .. && npm install && npm test'
+    const command = developer ? 'echo a' : 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
-        //start sub processes
         spawnChild('../demo-apps')
         spawnChild('../lme-model-api')
         spawnChild('../lme-data-api')

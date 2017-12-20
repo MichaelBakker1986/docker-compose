@@ -1,4 +1,4 @@
-require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/presentation/webexport');
 const LME = require('../../lme-model-api/src/lme');
 const LmeDisplayGrammer = require('../../lme-core/exchange_modules/presentation/LmeDisplayGrammer').LmeDisplayGrammer
 

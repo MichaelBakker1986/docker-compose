@@ -6,7 +6,7 @@
 var assert = require('assert');
 require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../exchange_modules/lme/lmeparser');
-require('../exchange_modules/presentation/webexport_with_template');
+require('../exchange_modules/presentation/webexport');
 require('../../math')
 var CalculationFacade = require('../').CalculationFacade;
 var Context = require('../src/Context');

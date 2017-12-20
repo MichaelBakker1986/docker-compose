@@ -40,7 +40,7 @@ ExcelLookup.initComplete(xlsxname).then(function(matrix) {
         debug: false
     };
     let b = browser(options).ignore('escodegen').ignore('esprima').ignore('ff-log').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
-    b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport_with_template.js');
+    b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js');
     b.add(__dirname + '/lmeAPIWrapper.js');
     b.transform(require('browserify-fastjson'));
     var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/' + name + '.js')
