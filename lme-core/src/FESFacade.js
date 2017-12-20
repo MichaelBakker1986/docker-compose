@@ -145,7 +145,7 @@ FESFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                     }
                 }
                 if (variable.datatype == 'number') {
-                    returnValue = OnNA(returnValue, '')
+                    returnValue = OnNA(returnValue, 0)
                 }
                 if (variable.displayAs == 'piechart') {
                     returnValue = PIECHART(returnValue)

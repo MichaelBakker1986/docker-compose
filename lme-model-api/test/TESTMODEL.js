@@ -1,4 +1,4 @@
-require('../../lme-core/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 const modelAPI = require('../src/lme');
 const log = require('ff-log');
 const fs = require('fs');

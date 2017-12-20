@@ -80,7 +80,7 @@ LMEParser.prototype.headername = '.finance lme';
 LMEParser.prototype.parseData = function(data, workbook) {
     const solution = SolutionFacade.createSolution(data.name);
     solution.nodes = data.nodes;
-    FormulaService.initVariables(data.variables)
+    if (data.variables) FormulaService.initVariables(data.variables)
     PropertiesAssembler.bulkInsert(solution);
     FormulaService.bulkInsertFormula(data.formulas)
     data.formulas.forEach(function(formula) {

@@ -1,4 +1,4 @@
-require('../../lme-core/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/presentation/webexport_with_template');
 require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 const LME = require('../../lme-model-api/src/lme');
 const log = require('ff-log');
@@ -13,6 +13,7 @@ excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
     const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
     assert(SCORECARDTESTMODEL.lme.validateImportedSolution())
 }).catch((err) => {
+    console.error(err)
     throw err;
 })
 
