@@ -120,8 +120,6 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
                 const parentName = flattenValues[key].parent.split("$")[0];
                 if (flattenValues[parentName]) {
                     flattenValues[parentName].data.push(flattenValues[key])
-                } else {
-                    console.info('root:' + key)
                 }
             }
         }
