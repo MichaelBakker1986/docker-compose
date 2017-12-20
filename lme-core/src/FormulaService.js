@@ -97,7 +97,7 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
     //if not locked and the formula isn't already cached, we can reuse it
     //if not locked, its not possible to re-use since the user to override the value of the formula
     //when running in DEBUG-MODUS, we cannot re-use Formula's since they will result in incorrect method calls
-    if (locked && cache[key] !== undefined) {
+    if (false && locked && cache[key] !== undefined) {
         formula = cache[key];
     }
     else {

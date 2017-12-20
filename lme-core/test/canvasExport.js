@@ -4,9 +4,9 @@
  * @type {ok}
  */
 var assert = require('assert');
-require('../exchange_modules/ffl/fflparser');
+require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');
 require('../exchange_modules/lme/lmeparser');
-require('../exchange_modules/presentation/presentation');
+require('../exchange_modules/presentation/webexport_with_template');
 require('../../math')
 var CalculationFacade = require('../').CalculationFacade;
 var Context = require('../src/Context');
@@ -16,10 +16,9 @@ CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 CalculationFacade.addFunctions(require('../../excel-connect').xlsxLookup);
 var log = require('ff-log');
 var WorkBook = require('../src/JSWorkBook');
-var JUNIT = require('./JUNIT.js');
 var fs = require('fs');
 
-var fflTestModels = ['../../lme-model-tests/V05/V05'];
+var fflTestModels = ['/../resources/KSP'];
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
@@ -27,16 +26,15 @@ function correctFileName(name) {
 
 for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
-    var data = JUNIT.getFile(fflModelName + '.ffl');
+    var data = fs.readFileSync(__dirname + fflModelName + '.ffl', 'utf8');
     var wb = new WorkBook(new Context());
 
-    wb.importSolution(data, 'ffl');
+    wb.importSolution(data, 'ffl2_backwards');
     var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
     // assert.ok(wb.validateImportedSolution().valid);
-    var fflExport = wb.export('ffl');
-    var screendefExport = wb.export('presentation');
-    var allnodes = screendefExport.tree._tree.nodes;
+    var screendefExport = wb.export('webexport');
+    var allnodes = screendefExport.nodes;
 
     var graphvizModelTree = '';
     var depVariableNames_with_formulas = "";

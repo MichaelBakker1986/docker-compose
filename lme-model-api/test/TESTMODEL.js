@@ -1,4 +1,5 @@
 require('../../lme-core/exchange_modules/presentation/webexport_with_template');
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
 const modelAPI = require('../src/lme');
 const log = require('ff-log');
 const fs = require('fs');
@@ -14,7 +15,7 @@ Number.prototype.countDecimals = function() {
 /**
  * FFL->LME->WebExport
  */
-newModel.importFFL(fs.readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8'));
+newModel.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8'));
 const nodes = newModel.exportWebModel().nodes;
 /**
  * Declare variables

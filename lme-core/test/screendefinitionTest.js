@@ -1,7 +1,7 @@
 var JUNIT = require('./JUNIT.js');
 var log = require('ff-log')
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
-require('../exchange_modules/ffl/fflparser');//just let it inject into the FESFacade
+require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');//just let it inject into the FESFacade
 var JSWorkBook = require('../src/JSWorkBook');
 var assert = require('assert');
 var data = require('../resources/scorecardtemplate.json');
@@ -21,4 +21,3 @@ JUNIT.validateTree(expected, actual, 'children', 'children', function(expected, 
 })
 if (log.TRACE) log.trace(screenDefexport)
 log.debug('succes model [' + wb.getSolutionName() + ']');
-if (log.TRACE) log.trace(wb.export('ffl'))

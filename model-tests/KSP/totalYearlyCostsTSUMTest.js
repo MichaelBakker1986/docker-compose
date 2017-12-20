@@ -1,5 +1,6 @@
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
+require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
 var SolutionFacade = require('../../lme-core/src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')
@@ -11,7 +12,7 @@ CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new Context());
-    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl');
+    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl2_backwards');
     var children = [
         // Child 1
         {
