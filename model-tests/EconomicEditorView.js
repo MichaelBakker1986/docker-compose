@@ -36,10 +36,8 @@ var defaultValue = {
 
 EconomicEditorView.prototype.parse = function(input) {
     var props = this.properties;
-    var parser = require('../lme-core/exchange_modules/ffl/FflToJsonConverter')
-    var JSVisitor = require('../lme-core/src/JSVisitor')
-    var result = parser.parseFFL(input)
-    var solutionName = findSolutionNameFromFFLFile(result);
+    return input;
+    var solutionName;//findSolutionNameFromFFLFile(result);
     let objectModel = result['model ' + solutionName.toUpperCase() + ' uses BaseModel'][''];
     var output = [];
     JSVisitor.travelOne(objectModel, null, function(keyArg, node, context) {
@@ -83,11 +81,11 @@ EconomicEditorView.prototype.parse = function(input) {
                     prefix.length = depth;
                     output.push(prefix.join(' ') + total3 + spaces.join(' ') + '=' + node.inputRequired);
                 }
-                 if (props && visible && !defaultValue.visible[visible]) {
+                if (props && visible && !defaultValue.visible[visible]) {
                     var spaces = [];
                     let depth = getdepth(node, 0);
                     let total6 = (node.modifier || '') + nodeName + ".visible";
-                    spaces.length = Math.max((80 - total6.length) - depth,0);
+                    spaces.length = Math.max((80 - total6.length) - depth, 0);
                     let prefix = [];
                     prefix.length = depth;
                     output.push(prefix.join(' ') + total6 + spaces.join(' ') + '=' + node.visible);
@@ -109,44 +107,6 @@ EconomicEditorView.prototype.parse = function(input) {
         }
     }, {nestTupleDepth: 0});
 
-    function stripVariableOrtuple(name, node) {
-        if (!name) {
-            return undefined;
-        }
-        //this is just a fallback, the FflToJsonConverter sometimes fails variable + variablename refers to othervariable
-        if (name.indexOf('+') > -1) {
-            //something wrong while parsing regex, trying to fix it here,
-            name = name.replace(/(\+|-|\=)\s*/gm, '');
-            node.modifier = '+';
-        }
-        else if (name.indexOf('-') > -1) {
-            name = name.replace(/(\+|-|\=)\s*/gm, '');
-            node.modifier = '-';
-        }
-        else if (name.indexOf('=') > -1) {
-            name = name.replace(/(\+|-|\=)\s*/gm, '');
-            node.modifier = '=';
-        }
-        if (name.split(' ').length < 2) {
-            return undefined;
-        }
-
-        //(Variable NetWorth Implies AnotherVariable) becomes NetWorth
-        var secondWordOfLine = name.split(' ')[1];
-        //Strip Variable Modifiers (+/-/=),
-        var replace = secondWordOfLine.replace(/\W/g, '');
-        if (replace === '') {
-            return undefined;
-        }
-        return replace;
-    }
-
-    function StartWithVariableOrTuplePredicate(node) {
-        if (node === undefined || !node._parentKey) {
-            return false;
-        }
-        return (node._parentKey.startsWith('variable') || node._parentKey.startsWith('tuple'));
-    }
 
     return output.join('\n');
 }
