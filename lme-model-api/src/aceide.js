@@ -451,7 +451,8 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             return scope.register.changes
         },
         function() {
-            console.info('change made')
+            //Hook for changes in the UI
+            //NO-OP
         }
     );
     $scope.togglePropertiesSidebar();
