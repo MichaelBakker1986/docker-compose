@@ -148,7 +148,7 @@ function modelVariableName(name) {
 }
 
 var wbKSP = new WorkBook(new Context());
-wbKSP.importSolution(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'), 'ffl2_backwards')
+wbKSP.importSolution(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'), 'ffl')
 var untestedformulas = 0;
 var totalformulas = 0;
 var formulas = {}

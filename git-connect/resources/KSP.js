@@ -16795,9 +16795,9 @@ const Register = require('./Register').Register
 function RegisterPlainFFLToLMEParser() {
 }
 
-RegisterPlainFFLToLMEParser.prototype.name = 'ffl2_backwards'
+RegisterPlainFFLToLMEParser.prototype.name = 'ffl'
 RegisterPlainFFLToLMEParser.prototype.status = 'green';
-RegisterPlainFFLToLMEParser.prototype.headername = '.finance ffl2_backwards';
+RegisterPlainFFLToLMEParser.prototype.headername = '.finance ffl';
 
 RegisterPlainFFLToLMEParser.prototype.deParse = function(data, workbook) {
     return new RegisterToLMEParser().deParse(data, workbook)
@@ -17760,7 +17760,7 @@ function LMEService() {
 
 LMEService.prototype.initializeFFlModelData = function(data) {
     var JSWorkBook = new WorkBook(new Context());
-    JSWorkBook.importSolution(data, "ffl2_backwards");
+    JSWorkBook.importSolution(data, "ffl");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validateImportedSolution();
@@ -23843,7 +23843,7 @@ LmeAPI.prototype.setColumnOffset = function(index) {
     this.lme.offset = parseInt(index);
 }
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl2_backwards')
+    this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.exportFFL = function() {
     return this.lme.export('ffl')

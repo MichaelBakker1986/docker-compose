@@ -29,7 +29,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var data = fs.readFileSync(__dirname + fflModelName + '.ffl', 'utf8');
     var wb = new WorkBook(new Context());
 
-    wb.importSolution(data, 'ffl2_backwards');
+    wb.importSolution(data, 'ffl');
     var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
     // assert.ok(wb.validateImportedSolution().valid);

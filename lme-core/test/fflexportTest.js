@@ -11,11 +11,11 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
     var data = JUNIT.getFile(fflModelName + '.ffl');
     var wb = new WorkBook(new Context());
-    wb.importSolution(data, 'ffl2_backwards');
+    wb.importSolution(data, 'ffl');
     var validate = wb.validateImportedSolution();
     wb.fixProblemsInImportedSolution();
     assert.ok(wb.validateImportedSolution().valid);
-    var fflExport = wb.export('ffl2_backwards').join('\n');
+    var fflExport = wb.export('ffl').join('\n');
     //debugging..
     if (log.TRACE) log.trace(fflExport);
 }

@@ -50,7 +50,7 @@ LmeAPI.prototype.setColumnOffset = function(index) {
     this.lme.offset = parseInt(index);
 }
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl2_backwards')
+    this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.exportFFL = function() {
     return this.lme.export('ffl')

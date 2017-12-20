@@ -10,7 +10,7 @@ CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(excelPlugin);
 var wb = new WorkBook(new Context());
-wb.importSolution(fs.readFileSync(__dirname + '/../../model-tests/KSP/KSP.ffl', 'utf8'), 'ffl2_backwards');
+wb.importSolution(fs.readFileSync(__dirname + '/../../model-tests/KSP/KSP.ffl', 'utf8'), 'ffl');
 wb.set('NrOfDaysChildcareWeek', 2, 'value', 0, 0)
 wb.set('NrOfDaysChildcareWeek', 3, 'value', 0, 1)
 assert(wb.get('NrOfDaysChildcareWeek', 'value', 0, 0) == 2)

@@ -326,7 +326,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         $(this).closest('.content .box').toggleClass('panel-fullscreen');
     });
     $(".data-story").click(function(e) {
-        $.get("resources/MVO.story", function(data, status, xhr) {
+        $.get("resources/" + windowModelName + ".story", function(data, status, xhr) {
             aceEditor.setValue(data)
         })
     });

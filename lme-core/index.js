@@ -13,7 +13,7 @@ function LMEService() {
 
 LMEService.prototype.initializeFFlModelData = function(data) {
     var JSWorkBook = new WorkBook(new Context());
-    JSWorkBook.importSolution(data, "ffl2_backwards");
+    JSWorkBook.importSolution(data, "ffl");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validateImportedSolution();

@@ -10,7 +10,7 @@ const log = require('ff-log')
 CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete().then(function(matrix) {
     var wb = new WorkBook(new Context());
-    wb.importSolution(require("fs").readFileSync(__dirname + '/KSP.ffl', "utf8"), 'ffl2_backwards')
+    wb.importSolution(require("fs").readFileSync(__dirname + '/KSP.ffl', "utf8"), 'ffl')
     wb.set('IncomeParent01', 25000)
     assert(wb.get('IncomeParent01') === 25000)
 //same response from restApi

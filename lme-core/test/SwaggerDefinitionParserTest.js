@@ -14,7 +14,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
     var data = fs.readFileSync(__dirname + '/../resources/' + fflModelName + '.ffl', 'utf8');
     var wb = new WorkBook(new Context());
-    wb.importSolution(data, 'ffl2_backwards');
+    wb.importSolution(data, 'ffl');
     var swaggerDefinition = wb.export('swagger', {
         rowId: 'Q_MAP01',
         type: 'input'

@@ -9,9 +9,9 @@ const Register = require('./Register').Register
 function RegisterPlainFFLToLMEParser() {
 }
 
-RegisterPlainFFLToLMEParser.prototype.name = 'ffl2_backwards'
+RegisterPlainFFLToLMEParser.prototype.name = 'ffl'
 RegisterPlainFFLToLMEParser.prototype.status = 'green';
-RegisterPlainFFLToLMEParser.prototype.headername = '.finance ffl2_backwards';
+RegisterPlainFFLToLMEParser.prototype.headername = '.finance ffl';
 
 RegisterPlainFFLToLMEParser.prototype.deParse = function(data, workbook) {
     return new RegisterToLMEParser().deParse(data, workbook)

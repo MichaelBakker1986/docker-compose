@@ -13,7 +13,7 @@ CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP_test').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new Context());
-    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl2_backwards');
+    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl');
     var children = [
         // Child 1
         {

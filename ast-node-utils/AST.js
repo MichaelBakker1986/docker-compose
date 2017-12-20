@@ -1,6 +1,7 @@
 /**
  * Default AST templates
  * alternative ast-types
+ * Should be excluded from front-end
  */
 function STRING(text)
 {
