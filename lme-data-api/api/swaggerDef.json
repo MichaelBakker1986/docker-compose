@@ -164,8 +164,7 @@
       "in": "path",
       "required": false,
       "type": "string",
-      "enum": [
-      ]
+      "enum": []
     }
   },
   "securityDefinitions": {},

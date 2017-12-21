@@ -82,10 +82,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
             });
             APIDefinition.paths["/id/{id}/figure/" + endPointname].post.responses["200"] = {
                 "description": "Success",
-                "schema": {
-                    "type": "array",
-                    "items": swaggerSchema
-                }
+                "schema": swaggerSchema
             }
         }
     }
