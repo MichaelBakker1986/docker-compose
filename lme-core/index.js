@@ -40,6 +40,7 @@ LMEService.prototype.addFunctions = function(plugin) {
  * TODO: move to tupleDefinition to support multiple tuple definition/tuple in tuple
  */
 // Convert tuple index to tuple number
+
 LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
     if (tupleindex !== undefined) {
@@ -51,19 +52,22 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
-    JSWorkBook.updateValues();
+    if (!context.isset) {
+        JSWorkBook.updateValues();
+        context.isset = true;
+    }
     //setvalue
     if (value !== undefined) {
         //choice(select) requests
         JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
+        /*
+                var values = [];
+                var rootNode = JSWorkBook.getSolutionNode(rowId);
 
-        var values = [];
-        var rootNode = JSWorkBook.getSolutionNode(rowId);
-
-        JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
-            values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-        }, 0);
-        return values;
+                JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
+                    values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
+                }, 0);*/
+        return [];
     } else {
         //getValue
         var values = [];
