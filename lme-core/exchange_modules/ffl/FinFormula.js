@@ -4,8 +4,7 @@ function finFormulaGeneric(buf) {
      * Choices fix, this is a problem for titles and hints containing ":" chars.
      * TODO: move to choice specific logic.
      */
-    var buf = buf.replace(/:/gm, ', ');
-    buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
+    var buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
     //temp case fix, <= lt,gt,lte,gte from Cases,
     buf = buf.replace(/\[\<\=/gm, '[');

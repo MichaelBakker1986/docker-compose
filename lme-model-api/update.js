@@ -129,10 +129,10 @@ function testAndDeploy() {
     const command = developer ? 'echo a' : 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
-        spawnChild('../demo-apps')
-        spawnChild('../lme-model-api')
-        spawnChild('../lme-data-api')
-        spawnChild('../proxy')
+        spawnChild(__dirname + '/../demo-apps')
+        spawnChild(__dirname + '/../lme-model-api')
+        spawnChild(__dirname + '/../lme-data-api')
+        spawnChild(__dirname + '/../proxy')
 
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');

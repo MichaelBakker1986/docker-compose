@@ -113,11 +113,25 @@ var simplified = {
         assert.equal(node.arguments.length, 2, formulaInfo.original);
         //TODO: for now we fix in math. but its better to compile this in the JS code
     },
-    //HSUM = function(fId, func, v, x, y, z, start, end) {
     //wants horizontale aggregation from values in between two given columns
     HSUM: function(formulaInfo, node) {
         node.callee.name = "HSUM";
-      /*  console.info('test')*/
+        if (node.arguments[0].type == 'Identifier') {
+            node.arguments[0] = {
+                "type": "MemberExpression",
+                "computed": true,
+                "object": {
+                    "type": "Identifier",
+                    "name": node.arguments[0].name
+                },
+                "property": {
+                    "type": "Identifier",
+                    "name": "all"
+                }
+            }
+        }
+
+        /*  console.info('test')*/
         /* node.arguments = [{
          "type": "Identifier",
          "name": "1"
