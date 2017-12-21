@@ -38,5 +38,5 @@ wb.createFormula('YearNumber[all]', 'YearNumberReferenceAll', 'value', false, 'd
 assert.equal(wb.get('YearNumberReferenceAll'), 2017);*/
 
 //Test HSUM function
-wb.createFormula('HSUM(YearNumber[all],0,18)', 'YearNumberReferenceHSUM', 'value', false, 'document', 'number')
+wb.createFormula('HSUM(YearNumber,0,18)', 'YearNumberReferenceHSUM', 'value', false, 'document', 'number')
 assert.equal(wb.get('YearNumberReferenceHSUM'), 38386);

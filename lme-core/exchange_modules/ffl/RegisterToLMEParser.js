@@ -97,7 +97,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         let trendformula = node[trend_formulaIndex];
         let valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
         if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
-            valueFormula = 'x.istrend ? ' + trendformula + ':' + valueFormula;
+            valueFormula = 'If(x.istrend,' + trendformula + ',' + valueFormula + ')';
         }
 
         if (type == 'select') {

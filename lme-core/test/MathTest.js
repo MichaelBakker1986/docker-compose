@@ -97,6 +97,12 @@ assert.equal(wb.get('DATAAVAILABLE'), false);
 wb.set('abc12', 'anyValue');
 assert.equal(wb.get('DATAAVAILABLE'), true);
 
+
+wb.createFormula("0", 'caseselectWithColon');
+let caseTest = 'Case(caseselectWithColon,[0, 576 || 1, 906 || 2, 535 || 3, 535])';
+wb.createFormula(caseTest, 'caseselectWithColonVariable')
+assert(wb.get('caseselectWithColonVariable'), 576);
+
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/
 /**

@@ -11,6 +11,8 @@ var tests = [
     './jsonValuesTest',
     './tupleTest',
     './apiTest',
+    './TrendNoTrendTest',
+    './CaseTest',
     './RegisterTest',
     './FinChoiceTest',
     './SwaggerDefinitionParserTest',
