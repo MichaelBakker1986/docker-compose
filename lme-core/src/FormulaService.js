@@ -9,7 +9,7 @@ var variables = []
 //the array index is used to be next formulaId
 var formulas = [];
 //make 100.000 entries, we start counting here for temporally formula's
-formulas[100000] = null;
+formulas[1000] = null;
 /**
  * Todo: add formula.frequency into the cache key?
  * the cache is a String based to Formula object cache,
@@ -28,7 +28,7 @@ FormulaService.prototype.visitFormulas = function(visitFunctionArg) {
             visitFunctionArg(formula);
 
         }
-        else if (i > 100000) {
+        else if (i > 1000) {
             visitFunctionArg(formula);
         }
     }
