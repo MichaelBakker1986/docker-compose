@@ -10,7 +10,7 @@ if (!global.MATRIX_VALUES) {
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
 
 var CalculationFacade = require('../../lme-core').CalculationFacade;
@@ -44,7 +44,7 @@ LmeAPI.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.importFFL2 = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl2')
+    this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.setColumnOffset = function(index) {
     this.lme.offset = parseInt(index);

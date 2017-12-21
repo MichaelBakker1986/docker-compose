@@ -10,7 +10,7 @@ V05ffl = V05ffl.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaft
 V05ffl = V05ffl.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
 V05ffl = V05ffl.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
 
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 
 
 LME.importFFL2BackwardsCompatible(V05ffl);

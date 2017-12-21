@@ -1,5 +1,5 @@
 require('../../lme-core/exchange_modules/presentation/webexport');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const modelAPI = require('../src/lme');
 const log = require('ff-log');
 const fs = require('fs');

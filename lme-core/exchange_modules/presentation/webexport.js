@@ -58,6 +58,8 @@ function changeAndCache(workbook, rowId, col, index, type) {
         },
         set: function(v) {
             var value;
+            //TODO: move preformatting, decorators to ValueFacade.
+            
             if (type == 'number' || type == 'currency') {
                 value = (v == null || v == '') ? null : (isNaN(v) ? v : parseFloat(v))
             } else {

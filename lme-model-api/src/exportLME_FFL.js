@@ -10,7 +10,7 @@ const fileType = '.ffl';
 const lmeAPI = require('./lme')
 const log = require('ff-log')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const CalculationFacade = require('../../lme-core').CalculationFacade;
 const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(ExcelLookup)

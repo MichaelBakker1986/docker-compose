@@ -1,5 +1,5 @@
 require('../../lme-core/exchange_modules/presentation/webexport');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');

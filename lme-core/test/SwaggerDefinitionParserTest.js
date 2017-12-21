@@ -1,5 +1,5 @@
 const assert = require('assert');
-require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../exchange_modules/swagger/swaggerParser');
 require('../../math/ff-math');
 PPMT = function() {

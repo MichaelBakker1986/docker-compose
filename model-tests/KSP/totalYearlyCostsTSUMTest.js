@@ -1,7 +1,7 @@
 //TODO: convert into JBehave story
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var SolutionFacade = require('../../lme-core/src/SolutionFacade')
 var log = require('ff-log')
 var assert = require('assert')

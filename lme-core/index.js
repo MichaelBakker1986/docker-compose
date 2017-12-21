@@ -2,7 +2,7 @@
  * user friendly API
  * TODO: Move tuple related work to FESFacade
  */
-require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
+require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
 var Context = require("./src/Context");

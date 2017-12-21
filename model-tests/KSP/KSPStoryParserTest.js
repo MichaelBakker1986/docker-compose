@@ -1,7 +1,7 @@
 var StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport');
 const assert = require('assert');
 const model = new LMEapi();

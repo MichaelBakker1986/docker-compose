@@ -4,7 +4,7 @@
  * @type {ok}
  */
 var assert = require('assert');
-require('../exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../exchange_modules/presentation/webexport');
 require('../../math')
 var CalculationFacade = require('../').CalculationFacade;

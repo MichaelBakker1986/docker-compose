@@ -17,7 +17,7 @@ function RegisterToLMEParser() {
 
 RegisterToLMEParser.prototype.name = 'ffl2'
 RegisterToLMEParser.prototype.status = 'green';
-RegisterToLMEParser.prototype.headername = '.finance ffl2';
+RegisterToLMEParser.prototype.headername = '.finance ffl';
 RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
     visitor(node, depth)
     const childs = node[this.childIndex];

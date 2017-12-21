@@ -16665,7 +16665,7 @@ Factory.prototype.create = function(register, input) {
 exports.Formatter = FFLFormatter;
 exports.FFLFormatter = new Factory();
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl2\\FFLFormatter.js","/lme-core\\exchange_modules\\ffl2",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\FFLFormatter.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"_process":38,"buffer":36}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -16781,7 +16781,7 @@ Register.prototype.walk = function(node, depth, visitor) {
     }
 }
 exports.Register = Register
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl2\\Register.js","/lme-core\\exchange_modules\\ffl2",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\Register.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"_process":38,"buffer":36}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -16811,7 +16811,7 @@ RegisterPlainFFLToLMEParser.prototype.parseData = function(data, workbook) {
 }
 exports.RegisterPlainFFLToLMEParser = RegisterPlainFFLToLMEParser;
 SolutionFacade.addParser(RegisterPlainFFLToLMEParser.prototype);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl2\\RegisterPlainFFLDecorator.js","/lme-core\\exchange_modules\\ffl2",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterPlainFFLDecorator.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"../../src/SolutionFacade":29,"./FFLFormatter":9,"./Register":10,"./RegisterToLMEParser":13,"_process":38,"buffer":36}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
@@ -17008,7 +17008,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     return formattedFFL;
 }
 exports.RegisterToFFL = RegisterToFFL;
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl2\\RegisterToFFL.js","/lme-core\\exchange_modules\\ffl2",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterToFFL.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"../../../model-tests/StringUtils":46,"_process":38,"buffer":36}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const SolutionFacade = require('../../src/SolutionFacade')
@@ -17028,9 +17028,9 @@ function RegisterToLMEParser() {
 
 }
 
-RegisterToLMEParser.prototype.name = 'ffl2'
+RegisterToLMEParser.prototype.name = 'ffl'
 RegisterToLMEParser.prototype.status = 'green';
-RegisterToLMEParser.prototype.headername = '.finance ffl2';
+RegisterToLMEParser.prototype.headername = '.finance ffl';
 RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
     visitor(node, depth)
     const childs = node[this.childIndex];
@@ -17207,7 +17207,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
 
 exports.RegisterToLMEParser = RegisterToLMEParser;
 SolutionFacade.addParser(RegisterToLMEParser.prototype);
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl2\\RegisterToLMEParser.js","/lme-core\\exchange_modules\\ffl2",undefined)
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterToLMEParser.js","/lme-core\\exchange_modules\\ffl",undefined)
 },{"../../../ast-node-utils/index":3,"../../src/SolutionFacade":29,"../ffl/FinFormula":14,"./RegisterToFFL":12,"_process":38,"buffer":36,"esprima":35,"ff-log":35}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
@@ -17749,7 +17749,7 @@ SolutionFacade.addParser(new WebExport())
  * user friendly API
  * TODO: Move tuple related work to FESFacade
  */
-require("./exchange_modules/ffl2/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
+require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
 var log = require("ff-log");
 var WorkBook = require("./src/JSWorkBook");
 var Context = require("./src/Context");
@@ -23837,7 +23837,7 @@ LmeAPI.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.importFFL2 = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl2')
+    this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.setColumnOffset = function(index) {
     this.lme.offset = parseInt(index);

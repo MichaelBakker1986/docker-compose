@@ -8,7 +8,7 @@ require('./KSPImportTest')
 require('./totalyearlycosttest')
 global.loglevel = 'debug'
 var FormulaService = require('../../lme-core/src/FormulaService')
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
 var log = require('ff-log')

@@ -1,5 +1,5 @@
-const FFLFormatter = require('../lme-core/exchange_modules/ffl2/FFLFormatter').Formatter
-const Register = require('../lme-core/exchange_modules/ffl2/Register').Register
+const FFLFormatter = require('../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
+const Register = require('../lme-core/exchange_modules/ffl/Register').Register
 
 function EconomicEditorView() {
     this.on = false;

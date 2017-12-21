@@ -2,13 +2,13 @@
  * editor variable is set to the window.
  */
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-const FFLFormatter = require('../../lme-core/exchange_modules/ffl2/FFLFormatter').FFLFormatter
-const ScorecardTool = require('../../lme-core/exchange_modules/ffl2/ScorecardTool').ScorecardTool
+const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').FFLFormatter
+const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
-const RegisterToFFL = require('../../lme-core/exchange_modules/ffl2/RegisterToFFL').RegisterToFFL
-const Register = require('../../lme-core/exchange_modules/ffl2/Register').Register
-const DebugManager = require('../../lme-core/exchange_modules/ffl2/DebugManager').DebugManager
-const ChangeManager = require('../../lme-core/exchange_modules/ffl2/ChangeManager').ChangeManager
+const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
+const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
+const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
+const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
 
 var fflModel = '';
 var params = window.location.href.split('#')
@@ -94,7 +94,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }
 
     $scope.dbModelConvert = function() {
-        $scope.fflType = '.ffl2'
+        $scope.fflType = '.ffl'
         Pace.track(function() {
             $.getJSON("model?model=" + windowModelName, function(data) {
                 currentIndexer = new RegisterToFFL(register, data.data);

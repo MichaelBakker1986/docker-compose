@@ -6,7 +6,7 @@
  */
 const fs = require('fs')
 const LMEapi = require('../../lme-model-api/src/lme');
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/screendefinition/screendefparser');
 const log = require('ff-log')

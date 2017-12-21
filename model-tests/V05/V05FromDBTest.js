@@ -1,5 +1,5 @@
-require('../../lme-core/exchange_modules/ffl2/RegisterToLMEParser')
-const Register = require('../../lme-core/exchange_modules/ffl2/Register')
+require('../../lme-core/exchange_modules/ffl/RegisterToLMEParser')
+const Register = require('../../lme-core/exchange_modules/ffl/Register')
 require('../../lme-core/exchange_modules/presentation/webexport')
 require('../../math')
 const excelplugin = require('../../excel-connect').xlsxLookup;

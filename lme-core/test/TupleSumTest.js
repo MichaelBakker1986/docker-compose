@@ -1,6 +1,6 @@
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook')
-require('../exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../exchange_modules/ffl/RegisterPlainFFLDecorator')
 var Context = require('../src/Context')
 var fs = require('fs')
 require('../../math')

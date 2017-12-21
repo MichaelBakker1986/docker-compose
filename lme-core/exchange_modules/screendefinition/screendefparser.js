@@ -2,7 +2,7 @@ var visitor = require('../../src/JSVisitor');
 var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var SolutionFacade = require('../../src/SolutionFacade');
 var AST = require('ast-node-utils').ast;
-var FinFormula = require('../ffl2/FinFormula');
+var FinFormula = require('../ffl/FinFormula');
 var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var parser = {
     name: 'screendefinition',

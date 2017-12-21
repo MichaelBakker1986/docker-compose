@@ -1,5 +1,5 @@
 var WorkBook = require('../../lme-core/src/JSWorkBook')
-require('../../lme-core/exchange_modules/ffl2/RegisterPlainFFLDecorator')
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var Context = require('../../lme-core/src/Context')
 var assert = require('assert')
 require('../../math')

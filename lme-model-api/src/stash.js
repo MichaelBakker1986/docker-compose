@@ -32,7 +32,7 @@ class Stash {
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {
-                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name + ' ' + (type == '.ffl2' ? 'FFL2' : 'FFL'))]).then((result) => {
+                return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name + ' ' + (type == '.ffl' ? 'FFL2' : 'FFL'))]).then((result) => {
                     if (result[0].stderr) throw Error(result[0].stderr)
                     let userID = uuid();
                     if (develop) {
