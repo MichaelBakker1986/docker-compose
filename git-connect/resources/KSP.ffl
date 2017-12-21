@@ -833,7 +833,7 @@ model KSP uses BaseModel
       title: "Food";
       frequency: column;
       locked: 1;
-      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup("YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
+      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup(null,"YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;

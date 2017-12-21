@@ -23,6 +23,9 @@ docker-compose -f docker-compose-db.yml up
 npm start
 
 #Release 1.0
+
+
+
 #DOCS
 #Dynamic assembling models via DB, like data, but also including dependencies to make subselects from models.
 #Authorization via property role: VIEWER|APPROVER|ADMIN Will generate the model dynamically from database. (only required and depending)
