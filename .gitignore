@@ -9,7 +9,7 @@ restapi/dbSettings.js
 
 *package-lock.json
 *.scssc
-
+*.cert
 git-connect/resources/_tmp_*
 git-connect/CODELISTS/**.pom
 git-connect/CODELISTS/*.pom
