@@ -7,7 +7,7 @@ const model = new LMEapi();
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
 const fflFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-const story = path.resolve(__dirname + '/MVO.story')
+const story = path.resolve(__dirname + '/mvo.story')
 const storyFile = require('fs').readFileSync(story, 'utf8');
 
 excelPlugin.initComplete('MVO').then(function(matrix) {
