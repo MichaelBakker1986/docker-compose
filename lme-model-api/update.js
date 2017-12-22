@@ -3,28 +3,28 @@ const express = require('express');
 const host = process.env.HOST || 'localhost'
 var now = require("performance-now")
 const app = express();
+const path = require('path')
 const httpServer = require('http').createServer(app);
 const request = require('request');
 const exec = require('child-process-promise').exec;
-const spawn = require('child-process-promise').spawn;
+const spawn = require('child_process').spawn;
 let busy = false;
 var childProcesses = {}
 const developer = (host === 'localhost');
+var debug = process.env.NODE_ENV !== 'production';
 
 function spawnChild(appname, args) {
-    var promise = spawn('node', [appname], {capture: ['stdout', 'stderr']})
-    var childProcess = promise.childProcess;
+    const childProcess = spawn('node', [appname], {capture: ['stdout', 'stderr']})
+
     childProcesses[appname] = childProcess;
-    childProcess.stdout.on('data', function(data) {
+    childProcess.stdout.on('data', (data) => {
         log(data.toString(), 'green');
     });
-    childProcess.stderr.on('data', function(data) {
+    childProcess.stderr.on('data', (data) => {
         log(data.toString(), 'red');
     });
-    promise.then(function() {
-        console.info('done');
-    }).catch(function(err) {
-        //NO-OP
+    childProcess.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
     });
 }
 
@@ -45,7 +45,7 @@ function update() {
             var start = now();
             busy = true;
             //npm install && bower install
-            var command = developer ? 'echo a' : 'git clean -f -x && git pull && cd .. && npm install && npm test';
+            var command = developer ? 'echo a' : 'git clean -f -x && git stash save --keep-index && git pull && cd .. && npm install && npm test';
             exec(command).then((result) => {
                 reDeploy()
                 fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');
@@ -129,11 +129,10 @@ function testAndDeploy() {
     const command = developer ? 'echo a' : 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
-        spawnChild(__dirname + '/../demo-apps')
-        spawnChild(__dirname + '/../lme-model-api')
-        spawnChild(__dirname + '/../lme-data-api')
-        spawnChild(__dirname + '/../proxy')
-
+        spawnChild(path.resolve(__dirname + '/../proxy'))
+        spawnChild(path.resolve(__dirname + '/../demo-apps'))
+        spawnChild(path.resolve(__dirname + '/../lme-model-api'))
+        spawnChild(path.resolve(__dirname + '/../lme-data-api'))
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
         log(err.toString(), 'red');

@@ -29,6 +29,13 @@ function clientErrorHandler(err, req, res, next) {
 }
 
 app.listen(port, () => {
+    /**
+     * Services register to to the proxy
+     */
+    app.post('*/register/service', function(req, res) {
+        console.info('service registered')
+        res.json({status: 'ok'})
+    })
     app.use('*/showcase', proxy({target: 'http://' + host + ':8083', changeOrigin: true, logLevel: 'silent'}));
     app.post('*/preview', proxy({
         target: 'http://' + host + ':8083',

@@ -1,5 +1,4 @@
 var request = require('request')
-var rp = require('request-promise');
 var counter = 1000;
 var modelAPI = require('../src/lme')
 var newModel = new modelAPI();
