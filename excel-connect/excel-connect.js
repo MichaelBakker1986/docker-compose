@@ -1,5 +1,6 @@
 /**
  * Bridge between excel files and LME
+ * The MatrixLookup function is found in math
  */
 const Excel = require('exceljs');
 const log = require('ff-log');
@@ -134,38 +135,7 @@ function readFunction(wb) {
     // This variable should be available in the client.
     return matrix
 }
-
-
-/**
- * MATRIX_VALUES is global declared with table names.
- * See @FormulaService
- */
-function doMatrixLookup(xlsfileName, tableName, row, col) {
-    if (log.TRACE)
-        if (!MATRIX_VALUES[tableName]) log.trace('Defined matrix name not found [%s]:[%s:%s]', tableName, row, col);
-    const table = MATRIX_VALUES[tableName];
-    if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
-        if (log.TRACE) log.trace('Matrix call [%s]:[%s:%s] xlsxValue:[%s]', tableName, row, col, table.xasValues[row][col]);
-        return table.xasValues[row][col];
-    } else if (table && table.xasValues) {
-        let lastidx = null;
-        for (var key in table.xasValues) {
-            if (key <= row) {
-                lastidx = key;
-            } else {
-                break;
-            }
-        }
-        if (lastidx) return table.xasValues[lastidx][col];
-    }
-    return NA;
-}
-
-var entries = {
-    'MatrixLookup': doMatrixLookup
-};
-entries.Matrixlookup = entries.MatrixLookup;
-MatrixLookup = entries.MatrixLookup
+var entries = {};
 exports.xlsxLookup = {
     name: 'xlsx-lookup',
     entries: entries,

@@ -65,25 +65,25 @@ SolutionFacade.prototype.gatherFormulaProperties = function(modelName, propertie
  * Creates Formula/Property if not exists
  * Initialize Functionmap
  */
-SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId, displaytype) {
+SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId, displaytype, frequency) {
     //create a formula for the element
     var ast = esprima.parse(formulaAsString);
     //create Solution if not exists.
     var solution = this.createSolution(solutionName);
     //integrate Property with Formula
-    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype);
+    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype, frequency);
     //integrate one formula from just created Solution
     this.initFormulaBootstrap(solution.formulas);
 };
 /**
  * Called by parsers
  */
-SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype) {
+SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
     if (displaytype) property.displaytype = displaytype;
-    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body);
+    var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency);
     return solution.createNode(rowId, colId, formulaId, displaytype);
 };
 
@@ -147,7 +147,7 @@ SolutionFacade.prototype.properties = {
 };
 SolutionFacade.prototype.functions = {}
 SolutionFacade.prototype.addFunction = function(solution, functionName, functionBody) {
-    var node = this.createUIFormulaLink(solution, functionName, 'function', functionBody, 'number');
+    var node = this.createUIFormulaLink(solution, functionName, 'function', functionBody, 'number', 'document');
     const findFormulaByIndex = FormulaService.findFormulaByIndex(node.ref);
     findFormulaByIndex.params = "$1,$2"
 }

@@ -8,11 +8,11 @@ var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',
     //expection json as String for screen definitions
-    parseData: function (json, workbook) {
+    parseData: function(json, workbook) {
         var data = JSON.parse(json);
         var solution = SolutionFacade.createSolution(data.modelName || workbook.getSolutionName());
 
-        visitor.travelOne(data, null, function (keyArg, node, context) {
+        visitor.travelOne(data, null, function(keyArg, node, context) {
             //keyArg !== null &&  is a hack, prevents RootNode from being added;
             if (node !== null && node !== undefined && keyArg !== null && (node.variableName || node.name) && !Array.isArray(node)) {
                 var parent = node._parent;
@@ -24,10 +24,10 @@ var parser = {
         });
         return solution;
     },
-    deParse: function (rowId, workbook) {
+    deParse: function(rowId, workbook) {
         var screenSolution = SolutionFacade.createSolution(workbook.getSolutionName());
 
-        PropertiesAssembler.visitProperty(rowId, function (elem) {
+        PropertiesAssembler.visitProperty(rowId, function(elem) {
             //create output node
             var uielem = {
                 name: elem.rowId,
@@ -57,12 +57,13 @@ function addnode(solution, rowId, node, parentId, referId) {
         //throw Error()
     }
     //create formula if not exist
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType");
+    var uiNode = SolutionFacade.createUIFormulaLink(solution, rowId, 'value', AST.UNDEFINED(), "AmountAnswerType", 'document');
     //only for the value tree a Tree structure is build, properties only part of the uiNode, not a child
     //uiNode.referId = referId;
     solution.setDelegate(uiNode, node);
     solution.setParentName(uiNode, parentId);
     var titlestring = node.name || node.description || rowId;
-    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(titlestring));
+    SolutionFacade.createUIFormulaLink(solution, rowId, 'title', AST.STRING(titlestring), undefined, 'document');
 }
+
 SolutionFacade.addParser(parser);

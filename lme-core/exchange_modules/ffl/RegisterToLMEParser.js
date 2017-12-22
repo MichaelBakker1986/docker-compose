@@ -120,14 +120,16 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
         }
+        const frequency = node[fflRegister.frequencyIndex] || 'column';
 
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type);
+        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
-        uiNode.frequency = node[fflRegister.frequencyIndex] || 'column';
+
+        uiNode.frequency = frequency;
 
         /**
          * Tuple properties
@@ -156,7 +158,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             const index = formulaIndexes[i];
             if (node[index]) {
                 if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]])
-                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null));
+                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null), undefined, frequency);
             }
         }
     });

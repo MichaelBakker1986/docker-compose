@@ -1,9 +1,8 @@
-MVO Score Basic
+@MVO Score Basic
 @Author Hilde de Jong
 @themes MVO Score basic
-
-Scenario: Verify MVO Score calculations
-Given a document of the model type MVO
+@Scenario: Verify MVO Score calculations
+@Given a document of the model type MVO
 When variable Q_MAP01_VRAAG01 is set to 1 for document
 And variable Q_MAP01_VRAAG02 is set to 1 for document
 And variable Q_MAP01_VRAAG03 is set to 1 for document

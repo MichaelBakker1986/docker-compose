@@ -48,7 +48,7 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
         oop.inherits(DocCommentHighlightRules, TextHighlightRules);
         var ExampleHighlightRules = function() {
             var keywordMapper = this.createKeywordMapper({
-                "variable.language": "unscalable|scorecard|model|boolean|radio|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
+                "variable.language": "unscalable|scorecard|model|boolean|radio|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
                 "keyword": "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
                 "comment": "#|Memo1",
                 "storage.type": "&",

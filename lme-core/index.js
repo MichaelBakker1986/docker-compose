@@ -60,13 +60,6 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
     if (value !== undefined) {
         //choice(select) requests
         JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
-        /*
-                var values = [];
-                var rootNode = JSWorkBook.getSolutionNode(rowId);
-
-                JSWorkBook.visitProperties(rootNode, function(node, yax, treeDepth) {
-                    values = values.concat(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-                }, 0);*/
         return [];
     } else {
         //getValue
@@ -98,7 +91,6 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     const flattenValues = {}
     if (rootNode) {
-
         JSWorkBook.visitProperties(rootNode, function(node, yax) {
             const nodeName = node.rowId;
             const parentName = node.parentName.split("_").slice(0, -1).join("_")

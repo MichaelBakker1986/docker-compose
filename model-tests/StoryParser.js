@@ -1,28 +1,32 @@
+const log = require('ff-log')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     valueset: {
-        regex: /variable (\w+) is set to (\d+) for document/,
-        call: function(args) {
+        regex: /variable (\w+) is set to ([0-9.,]+) for document/,
+        call: function(workbook, linenumber, line, args) {
             var $1 = args[0], $2 = args[1]
             return [function() {
-                LME.nodes[$1].value = $2
+                workbook.set($1, $2)
+                if (log.DEBUG) log.debug('[%s]: %s %s', linenumber, $1, $2)
                 return {
                     status: 'info',
-                    regeex: /variable (\w+) is set to (\d+) for document/,
+                    regeex: /variable (\w+) is set to ([0-9.,]+) for document/,
                     message: 'set variable ' + $1 + ' to ' + $2
                 }
             }]
         }
     },
-    assert: {
+    assertDocumentValue: {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
-        regex: /variable (\w+) should have (\d+) decimals rounded value (\d+)/,
-        call: function(args) {
-            var $1 = args[0], $2 = args[1], $3 = args[2]
+        //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
+        regex: /variable (\w+) should have (\d+) decimals rounded value ([0-9.,]+)\s*(?:(?:for column with id (\d+))|(for document))/,
+        call: function(workbook, linenumber, line, args) {
+            var $1 = args[0], $2 = args[1], $3 = args[2], $4 = args[3]
             return [function() {
                 var result = {};
-                let rawValue = LME.nodes[$1].value;
+                let rawValue = workbook.get($1, 'value', (parseInt($4) || 1) - 1);
                 let calculatedValue = rawValue.toFixed($2);
+                if (log.DEBUG) log.debug('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, $1, $2, $3)
                 if (calculatedValue != $3) {
                     result.status = 'error'
                     result.message = calculatedValue + ' is not ' + $3 + ' raw value ' + rawValue
@@ -36,7 +40,9 @@ const functionMapper = {
     }
 }
 
-function StoryParser(story) {
+function StoryParser(story, filename, workbook) {
+    this.filename = filename;
+    this.workbook = workbook;
     this.lines = story.split('\n')
     this.calls = [];
     this.results = {
@@ -50,21 +56,25 @@ function StoryParser(story) {
 }
 
 StoryParser.prototype.start = function() {
-    for (var i = 0; i < this.lines.length; i++) {
-        var line = this.lines[i];
+    for (var lineNumber = 0; lineNumber < this.lines.length; lineNumber++) {
+        let jebehaveMatchFound = false;
+        var line = this.lines[lineNumber];
+        if (line.startsWith('@')) continue;//just meta-data
         for (var mappedKey in functionMapper) {
             if (line.match(functionMapper[mappedKey].regex)) {
-                let functions = functionMapper[mappedKey].call(line.match(functionMapper[mappedKey].regex).slice(1));
+                jebehaveMatchFound = true;
+                let functions = functionMapper[mappedKey].call(this.workbook, lineNumber, line, line.match(functionMapper[mappedKey].regex).slice(1));
                 const lineAction = {
                     line: {
                         line: line,
-                        lineNumber: i
+                        lineNumber: lineNumber
                     },
                     functions: functions
                 }
                 this.calls.push(lineAction)
             }
         }
+        if (!jebehaveMatchFound) log.warn('No match [%s] [%s]:[%s]', this.filename, lineNumber, line.trim())
     }
 }
 StoryParser.prototype.call = function() {

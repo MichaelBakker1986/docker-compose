@@ -90,15 +90,16 @@ function addAssociation(index, property, associationType) {
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body) {
+FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency) {
+    assert(frequency,'A formula must have a frequency')
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
     var key = escodegen.generate(AST.EXPRESSION(body));
     //if not locked and the formula isn't already cached, we can reuse it
     //if not locked, its not possible to re-use since the user to override the value of the formula
     //when running in DEBUG-MODUS, we cannot re-use Formula's since they will result in incorrect method calls
-    if (false && locked && cache[key] !== undefined) {
-        formula = cache[key];
+    if (locked && cache[frequency + "_" + key] !== undefined) {
+        formula = cache[frequency + "_" + key];
     }
     else {
         //else we have to create a new formula

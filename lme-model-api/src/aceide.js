@@ -106,7 +106,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }
     $scope.runJBehaveTest = function() {
         var annotations = []
-        let storyParser = new StoryParser(aceEditor.getValue());
+        let storyParser = new StoryParser(aceEditor.getValue(), windowModelName + '.story', LMEMETA.lme);
         storyParser.message = function(event) {
             annotations.push({
                 row: event.line,
