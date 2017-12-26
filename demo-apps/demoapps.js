@@ -1,59 +1,73 @@
-var port = 8083;
+const port = 8083;
+const proxyhost = process.env.PROXY_HOST || 7080
 const host = process.env.HOST || 'localhost'
-var proxy = require('express-http-proxy');
-var compression = require('compression')
-var expressStaticGzip = require("express-static-gzip");
-var app = require('express')();
+const request = require('request-promise-json');
+const log = require('ff-log')
+const compression = require('compression')
+const expressStaticGzip = require("express-static-gzip");
+const app = require('express')();
 app.use(require("express-no-favicons")());
 app.use(require('cors')());
 app.use(compression())
-
 
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
 app.use('/', expressStaticGzip(__dirname + "/monli/"));
-app.use('/', expressStaticGzip(__dirname + "/node_modules/"));
+app.use('/id/:id/font-awesome', expressStaticGzip(__dirname + "/node_modules/font-awesome"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
-app.use('/', expressStaticGzip(__dirname + "/angular-demo/"));
-app.use('/', expressStaticGzip(__dirname + "/monli/"));
-
-//Update proxies
-app.get('*/update/git/notifyCommit', proxy('http://' + host + ':8081/update/git/notifyCommit'));
-app.get('*/hasUpdates', proxy('http://' + host + ':8081'));
 
 //proxies
-app.all('*/id/:id/data/:dataid', proxy('http://' + host + ':8085'));
 app.use('*/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
-
-app.get('*/data-docs', function(req, res) {
-    res.redirect('http://' + host + ':8085/docs/?url=%2Fapi-docs%3Fabc%3D1#/default/idRetrieveFigures');
-});
-app.get('*/model-docs', function(req, res) {
-    res.redirect('http://' + host + ':8080/docs/?url=%2Fapi-docs#/default/idRetrieveModels');
-});
-//IDE proxies
-app.get('*/excel/*', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/excelide.js', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/model', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/ui_showcase.js', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/engineonly.js', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/tmp_model/*', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.get('*/aceide.js', proxy('http://' + host + ':8080', {limit: '50mb'}))
-app.post('*/saveFFL_LME', proxy('http://' + host + ':8080', {limit: '50mb'}));
-app.post('*/preview', proxy('http://' + host + ':8080', {limit: '50mb'}));
-app.get('*/models', proxy('http://' + host + ':8080/models'));
-app.get('*/branches', proxy('http://' + host + ':8080/branches'));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
 
-app.listen(port, function() {
+app.listen(port, () => {
     var domain = host + ':' + port;
+
+    //talk with the proxy
+    const routes = [];
+    app._router.stack.forEach(function(r) {
+        if (r.route && r.route.path) {
+            routes.push(r.route.path)
+        }
+    })
+    routes.push('*.html')
+    routes.push('*.css')
+    routes.push('*.ffl')
+    routes.push('*/adminlte.min.js')
+    routes.push('*/demo.js')
+    routes.push('*/grid_bootstrap.js')
+    routes.push('*.woff2')
+    routes.push('*.woff')
+    routes.push('*.ttf')
+    routes.push('*MVO.js*')
+    routes.push('*KSP.js*')
+    routes.push('*/ace.js')
+    routes.push('*/promotion.js')
+    routes.push('*/monli.js')
+    routes.push('*/monli.ico')
+    routes.push('*/showcase.js')
+    routes.push('*.svg')
+    routes.push('*/ext-language_tools.js')
+    routes.push('*/fflmode.js')
+    routes.push('*/bootstrap.min.js')
+    routes.push('*/theme-tomorrow.js')
+    routes.push('*.jpg')
+    routes.push('*.story')
+    routes.push('*.xlsx')
+    const route = routes.join(',')
+    request.get('http://' + host + ':' + proxyhost + '/register/service/fs-api/' + host + '/' + port + '/' + route).then(function(data) {
+        if (log.DEBUG) log.debug(data);
+    }).catch(function(err) {
+        log.error('Failed to register ', err);
+    });
+
     console.info(
         '<span>DEMO apps: </span>\n' +
         '<a href="http://' + domain + '/id/DEMO/grid_bootstrap.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +

@@ -1,19 +1,25 @@
+/**
+ * The server will not update from remote in developer mode.
+ * @type {number}
+ */
 const port = 8081;
+const proxyhost = process.env.PROXY_HOST || 7080
 const express = require('express');
 const host = process.env.HOST || 'localhost'
-var now = require("performance-now")
+const now = require("performance-now")
+const request = require('request-promise-json');
 const app = express();
 const path = require('path')
-const httpServer = require('http').createServer(app);
-const request = require('request');
+
 const exec = require('child-process-promise').exec;
 const spawn = require('child_process').spawn;
-let busy = false;
-var childProcesses = {}
+let busyRedeploying = false;
+const childProcesses = {}
 const developer = (host === 'localhost');
-var debug = process.env.NODE_ENV !== 'production';
+const debug = process.env.NODE_ENV !== 'production';
+const log = require('./Hipchat-connect').log
 
-function spawnChild(appname, args) {
+function spawnChildProcess(appname, args) {
     const childProcess = spawn('node', [appname], {capture: ['stdout', 'stderr']})
 
     childProcesses[appname] = childProcess;
@@ -28,34 +34,34 @@ function spawnChild(appname, args) {
     });
 }
 
-function reDeploy() {
+function redeploy() {
     log('Tests passed deploying stack ');
     for (var key in childProcesses) {
         childProcesses[key].kill('SIGKILL')
-        spawnChild(key)
+        spawnChildProcess(key)
     }
-    busy = false;
+    busyRedeploying = false;
 }
 
-function update() {
+function pullBranchAndRedeploy() {
     return new Promise((fulfill, reject) => {
-        if (busy) {
+        if (busyRedeploying) {
             reject('Busy restarting.');
         } else {
-            var start = now();
-            busy = true;
+            let start = now();
+            busyRedeploying = true;
             //npm install && bower install
-            var command = developer ? 'echo a' : 'git clean -f -x && git stash save --keep-index && git pull && cd .. && npm install && npm test';
+            const command = developer ? 'echo developer test message' : 'git clean -f -x && git stash save --keep-index && git pull && cd .. && npm install && npm test';
             exec(command).then((result) => {
-                reDeploy()
+                redeploy()
                 fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');
             }).catch((err) => {
                 log('Tests failed, reinstalling modules and try again.', 'green');
-                exec('cd .. && npm install && npm test').then(function(result) {
-                    reDeploy()
+                exec('cd .. && npm install && npm test').then((result) => {
+                    redeploy()
                     fulfill('Successful redeploy stack in [' + (now() - start).toFixed(3) + ']ms');
                 }).catch((err) => {
-                    busy = false;
+                    busyRedeploying = false;
                     log(err.toString(), 'red');
                     reject('Fail restarting ' + err)
                 });
@@ -64,15 +70,15 @@ function update() {
     });
 }
 
-app.get('*/update/git/notifyCommit', function(req, res) {
-    update().then((result) => {
+app.get('*/update/git/notifyCommit', (req, res) => {
+    pullBranchAndRedeploy().then((result) => {
         res.end(result.toString());
     }).catch((err) => {
         res.end(err.toString());
     })
 });
 
-app.get('*/hasUpdates', function(req, res) {
+app.get('*/hasUpdates', (req, res) => {
     checkForUpdates().then((result) => {
         res.end(result.toString());
     }).catch((err) => {
@@ -82,6 +88,7 @@ app.get('*/hasUpdates', function(req, res) {
 
 function checkForUpdates() {
     return new Promise((fulfill, reject) => {
+        if (developer) fulfill({hasChanges: false})
         var command = 'git remote update && git status -uno'
         //'git diff --stat origin/master';
         exec(command).then((result) => {
@@ -106,46 +113,36 @@ function checkForUpdates() {
     });
 }
 
-function send(text, level) {
-    request.post({
-            url: 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + process.env.HIPCHAT_API_KEY,
-            json: {
-                "color": level,
-                "message": "[" + host + "] " + text
-            }
-        }, (err, res, body) => {
-            console.info(err ? "" + err : 'Hipchat post ok')
-        }
-    )
-}
 
-httpServer.listen(port, () => {
+app.listen(port, () => {
+    const routes = []
+    app._router.stack.forEach(function(r) {
+        if (r.route && r.route.path) {
+            routes.push(r.route.path)
+        }
+    })
+    request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
+        if (log.DEBUG) log.debug(data);
+    }).catch(function(err) {
+        log.error('Failed to register ', err);
+    });
     log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
 });
 
 function testAndDeploy() {
-    log('Running integration tests on server ' + host, 'info')
+    if (!developer) log('Running integration tests on server ' + host, 'info')
     var start = now();
-    const command = developer ? 'echo a' : 'cd .. && npm install && npm test'
+    const command = developer ? 'echo test message' : 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
+        spawnChildProcess(path.resolve(__dirname + '/../proxy'))
+        spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
+        spawnChildProcess(path.resolve(__dirname + '/../lme-model-api'))
+        spawnChildProcess(path.resolve(__dirname + '/../lme-data-api'))
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
-        spawnChild(path.resolve(__dirname + '/../proxy'))
-        spawnChild(path.resolve(__dirname + '/../demo-apps'))
-        spawnChild(path.resolve(__dirname + '/../lme-model-api'))
-        spawnChild(path.resolve(__dirname + '/../lme-data-api'))
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
         log(err.toString(), 'red');
     });
 }
 
-testAndDeploy();
-
-function log(message, levelArg) {
-    if (message && !developer) {
-        send(message, levelArg || 'green');
-    }
-    console.info(message);
-}
-
-exports.send = send;
+if (!developer) testAndDeploy();

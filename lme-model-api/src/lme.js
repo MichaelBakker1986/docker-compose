@@ -115,12 +115,10 @@ LmeAPI.prototype.persistData = function(callBack) {
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || 'MVO';
     let userID = params[1] || 'DEMO'
-    let liveUrl = 'transformFFL_LME/' + self.modelName + '.js'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + 'data/' + self.lme.context.saveToken;
-    http.open("POST", url, true);
-    http.setRequestHeader("Content-type", "application/json");
+    http.open("POST", 'saveUserData', true);
+    http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
@@ -134,7 +132,10 @@ LmeAPI.prototype.persistData = function(callBack) {
         callBack(http.responseText)
     };
 
-    http.send(JSON.stringify({data: self.exportData()}));
+    http.send(JSON.stringify({
+        token: self.lme.context.saveToken,
+        data: self.exportData()
+    }));
     return http;
 }
 module.exports = LmeAPI;

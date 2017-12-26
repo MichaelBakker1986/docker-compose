@@ -1,6 +1,8 @@
 const exec = require('child-process-promise').exec;
 const host = process.env.HOST || 'localhost'
+const proxyhost = process.env.PROXY_HOST || 7080
 const port = 8080;
+const request = require('request-promise-json');
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
@@ -28,12 +30,12 @@ const fs = require('fs')
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-app.use('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
+app.get('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
 }));
-app.use('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
+app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     cache: true,
     gzip: true,
     insertGlobals: true,
@@ -41,12 +43,12 @@ app.use('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     minify: true,
     precompile: true
 }));
-app.use('*/aceide.js', browserify(__dirname + '/src/aceide.js', {
+app.get('*/aceide.js', browserify(__dirname + '/src/aceide.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
 }));
-app.use('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
+app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
@@ -139,6 +141,18 @@ app.post('*/excel/:model', function(req, res) {
     });
 });
 require('./api-def').setup(app)
-app.listen(port, () => {
-    console.info('<span>LME model: </span><a href="' + domain + 'docs">model-api</a>')
+
+app.listen(port, (application) => {
+    //talk with the proxy
+    const routes = ['*/model-docs*']
+    app._router.stack.forEach(function(r) {
+        if (r.route && r.route.path) {
+            routes.push(r.route.path)
+        }
+    })
+    request.get('http://' + host + ':' + proxyhost + '/register/service/model-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
+        if (log.DEBUG) log.debug(data);
+    }).catch(function(err) {
+        log.error('Failed to register ', err);
+    });
 });

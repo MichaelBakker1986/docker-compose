@@ -26,6 +26,7 @@
     "performance-now": "^2.1.0",
     "pg": "^7.4.0",
     "promise": "^7.1.1",
+    "request-promise-json": "^1.0.4",
     "swagger-jsdoc": "^1.9.7",
     "swaggerize-express": "^4.0.5",
     "swaggerize-ui": "^1.0.1",

@@ -69,11 +69,11 @@ module.exports.setup = function(app) {
     /**
      * Store entered values supplied by the client
      */
-    app.post('*/id/:userId/data/:id', function(req, res) {
-        var now = new Date();
-        let newChildId = uuid()
-        var parentUuid = req.params.id;
-        var dbData = []
+    app.post('*/id/:userId/saveUserData', function(req, res) {
+        const now = new Date();
+        const newChildId = uuid()
+        const parentUuid = req.body.token;
+        const dbData = []
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
             dbData.push([newChildId, entry.varName, entry.colId, entry.value])

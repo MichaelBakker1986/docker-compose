@@ -11,7 +11,7 @@
   "produces": [
     "application/json"
   ],
-  "host": "::8080",
+  "host": "::7080",
   "basePath": "/",
   "paths": {
     "/branches": {

@@ -40,7 +40,7 @@ class Stash {
                         log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + require('os').hostname() + '" && git push && git rev-parse HEAD';
+                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + host + '" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
                         var output = ok.stdout.split('\n');
                         const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
@@ -79,7 +79,6 @@ class Stash {
 
     branches() {
         let command = develop ? "git branch" : "git ls-remote --heads";
-        //log.info("Do command: [" + command + "]");
         return exec(command)
             .then(function(result) {
                 //split results with tabs and newlines, extract only the branchnames

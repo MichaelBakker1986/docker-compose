@@ -2,6 +2,7 @@ const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
 const log = require('ff-log')
 exports.orm = Promise.all([
+    //acquireTimeout: 1000000
     orm.connectAsync(dbConnectString).then(async (db) => {
         db.use(require('orm-timestamps'), {
             createdProperty: 'created_at',

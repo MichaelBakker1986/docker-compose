@@ -11,10 +11,10 @@
   "produces": [
     "application/json"
   ],
-  "host": "::8085",
+  "host": "::7080",
   "basePath": "/",
   "paths": {
-    "/id/{id}/data": {
+    "/id/{id}/saveUserData/{dataId}": {
       "get": {
         "summary": "Retrieve all values identified by {id}.",
         "operationId": "idRetrieveFigures",
@@ -41,13 +41,26 @@
       },
       "post": {
         "summary": "Store all values identified by {id}.",
-        "operationId": "idStoreFigures",
+        "operationId": "idStoreFiguresPost",
         "produces": [
+          "application/json"
+        ],
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
             "$ref": "#/parameters/ContextId"
+          },
+          {
+            "$ref": "#/parameters/DataId"
+          },
+          {
+            "type:": "array",
+            "items": {
+              "in": "body",
+              "$ref": "#/definitions/Value"
+            }
           }
         ],
         "responses": {
@@ -56,7 +69,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/Value"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Value"
+                  }
                 }
               }
             }
@@ -114,7 +130,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/definitions/Value"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Value"
+                  }
                 }
               }
             }
@@ -137,6 +156,13 @@
     "ContextId": {
       "name": "id",
       "description": "Unique ID",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "DataId": {
+      "name": "dataId",
+      "description": "Unique data ID",
       "in": "path",
       "required": true,
       "type": "string"
