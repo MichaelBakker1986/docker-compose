@@ -9,6 +9,7 @@ const express = require('express');
 const app = express();
 const proxy = require('http-proxy-middleware');
 const log = require('ff-log')
+const morgan = require('morgan')
 app.use(require('express-favicon')());
 app.use(require('cors')())
 app.set('port', port)
@@ -16,21 +17,17 @@ app.set('host', host)
 app.use(require('method-override')())
 app.use(errorHandler)
 app.use(clientErrorHandler)
+app.use(morgan('combined'))
 
 function errorHandler(err, req, res, next) {
-    if (res.headersSent) {
-        return next(err)
-    }
+    if (res.headersSent) return next(err)
     res.status(500)
     res.render('error', {error: err})
 }
 
 function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) {
-        res.status(500).send({error: 'Something failed!'})
-    } else {
-        next(err)
-    }
+    if (req.xhr) res.status(500).send({error: 'Something failed!'})
+    else next(err)
 }
 
 /**

@@ -23,7 +23,8 @@ docker-compose -f docker-compose-db.yml up
 npm start
 
 #Release 1.0
-
+#All calls are proxied through 7080 Proxy.js
+#Authentication via auth-facebook on port
 
 
 #DOCS

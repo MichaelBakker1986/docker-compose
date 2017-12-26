@@ -14,7 +14,6 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
-app.use('/', expressStaticGzip(__dirname + "/monli/"));
 app.use('/id/:id/font-awesome', expressStaticGzip(__dirname + "/node_modules/font-awesome"));
 app.use('/', expressStaticGzip(__dirname + "/"));
 

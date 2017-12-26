@@ -1,10 +1,9 @@
-var express = require('express');
-var request = require('request')
-var httpProxy = require('http-proxy');
-var proxy = httpProxy.createProxyServer({});
-var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
-var port = 8091;//process.env.FACEBOOK_PROXY_PORT || 8091;
+const express = require('express');
+const httpProxy = require('http-proxy');
+const proxy = httpProxy.createProxyServer({});
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
+const port = process.env.FACEBOOK_PROXY_PORT || 8091;
 const internalRedirectUrl = "http://localhost:" + 7080;
 const domain = 'appmodel.org'
 passport.use(new Strategy({
