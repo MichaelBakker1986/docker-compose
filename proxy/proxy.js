@@ -21,7 +21,7 @@ app.set('host', host)
 app.use(require('method-override')())
 app.use(errorHandler)
 app.use(clientErrorHandler)
-app.use(morgan('combined'))
+if (log.DEBUG) app.use(morgan('combined'))
 
 function errorHandler(err, req, res, next) {
     if (res.headersSent) return next(err)
