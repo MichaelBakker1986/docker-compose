@@ -5,12 +5,13 @@
  */
 const port = process.env.PROXY_PORT || 7080;
 const host = process.env.HOST || 'localhost';
-const proxyLogLevel = process.env.ENV == 'debug' ? 'debug' : 'silent'
+
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
 const proxy = require('http-proxy-middleware');
 const log = require('ff-log')
+const proxyLogLevel = (log.DEBUG ? 'debug' : 'silent')
 const morgan = require('morgan')
 
 app.use(require('express-favicon')());
@@ -55,7 +56,7 @@ app.get('/register/service/:name/:host/:port/*', function(req, res) {
             limit: '50mb'
         }));
     }
-    log.info('service registered [' + name + '] http://' + host + ':' + port + '/' + routes + '] ~ > ' + ' http://' + targetProxyHost + ':' + targetProxyPort)
+    if (log.DEBUG) log.debug('service registered [' + name + '] http://' + host + ':' + port + '/' + routes + '] ~ > ' + ' http://' + targetProxyHost + ':' + targetProxyPort)
     res.send('ok')
 })
 
