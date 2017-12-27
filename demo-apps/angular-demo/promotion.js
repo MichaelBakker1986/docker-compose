@@ -8,7 +8,7 @@ angular
         $scope.widgets = [
             {name: 'IDE', description: 'IDE DEMO Application', href: 'aceide.html'},
             {name: 'STUDIEKOSTEN', description: 'Monli Hoeveel kost een studie?', href: 'HoeveelKostEenStudie.html'},
-            {name: 'MVO', description: 'MVO Bootstrap', href: 'grid_bootstrap.html'},
+            {name: 'MVO', description: 'MVO Bootstrap', href: 'scorecard.html'},
             {name: 'SHOWCASE', description: 'Showcase example', href: 'showcase.html'},
             /* {name: 'DESIGNER', description: 'Designer ide', href: 'ui_designer.html'},*/
             {name: 'BASICS', description: 'Most Basic Angular example', href: 'basic_example.html'},

@@ -18,7 +18,7 @@ class Stash {
                 return exec('node ' + __dirname + '/exportLME_FFL.js ' + tempHash).then((result) => {
                     if (result.stderr) throw Error(result.stderr)
                     let userID = uuid();
-                    console.info('<span>Temporary model update:</span><a href="http://' + host + ':8083/id/' + userID + '/grid_bootstrap.html#' + tempHash + '&' + userID + '">' + name + '</a><span></span>');
+                    console.info('<span>Temporary model update:</span><a href="http://' + host + ':7080/id/' + userID + '/scorecard.html#' + tempHash + '&' + userID + '">' + name + '</a><span></span>');
                     return tempHash;
                 }).catch((err) => {
                     throw Error('Failed to write or compile javascript', err);

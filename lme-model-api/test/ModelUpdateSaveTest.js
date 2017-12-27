@@ -44,8 +44,7 @@ class IntegrationTest {
         this.requestLoops("GET", "0/models")
         this.requestLoops("GET", "0/DEMO/transformFFL_LME/KSP")
         this.requestLoops("GET", "0/branches")
-        this.requestLoops("POST", "0/TEST/saveFFL_LME", {
-            model: 'TEST',
+        this.requestLoops("POST", "0/TEST/saveFFLModel/TEST", {
             data: '//' + counter++ + '\n' + this.fflFile
         })
 

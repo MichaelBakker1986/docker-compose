@@ -34,6 +34,19 @@ function JSWorkBook(context) {
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
+JSWorkBook.prototype.setColumnOffset = function(delta) {
+    let newOffset = this.offset
+    if (delta == 'next') newOffset++
+    else if (delta == 'previous') newOffset--
+    newOffset = Math.min(this.xaxis.length - 6, Math.max(0, newOffset))
+    if (newOffset != this.offset) {
+        this.offset = newOffset
+        this.context.calc_count++;
+    }
+}
+JSWorkBook.prototype.getTimeViews = function() {
+    return this.xaxis;
+}
 JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
     this.solution = solution;
@@ -94,7 +107,7 @@ function validateImportedSolution() {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
             //iterate all formula-sets to test 100%
-            ValueFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -129,7 +142,7 @@ function validateImportedSolution() {
                         formulaInfo.formulaDependencys.forEach(function(dependency) {
                             const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                             try {
-                                ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                                ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
                             } catch (e) {
                                 // log.error(e)
                                 //NOOP
@@ -153,7 +166,7 @@ function validateImportedSolution() {
                     if (dependency.association === 'deps') {
                         const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                         try {
-                            ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                            ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
                         } catch (e) {
                             log.error(e)
                             //NOOP
@@ -198,8 +211,8 @@ JSWorkBook.prototype.getSolutionNode = function(name) {
 };
 JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 
-function resolveX(wb, x) {
-    return x ? wb.xaxis[x] : wb.xaxis[0];
+JSWorkBook.prototype.resolveX = function(x) {
+    return x ? this.xaxis[x + this.offset] : this.xaxis[this.offset];
 }
 
 function resolveY(wb, y) {
@@ -208,21 +221,20 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
-    x = x + this.offset;
+
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
-    var xas = resolveX(this, x);
+    var xas = this.resolveX(x);
     var yas = resolveY(this, y)
     return ValueFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
-    x = x + this.offset;
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
-    var xas = resolveX(this, x);
+    var xas = this.resolveX(x);
     var yas = resolveY(this, y);
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }

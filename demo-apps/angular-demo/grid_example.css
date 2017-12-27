@@ -959,3 +959,6 @@ span.time i.fa {
 .toggle-save-btn.btn.btn-sm.active {
     background-color: #eee;
 }
+.ui-datepicker-calendar {
+    display: none;
+}​

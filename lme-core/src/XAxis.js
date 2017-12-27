@@ -1,4 +1,7 @@
 /* 
+ *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
+ *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
+ *
  *  Here we will do column/timeline ordering, referencing previous and adjacent columns
  *  
  *  The variable decorator should suply the referenced column to write into

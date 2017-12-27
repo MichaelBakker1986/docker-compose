@@ -8,6 +8,7 @@ function redefineParaments() {
     modelName = params[0] || 'MVO';
     hash = params[1] || 'DEMO';
 }
+
 redefineParaments()
 
 angular
@@ -21,14 +22,14 @@ angular
         };
     })
     .controller('lmeController', function($scope, $http, $rootScope) {
+
         $scope.changeSearch = function(node) {
             if (node.visible && node.children.length > 0) {
                 $scope.search = node
             }
         }
-        $scope.columnoffset = 0;
-        $scope.setColumnOffset = function() {
-            LMEMETA.setColumnOffset($scope.columnoffset)
+        $scope.setColumnOffset = function(delta) {
+            LMEMETA.setColumnOffset(delta)
         }
         $scope.addTuple = function(variable) {
             variable.add()
@@ -46,6 +47,7 @@ angular
             LMEMETA.importWebModel('Q_ROOT')
             LME = LMEMETA.exportWebModel();
             $scope.LME_MODEL = LME.nodes
+            $scope.timeviews = LMEMETA.getTimeViews()
             $scope.name = LME.name
             $scope.LMEMETA = LMEMETA;
 
@@ -75,6 +77,21 @@ angular
         $('body').popover({
             selector: '[data-toggle="popover"]'
         });
+        /*   $('#startYear').datepicker({
+               /!*    format: "yyyy",*!/
+               /!*      viewMode: "years",
+                     minViewMode: "years",*!/
+               changeMonth: false,
+               changeYear: true,
+               showButtonPanel: false,
+               dateFormat: 'yy',
+               onClose: function(dateText, inst) {
+                   var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                   var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                   $scope.columnoffset = year - 2017;
+                   $(this).datepicker('setDate', new Date(year, month, 1));
+               }
+           });*/
     })
     .controller('timelineController', function($scope, $http, $rootScope) {
         $scope.timeline_items = [];

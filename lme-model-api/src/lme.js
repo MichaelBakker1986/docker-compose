@@ -13,7 +13,8 @@ require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
 
-var CalculationFacade = require('../../lme-core').CalculationFacade;
+const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
+const CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
@@ -26,6 +27,9 @@ function LmeAPI() {
 
 LmeAPI.prototype.hasChanges = function() {
     return this.lme.context.hasChanges();
+}
+LmeAPI.prototype.getTimeViews = function() {
+    return this.lme.getTimeViews();
 }
 LmeAPI.prototype.addFunctions = CalculationFacade.addFunctions;
 LmeAPI.prototype.exportLME = function() {
@@ -46,8 +50,8 @@ LmeAPI.prototype.importFFL = function(ffl) {
 LmeAPI.prototype.importFFL2 = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
-LmeAPI.prototype.setColumnOffset = function(index) {
-    this.lme.offset = parseInt(index);
+LmeAPI.prototype.setColumnOffset = function(delta) {
+    this.lme.setColumnOffset(delta)
 }
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
@@ -81,9 +85,9 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
 LmeAPI.prototype.loadData = function(callBack, id) {
     var self = this;
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
-    self.modelName = params[0] || 'MVO';
+    self.modelName = params[0] || DEFAULT_MODELNAME;
     let userID = (params[1] || 'DEMO')
 
     self.lme.context.saveToken = userID;
@@ -107,17 +111,18 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     http.send();
     return http;
 }
+
 LmeAPI.prototype.persistData = function(callBack) {
     var self = this;
     //send data to server to store
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
-    self.modelName = params[0] || 'MVO';
+    self.modelName = params[0] || DEFAULT_MODELNAME;
     let userID = params[1] || 'DEMO'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    http.open("POST", 'saveUserData', true);
+    http.open("POST", 'saveUserData/' + self.lme.context.saveToken, true);
     http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
@@ -133,7 +138,6 @@ LmeAPI.prototype.persistData = function(callBack) {
     };
 
     http.send(JSON.stringify({
-        token: self.lme.context.saveToken,
         data: self.exportData()
     }));
     return http;

@@ -53,29 +53,31 @@ app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
     insertGlobals: true,
     debug: false
 }));
-app.post('*/preview', (req, res) => {
-    stash.preview(req.body.model, req.body.data).then((data) => {
+app.post('*/preview/:model_name', (req, res) => {
+    const model_name = req.params.model_name;
+    stash.preview(model_name, req.body.data).then((data) => {
         res.json({status: 'ok', link: data});
     }).catch((err) => {
-        log.debug('Failed to write ' + req.body.model + '.ffl file.', err)
+        log.debug('Failed to write ' + model_name + '.ffl file.', err)
         res.json({status: 'fail', reason: err.toString()});
     })
 });
 app.get('*/model', (req, res) => {
     var name = req.query.model;
     DBModel.getModel(name).then((data) => {
-        res.json({status: 'succes', data: data});
+        res.json({status: 'success', data: data});
     }).catch((err) => {
         log.debug('Failed to fetch model from database', err)
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.post('*/saveFFL_LME', (req, res) => {
-    stash.commit(req.body.model, req.body.data, req.body.type).then((data) => {
+app.post('*/saveFFLModel/:model_name', (req, res) => {
+    const model_name = req.params.model_name;
+    stash.commit(model_name, req.body.data, req.body.type).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
-        log.debug('Failed to write ' + req.body.model + '.ffl file.', err)
-        res.json({status: 'fail', reason: err.toString()});
+        log.debug('Failed to write ' + model_name + '.ffl file.', err)
+        res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
     })
 });
 app.get('*/branches', (req, res) => {

@@ -12,10 +12,18 @@ const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager
 
 var fflModel = '';
 var params = window.location.href.split('#')
-if (params.length == 1) window.location.href = '#MVO&DEMO'
+if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
 var params = window.location.href.split('#')[1].split('&')
-let windowModelName = params[0] || 'MVO';
+let windowModelName = params[0] || 'SCORECARDTESTMODEL';
 let userID = params[1] || 'DEMO'
+const newSotryTemplate =
+    "{model_name} Score Basic\n" +
+    "@Author {author_name}\n" +
+    "@themes {model_name} Score basic\n" +
+    "\n" +
+    "Scenario: Verify {model_name} Score calculations\n" +
+    "Given a document of the model type {model_name}"
+
 //just an dummy-template to quickly create a model
 var newModelTemplate = "model $1 uses BaseModel\n" +
     "{\n" +
@@ -44,7 +52,7 @@ var newModelTemplate = "model $1 uses BaseModel\n" +
 const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
-    page: 'grid_bootstrap',
+    page: 'scorecard',
     user: {
         name: userID
     },
@@ -71,6 +79,12 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.currentView = 'FFLModelEditorView';
     $scope.fflType = '.ffl'
     let currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+
+
+    $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+        console.warn('error while getting [' + settings.url + ']', thrownError)
+    });
+
     $.getScript('resources/' + windowModelName + '.js', function(data, textStatus, jqxhr) {
         LME = LMEMETA.exportWebModel();
         $scope.LME_MODEL = LME.nodes
@@ -79,7 +93,16 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         LMEMETA.loadData(function(response) {
             $scope.$digest()
         })
+    }).fail(function() {
+        if (arguments[0].readyState == 0) {
+            console.info('Failed to load')
+            //script failed to load
+        } else {
+            //script loaded but failed to parse
+            console.info('resources/' + windowModelName + '.js' + ":[" + arguments[2].toString() + ']')
+        }
     })
+
     let sidebaropen = false;
     $scope.togglePropertiesSidebar = function(open) {
         if (sidebaropen && open) {
@@ -101,6 +124,8 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
                 currentIndexer.indexProperties();
                 const lines = currentIndexer.toGeneratedCommaSeperated()
                 aceEditor.setValue(lines)
+            }).fail(function() {
+                console.info('Model get fail')
             });
         });
     }
@@ -127,21 +152,20 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.saveFFLModel = function() {
         const type = '.ffl';
         Pace.track(function() {
-            $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + " …"
-            $scope.saveFeedbackTitle = "Working on it...";
+            $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + "… "
+            $scope.saveFeedbackTitle = "Working on it... ";
             let data = aceEditor.getValue()
-            $.post("saveFFL_LME", {
-                model: $scope.session.fflModelPath,
+            $.post("saveFFLModel/" + $scope.session.fflModelPath, {
                 data: data,
                 type: type
             }, function(data) {
-                console.info(data)
                 $scope.$apply(function() {
                     $scope.saveFeedbackTitle = "Finished"
-                    $scope.saveFeedback = data.status == 'fail' ? 'Failed compiling model:' + data.reason : 'Done work..'
+                    $scope.saveFeedback = data.status == 'fail' ? 'Failed compiling model:' + data.reason : 'Done work.'
+                    $scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.js'
                     $scope.session.disablePreviewButton = false;
-                    if (data.status == 'succes') {
-                        window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
+                    if (data.status == 'success') {
+                        window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
                         $('#modal-success').modal('hide')
                     }
                 })
@@ -150,7 +174,8 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }
     $scope.goToPreviewPage = function() {
         $scope.session.disablePreviewButton = true;
-        window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
+        $scope.downloadJsLink = null;
+        window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
         $('#modal-success').modal('toggle');
     }
 
@@ -202,11 +227,10 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
      */
     $scope.sneakPreviewModel = function() {
         Pace.track(function() {
-            $.post("preview", {
-                model: $scope.session.fflModelPath,
+            $.post("preview/" + $scope.session.fflModelPath, {
                 data: aceEditor.getValue()
             }, function(data) {
-                window.open('/id/' + userID + '/' + $scope.session.page + '.html#' + data.link + '&' + userID);
+                window.open($scope.session.page + '.html#' + data.link + '&' + userID);
             });
         });
     }
@@ -319,15 +343,18 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
     });
 
-    $.getJSON("branches", function(data, status, xhr) {
-        $("#tags").autocomplete({source: data});
-    })
     $(".toggle-expand-btn").click(function(e) {
         $(this).closest('.content .box').toggleClass('panel-fullscreen');
     });
     $(".data-story").click(function(e) {
         $.get("resources/" + windowModelName + ".story", function(data, status, xhr) {
             aceEditor.setValue(data)
+        }).fail(function(err) {
+            if (err.status == 404) {
+                aceEditor.setValue(newSotryTemplate.replace(/{model_name}/g, windowModelName).replace(/{author_name}/g, userID))
+            } else {
+                aceEditor.setValue(err.statusText)
+            }
         })
     });
     $(".data-toggle-ide").click(function(e) {
@@ -366,9 +393,18 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         });
     }
 
-    $.getJSON("models", function(data, status, xhr) {
+    $.getJSON("models", function(data) {
         $("#models").autocomplete({
             source: data,
+            autoFocus: true,
+            change: function() {
+                windowModelName = $('#models').val();
+                handleModelChange()
+            }
+        });
+    }).fail(function() {
+        $("#models").autocomplete({
+            source: [],
             autoFocus: true,
             change: function() {
                 windowModelName = $('#models').val();

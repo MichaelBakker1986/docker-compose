@@ -11,9 +11,9 @@ git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
 docker-compose up
 
-#----- VIA NODEJS latest LTS or higher
+# --- VIA NODEJS latest LTS or higher ---
 #expose ports
-#set environment parameter to configure DB endpoint FIGURE_DB_STRING postgresql://postgres:postgres@localhost/lme
+#set environment parameter to configure DB endpoint {FIGURE_DB_STRING|postgresql://postgres:postgres@localhost/lme}
 #?LINUX:sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
@@ -23,21 +23,22 @@ docker-compose -f docker-compose-db.yml up
 npm start
 
 #Release 1.0
-#All calls are proxied through 7080 Proxy.js
-#Authentication via auth-facebook on port
+# --- SECURITY ---
+#All calls are proxied through {PROXY_PORT|7080} Proxy.js
+#Services register with {@Proxy.js} at http://{HOST|localhost}:{PROXY_PORT|7080}/register/service/:name/:host/:port/*
+#Authentication via {@auth-facebook.js} on port {FACEBOOK_PROXY_PORT|8091}
+#Authorization via {@auth-facebook.js} with ACL @{Authorization.js}
 
 
 #DOCS
+# --- FUTURE FEATURES ---
 #Dynamic assembling models via DB, like data, but also including dependencies to make subselects from models.
 #Authorization via property role: VIEWER|APPROVER|ADMIN Will generate the model dynamically from database. (only required and depending)
  #!Authorization will include combining model and aggregated data.
 #Identification via proxy.js, Using latest HEAD resolve current uuid
 #Debug via injnection in FunctionMap.js
-#Inheriterd properties in overview IDE
 #Rapportages via HTML5 just like creating a front-end by the designer
-#CICD via internal update mechanisme
 #Webhook module, broadcast events when state of data/model changes.
 #Internationalization via constants
-#Overview via hint icons in propertie-view
+#Overview via hint icons in properties-view
 #Functionverview in IDE
-#Auto-update feature test1234

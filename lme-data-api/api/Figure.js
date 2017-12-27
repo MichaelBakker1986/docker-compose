@@ -15,7 +15,7 @@
  * dev0   |usr1
  * dev1   |usr2
  */
-const dbConnectString = process.env.FIGURE_DB_STRING;
+const dbConnectString = process.env.FIGURE_DB_STRING || "postgresql://postgres:postgres@localhost/lme";
 const orm = require("orm");
 const log = require('ff-log')
 

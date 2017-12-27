@@ -6,6 +6,7 @@ var log = require('ff-log')
 var performceTestStartTime = new Date().getTime();
 var tests = [
     './MathTest',
+    './xaxisTest',
     './fflexportTest',//.FFL Language
     './screendefinitionTest',//.screen definition
     './jsonValuesTest',

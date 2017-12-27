@@ -1,4 +1,5 @@
 /**
+ * TODO: this class requires Unit-tests for internal logic. The lack of array.map is noticeable
  * While calculating in front-end.
  * There is a need to store/retrieve values entered by the client
  */
@@ -18,7 +19,7 @@ module.exports.setup = function(app) {
     });
 
 
-    function goDo(promise, req, res) {
+    function fetchDatabaseFigures(promise, req, res) {
         //TODO: move logic to the matrixStore, not pairing with rest-api now
         promise.then(function(dbData) {
             //TODO: use array.map....
@@ -57,34 +58,36 @@ module.exports.setup = function(app) {
     }
 
     app.get('*/scenario/:ids', function(req, res) {
-        goDo(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res);
+        fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res);
     });
     app.get('*/id/:userId/data/:id', function(req, res) {
         if (req.params.id.indexOf(',') > -1) {
-            goDo(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res);
+            fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res);
         } else {
-            goDo(new Figure.Figures().getFigures(req.params.id), req, res)
+            fetchDatabaseFigures(new Figure.Figures().getFigures(req.params.id), req, res)
         }
     });
     /**
      * Store entered values supplied by the client
      */
-    app.post('*/id/:userId/saveUserData', function(req, res) {
+    app.post('*/id/:userId/saveUserData/:token', function(req, res) {
         const now = new Date();
         const newChildId = uuid()
-        const parentUuid = req.body.token;
+        const parentUuid = req.params.token;
         const dbData = []
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
             dbData.push([newChildId, entry.varName, entry.colId, entry.value])
         }
         new Figure.Figures().insertFigures(parentUuid, newChildId, dbData, now).then(function(data) {
+            //tell the response a new hash should be added to the current user calling this method.
+            res.set('x-auth-id', newChildId);
             res.json({
-                status: 'succes',
+                status: 'success',
                 saveToken: newChildId
             })
         }).catch((err) => {
-            if (log.DEBUG) log.warn('error while inserting figures:', err)
+            if (log.DEBUG) log.warn('Error while inserting figures:', err)
             res.json({
                 status: 'fail',
                 message: err.toString()

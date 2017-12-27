@@ -12,7 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     <script src="bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
@@ -22,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
-    <script src="grid_bootstrap.js"></script>
+    <script src="scorecard.js"></script>
     <link rel="stylesheet" type="text/css" href="bundle.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
 </head>
@@ -43,10 +42,13 @@
             </ul>
             <ul class="nav navbar-nav" style="float: right">
                 <li>
+                    <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
+                </li>
+                <li>
                     <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
                 </li>
                 <li>
-                    <input class="form-control" ng-model="columnoffset" ng-change="setColumnOffset()">
+                    <a class="btn" ng-click="setColumnOffset('next')"><i class="fa fa-arrow-right"></i></a>
                 </li>
             </ul>
         </div>

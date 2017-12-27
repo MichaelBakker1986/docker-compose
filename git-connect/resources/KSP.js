@@ -19039,6 +19039,19 @@ function JSWorkBook(context) {
     this.xaxis = XAxis.bkyr.columns[0]
 }
 
+JSWorkBook.prototype.setColumnOffset = function(delta) {
+    let newOffset = this.offset
+    if (delta == 'next') newOffset++
+    else if (delta == 'previous') newOffset--
+    newOffset = Math.min(this.xaxis.length - 6, Math.max(0, newOffset))
+    if (newOffset != this.offset) {
+        this.offset = newOffset
+        this.context.calc_count++;
+    }
+}
+JSWorkBook.prototype.getTimeViews = function() {
+    return this.xaxis;
+}
 JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
     this.solution = solution;
@@ -19099,7 +19112,7 @@ function validateImportedSolution() {
         //TODO: use timeout, this monte carlo is blocking UI thread
         try {
             //iterate all formula-sets to test 100%
-            ValueFacade.apiGetValue(formulaInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -19134,7 +19147,7 @@ function validateImportedSolution() {
                         formulaInfo.formulaDependencys.forEach(function(dependency) {
                             const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                             try {
-                                ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                                ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
                             } catch (e) {
                                 // log.error(e)
                                 //NOOP
@@ -19158,7 +19171,7 @@ function validateImportedSolution() {
                     if (dependency.association === 'deps') {
                         const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
                         try {
-                            ValueFacade.apiGetValue(dependencyInfo, resolveX(workbook, 0), resolveY(workbook, 0), 0, context.getValues());
+                            ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
                         } catch (e) {
                             log.error(e)
                             //NOOP
@@ -19203,8 +19216,8 @@ JSWorkBook.prototype.getSolutionNode = function(name) {
 };
 JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 
-function resolveX(wb, x) {
-    return x ? wb.xaxis[x] : wb.xaxis[0];
+JSWorkBook.prototype.resolveX = function(x) {
+    return x ? this.xaxis[x + this.offset] : this.xaxis[this.offset];
 }
 
 function resolveY(wb, y) {
@@ -19213,21 +19226,20 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
-    x = x + this.offset;
+
     return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
-    var xas = resolveX(this, x);
+    var xas = this.resolveX(x);
     var yas = resolveY(this, y)
     return ValueFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
-    x = x + this.offset;
     return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
-    var xas = resolveX(this, x);
+    var xas = this.resolveX(x);
     var yas = resolveY(this, y);
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
@@ -20062,6 +20074,9 @@ module.exports = ValueFacade;
 },{"./FormulaService":21,"./FunctionMap":22,"./PropertiesAssembler":25,"_process":37,"buffer":35,"ff-log":34}],30:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /* 
+ *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
+ *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
+ *
  *  Here we will do column/timeline ordering, referencing previous and adjacent columns
  *  
  *  The variable decorator should suply the referenced column to write into
@@ -20086,7 +20101,7 @@ module.exports = ValueFacade;
 //Document will refer to first Period, else [forecast] or [history] has to be supplied
 //Document can only refer to itsself
 //can easy be refactored for better performance
-var importData = {"formulasets":[{"formulasetId":0,"name":"notrend"},{"formulasetId":1,"name":"trend"},{"formulasetId":2,"name":"user"},{"formulasetId":3,"name":"sector"},{"formulasetId":4,"name":"title"},{"formulasetId":5,"name":"aggregation"}],"layout":{"childrenmonth":[{"children":[{"children":[{"children":[{"children":[],"name":"detl","size":1}],"name":"qurt","size":4}],"name":"half","size":9}],"name":"bkyr","size":19}],"children":[{"children":[],"name":"bkyr","size":1}],"children13period":[{"children":[{"children":[],"name":"detl","size":1}],"name":"bkyr","size":13}],"idx":40,"name":"all","no":0,"period":[{"formulasetId":0,"hash":0,"idx":19},{"formulasetId":1,"hash":1,"idx":40}],"size":40},"navalue":1e-10,"nestedTupleMultiplier":"undefined","time":{"columnMultiplier":1,"columnSize":40,"columns":[{"index":0,"name":"jan/p1"},{"index":1,"name":"fes/p2"},{"index":2,"name":"mar/p3"}],"periodMultiplier":1,"periodSize":2,"timelineMultiplier":256,"timelineSize":1,"timelines":[{"index":0,"name":"ExpertOptie-level5"}]},"tupleMultiplier":32768};
+var importData = {"formulasets":[{"formulasetId":0,"name":"notrend"},{"formulasetId":1,"name":"trend"},{"formulasetId":2,"name":"user"},{"formulasetId":3,"name":"sector"},{"formulasetId":4,"name":"aggregation"}],"layout":{"childrenmonth":[{"children":[{"children":[{"children":[{"children":[],"name":"detl","size":1}],"name":"qurt","size":4}],"name":"half","size":9}],"name":"bkyr","size":19}],"children":[{"children":[],"name":"bkyr","size":1}],"children13period":[{"children":[{"children":[],"name":"detl","size":1}],"name":"bkyr","size":13}],"idx":40,"name":"all","no":0,"period":[{"formulasetId":0,"hash":0,"idx":19},{"formulasetId":1,"hash":1,"idx":40}],"size":40},"navalue":1e-10,"nestedTupleMultiplier":"undefined","time":{"columnMultiplier":1,"columnSize":40,"columns":[{"index":0,"name":"jan/p1"},{"index":1,"name":"fes/p2"},{"index":2,"name":"mar/p3"}],"periodMultiplier":1,"periodSize":2,"timelineMultiplier":256,"timelineSize":1,"timelines":[{"index":0,"name":"ExpertOptie-level5"}]},"tupleMultiplier":32768};
 var log = require('ff-log');
 var headers = {
     title: {
@@ -23801,7 +23816,8 @@ require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
 
-var CalculationFacade = require('../../lme-core').CalculationFacade;
+const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
+const CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI() {
@@ -23814,6 +23830,9 @@ function LmeAPI() {
 
 LmeAPI.prototype.hasChanges = function() {
     return this.lme.context.hasChanges();
+}
+LmeAPI.prototype.getTimeViews = function() {
+    return this.lme.getTimeViews();
 }
 LmeAPI.prototype.addFunctions = CalculationFacade.addFunctions;
 LmeAPI.prototype.exportLME = function() {
@@ -23834,8 +23853,8 @@ LmeAPI.prototype.importFFL = function(ffl) {
 LmeAPI.prototype.importFFL2 = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
-LmeAPI.prototype.setColumnOffset = function(index) {
-    this.lme.offset = parseInt(index);
+LmeAPI.prototype.setColumnOffset = function(delta) {
+    this.lme.setColumnOffset(delta)
 }
 LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
@@ -23869,9 +23888,9 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
 LmeAPI.prototype.loadData = function(callBack, id) {
     var self = this;
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
-    self.modelName = params[0] || 'MVO';
+    self.modelName = params[0] || DEFAULT_MODELNAME;
     let userID = (params[1] || 'DEMO')
 
     self.lme.context.saveToken = userID;
@@ -23895,18 +23914,19 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     http.send();
     return http;
 }
+
 LmeAPI.prototype.persistData = function(callBack) {
     var self = this;
     //send data to server to store
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
-    self.modelName = params[0] || 'MVO';
+    self.modelName = params[0] || DEFAULT_MODELNAME;
     let userID = params[1] || 'DEMO'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
-    var url = self.urlPrefix + 'saveUserData/' + self.lme.context.saveToken;
-    http.open("POST", url, true);
+    http.open("POST", 'saveUserData/' + self.lme.context.saveToken, true);
+    http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
             let returnData = JSON.parse(http.responseText);
@@ -23920,7 +23940,9 @@ LmeAPI.prototype.persistData = function(callBack) {
         callBack(http.responseText)
     };
 
-    http.send(JSON.stringify({data: self.exportData()}));
+    http.send(JSON.stringify({
+        data: self.exportData()
+    }));
     return http;
 }
 module.exports = LmeAPI;

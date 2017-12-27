@@ -18,10 +18,6 @@
     },
     {
       "formulasetId": 4,
-      "name": "title"
-    },
-    {
-      "formulasetId": 5,
       "name": "aggregation"
     }
   ],

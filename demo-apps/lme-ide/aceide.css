@@ -42,3 +42,9 @@
     border-radius: 20px 0px 0px 20px;
     box-shadow: 0px 0px 1px 1px red inset;
 }
+.pre {
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+}

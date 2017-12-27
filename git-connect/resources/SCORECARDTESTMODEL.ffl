@@ -372,7 +372,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     title: "Map 1";
     displaytype: select;
     choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-    hint: "t";
+    hint: "ScorecardTestModel";
     top_blanklines: 1;
     locked: On;
     visible: 1;
@@ -1040,7 +1040,7 @@ model SCORECARDTESTMODEL  uses BaseModel
      variable Q_MAP01_PARAGRAAF05SUB6 refers to MatrixVersion
      {
       title: "Parametersversie";
-      hint: "t";
+      hint: "MatrixVersion hint";
       visible: 1;
       options_title: locked;
      }
@@ -2659,7 +2659,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       frequency: document;
       formula: TupleSum(OnroerendGoed_tpVerschil);
       data_options: unscalable;
-      title: "t";
+      title: "variable OnroerendGoedTupleSumVerschil";
       displaytype: currency;
       fixed_decimals: 0;
       locked: On;
@@ -2674,7 +2674,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       frequency: document;
       formula: TupleSum(OnroerendGoed_tpGroter0);
       data_options: unscalable;
-      title: "t";
+      title: "OnroerendGoedTupleSumGroter0";
       fixed_decimals: 0;
       locked: On;
       visible: 1;
@@ -2688,7 +2688,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       frequency: document;
       formula: TupleSum(OnroerendGoed_tpJonger6Mnd);
       data_options: unscalable;
-      title: "t";
+      title: "OnroerendGoedTupleSumJonger6Mnd";
       fixed_decimals: 0;
       locked: On;
       visible: 1;
@@ -2938,7 +2938,7 @@ model SCORECARDTESTMODEL  uses BaseModel
        {
         datatype: string;
         frequency: document;
-        formula: String("t");
+        formula: String("OVK_Lening_tpNummer");
         data_options: unscalable;
         title: "Rekeningnummer";
         options_title: locked;
@@ -6397,7 +6397,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     formula: String(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
     data_options: saveCalculatedValue, unscalable;
     title: "Parametersversie";
-    hint: "t";
+    hint: "MatrixVersion";
     visible: 1;
     options_title: locked;
    }

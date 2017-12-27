@@ -14,15 +14,15 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/monli/"));
-app.use('/id/:id/font-awesome', expressStaticGzip(__dirname + "/node_modules/font-awesome"));
-app.use('/', expressStaticGzip(__dirname + "/"));
+app.use('*/font-awesome', expressStaticGzip(__dirname + "/node_modules/font-awesome"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
 app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
 
 //proxies
-app.use('*/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
+app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
 
@@ -41,12 +41,12 @@ app.listen(port, () => {
     routes.push('*.ffl')
     routes.push('*/adminlte.min.js')
     routes.push('*/demo.js')
-    routes.push('*/grid_bootstrap.js')
+    routes.push('*/scorecard.js')
     routes.push('*.woff2')
     routes.push('*.woff')
     routes.push('*.ttf')
-    routes.push('*MVO.js*')
-    routes.push('*KSP.js*')
+    routes.push('*/resources/*.js')
+    routes.push('*/ext-searchbox.js')
     routes.push('*/ace.js')
     routes.push('*/promotion.js')
     routes.push('*/monli.js')
@@ -66,17 +66,17 @@ app.listen(port, () => {
     }).catch(function(err) {
         log.error('Failed to register ', err);
     });
-
+    var proxy_domain = host + ':' + proxyhost;
     console.info(
         '<span>DEMO apps: </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/grid_bootstrap.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/SlimmeOuder/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/SlimmeOuder/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/DEMO/scorecard.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/SlimmeOuder/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/SlimmeOuder/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
+        '<a href="http://' + proxy_domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
         '<br><span>IDE apps: </span>\n' +
-        '<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n'
+        '<a href="http://' + proxy_domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n'
     )
 });
