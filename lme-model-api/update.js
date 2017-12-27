@@ -17,7 +17,7 @@ let busyRedeploying = false;
 const childProcesses = {}
 const developer = (host === 'localhost');
 const debug = process.env.NODE_ENV !== 'production';
-const log = require('./Hipchat-connect').log
+const HipchatConnect = require('./Hipchat-connect')
 
 function spawnChildProcess(appname, args) {
     const childProcess = spawn('node', [appname], {capture: ['stdout', 'stderr']})
@@ -143,6 +143,10 @@ function testAndDeploy() {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
         log(err.toString(), 'red');
     });
+}
+
+function log(message, level) {
+    HipchatConnect.log(message, level)
 }
 
 if (!developer) testAndDeploy();
