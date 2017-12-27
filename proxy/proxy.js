@@ -5,6 +5,7 @@
  */
 const port = process.env.PROXY_PORT || 7080;
 const host = process.env.HOST || 'localhost';
+const proxyLogLevel = process.env.ENV == 'debug' ? 'debug' : 'silent'
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
@@ -50,7 +51,7 @@ app.get('/register/service/:name/:host/:port/*', function(req, res) {
         app[req.params.type || 'all'](route, proxy({
             target: 'http://' + targetProxyHost + ':' + targetProxyPort,
             changeOrigin: true,
-            logLevel: 'debug',
+            logLevel: proxyLogLevel,
             limit: '50mb'
         }));
     }
