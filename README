@@ -1,4 +1,4 @@
-#install git
+#install git...
 #create SSH to repository
 #if already have ssh key u can skip this part
 ssh-keygen -t rsa
