@@ -139,6 +139,7 @@ function registerToProxy() {
             routes.push(r.route.path)
         }
     })
+    console.info('calling:: ' + 'http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(','))
     request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
         if (log.DEBUG) log.debug(data);
     }).catch(function(err) {
