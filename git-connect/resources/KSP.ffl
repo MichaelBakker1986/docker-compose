@@ -4,7 +4,7 @@ model KSP uses BaseModel
  {
   variable Q_ROOT
   {
-   title: "Costs of child raising (v1.33)";
+   title: "Costs of child raising (v1.34)";
    frequency: document;
    displaytype: scorecard;
    datatype: number;
