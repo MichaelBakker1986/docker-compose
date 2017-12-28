@@ -47,6 +47,7 @@ app.listen(port, () => {
     routes.push('*/monli.css')
     routes.push('*/fresh.css')
     routes.push('*/style.css')
+    routes.push('*/favicon.ico')
 
     routes.push('*.ffl')
     routes.push('*/adminlte.min.js')

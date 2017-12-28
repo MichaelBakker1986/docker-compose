@@ -134,10 +134,12 @@ function testAndDeploy() {
     var start = now();
     const command = developer ? 'echo test message' : 'cd .. && npm install && npm test'
     exec(command).then(function(result) {
+
         spawnChildProcess(path.resolve(__dirname + '/../proxy'))
-        spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-model-api'))
+        spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-data-api'))
+
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
