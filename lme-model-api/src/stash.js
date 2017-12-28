@@ -49,7 +49,6 @@ class Stash {
                         console.info('<a href="http://' + host + ':8083/id/' + userID + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + "@" + host + '</span>');
                     }).catch((err) => {
                         const errorData = err.toString()
-                        console.info(errorData)
                         if (errorData.indexOf('No changes detected') > -1) {
                             return "No changes detected in file."
                         } else {

@@ -133,18 +133,21 @@ function testAndDeploy() {
 }
 
 function registerToProxy() {
-    const routes = []
-    app._router.stack.forEach(function(r) {
-        if (r.route && r.route.path) {
-            routes.push(r.route.path)
-        }
-    })
-    console.info('calling:: ' + 'http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(','))
-    request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
-        if (log.DEBUG) log.debug(data);
-    }).catch(function(err) {
-        log.error('Failed to register ', err);
-    });
+    //just delay the action...
+    setTimeout(function() {
+        const routes = []
+        app._router.stack.forEach(function(r) {
+            if (r.route && r.route.path) {
+                routes.push(r.route.path)
+            }
+        })
+        console.info('calling:: ' + 'http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(','))
+        request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
+            if (log.DEBUG) log.debug(data);
+        }).catch(function(err) {
+            log.error('Failed to register ', err);
+        });
+    }, 5000)
 }
 
 app.listen(port, () => {
