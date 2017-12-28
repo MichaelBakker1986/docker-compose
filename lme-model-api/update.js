@@ -124,7 +124,7 @@ function testAndDeploy() {
         spawnChildProcess(path.resolve(__dirname + '/../lme-model-api'))
         spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-data-api'))
-
+        registerToProxy()
         log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
@@ -132,7 +132,7 @@ function testAndDeploy() {
     });
 }
 
-app.listen(port, () => {
+function registerToProxy() {
     const routes = []
     app._router.stack.forEach(function(r) {
         if (r.route && r.route.path) {
@@ -144,6 +144,10 @@ app.listen(port, () => {
     }).catch(function(err) {
         log.error('Failed to register ', err);
     });
+}
+
+app.listen(port, () => {
+    if (developer) registerToProxy()
     log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
 });
 
