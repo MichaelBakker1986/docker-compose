@@ -86,7 +86,6 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     });
 
     $.getScript('resources/' + windowModelName + '.js', function(data, textStatus, jqxhr) {
-        LME = LMEMETA.exportWebModel();
         $scope.LME_MODEL = LME.nodes
         $scope.name = LME.name
         $scope.LMEMETA = LMEMETA;

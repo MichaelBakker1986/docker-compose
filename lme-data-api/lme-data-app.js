@@ -1,20 +1,25 @@
 const port = 8085;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '127.0.0.1';
 const request = require('request-promise-json');
 const domain = 'http://' + host + ':' + port + '/';
 const proxyhost = process.env.PROXY_HOST || 7080
 const express = require('express');
 const log = require('ff-log');
 const app = express();
+const https = require('https');
 
 app.set('port', port)
 app.set('host', host)
 app.use(require('cors')())
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json({limit: '50mb'})); // To support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
     extended: true
 }));
+
+//var privateKey = fs.readFileSync('privatekey.pem');
+//var certificate = fs.readFileSync('certificate.pem');
 //routes
 require('./api/store').setup(app)
 require('./api/value').setup(app)

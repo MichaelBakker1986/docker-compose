@@ -24,7 +24,7 @@ newModel.lme.context.saveToken = saveToken;
 
 class LmeApiTester {
     constructor() {
-        newModel.urlPrefix = 'http://localhost:8085'
+        newModel.urlPrefix = 'http://127.0.0.1:8085'
     }
 
     testReceive(id) {

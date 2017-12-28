@@ -19314,9 +19314,11 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
     var formulaIds = [];
+    const formulaIdMap = {}
     for (var i = 0; i < this.context.audit.length; i++) {
         var audit = this.context.audit[i];
-        if (audit.saveToken == this.context.saveToken) {
+        if (audit.saveToken == this.context.saveToken && !formulaIdMap[audit.formulaId]) {
+            formulaIdMap[audit.formulaId] = true;
             formulaIds.push(audit.formulaId)
         }
     }
@@ -23802,14 +23804,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":39,"_process":37,"buffer":35,"inherits":38}],41:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 Error.prototype.stack = Error.prototype.stack || "";
-if (!global.MatrixLookup) {
-    MatrixLookup = function() {
-        return 1;
-    }
-}
-if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
-}
+
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
@@ -23916,7 +23911,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 }
 
 LmeAPI.prototype.persistData = function(callBack) {
-    var self = this;
+    const self = this;
     //send data to server to store
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'

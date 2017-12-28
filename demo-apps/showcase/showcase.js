@@ -3,9 +3,7 @@ var angularApplication = angular.module('angularapp', ['angular.filter']);
 
 //create an angular controller
 angularApplication.controller('myController', function($scope, $http, $interval) {
-    $http.get('../resources/MVO.js').then(function(data) {
-        //load sync dynamic javascript file
-        eval(data.data)
+    $.getScript('resources/MVO.js').then(function(data) {
         //create a tree from current loaded model
         //tell angular to apply model nodes to the controller $scope
         $scope.LME_MODEL = LME.nodes;

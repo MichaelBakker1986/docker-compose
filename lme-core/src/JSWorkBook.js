@@ -309,9 +309,11 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
     var formulaIds = [];
+    const formulaIdMap = {}
     for (var i = 0; i < this.context.audit.length; i++) {
         var audit = this.context.audit[i];
-        if (audit.saveToken == this.context.saveToken) {
+        if (audit.saveToken == this.context.saveToken && !formulaIdMap[audit.formulaId]) {
+            formulaIdMap[audit.formulaId] = true;
             formulaIds.push(audit.formulaId)
         }
     }

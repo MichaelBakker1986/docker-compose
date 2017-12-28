@@ -5,14 +5,17 @@
  */
 const Acl = require('acl');
 
-    const MichaelFaceBookID = '1683958891676092';
-    const VIEW_RULE = 'view';
-    const GUEST_ROLE = 'guest';
+const MichaelFaceBookID = '1683958891676092';
+const VIEW_RULE = 'view';
+const GUEST_ROLE = 'guest';
 
-    class Authorization {
+class Authorization {
     constructor() {
         this.acl = new Acl(new Acl.memoryBackend());
         this.acl.addUserRoles(MichaelFaceBookID, MichaelFaceBookID)
+        const anonymous_resources = [
+
+        ]
         const guest_resources = [
             "/data/DEMO",//THE CROSS-USER-DATA exposure.
             "/saveUserData/DEMO",//THE CROSS-USER-DATA exposure.
@@ -90,13 +93,17 @@ const Acl = require('acl');
     }
 
     isAuthorizedToView(id, resource, callback) {
-        //TODO: for now just always add guest-role to any call.
-        this.acl.addUserRoles(id, 'guest');
+        //TODO: for now just always add guest-role to any call, should only be added if not exists
+        this.acl.addUserRoles(id, 'guest')
         return this.acl.isAllowed(id, resource.split('?')[0], VIEW_RULE, callback)
     }
 
     isAuthorized(id, resource, role, callback) {
         return this.acl.isAllowed(id, resource.split('?')[0], role, callback)
+    }
+
+    isAnonymous(resource) {
+        return true
     }
 }
 

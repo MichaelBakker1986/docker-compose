@@ -1,12 +1,5 @@
 Error.prototype.stack = Error.prototype.stack || "";
-if (!global.MatrixLookup) {
-    MatrixLookup = function() {
-        return 1;
-    }
-}
-if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
-}
+
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
@@ -113,7 +106,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 }
 
 LmeAPI.prototype.persistData = function(callBack) {
-    var self = this;
+    const self = this;
     //send data to server to store
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'

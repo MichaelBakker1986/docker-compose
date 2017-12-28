@@ -1,7 +1,7 @@
 const exec = require('child-process-promise').exec;
 const log = require('ff-log');
-const host = process.env.HOST || 'localhost'
-const develop = (host == 'localhost');
+const host = process.env.HOST || '127.0.0.1'
+const develop = (host == '127.0.0.1');
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')

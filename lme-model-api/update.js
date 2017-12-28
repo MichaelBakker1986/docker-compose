@@ -5,7 +5,7 @@
 const port = 8081;
 const proxyhost = process.env.PROXY_HOST || 7080
 const express = require('express');
-const host = process.env.HOST || 'localhost'
+const host = process.env.HOST || '127.0.0.1'
 const now = require("performance-now")
 const request = require('request-promise-json');
 const app = express();
@@ -15,7 +15,7 @@ const exec = require('child-process-promise').exec;
 const spawn = require('child_process').spawn;
 let busyRedeploying = false;
 const childProcesses = {}
-const developer = (host === 'localhost');
+const developer = (host === 'localhost' || host === '127.0.0.1');
 const debug = process.env.NODE_ENV !== 'production';
 const HipchatConnect = require('./Hipchat-connect')
 
@@ -88,7 +88,7 @@ app.get('*/hasUpdates', (req, res) => {
 
 function checkForUpdates() {
     return new Promise((fulfill, reject) => {
-        if (developer) fulfill({hasChanges: false})
+        if (developer) return fulfill({hasChanges: false})
         var command = 'git remote update && git status -uno'
         //'git diff --stat origin/master';
         exec(command).then((result) => {

@@ -4,7 +4,7 @@
  * Using morgan middleware for generic server logging
  */
 const port = process.env.PROXY_PORT || 7080;
-const host = process.env.HOST || 'localhost';
+const host = process.env.HOST || '127.0.0.1';
 
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');

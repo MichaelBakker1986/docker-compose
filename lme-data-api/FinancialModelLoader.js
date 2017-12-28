@@ -9,7 +9,7 @@ const SolutionFacade = require('../lme-core/src/SolutionFacade');
 require('../lme-core/exchange_modules/swagger/swaggerParser');
 const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
-const APIDefinition = require(__dirname + '/api/swaggerDef.json');
+const APIDefinition = require(__dirname + '/api/AuthenticatedSwaggerDefinition.json');
 const log = require('ff-log')
 modelLoadListener.onNewModel = function(fflModelData, path) {
     const lmeModel = CalculationFacade.initializeFFlModelData(fflModelData);

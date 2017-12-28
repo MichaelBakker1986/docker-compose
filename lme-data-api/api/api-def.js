@@ -1,7 +1,6 @@
 const swaggerUi = require('swaggerize-ui');
 /**
  * Dynamic Swagger definition route
- * @param app
  */
 module.exports.setup = function(app) {
     const port = app.get('port');
@@ -12,8 +11,10 @@ module.exports.setup = function(app) {
         docs: '/data-api-docs'
     }));
     app.get('*/data-api-docs', function(req, res) {
-        let swaggerData = require(__dirname + '/swaggerDef.json');
-        swaggerData.host = domain || (host + ':' + port);
+        //TODO: check authorization role for fire-grained definiton. For now privacy > rest
+        //maybe via filename, maybe life-generated.
+        let swaggerData = require(__dirname + '/AuthenticatedSwaggerDefinition.json');
+        swaggerData.host = (host + ':' + port);
         res.json(swaggerData)
     });
 };

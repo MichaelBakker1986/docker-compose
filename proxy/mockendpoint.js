@@ -1,5 +1,5 @@
 var port = 7080;
-var host = process.env.HOST || 'localhost';
+var host = process.env.HOST || '127.0.0.1';
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();

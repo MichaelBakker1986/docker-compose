@@ -14,7 +14,7 @@ window = {
 }
 let MvoStory = require('../../model-tests/MVO/MVOStoryParserTest').MVOStory;
 new MvoStory(story).startTest()
-LMEMETA.urlPrefix = 'http://localhost:8085'
+LMEMETA.urlPrefix = 'http://127.0.0.1:8085'
 //LMEMETA.urlPrefix = 'http://10.146.2.87:8085'
 LMEMETA.persistData(function(done) {
     LMEMETA.persistData(function(done) {

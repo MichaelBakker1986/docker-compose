@@ -66,7 +66,9 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
         if (userValue != null) {
             const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
             userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
-            userValue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue))).name
+            const lookupvalue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue)));
+            if (log.DEBUG && lookupvalue == null) log.warn('Invalid choice-value set for ' + row + ' [' + userValue + ']')
+            userValue = lookupvalue ? lookupvalue.name : null;
             if (!isNaN(userValue)) {
                 userValue = parseFloat(userValue)
             }
@@ -94,7 +96,6 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
  */
 ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
-
     if (colType === 'entered') {
         //kinda copy-paste, find way to refactor. there is no real enteredValue formula.
         //retrieve the 'value' formula, check if there is an entered value
@@ -129,7 +130,8 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                 if (returnValue != null) {
                     const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
                     returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
-                    returnValue = choices.lookup('name', String(returnValue)).value
+                    const choicesLookup = choices.lookup('name', String(returnValue));
+                    returnValue = choicesLookup ? choicesLookup.value : returnValue;
                 }
             } else {
                 if (variable.decimals !== undefined) {

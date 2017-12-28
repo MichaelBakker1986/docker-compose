@@ -1,18 +1,18 @@
 const host_environment_variable = process.env.HOST;
-const host = host_environment_variable || 'localhost'
+const host = host_environment_variable || '127.0.0.1'
 const hipchatapikey = process.env.HIPCHAT_API_KEY;
 const hipchat_endpoint = 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + hipchatapikey;
 const request = require('request');
 const log = require('ff-log')
-const developer = (host === 'localhost');
+const developer = (host === '127.0.0.1');
 
 class HipchatConnect {
     constructor() {
         if (!hipchatapikey) {
-            log.warn('Because environment variable HIPCHAT_API_KEY is not set. No communication with the HipChat server is possible.')
+            log.warn('No communication with the HipChat server is possible, because environment variable HIPCHAT_API_KEY is not set.')
         }
         if (!host_environment_variable) {
-            log.info('Because environment variable HOST is not set. Not communicating with the HipChat server.')
+            log.info('Not communicating with the HipChat server, because environment variable HOST is not set. Assume developer build.')
         }
     }
 

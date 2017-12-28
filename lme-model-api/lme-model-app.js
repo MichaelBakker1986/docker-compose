@@ -1,5 +1,5 @@
 const exec = require('child-process-promise').exec;
-const host = process.env.HOST || 'localhost'
+const host = process.env.HOST || '127.0.0.1'
 const proxyhost = process.env.PROXY_HOST || 7080
 const port = 8080;
 const request = require('request-promise-json');

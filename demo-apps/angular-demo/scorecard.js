@@ -44,12 +44,10 @@ angular
 
         $.getScript('resources/' + modelName + '.js', function(data, textStatus, jqxhr) {
             //after this we can import the user-data....
-            LMEMETA.importWebModel('Q_ROOT')
-            LME = LMEMETA.exportWebModel();
             $scope.LME_MODEL = LME.nodes
             $scope.timeviews = LMEMETA.getTimeViews()
             $scope.name = LME.name
-            $scope.LMEMETA = LMEMETA;
+            $scope.LMEMETA = LME;
 
             for (var name in LME.nodes) {
                 if (LME.nodes[name].type == 'scorecard') {

@@ -1,4 +1,5 @@
-# Use postgres/example user/password credentials
+# Unauthorized developer compose
+# Expose the FACEBOOK_PROXY_PORT only for a secured container
 version: '2.0'
 
 services:
@@ -19,22 +20,16 @@ services:
             - db
         environment:
                 ENV: info
+                RROXY_HOST: 7080
+                HOST: localhost
+                ENABLED_MODELS: *
+                FACEBOOK_PROXY_PORT: 9091
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
                 HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
         build: .
         image: lme:1.0.34
         restart: always
         ports:
-            - 8080:8080
-            - 8081:8081
-            - 8082:8082
-            - 8083:8083
-            - 8084:8084
-            - 8085:8085
+            - 7080:7080
         expose:
-            - 8080
-            - 8081
-            - 8082
-            - 8083
-            - 8084
-            - 8085
+            - 7080

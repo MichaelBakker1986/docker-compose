@@ -19314,9 +19314,11 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
     var formulaIds = [];
+    const formulaIdMap = {}
     for (var i = 0; i < this.context.audit.length; i++) {
         var audit = this.context.audit[i];
-        if (audit.saveToken == this.context.saveToken) {
+        if (audit.saveToken == this.context.saveToken && !formulaIdMap[audit.formulaId]) {
+            formulaIdMap[audit.formulaId] = true;
             formulaIds.push(audit.formulaId)
         }
     }
@@ -19919,7 +19921,9 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
         if (userValue != null) {
             const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
             userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
-            userValue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue))).name
+            const lookupvalue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue)));
+            if (log.DEBUG && lookupvalue == null) log.warn('Invalid choice-value set for ' + row + ' [' + userValue + ']')
+            userValue = lookupvalue ? lookupvalue.name : null;
             if (!isNaN(userValue)) {
                 userValue = parseFloat(userValue)
             }
@@ -19947,7 +19951,6 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
  */
 ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     var colType = col || 'value';
-
     if (colType === 'entered') {
         //kinda copy-paste, find way to refactor. there is no real enteredValue formula.
         //retrieve the 'value' formula, check if there is an entered value
@@ -19982,7 +19985,8 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                 if (returnValue != null) {
                     const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
                     returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
-                    returnValue = choices.lookup('name', String(returnValue)).value
+                    const choicesLookup = choices.lookup('name', String(returnValue));
+                    returnValue = choicesLookup ? choicesLookup.value : returnValue;
                 }
             } else {
                 if (variable.decimals !== undefined) {
@@ -23802,14 +23806,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":39,"_process":37,"buffer":35,"inherits":38}],41:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 Error.prototype.stack = Error.prototype.stack || "";
-if (!global.MatrixLookup) {
-    MatrixLookup = function() {
-        return 1;
-    }
-}
-if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
-}
+
 require('../../lme-core/exchange_modules/lme/lmeparser');
 require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
@@ -23916,7 +23913,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 }
 
 LmeAPI.prototype.persistData = function(callBack) {
-    var self = this;
+    const self = this;
     //send data to server to store
     var params = window.location.href.split('#')
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'

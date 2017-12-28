@@ -3,7 +3,7 @@ import BaseModel.*;
 
 model SCORECARDTESTMODEL  uses BaseModel 
 {
- version: "01.19.000.000";
+ version: "01.19.000.001";
  root
  {
   variable RootSub1
@@ -854,7 +854,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       title: "Kopie van vraag 7 (alleen readonly)";
       displaytype: date;
       choices: "dd/MM/yyyy";
-      locked: On;
+      locked: 1;
       visible: 1;
       options_title: locked;
       options_notrend: locked;

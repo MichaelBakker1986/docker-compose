@@ -2,7 +2,7 @@
  * KSP Specific end-point
  */
 const port = process.env.KSP_APP_PORT || 8006;
-const host = process.env.KSP_APP_HOST || 'localhost';
+const host = process.env.KSP_APP_HOST || '127.0.0.1';
 const domain = process.env.KSP_APP_DOMAIN || host + ':' + port
 const https = require('https');
 const express = require('express');
@@ -10,8 +10,6 @@ const app = express();
 const fs = require('fs')
 const bodyParser = require('body-parser');
 
-//var privateKey = fs.readFileSync('privatekey.pem');
-//var certificate = fs.readFileSync('certificate.pem');
 
 app.set('port', port)
 app.set('host', host)

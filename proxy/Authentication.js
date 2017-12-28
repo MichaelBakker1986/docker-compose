@@ -38,4 +38,4 @@ class Authentication {
     }
 }
 
-exports.Authentication = Authentication
+module.exports = Authentication

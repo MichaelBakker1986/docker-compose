@@ -234,19 +234,24 @@
                                 <label ng-if="cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
                                 <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                                 <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
-                                <input type="date" ng-switch-when="date" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                </input>
-                                <select ng-switch-when="select" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                    <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>
-                                </select>
-                                <div ng-switch-when="radio" class="btn-group" data-toggle="buttons">
-                                    <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.value == cv.value?'active':''">
-                                        <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.value">
-                                        <i ng-class="choice.value == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
-                                        <span>{{choice.value}}</span>
-                                    </label>
+                                <input ng-switch-when="date" ng-readonly="cv.locked" type="{{cv.locked? 'text':'date'}}" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                <div ng-switch-when="select">
+                                    <select ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                        <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>
+                                    </select>
+                                    <input ng-if="cv.locked" type="text" readonly="readonly" class="form-control" ng-model="cv.value" placeholder="..">
                                 </div>
-                                <textarea ng-switch-when="memo" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
+                                <div ng-switch-when="radio">
+                                    <div ng-if="!cv.locked" class="btn-group" data-toggle="buttons">
+                                        <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.value == cv.value?'active':''">
+                                            <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.value">
+                                            <i ng-class="choice.value == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
+                                            <span>{{choice.value}}</span>
+                                        </label>
+                                    </div>
+                                    <input readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                </div>
+                                <textarea ng-switch-when="memo" ng-readonly="cv.locked" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
                                 <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
                                 <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
                                 <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
@@ -257,7 +262,7 @@
 
 
             </div>
-            <div class="row page-header">
+            <div class="row">
                 <div class="dataTables_paginate paging_simple_numbers" style="float: right">
                     <ul class="pagination">
                         <!--paginate-->

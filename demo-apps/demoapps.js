@@ -1,6 +1,6 @@
 const port = 8083;
 const proxyhost = process.env.PROXY_HOST || 7080
-const host = process.env.HOST || 'localhost'
+const host = process.env.HOST || '127.0.0.1'
 const request = require('request-promise-json');
 const log = require('ff-log')
 const compression = require('compression')
@@ -18,7 +18,7 @@ app.use('*/font-awesome', expressStaticGzip(__dirname + "/node_modules/font-awes
 app.use('/id/:id/', expressStaticGzip(__dirname + "/"));
 
 //showcase proxies
-app.use('/id/:id/showcase', expressStaticGzip(__dirname + "/showcase/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
 
 //proxies
@@ -37,7 +37,18 @@ app.listen(port, () => {
         }
     })
     routes.push('*.html')
-    routes.push('*.css')
+
+   // routes.push('*.css')
+
+    routes.push('*/AdminLTE.min.css')
+    routes.push('*/_all-skins.min.css')
+    routes.push('*/aceide.css')
+    routes.push('*/bundle.css')
+    routes.push('*/grid_example.css')
+    routes.push('*/monli.css')
+    routes.push('*/fresh.css')
+    routes.push('*/style.css')
+
     routes.push('*.ffl')
     routes.push('*/adminlte.min.js')
     routes.push('*/demo.js')

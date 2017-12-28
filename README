@@ -6,6 +6,11 @@ ssh-keygen -t rsa
 vim id_rsa.pub = {Public SSH key for Stash}
 
 set environment variable HOST={{your_host_name}} : defaults to 'localhost'
+set environment variable RROXY_HOST={{PROXY_HOST_PORT}} : defaults to 7080
+set environment variable FACEBOOK_PROXY_PORT={{FACEBOOK_AUTH_PROXY_PORT}} : defaults to 9091
+set environment variable ENABLED_MODELS={{KSP,MVO}} : defaults to '*'. Allows wildcards in modelnames.
+set environment variable HIPCHAT_API_KEY={{hipchat_api_key}} : defaults to 'Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW'.
+
 #----- VIA DOCKER
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
@@ -24,6 +29,7 @@ npm start
 
 #Release 1.0
 # --- SECURITY ---
+#default IP = 127.0.0.1, preferred over 'localhost' since 127.0.0.1 also works without internet connection.
 #All calls are proxied through {PROXY_PORT|7080} Proxy.js
 #Services register with {@Proxy.js} at http://{HOST|localhost}:{PROXY_PORT|7080}/register/service/:name/:host/:port/*
 #Authentication via {@auth-facebook.js} on port {FACEBOOK_PROXY_PORT|8091}
@@ -42,3 +48,4 @@ npm start
 #Internationalization via constants
 #Overview via hint icons in properties-view
 #Functionverview in IDE
+#10mb request is large enough, files bigger than 10mb should be separated in front-end
