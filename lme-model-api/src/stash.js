@@ -48,7 +48,11 @@ class Stash {
 
                         console.info('<a href="http://' + host + ':8083/id/' + userID + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + "@" + host + '</span>');
                     }).catch((err) => {
-                        throw Error('GIT commit failed while pushing file to repository:[' + err.toString() + ']')
+                        if (err.toString().indexOf('No changes detected') > -1) {
+                            throw Error("No changes detected in file.")
+                        } else {
+                            throw Error('GIT commit failed while pushing file to repository:[' + err.toString() + ']')
+                        }
                     })
                 }).catch((err) => {
                     throw Error('Failed to write or compile javascript. [' + err.toString() + ']');
