@@ -36,7 +36,7 @@ class Stash {
                 return Promise.all([exec('node ' + __dirname + '/exportLME_FFL.js ' + name + ' ' + (type == '.ffl' ? 'FFL2' : 'FFL'))]).then((result) => {
                     if (result[0].stderr) throw Error(result[0].stderr)
                     let userID = uuid();
-                    if (develop) {
+                    if (false && develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');
                         log.info("[" + user_id + "] modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
