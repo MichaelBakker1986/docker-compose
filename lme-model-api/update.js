@@ -114,21 +114,6 @@ function checkForUpdates() {
 }
 
 
-app.listen(port, () => {
-    const routes = []
-    app._router.stack.forEach(function(r) {
-        if (r.route && r.route.path) {
-            routes.push(r.route.path)
-        }
-    })
-    request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
-        if (log.DEBUG) log.debug(data);
-    }).catch(function(err) {
-        log.error('Failed to register ', err);
-    });
-    log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
-});
-
 function testAndDeploy() {
     if (!developer) log('Running integration tests on server ' + host, 'info')
     var start = now();
@@ -146,6 +131,21 @@ function testAndDeploy() {
         log(err.toString(), 'red');
     });
 }
+
+app.listen(port, () => {
+    const routes = []
+    app._router.stack.forEach(function(r) {
+        if (r.route && r.route.path) {
+            routes.push(r.route.path)
+        }
+    })
+    request.get('http://' + host + ':' + proxyhost + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
+        if (log.DEBUG) log.debug(data);
+    }).catch(function(err) {
+        log.error('Failed to register ', err);
+    });
+    log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
+});
 
 function log(message, level) {
     HipchatConnect.log(message, level)
