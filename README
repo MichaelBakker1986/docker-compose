@@ -19,7 +19,7 @@ docker-compose up
 # --- VIA NODEJS latest LTS or higher ---
 #expose ports
 #set environment parameter to configure DB endpoint {FIGURE_DB_STRING|postgresql://postgres:postgres@localhost/lme}
-#?LINUX:sudo firewall-cmd --zone=public --add-port=7080/tcp -permanent
+#?LINUX:sudo firewall-cmd --zone=public --add-port=7080/tcp --permanent
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git
 cd fesjs
 npm install -g concurrently
