@@ -3,8 +3,8 @@
  * While calculating in front-end.
  * There is a need to store/retrieve values entered by the client
  */
-var uuid = require('uuid4');
-var log = require('ff-log')
+const uuid = require('uuid4');
+const log = require('log6')
 const Figure = require('./Figure');
 
 const MatrixStore = require('../MatrixStore').MatrixStore;

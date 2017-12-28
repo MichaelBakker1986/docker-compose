@@ -3,7 +3,7 @@ const excelPlugin = require('../../excel-connect').xlsxLookup;
 const LME = require('../../lme-model-api/src/lme');
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');
 const MVO = new LME();
-const log = require('ff-log')
+const log = require('log6')
 MVO.addFunctions(excelPlugin);
 excelPlugin.initComplete().then(function() {
     try {

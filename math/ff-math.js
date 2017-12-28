@@ -1,4 +1,4 @@
-const logger = require('ff-log')
+const logger = require('log6')
 const jsMath = require('./jsMath.json')
 const Solver = require('js-solver')
 const entries = {};
@@ -18,7 +18,7 @@ function initJSMath(jsMath) {
         if (global[func] === undefined) {
             //functions
             if (typeof mathfunc === 'object') {
-                if (logger.DEBUG) logger.debug('Added function[%s] arguments[%s] body: [%s]', func, mathfunc.args, mathfunc.body)
+                if (logger.TRACE) logger.trace('Added function[%s] arguments[%s] body: [%s]', func, mathfunc.args, mathfunc.body)
                 global[func] = new Function(mathfunc.args, mathfunc.body);
             }
             else {

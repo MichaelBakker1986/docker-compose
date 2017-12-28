@@ -5,7 +5,7 @@ const LME = require('../../lme-model-api/src/lme');
 const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
 const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
-const log = require('ff-log');
+const log = require('log6');
 const assert = require('assert');
 const HYPOTHEEK = new LME();
 HYPOTHEEK.addFunctions(excelPlugin);

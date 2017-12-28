@@ -1,7 +1,7 @@
-var assert = require("assert")
-var log = require('ff-log')
-var AST = require('../../ast-node-utils').ast;
-var escodegen = require('escodegen');
+const assert = require("assert")
+const log = require('log6')
+const AST = require('../../ast-node-utils').ast;
+const escodegen = require('escodegen');
 
 // some variables we shall use..
 //we want to modify its default behavior

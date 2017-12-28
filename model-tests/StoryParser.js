@@ -1,4 +1,4 @@
-const log = require('ff-log')
+const log = require('log6')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     valueset: {
@@ -7,7 +7,7 @@ const functionMapper = {
             var $1 = args[0], $2 = args[1]
             return [function() {
                 workbook.set($1, $2)
-                if (log.DEBUG) log.debug('[%s]: %s %s', linenumber, $1, $2)
+                if (log.TRACE) log.trace('[%s]: %s %s', linenumber, $1, $2)
                 return {
                     status: 'info',
                     regeex: /variable (\w+) is set to ([0-9.,]+) for document/,
@@ -26,7 +26,7 @@ const functionMapper = {
                 var result = {};
                 let rawValue = workbook.get($1, 'value', (parseInt($4) || 1) - 1);
                 let calculatedValue = rawValue.toFixed($2);
-                if (log.DEBUG) log.debug('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, $1, $2, $3)
+                if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, $1, $2, $3)
                 if (calculatedValue != $3) {
                     result.status = 'error'
                     result.message = calculatedValue + ' is not ' + $3 + ' raw value ' + rawValue

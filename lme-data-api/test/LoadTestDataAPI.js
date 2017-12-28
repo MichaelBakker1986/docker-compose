@@ -5,7 +5,7 @@
  */
 const exec = require('child-process-promise').exec;
 const now = require('performance-now')
-const log = require('ff-log')
+const log = require('log6')
 
 function call(batchId) {
     return exec('node LoadTestClientEnvironment.js MVO ' + __dirname + '/../../model-tests/MVO/mvo.story').then(function(res) {

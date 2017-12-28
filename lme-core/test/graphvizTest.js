@@ -13,7 +13,7 @@ var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
 CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 CalculationFacade.addFunctions(require('../../excel-connect').xlsxLookup);
-var log = require('ff-log');
+var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
 var fs = require('fs');
 

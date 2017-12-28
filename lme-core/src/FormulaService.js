@@ -1,13 +1,13 @@
-var log = require('ff-log');
-var AST = require('../../ast-node-utils').ast;
-var assert = require('assert')
-var escodegen = require('escodegen')
+const log = require('log6');
+const AST = require('../../ast-node-utils').ast;
+const assert = require('assert')
+const escodegen = require('escodegen')
 /**
  * * FormulaId '0' is not a valid ID!
  */
-var variables = []
+const variables = []
 //the array index is used to be next formulaId
-var formulas = [];
+const formulas = [];
 //make 100.000 entries, we start counting here for temporally formula's
 formulas[1000] = null;
 /**
@@ -16,7 +16,7 @@ formulas[1000] = null;
  * One a formula is created, its stored in cache.
  * When another formula with the same modelFormula String is presented its checked with cache
  */
-var cache = {};
+const cache = {};
 
 function FormulaService() {
 }

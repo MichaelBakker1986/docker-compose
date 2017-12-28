@@ -1,5 +1,5 @@
-var log = require('ff-log')
-var formulaJs = require('./ff-formulajs').formulajs
+const log = require('log6')
+const formulaJs = require('./ff-formulajs').formulajs
 /**
  * Test NPV function
  */

@@ -1,5 +1,5 @@
 global.DEBUGMODUS = true;
-const log = require('ff-log')
+const log = require('log6')
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 require('../../lme-core/exchange_modules/presentation/webexport');

@@ -1,6 +1,6 @@
 const dbConnectString = process.env.FIGURE_DB_STRING;
 const orm = require("orm");
-const log = require('ff-log')
+const log = require('log6')
 exports.orm = Promise.all([
     //acquireTimeout: 1000000
     orm.connectAsync(dbConnectString).then(async (db) => {

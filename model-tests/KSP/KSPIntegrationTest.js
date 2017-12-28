@@ -11,7 +11,7 @@ var FormulaService = require('../../lme-core/src/FormulaService')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
-var log = require('ff-log')
+var log = require('log6')
 var assert = require('assert')
 require('../../math')
 var CalculationFacade = require('../../lme-core').CalculationFacade;
@@ -168,11 +168,11 @@ FormulaService.visitFormulas(function(formula) {
     if (!testVariables[variableName]) {
         if (!testedformulas[formula.original]) {
             untestedformulas++;
-            log.debug('[%s][%s][%s][%s]', variableName.replace(/(^KSP_)/gmi, ''), formula.name, formula.original, formula.parsed)
+            if (log.TRACE) log.trace('[%s][%s][%s][%s]', variableName.replace(/(^KSP_)/gmi, ''), formula.name, formula.original, formula.parsed)
         }
     }
 })
-log.debug('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
+if (log.DEBUG) log.debug('KSP untested formulas:[%s/%s]', untestedformulas, totalformulas)
 wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
 var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices')
@@ -208,7 +208,7 @@ function testVariable(variableName, level, column) {
     var result = {};
     var formula = formulas[variableName];
     var values = [];
-    log.debug(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', column), formula.original)
+    if (log.TRACE) log.trace(values + indent + '[%s][%s]=[%s]', variableName, wbKSP.get(variableName, 'value', column), formula.original)
     for (var dependencyname in formula.deps) {
         var modelVarName = modelVariableName(dependencyname);
         testVariable(modelVarName, level + 1, column)

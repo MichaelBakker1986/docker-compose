@@ -9,7 +9,7 @@ const LMEapi = require('../../lme-model-api/src/lme');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/screendefinition/screendefparser');
-const log = require('ff-log')
+const log = require('log6')
 const model = new LMEapi();
 const assert = require('assert')
 var excelPlugin = require('../../excel-connect').xlsxLookup;

@@ -1,13 +1,13 @@
 /*
  This class should have less business logic,
  Its the state wrapper around the stateless ValueFacade
- Remove All dependencies besides ValueFacade,ff-log. Even XAxis should be inside the Context Object
+ Remove All dependencies besides ValueFacade,log6. Even XAxis should be inside the Context Object
  */
 
 const SolutionFacade = require('./SolutionFacade');
 const ValueFacade = require('./ValueFacade');
 const AST = require('../../ast-node-utils').ast;
-const log = require('ff-log')
+const log = require('log6')
 const XAxis = require('./XAxis')
 const YAxis = require('./YAxis')
 
@@ -83,7 +83,7 @@ function fixAll() {
  */
 var mostcommon = {}
 
-function logErrorWithVariableName(variableName, workbook, formulaInfo) {
+function logErrorWithVariableName(variableName, workbook, formulaInfo, e) {
     return function() {
         try {
             log.debug(variableName + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
@@ -120,7 +120,7 @@ function validateImportedSolution() {
                         canFix: true,
                         variableName: variableName,
                         fixMessage: 'Add',
-                        fix: logErrorWithVariableName(variableName, workbook, formulaInfo)
+                        fix: logErrorWithVariableName(variableName, workbook, formulaInfo, e)
                     };
                 }
                 else {

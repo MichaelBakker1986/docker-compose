@@ -2,9 +2,9 @@
  * There is no way to clear State, every doImport will contribute to static state
  */
 process.alltest = true;
-var log = require('ff-log')
-var performceTestStartTime = new Date().getTime();
-var tests = [
+const log = require('log6')
+const performceTestStartTime = new Date().getTime();
+const tests = [
     './MathTest',
     './xaxisTest',
     './fflexportTest',//.FFL Language

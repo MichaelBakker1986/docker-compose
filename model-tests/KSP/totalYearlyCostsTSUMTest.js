@@ -3,7 +3,7 @@ var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var SolutionFacade = require('../../lme-core/src/SolutionFacade')
-var log = require('ff-log')
+var log = require('log6')
 var assert = require('assert')
 require('../../math/ff-math')
 var CalculationFacade = require('../../lme-core').CalculationFacade;

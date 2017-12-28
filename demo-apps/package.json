@@ -16,7 +16,7 @@
     "express-http-proxy": "^1.0.7",
     "express-no-favicons": "0.0.1",
     "express-static-gzip": "^0.3.0",
-    "ff-log": "^1.0.24",
+    "log6": "^1.0.26",
     "font-awesome": "^4.7.0",
     "gitgraph.js": "^1.11.4",
     "gulp": "^3.9.1",

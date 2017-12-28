@@ -1,0 +1,22 @@
+{
+  "name": "log6",
+  "version": "1.0.26",
+  "description": "logger",
+  "main": "log.js",
+  "scripts": {
+    "test": "node log-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
+  "keywords": [
+    "log"
+  ],
+  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://log6-example.com)",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "tracer": "^0.8.11"
+  }
+}

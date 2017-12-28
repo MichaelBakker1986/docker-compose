@@ -20,7 +20,7 @@ const debug = process.env.NODE_ENV !== 'production';
 const HipchatConnect = require('./Hipchat-connect')
 
 function spawnChildProcess(appname, args) {
-    const childProcess = spawn('node', [appname], {capture: ['stdout', 'stderr']})
+    const childProcess = spawn('node', [appname], {maxBuffer: 1024 * 500, capture: ['stdout', 'stderr']})
 
     childProcesses[appname] = childProcess;
     childProcess.stdout.on('data', (data) => {
@@ -151,4 +151,5 @@ function log(message, level) {
     HipchatConnect.log(message, level)
 }
 
-if (!developer) testAndDeploy();
+//if (!developer)
+testAndDeploy();

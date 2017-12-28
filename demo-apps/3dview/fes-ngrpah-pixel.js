@@ -1,5 +1,5 @@
 global.loglevel = 'debug'
-var log = require('ff-log')
+var log = require('log6')
 var assert = require('assert')
 var formula = require('excel-formula');
 var graph = require('./fes-dependency')

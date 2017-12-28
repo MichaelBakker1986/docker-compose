@@ -1,7 +1,7 @@
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
  */
-const log = require('ff-log');
+const log = require('log6');
 const ValueFacade = {}
 const PropertiesAssembler = require('./PropertiesAssembler');
 const FunctionMap = require('./FunctionMap');
@@ -53,7 +53,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
         //because only Formula's are known here, we cannot give away variable name here.
         throw Error('Cannot find variable')
     }
-    if (log.DEBUG) log.debug('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
+    if (log.TRACE) log.trace('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
     context.audit.push({
         saveToken: context.saveToken,

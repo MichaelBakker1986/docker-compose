@@ -17,7 +17,7 @@
     "express": "^4.16.2",
     "express-prettify": "0.0.9",
     "express-test": "^0.1.2",
-    "ff-log": "^1.0.23",
+    "log6": "^1.0.26",
     "flatten-object": "^1.2.0",
     "glob": "^7.1.2",
     "mysql": "^2.15.0",

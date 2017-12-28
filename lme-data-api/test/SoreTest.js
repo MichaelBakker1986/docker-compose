@@ -5,7 +5,7 @@
  * resolve values from childNode
  */
 const Figure = require('../api/Figure');
-const log = require('ff-log')
+const log = require('log6')
 const uuid = require('uuid4')
 Figure.orm.then((data) => {
     Figure.Figures.createAsync({

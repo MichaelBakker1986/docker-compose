@@ -6,7 +6,7 @@ const request = require('request-promise-json');
 const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
-const log = require('ff-log')
+const log = require('log6')
 const browserify = require('browserify-middleware');
 app.use(require('express-favicon')());
 const bodyParser = require('body-parser')

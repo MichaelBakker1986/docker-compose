@@ -1,7 +1,7 @@
 require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const modelAPI = require('../src/lme');
-const log = require('ff-log');
+const log = require('log6');
 const fs = require('fs');
 const assert = require('assert');
 const newModel = new modelAPI();

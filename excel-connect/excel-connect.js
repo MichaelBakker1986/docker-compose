@@ -3,7 +3,7 @@
  * The MatrixLookup function is found in math
  */
 const Excel = require('exceljs');
-const log = require('ff-log');
+const log = require('log6');
 const Promise = require('promise')
 const workbook = new Excel.Workbook();
 const fs = require('fs');

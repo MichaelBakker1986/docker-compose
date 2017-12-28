@@ -2,14 +2,14 @@
  * Solution encapsulation
  * FormulaId '0' is not a valid ID!
  */
-var log = require('ff-log')
-var Solution = require('./Solution')
-var PropertiesAssembler = require('./PropertiesAssembler')
-var FunctionMap = require('./FunctionMap')
-var FormulaService = require('./FormulaService')
-var ParserService = require('./ParserService')
-var FormulaBootstrap = require('./FormulaBootstrap');
-var esprima = require('esprima')
+const log = require('log6')
+const Solution = require('./Solution')
+const PropertiesAssembler = require('./PropertiesAssembler')
+const FunctionMap = require('./FunctionMap')
+const FormulaService = require('./FormulaService')
+const ParserService = require('./ParserService')
+const FormulaBootstrap = require('./FormulaBootstrap');
+const esprima = require('esprima')
 
 function SolutionFacade() {
 }

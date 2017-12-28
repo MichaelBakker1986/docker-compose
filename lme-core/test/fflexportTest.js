@@ -1,5 +1,5 @@
 var assert = require('assert');
-var log = require('ff-log')
+var log = require('log6')
 require('../exchange_modules/ffl/RegisterPlainFFLDecorator');//just let it inject into the FESFacade
 require('../exchange_modules/ffl/RegisterToFFL');//just let it inject into the FESFacade
 var WorkBook = require('../src/JSWorkBook');

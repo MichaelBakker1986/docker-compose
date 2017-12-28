@@ -4,7 +4,7 @@ const SolutionFacade = require('../../lme-core/src/SolutionFacade');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const path = require('path')
 const model = new LMEapi();
-const log = require('ff-log')
+const log = require('log6')
 const excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
 const fflFile = require('fs').readFileSync(__dirname + '/KSP_experience.ffl', 'utf8');

@@ -14076,7 +14076,7 @@ model V05 uses BaseModel
      data_options: hideFirstNoTrendColumn,unscalable;
      displaytype: select;
      title: "Overige mutaties EV akkoord?";
-     hint: "Een bedrag dat wordt getoond bij \"Overige mutaties eigen vermogen\" kan worden geaccepteerd door \"ja\" in te vullen.\r\nIn dat geval zullen alle beperkingen met betrekking tot het rapporteren vanwege de onverklaarde vermogensmutaties worden opgeheven.";
+     hint: "Een bedrag dat wordt getoond bij 'Overige mutaties eigen vermogen' kan worden geaccepteerd door 'ja' in te vullen.\r\nIn dat geval zullen alle beperkingen met betrekking tot het rapporteren vanwege de onverklaarde vermogensmutaties worden opgeheven.";
      visible: 1;
      choices: "Nee|Ja";
      link: OtherMutationsNetWorth;
@@ -48102,7 +48102,7 @@ model V05 uses BaseModel
        data_options: unscalable;
        displaytype: select;
        title: "Gebruik factureringsschema voor bepalen inkomsten?";
-       hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via een Omzet-Optie.";
+       hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via een Omzet-Optie.";
        top_blanklines: 1;
        visible: 1;
        choices: "0:Nee|1:Ja";
@@ -48118,7 +48118,7 @@ model V05 uses BaseModel
        data_options: unscalable;
        fixed_decimals: 1;
        title: "Factureringsschema";
-       hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via een Omzet-Optie.";
+       hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via een Omzet-Optie.";
        top_separator: 1;
        visible: 1;
        options_title: locked;
@@ -49148,7 +49148,7 @@ model V05 uses BaseModel
       data_options: unscalable;
       displaytype: select;
       title: "Gebruik betaalschema lonen voor liquiditeit";
-      hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via de optie \"Personeel\".";
+      hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via de optie 'Personeel'.";
       top_blanklines: 1;
       visible: 1;
       choices: "0:Nee|1:Ja";
@@ -49164,7 +49164,7 @@ model V05 uses BaseModel
       data_options: unscalable;
       fixed_decimals: 1;
       title: "Betaalschema lonen";
-      hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via de optie \"Personeel\".";
+      hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via de optie 'Personeel'.";
       top_separator: 1;
       visible: 1;
       options_title: locked;

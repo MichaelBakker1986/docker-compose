@@ -21,12 +21,12 @@
 function FormulaBootstrap() {
 }
 
-var log = require('ff-log');
-var assert = require('assert');
-var AST = require('../../ast-node-utils').ast;
-var esprima = require('esprima')
-var escodegen = require('escodegen')
-var simplified = require('./ASTPreparser')
+const log = require('log6');
+const assert = require('assert');
+const AST = require('../../ast-node-utils').ast;
+const esprima = require('esprima')
+const escodegen = require('escodegen')
+const simplified = require('./ASTPreparser')
 var variables;
 let functions;
 var getOrCreateProperty;

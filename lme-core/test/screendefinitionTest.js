@@ -1,5 +1,5 @@
 var JUNIT = require('./JUNIT.js');
-var log = require('ff-log')
+var log = require('log6')
 require('../exchange_modules/screendefinition/screendefparser');//just let it inject into the FESFacade
 require('../exchange_modules/ffl/RegisterPlainFFLDecorator');//just let it inject into the FESFacade
 var JSWorkBook = require('../src/JSWorkBook');

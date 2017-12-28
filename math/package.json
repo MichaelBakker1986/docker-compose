@@ -6,7 +6,7 @@
   "main": "ff-math.js",
   "dependencies": {
     "algebra.js": "^0.2.6",
-    "ff-log": "^1.0.24",
+    "log6": "^1.0.26",
     "js-solver": "0.0.2"
   },
   "scripts": {
@@ -15,6 +15,6 @@
   "keywords": [
     "math"
   ],
-  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://ff-log-example.com)",
+  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://log6-example.com)",
   "license": "ISC"
 }

@@ -1,8 +1,8 @@
-var SolutionFacade = require('../../src/SolutionFacade')
-var FormulaService = require('../../src/FormulaService')
-var PropertiesAssembler = require('../../src/PropertiesAssembler')
-var FunctionMap = require('../../src/FunctionMap')
-var log = require('ff-log');
+const SolutionFacade = require('../../src/SolutionFacade')
+const FormulaService = require('../../src/FormulaService')
+const PropertiesAssembler = require('../../src/PropertiesAssembler')
+const FunctionMap = require('../../src/FunctionMap')
+const log = require('log6');
 
 function FormulaInfo(data, schema, modelName) {
     this.formulas = [];

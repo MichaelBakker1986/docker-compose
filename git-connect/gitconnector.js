@@ -1,5 +1,5 @@
 const glob = require('glob')
-const log = require('ff-log')
+const log = require('log6')
 const fs = require('fs');
 const fileSystemFFLModelsSearchPath = __dirname + '/resources/**';
 const enabledModels = (process.env.ENABLED_MODELS || '.*').split(',')

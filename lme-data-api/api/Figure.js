@@ -17,7 +17,7 @@
  */
 const dbConnectString = process.env.FIGURE_DB_STRING || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
 const orm = require("orm");
-const log = require('ff-log')
+const log = require('log6')
 
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {

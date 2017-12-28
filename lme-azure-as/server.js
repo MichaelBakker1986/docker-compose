@@ -2,7 +2,7 @@
 const express = require('express');
 const pretty = require('express-prettify');
 const bodyParser = require('body-parser');
-const log = require('ff-log');
+const log = require('log6');
 
 const hostname = require('os').hostname();
 const port = process.env.PORT || 1337;

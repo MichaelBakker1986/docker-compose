@@ -5,7 +5,7 @@
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
 var assert = require('assert')
 var modelAPI = require('../src/lme')
-var log = require('ff-log')
+var log = require('log6')
 require('../../lme-core/exchange_modules/presentation/webexport');
 var rp = require('request-promise');
 var newModel = new modelAPI();

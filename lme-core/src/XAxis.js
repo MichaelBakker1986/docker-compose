@@ -27,7 +27,7 @@
 //Document can only refer to itsself
 //can easy be refactored for better performance
 var importData = require('../resources/CustomImport.json');
-var log = require('ff-log');
+var log = require('log6');
 var headers = {
     title: {
         title: 'title'

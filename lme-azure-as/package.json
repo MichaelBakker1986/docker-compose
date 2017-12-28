@@ -20,7 +20,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-prettify": "0.0.10",
-    "ff-log": "file:../ff-log",
+    "log6": "^1.0.26",
     "lme-data-app": "file:../lme-data-api"
   },
   "devDependencies": {

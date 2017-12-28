@@ -1,5 +1,5 @@
 const exec = require('child-process-promise').exec;
-const log = require('ff-log');
+const log = require('log6');
 const host = process.env.HOST || '127.0.0.1'
 const develop = (host == '127.0.0.1');
 //make git ls-files-root alias

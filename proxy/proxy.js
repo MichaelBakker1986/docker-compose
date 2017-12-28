@@ -10,7 +10,7 @@ const domain = 'http://' + host + ':' + port + '/';
 const express = require('express');
 const app = express();
 const proxy = require('http-proxy-middleware');
-const log = require('ff-log')
+const log = require('log6')
 const proxyLogLevel = (log.DEBUG ? 'debug' : 'silent')
 const morgan = require('morgan')
 

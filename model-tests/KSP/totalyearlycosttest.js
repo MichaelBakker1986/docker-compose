@@ -6,7 +6,7 @@ require('../../math')
 var CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-const log = require('ff-log')
+const log = require('log6')
 CalculationFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete().then(function(matrix) {
     var wb = new WorkBook(new Context());

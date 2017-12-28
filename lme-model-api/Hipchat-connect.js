@@ -3,7 +3,7 @@ const host = host_environment_variable || '127.0.0.1'
 const hipchatapikey = process.env.HIPCHAT_API_KEY;
 const hipchat_endpoint = 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + hipchatapikey;
 const request = require('request');
-const log = require('ff-log')
+const log = require('log6')
 const developer = (host === '127.0.0.1');
 
 class HipchatConnect {

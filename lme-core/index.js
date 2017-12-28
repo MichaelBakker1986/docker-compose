@@ -3,7 +3,7 @@
  * TODO: Move tuple related work to FESFacade
  */
 require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
-var log = require("ff-log");
+var log = require("log6");
 var WorkBook = require("./src/JSWorkBook");
 var Context = require("./src/Context");
 var TupleIndexConverter = require("./src/TupleIndexConverter");
@@ -32,7 +32,7 @@ LMEService.prototype.addFunctions = function(plugin) {
         functions.push(functionName);
         global[functionName] = plugin.entries[functionName];
     }
-    if (log.DEBUG) log.debug('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
+    if (log.TRACE) log.trace('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
 };
 /**
  * rowId - VariableName

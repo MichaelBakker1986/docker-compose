@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "formulajs": "^1.0.8",
-    "ff-log": "^1.0.23"
+    "log6": "^1.0.26"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
-const log = require('ff-log')
+const log = require('log6')
 const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFacade
 
 module.exports.setup = function(app) {

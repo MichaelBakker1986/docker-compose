@@ -1,7 +1,7 @@
 const StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');
-const log = require('ff-log')
+const log = require('log6')
 const path = require('path')
 const model = new LMEapi();
 var excelPlugin = require('../../excel-connect').xlsxLookup;

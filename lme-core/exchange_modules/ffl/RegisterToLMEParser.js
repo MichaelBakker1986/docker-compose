@@ -2,7 +2,7 @@ const SolutionFacade = require('../../src/SolutionFacade')
 const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
 const FinFormula = require('./FinFormula')
 const AST = require('../../../ast-node-utils/index').ast
-const log = require('ff-log')
+const log = require('log6')
 var esprima = require('esprima');
 
 /**
@@ -188,7 +188,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
         formulaReturn = esprima.parse(finparse).body[0].expression
     }
     catch (e) {
-        log.debug('unable to parse [' + finparse + '] returning it as String value [' + nodeName + "] : " + col, e);
+        if (log.DEBUG) log.debug('unable to parse [' + finparse + '] returning it as String value [' + nodeName + "] : " + col, e);
         formulaReturn = AST.STRING(finparse);
     }
     return formulaReturn;

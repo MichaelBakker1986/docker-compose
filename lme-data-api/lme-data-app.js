@@ -4,7 +4,7 @@ const request = require('request-promise-json');
 const domain = 'http://' + host + ':' + port + '/';
 const proxyhost = process.env.PROXY_HOST || 7080
 const express = require('express');
-const log = require('ff-log');
+const log = require('log6');
 const app = express();
 const https = require('https');
 

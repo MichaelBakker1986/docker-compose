@@ -1,7 +1,7 @@
 const assert = require('assert')
 const WorkBook = require('../src/JSWorkBook')
 const Context = require('../src/Context')
-const log = require('ff-log')
+const log = require('log6')
 require('../../math')
 const CalculationFacade = require('../').CalculationFacade;
 CalculationFacade.addFunctions(require('../../formulajs-connect/formulajs').formulajs);

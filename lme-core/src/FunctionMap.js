@@ -1,4 +1,4 @@
-var log = require('ff-log')
+const log = require('log6')
 
 /**
  * The map that contains parsed model-functions

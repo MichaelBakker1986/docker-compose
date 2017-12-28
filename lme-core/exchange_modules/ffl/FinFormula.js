@@ -93,22 +93,20 @@ function finChoice(formula) {
     //three options
     //Directly with mm/dd/yy
     else if (formula.indexOf("|") < 0 && formula.indexOf(":") < 0) {
-        return "[{ \"name\" : \"" + formula + "\", \"value\" : \"" + formula + "\" }]";
+        const cleanslice = formula.slice(1, -1);
+        return '[{ "name": "' + cleanslice + '", "value": "' + cleanslice + '" }]';
     }
     //NL|USA|BEL|GER
     else if (formula.indexOf(":") < 0) {
-        var split = formula.split('|');
+        let split = formula.split('|');
+        //remove a trailing and leading " character.
+        split[0] = split[0].slice(1);
         split[split.length - 1] = split[split.length - 1].slice(0, -1);
-        split[0] = split[0].substr(split[0].indexOf('\'') + 1);
 
-        var choices = "{ \"name\" : \"" + split[0] + "\", \"value\" : \"" + split[0] + "\" } ";
-
-        for (var i = 1; i < split.length; i++) {
-            var obj = split[i];
-            choices += ", { \"name\" : \"" + obj + "\", \"value\" : \"" + obj + "\" }";
-        }
-
-        return "[" + choices + "]";
+        split = split.map(function(e, idx) {
+            return '{ "name":' + idx + ' ,"value":' + (e ? '"' + e + '"' : null) + '}'
+        })
+        return "[" + split.join(',') + "]";
     }
     //HIGH:1|LOW:2|UNKNOWN:3
     else {

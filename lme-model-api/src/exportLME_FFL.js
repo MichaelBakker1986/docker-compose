@@ -8,7 +8,7 @@ const name = process.argv[2];
 const fflType = 'importFFL2BackwardsCompatible';
 const fileType = '.ffl';
 const lmeAPI = require('./lme')
-const log = require('ff-log')
+const log = require('log6')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const CalculationFacade = require('../../lme-core').CalculationFacade;
@@ -39,7 +39,7 @@ ExcelLookup.initComplete(xlsxname).then(function(matrix) {
         insertGlobals: true,
         debug: false
     };
-    let b = browser(options).ignore('escodegen').ignore('esprima').ignore('ff-log').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
+    let b = browser(options).ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
     b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js');
     b.add(__dirname + '/lmeAPIWrapper.js');
     b.transform(require('browserify-fastjson'));
