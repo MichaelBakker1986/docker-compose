@@ -3,7 +3,7 @@ import BaseModel.*;
 
 model SCORECARDTESTMODEL  uses BaseModel 
 {
- version: "01.19.000.004";
+ version: "01.19.000.005";
  root
  {
   variable RootSub1
