@@ -38,8 +38,7 @@ app.listen(port, () => {
     })
     routes.push('*.html')
 
-   // routes.push('*.css')
-
+    routes.push('*/lme_docs.pdf')
     routes.push('*/AdminLTE.min.css')
     routes.push('*/_all-skins.min.css')
     routes.push('*/aceide.css')
