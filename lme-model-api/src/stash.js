@@ -41,7 +41,7 @@ class Stash {
                         log.info("[" + user_id + "] modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + user_id + "@" + host + '" && git push && git rev-parse HEAD';
+                    let command = 'git pull &&  git commit -a -m "Model update [' + name + '] by ' + user_id + '@' + host + '" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
                         var output = ok.stdout.split('\n');
                         const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
