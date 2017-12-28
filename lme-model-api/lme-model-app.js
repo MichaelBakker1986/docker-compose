@@ -71,9 +71,10 @@ app.get('*/model', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
-app.post('*/saveFFLModel/:model_name', (req, res) => {
+app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
     const model_name = req.params.model_name;
-    stash.commit(model_name, req.body.data, req.body.type).then((data) => {
+    const user_id = req.params.user_id;
+    stash.commit(user_id, model_name, req.body.data, req.body.type).then((data) => {
         res.json({status: 'ok'});
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err)

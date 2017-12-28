@@ -28,7 +28,8 @@ class Stash {
             })
     }
 
-    commit(name, data, type) {
+//TODO: backupfile, on fail restore old file
+    commit(user_id, name, data, type) {
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {
@@ -37,15 +38,15 @@ class Stash {
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + host + ':8083/id/' + userID + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');
-                        log.info("DEMO user modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+                        log.info("[" + user_id + "] modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
-                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + host + '" && git push && git rev-parse HEAD';
+                    let command = 'git pull &&  git commit -a -m "Model update ' + name + ' by ' + user_id + "@" + host + '" && git push && git rev-parse HEAD';
                     return exec(command).then((ok) => {
                         var output = ok.stdout.split('\n');
                         const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
 
-                        console.info('<a href="http://' + host + ':8083/id/' + userID + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By DEMO</span>');
+                        console.info('<a href="http://' + host + ':8083/id/' + userID + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + "@" + host + '</span>');
                     }).catch((err) => {
                         throw Error('GIT commit failed while pushing file to repository:[' + err.toString() + ']')
                     })
