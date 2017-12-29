@@ -150,9 +150,10 @@ class Authorization {
     isAnonymous(resource) {
         const real_resource = resource.split('?')[0];
         /**
-         * Add the data-docs wildcard as anonymous resource
+         * Tricky exclusion since wildcards are more complex to manage.
+         * Add the ^/data-docs/* wildcard as anonymous resource
          */
-        if (/\/data-docs\/.*/.test(real_resource)) {
+        if (/^\/data-docs\/.*/.test(real_resource)) {
             return true;
         }
         return (anonymous[real_resource]) || false;

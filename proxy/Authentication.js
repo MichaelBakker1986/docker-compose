@@ -1,8 +1,6 @@
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const domain = 'http://127.0.0.1:8091'
-const host = process.env.HOST || '127.0.0.1'
 const developer = false;//(host === 'localhost' || host === '127.0.0.1');
 
 class Authentication {
@@ -11,7 +9,6 @@ class Authentication {
         passport.use(new Strategy({
                 clientID: '180467995863988',
                 clientSecret: 'b10828749578d1bd1402e8c57b72b01d',
-                callbackURL: "http://" + domain,
                 passReqToCallback: true
             },
             function(req, refreshToken, accessToken, profile, cb) {
@@ -47,7 +44,6 @@ class MockAuthentication {
         passport.use(new LocalStrategy({
                 clientID: '180467995863988',
                 clientSecret: 'b10828749578d1bd1402e8c57b72b01d',
-                callbackURL: "http://" + domain,
                 passReqToCallback: true
             },
             function(req, username, password, done) {

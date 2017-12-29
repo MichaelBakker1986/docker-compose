@@ -5,11 +5,34 @@ ssh-keygen -t rsa
 
 vim id_rsa.pub = {Public SSH key for Stash}
 
-set environment variable HOST={{your_host_name}} : defaults to 'localhost'
-set environment variable RROXY_HOST={{PROXY_HOST_PORT}} : defaults to 7080
-set environment variable FACEBOOK_PROXY_PORT={{FACEBOOK_AUTH_PROXY_PORT}} : defaults to 9091
-set environment variable ENABLED_MODELS={{KSP,MVO}} : defaults to '*'. Allows wildcards in modelnames.
-set environment variable HIPCHAT_API_KEY={{hipchat_api_key}} : defaults to 'Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW'.
+#(optional) The external HOST. e.g. appmodel.nl
+# - defaults to 127.0.0.1
+set environment variable HOST={{your_host_name}}
+
+#(optional) The external domain. e.g. appmodel.nl
+# - defaults to appmodel.org
+set environment variable DOMAIN={{your_domain_name}}
+
+#(optional) The internal gateway between (reverse named proxy to internal micro services)
+# - defaults to 7081
+set environment variable INTERNAL_PROXY_PORT={{INTERNAL_PROXY_PORT}}
+
+#(optional) The exposed Authorization port
+# - defaults to 8091
+set environment variable EXPOSED_AUTHENTICATION_PORT={{EXPOSED_AUTHENTICATION_PORT}}
+
+#(optional) The models the server will expose to the services
+# - Allows wildcards in modelnames.
+# - defaults to '*'.
+set environment variable ENABLED_MODELS={{KSP,MVO}}
+
+#(optional) Hipchat authorization key
+# - defaults to Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
+set environment variable HIPCHAT_API_KEY={{hipchat_api_key}}
+
+#(optional) Postgres database connection URL
+# - defaults to postgresql://postgres:postgres@localhost/lme
+set environment variable FIGURE_DB_STRING={{database_string}}
 
 #----- VIA DOCKER
 git clone ssh://git@stash.topicus.nl:7999/ff/fesjs.git

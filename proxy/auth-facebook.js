@@ -4,8 +4,10 @@
  * Delegates Authorization to ACL {Authorization.js}
  * TODO: Bypass all authorization and identification in developer mode
  */
-const port = process.env.FACEBOOK_PROXY_PORT || 8091;
-const internalRedirectUrl = "http://127.0.0.1:" + 7080;
+const exposed_authentication_port = process.env.EXPOSED_AUTHENTICATION_PORT || 8091;
+const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
+
+const internalRedirectUrl = "http://127.0.0.1:" + internal_proxy_port;
 const domain = process.env.DOMAIN || 'appmodel.org'
 
 const express = require('express');
@@ -70,6 +72,6 @@ proxy.on('proxyRes', (res) => {
     if (res.headers['x-auth-id']) auth.addModelInstancePrivileges(res.req.path.split('/')[2], res.headers['x-auth-id'])
 });
 
-app.listen(port, () => {
+app.listen(exposed_authentication_port, () => {
     log.info('<a href="http://' + domain + '/">AUTH Server</a><span> deployed.</span>');
 });

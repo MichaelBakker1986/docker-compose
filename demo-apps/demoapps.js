@@ -1,5 +1,6 @@
 const port = 8083;
-const proxyhost = process.env.PROXY_HOST || 7080
+const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
+
 const host = process.env.HOST || '127.0.0.1'
 const request = require('request-promise-json');
 const log = require('log6')
@@ -74,12 +75,12 @@ app.listen(port, () => {
     routes.push('*.story')
     routes.push('*.xlsx')
     const route = routes.join(',')
-    request.get('http://' + host + ':' + proxyhost + '/register/service/fs-api/' + host + '/' + port + '/' + route).then(function(data) {
+    request.get('http://' + host + ':' + internal_proxy_port + '/register/service/fs-api/' + host + '/' + port + '/' + route).then(function(data) {
         if (log.DEBUG) log.debug(data);
     }).catch(function(err) {
         log.error('Failed to register ', err);
     });
-    var proxy_domain = host + ':' + proxyhost;
+    var proxy_domain = host + ':' + internal_proxy_port;
     console.info(
         '<span>DEMO apps: </span>\n' +
         '<a href="http://' + proxy_domain + '/id/DEMO/scorecard.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +

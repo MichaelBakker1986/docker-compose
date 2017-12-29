@@ -2,7 +2,8 @@ const port = 8085;
 const host = process.env.HOST || '127.0.0.1';
 const request = require('request-promise-json');
 const domain = process.env.DOMAIN || host + ':' + port
-const proxyhost = process.env.PROXY_HOST || 7080
+const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
+
 const express = require('express');
 const log = require('log6');
 const app = express();
@@ -35,7 +36,7 @@ app.listen(port, () => {
             routes.push(r.route.path)
         }
     })
-    request.get('http://' + host + ':' + proxyhost + '/register/service/model-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
+    request.get('http://' + host + ':' + internal_proxy_port + '/register/service/model-api/' + host + '/' + port + '/' + routes.join(',')).then(function(data) {
         if (log.DEBUG) log.debug(data);
     }).catch(function(err) {
         log.error('Failed to register ', err);

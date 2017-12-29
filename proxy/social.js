@@ -1,5 +1,5 @@
-var port = 8091;
-var host = "94.213.30.5";
+const exposed_authentication_port = process.env.EXPOSED_AUTHENTICATION_PORT || 8091;
+const domain = process.env.DOMAIN || 'appmodel.org'
 var express = require('express');
 var app = express();
 /**
@@ -10,7 +10,7 @@ var socialLoginClass = require("social-login");
 var socialLogin = new socialLoginClass({
     //    returnRaw: true,
     app: app,    // ExpressJS instance
-    url: "http://" + host + ":" + port,  // Your root url
+    url: "http://" + domain,  // Your root url
     onAuth: function(req, type, uniqueProperty, accessToken, refreshToken, profile, done) {
 
         // This is the centralized method that is called when the user is logged in using any of the supported social site.
@@ -47,6 +47,6 @@ app.get('/interest', function(req, res) {
     res.end('interest' + res.user)
 });
 
-app.listen(port, function() {
-    console.log('<a href="http://' + host + ':' + port + '/auth/facebook">AUTH Server</a><span> deployed.</span>');
+app.listen(exposed_authentication_port, function() {
+    console.log('<a href="http://' + host + ':' + exposed_authentication_port + '/auth/facebook">AUTH Server</a><span> deployed.</span>');
 });
