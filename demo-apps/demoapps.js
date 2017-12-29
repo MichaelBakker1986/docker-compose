@@ -39,6 +39,12 @@ app.listen(port, () => {
     })
     routes.push('*/aceide.html')
     routes.push('*/scorecard.html')
+    routes.push('*/HoeveelKostEenStudie.html')
+    routes.push('*/WatKostEenKind.html')
+    routes.push('*/showcase.html')
+    routes.push('*/basic_example.html')
+    routes.push('*/uishowcase.html')
+    routes.push('*/extended_controller.html')
     routes.push('*/Promotion.html')
 
     routes.push('*/lme_docs.pdf')

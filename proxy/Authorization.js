@@ -35,6 +35,9 @@ class Authorization {
             '/data-docs',
             '/data-docs/',
             '/figure/KinderSpaarPlan',
+            '/basic_example.html',
+            '/extended_controller.html',
+            '/uishowcase.html',
             '/data-api-docs',
             "/Promotion.html",
             "/monli.css",
@@ -99,6 +102,8 @@ class Authorization {
         const secure_resources = [
             //IDE-FFL model Instance
             "/HoeveelKostEenStudie.html",
+            "/showcase.html",
+            "/WatKostEenKind.html",
             "/data/DEMO",              //TODO: DEMO is a various hash of figure-state.
             "/resources/MVO.js",
             "/resources/MVO.story",
@@ -114,6 +119,7 @@ class Authorization {
             this.acl.allow(MichaelFaceBookID, secure_resources[i], VIEW_RULE)
         }
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL");
+        this.addModelPrivileges(MichaelFaceBookID, "KSP");
         this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");
     }
 
