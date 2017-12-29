@@ -47,6 +47,7 @@ app.listen(port, () => {
     routes.push('*/aceide.css')
     routes.push('*/bundle.css')
     routes.push('*/grid_example.css')
+    routes.push('*/resources/lme_docs.pdf')
     routes.push('*/monli.css')
     routes.push('*/fresh.css')
     routes.push('*/style.css')

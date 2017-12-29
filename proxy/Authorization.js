@@ -105,9 +105,10 @@ class Authorization {
             "/excel/MVO",
             "/resources/MVO.ffl",
 
-            "/branches",  //IDE
-            "/models",    //IDE
-            "/hasUpdates" //IDE
+            "/branches",               //IDE
+            "/models",                 //IDE
+            "/hasUpdates",             //IDE
+            "/update/git/notifyCommit" //IDE
         ]
         for (var i = 0; i < secure_resources.length; i++) {
             this.acl.allow(MichaelFaceBookID, secure_resources[i], VIEW_RULE)
@@ -124,6 +125,7 @@ class Authorization {
         this.acl.allow(id, "/preview/" + modelname, VIEW_RULE)
         this.acl.allow(id, "/saveFFLModel/" + modelname, VIEW_RULE)
         this.acl.allow(id, "/scorecard.html", VIEW_RULE)
+        this.acl.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
     }
 
     /**
