@@ -11,7 +11,7 @@ function correctFileName(name) {
 angular.module('angapp').controller('graphController', function($scope, $http, $rootScope) {
 
     var params = window.location.href.split('#')[1].split('&')
-    var model = params[0] || 'MVO';
+    var model = params[0] || 'SCORECARDTESTMODEL';
     let hash = params[1] || 'DEMO';
     $http.get('/id/' + hash + '/data').then(function(data) {
         var master = gitgraph.branch("master");

@@ -1,7 +1,8 @@
 const port = 8083;
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-
 const host = process.env.HOST || '127.0.0.1'
+const domain = process.env.DOMAIN || (host + ":" + internal_proxy_port + ':/id/guest')
+
 const request = require('request-promise-json');
 const log = require('log6')
 const compression = require('compression')
@@ -28,7 +29,6 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/lme-ide/dist/"));
 
 app.listen(port, () => {
-    var domain = host + ':' + port;
 
     //talk with the proxy
     const routes = [];
@@ -83,14 +83,14 @@ app.listen(port, () => {
     var proxy_domain = host + ':' + internal_proxy_port;
     console.info(
         '<span>DEMO apps: </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/scorecard.html#MVO&DEMO">Bootstrap Grid example</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/SlimmeOuder/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/SlimmeOuder/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/scorecard.html">Bootstrap Grid example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
         '<br><span>IDE apps: </span>\n' +
-        '<a href="http://' + proxy_domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n'
+        '<a href="http://' + domain + '/aceide.html">IDE DEMO Application</a><span> | </span>\n'
     )
 });

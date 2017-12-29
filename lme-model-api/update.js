@@ -3,9 +3,12 @@
  * @type {number}
  */
 const port = 8081;
-const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-const express = require('express');
 const host = process.env.HOST || '127.0.0.1'
+const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
+const domain = process.env.DOMAIN || ('http://' + host + ':' + internal_proxy_port + '/id/guest');
+const developer = (host === 'localhost' || host === '127.0.0.1');
+
+const express = require('express');
 const now = require("performance-now")
 const request = require('request-promise-json');
 const app = express();
@@ -15,7 +18,7 @@ const exec = require('child-process-promise').exec;
 const spawn = require('child_process').spawn;
 let busyRedeploying = false;
 const childProcesses = {}
-const developer = (host === 'localhost' || host === '127.0.0.1');
+
 const debug = process.env.NODE_ENV !== 'production';
 const HipchatConnect = require('./Hipchat-connect')
 
@@ -152,10 +155,11 @@ function registerToProxy() {
 
 app.listen(port, () => {
     if (developer) registerToProxy()
-    log('<span>Auto update </span><a href="http://' + host + ":" + port + '/update/git/notifyCommit' + '">server</a><span> deployed</span>');
+    log('<span>Auto update </span><a href="http://' + domain + '/update/git/notifyCommit">server</a><span> deployed</span>');
 });
 
 function log(message, level) {
     HipchatConnect.log(message, level)
 }
+
 if (!developer) testAndDeploy();

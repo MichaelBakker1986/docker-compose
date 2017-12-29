@@ -6,8 +6,8 @@
  */
 const exposed_authentication_port = process.env.EXPOSED_AUTHENTICATION_PORT || 8091;
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-
 const internalRedirectUrl = "http://127.0.0.1:" + internal_proxy_port;
+
 const domain = process.env.DOMAIN || 'appmodel.org'
 
 const express = require('express');

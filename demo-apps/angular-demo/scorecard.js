@@ -3,9 +3,9 @@ let hash;
 
 function redefineParaments() {
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#MVO&DEMO'
+    if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
     var params = window.location.href.split('#')[1].split('&')
-    modelName = params[0] || 'MVO';
+    modelName = params[0] || 'SCORECARDTESTMODEL';
     hash = params[1] || 'DEMO';
 }
 
