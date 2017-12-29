@@ -372,7 +372,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     title: "Map 1";
     displaytype: select;
     choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-    hint: "ScorecardTestModel";
+    hint: "Guus was here";
     top_blanklines: 1;
     locked: On;
     visible: 1;
