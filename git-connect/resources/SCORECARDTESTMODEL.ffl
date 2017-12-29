@@ -210,7 +210,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     visible: 1;
     options_title: locked;
    }
-   variable FPS_VAR_BIK_Omschr
+   variable FPS_VAR_Accountmanager
    {
     datatype: string;
     frequency: document;
