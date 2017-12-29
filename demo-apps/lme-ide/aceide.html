@@ -74,6 +74,9 @@
                                 <button type="button" ng-if="error" data-toggle="tooltip" title="{{error}}"
                                         class="btn btn-info btn-flat" style="background-color: orange"><i
                                         class="fa fa-info-circle"></i></button>
+                             <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="previewRestApi()" data-toggle="tooltip" title="Preview {{session.fflModelPath}} API"
+                                     class="btn btn-info btn-flat"><i
+                                     class="fa fa-file-code-o"></i></button>
                         </span>
                         <input id="page" ng-model="session.page" type="text" class="form-control" placeholder="scorecard">
                     </div>

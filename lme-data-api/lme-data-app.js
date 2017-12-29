@@ -1,7 +1,7 @@
 const port = 8085;
 const host = process.env.HOST || '127.0.0.1';
 const request = require('request-promise-json');
-const domain = 'http://' + host + ':' + port + '/';
+const domain = process.env.DOMAIN || host + ':' + port
 const proxyhost = process.env.PROXY_HOST || 7080
 const express = require('express');
 const log = require('log6');
@@ -10,6 +10,7 @@ const https = require('https');
 
 app.set('port', port)
 app.set('host', host)
+app.set('domain', domain)
 app.use(require('cors')())
 const bodyParser = require('body-parser');
 

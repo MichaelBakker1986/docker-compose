@@ -233,6 +233,15 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             });
         });
     }
+    $scope.previewRestApi = function() {
+        Pace.track(function() {
+            $.post("preview/" + $scope.session.fflModelPath, {
+                data: aceEditor.getValue()
+            }, function(data) {
+                window.open('data-api-docs');
+            });
+        });
+    }
     global.debug = function(name) {
         debugManager.addStep(name)
     }

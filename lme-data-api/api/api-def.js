@@ -14,7 +14,7 @@ module.exports.setup = function(app) {
         //TODO: check authorization role for fire-grained definiton. For now privacy > rest
         //maybe via filename, maybe life-generated.
         let swaggerData = require(__dirname + '/AuthenticatedSwaggerDefinition.json');
-        swaggerData.host = (host + ':' + port);
+        swaggerData.host = domain;
         res.json(swaggerData)
     });
 };

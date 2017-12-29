@@ -6,7 +6,7 @@
  */
 const port = process.env.FACEBOOK_PROXY_PORT || 8091;
 const internalRedirectUrl = "http://127.0.0.1:" + 7080;
-const domain = 'appmodel.org'
+const domain = process.env.DOMAIN || 'appmodel.org'
 
 const express = require('express');
 const httpProxy = require('http-proxy');
@@ -18,11 +18,15 @@ const proxy = httpProxy.createProxyServer({});
 const app = express();
 const bodyParser = require('body-parser');
 
-if (log.DEBUG) app.use(require('morgan')('combined'));
+app.use(require('cors')())
+//if (log.DEBUG)
+app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);
-
+app.get('/fail', (req, res) => {
+    res.status(401).send('Unauthorized facebook user');
+});
 /**
  * proxy every request
  */
@@ -65,9 +69,7 @@ app.all('*', function(req, res, next) {
 proxy.on('proxyRes', (res) => {
     if (res.headers['x-auth-id']) auth.addModelInstancePrivileges(res.req.path.split('/')[2], res.headers['x-auth-id'])
 });
-app.get('/fail', (req, res) => {
-    res.status(401).send('Unauthorized facebook user');
-});
+
 app.listen(port, () => {
     log.info('<a href="http://' + domain + '/">AUTH Server</a><span> deployed.</span>');
 });

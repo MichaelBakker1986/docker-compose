@@ -31,7 +31,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
         for (var i = 0; i < inputNodes.length; i++) {
             var node = inputNodes[i];
             endPointname = node[indexer.schemaIndexes.name]
-            const operation = "/id/{id}/figure/" + endPointname;
+            const operation = "/figure/" + endPointname;
             const schema = lmeModel.export('swagger', {
                 rowId: endPointname,
                 type: 'input'
@@ -47,14 +47,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
                         "produces": [
                             "application/json"
                         ],
-                        "parameters": [
-                            {
-                                "$ref": "#/parameters/ContextId"
-                            },
-                            {
-                                "$ref": "#/parameters/Times"
-                            }
-                        ],
+                        "parameters": [],
                         "responses": {
                             "200": {
                                 "description": "Success",
@@ -80,7 +73,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
                 rowId: node[indexer.schemaIndexes.name],
                 type: 'output'
             });
-            APIDefinition.paths["/id/{id}/figure/" + endPointname].post.responses["200"] = {
+            APIDefinition.paths["/figure/" + endPointname].post.responses["200"] = {
                 "description": "Success",
                 "schema": swaggerSchema
             }

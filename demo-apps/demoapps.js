@@ -36,7 +36,9 @@ app.listen(port, () => {
             routes.push(r.route.path)
         }
     })
-    routes.push('*.html')
+    routes.push('*/aceide.html')
+    routes.push('*/scorecard.html')
+    routes.push('*/Promotion.html')
 
     routes.push('*/lme_docs.pdf')
     routes.push('*/AdminLTE.min.css')
