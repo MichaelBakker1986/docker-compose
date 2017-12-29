@@ -22,7 +22,7 @@ const bodyParser = require('body-parser');
 
 app.use(require('cors')())
 //if (log.DEBUG)
-app.use(require('morgan')('combined'));
+app.use(require('morgan')(':remote-addr - :method :url :status :res[content-length] b - :response-time ms'));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);
