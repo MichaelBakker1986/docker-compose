@@ -57,8 +57,8 @@ docker-compose -f docker-compose-db.yml up
 #default IP = 127.0.0.1, preferred over 'localhost' since 127.0.0.1 also works without internet connection.
 #All calls are proxied through {PROXY_PORT|7080} Proxy.js
 #Services register with {@Proxy.js} at http://{HOST|localhost}:{PROXY_PORT|7080}/register/service/:name/:host/:port/*
-#Authentication via {@auth-facebook.js} on port {FACEBOOK_PROXY_PORT|8091}
-#Authorization via {@auth-facebook.js} with ACL @{Authorization.js}
+#Authentication via {@SecurityPortal.js} on port {FACEBOOK_PROXY_PORT|8091}
+#Authorization via {@SecurityPortal.js} with ACL @{Authorization.js}
 
 
 #DOCS

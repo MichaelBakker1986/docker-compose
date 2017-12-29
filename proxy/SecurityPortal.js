@@ -2,7 +2,9 @@
  * Request gateway
  * Delegates Authentication to {Authentication.js}
  * Delegates Authorization to ACL {Authorization.js}
- * TODO: Bypass all authorization and identification in developer mode
+ * (!) when running in developer mode. add to hosts file. (its registered as facebook-app known host.
+ *        127.0.0.1  kspapp.local.com
+ *     -- https://stackoverflow.com/questions/2459728/how-to-test-facebook-connect-locally
  */
 const exposed_authentication_port = process.env.EXPOSED_AUTHENTICATION_PORT || 8091;
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -21,8 +23,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 app.use(require('cors')())
-//if (log.DEBUG)
-app.use(require('morgan')(':remote-addr - :method :url :status :res[content-length] b - :response-time ms'));
+app.use(require('morgan')(':remote-addr - :status :method :url :res[content-length] b - :response-time[0] ms'));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);
@@ -34,18 +35,22 @@ app.get('/fail', (req, res) => {
  */
 app.all('*', function(req, res, next) {
         /**
-         * Bypass facebook authentication because topicus-internal network can not allow incoming requests.
-         *
          * There is two kinds of allowed requests,
          * 1) authenticated and authorized
          * 2) anonymous and no authorized required
          */
-        if (auth.isAnonymous(req.originalUrl) || req.isAuthenticated()) {
+        const absoluteUrl = req.originalUrl.split('?')[0];
+        const host = req.headers.host;
+        if (auth.isAnonymous(absoluteUrl) || req.isAuthenticated()) {
             //TODO: sessionID is fine to use, but all more fine grained privileges should be created for new users to keep separated state
             const userId = req.user ? req.user.id : 'guest';//req.sessionID;//
-            auth.isAuthorizedToView(userId, req.originalUrl, function(err, authresponse) {
+            if (req.user && req.user._fresh) {//guest users are initially added.
+                auth.registerUser(userId)
+                req.user._fresh = false;
+            }
+            auth.isAuthorizedToView(userId, absoluteUrl, function(err, authresponse) {
+                if (log.DEBUG) log.debug("User " + userId + " is " + (authresponse ? "not" : "") + " allowed to view " + absoluteUrl)
                 if (authresponse) {
-                    if (log.DEBUG) log.debug("User " + userId + " is allowed to view " + req.originalUrl)
                     proxy.web(req, res, {
                         target: internalRedirectUrl + '/id/' + userId + req.originalUrl,
                         changeOrigin: true,
@@ -53,12 +58,11 @@ app.all('*', function(req, res, next) {
                         ignorePath: true
                     });
                 } else {
-                    if (log.DEBUG) log.debug("User " + userId + " is not allowed to view " + req.originalUrl)
                     res.status(401).send('Unauthorized facebook user [' + (req.user ? req.user.displayName : 'guest') + ']');
                 }
             })
         } else {
-            idProvider.resolveId("http://" + domain + req.params["0"])(req, res, next);
+            idProvider.resolveId("http://" + host + req.params["0"])(req, res, next);
         }
     }
 )

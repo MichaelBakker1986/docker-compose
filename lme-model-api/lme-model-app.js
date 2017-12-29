@@ -54,9 +54,11 @@ app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
     insertGlobals: true,
     debug: false
 }));
-app.post('*/preview/:model_name', (req, res) => {
+app.post('*/:user_id/preview/:model_name', (req, res) => {
     const model_name = req.params.model_name;
-    stash.preview(model_name, req.body.data).then((data) => {
+    const user_id = req.params.user_id;
+    stash.preview(user_id, model_name, req.body.data).then((data) => {
+        res.set('x-auth-id', data + ".ffl");
         res.json({status: 'ok', link: data});
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err)

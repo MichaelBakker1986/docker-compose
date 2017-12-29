@@ -124,7 +124,7 @@ function testAndDeploy() {
     exec(command).then(function(result) {
 
         spawnChildProcess(path.resolve(__dirname + '/../proxy'))
-        spawnChildProcess(path.resolve(__dirname + '/../proxy/auth-facebook'))
+        spawnChildProcess(path.resolve(__dirname + '/../proxy/SecurityPortal'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-model-api'))
         spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-data-api'))

@@ -1,2 +1,5 @@
-#Authentication PROXY
-maps all incoming request towards the services
+#SecurityPortal
+#All incoming requests are authenticated and authorized within this module.
+#Authentication.js provides facebook identification
+#Authorization.js provides fine-grained resource authorization
+#SecurityPortal.js validates requests with Authentication and Authorization. Proxies them regarding collected information to Proxy.js

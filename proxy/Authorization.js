@@ -23,7 +23,9 @@ const Acl = require('acl');
 const MichaelFaceBookID = '1683958891676092';
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
+const GUEST_USER = 'guest';
 const anonymous = {}
+const log = require('log6')
 
 class Authorization {
     constructor() {
@@ -35,24 +37,45 @@ class Authorization {
             '/data-docs',
             '/data-docs/',
             '/figure/KinderSpaarPlan',
+
             '/basic_example.html',
             '/extended_controller.html',
             '/uishowcase.html',
-            '/data-api-docs',
             "/Promotion.html",
+
+            "/bundle.css",
+            "/dist/css/skins/_all-skins.min.css",
+            "/dist/img/user2-160x160.jpg",
+            "/favicon.ico",
+            "/ide.js",
+            '/data-api-docs',
             "/showcase.js",
+            "/ext-searchbox.js",
             "/ui_showcase.js",
+            "/dist/js/adminlte.min.js",
+            "/dist/js/demo.js",
+            "/dist/css/AdminLTE.min.css",
+            "/ide.css",
+            "/monli.css",
+            "/monli.css",
+            "/engineonly.js",
             "/style/fresh.css",
             "/style/style.css",
-            "/monli.css",
             "/logo-monli.svg",
             "/promotion.js",
             "/bundle.css",
             "/wat_kost_een_studie_header.jpg",
-            "/monli.css",
             "/monli.ico",
             "/monli.js",
             "/bootstrap.min.js",
+            "/grid_example.css",
+            "/scorecard.html",
+            "/scorecard.js",
+            "/bootstrap.min.js",
+            "/ext-language_tools.js",
+            "/ace.js",
+            "/javascripts/fflmode.js",
+            "/theme-tomorrow.js",
             "/font-awesome/fonts/fontawesome-webfont.ttf",
             "/font-awesome/fonts/fontawesome-webfont.woff",
             "/font-awesome/fonts/fontawesome-webfont.woff2"
@@ -66,30 +89,10 @@ class Authorization {
         const guest_resources = [
             "/data/DEMO",//THE CROSS-USER-DATA exposure.
             "/saveUserData/DEMO",//THE CROSS-USER-DATA exposure.
-
-            "/ide.html",
-            "/grid_example.css",
-            "/scorecard.html",
-            "/ext-searchbox.js",
-            "/dist/css/AdminLTE.min.css",
-            "/ide.css",
-            "/bundle.css",
-            "/dist/css/skins/_all-skins.min.css",
-            "/dist/img/user2-160x160.jpg",
-            "/favicon.ico",
-            "/ide.js",
-            "/engineonly.js",
-            "/scorecard.js",
-            "/bootstrap.min.js",
-            "/dist/js/adminlte.min.js",
-            "/dist/js/demo.js",
-            "/ext-language_tools.js",
-            "/ace.js",
-            "/javascripts/fflmode.js",
-            "/theme-tomorrow.js",
+            "/ide.html"
         ]
         for (var i = 0; i < guest_resources.length; i++) {
-            this.acl.allow(GUEST_ROLE, guest_resources[i], VIEW_RULE)
+            this.allow(GUEST_ROLE, guest_resources[i], VIEW_RULE)
         }
         /**
          * These resources require facebook login
@@ -120,22 +123,29 @@ class Authorization {
             "/update/git/notifyCommit" //IDE
         ]
         for (var i = 0; i < secure_resources.length; i++) {
-            this.acl.allow(MichaelFaceBookID, secure_resources[i], VIEW_RULE)
+            this.allow(MichaelFaceBookID, secure_resources[i], VIEW_RULE)
         }
-        this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL");
-        this.addModelPrivileges(MichaelFaceBookID, "KSP");
+        this.registerUser(GUEST_USER)
+        this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
+        this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
+        this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
         this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");
     }
 
-    addModelPrivileges(id, modelname) {
-        this.acl.allow(id, "/resources/" + modelname + ".js", VIEW_RULE)
-        this.acl.allow(id, "/resources/" + modelname + ".story", VIEW_RULE)
-        this.acl.allow(id, "/excel/" + modelname, VIEW_RULE)
-        this.acl.allow(id, "/resources/" + modelname + ".ffl", VIEW_RULE)
-        this.acl.allow(id, "/preview/" + modelname, VIEW_RULE)
-        this.acl.allow(id, "/saveFFLModel/" + modelname, VIEW_RULE)
-        this.acl.allow(id, "/scorecard.html", VIEW_RULE)
-        this.acl.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
+    allow(id, resource, role) {
+        this.acl.allow(id, resource, role)
+        log.info('allow:' + id + ":[" + resource + ']')
+    }
+
+    addModelPrivileges(id, modelname, changeExisting) {
+        this.allow(id, "/resources/" + modelname + ".js", VIEW_RULE)
+        this.allow(id, "/resources/" + modelname + ".story", VIEW_RULE)
+        this.allow(id, "/excel/" + modelname, VIEW_RULE)
+        this.allow(id, "/resources/" + modelname + ".ffl", VIEW_RULE)
+        this.allow(id, "/preview/" + modelname, VIEW_RULE)
+        if (changeExisting) this.allow(id, "/saveFFLModel/" + modelname, VIEW_RULE)
+        this.allow(id, "/scorecard.html", VIEW_RULE)
+        this.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
     }
 
     /**
@@ -144,31 +154,38 @@ class Authorization {
      *
      */
     addModelInstancePrivileges(id, instanceId) {
-        this.acl.allow(id, "/data/" + instanceId, VIEW_RULE)
-        this.acl.allow(id, "/saveUserData/" + instanceId, VIEW_RULE)
+        if (instanceId.endsWith('.ffl')) {
+            this.addModelPrivileges(id, instanceId.slice(0, -4))
+        } else {
+            this.addDataPrivileges(id, instanceId)
+        }
+    }
+
+    addDataPrivileges(id, instanceId) {
+        this.allow(id, "/data/" + instanceId, VIEW_RULE)
+        this.allow(id, "/saveUserData/" + instanceId, VIEW_RULE)
     }
 
     isAuthorizedToView(id, resource, callback) {
-        //TODO: for now just always add guest-role to any call, should only be added if not exists
-        this.acl.addUserRoles(id, 'guest')
         if (this.isAnonymous(resource)) return callback(null, true);
-        return this.acl.isAllowed(id, resource.split('?')[0], VIEW_RULE, callback)
+        return this.acl.isAllowed(id, resource, VIEW_RULE, callback)
     }
 
-    isAuthorized(id, resource, role, callback) {
-        return this.acl.isAllowed(id, resource.split('?')[0], role, callback)
+    registerUser(id) {
+        this.acl.addUserRoles(id, GUEST_ROLE)
+        this.acl.addUserRoles(id, id)
+        this.addDataPrivileges(id)
     }
 
     isAnonymous(resource) {
-        const real_resource = resource.split('?')[0];
         /**
          * Tricky exclusion since wildcards are more complex to manage.
          * Add the ^/data-docs/* wildcard as anonymous resource
          */
-        if (/^\/data-docs\/.*/.test(real_resource) || (/^\/model-docs\/.*/.test(real_resource))) {
+        if (/^\/data-docs\/.*/.test(resource) || (/^\/model-docs\/.*/.test(resource))) {
             return true;
         }
-        return (anonymous[real_resource]) || false;
+        return (anonymous[resource]) || false;
     }
 }
 

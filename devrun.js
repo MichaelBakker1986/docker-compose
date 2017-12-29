@@ -1,4 +1,4 @@
-require('./proxy/auth-facebook')
+require('./proxy/SecurityPortal')
 require('./proxy')
 require('./lme-model-api')
 require('./lme-model-api/update')
