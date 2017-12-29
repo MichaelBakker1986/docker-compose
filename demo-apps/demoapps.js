@@ -37,7 +37,7 @@ app.listen(port, () => {
             routes.push(r.route.path)
         }
     })
-    routes.push('*/aceide.html')
+    routes.push('*/ide.html')
     routes.push('*/scorecard.html')
     routes.push('*/HoeveelKostEenStudie.html')
     routes.push('*/WatKostEenKind.html')
@@ -50,7 +50,7 @@ app.listen(port, () => {
     routes.push('*/lme_docs.pdf')
     routes.push('*/AdminLTE.min.css')
     routes.push('*/_all-skins.min.css')
-    routes.push('*/aceide.css')
+    routes.push('*/ide.css')
     routes.push('*/bundle.css')
     routes.push('*/grid_example.css')
     routes.push('*/resources/lme_docs.pdf')
@@ -99,6 +99,6 @@ app.listen(port, () => {
         '<a href="http://' + domain + '/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
         '<a href="http://' + domain + '/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
         '<br><span>IDE apps: </span>\n' +
-        '<a href="http://' + domain + '/aceide.html">IDE DEMO Application</a><span> | </span>\n'
+        '<a href="http://' + domain + '/ide.html">IDE DEMO Application</a><span> | </span>\n'
     )
 });

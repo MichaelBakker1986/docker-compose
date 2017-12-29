@@ -67,17 +67,17 @@ class Authorization {
             "/data/DEMO",//THE CROSS-USER-DATA exposure.
             "/saveUserData/DEMO",//THE CROSS-USER-DATA exposure.
 
-            "/aceide.html",
+            "/ide.html",
             "/grid_example.css",
             "/scorecard.html",
             "/ext-searchbox.js",
             "/dist/css/AdminLTE.min.css",
-            "/aceide.css",
+            "/ide.css",
             "/bundle.css",
             "/dist/css/skins/_all-skins.min.css",
             "/dist/img/user2-160x160.jpg",
             "/favicon.ico",
-            "/aceide.js",
+            "/ide.js",
             "/engineonly.js",
             "/scorecard.js",
             "/bootstrap.min.js",

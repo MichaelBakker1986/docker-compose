@@ -1,12 +1,8 @@
-/*'<span>DEMO apps: </span>\n' +
-/!*    '<a href="http://' + domain + '/id/DEMO/datagraph.html">Data graph</a>\n' +*!/
-'<br><span>IDE apps: </span>\n' +
-'<a href="http://' + domain + '/id/DEMO/aceide.html">IDE DEMO Application</a><span> | </span>\n'*/
 angular
     .module('angapp', ['angular.filter', "highcharts-ng"])
     .controller('promotionController', function($scope, $http, $rootScope) {
         $scope.widgets = [
-            {name: 'IDE', description: 'IDE DEMO Application', href: 'aceide.html'},
+            {name: 'IDE', description: 'IDE DEMO Application', href: 'ide.html'},
             {name: 'STUDIEKOSTEN', description: 'Monli Hoeveel kost een studie?', href: 'HoeveelKostEenStudie.html'},
             {name: 'MVO', description: 'MVO Bootstrap', href: 'scorecard.html#MVO'},
             {name: 'SCORECARDTESTMODEL', description: 'SCORECARDTESTMODEL', href: 'scorecard.html#SCORECARDTESTMODEL'},

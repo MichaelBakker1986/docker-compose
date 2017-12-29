@@ -44,7 +44,7 @@ app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     minify: true,
     precompile: true
 }));
-app.get('*/aceide.js', browserify(__dirname + '/src/aceide.js', {
+app.get('*/ide.js', browserify(__dirname + '/src/ide.js', {
     gzip: true,
     insertGlobals: true,
     debug: false
