@@ -353,7 +353,7 @@ model SCORECARDTESTMODEL  uses BaseModel
    frequency: document;
    formula:AMMOUNT(Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG15.required and Q_MAP01_VRAAG15.entered,Q_MAP01_VRAAG16.required and Q_MAP01_VRAAG16.entered,Q_MAP01_VRAAG17.required and Q_MAP01_VRAAG17.entered,Q_MAP01_VRAAG18.required and Q_MAP01_VRAAG18.entered,Q_MAP01_VRAAG21.required and Q_MAP01_VRAAG21.entered,Q_MAP01_VRAAG22.required and Q_MAP01_VRAAG22.entered,Q_MAP01_VRAAG23.required and Q_MAP01_VRAAG23.entered,Q_MAP01_VRAAG24.required and Q_MAP01_VRAAG24.entered,Q_MAP01_VRAAG25.required and Q_MAP01_VRAAG25.entered,Q_MAP01_VRAAG26.required and Q_MAP01_VRAAG26.entered,Q_MAP01_VRAAG27.required and Q_MAP01_VRAAG27.entered,Q_MAP01_VRAAG28.required and Q_MAP01_VRAAG28.entered,Q_MAP05_VRAAG01.required and Q_MAP05_VRAAG01.entered,Q_MAP06_P02VRAAG01.required and Q_MAP06_P02VRAAG01.entered,Q_MAP06_P02VRAAG02.required and Q_MAP06_P02VRAAG02.entered,Q_MAP06_P02VRAAG03.required and Q_MAP06_P02VRAAG03.entered,Q_MAP06_P02VRAAG04.required and Q_MAP06_P02VRAAG04.entered,Q_MAP06_P02VRAAG05.required and Q_MAP06_P02VRAAG05.entered) = AMMOUNT(Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG15.required,Q_MAP01_VRAAG16.required,Q_MAP01_VRAAG17.required,Q_MAP01_VRAAG18.required,Q_MAP01_VRAAG21.required,Q_MAP01_VRAAG22.required,Q_MAP01_VRAAG23.required,Q_MAP01_VRAAG24.required,Q_MAP01_VRAAG25.required,Q_MAP01_VRAAG26.required,Q_MAP01_VRAAG27.required,Q_MAP01_VRAAG28.required,Q_MAP05_VRAAG01.required,Q_MAP06_P02VRAAG01.required,Q_MAP06_P02VRAAG02.required,Q_MAP06_P02VRAAG03.required,Q_MAP06_P02VRAAG04.required,Q_MAP06_P02VRAAG05.required);
    data_options: unscalable;
-   title: "Guus was here";
+   title: "ScorecardTestModel";
    displaytype: scorecard;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    hint: "Dit is een model om de scorecard applicatie te testen.";
@@ -372,7 +372,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     title: "Map 1";
     displaytype: select;
     choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-    hint: "Guus was here";
+    hint: "ScorecardTestModel";
     top_blanklines: 1;
     locked: On;
     visible: 1;
