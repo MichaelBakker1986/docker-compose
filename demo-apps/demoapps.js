@@ -55,8 +55,8 @@ app.listen(port, () => {
     routes.push('*/grid_example.css')
     routes.push('*/resources/lme_docs.pdf')
     routes.push('*/monli.css')
-    routes.push('*/fresh.css')
-    routes.push('*/style.css')
+    routes.push('*/style/fresh.css')
+    routes.push('*/style/style.css')
     routes.push('*/favicon.ico')
 
     routes.push('*.ffl')
@@ -73,6 +73,7 @@ app.listen(port, () => {
     routes.push('*/monli.js')
     routes.push('*/monli.ico')
     routes.push('*/showcase.js')
+    routes.push('*/ui_showcase.js')
     routes.push('*.svg')
     routes.push('*/ext-language_tools.js')
     routes.push('*/fflmode.js')

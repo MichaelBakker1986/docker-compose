@@ -40,6 +40,10 @@ class Authorization {
             '/uishowcase.html',
             '/data-api-docs',
             "/Promotion.html",
+            "/showcase.js",
+            "/ui_showcase.js",
+            "/style/fresh.css",
+            "/style/style.css",
             "/monli.css",
             "/logo-monli.svg",
             "/promotion.js",
@@ -161,7 +165,7 @@ class Authorization {
          * Tricky exclusion since wildcards are more complex to manage.
          * Add the ^/data-docs/* wildcard as anonymous resource
          */
-        if (/^\/data-docs\/.*/.test(real_resource)) {
+        if (/^\/data-docs\/.*/.test(real_resource) || (/^\/model-docs\/.*/.test(real_resource))) {
             return true;
         }
         return (anonymous[real_resource]) || false;
