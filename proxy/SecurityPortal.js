@@ -62,7 +62,7 @@ app.all('*', function(req, res, next) {
                 }
             })
         } else {
-            idProvider.resolveId("http://" + host + req.params["0"])(req, res, next);
+            idProvider.resolveId("http://" + domain + req.params["0"])(req, res, next);
         }
     }
 )

@@ -134,7 +134,7 @@ class Authorization {
 
     allow(id, resource, role) {
         this.acl.allow(id, resource, role)
-        log.info('allow:' + id + ":[" + resource + ']')
+        if (log.DEBUG) log.debug('allow:' + id + ":[" + resource + ']')
     }
 
     addModelPrivileges(id, modelname, changeExisting) {

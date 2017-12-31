@@ -5,11 +5,11 @@ ssh-keygen -t rsa
 
 vim id_rsa.pub = {Public SSH key for Stash}
 
-#(optional) The external HOST. e.g. appmodel.nl
+#(optional) The internal (eth-lo) HOST. e.g. 127.0.0.1
 # - defaults to 127.0.0.1
 set environment variable HOST={{your_host_name}}
 
-#(optional) The external domain. e.g. appmodel.nl
+#(optional) The external domain. e.g. appmodel.nl/appmodel.org
 # - defaults to appmodel.org
 set environment variable DOMAIN={{your_domain_name}}
 
