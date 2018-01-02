@@ -162,4 +162,4 @@ function log(message, level) {
     HipchatConnect.log(message, level)
 }
 
-if (!developer) testAndDeploy();
+testAndDeploy();
