@@ -1,0 +1,37 @@
+import BaseModel.*;
+import FinanMath.*;
+
+model SELECTDESCENDANTS uses BaseModel
+{
+ root
+ {
+  variable Q_ROOT
+  {
+   title : "Formula should return two, Q_MAP02_SUB and Q_MAP01 are required.";
+   datatype: matrix;
+   formula : Count(X,SelectDescendants(Q_ROOT,Q_MAP03),InputRequired(X));
+   variable Q_MAP01
+   {
+    title : "Formula should return 0 when nothing is filled in, for required entered values it should add one per variable.";
+    formula : Count(X,SelectDescendants(Q_ROOT,Q_MAP03),InputRequired(X) And DataAvailable(X));;
+    required: 1;
+   }
+   variable Q_MAP02
+   {
+    title : "map02";
+    formula : 1234;
+    variable Q_MAP02_SUB
+    {
+     title : "map02";
+     formula : 1234;
+     required: 1;
+    }
+   }
+   variable Q_MAP03
+   {
+    title : "map03";
+    formula : 12345;
+   }
+  }
+ }
+}

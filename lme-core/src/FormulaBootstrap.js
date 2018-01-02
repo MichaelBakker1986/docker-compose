@@ -89,11 +89,11 @@ simplified.SelectDescendants = function(formulaInfo, node) {
         lambda = node.arguments[2];
         node.arguments.length = 2;
     }
-    //extrace lambda
+    //extract lambda
     //this can also be the propertyType is variableType empty
     var foundEndUiModel;
     if (lambda === undefined) {
-        lambda = node.arguments[1];
+        lambda = AST.IDENTIFIER('X')
         node.arguments.length = 1;
     }
     else {
@@ -110,16 +110,28 @@ simplified.SelectDescendants = function(formulaInfo, node) {
      }*/
     //first copy has many functions attached. copying it first will loss them, so next iterations can get use of it
     lambda = AST.cloneAST(lambda, null, null);
-    //todo, just query nodes, instead of filtering them here
     for (var i = 0; i < nodes.length; i++) {
-        if (foundEndUiModel !== undefined && foundEndUiModel.rowId === nodes[i].rowId) {
+        if (foundEndUiModel && foundEndUiModel.rowId === nodes[i].rowId) {
             break;
         }
-        node.elements.push(AST.cloneAST(lambda, 'X', nodes[i].rowId));
+        walkRecursive(nodes[i], groupName, propertiesArr[0], function(child) {
+            node.elements.push(AST.cloneAST(lambda, 'X', child.rowId));
+        })
     }
     delete node.arguments;
     delete node.callee;
 }
+
+function walkRecursive(node, groupName, col, callback) {
+    callback(node)
+    const n = getOrCreateProperty(groupName, node.rowId, col)
+    if (n.nodes.length) {
+        for (var i = 0; i < n.nodes.length; i++) {
+            walkRecursive(n.nodes[i], groupName, col, callback);
+        }
+    }
+}
+
 simplified.InputRequired = function(formulaInfo, node) {
     node.type = "MemberExpression";
     node.computed = false;
@@ -361,7 +373,7 @@ var traverseTypes = {
                 if (orId.tempnaaam === node.object.name) {
                     //return 1 instead of a Self-reference
                     node.name = '1';
-                    log.trace('found self reference [%s]', node.object.name)
+                    log.info('found self reference [%s]', node.object.name)
                 }
                 else {
                     //else will will what ever just get the onecol value back.
@@ -380,14 +392,26 @@ global.ExpandGrowth = function() {
 global.FormulaSetInT = function() {
     return 0;
 }
+//return  var (_cz199 = (call)) >  0?_cz199: zeroNumber
 global.Onzero = function() {
     return 0;
 }
 global.Hm = function() {
     return 0
 }
-
 //recursive walk the formula ast
+const identifier_replace = {
+    TSY: 'x.tsy',
+    T: 'x',
+    MainPeriod: 'z', //zAxis Reference, base period, z.base
+    MaxT: 'x',
+    Trend: 'x'//x.trend
+
+}
+identifier_replace.Tsy = identifier_replace.TSY;
+identifier_replace.TsY = identifier_replace.TSY;
+identifier_replace.tsy = identifier_replace.TSY;
+
 function buildFormula(formulaInfo, parent, node) {
     // just simplify some MODEL code, when a CallExpression appears, we might want to modify the structure before
     // looking at the content, this might cause some overhead because we have to parse more, but it simplifies the code
@@ -396,9 +420,7 @@ function buildFormula(formulaInfo, parent, node) {
     if (node.type === 'CallExpression') {
         //register function
         functions[node.callee.name] = true;
-        if (log.TRACE) {
-            log.trace('Use function [' + node.callee.name + "]")
-        }
+        if (log.TRACE) log.trace('Use function [' + node.callee.name + "]")
         if (simplified[node.callee.name]) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
@@ -419,23 +441,8 @@ function buildFormula(formulaInfo, parent, node) {
         /**
          * TODO: modify these parameters while parsing regex, directly inject the correct parameters
          */
-        if (node.name === 'T') {
-            node.name = 'x';
-        }
-        //zAxis Reference, base period, z.base
-        else if (node.name === 'MainPeriod') {
-            node.name = 'z';
-        }
-        //
-        else if (node.name === 'MaxT') {
-            node.name = 'x';
-        }
-        else if (node.name === 'TsY') {
-            node.name = 'x';
-        }
-        //xAxisReference x.trend
-        else if (node.name === 'Trend') {
-            node.name = 'x';
+        if (identifier_replace[node.name]) {
+            node.name = identifier_replace[node.name];
         }
         //xAsReference x.notrend
         else if (node.name === 'NoTrend') {
@@ -443,18 +450,12 @@ function buildFormula(formulaInfo, parent, node) {
         }
         //x.trend.lastbkyr
         else if (node.name === 'LastHistYear') {
-            node.name = 'x';
+            node.name = 'x.notrend.first';
         }
         //x.trend.lastbkyr
         else if (node.name === 'LastHistYear') {
             node.name = 'x';
         }
-        /*       else if (node.name === 'lastnotrend') {
-                   node.name = 'lastnotrend';
-               }
-               else if (node.name === 'lastnotrend') {
-                   node.name = 'lastnotrend';
-               }*/
         //should return the x.index.
         else if (node.name === 't') {
             log.warn('invalid t parsing [%s]', formulaInfo)

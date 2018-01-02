@@ -1,5 +1,6 @@
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook');
+var api = require('..').CalculationFacade;
 require('../../math')
 var Context = require('../src/Context');
 var wb = new WorkBook(new Context());
@@ -102,6 +103,21 @@ wb.createFormula("0", 'caseselectWithColon');
 let caseTest = 'Case(caseselectWithColon,[0, 576 || 1, 906 || 2, 535 || 3, 535])';
 wb.createFormula(caseTest, 'caseselectWithColonVariable')
 assert(wb.get('caseselectWithColonVariable'), 576);
+
+
+wb.createFormula("100+Tsy", "TSY_TEST")
+assert.equal(wb.get('TSY_TEST'), 101)
+
+wb.createFormula("''", "CHOICE_TEST")
+wb.createFormula("[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]", "CHOICE_TEST", "choices")
+var fesGetValue = api.getValue({
+    properties: {
+        choices: true,
+        value: true
+    },
+    columns: 1,
+    values: []
+}, 'NEW_CHOICE_TEST', 0);
 
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/

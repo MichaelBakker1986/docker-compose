@@ -230,6 +230,7 @@ simplified.Hsum = simplified.HSUM;
 simplified.HSum = simplified.HSUM;
 simplified.if = simplified.If;
 simplified.MAX = simplified.Max;
+
 simplified.MIN = simplified.Min;
 simplified.min = simplified.Min;
 simplified.max = simplified.Max;

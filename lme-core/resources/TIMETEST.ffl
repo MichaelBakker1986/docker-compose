@@ -1,0 +1,15 @@
+import BaseModel.*;
+import FinanMath.*;
+
+model TIMETEST uses BaseModel
+{
+ root
+ {
+  variable FormulaSetTest
+  {
+   title : "FormulaSetTest should return if the previous column is not trend.";
+   formula : If(FormulaSetInT(GetT(T,-1))<>NoTrend,100,200);
+   frequency : column;
+  }
+ }
+}

@@ -16,5 +16,3 @@ excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
     log.error(err)
     process.exit(1);
 })
-
-

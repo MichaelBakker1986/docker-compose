@@ -187,7 +187,7 @@ assert(wbKSP.get('Furniture') == 1800);
 assert(wbKSP.get('Furniture', 'value', 4) == 0);
 assert(wbKSP.get('DEBUG') == 0);
 wbKSP.set('Memo1', 'a_Negro_a')
-assert(If(Pos('Negro', 'a_Negro_a') > 0, 1, 0) == 1);
+assert((Pos('Negro', 'a_Negro_a') > 0 ? 1 : 0) == 1);
 
 assert(wbKSP.get('Q_RESTRICTIES') === '');
 assert(wbKSP.get('Q_RESTRICTIES_01') === '');

@@ -19,10 +19,6 @@
     "args": "v,onzerov",
     "body": "{ if (v <= 0) { return onzerov; } return v;}"
   },
-  "If": {
-    "args": "o,v1,v2",
-    "body": "{ if (o) { return v1; } else { return v2; }}"
-  },
   "SUM": {
     "args": "values",
     "body": "{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"
@@ -113,7 +109,7 @@
   },
   "Pos": {
     "args": "one,two",
-    "body": "{ if (two===undefined){return -1};return two.indexOf(one) }"
+    "body": "{ return (two==null) ? -1 : two.indexOf(one); }"
   },
   "Count": {
     "args": "elements",
@@ -142,10 +138,6 @@
   "DMYtoDate": {
     "args": "d,m,y",
     "body": "{ return new Date(d,m,y).toLocaleString(); }"
-  },
-  "DataEntered": {
-    "args": "one",
-    "body": "{ return one }"
   },
   "LastTInFormulaSet": {
     "args": "x,x2",
@@ -236,18 +228,6 @@
     "body": "{ return 1 }"
   },
   "FirstTinYear": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "TsY": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "tsy": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "Tsy": {
     "args": "one",
     "body": "{ return 1 }"
   },

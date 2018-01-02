@@ -1,21 +1,11 @@
+var assert = require('assert');
 var CalculationFacade = require('../').CalculationFacade;
 var WorkBook = require('../src/JSWorkBook')
 var Context = require('../src/Context')
 var wb = new WorkBook(new Context());
 wb.modelName = 'APITEST'
-//choices require value functions..
-wb.createFormula("''", "CHOICE_TEST")
-wb.createFormula("[{'name':' 0','value':'VWO'},{'name':'1','value':'VMBO-MBO'},{'name':'2','value':'VMBO-HAVO'},{'name':'3','value':'HAVO'}]", "CHOICE_TEST", "choices")
-var fesGetValue = CalculationFacade.getValue({
-    properties: {
-        choices: true,
-        value: true
-    },
-    columns: 1,
-    values: []
-}, 'NEW_CHOICE_TEST', 0);
+
 wb.createFormula("1+1", "TimeTest");
-var assert = require('assert');
 assert(wb.get('TimeTest') == 2)
 wb.set('TimeTest', 10)
 assert(wb.get('TimeTest') == 10)

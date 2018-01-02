@@ -95,25 +95,25 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
  * - every variable has one mask, this one includes display and data types.
  */
 ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
-    var colType = col || 'value';
+    const colType = col || 'value';
     if (colType === 'entered') {
         //kinda copy-paste, find way to refactor. there is no real enteredValue formula.
         //retrieve the 'value' formula, check if there is an entered value
-        var variable = fetchSolutionNode(row, 'value');
-        var localFormula = findFormula(variable);
+        const variable = fetchSolutionNode(row, 'value');
+        const localFormula = findFormula(variable);
         if (localFormula === undefined) {
             return false;
         }
-        var id = localFormula.id || localFormula.index;
-        var hash = xas.hash + yas.hash + 0;
+        const id = localFormula.id || localFormula.index;
+        const hash = xas.hash + yas.hash + 0;
         return context.values[id][hash] != null;
     } else if (colType === 'original') {
-        var variable = fetchSolutionNode(row, 'value');
-        var localFormula = findFormula(variable);
+        const variable = fetchSolutionNode(row, 'value');
+        const localFormula = findFormula(variable);
         return localFormula.original;
     }
-    var variable = fetchSolutionNode(row, colType);
-    var localFormula = findFormula(variable);
+    const variable = fetchSolutionNode(row, colType);
+    const localFormula = findFormula(variable);
     var returnValue;
     if (localFormula === undefined) {
         returnValue = context.propertyDefaults[colType];

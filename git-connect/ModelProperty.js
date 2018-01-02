@@ -17,6 +17,7 @@ exports.orm = Promise.all([
         var ModelProperty = db.define("model_property", {
             uuid: String,
             model_name: String,
+            model_path: String,
             var: String,
             col: String,
             val: String
@@ -58,9 +59,23 @@ exports.orm = Promise.all([
         });
 
         exports.ModelProperty = new ModelProperty();
-
-        return db.sync(async (err) => {
+        return db.sync(async (err, other) => {
             if (err) throw err;
+            const dbSchema = {
+                model_property: ['uuid', 'model_path', 'model_name', 'var', 'col', 'val']
+            }
+            //create indexes on psql databases
+            if (db.driver.dialect != 'mysql') {
+                for (var table in dbSchema) {
+                    for (var i = 0; i < dbSchema[table].length; i++) {
+                        var column = dbSchema[table][i];
+                        const sql = "CREATE INDEX IF NOT EXISTS idx_" + table + "_" + column + " ON " + table + " (" + column + ");";
+                        db.driver.execQuery(sql, [], function(err, result) {
+                            if (err) throw err
+                        })
+                    }
+                }
+            }
             return await "";
         })
     }).catch((err) => {

@@ -1,5 +1,5 @@
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
-let V05ffl = readFileSync(__dirname + '/V05.ffl');
+let V05ffl = readFileSync(__dirname + '/V05.FFL');
 
 //some case-bugfixes
 V05ffl = V05ffl.replace(/amount/gmi, 'Amount')
