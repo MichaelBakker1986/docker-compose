@@ -11,5 +11,11 @@ model TIMETEST uses BaseModel
    formula : If(FormulaSetInT(GetT(T,-1))<>NoTrend,100,200);
    frequency : column;
   }
+  variable FirstNoTrendMainPeriodTValue
+  {
+   title : "FirstNoTrendMainPeriodTValue should return the first no trend column value t.";
+   formula : ValueT(FirstTInFormulaSet(NoTrend,MainPeriod));
+   frequency : column;
+  }
  }
 }

@@ -21,9 +21,21 @@ const log = require('log6')
 const proxy = httpProxy.createProxyServer({});
 const app = express();
 const bodyParser = require('body-parser');
-
+const staticresources = {
+    'css': true,
+    'js': true,
+    'jpg': true,
+    'woff2': true,
+    'woff': true,
+    'ttf': true
+}
 app.use(require('cors')())
-app.use(require('morgan')(':remote-addr - :status :method :url :res[content-length] b - :response-time[0] ms'));
+app.use(require('morgan')(':remote-addr - :status :method :url :res[content-length] b - :response-time[0] ms', {
+    skip: function(req, res) {
+        const r = req.originalUrl.split('?')[0].split('.');
+        return staticresources[r[r.length - 1]] || false;
+    }
+}));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);

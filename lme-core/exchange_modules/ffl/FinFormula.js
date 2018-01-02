@@ -22,6 +22,7 @@ function finFormulaGeneric(buf) {
      * Here are all time references
      */
     buf = buf.replace(/FormulaSetInT\(GetT\(T\,-1\)\)<>NoTrend/gi, '!x.isprevnotrend');
+    buf = buf.replace(/FirstTInFormulaSet\(NoTrend,MainPeriod\)/gi, 'x.firstnotrend');
     buf = buf.replace(/FirstTInFormulaset\(NoTrend\)/gi, 'x.firstnotrend');
     buf = buf.replace(/\[1]/g, '[doc]');
     buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.

@@ -1,6 +1,7 @@
-var assert = require('assert')
-var WorkBook = require('../src/JSWorkBook');
-var Context = require('../src/Context');
+const assert = require('assert')
+const WorkBook = require('../src/JSWorkBook');
+const Context = require('../src/Context');
+const log = require('log6')
 require('../../math')
 require('../exchange_modules/ffl/RegisterPlainFFLDecorator')
 var wb = new WorkBook(new Context());
@@ -43,7 +44,5 @@ wb.createFormula('HSUM(YearNumber,0,18)', 'YearNumberReferenceHSUM', 'value', fa
 assert.equal(wb.get('YearNumberReferenceHSUM'), 38386);
 
 
-wb.importSolution(require('fs').readFileSync(__dirname + '/../resources/TIMETEST.ffl', 'utf-8'), 'ffl')
-assert.equal(200, wb.get('FormulaSetTest', 'value', 1))
-assert.equal(200, wb.get('FormulaSetTest', 'value', 10))
-assert.equal(100, wb.get('FormulaSetTest', 'value', 30))
+
+

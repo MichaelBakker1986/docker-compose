@@ -5,8 +5,9 @@
 const port = 8081;
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
+const developer = process.env.DOMAIN !== null
 const domain = process.env.DOMAIN || ('http://' + host + ':' + internal_proxy_port + '/id/guest');
-const developer = (host === 'localhost' || host === '127.0.0.1');
+//const developer = (host === 'localhost' || host === '127.0.0.1');
 
 const express = require('express');
 const now = require("performance-now")
@@ -129,7 +130,7 @@ function testAndDeploy() {
         spawnChildProcess(path.resolve(__dirname + '/../demo-apps'))
         spawnChildProcess(path.resolve(__dirname + '/../lme-data-api'))
         registerToProxy()
-        log('Successful deploy application ' + host + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
+        log('Successful deploy application ' + domain + ' in ' + ((now() - start) / 1000).toFixed(3) + 's');
     }).catch(function(err) {
         log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
         log(err.toString(), 'red');
@@ -162,4 +163,4 @@ function log(message, level) {
     HipchatConnect.log(message, level)
 }
 
-testAndDeploy();
+if (!developer) testAndDeploy();

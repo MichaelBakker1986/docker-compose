@@ -7,6 +7,7 @@ const performceTestStartTime = new Date().getTime();
 const tests = [
     './MathTest',
     './xaxisTest',
+    './FormulaSetTest',
     './fflexportTest',//.FFL Language
     './screendefinitionTest',//.screen definition
     './jsonValuesTest',

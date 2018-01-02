@@ -102,6 +102,14 @@ VALUES = function(func, fId, x, y, z, v) {
     }
     return result;
 }
+ValueT = function(one) {
+    let retrunValue = 1;
+    while (!one.prev.dummy) {
+        retrunValue++;
+        one = one.prev
+    }
+    return retrunValue
+}
 initJSMath(jsMath);
 exports.mathJs = {
     name: 'ff-math',
