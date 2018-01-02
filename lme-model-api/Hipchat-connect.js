@@ -1,5 +1,6 @@
 const host_environment_variable = process.env.HOST;
 const host = host_environment_variable || '127.0.0.1'
+const domain = process.env.DOMAIN
 const hipchatapikey = process.env.HIPCHAT_API_KEY;
 const hipchat_endpoint = 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + hipchatapikey;
 const request = require('request');
@@ -21,7 +22,7 @@ class HipchatConnect {
                 url: hipchat_endpoint,
                 json: {
                     "color": level,
-                    "message": "[" + host + "] " + text
+                    "message": "[" + domain + "] " + text
                 }
             }, (err, res, body) => {
                 if (err && log.DEBUG) log.debug(err.toString())

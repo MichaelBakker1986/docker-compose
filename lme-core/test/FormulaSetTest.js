@@ -13,5 +13,6 @@ assert.equal(200, wb.get('FormulaSetTest', 'value', 10), wb.get('FormulaSetTest'
 assert.equal(100, wb.get('FormulaSetTest', 'value', 30), wb.get('FormulaSetTest', 'title'))
 
 assert.equal(1, wb.get('FirstNoTrendMainPeriodTValue', 'value', 30));
+assert.equal(1, wb.get('FirstNoTrendMainPeriodTValue', 'value', 30));
 
 //, wb.get('FirstNoTrendMainPeriodTValue', 'title')
