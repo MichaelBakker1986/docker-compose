@@ -5,7 +5,7 @@
 const port = 8081;
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-const developer = process.env.DOMAIN !== null
+const developer = process.env.DOMAIN == null
 const domain = process.env.DOMAIN || ('http://' + host + ':' + internal_proxy_port + '/id/guest');
 //const developer = (host === 'localhost' || host === '127.0.0.1');
 
