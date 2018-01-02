@@ -20,7 +20,7 @@ const auth = new Authorization();
 const log = require('log6')
 const proxy = httpProxy.createProxyServer({});
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 const staticresources = {
     'css': true,
     'js': true,
