@@ -7,16 +7,29 @@ model BLG uses BaseModel
   {
    title: "Stap 1";
    displaytype: scorecard;
-   variable Q_MAP01
+   variable BLGInputs
    {
-    title: "Stap 1";
-    hint: "Informatie over de stap";
-    variable Q_MAP01_VRAAG0
+    title: "BLGInputs";
+    frequency: document;
+    displaytype: Input;
+    datatype: number;
+    variable TestInputVariable
     {
-     title: "TestVraag";
-     frequency: document;
-     datatype: number;
-     formula: 100+100;
+     title: "TestInputVariable";
+     frequency: column;
+     formula: ValueT(T);
+    }
+   }
+   variable BLGOutputs
+   {
+    title: "BLGOutputs";
+    frequency: document;
+    displaytype: Output;
+    datatype: number;
+    variable TestOutputVariable
+    {
+     locked:1;
+     title: "OutputVariable";
     }
    }
   }
