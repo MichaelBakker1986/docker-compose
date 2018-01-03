@@ -24,43 +24,12 @@
   "layout": {
     "children": [
       {
-        "children": [
-          {
-            "children": [
-              {
-                "children": [
-                  {
-                    "children": [],
-                    "name": "detl",
-                    "size": 1
-                  }
-                ],
-                "name": "qurt",
-                "size": 4
-              }
-            ],
-            "name": "half",
-            "size": 9
-          }
-        ],
+        "children": [],
         "name": "bkyr",
-        "size": 19
+        "size": 1
       }
     ],
-    "children13period": [
-      {
-        "children": [
-          {
-            "children": [],
-            "name": "detl",
-            "size": 1
-          }
-        ],
-        "name": "bkyr",
-        "size": 13
-      }
-    ],
-    "idx": 400,
+    "idx": 20,
     "name": "all",
     "no": 0,
     "period": [
@@ -72,16 +41,16 @@
       {
         "formulasetId": 1,
         "hash": 1,
-        "idx": 400
+        "idx": 20
       }
     ],
-    "size": 400
+    "size": 20
   },
   "navalue": 1e-10,
   "nestedTupleMultiplier": "undefined",
   "time": {
     "columnMultiplier": 1,
-    "columnSize": 400,
+    "columnSize": 20,
     "columns": [
       {
         "index": 0,
@@ -103,7 +72,7 @@
     "timelines": [
       {
         "index": 0,
-        "name": "ExpertOptie-level5"
+        "name": "Not_USED"
       }
     ]
   },

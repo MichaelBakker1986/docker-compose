@@ -5,15 +5,18 @@ require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
-
+const bookyearTimeModel = require('../../lme-core/src/XAxis');
+const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
 const CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
-function LmeAPI() {
-    let Context = require('../../lme-core/src/Context');
-    let WorkBook = require('../../lme-core/src/JSWorkBook');
-    this.lme = new WorkBook(new Context());
+function LmeAPI(TimeModel) {
+    const Context = require('../../lme-core/src/Context');
+    const WorkBook = require('../../lme-core/src/JSWorkBook');
+
+    //TODO: the TimeModel is probably part of the Context object.
+    this.lme = new WorkBook(new Context(), TimeModel ? new CustomTimeModel(TimeModel) : bookyearTimeModel);
     this.modelName = undefined;
     this.urlPrefix = '';
 }
@@ -45,9 +48,6 @@ LmeAPI.prototype.importFFL2 = function(ffl) {
 }
 LmeAPI.prototype.setColumnOffset = function(delta) {
     this.lme.setColumnOffset(delta)
-}
-LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.exportFFL = function() {
     return this.lme.export('ffl')

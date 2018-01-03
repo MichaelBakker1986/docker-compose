@@ -5,8 +5,10 @@
   "private": true,
   "main": "gitconnector.js",
   "dependencies": {
-    "log6": "^1.0.26",
+    "escodegen": "^1.9.0",
+    "esprima-walk": "^0.1.0",
     "glob": "^7.1.2",
+    "log6": "^1.0.26",
     "mysql": "^2.15.0",
     "orm": "^4.0.1",
     "orm-timestamps": "^0.5.2",

@@ -1,12 +1,8 @@
 const log = require('log6')
-const time = require('../src/XAxis')
+const bookYearTime = require('../src/XAxis')
 const assert = require('assert')
-require('../../math')
-var currentTime = time.bkyr.columns[0][0]
-let columns = 0;
-while (currentTime) {
-    if (log.TRACE) log.trace('[%s]%s', currentTime.hash, ValueT(currentTime))
-    currentTime = currentTime.next;
-    columns++;
-}
-assert.equal(columns, 40, 'We use 40columns for now')
+const defaultImport = require('../resources/CustomImport.json')
+const TimeAxis = require('../src/TimeAxis')
+const monthlyTime = new TimeAxis(defaultImport)
+assert.equal(bookYearTime.bkyr.cols.length, 19, 'We use 40columns for now but found' + bookYearTime.bkyr.cols.length)
+assert.equal(monthlyTime.detl.cols.length, 252, 'We use 252 detail columns for months ')

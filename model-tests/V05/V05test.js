@@ -13,7 +13,7 @@ V05ffl = V05ffl.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 
 
-LME.importFFL2BackwardsCompatible(V05ffl);
+LME.importFFL(V05ffl);
 var model = LME.exportWebModel();
 var [HiddenVars] = [model.nodes.HiddenVars];
 HiddenVars.visible;

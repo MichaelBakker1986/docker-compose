@@ -2270,7 +2270,7 @@ model V04 uses BaseModel
         {
           datatype: number;
           frequency: document;
-          formula: if(Kapitaal1[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal2[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal3[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal4[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal5[LastTinFormulaSet(Notrend,MainPeriod)]>0,11,1);
+          formula: If(Kapitaal1[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal2[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal3[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal4[LastTinFormulaSet(Notrend,MainPeriod)]+Kapitaal5[LastTinFormulaSet(Notrend,MainPeriod)]>0,11,1);
           data_options: unscalable;
           displaytype: select;
           title: "Rechtsvorm";

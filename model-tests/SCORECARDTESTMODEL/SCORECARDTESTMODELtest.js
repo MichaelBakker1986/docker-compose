@@ -6,10 +6,10 @@ const fs = require('fs');
 const assert = require('assert');
 
 const excelPlugin = require('../../excel-connect').xlsxLookup;
-const SCORECARDTESTMODEL = new LME();
+const SCORECARDTESTMODEL = new LME(require('../../lme-core/resources/CustomImport'));
 SCORECARDTESTMODEL.addFunctions(excelPlugin);
 excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
-    SCORECARDTESTMODEL.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/SCORECARDTESTMODEL.ffl', 'utf8'));
+    SCORECARDTESTMODEL.importFFL(fs.readFileSync(__dirname + '/SCORECARDTESTMODEL.ffl', 'utf8'));
     const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
     assert(SCORECARDTESTMODEL.lme.validateImportedSolution())
 }).catch((err) => {

@@ -3,16 +3,24 @@
  * TODO: Move tuple related work to FESFacade
  */
 require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
-var log = require("log6");
-var WorkBook = require("./src/JSWorkBook");
-var Context = require("./src/Context");
+const log = require("log6");
+const WorkBook = require("./src/JSWorkBook");
+const Context = require("./src/Context");
+const TimeAxis = require('./src/TimeAxis');
+const timeAxis = new TimeAxis(require('./resources/CustomImport'));
+
 var TupleIndexConverter = require("./src/TupleIndexConverter");
 
 function LMEService() {
 }
 
-LMEService.prototype.initializeFFlModelData = function(data) {
-    var JSWorkBook = new WorkBook(new Context());
+LMEService.prototype.initializeFFlModelData = function(data, path) {
+    var JSWorkBook;
+    if (path.indexOf('KSP') > -1) {
+        JSWorkBook = new WorkBook(new Context());
+    } else {
+        JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
+    }
     JSWorkBook.importSolution(data, "ffl");
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();

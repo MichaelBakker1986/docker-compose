@@ -8,7 +8,6 @@ const SolutionFacade = require('./SolutionFacade');
 const ValueFacade = require('./ValueFacade');
 const AST = require('../../ast-node-utils').ast;
 const log = require('log6')
-const XAxis = require('./XAxis')
 const YAxis = require('./YAxis')
 
 //user friendly stable API
@@ -22,8 +21,9 @@ const YAxis = require('./YAxis')
 // --optional property (default='value')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
-function JSWorkBook(context) {
+function JSWorkBook(context, XAxis, type) {
     this.indexer = null;//preserved to store the indexer
+    XAxis = XAxis || require('./XAxis')
     this.context = context;
     this.offset = 0;
     //default modelname
@@ -31,7 +31,7 @@ function JSWorkBook(context) {
     //tuple axis
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
-    this.xaxis = XAxis.bkyr.columns[0]
+    this.xaxis = XAxis[type || 'bkyr'].columns[0]
 }
 
 JSWorkBook.prototype.setColumnOffset = function(delta) {

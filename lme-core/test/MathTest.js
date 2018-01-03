@@ -119,6 +119,13 @@ var fesGetValue = api.getValue({
     values: []
 }, 'NEW_CHOICE_TEST', 0);
 
+
+wb.createFormula("OnZero(0,2)", "ONZERO_TEST")
+assert.equal(wb.get('ONZERO_TEST'), 2)
+wb.createFormula("OnZero(NA,2)", "ONZERO_TESTNA")
+assert.equal(wb.get('ONZERO_TESTNA'), NA)
+
+
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/
 /**

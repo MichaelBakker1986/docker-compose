@@ -23851,7 +23851,7 @@ LmeAPI.prototype.importFFL2 = function(ffl) {
 LmeAPI.prototype.setColumnOffset = function(delta) {
     this.lme.setColumnOffset(delta)
 }
-LmeAPI.prototype.importFFL2BackwardsCompatible = function(ffl) {
+LmeAPI.prototype.importFFL = function(ffl) {
     this.lme.importSolution(ffl, 'ffl')
 }
 LmeAPI.prototype.exportFFL = function() {

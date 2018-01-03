@@ -14,6 +14,7 @@ const domain = process.env.DOMAIN || 'appmodel.org'
 
 const express = require('express');
 const httpProxy = require('http-proxy');
+var nofavicon = require("express-no-favicons")
 const Authorization = require('./Authorization').Authorization
 const Authentication = require('./Authentication')
 const auth = new Authorization();
@@ -29,6 +30,7 @@ const staticresources = {
     'woff': true,
     'ttf': true
 }
+app.use(nofavicon());
 app.use(require('cors')())
 app.use(require('morgan')(':remote-addr - :status :method :url :res[content-length] b - :response-time[0] ms', {
     skip: function(req, res) {
@@ -42,6 +44,9 @@ const idProvider = new Authentication(app);
 app.get('/fail', (req, res) => {
     res.status(401).send('Unauthorized facebook user');
 });
+app.get('/whoami', (req, res) => {
+    res.status(200).send(req.isAuthenticated() ? req.user.displayName : 'guest')
+})
 /**
  * proxy every request
  */

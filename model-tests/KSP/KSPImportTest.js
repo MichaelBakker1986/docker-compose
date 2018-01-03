@@ -15,27 +15,10 @@ const assert = require('assert')
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 model.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
-    model.importFFL2BackwardsCompatible(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
+    model.importFFL(fs.readFileSync(__dirname + '/KSP.ffl', 'utf8'))
     const index = model.lme.indexer
     const nodes = model.exportWebModel().nodes
-    
-    /*    nodes.ValueExtraMonth.value = 10;
-        nodes.IncomeParent01.value = 1;
-        console.info(nodes.YearlyIncomeParent01.value)
-        nodes.IncomeParent01.value = 1;
 
-        nodes.ValueExtraMonth.value = 20;*/
-    /*    nodes.IncomeParent01.value = 100;
-        nodes.ValueExtraMonth.value = 100;
-        nodes.ExtraMonthParent01.value = "Nee";
-        assert(nodes.ValueExtraMonth.value == 100)
-        nodes.ExtraMonthParent01.value = "Ja";
-        assert(nodes.ValueExtraMonth.value == nodes.IncomeParent01.value)
-        assert(nodes.YearlyIncomeParent01.value == (nodes.IncomeParent01.value * 12 * 1.08) + nodes.ValueExtraMonth.value)
-        nodes.ValueExtraMonth.value = 0;
-        console.info(nodes.YearlyIncomeParent01.value)
-        nodes.SecondaryEducationProfile.value = 2;
-        console.info(nodes.CostsYearOneFour.value)*/
 }).catch(function(err) {
     log.error(err)
     process.exit(1);

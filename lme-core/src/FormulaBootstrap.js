@@ -389,9 +389,6 @@ var traverseTypes = {
 global.ExpandGrowth = function() {
     return 0;
 }
-global.FormulaSetInT = function() {
-    return 0;
-}
 //return  var (_cz199 = (call)) >  0?_cz199: zeroNumber
 global.Onzero = function() {
     return 0;
@@ -451,6 +448,9 @@ function buildFormula(formulaInfo, parent, node) {
         //x.trend.lastbkyr
         else if (node.name === 'LastHistYear') {
             node.name = 'x.notrend.first';
+        }
+        else if (node.name === 'LastTinPeriod') {
+            node.name = 'x.lastinperiod';
         }
         //x.trend.lastbkyr
         else if (node.name === 'LastHistYear') {

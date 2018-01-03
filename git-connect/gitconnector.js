@@ -41,7 +41,7 @@ ModelListener.prototype.loadModel = function(file) {
         modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
         modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
         try {
-            self.onNewModel(modelData)
+            self.onNewModel(modelData, file.toString())
         } catch (err) {
             log.warn("Failed to load model on path [%s] \nSee DEBUG logging to see why it has failed to load the model.", file.toString());
             if (log.DEBUG) log.error(err)

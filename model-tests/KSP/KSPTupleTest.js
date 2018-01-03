@@ -10,7 +10,7 @@ const MVO = new LME();
 MVO.addFunctions(excelPlugin);
 let mvoFLLFile = fs.readFileSync(__dirname + '/KSP.ffl', 'utf8');
 require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
-MVO.importFFL2BackwardsCompatible(mvoFLLFile);
+MVO.importFFL(mvoFLLFile);
 const nodes = MVO.exportWebModel().nodes;
 MVO.lme.fixProblemsInImportedSolution()
 

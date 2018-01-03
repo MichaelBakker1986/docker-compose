@@ -22,8 +22,25 @@ function finFormulaGeneric(buf) {
      * Here are all time references
      */
     buf = buf.replace(/FormulaSetInT\(GetT\(T\,-1\)\)<>NoTrend/gi, '!x.isprevnotrend');
-    buf = buf.replace(/FirstTInFormulaSet\(NoTrend,MainPeriod\)/gi, 'x.firstnotrend');
+
+    buf = buf.replace(/LastTinYear\(FirstTinFormulaSet\(Trend,\s*(\w+|\d+)\)\)/gi, 'x.firsttrend.lastbkyr');
     buf = buf.replace(/FirstTInFormulaset\(NoTrend\)/gi, 'x.firstnotrend');
+    buf = buf.replace(/FirstTInFormulaset\(Trend\)/gi, 'x.firsttrend');
+    buf = buf.replace(/FirstTinFormulaSet\(NoTrend,\s*(\w+|\d+)\)/gi, 'x.firstnotrend');
+    buf = buf.replace(/FirstTinFormulaSet\(Trend,\s*(\w+|\d+)\)/gi, 'x.firsttrend');
+
+    buf = buf.replace(/LastTinFormulaSet\(NoTrend\)/gi, 'x.lastnotrend');
+    buf = buf.replace(/LastTinFormulaSet\(Trend\)/gi, 'x.lasttrend');
+    buf = buf.replace(/LastTinFormulaSet\(NoTrend,\s*(\w+|\d+)\)/gi, 'x.lastnotrend');
+    buf = buf.replace(/LastTinFormulaSet\(Trend,\s*(\w+|\d+)\)/gi, 'x.lasttrend');
+    // buf = buf.replace(/LastTinFormulaSet\(NoTrend,PeriodInT\)/gi, 'x.lastnotrend');
+
+    buf = buf.replace(/FormulaSetInT\(LastTinPeriod\)/gi, 'x.lastinperiod');
+    buf = buf.replace(/FormulaSetInT\(FirstTinPeriod\)/gi, 'x.firstinperiod');
+
+    buf = buf.replace(/\[LastTinPeriod\(PeriodInT\)]/gi, '[lastinperiod]');
+    buf = buf.replace(/\LastTinPeriod\(PeriodInT\)/gi, 'x.lastinperiod');
+
     buf = buf.replace(/\[1]/g, '[doc]');
     buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
     buf = buf.replace(/\[GetT\(T,-1\)]/gi, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
@@ -33,11 +50,9 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gi, 'x.prevbkyr');
     buf = buf.replace(/GetT\(T,-1\)/gi, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gi, 'x.prev');
-    buf = buf.replace(/FirstTInFormulaset\(Trend\)/gi, 'x.firsttrend');
-    buf = buf.replace(/LastTinFormulaSet\(NoTrend\)/gi, 'x.lastnotrend');
+
     //TODO: same as TSY?
     buf = buf.replace(/TsY\(LastTinPeriod\)/gi, 'TsY');
-    buf = buf.replace(/LastTinFormulaSet\(Notrend,MainPeriod\)/gi, 'x.lastnotrend');
     buf = buf.replace(/\[0\]/g, '.title ');
 
     //(& types
@@ -64,6 +79,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/<>/gm, '!=');
     buf = buf.replace(/<->/gm, '!=');
     buf = buf.replace(/ Implies /g, '&&');
+    buf = buf.replace(/ mod /g, ' % ');
 
     return buf;
 }

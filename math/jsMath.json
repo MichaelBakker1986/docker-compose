@@ -17,7 +17,7 @@
   },
   "OnZero": {
     "args": "v,onzerov",
-    "body": "{ if (v <= 0) { return onzerov; } return v;}"
+    "body": "{ return v > 0 ? v : onzerov; }"
   },
   "SUM": {
     "args": "values",
@@ -139,40 +139,8 @@
     "args": "d,m,y",
     "body": "{ return new Date(d,m,y).toLocaleString(); }"
   },
-  "LastTInFormulaSet": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "LastTinFormulaSet": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "FirstTinFormulaSet": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "FirstTInFormulaset": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "FirstTInFormulaSet": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "FirstTinPeriod": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
-  "LastTinPeriod": {
-    "args": "x,x2",
-    "body": "{ return x }"
-  },
   "LastTinYear": {
     "args": "x",
-    "body": "{ return x }"
-  },
-  "LastTInFormulaSet": {
-    "args": "x,x2",
     "body": "{ return x }"
   },
   "FirstDateInT": {
@@ -244,10 +212,6 @@
     "body": "return 2016"
   },
   "FirstTinFormulaset": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "GetValue": {
     "args": "one",
     "body": "{ return 1 }"
   },

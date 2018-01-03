@@ -1,33 +1,5 @@
-/* 
- *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
- *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
- *
- *  Here we will do column/timeline ordering, referencing previous and adjacent columns
- *  
- *  The variable decorator should suply the referenced column to write into
- *  Period[T=12] will be referred to Period[1]
- *  When Period:
- *  variable.columns[12] will be referred to variable.columns[1]
- *  variable.columns[27] will be referred to variable.columns[2] etc..
- *  
- *  When Document 
- *  variable.columns[*] will be referred to variable.columns[1?0]
-
- *  When Detail 
- *  variable.columns[x] will be referred to variable.columns[x]
- */
-//Detail can refer to its Period
-//Detail will refer it its own Detail, else [bky] or [prev] has to be supplied
-//Detail can refer to Document
-//Period will refer to first Detail, else [first] or [last] or [bky] has to be supplied
-//Period will refer to its own Period, else [forecast] or [history] has to be supplied
-//Period can refer to Document
-//Document will refer to first Detail, else [first] or [last] or [bky] has to be supplied
-//Document will refer to first Period, else [forecast] or [history] has to be supplied
-//Document can only refer to itsself
-//can easy be refactored for better performance
-var importData = require('../resources/BookYearTimeModel.json');
 var log = require('log6');
+
 var headers = {
     title: {
         title: 'title'
@@ -49,7 +21,8 @@ var headers = {
     }
 }
 
-function calculateCalculationDocument(data) {
+function TimeAxis(data) {
+    this.importData = data
     // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
@@ -252,6 +225,7 @@ function calculateCalculationDocument(data) {
                 var metadata = currentviewmode.cols[cId];
                 var columnId = calculateIndex(tId, metadata.hash);
                 var previousColumn = (cId == 0 ? infinitColumn : columnEntriesForTimeline[columnEntriesForTimeline.length - 1]);
+                var previousTimelineColumn = (tId == 0 ? undefined : columnEntries[tId - 1][columnEntriesForTimeline.length]);
                 var columnElement = {
                     header: headers.columns,
                     hash: columnId,
@@ -385,16 +359,5 @@ function calculateCalculationDocument(data) {
     return viewmodes;
 }
 
-function CalculationDocument() {
-}
 
-CalculationDocument.prototype = calculateCalculationDocument(importData);
-// NodeJS support..
-// 25ms for 134col/5timelines
-// 199ms for 134col/40timelines
-// what is expected to be happen.. lineair result. 1ms boiler plate 5ms*timeline for 134cols
-// 280ms for 234cols 40timelines. Very acceptable 12year 40timelines 280ms..
-// columns can also be mixed in tsy. so 5x1d and then (7*12)bkyr.tsy. Allow 100year forecast., would require some nice
-// tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
-// currently we have max7 year 10timelines
-module.exports = CalculationDocument.prototype;
+module.exports = TimeAxis;

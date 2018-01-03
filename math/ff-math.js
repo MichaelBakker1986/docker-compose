@@ -90,6 +90,8 @@ PIECHART = function(points) {
 }
 HSUM = function(values, start, end) {
     var returnValue = 0;
+    if (start.hash) start = start.hash
+    if (end.hash) end = end.hash
     for (var i = (start || 0); i <= (end || values.length); i++) {
         returnValue += values[i];
     }
@@ -98,13 +100,18 @@ HSUM = function(values, start, end) {
 VALUES = function(func, fId, x, y, z, v) {
     var result = []
     for (var i = 0; i < x.aggcols.length; i++) {
-        result.push(func(fId, x.aggcols[i], y, z, v))
+        if (!x.aggcols[i].aggregated)//TODO: aggregation is serveral levels
+            result.push(func(fId, x.aggcols[i], y, z, v))
     }
     return result;
 }
+GetValue = function(variable, x, y, z, v, amm) {
+    return 1;//variable('123', x, y, z, v)
+}
+
 ValueT = function(one) {
-    let retrunValue = 1;
-    while (!one.prev.dummy) {
+    let retrunValue = 0;
+    while (!one.dummy) {
         retrunValue++;
         one = one.prev
     }
