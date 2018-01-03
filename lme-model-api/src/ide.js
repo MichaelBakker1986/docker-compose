@@ -68,7 +68,7 @@ const user_session = {
 
 angular.module('lmeapp', ['angular.filter']).controller('ideController', function($scope, $http, $timeout) {
     $http.get('whoami').then(function(response) {
-        user_session.user.name = response.data
+        user_session.user.name = response.data.split(',')[0]
     }).catch(function(err) {
         user_session.user.name = 'DEMO'
     })

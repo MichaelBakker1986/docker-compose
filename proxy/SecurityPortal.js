@@ -45,7 +45,7 @@ app.get('/fail', (req, res) => {
     res.status(401).send('Unauthorized facebook user');
 });
 app.get('/whoami', (req, res) => {
-    res.status(200).send(req.isAuthenticated() ? req.user.displayName : 'guest')
+    res.status(200).send(req.isAuthenticated() ? (req.user.displayName + ',' + req.user.id) : 'guest')
 })
 /**
  * proxy every request

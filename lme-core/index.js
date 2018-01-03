@@ -16,7 +16,7 @@ function LMEService() {
 
 LMEService.prototype.initializeFFlModelData = function(data, path) {
     var JSWorkBook;
-    if (path.indexOf('KSP') > -1) {
+    if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
         JSWorkBook = new WorkBook(new Context());
     } else {
         JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
