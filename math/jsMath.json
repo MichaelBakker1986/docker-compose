@@ -337,7 +337,7 @@
   },
   "MinMax": {
     "args": "value,min,max,fallback",
-    "body": "return value < min ? fallback : value > max ? fallback : value"
+    "body": "return isNaN(value) ? fallback : value < min ? min : value > max ? max : value"
   },
   "LN": {
     "args": "one",

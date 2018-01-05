@@ -119,12 +119,17 @@ var fesGetValue = api.getValue({
     values: []
 }, 'NEW_CHOICE_TEST', 0);
 
-
 wb.createFormula("OnZero(0,2)", "ONZERO_TEST")
 assert.equal(wb.get('ONZERO_TEST'), 2)
 wb.createFormula("OnZero(NA,2)", "ONZERO_TESTNA")
 assert.equal(wb.get('ONZERO_TESTNA'), NA)
 
+wb.createFormula("MinMax(100,110,200,NA)", "MINMAX_VALUEBOTTOM")
+assert.equal(wb.get('MINMAX_VALUEBOTTOM'), 110)
+wb.createFormula("MinMax(300,110,200,NA)", "MINMAX_VALUETOP")
+assert.equal(wb.get('MINMAX_VALUETOP'), 200)
+wb.createFormula("MinMax('a',110,200,300)", "MINMAX_VALUE_FALLBACK")
+assert.equal(wb.get('MINMAX_VALUE_FALLBACK'), 300)
 
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/

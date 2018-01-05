@@ -27,6 +27,8 @@ const staticresources = {
     'js': true,
     'jpg': true,
     'woff2': true,
+    'png': true,
+    'gif': true,
     'woff': true,
     'ttf': true
 }

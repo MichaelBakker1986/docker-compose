@@ -57,6 +57,12 @@ function changeAndCache(workbook, rowId, col, index, type) {
             return r;
         },
         set: function(v) {
+            /*if (v != null && ((v.indexOf('+') > -1) || (v.indexOf('-') > -1) || (v.indexOf('/') > -1) || (v.indexOf('*')) > -1)) {
+                if (!v.endsWith('+') && !v.endsWith('-'))
+                    v = eval(v)
+                else
+                    return
+            }*/
             workbook.set(rowId, (v == null || v == '') ? null : v, col, index, 0);
         }
     }
