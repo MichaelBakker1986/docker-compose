@@ -30,7 +30,12 @@ const staticresources = {
     'png': true,
     'gif': true,
     'woff': true,
-    'ttf': true
+    'ttf': true,
+    '/models': true,
+    '/hasUpdates': true,
+    '/whoami': true,
+    '/data/DEMO': true,
+    'html': true
 }
 app.use(nofavicon());
 app.use(require('cors')())
