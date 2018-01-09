@@ -93,16 +93,16 @@ function travelOne(node, keyArg, func, contextArg) {
                         arrayChild._parent = node;
                         arrayChild._parentKey = keyArg;
                         travelOne(arrayChild, key, func, newContext);
-                        arrayChild._parentKey = undefined;
-                        arrayChild._parent = undefined;
+                        delete arrayChild._parentKey
+                        delete arrayChild._parent
                     }
                 }
                 else {
                     child._parent = node;
                     child._parentKey = keyArg;
                     travelOne(child, key, func, newContext);
-                    child._parentKey = undefined;
-                    child._parent = undefined;
+                    delete child._parentKey
+                    delete child._parent
                 }
             }
         }

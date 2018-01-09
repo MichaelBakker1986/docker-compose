@@ -1,0 +1,278 @@
+model LGDTEST uses BaseModel
+{
+ root
+ {
+  variable Q_ROOT
+  {
+   displaytype:scorecard;
+   variable LGDCalculationInputContainer
+   {
+    displaytype: Input;
+    datatype: string;
+    title: "LGDCalculationInputContainer";
+    frequency: document;
+    variable GuaranteeAgreement
+    {
+     displaytype: none;
+     datatype: string;
+     title: "GuaranteeAgreement";
+     frequency: document;
+     variable ReferenceNumber
+     {
+      displaytype: string;
+      datatype: string;
+      title: "ReferenceNumber";
+      frequency: document;
+      maxlength: 128;
+     }
+     variable DefinitionCode
+     {
+      displaytype: string;
+      datatype: string;
+      title: "DefinitionCode";
+      frequency: document;
+      maxlength: 255;
+     }
+    }
+    variable CollateralAgreementContainer
+    {
+     displaytype: none;
+     datatype: string;
+     title: "CollateralAgreementContainer";
+     frequency: document;
+     variable CollateralAgreement
+     {
+      displaytype: none;
+      datatype: string;
+      title: "CollateralAgreement";
+      frequency: document;
+      variable ReferenceNumber
+      {
+       displaytype: string;
+       datatype: string;
+       title: "ReferenceNumber";
+       frequency: document;
+       maxlength: 128;
+      }
+      variable DefinitionCode
+      {
+       displaytype: string;
+       datatype: string;
+       title: "DefinitionCode";
+       frequency: document;
+       maxlength: 255;
+      }
+      variable SecuredAmount
+      {
+       displaytype: none;
+       datatype: string;
+       title: "SecuredAmount";
+       frequency: document;
+       variable Currency
+       {
+        displaytype: string;
+        datatype: string;
+        title: "Currency";
+        frequency: document;
+        maxlength: 10;
+       }
+       variable Amount
+       {
+        displaytype: number;
+        datatype: number;
+        title: "Amount";
+        frequency: document;
+       }
+      }
+     }
+     variable RegistrationContainer
+     {
+      displaytype: none;
+      datatype: string;
+      title: "RegistrationContainer";
+      frequency: document;
+      variable CollateralObject
+      {
+       displaytype: none;
+       datatype: string;
+       title: "CollateralObject";
+       frequency: document;
+       variable ReferenceNumber
+       {
+        displaytype: string;
+        datatype: string;
+        title: "ReferenceNumber";
+        frequency: document;
+        maxlength: 128;
+       }
+       variable DefinitionCode
+       {
+        displaytype: string;
+        datatype: string;
+        title: "DefinitionCode";
+        frequency: document;
+        maxlength: 255;
+       }
+       variable MarketValue
+       {
+        displaytype: none;
+        datatype: string;
+        title: "MarketValue";
+        frequency: document;
+        variable Currency
+        {
+         displaytype: string;
+         datatype: string;
+         title: "Currency";
+         frequency: document;
+         maxlength: 10;
+        }
+        variable Amount
+        {
+         displaytype: number;
+         datatype: number;
+         title: "Amount";
+         frequency: document;
+        }
+       }
+      }
+     }
+    }
+    variable FacilityInputContainer
+    {
+     displaytype: none;
+     datatype: string;
+     title: "FacilityInputContainer";
+     frequency: document;
+     variable FacilityDetails
+     {
+      displaytype: none;
+      datatype: string;
+      title: "FacilityDetails";
+      frequency: document;
+      variable FacilityIdentification
+      {
+       displaytype: none;
+       datatype: string;
+       title: "FacilityIdentification";
+       frequency: document;
+       variable ReferenceId
+       {
+        displaytype: string;
+        datatype: string;
+        title: "ReferenceId";
+        frequency: document;
+        maxlength: 128;
+       }
+       variable DisplayId
+       {
+        displaytype: string;
+        datatype: string;
+        title: "DisplayId";
+        frequency: document;
+        maxlength: 128;
+       }
+      }
+      variable FacilityDefinitionCode
+      {
+       displaytype: string;
+       datatype: string;
+       title: "FacilityDefinitionCode";
+       frequency: document;
+       maxlength: 255;
+      }
+     }
+     variable LimitDetails
+     {
+      displaytype: none;
+      datatype: string;
+      title: "LimitDetails";
+      frequency: document;
+      variable LimitTypeCode
+      {
+       displaytype: string;
+       datatype: string;
+       title: "LimitTypeCode";
+       frequency: document;
+       maxlength: 255;
+      }
+      variable CompensatingBalancePercentage
+      {
+       displaytype: number;
+       datatype: number;
+       title: "CompensatingBalancePercentage";
+       frequency: document;
+      }
+     }
+     tuple AllocatedGuarantee
+     {
+      displaytype: none;
+      datatype: string;
+      title: "AllocatedGuarantee";
+      frequency: document;
+      variable ReferenceNumber
+      {
+       displaytype: string;
+       datatype: string;
+       title: "ReferenceNumber";
+       frequency: document;
+       maxlength: 128;
+      }
+     }
+     tuple AllocatedCollateral
+     {
+      displaytype: none;
+      datatype: string;
+      title: "AllocatedCollateral";
+      frequency: document;
+      variable ReferenceNumber
+      {
+       displaytype: string;
+       datatype: string;
+       title: "ReferenceNumber";
+       frequency: document;
+       maxlength: 128;
+      }
+     }
+    }
+   }
+   variable LGDCalculationOutputContainer
+   {
+    displaytype: Output;
+    datatype: string;
+    title: "LGDCalculationOutputContainer";
+    frequency: document;
+    variable FacilityResultContainer
+    {
+     displaytype: none;
+     datatype: string;
+     title: "FacilityResultContainer";
+     frequency: document;
+     variable FacilityReferenceNumber
+     {
+      displaytype: string;
+      datatype: string;
+      title: "FacilityReferenceNumber";
+      frequency: document;
+      maxlength: 255;
+     }
+     variable FacilityLGD
+     {
+      displaytype: none;
+      datatype: string;
+      title: "FacilityLGD";
+      frequency: document;
+      variable LGDClass
+      {
+       displaytype: string;
+       datatype: string;
+       title: "LGDClass";
+       frequency: document;
+       maxlength: 255;
+      }
+     }
+    }
+   }
+  }
+ }
+}

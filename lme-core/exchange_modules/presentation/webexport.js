@@ -1,6 +1,6 @@
 var SolutionFacade = require('../../src/SolutionFacade');
 var PropertiesAssembler = require('../../src/PropertiesAssembler');
-var columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid']
+
 
 function WebExport() {
     this.exportAsObject = true;
@@ -15,6 +15,14 @@ function LMETree(name, workbook) {
     this.workbook = workbook;
     this.nodes = {};
     this.names = {};
+    this.repeats = {
+        undefined: [workbook.context.columnSize, 1],
+        none: [1, 1],
+        column: [workbook.context.columnSize, 1],
+        document: [1, workbook.context.columnSize],
+        timeline: [1, workbook.context.columnSize]
+    }
+    this.columns = workbook.context.columns;
 }
 
 function noChange(workbook, rowId, col, index, type) {
@@ -84,28 +92,64 @@ var properties = {
     hint: {cache: true, prox: noChange},
     choices: {cache: true, prox: noChange}
 }
-var repeats = {
-    undefined: [6, 1],
-    none: [1, 1],
-    column: [6, 1],
-    document: [1, 6],
-    timeline: [1, 6]
-}
 
-LMETree.prototype.addWebNode = function(node, treePath, index) {
+let tuplecounter = 0;
+LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas) {
+    tuplecounter++;
+    const tree = this;
     var workbook = this.workbook;
     var rowId = node.rowId;
-    var amount = repeats[node.frequency][0]
-    var colspan = repeats[node.frequency][1];
+    const newTupleId = rowId + "_add_tuple_" + tuplecounter
+    var amount = this.repeats.document[0]
+    var colspan = this.repeats.document[1];
+    const type = 'tuple_add';
+    const parent = this.nodes[treePath[treePath.length - 1]];
+    const path = treePath.join('.');
+    var rv = {
+        id: newTupleId,
+        order_id: natural_order_id,
+        add: function() {
+            console.info('Clicked add tuple' + newTupleId)
+            console.info(path)
+            tree.addTupleNode(node, path.split('.'), parent.children.length + 1, natural_order_id + tuplecounter, yas)
+        },
+        index: index,
+        title_locked: node.title_locked,
+        type: 'tuple_add',
+        path: path,
+        ammount: amount,
+        colspan: colspan,
+        visible: true,
+        cols: [{
+            value: newTupleId,
+            entered: false,
+            type: 'tuple_add',
+            locked: true,
+            visible: true,
+            valid: true
+        }],
+        children: []
+    };
+
+    if (parent) parent.children.push(rv);
+    this.nodes[newTupleId] = rv;
+}
+LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas) {
+    var workbook = this.workbook;
+    var rowId = node.rowId;
+    var amount = this.repeats[node.frequency][0]
+    var colspan = this.repeats[node.frequency][1];
     const type = node.displayAs;
     const datatype = node.datatype
     const displaytype = type;// node.datatype;
+    const path = treePath.join('.')
     var rv = {
         id: rowId,
+        order_id: natural_order_id,
         index: index,
         title_locked: node.title_locked,
         type: node.displayAs,
-        path: treePath.join('.'),
+        path: path,
         ammount: amount,
         colspan: colspan,
         cols: [],
@@ -136,6 +180,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
             valid: null
         }
         rv.cols.push(r);
+
         Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, displaytype));
         Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index, displaytype));
         Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, displaytype));
@@ -146,7 +191,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index) {
     /**
      * Proxy properties to the row object
      */
-    columns.forEach(function(col) {
+    this.columns.forEach(function(col) {
         rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype));
     });
@@ -170,8 +215,9 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     var indexPath = [];
     //make the walk here,
     var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
-
+    let natural_order_id = 0;
     workbook.visitProperties(rootNode, function(node, yas, treeDepth) {
+        natural_order_id = natural_order_id + 1000;
         if (node && node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)
@@ -184,11 +230,14 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             }
             var index = indexPath[indexPath.length - 1] + 1
             indexPath[indexPath.length - 1] = index
-            lmeTree.addWebNode(node, treePath, index)
+            if (node.tupleDefinition) {
+                lmeTree.addTupleNode(node, treePath, index, natural_order_id, yas)
+            } else {
+                lmeTree.addWebNode(node, treePath, index, natural_order_id, yas)
+            }
         }
     })
     lmeTree.offset = 0;
-    /*  }*/
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())

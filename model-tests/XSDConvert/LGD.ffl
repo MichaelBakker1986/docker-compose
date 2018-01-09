@@ -8,13 +8,11 @@ model LGD uses BaseModel
 variable LGDCalculationInputContainer
 {
  displaytype: none;
- datatype: string;
  title: "LGDCalculationInputContainer";
  frequency: document;
  variable GuaranteeAgreement
  {
   displaytype: none;
-  datatype: string;
   title: "GuaranteeAgreement";
   frequency: document;
   variable ReferenceNumber
@@ -37,13 +35,11 @@ variable LGDCalculationInputContainer
  variable CollateralAgreementContainer
  {
   displaytype: none;
-  datatype: string;
   title: "CollateralAgreementContainer";
   frequency: document;
   variable CollateralAgreement
   {
    displaytype: none;
-   datatype: string;
    title: "CollateralAgreement";
    frequency: document;
    variable ReferenceNumber
@@ -65,7 +61,6 @@ variable LGDCalculationInputContainer
    variable SecuredAmount
    {
     displaytype: none;
-    datatype: string;
     title: "SecuredAmount";
     frequency: document;
     variable Currency
@@ -88,13 +83,11 @@ variable LGDCalculationInputContainer
   variable RegistrationContainer
   {
    displaytype: none;
-   datatype: string;
    title: "RegistrationContainer";
    frequency: document;
    variable CollateralObject
    {
     displaytype: none;
-    datatype: string;
     title: "CollateralObject";
     frequency: document;
     variable ReferenceNumber
@@ -116,7 +109,6 @@ variable LGDCalculationInputContainer
     variable MarketValue
     {
      displaytype: none;
-     datatype: string;
      title: "MarketValue";
      frequency: document;
      variable Currency
@@ -141,19 +133,16 @@ variable LGDCalculationInputContainer
  variable FacilityInputContainer
  {
   displaytype: none;
-  datatype: string;
   title: "FacilityInputContainer";
   frequency: document;
   variable FacilityDetails
   {
    displaytype: none;
-   datatype: string;
    title: "FacilityDetails";
    frequency: document;
    variable FacilityIdentification
    {
     displaytype: none;
-    datatype: string;
     title: "FacilityIdentification";
     frequency: document;
     variable ReferenceId
@@ -185,7 +174,6 @@ variable LGDCalculationInputContainer
   variable LimitDetails
   {
    displaytype: none;
-   datatype: string;
    title: "LimitDetails";
    frequency: document;
    variable LimitTypeCode
@@ -240,13 +228,11 @@ variable LGDCalculationInputContainer
 variable LGDCalculationOutputContainer
 {
  displaytype: none;
- datatype: string;
  title: "LGDCalculationOutputContainer";
  frequency: document;
  variable FacilityResultContainer
  {
   displaytype: none;
-  datatype: string;
   title: "FacilityResultContainer";
   frequency: document;
   variable FacilityReferenceNumber
@@ -260,7 +246,6 @@ variable LGDCalculationOutputContainer
   variable FacilityLGD
   {
    displaytype: none;
-   datatype: string;
    title: "FacilityLGD";
    frequency: document;
    variable LGDClass

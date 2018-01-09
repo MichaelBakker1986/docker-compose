@@ -1,5 +1,6 @@
 /**
  * Tuple concept
+ * TODO: make tests for nested tuples!
  */
 var first = {
     index: 0,
