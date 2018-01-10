@@ -38,6 +38,7 @@ class Authorization {
 
         //These resources do not require authorization or authentication
         const anonymous_resources = [
+            "/resources/SCORECARDTESTMODEL.js",
             '/data-docs',
             '/data-docs/',
             '/figure/KinderSpaarPlan',
@@ -192,6 +193,7 @@ class Authorization {
                         callback(null, true)
                     }
                 }
+
                 this.acl.isAllowed(id, '/' + parts[1] + '/' + ids[i], VIEW_RULE, okCallBack)
             }
         } else {
