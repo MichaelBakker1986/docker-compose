@@ -37,6 +37,27 @@ module.exports.setup = function(app) {
                 if (req.originalUrl.endsWith('Container')) {
                     context.columns = 1;
                     result = LMECalculationFacade.getObjectValues(context, "LGD_LGDCalculationOutputContainer", undefined);
+                    result = {
+                        "facilityResultContainerField": [{
+                            "facilityReferenceNumberField": "CAS-210-01",
+                            "facilityLGDField": {
+                                "lGDClassField": "LCRMNL06",
+                                "bestEstimatedLGDField": 1.2,
+                                "lGDIncludingMOCField": 1.2,
+                                "downturnLGDIncludingMOCField": 1.2
+                            },
+                            "facilityCoverageField": 1.2
+                        }, {
+                            "facilityReferenceNumberField": "CAS-210-02",
+                            "facilityLGDField": {
+                                "lGDClassField": "LCRMNL06",
+                                "bestEstimatedLGDField": 1.4,
+                                "lGDIncludingMOCField": 2.1,
+                                "downturnLGDIncludingMOCField": 3.2
+                            },
+                            "facilityCoverageField": 0.2
+                        }]
+                    }
                 } else {
                     const body = req.body;
                     context.columns = 17;

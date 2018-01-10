@@ -10,126 +10,6 @@ variable LGDCalculationInputContainer
  displaytype: none;
  title: "LGDCalculationInputContainer";
  frequency: document;
- variable GuaranteeAgreement
- {
-  displaytype: none;
-  title: "GuaranteeAgreement";
-  frequency: document;
-  variable ReferenceNumber
-  {
-   displaytype: string;
-   datatype: string;
-   title: "ReferenceNumber";
-   frequency: document;
-   maxlength: 128;
-  }
-  variable DefinitionCode
-  {
-   displaytype: string;
-   datatype: string;
-   title: "DefinitionCode";
-   frequency: document;
-   maxlength: 255;
-  }
- }
- variable CollateralAgreementContainer
- {
-  displaytype: none;
-  title: "CollateralAgreementContainer";
-  frequency: document;
-  variable CollateralAgreement
-  {
-   displaytype: none;
-   title: "CollateralAgreement";
-   frequency: document;
-   variable ReferenceNumber
-   {
-    displaytype: string;
-    datatype: string;
-    title: "ReferenceNumber";
-    frequency: document;
-    maxlength: 128;
-   }
-   variable DefinitionCode
-   {
-    displaytype: string;
-    datatype: string;
-    title: "DefinitionCode";
-    frequency: document;
-    maxlength: 255;
-   }
-   variable SecuredAmount
-   {
-    displaytype: none;
-    title: "SecuredAmount";
-    frequency: document;
-    variable Currency
-    {
-     displaytype: string;
-     datatype: string;
-     title: "Currency";
-     frequency: document;
-     maxlength: 10;
-    }
-    variable Amount
-    {
-     displaytype: number;
-     datatype: number;
-     title: "Amount";
-     frequency: document;
-    }
-   }
-  }
-  variable RegistrationContainer
-  {
-   displaytype: none;
-   title: "RegistrationContainer";
-   frequency: document;
-   variable CollateralObject
-   {
-    displaytype: none;
-    title: "CollateralObject";
-    frequency: document;
-    variable ReferenceNumber
-    {
-     displaytype: string;
-     datatype: string;
-     title: "ReferenceNumber";
-     frequency: document;
-     maxlength: 128;
-    }
-    variable DefinitionCode
-    {
-     displaytype: string;
-     datatype: string;
-     title: "DefinitionCode";
-     frequency: document;
-     maxlength: 255;
-    }
-    variable MarketValue
-    {
-     displaytype: none;
-     title: "MarketValue";
-     frequency: document;
-     variable Currency
-     {
-      displaytype: string;
-      datatype: string;
-      title: "Currency";
-      frequency: document;
-      maxlength: 10;
-     }
-     variable Amount
-     {
-      displaytype: number;
-      datatype: number;
-      title: "Amount";
-      frequency: document;
-     }
-    }
-   }
-  }
- }
  variable FacilityInputContainer
  {
   displaytype: none;
@@ -198,13 +78,27 @@ variable LGDCalculationInputContainer
    datatype: string;
    title: "AllocatedGuarantee";
    frequency: document;
-   variable ReferenceNumber
+   variable GuaranteeAgreement
    {
-    displaytype: string;
-    datatype: string;
-    title: "ReferenceNumber";
+    displaytype: none;
+    title: "GuaranteeAgreement";
     frequency: document;
-    maxlength: 128;
+    variable ReferenceNumber
+    {
+     displaytype: string;
+     datatype: string;
+     title: "ReferenceNumber";
+     frequency: document;
+     maxlength: 128;
+    }
+    variable DefinitionCode
+    {
+     displaytype: string;
+     datatype: string;
+     title: "DefinitionCode";
+     frequency: document;
+     maxlength: 255;
+    }
    }
   }
   tuple AllocatedCollateral
@@ -213,13 +107,82 @@ variable LGDCalculationInputContainer
    datatype: string;
    title: "AllocatedCollateral";
    frequency: document;
-   variable ReferenceNumber
+   variable CollateralAgreementContainer
    {
-    displaytype: string;
-    datatype: string;
-    title: "ReferenceNumber";
+    displaytype: none;
+    title: "CollateralAgreementContainer";
     frequency: document;
-    maxlength: 128;
+    variable CollateralAgreement
+    {
+     displaytype: none;
+     title: "CollateralAgreement";
+     frequency: document;
+     variable ReferenceNumber
+     {
+      displaytype: string;
+      datatype: string;
+      title: "ReferenceNumber";
+      frequency: document;
+      maxlength: 128;
+     }
+     variable DefinitionCode
+     {
+      displaytype: string;
+      datatype: string;
+      title: "DefinitionCode";
+      frequency: document;
+      maxlength: 255;
+     }
+    }
+    variable RegistrationContainer
+    {
+     displaytype: none;
+     title: "RegistrationContainer";
+     frequency: document;
+     variable CollateralObject
+     {
+      displaytype: none;
+      title: "CollateralObject";
+      frequency: document;
+      variable ReferenceNumber
+      {
+       displaytype: string;
+       datatype: string;
+       title: "ReferenceNumber";
+       frequency: document;
+       maxlength: 128;
+      }
+      variable DefinitionCode
+      {
+       displaytype: string;
+       datatype: string;
+       title: "DefinitionCode";
+       frequency: document;
+       maxlength: 255;
+      }
+      variable MarketValue
+      {
+       displaytype: none;
+       title: "MarketValue";
+       frequency: document;
+       variable Currency
+       {
+        displaytype: string;
+        datatype: string;
+        title: "Currency";
+        frequency: document;
+        maxlength: 10;
+       }
+       variable Amount
+       {
+        displaytype: number;
+        datatype: number;
+        title: "Amount";
+        frequency: document;
+       }
+      }
+     }
+    }
    }
   }
  }
