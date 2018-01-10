@@ -96,6 +96,10 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     const values = [];
+    if (!context.isset) {
+        JSWorkBook.updateValues();
+        context.isset = true;
+    }
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     const flattenValues = {}
     if (rootNode) {

@@ -90,8 +90,6 @@ assert(wb.get("TestTupleValuesCOUNT") === 1);
  * TSUM herstellen en de logica verplaatsen naar de uitvragende formule
  * TSUM(tupleNaam) => TSUM(tupleDefinitionCount,propertyNaam,x,y,z)
  *
- * TSUM herstellen lijkt de beste oplossing
- *
  * Bij het inlezen van een FFL model, tuple markeren als TupleDefinition
  * Alle kinderen daaronder totaan nieuwe tuple markeren als TupleProperty
  *

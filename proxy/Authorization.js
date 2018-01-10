@@ -41,7 +41,7 @@ class Authorization {
             '/data-docs',
             '/data-docs/',
             '/figure/KinderSpaarPlan',
-
+            '/figure/LGDCalculationInputContainer',
             '/basic_example.html',
             '/extended_controller.html',
             '/uishowcase.html',

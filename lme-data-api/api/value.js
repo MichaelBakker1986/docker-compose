@@ -32,20 +32,25 @@ module.exports.setup = function(app) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
             try {
-                const body = req.body;
-                //resolve context key to stored values
+                let result;
                 var context = ds.getOrCreate(req.params.id);
-                context.columns = 17;
-                //set all values in the context.
-                for (var q in body) {
-                    for (var c in body[q]) {
-                        if (typeof(body[q][c]) != 'object') {
-                            LMECalculationFacade.getValue(context, "KSP_" + c, 0, body[q][c], undefined)
+                if (req.originalUrl.endsWith('Container')) {
+                    context.columns = 1;
+                    result = LMECalculationFacade.getObjectValues(context, "LGD_LGDCalculationOutputContainer", undefined);
+                } else {
+                    const body = req.body;
+                    context.columns = 17;
+                    //resolve context key to stored values
+                    //set all values in the context.
+                    for (var q in body) {
+                        for (var c in body[q]) {
+                            if (typeof(body[q][c]) != 'object') {
+                                LMECalculationFacade.getValue(context, "KSP_" + c, 0, body[q][c], undefined)
+                            }
                         }
                     }
+                    result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
                 }
-
-                const result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
                 success(result)
             } catch (err) {
                 fail(err);

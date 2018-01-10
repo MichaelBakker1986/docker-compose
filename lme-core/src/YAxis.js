@@ -12,6 +12,7 @@ for (var i = 1; i < 40; i++) {
     var newYas = {
         index: i,
         hash: 32768 * i,
+        depth: 0,
         previous: all[i - 1],
         base: first
     };
@@ -76,7 +77,6 @@ TINSTANCEBYNAME = function(v, fId, y, name) {
 
     }
 }
-//timelines we need aprox 8 4 bit
 //columns we need aprox 512 10bit
 //17bit for tuples, 8*8*8*8 (16bit)
 //when entering tuple in tuple y.children should be called.

@@ -248,25 +248,29 @@ model LGD uses BaseModel
      datatype: string;
      title: "FacilityResultContainer";
      frequency: document;
+     formula: 1;
      variable FacilityReferenceNumber
      {
       displaytype: string;
       datatype: string;
       title: "FacilityReferenceNumber";
       frequency: document;
+      formula: 1;
       maxlength: 255;
      }
      variable FacilityLGD
      {
-      displaytype: none;
+      displaytype: string;
       datatype: string;
       title: "FacilityLGD";
+      formula: 1;
       frequency: document;
       variable LGDClass
       {
        displaytype: string;
        datatype: string;
        title: "LGDClass";
+       formula: 1;
        frequency: document;
        maxlength: 255;
       }
