@@ -324,7 +324,7 @@ JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth
                 for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
                     wb.walkProperties(treeNode, visitor, y.deeper[t], 'instance', innerTreeDepth)
                 }
-                //tuple_add_call
+                //tuple_add call
                 visitor(treeNode, 'new', innerTreeDepth, y)
             } else if (type == 'instance') {
                 visitor(treeNode, y, innerTreeDepth, y)

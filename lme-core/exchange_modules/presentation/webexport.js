@@ -111,9 +111,8 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         id: newTupleId,
         order_id: natural_order_id,
         add: function() {
-            console.info('Clicked add tuple' + natural_order_id + 2000)
+            console.info('Clicked add tuple')
             console.info(path)
-
             const tupleCount = workbook.maxTupleCountForRow(node) + 1
             workbook.set('Tuple', 'value', 'value', 0, tupleCount)
             var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
@@ -234,6 +233,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
         natural_order_id = (natural_order_id + 100);
         //TODO: combine natural_order_id with Tuple Indexes.
+        //TODO: combine rest of algorithm into walkProperties function.
         if (node && node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)

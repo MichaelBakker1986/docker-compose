@@ -111,7 +111,7 @@ GetValue = function(variable, x, y, z, v, amm) {
 
 ValueT = function(one) {
     let retrunValue = 0;
-    while (!one.dummy) {
+    while (one && !one.dummy) {
         retrunValue++;
         one = one.prev
     }

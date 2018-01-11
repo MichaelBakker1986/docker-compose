@@ -42,7 +42,9 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
+    const modifierIndex = indexer.schemaIndexes.modifier;
     this.childIndex = indexer.schemaIndexes.children;
+    const childIndex = this.childIndex;
     const choiceIndex = indexer.schemaIndexes.choices;
     const trend_formulaIndex = indexer.schemaIndexes.formula_trend;
     const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
@@ -100,7 +102,17 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
             valueFormula = 'If(x.istrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
         }
-
+        if (node[modifierIndex] == '=') {
+            const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
+            let formula = '0';
+            for (var i = 0; i < siblings.length; i++) {
+                if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
+                    formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
+                }
+            }
+            // console.info('node has modifier parent is ' + indexer.i[node[fflRegister.parentNameIndex]][childIndex].length + ' : ' + formula)
+            valueFormula = formula;
+        }
         if (type == 'select') {
             if (!node[choiceIndex]) {
                 if (log.debug) log.debug('Row [' + nodeName + '] is type [select], but does not have choices')
