@@ -83,7 +83,6 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         let type = node[displayTypeIndex]
         inheritProperties(node)
 
-
         // expecting an parentName..
         let parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
         if (parentId == 'root') {
@@ -175,12 +174,6 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     });
     //think about formula-sets, same ritual as trend + notrend formulasets
-    //think about the modifiers, to make them work correctly
-    //think about ' and // in constants
-    //think about trend - notrend
-    //INFO: scorecardtool: think about paragraph, WARNING, INFO, HINT..
-    //think about tupleDefinitionName, tupleDefinitionProperty
-    //forget about de parsing, since its included in the indexer.
     return solution;
 }
 

@@ -157,6 +157,16 @@ simplified.TSUM = function(formulaInfo, node) {
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
 }
 simplified.TupleSum = simplified.TSUM
+simplified.TMIN = function(formulaInfo, node) {
+    node.callee.name = 'MIN'
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
+}
+simplified.TupleMin = simplified.TMIN
+simplified.TMAX = function(formulaInfo, node) {
+    node.callee.name = 'MAX'
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
+}
+simplified.TupleMax = simplified.TMAX
 simplified.TCOUNT = function(formulaInfo, node) {
     node.callee.name = 'PROXY'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TCOUNT');
