@@ -111,14 +111,12 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         id: newTupleId,
         order_id: natural_order_id,
         add: function() {
-            console.info('Clicked add tuple')
-            console.info(path)
             const tupleCount = workbook.maxTupleCountForRow(node) + 1
-            workbook.set('Tuple', 'value', 'value', 0, tupleCount)
+            workbook.set(node.rowId, 'value' + tupleCount, 'value', 0, tupleCount)
             var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
             workbook.walkProperties(node, function(child, yasi, treeDepth, yi) {
                 natural_order_idd++
-                tree.addWebNode(child, treePath, index + 1, natural_order_idd, yi)
+                tree.addWebNode(child, path.split('.'), natural_order_idd, natural_order_idd, yi)
                 //only print the newly added tuple instance.
                 console.info(child.rowId + " :: " + yi.hash)
             }, yas.parent.deeper[tupleCount], 'instance', treePath.length)

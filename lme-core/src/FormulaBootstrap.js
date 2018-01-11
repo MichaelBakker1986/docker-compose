@@ -156,6 +156,7 @@ simplified.TSUM = function(formulaInfo, node) {
     node.callee.name = 'SUM'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
 }
+simplified.TupleSum = simplified.TSUM
 simplified.TCOUNT = function(formulaInfo, node) {
     node.callee.name = 'PROXY'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TCOUNT');

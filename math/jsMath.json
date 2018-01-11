@@ -75,10 +75,6 @@
     "args": "x",
     "body": "{ return 1; }"
   },
-  "TupleSum": {
-    "args": "value",
-    "body": "{ return value; }"
-  },
   "EvaluateAsString": {
     "args": "value",
     "body": "{ return String(value) }"

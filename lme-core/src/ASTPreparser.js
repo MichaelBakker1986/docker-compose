@@ -224,7 +224,6 @@ var simplified = {
 }
 simplified.ForAll = simplified.Count
 simplified.Exists = simplified.ForAll;
-simplified.TupleSum = simplified.TSUM;
 simplified.IF = simplified.If;
 simplified.Hsum = simplified.HSUM;
 simplified.HSum = simplified.HSUM;

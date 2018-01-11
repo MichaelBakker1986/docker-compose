@@ -110,7 +110,6 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                     formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
                 }
             }
-            // console.info('node has modifier parent is ' + indexer.i[node[fflRegister.parentNameIndex]][childIndex].length + ' : ' + formula)
             valueFormula = formula;
         }
         if (type == 'select') {
