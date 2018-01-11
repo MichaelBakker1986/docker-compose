@@ -77,7 +77,7 @@ function addProperty(groupName, row, col, item, parentId) {
     //inherit all properties But new allow extended Objects.
     //Only copy primitive members, and the delegate Object.
     for (key in item) {
-        if (property[key] === undefined && (key === 'delegate' || typeof item[key] !== 'object' )) {
+        if (property[key] === undefined && (key === 'delegate' || typeof item[key] !== 'object')) {
             property[key] = item[key];
         }
     }
@@ -154,10 +154,10 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
  * As expected, problems while recursive calling this method.
  */
-PropertiesAssembler.prototype.visitProperty = function(node, func) {
+PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
     var startingNode = node || getRootNode('NEW');
     if (startingNode !== undefined) {
-        visitInternal(startingNode, func, 0, undefined)
+        visitInternal(startingNode, func, startDepth || 0)
     }
 }
 
@@ -166,12 +166,23 @@ function visitInternal(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
-            childNode.parentrowId = node.rowId;
+            childNode.parentrowId = node.rowId;//TODO: remove this (visitor should not modify state)
             visitInternal(childNode, func, depth + 1);
         }
     }
 }
 
+function visitChildren(node, func, depth) {
+    if (node.nodes) {
+        for (var i = 0; i < node.nodes.length; i++) {
+            func(node, depth);
+            var childNode = PropertiesModel[node.nodes[i].name];
+            visitChildren(childNode, func, depth + 1);
+        }
+    }
+}
+
+PropertiesAssembler.prototype.visitChildren = visitChildren;
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;

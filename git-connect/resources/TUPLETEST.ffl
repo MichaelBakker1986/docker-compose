@@ -12,26 +12,52 @@ model TUPLETEST uses BaseModel
    {
     title: "Test";
     datatype: number;
+    variable TSUMTEST
+    {
+     title: "TsumTEST" ;
+     formula: TSUM(TupleVar1);
+    }
+    variable TSUMTEST2
+    {
+     title: "TsumTEST2" ;
+     formula: TSUM(TupleVar4);
+    }
     tuple Tuple
     {
      title: "TupleDefinition";
      hint: "test";
      formula: 101;
      datatype: number;
-     frequency: document;
      variable TupleVar1
      {
       title: "TupleVar1";
       formula: 123;
       datatype: number;
-      frequency: document;
      }
      variable TupleVar2
      {
       title: "TupleVar2";
       formula: 1234;
       datatype: number;
-      frequency: document;
+     }
+    }
+    tuple Tuple2
+    {
+     title: "TupleDefinitio2n";
+     hint: "tes222t";
+     formula: 101123312;
+     datatype: number;
+     variable TupleVar3
+     {
+      title: "TupleVar3";
+      formula: TupleVar3[prev]+100;
+      datatype: number;
+     }
+     variable TupleVar4
+     {
+      title: "TupleVar4";
+      formula: 12349;
+      datatype: number;
      }
     }
    }

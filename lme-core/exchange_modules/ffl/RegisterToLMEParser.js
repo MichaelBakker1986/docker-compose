@@ -74,6 +74,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const rootNode = register['root']
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
+            tuples.length--
             while (!tuples[depth] && tuples.length > 0) tuples.length--
         }
         const nodeName = node[nameIndex];

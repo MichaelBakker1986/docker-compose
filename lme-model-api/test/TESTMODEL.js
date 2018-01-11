@@ -16,7 +16,7 @@ Number.prototype.countDecimals = function() {
  * FFL->LME->WebExport
  */
 newModel.importFFL(fs.readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8'));
-const nodes = newModel.exportWebModel().nodes;
+const nodes = newModel.exportWebModel().no;
 /**
  * Declare variables
  */

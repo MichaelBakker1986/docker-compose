@@ -18,7 +18,6 @@
 
         //create an angular controller
         angularApplication.controller('lmeController', function($scope, $http) {
-
             var url = 'http://blfif-tv-tr03.finance.lab/resources/SCORECARDTESTMODEL.js';
             $http.get(url).then(function(data) {
                 //load sync dynamic javascript file

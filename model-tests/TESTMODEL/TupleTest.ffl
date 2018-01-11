@@ -27,5 +27,12 @@ model TUPLETEST uses BaseModel
       frequency: document;
      }
     }
- }
+    variable RootVariable
+    {
+      title: "RootVariable";
+      formula: 12347;
+      datatype: number;
+      frequency: document;
+    }
+  }
 }

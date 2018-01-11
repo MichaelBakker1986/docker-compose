@@ -217,5 +217,6 @@ ValueFacade.updateValueMap = function(values) {
     });
 };
 ValueFacade.visit = PropertiesAssembler.visitProperty;
+ValueFacade.visitChildren = PropertiesAssembler.visitChildren;
 ValueFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = ValueFacade;

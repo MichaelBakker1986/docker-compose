@@ -7,7 +7,7 @@ const assert = require('assert');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);
 MVO.importFFL(require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8'))
-const nodes = MVO.exportWebModel().nodes;
+const nodes = MVO.exportWebModel().no;
 global.debug = function(name) {
     // console.info(name)
 }

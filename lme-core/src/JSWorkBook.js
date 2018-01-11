@@ -214,6 +214,9 @@ JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 JSWorkBook.prototype.resolveX = function(x) {
     return x ? this.xaxis[x + this.offset] : this.xaxis[this.offset];
 }
+JSWorkBook.prototype.resolveY = function(idx) {
+    return resolveY(this, idx)
+}
 
 function resolveY(wb, y) {
     var yAxis = y || 0;
@@ -245,24 +248,23 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
-
-function maxTupleCountForRow(wb, node) {
+JSWorkBook.prototype.maxTupleCountForRow = function(node) {
     if (!node.tuple) {
         return 0;
     }
-    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+    var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     var allrefIdes = [];
     if (tupleDefinition.ref) {
         allrefIdes.push('' + tupleDefinition.ref)
     }
     for (var i = 0; i < tupleDefinition.nodes.length; i++) {
         var tupleChild = tupleDefinition.nodes[i];
-        var items = wb.getSolutionNode(node.solutionName + '_' + tupleChild.rowId).ref;
+        var items = this.getSolutionNode(node.solutionName + '_' + tupleChild.rowId).ref;
         if (items) {
             allrefIdes.push('' + items);
         }
     }
-    return TINSTANCECOUNT(allrefIdes, wb.context.values);
+    return TINSTANCECOUNT(allrefIdes, this.context.values);
 }
 
 JSWorkBook.prototype.tupleIndexForName = function(node, name) {
@@ -285,17 +287,53 @@ JSWorkBook.prototype.tupleIndexForName = function(node, name) {
 JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
     var yax = resolveY(this, y)
     var wb = this;
-    ValueFacade.visit(startProperty, function(node, treeDepth) {
+    ValueFacade.visit(startProperty, function(node, treeDepth, natural_orderid) {
         //for max tuplecount in current node loop visitor node
-        var maxTupleCountForTupleDefinition = maxTupleCountForRow(wb, node);
+        var maxTupleCountForTupleDefinition = wb.maxTupleCountForRow(node);
         for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
-            visitor(node, resolveY(wb, tupleCounter), treeDepth)
+            visitor(node, resolveY(wb, tupleCounter), treeDepth, natural_orderid + tupleCounter * 1000)
         }
         //tuple add function
         if (node.tupleDefinition) {
-            visitor(node, resolveY(wb, 0), treeDepth)
+            visitor(node, resolveY(wb, 0), treeDepth, natural_orderid)
         }
-    });
+    }, yax);
+}
+/*
+* TupleDefinition[2]
+*  TupleProperty_A/TupleDefinition[2]
+*   TupleProperty_B
+*  =>
+*  0_0_TD
+*  0_0_TP_A
+*  0_0_TP_B
+*  0_1_TP_A
+*  0_1_TP_B
+*  1_0_TD
+*  1_0_TP_A
+*  1_0_TP_B
+*  1_1_TP_A
+*  1_1_TP_B
+ */
+JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth) {
+    const wb = this;
+    ValueFacade.visit(node, function(treeNode, innerTreeDepth) {
+        if (treeNode.tupleDefinition) {
+            if (!type) {
+                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode);
+                for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
+                    wb.walkProperties(treeNode, visitor, y.deeper[t], 'instance', innerTreeDepth)
+                }
+                //tuple_add_call
+                visitor(treeNode, 'new', innerTreeDepth, y)
+            } else if (type == 'instance') {
+                visitor(treeNode, y, innerTreeDepth, y)
+            }
+        } else {
+            if (type == 'instance' || !treeNode.tuple)
+                visitor(treeNode, y, innerTreeDepth, y)
+        }
+    }, treeDepth);
 }
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
