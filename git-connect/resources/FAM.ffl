@@ -3159,7 +3159,6 @@ model KAM uses BaseModel
     inputRequired:FacilityTarget.required and FacilityTotalInvestment.required and FacilityOwnResources.required and FacilityDetailsLimit.required and FacilityDetailsDuration.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP01), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Type request";
     displaytype: select;
@@ -3260,7 +3259,6 @@ model KAM uses BaseModel
     inputRequired:OrganisationCOCNumber.required and OrganisationStarting.required and OrganisationFoundationDate.required and OrganisationSector.required and OrganisationFTELastYear.required and OrganisationFoundatationLaw.required and OrganisationRevenueNetherlands.required and OrganisationMarketB2B.required and OrganisationMarketB2C.required and OrganisationDelivery.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP02), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Type organisation";
     displaytype: select;
@@ -3435,7 +3433,6 @@ model KAM uses BaseModel
     inputRequired:FinancialsTurnoverLastYear.required and FinancialsEbitLastYear.required and FinancialsAccountsReceivablesTotal.required and FinancialsAccountsReceivablesNumber.required and FinancialsAccountsReceivablesAverage.required and FinancialsForeignDebtors.required and FinancialsAvarageValueInvoice.required and FinancialsMaximumAdvances.required and FinancialsMaximumAdvancesDays.required and FinancialsPositiveCashFlow.required and FinancialsExistingPledgeRecourse.required and FinancialsIntercompanyTransactions.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP03), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Financial";
     displaytype: select;
@@ -3627,7 +3624,6 @@ model KAM uses BaseModel
     inputRequired:ProductType.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP04), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Funding options";
     displaytype: select;
@@ -3695,7 +3691,6 @@ model KAM uses BaseModel
     inputRequired:ClientInitials.required and ClientLastName.required and ClientFunction.required and ClientGender.required and ClientDateOfBirth.required and ClientNationality.required and ClientStreet.required and ClientHouseNumber.required and ClientZipCode.required and ClientCity.required and ClientCountry.required and ClientPhoneNumber.required and ClientEmailAddress.required and OrganisationName.required and OrganisationLegalForm.required and OrganisationCOCStatus.required and OrganisationBankruptcy.required and OrganisationStreet.required and OrganisationHouseNumber.required and OrganisationZipCode.required and OrganisationCity.required and OrganisationCountry.required and OrganisationPhoneNumber.required and OrganisationEmailAddress.required and OrganisationWebsite.required and IntermediaryInitials.required and IntermediaryName.required and IntermediaryFunction.required and IntermediaryNameOrganisation.required and IntermediaryCity.required and IntermediaryPhoneNumber.required and IntermediaryEmailAddress.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP05), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "General data";
     displaytype: select;
@@ -4234,7 +4229,7 @@ model KAM uses BaseModel
       frequency: document;
       inputRequired: (Visible (Q_MAP06));
       data_options: unscalable;
-      title: "Mission, vision and strategy";
+      title: "Mission, vision en strategy";
       displaytype: memo;
       top_blanklines: 1;
       visible: 1;
@@ -4836,7 +4831,6 @@ model KAM uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
       data_options: unscalable;
       title: "$>Aantal verplichte velden<$";
       fixed_decimals: 0;
@@ -4851,7 +4845,6 @@ model KAM uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
       data_options: unscalable;
       title: "$>Aantal ingevulde verplichte velden<$";
       fixed_decimals: 0;
@@ -4869,7 +4862,6 @@ model KAM uses BaseModel
     inputRequired:FacilityDetailsStartDate.required and ExistingLoansDescription.required and ExistingLoansFundingOrganisation.required and ExistingLoanAmount.required and ExistingLoanDateOfClosing.required and ExistingLoanDuration.required and ExistingLoanInterest.required and ExistingLoanCollaterals.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP07), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Financing need";
     displaytype: select;
@@ -7134,7 +7126,6 @@ model KAM uses BaseModel
     inputRequired:BalanceSheetDescription.required and IncomeStatementDescription.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP08), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Financial position";
     displaytype: select;
@@ -8995,7 +8986,6 @@ model KAM uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X));
       data_options: unscalable;
       title: "$>Aantal verplichte velden<$";
       fixed_decimals: 0;
@@ -9010,7 +9000,6 @@ model KAM uses BaseModel
      {
       datatype: number;
       frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
       data_options: unscalable;
       title: "$>Aantal ingevulde verplichte velden<$";
       fixed_decimals: 0;
@@ -9042,7 +9031,6 @@ model KAM uses BaseModel
     inputRequired:FinancialPositionAccountsReceivablesInsured.required and FinancialPositionAccountsReceivablesDebtorName.required and FinancialPositionAccountsReceivablesDebtorAmount.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP10), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Specification accounts receivables";
     displaytype: select;
@@ -9169,7 +9157,6 @@ model KAM uses BaseModel
     inputRequired:SpecificationLeaseObject.required and SpecificationLeaseObjectDescription.required and SpecificationLeaseObjectMarketability.required and SpecificationLeaseObjectDuration.required and SpecificationLeaseObjectDepreciation.required and SpecificationLeaseObjectFinalInstalment.required and SpecificationLeaseObjectDeposit.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP11), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Specification Lease";
     displaytype: select;
@@ -9287,7 +9274,6 @@ model KAM uses BaseModel
     inputRequired:SpecificationRealEstateExistingNew.required and SpecificationRealEstatetDescription.required and SpecificationRealEstateMarketability.required and SpecificationRealEstateWOZValue.required and SpecificationRealEstateRentalIncome.required and SpecificationRealEstateRentalContracts.required and SpecificationRealEstateMaintenanceCosts.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP12), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Specification commercial real estate";
     displaytype: select;
@@ -9406,7 +9392,6 @@ model KAM uses BaseModel
     inputRequired:DOC_COC.required and DOC_OrgChart.required and DOC_Signatures.required and DOC_Passport.required and DOC_ShareRegister.required and DOC_AnnualStatement.required and DOC_MemorandumOfAssociation.required and DOC_GeneralTermsAndConditions.required and DOC_BankAccounts.required and DOC_UBODeclaration.required and DOC_AdditionalCertification.required and DOC_CertificateOfGoodConduct.required and DOC_GAccount.required and DOC_InvoiceExample.required and DOC_Logo.required and DOC_RealEstatePurchaseAgreement.required and DOC_RealEstateRentalAgreement.required;
      datatype: number;
     frequency: document;
-    formula: ForAll(X, SelectDescendants(Q_MAP13), InputRequired(X) Implies DataAvailable(X));
     data_options: unscalable;
     title: "Documents";
     displaytype: select;

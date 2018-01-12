@@ -4,9 +4,10 @@ FAMffl = FAMffl.replace(/PDepreciationOfAssets/gmi, 'PDepreciationOfAssets')
 LME.importFFL(FAMffl);
 var model = LME.exportWebModel();
 
-var [AcquiredGoodwill] = [model.nodes.AcquiredGoodwill];
+var [AcquiredGoodwill] = [model.no.AcquiredGoodwill];
+model.no.Q_MAP
 AcquiredGoodwill.visible;
 AcquiredGoodwill.value;
 
 let fixProblemsInImportedSolution = LME.lme.fixProblemsInImportedSolution();
-log.debug(fixProblemsInImportedSolution)
+log.info(fixProblemsInImportedSolution)

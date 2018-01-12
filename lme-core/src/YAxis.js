@@ -29,23 +29,9 @@ first.base = first
  6*        32
  7*          64
  8*            128
- *!/
-for (var i = 1; i < 40; i++) {
-    var newYas = {
-        index: i,
-        hash: 32768 * i,
-        depth: 0,
-        previous: all[i - 1],
-        base: first
-    };
-    newYas.deeper = newYas//temp self-reference since not used
-    all[i - 1].next = newYas;
-    all.push(newYas)
-}*/
-
+ */
 function TupleProto() {
     const all = {
-        type: 'def',
         hash: 0,
         index: 0,
         depth: 0,
@@ -56,7 +42,6 @@ function TupleProto() {
         all.deeper[i] = {
             base: all,
             depth: 0,
-            type: 'instance',
             index: i,
             hash: (32768 * i),
             deeper: [],
@@ -70,7 +55,7 @@ function TupleProto() {
                 base: all,
                 index: j,
                 depth: 1,
-                hash: (i * 1) + (j * 64),
+                hash: (i * 32768) + (j * 64),
                 deeper: [],
                 parent: all.deeper[i]
             }
@@ -82,7 +67,7 @@ function TupleProto() {
                     base: all,
                     depth: 2,
                     index: k,
-                    hash: (i * 1) + (j * 64) + (k * (64 * 8)),
+                    hash: (i * 32768) + (j * 64) + (k * (64 * 8)),
                     parent: all.deeper[i].deeper[j]
                 }
                 if (k > 0) all.deeper[i].deeper[j].deeper[k].previous = all.deeper[i].deeper[j].deeper[k - 1]

@@ -3169,7 +3169,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map01), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Type request";
 				displaytype: select;
@@ -3268,7 +3267,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map02), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Type organisation";
 				displaytype: select;
@@ -3441,7 +3439,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map03), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Financial";
 				displaytype: select;
@@ -3631,7 +3628,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map04), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Funding options";
 				displaytype: select;
@@ -3697,7 +3693,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map05), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "General data";
 				displaytype: select;
@@ -4836,7 +4831,6 @@ model KAM uses BaseModel
 					{
 						datatype: number;
 						frequency: document;
-						formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X));
 						data_options: unscalable;
 						title: "$>Aantal verplichte velden<$";
 						fixed_decimals: 0;
@@ -4851,7 +4845,6 @@ model KAM uses BaseModel
 					{
 						datatype: number;
 						frequency: document;
-						formula: Count(X,SelectDescendants(Q_Map06, Q_Map06_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
 						data_options: unscalable;
 						title: "$>Aantal ingevulde verplichte velden<$";
 						fixed_decimals: 0;
@@ -4867,7 +4860,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map07), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Financing need";
 				displaytype: select;
@@ -7130,7 +7122,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map08), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Financial position";
 				displaytype: select;
@@ -8989,7 +8980,6 @@ model KAM uses BaseModel
 					{
 						datatype: number;
 						frequency: document;
-						formula: Count(X,SelectDescendants(Q_Map09, Q_Map09_Hulpvariabelen),InputRequired(X));
 						data_options: unscalable;
 						title: "$>Aantal verplichte velden<$";
 						fixed_decimals: 0;
@@ -9004,7 +8994,6 @@ model KAM uses BaseModel
 					{
 						datatype: number;
 						frequency: document;
-						formula: Count(X,SelectDescendants(Q_Map09, Q_Map09_Hulpvariabelen),InputRequired(X) And DataAvailable(X));
 						data_options: unscalable;
 						title: "$>Aantal ingevulde verplichte velden<$";
 						fixed_decimals: 0;
@@ -9034,7 +9023,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map10), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Specification accounts receivables";
 				displaytype: select;
@@ -9159,7 +9147,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map11), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Specification Lease";
 				displaytype: select;
@@ -9275,7 +9262,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map12), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Specification commercial real estate";
 				displaytype: select;
@@ -9392,7 +9378,6 @@ model KAM uses BaseModel
 			{
 				datatype: number;
 				frequency: document;
-				formula: ForAll(X, SelectDescendants(Q_Map13), InputRequired(X) Implies DataAvailable(X));
 				data_options: unscalable;
 				title: "Documents";
 				displaytype: select;

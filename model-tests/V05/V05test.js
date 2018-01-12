@@ -1,5 +1,5 @@
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
-let V05ffl = readFileSync(__dirname + '/V05.FFL');
+let V05ffl = readFileSync(__dirname + '/V05_realtuple.ffl');
 
 //some case-bugfixes
 V05ffl = V05ffl.replace(/amount/gmi, 'Amount')
@@ -14,9 +14,5 @@ require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 
 
 LME.importFFL(V05ffl);
-var model = LME.exportWebModel();
-var [HiddenVars] = [model.nodes.HiddenVars];
-HiddenVars.visible;
-HiddenVars.value;
 
 let fixProblemsInImportedSolution = LME.lme.fixProblemsInImportedSolution();

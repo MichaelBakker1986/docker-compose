@@ -162,6 +162,7 @@ PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
 }
 
 function visitInternal(node, func, depth) {
+    if (func.stop) return delete func.stop;
     func(node, depth);
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {

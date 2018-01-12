@@ -26,6 +26,20 @@ model TUPLETEST uses BaseModel
       datatype: number;
       frequency: document;
      }
+     tuple NestedTuple
+     {
+      title: "NestedTuple";
+      formula: 12309;
+      datatype: number;
+      frequency: document;
+      variable NestedTupleVariable
+      {
+        title: "NestedTupleVariable";
+        formula: 123437;
+        datatype: number;
+        frequency: document;
+      }
+     }
     }
     variable RootVariable
     {

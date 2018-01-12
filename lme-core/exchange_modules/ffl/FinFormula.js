@@ -44,7 +44,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/\[1]/g, '[doc]');
     buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
     buf = buf.replace(/\[GetT\(T,-1\)]/gi, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
-    buf = buf.replace(/\[LastT\]/gi, '');
+    buf = buf.replace(/\[LastT\]/gi, '[lastinperiod]');
     //(FormulaSetInT(GetT(T,-1))<>NoTrend) ==>  !x.prev.isnotrend
     buf = buf.replace(/ValueT\(1\)/gi, 'x.firstdetail');
     buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gi, 'x.prevbkyr');

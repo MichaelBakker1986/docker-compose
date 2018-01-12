@@ -149,7 +149,7 @@ function validateImportedSolution() {
                                 mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
                             }
                         })
-                        log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
+                        if (log.DEBUG) log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
                         formulaInfo.parsed = undefined;
@@ -252,6 +252,7 @@ JSWorkBook.prototype.maxTupleCountForRow = function(node) {
     if (!node.tuple) {
         return 0;
     }
+    if (node.nestedTupleDepth > 0) return -2//no support for nested tuples yet.
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     var allrefIdes = [];
     if (tupleDefinition.ref) {
@@ -320,18 +321,21 @@ JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth
     ValueFacade.visit(node, function(treeNode, innerTreeDepth) {
         if (treeNode.tupleDefinition) {
             if (!type) {
-                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode);
+                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode, y);
                 for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
                     wb.walkProperties(treeNode, visitor, y.deeper[t], 'instance', innerTreeDepth)
                 }
+                if (maxTupleCountForTupleDefenition != -2)
+                    visitor(treeNode, 'new', innerTreeDepth, y)
                 //tuple_add call
-                visitor(treeNode, 'new', innerTreeDepth, y)
+                visitor.stop = true;
             } else if (type == 'instance') {
                 visitor(treeNode, y, innerTreeDepth, y)
             }
         } else {
             if (type == 'instance' || !treeNode.tuple)
-                visitor(treeNode, y, innerTreeDepth, y)
+                if (!(treeNode.nestedTupleDepth > 1))
+                    visitor(treeNode, y, innerTreeDepth, y)
         }
     }, treeDepth);
 }

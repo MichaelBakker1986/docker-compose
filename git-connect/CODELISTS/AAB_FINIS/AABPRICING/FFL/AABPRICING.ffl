@@ -7973,7 +7973,6 @@ model AABPRICING uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
             displaytype: currency;
             title: "Aantal verplichte velden (1)";
             top_blanklines: 1;
@@ -7985,7 +7984,6 @@ model AABPRICING uses BaseModel
           {
             datatype: number;
             frequency: document;
-            formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
             displaytype: currency;
             title: "Aantal ingevulde verplichte velden (1)";
             locked: 1;

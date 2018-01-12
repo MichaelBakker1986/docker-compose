@@ -8,7 +8,7 @@ if (!global.MatrixLookup) {
     }
 }
 if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
+    global.MATRIX_VALUES = {}
 }
 
 //add functions found in the jsMath to the global scope
@@ -51,6 +51,7 @@ OnNA = function(v, nav) {
 }
 
 MatrixLookup = function(xlsfileName, tableName, row, col) {
+    if (!MATRIX_VALUES) return NA
     var table = MATRIX_VALUES[tableName];
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         return table.xasValues[row][col];
