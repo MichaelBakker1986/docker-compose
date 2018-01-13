@@ -25,6 +25,7 @@ const MonliFacebookID = '369400500137629';
 const LGDFacebookID = '10213076901574578';
 const MarcoFacebookID = '10159782534605228';
 const JasperRealEstate = '1565119990220779';
+const RichardRealEstate = '2023094311299941';
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
 const GUEST_USER = 'guest';
@@ -137,6 +138,7 @@ class Authorization {
         this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
         this.addModelPrivileges(MichaelFaceBookID, "REALESTATE", true);
         this.addModelPrivileges(JasperRealEstate, "REALESTATE", true);
+        this.addModelPrivileges(RichardRealEstate, "REALESTATE", true);
         this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
         this.addModelPrivileges(LGDFacebookID, "LGD", true);
         this.addModelPrivileges(MarcoFacebookID, "LGD", true);
