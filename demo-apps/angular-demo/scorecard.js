@@ -12,7 +12,7 @@ function redefineParaments() {
 redefineParaments()
 
 angular
-    .module('angapp', ['angular.filter', "highcharts-ng"])
+    .module('angapp', ['angular.filter', 'highcharts-ng'])
     .filter("filterByPrefix", function() {
         return function(nodes, search) {
             if (!search) return []

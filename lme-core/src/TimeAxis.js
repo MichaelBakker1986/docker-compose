@@ -1,6 +1,5 @@
-var log = require('log6');
-
-var headers = {
+const log = require('log6');
+const headers = {
     title: {
         title: 'title'
     },
@@ -358,6 +357,5 @@ function TimeAxis(data) {
     infinitColumn.doc = entree.doc;
     return viewmodes;
 }
-
 
 module.exports = TimeAxis;

@@ -20,7 +20,11 @@ const tests = [
     './SwaggerDefinitionParserTest',
     './TupleSumTest',
     './TupleIndexConverterTest',
-    './TimeTest'
+    './TimeTest',
+    './TSumTest',
+    './TCountTest',
+    './TipleTupleTest',
+    './TupleInstanceCountTest'
 ];
 var testResults = [];
 var failure = [];

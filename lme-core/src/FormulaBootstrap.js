@@ -68,6 +68,17 @@ simplified.DataAvailable = function(formulaInfo, node) {
     delete node.arguments;
     delete node.callee;
 }
+
+simplified.AnyDataAvailable = function(formulaInfo, node) {
+    var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
+    if (refFormula.ref === undefined) return log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
+
+    node.type = 'Identifier';
+    node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
+    delete node.refn;
+    delete node.arguments;
+    delete node.callee;
+}
 simplified.DataEntered = simplified.DataAvailable;
 //two members, START and END, will return Array<Variable>
 //so transform into ArrayExpression
@@ -407,12 +418,14 @@ global.Onzero = function() {
 global.Hm = function() {
     return 0
 }
+//So firstValueT means:  (FirstValueT(Self,1,MaxT)>0) Give me the First Column Index where the value is not NA
+//So the question here is has[variable]AnyValue in time?
 //recursive walk the formula ast
 const identifier_replace = {
     TSY: 'x.tsy',
     T: 'x',
     MainPeriod: 'z', //zAxis Reference, base period, z.base
-    MaxT: 'x',
+    MaxT: 'x.last',
     Trend: 'x'//x.trend
 
 }

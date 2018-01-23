@@ -20,7 +20,11 @@ Register.prototype.clean = function() {
     this.schema.length = 0
     this.i = []
     this.schemaIndexes = {}
-    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children']
+    //somehow 'valid' is a real important property
+    //{{MODEL_VARIABLENAME_undefined}} will exist when 'valid' is not added to the list here. (since valid is created on demand in RegisterToLMEParser
+    //Something alike if (VARIABLENAME.pattern) VARIABLENAME.valid = if(VARIABLENAME.test(VARIABLENAME),'','Invalid Input')
+    //therefore adding the property 'valid 'too late while parsing.
+    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children', 'valid']//expect 'valid' to exist
     for (var j = 0; j < schema.length; j++) {
         this.addColumn(schema[j]);
     }

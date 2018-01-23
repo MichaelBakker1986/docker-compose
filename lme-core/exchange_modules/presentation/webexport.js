@@ -5,9 +5,7 @@ var PropertiesAssembler = require('../../src/PropertiesAssembler');
 function WebExport() {
     this.exportAsObject = true;
     this.hide = true;
-
     this.name = 'webexport';
-
     this.headername = 'Native Object Web Presentation';
 }
 
@@ -96,7 +94,7 @@ var properties = {
 }
 
 let tuplecounter = 0;
-LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas) {
+LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
     tuplecounter++;
     const tree = this;
     var workbook = this.workbook;
@@ -111,15 +109,17 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         id: newTupleId,
         order_id: natural_order_id,
         add: function() {
-            const tupleCount = workbook.maxTupleCountForRow(node) + 1
-            workbook.set(node.rowId, 'value' + tupleCount, 'value', 0, tupleCount)
-            var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
+            const tupleCount = workbook.maxTupleCountForRow(node, yas) + 1
+            workbook.set(node.rowId, 'value' + tupleCount, 'value', 0, yas.deeper[tupleCount])
+            //  var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
+
             workbook.walkProperties(node, function(child, yasi, treeDepth, yi) {
-                natural_order_idd++
-                tree.addWebNode(child, path.split('.'), natural_order_idd, natural_order_idd, yi)
+                natural_order_id = (natural_order_id + 1000);
+                //   natural_order_idd++
+                tree.addWebNode(child, path.split('.'), index, natural_order_id + (yi.hash * (natural_order_id / 100000)), yi)
                 //only print the newly added tuple instance.
-                console.info(child.rowId + " :: " + yi.hash)
-            }, yas.parent.deeper[tupleCount], 'instance', treePath.length)
+                // console.info(child.rowId + " :: " + yi.hash)
+            }, yas.deeper[tupleCount], null, treePath.length)
         },
         index: index,
         title_locked: node.title_locked,
@@ -127,6 +127,7 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         path: path,
         ammount: amount,
         colspan: colspan,
+        depth: treeDepth,
         visible: true,
         cols: [{
             value: newTupleId,
@@ -142,7 +143,7 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
     if (parent) parent.children.push(rv);
     this.nodes[rowId] = rv;
 }
-LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas) {
+LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
     var workbook = this.workbook;
     var rowId = node.rowId;
     var unique = yas.index + "_" + rowId
@@ -152,9 +153,11 @@ LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id,
     const datatype = node.datatype
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
+    //for tuples we have to bitswitch the positions around, the variable-name is leading
+    //
     var rv = {
         id: rowId,
-        depth: treePath.length,
+        depth: treeDepth,
         order_id: natural_order_id,
         index: index,
         title_locked: node.title_locked,
@@ -228,8 +231,10 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     //make the walk here,
     var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
     let natural_order_id = 0;
+    PropertiesAssembler.indexProperties(modelName)
+
     workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
-        natural_order_id = (natural_order_id + 100);
+        natural_order_id = (natural_order_id + 100000);
         //TODO: combine natural_order_id with Tuple Indexes.
         //TODO: combine rest of algorithm into walkProperties function.
         if (node && node.rowId !== 'root') {
@@ -245,12 +250,12 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             var index = indexPath[indexPath.length - 1] + 1
             indexPath[indexPath.length - 1] = index
             if (yas == 'new') {
-                lmeTree.addTupleNode(node, treePath, index, natural_order_id, y)
+                lmeTree.addTupleNode(node, treePath, index, natural_order_id + (y.hash * (natural_order_id / 10000)), y, treeDepth)
             } else {
-                lmeTree.addWebNode(node, treePath, index, natural_order_id, y)
+                lmeTree.addWebNode(node, treePath, index, natural_order_id + ((y.hash * natural_order_id / 10000)), y, treeDepth)
             }
         }
-    }, workbook.resolveY(0), null, 0)
+    }, workbook.resolveY(0).parent, null, 0)
     lmeTree.offset = 0;
     return lmeTree;
 }

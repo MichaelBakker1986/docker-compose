@@ -13,7 +13,7 @@ var propertyDefaults = {
 }
 
 //request scope context
-function Context() {
+function Context(opts) {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
     this.values = {};
@@ -22,6 +22,7 @@ function Context() {
     this.columnSize = 6;
     this.columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid'];
     this.saveToken = undefined;//commit hash
+    if (opts) for (var key in opts) this[key] = opts[key]
 }
 
 Context.prototype.propertyDefaults = propertyDefaults;

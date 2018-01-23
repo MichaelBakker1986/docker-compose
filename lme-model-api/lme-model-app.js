@@ -127,6 +127,10 @@ app.get('*/excel/:model', function(req, res) {
         }
     })
 })
+app.post('*/upload', function(req, res) {
+    console.info('upload')
+    res.status(200).json({status: 'ok'})
+})
 app.post('*/excel/:model', function(req, res) {
     const modelName = req.params.model;
     if (!req.files) {

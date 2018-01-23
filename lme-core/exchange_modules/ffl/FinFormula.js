@@ -20,7 +20,9 @@ function finFormulaGeneric(buf) {
 
     /**
      * Here are all time references
+     the same as hasAnyValue? HasValue(var) ?
      */
+    buf = buf.replace(/\(FirstValueT\((\w+),1,MaxT\)>0\)/gi, 'AnyDataAvailable($1)')//regular test for any data entered
     buf = buf.replace(/FormulaSetInT\(GetT\(T\,-1\)\)<>NoTrend/gi, '!x.isprevnotrend');
 
     buf = buf.replace(/LastTinYear\(FirstTinFormulaSet\(Trend,\s*(\w+|\d+)\)\)/gi, 'x.firsttrend.lastbkyr');
@@ -50,9 +52,12 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gi, 'x.prevbkyr');
     buf = buf.replace(/GetT\(T,-1\)/gi, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gi, 'x.prev');
+    buf = buf.replace(/\(MaxT\)/g, '(x.last)');//only replace Function(MaxT) into  Function(x.last)
+
 
     //TODO: same as TSY?
     buf = buf.replace(/TsY\(LastTinPeriod\)/gi, 'TsY');
+    buf = buf.replace(/TsY\(T\)/gi, 'x.tsy');
     buf = buf.replace(/\[0\]/g, '.title ');
 
     //(& types
@@ -124,7 +129,7 @@ function finChoice(formula) {
         split[split.length - 1] = split[split.length - 1].slice(0, -1);
 
         split = split.map(function(e, idx) {
-            return '{ "name":' + idx + ' ,"value":' + (e ? '"' + e + '"' : null) + '}'
+            return '{ "name": "' + idx + '" ,"value":' + (e ? '"' + e + '"' : null) + '}'
         })
         return "[" + split.join(',') + "]";
     }

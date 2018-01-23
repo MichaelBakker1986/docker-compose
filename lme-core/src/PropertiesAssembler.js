@@ -156,14 +156,39 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  */
 PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
     var startingNode = node || getRootNode('NEW');
-    if (startingNode !== undefined) {
-        visitInternal(startingNode, func, startDepth || 0)
-    }
+    if (startingNode) visitInternal(startingNode, func, startDepth || 0)
+}
+PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth) {
+    visitInternal(getRootNode(modelName), func, startDepth || 0)
+}
+const hashcars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+PropertiesAssembler.prototype.indexProperties = function(modelName) {
+    let counter = 0;
+    visitInternal(getRootNode(modelName), function(node, depth) {
+        counter++;
+        node.id = pad(counter, 5);
+        if (node.tupleProperty) {
+            const tupleDef = PropertiesModel[node.solutionName + "_" + node.tupleDefinitionName + "_value"]
+            if (tupleDef.tupleProperty) {
+                const nestedTupleDef = PropertiesModel[node.solutionName + "_" + tupleDef.tupleDefinitionName + "_value"]
+                node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+            } else {
+                node.hash = [tupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+            }
+        }
+        else node.hash = [node.id, '000', node.id, '000', node.id, '000'];
+    }, 0)
+}
+
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
 function visitInternal(node, func, depth) {
-    if (func.stop) return delete func.stop;
     func(node, depth);
+    if (func.stop) return delete func.stop;
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
@@ -177,8 +202,7 @@ function visitChildren(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             func(node, depth);
-            var childNode = PropertiesModel[node.nodes[i].name];
-            visitChildren(childNode, func, depth + 1);
+            visitChildren(PropertiesModel[node.nodes[i].name], func, depth + 1);
         }
     }
 }

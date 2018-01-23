@@ -178,9 +178,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     })
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
     if (!rootVariableName) {
-        //formattedFFL.shift()
         formattedFFL[1] = " root\n {"
-        //formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
         formattedFFL.shift()
     }
     for (var i = 0; i < formattedFFL.length; i++) {

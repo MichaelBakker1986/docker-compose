@@ -19,6 +19,7 @@
     <script src="https://code.highcharts.com/stock/highstock.src.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts-ng/1.1.0/highcharts-ng.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-file-upload/2.5.0/angular-file-upload.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
     <script src="scorecard.js"></script>
@@ -231,11 +232,21 @@
                         <!--In most cases there are 4 columns, title,value,value,value-->
                         <!--Calculate the width by 6/length-1-->
                         <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
+                            <label ng-if="(cv.entered) && cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
                             <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
-                                <label ng-if="cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
                                 <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
                                 <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
                                 <input ng-switch-when="date" ng-readonly="cv.locked" type="{{cv.locked? 'text':'date'}}" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                <form ng-switch-when="photoupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
+                                    <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
+                                    <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
+                                </form>
+                                <form ng-switch-when="fileupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
+                                    <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
+                                    <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
+                                </form>
+
+
                                 <div ng-switch-when="select">
                                     <select ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="Pick value">
                                         <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>

@@ -5,6 +5,7 @@
  */
 
 const SolutionFacade = require('./SolutionFacade');
+const PropertiesAssembler = require('./PropertiesAssembler');
 const ValueFacade = require('./ValueFacade');
 const AST = require('../../ast-node-utils').ast;
 const log = require('log6')
@@ -21,7 +22,7 @@ const YAxis = require('./YAxis')
 // --optional property (default='value')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
-function JSWorkBook(context, XAxis, type) {
+function JSWorkBook(context, XAxis, type, opts) {
     this.indexer = null;//preserved to store the indexer
     XAxis = XAxis || require('./XAxis')
     this.context = context;
@@ -32,6 +33,7 @@ function JSWorkBook(context, XAxis, type) {
     this.yaxis = YAxis;
     //time axis, we looking at bookyears at the moment
     this.xaxis = XAxis[type || 'bkyr'].columns[0]
+    if (opts) for (var key in opts) this[key] = opts[key]
 }
 
 JSWorkBook.prototype.setColumnOffset = function(delta) {
@@ -209,6 +211,9 @@ JSWorkBook.prototype.getNode = function(name) {
 JSWorkBook.prototype.getSolutionNode = function(name) {
     return ValueFacade.fetchSolutionNode(name, 'value')
 };
+JSWorkBook.prototype.findNode = function(name) {
+    return ValueFacade.fetchSolutionNode(this.modelName + "_" + name, 'value')
+};
 JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 
 JSWorkBook.prototype.resolveX = function(x) {
@@ -224,7 +229,7 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
-    return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
+    return this.getSolutionPropertyValue(this.modelName + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
     var xas = this.resolveX(x);
@@ -233,7 +238,7 @@ JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
-    return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
+    return this.setSolutionPropertyValue(this.modelName + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
     var xas = this.resolveX(x);
@@ -248,24 +253,15 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
-JSWorkBook.prototype.maxTupleCountForRow = function(node) {
-    if (!node.tuple) {
-        return 0;
-    }
-    if (node.nestedTupleDepth > 0) return -2//no support for nested tuples yet.
+JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
+    if (!node.tuple) return 0;
+    yas = resolveY(this, yas)
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     var allrefIdes = [];
-    if (tupleDefinition.ref) {
-        allrefIdes.push('' + tupleDefinition.ref)
-    }
-    for (var i = 0; i < tupleDefinition.nodes.length; i++) {
-        var tupleChild = tupleDefinition.nodes[i];
-        var items = this.getSolutionNode(node.solutionName + '_' + tupleChild.rowId).ref;
-        if (items) {
-            allrefIdes.push('' + items);
-        }
-    }
-    return TINSTANCECOUNT(allrefIdes, this.context.values);
+    PropertiesAssembler.visitProperty(tupleDefinition, function(child, depth) {
+        if (child.ref) allrefIdes.push(String(child.ref))
+    }, 0)
+    return TINSTANCECOUNT(allrefIdes, this.context.values, yas);
 }
 
 JSWorkBook.prototype.tupleIndexForName = function(node, name) {
@@ -315,29 +311,32 @@ JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
 *  1_0_TP_B
 *  1_1_TP_A
 *  1_1_TP_B
+*
+*  Because this method is called in relative situations, within treedepths and tuple nesting, these two arguments are required
+*
  */
 JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth) {
     const wb = this;
-    ValueFacade.visit(node, function(treeNode, innerTreeDepth) {
+    const itarfunction = function(treeNode, innerTreeDepth) {
+        //instance is only for the first call
+        //we must be recursive since Tuple in tuple
         if (treeNode.tupleDefinition) {
-            if (!type) {
+            if (type !== treeNode.rowId) {
                 const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode, y);
                 for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
-                    wb.walkProperties(treeNode, visitor, y.deeper[t], 'instance', innerTreeDepth)
+                    wb.walkProperties(treeNode, visitor, y.deeper[t], treeNode.rowId, innerTreeDepth)
                 }
-                if (maxTupleCountForTupleDefenition != -2)
-                    visitor(treeNode, 'new', innerTreeDepth, y)
-                //tuple_add call
-                visitor.stop = true;
-            } else if (type == 'instance') {
-                visitor(treeNode, y, innerTreeDepth, y)
+                visitor(treeNode, 'new', innerTreeDepth, y)    //tuple_add call
+                itarfunction.stop = true;
+            } else {
+                visitor(treeNode, 'instance', innerTreeDepth, y)
             }
         } else {
-            if (type == 'instance' || !treeNode.tuple)
-                if (!(treeNode.nestedTupleDepth > 1))
-                    visitor(treeNode, y, innerTreeDepth, y)
+            //because of this check, the nested tuple-property will not be displayed.
+            visitor(treeNode, 'instance_no_td', innerTreeDepth, y)
         }
-    }, treeDepth);
+    };
+    ValueFacade.visit(node, itarfunction, treeDepth);
 }
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {

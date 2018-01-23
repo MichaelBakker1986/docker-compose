@@ -1,4 +1,7 @@
-/* 
+/*
+ * Absolutely remove title from this Dimension
+ * Since time has nothing to do with formula formula-sets [trend,notrend]
+ * We could index all properties with 8bits...  since there is never a need of 128 different properties
  *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
  *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
  *

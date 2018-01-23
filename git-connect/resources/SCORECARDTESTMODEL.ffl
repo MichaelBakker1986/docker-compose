@@ -807,7 +807,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       displaytype: memo;
       hint: "Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]";
       top_blanklines: 1;
-      locked: On;
+      locked: 0;
       visible: 1;
       options_title: locked;
       options_notrend: locked;
@@ -818,7 +818,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       title: "Dit is een vraag om de BBcodes ";
       displaytype: memo;
       hint: "Verplicht veld";
-      locked: On;
+      locked: 0;
       visible: 1;
       options_title: locked;
       options_notrend: locked;
@@ -2213,9 +2213,9 @@ model SCORECARDTESTMODEL  uses BaseModel
       datatype: string;
       frequency: document;
       data_options: unscalable;
-      pattern: "([0-9]*)";
+      pattern: "^[0-9]*$";
       title: "Alleen getallen";
-      hint: "Een tekstveld waarin alleen numerieke waarden ingevuld mogen worden$$Pattern=([0-9]*)";
+      hint: "Een tekstveld waarin alleen numerieke waarden ingevuld mogen worden Pattern=([0-9]*)";
       top_blanklines: 1;
       visible: 1;
       options_title: locked;
@@ -2227,7 +2227,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       data_options: unscalable;
       length: < 11;
       title: "Maximaal 10 karakters";
-      hint: "Maximaal 10 karakters$$MaxLength=10";
+      hint: "Maximaal 10 karakters MaxLength=10";
       visible: 1;
       options_title: locked;
      }
@@ -2238,7 +2238,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       data_options: unscalable;
       length: > 4;
       title: "Minimaal 5 karakters";
-      hint: "Minimaal 5 karakters (incl 5)$$MinLength=5";
+      hint: "Minimaal 5 karakters (incl 5 MinLength=5";
       visible: 1;
       options_title: locked;
      }
@@ -2247,9 +2247,9 @@ model SCORECARDTESTMODEL  uses BaseModel
       datatype: string;
       frequency: document;
       data_options: unscalable;
-      pattern: "^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+      pattern: "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
       title: "Email adres";
-      hint: "Door middel van een reguliere expressie wordt gecontroleerd of het ingevuld veld een emailadres is.$$Pattern=^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+      hint: "Door middel van een reguliere expressie wordt gecontroleerd of het ingevuld veld een emailadres is. ^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
       visible: 1;
       options_title: locked;
      }
@@ -2316,6 +2316,7 @@ model SCORECARDTESTMODEL  uses BaseModel
      {
       datatype: string;
       frequency: document;
+      displaytype: photoupload;
       data_options: unscalable;
       title: "PhotoUpload";
       top_blanklines: 1;
@@ -2336,6 +2337,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       datatype: string;
       frequency: document;
       data_options: unscalable;
+      displaytype: fileupload;
       title: "Upload een file";
       top_blanklines: 1;
       visible: 1;
@@ -4188,7 +4190,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     {
      datatype: number;
      frequency: document;
-     title: "Paragraaf 2:Visibility and Required";
+     title: "Paragraaf 2:Visibility en Required";
      displaytype: currency;
      locked: On;
      visible: 1;

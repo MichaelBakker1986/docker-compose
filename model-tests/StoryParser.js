@@ -2,7 +2,7 @@ const log = require('log6')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     valueset: {
-        regex: /variable (\w+) is set to ([0-9.,]+) for document/,
+        regex: /variable (\w+) is set to ([0-9.,]+)\s*(?:(?:for column with id (\d+))|(for document))/,
         call: function(workbook, linenumber, line, args) {
             var $1 = args[0], $2 = args[1]
             return [function() {
@@ -59,6 +59,7 @@ StoryParser.prototype.start = function() {
     for (var lineNumber = 0; lineNumber < this.lines.length; lineNumber++) {
         let jebehaveMatchFound = false;
         var line = this.lines[lineNumber];
+        if (line.trim() == '') continue;//empty lines
         if (line.startsWith('@')) continue;//just meta-data
         for (var mappedKey in functionMapper) {
             if (line.match(functionMapper[mappedKey].regex)) {

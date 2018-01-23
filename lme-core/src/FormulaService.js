@@ -131,8 +131,8 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
 //create a new Formula
 //initiate a new Object, add it to the Array
 function newFormula(locked, body, index, propertyName) {
-    var original = AST.PROGRAM(body);
-    var formula = {
+    const original = AST.PROGRAM(body);
+    const formula = {
         type: locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
         refs: {},//map of references
         formulaDependencys: [],//array of associations (deps and refs)

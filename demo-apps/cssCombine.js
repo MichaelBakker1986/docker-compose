@@ -12,7 +12,7 @@ gulp.task('default', function() {
         'node_modules/ionicons/dist/css/ionicons.css',
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'node_modules/gitgraph.js/build/gitgraph.css',
-        'angular-demo/AdminLTE.min.css',
+   /*     'angular-demo/AdminLTE.min.css',*/
     ])
         .pipe(importCss())
         .pipe(concatCss("bundle.css"))

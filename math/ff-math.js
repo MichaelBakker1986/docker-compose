@@ -109,7 +109,10 @@ VALUES = function(func, fId, x, y, z, v) {
 GetValue = function(variable, x, y, z, v, amm) {
     return 1;//variable('123', x, y, z, v)
 }
-
+//'^[0-9]+$'
+REGEXPMATCH = function(pattern, value, message) {
+    return new RegExp(pattern).test(value) ? true : false;
+}
 ValueT = function(one) {
     let retrunValue = 0;
     while (one && !one.dummy) {

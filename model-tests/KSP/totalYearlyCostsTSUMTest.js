@@ -1,4 +1,15 @@
-//TODO: convert into JBehave story
+/**
+ * Converting it into JBehaveStory
+ */
+const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
+const gyllionKspTest = new JBehaveStoryParser({
+    fflFile: __dirname + '/GYLLIONKSP.ffl',
+    modelName: 'GYLLIONKSP',
+    storyFile: __dirname + '/GYLLIONKSP.story'
+})
+gyllionKspTest.start()
+return
+
 var WorkBook = require('../../lme-core/src/JSWorkBook')
 var Context = require('../../lme-core/src/Context')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
@@ -10,10 +21,10 @@ var CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require('../../formulajs-connect/formulajs').formulajs);
 var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(excelPlugin);
-excelPlugin.initComplete('KSP_test').then(function(matrix) {
+excelPlugin.initComplete('GYLLIONKSP').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new Context());
-    wb.importSolution(require('fs').readFileSync(__dirname + '/gyllion_KSP.ffl', 'utf8'), 'ffl');
+    wb.importSolution(require('fs').readFileSync(__dirname + '/GYLLIONKSP.ffl', 'utf8'), 'ffl');
     var children = [
         // Child 1
         {
@@ -125,14 +136,9 @@ excelPlugin.initComplete('KSP_test').then(function(matrix) {
         values: {},
         tupleIndexList: []
     };
-    var result = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
-    //assert(result[0].value === 0);
-    var BobEntry = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
-    var bobResult = BobEntry[0];
-    //assert(bobResult.value === 3);
-    var LisaEntry = CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
-    var LisaResult = LisaEntry[1];
-    //assert(LisaResult.value == 1);
+    CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 0, 'Bob');
+    CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_NrOfDaysChildcareWeek', 0, 3, 'Bob');
+    CalculationFacade.getValue(fesContext, 'EXPERIENCEKSP_ChildGender', 0, 1, 'Lisa');
 
 
     for (var i = 0; i < children.length; i++) {
@@ -145,14 +151,14 @@ excelPlugin.initComplete('KSP_test').then(function(matrix) {
         // Testing all the TotalYearlyCostsChild columns
         for (var j = 0; j < children[i].TotalYearlyCosts.length; j++) {
             log.trace(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)) + " should be " + children[i].TotalYearlyCosts[j])
-            assert(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)).toFixed(2) == children[i].TotalYearlyCosts[j].toFixed(2));
+            assert.equal(parseFloat(wb.get('TotalYearlyCostsChild', 'value', j, i)).toFixed(2), children[i].TotalYearlyCosts[j].toFixed(2));
         }
     }
 
 //TotalYearlyCosts test
     for (var i = 0; i < totalYearlyCosts.length; i++) {
         log.trace(wb.get('TotalYearlyCosts', 'value', i, 0) + " should be " + totalYearlyCosts[i])
-        assert(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2) == totalYearlyCosts[i].toFixed(2));
+        assert.equal(parseFloat(wb.get('TotalYearlyCosts', 'value', i, 0)).toFixed(2), totalYearlyCosts[i].toFixed(2));
     }
 }).catch((err) => {
     log.error(err)

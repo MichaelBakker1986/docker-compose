@@ -6,13 +6,18 @@ const log = require('log6')
 var esprima = require('esprima');
 
 /**
- * v2 ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js}
- * Quicker, cleaner, flexible, less data-loss
+ * ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js} field-validations
+ * V2
+ *  Quicker, cleaner, flexible, less data-loss
+ *   1) Indexing makes lookups while processing data more efficient and use less code.
+ *   2) Prefer ["a","b"].join('') above "a" + "b" its way quicker.
+ *   3) The indexer has removed parsing abnormals with propername " visible" etc.. Makes the code more clean
+ *   4) Own char-interpreter was more complex than recursive regex-replace.
+ *
  * TODO: load property names in DB which directly correspond, fix defaults while saving.
- * TODO: choices not work correctly
+ * TODO: some exotic choices not work correctly
  */
 function RegisterToLMEParser() {
-
 }
 
 RegisterToLMEParser.prototype.name = 'ffl2'
@@ -39,9 +44,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const solution = SolutionFacade.createSolution(modelName || "NEW");
     const nameIndex = indexer.schemaIndexes.name;
     const tupleIndex = indexer.schemaIndexes.tuple;
+    const validIndex = indexer.schemaIndexes.valid;
+    const lengthIndex = indexer.schemaIndexes.length;
+    const patternIndex = indexer.schemaIndexes.pattern;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
+    const rangeIndex = indexer.schemaIndexes.range;
     const modifierIndex = indexer.schemaIndexes.modifier;
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
@@ -76,7 +85,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const rootNode = register['root']
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
-            tuples.length--
+            tuples.length = depth;
             while (!tuples[depth] && tuples.length > 0) tuples.length--
         }
         const nodeName = node[nameIndex];
@@ -127,10 +136,26 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
                 node[fflRegister.frequencyIndex] = 'none'
             }
+            type = 'string'
         } else if (nodeName.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
             node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
         }
+
+        //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
+        //info: patternIndex is language-specific (f.e. email- regular expression)
+        const validFormulas = []
+        if (node[validIndex]) validFormulas.push(node[validIndex])
+        if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
+        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
+        if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
+        if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + '),null)');
+
+        //its also only interesting when its a required field and entered
+        // or when its entered and required
+        //' + node[nameIndex] + '.required &&
+        //valid formulas are only interesting when entered OR required
+        if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         const frequency = node[fflRegister.frequencyIndex] || 'column';
 
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
@@ -152,6 +177,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
                 uiNode.tupleDefinition = true;
+                if (tuples.length > 0) {
+                    uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
+                    uiNode.tupleProperty = true
+                }
                 tuples[depth] = uiNode
             } else {
                 uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
@@ -178,13 +207,15 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 }
 
 /**
- * We have full indexed key-value of the model.
- * Easy way to implement refers-to (inheritance)
  * @param {optional} modelName
  */
 RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type) {
-    if (!formula) return type == 'string' ? AST.STRING("") : AST.UNDEFINED()
+    if (!formula) return type == 'string' ? AST.STRING("") : {
+        "type": "Identifier",
+        "name": 'null'
+    }
     let finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
+    //allow multi-language here
     finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
         return indexer.constants[parseInt($2)]
     })
