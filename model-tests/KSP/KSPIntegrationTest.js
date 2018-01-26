@@ -6,7 +6,6 @@
  * This looks a lot, but its centainly not much testing going on here.
  */
 
-require('./KSPImportTest')
 require('./totalyearlycosttest')
 var FormulaService = require('../../lme-core/src/FormulaService')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')

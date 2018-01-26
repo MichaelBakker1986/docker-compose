@@ -1,11 +1,12 @@
 const fs = require('fs');
+const path = require('path')
+exports.FileWalker = class {
 
-exports.ModelWalker = class {
-
-    constructor(basePath, patterns) {
+    constructor(basePath, patterns, extension) {
         this.paths = {}
         this.patterns = patterns || ['*', '*/FFL/*', '*/*/FFL/*', '*/*/*/FFL/*', '*/*/*/*/FFL/*']
         this.basePath = basePath || __dirname + '/CODELISTS/'
+        this.extension = extension || '.ffl'
     }
 
     multiple(patterns) {
@@ -18,14 +19,18 @@ exports.ModelWalker = class {
     }
 
     filesRead(file) {
-        if (file.toLowerCase().endsWith('.ffl'))
+        if (file.toLowerCase().endsWith(this.extension))
             this.paths[file] = true;
     }
 
-    walk(visit) {
+    walk(visit, dontOpenFile) {
         this.multiple(this.patterns)
-        for (var path in this.paths) {
-            this.readFile(path, visit)
+        for (var pathName in this.paths) {
+            if (dontOpenFile) {
+                visit(path.resolve(pathName), null)
+            } else {
+                this.readFile(path.resolve(pathName), visit)
+            }
         }
     }
 

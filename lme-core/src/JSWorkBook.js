@@ -224,6 +224,23 @@ JSWorkBook.prototype.resolveY = function(idx) {
     if (idx == null) return this.y
     return resolveY(this, idx)
 }
+/**
+ * Gets/Creates a named tuple list.
+ * Ok so now we have to do this for nested tuples too.
+ * Lets make sure the NestedTuple exist with corresponding tupleIndexNames
+ */
+JSWorkBook.prototype.resolveYas = function(variableName, note) {
+    var yas = this.resolveY(undefined);
+    if (note) {
+        const indexes = note.slice(1, -1).split(',')
+        for (var i = 0; i < indexes.length; i++) {
+            const tempIndex = this.tupleIndexForName(this.modelName + '_' + variableName, indexes[i], yas, indexes.length - i)
+            if (tempIndex == -1) yas = this.addTuple(variableName, indexes[i], yas)
+            else yas = yas.deeper[tempIndex]
+        }
+    }
+    return yas;
+}
 
 function resolveY(wb, y) {
     var yAxis = y || 0;
@@ -286,11 +303,13 @@ JSWorkBook.prototype.addTuple = function(nodeName, name, yas) {
  * These can be found with this method later on
  * (i) there is no support by duplicate names per Tuple
  */
-JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas) {
+JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas, delta) {
     const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
     if (!node.tuple) return -1;
     yas = this.resolveY(yas)
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+    if (delta >= 2) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
+    if (delta >= 3) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
     const values = this.context.values[String(tupleDefinition.ref)];
     for (var key in values) {
         if (name == values[key]) {

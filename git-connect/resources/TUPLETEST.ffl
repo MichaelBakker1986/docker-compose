@@ -27,7 +27,7 @@ model TUPLETEST uses BaseModel
      title: "TupleDefinition";
      hint: "test";
      formula: 101;
-     datatype: number;
+     datatype: string;
      variable TupleVar1
      {
       title: "TupleVar1";
@@ -46,7 +46,7 @@ model TUPLETEST uses BaseModel
      title: "TupleDefinitio2n";
      hint: "tes222t";
      formula: 101123312;
-     datatype: number;
+     datatype: string;
      variable TupleVar3
      {
       title: "TupleVar3";

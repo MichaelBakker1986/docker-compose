@@ -27,5 +27,5 @@ assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), YAxis[1]),
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[2].deeper[2]), -1)
 //its strange to see why the first tuple shows 3nested instances also
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
-    log.info(y.display + " ".repeat(treeDepth) + node.rowId)
+    if (log.DEBUG) log.debug(y.display + " ".repeat(treeDepth) + node.rowId)
 }, YAxis[0].parent, null, 0)

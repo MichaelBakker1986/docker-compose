@@ -58,9 +58,9 @@ allNodesAsArray.sort((a, b) => {
 console.info('--- start ')
 for (var i = 0; i < allNodesAsArray.length; i++) {
     const node = allNodesAsArray[i]
-    log.info(" ".repeat(node.depth) + node.id + ":" + node.order_id)
+    if (log.DEBUG) log.debug(" ".repeat(node.depth) + node.id + ":" + node.order_id)
 }
-log.info('--- done ')
+log.debug('--- done ')
 const TupleDefinition = {
     tupleProperty: {}
 }
@@ -70,7 +70,7 @@ TupleDefinition.tupleProperty.tupleProperty = TupleDefinition.tupleProperty;
 //Here we can adept the front-end to not show the
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
     called++;
-    log.info(" ".repeat(treeDepth) + y.hash + "_" + y.index + "_" + node.rowId + ": " + yax)
+    if (log.DEBUG) log.debug(" ".repeat(treeDepth) + y.hash + "_" + y.index + "_" + node.rowId + ": " + yax)
 }, yAxis, null, 0)
 
 //ok so how to hash without knowing of the children
@@ -128,9 +128,9 @@ arranged.sort((a, b) => {
 })
 for (var i = 0; i < arranged.length; i++) {
     var obj = arranged[i];
-    log.info(obj.order_id + obj.rowId)
+    if (log.DEBUG) log.debug(obj.order_id + obj.rowId)
 }
-log.info(' END ')
+log.debug(' END ')
 arranged = []
 val.nodes.Tuple.add()
 val.nodes.Tuple.add()
@@ -161,17 +161,17 @@ arranged.sort((a, b) => {
 })
 for (var i = 0; i < arranged.length; i++) {
     var obj = arranged[i];
-    log.info(obj.order_id + obj.node.rowId)
+    if (log.DEBUG) log.debug(obj.order_id + obj.node.rowId)
 }
 val.nodes.Tuple.add()
-log.info(workbook.maxTupleCountForRow(workbook.findNode('Tuple')))
+log.debug(workbook.maxTupleCountForRow(workbook.findNode('Tuple')))
 workbook.set('NestedTuple', '123', 'value', 0, YAxis[4].deeper[2])
-log.info(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[0]))
+log.debug(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[0]))
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[0]), -1)
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[5].deeper[2]), -1)
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[2]), 0)
 
-log.info('--')
+log.debug('--')
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
-    log.info(y.display + " ".repeat(treeDepth) + node.rowId)
+    if (log.DEBUG) log.debug(y.display + " ".repeat(treeDepth) + node.rowId)
 }, YAxis[0].parent, null, 0)

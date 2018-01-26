@@ -4,7 +4,7 @@
   "description": "",
   "main": "/MVO/MVOtest.js",
   "scripts": {
-    "test": "concurrently \"node KSP/KSPStoryParserTest.js\" \"node TESTMODEL/ExtractFunctionTest.js\" \"node KSP/totalyearlycosttest.js\" \"node KSP/KSPIntegrationTest.js\" \"node tests/FFLScorecardIndexerTest.js\"  \"node tests/EconomicViewTest.js\" \"node KSP/totalYearlyCostsTSUMTest.js\" \"node MVO/MVOtest.js\" \"node MVO/MVOStoryParserTest.js\" \"node MVO/FormatterTest.js\" \"node SCORECARDTESTMODEL/SCORECARDTESTMODELtest.js\""
+    "test": "concurrently \"node JBehave/StoryFinder.js\" \"node KSP/totalyearlycosttest.js\" \"node KSP/KSPIntegrationTest.js\" \"node tests/FFLScorecardIndexerTest.js\"  \"node tests/EconomicViewTest.js\" \"node MVO/MVOtest.js\" \"node MVO/FormatterTest.js\" \"node SCORECARDTESTMODEL/SCORECARDTESTMODELtest.js\""
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   "dependencies": {
     "ast-types": "^0.9.14",
     "browserify": "^14.5.0",
+    "child-process-promise": "^2.2.1",
     "concurrently": "^3.5.0",
     "escodegen": "^1.9.0",
     "esprima": "^4.0.0",

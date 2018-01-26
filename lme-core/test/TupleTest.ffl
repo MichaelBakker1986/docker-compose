@@ -9,8 +9,7 @@ model TUPLETEST uses BaseModel
     {
      title: "TupleDefinition";
      hint: "test";
-     formula: 101;
-     datatype: number;
+     datatype: string;
      frequency: document;
      variable TupleVar1
      {
@@ -29,8 +28,7 @@ model TUPLETEST uses BaseModel
      tuple NestedTuple
      {
       title: "NestedTuple";
-      formula: 12309;
-      datatype: number;
+      datatype: string;
       frequency: document;
       variable NestedTupleVariable
       {

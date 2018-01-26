@@ -1,4 +1,4 @@
-model KSP uses BaseModel
+model KSP2 uses BaseModel
 {
  root
  {
