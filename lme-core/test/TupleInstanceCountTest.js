@@ -5,11 +5,10 @@
  */
 const Yaxis = require('../src/YAxis')
 const assert = require('assert')
-const log = require('log6')
 const SecondLevelNestedTuple = Yaxis[2].deeper[3]
 let SecondLevelNestedTupleInstance = SecondLevelNestedTuple.hash + 120
-log.info((SecondLevelNestedTuple.bitmask & SecondLevelNestedTupleInstance) >> SecondLevelNestedTuple.start_bit, 1)
-log.info((Yaxis[2].bitmask & SecondLevelNestedTupleInstance) >> Yaxis[2].start_bit)
+assert.equal(((SecondLevelNestedTuple.bitmask & SecondLevelNestedTupleInstance) >> SecondLevelNestedTuple.start_bit), 0)
+assert.equal((Yaxis[2].bitmask & SecondLevelNestedTupleInstance) >> Yaxis[2].start_bit, 3)
 assert.equal(TINSTANCECOUNT([], {}, Yaxis), -1, 'Nothing to do here. There is no instance.')
 //an value is entered outside tuple-range, it should also return -1
 //the first relevant value for 100, being a tuple would be above 512

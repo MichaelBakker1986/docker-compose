@@ -1,14 +1,13 @@
-require('../../lme-core/exchange_modules/presentation/webexport');
-require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
-const PropertiesAssembler = require('../../lme-core/src/PropertiesAssembler');
+require('../exchange_modules/presentation/webexport');
+require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 const LME = require('../../lme-model-api/src/lme');
-const Context = require('../../lme-core/src/Context');
+const Context = require('../src/Context');
 const log = require('log6');
 const fs = require('fs');
 const assert = require('assert');
-const YAxis = require('../../lme-core/src/YAxis');
+const YAxis = require('../src/YAxis');
 //We add custom TimeAxis because we are going to extend columns here to the max to test the 10bit into tuple range
-const defaultImport = require('../../lme-core/resources/CustomImport.json')
+const defaultImport = require('../resources/CustomImport.json')
 const TUPLETEST = new LME(defaultImport, new Context({columnSize: 1, columns: ['value']}));
 const workbook = TUPLETEST.lme;
 TUPLETEST.importFFL(fs.readFileSync(__dirname + '/TupleTest.ffl', 'utf8'));
@@ -28,5 +27,5 @@ assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), YAxis[1]),
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[2].deeper[2]), -1)
 //its strange to see why the first tuple shows 3nested instances also
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
-    console.info(y.display + " ".repeat(treeDepth) + node.rowId)
+    log.info(y.display + " ".repeat(treeDepth) + node.rowId)
 }, YAxis[0].parent, null, 0)

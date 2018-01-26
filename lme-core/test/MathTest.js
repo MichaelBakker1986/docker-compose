@@ -131,6 +131,7 @@ assert.equal(wb.get('MINMAX_VALUETOP'), 200)
 wb.createFormula("MinMax('a',110,200,300)", "MINMAX_VALUE_FALLBACK")
 assert.equal(wb.get('MINMAX_VALUE_FALLBACK'), 300)
 
+
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/
 /**

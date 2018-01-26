@@ -1,7 +1,7 @@
 const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
 const gyllionKspTest = new JBehaveStoryParser({
-    fflFile: __dirname + '/KSP_experience.ffl',
-    modelName: 'KSP',
-    storyFile: __dirname + '/KSP.story'
+    fflFile: __dirname + '/TRENDNOTREND.ffl',
+    modelName: 'TRENDNOTREND',
+    storyFile: __dirname + '/TRENDNOTREND.story'
 })
 gyllionKspTest.start()

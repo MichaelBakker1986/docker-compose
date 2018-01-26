@@ -6,17 +6,12 @@ const MVO = new LME();
 const log = require('log6')
 MVO.addFunctions(excelPlugin);
 excelPlugin.initComplete().then(function() {
-    try {
-        const mvoFLLFile = require('fs').readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8');
-        // require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
-        MVO.importFFL(mvoFLLFile)
-        const functions = SolutionFacade.getFunctions();
-        const exportWebModel = MVO.exportWebModel();
-        log.info(exportWebModel.nodes.TestContainerChild.value)
-        log.info(functions)
-    } catch (err) {
-        log.error(err)
-    }
+    const mvoFLLFile = require('fs').readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8');
+    MVO.importFFL(mvoFLLFile)
+    const functions = SolutionFacade.getFunctions();
+    const exportWebModel = MVO.exportWebModel();
+    log.debug(exportWebModel.no.TestContainerChild.value)
+    log.debug(functions)
 }).catch((err) => {
     log.error(err)
     process.exit(1);

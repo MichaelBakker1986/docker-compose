@@ -1,3 +1,6 @@
+/**
+ * TODO: change into JBehave Test
+ */
 require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;

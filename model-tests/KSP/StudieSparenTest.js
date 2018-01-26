@@ -1,3 +1,4 @@
+//Convert into JBehave
 var formulaJS = require('formulajs')
 var studieDuurInmaanden = 48
 

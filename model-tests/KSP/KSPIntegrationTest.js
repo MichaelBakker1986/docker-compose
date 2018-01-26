@@ -1,12 +1,13 @@
 /**
+ *  * (!) TODO Convert into JBehave TEST
  * KSP test cases
  * some if statements are not parsed correctly (if/If), changes are made within the KSP.ffl file
  * formulas containing ":" are not parsed correctly, changes are made within KSP.ffl file
- *
+ * This looks a lot, but its centainly not much testing going on here.
  */
+
 require('./KSPImportTest')
 require('./totalyearlycosttest')
-global.loglevel = 'debug'
 var FormulaService = require('../../lme-core/src/FormulaService')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var WorkBook = require('../../lme-core/src/JSWorkBook')
@@ -21,31 +22,7 @@ CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 var excelPlugin = require('../../excel-connect').xlsxLookup;
 CalculationFacade.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new Context());
-assert('aIFRS-EUa'.indexOf('IFRS-EU') > 0)
-wbTest.createFormula("'IFRS-EU'", 'FES_LAYOUT')
-wbTest.createFormula("Pos('IFRS-EU',FES_LAYOUT)", "POS_LAYOUT");
-assert(wbTest.get('POS_LAYOUT') === 0)
-wbTest.set('FES_LAYOUT', 'IFRS-TEST')
-assert(wbTest.get('POS_LAYOUT') === -1)
-wbTest.set('FES_LAYOUT', 'IFRS-EU')
-assert(wbTest.get('POS_LAYOUT') === 0, 'actual:' + wbTest.get('POS_LAYOUT'))
-wbTest.createFormula("If(Pos('IFRS-EU','IFRS-EU')>0,1,2)", "KSP_POSTEST");
-assert(wbTest.get('KSP_POSTEST') === 2)
-wbTest.createFormula("If(Pos('IFRS-EU',FES_LAYOUT)>0,1,2)", "KSP_POSTEST");
-wbTest.set('FES_LAYOUT', 'IIFRS-EU')
-assert(wbTest.get('KSP_POSTEST') === 1)
-wbTest.createFormula("If(Pos('IFRS-EU',FES_LAYOUT)>0,1,If(Pos('IFRS-PL',FES_LAYOUT)>0,48,If(Pos('IFRS-Intl',FES_LAYOUT)>0,2,0)))", "FES_LAYOUTNR");
-assert(wbTest.get('FES_LAYOUTNR') === 1)
-wbTest.set('FES_LAYOUT', 'IIFRS-PL')
-assert(wbTest.get('FES_LAYOUTNR') === 48)
-wbTest.set('FES_LAYOUT', 'IIFRS-Intl')
-assert(wbTest.get('FES_LAYOUTNR') === 2)
 
-wbTest.createFormula("KSP_POSTEST[doc]", 'DOCUMENT_VALUE_TEST')
-//this value should be ignored when calling KSP_POSTEST[doc]
-var testValueBefore = wbTest.get('DOCUMENT_VALUE_TEST')
-wbTest.set('KSP_POSTEST', 100, 'value', 4)
-assert(wbTest.get('DOCUMENT_VALUE_TEST') === testValueBefore)
 
 var testVariables = {
     NEW_FES_LAYOUT: true,
@@ -176,19 +153,18 @@ if (log.DEBUG) log.debug('KSP untested formulas:[%s/%s]', untestedformulas, tota
 wbKSP.set('FES_LAYOUT', 'IIFRS-PL')
 var layoutNR = wbKSP.get('FES_LAYOUTNR');
 var layoutNRChoice = wbKSP.get('FES_LAYOUTNR', 'choices')
-assert(layoutNR == 'Polish');
-assert(wbKSP.get('Q_RESTRICTIES_01') == "");
-assert(wbKSP.get('CombinationDiscountPercentage') == .062);
-assert(wbKSP.get('DecreasingPercentage') == 0.07);
-assert(wbKSP.get('Age') == 0);
-assert(wbKSP.get('Age', 'value', 4) == 4);
-assert(wbKSP.get('TestT') === 1);
-assert(wbKSP.get('Furniture') == 1800);
-assert(wbKSP.get('Furniture', 'value', 4) == 0);
-assert(wbKSP.get('DEBUG') == 0);
+assert.equal(layoutNR, 'Polish');
+assert.equal(wbKSP.get('Q_RESTRICTIES_01'), "");
+assert.equal(wbKSP.get('CombinationDiscountPercentage'), .062);
+assert.equal(wbKSP.get('DecreasingPercentage'), 0.07);
+assert.equal(wbKSP.get('Age'), 0);
+assert.equal(wbKSP.get('Age', 'value', 4), 4);
+assert.equal(wbKSP.get('TestT'), 1);
+assert.equal(wbKSP.get('Furniture'), 1800);
+assert.equal(wbKSP.get('Furniture', 'value', 4), 0);
+assert.equal(wbKSP.get('DEBUG'), 0);
 wbKSP.set('Memo1', 'a_Negro_a')
-assert((Pos('Negro', 'a_Negro_a') > 0 ? 1 : 0) == 1);
-
+assert((Pos('Negro', 'a_Negro_a') > 0 ? 1 : 0), 1);
 assert(wbKSP.get('Q_RESTRICTIES') === '');
 assert(wbKSP.get('Q_RESTRICTIES_01') === '');
 assert(wbKSP.get('Q_RESTRICTIESTXT') === '');

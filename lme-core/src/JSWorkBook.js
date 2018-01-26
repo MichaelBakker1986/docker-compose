@@ -22,7 +22,7 @@ const YAxis = require('./YAxis')
 // --optional property (default='value')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
-function JSWorkBook(context, XAxis, type, opts) {
+function JSWorkBook(context, XAxis, interval, opts) {
     this.indexer = null;//preserved to store the indexer
     XAxis = XAxis || require('./XAxis')
     this.context = context;
@@ -31,8 +31,9 @@ function JSWorkBook(context, XAxis, type, opts) {
     this.modelName = 'NEW';
     //tuple axis
     this.yaxis = YAxis;
+    this.y = YAxis[0].parent
     //time axis, we looking at bookyears at the moment
-    this.xaxis = XAxis[type || 'bkyr'].columns[0]
+    this.xaxis = XAxis[interval || 'bkyr'].columns[0]
     if (opts) for (var key in opts) this[key] = opts[key]
 }
 
@@ -220,6 +221,7 @@ JSWorkBook.prototype.resolveX = function(x) {
     return x ? this.xaxis[x + this.offset] : this.xaxis[this.offset];
 }
 JSWorkBook.prototype.resolveY = function(idx) {
+    if (idx == null) return this.y
     return resolveY(this, idx)
 }
 
@@ -233,7 +235,7 @@ JSWorkBook.prototype.get = function(row, col, x, y) {
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
     var xas = this.resolveX(x);
-    var yas = resolveY(this, y)
+    var yas = this.resolveY(y)
     return ValueFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
@@ -241,8 +243,8 @@ JSWorkBook.prototype.set = function(row, value, col, x, y) {
     return this.setSolutionPropertyValue(this.modelName + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
-    var xas = this.resolveX(x);
-    var yas = resolveY(this, y);
+    const xas = this.resolveX(x);
+    const yas = this.resolveY(y);
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.updateValues = function() {
@@ -254,8 +256,8 @@ JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
 JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
-    if (!node.tuple) return 0;
-    yas = resolveY(this, yas)
+    if (!node.tuple) return -1;
+    yas = this.resolveY(yas)
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     var allrefIdes = [];
     PropertiesAssembler.visitProperty(tupleDefinition, function(child, depth) {
@@ -263,27 +265,47 @@ JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
     }, 0)
     return TINSTANCECOUNT(allrefIdes, this.context.values, yas);
 }
+/**
+ * TODO: enforce unique name per nodeName/yas.
+ */
+JSWorkBook.prototype.insertTuple = function(nodeName, name, yas) {
+    const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
+    const tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
 
-JSWorkBook.prototype.tupleIndexForName = function(node, name) {
-    var wb = this;
-    //if not tuple, index always 0
-    if (!node.tuple) {
-        return 0;
-    }
-    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    ValueFacade.visit(tupleDefinition, function(child, depth) {
-        if (child.tuple) {
-            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+    yas = this.resolveY(yas)//this makes it complex, since parent is used for the 0-tuple.
+    const tupleCount = this.maxTupleCountForRow(tupleDefinition, yas)
+    const deeperYaxis = yas.deeper[tupleCount + 1];
+    this.set(tupleDefinition.rowId, name || ('value' + tupleCount), 'value', undefined, deeperYaxis)
+    return deeperYaxis;
+}
+JSWorkBook.prototype.addTuple = function(nodeName, name, yas) {
+    return this.insertTuple(this.modelName + '_' + nodeName, name, yas)
+}
+/**
+ * Creating a tuple-instance is done by placing a name in the TupleDefinition
+ * These can be found with this method later on
+ * (i) there is no support by duplicate names per Tuple
+ */
+JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas) {
+    const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
+    if (!node.tuple) return -1;
+    yas = this.resolveY(yas)
+    var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+    const values = this.context.values[String(tupleDefinition.ref)];
+    for (var key in values) {
+        if (name == values[key]) {
+            if (log.DEBUG) log.debug('Found ' + key + '' + values[key])
+            return REVERSEYAXIS(parseInt(key), yas);
         }
-    });
-    return maxTupleCount;
+    }
+    return -1;
 }
 /**
  * Add tuple- iterations while iterating properties
  */
 JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
-    var yax = resolveY(this, y)
-    var wb = this;
+    const yax = this.resolveY(y)
+    const wb = this;
     ValueFacade.visit(startProperty, function(node, treeDepth, natural_orderid) {
         //for max tuplecount in current node loop visitor node
         var maxTupleCountForTupleDefinition = wb.maxTupleCountForRow(node);
@@ -341,17 +363,21 @@ JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
     SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none');
-    var orCreateProperty = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
-    orCreateProperty.tuple = tuple;
-    orCreateProperty.frequency = frequency;
+    const node = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
+    if (tuple) {
+        node.tuple = tuple;
+        node.tupleDefinition = true;
+        node.tupleDefinitionName = rowId;
+    }
+    node.frequency = frequency;
     this.updateValues();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
-    var formulaIds = [];
+    const formulaIds = [];
     const formulaIdMap = {}
     for (var i = 0; i < this.context.audit.length; i++) {
-        var audit = this.context.audit[i];
+        const audit = this.context.audit[i];
         if (audit.saveToken == this.context.saveToken && !formulaIdMap[audit.formulaId]) {
             formulaIdMap[audit.formulaId] = true;
             formulaIds.push(audit.formulaId)

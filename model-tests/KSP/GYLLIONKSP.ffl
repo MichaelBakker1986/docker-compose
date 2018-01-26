@@ -4,333 +4,319 @@
 import FinanMath.*;
 import BaseModel.*;
 
-model experienceKSP uses BaseModel
+model GYLLIONKSP uses BaseModel
 {
-  version: "1.27";
-  root
+ version: "1.27";
+ root
+ {
+  variable Q_ROOT
   {
-    variable Q_ROOT
+   datatype: number;
+   frequency: document;
+   variable IncomeParent01
+   {
+    datatype: number;
+    frequency: document;
+    inputRequired: 1;
+   }
+   variable IncomeParent02
+   {
+    datatype: number;
+    frequency: document;
+    inputRequired: 1;
+   }
+   tuple Child
+   {
+    datatype: string;
+    frequency: document;
+    locked: 0;
+    variable ChildGender
     {
-		datatype: number;
-		frequency: document;
-		
-		variable IncomeParent01
-		{
-			datatype: number;
-			frequency: document;
-			inputRequired: 1;
-		}
-        variable IncomeParent02
-        {
-            datatype: number;
-            frequency: document;
-            inputRequired: 1;
-		}
-		tuple Child
-        {
-            datatype: number;
-            frequency: document;
-            displaytype: currency;
-            locked: 0;
-            variable ChildGender
-			{
-				datatype: number;
-                frequency: document;
-                inputRequired: 1;
-                fixed_decimals: 0;
-                choices: "0:Boy|1:Girl";
-			}
-			variable NrOfDaysChildcareWeek
-            {
-                datatype: number;
-                formula: 0;
-                frequency: document;
-                inputRequired: 1;
-                fixed_decimals: 1;
-            }
-            variable NrOfDaysChildcareMonth
-            {
-                datatype: number;
-                frequency: document;
-                formula: OnER(10.5*NrOfDaysChildcareWeek*4,0);
-                fixed_decimals: 1;
-                locked: 1;
-            }
-            variable NrOfDaysOutOfSchoolCareWeek
-            {
-				datatype: number;
-                frequency: document;
-                inputRequired: 1;
-                fixed_decimals: 1;
-            }
-            variable NrOfDaysOutOfSchoolCareMonth
-            {
-                datatype: number;
-                frequency: document;
-                formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,0);
-                fixed_decimals: 1;
-                locked: 1;
-            }
-            variable HourlyFeeChildCare
-            {
-                datatype: number;
-                frequency: document;
-                formula: 6.8;
-                fixed_decimals: 1;
-            }
-            variable HourlyFeeOutOfSchoolCare
-            {
-                datatype: number;
-                frequency: document;
-                formula: 6.8;
-                fixed_decimals: 1;
-            }
-            variable ParentalContributionPrimaryEducation
-            {
-                datatype: number;
-                frequency: document;
-                formula: 80;
-                fixed_decimals: 1;
-            }
-            variable CostsUnspecified
-            {
-                datatype: number;
-                frequency: document;
-                formula: 180;
-                fixed_decimals: 1;
-            }
-            variable SecondaryEducationProfile
-            {
-                datatype: number;
-				formula: 1;
-                frequency: document;
-                inputRequired: 1;
-                displaytype: select;
-                fixed_decimals: 1;
-                choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
-            }
-			
-			variable Age
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: ValueT(T);
-              fixed_decimals: 0;
-              top_blanklines: 1;
-              locked: 1;
-            }
-			
-			variable Furniture
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If(Age=1,1800,0);
-              data_options: unscalable;
-              fixed_decimals: 2;
-              top_blanklines: 1;
-              locked: 1;
-            }
-			
-			variable ChildCareCosts
-			{
-			  datatype: number;
-			  frequency: column;
-			  aggregation: balance;
-			  formula: (NrOfDaysChildcareMonth[1]*HourlyFeeChildCare[1])*12;
-			  fixed_decimals: 2;
-			}
-			
-			variable ActualChildCareCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If(Age<=3,ChildCareCosts,0);
-              fixed_decimals: 2;
-              locked: 1;
-            }
-			
-			variable ActualDiapers
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Diapers",Age);
-              fixed_decimals: 2;
-            }
-			variable ActualFood
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-			  formula:If(ChildGender[1]=0,MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsBoy",Age),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",Age));
-              fixed_decimals: 2;
-            }
-			variable ActualClothingCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","ClothingCosts",Age);
-              data_options: unscalable;
-              fixed_decimals: 2;
-            }
-			variable ActualPersonalCareCosts
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",Age);
-              fixed_decimals: 2;
-            }
-			variable Hairdresser
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",Age);
-              fixed_decimals: 2;
-            }
-			variable Inventory
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",Age);
-              fixed_decimals: 2;
-            }
-			variable Allowance
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",Age);
-              fixed_decimals: 2;
-            }
-			variable Contributions
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",Age);
-              fixed_decimals: 2;
-            }
-			variable Transport
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",Age);
-              fixed_decimals: 2;
-            }
-            variable MobilePhone
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",Age);
-              fixed_decimals: 2;
-            }
-            variable DrivingLicense
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",Age);
-              fixed_decimals: 2;
-            }
-			
-			variable CostsForOutOfSchoolCare
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=4)and(Age<=11),(HourlyFeeOutOfSchoolCare[1]*NrOfDaysOutOfSchoolCareMonth[1])*12, 0);
-              fixed_decimals: 2;
-            }
-			
-			variable CostsForPrimaryEducation
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation[1],0);
-              fixed_decimals: 2;
-            }
-			
-			variable CostsForSecondaryEducation
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: If((Age>=12)and(Age<16),CostsYearOneFour[1],If(Age>=16,CostsYearFiveSixSeven[1],0));
-              fixed_decimals: 2;
-            }
-			
-			variable CostsYearOneFour
-			{
-			  datatype: number;
-			  frequency: document;
-			  formula: Case(SecondaryEducationProfile,[0, 576 | 1, 906 | 2, 535 | 3, 535]);
-			  fixed_decimals: 2;
-			  locked: 1;
-			}
-			variable CostsYearFiveSixSeven
-			{
-			  datatype: number;
-			  frequency: document;
-			  formula: Case(SecondaryEducationProfile,[0,576|1,906|2,535|3,535]);
-			  fixed_decimals: 2;
-			  locked: 1;
-			}
-			
-			variable CostsUnspecifiedOverview
-            {
-              datatype: number;
-              frequency: column;
-              aggregation: flow;
-              formula: CostsUnspecified[1]*12;
-              fixed_decimals: 2;
-              locked: 1;
-            }
-			variable CostsUnspecified
-			{
-			  datatype: number;
-			  frequency: document;
-			  formula: 180;
-			  fixed_decimals: 1;
-			}
-			
-			variable TotalYearlyCostsChild
-              {
-                datatype: number;
-                frequency: column;
-                aggregation: flow;
-                formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
-                fixed_decimals: 2;
-                locked: 1;
-              }
-		}
-		
-		variable TotalYearlyCosts
-		{
-		  datatype: number;
-		  frequency: column;
-		  aggregation: flow;
-		  formula: TSUM(TotalYearlyCostsChild);
-		  fixed_decimals: 2;
-		  locked: 1;
-		}
-		
-		variable TupleSumTest
-		{
-		  datatype: number;
-		  frequency: document;
-		  formula: TSUM(NrOfDaysChildcareWeek);
-		  locked: 1;
-		}
-	}
+     datatype: number;
+     displaytype: select;
+     frequency: document;
+     inputRequired: 1;
+     fixed_decimals: 0;
+     choices: "0:Boy|1:Girl";
+    }
+    variable NrOfDaysChildcareWeek
+    {
+     datatype: number;
+     formula: 0;
+     frequency: document;
+     inputRequired: 1;
+     fixed_decimals: 1;
+    }
+    variable NrOfDaysChildcareMonth
+    {
+     datatype: number;
+     frequency: document;
+     formula: OnER(10.5*NrOfDaysChildcareWeek*4,0);
+     fixed_decimals: 1;
+     locked: 1;
+    }
+    variable NrOfDaysOutOfSchoolCareWeek
+    {
+     datatype: number;
+     frequency: document;
+     inputRequired: 1;
+     fixed_decimals: 1;
+    }
+    variable NrOfDaysOutOfSchoolCareMonth
+    {
+     datatype: number;
+     frequency: document;
+     formula: OnER(4*NrOfDaysOutOfSchoolCareWeek*4.5,0);
+     fixed_decimals: 1;
+     locked: 1;
+    }
+    variable HourlyFeeChildCare
+    {
+     datatype: number;
+     frequency: document;
+     formula: 6.8;
+     fixed_decimals: 1;
+    }
+    variable HourlyFeeOutOfSchoolCare
+    {
+     datatype: number;
+     frequency: document;
+     formula: 6.8;
+     fixed_decimals: 1;
+    }
+    variable ParentalContributionPrimaryEducation
+    {
+     datatype: number;
+     frequency: document;
+     formula: 80;
+     fixed_decimals: 1;
+    }
+    variable CostsUnspecified
+    {
+     datatype: number;
+     frequency: document;
+     formula: 180;
+     fixed_decimals: 1;
+    }
+    variable SecondaryEducationProfile
+    {
+     datatype: number;
+     formula: 1;
+     frequency: document;
+     inputRequired: 1;
+     displaytype: select;
+     fixed_decimals: 1;
+     choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+    }
+    variable Age
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: ValueT(T);
+     fixed_decimals: 0;
+     top_blanklines: 1;
+     locked: 1;
+    }
+    variable Furniture
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: If(Age=1,1800,0);
+     data_options: unscalable;
+     fixed_decimals: 2;
+     top_blanklines: 1;
+     locked: 1;
+    }
+    variable ChildCareCosts
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     formula: (NrOfDaysChildcareMonth[1]*HourlyFeeChildCare[1])*12;
+     fixed_decimals: 2;
+    }
+    variable ActualChildCareCosts
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: If(Age<=3,ChildCareCosts,0);
+     fixed_decimals: 2;
+     locked: 1;
+    }
+    variable ActualDiapers
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","Diapers",Age);
+     fixed_decimals: 2;
+    }
+    variable ActualFood
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula:If(ChildGender[1]=0,MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","FoodCostsBoy",Age),MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","FoodCostsGirl",Age));
+     fixed_decimals: 2;
+    }
+    variable ActualClothingCosts
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup(null,"LeeftijdGeslachtGebondenKosten","ClothingCosts",Age);
+     data_options: unscalable;
+     fixed_decimals: 2;
+    }
+    variable ActualPersonalCareCosts
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","PersonalCare",Age);
+     fixed_decimals: 2;
+    }
+    variable Hairdresser
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Hairdresser",Age);
+     fixed_decimals: 2;
+    }
+    variable Inventory
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Inventory",Age);
+     fixed_decimals: 2;
+    }
+    variable Allowance
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Allowance",Age);
+     fixed_decimals: 2;
+    }
+    variable Contributions
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Contributions",Age);
+     fixed_decimals: 2;
+    }
+    variable Transport
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","Transport",Age);
+     fixed_decimals: 2;
+    }
+    variable MobilePhone
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","MobilePhone",Age);
+     fixed_decimals: 2;
+    }
+    variable DrivingLicense
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: MatrixLookup("ScorecardKSP.xls","LeeftijdGeslachtGebondenKosten","DrivingLicense",Age);
+     fixed_decimals: 2;
+    }
+    variable CostsForOutOfSchoolCare
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: If((Age>=4)and(Age<=11),(HourlyFeeOutOfSchoolCare[1]*NrOfDaysOutOfSchoolCareMonth[1])*12, 0);
+     fixed_decimals: 2;
+    }
+    variable CostsForPrimaryEducation
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation[1],0);
+     fixed_decimals: 2;
+    }
+    variable CostsForSecondaryEducation
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: If((Age>=12)and(Age<16),CostsYearOneFour[1],If(Age>=16,CostsYearFiveSixSeven[1],0));
+     fixed_decimals: 2;
+    }
+    variable CostsYearOneFour
+    {
+     datatype: number;
+     frequency: document;
+     formula: Case(SecondaryEducationProfile,[0, 576 | 1, 906 | 2, 535 | 3, 535]);
+     fixed_decimals: 2;
+     locked: 1;
+    }
+    variable CostsYearFiveSixSeven
+    {
+     datatype: number;
+     frequency: document;
+     formula: Case(SecondaryEducationProfile,[0,576|1,906|2,535|3,535]);
+     fixed_decimals: 2;
+     locked: 1;
+    }
+    variable CostsUnspecifiedOverview
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: CostsUnspecified[1]*12;
+     fixed_decimals: 2;
+     locked: 1;
+    }
+    variable CostsUnspecified
+    {
+     datatype: number;
+     frequency: document;
+     formula: 180;
+     fixed_decimals: 1;
+    }
+    variable TotalYearlyCostsChild
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
+     fixed_decimals: 2;
+     locked: 1;
+    }
+   }
+   variable TotalYearlyCosts
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    formula: TSUM(TotalYearlyCostsChild);
+    fixed_decimals: 2;
+    locked: 1;
+   }
+   variable TupleSumTest
+   {
+    datatype: number;
+    frequency: document;
+    formula: TSUM(NrOfDaysChildcareWeek);
+    locked: 1;
+   }
   }
+ }
 }

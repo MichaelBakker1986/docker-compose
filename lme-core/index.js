@@ -9,8 +9,6 @@ const Context = require("./src/Context");
 const TimeAxis = require('./src/TimeAxis');
 const timeAxis = new TimeAxis(require('./resources/CustomImport'));
 
-var TupleIndexConverter = require("./src/TupleIndexConverter");
-
 function LMEService() {
 }
 
@@ -51,18 +49,19 @@ LMEService.prototype.addFunctions = function(plugin) {
 
 LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
-    if (tupleindex !== undefined) {
-        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
-    }
-    var fesContext = new Context();
+    const fesContext = new Context();
     fesContext.values = context.values;
-    var JSWorkBook = new WorkBook(fesContext);
+    const JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
     if (!context.isset) {
         JSWorkBook.updateValues();
         context.isset = true;
+    }
+    if (tupleindex != null) {
+        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
+        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
     }
     //setvalue
     if (value !== undefined) {
@@ -74,9 +73,9 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
-            JSWorkBook.visitProperties(rootNode, function(node, yax) {
+            JSWorkBook.walkProperties(rootNode, function(node, type, depth, yax) {
                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-            });
+            }, JSWorkBook.resolveY(tupleindex), null, 0);
         } else {
             values.push({
                 variable: rowId
@@ -87,9 +86,7 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
 };
 
 LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
-    if (tupleindex !== undefined) {
-        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
-    }
+
     var fesContext = new Context();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
@@ -99,6 +96,10 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     if (!context.isset) {
         JSWorkBook.updateValues();
         context.isset = true;
+    }
+    if (tupleindex != null) {
+        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
+        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
     }
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     const flattenValues = {}

@@ -1,28 +1,7 @@
-const StoryParser = require('../StoryParser').StoryParser
-const LMEapi = require('../../lme-model-api/src/lme');
-const SolutionFacade = require('../../lme-core/src/SolutionFacade');
-const log = require('log6')
-const path = require('path')
-const model = new LMEapi();
-var excelPlugin = require('../../excel-connect').xlsxLookup;
-model.addFunctions(excelPlugin);
-const fflFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-const story = path.resolve(__dirname + '/mvo.story')
-const storyFile = require('fs').readFileSync(story, 'utf8');
-
-excelPlugin.initComplete('MVO').then(function(matrix) {
-    SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
-    model.importFFL(fflFile)
-    const storyParser = new StoryParser(storyFile, story, model.lme);
-    storyParser.filename = story;
-    storyParser.message = function(event) {
-        if (event.result.status == 'fail' || event.result.status == 'error') {
-            throw Error('Story failed' + JSON.stringify(event))
-        }
-    }
-    storyParser.start()
-    storyParser.call()
-}).catch((err) => {
-    log.error(err)
-    process.exit(1);
+const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
+const gyllionKspTest = new JBehaveStoryParser({
+    fflFile: __dirname + '/MVO.ffl',
+    modelName: 'MVO',
+    storyFile: __dirname + '/MVO.story'
 })
+gyllionKspTest.start()

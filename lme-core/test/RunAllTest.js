@@ -1,5 +1,5 @@
 /*
- * There is no way to clear State, every doImport will contribute to static state
+ * (i)(!) There is no way to clear State, every doImport will contribute to static state
  */
 process.alltest = true;
 const log = require('log6')
@@ -11,20 +11,14 @@ const tests = [
     './fflexportTest',//.FFL Language
     './screendefinitionTest',//.screen definition
     './jsonValuesTest',
-    './tupleTest',
-    './apiTest',
-    './TrendNoTrendTest',
+    './APIIntegrationTest',
     './CaseTest',
     './RegisterTest',
     './FinChoiceTest',
     './SwaggerDefinitionParserTest',
-    './TupleSumTest',
-    './TupleIndexConverterTest',
     './TimeTest',
-    './TSumTest',
-    './TCountTest',
-    './TipleTupleTest',
-    './TupleInstanceCountTest'
+    './BasicOperationsTest',
+    './TupleTests'//should include all Tuple logic tests.
 ];
 var testResults = [];
 var failure = [];

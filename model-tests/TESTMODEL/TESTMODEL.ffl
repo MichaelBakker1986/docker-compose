@@ -1,9 +1,6 @@
 import FinanMath.*;
 import BaseModel.*;
 
-WRAP:$1+$2;
-TESTMETHOD2:$1+$2;
-
 model TESTMODEL uses BaseModel
 {
   version: "1.14";
@@ -28,7 +25,7 @@ model TESTMODEL uses BaseModel
         variable TestContainerChild
         {
             title: "TotalConfusedMoreChild";
-            formula: WRAP(123,2);
+            formula: 123;
             datatype: number;
             frequency: document;
             inputRequired: 1;

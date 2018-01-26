@@ -169,7 +169,7 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
         f: parseInt('11111110000001111110000000000', 2),
         m: parseInt('0000000000000000000000000000000000', 2) + parseInt('00000000000000000000000010000000000', 2) * first,
         bin: (matchings[first][0][0]).toString(2).substring(0, (matchings[first][0][0]).toString(2).length - 10),
-        display: '000' + first,
+        display: first + '000',
         base: start,
         depth: 1,
         index: first,
@@ -187,7 +187,7 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
             m: (parseInt('0000000000010000000000000000', 2) * second) + (parseInt('0000000000000000000010000000000', 2) * first),
             bin: (matchings[first][second][0]).toString(2),
             bitmask: THIRD__LEVEL_BITMASK,
-            display: '00' + second + '' + first,
+            display: first + '' + second + '00',
             start_bit: THIRD__TUPLE_START_BIT,
             index: second,
             depth: 2,
@@ -206,7 +206,7 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
                 /*  m: (parseInt('00000000000000000010000000000000000', 2) * second) + (parseInt('00000000000000000000000010000000000', 2) * first),
                bin: (matchings[first][second][third]).toString(2),*/
                 bitmask: FOURTH_LEVEL_BITMASK,
-                display: '0' + third + second + '' + first,
+                display: first + '' + second + '' + third + '0',
                 start_bit: THIRD__TUPLE_START_BIT,
                 index: third,
                 depth: 3,
@@ -242,11 +242,14 @@ TVALUES = function(fIds, func, fId, x, y, z, v) {
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
     return TINSTANCECOUNT(fIds, v, y);
 }
+REVERSEYAXIS = function(index, y) {
+    return (y.bitmask & index) >> y.start_bit
+}
 
 function indexToArray(index, y) {
     const repre = [(index & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT];
     const match = [(y.m & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (y.m & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (y.m & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT];
-    console.info('input:' + repre + ' filter with : ' + (y.f >> 10).toString(2) + ' {' + match + "(" + y.depth + ',' + y.index + ")}" + ' gives:' + ((y.bitmask & index) >> y.start_bit))
+    log.info('input:' + repre + ' filter with : ' + (y.f >> 10).toString(2) + ' {' + match + "(" + y.depth + ',' + y.index + ")}" + ' gives:' + ((y.bitmask & index) >> y.start_bit))
 }
 
 //return tuplecount, get max tuple index given a (y) context.
@@ -293,7 +296,7 @@ TINSTANCECOUNT = function(fIds, v, y) {
             //first level just matching everything that does not have 2-tuple or 3-tuple keys
             //second level match everything on 1-tuple index. But should not have anything on the 3-tuple
             if ((v[fId][obj] != null) && (userKey & y.f) == y.m) {
-                indexToArray(userKey, y)
+                if (log.DEBUG) indexToArray(userKey, y)
                 tempkeys.push(userKey)
             }
         }
