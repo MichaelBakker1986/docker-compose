@@ -38,7 +38,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
 }
 
 JSWorkBook.prototype.setColumnOffset = function(delta) {
-    let newOffset = this.offset
+    var newOffset = this.offset
     if (delta == 'next') newOffset++
     else if (delta == 'previous') newOffset--
     newOffset = Math.min(this.xaxis.length - 6, Math.max(0, newOffset))

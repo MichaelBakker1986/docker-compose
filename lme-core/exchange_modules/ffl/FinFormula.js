@@ -123,7 +123,7 @@ function finChoice(formula) {
     }
     //NL|USA|BEL|GER
     else if (formula.indexOf(":") < 0) {
-        let split = formula.split('|');
+        var split = formula.split('|');
         //remove a trailing and leading " character.
         split[0] = split[0].slice(1);
         split[split.length - 1] = split[split.length - 1].slice(0, -1);

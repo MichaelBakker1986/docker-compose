@@ -69,33 +69,33 @@ EconomicEditorView.prototype.parse = function(input, rootNodeName) {
         const hint = node[hintIndex] || false
         if (hasFormula || node[childIndex].length > 0) {
             var spaces = [];
-            let total = (node[modifierIndex] || '') + nodeName + (props ? " is " + ((isLocked ? 'locked  ' : '') + (isVisible ? 'visible ' : '') + (isRequired ? 'required ' : '')) : '');
+            const total = (node[modifierIndex] || '') + nodeName + (props ? " is " + ((isLocked ? 'locked  ' : '') + (isVisible ? 'visible ' : '') + (isRequired ? 'required ' : '')) : '');
             spaces.length = Math.max((80 - total.length) - depth, 0);
-            let prefix = [];
+            const prefix = [];
             prefix.length = depth;
             output.push(prefix.join(' ') + total + (hasFormula ? spaces.join(' ') + '=' + formula : ''));
         }
         if (props && isRequired && !defaultValue.required[required]) {
             var spaces = [];
-            let total3 = (node[modifierIndex] || '') + nodeName + ".required";
+            const total3 = (node[modifierIndex] || '') + nodeName + ".required";
             spaces.length = Math.max((80 - total3.length) - depth, 0);
-            let prefix = [];
+            const prefix = [];
             prefix.length = depth;
             output.push(prefix.join(' ') + total3 + spaces.join(' ') + '=' + required);
         }
         if (props && isVisible && !defaultValue.visible[visible]) {
-            var spaces = [];
-            let total6 = (node.modifier || '') + nodeName + ".visible";
+            const spaces = [];
+            const total6 = (node.modifier || '') + nodeName + ".visible";
             spaces.length = Math.max((80 - total6.length) - depth, 0);
-            let prefix = [];
+            const prefix = [];
             prefix.length = depth;
             output.push(prefix.join(' ') + total6 + spaces.join(' ') + '=' + visible);
         }
         if (props && isLocked && !defaultValue.locked[locked]) {
-            var spaces = [];
-            let total2 = (node.modifier || '') + nodeName + ".locked";
+            const spaces = [];
+            const total2 = (node.modifier || '') + nodeName + ".locked";
             spaces.length = Math.max((80 - total2.length) - depth, 0);
-            let prefix = [];
+            const prefix = [];
             prefix.length = depth;
             output.push(prefix.join(' ') + total2 + spaces.join(' ') + '=' + locked);
         }

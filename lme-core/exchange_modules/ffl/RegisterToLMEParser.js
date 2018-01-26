@@ -80,7 +80,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     }
 
-    let nestedTupleDepth = 0
+    var nestedTupleDepth = 0
     const tuples = []
     const rootNode = register['root']
     this.walk(rootNode, 3, function(node, depth) {
@@ -89,11 +89,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             while (!tuples[depth] && tuples.length > 0) tuples.length--
         }
         const nodeName = node[nameIndex];
-        let type = node[displayTypeIndex]
+        var type = node[displayTypeIndex]
         inheritProperties(node)
 
         // expecting an parentName..
-        let parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
+        var parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
         if (parentId == 'root') {
             parentId = undefined;
         }
@@ -105,14 +105,14 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
          * Document formulaset is notrend, formula = notrend
          * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
          */
-        let trendformula = node[trend_formulaIndex];
-        let valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
+        var trendformula = node[trend_formulaIndex];
+        var valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
         if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
             valueFormula = 'If(x.istrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
         }
         if (node[modifierIndex] == '=') {
             const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
-            let formula = '0';
+            var formula = '0';
             for (var i = 0; i < siblings.length; i++) {
                 if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
                     formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
@@ -214,7 +214,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
         "type": "Identifier",
         "name": 'null'
     }
-    let finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
+    var finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
     //allow multi-language here
     finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
         return indexer.constants[parseInt($2)]

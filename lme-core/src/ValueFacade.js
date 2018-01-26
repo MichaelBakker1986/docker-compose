@@ -60,7 +60,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
         hash: xas.hash + yas.hash + 0,
         formulaId: localFormula.id || localFormula.index
     })
-    let userValue = value;
+    var userValue = value;
     var variable = fetchSolutionNode(row, (col || 'value'));
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
         if (userValue != null) {

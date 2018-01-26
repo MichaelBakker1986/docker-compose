@@ -10,8 +10,8 @@ excelPlugin.initComplete().then(function() {
     MVO.importFFL(mvoFLLFile)
     const functions = SolutionFacade.getFunctions();
     const exportWebModel = MVO.exportWebModel();
-    log.debug(exportWebModel.no.TestContainerChild.value)
-    log.debug(functions)
+    if (log.DEBUG) log.debug(exportWebModel.no.TestContainerChild.value)
+    if (log.DEBUG) log.debug(functions)
 }).catch((err) => {
     log.error(err)
     process.exit(1);

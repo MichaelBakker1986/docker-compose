@@ -1,9 +1,14 @@
+//FYNDOO_PRESCAN
+//Vragenlijstje authorizatie met API-KEY voor accountants
+//Vragenlijstje gebaseerd op de Rol
+//JWT token
+
+
 const assert = require('assert');
 const CalculationFacade = require('../').CalculationFacade;
 const WorkBook = require('../src/JSWorkBook'), Context = require('../src/Context')
 const wb = new WorkBook(new Context(), null, null, {modelName: 'APITEST'});
 wb.createFormula("1+1", "TimeTest", 'value', true, 'column');
-wb.findNode('TimeTest').tupleDefinitionName = 'TimeTest'
 assert.equal(wb.get('TimeTest'), 2)
 wb.set('TimeTest', 10)
 assert.equal(wb.get('TimeTest'), 10)

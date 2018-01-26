@@ -49,7 +49,7 @@ ScorecardTool.prototype.parse = function(input) {
     const scorecards = indexer.find('displaytype', 'scorecard');
     const adjustments = []
     for (var i = 0; i < scorecards.length; i++) {
-        let completeFilledIn = [];
+        var completeFilledIn = [];
         const scorecard = scorecards[i];
         const steps = scorecard[indexer.schemaIndexes.children];
         //CONVERT A LOT OF THIS INTO SELECT_DECENDANTS

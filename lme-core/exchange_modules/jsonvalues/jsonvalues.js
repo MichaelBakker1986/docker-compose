@@ -13,7 +13,7 @@ var jsonValues = {
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
-        let allValues = workbook.getAllChangedValues();
+        const allValues = workbook.getAllChangedValues();
         //clean up the audit while deparsing.
         allValues.forEach(function(el) {
             if (el.varName.endsWith('_title')) {
@@ -43,13 +43,13 @@ function updateValues(data, docValues) {
         docValues[key] = {};
     }
     for (var key in data.values) {
-        var value = data.values[key];
+        const value = data.values[key];
         var nodeId = key.split('#')[0]
-        var nodeColId = key.split('#')[1]
+        const nodeColId = key.split('#')[1]
         if (!nodeId.endsWith('_value')) {
             nodeId = nodeId + '_value'
         }
-        let fetch = PropertiesAssembler.fetch(nodeId);
+        const fetch = PropertiesAssembler.fetch(nodeId);
         //we don't have to import values for variables we don't use.
         if (fetch) {
             var enteredValue = value.value;

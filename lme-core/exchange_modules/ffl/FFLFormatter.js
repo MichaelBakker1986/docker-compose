@@ -28,7 +28,7 @@ FFLFormatter.prototype.extractHeader = function() {
     const headerLines = this.header.split('\n');
     for (var i = 0; i < headerLines.length; i++) {
         var headerLine = headerLines[i].trim();
-        let modelName;
+        var modelName;
         if (modelName = headerLine.match(/^\s*model (\w+)/i)) {
             this.name = modelName[1];
             break;
@@ -36,7 +36,7 @@ FFLFormatter.prototype.extractHeader = function() {
     }
 }
 FFLFormatter.prototype.extractConstants = function() {
-    let index = 0;
+    var index = 0;
     const constants = this.constants;
     this.data = this.data.replace(/"(.*?)"/gm, function($0) {
         constants[++index] = $0
@@ -51,7 +51,7 @@ FFLFormatter.prototype.insertConstants = function() {
 }
 FFLFormatter.prototype.extractComments = function() {
     var comments = {}
-    let index = 0;
+    var index = 0;
     this.data = this.data.replace(/\/\/.*/gm, function($0) {
         comments[++index] = $0
         return '____' + index
@@ -65,7 +65,7 @@ FFLFormatter.prototype.removeWhite = function() {
         .replace(/;\s+/g, ';')//7ms of 100ms..(V05) (expensive, but it is removing trailing whitespaces of properties)
 }
 FFLFormatter.prototype.extractVars = function() {
-    let noneexit = true;
+    var noneexit = true;
     var data = this.data;
     var index = 0;
     const vars = [];
@@ -112,7 +112,7 @@ FFLFormatter.prototype.walk = function(visit) {
 FFLFormatter.prototype.walkTree = function(visit, parentId, depth) {
     var self = this;
     const parts = this.vars[parentId][0].trim().split(';')
-    let children = 0;
+    var children = 0;
     if (parts[parts.length - 1] == '') {
         parts.length--;
     } else {
@@ -185,13 +185,13 @@ FFLFormatter.prototype.parseProperties = function() {
     const index = register.getIndex('i');
     const formatter = this;
     this.walk(function(v, raw_properties) {
-            for (let i = 0; i < raw_properties.length; i++) {
+            for (var i = 0; i < raw_properties.length; i++) {
                 const p = raw_properties[i];
                 const p_seperator_index = p.indexOf(':');//can't use split. some properties use multiple :
-                let key = p.substring(0, p_seperator_index).trim();
+                var key = p.substring(0, p_seperator_index).trim();
                 key = formulaMapping[key] || key
                 register.addColumn(key)
-                let value = p.substring(p_seperator_index + 1).trim();
+                var value = p.substring(p_seperator_index + 1).trim();
                 //TODO: internationalization should not happen here:
                 //TODO: But to introduce Internationalization will take a day.
                 //TODO: So thats why we are injecting constant Strings here.

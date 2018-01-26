@@ -163,7 +163,7 @@ PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth)
 }
 const hashcars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 PropertiesAssembler.prototype.indexProperties = function(modelName) {
-    let counter = 0;
+    var counter = 0;
     visitInternal(getRootNode(modelName), function(node, depth) {
         counter++;
         node.id = pad(counter, 5);

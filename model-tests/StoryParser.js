@@ -7,7 +7,7 @@ const functionMapper = {
         call: function(workbook, linenumber, line, args) {
             var variableName = args[0], tupleIndexName = args[1], value = args[2], colId = (parseInt(args[3]) || 1) - 1
             return [function() {
-                let tIndex = undefined;
+                var tIndex = undefined;
                 if (tupleIndexName) tIndex = workbook.tupleIndexForName(workbook.modelName + '_' + variableName, tupleIndexName.slice(1, -1))
                 if (tIndex == -1) tIndex = workbook.addTuple(variableName, tupleIndexName.slice(1, -1)).index
                 workbook.set(variableName, value, 'value', colId, tIndex)
@@ -47,8 +47,8 @@ const functionMapper = {
             const variableName = args[0], decimals = args[1], value = args[2], columnId = (parseInt(args[3]) || 1) - 1
             return [function() {
                 var result = {};
-                let rawValue = workbook.get(variableName, 'value', columnId);
-                let calculatedValue = rawValue;
+                var rawValue = workbook.get(variableName, 'value', columnId);
+                var calculatedValue = rawValue;
                 if (decimals) calculatedValue = calculatedValue.toFixed(decimals)
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
@@ -81,14 +81,14 @@ function StoryParser(story, filename, workbook) {
 
 StoryParser.prototype.start = function() {
     for (var lineNumber = 0; lineNumber < this.lines.length; lineNumber++) {
-        let jebehaveMatchFound = false;
+        var jebehaveMatchFound = false;
         var line = this.lines[lineNumber];
         if (line.trim() == '') continue;//empty lines
         if (line.startsWith('@')) continue;//just meta-data
         for (var mappedKey in functionMapper) {
             if (line.match(functionMapper[mappedKey].regex)) {
                 jebehaveMatchFound = true;
-                let functions = functionMapper[mappedKey].call(this.workbook, lineNumber, line, line.match(functionMapper[mappedKey].regex).slice(1));
+                var functions = functionMapper[mappedKey].call(this.workbook, lineNumber, line, line.match(functionMapper[mappedKey].regex).slice(1));
                 const lineAction = {
                     line: {
                         line: line,

@@ -144,7 +144,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     const relevant = this.relevant;
     const shiftindent = this.shiftindent;
 
-    let cdept = 0;
+    var cdept = 0;
     const rootNode = this.vars[rootVariableName || 'root'];
     this.walk(rootNode, 1, function(node, depth) {
         const items = [];

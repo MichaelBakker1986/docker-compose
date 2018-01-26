@@ -1,6 +1,5 @@
-var SolutionFacade = require('../../src/SolutionFacade');
-var PropertiesAssembler = require('../../src/PropertiesAssembler');
-
+const SolutionFacade = require('../../src/SolutionFacade');
+const PropertiesAssembler = require('../../src/PropertiesAssembler');
 
 function WebExport() {
     this.exportAsObject = true;
@@ -26,8 +25,8 @@ function LMETree(name, workbook) {
 }
 
 function noChange(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c && c < 0) {
@@ -40,8 +39,8 @@ function noChange(workbook, rowId, col, index, type, yas) {
 }
 
 function changeAble(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c) {
@@ -54,8 +53,8 @@ function changeAble(workbook, rowId, col, index, type, yas) {
 }
 
 function changeAndCache(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c) {
@@ -93,19 +92,19 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 
-let tuplecounter = 0;
+var tuplecounter = 0;
 LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
     tuplecounter++;
     const tree = this;
-    var workbook = this.workbook;
-    var rowId = node.rowId;
+    const workbook = this.workbook;
+    const rowId = node.rowId;
     const newTupleId = rowId + "_" + tuplecounter
-    var amount = this.repeats.document[0]
-    var colspan = this.repeats.document[1];
+    const amount = this.repeats.document[0]
+    const colspan = this.repeats.document[1];
     const type = 'tuple_add';
     const parent = this.nodes[treePath[treePath.length - 1] + '_' + yas.index];
     const path = treePath.join('.');
-    var rv = {
+    const rv = {
         id: newTupleId,
         order_id: natural_order_id,
         add: function() {
@@ -144,18 +143,18 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
     this.nodes[rowId] = rv;
 }
 LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
-    var workbook = this.workbook;
-    var rowId = node.rowId;
-    var unique = yas.index + "_" + rowId
-    var amount = this.repeats[node.frequency][0]
-    var colspan = this.repeats[node.frequency][1];
+    const workbook = this.workbook;
+    const rowId = node.rowId;
+    const unique = yas.index + "_" + rowId
+    const amount = this.repeats[node.frequency][0]
+    const colspan = this.repeats[node.frequency][1];
     const type = node.displayAs;
     const datatype = node.datatype
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
     //for tuples we have to bitswitch the positions around, the variable-name is leading
     //
-    var rv = {
+    const rv = {
         id: rowId,
         depth: treeDepth,
         order_id: natural_order_id,
@@ -183,7 +182,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id,
         });
     }
     for (var index = 0; index < amount; index++) {
-        var r = {
+        const r = {
             type: type,
             value: null,
             visible: null,
@@ -219,18 +218,18 @@ WebExport.prototype.parseData = function(webExport, workbook) {
 }
 
 WebExport.prototype.deParse = function(rowId, workbook) {
-    var modelName = workbook.getSolutionName();
+    const modelName = workbook.getSolutionName();
 
-    var lmeTree = new LMETree(modelName, workbook);
+    const lmeTree = new LMETree(modelName, workbook);
     PropertiesAssembler.findAllInSolution(modelName, function(node) {
         lmeTree.names[node.rowId] = true;
     });
-    var treePath = [];
+    const treePath = [];
     var currentDepth = 0;
-    var indexPath = [];
+    const indexPath = [];
     //make the walk here,
-    var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
-    let natural_order_id = 0;
+    const rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
+    var natural_order_id = 0;
     PropertiesAssembler.indexProperties(modelName)
 
     workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
@@ -247,7 +246,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
                 indexPath.length = treeDepth;
                 currentDepth = treeDepth;
             }
-            var index = indexPath[indexPath.length - 1] + 1
+            const index = indexPath[indexPath.length - 1] + 1
             indexPath[indexPath.length - 1] = index
             if (yas == 'new') {
                 lmeTree.addTupleNode(node, treePath, index, natural_order_id + (y.hash * (natural_order_id / 10000)), y, treeDepth)

@@ -60,7 +60,7 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
         }
     }
 
-    let currentVariable;
+    var currentVariable;
     for (var i = cursor.row; i > 0; i--) {
         if (this.lines[i].match(/(variable |tuple |root|model )/)) {
             currentVariable = extractName(this.lines[i].trim())

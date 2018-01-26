@@ -28,11 +28,11 @@ const esprima = require('esprima')
 const escodegen = require('escodegen')
 const simplified = require('./ASTPreparser')
 var variables;
-let functions;
+var functions;
 var getOrCreateProperty;
 var addFormulaDependency;
 var properties;
-var propertiesArr = [
+const propertiesArr = [
     'value',
     'visible',
     'required',
@@ -45,8 +45,8 @@ var propertiesArr = [
     'valid',
     'h'
 ]
-var IDENTIFIER = 'Identifier';
-var ARRAYEXPRESSION = 'ArrayExpression'
+const IDENTIFIER = 'Identifier';
+const ARRAYEXPRESSION = 'ArrayExpression'
 //this part is essencial to bind variables, extract support Variable types, supported Column types
 // these variables will be red from the given JSON asap.
 // for now we state them here..

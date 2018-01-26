@@ -4,38 +4,38 @@ const PropertiesAssembler = require('../../src/PropertiesAssembler')
 const FunctionMap = require('../../src/FunctionMap')
 const log = require('log6');
 
-function FormulaInfo(data, schema, modelName) {
+function FormulaInfo(dataArg, schema, modelName) {
     this.formulas = [];
     this.variables = []
-    var self = this;
-    var data = [];
-    this.data = data;
+    const self = this;
+    this.data = dataArg;
+    const data = [];
     this.nodes = [];
-    var forms = {};
+    const forms = {};
     FormulaService.visitFormulas(function(formula) {
         formula.id = formula.id || formula.index;
         forms[formula.name] = formula;
         self.addFormula(formula)
     });
-    var names = {};
-    var modelNamePrefix = modelName + '_';
+    const names = {};
+    const modelNamePrefix = modelName + '_';
     this.formulas.forEach(function(formula) {
-        var name = correctFileName(formula.name);
+        const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            var title = forms[modelNamePrefix + name + '_title'] || {original: null};
-            var hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
-            var visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
-            var valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
-            var value = forms[modelNamePrefix + name + '_value'] || {original: ''};
-            var formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
-            var formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
-            var locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
-            var choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
+            const title = forms[modelNamePrefix + name + '_title'] || {original: null};
+            const hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
+            const visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
+            const valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
+            const value = forms[modelNamePrefix + name + '_value'] || {original: ''};
+            const formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
+            const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
+            const locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
+            const choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
         }
     })
-    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
+    const types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
     //this.formulas = undefined;
     this.meta = {
         view: {
@@ -89,15 +89,15 @@ LMEParser.prototype.parseData = function(data, workbook) {
     if (log.DEBUG) log.info('Done import ' + data.name)
     return solution;
 }
-var unwantedKeys = {
+const unwantedKeys = {
     delegate: true,
     ast: true,
     body: true
 }
 LMEParser.prototype.deParse = function(rowId, workbook) {
-    var modelName = workbook.getSolutionName();
-    var formulaInfo = {};
-    let info = new FormulaInfo(formulaInfo, {}, modelName);
+    const modelName = workbook.getSolutionName();
+    const formulaInfo = {};
+    const info = new FormulaInfo(formulaInfo, {}, modelName);
     info.name = modelName;
     PropertiesAssembler.findAllInSolution(modelName, function(property) {
         info.nodes.push(property)

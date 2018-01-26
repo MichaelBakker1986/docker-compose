@@ -21,6 +21,7 @@
 const Acl = require('acl');
 
 const MichaelFaceBookID = '1683958891676092';
+const JorisNijboerFaceBookID = '10213615561315841';
 const MonliFacebookID = '369400500137629';
 const LGDFacebookID = '10213076901574578';
 const MarcoFacebookID = '10159782534605228';
@@ -133,6 +134,7 @@ class Authorization {
         }
         this.registerUser(GUEST_USER)
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
+        this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
         this.addModelPrivileges(GUEST_ROLE, "TEST", false);
         this.addModelPrivileges(MichaelFaceBookID, "KSP", true);

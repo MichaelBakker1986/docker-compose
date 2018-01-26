@@ -14,8 +14,8 @@ var fflModel = '';
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
 var params = window.location.href.split('#')[1].split('&')
-let windowModelName = params[0] || 'SCORECARDTESTMODEL';
-let userID = params[1] || 'DEMO'
+var windowModelName = params[0] || 'SCORECARDTESTMODEL';
+var userID = params[1] || 'DEMO'
 const newSotryTemplate =
     "{model_name} Score Basic\n" +
     "@Author {author_name}\n" +
@@ -73,7 +73,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         user_session.user.name = 'DEMO'
     })
     $scope.session = user_session;
-    let register = new Register();
+    var register = new Register();
     const debugManager = new DebugManager();
     DEBUGGER = debugManager
     $scope.register = register;
@@ -83,7 +83,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     $scope.fflmode = true;
     $scope.currentView = 'FFLModelEditorView';
     $scope.fflType = '.ffl'
-    let currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+    var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
 
 
     $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
@@ -107,7 +107,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
     })
 
-    let sidebaropen = false;
+    var sidebaropen = false;
     $scope.togglePropertiesSidebar = function(open) {
         if (sidebaropen && open) {
             return;
@@ -135,7 +135,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
     }
     $scope.runJBehaveTest = function() {
         var annotations = []
-        let storyParser = new StoryParser(aceEditor.getValue(), windowModelName + '.story', LMEMETA.lme);
+        var storyParser = new StoryParser(aceEditor.getValue(), windowModelName + '.story', LMEMETA.lme);
         storyParser.message = function(event) {
             annotations.push({
                 row: event.line,
@@ -158,7 +158,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         Pace.track(function() {
             $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + "… "
             $scope.saveFeedbackTitle = "Working on it... ";
-            let data = aceEditor.getValue()
+            var data = aceEditor.getValue()
             $.post("saveFFLModel/" + $scope.session.fflModelPath, {
                 data: data,
                 type: type
