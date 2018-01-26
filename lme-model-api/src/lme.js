@@ -81,7 +81,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || DEFAULT_MODELNAME;
-    let userID = (params[1] || 'DEMO')
+    var userID = (params[1] || 'DEMO')
 
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
@@ -90,7 +90,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-            let returnData = JSON.parse(http.responseText);
+            var returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? userID : returnData.id;
             self.importData(returnData)
             window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
@@ -112,14 +112,14 @@ LmeAPI.prototype.persistData = function(callBack) {
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || DEFAULT_MODELNAME;
-    let userID = params[1] || 'DEMO'
+    var userID = params[1] || 'DEMO'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     http.open("POST", 'saveUserData/' + self.lme.context.saveToken, true);
     http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-            let returnData = JSON.parse(http.responseText);
+            const returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
         }

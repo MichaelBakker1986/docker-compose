@@ -1,5 +1,5 @@
-let modelName;
-let hash;
+var modelName;
+var hash;
 
 function redefineParaments() {
     var params = window.location.href.split('#')

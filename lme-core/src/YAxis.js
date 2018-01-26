@@ -370,10 +370,10 @@ const combine = [{
     reg: '1****', match: '10000', filter: '10000',
     fit: ['10101'], nofit: ['01000']
 }]
-for (let testIndex = 0; testIndex < combine.length; testIndex++) {
+for (var testIndex = 0; testIndex < combine.length; testIndex++) {
     const test = combine[testIndex];
-    for (let i = 0; i < test.fit.length; i++) assert(((parseInt(test.fit[i], 2) & parseInt(test.filter, 2)) == parseInt(test.match, 2)))
-    for (let i = 0; i < test.nofit.length; i++) assert(((parseInt(test.nofit[i], 2) & parseInt(test.filter, 2)) != parseInt(test.match, 2)))
+    for (var i = 0; i < test.fit.length; i++) assert(((parseInt(test.fit[i], 2) & parseInt(test.filter, 2)) == parseInt(test.match, 2)))
+    for (var i = 0; i < test.nofit.length; i++) assert(((parseInt(test.nofit[i], 2) & parseInt(test.filter, 2)) != parseInt(test.match, 2)))
 }
 /*
  * oke hoe maak ik nou zo'n object?

@@ -37,7 +37,7 @@ SOLVER = function(args) {
     return new Solver(args || arguments)
 }
 AMMOUNT = function() {
-    let total = 0;
+    var total = 0;
     for (var key in arguments) {
         if (arguments[key]) total++
     }
@@ -56,7 +56,7 @@ MatrixLookup = function(xlsfileName, tableName, row, col) {
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         return table.xasValues[row][col];
     } else if (table && table.xasValues) {
-        let lastidx = null;
+        var lastidx = null;
         for (var key in table.xasValues) {
             if (key <= row) {
                 lastidx = key;
@@ -114,7 +114,7 @@ REGEXPMATCH = function(pattern, value, message) {
     return new RegExp(pattern).test(value) ? true : false;
 }
 ValueT = function(one) {
-    let retrunValue = 0;
+    var retrunValue = 0;
     while (one && !one.dummy) {
         retrunValue++;
         one = one.prev

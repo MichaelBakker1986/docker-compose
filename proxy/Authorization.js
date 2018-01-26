@@ -135,6 +135,7 @@ class Authorization {
         this.registerUser(GUEST_USER)
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
         this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
         this.addModelPrivileges(GUEST_ROLE, "TEST", false);
         this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
