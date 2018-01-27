@@ -19,9 +19,9 @@ model TUPLETEST uses BaseModel
     datatype: number;
     frequency: document;
    }
-   variable TupleVar2
+   variable EntityScore
    {
-    title: "TupleVar2";
+    title: "EntityScore";
     formula: 1234;
     datatype: number;
     frequency: document;
@@ -60,6 +60,13 @@ model TUPLETEST uses BaseModel
       {
        title: "LoanPart";
        formula: 0;
+       datatype: number;
+       frequency: document;
+      }
+      variable LoanInkomenReference
+      {
+       title: "LoanInkomenReference";
+       formula: Inkomen;
        datatype: number;
        frequency: document;
       }

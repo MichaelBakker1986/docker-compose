@@ -93,32 +93,40 @@ var properties = {
 }
 
 var tuplecounter = 0;
-LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
-    tuplecounter++;
+LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth) {
     const tree = this;
+    const unique = yas.display + '__' + node.rowId
     const workbook = this.workbook;
     const rowId = node.rowId;
-    const newTupleId = rowId + "_" + tuplecounter
     const amount = this.repeats.document[0]
     const colspan = this.repeats.document[1];
     const type = 'tuple_add';
-    const parent = this.nodes[treePath[treePath.length - 1] + '_' + yas.index];
+    const parent = this.nodes[yas.display + '_' + treePath[treePath.length - 1]];
     const path = treePath.join('.');
+    const has = node.hash.slice();
+    if (yas.depth == 0) {
+        has[1] = '999'
+    } else if (yas.depth == 1) {
+        has[1] = yas.uihash
+        has[3] = '999'
+    } else if (yas.depth == 2) {
+        has[1] = yas.parent.uihash
+        has[3] = yas.uihash
+        has[5] = '999'
+    }
     const rv = {
-        id: newTupleId,
-        order_id: natural_order_id,
+        id: rowId,
+        order_id: has.join(''),
         add: function() {
-            const tupleCount = workbook.maxTupleCountForRow(node, yas) + 1
-            workbook.set(node.rowId, 'value' + tupleCount, 'value', 0, yas.deeper[tupleCount])
-            //  var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
-
-            workbook.walkProperties(node, function(child, yasi, treeDepth, yi) {
-                natural_order_id = (natural_order_id + 1000);
-                //   natural_order_idd++
-                tree.addWebNode(child, path.split('.'), index, natural_order_id + (yi.hash * (natural_order_id / 100000)), yi)
-                //only print the newly added tuple instance.
-                // console.info(child.rowId + " :: " + yi.hash)
-            }, yas.deeper[tupleCount], null, treePath.length)
+            const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
+            workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
+                if (yasi == 'new') {
+                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
+                }
+                else {
+                    tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
+                }
+            }, inneryas, node.rowId, treePath.length)
         },
         index: index,
         title_locked: node.title_locked,
@@ -126,10 +134,10 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         path: path,
         ammount: amount,
         colspan: colspan,
-        depth: treeDepth,
+        depth: yas.depth,
         visible: true,
         cols: [{
-            value: newTupleId,
+            value: unique,
             entered: false,
             type: 'tuple_add',
             locked: true,
@@ -140,30 +148,40 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
     };
     Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (parent) parent.children.push(rv);
-    this.nodes[rowId] = rv;
+    this.nodes[unique] = rv;
 }
-LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas, treeDepth) {
+LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const workbook = this.workbook;
     const rowId = node.rowId;
-    const unique = yas.index + "_" + rowId
+    const unique = yas.display + "_" + rowId
     const amount = this.repeats[node.frequency][0]
     const colspan = this.repeats[node.frequency][1];
     const type = node.displayAs;
     const datatype = node.datatype
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
-    //for tuples we have to bitswitch the positions around, the variable-name is leading
-    //
+    const has = node.hash.slice();
+    if (yas.depth == 0) {
+        has[1] = yas.uihash
+    } else if (yas.depth == 1) {
+        has[1] = yas.uihash
+        has[3] = yas.parent.uihash
+    } else if (yas.depth == 2) {
+        has[1] = yas.uihash
+        has[3] = yas.parent.uihash
+        has[5] = yas.parent.parent.uihash
+    }
     const rv = {
         id: rowId,
-        depth: treeDepth,
-        order_id: natural_order_id,
+        depth: yas.depth,
+        order_id: has.join(''),
         index: index,
         title_locked: node.title_locked,
         type: node.displayAs,
         path: path,
         ammount: amount,
         colspan: colspan,
+        tupleDefinition: node.tupleDefinition,
         cols: [],
         children: []
     };
@@ -207,7 +225,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id,
         rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype, yas));
     });
-    const parent = this.nodes[yas.index + "_" + treePath[treePath.length - 1]];
+    const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
     //TODO: use array instead of Object
     this.nodes[unique] = rv;
@@ -229,13 +247,9 @@ WebExport.prototype.deParse = function(rowId, workbook) {
     const indexPath = [];
     //make the walk here,
     const rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
-    var natural_order_id = 0;
     PropertiesAssembler.indexProperties(modelName)
 
     workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
-        natural_order_id = (natural_order_id + 100000);
-        //TODO: combine natural_order_id with Tuple Indexes.
-        //TODO: combine rest of algorithm into walkProperties function.
         if (node && node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)
@@ -249,9 +263,9 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             const index = indexPath[indexPath.length - 1] + 1
             indexPath[indexPath.length - 1] = index
             if (yas == 'new') {
-                lmeTree.addTupleNode(node, treePath, index, natural_order_id + (y.hash * (natural_order_id / 10000)), y, treeDepth)
+                lmeTree.addTupleNode(node, treePath, index, y, treeDepth)
             } else {
-                lmeTree.addWebNode(node, treePath, index, natural_order_id + ((y.hash * natural_order_id / 10000)), y, treeDepth)
+                lmeTree.addWebNode(node, treePath, index, y, treeDepth)
             }
         }
     }, workbook.resolveY(0).parent, null, 0)

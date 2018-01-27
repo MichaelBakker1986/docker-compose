@@ -1,3 +1,6 @@
+/**
+ * This is the template runner for JBehave stories
+ */
 const modelname = process.argv[2];
 const fflFile = process.argv[3];
 const story = process.argv[4];

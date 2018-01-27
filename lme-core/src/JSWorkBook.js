@@ -287,8 +287,9 @@ JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
  */
 JSWorkBook.prototype.insertTuple = function(nodeName, name, yas) {
     const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
-    const tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
-
+    const tupleDefinition = node.tuple ? node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName) : node
+    //THIS IS quick-fix, it should never call insertTuple on a non-tuple
+    //if (!tupleDefinition) throw Error('Cannot add tuple of non-existing tuple' + nodeName)
     yas = this.resolveY(yas)//this makes it complex, since parent is used for the 0-tuple.
     const tupleCount = this.maxTupleCountForRow(tupleDefinition, yas)
     const deeperYaxis = yas.deeper[tupleCount + 1];
@@ -386,6 +387,7 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
     if (tuple) {
         node.tuple = tuple;
         node.tupleDefinition = true;
+        node.nestedTupleDepth = 0;
         node.tupleDefinitionName = rowId;
     }
     node.frequency = frequency;

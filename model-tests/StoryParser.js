@@ -7,14 +7,14 @@ const functionMapper = {
         call: function(workbook, linenumber, line, args) {
             var variableName = args[0], tupleIndexName = args[1], value = args[3], colId = (parseInt(args[4]) || 1) - 1
             return [function() {
-
+                // const locationDetails = workbook.locate(variableName, tupleIndexName)
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
+
                 workbook.set(variableName, value, 'value', colId, yas)
                 if (log.TRACE) log.trace('[%s]: %s %s', linenumber, variableName, tupleIndexName)
                 return {
                     status: 'info',
-                    regeex: /variable (\w+) is set to ([0-9.,A-z]+) for document/,
-                    message: 'set variable ' + variableName + ' to ' + tupleIndexName
+                    message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
                 }
             }]
         }
@@ -27,14 +27,14 @@ const functionMapper = {
             const variableName = args[0], tupleIndexName = args[1], decimals = args[3], value = args[4],
                 columnId = (parseInt(args[5]) || 1) - 1
             return [function() {
-                var result = {};
+                const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
-                var rawValue = workbook.get(variableName, 'value', columnId, yas);
+                const rawValue = workbook.get(variableName, 'value', columnId, yas);
                 var calculatedValue = rawValue;
                 if (decimals) calculatedValue = calculatedValue.toFixed(decimals)
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
-                    result.status = 'error'
+                    result.status = 'fail'
                     result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
                 } else {
                     result.status = 'info'
@@ -73,8 +73,8 @@ StoryParser.prototype.start = function() {
                 var functions = functionMapper[mappedKey].call(this.workbook, lineNumber, line, line.match(functionMapper[mappedKey].regex).slice(1));
                 const lineAction = {
                     line: {
-                        line: line,
-                        lineNumber: lineNumber
+                        line: line.trim(),
+                        lineNumber: lineNumber + 1
                     },
                     functions: functions
                 }
@@ -93,11 +93,13 @@ StoryParser.prototype.call = function() {
             //TODO: can have multiple calls on one row..
             var on = {
                 type: 'call',
+                raw: call.line,
                 line: call.line.lineNumber
             }
             try {
                 on.result = functionCall()
             } catch (err) {
+                if (log.DEBUG) log.warn('Unexpected Error', err)
                 on.result = {
                     status: 'error',
                     message: err.toString()

@@ -8,57 +8,119 @@ model TUPLETEST uses BaseModel
   variable Q_ROOT
   {
    displaytype: scorecard;
-   variable Q_MAP01
+   variable TupleTestStap
    {
-    title: "Test";
+    title: "TestTuples";
+    hint: "Test Tuples";
+    frequency: none;
     datatype: number;
-    variable TSUMTEST
+    variable Uitleg
     {
-     title: "TsumTEST" ;
-     formula: TSUM(TupleVar1);
+     frequency: none;
+     displaytype: string;
+     datatype: string;
+     locked: 1;
+     title: "In dit model worden visueel alle tuple aspected getest.";
+     formula: "In dit model worden visueel alle tuple aspected getest.";
     }
-    variable TSUMTEST2
+    variable Summary
     {
-     title: "TsumTEST2" ;
-     formula: TSUM(TupleVar4);
+     title: "Summary";
+     displaytype: paragraph;
+     frequency: none;
+     datatype: string;
+     variable TCOUNTTEST
+     {
+      locked: 1;
+      frequency: document;
+      title: "TCOUNT(NullTuple)";
+      formula: TCOUNT(NullTuple)+1;
+     }
+     variable TSUMTEST
+     {
+      locked: 1;
+      title: "TSUM(SecondSibling)" ;
+      formula: TSUM(SecondSibling);
+     }
+     variable TSUMTEST2
+     {
+      locked: 1;
+      title: "TSUM(ZeroTupleInstanceSibling)";
+      formula: TSUM(ZeroTupleInstanceSibling);
+     }
+     variable TMINEST
+     {
+      locked: 1;
+      title: "TMIN(ZeroTupleInstance)";
+      formula: TMIN(ZeroTupleInstance);
+     }
+     variable TMAXTEST
+     {
+      locked: 1;
+      title: "TMAX(ZeroTupleInstance)";
+      formula: TMAX(ZeroTupleInstance);
+     }
     }
     tuple Tuple
     {
-     title: "TupleDefinition";
-     hint: "test";
-     formula: 101;
+     title: String("Tuple") & String("(" & TupleIndex & ")");
+     hint: "Deze tuple heeft een geneste Tuple-Definitie";
+     frequency: none;
      datatype: string;
-     variable TupleVar1
+     displaytype: paragraph;
+     tuple FirstSiblingNestedTuple
      {
-      title: "TupleVar1";
+      title: String("FirstSiblingNestedTuple") & String("(" & TupleIndex & ")");
       formula: 123;
-      datatype: number;
+      frequency: none;
+      displaytype: paragraph;
+      variable FirstSiblingNestedTupleFirstSibling
+      {
+       title: "FirstSiblingNestedTupleFirstSibling";
+       formula: 1234;
+       datatype: number;
+      }
      }
-     variable TupleVar2
+     variable SecondSibling
      {
-      title: "TupleVar2";
-      formula: 1234;
+      locked: 1;
+      title: "TSUM(FirstSiblingNestedTupleFirstSibling)";
+      formula: TSUM(FirstSiblingNestedTupleFirstSibling);
       datatype: number;
      }
     }
-    tuple Tuple2
+    tuple NullTuple
     {
-     title: "TupleDefinitio2n";
-     hint: "tes222t";
-     formula: 101123312;
+     title: String("NullTuple") & String("(" & TupleIndex & ")");
+     hint: "Dit is een 0-tuple met een T-1 formule";
+     displaytype: paragraph;
+     frequency: none;
      datatype: string;
-     variable TupleVar3
+     variable ZeroTupleInstance
      {
-      title: "TupleVar3";
-      formula: TupleVar3[prev]+100;
+      title: "ZeroTupleInstance[prev]+100";
+      fixed_decimals: 2;
+      formula: ZeroTupleInstance[prev]+100;
       datatype: number;
      }
-     variable TupleVar4
+     variable ZeroTupleInstanceSibling
      {
-      title: "TupleVar4";
+      title: "ZeroTupleInstanceSibling";
       formula: 12349;
       datatype: number;
      }
+    }
+   }
+   variable Q_STAP02
+   {
+    frequency: none;
+    datatype: number;
+    title: "Q_STAP02";
+    hint: "Q_STAP02";
+    variable Opvulling
+    {
+     title: "TupleTestStap2";
+     hint: "TupleTestStap2";
     }
    }
   }

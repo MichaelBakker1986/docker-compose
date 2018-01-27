@@ -28,25 +28,25 @@ let tupleCountForNestedTuple = workbook.maxTupleCountForRow(workbook.findNode('N
 assert.equal(tupleCountForMainTuple, -1, 'A Tuple without instances should return -1')
 assert.equal(tupleCountForNestedTuple, -1, 'A nested Tuple without instances should return -1 for now.')
 
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
 tupleCountForMainTuple = workbook.maxTupleCountForRow(workbook.findNode('Tuple'))
 assert.equal(tupleCountForMainTuple, 0, 'The main tuple should return 0, since one tuple is created.')
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), yAxis), -1, 'No nested tuple instance should be returned. Even while the TupleDefinition does has an instance')
 //test if we look in the tuple itself. It will also be unable to return an instance.
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), yAxis.deeper[0]), -1, 'No nested tuple instance should be returned. Even while the TupleDefinition does has an instance')
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
 //Now we will add a value for a nested - tuple
 workbook.set('NestedTuple', 'test234', 'value', 0, yAxis.deeper[0])
 
-assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 1, 'The main tuple should return 1, since two tuples are created.')
+assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 1, 'The main tuple should return 1, since two tuples are created.'+workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis))
 //Now we will add a value for a nested - tuple
 workbook.set('NestedTuple', 'test234', 'value', 0, yAxis.deeper[0])
 
 //
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
 workbook.set('Tuple', 'test234', 'value', 0, yAxis.deeper[2])
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 2, 'The main tuple should return 2, since two tuples are created.')
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 3, 'The main tuple should return 3, since two tuples are created.')
 const allNodesAsArray = []
 for (var key in val.nodes) {
@@ -55,17 +55,12 @@ for (var key in val.nodes) {
 allNodesAsArray.sort((a, b) => {
     return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
 })
-console.info('--- start ')
+log.debug('--- start sort')
 for (var i = 0; i < allNodesAsArray.length; i++) {
     const node = allNodesAsArray[i]
     if (log.DEBUG) log.debug(" ".repeat(node.depth) + node.id + ":" + node.order_id)
 }
 log.debug('--- done ')
-const TupleDefinition = {
-    tupleProperty: {}
-}
-TupleDefinition.tupleProperty.TupleDefinition = TupleDefinition;
-TupleDefinition.tupleProperty.tupleProperty = TupleDefinition.tupleProperty;
 
 //Here we can adept the front-end to not show the
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
@@ -132,8 +127,8 @@ for (var i = 0; i < arranged.length; i++) {
 }
 log.debug(' END ')
 arranged = []
-val.nodes.Tuple.add()
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
+val.nodes['0000__Tuple'].add()
 
 
 function pad(n, width, z) {
@@ -163,7 +158,7 @@ for (var i = 0; i < arranged.length; i++) {
     var obj = arranged[i];
     if (log.DEBUG) log.debug(obj.order_id + obj.node.rowId)
 }
-val.nodes.Tuple.add()
+val.nodes['0000__Tuple'].add()
 log.debug(workbook.maxTupleCountForRow(workbook.findNode('Tuple')))
 workbook.set('NestedTuple', '123', 'value', 0, YAxis[4].deeper[2])
 log.debug(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[0]))

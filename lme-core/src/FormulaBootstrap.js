@@ -196,7 +196,7 @@ var escodegenOptions = {
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
- *
+ * This method is becoming so complex, its fixing a lot of things :)
  */
 function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tupleType) {
     xapendix = xapendix || '';
@@ -205,8 +205,14 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
     if (xapendix == '' && referenceProperty.frequency == 'document') xapendix = '.doc'
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
+
     if (!referenceProperty.tuple) {
+        //From y(n) -> y(0) we go y.base
         yAppendix += '.base';
+    } else {
+        //Here we want to do y.parent for y(1,2) -> y(1) functions.
+        //Lets be wiser, we can always do a parent-lookup y.one/y.two/y.three
+        yAppendix += '.p[' + referenceProperty.nestedTupleDepth + ']';
     }
     if (tupleType) {
         if (referenceProperty) {
@@ -426,6 +432,7 @@ const identifier_replace = {
     T: 'x',
     MainPeriod: 'z', //zAxis Reference, base period, z.base
     MaxT: 'x.last',
+    TupleIndex: 'y.index',
     Trend: 'x'//x.trend
 
 }

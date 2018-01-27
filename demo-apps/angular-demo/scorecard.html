@@ -22,6 +22,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-file-upload/2.5.0/angular-file-upload.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css"/>
+
     <script src="scorecard.js"></script>
     <link rel="stylesheet" type="text/css" href="bundle.css"/>
     <link rel="stylesheet" type="text/css" href="grid_example.css"/>
@@ -42,6 +45,20 @@
             <ul class="nav navbar-nav">
             </ul>
             <ul class="nav navbar-nav" style="float: right">
+                <li>
+                    <div style="margin-right: 50px; margin-top: 5px;">
+                        <input
+                                type="text"
+                                name="duration"
+                                data-provide="slider"
+                                data-slider-ticks="[1, 2, 3, 4]"
+                                data-slider-ticks-labels='["month", "quarter", "halfyear","bookyear"]'
+                                data-slider-step="1"
+                                range="true"
+                                data-slider-tooltip="hide"
+                        >
+                    </div>
+                </li>
                 <li>
                     <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
                 </li>
@@ -80,16 +97,18 @@
             <h1 class="page-header">{{search.hint}}</h1>
             <div class="row">
                 <div ng-repeat="f in LME_MODEL | toArray |  orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
-                    <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'quest    ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
-
+                    <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'d-'+f.depth+ ' quest ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                         <div ng-switch-when="wisihtml" class="col-md-12">
                             <textarea class="form-control" ng-model="cv.value"></textarea>
                         </div>
-                        <div ng-switch-when="tuple_add" class="col-md-12">
-                            <span class="" ng-click="addTuple(f)"><i class="fa fa-plus-square-o"></i> Add {{f.title}}</span>
+                        <div ng-switch-when="tuple_add" class="col-md-12 input-group text-right" ng-click="addTuple(f)">
+                            <span class="form-control">Add {{f.title}}</span>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                            </div>
                         </div>
                         <div ng-switch-when="paragraph" class="col-md-12">
-                            <h2>{{f.title}}</h2>
+                            <h2>{{f.title}} <i style="color: lightcoral" ng-if="f.tupleDefinition" class="fa fa-remove"></i></h2>
                             <span ng-if="f.hint">{{f.hint}}<p></p><br></span>
                         </div>
                         <div ng-switch-when="customwidget" style="margin: 15px;">

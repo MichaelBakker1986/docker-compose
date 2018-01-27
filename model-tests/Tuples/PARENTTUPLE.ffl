@@ -1,0 +1,37 @@
+import FinanMath.*;
+import BaseModel.*;
+
+model PARENTTUPLE uses BaseModel
+{
+ root
+ {
+  tuple ParentTuple
+  {
+   title: "ParentTuple";
+   hint: "test";
+   formula: 101;
+   datatype: string;
+   frequency: document;
+   tuple ChildTuple
+   {
+    title: "ChildTuple";
+    datatype: string;
+    frequency: document;
+    variable ParentTupleReference
+    {
+     title: "ParentTupleReference";
+     formula: ParentFigure;
+     datatype: number;
+     frequency: document;
+    }
+   }
+   variable ParentFigure
+   {
+    title: "ParentFigure";
+    formula: 123;
+    datatype: number;
+    frequency: document;
+   }
+  }
+ }
+}

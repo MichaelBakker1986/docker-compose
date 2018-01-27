@@ -280,11 +280,11 @@ var AST = {
 }
 module.exports = AST;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ast-node-utils\\AST.js","/ast-node-utils",undefined)
-},{"_process":39,"buffer":37}],2:[function(require,module,exports){
+},{"_process":38,"buffer":36}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.ast = require('./AST')
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/ast-node-utils\\index.js","/ast-node-utils",undefined)
-},{"./AST":1,"_process":39,"buffer":37}],3:[function(require,module,exports){
+},{"./AST":1,"_process":38,"buffer":36}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * bridge between formulajs and fesjs
@@ -308,7 +308,7 @@ exports.formulajs = {
     entries: entries
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\formulajs.js","/formulajs-connect",undefined)
-},{"_process":39,"buffer":37,"formulajs":4,"log6":36}],4:[function(require,module,exports){
+},{"_process":38,"buffer":36,"formulajs":4,"log6":35}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -8020,7 +8020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\formulajs\\dist\\formula.js","/formulajs-connect\\node_modules\\formulajs\\dist",undefined)
-},{"_process":39,"buffer":37,"jStat":5,"numeral":6,"numeric":7}],5:[function(require,module,exports){
+},{"_process":38,"buffer":36,"jStat":5,"numeral":6,"numeric":7}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 this.j$ = this.jStat = (function(Math, undefined) {
 
@@ -11278,7 +11278,7 @@ jStat.extend(jStat.fn, {
 }(this.jStat, Math));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\jStat\\dist\\jstat.js","/formulajs-connect\\node_modules\\jStat\\dist",undefined)
-},{"_process":39,"buffer":37}],6:[function(require,module,exports){
+},{"_process":38,"buffer":36}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  * numeral.js
@@ -11961,7 +11961,7 @@ jStat.extend(jStat.fn, {
 }).call(this);
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\numeral\\numeral.js","/formulajs-connect\\node_modules\\numeral",undefined)
-},{"_process":39,"buffer":37}],7:[function(require,module,exports){
+},{"_process":38,"buffer":36}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 "use strict";
 
@@ -16389,7 +16389,7 @@ numeric.svd= function svd(A) {
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/formulajs-connect\\node_modules\\numeric\\numeric-1.2.6.js","/formulajs-connect\\node_modules\\numeric",undefined)
-},{"_process":39,"buffer":37}],8:[function(require,module,exports){
+},{"_process":38,"buffer":36}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Is a FFL quick-formatter (V05 '3.1m chars' 90ms) and is FFL to indexed formatter
@@ -16421,7 +16421,7 @@ FFLFormatter.prototype.extractHeader = function() {
     const headerLines = this.header.split('\n');
     for (var i = 0; i < headerLines.length; i++) {
         var headerLine = headerLines[i].trim();
-        let modelName;
+        var modelName;
         if (modelName = headerLine.match(/^\s*model (\w+)/i)) {
             this.name = modelName[1];
             break;
@@ -16429,7 +16429,7 @@ FFLFormatter.prototype.extractHeader = function() {
     }
 }
 FFLFormatter.prototype.extractConstants = function() {
-    let index = 0;
+    var index = 0;
     const constants = this.constants;
     this.data = this.data.replace(/"(.*?)"/gm, function($0) {
         constants[++index] = $0
@@ -16444,7 +16444,7 @@ FFLFormatter.prototype.insertConstants = function() {
 }
 FFLFormatter.prototype.extractComments = function() {
     var comments = {}
-    let index = 0;
+    var index = 0;
     this.data = this.data.replace(/\/\/.*/gm, function($0) {
         comments[++index] = $0
         return '____' + index
@@ -16458,7 +16458,7 @@ FFLFormatter.prototype.removeWhite = function() {
         .replace(/;\s+/g, ';')//7ms of 100ms..(V05) (expensive, but it is removing trailing whitespaces of properties)
 }
 FFLFormatter.prototype.extractVars = function() {
-    let noneexit = true;
+    var noneexit = true;
     var data = this.data;
     var index = 0;
     const vars = [];
@@ -16505,7 +16505,7 @@ FFLFormatter.prototype.walk = function(visit) {
 FFLFormatter.prototype.walkTree = function(visit, parentId, depth) {
     var self = this;
     const parts = this.vars[parentId][0].trim().split(';')
-    let children = 0;
+    var children = 0;
     if (parts[parts.length - 1] == '') {
         parts.length--;
     } else {
@@ -16578,13 +16578,13 @@ FFLFormatter.prototype.parseProperties = function() {
     const index = register.getIndex('i');
     const formatter = this;
     this.walk(function(v, raw_properties) {
-            for (let i = 0; i < raw_properties.length; i++) {
+            for (var i = 0; i < raw_properties.length; i++) {
                 const p = raw_properties[i];
                 const p_seperator_index = p.indexOf(':');//can't use split. some properties use multiple :
-                let key = p.substring(0, p_seperator_index).trim();
+                var key = p.substring(0, p_seperator_index).trim();
                 key = formulaMapping[key] || key
                 register.addColumn(key)
-                let value = p.substring(p_seperator_index + 1).trim();
+                var value = p.substring(p_seperator_index + 1).trim();
                 //TODO: internationalization should not happen here:
                 //TODO: But to introduce Internationalization will take a day.
                 //TODO: So thats why we are injecting constant Strings here.
@@ -16644,7 +16644,7 @@ exports.Formatter = FFLFormatter;
 exports.FFLFormatter = new Factory();
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\FFLFormatter.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"_process":39,"buffer":37}],9:[function(require,module,exports){
+},{"_process":38,"buffer":36}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //http://excelformulabeautifier.com/
 function finFormulaGeneric(buf) {
@@ -16668,7 +16668,9 @@ function finFormulaGeneric(buf) {
 
     /**
      * Here are all time references
+     the same as hasAnyValue? HasValue(var) ?
      */
+    buf = buf.replace(/\(FirstValueT\((\w+),1,MaxT\)>0\)/gi, 'AnyDataAvailable($1)')//regular test for any data entered
     buf = buf.replace(/FormulaSetInT\(GetT\(T\,-1\)\)<>NoTrend/gi, '!x.isprevnotrend');
 
     buf = buf.replace(/LastTinYear\(FirstTinFormulaSet\(Trend,\s*(\w+|\d+)\)\)/gi, 'x.firsttrend.lastbkyr');
@@ -16692,15 +16694,18 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/\[1]/g, '[doc]');
     buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
     buf = buf.replace(/\[GetT\(T,-1\)]/gi, '[prev]'); //Variable[T] is the same as Variable, its always in default to the corresponding time.
-    buf = buf.replace(/\[LastT\]/gi, '');
+    buf = buf.replace(/\[LastT\]/gi, '[lastinperiod]');
     //(FormulaSetInT(GetT(T,-1))<>NoTrend) ==>  !x.prev.isnotrend
     buf = buf.replace(/ValueT\(1\)/gi, 'x.firstdetail');
     buf = buf.replace(/GetT\(T,-TsY,0,TsY\)/gi, 'x.prevbkyr');
     buf = buf.replace(/GetT\(T,-1\)/gi, 'x.prev');
     buf = buf.replace(/GetT(T,-1,1,1)/gi, 'x.prev');
+    buf = buf.replace(/\(MaxT\)/g, '(x.last)');//only replace Function(MaxT) into  Function(x.last)
+
 
     //TODO: same as TSY?
     buf = buf.replace(/TsY\(LastTinPeriod\)/gi, 'TsY');
+    buf = buf.replace(/TsY\(T\)/gi, 'x.tsy');
     buf = buf.replace(/\[0\]/g, '.title ');
 
     //(& types
@@ -16766,13 +16771,13 @@ function finChoice(formula) {
     }
     //NL|USA|BEL|GER
     else if (formula.indexOf(":") < 0) {
-        let split = formula.split('|');
+        var split = formula.split('|');
         //remove a trailing and leading " character.
         split[0] = split[0].slice(1);
         split[split.length - 1] = split[split.length - 1].slice(0, -1);
 
         split = split.map(function(e, idx) {
-            return '{ "name":' + idx + ' ,"value":' + (e ? '"' + e + '"' : null) + '}'
+            return '{ "name": "' + idx + '" ,"value":' + (e ? '"' + e + '"' : null) + '}'
         })
         return "[" + split.join(',') + "]";
     }
@@ -16817,7 +16822,7 @@ FinFormula.prototype.fixCasing = function(buf) {
 };
 module.exports = FinFormula.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\FinFormula.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"_process":39,"buffer":37}],10:[function(require,module,exports){
+},{"_process":38,"buffer":36}],10:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * All indexed will be linked to a array of values, like a DB structure
@@ -16841,7 +16846,11 @@ Register.prototype.clean = function() {
     this.schema.length = 0
     this.i = []
     this.schemaIndexes = {}
-    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children']
+    //somehow 'valid' is a real important property
+    //{{MODEL_VARIABLENAME_undefined}} will exist when 'valid' is not added to the list here. (since valid is created on demand in RegisterToLMEParser
+    //Something alike if (VARIABLENAME.pattern) VARIABLENAME.valid = if(VARIABLENAME.test(VARIABLENAME),'','Invalid Input')
+    //therefore adding the property 'valid 'too late while parsing.
+    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children', 'valid']//expect 'valid' to exist
     for (var j = 0; j < schema.length; j++) {
         this.addColumn(schema[j]);
     }
@@ -16933,7 +16942,7 @@ Register.prototype.walk = function(node, depth, visitor) {
 }
 exports.Register = Register
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\Register.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"_process":39,"buffer":37}],11:[function(require,module,exports){
+},{"_process":38,"buffer":36}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.
@@ -16963,7 +16972,7 @@ RegisterPlainFFLToLMEParser.prototype.parseData = function(data, workbook) {
 exports.RegisterPlainFFLToLMEParser = RegisterPlainFFLToLMEParser;
 SolutionFacade.addParser(RegisterPlainFFLToLMEParser.prototype);
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterPlainFFLDecorator.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"../../src/SolutionFacade":28,"./FFLFormatter":8,"./Register":10,"./RegisterToLMEParser":13,"_process":39,"buffer":37}],12:[function(require,module,exports){
+},{"../../src/SolutionFacade":28,"./FFLFormatter":8,"./Register":10,"./RegisterToLMEParser":13,"_process":38,"buffer":36}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Used in front-end to reassemble the FFL file when needed.
@@ -17111,7 +17120,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     const relevant = this.relevant;
     const shiftindent = this.shiftindent;
 
-    let cdept = 0;
+    var cdept = 0;
     const rootNode = this.vars[rootVariableName || 'root'];
     this.walk(rootNode, 1, function(node, depth) {
         const items = [];
@@ -17145,9 +17154,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     })
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
     if (!rootVariableName) {
-        //formattedFFL.shift()
         formattedFFL[1] = " root\n {"
-        //formattedFFL[0] = "model " + (modelName || "NEW") + " uses BaseModel\n{"
         formattedFFL.shift()
     }
     for (var i = 0; i < formattedFFL.length; i++) {
@@ -17160,7 +17167,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
 }
 exports.RegisterToFFL = RegisterToFFL;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterToFFL.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"../../../model-tests/StringUtils":47,"_process":39,"buffer":37}],13:[function(require,module,exports){
+},{"../../../model-tests/StringUtils":46,"_process":38,"buffer":36}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const SolutionFacade = require('../../src/SolutionFacade')
 const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
@@ -17170,13 +17177,18 @@ const log = require('log6')
 var esprima = require('esprima');
 
 /**
- * v2 ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js}
- * Quicker, cleaner, flexible, less data-loss
+ * ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js} field-validations
+ * V2
+ *  Quicker, cleaner, flexible, less data-loss
+ *   1) Indexing makes lookups while processing data more efficient and use less code.
+ *   2) Prefer ["a","b"].join('') above "a" + "b" its way quicker.
+ *   3) The indexer has removed parsing abnormals with propername " visible" etc.. Makes the code more clean
+ *   4) Own char-interpreter was more complex than recursive regex-replace.
+ *
  * TODO: load property names in DB which directly correspond, fix defaults while saving.
- * TODO: choices not work correctly
+ * TODO: some exotic choices not work correctly
  */
 function RegisterToLMEParser() {
-
 }
 
 RegisterToLMEParser.prototype.name = 'ffl2'
@@ -17203,10 +17215,16 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const solution = SolutionFacade.createSolution(modelName || "NEW");
     const nameIndex = indexer.schemaIndexes.name;
     const tupleIndex = indexer.schemaIndexes.tuple;
+    const validIndex = indexer.schemaIndexes.valid;
+    const lengthIndex = indexer.schemaIndexes.length;
+    const patternIndex = indexer.schemaIndexes.pattern;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
+    const rangeIndex = indexer.schemaIndexes.range;
+    const modifierIndex = indexer.schemaIndexes.modifier;
     this.childIndex = indexer.schemaIndexes.children;
+    const childIndex = this.childIndex;
     const choiceIndex = indexer.schemaIndexes.choices;
     const trend_formulaIndex = indexer.schemaIndexes.formula_trend;
     const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
@@ -17233,21 +17251,20 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     }
 
-    let nestedTupleDepth = 0
+    var nestedTupleDepth = 0
     const tuples = []
     const rootNode = register['root']
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
-            tuples.length--
-            while (!tuples[depth] && tuples.length > 0) tuples.length--
+            tuples.length = depth;
+            while (tuples.length > 0 && !tuples[depth - 1]) tuples.length--
         }
         const nodeName = node[nameIndex];
-        let type = node[displayTypeIndex]
+        var type = node[displayTypeIndex]
         inheritProperties(node)
 
-
         // expecting an parentName..
-        let parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
+        var parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
         if (parentId == 'root') {
             parentId = undefined;
         }
@@ -17259,12 +17276,21 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
          * Document formulaset is notrend, formula = notrend
          * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
          */
-        let trendformula = node[trend_formulaIndex];
-        let valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
+        var trendformula = node[trend_formulaIndex];
+        var valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
         if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
             valueFormula = 'If(x.istrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
         }
-
+        if (node[modifierIndex] == '=') {
+            const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
+            var formula = '0';
+            for (var i = 0; i < siblings.length; i++) {
+                if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
+                    formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
+                }
+            }
+            valueFormula = formula;
+        }
         if (type == 'select') {
             if (!node[choiceIndex]) {
                 if (log.debug) log.debug('Row [' + nodeName + '] is type [select], but does not have choices')
@@ -17281,10 +17307,26 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
                 node[fflRegister.frequencyIndex] = 'none'
             }
+            type = 'string'
         } else if (nodeName.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
             node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
         }
+
+        //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
+        //info: patternIndex is language-specific (f.e. email- regular expression)
+        const validFormulas = []
+        if (node[validIndex]) validFormulas.push(node[validIndex])
+        if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
+        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
+        if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
+        if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
+
+        //its also only interesting when its a required field and entered
+        // or when its entered and required
+        //' + node[nameIndex] + '.required &&
+        //valid formulas are only interesting when entered OR required
+        if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         const frequency = node[fflRegister.frequencyIndex] || 'column';
 
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
@@ -17306,6 +17348,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
                 uiNode.tupleDefinition = true;
+                if (tuples.length > 0) {
+                    uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
+                    uiNode.tupleProperty = true
+                }
                 tuples[depth] = uiNode
             } else {
                 uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
@@ -17328,23 +17374,19 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     });
     //think about formula-sets, same ritual as trend + notrend formulasets
-    //think about the modifiers, to make them work correctly
-    //think about ' and // in constants
-    //think about trend - notrend
-    //INFO: scorecardtool: think about paragraph, WARNING, INFO, HINT..
-    //think about tupleDefinitionName, tupleDefinitionProperty
-    //forget about de parsing, since its included in the indexer.
     return solution;
 }
 
 /**
- * We have full indexed key-value of the model.
- * Easy way to implement refers-to (inheritance)
  * @param {optional} modelName
  */
 RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type) {
-    if (!formula) return type == 'string' ? AST.STRING("") : AST.UNDEFINED()
-    let finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
+    if (!formula) return type == 'string' ? AST.STRING("") : {
+        "type": "Identifier",
+        "name": 'null'
+    }
+    var finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
+    //allow multi-language here
     finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
         return indexer.constants[parseInt($2)]
     })
@@ -17362,7 +17404,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
 exports.RegisterToLMEParser = RegisterToLMEParser;
 SolutionFacade.addParser(RegisterToLMEParser.prototype);
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\ffl\\RegisterToLMEParser.js","/lme-core\\exchange_modules\\ffl",undefined)
-},{"../../../ast-node-utils/index":2,"../../src/SolutionFacade":28,"./FinFormula":9,"./RegisterToFFL":12,"_process":39,"buffer":37,"esprima":36,"log6":36}],14:[function(require,module,exports){
+},{"../../../ast-node-utils/index":2,"../../src/SolutionFacade":28,"./FinFormula":9,"./RegisterToFFL":12,"_process":38,"buffer":36,"esprima":35,"log6":35}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  First, most basic export of values
@@ -17379,7 +17421,7 @@ var jsonValues = {
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
     deParse: function(rowId, workbook) {
-        let allValues = workbook.getAllChangedValues();
+        const allValues = workbook.getAllChangedValues();
         //clean up the audit while deparsing.
         allValues.forEach(function(el) {
             if (el.varName.endsWith('_title')) {
@@ -17409,13 +17451,13 @@ function updateValues(data, docValues) {
         docValues[key] = {};
     }
     for (var key in data.values) {
-        var value = data.values[key];
+        const value = data.values[key];
         var nodeId = key.split('#')[0]
-        var nodeColId = key.split('#')[1]
+        const nodeColId = key.split('#')[1]
         if (!nodeId.endsWith('_value')) {
             nodeId = nodeId + '_value'
         }
-        let fetch = PropertiesAssembler.fetch(nodeId);
+        const fetch = PropertiesAssembler.fetch(nodeId);
         //we don't have to import values for variables we don't use.
         if (fetch) {
             var enteredValue = value.value;
@@ -17429,7 +17471,7 @@ function updateValues(data, docValues) {
 
 SolutionFacade.addParser(jsonValues)
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js","/lme-core\\exchange_modules\\jsonvalues",undefined)
-},{"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":39,"buffer":37}],15:[function(require,module,exports){
+},{"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":38,"buffer":36}],15:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const SolutionFacade = require('../../src/SolutionFacade')
 const FormulaService = require('../../src/FormulaService')
@@ -17437,38 +17479,38 @@ const PropertiesAssembler = require('../../src/PropertiesAssembler')
 const FunctionMap = require('../../src/FunctionMap')
 const log = require('log6');
 
-function FormulaInfo(data, schema, modelName) {
+function FormulaInfo(dataArg, schema, modelName) {
     this.formulas = [];
     this.variables = []
-    var self = this;
-    var data = [];
-    this.data = data;
+    const self = this;
+    this.data = dataArg;
+    const data = [];
     this.nodes = [];
-    var forms = {};
+    const forms = {};
     FormulaService.visitFormulas(function(formula) {
         formula.id = formula.id || formula.index;
         forms[formula.name] = formula;
         self.addFormula(formula)
     });
-    var names = {};
-    var modelNamePrefix = modelName + '_';
+    const names = {};
+    const modelNamePrefix = modelName + '_';
     this.formulas.forEach(function(formula) {
-        var name = correctFileName(formula.name);
+        const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            var title = forms[modelNamePrefix + name + '_title'] || {original: null};
-            var hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
-            var visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
-            var valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
-            var value = forms[modelNamePrefix + name + '_value'] || {original: ''};
-            var formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
-            var formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
-            var locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
-            var choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
+            const title = forms[modelNamePrefix + name + '_title'] || {original: null};
+            const hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
+            const visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
+            const valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
+            const value = forms[modelNamePrefix + name + '_value'] || {original: ''};
+            const formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
+            const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
+            const locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
+            const choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
         }
     })
-    var types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
+    const types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
     //this.formulas = undefined;
     this.meta = {
         view: {
@@ -17522,15 +17564,15 @@ LMEParser.prototype.parseData = function(data, workbook) {
     if (log.DEBUG) log.info('Done import ' + data.name)
     return solution;
 }
-var unwantedKeys = {
+const unwantedKeys = {
     delegate: true,
     ast: true,
     body: true
 }
 LMEParser.prototype.deParse = function(rowId, workbook) {
-    var modelName = workbook.getSolutionName();
-    var formulaInfo = {};
-    let info = new FormulaInfo(formulaInfo, {}, modelName);
+    const modelName = workbook.getSolutionName();
+    const formulaInfo = {};
+    const info = new FormulaInfo(formulaInfo, {}, modelName);
     info.name = modelName;
     PropertiesAssembler.findAllInSolution(modelName, function(property) {
         info.nodes.push(property)
@@ -17545,18 +17587,15 @@ LMEParser.prototype.deParse = function(rowId, workbook) {
 SolutionFacade.addParser(LMEParser.prototype);
 exports.LMEParser = LMEParser.prototype
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\lme\\lmeparser.js","/lme-core\\exchange_modules\\lme",undefined)
-},{"../../src/FormulaService":22,"../../src/FunctionMap":23,"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":39,"buffer":37,"log6":36}],16:[function(require,module,exports){
+},{"../../src/FormulaService":22,"../../src/FunctionMap":23,"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":38,"buffer":36,"log6":35}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var SolutionFacade = require('../../src/SolutionFacade');
-var PropertiesAssembler = require('../../src/PropertiesAssembler');
-
+const SolutionFacade = require('../../src/SolutionFacade');
+const PropertiesAssembler = require('../../src/PropertiesAssembler');
 
 function WebExport() {
     this.exportAsObject = true;
     this.hide = true;
-
     this.name = 'webexport';
-
     this.headername = 'Native Object Web Presentation';
 }
 
@@ -17577,8 +17616,8 @@ function LMETree(name, workbook) {
 }
 
 function noChange(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c && c < 0) {
@@ -17591,8 +17630,8 @@ function noChange(workbook, rowId, col, index, type, yas) {
 }
 
 function changeAble(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c) {
@@ -17605,8 +17644,8 @@ function changeAble(workbook, rowId, col, index, type, yas) {
 }
 
 function changeAndCache(workbook, rowId, col, index, type, yas) {
-    let r;//return value
-    let c = -1;//calculation counter
+    var r;//return value
+    var c = -1;//calculation counter
     return {
         get: function() {
             if (workbook.context.calc_count !== c) {
@@ -17644,34 +17683,42 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 
-let tuplecounter = 0;
-LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_id, yas) {
-    tuplecounter++;
+var tuplecounter = 0;
+LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth) {
     const tree = this;
-    var workbook = this.workbook;
-    var rowId = node.rowId;
-    const newTupleId = rowId + "_" + tuplecounter
-    var amount = this.repeats.document[0]
-    var colspan = this.repeats.document[1];
+    const unique = yas.display + '__' + node.rowId
+    const workbook = this.workbook;
+    const rowId = node.rowId;
+    const amount = this.repeats.document[0]
+    const colspan = this.repeats.document[1];
     const type = 'tuple_add';
-    const parent = this.nodes[treePath[treePath.length - 1] + '_' + yas.index];
+    const parent = this.nodes[yas.display + '_' + treePath[treePath.length - 1]];
     const path = treePath.join('.');
-    var rv = {
-        id: newTupleId,
-        order_id: natural_order_id,
+    const has = node.hash.slice();
+    if (yas.depth == 0) {
+        has[1] = '999'
+    } else if (yas.depth == 1) {
+        has[1] = yas.uihash
+        has[3] = '999'
+    } else if (yas.depth == 2) {
+        has[1] = yas.parent.uihash
+        has[3] = yas.uihash
+        has[5] = '999'
+    }
+    console.info(has.join(''))
+    const rv = {
+        id: rowId,
+        order_id: has.join(''),
         add: function() {
-            console.info('Clicked add tuple' + natural_order_id + 2000)
-            console.info(path)
-
-            const tupleCount = workbook.maxTupleCountForRow(node) + 1
-            workbook.set('Tuple', 'value', 'value', 0, tupleCount)
-            var natural_order_idd = natural_order_id - 99 + (tupleCount * 10)
-            workbook.walkProperties(node, function(child, yasi, treeDepth, yi) {
-                natural_order_idd++
-                tree.addWebNode(child, treePath, index + 1, natural_order_idd, yi)
-                //only print the newly added tuple instance.
-                console.info(child.rowId + " :: " + yi.hash)
-            }, yas.parent.deeper[tupleCount], 'instance', treePath.length)
+            const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
+            workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
+                if (yasi == 'new') {
+                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
+                }
+                else {
+                    tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
+                }
+            }, inneryas, node.rowId, treePath.length)
         },
         index: index,
         title_locked: node.title_locked,
@@ -17679,9 +17726,10 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
         path: path,
         ammount: amount,
         colspan: colspan,
+        depth: yas.depth,
         visible: true,
         cols: [{
-            value: newTupleId,
+            value: unique,
             entered: false,
             type: 'tuple_add',
             locked: true,
@@ -17692,28 +17740,40 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, natural_order_i
     };
     Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (parent) parent.children.push(rv);
-    this.nodes[rowId] = rv;
+    this.nodes[unique] = rv;
 }
-LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id, yas) {
-    var workbook = this.workbook;
-    var rowId = node.rowId;
-    var unique = yas.index + "_" + rowId
-    var amount = this.repeats[node.frequency][0]
-    var colspan = this.repeats[node.frequency][1];
+LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
+    const workbook = this.workbook;
+    const rowId = node.rowId;
+    const unique = yas.display + "_" + rowId
+    const amount = this.repeats[node.frequency][0]
+    const colspan = this.repeats[node.frequency][1];
     const type = node.displayAs;
     const datatype = node.datatype
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
-    var rv = {
+    const has = node.hash.slice();
+    if (yas.depth == 0) {
+        has[1] = yas.uihash
+    } else if (yas.depth == 1) {
+        has[1] = yas.uihash
+        has[3] = yas.parent.uihash
+    } else if (yas.depth == 2) {
+        has[1] = yas.uihash
+        has[3] = yas.parent.uihash
+        has[5] = yas.parent.parent.uihash
+    }
+    const rv = {
         id: rowId,
-        depth: treePath.length,
-        order_id: natural_order_id,
+        depth: yas.depth,
+        order_id: has.join(''),
         index: index,
         title_locked: node.title_locked,
         type: node.displayAs,
         path: path,
         ammount: amount,
         colspan: colspan,
+        tupleDefinition: node.tupleDefinition,
         cols: [],
         children: []
     };
@@ -17732,7 +17792,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id,
         });
     }
     for (var index = 0; index < amount; index++) {
-        var r = {
+        const r = {
             type: type,
             value: null,
             visible: null,
@@ -17757,7 +17817,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, natural_order_id,
         rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype, yas));
     });
-    const parent = this.nodes[yas.index + "_" + treePath[treePath.length - 1]];
+    const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
     //TODO: use array instead of Object
     this.nodes[unique] = rv;
@@ -17768,21 +17828,20 @@ WebExport.prototype.parseData = function(webExport, workbook) {
 }
 
 WebExport.prototype.deParse = function(rowId, workbook) {
-    var modelName = workbook.getSolutionName();
+    const modelName = workbook.getSolutionName();
 
-    var lmeTree = new LMETree(modelName, workbook);
+    const lmeTree = new LMETree(modelName, workbook);
     PropertiesAssembler.findAllInSolution(modelName, function(node) {
         lmeTree.names[node.rowId] = true;
     });
-    var treePath = [];
+    const treePath = [];
     var currentDepth = 0;
-    var indexPath = [];
+    const indexPath = [];
     //make the walk here,
-    var rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
-    let natural_order_id = 0;
+    const rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName);
+    PropertiesAssembler.indexProperties(modelName)
+
     workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
-        natural_order_id = (natural_order_id + 100);
-        //TODO: combine natural_order_id with Tuple Indexes.
         if (node && node.rowId !== 'root') {
             if (treeDepth > currentDepth) {
                 treePath.push(node.parentrowId)
@@ -17793,21 +17852,21 @@ WebExport.prototype.deParse = function(rowId, workbook) {
                 indexPath.length = treeDepth;
                 currentDepth = treeDepth;
             }
-            var index = indexPath[indexPath.length - 1] + 1
+            const index = indexPath[indexPath.length - 1] + 1
             indexPath[indexPath.length - 1] = index
             if (yas == 'new') {
-                lmeTree.addTupleNode(node, treePath, index, natural_order_id, y)
+                lmeTree.addTupleNode(node, treePath, index, y, treeDepth)
             } else {
-                lmeTree.addWebNode(node, treePath, index, natural_order_id, y)
+                lmeTree.addWebNode(node, treePath, index, y, treeDepth)
             }
         }
-    }, workbook.resolveY(0), null, 0)
+    }, workbook.resolveY(0).parent, null, 0)
     lmeTree.offset = 0;
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\presentation\\webexport.js","/lme-core\\exchange_modules\\presentation",undefined)
-},{"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":39,"buffer":37}],17:[function(require,module,exports){
+},{"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":38,"buffer":36}],17:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * user friendly API
@@ -17819,8 +17878,6 @@ const WorkBook = require("./src/JSWorkBook");
 const Context = require("./src/Context");
 const TimeAxis = require('./src/TimeAxis');
 const timeAxis = new TimeAxis(require('./resources/CustomImport'));
-
-var TupleIndexConverter = require("./src/TupleIndexConverter");
 
 function LMEService() {
 }
@@ -17862,18 +17919,19 @@ LMEService.prototype.addFunctions = function(plugin) {
 
 LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
-    if (tupleindex !== undefined) {
-        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
-    }
-    var fesContext = new Context();
+    const fesContext = new Context();
     fesContext.values = context.values;
-    var JSWorkBook = new WorkBook(fesContext);
+    const JSWorkBook = new WorkBook(fesContext);
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     //prepare the workbook and context to match current appscope
     if (!context.isset) {
         JSWorkBook.updateValues();
         context.isset = true;
+    }
+    if (tupleindex != null) {
+        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
+        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
     }
     //setvalue
     if (value !== undefined) {
@@ -17885,9 +17943,9 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
         var values = [];
         var rootNode = JSWorkBook.getSolutionNode(rowId);
         if (rootNode) {
-            JSWorkBook.visitProperties(rootNode, function(node, yax) {
+            JSWorkBook.walkProperties(rootNode, function(node, type, depth, yax) {
                 values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-            });
+            }, JSWorkBook.resolveY(tupleindex), null, 0);
         } else {
             values.push({
                 variable: rowId
@@ -17898,9 +17956,7 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
 };
 
 LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
-    if (tupleindex !== undefined) {
-        tupleindex = TupleIndexConverter.getIndexNumber(context, tupleindex);
-    }
+
     var fesContext = new Context();
     fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
@@ -17910,6 +17966,10 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     if (!context.isset) {
         JSWorkBook.updateValues();
         context.isset = true;
+    }
+    if (tupleindex != null) {
+        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
+        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
     }
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     const flattenValues = {}
@@ -18011,7 +18071,7 @@ exports.LMEContext = WorkBook;
 exports.CalculationFacade = LMEService.prototype;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\index.js","/lme-core",undefined)
-},{"./exchange_modules/ffl/RegisterPlainFFLDecorator":11,"./resources/CustomImport":18,"./src/Context":20,"./src/JSWorkBook":24,"./src/TimeAxis":29,"./src/TupleIndexConverter":30,"_process":39,"buffer":37,"log6":36}],18:[function(require,module,exports){
+},{"./exchange_modules/ffl/RegisterPlainFFLDecorator":11,"./resources/CustomImport":18,"./src/Context":20,"./src/JSWorkBook":24,"./src/TimeAxis":29,"_process":38,"buffer":36,"log6":35}],18:[function(require,module,exports){
 module.exports={
   "formulasets": [
     {
@@ -18351,7 +18411,6 @@ var simplified = {
 }
 simplified.ForAll = simplified.Count
 simplified.Exists = simplified.ForAll;
-simplified.TupleSum = simplified.TSUM;
 simplified.IF = simplified.If;
 simplified.Hsum = simplified.HSUM;
 simplified.HSum = simplified.HSUM;
@@ -18364,7 +18423,7 @@ simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
 module.exports = simplified;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ASTPreparser.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils":2,"_process":39,"assert":34,"buffer":37,"escodegen":36,"log6":36}],20:[function(require,module,exports){
+},{"../../ast-node-utils":2,"_process":38,"assert":33,"buffer":36,"escodegen":35,"log6":35}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 //app scope context
 var ApplicationContext = {
@@ -18381,7 +18440,7 @@ var propertyDefaults = {
 }
 
 //request scope context
-function Context() {
+function Context(opts) {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
     this.values = {};
@@ -18390,6 +18449,7 @@ function Context() {
     this.columnSize = 6;
     this.columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid'];
     this.saveToken = undefined;//commit hash
+    if (opts) for (var key in opts) this[key] = opts[key]
 }
 
 Context.prototype.propertyDefaults = propertyDefaults;
@@ -18402,7 +18462,7 @@ Context.prototype.hasChanges = function() {
 module.exports = Context
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\Context.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],21:[function(require,module,exports){
+},{"_process":38,"buffer":36}],21:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bootstrap formula's
@@ -18434,11 +18494,11 @@ const esprima = require('esprima')
 const escodegen = require('escodegen')
 const simplified = require('./ASTPreparser')
 var variables;
-let functions;
+var functions;
 var getOrCreateProperty;
 var addFormulaDependency;
 var properties;
-var propertiesArr = [
+const propertiesArr = [
     'value',
     'visible',
     'required',
@@ -18451,8 +18511,8 @@ var propertiesArr = [
     'valid',
     'h'
 ]
-var IDENTIFIER = 'Identifier';
-var ARRAYEXPRESSION = 'ArrayExpression'
+const IDENTIFIER = 'Identifier';
+const ARRAYEXPRESSION = 'ArrayExpression'
 //this part is essencial to bind variables, extract support Variable types, supported Column types
 // these variables will be red from the given JSON asap.
 // for now we state them here..
@@ -18470,6 +18530,17 @@ simplified.DataAvailable = function(formulaInfo, node) {
     node.type = 'Identifier';
     // looks like being extracted as object, while has to be array
     node.name = 'v[' + (refFormula.ref) + '][x.hash + y.hash + z]!=null';
+    delete node.refn;
+    delete node.arguments;
+    delete node.callee;
+}
+
+simplified.AnyDataAvailable = function(formulaInfo, node) {
+    var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
+    if (refFormula.ref === undefined) return log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
+
+    node.type = 'Identifier';
+    node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
     delete node.refn;
     delete node.arguments;
     delete node.callee;
@@ -18562,6 +18633,17 @@ simplified.TSUM = function(formulaInfo, node) {
     node.callee.name = 'SUM'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
 }
+simplified.TupleSum = simplified.TSUM
+simplified.TMIN = function(formulaInfo, node) {
+    node.callee.name = 'MIN'
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
+}
+simplified.TupleMin = simplified.TMIN
+simplified.TMAX = function(formulaInfo, node) {
+    node.callee.name = 'MAX'
+    buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TVALUES');
+}
+simplified.TupleMax = simplified.TMAX
 simplified.TCOUNT = function(formulaInfo, node) {
     node.callee.name = 'PROXY'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TCOUNT');
@@ -18580,7 +18662,7 @@ var escodegenOptions = {
 /**
  * Two return types of this function, either the a11231(f.x.y.z.v) or v[f](xyz.hash)
  * There is no information which property is calling and cannot be resolved, since multiple sources can share a formula
- *
+ * This method is becoming so complex, its fixing a lot of things :)
  */
 function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tupleType) {
     xapendix = xapendix || '';
@@ -18589,8 +18671,14 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
     if (xapendix == '' && referenceProperty.frequency == 'document') xapendix = '.doc'
     delete referenceProperty.refn;
     var referenceFormulaId = referenceProperty.ref;
+
     if (!referenceProperty.tuple) {
+        //From y(n) -> y(0) we go y.base
         yAppendix += '.base';
+    } else {
+        //Here we want to do y.parent for y(1,2) -> y(1) functions.
+        //Lets be wiser, we can always do a parent-lookup y.one/y.two/y.three
+        yAppendix += '.p[' + referenceProperty.nestedTupleDepth + ']';
     }
     if (tupleType) {
         if (referenceProperty) {
@@ -18802,12 +18890,15 @@ global.Onzero = function() {
 global.Hm = function() {
     return 0
 }
+//So firstValueT means:  (FirstValueT(Self,1,MaxT)>0) Give me the First Column Index where the value is not NA
+//So the question here is has[variable]AnyValue in time?
 //recursive walk the formula ast
 const identifier_replace = {
     TSY: 'x.tsy',
     T: 'x',
     MainPeriod: 'z', //zAxis Reference, base period, z.base
-    MaxT: 'x',
+    MaxT: 'x.last',
+    TupleIndex: 'y.index',
     Trend: 'x'//x.trend
 
 }
@@ -18934,7 +19025,7 @@ FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
 };
 module.exports = FormulaBootstrap.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaBootstrap.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils":2,"./ASTPreparser":19,"_process":39,"assert":34,"buffer":37,"escodegen":36,"esprima":36,"log6":36}],22:[function(require,module,exports){
+},{"../../ast-node-utils":2,"./ASTPreparser":19,"_process":38,"assert":33,"buffer":36,"escodegen":35,"esprima":35,"log6":35}],22:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const log = require('log6');
 const AST = require('../../ast-node-utils').ast;
@@ -19069,8 +19160,8 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
 //create a new Formula
 //initiate a new Object, add it to the Array
 function newFormula(locked, body, index, propertyName) {
-    var original = AST.PROGRAM(body);
-    var formula = {
+    const original = AST.PROGRAM(body);
+    const formula = {
         type: locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
         refs: {},//map of references
         formulaDependencys: [],//array of associations (deps and refs)
@@ -19130,7 +19221,7 @@ FormulaService.prototype.initVariables = function(variables) {
 }
 module.exports = FormulaService.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FormulaService.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils":2,"_process":39,"assert":34,"buffer":37,"escodegen":36,"log6":36}],23:[function(require,module,exports){
+},{"../../ast-node-utils":2,"_process":38,"assert":33,"buffer":36,"escodegen":35,"log6":35}],23:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const log = require('log6')
 
@@ -19220,7 +19311,7 @@ fm.prototype.moveFunction = function(oldFormula, newFormula) {
 };
 module.exports = fm.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\FunctionMap.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37,"log6":36}],24:[function(require,module,exports){
+},{"_process":38,"buffer":36,"log6":35}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  This class should have less business logic,
@@ -19229,6 +19320,7 @@ module.exports = fm.prototype;
  */
 
 const SolutionFacade = require('./SolutionFacade');
+const PropertiesAssembler = require('./PropertiesAssembler');
 const ValueFacade = require('./ValueFacade');
 const AST = require('../../ast-node-utils').ast;
 const log = require('log6')
@@ -19245,7 +19337,7 @@ const YAxis = require('./YAxis')
 // --optional property (default='value')
 // --optional context Time/FormulaSet -Matrix (default=0)
 
-function JSWorkBook(context, XAxis, type) {
+function JSWorkBook(context, XAxis, interval, opts) {
     this.indexer = null;//preserved to store the indexer
     XAxis = XAxis || require('./XAxis')
     this.context = context;
@@ -19254,12 +19346,14 @@ function JSWorkBook(context, XAxis, type) {
     this.modelName = 'NEW';
     //tuple axis
     this.yaxis = YAxis;
+    this.y = YAxis[0].parent
     //time axis, we looking at bookyears at the moment
-    this.xaxis = XAxis[type || 'bkyr'].columns[0]
+    this.xaxis = XAxis[interval || 'bkyr'].columns[0]
+    if (opts) for (var key in opts) this[key] = opts[key]
 }
 
 JSWorkBook.prototype.setColumnOffset = function(delta) {
-    let newOffset = this.offset
+    var newOffset = this.offset
     if (delta == 'next') newOffset++
     else if (delta == 'previous') newOffset--
     newOffset = Math.min(this.xaxis.length - 6, Math.max(0, newOffset))
@@ -19373,7 +19467,7 @@ function validateImportedSolution() {
                                 mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
                             }
                         })
-                        log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
+                        if (log.DEBUG) log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
                             + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
                         )
                         formulaInfo.parsed = undefined;
@@ -19433,13 +19527,34 @@ JSWorkBook.prototype.getNode = function(name) {
 JSWorkBook.prototype.getSolutionNode = function(name) {
     return ValueFacade.fetchSolutionNode(name, 'value')
 };
+JSWorkBook.prototype.findNode = function(name) {
+    return ValueFacade.fetchSolutionNode(this.modelName + "_" + name, 'value')
+};
 JSWorkBook.prototype.fetchSolutionNode = ValueFacade.fetchSolutionNode
 
 JSWorkBook.prototype.resolveX = function(x) {
     return x ? this.xaxis[x + this.offset] : this.xaxis[this.offset];
 }
 JSWorkBook.prototype.resolveY = function(idx) {
+    if (idx == null) return this.y
     return resolveY(this, idx)
+}
+/**
+ * Gets/Creates a named tuple list.
+ * Ok so now we have to do this for nested tuples too.
+ * Lets make sure the NestedTuple exist with corresponding tupleIndexNames
+ */
+JSWorkBook.prototype.resolveYas = function(variableName, note) {
+    var yas = this.resolveY(undefined);
+    if (note) {
+        const indexes = note.slice(1, -1).split(',')
+        for (var i = 0; i < indexes.length; i++) {
+            const tempIndex = this.tupleIndexForName(this.modelName + '_' + variableName, indexes[i], yas, indexes.length - i)
+            if (tempIndex == -1) yas = this.addTuple(variableName, indexes[i], yas)
+            else yas = yas.deeper[tempIndex]
+        }
+    }
+    return yas;
 }
 
 function resolveY(wb, y) {
@@ -19448,20 +19563,20 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
-    return this.getSolutionPropertyValue(this.getSolutionName() + '_' + row, col, x, y);
+    return this.getSolutionPropertyValue(this.modelName + '_' + row, col, x, y);
 };
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
     var xas = this.resolveX(x);
-    var yas = resolveY(this, y)
+    var yas = this.resolveY(y)
     return ValueFacade.fetchSolutionPropertyValue(this.context, row, col, xas, yas)
 };
 
 JSWorkBook.prototype.set = function(row, value, col, x, y) {
-    return this.setSolutionPropertyValue(this.getSolutionName() + '_' + row, value, col, x, y);
+    return this.setSolutionPropertyValue(this.modelName + '_' + row, value, col, x, y);
 }
 JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) {
-    var xas = this.resolveX(x);
-    var yas = resolveY(this, y);
+    const xas = this.resolveX(x);
+    const yas = this.resolveY(y);
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.updateValues = function() {
@@ -19472,45 +19587,60 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
-JSWorkBook.prototype.maxTupleCountForRow = function(node) {
-    if (!node.tuple) {
-        return 0;
-    }
+JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
+    if (!node.tuple) return -1;
+    yas = this.resolveY(yas)
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     var allrefIdes = [];
-    if (tupleDefinition.ref) {
-        allrefIdes.push('' + tupleDefinition.ref)
-    }
-    for (var i = 0; i < tupleDefinition.nodes.length; i++) {
-        var tupleChild = tupleDefinition.nodes[i];
-        var items = this.getSolutionNode(node.solutionName + '_' + tupleChild.rowId).ref;
-        if (items) {
-            allrefIdes.push('' + items);
-        }
-    }
-    return TINSTANCECOUNT(allrefIdes, this.context.values);
+    PropertiesAssembler.visitProperty(tupleDefinition, function(child, depth) {
+        if (child.ref) allrefIdes.push(String(child.ref))
+    }, 0)
+    return TINSTANCECOUNT(allrefIdes, this.context.values, yas);
 }
-
-JSWorkBook.prototype.tupleIndexForName = function(node, name) {
-    var wb = this;
-    //if not tuple, index always 0
-    if (!node.tuple) {
-        return 0;
-    }
-    var tupleDefinition = node.tupleDefinition ? node : wb.getSolutionNode(node.tupleDefinitionName)
-    ValueFacade.visit(tupleDefinition, function(child, depth) {
-        if (child.tuple) {
-            maxTupleCount = Math.max(maxTupleCount, TINSTANCECOUNT(wb.context.values, child.ref));
+/**
+ * TODO: enforce unique name per nodeName/yas.
+ */
+JSWorkBook.prototype.insertTuple = function(nodeName, name, yas) {
+    const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
+    const tupleDefinition = node.tuple ? node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName) : node
+    //THIS IS quick-fix, it should never call insertTuple on a non-tuple
+    //if (!tupleDefinition) throw Error('Cannot add tuple of non-existing tuple' + nodeName)
+    yas = this.resolveY(yas)//this makes it complex, since parent is used for the 0-tuple.
+    const tupleCount = this.maxTupleCountForRow(tupleDefinition, yas)
+    const deeperYaxis = yas.deeper[tupleCount + 1];
+    this.set(tupleDefinition.rowId, name || ('value' + tupleCount), 'value', undefined, deeperYaxis)
+    return deeperYaxis;
+}
+JSWorkBook.prototype.addTuple = function(nodeName, name, yas) {
+    return this.insertTuple(this.modelName + '_' + nodeName, name, yas)
+}
+/**
+ * Creating a tuple-instance is done by placing a name in the TupleDefinition
+ * These can be found with this method later on
+ * (i) there is no support by duplicate names per Tuple
+ */
+JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas, delta) {
+    const node = ValueFacade.fetchSolutionNode(nodeName, 'value')
+    if (!node.tuple) return -1;
+    yas = this.resolveY(yas)
+    var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+    if (delta >= 2) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
+    if (delta >= 3) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
+    const values = this.context.values[String(tupleDefinition.ref)];
+    for (var key in values) {
+        if (name == values[key]) {
+            if (log.DEBUG) log.debug('Found ' + key + '' + values[key])
+            return REVERSEYAXIS(parseInt(key), yas);
         }
-    });
-    return maxTupleCount;
+    }
+    return -1;
 }
 /**
  * Add tuple- iterations while iterating properties
  */
 JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
-    var yax = resolveY(this, y)
-    var wb = this;
+    const yax = this.resolveY(y)
+    const wb = this;
     ValueFacade.visit(startProperty, function(node, treeDepth, natural_orderid) {
         //for max tuplecount in current node loop visitor node
         var maxTupleCountForTupleDefinition = wb.maxTupleCountForRow(node);
@@ -19538,41 +19668,52 @@ JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
 *  1_0_TP_B
 *  1_1_TP_A
 *  1_1_TP_B
+*
+*  Because this method is called in relative situations, within treedepths and tuple nesting, these two arguments are required
+*
  */
 JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth) {
     const wb = this;
-    ValueFacade.visit(node, function(treeNode, innerTreeDepth) {
+    const itarfunction = function(treeNode, innerTreeDepth) {
+        //instance is only for the first call
+        //we must be recursive since Tuple in tuple
         if (treeNode.tupleDefinition) {
-            if (!type) {
-                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode);
+            if (type !== treeNode.rowId) {
+                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode, y);
                 for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
-                    wb.walkProperties(treeNode, visitor, y.deeper[t], 'instance', innerTreeDepth)
+                    wb.walkProperties(treeNode, visitor, y.deeper[t], treeNode.rowId, innerTreeDepth)
                 }
-                //tuple_add_call
-                visitor(treeNode, 'new', innerTreeDepth, y)
-            } else if (type == 'instance') {
-                visitor(treeNode, y, innerTreeDepth, y)
+                visitor(treeNode, 'new', innerTreeDepth, y)    //tuple_add call
+                itarfunction.stop = true;
+            } else {
+                visitor(treeNode, 'instance', innerTreeDepth, y)
             }
         } else {
-            if (type == 'instance' || !treeNode.tuple)
-                visitor(treeNode, y, innerTreeDepth, y)
+            //because of this check, the nested tuple-property will not be displayed.
+            visitor(treeNode, 'instance_no_td', innerTreeDepth, y)
         }
-    }, treeDepth);
+    };
+    ValueFacade.visit(node, itarfunction, treeDepth);
 }
 JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
 JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
     SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none');
-    var orCreateProperty = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
-    orCreateProperty.tuple = tuple;
-    orCreateProperty.frequency = frequency;
+    const node = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
+    if (tuple) {
+        node.tuple = tuple;
+        node.tupleDefinition = true;
+        node.nestedTupleDepth = 0;
+        node.tupleDefinitionName = rowId;
+    }
+    node.frequency = frequency;
     this.updateValues();
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
-    var formulaIds = [];
+    const formulaIds = [];
     const formulaIdMap = {}
     for (var i = 0; i < this.context.audit.length; i++) {
-        var audit = this.context.audit[i];
+        const audit = this.context.audit[i];
         if (audit.saveToken == this.context.saveToken && !formulaIdMap[audit.formulaId]) {
             formulaIdMap[audit.formulaId] = true;
             formulaIds.push(audit.formulaId)
@@ -19585,7 +19726,7 @@ JSWorkBook.prototype.getAllValues = function() {
 };
 module.exports = JSWorkBook;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\JSWorkBook.js","/lme-core\\src",undefined)
-},{"../../ast-node-utils":2,"./SolutionFacade":28,"./ValueFacade":31,"./XAxis":32,"./YAxis":33,"_process":39,"buffer":37,"log6":36}],25:[function(require,module,exports){
+},{"../../ast-node-utils":2,"./PropertiesAssembler":26,"./SolutionFacade":28,"./ValueFacade":30,"./XAxis":31,"./YAxis":32,"_process":38,"buffer":36,"log6":35}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*
  register/resolve echange modules e.g. ffl,screendefinition,presentation
@@ -19615,7 +19756,7 @@ ParserService.prototype.findParser = function (parserName) {
 }
 module.exports = ParserService.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ParserService.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],26:[function(require,module,exports){
+},{"_process":38,"buffer":36}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 function PropertiesAssembler() {
 }
@@ -19775,13 +19916,39 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  */
 PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
     var startingNode = node || getRootNode('NEW');
-    if (startingNode !== undefined) {
-        visitInternal(startingNode, func, startDepth || 0)
-    }
+    if (startingNode) visitInternal(startingNode, func, startDepth || 0)
+}
+PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth) {
+    visitInternal(getRootNode(modelName), func, startDepth || 0)
+}
+const hashcars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+PropertiesAssembler.prototype.indexProperties = function(modelName) {
+    var counter = 0;
+    visitInternal(getRootNode(modelName), function(node, depth) {
+        counter++;
+        node.id = pad(counter, 5);
+        if (node.tupleProperty) {
+            const tupleDef = PropertiesModel[node.solutionName + "_" + node.tupleDefinitionName + "_value"]
+            if (tupleDef.tupleProperty) {
+                const nestedTupleDef = PropertiesModel[node.solutionName + "_" + tupleDef.tupleDefinitionName + "_value"]
+                node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+            } else {
+                node.hash = [tupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+            }
+        }
+        else node.hash = [node.id, '000', node.id, '000', node.id, '000'];
+    }, 0)
+}
+
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
 function visitInternal(node, func, depth) {
     func(node, depth);
+    if (func.stop) return delete func.stop;
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             var childNode = PropertiesModel[node.nodes[i].name];
@@ -19795,8 +19962,7 @@ function visitChildren(node, func, depth) {
     if (node.nodes) {
         for (var i = 0; i < node.nodes.length; i++) {
             func(node, depth);
-            var childNode = PropertiesModel[node.nodes[i].name];
-            visitChildren(childNode, func, depth + 1);
+            visitChildren(PropertiesModel[node.nodes[i].name], func, depth + 1);
         }
     }
 }
@@ -19806,7 +19972,7 @@ PropertiesAssembler.prototype.getRootProperty = getRootNode;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 module.exports = PropertiesAssembler.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\PropertiesAssembler.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],27:[function(require,module,exports){
+},{"_process":38,"buffer":36}],27:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Parsers/Exchange modules create Solution objects filled with generic metadata (formula's,properties concerning a variable)
@@ -19940,7 +20106,7 @@ Solution.prototype.size = function() {
 }
 module.exports = Solution;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\Solution.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],28:[function(require,module,exports){
+},{"_process":38,"buffer":36}],28:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Solution encapsulation
@@ -20101,11 +20267,10 @@ SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex
 FormulaBootstrap.initStateBootstrap(SolutionFacade.prototype);
 module.exports = SolutionFacade.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\SolutionFacade.js","/lme-core\\src",undefined)
-},{"./FormulaBootstrap":21,"./FormulaService":22,"./FunctionMap":23,"./ParserService":25,"./PropertiesAssembler":26,"./Solution":27,"_process":39,"buffer":37,"esprima":36,"log6":36}],29:[function(require,module,exports){
+},{"./FormulaBootstrap":21,"./FormulaService":22,"./FunctionMap":23,"./ParserService":25,"./PropertiesAssembler":26,"./Solution":27,"_process":38,"buffer":36,"esprima":35,"log6":35}],29:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-var log = require('log6');
-
-var headers = {
+const log = require('log6');
+const headers = {
     title: {
         title: 'title'
     },
@@ -20464,27 +20629,9 @@ function TimeAxis(data) {
     return viewmodes;
 }
 
-
 module.exports = TimeAxis;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\TimeAxis.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37,"log6":36}],30:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-function TupleIndexConverter() {
-}
-//TODO: move to TupleDefinition to support multiple tuples and tuple in tuple
-TupleIndexConverter.prototype.getIndexNumber = function (context, tupleindex, variableNameArg) {
-    // If tuple index list does not exist, make one
-    var variableName = variableNameArg || 'NOCATEGORY'
-    context.tupleIndexList = context.tupleIndexList || {}
-    //create entry per variable, *if not exists
-    var tuples = context.tupleIndexList[variableName] = context.tupleIndexList[variableName] || {}
-    // Check if tuple index string exists, else create and return it
-    return parseInt(tuples[tupleindex] || (tuples[tupleindex] = '' + Object.keys(tuples).length));
-};
-module.exports = TupleIndexConverter.prototype;
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\TupleIndexConverter.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],31:[function(require,module,exports){
+},{"_process":38,"buffer":36,"log6":35}],30:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
  * Bridge between FormulaService,PropertiesAssembler and FunctionMap
@@ -20548,7 +20695,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
         hash: xas.hash + yas.hash + 0,
         formulaId: localFormula.id || localFormula.index
     })
-    let userValue = value;
+    var userValue = value;
     var variable = fetchSolutionNode(row, (col || 'value'));
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
         if (userValue != null) {
@@ -20709,9 +20856,12 @@ ValueFacade.visitChildren = PropertiesAssembler.visitChildren;
 ValueFacade.findAllInSolution = PropertiesAssembler.findAllInSolution;
 module.exports = ValueFacade;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\ValueFacade.js","/lme-core\\src",undefined)
-},{"./FormulaService":22,"./FunctionMap":23,"./PropertiesAssembler":26,"_process":39,"buffer":37,"log6":36}],32:[function(require,module,exports){
+},{"./FormulaService":22,"./FunctionMap":23,"./PropertiesAssembler":26,"_process":38,"buffer":36,"log6":35}],31:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
-/* 
+/*
+ * Absolutely remove title from this Dimension
+ * Since time has nothing to do with formula formula-sets [trend,notrend]
+ * We could index all properties with 8bits...  since there is never a need of 128 different properties
  *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
  *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
  *
@@ -21112,166 +21262,445 @@ CalculationDocument.prototype = calculateCalculationDocument(importData);
 // currently we have max7 year 10timelines
 module.exports = CalculationDocument.prototype;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\XAxis.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37,"log6":36}],33:[function(require,module,exports){
+},{"_process":38,"buffer":36,"log6":35}],32:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /**
- * Tuple concept
- * TODO: make tests for nested tuples!
+ * TUPLES
+ *
+ * In mathematics a tuple is a finite ordered list (sequence) of elements.
+ * An n-tuple is a sequence (or ordered list) of n elements, where n is a non-negative integer.
+ * There is only one 0-tuple, an empty sequence.
+ * An n-tuple is defined inductively using the construction of an ordered pair.
+ * Mathematicians usually write tuples by listing the elements within parentheses and separated by commas; for example,(2, 7, 4, 1, 7) denotes a 5-tuple.
+ * Sometimes other symbols are used to surround the elements, such as square brackets "[ ]" or angle brackets "< >". Braces "{ }" are only used in defining arrays in some programming languages such as Java and Visual Basic,
+ * but not in mathematical expressions, as they are the standard notation for sets. The term tuplecan often occur when discussing other mathematical objects, such as vectors.
+ * In computer science, tuples come in many forms. In dynamically typed languages, such as Lisp,
+ * lists are commonly used as tuples.[citation needed] Most typed functional programming languages implement tuples directly as product types, tightly associated with algebraic data types,
+ * pattern matching, and destructuring assignment.[2] Many programming languages offer an alternative to tuples, known as record types, featuring unordered elements accessed by label.
+ * A few programming languages combine ordered tuple product types and unordered record types into a single construct, as in C structs and Haskell records.
+ * Relational databases may formally identify their rows (records) as tuples.
+ * Tuples also occur in relational algebra; when programming the semantic web with the Resource Description Framework (RDF); in linguistics; and in philosophy.
+ *
+ * Bit shifting is only possible for 32bit 2complement int in JavaScript
+ * Other trailing indexes are used for Time dimension.
+ *   10bit 512cols /20 = aprox 25bookyear
+ *
+ * We always start on level 0.0.0.0.* meaning we are always living in a TupleContext. The first TupleInstance of the First Tuple Definition node
+ *  Tuple instances and Definitions have ONLY! td/tp relations towards the existing Tree-structure based FFL, not regular tree-nodes
+ *  In abstract creating a TupleInstance of the First Tuple Definition within the model uses the same stateless object yet another TupleDefinition should use.
+ *  So don't confuse these concepts with existing parent-child relations in FFL nodes.
  */
 
-/*var first = {
-    prefix: '',
-    index: 0,
-    hash: 0
-};
-var all = [first];
-first.deeper = first
-first.base = first
-//32768 is the first index that can be used for tuples
-//LGD will use 128*128*128 three level tuples consuming load of bits.
-/!**
- * 8*4= 32
- * 128*128*128*128
- * We allow for the first run 8*8*8 tuples. 4+4+4 bits = 12 bits + 10 used by columns
- * So for every tuple depth we reserve 4bits
- * We have to make a Object with 4 levels of depth and 8elements per level
- * 8*8*8
- 0* 0
- 1*  1
- 2*   2
- 3*    4
- 4*     8
- 5*      16
- 6*        32
- 7*          64
- 8*            128
- *!/
-for (var i = 1; i < 40; i++) {
-    var newYas = {
-        index: i,
-        hash: 32768 * i,
-        depth: 0,
-        previous: all[i - 1],
-        base: first
-    };
-    newYas.deeper = newYas//temp self-reference since not used
-    all[i - 1].next = newYas;
-    all.push(newYas)
-}*/
+/**
+ * Gedachten bij het implementeren van tuples:
+ * Van tuple naar tuple *binnen eigen tupleDefinition* word de TupleLocatie gebruikt om berekeningen te doen
+ * Van Niet tuple naar tuple worden alle values van alle tupleinstanties terug gegeven
+ * van tuple naar niet tuple word de tuple naar 0 gezet (mits anders aangeven) (FirstTuple,LastTuple,MaxTuple,FirstTupleIn....)
+ * Formules worden geparsed, daarin is de target(referenceFormula) een propertyReferentie.
+ * Dit betekend dat er vantui deze manier gedacht moet worden met het parsen
+ * De TargetProperty kan een tuple/niet tuple zijn, en daar moet rekening mee gehouden worden.
+ * De YAxis word meegeven van de formule, als er naar een tuple variable referenced word, kan de geparsde formula vanuit een tuple
+ * een andere uitwerking hebben dan vanuit een niet-tuple
+ *
+ * tuple    A: 1
+ * tuple    X: A+1 -> a(x,y,z) + 1 = 2
+ * variable L: A+1 -> a(x,y,z) + 1 = [1] + 1
+ *
+ * Een wrapper om de uitvragende Property?
+ * TSUM herstellen en de logica verplaatsen naar de uitvragende formule
+ * TSUM(tupleNaam) => TSUM(tupleDefinitionCount,propertyNaam,x,y,z)
+ *
+ * Bij het inlezen van een FFL model, tuple markeren als TupleDefinition
+ * Alle kinderen daaronder totaan nieuwe tuple markeren als TupleProperty
+ *
+ * Bij het uitvragen van een TupleDefinition itereren over alle instanties
+ */
+const assert = require('assert')
+const log = require('log6')
+const INSTANCES_PER_TUPLE = 32;
+const BITS_PER_TUPLE = 6;
+const FIRST__TUPLE_START_BIT = 10;
+const SECOND_TUPLE_START_BIT = FIRST__TUPLE_START_BIT + (1 * BITS_PER_TUPLE);
+const THIRD__TUPLE_START_BIT = FIRST__TUPLE_START_BIT + (2 * BITS_PER_TUPLE);
 
-function TupleProto() {
-    const all = {
-        type: 'def',
-        hash: 0,
-        index: 0,
-        depth: 0,
-        deeper: []
-    }
-    all.base = all;
-    for (var i = 0; i < 40; i++) {
-        all.deeper[i] = {
-            base: all,
-            depth: 0,
-            type: 'instance',
-            index: i,
-            hash: (32768 * i),
-            deeper: [],
-            parent: all
-        }
-        if (i > 0) all.deeper[i].previous = all.deeper[i - 1]
-        if (i > 0) all.deeper[i - 1].next = all.deeper[i]
+const FIRST__LEVEL_TUPLE = 1 << FIRST__TUPLE_START_BIT;
+const SECOND_LEVEL_TUPLE = 1 << SECOND_TUPLE_START_BIT;
+const THIRD__LEVEL_TUPLE = 1 << THIRD__TUPLE_START_BIT;
 
-        for (var j = 0; j < 8; j++) {
-            all.deeper[i].deeper[j] = {
-                base: all,
-                index: j,
-                depth: 1,
-                hash: (i * 1) + (j * 64),
-                deeper: [],
-                parent: all.deeper[i]
-            }
-            if (j > 0) all.deeper[i].deeper[j].previous = all.deeper[i].deeper[j - 1]
-            if (j > 0) all.deeper[i].deeper[j - 1].next = all.deeper[i].deeper[j]
+/*
+ * These bitmasks are used to extract the bits for a given n-Tuple (0011***)
+ * e.g.
+ *  0011000 & 001001 = 001000
+ * after extracted 001000 bitshift result with corresponding tuple bit offset 001000 >> 3 = (BIN)001 = (HEX) 1
+ *
+ * so: (0011000 & 011001) >> 3 = (HEX)3
+ */
+const FIRST__LEVEL_BITMASK = parseInt("0000000000001111110000000000", 2);    //000129024
+assert(parseInt("0000000000001111110000000000", 2) == 64512)
+const SECOND_LEVEL_BITMASK = parseInt("0000001111110000000000000000", 2);    //008257536
+assert(parseInt("0000001111110000000000000000", 2) == 4128768)
+const THIRD__LEVEL_BITMASK = parseInt("1111110000000000000000000000", 2);    //528482304
+assert(parseInt("1111110000000000000000000000", 2) == 264241152)
+const FOURTH_LEVEL_BITMASK = parseInt("1111110000000000000000000000000000", 2);    //528482304
+//assert(parseInt("1111110000000000000000000000000000", 2) == 264241152)
 
-            for (var k = 0; k < 8; k++) {
-                all.deeper[i].deeper[j].deeper[k] = {
-                    base: all,
-                    depth: 2,
-                    index: k,
-                    hash: (i * 1) + (j * 64) + (k * (64 * 8)),
-                    parent: all.deeper[i].deeper[j]
-                }
-                if (k > 0) all.deeper[i].deeper[j].deeper[k].previous = all.deeper[i].deeper[j].deeper[k - 1]
-                if (k > 0) all.deeper[i].deeper[j].deeper[k - 1].next = all.deeper[i].deeper[j].deeper[k]
-            }
+const indexes = []
+for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
+    indexes[first] = []
+    for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
+        indexes[first][second] = []
+        for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
+            indexes[first][second][third] = (FIRST__LEVEL_TUPLE * first) + (SECOND_LEVEL_TUPLE * second) + (THIRD__LEVEL_TUPLE * third)
         }
     }
-    this.all = all;
+}
+/*
+ * Check if values are valid
+ */
+for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
+    for (var j = 0; j < INSTANCES_PER_TUPLE; j++) {
+        for (var k = 0; k < INSTANCES_PER_TUPLE; k++) {
+            const index = indexes[i][j][k];
+            // log.info(((index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT) + ',' + ((index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT) + ',' + (index >> THIRD__TUPLE_START_BIT))
+            assert.equal((index >> SECOND_TUPLE_START_BIT >> BITS_PER_TUPLE), (index >> THIRD__TUPLE_START_BIT))
+            assert.equal((index >> SECOND_TUPLE_START_BIT >> BITS_PER_TUPLE), index >> FIRST__TUPLE_START_BIT >> BITS_PER_TUPLE >> BITS_PER_TUPLE)
+        }
+    }
+}
+//Nu de check voor corresponderende context. (matching bits.)
+/*
+ * bits that are used to check if a value is in there.
+ * These are the bit masks used by the tuples 11-17,17-23,23-29 bits from the number
+ *
+ * So:(index)   00001000001101 belongs to
+ *               0  1    *****
+ *   (bitmask)  00001000000000
+ *
+ * So:(index)   01001000032321 does not belong to
+ *               1  1    *****
+ *   (bitmask)  00001000000000
+ *
+ * om te achterhalen of een index op interessant is voor een bepaalde tuple
+ * voor 0,0,1 is matching 1,1,0 nodig. omdat  0,0,0 niet werkt met de & operator, dus inverse van zichzelf
+ */
+const matchings = []
+const MAX_INVERSE_INT32 = ((1 << 20) - 1) << FIRST__TUPLE_START_BIT;//2147481600 , 111111111111111111100000000000
+assert(parseInt("111111111111111111110000000000", 2) == ((1 << 20) - 1) << FIRST__TUPLE_START_BIT)
+
+for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
+    matchings[first] = []
+    for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
+        matchings[first][second] = []
+        for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
+            matchings[first][second][third] = MAX_INVERSE_INT32 - indexes[first][second][third]
+        }
+    }
+}
+/*
+ * Test if the inverse masks result in 0.
+ *0010 : 2
+ *1101 :13
+ *maar zou 121311xxx,
+*/
+for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
+    for (var j = 0; j < INSTANCES_PER_TUPLE; j++) {
+        for (var k = 0; k < INSTANCES_PER_TUPLE; k++) {
+            const index = indexes[i][j][k];
+            const m = matchings[i][j][k];
+            assert.equal((index + Math.round(Math.random() * 100)) & MAX_INVERSE_INT32, index, 'index: ' + index.toString(2) + ' does not match ' + m.toString(2) + '::' + [i, j, k].toString())
+        }
+    }
 }
 
-var all = new TupleProto().all.deeper
-//return all values in given tuple
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+const start = {
+    bitmask: FIRST__LEVEL_BITMASK,
+    start_bit: FIRST__TUPLE_START_BIT,
+    hash: 0,
+    bin: (matchings[0][0][0]).toString(2),
+    f: parseInt('11111111111110000000000000000', 2),
+    f_bin: '111111111111110000000000000000',
+    m: parseInt('0000000000000000000000000000000000', 2),
+    m_bin: '0000000000000000000000000000000000',
+    index: 0,
+    uihash: pad(0, 3),
+    display: '0000',
+    depth: 0,
+    deeper: []
+}
+start.base = start;
+//p is the Jump from Tuple to Tuple
+start.p = [start, start, start];
+
+for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
+    start.deeper[first] = {
+        bitmask: SECOND_LEVEL_BITMASK,
+        start_bit: SECOND_TUPLE_START_BIT,
+        f: parseInt('11111110000001111110000000000', 2),
+        m: parseInt('0000000000000000000000000000000000', 2) + parseInt('00000000000000000000000010000000000', 2) * first,
+        bin: (matchings[first][0][0]).toString(2).substring(0, (matchings[first][0][0]).toString(2).length - 10),
+        display: first + '000',
+        base: start,
+        depth: 1,
+        index: first,
+        uihash: pad(first, 3),
+        hash: (FIRST__LEVEL_TUPLE * first),
+        deeper: [],
+        parent: start
+    }
+    //p is the Jump from Tuple to Tuple
+    start.deeper[first].p = [start, start.deeper[first], start.deeper[first], start.deeper[first]];
+    if (first > 0) start.deeper[first].previous = start.deeper[first - 1]
+    if (first > 0) start.deeper[first - 1].next = start.deeper[first]
+
+    for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
+        start.deeper[first].deeper[second] = {
+            base: start,
+            f: (parseInt('0000001111111111110000000000', 2)),
+            m: (parseInt('0000000000010000000000000000', 2) * second) + (parseInt('0000000000000000000010000000000', 2) * first),
+            bin: (matchings[first][second][0]).toString(2),
+            bitmask: THIRD__LEVEL_BITMASK,
+            display: first + '' + second + '00',
+            start_bit: THIRD__TUPLE_START_BIT,
+            index: second,
+            uihash: pad(second, 3),
+            depth: 2,
+            hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second),
+            deeper: [],
+            parent: start.deeper[first]
+        }
+        //p is the Jump from Tuple to Tuple
+        start.deeper[first].deeper[second].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second]];
+        if (second > 0) start.deeper[first].deeper[second].previous = start.deeper[first].deeper[second - 1]
+        if (second > 0) start.deeper[first].deeper[second - 1].next = start.deeper[first].deeper[second]
+
+        //this level is only used to set values, not to resolve them,
+        for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
+            start.deeper[first].deeper[second].deeper[third] = {
+                base: start,
+                /* f: (parseInt('0001111111111111111110000000000', 2)),*/
+                /*  m: (parseInt('00000000000000000010000000000000000', 2) * second) + (parseInt('00000000000000000000000010000000000', 2) * first),
+               bin: (matchings[first][second][third]).toString(2),*/
+                bitmask: FOURTH_LEVEL_BITMASK,
+                display: first + '' + second + '' + third + '0',
+                start_bit: THIRD__TUPLE_START_BIT,
+                index: third,
+                depth: 3,
+                uihash: pad(third, 3),
+                hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second) + (THIRD__LEVEL_TUPLE * third),
+                deeper: [],
+                parent: start.deeper[first].deeper[second]
+            }
+            //p is the Jump from Tuple to Tuple
+            start.deeper[first].deeper[second].deeper[third].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second].deeper[third]];
+
+            if (third > 0) start.deeper[first].deeper[second].deeper[third].previous = start.deeper[first].deeper[second].deeper[third - 1]
+            if (third > 0) start.deeper[first].deeper[second].deeper[third - 1].next = start.deeper[first].deeper[second].deeper[third]
+        }
+    }
+}
+
+/**
+ *
+ * return start values in given tuple
+ * It would be nice to use the null-tuple(0instance) T(0,{*,}) as base
+ * Since else we could only query 0,..* in this method.
+ */
 TVALUES = function(fIds, func, fId, x, y, z, v) {
     var current = y, returnValue = [];
-    var tinstancecount = TINSTANCECOUNT(fIds, v);
-    while (current && tinstancecount >= current.index) {
-        var tempValue = func(fId, x, current, z, v);
-        returnValue.push(tempValue);
-        current = current.next;
+    var tinstancecount = TINSTANCECOUNT(fIds, v, y);
+    for (var i = 0; i <= tinstancecount; i++) {
+        returnValue.push(func(fId, x, y.deeper[i], z, v));
     }
+    /*   while (current && tinstancecount >= current.index) {
+           var tempValue = func(fId, x, current, z, v);
+           returnValue.push(tempValue);
+           current = current.next;
+       }*/
     return returnValue;
 }
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
-    return TINSTANCECOUNT(fIds, v);
+    return TINSTANCECOUNT(fIds, v, y);
+}
+REVERSEYAXIS = function(index, y) {
+    return (y.bitmask & index) >> y.start_bit
 }
 
-//return tuplecount, get max tuple index,
-TINSTANCECOUNT = function(fIds, v) {
+function indexToArray(index, y) {
+    const repre = [(index & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT];
+    const match = [(y.m & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (y.m & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (y.m & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT];
+    log.info('input:' + repre + ' filter with : ' + (y.f >> 10).toString(2) + ' {' + match + "(" + y.depth + ',' + y.index + ")}" + ' gives:' + ((y.bitmask & index) >> y.start_bit))
+}
+
+//return tuplecount, get max tuple index given a (y) context.
+//Conceptually, if a value exists in a given range. There is an Tuple-Instance
+//Nested tuples start hash 0,0,0  So there is a Tuple instance on start three dimensions when a value is entered in the deepest level.
+TINSTANCECOUNT = function(fIds, v, y) {
     var max = -1;
+    //consider transforming into a bin-tree
+    //Since the dimensions are Infinite, indexing becomes complex.
     for (var fid = 0; fid < fIds.length; fid++) {
         var fId = fIds[fid];
+        const tempkeys = []
         var keys = Object.keys(v[fId]);
         //quick-fix remove NULL values..
+        //when looking for the instance-count with Y provided we also have to filter keys that are in other contexts.
+        //TODO: step1 ake key filter, with the bit-mask on y. context. rest keys are not interesting.
+        //TODO: start make unit testIndex, testing this function only.
+        //The Tuple-Dimension is 0based, All values are placed within the first Tulpe (or non-exsistant)
+        //Meaning that Any value in the Tuple Instance implies a Tuple-Instance is created.
+        //index: 0000001 makes TupleCount=0
+        //no index: makes TupleCount=-1
+        //index: 0100001: makes TupleCount=1
+        //this y.root is too cheap. It is possible to have a nested tuple instance abc2 but not have abc0
+        //So 0 is allowed when a Key has this prefix.
+        //the .root affix is strange there just should be a value on the corresponding tuple range to confirm its existence
+
         for (var i = 0; i < keys.length; i++) {
             var obj = keys[i];
-            if (v[fId][obj] == null) {
-                keys.splice(i, 1);
+            const userKey = parseInt(obj);
+            // the found value should have a meaning, should have a value in the tuple-range and should match parent mask
+            //Why should it have a value in the Tuple-Range?
+            //Is this the same as living in the Parent-Context..
+            /*
+             *   00000009
+             *   00001101
+             *   Oke inverse bitmask van me parent.
+             *   ~0000 maakt 1111 die & ik met me eigen hash. Als die niet null opleverd. Dan hoort hij er niet thuis
+             *
+             */
+            //this should match any tuple bits and validate it with the hash,
+            //most important mistake is to math with the HASH, since it should match parent.hash
+            //011        001
+            //010 match  010 no match
+            //first level just matching everything that does not have 2-tuple or 3-tuple keys
+            //second level match everything on 1-tuple index. But should not have anything on the 3-tuple
+            if ((v[fId][obj] != null) && (userKey & y.f) == y.m) {
+                if (log.DEBUG) indexToArray(userKey, y)
+                tempkeys.push(userKey)
             }
         }
-        if (keys.length == 0) {
+
+        if (tempkeys.length == 0) {
             continue;
         }
-        else if (keys.length == 1) {
-            max = Math.max(max, (2064384 & parseInt(keys[0])) >> 15);
+        else if (tempkeys.length == 1) {
+            max = Math.max(max, (y.bitmask & tempkeys[0]) >> y.start_bit);
         } else {
-            max = Math.max(max, keys.reduce(function(a1, b1) {
-                //filter bits 16-24 find highest tuple count.
-                //mask should be provided
-                //look for all values and obtain tuple instance value
-                return Math.max((2064384 & parseInt(a1)) >> 15, (2064384 & parseInt(b1)) >> 15);
+            max = Math.max(max, tempkeys.reduce(function(a1, b1) {
+                //filter bits  y.start_bit find highest tuple count identified with y.bitmask
+                //look for start values and obtain tuple instance value
+                //we don't have to y.bitmask? its just >> y.start_bit
+                return Math.max((y.bitmask & a1) >> y.start_bit, (y.bitmask & b1) >> y.start_bit);
             }))
         }
     }
     return max;
 }
 /*
- Does only look for document values
- * so only look for mask where first 15bits are 0
- * Get all 0*values for example used for tupleInstanceIdentiefiers
+ * Conceptually checks:
+ * From here we will build the concept
+ * 1-(2-tuple)
+ * 2-(1-tuple)
+ * 3-(0-tuple)
+ * 4-(column10)
+ * 5-(column01)
+ * [1][2][3][4][5]
+ *
+ * The filter means the ** wildcard
+ * The match means the tuple context
  */
-TINSTANCEBYNAME = function(v, fId, y, name) {
-    var count = TINSTANCECOUNT(v, fId);
-    for (var i = 0; i < count; i++) {
-        var obj = v[fId][y];
-
-    }
+//er is geen wens om 1*1 te testen, er word nooit gevraagd van hoeveeel tuples bijvoorbeeld 3tuples hebben.
+const combine = [{
+    reg: '000**', match: '00000', filter: '11100',
+    fit: ['00010', '00011', '00001', '00000'],
+    nofit: ['00110', '01110', '11110', '10110', '10010']
+}, {
+    reg: '001**', match: '00100', filter: '11100',
+    fit: ['00110', '00111'],
+    nofit: ['00010', '01010', '11010', '11110']
+}, {
+    reg: '011**', match: '01100', filter: '11100',
+    fit: ['01100', '01101'], nofit: ['10100', '11100', '00100', '11000']
+}, {
+    reg: '010**', match: '01000', filter: '11100',
+    fit: ['01010'],
+    nofit: ['00010', '00000']
+}, {
+    reg: '11***', match: '11000', filter: '11000',
+    fit: ['11000', '11100'],
+    nofit: ['01100', '00000', '01100']
+}, {//the first check, how many instances on root?
+    reg: '00***', match: '00000', filter: '11000',
+    fit: ['00000', '00001'],
+    nofit: ['01100', '10000', '01100']
+}, {
+    reg: '01***', match: '01000', filter: '11000',
+    fit: ['01000'], nofit: ['00000']
+}, {
+    reg: '1****', match: '10000', filter: '10000',
+    fit: ['10101'], nofit: ['01000']
+}]
+for (var testIndex = 0; testIndex < combine.length; testIndex++) {
+    const test = combine[testIndex];
+    for (var i = 0; i < test.fit.length; i++) assert(((parseInt(test.fit[i], 2) & parseInt(test.filter, 2)) == parseInt(test.match, 2)))
+    for (var i = 0; i < test.nofit.length; i++) assert(((parseInt(test.nofit[i], 2) & parseInt(test.filter, 2)) != parseInt(test.match, 2)))
 }
+/*
+ * oke hoe maak ik nou zo'n object?
+ * de sterretjes betekenen op beide filter als match een 0
+ * de 0/1 betekend in match een kopie
+ * de 0/1 betekend in filter een 1
+ * De reg betekend T(0,0,0)
+ *
+ * De vragen die worden gesteld zijn: wat is YCount, gegeven index[] en Y
+ * dus: Y heeft
+ * t(R) = f(t*<R?1:0)
+ * dus uit [t1,t2,t3] = filter: t1(R)+t2(R)+t3(R)+,00  e.g. hoeveel t2 in [1,0,*]? 110,00
+ * dus uit [t1,t2,t3] =  match: t1t2t3+,00             e.g.               [1,0,*]? 100,00
+ * uit gegeven [*,*,*] moet ik die twee dingen halen.
+ *
+ * Dus als ik wil weten hoeveel Y in [a,b,c]
+ * Dan '1'.repeat(bits), voor 0,0,0 wil ik  111 filter en match 000, maar die bestaat dus niet
+ * Dan '1'.repeat(bits), voor 0,1,0 wil ik  110 filter en match 110
+ *
+ * filter: 111111,111111,111111,0000000000 voor 0,0,0
+ *  match: 000000,000000,000000,0000000000 voor 0,0,0 (word niet gebruikt, impliceert 0,0,0,*)
+ * filter: 111111,111111,111111,0000000000 voor 0,0,1
+ *  match: 000000,111111,000001,0000000000 voor 0,0,1 (word niet gebruikt, impliceert 0,0,0,*)
+ * filter: 111111,111111,000000,0000000000 voor 0,0,*
+ *  match: 000000,000000,000000,0000000000 voor 0,0,*
+ * filter: 111111,000000,111111,0000000000 voor 0,*,1
+ *  match: 000000,000000,000001,0000000000 voor 0,*,1
+ *
+ *  Filter geeft alleen aan in welke sector de max-waarde gezocht word. dat kan slot1,slot2,of slot3 zijn
+ *  De Match geeft aan in welke context de vraag moet passen.
+ *  011 & f(0,*,1) = m(0,1,1)
+ *  001 & f(0,*,1) = m(0,1,1)
+ *
+ *  filter kan op het moment alleen *,*,* of *,0,* of 0,*,* zijn.
+ *
+ *  filter op level 0 = **. = 110
+ *  filter op level 1 = *.* = 101
+ *  filter op level 2 = .** = 011
+ *
+ *  Dus dat gaan we toevoegen aan het geheel
+ */
+
 //columns we need aprox 512 10bit
-//17bit for tuples, 8*8*8*8 (16bit)
-//when entering tuple in tuple y.children should be called.
-module.exports = all;
+//53 total bits to use, 43bit for tuples, 8*8*8*8 (32bit) 8bit represent 128 instances. 4dimensions 128 instances. takes 32 bit
+/*
+ * It can grow into 5dimensions having 128instances each using 40bit, leaving 10bits for columns. We have to figure out operations without binair operators
+ * A binair operator in javascript works until 32bits (4*8) So we have to calculate the index in a different way when exceeding these limits.
+*/
+module.exports = start.deeper;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\src\\YAxis.js","/lme-core\\src",undefined)
-},{"_process":39,"buffer":37}],34:[function(require,module,exports){
+},{"_process":38,"assert":33,"buffer":36,"log6":35}],33:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict';
 
@@ -21765,7 +22194,7 @@ var objectKeys = Object.keys || function (obj) {
 };
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\assert\\assert.js","/lme-model-api\\node_modules\\assert",undefined)
-},{"_process":39,"buffer":37,"util/":42}],35:[function(require,module,exports){
+},{"_process":38,"buffer":36,"util/":41}],34:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict'
 
@@ -21883,11 +22312,11 @@ function fromByteArray (uint8) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\base64-js\\index.js","/lme-model-api\\node_modules\\base64-js",undefined)
-},{"_process":39,"buffer":37}],36:[function(require,module,exports){
+},{"_process":38,"buffer":36}],35:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\browserify\\lib\\_empty.js","/lme-model-api\\node_modules\\browserify\\lib",undefined)
-},{"_process":39,"buffer":37}],37:[function(require,module,exports){
+},{"_process":38,"buffer":36}],36:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 /*!
  * The buffer module from node.js, for the browser.
@@ -23605,7 +24034,7 @@ function numberIsNaN (obj) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\buffer\\index.js","/lme-model-api\\node_modules\\buffer",undefined)
-},{"_process":39,"base64-js":35,"buffer":37,"ieee754":38}],38:[function(require,module,exports){
+},{"_process":38,"base64-js":34,"buffer":36,"ieee754":37}],37:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -23693,7 +24122,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\ieee754\\index.js","/lme-model-api\\node_modules\\ieee754",undefined)
-},{"_process":39,"buffer":37}],39:[function(require,module,exports){
+},{"_process":38,"buffer":36}],38:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // shim for using process in browser
 var process = module.exports = {};
@@ -23881,7 +24310,7 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\process\\browser.js","/lme-model-api\\node_modules\\process",undefined)
-},{"_process":39,"buffer":37}],40:[function(require,module,exports){
+},{"_process":38,"buffer":36}],39:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
@@ -23908,7 +24337,7 @@ if (typeof Object.create === 'function') {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\util\\node_modules\\inherits\\inherits_browser.js","/lme-model-api\\node_modules\\util\\node_modules\\inherits",undefined)
-},{"_process":39,"buffer":37}],41:[function(require,module,exports){
+},{"_process":38,"buffer":36}],40:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
@@ -23917,7 +24346,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.readUInt8 === 'function';
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\util\\support\\isBufferBrowser.js","/lme-model-api\\node_modules\\util\\support",undefined)
-},{"_process":39,"buffer":37}],42:[function(require,module,exports){
+},{"_process":38,"buffer":36}],41:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -24507,7 +24936,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\node_modules\\util\\util.js","/lme-model-api\\node_modules\\util",undefined)
-},{"./support/isBuffer":41,"_process":39,"buffer":37,"inherits":40}],43:[function(require,module,exports){
+},{"./support/isBuffer":40,"_process":38,"buffer":36,"inherits":39}],42:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 Error.prototype.stack = Error.prototype.stack || "";
 
@@ -24522,12 +24951,12 @@ const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
 const CalculationFacade = require('../../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
-function LmeAPI(TimeModel) {
+function LmeAPI(TimeModel, Ctx, interval) {
     const Context = require('../../lme-core/src/Context');
     const WorkBook = require('../../lme-core/src/JSWorkBook');
 
     //TODO: the TimeModel is probably part of the Context object.
-    this.lme = new WorkBook(new Context(), TimeModel ? new CustomTimeModel(TimeModel) : bookyearTimeModel);
+    this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : bookyearTimeModel, interval);
     this.modelName = undefined;
     this.urlPrefix = '';
 }
@@ -24592,7 +25021,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || DEFAULT_MODELNAME;
-    let userID = (params[1] || 'DEMO')
+    var userID = (params[1] || 'DEMO')
 
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
@@ -24601,7 +25030,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
     http.setRequestHeader("Content-type", "application/json");
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-            let returnData = JSON.parse(http.responseText);
+            var returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? userID : returnData.id;
             self.importData(returnData)
             window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
@@ -24623,14 +25052,14 @@ LmeAPI.prototype.persistData = function(callBack) {
     if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || DEFAULT_MODELNAME;
-    let userID = params[1] || 'DEMO'
+    var userID = params[1] || 'DEMO'
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     http.open("POST", 'saveUserData/' + self.lme.context.saveToken, true);
     http.setRequestHeader('Content-Type', 'application/json');
     http.onreadystatechange = function() {//Call a function when the state changes.
         if (http.readyState == 4 && http.status == 200) {
-            let returnData = JSON.parse(http.responseText);
+            const returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.saveToken;
             window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
         }
@@ -24648,18 +25077,18 @@ LmeAPI.prototype.persistData = function(callBack) {
 }
 module.exports = LmeAPI;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\src\\lme.js","/lme-model-api\\src",undefined)
-},{"../../formulajs-connect":3,"../../lme-core":17,"../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator":11,"../../lme-core/exchange_modules/jsonvalues/jsonvalues":14,"../../lme-core/exchange_modules/lme/lmeparser":15,"../../lme-core/src/Context":20,"../../lme-core/src/JSWorkBook":24,"../../lme-core/src/TimeAxis":29,"../../lme-core/src/XAxis":32,"../../math":45,"_process":39,"buffer":37}],44:[function(require,module,exports){
+},{"../../formulajs-connect":3,"../../lme-core":17,"../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator":11,"../../lme-core/exchange_modules/jsonvalues/jsonvalues":14,"../../lme-core/exchange_modules/lme/lmeparser":15,"../../lme-core/src/Context":20,"../../lme-core/src/JSWorkBook":24,"../../lme-core/src/TimeAxis":29,"../../lme-core/src/XAxis":31,"../../math":44,"_process":38,"buffer":36}],43:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var model = require('./lme')
 log = {}
 LMEMETA = new model()
 LMEMETA.importLME(JSON_MODEL);//JSON_MODEL is injected by browserify
 LME = LMEMETA.exportWebModel();
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\src\\lmeAPIWrapper.js","/lme-model-api\\src",{"formulas":[{"type":"noCacheUnlocked","refs":{"TUPLETEST_root_value":true},"formulaDependencys":[],"deps":{},"original":"undefined","index":1001,"name":"TUPLETEST_root_value","parsed":"undefined","id":1001,"fflname":"root_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_root_value":true},"formulaDependencys":[],"deps":{},"original":"undefined","index":1002,"name":"TUPLETEST_root_value","parsed":"undefined","id":1002,"fflname":"root_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_ROOT_value":true},"formulaDependencys":[],"deps":{},"original":"undefined","index":1003,"name":"TUPLETEST_Q_ROOT_value","parsed":"undefined","id":1003,"fflname":"Q_ROOT_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_MAP01_value":true},"formulaDependencys":[],"deps":{},"original":"undefined","index":1004,"name":"TUPLETEST_Q_MAP01_value","parsed":"undefined","id":1004,"fflname":"Q_MAP01_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_MAP01_title":true},"formulaDependencys":[],"deps":{},"original":"'Test'","index":1005,"name":"TUPLETEST_Q_MAP01_title","parsed":"'Test'","id":1005,"fflname":"Q_MAP01_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_TupleVar1_value","association":"deps","refId":1013}],"deps":{"TUPLETEST_TupleVar1_value":true},"original":"TSUM(TupleVar1)","index":1006,"name":"TUPLETEST_TSUMTEST_value","parsed":"SUM(TVALUES([1013,1013,1015],a1013,'1013',x,y,z,v))","id":1006,"fflname":"TSUMTEST_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST_title":true},"formulaDependencys":[],"deps":{},"original":"'TsumTEST'","index":1007,"name":"TUPLETEST_TSUMTEST_title","parsed":"'TsumTEST'","id":1007,"fflname":"TSUMTEST_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST2_value":true},"formulaDependencys":[{"name":"TUPLETEST_TupleVar4_value","association":"deps","refId":1022}],"deps":{"TUPLETEST_TupleVar4_value":true},"original":"TSUM(TupleVar4)","index":1008,"name":"TUPLETEST_TSUMTEST2_value","parsed":"SUM(TVALUES([1022,1020,1022],a1022,'1022',x,y,z,v))","id":1008,"fflname":"TSUMTEST2_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST2_title":true},"formulaDependencys":[],"deps":{},"original":"'TsumTEST2'","index":1009,"name":"TUPLETEST_TSUMTEST2_title","parsed":"'TsumTEST2'","id":1009,"fflname":"TSUMTEST2_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple_value":true},"formulaDependencys":[],"deps":{},"original":"101","index":1010,"name":"TUPLETEST_Tuple_value","parsed":"101","id":1010,"fflname":"Tuple_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleDefinition'","index":1011,"name":"TUPLETEST_Tuple_title","parsed":"'TupleDefinition'","id":1011,"fflname":"Tuple_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Tuple_hint":true},"formulaDependencys":[],"deps":{},"original":"'test'","index":1012,"name":"TUPLETEST_Tuple_hint","parsed":"'test'","id":1012,"fflname":"Tuple_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar1_value":true,"TUPLETEST_TSUMTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_TSUMTEST_value","association":"refs","refId":1006}],"deps":{},"original":"123","index":1013,"name":"TUPLETEST_TupleVar1_value","parsed":"123","id":1013,"fflname":"TupleVar1_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar1_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleVar1'","index":1014,"name":"TUPLETEST_TupleVar1_title","parsed":"'TupleVar1'","id":1014,"fflname":"TupleVar1_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar2_value":true},"formulaDependencys":[],"deps":{},"original":"1234","index":1015,"name":"TUPLETEST_TupleVar2_value","parsed":"1234","id":1015,"fflname":"TupleVar2_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar2_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleVar2'","index":1016,"name":"TUPLETEST_TupleVar2_title","parsed":"'TupleVar2'","id":1016,"fflname":"TupleVar2_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple2_value":true},"formulaDependencys":[],"deps":{},"original":"101123312","index":1017,"name":"TUPLETEST_Tuple2_value","parsed":"101123312","id":1017,"fflname":"Tuple2_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple2_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleDefinitio2n'","index":1018,"name":"TUPLETEST_Tuple2_title","parsed":"'TupleDefinitio2n'","id":1018,"fflname":"Tuple2_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Tuple2_hint":true},"formulaDependencys":[],"deps":{},"original":"'tes222t'","index":1019,"name":"TUPLETEST_Tuple2_hint","parsed":"'tes222t'","id":1019,"fflname":"Tuple2_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar3_value":true},"formulaDependencys":[{"name":"TUPLETEST_TupleVar3_value","association":"deps","refId":1020}],"deps":{"TUPLETEST_TupleVar3_value":true},"original":"TupleVar3[prev]+100","index":1020,"name":"TUPLETEST_TupleVar3_value","parsed":"a1020('1020',x.prev,y,z,v)+100","id":1020,"fflname":"TupleVar3_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar3_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleVar3'","index":1021,"name":"TUPLETEST_TupleVar3_title","parsed":"'TupleVar3'","id":1021,"fflname":"TupleVar3_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar4_value":true,"TUPLETEST_TSUMTEST2_value":true},"formulaDependencys":[{"name":"TUPLETEST_TSUMTEST2_value","association":"refs","refId":1008}],"deps":{},"original":"12349","index":1022,"name":"TUPLETEST_TupleVar4_value","parsed":"12349","id":1022,"fflname":"TupleVar4_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleVar4_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleVar4'","index":1023,"name":"TUPLETEST_TupleVar4_title","parsed":"'TupleVar4'","id":1023,"fflname":"TupleVar4_title"}],"variables":[{"name":"MATRIX_VALUES","expression":null}],"data":[["root",null,"undefined","","",false,false,null,"",false],["Q_ROOT",null,"undefined","","",false,false,null,"",false],["Q_MAP01","'Test'","undefined","","",false,false,null,"",false],["TSUMTEST","'TsumTEST'","TSUM(TupleVar1)","","",false,false,null,"",false],["TSUMTEST2","'TsumTEST2'","TSUM(TupleVar4)","","",false,false,null,"",false],["Tuple","'TupleDefinition'","101","","",false,false,null,"'test'",false],["TupleVar1","'TupleVar1'","123","","",false,false,null,"",false],["TupleVar2","'TupleVar2'","1234","","",false,false,null,"",false],["Tuple2","'TupleDefinitio2n'","101123312","","",false,false,null,"'tes222t'",false],["TupleVar3","'TupleVar3'","TupleVar3[prev]+100","","",false,false,null,"",false],["TupleVar4","'TupleVar4'","12349","","",false,false,null,"",false]],"nodes":[{"name":"TUPLETEST_root_value","rowId":"root","colId":"value","solutionName":"TUPLETEST","frequency":"document","displayAs":"SectionAnswerType","nodes":[{"name":"TUPLETEST_Q_ROOT_value","rowId":"Q_ROOT","colId":"value","identifier":"TUPLETEST_root_value"}],"ref":1002,"formulaName":"TUPLETEST_root_value","refId":1001,"datatype":"number"},{"rowId":"Q_ROOT","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Q_ROOT_value","nodes":[{"name":"TUPLETEST_Q_MAP01_value","rowId":"Q_MAP01","colId":"value","identifier":"TUPLETEST_Q_ROOT_value"}],"displaytype":"scorecard","ref":1003,"formulaName":"TUPLETEST_Q_ROOT_value","refId":1003,"displayAs":"scorecard","frequency":"column","datatype":"number","parentName":"root_value"},{"rowId":"Q_MAP01","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Q_MAP01_value","nodes":[{"name":"TUPLETEST_TSUMTEST_value","rowId":"TSUMTEST","colId":"value","identifier":"TUPLETEST_Q_MAP01_value"},{"name":"TUPLETEST_TSUMTEST2_value","rowId":"TSUMTEST2","colId":"value","identifier":"TUPLETEST_Q_MAP01_value"},{"name":"TUPLETEST_Tuple_value","rowId":"Tuple","colId":"value","identifier":"TUPLETEST_Q_MAP01_value"},{"name":"TUPLETEST_Tuple2_value","rowId":"Tuple2","colId":"value","identifier":"TUPLETEST_Q_MAP01_value"}],"ref":1004,"formulaName":"TUPLETEST_Q_MAP01_value","refId":1004,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Q_ROOT_value"},{"rowId":"Q_MAP01","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Q_MAP01_title","nodes":[],"ref":1005,"formulaName":"TUPLETEST_Q_MAP01_title","refId":1005,"displayAs":"string"},{"rowId":"TSUMTEST","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TSUMTEST_value","nodes":[],"ref":1006,"formulaName":"TUPLETEST_TSUMTEST_value","refId":1006,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Q_MAP01_value"},{"rowId":"TSUMTEST","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TSUMTEST_title","nodes":[],"ref":1007,"formulaName":"TUPLETEST_TSUMTEST_title","refId":1007,"displayAs":"string"},{"rowId":"TSUMTEST2","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TSUMTEST2_value","nodes":[],"ref":1008,"formulaName":"TUPLETEST_TSUMTEST2_value","refId":1008,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Q_MAP01_value"},{"rowId":"TSUMTEST2","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TSUMTEST2_title","nodes":[],"ref":1009,"formulaName":"TUPLETEST_TSUMTEST2_title","refId":1009,"displayAs":"string"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Tuple_value","nodes":[{"name":"TUPLETEST_TupleVar1_value","rowId":"TupleVar1","colId":"value","identifier":"TUPLETEST_Tuple_value"},{"name":"TUPLETEST_TupleVar2_value","rowId":"TupleVar2","colId":"value","identifier":"TUPLETEST_Tuple_value"}],"ref":1010,"formulaName":"TUPLETEST_Tuple_value","refId":1010,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":0,"tupleDefinition":true,"datatype":"number","parentName":"Q_MAP01_value"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Tuple_title","nodes":[],"ref":1011,"formulaName":"TUPLETEST_Tuple_title","refId":1011,"displayAs":"string"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_Tuple_hint","nodes":[],"ref":1012,"formulaName":"TUPLETEST_Tuple_hint","refId":1012,"displayAs":"string"},{"rowId":"TupleVar1","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TupleVar1_value","nodes":[],"ref":1013,"formulaName":"TUPLETEST_TupleVar1_value","refId":1013,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"Tuple","tupleProperty":true,"datatype":"number","parentName":"Tuple_value"},{"rowId":"TupleVar1","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TupleVar1_title","nodes":[],"ref":1014,"formulaName":"TUPLETEST_TupleVar1_title","refId":1014,"displayAs":"string"},{"rowId":"TupleVar2","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TupleVar2_value","nodes":[],"ref":1015,"formulaName":"TUPLETEST_TupleVar2_value","refId":1015,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"Tuple","tupleProperty":true,"datatype":"number","parentName":"Tuple_value"},{"rowId":"TupleVar2","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TupleVar2_title","nodes":[],"ref":1016,"formulaName":"TUPLETEST_TupleVar2_title","refId":1016,"displayAs":"string"},{"rowId":"Tuple2","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Tuple2_value","nodes":[{"name":"TUPLETEST_TupleVar3_value","rowId":"TupleVar3","colId":"value","identifier":"TUPLETEST_Tuple2_value"},{"name":"TUPLETEST_TupleVar4_value","rowId":"TupleVar4","colId":"value","identifier":"TUPLETEST_Tuple2_value"}],"ref":1017,"formulaName":"TUPLETEST_Tuple2_value","refId":1017,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":0,"tupleDefinition":true,"datatype":"number","parentName":"Q_MAP01_value"},{"rowId":"Tuple2","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Tuple2_title","nodes":[],"ref":1018,"formulaName":"TUPLETEST_Tuple2_title","refId":1018,"displayAs":"string"},{"rowId":"Tuple2","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_Tuple2_hint","nodes":[],"ref":1019,"formulaName":"TUPLETEST_Tuple2_hint","refId":1019,"displayAs":"string"},{"rowId":"TupleVar3","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TupleVar3_value","nodes":[],"ref":1020,"formulaName":"TUPLETEST_TupleVar3_value","refId":1020,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"Tuple2","tupleProperty":true,"datatype":"number","parentName":"Tuple2_value"},{"rowId":"TupleVar3","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TupleVar3_title","nodes":[],"ref":1021,"formulaName":"TUPLETEST_TupleVar3_title","refId":1021,"displayAs":"string"},{"rowId":"TupleVar4","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TupleVar4_value","nodes":[],"ref":1022,"formulaName":"TUPLETEST_TupleVar4_value","refId":1022,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"Tuple2","tupleProperty":true,"datatype":"number","parentName":"Tuple2_value"},{"rowId":"TupleVar4","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TupleVar4_title","nodes":[],"ref":1023,"formulaName":"TUPLETEST_TupleVar4_title","refId":1023,"displayAs":"string"}],"meta":{"view":{"columns":[{"width":50,"name":"name","dataTypeName":"text","fieldName":"name","position":0,"renderTypeName":"text"},{"width":50,"name":"title","dataTypeName":"text","fieldName":"title","position":1,"renderTypeName":"text"},{"width":50,"name":"value","dataTypeName":"text","fieldName":"value","position":2,"renderTypeName":"text"},{"width":50,"name":"notrend","dataTypeName":"text","fieldName":"notrend","position":3,"renderTypeName":"text"},{"width":50,"name":"trend","dataTypeName":"text","fieldName":"trend","position":4,"renderTypeName":"text"},{"name":"visible","dataTypeName":"text","fieldName":"visible","position":5,"renderTypeName":"text"},{"name":"locked","dataTypeName":"text","fieldName":"locked","position":6,"renderTypeName":"text"},{"width":50,"name":"choices","dataTypeName":"text","fieldName":"choices","position":7,"renderTypeName":"text"},{"width":50,"name":"hint","dataTypeName":"text","fieldName":"hint","position":8,"renderTypeName":"text"},{"width":50,"name":"valid","dataTypeName":"text","fieldName":"valid","position":9,"renderTypeName":"text"}]}},"name":"TUPLETEST"})
-},{"./lme":43,"_process":39,"buffer":37}],45:[function(require,module,exports){
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-model-api\\src\\lmeAPIWrapper.js","/lme-model-api\\src",{"formulas":[{"type":"noCacheUnlocked","refs":{"TUPLETEST_root_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1001,"name":"TUPLETEST_root_value","parsed":"null","id":1001,"fflname":"root_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_root_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1002,"name":"TUPLETEST_root_value","parsed":"null","id":1002,"fflname":"root_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_ROOT_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1003,"name":"TUPLETEST_Q_ROOT_value","parsed":"null","id":1003,"fflname":"Q_ROOT_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleTestStap_value":true,"TUPLETEST_TupleTestStap_valid":true},"formulaDependencys":[{"name":"TUPLETEST_TupleTestStap_valid","association":"refs","refId":1005}],"deps":{},"original":"null","index":1004,"name":"TUPLETEST_TupleTestStap_value","parsed":"null","id":1004,"fflname":"TupleTestStap_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_TupleTestStap_valid":true},"formulaDependencys":[{"name":"TUPLETEST_TupleTestStap_value","association":"deps","refId":1004}],"deps":{"TUPLETEST_TupleTestStap_value":true},"original":"If(!isNaN(OnNA(TupleTestStap,null)),'','Enter valid input.')","index":1005,"name":"TUPLETEST_TupleTestStap_valid","parsed":"!isNaN(OnNA(a1004('1004',x,y.base,z,v),null))?'':'Enter valid input.'","id":1005,"fflname":"TupleTestStap_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TupleTestStap_title":true},"formulaDependencys":[],"deps":{},"original":"'TestTuples'","index":1006,"name":"TUPLETEST_TupleTestStap_title","parsed":"'TestTuples'","id":1006,"fflname":"TupleTestStap_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TupleTestStap_hint":true},"formulaDependencys":[],"deps":{},"original":"'Test Tuples'","index":1007,"name":"TUPLETEST_TupleTestStap_hint","parsed":"'Test Tuples'","id":1007,"fflname":"TupleTestStap_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Uitleg_value":true},"formulaDependencys":[],"deps":{},"original":"'In dit model worden visueel alle tuple aspected getest.'","index":1008,"name":"TUPLETEST_Uitleg_value","parsed":"'In dit model worden visueel alle tuple aspected getest.'","id":1008,"fflname":"Uitleg_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Uitleg_title":true},"formulaDependencys":[],"deps":{},"original":"'In dit model worden visueel alle tuple aspected getest.'","index":1009,"name":"TUPLETEST_Uitleg_title","parsed":"'In dit model worden visueel alle tuple aspected getest.'","id":1009,"fflname":"Uitleg_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Uitleg_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1010,"name":"TUPLETEST_Uitleg_locked","parsed":"1","id":1010,"fflname":"Uitleg_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Summary_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1011,"name":"TUPLETEST_Summary_value","parsed":"null","id":1011,"fflname":"Summary_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Summary_title":true},"formulaDependencys":[],"deps":{},"original":"'Summary'","index":1012,"name":"TUPLETEST_Summary_title","parsed":"'Summary'","id":1012,"fflname":"Summary_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TCOUNTTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_NullTuple_value","association":"deps","refId":1040}],"deps":{"TUPLETEST_NullTuple_value":true},"original":"TCOUNT(NullTuple)+1","index":1013,"name":"TUPLETEST_TCOUNTTEST_value","parsed":"PROXY(TCOUNT([1040],a1040,'1040',x,y.p[0],z,v))+1","id":1013,"fflname":"TCOUNTTEST_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TCOUNTTEST_title":true},"formulaDependencys":[],"deps":{},"original":"'TCOUNT(NullTuple)'","index":1014,"name":"TUPLETEST_TCOUNTTEST_title","parsed":"'TCOUNT(NullTuple)'","id":1014,"fflname":"TCOUNTTEST_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TCOUNTTEST_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1015,"name":"TUPLETEST_TCOUNTTEST_locked","parsed":"1","id":1015,"fflname":"TCOUNTTEST_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_SecondSibling_value","association":"deps","refId":1036}],"deps":{"TUPLETEST_SecondSibling_value":true},"original":"TSUM(SecondSibling)","index":1016,"name":"TUPLETEST_TSUMTEST_value","parsed":"SUM(TVALUES([1036,1031,1036],a1036,'1036',x,y.p[1],z,v))","id":1016,"fflname":"TSUMTEST_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST_title":true},"formulaDependencys":[],"deps":{},"original":"'TSUM(SecondSibling)'","index":1017,"name":"TUPLETEST_TSUMTEST_title","parsed":"'TSUM(SecondSibling)'","id":1017,"fflname":"TSUMTEST_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TSUMTEST_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1018,"name":"TUPLETEST_TSUMTEST_locked","parsed":"1","id":1018,"fflname":"TSUMTEST_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST2_value":true},"formulaDependencys":[{"name":"TUPLETEST_ZeroTupleInstanceSibling_value","association":"deps","refId":1046}],"deps":{"TUPLETEST_ZeroTupleInstanceSibling_value":true},"original":"TSUM(ZeroTupleInstanceSibling)","index":1019,"name":"TUPLETEST_TSUMTEST2_value","parsed":"SUM(TVALUES([1046,1043,1046],a1046,'1046',x,y.p[1],z,v))","id":1019,"fflname":"TSUMTEST2_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TSUMTEST2_title":true},"formulaDependencys":[],"deps":{},"original":"'TSUM(ZeroTupleInstanceSibling)'","index":1020,"name":"TUPLETEST_TSUMTEST2_title","parsed":"'TSUM(ZeroTupleInstanceSibling)'","id":1020,"fflname":"TSUMTEST2_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TSUMTEST2_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1021,"name":"TUPLETEST_TSUMTEST2_locked","parsed":"1","id":1021,"fflname":"TSUMTEST2_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TMINEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_ZeroTupleInstance_value","association":"deps","refId":1043}],"deps":{"TUPLETEST_ZeroTupleInstance_value":true},"original":"TMIN(ZeroTupleInstance)","index":1022,"name":"TUPLETEST_TMINEST_value","parsed":"MIN(TVALUES([1043,1043,1046],a1043,'1043',x,y.p[1],z,v))","id":1022,"fflname":"TMINEST_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TMINEST_title":true},"formulaDependencys":[],"deps":{},"original":"'TMIN(ZeroTupleInstance)'","index":1023,"name":"TUPLETEST_TMINEST_title","parsed":"'TMIN(ZeroTupleInstance)'","id":1023,"fflname":"TMINEST_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TMINEST_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1024,"name":"TUPLETEST_TMINEST_locked","parsed":"1","id":1024,"fflname":"TMINEST_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TMAXTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_ZeroTupleInstance_value","association":"deps","refId":1043}],"deps":{"TUPLETEST_ZeroTupleInstance_value":true},"original":"TMAX(ZeroTupleInstance)","index":1025,"name":"TUPLETEST_TMAXTEST_value","parsed":"MAX(TVALUES([1043,1043,1046],a1043,'1043',x,y.p[1],z,v))","id":1025,"fflname":"TMAXTEST_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_TMAXTEST_title":true},"formulaDependencys":[],"deps":{},"original":"'TMAX(ZeroTupleInstance)'","index":1026,"name":"TUPLETEST_TMAXTEST_title","parsed":"'TMAX(ZeroTupleInstance)'","id":1026,"fflname":"TMAXTEST_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_TMAXTEST_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1027,"name":"TUPLETEST_TMAXTEST_locked","parsed":"1","id":1027,"fflname":"TMAXTEST_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1028,"name":"TUPLETEST_Tuple_value","parsed":"null","id":1028,"fflname":"Tuple_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Tuple_title":true},"formulaDependencys":[],"deps":{},"original":"String('Tuple')+String('('+TupleIndex+')')","index":1029,"name":"TUPLETEST_Tuple_title","parsed":"String('Tuple')+String('('+y.index+')')","id":1029,"fflname":"Tuple_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Tuple_hint":true},"formulaDependencys":[],"deps":{},"original":"'Deze tuple heeft een geneste Tuple-Definitie'","index":1030,"name":"TUPLETEST_Tuple_hint","parsed":"'Deze tuple heeft een geneste Tuple-Definitie'","id":1030,"fflname":"Tuple_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_FirstSiblingNestedTuple_value":true},"formulaDependencys":[],"deps":{},"original":"123","index":1031,"name":"TUPLETEST_FirstSiblingNestedTuple_value","parsed":"123","id":1031,"fflname":"FirstSiblingNestedTuple_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_FirstSiblingNestedTuple_title":true},"formulaDependencys":[],"deps":{},"original":"String('FirstSiblingNestedTuple')+String('('+TupleIndex+')')","index":1032,"name":"TUPLETEST_FirstSiblingNestedTuple_title","parsed":"String('FirstSiblingNestedTuple')+String('('+y.index+')')","id":1032,"fflname":"FirstSiblingNestedTuple_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value":true,"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid":true,"TUPLETEST_SecondSibling_value":true},"formulaDependencys":[{"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid","association":"refs","refId":1034},{"name":"TUPLETEST_SecondSibling_value","association":"refs","refId":1036}],"deps":{},"original":"1234","index":1033,"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","parsed":"1234","id":1033,"fflname":"FirstSiblingNestedTupleFirstSibling_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid":true},"formulaDependencys":[{"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","association":"deps","refId":1033}],"deps":{"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value":true},"original":"If(!isNaN(OnNA(FirstSiblingNestedTupleFirstSibling,null)),'','Enter valid input.')","index":1034,"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid","parsed":"!isNaN(OnNA(a1033('1033',x,y.p[2],z,v),null))?'':'Enter valid input.'","id":1034,"fflname":"FirstSiblingNestedTupleFirstSibling_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_FirstSiblingNestedTupleFirstSibling_title":true},"formulaDependencys":[],"deps":{},"original":"'FirstSiblingNestedTupleFirstSibling'","index":1035,"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_title","parsed":"'FirstSiblingNestedTupleFirstSibling'","id":1035,"fflname":"FirstSiblingNestedTupleFirstSibling_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_SecondSibling_value":true,"TUPLETEST_TSUMTEST_value":true,"TUPLETEST_SecondSibling_valid":true},"formulaDependencys":[{"name":"TUPLETEST_TSUMTEST_value","association":"refs","refId":1016},{"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","association":"deps","refId":1033},{"name":"TUPLETEST_SecondSibling_valid","association":"refs","refId":1037}],"deps":{"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value":true},"original":"TSUM(FirstSiblingNestedTupleFirstSibling)","index":1036,"name":"TUPLETEST_SecondSibling_value","parsed":"SUM(TVALUES([1033,1033],a1033,'1033',x,y.p[2],z,v))","id":1036,"fflname":"SecondSibling_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_SecondSibling_valid":true},"formulaDependencys":[{"name":"TUPLETEST_SecondSibling_value","association":"deps","refId":1036}],"deps":{"TUPLETEST_SecondSibling_value":true},"original":"If(!isNaN(OnNA(SecondSibling,null)),'','Enter valid input.')","index":1037,"name":"TUPLETEST_SecondSibling_valid","parsed":"!isNaN(OnNA(a1036('1036',x,y.p[1],z,v),null))?'':'Enter valid input.'","id":1037,"fflname":"SecondSibling_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_SecondSibling_title":true},"formulaDependencys":[],"deps":{},"original":"'TSUM(FirstSiblingNestedTupleFirstSibling)'","index":1038,"name":"TUPLETEST_SecondSibling_title","parsed":"'TSUM(FirstSiblingNestedTupleFirstSibling)'","id":1038,"fflname":"SecondSibling_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_SecondSibling_locked":true},"formulaDependencys":[],"deps":{},"original":"1","index":1039,"name":"TUPLETEST_SecondSibling_locked","parsed":"1","id":1039,"fflname":"SecondSibling_locked"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_NullTuple_value":true,"TUPLETEST_TCOUNTTEST_value":true},"formulaDependencys":[{"name":"TUPLETEST_TCOUNTTEST_value","association":"refs","refId":1013}],"deps":{},"original":"null","index":1040,"name":"TUPLETEST_NullTuple_value","parsed":"null","id":1040,"fflname":"NullTuple_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_NullTuple_title":true},"formulaDependencys":[],"deps":{},"original":"String('NullTuple')+String('('+TupleIndex+')')","index":1041,"name":"TUPLETEST_NullTuple_title","parsed":"String('NullTuple')+String('('+y.index+')')","id":1041,"fflname":"NullTuple_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_NullTuple_hint":true},"formulaDependencys":[],"deps":{},"original":"'Dit is een 0-tuple met een T-1 formule'","index":1042,"name":"TUPLETEST_NullTuple_hint","parsed":"'Dit is een 0-tuple met een T-1 formule'","id":1042,"fflname":"NullTuple_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_ZeroTupleInstance_value":true,"TUPLETEST_TMINEST_value":true,"TUPLETEST_TMAXTEST_value":true,"TUPLETEST_ZeroTupleInstance_valid":true},"formulaDependencys":[{"name":"TUPLETEST_TMINEST_value","association":"refs","refId":1022},{"name":"TUPLETEST_TMAXTEST_value","association":"refs","refId":1025},{"name":"TUPLETEST_ZeroTupleInstance_value","association":"deps","refId":1043},{"name":"TUPLETEST_ZeroTupleInstance_valid","association":"refs","refId":1044}],"deps":{"TUPLETEST_ZeroTupleInstance_value":true},"original":"ZeroTupleInstance[prev]+100","index":1043,"name":"TUPLETEST_ZeroTupleInstance_value","parsed":"a1043('1043',x.prev,y.p[1],z,v)+100","id":1043,"fflname":"ZeroTupleInstance_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_ZeroTupleInstance_valid":true},"formulaDependencys":[{"name":"TUPLETEST_ZeroTupleInstance_value","association":"deps","refId":1043}],"deps":{"TUPLETEST_ZeroTupleInstance_value":true},"original":"If(!isNaN(OnNA(ZeroTupleInstance,null)),'','Enter valid input.')","index":1044,"name":"TUPLETEST_ZeroTupleInstance_valid","parsed":"!isNaN(OnNA(a1043('1043',x,y.p[1],z,v),null))?'':'Enter valid input.'","id":1044,"fflname":"ZeroTupleInstance_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_ZeroTupleInstance_title":true},"formulaDependencys":[],"deps":{},"original":"'ZeroTupleInstance[prev]+100'","index":1045,"name":"TUPLETEST_ZeroTupleInstance_title","parsed":"'ZeroTupleInstance[prev]+100'","id":1045,"fflname":"ZeroTupleInstance_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_ZeroTupleInstanceSibling_value":true,"TUPLETEST_TSUMTEST2_value":true,"TUPLETEST_ZeroTupleInstanceSibling_valid":true},"formulaDependencys":[{"name":"TUPLETEST_TSUMTEST2_value","association":"refs","refId":1019},{"name":"TUPLETEST_ZeroTupleInstanceSibling_valid","association":"refs","refId":1047}],"deps":{},"original":"12349","index":1046,"name":"TUPLETEST_ZeroTupleInstanceSibling_value","parsed":"12349","id":1046,"fflname":"ZeroTupleInstanceSibling_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_ZeroTupleInstanceSibling_valid":true},"formulaDependencys":[{"name":"TUPLETEST_ZeroTupleInstanceSibling_value","association":"deps","refId":1046}],"deps":{"TUPLETEST_ZeroTupleInstanceSibling_value":true},"original":"If(!isNaN(OnNA(ZeroTupleInstanceSibling,null)),'','Enter valid input.')","index":1047,"name":"TUPLETEST_ZeroTupleInstanceSibling_valid","parsed":"!isNaN(OnNA(a1046('1046',x,y.p[1],z,v),null))?'':'Enter valid input.'","id":1047,"fflname":"ZeroTupleInstanceSibling_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_ZeroTupleInstanceSibling_title":true},"formulaDependencys":[],"deps":{},"original":"'ZeroTupleInstanceSibling'","index":1048,"name":"TUPLETEST_ZeroTupleInstanceSibling_title","parsed":"'ZeroTupleInstanceSibling'","id":1048,"fflname":"ZeroTupleInstanceSibling_title"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_STAP02_value":true,"TUPLETEST_Q_STAP02_valid":true},"formulaDependencys":[{"name":"TUPLETEST_Q_STAP02_valid","association":"refs","refId":1050}],"deps":{},"original":"null","index":1049,"name":"TUPLETEST_Q_STAP02_value","parsed":"null","id":1049,"fflname":"Q_STAP02_value"},{"type":"noCacheLocked","refs":{"TUPLETEST_Q_STAP02_valid":true},"formulaDependencys":[{"name":"TUPLETEST_Q_STAP02_value","association":"deps","refId":1049}],"deps":{"TUPLETEST_Q_STAP02_value":true},"original":"If(!isNaN(OnNA(Q_STAP02,null)),'','Enter valid input.')","index":1050,"name":"TUPLETEST_Q_STAP02_valid","parsed":"!isNaN(OnNA(a1049('1049',x,y.base,z,v),null))?'':'Enter valid input.'","id":1050,"fflname":"Q_STAP02_valid"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Q_STAP02_title":true},"formulaDependencys":[],"deps":{},"original":"'Q_STAP02'","index":1051,"name":"TUPLETEST_Q_STAP02_title","parsed":"'Q_STAP02'","id":1051,"fflname":"Q_STAP02_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Q_STAP02_hint":true},"formulaDependencys":[],"deps":{},"original":"'Q_STAP02'","index":1052,"name":"TUPLETEST_Q_STAP02_hint","parsed":"'Q_STAP02'","id":1052,"fflname":"Q_STAP02_hint"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Opvulling_value":true},"formulaDependencys":[],"deps":{},"original":"null","index":1053,"name":"TUPLETEST_Opvulling_value","parsed":"null","id":1053,"fflname":"Opvulling_value"},{"type":"noCacheUnlocked","refs":{"TUPLETEST_Opvulling_title":true},"formulaDependencys":[],"deps":{},"original":"'TupleTestStap2'","index":1054,"name":"TUPLETEST_Opvulling_title","parsed":"'TupleTestStap2'","id":1054,"fflname":"Opvulling_title"},{"type":"noCacheLocked","refs":{"TUPLETEST_Opvulling_hint":true},"formulaDependencys":[],"deps":{},"original":"'TupleTestStap2'","index":1055,"name":"TUPLETEST_Opvulling_hint","parsed":"'TupleTestStap2'","id":1055,"fflname":"Opvulling_hint"}],"variables":[{"name":"MATRIX_VALUES","expression":null}],"data":{},"nodes":[{"name":"TUPLETEST_root_value","rowId":"root","colId":"value","solutionName":"TUPLETEST","frequency":"document","displayAs":"SectionAnswerType","nodes":[{"name":"TUPLETEST_Q_ROOT_value","rowId":"Q_ROOT","colId":"value","identifier":"TUPLETEST_root_value"}],"ref":1002,"formulaName":"TUPLETEST_root_value","refId":1001,"datatype":"number"},{"rowId":"Q_ROOT","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Q_ROOT_value","nodes":[{"name":"TUPLETEST_TupleTestStap_value","rowId":"TupleTestStap","colId":"value","identifier":"TUPLETEST_Q_ROOT_value"},{"name":"TUPLETEST_Q_STAP02_value","rowId":"Q_STAP02","colId":"value","identifier":"TUPLETEST_Q_ROOT_value"}],"displaytype":"scorecard","ref":1003,"formulaName":"TUPLETEST_Q_ROOT_value","refId":1003,"displayAs":"scorecard","frequency":"column","datatype":"number","parentName":"root_value"},{"rowId":"TupleTestStap","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TupleTestStap_value","nodes":[{"name":"TUPLETEST_Uitleg_value","rowId":"Uitleg","colId":"value","identifier":"TUPLETEST_TupleTestStap_value"},{"name":"TUPLETEST_Summary_value","rowId":"Summary","colId":"value","identifier":"TUPLETEST_TupleTestStap_value"},{"name":"TUPLETEST_Tuple_value","rowId":"Tuple","colId":"value","identifier":"TUPLETEST_TupleTestStap_value"},{"name":"TUPLETEST_NullTuple_value","rowId":"NullTuple","colId":"value","identifier":"TUPLETEST_TupleTestStap_value"}],"ref":1004,"formulaName":"TUPLETEST_TupleTestStap_value","refId":1004,"displayAs":"string","frequency":"none","datatype":"number","parentName":"Q_ROOT_value"},{"rowId":"TupleTestStap","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_TupleTestStap_valid","nodes":[],"ref":1005,"formulaName":"TUPLETEST_TupleTestStap_valid","refId":1005,"displayAs":"string"},{"rowId":"TupleTestStap","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TupleTestStap_title","nodes":[],"ref":1006,"formulaName":"TUPLETEST_TupleTestStap_title","refId":1006,"displayAs":"string"},{"rowId":"TupleTestStap","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_TupleTestStap_hint","nodes":[],"ref":1007,"formulaName":"TUPLETEST_TupleTestStap_hint","refId":1007,"displayAs":"string"},{"rowId":"Uitleg","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Uitleg_value","nodes":[],"displaytype":"string","ref":1008,"formulaName":"TUPLETEST_Uitleg_value","refId":1008,"displayAs":"string","frequency":"none","datatype":"string","parentName":"TupleTestStap_value"},{"rowId":"Uitleg","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Uitleg_title","nodes":[],"ref":1009,"formulaName":"TUPLETEST_Uitleg_title","refId":1009,"displayAs":"string"},{"rowId":"Uitleg","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_Uitleg_locked","nodes":[],"ref":1010,"formulaName":"TUPLETEST_Uitleg_locked","refId":1010,"displayAs":"string"},{"rowId":"Summary","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Summary_value","nodes":[{"name":"TUPLETEST_TCOUNTTEST_value","rowId":"TCOUNTTEST","colId":"value","identifier":"TUPLETEST_Summary_value"},{"name":"TUPLETEST_TSUMTEST_value","rowId":"TSUMTEST","colId":"value","identifier":"TUPLETEST_Summary_value"},{"name":"TUPLETEST_TSUMTEST2_value","rowId":"TSUMTEST2","colId":"value","identifier":"TUPLETEST_Summary_value"},{"name":"TUPLETEST_TMINEST_value","rowId":"TMINEST","colId":"value","identifier":"TUPLETEST_Summary_value"},{"name":"TUPLETEST_TMAXTEST_value","rowId":"TMAXTEST","colId":"value","identifier":"TUPLETEST_Summary_value"}],"displaytype":"paragraph","ref":1011,"formulaName":"TUPLETEST_Summary_value","refId":1011,"displayAs":"paragraph","frequency":"none","datatype":"string","parentName":"TupleTestStap_value"},{"rowId":"Summary","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Summary_title","nodes":[],"ref":1012,"formulaName":"TUPLETEST_Summary_title","refId":1012,"displayAs":"string"},{"rowId":"TCOUNTTEST","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TCOUNTTEST_value","nodes":[],"ref":1013,"formulaName":"TUPLETEST_TCOUNTTEST_value","refId":1013,"displayAs":"string","frequency":"document","datatype":"number","parentName":"Summary_value"},{"rowId":"TCOUNTTEST","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TCOUNTTEST_title","nodes":[],"ref":1014,"formulaName":"TUPLETEST_TCOUNTTEST_title","refId":1014,"displayAs":"string"},{"rowId":"TCOUNTTEST","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_TCOUNTTEST_locked","nodes":[],"ref":1015,"formulaName":"TUPLETEST_TCOUNTTEST_locked","refId":1015,"displayAs":"string"},{"rowId":"TSUMTEST","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TSUMTEST_value","nodes":[],"ref":1016,"formulaName":"TUPLETEST_TSUMTEST_value","refId":1016,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Summary_value"},{"rowId":"TSUMTEST","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TSUMTEST_title","nodes":[],"ref":1017,"formulaName":"TUPLETEST_TSUMTEST_title","refId":1017,"displayAs":"string"},{"rowId":"TSUMTEST","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_TSUMTEST_locked","nodes":[],"ref":1018,"formulaName":"TUPLETEST_TSUMTEST_locked","refId":1018,"displayAs":"string"},{"rowId":"TSUMTEST2","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TSUMTEST2_value","nodes":[],"ref":1019,"formulaName":"TUPLETEST_TSUMTEST2_value","refId":1019,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Summary_value"},{"rowId":"TSUMTEST2","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TSUMTEST2_title","nodes":[],"ref":1020,"formulaName":"TUPLETEST_TSUMTEST2_title","refId":1020,"displayAs":"string"},{"rowId":"TSUMTEST2","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_TSUMTEST2_locked","nodes":[],"ref":1021,"formulaName":"TUPLETEST_TSUMTEST2_locked","refId":1021,"displayAs":"string"},{"rowId":"TMINEST","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TMINEST_value","nodes":[],"ref":1022,"formulaName":"TUPLETEST_TMINEST_value","refId":1022,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Summary_value"},{"rowId":"TMINEST","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TMINEST_title","nodes":[],"ref":1023,"formulaName":"TUPLETEST_TMINEST_title","refId":1023,"displayAs":"string"},{"rowId":"TMINEST","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_TMINEST_locked","nodes":[],"ref":1024,"formulaName":"TUPLETEST_TMINEST_locked","refId":1024,"displayAs":"string"},{"rowId":"TMAXTEST","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_TMAXTEST_value","nodes":[],"ref":1025,"formulaName":"TUPLETEST_TMAXTEST_value","refId":1025,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Summary_value"},{"rowId":"TMAXTEST","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_TMAXTEST_title","nodes":[],"ref":1026,"formulaName":"TUPLETEST_TMAXTEST_title","refId":1026,"displayAs":"string"},{"rowId":"TMAXTEST","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_TMAXTEST_locked","nodes":[],"ref":1027,"formulaName":"TUPLETEST_TMAXTEST_locked","refId":1027,"displayAs":"string"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Tuple_value","nodes":[{"name":"TUPLETEST_FirstSiblingNestedTuple_value","rowId":"FirstSiblingNestedTuple","colId":"value","identifier":"TUPLETEST_Tuple_value"},{"name":"TUPLETEST_SecondSibling_value","rowId":"SecondSibling","colId":"value","identifier":"TUPLETEST_Tuple_value"}],"displaytype":"paragraph","ref":1028,"formulaName":"TUPLETEST_Tuple_value","refId":1028,"displayAs":"paragraph","frequency":"none","tuple":true,"nestedTupleDepth":0,"tupleDefinition":true,"datatype":"string","parentName":"TupleTestStap_value"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Tuple_title","nodes":[],"ref":1029,"formulaName":"TUPLETEST_Tuple_title","refId":1029,"displayAs":"string"},{"rowId":"Tuple","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_Tuple_hint","nodes":[],"ref":1030,"formulaName":"TUPLETEST_Tuple_hint","refId":1030,"displayAs":"string"},{"rowId":"FirstSiblingNestedTuple","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_FirstSiblingNestedTuple_value","nodes":[{"name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","rowId":"FirstSiblingNestedTupleFirstSibling","colId":"value","identifier":"TUPLETEST_FirstSiblingNestedTuple_value"}],"displaytype":"paragraph","ref":1031,"formulaName":"TUPLETEST_FirstSiblingNestedTuple_value","refId":1031,"displayAs":"paragraph","frequency":"none","tuple":true,"nestedTupleDepth":1,"tupleDefinition":true,"tupleDefinitionName":"Tuple","tupleProperty":true,"datatype":"number","parentName":"Tuple_value"},{"rowId":"FirstSiblingNestedTuple","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_FirstSiblingNestedTuple_title","nodes":[],"ref":1032,"formulaName":"TUPLETEST_FirstSiblingNestedTuple_title","refId":1032,"displayAs":"string"},{"rowId":"FirstSiblingNestedTupleFirstSibling","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","nodes":[],"ref":1033,"formulaName":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_value","refId":1033,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":2,"tupleDefinitionName":"FirstSiblingNestedTuple","tupleProperty":true,"datatype":"number","parentName":"FirstSiblingNestedTuple_value"},{"rowId":"FirstSiblingNestedTupleFirstSibling","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid","nodes":[],"ref":1034,"formulaName":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_valid","refId":1034,"displayAs":"string"},{"rowId":"FirstSiblingNestedTupleFirstSibling","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_title","nodes":[],"ref":1035,"formulaName":"TUPLETEST_FirstSiblingNestedTupleFirstSibling_title","refId":1035,"displayAs":"string"},{"rowId":"SecondSibling","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_SecondSibling_value","nodes":[],"ref":1036,"formulaName":"TUPLETEST_SecondSibling_value","refId":1036,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"Tuple","tupleProperty":true,"datatype":"number","parentName":"Tuple_value"},{"rowId":"SecondSibling","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_SecondSibling_valid","nodes":[],"ref":1037,"formulaName":"TUPLETEST_SecondSibling_valid","refId":1037,"displayAs":"string"},{"rowId":"SecondSibling","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_SecondSibling_title","nodes":[],"ref":1038,"formulaName":"TUPLETEST_SecondSibling_title","refId":1038,"displayAs":"string"},{"rowId":"SecondSibling","solutionName":"TUPLETEST","colId":"locked","name":"TUPLETEST_SecondSibling_locked","nodes":[],"ref":1039,"formulaName":"TUPLETEST_SecondSibling_locked","refId":1039,"displayAs":"string"},{"rowId":"NullTuple","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_NullTuple_value","nodes":[{"name":"TUPLETEST_ZeroTupleInstance_value","rowId":"ZeroTupleInstance","colId":"value","identifier":"TUPLETEST_NullTuple_value"},{"name":"TUPLETEST_ZeroTupleInstanceSibling_value","rowId":"ZeroTupleInstanceSibling","colId":"value","identifier":"TUPLETEST_NullTuple_value"}],"displaytype":"paragraph","ref":1040,"formulaName":"TUPLETEST_NullTuple_value","refId":1040,"displayAs":"paragraph","frequency":"none","tuple":true,"nestedTupleDepth":0,"tupleDefinition":true,"datatype":"string","parentName":"TupleTestStap_value"},{"rowId":"NullTuple","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_NullTuple_title","nodes":[],"ref":1041,"formulaName":"TUPLETEST_NullTuple_title","refId":1041,"displayAs":"string"},{"rowId":"NullTuple","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_NullTuple_hint","nodes":[],"ref":1042,"formulaName":"TUPLETEST_NullTuple_hint","refId":1042,"displayAs":"string"},{"rowId":"ZeroTupleInstance","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_ZeroTupleInstance_value","nodes":[],"ref":1043,"formulaName":"TUPLETEST_ZeroTupleInstance_value","refId":1043,"displayAs":"string","decimals":2,"frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"NullTuple","tupleProperty":true,"datatype":"number","parentName":"NullTuple_value"},{"rowId":"ZeroTupleInstance","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_ZeroTupleInstance_valid","nodes":[],"ref":1044,"formulaName":"TUPLETEST_ZeroTupleInstance_valid","refId":1044,"displayAs":"string"},{"rowId":"ZeroTupleInstance","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_ZeroTupleInstance_title","nodes":[],"ref":1045,"formulaName":"TUPLETEST_ZeroTupleInstance_title","refId":1045,"displayAs":"string"},{"rowId":"ZeroTupleInstanceSibling","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_ZeroTupleInstanceSibling_value","nodes":[],"ref":1046,"formulaName":"TUPLETEST_ZeroTupleInstanceSibling_value","refId":1046,"displayAs":"string","frequency":"column","tuple":true,"nestedTupleDepth":1,"tupleDefinitionName":"NullTuple","tupleProperty":true,"datatype":"number","parentName":"NullTuple_value"},{"rowId":"ZeroTupleInstanceSibling","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_ZeroTupleInstanceSibling_valid","nodes":[],"ref":1047,"formulaName":"TUPLETEST_ZeroTupleInstanceSibling_valid","refId":1047,"displayAs":"string"},{"rowId":"ZeroTupleInstanceSibling","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_ZeroTupleInstanceSibling_title","nodes":[],"ref":1048,"formulaName":"TUPLETEST_ZeroTupleInstanceSibling_title","refId":1048,"displayAs":"string"},{"rowId":"Q_STAP02","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Q_STAP02_value","nodes":[{"name":"TUPLETEST_Opvulling_value","rowId":"Opvulling","colId":"value","identifier":"TUPLETEST_Q_STAP02_value"}],"ref":1049,"formulaName":"TUPLETEST_Q_STAP02_value","refId":1049,"displayAs":"string","frequency":"none","datatype":"number","parentName":"Q_ROOT_value"},{"rowId":"Q_STAP02","solutionName":"TUPLETEST","colId":"valid","name":"TUPLETEST_Q_STAP02_valid","nodes":[],"ref":1050,"formulaName":"TUPLETEST_Q_STAP02_valid","refId":1050,"displayAs":"string"},{"rowId":"Q_STAP02","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Q_STAP02_title","nodes":[],"ref":1051,"formulaName":"TUPLETEST_Q_STAP02_title","refId":1051,"displayAs":"string"},{"rowId":"Q_STAP02","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_Q_STAP02_hint","nodes":[],"ref":1052,"formulaName":"TUPLETEST_Q_STAP02_hint","refId":1052,"displayAs":"string"},{"rowId":"Opvulling","solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_Opvulling_value","nodes":[],"ref":1053,"formulaName":"TUPLETEST_Opvulling_value","refId":1053,"displayAs":"string","frequency":"column","datatype":"number","parentName":"Q_STAP02_value"},{"rowId":"Opvulling","solutionName":"TUPLETEST","colId":"title","name":"TUPLETEST_Opvulling_title","nodes":[],"ref":1054,"formulaName":"TUPLETEST_Opvulling_title","refId":1054,"displayAs":"string"},{"rowId":"Opvulling","solutionName":"TUPLETEST","colId":"hint","name":"TUPLETEST_Opvulling_hint","nodes":[],"ref":1055,"formulaName":"TUPLETEST_Opvulling_hint","refId":1055,"displayAs":"string"},{"solutionName":"TUPLETEST","colId":"value","name":"TUPLETEST_undefined_value","nodes":[]}],"meta":{"view":{"columns":[{"width":50,"name":"name","dataTypeName":"text","fieldName":"name","position":0,"renderTypeName":"text"},{"width":50,"name":"title","dataTypeName":"text","fieldName":"title","position":1,"renderTypeName":"text"},{"width":50,"name":"value","dataTypeName":"text","fieldName":"value","position":2,"renderTypeName":"text"},{"width":50,"name":"notrend","dataTypeName":"text","fieldName":"notrend","position":3,"renderTypeName":"text"},{"width":50,"name":"trend","dataTypeName":"text","fieldName":"trend","position":4,"renderTypeName":"text"},{"name":"visible","dataTypeName":"text","fieldName":"visible","position":5,"renderTypeName":"text"},{"name":"locked","dataTypeName":"text","fieldName":"locked","position":6,"renderTypeName":"text"},{"width":50,"name":"choices","dataTypeName":"text","fieldName":"choices","position":7,"renderTypeName":"text"},{"width":50,"name":"hint","dataTypeName":"text","fieldName":"hint","position":8,"renderTypeName":"text"},{"width":50,"name":"valid","dataTypeName":"text","fieldName":"valid","position":9,"renderTypeName":"text"}]}},"name":"TUPLETEST"})
+},{"./lme":42,"_process":38,"buffer":36}],44:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 const logger = require('log6')
-const jsMath = {"Length":{"args":"v1","body":"return String(v1).length"},"OnER":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"Oner":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnEr":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnZero":{"args":"v,onzerov","body":"{ return v > 0 ? v : onzerov; }"},"SUM":{"args":"values","body":"{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"},"OnNeg":{"args":"arg0,arg1","body":"{ if (arg0 < 0) { return arg1; } return arg0;}"},"OnZeroOrNA":{"args":"arg0,arg1","body":"{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"},"OnZeroOrNa":{"args":"v,arg1","body":"{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"},"Exp":{"args":"v","body":"{ return Math.pow(v, 2);}"},"OnERorNA":{"args":"v,onerrornav","body":"{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"},"Round":{"args":"v,decimals","body":"{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"{ return v === undefined? false : v.match(p); }"},"ZeroOnNaN":{"args":"v","body":"{ return parseFloat(isNaN(v) ? 0 : v); }"},"VALIDDATE":{"args":"d","body":"{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"},"LOOKUP":{"args":"key","body":"{ return CACHE[key]; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"TupleCount":{"args":"x","body":"{ return 1; }"},"TupleSum":{"args":"value","body":"{ return value; }"},"EvaluateAsString":{"args":"value","body":"{ return String(value) }"},"FirstUC":{"args":"value","body":"{ return value }"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"Visible":{"args":"variableOrValue","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"GetTitle":{"args":"one","body":"{ return 'tst' }"},"Pos":{"args":"one,two","body":"{ return (two==null) ? -1 : two.indexOf(one); }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"TupleMin":{"args":"one","body":"{ return 1 }"},"TupleMax":{"args":"one","body":"{ return 1 }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"{ return new Date(d,m,y).toLocaleString(); }"},"LastTinYear":{"args":"x","body":"{ return x }"},"FirstDateInT":{"args":"one","body":"{ return 1 }"},"FirstT":{"args":"one","body":"{ return 1 }"},"LastT":{"args":"one","body":"{ return 1 }"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"HINT":{"args":"one","body":"{ return 1 }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"one","body":"{ return 1 }"},"YearToT":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"{ return 1 }"},"FesExpression":{"args":"one","body":"{ return one }"},"RoundUp":{"args":"num,precision","body":"return Math.ceil(num * precision) / precision"},"Mut":{"args":"one","body":"{ return 1 }"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"one","body":"return one"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"TitleEntered":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"one","body":"return 1"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return x"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return ''+one;"},"DateToYear":{"args":"one","body":"return new Date(one)"},"DateToDay":{"args":"one","body":"return 1"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"value,from,to","body":"return String(value).substring(from,to)"},"Val":{"args":"one","body":"return 1"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"value,min,max,fallback","body":"return isNaN(value) ? fallback : value < min ? min : value > max ? max : value"},"LN":{"args":"one","body":"return 1"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"TupleInstanceIndex":{"args":"","body":"return 1"},"OnNEG":{"args":"a,b","body":"{ if (a < 0) { return a; } return b;}"},"OnError":{"args":"a,b","body":"{ if (isNaN(a)) { return b; } return a;}"},"DateStr":{"args":"string","body":"{ return string }"},"DateToYearNum":{"args":"string","body":"{ return string }"},"VAL":{"args":"string","body":"{ return string }"},"BeforeStr":{"args":"string","body":"{ return string }"},"AfterStr":{"args":"string","body":"{ return string }"},"MutCalc":1,"CalculatedInBaseCurrency":1,"PeriodinT":1,"TimeAggregated":false,"Bookyear":1,"ScaleFactor":1,"Self":1,"Notrend":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"MainPeriod":3,"X":1,"MaxT":1,"NumberOfyears":17,"FAM":1,"Now":1,"NA":1e-10,"On":1,"No":0,"Off":0,"True":1,"False":0,"SETTINGS":{"LANGUAGE":"en"},"ViewScaleFactor":1,"Backward":1,"Decimals":2,"CACHE":{}}
+const jsMath = {"Length":{"args":"v1","body":"return String(v1).length"},"OnER":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"Oner":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnEr":{"args":"v,onerrv","body":"{ if (isNaN(v)) { return onerrv; } return v; }"},"OnZero":{"args":"v,onzerov","body":"{ return v > 0 ? v : onzerov; }"},"SUM":{"args":"values","body":"{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"},"OnNeg":{"args":"arg0,arg1","body":"{ if (arg0 < 0) { return arg1; } return arg0;}"},"OnZeroOrNA":{"args":"arg0,arg1","body":"{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"},"OnZeroOrNa":{"args":"v,arg1","body":"{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"},"Exp":{"args":"v","body":"{ return Math.pow(v, 2);}"},"OnERorNA":{"args":"v,onerrornav","body":"{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"},"Round":{"args":"v,decimals","body":"{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"{ return v === undefined? false : v.match(p); }"},"ZeroOnNaN":{"args":"v","body":"{ return parseFloat(isNaN(v) ? 0 : v); }"},"VALIDDATE":{"args":"d","body":"{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"},"LOOKUP":{"args":"key","body":"{ return CACHE[key]; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"TupleCount":{"args":"x","body":"{ return 1; }"},"EvaluateAsString":{"args":"value","body":"{ return String(value) }"},"FirstUC":{"args":"value","body":"{ return value }"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"Visible":{"args":"variableOrValue","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"GetTitle":{"args":"one","body":"{ return 'tst' }"},"Pos":{"args":"one,two","body":"{ return (two==null) ? -1 : two.indexOf(one); }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"{ return new Date(d,m,y).toLocaleString(); }"},"LastTinYear":{"args":"x","body":"{ return x }"},"FirstDateInT":{"args":"one","body":"{ return 1 }"},"FirstT":{"args":"one","body":"{ return 1 }"},"LastT":{"args":"one","body":"{ return 1 }"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"HINT":{"args":"one","body":"{ return 1 }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"one","body":"{ return 1 }"},"YearToT":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"{ return 1 }"},"FesExpression":{"args":"one","body":"{ return one }"},"RoundUp":{"args":"num,precision","body":"return Math.ceil(num * precision) / precision"},"Mut":{"args":"one","body":"{ return 1 }"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"one","body":"return one"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"TitleEntered":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"one","body":"return 1"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return x"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return String(one)"},"DateToYear":{"args":"one","body":"return new Date(one)"},"DateToDay":{"args":"one","body":"return 1"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"value,from,to","body":"return String(value).substring(from,to)"},"Val":{"args":"one","body":"return 1"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"value,min,max,fallback","body":"return isNaN(value) ? fallback : value < min ? min : value > max ? max : value"},"LN":{"args":"one","body":"return 1"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"TupleInstanceIndex":{"args":"","body":"return 1"},"OnNEG":{"args":"a,b","body":"{ if (a < 0) { return a; } return b;}"},"OnError":{"args":"a,b","body":"{ if (isNaN(a)) { return b; } return a;}"},"DateStr":{"args":"string","body":"{ return string }"},"DateToYearNum":{"args":"string","body":"{ return string }"},"VAL":{"args":"string","body":"{ return string }"},"BeforeStr":{"args":"string","body":"{ return string }"},"AfterStr":{"args":"string","body":"{ return string }"},"MutCalc":1,"CalculatedInBaseCurrency":1,"PeriodinT":1,"TimeAggregated":false,"Bookyear":1,"ScaleFactor":1,"Self":1,"Notrend":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"MainPeriod":3,"X":1,"MaxT":1,"NumberOfyears":17,"FAM":1,"Now":1,"NA":1e-10,"On":1,"No":0,"Off":0,"True":1,"False":0,"SETTINGS":{"LANGUAGE":"en"},"ViewScaleFactor":1,"Backward":1,"Decimals":2,"CACHE":{}}
 const Solver = require('js-solver')
 const entries = {};
 if (!global.MatrixLookup) {
@@ -24668,7 +25097,7 @@ if (!global.MatrixLookup) {
     }
 }
 if (!global.MATRIX_VALUES) {
-    MATRIX_VALUES = {}
+    global.MATRIX_VALUES = {}
 }
 
 //add functions found in the jsMath to the global scope
@@ -24697,7 +25126,7 @@ SOLVER = function(args) {
     return new Solver(args || arguments)
 }
 AMMOUNT = function() {
-    let total = 0;
+    var total = 0;
     for (var key in arguments) {
         if (arguments[key]) total++
     }
@@ -24711,11 +25140,12 @@ OnNA = function(v, nav) {
 }
 
 MatrixLookup = function(xlsfileName, tableName, row, col) {
+    if (!MATRIX_VALUES) return NA
     var table = MATRIX_VALUES[tableName];
     if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         return table.xasValues[row][col];
     } else if (table && table.xasValues) {
-        let lastidx = null;
+        var lastidx = null;
         for (var key in table.xasValues) {
             if (key <= row) {
                 lastidx = key;
@@ -24768,10 +25198,13 @@ VALUES = function(func, fId, x, y, z, v) {
 GetValue = function(variable, x, y, z, v, amm) {
     return 1;//variable('123', x, y, z, v)
 }
-
+//'^[0-9]+$'
+REGEXPMATCH = function(pattern, value, message) {
+    return new RegExp(pattern).test(value) ? true : false;
+}
 ValueT = function(one) {
-    let retrunValue = 0;
-    while (!one.dummy) {
+    var retrunValue = 0;
+    while (one && !one.dummy) {
         retrunValue++;
         one = one.prev
     }
@@ -24783,7 +25216,7 @@ exports.mathJs = {
     entries: entries
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/math\\ff-math.js","/math",undefined)
-},{"_process":39,"buffer":37,"js-solver":46,"log6":36}],46:[function(require,module,exports){
+},{"_process":38,"buffer":36,"js-solver":45,"log6":35}],45:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 var Solver = (function () {
 
@@ -24851,7 +25284,7 @@ var Solver = (function () {
 
 if (typeof module !== 'undefined') module.exports = Solver;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/math\\node_modules\\js-solver\\js-solver.js","/math\\node_modules\\js-solver",undefined)
-},{"_process":39,"buffer":37}],47:[function(require,module,exports){
+},{"_process":38,"buffer":36}],46:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 if (!String.prototype.repeat) {
     String.prototype.repeat = function(count) {
@@ -24905,4 +25338,4 @@ StringBuffer.prototype = {
 }
 exports.StringBuffer = StringBuffer
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/model-tests\\StringUtils.js","/model-tests",undefined)
-},{"_process":39,"buffer":37}]},{},[16,44]);
+},{"_process":38,"buffer":36}]},{},[16,43]);

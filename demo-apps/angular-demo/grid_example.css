@@ -127,7 +127,7 @@ section.container table {
     white-space: nowrap;
 }
 
-.isentered input,.isentered textarea,.isentered select {
+.isentered input, .isentered textarea, .isentered select {
     border-left: 2px solid #000;
     border-right: 1px solid #ccc;
     color: #1A3485;
@@ -956,9 +956,14 @@ span.time i.fa {
     font-weight: 400;
     font-size: 12px;
 }
+
 .toggle-save-btn.btn.btn-sm.active {
     background-color: #eee;
 }
+
 .ui-datepicker-calendar {
     display: none;
-}​
+}
+.d-2 {
+    padding-left: 5px;
+}

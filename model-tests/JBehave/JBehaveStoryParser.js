@@ -31,13 +31,20 @@ JBehaveStoryParser.prototype.start = function() {
         model.importFFL(fflFile)
         const storyParser = new StoryParser(storyFile, story, model.lme);
         storyParser.filename = story;
+        var succes = true;
         storyParser.message = function(event) {
-            if (event.result.status == 'fail' || event.result.status == 'error') {
+            if (event.result.status == 'fail') {
+                //Failed results are just not right, but don't require stacktrace
+                log.error('Story ' + story + ':' + event.line + ' failed to complete.\n' + event.raw.line + ' failing, because [' + event.result.message + ']')
+                succes = false;
+            }
+            else if (event.result.status == 'error') {
                 throw Error('Story failed' + JSON.stringify(event))
             }
         }
         storyParser.start()
         storyParser.call()
+        if (!succes) process.exit(1);
     }).catch(function(err) {
         log.error(err)
         process.exit(1);

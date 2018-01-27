@@ -146,6 +146,12 @@ for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
     }
 }
 
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
 const start = {
     bitmask: FIRST__LEVEL_BITMASK,
     start_bit: FIRST__TUPLE_START_BIT,
@@ -156,11 +162,14 @@ const start = {
     m: parseInt('0000000000000000000000000000000000', 2),
     m_bin: '0000000000000000000000000000000000',
     index: 0,
+    uihash: pad(0, 3),
     display: '0000',
     depth: 0,
     deeper: []
 }
 start.base = start;
+//p is the Jump from Tuple to Tuple
+start.p = [start, start, start];
 
 for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
     start.deeper[first] = {
@@ -173,10 +182,13 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
         base: start,
         depth: 1,
         index: first,
+        uihash: pad(first, 3),
         hash: (FIRST__LEVEL_TUPLE * first),
         deeper: [],
         parent: start
     }
+    //p is the Jump from Tuple to Tuple
+    start.deeper[first].p = [start, start.deeper[first], start.deeper[first], start.deeper[first]];
     if (first > 0) start.deeper[first].previous = start.deeper[first - 1]
     if (first > 0) start.deeper[first - 1].next = start.deeper[first]
 
@@ -190,11 +202,14 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
             display: first + '' + second + '00',
             start_bit: THIRD__TUPLE_START_BIT,
             index: second,
+            uihash: pad(second, 3),
             depth: 2,
             hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second),
             deeper: [],
             parent: start.deeper[first]
         }
+        //p is the Jump from Tuple to Tuple
+        start.deeper[first].deeper[second].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second]];
         if (second > 0) start.deeper[first].deeper[second].previous = start.deeper[first].deeper[second - 1]
         if (second > 0) start.deeper[first].deeper[second - 1].next = start.deeper[first].deeper[second]
 
@@ -210,10 +225,14 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
                 start_bit: THIRD__TUPLE_START_BIT,
                 index: third,
                 depth: 3,
+                uihash: pad(third, 3),
                 hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second) + (THIRD__LEVEL_TUPLE * third),
                 deeper: [],
                 parent: start.deeper[first].deeper[second]
             }
+            //p is the Jump from Tuple to Tuple
+            start.deeper[first].deeper[second].deeper[third].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second].deeper[third]];
+
             if (third > 0) start.deeper[first].deeper[second].deeper[third].previous = start.deeper[first].deeper[second].deeper[third - 1]
             if (third > 0) start.deeper[first].deeper[second].deeper[third - 1].next = start.deeper[first].deeper[second].deeper[third]
         }
@@ -317,15 +336,6 @@ TINSTANCECOUNT = function(fIds, v, y) {
     }
     return max;
 }
-
-const TupleValues = {
-    100: {
-        10: 100
-    },
-    101: {},
-    102: {}
-}
-
 /*
  * Conceptually checks:
  * From here we will build the concept

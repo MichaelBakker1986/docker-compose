@@ -53,7 +53,7 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
                 "comment": "#|Memo1",
                 "storage.type": "&",
                 "support.function": "+|-|=|none|and|or|entered|visible",
-                "constant.language": "NA|T|X|0|1|2|3|4|5|6|7|8|9|."
+                "constant.language": "NA|TupleIndex|T|X|0|1|2|3|4|5|6|7|8|9|."
             }, "text", true);
             this.keywordMapper = keywordMapper;
             this.keywordRule = {

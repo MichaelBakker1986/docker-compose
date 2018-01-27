@@ -11,20 +11,18 @@ const log = require('log6')
 const exec = require('child-process-promise').exec;
 
 walker.walk(function(file) {
-    fs.exists(file.replace('.story', '.ffl'), function(exists) {
+    fs.exists(file.replace(/(\(\w+\))?\.story/gm, '.ffl'), function(exists) {
             if (exists) {
-                const fflFile = file.replace('.story', '.ffl');
+                const fflFile = file.replace(/(\(\w+\))?\.story/gm, '.ffl');
                 const jbehaveStoryFile = file;
                 const modelName = path.basename(fflFile).replace('.ffl', '')
 
                 const command = 'node ' + __dirname + '/StoryExecutor.js ' + [modelName, fflFile, jbehaveStoryFile].join(' ');
-                console.info(command)
                 exec(command).then((result) => {
-                    log.info('Success story ' + modelName)
+                    log.info('Success story ' + file)
                 }).catch((err) => {
                     log.error('Fail story ' + err.toString())
                 });
-
             } else {
                 log.info('Story has no matching ffl file [' + file + ']')
             }
