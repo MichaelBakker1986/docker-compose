@@ -17348,6 +17348,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
                 uiNode.tupleDefinition = true;
+                uiNode.displaytype = 'string' //Will story string-based values (Jan,Piet,123Jaar,Etc..)
                 if (tuples.length > 0) {
                     uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
                     uiNode.tupleProperty = true
@@ -17589,6 +17590,41 @@ exports.LMEParser = LMEParser.prototype
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\exchange_modules\\lme\\lmeparser.js","/lme-core\\exchange_modules\\lme",undefined)
 },{"../../src/FormulaService":22,"../../src/FunctionMap":23,"../../src/PropertiesAssembler":26,"../../src/SolutionFacade":28,"_process":38,"buffer":36,"log6":35}],16:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+/**
+ * Gives a Object-oriented view over a part of the model
+ * Objectify the entire model is simply too expensive to do. 128(t3)*128(t2)*128(t1)*128(t0)*500(cols)*5000(vars)...
+ * So we focus on the parts that are created, active and interesting to see/modify
+ *
+ * The LMETree has .sort() to sort the entire rows array naturally
+ *  Ordering the Nodes requires a somewhat complex sort-function.
+ *  ((VariableID|TupleDefinitionID),tIndex(tDepth)){maxTupleDepth}
+ *  e.g: 0005,001,0006,000,0006,000 = 0006(John)
+ *  e.g: 0005,001,0006,000,0008,001 = 0008(John,CarPayment)
+ *
+ *  Where id's are translated into Unique names per tIndex
+ *  So 0005,001 is always the First (John) in this example
+ *  So 0005,001,0006,000 is always the First (John,CarPayment) in this example
+ *  0008 can be any child-variable in 0005.0006.* Example John.CarPayment.Status
+ *
+ * (!)       TODO:                                                      Another option should be
+ * (?) be aware null-tuple is post-fixed with ,0,0 : t(2)    => 2,0,0 | 2,2,2
+ * (?) be aware first-tuple is post-fixed with ,0  : t(4,1)  => 4,1,0 | 4,1,1
+ *
+ *  So will mean that:
+ *  a(0)       = a0a0a0
+ *   b(0,0)    = a0b0b0
+ *    d(0,0,0) = a0b0d0
+ *   b(0,1)    = a0b1b0 (!) what to do with the last index? re-use the one before or not?
+ *    d(0,1,1) = a0b1d1
+ *   b(0,tMax) = a0b9b0
+ *  a(1)       = a1a0a0 (!) what to do with the last index? re-use the one before or not?
+ *   b(1,tMax) = a1b9b0
+ *  e(0)       = e0e0e0
+ *
+ * The LMETree.nodes has a blueprint from the entire model. (without tuple-instances, and not hiding the Tuple Definition)
+ * The LMETree.no has all created nodes in a map, to speed up lookups.
+ * The LMETree.rows is the Array, used for manipulation/view
+ */
 const SolutionFacade = require('../../src/SolutionFacade');
 const PropertiesAssembler = require('../../src/PropertiesAssembler');
 
@@ -17604,6 +17640,7 @@ function LMETree(name, workbook) {
     this.workbook = workbook;
     this.nodes = {};
     this.names = {};
+    this.rows = []
     this.no = {}
     this.repeats = {
         undefined: [workbook.context.columnSize, 1],
@@ -17704,28 +17741,38 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         has[1] = yas.parent.uihash
         has[3] = yas.uihash
         has[5] = '999'
+    } else if (yas.depth == 3) {
+        //throw Error('Something wrong here..')
+        has[1] = yas.parent.uihash
+        has[3] = yas.uihash
+        has[5] = '999'
     }
     const rv = {
         id: rowId,
-        order_id: has.join(''),
+        order_id: has.join('.'),
         add: function() {
             const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
+            workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
+
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
                 if (yasi == 'new') {
-                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
+                    tree.addTupleNode(child, path.split('.'), index, yi , cTreeDepth)
                 }
                 else {
                     tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
                 }
             }, inneryas, node.rowId, treePath.length)
+            return inneryas;
         },
+        //index is deprecated. Lookup the next sibling when needed. Could be tuple..
         index: index,
         title_locked: node.title_locked,
         type: 'tuple_add',
         path: path,
         ammount: amount,
+        display: yas.display,
         colspan: colspan,
-        depth: yas.depth,
+        depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
         visible: true,
         cols: [{
             value: unique,
@@ -17740,6 +17787,7 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
     Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (parent) parent.children.push(rv);
     this.nodes[unique] = rv;
+    this.rows.push(rv)
 }
 LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const workbook = this.workbook;
@@ -17752,20 +17800,24 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
     const has = node.hash.slice();
+    //alright this is a big step. and seems to work (there is a variable set wrongly.)
     if (yas.depth == 0) {
         has[1] = yas.uihash
     } else if (yas.depth == 1) {
         has[1] = yas.uihash
-        has[3] = yas.parent.uihash
     } else if (yas.depth == 2) {
-        has[1] = yas.uihash
+        has[3] = yas.uihash
+        has[1] = yas.parent.uihash
+    } else if (yas.depth == 3) {
+        has[5] = yas.uihash
         has[3] = yas.parent.uihash
-        has[5] = yas.parent.parent.uihash
+        has[1] = yas.parent.parent.uihash
     }
     const rv = {
         id: rowId,
         depth: yas.depth,
-        order_id: has.join(''),
+        display: yas.display,
+        order_id: has.join('.'),
         index: index,
         title_locked: node.title_locked,
         type: node.displayAs,
@@ -17818,9 +17870,9 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     });
     const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
-    //TODO: use array instead of Object
     this.nodes[unique] = rv;
     this.no[rowId] = rv;
+    this.rows.push(rv)
 }
 WebExport.prototype.parseData = function(webExport, workbook) {
     return SolutionFacade.createSolution(workbook.modelName);
@@ -17861,6 +17913,12 @@ WebExport.prototype.deParse = function(rowId, workbook) {
         }
     }, workbook.resolveY(0).parent, null, 0)
     lmeTree.offset = 0;
+    lmeTree.sort = function() {
+        lmeTree.rows.sort((a, b) => {
+            if (a.order_id == b.order_id) throw Error()
+            return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
+        })
+    }
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())
@@ -17875,8 +17933,6 @@ require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject
 const log = require("log6");
 const WorkBook = require("./src/JSWorkBook");
 const Context = require("./src/Context");
-const TimeAxis = require('./src/TimeAxis');
-const timeAxis = new TimeAxis(require('./resources/CustomImport'));
 
 function LMEService() {
 }
@@ -17886,6 +17942,8 @@ LMEService.prototype.initializeFFlModelData = function(data, path) {
     if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
         JSWorkBook = new WorkBook(new Context());
     } else {
+        const TimeAxis = require('./src/TimeAxis');
+        const timeAxis = new TimeAxis(require('./resources/CustomImport'));
         JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
     }
     JSWorkBook.importSolution(data, "ffl");
@@ -18898,6 +18956,7 @@ const identifier_replace = {
     MainPeriod: 'z', //zAxis Reference, base period, z.base
     MaxT: 'x.last',
     TupleIndex: 'y.index',
+    TupleLocation: 'y.display',
     Trend: 'x'//x.trend
 
 }
@@ -19373,8 +19432,13 @@ JSWorkBook.prototype.importSolution = function(data, parserType) {
 JSWorkBook.prototype.getSolutionName = function() {
     return this.modelName;
 }
-//if it is possible to fix missing functions
-//fix loops in the solution. we try it
+
+/**
+ * Try to do: Monte-Carlos simulation
+ * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie
+ * if it is possible to fix missing functions
+ * TRY fix infinite loops in the solution, breaking down chains.
+ */
 function fixAll() {
     var attempt = 0;
     var workbook = this;
@@ -19411,6 +19475,18 @@ function logErrorWithVariableName(variableName, workbook, formulaInfo, e) {
     }
 }
 
+/**
+ * TODO: this function only, is enough to extract into Validation.js
+ * Try to do: Monte-Carlos simulation
+ *  - TODO: add trend-notrend x-input values.
+ *
+ * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie
+ * if it is possible to fix missing functions
+ * TRY fix infinite loops in the solution, breaking down chains.
+ *  -- When ReferenceError: Create new VARIABLE matching, remove original formula
+ *  -- When RangeError:
+ *  --- lookup most significant part in loop, disable formula, transform into String formula. try again
+ */
 function validateImportedSolution() {
     var validateResponse = {
         succes: [],
@@ -19420,8 +19496,7 @@ function validateImportedSolution() {
     var workbook = this;
 
     function formulaFixer(elemId) {
-        var formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
-        //TODO: use timeout, this monte carlo is blocking UI thread
+        const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         try {
             //iterate all formula-sets to test 100%
             ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
@@ -19586,6 +19661,9 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
+/**
+ * Does not fix invalid request doing a 2-tuple node-lookup with a 3/1-tuple yas.
+ */
 JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
     if (!node.tuple) return -1;
     yas = this.resolveY(yas)
@@ -19920,22 +19998,33 @@ PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
 PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth) {
     visitInternal(getRootNode(modelName), func, startDepth || 0)
 }
-const hashcars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+/*
+ * Complex to explain. See {@webexport.js}
+ * Its used to provide a sortable id per row when combined with Tuples
+ *  [((variableId|tupleDefinitionId),tupleIndex){maxTupleDepth}]
+ */
 PropertiesAssembler.prototype.indexProperties = function(modelName) {
     var counter = 0;
+    const padder = pad;
     visitInternal(getRootNode(modelName), function(node, depth) {
         counter++;
-        node.id = pad(counter, 5);
+        node.id = padder(counter, 5);
         if (node.tupleProperty) {
             const tupleDef = PropertiesModel[node.solutionName + "_" + node.tupleDefinitionName + "_value"]
             if (tupleDef.tupleProperty) {
                 const nestedTupleDef = PropertiesModel[node.solutionName + "_" + tupleDef.tupleDefinitionName + "_value"]
-                node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+                if (nestedTupleDef.tupleProperty) {
+                    const douleNestedTupleDef = PropertiesModel[node.solutionName + "_" + nestedTupleDef.tupleDefinitionName + "_value"]
+                    if (douleNestedTupleDef.tupleProperty) throw Error('only 3levels nested tuples are allowed')
+                    node.hash = [douleNestedTupleDef.id, '000', nestedTupleDef.id, '000', tupleDef.id, '000', node.id]
+                } else {
+                    node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id]
+                }
             } else {
-                node.hash = [tupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+                node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id]
             }
         }
-        else node.hash = [node.id, '000', node.id, '000', node.id, '000'];
+        else node.hash = [node.id, '000', node.id, '000', node.id, '000', node.id];
     }, 0)
 }
 
@@ -24944,7 +25033,6 @@ require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
-const bookyearTimeModel = require('../../lme-core/src/XAxis');
 const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
 const CalculationFacade = require('../../lme-core').CalculationFacade;
@@ -24955,7 +25043,7 @@ function LmeAPI(TimeModel, Ctx, interval) {
     const WorkBook = require('../../lme-core/src/JSWorkBook');
 
     //TODO: the TimeModel is probably part of the Context object.
-    this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : bookyearTimeModel, interval);
+    this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : require('../../lme-core/src/XAxis'), interval);
     this.modelName = undefined;
     this.urlPrefix = '';
 }

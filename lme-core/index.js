@@ -6,8 +6,6 @@ require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject
 const log = require("log6");
 const WorkBook = require("./src/JSWorkBook");
 const Context = require("./src/Context");
-const TimeAxis = require('./src/TimeAxis');
-const timeAxis = new TimeAxis(require('./resources/CustomImport'));
 
 function LMEService() {
 }
@@ -17,6 +15,8 @@ LMEService.prototype.initializeFFlModelData = function(data, path) {
     if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
         JSWorkBook = new WorkBook(new Context());
     } else {
+        const TimeAxis = require('./src/TimeAxis');
+        const timeAxis = new TimeAxis(require('./resources/CustomImport'));
         JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
     }
     JSWorkBook.importSolution(data, "ffl");

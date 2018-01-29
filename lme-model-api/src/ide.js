@@ -138,10 +138,10 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         var storyParser = new StoryParser(aceEditor.getValue(), windowModelName + '.story', LMEMETA.lme);
         storyParser.message = function(event) {
             annotations.push({
-                row: event.line,
+                row: event.line - 1,
                 column: 0,
                 text: event.result.message, // Or the Json reply from the parser
-                type: event.result.status // also warning and information
+                type: event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
             })
             aceEditor.setAnnotations(annotations);
         }
@@ -152,6 +152,35 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         }
         storyParser.start();
         storyParser.call();
+    }
+    $scope.saveFileInView = function() {
+        if ($scope.currentView == 'FFLModelEditorView') {
+            $scope.saveFFLModel()
+        } else if ($scope.currentView == 'jbehaveView') {
+            $scope.saveJBehaveStory()
+        }
+    }
+    $scope.saveJBehaveStory = function() {
+        const type = '.story';
+        Pace.track(function() {
+            $scope.saveFeedback = "Saving story " + $scope.session.fflModelPath + "… "
+            $scope.saveFeedbackTitle = "Working on it... ";
+            var data = aceEditor.getValue()
+            $.post("saveJBehaveStory/" + $scope.session.fflModelPath, {
+                data: data,
+                type: type
+            }, function(data) {
+                $scope.$apply(function() {
+                    $scope.saveFeedbackTitle = "Finished"
+                    $scope.saveFeedback = data.status == 'fail' ? 'Failed saving story :' + data.reason : 'Done work.'
+                    $scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.story'
+                    $scope.session.disablePreviewButton = false;
+                    if (data.status == 'success') {
+                        $('#modal-success').modal('hide')
+                    }
+                })
+            });
+        });
     }
     $scope.saveFFLModel = function() {
         const type = '.ffl';
@@ -307,13 +336,34 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             location.reload();
         });
     }
-
+    /**
+     * Auto-complete for JBehave view
+     **/
+    $scope.changedView = function() {
+        if ($scope.currentView == 'jbehaveView') {
+            const names = register.getIndex('name')
+            const wordMap = []
+            for (var name in names) {
+                wordMap.push(
+                    {"word": name}
+                )
+            }
+            aceEditor.addCompleter(function(editor, session, pos, prefix, callback) {
+                if (prefix.length === 0) {
+                    callback(null, []);
+                    return
+                }
+                callback(null, wordMap.map(function(ea) {
+                    return {name: ea.word, value: ea.word, meta: "optional text"}
+                }));
+            })
+        }
+    }
     window.addEventListener("keydown", function(e) {
         if (e.ctrlKey && e.shiftKey) {
             return;
         }
         if (e.key == 'F5' && debugManager.active) {
-            console.info(e)
             doStep()
             e.preventDefault();
         }
@@ -331,8 +381,7 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
             switch (String.fromCharCode(evt.which).toLowerCase()) {
                 case 's':
                     evt.preventDefault();
-                    $('#saveFFLModel').click();
-                    $scope.saveFFLModel();
+                    $('#saveFileInView').click();
                     break;
                 case 'f':
                     if (evt.shiftKey) {
@@ -451,6 +500,13 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
 
 
     aceEditor.aceEditor.commands.on("afterExec", function(e) {
+        if ($scope.currentView == 'jbehaveView') {
+            $scope.runJBehaveTest()
+            return;
+        }
+        else if ($scope.currentView !== 'FFLModelEditorView') {
+            return;
+        }
         if (e.command.name == 'golinedown') {
         } else if (e.command.name == 'golineup') {
         } else if (e.command.name == 'gotoright') {
@@ -468,7 +524,9 @@ angular.module('lmeapp', ['angular.filter']).controller('ideController', functio
         $scope.$apply(function() {
             $scope.error = changeManager.error
             $scope.activeVariable = changeManager.currentVariable
-            $scope.togglePropertiesSidebar(true)
+
+            if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
+
             if (changeManager.warnings.length > 0) {
                 console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
             }

@@ -5,7 +5,6 @@ require('../../formulajs-connect');
 require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
-const bookyearTimeModel = require('../../lme-core/src/XAxis');
 const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
 const CalculationFacade = require('../../lme-core').CalculationFacade;
@@ -16,7 +15,7 @@ function LmeAPI(TimeModel, Ctx, interval) {
     const WorkBook = require('../../lme-core/src/JSWorkBook');
 
     //TODO: the TimeModel is probably part of the Context object.
-    this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : bookyearTimeModel, interval);
+    this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : require('../../lme-core/src/XAxis'), interval);
     this.modelName = undefined;
     this.urlPrefix = '';
 }

@@ -14,7 +14,7 @@ wb.createFormula("2+DocumentValue", "TupleSibling2", DEFAULT, true, 'document');
 wb.createFormula("TupleSibling1[doc]+TupleSibling2[doc]", "TestTupleValues", DEFAULT, true, 'document');
 wb.createFormula("TSUM(TestTupleValues[doc])", "TestTupleValuesSUM", DEFAULT, false, 'document');
 wb.createFormula("TCOUNT(TestTupleValues)", "TestTupleValuesCOUNT", DEFAULT, false, 'document');
-assert.equal(wb.get("TestTupleValuesCOUNT"), -1);
+assert.equal(wb.get("TestTupleValuesCOUNT"), 0);
 assert.equal(wb.get("TestTupleValues", DEFAULT, 0, 0), 13);
 wb.set('DocumentValue', 100, DEFAULT, 0, 1);//will completely be ignored, since its not a tuple
 assert.equal(wb.get("TestTupleValues", DEFAULT, 0, 0), 13);

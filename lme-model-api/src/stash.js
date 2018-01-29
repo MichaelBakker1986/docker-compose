@@ -31,7 +31,33 @@ class Stash {
             })
     }
 
-//TODO: backupfile, on fail restore old file
+    commitJBehaveFile(user_id, name, data, type) {
+        return write(__dirname + '/../../git-connect/resources/' + name + '.story', data)
+            .then(function(fileName) {
+                let userID = uuid();
+                if (develop) {
+                    console.info('<span>Story update:</span><a href="http://' + domain + 'ide.html#' + name + '&' + userID + '">' + name + '</a><span></span>');
+                    return 'Done'
+                }
+                let command = "git pull &&  git commit -a -m \"Story update [" + name + "] by " + user_id + "@" + host + "\" && git push && git rev-parse HEAD";
+                return exec(command).then((ok) => {
+                    var output = ok.stdout.split('\n');
+                    const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
+                    console.info('<a href="http://' + domain + 'ide.html#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + "@" + host + '</span>');
+                }).catch((err) => {
+                    const errorData = err.toString()
+                    if (errorData.indexOf('No changes detected') > -1) {
+                        return "No changes detected in file."
+                    } else {
+                        throw Error('GIT commit failed while pushing file to repository:[' + errorData + ']')
+                    }
+                })
+            }).catch(function(err) {
+                throw Error('Failed to write file to resources folder. [' + err.toString() + ']');
+            })
+    }
+
+    //TODO: backupfile, on fail restore old file
     commit(user_id, name, data, type) {
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])

@@ -258,8 +258,11 @@ TVALUES = function(fIds, func, fId, x, y, z, v) {
        }*/
     return returnValue;
 }
+/**
+ * TINSTANCECOUNT is 0 based. TCOUNT is the friendly 1based version
+ */
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
-    return TINSTANCECOUNT(fIds, v, y);
+    return TINSTANCECOUNT(fIds, v, y) + 1;
 }
 REVERSEYAXIS = function(index, y) {
     return (y.bitmask & index) >> y.start_bit

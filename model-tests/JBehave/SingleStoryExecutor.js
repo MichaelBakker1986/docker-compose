@@ -1,8 +1,9 @@
 const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
-const modelName = 'TUPLETEST'
+const modelName = 'GYLLIONKSP'
+const path = __dirname + '../../../git-connect/resources/'
 const test = new JBehaveStoryParser({
-    fflFile: __dirname + '/../Tuples/' + modelName + '.ffl',
+    fflFile: path + modelName + '.ffl',
     modelName: modelName,
-    storyFile: __dirname + '/../Tuples/' + modelName + '(parent).story'
+    storyFile: path + modelName + '.story'
 })
 test.start()

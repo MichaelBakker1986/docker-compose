@@ -156,7 +156,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         //' + node[nameIndex] + '.required &&
         //valid formulas are only interesting when entered OR required
         if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
-        const frequency = node[fflRegister.frequencyIndex] || 'column';
+        const frequency = (node[tupleIndex]) ? 'none' : (node[fflRegister.frequencyIndex] || 'column');
 
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
         //hierarchical visibility
@@ -177,6 +177,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
                 uiNode.tupleDefinition = true;
+                uiNode.displaytype = 'string' //Will story string-based values (Jan,Piet,123Jaar,Etc..)
                 if (tuples.length > 0) {
                     uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
                     uiNode.tupleProperty = true

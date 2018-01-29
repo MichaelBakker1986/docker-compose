@@ -9,7 +9,8 @@ function AceEditor() {
     this.fflModel = "";
     const aceEditor = ace.edit("editor");
     edit = aceEditor;//quick response front-end
-    var langTools = ace.require("ace/ext/language_tools");
+    const langTools = ace.require("ace/ext/language_tools");
+    this.langTools = langTools;
     aceEditor.session.setMode("ace/mode/ffl");
     aceEditor.setTheme("ace/theme/tomorrow");
     aceEditor.setBehavioursEnabled(true);
@@ -32,11 +33,18 @@ function AceEditor() {
     aceEditor.on("changeCursor", function(e) {
         console.info(e)
     });
+
     this.aceEditor = aceEditor;
 }
 
 AceEditor.prototype.getCursor = function() {
     return this.aceEditor.selection.getCursor();
+}
+AceEditor.prototype.addCompleter = function(callback) {
+    var modelNamesCompleter = {
+        getCompletions: callback
+    }
+    this.langTools.addCompleter(modelNamesCompleter);
 }
 AceEditor.prototype.setAnnotations = function(annotations) {
     this.aceEditor.session.setAnnotations(annotations)

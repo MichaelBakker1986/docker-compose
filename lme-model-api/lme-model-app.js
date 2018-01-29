@@ -84,6 +84,17 @@ app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
         res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
     })
 });
+app.post('*/:user_id/saveJBehaveStory/:model_name', (req, res) => {
+    const model_name = req.params.model_name;
+    const user_id = req.params.user_id;
+    stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then((data) => {
+        res.json({status: 'ok'});
+    }).catch((err) => {
+        log.debug('Failed to write ' + model_name + '.ffl file.', err)
+        res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
+    })
+});
+
 app.get('*/branches', (req, res) => {
     stash.branches().then((data) => {
         res.json(data);
@@ -131,6 +142,9 @@ app.post('*/upload', function(req, res) {
     console.info('upload')
     res.status(200).json({status: 'ok'})
 })
+/**
+ * TODO: add commit
+ */
 app.post('*/excel/:model', function(req, res) {
     const modelName = req.params.model;
     if (!req.files) {

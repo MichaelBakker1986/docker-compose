@@ -30,7 +30,7 @@ const functionMapper = {
     assertValue: {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
-        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([0-9.,]+)\s*(?:(?:for column with id (\d+))|(for document))?/,
+        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/,
         call: function(workbook, linenumber, line, args) {
             const variableName = args[0], tupleIndexName = args[1], decimals = args[3], value = args[4],
                 columnId = (parseInt(args[5]) || 1) - 1
@@ -89,7 +89,7 @@ StoryParser.prototype.start = function() {
                 this.calls.push(lineAction)
             }
         }
-        if (!jebehaveMatchFound) log.warn('No match [%s] [%s]:[%s]', this.filename, lineNumber, line.trim())
+        if (!jebehaveMatchFound && log.DEBUG) log.warn('No match [%s] [%s]:[%s]', this.filename, lineNumber, line.trim())
     }
 }
 StoryParser.prototype.call = function() {

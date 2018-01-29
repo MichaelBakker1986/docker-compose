@@ -11,54 +11,31 @@ model LGD uses BaseModel
     datatype: string;
     title: "LGDCalculationInputContainer";
     frequency: document;
-    variable GuaranteeAgreement
+    tuple CollateralAgreementContainer
     {
-     displaytype: none;
-     datatype: string;
-     title: "GuaranteeAgreement";
-     frequency: document;
-     variable ReferenceNumber
-     {
-      displaytype: string;
-      datatype: string;
-      title: "ReferenceNumber";
-      frequency: document;
-      maxlength: 128;
-     }
-     variable DefinitionCode
-     {
-      displaytype: string;
-      datatype: string;
-      title: "DefinitionCode";
-      frequency: document;
-      maxlength: 255;
-     }
-    }
-    variable CollateralAgreementContainer
-    {
-     displaytype: none;
+     displaytype: paragraph;
      datatype: string;
      title: "CollateralAgreementContainer";
-     frequency: document;
+     frequency: none;
      variable CollateralAgreement
      {
       displaytype: none;
       datatype: string;
       title: "CollateralAgreement";
       frequency: document;
-      variable ReferenceNumber
+      variable CollateralAgreementReferenceNumber
       {
        displaytype: string;
        datatype: string;
-       title: "ReferenceNumber";
+       title: "CollateralAgreementReferenceNumber";
        frequency: document;
        maxlength: 128;
       }
-      variable DefinitionCode
+      variable CollateralAgreementDefinitionCode
       {
        displaytype: string;
        datatype: string;
-       title: "DefinitionCode";
+       title: "CollateralAgreementDefinitionCode";
        frequency: document;
        maxlength: 255;
       }
@@ -76,11 +53,11 @@ model LGD uses BaseModel
         frequency: document;
         maxlength: 10;
        }
-       variable Amount
+       variable CollateralAgreementAmount
        {
         displaytype: number;
         datatype: number;
-        title: "Amount";
+        title: "CollateralAgreementAmount";
         frequency: document;
        }
       }
@@ -97,11 +74,11 @@ model LGD uses BaseModel
        datatype: string;
        title: "CollateralObject";
        frequency: document;
-       variable ReferenceNumber
+       variable CollateralObjectReferenceNumber
        {
         displaytype: string;
         datatype: string;
-        title: "ReferenceNumber";
+        title: "CollateralObjectReferenceNumber";
         frequency: document;
         maxlength: 128;
        }
@@ -138,12 +115,12 @@ model LGD uses BaseModel
       }
      }
     }
-    variable FacilityInputContainer
+    tuple FacilityInputContainer
     {
-     displaytype: none;
+     displaytype: paragraph;
      datatype: string;
      title: "FacilityInputContainer";
-     frequency: document;
+     frequency: none;
      variable FacilityDetails
      {
       displaytype: none;
@@ -206,30 +183,53 @@ model LGD uses BaseModel
      }
      tuple AllocatedGuarantee
      {
-      displaytype: none;
+      displaytype: paragraph;
       datatype: string;
       title: "AllocatedGuarantee";
-      frequency: document;
-      variable ReferenceNumber
+      frequency: none;
+      variable AllocatedGuaranteeReferenceNumber
       {
        displaytype: string;
        datatype: string;
-       title: "ReferenceNumber";
+       title: "AllocatedGuaranteeReferenceNumber";
        frequency: document;
        maxlength: 128;
+      }
+      tuple GuaranteeAgreement
+      {
+       displaytype: paragraph;
+       datatype: string;
+       title: "GuaranteeAgreement";
+       frequency: none;
+       variable GuaranteeAgreementReferenceNumber
+       {
+        displaytype: string;
+        datatype: string;
+        title: "GuaranteeAgreementReferenceNumber";
+        frequency: document;
+        maxlength: 128;
+       }
+       variable GuaranteeAgreementDefinitionCode
+       {
+        displaytype: string;
+        datatype: string;
+        title: "GuaranteeAgreementDefinitionCode";
+        frequency: document;
+        maxlength: 255;
+       }
       }
      }
      tuple AllocatedCollateral
      {
-      displaytype: none;
+      displaytype: paragraph;
       datatype: string;
       title: "AllocatedCollateral";
-      frequency: document;
-      variable ReferenceNumber
+      frequency: none;
+      variable AllocatedCollateralReferenceNumber
       {
        displaytype: string;
        datatype: string;
-       title: "ReferenceNumber";
+       title: "AllocatedCollateralReferenceNumber";
        frequency: document;
        maxlength: 128;
       }
@@ -242,6 +242,7 @@ model LGD uses BaseModel
     datatype: string;
     title: "LGDCalculationOutputContainer";
     frequency: document;
+    formula: TCOUNT(CollateralAgreement);
     variable FacilityResultContainer
     {
      displaytype: none;
@@ -270,7 +271,7 @@ model LGD uses BaseModel
        displaytype: string;
        datatype: string;
        title: "LGDClass";
-       formula: 1;
+       formula: String(TMAX(CollateralAgreementAmount));
        frequency: document;
        maxlength: 255;
       }

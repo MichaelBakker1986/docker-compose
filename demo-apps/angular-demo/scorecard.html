@@ -46,7 +46,10 @@
             </ul>
             <ul class="nav navbar-nav" style="float: right">
                 <li>
-                    <div style="margin-right: 50px; margin-top: 5px;">
+                    <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
+                </li>
+                <li>
+                    <div style="margin-right: 20px; margin-left: 20px; margin-top: 14px;">
                         <input
                                 type="text"
                                 name="duration"
@@ -60,14 +63,12 @@
                     </div>
                 </li>
                 <li>
-                    <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
+                    <a class="btn" ng-click="setColumnOffset('next')"><i class="fa fa-arrow-right"></i></a>
                 </li>
                 <li>
                     <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
                 </li>
-                <li>
-                    <a class="btn" ng-click="setColumnOffset('next')"><i class="fa fa-arrow-right"></i></a>
-                </li>
+
             </ul>
         </div>
     </div>

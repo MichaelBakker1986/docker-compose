@@ -66,12 +66,13 @@
                         </span>
                         <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
                         <span class="input-group-btn">
-                                <button id="saveFFLModel" type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="saveFFLModel()" data-toggle="modal" data-toggle="tooltip"
+
+                                <button id="saveFileInView" type="button" ng-disabled="!((fflmode && currentView == 'FFLModelEditorView')|| currentView == 'jbehaveView')" ng-click="saveFileInView()" data-toggle="modal" data-toggle="tooltip"
                                         title="Save {{session.fflModelPath}}" data-target="#modal-success" class="btn btn-info btn-flat"><i class="fa fa-save"></i></button>
                                 <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}"
                                         class="btn btn-info btn-flat"><i
                                         class="fa fa-window-restore"></i></button>
-                                <button type="button" ng-if="error" data-toggle="tooltip" title="{{error}}"
+                                <button type="button" ng-if="currentView == 'FFLModelEditorView' && error" data-toggle="tooltip" title="{{error}}"
                                         class="btn btn-info btn-flat" style="background-color: orange"><i
                                         class="fa fa-info-circle"></i></button>
                              <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="previewRestApi()" data-toggle="tooltip" title="Preview {{session.fflModelPath}} API"
@@ -108,13 +109,13 @@
                 </div>
             </div>
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="treeviwe active">
+                <li class="treeview {{currentView == 'FFLModelEditorView' ? 'active' : ''}}">
                     <a ng-click="currentView = 'FFLModelEditorView'" class="data-toggle-ide" data-toggle="tooltip" title="FFL- Editor">
                         <i class="fa fa-subscript"></i> <span>IDE</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a class="data-story" ng-click="currentView = 'jbehaveView'" data-toggle="tooltip" title="jBehave tests">
+                <li class="treeview {{currentView == 'jbehaveView' ? 'active' : ''}}">
+                    <a class="data-story" ng-click="currentView = 'jbehaveView'; changedView()" data-toggle="tooltip" title="jBehave tests">
                         <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
                 </li>
