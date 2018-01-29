@@ -161,22 +161,33 @@ PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
 PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth) {
     visitInternal(getRootNode(modelName), func, startDepth || 0)
 }
-const hashcars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+/*
+ * Complex to explain. See {@webexport.js}
+ * Its used to provide a sortable id per row when combined with Tuples
+ *  [((variableId|tupleDefinitionId),tupleIndex){maxTupleDepth}]
+ */
 PropertiesAssembler.prototype.indexProperties = function(modelName) {
     var counter = 0;
+    const padder = pad;
     visitInternal(getRootNode(modelName), function(node, depth) {
         counter++;
-        node.id = pad(counter, 5);
+        node.id = padder(counter, 5);
         if (node.tupleProperty) {
             const tupleDef = PropertiesModel[node.solutionName + "_" + node.tupleDefinitionName + "_value"]
             if (tupleDef.tupleProperty) {
                 const nestedTupleDef = PropertiesModel[node.solutionName + "_" + tupleDef.tupleDefinitionName + "_value"]
-                node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+                if (nestedTupleDef.tupleProperty) {
+                    const douleNestedTupleDef = PropertiesModel[node.solutionName + "_" + nestedTupleDef.tupleDefinitionName + "_value"]
+                    if (douleNestedTupleDef.tupleProperty) throw Error('only 3levels nested tuples are allowed')
+                    node.hash = [douleNestedTupleDef.id, '000', nestedTupleDef.id, '000', tupleDef.id, '000', node.id]
+                } else {
+                    node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id]
+                }
             } else {
-                node.hash = [tupleDef.id, '000', tupleDef.id, '000', node.id, '000']
+                node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id]
             }
         }
-        else node.hash = [node.id, '000', node.id, '000', node.id, '000'];
+        else node.hash = [node.id, '000', node.id, '000', node.id, '000', node.id];
     }, 0)
 }
 

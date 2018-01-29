@@ -11,20 +11,6 @@ model TUPLETEST uses BaseModel
      hint: "test";
      datatype: string;
      frequency: document;
-     variable TupleVar1
-     {
-      title: "TupleVar1";
-      formula: 123;
-      datatype: number;
-      frequency: document;
-     }
-     variable TupleVar2
-     {
-      title: "TupleVar2";
-      formula: 1234;
-      datatype: number;
-      frequency: document;
-     }
      tuple NestedTuple
      {
       title: "NestedTuple";

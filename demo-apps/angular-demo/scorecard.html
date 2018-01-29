@@ -96,7 +96,7 @@
         <div class="col-md-8">
             <h1 class="page-header">{{search.hint}}</h1>
             <div class="row">
-                <div ng-repeat="f in LME_MODEL | toArray |  orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
+                <div ng-repeat="f in LME_MODEL | orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
                     <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'d-'+f.depth+ ' quest ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                         <div ng-switch-when="wisihtml" class="col-md-12">
                             <textarea class="form-control" ng-model="cv.value"></textarea>

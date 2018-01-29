@@ -1,3 +1,38 @@
+/**
+ * Gives a Object-oriented view over a part of the model
+ * Objectify the entire model is simply too expensive to do. 128(t3)*128(t2)*128(t1)*128(t0)*500(cols)*5000(vars)...
+ * So we focus on the parts that are created, active and interesting to see/modify
+ *
+ * The LMETree has .sort() to sort the entire rows array naturally
+ *  Ordering the Nodes requires a somewhat complex sort-function.
+ *  ((VariableID|TupleDefinitionID),tIndex(tDepth)){maxTupleDepth}
+ *  e.g: 0005,001,0006,000,0006,000 = 0006(John)
+ *  e.g: 0005,001,0006,000,0008,001 = 0008(John,CarPayment)
+ *
+ *  Where id's are translated into Unique names per tIndex
+ *  So 0005,001 is always the First (John) in this example
+ *  So 0005,001,0006,000 is always the First (John,CarPayment) in this example
+ *  0008 can be any child-variable in 0005.0006.* Example John.CarPayment.Status
+ *
+ * (!)       TODO:                                                      Another option should be
+ * (?) be aware null-tuple is post-fixed with ,0,0 : t(2)    => 2,0,0 | 2,2,2
+ * (?) be aware first-tuple is post-fixed with ,0  : t(4,1)  => 4,1,0 | 4,1,1
+ *
+ *  So will mean that:
+ *  a(0)       = a0a0a0
+ *   b(0,0)    = a0b0b0
+ *    d(0,0,0) = a0b0d0
+ *   b(0,1)    = a0b1b0 (!) what to do with the last index? re-use the one before or not?
+ *    d(0,1,1) = a0b1d1
+ *   b(0,tMax) = a0b9b0
+ *  a(1)       = a1a0a0 (!) what to do with the last index? re-use the one before or not?
+ *   b(1,tMax) = a1b9b0
+ *  e(0)       = e0e0e0
+ *
+ * The LMETree.nodes has a blueprint from the entire model. (without tuple-instances, and not hiding the Tuple Definition)
+ * The LMETree.no has all created nodes in a map, to speed up lookups.
+ * The LMETree.rows is the Array, used for manipulation/view
+ */
 const SolutionFacade = require('../../src/SolutionFacade');
 const PropertiesAssembler = require('../../src/PropertiesAssembler');
 
@@ -13,6 +48,7 @@ function LMETree(name, workbook) {
     this.workbook = workbook;
     this.nodes = {};
     this.names = {};
+    this.rows = []
     this.no = {}
     this.repeats = {
         undefined: [workbook.context.columnSize, 1],
@@ -113,28 +149,38 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         has[1] = yas.parent.uihash
         has[3] = yas.uihash
         has[5] = '999'
+    } else if (yas.depth == 3) {
+        //throw Error('Something wrong here..')
+        has[1] = yas.parent.uihash
+        has[3] = yas.uihash
+        has[5] = '999'
     }
     const rv = {
         id: rowId,
-        order_id: has.join(''),
+        order_id: has.join('.'),
         add: function() {
             const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
+            workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
+
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
                 if (yasi == 'new') {
-                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
+                    tree.addTupleNode(child, path.split('.'), index, yi , cTreeDepth)
                 }
                 else {
                     tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
                 }
             }, inneryas, node.rowId, treePath.length)
+            return inneryas;
         },
+        //index is deprecated. Lookup the next sibling when needed. Could be tuple..
         index: index,
         title_locked: node.title_locked,
         type: 'tuple_add',
         path: path,
         ammount: amount,
+        display: yas.display,
         colspan: colspan,
-        depth: yas.depth,
+        depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
         visible: true,
         cols: [{
             value: unique,
@@ -149,6 +195,7 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
     Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (parent) parent.children.push(rv);
     this.nodes[unique] = rv;
+    this.rows.push(rv)
 }
 LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const workbook = this.workbook;
@@ -161,20 +208,24 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const displaytype = type;// node.datatype;
     const path = treePath.join('.')
     const has = node.hash.slice();
+    //alright this is a big step. and seems to work (there is a variable set wrongly.)
     if (yas.depth == 0) {
         has[1] = yas.uihash
     } else if (yas.depth == 1) {
         has[1] = yas.uihash
-        has[3] = yas.parent.uihash
     } else if (yas.depth == 2) {
-        has[1] = yas.uihash
+        has[3] = yas.uihash
+        has[1] = yas.parent.uihash
+    } else if (yas.depth == 3) {
+        has[5] = yas.uihash
         has[3] = yas.parent.uihash
-        has[5] = yas.parent.parent.uihash
+        has[1] = yas.parent.parent.uihash
     }
     const rv = {
         id: rowId,
         depth: yas.depth,
-        order_id: has.join(''),
+        display: yas.display,
+        order_id: has.join('.'),
         index: index,
         title_locked: node.title_locked,
         type: node.displayAs,
@@ -227,9 +278,9 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     });
     const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
-    //TODO: use array instead of Object
     this.nodes[unique] = rv;
     this.no[rowId] = rv;
+    this.rows.push(rv)
 }
 WebExport.prototype.parseData = function(webExport, workbook) {
     return SolutionFacade.createSolution(workbook.modelName);
@@ -270,6 +321,12 @@ WebExport.prototype.deParse = function(rowId, workbook) {
         }
     }, workbook.resolveY(0).parent, null, 0)
     lmeTree.offset = 0;
+    lmeTree.sort = function() {
+        lmeTree.rows.sort((a, b) => {
+            if (a.order_id == b.order_id) throw Error()
+            return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
+        })
+    }
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExport())

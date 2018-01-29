@@ -1,3 +1,11 @@
+/**
+ * JBehave testing is just more easy to make and maintain while innovation is happening
+ * Concepts on functional differentiation are tested, which are n(1) instead of n(^n), which leads to less shortcuts in tests.
+ *
+ * There is one thing to do here. Convert JBehave text files into LME statements.
+ *  1) Set a Value given in the story
+ *  2) Assert a value provided within the story
+ */
 const log = require('log6')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document

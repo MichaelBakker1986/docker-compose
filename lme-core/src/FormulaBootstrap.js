@@ -433,6 +433,7 @@ const identifier_replace = {
     MainPeriod: 'z', //zAxis Reference, base period, z.base
     MaxT: 'x.last',
     TupleIndex: 'y.index',
+    TupleLocation: 'y.display',
     Trend: 'x'//x.trend
 
 }

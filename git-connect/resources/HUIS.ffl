@@ -1,14 +1,14 @@
 import FinanMath.*;
 import BaseModel.*;
 
-model TUPLETEST uses BaseModel
+model HUIS uses BaseModel
 {
  root
  {
-  variable Q_ROOT
+  variable Huis
   {
    displaytype: scorecard;
-   variable TupleTestStap
+   variable HuisStap
    {
     title: "TUPLE";
     hint: "What are Tuples?";
@@ -33,9 +33,10 @@ model TUPLETEST uses BaseModel
      {
       locked: 1;
       frequency: document;
-      title: "TCOUNT(BoekenWinkel)";
-      fixed_decimals: 2;
-      formula: TCOUNT(BoekenWinkel)+1;
+      title: "Hoeveelheid winkels";
+      datatype: number;
+      fixed_decimals: 0;
+      formula: TCOUNT(Winkel)+1;
      }
      variable TSUMTEST
      {
@@ -47,9 +48,9 @@ model TUPLETEST uses BaseModel
      variable TSUMTEST2
      {
       locked: 1;
-      title: "TSUM(HoeveelheidBoeken)";
+      title: "Totaal oppervlakte winkels (m2)";
       fixed_decimals: 2;
-      formula: TSUM(HoeveelheidBoeken);
+      formula: TSUM(WinkelOppervlakte);
      }
      variable TMINEST
      {
@@ -69,7 +70,7 @@ model TUPLETEST uses BaseModel
     tuple Tuple
     {
      title: String("Tuple") & String("(" & TupleLocation & ")");
-     hint: "Deze tuple heeft een geneste Tuple-Definitie";
+     hint: "Kamer";
      frequency: none;
      datatype: string;
      displaytype: paragraph;
@@ -88,16 +89,16 @@ model TUPLETEST uses BaseModel
       displaytype: paragraph;
       variable FirstSiblingNestedTupleFirstSibling
       {
-       title: "FirstSiblingNestedTupleFirstSibling";
+       title: "Oppervlakte";
        formula: 1234;
        datatype: number;
       }
      }
     }
-    tuple BoekenWinkel
+    tuple Winkel
     {
-     title: String("BoekenWinkel") & String("(" & TupleLocation & ")");
-     hint: "Dit is een 0-tuple met een T-1 formule";
+     title: String("Winkel") & String("(" & TupleLocation & ")");
+     hint: "Winkel";
      displaytype: paragraph;
      frequency: none;
      datatype: string;
@@ -108,11 +109,12 @@ model TUPLETEST uses BaseModel
       formula: BoekenStelling[prev]+100;
       datatype: number;
      }
-     variable HoeveelheidBoeken
+     variable WinkelOppervlakte
      {
-      title: "HoeveelheidBoeken";
-      formula: 12349;
+      title: "WinkelOppervlakte (m2)";
+      formula: 80;
       datatype: number;
+      frequency: document;
      }
     }
    }

@@ -59,8 +59,13 @@ JSWorkBook.prototype.importSolution = function(data, parserType) {
 JSWorkBook.prototype.getSolutionName = function() {
     return this.modelName;
 }
-//if it is possible to fix missing functions
-//fix loops in the solution. we try it
+
+/**
+ * Try to do: Monte-Carlos simulation
+ * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie
+ * if it is possible to fix missing functions
+ * TRY fix infinite loops in the solution, breaking down chains.
+ */
 function fixAll() {
     var attempt = 0;
     var workbook = this;
@@ -97,6 +102,18 @@ function logErrorWithVariableName(variableName, workbook, formulaInfo, e) {
     }
 }
 
+/**
+ * TODO: this function only, is enough to extract into Validation.js
+ * Try to do: Monte-Carlos simulation
+ *  - TODO: add trend-notrend x-input values.
+ *
+ * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie
+ * if it is possible to fix missing functions
+ * TRY fix infinite loops in the solution, breaking down chains.
+ *  -- When ReferenceError: Create new VARIABLE matching, remove original formula
+ *  -- When RangeError:
+ *  --- lookup most significant part in loop, disable formula, transform into String formula. try again
+ */
 function validateImportedSolution() {
     var validateResponse = {
         succes: [],
@@ -106,8 +123,7 @@ function validateImportedSolution() {
     var workbook = this;
 
     function formulaFixer(elemId) {
-        var formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
-        //TODO: use timeout, this monte carlo is blocking UI thread
+        const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         try {
             //iterate all formula-sets to test 100%
             ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
@@ -272,6 +288,9 @@ JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 JSWorkBook.prototype.getRootSolutionProperty = function() {
     return ValueFacade.fetchRootSolutionProperty(this.getSolutionName());
 };
+/**
+ * Does not fix invalid request doing a 2-tuple node-lookup with a 3/1-tuple yas.
+ */
 JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
     if (!node.tuple) return -1;
     yas = this.resolveY(yas)

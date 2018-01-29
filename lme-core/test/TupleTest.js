@@ -1,3 +1,7 @@
+/**
+ * TODO: This is very important for the UI and took a long time to make it work.
+ * Therefore instead of logging the stuff, make unit-tests to ensure its working like it is supposed to be
+ */
 require('../exchange_modules/presentation/webexport');
 require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 const PropertiesAssembler = require('../src/PropertiesAssembler');
@@ -38,7 +42,7 @@ val.nodes['0000__Tuple'].add()
 //Now we will add a value for a nested - tuple
 workbook.set('NestedTuple', 'test234', 'value', 0, yAxis.deeper[0])
 
-assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 1, 'The main tuple should return 1, since two tuples are created.'+workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis))
+assert.equal(workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis), 1, 'The main tuple should return 1, since two tuples are created.' + workbook.maxTupleCountForRow(workbook.findNode('Tuple'), yAxis))
 //Now we will add a value for a nested - tuple
 workbook.set('NestedTuple', 'test234', 'value', 0, yAxis.deeper[0])
 
@@ -61,11 +65,11 @@ for (var i = 0; i < allNodesAsArray.length; i++) {
     if (log.DEBUG) log.debug(" ".repeat(node.depth) + node.id + ":" + node.order_id)
 }
 log.debug('--- done ')
-
+PropertiesAssembler.indexProperties('TUPLETEST')
 //Here we can adept the front-end to not show the
-workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
+workbook.walkProperties(rootVariable, function(node, typle, treeDepth, y) {
     called++;
-    if (log.DEBUG) log.debug(" ".repeat(treeDepth) + y.hash + "_" + y.index + "_" + node.rowId + ": " + yax)
+    if (log.DEBUG) log.debug(" ".repeat(treeDepth) + node.id + ":" + y.display + "_" + node.rowId + "(" + typle + ")")
 }, yAxis, null, 0)
 
 //ok so how to hash without knowing of the children
@@ -127,9 +131,7 @@ for (var i = 0; i < arranged.length; i++) {
 }
 log.debug(' END ')
 arranged = []
-val.nodes['0000__Tuple'].add()
-val.nodes['0000__Tuple'].add()
-
+val.nodes['3000__NestedTuple'].add()
 
 function pad(n, width, z) {
     z = z || '0';
@@ -137,16 +139,18 @@ function pad(n, width, z) {
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
+PropertiesAssembler.indexProperties('TUPLETEST')
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
     var newArray = node.hash.slice();
     //y should contain this information
     if (y.depth == 0) {
-        newArray[3] = pad(yax == 'new' ? 999 : y.index, 3)
+        newArray[1] = yax == 'new' ? pad(999, 3) : y.uihash
     } else if (y.depth == 1) {
-        newArray[3] = pad(y.index, 3)
-        newArray[5] = pad(yax == 'new' ? 999 : y.parent.index, 3)
+        newArray[1] = y.uihash
+        newArray[3] = yax == 'new' ? pad(999, 3) : y.parent.uihash
     }
     arranged.push({
+        depth: treeDepth,
         order_id: newArray.join(''),
         node: node
     })
@@ -156,7 +160,7 @@ arranged.sort((a, b) => {
 })
 for (var i = 0; i < arranged.length; i++) {
     var obj = arranged[i];
-    if (log.DEBUG) log.debug(obj.order_id + obj.node.rowId)
+    if (log.DEBUG) log.debug(obj.order_id + " ".repeat(obj.depth) + obj.node.rowId)
 }
 val.nodes['0000__Tuple'].add()
 log.debug(workbook.maxTupleCountForRow(workbook.findNode('Tuple')))
@@ -167,6 +171,7 @@ assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxi
 assert.equal(workbook.maxTupleCountForRow(workbook.findNode('NestedTuple'), YAxis[4].deeper[2]), 0)
 
 log.debug('--')
+PropertiesAssembler.indexProperties('TUPLETEST')
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
     if (log.DEBUG) log.debug(y.display + " ".repeat(treeDepth) + node.rowId)
 }, YAxis[0].parent, null, 0)

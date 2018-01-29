@@ -44,7 +44,7 @@ angular
 
         $.getScript('resources/' + modelName + '.js', function(data, textStatus, jqxhr) {
             //after this we can import the user-data....
-            $scope.LME_MODEL = LME.nodes
+            $scope.LME_MODEL = LME.rows
             $scope.timeviews = LMEMETA.getTimeViews()
             $scope.name = LME.name
             $scope.LMEMETA = LME;
