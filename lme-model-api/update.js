@@ -151,7 +151,7 @@ function registerToProxy() {
         }).catch(function(err) {
             log.error('Failed to register ', err);
         });
-    }, 10000)
+    }, 60000)
 }
 
 app.listen(port, () => {
