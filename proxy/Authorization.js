@@ -163,6 +163,7 @@ class Authorization {
         this.allow(id, "/excel/" + modelname, VIEW_RULE)
         this.allow(id, "/resources/" + modelname + ".ffl", VIEW_RULE)
         this.allow(id, "/preview/" + modelname, VIEW_RULE)
+        this.allow(id, "/saveJBehaveStory/" + modelname, VIEW_RULE)
         if (changeExisting) this.allow(id, "/saveFFLModel/" + modelname, VIEW_RULE)
         this.allow(id, "/scorecard.html", VIEW_RULE)
         this.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
