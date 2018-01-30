@@ -1,5 +1,5 @@
 const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
-const modelName = 'GYLLIONKSP'
+const modelName = 'LGD'
 const path = __dirname + '../../../git-connect/resources/'
 const test = new JBehaveStoryParser({
     fflFile: path + modelName + '.ffl',

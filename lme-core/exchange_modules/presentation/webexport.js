@@ -158,13 +158,14 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
     const rv = {
         id: rowId,
         order_id: has.join('.'),
+        treeDepth: treeDepth,
         add: function() {
             const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
             workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
 
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
                 if (yasi == 'new') {
-                    tree.addTupleNode(child, path.split('.'), index, yi , cTreeDepth)
+                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
                 }
                 else {
                     tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
@@ -223,6 +224,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     }
     const rv = {
         id: rowId,
+        treeDepth: treeDepth,
         depth: yas.depth,
         display: yas.display,
         order_id: has.join('.'),

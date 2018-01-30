@@ -147,7 +147,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         const validFormulas = []
         if (node[validIndex]) validFormulas.push(node[validIndex])
         if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
-        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
+        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') <= ' + node[lengthIndex]);
         if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
         if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
 

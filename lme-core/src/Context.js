@@ -29,6 +29,12 @@ Context.prototype.propertyDefaults = propertyDefaults;
 Context.prototype.getValues = function() {
     return this.values;
 }
+Context.prototype.clear = function() {
+    for (var key in this.values) {
+        this.values[key] = {}
+    }
+    this.audit.length = 0;
+}
 Context.prototype.hasChanges = function() {
     return this.audit.length > 0;
 }

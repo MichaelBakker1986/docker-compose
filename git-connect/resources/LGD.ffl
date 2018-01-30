@@ -29,7 +29,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "CollateralAgreementReferenceNumber";
        frequency: document;
-       maxlength: 128;
+       range: <= 128;
       }
       variable CollateralAgreementDefinitionCode
       {
@@ -37,7 +37,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "CollateralAgreementDefinitionCode";
        frequency: document;
-       maxlength: 255;
+       range: <= 255;
       }
       variable SecuredAmount
       {
@@ -51,7 +51,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "Currency";
         frequency: document;
-        maxlength: 10;
+        range: <= 10;
        }
        variable CollateralAgreementAmount
        {
@@ -80,7 +80,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "CollateralObjectReferenceNumber";
         frequency: document;
-        maxlength: 128;
+        range: <= 128;
        }
        variable DefinitionCode
        {
@@ -88,7 +88,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "DefinitionCode";
         frequency: document;
-        maxlength: 255;
+        range: <= 255;
        }
        variable MarketValue
        {
@@ -102,7 +102,7 @@ model LGD uses BaseModel
          datatype: string;
          title: "Currency";
          frequency: document;
-         maxlength: 10;
+         range: <=  10;
         }
         variable Amount
         {
@@ -139,7 +139,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "ReferenceId";
         frequency: document;
-        maxlength: 128;
+        range: <=  128;
        }
        variable DisplayId
        {
@@ -147,7 +147,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "DisplayId";
         frequency: document;
-        maxlength: 128;
+        range: <=  128;
        }
       }
       variable FacilityDefinitionCode
@@ -156,7 +156,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "FacilityDefinitionCode";
        frequency: document;
-       maxlength: 255;
+       range: <=  255;
       }
      }
      variable LimitDetails
@@ -171,7 +171,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "LimitTypeCode";
        frequency: document;
-       maxlength: 255;
+       range: <=  255;
       }
       variable CompensatingBalancePercentage
       {
@@ -193,7 +193,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "AllocatedGuaranteeReferenceNumber";
        frequency: document;
-       maxlength: 128;
+       range: <=  128;
       }
       tuple GuaranteeAgreement
       {
@@ -207,7 +207,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "GuaranteeAgreementReferenceNumber";
         frequency: document;
-        maxlength: 128;
+        range: <=  128;
        }
        variable GuaranteeAgreementDefinitionCode
        {
@@ -215,7 +215,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "GuaranteeAgreementDefinitionCode";
         frequency: document;
-        maxlength: 255;
+        range: <=  255;
        }
       }
      }
@@ -227,11 +227,11 @@ model LGD uses BaseModel
       frequency: none;
       variable AllocatedCollateralReferenceNumber
       {
-       displaytype: string;
-       datatype: string;
+       displaytype: number;
+       datatype: number;
        title: "AllocatedCollateralReferenceNumber";
        frequency: document;
-       maxlength: 128;
+       range: <=  128;
       }
      }
     }
@@ -257,7 +257,7 @@ model LGD uses BaseModel
       title: "FacilityReferenceNumber";
       frequency: document;
       formula: 1;
-      maxlength: 255;
+      range: <= 255;
      }
      variable FacilityLGD
      {
@@ -273,7 +273,7 @@ model LGD uses BaseModel
        title: "LGDClass";
        formula: String(TMAX(CollateralAgreementAmount));
        frequency: document;
-       maxlength: 255;
+       range: <=  255;
       }
      }
     }

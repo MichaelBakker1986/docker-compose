@@ -94,4 +94,5 @@ module.exports.setup = function(app) {
     app.get('*/id/:id/figure/:figureName', defaultResponse);
     app.post('*/id/:id/figure/:figureName/value/:value', defaultResponse);
     app.post('*/id/:id/figure/:figureName', defaultPostResponse);
+    app.post('*/figure/:figureName', defaultPostResponse);
 };

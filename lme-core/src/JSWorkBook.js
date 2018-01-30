@@ -412,6 +412,9 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
     node.frequency = frequency;
     this.updateValues();
 }
+JSWorkBook.prototype.clearValues = function() {
+    this.context.clear()
+}
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
     const formulaIds = [];

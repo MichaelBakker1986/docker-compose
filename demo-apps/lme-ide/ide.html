@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="ide.css">
 
 </head>
-<body class="controlsidebar hold-transition sidebar-mini skin-blue sidebar-collapse fixed" ng-controller="ideController">
+<body class="controlsidebar hold-transition sidebar-mini skin-black-light sidebar-collapse fixed" ng-controller="ideController">
 <div id="pagewrapper" class="wrapper">
     <header class="main-header">
         <a class="logo">
@@ -55,14 +55,8 @@
                         <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
                             <button ng-click="toggleFormatter()" type="button" data-toggle="tooltip" title="format" class="btn btn-info btn-flat"><i class="fa fa-indent"></i></button>
                         </span>
-                        <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
-                            <button ng-click="toggleScorecardTool()" type="button" data-toggle="tooltip" title="Add InputRequired Formulas to Scorecard variables" class="btn btn-info btn-flat"><i class="fa fa-question"></i></button>
-                        </span>
                         <span ng-switch-when="jbehaveView" class="input-group-btn">
                             <button ng-click="runJBehaveTest()" type="button" data-toggle="tooltip" title="run jBehave tests" class="btn btn-info btn-flat"><i class="fa fa-repeat"></i></button>
-                        </span>
-                        <span ng-switch-when="FFLModelEditorView" ng-show="fflmode" class="input-group-btn">
-                            <button ng-click="toggleWrapLines()" type="button" data-toggle="tooltip" title="toggle wrapped view" class="btn btn-info btn-flat"><i class="fa fa-hand-rock-o"></i></button>
                         </span>
                         <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
                         <span class="input-group-btn">
@@ -109,10 +103,19 @@
                 </div>
             </div>
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="treeview {{currentView == 'FFLModelEditorView' ? 'active' : ''}}">
+                <li class="treeview {{currentView == 'FFLModelEditorView' ? 'active' : ''}} menu-open model-tree">
                     <a ng-click="currentView = 'FFLModelEditorView'" class="data-toggle-ide" data-toggle="tooltip" title="FFL- Editor">
                         <i class="fa fa-subscript"></i> <span>IDE</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
+                    <ul class="treeview-menu" style="display: block;" ng-init="closed_nodes={}">
+                        <li ng-repeat="node in LME_MODEL | toArray | pick:'children.length > 0 && treeDepth < 3' | orderBy : 'order_id'" class="treeview model-tree-{{node.treeDepth}} menu-open" ng-if="isOpen(node,closed_nodes)">
+                            <a ng-click="showNode(node)">
+                                <i class="fa fa-circle-o"></i> {{node.id}} ({{node.children.length}})<span ng-click="closed_nodes[node.id] = !closed_nodes[node.id]" ng-if="node.treeDepth < 2" class="pull-right-container"><i
+                                    class="fa fa-angle-left pull-right"></i></span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview {{currentView == 'jbehaveView' ? 'active' : ''}}">
                     <a class="data-story" ng-click="currentView = 'jbehaveView'; changedView()" data-toggle="tooltip" title="jBehave tests">
@@ -159,7 +162,7 @@
         </div>
         <strong>Copyright &copy; 2014-2017 <a>Michael Bakker</a>.</strong> All rights reserved.
     </footer>
-    <aside id="sidebar" class="control-sidebar-dark container">
+    <aside id="sidebar" class="control-sidebar-light container">
         <div ng-repeat="p in activeVariable">
             <div class="input-group input-xsm">
                 <label>{{p.name}}</label>
