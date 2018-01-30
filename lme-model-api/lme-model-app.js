@@ -131,7 +131,8 @@ app.get('*/excel/:model', function(req, res) {
         const targetFilePath = __dirname + '/../git-connect/resources/' + modelName + '.xlsx';
         const sampleFilePath = __dirname + '/../git-connect/SAMPLE.xlsx';
         if (!result) {
-            fs.createReadStream(sampleFilePath).pipe(fs.createWriteStream(targetFilePath));
+            // failing resutls.
+            // fs.createReadStream(sampleFilePath).pipe(fs.createWriteStream(targetFilePath));
             res.sendFile(path.resolve(sampleFilePath));
         } else {
             res.sendFile(path.resolve(targetFilePath));

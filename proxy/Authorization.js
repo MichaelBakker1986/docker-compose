@@ -19,6 +19,7 @@
  *  - Admin access is defined here with MichaelFaceBookID
  */
 const Acl = require('acl');
+const rules = require('./Auth.json').rules;
 
 const MichaelFaceBookID = '1683958891676092';
 const JorisNijboerFaceBookID = '10213615561315841';
@@ -99,9 +100,9 @@ class Authorization {
             "/saveUserData/DEMO",//THE CROSS-USER-DATA exposure.
             "/ide.html"
         ]
-        for (var i = 0; i < guest_resources.length; i++) {
-            this.allow(GUEST_ROLE, guest_resources[i], VIEW_RULE)
-        }
+        /*     for (var i = 0; i < guest_resources.length; i++) {
+                 this.allow(GUEST_ROLE, guest_resources[i], VIEW_RULE)
+             }*/
         /**
          * These resources require facebook login
          */
@@ -114,7 +115,7 @@ class Authorization {
         /**
          * These resources require facebook login
          */
-        const secure_resources = [
+        const data_resources = [
             //IDE-FFL model Instance
             "/HoeveelKostEenStudie.html",
             "/showcase.html",
@@ -130,31 +131,39 @@ class Authorization {
             "/hasUpdates",             //IDE
             "/update/git/notifyCommit" //IDE
         ]
-        for (var i = 0; i < secure_resources.length; i++) {
-            this.allow(MichaelFaceBookID, secure_resources[i], VIEW_RULE)
-        }
+        /*   for (var i = 0; i < data_resources.length; i++) {
+               this.allow(MichaelFaceBookID, data_resources[i], VIEW_RULE)
+           }*/
         this.registerUser(GUEST_USER)
-        this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
-        this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
-        this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
-        this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
-        this.addModelPrivileges(GUEST_ROLE, "TEST", false);
-        this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
-        this.addModelPrivileges(MichaelFaceBookID, "REALESTATE", true);
-        this.addModelPrivileges(JasperRealEstate, "REALESTATE", true);
-        this.addModelPrivileges(RichardRealEstate, "REALESTATE", true);
-        this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
-        this.addModelPrivileges(LGDFacebookID, "LGD", true);
-        this.addModelPrivileges(RuudFacebookID, "LGD", true);
-        this.addModelPrivileges(MarcoFacebookID, "LGD", true);
-        this.addModelPrivileges(MonliFacebookID, "KSP", true);
-        this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
-        this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");
+
+
+        for (var ruleNumer = 0; ruleNumer < rules.length; ruleNumer++) {
+            var rule = rules[ruleNumer];
+            this.allow(rule.id, rule.resource, rule.role)
+        }
+        /*  this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
+                this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
+                this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
+                this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
+                this.addModelPrivileges(GUEST_ROLE, "TEST", false);
+                this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
+                this.addModelPrivileges(MichaelFaceBookID, "REALESTATE", true);
+                this.addModelPrivileges(JasperRealEstate, "REALESTATE", true);
+                this.addModelPrivileges(RichardRealEstate, "REALESTATE", true);
+                this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
+                this.addModelPrivileges(LGDFacebookID, "LGD", true);
+                this.addModelPrivileges(RuudFacebookID, "LGD", true);
+                this.addModelPrivileges(MarcoFacebookID, "LGD", true);
+                this.addModelPrivileges(MonliFacebookID, "KSP", true);
+                this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
+                this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");*/
     }
 
     allow(id, resource, role) {
         this.acl.allow(id, resource, role)
+        //require('./Auth').rules.push({id: id, resource: resource, role: role})
         if (log.DEBUG) log.debug('allow:' + id + ":[" + resource + ']')
+        //console.info(JSON.stringify(require('./Auth')))
     }
 
     addModelPrivileges(id, modelname, changeExisting) {
