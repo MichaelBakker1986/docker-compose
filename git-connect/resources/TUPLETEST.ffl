@@ -5,129 +5,85 @@ model TUPLETEST uses BaseModel
 {
  root
  {
-  variable Q_ROOT
+  variable QQ
   {
    displaytype: scorecard;
-   variable TupleTestStap
+   tuple Tuple
    {
-    title: "TUPLE";
-    hint: "What are Tuples?";
-    frequency: none;
-    datatype: number;
-    variable Uitleg
+    title: "TupleDefinition";
+    formula: 101;
+    datatype: string;
+    frequency: document;
+    hint: "test";
+    variable Inkomen
     {
-     frequency: none;
-     displaytype: string;
-     datatype: string;
-     locked: 1;
-     title: "In dit model worden visueel alle tuple aspected getest.";
-     formula: "In dit model worden visueel alle tuple aspected getest.";
+     title: "Inkomen";
+     formula: 123;
+     datatype: number;
+     frequency: document;
     }
-    variable Summary
+    variable EntityScore
     {
-     title: "Overizcht";
-     displaytype: paragraph;
-     frequency: none;
-     datatype: string;
-     variable TCOUNTTEST
-     {
-      locked: 1;
-      frequency: document;
-      title: "TCOUNT(BoekenWinkel)";
-      fixed_decimals: 2;
-      formula: TCOUNT(BoekenWinkel)+1;
-     }
-     variable TSUMTEST
-     {
-      locked: 1;
-      title: "TSUM(SecondSibling)" ;
-      fixed_decimals: 2;
-      formula: TSUM(SecondSibling);
-     }
-     variable TSUMTEST2
-     {
-      locked: 1;
-      title: "TSUM(HoeveelheidBoeken)";
-      fixed_decimals: 2;
-      formula: TSUM(HoeveelheidBoeken);
-     }
-     variable TMINEST
-     {
-      locked: 1;
-      title: "TMIN(BoekenStelling)";
-      fixed_decimals: 2;
-      formula: TMIN(BoekenStelling);
-     }
-     variable TMAXTEST
-     {
-      locked: 1;
-      title: "TMAX(BoekenStelling)";
-      fixed_decimals: 2;
-      formula: TMAX(BoekenStelling);
-     }
+     title: "EntityScore";
+     formula: 1234;
+     datatype: number;
+     frequency: document;
     }
-    tuple Tuple
+    variable OptelSubTotal
     {
-     title: String("Tuple") & String("(" & TupleLocation & ")");
-     hint: "Deze tuple heeft een geneste Tuple-Definitie";
-     frequency: none;
+     title: "TSUM";
+     formula: TSUM(SubTotal);
+     datatype: number;
+     frequency: document;
+    }
+    tuple NestedTuple
+    {
+     title: "NestedTuple";
      datatype: string;
-     displaytype: paragraph;
-     variable SecondSibling
+     frequency: document;
+     variable TOTALLOAN
      {
-      locked: 1;
-      title: "TSUM(FirstSiblingNestedTupleFirstSibling)";
-      formula: TSUM(FirstSiblingNestedTupleFirstSibling);
+      title: "TOTALLOAN";
+      formula: TSUM(LoanPart);
       datatype: number;
+      frequency: document;
      }
-     tuple FirstSiblingNestedTuple
+     variable SubTotal
      {
-      title: String("FirstSiblingNestedTuple") & String("(" & TupleLocation & ")");
-      formula: 123;
-      frequency: none;
-      displaytype: paragraph;
-      variable FirstSiblingNestedTupleFirstSibling
+      title: "SubTotal";
+      formula: 12349;
+      datatype: number;
+      frequency: document;
+      tuple Loan
       {
-       title: "FirstSiblingNestedTupleFirstSibling";
-       formula: 1234;
-       datatype: number;
+       title: "Loan";
+       datatype: string;
+       frequency: document;
+       variable LoanPart
+       {
+        title: "LoanPart";
+        formula: 0;
+        datatype: number;
+        frequency: document;
+       }
+       variable LoanInkomenReference
+       {
+        title: "LoanInkomenReference";
+        formula: Inkomen;
+        datatype: number;
+        frequency: document;
+       }
       }
      }
     }
-    tuple BoekenWinkel
-    {
-     title: String("BoekenWinkel") & String("(" & TupleLocation & ")");
-     hint: "Dit is een 0-tuple met een T-1 formule";
-     displaytype: paragraph;
-     frequency: none;
-     datatype: string;
-     variable BoekenStelling
-     {
-      title: "BoekenStelling[prev]+100";
-      fixed_decimals: 2;
-      formula: BoekenStelling[prev]+100;
-      datatype: number;
-     }
-     variable HoeveelheidBoeken
-     {
-      title: "HoeveelheidBoeken";
-      formula: 12349;
-      datatype: number;
-     }
-    }
    }
-   variable Q_STAP02
-   {
-    frequency: none;
-    datatype: number;
-    title: "Q_STAP02";
-    hint: "Q_STAP02";
-    variable Opvulling
-    {
-     title: "TupleTestStap2";
-     hint: "TupleTestStap2";
-    }
-   }
+  }
+  variable Balance
+  {
+   title: "Balance";
+   formula: TSUM(OptelSubTotal);
+   datatype: number;
+   frequency: document;
   }
  }
 }

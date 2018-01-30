@@ -63,7 +63,7 @@ And Q_MAP03_GEWICHT_VRAAG06 should have 0 decimals rounded value 8
 And Q_MAP03_GEWICHTTOTAAL_OMGEREKEND should have 0 decimals rounded value 17
 And Q_MAP03_SUBSCORE01 should have 0 decimals rounded value 17
 And Q_MAP03_SUBSCORE02 should have 0 decimals rounded value 8
-And Q_MAP03_SUBSCORE03 should have 0 decimals rounded value 17
+And Q_MAP03_SUBSCORE03 should have 1 decimals rounded value 16.7
 And Q_MAP03_SUBSCORE04 should have 0 decimals rounded value 17
 And Q_MAP03_SUBSCORE05 should have 0 decimals rounded value 4
 And Q_MAP03_SUBSCORE06 should have 0 decimals rounded value 4

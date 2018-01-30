@@ -17318,7 +17318,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         const validFormulas = []
         if (node[validIndex]) validFormulas.push(node[validIndex])
         if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
-        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
+        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') <= ' + node[lengthIndex]);
         if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
         if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
 
@@ -17327,7 +17327,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         //' + node[nameIndex] + '.required &&
         //valid formulas are only interesting when entered OR required
         if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
-        const frequency = node[fflRegister.frequencyIndex] || 'column';
+        const frequency = (node[tupleIndex]) ? 'none' : (node[fflRegister.frequencyIndex] || 'column');
 
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
         //hierarchical visibility
@@ -17750,13 +17750,14 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
     const rv = {
         id: rowId,
         order_id: has.join('.'),
+        treeDepth: treeDepth,
         add: function() {
             const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
             workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
 
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
                 if (yasi == 'new') {
-                    tree.addTupleNode(child, path.split('.'), index, yi , cTreeDepth)
+                    tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
                 }
                 else {
                     tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth)
@@ -17815,6 +17816,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     }
     const rv = {
         id: rowId,
+        treeDepth: treeDepth,
         depth: yas.depth,
         display: yas.display,
         order_id: has.join('.'),
@@ -18512,6 +18514,12 @@ function Context(opts) {
 Context.prototype.propertyDefaults = propertyDefaults;
 Context.prototype.getValues = function() {
     return this.values;
+}
+Context.prototype.clear = function() {
+    for (var key in this.values) {
+        this.values[key] = {}
+    }
+    this.audit.length = 0;
 }
 Context.prototype.hasChanges = function() {
     return this.audit.length > 0;
@@ -19784,6 +19792,9 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
     }
     node.frequency = frequency;
     this.updateValues();
+}
+JSWorkBook.prototype.clearValues = function() {
+    this.context.clear()
 }
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
@@ -21612,8 +21623,11 @@ TVALUES = function(fIds, func, fId, x, y, z, v) {
        }*/
     return returnValue;
 }
+/**
+ * TINSTANCECOUNT is 0 based. TCOUNT is the friendly 1based version
+ */
 TCOUNT = function(fIds, func, fId, x, y, z, v) {
-    return TINSTANCECOUNT(fIds, v, y);
+    return TINSTANCECOUNT(fIds, v, y) + 1;
 }
 REVERSEYAXIS = function(index, y) {
     return (y.bitmask & index) >> y.start_bit
