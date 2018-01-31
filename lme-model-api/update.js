@@ -140,7 +140,7 @@ function testAndDeploy() {
 function registerToProxy() {
     //just delay the action...
     setTimeout(function() {
-        const routes = []
+        const routes = ['*/hasUpdates']
         app._router.stack.forEach(function(r) {
             if (r.route && r.route.path) {
                 routes.push(r.route.path)
@@ -162,6 +162,4 @@ app.listen(port, () => {
 function log(message, level) {
     HipchatConnect.log(message, level)
 }
-
-//if (!developer)
 testAndDeploy();
