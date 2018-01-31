@@ -14,37 +14,14 @@ const domain = process.env.DOMAIN || 'appmodel.org'
 
 const express = require('express');
 const httpProxy = require('http-proxy');
-var nofavicon = require("express-no-favicons")
 const Authorization = require('./Authorization').Authorization
 const Authentication = require('./Authentication')
 const auth = new Authorization();
 const log = require('log6')
 const proxy = httpProxy.createProxyServer({});
 const app = express();
-const bodyParser = require('body-parser')
-const staticresources = {
-    'css': true,
-    'js': true,
-    'jpg': true,
-    'woff2': true,
-    'png': true,
-    'gif': true,
-    'woff': true,
-    'ttf': true,
-    '/models': true,
-    '/hasUpdates': true,
-    '/whoami': true,
-    '/data/DEMO': true,
-    'html': true
-}
-app.use(nofavicon());
+app.use(require("express-no-favicons")());
 app.use(require('cors')())
-app.use(require('morgan')(':remote-addr - :status :method :url :res[content-length] b - :response-time[0] ms', {
-    skip: function(req, res) {
-        const r = req.originalUrl.split('?')[0].split('.');
-        return staticresources[r[r.length - 1]] || false;
-    }
-}));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);

@@ -29,7 +29,10 @@ JBehaveStoryParser.prototype.start = function() {
     excelPlugin.initComplete(this.modelName).then(function(matrix) {
         SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
         model.importFFL(fflFile)
+
+        //TODO: allow multiple contexts here they should inherit model.lme but not modify it.
         const storyParser = new StoryParser(storyFile, story, model.lme);
+
         storyParser.filename = story;
         var succes = true;
         storyParser.message = function(event) {

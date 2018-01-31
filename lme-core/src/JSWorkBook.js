@@ -24,7 +24,6 @@ const YAxis = require('./YAxis')
 
 function JSWorkBook(context, XAxis, interval, opts) {
     this.indexer = null;//preserved to store the indexer
-    XAxis = XAxis || require('./XAxis')
     this.context = context;
     this.offset = 0;
     //default modelname
@@ -33,7 +32,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
     this.yaxis = YAxis;
     this.y = YAxis[0].parent
     //time axis, we looking at bookyears at the moment
-    this.xaxis = XAxis[interval || 'bkyr'].columns[0]
+    this.xaxis = (XAxis || require('./XAxis'))[interval || 'bkyr'].columns[0]
     if (opts) for (var key in opts) this[key] = opts[key]
 }
 

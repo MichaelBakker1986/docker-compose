@@ -1,6 +1,6 @@
 # Unauthorized developer compose
 # Expose the FACEBOOK_PROXY_PORT only for a secured container
-version: '2.0'
+version: '2.1'
 
 services:
     db:
@@ -22,7 +22,7 @@ services:
                 ENV: info
                 RROXY_HOST: 7080
                 HOST: localhost
-                ENABLED_MODELS: *
+                ENABLED_MODELS: '*'
                 FACEBOOK_PROXY_PORT: 9091
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
                 HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
