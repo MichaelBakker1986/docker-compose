@@ -7,7 +7,6 @@
  *  2) Assert a value provided within the story
  */
 const log = require('log6')
-const WB = require('../lme-core/src/JSWorkBook')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     setValue: {
@@ -25,6 +24,20 @@ const functionMapper = {
                     status: 'info',
                     message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
                 }
+            }]
+        }
+    },
+    cleanDocumentState: {
+        /* One story can have multiple contexts, this for now will just clean the current state. */
+        regex: /^\s*Given an? Context(\((\w+,?){0,3}\))?/i,
+        call: function(workbook, linenumber, line, args) {
+            return [function() {
+                workbook.clearValues()
+                if (log.TRACE) log.trace('Document values cleared')
+                return {
+                    status: 'info',
+                    message: "New context created."
+                };
             }]
         }
     },
