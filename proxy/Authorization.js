@@ -191,9 +191,14 @@ class Authorization {
         }
     }
 
+    shareData(id, instanceId) {
+        anonymous["/data/" + instanceId] = true
+    }
+
     addDataPrivileges(id, instanceId) {
         this.allow(id, "/data/" + instanceId, VIEW_RULE)
         this.allow(id, "/saveUserData/" + instanceId, VIEW_RULE)
+        this.allow(id, "/shareData/" + instanceId, VIEW_RULE)
     }
 
     isAuthorizedToView(id, resource, callback) {

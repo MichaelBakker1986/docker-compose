@@ -68,7 +68,9 @@
                 <li>
                     <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
                 </li>
-
+                <li>
+                    <a data-toggle="tooltip" title="Share this data" ng-click="shareData()" class="toggle-save-btn btn btn-sm"><i style="font-size: 24px" class="fa fa-share-alt"></i></a>
+                </li>
             </ul>
         </div>
     </div>

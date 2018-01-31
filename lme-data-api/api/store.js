@@ -68,6 +68,15 @@ module.exports.setup = function(app) {
         }
     });
     /**
+     * Quick solution to test if share-data works
+     */
+    app.get('*/id/:userId/shareData/:token', function(req, res) {
+        res.set('x-share-id', req.params.token);
+        res.json({
+            status: 'success'
+        })
+    })
+    /**
      * Store entered values supplied by the client
      */
     app.post('*/id/:userId/saveUserData/:token', function(req, res) {

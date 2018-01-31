@@ -10,7 +10,7 @@ const exposed_authentication_port = process.env.EXPOSED_AUTHENTICATION_PORT || 8
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const internalRedirectUrl = "http://127.0.0.1:" + internal_proxy_port;
 
-const domain = process.env.DOMAIN || 'appmodel.org'
+const domain = process.env.DOMAIN || 'kspapp.local.com:8091'
 
 const express = require('express');
 const httpProxy = require('http-proxy');
@@ -75,6 +75,7 @@ app.all('*', function(req, res, next) {
  */
 proxy.on('proxyRes', (res) => {
     if (res.headers['x-auth-id']) auth.addModelInstancePrivileges(res.req.path.split('/')[2], res.headers['x-auth-id'])
+    if (res.headers['x-share-id']) auth.shareData(res.req.path.split('/')[2], res.headers['x-share-id'])
 });
 
 app.listen(exposed_authentication_port, () => {

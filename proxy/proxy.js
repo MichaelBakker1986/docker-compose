@@ -118,4 +118,5 @@ async function onProxyRes(proxyRes, req, res) {
     logstash.send(message);
 }
 app.listen(internal_proxy_port, () => {
+    log.info('<a href="http://blfif-tv-tr03.finance.lab:5601"> Kibana logstash</a><span> deployed.</span>');
 });

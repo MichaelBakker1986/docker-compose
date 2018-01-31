@@ -75,6 +75,13 @@ angular
         $('body').popover({
             selector: '[data-toggle="popover"]'
         });
+        $scope.shareData = function() {
+            $http.get('shareData/' + hash).then(function(data) {
+                alert('data shared: ' + window.location.href)
+            }).catch(function(err) {
+                console.error(err)
+            })
+        }
         /*   $('#startYear').datepicker({
                /!*    format: "yyyy",*!/
                /!*      viewMode: "years",
