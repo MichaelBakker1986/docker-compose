@@ -22,7 +22,6 @@ fm.prototype.apiGet = function(formula, x, y, z, v) {
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id || formula.index;
-
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
@@ -59,16 +58,13 @@ var formulaDecorators = {
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
         return function(f, x, y, z, v) {
-            if (x.dummy) {
-                return NA;
-            }
+            if (x.dummy) return NA;
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] == null) {
                 return innerFunction(f, x, y, z, v);
             }
-            //return entered value
-            return v[f][hash];
+            return v[f][hash]; //return entered value
         };
     }
     //will need more types e.g. cacheLocked and cacheUnlocked.

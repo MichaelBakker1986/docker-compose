@@ -119,7 +119,7 @@ GetValue = function(variable, x, y, z, v, amm) {
     return 1;//variable('123', x, y, z, v)
 }
 //'^[0-9]+$'
-REGEXPMATCH = function(pattern, value, message) {
+REGEXPMATCH = function(pattern, value) {
     return new RegExp(pattern).test(value) ? true : false;
 }
 ValueT = function(one) {

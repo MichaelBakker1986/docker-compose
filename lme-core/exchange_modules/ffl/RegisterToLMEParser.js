@@ -142,20 +142,23 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             type = 'paragraph'
         }
 
-        //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
-        //info: patternIndex is language-specific (f.e. email- regular expression)
-        const validFormulas = []
-        if (node[validIndex]) validFormulas.push(node[validIndex])
-        if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
-        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
-        if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
-        if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
 
-        //its also only interesting when its a required field and entered
-        // or when its entered and required
-        //' + node[nameIndex] + '.required &&
-        //valid formulas are only interesting when entered OR required
-        if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
+        if (!node[validIndex]) {
+            //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
+            //info: patternIndex is language-specific (f.e. email- regular expression)
+            const validFormulas = []
+            //if (node[validIndex]) validFormulas.push(node[validIndex])
+            if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ')');
+            if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
+            if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
+            if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
+            //its also only interesting when its a required field and entered
+            // or when its entered and required
+            //' + node[nameIndex] + '.required &&
+            //valid formulas are only interesting when entered OR required
+            if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
+            //if (validFormulas.length > 0) console.info(node[nameIndex] + ':' + node[validIndex])
+        }
         const frequency = (node[tupleIndex]) ? 'none' : (node[fflRegister.frequencyIndex] || 'column');
         if (node[tupleIndex]) type = 'paragraph'
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
