@@ -131,13 +131,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
 
         //TODO: quick-fix move into IDE ScorecardTool-addon
-        if (nodeName.match(/MAP[0-9]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
+        if (nodeName.match(/MAP[0-9,A-z]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
             if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
                 node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
                 node[fflRegister.frequencyIndex] = 'none'
             }
             type = 'string'
-        } else if (nodeName.match(/MAP[0-9]+_PARAGRAAF[0-9]+$/i)) {
+        } else if (nodeName.match(/MAP[0-9,A-z]+_PARAGRAAF[0-9]+$/i)) {
             node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
         }
@@ -147,7 +147,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         const validFormulas = []
         if (node[validIndex]) validFormulas.push(node[validIndex])
         if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ',"Enter valid input.")');
-        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') <= ' + node[lengthIndex]);
+        if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
         if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
         if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
 
@@ -157,7 +157,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         //valid formulas are only interesting when entered OR required
         if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         const frequency = (node[tupleIndex]) ? 'none' : (node[fflRegister.frequencyIndex] || 'column');
-
+        if (node[tupleIndex]) type = 'paragraph'
         var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
@@ -177,7 +177,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 if (tuples[i]) uiNode.nestedTupleDepth++
             if (node[tupleIndex]) {
                 uiNode.tupleDefinition = true;
-                uiNode.displaytype = 'string' //Will story string-based values (Jan,Piet,123Jaar,Etc..)
+                uiNode.datatype = 'string' //Will story string-based values (Jan,Piet,123Jaar,Etc..)
                 if (tuples.length > 0) {
                     uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
                     uiNode.tupleProperty = true

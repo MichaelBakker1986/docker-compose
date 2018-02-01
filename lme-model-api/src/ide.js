@@ -55,6 +55,7 @@ const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
     page: 'scorecard',
+    version: '0.0.4',
     user: {
         name: userID
     },
@@ -581,5 +582,9 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.showNode = function(node) {
             console.info(register)
             aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id).join('\n'));
+        }
+        $scope.changeView = function(viewName) {
+            $scope.currentView = viewName;
+            $scope.changedView();
         }
     });

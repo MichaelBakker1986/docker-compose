@@ -2702,6 +2702,9 @@ model SCORECARDTESTMODEL  uses BaseModel
      {
       title: "Onroerend goed";
       options_title: locked;
+      frequency: none;
+      datatype: string;
+      displaytype: paragraph;
       variable OnroerendGoed_tpRegistratienummer
       {
        datatype: string;
@@ -2814,12 +2817,15 @@ model SCORECARDTESTMODEL  uses BaseModel
      datatype: number;
      frequency: document;
      title: "Tuple Omzetgroep";
-     displaytype: currency;
+     displaytype: paragraph;
      visible: 1;
      options_title: locked;
      tuple OmzetGroep
      {
       title: "Omzetgroep";
+      frequency: none;
+      datatype: string;
+      displaytype: paragraph;
       options_title: locked;
       variable Omzetgroep_tpNaam
       {
@@ -2905,6 +2911,9 @@ model SCORECARDTESTMODEL  uses BaseModel
      tuple OVK
      {
       title: "Overeenkomst (T)";
+      frequency: none;
+      datatype: string;
+      displaytype: paragraph;
       options_title: locked;
       variable OVK_tpID
       {
@@ -2927,6 +2936,9 @@ model SCORECARDTESTMODEL  uses BaseModel
       {
        title: "Lening (T)";
        options_title: locked;
+       frequency: none;
+       displaytype: paragraph;
+       datatype: string;
        variable OVK_Lening_tpID
        {
         datatype: string;
@@ -2995,6 +3007,8 @@ model SCORECARDTESTMODEL  uses BaseModel
        {
         title: "Zekerheid (T) (Gealloceerd)";
         options_title: locked;
+        datatype: string;
+        displaytype: paragraph;
         variable OVK_Lening_Zekerheid_tpID
         {
          datatype: string;
@@ -3153,6 +3167,8 @@ model SCORECARDTESTMODEL  uses BaseModel
      tuple Q_MAP05_PARAGRAAF07SUB1
      {
       title: String(OVK_tpNaam);
+      frequency: none;
+      displaytype: paragraph;
       options_title: locked;
       options_notrend: locked;
       options_trend: locked;
@@ -3177,7 +3193,7 @@ model SCORECARDTESTMODEL  uses BaseModel
       tuple Q_MAP05_PARAGRAAF07SUB1SUB3
       {
        title: String(OVK_Lening_tpNummer);
-       displaytype: currency;
+       displaytype: paragraph;
        fixed_decimals: 0;
        options_title: locked;
        options_notrend: locked;
@@ -3234,7 +3250,7 @@ model SCORECARDTESTMODEL  uses BaseModel
        tuple Q_MAP05_PARAGRAAF07SUB1SUB3SUB4
        {
         title: String(OVK_Lening_Zekerheid_tpNaam);
-        displaytype: currency;
+        displaytype: paragraph;
         fixed_decimals: 0;
         options_title: locked;
         options_notrend: locked;
@@ -3348,7 +3364,7 @@ model SCORECARDTESTMODEL  uses BaseModel
      datatype: number;
      frequency: document;
      title: "(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [NIET READONLY]";
-     displaytype: currency;
+     displaytype: paragraph;
      visible: 1;
      tuple Q_MAP05_PARAGRAAF08SUB1
      {
@@ -6143,27 +6159,26 @@ model SCORECARDTESTMODEL  uses BaseModel
      options_notrend: locked;
      options_trend: locked;
     }
-    variable GraphResRek
+    variable GraphResRek refers to NetSales
     {
-     datatype: number;
-     frequency: document;
-     title: "Grafiek resultatenrekening";
-     displaytype: currency;
+     title: "Netto omzet";
+     frequency: none;
+     datatype: matrix;
+     displaytype: piechart;
+     formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
+     top_blanklines: 1;
      visible: 1;
      options_title: locked;
-     variable +GraphResRek1 refers to NetSales
-     {
-      title: "Netto omzet";
-      top_blanklines: 1;
-      visible: 1;
-      options_title: locked;
-     }
-     variable -GraphResRek2 refers to CostOfSales
-     {
-      title: "Inkoopwaarde";
-      visible: 1;
-      options_title: locked;
-     }
+    }
+    variable -GraphResRek2 refers to CostOfSales
+    {
+     title: "Inkoopwaarde";
+     datatype: matrix;
+     frequency: none;
+     displaytype: piechart;
+     formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
+     visible: 1;
+     options_title: locked;
     }
     variable Q_MAP0A_PARAGRAAF09
     {

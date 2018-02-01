@@ -98,6 +98,15 @@ HSUM = function(values, start, end) {
     }
     return returnValue;
 }
+HVALUES = function(values, start, end) {
+    var returnValue = [];
+    if (start.hash) start = start.hash
+    if (end.hash) end = end.hash
+    for (var i = (start || 0); i <= (end || values.length); i++) {
+        returnValue.push(values[i]);
+    }
+    return returnValue;
+}
 VALUES = function(func, fId, x, y, z, v) {
     var result = []
     for (var i = 0; i < x.aggcols.length; i++) {

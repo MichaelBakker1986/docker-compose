@@ -17,6 +17,13 @@
  *  - Static resources are defined here
  *  - x-auth-id should allow multiple hashes: hash2,hash3 for URL get: data/hash1,hash2
  *  - Admin access is defined here with MichaelFaceBookID
+ *
+ *  First step is to List all resources  (or groups)
+ *   - Group{MODEL_NAME}~temp
+ *            \--  resources/MODELNAME.js    - VIEW|EDIT
+ *             \-  resources/MODELNAME.story - VIEW|EDIT
+ *
+ *
  */
 const Acl = require('acl');
 const rules = require('./Auth.json').rules;
@@ -141,6 +148,7 @@ class Authorization {
             var rule = rules[ruleNumer];
             this.allow(rule.id, rule.resource, rule.role)
         }
+        this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
         /*  this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
                 this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
                 this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);

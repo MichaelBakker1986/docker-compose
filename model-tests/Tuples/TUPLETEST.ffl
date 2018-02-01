@@ -71,8 +71,8 @@ model TUPLETEST uses BaseModel
        frequency: document;
       }
      }
-    }
    }
+    }
   }
   variable Balance
   {

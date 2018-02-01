@@ -137,6 +137,29 @@ var simplified = {
          "name": "1"
          }];*/
     },
+    HVALUES: function(formulaInfo, node) {
+        node.callee.name = "HVALUES";
+        if (node.arguments[0].type == 'Identifier') {
+            node.arguments[0] = {
+                "type": "MemberExpression",
+                "computed": true,
+                "object": {
+                    "type": "Identifier",
+                    "name": node.arguments[0].name
+                },
+                "property": {
+                    "type": "Identifier",
+                    "name": "all"
+                }
+            }
+        }
+
+        /*  console.info('test')*/
+        /* node.arguments = [{
+         "type": "Identifier",
+         "name": "1"
+         }];*/
+    },
     /*
      OnZero: function (node)
      {
