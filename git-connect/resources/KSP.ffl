@@ -245,7 +245,7 @@ model KSP uses BaseModel
      {
       title: "Hourly fee child daycare";
       frequency: document;
-      formula: 7.18;
+      formula: 7.45;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -343,7 +343,7 @@ model KSP uses BaseModel
       title: "Max. hourly rate childcare";
       locked: 1;
       frequency: document;
-      formula: 7.18;
+      formula: 7.45;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -352,7 +352,7 @@ model KSP uses BaseModel
       title: "Max. hourly rate out-of-school care";
       locked: 1;
       frequency: document;
-      formula: 6.69;
+      formula: 6.95;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -361,7 +361,7 @@ model KSP uses BaseModel
       title: "Max. hourly rate guest parent";
       locked: 1;
       frequency: document;
-      formula: 5.75;
+      formula: 5.91;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -370,7 +370,7 @@ model KSP uses BaseModel
       title: "Max. hourly rate guest parent out-of-school care";
       locked: 1;
       frequency: document;
-      formula: 5.75;
+      formula: 5.91;
       datatype: number;
       fixed_decimals: 2;
      }
@@ -387,7 +387,7 @@ model KSP uses BaseModel
       title: "Lower boundary Income";
       locked: 1;
       frequency: document;
-      formula: 4895;
+      formula: 4934;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -396,7 +396,7 @@ model KSP uses BaseModel
       title: "Base";
       locked: 1;
       frequency: document;
-      formula: 1043;
+      formula: 1052;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -415,7 +415,7 @@ model KSP uses BaseModel
       title: "Maximum Discount";
       locked: 1;
       frequency: document;
-      formula: 2778;
+      formula: 2801;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -432,7 +432,7 @@ model KSP uses BaseModel
       title: "Max Budget (1 - 12 yrs)";
       locked: 1;
       frequency: document;
-      formula: 1142;
+      formula: 1152;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -441,7 +441,7 @@ model KSP uses BaseModel
       title: "Max Budget (12 - 15 yrs)";
       locked: 1;
       frequency: document;
-      formula: 1376;
+      formula: 1388;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -450,7 +450,7 @@ model KSP uses BaseModel
       title: "Max Budget (16 - 17 yrs)";
       locked: 1;
       frequency: document;
-      formula: 1559;
+      formula: 1573;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -459,7 +459,7 @@ model KSP uses BaseModel
       title: "Upper boundary Income";
       locked: 1;
       frequency: document;
-      formula: 20109;
+      formula: 20451;
       datatype: number;
       fixed_decimals: 1;
      }
@@ -1002,7 +1002,7 @@ model KSP uses BaseModel
       title: "Child benefits";
       locked: 1;
       frequency: column;
-      formula: If((Age<=5),200.59*4,If((Age>=6) and (Age<=11),243.57*4,286.55*4));
+      formula: If((Age<=5),201.05*4,If((Age>=6) and (Age<=11),244.13*4,287.21*4));
       datatype: number;
       fixed_decimals: 2;
       aggregation: flow;
