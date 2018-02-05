@@ -4,6 +4,7 @@ const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFa
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
+
     function defaultResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
@@ -31,24 +32,24 @@ module.exports.setup = function(app) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
             try {
+                const body = req.body;
                 let result;
                 var context = ds.getOrCreate(req.params.id);
+                var modelPrefix = req.originalUrl.endsWith('Container') ? 'LGD_' : "KSP_";
+                for (var q in body) {
+                    for (var c in body[q]) {
+                        if (typeof(body[q][c]) != 'object') {
+                            LMECalculationFacade.getValue(context, modelPrefix + c, 0, body[q][c], undefined)
+                        }
+                    }
+                }
+
                 if (req.originalUrl.endsWith('Container')) {
                     context.columns = 1;
                     result = LMECalculationFacade.getObjectValues(context, "LGD_LGDCalculationOutputContainer", undefined);
                 } else {
-                    const body = req.body;
-                    context.columns = 17;
-                    //resolve context key to stored values
-                    //set all values in the context.
-                    for (var q in body) {
-                        for (var c in body[q]) {
-                            if (typeof(body[q][c]) != 'object') {
-                                LMECalculationFacade.getValue(context, "KSP_" + c, 0, body[q][c], undefined)
-                            }
-                        }
-                    }
 
+                    context.columns = 17;
                     result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
                 }
                 success(result)
