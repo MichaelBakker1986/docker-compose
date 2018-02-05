@@ -4,12 +4,6 @@ const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFa
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
-    app.use(function(req, res, next) {
-        res.on('finish', function() {
-            console.info(res.body)
-        });
-        next()
-    })
     function defaultResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
@@ -80,6 +74,4 @@ module.exports.setup = function(app) {
     app.post('*/id/:id/figure/:figureName/value/:value', defaultResponse);
     app.post('*/id/:id/figure/:figureName', defaultPostResponse);
     app.post('*/figure/:figureName', defaultPostResponse);
-
-
 };
