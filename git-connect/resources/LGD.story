@@ -4,13 +4,25 @@ LGD Score Basic
 
 Scenario: Verify LGD Score calculations
 Given a document of the model type LGD
-When FacilityInputContainer(John) is set to John
-When CollateralAgreementDefinitionCode(John,Sara) is set to 100
-When SecuredAmount(John,Sara) is set to 100
-Then SecuredAmount(John,Sara) should be 100
 
-@Given a Context(Jan) (But this should also be possible for, Given a Context(TRIODOS,Jan) - Needs further research
-@#TCONSOLID(TEST)#
-Given a document of the model type LGD
-Given a document of the model type LGD
-Given a document of the model type LGD
+When SecuredAmount(213) is set to 21000
+
+@Collateral PandHypotheek
+And CollateralObject(213,SecureCollateral) is set to PandHypotheek
+And MarketValue(213,SecureCollateral) is set to 10000
+And Discount(213,SecureCollateral) is set to 2000
+
+Then CollateralObjectECValue(213,SecureCollateral) should be 7000
+And CollateralECValue(213) should be 7000
+
+And RecoveryValue should be 7000
+
+@Collateral Investment
+And CollateralObject(213,Investment) is set to Investment
+And MarketValue(213,Investment) is set to 10000
+And Discount(213,Investment) is set to 2000
+
+Then CollateralObjectECValue(213,Investment) should be 7000
+And CollateralECValue(213) should be 14000
+
+And RecoveryValue should be 14000
