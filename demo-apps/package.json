@@ -16,7 +16,6 @@
     "express-http-proxy": "^1.0.7",
     "express-no-favicons": "0.0.1",
     "express-static-gzip": "^0.3.0",
-    "log6": "^1.0.26",
     "font-awesome": "^4.7.0",
     "gitgraph.js": "^1.11.4",
     "gulp": "^3.9.1",
@@ -30,11 +29,13 @@
     "gulp-uglify": "^3.0.0",
     "ionicons": "^3.0.0",
     "ip": "^1.1.5",
+    "log6": "^1.0.26",
     "pace-progress": "^1.0.2",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "request-promise-json": "^1.0.4",
-    "serve-static": "^1.13.1"
+    "serve-static": "^1.13.1",
+    "viz.js": "^1.8.0"
   },
   "devDependencies": {},
   "main": "demoapps.js",

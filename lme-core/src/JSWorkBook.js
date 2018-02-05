@@ -339,22 +339,29 @@ JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas, delta) {
     return -1;
 }
 /**
- * Add tuple- iterations while iterating properties
+ * Copy-paste from walkproperties. (Without [+]tupleD)
  */
-JSWorkBook.prototype.visitProperties = function(startProperty, visitor, y) {
-    const yax = this.resolveY(y)
+JSWorkBook.prototype.visitProperties = function(node, visitor, y, type, treeDepth) {
     const wb = this;
-    ValueFacade.visit(startProperty, function(node, treeDepth, natural_orderid) {
-        //for max tuplecount in current node loop visitor node
-        var maxTupleCountForTupleDefinition = wb.maxTupleCountForRow(node);
-        for (var tupleCounter = 0; tupleCounter <= maxTupleCountForTupleDefinition; tupleCounter++) {
-            visitor(node, resolveY(wb, tupleCounter), treeDepth, natural_orderid + tupleCounter * 1000)
+    const itarfunction = function(treeNode, innerTreeDepth) {
+        //instance is only for the first call
+        //we must be recursive since Tuple in tuple
+        if (treeNode.tupleDefinition) {
+            if (type !== treeNode.rowId) {
+                const maxTupleCountForTupleDefenition = wb.maxTupleCountForRow(treeNode, y);
+                for (var t = 0; t <= maxTupleCountForTupleDefenition; t++) {
+                    wb.visitProperties(treeNode, visitor, y.deeper[t], treeNode.rowId, innerTreeDepth)
+                }
+                itarfunction.stop = true;
+            } else {
+                visitor(treeNode, 'instance', innerTreeDepth, y)
+            }
+        } else {
+            //because of this check, the nested tuple-property will not be displayed.
+            visitor(treeNode, 'instance_no_td', innerTreeDepth, y)
         }
-        //tuple add function
-        if (node.tupleDefinition) {
-            visitor(node, resolveY(wb, 0), treeDepth, natural_orderid)
-        }
-    }, yax);
+    };
+    ValueFacade.visit(node, itarfunction, treeDepth);
 }
 /*
 * TupleDefinition[2]

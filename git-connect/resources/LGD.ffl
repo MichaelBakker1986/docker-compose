@@ -9,118 +9,167 @@ model LGD uses BaseModel
    {
     displaytype: Input;
     datatype: string;
-    title: "LGDCalculationInputContainer";
+    title: "LGDCalculationInputContaine1r";
     frequency: document;
-    tuple CollateralAgreementContainer
-    {
-     displaytype: paragraph;
-     datatype: string;
-     title: "CollateralAgreementContainer";
-     frequency: none;
-     variable CollateralAgreement
-     {
-      displaytype: none;
-      datatype: string;
-      title: "CollateralAgreement";
-      frequency: document;
-      variable CollateralAgreementReferenceNumber
-      {
-       displaytype: string;
-       datatype: string;
-       title: "CollateralAgreementReferenceNumber";
-       frequency: document;
-       range: <= 128;
-      }
-      variable CollateralAgreementDefinitionCode
-      {
-       displaytype: string;
-       datatype: string;
-       title: "CollateralAgreementDefinitionCode";
-       frequency: document;
-       range: <= 255;
-      }
-      variable SecuredAmount
-      {
-       displaytype: none;
-       datatype: string;
-       title: "SecuredAmount";
-       frequency: document;
-       variable Currency
-       {
-        displaytype: string;
-        datatype: string;
-        title: "Currency";
-        frequency: document;
-        range: <= 10;
-       }
-       variable CollateralAgreementAmount
-       {
-        displaytype: number;
-        datatype: number;
-        title: "CollateralAgreementAmount";
-        frequency: document;
-       }
-      }
-     }
-     variable RegistrationContainer
-     {
-      displaytype: none;
-      datatype: string;
-      title: "RegistrationContainer";
-      frequency: document;
-      variable CollateralObject
-      {
-       displaytype: none;
-       datatype: string;
-       title: "CollateralObject";
-       frequency: document;
-       variable CollateralObjectReferenceNumber
-       {
-        displaytype: string;
-        datatype: string;
-        title: "CollateralObjectReferenceNumber";
-        frequency: document;
-        range: <= 128;
-       }
-       variable DefinitionCode
-       {
-        displaytype: string;
-        datatype: string;
-        title: "DefinitionCode";
-        frequency: document;
-        range: <= 255;
-       }
-       variable MarketValue
-       {
-        displaytype: none;
-        datatype: string;
-        title: "MarketValue";
-        frequency: document;
-        variable Currency
-        {
-         displaytype: string;
-         datatype: string;
-         title: "Currency";
-         frequency: document;
-         range: <=  10;
-        }
-        variable Amount
-        {
-         displaytype: number;
-         datatype: number;
-         title: "Amount";
-         frequency: document;
-        }
-       }
-      }
-     }
-    }
     tuple FacilityInputContainer
     {
      displaytype: paragraph;
      datatype: string;
      title: "FacilityInputContainer";
      frequency: none;
+     variable RecoveryValue
+     {
+      title: "RecoveryValue";
+      frequency: document;
+      locked: 1;
+      datatype: number;
+      fixed_decimals: 2;
+      formula: TSUM(CollateralECValue) * AllocationValue;
+     }
+     variable AllocationValue
+     {
+      title: "AllocationValue";
+      frequency: document;
+      datatype: number;
+      formula: 1;
+     }
+     tuple CollateralAgreementContainer
+     {
+      displaytype: paragraph;
+      datatype: string;
+      title: "CollateralAgreementContainer";
+      frequency: none;
+      variable CollateralECValue
+      {
+       datatype: number;
+       locked: 1;
+       title: "Collateral EC Value";
+       frequency: document;
+       formula: MIN(SecuredAmount, TSUM(CollateralObjectECValue));
+      }
+      tuple RegistrationContainer
+      {
+       displaytype: paragraph;
+       datatype: string;
+       title: "RegistrationContainer";
+       frequency: none;
+       variable CollateralObject
+       {
+        displaytype: none;
+        datatype: string;
+        title: "CollateralObject";
+        frequency: document;
+        variable CollateralObjectReferenceNumber
+        {
+         displaytype: string;
+         datatype: string;
+         title: "CollateralObjectReferenceNumber";
+         frequency: document;
+         range: <= 128;
+        }
+        variable DefinitionCode
+        {
+         displaytype: string;
+         datatype: string;
+         title: "DefinitionCode";
+         frequency: document;
+         range: <= 255;
+        }
+        variable MarketValue
+        {
+         displaytype: none;
+         datatype: string;
+         title: "MarketValue";
+         frequency: document;
+         variable Currency
+         {
+          displaytype: string;
+          datatype: string;
+          title: "Currency";
+          frequency: document;
+          range: <= 10;
+         }
+         variable Amount
+         {
+          displaytype: number;
+          datatype: number;
+          title: "Amount";
+          frequency: document;
+         }
+        }
+        variable OtherRank
+        {
+         displaytype: number;
+         datatype: number;
+         formula: NA;
+         title: "OtherRank";
+         frequency: document;
+        }
+        variable Discount
+        {
+         displaytype: number;
+         datatype: number;
+         formula: NA;
+         title: "Discount";
+         frequency: document;
+        }
+       }
+       variable CollateralObjectECValue
+       {
+        datatype: number;
+        title: "CollateralObjectECValue";
+        frequency: document;
+        fixed_decimals: 2;
+        locked:1;
+        formula: (MarketValue * 0.9)- If(OtherRank>NA,NA,Discount) ;
+       }
+      }
+      variable CollateralAgreement
+      {
+       displaytype: none;
+       datatype: string;
+       title: "CollateralAgreement";
+       frequency: document;
+       variable CollateralAgreementReferenceNumber
+       {
+        displaytype: string;
+        datatype: string;
+        title: "CollateralAgreementReferenceNumber";
+        frequency: document;
+        range: <= 128;
+       }
+       variable CollateralAgreementDefinitionCode
+       {
+        displaytype: string;
+        datatype: string;
+        title: "CollateralAgreementDefinitionCode";
+        frequency: document;
+        range: <= 255;
+       }
+       variable SecuredAmount
+       {
+        displaytype: none;
+        datatype: string;
+        title: "SecuredAmount";
+        frequency: document;
+        variable SecuredAmountCurrency
+        {
+         displaytype: string;
+         datatype: string;
+         title: "SecuredAmountCurrency";
+         frequency: document;
+         range: <= 10;
+        }
+        variable CollateralAgreementAmount
+        {
+         displaytype: number;
+         datatype: number;
+         title: "CollateralAgreementAmount";
+         frequency: document;
+        }
+       }
+      }
+     }
      variable FacilityDetails
      {
       displaytype: none;
@@ -139,7 +188,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "ReferenceId";
         frequency: document;
-        range: <=  128;
+        range: <= 128;
        }
        variable DisplayId
        {
@@ -147,7 +196,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "DisplayId";
         frequency: document;
-        range: <=  128;
+        range: <= 128;
        }
       }
       variable FacilityDefinitionCode
@@ -156,7 +205,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "FacilityDefinitionCode";
        frequency: document;
-       range: <=  255;
+       range: <= 255;
       }
      }
      variable LimitDetails
@@ -165,20 +214,27 @@ model LGD uses BaseModel
       datatype: string;
       title: "LimitDetails";
       frequency: document;
-      variable LimitTypeCode
+      variable Limiet
       {
-       displaytype: string;
-       datatype: string;
-       title: "LimitTypeCode";
+       datatype: number;
+       title: "Limiet";
        frequency: document;
-       range: <=  255;
       }
-      variable CompensatingBalancePercentage
+      variable ExposureAtDefault
       {
        displaytype: number;
        datatype: number;
-       title: "CompensatingBalancePercentage";
+       title: "Limiet * percentage";
+       formula: Limiet * ExpectedLimitUsage;
        frequency: document;
+      }
+      variable ExpectedLimitUsage
+      {
+       title: "ExpectedLimitUsage";
+       datatype: number;
+       frequency: document;
+       displaytype: percentage;
+       formula: 0.60;
       }
      }
      tuple AllocatedGuarantee
@@ -193,7 +249,7 @@ model LGD uses BaseModel
        datatype: string;
        title: "AllocatedGuaranteeReferenceNumber";
        frequency: document;
-       range: <=  128;
+       range: <= 128;
       }
       tuple GuaranteeAgreement
       {
@@ -207,7 +263,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "GuaranteeAgreementReferenceNumber";
         frequency: document;
-        range: <=  128;
+        range: <= 128;
        }
        variable GuaranteeAgreementDefinitionCode
        {
@@ -215,7 +271,7 @@ model LGD uses BaseModel
         datatype: string;
         title: "GuaranteeAgreementDefinitionCode";
         frequency: document;
-        range: <=  255;
+        range: <= 255;
        }
       }
      }
@@ -231,7 +287,7 @@ model LGD uses BaseModel
        datatype: number;
        title: "AllocatedCollateralReferenceNumber";
        frequency: document;
-       range: <=  128;
+       range: <= 128;
       }
      }
     }
@@ -243,6 +299,12 @@ model LGD uses BaseModel
     title: "LGDCalculationOutputContainer";
     frequency: document;
     formula: TCOUNT(CollateralAgreement);
+    variable CounterParty
+    {
+     title: "CounterParty";
+     frequency: document;
+     datatype: number;
+    }
     variable FacilityResultContainer
     {
      displaytype: none;
@@ -256,25 +318,50 @@ model LGD uses BaseModel
       datatype: string;
       title: "FacilityReferenceNumber";
       frequency: document;
-      formula: 1;
+      formula: "CAS-210-01";
       range: <= 255;
      }
-     variable FacilityLGD
+     variable LGD
      {
-      displaytype: string;
+      displaytype: paragraph;
       datatype: string;
-      title: "FacilityLGD";
-      formula: 1;
-      frequency: document;
+      title: "LGD";
+      frequency: none;
       variable LGDClass
       {
-       displaytype: string;
        datatype: string;
        title: "LGDClass";
-       formula: String(TMAX(CollateralAgreementAmount));
+       formula: "LCRMNL06";
        frequency: document;
-       range: <=  255;
       }
+      variable DownturnLGDIncludingMOCField
+      {
+       datatype: number;
+       title: "DownturnLGDIncludingMOCField";
+       formula: 2.1;
+       frequency: document;
+      }
+      variable LGDIncludingMOCField
+      {
+       datatype: number;
+       title: "lGDIncludingMOCField";
+       formula: 2.1;
+       frequency: document;
+      }
+      variable BestEstimatedLGD
+      {
+       datatype: number;
+       title: "BestEstimatedLGD";
+       formula: 1.4;
+       frequency: document;
+      }
+     }
+     variable FacilityCoverageField
+     {
+      datatype: number;
+      title: "FacilityCoverageField";
+      formula: 1.2;
+      frequency: document;
      }
     }
    }

@@ -6,18 +6,21 @@
 var assert = require('assert');
 require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../exchange_modules/presentation/webexport');
+
 require('../../math')
 var CalculationFacade = require('../').CalculationFacade;
 var Context = require('../src/Context');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
+const ValueFacade = require('../src/ValueFacade');
 CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
 CalculationFacade.addFunctions(require('../../excel-connect').xlsxLookup);
 var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
 var fs = require('fs');
-
-var fflTestModels = ['/../resources/KSP'];
+const path = '/../../git-connect/resources/';
+const modelname = 'KSP';
+var fflTestModels = [path + modelname];
 
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
@@ -43,7 +46,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
         var node = allnodes[nodeName];
     }
 
-    wb.visitProperties(wb.getSolutionNode('KSP_root'), function(child) {
+    ValueFacade.visit(wb.getSolutionNode(modelname + '_root'), function(child) {
         graphvizModelTree += createRow(child.rowId);
         graphvizModelTree += "\r\n" + child.parentrowId + " -> " + child.rowId + ";"
     }, 0)

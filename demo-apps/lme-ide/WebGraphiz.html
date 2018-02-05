@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Webgraphviz</title>
+</head>
+<body>
+
+<br>
+<textarea id="graphviz_data" rows="20" cols="80" width="100%" wrap="off">
+    digraph models_diagram {
+    graph[overlap=false, splines=true]
+    "Venue" [shape=record, label="{\
+      Venue|name :string\l\
+    }"]
+
+    "User" [shape=record, label="{User|\
+      email :string\l\
+      password :string\l\
+    }"]
+
+    "Order" [shape=record, label="{Order|\
+      name :string\l\
+    }"]
+
+    "User" -> "Order" [arrowtail=odot, arrowhead=crow, dir=both, label="request"]
+    "User" -> "Venue" [arrowtail=odot, arrowhead=crow, dir=both, label=agent]
+}
+</textarea>
+<p>
+    <button id="generate_btn" style="font-size: 120%">Generate Graph!</button>
+</p>
+<div id="graphviz_svg_div">
+</div>
+
+
+<script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript" src="./dist/js/viz.js"></script>
+<script language="javascript" type="text/javascript" src="./dist/js/site.js"></script>
+<script type="javascript">
+
+</script>
+</body>
+</html>

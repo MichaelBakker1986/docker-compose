@@ -61,6 +61,7 @@ app.listen(port, () => {
 
     routes.push('*.ffl')
     routes.push('*/adminlte.min.js')
+    routes.push('*/viz.js')
     routes.push('*/demo.js')
     routes.push('*/scorecard.js')
     routes.push('*.woff2')

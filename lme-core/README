@@ -1,1 +1,29 @@
+#Idea behind XAxis:
+Every variable(t0,t1,t2) can hold up to 256 values
+ USER|DOC|{TREND|NOTREND|AGG}+
+ First value is reserved for USER value, defined with the USER-Formula       - This could be MIN(Self[lastbkyear],100) to see all values from the last bookyear with a minimal value of 100
+ Second value is reserved for the DOCUMENT value, with the 'default'-Formula - Often used for overall settings.
+ Trend|NoTrend|AGG values are reserved for values in time The user decides when Trend|NoTrend starts and ends. Combined with aggregation formula's
+  e.g.
+0     (USER)
+1     (DOCUMENT)
+    2 (detail)
+    3 (detail)
+    4 (detail)
+   5  (quart_bkyear) agg(2,3,4)
+    6 (detail)
+    7 (detail)
+    8 (detail)
+   9  (quart_bkyear) agg(6,7,8)
+ 10   (half_bkyear)  agg(5,9)
+[.....]
+
+Aggregation formulaset would be like If(FLOW,Self[prev])                  -- (!) previous column can be aggregation column
+                                     If(BALANCE,SUM(Self[t.agg_columns])) --
+
+Inverse aggregation:(~~similar to flip-flop) if(DataEntered(Self|Aggregated)) SUM(Self[agg]/fraction)
+ -- So the formula for these types are more complex to perform.
+
+Introducing valuation formulaset could be done in the USER- formulaset, when the USER-formulaset is already taken. We need to introduce another formulaset.
+
 -- https://www.npmjs.com/package/js-solver solver module to find flip-flop value.

@@ -104,7 +104,7 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
     var rootNode = JSWorkBook.getSolutionNode(rowId);
     const flattenValues = {}
     if (rootNode) {
-        JSWorkBook.visitProperties(rootNode, function(node, yax) {
+        JSWorkBook.visitProperties(rootNode, function(node, type, innerTreeDepth, yax) {
             const nodeName = node.rowId;
             const parentName = node.parentName.split("_").slice(0, -1).join("_")
             const columns = node.frequency == 'document' ? 0 : context.columns;
@@ -117,7 +117,7 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
                     data: []
                 }
             }
-        })
+        }, JSWorkBook.resolveY(0).parent, null, 0)
         //reassemble results
         for (var key in flattenValues) {
             if (flattenValues[flattenValues[key].parent]) {
@@ -140,6 +140,9 @@ LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
             variable: rowId
         });
     }
+    /**
+     * Values are not bound.
+     */
     return flattenValues[rowId.split("_").slice(1).join("_")];
 }
 
