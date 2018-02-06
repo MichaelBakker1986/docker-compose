@@ -51,6 +51,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
+    const aggregationIndex = indexer.schemaIndexes.aggregation;
     const modifierIndex = indexer.schemaIndexes.modifier;
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
@@ -108,8 +109,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var trendformula = node[trend_formulaIndex];
         var valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
         if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
-            valueFormula = 'If(x.istrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
+            valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
         }
+        if (node[fflRegister.frequencyIndex] == 'column' && node[dataTypeIndex] == 'number' && node[aggregationIndex] == 'flow') {
+            valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + valueFormula + ')'
+        }
+        //if column && number.. (aggregate)
+
         if (node[modifierIndex] == '=') {
             const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
             var formula = '0';

@@ -42,6 +42,7 @@ function finFormulaGeneric(buf) {
 
     buf = buf.replace(/\[LastTinPeriod\(PeriodInT\)]/gi, '[lastinperiod]');
     buf = buf.replace(/\LastTinPeriod\(PeriodInT\)/gi, 'x.lastinperiod');
+    buf = buf.replace(/LastTinYear\(T-TsY\)/gi, 'x.prevbkyear');
 
     buf = buf.replace(/\[1]/g, '[doc]');
     buf = buf.replace(/\[T]/g, ''); //Variable[T] is the same as Variable, its always in default to the corresponding time.
@@ -59,6 +60,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/TsY\(LastTinPeriod\)/gi, 'TsY');
     buf = buf.replace(/TsY\(T\)/gi, 'x.tsy');
     buf = buf.replace(/\[0\]/g, '.title ');
+    /*buf = buf.replace(/Visible\((\w+)\)/gi, '$1.visible')  ; Is done in ASTPreparser.js*/
 
     //(& types
     buf = buf.replace(/(=|,|\()\s{0,4}\&/gm, ' $1 ');// replace all '=   &' and '(  &'   with = or ( respectively

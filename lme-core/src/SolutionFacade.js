@@ -108,17 +108,6 @@ SolutionFacade.prototype.mergeFormulas = function(formulasArg) {
     this.initFormulaBootstrap(changed, true);
 };
 
-function modifyFormula(old, newFormula) {
-    FormulaService.moveFormula(old, newFormula);
-    FunctionMap.moveFunction(old, newFormula);
-    //update references
-    for (var ref in old.refs) {
-        var property = PropertiesAssembler.fetch(ref);
-        property.ref = newFormula.id;
-        property.formulaId = newFormula.id;
-    }
-}
-
 SolutionFacade.prototype.addFormulaDependency = function(formulaInfo, name, propertyName) {
     var property = PropertiesAssembler.getOrCreateProperty(formulaInfo.name.split('_')[0], name, propertyName || 'value');
     FormulaService.addFormulaDependency(formulaInfo, property.ref, property.name);

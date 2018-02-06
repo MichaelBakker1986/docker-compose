@@ -43,7 +43,7 @@ const propertiesArr = [
     'validateInput',
     'choices',
     'valid',
-    'h'
+    'hint'
 ]
 const IDENTIFIER = 'Identifier';
 const ARRAYEXPRESSION = 'ArrayExpression'
@@ -73,6 +73,15 @@ simplified.AnyDataAvailable = function(formulaInfo, node) {
     var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'value')
     if (refFormula.ref === undefined) return log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
 
+    node.type = 'Identifier';
+    node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
+    delete node.refn;
+    delete node.arguments;
+    delete node.callee;
+}
+simplified.TitleEntered = function(formulaInfo, node) {
+    var refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'title')
+    if (refFormula.ref === undefined) return log.warn("Can't find a variableReference for " + regenerate(node)) + " " + formulaInfo.name + ":" + formulaInfo.original;
     node.type = 'Identifier';
     node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
     delete node.refn;
@@ -230,7 +239,7 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
                 }
             }
             var test = '[' + allrefIdes.join(',') + "]"
-            node.name = tupleType + '(' + test + ',a' + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
+            node.name = tupleType + '(' + test + ',m[' + referenceFormulaId + "],'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v,m)"
         } else {
             node.name = '[' + defaultValues[propertiesArr[property]] + ']';
         }
@@ -244,9 +253,9 @@ function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tup
             } else {
                 if (xapendix == '.all') {
                     //HSUM = function(fId, func, v, x, y, z, start, end) {
-                    node.name = "VALUES(a" + referenceFormulaId + ",'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)"
+                    node.name = "VALUES(m[" + referenceFormulaId + "],'" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v,m)"
                 } else {
-                    node.name = 'a' + referenceFormulaId + "('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v)";
+                    node.name = 'm[' + referenceFormulaId + "]('" + referenceFormulaId + "',x" + xapendix + "," + yAppendix + ",z,v,m)";
                 }
             }
         }
@@ -432,11 +441,18 @@ const identifier_replace = {
     T: 'x',
     MainPeriod: 'z', //zAxis Reference, base period, z.base
     MaxT: 'x.last',
+    TupleInstanceIndex: 'y.index',
     TupleIndex: 'y.index',
     TupleLocation: 'y.display',
-    Trend: 'x'//x.trend
+    Trend: 'x',//x.trend
+    IsTrend: 'x.istrend',
+    LastTinYear: 'x.lastinbkyear',
+    Bookyear: 'x.bkyear',
+    Now: 'NOW()',
+    TimeAggregated: 'x.aggregated'
 
 }
+
 identifier_replace.Tsy = identifier_replace.TSY;
 identifier_replace.TsY = identifier_replace.TSY;
 identifier_replace.tsy = identifier_replace.TSY;
@@ -459,7 +475,8 @@ function buildFormula(formulaInfo, parent, node) {
                 var groupName = formulaInfo.name.split('_')[0];
                 var referenceProperty = getOrCreateProperty(groupName, globalFunction, 'function');
                 if (referenceProperty.ref !== undefined) {
-                    node.callee.name = 'a' + referenceProperty.ref
+                    node.callee.name = 'm[' + referenceProperty.ref + ']'
+                    throw Error('??')
                 } else {
                     throw Error('invalid call [' + node.callee.name + ']')
                 }

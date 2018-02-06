@@ -5,47 +5,47 @@
   },
   "OnER": {
     "args": "v,onerrv",
-    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
+    "body": "return isNaN(v) ? onerrv : v"
   },
   "Oner": {
     "args": "v,onerrv",
-    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
+    "body": "return isNaN(v) ? onerrv : v"
   },
   "OnEr": {
     "args": "v,onerrv",
-    "body": "{ if (isNaN(v)) { return onerrv; } return v; }"
+    "body": "return isNaN(v) ? onerrv : v"
   },
   "OnZero": {
     "args": "v,onzerov",
-    "body": "{ return v > 0 ? v : onzerov; }"
+    "body": "return v > 0 ? v : onzerov"
   },
   "SUM": {
     "args": "values",
-    "body": "{ var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue; }"
+    "body": "var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue;"
   },
   "OnNeg": {
     "args": "arg0,arg1",
-    "body": "{ if (arg0 < 0) { return arg1; } return arg0;}"
+    "body": "if (arg0 < 0) { return arg1; } return arg0"
   },
   "OnZeroOrNA": {
     "args": "arg0,arg1",
-    "body": "{ if (arg0 == undefined || isNaN(arg0)) { return arg1; } return arg0;}"
+    "body": "return (arg0 == undefined || isNaN(arg0)) ? arg1 : arg0"
   },
   "OnZeroOrNa": {
     "args": "v,arg1",
-    "body": "{ if (v == undefined || isNaN(v)) { return arg1; } return v;}"
+    "body": "return (v == undefined || isNaN(v)) ? arg1 : v"
   },
   "Exp": {
     "args": "v",
-    "body": "{ return Math.pow(v, 2);}"
+    "body": "return Math.pow(v, 2)"
   },
   "OnERorNA": {
     "args": "v,onerrornav",
-    "body": "{ if (v == undefined || isNaN(v)) { return onerrornav; } return v;}"
+    "body": "if (v == undefined || isNaN(v)) { return onerrornav; } return v"
   },
   "Round": {
     "args": "v,decimals",
-    "body": "{ var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow;}"
+    "body": "var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow"
   },
   "AVG": {
     "args": "vs",
@@ -53,31 +53,23 @@
   },
   "MATCH": {
     "args": "v,p",
-    "body": "{ return v === undefined? false : v.match(p); }"
+    "body": "return v === undefined? false : v.match(p);"
   },
   "ZeroOnNaN": {
     "args": "v",
-    "body": "{ return parseFloat(isNaN(v) ? 0 : v); }"
+    "body": "return parseFloat(isNaN(v) ? 0 : v)"
   },
   "VALIDDATE": {
     "args": "d",
-    "body": "{ if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; } }"
-  },
-  "LOOKUP": {
-    "args": "key",
-    "body": "{ return CACHE[key]; }"
+    "body": "if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; }"
   },
   "GET": {
     "args": "url,name",
     "body": "{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"
   },
-  "TupleCount": {
-    "args": "x",
-    "body": "{ return 1; }"
-  },
   "EvaluateAsString": {
     "args": "value",
-    "body": "{ return String(value) }"
+    "body": "return String(value)"
   },
   "FirstUC": {
     "args": "value",
@@ -87,10 +79,6 @@
     "args": "value,ammount",
     "body": "{ return 1 }"
   },
-  "Visible": {
-    "args": "variableOrValue",
-    "body": "{ return 1 }"
-  },
   "ForAll": {
     "args": "elements",
     "body": "{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"
@@ -98,10 +86,6 @@
   "PROXY": {
     "args": "proxy",
     "body": "{ return proxy }"
-  },
-  "GetTitle": {
-    "args": "one",
-    "body": "{ return 'tst' }"
   },
   "Pos": {
     "args": "one,two",
@@ -127,29 +111,13 @@
     "args": "d,m,y",
     "body": "{ return new Date(d,m,y).toLocaleString(); }"
   },
-  "LastTinYear": {
-    "args": "x",
-    "body": "{ return x }"
-  },
   "FirstDateInT": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "FirstT": {
-    "args": "one",
-    "body": "{ return 1 }"
-  },
-  "LastT": {
     "args": "one",
     "body": "{ return 1 }"
   },
   "TableLookup": {
     "args": "row,col",
     "body": "{ return row + col }"
-  },
-  "HINT": {
-    "args": "one",
-    "body": "{ return 1 }"
   },
   "GetFrac": {
     "args": "one",
@@ -201,11 +169,11 @@
   },
   "FirstTinFormulaset": {
     "args": "one",
-    "body": "{ return 1 }"
+    "body": "return 1"
   },
   "FesExpression": {
     "args": "one",
-    "body": "{ return one }"
+    "body": "return one"
   },
   "RoundUp": {
     "args": "num,precision",
@@ -213,7 +181,7 @@
   },
   "Mut": {
     "args": "one",
-    "body": "{ return 1 }"
+    "body": "return 1"
   },
   "VSUM": {
     "args": "one",
@@ -240,10 +208,6 @@
     "body": "return 1"
   },
   "BaseCurrencyValue": {
-    "args": "one",
-    "body": "return 1"
-  },
-  "TitleEntered": {
     "args": "one",
     "body": "return 1"
   },
@@ -316,8 +280,8 @@
     "body": "return String(value).substring(from,to)"
   },
   "Val": {
-    "args": "one",
-    "body": "return 1"
+    "args": "input",
+    "body": "return isNaN(input) ? Number(input) : NA"
   },
   "SumFor": {
     "args": "one,two,three,fours",
@@ -339,67 +303,51 @@
     "args": "one",
     "body": "return 1"
   },
-  "TupleInstanceIndex": {
-    "args": "",
-    "body": "return 1"
-  },
   "OnNEG": {
     "args": "a,b",
-    "body": "{ if (a < 0) { return a; } return b;}"
+    "body": "return a < 0 ? a : b"
   },
   "OnError": {
     "args": "a,b",
-    "body": "{ if (isNaN(a)) { return b; } return a;}"
+    "body": "return isNaN(a) ? b : a"
   },
   "DateStr": {
-    "args": "string",
-    "body": "{ return string }"
+    "args": "date",
+    "body": "return new Date(date).toString()"
   },
   "DateToYearNum": {
     "args": "string",
-    "body": "{ return string }"
+    "body": "return string"
   },
   "VAL": {
-    "args": "string",
-    "body": "{ return string }"
+    "args": "input",
+    "body": "return isNaN(input) ? Number(input) : NA"
   },
   "BeforeStr": {
-    "args": "string",
-    "body": "{ return string }"
+    "args": "input,before",
+    "body": "return String(input).substring(0,String(input).indexOf(String(before)))"
   },
   "AfterStr": {
-    "args": "string",
-    "body": "{ return string }"
+    "args": "input,after",
+    "body": "return String(input).substring(String(input).indexOf(String(after)))"
   },
   "MutCalc": 1,
   "CalculatedInBaseCurrency": 1,
-  "PeriodinT": 1,
-  "TimeAggregated": false,
-  "Bookyear": 1,
   "ScaleFactor": 1,
-  "Self": 1,
-  "Notrend": 1,
   "NoTrend": 1,
   "Trend": 1,
   "ApplicationStartDateTime": 1,
   "Values": 1,
-  "MainPeriod": 3,
   "X": 1,
   "MaxT": 1,
   "NumberOfyears": 17,
-  "FAM": 1,
-  "Now": 1,
   "NA": 1e-10,
   "On": 1,
   "No": 0,
   "Off": 0,
   "True": 1,
   "False": 0,
-  "SETTINGS": {
-    "LANGUAGE": "en"
-  },
   "ViewScaleFactor": 1,
   "Backward": 1,
-  "Decimals": 2,
-  "CACHE": {}
+  "Decimals": 2
 }

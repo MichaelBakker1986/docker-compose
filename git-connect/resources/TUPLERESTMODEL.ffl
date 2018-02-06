@@ -1,0 +1,54 @@
+model TUPLERESTMODEL uses BaseModel 
+{
+ variable Q_ROOT
+ {
+  displaytype:scorecard;
+  variable TupleRestTestInput
+  {
+   displaytype: Input;
+   datatype: string;
+   title: "TupleRestTestInput";
+   frequency: document;
+   variable TupleRestTestInputStep
+   {
+    datatype: string;
+    title: "TupleRestTestInputStep";
+    frequency: document;
+   }
+   tuple TupleRestTestInputTuple
+   {
+    title: "TupleRestTestInputTuple";
+    frequency: none;
+    datatype: string;
+    displaytype: paragraph;
+    variable TestTupleInstanceVariable
+    {
+     frequency: document;
+     formula: 100;
+     title: "TestTupleInstanceVariable";
+    }
+   }
+  }
+  variable TupleRestTestOutput
+  {
+   displaytype: Output;
+   datatype: string;
+   title: "TupleRestTestOutput";
+   frequency: document;
+   variable TupleRestTestOutputCounter
+   {
+    title: "TupleRestTestOutputCounter";
+    frequency: document;
+    datatype: number;
+    formula: TCOUNT(TupleRestTestInputTuple);
+   }
+   variable ValueOutput
+   {
+    title: "ValueOutput";
+    frequency: document;
+    datatype: string;
+    formula: TupleRestTestInputStep;
+   }
+  }
+ }
+}

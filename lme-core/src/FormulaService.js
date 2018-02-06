@@ -45,8 +45,8 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
     var refName = referenceName;
     var refId;
     if (referenceFormulaInfo === undefined) {
-        log.trace('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
-        log.trace(formulaInfo.original);
+        if (log.TRACE) log.trace('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
+        if (log.TRACE) log.trace(formulaInfo.original);
     }
     else {
         refName = referenceFormulaInfo.name;
@@ -72,8 +72,6 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
     return referenceFormulaInfo;
 }
 
-/**
- */
 function addAssociation(index, property, associationType) {
     var formula = formulas[index];
     var otherFormula = formulas[property.ref];
@@ -87,11 +85,13 @@ function addAssociation(index, property, associationType) {
 }
 
 /**
+ * TODO: every formula created requires a UNIQUE id, but can re-use a formula.
+ * TODO: Now it will reuse the ID when formulastring is found
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
 FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency) {
-    assert(frequency,'A formula must have a frequency')
+    assert(frequency, 'A formula must have a frequency')
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
     var key = escodegen.generate(AST.EXPRESSION(body));

@@ -216,7 +216,14 @@ var simplified = {
         node.property = AST.IDENTIFIER('visible');
         delete node.arguments;
         delete node.callee;
-
+    },
+    HINT: function(formulaInfo, node) {
+        node.type = "MemberExpression";
+        node.computed = false;
+        node.object = AST.IDENTIFIER(node.arguments[0].name);
+        node.property = AST.IDENTIFIER('hint');
+        delete node.arguments;
+        delete node.callee;
     },
     //now its provided with (x,SelectDecendents/Array,LambaExpression)
     //we gonna narrow it down until further use of the 'X'. so ForAll(array,property[])

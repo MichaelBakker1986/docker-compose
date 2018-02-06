@@ -5,6 +5,11 @@ cd docker-elk
 docker-compose up -d
 - kibana UI: http://localhost:5601
 - logstash enpoint: http://localhost:5000
+- By default, the stack exposes the following ports:
+- 5000: Logstash TCP input.
+- 9200: Elasticsearch HTTP
+- 9300: Elasticsearch TCP transport
+- 5601: Kibana
 
 #SecurityPortal
 #All incoming requests are authenticated and authorized within this module.

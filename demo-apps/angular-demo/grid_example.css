@@ -964,9 +964,51 @@ span.time i.fa {
 .ui-datepicker-calendar {
     display: none;
 }
-.d-2 {
+/*.d-2 {
     padding-left: 5px;
 }
 .d-3 {
     padding-left: 10px;
+}*/
+.d0-1 > div:first-child {
+    padding-left: 1rem;
+}
+.d0-1 > div:first-child:before {
+    content: "";
+    display: inline-block;
+    position:  absolute;
+    width: 0px;
+}
+.d0-2 > div:first-child {
+    padding-left: 3rem;
+}
+.d0-2 > div:first-child:before {
+    content: " ";
+    display: inline-block;
+    position:  absolute;
+    width: 2px;
+    height:  100%;
+    left: 2rem;
+    background-color: grey;
+}
+.d0-3 > div:first-child{
+    padding-left: 4rem;
+}
+.d0-3 > div:first-child:before {
+    content: " ";
+    display: inline-block;
+    position:  absolute;
+    width: 2px;
+    height:  100%;
+    left: 3rem;
+    background-color: grey;
+}
+
+
+.d0-1 h2 {
+    font-size: 15px !important;
+    color: red !important;
+}
+.d0-2 h2 {
+    font-size: 15px !important;
 }

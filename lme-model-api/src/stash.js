@@ -67,7 +67,7 @@ class Stash {
                     let userID = uuid();
                     if (develop) {
                         console.info('<span>ffl model update:</span><a href="http://' + domain + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');
-                        log.info("[" + user_id + "] modified model file: [" + filename + "]. Begin pushing to repository.") //=> '/tmp/foo'
+                        log.info("[" + user_id + "] modified model file: [" + name + "]. Begin pushing to repository.") //=> '/tmp/foo'
                         return "develop mode";
                     }
                     let command = "git pull &&  git commit -a -m \"Model update [" + name + "] by " + user_id + "@" + host + "\" && git push && git rev-parse HEAD";
@@ -136,5 +136,4 @@ class Stash {
             });
     }
 }
-
 exports.Stash = new Stash();

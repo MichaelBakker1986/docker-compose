@@ -248,7 +248,7 @@
                         <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
                             <span contenteditable="{{f.title_locked?'false':'true'}}" class="title" ng-bind="f.title"></span>
                             <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
-                            <span><i ng-if="f.original!=='undefined' && f.original!=='\'\''" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
+                            <span><i ng-if="f.original!='undefined' && f.original!='\'\'' && f.original!='null'" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
                                      data-content="{{f.original}}"></i></span>
                         </div>
                         <!--In most cases there are 4 columns, title,value,value,value-->

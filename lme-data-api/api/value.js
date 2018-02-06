@@ -35,7 +35,8 @@ module.exports.setup = function(app) {
                 const body = req.body;
                 let result;
                 var context = ds.getOrCreate(req.params.id);
-                var modelPrefix = req.originalUrl.endsWith('Container') ? 'LGD_' : "KSP_";
+                var modelPrefix = req.originalUrl.endsWith('TupleRestTestInput') ? 'TUPLERESTMODEL_' : req.originalUrl.endsWith('Container') ? 'LGD_' : "KSP_";
+                //This is very very basic, rewrite required.
                 for (var q in body) {
                     for (var c in body[q]) {
                         if (typeof(body[q][c]) != 'object') {
@@ -43,12 +44,14 @@ module.exports.setup = function(app) {
                         }
                     }
                 }
-
                 if (req.originalUrl.endsWith('Container')) {
                     context.columns = 1;
                     result = LMECalculationFacade.getObjectValues(context, "LGD_LGDCalculationOutputContainer", undefined);
+                }
+                else if (req.originalUrl.endsWith('TupleRestTestInput')) {
+                    context.columns = 1;
+                    result = LMECalculationFacade.getObjectValues(context, "TUPLERESTMODEL_TupleRestTestOutput", undefined);
                 } else {
-
                     context.columns = 17;
                     result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
                 }

@@ -9,16 +9,18 @@ const log = require('log6')
  * z = timeline object
  * value = new value
  * v = entered values
+ * m = model
  */
 function fm() {
 }
 
+const m = []
 //don't directly use this method, use JSWorkBook instead.
 fm.prototype.apiGet = function(formula, x, y, z, v) {
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
     var id = formula.id || formula.index;
-    return global['a' + id](id, x, y, z, v);
+    return m[id](id, x, y, z, v, m);
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id || formula.index;
@@ -27,9 +29,7 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
         var newValue = value;
         v[id][hash] = newValue;
     }
-    else {
-        if (log.DEBUG) log.debug('[%s] does not exist', id);
-    }
+    else if (log.DEBUG) log.debug('[%s] does not exist', id);
 }
 if (!global.DEBUGMODUS) {
     global.DEBUGMODUS = false
@@ -37,10 +37,10 @@ if (!global.DEBUGMODUS) {
 fm.prototype.initializeFormula = function(newFormula) {
     const id = newFormula.id || newFormula.index;
     //"debug('" + newFormula.name + "');
-    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", 'a' + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
     const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
-    const modelFunction = Function(newFormula.params || 'f, x, y, z, v', stringFunction).bind(global);
-    global['a' + id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
+    const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction).bind(global);
+    m[id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of
 //for now we just use static functions and user enterable function that will not cache.
@@ -57,27 +57,15 @@ var formulaDecorators = {
         //f = formulaId
         //y,x,z dimensions Tuple,Column,Layer
         //v = enteredValues
-        return function(f, x, y, z, v) {
+        return function(f, x, y, z, v, m) {
             if (x.dummy) return NA;
             var hash = x.hash + y.hash + z;
             //check if user entered a value
             if (v[f][hash] == null) {
-                return innerFunction(f, x, y, z, v);
+                return innerFunction(f, x, y, z, v, m);
             }
             return v[f][hash]; //return entered value
         };
     }
-    //will need more types e.g. cacheLocked and cacheUnlocked.
 }
-fm.prototype.moveFunction = function(oldFormula, newFormula) {
-    if (oldFormula.index !== newFormula.id) {
-        if (global['a' + newFormula.id]) {
-            if (log.DEBUG) log.warn('Formula already taken[' + newFormula.id + ']');
-        }
-        else {
-            global['a' + newFormula.id] = newFormula;
-            global['a' + oldFormula.index] = null;
-        }
-    }
-};
 module.exports = fm.prototype;

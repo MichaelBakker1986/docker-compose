@@ -107,15 +107,19 @@ HVALUES = function(values, start, end) {
     }
     return returnValue;
 }
-VALUES = function(func, fId, x, y, z, v) {
+VALUES = function(func, fId, x, y, z, v, m) {
     var result = []
     for (var i = 0; i < x.aggcols.length; i++) {
         if (!x.aggcols[i].aggregated)//TODO: aggregation is serveral levels
-            result.push(func(fId, x.aggcols[i], y, z, v))
+            result.push(func(fId, x.aggcols[i], y, z, v, m))
     }
     return result;
 }
+Aggregate = function(f, x) {
+    return 1;
+}
 GetValue = function(variable, x, y, z, v, amm) {
+    // throw Error(Did not implement GetValue)
     return 1;//variable('123', x, y, z, v)
 }
 //'^[0-9]+$'

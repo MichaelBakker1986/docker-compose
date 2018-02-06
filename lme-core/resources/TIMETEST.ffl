@@ -17,5 +17,12 @@ model TIMETEST uses BaseModel
    formula : ValueT(FirstTInFormulaSet(NoTrend,MainPeriod));
    frequency : column;
   }
+  variable FlowFigure
+  {
+   title: "Flow should return a aggregation function";
+   formula: 100;
+   frequency: column;
+   aggregation: flow;
+  }
  }
 }

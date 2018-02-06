@@ -1,7 +1,6 @@
 /**
  * JSON parsing does not work here yet, it will modify the proxy requests
  * Just a dynamic reverse proxy
- * Using morgan middleware for generic server logging
  */
 const now = require("performance-now")
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081

@@ -245,11 +245,11 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
  * It would be nice to use the null-tuple(0instance) T(0,{*,}) as base
  * Since else we could only query 0,..* in this method.
  */
-TVALUES = function(fIds, func, fId, x, y, z, v) {
+TVALUES = function(fIds, func, fId, x, y, z, v, m) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(fIds, v, y);
     for (var i = 0; i <= tinstancecount; i++) {
-        returnValue.push(func(fId, x, y.deeper[i], z, v));
+        returnValue.push(func(fId, x, y.deeper[i], z, v, m));
     }
     /*   while (current && tinstancecount >= current.index) {
            var tempValue = func(fId, x, current, z, v);
