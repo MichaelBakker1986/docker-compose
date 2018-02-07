@@ -298,7 +298,6 @@ model GYLLIONKSP uses BaseModel
      aggregation: flow;
      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedOverview;
      fixed_decimals: 2;
-     locked: 1;
     }
    }
    variable TotalYearlyCosts
