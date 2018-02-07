@@ -55,7 +55,7 @@ const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
     page: 'scorecard',
-    version: '0.0.5',
+    version: '0.0.6',
     author: "michael.bakker@topicus.nl",
     user: {
         name: userID
@@ -77,7 +77,7 @@ angular.module('lmeapp', ['angular.filter'])
             user_session.user.name = 'DEMO'
         })
         $scope.session = user_session;
-        register = new Register();
+        const register = new Register();
         const debugManager = new DebugManager();
         DEBUGGER = debugManager
         $scope.register = register;
@@ -544,7 +544,11 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.activeVariable = [];
         $scope.schema = register.schema
         right_editor.aceEditor.on("mousedown", function() {
-            $scope.reloadFFL()
+            if (register.changes.length > 0) {
+                console.info("Changes been made")
+                register.changes.length = 0
+                $scope.reloadFFL()
+            }
             $scope.runJBehaveTest()
         });
         right_editor.aceEditor.commands.on("afterExec", function(e) {
