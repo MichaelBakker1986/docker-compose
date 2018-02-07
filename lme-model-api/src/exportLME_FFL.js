@@ -10,6 +10,7 @@ const fileType = '.ffl';
 const lmeAPI = require('./lme')
 const log = require('log6')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
+const Context = require('../../lme-core/src/Context')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const CalculationFacade = require('../../lme-core').CalculationFacade;
 const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
@@ -19,8 +20,13 @@ var xlsxname = name.substring(0, 5) == "_tmp_" ? name.split('_')[name.split('_')
 ExcelLookup.initComplete(xlsxname).then(function(matrix) {
     SolutionFacade.addVariables([{name: 'MATRIX_VALUES', expression: matrix}])
 
-    LME = new lmeAPI()
-    LME.lme.modelName = name
+    if (name.indexOf('SCORECARDTESTMODEL') > -1) {
+        const interval = 'detl';
+        const timeModel = require('../../lme-core/resources/CustomImport.json')
+        LME = new lmeAPI(timeModel, new Context({modelName: name}), interval);
+    } else {
+        LME = new lmeAPI(null, new Context({modelName: name}), null)
+    }
     let rawData = fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + fileType, 'utf8');
     if (fileType == '.ffl2') {
         rawData = JSON.parse(rawData)

@@ -81,7 +81,10 @@ angular.module('lmeapp', ['angular.filter'])
         DEBUGGER = debugManager
         $scope.register = register;
         const AceEditor = require('./ace_editor_api').AceEditor
-        const aceEditor = new AceEditor();
+
+        const right_editor = new AceEditor("right_editor");
+        const aceEditor = new AceEditor("editor");
+
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
         $scope.currentView = 'FFLModelEditorView';
@@ -93,13 +96,22 @@ angular.module('lmeapp', ['angular.filter'])
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });
 
-        $.getScript('resources/' + windowModelName + '.js', function(data, textStatus, jqxhr) {
-            $scope.LME_MODEL = LME.nodes
-            $scope.name = LME.name
-            $scope.LMEMETA = LMEMETA;
-            LMEMETA.loadData(function(response) {
-                $scope.$digest()
+
+        $.getScript('engineonly.js', function(data, textStatus, jqxhr) {
+            $.get("resources/" + windowModelName + ".ffl", function(data, status, xhr) {
+                aceEditor.setValue(data)
+                LMEMETA.importFFL(data)
+                LME = LMEMETA.exportWebModel()
+                $scope.LME_MODEL = LME.nodes
+                $scope.name = LME.name
+                $scope.LMEMETA = LMEMETA;
+                LMEMETA.loadData(function(response) {
+                    $scope.$digest()
+                })
+            }).fail(function(err) {
+                console.error(err)
             })
+
         }).fail(function() {
             if (arguments[0].readyState == 0) {
                 console.info('Failed to load')
@@ -138,11 +150,8 @@ angular.module('lmeapp', ['angular.filter'])
         }
         $scope.runJBehaveTest = function() {
             var annotations = []
-            //LMEMETA.lme.clearValues();
-            /*       const wb = new JSWorkBook(new Context(), null, null, {modelName: windowModelName})
-                   wb.updateValues()*/
             LMEMETA.lme.clearValues();//Quick-fix to clear state, we should just create a copy of the current one.
-            var storyParser = new StoryParser(aceEditor.getValue(), windowModelName + '.story', LMEMETA.lme);
+            var storyParser = new StoryParser(right_editor.getValue(), windowModelName + '.story', LMEMETA.lme);
             storyParser.message = function(event) {
                 annotations.push({
                     row: event.line - 1,
@@ -150,7 +159,7 @@ angular.module('lmeapp', ['angular.filter'])
                     text: event.result.message, // Or the Json reply from the parser
                     type: event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
                 })
-                aceEditor.setAnnotations(annotations);
+                right_editor.setAnnotations(annotations);
             }
             storyParser.then = function(event) {
                 $scope.session.messages.data.push({
@@ -172,7 +181,7 @@ angular.module('lmeapp', ['angular.filter'])
             Pace.track(function() {
                 $scope.saveFeedback = "Saving story " + $scope.session.fflModelPath + "… "
                 $scope.saveFeedbackTitle = "Working on it... ";
-                var data = aceEditor.getValue()
+                var data = right_editor.getValue()
                 $.post("saveJBehaveStory/" + $scope.session.fflModelPath, {
                     data: data,
                     type: type
@@ -274,7 +283,19 @@ angular.module('lmeapp', ['angular.filter'])
                 });
             });
         }
+        $scope.reloadFFL = function() {
+            //Hello engine-only
+            LMEMETA.importFFL(aceEditor.getValue())
+            LME = LMEMETA.exportWebModel()
+            $scope.LME_MODEL = LME.nodes
+            $scope.name = LME.name
+            $scope.LMEMETA = LMEMETA;
+            LMEMETA.loadData(function(response) {
+                $scope.$digest()
+            })
+        }
         $scope.previewRestApi = function() {
+            $scope.reloadFFL();
             Pace.track(function() {
                 $.post("preview/" + $scope.session.fflModelPath, {
                     data: aceEditor.getValue()
@@ -364,6 +385,8 @@ angular.module('lmeapp', ['angular.filter'])
                         return {name: ea.word, value: ea.word, meta: "optional text"}
                     }));
                 })
+                $scope.reloadFFL();
+                $scope.runJBehaveTest();
             }
         }
         window.addEventListener("keydown", function(e) {
@@ -417,12 +440,12 @@ angular.module('lmeapp', ['angular.filter'])
         });
         $(".data-story").click(function(e) {
             $.get("resources/" + windowModelName + ".story", function(data, status, xhr) {
-                aceEditor.setValue(data)
+                right_editor.setValue(data)
             }).fail(function(err) {
                 if (err.status == 404) {
-                    aceEditor.setValue(newSotryTemplate.replace(/{model_name}/g, windowModelName).replace(/{author_name}/g, userID))
+                    right_editor.setValue(newSotryTemplate.replace(/{model_name}/g, windowModelName).replace(/{author_name}/g, userID))
                 } else {
-                    aceEditor.setValue(err.statusText)
+                    right_editor.setValue(err.statusText)
                 }
             })
         });
@@ -504,14 +527,18 @@ angular.module('lmeapp', ['angular.filter'])
         })
         $scope.activeVariable = [];
         $scope.schema = register.schema
+        right_editor.aceEditor.on("mousedown", function() {
+            $scope.reloadFFL()
+            $scope.runJBehaveTest()
+        });
+        right_editor.aceEditor.commands.on("afterExec", function(e) {
+            $scope.runJBehaveTest()
+            return;
+        });
 
-
+        //TODO: make functionality for single formula recompilation
         aceEditor.aceEditor.commands.on("afterExec", function(e) {
-            if ($scope.currentView == 'jbehaveView') {
-                $scope.runJBehaveTest()
-                return;
-            }
-            else if ($scope.currentView !== 'FFLModelEditorView') {
+            if ($scope.currentView !== 'FFLModelEditorView') {
                 return;
             }
             if (e.command.name == 'golinedown') {
@@ -525,7 +552,6 @@ angular.module('lmeapp', ['angular.filter'])
             } else {
                 changeManager.changed = true;
             }
-            console.info({name: e.command.name, args: e.args})
             changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
             var annotations = [];
             $scope.$apply(function() {
@@ -580,7 +606,6 @@ angular.module('lmeapp', ['angular.filter'])
             return true;
         }
         $scope.showNode = function(node) {
-            console.info(register)
             aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id).join('\n'));
         }
         $scope.changeView = function(viewName) {

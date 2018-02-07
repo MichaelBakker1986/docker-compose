@@ -191,6 +191,7 @@ simplified.TCOUNT = function(formulaInfo, node) {
     node.callee.name = 'PROXY'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TCOUNT');
 }
+simplified.TupleCount = simplified.TCOUNT
 var escodegenOptions = {
     format: {
         renumber: true,

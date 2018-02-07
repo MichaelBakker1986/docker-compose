@@ -24,4 +24,8 @@ assert.equal(100, wb.get('FormulaSetTest', 'value', 40), wb.get('FormulaSetTest'
 assert.equal(1, wb.get('FirstNoTrendMainPeriodTValue', 'value', 18));
 assert.equal(1, wb.get('FirstNoTrendMainPeriodTValue', 'value', 18));
 
+
+assert.equal(100, wb.get('FlowFigure', 'value', 1));
+assert.equal(100, wb.get('FlowFigure', 'value', 1));
+
 //, wb.get('FirstNoTrendMainPeriodTValue', 'title')

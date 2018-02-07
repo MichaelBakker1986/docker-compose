@@ -19459,6 +19459,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
     this.y = YAxis[0].parent
     //time axis, we looking at bookyears at the moment
     this.xaxis = (XAxis || require('./XAxis'))[interval || 'bkyr'].columns[0]
+    console.info(this.xaxis)
     if (opts) for (var key in opts) this[key] = opts[key]
 }
 

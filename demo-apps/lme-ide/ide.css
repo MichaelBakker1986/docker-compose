@@ -58,12 +58,50 @@
 .model-tree .treeview-menu > li > a {
     font-size: 10px;
 }
+
 .model-tree .model-tree-1 {
     padding-left: 10px;
 }
+
 .model-tree .model-tree-2 {
     padding-left: 20px;
 }
+
 .model-tree .model-tree-3 {
     padding-left: 30px;
+}
+
+.content {
+    min-height: 250px;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#editor-container .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.ace_editor {
+    position: unset;
+}
+
+.editor-left {
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 0px;
+}
+
+.editor-right {
+    padding-top: 3px;
+    padding-left: 1em;
+    padding-right: 3px;
+}
+
+.ace_link_marker {
+    position: absolute;
+    border-bottom: 1px solid blue;
 }

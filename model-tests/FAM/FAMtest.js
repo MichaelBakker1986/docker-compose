@@ -11,3 +11,4 @@ AcquiredGoodwill.value;
 
 let fixProblemsInImportedSolution = LME.lme.fixProblemsInImportedSolution();
 log.info(fixProblemsInImportedSolution)
+require('assert').ok(fixProblemsInImportedSolution.valid)

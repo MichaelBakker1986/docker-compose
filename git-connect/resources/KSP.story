@@ -6,7 +6,7 @@ And MonthlyIncomeParent02 is set to 500
 And ExtraMonthParent02 is set to 1
 And WeeklyWorkingHoursParent02 is set to 40
 And ParentalContributionPrimaryEducation is set to 30
-And SecondaryEducationProfile is set to 2
+And SecondaryEducationProfile is set to VMBO-HAVO
 And ChildAge is set to 1
 And Gender is set to Boy
 And NrOfHoursChildcareWeek is set to 32

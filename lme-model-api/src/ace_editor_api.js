@@ -5,9 +5,9 @@ const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 
 
-function AceEditor() {
+function AceEditor(id) {
     this.fflModel = "";
-    const aceEditor = ace.edit("editor");
+    const aceEditor = ace.edit(id);
     edit = aceEditor;//quick response front-end
     const langTools = ace.require("ace/ext/language_tools");
     this.langTools = langTools;
@@ -18,8 +18,15 @@ function AceEditor() {
     aceEditor.setOptions({
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: true,
+        enableSnippets: true,
         showFoldWidgets: true
     });
+
+
+    /*
+        var snippetManager = ace.require("ace/snippets").snippetManager;
+        snippetManager.insertSnippet(aceEditor, "test124");*/
+
     aceEditor.setAutoScrollEditorIntoView(true);
     aceEditor.setOption("maxLines", 60);
     aceEditor.$blockScrolling = Infinity
@@ -30,11 +37,38 @@ function AceEditor() {
     });
     aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
     aceEditor.resize()
-    aceEditor.on("changeCursor", function(e) {
-        console.info(e)
-    });
 
     this.aceEditor = aceEditor;
+    const wordMap = [
+        {
+            "word":
+            "model {model_name} uses BaseModel \n" +
+            "{\n" +
+            "\n" +
+            "}\n"
+        },
+        {
+            "word":
+                "When {variable_name}(tuple) is set to {value}\n"
+        }
+    ]
+
+    var HoverLink = ace.require("hoverlink").HoverLink
+    aceEditor.hoverLink = new HoverLink(aceEditor);
+    aceEditor.hoverLink.on("open", function() {
+        aceEditor.scrollToLine(20, true, true, function() {
+        });
+    })
+
+    this.addCompleter(function(editor, session, pos, prefix, callback) {
+        if (prefix.length === 0) {
+            callback(null, []);
+            return
+        }
+        callback(null, wordMap.map(function(ea) {
+            return {name: ea.word, value: ea.word, meta: "optional text"}
+        }));
+    })
 }
 
 AceEditor.prototype.getCursor = function() {

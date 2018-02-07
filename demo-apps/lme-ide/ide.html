@@ -19,7 +19,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="bootstrap.min.js"></script>
-    <script src="engineonly.js"></script>
     <script src="ide.js"></script>
     <link rel="stylesheet" href="ide.css">
 
@@ -83,9 +82,6 @@
                                 <i class="fa fa-refresh"></i> <span></span>
                             </a>
                         </li>
-                        <li>
-                            <a ng-click="togglePropertiesSidebar()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -118,7 +114,7 @@
                     </ul>
                 </li>
                 <li class="treeview {{currentView == 'jbehaveView' ? 'active' : ''}}">
-                    <a class="data-story" ng-click="changeView('jbehaveView')" data-toggle="tooltip" title="jBehave tests" href="">
+                    <a class="data-story" ng-click="split_window=!split_window;changeView('jbehaveView')" data-toggle="tooltip" title="jBehave tests" href="">
                         <i class="fa fa-heartbeat"></i> <span>Tests</span>
                     </a>
                 </li>
@@ -142,11 +138,21 @@
         </section>
     </aside>
     <div class="content-wrapper">
-        <section id="editor-container" class="content" style="max-height: 90vh;" ng-switch="currentView">
-            <div class="box" style="max-height: 90vh;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">
-                <div class="box-body" style="max-height: 90vh;">
-                    <!--The Editor is persistent to the page-->
-                    <pre id="editor"></pre>
+        <!--<section id="editor-container" class="content" style="max-height: 100%;" ng-switch="currentView">-->
+            <!--<div style="max-height: 100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">-->
+
+            <section id="editor-container" class="content" style="max-height: 90vh;position:  relative;" ng-switch="currentView">
+            <div style="max-height: 90vh;position:  absolute;top: 0px;bottom: 0px;left:  0px;right: 0px;width: 100%;height:  100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">
+
+
+                <!--The Editor is persistent to the page-->
+                <div class="row">
+                    <div class="col-xs-{{split_window?6:12}} editor-left">
+                        <div id="editor"></div>
+                    </div>
+                    <div ng-show="split_window" class="col-xs-6 editor-right">
+                        <div id="right_editor"></div>
+                    </div>
                 </div>
             </div>
             <div ng-switch-when="updateView">

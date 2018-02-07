@@ -13,16 +13,32 @@ const functionMapper = {
         // ------------------------------------------------------VARIABLE_NAME--TUPLE_NAME
         regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? is set to ([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?\s*$/i,
         call: function(workbook, linenumber, line, args) {
-            var variableName = args[0], tupleIndexName = args[1], value = args[3], colId = (parseInt(args[4]) || 1) - 1
+            var variableName = args[0], tupleIndexName = args[1], value = args[3],
+                columnId = (parseInt(args[4]) || 1) - 1
             return [function() {
                 // const locationDetails = workbook.locate(variableName, tupleIndexName)
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
+                const lockedValue = workbook.get(variableName, 'locked', columnId, yas);
+                workbook.set(variableName, value, 'value', columnId, yas)
+                const validValue = workbook.get(variableName, 'valid', columnId, yas);
 
-                workbook.set(variableName, value, 'value', colId, yas)
                 if (log.TRACE) log.trace('[%s]: %s %s', linenumber, variableName, tupleIndexName)
-                return {
-                    status: 'info',
-                    message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
+                if (lockedValue) {
+                    return {
+                        status: 'fail',
+                        message: variableName + " is locked "
+                    }
+                }
+                else if (validValue.length > 0) {
+                    return {
+                        status: 'fail',
+                        message: value + " is not a valid value for " + variableName + " because " + validValue
+                    }
+                } else {
+                    return {
+                        status: 'info',
+                        message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
+                    }
                 }
             }]
         }
@@ -52,18 +68,23 @@ const functionMapper = {
                 const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
                 const rawValue = workbook.get(variableName, 'value', columnId, yas);
+                const validValue = workbook.get(variableName, 'valid', columnId, yas);
                 var calculatedValue = rawValue;
                 if (decimals) calculatedValue = calculatedValue.toFixed(decimals)
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
                     result.status = 'fail'
                     result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
+                } else if (validValue.length > 0) {
+                    result.status = 'fail'
+                    result.message = rawValue + " is not a valid value for " + variableName + " because " + validValue
                 } else {
                     result.status = 'info'
                     result.message = 'Variable ' + variableName + " = " + calculatedValue + ' is ' + value + " [" + rawValue + "]";
                 }
                 return result;
-            }]
+            }
+            ]
         }
     }
 }
