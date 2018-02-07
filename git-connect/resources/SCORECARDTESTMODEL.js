@@ -16989,7 +16989,7 @@ const StringBuffer = require('../../../model-tests/StringUtils').StringBuffer
 function RegisterToFFL(register) {
     this.schema = register.schema;
     this.constants = register.constants;
-    register.createIndex('name')
+    this.names = register.getIndex('name')
     //this.nodes = register.getIndex('name');
     this.vars = register.getIndex('name');
     this.child = {}
@@ -18766,6 +18766,7 @@ simplified.TCOUNT = function(formulaInfo, node) {
     node.callee.name = 'PROXY'
     buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? '.' + node.property.name : '', 'TCOUNT');
 }
+simplified.TupleCount = simplified.TCOUNT
 var escodegenOptions = {
     format: {
         renumber: true,
@@ -19459,7 +19460,6 @@ function JSWorkBook(context, XAxis, interval, opts) {
     this.y = YAxis[0].parent
     //time axis, we looking at bookyears at the moment
     this.xaxis = (XAxis || require('./XAxis'))[interval || 'bkyr'].columns[0]
-    console.info(this.xaxis)
     if (opts) for (var key in opts) this[key] = opts[key]
 }
 

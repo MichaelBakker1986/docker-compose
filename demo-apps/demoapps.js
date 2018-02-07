@@ -60,6 +60,7 @@ app.listen(port, () => {
     routes.push('*/favicon.ico')
 
     routes.push('*.ffl')
+    routes.push('*/snippets/ffl.js')
     routes.push('*/adminlte.min.js')
     routes.push('*/viz.js')
     routes.push('*/demo.js')

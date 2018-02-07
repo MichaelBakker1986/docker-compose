@@ -53,13 +53,6 @@ function AceEditor(id) {
         }
     ]
 
-    var HoverLink = ace.require("hoverlink").HoverLink
-    aceEditor.hoverLink = new HoverLink(aceEditor);
-    aceEditor.hoverLink.on("open", function() {
-        aceEditor.scrollToLine(20, true, true, function() {
-        });
-    })
-
     this.addCompleter(function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) {
             callback(null, []);
@@ -108,5 +101,10 @@ AceEditor.prototype.scrollTop = function() {
     });
     this.aceEditor.gotoLine(1, 1, true);
     this.aceEditor.selection.moveTo(0, 0)
+}
+AceEditor.prototype.scrollToLine = function(lineNumber) {
+    this.aceEditor.scrollToLine(lineNumber, true, true, function() {
+    });
+    this.aceEditor.gotoLine(lineNumber, 20, true);
 }
 exports.AceEditor = AceEditor;

@@ -1,18 +1,19 @@
 ace.define("ace/snippets/ffl", ["require", "exports", "module"], function(require, exports, module) {
     "use strict";
+
     exports.snippetText = "# Some useful Unicode entities\n\
-snippet matrixlookup\n\
-	MatrixLookup(null, \"${1:table_name}\", ${2:rowId}, ${3:ValueT(T)})\n\
-snippet max\n\
-	MAX(${1:number_one}, ${2:number_two})\n\
-snippet min\n\
-    MIN(${1:number_one}, ${2:number_two})\n\
 snippet variable\n\
 	variable ${1}\n\
 	{\n\
 	 title: \"${1}\";\n\
 	 formula: 1;\n\
 	}\n\
+snippet matrixlookup\n\
+	MatrixLookup(null, \"${1:table_name}\", ${2:rowId}, ${3:ValueT(T)})\n\
+snippet max\n\
+	MAX(${1:number_one}, ${2:number_two})\n\
+snippet min\n\
+    MIN(${1:number_one}, ${2:number_two})\n\
 snippet onna\n\
 	OnNA(${1:value}, ${2:na_value})\n\
 snippet formula/*adds a formula to a variable*/\n\

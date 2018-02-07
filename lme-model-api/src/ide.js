@@ -55,7 +55,8 @@ const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
     page: 'scorecard',
-    version: '0.0.4',
+    version: '0.0.5',
+    author: "michael.bakker@topicus.nl",
     user: {
         name: userID
     },
@@ -76,21 +77,36 @@ angular.module('lmeapp', ['angular.filter'])
             user_session.user.name = 'DEMO'
         })
         $scope.session = user_session;
-        var register = new Register();
+        register = new Register();
         const debugManager = new DebugManager();
         DEBUGGER = debugManager
         $scope.register = register;
         const AceEditor = require('./ace_editor_api').AceEditor
-
         const right_editor = new AceEditor("right_editor");
-        const aceEditor = new AceEditor("editor");
 
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
         $scope.currentView = 'FFLModelEditorView';
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+        const aceEditor = new AceEditor("editor");
 
+        var HoverLink = ace.require("hoverlink").HoverLink
+        var TokenTooltip = ace.require("token_tooltip").TokenTooltip
+
+        function registerEditorToClickNames(selected_editor) {
+            selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register);
+            selected_editor.aceEditor.hoverLink.on("open", function(link) {
+                const startLookIndex = fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
+                //(!) its the real LineNumber - Delta on page
+                const lineNumber = fflModel.substring(0, startLookIndex).split('\n').length
+                aceEditor.scrollToLine(lineNumber)
+            })
+            selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register);
+        }
+
+        registerEditorToClickNames(right_editor)
+        registerEditorToClickNames(aceEditor)
 
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
@@ -606,7 +622,7 @@ angular.module('lmeapp', ['angular.filter'])
             return true;
         }
         $scope.showNode = function(node) {
-            aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id).join('\n'));
+            aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id, undefined).join('\n'));
         }
         $scope.changeView = function(viewName) {
             $scope.currentView = viewName;

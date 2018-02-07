@@ -36,6 +36,8 @@ const MarcoFacebookID = '10159782534605228';
 const RuudFacebookID = '1749387815119222';
 const JasperRealEstate = '1565119990220779';
 const RichardRealEstate = '2023094311299941';
+const RamonFBId = '10216226641645779 ';
+
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
 const GUEST_USER = 'guest';
@@ -149,6 +151,10 @@ class Authorization {
             this.allow(rule.id, rule.resource, rule.role)
         }
         this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
+        this.addModelPrivileges(RamonFBId, "MVO", true);
+        this.addModelPrivileges(RamonFBId, "REALESTATE", true);
+        this.addModelPrivileges(RamonFBId, "PRESCAN", true);
+
         /*  this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
                 this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
                 this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
