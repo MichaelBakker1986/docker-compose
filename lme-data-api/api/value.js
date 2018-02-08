@@ -1,6 +1,7 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('log6')
-const LMECalculationFacade = require('../FinancialModelLoader').LMECalculationFacade
+const ModelLoader = require('../FinancialModelLoader');
+const LMECalculationFacade = ModelLoader.LMECalculationFacade
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -66,6 +67,10 @@ module.exports.setup = function(app) {
         });
     }
 
+    app.get('*/id/:id/newModel', function(req, res) {
+        ModelLoader.ModelLoader.onNewModel(require('fs').readFileSync('C:/stack/lme/git-connect/resources/LGD.ffl', 'utf-8'), 'C:/stack/lme/git-connect/resources/LGD.ffl')
+        res.json({'status': 'ok'})
+    })
     /**
      * UserName/value/MaxNrCompensatedHoursOutofSchoolCare/101
      * @:id            - (any context to identify the process  username/processid/requestId

@@ -8,11 +8,11 @@ try {
     const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
     require('../../lme-core/exchange_modules/ffl/RegisterToLMEParser')
     const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
-    const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').FFLFormatter
+    const Formatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
     const ffl = require('fs').readFileSync(__dirname + '/../MVO/MVO.ffl', 'utf-8')
     var now = require('performance-now')
-    var fflformat = FFLFormatter.create(modelRegister, ffl)
-    fflformat.indexProperties()
+    var formatter = new Formatter(modelRegister, ffl);
+    formatter.parseProperties()
     let start = now()
     const data = new RegisterToFFL(modelRegister).toGeneratedFFL("Q_ROOT", 'MVO').join('\n');
     const indexer = new ScorecardTool().parse(ffl)

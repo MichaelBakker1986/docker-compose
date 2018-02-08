@@ -154,6 +154,10 @@ class Authorization {
         this.addModelPrivileges(RamonFBId, "MVO", true);
         this.addModelPrivileges(RamonFBId, "REALESTATE", true);
         this.addModelPrivileges(RamonFBId, "PRESCAN", true);
+        this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(JorisNijboerFaceBookID, "URA", true);
+        this.addModelPrivileges(RamonFBId, "URA", true);
+        this.addModelPrivileges(MichaelFaceBookID, "URA", true);
 
         /*  this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
                 this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);

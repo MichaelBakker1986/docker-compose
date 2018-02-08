@@ -19,9 +19,9 @@ var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
 var fs = require('fs');
 const path = '/../../git-connect/resources/';
-const modelname = 'KSP';
+const modelname = 'URA';
 var fflTestModels = [path + modelname];
-
+const onlyValue = true;
 function correctFileName(name) {
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
@@ -55,10 +55,12 @@ for (var i = 0; i < fflTestModels.length; i++) {
 
     wb.solution.formulas.forEach(function(formulaId) {
         var formula = SolutionFacade.fetchFormulaByIndex(formulaId);
+        if (onlyValue && formula.name.endsWith('_valid')) return;
         if (Object.keys(formula.deps).length > 0) {
             variableNames.add(correctFileName(formula.name))
         }
         for (var dep in formula.deps) {
+            if (onlyValue && !dep.endsWith('_value')) continue;
             depVariableNames_with_formulas += "\r\n" + correctFileName(formula.name) + " -> " + correctFileName(dep) + '[label="' + formula.original + '"];'
             depVariableNames += "\r\n" + correctFileName(formula.name) + " -> " + correctFileName(dep) + ';'
         }

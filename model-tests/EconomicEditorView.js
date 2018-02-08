@@ -64,9 +64,11 @@ EconomicEditorView.prototype.parse = function(input, rootNodeName) {
         const isVisible = visible || false
         const required = node[requiredIndex];
         const isRequired = required || false
-        const formula = node[formulaIndex];
+        var formula = node[notrend_formulaIndex] || node[formulaIndex];
+        if (node[trend_formulaIndex] && node[notrend_formulaIndex] != node[trend_formulaIndex]) formula = "If(Trend," + node[trend_formulaIndex] + "," + node[notrend_formulaIndex] + ")"
         const hasFormula = formula || false
         const hint = node[hintIndex] || false
+
         if (hasFormula || node[childIndex].length > 0) {
             var spaces = [];
             const total = (node[modifierIndex] || '') + nodeName + (props ? " is " + ((isLocked ? 'locked  ' : '') + (isVisible ? 'visible ' : '') + (isRequired ? 'required ' : '')) : '');

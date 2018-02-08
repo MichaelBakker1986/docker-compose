@@ -570,8 +570,10 @@ define("token_tooltip", [], function(require, exports, module) {
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
                 if (!match) return;
 
-                const display = this.register.getIndex('name')[match.value][this.register.schemaIndexes.title]
-                const formula = this.register.getIndex('name')[match.value][this.register.schemaIndexes.formula]
+                const nodes = this.register.getIndex('name')[match.value];
+                const display = nodes[this.register.schemaIndexes.title]
+                var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
+
                 this.setText(match.value + ":\n" + display + '\n' + formula);
 
                 this.width = this.getWidth();

@@ -2,7 +2,7 @@
  * editor variable is set to the window.
  */
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').FFLFormatter
+const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
@@ -325,7 +325,7 @@ angular.module('lmeapp', ['angular.filter'])
         }
         $scope.toggleFormatter = function() {
             const cursor = aceEditor.getCursor()
-            fflModel = FFLFormatter.create(register, aceEditor.getValue()).toString();
+            fflModel = new FFLFormatter(register, aceEditor.getValue()).toString();
             aceEditor.setParsedValue(fflModel);
             aceEditor.aceEditor.gotoLine(cursor.row + 1, cursor.column)
         }

@@ -1,7 +1,7 @@
 /**
  * find displaytype = scorecard
  */
-var FFLFormatter = require('./FFLFormatter').FFLFormatter
+var FFLFormatter = require('./FFLFormatter').Formatter
 var Register = require('./Register').Register
 
 function ScorecardTool() {
@@ -32,13 +32,11 @@ var defaultValue = {
         'Off': true
     }
 }
-var variables = {}
-var formulaMapping = {nputRequired: 'required'}
 ScorecardTool.prototype.parse = function(input) {
     //TODO: move radio-choice / VALIDATION names into here..
     var indexer = new Register();
-    var model = FFLFormatter.create(indexer, input);
-    model.indexProperties();
+    var model = new FFLFormatter(indexer, input);
+    model.parseProperties();
     this.childIndex = indexer.schemaIndexes.children
     const requiredIndex = indexer.schemaIndexes.required
     const nameIndex = indexer.schemaIndexes.name

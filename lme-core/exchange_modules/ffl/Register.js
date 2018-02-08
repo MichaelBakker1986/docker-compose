@@ -114,4 +114,7 @@ Register.prototype.walk = function(node, depth, visitor) {
         this.walk(childs[i], depth + 1, visitor)
     }
 }
+Register.prototype.toString = function() {
+    return "variables:[" + this.i.length + "]\n" + this.i.join('\n')
+}
 exports.Register = Register
