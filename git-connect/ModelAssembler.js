@@ -1,6 +1,8 @@
 const ORM = require('./ModelProperty');
-
+if (!ORM.orm) return;//exit-early for non-db setups
 exports.started = ORM.orm.then(function() {
+    exports.insertProperties = ORM.ModelProperty.insertModelProperties;
+    exports.getFFLModelPropertyChanges = ORM.ModelProperty.getFFLModelPropertyChanges;
     exports.getModel = function(modelName) {
         return ORM.ModelProperty.getModel(modelName).then(function(ok) {
             var schemaIndex = {}

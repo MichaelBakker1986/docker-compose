@@ -202,50 +202,13 @@ FFLFormatter.prototype.parseProperties = function() {
         }
     )
 }
+FFLFormatter.prototype.toString = function() {
+    this.buildTree();
+    return this.header + '{\n' + this.reassembled + '\n}';
+}
 
 function Factory() {
     this.on = false;
-}
-
-//TODO: remove this factory.
-Factory.prototype.create = function(register, input) {
-    const lexialParser = new FFLFormatter(register, input);
-    return {
-        indexProperties: function() {
-            lexialParser.parseProperties()
-        },
-        visit: function(visitor) {
-            return lexialParser.walk(visitor)
-        },
-        lookupConstant: function(index) {
-            return lexialParser.constants[parseInt(index.substring(2))].replace(/'/g, "\\'").replace(/(?:\\r\\n|\\r|\\n)/g, "[br]");
-        },
-        //optional
-        modelName: function() {
-            return lexialParser.name;
-        },
-        change: function(index, property, value) {
-            var variable = lexialParser.vars[index];
-            var startSearchindex = variable.indexOf(property + ':')
-            var endSearchindex = variable.indexOf(';', startSearchindex + (property.length + 1))
-            var result;
-            if (startSearchindex == -1) {
-                result = property + ':' + value + ';' + variable
-            } else {
-                result = variable.substring(0, startSearchindex) + property + ":" + value + variable.substring(endSearchindex)
-            }
-            lexialParser.vars[index] = result
-        },
-        toFFL: function() {
-            lexialParser.reassembled = lexialParser.prettyFormatFFL(1, lexialParser.findRootVariable())
-            lexialParser.insertConstants();
-            return lexialParser.header + '{\n' + lexialParser.reassembled + '\n}'
-        },
-        toString: function() {
-            lexialParser.buildTree();
-            return lexialParser.header + '{\n' + lexialParser.reassembled + '\n}';
-        }
-    }
 }
 exports.Formatter = FFLFormatter;
 exports.FFLFormatter = new Factory();

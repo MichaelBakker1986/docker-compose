@@ -8,6 +8,7 @@ const develop = (host == '127.0.0.1');
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
+const modelStorage = require('./ModelStorage').ModelStorage
 const uuid = require('uuid4');
 
 class Stash {
@@ -59,6 +60,16 @@ class Stash {
 
     //TODO: backupfile, on fail restore old file
     commit(user_id, name, data, type) {
+        /*
+         * Save delta's to the DB to keep track of history.
+         * Later this will be used to resolve the FFL
+         * The FFL file will always be pushed to master also
+         */
+        try {
+            modelStorage.saveDelta(name, data)
+        } catch (err) {
+            log.warn('Failed saving delta to DB', err)
+        }
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {
@@ -136,4 +147,5 @@ class Stash {
             });
     }
 }
+
 exports.Stash = new Stash();

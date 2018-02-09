@@ -94,6 +94,7 @@ class Authorization {
             "/ace.js",
             "/javascripts/fflmode.js",
             "/theme-tomorrow.js",
+            "/snippets/ffl.js",
             "/font-awesome/fonts/fontawesome-webfont.ttf",
             "/font-awesome/fonts/fontawesome-webfont.woff",
             "/font-awesome/fonts/fontawesome-webfont.woff2"
@@ -154,23 +155,26 @@ class Authorization {
         this.addModelPrivileges(RamonFBId, "MVO", true);
         this.addModelPrivileges(RamonFBId, "REALESTATE", true);
         this.addModelPrivileges(RamonFBId, "PRESCAN", true);
-
-        /*  this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
-                this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
-                this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
-                this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
-                this.addModelPrivileges(GUEST_ROLE, "TEST", false);
-                this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
-                this.addModelPrivileges(MichaelFaceBookID, "REALESTATE", true);
-                this.addModelPrivileges(JasperRealEstate, "REALESTATE", true);
-                this.addModelPrivileges(RichardRealEstate, "REALESTATE", true);
-                this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
-                this.addModelPrivileges(LGDFacebookID, "LGD", true);
-                this.addModelPrivileges(RuudFacebookID, "LGD", true);
-                this.addModelPrivileges(MarcoFacebookID, "LGD", true);
-                this.addModelPrivileges(MonliFacebookID, "KSP", true);
-                this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
-                this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");*/
+        this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(JorisNijboerFaceBookID, "FYNDOOCREDITRATING", true);
+        this.addModelPrivileges(RamonFBId, "FYNDOOCREDITRATING", true);
+        this.addModelPrivileges(MichaelFaceBookID, "FYNDOOCREDITRATING", true);
+        this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
+        this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
+        this.addModelPrivileges(GUEST_ROLE, "TEST", false);
+        this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
+        this.addModelPrivileges(MichaelFaceBookID, "REALESTATE", true);
+        this.addModelPrivileges(JasperRealEstate, "REALESTATE", true);
+        this.addModelPrivileges(RichardRealEstate, "REALESTATE", true);
+        this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
+        this.addModelPrivileges(LGDFacebookID, "LGD", true);
+        this.addModelPrivileges(RuudFacebookID, "LGD", true);
+        this.addModelPrivileges(MarcoFacebookID, "LGD", true);
+        this.addModelPrivileges(MonliFacebookID, "KSP", true);
+        this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
+        this.addModelInstancePrivileges(GUEST_ROLE, "DEMO");
     }
 
     allow(id, resource, role) {
@@ -183,11 +187,13 @@ class Authorization {
     addModelPrivileges(id, modelname, changeExisting) {
         this.allow(id, "/resources/" + modelname + ".js", VIEW_RULE)
         this.allow(id, "/resources/" + modelname + ".story", VIEW_RULE)
+        this.allow(id, "/resources/" + modelname + ".story", VIEW_RULE)
         this.allow(id, "/excel/" + modelname, VIEW_RULE)
         this.allow(id, "/resources/" + modelname + ".ffl", VIEW_RULE)
         this.allow(id, "/preview/" + modelname, VIEW_RULE)
         this.allow(id, "/saveJBehaveStory/" + modelname, VIEW_RULE)
         if (changeExisting) this.allow(id, "/saveFFLModel/" + modelname, VIEW_RULE)
+        this.allow(id, "/modelChanges/" + modelname, VIEW_RULE)
         this.allow(id, "/scorecard.html", VIEW_RULE)
         this.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
     }

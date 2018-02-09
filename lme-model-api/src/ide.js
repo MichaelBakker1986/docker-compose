@@ -2,7 +2,7 @@
  * editor variable is set to the window.
  */
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').FFLFormatter
+const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
@@ -55,7 +55,7 @@ const user_session = {
     disablePreviewButton: true,
     fflModelPath: windowModelName,
     page: 'scorecard',
-    version: '0.0.5',
+    version: '0.0.6',
     author: "michael.bakker@topicus.nl",
     user: {
         name: userID
@@ -77,7 +77,31 @@ angular.module('lmeapp', ['angular.filter'])
             user_session.user.name = 'DEMO'
         })
         $scope.session = user_session;
-        register = new Register();
+        $scope.model_history = []
+        $.get("modelChanges/" + windowModelName, function(data, status, xhr) {
+            const history = [];
+            const hashes = {};
+            for (var i = 0; i < data.data.length; i++) {
+                var obj = data.data[i];
+                obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
+
+                if (hashes[obj.uuid]) {
+                    hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
+                    continue
+                }
+                hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
+                history.push({
+                    create_time: obj.create_time,
+                    data: hashes[obj.uuid]
+                })
+            }
+            history.reverse()
+            $scope.model_history = history;
+        }).fail(function(err) {
+            console.error(err)
+        })
+
+        const register = new Register();
         const debugManager = new DebugManager();
         DEBUGGER = debugManager
         $scope.register = register;
@@ -325,7 +349,7 @@ angular.module('lmeapp', ['angular.filter'])
         }
         $scope.toggleFormatter = function() {
             const cursor = aceEditor.getCursor()
-            fflModel = FFLFormatter.create(register, aceEditor.getValue()).toString();
+            fflModel = new FFLFormatter(register, aceEditor.getValue()).toString();
             aceEditor.setParsedValue(fflModel);
             aceEditor.aceEditor.gotoLine(cursor.row + 1, cursor.column)
         }
@@ -544,7 +568,11 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.activeVariable = [];
         $scope.schema = register.schema
         right_editor.aceEditor.on("mousedown", function() {
-            $scope.reloadFFL()
+            if (register.changes.length > 0) {
+                console.info("Changes been made")
+                register.changes.length = 0
+                $scope.reloadFFL()
+            }
             $scope.runJBehaveTest()
         });
         right_editor.aceEditor.commands.on("afterExec", function(e) {

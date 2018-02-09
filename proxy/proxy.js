@@ -123,9 +123,7 @@ async function onProxyRes(proxyRes, req, res) {
      */
     if (req.originalUrl.indexOf('/figure/') > -1) {
         var content = '';
-        proxyRes.on('data', function(dataBuffer) {
-            content += dataBuffer;
-        });
+        proxyRes.on('data', (dataBuffer) => content += dataBuffer);
         proxyRes.on('end', function() {
             logstash.send({
                 host: host,

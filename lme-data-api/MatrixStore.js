@@ -6,7 +6,6 @@ exports.MatrixStore = class {
             values: {},
             parents: {},
             create_date: new Date().getTime()
-            // properties: { column: true,  variable: true,  value: true }
         };
     }
 }

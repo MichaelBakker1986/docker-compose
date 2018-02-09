@@ -1,7 +1,6 @@
 /**
  * DB Connector
- */
-/**
+ *
  * Git structure DB
  *       |a=100     |a=300
  *       |b=200     |

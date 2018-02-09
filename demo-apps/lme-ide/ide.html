@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
@@ -129,9 +130,21 @@
                         <i class="fa fa-question-circle-o"></i> <span>Formula information</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a data-toggle="tooltip" title="History" href="">
+                        <i class="fa fa-history"></i><span>History</span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li ng-repeat="model_history_item in model_history" title="{{model_history_item.data.join(';')}}">
+                            <a href="">
+                                <i class="fa fa-pencil-square-o"></i> {{model_history_item.create_time}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
-                    <a ng-click="changeView('Settings')" data-toggle="tooltip" title="Sytem settings" href="" class="{{currentView == 'Settings' ? 'active' : ''}}">
-                        <i class="fa fa-cog"></i><span>Sytem settings</span>
+                    <a ng-click="changeView('Settings')" data-toggle="tooltip" title="Configuration" href="" class="{{currentView == 'Settings' ? 'active' : ''}}">
+                        <i class="fa fa-cog"></i><span>Configuration</span>
                     </a>
                 </li>
             </ul>
@@ -139,9 +152,9 @@
     </aside>
     <div class="content-wrapper">
         <!--<section id="editor-container" class="content" style="max-height: 100%;" ng-switch="currentView">-->
-            <!--<div style="max-height: 100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">-->
+        <!--<div style="max-height: 100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">-->
 
-            <section id="editor-container" class="content" style="max-height: 90vh;position:  relative;" ng-switch="currentView">
+        <section id="editor-container" class="content" style="max-height: 90vh;position:  relative;" ng-switch="currentView">
             <div style="max-height: 90vh;position:  absolute;top: 0px;bottom: 0px;left:  0px;right: 0px;width: 100%;height:  100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">
 
 
@@ -262,7 +275,7 @@
                 </div>
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">System settings</h3>
+                        <h3 class="box-title">Configuration</h3>
                         <div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
