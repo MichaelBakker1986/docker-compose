@@ -181,8 +181,8 @@ highchart {
     display: block;
 }
 
-.required label.title:after, 
-span.required:after, 
+.required label.title:after,
+span.required:after,
 label[required]:not(input):after {
     content: "";
     font-family: fontAwesome;
@@ -960,7 +960,6 @@ span.time i.fa {
     display: none;
 }
 
-
 /*
  * Questionnaire outline
  */
@@ -968,6 +967,7 @@ span.time i.fa {
     padding: 0.25rem 0px;
     position: relative;
 }
+
 .real-row:after {
     content: " ";
     display: block;
@@ -984,53 +984,60 @@ span.time i.fa {
     padding: 0px 2px;
 }
 
-.depth-1 > div:first-child{
+.depth-1 > div:first-child {
     padding-left: 3rem;
 }
+
 .depth-1:before {
     content: " ";
     display: inline-block;
-    position:  absolute;
+    position: absolute;
     width: 2px;
     top: 0px;
-    bottom:  0px;
+    bottom: 0px;
     left: 2rem;
     background-color: grey;
 }
-.depth-1 h3 { 
+
+.depth-1 h3 {
     font-size: 22px;
 }
-.depth-2 > div:first-child{
+
+.depth-2 > div:first-child {
     padding-left: 4rem;
 }
+
 .depth-2:before {
     content: " ";
     display: inline-block;
-    position:  absolute;
+    position: absolute;
     width: 2px;
     top: 0px;
-    bottom:  0px;
+    bottom: 0px;
     left: 3rem;
     background-color: grey;
 }
 
-.depth-2 h3 { 
+.depth-2 h3 {
     font-size: 20px;
 }
-.depth-3 > div:first-child{
+
+.depth-3 > div:first-child {
     padding-left: 5rem;
 }
+
 .depth-3:before {
     content: " ";
     display: inline-block;
-    position:  absolute;
+    position: absolute;
     width: 2px;
-    top: 0px;   
+    top: 0px;
     bottom: 0px;
     left: 4rem;
     background-color: grey;
 }
-.depth-3 h3 { 
+
+.depth-3 h3 {
     font-size: 18px;
 }
 
@@ -1049,24 +1056,28 @@ h3 i.fa-remove {
     color: #555;
     margin-bottom: 0px;
 }
+
 .form-group label {
     font-weight: normal;
 }
+
 .form-group i.fa-info-circle:hover {
     cursor: pointer;
 }
+
 .form-group i.fa-question-circle-o:hover {
     cursor: pointer;
 }
-.add-tuple-row{
+
+.add-tuple-row {
     border-top: 1px dotted #ccc;
     padding-top: 5px;
     padding-bottom: 10px;
 }
+
 .fa-2x {
     font-size: 1.75rem;
 }
-
 
 .paragraph {
     border-radius: 3px;
@@ -1078,4 +1089,12 @@ h3 i.fa-remove {
 }
 .real-row div.displayAsSummation:first-child {
     border-top: 3px double #cccccc;
+}
+
+.real-row.info input, .real-row.hint input {
+    background-color: lavender;
+}
+
+.real-row.warning input, .real-row.validation input {
+    background-color: khaki;
 }

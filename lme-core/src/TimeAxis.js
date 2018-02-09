@@ -1,8 +1,5 @@
 const log = require('log6');
 const headers = {
-    title: {
-        title: 'title'
-    },
     columns: {
         title: 'timeline'
     },
@@ -25,7 +22,6 @@ function TimeAxis(data) {
     // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
-    var formulasetsCount = data.formulasets.length;
     var viewmodes = {};
     var NA = data.navalue;
     var indexed = [];// holds a indexed reference for quicked lookup for real-column-contexts/ can be used for the
@@ -66,7 +62,6 @@ function TimeAxis(data) {
     infinitColumn.f = 0;
     infinitColumn.prev = infinitColumn;
     var timelineSize = data.time.timelineSize;
-    var timelineMultiplier = data.time.timelineMultiplier;
     var columnMultiplier = data.time.columnMultiplier;
     // find out all viewtypes in the document
     var layout = data.layout;
@@ -74,7 +69,7 @@ function TimeAxis(data) {
     while (layout != undefined) {
         viewmodes[layout.name] = {
             //these will be reduced to fixednumber and columns, they all share the same algorithms
-            doc: [[{hash: 0, f: 0, header: headers.title}, {
+            doc: [[{
                 hash: 1,
                 f: 1,
                 header: headers.doc,
@@ -85,13 +80,13 @@ function TimeAxis(data) {
                 firsttrend: {hash: 1, lastbkyr: {hash: 0}},
                 lasttrend: {hash: 1}
             }]],
-            period: [[{hash: 0, f: 0, header: headers.title}, {hash: 1, f: 1, header: headers.period}, {
+            period: [[{hash: 1, f: 1, header: headers.period}, {
                 hash: 2,
                 header: headers.period
             }]],
-            none: [[{hash: 0, f: 0, header: headers.title}]],
+            none: [[]],
             columns: [],
-            matrix: [[{hash: 0, f: 0, header: headers.title}, {hash: 1, f: 1, header: headers.matrix}, {
+            matrix: [[{hash: 1, f: 1, header: headers.matrix}, {
                 hash: 2,
                 header: headers.matrix
             }, {
@@ -196,8 +191,6 @@ function TimeAxis(data) {
         var columnId = (columnId * columnMultiplier);
         // add offset,0 for the titleValue, 1 for dummy cache,we starting from 1 so +1
         columnId++;
-        // add timeline
-        columnId += (timelineId * timelineMultiplier);
         return columnId;
     }
 
@@ -224,7 +217,6 @@ function TimeAxis(data) {
                 var metadata = currentviewmode.cols[cId];
                 var columnId = calculateIndex(tId, metadata.hash);
                 var previousColumn = (cId == 0 ? infinitColumn : columnEntriesForTimeline[columnEntriesForTimeline.length - 1]);
-                var previousTimelineColumn = (tId == 0 ? undefined : columnEntries[tId - 1][columnEntriesForTimeline.length]);
                 var columnElement = {
                     header: headers.columns,
                     hash: columnId,

@@ -1,15 +1,17 @@
-var FESFacade = require('../../../../../ff-fes/fesjs/FESFacade');
-var SolutionFacade = require('../../../../../ff-fes/fesjs/SolutionFacade');
-var AST = require('../../../../../ast-node-utils').ast;
-var lineparser = require('./finToJson.js');
-var finformula = require('../FinFormula/FinFormula.js');
-var Solution = require('../fesjs/Solution.js');
+/**
+ * We might actually need the fin->ffl/lme parser since the main fin language is .fin
+ */
+var ValueFacade = require('../../src/ValueFacade');
+var SolutionFacade = require('../../src/SolutionFacade');
+var PropertiesAssembler = require('../../src/PropertiesAssembler');
+const AST = require('../../../ast-node-utils/index').ast
+var lineparser = require('./FinToJSON.js');
+var finformula = require('../ffl/FinFormula.js');
+var Solution = require('../../src/Solution.js');
 var assert = require('assert');
 var Stack = require('stack-adt');
 var esprima = require('esprima')
-var escodegen = require('escodegen')
 var logger = require('log6');
-var excelFormulaUtilities = global.excelFormulaUtilities;
 //FIN->JavaScript
 var parser = {
     name: 'fin',
@@ -21,10 +23,10 @@ var parser = {
         var solution;
         var parseResult = lineparser.parse(data);
         if (!parseResult.valid) {
-            solution = uimodel.create();
+            solution = PropertiesAssembler.create();
         }
         else {
-            solution = uimodel.create(parseResult.solutionName);
+            solution = PropertiesAssembler.create(parseResult.solutionName);
 
             //at some lines we need to remember some state, f.e. if it were Trend formula or Visible formula
             var finVariables = parseResult.orderedByType.variables;
@@ -38,17 +40,17 @@ var parser = {
         return solution;
     },
     deParse: function(rowId) {
-        var finExport = uimodel.create()
+        var finExport = PropertiesAssembler.create()
         var exportString = "";
         //= finExport.getName() + "\n\n";
         //exportString += ".Variables\n.Variables\n";
         var formulasString = {};
         if (rowId) {
-            var startuielem;// = uimodel.getOrCreateProperty(rowId, 'value')
+            var startuielem;// = PropertiesAssembler.getOrCreateProperty(rowId, 'value')
         }
 
-        uimodel.visit(startuielem, function(node, depth) {
-            var formulaProperties = finExport.gatherFormulaProperties(FESFacade.getFormula, FESFacade.properties, node.rowId);
+        PropertiesAssembler.visit(startuielem, function(node, depth) {
+            var formulaProperties = finExport.gatherFormulaProperties(ValueFacade.getFormula, ValueFacade.properties, node.rowId);
             // exportString += createFinVariableRow(node, formulaProperties['title'] || '');
             for (var key in formulaProperties) {
                 if (formulasString[key] === undefined) {
@@ -268,4 +270,4 @@ function addNode(solution, node, parentId) {
     }
 }
 
-FESFacade.addParser(parser);
+SolutionFacade.addParser(parser);

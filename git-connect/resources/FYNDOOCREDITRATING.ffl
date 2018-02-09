@@ -1,3 +1,9 @@
+// model "URA Rating"
+// created by FINAN 3.2.57.19
+
+import FinanMath.*;
+import BaseModel.*;
+
 model FYNDOOCREDITRATING uses BaseModel
 {
  version: "0.0.1";
@@ -7,14 +13,14 @@ model FYNDOOCREDITRATING uses BaseModel
   variable Q_ROOT
   {
    displaytype: scorecard;
-   variable SimpleEntryFolder
+   variable Input
    {
     datatype: number;
     frequency: column;
     aggregation: balance;
-    displaytype: Input;
-    title: "$>Kurzes Eingabeformular<$$";
+    title: "SimpleDataEntryFolder";
     top_blanklines: 1;
+    displaytype: Input;
     display_options: showColumnTitlesAboveSubVars;
     locked: 1;
     visible: 1;
@@ -27,7 +33,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>GoodWill und selbst geschaffene Schutzrechte<$";
+     title: "sdeGoodWill";
      top_blanklines: 1;
      visible: 1;
      options_title: locked;
@@ -38,7 +44,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>Forderungen gegen?ber Gesellschaftern, Gesellschaftsorganen usw.<$";
+     title: "sdeReceivablesShareholders";
      visible: 1;
      options_title: locked;
     }
@@ -48,7 +54,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>Aktive latente Steuern<$";
+     title: "sdeDeferredTaxesAssets";
      visible: 1;
      options_title: locked;
     }
@@ -58,7 +64,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>Eigenkapital ohne den nicht durch Eigenkapital gedeckten Fehlbetrag<$";
+     title: "sdeEquity";
      top_blanklines: 1;
      visible: 1;
      options_title: locked;
@@ -69,7 +75,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon Bilanzgewinn, soweit auszusch?tten<$";
+     title: "sdeResultForTheYear";
      visible: 1;
      options_title: locked;
     }
@@ -79,7 +85,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon variables Kapital Kommanditisten, soweit auszusch?tten<$";
+     title: "sdeVarCapLimitedPartners";
      visible: 1;
      options_title: locked;
     }
@@ -89,7 +95,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>R?ckstellungen, passive latente Steuern und passive Abgrenzungsposten<$";
+     title: "$sdeProvisions";
      visible: 1;
      options_title: locked;
     }
@@ -99,7 +105,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>Verbindlichkeiten >1 Jahr<$";
+     title: "sdeLiabilitiesLong";
      visible: 1;
      options_title: locked;
     }
@@ -109,7 +115,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon gegen?ber Kreditinstituten und aus Anleihen<$";
+     title: "sdeLiabilitiesLong";
      visible: 1;
      options_title: locked;
     }
@@ -119,7 +125,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon aus Lieferungen und Leistungen<$";
+     title: "sdeLongTradePayables";
      visible: 1;
      options_title: locked;
     }
@@ -129,7 +135,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+     title: "sdeLongReceivedAdvanceOrdersCurrent";
      visible: 1;
      options_title: locked;
     }
@@ -139,7 +145,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon gegen?ber Gesellschaftern und verbundenen Unternehmen >5 Jahre<$";
+     title: "sdeLiabilitiesToShareholdersOver5Y";
      visible: 1;
      options_title: locked;
     }
@@ -149,7 +155,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>Kurzfristige Verbindlichkeiten<$";
+     title: "$sdeLiabilitiesShort";
      visible: 1;
      options_title: locked;
     }
@@ -159,7 +165,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon gegen?ber Kreditinstituten und aus Anleihen<$";
+     title: "sdeLiabilitiesBankShort";
      visible: 1;
      options_title: locked;
     }
@@ -169,7 +175,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon aus Lieferungen und Leistungen<$";
+     title: "sdeTradePayables";
      visible: 1;
      options_title: locked;
     }
@@ -179,7 +185,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+     title: "sdeReceivedAdvanceOrdersCurrent";
      visible: 1;
      options_title: locked;
     }
@@ -189,7 +195,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      displaytype: currency;
-     title: "$>>> davon gegen?ber Gesellschaftern, verbundenen Unternehmen, Beteiligungen<$";
+     title: "sdeShortShareholderPayables";
      visible: 1;
      options_title: locked;
     }
@@ -201,7 +207,7 @@ model FYNDOOCREDITRATING uses BaseModel
      formula_notrend: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
      formula_trend: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
      displaytype: currency;
-     title: "$>Bilanzsumme<$";
+     title: "sdeBalanceSheetTotal";
      top_separator: 1;
      display_options: displayAsSummation;
      bottom_separator: 2;
@@ -217,7 +223,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Umsatz<$";
+     title: "sdeSales";
      top_blanklines: 1;
      visible: 1;
      options_title: locked;
@@ -228,7 +234,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Abschreibungen auf immaterielles Verm?gen und Sachanlagen<$";
+     title: "sdeDepreciation";
      visible: 1;
      options_title: locked;
     }
@@ -238,7 +244,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Einmalertrag / -aufwand<$";
+     title: "sdeResultCorrections";
      visible: 1;
      options_title: locked;
     }
@@ -248,7 +254,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Betriebsergebnis nach sonstigen Steuern<$";
+     title: "sdeEBIT";
      visible: 1;
      options_title: locked;
     }
@@ -258,7 +264,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Zinsertrag<$";
+     title: "sdeInterestEarnings";
      visible: 1;
      options_title: locked;
     }
@@ -268,7 +274,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Zinsaufwand ohne Abzinsung von R?ckstellungen<$";
+     title: "sdeInterestExpenses";
      visible: 1;
      options_title: locked;
     }
@@ -278,7 +284,7 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Sonstiges Finanz- und Beteiligungsergebnis ohne Abschreibung auf Finanzanlagen<$";
+     title: "sdeParticipationEarnings";
      visible: 1;
      options_title: locked;
     }
@@ -288,10 +294,352 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: flow;
      displaytype: currency;
-     title: "$>Unternehmerlohn au?erhalb des Betriebsergebnisses<$";
+     title: "sdeEntrepreneurFeeOutsideResult";
      visible: 1;
      options_title: locked;
     }
+   }
+   variable Output
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "Output";
+    top_blanklines: 1;
+    displaytype: Output;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    visible: 1;
+    options_title: locked;
+    options_notrend: locked;
+    options_trend: locked;
+    variable URAPD refers to krPD
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 3;
+     title: "Probability of default";
+     top_blanklines: 2;
+     display_options: hideFormulas;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable URARatingClass refers to krUraRatingKlasse
+    {
+     datatype: string;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     title: "URA Rating class";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable URATrafficLight refers to krUraAmpel
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 0;
+     title: "URA $>Ampel<$";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable URATrafficLightD refers to krUraAmpelD
+    {
+     datatype: string;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     title: "URA $>Ampel<$";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable URATrafficLightDNL refers to krUraAmpelDNL
+    {
+     datatype: string;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     title: "URA $>Ampel<$";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable IFDRatingClass refers to krIfdRatingKlasse
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation;
+     displaytype: currency;
+     title: "IFD $>Ratingklasse<$";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable IFDRatingClassD refers to krIfdRatingKlasseD
+    {
+     datatype: string;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     title: "IFD $>Ratingklasse<$";
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R1_ShareOfOrdinaryResult refers to krAnteilOrdentlichenErgebnisses
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 2;
+     title: "Share of ordinary result";
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+     variable R1_P1_OrdinaryResult refers to krOrdentlichesErgebnis
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "Ordinary result";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable R1_P2_NetBalanceSheetTotalForTheRating refers to krNettoBilanzsummeRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Net balance sheet total for the rating";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable R2_QuotaOfBankAndSuppliers refers to krBankUndLieferantenanteil
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 2;
+     title: "Quota of bank and suppliers";
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+     variable R2_P1_AmountsDueToBanksAndSuppliers refers to krBankUndLieferantenverbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Amounts due to banks and suppliers";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable R2_P2_NetBalanceSheetTotalForTheRating refers to krNettoBilanzsummeRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Net balance sheet total for the rating";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable R3_InterestRateOnBorrowings refers to krFremdKapitalzinslast
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 2;
+     title: "Interest rate on borrowings";
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+     variable R3_P1_InteresExpenseExlcudingDiscountingOfProfisions refers to krZinsen
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "Interest expense excluding discounting of provisions";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable R3_P2_Liabilities refers to krVerbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Liabilities";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable R4_ShareOfShortTermLiabilities refers to krAnteilKurzfristigeVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 2;
+     title: "Share of short-term liabilities";
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+     variable R4_P1_ShortTermLiabilities refers to krKurzfristigeVerbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Short-term liabilities";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable R4_P2_Sales refers to krUmsatzerloese
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "Sales";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable R5_ShareOfOwnResources refers to krAnteilEigenmittel
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     data_options: calculateAggregation,unscalable;
+     displaytype: percentage;
+     fixed_decimals: 2;
+     title: "Share of own resources";
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     visible: 1;
+     options_title: locked;
+     options_notrend: locked;
+     options_trend: locked;
+     variable R5_P1_RatingOrientatedBusinessEquity refers to krWirtschaftlichesEigenKapitalRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Rating orientated, business equity";
+      top_blanklines: 1;
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable R5_P2_RatingOrientedBalanceSheetTotal refers to krRatingorientierteBilanzsumme
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "Rating orientated balance sheet total";
+      locked: 1;
+      visible: 1;
+      options_title: locked;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+   }
+   variable RatioFolder
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "$>Rating Ratios<$";
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    visible: 0;
+    options_title: locked, invisible;
+    options_notrend: locked, invisible;
+    options_trend: locked, invisible;
     variable sdePD refers to krPD
     {
      datatype: number;
@@ -300,7 +648,7 @@ model FYNDOOCREDITRATING uses BaseModel
      data_options: calculateAggregation,unscalable;
      displaytype: percentage;
      fixed_decimals: 3;
-     title: "$>Ausfallwahrscheinlichkeit<$";
+     title: "Probability of default";
      top_blanklines: 2;
      display_options: hideFormulas;
      locked: 1;
@@ -315,27 +663,13 @@ model FYNDOOCREDITRATING uses BaseModel
      frequency: column;
      aggregation: balance;
      data_options: calculateAggregation,unscalable;
-     title: "URA $>Ratingklasse<$";
+     title: "URA Rating class";
      locked: 1;
      visible: 1;
      options_title: locked;
      options_notrend: locked;
      options_trend: locked;
     }
-   }
-   variable RatioFolder
-   {
-    datatype: number;
-    frequency: column;
-    aggregation: balance;
-    displaytype: currency;
-    title: "$>Rating Kennzahlen<$";
-    display_options: showColumnTitlesAboveSubVars;
-    locked: 1;
-    visible: 1;
-    options_title: locked, invisible;
-    options_notrend: locked, invisible;
-    options_trend: locked, invisible;
     variable krAnteilOrdentlichenErgebnisses
     {
      datatype: number;
@@ -347,7 +681,6 @@ model FYNDOOCREDITRATING uses BaseModel
      displaytype: percentage;
      fixed_decimals: 2;
      title: "$>Anteil des ordentlichen Ergebnisses<$";
-     top_blanklines: 1;
      display_options: showColumnTitlesAboveSubVars;
      locked: 1;
      visible: 1;
@@ -376,7 +709,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Betriebsergebnis nach sonstigen Steuern<$";
+       title: "sdeEBIT";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -391,7 +724,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Sonstiges Finanz- und Beteiligungsergebnis ohne Abschreibung auf Finanzanlagen<$";
+       title: "sdeParticipationEarnings";
        locked: 1;
        visible: 1;
        link: sdeParticipationEarnings;
@@ -405,7 +738,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Zinsertrag<$";
+       title: "sdeInterestEarnings";
        locked: 1;
        visible: 1;
        link: sdeInterestEarnings;
@@ -419,7 +752,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Zinsaufwand ohne Abzinsung von R?ckstellungen<$";
+       title: "sdeInterestExpenses";
        locked: 1;
        visible: 1;
        link: sdeInterestExpenses;
@@ -433,7 +766,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Abschreibungen auf immaterielles Verm?gen und Sachanlagen<$";
+       title: "sdeDepreciation";
        locked: 1;
        visible: 1;
        link: sdeDepreciation;
@@ -447,7 +780,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Einmalertrag / -aufwand<$";
+       title: "sdeResultCorrections";
        locked: 1;
        visible: 1;
        link: sdeResultCorrections;
@@ -461,7 +794,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Unternehmerlohn au?erhalb des Betriebsergebnisses<$";
+       title: "sdeEntrepreneurFeeOutsideResult";
        locked: 1;
        visible: 1;
        link: sdeEntrepreneurFeeOutsideResult;
@@ -522,7 +855,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon Bilanzgewinn, soweit auszusch?tten<$";
+       title: "sdeResultForTheYear";
        locked: 1;
        visible: 1;
        link: sdeResultForTheYear;
@@ -536,7 +869,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon variables Kapital Kommanditisten, soweit auszusch?tten<$";
+       title: "sdeVarCapLimitedPartners";
        locked: 1;
        visible: 1;
        link: sdeVarCapLimitedPartners;
@@ -550,7 +883,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>R?ckstellungen, passive latente Steuern und passive Abgrenzungsposten<$";
+       title: "$sdeProvisions";
        locked: 1;
        visible: 1;
        link: sdeProvisions;
@@ -564,7 +897,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Verbindlichkeiten >1 Jahr<$";
+       title: "sdeLiabilitiesLong";
        locked: 1;
        visible: 1;
        link: sdeLiabilitiesLong;
@@ -578,7 +911,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Kurzfristige Verbindlichkeiten<$";
+       title: "$sdeLiabilitiesShort";
        locked: 1;
        visible: 1;
        options_title: locked;
@@ -608,7 +941,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+       title: "sdeLongReceivedAdvanceOrdersCurrent";
        locked: 1;
        visible: 1;
        link: sdeLongReceivedAdvanceOrdersCurrent;
@@ -622,7 +955,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+       title: "sdeReceivedAdvanceOrdersCurrent";
        locked: 1;
        visible: 1;
        link: sdeReceivedAdvanceOrdersCurrent;
@@ -705,7 +1038,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon gegen?ber Kreditinstituten und aus Anleihen<$";
+       title: "sdeLiabilitiesLong";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -720,7 +1053,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon aus Lieferungen und Leistungen<$";
+       title: "sdeLongTradePayables";
        locked: 1;
        visible: 1;
        link: sdeLongTradePayables;
@@ -734,7 +1067,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon gegen?ber Kreditinstituten und aus Anleihen<$";
+       title: "sdeLiabilitiesBankShort";
        locked: 1;
        visible: 1;
        link: sdeLiabilitiesBankShort;
@@ -748,7 +1081,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon aus Lieferungen und Leistungen<$";
+       title: "sdeTradePayables";
        locked: 1;
        visible: 1;
        link: sdeTradePayables;
@@ -845,7 +1178,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Zinsaufwand ohne Abzinsung von R?ckstellungen<$";
+       title: "sdeInterestExpenses";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -892,7 +1225,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Verbindlichkeiten >1 Jahr<$";
+       title: "sdeLiabilitiesLong";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -907,7 +1240,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Kurzfristige Verbindlichkeiten<$";
+       title: "$sdeLiabilitiesShort";
        locked: 1;
        visible: 1;
        options_title: locked;
@@ -920,7 +1253,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon Bilanzgewinn, soweit auszusch?tten<$";
+       title: "sdeResultForTheYear";
        locked: 1;
        visible: 1;
        link: sdeResultForTheYear;
@@ -934,7 +1267,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon variables Kapital Kommanditisten, soweit auszusch?tten<$";
+       title: "sdeVarCapLimitedPartners";
        locked: 1;
        visible: 1;
        link: sdeVarCapLimitedPartners;
@@ -948,7 +1281,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+       title: "sdeLongReceivedAdvanceOrdersCurrent";
        locked: 1;
        visible: 1;
        link: sdeLongReceivedAdvanceOrdersCurrent;
@@ -962,7 +1295,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+       title: "sdeReceivedAdvanceOrdersCurrent";
        locked: 1;
        visible: 1;
        link: sdeReceivedAdvanceOrdersCurrent;
@@ -1045,7 +1378,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon Bilanzgewinn, soweit auszusch?tten<$";
+       title: "sdeResultForTheYear";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -1060,7 +1393,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon variables Kapital Kommanditisten, soweit auszusch?tten<$";
+       title: "sdeVarCapLimitedPartners";
        locked: 1;
        visible: 1;
        link: sdeVarCapLimitedPartners;
@@ -1074,7 +1407,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Kurzfristige Verbindlichkeiten<$";
+       title: "$sdeLiabilitiesShort";
        locked: 1;
        visible: 1;
        link: sdeLiabilitiesShort;
@@ -1088,7 +1421,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon erhaltene Anzahlungen auf Bestellungen<$";
+       title: "sdeReceivedAdvanceOrdersCurrent";
        locked: 1;
        visible: 1;
        link: sdeReceivedAdvanceOrdersCurrent;
@@ -1102,7 +1435,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon gegen?ber Gesellschaftern, verbundenen Unternehmen, Beteiligungen<$";
+       title: "sdeShortShareholderPayables";
        locked: 1;
        visible: 1;
        link: sdeShortShareholderPayables;
@@ -1148,7 +1481,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: flow;
        displaytype: currency;
-       title: "$>Umsatz<$";
+       title: "sdeSales";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -1232,7 +1565,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Eigenkapital ohne den nicht durch Eigenkapital gedeckten Fehlbetrag<$";
+       title: "sdeEquity";
        top_blanklines: 1;
        locked: 1;
        visible: 1;
@@ -1264,7 +1597,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon Bilanzgewinn, soweit auszusch?tten<$";
+       title: "sdeResultForTheYear";
        locked: 1;
        visible: 1;
        link: sdeResultForTheYear;
@@ -1278,7 +1611,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon variables Kapital Kommanditisten, soweit auszusch?tten<$";
+       title: "sdeVarCapLimitedPartners";
        locked: 1;
        visible: 1;
        link: sdeVarCapLimitedPartners;
@@ -1309,7 +1642,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>GoodWill und selbst geschaffene Schutzrechte<$";
+       title: "sdeGoodWill";
        locked: 1;
        visible: 1;
        link: sdeGoodWill;
@@ -1323,7 +1656,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Forderungen gegen?ber Gesellschaftern, Gesellschaftsorganen usw.<$";
+       title: "sdeReceivablesShareholders";
        locked: 1;
        visible: 1;
        link: sdeReceivablesShareholders;
@@ -1337,7 +1670,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Aktive latente Steuern<$";
+       title: "sdeDeferredTaxesAssets";
        locked: 1;
        visible: 1;
        link: sdeDeferredTaxesAssets;
@@ -1351,7 +1684,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>>> davon gegen?ber Gesellschaftern und verbundenen Unternehmen >5 Jahre<$";
+       title: "sdeLiabilitiesToShareholdersOver5Y";
        locked: 1;
        visible: 1;
        link: sdeLiabilitiesToShareholdersOver5Y;
@@ -1411,7 +1744,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>GoodWill und selbst geschaffene Schutzrechte<$";
+       title: "sdeGoodWill";
        locked: 1;
        visible: 1;
        link: sdeGoodWill;
@@ -1425,7 +1758,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Forderungen gegen?ber Gesellschaftern, Gesellschaftsorganen usw.<$";
+       title: "sdeReceivablesShareholders";
        locked: 1;
        visible: 1;
        link: sdeReceivablesShareholders;
@@ -1439,7 +1772,7 @@ model FYNDOOCREDITRATING uses BaseModel
        frequency: column;
        aggregation: balance;
        displaytype: currency;
-       title: "$>Aktive latente Steuern<$";
+       title: "sdeDeferredTaxesAssets";
        locked: 1;
        visible: 1;
        link: sdeDeferredTaxesAssets;
@@ -1489,7 +1822,7 @@ model FYNDOOCREDITRATING uses BaseModel
     datatype: number;
     frequency: column;
     aggregation: balance;
-    displaytype: Output;
+    displaytype: currency;
     title: "$>Rating<$";
     display_options: showColumnTitlesAboveSubVars;
     locked: 1;
@@ -1571,7 +1904,7 @@ model FYNDOOCREDITRATING uses BaseModel
      data_options: saveCalculatedValue,calculateAggregation,unscalable;
      displaytype: percentage;
      fixed_decimals: 3;
-     title: "$>Ausfallwahrscheinlichkeit<$";
+     title: "Probability of Default";
      display_options: hideFormulas;
      locked: 1;
      visible: 1;
@@ -1587,7 +1920,7 @@ model FYNDOOCREDITRATING uses BaseModel
      formula_notrend: String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
      formula_trend: String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
      data_options: saveCalculatedValue,calculateAggregation,unscalable;
-     title: "URA $>Ratingklasse<$";
+     title: "URA Rating class";
      locked: 1;
      visible: 1;
      options_title: locked;

@@ -180,7 +180,6 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         path: path,
         ammount: amount,
         display: yas.display,
-        display_options: node.display_options,
         colspan: colspan,
         depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
         visible: true,
@@ -194,6 +193,8 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         }],
         children: []
     };
+    if (node.display_options) rv.display_options = node.display_options;
+
     Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (parent) parent.children.push(rv);
     this.nodes[unique] = rv;

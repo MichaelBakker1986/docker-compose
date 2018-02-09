@@ -143,7 +143,8 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
                 node[fflRegister.frequencyIndex] = 'none'
             }
-            type = nodeName.split("_").pop().toLowerCase();
+            type = 'string';
+            node[displayOptionsIndex] = nodeName.split("_").pop().toLowerCase();
         } else if (nodeName.match(/MAP[0-9,A-z]+_PARAGRAAF[0-9]+$/i)) {
             node[fflRegister.frequencyIndex] = 'none'
             type = 'paragraph'
