@@ -22,7 +22,7 @@ model SCORECARDTESTMODEL  uses BaseModel
     data_options: unscalable;
     title: "Layout";
     displaytype: select;
-    choices: "0: NA|1: IFRS-EU|2: IFRS|48: Polish";
+    choices: "0: NA|1: IFRS-EU|2:IFRS|48:Polish";
     top_blanklines: 1;
     locked: On;
     visible: 1;
