@@ -181,7 +181,7 @@ highchart {
     display: block;
 }
 
-.required span.title:after, 
+.required label.title:after, 
 span.required:after, 
 label[required]:not(input):after {
     content: "";
