@@ -180,6 +180,7 @@ highchart {
     width: 100%;
     display: block;
 }
+
 .required label.title:after,
 span.required:after,
 label[required]:not(input):after {
