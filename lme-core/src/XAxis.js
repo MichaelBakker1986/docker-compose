@@ -1,40 +1,6 @@
-/*
- * Absolutely remove title from this Dimension
- * Since time has nothing to do with formula formula-sets [trend,notrend]
- * We could index all properties with 8bits...  since there is never a need of 128 different properties
- *  TODO: this also includes the legacy more-complex 'title-prefix-column'. Remove the title column
- *  TODO: Timelines dimension is no longer used within the engine since they are accumulated with the database
- *
- *  Here we will do column/timeline ordering, referencing previous and adjacent columns
- *  
- *  The variable decorator should suply the referenced column to write into
- *  Period[T=12] will be referred to Period[1]
- *  When Period:
- *  variable.columns[12] will be referred to variable.columns[1]
- *  variable.columns[27] will be referred to variable.columns[2] etc..
- *  
- *  When Document 
- *  variable.columns[*] will be referred to variable.columns[1?0]
-
- *  When Detail 
- *  variable.columns[x] will be referred to variable.columns[x]
- */
-//Detail can refer to its Period
-//Detail will refer it its own Detail, else [bky] or [prev] has to be supplied
-//Detail can refer to Document
-//Period will refer to first Detail, else [first] or [last] or [bky] has to be supplied
-//Period will refer to its own Period, else [forecast] or [history] has to be supplied
-//Period can refer to Document
-//Document will refer to first Detail, else [first] or [last] or [bky] has to be supplied
-//Document will refer to first Period, else [forecast] or [history] has to be supplied
-//Document can only refer to itsself
-//can easy be refactored for better performance
 var importData = require('../resources/BookYearTimeModel.json');
 var log = require('log6');
 var headers = {
-    title: {
-        title: 'title'
-    },
     columns: {
         title: 'timeline'
     },
@@ -56,7 +22,6 @@ function calculateCalculationDocument(data) {
     // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
-    var formulasetsCount = data.formulasets.length;
     var viewmodes = {};
     var NA = data.navalue;
     var indexed = [];// holds a indexed reference for quicked lookup for real-column-contexts/ can be used for the
@@ -97,7 +62,6 @@ function calculateCalculationDocument(data) {
     infinitColumn.f = 0;
     infinitColumn.prev = infinitColumn;
     var timelineSize = data.time.timelineSize;
-    var timelineMultiplier = data.time.timelineMultiplier;
     var columnMultiplier = data.time.columnMultiplier;
     // find out all viewtypes in the document
     var layout = data.layout;
@@ -105,7 +69,7 @@ function calculateCalculationDocument(data) {
     while (layout != undefined) {
         viewmodes[layout.name] = {
             //these will be reduced to fixednumber and columns, they all share the same algorithms
-            doc: [[{hash: 0, f: 0, header: headers.title}, {
+            doc: [[{
                 hash: 1,
                 f: 1,
                 header: headers.doc,
@@ -116,13 +80,13 @@ function calculateCalculationDocument(data) {
                 firsttrend: {hash: 1, lastbkyr: {hash: 0}},
                 lasttrend: {hash: 1}
             }]],
-            period: [[{hash: 0, f: 0, header: headers.title}, {hash: 1, f: 1, header: headers.period}, {
+            period: [[{hash: 1, f: 1, header: headers.period}, {
                 hash: 2,
                 header: headers.period
             }]],
-            none: [[{hash: 0, f: 0, header: headers.title}]],
+            none: [[]],
             columns: [],
-            matrix: [[{hash: 0, f: 0, header: headers.title}, {hash: 1, f: 1, header: headers.matrix}, {
+            matrix: [[{hash: 1, f: 1, header: headers.matrix}, {
                 hash: 2,
                 header: headers.matrix
             }, {
@@ -227,8 +191,6 @@ function calculateCalculationDocument(data) {
         var columnId = (columnId * columnMultiplier);
         // add offset,0 for the titleValue, 1 for dummy cache,we starting from 1 so +1
         columnId++;
-        // add timeline
-        columnId += (timelineId * timelineMultiplier);
         return columnId;
     }
 
@@ -392,12 +354,5 @@ function CalculationDocument() {
 }
 
 CalculationDocument.prototype = calculateCalculationDocument(importData);
-// NodeJS support..
-// 25ms for 134col/5timelines
-// 199ms for 134col/40timelines
-// what is expected to be happen.. lineair result. 1ms boiler plate 5ms*timeline for 134cols
-// 280ms for 234cols 40timelines. Very acceptable 12year 40timelines 280ms..
-// columns can also be mixed in tsy. so 5x1d and then (7*12)bkyr.tsy. Allow 100year forecast., would require some nice
-// tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
-// currently we have max7 year 10timelines
+
 module.exports = CalculationDocument.prototype;
