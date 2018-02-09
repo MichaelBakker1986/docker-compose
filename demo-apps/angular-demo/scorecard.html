@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="angapp" ng-controller="lmeController">
+
 <head>
     <!--MANY DROP DOWN -->
     <!--https://stackoverflow.com/questions/12934339/single-dropdown-for-many-items-using-twitter-bootstrap-->
@@ -7,8 +8,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{name}} DEMO</title>
-    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD8fwAA/H8AAPxjAAD/4wAA/+MAAMY/AADGPwAAxjEAAP/xAAD/8QAA4x8AAOMfAADjHwAA//8AAP//AAA="
-          rel="icon" type="image/x-icon">
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD8fwAA/H8AAPxjAAD/4wAA/+MAAMY/AADGPwAAxjEAAP/xAAD/8QAA4x8AAOMfAADjHwAA//8AAP//AAA=" rel="icon" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -23,319 +23,326 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.11.4/gitgraph.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
 
     <script src="scorecard.js"></script>
-    <link rel="stylesheet" type="text/css" href="bundle.css"/>
-    <link rel="stylesheet" type="text/css" href="grid_example.css"/>
+    <link rel="stylesheet" type="text/css" href="bundle.css" />
+    <link rel="stylesheet" type="text/css" href="grid_example.css" />
 </head>
+
 <body>
-<nav class="navbar navbar-fixed-top">
-    <div id="header-container" class="container navbar-container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-            </button>
-            <a id="brand" class="navbar-brand" href="">
+    <nav class="navbar navbar-fixed-top">
+        <div id="header-container" class="container navbar-container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a id="brand" class="navbar-brand" href="">
                 Figure {{name}}
                 <small> Preview page</small>
             </a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-            </ul>
-            <ul class="nav navbar-nav" style="float: right">
-                <li>
-                    <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
-                </li>
-                <li>
-                    <div style="margin-right: 20px; margin-left: 20px; margin-top: 14px;">
-                        <input
-                                type="text"
-                                name="duration"
-                                data-provide="slider"
-                                data-slider-ticks="[1, 2, 3, 4]"
-                                data-slider-ticks-labels='["month", "quarter", "halfyear","bookyear"]'
-                                data-slider-step="1"
-                                range="true"
-                                data-slider-tooltip="hide"
-                        >
-                    </div>
-                </li>
-                <li>
-                    <a class="btn" ng-click="setColumnOffset('next')"><i class="fa fa-arrow-right"></i></a>
-                </li>
-                <li>
-                    <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
-                </li>
-                <li>
-                    <a data-toggle="tooltip" title="Share this data" ng-click="shareData()" class="toggle-save-btn btn btn-sm"><i style="font-size: 24px" class="fa fa-share-alt"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <div style="margin: 40px 0 20px;"></div>
-            <div class="affix" ng-controller="timelineController">
-                <ul class="timeline">
-                    <li ng-repeat="timeline_item in timeline_items" ng-class="timeline_item.css" ng-switch="timeline_item.type" ng-click="clicktimeline(timeline_item)">
-                        <span ng-switch-when="label" ng-class="timeline_item.labelclass">
-                            {{timeline_item.text}}
-                        </span>
-                        <i ng-switch-when="event" ng-class="timeline_item.enabled? timeline_item.eventclass:''"></i>
-                        <div ng-switch-when="event" class="timeline-item">
-                            <span class="time"><i class="fa fa-clock-o"></i> {{timeline_item.ago}}</span>
-                            <div class="timeline-body"></div>
-                            <div class="timeline-footer">
-                            </div>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav" style="float: right">
+                    <li>
+                        <a class="btn" ng-click="setColumnOffset('previous')"><i class="fa fa-arrow-left"></i></a>
+                    </li>
+                    <li>
+                        <div style="margin-right: 20px; margin-left: 20px; margin-top: 14px;">
+                            <input type="text" name="duration" data-provide="slider" data-slider-ticks="[1, 2, 3, 4]" data-slider-ticks-labels='["month", "quarter", "halfyear","bookyear"]' data-slider-step="1" range="true" data-slider-tooltip="hide">
                         </div>
+                    </li>
+                    <li>
+                        <a class="btn" ng-click="setColumnOffset('next')"><i class="fa fa-arrow-right"></i></a>
+                    </li>
+                    <li>
+                        <a ng-click="saveData()" class="toggle-save-btn btn btn-sm {{ hasChanges() ? ' active' : ''}}"><i style="font-size: 24px" class="fa fa fa-save"></i></a>
+                    </li>
+                    <li>
+                        <a data-toggle="tooltip" title="Share this data" ng-click="shareData()" class="toggle-save-btn btn btn-sm"><i style="font-size: 24px" class="fa fa-share-alt"></i></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-8">
-            <h1 class="page-header">{{search.hint}}</h1>
-            <div class="row">
-                <div ng-repeat="f in LME_MODEL | orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'')">
-                    <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="'d'+$index+'-'+f.depth+ ' quest ions ' + (cv.entered ? 'isentered' : '')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
-                        <div ng-switch-when="wisihtml" class="col-md-12">
-                            <textarea class="form-control" ng-model="cv.value"></textarea>
-                        </div>
-                        <div ng-switch-when="tuple_add" class="col-md-12 input-group text-right" ng-click="addTuple(f)">
-                            <span class="form-control">Add {{f.title}}</span>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <div ng-switch-when="paragraph" class="col-md-12">
-                            <h2>{{f.title}} <i style="color: lightcoral" ng-if="f.tupleDefinition" class="fa fa-remove"></i></h2>
-                            <span ng-if="f.hint">{{f.hint}}<p></p><br></span>
-                        </div>
-                        <div ng-switch-when="customwidget" style="margin: 15px;">
-                            <div class=" col-sm-6">
-                                <div class="info-box bg-aqua">
-                                    <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">{{cv.value[0][3]}}</span>
-                                        <span class="info-box-number">{{cv.value[1][3]}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][3]+'%'}}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                        Een score van 100 punten betekent dat u voor 100% de stakeholders revevant vindt en bij veranderingen betrekt.
-                                    </span>
-                                    </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div style="margin: 40px 0 20px;"></div>
+                <div class="affix" ng-controller="timelineController">
+                    <ul class="timeline">
+                        <li ng-repeat="timeline_item in timeline_items" ng-class="timeline_item.css" ng-switch="timeline_item.type" ng-click="clicktimeline(timeline_item)">
+                            <span ng-switch-when="label" ng-class="timeline_item.labelclass">
+                            {{timeline_item.text}}
+                        </span>
+                            <i ng-switch-when="event" ng-class="timeline_item.enabled? timeline_item.eventclass:''"></i>
+                            <div ng-switch-when="event" class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i> {{timeline_item.ago}}</span>
+                                <div class="timeline-body"></div>
+                                <div class="timeline-footer">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="info-box bg-yellow">
-                                    <span class="info-box-icon"><i class="fa fa-tree"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">{{cv.value[0][1]}}</span>
-                                        <span class="info-box-number">{{cv.value[1][1]}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][1]+'%'}}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                        Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema's van dit thema
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" col-md-6">
-                                <div class="info-box bg-green">
-                                    <span class="info-box-icon"><i class="fa fa-picture-o"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">{{cv.value[0][2]}}</span>
-                                        <span class="info-box-number">{{cv.value[1][2]}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][2]+'%'}}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                        Een score van 100punten beteknt dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box bg-red">
-                                    <span class="info-box-icon"><i class="fa fa-balance-scale"></i></span>
-
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">{{cv.value[0][0]}}</span>
-                                        <span class="info-box-number">{{cv.value[1][0]}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="{{'width: ' + cv.value[1][0]+'%'}}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                        Een score van 100punten betekent dat u het 100% eens bent met de stellingen over de 7 thema's van de ISO 26000 MVO richtlijn
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-1">
-                                    <span class="info-box-search"><i class="fa fa-search" style="color: green;"></i></span>
-                                </div>
-                                <div class="col-md-2">
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-1">
-                                    <span class="info-box-search"><i class="fa fa-search" style="color: firebrick;"></i></span>
-                                </div>
-                                <div class="col-md-2"></div>
-                            </div>
-                        </div>
-                        <div ng-switch-when="piechart" class="col-md-6">
-                            <div>
-                                <div class="box box-default">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">{{f.title}}</h3>
-
-                                        <div class="box-tools pull-right">
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="chart-responsive">
-                                                    <highchart config="{
-                    chart: {
-                     type: 'pie'
-                    },
-                    title: false,
-                    tooltip: {
-                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '{point.name}',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            },
-                            showInLegend: true
-                        }
-                    },
-                    credits:false,
-                    xAxis: {
-                        categories: cv.value[0]
-                    },
-                    series: [{
-                        name : 'Quantity',
-                        data : cv.value
-                    }]
-                }"></highchart>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="box-footer box-comments">
-                                        Dit zijn de scores per onderdeel van {{f.title}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div ng-switch-when="title" ng-class="'col-md-'+(f.cols.length==1?12:6)">
-                            <span contenteditable="{{f.title_locked?'false':'true'}}" class="title" ng-bind="f.title"></span>
-                            <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
-                            <span><i ng-if="f.original!='undefined' && f.original!='\'\'' && f.original!='null'" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
-                                     data-content="{{f.original}}"></i></span>
-                        </div>
-                        <!--In most cases there are 4 columns, title,value,value,value-->
-                        <!--Calculate the width by 6/length-1-->
-                        <div ng-switch-default ng-class="'questions col-md-'+(6/(f.cols.length-1))">
-                            <label ng-if="(cv.entered) && cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
-                            <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
-                                <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
-                                <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
-                                <input ng-switch-when="date" ng-readonly="cv.locked" type="{{cv.locked? 'text':'date'}}" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                <form ng-switch-when="photoupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
-                                    <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
-                                    <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
-                                </form>
-                                <form ng-switch-when="fileupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
-                                    <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
-                                    <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
-                                </form>
-
-
-                                <div ng-switch-when="select">
-                                    <select ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="Pick value">
-                                        <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>
-                                    </select>
-                                    <input ng-if="cv.locked" type="text" readonly="readonly" class="form-control" ng-model="cv.value" placeholder="..">
-                                </div>
-                                <div ng-switch-when="radio">
-                                    <div ng-if="!cv.locked" class="btn-group" data-toggle="buttons">
-                                        <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.value == cv.value?'active':''">
-                                            <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.value">
-                                            <i ng-class="choice.value == cv.value ? 'fa fa-check-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
-                                            <span>{{choice.value}}</span>
-                                        </label>
-                                    </div>
-                                    <input readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-                                </div>
-                                <textarea ng-switch-when="memo" ng-readonly="cv.locked" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
-                                <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-                                <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
-                                <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="row">
-                <div class="dataTables_paginate paging_simple_numbers" style="float: right">
-                    <ul class="pagination">
-                        <!--paginate-->
-                        <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
-                                class="fa fa-arrow-left"></i> </a></li>
-                        <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
-                            <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
                         </li>
-                        <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '"><a aria-controls="example2"
-                                                                                                                                                                                                              data-dt-idx="7" tabindex="0"><i
-                                class="fa fa-arrow-right"></i> </a></li>
                     </ul>
                 </div>
             </div>
+            <div class="col-md-8">
+                <h1 class="page-header">{{search.hint}}</h1>
+                <div class="row">
+                    <div class="col-md-12">
 
-        </div>
-        <div class="col-md-1">
-            <div style="margin: 40px 0 20px;"></div>
-            <ul class="nav list-group affix">
-                <li>
-                    <input class="hidden" type="text" ng-model="search" placeholder="Search figure"/>
-                </li>
-                <li style="margin-left: 10px" ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
-                    <div>
-                        <span ng-bind="f.title"></span>
-                        <span ng-if="f.valid[0] != f.valid[1]" class="fa-stack fa-1x has-badge yellow" data-count="{{f.valid[0]}}/{{f.valid[1]}}">
+                        <div ng-repeat="f in LME_MODEL | orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required':'') + 'depth-'+f.depth" class="real-row">
+                            <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="(cv.entered ? 'isentered' : '') + ' col-md-'+(f.cols.length == 1 ? '12' : ($index == 0 ? 6 : (6/(f.cols.length-1)) +' questions' ) )" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+                                <!-- Full row elements -->
+                                <div ng-switch-when="wisihtml">
+                                    <textarea class="form-control" ng-model="cv.value"></textarea>
+                                </div>
+
+                                <div ng-switch-when="tuple_add" class=" input-group add-tuple-row" ng-click="addTuple(f)">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Add {{f.title}} </button>
+                                    </div>
+                                </div>
+
+                                <div ng-switch-when="paragraph">
+                                    <h3>{{f.title}} <i style="color: lightcoral" ng-if="f.tupleDefinition" class="fa fa-remove"></i></h3>
+                                    <div class="paragraph bg-gray color-palette" ng-if="f.hint">{{f.hint}}</div>
+                                </div>
+
+                                <!-- custom stuff -->
+                                <div ng-switch-when="customwidget" style="margin: 15px;">
+                                    <div class=" col-sm-6">
+                                        <div class="info-box bg-aqua">
+                                            <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{cv.value[0][3]}}</span>
+                                                <span class="info-box-number">{{cv.value[1][3]}}</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="{{'width: ' + cv.value[1][3]+'%'}}"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                Een score van 100 punten betekent dat u voor 100% de stakeholders revevant vindt en bij veranderingen betrekt.
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="info-box bg-yellow">
+                                            <span class="info-box-icon"><i class="fa fa-tree"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{cv.value[0][1]}}</span>
+                                                <span class="info-box-number">{{cv.value[1][1]}}</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="{{'width: ' + cv.value[1][1]+'%'}}"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                Deze score geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema's van dit thema
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" col-md-6">
+                                        <div class="info-box bg-green">
+                                            <span class="info-box-icon"><i class="fa fa-picture-o"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{cv.value[0][2]}}</span>
+                                                <span class="info-box-number">{{cv.value[1][2]}}</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="{{'width: ' + cv.value[1][2]+'%'}}"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                                Een score van 100punten beteknt dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="info-box bg-red">
+                                            <span class="info-box-icon"><i class="fa fa-balance-scale"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{cv.value[0][0]}}</span>
+                                                <span class="info-box-number">{{cv.value[1][0]}}</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" style="{{'width: ' + cv.value[1][0]+'%'}}"></div>
+                                                </div>
+                                                <span class="progress-description">
+                                        Een score van 100punten betekent dat u het 100% eens bent met de stellingen over de 7 thema's van de ISO 26000 MVO richtlijn
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-1">
+                                            <span class="info-box-search"><i class="fa fa-search" style="color: green;"></i></span>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-1">
+                                            <span class="info-box-search"><i class="fa fa-search" style="color: firebrick;"></i></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                </div>
+
+                                <div ng-switch-when="piechart">
+                                    <div>
+                                        <div class="box box-default">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">{{f.title}}</h3>
+
+                                                <div class="box-tools pull-right">
+                                                </div>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="chart-responsive">
+                                                            <highchart config="{
+                                                            chart: {
+                                                             type: 'pie'
+                                                            },
+                                                            title: false,
+                                                            tooltip: {
+                                                                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                                            },
+                                                            plotOptions: {
+                                                                pie: {
+                                                                    allowPointSelect: true,
+                                                                    cursor: 'pointer',
+                                                                    dataLabels: {
+                                                                        enabled: true,
+                                                                        format: '{point.name}',
+                                                                        style: {
+                                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                                        }
+                                                                    },
+                                                                    showInLegend: true
+                                                                }
+                                                            },
+                                                            credits:false,
+                                                            xAxis: {
+                                                                categories: cv.value[0]
+                                                            },
+                                                            series: [{
+                                                                name : 'Quantity',
+                                                                data : cv.value
+                                                            }]
+                                                        }">
+                                                            </highchart>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-footer box-comments">
+                                                Dit zijn de scores per onderdeel van {{f.title}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Default title columns -->
+                                <div ng-switch-when="title" class="form-group">
+                                    <label contenteditable="{{f.title_locked?'false':'true'}}" class="title" ng-bind="f.title"></label>
+                                    <span><i ng-if="f.hint" class="fa fa-info-circle" data-content="{{f.hint}}" data-trigger="click" data-original-title="{{f.title}}" data-toggle="popover"></i></span>
+                                    <span><i ng-if="f.original!='undefined' && f.original!='\'\'' && f.original!='null'" class="fa fa-question-circle-o" data-trigger="click" data-toggle="popover" data-original-title="{{f.id}}="
+                                     data-content="{{f.original}}"></i></span>
+                                </div>
+                                <!--In most cases there are 4 columns, title,value,value,value-->
+                                <!--Calculate the width by 6/length-1-->
+
+                                <!-- Default value columns -->
+                                <div ng-switch-default>
+                                    <label ng-if="(cv.entered) && cv.valid.length > 0" style="color: red" class="control-label"><i class="fa fa-times-circle-o"></i>{{cv.valid}}</label>
+                                    <div class="input-group" ng-init="pid = $index" ng-switch="cv.type">
+                                        <span ng-if="f.type == 'currency'" class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                        <span ng-if="f.type == 'percentage'" class="input-group-addon"><i class="fa fa-percent"></i></span>
+                                        <input ng-switch-when="date" ng-readonly="cv.locked" type="{{cv.locked? 'text':'date'}}" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                        <form ng-switch-when="photoupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
+                                            <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
+                                            <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
+                                        </form>
+                                        <form ng-switch-when="fileupload" action='upload' method='post' encType="multipart/form-data" onsubmit="return false;">
+                                            <input ng-readonly="cv.locked" type="{{cv.locked? 'text':'file'}}" class="form-control" onchange="angular.element(this).scope().fileUpload(this)" ng-model="cv.value" placeholder="Pick value">
+                                            <a href="http://www.planetpdf.com/planetpdf/pdfs/pdf_tmpl.pdf" download="Monthly Report for March 2014.pdf">Download March 2014 Report</a>
+                                        </form>
+
+
+                                        <div ng-switch-when="select">
+                                            <select ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="Pick value">
+                                                <option ng-repeat="choice in f.choices" value="{{choice.value}}" ng-selected="choice.value == cv.value">{{choice.value}}</option>
+                                            </select>
+                                            <input ng-if="cv.locked" type="text" readonly="readonly" class="form-control" ng-model="cv.value" placeholder="..">
+                                        </div>
+                                        <div ng-switch-when="radio">
+                                            <div ng-if="!cv.locked" class="btn-group" data-toggle="buttons">
+                                                <label class="btn" ng-repeat="choice in f.choices" ng-class="choice.value == cv.value?'active':''">
+                                                    <input type="radio" name='{{f.id + "-" + pid}}' ng-click="cv.value = choice.value">
+                                                    <i ng-class="choice.value == cv.value ? 'fa fa-dot-circle-o fa-2x' : 'fa fa-circle-o fa-2x'"></i>
+                                                    <span>{{choice.value}}</span>
+                                                </label>
+                                            </div>
+                                            <input readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                        </div>
+                                        <textarea ng-switch-when="memo" ng-readonly="cv.locked" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
+                                        <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                        <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                        <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="dataTables_paginate paging_simple_numbers" style="float: right">
+                        <ul class="pagination">
+                            <!--paginate-->
+                            <li class="paginate_button previous" ng-class="nav[search.index-1].visible ? ' ' : ' disabled '" ng-click="changeSearch(nav[search.index-1])"><a aria-controls="example2" data-dt-idx="7" tabindex="0"><i
+                                class="fa fa-arrow-left"></i> </a></li>
+                            <li ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" ng-class="f==search?'active':''" ng-click="changeSearch(f)" class="paginate_button previous">
+                                <a aria-controls="example2" data-dt-idx="0">{{f.title}}</a>
+                            </li>
+                            <li ng-click="changeSearch(nav[search.index+1])" class="paginate_button next" ng-class="nav[search.index+1].visible && nav[search.index+1].children.length>1 ? ' ' : ' disabled '">
+                                <a aria-controls="example2" data-dt-idx="7" tabindex="0">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <div style="margin: 40px 0 20px;"></div>
+                <ul class="nav list-group affix">
+                    <li>
+                        <input class="hidden" type="text" ng-model="search" placeholder="Search figure" />
+                    </li>
+                    <li style="margin-left: 10px" ng-repeat="f in nav | pick:'children.length > 0'" ng-if="f.visible" class="nav list-group-item" ng-class="f==search?'active':''" ng-click="changeSearch(f)">
+                        <div>
+                            <span ng-bind="f.title"></span>
+                            <span ng-if="f.valid[0] != f.valid[1]" class="fa-stack fa-1x has-badge yellow" data-count="{{f.valid[0]}}/{{f.valid[1]}}">
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                         </span>
-                        <span ng-if="f.valid[0] == f.valid[1]" class="fa-stack fa-1x has-badge green" data-count="100%">
+                            <span ng-if="f.valid[0] == f.valid[1]" class="fa-stack fa-1x has-badge green" data-count="100%">
                           <i class="fa fa-stack-2x"></i>
                           <i class="fa fa-check fa-stack-2x fa-inverse"></i>
                         </span>
-                    </div>
-                </li>
-                <li>
-                    <div ng-repeat="widget in LME_MODEL.WIDGETS.children" ng-switch="widget.type">
-                        <div style="margin-bottom: 30px;"></div>
-                        <highchart ng-switch-when="polarchart" id="{{$index}}-polar-chart" config="{
+                        </div>
+                    </li>
+                    <li>
+                        <div ng-repeat="widget in LME_MODEL.WIDGETS.children" ng-switch="widget.type">
+                            <div style="margin-bottom: 30px;"></div>
+                            <highchart ng-switch-when="polarchart" id="{{$index}}-polar-chart" config="{
                 chart: {
                     polar: true,
                     height:140,
@@ -373,15 +380,12 @@
                     enableMouseTracking: false
                 }]
             }"></highchart>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-1">
-            <div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>
