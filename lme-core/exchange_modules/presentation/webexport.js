@@ -180,6 +180,7 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         path: path,
         ammount: amount,
         display: yas.display,
+        display_options: node.display_options,
         colspan: colspan,
         depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
         visible: true,
@@ -226,6 +227,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
         id: rowId,
         treeDepth: treeDepth,
         depth: yas.depth,
+        display_options: node.display_options,
         display: yas.display,
         order_id: has.join('.'),
         index: index,

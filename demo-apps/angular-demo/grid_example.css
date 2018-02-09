@@ -1076,3 +1076,7 @@ h3 i.fa-remove {
     border-radius: 3px;
     padding: 0.5rem 12px;
 }
+
+.displayAsSummation {
+    border-top: 1px solid #000000;
+}

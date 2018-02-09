@@ -146,6 +146,7 @@ model MVO uses BaseModel
       displaytype: radio;
       title: "U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn";
       top_blanklines: 1;
+      display_options: displayAsSummation;
       visible: 1;
       choices: "0:Nee|1:Ja";
      }
@@ -2369,7 +2370,6 @@ model MVO uses BaseModel
       displaytype: currency;
       title: "Principes";
       top_separator: 1;
-      display_options: displayAsSummation;
       locked: 1;
       visible: 1;
       options_title: locked;

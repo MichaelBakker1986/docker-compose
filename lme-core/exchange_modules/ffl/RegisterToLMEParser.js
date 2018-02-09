@@ -45,6 +45,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const nameIndex = indexer.schemaIndexes.name;
     const tupleIndex = indexer.schemaIndexes.tuple;
     const validIndex = indexer.schemaIndexes.valid;
+    const displayOptionsIndex = indexer.schemaIndexes.display_options;
     const lengthIndex = indexer.schemaIndexes.length;
     const patternIndex = indexer.schemaIndexes.pattern;
     const referstoIndex = indexer.schemaIndexes.refersto;
@@ -173,6 +174,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
 
         if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
+        if (node[displayOptionsIndex]) uiNode.display_options = node[displayOptionsIndex]
 
         uiNode.frequency = frequency;
 
