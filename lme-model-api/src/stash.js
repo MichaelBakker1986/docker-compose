@@ -8,28 +8,8 @@ const develop = (host == '127.0.0.1');
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
+const modelStorage = require('./ModelStorage').ModelStorage
 const uuid = require('uuid4');
-
-
-const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
-const DeltaCompareRegister = require('../../lme-core/exchange_modules/ffl/DeltaCompareRegister').DeltaCompareRegister
-const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
-
-function doDeltaCompare(name, data) {
-    const fs = require('fs');
-    const fflPath = __dirname + '/../../git-connect/resources/' + name + '.ffl';
-    if (fs.existsSync(fflPath)) {
-        const modelRegister = new Register();
-        const fflformat = new FFLFormatter(modelRegister, require('fs').readFileSync(fflPath, 'utf8'))
-        fflformat.parseProperties()
-        const otherModelRegister = new Register();
-        const otherFFLFormat = new FFLFormatter(otherModelRegister, data)
-        otherFFLFormat.parseProperties()
-        const dcompare = new DeltaCompareRegister(modelRegister, otherModelRegister)
-        const compareResults = dcompare.compare();
-        log.info(compareResults.toString());
-    }
-}
 
 class Stash {
     constructor() {
@@ -80,7 +60,16 @@ class Stash {
 
     //TODO: backupfile, on fail restore old file
     commit(user_id, name, data, type) {
-        doDeltaCompare(name, data)
+        /*
+         * Save delta's to the DB to keep track of history.
+         * Later this will be used to resolve the FFL
+         * The FFL file will always be pushed to master also
+         */
+        try {
+            modelStorage.saveDelta(name, data)
+        } catch (err) {
+            log.warn('Failed saving delta to DB', err)
+        }
         //transform ffl to JSON canvas file
         return Promise.all([write(__dirname + '/../../git-connect/resources/' + name + (type || '.ffl'), data)])
             .then(function(filename) {

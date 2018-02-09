@@ -374,6 +374,7 @@ define("hoverlink", [], function(require, exports, module) {
 
         this.getMatchAround = function(regExp, string, col) {
             var match;
+            if (!regExp) return match;
             regExp.lastIndex = 0;
             string.replace(regExp, function(str) {
                 var offset = arguments[arguments.length - 2];
@@ -503,6 +504,7 @@ define("token_tooltip", [], function(require, exports, module) {
         this.range = new Range();
         this.getMatchAround = function(regExp, string, col) {
             var match;
+            if (!regExp) return;
             regExp.lastIndex = 0;
             string.replace(regExp, function(str) {
                 var offset = arguments[arguments.length - 2];
@@ -517,7 +519,27 @@ define("token_tooltip", [], function(require, exports, module) {
             return match;
         };
         var wordMapSize = 0;
-        var regex;
+        var regex = new RegExp([].join('|'), "gi");
+        const formulaInfo = {
+            TSUM: 'TSUM(variable_name)\nSUM of TupleInstances given name',
+            MAX: 'MAX(n1,n2)\nReturn maximum value of value n1 or n2',
+            MIN: 'MIN(n1,n2)\nReturn minimum value of value n1 or n2',
+            OnZero: 'OnZero(value,alternative)',
+            TsY: 'Amount of times current period fits in a bookyear',
+            MatrixLookup: 'MatrixLookup(a,named_table,row_name,column_name)',
+            ValueT: 'Convert a period into a time-index',
+            aggregation: 'A number can be aggregated over time.\nOptions:flow|balance\nDefaults to balance',
+            "locked:": 'Describes if a variable can be changed by input.\nValid values:On|Off|0|1 or a custom formula',
+            "refers to": "Inheritance in FFL",
+            "visible:": 'Describes if a variable can be seen.\nValid values:On|Off|0|1 or a custom formula',
+            "required:": 'Describes if a variable is mandatory.\nValid values:On|Off|0|1 or a custom formula',
+            "frequency:": 'The frequency a variable-value is repeated over time.\nOptions:[document|column|timeline|none]\nDefaults to column',
+            "datatype:": 'Datatype for the variable:\nOptions:[number|string|boolean|currency|matrix|none]\nDefaults to number',
+            "fixed_decimals:": 'a number or currency datatype can be restricted to an ammount of decimals shown.',
+            displaytype: 'Displaytype for the variable:\nOptions:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\nDefaults to default',
+        }
+        var formulaRegex = new RegExp(Object.keys(formulaInfo).join('|'), "gi")
+
         this.update = function() {
             this.$timer = null;
 
@@ -568,17 +590,30 @@ define("token_tooltip", [], function(require, exports, module) {
                     regex = new RegExp(Object.keys(this.register.getIndex('name')).join("|"), 'gi')
                 }
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
-                if (!match) return;
+                var otherMath = null;
+                if (!match) otherMath = this.getMatchAround(formulaRegex, session.getLine(docPos.row), col);
+                if (match && this.register.getIndex('name')[match.value]) {
+                    const nodes = this.register.getIndex('name')[match.value];
+                    const display = nodes[this.register.schemaIndexes.title]
+                    var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
+                    this.setText(match.value + ":\n" + display + '\n' + formula);
+                    this.width = this.getWidth();
+                    this.height = this.getHeight();
+                    this.tokenText = match.value + " :\n" + display;
 
-                const nodes = this.register.getIndex('name')[match.value];
-                const display = nodes[this.register.schemaIndexes.title]
-                var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
+                } else if (otherMath) {
+                    const displayValue = otherMath.value + ":\n" + formulaInfo[otherMath.value];
+                    this.setText(displayValue);
+                    this.width = this.getWidth();
+                    this.height = this.getHeight();
+                    this.tokenText = displayValue;
 
-                this.setText(match.value + ":\n" + display + '\n' + formula);
-
-                this.width = this.getWidth();
-                this.height = this.getHeight();
-                this.tokenText = match.value + " :\n" + display;
+                } else {
+                    this.setText(null);
+                    this.tokenText = null;
+                    this.hide();
+                    return;
+                }
             }
 
             this.show(null, this.x, this.y);

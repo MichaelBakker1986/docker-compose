@@ -77,6 +77,30 @@ angular.module('lmeapp', ['angular.filter'])
             user_session.user.name = 'DEMO'
         })
         $scope.session = user_session;
+        $scope.model_history = []
+        $.get("modelChanges/" + windowModelName, function(data, status, xhr) {
+            const history = [];
+            const hashes = {};
+            for (var i = 0; i < data.data.length; i++) {
+                var obj = data.data[i];
+                obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
+
+                if (hashes[obj.uuid]) {
+                    hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
+                    continue
+                }
+                hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
+                history.push({
+                    create_time: obj.create_time,
+                    data: hashes[obj.uuid]
+                })
+            }
+            history.reverse()
+            $scope.model_history = history;
+        }).fail(function(err) {
+            console.error(err)
+        })
+
         const register = new Register();
         const debugManager = new DebugManager();
         DEBUGGER = debugManager

@@ -55,11 +55,17 @@ DeltaCompareRegister.prototype.compare = function() {
     } else {
         for (var i = 0; i < this.one.schema.length; i++) schemaMapping[i] = [i, i]
     }
+    const schema = this.other.schema;
     const delta = {
         schema: this.other.schemaIndexes,
         updates: [],
         inserts: [],
-        deletes: []
+        deletes: [],
+        changes: 0
+    }
+    delta.addChange = function(changeType, colIndex, variableName, value) {
+        delta[changeType].push([changeType, variableName, schema[colIndex], value])
+        delta.changes++
     }
     //Some kind of Internal index (not required to rebuild model)
     const internalIndexIndex = this.other.schemaIndexes.index;
@@ -88,16 +94,17 @@ DeltaCompareRegister.prototype.compare = function() {
     const otherNames = this.other.getIndex('name')
 
     //check inserts and updates
-    for (var key in otherNames) {
-        const baseRow = baseNames[key];
-        const otherRow = otherNames[key];
+    for (var variableName in otherNames) {
+        const baseRow = baseNames[variableName];
+        const otherRow = otherNames[variableName];
 
         if (!baseRow) {
             //INSERT every property for the variable
             for (var otherRowSchemaIndex = 3; otherRowSchemaIndex < otherRow.length; otherRowSchemaIndex++) {
                 const otherProperty = otherRow[schemaMapping[otherRowSchemaIndex][0]];
                 if (otherRowSchemaIndex == parentIdIndex || otherRowSchemaIndex == internalIndexIndex || otherProperty == null || otherProperty == undefined) continue
-                delta.inserts.push(['INSERT', key, schemaMapping[otherRowSchemaIndex][0], otherProperty])
+                delta.addChange('inserts', schemaMapping[otherRowSchemaIndex][0], variableName, otherProperty)
+
             }
         } else {
             for (var otherRowSchemaIndex = 3; otherRowSchemaIndex < otherRow.length; otherRowSchemaIndex++) {
@@ -107,9 +114,9 @@ DeltaCompareRegister.prototype.compare = function() {
                 const otherProperty = otherRow[schemaMapping[otherRowSchemaIndex][1]];
 
                 if ((baseProperty == null || baseProperty == undefined) && (otherProperty != null || otherProperty != undefined)) {
-                    delta.inserts.push(['INSERT', key, schemaMapping[otherRowSchemaIndex][0], otherProperty])
+                    delta.addChange('inserts', schemaMapping[otherRowSchemaIndex][0], variableName, otherProperty)
                 } else if (baseProperty != otherProperty && otherProperty != undefined && otherProperty != null && !Array.isArray(baseProperty)) {
-                    delta.updates.push(['UPDATE', key, schemaMapping[otherRowSchemaIndex][0], otherProperty])
+                    delta.addChange('updates', schemaMapping[otherRowSchemaIndex][0], variableName, otherProperty)
                 }
             }
         }
@@ -122,14 +129,14 @@ DeltaCompareRegister.prototype.compare = function() {
             for (var baseSchemaIndex = 3; baseSchemaIndex < baseRow.length; baseSchemaIndex++) {
                 const baseProperty = baseRow[schemaMapping[baseSchemaIndex][1]];
                 if (baseSchemaIndex == parentIdIndex || baseSchemaIndex == internalIndexIndex || baseProperty == null || baseProperty == undefined) continue
-                delta.deletes.push(['DELETE', key, schemaMapping[baseSchemaIndex][1], null])
+                delta.addChange('deletes', schemaMapping[baseSchemaIndex][1], key, null)
             }
         } else {
             for (var schemaIndex = 3; schemaIndex < baseRow.length; schemaIndex++) {
                 const baseProperty = baseRow[schemaMapping[schemaIndex][0]];
                 const otherProperty = otherRow[schemaMapping[schemaIndex][1]];
                 if ((otherProperty == null || otherProperty == undefined) && (baseProperty != null || baseProperty != undefined)) {
-                    delta.deletes.push(['DELETE', key, schemaMapping[schemaIndex][1]])
+                    delta.addChange('deletes', schemaMapping[schemaIndex][1], key, null)
                 }
             }
         }

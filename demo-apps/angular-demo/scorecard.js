@@ -103,7 +103,6 @@ angular
         $scope.rebuildTimeline = function() {
             $http.get('data/' + hash).then(function(data) {
                 var timeline_items = [];
-                var now = new Date().getTime();
                 for (var parentIndex = 0; parentIndex < data.data.parents.length; parentIndex++) {
                     var parent = data.data.parents[parentIndex];
                     if (data.data.id == parent.id) {

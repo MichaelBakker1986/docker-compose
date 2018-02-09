@@ -74,6 +74,15 @@ app.get('*/model', (req, res) => {
         res.json({status: 'fail', reason: err.toString()});
     })
 });
+app.get('*/modelChanges/:model_name', (req, res) => {
+    const model_name = req.params.model_name;
+    DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
+        res.json({status: 'success', data: data});
+    }).catch((err) => {
+        log.debug('Failed to fetch model changes from database', err)
+        res.json({status: 'fail', reason: err.toString()});
+    })
+});
 app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
     const model_name = req.params.model_name;
     const user_id = req.params.user_id;
