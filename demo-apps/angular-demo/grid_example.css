@@ -192,6 +192,10 @@ label[required]:not(input):after {
     color: #dd3333;
 }
 
+label.title {
+    display: inline;
+}
+
 .icon {
     display: table-cell;
     width: 20px;
