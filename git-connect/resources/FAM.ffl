@@ -3129,7 +3129,7 @@ model FAM uses BaseModel
    formula: 1;
    data_options: unscalable;
    title: "FAM";
-   displaytype: scorecard;
+   display_options: scorecard;
    choices: "0:Incomplete.|1:Complete.";
    hint: "Vul onderstaande vragen in.";
    top_blanklines: 1;

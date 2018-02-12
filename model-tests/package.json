@@ -4,7 +4,7 @@
   "description": "",
   "main": "/MVO/MVOtest.js",
   "scripts": {
-    "test": "concurrently \"node JBehave/StoryFinder.js\" \"node KSP/totalyearlycosttest.js\" \"node KSP/KSPIntegrationTest.js\" \"node tests/FFLScorecardIndexerTest.js\"  \"node tests/EconomicViewTest.js\" \"node MVO/MVOtest.js\" \"node MVO/FormatterTest.js\" \"node SCORECARDTESTMODEL/SCORECARDTESTMODELtest.js\" \"node MVO/MVOScorecardToolTest.js\""
+    "test": "concurrently \"node JBehave/StoryFinder.js\" \"node HYPOTHEEK/HYPOTHEEKTest.js\" \"node SCORECARDTESTMODEL/ScorecardBasicsTest.js\" \"node KSP/totalyearlycosttest.js\" \"node KSP/KSPIntegrationTest.js\" \"node tests/FFLScorecardIndexerTest.js\"  \"node tests/EconomicViewTest.js\" \"node MVO/MVOtest.js\" \"node MVO/FormatterTest.js\" \"node SCORECARDTESTMODEL/SCORECARDTESTMODELtest.js\" \"node MVO/MVOScorecardToolTest.js\""
   },
   "repository": {
     "type": "git",

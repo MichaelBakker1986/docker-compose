@@ -49,11 +49,16 @@ angular
             $scope.name = LME.name
             $scope.LMEMETA = LME;
 
-            for (var name in LME.nodes) {
-                if (LME.nodes[name].type == 'scorecard') {
-                    $scope.nav = LME.nodes[name].children
-                    $scope.search = LME.nodes[name].children[0]
+            const scorecard = LME.findScorecardTypes()[0]
+            if (scorecard == null) {
+                $scope.nav = []
+                $scope.search = {
+                    title: 'No scorecard',
+                    hint: 'Nothing to question in ' + LME.name + '\n.Add a displaytype/display_options=scorecard'
                 }
+            } else {
+                $scope.nav = scorecard.children
+                $scope.search = scorecard.children[0]
             }
             $scope.hasChanges = function() {
                 return LMEMETA.hasChanges()

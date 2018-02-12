@@ -6,7 +6,7 @@
 }
 
 .navbar-header a {
-    color: white;
+    color: midnightblue;
     display: block;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .navbar.navbar-fixed-top {
-    background: #3c8dbc;
+    background: whitesmoke;
 }
 
 .navbar-brand.fixed-theme,
@@ -1099,4 +1099,8 @@ h3 i.fa-remove {
 
 .real-row.warning input, .real-row.validation input {
     background-color: khaki;
+}
+
+.navbar-brand small {
+    font-size: 60%;
 }

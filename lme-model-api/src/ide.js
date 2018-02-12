@@ -140,14 +140,9 @@ angular.module('lmeapp', ['angular.filter'])
         $.getScript('engineonly.js', function(data, textStatus, jqxhr) {
             $.get("resources/" + windowModelName + ".ffl", function(data, status, xhr) {
                 aceEditor.setValue(data)
-                LMEMETA.importFFL(data)
-                LME = LMEMETA.exportWebModel()
-                $scope.LME_MODEL = LME.nodes
-                $scope.name = LME.name
-                $scope.LMEMETA = LMEMETA;
-                LMEMETA.loadData(function(response) {
-                    $scope.$digest()
-                })
+                $scope.reloadFFL()
+                //Also tell the auto-complete manager to initiate
+                changeManager.updateCursor(aceEditor.getValue(), 0);
             }).fail(function(err) {
                 console.error(err)
             })
@@ -409,6 +404,8 @@ angular.module('lmeapp', ['angular.filter'])
          **/
         $scope.changedView = function() {
             if ($scope.currentView == 'jbehaveView') {
+                /*right_editor.aceEditor.renderer.setShowGutter(false)
+                aceEditor.aceEditor.renderer.setShowGutter(false)*/
                 const names = register.getIndex('name')
                 const wordMap = []
                 for (var name in names) {
@@ -427,53 +424,11 @@ angular.module('lmeapp', ['angular.filter'])
                 })
                 $scope.reloadFFL();
                 $scope.runJBehaveTest();
+            } else {
+                /*  right_editor.aceEditor.renderer.setShowGutter(true)
+                  aceEditor.aceEditor.renderer.setShowGutter(true)*/
             }
         }
-        window.addEventListener("keydown", function(e) {
-            if (e.ctrlKey && e.shiftKey) {
-                return;
-            }
-            if (e.key == 'F5' && debugManager.active) {
-                doStep()
-                e.preventDefault();
-            }
-            if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
-                e.preventDefault();
-                aceEditor.aceEditor.execCommand("find")
-            }
-            else if ((e.ctrlKey && e.keyCode === 82)) {
-                e.preventDefault();
-                aceEditor.aceEditor.execCommand("replace")
-            }
-        })
-        $(window).bind('keydown', function(evt) {
-            if (evt.ctrlKey || evt.metaKey) {
-                switch (String.fromCharCode(evt.which).toLowerCase()) {
-                    case 's':
-                        evt.preventDefault();
-                        $('#saveFileInView').click();
-                        break;
-                    case 'f':
-                        if (evt.shiftKey) {
-                            evt.preventDefault();
-                            $scope.toggleFormatter()
-                        }
-                        break;
-                    case 'p':
-                        evt.preventDefault();
-                        $scope.sneakPreviewModel();
-                        break;
-                }
-            } else {
-                switch (evt.keyCode) {
-                    case 117://F6
-                        evt.preventDefault();
-                        $('#models').select()
-                        $('#models').focus()
-                        break;
-                }
-            }
-        });
 
         $(".toggle-expand-btn").click(function(e) {
             $(this).closest('.content .box').toggleClass('panel-fullscreen');
@@ -568,6 +523,7 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.activeVariable = [];
         $scope.schema = register.schema
         right_editor.aceEditor.on("mousedown", function() {
+            //console.info("Changes been made" + register.changes.length)
             if (register.changes.length > 0) {
                 console.info("Changes been made")
                 register.changes.length = 0
@@ -575,56 +531,10 @@ angular.module('lmeapp', ['angular.filter'])
             }
             $scope.runJBehaveTest()
         });
-        right_editor.aceEditor.commands.on("afterExec", function(e) {
-            $scope.runJBehaveTest()
-            return;
-        });
 
-        //TODO: make functionality for single formula recompilation
-        aceEditor.aceEditor.commands.on("afterExec", function(e) {
-            if ($scope.currentView !== 'FFLModelEditorView') {
-                return;
-            }
-            if (e.command.name == 'golinedown') {
-            } else if (e.command.name == 'golineup') {
-            } else if (e.command.name == 'gotoright') {
-            } else if (e.command.name == 'gotoleft') {
-            } else if (e.command.name == 'selectwordright') {
-            } else if (e.command.name == 'replace') {
-            } else if (e.command.name == 'find') {
-            } else if (e.command.name == 'selectwordleft') {
-            } else {
-                changeManager.changed = true;
-            }
-            changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
-            var annotations = [];
-            $scope.$apply(function() {
-                $scope.error = changeManager.error
-                $scope.activeVariable = changeManager.currentVariable
-
-                if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
-
-                if (changeManager.warnings.length > 0) {
-                    console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
-                }
-            })
-            if (changeManager.warnings.length > 0) {
-                for (var i = 0; i < changeManager.warnings.length; i++) {
-                    var warning = changeManager.warnings[i];
-                    for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
-                        var obj = changeManager.warnings[i].pos[j];
-                        annotations.push({
-                            row: fflModel.substring(0, obj.char).split('\n').length,
-                            column: 0,
-                            text: warning.message, // Or the Json reply from the parser
-                            type: 'error' // also warning and information
-                        })
-                    }
-                }
-
-            }
-            aceEditor.setAnnotations(annotations)
-        });
+        /**
+         * This watches the propertiesView on the right side of the page.
+         */
         $scope.$watch(function(scope) {
                 if (scope.register.changes.length > 0) {
                     console.info("Changes been made")
@@ -656,4 +566,121 @@ angular.module('lmeapp', ['angular.filter'])
             $scope.currentView = viewName;
             $scope.changedView();
         }
+        //--------------ACE EDITOR INPUTS ----------------------------------------------------------------------//
+        /**
+         *
+         * Every keystroke from the JBehaveView will pass here
+         */
+        right_editor.aceEditor.commands.on("afterExec", function(e) {
+            $scope.runJBehaveTest()
+            return;
+        });
+
+        /**
+         * TODO: make functionality for single formula recompilation
+         * Every keystroke from the ACE-IDE will pass here
+         */
+        aceEditor.aceEditor.commands.on("afterExec", function(e) {
+            var changingValue = false;
+            if ($scope.currentView !== 'FFLModelEditorView' && $scope.currentView !== 'jbehaveView') {
+                return;
+            }
+            if (e.command.name == 'golinedown') {
+            } else if (e.command.name == 'golineup') {
+            } else if (e.command.name == 'gotoright') {
+            } else if (e.command.name == 'gotoleft') {
+            } else if (e.command.name == 'selectwordright') {
+            } else if (e.command.name == 'replace') {
+            } else if (e.command.name == 'find') {
+            } else if (e.command.name == 'selectwordleft') {
+            } else if (e.command.name == 'gotolineend') {//END
+            } else if (e.command.name == 'gotolinestart') {//HOME
+            } else if (e.command.name == 'gotopagedown') {
+            } else if (e.command.name == 'gotopageup') {//PAGE-UP
+            } else if (e.command.name == 'overwrite') {//INSERT
+            } else {
+                //current variable changed.
+                console.info(e.command.name)
+                changingValue = true;
+                changeManager.changed = true;
+            }
+            changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
+            var annotations = [];
+            $scope.$apply(function() {
+                $scope.error = changeManager.error
+                $scope.activeVariable = changeManager.currentVariable
+
+                if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
+                if (changingValue) {
+                    //only reload the variable
+                    console.info('changed[' + changeManager.currentVariable + ']')
+                    $scope.runJBehaveTest();
+                }
+
+                if (changeManager.warnings.length > 0) {
+                    console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
+                }
+            })
+            if (changeManager.warnings.length > 0) {
+                for (var i = 0; i < changeManager.warnings.length; i++) {
+                    var warning = changeManager.warnings[i];
+                    for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
+                        var obj = changeManager.warnings[i].pos[j];
+                        annotations.push({
+                            row: fflModel.substring(0, obj.char).split('\n').length,
+                            column: 0,
+                            text: warning.message, // Or the Json reply from the parser
+                            type: 'error' // also warning and information
+                        })
+                    }
+                }
+
+            }
+            aceEditor.setAnnotations(annotations)
+        });
+        window.addEventListener("keydown", function(e) {
+            if (e.ctrlKey && e.shiftKey) {
+                return;
+            }
+            if (e.key == 'F5' && debugManager.active) {
+                doStep()
+                e.preventDefault();
+            }
+            if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+                e.preventDefault();
+                aceEditor.aceEditor.execCommand("find")
+            }
+            else if ((e.ctrlKey && e.keyCode === 82)) {
+                e.preventDefault();
+                aceEditor.aceEditor.execCommand("replace")
+            }
+        })
+        $(window).bind('keydown', function(evt) {
+            if (evt.ctrlKey || evt.metaKey) {
+                switch (String.fromCharCode(evt.which).toLowerCase()) {
+                    case 's':
+                        evt.preventDefault();
+                        $('#saveFileInView').click();
+                        break;
+                    case 'f':
+                        if (evt.shiftKey) {
+                            evt.preventDefault();
+                            $scope.toggleFormatter()
+                        }
+                        break;
+                    case 'p':
+                        evt.preventDefault();
+                        $scope.sneakPreviewModel();
+                        break;
+                }
+            } else {
+                switch (evt.keyCode) {
+                    case 117://F6
+                        evt.preventDefault();
+                        $('#models').select()
+                        $('#models').focus()
+                        break;
+                }
+            }
+        });
     });

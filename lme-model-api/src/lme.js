@@ -40,10 +40,7 @@ LmeAPI.prototype.exportJavaScript = function() {
  * Not used in Client UI input rendering
  */
 LmeAPI.prototype.importFFL = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl')
-}
-LmeAPI.prototype.importFFL2 = function(ffl) {
-    this.lme.importSolution(ffl, 'ffl')
+    this.lme.importFFL(ffl)
 }
 LmeAPI.prototype.setColumnOffset = function(delta) {
     this.lme.setColumnOffset(delta)

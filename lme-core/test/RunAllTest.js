@@ -10,6 +10,7 @@ const tests = [
     './FormulaSetTest',
     './fflexportTest',//.FFL Language
     './screendefinitionTest',//.screen definition
+    './webexportTest',
     './jsonValuesTest',
     './APIIntegrationTest',
     './CaseTest',

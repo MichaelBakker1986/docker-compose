@@ -6,6 +6,32 @@ const uuid = require('uuid4');
 const log = require('log6')
 const path = require('path')
 
+/**
+ * A data-state contains
+ *  - Translation file(s)    MODEL.test(1.1).csv
+ *  - FFL model files(s)     MODEL.test(0.1).ffl
+ *  - JBehave story files(s) MODEL(test-v1).story
+ *  - Excel matrix files(s)  MODEL(test-v1).xlsx
+ *  -
+ *
+ *  We want to load multiple version files runtime.
+ *  Storage is another question
+ *  Could load only last 4versions.
+ *
+ *  model(v1|2|3|4).ffl -> LME
+ *  We require state to be changed runtime, Since we update small parts of the model only constantly
+ *  And ability to change model also.
+ *
+ *  TODO: bug in JBehave view while editing FFL.
+ *
+ *  root
+ *  {
+ *    version: a
+ *  }
+ *  is combined with model X uses BaseModel {
+ *  will become x_root_value   = null
+ *  will become x_root_version = a
+ */
 function ModelStorage() {
 }
 
@@ -18,6 +44,17 @@ ModelStorage.prototype.getHistory = function(name) {
         throw Error('Unable to get history for model with name ' + name, err)
     });
 }
+/**
+ * TODO: WE KNOW FOR ALL VALUES IN THE MODEL WHAT VALUES IT OUTPUTS IN THE MONTOCARLO TEST
+ * STORE THESE VALUES,  AND MATCH IT VS UPDATES!!!!!
+ * THIS WAY we do not explicitly need a JBehave Test, we can conftront the editor with the changes once he want to edit formula's
+ *
+ * Variables * FormulaSets[doc|column_trend|column_notrend_user|valuation]
+ * So we can create a DELTA-COMPARE between calculations. ALSO internal calculations will be reported
+ *
+ * document_title: 'Hoi';
+ *   column_title: 'Other';
+ */
 ModelStorage.prototype.saveDelta = function(name, data) {
     const fflPath = path.resolve(__dirname + '/../../git-connect/resources/' + name + '.ffl');
     const compareResults = this.doDeltaCompare(name, fflPath, data)

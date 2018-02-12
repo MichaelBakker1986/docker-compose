@@ -10,7 +10,6 @@ if (!global.MatrixLookup) {
 if (!global.MATRIX_VALUES) {
     global.MATRIX_VALUES = {}
 }
-
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
     for (var func in jsMath) {

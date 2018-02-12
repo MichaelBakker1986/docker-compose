@@ -19,7 +19,7 @@ LMEService.prototype.initializeFFlModelData = function(data, path) {
         const timeAxis = new TimeAxis(require('./resources/CustomImport'));
         JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
     }
-    JSWorkBook.importSolution(data, "ffl");
+    JSWorkBook.importFFL(data);
     var validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
     var validateFeedback = JSWorkBook.validateImportedSolution();

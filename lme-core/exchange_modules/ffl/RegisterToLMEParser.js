@@ -50,10 +50,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const patternIndex = indexer.schemaIndexes.pattern;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
+    const frequencyIndex = indexer.schemaIndexes.frequency;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
     const aggregationIndex = indexer.schemaIndexes.aggregation;
     const modifierIndex = indexer.schemaIndexes.modifier;
+    const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
+
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
     const choiceIndex = indexer.schemaIndexes.choices;
@@ -63,7 +66,8 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const formulaIndexes = this.formulaIndexes
     var formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']
     for (var i = 0; i < formulas.length; i++) {
-        this.formulaIndexes.push(data.schemaIndexes[formulas[i]])
+        //test if the formula is in the model at all
+        if (data.schemaIndexes[formulas[i]] != null) this.formulaIndexes.push(data.schemaIndexes[formulas[i]])
     }
     //only inherit properties once.
     const inherited = {}
@@ -76,6 +80,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
             //first inherit from parents of parents.
             if (supertype[fflRegister.referstoIndex]) inheritProperties(supertype)
+
             for (var i = 0; i < supertype.length; i++) {
                 if (node[i] == null) node[i] = supertype[i];
             }
@@ -91,15 +96,41 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             while (tuples.length > 0 && !tuples[depth - 1]) tuples.length--
         }
         const nodeName = node[nameIndex];
-        var type = node[displayTypeIndex]
         inheritProperties(node)
 
+        var displaytype = node[displayTypeIndex] || 'number'
+        var datatype = node[dataTypeIndex] || 'number'
+        var frequency = node[frequencyIndex] || 'column'
+        //TODO: paragraph when no children.
+        //TODO: else column frequency..
+        /*
+         * Don't forget reference variables
+         * Don't forget num(1,2) datatype parsing. (fixed_decimals)
+         * Don't forget unscalable number
+         * Choice -> " and " <- fix
+         * merge display options and displaytype.
+         */
+        if (node[tupleIndex]) {
+            displaytype = 'paragraph'
+        }
+        if (displaytype == 'paragraph') {
+            datatype = 'string'
+            frequency = 'none'
+        }
         // expecting an parentName..
         var parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
         if (parentId == 'root') {
             parentId = undefined;
         }
-
+        /**
+         * number:2 means: number with 2 fixed decimals
+         */
+        var fixed_decimals = node[decimalsIndex];
+        var startdecimalsIndex;
+        if ((startdecimalsIndex = displaytype.indexOf('(')) > -1) {
+            fixed_decimals = displaytype.substr(startdecimalsIndex).slice(1, -1)
+            displaytype = displaytype.substr(0, startdecimalsIndex);
+        }
         /**
          * This is where formula-sets are combined.
          * if the node has and trend and notrend formula, the target formula will be x.trend ? node.formula_trend : valueFormula
@@ -107,32 +138,48 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
          * Document formulaset is notrend, formula = notrend
          * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
          */
-        var trendformula = node[trend_formulaIndex];
-        var valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
-        if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
-            valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
-        }
-        if (node[fflRegister.frequencyIndex] == 'column' && node[dataTypeIndex] == 'number' && node[aggregationIndex] == 'flow') {
-            valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + valueFormula + ')'
+        var valueFormula;
+        /**
+         * Copy - variable
+         */
+        if (node[referstoIndex]) {
+            valueFormula = node[referstoIndex]
+        } else {
+            var trendformula = node[trend_formulaIndex];
+            valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
+            if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
+                valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
+            }
+            if (frequency == 'column' && datatype == 'number' && node[aggregationIndex] == 'flow') {
+                valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + valueFormula + ')'
+            }
+
+            if (node[modifierIndex] == '=') {
+                const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
+                var formula = '0';
+                for (var i = 0; i < siblings.length; i++) {
+                    if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
+                        formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
+                    }
+                }
+                valueFormula = formula;
+            }
         }
         //if column && number.. (aggregate)
-
-        if (node[modifierIndex] == '=') {
-            const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
-            var formula = '0';
-            for (var i = 0; i < siblings.length; i++) {
-                if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
-                    formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
-                }
+        /**
+         * optional displaytype =select.
+         * Having the choice member is enough
+         */
+        if (node[choiceIndex] || displaytype == 'select') {
+            if (displaytype == 'date') {
+                //NO-OP (for now..., the choices are used to format the date-picker.
             }
-            valueFormula = formula;
-        }
-        if (type == 'select') {
-            if (!node[choiceIndex]) {
-                if (log.debug) log.debug('Row [' + nodeName + '] is type [select], but does not have choices')
+            else if (!node[choiceIndex]) {
+                if (log.debug) log.debug('Row [' + nodeName + '] is displaytype [select], but does not have choices')
             } else if (node[choiceIndex].split('|').length == 2) {
-                type = 'radio'
+                displaytype = 'radio'
             } else {
+                displaytype = 'select'
                 if (log.TRACE) log.trace('[' + nodeName + '] ' + node.choices)
             }
         }
@@ -141,15 +188,16 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         if (nodeName.match(/MAP[0-9,A-z]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
             if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
                 node[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'
-                node[fflRegister.frequencyIndex] = 'none'
+                frequency = 'none'
+                node[frequencyIndex] = 'none'
             }
-            type = 'string';
+            displaytype = 'string';
             node[displayOptionsIndex] = nodeName.split("_").pop().toLowerCase();
         } else if (nodeName.match(/MAP[0-9,A-z]+_PARAGRAAF[0-9]+$/i)) {
-            node[fflRegister.frequencyIndex] = 'none'
-            type = 'paragraph'
+            node[frequencyIndex] = 'none'
+            frequency = 'none'
+            displaytype = 'paragraph'
         }
-
 
         if (!node[validIndex]) {
             //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
@@ -159,7 +207,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ')');
             if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
             if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
-            if (node[dataTypeIndex] == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
+            if (datatype == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
             //its also only interesting when its a required field and entered
             // or when its entered and required
             //' + node[nameIndex] + '.required &&
@@ -167,14 +215,12 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
             //if (validFormulas.length > 0) console.info(node[nameIndex] + ':' + node[validIndex])
         }
-        const frequency = (node[tupleIndex]) ? 'none' : (node[fflRegister.frequencyIndex] || 'column');
-        if (node[tupleIndex]) type = 'paragraph'
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', type), type, frequency);
+        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype), displaytype, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
 
-        if (node[fflRegister.decimalsIndex]) uiNode.decimals = parseInt(node[fflRegister.decimalsIndex]);
+        if (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals);
         if (node[displayOptionsIndex]) uiNode.display_options = node[displayOptionsIndex]
 
         uiNode.frequency = frequency;
@@ -203,15 +249,16 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true
 
-        uiNode.datatype = node[dataTypeIndex] || 'number';
+        uiNode.datatype = datatype;
 
         if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
 
         for (var i = 0; i < formulaIndexes.length; i++) {
             const index = formulaIndexes[i];
             if (node[index]) {
-                if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]])
+                if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {
                     SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null), undefined, frequency);
+                }
             }
         }
     });
@@ -223,7 +270,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
  * @param {optional} modelName
  */
 RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type) {
-    if (!formula) return type == 'string' ? AST.STRING("") : {
+    if (!formula) return type == 'string' ? AST.STRING("") : type == 'number' ? {
+        "type": "Identifier",
+        "name": 'NA'
+    } : {
         "type": "Identifier",
         "name": 'null'
     }

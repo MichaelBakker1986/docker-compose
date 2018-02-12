@@ -1,6 +1,8 @@
 @Summary: Nested Tuple JBehave tests
 
-When TupleVar1(Basic) is set to 100
-And TupleVar2(Basic) is set to 200
+When NestedTupleVariable(Basic) is set to 100
+And NestedTupleVariable(Basic) is set to 200
+
+Then NestedTupleVariable frequency should be column
 
 Then RootVariable should be 12347

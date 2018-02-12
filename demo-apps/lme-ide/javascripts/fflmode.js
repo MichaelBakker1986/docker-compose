@@ -535,6 +535,7 @@ define("token_tooltip", [], function(require, exports, module) {
             "required:": 'Describes if a variable is mandatory.\nValid values:On|Off|0|1 or a custom formula',
             "frequency:": 'The frequency a variable-value is repeated over time.\nOptions:[document|column|timeline|none]\nDefaults to column',
             "datatype:": 'Datatype for the variable:\nOptions:[number|string|boolean|currency|matrix|none]\nDefaults to number',
+            "options_title:": 'Descibes if a title can be changed by user.\nOptions: locked|unlocked.\n Defaults to unlocked',
             "fixed_decimals:": 'a number or currency datatype can be restricted to an ammount of decimals shown.',
             displaytype: 'Displaytype for the variable:\nOptions:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\nDefaults to default',
         }

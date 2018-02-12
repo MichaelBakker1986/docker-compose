@@ -68,9 +68,6 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
         }
     }
     const changedCurrentVariable = this.currentVariableName != currentVariable;
-    /* console.info(namedIndex)
-     console.info(idIndex)
-     console.info(doubles)*/
     if ((this.changed || changedCurrentVariable) && currentVariable && this.namedIndex[currentVariable]) {
         this.currentVariableName = currentVariable
         var variable = this.register.createInformationObject(this.currentVariableName, new RegisterToFFL(this.register).hiddenProperties)

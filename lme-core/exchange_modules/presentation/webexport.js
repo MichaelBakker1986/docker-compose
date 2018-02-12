@@ -36,13 +36,28 @@
 const SolutionFacade = require('../../src/SolutionFacade');
 const PropertiesAssembler = require('../../src/PropertiesAssembler');
 
-function WebExport() {
+/**
+ * Parser object
+ */
+function WebExportParser() {
     this.exportAsObject = true;
     this.hide = true;
     this.name = 'webexport';
     this.headername = 'Native Object Web Presentation';
 }
 
+/**
+ * LMETree is a array-based representation of the internal data-structure
+ * Easy to manipulate with Tuples,
+ *  - First-level caching. (SetValue will increment all getters to just retrieve the values once)
+ *  - Basic NULL and Empty string to NA converter
+ * Every object in the members, no|nodes and rows have the DOCUMENT properties
+ * the cols member in the rows is a list of repeated elements in time
+ *
+ *  - a Document frequency variable contains [title,document_value]
+ *  - a None frequency variable contains [document_value]
+ *  - a Column frequency variable contains [title,{column_value*,}+]
+ */
 function LMETree(name, workbook) {
     this.name = name;
     this.workbook = workbook;
@@ -58,6 +73,28 @@ function LMETree(name, workbook) {
         timeline: [1, workbook.context.columnSize]
     }
     this.columns = workbook.context.columns;
+    const rowColumns = workbook.context.columns.slice();
+    if (this.columns.indexOf('choices') == -1) rowColumns.push('choices')
+    this.propertyNames = rowColumns
+    this.tuplecounter = 0;
+}
+
+/**
+ * Sort created rows output for UI
+ */
+LMETree.prototype.sort = function() {
+    this.rows.sort((a, b) => {
+        if (a.order_id == b.order_id) throw Error('Duplicate variable names in financial model are not supported. Choose an unique name for every variable. [' + a.id + '] in \'' + b.path + '\' and in \'' + a.path + '\'')
+        return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
+    })
+}
+LMETree.prototype.findScorecardTypes = function() {
+    const scorecards = []
+    for (var name in this.no) {
+        const row_element = this.no[name];
+        if (row_element.type == 'scorecard' || row_element.display_options == 'scorecard') scorecards.push(row_element)
+    }
+    return scorecards;
 }
 
 function noChange(workbook, rowId, col, index, type, yas) {
@@ -100,12 +137,6 @@ function changeAndCache(workbook, rowId, col, index, type, yas) {
             return r;
         },
         set: function(v) {
-            /*if (v != null && ((v.indexOf('+') > -1) || (v.indexOf('-') > -1) || (v.indexOf('/') > -1) || (v.indexOf('*')) > -1)) {
-                if (!v.endsWith('+') && !v.endsWith('-'))
-                    v = eval(v)
-                else
-                    return
-            }*/
             workbook.set(rowId, (v == null || v == '') ? null : v, col, index, yas);
         }
     }
@@ -128,7 +159,6 @@ var properties = {
     choices: {cache: true, prox: noChange}
 }
 
-var tuplecounter = 0;
 LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth) {
     const tree = this;
     const unique = yas.display + '__' + node.rowId
@@ -136,7 +166,6 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
     const rowId = node.rowId;
     const amount = this.repeats.document[0]
     const colspan = this.repeats.document[1];
-    const type = 'tuple_add';
     const parent = this.nodes[yas.display + '_' + treePath[treePath.length - 1]];
     const path = treePath.join('.');
     const has = node.hash.slice();
@@ -160,9 +189,8 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         order_id: has.join('.'),
         treeDepth: treeDepth,
         add: function() {
-            const inneryas = workbook.addTuple(node.rowId, ++tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
+            const inneryas = workbook.addTuple(node.rowId, ++tree.tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
             workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
-
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
                 if (yasi == 'new') {
                     tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth)
@@ -182,7 +210,6 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         display: yas.display,
         colspan: colspan,
         depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
-        visible: true,
         cols: [{
             value: unique,
             entered: false,
@@ -194,8 +221,14 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         children: []
     };
     if (node.display_options) rv.display_options = node.display_options;
-
-    Object.defineProperty(rv, 'title', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
+    /**
+     * Proxy properties to the row object
+     */
+    for (var columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+        const col = this.columns[columnIndex];
+        rv[col] = null;
+        Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, undefined, yas));
+    }
     if (parent) parent.children.push(rv);
     this.nodes[unique] = rv;
     this.rows.push(rv)
@@ -207,8 +240,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const amount = this.repeats[node.frequency][0]
     const colspan = this.repeats[node.frequency][1];
     const type = node.displayAs;
-    const datatype = node.datatype
-    const displaytype = type;// node.datatype;
+    const displaytype = type;
     const path = treePath.join('.')
     const has = node.hash.slice();
     //alright this is a big step. and seems to work (there is a variable set wrongly.)
@@ -244,13 +276,14 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     /**
      * Proxy properties to the column objects
      */
-    var rt = {}
+    const rt = {}
     Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (node.frequency !== 'none') {
         rv.cols.push({
             value: null,
             entered: null,
             type: 'title',
+            visible: true,
             locked: null,
             valid: null
         });
@@ -266,34 +299,31 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
             valid: null
         }
         rv.cols.push(r);
-
-        Object.defineProperty(r, 'value', properties.value.prox(workbook, rowId, 'value', index, displaytype, yas));
-        Object.defineProperty(r, 'visible', properties.visible.prox(workbook, rowId, 'visible', index, displaytype, yas));
-        Object.defineProperty(r, 'entered', properties.entered.prox(workbook, rowId, 'entered', index, displaytype, yas));
-        Object.defineProperty(r, 'required', properties.required.prox(workbook, rowId, 'required', index, displaytype, yas));
-        Object.defineProperty(r, 'locked', properties.locked.prox(workbook, rowId, 'locked', index, displaytype, yas));
-        Object.defineProperty(r, 'valid', properties.locked.prox(workbook, rowId, 'valid', index, displaytype, yas));
+        for (var propertyIndex = 0; propertyIndex < this.propertyNames.length; propertyIndex++) {
+            const propertyName = this.propertyNames[propertyIndex];
+            Object.defineProperty(r, propertyName, properties[propertyName].prox(workbook, rowId, propertyName, index, displaytype, yas));
+        }
     }
     /**
      * Proxy properties to the row object
      */
-    this.columns.forEach(function(col) {
+    for (var columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
+        const col = this.columns[columnIndex];
         rv[col] = null;
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype, yas));
-    });
+    }
     const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
     if (parent) parent.children.push(rv);
     this.nodes[unique] = rv;
     this.no[rowId] = rv;
     this.rows.push(rv)
 }
-WebExport.prototype.parseData = function(webExport, workbook) {
+WebExportParser.prototype.parseData = function(webExport, workbook) {
     return SolutionFacade.createSolution(workbook.modelName);
 }
 
-WebExport.prototype.deParse = function(rowId, workbook) {
+WebExportParser.prototype.deParse = function(rowId, workbook) {
     const modelName = workbook.getSolutionName();
-
     const lmeTree = new LMETree(modelName, workbook);
     PropertiesAssembler.findAllInSolution(modelName, function(node) {
         lmeTree.names[node.rowId] = true;
@@ -325,13 +355,7 @@ WebExport.prototype.deParse = function(rowId, workbook) {
             }
         }
     }, workbook.resolveY(0).parent, null, 0)
-    lmeTree.offset = 0;
-    lmeTree.sort = function() {
-        lmeTree.rows.sort((a, b) => {
-            if (a.order_id == b.order_id) throw Error()
-            return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
-        })
-    }
+
     return lmeTree;
 }
-SolutionFacade.addParser(new WebExport())
+SolutionFacade.addParser(new WebExportParser())

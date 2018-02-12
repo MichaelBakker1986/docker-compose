@@ -5,12 +5,13 @@
  */
 const Walker = require('../../git-connect/FileWalker').FileWalker
 const walker = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
+const walker2 = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
 const fs = require('fs')
 const path = require('path')
 const log = require('log6')
 const exec = require('child-process-promise').exec;
 
-walker.walk(function(file) {
+const visit = function(file) {
     fs.exists(file.replace(/(\(\w+\))?\.story/gm, '.ffl'), function(exists) {
             if (exists) {
                 const fflFile = file.replace(/(\(\w+\))?\.story/gm, '.ffl');
@@ -28,4 +29,6 @@ walker.walk(function(file) {
             }
         }
     )
-}, true)
+};
+walker.walk(visit, true)
+walker2.walk(visit, true)

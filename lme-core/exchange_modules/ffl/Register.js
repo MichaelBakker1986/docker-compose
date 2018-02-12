@@ -13,9 +13,7 @@ function Register() {
 Register.prototype.clean = function() {
     this.header = null;
     this.constants = []
-    for (var j = 0; j < this.createdIndexes.length; j++) {
-        delete this[this.createdIndexes[j]];
-    }
+    for (var j = 0; j < this.createdIndexes.length; j++) delete this[this.createdIndexes[j]];
     this.createdIndexes = []
     this.schema.length = 0
     this.i = []
@@ -25,9 +23,7 @@ Register.prototype.clean = function() {
     //Something alike if (VARIABLENAME.pattern) VARIABLENAME.valid = if(VARIABLENAME.test(VARIABLENAME),'','Invalid Input')
     //therefore adding the property 'valid 'too late while parsing.
     var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children', 'valid']//expect 'valid' to exist
-    for (var j = 0; j < schema.length; j++) {
-        this.addColumn(schema[j]);
-    }
+    for (var j = 0; j < schema.length; j++) this.addColumn(schema[j]);
 }
 Register.prototype.getIndex = function(name) {
     if (!this[name]) this.createIndex(name)
@@ -46,11 +42,8 @@ Register.prototype.value = function(idx, key, value) {
     this.i[idx][this.schemaIndexes[key]] = value
 }
 Register.prototype.find = function(key, value) {
-    const idx = this.schemaIndexes[key]
     const result = []
-    for (var i = 0; i < this.i.length; i++) {
-        if (this.i[i][idx] === value) result.push(this.i[i])
-    }
+    for (var i = 0; i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
     return result;
 }
 //can only be unique indexes, string based.
@@ -58,9 +51,8 @@ Register.prototype.createIndex = function(name) {
     if (!this[name]) {
         this.createdIndexes.push(name)
         const index = {}
-        const sindex = this.schemaIndexes[name]
         const a = this.i
-        for (var i = 0; i < a.length; i++) index[a[i][sindex]] = a[i]
+        for (var i = 0; i < a.length; i++) index[a[i][this.schemaIndexes[name]]] = a[i]
         this[name] = index
     }
 }

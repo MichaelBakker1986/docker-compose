@@ -19,7 +19,7 @@ try {
     const scorecarddata = modelRegister.header + '{\n' + new RegisterToFFL(indexer).toGeneratedFFL(undefined, 'MVO').join('\n');
     const lme = new LME();
     lme.lme.modelName = "MVO"
-    lme.importFFL2(scorecarddata)
+    lme.importFFL(scorecarddata)
     var validate = lme.lme.validateImportedSolution();
     lme.lme.fixProblemsInImportedSolution();
     assert.ok(lme.lme.validateImportedSolution().valid);

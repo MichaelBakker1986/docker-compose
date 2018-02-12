@@ -49,6 +49,12 @@ JSWorkBook.prototype.setColumnOffset = function(delta) {
 JSWorkBook.prototype.getTimeViews = function() {
     return this.xaxis;
 }
+/**
+ * workbook modelName leads to data modelName
+ */
+JSWorkBook.prototype.importFFL = function(data) {
+    this.importSolution(data, 'ffl')
+}
 JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
     this.solution = solution;
@@ -217,6 +223,9 @@ function validateImportedSolution() {
  */
 JSWorkBook.prototype.visitSolutionFormulas = function(visitor) {
     return this.solution.formulas.forEach(visitor);
+}
+JSWorkBook.prototype.exportWebModel = function(rowId) {
+    return this.export('webexport', rowId)
 }
 JSWorkBook.prototype.export = function(parserType, rowId) {
     return SolutionFacade.exportSolution(parserType, rowId, this);

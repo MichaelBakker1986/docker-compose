@@ -90,15 +90,7 @@ function RegisterToFFL(register) {
         'Off': true,
         'No': true
     }
-    this.defaultValues[this.requiredIndex] = {
-        undefined: true,
-        null: true,
-        '0.0': true,
-        '0': true,
-        'false': true,
-        'No': true,
-        'Off': true
-    }
+    this.defaultValues[this.requiredIndex] = this.defaultValues[this.lockedIndex];
 }
 
 RegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName) {

@@ -17,27 +17,33 @@ const functionMapper = {
                 columnId = (parseInt(args[4]) || 1) - 1
             return [function() {
                 // const locationDetails = workbook.locate(variableName, tupleIndexName)
-                const yas = workbook.resolveYas(variableName, tupleIndexName)
-                const lockedValue = workbook.get(variableName, 'locked', columnId, yas);
-                workbook.set(variableName, value, 'value', columnId, yas)
-                const validValue = workbook.get(variableName, 'valid', columnId, yas);
-
-                if (log.TRACE) log.trace('[%s]: %s %s', linenumber, variableName, tupleIndexName)
-                if (lockedValue) {
-                    return {
-                        status: 'fail',
-                        message: variableName + " is locked "
+                if (log.TRACE) log.trace('JBehave called line [%s]: %s %s', linenumber, variableName, tupleIndexName)
+                if (workbook.getNode(variableName)) {
+                    const yas = workbook.resolveYas(variableName, tupleIndexName)
+                    const lockedValue = workbook.get(variableName, 'locked', columnId, yas);
+                    workbook.set(variableName, value, 'value', columnId, yas)
+                    const validValue = workbook.get(variableName, 'valid', columnId, yas);
+                    if (lockedValue) {
+                        return {
+                            status: 'fail',
+                            message: variableName + " is locked "
+                        }
                     }
-                }
-                else if (validValue.length > 0) {
-                    return {
-                        status: 'fail',
-                        message: value + " is not a valid value for " + variableName + " because " + validValue
+                    else if (validValue.length > 0) {
+                        return {
+                            status: 'fail',
+                            message: value + " is not a valid value for " + variableName + " because " + validValue
+                        }
+                    } else {
+                        return {
+                            status: 'info',
+                            message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
+                        }
                     }
                 } else {
                     return {
-                        status: 'info',
-                        message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
+                        status: 'fail',
+                        message: variableName + " is does not exist"
                     }
                 }
             }]
@@ -78,6 +84,28 @@ const functionMapper = {
                 } else if (validValue.length > 0) {
                     result.status = 'fail'
                     result.message = rawValue + " is not a valid value for " + variableName + " because " + validValue
+                } else {
+                    result.status = 'info'
+                    result.message = 'Variable ' + variableName + " = " + calculatedValue + ' is ' + value + " [" + rawValue + "]";
+                }
+                return result;
+            }
+            ]
+        }
+    },
+    assertProperty: {
+        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))?\.(\w+) should (?:have |be )? ([-0-9,.A-z]+)/i,
+        call: function(workbook, linenumber, line, args) {
+            const variableName = args[0], tupleIndexName = args[1], pname = args[3], value = args[4];
+            return [function() {
+                const result = {};
+                const yas = workbook.resolveYas(variableName, tupleIndexName)
+                const rawValue = workbook.get(variableName, pname, null, yas);
+                var calculatedValue = rawValue;
+                if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s]  [%s]', linenumber, calculatedValue, variableName, value)
+                if (calculatedValue != value) {
+                    result.status = 'fail'
+                    result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
                 } else {
                     result.status = 'info'
                     result.message = 'Variable ' + variableName + " = " + calculatedValue + ' is ' + value + " [" + rawValue + "]";

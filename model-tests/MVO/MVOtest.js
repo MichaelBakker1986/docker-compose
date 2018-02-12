@@ -19,7 +19,7 @@ nodes.Q_FINAL_REPORT_VISIBLE.value = true
 const [Q_MAP01_VRAAG01_MEMO, FES_LAYOUTNR, RootSub1, FES_COLUMN_VISIBLE] = [nodes.Q_MAP01_VRAAG01_MEMO, nodes.FES_LAYOUTNR, nodes.RootSub1, nodes.FES_COLUMN_VISIBLE];
 const [Q_MAP01, Q_MAP01_ENTEREDREQUIREDVARS, Q_MAP01_REQUIREDVARS, Q_MAP01_PARAGRAAF00, Q_MAP01_VRAAG01] = [nodes.Q_MAP01, nodes.Q_MAP01_ENTEREDREQUIREDVARS, nodes.Q_MAP01_REQUIREDVARS, nodes.Q_MAP01_PARAGRAAF00, nodes.Q_MAP01_VRAAG01];
 assert(!Q_MAP01_VRAAG01_MEMO.visible)
-assert(Q_MAP01.value == undefined)
+assert.equal(Q_MAP01.value, NA)
 Q_MAP01.value = Q_MAP01.choices[0].value
 assert(Q_MAP01.value == "Onvolledig ingevuld.")
 Q_MAP01.value = Q_MAP01.choices[1].value

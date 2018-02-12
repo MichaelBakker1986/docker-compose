@@ -1,35 +1,27 @@
- // model "Personal Finance"
- // created by FINAN 3.2.57.19
-
- import FinanMath.*;
- import BaseModel.*;
-
- model HYPOTHEEK uses BaseModel
- {
- version: "0.1";
- ffl_version: "1.2";
+model HYPOTHEEK uses BaseModel
+{
  root
  {
   variable Q_ROOT
   {
    datatype: number;
    frequency: document;
-   displaytype: scorecard;
    title: "Monli Hypotheek";
-   locked: 1;
    visible: 1;
    options_title: locked;
+   displaytype: scorecard;
+   locked: 1;
    options: locked;
    variable Q_MAP01
    {
     datatype: number;
     frequency: document;
-    displaytype: currency;
     title: "Jouw gegevens";
     top_blanklines: 1;
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
+    locked: 1;
     options: locked;
     variable Q_MAP01_WARNING
     {
@@ -67,31 +59,31 @@
      frequency: document;
      data_options: unscalable;
      title: "Persoonsgegevens 1";
-     locked: 1;
      visible: 1;
      options_title: locked;
+     locked: 1;
      options: locked;
      variable Partner01Initialen
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Initialen";
       top_blanklines: 1;
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01VoorNaam
      {
       valid: If(Partner01VoorNaam.entered and Length(Partner01VoorNaam) < 3,"Te kort","");
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Voornaam";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01Tussenvoegsel
      {
@@ -106,11 +98,11 @@
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Achternaam";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01Meisjesnaam
      {
@@ -125,135 +117,135 @@
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Geslacht";
       visible: 1;
-      choices: "1:Man|2:Vrouw";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Man|2:Vrouw";
      }
      variable Partner01GeboorteDatum
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: date;
       title: "Geboortedatum";
       visible: 1;
       options_title: locked;
+      required: 1;
+      displaytype: date;
      }
      variable Partner01BurgerlijkeStaat
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Burgerlijke staat";
       visible: 1;
-      choices: "1:Alleenstaand|2:Alleenstaand met kinderen|11:Gehuwd/samenwonend|12:Gehuwd/samenwonend met kinderen";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Alleenstaand|2:Alleenstaand met kinderen|11:Gehuwd/samenwonend|12:Gehuwd/samenwonend met kinderen";
      }
      variable Partner01Geboorteland
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Geboorteland";
       visible: 1;
-      choices: "1:NL|2:BE|3:DE";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:NL|2:BE|3:DE";
      }
      variable Partner01Geboorteplaats
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Geboorteplaats";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01Nationaliteit
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Nationaliteit";
       visible: 1;
-      choices: "1:NL|2:BE|3:DE";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:NL|2:BE|3:DE";
      }
      variable Partner01IDType
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Identificatietype";
       visible: 1;
-      choices: "1:Europese identiteitskaart|2:Paspoort|3:Rijbewijs";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Europese identiteitskaart|2:Paspoort|3:Rijbewijs";
      }
      variable Partner01IdentificatieNummer
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Identificatienummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01BSN
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Burgerservicenummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01Telefoonnummer
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Telefoonnummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner01MetPartner
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Jouw situatie";
       visible: 1;
-      choices: "1:Ik koop alleen|2:Ik koop samen";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Ik koop alleen|2:Ik koop samen";
      }
     }
     variable Q_MAP01_HULPVARIABELEN
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Hulpvariabelen";
-     locked: 1;
      visible: 0;
      options_title: locked, invisible;
+     displaytype: currency;
+     locked: 1;
      options: locked, invisible;
      variable Q_MAP01_REQUIREDVARS
      {
@@ -261,13 +253,13 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal verplichte velden (1)";
       top_blanklines: 1;
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
      variable Q_MAP01_ENTEREDREQUIREDVARS
      {
@@ -275,12 +267,12 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
     }
    }
@@ -288,12 +280,12 @@
    {
     datatype: number;
     frequency: document;
-    displaytype: currency;
     title: "Gegevens van jou partner";
     top_blanklines: 1;
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
+    locked: 1;
     options: locked;
     variable Q_PARTNER_GEGEVENS_WARNING
     {
@@ -322,30 +314,30 @@
      frequency: document;
      data_options: unscalable;
      title: "Persoonsgegevens partner";
-     locked: 1;
      visible: If(Partner01MetPartner=2,1,0);
      options_title: locked;
+     locked: 1;
      options: locked;
      variable Partner02Initialen
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Initialen";
       top_blanklines: 1;
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02VoorNaam
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Voornaam";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02Tussenvoegsel
      {
@@ -360,11 +352,11 @@
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Achternaam";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02Meisjesnaam
      {
@@ -379,112 +371,112 @@
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Geslacht";
       visible: 1;
-      choices: "1:Man|2:Vrouw";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Man|2:Vrouw";
      }
      variable Partner02GeboorteDatum
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: date;
       title: "Geboortedatum";
       visible: 1;
       options_title: locked;
+      required: 1;
+      displaytype: date;
      }
      variable Partner02BurgerlijkeStaat
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Burgerlijke staat";
       visible: 1;
-      choices: "1:Alleenstaand|2:Alleenstaand met kinderen|11:Gehuwd/samenwonend|12:Gehuwd/samenwonend met kinderen";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Alleenstaand|2:Alleenstaand met kinderen|11:Gehuwd/samenwonend|12:Gehuwd/samenwonend met kinderen";
      }
      variable Partner02Geboorteland
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Geboorteland";
       visible: 1;
-      choices: "1:NL|2:BE|3:DE";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:NL|2:BE|3:DE";
      }
      variable Partner02Geboorteplaats
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Geboorteplaats";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02Nationaliteit
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Nationaliteit";
       visible: 1;
-      choices: "1:NL|2:BE|3:DE";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:NL|2:BE|3:DE";
      }
      variable Partner02IDType
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Identificatietype";
       visible: 1;
-      choices: "1:Europese identiteitskaart|2:Paspoort|3:Rijbewijs";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Europese identiteitskaart|2:Paspoort|3:Rijbewijs";
      }
      variable Partner02IdentificatieNummer
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Identificatienummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02BSN
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Burgerservicenummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
      variable Partner02Telefoonnummer
      {
       datatype: string;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
       title: "Telefoonnummer";
       visible: 1;
       options_title: locked;
+      required: 1;
      }
     }
    }
@@ -493,11 +485,11 @@
     datatype: number;
     frequency: document;
     formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
-    displaytype: currency;
     title: "Jouw nieuwe woning";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
+    locked: 1;
     options: locked;
     variable Q_MAP02_WARNING
     {
@@ -533,11 +525,11 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Jouw nieuwe woning";
-     locked: 1;
      visible: 1;
      options_title: locked;
+     displaytype: currency;
+     locked: 1;
      options: locked;
      variable Woning_Straat
      {
@@ -589,13 +581,13 @@
      {
       datatype: number;
       frequency: document;
-      inputRequired: 1;
       data_options: unscalable;
-      displaytype: select;
       title: "Soort woning";
       visible: 1;
-      choices: "1:Eengezinswoning|2:Eengezinswoning met garage|3:Flat of appartement|4:Flat of appartement met garage";
       options_title: locked;
+      required: 1;
+      displaytype: select;
+      choices: "1:Eengezinswoning|2:Eengezinswoning met garage|3:Flat of appartement|4:Flat of appartement met garage";
      }
      variable Woning_Bouwjaar
      {
@@ -611,11 +603,11 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Hulpvariabelen";
-     locked: 1;
      visible: 0;
      options_title: locked, invisible;
+     displaytype: currency;
+     locked: 1;
      options: locked, invisible;
      variable Q_MAP02_REQUIREDVARS
      {
@@ -623,13 +615,13 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal verplichte velden (1)";
       top_blanklines: 1;
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
      variable Q_MAP02_ENTEREDREQUIREDVARS
      {
@@ -637,12 +629,12 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
     }
    }
@@ -651,11 +643,11 @@
     datatype: number;
     frequency: document;
     formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
-    displaytype: currency;
     title: "Jouw hypotheekberekening";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
+    locked: 1;
     options: locked;
     variable Q_MAP03_WARNING
     {
@@ -691,11 +683,11 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Jouw hypotheekberekening";
-     locked: 1;
      visible: 1;
      options_title: locked;
+     displaytype: currency;
+     locked: 1;
      options: locked;
      variable Hypotheek_Rente
      {
@@ -712,11 +704,11 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Hulpvariabelen";
-     locked: 1;
      visible: 0;
      options_title: locked, invisible;
+     displaytype: currency;
+     locked: 1;
      options: locked, invisible;
      variable Q_MAP03_REQUIREDVARS
      {
@@ -724,13 +716,13 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal verplichte velden (1)";
       top_blanklines: 1;
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
      variable Q_MAP03_ENTEREDREQUIREDVARS
      {
@@ -738,12 +730,12 @@
       frequency: document;
       formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
     }
    }
@@ -751,11 +743,11 @@
    {
     datatype: number;
     frequency: document;
-    displaytype: currency;
     title: "Gegevenscheck";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
+    locked: 1;
     options: locked;
     variable Q_MAP04_WARNING
     {
@@ -789,11 +781,11 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Gegevenscheck";
-     locked: 1;
      visible: 1;
      options_title: locked;
+     displaytype: currency;
+     locked: 1;
      options: locked;
      variable Gegevenscheck01
      {
@@ -810,36 +802,36 @@
     {
      datatype: number;
      frequency: document;
-     displaytype: currency;
      title: "Hulpvariabelen";
-     locked: 1;
      visible: 0;
      options_title: locked, invisible;
+     displaytype: currency;
+     locked: 1;
      options: locked, invisible;
      variable Q_MAP04_REQUIREDVARS
      {
       datatype: number;
       frequency: document;
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal verplichte velden (1)";
       top_blanklines: 1;
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
      variable Q_MAP04_ENTEREDREQUIREDVARS
      {
       datatype: number;
       frequency: document;
       data_options: unscalable;
-      fixed_decimals: 0;
       title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
       visible: 1;
       options_title: locked;
+      locked: 1;
       options: locked;
+      fixed_decimals: 0;
      }
     }
    }
@@ -849,9 +841,9 @@
     frequency: document;
     data_options: unscalable;
     title: "Resultaat";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    locked: 1;
     options: locked;
     variable Q_RESULTSUB1 refers to Q_RESULT
     {
@@ -860,9 +852,9 @@
      data_options: unscalable;
      title: "Resultaat";
      top_blanklines: 1;
-     locked: 1;
      visible: 1;
      options_title: locked;
+     locked: 1;
      options: locked;
     }
    }
@@ -874,29 +866,29 @@
    data_options: unscalable;
    title: "Hulpvariabelen";
    top_blanklines: 1;
-   locked: 1;
    visible: 1;
    options_title: locked;
+   locked: 1;
    options: locked;
    variable Q_STATUS
    {
     datatype: number;
     frequency: document;
-    displaytype: currency;
     title: "Status";
     top_blanklines: 1;
     visible: 1;
     options_title: locked;
+    displaytype: currency;
    }
    variable Q_STATUS_FINAL_ON
    {
     datatype: number;
     frequency: document;
     data_options: unscalable;
-    displaytype: date;
     title: "Definitief gemaakt op:";
     visible: 1;
     options_title: locked;
+    displaytype: date;
    }
    variable Q_STATUS_FINAL_BY
    {
@@ -921,10 +913,10 @@
     datatype: number;
     frequency: document;
     data_options: unscalable;
-    displaytype: date;
     title: "Aangemaakt op:";
     visible: 1;
     options_title: locked;
+    displaytype: date;
    }
    variable Q_STATUS_STARTED_BY
    {
@@ -951,9 +943,9 @@
     formula: "00.01.000.000";
     data_options: saveCalculatedValue,unscalable;
     title: "Modelversie";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    locked: 1;
     options: locked;
    }
    variable Q_WARNING_GLOBAL
@@ -961,23 +953,23 @@
     datatype: string;
     frequency: document;
     data_options: unscalable;
-    displaytype: memo;
     title: "Knock-out(s)?";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: memo;
+    locked: 1;
     options: locked;
     variable Q_WARNING_GLOBALTXT
     {
      datatype: string;
      frequency: document;
      data_options: unscalable;
-     displaytype: memo;
      title: "Knock-out tekst";
      top_blanklines: 1;
-     locked: 1;
      visible: 1;
      options_title: locked;
+     displaytype: memo;
+     locked: 1;
      options: locked;
     }
    }
@@ -986,23 +978,23 @@
     datatype: string;
     frequency: document;
     data_options: unscalable;
-    displaytype: memo;
     title: "Restricties";
-    locked: 1;
     visible: 1;
     options_title: locked;
+    displaytype: memo;
+    locked: 1;
     options: locked;
     variable Q_RESTRICTIESTXT
     {
      datatype: string;
      frequency: document;
      data_options: unscalable;
-     displaytype: memo;
      title: "Restricties tekst";
      top_blanklines: 1;
-     locked: 1;
      visible: 1;
      options_title: locked;
+     displaytype: memo;
+     locked: 1;
      options: locked;
     }
    }

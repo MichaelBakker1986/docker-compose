@@ -17,8 +17,14 @@ RegisterPlainFFLToLMEParser.prototype.deParse = function(data, workbook) {
     return new RegisterToLMEParser().deParse(data, workbook)
 }
 RegisterPlainFFLToLMEParser.prototype.parseData = function(data, workbook) {
-    const register = new Register()
-    const fflFormatter = new FFLFormatter(register, data)
+    /*
+     * Backward compatibility:
+     * Allow the register to be provided
+     */
+    const register = data.register || new Register()
+    const raw = data.raw || data;
+
+    const fflFormatter = new FFLFormatter(register, raw)
     fflFormatter.parseProperties();
     workbook.modelName = fflFormatter.name || workbook.modelName;
     return new RegisterToLMEParser().parseData(register, workbook)

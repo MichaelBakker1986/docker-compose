@@ -81,6 +81,7 @@ SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, form
 SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
+
     var property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
     if (displaytype) property.displaytype = displaytype;
     var formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency);

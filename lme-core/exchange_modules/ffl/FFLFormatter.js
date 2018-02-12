@@ -68,7 +68,6 @@ FFLFormatter.prototype.extractVars = function() {
     var noneexit = true;
     var data = this.data;
     var index = 0;
-    const vars = [];
     const register = this.register;
     while (noneexit) {
         noneexit = false;
@@ -79,7 +78,6 @@ FFLFormatter.prototype.extractVars = function() {
             return '___' + index
         })
     }
-    //  this.vars = vars;
 }
 FFLFormatter.prototype.findRootVariable = function() {
     return this.register.lastRowIndex()
@@ -103,7 +101,7 @@ FFLFormatter.prototype.walk = function(visit) {
     this.extractVars();
     var firstVar = this.register.lastRowIndex();
     const firstRow = this.vars[firstVar];
-    firstRow[0] = firstRow[0].replace(/root /gi, 'variable root ').trim()
+    firstRow[0] = firstRow[0].replace(/^\s*root /gi, 'variable root ').trim()
 
     //this is a trick, not wrong!. parent and child index are the same to start with root.
     firstRow.push('root', firstVar, null, null, null, null, 0, [])

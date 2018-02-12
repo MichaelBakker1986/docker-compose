@@ -11,6 +11,7 @@ const lmeAPI = require('./lme')
 const log = require('log6')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 const Context = require('../../lme-core/src/Context')
+const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const CalculationFacade = require('../../lme-core').CalculationFacade;
 const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;

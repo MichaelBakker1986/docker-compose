@@ -37,8 +37,12 @@ if (!global.DEBUGMODUS) {
 fm.prototype.initializeFormula = function(newFormula) {
     const id = newFormula.id || newFormula.index;
     //"debug('" + newFormula.name + "');
-    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", + id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+    var stringFunction;
+
+    if (global.DEBUGMODUS) stringFunction = "const debugv =  (" + newFormula.parsed + ") ;console.info(' variable[%s] value[%s] tuple:[%s] column[%s]','" + newFormula.name + "',debugv,y.display,x.hash);return debugv;/*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+    else stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction).bind(global);
     m[id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 };

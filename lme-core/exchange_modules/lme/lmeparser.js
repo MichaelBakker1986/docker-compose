@@ -18,8 +18,10 @@ function FormulaInfo(dataArg, schema, modelName) {
         self.addFormula(formula)
     });
     const names = {};
+
     const modelNamePrefix = modelName + '_';
-    this.formulas.forEach(function(formula) {
+    for (var i = 0; i < this.formulas.length; i++) {
+        var formula = this.formulas[i];
         const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
@@ -34,7 +36,7 @@ function FormulaInfo(dataArg, schema, modelName) {
             const choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
         }
-    })
+    }
     const types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
     //this.formulas = undefined;
     this.meta = {
@@ -43,7 +45,8 @@ function FormulaInfo(dataArg, schema, modelName) {
         }
     }
     var counter = 0;
-    types.forEach(function(type) {
+    for (var i = 0; i < types.length; i++) {
+        var type = types[i];
         self.meta.view.columns.push({
             "width": ['locked', 'visible', 'entered'].indexOf(type) == -1 ? 50 : undefined,
             "name": type,
@@ -52,7 +55,7 @@ function FormulaInfo(dataArg, schema, modelName) {
             "position": counter++,
             "renderTypeName": "text",
         })
-    })
+    }
 }
 
 FormulaInfo.prototype.setSchema = function(schema) {
@@ -83,9 +86,7 @@ LMEParser.prototype.parseData = function(data, workbook) {
     if (data.variables) FormulaService.initVariables(data.variables)
     PropertiesAssembler.bulkInsert(solution);
     FormulaService.bulkInsertFormula(data.formulas)
-    data.formulas.forEach(function(formula) {
-        FunctionMap.initializeFormula(formula);
-    })
+    for (var i = 0; i < data.formulas.length; i++) FunctionMap.initializeFormula(data.formulas[i]);
     if (log.DEBUG) log.info('Done import ' + data.name)
     return solution;
 }
