@@ -15,8 +15,12 @@ And HourlyFeeChildCare is set to 7
 And NrOfHoursOutOfSchoolCareWeek is set to 18
 And HourlyFeeOutOfSchoolCare is set to 7
 Then TotalGrossCostsChildTillEighteen should have 0 decimals rounded value 164770
-And TotalNettCostsChildTillEighteen should have 0 decimals rounded value 37880
+And TotalNettCostsChildTillEighteen should have 0 decimals rounded value 36337
 And TotalYearlyCosts should have 0 decimals rounded value 15944 for column with id 1
+And Furniture should have 0 decimals rounded value 1800 for column with id 1
+And ActualChildCareCosts should have 0 decimals rounded value 11647 for column with id 1
+And ActualDiapers should have 0 decimals rounded value 300 for column with id 1
+And ActualFood should have 0 decimals rounded value 967 for column with id 1
 And TotalYearlyCosts should have 0 decimals rounded value 14144 for column with id 2
 And TotalYearlyCosts should have 0 decimals rounded value 14214 for column with id 3
 And TotalYearlyCosts should have 0 decimals rounded value 14099 for column with id 4
@@ -40,24 +44,24 @@ And Age should be 0 for column with id 1
 And ChildBenefits should have 804.2 for column with id 1
 
 And ChildCarePremiumOverview should have 0 decimals rounded value 10622 for column with id 1 
-And ChildcareBudgetOverview should have 0 decimals rounded value 615 for column with id 1 
-And CombinationDiscountOverview should have 0 decimals rounded value 1171 for column with id 1 
+And ChildcareBudgetOverview should have 0 decimals rounded value 648 for column with id 1 
+And CombinationDiscountOverview should have 0 decimals rounded value 1178 for column with id 1 
 
-And TotalYearlyBalance should have 0 decimals rounded value 2734 for column with id 1
-And TotalYearlyBalance should have 0 decimals rounded value 934 for column with id 2
-And TotalYearlyBalance should have 0 decimals rounded value 1004 for column with id 3
-And TotalYearlyBalance should have 0 decimals rounded value 889 for column with id 4
-And TotalYearlyBalance should have 0 decimals rounded value 1386 for column with id 5
-And TotalYearlyBalance should have 0 decimals rounded value 1386 for column with id 6
-And TotalYearlyBalance should have 0 decimals rounded value 1318 for column with id 7
-And TotalYearlyBalance should have 0 decimals rounded value 1318 for column with id 8
-And TotalYearlyBalance should have 0 decimals rounded value 1318 for column with id 9
-And TotalYearlyBalance should have 0 decimals rounded value 1709 for column with id 10
-And TotalYearlyBalance should have 0 decimals rounded value 1829 for column with id 11
-And TotalYearlyBalance should have 0 decimals rounded value 1014 for column with id 12
-And TotalYearlyBalance should have 0 decimals rounded value 2630 for column with id 13
-And TotalYearlyBalance should have 0 decimals rounded value 2666 for column with id 14
-And TotalYearlyBalance should have 0 decimals rounded value 3260 for column with id 15
-And TotalYearlyBalance should have 0 decimals rounded value 3313 for column with id 16
-And TotalYearlyBalance should have 0 decimals rounded value 3794 for column with id 17
-And TotalYearlyBalance should have 0 decimals rounded value 5379 for column with id 18
+And TotalYearlyBalance should have 0 decimals rounded value 2692  for column with id 1
+And TotalYearlyBalance should have 0 decimals rounded value 892 for column with id 2
+And TotalYearlyBalance should have 0 decimals rounded value 962 for column with id 3
+And TotalYearlyBalance should have 0 decimals rounded value 847 for column with id 4
+And TotalYearlyBalance should have 0 decimals rounded value 1122 for column with id 5
+And TotalYearlyBalance should have 0 decimals rounded value 1122 for column with id 6
+And TotalYearlyBalance should have 0 decimals rounded value 1054 for column with id 7
+And TotalYearlyBalance should have 0 decimals rounded value 1054  for column with id 8
+And TotalYearlyBalance should have 0 decimals rounded value 1054  for column with id 9
+And TotalYearlyBalance should have 0 decimals rounded value 1444  for column with id 10
+And TotalYearlyBalance should have 0 decimals rounded value 1564  for column with id 11
+And TotalYearlyBalance should have 0 decimals rounded value 971  for column with id 12
+And TotalYearlyBalance should have 0 decimals rounded value 2592  for column with id 13
+And TotalYearlyBalance should have 0 decimals rounded value 2628  for column with id 14
+And TotalYearlyBalance should have 0 decimals rounded value 3221  for column with id 15
+And TotalYearlyBalance should have 0 decimals rounded value 3275  for column with id 16
+And TotalYearlyBalance should have 0 decimals rounded value 4124  for column with id 17
+And TotalYearlyBalance should have 0 decimals rounded value 5710  for column with id 18
