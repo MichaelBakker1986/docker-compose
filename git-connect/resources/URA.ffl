@@ -1,26 +1,19 @@
 model URA uses BaseModel
 {
- version: "0.0.1";
- ffl_version: "1.2";
  root
  {
+  ffl_version: "1.2";
+  default: datatype:number|frequency:column|aggregation:balance|options_title:locked;
   variable Q_ROOT
   {
    displaytype: scorecard;
    variable SimpleEntryFolder
    {
-    datatype: number;
-    frequency: column;
     aggregation: balance;
     displaytype: Input;
     title: "$>Kurzes Eingabeformular<$";
     top_blanklines: 1;
     display_options: showColumnTitlesAboveSubVars;
-    locked: 1;
-    visible: 1;
-    options_title: locked;
-    options_notrend: locked;
-    options_trend: locked;
     variable sdeGoodWill
     {
      datatype: number;
@@ -30,7 +23,6 @@ model URA uses BaseModel
      title: "$>GoodWill und selbst geschaffene Schutzrechte<$";
      top_blanklines: 1;
      visible: 1;
-     options_title: locked;
     }
     variable sdeReceivablesShareholders
     {
@@ -39,7 +31,6 @@ model URA uses BaseModel
      aggregation: balance;
      displaytype: currency;
      title: "$>Forderungen gegen?ber Gesellschaftern, Gesellschaftsorganen usw.<$";
-     visible: 1;
      options_title: locked;
     }
     variable sdeDeferredTaxesAssets
@@ -49,8 +40,6 @@ model URA uses BaseModel
      aggregation: balance;
      displaytype: currency;
      title: "$>Aktive latente Steuern<$";
-     visible: 1;
-     options_title: locked;
     }
     variable sdeEquity
     {
@@ -60,8 +49,6 @@ model URA uses BaseModel
      displaytype: currency;
      title: "$>Eigenkapital ohne den nicht durch Eigenkapital gedeckten Fehlbetrag<$";
      top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
     }
     variable sdeResultForTheYear
     {
@@ -1556,10 +1543,6 @@ model URA uses BaseModel
      title: "Relative Default Frequency (RDF) of sample";
      display_options: hideFormulas;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krPD
     {
@@ -1574,10 +1557,6 @@ model URA uses BaseModel
      title: "$>Ausfallwahrscheinlichkeit<$";
      display_options: hideFormulas;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krUraRatingKlasse
     {
@@ -1589,10 +1568,6 @@ model URA uses BaseModel
      data_options: saveCalculatedValue,calculateAggregation,unscalable;
      title: "URA $>Ratingklasse<$";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krUraAmpel
     {
@@ -1605,10 +1580,6 @@ model URA uses BaseModel
      fixed_decimals: 0;
      title: "URA $>Ampel<$";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krUraAmpelD
     {
@@ -1620,10 +1591,6 @@ model URA uses BaseModel
      data_options: calculateAggregation,unscalable;
      title: "URA $>Ampel<$";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krUraAmpelDNL
     {
@@ -1651,10 +1618,6 @@ model URA uses BaseModel
      displaytype: currency;
      title: "IFD $>Ratingklasse<$";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
     variable krIfdRatingKlasseD
     {
@@ -1666,10 +1629,6 @@ model URA uses BaseModel
      data_options: calculateAggregation,unscalable;
      title: "IFD $>Ratingklasse<$";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options_notrend: locked;
-     options_trend: locked;
     }
    }
   }

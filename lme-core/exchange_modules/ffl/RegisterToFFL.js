@@ -170,8 +170,10 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
     })
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
     if (!rootVariableName) {
-        formattedFFL[1] = " root\n {"
+        //if (formattedFFL[1].indexOf('root') > -1) {
         formattedFFL.shift()
+        // }
+        //formattedFFL[1] = " root\n {"
     }
     for (var i = 0; i < formattedFFL.length; i++) {
         var obj = formattedFFL[i];
