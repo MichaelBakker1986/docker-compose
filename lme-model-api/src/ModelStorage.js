@@ -78,7 +78,7 @@ ModelStorage.prototype.saveDelta = function(name, data) {
         assembler.insertProperties(dbEntries).then(function(ok) {
             log.info(ok)
         }).catch(function(err) {
-            log.error(err)
+            if (log.DEBUG) log.error(err)
         });
         return hash
     }
