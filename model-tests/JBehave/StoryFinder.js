@@ -18,7 +18,7 @@ const visit = function(file) {
                 const jbehaveStoryFile = file;
                 const modelName = path.basename(fflFile).replace('.ffl', '')
 
-                const command = 'node ' + __dirname + '/StoryExecutor.js ' + [modelName, fflFile, jbehaveStoryFile].join(' ');
+                const command = 'node ' + __dirname + '/StoryExecutor.js ' + [modelName, '"' + fflFile + '"', '"' + jbehaveStoryFile + '"'].join(' ');
                 exec(command).then((result) => {
                     log.info('Success story ' + file)
                 }).catch((err) => {

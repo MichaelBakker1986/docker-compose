@@ -612,7 +612,6 @@ angular.module('lmeapp', ['angular.filter'])
                 if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
                 if (changingValue) {
                     //only reload the variable
-                    console.info('changed[' + changeManager.currentVariable + ']')
                     $scope.runJBehaveTest();
                 }
 
