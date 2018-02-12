@@ -110,7 +110,7 @@ angular.module('lmeapp', ['angular.filter'])
 
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
-        $scope.currentView = 'FFLModelEditorView';
+        $scope.currentView = 'FFLModelEditorView'
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
         const aceEditor = new AceEditor("editor");
@@ -380,7 +380,7 @@ angular.module('lmeapp', ['angular.filter'])
 
         })
         $scope.gotoUpdateScreen = function() {
-            $scope.currentView = 'updateView';
+            $scope.changeView('updateView')
         }
         $scope.update = function(hasUpdates) {
             $http.get('hasUpdates').then(function(data) {
@@ -404,6 +404,7 @@ angular.module('lmeapp', ['angular.filter'])
          **/
         $scope.changedView = function() {
             if ($scope.currentView == 'jbehaveView') {
+                console.info('Changed to JBEHAVE VIEW')
                 /*right_editor.aceEditor.renderer.setShowGutter(false)
                 aceEditor.aceEditor.renderer.setShowGutter(false)*/
                 const names = register.getIndex('name')
@@ -445,8 +446,7 @@ angular.module('lmeapp', ['angular.filter'])
             })
         });
         $(".data-toggle-ide").click(function(e) {
-            aceEditor.setValue(fflModel);
-            aceEditor.scrollTop()
+            $scope.changeView('FFLModelEditorView')
         });
         $(".toggle-debug-btn").click(function(e) {
             var wholelinetxt = aceEditor.getCurrentLine()
@@ -509,6 +509,8 @@ angular.module('lmeapp', ['angular.filter'])
 
         aceEditor.aceEditor.on("change", function(e) {
             var fflAnnotations = []
+            $scope.changeView('FFLModelEditorView')
+
             if (aceEditor.aceEditor.curOp && aceEditor.aceEditor.curOp.command.name) {
                 // reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
                 fflAnnotations.push({
@@ -522,8 +524,11 @@ angular.module('lmeapp', ['angular.filter'])
         })
         $scope.activeVariable = [];
         $scope.schema = register.schema
+        aceEditor.aceEditor.on("mousedown", function() {
+            $scope.changeView('FFLModelEditorView')
+        });
         right_editor.aceEditor.on("mousedown", function() {
-            //console.info("Changes been made" + register.changes.length)
+            $scope.changeView('jbehaveView')
             if (register.changes.length > 0) {
                 console.info("Changes been made")
                 register.changes.length = 0
@@ -537,7 +542,7 @@ angular.module('lmeapp', ['angular.filter'])
          */
         $scope.$watch(function(scope) {
                 if (scope.register.changes.length > 0) {
-                    console.info("Changes been made")
+                    console.info('Register changes')
                     scope.register.changes.length = 0
                     const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n')
                     aceEditor.setValue(newValue)
@@ -560,11 +565,16 @@ angular.module('lmeapp', ['angular.filter'])
             return true;
         }
         $scope.showNode = function(node) {
+            $scope.changeView('FFLModelEditorView')
+            console.info('Looking at node ' + node)
             aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id, undefined).join('\n'));
         }
         $scope.changeView = function(viewName) {
-            $scope.currentView = viewName;
-            $scope.changedView();
+            if ($scope.currentView != viewName) {
+                console.info('Switched to ' + viewName)
+                $scope.currentView = viewName;
+                $scope.changedView();
+            }
         }
         //--------------ACE EDITOR INPUTS ----------------------------------------------------------------------//
         /**
@@ -582,9 +592,7 @@ angular.module('lmeapp', ['angular.filter'])
          */
         aceEditor.aceEditor.commands.on("afterExec", function(e) {
             var changingValue = false;
-            if ($scope.currentView !== 'FFLModelEditorView' && $scope.currentView !== 'jbehaveView') {
-                return;
-            }
+            $scope.changeView('FFLModelEditorView')
             if (e.command.name == 'golinedown') {
             } else if (e.command.name == 'golineup') {
             } else if (e.command.name == 'gotoright') {
@@ -603,6 +611,7 @@ angular.module('lmeapp', ['angular.filter'])
                 changingValue = true;
                 changeManager.changed = true;
             }
+            console.info('action:' + e.command)
             changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
             var annotations = [];
             $scope.$apply(function() {
