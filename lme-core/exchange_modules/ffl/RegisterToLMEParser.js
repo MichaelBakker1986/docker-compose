@@ -101,6 +101,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var displaytype = node[displayTypeIndex] || 'number'
         var datatype = node[dataTypeIndex] || 'number'
         var frequency = node[frequencyIndex] || 'column'
+        var display_options = node[displayOptionsIndex]
         //TODO: paragraph when no children.
         //TODO: else column frequency..
         /*
@@ -155,6 +156,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             }
 
             if (node[modifierIndex] == '=') {
+                display_options = 'displayAsSummation'
                 const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
                 var formula = '0';
                 for (var i = 0; i < siblings.length; i++) {
@@ -221,7 +223,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
 
         if (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals);
-        if (node[displayOptionsIndex]) uiNode.display_options = node[displayOptionsIndex]
+        if (display_options) uiNode.display_options = display_options
 
         uiNode.frequency = frequency;
 
