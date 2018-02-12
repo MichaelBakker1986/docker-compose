@@ -600,7 +600,6 @@ angular.module('lmeapp', ['angular.filter'])
             } else if (e.command.name == 'overwrite') {//INSERT
             } else {
                 //current variable changed.
-                console.info(e.command.name)
                 changingValue = true;
                 changeManager.changed = true;
             }

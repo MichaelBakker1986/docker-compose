@@ -16,7 +16,7 @@ model REALESTATE uses BaseModel
    frequency: document;
    formula: (Q_STEP01 and Q_STEP02);
    data_options: saveCalculatedValue,unscalable;
-   displaytype: scorecard;
+   display_options: scorecard;
    title: "Vragenlijst";
    top_blanklines: 1;
    locked: 1;

@@ -1,6 +1,6 @@
-URA Score Basic
+FYNDOOCREDITRATING Score Basic
 @Author DEMO
-@themes URA Score basic
+@themes FYNDOOCREDITRATING Score basic
 
-Scenario: Verify URA Score calculations
-Given a document of the model type URA
+Scenario: Verify FYNDOOCREDITRATING Score calculations
+Given a document of the model type FYNDOOCREDITRATING
