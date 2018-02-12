@@ -57,8 +57,10 @@
         </span>
 
                         <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
+                        <span class="input-group-addon">
+                            {{model_history.length}}
+                        </span>
                         <span class="input-group-btn">
-
             <button id="saveFileInView" type="button" ng-disabled="!((fflmode && currentView == 'FFLModelEditorView')|| currentView == 'jbehaveView')" ng-click="saveFileInView()" data-toggle="modal" data-toggle="tooltip"
                     title="Save {{session.fflModelPath}}" data-target="#modal-success" class="btn btn-info btn-flat"><i class="fa fa-save"></i></button>
             <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip" title="Preview {{session.fflModelPath}}"

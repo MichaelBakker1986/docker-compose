@@ -325,6 +325,7 @@ angular.module('lmeapp', ['angular.filter'])
             $scope.LME_MODEL = LME.nodes
             $scope.name = LME.name
             $scope.LMEMETA = LMEMETA;
+
             LMEMETA.loadData(function(response) {
                 $scope.$digest()
             })
