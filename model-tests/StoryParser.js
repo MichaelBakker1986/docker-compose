@@ -11,7 +11,7 @@ const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     setValue: {
         // ------------------------------------------------------VARIABLE_NAME--TUPLE_NAME
-        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? is set to ([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?\s*$/i,
+        regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? is set to ([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?\s*$/i,
         call: function(workbook, linenumber, line, args) {
             var variableName = args[0], tupleIndexName = args[1], value = args[3],
                 columnId = (parseInt(args[4]) || 1) - 1
@@ -66,7 +66,7 @@ const functionMapper = {
     assertValue: {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
-        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
+        regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
         call: function(workbook, linenumber, line, args) {
             const variableName = args[0], tupleIndexName = args[1], decimals = args[3], value = args[4],
                 columnId = (parseInt(args[5]) || 1) - 1
@@ -94,7 +94,7 @@ const functionMapper = {
         }
     },
     assertProperty: {
-        regex: /^\s*(?:When|Then|And) (?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))?\.(\w+) should (?:have |be )? ([-0-9,.A-z]+)/i,
+        regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))?\.(\w+) should (?:have |be )? ([-0-9,.A-z]+)/i,
         call: function(workbook, linenumber, line, args) {
             const variableName = args[0], tupleIndexName = args[1], pname = args[3], value = args[4];
             return [function() {

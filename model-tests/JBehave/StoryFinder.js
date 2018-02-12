@@ -4,8 +4,9 @@
  * Call the JBehaveStoryParser to execute vs Financial Model File
  */
 const Walker = require('../../git-connect/FileWalker').FileWalker
-const walker = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
-const walker2 = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
+const modelTests = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
+const coreTests = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
+const stashedResources = new Walker(__dirname + '/../../git-connect/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
 const fs = require('fs')
 const path = require('path')
 const log = require('log6')
@@ -30,5 +31,5 @@ const visit = function(file) {
         }
     )
 };
-walker.walk(visit, true)
-walker2.walk(visit, true)
+modelTests.walk(visit, true)
+coreTests.walk(visit, true)

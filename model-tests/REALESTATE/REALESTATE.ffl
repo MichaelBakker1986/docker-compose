@@ -603,7 +603,7 @@ model REALESTATE uses BaseModel
    {
     datatype: number;
     frequency: document;
-    formula: If(HSum(Q_STEP01_REQUIREDVARS[all],0,4)=0,1,HSum(Q_STEP01_ENTEREDREQUIREDVARS[all],0,4)/HSum(Q_STEP01_REQUIREDVARS[all],0,4));
+    formula: If(HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP01_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP01_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
     data_options: unscalable;
     displaytype: percentage;
     fixed_decimals: 1;
@@ -723,7 +723,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -753,7 +753,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -1906,7 +1906,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -1936,7 +1936,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -2610,7 +2610,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -2640,7 +2640,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3015,7 +3015,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -3045,7 +3045,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3138,7 +3138,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -3168,7 +3168,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3320,7 +3320,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -3350,7 +3350,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3530,7 +3530,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -3560,7 +3560,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3672,7 +3672,7 @@ model REALESTATE uses BaseModel
       datatype: string;
       frequency: column;
       aggregation: flow;
-      required: 1;
+      inputRequired: 1;
       data_options: unscalable;
       namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
       namespaceprefix: "frc-vt-dm";
@@ -3702,7 +3702,7 @@ model REALESTATE uses BaseModel
        datatype: string;
        frequency: column;
        aggregation: flow;
-       required: 1;
+       inputRequired: 1;
        data_options: unscalable;
        namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-domains";
        namespaceprefix: "frc-vt-dm";
@@ -3930,7 +3930,7 @@ model REALESTATE uses BaseModel
    {
     datatype: number;
     frequency: document;
-    formula: If(HSum(Q_STEP02_REQUIREDVARS[all],0,4)=0,1,HSum(Q_STEP02_ENTEREDREQUIREDVARS[all],0,4)/HSum(Q_STEP02_REQUIREDVARS[all],0,4));
+    formula: If(HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))=0,1,HSum(Q_STEP02_ENTEREDREQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend))/HSum(Q_STEP02_REQUIREDVARS,FirstTinFormulaSet(NoTrend),LastTinFormulaSet(NoTrend)));
     data_options: unscalable;
     displaytype: percentage;
     fixed_decimals: 1;
