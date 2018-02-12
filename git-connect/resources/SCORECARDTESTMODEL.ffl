@@ -554,7 +554,7 @@ model SCORECARDTESTMODEL uses BaseModel
      datatype: string;
      frequency: document;
      data_options: unscalable;
-     title: "Vraag 11 (String)";
+     title: "Vraag 11 (String) Hele lange title tekst waardoor wrapping kapot kan gaat word hier mee getest";
      visible: 1;
      options_title: locked;
      hint: "http://www.topicus.nl Verplicht veld";
