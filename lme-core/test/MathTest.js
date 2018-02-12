@@ -131,6 +131,10 @@ assert.equal(wb.get('MINMAX_VALUETOP'), 200)
 wb.createFormula("MinMax('a',110,200,300)", "MINMAX_VALUE_FALLBACK")
 assert.equal(wb.get('MINMAX_VALUE_FALLBACK'), 300)
 
+wb.createFormula("DMYtoDate(10,11,2020)", "DMYTest")
+const daysInMillis = ((1000 * 3600) * 24);
+assert.equal(Math.round(wb.get('DMYTest').getTime() / daysInMillis), Math.round(new Date(2020, 10, 10).getTime() / daysInMillis))
+
 
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/

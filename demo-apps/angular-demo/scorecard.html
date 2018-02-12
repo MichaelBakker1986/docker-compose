@@ -92,8 +92,9 @@
                 <h1 class="page-header">{{search.hint}}</h1>
                 <div class="row">
                     <div class="col-md-12">
-                        <div ng-repeat="f in LME_MODEL | orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required ':'') + 'depth-'+f.depth+' '+(f.display_options||'')" class="real-row">
-                            <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="(cv.entered ? 'isentered' : '') + ' col-md-'+(f.cols.length == 1 ? '12' : ($index == 0 ? 6 : (6/(f.cols.length-1)) +' questions' ) )" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
+
+                        <div ng-repeat="f in LME_MODEL | orderBy : 'order_id' | filterByPrefix:search" ng-if="f.visible" ng-class="(f.type=='piechart'? ' ': 'row ') + (f.required&&!f.entered?'required ':'') + 'depth-'+f.depth+' '" class="real-row">
+                            <div ng-repeat="cv in f.cols" ng-required="cv.required" ng-class="(cv.entered ? 'isentered' : '') + ' col-md-'+(f.cols.length == 1 ? '12' : ($index == 0 ? 6 : (6/(f.cols.length-1)) +' questions'))+ ' type-' +(f.display_options||'')" ng-readonly="cv.locked" ng-disabled="cv.locked" ng-switch="cv.type">
                                 <!-- Full row elements -->
                                 <div ng-switch-when="wisihtml">
                                     <textarea class="form-control" ng-model="cv.value"></textarea>
@@ -104,9 +105,9 @@
                                     </div>
                                 </div>
 
-                                <div ng-switch-when="paragraph">
+                                <div ng-switch-when="paragraph" class="paragraph-container">
                                     <h3>{{f.title}} <i style="color: lightcoral" ng-if="f.tupleDefinition" class="fa fa-remove"></i></h3>
-                                    <div class="paragraph bg-gray color-palette" ng-if="f.hint">{{f.hint}}</div>
+                                    <div class="paragraph" ng-if="f.hint">{{f.hint}}</div>
                                 </div>
 
                                 <!-- custom stuff -->
@@ -288,7 +289,7 @@
                                             <input readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
                                         </div>
                                         <textarea ng-switch-when="memo" ng-readonly="cv.locked" rows="4" class="form-control" ng-model="cv.value" placeholder=".."></textarea>
-                                        <input ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
+                                        <div ng-switch-default readonly="readonly" ng-if="cv.locked" class="form-group">{{cv.value || '..'}}</div>
                                         <input ng-switch-default ng-if="!cv.locked" class="form-control" ng-model="cv.value" placeholder="..">
                                         <span ng-if="$last && f.tuple" class="input-group-addon"><i class="fa fa-plus"></i></span>
                                     </div>
