@@ -1,3 +1,4 @@
+Given a Context(BasicKSPtest)
 When MonthlyIncomeParent01 is set to 1500
 And ExtraMonthParent01 is set to 1
 And WeeklyWorkingHoursParent01 is set to 40
@@ -35,7 +36,8 @@ And TotalYearlyCosts should have 0 decimals rounded value 5972 for column with i
 And TotalYearlyCosts should have 0 decimals rounded value 7557 for column with id 18
 And TotalYearlyAllowance should have 0 decimals rounded value 13211 for column with id 1 
 
-And ChildBenefits should have 802 for column with id 1
+And Age should be 0 for column with id 1
+And ChildBenefits should have 804.2 for column with id 1
 
 And ChildCarePremiumOverview should have 0 decimals rounded value 10622 for column with id 1 
 And ChildcareBudgetOverview should have 0 decimals rounded value 615 for column with id 1 
