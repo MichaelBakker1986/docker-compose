@@ -1,6 +1,6 @@
 model PRESCAN uses BaseModel
 {
- variable Prescan
+ variable PrescanScorecard
  {
   frequency: document;
   data_options: Input;
@@ -256,7 +256,7 @@ model PRESCAN uses BaseModel
    }
   }
  }
- variable PrescanScore refers to Score
+ variable PRESCAN refers to Score
  {
   data_options: Output;
   title:"PrescanScore";

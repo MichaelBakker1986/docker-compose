@@ -7,4 +7,4 @@ Given a document of the model type PRESCAN
 
 When Vraag11 is set to 1
 And Weging11 is set to 100
-And TotalPrescanScore should be 100
+And PRESCAN should be 100

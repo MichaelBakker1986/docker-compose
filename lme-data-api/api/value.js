@@ -42,7 +42,25 @@ module.exports.setup = function(app) {
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
-                const modelPrefix = (outputNodeName == 'PrescanScore' ? 'PRESCAN' : outputNodeName == 'TupleRestTestInput' ? 'TUPLERESTMODEL' : outputNodeName == 'LGDCalculationOutputContainer' ? 'LGD' : "KSP") + '_';
+                let modelPrefix;
+                switch (outputNodeName) {
+                    case "PrescanScore":
+                        modelPrefix = "PRESCAN"
+                        break
+                    case "FyndooCreditRating":
+                        modelPrefix = "FyndooCreditRating"
+                        break
+                    case "TupleRestTestInput":
+                        modelPrefix = "TUPLERESTMODELRating"
+                        break
+                    case "LGDCalculationOutputContainer":
+                        modelPrefix = "LGD"
+                        break
+                    case "KinderSpaarPlan":
+                        modelPrefix = "KSP"
+                        break
+                }
+                modelPrefix = modelPrefix + "_"
 
                 //This is very very basic, rewrite required.
                 for (var q in body) {
@@ -57,6 +75,7 @@ module.exports.setup = function(app) {
                  */
                 if (outputNodeName == 'LGDCalculationOutputContainer') context.columns = 1;
                 else if (outputNodeName == 'PrescanScore') context.columns = 1;
+                else if (outputNodeName == 'FyndooCreditRating') context.columns = 1;
                 else if (outputNodeName == 'TupleRestTestOutput') context.columns = 1
                 else if (outputNodeName == 'KinderSpaarPlan') context.columns = 17;
                 else log.warn('Invalid rest api call ' + url)

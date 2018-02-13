@@ -38,8 +38,11 @@ const JasperRealEstate = '1565119990220779';
 const RichardRealEstate = '2023094311299941';
 const RamonFBId = '10216226641645779 ';
 const BerryFBId = '1960057484255967';
+const BerndFBId = '1893680553997744';
 const BasNieveldFBId = '1631660686928794';
+const HildeFBId = '1551240648324836';
 const FYNDOOCREDITRATING = 'FyndooCreditRating'
+const MVO = "MVO";
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
 const GUEST_USER = 'guest';
@@ -158,7 +161,9 @@ class Authorization {
             this.allow(rule.id, rule.resource, rule.role)
         }
         this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
-        this.addModelPrivileges(RamonFBId, "MVO", true);
+
+        this.addModelPrivileges(RamonFBId, MVO, true);
+        this.addModelPrivileges(HildeFBId, MVO, true);
         this.addModelPrivileges(RamonFBId, "REALESTATE", true);
         this.addModelPrivileges(RamonFBId, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
@@ -168,6 +173,8 @@ class Authorization {
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
         this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
+        this.addModelPrivileges(BerndFBId, "PRESCAN", true);
+        this.addModelPrivileges(BerndFBId, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(MichaelFaceBookID, "SCORECARDTESTMODEL", true);
         this.addModelPrivileges(GUEST_ROLE, "TEST", false);
         this.addModelPrivileges(MichaelFaceBookID, "KSP", true);
@@ -179,7 +186,7 @@ class Authorization {
         this.addModelPrivileges(RuudFacebookID, "LGD", true);
         this.addModelPrivileges(MarcoFacebookID, "LGD", true);
         this.addModelPrivileges(MonliFacebookID, "KSP", true);
-        this.addModelPrivileges(MichaelFaceBookID, "MVO", true);
+        this.addModelPrivileges(MichaelFaceBookID, MVO, true);
         this.addModelPrivileges(BerryFBId, "CLAUDIA2", true);
         this.addModelPrivileges(MichaelFaceBookID, "CLAUDIA2", true);
         this.addModelPrivileges(BasNieveldFBId, "CLAUDIA2", true);
