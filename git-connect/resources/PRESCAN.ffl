@@ -1,6 +1,6 @@
 model PRESCAN uses BaseModel
 {
- variable Q_ROOT
+ variable Prescan
  {
   data_options: Input;
   display_options: scorecard;
