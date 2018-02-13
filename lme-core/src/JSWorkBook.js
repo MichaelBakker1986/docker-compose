@@ -430,6 +430,16 @@ JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tup
 JSWorkBook.prototype.clearValues = function() {
     this.context.clear()
 }
+JSWorkBook.prototype.isValidInput = function(rowId, columnId, yas, value) {
+    var choices;
+    if (choices = this.get(rowId, 'choices')) {
+        return ValueFacade.validChoice(choices, rowId, value) != null ? '' : 'Invalid choice value ' + value + '. Choose from ' + choices.map(function(el) {
+            return el.value + '|' + el.name;
+        }).join('|');
+    } else {
+        return this.get(rowId, 'valid', columnId, yas)
+    }
+}
 JSWorkBook.prototype.properties = SolutionFacade.properties;
 JSWorkBook.prototype.getAllChangedValues = function() {
     const formulaIds = [];

@@ -70,7 +70,13 @@ docker-compose -f docker-compose-db.yml up
 #Debug via injnection in FunctionMap.js
 #Rapportages via HTML5 just like creating a front-end by the designer
 #Webhook module, broadcast events when state of data/model changes.
-#Internationalization via constants
+#In ternationalization via constants
 #Overview via hint icons in properties-view
 #Functionverview in IDE
 #10mb request is large enough, files bigger than 10mb should be separated in front-end
+
+
+Matrix-files are also generated as
+Uploaded matrix-files are a rest-api function  /{model_name}/{version}/MATRIX(null,table_name,x,y)
+Every save call will implicitly save JBEHAVE,FFL and MATRIX file(s)
+

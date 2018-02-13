@@ -18,26 +18,27 @@ const functionMapper = {
             return [function() {
                 // const locationDetails = workbook.locate(variableName, tupleIndexName)
                 if (log.TRACE) log.trace('JBehave called line [%s]: %s %s', linenumber, variableName, tupleIndexName)
+
                 if (workbook.getNode(variableName)) {
                     const yas = workbook.resolveYas(variableName, tupleIndexName)
                     const lockedValue = workbook.get(variableName, 'locked', columnId, yas);
                     workbook.set(variableName, value, 'value', columnId, yas)
-                    const validValue = workbook.get(variableName, 'valid', columnId, yas);
+                    const validValue = workbook.isValidInput(variableName, columnId, yas, value);
                     if (lockedValue) {
                         return {
                             status: 'fail',
-                            message: variableName + " is locked "
+                            message: variableName + ' cannot be set to value [' + value + "]. Because [" + variableName + " is locked for user input."
                         }
                     }
                     else if (validValue.length > 0) {
                         return {
                             status: 'fail',
-                            message: value + " is not a valid value for " + variableName + " because " + validValue
+                            message: variableName + ' cannot be set to value [' + value + "]. Because [" + validValue + ']'
                         }
                     } else {
                         return {
                             status: 'info',
-                            message: 'set variable ' + variableName + tupleIndexName + ' to ' + value
+                            message: variableName + (tupleIndexName || '') + ' is set to ' + value
                         }
                     }
                 } else {
@@ -83,10 +84,10 @@ const functionMapper = {
                     result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
                 } else if (validValue.length > 0) {
                     result.status = 'fail'
-                    result.message = rawValue + " is not a valid value for " + variableName + " because " + validValue
+                    result.message = rawValue + " is not a valid value for " + variableName + ". Because " + validValue
                 } else {
                     result.status = 'info'
-                    result.message = 'Variable ' + variableName + " = " + calculatedValue + ' is ' + value + " [" + rawValue + "]";
+                    result.message = variableName + " is " + calculatedValue;
                 }
                 return result;
             }

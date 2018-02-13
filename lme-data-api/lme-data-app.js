@@ -3,7 +3,6 @@ const host = process.env.HOST || '127.0.0.1';
 const request = require('request-promise-json');
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const domain = process.env.DOMAIN || (host + ':' + internal_proxy_port + "/id/guest")
-
 const express = require('express');
 const log = require('log6');
 const app = express();

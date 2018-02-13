@@ -46,6 +46,10 @@ function fetchSolutionNode(row, col) {
     return PropertiesAssembler.fetch(row + '_' + col);
 }
 
+ValueFacade.validChoice = function(choices, row, userValue) {
+    userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
+    return (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue)));
+}
 ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
     var rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
@@ -65,8 +69,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
         if (userValue != null) {
             const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
-            userValue = userValue === true ? "1" : userValue === false ? "0" : userValue
-            const lookupvalue = (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue)));
+            const lookupvalue = ValueFacade.validChoice(choices, row, userValue)
             if (log.DEBUG && lookupvalue == null) log.warn('Invalid choice-value set for ' + row + ' [' + userValue + ']')
             userValue = lookupvalue ? lookupvalue.name : null;
             if (!isNaN(userValue)) {

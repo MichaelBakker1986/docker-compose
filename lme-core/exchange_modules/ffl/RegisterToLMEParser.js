@@ -128,7 +128,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
          */
         var fixed_decimals = node[decimalsIndex];
         var startdecimalsIndex;
-        if ((startdecimalsIndex = displaytype.indexOf('(')) > -1) {
+        if ((fixed_decimals == null) && (startdecimalsIndex = displaytype.indexOf('(')) > -1) {
             fixed_decimals = displaytype.substr(startdecimalsIndex).slice(1, -1)
             displaytype = displaytype.substr(0, startdecimalsIndex);
         }
