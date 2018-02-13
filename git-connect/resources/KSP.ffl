@@ -2,7 +2,7 @@ model KSP uses BaseModel
 {
  variable Q_ROOT
  {
-  title: "Costs of child raising (v1.34)";
+  title: "Costs of child raising (v1.36)";
   frequency: document;
   display_options: scorecard;
   hint: "This module enables you to gain insight in the costs involved for raising a child";
