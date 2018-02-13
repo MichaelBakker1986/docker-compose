@@ -209,7 +209,6 @@ model KSP uses BaseModel
      title: "Nr. of hours childcare per week";
      frequency: document;
      formula: 0;
-     datatype: number;
      required: 1;
      fixed_decimals: 1;
     }
@@ -235,8 +234,6 @@ model KSP uses BaseModel
      title: "Nr. of hours out-of-school care per week";
      frequency: document;
      formula: 0;
-     datatype: number;
-     displaytype: number;
      required: 1;
      fixed_decimals: 1;
     }
@@ -245,7 +242,6 @@ model KSP uses BaseModel
      title: "Hourly fee out-of-school daycare";
      frequency: document;
      formula: 6.69;
-     datatype: number;
      fixed_decimals: 2;
     }
     variable NrOfHoursOutOfSchoolCareMonth
@@ -254,8 +250,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: NrOfHoursOutOfSchoolCareWeek*4.333;
-     displaytype: number;
-     datatype: number;
      fixed_decimals: 2;
     }
    }
@@ -265,8 +259,6 @@ model KSP uses BaseModel
    title: "Calculations childcare allowances";
    locked: 1;
    frequency: document;
-   displaytype: select;
-   datatype: number;
    choices: "0:Complete|1:Incomplete";
    variable FiscalParameters
    {
@@ -274,7 +266,6 @@ model KSP uses BaseModel
     locked: 1;
     frequency: document;
     displaytype: currency;
-    datatype: number;
     variable ChildcareContribution
     {
      title: "Childcare Contribution";
@@ -287,7 +278,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 230;
-     datatype: number;
      fixed_decimals: 1;
     }
     variable MultiplierDaycare
@@ -297,7 +287,6 @@ model KSP uses BaseModel
      frequency: document;
      formula: 1.4;
      displaytype: percentage;
-     datatype: number;
      fixed_decimals: 1;
     }
     variable MultiplierOutOfSchoolCare
@@ -307,7 +296,6 @@ model KSP uses BaseModel
      frequency: document;
      formula: 0.7;
      displaytype: percentage;
-     datatype: number;
      fixed_decimals: 1;
     }
     variable MaxHourlyRateChildcare
@@ -316,7 +304,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 7.45;
-     datatype: number;
      fixed_decimals: 2;
     }
     variable MaxHourlyRateOutOfSchoolCare
@@ -325,7 +312,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 6.95;
-     datatype: number;
      fixed_decimals: 2;
     }
     variable MaxHourlyRateGuestParent
@@ -334,7 +320,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 5.91;
-     datatype: number;
      fixed_decimals: 2;
     }
     variable MaxHourlyRateGuestParentOutOfSchoolCare
@@ -343,7 +328,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 5.91;
-     datatype: number;
      fixed_decimals: 2;
     }
    }
@@ -353,14 +337,12 @@ model KSP uses BaseModel
     locked: 1;
     frequency: document;
     displaytype: currency;
-    datatype: number;
     variable LowerBoundaryIncome
     {
      title: "Lower boundary Income";
      locked: 1;
      frequency: document;
      formula: 4934;
-     datatype: number;
      fixed_decimals: 1;
     }
     variable Base
@@ -369,7 +351,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: 1052;
-     datatype: number;
      fixed_decimals: 1;
     }
     variable CombinationDiscountPercentage
@@ -681,7 +662,6 @@ model KSP uses BaseModel
     title: "Leeftijd kind";
     frequency: document;
     formula: 17;
-    datatype: number;
    }
    variable SavedMoney
    {
@@ -689,7 +669,6 @@ model KSP uses BaseModel
     frequency: document;
     formula: 100;
     displaytype: currency;
-    datatype: currency;
    }
    variable MonthlyIncomeBijBaan
    {
@@ -697,7 +676,6 @@ model KSP uses BaseModel
     frequency: document;
     formula: 409;
     displaytype: currency;
-    datatype: number;
    }
    variable MonthlyDUOLoan
    {
@@ -705,7 +683,6 @@ model KSP uses BaseModel
     frequency: document;
     formula: 559;
     displaytype: currency;
-    datatype: currency;
     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
    }
    variable AantalMaandenTeSparen
@@ -714,7 +691,6 @@ model KSP uses BaseModel
     locked: 1;
     frequency: document;
     formula: (18-EducationAgeChild) * 12;
-    datatype: number;
    }
    variable RentePerJaar
    {
@@ -730,9 +706,7 @@ model KSP uses BaseModel
     locked: 1;
     frequency: document;
     formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(70000 - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
-    displaytype: currency;
-    datatype: currency;
-    fixed_decimals: 0;
+    displaytype: currency(0);
     hint: "per maand";
    }
   }
