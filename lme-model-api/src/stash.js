@@ -2,9 +2,9 @@ const exec = require('child-process-promise').exec;
 const log = require('log6');
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-const domain = process.env.DOMAIN || (host + ":" + internal_proxy_port + ':/id/guest')
+const domain = process.env.DOMAIN || (host + ":" + internal_proxy_port + '/id/guest')
 
-const develop = (host == '127.0.0.1');
+const develop = (!process.env.DOMAIN);
 //make git ls-files-root alias
 exec('git config --global alias.ls-files-root "! git ls-files"')
 const write = require('node-fs-writefile-promise')
