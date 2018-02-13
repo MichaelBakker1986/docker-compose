@@ -1,11 +1,11 @@
-model TUPLERESTMODEL uses BaseModel 
+model TupleRestModel uses BaseModel
 {
- variable Q_ROOT
+ variable TupleRestScorecard
  {
-  displaytype:scorecard;
+  display_options: scorecard;
   variable TupleRestTestInput
   {
-   displaytype: Input;
+   data_options: Input;
    datatype: string;
    title: "TupleRestTestInput";
    frequency: document;
@@ -29,9 +29,9 @@ model TUPLERESTMODEL uses BaseModel
     }
    }
   }
-  variable TupleRestTestOutput
+  variable TupleRestModel
   {
-   displaytype: Output;
+   data_options: Output;
    datatype: string;
    title: "TupleRestTestOutput";
    frequency: document;

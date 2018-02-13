@@ -17181,6 +17181,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const frequencyIndex = indexer.schemaIndexes.frequency;
+    const versionIndex = indexer.schemaIndexes.version;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
     const aggregationIndex = indexer.schemaIndexes.aggregation;
@@ -17217,9 +17218,9 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     }
 
-    var nestedTupleDepth = 0
     const tuples = []
     const rootNode = register['root']
+    workbook.model_version = rootNode ? rootNode[versionIndex] : ''
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
             tuples.length = depth;
@@ -17989,10 +17990,10 @@ const log = require("log6");
 const WorkBook = require("./src/JSWorkBook");
 const Context = require("./src/Context");
 
-function LMEService() {
+function LMEFacade() {
 }
 
-LMEService.prototype.initializeFFlModelData = function(data, path) {
+LMEFacade.prototype.initializeFFlModelData = function(data, path) {
     var JSWorkBook;
     if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
         JSWorkBook = new WorkBook(new Context());
@@ -18014,7 +18015,7 @@ LMEService.prototype.initializeFFlModelData = function(data, path) {
     }
     return JSWorkBook;
 };
-LMEService.prototype.addFunctions = function(plugin) {
+LMEFacade.prototype.addFunctions = function(plugin) {
     var functions = [];
     for (var functionName in plugin.entries) {
         functions.push(functionName);
@@ -18029,7 +18030,7 @@ LMEService.prototype.addFunctions = function(plugin) {
  */
 // Convert tuple index to tuple number
 
-LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
+LMEFacade.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
     const fesContext = new Context();
     fesContext.values = context.values;
@@ -18067,7 +18068,7 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
     }
 };
 
-LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
+LMEFacade.prototype.getObjectValues = function(context, rowId, tupleindex) {
 
     var fesContext = new Context();
     fesContext.values = context.values;
@@ -18183,7 +18184,7 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 
 exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
-exports.LMEFacade = LMEService.prototype;
+exports.LMEFacade = LMEFacade.prototype;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\index.js","/lme-core",undefined)
 },{"./exchange_modules/ffl/RegisterPlainFFLDecorator":11,"./resources/CustomImport":18,"./src/Context":20,"./src/JSWorkBook":24,"./src/TimeAxis":29,"_process":38,"buffer":36,"log6":35}],18:[function(require,module,exports){
@@ -19501,6 +19502,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
     this.offset = 0;
     //default modelname
     this.modelName = 'NEW';
+    this.model_version = '';
     //tuple axis
     this.yaxis = YAxis;
     this.y = YAxis[0].parent
@@ -25106,8 +25108,8 @@ require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
 const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
-const CalculationFacade = require('../../lme-core').LMEFacade;
-CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
+const LMEFacade = require('../../lme-core').LMEFacade;
+LMEFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI(TimeModel, Ctx, interval) {
     const Context = require('../../lme-core/src/Context');
@@ -25125,7 +25127,7 @@ LmeAPI.prototype.hasChanges = function() {
 LmeAPI.prototype.getTimeViews = function() {
     return this.lme.getTimeViews();
 }
-LmeAPI.prototype.addFunctions = CalculationFacade.addFunctions;
+LmeAPI.prototype.addFunctions = LMEFacade.addFunctions;
 LmeAPI.prototype.exportLME = function() {
     return this.lme.export('lme')
 }

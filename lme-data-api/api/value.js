@@ -36,7 +36,6 @@ module.exports.setup = function(app) {
         }
     }
 
-    //should return 17 columns
     function defaultPostResponse(req, res) {
         //handle request Async by default, create Promise, result when done.
         new Promise(function(success, fail) {
@@ -47,6 +46,7 @@ module.exports.setup = function(app) {
                 var context = ds.getOrCreate(req.params.id);
                 const url = req.originalUrl;
                 const outputNodeName = req.params.figureName;
+                const version = req.params.version || '';
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
@@ -58,8 +58,8 @@ module.exports.setup = function(app) {
                     case "FyndooCreditRating":
                         modelPrefix = "FyndooCreditRating"
                         break
-                    case "TupleRestTestInput":
-                        modelPrefix = "TUPLERESTMODELRating"
+                    case "TupleRestModel":
+                        modelPrefix = "TupleRestModel"
                         break
                     case "LGDCalculationOutputContainer":
                         modelPrefix = "LGD"
@@ -67,6 +67,8 @@ module.exports.setup = function(app) {
                     case "KinderSpaarPlan":
                         modelPrefix = "KSP"
                         break
+                    default:
+                        modelPrefix = outputNodeName
                 }
                 modelPrefix = modelPrefix.toUpperCase() + "_"
 
@@ -83,7 +85,7 @@ module.exports.setup = function(app) {
                 if (outputNodeName == 'LGDCalculationOutputContainer') context.columns = 1;
                 else if (outputNodeName == 'PRESCAN') context.columns = 1;
                 else if (outputNodeName == 'FyndooCreditRating') context.columns = 1;
-                else if (outputNodeName == 'TupleRestTestOutput') context.columns = 1
+                else if (outputNodeName == 'TupleRestModel') context.columns = 1
                 else if (outputNodeName == 'KinderSpaarPlan') context.columns = 17;
                 else log.warn('Invalid rest api call ' + url)
                 result = LMECalculationFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined);
@@ -114,6 +116,9 @@ module.exports.setup = function(app) {
      */
     app.get('*/id/:id/figure/:figureName', defaultResponse);
     app.post('*/id/:id/figure/:figureName/value/:value', defaultResponse);
+
+    app.post('*/id/:id/figure/:figureName/:version', defaultPostResponse);
     app.post('*/id/:id/figure/:figureName', defaultPostResponse);
     app.post('*/figure/:figureName', defaultPostResponse);
+    app.post('*/figure/:figureName/:version', defaultPostResponse);
 };

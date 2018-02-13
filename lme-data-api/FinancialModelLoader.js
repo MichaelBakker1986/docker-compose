@@ -16,6 +16,7 @@ const log = require('log6')
 modelLoadListener.addListener(function(fflModelData, path) {
     const lmeModel = LMEFacade.initializeFFlModelData(fflModelData, path);
     const modelname = lmeModel.modelName;
+    const model_version_postfix = lmeModel.model_version ? ('/v' + lmeModel.model_version) : ''
     const indexer = lmeModel.indexer
     const names = indexer.getIndex('name')
 
@@ -37,7 +38,7 @@ modelLoadListener.addListener(function(fflModelData, path) {
         for (var i = 0; i < outputNodes.length; i++) {
             var outputNode = outputNodes[i];
             var inputNode = inputNodes[i];
-            endPointname = outputNode[indexer.schemaIndexes.name]
+            endPointname = outputNode[indexer.schemaIndexes.name] + model_version_postfix
             const operation = "/figure/" + endPointname;
             const schema = lmeModel.export('swagger', {
                 rowId: inputNode[indexer.schemaIndexes.name],

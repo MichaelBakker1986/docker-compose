@@ -28,6 +28,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
     this.offset = 0;
     //default modelname
     this.modelName = 'NEW';
+    this.model_version = '';
     //tuple axis
     this.yaxis = YAxis;
     this.y = YAxis[0].parent

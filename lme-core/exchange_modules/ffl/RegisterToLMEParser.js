@@ -52,6 +52,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const frequencyIndex = indexer.schemaIndexes.frequency;
+    const versionIndex = indexer.schemaIndexes.version;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
     const aggregationIndex = indexer.schemaIndexes.aggregation;
@@ -88,9 +89,9 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
     }
 
-    var nestedTupleDepth = 0
     const tuples = []
     const rootNode = register['root']
+    workbook.model_version = rootNode ? rootNode[versionIndex] : ''
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
             tuples.length = depth;
