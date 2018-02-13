@@ -1,4 +1,4 @@
-model FYNDOOCREDITRATING uses BaseModel
+model FyndooCreditRating uses BaseModel
 {
  variable CreditRatingScorecard
  {
@@ -286,7 +286,7 @@ model FYNDOOCREDITRATING uses BaseModel
   variable FyndooCreditRating
   {
    aggregation: balance;
-   display_options: Output;
+   data_options: Output;
    title: "FyndooCreditRating";
    options_title: locked;
    display_options: showColumnTitlesAboveSubVars;

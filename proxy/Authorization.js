@@ -39,7 +39,7 @@ const RichardRealEstate = '2023094311299941';
 const RamonFBId = '10216226641645779 ';
 const BerryFBId = '1960057484255967';
 const BasNieveldFBId = '1631660686928794';
-
+const FYNDOOCREDITRATING = 'FyndooCreditRating'
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
 const GUEST_USER = 'guest';
@@ -60,7 +60,7 @@ class Authorization {
             '/figure/KinderSpaarPlan',
             '/figure/LGDCalculationInputContainer',
             '/figure/PrescanScore',
-            '/figure/FyndooCreditRating',
+            '/figure/' + FYNDOOCREDITRATING,
 
             '/basic_example.html',
             '/extended_controller.html',
@@ -162,9 +162,9 @@ class Authorization {
         this.addModelPrivileges(RamonFBId, "REALESTATE", true);
         this.addModelPrivileges(RamonFBId, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
-        this.addModelPrivileges(JorisNijboerFaceBookID, "FYNDOOCREDITRATING", true);
-        this.addModelPrivileges(RamonFBId, "FYNDOOCREDITRATING", true);
-        this.addModelPrivileges(MichaelFaceBookID, "FYNDOOCREDITRATING", true);
+        this.addModelPrivileges(JorisNijboerFaceBookID, FYNDOOCREDITRATING, true);
+        this.addModelPrivileges(RamonFBId, FYNDOOCREDITRATING, true);
+        this.addModelPrivileges(MichaelFaceBookID, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
         this.addModelPrivileges(JorisNijboerFaceBookID, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
@@ -205,6 +205,8 @@ class Authorization {
         this.allow(id, "/modelChanges/" + modelname, VIEW_RULE)
         this.allow(id, "/scorecard.html", VIEW_RULE)
         this.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
+        //allow generic rest-api outputnode  (same name as model_name)
+        anonymous['/figure/' + modelname] = true;
     }
 
     /**
