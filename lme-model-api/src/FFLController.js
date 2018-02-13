@@ -28,7 +28,7 @@ const EconomicEditorView = require('../../model-tests/EconomicEditorView').Econo
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 
-function FFLController($scope, $http, fflEditor, user_session, changeManager) {
+function FFLController($scope, $http, fflEditor, user_session, changeManager, register) {
     this.$scope = $scope
     this.$http = $http
     this.fflEditor = fflEditor;
@@ -69,6 +69,9 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager) {
             $scope.$digest()
         })
     }
+    $(".data-toggle-ide").click(function(e) {
+        $scope.changeView('FFLModelEditorView')
+    });
     $scope.saveFFLModel = function() {
         const type = '.ffl';
         Pace.track(function() {

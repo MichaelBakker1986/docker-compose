@@ -42,29 +42,34 @@ angular.module('lmeapp', ['angular.filter'])
         })
         $scope.session = user_session;
         $scope.model_history = []
-        $.get("modelChanges/" + user_session.fflModelPath, function(data, status, xhr) {
-            const history = [];
-            const hashes = {};
-            for (var i = 0; i < data.data.length; i++) {
-                var obj = data.data[i];
-                obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
 
-                if (hashes[obj.uuid]) {
-                    hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
-                    continue
+        $scope.updateModelChanges = function() {
+            $.get("modelChanges/" + user_session.fflModelPath, function(data, status, xhr) {
+                const history = [];
+                const hashes = {};
+                for (var i = 0; i < data.data.length; i++) {
+                    var obj = data.data[i];
+                    obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
+
+                    if (hashes[obj.uuid]) {
+                        hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
+                        continue
+                    }
+                    hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
+                    history.push({
+                        create_time: obj.create_time,
+                        data: hashes[obj.uuid]
+                    })
                 }
-                hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
-                history.push({
-                    create_time: obj.create_time,
-                    data: hashes[obj.uuid]
+                history.reverse()
+                $scope.$apply(function() {
+                    $scope.model_history = history;
                 })
-            }
-            history.reverse()
-            $scope.model_history = history;
-        }).fail(function(err) {
-            console.error(err)
-        })
 
+            }).fail(function(err) {
+                console.error(err)
+            })
+        }
         const register = new Register();
         const debugManager = new DebugManager();
         DEBUGGER = debugManager
@@ -78,8 +83,7 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
         const fflEditor = new AceEditor("editor");
-        const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager)
-
+        const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register)
         var HoverLink = ace.require("hoverlink").HoverLink
         var TokenTooltip = ace.require("token_tooltip").TokenTooltip
 
@@ -96,11 +100,9 @@ angular.module('lmeapp', ['angular.filter'])
 
         registerEditorToClickNames(right_editor)
         registerEditorToClickNames(fflEditor)
-
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });
-
         var sidebaropen = false;
         $scope.togglePropertiesSidebar = function(open) {
             if (sidebaropen && open) {
@@ -113,7 +115,6 @@ angular.module('lmeapp', ['angular.filter'])
             $('#pagewrapper').toggleClass('control-sidebar-open')
             $('#sidebar').toggleClass('control-sidebar')
         }
-
         $scope.dbModelConvert = function() {
             $scope.fflType = '.ffl'
             Pace.track(function() {
@@ -127,12 +128,10 @@ angular.module('lmeapp', ['angular.filter'])
                 });
             });
         }
-
         $scope.saveFileInView = function() {
             if ($scope.currentView == 'FFLModelEditorView') $scope.saveFFLModel()
             else if ($scope.currentView == 'jbehaveView') $scope.saveJBehaveStory()
         }
-
         $scope.goToPreviewPage = function() {
             $scope.session.disablePreviewButton = true;
             $scope.downloadJsLink = null;
@@ -219,29 +218,15 @@ angular.module('lmeapp', ['angular.filter'])
                 $scope.runJBehaveTest();
             }
         }
-
         $(".toggle-expand-btn").click(function(e) {
             $(this).closest('.content .box').toggleClass('panel-fullscreen');
-        });
-
-        $(".data-toggle-ide").click(function(e) {
-            $scope.changeView('FFLModelEditorView')
-        });
-        $(".toggle-debug-btn").click(function(e) {
-            var wholelinetxt = fflEditor.getCurrentLine()
-            var customPosition = {
-                row: fflEditor.getCursor().row,
-                column: 500
-            };
-
-            var text = '\t\t\t//*' + LME.nodes[wholelinetxt.replace(/variable (\w)/, '$1').trim()].value + "*//";
-            fflEditor.aceEditor.session.insert(customPosition, text);
         });
 
         function handleModelChange() {
             fflController.updateFFLModel(user_session.fflModelPath)
             matrixController.updateMatrix(user_session.fflModelPath)
             jBehaveController.updateStory(user_session.fflModelPath)
+            $scope.updateModelChanges()
         }
 
         $.getJSON("models", function(data) {
@@ -270,10 +255,8 @@ angular.module('lmeapp', ['angular.filter'])
                 return false;
             }
         });
-
         $scope.activeVariable = [];
         $scope.schema = register.schema
-
         right_editor.aceEditor.on("mousedown", function() {
             $scope.changeView('jbehaveView')
             if (register.changes.length > 0) {
@@ -283,7 +266,6 @@ angular.module('lmeapp', ['angular.filter'])
             }
             $scope.runJBehaveTest()
         });
-
         /* This watches the propertiesView on the right side of the page.*/
         $scope.$watch(function(scope) {
                 if (scope.register.changes.length > 0) {
@@ -301,7 +283,6 @@ angular.module('lmeapp', ['angular.filter'])
         );
         $scope.togglePropertiesSidebar();
         handleModelChange()
-
         $scope.isOpen = function(node, closed_nodes) {
             var path = node.path.split('.')
             for (var i = 0; i < path.length; i++) {
