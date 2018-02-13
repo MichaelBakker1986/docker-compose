@@ -11,9 +11,7 @@ module.exports.setup = function(app) {
         new Promise(function(success, fail) {
             try {
                 var context = ds.getOrCreate(req.params.id);
-                //resolve context key to stored values
                 var columncontext = parseInt(req.params.columncontext || "0");
-                var tupleindex = req.params.tupleindex;
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
@@ -26,6 +24,16 @@ module.exports.setup = function(app) {
         }).catch(function(err) {
             log.error(err);
         });
+    }
+
+    function flatten(keyvalue, object) {
+        for (var key in object) {
+            if (typeof(object[key]) === 'object') flatten(keyvalue, object[key])
+            else {
+                if (keyvalue[key] != null) throw Error('Duplicate value input')
+                keyvalue[key] = object[key]
+            }
+        }
     }
 
     //should return 17 columns
@@ -42,9 +50,9 @@ module.exports.setup = function(app) {
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
-                let modelPrefix;
+                let modelPrefix = '';
                 switch (outputNodeName) {
-                    case "PrescanScore":
+                    case "PRESCAN":
                         modelPrefix = "PRESCAN"
                         break
                     case "FyndooCreditRating":
@@ -60,21 +68,20 @@ module.exports.setup = function(app) {
                         modelPrefix = "KSP"
                         break
                 }
-                modelPrefix = modelPrefix + "_"
+                modelPrefix = modelPrefix.toUpperCase() + "_"
 
                 //This is very very basic, rewrite required.
-                for (var q in body) {
-                    for (var c in body[q]) {
-                        if (typeof(body[q][c]) != 'object') {
-                            LMECalculationFacade.getValue(context, modelPrefix + c, 0, body[q][c], undefined)
-                        }
-                    }
+
+                const keyValue = {};
+                flatten(keyValue, body);
+                for (var key in keyValue) {
+                    LMECalculationFacade.getValue(context, modelPrefix + key, 0, keyValue[key], undefined)
                 }
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
                 if (outputNodeName == 'LGDCalculationOutputContainer') context.columns = 1;
-                else if (outputNodeName == 'PrescanScore') context.columns = 1;
+                else if (outputNodeName == 'PRESCAN') context.columns = 1;
                 else if (outputNodeName == 'FyndooCreditRating') context.columns = 1;
                 else if (outputNodeName == 'TupleRestTestOutput') context.columns = 1
                 else if (outputNodeName == 'KinderSpaarPlan') context.columns = 17;

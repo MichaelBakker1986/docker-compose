@@ -2,24 +2,24 @@ const WorkBook = require('../../lme-core/src/JSWorkBook'), Context = require('..
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const assert = require('assert')
 require('../../math')
-const CalculationFacade = require('../../lme-core').CalculationFacade;
-CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
+const LMEFacade = require('../../lme-core').LMEFacade;
+LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
 const excelPlugin = require('../../excel-connect').xlsxLookup;
 const log = require('log6')
-CalculationFacade.addFunctions(excelPlugin);
+LMEFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
     const wb = new WorkBook(new Context());
     wb.importSolution(require("fs").readFileSync(__dirname + '/KSP.ffl', "utf8"), 'ffl')
     wb.set('IncomeParent01', 25000)
     assert.equal(wb.get('IncomeParent01'), 25000)
 //same response from restApi
-    const fesGetValue = CalculationFacade.getValue({
+    const fesGetValue = LMEFacade.getValue({
         columns: 3,
         properties: {value: true, title: true},
         values: wb.context.values
     }, 'KSP_IncomeParent01');
     assert.equal(fesGetValue[0].value, 25000)
-    const valueResponse = CalculationFacade.getValue({
+    const valueResponse = LMEFacade.getValue({
         columns: 3,
         properties: {value: true, title: true},
         values: wb.context.values

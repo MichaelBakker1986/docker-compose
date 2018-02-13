@@ -285,8 +285,8 @@ model FyndooCreditRating uses BaseModel
   }
   variable FyndooCreditRating
   {
-   aggregation: balance;
    data_options: Output;
+   frequency: document;
    title: "FyndooCreditRating";
    options_title: locked;
    display_options: showColumnTitlesAboveSubVars;

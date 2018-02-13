@@ -14,12 +14,12 @@ var Context = require('../../lme-core/src/Context')
 var log = require('log6')
 var assert = require('assert')
 require('../../math')
-var CalculationFacade = require('../../lme-core').CalculationFacade;
+var LMEFacade = require('../../lme-core').LMEFacade;
 var fs = require('fs');
-CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
+LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
 var excelPlugin = require('../../excel-connect').xlsxLookup;
-CalculationFacade.addFunctions(excelPlugin);
+LMEFacade.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new Context());
 
 

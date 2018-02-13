@@ -3,9 +3,9 @@
  * TODO: concat the matrix files into one
  * TODO: ModelName to Entrypoints mapping
  */
-const CalculationFacade = require('../lme-core').CalculationFacade;
-CalculationFacade.addFunctions(require('../math').mathJs);
-CalculationFacade.addFunctions(require('../formulajs-connect').formulajs);
+const LMEFacade = require('../lme-core').LMEFacade;
+LMEFacade.addFunctions(require('../math').mathJs);
+LMEFacade.addFunctions(require('../formulajs-connect').formulajs);
 const SolutionFacade = require('../lme-core/src/SolutionFacade');
 require('../lme-core/exchange_modules/swagger/swaggerParser');
 const ModelListener = require('../git-connect').ModelListener;
@@ -14,7 +14,7 @@ const APIDefinition = require(__dirname + '/api/AuthenticatedSwaggerDefinition.j
 const log = require('log6')
 
 modelLoadListener.addListener(function(fflModelData, path) {
-    const lmeModel = CalculationFacade.initializeFFlModelData(fflModelData, path);
+    const lmeModel = LMEFacade.initializeFFlModelData(fflModelData, path);
     const modelname = lmeModel.modelName;
     const indexer = lmeModel.indexer
     const names = indexer.getIndex('name')
@@ -98,6 +98,6 @@ excelPlugin.initComplete('KSP').then(function(matrix) {
 }).catch(function(err) {
     log.error(err)
 })
-CalculationFacade.addFunctions(excelPlugin);
+LMEFacade.addFunctions(excelPlugin);
 exports.ModelLoader = modelLoadListener
-exports.LMECalculationFacade = CalculationFacade
+exports.LMECalculationFacade = LMEFacade

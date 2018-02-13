@@ -1,6 +1,6 @@
 var assert = require('assert')
 var WorkBook = require('../src/JSWorkBook');
-var api = require('..').CalculationFacade;
+var api = require('..').LMEFacade;
 require('../../math')
 var Context = require('../src/Context');
 var wb = new WorkBook(new Context());

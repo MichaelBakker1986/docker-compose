@@ -3,10 +3,10 @@ const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 const Context = require('../../lme-core/src/Context')
 const log = require('log6')
 const assert = require('assert')
-const CalculationFacade = require('../../lme-core').CalculationFacade;
+const LMEFacade = require('../../lme-core').LMEFacade;
 const excelPlugin = require('../excel-connect').xlsxLookup;
 require('../../math');
-CalculationFacade.addFunctions(excelPlugin);
+LMEFacade.addFunctions(excelPlugin);
 excelPlugin.initComplete('KSP').then(function(matrix) {
     SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
     var wb = new WorkBook(new Context());

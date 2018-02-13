@@ -61,7 +61,7 @@ class Authorization {
             '/data-docs/',
 
             '/figure/KinderSpaarPlan',
-            '/figure/LGDCalculationInputContainer',
+            '/figure/LGDCalculationOutputContainer',
             '/figure/PrescanScore',
             '/figure/' + FYNDOOCREDITRATING,
 

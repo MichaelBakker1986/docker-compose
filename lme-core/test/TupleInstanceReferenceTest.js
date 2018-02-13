@@ -8,8 +8,8 @@ const WorkBook = require('../src/JSWorkBook')
 const Context = require('../src/Context')
 const YAxis = require('../src/YAxis')
 require('../../math')
-const CalculationFacade = require('../').CalculationFacade;
-CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
+const LMEFacade = require('../').LMEFacade;
+LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
 const wb = new WorkBook(new Context());
 wb.importSolution(require('fs').readFileSync(__dirname + '/../resources/TupleValueTest.ffl', 'utf-8'), 'ffl');
 

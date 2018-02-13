@@ -7,10 +7,10 @@ const log = require("log6");
 const WorkBook = require("./src/JSWorkBook");
 const Context = require("./src/Context");
 
-function LMEService() {
+function LMEFacade() {
 }
 
-LMEService.prototype.initializeFFlModelData = function(data, path) {
+LMEFacade.prototype.initializeFFlModelData = function(data, path) {
     var JSWorkBook;
     if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
         JSWorkBook = new WorkBook(new Context());
@@ -32,7 +32,7 @@ LMEService.prototype.initializeFFlModelData = function(data, path) {
     }
     return JSWorkBook;
 };
-LMEService.prototype.addFunctions = function(plugin) {
+LMEFacade.prototype.addFunctions = function(plugin) {
     var functions = [];
     for (var functionName in plugin.entries) {
         functions.push(functionName);
@@ -47,7 +47,7 @@ LMEService.prototype.addFunctions = function(plugin) {
  */
 // Convert tuple index to tuple number
 
-LMEService.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
+LMEFacade.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
     columncontext = columncontext || 0;
     const fesContext = new Context();
     fesContext.values = context.values;
@@ -85,7 +85,7 @@ LMEService.prototype.getValue = function(context, rowId, columncontext, value, t
     }
 };
 
-LMEService.prototype.getObjectValues = function(context, rowId, tupleindex) {
+LMEFacade.prototype.getObjectValues = function(context, rowId, tupleindex) {
 
     var fesContext = new Context();
     fesContext.values = context.values;
@@ -201,4 +201,4 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 
 exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
-exports.CalculationFacade = LMEService.prototype;
+exports.LMEFacade = LMEFacade.prototype;

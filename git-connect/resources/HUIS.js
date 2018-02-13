@@ -18110,7 +18110,7 @@ function getEntry(workbook, rowId, columncontext, yAxis) {
 
 exports.JSWorkbook = WorkBook;
 exports.LMEContext = WorkBook;
-exports.CalculationFacade = LMEService.prototype;
+exports.LMEFacade = LMEService.prototype;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lme-core\\index.js","/lme-core",undefined)
 },{"./exchange_modules/ffl/RegisterPlainFFLDecorator":11,"./resources/CustomImport":18,"./src/Context":20,"./src/JSWorkBook":24,"./src/TimeAxis":29,"_process":38,"buffer":36,"log6":35}],18:[function(require,module,exports){
@@ -25019,7 +25019,7 @@ require('../../math');
 const bookyearTimeModel = require('../../lme-core/src/XAxis');
 const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
-const CalculationFacade = require('../../lme-core').CalculationFacade;
+const CalculationFacade = require('../../lme-core').LMEFacade;
 CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI(TimeModel, Ctx, interval) {

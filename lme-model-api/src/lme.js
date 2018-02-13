@@ -7,8 +7,8 @@ require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../../math');
 const CustomTimeModel = require('../../lme-core/src/TimeAxis');
 const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
-const CalculationFacade = require('../../lme-core').CalculationFacade;
-CalculationFacade.addFunctions(require("../../formulajs-connect").formulajs);
+const LMEFacade = require('../../lme-core').LMEFacade;
+LMEFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
 function LmeAPI(TimeModel, Ctx, interval) {
     const Context = require('../../lme-core/src/Context');
@@ -26,7 +26,7 @@ LmeAPI.prototype.hasChanges = function() {
 LmeAPI.prototype.getTimeViews = function() {
     return this.lme.getTimeViews();
 }
-LmeAPI.prototype.addFunctions = CalculationFacade.addFunctions;
+LmeAPI.prototype.addFunctions = LMEFacade.addFunctions;
 LmeAPI.prototype.exportLME = function() {
     return this.lme.export('lme')
 }

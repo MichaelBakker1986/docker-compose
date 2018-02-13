@@ -8,13 +8,13 @@ require('../exchange_modules/ffl/RegisterPlainFFLDecorator');
 require('../exchange_modules/presentation/webexport');
 
 require('../../math')
-var CalculationFacade = require('../').CalculationFacade;
+var LMEFacade = require('../').LMEFacade;
 var Context = require('../src/Context');
 var FormulaService = require('../src/FormulaService');
 var SolutionFacade = require('../src/SolutionFacade');
 const ValueFacade = require('../src/ValueFacade');
-CalculationFacade.addFunctions(require('../../formulajs-connect').formulajs);
-CalculationFacade.addFunctions(require('../../excel-connect').xlsxLookup);
+LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
+LMEFacade.addFunctions(require('../../excel-connect').xlsxLookup);
 var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
 var fs = require('fs');
