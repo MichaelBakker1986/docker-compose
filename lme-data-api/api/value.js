@@ -34,13 +34,16 @@ module.exports.setup = function(app) {
         new Promise(function(success, fail) {
             try {
                 const body = req.body;
+
                 let result;
                 var context = ds.getOrCreate(req.params.id);
-                const url = req.originalUrl.toLowerCase();
+                const url = req.originalUrl;
+                const outputNodeName = req.params.figureName;
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
-                const modelPrefix = (url.endsWith('prescan') ? 'PRESCAN' : url.endsWith('TupleRestTestInput') ? 'TUPLERESTMODEL' : url.endsWith('Container') ? 'LGD' : "KSP") + '_';
+                const modelPrefix = (outputNodeName == 'PrescanScore' ? 'PRESCAN' : outputNodeName == 'TupleRestTestInput' ? 'TUPLERESTMODEL' : outputNodeName == 'LGDCalculationOutputContainer' ? 'LGD' : "KSP") + '_';
+
                 //This is very very basic, rewrite required.
                 for (var q in body) {
                     for (var c in body[q]) {
@@ -52,25 +55,13 @@ module.exports.setup = function(app) {
                 /**
                  * TODO: find generic way to map the Output node to the model name
                  */
-                if (url.endsWith('container')) {
-                    context.columns = 1;
-                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "LGDCalculationOutputContainer", undefined);
-                }
-                else if (url.endsWith('prescan')) {
-                    context.columns = 1;
-                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "Prescan", undefined);
-                }
-                else if (url.endsWith('tupleresttestinput')) {
-                    context.columns = 1;
-                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "TupleRestTestOutput", undefined);
-                }
-                else if (url.endsWith('ksp')) {
-                    context.columns = 17;
-                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "Q_MAP06", undefined);
-                } else {
-                    log.warn('Invalid rest api call ' + url)
-                    result = {}
-                }
+                if (outputNodeName == 'LGDCalculationOutputContainer') context.columns = 1;
+                else if (outputNodeName == 'PrescanScore') context.columns = 1;
+                else if (outputNodeName == 'TupleRestTestOutput') context.columns = 1
+                else if (outputNodeName == 'KinderSpaarPlan') context.columns = 17;
+                else log.warn('Invalid rest api call ' + url)
+                result = LMECalculationFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined);
+
                 if (!result) result = {status: 'failed '}
                 success(result)
             } catch (err) {

@@ -242,12 +242,11 @@ model PRESCAN uses BaseModel
     fixed_decimals: 0;
    }
   }
-  variable Score
+  variable ScoreStap
   {
    frequency: document;
    title: "score";
-   data_options: Output;
-   variable TotalPrescanScore
+   variable Score
    {
     frequency: document;
     title: "Score";
@@ -256,5 +255,10 @@ model PRESCAN uses BaseModel
     fixed_decimals: 0;
    }
   }
+ }
+ variable PrescanScore refers to Score
+ {
+  data_options: Output;
+  title:"PrescanScore";
  }
 }

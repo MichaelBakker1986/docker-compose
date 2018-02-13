@@ -25,16 +25,22 @@ modelLoadListener.addListener(function(fflModelData, path) {
      * Is only used for KSP
      * TODO: make more generic solution
      */
-    const inputNodes = indexer.find('displaytype', 'Input').concat(indexer.find('data_options', 'Input'))
-    if (inputNodes.length > 0) {
-        let endPointname;
 
-        for (var i = 0; i < inputNodes.length; i++) {
-            var node = inputNodes[i];
-            endPointname = node[indexer.schemaIndexes.name]
+    const outputNodes = indexer.find('displaytype', 'Output').concat(indexer.find('data_options', 'Output'))
+    if (outputNodes.length > 0) {
+        let endPointname;
+        const inputNodes = indexer.find('displaytype', 'Input').concat(indexer.find('data_options', 'Input'))
+        if (outputNodes.length != inputNodes.length) {
+            log.warn('invalid in and output-nodes ')
+            return;
+        }
+        for (var i = 0; i < outputNodes.length; i++) {
+            var outputNode = outputNodes[i];
+            var inputNode = inputNodes[i];
+            endPointname = outputNode[indexer.schemaIndexes.name]
             const operation = "/figure/" + endPointname;
             const schema = lmeModel.export('swagger', {
-                rowId: endPointname,
+                rowId: inputNode[indexer.schemaIndexes.name],
                 type: 'input'
             });
             if (!APIDefinition.paths[operation]) {
@@ -66,7 +72,6 @@ modelLoadListener.addListener(function(fflModelData, path) {
                 "schema": schema
             })
         }
-        const outputNodes = indexer.find('displaytype', 'Output').concat(indexer.find('data_options', 'Output'))
         for (var i = 0; i < outputNodes.length; i++) {
             var node = outputNodes[i];
             const swaggerSchema = lmeModel.export('swagger', {

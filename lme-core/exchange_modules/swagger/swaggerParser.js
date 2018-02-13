@@ -28,7 +28,7 @@ SwaggerParser.prototype.parseInput = function(metaData, workbook) {
         if (type == 'input' && workbook.get(nodeName, 'locked') && node[childrenIndex].length == 0) {
             return;
         }
-        let nodeType = 'string';
+        let nodeType = 'number';
         const currentNode = {
             type: nodeType,
             description: workbook.get(nodeName, 'title')
@@ -57,11 +57,9 @@ SwaggerParser.prototype.parseInput = function(metaData, workbook) {
             currentNode.properties = {}
             for (var type in workbook.properties) {
                 if (type.startsWith("_")) continue
-                //   if (node[register.schemaIndexes[type]]) {
                 currentNode.properties[type] = {
                     "type": type == 'title' ? 'string' : "boolean"
                 }
-                // }
             }
             currentNode.properties.value = {
                 "type": currentNode.type

@@ -6,11 +6,11 @@ model KSP uses BaseModel
   frequency: document;
   display_options: scorecard;
   hint: "This module enables you to gain insight in the costs involved for raising a child";
-  variable KinderSpaarPlan
+  variable KinderSpaarPlanInput
   {
    title: "Input";
    frequency: document;
-   displaytype: Input;
+   data_options: Input;
    required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
    choices: "0:Complete|1:Incomplete";
    variable Parents
@@ -750,27 +750,24 @@ model KSP uses BaseModel
     hint: "per maand";
    }
   }
-  variable Q_MAP06
+  variable KinderSpaarPlan
   {
    title: "Your Personal situation";
    locked: 1;
    frequency: document;
-   displaytype:Output;
-   datatype: number;
+   data_options: Output;
    choices: "0:Complete|1:Incomplete";
    variable PersonalSituation
    {
     title: "Your Personal Situation";
     locked: 1;
     frequency: column;
-    datatype: number;
     variable TotalNetCosts
     {
      title: "Total Net Costs";
      locked: 1;
      frequency: column;
      formula: TotalYearlyBalance;
-     datatype: number;
      fixed_decimals: 2;
      aggregation: balance;
     }
@@ -780,7 +777,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: column;
      formula: ChildAgeInTime-1;
-     datatype: number;
      fixed_decimals: 0;
      aggregation: flow;
     }
@@ -790,7 +786,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: column;
      formula: If(ChildAgeInTime=1,1800,0);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -800,7 +795,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: column;
      formula: If((Age<=3),(HourlyFeeChildCare*NrOfHoursChildcareMonth)*12, 0);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -810,7 +804,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Diapers",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -820,7 +813,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup(null,"YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -830,7 +822,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -840,7 +831,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -850,7 +840,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -860,7 +849,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Inventory",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -870,7 +858,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Allowance",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -880,7 +867,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Contributions",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -890,7 +876,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","Transport",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -900,7 +885,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -910,7 +894,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",ChildAgeInTime);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -920,7 +903,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,0);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -930,7 +912,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -940,7 +921,6 @@ model KSP uses BaseModel
      frequency: column;
      locked: 1;
      formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -950,7 +930,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: column;
      formula: CostsUnspecified*12;
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }
@@ -960,7 +939,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: column;
      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
-     datatype: number;
      fixed_decimals: 2;
      aggregation: flow;
     }

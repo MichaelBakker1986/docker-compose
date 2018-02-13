@@ -5,8 +5,8 @@ model LGD uses BaseModel
   display_options: scorecard;
   variable LGDCalculationInputContainer
   {
-   displaytype: Input;
    datatype: string;
+   data_options: Input;
    title: "LGDCalculationInputContaine1r";
    frequency: document;
    variable FacilityInputContainer
@@ -292,7 +292,7 @@ model LGD uses BaseModel
   }
   variable LGDCalculationOutputContainer
   {
-   displaytype: Output;
+   data_options: Output;
    datatype: string;
    title: "LGDCalculationOutputContainer";
    frequency: document;
