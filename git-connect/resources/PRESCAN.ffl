@@ -247,11 +247,12 @@ model PRESCAN uses BaseModel
   {
    frequency: document;
    title: "score";
+   locked: On;
    variable Score
    {
     frequency: document;
     title: "Score";
-    locked: 1;
+    locked: On;
     formula: Weging11*Vraag11+Weging12*Vraag12+Weging13*Vraag13+Weging14*Vraag14+ Weging15*Vraag15+Weging21*Vraag21+Weging22*Vraag22+Weging23*Vraag23+ Weging24*Vraag24+Weging25*Vraag25+Weging31*Vraag31+Weging32*Vraag32+ Weging33*Vraag33+Weging34*Vraag34+Weging35*Vraag35;
     fixed_decimals: 0;
    }

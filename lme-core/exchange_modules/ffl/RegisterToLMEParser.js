@@ -58,6 +58,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const aggregationIndex = indexer.schemaIndexes.aggregation;
     const modifierIndex = indexer.schemaIndexes.modifier;
     const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
+    const parentNameIndex = indexer.schemaIndexes.parentId;
 
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
@@ -81,7 +82,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             const supertype = register[node[referstoIndex]]
             if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
             //first inherit from parents of parents.
-            if (supertype[fflRegister.referstoIndex]) inheritProperties(supertype)
+            if (supertype[referstoIndex]) inheritProperties(supertype)
 
             for (var i = 0; i < supertype.length; i++) {
                 if (node[i] == null) node[i] = supertype[i];
@@ -122,7 +123,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             frequency = 'none'
         }
         // expecting an parentName..
-        var parentId = node[fflRegister.parentNameIndex] ? indexer.i[node[fflRegister.parentNameIndex]][fflRegister.nameIndex] : null;
+        var parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null;
         if (parentId == 'root') {
             parentId = undefined;
         }
@@ -160,7 +161,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
             if (node[modifierIndex] == '=') {
                 display_options = 'displayAsSummation'
-                const siblings = indexer.i[node[fflRegister.parentNameIndex]][childIndex]
+                const siblings = indexer.i[node[parentNameIndex]][childIndex]
                 var formula = '0';
                 for (var i = 0; i < siblings.length; i++) {
                     if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {

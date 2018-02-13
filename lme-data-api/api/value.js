@@ -1,7 +1,7 @@
 const MatrixStore = require('../MatrixStore').MatrixStore;
 const log = require('log6')
 const ModelLoader = require('../FinancialModelLoader');
-const LMECalculationFacade = ModelLoader.LMECalculationFacade
+const LMEFacade = ModelLoader.LMEFacade
 
 module.exports.setup = function(app) {
     var ds = new MatrixStore();
@@ -15,7 +15,7 @@ module.exports.setup = function(app) {
                 var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName;
                 var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
-                success(LMECalculationFacade.getValue(context, variablename, columncontext, value, undefined))
+                success(LMEFacade.getValue(context, variablename, columncontext, value, undefined))
             } catch (err) {
                 fail(err);
             }
@@ -77,7 +77,7 @@ module.exports.setup = function(app) {
                 const keyValue = {};
                 flatten(keyValue, body);
                 for (var key in keyValue) {
-                    LMECalculationFacade.getValue(context, modelPrefix + key, 0, keyValue[key], undefined)
+                    LMEFacade.getValue(context, modelPrefix + key, 0, keyValue[key], undefined)
                 }
                 /**
                  * TODO: find generic way to map the Output node to the model name
@@ -88,7 +88,7 @@ module.exports.setup = function(app) {
                 else if (outputNodeName == 'TupleRestModel') context.columns = 1
                 else if (outputNodeName == 'KinderSpaarPlan') context.columns = 17;
                 else log.warn('Invalid rest api call ' + url)
-                result = LMECalculationFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined);
+                result = LMEFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined);
 
                 if (!result) result = {status: 'failed '}
                 success(result)

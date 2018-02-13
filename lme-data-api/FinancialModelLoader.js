@@ -101,4 +101,4 @@ excelPlugin.initComplete('KSP').then(function(matrix) {
 })
 LMEFacade.addFunctions(excelPlugin);
 exports.ModelLoader = modelLoadListener
-exports.LMECalculationFacade = LMEFacade
+exports.LMEFacade = LMEFacade

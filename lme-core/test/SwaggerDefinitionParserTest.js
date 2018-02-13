@@ -613,7 +613,7 @@ for (var i = 0; i < fflTestModels.length; i++) {
         "schema": swaggerDefinition
     }
     var swaggerDefinitionOutput = wb.export('swagger', {
-        rowId: 'Q_MAP06',
+        rowId: 'KinderSpaarPlan',
         type: 'output'
     })
     /*   var outputResult = {

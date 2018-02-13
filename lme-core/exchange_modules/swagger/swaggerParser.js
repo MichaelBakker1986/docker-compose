@@ -2,6 +2,7 @@
  * Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.
  */
 const SolutionFacade = require('../../src/SolutionFacade')
+const log = require('log6')
 
 function SwaggerParser() {
 }
@@ -10,22 +11,56 @@ SwaggerParser.prototype.name = 'swagger'
 SwaggerParser.prototype.status = 'green';
 SwaggerParser.prototype.headername = '.swagger';
 
+SwaggerParser.prototype.deParse = function(metaData, workbook) {
+    if (metaData.type == 'output') return this.parseInput(metaData, workbook);
+    else if (metaData.type == 'input') return this.parseOutput(metaData, workbook)
+    else throw Error('Error while parsing Swagger. Invalid conversion type valid types: input|output')
+}
 SwaggerParser.prototype.parseInput = function(metaData, workbook) {
     const rowId = metaData.rowId
     const type = metaData.type
-    const register = workbook.indexer;
-    const startnode = register.getIndex('name')[rowId]
-    const nameIndex = register.schemaIndexes.name;
-    const childrenIndex = register.schemaIndexes.children;
-    const frequencyIndex = register.schemaIndexes.frequency;
-    const datatypeIndex = register.schemaIndexes.datatype;
-    const parentIdIndex = register.schemaIndexes.parentId;
+
+
+    const indexer = workbook.indexer;
+    const register = indexer.getIndex('name');
+    const startnode = indexer.getIndex('name')[rowId]
+    const nameIndex = indexer.schemaIndexes.name;
+    const childrenIndex = indexer.schemaIndexes.children;
+    const frequencyIndex = indexer.schemaIndexes.frequency;
+    const datatypeIndex = indexer.schemaIndexes.datatype;
+    const parentIdIndex = indexer.schemaIndexes.parentId;
+    const referstoIndex = indexer.schemaIndexes.refersto;
     const variables = {}
-    const names = register.getIndex('i')
+    const names = indexer.getIndex('i')
     let firstArray = true;
-    register.walk(startnode, 0, function(node, depth) {
+
+
+    //TODO: copy-paste from RegisterToLMEParser...
+    //only inherit properties once.
+    const inherited = {}
+    //INFO: inheritance could also be possible via database
+    //TODO: copy-paste from RegisterToLMEParser...
+    function inheritProperties(node) {
+        if (!inherited[node[nameIndex]] && node[referstoIndex]) {
+            inherited[node[nameIndex]] = true
+            const supertype = register[node[referstoIndex]]
+            if (supertype == null) {
+                if (log.DEBUG) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
+            }
+            //first inherit from parents of parents.
+            if (supertype[referstoIndex]) inheritProperties(supertype)
+            for (var i = 0; i < supertype.length; i++) {
+                if (node[i] == null) node[i] = supertype[i];
+            }
+        }
+    }
+
+    indexer.walk(startnode, 0, function(node, depth) {
         const nodeName = node[nameIndex];
-        if (type == 'input' && workbook.get(nodeName, 'locked') && node[childrenIndex].length == 0) {
+        inheritProperties(node)
+
+        const hasChildren = node[childrenIndex].length == 0;
+        if (workbook.get(nodeName, 'locked') && !hasChildren) {
             return;
         }
         let nodeType = 'number';
@@ -79,7 +114,7 @@ SwaggerParser.prototype.parseInput = function(metaData, workbook) {
             delete  currentNode.properties
         }
     })
-    register.walk(startnode, 0, function(node, depth) {
+    indexer.walk(startnode, 0, function(node, depth) {
         if (node[parentIdIndex]) {
             const variable = variables[node[nameIndex]];
             const parent = variables[names[node[parentIdIndex]][nameIndex]];
@@ -94,10 +129,9 @@ SwaggerParser.prototype.parseInput = function(metaData, workbook) {
     })
     return variables[rowId];
 }
-SwaggerParser.prototype.deParse = function(metaData, workbook) {
+SwaggerParser.prototype.parseOutput = function(metaData, workbook) {
     const rowId = metaData.rowId
     const type = metaData.type
-    if (type == 'output') return this.parseInput(metaData, workbook)
     const register = workbook.indexer;
     const startnode = register.getIndex('name')[rowId]
     const nameIndex = register.schemaIndexes.name;
@@ -110,10 +144,7 @@ SwaggerParser.prototype.deParse = function(metaData, workbook) {
     let firstArray = true;
     register.walk(startnode, 0, function(node, depth) {
         const nodeName = node[nameIndex];
-        if (type == 'input' && workbook.get(nodeName, 'locked') && node[childrenIndex].length == 0) {
-            return;
-        }
-        let nodeType = 'string';
+        let nodeType = 'number';
         const currentNode = {
             type: nodeType,
             description: workbook.get(nodeName, 'title')
@@ -131,7 +162,7 @@ SwaggerParser.prototype.deParse = function(metaData, workbook) {
             if (node[datatypeIndex]) {
                 currentNode.type = (node[datatypeIndex])
             } else {
-                currentNode.type = 'string'
+                currentNode.type = 'number'
             }
         }
         variables[nodeName] = currentNode
