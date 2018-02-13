@@ -483,8 +483,7 @@ define("token_tooltip", [], function(require, exports, module) {
     var Tooltip = require("ace/tooltip").Tooltip;
 
     function TokenTooltip(editor, register) {
-        if (editor.tokenTooltip)
-            return;
+        if (editor.tokenTooltip) return;
         Tooltip.call(this, editor.container);
         editor.tokenTooltip = this;
         this.editor = editor;
@@ -524,6 +523,7 @@ define("token_tooltip", [], function(require, exports, module) {
             TSUM: 'TSUM(variable_name)\nSUM of TupleInstances given name',
             MAX: 'MAX(n1,n2)\nReturn maximum value of value n1 or n2',
             MIN: 'MIN(n1,n2)\nReturn minimum value of value n1 or n2',
+            OnER: 'OnER(expression,error_value)',
             OnZero: 'OnZero(value,alternative)',
             TsY: 'Amount of times current period fits in a bookyear',
             MatrixLookup: 'MatrixLookup(a,named_table,row_name,column_name)',

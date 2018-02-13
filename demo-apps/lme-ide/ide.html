@@ -124,6 +124,13 @@
                     <a href="excel/{{session.fflModelPath}}" data-toggle="tooltip" title="Download matrix" download>
                         <i class="fa fa-cloud-download"></i> <span>Excel matrix</span>
                     </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li ng-repeat="matrix_table in matrix_tables" title="{{matrix_table}}">
+                            <a href="">
+                                <i class="fa fa-table"></i> {{matrix_table.name}}
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="resources/lme_docs.pdf" target="_blank" data-toggle="tooltip" title="Formula information">

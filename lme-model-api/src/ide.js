@@ -1,64 +1,26 @@
-/**
- * editor variable is set to the window.
- */
-const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
-const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
-const StoryParser = require('../../model-tests/StoryParser').StoryParser
+/** * editor variable is set to the window. */
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
-const JSWorkBook = require('../../lme-core/src/JSWorkBook')
-const Context = require('../../lme-core/src/Context')
 const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
 const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
-
-var fflModel = '';
+const JBehaveController = require('./JBehaveController')
+const MatrixManager = require('../../excel-connect/MatrixManager').MatrixManager
+const MatrixController = require('./MatrixController')
+const FFLController = require('./FFLController')
+const DebugController = require('./DebugController')
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
 var params = window.location.href.split('#')[1].split('&')
-var windowModelName = params[0] || 'SCORECARDTESTMODEL';
-var userID = params[1] || 'DEMO'
-const newSotryTemplate =
-    "{model_name} Score Basic\n" +
-    "@Author {author_name}\n" +
-    "@themes {model_name} Score basic\n" +
-    "\n" +
-    "Scenario: Verify {model_name} Score calculations\n" +
-    "Given a document of the model type {model_name}"
 
-//just an dummy-template to quickly create a model
-var newModelTemplate = "model $1 uses BaseModel\n" +
-    "{\n" +
-    " version: \"1.0\";\n" +
-    " root\n" +
-    " {\n" +
-    "  variable Q_ROOT\n" +
-    "  {\n" +
-    "   title: \"Stap 1\";\n" +
-    "   displaytype: scorecard;\n" +
-    "   variable Q_MAP01\n" +
-    "   {\n" +
-    "    title: \"Stap 1\";\n" +
-    "    hint: \"Informatie over de stap\";\n" +
-    "    variable Q_MAP01_VRAAG0\n" +
-    "    {\n" +
-    "     title: \"TestVraag\";\n" +
-    "     frequency: document;\n" +
-    "     datatype: number;\n" +
-    "     formula: 100+100;\n" +
-    "    }\n" +
-    "   }\n" +
-    "  }\n" +
-    " }\n" +
-    "}"
 const user_session = {
     disablePreviewButton: true,
-    fflModelPath: windowModelName,
+    fflModelPath: params[0] || 'SCORECARDTESTMODEL',
     page: 'scorecard',
-    version: '0.0.6',
+    fflModel: '',
+    version: '0.0.7',
     author: "michael.bakker@topicus.nl",
     user: {
-        name: userID
+        name: params[1] || 'DEMO'
     },
     messages: {
         data: [
@@ -68,9 +30,11 @@ const user_session = {
         ]
     }
 }
-
 angular.module('lmeapp', ['angular.filter'])
     .controller('ideController', function($scope, $http, $timeout) {
+        const matrixManager = new MatrixManager()
+        const matrixController = new MatrixController($scope, $http, matrixManager)
+        const debugController = new DebugController($scope, $http)
         $http.get('whoami').then(function(response) {
             user_session.user.name = response.data.split(',')[0]
         }).catch(function(err) {
@@ -78,7 +42,7 @@ angular.module('lmeapp', ['angular.filter'])
         })
         $scope.session = user_session;
         $scope.model_history = []
-        $.get("modelChanges/" + windowModelName, function(data, status, xhr) {
+        $.get("modelChanges/" + user_session.fflModelPath, function(data, status, xhr) {
             const history = [];
             const hashes = {};
             for (var i = 0; i < data.data.length; i++) {
@@ -107,13 +71,14 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.register = register;
         const AceEditor = require('./ace_editor_api').AceEditor
         const right_editor = new AceEditor("right_editor");
-
+        const jBehaveController = new JBehaveController($scope, $http, null, right_editor, user_session)
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
         $scope.currentView = 'FFLModelEditorView'
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
-        const aceEditor = new AceEditor("editor");
+        const fflEditor = new AceEditor("editor");
+        const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager)
 
         var HoverLink = ace.require("hoverlink").HoverLink
         var TokenTooltip = ace.require("token_tooltip").TokenTooltip
@@ -121,41 +86,20 @@ angular.module('lmeapp', ['angular.filter'])
         function registerEditorToClickNames(selected_editor) {
             selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register);
             selected_editor.aceEditor.hoverLink.on("open", function(link) {
-                const startLookIndex = fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
+                const startLookIndex = user_session.fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
                 //(!) its the real LineNumber - Delta on page
-                const lineNumber = fflModel.substring(0, startLookIndex).split('\n').length
-                aceEditor.scrollToLine(lineNumber)
+                const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
+                fflEditor.scrollToLine(lineNumber)
             })
             selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register);
         }
 
         registerEditorToClickNames(right_editor)
-        registerEditorToClickNames(aceEditor)
+        registerEditorToClickNames(fflEditor)
 
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });
-
-
-        $.getScript('engineonly.js', function(data, textStatus, jqxhr) {
-            $.get("resources/" + windowModelName + ".ffl", function(data, status, xhr) {
-                aceEditor.setValue(data)
-                $scope.reloadFFL()
-                //Also tell the auto-complete manager to initiate
-                changeManager.updateCursor(aceEditor.getValue(), 0);
-            }).fail(function(err) {
-                console.error(err)
-            })
-
-        }).fail(function() {
-            if (arguments[0].readyState == 0) {
-                console.info('Failed to load')
-                //script failed to load
-            } else {
-                //script loaded but failed to parse
-                console.info('resources/' + windowModelName + '.js' + ":[" + arguments[2].toString() + ']')
-            }
-        })
 
         var sidebaropen = false;
         $scope.togglePropertiesSidebar = function(open) {
@@ -173,168 +117,44 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.dbModelConvert = function() {
             $scope.fflType = '.ffl'
             Pace.track(function() {
-                $.getJSON("model?model=" + windowModelName, function(data) {
+                $.getJSON("model?model=" + user_session.fflModelPath, function(data) {
                     currentIndexer = new RegisterToFFL(register);
                     currentIndexer.indexProperties();
                     const lines = currentIndexer.toGeneratedCommaSeperated()
-                    aceEditor.setValue(lines)
+                    fflEditor.setValue(lines)
                 }).fail(function() {
                     console.info('Model get fail')
                 });
             });
         }
-        $scope.runJBehaveTest = function() {
-            var annotations = []
-            LMEMETA.lme.clearValues();//Quick-fix to clear state, we should just create a copy of the current one.
-            var storyParser = new StoryParser(right_editor.getValue(), windowModelName + '.story', LMEMETA.lme);
-            storyParser.message = function(event) {
-                annotations.push({
-                    row: event.line - 1,
-                    column: 0,
-                    text: event.result.message, // Or the Json reply from the parser
-                    type: event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
-                })
-                right_editor.setAnnotations(annotations);
-            }
-            storyParser.then = function(event) {
-                $scope.session.messages.data.push({
-                    text: 'jBehave tests done ' + storyParser.results.rate().toFixed(1) + '% passed'
-                })
-            }
-            storyParser.start();
-            storyParser.call();
-        }
+
         $scope.saveFileInView = function() {
-            if ($scope.currentView == 'FFLModelEditorView') {
-                $scope.saveFFLModel()
-            } else if ($scope.currentView == 'jbehaveView') {
-                $scope.saveJBehaveStory()
-            }
+            if ($scope.currentView == 'FFLModelEditorView') $scope.saveFFLModel()
+            else if ($scope.currentView == 'jbehaveView') $scope.saveJBehaveStory()
         }
-        $scope.saveJBehaveStory = function() {
-            const type = '.story';
-            Pace.track(function() {
-                $scope.saveFeedback = "Saving story " + $scope.session.fflModelPath + "… "
-                $scope.saveFeedbackTitle = "Working on it... ";
-                var data = right_editor.getValue()
-                $.post("saveJBehaveStory/" + $scope.session.fflModelPath, {
-                    data: data,
-                    type: type
-                }, function(data) {
-                    $scope.$apply(function() {
-                        $scope.saveFeedbackTitle = "Finished"
-                        $scope.saveFeedback = data.status == 'fail' ? 'Failed saving story :' + data.reason : 'Done work.'
-                        $scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.story'
-                        $scope.session.disablePreviewButton = false;
-                        if (data.status == 'success') {
-                            $('#modal-success').modal('hide')
-                        }
-                    })
-                });
-            });
-        }
-        $scope.saveFFLModel = function() {
-            const type = '.ffl';
-            Pace.track(function() {
-                $scope.saveFeedback = "Customizing " + $scope.session.fflModelPath + "… "
-                $scope.saveFeedbackTitle = "Working on it... ";
-                var data = aceEditor.getValue()
-                $.post("saveFFLModel/" + $scope.session.fflModelPath, {
-                    data: data,
-                    type: type
-                }, function(data) {
-                    $scope.$apply(function() {
-                        $scope.saveFeedbackTitle = "Finished"
-                        $scope.saveFeedback = data.status == 'fail' ? 'Failed compiling model:' + data.reason : 'Done work.'
-                        $scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.js'
-                        $scope.session.disablePreviewButton = false;
-                        if (data.status == 'success') {
-                            window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
-                            $('#modal-success').modal('hide')
-                        }
-                    })
-                });
-            });
-        }
+
         $scope.goToPreviewPage = function() {
             $scope.session.disablePreviewButton = true;
             $scope.downloadJsLink = null;
-            window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + userID)
+            window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + user_session.user.name)
             $('#modal-success').modal('toggle');
         }
 
-        /**
-         * DEBUG FUNCTIONALITY, deep dive- pilot
-         */
-        /*$scope.breakpoints = []
-        aceEditor.aceEditor.on("guttermousedown", function(e) {
-            var target = e.domEvent.target;
-            if (target.className.indexOf("ace_gutter-cell") == -1)
-                return;
-            if (!aceEditor.aceEditor.isFocused())
-                return;
-            if (e.clientX > 25 + target.getBoundingClientRect().left)
-                return;
-
-            var row = e.getDocumentPosition().row;
-
-            e.editor.session.setBreakpoint(row);
-            $scope.$apply(function() {
-                $scope.breakpoints = aceEditor.aceEditor.session.$breakpoints;
-            })
-            e.stop();
-        })
-
-        function doStep() {
-            console.info(debugManager.getCurrentLine())
-            edit.gotoLine(debugManager.getCurrentLine())
-            debugManager.nextStep()
-        }
-
-        $scope.callDebug = function() {
-            const breaks = $scope.breakpoints
-            debugManager.initVariables(fflModel)
-            for (var i = 0; i < breaks.length; i++) {
-                var obj = breaks[i];
-                if (obj) {
-                    changeManager.updateCursor(fflModel, {row: i, col: 0})
-                    var property = aceEditor.aceEditor.session.getLine(i).trim().split(':')[0].trim()
-                    property = property == 'formula' ? 'value' : property
-                }
-            }
-            //once call is done, we reproduce the steps.
-            debugManager.active = true;
-            doStep()
-        }
-        /**
-         * END DEBUG FUNCTIONALITY
-         */
         $scope.sneakPreviewModel = function() {
             Pace.track(function() {
                 $.post("preview/" + $scope.session.fflModelPath, {
-                    data: aceEditor.getValue()
+                    data: fflEditor.getValue()
                 }, function(data) {
-                    window.open($scope.session.page + '.html#' + data.link + '&' + userID);
+                    window.open($scope.session.page + '.html#' + data.link + '&' + user_session.user.name);
                 });
             });
         }
-        $scope.reloadFFL = function() {
-            //Hello engine-only
-            LMEMETA.importFFL(aceEditor.getValue())
-            LME = LMEMETA.exportWebModel()
-            $scope.LME_MODEL = LME.nodes
-            $scope.name = LME.name
-            $scope.LMEMETA = LMEMETA;
 
-            LMEMETA.loadData(function(response) {
-                $scope.$digest()
-            })
-        }
         $scope.previewRestApi = function() {
             $scope.reloadFFL();
             Pace.track(function() {
                 $.post("preview/" + $scope.session.fflModelPath, {
-                    data: aceEditor.getValue()
+                    data: fflEditor.getValue()
                 }, function(data) {
                     window.open('data-api-docs');
                 });
@@ -342,31 +162,6 @@ angular.module('lmeapp', ['angular.filter'])
         }
         global.debug = function(name) {
             debugManager.addStep(name)
-        }
-        $scope.toggleFormatter = function() {
-            const cursor = aceEditor.getCursor()
-            fflModel = new FFLFormatter(register, aceEditor.getValue()).toString();
-            aceEditor.setParsedValue(fflModel);
-            aceEditor.aceEditor.gotoLine(cursor.row + 1, cursor.column)
-        }
-        $scope.toggleWrapLines = function() {
-            this.toggleFormatter()
-        }
-        $scope.toggleProperties = function() {
-            EconomicEditorView.properties = !EconomicEditorView.properties;
-            aceEditor.setParsedValue(fflModel)
-            aceEditor.scrollTop()
-        }
-        $scope.toggleScorecardTool = function() {
-            const cursor = aceEditor.getCursor()
-            fflModel = ScorecardTool.parse(aceEditor.getValue());
-            aceEditor.setParsedValue(fflModel);
-            aceEditor.aceEditor.gotoLine(cursor.row + 1, cursor.column)
-        }
-        $scope.toggleAceEditorMode = function() {
-            $scope.fflmode = !$scope.fflmode;
-            EconomicEditorView.on = !EconomicEditorView.on;
-            aceEditor.setParsedValue(fflModel)
         }
 
         $scope.hasChanges = false;
@@ -400,14 +195,10 @@ angular.module('lmeapp', ['angular.filter'])
                 location.reload();
             });
         }
-        /**
-         * Auto-complete for JBehave view
-         **/
+        /*** Auto-complete for JBehave view **/
         $scope.changedView = function() {
             if ($scope.currentView == 'jbehaveView') {
                 console.info('Changed to JBEHAVE VIEW')
-                /*right_editor.aceEditor.renderer.setShowGutter(false)
-                aceEditor.aceEditor.renderer.setShowGutter(false)*/
                 const names = register.getIndex('name')
                 const wordMap = []
                 for (var name in names) {
@@ -415,7 +206,7 @@ angular.module('lmeapp', ['angular.filter'])
                         {"word": name}
                     )
                 }
-                aceEditor.addCompleter(function(editor, session, pos, prefix, callback) {
+                fflEditor.addCompleter(function(editor, session, pos, prefix, callback) {
                     if (prefix.length === 0) {
                         callback(null, []);
                         return
@@ -426,65 +217,31 @@ angular.module('lmeapp', ['angular.filter'])
                 })
                 $scope.reloadFFL();
                 $scope.runJBehaveTest();
-            } else {
-                /*  right_editor.aceEditor.renderer.setShowGutter(true)
-                  aceEditor.aceEditor.renderer.setShowGutter(true)*/
             }
         }
 
         $(".toggle-expand-btn").click(function(e) {
             $(this).closest('.content .box').toggleClass('panel-fullscreen');
         });
-        $(".data-story").click(function(e) {
-            $.get("resources/" + windowModelName + ".story", function(data, status, xhr) {
-                right_editor.setValue(data)
-            }).fail(function(err) {
-                if (err.status == 404) {
-                    right_editor.setValue(newSotryTemplate.replace(/{model_name}/g, windowModelName).replace(/{author_name}/g, userID))
-                } else {
-                    right_editor.setValue(err.statusText)
-                }
-            })
-        });
+
         $(".data-toggle-ide").click(function(e) {
             $scope.changeView('FFLModelEditorView')
         });
         $(".toggle-debug-btn").click(function(e) {
-            var wholelinetxt = aceEditor.getCurrentLine()
+            var wholelinetxt = fflEditor.getCurrentLine()
             var customPosition = {
-                row: aceEditor.getCursor().row,
+                row: fflEditor.getCursor().row,
                 column: 500
             };
 
             var text = '\t\t\t//*' + LME.nodes[wholelinetxt.replace(/variable (\w)/, '$1').trim()].value + "*//";
-            aceEditor.aceEditor.session.insert(customPosition, text);
+            fflEditor.aceEditor.session.insert(customPosition, text);
         });
 
         function handleModelChange() {
-            Pace.track(function() {
-                window.location.href = "#" + windowModelName + "&" + userID;
-                var xhr = new XMLHttpRequest();
-                xhr.addEventListener('progress', function(e) {
-                    aceEditor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');
-                });
-                xhr.addEventListener('load', function(e) {
-                    if (this.responseText.startsWith("<!DOCTYPE html>")) {
-                        fflModel = newModelTemplate.replace('$1', windowModelName)
-                    } else {
-                        fflModel = this.responseText;
-                    }
-                    aceEditor.setParsedValue(fflModel)
-                    aceEditor.scrollTop();
-                });
-                xhr.open('GET', 'resources/' + windowModelName + '.ffl');
-                return xhr.send();
-            });
-
-            $.getJSON("readExcel/" + windowModelName, function(data) {
-                MATRIX_VALUES = data;
-            }).fail(function(err) {
-                console.error(err)
-            })
+            fflController.updateFFLModel(user_session.fflModelPath)
+            matrixController.updateMatrix(user_session.fflModelPath)
+            jBehaveController.updateStory(user_session.fflModelPath)
         }
 
         $.getJSON("models", function(data) {
@@ -492,7 +249,7 @@ angular.module('lmeapp', ['angular.filter'])
                 source: data,
                 autoFocus: true,
                 change: function() {
-                    windowModelName = $('#models').val();
+                    user_session.fflModelPath = $('#models').val();
                     handleModelChange()
                 }
             });
@@ -501,7 +258,7 @@ angular.module('lmeapp', ['angular.filter'])
                 source: [],
                 autoFocus: true,
                 change: function() {
-                    windowModelName = $('#models').val();
+                    user_session.fflModelPath = $('#models').val();
                     handleModelChange()
                 }
             });
@@ -514,26 +271,9 @@ angular.module('lmeapp', ['angular.filter'])
             }
         });
 
-        aceEditor.aceEditor.on("change", function(e) {
-            var fflAnnotations = []
-            $scope.changeView('FFLModelEditorView')
-
-            if (aceEditor.aceEditor.curOp && aceEditor.aceEditor.curOp.command.name) {
-                // reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
-                fflAnnotations.push({
-                    row: e.start.row,
-                    column: 0,
-                    text: 'Changed', // Or the Json reply from the parser
-                    type: 'info' // also warning and information
-                })
-                aceEditor.setAnnotations(fflAnnotations);
-            }
-        })
         $scope.activeVariable = [];
         $scope.schema = register.schema
-        aceEditor.aceEditor.on("mousedown", function() {
-            $scope.changeView('FFLModelEditorView')
-        });
+
         right_editor.aceEditor.on("mousedown", function() {
             $scope.changeView('jbehaveView')
             if (register.changes.length > 0) {
@@ -544,15 +284,13 @@ angular.module('lmeapp', ['angular.filter'])
             $scope.runJBehaveTest()
         });
 
-        /**
-         * This watches the propertiesView on the right side of the page.
-         */
+        /* This watches the propertiesView on the right side of the page.*/
         $scope.$watch(function(scope) {
                 if (scope.register.changes.length > 0) {
                     console.info('Register changes')
                     scope.register.changes.length = 0
-                    const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, windowModelName).join('\n')
-                    aceEditor.setValue(newValue)
+                    const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, user_session.fflModelPath).join('\n')
+                    fflEditor.setValue(newValue)
                 }
                 return scope.register.changes
             },
@@ -574,7 +312,7 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.showNode = function(node) {
             $scope.changeView('FFLModelEditorView')
             console.info('Looking at node ' + node)
-            aceEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id, undefined).join('\n'));
+            fflEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id, undefined).join('\n'));
         }
         $scope.changeView = function(viewName) {
             if ($scope.currentView != viewName) {
@@ -583,90 +321,23 @@ angular.module('lmeapp', ['angular.filter'])
                 $scope.changedView();
             }
         }
-        //--------------ACE EDITOR INPUTS ----------------------------------------------------------------------//
-        /**
-         *
-         * Every keystroke from the JBehaveView will pass here
-         */
+        /*** Every keystroke from the JBehaveView will pass here */
         right_editor.aceEditor.commands.on("afterExec", function(e) {
-            $scope.runJBehaveTest()
-            return;
-        });
-
-        /**
-         * TODO: make functionality for single formula recompilation
-         * Every keystroke from the ACE-IDE will pass here
-         */
-        aceEditor.aceEditor.commands.on("afterExec", function(e) {
-            var changingValue = false;
-            $scope.changeView('FFLModelEditorView')
-            if (e.command.name == 'golinedown') {
-            } else if (e.command.name == 'golineup') {
-            } else if (e.command.name == 'gotoright') {
-            } else if (e.command.name == 'gotoleft') {
-            } else if (e.command.name == 'selectwordright') {
-            } else if (e.command.name == 'replace') {
-            } else if (e.command.name == 'find') {
-            } else if (e.command.name == 'selectwordleft') {
-            } else if (e.command.name == 'gotolineend') {//END
-            } else if (e.command.name == 'gotolinestart') {//HOME
-            } else if (e.command.name == 'gotopagedown') {
-            } else if (e.command.name == 'gotopageup') {//PAGE-UP
-            } else if (e.command.name == 'overwrite') {//INSERT
-            } else {
-                //current variable changed.
-                changingValue = true;
-                changeManager.changed = true;
-            }
-            console.info('action:' + e.command)
-            changeManager.updateCursor(aceEditor.getValue(), aceEditor.getCursor());
-            var annotations = [];
-            $scope.$apply(function() {
-                $scope.error = changeManager.error
-                $scope.activeVariable = changeManager.currentVariable
-
-                if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
-                if (changingValue) {
-                    //only reload the variable
-                    $scope.runJBehaveTest();
-                }
-
-                if (changeManager.warnings.length > 0) {
-                    console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
-                }
-            })
-            if (changeManager.warnings.length > 0) {
-                for (var i = 0; i < changeManager.warnings.length; i++) {
-                    var warning = changeManager.warnings[i];
-                    for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
-                        var obj = changeManager.warnings[i].pos[j];
-                        annotations.push({
-                            row: fflModel.substring(0, obj.char).split('\n').length,
-                            column: 0,
-                            text: warning.message, // Or the Json reply from the parser
-                            type: 'error' // also warning and information
-                        })
-                    }
-                }
-
-            }
-            aceEditor.setAnnotations(annotations)
+            return $scope.runJBehaveTest()
         });
         window.addEventListener("keydown", function(e) {
-            if (e.ctrlKey && e.shiftKey) {
-                return;
-            }
-            if (e.key == 'F5' && debugManager.active) {
+            if (e.ctrlKey && e.shiftKey) return;
+            else if (e.key == 'F5' && debugManager.active) {
                 doStep()
                 e.preventDefault();
             }
             if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
                 e.preventDefault();
-                aceEditor.aceEditor.execCommand("find")
+                fflEditor.aceEditor.execCommand("find")
             }
             else if ((e.ctrlKey && e.keyCode === 82)) {
                 e.preventDefault();
-                aceEditor.aceEditor.execCommand("replace")
+                fflEditor.aceEditor.execCommand("replace")
             }
         })
         $(window).bind('keydown', function(evt) {
