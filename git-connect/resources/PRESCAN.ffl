@@ -1,0 +1,262 @@
+model PRESCAN uses BaseModel
+{
+ variable Q_ROOT
+ {
+  displaytype: Input;
+  display_options: scorecard;
+  variable VragenVent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Vragen Vent";
+   locked: 1;
+   variable Vraag11
+   {
+    frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+    choices: "Nee|Ja";
+   }
+   variable Vraag12
+   {
+    frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+    choices: "Nee|Ja";
+   }
+   variable Vraag13
+   {
+    frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+    choices: "Nee|Ja";
+   }
+   variable Vraag14
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+   variable Vraag15
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+  }
+  variable VragenTent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Vragen Cent";
+   locked: 1;
+   variable Vraag21
+   {
+    frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+    choices: "Nee|Ja";
+   }
+   variable Vraag22
+   {
+    frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+    choices: "Nee|Ja";
+   }
+   variable Vraag23
+   {
+    frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+    choices: "Nee|Ja";
+   }
+   variable Vraag24
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+   variable Vraag25
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+  }
+  variable VragenCent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Vragen Tent";
+   locked: 1;
+   variable Vraag31
+   {
+    frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+    choices: "Nee|Ja";
+   }
+   variable Vraag32
+   {
+    frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+    choices: "Nee|Ja";
+   }
+   variable Vraag33
+   {
+    frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+    choices: "Nee|Ja";
+   }
+   variable Vraag34
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+   variable Vraag35
+   {
+    frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+    choices: "Nee|Ja";
+   }
+  }
+  variable WegingenVent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Wegingen Vent";
+   locked: 1;
+   variable Weging11
+   {
+    datatype: number;
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+   }
+   variable Weging12
+   {
+    datatype: number;
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+   }
+   variable Weging13
+   {
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+   }
+   variable Weging14
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+   variable Weging15
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+  }
+  variable WegingenTent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Wegingen Tent";
+   locked: 1;
+   options: locked;
+   variable Weging21
+   {
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+   }
+   variable Weging22
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+   }
+   variable Weging23
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+   }
+   variable Weging24
+   {
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+   variable Weging25
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+  }
+  variable WegingenCent
+  {
+   frequency: none;
+   displaytype: currency;
+   title: "Wegingen Cent";
+   locked: 1;
+   variable Weging31
+   {
+    datatype: number;
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
+   }
+   variable Weging32
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
+   }
+   variable Weging33
+   {
+    frequency: document;
+    formula: 2;
+    fixed_decimals: 0;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
+   }
+   variable Weging34
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+   variable Weging35
+   {
+    frequency: document;
+    formula: 1;
+    fixed_decimals: 0;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
+   }
+  }
+  variable Score
+  {
+   title: "score";
+   displaytype: Output;
+   variable ScoreBord
+   {
+    frequency: document;
+    formula: Weging11*Vraag11+Weging12*Vraag12+Weging13*Vraag13+Weging14*Vraag14+Weging15*Vraag15+Weging21*Vraag21+Weging22*Vraag22+Weging23*Vraag23+Weging24*Vraag24+Weging25*Vraag25+Weging31*Vraag31+Weging32*Vraag32+Weging33*Vraag33+Weging34*Vraag34+Weging35*Vraag35;
+    fixed_decimals: 0;
+    title: "Score";
+    locked: 1;
+   }
+  }
+ }
+}
