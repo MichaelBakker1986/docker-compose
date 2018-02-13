@@ -27,7 +27,7 @@ require('./api/value').setup(app)
 require('./api/api-def').setup(app)
 
 app.listen(port, () => {
-    console.info('<span>LME DATA: </span><a href="' + domain + 'docs/?url=%2Fapi-docs#!/default/value">data-api</a>\n');
+    console.info('<span>LME DATA: </span><a href="http://' + domain + '/docs/?url=%2Fapi-docs#!/default/value">data-api</a>\n');
     //talk with the proxy
     const routes = ['*/data-docs*']
     app._router.stack.forEach(function(r) {

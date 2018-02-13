@@ -62,7 +62,9 @@ class Authorization {
 
             '/figure/KinderSpaarPlan',
             '/figure/LGDCalculationOutputContainer',
-            '/figure/PrescanScore',
+            '/figure/PRESCAN/v2',
+            '/figure/PRESCAN/v1',
+            '/figure/PRESCAN/v3',
             '/figure/' + FYNDOOCREDITRATING,
 
             '/basic_example.html',
