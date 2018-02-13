@@ -15,7 +15,7 @@ And HourlyFeeChildCare is set to 7
 And NrOfHoursOutOfSchoolCareWeek is set to 18
 And HourlyFeeOutOfSchoolCare is set to 7
 Then TotalGrossCostsChildTillEighteen should have 0 decimals rounded value 164770
-And TotalNettCostsChildTillEighteen should have 0 decimals rounded value 36337
+And TotalNettCostsChildTillEighteen should have 0 decimals rounded value 35595
 And TotalYearlyCosts should have 0 decimals rounded value 15944 for column with id 1
 And Furniture should have 0 decimals rounded value 1800 for column with id 1
 And ActualChildCareCosts should have 0 decimals rounded value 11647 for column with id 1
@@ -38,7 +38,7 @@ And TotalYearlyCosts should have 0 decimals rounded value 5255 for column with i
 And TotalYearlyCosts should have 0 decimals rounded value 5308 for column with id 16
 And TotalYearlyCosts should have 0 decimals rounded value 5972 for column with id 17
 And TotalYearlyCosts should have 0 decimals rounded value 7557 for column with id 18
-And TotalYearlyAllowance should have 0 decimals rounded value 13211 for column with id 1 
+And TotalYearlyAllowance should have 0 decimals rounded value 13252 for column with id 1 
 
 And Age should be 0 for column with id 1
 And ChildBenefits should be 804.2 for column with id 1
@@ -63,5 +63,5 @@ And TotalYearlyBalance should have 0 decimals rounded value 2593 for column with
 And TotalYearlyBalance should have 0 decimals rounded value 2629 for column with id 14
 And TotalYearlyBalance should have 0 decimals rounded value 3222 for column with id 15
 And TotalYearlyBalance should have 0 decimals rounded value 3276 for column with id 16
-And TotalYearlyBalance should have 0 decimals rounded value 4124 for column with id 17
-And TotalYearlyBalance should have 0 decimals rounded value 5710 for column with id 18
+And TotalYearlyBalance should have 0 decimals rounded value 3754 for column with id 17
+And TotalYearlyBalance should have 0 decimals rounded value 5339 for column with id 18
