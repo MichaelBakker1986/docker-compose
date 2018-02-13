@@ -56,8 +56,12 @@ class Authorization {
             "/resources/SCORECARDTESTMODEL.js",
             '/data-docs',
             '/data-docs/',
+
             '/figure/KinderSpaarPlan',
             '/figure/LGDCalculationInputContainer',
+            '/figure/PrescanScore',
+            '/figure/FyndooCreditRating',
+
             '/basic_example.html',
             '/extended_controller.html',
             '/uishowcase.html',

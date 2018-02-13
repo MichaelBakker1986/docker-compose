@@ -1,6 +1,6 @@
 model FYNDOOCREDITRATING uses BaseModel
 {
- variable Q_ROOT
+ variable CreditRatingScorecard
  {
   display_options: scorecard;
   variable Input
@@ -8,15 +8,11 @@ model FYNDOOCREDITRATING uses BaseModel
    datatype: number;
    frequency: column;
    aggregation: balance;
-   displaytype: Input;
+   data_options: Input;
    title: "SimpleDataEntryFolder";
-   top_blanklines: 1;
-   visible: 1;
    options_title: locked;
    display_options: showColumnTitlesAboveSubVars;
    locked: 1;
-   options_notrend: locked;
-   options_trend: locked;
    variable sdeGoodWill
    {
     datatype: number;
@@ -280,8 +276,6 @@ model FYNDOOCREDITRATING uses BaseModel
    }
    variable sdeEntrepreneurFeeOutsideResult
    {
-    datatype: number;
-    frequency: column;
     aggregation: flow;
     displaytype: currency;
     title: "sdeEntrepreneurFeeOutsideResult";
@@ -289,24 +283,16 @@ model FYNDOOCREDITRATING uses BaseModel
     options_title: locked;
    }
   }
-  variable Output
+  variable FyndooCreditRating
   {
-   datatype: number;
-   frequency: column;
    aggregation: balance;
-   displaytype: Output;
-   title: "Output";
-   top_blanklines: 1;
-   visible: 1;
+   display_options: Output;
+   title: "FyndooCreditRating";
    options_title: locked;
    display_options: showColumnTitlesAboveSubVars;
    locked: 1;
-   options_notrend: locked;
-   options_trend: locked;
    variable URAPD refers to krPD
    {
-    datatype: number;
-    frequency: column;
     aggregation: balance;
     displaytype: percentage;
     title: "Probability of default";
@@ -323,7 +309,6 @@ model FYNDOOCREDITRATING uses BaseModel
    variable URARatingClass refers to krUraRatingKlasse
    {
     datatype: string;
-    frequency: column;
     aggregation: balance;
     title: "URA Rating class";
     visible: 1;
@@ -335,8 +320,6 @@ model FYNDOOCREDITRATING uses BaseModel
    }
    variable URATrafficLight refers to krUraAmpel
    {
-    datatype: number;
-    frequency: column;
     aggregation: balance;
     title: "URA $>Ampel<$";
     visible: 1;
@@ -350,14 +333,11 @@ model FYNDOOCREDITRATING uses BaseModel
    variable URATrafficLightD refers to krUraAmpelD
    {
     datatype: string;
-    frequency: column;
     aggregation: balance;
     title: "URA $>Ampel<$";
     visible: 1;
     options_title: locked;
     locked: 1;
-    options_notrend: locked;
-    options_trend: locked;
     data_options: calculateAggregation,unscalable;
    }
    variable URATrafficLightDNL refers to krUraAmpelDNL
@@ -369,8 +349,6 @@ model FYNDOOCREDITRATING uses BaseModel
     visible: 1;
     options_title: locked;
     locked: 1;
-    options_notrend: locked;
-    options_trend: locked;
     data_options: calculateAggregation,unscalable;
    }
    variable IFDRatingClass refers to krIfdRatingKlasse
