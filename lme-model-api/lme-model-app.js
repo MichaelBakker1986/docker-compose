@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
+const ExcelConnect = require('../excel-connect/').xlsxLookup;
 const fileUpload = require('express-fileupload');
 const fs = require('fs')
 browserify.settings({
@@ -151,6 +152,15 @@ app.get('*/excel/:model', function(req, res) {
 app.post('*/upload', function(req, res) {
     console.info('upload')
     res.status(200).json({status: 'ok'})
+})
+
+app.get('*/readExcel/:model', function(req, res) {
+    const modelName = req.params.model;
+    ExcelConnect.initComplete(modelName).then(function(matrix) {
+        res.json(matrix)
+    }).catch(function(err) {
+        return res.status(400).json({status: 'fail', reason: err.toString()});
+    })
 })
 /**
  * TODO: add commit

@@ -40,11 +40,9 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
-     datatype: number;
-     displaytype: currency;
+     displaytype: currency(2);
      visible: 0;
      required: 1;
-     fixed_decimals: 2;
     }
     variable YearlyIncomeParent01
     {
@@ -52,8 +50,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: OnER(((MonthlyIncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
-     datatype: number;
-     visible: 1;
      required: 1;
      fixed_decimals: 2;
     }
@@ -62,7 +58,6 @@ model KSP uses BaseModel
      title: "Working hours of 1st parent";
      frequency: document;
      formula: 0;
-     datatype: number;
      required: 1;
      fixed_decimals: 1;
     }
@@ -70,9 +65,7 @@ model KSP uses BaseModel
     {
      title: "Child has 2nd working parent";
      frequency: document;
-     displaytype: select;
      formula: 0;
-     datatype: number;
      required: 1;
      fixed_decimals: 0;
      choices: "0:Nee|1:Ja";
@@ -81,19 +74,15 @@ model KSP uses BaseModel
     {
      title: "Gross monthly income of 2nd parent";
      frequency: document;
-     datatype: number;
-     displaytype: currency;
+     displaytype: currency(2);
      formula: 0;
      required: 1;
-     fixed_decimals: 2;
     }
     variable ExtraMonthParent02
     {
      title: "Extra month of 2nd parent";
      frequency: document;
      formula: 0;
-     displaytype: select;
-     datatype: number;
      required: 1;
      choices: "0:Nee|1:Ja";
     }
@@ -103,7 +92,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: Case(ExtraMonthParent02,[0:0|1:MonthlyIncomeParent02]);
-     datatype: number;
      visible: 0;
      required: 1;
      fixed_decimals: 2;
@@ -114,8 +102,6 @@ model KSP uses BaseModel
      locked: 1;
      frequency: document;
      formula: OnER(((MonthlyIncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
-     datatype: number;
-     visible: 1;
      required: 1;
      fixed_decimals: 2;
     }

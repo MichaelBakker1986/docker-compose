@@ -81,7 +81,7 @@ const functionMapper = {
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
                     result.status = 'fail'
-                    result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
+                    result.message = variableName + ' should be ' + value + '. But is ' + calculatedValue
                 } else if (validValue.length > 0) {
                     result.status = 'fail'
                     result.message = rawValue + " is not a valid value for " + variableName + ". Because " + validValue

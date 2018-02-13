@@ -479,6 +479,12 @@ angular.module('lmeapp', ['angular.filter'])
                 xhr.open('GET', 'resources/' + windowModelName + '.ffl');
                 return xhr.send();
             });
+
+            $.getJSON("readExcel/" + windowModelName, function(data) {
+                MATRIX_VALUES = data;
+            }).fail(function(err) {
+                console.error(err)
+            })
         }
 
         $.getJSON("models", function(data) {
