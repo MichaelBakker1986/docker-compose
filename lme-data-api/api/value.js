@@ -36,7 +36,11 @@ module.exports.setup = function(app) {
                 const body = req.body;
                 let result;
                 var context = ds.getOrCreate(req.params.id);
-                var modelPrefix = req.originalUrl.endsWith('TupleRestTestInput') ? 'TUPLERESTMODEL_' : req.originalUrl.endsWith('Container') ? 'LGD_' : "KSP_";
+                const url = req.originalUrl.toLowerCase();
+                /**
+                 * TODO: find generic way to map the Output node to the model name
+                 */
+                const modelPrefix = (url.endsWith('prescan') ? 'PRESCAN' : url.endsWith('TupleRestTestInput') ? 'TUPLERESTMODEL' : url.endsWith('Container') ? 'LGD' : "KSP") + '_';
                 //This is very very basic, rewrite required.
                 for (var q in body) {
                     for (var c in body[q]) {
@@ -45,17 +49,29 @@ module.exports.setup = function(app) {
                         }
                     }
                 }
-                if (req.originalUrl.endsWith('Container')) {
+                /**
+                 * TODO: find generic way to map the Output node to the model name
+                 */
+                if (url.endsWith('container')) {
                     context.columns = 1;
-                    result = LMECalculationFacade.getObjectValues(context, "LGD_LGDCalculationOutputContainer", undefined);
+                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "LGDCalculationOutputContainer", undefined);
                 }
-                else if (req.originalUrl.endsWith('TupleRestTestInput')) {
+                else if (url.endsWith('prescan')) {
                     context.columns = 1;
-                    result = LMECalculationFacade.getObjectValues(context, "TUPLERESTMODEL_TupleRestTestOutput", undefined);
-                } else {
+                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "Prescan", undefined);
+                }
+                else if (url.endsWith('tupleresttestinput')) {
+                    context.columns = 1;
+                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "TupleRestTestOutput", undefined);
+                }
+                else if (url.endsWith('ksp')) {
                     context.columns = 17;
-                    result = LMECalculationFacade.getObjectValues(context, "KSP_Q_MAP06", undefined);
+                    result = LMECalculationFacade.getObjectValues(context, modelPrefix + "Q_MAP06", undefined);
+                } else {
+                    log.warn('Invalid rest api call ' + url)
+                    result = {}
                 }
+                if (!result) result = {status: 'failed '}
                 success(result)
             } catch (err) {
                 fail(err);
@@ -68,7 +84,7 @@ module.exports.setup = function(app) {
     }
 
     app.get('*/id/:id/newModel', function(req, res) {
-        ModelLoader.ModelLoader.onNewModel(require('fs').readFileSync('C:/stack/lme/git-connect/resources/LGD.ffl', 'utf-8'), 'C:/stack/lme/git-connect/resources/LGD.ffl')
+        ModelLoader.ModelLoader.onNewModel(require('fs').readFileSync(__dirname + '/../../git-connect/resources/LGD.ffl', 'utf8'), __dirname + '/../../git-connect/resources/LGD.ffl')
         res.json({'status': 'ok'})
     })
     /**

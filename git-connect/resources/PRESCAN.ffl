@@ -2,13 +2,14 @@ model PRESCAN uses BaseModel
 {
  variable Prescan
  {
+  frequency: document;
   data_options: Input;
   display_options: scorecard;
   variable VragenVent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Vragen Vent";
+   displaytype: currency;
    locked: 1;
    variable Vraag11
    {
@@ -43,9 +44,9 @@ model PRESCAN uses BaseModel
   }
   variable VragenTent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Vragen Cent";
+   displaytype: currency;
    locked: 1;
    variable Vraag21
    {
@@ -80,9 +81,9 @@ model PRESCAN uses BaseModel
   }
   variable VragenCent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Vragen Tent";
+   displaytype: currency;
    locked: 1;
    variable Vraag31
    {
@@ -117,148 +118,142 @@ model PRESCAN uses BaseModel
   }
   variable WegingenVent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Wegingen Vent";
+   displaytype: currency;
    locked: 1;
    variable Weging11
    {
-    datatype: number;
     frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
     formula: 2;
     fixed_decimals: 0;
-    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
    }
    variable Weging12
    {
-    datatype: number;
     frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
     formula: 1;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
    }
    variable Weging13
    {
     frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
     formula: 2;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
    }
    variable Weging14
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 1;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
    variable Weging15
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 1;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
   }
   variable WegingenTent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Wegingen Tent";
+   displaytype: currency;
    locked: 1;
-   options: locked;
    variable Weging21
    {
     frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
     formula: 2;
     fixed_decimals: 0;
-    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
    }
    variable Weging22
    {
     frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
     formula: 1;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
    }
    variable Weging23
    {
     frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
     formula: 1;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
    }
    variable Weging24
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 2;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
    variable Weging25
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 1;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
   }
   variable WegingenCent
   {
-   frequency: none;
-   displaytype: currency;
+   frequency: document;
    title: "Wegingen Cent";
+   displaytype: currency;
    locked: 1;
    variable Weging31
    {
-    datatype: number;
     frequency: document;
+    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
     formula: 2;
     fixed_decimals: 0;
-    title: "Ik heb duidelijk omschreven wat mijn ondernemerskwaliteiten zijn";
    }
    variable Weging32
    {
     frequency: document;
+    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
     formula: 1;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven op welke punten ik ondersteuning van derden nodig heb";
    }
    variable Weging33
    {
     frequency: document;
+    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
     formula: 2;
     fixed_decimals: 0;
-    title: "Ik heb aangegeven wat ik als ondernemer wil bereiken";
    }
    variable Weging34
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 1;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
    variable Weging35
    {
     frequency: document;
+    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
     formula: 1;
     fixed_decimals: 0;
-    title: "Mijn eventuele levenspartner staat achter mijn ondernemersplannen";
    }
   }
   variable Score
   {
+   frequency: document;
    title: "score";
    data_options: Output;
    variable TotalPrescanScore
    {
     frequency: document;
-    formula: Weging11*Vraag11+Weging12*Vraag12+Weging13*Vraag13+Weging14*Vraag14+
-             Weging15*Vraag15+Weging21*Vraag21+Weging22*Vraag22+Weging23*Vraag23+
-             Weging24*Vraag24+Weging25*Vraag25+Weging31*Vraag31+Weging32*Vraag32+
-             Weging33*Vraag33+Weging34*Vraag34+Weging35*Vraag35;
-    fixed_decimals: 0;
     title: "Score";
     locked: 1;
+    formula: Weging11*Vraag11+Weging12*Vraag12+Weging13*Vraag13+Weging14*Vraag14+ Weging15*Vraag15+Weging21*Vraag21+Weging22*Vraag22+Weging23*Vraag23+ Weging24*Vraag24+Weging25*Vraag25+Weging31*Vraag31+Weging32*Vraag32+ Weging33*Vraag33+Weging34*Vraag34+Weging35*Vraag35;
+    fixed_decimals: 0;
    }
   }
  }

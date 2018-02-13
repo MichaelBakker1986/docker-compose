@@ -46,6 +46,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const tupleIndex = indexer.schemaIndexes.tuple;
     const validIndex = indexer.schemaIndexes.valid;
     const displayOptionsIndex = indexer.schemaIndexes.display_options;
+    const dataOptionsIndex = indexer.schemaIndexes.data_options;
     const lengthIndex = indexer.schemaIndexes.length;
     const patternIndex = indexer.schemaIndexes.pattern;
     const referstoIndex = indexer.schemaIndexes.refersto;
@@ -102,6 +103,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var datatype = node[dataTypeIndex] || 'number'
         var frequency = node[frequencyIndex] || 'column'
         var display_options = node[displayOptionsIndex]
+        const data_options = node[dataOptionsIndex]
         //TODO: paragraph when no children.
         //TODO: else column frequency..
         /*
@@ -224,6 +226,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals);
         if (display_options) uiNode.display_options = display_options
+        if (data_options) uiNode.data_options = data_options
 
         uiNode.frequency = frequency;
 

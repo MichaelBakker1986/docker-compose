@@ -9,6 +9,7 @@ const enabledModels = (process.env.ENABLED_MODELS || '.*').split(',')
  * Filtered by {@enabledModels}
  */
 function ModelListener() {
+    this.listeners = []
 }
 
 function enabledModel(caseInsensitiveFileName) {
@@ -66,7 +67,13 @@ ModelListener.prototype.initializeModels = function() {
     };
     glob(fileSystemFFLModelsSearchPath, fileLookupCallback);
 }
-ModelListener.prototype.onNewModel = function(modeldata) {
-    log.info(modeldata)
+ModelListener.prototype.addListener = function(listener) {
+    this.listeners.push(listener)
+}
+ModelListener.prototype.onNewModel = function(modeldata, path) {
+    if (log.TRACE) log.trace(modeldata)
+    for (var i = 0; i < this.listeners.length; i++) {
+        this.listeners[i](modeldata, path)
+    }
 }
 exports.ModelListener = ModelListener;

@@ -1,6 +1,7 @@
 /**
  * Load FFL models, update Dynamic Swagger docs
  * TODO: concat the matrix files into one
+ * TODO: ModelName to Entrypoints mapping
  */
 const CalculationFacade = require('../lme-core').CalculationFacade;
 CalculationFacade.addFunctions(require('../math').mathJs);
@@ -11,20 +12,20 @@ const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
 const APIDefinition = require(__dirname + '/api/AuthenticatedSwaggerDefinition.json');
 const log = require('log6')
-modelLoadListener.onNewModel = function(fflModelData, path) {
+
+modelLoadListener.addListener(function(fflModelData, path) {
     const lmeModel = CalculationFacade.initializeFFlModelData(fflModelData, path);
     const modelname = lmeModel.modelName;
     const indexer = lmeModel.indexer
     const names = indexer.getIndex('name')
-    for (var name in names) {
-        APIDefinition.parameters.FigureName.enum.push(modelname + '_' + name)
-    }
+
+    for (var name in names) APIDefinition.parameters.FigureName.enum.push(modelname + '_' + name)
     /**
      * Update API-definition with variable names
      * Is only used for KSP
      * TODO: make more generic solution
      */
-    const inputNodes = indexer.find('displaytype', 'Input')
+    const inputNodes = indexer.find('displaytype', 'Input').concat(indexer.find('data_options', 'Input'))
     if (inputNodes.length > 0) {
         let endPointname;
 
@@ -65,8 +66,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
                 "schema": schema
             })
         }
-        const outputNodes = indexer.find('displaytype', 'Output')
-        var output = {}
+        const outputNodes = indexer.find('displaytype', 'Output').concat(indexer.find('data_options', 'Output'))
         for (var i = 0; i < outputNodes.length; i++) {
             var node = outputNodes[i];
             const swaggerSchema = lmeModel.export('swagger', {
@@ -79,7 +79,7 @@ modelLoadListener.onNewModel = function(fflModelData, path) {
             }
         }
     }
-}
+})
 /**
  * Add modules
  *    - Matrix
