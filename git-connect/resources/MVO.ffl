@@ -8,132 +8,85 @@ model MVO uses BaseModel
   data_options: unscalable;
   title: "Maatschappelijk Verantwoord Ondernemen";
   locked: 1;
-  visible: 1;
-  options_title: locked;
-  options: locked;
   display_options: scorecard;
   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
   variable Q_MAP01
   {
    valid: [AMMOUNT(Q_MAP01_VRAAG01.required and Q_MAP01_VRAAG01.entered,Q_MAP01_VRAAG01_MEMO.required and Q_MAP01_VRAAG01_MEMO.entered,Q_MAP01_VRAAG02.required and Q_MAP01_VRAAG02.entered,Q_MAP01_VRAAG02_MEMO.required and Q_MAP01_VRAAG02_MEMO.entered,Q_MAP01_VRAAG03.required and Q_MAP01_VRAAG03.entered,Q_MAP01_VRAAG03_MEMO.required and Q_MAP01_VRAAG03_MEMO.entered,Q_MAP01_VRAAG04.required and Q_MAP01_VRAAG04.entered,Q_MAP01_VRAAG04_MEMO.required and Q_MAP01_VRAAG04_MEMO.entered,Q_MAP01_VRAAG05.required and Q_MAP01_VRAAG05.entered,Q_MAP01_VRAAG05_MEMO.required and Q_MAP01_VRAAG05_MEMO.entered,Q_MAP01_VRAAG06.required and Q_MAP01_VRAAG06.entered,Q_MAP01_VRAAG06_MEMO.required and Q_MAP01_VRAAG06_MEMO.entered,Q_MAP01_VRAAG07.required and Q_MAP01_VRAAG07.entered,Q_MAP01_VRAAG07_MEMO.required and Q_MAP01_VRAAG07_MEMO.entered,Q_MAP01_VRAAG08.required and Q_MAP01_VRAAG08.entered,Q_MAP01_VRAAG08_MEMO.required and Q_MAP01_VRAAG08_MEMO.entered,Q_MAP01_VRAAG09.required and Q_MAP01_VRAAG09.entered,Q_MAP01_VRAAG09_MEMO.required and Q_MAP01_VRAAG09_MEMO.entered,Q_MAP01_VRAAG10.required and Q_MAP01_VRAAG10.entered,Q_MAP01_VRAAG10_MEMO.required and Q_MAP01_VRAAG10_MEMO.entered,Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG11_MEMO.required and Q_MAP01_VRAAG11_MEMO.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG12_MEMO.required and Q_MAP01_VRAAG12_MEMO.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG13_MEMO.required and Q_MAP01_VRAAG13_MEMO.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG14_MEMO.required and Q_MAP01_VRAAG14_MEMO.entered),AMMOUNT(Q_MAP01_VRAAG01.required,Q_MAP01_VRAAG01_MEMO.required,Q_MAP01_VRAAG02.required,Q_MAP01_VRAAG02_MEMO.required,Q_MAP01_VRAAG03.required,Q_MAP01_VRAAG03_MEMO.required,Q_MAP01_VRAAG04.required,Q_MAP01_VRAAG04_MEMO.required,Q_MAP01_VRAAG05.required,Q_MAP01_VRAAG05_MEMO.required,Q_MAP01_VRAAG06.required,Q_MAP01_VRAAG06_MEMO.required,Q_MAP01_VRAAG07.required,Q_MAP01_VRAAG07_MEMO.required,Q_MAP01_VRAAG08.required,Q_MAP01_VRAAG08_MEMO.required,Q_MAP01_VRAAG09.required,Q_MAP01_VRAAG09_MEMO.required,Q_MAP01_VRAAG10.required,Q_MAP01_VRAAG10_MEMO.required,Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG11_MEMO.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG12_MEMO.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG13_MEMO.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG14_MEMO.required)];
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Principes";
-   top_blanklines: 1;
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
-   displaytype: select;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    variable Q_MAP01_WARNING
    {
     datatype: string;
     frequency: document;
     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-    data_options: unscalable;
     title: "Warning voor map 1";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP01_INFO
    {
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP01[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "Info bij stap 1";
-    locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP01_VALIDATION
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Validatie stap 1";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP01_HINT
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Hinttekst stap 1";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP01_PARAGRAAF00
    {
-    datatype: number;
     frequency: document;
     title: "Uitleg MVO";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Maatschappelijk verantwoord ondernemen betekent dat je als bedrijf actief probeert om een positieve bijdrage te leveren aan de maatschappij. De gedachte achter MVO is dat je je allereerst bewust bent van het effect dat je hebt op je omgeving. Vandaaruit probeert u om een duidelijke visie te ontwikkelen om stap voor stap uzelf te verbeteren. Hiermee zorg je voor een positieve impact op je omgeving en verbeter je tegelijkertijd je competitiviteit en reputatie en - misschien nog wel belangrijker - hoe stakeholders, zoals je huidige medewerkers, potentiele medewerkers, donors, sponsoren, leveranciers tegen jou als bedrijf aankijken. MVO kan ook onderdeel zijn van de identiteit van uw bedrijf, bijvoorbeeld Baabaazuzu heeft als bedrijfsmodel om sjaals en wanten van oude sweaters te maken. Op grote schaal kunt u denken aan Google Green, waarin Google werknemers stimuleert om zuinig om te gaan met resources. De ISO 26000 richtlijn maakt MVO concreet. In deze richtlijn is MVO opgedeeld in Principes, Omgeving, Thema\'s en Implementatie. Deze MVO Scan geeft u op een toegankelijke wijze inzicht in uw scores op al de aspecten van deze ISO 26000 richtlijn. Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn.";
     variable Q_MAP01_VERBORGEN
     {
-     datatype: number;
      frequency: document;
      title: "Verborgen variabele";
-     top_blanklines: 1;
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
-     options: locked, invisible;
      displaytype: currency;
     }
    }
    variable Q_MAP01_PARAGRAAF000
    {
-    datatype: number;
     frequency: document;
     title: "Toelichting principes";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 4 van de ISO 26000 richtlijn. Het MVO-beleid van de organisatie is gebaseerd op onder andere deze zeven principes. Alle ja / nee vragen op deze stap zijn verplicht en bij \'ja\' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
     variable Q_MAP01_VERBORGEN_1
     {
-     datatype: number;
      frequency: document;
      title: "Verborgen variabele";
-     top_blanklines: 1;
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
-     options: locked, invisible;
      displaytype: currency;
     }
    }
    variable Q_MAP01_PARAGRAAF01
    {
-    datatype: number;
     frequency: document;
     title: "Verantwoordelijkheid en verantwoording";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP01_VRAAG01
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U voelt zich verantwoordelijk voor de effecten van beslissingen en activiteiten, ook als deze gevolgen onbedoeld of onvoorzien zijn";
-     top_blanklines: 1;
-     visible: 1;
      displaytype: radio;
      required: (Q_MAP01_VERPLICHT[1]=1);
      display_options: displayAsSummation;
@@ -143,21 +96,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Geef hier uw toelichting of relevante voorbeelden m.b.t. bovenstaande vraag";
      visible: (Q_MAP01_VRAAG01=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG01_MEMO);
     }
     variable Q_MAP01_VRAAG02
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U bent bereid verantwoording af te leggen over gemaakte keuzes";
-     visible: 1;
-     options_title: locked;
      displaytype: radio;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
@@ -166,33 +113,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG02=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG02_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF02
    {
-    datatype: number;
     frequency: document;
     title: "Transparantie";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers, vakbonden, beroepsorganisaties, milieuorganisaties en omwonenden.";
     variable Q_MAP01_VRAAG03
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U geeft openheid aan stakeholders over activiteiten die invloed hebben op de maatschappij";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -200,22 +136,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG03=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG03_MEMO);
     }
     variable Q_MAP01_VRAAG04
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft openlijk beschikbaar hoe u uw eigen bedrijf beoordeeld op het gebied van MVO";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -223,32 +152,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG04=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG04_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF03
    {
-    datatype: number;
     frequency: document;
     title: "Ethisch gedrag";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP01_VRAAG05
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft respect voor mens, dier en milieu";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -256,22 +174,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG05=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG05_MEMO);
     }
     variable Q_MAP01_VRAAG06
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft schriftelijk (gedrags)regels opgesteld, die aan alle medewerkers worden gecommuniceerd";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -279,33 +190,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG06=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG06_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF04
    {
-    datatype: number;
     frequency: document;
     title: "Belangen van stakeholders";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers, vakbonden, beroepsorganisaties, milieuorganisaties en omwonenden.";
     variable Q_MAP01_VRAAG07
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft nagedacht over wie uw stakeholders zijn";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -313,22 +213,16 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG07=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG07_MEMO);
     }
     variable Q_MAP01_VRAAG08
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft uw stakeholders in een document in kaart gebracht";
      visible: Q_MAP01_VRAAG07=1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -336,32 +230,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG08=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG08_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF05
    {
-    datatype: number;
     frequency: document;
     title: "Respect voor de wet";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP01_VRAAG09
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "We zorgen dat we voor onze activiteiten en ons beleid nagaan dat dit niet botst met lokale en internationale regelgeving";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -369,22 +252,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG09=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG09_MEMO);
     }
     variable Q_MAP01_VRAAG10
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Als er veranderingen in wetten zijn, zorgt u ervoor dat u dit op tijd weet, zodat u actie kunt ondernemen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -392,33 +268,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG10=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG10_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF06
    {
-    datatype: number;
     frequency: document;
     title: "Respect voor internationale gedragsvormen";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Uiteraard volgt u de internationale gedragsvormen. Maar heeft u ook al stilgestaan bij de internationale gedragsvormen in uw keten (denk hierbij aan afnemers en leveranciers)?";
     variable Q_MAP01_VRAAG11
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U bent op de hoogte van internationale gedragsvormen";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -426,22 +291,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG11=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG11_MEMO);
     }
     variable Q_MAP01_VRAAG12
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de internationale gedragsvormen opvolgen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -449,33 +307,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG12=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG12_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF07
    {
-    datatype: number;
     frequency: document;
     title: "Respect voor mensenrechten";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Mensenrechten is misschien niet iets waar u vaak over nadenkt, maar dit onderwerp kan dichtbij komen als u buitenlandse arbeidskrachten in dienst heeft of onderdeel bent van een internationale keten.";
     variable Q_MAP01_VRAAG13
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U bent op de hoogte van mensenrechten";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -483,22 +330,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG13=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG13_MEMO);
     }
     variable Q_MAP01_VRAAG14
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties de mensenrechten opvolgen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP01_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -506,17 +346,14 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP01_VRAAG14=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP01_VRAAG14_MEMO);
     }
    }
    variable Q_MAP01_PARAGRAAF09
    {
-    datatype: number;
     frequency: document;
     title: "Eigenschappen van de stap";
     locked: 1;
@@ -528,40 +365,26 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Warning voor map 1";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP01_PARAGRAAF09SUB2 refers to Q_MAP01_INFO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Info bij stap 1";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP01_PARAGRAAF09SUB3 refers to Q_MAP01_VALIDATION
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Validatie stap 1";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
    }
    variable Q_MAP01_HULPVARIABELEN
    {
-    datatype: number;
     frequency: document;
     title: "Hulpvariabelen";
     locked: 1;
@@ -571,16 +394,10 @@ model MVO uses BaseModel
     displaytype: currency;
     variable Q_MAP01_VERPLICHT
     {
-     datatype: number;
      frequency: document;
      formula: 1;
-     data_options: unscalable;
      title: "Zijn de vragen in deze stap verplicht?";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-     displaytype: select;
      choices: "0:Nee|1:Ja";
     }
    }
@@ -588,78 +405,50 @@ model MVO uses BaseModel
   variable Q_MAP02
   {
    valid: [AMMOUNT(Q_MAP02_VRAAG01.required and Q_MAP02_VRAAG01.entered,Q_MAP02_VRAAG01_MEMO.required and Q_MAP02_VRAAG01_MEMO.entered,Q_MAP02_VRAAG02.required and Q_MAP02_VRAAG02.entered,Q_MAP02_VRAAG02_MEMO.required and Q_MAP02_VRAAG02_MEMO.entered),AMMOUNT(Q_MAP02_VRAAG01.required,Q_MAP02_VRAAG01_MEMO.required,Q_MAP02_VRAAG02.required,Q_MAP02_VRAAG02_MEMO.required)];
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Omgeving";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
-   displaytype: select;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    variable Q_MAP02_WARNING
    {
     datatype: string;
     frequency: document;
     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-    data_options: unscalable;
     title: "Warning voor map 2";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP02_INFO
    {
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP02[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "Info bij stap 2";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP02_VALIDATION
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Validatie stap 2";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP02_HINT
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Hinttekst stap 2";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP02_PARAGRAAF00
    {
-    datatype: number;
     frequency: document;
     title: "Toelichting omgeving";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 5 van de ISO 26000 richtlijn. Dit hoofdstuk gaat in op het erkennen en betrekken van stakeholders bij het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij \'ja\' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
     variable Q_MAP02_VERBORGEN
     {
-     datatype: number;
      frequency: document;
      title: "Verborgen variabele";
-     top_blanklines: 1;
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
@@ -669,43 +458,28 @@ model MVO uses BaseModel
    }
    variable Q_MAP02_PARAGRAAF01
    {
-    datatype: number;
     frequency: document;
     title: "Stakeholders";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Stakeholders zijn personen of organisaties die (positief of negatief) kunnen worden beinvloed door uw activiteiten. De meest bekende voorbeelden van stakeholders zijn aandeelhouders, werknemers, leveranciers, banken / kredietgevers, vakbonden, beroepsorganisaties, milieuorganisaties en omwonenden.";
     variable Q_MAP02_VRAAGA_MEMO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Welke personen vallen wat u betreft onder uw relevante stakeholders, op het gebied van uw MVO?";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
      displaytype: memo;
     }
     variable Q_MAP02_VRAAGB_MEMO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Hoe betrekt u uw belangrijkste stakeholders bij uw bedrijf? Denk hierbij aan: bijeenkomsten, nieuwsbrief, advertenties, website, podcasts, focusgroepen, vragenlijsten, social media en een open dag.";
-     visible: 1;
-     options_title: locked;
      displaytype: memo;
     }
     variable Q_MAP02_VRAAG01
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U voert minstens jaarlijks een stakeholderanalyse uit. De uitkomst van deze analyse is vastgelegd in een document dat u onder, in ieder geval, het management van uw bedrijf verspreidt.";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP02_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -713,22 +487,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP02_VRAAG01=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP02_VRAAG01_MEMO);
     }
     variable Q_MAP02_VRAAG02
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U betrekt de stakeholders bij relevante veranderingen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP02_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -736,17 +503,14 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP02_VRAAG02=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP02_VRAAG02_MEMO);
     }
    }
    variable Q_MAP02_PARAGRAAF09
    {
-    datatype: number;
     frequency: document;
     title: "Eigenschappen van de stap";
     locked: 1;
@@ -758,40 +522,26 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Warning voor map 2";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP02_PARAGRAAF09SUB2 refers to Q_MAP02_INFO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Info bij stap 2";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP02_PARAGRAAF09SUB3 refers to Q_MAP02_VALIDATION
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Validatie stap 2";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
    }
    variable Q_MAP02_HULPVARIABELEN
    {
-    datatype: number;
     frequency: document;
     title: "Hulpvariabelen";
     locked: 1;
@@ -801,16 +551,10 @@ model MVO uses BaseModel
     displaytype: currency;
     variable Q_MAP02_VERPLICHT
     {
-     datatype: number;
      frequency: document;
      formula: 1;
-     data_options: unscalable;
      title: "Zijn de vragen in deze stap verplicht?";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-     displaytype: select;
      choices: "0:Nee|1:Ja";
     }
    }
@@ -818,109 +562,68 @@ model MVO uses BaseModel
   variable Q_MAP03
   {
    valid: [AMMOUNT(Q_MAP03_VRAAG01.required and Q_MAP03_VRAAG01.entered,Q_MAP03_VRAAG01_MEMO.required and Q_MAP03_VRAAG01_MEMO.entered,Q_MAP03_VRAAG02.required and Q_MAP03_VRAAG02.entered,Q_MAP03_VRAAG02_MEMO.required and Q_MAP03_VRAAG02_MEMO.entered,Q_MAP03_VRAAG03.required and Q_MAP03_VRAAG03.entered,Q_MAP03_VRAAG03_MEMO.required and Q_MAP03_VRAAG03_MEMO.entered,Q_MAP03_VRAAG04.required and Q_MAP03_VRAAG04.entered,Q_MAP03_VRAAG04_MEMO.required and Q_MAP03_VRAAG04_MEMO.entered,Q_MAP03_VRAAG05.required and Q_MAP03_VRAAG05.entered,Q_MAP03_VRAAG05_MEMO.required and Q_MAP03_VRAAG05_MEMO.entered,Q_MAP03_VRAAG06.required and Q_MAP03_VRAAG06.entered,Q_MAP03_VRAAG06_MEMO.required and Q_MAP03_VRAAG06_MEMO.entered,Q_MAP03_VRAAG07.required and Q_MAP03_VRAAG07.entered,Q_MAP03_VRAAG07_MEMO.required and Q_MAP03_VRAAG07_MEMO.entered,Q_MAP03_VRAAG08.required and Q_MAP03_VRAAG08.entered,Q_MAP03_VRAAG08_MEMO.required and Q_MAP03_VRAAG08_MEMO.entered,Q_MAP03_VRAAG09.required and Q_MAP03_VRAAG09.entered,Q_MAP03_VRAAG09_MEMO.required and Q_MAP03_VRAAG09_MEMO.entered,Q_MAP03_VRAAG10.required and Q_MAP03_VRAAG10.entered,Q_MAP03_VRAAG10_MEMO.required and Q_MAP03_VRAAG10_MEMO.entered,Q_MAP03_VRAAG11.required and Q_MAP03_VRAAG11.entered,Q_MAP03_VRAAG11_MEMO.required and Q_MAP03_VRAAG11_MEMO.entered,Q_MAP03_VRAAG12.required and Q_MAP03_VRAAG12.entered,Q_MAP03_VRAAG12_MEMO.required and Q_MAP03_VRAAG12_MEMO.entered,Q_MAP03_VRAAG13.required and Q_MAP03_VRAAG13.entered,Q_MAP03_VRAAG13_MEMO.required and Q_MAP03_VRAAG13_MEMO.entered,Q_MAP03_VRAAG14.required and Q_MAP03_VRAAG14.entered,Q_MAP03_VRAAG14_MEMO.required and Q_MAP03_VRAAG14_MEMO.entered),AMMOUNT(Q_MAP03_VRAAG01.required,Q_MAP03_VRAAG01_MEMO.required,Q_MAP03_VRAAG02.required,Q_MAP03_VRAAG02_MEMO.required,Q_MAP03_VRAAG03.required,Q_MAP03_VRAAG03_MEMO.required,Q_MAP03_VRAAG04.required,Q_MAP03_VRAAG04_MEMO.required,Q_MAP03_VRAAG05.required,Q_MAP03_VRAAG05_MEMO.required,Q_MAP03_VRAAG06.required,Q_MAP03_VRAAG06_MEMO.required,Q_MAP03_VRAAG07.required,Q_MAP03_VRAAG07_MEMO.required,Q_MAP03_VRAAG08.required,Q_MAP03_VRAAG08_MEMO.required,Q_MAP03_VRAAG09.required,Q_MAP03_VRAAG09_MEMO.required,Q_MAP03_VRAAG10.required,Q_MAP03_VRAAG10_MEMO.required,Q_MAP03_VRAAG11.required,Q_MAP03_VRAAG11_MEMO.required,Q_MAP03_VRAAG12.required,Q_MAP03_VRAAG12_MEMO.required,Q_MAP03_VRAAG13.required,Q_MAP03_VRAAG13_MEMO.required,Q_MAP03_VRAAG14.required,Q_MAP03_VRAAG14_MEMO.required)];
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Thema\'s";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
-   displaytype: select;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    variable Q_MAP03_WARNING
    {
     datatype: string;
     frequency: document;
     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-    data_options: unscalable;
     title: "Warning voor map 3";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP03_INFO
    {
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP03[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "Info bij stap 3";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP03_VALIDATION
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Validatie stap 3";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP03_HINT
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Hinttekst stap 3";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP03_PARAGRAAF01
    {
-    datatype: number;
     frequency: document;
     title: "Relevantie thema\'s";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100% zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.";
     variable +Q_MAP03_GEWICHT_VRAAG05_INPUT
     {
-     datatype: number;
      frequency: document;
      formula: 50;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF06));
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
      range: <=100 and >=0;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG06_INPUT
     {
-     datatype: number;
      frequency: document;
      formula: OnER(100-Q_MAP03_GEWICHT_VRAAG05_INPUT,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF07));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP03_GEWICHTTOTAAL
     {
-     datatype: number;
      frequency: document;
      formula: Q_MAP03_GEWICHT_VRAAG05_INPUT+Q_MAP03_GEWICHT_VRAAG06_INPUT;
-     data_options: unscalable;
      title: "Totaal aantal punten";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      display_options: displayAsSummation;
      fixed_decimals: 1;
      top_separator: 1;
@@ -928,7 +631,6 @@ model MVO uses BaseModel
    }
    variable Q_MAP03_PARAGRAAF11
    {
-    datatype: number;
     frequency: document;
     title: "Omgerekende relevantie thema\'s";
     locked: 1;
@@ -938,42 +640,26 @@ model MVO uses BaseModel
     displaytype: currency;
     variable +Q_MAP03_GEWICHT_VRAAG05
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*Q_MAP03_GEWICHT_VRAAG05_INPUT,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF06));
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG06
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*Q_MAP03_GEWICHT_VRAAG06_INPUT,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF07));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP03_GEWICHTTOTAAL_OMGEREKEND
     {
-     datatype: number;
      frequency: document;
      formula: Q_MAP03_GEWICHT_VRAAG05+Q_MAP03_GEWICHT_VRAAG06;
-     data_options: unscalable;
      title: "Totaal aantal punten";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      display_options: displayAsSummation;
      fixed_decimals: 1;
      top_separator: 1;
@@ -981,7 +667,6 @@ model MVO uses BaseModel
    }
    variable Q_MAP03_PARAGRAAF10
    {
-    datatype: number;
     frequency: document;
     title: "Verborgen mapje met vastgezette gewichten voor de 5 overige thema\'s";
     locked: 1;
@@ -991,81 +676,50 @@ model MVO uses BaseModel
     displaytype: currency;
     variable +Q_MAP03_GEWICHT_VRAAG01
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*100,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF02));
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG02
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*100,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF03));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG03
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*100,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF04));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG04
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*100,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF05));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable +Q_MAP03_GEWICHT_VRAAG07
     {
-     datatype: number;
      frequency: document;
      formula: OnER((1/6)*100,NA);
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP03_PARAGRAAF08));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP03_GEWICHTTOTAALOVERIG
     {
-     datatype: number;
      frequency: document;
      formula: Q_MAP03_GEWICHT_VRAAG01+Q_MAP03_GEWICHT_VRAAG02+Q_MAP03_GEWICHT_VRAAG03+Q_MAP03_GEWICHT_VRAAG04+Q_MAP03_GEWICHT_VRAAG07;
-     data_options: unscalable;
      title: "Totaal aantal punten";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      display_options: displayAsSummation;
      fixed_decimals: 1;
      top_separator: 1;
@@ -1073,19 +727,14 @@ model MVO uses BaseModel
    }
    variable Q_MAP03_PARAGRAAF00
    {
-    datatype: number;
     frequency: document;
     title: "Toelichting thema\'s";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Deze stap van de MVO Scan betreft hoofdstuk 6 van de ISO 26000 richtlijn. Hoofdstuk 4 (principes) en hoofdstuk 6 (thema\'s) zijn een gezamenlijke basis voor het MVO-beleid. Alle ja / nee vragen op deze stap zijn verplicht en bij \'ja\' als antwoord wordt u gevraagd om een (verplichte) toelichting.";
     variable Q_MAP03_VERBORGEN
     {
-     datatype: number;
      frequency: document;
      title: "Verborgen variabele";
-     top_blanklines: 1;
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
@@ -1095,22 +744,13 @@ model MVO uses BaseModel
    }
    variable Q_MAP03_PARAGRAAF02
    {
-    datatype: number;
     frequency: document;
     title: "Bestuur";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP03_VRAAG01
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "MVO is een onderdeel van uw strategie(plannen)";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1118,22 +758,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG01=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG01_MEMO);
     }
     variable Q_MAP03_VRAAG02
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U neemt het effect op MVO onderwerpen mee in het maken van belangrijke beslissingen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1141,33 +774,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG02=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG02_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF03
    {
-    datatype: number;
     frequency: document;
     title: "Mensenrechten";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Mensenrechten raken het bedrijfsleven concreet op het gebied van onder andere arbeidsomstandigheden, ketenbeheer en de invloed op de lokale gemeenschap.";
     variable Q_MAP03_VRAAG03
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U bent op de hoogte van de arbeidsomstandigheden in uw keten (denk hierbij aan afnemers en leveranciers)";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1175,22 +797,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG03=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG03_MEMO);
     }
     variable Q_MAP03_VRAAG04
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U bent op de hoogte van de invloed van uw keten (denk hierbij aan afnemers en leveranciers) op hun lokale gemeenschap (bv veiligheid en gezondheid lokale bevolking)";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1198,33 +813,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG04=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG04_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF04
    {
-    datatype: number;
     frequency: document;
     title: "Werknemers / arbeid";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Dit MVO thema wordt in de volgende stap nog verder uitgewerkt, met vragen betreffende de implementatie ervan.";
     variable Q_MAP03_VRAAG05
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Het welzijn van werknemers is onderdeel van het beleid";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1232,22 +836,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG05=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG05_MEMO);
     }
     variable Q_MAP03_VRAAG06
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties werknemerswelzijn relevant vinden";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1255,32 +852,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG06=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG06_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF05
    {
-    datatype: number;
     frequency: document;
     title: "Milieu / omgeving";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP03_VRAAG07
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft schriftelijk (gedrags)regels opgesteld over milieuvervuiling, die aan alle medewerkers worden gecommuniceerd";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1288,22 +874,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG07=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG07_MEMO);
     }
     variable Q_MAP03_VRAAG08
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U neemt de mate van milieuvervuiling mee in het maken van belangrijke beslissingen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1311,32 +890,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG08=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG08_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF06
    {
-    datatype: number;
     frequency: document;
     title: "Zaken doen (B2B)";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP03_VRAAG09
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen, die aan alle relevante medewerkers worden gecommuniceerd";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1344,22 +912,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG09=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG09_MEMO);
     }
     variable Q_MAP03_VRAAG10
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U neemt de mate van het eerlijk zakendoen (B2B) mee in het maken van belangrijke beslissingen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1367,32 +928,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG10=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG10_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF07
    {
-    datatype: number;
     frequency: document;
     title: "Omgang met consumenten (B2C)";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP03_VRAAG11
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U heeft schriftelijk (gedrags)regels opgesteld over eerlijk zakendoen met consumenten, die aan alle relevante medewerkers worden gecommuniceerd";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1400,22 +950,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG11=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG11_MEMO);
     }
     variable Q_MAP03_VRAAG12
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U neemt de mate van het eerlijk behandelen van consumenten mee in het maken van belangrijke beslissingen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1423,32 +966,21 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG12=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG12_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF08
    {
-    datatype: number;
     frequency: document;
     title: "Maatschappelijke betrokkenheid";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     variable Q_MAP03_VRAAG13
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Maatschappelijke betrokkenheid is onderdeel van uw strategie(plannen)";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1456,22 +988,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG13=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG13_MEMO);
     }
     variable Q_MAP03_VRAAG14
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Bij samenwerking met andere organisaties is het voor u van belang of de andere organisaties maatschappelijke betrokkenheid relevant vinden";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP03_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1479,17 +1004,14 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP03_VRAAG14=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP03_VRAAG14_MEMO);
     }
    }
    variable Q_MAP03_PARAGRAAF09
    {
-    datatype: number;
     frequency: document;
     title: "Eigenschappen van de stap";
     locked: 1;
@@ -1501,40 +1023,26 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Warning voor map 3";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP03_PARAGRAAF09SUB2 refers to Q_MAP03_INFO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Info bij stap 3";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP03_PARAGRAAF09SUB3 refers to Q_MAP03_VALIDATION
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Validatie stap 3";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
    }
    variable Q_MAP03_HULPVARIABELEN
    {
-    datatype: number;
     frequency: document;
     title: "Hulpvariabelen";
     locked: 1;
@@ -1544,16 +1052,10 @@ model MVO uses BaseModel
     displaytype: currency;
     variable Q_MAP03_VERPLICHT
     {
-     datatype: number;
      frequency: document;
      formula: 1;
-     data_options: unscalable;
      title: "Zijn de vragen in deze stap verplicht?";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-     displaytype: select;
      choices: "0:Nee|1:Ja";
     }
    }
@@ -1561,78 +1063,50 @@ model MVO uses BaseModel
   variable Q_MAP04
   {
    valid: [AMMOUNT(Q_MAP04_VRAAG01.required and Q_MAP04_VRAAG01.entered,Q_MAP04_VRAAG01_MEMO.required and Q_MAP04_VRAAG01_MEMO.entered,Q_MAP04_VRAAG02.required and Q_MAP04_VRAAG02.entered,Q_MAP04_VRAAG02_MEMO.required and Q_MAP04_VRAAG02_MEMO.entered,Q_MAP04_VRAAG03.required and Q_MAP04_VRAAG03.entered,Q_MAP04_VRAAG03_MEMO.required and Q_MAP04_VRAAG03_MEMO.entered,Q_MAP04_VRAAG04.required and Q_MAP04_VRAAG04.entered,Q_MAP04_VRAAG04_MEMO.required and Q_MAP04_VRAAG04_MEMO.entered,Q_MAP04_VRAAG04_MEMO_EXTRA.required and Q_MAP04_VRAAG04_MEMO_EXTRA.entered,Q_MAP04_VRAAG05.required and Q_MAP04_VRAAG05.entered,Q_MAP04_VRAAG05_MEMO.required and Q_MAP04_VRAAG05_MEMO.entered,Q_MAP04_VRAAG06.required and Q_MAP04_VRAAG06.entered,Q_MAP04_VRAAG06_MEMO.required and Q_MAP04_VRAAG06_MEMO.entered,Q_MAP04_VRAAG07.required and Q_MAP04_VRAAG07.entered,Q_MAP04_VRAAG07_MEMO.required and Q_MAP04_VRAAG07_MEMO.entered,Q_MAP04_VRAAG08.required and Q_MAP04_VRAAG08.entered,Q_MAP04_VRAAG08_MEMO.required and Q_MAP04_VRAAG08_MEMO.entered,Q_MAP04_VRAAG09.required and Q_MAP04_VRAAG09.entered,Q_MAP04_VRAAG09_MEMO.required and Q_MAP04_VRAAG09_MEMO.entered,Q_MAP04_VRAAG10.required and Q_MAP04_VRAAG10.entered,Q_MAP04_VRAAG10_MEMO.required and Q_MAP04_VRAAG10_MEMO.entered,Q_MAP04_VRAAG11.required and Q_MAP04_VRAAG11.entered,Q_MAP04_VRAAG11_MEMO.required and Q_MAP04_VRAAG11_MEMO.entered,Q_MAP04_VRAAG12.required and Q_MAP04_VRAAG12.entered,Q_MAP04_VRAAG12_MEMO.required and Q_MAP04_VRAAG12_MEMO.entered),AMMOUNT(Q_MAP04_VRAAG01.required,Q_MAP04_VRAAG01_MEMO.required,Q_MAP04_VRAAG02.required,Q_MAP04_VRAAG02_MEMO.required,Q_MAP04_VRAAG03.required,Q_MAP04_VRAAG03_MEMO.required,Q_MAP04_VRAAG04.required,Q_MAP04_VRAAG04_MEMO.required,Q_MAP04_VRAAG04_MEMO_EXTRA.required,Q_MAP04_VRAAG05.required,Q_MAP04_VRAAG05_MEMO.required,Q_MAP04_VRAAG06.required,Q_MAP04_VRAAG06_MEMO.required,Q_MAP04_VRAAG07.required,Q_MAP04_VRAAG07_MEMO.required,Q_MAP04_VRAAG08.required,Q_MAP04_VRAAG08_MEMO.required,Q_MAP04_VRAAG09.required,Q_MAP04_VRAAG09_MEMO.required,Q_MAP04_VRAAG10.required,Q_MAP04_VRAAG10_MEMO.required,Q_MAP04_VRAAG11.required,Q_MAP04_VRAAG11_MEMO.required,Q_MAP04_VRAAG12.required,Q_MAP04_VRAAG12_MEMO.required)];
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Werknemers";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
-   displaytype: select;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    variable Q_MAP04_WARNING
    {
     datatype: string;
     frequency: document;
     formula: String(Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-    data_options: unscalable;
     title: "Warning voor map 4";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP04_INFO
    {
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP04[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "Info bij stap 4";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP04_VALIDATION
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Validatie stap 4";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP04_HINT
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Hinttekst stap 4";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAP04_PARAGRAAF00
    {
-    datatype: number;
     frequency: document;
     title: "Toelichting implementatie";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "Op www.iso.org/iso-26000-social-responsibility.html vindt u meer informatie over deze ISO richtlijn. En op www.iso.org/obp/ui/#iso:std:iso:26000:ed-1:v1:en vindt u de openbare inhoud (uit 2010) van deze richtlijn. Hoofdstuk 7 van de ISO 26000 richtlijn gaat in op de implementatie van het MVO-beleid. In deze stap van de MVO Scan worden voor het thema Werknemers stelling en vragen gepresenteerd die in een indicatie geven van de daadwerkelijke implementatie van dit thema. Alle ja / nee vragen op deze stap zijn verplicht en bij \'ja\' als antwoord wordt u gevraagd om een (verplichte) toelichting. En bij vraag 4 wordt zowel bij ja als nee gevraagd om een (verplichte) toelichting.";
     variable Q_MAP04_VERBORGEN
     {
-     datatype: number;
      frequency: document;
      title: "Verborgen variabele";
-     top_blanklines: 1;
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
@@ -1642,23 +1116,14 @@ model MVO uses BaseModel
    }
    variable Q_MAP04_PARAGRAAF01
    {
-    datatype: number;
     frequency: document;
     title: "Arbeidsomstandigheden";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "ISO 26000 - hoofdstuk 6.4.4";
     variable Q_MAP04_VRAAG01
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Ons beleid is niet in strijd met de CAO(\'s)";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1666,22 +1131,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG01=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG01_MEMO);
     }
     variable Q_MAP04_VRAAG02
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Voert u wijzigingen in de CAO door in uw arbeidscontracten, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1689,22 +1147,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG02=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG02_MEMO);
     }
     variable Q_MAP04_VRAAG03
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U zorgt ervoor dat u tijdig op de hoogte bent van wijzigingen in CAO(\'s)";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1712,22 +1163,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG03=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG03_MEMO);
     }
     variable Q_MAP04_VRAAG04
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant in zijn arbeidscontractens salarissen hanteert die in strijd zijn met de geldende CAO?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1735,10 +1179,8 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG04=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG04_MEMO);
     }
@@ -1746,10 +1188,8 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Welk onderwerp / onderwerpen van de CAO zou voor u eventueel wel een reden zijn om bovenstaande deal af te slaan?";
      visible: (Q_MAP04_VRAAG04=0);
-     options_title: locked;
      displaytype: memo;
      hint: "Mogelijke andere onderwerpen van een CAO zijn: werktijden, opzegtermijn en pensioenregeling. Over arbeidsomstandigheden wordt overigens op deze stap een aparte vraag gesteld.";
      required: Visible(Q_MAP04_VRAAG04_MEMO_EXTRA);
@@ -1757,23 +1197,14 @@ model MVO uses BaseModel
    }
    variable Q_MAP04_PARAGRAAF02
    {
-    datatype: number;
     frequency: document;
     title: "Gezondheid en veiligheid";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "ISO 26000 - hoofdstuk 6.4.6";
     variable Q_MAP04_VRAAG05
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Wij hebben een gezondheids- en veiligheidsbeleid";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1781,22 +1212,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG05=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG05_MEMO);
     }
     variable Q_MAP04_VRAAG06
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Zorgt u ervoor dat procedures en veilige werkwijzen altijd worden gevolgd, ook wanneer dit voor u als werkgever substantiele nadelige financiele consequenties heeft?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1804,22 +1228,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG06=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG06_MEMO);
     }
     variable Q_MAP04_VRAAG07
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "U zorgt ervoor dat het calamiteitenplan minstens jaarlijks wordt doorlopen";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1827,22 +1244,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG07=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG07_MEMO);
     }
     variable Q_MAP04_VRAAG08
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de werknemers van de potentiele klant in onveilige omstandigheden werken?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1850,33 +1260,22 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG08=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG08_MEMO);
     }
    }
    variable Q_MAP04_PARAGRAAF03
    {
-    datatype: number;
     frequency: document;
     title: "Persoonlijke ontwikkeling en opleiding";
-    visible: 1;
-    options_title: locked;
     displaytype: currency;
     hint: "ISO 26000 - hoofdstuk 6.4.7";
     variable Q_MAP04_VRAAG09
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Ons HRM beleid moedigt opleidingen voor werknemers aan";
-     top_blanklines: 1;
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1884,22 +1283,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG09=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG09_MEMO);
     }
     variable Q_MAP04_VRAAG10
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Moedigt u aan dat ingeplande opleidingen worden gevolgd, ook al brengt dit deadlines in gevaar?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1907,22 +1299,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG10=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG10_MEMO);
     }
     variable Q_MAP04_VRAAG11
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Bij de jaarlijkse gesprekken wordt met de werknemer overlegd welke opleiding passend is";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1930,22 +1315,15 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG11=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG11_MEMO);
     }
     variable Q_MAP04_VRAAG12
     {
-     datatype: number;
      frequency: document;
-     data_options: unscalable;
      title: "Slaat u een deal van 1 miljoen euro omzet af, wanneer blijkt dat de potentiele klant persoonlijke ontwikkeling van zijn werknemers ontmoedigt?";
-     visible: 1;
-     options_title: locked;
-     displaytype: select;
      required: (Q_MAP04_VERPLICHT[1]=1);
      choices: "0:Nee|1:Ja";
     }
@@ -1953,17 +1331,14 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01_MEMO));
      visible: (Q_MAP04_VRAAG12=1);
-     options_title: locked;
      displaytype: memo;
      required: Visible(Q_MAP04_VRAAG12_MEMO);
     }
    }
    variable Q_MAP04_PARAGRAAF10
    {
-    datatype: number;
     frequency: document;
     title: "Verborgen mapje met gewichten voor deze stap";
     locked: 1;
@@ -1973,165 +1348,103 @@ model MVO uses BaseModel
     displaytype: currency;
     variable Q_MAP04_GEWICHT_VRAAG01
     {
-     datatype: number;
      frequency: document;
      formula: 10;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG01));
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG02
     {
-     datatype: number;
      frequency: document;
      formula: 30;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG02));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG03
     {
-     datatype: number;
      frequency: document;
      formula: 20;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG03));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG04
     {
-     datatype: number;
      frequency: document;
      formula: 40;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG04));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG05
     {
-     datatype: number;
      frequency: document;
      formula: 10;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG05));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG06
     {
-     datatype: number;
      frequency: document;
      formula: 30;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG06));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG07
     {
-     datatype: number;
      frequency: document;
      formula: 20;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG07));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG08
     {
-     datatype: number;
      frequency: document;
      formula: 40;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG08));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG09
     {
-     datatype: number;
      frequency: document;
      formula: 10;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG09));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG10
     {
-     datatype: number;
      frequency: document;
      formula: 30;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG10));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG11
     {
-     datatype: number;
      frequency: document;
      formula: 20;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG11));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
     variable Q_MAP04_GEWICHT_VRAAG12
     {
-     datatype: number;
      frequency: document;
      formula: 40;
-     data_options: unscalable;
      title: String(GetTitle(Q_MAP01_VRAAG12));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      fixed_decimals: 1;
     }
    }
    variable Q_MAP04_PARAGRAAF09
    {
-    datatype: number;
     frequency: document;
     title: "Eigenschappen van de stap";
     locked: 1;
@@ -2143,40 +1456,26 @@ model MVO uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Warning voor map 4";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP04_PARAGRAAF09SUB2 refers to Q_MAP04_INFO
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Info bij stap 4";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
     variable Q_MAP04_PARAGRAAF09SUB3 refers to Q_MAP04_VALIDATION
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Validatie stap 4";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
     }
    }
    variable Q_MAP04_HULPVARIABELEN
    {
-    datatype: number;
     frequency: document;
     title: "Hulpvariabelen";
     locked: 1;
@@ -2186,16 +1485,10 @@ model MVO uses BaseModel
     displaytype: currency;
     variable Q_MAP04_VERPLICHT
     {
-     datatype: number;
      frequency: document;
      formula: 1;
-     data_options: unscalable;
      title: "Zijn de vragen in deze stap verplicht?";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-     displaytype: select;
      choices: "0:Nee|1:Ja";
     }
    }
@@ -2205,13 +1498,9 @@ model MVO uses BaseModel
    datatype: string;
    frequency: document;
    formula: String(If(Q_ROOT[1]=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES[1]&Q_WARNING_GLOBAL[1]);
-   data_options: unscalable;
    title: "Resultaat";
-   top_blanklines: 1;
    locked: 1;
    visible: Q_ROOT=1;
-   options_title: locked;
-   options: locked;
    variable RESULT_DASHBOARD
    {
     datatype: matrix;
@@ -2219,7 +1508,6 @@ model MVO uses BaseModel
     formula: POLARBENCHMARK;
     title: "Scores";
     locked: 1;
-    visible: 1;
     displaytype: customwidget;
     fixed_decimals: 0;
    }
@@ -2230,7 +1518,6 @@ model MVO uses BaseModel
     formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE01.value],[Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE02.value],[Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE03.value],[Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE04.value],[Q_MAP03_SUBSCORE05.title,Q_MAP03_SUBSCORE05.value]];
     title: "Themas";
     locked: 1;
-    visible: 1;
     displaytype: piechart;
     fixed_decimals: 0;
    }
@@ -2241,7 +1528,6 @@ model MVO uses BaseModel
     formula: PRINCIPES_GRAPH;
     title: "Principes";
     locked: 1;
-    visible: 1;
     displaytype: piechart;
     fixed_decimals: 0;
    }
@@ -2249,249 +1535,168 @@ model MVO uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Resultaat";
-    top_blanklines: 1;
     locked: 1;
     visible: 0;
-    options_title: locked;
-    options: locked;
    }
    variable Q_MAPRESULT_PARAGRAAF01
    {
-    datatype: number;
     frequency: document;
     title: "Principes";
     visible: 0;
-    options_title: locked;
     displaytype: currency;
     hint: "Een totaalscore van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 principes van de ISO 26000 MVO richtlijn";
     variable +Q_MAP01_SUBSCORE01
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG01*((1/7)*100))+(Q_MAP01_VRAAG02*((1/7)*100)))/2,NA);
      title: "Verantwoordelijkheid";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE02
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG03*((1/7)*100))+(Q_MAP01_VRAAG04*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF02));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE03
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG05*((1/7)*100))+(Q_MAP01_VRAAG06*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF03));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE04
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG07*((1/7)*100))+(Q_MAP01_VRAAG08*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF04));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE05
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG09*((1/7)*100))+(Q_MAP01_VRAAG10*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF05));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE06
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG11*((1/7)*100))+(Q_MAP01_VRAAG12*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF06));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP01_SUBSCORE07
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP01_VRAAG13*((1/7)*100))+(Q_MAP01_VRAAG14*((1/7)*100)))/2,NA);
      title: String(GetTitle(Q_MAP01_PARAGRAAF07));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable Q_MAP01_SCORE01
     {
-     datatype: number;
      frequency: document;
      formula: Q_MAP01_SUBSCORE01+Q_MAP01_SUBSCORE02+Q_MAP01_SUBSCORE03+Q_MAP01_SUBSCORE04+Q_MAP01_SUBSCORE05+Q_MAP01_SUBSCORE06+Q_MAP01_SUBSCORE07;
      title: "Principes";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
      top_separator: 1;
     }
    }
    variable Q_MAPRESULT_PARAGRAAF02
    {
-    datatype: number;
     frequency: document;
     title: "Een totaalscore van 100 punten betekent dat u voor 100% de stakeholders relevant vindt en bij veranderingen betrekt";
     visible: 0;
-    options_title: locked;
     displaytype: currency;
     hint: "Een totaalscore van 100 punten betekent dat u voor 100% de stakeholders relevant vindt en bij veranderingen betrekt";
     variable Q_MAP02_SCORE01
     {
-     datatype: number;
      frequency: document;
      formula: OnER((((Q_MAP02_VRAAG01+Q_MAP02_VRAAG02)/2)*100),NA);
      title: "Omgeving";
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
    }
    variable Q_MAPRESULT_PARAGRAAF03
    {
-    datatype: number;
     frequency: document;
     title: "Thema\'s";
     visible: 0;
-    options_title: locked;
     displaytype: currency;
     hint: "Een totaalscore van 100 punten betekent dat u het 100% eens bent met de stellingen over de 7 thema\'s van de ISO 26000 MVO richtlijn";
     variable +Q_MAP03_SUBSCORE01
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG01*Q_MAP03_GEWICHT_VRAAG01)+(Q_MAP03_VRAAG02*Q_MAP03_GEWICHT_VRAAG01))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG01));
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE02
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG03*Q_MAP03_GEWICHT_VRAAG02)+(Q_MAP03_VRAAG04*Q_MAP03_GEWICHT_VRAAG02))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG02));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE03
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG05*Q_MAP03_GEWICHT_VRAAG03)+(Q_MAP03_VRAAG06*Q_MAP03_GEWICHT_VRAAG03))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG03));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE04
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG07*Q_MAP03_GEWICHT_VRAAG04)+(Q_MAP03_VRAAG08*Q_MAP03_GEWICHT_VRAAG04))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG04));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE05
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG09*Q_MAP03_GEWICHT_VRAAG05)+(Q_MAP03_VRAAG10*Q_MAP03_GEWICHT_VRAAG05))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG05));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE06
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG11*Q_MAP03_GEWICHT_VRAAG06)+(Q_MAP03_VRAAG12*Q_MAP03_GEWICHT_VRAAG06))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG06));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable +Q_MAP03_SUBSCORE07
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP03_VRAAG13*Q_MAP03_GEWICHT_VRAAG07)+(Q_MAP03_VRAAG14*Q_MAP03_GEWICHT_VRAAG07))/2,NA);
      title: String(GetTitle(Q_MAP03_GEWICHT_VRAAG07));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable Q_MAP03_SCORE01
     {
-     datatype: number;
      frequency: document;
      formula: Q_MAP03_SUBSCORE01+Q_MAP03_SUBSCORE02+Q_MAP03_SUBSCORE03+Q_MAP03_SUBSCORE04+Q_MAP03_SUBSCORE05+Q_MAP03_SUBSCORE06+Q_MAP03_SUBSCORE07;
      title: "Thema\'s";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
      display_options: displayAsSummation;
      top_separator: 1;
@@ -2499,60 +1704,41 @@ model MVO uses BaseModel
    }
    variable Q_MAPRESULT_PARAGRAAF04
    {
-    datatype: number;
     frequency: document;
     title: "Werknemers";
     visible: 0;
-    options_title: locked;
     displaytype: currency;
     hint: "Deze totaalscore geeft een indicatie in hoeverre u handelt volgens de richtlijnen van drie van de vijf subthema\'s van het thema Werknemers (100 is de maximale score voor het totaal en per subthema)";
     variable Q_MAP04_SUBSCORE01
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP04_GEWICHT_VRAAG01*Q_MAP04_VRAAG01)+(Q_MAP04_GEWICHT_VRAAG02*Q_MAP04_VRAAG02)+(Q_MAP04_GEWICHT_VRAAG03*Q_MAP04_VRAAG03)+(Q_MAP04_GEWICHT_VRAAG04*Q_MAP04_VRAAG04)),NA);
      title: String(GetTitle(Q_MAP04_PARAGRAAF01));
-     top_blanklines: 1;
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable Q_MAP04_SUBSCORE02
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP04_GEWICHT_VRAAG05*Q_MAP04_VRAAG05)+(Q_MAP04_GEWICHT_VRAAG06*Q_MAP04_VRAAG06)+(Q_MAP04_GEWICHT_VRAAG07*Q_MAP04_VRAAG07)+(Q_MAP04_GEWICHT_VRAAG08*Q_MAP04_VRAAG08)),NA);
      title: String(GetTitle(Q_MAP04_PARAGRAAF02));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable Q_MAP04_SUBSCORE03
     {
-     datatype: number;
      frequency: document;
      formula: OnER(((Q_MAP04_GEWICHT_VRAAG09*Q_MAP04_VRAAG09)+(Q_MAP04_GEWICHT_VRAAG10*Q_MAP04_VRAAG10)+(Q_MAP04_GEWICHT_VRAAG11*Q_MAP04_VRAAG11)+(Q_MAP04_GEWICHT_VRAAG12*Q_MAP04_VRAAG12)),NA);
      title: String(GetTitle(Q_MAP04_PARAGRAAF03));
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
     }
     variable Q_MAP04_SCORE01
     {
-     datatype: number;
      frequency: document;
      formula: OnER((Q_MAP04_SUBSCORE01+Q_MAP04_SUBSCORE02+Q_MAP04_SUBSCORE03)/3,NA);
      title: "Werknemers";
      locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
      displaytype: currency;
      display_options: displayAsSummation;
      top_separator: 1;
@@ -2561,25 +1747,15 @@ model MVO uses BaseModel
   }
   variable Q_STATUS
   {
-   datatype: number;
    frequency: document;
    formula: 0;
-   data_options: unscalable;
    title: "Status";
-   top_blanklines: 1;
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Actief|1:Defintief";
   }
   variable Q_STATUS_FINAL_ON
   {
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Definitief gemaakt op:";
-   visible: 1;
-   options_title: locked;
    displaytype: date;
    afterinput: (SetValue(MatrixVersion, MatrixVersion, true));
   }
@@ -2587,47 +1763,31 @@ model MVO uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Definitief gemaakt door (gebruikersnaam):";
-   visible: 1;
-   options_title: locked;
   }
   variable Q_STATUS_FINAL_BY_NAME
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Definitief gemaakt door (volledige naam):";
-   visible: 1;
-   options_title: locked;
   }
   variable Q_STATUS_STARTED_ON
   {
-   datatype: number;
    frequency: document;
-   data_options: unscalable;
    title: "Aangemaakt op:";
-   visible: 1;
-   options_title: locked;
    displaytype: date;
   }
   variable Q_STATUS_STARTED_BY
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Aangemaakt door (gebruikersnaam):";
-   visible: 1;
-   options_title: locked;
   }
   variable Q_STATUS_STARTED_BY_NAME
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Aangemaakt door (volledige naam):";
-   visible: 1;
-   options_title: locked;
   }
   variable ModelVersion
   {
@@ -2637,9 +1797,6 @@ model MVO uses BaseModel
    data_options: saveCalculatedValue,unscalable;
    title: "Modelversie";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
   }
   variable ModelType
   {
@@ -2649,9 +1806,6 @@ model MVO uses BaseModel
    data_options: saveCalculatedValue,unscalable;
    title: "Modeltype";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
   }
   variable MatrixVersion
   {
@@ -2660,68 +1814,41 @@ model MVO uses BaseModel
    formula: "None";
    data_options: saveCalculatedValue,unscalable;
    title: "Parametersversie";
-   visible: 1;
-   options_title: locked;
    hint: "Bij het definitief maken wordt de waarde \'vastgezet\'.";
   }
   variable Q_PREVIOUS_BUTTON_VISIBLE
   {
-   datatype: number;
    frequency: document;
    formula: 2;
-   data_options: unscalable;
    title: "Vorige";
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Nooit|2:Altijd";
   }
   variable Q_NEXT_BUTTON_VISIBLE
   {
-   datatype: number;
    frequency: document;
    formula: 2;
-   data_options: unscalable;
    title: "Volgende";
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
   }
   variable Q_CONCEPT_REPORT_VISIBLE
   {
-   datatype: number;
    frequency: document;
    formula: 1;
-   data_options: unscalable;
    title: "Concept rapport";
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Nee|1:Ja";
   }
   variable Q_MAKE_FINAL_VISIBLE
   {
-   datatype: number;
    frequency: document;
    formula: 1;
-   data_options: unscalable;
    title: "Definitief maken";
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Nee|1:Ja";
   }
   variable Q_FINAL_REPORT_VISIBLE
   {
-   datatype: number;
    frequency: document;
    formula: 1;
-   data_options: unscalable;
    title: "Definitief rapport";
-   visible: 1;
-   options_title: locked;
-   displaytype: select;
    choices: "0:Nee|1:Ja";
   }
  }
@@ -2731,48 +1858,30 @@ model MVO uses BaseModel
   frequency: document;
   data_options: unscalable;
   title: "Hulpvariabelen";
-  top_blanklines: 1;
   locked: 1;
-  visible: 1;
-  options_title: locked;
-  options: locked;
   variable Q_WARNING_GLOBAL
   {
    datatype: string;
    frequency: document;
    formula: String(If( Length ( Q_WARNING_GLOBALTXT[1])>0 , "[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT , ""));
-   data_options: unscalable;
    title: "Knock-out(s)?";
-   top_blanklines: 1;
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
    displaytype: memo;
    variable Q_WARNING_01
    {
     datatype: string;
     frequency: document;
     formula: "";
-    data_options: unscalable;
     title: "Map6 - Vraag 6";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_WARNING_GLOBALTXT
    {
     datatype: string;
     frequency: document;
     formula: String(If( Length ( Q_WARNING_01[1])>0 , "[br][/br]"&Q_WARNING_01[1],""));
-    data_options: unscalable;
     title: "Knock-out tekst";
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
     displaytype: memo;
    }
   }
@@ -2782,7 +1891,6 @@ model MVO uses BaseModel
    frequency: none;
    title: "Widgets";
    locked: 1;
-   visible: 1;
    variable POLARBENCHMARK
    {
     datatype: matrix;
@@ -2790,7 +1898,6 @@ model MVO uses BaseModel
     formula: [[Q_MAP01_SCORE01.title,Q_MAP02_SCORE01.title,Q_MAP03_SCORE01.title,Q_MAP04_SCORE01.title],[Q_MAP01_SCORE01,Q_MAP02_SCORE01,Q_MAP03_SCORE01,Q_MAP04_SCORE01]];
     title: "Maatschappelijk Verantwoord Ondernemen";
     locked: 1;
-    visible: 1;
     displaytype: polarchart;
     fixed_decimals: 2;
    }
@@ -2801,7 +1908,6 @@ model MVO uses BaseModel
     formula: [[Q_MAP03_SUBSCORE01.title,Q_MAP03_SUBSCORE01.value],[Q_MAP03_SUBSCORE02.title,Q_MAP03_SUBSCORE02.value],[Q_MAP03_SUBSCORE03.title,Q_MAP03_SUBSCORE03.value],[Q_MAP03_SUBSCORE04.title,Q_MAP03_SUBSCORE04.value],[Q_MAP03_SUBSCORE05.title,Q_MAP03_SUBSCORE05.value]];
     title: "Themas";
     locked: 1;
-    visible: 1;
     displaytype: piechart;
     fixed_decimals: 0;
    }
@@ -2812,7 +1918,6 @@ model MVO uses BaseModel
     formula: [[Q_MAP01_SUBSCORE01.title,Q_MAP01_SUBSCORE01.value],[Q_MAP01_SUBSCORE02.title,Q_MAP01_SUBSCORE02.value],[Q_MAP01_SUBSCORE03.title,Q_MAP01_SUBSCORE03.value],[Q_MAP01_SUBSCORE04.title,Q_MAP01_SUBSCORE04.value],[Q_MAP01_SUBSCORE05.title,Q_MAP01_SUBSCORE05.value]];
     title: "Principes";
     locked: 1;
-    visible: 1;
     displaytype: piechart;
     fixed_decimals: 0;
    }
@@ -2822,47 +1927,29 @@ model MVO uses BaseModel
    datatype: string;
    frequency: document;
    formula: String(If( Length ( Q_RESTRICTIESTXT[1])>0 , "[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT , ""));
-   data_options: unscalable;
    title: "Restricties";
    locked: 1;
-   visible: 1;
-   options_title: locked;
-   options: locked;
    displaytype: memo;
    variable Q_RESTRICTIES_01
    {
     datatype: string;
     frequency: document;
     formula: "";
-    data_options: unscalable;
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_RESTRICTIES_02
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
    }
    variable Q_RESTRICTIESTXT
    {
     datatype: string;
     frequency: document;
     formula: String(If( Length ( Q_RESTRICTIES_01[1])>0 , "[br][/br]"&Q_RESTRICTIES_01[1],""));
-    data_options: unscalable;
     title: "Restricties tekst";
-    top_blanklines: 1;
     locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
     displaytype: memo;
    }
   }
