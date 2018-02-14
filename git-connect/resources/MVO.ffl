@@ -594,7 +594,7 @@ model MVO uses BaseModel
    variable Q_MAP03_PARAGRAAF01
    {
     frequency: document;
-    title: "Relevantie thema\'s";
+    title: "Relevantie thema's";
     displaytype: currency;
     hint: "Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100% zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.";
     variable +Q_MAP03_GEWICHT_VRAAG05_INPUT
