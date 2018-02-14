@@ -10,6 +10,7 @@ if (!global.MatrixLookup) {
 if (!global.MATRIX_VALUES) {
     global.MATRIX_VALUES = {}
 }
+
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
     for (var func in jsMath) {
@@ -49,23 +50,32 @@ OnNA = function(v, nav) {
     return v;
 }
 
+function closestLowerNum(num, arr) {
+    var mid;
+    var lo = 0;
+    var hi = arr.length - 1;
+    while (hi - lo > 1) {
+        mid = Math.floor((lo + hi) / 2);
+        if (arr[mid] < num) lo = mid;
+        else hi = mid;
+    }
+    if (num - arr[lo] <= arr[hi] - num) return arr[lo];
+    return arr[lo];//change to hi to get the nearest
+}
+
 MatrixLookup = function(xlsfileName, tableName, row, col) {
     if (!MATRIX_VALUES) return NA
-    var table = MATRIX_VALUES[tableName];
-    if (table && table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
-        return table.xasValues[row][col];
-    } else if (table && table.xasValues) {
-        var lastidx = null;
-        for (var key in table.xasValues) {
-            if (key <= row) {
-                lastidx = key;
-            } else {
-                break;
-            }
+    const table = MATRIX_VALUES[tableName];
+    var rv = NA;
+    if (table) {
+        if (table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
+            rv = table.xasValues[row][col];
+        } else if (table.xasValues && table.x_sort) {
+            const v = closestLowerNum(row, table.x_sort)
+            rv = table.xasValues[v][col];
         }
-        if (lastidx) return table.xasValues[lastidx][col];
     }
-    return NA;
+    return rv;
 }
 
 FILLEDIN = function(required, entered) {

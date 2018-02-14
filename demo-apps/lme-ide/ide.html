@@ -83,6 +83,11 @@
                                 <i class="fa fa-refresh"></i> <span></span>
                             </a>
                         </li>
+                        <li>
+                            <a ng-click="publishDockerImage()" data-toggle="tooltip" title="Publish Docker image">
+                                <i class="fa fa-server"></i> <span></span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -335,7 +340,7 @@
         </div>
         <strong>Copyright &copy; 2014-2018 <a>{{session.author}}</a>.</strong> All rights reserved.
     </footer>
-    <aside id="sidebar" class="control-sidebar-light container">
+    <aside id="sidebar" style="display: none;" class="control-sidebar-light container">
         <div ng-repeat="p in activeVariable">
             <div class="input-group input-xsm">
                 <label>{{p.name}}</label>

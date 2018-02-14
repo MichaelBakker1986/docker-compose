@@ -96,16 +96,29 @@ angular.module('lmeapp', ['angular.filter'])
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });
         var sidebaropen = false;
+        var hideSideBar = true;
+        $scope.publishDockerImage = function() {
+            $scope.toggleSideBarUsed()
+        }
+        $scope.toggleSideBarUsed = function() {
+            hideSideBar = !hideSideBar;
+            $scope.togglePropertiesSidebar(hideSideBar)
+        }
         $scope.togglePropertiesSidebar = function(open) {
-            if (sidebaropen && open) {
-                return;
+            if (hideSideBar && !sidebaropen) return;
+            if (hideSideBar && sidebaropen) {
+                sidebaropen = !sidebaropen;
+                $('#pagewrapper').toggleClass('control-sidebar-open')
+                $('#sidebar').toggleClass('control-sidebar')
+            } else {
+                if (sidebaropen && open) return;
+                if ($scope.activeVariable.length == 0 && !sidebaropen) return;
+                sidebaropen = !sidebaropen;
+                $('#pagewrapper').toggleClass('control-sidebar-open')
+                $('#sidebar').toggleClass('control-sidebar')
             }
-            if ($scope.activeVariable.length == 0 && !sidebaropen) {
-                return;
-            }
-            sidebaropen = !sidebaropen;
-            $('#pagewrapper').toggleClass('control-sidebar-open')
-            $('#sidebar').toggleClass('control-sidebar')
+            if (!sidebaropen) $('#sidebar').hide()
+            else $('#sidebar').show()
         }
         $scope.dbModelConvert = function() {
             $scope.fflType = '.ffl'
@@ -208,6 +221,7 @@ angular.module('lmeapp', ['angular.filter'])
                 })
                 $scope.reloadFFL();
                 $scope.runJBehaveTest();
+                matrixController.refresh()
             }
         }
         $(".toggle-expand-btn").click(function(e) {
@@ -216,9 +230,9 @@ angular.module('lmeapp', ['angular.filter'])
 
         function handleModelChange() {
             fflController.updateFFLModel(user_session.fflModelPath)
-            matrixController.updateMatrix(user_session.fflModelPath)
             jBehaveController.updateStory(user_session.fflModelPath)
             $scope.updateModelChanges()
+            matrixController.updateMatrix(user_session.fflModelPath)
         }
 
         $.getJSON("models", function(data) {

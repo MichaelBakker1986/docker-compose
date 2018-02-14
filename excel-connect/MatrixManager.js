@@ -22,7 +22,7 @@ MatrixManager.prototype.toFatrix = function() {
             }
         }
     }
-    var output = [['TableName','RowName','ColumnID','Value']]
+    var output = [['TableName', 'RowName', 'ColumnID', 'Value']]
     for (var i = 0; i < register.i.length; i++) {
         var obj = register.i[i];
         output.push([obj[0], obj[1], obj[2], obj[3]])
@@ -30,7 +30,7 @@ MatrixManager.prototype.toFatrix = function() {
     output = output.map(function(el) {
         return el.map(function(innerEl) {
             const prefix = [];
-            prefix.length = (40 - String(innerEl).length);
+            prefix.length = Math.max(30 - String(innerEl).length, 0);
             return innerEl + prefix.join(' ')
         }).join("|")
     })
