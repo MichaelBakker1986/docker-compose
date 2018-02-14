@@ -558,7 +558,7 @@ model MVO uses BaseModel
   {
    valid: [AMMOUNT(Q_MAP03_VRAAG01.required and Q_MAP03_VRAAG01.entered,Q_MAP03_VRAAG01_MEMO.required and Q_MAP03_VRAAG01_MEMO.entered,Q_MAP03_VRAAG02.required and Q_MAP03_VRAAG02.entered,Q_MAP03_VRAAG02_MEMO.required and Q_MAP03_VRAAG02_MEMO.entered,Q_MAP03_VRAAG03.required and Q_MAP03_VRAAG03.entered,Q_MAP03_VRAAG03_MEMO.required and Q_MAP03_VRAAG03_MEMO.entered,Q_MAP03_VRAAG04.required and Q_MAP03_VRAAG04.entered,Q_MAP03_VRAAG04_MEMO.required and Q_MAP03_VRAAG04_MEMO.entered,Q_MAP03_VRAAG05.required and Q_MAP03_VRAAG05.entered,Q_MAP03_VRAAG05_MEMO.required and Q_MAP03_VRAAG05_MEMO.entered,Q_MAP03_VRAAG06.required and Q_MAP03_VRAAG06.entered,Q_MAP03_VRAAG06_MEMO.required and Q_MAP03_VRAAG06_MEMO.entered,Q_MAP03_VRAAG07.required and Q_MAP03_VRAAG07.entered,Q_MAP03_VRAAG07_MEMO.required and Q_MAP03_VRAAG07_MEMO.entered,Q_MAP03_VRAAG08.required and Q_MAP03_VRAAG08.entered,Q_MAP03_VRAAG08_MEMO.required and Q_MAP03_VRAAG08_MEMO.entered,Q_MAP03_VRAAG09.required and Q_MAP03_VRAAG09.entered,Q_MAP03_VRAAG09_MEMO.required and Q_MAP03_VRAAG09_MEMO.entered,Q_MAP03_VRAAG10.required and Q_MAP03_VRAAG10.entered,Q_MAP03_VRAAG10_MEMO.required and Q_MAP03_VRAAG10_MEMO.entered,Q_MAP03_VRAAG11.required and Q_MAP03_VRAAG11.entered,Q_MAP03_VRAAG11_MEMO.required and Q_MAP03_VRAAG11_MEMO.entered,Q_MAP03_VRAAG12.required and Q_MAP03_VRAAG12.entered,Q_MAP03_VRAAG12_MEMO.required and Q_MAP03_VRAAG12_MEMO.entered,Q_MAP03_VRAAG13.required and Q_MAP03_VRAAG13.entered,Q_MAP03_VRAAG13_MEMO.required and Q_MAP03_VRAAG13_MEMO.entered,Q_MAP03_VRAAG14.required and Q_MAP03_VRAAG14.entered,Q_MAP03_VRAAG14_MEMO.required and Q_MAP03_VRAAG14_MEMO.entered),AMMOUNT(Q_MAP03_VRAAG01.required,Q_MAP03_VRAAG01_MEMO.required,Q_MAP03_VRAAG02.required,Q_MAP03_VRAAG02_MEMO.required,Q_MAP03_VRAAG03.required,Q_MAP03_VRAAG03_MEMO.required,Q_MAP03_VRAAG04.required,Q_MAP03_VRAAG04_MEMO.required,Q_MAP03_VRAAG05.required,Q_MAP03_VRAAG05_MEMO.required,Q_MAP03_VRAAG06.required,Q_MAP03_VRAAG06_MEMO.required,Q_MAP03_VRAAG07.required,Q_MAP03_VRAAG07_MEMO.required,Q_MAP03_VRAAG08.required,Q_MAP03_VRAAG08_MEMO.required,Q_MAP03_VRAAG09.required,Q_MAP03_VRAAG09_MEMO.required,Q_MAP03_VRAAG10.required,Q_MAP03_VRAAG10_MEMO.required,Q_MAP03_VRAAG11.required,Q_MAP03_VRAAG11_MEMO.required,Q_MAP03_VRAAG12.required,Q_MAP03_VRAAG12_MEMO.required,Q_MAP03_VRAAG13.required,Q_MAP03_VRAAG13_MEMO.required,Q_MAP03_VRAAG14.required,Q_MAP03_VRAAG14_MEMO.required)];
    frequency: document;
-   title: "Thema\'s";
+   title: "Thema's";
    locked: 1;
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    variable Q_MAP03_WARNING
@@ -594,7 +594,7 @@ model MVO uses BaseModel
    variable Q_MAP03_PARAGRAAF01
    {
     frequency: document;
-    title: "Relevantie thema\'s";
+    title: "Relevantie thema's";
     displaytype: currency;
     hint: "Specificeer de mate waarin u zaken doet via B2B (ten opzichte van B2C). 0 punten op B2B betekent 100 punten op B2C en dat betekent dat u 100% zaken doet met consumenten. Voor de scores betekent dit dat uw antwoorden op de vragen over B2B niet meetellen.";
     variable +Q_MAP03_GEWICHT_VRAAG05_INPUT
