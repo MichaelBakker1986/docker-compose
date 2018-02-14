@@ -359,7 +359,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP01_PARAGRAAF09SUB1 refers to Q_MAP01_WARNING
     {
@@ -390,7 +389,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP01_VERPLICHT
     {
@@ -452,7 +450,6 @@ model MVO uses BaseModel
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
-     options: locked, invisible;
      displaytype: currency;
     }
    }
@@ -516,7 +513,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP02_PARAGRAAF09SUB1 refers to Q_MAP02_WARNING
     {
@@ -547,7 +543,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP02_VERPLICHT
     {
@@ -636,7 +631,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable +Q_MAP03_GEWICHT_VRAAG05
     {
@@ -672,7 +666,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable +Q_MAP03_GEWICHT_VRAAG01
     {
@@ -738,7 +731,6 @@ model MVO uses BaseModel
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
-     options: locked, invisible;
      displaytype: currency;
     }
    }
@@ -1017,7 +1009,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP03_PARAGRAAF09SUB1 refers to Q_MAP03_WARNING
     {
@@ -1048,7 +1039,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP03_VERPLICHT
     {
@@ -1110,7 +1100,6 @@ model MVO uses BaseModel
      locked: 1;
      visible: 0;
      options_title: locked, invisible;
-     options: locked, invisible;
      displaytype: currency;
     }
    }
@@ -1344,7 +1333,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP04_GEWICHT_VRAAG01
     {
@@ -1450,7 +1438,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP04_PARAGRAAF09SUB1 refers to Q_MAP04_WARNING
     {
@@ -1481,7 +1468,6 @@ model MVO uses BaseModel
     locked: 1;
     visible: 0;
     options_title: locked, invisible;
-    options: locked, invisible;
     displaytype: currency;
     variable Q_MAP04_VERPLICHT
     {

@@ -13,6 +13,8 @@ exports.SimTupleFix = function(data) {
         linecounter++;
         if (line.match(/(variable|tuple) (\-|\+|\=){0,1}\w+_ti([0-9]{2}[2-9]{1}|[0-9]{1}1[0-9]{1})/gmi)) {
             bracketOpen = true;
+            line = line.replace(/variable/, 'tuple')
+            lines[i] = line
             simtuples.push({
                 ln: linecounter
             })
@@ -34,3 +36,4 @@ exports.SimTupleFix = function(data) {
     outputFFL = outputFFL.replace(/_ti[0-9]{3}/gmi, '')//just remove Tuple completely
     return outputFFL;
 }
+//console.info(exports.SimTupleFix(require('fs').readFileSync('../git-connect/resources/FAM.ffl', 'utf8')))

@@ -48,14 +48,6 @@ function DeltaCompareRegister(registerOne, registerOther) {
 DeltaCompareRegister.prototype.compare = function() {
     // log.info(this.one.toString())
     // log.info(this.other.toString())
-    //Check the schema also has to be diffed.
-    const schemaMapping = []
-    if (!this.one.schema.equals(this.other.schema)) {
-        throw Error('Not supported yet! Incomparable schemas')
-    } else {
-        for (var i = 0; i < this.one.schema.length; i++) schemaMapping[i] = [i, i]
-    }
-    const schema = this.other.schema;
     const delta = {
         schema: this.other.schemaIndexes,
         updates: [],
@@ -63,6 +55,16 @@ DeltaCompareRegister.prototype.compare = function() {
         deletes: [],
         changes: 0
     }
+    //Check the schema also has to be diffed.
+    const schemaMapping = []
+    if (!this.one.schema.equals(this.other.schema)) {
+        log.warn('Not supported yet! Incomparable schemas')
+        return delta;
+    } else {
+        for (var i = 0; i < this.one.schema.length; i++) schemaMapping[i] = [i, i]
+    }
+    const schema = this.other.schema;
+
     delta.addChange = function(changeType, colIndex, variableName, value) {
         delta[changeType].push([changeType, variableName, schema[colIndex], value])
         delta.changes++

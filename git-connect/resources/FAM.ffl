@@ -17,34 +17,29 @@ model FAM uses BaseModel
   {
    datatype: string;
    aggregation: balance;
-   data_options: unscalable;
    title: "Exchange Rates";
   }
   variable FES_LAYOUT
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Layout name";
   }
   variable FES_FLATINPUT
   {
    frequency: document;
-   data_options: unscalable;
    title: "Is flat input used? (1=yes)";
    fixed_decimals: 0;
   }
   variable FES_PROJECTION_PROFILE
   {
    frequency: document;
-   data_options: unscalable;
    title: "Projection Profile";
    fixed_decimals: 0;
   }
   variable FES_COLUMN_ORDER
   {
    frequency: document;
-   data_options: unscalable;
    title: "Column order";
    fixed_decimals: 0;
   }
@@ -52,42 +47,36 @@ model FAM uses BaseModel
   {
    aggregation: balance;
    formula: 1;
-   data_options: unscalable;
    title: "Column visible";
    fixed_decimals: 0;
   }
   variable FES_StartDatePERIOD
   {
    aggregation: balance;
-   data_options: unscalable;
    title: "Start Date Period";
    fixed_decimals: 0;
   }
   variable FES_ENDDATEPERIOD
   {
    aggregation: balance;
-   data_options: unscalable;
    title: "End Date Period";
    fixed_decimals: 0;
   }
   variable FES_BASECURRENCYPERIOD
   {
    aggregation: balance;
-   data_options: unscalable;
    title: "Base Currency Period";
    fixed_decimals: 0;
   }
   variable FES_VIEWCURRENCYPERIOD
   {
    aggregation: balance;
-   data_options: unscalable;
    title: "View Currency Period";
    fixed_decimals: 0;
   }
   variable FES_COLUMNTYPE
   {
    aggregation: balance;
-   data_options: unscalable;
    title: "Column Type";
    choices: "0:History|1:Projection";
    fixed_decimals: 0;
@@ -104,146 +93,125 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "NAME";
   }
   variable FPS_VAR_Relatienummer
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "CUSTOMERNUMBER";
   }
   variable FPS_VAR_KVKnr
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "CHAMBEROFCOMMERCENUMBER";
   }
   variable FPS_VAR_Rechtsvorm_nr
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "LEGALSTATUSCODE";
   }
   variable FPS_VAR_Rechtsvorm_omschr
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "LEGALSTATUSDESCRIPTION";
   }
   variable FPS_VAR_BIK_CODE
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "SECTOROFINDUSTRYCODE";
   }
   variable FPS_VAR_BIK_Omschr
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "SECTOROFINDUSTRYDESCRIPTION";
   }
   variable FPS_VAR_GridId
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "GRIDID";
   }
   variable FPS_VAR_Accountmanager
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "ACCOUNTMANAGER";
   }
   variable FPS_VAR_Kantoor
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "OFFICENUMBER";
   }
   variable FPS_VAR_Straat
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "STREET";
   }
   variable FPS_VAR_Housenumber
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "HOUSENUMBER";
   }
   variable FPS_VAR_Postcode
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "ZIPCODE";
   }
   variable FPS_VAR_Woonplaats
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "CITY";
   }
   variable FPS_VAR_Provincie
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "STATEORPROVINCE";
   }
   variable FPS_VAR_Land
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "COUNTRY";
   }
   variable FPS_VAR_BvDID
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Bureau van Dijk ID";
   }
   variable FPS_VAR_Telefoon
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Telefoonnummer";
   }
   variable FPS_VAR_Emailadres
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Emailadres";
    variable FPS_FINAN_USER_ROLES
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "FPS_FINAN_USER_ROLES";
    }
    variable FPS_FINAN_USER
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "FPS_FINAN_USER";
    }
   }
@@ -258,14 +226,12 @@ model FAM uses BaseModel
   variable CashflowFromOperatingActivities
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Kasstroom uit operationele activiteiten";
    displaytype: currency;
   }
   variable DecreaseNetWorkingCapital
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Afname netto werkkapitaal";
    displaytype: currency;
   }
@@ -277,14 +243,12 @@ model FAM uses BaseModel
   variable RepCapBookvalueEquitySoldRepCap
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Boekwaarde verkochte aandelen";
    displaytype: currency;
   }
   variable RepCapReservationForReplacement
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Reservering voor vervanging";
    displaytype: currency;
    variable -P2DepreciationOfAssets refers to DepreciationOfAssets
@@ -295,7 +259,6 @@ model FAM uses BaseModel
    variable RepCapReservationAdjustment
    {
     aggregation: flow;
-    data_options: hideFirstNoTrendColumn;
     title: "Meer/minder reserveren";
     displaytype: currency;
    }
@@ -313,28 +276,24 @@ model FAM uses BaseModel
   variable RepCapCorrections
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Overige correcties";
    displaytype: currency;
   }
   variable QuickRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Quick ratio";
    fixed_decimals: 2;
   }
   variable CurrentRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Current ratio";
    fixed_decimals: 2;
   }
   variable GoldenBalanceRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Gouden balans ratio";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -348,14 +307,12 @@ model FAM uses BaseModel
   variable DefensiveInterval
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Defensive interval (weken)";
    fixed_decimals: 1;
   }
   variable SolvencyRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Solvabiliteit (balans)";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -363,21 +320,18 @@ model FAM uses BaseModel
   variable InterestCoverageRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Interest coverage ratio";
    fixed_decimals: 2;
   }
   variable DebtToEBITDA
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Debt To EBITDA";
    fixed_decimals: 2;
   }
   variable GrossProfitMargin
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Bruto winstmarge";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -385,7 +339,6 @@ model FAM uses BaseModel
   variable ReturnOnAssets
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Rentabiliteit totaal vermogen";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -393,7 +346,6 @@ model FAM uses BaseModel
   variable ReturnOnEquity
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Rentabiliteit eigen vermogen";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -401,630 +353,540 @@ model FAM uses BaseModel
   variable MutationExcessCash
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie vrij besteedbare liquiditeiten";
    displaytype: currency;
   }
   variable MutationCapitalShortfall
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Vermogensbehoefte";
    displaytype: currency;
   }
   variable InvestmentsInGoodWillList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInGoodWillList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInGoodWillList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInGoodWillList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInGoodWillList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInGoodWillList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInGoodWillList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInGoodWillList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInGoodWillList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInGoodWillList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInPatentsTrademarksAndOtherRightsList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPatentsTrademarksAndOtherRightsList_ti";
    displaytype: currency;
   }
   variable InvestmentsInPatentsTrademarksAndOtherRightsList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPatentsTrademarksAndOtherRightsList_ti";
    displaytype: currency;
   }
   variable InvestmentsInPatentsTrademarksAndOtherRightsList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPatentsTrademarksAndOtherRightsList_ti";
    displaytype: currency;
   }
   variable InvestmentsInPatentsTrademarksAndOtherRightsList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPatentsTrademarksAndOtherRightsList_ti";
    displaytype: currency;
   }
   variable InvestmentsInPatentsTrademarksAndOtherRightsList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPatentsTrademarksAndOtherRightsList_ti";
    displaytype: currency;
   }
   variable InvestmentsInOtherIntangibleFixedAssetsList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherIntangibleFixedAssetsList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInOtherIntangibleFixedAssetsList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherIntangibleFixedAssetsList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInOtherIntangibleFixedAssetsList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherIntangibleFixedAssetsList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInOtherIntangibleFixedAssetsList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherIntangibleFixedAssetsList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInOtherIntangibleFixedAssetsList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherIntangibleFixedAssetsList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInLandAndBuildingsList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLandAndBuildingsList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInLandAndBuildingsList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLandAndBuildingsList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInLandAndBuildingsList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLandAndBuildingsList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInLandAndBuildingsList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLandAndBuildingsList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInLandAndBuildingsList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLandAndBuildingsList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInPlantAndEquipmentList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPlantAndEquipmentList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInPlantAndEquipmentList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPlantAndEquipmentList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInPlantAndEquipmentList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPlantAndEquipmentList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInPlantAndEquipmentList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPlantAndEquipmentList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInPlantAndEquipmentList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInPlantAndEquipmentList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInFurnitureAndFixturesList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInFurnitureAndFixturesList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInFurnitureAndFixturesList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInFurnitureAndFixturesList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInFurnitureAndFixturesList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInFurnitureAndFixturesList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInFurnitureAndFixturesList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInFurnitureAndFixturesList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInFurnitureAndFixturesList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInFurnitureAndFixturesList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInTransportationEquipmentList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInTransportationEquipmentList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInTransportationEquipmentList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInTransportationEquipmentList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInTransportationEquipmentList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInTransportationEquipmentList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInTransportationEquipmentList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInTransportationEquipmentList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInTransportationEquipmentList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInTransportationEquipmentList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInOtherMaterialFixedAssetsList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherMaterialFixedAssetsList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInOtherMaterialFixedAssetsList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherMaterialFixedAssetsList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInOtherMaterialFixedAssetsList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherMaterialFixedAssetsList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInOtherMaterialFixedAssetsList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherMaterialFixedAssetsList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInOtherMaterialFixedAssetsList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherMaterialFixedAssetsList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInSubsidiariesList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInSubsidiariesList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInSubsidiariesList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInSubsidiariesList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInSubsidiariesList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInSubsidiariesList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInSubsidiariesList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInSubsidiariesList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInSubsidiariesList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInSubsidiariesList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInLoansToSubsidiariesList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToSubsidiariesList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInLoansToSubsidiariesList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToSubsidiariesList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInLoansToSubsidiariesList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToSubsidiariesList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInLoansToSubsidiariesList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToSubsidiariesList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInLoansToSubsidiariesList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToSubsidiariesList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInLoansToAffiliatedCompaniesList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToAffiliatedCompaniesList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInLoansToAffiliatedCompaniesList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToAffiliatedCompaniesList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInLoansToAffiliatedCompaniesList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToAffiliatedCompaniesList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInLoansToAffiliatedCompaniesList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToAffiliatedCompaniesList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInLoansToAffiliatedCompaniesList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInLoansToAffiliatedCompaniesList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInOtherSecuritiesList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherSecuritiesList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInOtherSecuritiesList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherSecuritiesList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInOtherSecuritiesList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherSecuritiesList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInOtherSecuritiesList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherSecuritiesList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInOtherSecuritiesList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherSecuritiesList_ti005";
    displaytype: currency;
   }
   variable InvestmentsInOtherFinancialFixedAssetsList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherFinancialFixedAssetsList_ti001";
    displaytype: currency;
   }
   variable InvestmentsInOtherFinancialFixedAssetsList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherFinancialFixedAssetsList_ti002";
    displaytype: currency;
   }
   variable InvestmentsInOtherFinancialFixedAssetsList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherFinancialFixedAssetsList_ti003";
    displaytype: currency;
   }
   variable InvestmentsInOtherFinancialFixedAssetsList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherFinancialFixedAssetsList_ti004";
    displaytype: currency;
   }
   variable InvestmentsInOtherFinancialFixedAssetsList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "InvestmentsInOtherFinancialFixedAssetsList_ti005";
    displaytype: currency;
   }
   variable MutationAccountsPayableInvestments
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie investeringscrediteuren";
    displaytype: currency;
   }
   variable MutationDivestmentReceivables
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie divestments";
    displaytype: currency;
   }
   variable AcquiredGoodWill
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "AcquiredGoodWill";
    displaytype: currency;
   }
   variable RevaluationOtherUnSpecified
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "RevaluationOtherUnSpecified";
    displaytype: currency;
   }
   variable MutationTradePayablesTotal
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie handelscrediteuren";
    displaytype: currency;
   }
   variable MutationInOtherAccountsPayable
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie kostencrediteuren";
    displaytype: currency;
   }
   variable MutationInventories
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie voorraden";
    displaytype: currency;
   }
   variable MutationTradeReceivablesTotal
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie handelsdebiteuren";
    displaytype: currency;
   }
   variable ChangeInOtherAccountsReceivable
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Afname overige debiteuren";
    displaytype: currency;
   }
   variable MutationOperationalCashTotal
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie operationele liquiditeiten";
    displaytype: currency;
   }
   variable ProfitPaidOutToClaimants
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "ProfitPaidOutToClaimants";
    displaytype: currency;
   }
   variable PersonalDrawDownOfPartners
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "PersonalDrawDownOfPartners";
    displaytype: currency;
   }
   variable ForeignExchangeAndCurrencyAdjustments
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "ForeignExchangeAndCurrencyAdjustments";
    displaytype: currency;
   }
   variable OtherChangesOutsiteResult
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "OtherChangesOutsiteResult";
    displaytype: currency;
   }
   variable MutationDividendPayable
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "DividendPayable";
    displaytype: currency;
   }
   variable RepaymentOnSubordinatedDebts
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing achtergestelde schulden";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebts
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing langlopende schulden aan kredietinstellingen";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebtsOther
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing overige langlopende schulden";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebtsOtherCat2
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing overige langlopende schulden categorie 2";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebtsOtherCat3
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing overige langlopende schulden categorie 3";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebtsOtherCat4
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossing overige langlopende schulden categorie 4";
    displaytype: currency;
   }
   variable RepaymentOnLongTermDebtsAnnuity
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Aflossingen lang vreemd vermogen (Annuïteit)";
    displaytype: currency;
   }
   variable NetFinancialExpenses
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Netto rentelasten";
    displaytype: currency;
   }
@@ -1048,7 +910,6 @@ model FAM uses BaseModel
   variable +MutationProvisions
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie voorzieningen";
    displaytype: currency;
   }
@@ -1061,7 +922,6 @@ model FAM uses BaseModel
   variable +FictitiousTaxOnProfits
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "FictitiousTaxOnProfits";
    displaytype: currency;
   }
@@ -1074,308 +934,264 @@ model FAM uses BaseModel
   variable MutationMarketableSecurities
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Afname effecten";
    displaytype: currency;
   }
   variable ContributionOfCapital
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "ContributionOfCapital";
    displaytype: currency;
   }
   variable BookvalueEquitySold
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "BookvalueEquitySold";
    displaytype: currency;
   }
   variable MutationMinorityInterests
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie aandeel van derden";
    displaytype: currency;
   }
   variable MutationStatutoryReserve
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "MutationStatutoryReserve";
    displaytype: currency;
   }
   variable MutationRevaluationReserveAfterChange
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "MutationRevaluationReserve";
    displaytype: currency;
   }
   variable OtherMutationsNetWorth
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "OtherMutationsNetWorth";
    displaytype: currency;
   }
   variable SubordinatedDebtNewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(SubordinatedDebt_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable SubordinatedDebtNewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(SubordinatedDebt_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable SubordinatedDebtNewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(SubordinatedDebt_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable SubordinatedDebtNewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(SubordinatedDebt_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable SubordinatedDebtNewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(SubordinatedDebt_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtNewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebt_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtNewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebt_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtNewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebt_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtNewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebt_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtNewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebt_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtOtherNewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOther_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtOtherNewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOther_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtOtherNewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOther_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtOtherNewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOther_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtOtherNewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOther_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat2NewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat2_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat2NewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat2_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat2NewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat2_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat2NewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat2_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat2NewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat2_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat3NewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat3_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat3NewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat3_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat3NewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat3_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat3NewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat3_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat3NewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat3_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat4NewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat4_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat4NewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat4_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat4NewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat4_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat4NewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat4_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtOtherCat4NewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtOtherCat4_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable LongTermDebtAnnuityNewLoanList_ti001
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtAnnuity_tpBookValue_ti001)";
    displaytype: currency;
   }
   variable LongTermDebtAnnuityNewLoanList_ti002
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtAnnuity_tpBookValue_ti002)";
    displaytype: currency;
   }
   variable LongTermDebtAnnuityNewLoanList_ti003
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtAnnuity_tpBookValue_ti003)";
    displaytype: currency;
   }
   variable LongTermDebtAnnuityNewLoanList_ti004
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtAnnuity_tpBookValue_ti004)";
    displaytype: currency;
   }
   variable LongTermDebtAnnuityNewLoanList_ti005
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "GetTitle(LongTermDebtAnnuity_tpBookValue_ti005)";
    displaytype: currency;
   }
   variable MutationOtherShortTermDebt
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "MutationOtherShortTermDebt";
    displaytype: currency;
   }
   variable MutationOverdraftCurrentAccount
   {
    aggregation: flow;
-   data_options: hideFirstNoTrendColumn;
    title: "Mutatie rekening courant";
    displaytype: currency;
   }
@@ -1388,14 +1204,12 @@ model FAM uses BaseModel
   variable +CapitalShortfall
   {
    aggregation: balance;
-   data_options: hideFirstNoTrendColumn;
    title: "Vermogensbehoefte";
    displaytype: currency;
   }
   variable CapitalShortfallInYear
   {
    aggregation: balance;
-   data_options: hideFirstNoTrendColumn;
    title: "Maximale vermogensbehoefte binnen jaar";
    displaytype: currency;
   }
@@ -2152,7 +1966,6 @@ model FAM uses BaseModel
   variable EffectiveNetWorthRatio
   {
    aggregation: balance;
-   data_options: unscalable, calculateAggregation;
    title: "Solvabiliteit aansprakelijk vermogen";
    displaytype: percentage;
    fixed_decimals: 1;
@@ -2172,7 +1985,6 @@ model FAM uses BaseModel
   variable Q_GROUP01
   {
    frequency: document;
-   data_options: unscalable;
    title: "Product selection";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -2182,7 +1994,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(FacilityTarget.required and FacilityTarget.entered,FacilityTotalInvestment.required and FacilityTotalInvestment.entered,FacilityOwnResources.required and FacilityOwnResources.entered,FacilityDetailsLimit.required and FacilityDetailsLimit.entered,FacilityDetailsDuration.required and FacilityDetailsDuration.entered),AMMOUNT(FacilityTarget.required,FacilityTotalInvestment.required,FacilityOwnResources.required,FacilityDetailsLimit.required,FacilityDetailsDuration.required)];
    required:FacilityTarget.required and FacilityTotalInvestment.required and FacilityOwnResources.required and FacilityDetailsLimit.required and FacilityDetailsDuration.required;
    frequency: document;
-   data_options: unscalable;
    title: "Type request";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -2191,7 +2002,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP01 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 1";
     locked: On;
    }
@@ -2205,7 +2015,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP07));
-     data_options: unscalable;
      title: "Financing target(s)";
      choices: "1:Inventory and machines|2:Stock|3:Transport equipment|4:Real estate|5:Corporate takeover|6:Research and development|7:Growth and expansion|8:Debtors|9:Refinancing|10:Other";
     }
@@ -2236,7 +2045,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (FacilityDetailsDuration));
-     data_options: unscalable;
      title: "Specify your desired tenor in months";
      fixed_decimals: 0;
      visible: If(FacilityTarget=8,0,1);
@@ -2248,7 +2056,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(OrganisationCOCNumber.required and OrganisationCOCNumber.entered,OrganisationStarting.required and OrganisationStarting.entered,OrganisationFoundationDate.required and OrganisationFoundationDate.entered,OrganisationSector.required and OrganisationSector.entered,OrganisationFTELastYear.required and OrganisationFTELastYear.entered,OrganisationFoundatationLaw.required and OrganisationFoundatationLaw.entered,OrganisationRevenueNetherlands.required and OrganisationRevenueNetherlands.entered,OrganisationMarketB2B.required and OrganisationMarketB2B.entered,OrganisationMarketB2C.required and OrganisationMarketB2C.entered,OrganisationDelivery.required and OrganisationDelivery.entered),AMMOUNT(OrganisationCOCNumber.required,OrganisationStarting.required,OrganisationFoundationDate.required,OrganisationSector.required,OrganisationFTELastYear.required,OrganisationFoundatationLaw.required,OrganisationRevenueNetherlands.required,OrganisationMarketB2B.required,OrganisationMarketB2C.required,OrganisationDelivery.required)];
    required:OrganisationCOCNumber.required and OrganisationStarting.required and OrganisationFoundationDate.required and OrganisationSector.required and OrganisationFTELastYear.required and OrganisationFoundatationLaw.required and OrganisationRevenueNetherlands.required and OrganisationMarketB2B.required and OrganisationMarketB2C.required and OrganisationDelivery.required;
    frequency: document;
-   data_options: unscalable;
    title: "Type organisation";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
@@ -2258,7 +2065,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP02 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 2";
     locked: On;
    }
@@ -2275,14 +2081,12 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_KVKnr);
      required: True;
-     data_options: unscalable;
      title: "COC number";
     }
     variable OrganisationStarting
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Starting organisation?";
      choices: "0:No|1:Yes";
     }
@@ -2290,7 +2094,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Date of founding";
      displaytype: date;
      choices: "dd/MM/yyyy";
@@ -2301,7 +2104,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_BIK_CODE & " - " & FPS_VAR_BIK_Omschr);
      required: True;
-     data_options: unscalable;
      title: "Sector of industry/SBI code";
      hint: "sbi_placeholder";
     }
@@ -2309,7 +2111,6 @@ model FAM uses BaseModel
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Secondary sector of industry/SBI code";
      hint: "sbi_placeholder";
     }
@@ -2317,7 +2118,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Number of FTE (last year)";
      fixed_decimals: 1;
     }
@@ -2325,7 +2125,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Founded under Dutch law?";
      choices: "0:No|1:Yes";
     }
@@ -2333,7 +2132,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "A minimum of 50% operational revenue realised in the Netherlands?";
      choices: "0:No|1:Yes";
     }
@@ -2341,7 +2139,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Business to Business market?";
      choices: "0:No|1:Yes";
     }
@@ -2349,7 +2146,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Business to Consumer market?";
      choices: "0:No|1:Yes";
     }
@@ -2357,7 +2153,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Products and/or services will be paid after delivery";
      choices: "0:No|1:Yes";
     }
@@ -2368,7 +2163,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(FinancialsTurnoverLastYear.required and FinancialsTurnoverLastYear.entered,FinancialsEbitLastYear.required and FinancialsEbitLastYear.entered,FinancialsAccountsReceivablesTotal.required and FinancialsAccountsReceivablesTotal.entered,FinancialsAccountsReceivablesNumber.required and FinancialsAccountsReceivablesNumber.entered,FinancialsAccountsReceivablesAverage.required and FinancialsAccountsReceivablesAverage.entered,FinancialsForeignDebtors.required and FinancialsForeignDebtors.entered,FinancialsAvarageValueInvoice.required and FinancialsAvarageValueInvoice.entered,FinancialsMaximumAdvances.required and FinancialsMaximumAdvances.entered,FinancialsMaximumAdvancesDays.required and FinancialsMaximumAdvancesDays.entered,FinancialsPositiveCashFlow.required and FinancialsPositiveCashFlow.entered,FinancialsExistingPledgeRecourse.required and FinancialsExistingPledgeRecourse.entered,FinancialsIntercompanyTransactions.required and FinancialsIntercompanyTransactions.entered),AMMOUNT(FinancialsTurnoverLastYear.required,FinancialsEbitLastYear.required,FinancialsAccountsReceivablesTotal.required,FinancialsAccountsReceivablesNumber.required,FinancialsAccountsReceivablesAverage.required,FinancialsForeignDebtors.required,FinancialsAvarageValueInvoice.required,FinancialsMaximumAdvances.required,FinancialsMaximumAdvancesDays.required,FinancialsPositiveCashFlow.required,FinancialsExistingPledgeRecourse.required,FinancialsIntercompanyTransactions.required)];
    required:FinancialsTurnoverLastYear.required and FinancialsEbitLastYear.required and FinancialsAccountsReceivablesTotal.required and FinancialsAccountsReceivablesNumber.required and FinancialsAccountsReceivablesAverage.required and FinancialsForeignDebtors.required and FinancialsAvarageValueInvoice.required and FinancialsMaximumAdvances.required and FinancialsMaximumAdvancesDays.required and FinancialsPositiveCashFlow.required and FinancialsExistingPledgeRecourse.required and FinancialsIntercompanyTransactions.required;
    frequency: document;
-   data_options: unscalable;
    title: "Financial";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
@@ -2378,7 +2172,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP03 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 2";
     locked: On;
    }
@@ -2392,7 +2185,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Turnover in the last financial year";
      displaytype: currency;
      fixed_decimals: 0;
@@ -2401,7 +2193,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "EBIT in the last financial year";
      displaytype: currency;
      fixed_decimals: 0;
@@ -2410,7 +2201,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Total count of accounts receivables";
      displaytype: currency;
      fixed_decimals: 0;
@@ -2419,7 +2209,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Total number of accounts recivables";
      fixed_decimals: 0;
     }
@@ -2428,7 +2217,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: OnER(FinancialsAccountsReceivablesTotal / FinancialsAccountsReceivablesNumber, NA);
      required: True;
-     data_options: unscalable;
      title: "Average of accounts receivables (per debtor)";
      displaytype: currency;
      fixed_decimals: 0;
@@ -2438,7 +2226,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Share of foreign debtors";
      displaytype: percentage;
      fixed_decimals: 1;
@@ -2447,7 +2234,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Average value per invoice";
      displaytype: currency;
      fixed_decimals: 0;
@@ -2456,7 +2242,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Maximum advances of invoices in percentages";
      displaytype: percentage;
      fixed_decimals: 1;
@@ -2465,7 +2250,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Maximum advances in days";
      fixed_decimals: 0;
     }
@@ -2473,7 +2257,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Was there a positive cash flow the last two years?";
      choices: "0:No|1:Yes";
     }
@@ -2481,7 +2264,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Is there an existing pledge with recourse?";
      choices: "0:No|1:Yes";
     }
@@ -2489,7 +2271,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Are there intercompany transactions?";
      choices: "0:No|1:Yes";
     }
@@ -2500,7 +2281,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(ProductType.required and ProductType.entered),AMMOUNT(ProductType.required)];
    required:ProductType.required;
    frequency: document;
-   data_options: unscalable;
    title: "Funding options";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
@@ -2510,7 +2290,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP04 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 2";
     locked: On;
    }
@@ -2523,7 +2302,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: True;
-     data_options: unscalable;
      title: "Product type";
      choices: "1:Multiple|2:Lening|3:RC|4:Lease|5:Factoring|6:Vastgoed Eigen gebruik|7:Commercieel vastgoed|8:Residentieel vastgoed";
     }
@@ -2532,7 +2310,6 @@ model FAM uses BaseModel
   variable Q_GROUP02
   {
    frequency: document;
-   data_options: unscalable;
    title: "Product request";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -2542,7 +2319,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(ClientInitials.required and ClientInitials.entered,ClientLastName.required and ClientLastName.entered,ClientFunction.required and ClientFunction.entered,ClientGender.required and ClientGender.entered,ClientDateOfBirth.required and ClientDateOfBirth.entered,ClientNationality.required and ClientNationality.entered,ClientStreet.required and ClientStreet.entered,ClientHouseNumber.required and ClientHouseNumber.entered,ClientZipCode.required and ClientZipCode.entered,ClientCity.required and ClientCity.entered,ClientCountry.required and ClientCountry.entered,ClientPhoneNumber.required and ClientPhoneNumber.entered,ClientEmailAddress.required and ClientEmailAddress.entered,OrganisationName.required and OrganisationName.entered,OrganisationLegalForm.required and OrganisationLegalForm.entered,OrganisationCOCStatus.required and OrganisationCOCStatus.entered,OrganisationBankruptcy.required and OrganisationBankruptcy.entered,OrganisationStreet.required and OrganisationStreet.entered,OrganisationHouseNumber.required and OrganisationHouseNumber.entered,OrganisationZipCode.required and OrganisationZipCode.entered,OrganisationCity.required and OrganisationCity.entered,OrganisationCountry.required and OrganisationCountry.entered,OrganisationPhoneNumber.required and OrganisationPhoneNumber.entered,OrganisationEmailAddress.required and OrganisationEmailAddress.entered,OrganisationWebsite.required and OrganisationWebsite.entered,IntermediaryInitials.required and IntermediaryInitials.entered,IntermediaryName.required and IntermediaryName.entered,IntermediaryFunction.required and IntermediaryFunction.entered,IntermediaryNameOrganisation.required and IntermediaryNameOrganisation.entered,IntermediaryCity.required and IntermediaryCity.entered,IntermediaryPhoneNumber.required and IntermediaryPhoneNumber.entered,IntermediaryEmailAddress.required and IntermediaryEmailAddress.entered),AMMOUNT(ClientInitials.required,ClientLastName.required,ClientFunction.required,ClientGender.required,ClientDateOfBirth.required,ClientNationality.required,ClientStreet.required,ClientHouseNumber.required,ClientZipCode.required,ClientCity.required,ClientCountry.required,ClientPhoneNumber.required,ClientEmailAddress.required,OrganisationName.required,OrganisationLegalForm.required,OrganisationCOCStatus.required,OrganisationBankruptcy.required,OrganisationStreet.required,OrganisationHouseNumber.required,OrganisationZipCode.required,OrganisationCity.required,OrganisationCountry.required,OrganisationPhoneNumber.required,OrganisationEmailAddress.required,OrganisationWebsite.required,IntermediaryInitials.required,IntermediaryName.required,IntermediaryFunction.required,IntermediaryNameOrganisation.required,IntermediaryCity.required,IntermediaryPhoneNumber.required,IntermediaryEmailAddress.required)];
    required:ClientInitials.required and ClientLastName.required and ClientFunction.required and ClientGender.required and ClientDateOfBirth.required and ClientNationality.required and ClientStreet.required and ClientHouseNumber.required and ClientZipCode.required and ClientCity.required and ClientCountry.required and ClientPhoneNumber.required and ClientEmailAddress.required and OrganisationName.required and OrganisationLegalForm.required and OrganisationCOCStatus.required and OrganisationBankruptcy.required and OrganisationStreet.required and OrganisationHouseNumber.required and OrganisationZipCode.required and OrganisationCity.required and OrganisationCountry.required and OrganisationPhoneNumber.required and OrganisationEmailAddress.required and OrganisationWebsite.required and IntermediaryInitials.required and IntermediaryName.required and IntermediaryFunction.required and IntermediaryNameOrganisation.required and IntermediaryCity.required and IntermediaryPhoneNumber.required and IntermediaryEmailAddress.required;
    frequency: document;
-   data_options: unscalable;
    title: "General data";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In this stage of the financing application you will give information about yourself, and for which company financing is requested.";
@@ -2553,14 +2329,12 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP05 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 1";
     locked: On;
    }
    variable ClientDetails
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Details applicant";
     displaytype: currency;
     hint: "Please fill in the details of the applicant.";
@@ -2570,7 +2344,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Initials";
     }
     variable ClientLastName
@@ -2578,7 +2351,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Last name";
     }
     variable ClientFunction
@@ -2586,14 +2358,12 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Function";
     }
     variable ClientGender
     {
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Gender";
      choices: "0:Male|1:Female";
     }
@@ -2601,7 +2371,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Date of birth";
      displaytype: date;
      choices: "dd/MM/yyyy";
@@ -2611,7 +2380,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: 528.0;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Nationality";
      choices: "4:Afghanistan|8:Albani�|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentini�|36:Australi�|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armeni�|52:Barbados|56:Belgi�|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosni� en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazili�|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdi�|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroati�|192:Cuba|196:Cyprus|203:Tsjechi�|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopi�|232:Eritrea|233:Estland|234:Faer�er|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:�land|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesi�|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgi�|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Ha�ti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesi�|364:Iran|368:Irak|372:Ierland|376:Isra�l|380:Itali�|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordani�|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizi�|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libi�|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisi�|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritani�|480:Mauritius|484:Mexico|492:Monaco|496:Mongoli�|498:Moldavi�|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibi�|520:Nauru|524:Nepal|528:Nederland|531:Cura�ao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledoni�|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:R�union|642:Roemeni�|643:Rusland|646:Rwanda|652:Saint-Barth�lemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tom� en Principe|682:Saoedi-Arabi�|686:Senegal|688:Servi�|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Sloveni�|706:Somali�|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syri�|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesi�|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekra�ne|807:Macedoni�|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
     }
@@ -2620,7 +2388,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Street name";
     }
     variable ClientHouseNumber
@@ -2628,14 +2395,12 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Housenumber";
     }
     variable ClientHouseNumberAddition
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Housenumber addition";
     }
     variable ClientZipCode
@@ -2643,7 +2408,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Zip code";
     }
     variable ClientCity
@@ -2651,7 +2415,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "City";
     }
     variable ClientCountry
@@ -2659,7 +2422,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: 528.0;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Country";
      choices: "4:Afghanistan|8:Albani�|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentini�|36:Australi�|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armeni�|52:Barbados|56:Belgi�|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosni� en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazili�|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdi�|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroati�|192:Cuba|196:Cyprus|203:Tsjechi�|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopi�|232:Eritrea|233:Estland|234:Faer�er|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:�land|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesi�|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgi�|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Ha�ti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesi�|364:Iran|368:Irak|372:Ierland|376:Isra�l|380:Itali�|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordani�|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizi�|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libi�|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisi�|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritani�|480:Mauritius|484:Mexico|492:Monaco|496:Mongoli�|498:Moldavi�|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibi�|520:Nauru|524:Nepal|528:Nederland|531:Cura�ao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledoni�|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:R�union|642:Roemeni�|643:Rusland|646:Rwanda|652:Saint-Barth�lemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tom� en Principe|682:Saoedi-Arabi�|686:Senegal|688:Servi�|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Sloveni�|706:Somali�|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syri�|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesi�|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekra�ne|807:Macedoni�|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
     }
@@ -2668,7 +2430,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Phone number";
     }
     variable ClientEmailAddress
@@ -2676,7 +2437,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Email address";
     }
    }
@@ -2693,14 +2453,12 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Naam);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Name organisation";
     }
     variable OrganisationLegalForm
     {
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Legal form";
      choices: "choices|legal|form";
     }
@@ -2712,7 +2470,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "COC status";
      choices: "0:Inactive|1:Active";
     }
@@ -2720,7 +2477,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Involved with bankruptcy?";
      choices: "0:No|1:Yes";
     }
@@ -2742,7 +2498,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Straat);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Street name";
     }
     variable OrganisationHouseNumber
@@ -2751,14 +2506,12 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Housenumber);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Housenumber";
     }
     variable OrganisationHouseNumberAddition
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Housenumber addition";
     }
     variable OrganisationZipCode
@@ -2767,7 +2520,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Postcode);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Zip code";
     }
     variable OrganisationCity
@@ -2776,7 +2528,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Woonplaats);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "City";
     }
     variable OrganisationCountry
@@ -2784,7 +2535,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: 528.0;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Country";
      choices: "4:Afghanistan|8:Albani�|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentini�|36:Australi�|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armeni�|52:Barbados|56:Belgi�|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosni� en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazili�|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdi�|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroati�|192:Cuba|196:Cyprus|203:Tsjechi�|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopi�|232:Eritrea|233:Estland|234:Faer�er|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:�land|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesi�|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgi�|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Ha�ti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesi�|364:Iran|368:Irak|372:Ierland|376:Isra�l|380:Itali�|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordani�|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizi�|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libi�|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisi�|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritani�|480:Mauritius|484:Mexico|492:Monaco|496:Mongoli�|498:Moldavi�|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibi�|520:Nauru|524:Nepal|528:Nederland|531:Cura�ao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledoni�|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:R�union|642:Roemeni�|643:Rusland|646:Rwanda|652:Saint-Barth�lemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tom� en Principe|682:Saoedi-Arabi�|686:Senegal|688:Servi�|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Sloveni�|706:Somali�|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syri�|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesi�|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekra�ne|807:Macedoni�|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
     }
@@ -2794,7 +2544,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: String(FPS_VAR_Telefoon);
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Phone number";
     }
     variable OrganisationEmailAddress
@@ -2802,7 +2551,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Email address";
     }
     variable OrganisationWebsite
@@ -2810,14 +2558,12 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Website";
     }
    }
    variable IntermediaryDetails
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Details intermediary";
     displaytype: currency;
     hint: "Please fill in the details of the intermediary.";
@@ -2827,7 +2573,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Initials";
     }
     variable IntermediaryName
@@ -2835,7 +2580,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Last name";
     }
     variable IntermediaryFunction
@@ -2843,14 +2587,12 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Function";
     }
     variable IntermediaryTitle
     {
      datatype: string;
      frequency: document;
-     data_options: unscalable;
      title: "Title";
     }
     variable IntermediaryNameOrganisation
@@ -2858,7 +2600,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Name organisation";
     }
     variable IntermediaryCity
@@ -2866,7 +2607,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "City";
     }
     variable IntermediaryPhoneNumber
@@ -2874,7 +2614,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Phone number";
     }
     variable IntermediaryEmailAddress
@@ -2882,7 +2621,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP05));
-     data_options: unscalable;
      title: "Email address";
     }
    }
@@ -2893,7 +2631,6 @@ model FAM uses BaseModel
    required:OrganisationMissionVisionStrategy.required and OrganisationHistory.required and OrganisationProductsServices.required and OrganisationRevenueModel.required and OrganisationUniqueness.required and OrganisationUniquenessDescription.required and OrganisationMarketOperation.required and OrganisationNewMarket.required and OrganisationMarketDevelopment.required and OrganisationCompetitivePositioning.required and OrganisationCompetitivePositioningDescription.required and OrganisationEconomicFluctuations.required and OrganisationEconomicFluctuationsDescription.required and OrganisationSuppliers.required and OrganisationSuppliersDescription.required and OrganisationCustomers.required and OrganisationCustomersDescription.required and OrganisationStrengths.required and OrganisationWeaknesses.required and OrganisationOpportunities.required and OrganisationThreats.required and OrganisationRiskProfileDescription.required and OrganisationLegalStructure.required and OrganisationStakeholders.required and OrganisationFTE.required and OrganisationAgeStructure.required and OrganisationEducationLevel.required and OrganisationManagementComposition.required and OrganisationManagementQuality.required and OrganisationManagementSupport.required and OrganisationBoardMemberInitials.required and OrganisationBoardMemberName.required and OrganisationBoardMemberDateOfBirth.required and OrganisationBoardMemberFunction.required and OrganisationBoardMemberYearsOfService.required and OrganisationBoardMemberEducation.required and OrganisationBoardMemberTrackRecord.required and OrganisationSustainabilityDescription.required;
    frequency: document;
    formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
-   data_options: unscalable;
    title: "Profile of the organisation";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In this stage of the financing application you will give insight of the organisation. You will focus on the nature of the undertaking business, the mission, vision, strategy, the products and services of the organisation and which markets the organisation serves. You will also give insights of the organisational structure, opportunities, threats, strengths and weaknesses of the organisation.";
@@ -2904,7 +2641,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String( scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 06";
     locked: On;
    }
@@ -2913,7 +2649,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP10=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "$>Info bij stap 06<$";
     locked: On;
    }
@@ -2921,7 +2656,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "$>Validatie stap 06<$";
     locked: On;
    }
@@ -2936,7 +2670,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Mission, vision en strategy";
      displaytype: memo;
     }
@@ -2945,7 +2678,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "History";
      displaytype: memo;
     }
@@ -2953,7 +2685,6 @@ model FAM uses BaseModel
    variable OrganisationProductsAndServices
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Products and/or Services";
     displaytype: currency;
     locked: On;
@@ -2962,7 +2693,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Which products and/or services does the organisation deliver?";
      displaytype: memo;
     }
@@ -2971,7 +2701,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the revenue model";
      displaytype: memo;
     }
@@ -2979,7 +2708,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "What is the uniqueness of the products and/or services?";
      choices: "0:High|1:Average|2:Low";
     }
@@ -2988,7 +2716,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the uniqueness";
      displaytype: memo;
     }
@@ -2996,7 +2723,6 @@ model FAM uses BaseModel
    variable OrganisationMarketPosition
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Market position";
     displaytype: currency;
     locked: On;
@@ -3005,7 +2731,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "In which market does the organisation operate?";
      displaytype: memo;
     }
@@ -3013,7 +2738,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Does the organisation serve a new market?";
      choices: "0:No|1:Yes";
     }
@@ -3022,7 +2746,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the expected market development";
      displaytype: memo;
     }
@@ -3030,7 +2753,6 @@ model FAM uses BaseModel
    variable OrganisationCompetition
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Competition";
     displaytype: currency;
     locked: On;
@@ -3038,7 +2760,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "How strong is the competitive positioning?";
      choices: "0:Strong|1:Average|2:Weak";
     }
@@ -3047,7 +2768,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the competitive positioning";
      displaytype: memo;
     }
@@ -3055,7 +2775,6 @@ model FAM uses BaseModel
    variable OrganisationSesitivity
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Sensitivity";
     displaytype: currency;
     locked: On;
@@ -3063,7 +2782,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Is the organisation sensitive to economic fluctuations?";
      choices: "0:No|1:Yes";
     }
@@ -3072,7 +2790,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the sensitivity to economic fluctuations";
      displaytype: memo;
     }
@@ -3080,7 +2797,6 @@ model FAM uses BaseModel
    variable OrganisationSuppliersCustomers
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Suppliers and customers";
     displaytype: currency;
     locked: On;
@@ -3088,7 +2804,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "How dependent is the organisation from their suppliers?";
      choices: "0:Dependent|1:Reasonable|2:Barely|3:Not dependent";
     }
@@ -3097,7 +2812,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the dependency of suppliers";
      displaytype: memo;
     }
@@ -3105,7 +2819,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "How dependent is the organisation from their customers?";
      choices: "0:Dependent|1:Reasonable|2:Barely|3:Not dependent";
     }
@@ -3114,7 +2827,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the dependency of customers";
      displaytype: memo;
     }
@@ -3122,7 +2834,6 @@ model FAM uses BaseModel
    variable OrganisationSWOT
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "SWOT Analyse";
     displaytype: currency;
     locked: On;
@@ -3131,7 +2842,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Strengths";
      displaytype: memo;
     }
@@ -3140,7 +2850,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Weaknesses";
      displaytype: memo;
     }
@@ -3149,7 +2858,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Opportunities";
      displaytype: memo;
     }
@@ -3158,7 +2866,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Threats";
      displaytype: memo;
     }
@@ -3166,7 +2873,6 @@ model FAM uses BaseModel
    variable OrganisationRiskProfile
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Risk profile";
     displaytype: currency;
     locked: On;
@@ -3175,7 +2881,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the organisation's risk profile";
      displaytype: memo;
     }
@@ -3183,7 +2888,6 @@ model FAM uses BaseModel
    variable OrganisationStructure
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Organisation structure";
     displaytype: currency;
     locked: On;
@@ -3192,7 +2896,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the legal structure";
      displaytype: memo;
     }
@@ -3201,7 +2904,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the stakeholders";
      displaytype: memo;
     }
@@ -3209,7 +2911,6 @@ model FAM uses BaseModel
    variable OrganisationEmployees
    {
     frequency: document;
-    data_options: unscalable, saveCalculatedValue;
     title: "Employees";
     fixed_decimals: 0;
     locked: On;
@@ -3218,7 +2919,6 @@ model FAM uses BaseModel
      frequency: document;
      formula: OrganisationFTELastYear;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "How many FTE employees does the organisation have?";
      fixed_decimals: 1;
      locked: On;
@@ -3228,7 +2928,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the age structure of the employees";
      displaytype: memo;
     }
@@ -3237,7 +2936,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the level of education of the employees";
      displaytype: memo;
     }
@@ -3245,7 +2943,6 @@ model FAM uses BaseModel
    variable OrganisationManagement
    {
     frequency: document;
-    data_options: saveCalculatedValue;
     title: "Management";
     displaytype: currency;
     locked: On;
@@ -3254,7 +2951,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the composition of the management";
      displaytype: memo;
     }
@@ -3263,7 +2959,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the quality of the management";
      displaytype: memo;
     }
@@ -3272,7 +2967,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description how the management is supported";
      displaytype: memo;
     }
@@ -3292,7 +2986,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Initials";
      }
      variable OrganisationBoardMemberName
@@ -3300,14 +2993,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Name";
      }
      variable OrganisationBoardMemberDateOfBirth
      {
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Date of birth";
       displaytype: date;
       choices: "dd/MM/yyyy";
@@ -3317,14 +3008,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Function";
      }
      variable OrganisationBoardMemberYearsOfService
      {
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Number of years of service";
       fixed_decimals: 0;
      }
@@ -3333,7 +3022,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Education";
       displaytype: memo;
      }
@@ -3342,7 +3030,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP06));
-      data_options: unscalable;
       title: "Track record";
       displaytype: memo;
      }
@@ -3359,7 +3046,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP06));
-     data_options: unscalable;
      title: "Please give a description of the sustainability in the organisation";
      displaytype: memo;
     }
@@ -3374,7 +3060,6 @@ model FAM uses BaseModel
     variable Q_MAP06_REQUIREDVARS
     {
      frequency: document;
-     data_options: unscalable;
      title: "$>Aantal verplichte velden<$";
      fixed_decimals: 0;
      locked: On;
@@ -3383,7 +3068,6 @@ model FAM uses BaseModel
     variable Q_MAP06_ENTEREDREQUIREDVARS
     {
      frequency: document;
-     data_options: unscalable;
      title: "$>Aantal ingevulde verplichte velden<$";
      fixed_decimals: 0;
      locked: On;
@@ -3396,7 +3080,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(FacilityDetailsStartDate.required and FacilityDetailsStartDate.entered,ExistingLoansDescription.required and ExistingLoansDescription.entered,ExistingLoansFundingOrganisation.required and ExistingLoansFundingOrganisation.entered,ExistingLoanAmount.required and ExistingLoanAmount.entered,ExistingLoanDateOfClosing.required and ExistingLoanDateOfClosing.entered,ExistingLoanDuration.required and ExistingLoanDuration.entered,ExistingLoanInterest.required and ExistingLoanInterest.entered,ExistingLoanCollaterals.required and ExistingLoanCollaterals.entered),AMMOUNT(FacilityDetailsStartDate.required,ExistingLoansDescription.required,ExistingLoansFundingOrganisation.required,ExistingLoanAmount.required,ExistingLoanDateOfClosing.required,ExistingLoanDuration.required,ExistingLoanInterest.required,ExistingLoanCollaterals.required)];
    required:FacilityDetailsStartDate.required and ExistingLoansDescription.required and ExistingLoansFundingOrganisation.required and ExistingLoanAmount.required and ExistingLoanDateOfClosing.required and ExistingLoanDuration.required and ExistingLoanInterest.required and ExistingLoanCollaterals.required;
    frequency: document;
-   data_options: unscalable;
    title: "Financing need";
    choices: "0:Incomplete.|1:Complete.";
    hint: "Om de financieringsbehoefte in kaart te brengen maakt u eerst een prognose, vervolgens selecteert u een prognoseproject dat u mee wilt nemen in deze financieringsaanvraag. De gegevens worden automatisch overgenomen.";
@@ -3407,7 +3090,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP07 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 3";
     locked: On;
    }
@@ -3415,7 +3097,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Financing need";
     locked: On;
     variable FacilityNeedSub1 refers to FacilityTotalInvestment
@@ -3443,7 +3124,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP07));
-     data_options: unscalable;
      title: "Select a start date";
      displaytype: date;
      choices: "dd/MM/yyyy";
@@ -3459,7 +3139,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      formula: AddMonth(FacilityDetailsStartDate,FacilityDetailsDuration);
-     data_options: unscalable;
      title: "Product tenor ends at";
      displaytype: date;
      choices: "dd/MM/yyyy";
@@ -3469,7 +3148,6 @@ model FAM uses BaseModel
    variable InvestmentPlanExternal
    {
     frequency: document;
-    data_options: unscalable;
     title: String(FirstUC("investment plan"));
     displaytype: currency;
     locked: On;
@@ -3477,14 +3155,12 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: pInvestmentsInGoodWill + pInvestmentsInPatentsTrademarksAndOtherRights + pInvestmentsInOtherIntangibleFixedAssets +pInvestmentsInLandAndBuildings + pInvestmentsInPlantAndEquipment + pInvestmentsInFurnitureAndFixtures + pInvestmentsInTransportationEquipment +pInvestmentsInOtherMaterialFixedAssets + pInvestmentsInSubsidiaries + pInvestmentsInLoansToSubsidiaries + pInvestmentsInLoansToAffiliatedCompanies +pInvestmentsInOtherSecurities + pInvestmentsInOtherFinancialFixedAssets - MutationAccountsPayableInvestments + MutationDivestmentReceivables +AcquiredGoodWill - RevaluationOtherUnSpecified;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("investments in")&" "&"fixed assets");
      displaytype: currency;
      variable pInvestmentsInGoodWill
      {
       aggregation: flow;
       formula: InvestmentsInGoodWillList_ti001 + InvestmentsInGoodWillList_ti002 + InvestmentsInGoodWillList_ti003 + InvestmentsInGoodWillList_ti004 +InvestmentsInGoodWillList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" GoodWill");
       displaytype: currency;
       variable pInvestmentsInGoodWillList_ti001 refers to InvestmentsInGoodWillList_ti001
@@ -3522,7 +3198,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInPatentsTrademarksAndOtherRightsList_ti001 + InvestmentsInPatentsTrademarksAndOtherRightsList_ti002 +InvestmentsInPatentsTrademarksAndOtherRightsList_ti003 + InvestmentsInPatentsTrademarksAndOtherRightsList_ti004 +InvestmentsInPatentsTrademarksAndOtherRightsList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"patents, trademarks and other rights");
       displaytype: currency;
       variable pInvestmentsInPatentsTrademarksAndOtherRightsList_ti001 refers to InvestmentsInPatentsTrademarksAndOtherRightsList_ti001
@@ -3560,7 +3235,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInOtherIntangibleFixedAssetsList_ti001 + InvestmentsInOtherIntangibleFixedAssetsList_ti002 +InvestmentsInOtherIntangibleFixedAssetsList_ti003 + InvestmentsInOtherIntangibleFixedAssetsList_ti004 +InvestmentsInOtherIntangibleFixedAssetsList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"other"&" "&"immaterial fixed assets");
       displaytype: currency;
       variable pInvestmentsInOtherIntangibleFixedAssetsList_ti001 refers to InvestmentsInOtherIntangibleFixedAssetsList_ti001
@@ -3598,7 +3272,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInLandAndBuildingsList_ti001 + InvestmentsInLandAndBuildingsList_ti002 + InvestmentsInLandAndBuildingsList_ti003 +InvestmentsInLandAndBuildingsList_ti004 + InvestmentsInLandAndBuildingsList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"land and buildings");
       displaytype: currency;
       variable pInvestmentsInLandAndBuildingsList_ti001 refers to InvestmentsInLandAndBuildingsList_ti001
@@ -3636,7 +3309,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInPlantAndEquipmentList_ti001 + InvestmentsInPlantAndEquipmentList_ti002 + InvestmentsInPlantAndEquipmentList_ti003 +InvestmentsInPlantAndEquipmentList_ti004 + InvestmentsInPlantAndEquipmentList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"plant and equipment");
       displaytype: currency;
       variable pInvestmentsInPlantAndEquipmentList_ti001 refers to InvestmentsInPlantAndEquipmentList_ti001
@@ -3674,7 +3346,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInFurnitureAndFixturesList_ti001 + InvestmentsInFurnitureAndFixturesList_ti002 + InvestmentsInFurnitureAndFixturesList_ti003 +InvestmentsInFurnitureAndFixturesList_ti004 + InvestmentsInFurnitureAndFixturesList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"furniture and fixtures");
       displaytype: currency;
       variable pInvestmentsInFurnitureAndFixturesList_ti001 refers to InvestmentsInFurnitureAndFixturesList_ti001
@@ -3712,7 +3383,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInTransportationEquipmentList_ti001 + InvestmentsInTransportationEquipmentList_ti002 +InvestmentsInTransportationEquipmentList_ti003 + InvestmentsInTransportationEquipmentList_ti004 + InvestmentsInTransportationEquipmentList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"transportation equipment");
       displaytype: currency;
       variable pInvestmentsInTransportationEquipmentList_ti001 refers to InvestmentsInTransportationEquipmentList_ti001
@@ -3750,7 +3420,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInOtherMaterialFixedAssetsList_ti001 + InvestmentsInOtherMaterialFixedAssetsList_ti002 +InvestmentsInOtherMaterialFixedAssetsList_ti003 + InvestmentsInOtherMaterialFixedAssetsList_ti004 + InvestmentsInOtherMaterialFixedAssetsList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"other"&" "&"material fixed assets");
       displaytype: currency;
       variable pInvestmentsInOtherMaterialFixedAssetsList_ti001 refers to InvestmentsInOtherMaterialFixedAssetsList_ti001
@@ -3788,7 +3457,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInSubsidiariesList_ti001 + InvestmentsInSubsidiariesList_ti002 + InvestmentsInSubsidiariesList_ti003 +InvestmentsInSubsidiariesList_ti004 + InvestmentsInSubsidiariesList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"subsidiaries");
       displaytype: currency;
       variable pInvestmentsInSubsidiariesList_ti001 refers to InvestmentsInSubsidiariesList_ti001
@@ -3826,7 +3494,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInLoansToSubsidiariesList_ti001 + InvestmentsInLoansToSubsidiariesList_ti002 + InvestmentsInLoansToSubsidiariesList_ti003 +InvestmentsInLoansToSubsidiariesList_ti004 + InvestmentsInLoansToSubsidiariesList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("loans to subsidiaries"));
       displaytype: currency;
       variable pInvestmentsInLoansToSubsidiariesList_ti001 refers to InvestmentsInLoansToSubsidiariesList_ti001
@@ -3864,7 +3531,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInLoansToAffiliatedCompaniesList_ti001 + InvestmentsInLoansToAffiliatedCompaniesList_ti002 +InvestmentsInLoansToAffiliatedCompaniesList_ti003 + InvestmentsInLoansToAffiliatedCompaniesList_ti004 +InvestmentsInLoansToAffiliatedCompaniesList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("loans to affiliated companies"));
       displaytype: currency;
       variable pInvestmentsInLoansToAffiliatedCompaniesList_ti001 refers to InvestmentsInLoansToAffiliatedCompaniesList_ti001
@@ -3902,7 +3568,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInOtherSecuritiesList_ti001 + InvestmentsInOtherSecuritiesList_ti002 + InvestmentsInOtherSecuritiesList_ti003 +InvestmentsInOtherSecuritiesList_ti004 + InvestmentsInOtherSecuritiesList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"other"&" "&"securities");
       displaytype: currency;
       variable pInvestmentsInOtherSecuritiesList_ti001 refers to InvestmentsInOtherSecuritiesList_ti001
@@ -3940,7 +3605,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: InvestmentsInOtherFinancialFixedAssetsList_ti001 + InvestmentsInOtherFinancialFixedAssetsList_ti002 +InvestmentsInOtherFinancialFixedAssetsList_ti003 + InvestmentsInOtherFinancialFixedAssetsList_ti004 + InvestmentsInOtherFinancialFixedAssetsList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("investments in")&" "&"other"&" "&"financial fixed assets");
       displaytype: currency;
       variable pInvestmentsInOtherFinancialFixedAssetsList_ti001 refers to InvestmentsInOtherFinancialFixedAssetsList_ti001
@@ -4004,7 +3668,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: - MutationTradePayablesTotal - MutationInOtherAccountsPayable + MutationInventories + MutationTradeReceivablesTotal +ChangeInOtherAccountsReceivable + MutationOperationalCashTotal;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("investments in")&" "&"net working capital (incl. operational cash)");
      displaytype: currency;
      variable pMutationTradePayablesTotal refers to MutationTradePayablesTotal
@@ -4047,7 +3710,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: pInvestmentsInFixedAssets + pIncreaseNetWorkingCapitalFAM;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("total investments"));
      displaytype: currency;
     }
@@ -4055,7 +3717,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: ProfitPaidOutToClaimants + PersonalDrawDownOfPartners - ForeignExchangeAndCurrencyAdjustments - OtherChangesOutsiteResult - MutationDividendPayable;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("payments to shareholders"));
      displaytype: currency;
      variable p2ProfitPaidOutToClaimants refers to ProfitPaidOutToClaimants
@@ -4093,7 +3754,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: RepaymentOnSubordinatedDebts + RepaymentOnLongTermDebts + RepaymentOnLongTermDebtsOther+ RepaymentOnLongTermDebtsOtherCat2 + RepaymentOnLongTermDebtsOtherCat3 + RepaymentOnLongTermDebtsOtherCat4 + RepaymentOnLongTermDebtsAnnuity +NetFinancialExpenses;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("payments to debt holders"));
      displaytype: currency;
      variable pRepaymentOnSubordinatedDebts refers to RepaymentOnSubordinatedDebts
@@ -4146,7 +3806,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: pTotaalInvesteringen + pPaymentsToShareholders + pPaymentsToDebtHolders;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("total cash expenses"));
      displaytype: currency;
     }
@@ -4154,7 +3813,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: pCashflowFromOperatingActivities - NetExtraordinaryExpenses - MutationMarketableSecurities;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("cashflow from exploitation"));
      displaytype: currency;
      variable +pNetOperatingProfit refers to NetOperatingProfit
@@ -4166,7 +3824,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: PDepreciationOfAssets;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("depreciation of assets"));
       displaytype: currency;
      }
@@ -4194,7 +3851,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: NetOperatingProfit+p3DepreciationOfAssets+ProvisionForRetirementExpensesPartners+MutationProvisions+FictitiousExpensesTotal+FictitiousTaxOnProfits;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("cashflow from operational activities"));
       displaytype: currency;
      }
@@ -4243,14 +3899,12 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: String(FirstUC("description"));
     displaytype: memo;
    }
    variable FinancingPlanExternal
    {
     frequency: document;
-    data_options: unscalable;
     title: String(FirstUC("financing plan"));
     displaytype: currency;
     locked: On;
@@ -4263,7 +3917,6 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: ContributionOfCapital - BookvalueEquitySold + MutationMinorityInterests + MutationStatutoryReserve + MutationRevaluationReserveAfterChange +OtherMutationsNetWorth;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("equity finance"));
      displaytype: currency;
      variable p2ContributionOfCapital refers to ContributionOfCapital
@@ -4306,14 +3959,12 @@ model FAM uses BaseModel
     {
      aggregation: flow;
      formula: pSubordinatedDebtFinancing + pLongTermDebtFinancing + pLongTermDebtOtherFinancing + pLongTermDebtOtherCat2Financing + pLongTermDebtOtherCat3Financing + pLongTermDebtOtherCat4Financing + pLongTermDebtAnnuityFinancing + MutationOtherShortTermDebt+ MutationOverdraftCurrentAccount;
-     data_options: hideFirstNoTrendColumn;
      title: String(FirstUC("debt finance"));
      displaytype: currency;
      variable pSubordinatedDebtFinancing
      {
       aggregation: flow;
       formula: SubordinatedDebtNewLoanList_ti001 + SubordinatedDebtNewLoanList_ti002 + SubordinatedDebtNewLoanList_ti003 + SubordinatedDebtNewLoanList_ti004+ SubordinatedDebtNewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("subordinated debts"));
       displaytype: currency;
       variable pSubordinatedDebtNewLoanList_ti001 refers to SubordinatedDebtNewLoanList_ti001
@@ -4351,7 +4002,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtNewLoanList_ti001 + LongTermDebtNewLoanList_ti002 + LongTermDebtNewLoanList_ti003 + LongTermDebtNewLoanList_ti004 +LongTermDebtNewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("long term debts"));
       displaytype: currency;
       variable pLongTermDebtNewLoanList_ti001 refers to LongTermDebtNewLoanList_ti001
@@ -4389,7 +4039,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtOtherNewLoanList_ti001 + LongTermDebtOtherNewLoanList_ti002 + LongTermDebtOtherNewLoanList_ti003 +LongTermDebtOtherNewLoanList_ti004 + LongTermDebtOtherNewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("other long term debts"));
       displaytype: currency;
       variable pLongTermDebtOtherNewLoanList_ti001 refers to LongTermDebtOtherNewLoanList_ti001
@@ -4427,7 +4076,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtOtherCat2NewLoanList_ti001 + LongTermDebtOtherCat2NewLoanList_ti002 + LongTermDebtOtherCat2NewLoanList_ti003 +LongTermDebtOtherCat2NewLoanList_ti004 + LongTermDebtOtherCat2NewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("other long term debts")&" "&"category"&" 2");
       displaytype: currency;
       variable pLongTermDebtOtherCat2NewLoanList_ti001 refers to LongTermDebtOtherCat2NewLoanList_ti001
@@ -4465,7 +4113,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtOtherCat3NewLoanList_ti001 + LongTermDebtOtherCat3NewLoanList_ti002 + LongTermDebtOtherCat3NewLoanList_ti003 +LongTermDebtOtherCat3NewLoanList_ti004 + LongTermDebtOtherCat3NewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("other long term debts")&" "&"category"&" 3");
       displaytype: currency;
       variable pLongTermDebtOtherCat3NewLoanList_ti001 refers to LongTermDebtOtherCat3NewLoanList_ti001
@@ -4503,7 +4150,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtOtherCat4NewLoanList_ti001 + LongTermDebtOtherCat4NewLoanList_ti002 + LongTermDebtOtherCat4NewLoanList_ti003 +LongTermDebtOtherCat4NewLoanList_ti004 + LongTermDebtOtherCat4NewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("other long term debts")&" "&"category"&" 4");
       displaytype: currency;
       variable pLongTermDebtOtherCat4NewLoanList_ti001 refers to LongTermDebtOtherCat4NewLoanList_ti001
@@ -4541,7 +4187,6 @@ model FAM uses BaseModel
      {
       aggregation: flow;
       formula: LongTermDebtAnnuityNewLoanList_ti001 + LongTermDebtAnnuityNewLoanList_ti002 + LongTermDebtAnnuityNewLoanList_ti003 +LongTermDebtAnnuityNewLoanList_ti004 + LongTermDebtAnnuityNewLoanList_ti005;
-      data_options: hideFirstNoTrendColumn;
       title: String(FirstUC("other long term debts annuity"));
       displaytype: currency;
       variable pLongTermDebtAnnuityNewLoanList_ti001 refers to LongTermDebtAnnuityNewLoanList_ti001
@@ -4604,7 +4249,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: String(FirstUC("description"));
     displaytype: memo;
    }
@@ -4622,7 +4266,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Please give a description of the existing loan";
      }
      variable ExistingLoansFundingOrganisation
@@ -4630,7 +4273,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Funding organisation";
      }
      variable ExistingLoanAmount
@@ -4644,7 +4286,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Date of closing";
       displaytype: date;
       choices: "dd/MM/yyyy";
@@ -4653,7 +4294,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Duration in months";
       fixed_decimals: 0;
      }
@@ -4661,7 +4301,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Rate of interest";
       displaytype: percentage;
       fixed_decimals: 1;
@@ -4671,7 +4310,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP07));
-      data_options: unscalable;
       title: "Collaterals";
       displaytype: memo;
      }
@@ -4683,7 +4321,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(BalanceSheetDescription.required and BalanceSheetDescription.entered,IncomeStatementDescription.required and IncomeStatementDescription.entered),AMMOUNT(BalanceSheetDescription.required,IncomeStatementDescription.required)];
    required:BalanceSheetDescription.required and IncomeStatementDescription.required;
    frequency: document;
-   data_options: unscalable;
    title: "Financial position";
    choices: "0:Incomplete.|1:Complete.";
    hint: "In dit onderdeel van de financieringsaanvraag geeft u inzicht in de onderneming. U gaat hierbij in op de aard van de onderneming, de missie en strategie, de producten en diensten die zij levert en welke markten er worden bediend. Daarnaast geeft u inzicht in de organisatiestructuur, kansen, bedreigingen en sterke en zwakke punten van de onderneming.";
@@ -4694,7 +4331,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP08 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 8";
     locked: On;
    }
@@ -5234,7 +4870,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     required: (Visible (Q_MAP08));
-    data_options: unscalable;
     title: String(FirstUC("description"));
     displaytype: memo;
    }
@@ -5500,7 +5135,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP08));
-     data_options: unscalable;
      title: String(FirstUC("description"));
      displaytype: memo;
     }
@@ -5512,7 +5146,6 @@ model FAM uses BaseModel
    required:CollateralDescription.required and CountryCode.required and City.required and StreetName.required and HouseNumber.required and Municipality.required and Section.required and PartNumber.required and Size.required and CollateralProvider.required and MarketValue.required and SourceMarketValue.required and Valuer.required and ValuerReferenceNumber.required and GuaranteeValue.required and ConstructionDate.required and RegistrationAmount.required and PriorRegistration.required and Rank.required and Discount.required;
    frequency: document;
    formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS);
-   data_options: unscalable;
    title: "Collaterals";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -5522,7 +5155,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(Q_WARNING_GLOBAL&If(Q_MAP09_TOTALCALCULATION , " The total amount of subscriptions cannot exceed the market value." , ""));
-    data_options: unscalable;
     title: "Warning for folder 10";
     locked: On;
    }
@@ -5531,7 +5163,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP09=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    data_options: unscalable;
     title: "$>Info bij stap 10<$";
     locked: On;
    }
@@ -5539,7 +5170,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "$>Validatie stap 10<$";
     locked: On;
    }
@@ -5558,13 +5188,11 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Description";
      }
      variable CoverDefinitionReferenceCode
      {
       frequency: document;
-      data_options: unscalable;
       afterinput: Execute((SetValue(PriorRegistration, NA, true)));
       title: "Select a collateral";
       choices: "0:Guarantee|1:Registry property|2:Non registry property";
@@ -5572,7 +5200,6 @@ model FAM uses BaseModel
      variable CollateralObjectDefinitionReferenceCode
      {
       frequency: document;
-      data_options: unscalable;
       title: "Specify the collateral type";
       choices: "0:Family house|1:Family house with garage|2:Flat / Apartment|3:Flat / Apartment with garage|4:Store-house|5:House with commercial space|6:Shop|7:Office|8:Holiday Home|9:Farm|10:Business collateral|11:Agricultural land / plot|12:Garage|13:Building site|14:Houseboat|15:Ship|16:Airplane|99:Other";
      }
@@ -5580,7 +5207,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       formula: 528.0;
-      data_options: unscalable;
       title: "Country";
       choices: "4:Afghanistan|8:Albani�|10:Antarctica|12:Algerije|16:Amerikaans-Samoa|20:Andorra|24:Angola|28:Antigua en Barbuda|31:Azerbeidzjan|32:Argentini�|36:Australi�|40:Oostenrijk|44:Bahamas|48:Bahrein|50:Bangladesh|51:Armeni�|52:Barbados|56:Belgi�|60:Bermuda|64:Bhutan|68:Bolivia|70:Bosni� en Herzegovina|72:Botswana|74:Bouveteiland|76:Brazili�|84:Belize|86:Brits Indische Oceaanterritorium|90:Salomonseilanden|92:Britse Maagdeneilanden|96:Brunei|100:Bulgarije|104:Myanmar|108:Burundi|112:Wit-Rusland|116:Cambodja|120:Kameroen|124:Canada|132:Kaapverdi�|136:Kaaimaneilanden|140:Centraal-Afrikaanse Republiek|144:Sri Lanka|148:Tsjaad|152:Chili|156:China|158:Taiwan|162:Christmaseiland|166:Cocoseilanden|170:Colombia|174:Comoren|175:Mayotte|178:Congo-Brazzaville|180:Congo-Kinshasa|184:Cookeilanden|188:Costa Rica|191:Kroati�|192:Cuba|196:Cyprus|203:Tsjechi�|204:Benin|208:Denemarken|212:Dominica|214:Dominicaanse Republiek|218:Ecuador|222:El Salvador|226:Equatoriaal-Guinea|231:Ethiopi�|232:Eritrea|233:Estland|234:Faer�er|238:Falklandeilanden|239:Zuid-Georgia en de Zuidelijke Sandwicheilanden|242:Fiji|246:Finland|248:�land|250:Frankrijk|254:Frans-Guyana|258:Frans-Polynesi�|260:Franse Zuidelijke en Antarctische Gebieden|262:Djibouti|266:Gabon|268:Georgi�|270:Gambia|275:Palestina|276:Duitsland|288:Ghana|292:Gibraltar|296:Kiribati|300:Griekenland|304:Groenland|308:Grenada|312:Guadeloupe|316:Guam|320:Guatemala|324:Guinee|328:Guyana|332:Ha�ti|334:Heard en MacDonaldeilanden|336:Vaticaanstad|340:Honduras|344:Hongkong|348:Hongarije|352:IJsland|356:India|360:Indonesi�|364:Iran|368:Irak|372:Ierland|376:Isra�l|380:Itali�|384:Ivoorkust|388:Jamaica|392:Japan|398:Kazachstan|400:Jordani�|404:Kenia|408:Noord-Korea|410:Zuid-Korea|414:Koeweit|417:Kirgizi�|418:Laos|422:Libanon|426:Lesotho|428:Letland|430:Liberia|434:Libi�|438:Liechtenstein|440:Litouwen|442:Luxemburg|446:Macau|450:Madagaskar|454:Malawi|458:Maleisi�|462:Maldiven|466:Mali|470:Malta|474:Martinique|478:Mauritani�|480:Mauritius|484:Mexico|492:Monaco|496:Mongoli�|498:Moldavi�|499:Montenegro|500:Montserrat|504:Marokko|508:Mozambique|512:Oman|516:Namibi�|520:Nauru|524:Nepal|528:Nederland|531:Cura�ao|533:Aruba|534:Sint Maarten|535:Bonaire, Sint Eustatius en Saba|540:Nieuw-Caledoni�|548:Vanuatu|554:Nieuw-Zeeland|558:Nicaragua|562:Niger|566:Nigeria|570:Niue|574:Norfolk|578:Noorwegen|580:Noordelijke Marianen|581:Kleine Pacifische eilanden van de Verenigde Staten|583:Micronesia|584:Marshalleilanden|585:Palau|586:Pakistan|591:Panama|598:Papoea-Nieuw-Guinea|600:Paraguay|604:Peru|608:Filipijnen|612:Pitcairneilanden|616:Polen|620:Portugal|624:Guinee-Bissau|626:Oost-Timor|630:Puerto Rico|634:Qatar|638:R�union|642:Roemeni�|643:Rusland|646:Rwanda|652:Saint-Barth�lemy|654:Sint-Helena, Ascension en Tristan da Cunha|659:Saint Kitts en Nevis|660:Anguilla|662:Saint Lucia|663:Sint-Maarten|666:Saint-Pierre en Miquelon|670:Saint Vincent en de Grenadines|674:San Marino|678:Sao Tom� en Principe|682:Saoedi-Arabi�|686:Senegal|688:Servi�|690:Seychellen|694:Sierra Leone|702:Singapore|703:Slowakije|704:Vietnam|705:Sloveni�|706:Somali�|710:Zuid-Afrika|716:Zimbabwe|724:Spanje|728:Zuid-Soedan|729:Soedan|732:Westelijke Sahara|740:Suriname|744:Spitsbergen en Jan Mayen|748:Swaziland|752:Zweden|756:Zwitserland|760:Syri�|762:Tadzjikistan|764:Thailand|768:Togo|772:Tokelau|776:Tonga|780:Trinidad en Tobago|784:Verenigde Arabische Emiraten|788:Tunesi�|792:Turkije|795:Turkmenistan|796:Turks- en Caicoseilanden|798:Tuvalu|800:Oeganda|804:Oekra�ne|807:Macedoni�|818:Egypte|826:Verenigd Koninkrijk|831:Guernsey|832:Jersey|833:Man|834:Tanzania|840:Verenigde Staten|850:Amerikaanse Maagdeneilanden|854:Burkina Faso|858:Uruguay|860:Oezbekistan|862:Venezuela|876:Wallis en Futuna|882:Samoa|887:Jemen|894:Zambia";
      }
@@ -5590,7 +5216,6 @@ model FAM uses BaseModel
       frequency: document;
       formula: String(Case(CountryType, [0:"Other"|528:"NL"]));
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "CountryCode";
      }
      variable City
@@ -5598,7 +5223,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "City";
      }
      variable StreetName
@@ -5606,14 +5230,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Street name";
      }
      variable HouseNumber
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Housenumber";
       fixed_decimals: 0;
      }
@@ -5621,7 +5243,6 @@ model FAM uses BaseModel
      {
       datatype: string;
       frequency: document;
-      data_options: unscalable;
       title: "Housenumber addition";
      }
      tuple LandRegistry
@@ -5632,7 +5253,6 @@ model FAM uses BaseModel
        datatype: string;
        frequency: document;
        required: (Visible (Q_MAP09));
-       data_options: unscalable;
        title: "Municipality";
       }
       variable Section
@@ -5640,7 +5260,6 @@ model FAM uses BaseModel
        datatype: string;
        frequency: document;
        required: (Visible (Q_MAP09));
-       data_options: unscalable;
        title: "Section";
       }
       variable PartNumber
@@ -5648,14 +5267,12 @@ model FAM uses BaseModel
        datatype: string;
        frequency: document;
        required: (Visible (Q_MAP09));
-       data_options: unscalable;
        title: "Part number";
       }
       variable Size
       {
        frequency: document;
        required: (Visible (Q_MAP09));
-       data_options: unscalable;
        title: "Size";
        fixed_decimals: 0;
       }
@@ -5663,7 +5280,6 @@ model FAM uses BaseModel
       {
        frequency: document;
        formula: 0;
-       data_options: unscalable;
        title: "Unit";
        choices: "0:m2|1:ha";
       }
@@ -5673,14 +5289,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Collateral provider";
      }
      variable MarketValue
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Market value";
       displaytype: currency;
       fixed_decimals: 0;
@@ -5690,7 +5304,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Source market value";
       hint: "Source market value hint";
      }
@@ -5699,7 +5312,6 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Valuer";
      }
      variable ValuerReferenceNumber
@@ -5707,14 +5319,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Valuer reference number";
      }
      variable GuaranteeValue
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Guarantee value";
       displaytype: currency;
       fixed_decimals: 0;
@@ -5723,7 +5333,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Construction date";
       displaytype: date;
       choices: "dd/MM/yyyy";
@@ -5739,7 +5348,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "This object is already used as collateral for another loan?";
       choices: "0:No|1:Yes";
      }
@@ -5747,7 +5355,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       required: (Visible (Q_MAP09));
-      data_options: unscalable;
       title: "Rank of subscription";
       fixed_decimals: 0;
      }
@@ -5762,7 +5369,6 @@ model FAM uses BaseModel
      {
       frequency: document;
       formula: If(RegistrationAmount + Discount > MarketValue ,1,0);
-      data_options: unscalable;
       title: "Calculation";
       choices: "0:Good|1:Not good.";
      }
@@ -5778,7 +5384,6 @@ model FAM uses BaseModel
     variable Q_MAP09_REQUIREDVARS
     {
      frequency: document;
-     data_options: unscalable;
      title: "$>Aantal verplichte velden<$";
      fixed_decimals: 0;
      locked: On;
@@ -5787,7 +5392,6 @@ model FAM uses BaseModel
     variable Q_MAP09_ENTEREDREQUIREDVARS
     {
      frequency: document;
-     data_options: unscalable;
      title: "$>Aantal ingevulde verplichte velden<$";
      fixed_decimals: 0;
      locked: On;
@@ -5797,7 +5401,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      formula: TupleSum(Calculation)>0;
-     data_options: unscalable;
      title: "$>Optellingen<$";
      fixed_decimals: 0;
      locked: On;
@@ -5810,7 +5413,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(FinancialPositionAccountsReceivablesInsured.required and FinancialPositionAccountsReceivablesInsured.entered,FinancialPositionAccountsReceivablesDebtorName.required and FinancialPositionAccountsReceivablesDebtorName.entered,FinancialPositionAccountsReceivablesDebtorAmount.required and FinancialPositionAccountsReceivablesDebtorAmount.entered),AMMOUNT(FinancialPositionAccountsReceivablesInsured.required,FinancialPositionAccountsReceivablesDebtorName.required,FinancialPositionAccountsReceivablesDebtorAmount.required)];
    required:FinancialPositionAccountsReceivablesInsured.required and FinancialPositionAccountsReceivablesDebtorName.required and FinancialPositionAccountsReceivablesDebtorAmount.required;
    frequency: document;
-   data_options: unscalable;
    title: "Specification accounts receivables";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -5820,7 +5422,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP10 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 10";
     locked: On;
    }
@@ -5852,7 +5453,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP10));
-     data_options: unscalable;
      title: "Are the accounts receivables insured?";
      choices: "0:No|1:Yes";
     }
@@ -5872,14 +5472,12 @@ model FAM uses BaseModel
       datatype: string;
       frequency: document;
       required: (Visible (Q_MAP10));
-      data_options: unscalable;
       title: "Name debtor";
      }
      variable FinancialPositionAccountsReceivablesDebtorAmount
      {
       frequency: document;
       required: (Visible (Q_MAP10));
-      data_options: unscalable;
       title: "Amount";
       fixed_decimals: 0;
      }
@@ -5891,7 +5489,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(SpecificationLeaseObject.required and SpecificationLeaseObject.entered,SpecificationLeaseObjectDescription.required and SpecificationLeaseObjectDescription.entered,SpecificationLeaseObjectMarketability.required and SpecificationLeaseObjectMarketability.entered,SpecificationLeaseObjectDuration.required and SpecificationLeaseObjectDuration.entered,SpecificationLeaseObjectDepreciation.required and SpecificationLeaseObjectDepreciation.entered,SpecificationLeaseObjectFinalInstalment.required and SpecificationLeaseObjectFinalInstalment.entered,SpecificationLeaseObjectDeposit.required and SpecificationLeaseObjectDeposit.entered),AMMOUNT(SpecificationLeaseObject.required,SpecificationLeaseObjectDescription.required,SpecificationLeaseObjectMarketability.required,SpecificationLeaseObjectDuration.required,SpecificationLeaseObjectDepreciation.required,SpecificationLeaseObjectFinalInstalment.required,SpecificationLeaseObjectDeposit.required)];
    required:SpecificationLeaseObject.required and SpecificationLeaseObjectDescription.required and SpecificationLeaseObjectMarketability.required and SpecificationLeaseObjectDuration.required and SpecificationLeaseObjectDepreciation.required and SpecificationLeaseObjectFinalInstalment.required and SpecificationLeaseObjectDeposit.required;
    frequency: document;
-   data_options: unscalable;
    title: "Specification Lease";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -5901,7 +5498,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP11 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 11";
     locked: On;
    }
@@ -5909,7 +5505,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Specification Lease object";
     locked: On;
     variable SpecificationLeaseObject
@@ -5917,7 +5512,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP11));
-     data_options: unscalable;
      title: "Lease object";
     }
     variable SpecificationLeaseObjectDescription
@@ -5925,7 +5519,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP11));
-     data_options: unscalable;
      title: "Description of the lease object";
      displaytype: memo;
     }
@@ -5933,7 +5526,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP11));
-     data_options: unscalable;
      title: "Marketability of lease object";
      choices: "0:Low|1:Average|2:High";
     }
@@ -5941,7 +5533,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP11));
-     data_options: unscalable;
      title: "Duration in months";
      fixed_decimals: 0;
     }
@@ -5973,7 +5564,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(SpecificationRealEstateExistingNew.required and SpecificationRealEstateExistingNew.entered,SpecificationRealEstatetDescription.required and SpecificationRealEstatetDescription.entered,SpecificationRealEstateMarketability.required and SpecificationRealEstateMarketability.entered,SpecificationRealEstateWOZValue.required and SpecificationRealEstateWOZValue.entered,SpecificationRealEstateRentalIncome.required and SpecificationRealEstateRentalIncome.entered,SpecificationRealEstateRentalContracts.required and SpecificationRealEstateRentalContracts.entered,SpecificationRealEstateMaintenanceCosts.required and SpecificationRealEstateMaintenanceCosts.entered),AMMOUNT(SpecificationRealEstateExistingNew.required,SpecificationRealEstatetDescription.required,SpecificationRealEstateMarketability.required,SpecificationRealEstateWOZValue.required,SpecificationRealEstateRentalIncome.required,SpecificationRealEstateRentalContracts.required,SpecificationRealEstateMaintenanceCosts.required)];
    required:SpecificationRealEstateExistingNew.required and SpecificationRealEstatetDescription.required and SpecificationRealEstateMarketability.required and SpecificationRealEstateWOZValue.required and SpecificationRealEstateRentalIncome.required and SpecificationRealEstateRentalContracts.required and SpecificationRealEstateMaintenanceCosts.required;
    frequency: document;
-   data_options: unscalable;
    title: "Specification commercial real estate";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -5983,7 +5573,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP12 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 12";
     locked: On;
    }
@@ -5991,14 +5580,12 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Specification property";
     locked: On;
     variable SpecificationRealEstateExistingNew
     {
      frequency: document;
      required: (Visible (Q_MAP12));
-     data_options: unscalable;
      title: "Existing or new property?";
      choices: "0:New|1:Existing";
     }
@@ -6007,7 +5594,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (Q_MAP12));
-     data_options: unscalable;
      title: "Description of the property";
      displaytype: memo;
     }
@@ -6015,7 +5601,6 @@ model FAM uses BaseModel
     {
      frequency: document;
      required: (Visible (Q_MAP12));
-     data_options: unscalable;
      title: "Marketability of the property";
      choices: "0:Low|1:Average|2:High";
     }
@@ -6054,7 +5639,6 @@ model FAM uses BaseModel
    valid:[AMMOUNT(DOC_COC.required and DOC_COC.entered,DOC_OrgChart.required and DOC_OrgChart.entered,DOC_Signatures.required and DOC_Signatures.entered,DOC_Passport.required and DOC_Passport.entered,DOC_ShareRegister.required and DOC_ShareRegister.entered,DOC_AnnualStatement.required and DOC_AnnualStatement.entered,DOC_MemorandumOfAssociation.required and DOC_MemorandumOfAssociation.entered,DOC_GeneralTermsAndConditions.required and DOC_GeneralTermsAndConditions.entered,DOC_BankAccounts.required and DOC_BankAccounts.entered,DOC_UBODeclaration.required and DOC_UBODeclaration.entered,DOC_AdditionalCertification.required and DOC_AdditionalCertification.entered,DOC_CertificateOfGoodConduct.required and DOC_CertificateOfGoodConduct.entered,DOC_GAccount.required and DOC_GAccount.entered,DOC_InvoiceExample.required and DOC_InvoiceExample.entered,DOC_Logo.required and DOC_Logo.entered,DOC_RealEstatePurchaseAgreement.required and DOC_RealEstatePurchaseAgreement.entered,DOC_RealEstateRentalAgreement.required and DOC_RealEstateRentalAgreement.entered),AMMOUNT(DOC_COC.required,DOC_OrgChart.required,DOC_Signatures.required,DOC_Passport.required,DOC_ShareRegister.required,DOC_AnnualStatement.required,DOC_MemorandumOfAssociation.required,DOC_GeneralTermsAndConditions.required,DOC_BankAccounts.required,DOC_UBODeclaration.required,DOC_AdditionalCertification.required,DOC_CertificateOfGoodConduct.required,DOC_GAccount.required,DOC_InvoiceExample.required,DOC_Logo.required,DOC_RealEstatePurchaseAgreement.required,DOC_RealEstateRentalAgreement.required)];
    required:DOC_COC.required and DOC_OrgChart.required and DOC_Signatures.required and DOC_Passport.required and DOC_ShareRegister.required and DOC_AnnualStatement.required and DOC_MemorandumOfAssociation.required and DOC_GeneralTermsAndConditions.required and DOC_BankAccounts.required and DOC_UBODeclaration.required and DOC_AdditionalCertification.required and DOC_CertificateOfGoodConduct.required and DOC_GAccount.required and DOC_InvoiceExample.required and DOC_Logo.required and DOC_RealEstatePurchaseAgreement.required and DOC_RealEstateRentalAgreement.required;
    frequency: document;
-   data_options: unscalable;
    title: "Documents";
    choices: "0:Incomplete.|1:Complete.";
    locked: On;
@@ -6063,7 +5647,6 @@ model FAM uses BaseModel
     datatype: string;
     frequency: document;
     formula: String(If(Q_MAP13 = 0.0 , "." , "") & scRestricties &Q_WARNING_GLOBAL);
-    data_options: unscalable;
     title: "Warning for folder 11";
     locked: On;
    }
@@ -6071,7 +5654,6 @@ model FAM uses BaseModel
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Documents";
     locked: On;
     variable DOC_COC
@@ -6079,7 +5661,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_COC));
-     data_options: unscalable;
      title: "COC";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_COC",ProductType));
     }
@@ -6088,7 +5669,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_OrgChart));
-     data_options: unscalable;
      title: "OrgChart";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_OrgChart",ProductType));
     }
@@ -6097,7 +5677,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_Signatures));
-     data_options: unscalable;
      title: "Signatures";
      hint: "http://www.fyndoo.com/signatures Download template on www.fyndoo.com/signatures";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Signatures",ProductType));
@@ -6107,7 +5686,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_Passport));
-     data_options: unscalable;
      title: "Passport";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Passport",ProductType));
     }
@@ -6116,7 +5694,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_ShareRegister));
-     data_options: unscalable;
      title: "ShareRegister";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_ShareRegister",ProductType));
     }
@@ -6125,7 +5702,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_AnnualStatement));
-     data_options: unscalable;
      title: "AnnualStatement";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_AnnualStatement",ProductType));
     }
@@ -6134,7 +5710,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_MemorandumOfAssociation));
-     data_options: unscalable;
      title: "MemorandumOfAssociation";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_MemorandumOfAssociation",ProductType));
     }
@@ -6143,7 +5718,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_GeneralTermsAndConditions));
-     data_options: unscalable;
      title: "GeneralTermsAndConditions";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_GeneralTermsAndConditions",ProductType));
     }
@@ -6152,7 +5726,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_BankAccounts));
-     data_options: unscalable;
      title: "BankAccounts";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_BankAccounts",ProductType));
     }
@@ -6161,7 +5734,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_UBODeclaration));
-     data_options: unscalable;
      title: "UBODeclaration";
      hint: "http://www.fyndoo.com/UBODeclaration Download template on www.fyndoo.com/UBODeclaration";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_UBODeclaration",ProductType));
@@ -6171,7 +5743,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_AdditionalCertification));
-     data_options: unscalable;
      title: "AdditionalCertification";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_AdditionalCertification",ProductType));
     }
@@ -6180,7 +5751,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_CertificateOfGoodConduct));
-     data_options: unscalable;
      title: "CertificateOfGoodConduct";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_CertificateOfGoodConduct",ProductType));
     }
@@ -6189,7 +5759,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_GAccount));
-     data_options: unscalable;
      title: "GAccount";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_GAccount",ProductType));
     }
@@ -6198,7 +5767,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_InvoiceExample));
-     data_options: unscalable;
      title: "InvoiceExample";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_InvoiceExample",ProductType));
     }
@@ -6207,7 +5775,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_Logo));
-     data_options: unscalable;
      title: "Logo";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_Logo",ProductType));
     }
@@ -6216,7 +5783,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_RealEstatePurchaseAgreement));
-     data_options: unscalable;
      title: "RealEstatePurchaseAgreement";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_RealEstatePurchaseAgreement",ProductType));
     }
@@ -6225,7 +5791,6 @@ model FAM uses BaseModel
      datatype: string;
      frequency: document;
      required: (Visible (DOC_RealEstateRentalAgreement));
-     data_options: unscalable;
      title: "RealEstateRentalAgreement";
      visible: (MatrixLookup("PRODUCTSELECTION.xls","InputRequiredPerProducttype","DOC_RealEstateRentalAgreement",ProductType));
     }
@@ -6235,14 +5800,12 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Send and download";
    locked: On;
    variable SummarySend
    {
     datatype: string;
     frequency: document;
-    data_options: unscalable;
     title: "Send credit application";
     locked: On;
    }
@@ -6257,7 +5820,6 @@ model FAM uses BaseModel
   {
    frequency: document;
    formula: 0.0;
-   data_options: unscalable;
    title: "Status";
    choices: "0:Active|1:Final";
   }
@@ -6299,7 +5861,6 @@ model FAM uses BaseModel
   variable Q_STATUS_FINAL_ON
   {
    frequency: document;
-   data_options: unscalable;
    title: "Final:";
    displaytype: date;
    choices: "dd/MM/yyyy";
@@ -6308,13 +5869,11 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Final by:";
   }
   variable Q_STATUS_STARTED_ON
   {
    frequency: document;
-   data_options: unscalable;
    title: "Created:";
    displaytype: date;
    choices: "dd/MM/yyyy";
@@ -6323,14 +5882,12 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Created by:";
   }
   variable Q_STATUS_MODIFIED_ON
   {
    frequency: document;
    formula: Now;
-   data_options: unscalable, saveCalculatedValue;
    title: "Last modified";
    displaytype: date;
    choices: "dd/MM/yyyy";
@@ -6340,7 +5897,6 @@ model FAM uses BaseModel
    datatype: string;
    frequency: document;
    formula: "00.00.001.042";
-   data_options: unscalable, saveCalculatedValue;
    title: "Modelversion:";
    locked: On;
   }
@@ -6349,7 +5905,6 @@ model FAM uses BaseModel
    datatype: string;
    frequency: document;
    formula: "FAM";
-   data_options: unscalable, saveCalculatedValue;
    title: "Modeltype:";
    locked: On;
   }
@@ -6357,7 +5912,6 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable, saveCalculatedValue;
    title: "Parameters version:";
    locked: On;
   }
@@ -6365,7 +5919,6 @@ model FAM uses BaseModel
   {
    datatype: none;
    frequency: document;
-   data_options: unscalable;
    title: "Overige berekeningen";
    locked: On;
   }
@@ -6374,7 +5927,6 @@ model FAM uses BaseModel
    datatype: string;
    frequency: document;
    formula: String(If(Length ( scKnockoutsCombi ) > 0.0 , "\r\nEr zijn knockouts van toepassing:" & scKnockoutsCombi, ""));
-   data_options: unscalable;
    title: "Knockout(s)?";
    locked: On;
   }
@@ -6382,7 +5934,6 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Knockouts text";
    displaytype: memo;
    locked: On;
@@ -6392,7 +5943,6 @@ model FAM uses BaseModel
    datatype: string;
    frequency: document;
    formula: String(If(Length ( scRestrictiesCombi ) > 0.0 , "\r\n\r\nThe listed variables are not filled correct:" &scRestrictiesCombi, ""));
-   data_options: unscalable;
    title: "Restricties";
    displaytype: memo;
    locked: On;
@@ -6401,7 +5951,6 @@ model FAM uses BaseModel
   {
    datatype: string;
    frequency: document;
-   data_options: unscalable;
    title: "Restricties text";
    displaytype: memo;
    locked: On;

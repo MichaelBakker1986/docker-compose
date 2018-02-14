@@ -187,6 +187,12 @@ FormulaService.prototype.getVariables = function(visit) {
 FormulaService.prototype.initVariables = function(variables) {
     for (var i = 0; i < variables.length; i++) {
         const variable = variables[i];
+        for (var key in variable.xasValues) {
+            variable.x = []
+            for (var keyX in variable.xasValues[key]) {
+                variable.x.push(keyX)
+            }
+        }
         global[variable.name] = variable.expression;
     }
 }

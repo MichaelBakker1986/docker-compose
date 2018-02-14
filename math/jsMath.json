@@ -73,7 +73,7 @@
   },
   "FirstUC": {
     "args": "value",
-    "body": "{ return value }"
+    "body": "return value.charAt(0).toUpperCase() + value.slice(1)"
   },
   "AddMonth": {
     "args": "value,ammount",
@@ -81,7 +81,7 @@
   },
   "ForAll": {
     "args": "elements",
-    "body": "{ for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0; }"
+    "body": "for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0"
   },
   "PROXY": {
     "args": "proxy",
@@ -196,8 +196,8 @@
     "body": "return 1"
   },
   "DateToMonth": {
-    "args": "one",
-    "body": "return one"
+    "args": "value",
+    "body": "return new Date(value).getMonth()"
   },
   "HAvg": {
     "args": "one",
@@ -216,8 +216,8 @@
     "body": "return one"
   },
   "FirstLC": {
-    "args": "one",
-    "body": "return 1"
+    "args": "value",
+    "body": "return value.charAt(0).toLowerCase() + value.slice(1)"
   },
   "ExpandFraction": {
     "args": "one",
@@ -265,11 +265,11 @@
   },
   "DateToYear": {
     "args": "one",
-    "body": "return new Date(one)"
+    "body": "return new Date(one).getYear()"
   },
   "DateToDay": {
     "args": "one",
-    "body": "return 1"
+    "body": "return new Date(one).getDay()"
   },
   "CumNormal": {
     "args": "one",
@@ -292,8 +292,8 @@
     "body": "return isNaN(value) ? fallback : value < min ? min : value > max ? max : value"
   },
   "LN": {
-    "args": "one",
-    "body": "return 1"
+    "args": "value",
+    "body": "return Math.log(Number(value))"
   },
   "BivarNormal": {
     "args": "one",
@@ -316,8 +316,8 @@
     "body": "return new Date(date).toString()"
   },
   "DateToYearNum": {
-    "args": "string",
-    "body": "return string"
+    "args": "value",
+    "body": "return new Date(value).getYear()"
   },
   "VAL": {
     "args": "input",

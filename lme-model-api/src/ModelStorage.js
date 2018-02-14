@@ -95,7 +95,7 @@ ModelStorage.prototype.doDeltaCompare = function(name, fflPath, data) {
         otherFFLFormat.parseProperties()
         const dcompare = new DeltaCompareRegister(modelRegister, otherModelRegister)
         const compareResults = dcompare.compare();
-        if (log.TRACE) log.trace(compareResults.toString());
+        if (log.TRACE) log.trace(compareResults.toString())
         result.status = 'ok'
         result.changes = compareResults.changes;
         result.compare = compareResults;

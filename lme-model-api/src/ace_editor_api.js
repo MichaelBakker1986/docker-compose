@@ -5,8 +5,11 @@ const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 
 
-function AceEditor(id) {
+function AceEditor(id, opts) {
+    opts = opts || {}
     this.fflModel = "";
+    this.halfHeight = false;
+    if (opts.halfHeight) this.halfHeight = opts.halfHeight;
     const aceEditor = ace.edit(id);
     edit = aceEditor;//quick response front-end
     const langTools = ace.require("ace/ext/language_tools");
@@ -21,21 +24,19 @@ function AceEditor(id) {
         enableSnippets: true,
         showFoldWidgets: true
     });
-
-
     /*
         var snippetManager = ace.require("ace/snippets").snippetManager;
         snippetManager.insertSnippet(aceEditor, "test124");*/
-
     aceEditor.setAutoScrollEditorIntoView(true);
     aceEditor.setOption("maxLines", 60);
     aceEditor.$blockScrolling = Infinity
     aceEditor.resize(true)
+    const maxLines = (this.halfHeight ? 0.5 : 1) * (41 + (($(window).height() - 730) / 17));
     $(window).resize(function() {
-        aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
+        aceEditor.setOption("maxLines", maxLines);
         aceEditor.resize()
     });
-    aceEditor.setOption("maxLines", 41 + (($(window).height() - 730) / 17));
+    aceEditor.setOption("maxLines", maxLines);
     aceEditor.resize()
 
     this.aceEditor = aceEditor;
@@ -101,6 +102,19 @@ AceEditor.prototype.scrollTop = function() {
     });
     this.aceEditor.gotoLine(1, 1, true);
     this.aceEditor.selection.moveTo(0, 0)
+}
+AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEditor, user_session, register) {
+    var HoverLink = ace.require("hoverlink").HoverLink
+    var TokenTooltip = ace.require("token_tooltip").TokenTooltip
+
+    selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register);
+    selected_editor.aceEditor.hoverLink.on("open", function(link) {
+        const startLookIndex = user_session.fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
+        //(!) its the real LineNumber - Delta on page
+        const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
+        fflEditor.scrollToLine(lineNumber)
+    })
+    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register);
 }
 AceEditor.prototype.scrollToLine = function(lineNumber) {
     this.aceEditor.scrollToLine(lineNumber, true, true, function() {

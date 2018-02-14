@@ -8,10 +8,10 @@ const Promise = require('promise')
 const workbook = new Excel.Workbook();
 const fs = require('fs');
 
-const loadExcelFile = function(excelFileName) {
+const loadExcelFile = function(excelFileName, fullPath) {
     return new Promise(function(succes, fail) {
         //check if an file exists
-        const xlsxPath = __dirname + '/../git-connect/resources/' + excelFileName + '.xlsx';
+        const xlsxPath = fullPath || (__dirname + '/../git-connect/resources/' + excelFileName + '.xlsx');
         if (!fs.existsSync(xlsxPath)) {
             succes(null)
         } else {
@@ -123,11 +123,14 @@ function readFunction(wb) {
         var bounds = findStart(range);
         var yasNames = findYasNames(range, bounds);
         var xasValues = findXasValues(range, yasNames, bounds);
+        const sorted = []
+        for (var key in xasValues) sorted.push(key)
         matrix[definedName] = {
             name: range.name,
             table: {},
             bounds: bounds,
             yasNames: yasNames,
+            x_sort: sorted,
             xasValues: xasValues
         };
     }
@@ -135,6 +138,7 @@ function readFunction(wb) {
     // This variable should be available in the client.
     return matrix
 }
+
 var entries = {};
 exports.xlsxLookup = {
     name: 'xlsx-lookup',

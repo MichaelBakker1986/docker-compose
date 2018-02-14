@@ -4,10 +4,11 @@ const Register = require('../../lme-core/exchange_modules/ffl/Register').Registe
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
 const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
 const JBehaveController = require('./JBehaveController')
-const MatrixManager = require('../../excel-connect/MatrixManager').MatrixManager
+const MatrixManager = require('../../excel-connect/MatrixManager')
 const MatrixController = require('./MatrixController')
 const FFLController = require('./FFLController')
 const DebugController = require('./DebugController')
+
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
 var params = window.location.href.split('#')[1].split('&')
@@ -32,8 +33,10 @@ const user_session = {
 }
 angular.module('lmeapp', ['angular.filter'])
     .controller('ideController', function($scope, $http, $timeout) {
+
+        const AceEditor = require('./ace_editor_api').AceEditor
         const matrixManager = new MatrixManager()
-        const matrixController = new MatrixController($scope, $http, matrixManager)
+        const matrixController = new MatrixController($scope, $http, matrixManager, {halfHeight: true})
         const debugController = new DebugController($scope, $http)
         $http.get('whoami').then(function(response) {
             user_session.user.name = response.data.split(',')[0]
@@ -74,8 +77,8 @@ angular.module('lmeapp', ['angular.filter'])
         const debugManager = new DebugManager();
         DEBUGGER = debugManager
         $scope.register = register;
-        const AceEditor = require('./ace_editor_api').AceEditor
-        const right_editor = new AceEditor("right_editor");
+
+        const right_editor = new AceEditor("right_editor", {halfHeight: true});
         const jBehaveController = new JBehaveController($scope, $http, null, right_editor, user_session)
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
@@ -84,22 +87,11 @@ angular.module('lmeapp', ['angular.filter'])
         var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
         const fflEditor = new AceEditor("editor");
         const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register)
-        var HoverLink = ace.require("hoverlink").HoverLink
-        var TokenTooltip = ace.require("token_tooltip").TokenTooltip
 
-        function registerEditorToClickNames(selected_editor) {
-            selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register);
-            selected_editor.aceEditor.hoverLink.on("open", function(link) {
-                const startLookIndex = user_session.fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
-                //(!) its the real LineNumber - Delta on page
-                const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
-                fflEditor.scrollToLine(lineNumber)
-            })
-            selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register);
-        }
+        right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register)
+        fflEditor.registerEditorToClickNames(fflEditor, fflEditor, user_session, register)
+        matrixController.registerEditorToClickNames(fflEditor, user_session, register)
 
-        registerEditorToClickNames(right_editor)
-        registerEditorToClickNames(fflEditor)
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });

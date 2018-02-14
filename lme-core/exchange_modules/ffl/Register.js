@@ -3,9 +3,10 @@
  * Lightweigt data-model
  * @constructor
  */
-function Register() {
+function Register(schema_defualts) {
     this.schema = []
     this.createdIndexes = []
+    this.schema_defaults = schema_defualts || ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children', 'valid']//expect 'valid' to exist
     this.clean()
     this.changes = []
 }
@@ -22,8 +23,7 @@ Register.prototype.clean = function() {
     //{{MODEL_VARIABLENAME_undefined}} will exist when 'valid' is not added to the list here. (since valid is created on demand in RegisterToLMEParser
     //Something alike if (VARIABLENAME.pattern) VARIABLENAME.valid = if(VARIABLENAME.test(VARIABLENAME),'','Invalid Input')
     //therefore adding the property 'valid 'too late while parsing.
-    var schema = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'treeindex', 'children', 'valid']//expect 'valid' to exist
-    for (var j = 0; j < schema.length; j++) this.addColumn(schema[j]);
+    for (var j = 0; j < this.schema_defaults.length; j++) this.addColumn(this.schema_defaults[j]);
 }
 Register.prototype.getIndex = function(name) {
     if (!this[name]) this.createIndex(name)

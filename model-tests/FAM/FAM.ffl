@@ -1,12 +1,12 @@
 import FinanMath.*;
 import BaseModel.*;
 
-model KAM uses BaseModel
+model FAM uses BaseModel
 {
 	version: "00.00.001.042";
 	root
 	{
-		variable RootSub1 
+		variable RootSub1
 		{
 			datatype: none;
 			data_options: unscalable;
@@ -16,7 +16,7 @@ model KAM uses BaseModel
 			options_title: locked, invisible;
 			options_notrend: locked, invisible;
 			options_trend: locked, invisible;
-			variable FES_LAYOUTNR 
+			variable FES_LAYOUTNR
 			{
 				datatype: number;
 				frequency: document;
@@ -32,7 +32,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable FES_EXCHANGE_RATES 
+			variable FES_EXCHANGE_RATES
 			{
 				datatype: string;
 				aggregation: balance;
@@ -43,7 +43,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_LAYOUT 
+			variable FES_LAYOUT
 			{
 				datatype: string;
 				frequency: document;
@@ -52,7 +52,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_FLATINPUT 
+			variable FES_FLATINPUT
 			{
 				datatype: number;
 				frequency: document;
@@ -62,7 +62,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_PROJECTION_PROFILE 
+			variable FES_PROJECTION_PROFILE
 			{
 				datatype: number;
 				frequency: document;
@@ -72,7 +72,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_COLUMN_ORDER 
+			variable FES_COLUMN_ORDER
 			{
 				datatype: number;
 				frequency: document;
@@ -82,7 +82,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_COLUMN_VISIBLE 
+			variable FES_COLUMN_VISIBLE
 			{
 				datatype: number;
 				aggregation: balance;
@@ -94,7 +94,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_STARTDATEPERIOD 
+			variable FES_STARTDATEPERIOD
 			{
 				datatype: number;
 				aggregation: balance;
@@ -104,7 +104,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_ENDDATEPERIOD 
+			variable FES_ENDDATEPERIOD
 			{
 				datatype: number;
 				aggregation: balance;
@@ -114,7 +114,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_BASECURRENCYPERIOD 
+			variable FES_BASECURRENCYPERIOD
 			{
 				datatype: number;
 				aggregation: balance;
@@ -124,7 +124,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_VIEWCURRENCYPERIOD 
+			variable FES_VIEWCURRENCYPERIOD
 			{
 				datatype: number;
 				aggregation: balance;
@@ -134,7 +134,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FES_COLUMNTYPE 
+			variable FES_COLUMNTYPE
 			{
 				datatype: number;
 				aggregation: balance;
@@ -147,7 +147,7 @@ model KAM uses BaseModel
 				options_title: locked;
 			}
 		}
-		variable RootSub2 
+		variable RootSub2
 		{
 			datatype: none;
 			data_options: unscalable;
@@ -156,7 +156,7 @@ model KAM uses BaseModel
 			options_title: locked, invisible;
 			options_notrend: locked, invisible;
 			options_trend: locked, invisible;
-			variable FPS_VAR_Naam 
+			variable FPS_VAR_Naam
 			{
 				datatype: string;
 				frequency: document;
@@ -166,7 +166,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Relatienummer 
+			variable FPS_VAR_Relatienummer
 			{
 				datatype: string;
 				frequency: document;
@@ -175,7 +175,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_KVKnr 
+			variable FPS_VAR_KVKnr
 			{
 				datatype: string;
 				frequency: document;
@@ -184,7 +184,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Rechtsvorm_nr 
+			variable FPS_VAR_Rechtsvorm_nr
 			{
 				datatype: string;
 				frequency: document;
@@ -193,7 +193,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Rechtsvorm_omschr 
+			variable FPS_VAR_Rechtsvorm_omschr
 			{
 				datatype: string;
 				frequency: document;
@@ -202,7 +202,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_BIK_CODE 
+			variable FPS_VAR_BIK_CODE
 			{
 				datatype: string;
 				frequency: document;
@@ -211,7 +211,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_BIK_Omschr 
+			variable FPS_VAR_BIK_Omschr
 			{
 				datatype: string;
 				frequency: document;
@@ -220,7 +220,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_GridId 
+			variable FPS_VAR_GridId
 			{
 				datatype: string;
 				frequency: document;
@@ -229,7 +229,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Accountmanager 
+			variable FPS_VAR_Accountmanager
 			{
 				datatype: string;
 				frequency: document;
@@ -238,7 +238,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Kantoor 
+			variable FPS_VAR_Kantoor
 			{
 				datatype: string;
 				frequency: document;
@@ -247,7 +247,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Straat 
+			variable FPS_VAR_Straat
 			{
 				datatype: string;
 				frequency: document;
@@ -256,7 +256,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Housenumber 
+			variable FPS_VAR_Housenumber
 			{
 				datatype: string;
 				frequency: document;
@@ -265,7 +265,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Postcode 
+			variable FPS_VAR_Postcode
 			{
 				datatype: string;
 				frequency: document;
@@ -274,7 +274,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Woonplaats 
+			variable FPS_VAR_Woonplaats
 			{
 				datatype: string;
 				frequency: document;
@@ -283,7 +283,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Provincie 
+			variable FPS_VAR_Provincie
 			{
 				datatype: string;
 				frequency: document;
@@ -292,7 +292,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Land 
+			variable FPS_VAR_Land
 			{
 				datatype: string;
 				frequency: document;
@@ -301,7 +301,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_BvDID 
+			variable FPS_VAR_BvDID
 			{
 				datatype: string;
 				frequency: document;
@@ -310,7 +310,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Telefoon 
+			variable FPS_VAR_Telefoon
 			{
 				datatype: string;
 				frequency: document;
@@ -319,7 +319,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable FPS_VAR_Emailadres 
+			variable FPS_VAR_Emailadres
 			{
 				datatype: string;
 				frequency: document;
@@ -327,7 +327,7 @@ model KAM uses BaseModel
 				title: "Emailadres";
 				visible: 1;
 				options_title: locked;
-				variable FPS_FINAN_USER_ROLES 
+				variable FPS_FINAN_USER_ROLES
 				{
 					datatype: string;
 					frequency: document;
@@ -337,7 +337,7 @@ model KAM uses BaseModel
 					visible: 1;
 					options_title: locked;
 				}
-				variable FPS_FINAN_USER 
+				variable FPS_FINAN_USER
 				{
 					datatype: string;
 					frequency: document;
@@ -348,7 +348,7 @@ model KAM uses BaseModel
 				}
 			}
 		}
-		variable ImportVariables 
+		variable ImportVariables
 		{
 			datatype: number;
 			frequency: document;
@@ -360,7 +360,7 @@ model KAM uses BaseModel
 			options_title: locked;
 			options_notrend: locked;
 			options_trend: locked;
-			variable CashflowFromOperatingActivities 
+			variable CashflowFromOperatingActivities
 			{
 				datatype: number;
 				aggregation: flow;
@@ -371,7 +371,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable DecreaseNetWorkingCapital 
+			variable DecreaseNetWorkingCapital
 			{
 				datatype: number;
 				aggregation: flow;
@@ -9623,7 +9623,7 @@ model KAM uses BaseModel
 					options_trend: locked;
 				}
 			}
-			variable Q_STATUS 
+			variable Q_STATUS
 			{
 				datatype: number;
 				frequency: document;
@@ -9636,7 +9636,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_NEXT_BUTTON_VISIBLE 
+			variable Q_NEXT_BUTTON_VISIBLE
 			{
 				datatype: number;
 				frequency: document;
@@ -9646,7 +9646,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_PREVIOUS_BUTTON_VISIBLE 
+			variable Q_PREVIOUS_BUTTON_VISIBLE
 			{
 				datatype: number;
 				frequency: document;
@@ -9656,7 +9656,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_CONCEPT_REPORT_VISIBLE 
+			variable Q_CONCEPT_REPORT_VISIBLE
 			{
 				datatype: number;
 				frequency: document;
@@ -9666,7 +9666,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_FINAL_REPORT_VISIBLE 
+			variable Q_FINAL_REPORT_VISIBLE
 			{
 				datatype: number;
 				frequency: document;
@@ -9676,7 +9676,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_MAKE_FINAL_VISIBLE 
+			variable Q_MAKE_FINAL_VISIBLE
 			{
 				datatype: number;
 				frequency: document;
@@ -9686,7 +9686,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_STATUS_FINAL_ON 
+			variable Q_STATUS_FINAL_ON
 			{
 				datatype: number;
 				frequency: document;
@@ -9697,7 +9697,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_STATUS_FINAL_BY 
+			variable Q_STATUS_FINAL_BY
 			{
 				datatype: string;
 				frequency: document;
@@ -9706,7 +9706,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_STATUS_STARTED_ON 
+			variable Q_STATUS_STARTED_ON
 			{
 				datatype: number;
 				frequency: document;
@@ -9717,7 +9717,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_STATUS_STARTED_BY 
+			variable Q_STATUS_STARTED_BY
 			{
 				datatype: string;
 				frequency: document;
@@ -9726,7 +9726,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_STATUS_MODIFIED_ON 
+			variable Q_STATUS_MODIFIED_ON
 			{
 				datatype: number;
 				frequency: document;
@@ -9738,7 +9738,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_ModelVersion 
+			variable Q_ModelVersion
 			{
 				datatype: string;
 				frequency: document;
@@ -9751,7 +9751,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable Q_ModelType 
+			variable Q_ModelType
 			{
 				datatype: string;
 				frequency: document;
@@ -9764,7 +9764,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable Q_MatrixVersion 
+			variable Q_MatrixVersion
 			{
 				datatype: string;
 				frequency: document;
@@ -9776,7 +9776,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable Hulpvariabelen 
+			variable Hulpvariabelen
 			{
 				datatype: none;
 				frequency: document;
@@ -9787,7 +9787,7 @@ model KAM uses BaseModel
 				visible: 1;
 				options_title: locked;
 			}
-			variable Q_WARNING_GLOBAL 
+			variable Q_WARNING_GLOBAL
 			{
 				datatype: string;
 				frequency: document;
@@ -9800,7 +9800,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable scKnockoutsCombi 
+			variable scKnockoutsCombi
 			{
 				datatype: string;
 				frequency: document;
@@ -9813,7 +9813,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable scRestricties 
+			variable scRestricties
 			{
 				datatype: string;
 				frequency: document;
@@ -9827,7 +9827,7 @@ model KAM uses BaseModel
 				options_notrend: locked;
 				options_trend: locked;
 			}
-			variable scRestrictiesCombi 
+			variable scRestrictiesCombi
 			{
 				datatype: string;
 				frequency: document;
