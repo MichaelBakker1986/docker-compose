@@ -28,6 +28,7 @@ const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
 const ExcelConnect = require('../excel-connect/').xlsxLookup;
 const fileUpload = require('express-fileupload');
+const DockerImageBuilder = require('./src/DockerImageBuilder')
 const fs = require('fs')
 browserify.settings({
     transform: [require('browserify-fastjson')]
@@ -163,8 +164,42 @@ app.get('*/readExcel/:model', function(req, res) {
     })
 })
 /**
- * TODO: add commit
+ * Test the distribution
+ * Stash all given data.
+ * Tag the version
+ * Build image
+ * Publish to nexus
  */
+app.post('*/:user_id/publishDockerImage/:model_name', function(req, res) {
+    const model_name = req.params.model_name;
+    const user_id = req.params.user_id;
+
+    stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then((data) => {
+        ExcelConnect.initComplete(model_name).then(function(matrix) {
+            stash.commit(user_id, model_name, req.body.fflData, null).then((data) => {
+                new DockerImageBuilder(model_name, null, null, null).buildDockerImage()
+                return res.json({
+                    version: 1,
+                    status: 'ok',
+                    model_name: model_name
+                })
+            }).catch((err) => {
+                log.debug('Failed to write ' + model_name + '.ffl file.', err)
+                return res.json({
+                    status: 'fail',
+                    message: 'Failed to write ' + model_name + '.ffl',
+                    reason: err.toString()
+                });
+            })
+        }).catch(function(err) {
+            return res.status(400).json({status: 'fail', reason: err.toString()});
+        })
+    }).catch((err) => {
+        log.debug('Failed to write ' + model_name + '.ffl file.', err.toString())
+        return res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
+    })
+})
+/** * TODO: add commit to stash */
 app.post('*/excel/:model', function(req, res) {
     const modelName = req.params.model;
     if (!req.files) {

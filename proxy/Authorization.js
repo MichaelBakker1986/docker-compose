@@ -215,6 +215,7 @@ class Authorization {
         this.allow(id, "/scorecard.html", VIEW_RULE)
         this.allow(id, "/resources/lme_docs.pdf", VIEW_RULE)
         this.allow(id, "/readExcel/" + modelname, VIEW_RULE)
+        this.allow(id, "/publishDockerImage/" + modelname, VIEW_RULE)
         //allow generic rest-api outputnode  (same name as model_name)
         anonymous['/figure/' + modelname] = true;
     }

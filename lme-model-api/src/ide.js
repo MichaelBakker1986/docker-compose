@@ -98,7 +98,15 @@ angular.module('lmeapp', ['angular.filter'])
         var sidebaropen = false;
         var hideSideBar = true;
         $scope.publishDockerImage = function() {
-            $scope.toggleSideBarUsed()
+            Pace.track(function() {
+                $.post("publishDockerImage/" + $scope.session.fflModelPath, {
+                    story: right_editor.getValue(),
+                    matrix: matrixManager.toFatrix(),
+                    fflData: fflEditor.getValue()
+                }, function(data) {
+                    console.info('Done')
+                });
+            });
         }
         $scope.toggleSideBarUsed = function() {
             hideSideBar = !hideSideBar;
