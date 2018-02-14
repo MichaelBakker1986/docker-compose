@@ -69,9 +69,10 @@ const functionMapper = {
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
         call: function(workbook, linenumber, line, args) {
-            const variableName = args[0], tupleIndexName = args[1], decimals = args[3], value = args[4],
+            //default decimals are defined by the ammount of decimals in the value.
+            const variableName = args[0], tupleIndexName = args[1], decimals = (args[3]||args[4].split('.')[1].length), value = args[4],
                 columnId = (parseInt(args[5]) || 1) - 1
-            return [function() {
+                        return [function() {
                 const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
                 const rawValue = workbook.get(variableName, 'value', columnId, yas);
