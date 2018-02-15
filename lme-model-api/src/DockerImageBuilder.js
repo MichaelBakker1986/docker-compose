@@ -1,6 +1,8 @@
 /**
  * build docker image and publish to Registry
  */
+const log = require('log6')
+
 function DockerImageBuilder(fflModel, story, matrix) {
     this.fflModel = fflModel
     this.story = story
@@ -8,6 +10,6 @@ function DockerImageBuilder(fflModel, story, matrix) {
 }
 
 DockerImageBuilder.prototype.buildDockerImage = function() {
-    console.info('Start build image')
+    log.info('Start build image')
 }
 module.exports = DockerImageBuilder

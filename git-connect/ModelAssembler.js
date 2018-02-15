@@ -27,8 +27,8 @@ exports.started = ORM.orm.then(function() {
                 nodes.push(node)
             }
             return {
-                schema: schema,
-                nodes: nodes,
+                schema   : schema,
+                nodes    : nodes,
                 constants: constants
             }
         }).catch(function(err) {

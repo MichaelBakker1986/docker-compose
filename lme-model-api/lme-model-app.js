@@ -19,10 +19,10 @@ app.use(require('compression')())
 app.use(require('cors')())
 app.set('port', port)
 app.set('host', host)
-app.use(bodyParser.json({limit: '50mb'}));       // to support JSON-encoded bodies
+app.use(bodyParser.json({ limit: '50mb' }));       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true,
-    limit: '50mb'
+    limit   : '50mb'
 }));
 const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
@@ -34,75 +34,75 @@ browserify.settings({
     transform: [require('browserify-fastjson')]
 })
 app.get('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
-    gzip: true,
+    gzip         : true,
     insertGlobals: true,
-    debug: false
+    debug        : false
 }));
 app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
-    cache: true,
-    gzip: true,
+    cache        : true,
+    gzip         : true,
     insertGlobals: true,
-    debug: false,
-    minify: true,
-    precompile: true
+    debug        : false,
+    minify       : true,
+    precompile   : true
 }));
 app.get('*/ide.js', browserify(__dirname + '/src/ide.js', {
-    gzip: true,
+    gzip         : true,
     insertGlobals: true,
-    debug: false
+    debug        : false
 }));
 app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
-    gzip: true,
+    gzip         : true,
     insertGlobals: true,
-    debug: false
+    debug        : false
 }));
 app.post('*/:user_id/preview/:model_name', (req, res) => {
     const model_name = req.params.model_name;
     const user_id = req.params.user_id;
     stash.preview(user_id, model_name, req.body.data).then((data) => {
         res.set('x-auth-id', data + ".ffl");
-        res.json({status: 'ok', link: data});
+        res.json({ status: 'ok', link: data });
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err)
-        res.json({status: 'fail', reason: err.toString()});
+        res.json({ status: 'fail', reason: err.toString() });
     })
 });
 app.get('*/model', (req, res) => {
     var name = req.query.model;
     DBModel.getModel(name).then((data) => {
-        res.json({status: 'success', data: data});
+        res.json({ status: 'success', data: data });
     }).catch((err) => {
         log.debug('Failed to fetch model from database', err)
-        res.json({status: 'fail', reason: err.toString()});
+        res.json({ status: 'fail', reason: err.toString() });
     })
 });
 app.get('*/modelChanges/:model_name', (req, res) => {
     const model_name = req.params.model_name;
     DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
-        res.json({status: 'success', data: data});
+        res.json({ status: 'success', data: data });
     }).catch((err) => {
         log.debug('Failed to fetch model changes from database', err)
-        res.json({status: 'fail', reason: err.toString()});
+        res.json({ status: 'fail', reason: err.toString() });
     })
 });
 app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
     const model_name = req.params.model_name;
     const user_id = req.params.user_id;
     stash.commit(user_id, model_name, req.body.data, req.body.type).then((data) => {
-        res.json({status: 'ok'});
+        res.json({ status: 'ok' });
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err)
-        res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
+        res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() });
     })
 });
 app.post('*/:user_id/saveJBehaveStory/:model_name', (req, res) => {
     const model_name = req.params.model_name;
     const user_id = req.params.user_id;
     stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then((data) => {
-        res.json({status: 'ok'});
+        res.json({ status: 'ok' });
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err)
-        res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
+        res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() });
     })
 });
 
@@ -132,7 +132,6 @@ app.get('*/tmp_model/:model', (req, res) => {
     })
 });
 
-
 // default options
 app.use(fileUpload());
 const path = require('path')
@@ -152,7 +151,7 @@ app.get('*/excel/:model', function(req, res) {
 })
 app.post('*/upload', function(req, res) {
     console.info('upload')
-    res.status(200).json({status: 'ok'})
+    res.status(200).json({ status: 'ok' })
 })
 
 app.get('*/readExcel/:model', function(req, res) {
@@ -160,7 +159,7 @@ app.get('*/readExcel/:model', function(req, res) {
     ExcelConnect.initComplete(modelName).then(function(matrix) {
         res.json(matrix)
     }).catch(function(err) {
-        return res.status(400).json({status: 'fail', reason: err.toString()});
+        return res.status(400).json({ status: 'fail', reason: err.toString() });
     })
 })
 /**
@@ -179,24 +178,24 @@ app.post('*/:user_id/publishDockerImage/:model_name', function(req, res) {
             stash.commit(user_id, model_name, req.body.fflData, null).then((data) => {
                 new DockerImageBuilder(model_name, null, null, null).buildDockerImage()
                 return res.json({
-                    version: 1,
-                    status: 'ok',
+                    version   : 1,
+                    status    : 'ok',
                     model_name: model_name
                 })
             }).catch((err) => {
                 log.debug('Failed to write ' + model_name + '.ffl file.', err)
                 return res.json({
-                    status: 'fail',
+                    status : 'fail',
                     message: 'Failed to write ' + model_name + '.ffl',
-                    reason: err.toString()
+                    reason : err.toString()
                 });
             })
         }).catch(function(err) {
-            return res.status(400).json({status: 'fail', reason: err.toString()});
+            return res.status(400).json({ status: 'fail', reason: err.toString() });
         })
     }).catch((err) => {
         log.debug('Failed to write ' + model_name + '.ffl file.', err.toString())
-        return res.json({status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString()});
+        return res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() });
     })
 })
 /** * TODO: add commit to stash */
@@ -204,7 +203,7 @@ app.post('*/excel/:model', function(req, res) {
     const modelName = req.params.model;
     if (!req.files) {
         log.debug('Failed to write ' + modelName + '.xlsx file.', err)
-        return res.status(400).json({status: 'fail', reason: 'No files were uploaded.'});
+        return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' });
     }
 
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
@@ -214,9 +213,9 @@ app.post('*/excel/:model', function(req, res) {
     excelfile.mv(__dirname + '/../git-connect/resources/' + modelName + '.xlsx', function(err) {
         if (err) {
             log.debug('Failed to write ' + modelName + '.xlsx file.', err)
-            return res.status(400).json({status: 'fail', reason: 'No files were uploaded.'});
+            return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' });
         }
-        res.json({status: 'ok'});
+        res.json({ status: 'ok' });
     });
 });
 require('./api-def').setup(app)

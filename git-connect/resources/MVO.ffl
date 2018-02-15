@@ -621,7 +621,6 @@ model MVO uses BaseModel
      locked: 1;
      display_options: displayAsSummation;
      fixed_decimals: 1;
-     top_separator: 1;
     }
    }
    variable Q_MAP03_PARAGRAAF11
@@ -656,7 +655,6 @@ model MVO uses BaseModel
      locked: 1;
      display_options: displayAsSummation;
      fixed_decimals: 1;
-     top_separator: 1;
     }
    }
    variable Q_MAP03_PARAGRAAF10
@@ -715,7 +713,6 @@ model MVO uses BaseModel
      locked: 1;
      display_options: displayAsSummation;
      fixed_decimals: 1;
-     top_separator: 1;
     }
    }
    variable Q_MAP03_PARAGRAAF00
@@ -1595,7 +1592,6 @@ model MVO uses BaseModel
      title: "Principes";
      locked: 1;
      displaytype: currency;
-     top_separator: 1;
     }
    }
    variable Q_MAPRESULT_PARAGRAAF02
@@ -1685,7 +1681,6 @@ model MVO uses BaseModel
      locked: 1;
      displaytype: currency;
      display_options: displayAsSummation;
-     top_separator: 1;
     }
    }
    variable Q_MAPRESULT_PARAGRAAF04
@@ -1727,7 +1722,6 @@ model MVO uses BaseModel
      locked: 1;
      displaytype: currency;
      display_options: displayAsSummation;
-     top_separator: 1;
     }
    }
   }
