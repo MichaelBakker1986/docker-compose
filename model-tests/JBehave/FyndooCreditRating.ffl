@@ -1,0 +1,1976 @@
+model FyndooCreditRating uses BaseModel
+{
+ variable CreditRatingScorecard
+ {
+  display_options: scorecard;
+  variable Input
+  {
+   datatype: number;
+   frequency: column;
+   aggregation: balance;
+   data_options: Input;
+   title: "SimpleDataEntryFolder";
+   options_title: locked;
+   display_options: showColumnTitlesAboveSubVars;
+   locked: 1;
+   variable sdeGoodWill
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeGoodWill";
+    top_blanklines: 1;
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeReceivablesShareholders
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeReceivablesShareholders";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeDeferredTaxesAssets
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeDeferredTaxesAssets";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeEquity
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeEquity";
+    top_blanklines: 1;
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeResultForTheYear
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeResultForTheYear";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeVarCapLimitedPartners
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeVarCapLimitedPartners";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeProvisions
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "$sdeProvisions";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLiabilitiesLong
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLiabilitiesLong";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLiabilitiesBankLong
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLiabilitiesLong";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLongTradePayables
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLongTradePayables";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLongReceivedAdvanceOrdersCurrent
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLongReceivedAdvanceOrdersCurrent";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLiabilitiesToShareholdersOver5Y
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLiabilitiesToShareholdersOver5Y";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLiabilitiesShort
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "$sdeLiabilitiesShort";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeLiabilitiesBankShort
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeLiabilitiesBankShort";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeTradePayables
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeTradePayables";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeReceivedAdvanceOrdersCurrent
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeReceivedAdvanceOrdersCurrent";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeShortShareholderPayables
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeShortShareholderPayables";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeBalanceSheetTotal
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "sdeBalanceSheetTotal";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
+    formula_trend: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
+    top_separator: 1;
+    display_options: displayAsSummation;
+    bottom_separator: 2;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+   }
+   variable sdeSales
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeSales";
+    top_blanklines: 1;
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeDepreciation
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeDepreciation";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeResultCorrections
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeResultCorrections";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeEBIT
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeEBIT";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeInterestEarnings
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeInterestEarnings";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeInterestExpenses
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeInterestExpenses";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeParticipationEarnings
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeParticipationEarnings";
+    visible: 1;
+    options_title: locked;
+   }
+   variable sdeEntrepreneurFeeOutsideResult
+   {
+    aggregation: flow;
+    displaytype: currency;
+    title: "sdeEntrepreneurFeeOutsideResult";
+    visible: 1;
+    options_title: locked;
+   }
+  }
+  variable FyndooCreditRating
+  {
+   data_options: Output;
+   frequency: document;
+   title: "FyndooCreditRating";
+   options_title: locked;
+   display_options: showColumnTitlesAboveSubVars;
+   locked: 1;
+   variable URAPD refers to krPD
+   {
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Probability of default";
+    top_blanklines: 2;
+    visible: 1;
+    options_title: locked;
+    display_options: hideFormulas;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 3;
+   }
+   variable URARatingClass refers to krUraRatingKlasse
+   {
+    datatype: string;
+    aggregation: balance;
+    title: "URA Rating class";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable URATrafficLight refers to krUraAmpel
+   {
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 0;
+   }
+   variable URATrafficLightD refers to krUraAmpelD
+   {
+    datatype: string;
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable URATrafficLightDNL refers to krUraAmpelDNL
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable IFDRatingClass refers to krIfdRatingKlasse
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "IFD $>Ratingklasse<$";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation;
+   }
+   variable IFDRatingClassD refers to krIfdRatingKlasseD
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "IFD $>Ratingklasse<$";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable R1_ShareOfOrdinaryResult refers to krAnteilOrdentlichenErgebnisses
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Share of ordinary result";
+    visible: 1;
+    options_title: locked;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable R1_P1_OrdinaryResult refers to krOrdentlichesErgebnis
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "Ordinary result";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R1_P2_NetBalanceSheetTotalForTheRating refers to krNettoBilanzsummeRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Net balance sheet total for the rating";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+   }
+   variable R2_QuotaOfBankAndSuppliers refers to krBankUndLieferantenanteil
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Quota of bank and suppliers";
+    visible: 1;
+    options_title: locked;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable R2_P1_AmountsDueToBanksAndSuppliers refers to krBankUndLieferantenverbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Amounts due to banks and suppliers";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R2_P2_NetBalanceSheetTotalForTheRating refers to krNettoBilanzsummeRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Net balance sheet total for the rating";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+   }
+   variable R3_InterestRateOnBorrowings refers to krFremdKapitalzinslast
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Interest rate on borrowings";
+    visible: 1;
+    options_title: locked;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable R3_P1_InteresExpenseExlcudingDiscountingOfProfisions refers to krZinsen
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "Interest expense excluding discounting of provisions";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R3_P2_Liabilities refers to krVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Liabilities";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+   }
+   variable R4_ShareOfShortTermLiabilities refers to krAnteilKurzfristigeVerbindlichkeiten
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Share of short-term liabilities";
+    visible: 1;
+    options_title: locked;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable R4_P1_ShortTermLiabilities refers to krKurzfristigeVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Short-term liabilities";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R4_P2_Sales refers to krUmsatzerloese
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "Sales";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+   }
+   variable R5_ShareOfOwnResources refers to krAnteilEigenmittel
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Share of own resources";
+    visible: 1;
+    options_title: locked;
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable R5_P1_RatingOrientatedBusinessEquity refers to krWirtschaftlichesEigenKapitalRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Rating orientated, business equity";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+    variable R5_P2_RatingOrientedBalanceSheetTotal refers to krRatingorientierteBilanzsumme
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "Rating orientated balance sheet total";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+    }
+   }
+  }
+  variable RatioFolder
+  {
+   datatype: number;
+   frequency: column;
+   aggregation: balance;
+   displaytype: currency;
+   title: "$>Rating Ratios<$";
+   visible: 0;
+   options_title: locked, invisible;
+   display_options: showColumnTitlesAboveSubVars;
+   locked: 1;
+   options_notrend: locked, invisible;
+   options_trend: locked, invisible;
+   variable sdePD refers to krPD
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Probability of default";
+    top_blanklines: 2;
+    visible: 1;
+    options_title: locked;
+    display_options: hideFormulas;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 3;
+   }
+   variable sdeURARatingKlasse refers to krUraRatingKlasse
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "URA Rating class";
+    visible: 1;
+    options_title: locked;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable krAnteilOrdentlichenErgebnisses
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "$>Anteil des ordentlichen Ergebnisses<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: OnER(If(krNettoBilanzsummeRating<0,NA,GetValue(krOrdentlichesErgebnis,T,1)/krNettoBilanzsummeRating),NA);
+    formula_trend: OnER(If(krNettoBilanzsummeRating<0,NA,GetValue(krOrdentlichesErgebnis,T,1)/krNettoBilanzsummeRating),NA);
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable krOrdentlichesErgebnis
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "$>Ordentliches Ergebnis<$";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeEBIT+sdeParticipationEarnings+sdeInterestEarnings-sdeInterestExpenses+sdeDepreciation-sdeResultCorrections-sdeEntrepreneurFeeOutsideResult;
+     formula_trend: sdeEBIT+sdeParticipationEarnings+sdeInterestEarnings-sdeInterestExpenses+sdeDepreciation-sdeResultCorrections-sdeEntrepreneurFeeOutsideResult;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krOrdentlichesErgebnisSub1 refers to sdeEBIT
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeEBIT";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeEBIT;
+     }
+     variable +krOrdentlichesErgebnisSub2 refers to sdeParticipationEarnings
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeParticipationEarnings";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeParticipationEarnings;
+     }
+     variable +krOrdentlichesErgebnisSub3 refers to sdeInterestEarnings
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeInterestEarnings";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeInterestEarnings;
+     }
+     variable -krOrdentlichesErgebnisSub4 refers to sdeInterestExpenses
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeInterestExpenses";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeInterestExpenses;
+     }
+     variable +krOrdentlichesErgebnisSub5 refers to sdeDepreciation
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeDepreciation";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeDepreciation;
+     }
+     variable -krOrdentlichesErgebnisSub6 refers to sdeResultCorrections
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeResultCorrections";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeResultCorrections;
+     }
+     variable -krOrdentlichesErgebnisSub7 refers to sdeEntrepreneurFeeOutsideResult
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeEntrepreneurFeeOutsideResult";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeEntrepreneurFeeOutsideResult;
+     }
+     variable krOrdentlichesErgebnisSub8 refers to krOrdentlichesErgebnis
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "$>Ordentliches Ergebnis<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krNettoBilanzsummeRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Netto Bilanzsumme f?r das Rating<$";
+     visible: 1;
+     options_title: locked;
+     formula_notrend: krNettoBilanzsummeRatingSub7-sdeLongReceivedAdvanceOrdersCurrent-sdeReceivedAdvanceOrdersCurrent;
+     formula_trend: krNettoBilanzsummeRatingSub7-sdeLongReceivedAdvanceOrdersCurrent-sdeReceivedAdvanceOrdersCurrent;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krNettoBilanzsummeRatingSub1 refers to krWirtschaftlichesEigenkapital
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Wirtschaftliches Eigenkapital<$";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: krWirtschaftlichesEigenkapital;
+     }
+     variable +krNettoBilanzsummeRatingSub2 refers to sdeResultForTheYear
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeResultForTheYear";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeResultForTheYear;
+     }
+     variable +krNettoBilanzsummeRatingSub3 refers to sdeVarCapLimitedPartners
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeVarCapLimitedPartners";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeVarCapLimitedPartners;
+     }
+     variable +krNettoBilanzsummeRatingSub4 refers to sdeProvisions
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$sdeProvisions";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeProvisions;
+     }
+     variable +krNettoBilanzsummeRatingSub5 refers to sdeLiabilitiesLong
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLiabilitiesLong";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesLong;
+     }
+     variable +krNettoBilanzsummeRatingSub6 refers to sdeLiabilitiesShort
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$sdeLiabilitiesShort";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable krNettoBilanzsummeRatingSub7
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Netto Bilanzsumme<$";
+      visible: 1;
+      options_title: locked;
+      formula_notrend: krWirtschaftlichesEigenkapital+sdeResultForTheYear+sdeVarCapLimitedPartners+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
+      formula_trend: krWirtschaftlichesEigenkapital+sdeResultForTheYear+sdeVarCapLimitedPartners+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable -krNettoBilanzsummeRatingSub8 refers to sdeLongReceivedAdvanceOrdersCurrent
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLongReceivedAdvanceOrdersCurrent";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLongReceivedAdvanceOrdersCurrent;
+     }
+     variable -krNettoBilanzsummeRatingSub9 refers to sdeReceivedAdvanceOrdersCurrent
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeReceivedAdvanceOrdersCurrent";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeReceivedAdvanceOrdersCurrent;
+     }
+     variable krNettoBilanzsummeRatingSub10 refers to krNettoBilanzsummeRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Netto Bilanzsumme f?r das Rating<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krAnteilOrdentlichenErgebnissesSub3 refers to krAnteilOrdentlichenErgebnisses
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: percentage;
+     title: "$>Anteil des ordentlichen Ergebnisses<$";
+     visible: 1;
+     options_title: locked;
+     top_separator: 1;
+     display_options: displayAsSummation;
+     bottom_separator: 2;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 2;
+    }
+   }
+   variable krBankUndLieferantenanteil
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "$>Bank- und Lieferantenanteil<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: OnER(OnNA(krBankUndLieferantenverbindlichkeiten,0)/krNettoBilanzsummeRating,NA);
+    formula_trend: OnER(OnNA(krBankUndLieferantenverbindlichkeiten,0)/krNettoBilanzsummeRating,NA);
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable krBankUndLieferantenverbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Bank- und Lieferantenverbindlichkeiten<$";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeLiabilitiesBankLong+sdeLongTradePayables+sdeLiabilitiesBankShort+sdeTradePayables;
+     formula_trend: sdeLiabilitiesBankLong+sdeLongTradePayables+sdeLiabilitiesBankShort+sdeTradePayables;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krBankUndLieferantenverbindlichkeitenSub1 refers to sdeLiabilitiesBankLong
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLiabilitiesLong";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesBankLong;
+     }
+     variable +krBankUndLieferantenverbindlichkeitenSub2 refers to sdeLongTradePayables
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLongTradePayables";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLongTradePayables;
+     }
+     variable +krBankUndLieferantenverbindlichkeitenSub3 refers to sdeLiabilitiesBankShort
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLiabilitiesBankShort";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesBankShort;
+     }
+     variable +krBankUndLieferantenverbindlichkeitenSub4 refers to sdeTradePayables
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeTradePayables";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeTradePayables;
+     }
+     variable krBankUndLieferantenverbindlichkeitenSub5 refers to krBankUndLieferantenverbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Bank- und Lieferantenverbindlichkeiten<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krBankUndLieferantenanteilSub2 refers to krNettoBilanzsummeRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Netto Bilanzsumme f?r das Rating<$";
+     visible: 1;
+     options_title: locked;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     link: krNettoBilanzsummeRatingSub10;
+    }
+    variable krBankUndLieferantenanteilSub3 refers to krBankUndLieferantenanteil
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: percentage;
+     title: "$>Bank- und Lieferantenanteil<$";
+     visible: 1;
+     options_title: locked;
+     top_separator: 1;
+     display_options: displayAsSummation;
+     bottom_separator: 2;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 2;
+    }
+   }
+   variable krFremdKapitalzinslast
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "$>Fremdkapitalzinslast<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: OnER(Max(OnNA(GetValue(krZinsen,T,1),0),0)/Max(krVerbindlichkeiten,0),0);
+    formula_trend: OnER(Max(OnNA(GetValue(krZinsen,T,1),0),0)/Max(krVerbindlichkeiten,0),0);
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable krZinsen
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "$>Zinsaufwand ohne Abzinsung von R?ckstellungen<$";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeInterestExpenses;
+     formula_trend: sdeInterestExpenses;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krZinsenSub1 refers to sdeInterestExpenses
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeInterestExpenses";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeInterestExpenses;
+     }
+     variable krZinsenSub2 refers to krZinsen
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "$>Zinsaufwand ohne Abzinsung von R?ckstellungen<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Verbindlichkeiten<$";
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeLiabilitiesLong+sdeLiabilitiesShort+sdeResultForTheYear+sdeVarCapLimitedPartners-sdeLongReceivedAdvanceOrdersCurrent-sdeReceivedAdvanceOrdersCurrent;
+     formula_trend: sdeLiabilitiesLong+sdeLiabilitiesShort+sdeResultForTheYear+sdeVarCapLimitedPartners-sdeLongReceivedAdvanceOrdersCurrent-sdeReceivedAdvanceOrdersCurrent;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krVerbindlichkeitenSub1 refers to sdeLiabilitiesLong
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLiabilitiesLong";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesLong;
+     }
+     variable +krVerbindlichkeitenSub2 refers to sdeLiabilitiesShort
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$sdeLiabilitiesShort";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable +krVerbindlichkeitenSub3 refers to sdeResultForTheYear
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeResultForTheYear";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeResultForTheYear;
+     }
+     variable +krVerbindlichkeitenSub4 refers to sdeVarCapLimitedPartners
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeVarCapLimitedPartners";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeVarCapLimitedPartners;
+     }
+     variable -krVerbindlichkeitenSub5 refers to sdeLongReceivedAdvanceOrdersCurrent
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLongReceivedAdvanceOrdersCurrent";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLongReceivedAdvanceOrdersCurrent;
+     }
+     variable -krVerbindlichkeitenSub6 refers to sdeReceivedAdvanceOrdersCurrent
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeReceivedAdvanceOrdersCurrent";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeReceivedAdvanceOrdersCurrent;
+     }
+     variable krVerbindlichkeitenSub7 refers to krVerbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Verbindlichkeiten<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krFremdKapitalzinslastSub3 refers to krFremdKapitalzinslast
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: percentage;
+     title: "$>Fremdkapitalzinslast<$";
+     visible: 1;
+     options_title: locked;
+     top_separator: 1;
+     display_options: displayAsSummation;
+     bottom_separator: 2;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 2;
+    }
+   }
+   variable krAnteilKurzfristigeVerbindlichkeiten
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "$>Anteil kurzfristige Verbindlichkeiten<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: OnER(OnNA(krKurzfristigeVerbindlichkeiten,0)/GetValue(krUmsatzerloese,T,1),0);
+    formula_trend: OnER(OnNA(krKurzfristigeVerbindlichkeiten,0)/GetValue(krUmsatzerloese,T,1),0);
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable krKurzfristigeVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Kurzfristige Verbindlichkeiten<$";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeResultForTheYear+sdeVarCapLimitedPartners+sdeLiabilitiesShort-sdeReceivedAdvanceOrdersCurrent-sdeShortShareholderPayables;
+     formula_trend: sdeResultForTheYear+sdeVarCapLimitedPartners+sdeLiabilitiesShort-sdeReceivedAdvanceOrdersCurrent-sdeShortShareholderPayables;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krKurzfristigeVerbindlichkeitenSub1 refers to sdeResultForTheYear
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeResultForTheYear";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeResultForTheYear;
+     }
+     variable +krKurzfristigeVerbindlichkeitenSub2 refers to sdeVarCapLimitedPartners
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeVarCapLimitedPartners";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeVarCapLimitedPartners;
+     }
+     variable +krKurzfristigeVerbindlichkeitenSub3 refers to sdeLiabilitiesShort
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$sdeLiabilitiesShort";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesShort;
+     }
+     variable -krKurzfristigeVerbindlichkeitenSub4 refers to sdeReceivedAdvanceOrdersCurrent
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeReceivedAdvanceOrdersCurrent";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeReceivedAdvanceOrdersCurrent;
+     }
+     variable -krKurzfristigeVerbindlichkeitenSub5 refers to sdeShortShareholderPayables
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeShortShareholderPayables";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeShortShareholderPayables;
+     }
+     variable krKurzfristigeVerbindlichkeitenSub6 refers to krKurzfristigeVerbindlichkeiten
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Kurzfristige Verbindlichkeiten<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krUmsatzerloese
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: flow;
+     displaytype: currency;
+     title: "$>Umsatzerl?se / Ertr?ge<$";
+     visible: 1;
+     options_title: locked;
+     formula_notrend: sdeSales;
+     formula_trend: sdeSales;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krUmsatzerloeseSub1 refers to sdeSales
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "sdeSales";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeSales;
+     }
+     variable krUmsatzerloeseSub2 refers to krUmsatzerloese
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: flow;
+      displaytype: currency;
+      title: "$>Umsatzerl?se / Ertr?ge<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krAnteilKurzfristigeVerbindlichkeitenSub3 refers to krAnteilKurzfristigeVerbindlichkeiten
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: percentage;
+     title: "$>Anteil kurzfristige Verbindlichkeiten<$";
+     visible: 1;
+     options_title: locked;
+     top_separator: 1;
+     display_options: displayAsSummation;
+     bottom_separator: 2;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 2;
+    }
+   }
+   variable krAnteilEigenmittel
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "$>Anteil Eigenmittel<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: OnER(If((krWirtschaftlichesEigenKapitalRating<0) and (krRatingorientierteBilanzsumme<0),-krWirtschaftlichesEigenKapitalRating/krRatingorientierteBilanzsumme,krWirtschaftlichesEigenKapitalRating/krRatingorientierteBilanzsumme),NA);
+    formula_trend: OnER(If((krWirtschaftlichesEigenKapitalRating<0) and (krRatingorientierteBilanzsumme<0),-krWirtschaftlichesEigenKapitalRating/krRatingorientierteBilanzsumme,krWirtschaftlichesEigenKapitalRating/krRatingorientierteBilanzsumme),NA);
+    display_options: showColumnTitlesAboveSubVars;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+    fixed_decimals: 2;
+    variable krWirtschaftlichesEigenKapitalRating
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Ratingorientiertes, wirtschaftliches Eigenkapital<$";
+     top_blanklines: 1;
+     visible: 1;
+     options_title: locked;
+     formula_notrend: krWirtschaftlichesEigenkapital-sdeGoodWill-sdeReceivablesShareholders-sdeDeferredTaxesAssets+sdeLiabilitiesToShareholdersOver5Y;
+     formula_trend: krWirtschaftlichesEigenkapital-sdeGoodWill-sdeReceivablesShareholders-sdeDeferredTaxesAssets+sdeLiabilitiesToShareholdersOver5Y;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krWirtschaftlichesEigenKapitalRatingSub1 refers to sdeEquity
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeEquity";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeEquity;
+     }
+     variable krBilanziellesEigenkapitalBrutto
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Bilanzielles Eigenkapital Brutto (ohne Abzug Sonderposten f?r Verluste etc)<$";
+      visible: 1;
+      options_title: locked;
+      formula_notrend: sdeEquity;
+      formula_trend: sdeEquity;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable -krWirtschaftlichesEigenKapitalRatingSub3 refers to sdeResultForTheYear
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeResultForTheYear";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeResultForTheYear;
+     }
+     variable -krWirtschaftlichesEigenKapitalRatingSub4 refers to sdeVarCapLimitedPartners
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeVarCapLimitedPartners";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeVarCapLimitedPartners;
+     }
+     variable krWirtschaftlichesEigenkapital
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Wirtschaftliches Eigenkapital<$";
+      visible: 1;
+      options_title: locked;
+      formula_notrend: krBilanziellesEigenkapitalBrutto-sdeResultForTheYear-sdeVarCapLimitedPartners;
+      formula_trend: krBilanziellesEigenkapitalBrutto-sdeResultForTheYear-sdeVarCapLimitedPartners;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable -krWirtschaftlichesEigenKapitalRatingSub6 refers to sdeGoodWill
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeGoodWill";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeGoodWill;
+     }
+     variable -krWirtschaftlichesEigenKapitalRatingSub7 refers to sdeReceivablesShareholders
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeReceivablesShareholders";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeReceivablesShareholders;
+     }
+     variable -krWirtschaftlichesEigenKapitalRatingSub8 refers to sdeDeferredTaxesAssets
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeDeferredTaxesAssets";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeDeferredTaxesAssets;
+     }
+     variable +krWirtschaftlichesEigenKapitalRatingSub9 refers to sdeLiabilitiesToShareholdersOver5Y
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeLiabilitiesToShareholdersOver5Y";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeLiabilitiesToShareholdersOver5Y;
+     }
+     variable krWirtschaftlichesEigenKapitalRatingSub10 refers to krWirtschaftlichesEigenKapitalRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Ratingorientiertes, wirtschaftliches Eigenkapital<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krRatingorientierteBilanzsumme
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: currency;
+     title: "$>Ratingorientierte Bilanzsumme<$";
+     visible: 1;
+     options_title: locked;
+     formula_notrend: krNettoBilanzsummeRating-sdeGoodWill-sdeReceivablesShareholders-sdeDeferredTaxesAssets;
+     formula_trend: krNettoBilanzsummeRating-sdeGoodWill-sdeReceivablesShareholders-sdeDeferredTaxesAssets;
+     display_options: showColumnTitlesAboveSubVars;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     variable +krRatingorientierteBilanzsummeSub1 refers to krNettoBilanzsummeRating
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Netto Bilanzsumme f?r das Rating<$";
+      top_blanklines: 1;
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+     variable -krRatingorientierteBilanzsummeSub2 refers to sdeGoodWill
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeGoodWill";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeGoodWill;
+     }
+     variable -krRatingorientierteBilanzsummeSub3 refers to sdeReceivablesShareholders
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeReceivablesShareholders";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeReceivablesShareholders;
+     }
+     variable -krRatingorientierteBilanzsummeSub4 refers to sdeDeferredTaxesAssets
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "sdeDeferredTaxesAssets";
+      visible: 1;
+      options_title: locked;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+      link: sdeDeferredTaxesAssets;
+     }
+     variable krRatingorientierteBilanzsummeSub5 refers to krRatingorientierteBilanzsumme
+     {
+      datatype: number;
+      frequency: column;
+      aggregation: balance;
+      displaytype: currency;
+      title: "$>Ratingorientierte Bilanzsumme<$";
+      visible: 1;
+      options_title: locked;
+      top_separator: 1;
+      display_options: displayAsSummation;
+      bottom_separator: 2;
+      locked: 1;
+      options_notrend: locked;
+      options_trend: locked;
+     }
+    }
+    variable krAnteilEigenmittelSub3 refers to krAnteilEigenmittel
+    {
+     datatype: number;
+     frequency: column;
+     aggregation: balance;
+     displaytype: percentage;
+     title: "$>Anteil Eigenmittel<$";
+     visible: 1;
+     options_title: locked;
+     top_separator: 1;
+     display_options: displayAsSummation;
+     bottom_separator: 2;
+     locked: 1;
+     options_notrend: locked;
+     options_trend: locked;
+     data_options: calculateAggregation,unscalable;
+     fixed_decimals: 2;
+    }
+   }
+  }
+  variable RatingFolder
+  {
+   datatype: number;
+   frequency: column;
+   aggregation: balance;
+   displaytype: currency;
+   title: "$>Rating<$";
+   visible: 0;
+   options_title: locked, invisible;
+   display_options: showColumnTitlesAboveSubVars;
+   locked: 1;
+   options_notrend: locked, invisible;
+   options_trend: locked, invisible;
+   variable ModelConfiguration
+   {
+    datatype: number;
+    frequency: document;
+    displaytype: select;
+    title: "$>Modellkonfiguration<$";
+    top_blanklines: 1;
+    visible: 1;
+    options_title: locked;
+    data_options: unscalable;
+    formula: 1;
+    choices: "$>Deutsch<$|$>Niederl?ndisch<$";
+   }
+   variable krInsolvenzquote
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: average;
+    displaytype: percentage;
+    title: "$>Apriori-Insolvenzquote<$";
+    top_blanklines: 1;
+    visible: 1;
+    options_title: locked;
+    formula_notrend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
+    formula_trend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
+    top_separator: 1;
+    display_options: hideFormulas;
+    data_options: saveCalculatedValue,unscalable;
+    fixed_decimals: 1;
+   }
+   variable krZValue
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    title: "$>Z-Wert<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,4.03964180885174+9.29864789092051*krAnteilOrdentlichenErgebnisses+2.38051797748078*krAnteilEigenmittel-23.0757849643717*krFremdKapitalzinslast-1.85536265755931*krBankUndLieferantenanteil-0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten);
+    formula_trend: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,4.03964180885174+9.29864789092051*krAnteilOrdentlichenErgebnisses+2.38051797748078*krAnteilEigenmittel-23.0757849643717*krFremdKapitalzinslast-1.85536265755931*krBankUndLieferantenanteil-0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten);
+    display_options: hideFormulas;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: saveCalculatedValue,calculateAggregation,unscalable;
+    fixed_decimals: 5;
+   }
+   variable krRDFsample
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: average;
+    title: "Relative Default Frequency (RDF) of sample";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: 0.08223466368715092;
+    formula_trend: 0.08223466368715092;
+    display_options: hideFormulas;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: unscalable;
+    fixed_decimals: 5;
+   }
+   variable krPD
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: percentage;
+    title: "Probability of Default";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+    formula_trend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+    display_options: hideFormulas;
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: saveCalculatedValue,calculateAggregation,unscalable;
+    fixed_decimals: 3;
+   }
+   variable krUraRatingKlasse
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "URA Rating class";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
+    formula_trend: String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: saveCalculatedValue,calculateAggregation,unscalable;
+   }
+   variable krUraAmpel
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: Case(krPD,[<=0.01:2|<=0.03:1|>0.03:0]);
+    formula_trend: Case(krPD,[<=0.01:2|<=0.03:1|>0.03:0]);
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: saveCalculatedValue,calculateAggregation,unscalable;
+    fixed_decimals: 0;
+   }
+   variable krUraAmpelD
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: String(Case(krUraAmpel,[=0:"Rot"|=1:"Gelb"|=2:"Grün"]));
+    formula_trend: String(Case(krUraAmpel,[=0:"Rot"|=1:"Gelb"|=2:"Grün"]));
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable krUraAmpelDNL
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "URA $>Ampel<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: String(Case(krUraAmpel,[=0:"rood"|=1:"oranje"|=2:"groen"]));
+    formula_trend: String(Case(krUraAmpel,[=0:"rood"|=1:"oranje"|=2:"groen"]));
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+   variable krIfdRatingKlasse
+   {
+    datatype: number;
+    frequency: column;
+    aggregation: balance;
+    displaytype: currency;
+    title: "IFD $>Ratingklasse<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: Case(krPD,[<=0.0030:1|<=0.0070:2|<=0.0150:3|<=0.0300:4|<=0.0800:5|>0.0800:6]);
+    formula_trend: Case(krPD,[<=0.0030:1|<=0.0070:2|<=0.0150:3|<=0.0300:4|<=0.0800:5|>0.0800:6]);
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: saveCalculatedValue,calculateAggregation;
+   }
+   variable krIfdRatingKlasseD
+   {
+    datatype: string;
+    frequency: column;
+    aggregation: balance;
+    title: "IFD $>Ratingklasse<$";
+    visible: 1;
+    options_title: locked;
+    formula_notrend: String(Case(krIfdRatingKlasse,[=1:"1"|=2:"2"|=3:"3"|=4:"4"|=5:"5"|=6:"6"]));
+    formula_trend: String(Case(krIfdRatingKlasse,[=1:"1"|=2:"2"|=3:"3"|=4:"4"|=5:"5"|=6:"6"]));
+    locked: 1;
+    options_notrend: locked;
+    options_trend: locked;
+    data_options: calculateAggregation,unscalable;
+   }
+  }
+ }
+}

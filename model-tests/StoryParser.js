@@ -9,12 +9,16 @@
 const log = require('log6')
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
-    setValue: {
+    setValue          : {
         // ------------------------------------------------------VARIABLE_NAME--TUPLE_NAME
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? is set to ([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?\s*$/i,
-        call: function(workbook, linenumber, line, args) {
-            var variableName = args[0], tupleIndexName = args[1], value = args[3],
-                columnId = (parseInt(args[4]) || 1) - 1
+        call : function(workbook, linenumber, line, args) {
+
+            var variableName   = args[0],
+                tupleIndexName = args[1],
+                value          = args[3],
+                columnId       = (parseInt(args[4]) || 1) - 1
+
             return [function() {
                 // const locationDetails = workbook.locate(variableName, tupleIndexName)
                 if (log.TRACE) log.trace('JBehave called line [%s]: %s %s', linenumber, variableName, tupleIndexName)
@@ -26,24 +30,24 @@ const functionMapper = {
                     const validValue = workbook.isValidInput(variableName, columnId, yas, value);
                     if (lockedValue) {
                         return {
-                            status: 'fail',
+                            status : 'fail',
                             message: variableName + ' cannot be set to value [' + value + "]. Because [" + variableName + " is locked for user input."
                         }
                     }
                     else if (validValue.length > 0) {
                         return {
-                            status: 'fail',
+                            status : 'fail',
                             message: variableName + ' cannot be set to value [' + value + "]. Because [" + validValue + ']'
                         }
                     } else {
                         return {
-                            status: 'info',
+                            status : 'info',
                             message: variableName + (tupleIndexName || '') + ' is set to ' + value
                         }
                     }
                 } else {
                     return {
-                        status: 'fail',
+                        status : 'fail',
                         message: variableName + " is does not exist"
                     }
                 }
@@ -53,32 +57,35 @@ const functionMapper = {
     cleanDocumentState: {
         /* One story can have multiple contexts, this for now will just clean the current state. */
         regex: /^\s*Given an? Context(\((\w+,?){0,3}\))?/i,
-        call: function(workbook, linenumber, line, args) {
+        call : function(workbook, linenumber, line, args) {
             return [function() {
                 workbook.clearValues()
                 if (log.TRACE) log.trace('Document values cleared')
                 return {
-                    status: 'info',
+                    status : 'info',
                     message: "New context created."
                 };
             }]
         }
     },
-    assertValue: {
+    assertValue       : {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
-        call: function(workbook, linenumber, line, args) {
+        call : function(workbook, linenumber, line, args) {
             //default decimals are defined by the ammount of decimals in the value.
-            const variableName = args[0], tupleIndexName = args[1], decimals = (args[3]||(args[4].split('.')[1]||'').length), value = args[4],
-                columnId = (parseInt(args[5]) || 1) - 1
-                        return [function() {
+            const variableName   = args[0],
+                  tupleIndexName = args[1],
+                  decimals       = (args[3] || (args[4].split('.')[1] || '').length),
+                  value          = args[4],
+                  columnId       = (parseInt(args[5]) || 1) - 1
+            return [function() {
                 const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
                 const rawValue = workbook.get(variableName, 'value', columnId, yas);
                 const validValue = workbook.get(variableName, 'valid', columnId, yas);
                 var calculatedValue = rawValue;
-                if (decimals) calculatedValue = calculatedValue.toFixed(decimals)
+                if (decimals != null) calculatedValue = calculatedValue.toFixed(decimals)
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
                     result.status = 'fail'
@@ -95,10 +102,13 @@ const functionMapper = {
             ]
         }
     },
-    assertProperty: {
+    assertProperty    : {
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))?\.(\w+) should (?:have |be )? ([-0-9,.A-z]+)/i,
-        call: function(workbook, linenumber, line, args) {
-            const variableName = args[0], tupleIndexName = args[1], pname = args[3], value = args[4];
+        call : function(workbook, linenumber, line, args) {
+            const variableName   = args[0],
+                  tupleIndexName = args[1],
+                  pname          = args[3],
+                  value          = args[4];
             return [function() {
                 const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
@@ -127,8 +137,8 @@ function StoryParser(story, filename, workbook) {
     this.results = {
         passed: 0,
         failed: 0,
-        total: 0,
-        rate: function() {
+        total : 0,
+        rate  : function() {
             return (100 / this.total) * (this.passed)
         }
     };
@@ -145,8 +155,8 @@ StoryParser.prototype.start = function() {
                 jebehaveMatchFound = true;
                 var functions = functionMapper[mappedKey].call(this.workbook, lineNumber, line, line.match(functionMapper[mappedKey].regex).slice(1));
                 const lineAction = {
-                    line: {
-                        line: line.trim(),
+                    line     : {
+                        line      : line.trim(),
                         lineNumber: lineNumber + 1
                     },
                     functions: functions
@@ -166,7 +176,7 @@ StoryParser.prototype.call = function() {
             //TODO: can have multiple calls on one row..
             var on = {
                 type: 'call',
-                raw: call.line,
+                raw : call.line,
                 line: call.line.lineNumber
             }
             try {
@@ -174,7 +184,7 @@ StoryParser.prototype.call = function() {
             } catch (err) {
                 if (log.DEBUG) log.warn('Unexpected Error', err)
                 on.result = {
-                    status: 'error',
+                    status : 'error',
                     message: err.toString()
                 }
             }
@@ -182,7 +192,7 @@ StoryParser.prototype.call = function() {
         }
     }
     this.on({
-        type: 'done',
+        type  : 'done',
         result: {
             status: 'info'
         }
