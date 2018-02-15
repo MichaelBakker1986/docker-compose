@@ -14,10 +14,10 @@ const functionMapper = {
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? is set to ([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?\s*$/i,
         call : function(workbook, linenumber, line, args) {
 
-            var variableName   = args[0],
-                tupleIndexName = args[1],
-                value          = args[3],
-                columnId       = (parseInt(args[4]) || 1) - 1
+            const variableName   = args[0],
+                  tupleIndexName = args[1],
+                  value          = args[3],
+                  columnId       = (parseInt(args[4]) || 1) - 1
 
             return [function() {
                 // const locationDetails = workbook.locate(variableName, tupleIndexName)
@@ -85,7 +85,7 @@ const functionMapper = {
                 const rawValue = workbook.get(variableName, 'value', columnId, yas);
                 const validValue = workbook.get(variableName, 'valid', columnId, yas);
                 var calculatedValue = rawValue;
-                if (decimals != null) calculatedValue = calculatedValue.toFixed(decimals)
+                if (decimals != null && !isNaN(calculatedValue)) calculatedValue = calculatedValue.toFixed(decimals)
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != value) {
                     result.status = 'fail'
@@ -193,9 +193,7 @@ StoryParser.prototype.call = function() {
     }
     this.on({
         type  : 'done',
-        result: {
-            status: 'info'
-        }
+        result: { status: 'info' }
     });
 }
 StoryParser.prototype.on = function(event) {
