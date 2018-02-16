@@ -15,8 +15,6 @@ var logger = require('log6');
 //FIN->JavaScript
 var parser = {
     name: 'fin',
-    status: 'yellow',
-    headername: '.finance fin',
     parse: function(data) {
         //should return a parseResult
         //.with a .valid
@@ -142,7 +140,7 @@ function createFormulaSafe(solution, formula) {
     if (formula._delegate) {
         throw Error('refactored')
         //solution.setDelegate(uiNode, formula._delegate);
-        solution.setParentName(uiNode, formula.parentName);
+        //solution.setParentName(uiNode, formula.parentName);
     }
 }
 

@@ -65,8 +65,6 @@ function JavaScriptParser() {
 }
 
 JavaScriptParser.prototype.name = 'js'
-JavaScriptParser.prototype.status = 'green';
-JavaScriptParser.prototype.headername = '.js';
 JavaScriptParser.prototype.parseData = function(data, workbook) {
     throw Error();
 }

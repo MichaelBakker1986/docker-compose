@@ -2,12 +2,12 @@
  First, most basic export of values
  Just calling getAllValues() internally to export
  */
-var SolutionFacade = require('../../src/SolutionFacade');
-var PropertiesAssembler = require('../../src/PropertiesAssembler');
-var jsonValues = {
+const SolutionFacade = require('../../src/SolutionFacade');
+const PropertiesAssembler = require('../../src/PropertiesAssembler');
+const Solution = require('../../src/Solution')
+
+const jsonValues = {
     name: 'jsonvalues',
-    extension: 'json',
-    headername: 'JSON Values',
     parseData: function(data, workbook) {
         updateValues(data, workbook.context.values);
         return SolutionFacade.createSolution(workbook.getSolutionName());

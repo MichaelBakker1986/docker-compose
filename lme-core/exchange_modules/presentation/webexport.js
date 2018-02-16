@@ -35,13 +35,12 @@
  */
 const SolutionFacade = require('../../src/SolutionFacade');
 const PropertiesAssembler = require('../../src/PropertiesAssembler');
+const Solution = require('../../src/Solution');
 
 /**
  * Parser object
  */
 function WebExportParser() {
-    this.exportAsObject = true;
-    this.hide = true;
     this.name = 'webexport';
     this.headername = 'Native Object Web Presentation';
 }

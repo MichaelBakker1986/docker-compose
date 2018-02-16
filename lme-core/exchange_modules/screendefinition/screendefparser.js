@@ -1,11 +1,11 @@
-var visitor = require('../../src/JSVisitor');
-var PropertiesAssembler = require('../../src/PropertiesAssembler');
-var SolutionFacade = require('../../src/SolutionFacade');
-var AST = require('ast-node-utils').ast;
-var FinFormula = require('../ffl/FinFormula');
-var parser = {
+const visitor = require('../../src/JSVisitor');
+const PropertiesAssembler = require('../../src/PropertiesAssembler');
+const SolutionFacade = require('../../src/SolutionFacade');
+const Solution = require('../../src/Solution')
+const AST = require('ast-node-utils').ast;
+const FinFormula = require('../ffl/FinFormula');
+const parser = {
     name: 'screendefinition',
-    headername: '.finance Screendefinition',
     //expection json as String for screen definitions
     parseData: function(json, workbook) {
         var data = JSON.parse(json);

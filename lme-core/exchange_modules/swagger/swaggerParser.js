@@ -8,7 +8,6 @@ function SwaggerParser() {
 }
 
 SwaggerParser.prototype.name = 'swagger'
-SwaggerParser.prototype.status = 'green';
 SwaggerParser.prototype.headername = '.swagger';
 
 SwaggerParser.prototype.deParse = function(metaData, workbook) {

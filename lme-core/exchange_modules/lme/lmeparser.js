@@ -2,6 +2,8 @@ const SolutionFacade = require('../../src/SolutionFacade')
 const FormulaService = require('../../src/FormulaService')
 const PropertiesAssembler = require('../../src/PropertiesAssembler')
 const FunctionMap = require('../../src/FunctionMap')
+const Solution = require('../../src/Solution')
+
 const log = require('log6');
 
 function FormulaInfo(dataArg, schema, modelName) {
@@ -80,7 +82,6 @@ function LMEParser() {
 }
 
 LMEParser.prototype.name = 'lme'
-LMEParser.prototype.status = 'green';
 LMEParser.prototype.headername = '.finance lme';
 LMEParser.prototype.parseData = function(data, workbook) {
     const solution = SolutionFacade.createSolution(data.name);

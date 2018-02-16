@@ -2,8 +2,9 @@ const SolutionFacade = require('../../src/SolutionFacade')
 const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
 const FinFormula = require('./FinFormula')
 const AST = require('../../../ast-node-utils/index').ast
+const Solution = require('../../src/Solution')
 const log = require('log6')
-var esprima = require('esprima');
+const esprima = require('esprima');
 
 /**
  * ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js} field-validations
@@ -21,7 +22,6 @@ function RegisterToLMEParser() {
 }
 
 RegisterToLMEParser.prototype.name = 'ffl2'
-RegisterToLMEParser.prototype.status = 'green';
 RegisterToLMEParser.prototype.headername = '.finance ffl';
 RegisterToLMEParser.prototype.walk = function(node, depth, visitor) {
     visitor(node, depth)
@@ -124,9 +124,8 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
         // expecting an parentName..
         var parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null;
-        if (parentId == 'root') {
-            parentId = undefined;
-        }
+        if (parentId == 'root') parentId = undefined;
+
         /**
          * number:2 means: number with 2 fixed decimals
          */
