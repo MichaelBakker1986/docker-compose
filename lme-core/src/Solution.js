@@ -1,15 +1,8 @@
 /**
- * Parsers/Exchange modules create Solution objects filled with generic metadata (formula's,properties concerning a variable)
- *
+ * @Deprecated, use Register.js
  */
-//This class also has functions for Property types.
-//No instances of Property are made since there will be made a lot of those. (1.000.000) easy
-//So we keep them plain.
-//Don't allow dependencies to Services occur here
-//TODO: we should not twice hold the 'nodes' object.
 function Solution(solutionName) {
     this.name = solutionName;
-    this.displayTypes = {};
     this.type = solutionName;
     this.properties = {};
     this.nodes = [];
@@ -18,12 +11,6 @@ function Solution(solutionName) {
     this.root = {};
 }
 
-Solution.prototype.preparser = function(input) {
-    return input;
-}
-Solution.prototype.getFormulas = function(iterator) {
-    return this.formulas.forEach(iterator);
-}
 Solution.prototype.hasNode = function(rowId) {
     var has = this.addedRowIds.has(rowId);
     this.addedRowIds.add(rowId);
@@ -55,45 +42,32 @@ Solution.prototype.getName = function() {
 //Save UI- names only
 Solution.prototype.createNode = function(rowId, colId, formulaId, displayAs) {
     var uiNode = {
-        name: this.name + "_" + rowId + "_" + colId,
-        rowId: rowId,
-        colId: colId,
-        refId: formulaId,
+        name     : this.name + "_" + rowId + "_" + colId,
+        rowId    : rowId,
+        colId    : colId,
+        refId    : formulaId,
         displayAs: displayAs || 'string'
     };
     if (formulaId !== undefined) {
         uiNode.ref = formulaId;
         this.formulas.add(formulaId);
     }
-    this.displayTypes[uiNode.displayAs] = true;
     this.nodes.push(uiNode);
     return uiNode;
 }
 
-Solution.prototype.addDisplayType = function(displayType) {
-    if (displayType === undefined) {
-        throw new Error('undefined displaytype, make sure to use valid displayTypes');
-    }
-    this.displayTypes[displayType] = true;
-}
-Solution.prototype.getDisplayTypes = function(displayType) {
-    return this.displayTypes;
-}
 Solution.prototype.stringify = function() {
-    return this.preparser(JSON.stringify(this.root, function(key, val) {
+    return JSON.stringify(this.root, function(key, val) {
             if (key === 'originalproperties') {
                 return undefined;
             }
             return val;
         }, 2
-    ));
+    );
 }
 //add to global list of found variables
 Solution.prototype.addNode = function(rowId, node) {
     this.nodes[rowId] = node
-}
-Solution.prototype.setPreparser = function(parser) {
-    this.preparser = parser;
 }
 //'uielem' the Object of which the properties need to be set
 //'elem' the Object of which the properties can be found

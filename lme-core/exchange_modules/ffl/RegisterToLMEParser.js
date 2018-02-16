@@ -221,7 +221,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
             //if (validFormulas.length > 0) console.info(node[nameIndex] + ':' + node[validIndex])
         }
-        var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype), displaytype, frequency);
+        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype), displaytype, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula

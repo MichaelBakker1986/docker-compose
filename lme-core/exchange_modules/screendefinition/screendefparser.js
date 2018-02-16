@@ -3,7 +3,6 @@ var PropertiesAssembler = require('../../src/PropertiesAssembler');
 var SolutionFacade = require('../../src/SolutionFacade');
 var AST = require('ast-node-utils').ast;
 var FinFormula = require('../ffl/FinFormula');
-var keys = ['description', 'viewType', 'col9umnHeader', 'searchBar'];
 var parser = {
     name: 'screendefinition',
     headername: '.finance Screendefinition',

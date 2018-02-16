@@ -1,39 +1,41 @@
-FROM node:9.5.0
+FROM node:9.5.0-alpine
 
 USER root
-ENV ENABLED_MODELS PRESCAN
+#ENV ENABLED_MODELS KSP -- only when not build via dc_restapi.yml
 ENV HOST '127.0.0.1'
 ENV INTERNAL_PROXY_PORT 7081
 ENV DATA_API_PORT 8085
+ENV ENABLED_MODELS PRESCAN
 ENV ENV info
 
 #docker build . -f LMERestAPIBuilder -t=nexus.topicusfinance.nl:8444/ksp:0.3
+#docker push nexus.topicusfinance.nl:8444/ksp:1.1
 #sudo docker run -p 80:7081 nexus.topicusfinance.nl:8444/ksp:0.3
-
 #should only include the generated model.js from the generator instead of
 # -- but for now we include all to make the docker-image file work
+#http://blfyn-dv-doc01.finance.lab
 # - lme-core
 # - math
 # - ast-node-utils
 # - formulajs
 # - excel-connect
-
 # nexus.topicusfinance.nl:8444
-COPY /rest_package.json /package.json
-COPY /lme-data-api /lme-data-api
-COPY /git-connect /git-connect
-COPY /lme-core /lme-core
+COPY docker-connect/rest_package.json package.json
+COPY lme-data-api /lme-data-api
+COPY git-connect /git-connect
+COPY lme-core /lme-core
 #TODO: morph into the Generated FFLModel.js
-COPY /formulajs-connect /formulajs-connect
+COPY formulajs-connect /formulajs-connect
 #TODO: morph into the Generated FFLModel.js
-COPY /excel-connect /excel-connect
-COPY /ast-node-utils /ast-node-utils
-COPY /log /log
+COPY excel-connect /excel-connect
+COPY ast-node-utils /ast-node-utils
+COPY log /log
 #TODO: morph into the Generated FFLModel.js
-COPY /math /math
+COPY math /math
 #We require proxy since swagger and rest-api are tunneled.
 #blfyn-dv-doc01
-COPY /proxy /proxy
-
-CMD npm install --unsafe-perm --allow-root --production && npm start
+COPY proxy /proxy
+#WORKDIR docker-connect
+RUN npm install --unsafe-perm --allow-root --production
+CMD npm start
 EXPOSE 7081

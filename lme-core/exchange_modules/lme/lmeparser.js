@@ -5,6 +5,7 @@ const FunctionMap = require('../../src/FunctionMap')
 const log = require('log6');
 
 function FormulaInfo(dataArg, schema, modelName) {
+    this.name = modelName
     this.formulas = [];
     this.variables = []
     const self = this;
@@ -25,15 +26,16 @@ function FormulaInfo(dataArg, schema, modelName) {
         const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            const title = forms[modelNamePrefix + name + '_title'] || {original: null};
-            const hint = forms[modelNamePrefix + name + '_hint'] || {original: ''};
-            const visible = forms[modelNamePrefix + name + '_visible'] || {original: false};
-            const valid = forms[modelNamePrefix + name + '_valid'] || {original: false};
-            const value = forms[modelNamePrefix + name + '_value'] || {original: ''};
-            const formula_trend = forms[modelNamePrefix + name + '_trend'] || {original: ''};
-            const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || {original: ''};
-            const locked = forms[modelNamePrefix + name + '_locked'] || {original: false};
-            const choices = forms[modelNamePrefix + name + '_choices'] || {original: null};
+            const title = forms[modelNamePrefix + name + '_title'] || { original: null };
+            const hint = forms[modelNamePrefix + name + '_hint'] || { original: '' };
+            const visible = forms[modelNamePrefix + name + '_visible'] || { original: false };
+            const valid = forms[modelNamePrefix + name + '_valid'] || { original: false };
+            const value = forms[modelNamePrefix + name + '_value'] || { original: '' };
+            const formula_trend = forms[modelNamePrefix + name + '_trend'] || { original: '' };
+            const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || { original: '' };
+            const locked = forms[modelNamePrefix + name + '_locked'] || { original: false };
+            const choices = forms[modelNamePrefix + name + '_choices'] || { original: null };
+            //looks a lot like the Register.js functionality
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
         }
     }
@@ -48,11 +50,11 @@ function FormulaInfo(dataArg, schema, modelName) {
     for (var i = 0; i < types.length; i++) {
         var type = types[i];
         self.meta.view.columns.push({
-            "width": ['locked', 'visible', 'entered'].indexOf(type) == -1 ? 50 : undefined,
-            "name": type,
-            "dataTypeName": "text",
-            "fieldName": type,
-            "position": counter++,
+            "width"         : ['locked', 'visible', 'entered'].indexOf(type) == -1 ? 50 : undefined,
+            "name"          : type,
+            "dataTypeName"  : "text",
+            "fieldName"     : type,
+            "position"      : counter++,
             "renderTypeName": "text",
         })
     }
@@ -85,6 +87,7 @@ LMEParser.prototype.parseData = function(data, workbook) {
     solution.nodes = data.nodes;
     if (data.variables) FormulaService.initVariables(data.variables)
     PropertiesAssembler.bulkInsert(solution);
+    //Probably for formula-information
     FormulaService.bulkInsertFormula(data.formulas)
     for (var i = 0; i < data.formulas.length; i++) FunctionMap.initializeFormula(data.formulas[i]);
     if (log.DEBUG) log.info('Done import ' + data.name)
@@ -92,14 +95,12 @@ LMEParser.prototype.parseData = function(data, workbook) {
 }
 const unwantedKeys = {
     delegate: true,
-    ast: true,
-    body: true
+    ast     : true,
+    body    : true
 }
 LMEParser.prototype.deParse = function(rowId, workbook) {
     const modelName = workbook.getSolutionName();
-    const formulaInfo = {};
-    const info = new FormulaInfo(formulaInfo, {}, modelName);
-    info.name = modelName;
+    const info = new FormulaInfo({}, {}, modelName);
     PropertiesAssembler.findAllInSolution(modelName, function(property) {
         info.nodes.push(property)
     })

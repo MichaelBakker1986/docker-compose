@@ -6,7 +6,7 @@ ADD /package.json /package.json
 ADD /lme-data-api /lme-data-api
 ADD /lme-model-api /lme-model-api
 ADD /demo-apps /demo-apps
-ADD /model-tests /model-tests
+ADD / /model-tests
 ADD /git-connect /git-connect
 ADD /lme-core /lme-core
 ADD /proxy /proxy

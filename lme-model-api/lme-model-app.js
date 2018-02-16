@@ -28,7 +28,7 @@ const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
 const ExcelConnect = require('../excel-connect/').xlsxLookup;
 const fileUpload = require('express-fileupload');
-const DockerImageBuilder = require('./src/DockerImageBuilder')
+const DockerImageBuilder = require('../docker-connect/DockerImageBuilder')
 const fs = require('fs')
 browserify.settings({
     transform: [require('browserify-fastjson')]

@@ -140,7 +140,8 @@ function createFormulaSafe(solution, formula) {
     }
     var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
     if (formula._delegate) {
-        solution.setDelegate(uiNode, formula._delegate);
+        throw Error('refactored')
+        //solution.setDelegate(uiNode, formula._delegate);
         solution.setParentName(uiNode, formula.parentName);
     }
 }
@@ -236,9 +237,11 @@ function addNode(solution, node, parentId) {
     if (rowId === 'root') {
         return
     }
-    if (solution.hasNode(rowId)) {
-        logger.info('Dupe..')
-    }
+
+    throw Error('refactored')
+    // if (solution.hasNode(rowId)) {
+    //     logger.info('Dupe..')
+    // }
     var parentName;
     if (parentId !== undefined && parentId !== null) {
         parentName = parentId.name;
