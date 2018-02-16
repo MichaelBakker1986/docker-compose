@@ -1,1 +1,1 @@
-require('./proxy')
+require('./lme-model-api/update')

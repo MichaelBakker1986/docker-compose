@@ -10,6 +10,7 @@ function DockerImageBuilder(fflModel, story, matrix) {
 }
 
 DockerImageBuilder.prototype.buildDockerImage = function() {
+
     log.info('Start build image')
 }
 module.exports = DockerImageBuilder

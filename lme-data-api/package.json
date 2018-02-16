@@ -8,7 +8,7 @@
   "main": "lme-data-app.js",
   "version": "0.0.2",
   "scripts": {
-    "start": "concurrently \"docker-compose -f db.yml up \" \"npm install --no-optional && node lme-data-app.js \""
+    "start": "npm install --no-optional && node lme-data-app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

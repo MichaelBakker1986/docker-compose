@@ -55,18 +55,18 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
         if (referenceFormulaInfo.refs[formulaInfo.name] === undefined) {
             referenceFormulaInfo.refs[formulaInfo.name] = true;
             referenceFormulaInfo.formulaDependencys.push({
-                name: formulaInfo.name,
+                name       : formulaInfo.name,
                 association: 'refs',
-                refId: formulaInfo.id || formulaInfo.index
+                refId      : formulaInfo.id || formulaInfo.index
             });
         }
     }
     if (formulaInfo.deps[refName] === undefined) {
         formulaInfo.deps[refName] = true;
         formulaInfo.formulaDependencys.push({
-            name: refName,
+            name       : refName,
             association: 'deps',
-            refId: refId
+            refId      : refId
         });
     }
     return referenceFormulaInfo;
@@ -77,7 +77,7 @@ function addAssociation(index, property, associationType) {
     var otherFormula = formulas[property.ref];
     if (otherFormula.name !== formula.name && formula.refs[otherFormula.name] === undefined) {
         formula.formulaDependencys.push({
-            name: otherFormula.name,
+            name       : otherFormula.name,
             association: associationType
         });
     }
@@ -133,14 +133,14 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
 function newFormula(locked, body, index, propertyName) {
     const original = AST.PROGRAM(body);
     const formula = {
-        type: locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
-        refs: {},//map of references
+        type              : locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
+        refs              : {},//map of references
         formulaDependencys: [],//array of associations (deps and refs)
-        deps: {},//map of dependencies
-        body: original,//AST
-        original: original,
-        index: index,//index used in formula array
-        name: propertyName//default formula name.
+        deps              : {},//map of dependencies
+        body              : original,//AST
+        original          : original,
+        index             : index,//index used in formula array
+        name              : propertyName//default formula name.
     };
     formulas.push(formula);
     return formula;
@@ -174,7 +174,7 @@ FormulaService.prototype.addVariables = function(variablesArg) {
             throw Error('already declared variable [' + variable.name + ']')
         }
         variables.push({
-            name: variable.name,
+            name      : variable.name,
             expression: variable.expression
         })
     }
@@ -193,7 +193,13 @@ FormulaService.prototype.initVariables = function(variables) {
                 variable.x.push(keyX)
             }
         }
-        global[variable.name] = variable.expression;
+        if (global[variable.name]) {
+            for (var key in variable.expression) {
+                global[variable.name][key] = variable.expression[key];
+            }
+        } else {
+            global[variable.name] = variable.expression;
+        }
     }
 }
 module.exports = FormulaService.prototype;

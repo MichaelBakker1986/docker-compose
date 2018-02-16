@@ -17,7 +17,7 @@
   "scripts": {
     "install": "concurrently \"cd log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd excel-connect && npm install --no-optional \" \"cd lme-core && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd formulajs-connect && npm install --no-optional\" \"cd demo-apps && npm install --no-optional --allow-root\" \"cd git-connect && npm install --no-optional\" \"cd math && npm install --no-optional\" \"cd model-tests && npm install --no-optional\" \"cd proxy && npm install --no-optional\"",
     "test": "concurrently \"cd excel-connect && npm test\" \"cd lme-core && npm test\" \"cd model-tests && npm test\" \"cd lme-model-api && npm test\" \"cd log && npm test\"",
-    "start": "concurrently \"cd lme-model-api && node update.js\" \"node run.js\""
+    "start": "concurrently \"cd lme-model-api && node update.js\""
   },
   "config": {
     "unsafe-perm": true

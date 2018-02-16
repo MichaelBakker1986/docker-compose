@@ -4,3 +4,4 @@ const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL;
 const parsedMVOFFL = new RegisterToFFL(new ScorecardTool().parse(mvoFLLFile)).toGeneratedFFL(null, null).join('\n')
 assert.ok(parsedMVOFFL.length > 100)
+assert.ok(new RegisterToFFL(new ScorecardTool().parse(mvoFLLFile)).toGeneratedCommaSeperated().length > 100)

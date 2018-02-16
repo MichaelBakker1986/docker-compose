@@ -1,7 +1,6 @@
 /**
  * Used in front-end to reassemble the FFL file when needed.
  */
-const StringBuffer = require('../../../model-tests/StringUtils').StringBuffer
 //extract underlying data-model
 //make an register, schema - indexed with array values
 //Can expand while adding more properties and keeps its integrity
@@ -75,20 +74,20 @@ function RegisterToFFL(register) {
     this.defaultValues = [];
     this.defaultValues[this.visibleIndex] = {
         undefined: true,
-        null: true,
-        '1.0': true,
-        '1': true,
-        'true': true,
-        'On': true
+        null     : true,
+        '1.0'    : true,
+        '1'      : true,
+        'true'   : true,
+        'On'     : true
     }
     this.defaultValues[this.lockedIndex] = {
         undefined: true,
-        null: true,
-        '0.0': true,
-        '0': true,
-        'false': true,
-        'Off': true,
-        'No': true
+        null     : true,
+        '0.0'    : true,
+        '0'      : true,
+        'false'  : true,
+        'Off'    : true,
+        'No'     : true
     }
     this.defaultValues[this.requiredIndex] = this.defaultValues[this.lockedIndex];
 }
@@ -98,10 +97,11 @@ RegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName) {
     const hidden = this.hiddenProperties;
     const lines = []
     const rootNode = this.vars[rooNodeName || 'root']
+    const indents = this.indents;
     this.walk(rootNode, 0, function(variable, depth) {
-        lines.push(new StringBuffer().append(" ".repeat(depth)).append(variable.filter(function(value, index) {
+        lines.push([indents[depth], variable.filter(function(value, index) {
             return hidden.indexOf(index) == -1;
-        }).join(delimiter)).toString());
+        })].join(delimiter));
     })
     this.output = lines.join(this.line_delimiter);
     return this.output;
@@ -116,7 +116,6 @@ RegisterToFFL.prototype.walk = function(node, depth, visitor) {
 RegisterToFFL.prototype.validate = function(line) {
     return (this.schema.length - this.hiddenProperties.length) == ((line.match(/;/g) || []).length + 1)
 }
-
 /**
  * TODO: internationalization should happen here, inject constants on placeholders
  */

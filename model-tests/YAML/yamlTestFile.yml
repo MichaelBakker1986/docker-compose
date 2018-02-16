@@ -19,17 +19,17 @@ services:
         links:
             - db
         environment:
-                EXPOSED_AUTHENTICATION_PORT: 8091
-                INTERNAL_PROXY_PORT: 7081
-                DOMAIN: kspapp.local.com
                 ENV: info
-                ENABLED_MODELS: 'KSP'
+                RROXY_HOST: 7080
+                HOST: localhost
+                ENABLED_MODELS: '*'
+                FACEBOOK_PROXY_PORT: 9091
                 FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
                 HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
         build: .
-        image: lme:00.14
+        image: lme:1.0.34
         restart: always
         ports:
-            - 80:8091
+            - 7080:7080
         expose:
-            - 80
+            - 7080

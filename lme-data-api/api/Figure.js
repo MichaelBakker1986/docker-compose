@@ -14,28 +14,28 @@
  * dev0   |usr1
  * dev1   |usr2
  */
-const dbConnectString = process.env.FIGURE_DB_STRING || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
+const dbConnectString = process.env.FIGURE_DB_STRING;// || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
+if (!dbConnectString) return;//early exit (no db)
 const orm = require("orm");
 const log = require('log6')
-
 exports.orm = Promise.all([
     orm.connectAsync(dbConnectString).then(async (db) => {
 
         db.use(require('orm-timestamps'), {
-            createdProperty: 'created_at',
+            createdProperty : 'created_at',
             modifiedProperty: 'modified_at',
-            expireProperty: false,
-            dbtype: {type: 'date', time: true},
-            now: function() {
+            expireProperty  : false,
+            dbtype          : { type: 'date', time: true },
+            now             : function() {
                 return new Date();
             },
-            persist: true
+            persist         : true
         });
         var Figures = db.define("figure", {
             uuid: String,
-            var: String,
-            col: String,
-            val: String
+            var : String,
+            col : String,
+            val : String
         }, {
             methods: {
                 getScenarioFigures: function(ids) {
@@ -54,7 +54,7 @@ exports.orm = Promise.all([
                         })
                     })]);
                 },
-                getFigures: function(id) {
+                getFigures        : function(id) {
                     return Promise.all([new Promise(function(ok, fail) {
                         let sql = "SELECT figure.* FROM figure join ( SELECT max(figure.id) as m from figure inner join figure_tree on uuid_parent=figure.uuid where figure_tree.uuid=? group by var,col ) as best on best.m=figure.id";
                         db.driver.execQuery(sql, [id], function(err, result) {
@@ -70,7 +70,7 @@ exports.orm = Promise.all([
                         })
                     })]);
                 },
-                insertFigures: function(parent, newChildId, values, saveTime) {
+                insertFigures     : function(parent, newChildId, values, saveTime) {
                     return Promise.all([new Promise(function(ok, fail) {
                         var sql = "INSERT INTO figure_tree (uuid,uuid_parent)  SELECT '" + newChildId + "' as uuid,uuid_parent as uuid_parent FROM figure_tree where uuid = '" + parent + "' UNION  select '" + newChildId + "','" + newChildId + "';";
                         db.driver.execQuery(sql, [], function(err, result) {
@@ -86,7 +86,7 @@ exports.orm = Promise.all([
                                 ok(result)
                             })
                         } else {
-                            ok({status: 'succes', message: 'no values need to be inserted'})
+                            ok({ status: 'succes', message: 'no values need to be inserted' })
                         }
                     }), new Promise(function(ok, fail) {
                         if (values.length > 0) {
@@ -96,7 +96,7 @@ exports.orm = Promise.all([
                                     ok(result)
                                 })
                         } else {
-                            ok({status: 'succes', message: 'no values need to be inserted'})
+                            ok({ status: 'succes', message: 'no values need to be inserted' })
                         }
                     })])
                 }
@@ -105,7 +105,7 @@ exports.orm = Promise.all([
             timestamp: true
         });
         var FigureTree = db.define("figure_tree", {
-            uuid: String,
+            uuid       : String,
             uuid_parent: String,
         }, {
             methods: {}
@@ -113,8 +113,8 @@ exports.orm = Promise.all([
             timestamp: true
         });
         var FigureCommit = db.define("figure_commit", {
-            uuid: String,
-            create_time: {type: "date", time: true}
+            uuid       : String,
+            create_time: { type: "date", time: true }
         });
 
         exports.Figures = Figures;
@@ -124,9 +124,9 @@ exports.orm = Promise.all([
         return db.sync(async (err, other) => {
             if (err) throw err;
             const dbSchema = {
-                figure: ['uuid', 'var', 'col', 'val'],
+                figure       : ['uuid', 'var', 'col', 'val'],
                 figure_commit: ['uuid', 'create_time'],
-                figure_tree: ['uuid', 'uuid_parent']
+                figure_tree  : ['uuid', 'uuid_parent']
             }
             //create indexes on psql databases
             if (db.driver.dialect != 'mysql') {

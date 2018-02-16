@@ -1,4 +1,4 @@
-const port = 8085;
+const port = process.env.DATA_API_PORT || 8085;
 const host = process.env.HOST || '127.0.0.1';
 const request = require('request-promise-json');
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -14,7 +14,7 @@ app.set('domain', domain)
 app.use(require('cors')())
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json({limit: '50mb'})); // To support JSON-encoded bodies
+app.use(bodyParser.json({ limit: '50mb' })); // To support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // To support URL-encoded bodies
     extended: true
 }));

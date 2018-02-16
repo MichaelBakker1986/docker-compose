@@ -1,0 +1,19 @@
+FROM node:9.5.0
+
+USER root
+
+ADD /package.json /package.json
+ADD /lme-data-api /lme-data-api
+ADD /lme-model-api /lme-model-api
+ADD /demo-apps /demo-apps
+ADD /model-tests /model-tests
+ADD /git-connect /git-connect
+ADD /lme-core /lme-core
+ADD /proxy /proxy
+ADD /formulajs-connect /formulajs-connect
+ADD /excel-connect /excel-connect
+ADD /ast-node-utils /ast-node-utils
+ADD /log /log
+ADD /math /math
+
+CMD npm install -g concurrently && npm install --unsafe-perm --allow-root && npm start

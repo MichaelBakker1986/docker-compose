@@ -5,10 +5,11 @@
  */
 const uuid = require('uuid4');
 const log = require('log6')
+const dbConnectString = process.env.FIGURE_DB_STRING;// || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
 const Figure = require('./Figure');
-
 const MatrixStore = require('../MatrixStore').MatrixStore;
 module.exports.setup = function(app) {
+    if (!dbConnectString) return;//early exit (no db)
     var ds = new MatrixStore();
     /**
      * Retrieve entered values supplied by the client
