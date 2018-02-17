@@ -91,7 +91,7 @@ function finFormulaGeneric(buf) {
     return buf;
 }
 
-//console.info(finFormulaGeneric('[(VATPaymentFraction[GetT(T,-1)]>0)*(Round(VATPaymentFraction[GetT(T,-1)],0)=VATPaymentFraction[GetT(T,-1)])]'))
+//finFormulaGeneric('[(VATPaymentFraction[GetT(T,-1)]>0)*(Round(VATPaymentFraction[GetT(T,-1)],0)=VATPaymentFraction[GetT(T,-1)])]'))
 function javaScriptToFinGeneric(buf) {
     var buf = buf.replace(/!=/gm, '<>');
     //buf = buf.replace(/<=/gm, '<==');

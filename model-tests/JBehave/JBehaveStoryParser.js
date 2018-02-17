@@ -27,7 +27,7 @@ JBehaveStoryParser.prototype.start = function() {
     model.addFunctions(excelPlugin);
     const fflFile = require('fs').readFileSync(this.fflFile, 'utf8');
     excelPlugin.initComplete(this.modelName).then(function(matrix) {
-        SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
+        SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
         model.importFFL(fflFile)
 
         //TODO: allow multiple contexts here they should inherit model.lme but not modify it.
@@ -47,6 +47,10 @@ JBehaveStoryParser.prototype.start = function() {
         }
         storyParser.start()
         storyParser.call()
+
+    /*    var feedback = model.lme.fixProblemsInImportedSolution();
+        if (!feedback.valid) succes = false*/
+
         if (!succes) process.exit(1);
     }).catch(function(err) {
         log.error(err)

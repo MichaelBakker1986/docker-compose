@@ -15,19 +15,19 @@ var params = window.location.href.split('#')[1].split('&')
 
 const user_session = {
     disablePreviewButton: true,
-    fflModelPath: params[0] || 'SCORECARDTESTMODEL',
-    page: 'scorecard',
-    fflModel: '',
-    version: '0.0.7',
-    author: "michael.bakker@topicus.nl",
-    user: {
+    fflModelPath        : params[0] || 'SCORECARDTESTMODEL',
+    page                : 'scorecard',
+    fflModel            : '',
+    version             : '0.0.7',
+    author              : "michael.bakker@topicus.nl",
+    user                : {
         name: params[1] || 'DEMO'
     },
-    messages: {
+    messages            : {
         data: [
-            {text: 'Scorecard converter!'},
-            {text: 'Implement refersTo generic!\nrefersTo STEP01\nrefersTo numberVariable</br>Multi dimentional is a Step and a Tuple'},
-            {text: 'Make bigdata analyses from all models to find generics'}
+            { text: 'Scorecard converter!' },
+            { text: 'Implement refersTo generic!\nrefersTo STEP01\nrefersTo numberVariable</br>Multi dimentional is a Step and a Tuple' },
+            { text: 'Make bigdata analyses from all models to find generics' }
         ]
     }
 }
@@ -36,7 +36,7 @@ angular.module('lmeapp', ['angular.filter'])
 
         const AceEditor = require('./ace_editor_api').AceEditor
         const matrixManager = new MatrixManager()
-        const matrixController = new MatrixController($scope, $http, matrixManager, {halfHeight: true})
+        const matrixController = new MatrixController($scope, $http, matrixManager, { halfHeight: true })
         const debugController = new DebugController($scope, $http)
         $http.get('whoami').then(function(response) {
             user_session.user.name = response.data.split(',')[0]
@@ -61,7 +61,7 @@ angular.module('lmeapp', ['angular.filter'])
                     hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
                     history.push({
                         create_time: obj.create_time,
-                        data: hashes[obj.uuid]
+                        data       : hashes[obj.uuid]
                     })
                 }
                 history.reverse()
@@ -70,7 +70,7 @@ angular.module('lmeapp', ['angular.filter'])
                 })
 
             }).fail(function(err) {
-                console.error(err)
+                console.error('Error while reading modelchanges.', err)
             })
         }
         const register = new Register();
@@ -78,13 +78,13 @@ angular.module('lmeapp', ['angular.filter'])
         DEBUGGER = debugManager
         $scope.register = register;
 
-        const right_editor = new AceEditor("right_editor", {halfHeight: true});
+        const right_editor = new AceEditor("right_editor", { halfHeight: true });
         const jBehaveController = new JBehaveController($scope, $http, null, right_editor, user_session)
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
         $scope.currentView = 'FFLModelEditorView'
         $scope.fflType = '.ffl'
-        var currentIndexer = new RegisterToFFL(register, {schema: [], nodes: []});//current modelindexer
+        var currentIndexer = new RegisterToFFL(register, { schema: [], nodes: [] });//current modelindexer
         const fflEditor = new AceEditor("editor");
         const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register)
 
@@ -100,11 +100,11 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.publishDockerImage = function() {
             Pace.track(function() {
                 $.post("publishDockerImage/" + $scope.session.fflModelPath, {
-                    story: right_editor.getValue(),
-                    matrix: matrixManager.toFatrix(),
+                    story  : right_editor.getValue(),
+                    matrix : matrixManager.toFatrix(),
                     fflData: fflEditor.getValue()
                 }, function(data) {
-                    console.info('Done')
+                    console.info('Finished publishing docker image.')
                 });
             });
         }
@@ -215,7 +215,7 @@ angular.module('lmeapp', ['angular.filter'])
                 const wordMap = []
                 for (var name in names) {
                     wordMap.push(
-                        {"word": name}
+                        { "word": name }
                     )
                 }
                 fflEditor.addCompleter(function(editor, session, pos, prefix, callback) {
@@ -224,7 +224,7 @@ angular.module('lmeapp', ['angular.filter'])
                         return
                     }
                     callback(null, wordMap.map(function(ea) {
-                        return {name: ea.word, value: ea.word, meta: "optional text"}
+                        return { name: ea.word, value: ea.word, meta: "optional text" }
                     }));
                 })
                 $scope.reloadFFL();
@@ -245,18 +245,18 @@ angular.module('lmeapp', ['angular.filter'])
 
         $.getJSON("models", function(data) {
             $("#models").autocomplete({
-                source: data,
+                source   : data,
                 autoFocus: true,
-                change: function() {
+                change   : function() {
                     user_session.fflModelPath = $('#models').val();
                     handleModelChange()
                 }
             });
         }).fail(function() {
             $("#models").autocomplete({
-                source: [],
+                source   : [],
                 autoFocus: true,
-                change: function() {
+                change   : function() {
                     user_session.fflModelPath = $('#models').val();
                     handleModelChange()
                 }
@@ -338,28 +338,28 @@ angular.module('lmeapp', ['angular.filter'])
         $(window).bind('keydown', function(evt) {
             if (evt.ctrlKey || evt.metaKey) {
                 switch (String.fromCharCode(evt.which).toLowerCase()) {
-                    case 's':
+                case 's':
+                    evt.preventDefault();
+                    $('#saveFileInView').click();
+                    break;
+                case 'f':
+                    if (evt.shiftKey) {
                         evt.preventDefault();
-                        $('#saveFileInView').click();
-                        break;
-                    case 'f':
-                        if (evt.shiftKey) {
-                            evt.preventDefault();
-                            $scope.toggleFormatter()
-                        }
-                        break;
-                    case 'p':
-                        evt.preventDefault();
-                        $scope.sneakPreviewModel();
-                        break;
+                        $scope.toggleFormatter()
+                    }
+                    break;
+                case 'p':
+                    evt.preventDefault();
+                    $scope.sneakPreviewModel();
+                    break;
                 }
             } else {
                 switch (evt.keyCode) {
-                    case 117://F6
-                        evt.preventDefault();
-                        $('#models').select()
-                        $('#models').focus()
-                        break;
+                case 117://F6
+                    evt.preventDefault();
+                    $('#models').select()
+                    $('#models').focus()
+                    break;
                 }
             }
         });

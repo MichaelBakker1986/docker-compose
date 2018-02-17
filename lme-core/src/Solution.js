@@ -8,6 +8,7 @@ function Solution(solutionName) {
     this.nodes = [];
     this.addedRowIds = new Set();
     this.formulas = new Set();
+    this.formulas = new Set();
     this.root = {};
 }
 
@@ -15,6 +16,9 @@ Solution.prototype.hasNode = function(rowId) {
     var has = this.addedRowIds.has(rowId);
     this.addedRowIds.add(rowId);
     return has;
+}
+Solution.prototype.getFormulaKeys = function() {
+    return Array.from(this.formulas)
 }
 Solution.prototype.setParentName = function(uiNode, parentId) {
     uiNode.parentName = (parentId === undefined ? 'root_value' : parentId + '_value');

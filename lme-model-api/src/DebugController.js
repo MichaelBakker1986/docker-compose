@@ -22,7 +22,6 @@ fflEditor.fflEditor.on("guttermousedown", function(e) {
 })
 
 function doStep() {
-    console.info(debugManager.getCurrentLine())
     edit.gotoLine(debugManager.getCurrentLine())
     debugManager.nextStep()
 }

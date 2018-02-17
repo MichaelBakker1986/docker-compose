@@ -30,7 +30,7 @@ ChangeManager.prototype.syntaxCheck = function(ffl) {
         this.error = null
     } catch (err) {
         this.error = err.toString()
-        console.error(err)
+        console.error('Error while checking syntax', err)
     }
 }
 
@@ -41,7 +41,6 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
     this.warnings.length = 0;
     //will also update the register
     if (this.changed) {
-        //console.info('Changed content in FFL, reparsing all data')
         this.syntaxCheck(ffl, cursor);
         this.lines = ffl.split('\n')
         this.namedIndex = this.register.getIndex('name');
@@ -51,7 +50,7 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
         for (var i = 0; i < names.length; i++) {
             if (doubles[names[i]]) {
                 this.warnings.push({
-                    pos: doubles[names[i]],
+                    pos    : doubles[names[i]],
                     message: "duplicate variablename" + names[i]
                 })
                 doubles[names[i]].push(i);

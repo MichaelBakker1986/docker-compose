@@ -19,7 +19,6 @@ const headers = {
 
 function TimeAxis(data) {
     this.importData = data
-    // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
     var viewmodes = {};

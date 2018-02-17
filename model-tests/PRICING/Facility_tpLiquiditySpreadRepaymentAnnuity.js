@@ -1,6 +1,6 @@
+const log = require('log6')
 const duplicates = {}
-var jslrs = require("js-longest-repeated-substring");
-
+const jslrs = require("js-longest-repeated-substring");
 
 String.prototype.findParenthesis = function() {
     var a = [], r = [];
@@ -45,7 +45,6 @@ f = f.replace(/MatrixLookup\("AAB_Parameters\.xls"\,/gmi, 'MatrixLookup(')
  * Example simple variable extraction
  */
 f = f.replace(/X\*12/gmi, 'cTsY')
-console.info(">>>>>. " + jslrs.lrs(f)); // display ATCGA
-
-console.info(f)
-console.info(excelFormula.formatFormula(f))
+log.info(">>>>>. " + jslrs.lrs(f)); // display ATCGA
+log.info(f)
+log.info(excelFormula.formatFormula(f))

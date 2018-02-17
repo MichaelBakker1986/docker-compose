@@ -59,6 +59,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const modifierIndex = indexer.schemaIndexes.modifier;
     const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
     const parentNameIndex = indexer.schemaIndexes.parentId;
+    const visibleIndex = indexer.schemaIndexes.visible;
 
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
@@ -218,12 +219,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             //' + node[nameIndex] + '.required &&
             //valid formulas are only interesting when entered OR required
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
-            //if (validFormulas.length > 0) console.info(node[nameIndex] + ':' + node[validIndex])
         }
         const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype), displaytype, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
-        if (visibleFormula && parentId) node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
+        if (visibleFormula && parentId) {
+            node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleIndex][visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
+        }
 
         if (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals);
         if (display_options) uiNode.display_options = display_options

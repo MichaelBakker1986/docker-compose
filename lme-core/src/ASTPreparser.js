@@ -130,12 +130,6 @@ var simplified = {
                 }
             }
         }
-
-        /*  console.info('test')*/
-        /* node.arguments = [{
-         "type": "Identifier",
-         "name": "1"
-         }];*/
     },
     HVALUES: function(formulaInfo, node) {
         node.callee.name = "HVALUES";
@@ -153,12 +147,6 @@ var simplified = {
                 }
             }
         }
-
-        /*  console.info('test')*/
-        /* node.arguments = [{
-         "type": "Identifier",
-         "name": "1"
-         }];*/
     },
     /*
      OnZero: function (node)

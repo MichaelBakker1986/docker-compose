@@ -1,3 +1,6 @@
+/**
+ * Convert Register into Formula-View only
+ */
 const FFLFormatter = require('../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const Register = require('../lme-core/exchange_modules/ffl/Register').Register
 

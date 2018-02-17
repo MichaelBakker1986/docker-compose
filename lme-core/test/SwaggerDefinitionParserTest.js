@@ -616,10 +616,4 @@ for (var i = 0; i < fflTestModels.length; i++) {
         rowId: 'KinderSpaarPlan',
         type: 'output'
     })
-    /*   var outputResult = {
-           "type": "array",
-           "items": swaggerDefinitionOutput
-       }*/
-    // console.info(JSON.stringify(swaggerDefinitionOutput, null, 2))
-    // assert(JSON.stringify(swaggerDefinitionOutput, null, 2).length == 5623)
 }

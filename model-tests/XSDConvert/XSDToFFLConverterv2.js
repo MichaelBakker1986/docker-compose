@@ -6,6 +6,7 @@ const Register = require('../../lme-core/exchange_modules/ffl/Register').Registe
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
 const baseConverter = new BaseConverter()
 const annotedVisitor = new BaseConvertionVisitor(baseConverter);
+const log = require('log6')
 const converter = new Xsd2JsonSchema({
     baseId: "#",
     xsdBaseDir: __dirname,
@@ -92,7 +93,6 @@ XSDConverter.prototype.extractVariables = function(id, jsonObj) {
     const variables = this.variables;
     //restructure oneOf instances
     jsVisit.travelOne(jsonObj, null, function(key, node, ctx) {
-      //  console.info(key)
         if (key == null) return
         if (node.oneOf && node._parentKey == 'properties' && !node._parent.id) {
             if (node.oneOf[1].type == 'array') {
@@ -248,10 +248,9 @@ XSDConverter.prototype.start = function() {
 XSDConverter.prototype.print = function() {
     const names = XSDRegister.getIndex('name');
     for (var v in names) {
-        console.info('---' + v + '---')
-        console.info(this.variables[v])
-        //console.info(names[v])
-        console.info(new RegisterToFFL(XSDRegister).toGeneratedFFL(v, 'LGD').join('\n'))
+        log.info('---' + v + '---')
+        log.info(this.variables[v])
+        log.info(new RegisterToFFL(XSDRegister).toGeneratedFFL(v, 'LGD').join('\n'))
     }
 }
 exports.XSDConverter = XSDConverter

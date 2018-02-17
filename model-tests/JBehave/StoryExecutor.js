@@ -7,9 +7,9 @@ const story = process.argv[4];
 
 const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
 
-const gyllionKspTest = new JBehaveStoryParser({
+const storyParser = new JBehaveStoryParser({
     fflFile: fflFile,
     modelName: modelname,
     storyFile: story
 })
-gyllionKspTest.start()
+storyParser.start()

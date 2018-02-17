@@ -1,5 +1,5 @@
 //just an dummy-template to quickly create a model
-var newModelTemplate = "model $1 uses BaseModel\n" +
+const newModelTemplate = "model $1 uses BaseModel\n" +
     "{\n" +
     " version: \"1.0\";\n" +
     " root\n" +
@@ -51,7 +51,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             //script failed to load
         } else {
             //script loaded but failed to parse
-            console.info('resources/' + user_session.fflModelPath + '.js' + ":[" + arguments[2].toString() + ']')
+            console.info('Error while loading modeldata: resources/' + user_session.fflModelPath + '.js' + ":[" + arguments[2].toString() + ']')
         }
     })
     fflEditor.aceEditor.on("mousedown", function() {

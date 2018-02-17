@@ -61,14 +61,14 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
     context.calc_count++;
     context.audit.push({
         saveToken: context.saveToken,
-        hash: xas.hash + yas.hash + 0,
+        hash     : xas.hash + yas.hash + 0,
         formulaId: localFormula.id || localFormula.index
     })
     var userValue = value;
     var variable = fetchSolutionNode(row, (col || 'value'));
     if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
         if (userValue != null) {
-            const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
+            const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas);
             const lookupvalue = ValueFacade.validChoice(choices, row, userValue)
             if (log.DEBUG && lookupvalue == null) log.warn('Invalid choice-value set for ' + row + ' [' + userValue + ']')
             userValue = lookupvalue ? lookupvalue.name : null;
@@ -131,7 +131,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         if (colType === 'value') {
             if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
                 if (returnValue != null) {
-                    const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices');
+                    const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas);
                     returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
                     const choicesLookup = choices.lookup('name', String(returnValue));
                     returnValue = choicesLookup ? choicesLookup.value : returnValue;
@@ -199,8 +199,8 @@ ValueFacade.getValuesFromFormulaIds = function(keys, docValues) {
             for (var cachedValue in cachevalues)
                 values.push({
                     varName: formulaName,
-                    colId: cachedValue,
-                    value: cachevalues[cachedValue]
+                    colId  : cachedValue,
+                    value  : cachevalues[cachedValue]
                 });
         }
     }

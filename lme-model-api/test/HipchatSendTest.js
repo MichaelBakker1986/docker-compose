@@ -2,6 +2,7 @@ const request = require('request');
 const hostname = require('os').hostname();
 var uuid = require('uuid4');
 var name = 'KSP'
+const log = require('log6')
 
 function send(text, level) {
     request.post({
@@ -11,8 +12,8 @@ function send(text, level) {
                 "message": '<span>ffl model update:</span><a href="http://' + hostname + ':8083/#' + name + '&' + uuid() + '">' + name + "</a><span>" + name + '</span>'
             }
         }, (err, res, body) => {
-            if (err) console.error(err)
-            console.info(err ? "" + err : 'Hipchat post ok')
+            if (err) log.error(err)
+            log.info(err ? "" + err : 'Hipchat post ok')
         }
     )
 }

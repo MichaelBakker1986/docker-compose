@@ -5,7 +5,6 @@ angular
             variable.value = value.name
         }
         window.onerror = function errorHandler(msg, url, line) {
-            console.log(arguments);
             // Just let default handler run.
             return true;
         }
@@ -23,7 +22,7 @@ angular
                 }
             });
             $(window).ajaxError(function() {
-                console.info('global')
+                console.error('global ajax error')
             });
         });
 
@@ -34,13 +33,12 @@ angular
                 }
                 $scope.name = LME.name
             }).fail(function(err) {
-                console.info('test')
+                console.info('Failed loading ksp.js')
             }).catch(function(err) {
-                //console.error("failed loading ", err);
                 console.info("failed loading KSP.js");
             });
         } catch (err) {
-            console.info('err')
+            console.info('Failed loading ksp.js',err)
         }
         $('body').popover({
             selector: '[data-toggle="popover"]'

@@ -82,4 +82,4 @@ RegisterToFFL.prototype.toGeneratedYaml = function(rootVariableName, modelName) 
     }
     return yawmlOut;
 }
-console.info(YAML.stringify(registerToFFL.toGeneratedYaml(null, null)['root'], 6))
+log.info(YAML.stringify(registerToFFL.toGeneratedYaml(null, null)['root'], 6))

@@ -3,7 +3,7 @@ function PropertiesAssembler() {
 
 var PropertiesModel = {
     NEW_root_value: {
-        rowId: 'root',
+        rowId       : 'root',
         solutionName: 'NEW'
     }
 };
@@ -28,13 +28,13 @@ function createRootnode(modelName) {
     var newRootNodeName = newModelName + '_root_value';
     if (!rootNodes[newModelName]) {
         PropertiesModel[newRootNodeName] = {
-            name: newRootNodeName,
-            rowId: 'root',
-            colId: 'value',
+            name        : newRootNodeName,
+            rowId       : 'root',
+            colId       : 'value',
             solutionName: newModelName,
-            frequency: 'document',
-            displayAs: 'SectionAnswerType',
-            nodes: []
+            frequency   : 'document',
+            displayAs   : 'SectionAnswerType',
+            nodes       : []
         };
         rootNodes[newModelName] = PropertiesModel[newRootNodeName]
     }
@@ -42,17 +42,17 @@ function createRootnode(modelName) {
 };
 PropertiesAssembler.prototype.createRootNode = createRootnode
 
-function getOrCreateProperty(groupName, row, col) {
+const getOrCreateProperty = function(groupName, row, col) {
     var rowId = groupName + '_' + row;
     var name = rowId + "_" + col;
     var node = PropertiesModel[name];
     if (node == undefined) {
         node = {
-            rowId: row,
+            rowId       : row,
             solutionName: groupName,
-            colId: col,
-            name: name,
-            nodes: []
+            colId       : col,
+            name        : name,
+            nodes       : []
         }
         PropertiesModel[name] = node;
         rows.add(row);
@@ -87,9 +87,9 @@ function addProperty(groupName, row, col, item, parentId) {
         var parentUiModel = PropertiesModel[groupName + '_' + parentId];
         if (!hasChild(parentUiModel, property.name)) {
             parentUiModel.nodes.push({
-                name: property.name,
-                rowId: property.rowId,
-                colId: property.colId,
+                name      : property.name,
+                rowId     : property.rowId,
+                colId     : property.colId,
                 identifier: groupName + '_' + parentId
             })
         }

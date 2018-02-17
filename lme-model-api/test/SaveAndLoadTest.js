@@ -32,9 +32,9 @@ class LmeApiTester {
             uri: newModel.urlPrefix + '/id/' + id + '/data',
             json: true // Automatically parses the JSON string in the response
         }).then(function(data) {
-            console.log(JSON.stringify(data, null, 2));
+            log.info(JSON.stringify(data, null, 2));
         }).catch(function(err) {
-            console.error('Failed to complete ', err);
+            log.error('Failed to complete ', err);
         });
     }
 

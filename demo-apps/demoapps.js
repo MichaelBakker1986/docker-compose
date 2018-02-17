@@ -90,7 +90,7 @@ app.listen(port, () => {
     }).catch(function(err) {
         log.error('Failed to register ', err);
     });
-    var proxy_domain = host + ':' + internal_proxy_port;
+    const proxy_domain = host + ':' + internal_proxy_port;
     console.info(
         '<span>DEMO apps: </span>\n' +
         '<a href="http://' + domain + '/scorecard.html">Bootstrap Grid example</a><span> | </span>\n' +

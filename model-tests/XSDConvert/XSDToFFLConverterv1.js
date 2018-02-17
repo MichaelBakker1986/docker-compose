@@ -7,7 +7,7 @@ const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL
 const XSDRegister = new Register();
 var baseConverter = new BaseConverter()
 var x = new BaseConvertionVisitor(baseConverter);
-
+const log = require('log6')
 
 const converter = new Xsd2JsonSchema({
     baseId: "#",
@@ -76,7 +76,7 @@ for (var i = 0; i < array.length; i++) {
         if (key == null) return
         const realkey = key.replace(/tns:|colcom:|xsd:|comres:|pay:|colcov:|colobj:|colreg:|coladr:|met:|lgdcon:|facprod:|facrat:|facfac:|facrep:|facwith:|comens:|comdat:/, '');
         if (realkey == 'FacilityInputContainer')
-            console.info('')
+            log.info('')
         if (node.allOf) {
             //skipping inherited properties
             if (!variables[realkey])
@@ -167,7 +167,7 @@ for (var node in variables) {
     } else if (type == 'string' || type == 'integer' || type == 'number') {
         if (variable.enum) type = 'select'
         if (variable.enum) {
-            console.info(node)
+            log.info(node)
         }
         const index = XSDRegister.addRow([variable, 0, 0, node, null, null, null, false, null, null, [], type, type, '"' + node + '"', 'document', variable.maxLength, variable.pattern, variable.minimum, variable.maximum, variable.enum])
     } else if (type == 'array') {//tuple
@@ -198,7 +198,7 @@ for (var node in names) {
 }
 
 const fflInput = new RegisterToFFL(XSDRegister).toGeneratedFFL('LGDCalculationInputContainer', 'LGD').join('\n');
-console.info(fflInput)
+log.info(fflInput)
 const fflOutput = new RegisterToFFL(XSDRegister).toGeneratedFFL('LGDCalculationOutputContainer', 'LGD').join('\n');
-console.info(fflOutput)
+log.info(fflOutput)
 require('fs').writeFileSync('./LGD.ffl', 'model LGD uses BaseModel \n{\n root\n {\n  variable Q_ROOT\n   {\n   displaytype:scorecard;\n' + fflInput + '\n' + fflOutput + '\n  }\n }\n}')

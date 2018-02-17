@@ -9,5 +9,5 @@ excelPlugin.initComplete(null, __dirname + '/TestExcelFile.xlsx').then(function(
     matrixManager.setMatrices(matrix)
     if (log.DEBUG) log.info(matrixManager.toFatrix())
 }).catch(function(err) {
-    console.error(err)
+    log.error('error while reading excelfile', err)
 })

@@ -19,7 +19,6 @@ var headers = {
 }
 
 function calculateCalculationDocument(data) {
-    // console.time('initialize_xAxis');
     this.tContext = data;
     var formulasets = data.formulasets;
     var viewmodes = {};

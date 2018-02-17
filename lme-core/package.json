@@ -16,7 +16,10 @@
     "stack-adt": "^0.2.3",
     "tracer": "^0.8.11"
   },
-  "repository": {},
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
   "scripts": {
     "test": "node test/RunAllTest.js"
   },

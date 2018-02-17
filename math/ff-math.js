@@ -79,8 +79,6 @@ MatrixLookup = function(xlsfileName, tableName, row, col) {
 }
 
 FILLEDIN = function(required, entered) {
-    console.info(required)
-    console.info(entered)
     return true;
 }
 //should be:  arguments => { name: $1, y: $2 }

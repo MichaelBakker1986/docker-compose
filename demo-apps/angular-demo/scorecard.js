@@ -84,7 +84,7 @@ angular
             $http.get('shareData/' + hash).then(function(data) {
                 alert('data shared: ' + window.location.href)
             }).catch(function(err) {
-                console.error(err)
+                console.error('Error while sharing data:',err)
             })
         }
         /*   $('#startYear').datepicker({

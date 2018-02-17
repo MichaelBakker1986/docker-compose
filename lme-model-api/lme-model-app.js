@@ -150,7 +150,7 @@ app.get('*/excel/:model', function(req, res) {
     })
 })
 app.post('*/upload', function(req, res) {
-    console.info('upload')
+    log.info('upload')
     res.status(200).json({ status: 'ok' })
 })
 

@@ -11,7 +11,7 @@ const AST = require('../../ast-node-utils').ast;
 const log = require('log6')
 const YAxis = require('./YAxis')
 
-//user friendly stable API
+//user friendly API
 //importSolution(data,'type') : Solution          ; See Solution class for definiton
 //export('type')        : Object            ; raw type undefined output. When calling this read the header of the parser to get more information
 //set(rowId,value <,property> <,context>)   ; value can be anything see "get" function
@@ -51,7 +51,7 @@ JSWorkBook.prototype.getTimeViews = function() {
     return this.xaxis;
 }
 /**
- * workbook modelName leads to data modelName
+ * workbook modelName is preferred to data modelName
  */
 JSWorkBook.prototype.importFFL = function(data) {
     this.importSolution(data, 'ffl')
@@ -74,13 +74,11 @@ JSWorkBook.prototype.getSolutionName = function() {
  */
 function fixAll() {
     var attempt = 0;
-    var workbook = this;
+    const workbook = this;
     var feedback = workbook.validateImportedSolution();
-    while (!feedback.valid && attempt < 20) {
+    while (!feedback.valid && attempt < 4) {
         feedback.error.forEach(function(item) {
-            if (item.canFix) {
-                item.fix();
-            }
+            if (item.canFix) item.fix();
         });
         feedback = workbook.validateImportedSolution();
         attempt++;
@@ -97,11 +95,24 @@ function fixAll() {
  */
 var mostcommon = {}
 
-function logErrorWithVariableName(variableName, workbook, formulaInfo, e) {
+function fixForReferenceError(variableName, workbook, formulaInfo, e) {
     return function() {
         try {
-            log.debug(variableName + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
-            workbook.createFormula(1, variableName);
+            log.info(variableName + " : " + 'Fix for [' + variableName + '] in solution: ' + workbook.getSolutionName() + " : " + formulaInfo.original + ' message:[' + e + ']')
+            //So we fix the ReferenceError
+            workbook.createFormula("1", variableName, 'value', false, 'document');
+            //re-init the formula
+            //and dependencies which could cause the exception to happen.
+            for (var i = 0; i < formulaInfo.formulaDependencys.length; i++) {
+                var dependency = formulaInfo.formulaDependencys[i];
+                if (dependency.association == 'deps') {
+                    const depFormula = SolutionFacade.fetchFormulaByIndex(dependency.refId)
+                    fixForReferenceError(variableName, workbook, depFormula, e)()
+                    //   SolutionFacade.initFormulaBootstrap([dependency.refId], true);
+                }
+            }
+            SolutionFacade.initFormulaBootstrap([formulaInfo.id || formulaInfo.index], true, workbook.ma, workbook.audittrail);
+
         } catch (err) {
             log.error('Fatal error in variable [' + variableName + ']', err);
         }
@@ -119,106 +130,10 @@ function logErrorWithVariableName(variableName, workbook, formulaInfo, e) {
  *  -- When ReferenceError: Create new VARIABLE matching, remove original formula
  *  -- When RangeError:
  *  --- lookup most significant part in loop, disable formula, transform into String formula. try again
+ *
+ *  Test all variables for feedback.
+ *
  */
-function validateImportedSolution() {
-    var validateResponse = {
-        succes: [],
-        error: []
-    };
-    var context = this.context;
-    var workbook = this;
-
-    function formulaFixer(elemId) {
-        const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
-        try {
-            //iterate all formula-sets to test 100%
-            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
-            validateResponse.succes.push(formulaInfo.name);
-        }
-        catch (e) {
-            var fix;
-            if (e.name === 'ReferenceError') {
-                var variableName = e.message.split(' ')[0];
-                //it could occur same problem is found multiple times. Strip those errors
-                if (!validateResponse.error.lookup('variableName', variableName)) {
-                    fix = {
-                        canFix: true,
-                        variableName: variableName,
-                        fixMessage: 'Add',
-                        fix: logErrorWithVariableName(variableName, workbook, formulaInfo, e)
-                    };
-                }
-                else {
-                    fix = {
-                        hide: true
-                    }
-                }
-            }
-            else if (e.name === 'RangeError') {
-                //we should Isolate the most offending formula here instead of all
-                //make a graph of the loops, resolve the deepest one, only add this one.
-                fix = {
-                    canFix: true,
-                    fixMessage: 'Remove formula',
-                    fix: function() {
-                        var deps = Object.keys(formulaInfo.deps);
-                        var refs = Object.keys(formulaInfo.refs);
-
-                        formulaInfo.formulaDependencys.forEach(function(dependency) {
-                            const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
-                            try {
-                                ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
-                            } catch (e) {
-                                // log.error(e)
-                                //NOOP
-                                mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
-                            }
-                        })
-                        if (log.DEBUG) log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
-                            + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
-                        )
-                        formulaInfo.parsed = undefined;
-                        formulaInfo.body = AST.STRING(formulaInfo.original);
-                        //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                        SolutionFacade.initFormulaBootstrap([elemId], false);
-                        workbook.updateValues();
-                    }
-                };
-            }
-            else {
-                //try underlying formulas
-                formulaInfo.formulaDependencys.forEach(function(dependency) {
-                    if (dependency.association === 'deps') {
-                        const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
-                        try {
-                            ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
-                        } catch (e) {
-                            log.error(e)
-                            //NOOP
-                        }
-                    }
-                })
-                log.error(e)
-                log.warn('unable to fix problem in ' + formulaInfo.original + ' fail:' + e)
-                log.warn(formulaInfo);
-                fix = {
-                    canFix: false
-                }
-            }
-            //filter Exceptions not worth viewing e.g. Duplicates
-            if (!fix.hide) {
-                fix.formulaName = formulaInfo.name;
-                fix.reason = e.message;
-                validateResponse.error.push(fix);
-            }
-        }
-    };
-    this.visitSolutionFormulas(formulaFixer);
-    validateResponse.valid = validateResponse.error.length === 0;
-    validateResponse.fixProblemsInImportedSolution = fixAll;
-    validateResponse.more = mostcommon;
-    return validateResponse;
-};
 /**
  * Visit imported Formula's
  */
@@ -415,9 +330,107 @@ JSWorkBook.prototype.walkProperties = function(node, visitor, y, type, treeDepth
     };
     ValueFacade.visit(node, itarfunction, treeDepth);
 }
-JSWorkBook.prototype.validateImportedSolution = validateImportedSolution;
+JSWorkBook.prototype.validateImportedSolution = function() {
+    var validateResponse = {
+        succes: [],
+        error : []
+    };
+    const context = this.context;
+    const workbook = this;
+
+    function formulaFixer(elemId) {
+        const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
+        try {
+            //iterate all formula-sets to test 100%
+            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
+            validateResponse.succes.push(formulaInfo.name);
+        }
+        catch (e) {
+            var fix;
+            if (e.name === 'ReferenceError') {
+                const variableName = e.message.split(' ')[0];
+                //it could occur same problem is found multiple times. Strip those errors
+                if (!validateResponse.error.lookup('variableName', variableName)) {
+                    fix = {
+                        canFix      : true,
+                        variableName: variableName,
+                        fixMessage  : 'Add',
+                        fix         : fixForReferenceError(variableName, workbook, formulaInfo, e)
+                    };
+                }
+                else {
+                    fix = {
+                        hide: true
+                    }
+                }
+            }
+            else if (e.name === 'RangeError') {
+                //we should Isolate the most offending formula here instead of all
+                //make a graph of the loops, resolve the deepest one, only add this one.
+                fix = {
+                    canFix    : true,
+                    fixMessage: 'Remove formula',
+                    fix       : function() {
+                        var deps = Object.keys(formulaInfo.deps);
+                        var refs = Object.keys(formulaInfo.refs);
+                        for (var i = 0; i < formulaInfo.formulaDependencys.length; i++) {
+                            const dependency = formulaInfo.formulaDependencys[i];
+                            const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
+                            try {
+                                ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
+                            } catch (e) {
+                                // log.error(e)
+                                //NOOP
+                                mostcommon[formulaInfo.name] = isNaN(mostcommon[formulaInfo.name]) ? 1 : mostcommon[formulaInfo.name] + 1
+                            }
+                        }
+                        if (log.DEBUG) log.debug('Loop detected for [' + formulaInfo.name + '], Making string formula ' + formulaInfo.original + "\n"
+                            + "DEPS[" + deps.length + "][" + deps + "]\nREFS[" + refs.length + "]:[" + refs + "]"
+                        )
+                        formulaInfo.parsed = undefined;
+                        formulaInfo.body = AST.STRING(formulaInfo.original);
+                        //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
+                        SolutionFacade.initFormulaBootstrap([elemId], false, workbook.ma, workbook.audittrail);
+                        workbook.updateValues();
+                    }
+                };
+            }
+            else {
+                //try underlying formulas
+                formulaInfo.formulaDependencys.forEach(function(dependency) {
+                    if (dependency.association === 'deps') {
+                        const dependencyInfo = SolutionFacade.fetchFormulaByIndex(dependency.refId);
+                        try {
+                            ValueFacade.apiGetValue(dependencyInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
+                        } catch (e) {
+                            log.error(e)
+                            //NOOP
+                        }
+                    }
+                })
+                log.error(e)
+                log.warn('unable to fix problem in ' + formulaInfo.original + ' fail:' + e)
+                log.warn(formulaInfo);
+                fix = {
+                    canFix: false
+                }
+            }
+            //filter Exceptions not worth viewing e.g. Duplicates
+            if (!fix.hide) {
+                fix.formulaName = formulaInfo.name;
+                fix.reason = e.message;
+                validateResponse.error.push(fix);
+            }
+        }
+    };
+    this.visitSolutionFormulas(formulaFixer);
+    validateResponse.valid = validateResponse.error.length === 0;
+    validateResponse.fixProblemsInImportedSolution = fixAll;
+    validateResponse.more = mostcommon;
+    return validateResponse;
+};
 JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
-    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none');
+    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none', this);
     const node = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
     if (tuple) {
         node.tuple = tuple;

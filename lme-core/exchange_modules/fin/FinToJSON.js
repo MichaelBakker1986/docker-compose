@@ -1,8 +1,8 @@
 /**
  * We might actually need the fin->ffl/lme parser since the main fin language is .fin
  */
-var logger = require('tracer').console();
 var assert = require('assert');
+const log = require('log6')
 var finFormula = require('../ffl/FinFormula');
 //Attempt3
 //the king of regulars, its very simple actually, just get scope all needed information
@@ -62,17 +62,14 @@ types = {
     },
     language: function (solution, obj)
     {
-        //console.info('Language ' + obj)
         //nothing for now
     },
     tryinclude: function (solution, obj)
     {
-        //console.info('tryInclude ' + obj)
         //nothing for now
     },
     quit: function (solution, obj)
     {
-        //console.info('Quit ' + obj)
         //nothing for now
     },
     unknown: function (solution, obj)
@@ -90,7 +87,7 @@ types = {
         }
         else
         {
-            console.info('Warn:  ' + JSON.stringify(obj))
+            log.info('Warn:  ' + JSON.stringify(obj))
         }
     },
     //there is soo many pattern, we can do this easier later.
@@ -137,7 +134,7 @@ types = {
         //hint,visible,locked,title
         if (obj.title === undefined)
         {
-            console.info('');
+            log.info('>>' + obj);
         }
         obj.title = "'" + obj.title.replace(/["'](.*)["']/gm, "$1") + "'";
     }
@@ -148,7 +145,6 @@ function parseFinFile(buf)
 {
     if (buf.length !== 0)
     {
-        console.time('finToJSON')
         //cant change too much here,
         //but removing large chunks, like comments, empty lines will speed up the rest.
         buf = buf.replace(/;.*$/gm, '');//remove commented lines and commented appendings
@@ -277,13 +273,12 @@ function parseFinFile(buf)
                 //ensure the array exists
                 //there are two groups, formulas and variables
                 orderedByType[obj._type].push(obj);
-                // console.info(obj.property || state.name)
                 //find a way to be case-insensitive
                 var objName = (obj.property || nestedState.name || state.name).toLowerCase();
 
                 if (types[objName] == undefined)
                 {
-                    logger.warn('skipping type:[' + obj.property + " OR " + JSON.stringify(state) + "] its not yet registered.")
+                    log.warn('skipping type:[' + obj.property + " OR " + JSON.stringify(state) + "] its not yet registered.")
                     continue;
                 }
                 types[objName](solution, obj);
@@ -301,7 +296,6 @@ function parseFinFile(buf)
             solution.orderedByType = orderedByType;
             solution.valid = true;
         }
-        console.timeEnd('finToJSON')
     }
     //.info(types)
     return solution;

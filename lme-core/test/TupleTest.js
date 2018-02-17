@@ -22,7 +22,6 @@ const val = workbook.export('webexport')
 let called = 0;
 workbook.walkProperties(rootVariable, function(node, yax, treeDepth, y) {
     called++;
-    //console.info(" ".repeat(treeDepth) + y.hash + "_" + y.index + "_" + node.name + ": " + yax)
 }, yAxis, null, 0)
 assert(called == 3, 'Should be called for root_value and Tuple_value and RootVariable_value')
 

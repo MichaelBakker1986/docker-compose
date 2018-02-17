@@ -7,6 +7,11 @@
  *  2) Assert a value provided within the story
  */
 const log = require('log6')
+
+const map_property = {
+    'invisible': 'visible',
+    'visible'  : 'visible'
+}
 const functionMapper = {
     //And variable Q_MAP04_VRAAG12 is set to 0 for document
     setValue          : {
@@ -73,24 +78,39 @@ const functionMapper = {
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
         regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable )?(\w+)(\((\w+,?){0,3}\))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
         call : function(workbook, linenumber, line, args) {
-            //default decimals are defined by the ammount of decimals in the value.
+
+            const maptable = {
+                'OI'       : 'Onvolledig ingevuld.',
+                'invisible': false,
+                'visible'  : true,
+                'NA'       : NA
+            }
+            //default decimals are defined by the amount of decimals in the value.
             const variableName   = args[0],
                   tupleIndexName = args[1],
                   decimals       = (args[3] || (args[4].split('.')[1] || '').length),
-                  value          = args[4],
+                  //Should the input be validated?
+                  testProperty   = args[4] == 'invisible' || args[4] == 'visible',
+                  property       = map_property[args[4]] || 'value',
+                  value          = maptable[args[4]] == null ? args[4] : maptable[args[4]],
                   columnId       = (parseInt(args[5]) || 1) - 1
+
             return [function() {
                 const result = {};
                 const yas = workbook.resolveYas(variableName, tupleIndexName)
-                const rawValue = workbook.get(variableName, 'value', columnId, yas);
+                const rawValue = workbook.get(variableName, property, columnId, yas);
                 const validValue = workbook.get(variableName, 'valid', columnId, yas);
+                var testValue = value;
                 var calculatedValue = rawValue;
-                if (decimals != null && !isNaN(calculatedValue)) calculatedValue = calculatedValue.toFixed(decimals)
+                if (decimals != null && property == 'value' && !isNaN(calculatedValue) && !isNaN(value)) {
+                    calculatedValue = calculatedValue.toFixed(decimals)
+                    testValue = Number(value).toFixed(decimals)
+                }
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
-                if (calculatedValue != value) {
+                if (calculatedValue != testValue) {
                     result.status = 'fail'
                     result.message = variableName + ' should be ' + value + '. But is ' + calculatedValue
-                } else if (validValue.length > 0) {
+                } else if (testProperty && validValue.length > 0) {
                     result.status = 'fail'
                     result.message = rawValue + " is not a valid value for " + variableName + ". Because " + validValue
                 } else {

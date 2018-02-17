@@ -28,12 +28,10 @@ var parser = {
 
             //at some lines we need to remember some state, f.e. if it were Trend formula or Visible formula
             var finVariables = parseResult.orderedByType.variables;
-            console.time('jsonToNode')
 
             createVariableTree(finVariables, solution);
             //add all Formula Groups, Choices, Trend, NoTrend, Hint, Title
             createFormulaGroupsSafe(solution, parseResult.orderedByType.formulas);
-            console.timeEnd('jsonToNode')
         }
         return solution;
     },
@@ -75,7 +73,6 @@ function createVariableTree(variables, solution) {
         //nothing to do
         return;
     }
-    console.time('buildHierarchy')
     var cache = {};
     var stack = new Stack();
 
@@ -108,7 +105,6 @@ function createVariableTree(variables, solution) {
         cache[stack.peek().name] = variable;
         addNode(solution, variable, stack.peek())
     }
-    console.timeEnd('buildHierarchy')
 }
 
 function createFormulaGroupsSafe(solution, formulas) {

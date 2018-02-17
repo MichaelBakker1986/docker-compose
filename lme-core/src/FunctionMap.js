@@ -16,11 +16,11 @@ function fm() {
 
 const m = []
 //don't directly use this method, use JSWorkBook instead.
-fm.prototype.apiGet = function(formula, x, y, z, v) {
+fm.prototype.apiGet = function(formula, x, y, z, v, ma) {
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
     var id = formula.id || formula.index;
-    return m[id](id, x, y, z, v, m);
+    return (ma || m)[id](id, x, y, z, v, m);
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     var id = formula.id || formula.index;
@@ -29,29 +29,50 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
         var newValue = value;
         v[id][hash] = newValue;
     }
-    else if (log.DEBUG) log.debug('[%s] does not exist', id);
+    else if (log.DEBUG) log.debug('[%s] does not exist in the model.', id);
 }
-if (!global.DEBUGMODUS) {
-    global.DEBUGMODUS = false
-}
-fm.prototype.initializeFormula = function(newFormula) {
+fm.prototype.initializeFormula = function(newFormula, ma, audittrail) {
     const id = newFormula.id || newFormula.index;
-    //"debug('" + newFormula.name + "');
+    const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+    const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
+    const javaScriptFunction = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
+
+    if (global.DEBUGMODUS) (ma || m)[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
+    else (ma || m)[id] = javaScriptFunction;
+}
+/**
+ * The debugwrapper is used by unit-tests and IDE
+ * It supports engine audit-trail
+ * Inject source FFL into the parsed functions
+ * @param javaScriptFunction
+ * @returns {Function}
+ */
+const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
     if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
-    var stringFunction;
+    const idxMap = [30, 10, 10, 10, 10, 240]
 
-    if (global.DEBUGMODUS) stringFunction = "const debugv =  (" + newFormula.parsed + ") ;console.info(' variable[%s] value[%s] tuple:[%s] column[%s]','" + newFormula.name + "',debugv,y.display,x.hash);return debugv;/*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
-    else stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+    const variableName = newFormula.name.split('_').slice(1, -1).join('_')
+    const property = newFormula.name.split('_').pop()
 
-    const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction).bind(global);
-    m[id] = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
-};
+    return function(f, x, y, z, v, m) {
+
+        const value = javaScriptFunction(f, x, y, z, v, m);
+        const el = [variableName, property, y.display, x.hash, value, newFormula.original]
+        const tout = el.map(function(innerEl, idx) {
+            const prefix = [];
+            prefix.length = Math.max(idxMap[idx] - String(innerEl).length, 0);
+            return String(innerEl).slice(0, idxMap[idx] - 1) + prefix.join(' ')
+        }).join("|")
+        log.info(tout)
+        return value;
+    }
+}
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of
 //for now we just use static functions and user enterable function that will not cache.
 // the ApiGet. we don't need the CacheLocked and the NoCacheUnlocked they are just for further optimalizations.
-var formulaDecorators = {
+const formulaDecorators = {
     //nothing to to, just return the inner function
-    noCacheLocked: function(innerFunction, formulaName) {
+    noCacheLocked  : function(innerFunction, formulaName) {
         return innerFunction;
     },
     //Unlocked formula's can be user entered.

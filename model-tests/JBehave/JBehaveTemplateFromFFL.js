@@ -2,6 +2,7 @@ require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const LME = require('../../lme-model-api/src/lme');
 const assert = require('assert');
 const Context  = require('../../lme-core/src/Context'),
+      log      = require('log6'),
       Register = require('../../lme-core/exchange_modules/ffl/Register').Register;
 const context = new Context({ columnSize: 1, columns: ['value', 'visible'] });
 const wb = new LME(null, context)
@@ -31,10 +32,10 @@ for (var i = 0; i < jbehaveTemplateOutput.length; i++) {
     variable[3] = workbook.get(variable[1]);
 }
 //When Vraag11 is set to 1
-console.info(jbehaveTemplateInput.map(function(el) {
+log.info(jbehaveTemplateInput.map(function(el) {
     return el.join(' ')
 }).join('\n'))
 //And Q_MAP04_SCORE01 should be 47
-console.info(jbehaveTemplateOutput.map(function(el) {
+log.info(jbehaveTemplateOutput.map(function(el) {
     return el.join(' ')
 }).join('\n'))

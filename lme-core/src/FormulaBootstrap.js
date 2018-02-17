@@ -394,7 +394,7 @@ var traverseTypes = {
                     delete node.computed;
                 }
             }
-            //Sequence is XYZ[a,b]...
+            //Sequence is XYZ[a,b]... '[x,x] Not implemented this feature yet : ' + orId.original
             else if (property.type === 'SequenceExpression') {
                 node.type = IDENTIFIER;
                 buildFunc(orId, node, 0, node.object);
@@ -402,7 +402,6 @@ var traverseTypes = {
                 delete node.object;
                 delete node.property;
                 delete node.computed;
-                //console.info('[x,x] Not implemented this feature yet : ' + orId.original)
             }
             else {
                 node.type = IDENTIFIER;

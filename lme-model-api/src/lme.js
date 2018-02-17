@@ -10,11 +10,10 @@ const DEFAULT_MODELNAME = "SCORECARDTESTMODEL";
 const LMEFacade = require('../../lme-core').LMEFacade;
 LMEFacade.addFunctions(require("../../formulajs-connect").formulajs);
 
-function LmeAPI(TimeModel, Ctx, interval) {
+function LmeAPI(TimeModel, Ctx, interval, optsArg) {
     const Context = require('../../lme-core/src/Context');
     const WorkBook = require('../../lme-core/src/JSWorkBook');
-
-    //TODO: the TimeModel is probably part of the Context object.
+    //TODO: the TimeModel is part of the Context object.
     this.lme = new WorkBook(Ctx || new Context(), TimeModel ? new CustomTimeModel(TimeModel) : require('../../lme-core/src/XAxis'), interval);
     this.modelName = undefined;
     this.urlPrefix = '';

@@ -14,10 +14,10 @@ MatrixController.prototype.registerEditorToClickNames = function(fflEditor, user
 MatrixController.prototype.refresh = function() {
     var annotations = []
     annotations.push({
-        row: 0,
+        row   : 0,
         column: 0,
-        text: 'Named tables found in matrix file', // Or the Json reply from the parser
-        type: 'info'
+        text  : 'Named tables found in matrix file', // Or the Json reply from the parser
+        type  : 'info'
     })
     this.matrix_editor.setAnnotations(annotations);
 }
@@ -35,7 +35,7 @@ MatrixController.prototype.updateMatrix = function(model_name) {
             self.matrix_editor.aceEditor.setValue(self.matrixManager.toFatrix())
         })
     }).fail(function(err) {
-        console.error(err)
+        console.error("Error reading excel file " + model_name, err)
     })
 }
 
