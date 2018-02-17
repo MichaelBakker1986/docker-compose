@@ -1,14 +1,16 @@
 //app scope context
-var ApplicationContext = {
-    parsers: []
+const ApplicationContext = {
+    parsers   : [], //holds all injected parsers
+    ma        : [], //holds all loaded model-functions.
+    audittrail: []  //trailer
 }
-var propertyDefaults = {
-    'visible': true,
-    'value': 1e-10,
-    'required': false,
-    'locked': false,
-    'choices': undefined,
-    'valid': true,
+const propertyDefaults = {
+    'visible'   : true,
+    'value'     : 1e-10,
+    'required'  : false,
+    'locked'    : false,
+    'choices'   : undefined,
+    'valid'     : true,
     'validation': false
 }
 
@@ -17,6 +19,8 @@ function Context(opts) {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
     this.values = {};
+    this.ma = ApplicationContext.ma
+    this.audittrail = ApplicationContext.audittrail
     this.audit = [];
     this.calc_count = 0;
     this.columnSize = 6;

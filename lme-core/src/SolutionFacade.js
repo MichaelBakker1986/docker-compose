@@ -21,7 +21,7 @@ SolutionFacade.prototype.importSolutionData = function(data, parserType, workboo
     const foundParser = ParserService.findParser(parserType);
     const solution = foundParser.parseData(data, workbook);
     PropertiesAssembler.bulkInsert(solution);
-    this.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.ma, workbook.audittrail);
+    this.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.context.ma, workbook.context.audittrail);
     return solution;
 }
 SolutionFacade.prototype.exportSolution = function(parserType, rowId, workbook) {
@@ -65,7 +65,7 @@ SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, form
     //integrate Property with Formula
     this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype, frequency);
     //integrate one formula from just created Solution
-    this.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.ma, workbook.audittrail);
+    this.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.context.ma, workbook.context.audittrail);
 };
 /**
  * Called by parsers

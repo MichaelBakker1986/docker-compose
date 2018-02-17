@@ -90,7 +90,7 @@ LMEParser.prototype.parseData = function(data, workbook) {
     PropertiesAssembler.bulkInsert(solution);
     //Probably for formula-information
     FormulaService.bulkInsertFormula(data.formulas)
-    for (var i = 0; i < data.formulas.length; i++) FunctionMap.initializeFormula(data.formulas[i], workbook.ma, workbook.audittrail);
+    for (var i = 0; i < data.formulas.length; i++) FunctionMap.initializeFormula(data.formulas[i], workbook.context.ma, workbook.context.audittrail);
     if (log.DEBUG) log.info('Done import ' + data.name)
     return solution;
 }

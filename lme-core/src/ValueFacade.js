@@ -125,7 +125,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         if (variable.frequency == 'document') {
             xas = xas.doc
         }
-        returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values);
+        returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values, context.ma, context.audittrail);
     }
     if (variable) {
         if (colType === 'value') {

@@ -14,16 +14,15 @@ const log = require('log6')
 function fm() {
 }
 
-const m = []
 //don't directly use this method, use JSWorkBook instead.
-fm.prototype.apiGet = function(formula, x, y, z, v, ma) {
+fm.prototype.apiGet = function(formula, x, y, z, v, map) {
     //temp fix fallback for ID, index is the Virtual ID, not persisted in the database
     //should be checked outside this function call
-    var id = formula.id || formula.index;
-    return (ma || m)[id](id, x, y, z, v, m);
+    const id = formula.id || formula.index;
+    return map[id](id, x, y, z, v, map);
 }
 fm.prototype.apiSet = function(formula, x, y, z, value, v) {
-    var id = formula.id || formula.index;
+    const id = formula.id || formula.index;
     if (v[id] !== undefined) {
         var hash = x.hash + y.hash + z;
         var newValue = value;
@@ -31,14 +30,14 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     }
     else if (log.DEBUG) log.debug('[%s] does not exist in the model.', id);
 }
-fm.prototype.initializeFormula = function(newFormula, ma, audittrail) {
+fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
     const id = newFormula.id || newFormula.index;
     const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
     const javaScriptFunction = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 
-    if (global.DEBUGMODUS) (ma || m)[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
-    else (ma || m)[id] = javaScriptFunction;
+    if (global.DEBUGMODUS) (map || m)[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
+    else map[id] = javaScriptFunction;
 }
 /**
  * The debugwrapper is used by unit-tests and IDE
@@ -48,7 +47,7 @@ fm.prototype.initializeFormula = function(newFormula, ma, audittrail) {
  * @returns {Function}
  */
 const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
-    if (log.TRACE) log.trace("Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed)
+    if (log.TRACE) audittrail.push(["Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed])
     const idxMap = [30, 10, 10, 10, 10, 240]
 
     const variableName = newFormula.name.split('_').slice(1, -1).join('_')
@@ -63,7 +62,7 @@ const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
             prefix.length = Math.max(idxMap[idx] - String(innerEl).length, 0);
             return String(innerEl).slice(0, idxMap[idx] - 1) + prefix.join(' ')
         }).join("|")
-        log.info(tout)
+        audittrail.push([tout])
         return value;
     }
 }
@@ -84,11 +83,9 @@ const formulaDecorators = {
         //v = enteredValues
         return function(f, x, y, z, v, m) {
             if (x.dummy) return NA;
-            var hash = x.hash + y.hash + z;
+            const hash = x.hash + y.hash + z;
             //check if user entered a value
-            if (v[f][hash] == null) {
-                return innerFunction(f, x, y, z, v, m);
-            }
+            if (v[f][hash] == null) return innerFunction(f, x, y, z, v, m);
             return v[f][hash]; //return entered value
         };
     }

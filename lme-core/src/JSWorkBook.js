@@ -111,7 +111,7 @@ function fixForReferenceError(variableName, workbook, formulaInfo, e) {
                     //   SolutionFacade.initFormulaBootstrap([dependency.refId], true);
                 }
             }
-            SolutionFacade.initFormulaBootstrap([formulaInfo.id || formulaInfo.index], true, workbook.ma, workbook.audittrail);
+            SolutionFacade.initFormulaBootstrap([formulaInfo.id || formulaInfo.index], true, workbook.ma, workbook.context.audittrail);
 
         } catch (err) {
             log.error('Fatal error in variable [' + variableName + ']', err);
@@ -342,7 +342,7 @@ JSWorkBook.prototype.validateImportedSolution = function() {
         const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         try {
             //iterate all formula-sets to test 100%
-            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues());
+            ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues(), workbook.context.ma, workbook.context.audittrail);
             validateResponse.succes.push(formulaInfo.name);
         }
         catch (e) {
@@ -390,7 +390,7 @@ JSWorkBook.prototype.validateImportedSolution = function() {
                         formulaInfo.parsed = undefined;
                         formulaInfo.body = AST.STRING(formulaInfo.original);
                         //YES we have to do this two times, known BUG, we have to call rebuild, updateValueMap, rebuild
-                        SolutionFacade.initFormulaBootstrap([elemId], false, workbook.ma, workbook.audittrail);
+                        SolutionFacade.initFormulaBootstrap([elemId], false, workbook.context.ma, workbook.context.audittrail);
                         workbook.updateValues();
                     }
                 };
