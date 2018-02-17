@@ -9,7 +9,7 @@ const log = require('log6')
  * z = timeline object
  * value = new value
  * v = entered values
- * m = model
+ * map = model
  */
 function fm() {
 }
@@ -36,7 +36,7 @@ fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
     const javaScriptFunction = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 
-    if (global.DEBUGMODUS) (map || m)[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
+    if (global.DEBUGMODUS) map[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
     else map[id] = javaScriptFunction;
 }
 /**
@@ -48,21 +48,24 @@ fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
  */
 const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
     if (log.TRACE) audittrail.push(["Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed])
-    const idxMap = [30, 10, 10, 10, 10, 240]
 
     const variableName = newFormula.name.split('_').slice(1, -1).join('_')
     const property = newFormula.name.split('_').pop()
 
     return function(f, x, y, z, v, m) {
+        var value
+        var state = 'INFO'
+        var message = '';
+        try {
+            value = javaScriptFunction(f, x, y, z, v, m);
+        } catch (err) {
+            state = 'ERROR'
+            message = err.toString()
+            value = NA
+        }
+        const el = [state, variableName, property, y.display, x.hash, value, message, newFormula.original]
 
-        const value = javaScriptFunction(f, x, y, z, v, m);
-        const el = [variableName, property, y.display, x.hash, value, newFormula.original]
-        const tout = el.map(function(innerEl, idx) {
-            const prefix = [];
-            prefix.length = Math.max(idxMap[idx] - String(innerEl).length, 0);
-            return String(innerEl).slice(0, idxMap[idx] - 1) + prefix.join(' ')
-        }).join("|")
-        audittrail.push([tout])
+        audittrail.addRow(el)
         return value;
     }
 }

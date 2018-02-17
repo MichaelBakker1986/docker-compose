@@ -1,6 +1,8 @@
 const log = require('log6')
 const path = require('path')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');
+const Context = require('../../lme-core/src/Context');
+const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager;
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
@@ -22,7 +24,10 @@ JBehaveStoryParser.prototype.start = function() {
         this.interval = 'detl';
         this.timeModel = require('../../lme-core/resources/CustomImport.json')
     }
-    const model = new LMEapi(this.timeModel, null, this.interval);
+    const context = new Context()
+    const model = new LMEapi(this.timeModel, context, this.interval);
+    const debugManager = new DebugManager(context.audittrail);
+
     const excelPlugin = require('../../excel-connect').xlsxLookup;
     model.addFunctions(excelPlugin);
     const fflFile = require('fs').readFileSync(this.fflFile, 'utf8');
@@ -48,8 +53,7 @@ JBehaveStoryParser.prototype.start = function() {
         storyParser.start()
         storyParser.call()
 
-    /*    var feedback = model.lme.fixProblemsInImportedSolution();
-        if (!feedback.valid) succes = false*/
+        debugManager.monteCarlo()
 
         if (!succes) process.exit(1);
     }).catch(function(err) {

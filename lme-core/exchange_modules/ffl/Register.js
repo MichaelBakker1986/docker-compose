@@ -73,7 +73,7 @@ Register.prototype.doProx = function doProx(name, metaData, paramIndex) {
         set: function(value) {
             variable[paramIndex] = value;
             register.changes.push({
-                name: name,
+                name : name,
                 param: paramIndex
             })
         },
@@ -88,7 +88,7 @@ Register.prototype.createInformationObject = function(name, hidden) {
         var propertyName = this.schema[paramIndex];
 
         if (hidden.indexOf(paramIndex) != -1) continue
-        const metaData = {name: propertyName};
+        const metaData = { name: propertyName };
         this.doProx(name, metaData, paramIndex)
         variable.push(metaData)
     }
@@ -105,6 +105,21 @@ Register.prototype.walk = function(node, depth, visitor) {
     for (var i = 0; i < childs.length; i++) {
         this.walk(childs[i], depth + 1, visitor)
     }
+}
+Register.prototype.print = function(idxMap) {
+    return this.printArr(this.i, idxMap)
+}
+Register.prototype.printArr = function(arr, idxMap) {
+    const tout = []
+    for (var i = 0; i < arr.length; i++) {
+        var el = arr[i];
+        tout.push(el.map(function(innerEl, idx) {
+            const prefix = [];
+            prefix.length = Math.max(idxMap[idx] - String(innerEl).length, 0);
+            return String(innerEl).slice(0, idxMap[idx] - 1) + prefix.join(' ')
+        }).join("|"))
+    }
+    return tout
 }
 Register.prototype.toString = function() {
     return "variables:[" + this.i.length + "]\n" + this.i.join('\n')

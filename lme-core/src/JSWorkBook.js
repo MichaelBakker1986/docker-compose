@@ -76,7 +76,7 @@ function fixAll() {
     var attempt = 0;
     const workbook = this;
     var feedback = workbook.validateImportedSolution();
-    while (!feedback.valid && attempt < 4) {
+    while (!feedback.valid && attempt < 2) {
         feedback.error.forEach(function(item) {
             if (item.canFix) item.fix();
         });
@@ -111,7 +111,7 @@ function fixForReferenceError(variableName, workbook, formulaInfo, e) {
                     //   SolutionFacade.initFormulaBootstrap([dependency.refId], true);
                 }
             }
-            SolutionFacade.initFormulaBootstrap([formulaInfo.id || formulaInfo.index], true, workbook.ma, workbook.context.audittrail);
+            SolutionFacade.initFormulaBootstrap([formulaInfo.id || formulaInfo.index], true, workbook.context.ma, workbook.context.audittrail);
 
         } catch (err) {
             log.error('Fatal error in variable [' + variableName + ']', err);
@@ -341,7 +341,7 @@ JSWorkBook.prototype.validateImportedSolution = function() {
     function formulaFixer(elemId) {
         const formulaInfo = SolutionFacade.fetchFormulaByIndex(elemId)
         try {
-            //iterate all formula-sets to test 100%
+            //iterate all formula-sets to test 100% Trend,NoTrend
             ValueFacade.apiGetValue(formulaInfo, workbook.resolveX(0), resolveY(workbook, 0), 0, context.getValues(), workbook.context.ma, workbook.context.audittrail);
             validateResponse.succes.push(formulaInfo.name);
         }
