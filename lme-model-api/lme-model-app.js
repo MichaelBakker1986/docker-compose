@@ -33,11 +33,6 @@ const fs = require('fs')
 browserify.settings({
     transform: [require('browserify-fastjson')]
 })
-app.get('*/engineonly.js', browserify(__dirname + '/src/LME_FFL_FrontendModelEngine.js', {
-    gzip         : true,
-    insertGlobals: true,
-    debug        : false
-}));
 app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     cache        : true,
     gzip         : true,

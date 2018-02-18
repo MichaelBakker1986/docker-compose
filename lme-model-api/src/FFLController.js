@@ -30,7 +30,7 @@ const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 const Formatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 
-function FFLController($scope, $http, fflEditor, user_session, changeManager, register) {
+function FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine) {
     this.register = register;
     this.$scope = $scope
     this.$http = $http
@@ -38,17 +38,13 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
     this.user_session = user_session;
     this.changeManager = changeManager;
 
-    $.getScript('engineonly.js', function(data, textStatus, jqxhr) {
-        $.get("resources/" + user_session.fflModelPath + ".ffl", function(data, status, xhr) {
-            fflEditor.setValue(data)
-            $scope.reloadFFL()
-            //Also tell the auto-complete manager to initiate
-            changeManager.updateCursor(fflEditor.getValue(), 0);
-        }).fail(function(err) {
-            console.error(err)
-        })
-
-    }).fail(function() {
+    $.get("resources/" + user_session.fflModelPath + ".ffl", function(data, status, xhr) {
+        console.info('Loaded engine')
+        fflEditor.setValue(data)
+        $scope.reloadFFL()
+        //Also tell the auto-complete manager to initiate
+        changeManager.updateCursor(fflEditor.getValue(), 0);
+    }).fail(function(err) {
         if (arguments[0].readyState == 0) {
             console.info('Failed to load')
             //script failed to load
@@ -57,18 +53,18 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             console.info('Error while loading modeldata: resources/' + user_session.fflModelPath + '.js' + ":[" + arguments[2].toString() + ']')
         }
     })
+
     fflEditor.aceEditor.on("mousedown", function() {
         $scope.changeView('FFLModelEditorView')
     });
     $scope.reloadFFL = function() {
         //Hello engine-only
-        LMEMETA.importFFL(fflEditor.getValue())
-        LME = LMEMETA.exportWebModel()
+        modelEngine.importFFL(fflEditor.getValue())
+        const LME = modelEngine.exportWebModel()
         $scope.LME_MODEL = LME.nodes
         $scope.name = LME.name
-        $scope.LMEMETA = LMEMETA;
 
-        LMEMETA.loadData(function(response) {
+        modelEngine.loadData(function(response) {
             $scope.$digest()
         })
     }
@@ -142,13 +138,18 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
      * TODO: make functionality for single formula recompilation
      * Every keystroke from the ACE-IDE will pass here
      */
-    const silent_ace_commands = new Set([
-        'selectwordleft', 'gotolineend'/*END*/, 'gotolinestart'/*HOME*/, 'gotopagedown', 'gotopageup', 'Esc',
+    const silent_ace_commands = new Set();
+    ['selectwordleft', 'gotolineend'/*END*/, 'gotolinestart'/*HOME*/, 'gotopagedown', 'gotopageup', 'Esc',
         'overwrite'/*INSERT*/, 'gotowordright', 'gotowordleft', 'copy', 'selectright', 'selectleft',
         'replace', 'find', 'addCursorAbove', 'selectup', 'selectdown', 'scrollup', 'scrolldown', 'golinedown', 'golineup',
         'selectwordright', 'gotoleft', 'singleSelection', 'selectMoreAfter', 'selectMoreBefore', 'golineup', 'gotoright'
-    ])
-    const changing_ace_commands = new Set(['movelinesdown', 'backspace', 'undo', 'insertstring', 'removeline'])
+    ].forEach(function(el) {
+        silent_ace_commands.add(el)
+    })
+    const changing_ace_commands = new Set();
+    ['movelinesdown', 'backspace', 'undo', 'insertstring', 'removeline'].forEach(function(el) {
+        changing_ace_commands.add(el)
+    })
     fflEditor.aceEditor.commands.on("afterExec", function(e) {
         var changingValue = false;
         $scope.changeView('FFLModelEditorView')
@@ -177,7 +178,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 //get FFL String of current variable
                 const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
                 console.info(fflData)
-                LMEMETA.importFFL(fflData)
+                modelEngine.importFFL(fflData)
                 $scope.runJBehaveTest();
             }
 

@@ -66,10 +66,10 @@ function LMETree(name, workbook) {
     this.no = {}
     this.repeats = {
         undefined: [workbook.context.columnSize, 1],
-        none: [1, 1],
-        column: [workbook.context.columnSize, 1],
-        document: [1, workbook.context.columnSize],
-        timeline: [1, workbook.context.columnSize]
+        none     : [1, 1],
+        column   : [workbook.context.columnSize, 1],
+        document : [1, workbook.context.columnSize],
+        timeline : [1, workbook.context.columnSize]
     }
     this.columns = workbook.context.columns;
     const rowColumns = workbook.context.columns.slice();
@@ -82,7 +82,7 @@ function LMETree(name, workbook) {
  * Sort created rows output for UI
  */
 LMETree.prototype.sort = function() {
-    this.rows.sort((a, b) => {
+    this.rows.sort(function(a, b) {
         if (a.order_id == b.order_id) throw Error('Duplicate variable names in financial model are not supported. Choose an unique name for every variable. [' + a.id + '] in \'' + b.path + '\' and in \'' + a.path + '\'')
         return a.order_id == b.order_id ? 0 : a.order_id < b.order_id ? -1 : 1
     })
@@ -146,16 +146,16 @@ function changeAndCache(workbook, rowId, col, index, type, yas) {
  * Change means user can modify the value
  */
 var properties = {
-    title: {change: true, prox: changeAndCache},
-    original: {change: true, prox: noChange},
-    value: {change: true, prox: changeAndCache},
-    visible: {prox: changeAble},
-    entered: {prox: changeAble},
-    valid: {prox: changeAble},
-    locked: {prox: changeAble},
-    required: {prox: changeAble},
-    hint: {cache: true, prox: noChange},
-    choices: {cache: true, prox: noChange}
+    title   : { change: true, prox: changeAndCache },
+    original: { change: true, prox: noChange },
+    value   : { change: true, prox: changeAndCache },
+    visible : { prox: changeAble },
+    entered : { prox: changeAble },
+    valid   : { prox: changeAble },
+    locked  : { prox: changeAble },
+    required: { prox: changeAble },
+    hint    : { cache: true, prox: noChange },
+    choices : { cache: true, prox: noChange }
 }
 
 LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth) {
@@ -184,10 +184,10 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
         has[5] = '999'
     }
     const rv = {
-        id: rowId,
-        order_id: has.join('.'),
-        treeDepth: treeDepth,
-        add: function() {
+        id          : rowId,
+        order_id    : has.join('.'),
+        treeDepth   : treeDepth,
+        add         : function() {
             const inneryas = workbook.addTuple(node.rowId, ++tree.tuplecounter + '_' + yas.display + '_' + node.rowId, yas)
             workbook.set(node.rowId, inneryas.display + ":" + node.rowId, 'value', undefined, inneryas)
             workbook.walkProperties(node, function(child, yasi, cTreeDepth, yi) {
@@ -201,23 +201,23 @@ LMETree.prototype.addTupleNode = function(node, treePath, index, yas, treeDepth)
             return inneryas;
         },
         //index is deprecated. Lookup the next sibling when needed. Could be tuple..
-        index: index,
+        index       : index,
         title_locked: node.title_locked,
-        type: 'tuple_add',
-        path: path,
-        ammount: amount,
-        display: yas.display,
-        colspan: colspan,
-        depth: yas.depth + 1,//This could be a quick-fix to a serious problem.
-        cols: [{
-            value: unique,
+        type        : 'tuple_add',
+        path        : path,
+        ammount     : amount,
+        display     : yas.display,
+        colspan     : colspan,
+        depth       : yas.depth + 1,//This could be a quick-fix to a serious problem.
+        cols        : [{
+            value  : unique,
             entered: false,
-            type: 'tuple_add',
-            locked: true,
+            type   : 'tuple_add',
+            locked : true,
             visible: true,
-            valid: true
+            valid  : true
         }],
-        children: []
+        children    : []
     };
     if (node.display_options) rv.display_options = node.display_options;
     /**
@@ -256,21 +256,21 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
         has[1] = yas.parent.parent.uihash
     }
     const rv = {
-        id: rowId,
-        treeDepth: treeDepth,
-        depth: yas.depth,
+        id             : rowId,
+        treeDepth      : treeDepth,
+        depth          : yas.depth,
         display_options: node.display_options,
-        display: yas.display,
-        order_id: has.join('.'),
-        index: index,
-        title_locked: node.title_locked,
-        type: node.displayAs,
-        path: path,
-        ammount: amount,
-        colspan: colspan,
+        display        : yas.display,
+        order_id       : has.join('.'),
+        index          : index,
+        title_locked   : node.title_locked,
+        type           : node.displayAs,
+        path           : path,
+        ammount        : amount,
+        colspan        : colspan,
         tupleDefinition: node.tupleDefinition,
-        cols: [],
-        children: []
+        cols           : [],
+        children       : []
     };
     /**
      * Proxy properties to the column objects
@@ -279,23 +279,23 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
     if (node.frequency !== 'none') {
         rv.cols.push({
-            value: null,
+            value  : null,
             entered: null,
-            type: 'title',
+            type   : 'title',
             visible: true,
-            locked: null,
-            valid: null
+            locked : null,
+            valid  : null
         });
     }
     for (var index = 0; index < amount; index++) {
         const r = {
-            type: type,
-            value: null,
-            visible: null,
-            entered: null,
+            type    : type,
+            value   : null,
+            visible : null,
+            entered : null,
             required: null,
-            locked: null,
-            valid: null
+            locked  : null,
+            valid   : null
         }
         rv.cols.push(r);
         for (var propertyIndex = 0; propertyIndex < this.propertyNames.length; propertyIndex++) {

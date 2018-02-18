@@ -1,19 +1,18 @@
 const StoryParser = require('../../model-tests/StoryParser').StoryParser
 
 const newStoryTemplate =
-    "{model_name} Score Basic\n" +
-    "@Author {author_name}\n" +
-    "@themes {model_name} Score basic\n" +
-    "\n" +
-    "Scenario: Verify {model_name} Score calculations\n" +
-    "Given a document of the model type {model_name}"
+          "{model_name} Score Basic\n" +
+          "@Author {author_name}\n" +
+          "@themes {model_name} Score basic\n" +
+          "\n" +
+          "Scenario: Verify {model_name} Score calculations\n" +
+          "Given a document of the model type {model_name}"
 
-
-function JBehaveController($scope, $http, jBehaveManager, right_editor, user_session) {
+function JBehaveController($scope, $http, modelEngine, right_editor, user_session) {
     this.$scope = $scope
     this.$http = $http
     this.user_session = user_session
-    this.jBehaveManager = jBehaveManager
+    this.modelEngine = modelEngine
     const self = this;
     this.right_editor = right_editor;
 
@@ -44,14 +43,15 @@ function JBehaveController($scope, $http, jBehaveManager, right_editor, user_ses
     });
     $scope.runJBehaveTest = function() {
         var annotations = []
-        LMEMETA.lme.clearValues();//Quick-fix to clear state, we should just create a copy of the current one.
-        var storyParser = new StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', LMEMETA.lme);
+        const workbook = modelEngine.lme;
+        workbook.clearValues();//Quick-fix to clear state, we should just create a copy of the current one.
+        var storyParser = new StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', workbook);
         storyParser.message = function(event) {
             annotations.push({
-                row: event.line - 1,
+                row   : event.line - 1,
                 column: 0,
-                text: event.result.message, // Or the Json reply from the parser
-                type: event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
+                text  : event.result.message, // Or the Json reply from the parser
+                type  : event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
             })
             right_editor.setAnnotations(annotations);
         }

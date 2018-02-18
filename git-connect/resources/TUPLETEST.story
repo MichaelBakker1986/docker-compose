@@ -17,6 +17,7 @@ And Inkomen(Gerard) is set to 50000
 
 Then Balance should be 1001
 And OptelSubTotal(ABN) should be 301
+And OptelSubTotal in tuple ABN should be 301
 And OptelSubTotal(TRIODOS) should be 700
 And TOTALLOAN(ABN,John) should be 1600
 And TOTALLOAN(TRIODOS,Sara) should be 90

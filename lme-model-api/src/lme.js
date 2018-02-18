@@ -22,6 +22,10 @@ function LmeAPI(TimeModel, Ctx, interval, optsArg) {
 LmeAPI.prototype.hasChanges = function() {
     return this.lme.context.hasChanges();
 }
+//*QUICK-FIX*//
+LmeAPI.prototype.cleanValues = function() {
+    return this.lme.clearValues();
+}
 LmeAPI.prototype.getTimeViews = function() {
     return this.lme.getTimeViews();
 }

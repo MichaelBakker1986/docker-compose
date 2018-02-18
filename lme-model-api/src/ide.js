@@ -1,4 +1,6 @@
 /** * editor variable is set to the window. */
+require('../../lme-core/exchange_modules/presentation/webexport');
+require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
 const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
@@ -8,6 +10,7 @@ const MatrixManager = require('../../excel-connect/MatrixManager')
 const MatrixController = require('./MatrixController')
 const FFLController = require('./FFLController')
 const DebugController = require('./DebugController')
+const LMEModelEngine = require('./lme.js')
 
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
@@ -33,6 +36,11 @@ const user_session = {
 }
 angular.module('lmeapp', ['angular.filter'])
     .controller('ideController', function($scope, $http, $timeout) {
+
+        const modelEngine = new LMEModelEngine()
+        $scope.LMEMETA = modelEngine;
+        modelEngine.loadData(function(response) {
+        })
 
         const AceEditor = require('./ace_editor_api').AceEditor
         const matrixManager = new MatrixManager()
@@ -79,14 +87,14 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.register = register;
 
         const right_editor = new AceEditor("right_editor", { halfHeight: true });
-        const jBehaveController = new JBehaveController($scope, $http, null, right_editor, user_session)
+        const jBehaveController = new JBehaveController($scope, $http, modelEngine, right_editor, user_session)
         const changeManager = new ChangeManager(register)
         $scope.fflmode = true;
         $scope.currentView = 'FFLModelEditorView'
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, { schema: [], nodes: [] });//current modelindexer
         const fflEditor = new AceEditor("editor");
-        const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register)
+        const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
 
         right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register)
         fflEditor.registerEditorToClickNames(fflEditor, fflEditor, user_session, register)

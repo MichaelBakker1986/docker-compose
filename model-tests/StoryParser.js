@@ -76,7 +76,7 @@ const functionMapper = {
     assertValue       : {
         //Then variable Q_MAP01_SUBSCORE01 should have 0 decimals rounded value 14 for document
         //And variable TotalYearlyCosts should have 0 decimals rounded 15944 for column with id 1
-        regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:variable |tuple )*(\w+)(\((\w+,?){0,3}\))?(?: in tuple \w+)? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
+        regex: /^\s*(?:When|Then|And)\s+(?:a |an )?(?:tuple )?(?:variable )?(\w+)(\((\w+,?){0,3}\))?(?: in tuple (\w+))? should (?:have |be )?(?:(\d+) decimals rounded value )?([-0-9,.A-z]+)\s*(?:(?:for column with id (\d+))|(for document))?/i,
         call : function(workbook, linenumber, line, args) {
 
             const maptable = {
@@ -87,13 +87,13 @@ const functionMapper = {
             }
             //default decimals are defined by the amount of decimals in the value.
             const variableName   = args[0],
-                  tupleIndexName = args[1],
-                  decimals       = (args[3] || (args[4].split('.')[1] || '').length),
+                  tupleIndexName = args[1] || (args[3] ? '(' + args[3] + ')' : null),
+                  decimals       = (args[4] || (args[5].split('.')[1] || '').length),
                   //Should the input be validated?
-                  testProperty   = args[4] == 'invisible' || args[4] == 'visible',
-                  property       = map_property[args[4]] || 'value',
-                  value          = maptable[args[4]] == null ? args[4] : maptable[args[4]],
-                  columnId       = (parseInt(args[5]) || 1) - 1
+                  testProperty   = args[5] == 'invisible' || args[5] == 'visible',
+                  property       = map_property[args[5]] || 'value',
+                  value          = maptable[args[5]] == null ? args[5] : maptable[args[5]],
+                  columnId       = (parseInt(args[6]) || 1) - 1
 
             return [function() {
                 const result = {};
@@ -109,13 +109,13 @@ const functionMapper = {
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s] decimals[%s] [%s]', linenumber, calculatedValue, variableName, decimals, value)
                 if (calculatedValue != testValue) {
                     result.status = 'fail'
-                    result.message = variableName + ' should be ' + value + '. But is ' + calculatedValue
+                    result.message = variableName + (tupleIndexName || '') + ' should be ' + value + '. But is ' + calculatedValue
                 } else if (testProperty && validValue.length > 0) {
                     result.status = 'fail'
-                    result.message = rawValue + " is not a valid value for " + variableName + ". Because " + validValue
+                    result.message = rawValue + " is not a valid value for " + variableName + (tupleIndexName || '') + ". Because " + validValue
                 } else {
                     result.status = 'info'
-                    result.message = variableName + " is " + calculatedValue;
+                    result.message = variableName + (tupleIndexName || '') + " is " + calculatedValue;
                 }
                 return result;
             }
@@ -137,10 +137,10 @@ const functionMapper = {
                 if (log.TRACE) log.trace('[%s]: assert value calculated[%s] [%s]  [%s]', linenumber, calculatedValue, variableName, value)
                 if (calculatedValue != value) {
                     result.status = 'fail'
-                    result.message = calculatedValue + ' is not ' + value + ' raw value ' + rawValue
+                    result.message = (tupleIndexName || '') + ' is not ' + value + ' raw value ' + rawValue
                 } else {
                     result.status = 'info'
-                    result.message = 'Variable ' + variableName + " = " + calculatedValue + ' is ' + value + " [" + rawValue + "]";
+                    result.message = 'Variable ' + variableName + " = " + (tupleIndexName || '') + ' is ' + value + " [" + rawValue + "]";
                 }
                 return result;
             }

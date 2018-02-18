@@ -24,8 +24,28 @@ function DockerImageBuilder(fflModel, story, matrix, model_name) {
     this.matrix = matrix
     this.model_name = model_name
 }
+//browserify --output bundle.js --bare --dg false input.js.
+const compile = require('nexe')
+/*compile.compile({
+    input : 'C:/Users/mbakk/Documents/fesjs/lme-model-api/lme.js',
+    python: 'C:/Users/mbakk/Documents/python/python.exe',
+    /!*target: 'linux-x64',*!/
+    build : true   //required to use patches
+    /!* patches: [
+         async (compiler, next) => {
+             await compiler.setFileContentsAsync(
+                 'lib/new-native-module.js',
+                 'module.exports = 42'
+             )
+             return next()
+         }
+     ]*!/
+}).then(() => {
+    console.log('success')
+})*/
 
 DockerImageBuilder.prototype.buildDockerImage = function() {
+
     log.info('Start build image')
     const command = 'cd .. && docker build . -f LMERestAPIBuilder -t=' + this.model_name + ':0.002'
     exec(command).then((resp) => {

@@ -1,3 +1,13 @@
+if (!Array.from) {
+    Array.from = function(set) {
+        const temp_array = []
+        set.forEach(function(v) {
+            temp_array.push(v)
+        });
+        return temp_array;
+    }
+}
+
 /**
  * @Deprecated, use Register.js
  */
