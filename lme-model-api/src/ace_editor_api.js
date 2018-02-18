@@ -4,7 +4,6 @@ const ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix
 const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 
-
 function AceEditor(id, opts) {
     opts = opts || {}
     this.fflModel = "";
@@ -20,9 +19,9 @@ function AceEditor(id, opts) {
     // enable autocompletion and snippets
     aceEditor.setOptions({
         enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true,
-        enableSnippets: true,
-        showFoldWidgets: true
+        enableLiveAutocompletion : true,
+        enableSnippets           : true,
+        showFoldWidgets          : true
     });
     /*
         var snippetManager = ace.require("ace/snippets").snippetManager;
@@ -60,7 +59,7 @@ function AceEditor(id, opts) {
             return
         }
         callback(null, wordMap.map(function(ea) {
-            return {name: ea.word, value: ea.word, meta: "optional text"}
+            return { name: ea.word, value: ea.word, meta: "optional text" }
         }));
     })
 }
@@ -92,6 +91,9 @@ AceEditor.prototype.setValue = function(value) {
 }
 AceEditor.prototype.getCurrentLine = function() {
     return this.aceEditor.session.getLine(this.getCursor().row);
+}
+AceEditor.prototype.getNextLine = function() {
+    return this.aceEditor.session.getLine(this.getCursor().row + 1);
 }
 AceEditor.prototype.getValue = function() {
     return this.aceEditor.session.getValue()

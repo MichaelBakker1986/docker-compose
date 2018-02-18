@@ -19,6 +19,7 @@ const tests = [
     './SwaggerDefinitionParserTest',
     './TimeTest',
     './BasicOperationsTest',
+    './ChangeManagerTest',
     './TupleTests'//should include all Tuple logic tests.
 ];
 var testResults = [];

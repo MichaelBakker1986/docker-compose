@@ -34,30 +34,30 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
                 return {
                     token: "comment.doc", // doc comment
                     regex: "\\/\\*(?=\\*)",
-                    next: start
+                    next : start
                 };
             };
             DocCommentHighlightRules.getEndRule = function(start) {
                 return {
                     token: "comment.doc", // closing comment
                     regex: "\\*\\/",
-                    next: start
+                    next : start
                 };
             };
         }
         oop.inherits(DocCommentHighlightRules, TextHighlightRules);
         var ExampleHighlightRules = function() {
             var keywordMapper = this.createKeywordMapper({
-                "variable.language": "unscalable|scorecard|model|matrix|boolean|radio|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
-                "keyword": "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|pattern|range|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
-                "comment": "#|Memo1",
-                "storage.type": "&",
-                "support.function": "+|-|=|none|and|or|entered|visible",
+                "variable.language": "unscalable|scorecard|model|matrix|boolean|radio|root|uses|refers|to|date|On|Off|fileupload|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
+                "keyword"          : "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|pattern|range|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
+                "comment"          : "#|Memo1",
+                "storage.type"     : "&",
+                "support.function" : "+|-|=|none|and|or|entered|visible",
                 "constant.language": "NA|TupleIndex|T|X|0|1|2|3|4|5|6|7|8|9|."
             }, "text", true);
             this.keywordMapper = keywordMapper;
             this.keywordRule = {
-                regex: "\\w+",
+                regex  : "\\w+",
                 onMatch: function() {
                     return "text"
                 }
@@ -72,13 +72,13 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
                         regex: "\\b(?:TODO|FIXME|XXX|HACK)\\b"
                     },
                     {
-                        defaultToken: "comment.doc",
+                        defaultToken   : "comment.doc",
                         caseInsensitive: true
                     }, {
                         token: "string",
                         start: '"',
-                        end: '"',
-                        next: [{token: "language.escape", regex: /\\[tn"\\]/}]
+                        end  : '"',
+                        next : [{ token: "language.escape", regex: /\\[tn"\\]/ }]
                     },
                     this.keywordRule
                 ]
@@ -331,7 +331,7 @@ define("hoverlink", [], function(require, exports, module) {
             var row = Math.floor((this.y + renderer.scrollTop - canvasPos.top) / renderer.lineHeight);
             var col = Math.round(offset);
 
-            var screenPos = {row: row, column: col, side: offset - col > 0 ? 1 : -1};
+            var screenPos = { row: row, column: col, side: offset - col > 0 ? 1 : -1 };
             var session = editor.session;
             var docPos = session.screenToDocumentPosition(screenPos.row, screenPos.column);
 
@@ -407,7 +407,7 @@ define("hoverlink", [], function(require, exports, module) {
             if (wordMapSize !== this.register.i.length) {
                 wordMapSize = this.register.i.length
                 const variableNames = Object.keys(this.register.getIndex('name'));
-                variableNames.sort(function(a, b){
+                variableNames.sort(function(a, b) {
                     // ASC  -> a.length - b.length
                     // DESC -> b.length - a.length
                     return b.length - a.length;
@@ -447,7 +447,6 @@ define("hoverlink", [], function(require, exports, module) {
     exports.HoverLink = HoverLink;
 
 });
-
 
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
@@ -526,26 +525,92 @@ define("token_tooltip", [], function(require, exports, module) {
         var wordMapSize = 0;
         var regex = new RegExp([].join('|'), "gi");
         const formulaInfo = {
-            TSUM: 'TSUM(variable_name)\nSUM of TupleInstances given name',
-            MAX: 'MAX(n1,n2)\nReturn maximum value of value n1 or n2',
-            MIN: 'MIN(n1,n2)\nReturn minimum value of value n1 or n2',
-            OnER: 'OnER(expression,error_value)',
-            OnZero: 'OnZero(value,alternative)',
-            TsY: 'Amount of times current period fits in a bookyear',
-            MatrixLookup: 'MatrixLookup(a,named_table,row_name,column_name)',
-            ValueT: 'Convert a period into a time-index',
-            aggregation: 'A number can be aggregated over time.\nOptions:flow|balance\nDefaults to balance',
-            "locked:": 'Describes if a variable can be changed by input.\nValid values:On|Off|0|1 or a custom formula',
-            "refers to": "Inheritance in FFL",
-            "visible:": 'Describes if a variable can be seen.\nValid values:On|Off|0|1 or a custom formula',
-            "required:": 'Describes if a variable is mandatory.\nValid values:On|Off|0|1 or a custom formula',
-            "frequency:": 'The frequency a variable-value is repeated over time.\nOptions:[document|column|timeline|none]\nDefaults to column',
-            "datatype:": 'Datatype for the variable:\nOptions:[number|string|boolean|currency|matrix|none]\nDefaults to number',
-            "options_title:": 'Descibes if a title can be changed by user.\nOptions: locked|unlocked.\n Defaults to unlocked',
+            flow             : 'Flow is a quantity which is measured with reference to a period of time.\n' +
+            'Thus, flows are defined with reference to a specific period (length of time),\n' +
+            ' e.g., hours, days, weeks, months or years. It has time dimension.\n' +
+            ' National income is a flow. It describes and measures flow of goods and services which\n' +
+            ' become available to a country during a year.\n Similarly, all other economic variables which have time dimension,\n' +
+            ' i.e., whose magnitude can be measured over a period of time are called flow variables.\n' +
+            ' For instance, income of a person is a flow which is earned during a week or a month or any other period.\n' +
+            ' Likewise, investment (i.e., addition to the stock of capital) is a flow as it pertains to a period of time.',
+            balance          : 'Balance Variables:\n' +
+            'A stock is a quantity which is measurable at a particular point of time, e.g., 4 p.m.,\n' +
+            ' 1st January, Monday, 2010, etc. Capital is a stock variable.\n' +
+            ' On a particular date (say, 1st April, 2011), a country owns and commands stock of machines,\n' +
+            ' buildings, accessories, raw materials, etc. It is stock of capital.\n' +
+            ' Like a balance-sheet, a stock has a reference to a particular date on which it shows stock position.\n' +
+            ' Clearly, a stock has no time dimension (length of time) as against a flow which has time dimension.',
+            TSUM             : 'TSUM(variable_name)\nSUM of TupleInstances given name',
+            MAX              : 'MAX(n1,n2)\nReturn maximum value of value n1 or n2',
+            MIN              : 'MIN(n1,n2)\nReturn minimum value of value n1 or n2',
+            OnER             : 'OnER(expression,error_value)',
+            OnZero           : 'OnZero(value,alternative)',
+            Or               : 'Abstract A Or B\nExample: 1>2 Or 2>1=True',
+            And              : 'Abstract A And B\nExample: 1>2 And 2>1=False',
+            document         : 'One value per context in time.\nCan have multiple values in Tuple dimension',
+            column           : 'One value per time_unit in context.\nCan have multiple values in Tuple dimension',
+            string           : 'Is a datatype',
+            number           : 'Is a datatype. And the default one.',
+            unscalable       : 'While scaling don\'t scale this variable',
+            afterinput       : 'Is not supported in lme.\n FFL is descriptive\n' +
+            'One of the benefits of using descriptive language is that it helps the writer to convey the meaning behind the text.\n' +
+            ' By using descriptive language, the writer can describe exactly how a setting looks,\n' +
+            ' how a character behaves or what action is taking place. The benefit for the reader is the ability\n' +
+            ' to more clearly visualize what is being described.',
+            Execute          : 'This is not supported in lme. FFL is a descriptive language',
+            memo             : 'displaytype: Textarea',
+            String           : 'Convert any to String\nExample\nString(1)',
+            If               : 'Abstract:\nIf(expression,default,alternative)\nExample: If(2>1,100,200)=100',
+            TsY              : 'Amount of times current period fits in a bookyear',
+            FirstUC          : 'FirstUpperCase \nExample FirstUC("hoi")',
+            Pos              : 'Position \nExample Pos("hoi","o")==2',
+            MatrixLookup     : 'Example:\n  MatrixLookup(a,named_table,row_name,column_name)',
+            SelectDescendants: 'Abstract:\n  Count(X,{variable_name},{lambda})\nExample:\n' +
+            '  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
+            Count            : 'Example:\n  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
+            Case             : 'Example:\n  Case(1,[1:100|2:200])==100',
+            SubStr           : 'Example:\n  SubStr("Hoi",2)==i',
+            InputRequired    : 'Example:\n  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
+            DataAvailable    : 'Example:\n  DataAvailable(VARIABLE)',
+            Visible          : 'Example Visible(Q_ROOT)',
+            GetTitle         : 'Example GetTitle(Q_ROOT)',
+            title            : 'Specify the dynamic title for a given variable',
+            formula          : 'Specify the dynamic formula for a given variable',
+            variable         : 'Describes a new variable',
+            options_trend    : 'locked,visible',
+            options_notrend  : 'locked,visible',
+            date             : 'Is a datatype',
+            select           : 'displaytype select\nDescribes a choice type. Visualized a dropdown|select.\nWhen choices:0:No|1:Yes it implies a radio',
+            On               : 'Synonym to 1, true, True',
+            True             : 'Synonym to 1, true, True',
+            Off              : 'Synonym to 0, false, False',
+            False            : 'Synonym to 0, false, False',
+            'choices:'       : 'Specify the choices for a given variable\nImplies displaytype: select\nExample: "0:No|1:Yes"\n' +
+            'Example: "High|Low|None"',
+            "hint:"          : 'Specify the dynamic hint formula for a given variable',
+            ValueT           : 'Convert a period into a time-index',
+            "aggregation:"   : 'A number can be aggregated over time.\nOptions:flow|balance\nDefaults to balance',
+            "locked:"        : 'Describes if a variable can be changed by input.\nValid values:On|Off|0|1 or a custom formula',
+            "refers to"      : "Inheritance in FFL",
+            "visible:"       : 'Describes if a variable can be seen.\nValid values:On|Off|0|1 or a custom formula',
+            "required:"      : 'Describes if a variable is mandatory.\nValid values:On|Off|0|1 or a custom formula',
+            "frequency:"     : 'The frequency a variable-value is repeated over time.\nOptions:[document|column|timeline|none]' +
+            '\nDefaults to column',
+            "datatype:"      : 'Datatype for the variable:\nOptions:[number|string|boolean|currency|matrix|none]\nDefaults to number',
+            "options_title:" : 'Descibes if a title can be changed by user.\nOptions: locked|unlocked.\n Defaults to unlocked',
             "fixed_decimals:": 'a number or currency datatype can be restricted to an ammount of decimals shown.',
-            displaytype: 'Displaytype for the variable:\nOptions:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\nDefaults to default',
+            "displaytype:"   : 'Displaytype for the variable:\n' +
+            'Options:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\n' +
+            'currency(2) implies fixed_decimals: 2\n' +
+            'Defaults to default',
         }
-        var formulaRegex = new RegExp(Object.keys(formulaInfo).join('|'), "gi")
+        const definitions = Object.keys(formulaInfo);
+        definitions.sort(function(a, b) {
+            // ASC  -> a.length - b.length
+            // DESC -> b.length - a.length
+            return b.length - a.length;
+        });
+        var formulaRegex = new RegExp(definitions.join('|'), "g")
 
         this.update = function() {
             this.$timer = null;
@@ -563,14 +628,14 @@ define("token_tooltip", [], function(require, exports, module) {
             var row = Math.floor((this.y + r.scrollTop - canvasPos.top) / r.lineHeight);
             var col = Math.round(offset);
 
-            var screenPos = {row: row, column: col, side: offset - col > 0 ? 1 : -1};
+            var screenPos = { row: row, column: col, side: offset - col > 0 ? 1 : -1 };
             var session = this.editor.session;
             var docPos = session.screenToDocumentPosition(screenPos.row, screenPos.column);
             var token = session.getTokenAt(docPos.row, docPos.column);
 
             if (!token && !session.getLine(docPos.row)) {
                 token = {
-                    type: "",
+                    type : "",
                     value: "",
                     state: session.bgTokenizer.getState(0)
                 };
@@ -589,12 +654,17 @@ define("token_tooltip", [], function(require, exports, module) {
             if (token.stateTransitions)
                 tokenText += "\n  " + token.stateTransitions.join("\n  ");
 
-
             if (this.tokenText != tokenText) {
                 //TODO: convert into callback!
                 if (wordMapSize !== this.register.i.length) {
                     wordMapSize = this.register.i.length
-                    regex = new RegExp(Object.keys(this.register.getIndex('name')).join("|"), 'gi')
+                    const variableNames = Object.keys(this.register.getIndex('name'));
+                    variableNames.sort(function(a, b) {
+                        // ASC  -> a.length - b.length
+                        // DESC -> b.length - a.length
+                        return b.length - a.length;
+                    });
+                    regex = new RegExp(variableNames.join("|"), 'g')
                 }
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
                 var otherMath = null;
@@ -604,7 +674,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     const nodes = this.register.getIndex('name')[match.value];
                     const display = nodes[this.register.schemaIndexes.title]
                     var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
-                    this.setText(match.value + ":\n" + display + '\n' + formula);
+                    this.setText(match.value + "\n" + display + '\n' + formula);
                     this.width = this.getWidth();
                     this.height = this.getHeight();
                     this.tokenText = match.value + " :\n" + display;

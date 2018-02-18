@@ -26,6 +26,7 @@ const newModelTemplate = "model $1 uses BaseModel\n" +
 
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
+const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
 const Formatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 
@@ -141,26 +142,25 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
      * TODO: make functionality for single formula recompilation
      * Every keystroke from the ACE-IDE will pass here
      */
+    const silent_ace_commands = new Set([
+        'selectwordleft', 'gotolineend'/*END*/, 'gotolinestart'/*HOME*/, 'gotopagedown', 'gotopageup', 'Esc',
+        'overwrite'/*INSERT*/, 'gotowordright', 'gotowordleft', 'copy', 'selectright', 'selectleft',
+        'replace', 'find', 'addCursorAbove', 'selectup', 'selectdown', 'scrollup', 'scrolldown', 'golinedown', 'golineup',
+        'selectwordright', 'gotoleft', 'singleSelection', 'selectMoreAfter', 'selectMoreBefore', 'golineup', 'gotoright'
+    ])
+    const changing_ace_commands = new Set(['movelinesdown', 'backspace', 'undo', 'insertstring', 'removeline'])
     fflEditor.aceEditor.commands.on("afterExec", function(e) {
         var changingValue = false;
         $scope.changeView('FFLModelEditorView')
-        if (e.command.name == 'golinedown') {
-        } else if (e.command.name == 'golineup') {
-        } else if (e.command.name == 'gotoright') {
-        } else if (e.command.name == 'gotoleft') {
-        } else if (e.command.name == 'selectwordright') {
-        } else if (e.command.name == 'replace') {
-        } else if (e.command.name == 'find') {
-        } else if (e.command.name == 'selectwordleft') {
-        } else if (e.command.name == 'gotolineend') {//END
-        } else if (e.command.name == 'gotolinestart') {//HOME
-        } else if (e.command.name == 'gotopagedown') {
-        } else if (e.command.name == 'gotopageup') {//PAGE-UP
-        } else if (e.command.name == 'overwrite') {//INSERT
-        } else {
-            //current variable changed.
-            changingValue = true;
-            changeManager.changed = true;
+        if (!silent_ace_commands.has(e.command.name)) {
+            //rather white-list actions.
+            if (!changing_ace_commands.has(e.command.name)) console.info(e.command)
+
+            //check if the line being changed is valid.
+            if (changeManager.validCurrentLine(fflEditor.getCurrentLine(), fflEditor.getNextLine())) {
+                changingValue = true;
+                changeManager.setModelChanged();
+            }
         }
         //console.info('action:' + JSON.stringify(e.command))
         changeManager.updateCursor(fflEditor.getValue(), fflEditor.getCursor());
@@ -172,6 +172,12 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
             if (changingValue) {
                 //only reload the variable
+                //$scope.reloadFFL()
+                // LMEMETA.importFFL(fflEditor.getValue())
+                //get FFL String of current variable
+                const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
+                console.info(fflData)
+                LMEMETA.importFFL(fflData)
                 $scope.runJBehaveTest();
             }
 
@@ -213,7 +219,7 @@ FFLController.prototype.updateFFLModel = function(model_name) {
                 self.user_session.fflModel = this.responseText;
             }
             self.fflEditor.setParsedValue(self.user_session.fflModel)
-
+            self.changeManager.setModelChanged();
             self.register.clean();
             const formatter = new Formatter(self.register, self.user_session.fflModel)
             formatter.parseProperties()

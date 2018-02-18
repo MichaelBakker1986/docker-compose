@@ -18,10 +18,24 @@ function ChangeManager(register) {
     this.lines = []
 }
 
-function extractName(line) {
-    return line.replace(/(?:variable|tuple)\s*(\w+).*/i, "$1")
+ChangeManager.prototype.setModelChanged = function() {
+    this.changed = true;
 }
 
+/**
+ * Extract:
+ * tuple =+test Implies
+ * tuple -test
+ * variable =test refers to
+ * =test refers to
+ * To: test
+ */
+ChangeManager.prototype.extractName = function(line) {
+    return line.replace(/(?:variable |tuple |function )?\s*(?:\+?-?=?)+(\w+).*/i, "$1")
+}
+ChangeManager.prototype.isVariableLine = function(line) {
+    return /^(?:variable |tuple |function )?\s*(?:\+?-?=?)+(\w+)\s*(?:Refers to \w+|Implies \w+)?\s*\n\s*{/igm.test(line)
+}
 ChangeManager.prototype.syntaxCheck = function(ffl) {
     try {
         this.register.clean();
@@ -34,6 +48,11 @@ ChangeManager.prototype.syntaxCheck = function(ffl) {
     }
 }
 
+ChangeManager.prototype.validCurrentLine = function(line, nextline) {
+    const trimmed = String(line).replace(/\s+/gmi, ' ').trim();
+    const trimmedNextLine = String(nextline).replace(/\s+/gmi, ' ').trim();
+    return trimmed.endsWith(';') || this.isVariableLine(trimmed + '\n' + trimmedNextLine)
+}
 /**
  * When cursor is changed in file, adept state. Set active variable
  */
@@ -62,7 +81,7 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
     var currentVariable;
     for (var i = cursor.row; i > 0; i--) {
         if (this.lines[i].match(/(variable |tuple |root|model )/)) {
-            currentVariable = extractName(this.lines[i].trim())
+            currentVariable = this.extractName(this.lines[i].trim())
             break;
         }
     }

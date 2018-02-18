@@ -4,5 +4,5 @@ FAM Score Basic
 
 Scenario: Verify FAM Score calculations
 Given a document of the model type FAM
-When FES_LAYOUT is set to 100
-Then FES_LAYOUT should be 100
+When FES_LAYOUT is set to a22
+Then FES_LAYOUT should be a22

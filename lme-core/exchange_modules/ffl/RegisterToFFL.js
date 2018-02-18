@@ -119,9 +119,10 @@ RegisterToFFL.prototype.validate = function(line) {
 /**
  * TODO: internationalization should happen here, inject constants on placeholders
  */
-RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
+RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName, noChildren) {
     const constants = this.constants;
     const formattedFFL = []
+    const traverse = !noChildren
     const midx = this.modifierIndex;
     const nidx = this.nameIndex;
     const ridx = this.referstoIndex;
@@ -137,7 +138,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
 
     var cdept = 0;
     const rootNode = this.vars[rootVariableName || 'root'];
-    this.walk(rootNode, 1, function(node, depth) {
+    const visitor = function(node, depth) {
         const items = [];
         if (cdept >= depth) items.push(shiftindent[cdept][(cdept - depth)])
         items.push(indents[depth])
@@ -166,13 +167,14 @@ RegisterToFFL.prototype.toGeneratedFFL = function(rootVariableName, modelName) {
         }
         cdept = depth;
         formattedFFL.push(items.join(""));
-    })
+    };
+    //either with or without children
+    if (traverse) this.walk(rootNode, 1, visitor)
+    else visitor(rootNode, 1)
+
     formattedFFL.push(shiftindent[cdept][cdept - 1]);
     if (!rootVariableName) {
-        //if (formattedFFL[1].indexOf('root') > -1) {
         formattedFFL.shift()
-        // }
-        //formattedFFL[1] = " root\n {"
     }
     for (var i = 0; i < formattedFFL.length; i++) {
         var obj = formattedFFL[i];
