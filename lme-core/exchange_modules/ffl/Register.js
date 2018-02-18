@@ -25,6 +25,9 @@ Register.prototype.clean = function() {
     //therefore adding the property 'valid 'too late while parsing.
     for (var j = 0; j < this.schema_defaults.length; j++) this.addColumn(this.schema_defaults[j]);
 }
+Register.prototype.getNames = function() {
+    return this.getIndex('name')
+}
 Register.prototype.getIndex = function(name) {
     if (!this[name]) this.createIndex(name)
     return this[name]
@@ -41,9 +44,27 @@ Register.prototype.addColumn = function(name) {
 Register.prototype.value = function(idx, key, value) {
     this.i[idx][this.schemaIndexes[key]] = value
 }
-Register.prototype.find = function(key, value) {
+Register.prototype.find = function(key, value, start) {
     const result = []
-    for (var i = 0; i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
+    for (var i = (start || 0); i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
+    return result;
+}
+Register.prototype.distinctArr = function(arr, schema, start) {
+    const result = []
+    const combi = {}
+    const schemaIndexes = this.schemaIndexes;
+    const distinctIndex = schema.map(function(el) {
+        return schemaIndexes[el]
+    })
+    for (var i = (start || 0); i < arr.length; i++) {
+        const row = arr[i]
+        var key = ''
+        for (var j = 0; j < distinctIndex.length; j++) key += '_' + row[distinctIndex[j]];
+        if (!combi[key]) {
+            result.push(row);
+            combi[key] = true
+        }
+    }
     return result;
 }
 //can only be unique indexes, string based.
@@ -60,6 +81,7 @@ Register.prototype.addRow = function(row) {
     this.i.push(row)
     return this.i.length - 1
 }
+/*Inheritance belongs to the Register! this data-structure supports it. DB+Inheritance data-model */
 Register.prototype.inheritProperty = function(name, paramIndex) {
     const variable = this.getIndex('name')[name]
     if (variable[paramIndex]) return variable[paramIndex]

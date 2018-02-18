@@ -36,7 +36,7 @@ fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
     const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
     const javaScriptFunction = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 
-    if (global.DEBUGMODUS) map[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
+    if (global.IDE_DEBUGMODUS) map[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
     else map[id] = javaScriptFunction;
 }
 /**
@@ -56,14 +56,16 @@ const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
         var value
         var state = 'INFO'
         var message = '';
+        var display;
         try {
+            display = y.display
             value = javaScriptFunction(f, x, y, z, v, m);
         } catch (err) {
             state = 'ERROR'
             message = err.toString()
             value = NA
         }
-        const el = [state, variableName, property, y.display, x.hash, value, message, newFormula.original]
+        const el = [state, variableName, property, display, x.hash, value, message, newFormula.original, id]
 
         audittrail.addRow(el)
         return value;

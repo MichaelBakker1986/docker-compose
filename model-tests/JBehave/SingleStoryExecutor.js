@@ -1,12 +1,12 @@
-global.DEBUGMODUS = true
+global.IDE_DEBUGMODUS = true
 const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
-const modelName = 'MVO'
+const modelName = 'FAM'
 //const path = __dirname + '../../../git-connect/resources/'
 //const path = __dirname + '../../../lme-core/test/'
-const path = __dirname + '/../MVO/'
+const path = __dirname + '/../FAM/'
 const test = new JBehaveStoryParser({
     fflFile: path + modelName + '.ffl',
     modelName: modelName,
-    storyFile: path + modelName + '(basic).story'
+    storyFile: path + modelName + '.story'
 })
 test.start()

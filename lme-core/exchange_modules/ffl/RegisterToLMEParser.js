@@ -205,15 +205,18 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             displaytype = 'paragraph'
         }
 
-        if (!node[validIndex]) {
+        //we also check nodeName here. With root { .. there are two root nodes, one wihout name.
+        if (!node[validIndex] && nodeName) {
             //valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message
             //info: patternIndex is language-specific (f.e. email- regular expression)
             const validFormulas = []
-            //if (node[validIndex]) validFormulas.push(node[validIndex])
-            if (node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + node[nameIndex] + ')');
-            if (node[lengthIndex]) validFormulas.push('Length(' + node[nameIndex] + ') ' + node[lengthIndex]);
-            if (node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, node[nameIndex] + ' $1') + ')');
-            if (datatype == 'number') validFormulas.push('not isNaN(OnNA(' + node[nameIndex] + ',null))');
+            //pattern is optional
+            if (patternIndex && node[patternIndex]) validFormulas.push("REGEXPMATCH(" + node[patternIndex] + ',' + nodeName + ')');
+            //length is optional
+            if (lengthIndex && node[lengthIndex]) validFormulas.push('Length(' + nodeName + ') ' + node[lengthIndex]);
+            //range is optional
+            if (rangeIndex && node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, nodeName + ' $1') + ')');
+            if (datatype == 'number') validFormulas.push('not isNaN(OnNA(' + nodeName + ',null))');
             //its also only interesting when its a required field and entered
             // or when its entered and required
             //' + node[nameIndex] + '.required &&

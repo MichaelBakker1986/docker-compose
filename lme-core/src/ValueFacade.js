@@ -36,9 +36,7 @@ if (!String.prototype.trim) {
 }
 
 function findFormula(uiModel) {
-    if (uiModel === undefined) {
-        return undefined;
-    }
+    if (uiModel === undefined) return undefined;
     return FormulaService.findFormulaByIndex(uiModel.ref);
 }
 

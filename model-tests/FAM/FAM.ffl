@@ -4,8 +4,6 @@ import BaseModel.*;
 model FAM uses BaseModel
 {
 	version: "00.00.001.042";
-	root
-	{
 		variable RootSub1
 		{
 			datatype: none;
@@ -9842,5 +9840,4 @@ model FAM uses BaseModel
 				options_trend: locked;
 			}
 		}
-	}
 }

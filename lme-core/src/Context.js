@@ -3,7 +3,7 @@ const Register = require('../exchange_modules/ffl/Register').Register;
 const ApplicationContext = {
     parsers   : [], //holds all injected parsers
     ma        : [], //holds all loaded model-functions.
-    audittrail: new Register(['LEVEL', 'VARIABLENAME', 'PROPERTY', 'YAX', 'XAS', 'VALUE', 'MESSAGE', 'FORMULA'])  //trailer
+    audittrail: new Register(['level', 'name', 'property', 'yax', 'xas', 'value', 'message', 'formula', 'refId'])  //trailer
 }
 const propertyDefaults = {
     'visible'   : true,

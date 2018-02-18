@@ -8,19 +8,13 @@ var Context = require('../src/Context')
 var wb = new JSWorkBook(new Context());
 
 function arraysEqual(a, b) {
-    if (a === b) {
-        return true;
-    }
+    if (a === b) return true;
     if (a == null) {
-        if (b == null) {
-            return true;
-        }
+        if (b == null) return true;
         return b.length == 0;
     }
     if (b == null) {
-        if (a == null) {
-            return true;
-        }
+        if (a == null) return true;
         return a.length == 0;
     }
     return a.length == b.length;

@@ -27,8 +27,10 @@ const newModelTemplate = "model $1 uses BaseModel\n" +
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool
+const Formatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 
 function FFLController($scope, $http, fflEditor, user_session, changeManager, register) {
+    this.register = register;
     this.$scope = $scope
     this.$http = $http
     this.fflEditor = fflEditor;
@@ -127,10 +129,10 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
         if (fflEditor.aceEditor.curOp && fflEditor.aceEditor.curOp.command.name) {
             // reindex(Math.min(e.start.row, e.end.row), Math.max(e.start.row, e.end.row))
             fflAnnotations.push({
-                row: e.start.row,
+                row   : e.start.row,
                 column: 0,
-                text: 'Changed', // Or the Json reply from the parser
-                type: 'info' // also warning and information
+                text  : 'Changed', // Or the Json reply from the parser
+                type  : 'info' // also warning and information
             })
             fflEditor.setAnnotations(fflAnnotations);
         }
@@ -160,7 +162,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             changingValue = true;
             changeManager.changed = true;
         }
-        console.info('action:' + JSON.stringify(e.command))
+        //console.info('action:' + JSON.stringify(e.command))
         changeManager.updateCursor(fflEditor.getValue(), fflEditor.getCursor());
         var annotations = [];
         $scope.$apply(function() {
@@ -183,10 +185,10 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
                     var obj = changeManager.warnings[i].pos[j];
                     annotations.push({
-                        row: fflModel.substring(0, obj.char).split('\n').length,
+                        row   : fflModel.substring(0, obj.char).split('\n').length,
                         column: 0,
-                        text: warning.message, // Or the Json reply from the parser
-                        type: 'error' // also warning and information
+                        text  : warning.message, // Or the Json reply from the parser
+                        type  : 'error' // also warning and information
                     })
                 }
             }
@@ -211,6 +213,11 @@ FFLController.prototype.updateFFLModel = function(model_name) {
                 self.user_session.fflModel = this.responseText;
             }
             self.fflEditor.setParsedValue(self.user_session.fflModel)
+
+            self.register.clean();
+            const formatter = new Formatter(self.register, self.user_session.fflModel)
+            formatter.parseProperties()
+
             self.fflEditor.scrollTop();
         });
         xhr.open('GET', 'resources/' + model_name + '.ffl');

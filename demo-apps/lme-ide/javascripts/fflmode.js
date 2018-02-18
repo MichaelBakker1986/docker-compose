@@ -48,7 +48,7 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
         oop.inherits(DocCommentHighlightRules, TextHighlightRules);
         var ExampleHighlightRules = function() {
             var keywordMapper = this.createKeywordMapper({
-                "variable.language": "unscalable|scorecard|model|boolean|radio|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
+                "variable.language": "unscalable|scorecard|model|matrix|boolean|radio|root|uses|refers|to|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|OnER|Min|ValueT|Count|SelectDescendants|TSUM|DataAvailable|InputRequired|Max|Case",
                 "keyword": "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|variable|tuple|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|pattern|range|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
                 "comment": "#|Memo1",
                 "storage.type": "&",
@@ -406,7 +406,13 @@ define("hoverlink", [], function(require, exports, module) {
 
             if (wordMapSize !== this.register.i.length) {
                 wordMapSize = this.register.i.length
-                regex = new RegExp(Object.keys(this.register.getIndex('name')).join("|"), 'gi')
+                const variableNames = Object.keys(this.register.getIndex('name'));
+                variableNames.sort(function(a, b){
+                    // ASC  -> a.length - b.length
+                    // DESC -> b.length - a.length
+                    return b.length - a.length;
+                });
+                regex = new RegExp(variableNames.join("|"), 'gi')
             }
             var match = this.getMatchAround(regex, line, column);
             if (!match) return;
@@ -594,6 +600,7 @@ define("token_tooltip", [], function(require, exports, module) {
                 var otherMath = null;
                 if (!match) otherMath = this.getMatchAround(formulaRegex, session.getLine(docPos.row), col);
                 if (match && this.register.getIndex('name')[match.value]) {
+                    //variable info
                     const nodes = this.register.getIndex('name')[match.value];
                     const display = nodes[this.register.schemaIndexes.title]
                     var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
@@ -603,6 +610,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     this.tokenText = match.value + " :\n" + display;
 
                 } else if (otherMath) {
+                    //FinanMath functions info
                     const displayValue = otherMath.value + ":\n" + formulaInfo[otherMath.value];
                     this.setText(displayValue);
                     this.width = this.getWidth();

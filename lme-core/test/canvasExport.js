@@ -11,11 +11,13 @@ require('../../math')
 var LMEFacade = require('../').LMEFacade;
 var Context = require('../src/Context');
 var FormulaService = require('../src/FormulaService');
+var DebugManager = require('../exchange_modules/ffl/DebugManager').DebugManager;
 var SolutionFacade = require('../src/SolutionFacade');
 LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
 LMEFacade.addFunctions(require('../../excel-connect').xlsxLookup);
 var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
+var Register = require('../exchange_modules/ffl/Register').Register;
 var fs = require('fs');
 
 var fflTestModels = ['/../resources/KSP'];
@@ -27,12 +29,16 @@ function correctFileName(name) {
 for (var i = 0; i < fflTestModels.length; i++) {
     var fflModelName = fflTestModels[i];
     var data = fs.readFileSync(__dirname + fflModelName + '.ffl', 'utf8');
-    var wb = new WorkBook(new Context());
-
-    wb.importSolution(data, 'ffl');
-    var validate = wb.validateImportedSolution();
-    wb.fixProblemsInImportedSolution();
-    // assert.ok(wb.validateImportedSolution().valid);
+    const context = new Context();
+    var wb = new WorkBook(context);
+    const register = new Register();
+    const debug_manager = new DebugManager(register, context.audittrail)
+    wb.importSolution({
+        register: register,
+        raw     : data
+    }, 'ffl');
+    var validate = debug_manager.monteCarlo(fflModelName)
+    assert.ok(validate.valid);
     var screendefExport = wb.export('webexport');
     var allnodes = screendefExport.nodes;
 
@@ -62,18 +68,18 @@ for (var i = 0; i < fflTestModels.length; i++) {
         }
     });
     variableNames.forEach(function(name) {
-        depVariableNames_with_formulas += createRow(name);
-        depVariableNames += createRow(name);
+        depVariableNames_with_formulas += createRow(name)
+        depVariableNames += createRow(name)
     })
     var formulaInfo = {};
     FormulaService.visitFormulas(function(formula) {
-        formulaInfo[formula.name] = formula;
+        formulaInfo[formula.name] = formula
     })
-    createFile(wb, "_dependencies.json", JSON.stringify(formulaInfo, null, 2));
-    createFile(wb, "_canvas.json", wb.export('lme', undefined));
-    createFile(wb, "_modelTree.txt", createGraph(graphvizModelTree));
-    createFile(wb, "_dependencies.txt", createGraph(depVariableNames));
-    createFile(wb, "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas));
+    createFile(wb, "_dependencies.json", JSON.stringify(formulaInfo, null, 2))
+    createFile(wb, "_canvas.json", wb.export('lme', undefined))
+    createFile(wb, "_modelTree.txt", createGraph(graphvizModelTree))
+    createFile(wb, "_dependencies.txt", createGraph(depVariableNames))
+    createFile(wb, "_dependencies_with_formulas.txt", createGraph(depVariableNames_with_formulas))
 }
 
 function createFile(wb, fileName, graph) {

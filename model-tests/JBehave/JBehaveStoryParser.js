@@ -3,6 +3,7 @@ const path = require('path')
 const SolutionFacade = require('../../lme-core/src/SolutionFacade');
 const Context = require('../../lme-core/src/Context');
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager;
+const Register = require('../../lme-core/exchange_modules/ffl/Register').Register;
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator');
 const StoryParser = require('../StoryParser').StoryParser
 const LMEapi = require('../../lme-model-api/src/lme');
@@ -26,16 +27,18 @@ JBehaveStoryParser.prototype.start = function() {
     }
     const context = new Context()
     const model = new LMEapi(this.timeModel, context, this.interval);
-    const debugManager = new DebugManager(context.audittrail);
-
     const excelPlugin = require('../../excel-connect').xlsxLookup;
     model.addFunctions(excelPlugin);
     const fflFile = require('fs').readFileSync(this.fflFile, 'utf8');
-    excelPlugin.initComplete(this.modelName).then(function(matrix) {
+    const model_name = this.modelName;
+    excelPlugin.initComplete(model_name).then(function(matrix) {
         SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
-        model.importFFL(fflFile)
-
-        //TODO: allow multiple contexts here they should inherit model.lme but not modify it.
+        const register = new Register()
+        model.importFFL({
+            register: register,
+            raw     : fflFile
+        })
+        const debugManager = new DebugManager(register, context.audittrail);
         const storyParser = new StoryParser(storyFile, story, model.lme);
 
         storyParser.filename = story;
@@ -53,7 +56,7 @@ JBehaveStoryParser.prototype.start = function() {
         storyParser.start()
         storyParser.call()
 
-        debugManager.monteCarlo()
+        debugManager.monteCarlo(model_name)
 
         if (!succes) process.exit(1);
     }).catch(function(err) {
