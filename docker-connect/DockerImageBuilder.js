@@ -49,7 +49,6 @@ function DockerImageBuilder(fflModel, story, matrix, model_name) {
 })*/
 
 DockerImageBuilder.prototype.buildDockerImage = function() {
-
     log.info('Start build image')
     const command = 'cd .. && docker build . -f LMERestAPIBuilder -t=' + this.model_name + ':0.002'
     exec(command).then((resp) => {
@@ -58,5 +57,4 @@ DockerImageBuilder.prototype.buildDockerImage = function() {
     })
 }
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()
-
 module.exports = DockerImageBuilder
