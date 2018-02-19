@@ -5,10 +5,10 @@ USER root
 ENV HOST '127.0.0.1'
 ENV INTERNAL_PROXY_PORT 7081
 ENV DATA_API_PORT 8085
-ENV ENABLED_MODELS PRESCAN
+ENV ENABLED_MODELS KSP
 ENV ENV info
 
-#docker build . -f LMERestAPIBuilder -t=nexus.topicusfinance.nl:8444/ksp:0.3
+#docker build . -f LMERestAPIBuilder -t=nexus.topicusfinance.nl:8444/ksp:2.0
 #docker push nexus.topicusfinance.nl:8444/ksp:1.1
 #sudo docker run -p 80:7081 nexus.topicusfinance.nl:8444/ksp:0.3
 #should only include the generated model.js from the generator instead of
