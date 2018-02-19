@@ -1,0 +1,33 @@
+model DEPS uses BaseModel
+{
+  variable ReferencedVar
+  {
+   title : "Q_ROOT";
+   formula : 10;
+   frequency : document;
+   variable Q_MAP01
+   {
+    title : "Hint";
+    formula : 50;
+    locked: true;
+    frequency : document;
+    variable DepHost
+    {
+     title : "Vraag01";
+     formula : ReferencedVar;
+     displaytype: select;
+     choices: "0:History|1:Projection";
+     frequency : document;
+     visible: 0;
+    }
+   }
+   variable TestProperty
+   {
+    title : "TestProperty";
+    formula : 200;
+    frequency : document;
+    choices: 1:Multiple|2:Lening|3:RC|4:Lease|5:Factoring|6:Vastgoed Eigen gebruik|7:Commercieel vastgoed|8:Residentieel vastgoed;
+    displaytype: select;
+   }
+  }
+}

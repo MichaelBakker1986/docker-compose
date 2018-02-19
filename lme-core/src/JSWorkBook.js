@@ -5,6 +5,7 @@
  */
 
 const SolutionFacade = require('./SolutionFacade');
+const FormulaService = require('./FormulaService');
 const PropertiesAssembler = require('./PropertiesAssembler');
 const ValueFacade = require('./ValueFacade');
 const AST = require('../../ast-node-utils').ast;
@@ -180,6 +181,11 @@ JSWorkBook.prototype.resolveYas = function(variableName, note) {
         }
     }
     return yas;
+}
+JSWorkBook.prototype.getDependencies = function(variableName) {
+    const node = this.getNode(variableName)
+    const formula = FormulaService.findFormulaByIndex(node.refId)
+    return [Object.keys(formula.refs),Object.keys(formula.deps)]
 }
 
 function resolveY(wb, y) {

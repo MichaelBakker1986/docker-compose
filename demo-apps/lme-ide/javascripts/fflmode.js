@@ -487,11 +487,12 @@ define("token_tooltip", [], function(require, exports, module) {
     var Range = require("ace/range").Range;
     var Tooltip = require("ace/tooltip").Tooltip;
 
-    function TokenTooltip(editor, register) {
+    function TokenTooltip(editor, register, workbook) {
         if (editor.tokenTooltip) return;
         Tooltip.call(this, editor.container);
         editor.tokenTooltip = this;
         this.editor = editor;
+        this.workbook = workbook
         this.register = register;
 
         this.update = this.update.bind(this);
@@ -669,15 +670,25 @@ define("token_tooltip", [], function(require, exports, module) {
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
                 var otherMath = null;
                 if (!match) otherMath = this.getMatchAround(formulaRegex, session.getLine(docPos.row), col);
+
                 if (match && this.register.getIndex('name')[match.value]) {
+                    const variable_name = match.value;
                     //variable info
-                    const nodes = this.register.getIndex('name')[match.value];
+                    const nodes = this.register.getIndex('name')[variable_name];
                     const display = nodes[this.register.schemaIndexes.title]
-                    var formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
-                    this.setText(match.value + "\n" + display + '\n' + formula);
+                    // const formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
+                    const dependencies = this.workbook.getDependencies(variable_name)
+                    const formula = this.workbook.get(variable_name, 'original')
+                    this.setText(variable_name + ":" + display + '\nformula:\n ' + formula + '\n' + dependencies.map(function(el, idx) {
+                        return (idx == 0 ? 'references:\n ' : 'dependencies:\n ') + el.map(function(el, idx2) {
+                            const parts = el.split('_').slice(1)
+                            const lastpart = parts.pop()
+                            return parts.join('_') + (lastpart == 'value' ? '' : '.' + lastpart) + (idx2 % 4 == 1 ? '\n' : '')
+                        }).join(', ')
+                    }).join('\n'));
                     this.width = this.getWidth();
                     this.height = this.getHeight();
-                    this.tokenText = match.value + " :\n" + display;
+                    this.tokenText = variable_name + " :\n" + display;
 
                 } else if (otherMath) {
                     //FinanMath functions info

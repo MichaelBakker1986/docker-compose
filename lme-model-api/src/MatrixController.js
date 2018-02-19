@@ -8,8 +8,8 @@ function MatrixController($scope, $http, matrixManager, opts) {
     this.matrix_editor = new AceEditor("matrix_editor", opts);
 }
 
-MatrixController.prototype.registerEditorToClickNames = function(fflEditor, user_session, register) {
-    this.matrix_editor.registerEditorToClickNames(this.matrix_editor, fflEditor, user_session, register)
+MatrixController.prototype.registerEditorToClickNames = function(fflEditor, user_session, register, workbook) {
+    this.matrix_editor.registerEditorToClickNames(this.matrix_editor, fflEditor, user_session, register, workbook)
 }
 MatrixController.prototype.refresh = function() {
     var annotations = []

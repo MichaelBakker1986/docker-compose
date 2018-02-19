@@ -6,7 +6,6 @@ const domain = process.env.DOMAIN || (host + ':' + internal_proxy_port + "/id/gu
 const express = require('express');
 const log = require('log6');
 const app = express();
-const https = require('https');
 
 app.set('port', port)
 app.set('host', host)

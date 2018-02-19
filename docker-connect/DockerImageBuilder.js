@@ -13,6 +13,10 @@
  # - excel-connect
  # nexus.topicusfinance.nl:8444
  **/
+
+//#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../devrun.js -i fsevents -i thread-sleep -i tweetnacl -i jsbn -i ecc-jsbn -i bcrypt-pbkdf -i ecc-jsbn/lib/ec
+//#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../lme-data-api/lme-data-app.js
+
 const log = require('log6')
 const exec = require('child-process-promise').exec;
 const params = process.env.MODEL || 'MVO'
@@ -25,7 +29,7 @@ function DockerImageBuilder(fflModel, story, matrix, model_name) {
     this.model_name = model_name
 }
 //browserify --output bundle.js --bare --dg false input.js.
-const compile = require('nexe')
+/*const compile = require('nexe')*/
 /*compile.compile({
     input : 'C:/Users/mbakk/Documents/fesjs/lme-model-api/lme.js',
     python: 'C:/Users/mbakk/Documents/python/python.exe',
@@ -51,7 +55,6 @@ DockerImageBuilder.prototype.buildDockerImage = function() {
     exec(command).then((resp) => {
         if (resp.stderr.length > 0) return log.error('failed to create docker image ', resp.stderr)
         log.info(resp.stdout)
-        exec('')
     })
 }
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()

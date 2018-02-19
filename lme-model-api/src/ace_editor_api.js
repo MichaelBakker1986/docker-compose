@@ -105,18 +105,18 @@ AceEditor.prototype.scrollTop = function() {
     this.aceEditor.gotoLine(1, 1, true);
     this.aceEditor.selection.moveTo(0, 0)
 }
-AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEditor, user_session, register) {
+AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEditor, user_session, register, workbook) {
     var HoverLink = ace.require("hoverlink").HoverLink
     var TokenTooltip = ace.require("token_tooltip").TokenTooltip
 
-    selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register);
+    selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register, workbook);
     selected_editor.aceEditor.hoverLink.on("open", function(link) {
         const startLookIndex = user_session.fflModel.search(new RegExp("(variable|tuple)\\s*\\+?\\-?\\=?" + link.value + "\s*$", "gmi"));
         //(!) its the real LineNumber - Delta on page
         const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
         fflEditor.scrollToLine(lineNumber)
     })
-    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register);
+    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook);
 }
 AceEditor.prototype.scrollToLine = function(lineNumber) {
     this.aceEditor.scrollToLine(lineNumber, true, true, function() {

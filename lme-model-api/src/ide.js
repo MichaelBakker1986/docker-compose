@@ -95,10 +95,10 @@ angular.module('lmeapp', ['angular.filter'])
         var currentIndexer = new RegisterToFFL(register, { schema: [], nodes: [] });//current modelindexer
         const fflEditor = new AceEditor("editor");
         const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
-
-        right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register)
-        fflEditor.registerEditorToClickNames(fflEditor, fflEditor, user_session, register)
-        matrixController.registerEditorToClickNames(fflEditor, user_session, register)
+        const workbook = modelEngine.lme;
+        right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register, workbook)
+        fflEditor.registerEditorToClickNames(fflEditor, fflEditor, user_session, register, workbook)
+        matrixController.registerEditorToClickNames(fflEditor, user_session, register, workbook)
 
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
