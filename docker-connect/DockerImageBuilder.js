@@ -17,8 +17,8 @@
 //#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../devrun.js -i fsevents -i thread-sleep -i tweetnacl -i jsbn -i ecc-jsbn -i bcrypt-pbkdf -i ecc-jsbn/lib/ec
 //#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../lme-data-api/lme-data-app.js
 
-const log = require('log6')
-const exec = require('child-process-promise').exec;
+//const log = require('log6')
+//const exec = require('child-process-promise').exec;
 const params = process.env.MODEL || 'MVO'
 const path = require('path')
 
@@ -49,12 +49,13 @@ function DockerImageBuilder(fflModel, story, matrix, model_name) {
 })*/
 
 DockerImageBuilder.prototype.buildDockerImage = function() {
-    log.info('Start build image')
+    console.info('Start build image')
+    /*log.info('Start build image')
     const command = 'cd .. && docker build . -f LMERestAPIBuilder -t=' + this.model_name + ':0.002'
     exec(command).then((resp) => {
         if (resp.stderr.length > 0) return log.error('failed to create docker image ', resp.stderr)
         log.info(resp.stdout)
-    })
+    })*/
 }
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()
 module.exports = DockerImageBuilder
