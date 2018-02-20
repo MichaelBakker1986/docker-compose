@@ -1,4 +1,4 @@
-model AABPRICING uses BaseModel
+model PRICING uses BaseModel
 {
  version: "1.34.5";
  variable RootSub1
@@ -5643,7 +5643,6 @@ model AABPRICING uses BaseModel
   {
    frequency: document;
    formula: 0;
-   data_options: saveCalculatedValue,unscalable;
    title: "Role";
    choices: "0:Tester|2:RM|3:FB";
   }
@@ -5651,7 +5650,6 @@ model AABPRICING uses BaseModel
   {
    frequency: document;
    formula: 0;
-   data_options: saveCalculatedValue,unscalable;
    title: "Status";
    choices: "0:Open|1:Final";
   }
@@ -5695,7 +5693,6 @@ model AABPRICING uses BaseModel
   {
    frequency: document;
    formula: Now;
-   data_options: saveCalculatedValue,unscalable;
    displaytype: date;
    title: "Last modification:";
   }
@@ -5704,7 +5701,6 @@ model AABPRICING uses BaseModel
    datatype: string;
    frequency: document;
    formula: "01.34.002.000";
-   data_options: saveCalculatedValue,unscalable;
    title: "Model version";
    locked: 1;
   }
@@ -5713,7 +5709,6 @@ model AABPRICING uses BaseModel
    datatype: string;
    frequency: document;
    formula: "AABPRICING";
-   data_options: saveCalculatedValue,unscalable;
    title: "Model type";
    locked: 1;
   }
@@ -5722,7 +5717,6 @@ model AABPRICING uses BaseModel
    datatype: string;
    frequency: document;
    formula: String(MatrixLookup("AAB_Parameters.xls","Version",1,3));
-   data_options: saveCalculatedValue,unscalable;
    title: "Matrix version";
    locked: 1;
   }

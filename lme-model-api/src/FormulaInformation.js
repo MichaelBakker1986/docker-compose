@@ -30,6 +30,8 @@ module.exports = {
     RoundUp          : 'RoundUp(value)',
     SumFor           : 'Example (not documented!) SumFor(a,d,c,d)',
     PPMT             : 'Example: (not documented!) PPMT(a,b,c,d)',
+    BivarNormal      : 'Example: (not documented!) BivarNormal(a,b,c,d)',
+    InvNormal        : 'Example: (not documented!) InvNormal(a,b,c,d)',
     OnZero           : 'OnZero(value,alternative)',
     Or               : 'Abstract A Or B\nExample: 1>2 Or 2>1=True',
     And              : 'Abstract A And B\nExample: 1>2 And 2>1=False',
