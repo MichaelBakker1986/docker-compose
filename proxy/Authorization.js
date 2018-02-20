@@ -189,6 +189,12 @@ class Authorization {
         this.addModelPrivileges(MarcoFacebookID, "LGD", true);
         this.addModelPrivileges(MonliFacebookID, "KSP", true);
         this.addModelPrivileges(MichaelFaceBookID, MVO, true);
+
+        this.addModelPrivileges(MichaelFaceBookID, 'V05', true);
+        this.addModelPrivileges(MichaelFaceBookID, 'PRICING', true);
+        this.addModelPrivileges(RamonFBId, "V05", true);
+        this.addModelPrivileges(RamonFBId, "PRICING", true);
+
         this.addModelPrivileges(BerryFBId, "CLAUDIA2", true);
         this.addModelPrivileges(MichaelFaceBookID, "CLAUDIA2", true);
         this.addModelPrivileges(BasNieveldFBId, "CLAUDIA2", true);
