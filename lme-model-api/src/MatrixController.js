@@ -28,11 +28,12 @@ MatrixController.prototype.updateMatrix = function(model_name) {
     const self = this;
     const $scope = this.$scope;
     $.getJSON("readExcel/" + model_name, function(data) {
-        //used by the LME
+        //TODO: change to default funtions in the FunctionMap
         MATRIX_VALUES = data;
         self.matrixManager.setMatrices(data)
         $scope.$apply(function() {
             self.matrix_editor.aceEditor.setValue(self.matrixManager.toFatrix())
+            self.matrix_editor.scrollTop()
         })
     }).fail(function(err) {
         console.error("Error reading excel file " + model_name, err)

@@ -3,6 +3,7 @@ const AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter
 const ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
 const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
+const FormulaInformation = require('./FormulaInformation')
 
 function AceEditor(id, opts) {
     opts = opts || {}
@@ -116,7 +117,7 @@ AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEd
         const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
         fflEditor.scrollToLine(lineNumber)
     })
-    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook);
+    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, FormulaInformation);
 }
 AceEditor.prototype.scrollToLine = function(lineNumber) {
     this.aceEditor.scrollToLine(lineNumber, true, true, function() {

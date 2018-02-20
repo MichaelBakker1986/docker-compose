@@ -3,81 +3,100 @@ model FyndooCreditRating uses BaseModel
  variable CreditRatingScorecard
  {
   display_options: scorecard;
-  variable SimpleDataEntryFolder
+  variable Input
   {
    data_options: Input;
+   title: "SimpleDataEntryFolder";
    locked: 1;
    variable sdeGoodWill
    {
     displaytype: currency;
+    title: "sdeGoodWill";
    }
    variable sdeReceivablesShareholders
    {
     displaytype: currency;
+    title: "sdeReceivablesShareholders";
    }
    variable sdeDeferredTaxesAssets
    {
     displaytype: currency;
+    title: "sdeDeferredTaxesAssets";
    }
    variable sdeEquity
    {
     displaytype: currency;
+    title: "sdeEquity";
    }
    variable sdeResultForTheYear
    {
     displaytype: currency;
+    title: "sdeResultForTheYear";
    }
    variable sdeVarCapLimitedPartners
    {
     displaytype: currency;
+    title: "sdeVarCapLimitedPartners";
    }
    variable sdeProvisions
    {
     displaytype: currency;
+    title: "$sdeProvisions";
    }
    variable sdeLiabilitiesLong
    {
     displaytype: currency;
+    title: "sdeLiabilitiesLong";
    }
    variable sdeLiabilitiesBankLong
    {
     displaytype: currency;
+    title: "sdeLiabilitiesLong";
    }
    variable sdeLongTradePayables
    {
     displaytype: currency;
+    title: "sdeLongTradePayables";
    }
    variable sdeLongReceivedAdvanceOrdersCurrent
    {
     displaytype: currency;
+    title: "sdeLongReceivedAdvanceOrdersCurrent";
    }
    variable sdeLiabilitiesToShareholdersOver5Y
    {
     displaytype: currency;
+    title: "sdeLiabilitiesToShareholdersOver5Y";
    }
    variable sdeLiabilitiesShort
    {
     displaytype: currency;
+    title: "$sdeLiabilitiesShort";
    }
    variable sdeLiabilitiesBankShort
    {
     displaytype: currency;
+    title: "sdeLiabilitiesBankShort";
    }
    variable sdeTradePayables
    {
     displaytype: currency;
+    title: "sdeTradePayables";
    }
    variable sdeReceivedAdvanceOrdersCurrent
    {
     displaytype: currency;
+    title: "sdeReceivedAdvanceOrdersCurrent";
    }
    variable sdeShortShareholderPayables
    {
     displaytype: currency;
+    title: "sdeShortShareholderPayables";
    }
    variable sdeBalanceSheetTotal
    {
     displaytype: currency;
+    title: "sdeBalanceSheetTotal";
     formula: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
     display_options: displayAsSummation;
     locked: 1;
@@ -86,47 +105,56 @@ model FyndooCreditRating uses BaseModel
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeSales";
    }
    variable sdeDepreciation
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeDepreciation";
    }
    variable sdeResultCorrections
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeResultCorrections";
    }
    variable sdeEBIT
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeEBIT";
    }
    variable sdeInterestEarnings
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeInterestEarnings";
    }
    variable sdeInterestExpenses
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeInterestExpenses";
    }
    variable sdeParticipationEarnings
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeParticipationEarnings";
    }
    variable sdeEntrepreneurFeeOutsideResult
    {
     aggregation: flow;
     displaytype: currency;
+    title: "sdeEntrepreneurFeeOutsideResult";
    }
   }
   variable FyndooCreditRating
   {
    data_options: Output;
    frequency: document;
+   title: "FyndooCreditRating";
    locked: 1;
    variable URAPD refers to krPD
    {
@@ -144,28 +172,33 @@ model FyndooCreditRating uses BaseModel
    }
    variable URATrafficLight refers to krUraAmpel
    {
+    title: "URA $>Ampel<$";
     locked: 1;
     fixed_decimals: 0;
    }
    variable URATrafficLightD refers to krUraAmpelD
    {
     datatype: string;
+    title: "URA $>Ampel<$";
     locked: 1;
    }
    variable URATrafficLightDNL refers to krUraAmpelDNL
    {
     datatype: string;
+    title: "URA $>Ampel<$";
     locked: 1;
    }
    variable IFDRatingClass refers to krIfdRatingKlasse
    {
     displaytype: currency;
+    title: "IFD $>Ratingklasse<$";
     locked: 1;
     data_options: calculateAggregation;
    }
    variable IFDRatingClassD refers to krIfdRatingKlasseD
    {
     datatype: string;
+    title: "IFD $>Ratingklasse<$";
     locked: 1;
    }
    variable R1_ShareOfOrdinaryResult refers to krAnteilOrdentlichenErgebnisses
@@ -270,6 +303,7 @@ model FyndooCreditRating uses BaseModel
   variable RatioFolder
   {
    displaytype: currency;
+   title: "$>Rating Ratios<$";
    visible: 0;
    locked: 1;
    variable sdePD refers to krPD
@@ -857,22 +891,13 @@ model FyndooCreditRating uses BaseModel
     aggregation: average;
     displaytype: percentage;
     title: "$>Apriori-Insolvenzquote<$";
-    formula: If(ModelConfiguration=0,0.018,
-                Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012])
-               );
+    formula: If(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
     fixed_decimals: 1;
    }
    variable krZValue
    {
     title: "$>Z-Wert<$";
-    formula: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,
-                 4.03964180885174
-                +9.29864789092051*krAnteilOrdentlichenErgebnisses
-                +2.38051797748078*krAnteilEigenmittel
-                -23.0757849643717*krFremdKapitalzinslast
-                -1.85536265755931*krBankUndLieferantenanteil
-                -0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten
-                );
+    formula: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,4.03964180885174+9.29864789092051*krAnteilOrdentlichenErgebnisses+2.38051797748078*krAnteilEigenmittel-23.0757849643717*krFremdKapitalzinslast-1.85536265755931*krBankUndLieferantenanteil-0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten);
     locked: 1;
     fixed_decimals: 5;
    }
@@ -888,11 +913,7 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "Probability of Default";
-    formula: If(krZValue=NA,NA,
-                OnER(
-                    1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),
-                    NA)
-                );
+    formula: If(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
     locked: 1;
     fixed_decimals: 3;
    }
@@ -900,9 +921,8 @@ model FyndooCreditRating uses BaseModel
    {
     datatype: string;
     title: "URA Rating class";
-    formula: String(If(krPD=NA," ",
-                    Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"]))
-                    );
+    formula_notrend: String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
+    formula_trend:   String(If(krPD=NA," " , Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])));
     locked: 1;
    }
    variable krUraAmpel
@@ -916,14 +936,16 @@ model FyndooCreditRating uses BaseModel
    {
     datatype: string;
     title: "URA $>Ampel<$";
-    formula: String(Case(krUraAmpel,[=0:"Rot"|=1:"Gelb"|=2:"Grün"]));
+    formula_notrend: String(Case(krUraAmpel,[=0:"Rot"|=1:"Gelb"|=2:"Grün"]));
+    formula_trend: String(Case(krUraAmpel,[=0:"Rot"|=1:"Gelb"|=2:"Grün"]));
     locked: 1;
    }
    variable krUraAmpelDNL
    {
     datatype: string;
     title: "URA $>Ampel<$";
-    formula: String(Case(krUraAmpel,[=0:"rood"|=1:"oranje"|=2:"groen"]));
+    formula_notrend: String(Case(krUraAmpel,[=0:"rood"|=1:"oranje"|=2:"groen"]));
+    formula_trend: String(Case(krUraAmpel,[=0:"rood"|=1:"oranje"|=2:"groen"]));
     locked: 1;
    }
    variable krIfdRatingKlasse
@@ -937,7 +959,8 @@ model FyndooCreditRating uses BaseModel
    {
     datatype: string;
     title: "IFD $>Ratingklasse<$";
-    formula: String(Case(krIfdRatingKlasse,[=1:"1"|=2:"2"|=3:"3"|=4:"4"|=5:"5"|=6:"6"]));
+    formula_notrend: String(Case(krIfdRatingKlasse,[=1:"1"|=2:"2"|=3:"3"|=4:"4"|=5:"5"|=6:"6"]));
+    formula_trend: String(Case(krIfdRatingKlasse,[=1:"1"|=2:"2"|=3:"3"|=4:"4"|=5:"5"|=6:"6"]));
     locked: 1;
    }
   }

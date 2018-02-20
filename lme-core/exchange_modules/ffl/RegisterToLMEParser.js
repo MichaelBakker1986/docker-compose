@@ -49,6 +49,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const dataOptionsIndex = indexer.schemaIndexes.data_options;
     const lengthIndex = indexer.schemaIndexes.length;
     const patternIndex = indexer.schemaIndexes.pattern;
+    const titleIndex = indexer.schemaIndexes.title;
     const referstoIndex = indexer.schemaIndexes.refersto;
     const displayTypeIndex = indexer.schemaIndexes.displaytype;
     const frequencyIndex = indexer.schemaIndexes.frequency;
@@ -68,7 +69,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
     this.formulaIndexes = []
     const formulaIndexes = this.formulaIndexes
-    var formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']
+    var formulas = ['valid', 'hint', 'locked', 'visible', 'required', 'choices']
     for (var i = 0; i < formulas.length; i++) {
         //test if the formula is in the model at all
         if (data.schemaIndexes[formulas[i]] != null) this.formulaIndexes.push(data.schemaIndexes[formulas[i]])
@@ -92,7 +93,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     }
 
     const tuples = []
-    const rootNode = register['root']
+    const rootNode = register['root'] || indexer.i[0]
     workbook.model_version = rootNode ? rootNode[versionIndex] : ''
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
@@ -106,6 +107,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var datatype = node[dataTypeIndex] || 'number'
         var frequency = node[frequencyIndex] || 'column'
         var display_options = node[displayOptionsIndex]
+        const title = node[titleIndex] || "\"" + nodeName + "\""
         const data_options = node[dataOptionsIndex]
         //TODO: paragraph when no children.
         //TODO: else column frequency..
@@ -152,11 +154,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         } else {
             var trendformula = node[trend_formulaIndex];
             valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
-            if (trendformula !== undefined && valueFormula !== trendformula) {//first of all, if both formula's are identical. We can skip the exercise
+            if (trendformula != null && valueFormula != trendformula) {//first of all, if both formula's are identical. We can skip the exercise
                 valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
             }
             if (frequency == 'column' && datatype == 'number' && node[aggregationIndex] == 'flow') {
-                valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + valueFormula + ')'
+                valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + (valueFormula ? valueFormula : 'NA') + ')'
             }
 
             if (node[modifierIndex] == '=') {
@@ -223,7 +225,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             //valid formulas are only interesting when entered OR required
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         }
-        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype), displaytype, frequency);
+        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) {
@@ -264,11 +266,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
 
+        SolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency);
+
         for (var i = 0; i < formulaIndexes.length; i++) {
             const index = formulaIndexes[i];
             if (node[index]) {
                 if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {
-                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null), undefined, frequency);
+                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency);
                 }
             }
         }
@@ -280,7 +284,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 /**
  * @param {optional} modelName
  */
-RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type) {
+RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type, context) {
     if (!formula) return type == 'string' ? AST.STRING("") : type == 'number' ? {
         "type": "Identifier",
         "name": 'NA'
@@ -300,6 +304,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
     catch (e) {
         if (log.DEBUG) log.debug('unable to parse [' + finparse + '] returning it as String value [' + nodeName + "] : " + col, e);
         formulaReturn = AST.STRING(finparse);
+        if (global.IDE_DEBUGMODUS) context.audittrail.addRow(['MODEL', 'ERROR', nodeName, col, '', '', '', e.toString(), formula, null, finparse])
     }
     return formulaReturn;
 }

@@ -8,14 +8,14 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/(\$p|@|#|%|\.\.)/gmi, '');
 
     //temp case fix, <= lt,gt,lte,gte from Cases,
-    buf = buf.replace(/\[\<\=/gm, '[');
-    buf = buf.replace(/\[\</gm, '[');
-    buf = buf.replace(/\|\</gm, '|');
+    buf = buf.replace(/\[\<\=/gm, '[Infinity<=');
+    buf = buf.replace(/\[\</gm, '[Infinity<');
+    buf = buf.replace(/\|\</gm, '<');
     buf = buf.replace(/\[\=/gm, '[');
-    buf = buf.replace(/\|\<\=/gm, '|');
-    buf = buf.replace(/\|\=/gm, '|');
-    buf = buf.replace(/\|\>\=/gm, '|');
-    buf = buf.replace(/\|\>/gm, '|');
+    buf = buf.replace(/\|\<\=/gm, '<=');
+    buf = buf.replace(/\|\=/gm, '=');
+    buf = buf.replace(/\|\>\=/gm, '=>');
+    buf = buf.replace(/\|\>/gm, '>');
     //end temp case fix
 
     /**

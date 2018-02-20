@@ -47,11 +47,13 @@ fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
  * @returns {Function}
  */
 const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
+
     if (log.TRACE) audittrail.push(["Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed])
 
     const variableName = newFormula.name.split('_').slice(1, -1).join('_')
     const property = newFormula.name.split('_').pop()
 
+    audittrail.addRow(['MODEL', 'INFO', variableName, property, '', '', '', 'Ok', newFormula.original, id, newFormula.parsed])
     return function(f, x, y, z, v, m) {
         var value
         var state = 'INFO'
@@ -65,9 +67,7 @@ const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
             message = err.toString()
             value = NA
         }
-        const el = [state, variableName, property, display, x.hash, value, message, newFormula.original, id]
-
-        audittrail.addRow(el)
+        audittrail.addRow(['DATA', state, variableName, property, display, x.hash, value, message, newFormula.original, id])
         return value;
     }
 }

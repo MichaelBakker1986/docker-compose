@@ -47,6 +47,9 @@ JBehaveStoryParser.prototype.start = function() {
             if (event.result.status == 'fail') {
                 //Failed results are just not right, but don't require stacktrace
                 log.error('Story ' + story + ':' + event.line + ' failed to complete.\n' + event.raw.line + ' failing, because [' + event.result.message + ']')
+
+                console.info(context.audittrail.printAuditTrailDelta())
+
                 succes = false;
             }
             else if (event.result.status == 'error') {
@@ -57,6 +60,7 @@ JBehaveStoryParser.prototype.start = function() {
         storyParser.call()
 
         debugManager.monteCarlo(model_name)
+        context.audittrail.printErrors()
 
         if (!succes) process.exit(1);
     }).catch(function(err) {

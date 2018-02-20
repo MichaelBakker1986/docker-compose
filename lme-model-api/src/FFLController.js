@@ -139,7 +139,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
      * Every keystroke from the ACE-IDE will pass here
      */
     const silent_ace_commands = new Set();
-    ['selectwordleft', 'gotolineend'/*END*/, 'gotolinestart'/*HOME*/, 'gotopagedown', 'gotopageup', 'Esc',
+    ['selectwordleft', 'gotolineend'/*END*/, 'gotolinestart'/*HOME*/, 'gotopagedown', 'gotopageup', 'Esc', 'Down',
         'overwrite'/*INSERT*/, 'gotowordright', 'gotowordleft', 'copy', 'selectright', 'selectleft',
         'replace', 'find', 'addCursorAbove', 'selectup', 'selectdown', 'scrollup', 'scrolldown', 'golinedown', 'golineup',
         'selectwordright', 'gotoleft', 'singleSelection', 'selectMoreAfter', 'selectMoreBefore', 'golineup', 'gotoright'
@@ -163,7 +163,6 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 changeManager.setModelChanged();
             }
         }
-        //console.info('action:' + JSON.stringify(e.command))
         changeManager.updateCursor(fflEditor.getValue(), fflEditor.getCursor());
         var annotations = [];
         $scope.$apply(function() {
@@ -173,8 +172,6 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             if ($scope.currentView == 'FFLModelEditorView') $scope.togglePropertiesSidebar(true)
             if (changingValue) {
                 //only reload the variable
-                //$scope.reloadFFL()
-                // LMEMETA.importFFL(fflEditor.getValue())
                 //get FFL String of current variable
                 const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
                 console.info(fflData)
@@ -182,9 +179,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 $scope.runJBehaveTest();
             }
 
-            if (changeManager.warnings.length > 0) {
-                console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
-            }
+            if (changeManager.warnings.length > 0) console.info('There are warnings:' + JSON.stringify(changeManager.warnings));
         })
         if (changeManager.warnings.length > 0) {
             for (var i = 0; i < changeManager.warnings.length; i++) {

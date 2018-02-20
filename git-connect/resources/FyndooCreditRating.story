@@ -33,14 +33,13 @@ When sdeEntrepreneurFeeOutsideResult is set to 1
 When ModelConfiguration is set to 1
 When krInsolvenzquote is set to 1
 When CreditRatingScorecard is set to 1
-When root is set to 1
 Then sdeBalanceSheetTotal should be 4
-Then URAPD should be 0
+Then URAPD should be 1
 @Then URARatingClass should be 1e-10
-Then URATrafficLight should be 0
+Then URATrafficLight should be 1
 @Then URATrafficLightD should be 1e-10
 @Then URATrafficLightDNL should be 1e-10
-Then IFDRatingClass should be 0
+Then IFDRatingClass should be 5
 @hen IFDRatingClassD should be 1e-10
 Then R1_P1_OrdinaryResult should be 1
 Then R1_P2_NetBalanceSheetTotalForTheRating should be 2
@@ -52,7 +51,7 @@ Then R4_P1_ShortTermLiabilities should be 1
 Then R4_P2_Sales should be 1
 Then R5_P1_RatingOrientatedBusinessEquity should be -3
 Then R5_P2_RatingOrientedBalanceSheetTotal should be -1
-Then sdePD should be 0
+Then sdePD should be 1
 @Then sdeURARatingKlasse should be NA
 Then krOrdentlichesErgebnisSub1 should be 1
 Then krOrdentlichesErgebnisSub2 should be 1
@@ -117,12 +116,12 @@ Then krRatingorientierteBilanzsummeSub5 should be -1
 Then krAnteilEigenmittelSub3 should be -3
 Then krZValue should be -14.54566
 Then krRDFsample should be 0.08223
-Then krPD should be 0
+Then krPD should be 1
 @Then krUraRatingKlasse should be 1e-10
-Then krUraAmpel should be 0
+Then krUraAmpel should be 1
 @Then krUraAmpelD should be 1e-10
 @Then krUraAmpelDNL should be 1e-10
-Then krIfdRatingKlasse should be 0
+Then krIfdRatingKlasse should be 5
 @Then krIfdRatingKlasseD should be 1e-10
 Then Input should be 0
 Then R1_ShareOfOrdinaryResult should be 0.5
@@ -147,3 +146,18 @@ Then krFremdKapitalzinslast should be 0.5
 Then krAnteilKurzfristigeVerbindlichkeiten should be 1
 Then krAnteilEigenmittel should be -3
 Then RatioFolder should be 0
+
+Given a Context(URA)
+When sdeGoodWill is set to 100 for column with id 1
+And sdeEquity is set to 150 for column with id 1
+And sdeProvisions is set to 150 for column with id 1
+And sdeLiabilitiesLong is set to 150 for column with id 1
+And sdeLiabilitiesBankLong is set to 150 for column with id 1
+And sdeLiabilitiesShort is set to 150 for column with id 1
+And sdeTradePayables is set to 150 for column with id 1
+And sdeSales is set to 100 for column with id 1
+And sdeDepreciation is set to 5 for column with id 1
+And sdeEBIT is set to 15 for column with id 1
+Then krZValue should be 2.39328 for column with id 1
+And krPD should be 0.02106 for column with id 1
+And krUraRatingKlasse should be BB- for for column with id 1

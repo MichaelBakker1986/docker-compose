@@ -34,14 +34,12 @@ for (var i = 0; i < tests.length; i++) {
     }
     catch (e) {
         failure.push(e);
-        log.error(testName);
-        log.log(e.stack);
+        log.error('Error in file:' + testName, e);
     }
     var endTime = new Date().getTime();
 
     for (var j = 0; j < failure.length; j++) {
         var obj = failure[j];
-        log.error(obj);
         testResults.push([testName, obj]);
     }
     testResults.push([testName, endTime, 'end', (endTime - startTime)]);
@@ -57,7 +55,7 @@ if (totalTestTime > 3500) {
 }
 if (failure.length > 0) {
     log.error('A test failed' + failure)
-    throw Error('A test failed', failure);
+    process.exit(1);
 }
 else {
     log.info('All test success in ' + totalTestTime + 'ms')

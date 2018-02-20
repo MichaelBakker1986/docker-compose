@@ -128,12 +128,12 @@ Register.prototype.walk = function(node, depth, visitor) {
         this.walk(childs[i], depth + 1, visitor)
     }
 }
-Register.prototype.print = function(idxMap) {
-    return this.printArr(this.i, idxMap)
+Register.prototype.print = function(idxMap, start) {
+    return this.printArr(this.i, idxMap, start)
 }
-Register.prototype.printArr = function(arr, idxMap) {
+Register.prototype.printArr = function(arr, idxMap, start) {
     const tout = []
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = (start || 0); i < arr.length; i++) {
         var el = arr[i];
         tout.push(el.map(function(innerEl, idx) {
             const prefix = [];

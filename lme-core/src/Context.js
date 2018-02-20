@@ -1,9 +1,9 @@
 //app scope context
-const Register = require('../exchange_modules/ffl/Register').Register;
+const AuditTrail = require('../exchange_modules/ffl/AuditTrail');
 const ApplicationContext = {
     parsers   : [], //holds all injected parsers
     ma        : [], //holds all loaded model-functions.
-    audittrail: new Register(['level', 'name', 'property', 'yax', 'xas', 'value', 'message', 'formula', 'refId'])  //trailer
+    audittrail: new AuditTrail()  //trailer
 }
 const propertyDefaults = {
     'visible'   : true,
