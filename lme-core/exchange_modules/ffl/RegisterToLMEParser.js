@@ -161,16 +161,18 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
                 valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + (valueFormula ? valueFormula : 'NA') + ')'
             }
 
-            if (node[modifierIndex] == '=') {
+            if (node[modifierIndex] == '=' || node[modifierIndex] == '+=') {
                 display_options = 'displayAsSummation'
                 const siblings = indexer.i[node[parentNameIndex]][childIndex]
-                var formula = '0';
+                var sumformula = [];
                 for (var i = 0; i < siblings.length; i++) {
-                    if (siblings[i][modifierIndex] && siblings[i][modifierIndex] != '=') {
-                        formula += siblings[i][modifierIndex] + siblings[i][nameIndex];
+                    const sibling_modifier = siblings[i][modifierIndex];
+                    if (sibling_modifier && siblings[i][nameIndex] != nodeName) {
+                        const withouttotal = sibling_modifier.replace(/=/, '');
+                        if (withouttotal.length > 0) sumformula.push(withouttotal + siblings[i][nameIndex]);
                     }
                 }
-                valueFormula = formula;
+                valueFormula = sumformula.join('');
             }
         }
         //if column && number.. (aggregate)

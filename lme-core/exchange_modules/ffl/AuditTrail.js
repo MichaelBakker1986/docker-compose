@@ -5,7 +5,7 @@
 const Register = require('./Register').Register
 const AuditTrail = function() {
     const register = new Register(['category', 'level', 'name', 'property', 'yax', 'xas', 'value', 'message', 'formula', 'refId', 'parsed']);
-    register.auditcols = [10, 10, 30, 10, 10, 10, 10, 10, 100, 10, 860];
+    register.auditcols = [10, 10, 30, 10, 10, 10, 20, 20, 100, 10, 860];
     return register
 }
 /** * mark current moment as last checkpoint */

@@ -602,7 +602,16 @@ define("token_tooltip", [], function(require, exports, module) {
                     // const formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
                     const dependencies = workbook.getDependencies(variable_name)
 
-                    const formula = workbook.get(variable_name, 'original')
+                    var formula = workbook.get(variable_name, 'original')
+
+                    const prep = []
+                    var lastIndent = 0
+                    formula = formula.replace(/,/g, function($1, $2, $3) {
+                        if (lastIndent == 0) lastIndent = $2
+                        prep.length = lastIndent
+                        return ',\n' + prep.join(' ')
+                    })
+
                     const entered = workbook.get(variable_name, 'entered')
                     var value;
                     try {
@@ -610,7 +619,10 @@ define("token_tooltip", [], function(require, exports, module) {
                     } catch (err) {
                         value = 'ERR:' + err.toString()
                     }
-                    this.setText(variable_name + ":" + display + '\n' + value + '=' + formula + '\n\n' + dependencies.map(function(el, idx) {
+                    const prefix = [];
+                    const deplength = 60
+                    const dep_ammount_in_row = 2
+                    this.setText(variable_name + ":" + display + '\n\n' + value + '=\n' + formula + '\n\n' + dependencies.map(function(el, idx) {
                         if (el.length == 0) return '';
                         return (idx == 0 ? 'references:\n ' : 'dependencies:\n ') + el.map(function(el, idx2) {
                             const parts = el.split('_').slice(1)
@@ -625,9 +637,13 @@ define("token_tooltip", [], function(require, exports, module) {
                                 dep_value = 'ERR:' + err.toString()
                             }
 
-                            return dep_var_name + (lastpart == 'value' ? '' : '.' + lastpart) + "=" + dep_value + ((idx2 + 1) % 3 == 0 ? '\n' : '')
-                        }).join(', ')
-                    }).join('\n'));
+                            const total = dep_var_name + (lastpart == 'value' ? '' : '.' + lastpart) + "=" + dep_value;
+
+                            prefix.length = Math.max(deplength - String(total).length, 0);
+                            return (String(total).slice(0, deplength - 1) + prefix.join(' ')) + ((idx2 + 1) % dep_ammount_in_row == 0 ? '\n' : '')
+
+                        }).join(' ')
+                    }).join('\n\n'));
                     this.width = this.getWidth();
                     this.height = this.getHeight();
                     this.tokenText = variable_name + " :\n" + display;

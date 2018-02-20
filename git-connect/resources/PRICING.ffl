@@ -2792,7 +2792,7 @@ model PRICING uses BaseModel
         variable Facility_tpManual_tpMonthsSinceStartDate
         {
          frequency: document;
-         formula: If(Facility_tpManual_tpFirstDayMonth = NA ,NA, ( DateToYear(Facility_tpManual_tpFirstDayMonth) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpManual_tpFirstDayMonth) - DateToMonth(Facility_tpStartDate)) + If(Facility_tpManual_tpMonthsSinceStartDate = NA, NA,1);
+         formula: If(Facility_tpManual_tpFirstDayMonth = NA ,NA, ( DateToYear(Facility_tpManual_tpFirstDayMonth) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpManual_tpFirstDayMonth) - DateToMonth(Facility_tpStartDate)) + If(NA = NA, NA,1);
          title: "Months Since StartDate";
          hint: "This variabele is based on months - depending time frequency";
         }
@@ -3084,7 +3084,7 @@ model PRICING uses BaseModel
        variable Facility_tpAnnuityMonthsSinceStartDate
        {
         frequency: document;
-        formula: OnZero(RoundUp((OnNeg((If(Facility_tpStartDate = NA ,NA, ( DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)) + If(Facility_tpAnnuityMonthsSinceStartDate = NA, NA,1)),0)) / Facility_tpAnnuityRepaymentFreqHelpVar , 0), 1);
+        formula: OnZero(RoundUp((OnNeg((If(Facility_tpStartDate = NA ,NA, ( DateToYear(Facility_tpCurrentDate) - DateToYear(Facility_tpStartDate)) * 12 + DateToMonth(Facility_tpCurrentDate) - DateToMonth(Facility_tpStartDate)) + If(NA = NA, NA,1)),0)) / Facility_tpAnnuityRepaymentFreqHelpVar , 0), 1);
         title: "Annuity Months Since Start Date";
        }
        variable Facility_tpAnnuityMonthsSinceCurrentDate

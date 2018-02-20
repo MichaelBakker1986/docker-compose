@@ -1,4 +1,9 @@
+global.IDE_DEBUGMODUS = true
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
+
+const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
+const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
+
 let V05ffl = readFileSync(__dirname + '/V05_realtuple.ffl');
 
 //some case-bugfixes
@@ -12,7 +17,10 @@ V05ffl = V05ffl.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
 
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 
-
-LME.importFFL(V05ffl);
-
-let fixProblemsInImportedSolution = LME.lme.fixProblemsInImportedSolution();
+const register = new Register();
+LME.importFFL({
+    register: register,
+    raw     : V05ffl
+});
+new DebugManager(register, LME.lme.context.audittrail).monteCarlo('V05')
+LME.lme.context.audittrail.printErrors()

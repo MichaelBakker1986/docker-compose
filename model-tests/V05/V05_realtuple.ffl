@@ -6513,8 +6513,8 @@ model V05 uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_notrend: CurrentLimitOnCurrentAccount[GetT(T,-1)];
-              formula_trend: CurrentLimitOnCurrentAccount[GetT(T,-1)];
+              formula_notrend: CurrentLimitOnCurrentAccount[prev];
+              formula_trend: CurrentLimitOnCurrentAccount[prev];
               data_options: calculateAggregation;
               displaytype: currency;
               title: "RC limiet (bank) begin van de periode";
@@ -14075,7 +14075,7 @@ model V05 uses BaseModel
           data_options: hideFirstNoTrendColumn,unscalable;
           displaytype: select;
           title: "Overige mutaties EV akkoord?";
-          hint: "Een bedrag dat wordt getoond bij \"Overige mutaties eigen vermogen\" kan worden geaccepteerd door \"ja\" in te vullen.\r\nIn dat geval zullen alle beperkingen met betrekking tot het rapporteren vanwege de onverklaarde vermogensmutaties worden opgeheven.";
+          hint: "Een bedrag dat wordt getoond bij 'Overige mutaties eigen vermogen' kan worden geaccepteerd door 'ja' in te vullen.\r\nIn dat geval zullen alle beperkingen met betrekking tot het rapporteren vanwege de onverklaarde vermogensmutaties worden opgeheven.";
           visible: 1;
           choices: "Nee|Ja";
           link: OtherMutationsNetWorth;
@@ -48101,7 +48101,7 @@ model V05 uses BaseModel
               data_options: unscalable;
               displaytype: select;
               title: "Gebruik factureringsschema voor bepalen inkomsten?";
-              hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via een Omzet-Optie.";
+              hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via een Omzet-Optie.";
               top_blanklines: 1;
               visible: 1;
               choices: "0:Nee|1:Ja";
@@ -48117,7 +48117,7 @@ model V05 uses BaseModel
               data_options: unscalable;
               fixed_decimals: 1;
               title: "Factureringsschema";
-              hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via een Omzet-Optie.";
+              hint: "Gebruik dit patroon om de omzet te herverdelen naar omzetontvangsten binnen het jaar in het liquiditeitsoverzicht.\r\nLet op: Het ontvangstpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via een Omzet-Optie.";
               top_separator: 1;
               visible: 1;
               options_title: locked;
@@ -48159,7 +48159,7 @@ model V05 uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              formula_trend: If(DataEntered(Product_tpSalesLiq)        ,Product_tpSalesInvoicedIncVAT   -Product_tpSalesLiqIncVAT        +Product_tpTradeReceivables[GetT(T,-1)]  +Product_tpMutationReceivedPrePayments       ,If(CompanyProjectionTemplate=1,Product_tpTradeReceivables[GetT(T,-1)],If((GetPoint(Product_tpSalesInvoicedIncVAT,Product_tpTradeReceivablesTerm/365)  -Product_tpTradeReceivables[GetT(T,-1)])> OnNA(Product_tpSalesInvoicedIncVAT,0),Product_tpSalesInvoicedIncVAT+Product_tpTradeReceivables[GetT(T,-1)],GetPoint(Product_tpSalesInvoicedIncVAT,Product_tpTradeReceivablesTerm  /365))));
+              formula_trend: If(DataEntered(Product_tpSalesLiq)        ,Product_tpSalesInvoicedIncVAT   -Product_tpSalesLiqIncVAT        +Product_tpTradeReceivables[prev]  +Product_tpMutationReceivedPrePayments       ,If(CompanyProjectionTemplate=1,Product_tpTradeReceivables[prev],If((GetPoint(Product_tpSalesInvoicedIncVAT,Product_tpTradeReceivablesTerm/365)  -Product_tpTradeReceivables[prev])> OnNA(Product_tpSalesInvoicedIncVAT,0),Product_tpSalesInvoicedIncVAT+Product_tpTradeReceivables[prev],GetPoint(Product_tpSalesInvoicedIncVAT,Product_tpTradeReceivablesTerm  /365))));
               displaytype: currency;
               title: EvaluateAsString("Handelsdebiteuren ("&GetTitle(Product_tpSales)&")");
               visible: 1;
@@ -49147,7 +49147,7 @@ model V05 uses BaseModel
             data_options: unscalable;
             displaytype: select;
             title: "Gebruik betaalschema lonen voor liquiditeit";
-            hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via de optie \"Personeel\".";
+            hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via de optie 'Personeel'.";
             top_blanklines: 1;
             visible: 1;
             choices: "0:Nee|1:Ja";
@@ -49163,7 +49163,7 @@ model V05 uses BaseModel
             data_options: unscalable;
             fixed_decimals: 1;
             title: "Betaalschema lonen";
-            hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de \"Prognosevariabelen\" of via de optie \"Personeel\".";
+            hint: "Gebruik dit patroon om de kosten te herverdelen naar uitgaven in het liquiditeitsoverzicht.\r\nLet op: Het betaalpatroon kan alleen worden ingevoerd bij de 'Prognosevariabelen' of via de optie 'Personeel'.";
             top_separator: 1;
             visible: 1;
             options_title: locked;

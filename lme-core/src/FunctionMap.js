@@ -46,28 +46,27 @@ fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
  * @param javaScriptFunction
  * @returns {Function}
  */
-const debugwrapper = function(javaScriptFunction, id, newFormula, audittrail) {
+const debugwrapper = function(javaScriptFunction, id, newFormula, audittrailArg) {
 
-    if (log.TRACE) audittrail.push(["Added function %s\n\t\t\t\t\t\t\t\t\t  [%s] %s : %s : [%s]", +id, newFormula.original, newFormula.name, newFormula.type, newFormula.parsed])
-
+    const audittrail = audittrailArg;
+    const original = newFormula.original;
     const variableName = newFormula.name.split('_').slice(1, -1).join('_')
     const property = newFormula.name.split('_').pop()
+    const ff = javaScriptFunction;
 
     audittrail.addRow(['MODEL', 'INFO', variableName, property, '', '', '', 'Ok', newFormula.original, id, newFormula.parsed])
     return function(f, x, y, z, v, m) {
         var value
         var state = 'INFO'
         var message = '';
-        var display;
         try {
-            display = y.display
-            value = javaScriptFunction(f, x, y, z, v, m);
+            value = ff(f, x, y, z, v, m);
         } catch (err) {
             state = 'ERROR'
             message = err.toString()
             value = NA
         }
-        audittrail.addRow(['DATA', state, variableName, property, display, x.hash, value, message, newFormula.original, id])
+        if (state == 'ERROR') audittrail.addRow(['DATA', state, variableName, property, y.display, x.hash, value, message, original, id])
         return value;
     }
 }

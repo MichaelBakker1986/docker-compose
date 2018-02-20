@@ -14,7 +14,7 @@ function finFormulaGeneric(buf) {
     buf = buf.replace(/\[\=/gm, '[');
     buf = buf.replace(/\|\<\=/gm, '<=');
     buf = buf.replace(/\|\=/gm, '=');
-    buf = buf.replace(/\|\>\=/gm, '=>');
+    buf = buf.replace(/\|\>\=/gm, '>=');
     buf = buf.replace(/\|\>/gm, '>');
     //end temp case fix
 
