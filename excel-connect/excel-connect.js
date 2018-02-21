@@ -23,10 +23,11 @@ class ExcelConnect {
             const files = fs.readdirSync(folder);
             const fileNames = []
             for (var i = 0; i < files.length; i++) {
-                const filename = path.resolve(path.join(folder, files[i])).replace(/\(\w+\)/gmi, '');
+                const full_path = path.resolve(path.join(folder, files[i]));
+                const filename = full_path.replace(/\(\w+\)/gmi, '');
                 if (path.extname(filename) == '.xlsx' && path.parse(filename).name == excelFileName) {
-                    fileNames.push(filename)
-                    if (log.DEBUG) log.debug('Found excel file: ', filename);
+                    fileNames.push(full_path)
+                    if (log.DEBUG) log.debug('Found excel file: ', full_path);
                 }
             }
             Promise.all(fileNames.map(function(filename) {
