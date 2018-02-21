@@ -35,7 +35,7 @@ class ExcelConnect {
                     new Excel.Workbook().xlsx.readFile(filename).then(function(data) {
                         succes(self.readFunction(data))
                     }).catch(function(err) {
-                        fail('Error reading XLSX ' + fn + ' for ' + excelFileName, err.toString())
+                        fail('Error reading XLSX ' + filename + ' for ' + excelFileName, err.toString())
                     })
                 })
             })).then((ok) => {
