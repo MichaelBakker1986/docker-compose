@@ -6,7 +6,7 @@ require('../lme-core/exchange_modules/presentation/webexport');
 const FormulaService = require('../lme-core/src/FormulaService');
 var esprima = require('esprima')
 var escodegen = require('escodegen')
-var excelPlugin = require('../excel-connect').xlsxLookup;
+var excelPlugin = require('../excel-connect');
 const LME = require('../lme-model-api/src/lme');
 const log = require('log6');
 const fs = require('fs');

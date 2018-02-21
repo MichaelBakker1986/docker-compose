@@ -4,10 +4,10 @@ const LME = require('../../lme-model-api/src/lme');
 const log = require('log6');
 const fs = require('fs');
 const assert = require('assert');
-const excelPlugin = require('../../excel-connect').xlsxLookup;
+const excelPlugin = require('../../excel-connect');
 const SCORECARDTESTMODEL = new LME(require('../../lme-core/resources/CustomImport'));
 SCORECARDTESTMODEL.addFunctions(excelPlugin);
-excelPlugin.initComplete('SCORECARDTESTMODEL').then(function(matrix) {
+excelPlugin.loadExcelFile('SCORECARDTESTMODEL').then(function(matrix) {
     SCORECARDTESTMODEL.importFFL(fs.readFileSync(__dirname + '/SCORECARDTESTMODEL.ffl', 'utf8'));
     const nodes = SCORECARDTESTMODEL.exportWebModel().nodes;
     var validate = SCORECARDTESTMODEL.lme.validateImportedSolution();

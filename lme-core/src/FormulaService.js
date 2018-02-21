@@ -23,7 +23,7 @@ function FormulaService() {
 
 FormulaService.prototype.visitFormulas = function(visitFunctionArg) {
     for (var i = 0; i < formulas.length; i++) {
-        var formula = formulas[i];
+        const formula = formulas[i];
         if (formula !== null && formula !== undefined) {
             visitFunctionArg(formula);
 
@@ -38,7 +38,7 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
     //in future we want to check here if its a dynamic formula, or plain value.
     //also inherited functions are nice to play around with.
     //if type is not static, we add it as dependency
-    var referenceFormulaInfo = formulas[referenceFormulaIndex];
+    const referenceFormulaInfo = formulas[referenceFormulaIndex];
     //ok so we going to allow default values, this could because this formula was the default.
     //there was once an idea to create static formula types
     //we could now reference to the index instead...
@@ -72,9 +72,9 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
     return referenceFormulaInfo;
 }
 
-function addAssociation(index, property, associationType) {
-    var formula = formulas[index];
-    var otherFormula = formulas[property.ref];
+FormulaService.prototype.addAssociation = function(index, property, associationType) {
+    const formula = formulas[index];
+    const otherFormula = formulas[property.ref];
     if (otherFormula.name !== formula.name && formula.refs[otherFormula.name] === undefined) {
         formula.formulaDependencys.push({
             name       : otherFormula.name,
@@ -90,27 +90,30 @@ function addAssociation(index, property, associationType) {
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency) {
+FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency, self_body) {
     assert(frequency, 'A formula must have a frequency')
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
-    var key = escodegen.generate(AST.EXPRESSION(body));
+    //This is stupid, we have an AST and we going to deconstruct it into a string here.
+    //The string should be supplied!
+    const key = escodegen.generate(AST.EXPRESSION(body));
     //if not locked and the formula isn't already cached, we can reuse it
     //if not locked, its not possible to re-use since the user to override the value of the formula
     //when running in DEBUG-MODUS, we cannot re-use Formula's since they will result in incorrect method calls
-    if (locked && cache[frequency + "_" + key] !== undefined) {
-        formula = cache[frequency + "_" + key];
-    }
+    //SelfBody is supposed to be a JSON string
+    const cache_key = [(self_body || ''), (frequency || ''), key].join('_')
+
+    if (locked && cache[cache_key] !== undefined) formula = cache[cache_key];
     else {
         //else we have to create a new formula
-        formula = newFormula(locked, AST.EXPRESSION(body), formulas.length, property.name);
+        formula = this.newFormula(locked, AST.EXPRESSION(body), formulas.length, property.name, self_body);
         cache[key] = formula;
     }
     property.ref = formula.index;
     property.formulaName = formula.name;
 
     //add the formula Association, so formula 1 knows C12_value uses it.
-    addAssociation(formula.index, property, 'refs');
+    this.addAssociation(formula.index, property, 'refs');
     return formula.id || formula.index;
 }
 /*
@@ -130,14 +133,17 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
  */
 //create a new Formula
 //initiate a new Object, add it to the Array
-function newFormula(locked, body, index, propertyName) {
+FormulaService.prototype.newFormula = function(locked, body, index, propertyName, self_body) {
     const original = AST.PROGRAM(body);
+    const self = self_body ? JSON.parse(self_body) : {}
     const formula = {
         type              : locked ? 'noCacheLocked' : 'noCacheUnlocked',//there are some types, for nor only locked and unlocked are interesting
         refs              : {},//map of references
         formulaDependencys: [],//array of associations (deps and refs)
         deps              : {},//map of dependencies
         body              : original,//AST
+        self              : self.body,//JSON body
+        params            : self.params,//function parameters
         original          : original,
         index             : index,//index used in formula array
         name              : propertyName//default formula name.
@@ -189,17 +195,11 @@ FormulaService.prototype.initVariables = function(variables) {
         const variable = variables[i];
         for (var key in variable.xasValues) {
             variable.x = []
-            for (var keyX in variable.xasValues[key]) {
-                variable.x.push(keyX)
-            }
+            for (var keyX in variable.xasValues[key]) variable.x.push(keyX)
         }
         if (global[variable.name]) {
-            for (var key in variable.expression) {
-                global[variable.name][key] = variable.expression[key];
-            }
-        } else {
-            global[variable.name] = variable.expression;
-        }
+            for (var key in variable.expression) global[variable.name][key] = variable.expression[key];
+        } else global[variable.name] = variable.expression;
     }
 }
 module.exports = FormulaService.prototype;

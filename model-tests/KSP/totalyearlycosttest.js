@@ -4,10 +4,10 @@ const assert = require('assert')
 require('../../math')
 const LMEFacade = require('../../lme-core').LMEFacade;
 LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
-const excelPlugin = require('../../excel-connect').xlsxLookup;
+const excelPlugin = require('../../excel-connect');
 const log = require('log6')
 LMEFacade.addFunctions(excelPlugin);
-excelPlugin.initComplete('KSP').then(function(matrix) {
+excelPlugin.loadExcelFile('KSP').then(function(matrix) {
     const wb = new WorkBook(new Context());
     wb.importSolution(require("fs").readFileSync(__dirname + '/KSP.ffl', "utf8"), 'ffl')
     wb.set('IncomeParent01', 25000)

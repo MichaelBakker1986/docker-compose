@@ -8,7 +8,7 @@ global.debug = function(name) {
     debugManager.addStep(name)
 }
 let ffl = require('fs').readFileSync('./KSP.ffl', 'utf8')
-var excelPlugin = require('../../excel-connect/excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect/excel-connect');
 const LME = require('../../lme-model-api/src/lme');
 const MVO = new LME();
 MVO.addFunctions(excelPlugin);

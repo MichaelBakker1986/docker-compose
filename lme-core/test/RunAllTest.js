@@ -20,6 +20,7 @@ const tests = [
     './TimeTest',
     './BasicOperationsTest',
     './ChangeManagerTest',
+    './FormulaWithSelfTest',
     './TupleTests'//should include all Tuple logic tests.
 ];
 var testResults = [];

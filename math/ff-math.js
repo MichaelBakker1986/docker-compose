@@ -63,18 +63,21 @@ function closestLowerNum(num, arr) {
     return arr[lo];//change to hi to get the nearest
 }
 
+MatrixLookDown = function(table, row, col) {
+    var rv = NA;
+    if (table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
+        rv = table.xasValues[row][col];
+    } else if (table.xasValues && table.x_sort) {
+        const v = closestLowerNum(row, table.x_sort)
+        rv = table.xasValues[v][col];
+    }
+    return rv;
+}
 MatrixLookup = function(xlsfileName, tableName, row, col) {
     if (!MATRIX_VALUES) return NA
     const table = MATRIX_VALUES[tableName];
     var rv = NA;
-    if (table) {
-        if (table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
-            rv = table.xasValues[row][col];
-        } else if (table.xasValues && table.x_sort) {
-            const v = closestLowerNum(row, table.x_sort)
-            rv = table.xasValues[v][col];
-        }
-    }
+    if (table) rv = MatrixLookDown(table, row, col)
     return rv;
 }
 
@@ -90,7 +93,7 @@ PIECHART = function(points) {
             var point = points[index];
             result.push({
                 name: point[0],
-                y: point[1]
+                y   : point[1]
             })
         }
     }
@@ -125,9 +128,8 @@ VALUES = function(func, fId, x, y, z, v, m) {
 Aggregate = function(f, x) {
     return 1;
 }
-GetValue = function(variable, x, y, z, v, amm) {
-    // throw Error(Did not implement GetValue)
-    return 1;//variable('123', x, y, z, v)
+GetValue = function(variable, x, y, z, v, am) {
+    return 1;
 }
 //'^[0-9]+$'
 REGEXPMATCH = function(pattern, value) {
@@ -143,6 +145,6 @@ ValueT = function(one) {
 }
 initJSMath(jsMath);
 exports.mathJs = {
-    name: 'ff-math',
+    name   : 'ff-math',
     entries: entries
 }

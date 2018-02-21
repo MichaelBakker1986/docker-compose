@@ -14,7 +14,7 @@ var FormulaService = require('../src/FormulaService');
 var DebugManager = require('../exchange_modules/ffl/DebugManager').DebugManager;
 var SolutionFacade = require('../src/SolutionFacade');
 LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
-LMEFacade.addFunctions(require('../../excel-connect').xlsxLookup);
+LMEFacade.addFunctions(require('../../excel-connect'));
 var log = require('log6');
 var WorkBook = require('../src/JSWorkBook');
 var Register = require('../exchange_modules/ffl/Register').Register;

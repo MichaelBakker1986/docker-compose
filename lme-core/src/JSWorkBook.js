@@ -60,7 +60,7 @@ JSWorkBook.prototype.importFFL = function(data) {
 JSWorkBook.prototype.importSolution = function(data, parserType) {
     var solution = SolutionFacade.importSolutionData(data, parserType, this);
     this.solution = solution;
-    this.modelName = solution.getName();
+    this.modelName = solution.name;
     this.updateValues();
 }
 JSWorkBook.prototype.getSolutionName = function() {
@@ -185,7 +185,7 @@ JSWorkBook.prototype.resolveYas = function(variableName, note) {
 JSWorkBook.prototype.getDependencies = function(variableName) {
     const node = this.getNode(variableName)
     const formula = FormulaService.findFormulaByIndex(node.refId)
-    return [Object.keys(formula.refs),Object.keys(formula.deps)]
+    return [Object.keys(formula.refs), Object.keys(formula.deps)]
 }
 
 function resolveY(wb, y) {
@@ -435,8 +435,8 @@ JSWorkBook.prototype.validateImportedSolution = function() {
     validateResponse.more = mostcommon;
     return validateResponse;
 };
-JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype) {
-    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none', this);
+JSWorkBook.prototype.createFormula = function(formulaAsString, rowId, colId, tuple, frequency, displaytype, self_body) {
+    SolutionFacade.createFormulaAndStructure(this.getSolutionName(), formulaAsString, rowId, colId || 'value', displaytype, frequency || 'none', this.context.ma, this.context.audittrail, self_body);
     const node = SolutionFacade.getOrCreateProperty(this.getSolutionName(), rowId, colId || 'value');
     if (tuple) {
         node.tuple = tuple;

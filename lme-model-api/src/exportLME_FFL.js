@@ -12,11 +12,11 @@ const SolutionFacade = require('../../lme-core/src/SolutionFacade')
 const Context = require('../../lme-core/src/Context')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const LMEFacade = require('../../lme-core').LMEFacade;
-const ExcelLookup = require('../../excel-connect/excel-connect').xlsxLookup;
+const ExcelLookup = require('../../excel-connect/excel-connect');
 LMEFacade.addFunctions(ExcelLookup)
 //quick-fix resolve XSLX name
 var xlsxname = name.substring(0, 5) == "_tmp_" ? name.split('_')[name.split('_').length - 1] : name
-ExcelLookup.initComplete(xlsxname).then(function(matrix) {
+ExcelLookup.loadExcelFile(xlsxname).then(function(matrix) {
     SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
     if (name.indexOf('SCORECARDTESTMODEL') > -1) {
         const interval = 'detl';

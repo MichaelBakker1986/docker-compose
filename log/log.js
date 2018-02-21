@@ -1,33 +1,33 @@
-var tracer = require('tracer');
-var format = "HH.MM.ssl";
-var logLevel = process.env.ENV || 'info';
-var levels = {
+const tracer = require('tracer');
+const format = "HH.MM.ssl";
+const logLevel = process.env.ENV || 'info';
+const levels = {
     debug: {
         DEBUG: true,
         TRACE: false,
-        INFO: true
+        INFO : true
     },
-    info: {
+    info : {
         DEBUG: false,
         TRACE: false,
-        INFO: true
+        INFO : true
     },
     error: {
         DEBUG: false,
         TRACE: false,
-        INFO: false,
-        WARN: false
+        INFO : false,
+        WARN : false
     },
     trace: {
         DEBUG: true,
         TRACE: true,
-        INFO: true
+        INFO : true
     }
 }
-var console = tracer.colorConsole({
-    format: "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
+const console = tracer.colorConsole({
+    format    : "{{timestamp}} ({{file}}:{{line}}) \t- {{message}}",
     dateformat: format,
-    level: logLevel
+    level     : logLevel
 });
 console.DEBUG = levels[logLevel].DEBUG;
 console.INFO = levels[logLevel].INFO;

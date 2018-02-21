@@ -10,12 +10,14 @@ const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
 const APIDefinition = require(__dirname + '/api/AuthenticatedSwaggerDefinition.json');
 const log = require('log6')
-const excelPlugin = require('../excel-connect').xlsxLookup;
+const excelPlugin = require('../excel-connect');
 LMEFacade.addFunctions(excelPlugin);
 modelLoadListener.addListener(function(fflModelData, path) {
     const pathModelName = require('path').basename(path).split('.')[0]
-    excelPlugin.initComplete(pathModelName).then(function(matrix) {
+    excelPlugin.loadExcelFile(pathModelName).then(function(matrix) {
+
         SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
+
         const lmeModel = LMEFacade.initializeFFlModelData(fflModelData, path);
         const modelname = lmeModel.modelName;
         const model_version_postfix = lmeModel.model_version ? ('/v' + lmeModel.model_version) : ''

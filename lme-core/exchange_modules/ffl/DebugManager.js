@@ -19,15 +19,14 @@ function DebugManager(register, audittrail) {
     this.vars = {}
 }
 
-function splitName(name) {
+DebugManager.prototype.splitName = function(name) {
     const split = name.split('_');
     return { row: split.slice(1, -1).join('_'), col: split[split.length - 1] }
 }
 
 DebugManager.prototype.addStep = function(name) {
     this.active = true;
-    const varcol = splitName(name);
-    this.steps.push(varcol)
+    this.steps.push(this.splitName(name))
 }
 DebugManager.prototype.initVariables = function(fflModel) {
     const lines = fflModel.split('\n')
@@ -108,10 +107,7 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
         fix.reason = message;
         validateResponse.error.push(fix);
     }
-    //console.info(this.audittrail.print([6, 30, 10, 10, 10, 10, 40, 140, 8]).join('\n'))
     //if (!feedback.valid) succes = false
-    //console.info(this.audittrail.printArr(this.audittrail.find('level', 'ERROR'), [6, 30, 10, 10, 10, 10, 40, 140, 8]).join('\n'))
-    // console.info(this.audittrail.find('LEVEL', 'ERROR'))
     validateResponse.valid = validateResponse.error.length === 0;
     return validateResponse;
 }

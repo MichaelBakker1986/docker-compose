@@ -20,9 +20,9 @@ LMEFacade.prototype.initializeFFlModelData = function(data, path) {
         JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
     }
     JSWorkBook.importFFL(data);
-    var validate = JSWorkBook.validateImportedSolution();
+    const validate = JSWorkBook.validateImportedSolution();
     JSWorkBook.fixProblemsInImportedSolution();
-    var validateFeedback = JSWorkBook.validateImportedSolution();
+    const validateFeedback = JSWorkBook.validateImportedSolution();
     if (validateFeedback.valid) {
         //valid
         if (log.DEBUG) log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
@@ -32,6 +32,10 @@ LMEFacade.prototype.initializeFFlModelData = function(data, path) {
     }
     return JSWorkBook;
 };
+/**
+ * TODO: Inject this functions into the FunctionMap instead of global.
+ * @param plugin
+ */
 LMEFacade.prototype.addFunctions = function(plugin) {
     var functions = [];
     for (var functionName in plugin.entries) {
@@ -112,9 +116,9 @@ LMEFacade.prototype.getObjectValues = function(context, rowId, tupleindex) {
                 const appendix = columns == 0 ? "" : "$" + i
                 flattenValues[node.rowId + appendix] = {
                     parent: parentName + appendix,
-                    name: nodeName,
-                    value: getValueObject(JSWorkBook, node.solutionName + "_" + node.rowId, i, yax),
-                    data: []
+                    name  : nodeName,
+                    value : getValueObject(JSWorkBook, node.solutionName + "_" + node.rowId, i, yax),
+                    data  : []
                 }
             }
         }, JSWorkBook.resolveY(0).parent, null, 0)

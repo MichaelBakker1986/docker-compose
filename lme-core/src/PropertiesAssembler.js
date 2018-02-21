@@ -1,7 +1,7 @@
 function PropertiesAssembler() {
 }
 
-var PropertiesModel = {
+const PropertiesModel = {
     NEW_root_value: {
         rowId       : 'root',
         solutionName: 'NEW'
@@ -10,10 +10,10 @@ var PropertiesModel = {
 /**
  * Model root nodes
  */
-var rootNodes = {
+const rootNodes = {
     NEW: PropertiesModel.NEW_root_value
 };
-var rows = new Set();
+const rows = new Set();
 
 PropertiesAssembler.prototype.contains = function(name) {
     return rows.has(name);
@@ -22,10 +22,10 @@ PropertiesAssembler.prototype.contains = function(name) {
 //NULL is not valid, nor empty string
 function createRootnode(modelName) {
     //when calling with undefined just return a Solution with current modelName
-    var newModelName = modelName.toUpperCase();
+    const newModelName = modelName.toUpperCase();
     //create a root node if not exists
     //Better to keep a list of existing Solution instead of writing over them
-    var newRootNodeName = newModelName + '_root_value';
+    const newRootNodeName = newModelName + '_root_value';
     if (!rootNodes[newModelName]) {
         PropertiesModel[newRootNodeName] = {
             name        : newRootNodeName,
@@ -43,8 +43,8 @@ function createRootnode(modelName) {
 PropertiesAssembler.prototype.createRootNode = createRootnode
 
 const getOrCreateProperty = function(groupName, row, col) {
-    var rowId = groupName + '_' + row;
-    var name = rowId + "_" + col;
+    const rowId = groupName + '_' + row;
+    const name = rowId + "_" + col;
     var node = PropertiesModel[name];
     if (node == undefined) {
         node = {
@@ -62,9 +62,7 @@ const getOrCreateProperty = function(groupName, row, col) {
 
 function hasChild(children, name) {
     for (var i = 0; i < children.nodes.length; i++) {
-        if (children.nodes[i].name === name) {
-            return true;
-        }
+        if (children.nodes[i].name === name) return true;
     }
     return false;
 }
@@ -72,19 +70,12 @@ function hasChild(children, name) {
 //add element to Solution
 function addProperty(groupName, row, col, item, parentId) {
     //add to map if it not exists, else re-use the entry
-    var property = getOrCreateProperty(groupName, row, col);
+    const property = getOrCreateProperty(groupName, row, col);
 
-    //inherit all properties But new allow extended Objects.
-    //Only copy primitive members, and the delegate Object.
-    for (key in item) {
-        if (property[key] === undefined && (key === 'delegate' || typeof item[key] !== 'object')) {
-            property[key] = item[key];
-        }
-    }
     //add to root if no parent
-    if (parentId !== undefined) {
+    if (parentId) {
         //else add to PropertiesModel
-        var parentUiModel = PropertiesModel[groupName + '_' + parentId];
+        const parentUiModel = PropertiesModel[groupName + '_' + parentId];
         if (!hasChild(parentUiModel, property.name)) {
             parentUiModel.nodes.push({
                 name      : property.name,
@@ -98,25 +89,23 @@ function addProperty(groupName, row, col, item, parentId) {
 
 //add elements from Solution into Map
 PropertiesAssembler.prototype.bulkInsert = function(solution) {
-    var solutionName = solution.getName();
-    if (!rootNodes[solutionName]) {
-        createRootnode(solutionName);
-    }
+    const solutionName = solution.name;
+    if (!rootNodes[solutionName]) createRootnode(solutionName);
+
     var nodes = solution.nodes;
     var leftOver = [];
     var iteration = 0;
 
     //inserting Nodes requires a couple of iterations, parents first
-    //fail for recursive structures
     while (iteration < 8) {
         for (var i = 0; i < nodes.length; i++) {
-            var obj = nodes[i];
-            if (!obj.parentName || PropertiesModel[solutionName + '_' + obj.parentName]) {
-                obj.ref = obj.formulaId || obj.ref;
-                addProperty(solutionName, obj.rowId, obj.colId, obj, obj.parentName == null ? undefined : obj.parentName);
+            const node = nodes[i];
+            if (!node.parentName || PropertiesModel[solutionName + '_' + node.parentName]) {
+                node.ref = node.formulaId || node.ref;
+                addProperty(solutionName, node.rowId, node.colId, node, node.parentName);
             }
             else {
-                leftOver.push(obj);
+                leftOver.push(node);
             }
         }
         if (leftOver.length == 0) {
@@ -127,9 +116,7 @@ PropertiesAssembler.prototype.bulkInsert = function(solution) {
         leftOver = [];
         iteration++;
     }
-    if (nodes.length !== 0) {
-        throw Error('after ' + iteration + ' still items left, maybe too deeply nested or resursive.');
-    }
+    if (nodes.length !== 0) throw Error('after ' + iteration + ' still items left, maybe too deeply nested or resursive.');
 }
 
 function getRootNode(modelName) {
@@ -138,7 +125,7 @@ function getRootNode(modelName) {
 
 PropertiesAssembler.prototype.findAllInSolution = function(modelName, visitArg) {
     for (var key in PropertiesModel) {
-        var property = PropertiesModel[key];
+        const property = PropertiesModel[key];
         if (property.solutionName === modelName) {
             visitArg(property);
         }
@@ -155,7 +142,7 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * As expected, problems while recursive calling this method.
  */
 PropertiesAssembler.prototype.visitProperty = function(node, func, startDepth) {
-    var startingNode = node || getRootNode('NEW');
+    const startingNode = node || getRootNode('NEW');
     if (startingNode) visitInternal(startingNode, func, startDepth || 0)
 }
 PropertiesAssembler.prototype.visitModel = function(modelName, func, startDepth) {
@@ -180,12 +167,8 @@ PropertiesAssembler.prototype.indexProperties = function(modelName) {
                     const douleNestedTupleDef = PropertiesModel[node.solutionName + "_" + nestedTupleDef.tupleDefinitionName + "_value"]
                     if (douleNestedTupleDef.tupleProperty) throw Error('only 3levels nested tuples are allowed')
                     node.hash = [douleNestedTupleDef.id, '000', nestedTupleDef.id, '000', tupleDef.id, '000', node.id]
-                } else {
-                    node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id]
-                }
-            } else {
-                node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id]
-            }
+                } else node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id]
+            } else node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id]
         }
         else node.hash = [node.id, '000', node.id, '000', node.id, '000', node.id];
     }, 0)

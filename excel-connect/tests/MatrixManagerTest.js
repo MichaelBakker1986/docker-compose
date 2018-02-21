@@ -1,6 +1,6 @@
 const log = require('log6'), assert = require('assert')
 const LMEFacade = require('../../lme-core').LMEFacade;
-const excelPlugin = require('../excel-connect').xlsxLookup;
+const excelPlugin = require('../excel-connect');
 require('../../math');
 LMEFacade.addFunctions(excelPlugin);
 const MatrixManager = require('../MatrixManager')

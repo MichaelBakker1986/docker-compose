@@ -57,26 +57,28 @@ SolutionFacade.prototype.gatherFormulaProperties = function(modelName, propertie
  * Creates Formula/Property if not exists
  * Initialize Functionmap
  */
-SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId, displaytype, frequency, workbook) {
+SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, formulaAsString, rowId, colId, displaytype, frequency, ma, audittrail, self_body, parent_id) {
     //create a formula for the element
     const ast = esprima.parse(formulaAsString);
     //create Solution if not exists.
     const solution = this.createSolution(solutionName);
     //integrate Property with Formula
-    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype, frequency);
+    this.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype, frequency, self_body, parent_id);
     //integrate one formula from just created Solution
-    this.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.context.ma, workbook.context.audittrail);
+    this.initFormulaBootstrap(solution.getFormulaKeys(), false, ma, audittrail);
 };
 /**
  * Called by parsers
  */
-SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency) {
+SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency, self_body, parent_id) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     const property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
+    if (rowId !== 'root' && colId == 'value') property.parentName = parent_id ? parent_id + '_value' : 'root_value';
     if (displaytype) property.displaytype = displaytype;
-    const formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency);
-    return solution.createNode(rowId, colId, formulaId, displaytype);
+    const formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency, self_body);
+    solution.createNode(formulaId, displaytype, property);
+    return property
 };
 
 SolutionFacade.prototype.addFormulaDependency = function(formulaInfo, name, propertyName) {
@@ -102,15 +104,10 @@ SolutionFacade.prototype.properties = {
     title        : 6,
     validateInput: 7,
     choices      : 8,
-    _testg       : 9,
+    hint         : 9,
     _testh       : 10
 };
 SolutionFacade.prototype.functions = {}
-SolutionFacade.prototype.addFunction = function(solution, functionName, functionBody) {
-    const node = this.createUIFormulaLink(solution, functionName, 'function', functionBody, 'number', 'document');
-    const findFormulaByIndex = FormulaService.findFormulaByIndex(node.ref);
-    findFormulaByIndex.params = "$1,$2"
-}
 SolutionFacade.prototype.addVariables = FormulaService.addVariables
 SolutionFacade.prototype.initVariables = FormulaService.initVariables
 SolutionFacade.prototype.fetchFormulaByIndex = FormulaService.findFormulaByIndex;

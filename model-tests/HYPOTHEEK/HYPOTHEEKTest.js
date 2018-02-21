@@ -1,6 +1,6 @@
 require('../../lme-core/exchange_modules/presentation/webexport');
 XMLHttpRequest = require("xhr2").XMLHttpRequest;
-var excelPlugin = require('../../excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect');
 const LME = require('../../lme-model-api/src/lme');
 const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
 const Register = require('../../lme-core/exchange_modules/ffl/Register').Register

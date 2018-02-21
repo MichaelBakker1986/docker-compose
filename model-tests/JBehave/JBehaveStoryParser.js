@@ -27,11 +27,11 @@ JBehaveStoryParser.prototype.start = function() {
     }
     const context = new Context()
     const model = new LMEapi(this.timeModel, context, this.interval);
-    const excelPlugin = require('../../excel-connect').xlsxLookup;
+    const excelPlugin = require('../../excel-connect');
     model.addFunctions(excelPlugin);
     const fflFile = require('fs').readFileSync(this.fflFile, 'utf8');
     const model_name = this.modelName;
-    excelPlugin.initComplete(model_name).then(function(matrix) {
+    excelPlugin.loadExcelFile(model_name).then(function(matrix) {
         SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
         const register = new Register()
         model.importFFL({

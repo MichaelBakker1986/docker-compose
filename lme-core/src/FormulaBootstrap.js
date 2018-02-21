@@ -194,11 +194,11 @@ simplified.TCOUNT = function(formulaInfo, node) {
 simplified.TupleCount = simplified.TCOUNT
 var escodegenOptions = {
     format: {
-        renumber: true,
+        renumber   : true,
         hexadecimal: true,
-        escapeless: true,
-        compact: true,
-        semicolons: false,
+        escapeless : true,
+        compact    : true,
+        semicolons : false,
         parentheses: false
     }
 };
@@ -267,10 +267,10 @@ var varproperties = {}
 
 var defaultValues = {
     required: false,
-    visible: true,
-    locked: false,
-    entered: false,
-    valid: true
+    visible : true,
+    locked  : false,
+    entered : false,
+    valid   : true
 }
 var dummy = function(or, parent, node) {
 };
@@ -287,7 +287,7 @@ var expression = function(or, parent, node) {
 //the tree, visited Depth First
 var traverseTypes = {
     //TODO: make one map directly returning the value, for T or variable
-    Identifier: function(formulaInfo, parent, node) {
+    Identifier           : function(formulaInfo, parent, node) {
         //variable reference
         if (variables(node.name)) {
             node.refn = node.name;
@@ -302,40 +302,40 @@ var traverseTypes = {
         }
     },
     //Don't check the left side of an AssignmentExpression, it would lead into a102('102',x,y,z,v) = 'something'
-    AssignmentExpression: function(formulaInfo, parent, node) {
+    AssignmentExpression : function(formulaInfo, parent, node) {
         if (node.right.refn) {
             buildFunc(formulaInfo, node.right, 0, node.right);
         }
     },
-    ThisExpression: dummy,
-    SequenceExpression: dummy,
-    ObjectExpression: dummy,
-    Property: dummy,
-    Program: dummy,
-    Literal: dummy,
-    ArrayExpression: function(or, parent, node) {
+    ThisExpression       : dummy,
+    SequenceExpression   : dummy,
+    ObjectExpression     : dummy,
+    Property             : dummy,
+    Program              : dummy,
+    Literal              : dummy,
+    ArrayExpression      : function(or, parent, node) {
         node.elements.forEach(function(el) {
             if (el.refn) {
                 //Why is here a new Object created? {}
-                buildFunc(or, el, 0, {name: el.refn});
+                buildFunc(or, el, 0, { name: el.refn });
             }
         });
     },
-    BinaryExpression: expression,
-    LogicalExpression: expression,
-    ExpressionStatement: function(orId, parent, node) {
+    BinaryExpression     : expression,
+    LogicalExpression    : expression,
+    ExpressionStatement  : function(orId, parent, node) {
         var expression = node.expression;
         if (expression.refn) {
             buildFunc(orId, expression, 0, expression);
         }
     },
-    UnaryExpression: function(orId, parent, node) {
+    UnaryExpression      : function(orId, parent, node) {
         var argument = node.argument;
         if (argument.refn) {
             buildFunc(orId, argument, 0, argument);
         }
     },
-    CallExpression: function(orId, parent, node) {
+    CallExpression       : function(orId, parent, node) {
         for (var i = 0, len = node.arguments.length; i < len; i++) {
             var argument = node.arguments[i];
             if (argument.refn) {
@@ -343,7 +343,7 @@ var traverseTypes = {
             }
         }
     },
-    SequenceExpression: function(orId, parent, node) {
+    SequenceExpression   : function(orId, parent, node) {
         //for now we can discard any SequenceExpression
     },
     ConditionalExpression: function(orId, parent, node) {
@@ -357,7 +357,7 @@ var traverseTypes = {
             buildFunc(orId, node.consequent, 0, node.consequent);
         }
     },
-    MemberExpression: function(orId, parent, node) {
+    MemberExpression     : function(orId, parent, node) {
         var object = node.object;
         if (object.refn) {
             var property = node.property;
@@ -437,19 +437,19 @@ global.Hm = function() {
 //So the question here is has[variable]AnyValue in time?
 //recursive walk the formula ast
 const identifier_replace = {
-    TSY: 'x.tsy',
-    T: 'x',
-    MainPeriod: 'z', //zAxis Reference, base period, z.base
-    MaxT: 'x.last',
+    TSY               : 'x.tsy',
+    T                 : 'x',
+    MainPeriod        : 'z', //zAxis Reference, base period, z.base
+    MaxT              : 'x.last',
     TupleInstanceIndex: 'y.index',
-    TupleIndex: 'y.index',
-    TupleLocation: 'y.display',
-    Trend: 'x',//x.trend
-    IsTrend: 'x.istrend',
-    LastTinYear: 'x.lastinbkyear',
-    Bookyear: 'x.bkyear',
-    Now: 'NOW()',
-    TimeAggregated: 'x.aggregated'
+    TupleIndex        : 'y.index',
+    TupleLocation     : 'y.display',
+    Trend             : 'x',//x.trend
+    IsTrend           : 'x.istrend',
+    LastTinYear       : 'x.lastinbkyear',
+    Bookyear          : 'x.bkyear',
+    Now               : 'NOW()',
+    TimeAggregated    : 'x.aggregated'
 
 }
 
@@ -470,16 +470,15 @@ function buildFormula(formulaInfo, parent, node) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
             //be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
-            const globalFunction = node.callee.name.split('.')[0];
-            if (global[globalFunction] == undefined) {
+            const lme_math = node.callee.name.split('.')[0];
+            if (global[lme_math] == undefined) {
                 var groupName = formulaInfo.name.split('_')[0];
-                var referenceProperty = getOrCreateProperty(groupName, globalFunction, 'function');
+                var referenceProperty = getOrCreateProperty(groupName, lme_math, 'function');
                 if (referenceProperty.ref !== undefined) {
+                    const abc = addFormulaDependency(formulaInfo, referenceProperty.rowId, 'function');
                     node.callee.name = 'm[' + referenceProperty.ref + ']'
-                    throw Error('??')
-                } else {
-                    throw Error('invalid call [' + node.callee.name + ']')
-                }
+                } else throw Error('invalid call [' + node.callee.name + ']')
+
             }
         }
     }

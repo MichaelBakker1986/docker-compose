@@ -127,7 +127,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
         // expecting an parentName..
         var parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null;
-        if (parentId == 'root') parentId = undefined;
+        //if (parentId == 'root') parentId = undefined;
 
         /**
          * number:2 means: number with 2 fixed decimals
@@ -227,7 +227,8 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             //valid formulas are only interesting when entered OR required
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         }
-        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency);
+
+        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId);
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
         if (visibleFormula && parentId) {
@@ -238,6 +239,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         if (display_options) uiNode.display_options = display_options
         if (data_options) uiNode.data_options = data_options
 
+        //should not be needed...
         uiNode.frequency = frequency;
 
         /**
@@ -266,15 +268,13 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         uiNode.datatype = datatype;
 
-        if (nodeName !== 'root') solution.setParentName(uiNode, parentId);
-
-        SolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency);
+        SolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency, null, null);
 
         for (var i = 0; i < formulaIndexes.length; i++) {
             const index = formulaIndexes[i];
             if (node[index]) {
                 if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {
-                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency);
+                    SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency, null, null);
                 }
             }
         }

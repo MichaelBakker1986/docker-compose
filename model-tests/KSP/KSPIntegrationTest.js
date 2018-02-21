@@ -18,7 +18,7 @@ var LMEFacade = require('../../lme-core').LMEFacade;
 var fs = require('fs');
 LMEFacade.addFunctions(require('../../formulajs-connect').formulajs);
 //add excel-lookup, MatrixLookup
-var excelPlugin = require('../../excel-connect').xlsxLookup;
+var excelPlugin = require('../../excel-connect');
 LMEFacade.addFunctions(excelPlugin);
 var wbTest = new WorkBook(new Context());
 

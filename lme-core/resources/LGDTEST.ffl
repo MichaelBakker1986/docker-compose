@@ -1,7 +1,5 @@
 model LGD uses BaseModel
 {
- root
- {
  variable Q_ROOT
  {
   displaytype:scorecard;
@@ -349,5 +347,4 @@ model LGD uses BaseModel
    }
   }
  }
-}
 }

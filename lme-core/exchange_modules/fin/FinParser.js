@@ -14,8 +14,8 @@ var esprima = require('esprima')
 var logger = require('log6');
 //FIN->JavaScript
 var parser = {
-    name: 'fin',
-    parse: function(data) {
+    name   : 'fin',
+    parse  : function(data) {
         //should return a parseResult
         //.with a .valid
         var solution;
@@ -132,7 +132,7 @@ function createFormulaSafe(solution, formula) {
             ast = AST.STRING(code);
         }
     }
-    var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
+    //var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
     if (formula._delegate) {
         throw Error('refactored')
         //solution.setDelegate(uiNode, formula._delegate);
@@ -174,26 +174,26 @@ function createFinFormulaRow(key, variable, formula) {
  'M': Memo = memoscreen. Memos per period are possible.
  */
 var displayAsMapping = {
-    C: 'select',
-    T: 'select',
-    " ": 'StringAnswerType',
+    C        : 'select',
+    T        : 'select',
+    " "      : 'StringAnswerType',
     undefined: 'TextAnswerType',
-    G: 'AmountAnswerType',
-    I: 'StringAnswerType',
+    G        : 'AmountAnswerType',
+    I        : 'StringAnswerType',
     //date: 'DateAnswerType',//requires a converter to work
     //Causing infinite digest cycles, soemthing with Date types with functions returning either 1 or Undefined.
-    D: 'StringAnswerType',
+    D        : 'StringAnswerType',
     //D: 'DateAnswerType',
-    '%': 'PercentageAnswerType',
-    M: 'MemoAnswerType'
+    '%'      : 'PercentageAnswerType',
+    M        : 'MemoAnswerType'
 }
 var ASTCache = {
     "undefined": AST.UNDEFINED,
-    "On": AST.TRUE,
-    "No": AST.FALSE,
-    "Off": AST.FALSE,
-    "True": AST.TRUE,
-    "False": AST.FALSE
+    "On"       : AST.TRUE,
+    "No"       : AST.FALSE,
+    "Off"      : AST.FALSE,
+    "True"     : AST.TRUE,
+    "False"    : AST.FALSE
 }
 /*
  Column 21: Input required
@@ -242,28 +242,28 @@ function addNode(solution, node, parentId) {
     }
 
     createFormulaSafe(solution, {
-        _delegate: node,
+        _delegate : node,
         parentName: parentName,
-        displayAs: displayAsMapping[node.displaytype],
-        name: rowId,
-        property: 'value',
-        formula: 'undefined'
+        displayAs : displayAsMapping[node.displaytype],
+        name      : rowId,
+        property  : 'value',
+        formula   : 'undefined'
     });
-    createFormulaSafe(solution, {name: rowId, property: 'title', formula: node.title});
+    createFormulaSafe(solution, { name: rowId, property: 'title', formula: node.title });
 
     //locked and visibility
     if (node.protection === 'I') {
-        SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
+        //SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
     }
     else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N') {
-        SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
+        //    SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
     }
     if (node.required === '+' || node.required === 'R') {
-        SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
+        // SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
     }
 
     if (node.hint.trim().length > 0) {
-        SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
+        //   SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
     }
 }
 

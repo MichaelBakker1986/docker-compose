@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 const stash = require('./src/stash').Stash;
 const DBModel = require('../git-connect/ModelAssembler');
-const ExcelConnect = require('../excel-connect/').xlsxLookup;
+const ExcelConnect = require('../excel-connect/');
 const fileUpload = require('express-fileupload');
 const DockerImageBuilder = require('../docker-connect/DockerImageBuilder')
 const fs = require('fs')
@@ -151,7 +151,7 @@ app.post('*/upload', function(req, res) {
 
 app.get('*/readExcel/:model', function(req, res) {
     const modelName = req.params.model;
-    ExcelConnect.initComplete(modelName).then(function(matrix) {
+    ExcelConnect.loadExcelFile(modelName).then(function(matrix) {
         res.json(matrix)
     }).catch(function(err) {
         return res.status(400).json({ status: 'fail', reason: err.toString() });
@@ -169,7 +169,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', function(req, res) {
     const user_id = req.params.user_id;
 
     stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then((data) => {
-        ExcelConnect.initComplete(model_name).then(function(matrix) {
+        ExcelConnect.loadExcelFile(model_name).then(function(matrix) {
             stash.commit(user_id, model_name, req.body.fflData, null).then((data) => {
                 new DockerImageBuilder(model_name, null, null, null).buildDockerImage()
                 return res.json({

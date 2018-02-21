@@ -30,10 +30,23 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
     }
     else if (log.DEBUG) log.debug('[%s] does not exist in the model.', id);
 }
+/**
+ * TODO: support for variable types.
+ *  - primitive and objects
+ *  - also function types that don't need to be executed.
+ *  100 + m[10002]   when m[10002] = 1(but can be entered.)
+ *  100 + 1          when m[10002] = 1(and locked.)
+ */
 fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
     const id = newFormula.id || newFormula.index;
     const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
-    const modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
+
+    //we going to use .bind for function-scope variable binding. First of all we going to bind all CHOICES!
+    //In the choice we can use this.options[]....
+
+    var modelFunction = Function(newFormula.params || 'f, x, y, z, v, m', stringFunction);
+    if (newFormula.self != null) modelFunction = modelFunction.bind(newFormula.self)
+
     const javaScriptFunction = formulaDecorators[newFormula.type](modelFunction, id, newFormula.name);
 
     if (global.IDE_DEBUGMODUS) map[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail)
@@ -55,18 +68,21 @@ const debugwrapper = function(javaScriptFunction, id, newFormula, audittrailArg)
     const ff = javaScriptFunction;
 
     audittrail.addRow(['MODEL', 'INFO', variableName, property, '', '', '', 'Ok', newFormula.original, id, newFormula.parsed])
-    return function(f, x, y, z, v, m) {
+    return function() {
         var value
         var state = 'INFO'
         var message = '';
+
         try {
-            value = ff(f, x, y, z, v, m);
+            value = ff.apply(this, arguments);
         } catch (err) {
             state = 'ERROR'
             message = err.toString()
             value = NA
         }
-        if (state == 'ERROR') audittrail.addRow(['DATA', state, variableName, property, y.display, x.hash, value, message, original, id])
+        //*growing too fast for V05*//
+        //*For static functions args[1] and args[2] can be anythng*//
+        audittrail.addRow(['DATA', state, variableName, property, (arguments[2].display || arguments[2]), (arguments[1].hash || arguments[1]), value, message, original, id])
         return value;
     }
 }

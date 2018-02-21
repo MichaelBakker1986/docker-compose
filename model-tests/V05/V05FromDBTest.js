@@ -3,7 +3,7 @@ require('../../lme-core/exchange_modules/presentation/webexport')
 require('../../math')
 
 const Register    = require('../../lme-core/exchange_modules/ffl/Register'),
-      excelplugin = require('../../excel-connect').xlsxLookup,
+      excelplugin = require('../../excel-connect'),
       assembler   = require('../../git-connect/ModelAssembler'),
       JSWorkbook  = require('../../lme-core/src/JSWorkBook'),
       Context     = require('../../lme-core/src/Context'),
@@ -12,7 +12,7 @@ const Register    = require('../../lme-core/exchange_modules/ffl/Register'),
       lmeModel    = new LME()
 
 lmeModel.addFunctions(excelplugin)
-Promise.all([assembler.started, excelplugin.initComplete]).then(() => {
+Promise.all([assembler.started, excelplugin.loadExcelFile]).then(() => {
     assembler.getModel("V05").then((modelData) => {
     }).catch((err) => {
         log.error(err)
