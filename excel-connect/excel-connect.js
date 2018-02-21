@@ -21,11 +21,10 @@ class ExcelConnect {
             //check if an file exists
             const folder = fullPath || default_resouces_map;
             const files = fs.readdirSync(folder);
-            const matcher = new RegExp('/|\\\\' + excelFileName + '(\\(\\w*\\))?\.xlsx', 'i');
             const fileNames = []
             for (var i = 0; i < files.length; i++) {
-                const filename = path.resolve(path.join(folder, files[i]));
-                if (matcher.test(filename)) {
+                const filename = path.resolve(path.join(folder, files[i])).replace(/\(\w+\)/gmi, '');
+                if (path.extname(filename) == '.xlsx' && path.parse(filename).name == excelFileName) {
                     fileNames.push(filename)
                     if (log.DEBUG) log.debug('Found excel file: ', filename);
                 }
@@ -169,4 +168,5 @@ class ExcelConnect {
         return matrix
     }
 }
+
 module.exports = new ExcelConnect()

@@ -8,7 +8,7 @@ const excelPlugin = require('../excel-connect');
 require('../../math');
 LMEFacade.addFunctions(excelPlugin);
 excelPlugin.loadExcelFile('KSP').then(function(matrix) {
-    SolutionFacade.initVariables([{name: 'MATRIX_VALUES', expression: matrix}])
+    SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
     var wb = new WorkBook(new Context());
     wb.createFormula("MatrixLookup('','YearlyChildCosts','Diapers',1)", 'MatrixLookupTest')
     wb.createFormula("MatrixLookup('','PremiumOutOfSchoolCare',18486,1)", 'MatrixLookupPremiumOutOfSchoolCare')
