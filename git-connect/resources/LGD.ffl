@@ -69,20 +69,15 @@ model LGD uses BaseModel
         }
         variable Amount
         {
-         displaytype: number;
          frequency: document;
         }
        }
        variable OtherRank
        {
-        displaytype: number;
-        formula: NA;
         frequency: document;
        }
        variable Discount
        {
-        displaytype: number;
-        formula: NA;
         frequency: document;
        }
       }
@@ -127,7 +122,6 @@ model LGD uses BaseModel
        }
        variable CollateralAgreementAmount
        {
-        displaytype: number;
         frequency: document;
        }
       }
@@ -177,7 +171,6 @@ model LGD uses BaseModel
      }
      variable ExposureAtDefault
      {
-      displaytype: number;
       formula: Limiet * ExpectedLimitUsage;
       frequency: document;
      }
@@ -222,7 +215,6 @@ model LGD uses BaseModel
      datatype: string;
      variable AllocatedCollateralReferenceNumber
      {
-      displaytype: number;
       frequency: document;
       range: <= 128;
      }
