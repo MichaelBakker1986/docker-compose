@@ -14,8 +14,8 @@ Solution.prototype.getFormulaKeys = function() {
     });
     return temp_array;
 }
-Solution.prototype.createNode = function(formulaId, displayAs, n) {
-    n.displayAs = (displayAs || 'string')
+Solution.prototype.createNode = function(formulaId, displaytype, n) {
+    n.displaytype = (displaytype || 'string')
     if (formulaId !== undefined) this.formulas.add(formulaId);
     this.nodes.push(n);
 }

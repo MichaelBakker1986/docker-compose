@@ -72,6 +72,12 @@ function addProperty(groupName, row, col, item, parentId) {
     //add to map if it not exists, else re-use the entry
     const property = getOrCreateProperty(groupName, row, col);
 
+    //inherit all properties But new allow extended Objects.
+    //Only copy primitive members, and the delegate Object.
+    for (var key in item)
+        if (property[key] === undefined && (typeof item[key] !== 'object'))
+            property[key] = item[key];
+
     //add to root if no parent
     if (parentId) {
         //else add to PropertiesModel

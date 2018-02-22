@@ -169,5 +169,4 @@ class ExcelConnect {
         return matrix
     }
 }
-
 module.exports = new ExcelConnect()

@@ -244,7 +244,7 @@ function addNode(solution, node, parentId) {
     createFormulaSafe(solution, {
         _delegate : node,
         parentName: parentName,
-        displayAs : displayAsMapping[node.displaytype],
+        displaytype : displayAsMapping[node.displaytype],
         name      : rowId,
         property  : 'value',
         formula   : 'undefined'

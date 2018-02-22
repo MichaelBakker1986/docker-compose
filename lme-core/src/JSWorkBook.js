@@ -184,7 +184,7 @@ JSWorkBook.prototype.resolveYas = function(variableName, note) {
 }
 JSWorkBook.prototype.getDependencies = function(variableName) {
     const node = this.getNode(variableName)
-    const formula = FormulaService.findFormulaByIndex(node.refId)
+    const formula = FormulaService.findFormulaByIndex(node.ref)
     return [Object.keys(formula.refs), Object.keys(formula.deps)]
 }
 

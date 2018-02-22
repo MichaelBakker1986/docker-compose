@@ -238,7 +238,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
     const unique = yas.display + "_" + rowId
     const amount = this.repeats[node.frequency][0]
     const colspan = this.repeats[node.frequency][1];
-    const type = node.displayAs;
+    const type = node.displaytype;
     const displaytype = type;
     const path = treePath.join('.')
     const has = node.hash.slice();
@@ -264,7 +264,7 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
         order_id       : has.join('.'),
         index          : index,
         title_locked   : node.title_locked,
-        type           : node.displayAs,
+        type           : node.displaytype,
         path           : path,
         ammount        : amount,
         colspan        : colspan,

@@ -29,7 +29,7 @@ const parser = {
             //create output node
             var uielem = {
                 name       : elem.rowId,
-                displaytype: elem.displayAs,
+                displaytype: elem.displaytype,
                 description: elem.title
             };
             var formulaProperties = SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId);

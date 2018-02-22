@@ -64,7 +64,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
     })
     var userValue = value;
     var variable = fetchSolutionNode(row, (col || 'value'));
-    if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
+    if (variable.displaytype == 'radio' || variable.displaytype == 'select') {
         if (userValue != null) {
             const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas);
             const lookupvalue = ValueFacade.validChoice(choices, row, userValue)
@@ -127,7 +127,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
     }
     if (variable) {
         if (colType === 'value') {
-            if (variable.displayAs == 'radio' || variable.displayAs == 'select') {
+            if (variable.displaytype == 'radio' || variable.displaytype == 'select') {
                 if (returnValue != null) {
                     const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas);
                     returnValue = returnValue === true ? "1" : returnValue === false ? "0" : returnValue
@@ -160,11 +160,11 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                 if (variable.datatype == 'number') {
                     returnValue = OnNA(returnValue, 0)
                 }
-                if (variable.displayAs == 'piechart') {
+                if (variable.displaytype == 'piechart') {
                     returnValue = PIECHART(returnValue)
                 }
             }
-            if (variable.displayAs == 'date') {
+            if (variable.displaytype == 'date') {
                 returnValue = new Date(returnValue)
             }
         } else if (colType == 'locked') {
