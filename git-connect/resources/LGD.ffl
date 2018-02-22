@@ -27,7 +27,6 @@ model LGD uses BaseModel
     }
     tuple CollateralAgreementContainer
     {
-     
      datatype: string;
      frequency: none;
      variable CollateralECValue
@@ -38,7 +37,6 @@ model LGD uses BaseModel
      }
      tuple RegistrationContainer
      {
-      
       datatype: string;
       frequency: none;
       variable CollateralObject
@@ -195,7 +193,6 @@ model LGD uses BaseModel
     }
     tuple AllocatedGuarantee
     {
-     
      datatype: string;
      frequency: none;
      variable AllocatedGuaranteeReferenceNumber
@@ -207,7 +204,6 @@ model LGD uses BaseModel
      }
      tuple GuaranteeAgreement
      {
-      
       datatype: string;
       frequency: none;
       variable GuaranteeAgreementReferenceNumber
@@ -228,7 +224,6 @@ model LGD uses BaseModel
     }
     tuple AllocatedCollateral
     {
-     
      datatype: string;
      frequency: none;
      variable AllocatedCollateralReferenceNumber
