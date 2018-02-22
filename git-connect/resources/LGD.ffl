@@ -23,7 +23,6 @@ model LGD uses BaseModel
     variable AllocationValue
     {
      frequency: document;
-     formula: 1;
     }
     tuple CollateralAgreementContainer
     {
@@ -245,7 +244,6 @@ model LGD uses BaseModel
     displaytype: none;
     datatype: string;
     frequency: document;
-    formula: 1;
    }
    variable FacilityReferenceNumber
    {
