@@ -1,12 +1,21 @@
+define("ace/snippets/text", ["require", "exports", "module"], function(require, exports, module) {
+    "use strict";
+
+    exports.snippetText = undefined;
+    exports.scope = "text";
+
+});
+
 define('ace/mode/ffl', function(require, exports, module) {
 
     var oop = require("ace/lib/oop");
     var TextMode = require("ace/mode/text").Mode;
-    var ExampleHighlightRules = require("ace/mode/ffl_highlight_rules").ExampleHighlightRules;
+    var FFLHighlightRules = require("ace/mode/ffl_highlight_rules").FFLHighlightRules;
     var CStyleFoldMode = require("ace/mode/folding/cstyle").FoldMode;
-    var Mode = function() {
-        this.HighlightRules = ExampleHighlightRules;
-        this.keywordMapper = ExampleHighlightRules.keywordMapper;
+    var Mode = function(keywordmap) {
+        this.HighlightRules = FFLHighlightRules;
+        FFLHighlightRules.prototype.keywords = keywordmap
+        this.keywordMapper = FFLHighlightRules.keywordMapper;
         this.foldingRules = new CStyleFoldMode();
     };
     oop.inherits(Mode, TextMode);
@@ -22,39 +31,8 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
 
         var oop = require("ace/lib/oop");
         var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-        var DocCommentHighlightRules = function() {
-
-            DocCommentHighlightRules.getTagRule = function(start) {
-                return {
-                    token: "comment.doc.tag.storage.type",
-                    regex: "\\b(?:TODO|FIXME|XXX|HACK)\\b"
-                };
-            };
-            DocCommentHighlightRules.getStartRule = function(start) {
-                return {
-                    token: "comment.doc", // doc comment
-                    regex: "\\/\\*(?=\\*)",
-                    next : start
-                };
-            };
-            DocCommentHighlightRules.getEndRule = function(start) {
-                return {
-                    token: "comment.doc", // closing comment
-                    regex: "\\*\\/",
-                    next : start
-                };
-            };
-        }
-        oop.inherits(DocCommentHighlightRules, TextHighlightRules);
-        var ExampleHighlightRules = function() {
-            var keywordMapper = this.createKeywordMapper({
-                "variable.language": "Output|RoundUp|DateToMonth|DateToYear|OnNeg|CumNormal|InvNormal|unscalable|scorecard|model|matrix|boolean|radio|Input|paragraph|root|uses|refers|to|date|On|Off|fileupload|displayAsSummation|percentage|average|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|GetValue|OnER|Min|AddMonth|ValueT|Count|SelectDescendants|TSUM|DMYtoDate|DataAvailable|InputRequired|Max|Case",
-                "keyword"          : "Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|pattern|range|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint",
-                "comment"          : "#|variable|tuple",
-                "storage.type"     : "&",
-                "support.function" : "+|-|=|none|and|or|entered|visible",
-                "constant.language": "NA|TupleIndex|T|TsY|X|YearInT"
-            }, "text", true);
+        var FFLHighlightRules = function() {
+            var keywordMapper = this.createKeywordMapper(this.keywords, "text", true);
             this.keywordMapper = keywordMapper;
             this.keywordRule = {
                 regex  : "\\w+",
@@ -88,14 +66,12 @@ define('ace/mode/ffl_highlight_rules', function(require, exports, module) {
                 ]
             };
 
-            this.addRules(new DocCommentHighlightRules().getRules(), "comment-");
             this.addRules(new TextHighlightRules().getRules(), "defaultrules-");
             this.normalizeRules()
         }
+        oop.inherits(FFLHighlightRules, TextHighlightRules);
 
-        oop.inherits(ExampleHighlightRules, TextHighlightRules);
-
-        exports.ExampleHighlightRules = ExampleHighlightRules;
+        exports.FFLHighlightRules = FFLHighlightRules;
     }
 );
 
@@ -495,14 +471,8 @@ define("token_tooltip", [], function(require, exports, module) {
         this.editor = editor;
         this.workbook = workbook
         this.register = register;
-        this.formulaInformation = formulaInfo
-        const definitions = Object.keys(formulaInfo);
-        definitions.sort(function(a, b) {
-            // ASC  -> a.length - b.length
-            // DESC -> b.length - a.length
-            return b.length - a.length;
-        });
-        this.formulaRegex = new RegExp(definitions.join('|'), "g")
+        this.formulaInfo = formulaInfo
+        this.formulaRegex = new RegExp(formulaInfo.mathDefinitions().join('|'), "g")
 
         this.update = this.update.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
@@ -592,7 +562,6 @@ define("token_tooltip", [], function(require, exports, module) {
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
                 var otherMath = null;
                 if (!match) otherMath = this.getMatchAround(this.formulaRegex, session.getLine(docPos.row), col);
-
                 if (match && this.register.getIndex('name')[match.value]) {
                     const variable_name = match.value;
                     //variable info
@@ -615,7 +584,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     const entered = workbook.get(variable_name, 'entered')
                     var value;
                     try {
-                        value = (entered ? '!' : '') + workbook.get(variable_name, 'value')
+                        value = (entered ? '!' : '') + OnNA(workbook.get(variable_name, 'value'), "NA")
                     } catch (err) {
                         value = 'ERR:' + err.toString()
                     }
@@ -624,7 +593,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     const dep_ammount_in_row = 2
                     this.setText(variable_name + ":" + display + '\n\n' + value + '=\n' + formula + '\n\n' + dependencies.map(function(el, idx) {
                         if (el.length == 0) return '';
-                        return (idx == 0 ? 'references:\n ' : 'dependencies:\n ') + el.map(function(el, idx2) {
+                        return (idx == 0 ? 'references:\n\n' : 'dependencies:\n\n') + el.map(function(el, idx2) {
                             const parts = el.split('_').slice(1)
                             const lastpart = parts.pop()
 
@@ -632,7 +601,7 @@ define("token_tooltip", [], function(require, exports, module) {
                             var dep_value;
                             try {
                                 const entered = workbook.get(dep_var_name, 'entered')
-                                dep_value = (entered ? '!' : '') + workbook.get(dep_var_name, lastpart)
+                                dep_value = (entered ? '!' : '') + OnNA(workbook.get(dep_var_name, lastpart), 'NA')
                             } catch (err) {
                                 dep_value = 'ERR:' + err.toString()
                             }
@@ -642,7 +611,7 @@ define("token_tooltip", [], function(require, exports, module) {
                             prefix.length = Math.max(deplength - String(total).length, 0);
                             return (String(total).slice(0, deplength - 1) + prefix.join(' ')) + ((idx2 + 1) % dep_ammount_in_row == 0 ? '\n' : '')
 
-                        }).join(' ')
+                        }).join('')
                     }).join('\n\n'));
                     this.width = this.getWidth();
                     this.height = this.getHeight();
@@ -650,7 +619,13 @@ define("token_tooltip", [], function(require, exports, module) {
 
                 } else if (otherMath) {
                     //FinanMath functions info
-                    const displayValue = otherMath.value + ":\n" + this.formulaInformation[otherMath.value];
+                    //if otherMath.value == If(a,b,c) lets Extract the Abstract-Tree
+                    const workbook = this.workbook;
+
+                    const lookupFunction = this.formulaInfo.lookupFunction(otherMath.value, session.getLine(docPos.row), otherMath.start - 1);
+                    const eval_parts = this.formulaInfo.extractParts(workbook, lookupFunction)
+
+                    const displayValue = eval_parts.join('\n') + "\n\nAbout:\n\n" + lookupFunction.lines.join('\n')
                     this.setText(displayValue);
                     this.width = this.getWidth();
                     this.height = this.getHeight();
@@ -671,7 +646,7 @@ define("token_tooltip", [], function(require, exports, module) {
             this.range = new Range(docPos.row, token.start, docPos.row, token.start + token.value.length);
             this.marker = session.addMarker(this.range, "ace_bracket", "text");
         };
-
+        //this.setAttribute('class', 'seecoderun_tooltip');
         this.onMouseMove = function(e) {
             this.x = e.clientX;
             this.y = e.clientY;

@@ -21,6 +21,7 @@ const tests = [
     './BasicOperationsTest',
     './ChangeManagerTest',
     './FormulaWithSelfTest',
+    './SelfReferenceTest',
     './TupleTests'//should include all Tuple logic tests.
 ];
 var testResults = [];

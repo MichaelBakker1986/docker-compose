@@ -44,11 +44,11 @@ AMMOUNT = function() {
     return total;
 }
 OnNA = function(v, nav) {
-    if (v == null || isNaN(v) || (v !== 0 && v < 0.00001 && v > -0.00001)) {
-        return nav;
-    }
-    return v;
-}
+    return (v == null || isNaN(v) || (v != 0 && v != -0 && v < this.n && v > this.ng)) ? nav : v;
+}.bind({
+    n : 1e-100 * 1000,
+    ng: -1e-100 * 1000
+})
 
 function closestLowerNum(num, arr) {
     var mid;
@@ -125,11 +125,12 @@ VALUES = function(func, fId, x, y, z, v, m) {
     }
     return result;
 }
+/*f=Self for now..*/
 Aggregate = function(f, x) {
-    return 1;
+    return f;
 }
-GetValue = function(variable, x, y, z, v, am) {
-    return 1;
+GetValue = function(variable_value, x, y, z, v, am) {
+    return variable_value;
 }
 //'^[0-9]+$'
 REGEXPMATCH = function(pattern, value) {

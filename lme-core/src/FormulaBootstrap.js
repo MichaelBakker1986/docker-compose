@@ -462,6 +462,7 @@ function buildFormula(formulaInfo, parent, node) {
     // looking at the content, this might cause some overhead because we have to parse more, but it simplifies the code
     // Simplified is only Top down
     // its only lookAhead
+
     if (node.type === 'CallExpression') {
         //register function
         functions[node.callee.name] = true;
@@ -486,29 +487,32 @@ function buildFormula(formulaInfo, parent, node) {
         /**
          * TODO: modify these parameters while parsing regex, directly inject the correct parameters
          */
-        if (identifier_replace[node.name]) {
-            node.name = identifier_replace[node.name];
+        const n_name = node.name;
+        if (identifier_replace[n_name]) {
+            node.name = identifier_replace[n_name];
         }
         //xAsReference x.notrend
-        else if (node.name === 'NoTrend') {
+        else if (n_name === 'NoTrend') {
             node.name = 'x';
         }
         //x.trend.lastbkyr
-        else if (node.name === 'LastHistYear') {
+        else if (n_name === 'LastHistYear') {
             node.name = 'x.notrend.first';
         }
-        else if (node.name === 'LastTinPeriod') {
+        else if (n_name === 'LastTinPeriod') {
             node.name = 'x.lastinperiod';
         }
         //x.trend.lastbkyr
-        else if (node.name === 'LastHistYear') {
+        else if (n_name === 'LastHistYear') {
             node.name = 'x';
         }
         //should return the x.index.
-        else if (node.name === 't') {
+        else if (n_name === 't') {
             log.warn('invalid t parsing [%s]', formulaInfo)
             //return the hash t.hash or t.index?
             node.name = 'hash';
+        } else if (n_name == 'Self') {
+            node.name = formulaInfo.name.split('_').slice(1, -1).join('_');
         }
     }
     //now we iterate all members, its not required if just use all types, we can skip things like properties etc..
@@ -529,7 +533,7 @@ function buildFormula(formulaInfo, parent, node) {
         }
     }
     if (!traverseTypes[node.type]) {
-        log.error('ERROR: [%s] not registered AST expression [%s]', node.type, node.name);
+        log.error('ERROR: [%s] not registered AST expression [%s]', node.type, name);
     }
     traverseTypes[node.type](formulaInfo, parent, node);
 }

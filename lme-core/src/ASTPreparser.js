@@ -231,12 +231,6 @@ var simplified = {
         //remove the lambda expression
         node.arguments.splice(1, 1);
     },
-    Self               : function(formulaInfo, node) {
-        node.arguments = [{
-            "type": "Identifier",
-            "name": "1"
-        }];
-    },
     Mut                : function(formulaInfo, node) {
         node.arguments = [{
             "type": "Identifier",

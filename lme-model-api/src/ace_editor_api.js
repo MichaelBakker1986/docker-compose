@@ -3,7 +3,7 @@ const AmpersandConverter = require('../../model-tests/plugins/AmpersandConverter
 const ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix').ScorecardQCaseFix
 const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
-const FormulaInformation = require('./FormulaInformation')
+const FormulaInformationManager = require('./FormulaInformationManager')
 
 function AceEditor(id, opts) {
     opts = opts || {}
@@ -14,7 +14,9 @@ function AceEditor(id, opts) {
     edit = aceEditor;//quick response front-end
     const langTools = ace.require("ace/ext/language_tools");
     this.langTools = langTools;
-    aceEditor.session.setMode("ace/mode/ffl");
+    const FFLMode = ace.require("ace/mode/ffl").Mode
+    aceEditor.session.setMode(new FFLMode(FormulaInformationManager.highlights));
+
     aceEditor.setTheme("ace/theme/tomorrow");
     aceEditor.setBehavioursEnabled(true);
     // enable autocompletion and snippets
@@ -117,7 +119,7 @@ AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEd
         const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
         fflEditor.scrollToLine(lineNumber)
     })
-    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, FormulaInformation);
+    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, FormulaInformationManager);
 }
 AceEditor.prototype.scrollToLine = function(lineNumber) {
     this.aceEditor.scrollToLine(lineNumber, true, true, function() {

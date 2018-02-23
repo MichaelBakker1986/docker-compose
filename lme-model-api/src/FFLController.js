@@ -174,8 +174,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 //only reload the variable
                 //get FFL String of current variable
                 const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
-                console.info(fflData)
-                modelEngine.importFFL(fflData)
+                //modelEngine.importFFL(fflData)
                 $scope.runJBehaveTest();
             }
 

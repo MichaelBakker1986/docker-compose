@@ -79,9 +79,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
     //INFO: inheritance could also be possible via database
     function inheritProperties(node) {
-        if (!inherited[node[nameIndex]] && node[referstoIndex]) {
+        if (register.root == node) return
+        const fallback = node[referstoIndex] || register.root
+        if (!inherited[node[nameIndex]]) {
             inherited[node[nameIndex]] = true
-            const supertype = register[node[referstoIndex]]
+            const supertype = node[referstoIndex] ? register[node[referstoIndex]] : register.root
             if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
             //first inherit from parents of parents.
             if (supertype[referstoIndex]) inheritProperties(supertype)
@@ -93,7 +95,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     }
 
     const tuples = []
-    const rootNode = register['root'] || indexer.i[0]
+    /*  var default_frequency = 'column'
+      if (register.root) {
+          default_frequency = register.root[frequencyIndex] || 'column'
+      }*/
+    const rootNode = register.root || indexer.i[0]
     workbook.model_version = rootNode ? rootNode[versionIndex] : ''
     this.walk(rootNode, 3, function(node, depth) {
         if (depth < tuples.length) {
@@ -102,10 +108,11 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
         const nodeName = node[nameIndex];
         inheritProperties(node)
-
         var displaytype = node[displayTypeIndex] || 'number'
+
         var datatype = node[dataTypeIndex] || 'number'
         var frequency = node[frequencyIndex] || 'column'
+        console.info(nodeName + ':' + frequency)
         var display_options = node[displayOptionsIndex]
         const title = node[titleIndex] || "\"" + nodeName + "\""
         const data_options = node[dataOptionsIndex]
@@ -229,9 +236,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         }
 
         const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId);
+
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];
-        if (visibleFormula && parentId) {
+        if (parentId) {
             node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleIndex][visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula
         }
 

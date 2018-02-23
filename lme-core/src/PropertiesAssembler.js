@@ -61,9 +61,8 @@ const getOrCreateProperty = function(groupName, row, col) {
 }
 
 function hasChild(children, name) {
-    for (var i = 0; i < children.nodes.length; i++) {
+    for (var i = 0; i < children.nodes.length; i++)
         if (children.nodes[i].name === name) return true;
-    }
     return false;
 }
 

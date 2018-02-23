@@ -132,7 +132,6 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "Probability of default";
-    top_blanklines: 2;
     locked: 1;
     fixed_decimals: 3;
    }
@@ -276,7 +275,6 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "Probability of default";
-    top_blanklines: 2;
     locked: 1;
     fixed_decimals: 3;
    }
