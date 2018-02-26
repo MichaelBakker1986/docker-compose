@@ -92,8 +92,8 @@ LMEFacade.prototype.getValue = function(context, rowId, columncontext, value, tu
 LMEFacade.prototype.getObjectValues = function(context, rowId, tupleindex) {
 
     var fesContext = new Context();
-    fesContext.values = context.values;
     var JSWorkBook = new WorkBook(fesContext);
+    JSWorkBook.importValues(context.values)
     JSWorkBook.columns = context.columns || 2;
     JSWorkBook.properties = context.properties || JSWorkBook.properties;
     const values = [];

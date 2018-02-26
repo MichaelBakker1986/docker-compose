@@ -219,6 +219,11 @@ JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) 
     const yas = this.resolveY(y);
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
+JSWorkBook.prototype.importValues = function(values) {
+    for (var key in values) {
+        this.context._values[key] = values[key]
+    }
+}
 JSWorkBook.prototype.updateValues = function() {
     ValueFacade.updateValueMap(this.context.getValues());
 };
