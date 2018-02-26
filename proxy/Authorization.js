@@ -32,6 +32,7 @@ const MichaelFaceBookID = '1683958891676092';
 const JorisNijboerFaceBookID = '10213615561315841';
 const MonliFacebookID = '369400500137629';
 const LGDFacebookID = '10213076901574578';
+const CHEEFacebookID = '121550868672018';
 const MarcoFacebookID = '10159782534605228';
 const RuudFacebookID = '1749387815119222';
 const JasperRealEstate = '1565119990220779';
@@ -170,6 +171,8 @@ class Authorization {
         this.addModelPrivileges(RamonFBId, "PRESCAN", true);
         this.addModelPrivileges(MichaelFaceBookID, "PRESCAN", true);
         this.addModelPrivileges(JorisNijboerFaceBookID, FYNDOOCREDITRATING, true);
+        this.addModelPrivileges(CHEEFacebookID, FYNDOOCREDITRATING, true);
+        this.addModelPrivileges(CHEEFacebookID, "PRESCAN", true);
         this.addModelPrivileges(RamonFBId, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(MichaelFaceBookID, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);
