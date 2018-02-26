@@ -855,22 +855,12 @@ model FyndooCreditRating uses BaseModel
     aggregation: average;
     displaytype: percentage;
     title: "$>Apriori-Insolvenzquote<$";
-    formula: If(ModelConfiguration=0,0.018,
-                Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012])
-               );
-    fixed_decimals: 1;
+    formula: If(ModelConfiguration=0,0.018, Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]) );
    }
    variable krZValue
    {
     title: "$>Z-Wert<$";
-    formula: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA,
-                 4.03964180885174
-                +9.29864789092051*krAnteilOrdentlichenErgebnisses
-                +2.38051797748078*krAnteilEigenmittel
-                -23.0757849643717*krFremdKapitalzinslast
-                -1.85536265755931*krBankUndLieferantenanteil
-                -0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten
-                );
+    formula: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA, 4.03964180885174 +9.29864789092051*krAnteilOrdentlichenErgebnisses +2.38051797748078*krAnteilEigenmittel -23.0757849643717*krFremdKapitalzinslast -1.85536265755931*krBankUndLieferantenanteil -0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten );
     locked: 1;
     fixed_decimals: 5;
    }
@@ -886,11 +876,7 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "Probability of Default";
-    formula: If(krZValue=NA,NA,
-                OnER(
-                    1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),
-                    NA)
-                );
+    formula: If(krZValue=NA,NA, OnER( 1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote), NA) );
     locked: 1;
     fixed_decimals: 3;
    }
@@ -898,9 +884,7 @@ model FyndooCreditRating uses BaseModel
    {
     datatype: string;
     title: "URA Rating class";
-    formula: String(If(krPD=NA," ",
-                    Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"]))
-                    );
+    formula: String(If(krPD=NA," ", Case(krPD,[<=0.00001:"AAA"|<=0.00002:"AA+"|<=0.00004:"AA"|<=0.00008:"AA-"|<=0.00010:"A+"|<=0.00020:"A"|<=0.00040:"A-"|<=0.00090:"BBB+"|<=0.00170:"BBB"|<=0.00420:"BBB-"|<=0.00870:"BB+"|<=0.01560:"BB"|<=0.02810:"BB-"|<=0.04680:"B+"|<=0.07160:"B"|<=0.11620:"B-"|<=0.15400:"CCC+"|<=0.17380:"CCC"|<=0.21500:"CCC-"|<=0.26000:"CC"|>0.26000:"D"])) );
     locked: 1;
    }
    variable krUraAmpel

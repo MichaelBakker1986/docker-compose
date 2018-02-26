@@ -1,6 +1,8 @@
 /**
  * All indexed will be linked to a array of values, like a DB structure
  * Lightweigt data-model
+ * Creating a simple-typed DB is easy. When this functionality in growing exponentially introduce in memory-db..
+ * For now this is a easy data-structure for many problems. very close to JS/NodeJS
  * @constructor
  */
 function Register(schema_defualts) {
@@ -11,9 +13,15 @@ function Register(schema_defualts) {
     this.changes = []
 }
 
+Register.prototype.setFormatters = function(formatters) {
+    for (var i = 0; i < formatters.length; i++) {
+        this.formatters[i] = formatters[i];
+    }
+}
 Register.prototype.clean = function() {
     this.header = null;
     this.constants = []
+    this.formatters = []
     for (var j = 0; j < this.createdIndexes.length; j++) delete this[this.createdIndexes[j]];
     this.createdIndexes = []
     this.schema.length = 0
@@ -68,15 +76,29 @@ Register.prototype.distinctArr = function(arr, schema, start) {
     return result;
 }
 //can only be unique indexes, string based.
+Register.prototype.addIndex = function(name) {
+    this.createIndex(name)
+    return this[name]
+}
+//can only be unique indexes, string based.
 Register.prototype.createIndex = function(name) {
     if (!this[name]) {
         this.createdIndexes.push(name)
-        const index = {}
-        const a = this.i
-        for (var i = 0; i < a.length; i++) index[a[i][this.schemaIndexes[name]]] = a[i]
+        const index = {}, i = this.i, ni = this.schemaIndexes[name];
+        for (var c = 0; c < i.length; c++) index[i[c][ni]] = i[c]
         this[name] = index
     }
 }
+//this will also update indexes...
+Register.prototype.addRowSave = function(row) {
+    this.i.push(row)
+    for (var i = 0; i < this.createdIndexes.length; i++) {
+        const index = this.createdIndexes[i];
+        this[index][row[this.schemaIndexes[index]]] = row
+    }
+    return this.i.length - 1
+}
+//insert (quick)
 Register.prototype.addRow = function(row) {
     this.i.push(row)
     return this.i.length - 1
@@ -128,20 +150,31 @@ Register.prototype.walk = function(node, depth, visitor) {
         this.walk(childs[i], depth + 1, visitor)
     }
 }
-Register.prototype.print = function(idxMap, start) {
-    return this.printArr(this.i, idxMap, start)
+Register.prototype.print = function(idxMap, start, filter) {
+    return this.printArr(this.i, idxMap, this.mark || start, filter)
 }
-Register.prototype.printArr = function(arr, idxMap, start) {
+Register.prototype.printArr = function(arr, idxMap, start, filter) {
     const tout = []
+    const self = this;
+    const filtermap = []
+    for (var i = 0; i < filter.length; i++) filtermap[this.schemaIndexes[filter[i]]] = true
+    const f = function(el, idx) {
+        return filtermap[idx]
+    }
     for (var i = (start || 0); i < arr.length; i++) {
-        var el = arr[i];
-        tout.push(el.map(function(innerEl, idx) {
+        const el = arr[i];
+        tout.push((filter ? el.filter(f) : el).map(function(innerEl, idx) {
+            const v = self.formatters[idx] ? self.formatters[idx](innerEl) : innerEl
             const prefix = [];
-            prefix.length = Math.max(idxMap[idx] - String(innerEl).length, 0);
-            return String(innerEl).slice(0, idxMap[idx] - 1) + prefix.join(' ')
+            prefix.length = Math.max(idxMap[idx] - String(v).length, 0);
+            return String(v).slice(0, idxMap[idx] - 1) + prefix.join(' ')
         }).join("|"))
     }
     return tout
+}
+/** * mark current moment as last checkpoint */
+Register.prototype.markNow = function() {
+    this.mark = this.i.length;
 }
 Register.prototype.toString = function() {
     return "variables:[" + this.i.length + "]\n" + this.i.join('\n')

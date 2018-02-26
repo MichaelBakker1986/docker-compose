@@ -1,29 +1,26 @@
 //just an dummy-template to quickly create a model
-const newModelTemplate = "model $1 uses BaseModel\n" +
-    "{\n" +
-    " version: \"1.0\";\n" +
-    " root\n" +
-    " {\n" +
-    "  variable Q_ROOT\n" +
-    "  {\n" +
-    "   title: \"Stap 1\";\n" +
-    "   displaytype: scorecard;\n" +
-    "   variable Q_MAP01\n" +
-    "   {\n" +
-    "    title: \"Stap 1\";\n" +
-    "    hint: \"Informatie over de stap\";\n" +
-    "    variable Q_MAP01_VRAAG0\n" +
-    "    {\n" +
-    "     title: \"TestVraag\";\n" +
-    "     frequency: document;\n" +
-    "     datatype: number;\n" +
-    "     formula: 100+100;\n" +
-    "    }\n" +
-    "   }\n" +
-    "  }\n" +
-    " }\n" +
-    "}"
-
+const newModelTemplate =
+          "model $1 uses BaseModel\n" +
+          "{\n" +
+          " version: \"1.0\";\n" +
+          " variable Q_ROOT\n" +
+          " {\n" +
+          "  title: \"Stap 1\";\n" +
+          "  displaytype: scorecard;\n" +
+          "  variable Q_MAP01\n" +
+          "  {\n" +
+          "   title: \"Stap 1\";\n" +
+          "   hint: \"Informatie over de stap\";\n" +
+          "   variable Q_MAP01_VRAAG0\n" +
+          "   {\n" +
+          "    title: \"TestVraag\";\n" +
+          "    frequency: document;\n" +
+          "    datatype: number;\n" +
+          "    formula: 100+100;\n" +
+          "   }\n" +
+          "  }\n" +
+          " }\n" +
+          "}"
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
@@ -173,7 +170,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
             if (changingValue) {
                 //only reload the variable
                 //get FFL String of current variable
-                const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
+                //   const fflData = new RegisterToFFL(register).toGeneratedFFL(changeManager.currentVariableName, user_session.fflModelPath, true).join('\n');
                 //modelEngine.importFFL(fflData)
                 $scope.runJBehaveTest();
             }
@@ -186,7 +183,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
                 for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
                     var obj = changeManager.warnings[i].pos[j];
                     annotations.push({
-                        row   : fflModel.substring(0, obj.char).split('\n').length,
+                        row   : user_session.fflModel.substring(0, obj.char).split('\n').length,
                         column: 0,
                         text  : warning.message, // Or the Json reply from the parser
                         type  : 'error' // also warning and information

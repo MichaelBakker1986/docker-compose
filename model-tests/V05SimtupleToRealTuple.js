@@ -36,4 +36,3 @@ exports.SimTupleFix = function(data) {
     outputFFL = outputFFL.replace(/_ti[0-9]{3}/gmi, '')//just remove Tuple completely
     return outputFFL;
 }
-//console.info(exports.SimTupleFix(require('fs').readFileSync('../git-connect/resources/FAM.ffl', 'utf8')))

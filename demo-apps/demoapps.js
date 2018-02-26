@@ -8,9 +8,16 @@ const log = require('log6')
 const compression = require('compression')
 const expressStaticGzip = require("express-static-gzip");
 const app = require('express')();
+const browserify = require('browserify-middleware');
+
 app.use(require("express-no-favicons")());
 app.use(require('cors')());
 app.use(compression())
+
+app.get('/id/:id/OptionViewer.js', browserify(__dirname + '/angular-demo/OptionViewer.js', {
+    gzip : true,
+    debug: false
+}));
 
 app.use('/id/:id/', expressStaticGzip(__dirname + "/angular-demo/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/data-graph/"));
@@ -22,6 +29,7 @@ app.use('/id/:id/', expressStaticGzip(__dirname + "/"));
 //showcase proxies
 app.use('/id/:id/', expressStaticGzip(__dirname + "/showcase/"));
 app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/ace-builds/src-min/"));
+app.use('/id/:id/', expressStaticGzip(__dirname + "/node_modules/dc/"));
 
 //proxies
 app.use('/id/:id/resources/', expressStaticGzip(__dirname + "/../git-connect/resources/"));
@@ -43,6 +51,7 @@ app.listen(port, () => {
     routes.push('*/WatKostEenKind.html')
     routes.push('*/showcase.html')
     routes.push('*/basic_example.html')
+    routes.push('*/OptionViewer.html')
     routes.push('*/uishowcase.html')
     routes.push('*/extended_controller.html')
     routes.push('*/Promotion.html')
@@ -55,6 +64,8 @@ app.listen(port, () => {
     routes.push('*/grid_example.css')
     routes.push('*/resources/lme_docs.pdf')
     routes.push('*/monli.css')
+    routes.push('*/dc.css')
+    routes.push('*/data.json')
     routes.push('*/style/fresh.css')
     routes.push('*/style/style.css')
     routes.push('*/favicon.ico')
@@ -63,10 +74,12 @@ app.listen(port, () => {
     routes.push('*/snippets/ffl.js')
     routes.push('*/adminlte.min.js')
     routes.push('*/viz.js')
+    routes.push('*/OptionViewer.js')
     routes.push('*/demo.js')
     routes.push('*/scorecard.js')
     routes.push('*.woff2')
     routes.push('*.woff')
+    routes.push('*.csv')
     routes.push('*.ttf')
     routes.push('*/resources/*.js')
     routes.push('*/ext-searchbox.js')
@@ -94,6 +107,7 @@ app.listen(port, () => {
     console.info(
         '<span>DEMO apps: </span>\n' +
         '<a href="http://' + domain + '/scorecard.html">Bootstrap Grid example</a><span> | </span>\n' +
+        '<a href="http://' + domain + '/OptionViewer.html">Option viewer</a><span> | </span>\n' +
         '<a href="http://' + domain + '/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
         '<a href="http://' + domain + '/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
         '<a href="http://' + domain + '/uishowcase.html">UI Showcase example</a><span> | </span>\n' +

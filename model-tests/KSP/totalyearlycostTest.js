@@ -14,15 +14,15 @@ excelPlugin.loadExcelFile('KSP').then(function(matrix) {
     assert.equal(wb.get('IncomeParent01'), 25000)
 //same response from restApi
     const fesGetValue = LMEFacade.getValue({
-        columns: 3,
-        properties: {value: true, title: true},
-        values: wb.context.values
+        columns   : 3,
+        properties: { value: true, title: true },
+        values    : wb.context.getValues()
     }, 'KSP_IncomeParent01');
     assert.equal(fesGetValue[0].value, 25000)
     const valueResponse = LMEFacade.getValue({
-        columns: 3,
-        properties: {value: true, title: true},
-        values: wb.context.values
+        columns   : 3,
+        properties: { value: true, title: true },
+        values    : wb.context._values
     }, 'KSP_Q_FINAL_REPORT_VISIBLE', 0, "Ja");
     assert.equal(valueResponse.length, 0, 'Choose to return empty array when setting value')
 }).catch(function(err) {

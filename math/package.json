@@ -6,8 +6,9 @@
   "main": "ff-math.js",
   "dependencies": {
     "algebra.js": "^0.2.6",
-    "log6": "^1.0.26",
-    "js-solver": "0.0.2"
+    "exponential-moving-average": "^1.0.0",
+    "js-solver": "0.0.2",
+    "log6": "^1.0.26"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

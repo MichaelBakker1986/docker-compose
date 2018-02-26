@@ -69,3 +69,16 @@ Introducing valuation formulaset could be done in the USER- formulaset, when the
 // columns can also be mixed in tsy. so 5x1d and then (7*12)bkyr.tsy. Allow 100year forecast., would require some nice
 // tricks here.. but possible from here only prevbkyear, might consider removing *[agg*], only keep the *[top*]
 // currently we have max7 year 10timelines
+
+import java.lang.Math;
+import static java.lang.Math.*;
+public class MyClass {
+    public static void main(String args[]) {
+        double sample=0.08223466368715092;
+        double other = exp(2.39328);
+        double quote=0.012;
+        double pd=(1.0/(1.0+(other *sample)*((1.0-quote)/quote)));
+
+        System.out.println("Sum of x+y = " + pd);
+    }
+}

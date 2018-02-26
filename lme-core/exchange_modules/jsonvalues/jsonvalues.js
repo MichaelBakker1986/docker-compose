@@ -7,12 +7,12 @@ const PropertiesAssembler = require('../../src/PropertiesAssembler');
 const Solution = require('../../src/Solution')
 
 const jsonValues = {
-    name: 'jsonvalues',
+    name     : 'jsonvalues',
     parseData: function(data, workbook) {
-        updateValues(data, workbook.context.values);
+        updateValues(data, workbook.context);
         return SolutionFacade.createSolution(workbook.getSolutionName());
     },
-    deParse: function(rowId, workbook) {
+    deParse  : function(rowId, workbook) {
         const allValues = workbook.getAllChangedValues();
         //clean up the audit while deparsing.
         allValues.forEach(function(el) {
@@ -38,9 +38,10 @@ function correctFileName(name) {
  * values are directly injected into the context, not through the API
  * They will not be saved in the audit.
  */
-function updateValues(data, docValues) {
+function updateValues(data, context) {
+    const docValues = context.getValues()
     for (var key in docValues) {
-        docValues[key] = {};
+        if (!isNaN(key)) docValues[key] = {};
     }
     for (var key in data.values) {
         const value = data.values[key];

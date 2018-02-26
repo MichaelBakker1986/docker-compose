@@ -1,8 +1,11 @@
-const log = require('log6')
-const bookYearTime = require('../src/XAxis')
-const assert = require('assert')
-const defaultImport = require('../resources/CustomImport.json')
-const TimeAxis = require('../src/TimeAxis')
-const monthlyTime = new TimeAxis(defaultImport)
-assert.equal(bookYearTime.bkyr.cols.length, 19, 'We use 40columns for now but found' + bookYearTime.bkyr.cols.length)
-assert.equal(monthlyTime.detl.cols.length, 252, 'We use 252 detail columns for months ')
+const log           = require('log6'),
+      BookYearTime  = require('../src/XAxis'),
+      assert        = require('assert'),
+      defaultImport = require('../resources/CustomImport.json'),
+      MonthTime     = require('../src/TimeAxis');
+
+const bookYearXaxis = new BookYearTime();
+const monthlyTime = new MonthTime(defaultImport)
+
+assert.equal(bookYearXaxis.viewmodes.bkyr.cols.length, 19, 'We use 40columns for now but found' + bookYearXaxis.viewmodes.bkyr.cols.length)
+assert.equal(monthlyTime.viewmodes.detl.cols.length, 252, 'We use 252 detail columns for months ')

@@ -46,7 +46,7 @@
     ],
     "size": 20
   },
-  "navalue": 1e-10,
+  "navalue": 1e-100,
   "nestedTupleMultiplier": "undefined",
   "time": {
     "columnMultiplier": 1,

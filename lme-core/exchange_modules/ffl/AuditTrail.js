@@ -1,5 +1,9 @@
 /**
- * Functional audit-trail wrapper around the Generic Register
+ * Audit-trail
+ *  - key - value store
+ *  - easy lookup
+ *
+ * extends Register.js and add functionality
  * @type {Register}
  */
 const Register = require('./Register').Register
@@ -7,10 +11,6 @@ const AuditTrail = function() {
     const register = new Register(['category', 'level', 'name', 'property', 'yax', 'xas', 'value', 'message', 'formula', 'refId', 'parsed']);
     register.auditcols = [10, 10, 30, 10, 10, 10, 20, 20, 100, 10, 860];
     return register
-}
-/** * mark current moment as last checkpoint */
-Register.prototype.markNow = function() {
-    this.mark = this.i.length;
 }
 Register.prototype.doAudit = function() {
     this.clean();

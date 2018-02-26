@@ -87,7 +87,7 @@ modelLoadListener.addListener(function(fflModelData, path) {
             }
         }
     }).catch(function(err) {
-        log.error('Error while loading model: [' + pathModelName + ']', err)
+        log.error('Error while loading model: [' + pathModelName + ']' + path, err)
     })
 })
 

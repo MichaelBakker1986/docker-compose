@@ -14,6 +14,7 @@ const Register    = require('../../lme-core/exchange_modules/ffl/Register'),
 lmeModel.addFunctions(excelplugin)
 Promise.all([assembler.started, excelplugin.loadExcelFile]).then(() => {
     assembler.getModel("V05").then((modelData) => {
+        process.exit(0);
     }).catch((err) => {
         log.error(err)
         process.exit(1);

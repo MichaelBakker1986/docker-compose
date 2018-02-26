@@ -1,4 +1,4 @@
-global.IDE_DEBUGMODUS = true
+//global.IDE_DEBUGMODUS = true
 const [assert, importModel, LME, log, readFileSync, writeFileSync] = require('../ModelFacade')
 
 const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
@@ -22,5 +22,7 @@ LME.importFFL({
     register: register,
     raw     : V05ffl
 });
-new DebugManager(register, LME.lme.context.audittrail).monteCarlo('V05')
+console.info(LME.lme.get('LossesCarriedForward'))
+
+//new DebugManager(register, LME.lme.context.audittrail).monteCarlo('V05')
 //LME.lme.context.audittrail.printErrors()

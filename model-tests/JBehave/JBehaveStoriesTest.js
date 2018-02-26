@@ -3,7 +3,7 @@
  * Match them with a *.ffl model-file
  * Call the JBehaveStoryParser to execute vs Financial Model File
  */
-const Walker = require('../../git-connect/FileWalker').FileWalker
+const Walker = require('../../git-connect/FileWalker')
 const modelTests = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
 const coreTests = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
 const stashedResources = new Walker(__dirname + '/../../git-connect/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');

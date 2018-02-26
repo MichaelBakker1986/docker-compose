@@ -19,6 +19,7 @@ const tests = [
     './SwaggerDefinitionParserTest',
     './TimeTest',
     './BasicOperationsTest',
+    './BookYearTest',
     './ChangeManagerTest',
     './FormulaWithSelfTest',
     './SelfReferenceTest',

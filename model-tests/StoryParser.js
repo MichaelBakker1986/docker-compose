@@ -31,7 +31,7 @@ const functionMapper = {
                 if (workbook.getNode(variableName)) {
                     const yas = workbook.resolveYas(variableName, tupleIndexName)
                     const lockedValue = workbook.get(variableName, 'locked', columnId, yas);
-                    workbook.set(variableName, value, 'value', columnId, yas)
+                    workbook.set(variableName, value == 'NA' ? NA : value, 'value', columnId, yas)
                     const validValue = workbook.isValidInput(variableName, columnId, yas, value);
                     if (lockedValue) {
                         return {
@@ -65,6 +65,7 @@ const functionMapper = {
         call : function(workbook, linenumber, line, args) {
             return [function() {
                 workbook.clearValues()
+                workbook.context._values.absolute_start_year = 2016
                 if (log.TRACE) log.trace('Document values cleared')
                 return {
                     status : 'info',
@@ -189,12 +190,12 @@ StoryParser.prototype.start = function() {
 }
 StoryParser.prototype.call = function() {
     for (var i = 0; i < this.calls.length; i++) {
-        var call = this.calls[i];
-        var functions = call.functions;
+        const call = this.calls[i];
+        const functions = call.functions;
         for (var callIndex = 0; callIndex < functions.length; callIndex++) {
-            var functionCall = functions[callIndex];
+            const functionCall = functions[callIndex];
             //TODO: can have multiple calls on one row..
-            var on = {
+            const on = {
                 type: 'call',
                 raw : call.line,
                 line: call.line.lineNumber

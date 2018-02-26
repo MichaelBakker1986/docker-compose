@@ -39,7 +39,7 @@ fm.prototype.apiSet = function(formula, x, y, z, value, v) {
  */
 fm.prototype.initializeFormula = function(newFormula, map, audittrail) {
     const id = newFormula.id || newFormula.index;
-    const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";// : "return " + newFormula.parsed
+    const stringFunction = "return " + newFormula.parsed + " /*  \n" + newFormula.name + ":" + newFormula.original + "  */ ";
 
     //we going to use .bind for function-scope variable binding. First of all we going to bind all CHOICES!
     //In the choice we can use this.options[]....

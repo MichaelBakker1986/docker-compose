@@ -43,17 +43,18 @@ JBehaveStoryParser.prototype.start = function() {
 
         storyParser.filename = story;
         var succes = true;
+
         storyParser.message = function(event) {
             if (event.result.status == 'fail') {
                 //Failed results are just not right, but don't require stacktrace
                 log.error('Story ' + story + ':' + event.line + ' failed to complete.\n' + event.raw.line + ' failing, because [' + event.result.message + ']')
-
-                console.info(context.audittrail.printAuditTrailDelta())
-
+                log.error(context.audittrail.printAuditTrailDelta())
                 succes = false;
             }
             else if (event.result.status == 'error') {
                 throw Error('Story failed' + JSON.stringify(event))
+            } else {
+                context.audittrail.markNow()
             }
         }
         storyParser.start()

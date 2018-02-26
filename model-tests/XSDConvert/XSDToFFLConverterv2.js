@@ -248,9 +248,9 @@ XSDConverter.prototype.start = function() {
 XSDConverter.prototype.print = function() {
     const names = XSDRegister.getIndex('name');
     for (var v in names) {
-        log.info('---' + v + '---')
-        log.info(this.variables[v])
-        log.info(new RegisterToFFL(XSDRegister).toGeneratedFFL(v, 'LGD').join('\n'))
+        log.debug('---' + v + '---')
+        log.debug(this.variables[v])
+        log.debug(new RegisterToFFL(XSDRegister).toGeneratedFFL(v, 'LGD').join('\n'))
     }
 }
 exports.XSDConverter = XSDConverter

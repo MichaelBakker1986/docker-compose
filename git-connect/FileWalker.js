@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path')
-exports.FileWalker = class {
+module.exports = class {
 
     constructor(basePath, patterns, extension) {
         this.paths = {}
@@ -24,19 +24,21 @@ exports.FileWalker = class {
     }
 
     walk(visit, dontOpenFile) {
+        const promises = []
         this.multiple(this.patterns)
         for (var pathName in this.paths) {
             if (dontOpenFile) {
-                visit(path.resolve(pathName), null)
+                promises.push(visit(path.resolve(pathName), null))
             } else {
                 this.readFile(path.resolve(pathName), visit)
             }
         }
+        return Promise.all(promises)
     }
 
     //needs separate method
     readFile(path, visit) {
-        fs.readFile(path, {encoding: 'utf8'}, function(err, data) {
+        fs.readFile(path, { encoding: 'utf8' }, function(err, data) {
             visit(path, data)
         })
     }

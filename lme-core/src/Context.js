@@ -19,7 +19,7 @@ const propertyDefaults = {
 function Context(opts) {
     //reference to the ApplicationContext context
     this.applicationContext = ApplicationContext;
-    this.values = {};
+    this._values = {}
     this.ma = ApplicationContext.ma
     this.audittrail = ApplicationContext.audittrail
     this.audit = [];
@@ -28,16 +28,15 @@ function Context(opts) {
     this.columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid'];
     this.saveToken = undefined;//commit hash
     if (opts) for (var key in opts) this[key] = opts[key]
+    this._values.absolute_start_year = (this.absolute_start_year || (new Date()).getFullYear())
 }
 
 Context.prototype.propertyDefaults = propertyDefaults;
 Context.prototype.getValues = function() {
-    return this.values;
+    return this._values;
 }
 Context.prototype.clear = function() {
-    for (var key in this.values) {
-        this.values[key] = {}
-    }
+    for (var key in this.values) if (!isNaN(key)) this.values[key] = {}
     this.audit.length = 0;
 }
 Context.prototype.hasChanges = function() {

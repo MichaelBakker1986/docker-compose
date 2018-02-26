@@ -81,7 +81,7 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
                 validateResponse.succes.push(name)
             }
         } catch (err) {
-            log.error(err)
+            log.error('Error while trying:' + name + "." + property + ' in model ' + modelName, err)
         }
     }
     const errors = this.audittrail.distinctArr(this.audittrail.find('level', 'ERROR', start), ['name', 'property'])
@@ -136,8 +136,5 @@ DebugManager.prototype.nextStep = function() {
     if (this.steps.length <= this.stepIndex) {
         this.active = false;
     }
-}
-DebugManager.prototype.getCurrentLine = function() {
-    return this.vars[this.steps[this.stepIndex].row]
 }
 exports.DebugManager = DebugManager

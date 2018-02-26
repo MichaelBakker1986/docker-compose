@@ -10,6 +10,7 @@ const FormulaService = require('./FormulaService')
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
  * Just iterate the shabang and test the property
  */
+
 Array.prototype.lookup = function(property, name) {
     for (var i = 0; i < this.length; i++) {
         if (this[i][property] === name) {
@@ -22,17 +23,17 @@ if (!String.prototype.startsWith) {
     String.prototype.startsWith = function(searchString, position) {
         position = position || 0;
         return this.substr(position, searchString.length) === searchString;
-    };
+    }
 }
 if (!String.prototype.endsWith) {
     String.prototype.endsWith = function(suffix) {
         return this.indexOf(suffix, this.length - suffix.length) !== -1;
-    };
+    }
 }
 if (!String.prototype.trim) {
     String.prototype.trim = function() {
         return this.replace(/^\s+|\s+$/g, '');
-    };
+    }
 }
 
 function findFormula(uiModel) {
@@ -49,12 +50,10 @@ ValueFacade.validChoice = function(choices, row, userValue) {
     return (choices.lookup('value', String(userValue)) || choices.lookup('name', String(userValue)));
 }
 ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, yas) {
-    var rowId = row + '_' + (col || 'value');
+    const rowId = row + '_' + (col || 'value');
     var localFormula = findFormula(PropertiesAssembler.fetch(rowId));
-    if (localFormula === undefined) {
-        //because only Formula's are known here, we cannot give away variable name here.
-        throw Error('Cannot find variable')
-    }
+    //because only Formula's are known here, we cannot give away variable name here.
+    if (localFormula === undefined) throw Error('Cannot find variable')
     if (log.TRACE) log.trace('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
     context.calc_count++;
     context.audit.push({
@@ -75,9 +74,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
             }
         }
     }
-    if (variable.frequency == 'document') {
-        xas = xas.doc
-    }
+    if (variable.frequency == 'document') xas = xas.doc
     //NULL values are allowed, and should not be parsed into a real data type.
     if (userValue != null) {
         if (variable.datatype == 'number') {
@@ -88,7 +85,7 @@ ValueFacade.putSolutionPropertyValue = function(context, row, value, col, xas, y
             userValue = Boolean(userValue)
         }
     }
-    FunctionMap.apiSet(localFormula, xas, yas, 0, userValue, context.values);
+    FunctionMap.apiSet(localFormula, xas, yas, 0, userValue, context.getValues());
 };
 /**
  * Generic default values, formatter transformers
@@ -107,7 +104,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         }
         const id = localFormula.id || localFormula.index;
         const hash = xas.hash + yas.hash + 0;
-        return context.values[id][hash] != null;
+        return context.getValues()[id][hash] != null;
     } else if (colType === 'original') {
         const variable = fetchSolutionNode(row, 'value');
         const localFormula = findFormula(variable);
@@ -123,7 +120,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
         if (variable.frequency == 'document') {
             xas = xas.doc
         }
-        returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.values, context.ma, context.audittrail);
+        returnValue = FunctionMap.apiGet(localFormula, xas, yas, 0, context.getValues(), context.ma, context.audittrail);
     }
     if (variable) {
         if (colType === 'value') {
@@ -138,13 +135,13 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                 if (variable.decimals !== undefined) {
                     if (variable.datatype == 'matrix') {
                         for (var i = 0; i < returnValue.length; i++) {
-                            var innerx = returnValue[i];
+                            const innerx = returnValue[i];
                             if (!isNaN(innerx)) {
                                 var level = Math.pow(10, variable.decimals);
                                 returnValue[i] = (Math.round(innerx * level) / level)
                             }
                             for (var y = 0; y < returnValue[i].length; y++) {
-                                var innery = returnValue[i][y];
+                                const innery = returnValue[i][y];
                                 if (!isNaN(innery)) {
                                     var level = Math.pow(10, variable.decimals);
                                     returnValue[i][y] = (Math.round(innery * level) / level)
@@ -153,7 +150,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
                         }
                     }
                     else if (!isNaN(returnValue)) {
-                        var level = Math.pow(10, variable.decimals);
+                        const level = Math.pow(10, variable.decimals);
                         returnValue = (Math.round(returnValue * level) / level)
                     }
                 }
@@ -187,7 +184,7 @@ ValueFacade.getValuesFromFormulaIds = function(keys, docValues) {
     //Also Functions themSelves are bound to this object.
     //So we have to strip them out here.
     //should be part of the apiGet, to query all *_value functions. or *_validation etc.
-    var values = [];
+    const values = [];
     for (var i = 0; i < keys.length; i++) {
         var formulaId = keys[i];
         var cachevalues = docValues[formulaId];
@@ -211,11 +208,9 @@ ValueFacade.updateValueMap = function(values) {
         //for unlocked add values[key] here will user entered values stay
         if (formula.type === 'noCacheUnlocked') {
             var id = formula.id || formula.index;
-            if (!values[id]) {
-                values[id] = {};
-            }
+            if (!values[id]) values[id] = {};
         }
-    });
+    })
 };
 ValueFacade.visit = PropertiesAssembler.visitProperty;
 ValueFacade.visitChildren = PropertiesAssembler.visitChildren;

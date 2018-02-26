@@ -3849,12 +3849,11 @@ model V05 uses BaseModel
        displaytype: currency;
        title: "Accreditieven";
       }
-      variable =CalculatedLimitOnCurrentAccount
+      variable CalculatedLimitOnCurrentAccount
       {
        aggregation: balance;
-       formula_notrend: CurrentLimitOnCurrentAccount-BankGuarantees-LetterOfCredit;
-       formula_trend: CurrentLimitOnCurrentAccount-BankGuarantees-LetterOfCredit;
        displaytype: currency;
+       formula: CurrentLimitOnCurrentAccount-BankGuarantees-LetterOfCredit;
        title: "Limiet rekening cour. (bank)";
        display_options: displayAsSummation;
       }
@@ -27498,7 +27497,7 @@ model V05 uses BaseModel
       title: String("Vrijval"&" "&FirstLC ( GetTitle(PensionProvisions)));
       hint: "Opbrengsten, maar geen kasstroom. Betreft vrijval van voorziening die niet meer nodig is, en zal leiden tot een buitengewone opbrengst in de resultatenrekening.";
      }
-     variable =MutationPensionProvisions
+     variable MutationPensionProvisions
      {
       aggregation: flow;
       formula_notrend: Mut(PensionProvisions);

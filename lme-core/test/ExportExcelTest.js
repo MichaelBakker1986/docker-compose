@@ -39,7 +39,6 @@ const s = closestLowerNum.toString();
 var body2 = s.substring(s.indexOf("{") + 1, s.lastIndexOf("}"));
 //const a = Function('table,row,col', body)
 const ab = Function('num,arr', body2)
-//console.info(a(1, 2, 3))
 log.debug(ab(1, [1, 2, 3]))
 const excel = require('../../excel-connect/excel-connect').loadExcelFile('V05').then(function(matrix) {
 

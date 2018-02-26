@@ -3849,7 +3849,7 @@ model V05 uses BaseModel
        displaytype: currency;
        title: "Accreditieven";
       }
-      variable =CalculatedLimitOnCurrentAccount
+      variable CalculatedLimitOnCurrentAccount
       {
        aggregation: balance;
        formula_notrend: CurrentLimitOnCurrentAccount-BankGuarantees-LetterOfCredit;
@@ -4916,8 +4916,7 @@ model V05 uses BaseModel
      {
       aggregation: flow;
       unspecified: preferred;
-      formula_notrend: Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales;
-      formula_trend: Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales+Product_tpSales;
+      formula: Product_tpSales;
       displaytype: currency;
       title: "Omzet excl. BTW";
       display_options: displayAsSummation;
@@ -27498,7 +27497,7 @@ model V05 uses BaseModel
       title: String("Vrijval"&" "&FirstLC ( GetTitle(PensionProvisions)));
       hint: "Opbrengsten, maar geen kasstroom. Betreft vrijval van voorziening die niet meer nodig is, en zal leiden tot een buitengewone opbrengst in de resultatenrekening.";
      }
-     variable =MutationPensionProvisions
+     variable MutationPensionProvisions
      {
       aggregation: flow;
       formula_notrend: Mut(PensionProvisions);

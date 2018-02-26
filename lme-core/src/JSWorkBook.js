@@ -33,8 +33,17 @@ function JSWorkBook(context, XAxis, interval, opts) {
     //tuple axis
     this.yaxis = YAxis;
     this.y = YAxis[0].parent
+
     //time axis, we looking at bookyears at the moment
-    this.xaxis = (XAxis || require('./XAxis'))[interval || 'bkyr'].columns[0]
+    if (XAxis) {
+        this.viewmodes = XAxis;
+        this.xaxis = this.viewmodes.viewmodes[interval || 'bkyr'].columns[0]
+    } else {
+        const by = require('./XAxis');
+        this.viewmodes = new by();
+        this.xaxis = this.viewmodes.viewmodes['bkyr'].columns[0]
+    }
+
     if (opts) for (var key in opts) this[key] = opts[key]
 }
 
@@ -147,11 +156,11 @@ JSWorkBook.prototype.exportWebModel = function(rowId) {
 JSWorkBook.prototype.export = function(parserType, rowId) {
     return SolutionFacade.exportSolution(parserType, rowId, this);
 }
-JSWorkBook.prototype.getNode = function(name) {
-    return this.getSolutionNode(this.getSolutionName() + "_" + name);
+JSWorkBook.prototype.getNode = function(name, col) {
+    return this.getSolutionNode(this.getSolutionName() + "_" + name, col);
 }
-JSWorkBook.prototype.getSolutionNode = function(name) {
-    return ValueFacade.fetchSolutionNode(name, 'value')
+JSWorkBook.prototype.getSolutionNode = function(name, col) {
+    return ValueFacade.fetchSolutionNode(name, col || 'value')
 };
 JSWorkBook.prototype.findNode = function(name) {
     return ValueFacade.fetchSolutionNode(this.modelName + "_" + name, 'value')
@@ -182,8 +191,8 @@ JSWorkBook.prototype.resolveYas = function(variableName, note) {
     }
     return yas;
 }
-JSWorkBook.prototype.getDependencies = function(variableName) {
-    const node = this.getNode(variableName)
+JSWorkBook.prototype.getDependencies = function(variableName, col) {
+    const node = this.getNode(variableName, col)
     const formula = FormulaService.findFormulaByIndex(node.ref)
     return [Object.keys(formula.refs), Object.keys(formula.deps)]
 }
@@ -211,7 +220,7 @@ JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) 
     return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas);
 }
 JSWorkBook.prototype.updateValues = function() {
-    ValueFacade.updateValueMap(this.context.values);
+    ValueFacade.updateValueMap(this.context.getValues());
 };
 JSWorkBook.prototype.fixProblemsInImportedSolution = fixAll
 //should return the solution instead. So its deprecated
@@ -229,7 +238,7 @@ JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
     PropertiesAssembler.visitProperty(tupleDefinition, function(child, depth) {
         if (child.ref) allrefIdes.push(String(child.ref))
     }, 0)
-    return TINSTANCECOUNT(allrefIdes, this.context.values, yas);
+    return TINSTANCECOUNT(allrefIdes, this.context.getValues(), yas);
 }
 /**
  * TODO: enforce unique name per nodeName/yas.
@@ -260,7 +269,7 @@ JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas, delta) {
     var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
     if (delta >= 2) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
     if (delta >= 3) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(tupleDefinition.solutionName + '_' + tupleDefinition.tupleDefinitionName) : tupleDefinition
-    const values = this.context.values[String(tupleDefinition.ref)];
+    const values = this.context.getValues()[String(tupleDefinition.ref)];
     for (var key in values) {
         if (name == values[key]) {
             if (log.DEBUG) log.debug('Found ' + key + '' + values[key])
@@ -471,9 +480,9 @@ JSWorkBook.prototype.getAllChangedValues = function() {
             formulaIds.push(audit.formulaId)
         }
     }
-    return ValueFacade.getValuesFromFormulaIds(formulaIds, this.context.values);
+    return ValueFacade.getValuesFromFormulaIds(formulaIds, this.context.getValues());
 }
 JSWorkBook.prototype.getAllValues = function() {
-    return ValueFacade.getAllValues(this.context.values);
+    return ValueFacade.getAllValues(this.context.getValues());
 };
 module.exports = JSWorkBook;

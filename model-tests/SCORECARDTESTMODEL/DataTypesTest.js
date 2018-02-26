@@ -11,4 +11,4 @@ wb.importFFL({
     register: register,
     raw     : require('fs').readFileSync(__dirname + '/SCORECARDBASICS.ffl', 'utf8')
 });
-log.info(wb.lme.getNode('FirstMAP'))
+assert.equal(wb.lme.getNode('FirstMAP').name, 'SCORECARDBASICS_FirstMAP_value')

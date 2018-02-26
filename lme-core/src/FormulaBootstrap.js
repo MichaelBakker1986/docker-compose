@@ -363,8 +363,8 @@ var traverseTypes = {
             var property = node.property;
             if (property.type === 'Identifier') {
                 if (node.computed) {
-                    if (parent.type === 'MemberExpression') {
-                        throw new Error('Not Supported Yet')
+                    if (false && parent.type === 'MemberExpression') {
+                        //throw new Error('Not Supported Yet')
                     }
                     else {
                         //this is presumably were the undefined comes from.
@@ -470,16 +470,18 @@ function buildFormula(formulaInfo, parent, node) {
         if (simplified[node.callee.name]) {
             simplified[node.callee.name](formulaInfo, node);
         } else {
-            //be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
-            const lme_math = node.callee.name.split('.')[0];
-            if (global[lme_math] == undefined) {
-                var groupName = formulaInfo.name.split('_')[0];
-                var referenceProperty = getOrCreateProperty(groupName, lme_math, 'function');
-                if (referenceProperty.ref !== undefined) {
-                    const abc = addFormulaDependency(formulaInfo, referenceProperty.rowId, 'function');
-                    node.callee.name = 'm[' + referenceProperty.ref + ']'
-                } else throw Error('invalid call [' + node.callee.name + ']')
+            if (node.callee.name) {
+                //be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
+                const lme_math = node.callee.name.split('.')[0];
+                if (global[lme_math] == undefined) {
+                    var groupName = formulaInfo.name.split('_')[0];
+                    var referenceProperty = getOrCreateProperty(groupName, lme_math, 'function');
+                    if (referenceProperty.ref !== undefined) {
+                        addFormulaDependency(formulaInfo, referenceProperty.rowId, 'function');
+                        node.callee.name = 'm[' + referenceProperty.ref + ']'
+                    } else throw Error('invalid call [' + node.callee.name + ']')
 
+                }
             }
         }
     }
@@ -490,6 +492,19 @@ function buildFormula(formulaInfo, parent, node) {
         const n_name = node.name;
         if (identifier_replace[n_name]) {
             node.name = identifier_replace[n_name];
+        } else if (n_name == 'YearInT' && parent.callee != node) {
+            node.callee = {
+                type: 'Identifier',
+                name: 'YearInT'
+            }
+            node.type = 'CallExpression'
+            node.arguments = [{
+                type: 'Identifier',
+                name: 'x'
+            }]
+            delete node.name;
+            //because we create the CallExpression too late..
+            simplified['YearInT'](formulaInfo, node)
         }
         //xAsReference x.notrend
         else if (n_name === 'NoTrend') {

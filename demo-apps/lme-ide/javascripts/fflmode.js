@@ -601,7 +601,7 @@ define("token_tooltip", [], function(require, exports, module) {
                             var dep_value;
                             try {
                                 const entered = workbook.get(dep_var_name, 'entered')
-                                dep_value = (entered ? '!' : '') + OnNA(workbook.get(dep_var_name, lastpart), 'NA')
+                                dep_value = (entered ? '!' : '') + OnNAIfNumber(workbook.get(dep_var_name, lastpart), 'NA')
                             } catch (err) {
                                 dep_value = 'ERR:' + err.toString()
                             }

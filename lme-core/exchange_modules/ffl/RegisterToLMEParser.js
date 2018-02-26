@@ -61,6 +61,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
     const parentNameIndex = indexer.schemaIndexes.parentId;
     const visibleIndex = indexer.schemaIndexes.visible;
+    const treeIndex = indexer.schemaIndexes.treeindex;
 
     this.childIndex = indexer.schemaIndexes.children;
     const childIndex = this.childIndex;
@@ -112,7 +113,6 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
 
         var datatype = node[dataTypeIndex] || 'number'
         var frequency = node[frequencyIndex] || 'column'
-        console.info(nodeName + ':' + frequency)
         var display_options = node[displayOptionsIndex]
         const title = node[titleIndex] || "\"" + nodeName + "\""
         const data_options = node[dataOptionsIndex]
@@ -167,19 +167,22 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (frequency == 'column' && datatype == 'number' && node[aggregationIndex] == 'flow') {
                 valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + (valueFormula ? valueFormula : 'NA') + ')'
             }
-
             if (node[modifierIndex] == '=' || node[modifierIndex] == '+=') {
+                const treeIdx = (node[treeIndex] - 2)
                 display_options = 'displayAsSummation'
                 const siblings = indexer.i[node[parentNameIndex]][childIndex]
                 var sumformula = [];
-                for (var i = 0; i < siblings.length; i++) {
+
+                for (var i = treeIdx; i >= 0; i--) {
                     const sibling_modifier = siblings[i][modifierIndex];
-                    if (sibling_modifier && siblings[i][nameIndex] != nodeName) {
+                    if (sibling_modifier) {
+                        if (sibling_modifier.indexOf('=') > -1) break
                         const withouttotal = sibling_modifier.replace(/=/, '');
                         if (withouttotal.length > 0) sumformula.push(withouttotal + siblings[i][nameIndex]);
                     }
                 }
-                valueFormula = sumformula.join('');
+                //if (valueFormula) log.error(nodeName + '=\n' + sumformula.reverse().join('') + '\nformula:\n' + valueFormula)
+                valueFormula = sumformula.reverse().join('');
             }
         }
         //if column && number.. (aggregate)

@@ -80,7 +80,7 @@ ChangeManager.prototype.updateCursor = function(ffl, cursor) {
 
     var currentVariable;
     for (var i = cursor.row; i > 0; i--) {
-        if (this.lines[i].match(/(variable |tuple |root|model )/)) {
+        if ((this.lines[i] || '').match(/(variable |tuple |root|model )/)) {
             currentVariable = this.extractName(this.lines[i].trim())
             break;
         }

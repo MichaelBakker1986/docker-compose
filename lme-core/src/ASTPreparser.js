@@ -8,6 +8,12 @@ const escodegen = require('escodegen');
 //Before entering a Function..
 var caseCount = 0;
 var simplified = {
+    YearInT            : function(formulaInfo, node) {
+        node.arguments.unshift({
+            type: 'Identifier',
+            name: 'v'
+        });
+    },
     //gets Sels for the value also
     ExpandLevel        : function(formulaInfo, node) {
         node.arguments = [{

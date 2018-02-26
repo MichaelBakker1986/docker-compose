@@ -1,6 +1,8 @@
 const logger = require('log6')
 const jsMath = require('./jsMath.json')
 const Solver = require('js-solver')
+const ema = require('exponential-moving-average');
+const jStat = require('jStat').jStat;
 const entries = {};
 if (!global.MatrixLookup) {
     MatrixLookup = function() {
@@ -10,6 +12,72 @@ if (!global.MatrixLookup) {
 if (!global.MATRIX_VALUES) {
     global.MATRIX_VALUES = {}
 }
+if (!Array.prototype.stdev)
+    Object.defineProperty(Array.prototype, 'stdev', {
+        enumerable: false,
+        value     : function() {
+            //calculate standard deviation of an array
+            return jStat.stdev(this, true)
+        }
+    });
+if (!Array.prototype.select)
+    Object.defineProperty(Array.prototype, 'select', {
+        enumerable: false,
+        value     : function(name) {
+            const v = []
+            for (var i = 0; i < this.length; i++) {
+                v[i] = this[i][name]
+            }
+            return v;
+        }
+    });
+if (!Array.prototype.ema)
+    Object.defineProperty(Array.prototype, 'ema', {
+        enumerable: false,
+        value     : function(length) {
+            return ema(this, length)
+        }
+    });
+if (!Array.prototype.avg)
+    Object.defineProperty(Array.prototype, 'avg', {
+        enumerable: false,
+        value     : function() {
+            return this.sum() / this.length
+        }
+    });
+if (!Array.prototype.sum)
+    Object.defineProperty(Array.prototype, 'sum', {
+        enumerable: false,
+        value     : function() {
+            const nl = this.length;
+            const n = this;
+            var a = 0;
+            for (var j = nl - 1; j > 0; j--) a = a + n[j];
+            return a
+        }
+    });
+//distance between two numbers
+if (!Number.prototype.distance)
+    Object.defineProperty(Number.prototype, 'distance', {
+        enumerable: false,
+        value     : function(other) {
+            return (this > other) ? this - other : other - this;
+        }
+    });
+if (!Array.prototype.first)
+    Object.defineProperty(Array.prototype, 'first', {
+        enumerable: false,
+        value     : function() {
+            return this[1];
+        }
+    });
+if (!Array.prototype.last)
+    Object.defineProperty(Array.prototype, 'last', {
+        enumerable: false,
+        value     : function() {
+            return this[this.length - 1];
+        }
+    });
 
 //add functions found in the jsMath to the global scope
 function initJSMath(jsMath) {
@@ -42,6 +110,9 @@ AMMOUNT = function() {
         if (arguments[key]) total++
     }
     return total;
+}
+OnNAIfNumber = function(v, nav) {
+    return isNaN(v) ? v : OnNA(v, nav)
 }
 OnNA = function(v, nav) {
     return (v == null || isNaN(v) || (v != 0 && v != -0 && v < this.n && v > this.ng)) ? nav : v;
@@ -83,6 +154,9 @@ MatrixLookup = function(xlsfileName, tableName, row, col) {
 
 FILLEDIN = function(required, entered) {
     return true;
+}
+YearInT = function(v, x) {
+    return v.absolute_start_year + x.bkyr.index
 }
 //should be:  arguments => { name: $1, y: $2 }
 PIECHART = function(points) {
