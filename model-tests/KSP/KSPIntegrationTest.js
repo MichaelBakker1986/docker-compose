@@ -6,7 +6,7 @@
  * This looks a lot, but its centainly not much testing going on here.
  */
 
-require('./totalyearlycosttest')
+require('./totalyearlycostTest')
 var FormulaService = require('../../lme-core/src/FormulaService')
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 var WorkBook = require('../../lme-core/src/JSWorkBook')
