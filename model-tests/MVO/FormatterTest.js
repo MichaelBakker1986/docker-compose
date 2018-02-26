@@ -13,7 +13,7 @@ try {
     formatterTry1.parseProperties()
     const parse = formatterTry1.toString();
     const time = (now() - start).toFixed(0);
-    assert(time < 80, "formatting KSP twice may never take longer than 80ms")
+    assert(time < 120, "formatting KSP twice may never take longer than 120ms")
 } catch (err) {
     //re-try
     var start = now()
@@ -21,5 +21,5 @@ try {
     formatterTry2.parseProperties()
     const parse = formatterTry2.toString();
     const time = (now() - start).toFixed(0);
-    assert(time < 80, "formatting KSP twice may never take longer than 80ms")
+    assert(time < 120, "formatting KSP twice may never take longer than 120ms")
 }
