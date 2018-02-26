@@ -15,6 +15,7 @@ And Discount(213,SecureCollateral) is set to 2000
 Then CollateralObjectECValue(213,SecureCollateral) should be 7000
 And CollateralECValue(213) should be 7000
 
+And AllocationValue is set to 1
 And RecoveryValue should be 7000
 
 @Collateral Investment
