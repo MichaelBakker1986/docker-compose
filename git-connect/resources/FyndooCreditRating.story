@@ -18,5 +18,6 @@ And sdeSales is set to 100 for column with id 1
 And sdeDepreciation is set to 5 for column with id 1
 And sdeEBIT is set to 15 for column with id 1
 Then krZValue should be 2.39328 for column with id 1
-And krPD should be 0.02106 for column with id 1
+Then krInsolvenzquote should be 0.012 for column with id 1
+And krPD should be 0.01331 for column with id 1
 And krUraRatingKlasse should be BB- for for column with id 1
