@@ -40,6 +40,7 @@ const RichardRealEstate = '2023094311299941';
 const RamonFBId = '10216226641645779 ';
 const BerryFBId = '1960057484255967';
 const BerndFBId = '1893680553997744';
+const JamieFBId = '115734455923712';
 const BasNieveldFBId = '1631660686928794';
 const HildeFBId = '1551240648324836';
 const FYNDOOCREDITRATING = 'FyndooCreditRating'
@@ -158,7 +159,6 @@ class Authorization {
            }*/
         this.registerUser(GUEST_USER)
 
-
         for (var ruleNumer = 0; ruleNumer < rules.length; ruleNumer++) {
             var rule = rules[ruleNumer];
             this.allow(rule.id, rule.resource, rule.role)
@@ -173,6 +173,8 @@ class Authorization {
         this.addModelPrivileges(JorisNijboerFaceBookID, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(CHEEFacebookID, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(CHEEFacebookID, "PRESCAN", true);
+        this.addModelPrivileges(JamieFBId, "PRESCAN", true);
+        this.addModelPrivileges(JamieFBId, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(RamonFBId, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(MichaelFaceBookID, FYNDOOCREDITRATING, true);
         this.addModelPrivileges(GUEST_ROLE, "SCORECARDTESTMODEL", false);

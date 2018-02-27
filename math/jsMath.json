@@ -37,7 +37,7 @@
   },
   "Exp": {
     "args": "v",
-    "body": "return Math.pow(v, 2)"
+    "body": "return Math.exp(v)"
   },
   "OnERorNA": {
     "args": "v,onerrornav",

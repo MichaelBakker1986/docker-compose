@@ -154,6 +154,7 @@ Register.prototype.print = function(idxMap, start, filter) {
     return this.printArr(this.i, idxMap, this.mark || start, filter)
 }
 Register.prototype.printArr = function(arr, idxMap, start, filter) {
+    filter = filter || []
     const tout = []
     const self = this;
     const filtermap = []

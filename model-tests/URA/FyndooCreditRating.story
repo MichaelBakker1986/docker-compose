@@ -19,4 +19,4 @@ And sdeDepreciation is set to 5 for column with id 1
 And sdeEBIT is set to 15 for column with id 1
 Then krZValue should be 2.39328 for column with id 1
 @And krPD should be 0.02106 for column with id 1
-And krUraRatingKlasse should be BB- for for column with id 1
+@And krUraRatingKlasse should be BB- for for column with id 1
