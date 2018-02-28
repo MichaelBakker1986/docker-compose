@@ -4,6 +4,7 @@ const ScorecardQ_caseFix = require('../../model-tests/plugins/ScorecardQ_caseFix
 const V05CaseFix = require('../../model-tests/plugins/V05CaseFix').V05CaseFix
 const EconomicEditorView = require('../../model-tests/EconomicEditorView').EconomicEditorView
 const FormulaInformationManager = require('./FormulaInformationManager')
+const RegisterFormulaBuilder = require('../../lme-core/exchange_modules/ffl/RegisterFormulaBuilder')
 
 function AceEditor(id, opts) {
     opts = opts || {}
@@ -119,7 +120,7 @@ AceEditor.prototype.registerEditorToClickNames = function(selected_editor, fflEd
         const lineNumber = user_session.fflModel.substring(0, startLookIndex).split('\n').length
         fflEditor.scrollToLine(lineNumber)
     })
-    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, FormulaInformationManager);
+    selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, FormulaInformationManager, RegisterFormulaBuilder);
 }
 AceEditor.prototype.scrollToLine = function(lineNumber) {
     this.aceEditor.scrollToLine(lineNumber, true, true, function() {

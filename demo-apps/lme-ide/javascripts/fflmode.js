@@ -464,12 +464,13 @@ define("token_tooltip", [], function(require, exports, module) {
     var Range = require("ace/range").Range;
     var Tooltip = require("ace/tooltip").Tooltip;
 
-    function TokenTooltip(editor, register, workbook, formulaInfo) {
+    function TokenTooltip(editor, register, workbook, formulaInfo, RegisterFormulaBuilder) {
         if (editor.tokenTooltip) return;
         Tooltip.call(this, editor.container);
         editor.tokenTooltip = this;
         this.editor = editor;
         this.workbook = workbook
+        this.RegisterFormulaBuilder = RegisterFormulaBuilder
         this.register = register;
         this.formulaInfo = formulaInfo
         this.formulaRegex = new RegExp(formulaInfo.mathDefinitions().join('|'), "g")
@@ -504,7 +505,7 @@ define("token_tooltip", [], function(require, exports, module) {
         };
         var wordMapSize = 0;
         var regex = new RegExp([].join('|'), "gi");
-
+        var formula_builder;
         this.update = function() {
             this.$timer = null;
 
@@ -549,30 +550,32 @@ define("token_tooltip", [], function(require, exports, module) {
 
             if (this.tokenText != tokenText) {
                 //TODO: convert into callback!
+                const names = this.register.getIndex('name');
                 if (wordMapSize !== this.register.i.length) {
                     wordMapSize = this.register.i.length
-                    const variableNames = Object.keys(this.register.getIndex('name'));
+                    const variableNames = Object.keys(names);
                     variableNames.sort(function(a, b) {
                         // ASC  -> a.length - b.length
                         // DESC -> b.length - a.length
                         return b.length - a.length;
                     });
                     regex = new RegExp(variableNames.join("|"), 'g')
+                    formula_builder = new this.RegisterFormulaBuilder(this.register)
                 }
                 const match = this.getMatchAround(regex, session.getLine(docPos.row), col);// "\nInformation about the formula\n"; + token//+)
                 var otherMath = null;
                 if (!match) otherMath = this.getMatchAround(this.formulaRegex, session.getLine(docPos.row), col);
-                if (match && this.register.getIndex('name')[match.value]) {
+                if (match && names[match.value]) {
                     const variable_name = match.value;
                     //variable info
-                    const nodes = this.register.getIndex('name')[variable_name];
+                    const node = names[variable_name];
                     const workbook = this.workbook;
-                    const display = nodes[this.register.schemaIndexes.title] || variable_name
-                    // const formula = nodes[this.register.schemaIndexes.formula_trend] || nodes[this.register.schemaIndexes.formula]
+                    const display = node[this.register.schemaIndexes.title] || variable_name
+                    // const formula = node[this.register.schemaIndexes.formula_trend] || node[this.register.schemaIndexes.formula]
                     const dependencies = workbook.getDependencies(variable_name)
-
-                    var formula = workbook.get(variable_name, 'original')
-
+                    var frequency = node[this.register.schemaIndexes.frequency] || 'column'
+                    var datatype = node[this.register.schemaIndexes.datatype] || 'number'
+                    var formula = this.register.translateKeys((formula_builder.buildFFLFormula(node, datatype == 'number' && frequency == 'column')) || '')
                     const prep = []
                     var lastIndent = 0
                     formula = formula.replace(/,/g, function($1, $2, $3) {
@@ -584,7 +587,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     const entered = workbook.get(variable_name, 'entered')
                     var value;
                     try {
-                        value = (entered ? '!' : '') + OnNA(workbook.get(variable_name, 'value'), "NA")
+                        value = (entered ? '@' : '') + OnNA(workbook.get(variable_name, 'value'), "NA")
                     } catch (err) {
                         value = 'ERR:' + err.toString()
                     }
@@ -593,7 +596,9 @@ define("token_tooltip", [], function(require, exports, module) {
                     const dep_ammount_in_row = 2
                     this.setText(variable_name + ":" + display + '\n\n' + value + '=\n' + formula + '\n\n' + dependencies.map(function(el, idx) {
                         if (el.length == 0) return '';
-                        return (idx == 0 ? 'references:\n\n' : 'dependencies:\n\n') + el.map(function(el, idx2) {
+                        return (idx == 0 ? 'dependencies:\n\n' : 'references:\n\n') + el.filter(function(el) {
+                            return !el.indexOf('__SMT') > -1
+                        }).map(function(el, idx2) {
                             const parts = el.split('_').slice(1)
                             const lastpart = parts.pop()
 

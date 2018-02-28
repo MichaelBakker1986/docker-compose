@@ -272,6 +272,13 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
         cols           : [],
         children       : []
     };
+
+    Object.defineProperty(rv, 'firstChild', {
+        get: function() {
+            return rv.children.length > 0 ? rv.children[0] : null
+        }
+    })
+
     /**
      * Proxy properties to the column objects
      */
@@ -312,7 +319,10 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
         Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype, yas));
     }
     const parent = this.nodes[yas.display + "_" + treePath[treePath.length - 1]];
-    if (parent) parent.children.push(rv);
+    if (parent) {
+        parent[rowId] = rv
+        parent.children.push(rv);
+    }
     this.nodes[unique] = rv;
     this.no[rowId] = rv;
     this.rows.push(rv)
@@ -354,7 +364,6 @@ WebExportParser.prototype.deParse = function(rowId, workbook) {
             }
         }
     }, workbook.resolveY(0).parent, null, 0)
-
     return lmeTree;
 }
 SolutionFacade.addParser(new WebExportParser())

@@ -120,8 +120,7 @@ const functionMapper = {
                     result.message = variableName + (tupleIndexName || '') + " is " + calculatedValue;
                 }
                 return result;
-            }
-            ]
+            }]
         }
     },
     assertProperty    : {

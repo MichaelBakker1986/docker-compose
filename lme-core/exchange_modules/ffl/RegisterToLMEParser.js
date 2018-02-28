@@ -1,5 +1,6 @@
 const SolutionFacade = require('../../src/SolutionFacade')
 const RegisterToFFL = require('./RegisterToFFL').RegisterToFFL
+const RegisterFormulaBuilder = require('./RegisterFormulaBuilder')
 const FinFormula = require('./FinFormula')
 const AST = require('../../../ast-node-utils/index').ast
 const Solution = require('../../src/Solution')
@@ -37,9 +38,11 @@ RegisterToLMEParser.prototype.deParse = function(data, workbook) {
 RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const indexer = data;
     workbook.indexer = indexer;
+
     const self = this;
     const fflRegister = new RegisterToFFL(indexer)
     const register = data.getIndex('name');
+    const rfb = new RegisterFormulaBuilder(indexer)
     const modelName = workbook.modelName || indexer.name;
     const solution = SolutionFacade.createSolution(modelName || "NEW");
     const nameIndex = indexer.schemaIndexes.name;
@@ -56,44 +59,21 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const versionIndex = indexer.schemaIndexes.version;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
-    const aggregationIndex = indexer.schemaIndexes.aggregation;
     const protectedIndex = indexer.schemaIndexes.protected;
     const modifierIndex = indexer.schemaIndexes.modifier;
     const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
     const parentNameIndex = indexer.schemaIndexes.parentId;
     const visibleIndex = indexer.schemaIndexes.visible;
-    const treeIndex = indexer.schemaIndexes.treeindex;
 
     this.childIndex = indexer.schemaIndexes.children;
-    const childIndex = this.childIndex;
     const choiceIndex = indexer.schemaIndexes.choices;
-    const trend_formulaIndex = indexer.schemaIndexes.formula_trend;
-    const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend;
+
     this.formulaIndexes = []
     const formulaIndexes = this.formulaIndexes
     var formulas = ['valid', 'hint', 'locked', 'visible', 'required', 'choices']
     for (var i = 0; i < formulas.length; i++) {
         //test if the formula is in the model at all
         if (data.schemaIndexes[formulas[i]] != null) this.formulaIndexes.push(data.schemaIndexes[formulas[i]])
-    }
-    //only inherit properties once.
-    const inherited = {}
-
-    //INFO: inheritance could also be possible via database
-    function inheritProperties(node) {
-        if (register.root == node) return
-        const fallback = node[referstoIndex] || register.root
-        if (!inherited[node[nameIndex]]) {
-            inherited[node[nameIndex]] = true
-            const supertype = node[referstoIndex] ? register[node[referstoIndex]] : register.root
-            if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
-            //first inherit from parents of parents.
-            if (supertype[referstoIndex]) inheritProperties(supertype)
-
-            for (var i = 0; i < supertype.length; i++) {
-                if (node[i] == null) node[i] = supertype[i];
-            }
-        }
     }
 
     const tuples = []
@@ -109,7 +89,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             while (tuples.length > 0 && !tuples[depth - 1]) tuples.length--
         }
         const nodeName = node[nameIndex];
-        inheritProperties(node)
+        rfb.inherit(node)
         var displaytype = node[displayTypeIndex] || 'number'
 
         var datatype = node[dataTypeIndex] || 'number'
@@ -154,39 +134,10 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
          * Document formulaset is notrend, formula = notrend
          * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets
          */
-        var valueFormula;
-        /**
-         * Copy - variable
-         */
-        if (node[referstoIndex]) {
-            valueFormula = node[referstoIndex]
-        } else {
-            var trendformula = node[trend_formulaIndex];
-            valueFormula = node[notrend_formulaIndex] || node[fflRegister.formulaindex];//notrend is more specific than formula
-            if (trendformula != null && valueFormula != trendformula) {//first of all, if both formula's are identical. We can skip the exercise
-                valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';
-            }
-            if (frequency == 'column' && datatype == 'number' && node[aggregationIndex] == 'flow') {
-                valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + (valueFormula ? valueFormula : 'NA') + ')'
-            }
-            if (node[modifierIndex] == '=' || node[modifierIndex] == '+=') {
-                const treeIdx = (node[treeIndex] - 2)
-                display_options = 'displayAsSummation'
-                const siblings = indexer.i[node[parentNameIndex]][childIndex]
-                var sumformula = [];
+        const valueFormula = rfb.buildFFLFormula(node, frequency == 'column' && datatype == 'number')
 
-                for (var i = treeIdx; i >= 0; i--) {
-                    const sibling_modifier = siblings[i][modifierIndex];
-                    if (sibling_modifier) {
-                        if (sibling_modifier.indexOf('=') > -1) break
-                        const withouttotal = sibling_modifier.replace(/=/, '');
-                        if (withouttotal.length > 0) sumformula.push(withouttotal + siblings[i][nameIndex]);
-                    }
-                }
-                //if (valueFormula) log.error(nodeName + '=\n' + sumformula.reverse().join('') + '\nformula:\n' + valueFormula)
-                valueFormula = sumformula.reverse().join('');
-            }
-        }
+        if (node[modifierIndex] && node[modifierIndex].indexOf('=') > -1) display_options = 'displayAsSummation'
+
         //if column && number.. (aggregate)
         /**
          * optional displaytype =select.
@@ -309,9 +260,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
     }
     var finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)
     //allow multi-language here
-    finparse = finparse.replace(/__(\d+)/gm, function($1, $2) {
-        return indexer.constants[parseInt($2)]
-    })
+    finparse = indexer.translateKeys(finparse)
     var formulaReturn = 'undefined';
     try {
         formulaReturn = esprima.parse(finparse).body[0].expression

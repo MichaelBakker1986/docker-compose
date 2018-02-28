@@ -173,6 +173,12 @@ Register.prototype.printArr = function(arr, idxMap, start, filter) {
     }
     return tout
 }
+Register.prototype.translateKeys = function(formula) {
+    const self = this;
+    return formula.replace(/__(\d+)/gm, function($1, $2) {
+        return self.constants[parseInt($2)]
+    })
+}
 /** * mark current moment as last checkpoint */
 Register.prototype.markNow = function() {
     this.mark = this.i.length;

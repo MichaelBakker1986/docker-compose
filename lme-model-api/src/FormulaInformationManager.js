@@ -1,5 +1,6 @@
 const log = require('log6')
 const FinFormula = require('../../lme-core/exchange_modules/ffl/FinFormula')
+
 const info = {
     NA                : 1e-100,
     "\\("             : 'Open tag',
@@ -356,15 +357,17 @@ FormulaInformationManager.prototype.lookupFunction = function(name, line, offset
 }
 FormulaInformationManager.prototype.extractParts = function(workbook, info) {
     return info.parts.map(function(formulaAsString, idx) {
-        workbook.createFormula(FinFormula.parseFormula(formulaAsString), 'SMT', 'a' + idx, false, 'document', 'object', null)
-        const e_value = OnNA(workbook.get('SMT', 'a' + idx), "NA")
+        workbook.createFormula(FinFormula.parseFormula(formulaAsString), '__SMT', 'a' + idx, false, 'document', 'object', null)
+        const e_value = OnNA(workbook.get('__SMT', 'a' + idx), "NA")
 
-        const dependencies = workbook.getDependencies('SMT', 'a' + idx)
+        const dependencies = workbook.getDependencies('__SMT', 'a' + idx)
         const prefix = [];
         const deplength = 60
         const dep_ammount_in_row = 2
         const real_dep = dependencies[1]
-        const asstring = real_dep.map(function(el, idx2) {
+        const asstring = real_dep.filter(function(el) {
+            return el.indexOf('__SMT') == -1
+        }).map(function(el, idx2) {
             const parts = el.split('_').slice(1)
             const lastpart = parts.pop()
 
