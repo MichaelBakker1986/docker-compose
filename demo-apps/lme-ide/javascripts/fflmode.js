@@ -627,7 +627,7 @@ define("token_tooltip", [], function(require, exports, module) {
                     //if otherMath.value == If(a,b,c) lets Extract the Abstract-Tree
                     const workbook = this.workbook;
 
-                    const lookupFunction = this.formulaInfo.lookupFunction(otherMath.value, session.getLine(docPos.row), otherMath.start - 1);
+                    const lookupFunction = this.formulaInfo.lookupFunction(otherMath.value, session.getLine(docPos.row), otherMath.start);
                     const eval_parts = this.formulaInfo.extractParts(workbook, lookupFunction)
 
                     const displayValue = eval_parts.join('\n') + "\n\nAbout:\n\n" + lookupFunction.lines.join('\n')
