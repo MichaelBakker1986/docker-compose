@@ -1,6 +1,5 @@
 model FyndooCreditRating uses BaseModel
 {
- version: 3;
  variable CreditRatingScorecard
  {
   display_options: scorecard;
