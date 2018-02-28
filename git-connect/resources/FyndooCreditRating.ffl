@@ -1,6 +1,5 @@
 model FyndooCreditRating uses BaseModel
 {
- version: 2;
  variable CreditRatingScorecard
  {
   display_options: scorecard;
@@ -879,7 +878,7 @@ model FyndooCreditRating uses BaseModel
     title: "Probability of Default";
     formula: If(krZValue=NA,NA, OnER( 1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote), NA) );
     locked: 1;
-    fixed_decimals: 3;
+    fixed_decimals: 5;
    }
    variable krUraRatingKlasse
    {
