@@ -3,6 +3,4 @@ FyndooCreditRating Score Basic
 @themes FyndooCreditRating Score basic
 
 Scenario: Verify FyndooCreditRating Score calculations
-Given a document of the model type FyndooCreditRating
-
-Given a Context(URA)
+Given a Context(URA) for year 2055

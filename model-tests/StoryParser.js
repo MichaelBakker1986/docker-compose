@@ -61,11 +61,12 @@ const functionMapper = {
     },
     cleanDocumentState: {
         /* One story can have multiple contexts, this for now will just clean the current state. */
-        regex: /^\s*Given an? Context(\((\w+,?){0,3}\))?/i,
+        regex: /^\s*Given an? Context(\((\w+,?){0,3}\))?(?: for year (\d+))?/i,
         call : function(workbook, linenumber, line, args) {
+            const start_year = parseInt(args[2] || new Date().getFullYear())
             return [function() {
                 workbook.clearValues()
-                workbook.context._values.absolute_start_year = 2016
+                workbook.context._values.absolute_start_year = start_year
                 if (log.TRACE) log.trace('Document values cleared')
                 return {
                     status : 'info',
