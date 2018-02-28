@@ -837,10 +837,6 @@ model FyndooCreditRating uses BaseModel
     }
    }
   }
-  variable testtmin
-  {
-  formula: testtmin[prev]+10;
-  }
   variable RatingFolder
   {
    displaytype: currency;
