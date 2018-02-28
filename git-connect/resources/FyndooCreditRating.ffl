@@ -266,17 +266,28 @@ model FyndooCreditRating uses BaseModel
     }
    }
   }
-  variable ScoreView 
+  variable ScoreView
   {
-     variable First refers to krUraAmpelDNL
-     {
-     }
-     variable Second refers to krIfdRatingKlasseD
-     {
-     }
-     variable Third refers to krIfdRatingKlasseD
-     {
-     }
+   variable Drive1 refers to R1_ShareOfOrdinaryResult
+   {
+
+   }
+   variable Drive2 refers to R2_QuotaOfBankAndSuppliers
+   {
+
+   }
+   variable Drive3 refers to R3_InterestRateOnBorrowings
+   {
+
+   }
+   variable Drive4 refers to R4_ShareOfShortTermLiabilities
+   {
+
+   }
+   variable Drive5 refers to R5_ShareOfOwnResources
+   {
+
+   }
   }
   variable RatioFolder
   {
