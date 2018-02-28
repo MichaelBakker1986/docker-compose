@@ -176,7 +176,7 @@ angular.module('lmeapp', ['angular.filter'])
                 $.post("preview/" + $scope.session.fflModelPath, {
                     data: fflEditor.getValue()
                 }, function(data) {
-                    window.open('data-docs/');
+                    window.open('data-docs/?url=%2Fdata-api-docs#!/default/' + $scope.session.fflModelPath);
                 });
             });
         }
