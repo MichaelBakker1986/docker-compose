@@ -300,7 +300,7 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "$>Anteil des ordentlichen Ergebnisses<$";
-    formula: OnER(If(krNettoBilanzsummeRating<0,NA,GetValue(krOrdentlichesErgebnis,T,1)/krNettoBilanzsummeRating),NA);
+    formula: OnER(If(krNettoBilanzsummeRating<0,NA,krOrdentlichesErgebnis[bkyr]/krNettoBilanzsummeRating),NA);
     locked: 1;
     fixed_decimals: 2;
     variable krOrdentlichesErgebnis
@@ -530,7 +530,7 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "$>Fremdkapitalzinslast<$";
-    formula: OnER(Max(OnNA(GetValue(krZinsen,T,1),0),0)/Max(krVerbindlichkeiten,0),0);
+    formula: OnER(Max(OnNA(krZinsen[bkyr],0),0)/Max(krVerbindlichkeiten,0),0);
     locked: 1;
     fixed_decimals: 2;
     variable krZinsen
@@ -625,7 +625,7 @@ model FyndooCreditRating uses BaseModel
    {
     displaytype: percentage;
     title: "$>Anteil kurzfristige Verbindlichkeiten<$";
-    formula: OnER(OnNA(krKurzfristigeVerbindlichkeiten,0)/GetValue(krUmsatzerloese,T,1),0);
+    formula: OnER(OnNA(krKurzfristigeVerbindlichkeiten,0)/krUmsatzerloese[bkyr],0);
     locked: 1;
     fixed_decimals: 2;
     variable krKurzfristigeVerbindlichkeiten
@@ -682,8 +682,7 @@ model FyndooCreditRating uses BaseModel
      aggregation: flow;
      displaytype: currency;
      title: "$>Umsatzerl?se / Ertr?ge<$";
-     formula_notrend: sdeSales;
-     formula_trend: sdeSales;
+     formula: sdeSales;
      locked: 1;
      variable +krUmsatzerloeseSub1 refers to sdeSales
      {
@@ -735,8 +734,7 @@ model FyndooCreditRating uses BaseModel
      {
       displaytype: currency;
       title: "$>Bilanzielles Eigenkapital Brutto (ohne Abzug Sonderposten f?r Verluste etc)<$";
-      formula_notrend: sdeEquity;
-      formula_trend: sdeEquity;
+      formula: sdeEquity;
       display_options: displayAsSummation;
       locked: 1;
      }
