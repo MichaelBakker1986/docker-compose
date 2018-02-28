@@ -142,8 +142,8 @@ assert.equal(OnNA((NA * NA * 9), 'NA'), 'NA')
 assert.equal(OnNA(NA / -2, 'NA'), 'NA')
 assert.equal(OnNA(NA + NA, 'NA'), 'NA')
 
-
-
+wb.createFormula("Exp(5)", "EXPTEST")
+assert.equal(wb.get('EXPTEST'), Math.exp(5))
 
 /*wb.createFormula("Count(x,String(x),x)", "TestCount")
 log.info(wb.get("TestCount"))*/

@@ -24,21 +24,26 @@ function FormulaInfo(dataArg, schema, modelName) {
 
     const modelNamePrefix = modelName + '_';
     for (var i = 0; i < this.formulas.length; i++) {
-        var formula = this.formulas[i];
+        const formula = this.formulas[i];
         const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            const title = forms[modelNamePrefix + name + '_title'] || { original: null };
-            const hint = forms[modelNamePrefix + name + '_hint'] || { original: '' };
-            const visible = forms[modelNamePrefix + name + '_visible'] || { original: false };
-            const valid = forms[modelNamePrefix + name + '_valid'] || { original: false };
-            const value = forms[modelNamePrefix + name + '_value'] || { original: '' };
-            const formula_trend = forms[modelNamePrefix + name + '_trend'] || { original: '' };
-            const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || { original: '' };
-            const locked = forms[modelNamePrefix + name + '_locked'] || { original: false };
-            const choices = forms[modelNamePrefix + name + '_choices'] || { original: null };
-            //looks a lot like the Register.js functionality
-            data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
+            if (formula.protected) {
+                log.info('formula is protected' + JSON.stringify(formula))
+                data.push([name, (forms[modelNamePrefix + name + '_title'] || { original: null }).original, null, null, null, null, null, null, null, null])
+            } else {
+                const title = forms[modelNamePrefix + name + '_title'] || { original: null };
+                const hint = forms[modelNamePrefix + name + '_hint'] || { original: '' };
+                const visible = forms[modelNamePrefix + name + '_visible'] || { original: false };
+                const valid = forms[modelNamePrefix + name + '_valid'] || { original: false };
+                const value = forms[modelNamePrefix + name + '_value'] || { original: '' };
+                const formula_trend = forms[modelNamePrefix + name + '_trend'] || { original: '' };
+                const formula_notrend = forms[modelNamePrefix + name + '_notrend'] || { original: '' };
+                const locked = forms[modelNamePrefix + name + '_locked'] || { original: false };
+                const choices = forms[modelNamePrefix + name + '_choices'] || { original: null };
+                //looks a lot like the Register.js functionality
+                data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original])
+            }
         }
     }
     const types = ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid'];
@@ -67,15 +72,21 @@ FormulaInfo.prototype.setSchema = function(schema) {
 }
 FormulaInfo.prototype.addFormula = function(formula) {
     formula.fflname = variableName(formula.name)
-    this.formulas.push(formula);
+    if (!formula.protected)
+        this.formulas.push(formula);
+    else {
+        this.formulas.push(JSON.parse(JSON.stringify(formula, function(k, v) {
+            return hidden_keys[k] ? undefined : v;
+        })));
+    }
 }
 
 function correctFileName(name) {
-    return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
+    return name.split('_').slice(1, -1).join("_");
 }
 
 function variableName(name) {
-    return name.replace(/^[^_]+_([\w]*_\w+)$/gmi, '$1');
+    return name.split('_').slice(1).join("_");
 }
 
 function LMEParser() {
@@ -98,6 +109,10 @@ const unwantedKeys = {
     delegate: true,
     ast     : true,
     body    : true
+}
+const hidden_keys = {
+    original: true,
+    parsed  : true
 }
 LMEParser.prototype.deParse = function(rowId, workbook) {
     const modelName = workbook.getSolutionName();

@@ -35,10 +35,6 @@
     "args": "v,arg1",
     "body": "return (v == undefined || isNaN(v)) ? arg1 : v"
   },
-  "Exp": {
-    "args": "v",
-    "body": "return Math.exp(v)"
-  },
   "OnERorNA": {
     "args": "v,onerrornav",
     "body": "if (v == undefined || isNaN(v)) { return onerrornav; } return v"

@@ -90,7 +90,7 @@ FormulaService.prototype.addAssociation = function(index, property, associationT
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency, self_body) {
+FormulaService.prototype.addModelFormula = function(property, groupName, row, col, locked, body, frequency, self_body, protected) {
     assert(frequency, 'A formula must have a frequency')
     assert(body !== undefined, 'refactored, this function return undefined when body is undefined');
     var formula;
@@ -106,7 +106,7 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
     if (locked && cache[cache_key] !== undefined) formula = cache[cache_key];
     else {
         //else we have to create a new formula
-        formula = this.newFormula(locked, AST.EXPRESSION(body), formulas.length, property.name, self_body);
+        formula = this.newFormula(locked, AST.EXPRESSION(body), formulas.length, property.name, self_body, protected);
         cache[key] = formula;
     }
     property.ref = formula.index;
@@ -133,7 +133,7 @@ FormulaService.prototype.addModelFormula = function(property, groupName, row, co
  */
 //create a new Formula
 //initiate a new Object, add it to the Array
-FormulaService.prototype.newFormula = function(locked, body, index, propertyName, self_body) {
+FormulaService.prototype.newFormula = function(locked, body, index, propertyName, self_body, protected) {
     const original = AST.PROGRAM(body);
     const self = self_body ? JSON.parse(self_body) : {}
     const formula = {
@@ -141,6 +141,7 @@ FormulaService.prototype.newFormula = function(locked, body, index, propertyName
         refs              : {},//map of references
         formulaDependencys: [],//array of associations (deps and refs)
         deps              : {},//map of dependencies
+        protected         : protected || false,
         body              : original,//AST
         self              : self.body,//JSON body
         params            : self.params,//function parameters

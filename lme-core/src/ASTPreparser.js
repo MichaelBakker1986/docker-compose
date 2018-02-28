@@ -28,6 +28,9 @@ var simplified = {
     Min                : function(formulaInfo, node) {
         node.callee.name = 'Math.min'
     },
+    Exp                : function(formulaInfo, node) {
+        node.callee.name = 'Math.exp'
+    },
     //we will need this one later to determine + or &&
     EvaluateAsString   : function(formulaInfo, node) {
         node.callee.name = 'String'
@@ -259,4 +262,5 @@ simplified.MIN = simplified.Min;
 simplified.min = simplified.Min;
 simplified.max = simplified.Max;
 simplified.ABS = simplified.Abs;
+simplified.EXP = simplified.Exp;
 module.exports = simplified;
