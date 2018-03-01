@@ -106,6 +106,7 @@ class Authorization {
             "/ext-language_tools.js",
             "/ace.js",
             "/javascripts/fflmode.js",
+            "/resources/FyndooCreditRating.js",
             "/theme-tomorrow.js",
             "/snippets/ffl.js",
             "/font-awesome/fonts/fontawesome-webfont.ttf",
