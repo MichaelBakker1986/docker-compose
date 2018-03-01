@@ -7,6 +7,19 @@ model FyndooCreditRating uses BaseModel
   {
    data_options: Input;
    locked: 1;
+   variable CreateDate
+   {
+    locked:1;
+    datatype: date;
+    displaytype: date;
+    frequency: document;
+    formula: NOW();
+   }
+   variable ColumnHeader
+   {
+    locked:1;
+    formula: YearInT;
+   }
    variable sdeGoodWill
    {
     displaytype: currency;
