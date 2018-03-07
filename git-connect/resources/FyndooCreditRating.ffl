@@ -896,7 +896,6 @@ model FyndooCreditRating uses BaseModel
    variable krZValue
    {
     title: "$>Z-Wert<$";
-    protected: true;
     formula: If((krAnteilOrdentlichenErgebnisses=NA) or (krBankUndLieferantenanteil=NA) or (krFremdKapitalzinslast=NA) or (krAnteilKurzfristigeVerbindlichkeiten=NA)or (krAnteilEigenmittel=NA),NA, 4.03964180885174 +9.29864789092051*krAnteilOrdentlichenErgebnisses +2.38051797748078*krAnteilEigenmittel -23.0757849643717*krFremdKapitalzinslast -1.85536265755931*krBankUndLieferantenanteil -0.844454993608427*krAnteilKurzfristigeVerbindlichkeiten );
     locked: 1;
     fixed_decimals: 5;
