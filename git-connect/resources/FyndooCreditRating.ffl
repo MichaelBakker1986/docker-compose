@@ -22,7 +22,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeGoodWill
    {
-    title: "GoodWilll";
+    title: "GoodWill";
     displaytype: currency;
    }
    variable sdeReceivablesShareholders
