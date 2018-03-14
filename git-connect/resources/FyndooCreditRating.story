@@ -5,7 +5,7 @@ FyndooCreditRating Score Basic
 Scenario: Verify FyndooCreditRating Score calculations
 Given a document of the model type FyndooCreditRating
 
-Given a Context(URA) for year 2016
+Given a Context(URA) for year 2018
 When sdeGoodWill is set to 100
 
 And sdeEquity is set to 150
