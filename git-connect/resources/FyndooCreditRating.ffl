@@ -32,6 +32,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeDeferredTaxesAssets
    {
+    title: "Latente belasting vorderingen";
     displaytype: currency;
    }
    variable sdeEquity
