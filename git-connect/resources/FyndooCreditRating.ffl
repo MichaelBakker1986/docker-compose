@@ -892,7 +892,7 @@ model FyndooCreditRating uses BaseModel
     aggregation: average;
     displaytype: percentage;
     title: "$>Apriori-Insolvenzquote<$";
-    formula: If(ModelConfiguration=0,0.018, Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]) );
+    formula: If(ModelConfiguration=0,0.018, Case(ColumnHeader,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]) );
    }
    variable krZValue
    {
