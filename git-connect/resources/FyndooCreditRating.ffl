@@ -56,14 +56,17 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeProvisions
    {
+    title: "Voorzieningen";
     displaytype: currency;
    }
    variable sdeLiabilitiesLong
    {
+    title: "Lang vreemd vermogen";
     displaytype: currency;
    }
    variable sdeLiabilitiesBankLong
    {
+    title: "- Waarvan kredietinstellingen en obligatiehouders";
     displaytype: currency;
    }
    variable sdeLongTradePayables
