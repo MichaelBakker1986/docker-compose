@@ -25,6 +25,11 @@ model FyndooCreditRating uses BaseModel
     title: "Goodwill";
     displaytype: currency;
    }
+   variable RaboTest
+   {
+   title: "Rabo Tesvariabele"
+   displaytype: currency;
+   }
    variable sdeReceivablesShareholders
    {
     title: "Vorderingen op aandeelhouders, groepsmaatschappijen, enz.";
