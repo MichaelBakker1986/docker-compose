@@ -51,6 +51,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeVarCapLimitedPartners
    {
+    title: "- Waarvan nog uit te keren variabel kapitaal commanditaire vennoten";
     displaytype: currency;
    }
    variable sdeProvisions
