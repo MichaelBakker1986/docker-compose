@@ -17,12 +17,11 @@ model FyndooCreditRating uses BaseModel
    }
    variable ColumnHeader
    {
-    locked:1;
     formula: YearInT - 2;
    }
    variable sdeGoodWill
    {
-    title: "Goodwill";
+    title: "GoodWill";
     displaytype: currency;
    }
    variable RaboTest
