@@ -46,6 +46,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeResultForTheYear
    {
+    title: "- Waarvan nog uit te keren dividend";
     displaytype: currency;
    }
    variable sdeVarCapLimitedPartners
