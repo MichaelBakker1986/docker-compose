@@ -27,7 +27,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable RaboTest
    {
-   title: "Rabo Tesvariabele"
+   title: "Rabo Tesvariabele";
    displaytype: currency;
    }
    variable sdeReceivablesShareholders
