@@ -71,38 +71,47 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeLongTradePayables
    {
+    title: "- Waarvan handelscrediteuren";
     displaytype: currency;
    }
    variable sdeLongReceivedAdvanceOrdersCurrent
    {
+    title: "- Waarvan vooruitbetalingen";
     displaytype: currency;
    }
    variable sdeLiabilitiesToShareholdersOver5Y
    {
+    title: "- Waarvan aan aandeelhouders en groepsmaatschappijen langer dan 5 jaar";
     displaytype: currency;
    }
    variable sdeLiabilitiesShort
    {
+    title : "Kortlopende schulden";
     displaytype: currency;
    }
    variable sdeLiabilitiesBankShort
    {
+    title : "- Waarvan kredietinstellingen en obligatiehouders";
     displaytype: currency;
    }
    variable sdeTradePayables
    {
+    title: "- Waarvan handelscrediteuren";
     displaytype: currency;
    }
    variable sdeReceivedAdvanceOrdersCurrent
    {
+    title: "- Waarvan vooruitbetalingen";
     displaytype: currency;
    }
    variable sdeShortShareholderPayables
    {
+    title: "- Waarvan aan aandeelhouders, groepsmaatschappijen en investeerders";
     displaytype: currency;
    }
    variable sdeBalanceSheetTotal
    {
+    title: "Balanstotaal";
     displaytype: currency;
     formula: sdeEquity+sdeProvisions+sdeLiabilitiesLong+sdeLiabilitiesShort;
     display_options: displayAsSummation;
@@ -110,41 +119,49 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeSales
    {
+    title: "Omzet";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeDepreciation
    {
+    title: "Afschrijvingen op immateriële en materiële vaste activa";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeResultCorrections
    {
+    title: "Eenmalige baten / lasten";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeEBIT
    {
+    title: "Bedrijfsresultaat";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeInterestEarnings
    {
+    title : "Rentebaten";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeInterestExpenses
    {
+    title: "Rentelasten";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeParticipationEarnings
    {
+    title: "Resultaat uit deelnemingen";
     aggregation: flow;
     displaytype: currency;
    }
    variable sdeEntrepreneurFeeOutsideResult
    {
+    title: "Ondernemersbeloning voor zover buiten het resultaat";
     aggregation: flow;
     displaytype: currency;
    }
@@ -196,7 +213,7 @@ model FyndooCreditRating uses BaseModel
    variable R1_ShareOfOrdinaryResult refers to krAnteilOrdentlichenErgebnisses
    {
     displaytype: percentage;
-    title: "Share of ordinary result";
+    title: "Aandeel in het gewone resultaat";
     locked: 1;
     fixed_decimals: 2;
     variable R1_P1_OrdinaryResult refers to krOrdentlichesErgebnis
@@ -216,7 +233,7 @@ model FyndooCreditRating uses BaseModel
    variable R2_QuotaOfBankAndSuppliers refers to krBankUndLieferantenanteil
    {
     displaytype: percentage;
-    title: "Quota of bank and suppliers";
+    title: "Bank en leveranciersaandeel";
     locked: 1;
     fixed_decimals: 2;
     variable R2_P1_AmountsDueToBanksAndSuppliers refers to krBankUndLieferantenverbindlichkeiten
@@ -235,7 +252,7 @@ model FyndooCreditRating uses BaseModel
    variable R3_InterestRateOnBorrowings refers to krFremdKapitalzinslast
    {
     displaytype: percentage;
-    title: "Interest rate on borrowings";
+    title: "Rentevoet vreemd vermogen";
     locked: 1;
     fixed_decimals: 2;
     variable R3_P1_InteresExpenseExlcudingDiscountingOfProfisions refers to krZinsen
@@ -255,7 +272,7 @@ model FyndooCreditRating uses BaseModel
    variable R4_ShareOfShortTermLiabilities refers to krAnteilKurzfristigeVerbindlichkeiten
    {
     displaytype: percentage;
-    title: "Share of short-term liabilities";
+    title: "Kort vreemd vermogen / omzet";
     locked: 1;
     fixed_decimals: 2;
     variable R4_P1_ShortTermLiabilities refers to krKurzfristigeVerbindlichkeiten
@@ -275,7 +292,7 @@ model FyndooCreditRating uses BaseModel
    variable R5_ShareOfOwnResources refers to krAnteilEigenmittel
    {
     displaytype: percentage;
-    title: "Share of own resources";
+    title: "Solvabiliteit voor de rating";
     locked: 1;
     fixed_decimals: 2;
     variable R5_P1_RatingOrientatedBusinessEquity refers to krWirtschaftlichesEigenKapitalRating
