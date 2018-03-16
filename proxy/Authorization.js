@@ -43,6 +43,8 @@ const BerndFBId = '1893680553997744';
 const JamieFBId = '115734455923712';
 const BasNieveldFBId = '1631660686928794';
 const HildeFBId = '1551240648324836';
+const DeborahFacebookID = '1694508597275660';
+const RonaldFacebookID = '107330810108163';
 const FYNDOOCREDITRATING = 'FyndooCreditRating'
 const MVO = "MVO";
 const VIEW_RULE = 'view';
@@ -196,6 +198,8 @@ class Authorization {
         this.addModelPrivileges(MonliFacebookID, "KSP", true);
         this.addModelPrivileges(MichaelFaceBookID, MVO, true);
         this.addModelPrivileges(MichaelFaceBookID, "VASTGOED", true);
+        this.addModelPrivileges(DeborahFacebookID, "VASTGOED", true);
+        this.addModelPrivileges(RonaldFacebookID, "VASTGOED", true);
 
         this.addModelPrivileges(MichaelFaceBookID, 'V05', true);
         this.addModelPrivileges(MichaelFaceBookID, 'PRICING', true);
