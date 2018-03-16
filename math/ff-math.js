@@ -2,7 +2,6 @@ const logger = require('log6')
 const jsMath = require('./jsMath.json')
 const Solver = require('js-solver')
 const ema = require('exponential-moving-average');
-const regression = require('regression')
 const jStat = require('jStat').jStat;
 const entries = {};
 if (!global.MatrixLookup) {
@@ -21,66 +20,6 @@ if (!Array.prototype.stdev)
             return jStat.stdev(this, true)
         }
     });
-if (!Array.prototype.max)
-    Object.defineProperty(Array.prototype, 'max', {
-        enumerable: false,
-        value     : function() {
-            return Math.max.apply(null, this);
-        }
-    });
-if (!Array.prototype.sentiment)
-    Object.defineProperty(Array.prototype, 'sentiment', {
-        enumerable: false,
-        value     : function() {
-            const avg = this.reduce(function(a, b, i, arr) {
-                a[i] = arr[i] - arr[i - 1]
-                return a;
-            }, []).splice(1).avg()
-
-            return {
-                avg    : avg,
-                raising: avg > 0
-            }
-        }
-    });
-if (!Array.prototype.maxProfit)
-    Object.defineProperty(Array.prototype, 'maxProfit', {
-        enumerable: false,
-        value     : function() {
-            return this.reduce((current, b, i) => Math.max(current, b.distance(this.slice(i).max())));
-        }
-    });
-if (!Array.prototype.groupBy)
-    Object.defineProperty(Array.prototype, 'groupBy', {
-        enumerable: false,
-        value     : function(key) {
-            return this.reduce(function(rv, x) {
-                (rv[x[key]] = rv[x[key]] || []).push(x);
-                return rv;
-            }, {});
-        }
-    });
-if (!Array.prototype.linearPredict)
-    Object.defineProperty(Array.prototype, 'linearPredict', {
-        enumerable: false,
-        value     : function(ammount) {
-            const r = []
-            const predictor = this.linearPredictor();
-            for (var i = 0; i < ammount; i++) {
-                r.push(predictor(this.length + i))
-            }
-            return r;
-        }
-    });
-if (!Array.prototype.linearPredictor)
-    Object.defineProperty(Array.prototype, 'linearPredictor', {
-        enumerable: false,
-        value     : function() {
-            const linear = regression.linear(this.map((v, i) => [i, v]), { precision: 8 });
-            return (offset) => linear.predict(this.length + offset)[1];
-        }
-    });
-
 if (!Array.prototype.select)
     Object.defineProperty(Array.prototype, 'select', {
         enumerable: false,
@@ -95,8 +34,8 @@ if (!Array.prototype.select)
 if (!Array.prototype.ema)
     Object.defineProperty(Array.prototype, 'ema', {
         enumerable: false,
-        value     : function(opts) {
-            return ema(this, opts).last()
+        value     : function(length) {
+            return ema(this, length)
         }
     });
 if (!Array.prototype.avg)
@@ -113,30 +52,16 @@ if (!Array.prototype.sum)
             const nl = this.length;
             const n = this;
             var a = 0;
-            for (var j = nl - 1; j >= 0; j--) a = a + n[j];
+            for (var j = nl - 1; j > 0; j--) a = a + n[j];
             return a
         }
     });
-/*if (!Array.prototype.column)
-    Object.defineProperty(Array.prototype, 'column', {
-        enumerable: false,
-        value     : function(i) {
-            return this.map((el) => el[i])
-        }
-    });*/
 //distance between two numbers
 if (!Number.prototype.distance)
     Object.defineProperty(Number.prototype, 'distance', {
         enumerable: false,
         value     : function(other) {
             return (this > other) ? this - other : other - this;
-        }
-    });
-if (!Number.prototype.round)
-    Object.defineProperty(Number.prototype, 'round', {
-        enumerable: false,
-        value     : function(decimals) {
-            return Number((this).toFixed(decimals));
         }
     });
 if (!Array.prototype.first)

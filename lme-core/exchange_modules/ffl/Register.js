@@ -52,16 +52,10 @@ Register.prototype.addColumn = function(name) {
 Register.prototype.value = function(idx, key, value) {
     this.i[idx][this.schemaIndexes[key]] = value
 }
-Register.prototype.findStream = function(key, value, start) {
-    return this.find(key, value, this.mark)
-}
 Register.prototype.find = function(key, value, start) {
     const result = []
     for (var i = (start || 0); i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
     return result;
-}
-Register.prototype.distinct = function(schema, start) {
-    return this.distinctArr(this.i, schema, start || this.mark)
 }
 Register.prototype.distinctArr = function(arr, schema, start) {
     const result = []
