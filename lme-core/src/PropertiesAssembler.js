@@ -170,7 +170,7 @@ PropertiesAssembler.prototype.indexProperties = function(modelName) {
                 const nestedTupleDef = PropertiesModel[node.solutionName + "_" + tupleDef.tupleDefinitionName + "_value"]
                 if (nestedTupleDef.tupleProperty) {
                     const douleNestedTupleDef = PropertiesModel[node.solutionName + "_" + nestedTupleDef.tupleDefinitionName + "_value"]
-                    if (douleNestedTupleDef.tupleProperty) throw Error('only 3levels nested tuples are allowed')
+                    // if (douleNestedTupleDef.tupleProperty) throw Error('only 3levels nested tuples are allowed')
                     node.hash = [douleNestedTupleDef.id, '000', nestedTupleDef.id, '000', tupleDef.id, '000', node.id]
                 } else node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id]
             } else node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id]
