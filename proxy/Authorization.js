@@ -50,7 +50,7 @@ const MVO = "MVO";
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
 const GUEST_USER = 'guest';
-const anonymous = {}
+const anonymous = new Set()
 const log = require('log6')
 
 class Authorization {
@@ -117,7 +117,7 @@ class Authorization {
         ]
         for (var i = 0; i < anonymous_resources.length; i++) {
             var resource = anonymous_resources[i];
-            anonymous[resource] = true;
+            anonymous.add(resource);
         }
 
         //these resources require Authorization, but are valid with guest account.
@@ -166,6 +166,8 @@ class Authorization {
             var rule = rules[ruleNumer];
             this.allow(rule.id, rule.resource, rule.role)
         }
+        this.shareData('89c1d5f6-8512-41bf-ba96-8fa0b54a8a02');
+
         this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
 
         this.addModelPrivileges(RamonFBId, MVO, true);
@@ -233,7 +235,7 @@ class Authorization {
         this.allow(id, "/readExcel/" + modelname, VIEW_RULE)
         this.allow(id, "/publishDockerImage/" + modelname, VIEW_RULE)
         //allow generic rest-api outputnode  (same name as model_name)
-        anonymous['/figure/' + modelname] = true;
+        anonymous.add('/figure/' + modelname);
     }
 
     /**
@@ -242,6 +244,7 @@ class Authorization {
      *
      */
     addModelInstancePrivileges(id, instanceId) {
+        if (!instanceId) return this.shareData(id)
         if (instanceId.endsWith('.ffl')) {
             this.addModelPrivileges(id, instanceId.slice(0, -4))
         } else {
@@ -250,7 +253,8 @@ class Authorization {
     }
 
     shareData(id, instanceId) {
-        anonymous["/data/" + instanceId] = true
+        anonymous.add("/data/" + instanceId)
+        anonymous.add("/saveUserData/" + instanceId)
     }
 
     addDataPrivileges(id, instanceId) {

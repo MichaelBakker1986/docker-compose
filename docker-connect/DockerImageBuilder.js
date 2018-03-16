@@ -13,10 +13,9 @@
  # - excel-connect
  # nexus.topicusfinance.nl:8444
  **/
-
 //#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../devrun.js -i fsevents -i thread-sleep -i tweetnacl -i jsbn -i ecc-jsbn -i bcrypt-pbkdf -i ecc-jsbn/lib/ec
 //#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../lme-data-api/lme-data-app.js
-
+////npm publish --registry http://nexus.topicusfinance.nl:8444
 //const log = require('log6')
 //const exec = require('child-process-promise').exec;
 const params = process.env.MODEL || 'MVO'

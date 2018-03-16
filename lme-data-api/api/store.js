@@ -8,6 +8,12 @@ const log = require('log6')
 const dbConnectString = process.env.FIGURE_DB_STRING;// || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
 const Figure = require('./Figure');
 const MatrixStore = require('../MatrixStore').MatrixStore;
+const ModelLoader = require('../FinancialModelLoader');
+const LMEFacade = ModelLoader.LMEFacade
+require('../../lme-core/exchange_modules/jsonvalues/jsonvalues');
+const WorkBook = require("../../lme-core/src/JSWorkBook");
+const Context = require("../../lme-core/src/Context");
+
 module.exports.setup = function(app) {
     if (!dbConnectString) return;//early exit (no db)
     var ds = new MatrixStore();
@@ -19,10 +25,9 @@ module.exports.setup = function(app) {
         throw Error('Fail db initializeFFlModelData', err)
     });
 
-
     function fetchDatabaseFigures(promise, req, res) {
         //TODO: move logic to the matrixStore, not pairing with rest-api now
-        promise.then(function(dbData) {
+        return promise.then(function(dbData) {
             //TODO: use array.map....
             var values = {}
             for (var i = 0; i < dbData[0].length; i++) {
@@ -37,35 +42,54 @@ module.exports.setup = function(app) {
             for (var dbParentsIndex = 0; dbParentsIndex < dbData[1].length; dbParentsIndex++) {
                 var dbParentRow = dbData[1][dbParentsIndex];
                 parents.push({
-                    id: dbParentRow.uuid,
+                    id         : dbParentRow.uuid,
                     create_date: dbParentRow.create_time.getTime()
                 })
             }
-            res.json({
-                status: 'succes',
-                id: req.params.id,
+            return {
+                status : 'succes',
+                id     : req.params.id,
                 parents: parents,
-                values: values
-            })
+                values : values
+            }
         }).catch((err) => {
             if (log.DEBUG) log.warn('error while resolving figures:', err)
-            req.json({
-                id: req.params.id,
-                status: 'fail',
+            return {
+                id     : req.params.id,
+                status : 'fail',
                 message: err.toString(),
-                values: []
-            })
+                values : []
+            }
         })
     }
 
     app.get('*/scenario/:ids', function(req, res) {
-        fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res);
+        fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res).then(function(result) {
+            res.json(result)
+        });
     });
     app.get('*/id/:userId/data/:id', function(req, res) {
         if (req.params.id.indexOf(',') > -1) {
-            fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res);
+            fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res).then(function(result) {
+                res.json(result)
+            });
         } else {
-            fetchDatabaseFigures(new Figure.Figures().getFigures(req.params.id), req, res)
+            fetchDatabaseFigures(new Figure.Figures().getFigures(req.params.id), req, res).then(function(result) {
+
+                //TODO: Dive into back-end protected-formula
+                /* const wb = new WorkBook(new Context(), null, null, { modelName: 'FyndooCreditRating' })
+                 wb.importSolution(result.values, 'jsonvalues')
+                 wb.set('krZValue', wb.get('krZValue'))
+                 wb.set('krPD', wb.get('krPD'))
+                 const jsonValuesExport = wb.export('jsonvalues');
+                 for (var i = 0; i < jsonValuesExport.length; i++) {
+                     const exportValue = jsonValuesExport[i];
+                     result.values[exportValue.varName + '#' + exportValue.colId] = {
+                         value: exportValue.value
+                     }
+                 }*/
+                res.json(result)
+            });
         }
     });
     /**
@@ -87,19 +111,25 @@ module.exports.setup = function(app) {
         const dbData = []
         for (var i = 0; i < req.body.data.length; i++) {
             var entry = req.body.data[i]
+
+            // /TODO: Dive into back-end protected-formula
+            if (entry.varName == 'FYNDOOCREDITRATING_krPD' || entry.varName == 'FYNDOOCREDITRATING_krZValue') continue
+
             dbData.push([newChildId, entry.varName, entry.colId, entry.value])
         }
         new Figure.Figures().insertFigures(parentUuid, newChildId, dbData, now).then(function(data) {
             //tell the response a new hash should be added to the current user calling this method.
             res.set('x-auth-id', newChildId);
             res.json({
-                status: 'success',
+                status   : 'success',
                 saveToken: newChildId
+                //here we going to inject protected-calculated values
+                //  values   : LMEFacade.getObjectValues(new Context(), "FyndooCreditRating", undefined)
             })
         }).catch((err) => {
             if (log.DEBUG) log.warn('Error while inserting figures:', err)
             res.json({
-                status: 'fail',
+                status : 'fail',
                 message: err.toString()
             })
         })

@@ -1,6 +1,7 @@
-const assert = require('assert'), log = require('log6'),
-      Register                        = require('../exchange_modules/ffl/Register').Register,
-      ChangeManager                   = require('../exchange_modules/ffl/ChangeManager').ChangeManager
+const assert        = require('assert'),
+      log           = require('log6'),
+      Register      = require('../exchange_modules/ffl/Register').Register,
+      ChangeManager = require('../exchange_modules/ffl/ChangeManager').ChangeManager
 
 const register = new Register()
 register.addRow(['abc', 1, 10, 'testVar', null, 'modifier', 'parentId', 'tuple', 'SUPERVAR'])
