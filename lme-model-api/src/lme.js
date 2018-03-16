@@ -85,8 +85,9 @@ LmeAPI.prototype.importData = function(valueAsJSON) {
 LmeAPI.prototype.loadData = function(callBack, id) {
     var self = this;
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO&6'
     var params = window.location.href.split('#')[1].split('&')
+    var columnSize = parseInt(params.length > 2 ? (params[2] || '6') : '6')
     self.modelName = params[0] || DEFAULT_MODELNAME;
     var userID = (params[1] || 'DEMO')
 
@@ -100,7 +101,7 @@ LmeAPI.prototype.loadData = function(callBack, id) {
             var returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? userID : returnData.id;
             self.importData(returnData)
-            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
+            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken + "&" + columnSize
         }
     }
     http.onload = function() {
@@ -116,10 +117,11 @@ LmeAPI.prototype.persistData = function(callBack) {
     const self = this;
     //send data to server to store
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO'
+    if (params.length == 1) window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO&6'
     var params = window.location.href.split('#')[1].split('&')
     self.modelName = params[0] || DEFAULT_MODELNAME;
     var userID = params[1] || 'DEMO'
+    var columnSize = parseInt(params.length > 1 ? (params[2] || '6') : '6')
     self.lme.context.saveToken = userID;
     var http = new XMLHttpRequest();
     http.open("POST", 'saveUserData/' + self.lme.context.saveToken, true);
@@ -128,7 +130,7 @@ LmeAPI.prototype.persistData = function(callBack) {
         if (http.readyState == 4 && http.status == 200) {
             const returnData = JSON.parse(http.responseText);
             self.lme.context.saveToken = returnData.saveToken;
-            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken
+            window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken + '&' + columnSize
         }
     };
     http.onload = function() {

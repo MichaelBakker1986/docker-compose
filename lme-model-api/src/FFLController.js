@@ -199,7 +199,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 FFLController.prototype.updateFFLModel = function(model_name) {
     const self = this;
     Pace.track(function() {
-        window.location.href = "#" + model_name + "&" + self.user_session.user.name;
+        window.location.href = "#" + model_name + "&" + self.user_session.user.name + "&" + 6;
         var xhr = new XMLHttpRequest();
         xhr.addEventListener('progress', function(e) {
             self.fflEditor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...');

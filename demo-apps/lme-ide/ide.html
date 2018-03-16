@@ -47,6 +47,7 @@
                 </div>
                 <div class="col-xs-6" style="padding-top: 5px;">
                     <div class="input-group" ng-switch="currentView">
+                        <input id="column_size" ng-model="session.column_size" type="text" class="form-control" placeholder="6">
                         <span ng-switch-when="FFLModelEditorView" ng-if="breakpoints.length>0" class="input-group-btn">
                              <button type="button" ng-click="callDebug()" data-toggle="tooltip"
                                      title="Debug breakpoints" class="btn btn-info btn-flat bg-gray"><i
@@ -90,8 +91,10 @@
                     class="btn btn-info btn-flat"><i
                     class="fa fa-file-code-o"></i></button>
             </span>
-                        <input id="page" ng-model="session.page" type="text" class="form-control"
-                               placeholder="scorecard">
+                        <input id="page" ng-model="session.page" type="text" class="form-control" placeholder="scorecard">
+
+
+
                     </div>
                 </div>
                 <div class="col-xs-3">

@@ -1,11 +1,14 @@
 var modelName;
 var hash;
+var columnSize = 6
 
 function redefineParaments() {
     var params = window.location.href.split('#')
-    if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
+    if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO&6'
     var params = window.location.href.split('#')[1].split('&')
     modelName = params[0] || 'SCORECARDTESTMODEL';
+    columnSize = params.length > 2 ? parseInt(params[2] || '6') : 6;
+    columnSize = isNaN(columnSize) ? 6 : columnSize
     hash = params[1] || 'DEMO';
 }
 
@@ -44,6 +47,10 @@ angular
 
         $.getScript('resources/' + modelName + '.js', function(data, textStatus, jqxhr) {
             //after this we can import the user-data....
+
+            LMEMETA.lme.context.columnSize = columnSize;
+            LME = LMEMETA.exportWebModel()
+
             $scope.LME_MODEL = LME.rows
             $scope.timeviews = LMEMETA.getTimeViews()
             $scope.name = LME.name
@@ -54,7 +61,7 @@ angular
                 $scope.nav = []
                 $scope.search = {
                     title: 'No scorecard',
-                    hint: 'Nothing to question in ' + LME.name + '\n.Add a displaytype/display_options=scorecard'
+                    hint : 'Nothing to question in ' + LME.name + '\n.Add a displaytype/display_options=scorecard'
                 }
             } else {
                 $scope.nav = scorecard.children
@@ -70,10 +77,10 @@ angular
         $(window).bind('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {
-                    case 's':
-                        event.preventDefault();
-                        $scope.saveData();
-                        break;
+                case 's':
+                    event.preventDefault();
+                    $scope.saveData();
+                    break;
                 }
             }
         });
@@ -84,7 +91,7 @@ angular
             $http.get('shareData/' + hash).then(function(data) {
                 alert('data shared: ' + window.location.href)
             }).catch(function(err) {
-                console.error('Error while sharing data:',err)
+                console.error('Error while sharing data:', err)
             })
         }
         /*   $('#startYear').datepicker({
@@ -114,23 +121,23 @@ angular
                         continue;
                     }
                     timeline_items.push({
-                        enabled: true,
-                        type: 'event',
-                        ago: moment(parent.create_date).fromNow(),
+                        enabled   : true,
+                        type      : 'event',
+                        ago       : moment(parent.create_date).fromNow(),
                         eventclass: data.data.id == parent.id ? 'fa fa-file-text-o bg-gray' : 'fa fa-pencil-square-o bg-yellow',
-                        sha1: parent.id,
-                        data: parent,
-                        css: ''
+                        sha1      : parent.id,
+                        data      : parent,
+                        css       : ''
                     })
                 }
                 timeline_items.push({
-                    enabled: true,
-                    type: 'event',
-                    ago: moment(new Date().getTime()).fromNow(),
+                    enabled   : true,
+                    type      : 'event',
+                    ago       : moment(new Date().getTime()).fromNow(),
                     eventclass: 'fa fa-file-text-o bg-gray',
-                    sha1: hash,
-                    data: {},
-                    css: ''
+                    sha1      : hash,
+                    data      : {},
+                    css       : ''
                 })
                 if (timeline_items.length > 0) {
                     timeline_items[0].eventclass = 'fa fa-file-o bg-gray'

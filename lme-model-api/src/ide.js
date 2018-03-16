@@ -13,7 +13,7 @@ const DebugController = require('./DebugController')
 const LMEModelEngine = require('./lme.js')
 
 var params = window.location.href.split('#')
-if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO'
+if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO&6'
 var params = window.location.href.split('#')[1].split('&')
 
 const user_session = {
@@ -21,6 +21,7 @@ const user_session = {
     fflModelPath        : params[0] || 'SCORECARDTESTMODEL',
     page                : 'scorecard',
     fflModel            : '',
+    column_size         : 6,
     version             : '0.0.7',
     author              : "michael.bakker@topicus.nl",
     user                : {
@@ -156,7 +157,7 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.goToPreviewPage = function() {
             $scope.session.disablePreviewButton = true;
             $scope.downloadJsLink = null;
-            window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + user_session.user.name)
+            window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + user_session.user.name + "&" + user_session.column_size)
             $('#modal-success').modal('toggle');
         }
 
@@ -165,7 +166,7 @@ angular.module('lmeapp', ['angular.filter'])
                 $.post("preview/" + $scope.session.fflModelPath, {
                     data: fflEditor.getValue()
                 }, function(data) {
-                    window.open($scope.session.page + '.html#' + data.link + '&' + user_session.user.name);
+                    window.open($scope.session.page + '.html#' + data.link + '&' + user_session.user.name + "&" + user_session.column_size);
                 });
             });
         }
