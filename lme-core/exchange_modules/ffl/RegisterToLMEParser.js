@@ -59,7 +59,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
     const versionIndex = indexer.schemaIndexes.version;
     const dataTypeIndex = indexer.schemaIndexes.datatype;
     const rangeIndex = indexer.schemaIndexes.range;
-    const protectedIndex = indexer.schemaIndexes.protected;
+    const ipprotectedIndex = indexer.schemaIndexes.ipprotected;
     const modifierIndex = indexer.schemaIndexes.modifier;
     const decimalsIndex = indexer.schemaIndexes.fixed_decimals;
     const parentNameIndex = indexer.schemaIndexes.parentId;
@@ -97,7 +97,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
         var display_options = node[displayOptionsIndex]
         const title = node[titleIndex] || "\"" + nodeName + "\""
         const data_options = node[dataOptionsIndex]
-        const protected = node[protectedIndex] || false
+        const ipprotected = node[ipprotectedIndex] || false
         //TODO: paragraph when no children.
         //TODO: else column frequency..
         /*
@@ -191,7 +191,7 @@ RegisterToLMEParser.prototype.parseData = function(data, workbook) {
             if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")'
         }
 
-        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId, protected);
+        const uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId, ipprotected);
 
         //hierarchical visibility
         const visibleFormula = node[fflRegister.visibleIndex];

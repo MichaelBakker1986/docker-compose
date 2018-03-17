@@ -46,5 +46,21 @@
     "uuid4": "^1.0.0",
     "xhr2": "^0.1.4",
     "xmlhttprequest": "^1.8.0"
+  },
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
+  "presets": [
+    "env"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0"
   }
 }

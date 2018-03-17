@@ -2,8 +2,9 @@
  * Convert Model into front-end distrobution
  * node exportLME_FFL {modelName}
  */
-const browser = require('browserify');
-const fs = require('fs')
+const browser  = require('browserify'),
+      fs       = require('fs'),
+      babelify = require('babelify')
 const name = process.argv[2];
 const fileType = '.ffl';
 const lmeAPI = require('./lme')
@@ -40,9 +41,12 @@ ExcelLookup.loadExcelFile(xlsxname).then(function(matrix) {
         insertGlobals   : true,
         debug           : false
     };
-    let b = browser(options).ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
+    let b = browser(options)
+        .ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
     b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js');
     b.add(__dirname + '/lmeAPIWrapper.js');
+
+    b.transform(babelify, { presets: ["env"] })
     b.transform(require('browserify-fastjson'));
     var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/' + name + '.js')
     b.bundle().pipe(res);

@@ -5,7 +5,7 @@ const ema = require('exponential-moving-average');
 const jStat = require('jStat').jStat;
 const entries = {};
 if (!global.MatrixLookup) {
-    MatrixLookup = function() {
+    global.MatrixLookup = function() {
         return 1;
     }
 }
@@ -101,20 +101,20 @@ function initJSMath(jsMath) {
 }
 
 //TODO: add these functions as internal functions
-SOLVER = function(args) {
+global.SOLVER = function(args) {
     return new Solver(args || arguments)
 }
-AMMOUNT = function() {
+global.AMMOUNT = function() {
     var total = 0;
     for (var key in arguments) {
         if (arguments[key]) total++
     }
     return total;
 }
-OnNAIfNumber = function(v, nav) {
+global.OnNAIfNumber = function(v, nav) {
     return isNaN(v) ? v : OnNA(v, nav)
 }
-OnNA = function(v, nav) {
+global.OnNA = function(v, nav) {
     return (v == null || isNaN(v) || (v != 0 && v != -0 && v < this.n && v > this.ng)) ? nav : v;
 }.bind({
     n : 1e-100 * 1000,
@@ -134,7 +134,7 @@ function closestLowerNum(num, arr) {
     return arr[lo];//change to hi to get the nearest
 }
 
-MatrixLookDown = function(table, row, col) {
+global.MatrixLookDown = function(table, row, col) {
     var rv = NA;
     if (table.xasValues && table.xasValues[row] && table.xasValues[row][col] !== undefined) {
         rv = table.xasValues[row][col];
@@ -144,7 +144,7 @@ MatrixLookDown = function(table, row, col) {
     }
     return rv;
 }
-MatrixLookup = function(xlsfileName, tableName, row, col) {
+global.MatrixLookup = function(xlsfileName, tableName, row, col) {
     if (!MATRIX_VALUES) return NA
     const table = MATRIX_VALUES[tableName];
     var rv = NA;
@@ -152,14 +152,14 @@ MatrixLookup = function(xlsfileName, tableName, row, col) {
     return rv;
 }
 
-FILLEDIN = function(required, entered) {
+global.FILLEDIN = function(required, entered) {
     return true;
 }
-YearInT = function(v, x) {
+global.YearInT = function(v, x) {
     return v.absolute_start_year + x.bkyr.index
 }
 //should be:  arguments => { name: $1, y: $2 }
-PIECHART = function(points) {
+global.PIECHART = function(points) {
     var result = [];
     for (var i = 0; i < arguments.length; i++) {
         var points = arguments[i];
@@ -173,7 +173,7 @@ PIECHART = function(points) {
     }
     return result;
 }
-HSUM = function(values, start, end) {
+global.HSUM = function(values, start, end) {
     var returnValue = 0;
     if (start.hash) start = start.hash
     if (end.hash) end = end.hash
@@ -182,7 +182,7 @@ HSUM = function(values, start, end) {
     }
     return returnValue;
 }
-HVALUES = function(values, start, end) {
+global.HVALUES = function(values, start, end) {
     var returnValue = [];
     if (start.hash) start = start.hash
     if (end.hash) end = end.hash
@@ -191,7 +191,7 @@ HVALUES = function(values, start, end) {
     }
     return returnValue;
 }
-VALUES = function(func, fId, x, y, z, v, m) {
+global.VALUES = function(func, fId, x, y, z, v, m) {
     var result = []
     for (var i = 0; i < x.aggcols.length; i++) {
         if (!x.aggcols[i].aggregated)//TODO: aggregation is serveral levels
@@ -200,17 +200,17 @@ VALUES = function(func, fId, x, y, z, v, m) {
     return result;
 }
 /*f=Self for now..*/
-Aggregate = function(f, x) {
+global.Aggregate = function(f, x) {
     return f;
 }
-GetValue = function(variable_value, x, y, z, v, am) {
+global.GetValue = function(variable_value, x, y, z, v, am) {
     return variable_value;
 }
 //'^[0-9]+$'
-REGEXPMATCH = function(pattern, value) {
+global.REGEXPMATCH = function(pattern, value) {
     return new RegExp(pattern).test(value) ? true : false;
 }
-ValueT = function(one) {
+global.ValueT = function(one) {
     var retrunValue = 0;
     while (one && !one.dummy) {
         retrunValue++;

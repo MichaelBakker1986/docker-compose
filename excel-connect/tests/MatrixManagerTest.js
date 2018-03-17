@@ -4,7 +4,7 @@ const excelPlugin = require('../excel-connect');
 require('../../math');
 LMEFacade.addFunctions(excelPlugin);
 const MatrixManager = require('../MatrixManager')
-excelPlugin.initComplete(null, __dirname + '/TestExcelFile.xlsx').then(function(matrix) {
+excelPlugin.loadExcelFile(null, __dirname + '/TestExcelFile.xlsx').then(function(matrix) {
     const matrixManager = new MatrixManager();
     matrixManager.setMatrices(matrix)
     if (log.DEBUG) log.info(matrixManager.toFatrix())

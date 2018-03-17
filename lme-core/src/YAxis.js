@@ -60,7 +60,6 @@ const THIRD__TUPLE_START_BIT = FIRST__TUPLE_START_BIT + (2 * BITS_PER_TUPLE);
 const FIRST__LEVEL_TUPLE = 1 << FIRST__TUPLE_START_BIT;
 const SECOND_LEVEL_TUPLE = 1 << SECOND_TUPLE_START_BIT;
 const THIRD__LEVEL_TUPLE = 1 << THIRD__TUPLE_START_BIT;
-
 /*
  * These bitmasks are used to extract the bits for a given n-Tuple (0011***)
  * e.g.
@@ -153,19 +152,19 @@ function pad(n, width, z) {
 }
 
 const start = {
-    bitmask: FIRST__LEVEL_BITMASK,
+    bitmask  : FIRST__LEVEL_BITMASK,
     start_bit: FIRST__TUPLE_START_BIT,
-    hash: 0,
-    bin: (matchings[0][0][0]).toString(2),
-    f: parseInt('11111111111110000000000000000', 2),
-    f_bin: '111111111111110000000000000000',
-    m: parseInt('0000000000000000000000000000000000', 2),
-    m_bin: '0000000000000000000000000000000000',
-    index: 0,
-    uihash: pad(0, 3),
-    display: '0000',
-    depth: 0,
-    deeper: []
+    hash     : 0,
+    bin      : (matchings[0][0][0]).toString(2),
+    f        : parseInt('11111111111110000000000000000', 2),
+    f_bin    : '111111111111110000000000000000',
+    m        : parseInt('0000000000000000000000000000000000', 2),
+    m_bin    : '0000000000000000000000000000000000',
+    index    : 0,
+    uihash   : pad(0, 3),
+    display  : '0000',
+    depth    : 0,
+    deeper   : []
 }
 start.base = start;
 //p is the Jump from Tuple to Tuple
@@ -173,19 +172,19 @@ start.p = [start, start, start];
 
 for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
     start.deeper[first] = {
-        bitmask: SECOND_LEVEL_BITMASK,
+        bitmask  : SECOND_LEVEL_BITMASK,
         start_bit: SECOND_TUPLE_START_BIT,
-        f: parseInt('11111110000001111110000000000', 2),
-        m: parseInt('0000000000000000000000000000000000', 2) + parseInt('00000000000000000000000010000000000', 2) * first,
-        bin: (matchings[first][0][0]).toString(2).substring(0, (matchings[first][0][0]).toString(2).length - 10),
-        display: first + '000',
-        base: start,
-        depth: 1,
-        index: first,
-        uihash: pad(first, 3),
-        hash: (FIRST__LEVEL_TUPLE * first),
-        deeper: [],
-        parent: start
+        f        : parseInt('11111110000001111110000000000', 2),
+        m        : parseInt('0000000000000000000000000000000000', 2) + parseInt('00000000000000000000000010000000000', 2) * first,
+        bin      : (matchings[first][0][0]).toString(2).substring(0, (matchings[first][0][0]).toString(2).length - 10),
+        display  : first + '000',
+        base     : start,
+        depth    : 1,
+        index    : first,
+        uihash   : pad(first, 3),
+        hash     : (FIRST__LEVEL_TUPLE * first),
+        deeper   : [],
+        parent   : start
     }
     //p is the Jump from Tuple to Tuple
     start.deeper[first].p = [start, start.deeper[first], start.deeper[first], start.deeper[first]];
@@ -194,19 +193,19 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
 
     for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
         start.deeper[first].deeper[second] = {
-            base: start,
-            f: (parseInt('0000001111111111110000000000', 2)),
-            m: (parseInt('0000000000010000000000000000', 2) * second) + (parseInt('0000000000000000000010000000000', 2) * first),
-            bin: (matchings[first][second][0]).toString(2),
-            bitmask: THIRD__LEVEL_BITMASK,
-            display: first + '' + second + '00',
+            base     : start,
+            f        : (parseInt('0000001111111111110000000000', 2)),
+            m        : (parseInt('0000000000010000000000000000', 2) * second) + (parseInt('0000000000000000000010000000000', 2) * first),
+            bin      : (matchings[first][second][0]).toString(2),
+            bitmask  : THIRD__LEVEL_BITMASK,
+            display  : first + '' + second + '00',
             start_bit: THIRD__TUPLE_START_BIT,
-            index: second,
-            uihash: pad(second, 3),
-            depth: 2,
-            hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second),
-            deeper: [],
-            parent: start.deeper[first]
+            index    : second,
+            uihash   : pad(second, 3),
+            depth    : 2,
+            hash     : (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second),
+            deeper   : [],
+            parent   : start.deeper[first]
         }
         //p is the Jump from Tuple to Tuple
         start.deeper[first].deeper[second].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second]];
@@ -216,19 +215,19 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
         //this level is only used to set values, not to resolve them,
         for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
             start.deeper[first].deeper[second].deeper[third] = {
-                base: start,
+                base     : start,
                 /* f: (parseInt('0001111111111111111110000000000', 2)),*/
                 /*  m: (parseInt('00000000000000000010000000000000000', 2) * second) + (parseInt('00000000000000000000000010000000000', 2) * first),
                bin: (matchings[first][second][third]).toString(2),*/
-                bitmask: FOURTH_LEVEL_BITMASK,
-                display: first + '' + second + '' + third + '0',
+                bitmask  : FOURTH_LEVEL_BITMASK,
+                display  : first + '' + second + '' + third + '0',
                 start_bit: THIRD__TUPLE_START_BIT,
-                index: third,
-                depth: 3,
-                uihash: pad(third, 3),
-                hash: (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second) + (THIRD__LEVEL_TUPLE * third),
-                deeper: [],
-                parent: start.deeper[first].deeper[second]
+                index    : third,
+                depth    : 3,
+                uihash   : pad(third, 3),
+                hash     : (first * FIRST__LEVEL_TUPLE) + (SECOND_LEVEL_TUPLE * second) + (THIRD__LEVEL_TUPLE * third),
+                deeper   : [],
+                parent   : start.deeper[first].deeper[second]
             }
             //p is the Jump from Tuple to Tuple
             start.deeper[first].deeper[second].deeper[third].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second].deeper[third]];
@@ -245,7 +244,7 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
  * It would be nice to use the null-tuple(0instance) T(0,{*,}) as base
  * Since else we could only query 0,..* in this method.
  */
-TVALUES = function(fIds, func, fId, x, y, z, v, m) {
+global.TVALUES = function(fIds, func, fId, x, y, z, v, m) {
     var current = y, returnValue = [];
     var tinstancecount = TINSTANCECOUNT(fIds, v, y);
     for (var i = 0; i <= tinstancecount; i++) {
@@ -261,10 +260,10 @@ TVALUES = function(fIds, func, fId, x, y, z, v, m) {
 /**
  * TINSTANCECOUNT is 0 based. TCOUNT is the friendly 1based version
  */
-TCOUNT = function(fIds, func, fId, x, y, z, v) {
+global.TCOUNT = function(fIds, func, fId, x, y, z, v) {
     return TINSTANCECOUNT(fIds, v, y) + 1;
 }
-REVERSEYAXIS = function(index, y) {
+global.REVERSEYAXIS = function(index, y) {
     return (y.bitmask & index) >> y.start_bit
 }
 
@@ -277,7 +276,7 @@ function indexToArray(index, y) {
 //return tuplecount, get max tuple index given a (y) context.
 //Conceptually, if a value exists in a given range. There is an Tuple-Instance
 //Nested tuples start hash 0,0,0  So there is a Tuple instance on start three dimensions when a value is entered in the deepest level.
-TINSTANCECOUNT = function(fIds, v, y) {
+global.TINSTANCECOUNT = function(fIds, v, y) {
     var max = -1;
     //consider transforming into a bin-tree
     //Since the dimensions are Infinite, indexing becomes complex.
@@ -354,27 +353,27 @@ TINSTANCECOUNT = function(fIds, v, y) {
  */
 //er is geen wens om 1*1 te testen, er word nooit gevraagd van hoeveeel tuples bijvoorbeeld 3tuples hebben.
 const combine = [{
-    reg: '000**', match: '00000', filter: '11100',
-    fit: ['00010', '00011', '00001', '00000'],
+    reg  : '000**', match: '00000', filter: '11100',
+    fit  : ['00010', '00011', '00001', '00000'],
     nofit: ['00110', '01110', '11110', '10110', '10010']
 }, {
-    reg: '001**', match: '00100', filter: '11100',
-    fit: ['00110', '00111'],
+    reg  : '001**', match: '00100', filter: '11100',
+    fit  : ['00110', '00111'],
     nofit: ['00010', '01010', '11010', '11110']
 }, {
     reg: '011**', match: '01100', filter: '11100',
     fit: ['01100', '01101'], nofit: ['10100', '11100', '00100', '11000']
 }, {
-    reg: '010**', match: '01000', filter: '11100',
-    fit: ['01010'],
+    reg  : '010**', match: '01000', filter: '11100',
+    fit  : ['01010'],
     nofit: ['00010', '00000']
 }, {
-    reg: '11***', match: '11000', filter: '11000',
-    fit: ['11000', '11100'],
+    reg  : '11***', match: '11000', filter: '11000',
+    fit  : ['11000', '11100'],
     nofit: ['01100', '00000', '01100']
 }, {//the first check, how many instances on root?
-    reg: '00***', match: '00000', filter: '11000',
-    fit: ['00000', '00001'],
+    reg  : '00***', match: '00000', filter: '11000',
+    fit  : ['00000', '00001'],
     nofit: ['01100', '10000', '01100']
 }, {
     reg: '01***', match: '01000', filter: '11000',

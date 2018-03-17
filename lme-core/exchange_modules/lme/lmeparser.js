@@ -28,8 +28,8 @@ function FormulaInfo(dataArg, schema, modelName) {
         const name = correctFileName(formula.name);
         if (names[name] === undefined) {
             names[name] = true;
-            if (formula.protected) {
-                log.info('formula is protected' + JSON.stringify(formula))
+            if (formula.ipprotected) {
+                log.info('formula is ipprotected' + JSON.stringify(formula))
                 data.push([name, (forms[modelNamePrefix + name + '_title'] || { original: null }).original, null, null, null, null, null, null, null, null])
             } else {
                 const title = forms[modelNamePrefix + name + '_title'] || { original: null };
@@ -72,7 +72,7 @@ FormulaInfo.prototype.setSchema = function(schema) {
 }
 FormulaInfo.prototype.addFormula = function(formula) {
     formula.fflname = variableName(formula.name)
-    if (!formula.protected)
+    if (!formula.ipprotected)
         this.formulas.push(formula);
     else {
         this.formulas.push(JSON.parse(JSON.stringify(formula, function(k, v) {

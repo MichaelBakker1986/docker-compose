@@ -70,13 +70,13 @@ SolutionFacade.prototype.createFormulaAndStructure = function(solutionName, form
 /**
  * Called by parsers
  */
-SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency, self_body, parent_id, protected) {
+SolutionFacade.prototype.createUIFormulaLink = function(solution, rowId, colId, body, displaytype, frequency, self_body, parent_id, ipprotected) {
     //by default only value properties can be user entered
     //in simple (LOCKED = (colId !== 'value'))
     const property = PropertiesAssembler.getOrCreateProperty(solution.name, rowId, colId);
     if (rowId !== 'root' && colId == 'value') property.parentName = parent_id ? parent_id + '_value' : 'root_value';
     if (displaytype) property.displaytype = displaytype;
-    const formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency, self_body, protected);
+    const formulaId = FormulaService.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) == -1, body, frequency, self_body, ipprotected);
     solution.createNode(formulaId, displaytype, property);
     return property
 };
