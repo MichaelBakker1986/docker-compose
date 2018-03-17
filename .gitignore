@@ -15,3 +15,4 @@ git-connect/resources/_tmp_*
 git-connect/CODELISTS/**.pom
 git-connect/CODELISTS/*.pom
 git-connect/CODELISTS/*
+git-connect/resources/Trader.ffl
