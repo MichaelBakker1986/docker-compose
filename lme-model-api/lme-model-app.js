@@ -9,6 +9,7 @@ const express = require('express');
 const app = express();
 const log = require('log6')
 const browserify = require('browserify-middleware');
+const babelify = require('babelify')
 app.use(require('express-favicon')());
 const bodyParser = require('body-parser')
 const expressStaticGzip = require("express-static-gzip");
@@ -31,7 +32,11 @@ const fileUpload = require('express-fileupload');
 const DockerImageBuilder = require('../docker-connect/DockerImageBuilder')
 const fs = require('fs')
 browserify.settings({
-    transform: [require('browserify-fastjson')]
+
+    transform: [
+        require('browserify-fastjson'),
+        [babelify, { presets: ['env'] }]
+    ]
 })
 app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
     cache        : true,

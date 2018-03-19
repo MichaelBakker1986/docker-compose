@@ -12,7 +12,7 @@ function AceEditor(id, opts) {
     this.halfHeight = false;
     if (opts.halfHeight) this.halfHeight = opts.halfHeight;
     const aceEditor = ace.edit(id);
-    edit = aceEditor;//quick response front-end
+    global.edit = aceEditor;//quick response front-end
     const langTools = ace.require("ace/ext/language_tools");
     this.langTools = langTools;
     const FFLMode = ace.require("ace/mode/ffl").Mode
@@ -27,20 +27,13 @@ function AceEditor(id, opts) {
         enableSnippets           : true,
         showFoldWidgets          : true
     });
-    /*
-        var snippetManager = ace.require("ace/snippets").snippetManager;
-        snippetManager.insertSnippet(aceEditor, "test124");*/
     aceEditor.setAutoScrollEditorIntoView(true);
-    aceEditor.setOption("maxLines", 60);
     aceEditor.$blockScrolling = Infinity
-    aceEditor.resize(true)
-    const maxLines = (this.halfHeight ? 0.5 : 1) * (41 + (($(window).height() - 730) / 17));
-    $(window).resize(function() {
-        aceEditor.setOption("maxLines", maxLines);
-        aceEditor.resize()
-    });
-    aceEditor.setOption("maxLines", maxLines);
+
+    aceEditor.setOption("minLines", 1);
+    aceEditor.setOption("maxLines", 1);
     aceEditor.resize()
+    aceEditor.resize(true)
 
     this.aceEditor = aceEditor;
     const wordMap = [
@@ -68,6 +61,46 @@ function AceEditor(id, opts) {
     })
 }
 
+AceEditor.prototype.initResize = function() {
+
+    const editor = this.aceEditor;
+    const split_vertically = this.halfHeight
+    var heightUpdateFunction = function() {
+
+        // http://stackoverflow.com/questions/11584061/
+        var newHeight =
+                editor.getSession().getScreenLength()
+                * editor.renderer.lineHeight
+                + editor.renderer.scrollBar.getWidth();
+        const editor_height = $('.content-wrapper').height() - (split_vertically ? 20 : 10);
+        const lines = (editor_height - editor.renderer.scrollBar.getWidth()) / editor.renderer.lineHeight;
+        editor.setOption("maxLines", (Math.max(lines, 2) / (split_vertically ? 2.0 : 1.0)))
+        editor.setOption("minLines", Math.max(lines, 1) / ((split_vertically ? 2.0 : 1.0) / 2.0))
+        editor.resize();
+    };
+    // Set initial size to match initial content
+    heightUpdateFunction();
+
+    // Whenever a change happens inside the ACE editor, update
+    // the size again
+    editor.getSession().on('change', heightUpdateFunction);
+
+    $(window).resize(function() {
+        $(window).trigger('zoom');
+    });
+    $(window).on('zoom', function() {
+        console.log('zoom', window.devicePixelRatio);
+        heightUpdateFunction()
+    });
+    let resizeTO;
+    $(window).resize(function() {
+        if (resizeTO) clearTimeout(resizeTO);
+        resizeTO = setTimeout(function() {
+            $(this).trigger('resizeEnd');
+        }, 200);
+    });
+    $(window).bind('resizeEnd', heightUpdateFunction);
+}
 AceEditor.prototype.getCursor = function() {
     return this.aceEditor.selection.getCursor();
 }

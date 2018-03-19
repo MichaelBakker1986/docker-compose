@@ -9,8 +9,6 @@ var walk = require('esprima-walk')
 var n = require("ast-types").namedTypes;
 //some case-bugfixes
 PRICINGffl = PRICINGffl.replace(/amount/gmi, 'Amount')
-PRICINGffl = PRICINGffl.replace(/MatrixLookup\("AAB_Parameters\.xls",/gmi, "MatrixLookup(")
-PRICINGffl = PRICINGffl.replace(/MatrixLookup\("AAB_Parameters_ELMultiplier\.xls",/gmi, "MatrixLookup(")
 
 LME.importFFL(PRICINGffl);
 

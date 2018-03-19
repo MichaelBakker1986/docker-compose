@@ -3,7 +3,6 @@ require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
 const Register = require('../../lme-core/exchange_modules/ffl/Register').Register
-const DebugManager = require('../../lme-core/exchange_modules/ffl/DebugManager').DebugManager
 const ChangeManager = require('../../lme-core/exchange_modules/ffl/ChangeManager').ChangeManager
 const JBehaveController = require('./JBehaveController')
 const MatrixManager = require('../../excel-connect/MatrixManager')
@@ -11,7 +10,6 @@ const MatrixController = require('./MatrixController')
 const FFLController = require('./FFLController')
 const DebugController = require('./DebugController')
 const LMEModelEngine = require('./lme.js')
-
 var params = window.location.href.split('#')
 if (params.length == 1) window.location.href = '#SCORECARDTESTMODEL&DEMO&6'
 var params = window.location.href.split('#')[1].split('&')
@@ -83,8 +81,6 @@ angular.module('lmeapp', ['angular.filter'])
             })
         }
         const register = new Register();
-        const debugManager = new DebugManager();
-        DEBUGGER = debugManager
         $scope.register = register;
 
         const right_editor = new AceEditor("right_editor", { halfHeight: true });
@@ -95,12 +91,14 @@ angular.module('lmeapp', ['angular.filter'])
         $scope.fflType = '.ffl'
         var currentIndexer = new RegisterToFFL(register, { schema: [], nodes: [] });//current modelindexer
         const fflEditor = new AceEditor("editor");
+        fflEditor.initResize()
         const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
         const workbook = modelEngine.lme;
         right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register, workbook)
+        right_editor.initResize()
         fflEditor.registerEditorToClickNames(fflEditor, fflEditor, user_session, register, workbook)
         matrixController.registerEditorToClickNames(fflEditor, user_session, register, workbook)
-
+        matrixController.matrix_editor.initResize()
         $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
             console.warn('error while getting [' + settings.url + ']', thrownError)
         });
@@ -180,9 +178,6 @@ angular.module('lmeapp', ['angular.filter'])
                     window.open('data-docs/?url=%2Fdata-api-docs#!/default/' + $scope.session.fflModelPath);
                 });
             });
-        }
-        global.debug = function(name) {
-            debugManager.addStep(name)
         }
 
         $scope.hasChanges = false;
@@ -331,10 +326,6 @@ angular.module('lmeapp', ['angular.filter'])
         });
         window.addEventListener("keydown", function(e) {
             if (e.ctrlKey && e.shiftKey) return;
-            else if (e.key == 'F5' && debugManager.active) {
-                doStep()
-                e.preventDefault();
-            }
             if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
                 e.preventDefault();
                 fflEditor.aceEditor.execCommand("find")

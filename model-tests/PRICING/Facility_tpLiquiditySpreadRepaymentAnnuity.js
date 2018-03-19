@@ -40,7 +40,6 @@ f = f.replace(/,&/gmi, ',')
 /**
  * Example simple optimization, 8rows win. for one extra function
  */
-f = f.replace(/MatrixLookup\("AAB_Parameters\.xls"\,/gmi, 'MatrixLookup(')
 /**
  * Example simple variable extraction
  */

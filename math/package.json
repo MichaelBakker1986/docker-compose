@@ -9,7 +9,8 @@
     "exponential-moving-average": "^1.0.0",
     "jStat": "^1.7.1",
     "js-solver": "0.0.2",
-    "log6": "^1.0.26"
+    "log6": "^1.0.26",
+    "regression": "^2.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -25,12 +25,9 @@ app.use(require('cors')())
 app.use(require('cookie-parser')());
 app.use(require('express-session')({secret: 'elm a1tm', resave: true, saveUninitialized: true}));
 const idProvider = new Authentication(app);
-app.get('/fail', (req, res) => {
-    res.status(401).send('Unauthorized facebook user');
-});
-app.get('/whoami', (req, res) => {
-    res.status(200).send(req.isAuthenticated() ? (req.user.displayName + ',' + req.user.id) : 'guest')
-})
+
+app.get('/fail', (req, res) => res.status(401).send('Unauthorized facebook user'));
+app.get('/whoami', (req, res) => res.status(200).send(req.isAuthenticated() ? (req.user.displayName + ',' + req.user.id) : 'guest'))
 /**
  * proxy every request
  */
@@ -78,6 +75,4 @@ proxy.on('proxyRes', (res) => {
     if (res.headers['x-share-id']) auth.shareData(res.req.path.split('/')[2], res.headers['x-share-id'])
 });
 
-app.listen(exposed_authentication_port, () => {
-    log.info('<a href="http://' + domain + '/">AUTH Server</a><span> deployed.</span>');
-});
+app.listen(exposed_authentication_port, () => log.info('<a href="http://' + domain + '/">AUTH Server</a><span> deployed.</span>'));
