@@ -16354,5 +16354,7036 @@ model VASTGOED uses BaseModel
     }
    }
   }
+  variable presentatie
+  {
+   variable P_ObjectGeneralInformationTitle refers to ObjectGeneralInformationTitle
+   {
+
+   }
+   variable P_ObjectInformation refers to ObjectInformation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ActualUse refers to ActualUse
+   {
+
+   }
+   variable P_LeasedOrUsedByOwner refers to LeasedOrUsedByOwner
+   {
+
+   }
+   variable P_ConstructionYear refers to ConstructionYear
+   {
+
+   }
+   variable P_RenovationYear refers to RenovationYear
+   {
+
+   }
+   variable P_DaysToNextBreak refers to DaysToNextBreak
+   {
+
+   }
+   variable P_AreaForLease refers to AreaForLease
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterComments refers to LandRegisterComments
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_ObjectInformationReference refers to ObjectInformationReference
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ObjectReferenceAllocatedBy refers to ObjectReferenceAllocatedBy
+   {
+
+   }
+   variable P_ObjectReferenceAllocatedByDescription refers to ObjectReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_ObjectReferenceDescription refers to ObjectReferenceDescription
+   {
+
+   }
+   variable P_ObjectTyping refers to ObjectTyping
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TypingDescription refers to TypingDescription
+   {
+
+   }
+   variable P_IPDtype refers to IPDtype
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_ObjectAddress refers to ObjectAddress
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_DescriptionLocationNL refers to DescriptionLocationNL
+   {
+
+   }
+   variable P_StreetNameNL refers to StreetNameNL
+   {
+
+   }
+   variable P_HouseNumberNL refers to HouseNumberNL
+   {
+
+   }
+   variable P_HouseNumberAddition refers to HouseNumberAddition
+   {
+
+   }
+   variable P_PlaceOfResidenceNL refers to PlaceOfResidenceNL
+   {
+
+   }
+   variable P_Borough refers to Borough
+   {
+
+   }
+   variable P_PostalCodeNL refers to PostalCodeNL
+   {
+
+   }
+   variable P_Municipality refers to Municipality
+   {
+
+   }
+   variable P_NameRegion refers to NameRegion
+   {
+
+   }
+   variable P_BAGPandID refers to BAGPandID
+   {
+
+   }
+   variable P_BAGVBOID refers to BAGVBOID
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_ObjectEnvironmentalPollution refers to ObjectEnvironmentalPollution
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_GroundPollution refers to GroundPollution
+   {
+
+   }
+   variable P_ObjectPollution refers to ObjectPollution
+   {
+
+   }
+   variable P_RemovalPollutionCost refers to RemovalPollutionCost
+   {
+
+   }
+   variable P_SoundPollution refers to SoundPollution
+   {
+
+   }
+   variable P_AirPollution refers to AirPollution
+   {
+
+   }
+   variable P_ObjectEnvironmentalAssesment refers to ObjectEnvironmentalAssesment
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_EPCScore refers to EPCScore
+   {
+
+   }
+   variable P_EnergyLabel refers to EnergyLabel
+   {
+
+   }
+   variable P_BREAAMlabel refers to BREAAMlabel
+   {
+
+   }
+   variable P_ObjectInformationTitle refers to ObjectInformationTitle
+   {
+
+   }
+   variable P_ObjectLegalInformationTitle refers to ObjectLegalInformationTitle
+   {
+
+   }
+   variable P_ObjectLegalInformation refers to ObjectLegalInformation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_RightOfResidence refers to RightOfResidence
+   {
+
+   }
+   variable P_NationalMonument refers to NationalMonument
+   {
+
+   }
+   variable P_ProvinceMonument refers to ProvinceMonument
+   {
+
+   }
+   variable P_CountyMonument refers to CountyMonument
+   {
+
+   }
+   variable P_ProtectedCountyView refers to ProtectedCountyView
+   {
+
+   }
+   variable P_ObjectLandRegisterParcels refers to ObjectLandRegisterParcels
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_OwnerAccordingToLandRegister refers to OwnerAccordingToLandRegister
+   {
+
+   }
+   variable P_OwnerChamberOfCommerceRegistrationNumber refers to OwnerChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_CountyLandRegisterSection refers to CountyLandRegisterSection
+   {
+
+   }
+   variable P_CountyLandRegisterNumber refers to CountyLandRegisterNumber
+   {
+
+   }
+   variable P_CountyLandRegisterIndexNumberAppartmentRight refers to CountyLandRegisterIndexNumberAppartmentRight
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_ObjectLandRegisterParcelSalesInformation refers to ObjectLandRegisterParcelSalesInformation
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LandRegisterParcelSalesDate refers to LandRegisterParcelSalesDate
+   {
+
+   }
+   variable P_LandRegisterParcelSalesPrice refers to LandRegisterParcelSalesPrice
+   {
+
+   }
+   variable P_ObjectGroundLeaseAgreements refers to ObjectGroundLeaseAgreements
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_FirstYearOfUse refers to FirstYearOfUse
+   {
+
+   }
+   variable P_ObjectUsageTitle refers to ObjectUsageTitle
+   {
+
+   }
+   variable P_ObjectUsage refers to ObjectUsage
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_OccupancyRate refers to OccupancyRate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_EstimateHeadlineRentDate refers to EstimateHeadlineRentDate
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_MedianCreditQualityTenants refers to MedianCreditQualityTenants
+   {
+
+   }
+   variable P_NumberOfTenants refers to NumberOfTenants
+   {
+
+   }
+   variable P_ObjectGeneralLeaseInformation refers to ObjectGeneralLeaseInformation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TenantName refers to TenantName
+   {
+
+   }
+   variable P_TenantType refers to TenantType
+   {
+
+   }
+   variable P_TenantChamberOfCommerceRegistrationNumber refers to TenantChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_AnchorTenant refers to AnchorTenant
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_CreditQualityTenant refers to CreditQualityTenant
+   {
+
+   }
+   variable P_NAICSCode refers to NAICSCode
+   {
+
+   }
+   variable P_ObjectLeaseCharges refers to ObjectLeaseCharges
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IncomeCategory refers to IncomeCategory
+   {
+
+   }
+   variable P_PaymentFrequency refers to PaymentFrequency
+   {
+
+   }
+   variable P_LeaseVATChargeable refers to LeaseVATChargeable
+   {
+
+   }
+   variable P_LeaseVAT refers to LeaseVAT
+   {
+
+   }
+   variable P_LeaseInterestChargeable refers to LeaseInterestChargeable
+   {
+
+   }
+   variable P_RentCommissionAuthorityCase refers to RentCommissionAuthorityCase
+   {
+
+   }
+   variable P_AmountInvoiced refers to AmountInvoiced
+   {
+
+   }
+   variable P_StartingRent refers to StartingRent
+   {
+
+   }
+   variable P_StartPaymentSchedule refers to StartPaymentSchedule
+   {
+
+   }
+   variable P_EndPaymentSchedule refers to EndPaymentSchedule
+   {
+
+   }
+   variable P_AdvancePayment refers to AdvancePayment
+   {
+
+   }
+   variable P_ObjectLeaseChargeInformationReference refers to ObjectLeaseChargeInformationReference
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LeaseChargeReferenceAllocatedBy refers to LeaseChargeReferenceAllocatedBy
+   {
+
+   }
+   variable P_LeaseChargeReferenceAllocatedByDescription refers to LeaseChargeReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_LeaseChargeReferenceDescription refers to LeaseChargeReferenceDescription
+   {
+
+   }
+   variable P_ObjectLeaseChargesBreak refers to ObjectLeaseChargesBreak
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_BreakDate refers to BreakDate
+   {
+
+   }
+   variable P_FirstNoticeDate refers to FirstNoticeDate
+   {
+
+   }
+   variable P_LastNoticeDate refers to LastNoticeDate
+   {
+
+   }
+   variable P_BreakParty refers to BreakParty
+   {
+
+   }
+   variable P_BreakPenalty refers to BreakPenalty
+   {
+
+   }
+   variable P_BreakPenaltyParty refers to BreakPenaltyParty
+   {
+
+   }
+   variable P_BreakRollingOption refers to BreakRollingOption
+   {
+
+   }
+   variable P_ObjectRentMeasurement refers to ObjectRentMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ContractRent refers to ContractRent
+   {
+
+   }
+   variable P_ContractRentMethod refers to ContractRentMethod
+   {
+
+   }
+   variable P_ContractRentSourceType refers to ContractRentSourceType
+   {
+
+   }
+   variable P_ContractRentDate refers to ContractRentDate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_ObjectMarketMeasurement refers to ObjectMarketMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketRent refers to MarketRent
+   {
+
+   }
+   variable P_MarketRentSourceType refers to MarketRentSourceType
+   {
+
+   }
+   variable P_EstimateMarketRentDate refers to EstimateMarketRentDate
+   {
+
+   }
+   variable P_ObjectAreaMeasurement refers to ObjectAreaMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_AreaLeasedMethod refers to AreaLeasedMethod
+   {
+
+   }
+   variable P_AreaSourceType refers to AreaSourceType
+   {
+
+   }
+   variable P_AreaMeasuredDate refers to AreaMeasuredDate
+   {
+
+   }
+   variable P_ObjectIndexation refers to ObjectIndexation
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IndexUsed refers to IndexUsed
+   {
+
+   }
+   variable P_IndexUsedDescription refers to IndexUsedDescription
+   {
+
+   }
+   variable P_DenominationMethod refers to DenominationMethod
+   {
+
+   }
+   variable P_IndexDelayNominator refers to IndexDelayNominator
+   {
+
+   }
+   variable P_IndexDelayDenominator refers to IndexDelayDenominator
+   {
+
+   }
+   variable P_IndexEffectiveDate refers to IndexEffectiveDate
+   {
+
+   }
+   variable P_IndexFrequency refers to IndexFrequency
+   {
+
+   }
+   variable P_IndexStartYear refers to IndexStartYear
+   {
+
+   }
+   variable P_MaxRentIncrease refers to MaxRentIncrease
+   {
+
+   }
+   variable P_MinRentIncrease refers to MinRentIncrease
+   {
+
+   }
+   variable P_ObjectAreaAdministrationTitle refers to ObjectAreaAdministrationTitle
+   {
+
+   }
+   variable P_ObjectUnitInformation refers to ObjectUnitInformation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_PreSold refers to PreSold
+   {
+
+   }
+   variable P_PreSoldArea refers to PreSoldArea
+   {
+
+   }
+   variable P_SalesPrice refers to SalesPrice
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_PreLet refers to PreLet
+   {
+
+   }
+   variable P_ValuePreLet refers to ValuePreLet
+   {
+
+   }
+   variable P_ObjectAreaInformation refers to ObjectAreaInformation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LeaseArea refers to LeaseArea
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_LeaseAreaSourceType refers to LeaseAreaSourceType
+   {
+
+   }
+   variable P_LeaseAreaMeasurementDate refers to LeaseAreaMeasurementDate
+   {
+
+   }
+   variable P_ObjectMarketValue refers to ObjectMarketValue
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValue refers to MarketValue
+   {
+
+   }
+   variable P_MarketValueSourceType refers to MarketValueSourceType
+   {
+
+   }
+   variable P_MarketValueMeasurementDate refers to MarketValueMeasurementDate
+   {
+
+   }
+   variable P_ObjectValuationTitle refers to ObjectValuationTitle
+   {
+
+   }
+   variable P_ObjectValuationInformationReferenceTitle refers to ObjectValuationInformationReferenceTitle
+   {
+
+   }
+   variable P_ObjectValuationInformationReference refers to ObjectValuationInformationReference
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ObjectValuationReferenceAllocatedBy refers to ObjectValuationReferenceAllocatedBy
+   {
+
+   }
+   variable P_ObjectValuationReferenceAllocatedByDescription refers to ObjectValuationReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_ObjectValuationReferenceDescription refers to ObjectValuationReferenceDescription
+   {
+
+   }
+   variable P_ObjectValuationAppraisalTitle refers to ObjectValuationAppraisalTitle
+   {
+
+   }
+   variable P_ObjectValuationAppraisalMarketAppraissal refers to ObjectValuationAppraisalMarketAppraissal
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketabilityOverall refers to MarketabilityOverall
+   {
+
+   }
+   variable P_MarketabilitySales refers to MarketabilitySales
+   {
+
+   }
+   variable P_MarketabilityRent refers to MarketabilityRent
+   {
+
+   }
+   variable P_AlternativeUseMarket refers to AlternativeUseMarket
+   {
+
+   }
+   variable P_HighestAndBestUseDescription refers to HighestAndBestUseDescription
+   {
+
+   }
+   variable P_MarketabilitySalesUnit refers to MarketabilitySalesUnit
+   {
+
+   }
+   variable P_MarketvisionCountry refers to MarketvisionCountry
+   {
+
+   }
+   variable P_MarketvisionLocal refers to MarketvisionLocal
+   {
+
+   }
+   variable P_ObjectValuationAppraisalObjectAssessment refers to ObjectValuationAppraisalObjectAssessment
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ObjectOverallAssessment refers to ObjectOverallAssessment
+   {
+
+   }
+   variable P_ConstructionState refers to ConstructionState
+   {
+
+   }
+   variable P_MaintenanceStateInterior refers to MaintenanceStateInterior
+   {
+
+   }
+   variable P_MaintenanceStateExterior refers to MaintenanceStateExterior
+   {
+
+   }
+   variable P_MaintenanceGeneralAssesment refers to MaintenanceGeneralAssesment
+   {
+
+   }
+   variable P_Functionality refers to Functionality
+   {
+
+   }
+   variable P_AlternativeUseObject refers to AlternativeUseObject
+   {
+
+   }
+   variable P_ParkingOnSite refers to ParkingOnSite
+   {
+
+   }
+   variable P_ObjectValuationAppraisalLocationAssessment refers to ObjectValuationAppraisalLocationAssessment
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LocationOverallAssessment refers to LocationOverallAssessment
+   {
+
+   }
+   variable P_AccessibilityGeneral refers to AccessibilityGeneral
+   {
+
+   }
+   variable P_AccessibilityCars refers to AccessibilityCars
+   {
+
+   }
+   variable P_AccessibilityPublicTransport refers to AccessibilityPublicTransport
+   {
+
+   }
+   variable P_AccessibilityTrucks refers to AccessibilityTrucks
+   {
+
+   }
+   variable P_ParkingPublic refers to ParkingPublic
+   {
+
+   }
+   variable P_Site refers to Site
+   {
+
+   }
+   variable P_ObjectValuationAppraisalSWOTAnalysis refers to ObjectValuationAppraisalSWOTAnalysis
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_Strengths refers to Strengths
+   {
+
+   }
+   variable P_Weaknesses refers to Weaknesses
+   {
+
+   }
+   variable P_Opportunities refers to Opportunities
+   {
+
+   }
+   variable P_Threats refers to Threats
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsTitle refers to ObjectValuationAssumptionsTitle
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsExternalValuation refers to ObjectValuationAssumptionsExternalValuation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_LocalTaxInformationTitle refers to LocalTaxInformationTitle
+   {
+
+   }
+   variable P_Value refers to Value
+   {
+
+   }
+   variable P_ReferenceDate refers to ReferenceDate
+   {
+
+   }
+   variable P_RebuildValueTitle refers to RebuildValueTitle
+   {
+
+   }
+   variable P_RebuildValueInsurance refers to RebuildValueInsurance
+   {
+
+   }
+   variable P_AssesmentDateRebuildValue refers to AssesmentDateRebuildValue
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsPreviousValuation refers to ObjectValuationAssumptionsPreviousValuation
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_ValuationDate refers to ValuationDate
+   {
+
+   }
+   variable P_ValuationType refers to ValuationType
+   {
+
+   }
+   variable P_Remarks refers to Remarks
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsIndices refers to ObjectValuationAssumptionsIndices
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_IndexSource refers to IndexSource
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_IndexMeasurementTitle refers to IndexMeasurementTitle
+   {
+
+   }
+   variable P_Index refers to Index
+   {
+
+   }
+   variable P_PeriodTitle refers to PeriodTitle
+   {
+
+   }
+   variable P_Start refers to Start
+   {
+
+   }
+   variable P_End refers to End
+   {
+
+   }
+   variable P_PeriodNumber refers to PeriodNumber
+   {
+
+   }
+   variable P_Description refers to Description
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsGeneralAssumptions refers to ObjectValuationAssumptionsGeneralAssumptions
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuedInterest refers to ValuedInterest
+   {
+
+   }
+   variable P_Principles refers to Principles
+   {
+
+   }
+   variable P_SpecialPrinciples refers to SpecialPrinciples
+   {
+
+   }
+   variable P_AssumptionExplanation refers to AssumptionExplanation
+   {
+
+   }
+   variable P_Disclaimer refers to Disclaimer
+   {
+
+   }
+   variable P_MarketRentUsedExplination refers to MarketRentUsedExplination
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsDiscountedCashFlowAssumptions refers to ObjectValuationAssumptionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuationPeriod refers to ValuationPeriod
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_DiscountRateGroundLease refers to DiscountRateGroundLease
+   {
+
+   }
+   variable P_DiscountRateCorrectionsDiscountedCashFlowAssumptions refers to DiscountRateCorrectionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCostPercentageDiscountedCashFlowAssumptions refers to TransferCostPercentageDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_VAT refers to VAT
+   {
+
+   }
+   variable P_TimingRentIncome refers to TimingRentIncome
+   {
+
+   }
+   variable P_TimingOperatingExpenses refers to TimingOperatingExpenses
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsGrossYieldAssumptions refers to ObjectValuationAssumptionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentGrossYieldAssumptions refers to MarketRentGrossYieldAssumptions
+   {
+
+   }
+   variable P_GrossCapRateAfterTransferCostContractRentPerYear refers to GrossCapRateAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_DiscountRateCorrectionsGrossYieldAssumptions refers to DiscountRateCorrectionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageGrossYieldAssumptions refers to TransferCostPercentageGrossYieldAssumptions
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsNetYieldAssumptions refers to ObjectValuationAssumptionsNetYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentNetYieldAssumptions refers to MarketRentNetYieldAssumptions
+   {
+
+   }
+   variable P_EternityTotalCost refers to EternityTotalCost
+   {
+
+   }
+   variable P_EternityFixedCostPerYear refers to EternityFixedCostPerYear
+   {
+
+   }
+   variable P_EternityMaintenancePerYear refers to EternityMaintenancePerYear
+   {
+
+   }
+   variable P_EternityGroundLeasePerYear refers to EternityGroundLeasePerYear
+   {
+
+   }
+   variable P_EternityPropertyManagementPerYear refers to EternityPropertyManagementPerYear
+   {
+
+   }
+   variable P_EternityOtherCostPerYear refers to EternityOtherCostPerYear
+   {
+
+   }
+   variable P_NetMarketRent refers to NetMarketRent
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_DiscountRateCorrectionsNetYieldAssumptions refers to DiscountRateCorrectionsNetYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageNetYieldAssumptions refers to TransferCostPercentageNetYieldAssumptions
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsGrossNetYieldCorrections refers to ObjectValuationAssumptionsGrossNetYieldCorrections
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TotalCorrections refers to TotalCorrections
+   {
+
+   }
+   variable P_CorrectionRevisionaryPotential refers to CorrectionRevisionaryPotential
+   {
+
+   }
+   variable P_CorrectionMutationVacancy refers to CorrectionMutationVacancy
+   {
+
+   }
+   variable P_CorrectionInitialVacancy refers to CorrectionInitialVacancy
+   {
+
+   }
+   variable P_CorrectionMutationExpenses refers to CorrectionMutationExpenses
+   {
+
+   }
+   variable P_CorrectionVATCompensation refers to CorrectionVATCompensation
+   {
+
+   }
+   variable P_CorrectionNonDeductableVAT refers to CorrectionNonDeductableVAT
+   {
+
+   }
+   variable P_CorrectionDeferredMaintenance refers to CorrectionDeferredMaintenance
+   {
+
+   }
+   variable P_CorrectionGroundLease refers to CorrectionGroundLease
+   {
+
+   }
+   variable P_CorrectionOtherIncomeExpenses refers to CorrectionOtherIncomeExpenses
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsCashFlow refers to ObjectValuationAssumptionsCashFlow
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TypeFinancialCode refers to TypeFinancialCode
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_AmountMeasurementTitle refers to AmountMeasurementTitle
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_SourceType refers to SourceType
+   {
+
+   }
+   variable P_PeriodTitle refers to PeriodTitle
+   {
+
+   }
+   variable P_Start refers to Start
+   {
+
+   }
+   variable P_End refers to End
+   {
+
+   }
+   variable P_PeriodNumber refers to PeriodNumber
+   {
+
+   }
+   variable P_Description refers to Description
+   {
+
+   }
+   variable P_ObjectValuationAssumptionsOtherValueComponents refers to ObjectValuationAssumptionsOtherValueComponents
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ComponentType refers to ComponentType
+   {
+
+   }
+   variable P_DescriptionOtherValueComponents refers to DescriptionOtherValueComponents
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_ObjectValuationResultTitle refers to ObjectValuationResultTitle
+   {
+
+   }
+   variable P_ObjectValuationResultValueTitle refers to ObjectValuationResultValueTitle
+   {
+
+   }
+   variable P_ObjectValuationResultValue refers to ObjectValuationResultValue
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_AmountInLetters refers to AmountInLetters
+   {
+
+   }
+   variable P_ObjectValuationResultValueDescriptionCalculationModelUsedTitle refers to ObjectValuationResultValueDescriptionCalculationModelUsedTitle
+   {
+
+   }
+   variable P_CalculationModelUsed refers to CalculationModelUsed
+   {
+
+   }
+   variable P_OwnExcelModel refers to OwnExcelModel
+   {
+
+   }
+   variable P_ObjectValuationResultKPITitle refers to ObjectValuationResultKPITitle
+   {
+
+   }
+   variable P_ObjectValuationResultKPI refers to ObjectValuationResultKPI
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValueBeforeCorrectionBeforeTransferCost refers to MarketValueBeforeCorrectionBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCost refers to TransferCost
+   {
+
+   }
+   variable P_MarketValueBeforeTransferCost refers to MarketValueBeforeTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCost refers to MarketValueAfterTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCostRounded refers to MarketValueAfterTransferCostRounded
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_NetPresentValueCashFlows refers to NetPresentValueCashFlows
+   {
+
+   }
+   variable P_ExitYieldMarketRentBeforeTransferCost refers to ExitYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetPresentValueExitValueAfterTransferCost refers to NetPresentValueExitValueAfterTransferCost
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostContractRentPerYear refers to GrossYieldAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostMarketRentPerYear refers to GrossYieldAfterTransferCostMarketRentPerYear
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldMarketRentBeforeTransferCost refers to NetYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldRentalIncomeBeforeTransferCost refers to NetYieldRentalIncomeBeforeTransferCost
+   {
+
+   }
+   variable P_InternalRateOfReturn refers to InternalRateOfReturn
+   {
+
+   }
+   variable P_OperatingExpensesPercentageMarketRentPerYear refers to OperatingExpensesPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_VacancyPercentageMarketRentPerYear refers to VacancyPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_ObjectValuationResultCommercialTitle refers to ObjectValuationResultCommercialTitle
+   {
+
+   }
+   variable P_ObjectValuationResultCommercial refers to ObjectValuationResultCommercial
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_WeightedAverageLeaseExpiry refers to WeightedAverageLeaseExpiry
+   {
+
+   }
+   variable P_MarketValuePerSquareMeter refers to MarketValuePerSquareMeter
+   {
+
+   }
+   variable P_ObjectValuationComparableTitle refers to ObjectValuationComparableTitle
+   {
+
+   }
+   variable P_ObjectValuationComparableRentTransactions refers to ObjectValuationComparableRentTransactions
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ComparableRentTransactionAxis refers to ComparableRentTransactionAxis
+   {
+
+   }
+   variable P_ComparableRentTransactionTypedMember refers to ComparableRentTransactionTypedMember
+   {
+
+   }
+   variable P_CommentRentComparable refers to CommentRentComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_ObjectValuationComparableSaleReferences refers to ObjectValuationComparableSaleReferences
+   {
+
+   }
+   variable P_SaleReferenceAxis refers to SaleReferenceAxis
+   {
+
+   }
+   variable P_SaleReferenceTypedMember refers to SaleReferenceTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_CommentSaleComparable refers to CommentSaleComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_aqr refers to aqr
+   {
+
+   }
+   variable P_AQRDetailsGeneralPropertyInformation refers to AQRDetailsGeneralPropertyInformation
+   {
+
+   }
+   variable P_PropertyAxis refers to PropertyAxis
+   {
+
+   }
+   variable P_PropertyTypedMember refers to PropertyTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TimeToNextBreak refers to TimeToNextBreak
+   {
+
+   }
+   variable P_AQRCollateralData refers to AQRCollateralData
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_ExercisingPotential refers to ExercisingPotential
+   {
+
+   }
+   variable P_AQRDetailsValuation refers to AQRDetailsValuation
+   {
+
+   }
+   variable P_PropertyAxis refers to PropertyAxis
+   {
+
+   }
+   variable P_PropertyTypedMember refers to PropertyTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AQRCondition refers to AQRCondition
+   {
+
+   }
+   variable P_SignificantBankLastInternalValuationValue refers to SignificantBankLastInternalValuationValue
+   {
+
+   }
+   variable P_SignificantBankLastInternalValuationDate refers to SignificantBankLastInternalValuationDate
+   {
+
+   }
+   variable P_LastInternalValuationType refers to LastInternalValuationType
+   {
+
+   }
+   variable P_LastInternalValuationTypeIfOther refers to LastInternalValuationTypeIfOther
+   {
+
+   }
+   variable P_FirstValuationValue refers to FirstValuationValue
+   {
+
+   }
+   variable P_FirstValuationDate refers to FirstValuationDate
+   {
+
+   }
+   variable P_AQRTimeToCompletion refers to AQRTimeToCompletion
+   {
+
+   }
+   variable P_FinanceNeededToCompletion refers to FinanceNeededToCompletion
+   {
+
+   }
+   variable P_PlanningPermissionStatus refers to PlanningPermissionStatus
+   {
+
+   }
+   variable P_gebouw1 refers to gebouw1
+   {
+
+   }
+   variable P_BuildingInfoTitle refers to BuildingInfoTitle
+   {
+
+   }
+   variable P_BuildingGeneralInformationTitle refers to BuildingGeneralInformationTitle
+   {
+
+   }
+   variable P_BuildingInformation refers to BuildingInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ActualUse refers to ActualUse
+   {
+
+   }
+   variable P_LeasedOrUsedByOwner refers to LeasedOrUsedByOwner
+   {
+
+   }
+   variable P_ConstructionYear refers to ConstructionYear
+   {
+
+   }
+   variable P_RenovationYear refers to RenovationYear
+   {
+
+   }
+   variable P_DaysToNextBreak refers to DaysToNextBreak
+   {
+
+   }
+   variable P_AreaForLease refers to AreaForLease
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterComments refers to LandRegisterComments
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_BuildingInformationReference refers to BuildingInformationReference
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_BuildingReferenceAllocatedBy refers to BuildingReferenceAllocatedBy
+   {
+
+   }
+   variable P_BuildingReferenceAllocatedByDescription refers to BuildingReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_BuildingReferenceDescription refers to BuildingReferenceDescription
+   {
+
+   }
+   variable P_BuildingTyping refers to BuildingTyping
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TypingDescription refers to TypingDescription
+   {
+
+   }
+   variable P_IPDtype refers to IPDtype
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_BuildingAddress refers to BuildingAddress
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_DescriptionLocationNL refers to DescriptionLocationNL
+   {
+
+   }
+   variable P_StreetNameNL refers to StreetNameNL
+   {
+
+   }
+   variable P_HouseNumberNL refers to HouseNumberNL
+   {
+
+   }
+   variable P_HouseNumberAddition refers to HouseNumberAddition
+   {
+
+   }
+   variable P_PlaceOfResidenceNL refers to PlaceOfResidenceNL
+   {
+
+   }
+   variable P_Borough refers to Borough
+   {
+
+   }
+   variable P_PostalCodeNL refers to PostalCodeNL
+   {
+
+   }
+   variable P_Municipality refers to Municipality
+   {
+
+   }
+   variable P_NameRegion refers to NameRegion
+   {
+
+   }
+   variable P_BAGVBOID refers to BAGVBOID
+   {
+
+   }
+   variable P_BAGPandID refers to BAGPandID
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_BuildingInfoTitle refers to BuildingInfoTitle
+   {
+
+   }
+   variable P_BuildingLegalInfoTitle refers to BuildingLegalInfoTitle
+   {
+
+   }
+   variable P_BuildingLegalInformation refers to BuildingLegalInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_RightOfResidence refers to RightOfResidence
+   {
+
+   }
+   variable P_NationalMonument refers to NationalMonument
+   {
+
+   }
+   variable P_ProvinceMonument refers to ProvinceMonument
+   {
+
+   }
+   variable P_CountyMonument refers to CountyMonument
+   {
+
+   }
+   variable P_ProtectedCountyView refers to ProtectedCountyView
+   {
+
+   }
+   variable P_BuildingLandRegisterParcels refers to BuildingLandRegisterParcels
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_OwnerAccordingToLandRegister refers to OwnerAccordingToLandRegister
+   {
+
+   }
+   variable P_OwnerChamberOfCommerceRegistrationNumber refers to OwnerChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_CountyLandRegisterSection refers to CountyLandRegisterSection
+   {
+
+   }
+   variable P_CountyLandRegisterNumber refers to CountyLandRegisterNumber
+   {
+
+   }
+   variable P_CountyLandRegisterIndexNumberAppartmentRight refers to CountyLandRegisterIndexNumberAppartmentRight
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_BuildingLandRegisterParcelSalesInformation refers to BuildingLandRegisterParcelSalesInformation
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LandRegisterParcelSalesDate refers to LandRegisterParcelSalesDate
+   {
+
+   }
+   variable P_LandRegisterParcelSalesPrice refers to LandRegisterParcelSalesPrice
+   {
+
+   }
+   variable P_BuildingUsageTitle refers to BuildingUsageTitle
+   {
+
+   }
+   variable P_BuildingUsage refers to BuildingUsage
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_OccupancyRate refers to OccupancyRate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_EstimateHeadlineRentDate refers to EstimateHeadlineRentDate
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_MedianCreditQualityTenants refers to MedianCreditQualityTenants
+   {
+
+   }
+   variable P_NumberOfTenants refers to NumberOfTenants
+   {
+
+   }
+   variable P_BuildingGeneralLeaseInformation refers to BuildingGeneralLeaseInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TenantName refers to TenantName
+   {
+
+   }
+   variable P_TenantChamberOfCommerceRegistrationNumber refers to TenantChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_CreditQualityTenant refers to CreditQualityTenant
+   {
+
+   }
+   variable P_AnchorTenant refers to AnchorTenant
+   {
+
+   }
+   variable P_NAICSCode refers to NAICSCode
+   {
+
+   }
+   variable P_BuildingLeaseCharges refers to BuildingLeaseCharges
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IncomeCategory refers to IncomeCategory
+   {
+
+   }
+   variable P_PaymentFrequency refers to PaymentFrequency
+   {
+
+   }
+   variable P_LeaseVATChargeable refers to LeaseVATChargeable
+   {
+
+   }
+   variable P_LeaseVAT refers to LeaseVAT
+   {
+
+   }
+   variable P_LeaseInterestChargeable refers to LeaseInterestChargeable
+   {
+
+   }
+   variable P_RentCommissionAuthorityCase refers to RentCommissionAuthorityCase
+   {
+
+   }
+   variable P_AmountInvoiced refers to AmountInvoiced
+   {
+
+   }
+   variable P_StartingRent refers to StartingRent
+   {
+
+   }
+   variable P_StartPaymentSchedule refers to StartPaymentSchedule
+   {
+
+   }
+   variable P_EndPaymentSchedule refers to EndPaymentSchedule
+   {
+
+   }
+   variable P_AdvancePayment refers to AdvancePayment
+   {
+
+   }
+   variable P_BuildingLeaseChargesBreak refers to BuildingLeaseChargesBreak
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_BreakDate refers to BreakDate
+   {
+
+   }
+   variable P_FirstNoticeDate refers to FirstNoticeDate
+   {
+
+   }
+   variable P_LastNoticeDate refers to LastNoticeDate
+   {
+
+   }
+   variable P_BreakParty refers to BreakParty
+   {
+
+   }
+   variable P_BreakPenalty refers to BreakPenalty
+   {
+
+   }
+   variable P_BreakPenaltyParty refers to BreakPenaltyParty
+   {
+
+   }
+   variable P_BreakRollingOption refers to BreakRollingOption
+   {
+
+   }
+   variable P_BuildingRentMeasurement refers to BuildingRentMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ContractRent refers to ContractRent
+   {
+
+   }
+   variable P_ContractRentMethod refers to ContractRentMethod
+   {
+
+   }
+   variable P_ContractRentSourceType refers to ContractRentSourceType
+   {
+
+   }
+   variable P_ContractRentDate refers to ContractRentDate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_BuildingMarketMeasurement refers to BuildingMarketMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketRent refers to MarketRent
+   {
+
+   }
+   variable P_MarketRentSourceType refers to MarketRentSourceType
+   {
+
+   }
+   variable P_EstimateMarketRentDate refers to EstimateMarketRentDate
+   {
+
+   }
+   variable P_BuildingAreaMeasurement refers to BuildingAreaMeasurement
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_AreaLeasedMethod refers to AreaLeasedMethod
+   {
+
+   }
+   variable P_AreaSourceType refers to AreaSourceType
+   {
+
+   }
+   variable P_AreaMeasuredDate refers to AreaMeasuredDate
+   {
+
+   }
+   variable P_BuildingIndexation refers to BuildingIndexation
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IndexUsed refers to IndexUsed
+   {
+
+   }
+   variable P_IndexUsedDescription refers to IndexUsedDescription
+   {
+
+   }
+   variable P_DenominationMethod refers to DenominationMethod
+   {
+
+   }
+   variable P_IndexDelayNominator refers to IndexDelayNominator
+   {
+
+   }
+   variable P_IndexDelayDenominator refers to IndexDelayDenominator
+   {
+
+   }
+   variable P_IndexEffectiveDate refers to IndexEffectiveDate
+   {
+
+   }
+   variable P_IndexFrequency refers to IndexFrequency
+   {
+
+   }
+   variable P_IndexStartYear refers to IndexStartYear
+   {
+
+   }
+   variable P_MaxRentIncrease refers to MaxRentIncrease
+   {
+
+   }
+   variable P_MinRentIncrease refers to MinRentIncrease
+   {
+
+   }
+   variable P_BuidlingAreaAdministrationTitle refers to BuidlingAreaAdministrationTitle
+   {
+
+   }
+   variable P_BuildingAreaInformation refers to BuildingAreaInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LeaseArea refers to LeaseArea
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_LeaseAreaSourceType refers to LeaseAreaSourceType
+   {
+
+   }
+   variable P_LeaseAreaMeasurementDate refers to LeaseAreaMeasurementDate
+   {
+
+   }
+   variable P_BuildingMarketValue refers to BuildingMarketValue
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValue refers to MarketValue
+   {
+
+   }
+   variable P_MarketValueSourceType refers to MarketValueSourceType
+   {
+
+   }
+   variable P_MarketValueMeasurementDate refers to MarketValueMeasurementDate
+   {
+
+   }
+   variable P_BuildingUnitInformation refers to BuildingUnitInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_PreSold refers to PreSold
+   {
+
+   }
+   variable P_PreSoldArea refers to PreSoldArea
+   {
+
+   }
+   variable P_SalesPrice refers to SalesPrice
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_PreLet refers to PreLet
+   {
+
+   }
+   variable P_ValuePreLet refers to ValuePreLet
+   {
+
+   }
+   variable P_BuildingValuationTitle refers to BuildingValuationTitle
+   {
+
+   }
+   variable P_BuildingValuationInformationReferenceTitle refers to BuildingValuationInformationReferenceTitle
+   {
+
+   }
+   variable P_BuildingValuationInformationReference refers to BuildingValuationInformationReference
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_BuildingValuationReferenceAllocatedBy refers to BuildingValuationReferenceAllocatedBy
+   {
+
+   }
+   variable P_BuildingValuationReferenceAllocatedByDescription refers to BuildingValuationReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_BuildingValuationReferenceDescription refers to BuildingValuationReferenceDescription
+   {
+
+   }
+   variable P_BuildingValuationAppraisalTitle refers to BuildingValuationAppraisalTitle
+   {
+
+   }
+   variable P_BuildingValuationAppraisalMarketAppraissal refers to BuildingValuationAppraisalMarketAppraissal
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketabilityOverall refers to MarketabilityOverall
+   {
+
+   }
+   variable P_MarketabilitySales refers to MarketabilitySales
+   {
+
+   }
+   variable P_MarketabilityRent refers to MarketabilityRent
+   {
+
+   }
+   variable P_AlternativeUseMarket refers to AlternativeUseMarket
+   {
+
+   }
+   variable P_HighestAndBestUseDescription refers to HighestAndBestUseDescription
+   {
+
+   }
+   variable P_MarketabilitySalesUnit refers to MarketabilitySalesUnit
+   {
+
+   }
+   variable P_MarketvisionCountry refers to MarketvisionCountry
+   {
+
+   }
+   variable P_MarketvisionLocal refers to MarketvisionLocal
+   {
+
+   }
+   variable P_BuildingValuationAppraisalObjectAssessment refers to BuildingValuationAppraisalObjectAssessment
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ObjectOverallAssessment refers to ObjectOverallAssessment
+   {
+
+   }
+   variable P_ConstructionState refers to ConstructionState
+   {
+
+   }
+   variable P_MaintenanceStateInterior refers to MaintenanceStateInterior
+   {
+
+   }
+   variable P_MaintenanceStateExterior refers to MaintenanceStateExterior
+   {
+
+   }
+   variable P_MaintenanceGeneralAssesment refers to MaintenanceGeneralAssesment
+   {
+
+   }
+   variable P_Functionality refers to Functionality
+   {
+
+   }
+   variable P_AlternativeUseObject refers to AlternativeUseObject
+   {
+
+   }
+   variable P_ParkingOnSite refers to ParkingOnSite
+   {
+
+   }
+   variable P_BuildingValuationAppraisalLocationAssessment refers to BuildingValuationAppraisalLocationAssessment
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LocationOverallAssessment refers to LocationOverallAssessment
+   {
+
+   }
+   variable P_AccessibilityGeneral refers to AccessibilityGeneral
+   {
+
+   }
+   variable P_AccessibilityCars refers to AccessibilityCars
+   {
+
+   }
+   variable P_AccessibilityPublicTransport refers to AccessibilityPublicTransport
+   {
+
+   }
+   variable P_AccessibilityTrucks refers to AccessibilityTrucks
+   {
+
+   }
+   variable P_ParkingPublic refers to ParkingPublic
+   {
+
+   }
+   variable P_Site refers to Site
+   {
+
+   }
+   variable P_BuildingValuationAppraisalSWOTAnalysis refers to BuildingValuationAppraisalSWOTAnalysis
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_Strengths refers to Strengths
+   {
+
+   }
+   variable P_Weaknesses refers to Weaknesses
+   {
+
+   }
+   variable P_Opportunities refers to Opportunities
+   {
+
+   }
+   variable P_Threats refers to Threats
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsTitle refers to BuildingValuationAssumptionsTitle
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsExternalValuation refers to BuildingValuationAssumptionsExternalValuation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_LocalTaxInformationTitle refers to LocalTaxInformationTitle
+   {
+
+   }
+   variable P_Value refers to Value
+   {
+
+   }
+   variable P_ReferenceDate refers to ReferenceDate
+   {
+
+   }
+   variable P_RebuildValueTitle refers to RebuildValueTitle
+   {
+
+   }
+   variable P_RebuildValueInsurance refers to RebuildValueInsurance
+   {
+
+   }
+   variable P_AssesmentDateRebuildValue refers to AssesmentDateRebuildValue
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsPreviousValuation refers to BuildingValuationAssumptionsPreviousValuation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_ValuationDate refers to ValuationDate
+   {
+
+   }
+   variable P_ValuationType refers to ValuationType
+   {
+
+   }
+   variable P_Remarks refers to Remarks
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsIndices refers to BuildingValuationAssumptionsIndices
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_IndexSource refers to IndexSource
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_IndexMeasurementTitle refers to IndexMeasurementTitle
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGeneralAssumptions refers to BuildingValuationAssumptionsGeneralAssumptions
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuedInterest refers to ValuedInterest
+   {
+
+   }
+   variable P_Principles refers to Principles
+   {
+
+   }
+   variable P_SpecialPrinciples refers to SpecialPrinciples
+   {
+
+   }
+   variable P_AssumptionExplanation refers to AssumptionExplanation
+   {
+
+   }
+   variable P_Disclaimer refers to Disclaimer
+   {
+
+   }
+   variable P_MarketRentUsedExplination refers to MarketRentUsedExplination
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsDiscountedCashFlowAssumptions refers to BuildingValuationAssumptionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuationPeriod refers to ValuationPeriod
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_DiscountRateGroundLease refers to DiscountRateGroundLease
+   {
+
+   }
+   variable P_DiscountRateCorrectionsDiscountedCashFlowAssumptions refers to DiscountRateCorrectionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCostPercentageDiscountedCashFlowAssumptions refers to TransferCostPercentageDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_VAT refers to VAT
+   {
+
+   }
+   variable P_TimingRentIncome refers to TimingRentIncome
+   {
+
+   }
+   variable P_TimingOperatingExpenses refers to TimingOperatingExpenses
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGrossYieldAssumptions refers to BuildingValuationAssumptionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentGrossYieldAssumptions refers to MarketRentGrossYieldAssumptions
+   {
+
+   }
+   variable P_GrossCapRateAfterTransferCostContractRentPerYear refers to GrossCapRateAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_DiscountRateCorrectionsGrossYieldAssumptions refers to DiscountRateCorrectionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageGrossYieldAssumptions refers to TransferCostPercentageGrossYieldAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsNetYieldAssumptions refers to BuildingValuationAssumptionsNetYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentNetYieldAssumptions refers to MarketRentNetYieldAssumptions
+   {
+
+   }
+   variable P_EternityTotalCost refers to EternityTotalCost
+   {
+
+   }
+   variable P_EternityFixedCostPerYear refers to EternityFixedCostPerYear
+   {
+
+   }
+   variable P_EternityMaintenancePerYear refers to EternityMaintenancePerYear
+   {
+
+   }
+   variable P_EternityGroundLeasePerYear refers to EternityGroundLeasePerYear
+   {
+
+   }
+   variable P_EternityPropertyManagementPerYear refers to EternityPropertyManagementPerYear
+   {
+
+   }
+   variable P_EternityOtherCostPerYear refers to EternityOtherCostPerYear
+   {
+
+   }
+   variable P_NetMarketRent refers to NetMarketRent
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_DiscountRateCorrectionsNetYieldAssumptions refers to DiscountRateCorrectionsNetYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageNetYieldAssumptions refers to TransferCostPercentageNetYieldAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGrossNetYieldCorrections refers to BuildingValuationAssumptionsGrossNetYieldCorrections
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TotalCorrections refers to TotalCorrections
+   {
+
+   }
+   variable P_CorrectionRevisionaryPotential refers to CorrectionRevisionaryPotential
+   {
+
+   }
+   variable P_CorrectionMutationVacancy refers to CorrectionMutationVacancy
+   {
+
+   }
+   variable P_CorrectionInitialVacancy refers to CorrectionInitialVacancy
+   {
+
+   }
+   variable P_CorrectionMutationExpenses refers to CorrectionMutationExpenses
+   {
+
+   }
+   variable P_CorrectionVATCompensation refers to CorrectionVATCompensation
+   {
+
+   }
+   variable P_CorrectionNonDeductableVAT refers to CorrectionNonDeductableVAT
+   {
+
+   }
+   variable P_CorrectionDeferredMaintenance refers to CorrectionDeferredMaintenance
+   {
+
+   }
+   variable P_CorrectionGroundLease refers to CorrectionGroundLease
+   {
+
+   }
+   variable P_CorrectionOtherIncomeExpenses refers to CorrectionOtherIncomeExpenses
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsCashFlow refers to BuildingValuationAssumptionsCashFlow
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TypeFinancialCode refers to TypeFinancialCode
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_AmountMeasurementTitle refers to AmountMeasurementTitle
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_SourceType refers to SourceType
+   {
+
+   }
+   variable P_PeriodTitle refers to PeriodTitle
+   {
+
+   }
+   variable P_Start refers to Start
+   {
+
+   }
+   variable P_End refers to End
+   {
+
+   }
+   variable P_PeriodNumber refers to PeriodNumber
+   {
+
+   }
+   variable P_Description refers to Description
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsOtherValueComponents refers to BuildingValuationAssumptionsOtherValueComponents
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ComponentType refers to ComponentType
+   {
+
+   }
+   variable P_DescriptionOtherValueComponents refers to DescriptionOtherValueComponents
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_BuildingValuationResultTitle refers to BuildingValuationResultTitle
+   {
+
+   }
+   variable P_BuildingValuationResultValueTitle refers to BuildingValuationResultValueTitle
+   {
+
+   }
+   variable P_BuildingValuationResultValue refers to BuildingValuationResultValue
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_AmountInLetters refers to AmountInLetters
+   {
+
+   }
+   variable P_BuildingValuationResultValueDescriptionCalculationModelUsedTitle refers to BuildingValuationResultValueDescriptionCalculationModelUsedTitle
+   {
+
+   }
+   variable P_CalculationModelUsed refers to CalculationModelUsed
+   {
+
+   }
+   variable P_OwnExcelModel refers to OwnExcelModel
+   {
+
+   }
+   variable P_BuildingValuationResultKPITitle refers to BuildingValuationResultKPITitle
+   {
+
+   }
+   variable P_BuildingValuationResultKPI refers to BuildingValuationResultKPI
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValueBeforeCorrectionBeforeTransferCost refers to MarketValueBeforeCorrectionBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCost refers to TransferCost
+   {
+
+   }
+   variable P_MarketValueBeforeTransferCost refers to MarketValueBeforeTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCost refers to MarketValueAfterTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCostRounded refers to MarketValueAfterTransferCostRounded
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_NetPresentValueCashFlows refers to NetPresentValueCashFlows
+   {
+
+   }
+   variable P_ExitYieldMarketRentBeforeTransferCost refers to ExitYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetPresentValueExitValueAfterTransferCost refers to NetPresentValueExitValueAfterTransferCost
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostContractRentPerYear refers to GrossYieldAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostMarketRentPerYear refers to GrossYieldAfterTransferCostMarketRentPerYear
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldMarketRentBeforeTransferCost refers to NetYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldRentalIncomeBeforeTransferCost refers to NetYieldRentalIncomeBeforeTransferCost
+   {
+
+   }
+   variable P_InternalRateOfReturn refers to InternalRateOfReturn
+   {
+
+   }
+   variable P_OperatingExpensesPercentageMarketRentPerYear refers to OperatingExpensesPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_VacancyPercentageMarketRentPerYear refers to VacancyPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_BuildingValuationResultCommercialTitle refers to BuildingValuationResultCommercialTitle
+   {
+
+   }
+   variable P_BuildingValuationResultCommercial refers to BuildingValuationResultCommercial
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_WeightedAverageLeaseExpiry refers to WeightedAverageLeaseExpiry
+   {
+
+   }
+   variable P_MarketValuePerSquareMeter refers to MarketValuePerSquareMeter
+   {
+
+   }
+   variable P_BuildingValuationComparableTitle refers to BuildingValuationComparableTitle
+   {
+
+   }
+   variable P_BuildingValuationComparableRentTransactions refers to BuildingValuationComparableRentTransactions
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ComparableRentTransactionAxis refers to ComparableRentTransactionAxis
+   {
+
+   }
+   variable P_ComparableRentTransactionTypedMember refers to ComparableRentTransactionTypedMember
+   {
+
+   }
+   variable P_CommentRentComparable refers to CommentRentComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_BuildingValuationComparableSaleReferences refers to BuildingValuationComparableSaleReferences
+   {
+
+   }
+   variable P_SaleReferenceAxis refers to SaleReferenceAxis
+   {
+
+   }
+   variable P_SaleReferenceTypedMember refers to SaleReferenceTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_CommentSaleComparable refers to CommentSaleComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_AQRDetailsGeneralUnitInformation refers to AQRDetailsGeneralUnitInformation
+   {
+
+   }
+   variable P_UnitAxis refers to UnitAxis
+   {
+
+   }
+   variable P_UnitTypedMember refers to UnitTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_OccupiableAreaResidentialHouse refers to OccupiableAreaResidentialHouse
+   {
+
+   }
+   variable P_OccupiableAreaResidentialAppartment refers to OccupiableAreaResidentialAppartment
+   {
+
+   }
+   variable P_OccupiableAreaMultiFamilyHome refers to OccupiableAreaMultiFamilyHome
+   {
+
+   }
+   variable P_OccupiableAreaSocialHousing refers to OccupiableAreaSocialHousing
+   {
+
+   }
+   variable P_OccupiableAreaIndustrial refers to OccupiableAreaIndustrial
+   {
+
+   }
+   variable P_OccupiableAreaOffices refers to OccupiableAreaOffices
+   {
+
+   }
+   variable P_OccupiableAreaRetail refers to OccupiableAreaRetail
+   {
+
+   }
+   variable P_OccupiableAreaHotel refers to OccupiableAreaHotel
+   {
+
+   }
+   variable P_OccupiableAreaElderlyCare refers to OccupiableAreaElderlyCare
+   {
+
+   }
+   variable P_OccupiableAreaAgriculture refers to OccupiableAreaAgriculture
+   {
+
+   }
+   variable P_OccupiableLandWithoutPlan refers to OccupiableLandWithoutPlan
+   {
+
+   }
+   variable P_OccupiableLandWithPlan refers to OccupiableLandWithPlan
+   {
+
+   }
+   variable P_OccupiableOtherLand refers to OccupiableOtherLand
+   {
+
+   }
+   variable P_PreSold refers to PreSold
+   {
+
+   }
+   variable P_PreSoldArea refers to PreSoldArea
+   {
+
+   }
+   variable P_SalesPrice refers to SalesPrice
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_MarketValue refers to MarketValue
+   {
+
+   }
+   variable P_PreLet refers to PreLet
+   {
+
+   }
+   variable P_ValuePreLet refers to ValuePreLet
+   {
+
+   }
+   variable P_AQRDetailsCadastreInformation refers to AQRDetailsCadastreInformation
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_CadastrialPlotNumberAxis refers to CadastrialPlotNumberAxis
+   {
+
+   }
+   variable P_CadastrialPlotNumberTypedMember refers to CadastrialPlotNumberTypedMember
+   {
+
+   }
+   variable P_CadastrialOwner refers to CadastrialOwner
+   {
+
+   }
+   variable P_AQRDetailsAreaUnitInformation refers to AQRDetailsAreaUnitInformation
+   {
+
+   }
+   variable P_UnitAxis refers to UnitAxis
+   {
+
+   }
+   variable P_UnitTypedMember refers to UnitTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_OccupiableArea refers to OccupiableArea
+   {
+
+   }
+   variable P_AreaForLeaseAQR refers to AreaForLeaseAQR
+   {
+
+   }
+   variable P_AreaAvailableForDevelopment refers to AreaAvailableForDevelopment
+   {
+
+   }
+   variable P_BuildingUsageTitle refers to BuildingUsageTitle
+   {
+
+   }
+   variable P_BuildingUsage refers to BuildingUsage
+   {
+
+   }
+   variable P_BuildingGeneralLeaseInformation refers to BuildingGeneralLeaseInformation
+   {
+
+   }
+   variable P_BuildingLeaseCharges refers to BuildingLeaseCharges
+   {
+
+   }
+   variable P_BuildingLeaseChargesBreak refers to BuildingLeaseChargesBreak
+   {
+
+   }
+   variable P_BuildingRentMeasurement refers to BuildingRentMeasurement
+   {
+
+   }
+   variable P_BuildingMarketMeasurement refers to BuildingMarketMeasurement
+   {
+
+   }
+   variable P_BuildingAreaMeasurement refers to BuildingAreaMeasurement
+   {
+
+   }
+   variable P_BuildingIndexation refers to BuildingIndexation
+   {
+
+   }
+   variable P_BuidlingAreaAdministrationTitle refers to BuidlingAreaAdministrationTitle
+   {
+
+   }
+   variable P_BuildingAreaInformation refers to BuildingAreaInformation
+   {
+
+   }
+   variable P_BuildingMarketValue refers to BuildingMarketValue
+   {
+
+   }
+   variable P_BuildingUnitInformation refers to BuildingUnitInformation
+   {
+
+   }
+   variable P_BuildingValuationTitle refers to BuildingValuationTitle
+   {
+
+   }
+   variable P_BuildingValuationInformationReferenceTitle refers to BuildingValuationInformationReferenceTitle
+   {
+
+   }
+   variable P_BuildingValuationInformationReference refers to BuildingValuationInformationReference
+   {
+
+   }
+   variable P_BuildingValuationAppraisalTitle refers to BuildingValuationAppraisalTitle
+   {
+
+   }
+   variable P_BuildingValuationAppraisalMarketAppraissal refers to BuildingValuationAppraisalMarketAppraissal
+   {
+
+   }
+   variable P_BuildingValuationAppraisalObjectAssessment refers to BuildingValuationAppraisalObjectAssessment
+   {
+
+   }
+   variable P_BuildingValuationAppraisalLocationAssessment refers to BuildingValuationAppraisalLocationAssessment
+   {
+
+   }
+   variable P_BuildingValuationAppraisalSWOTAnalysis refers to BuildingValuationAppraisalSWOTAnalysis
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsTitle refers to BuildingValuationAssumptionsTitle
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsExternalValuation refers to BuildingValuationAssumptionsExternalValuation
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsPreviousValuation refers to BuildingValuationAssumptionsPreviousValuation
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsIndices refers to BuildingValuationAssumptionsIndices
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGeneralAssumptions refers to BuildingValuationAssumptionsGeneralAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsDiscountedCashFlowAssumptions refers to BuildingValuationAssumptionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGrossYieldAssumptions refers to BuildingValuationAssumptionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsNetYieldAssumptions refers to BuildingValuationAssumptionsNetYieldAssumptions
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsGrossNetYieldCorrections refers to BuildingValuationAssumptionsGrossNetYieldCorrections
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsCashFlow refers to BuildingValuationAssumptionsCashFlow
+   {
+
+   }
+   variable P_BuildingValuationAssumptionsOtherValueComponents refers to BuildingValuationAssumptionsOtherValueComponents
+   {
+
+   }
+   variable P_BuildingValuationResultTitle refers to BuildingValuationResultTitle
+   {
+
+   }
+   variable P_BuildingValuationResultValueTitle refers to BuildingValuationResultValueTitle
+   {
+
+   }
+   variable P_BuildingValuationResultValue refers to BuildingValuationResultValue
+   {
+
+   }
+   variable P_BuildingValuationResultKPITitle refers to BuildingValuationResultKPITitle
+   {
+
+   }
+   variable P_BuildingValuationResultKPI refers to BuildingValuationResultKPI
+   {
+
+   }
+   variable P_BuildingValuationResultCommercialTitle refers to BuildingValuationResultCommercialTitle
+   {
+
+   }
+   variable P_BuildingValuationResultCommercial refers to BuildingValuationResultCommercial
+   {
+
+   }
+   variable P_BuildingValuationComparableTitle refers to BuildingValuationComparableTitle
+   {
+
+   }
+   variable P_BuildingValuationComparableRentTransactions refers to BuildingValuationComparableRentTransactions
+   {
+
+   }
+   variable P_BuildingValuationComparableSaleReferences refers to BuildingValuationComparableSaleReferences
+   {
+
+   }
+   variable P_SubbuildingInfoTitle refers to SubbuildingInfoTitle
+   {
+
+   }
+   variable P_SubbuildingGeneralInformationTitle refers to SubbuildingGeneralInformationTitle
+   {
+
+   }
+   variable P_SubbuildingInformation refers to SubbuildingInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ActualUse refers to ActualUse
+   {
+
+   }
+   variable P_LeasedOrUsedByOwner refers to LeasedOrUsedByOwner
+   {
+
+   }
+   variable P_ConstructionYear refers to ConstructionYear
+   {
+
+   }
+   variable P_RenovationYear refers to RenovationYear
+   {
+
+   }
+   variable P_DaysToNextBreak refers to DaysToNextBreak
+   {
+
+   }
+   variable P_AreaForLease refers to AreaForLease
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterComments refers to LandRegisterComments
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_SubbuildingInformationReference refers to SubbuildingInformationReference
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_SubbuildingReferenceAllocatedBy refers to SubbuildingReferenceAllocatedBy
+   {
+
+   }
+   variable P_SubbuildingReferenceAllocatedByDescription refers to SubbuildingReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_SubbuildingReferenceDescription refers to SubbuildingReferenceDescription
+   {
+
+   }
+   variable P_SubbuildingTyping refers to SubbuildingTyping
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TypingDescription refers to TypingDescription
+   {
+
+   }
+   variable P_IPDtype refers to IPDtype
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_SubbuildingAddress refers to SubbuildingAddress
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_DescriptionLocationNL refers to DescriptionLocationNL
+   {
+
+   }
+   variable P_StreetNameNL refers to StreetNameNL
+   {
+
+   }
+   variable P_HouseNumberNL refers to HouseNumberNL
+   {
+
+   }
+   variable P_HouseNumberAddition refers to HouseNumberAddition
+   {
+
+   }
+   variable P_PlaceOfResidenceNL refers to PlaceOfResidenceNL
+   {
+
+   }
+   variable P_Borough refers to Borough
+   {
+
+   }
+   variable P_PostalCodeNL refers to PostalCodeNL
+   {
+
+   }
+   variable P_Municipality refers to Municipality
+   {
+
+   }
+   variable P_NameRegion refers to NameRegion
+   {
+
+   }
+   variable P_BAGPandID refers to BAGPandID
+   {
+
+   }
+   variable P_BAGVBOID refers to BAGVBOID
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_SubbuildingGeneralInformationTitle refers to SubbuildingGeneralInformationTitle
+   {
+
+   }
+   variable P_SubbuidlingLegalInformationTitle refers to SubbuidlingLegalInformationTitle
+   {
+
+   }
+   variable P_SubbuildingLegalInformation refers to SubbuildingLegalInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_RightOfResidence refers to RightOfResidence
+   {
+
+   }
+   variable P_NationalMonument refers to NationalMonument
+   {
+
+   }
+   variable P_ProvinceMonument refers to ProvinceMonument
+   {
+
+   }
+   variable P_CountyMonument refers to CountyMonument
+   {
+
+   }
+   variable P_ProtectedCountyView refers to ProtectedCountyView
+   {
+
+   }
+   variable P_SubbuildingLandRegisterParcels refers to SubbuildingLandRegisterParcels
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_OwnerAccordingToLandRegister refers to OwnerAccordingToLandRegister
+   {
+
+   }
+   variable P_OwnerChamberOfCommerceRegistrationNumber refers to OwnerChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_CountyLandRegister refers to CountyLandRegister
+   {
+
+   }
+   variable P_CountyLandRegisterSection refers to CountyLandRegisterSection
+   {
+
+   }
+   variable P_CountyLandRegisterNumber refers to CountyLandRegisterNumber
+   {
+
+   }
+   variable P_CountyLandRegisterIndexNumberAppartmentRight refers to CountyLandRegisterIndexNumberAppartmentRight
+   {
+
+   }
+   variable P_GroundInterest refers to GroundInterest
+   {
+
+   }
+   variable P_LandRegisterArea refers to LandRegisterArea
+   {
+
+   }
+   variable P_SubbuildingLandRegisterParcelSalesInformation refers to SubbuildingLandRegisterParcelSalesInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDParcelAxis refers to InternalIDParcelAxis
+   {
+
+   }
+   variable P_InternalIDParcelTypedMember refers to InternalIDParcelTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LandRegisterParcelSalesDate refers to LandRegisterParcelSalesDate
+   {
+
+   }
+   variable P_LandRegisterParcelSalesPrice refers to LandRegisterParcelSalesPrice
+   {
+
+   }
+   variable P_SubbuildingUsageTitle refers to SubbuildingUsageTitle
+   {
+
+   }
+   variable P_SubbuildingUsage refers to SubbuildingUsage
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_OccupancyRate refers to OccupancyRate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_EstimateHeadlineRentDate refers to EstimateHeadlineRentDate
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_MedianCreditQualityTenants refers to MedianCreditQualityTenants
+   {
+
+   }
+   variable P_NumberOfTenants refers to NumberOfTenants
+   {
+
+   }
+   variable P_SubbuildingGeneralLeaseInformation refers to SubbuildingGeneralLeaseInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_TenantName refers to TenantName
+   {
+
+   }
+   variable P_TenantChamberOfCommerceRegistrationNumber refers to TenantChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_CreditQualityTenant refers to CreditQualityTenant
+   {
+
+   }
+   variable P_AnchorTenant refers to AnchorTenant
+   {
+
+   }
+   variable P_NAICSCode refers to NAICSCode
+   {
+
+   }
+   variable P_SubbuildingLeaseCharges refers to SubbuildingLeaseCharges
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_IncomeCategory refers to IncomeCategory
+   {
+
+   }
+   variable P_PaymentFrequency refers to PaymentFrequency
+   {
+
+   }
+   variable P_LeaseVATChargeable refers to LeaseVATChargeable
+   {
+
+   }
+   variable P_LeaseVAT refers to LeaseVAT
+   {
+
+   }
+   variable P_LeaseInterestChargeable refers to LeaseInterestChargeable
+   {
+
+   }
+   variable P_RentCommissionAuthorityCase refers to RentCommissionAuthorityCase
+   {
+
+   }
+   variable P_AmountInvoiced refers to AmountInvoiced
+   {
+
+   }
+   variable P_StartingRent refers to StartingRent
+   {
+
+   }
+   variable P_StartPaymentSchedule refers to StartPaymentSchedule
+   {
+
+   }
+   variable P_EndPaymentSchedule refers to EndPaymentSchedule
+   {
+
+   }
+   variable P_AdvancePayment refers to AdvancePayment
+   {
+
+   }
+   variable P_SubbuildingLeaseChargesBreak refers to SubbuildingLeaseChargesBreak
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_BreakDate refers to BreakDate
+   {
+
+   }
+   variable P_FirstNoticeDate refers to FirstNoticeDate
+   {
+
+   }
+   variable P_LastNoticeDate refers to LastNoticeDate
+   {
+
+   }
+   variable P_BreakParty refers to BreakParty
+   {
+
+   }
+   variable P_BreakPenalty refers to BreakPenalty
+   {
+
+   }
+   variable P_BreakPenaltyParty refers to BreakPenaltyParty
+   {
+
+   }
+   variable P_BreakRollingOption refers to BreakRollingOption
+   {
+
+   }
+   variable P_SubbuildingRentMeasurement refers to SubbuildingRentMeasurement
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ContractRent refers to ContractRent
+   {
+
+   }
+   variable P_ContractRentMethod refers to ContractRentMethod
+   {
+
+   }
+   variable P_ContractRentSourceType refers to ContractRentSourceType
+   {
+
+   }
+   variable P_ContractRentDate refers to ContractRentDate
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_SubbuildingMarketMeasurement refers to SubbuildingMarketMeasurement
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketRent refers to MarketRent
+   {
+
+   }
+   variable P_MarketRentSourceType refers to MarketRentSourceType
+   {
+
+   }
+   variable P_EstimateMarketRentDate refers to EstimateMarketRentDate
+   {
+
+   }
+   variable P_SubbuildingAreaMeasurement refers to SubbuildingAreaMeasurement
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_AreaLeasedMethod refers to AreaLeasedMethod
+   {
+
+   }
+   variable P_AreaSourceType refers to AreaSourceType
+   {
+
+   }
+   variable P_AreaMeasuredDate refers to AreaMeasuredDate
+   {
+
+   }
+   variable P_SubbuildingIndexation refers to SubbuildingIndexation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDLeaseChargesAxis refers to InternalIDLeaseChargesAxis
+   {
+
+   }
+   variable P_InternalIDLeaseChargesTypedMember refers to InternalIDLeaseChargesTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IndexUsed refers to IndexUsed
+   {
+
+   }
+   variable P_IndexUsedDescription refers to IndexUsedDescription
+   {
+
+   }
+   variable P_DenominationMethod refers to DenominationMethod
+   {
+
+   }
+   variable P_IndexDelayNominator refers to IndexDelayNominator
+   {
+
+   }
+   variable P_IndexDelayDenominator refers to IndexDelayDenominator
+   {
+
+   }
+   variable P_IndexEffectiveDate refers to IndexEffectiveDate
+   {
+
+   }
+   variable P_IndexFrequency refers to IndexFrequency
+   {
+
+   }
+   variable P_IndexStartYear refers to IndexStartYear
+   {
+
+   }
+   variable P_MaxRentIncrease refers to MaxRentIncrease
+   {
+
+   }
+   variable P_MinRentIncrease refers to MinRentIncrease
+   {
+
+   }
+   variable P_SubbuidlingAreaAdministrationTitle refers to SubbuidlingAreaAdministrationTitle
+   {
+
+   }
+   variable P_SubbuildingAreaInformation refers to SubbuildingAreaInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LeaseArea refers to LeaseArea
+   {
+
+   }
+   variable P_AreaForLeaseMethod refers to AreaForLeaseMethod
+   {
+
+   }
+   variable P_LeaseAreaSourceType refers to LeaseAreaSourceType
+   {
+
+   }
+   variable P_LeaseAreaMeasurementDate refers to LeaseAreaMeasurementDate
+   {
+
+   }
+   variable P_SubbuildingMarketValue refers to SubbuildingMarketValue
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValue refers to MarketValue
+   {
+
+   }
+   variable P_MarketValueSourceType refers to MarketValueSourceType
+   {
+
+   }
+   variable P_MarketValueMeasurementDate refers to MarketValueMeasurementDate
+   {
+
+   }
+   variable P_SubbuildingUnitInformation refers to SubbuildingUnitInformation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_IPDSubtype refers to IPDSubtype
+   {
+
+   }
+   variable P_PreSold refers to PreSold
+   {
+
+   }
+   variable P_PreSoldArea refers to PreSoldArea
+   {
+
+   }
+   variable P_SalesPrice refers to SalesPrice
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_PreLet refers to PreLet
+   {
+
+   }
+   variable P_ValuePreLet refers to ValuePreLet
+   {
+
+   }
+   variable P_SubbuildingValuationTitle refers to SubbuildingValuationTitle
+   {
+
+   }
+   variable P_SubbuildingValuationInformationReferenceTitle refers to SubbuildingValuationInformationReferenceTitle
+   {
+
+   }
+   variable P_SubbuildingValuationInformationReference refers to SubbuildingValuationInformationReference
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_SubbuildingValuationReferenceAllocatedBy refers to SubbuildingValuationReferenceAllocatedBy
+   {
+
+   }
+   variable P_SubbuildingValuationReferenceAllocatedByDescription refers to SubbuildingValuationReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_SubbuildingValuationReferenceDescription refers to SubbuildingValuationReferenceDescription
+   {
+
+   }
+   variable P_SubbuildingValuationAppraisalTitle refers to SubbuildingValuationAppraisalTitle
+   {
+
+   }
+   variable P_SubbuildingValuationAppraisalMarketAppraissal refers to SubbuildingValuationAppraisalMarketAppraissal
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketabilityOverall refers to MarketabilityOverall
+   {
+
+   }
+   variable P_MarketabilitySales refers to MarketabilitySales
+   {
+
+   }
+   variable P_MarketabilityRent refers to MarketabilityRent
+   {
+
+   }
+   variable P_AlternativeUseMarket refers to AlternativeUseMarket
+   {
+
+   }
+   variable P_HighestAndBestUseDescription refers to HighestAndBestUseDescription
+   {
+
+   }
+   variable P_MarketabilitySalesUnit refers to MarketabilitySalesUnit
+   {
+
+   }
+   variable P_MarketvisionCountry refers to MarketvisionCountry
+   {
+
+   }
+   variable P_MarketvisionLocal refers to MarketvisionLocal
+   {
+
+   }
+   variable P_SubbuildingValuationAppraisalObjectAssessment refers to SubbuildingValuationAppraisalObjectAssessment
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ObjectOverallAssessment refers to ObjectOverallAssessment
+   {
+
+   }
+   variable P_ConstructionState refers to ConstructionState
+   {
+
+   }
+   variable P_MaintenanceStateInterior refers to MaintenanceStateInterior
+   {
+
+   }
+   variable P_MaintenanceStateExterior refers to MaintenanceStateExterior
+   {
+
+   }
+   variable P_MaintenanceGeneralAssesment refers to MaintenanceGeneralAssesment
+   {
+
+   }
+   variable P_Functionality refers to Functionality
+   {
+
+   }
+   variable P_AlternativeUseObject refers to AlternativeUseObject
+   {
+
+   }
+   variable P_ParkingOnSite refers to ParkingOnSite
+   {
+
+   }
+   variable P_SubbuildingValuationAppraisalLocationAssessment refers to SubbuildingValuationAppraisalLocationAssessment
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_LocationOverallAssessment refers to LocationOverallAssessment
+   {
+
+   }
+   variable P_AccessibilityGeneral refers to AccessibilityGeneral
+   {
+
+   }
+   variable P_AccessibilityCars refers to AccessibilityCars
+   {
+
+   }
+   variable P_AccessibilityPublicTransport refers to AccessibilityPublicTransport
+   {
+
+   }
+   variable P_AccessibilityTrucks refers to AccessibilityTrucks
+   {
+
+   }
+   variable P_ParkingPublic refers to ParkingPublic
+   {
+
+   }
+   variable P_Site refers to Site
+   {
+
+   }
+   variable P_SubbuildingValuationAppraisalSWOTAnalysis refers to SubbuildingValuationAppraisalSWOTAnalysis
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_Strengths refers to Strengths
+   {
+
+   }
+   variable P_Weaknesses refers to Weaknesses
+   {
+
+   }
+   variable P_Opportunities refers to Opportunities
+   {
+
+   }
+   variable P_Threats refers to Threats
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsTitle refers to SubbuildingValuationAssumptionsTitle
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsExternalValuation refers to SubbuildingValuationAssumptionsExternalValuation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_LocalTaxInformationTitle refers to LocalTaxInformationTitle
+   {
+
+   }
+   variable P_Value refers to Value
+   {
+
+   }
+   variable P_ReferenceDate refers to ReferenceDate
+   {
+
+   }
+   variable P_RebuildValueTitle refers to RebuildValueTitle
+   {
+
+   }
+   variable P_RebuildValueInsurance refers to RebuildValueInsurance
+   {
+
+   }
+   variable P_AssesmentDateRebuildValue refers to AssesmentDateRebuildValue
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsPreviousValuation refers to SubbuildingValuationAssumptionsPreviousValuation
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_ValuationDate refers to ValuationDate
+   {
+
+   }
+   variable P_ValuationType refers to ValuationType
+   {
+
+   }
+   variable P_Remarks refers to Remarks
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsIndices refers to SubbuildingValuationAssumptionsIndices
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_IndexSource refers to IndexSource
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_IndexMeasurementTitle refers to IndexMeasurementTitle
+   {
+
+   }
+   variable P_Index refers to Index
+   {
+
+   }
+   variable P_PeriodTitle refers to PeriodTitle
+   {
+
+   }
+   variable P_Start refers to Start
+   {
+
+   }
+   variable P_End refers to End
+   {
+
+   }
+   variable P_PeriodNumber refers to PeriodNumber
+   {
+
+   }
+   variable P_Description refers to Description
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsGeneralAssumptions refers to SubbuildingValuationAssumptionsGeneralAssumptions
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuedInterest refers to ValuedInterest
+   {
+
+   }
+   variable P_Principles refers to Principles
+   {
+
+   }
+   variable P_SpecialPrinciples refers to SpecialPrinciples
+   {
+
+   }
+   variable P_AssumptionExplanation refers to AssumptionExplanation
+   {
+
+   }
+   variable P_Disclaimer refers to Disclaimer
+   {
+
+   }
+   variable P_MarketRentUsedExplination refers to MarketRentUsedExplination
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsDiscountedCashFlowAssumptions refers to SubbuildingValuationAssumptionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ValuationPeriod refers to ValuationPeriod
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_DiscountRateGroundLease refers to DiscountRateGroundLease
+   {
+
+   }
+   variable P_DiscountRateCorrectionsDiscountedCashFlowAssumptions refers to DiscountRateCorrectionsDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCostPercentageDiscountedCashFlowAssumptions refers to TransferCostPercentageDiscountedCashFlowAssumptions
+   {
+
+   }
+   variable P_VAT refers to VAT
+   {
+
+   }
+   variable P_TimingRentIncome refers to TimingRentIncome
+   {
+
+   }
+   variable P_TimingOperatingExpenses refers to TimingOperatingExpenses
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsGrossYieldAssumptions refers to SubbuildingValuationAssumptionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentGrossYieldAssumptions refers to MarketRentGrossYieldAssumptions
+   {
+
+   }
+   variable P_GrossCapRateAfterTransferCostContractRentPerYear refers to GrossCapRateAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_DiscountRateCorrectionsGrossYieldAssumptions refers to DiscountRateCorrectionsGrossYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageGrossYieldAssumptions refers to TransferCostPercentageGrossYieldAssumptions
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsNetYieldAssumptions refers to SubbuildingValuationAssumptionsNetYieldAssumptions
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_MarketRentNetYieldAssumptions refers to MarketRentNetYieldAssumptions
+   {
+
+   }
+   variable P_EternityTotalCost refers to EternityTotalCost
+   {
+
+   }
+   variable P_EternityFixedCostPerYear refers to EternityFixedCostPerYear
+   {
+
+   }
+   variable P_EternityMaintenancePerYear refers to EternityMaintenancePerYear
+   {
+
+   }
+   variable P_EternityGroundLeasePerYear refers to EternityGroundLeasePerYear
+   {
+
+   }
+   variable P_EternityPropertyManagementPerYear refers to EternityPropertyManagementPerYear
+   {
+
+   }
+   variable P_EternityOtherCostPerYear refers to EternityOtherCostPerYear
+   {
+
+   }
+   variable P_NetMarketRent refers to NetMarketRent
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_DiscountRateCorrectionsNetYieldAssumptions refers to DiscountRateCorrectionsNetYieldAssumptions
+   {
+
+   }
+   variable P_TransferCostPercentageNetYieldAssumptions refers to TransferCostPercentageNetYieldAssumptions
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsGrossNetYieldCorrections refers to SubbuildingValuationAssumptionsGrossNetYieldCorrections
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TotalCorrections refers to TotalCorrections
+   {
+
+   }
+   variable P_CorrectionRevisionaryPotential refers to CorrectionRevisionaryPotential
+   {
+
+   }
+   variable P_CorrectionMutationVacancy refers to CorrectionMutationVacancy
+   {
+
+   }
+   variable P_CorrectionInitialVacancy refers to CorrectionInitialVacancy
+   {
+
+   }
+   variable P_CorrectionMutationExpenses refers to CorrectionMutationExpenses
+   {
+
+   }
+   variable P_CorrectionVATCompensation refers to CorrectionVATCompensation
+   {
+
+   }
+   variable P_CorrectionNonDeductableVAT refers to CorrectionNonDeductableVAT
+   {
+
+   }
+   variable P_CorrectionDeferredMaintenance refers to CorrectionDeferredMaintenance
+   {
+
+   }
+   variable P_CorrectionGroundLease refers to CorrectionGroundLease
+   {
+
+   }
+   variable P_CorrectionOtherIncomeExpenses refers to CorrectionOtherIncomeExpenses
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsCashFlow refers to SubbuildingValuationAssumptionsCashFlow
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_TypeFinancialCode refers to TypeFinancialCode
+   {
+
+   }
+   variable P_FinancialCode refers to FinancialCode
+   {
+
+   }
+   variable P_AmountMeasurementTitle refers to AmountMeasurementTitle
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_SourceType refers to SourceType
+   {
+
+   }
+   variable P_PeriodTitle refers to PeriodTitle
+   {
+
+   }
+   variable P_Start refers to Start
+   {
+
+   }
+   variable P_End refers to End
+   {
+
+   }
+   variable P_PeriodNumber refers to PeriodNumber
+   {
+
+   }
+   variable P_Description refers to Description
+   {
+
+   }
+   variable P_SubbuildingValuationAssumptionsOtherValueComponents refers to SubbuildingValuationAssumptionsOtherValueComponents
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_InternalIDAssumptionAxis refers to InternalIDAssumptionAxis
+   {
+
+   }
+   variable P_InternalIDAssumptionTypedMember refers to InternalIDAssumptionTypedMember
+   {
+
+   }
+   variable P_ComponentType refers to ComponentType
+   {
+
+   }
+   variable P_DescriptionOtherValueComponents refers to DescriptionOtherValueComponents
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_SubbuildingValuationResultTitle refers to SubbuildingValuationResultTitle
+   {
+
+   }
+   variable P_SubbuildingValuationResultValueTitle refers to SubbuildingValuationResultValueTitle
+   {
+
+   }
+   variable P_SubbuildingValuationResultValue refers to SubbuildingValuationResultValue
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ValueConcept refers to ValueConcept
+   {
+
+   }
+   variable P_TypeOfTransferCost refers to TypeOfTransferCost
+   {
+
+   }
+   variable P_Amount refers to Amount
+   {
+
+   }
+   variable P_AmountInLetters refers to AmountInLetters
+   {
+
+   }
+   variable P_SubbuildingValuationResultValueDescriptionCalculationModelUsedTitle refers to SubbuildingValuationResultValueDescriptionCalculationModelUsedTitle
+   {
+
+   }
+   variable P_CalculationModelUsed refers to CalculationModelUsed
+   {
+
+   }
+   variable P_OwnExcelModel refers to OwnExcelModel
+   {
+
+   }
+   variable P_SubbuildingValuationResultKPITitle refers to SubbuildingValuationResultKPITitle
+   {
+
+   }
+   variable P_SubbuildingValuationResultKPI refers to SubbuildingValuationResultKPI
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_MarketValueBeforeCorrectionBeforeTransferCost refers to MarketValueBeforeCorrectionBeforeTransferCost
+   {
+
+   }
+   variable P_TransferCost refers to TransferCost
+   {
+
+   }
+   variable P_MarketValueBeforeTransferCost refers to MarketValueBeforeTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCost refers to MarketValueAfterTransferCost
+   {
+
+   }
+   variable P_MarketValueAfterTransferCostRounded refers to MarketValueAfterTransferCostRounded
+   {
+
+   }
+   variable P_DiscountRateDiscountedCashFlow refers to DiscountRateDiscountedCashFlow
+   {
+
+   }
+   variable P_NetPresentValueCashFlows refers to NetPresentValueCashFlows
+   {
+
+   }
+   variable P_ExitYieldMarketRentBeforeTransferCost refers to ExitYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_ExitYieldNetMarketRentBeforeTransferCost refers to ExitYieldNetMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetPresentValueExitValueAfterTransferCost refers to NetPresentValueExitValueAfterTransferCost
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostContractRentPerYear refers to GrossYieldAfterTransferCostContractRentPerYear
+   {
+
+   }
+   variable P_GrossYieldAfterTransferCostMarketRentPerYear refers to GrossYieldAfterTransferCostMarketRentPerYear
+   {
+
+   }
+   variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost refers to NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldMarketRentBeforeTransferCost refers to NetYieldMarketRentBeforeTransferCost
+   {
+
+   }
+   variable P_NetYieldRentalIncomeBeforeTransferCost refers to NetYieldRentalIncomeBeforeTransferCost
+   {
+
+   }
+   variable P_InternalRateOfReturn refers to InternalRateOfReturn
+   {
+
+   }
+   variable P_OperatingExpensesPercentageMarketRentPerYear refers to OperatingExpensesPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_VacancyPercentageMarketRentPerYear refers to VacancyPercentageMarketRentPerYear
+   {
+
+   }
+   variable P_SubbuildingValuationResultCommercialTitle refers to SubbuildingValuationResultCommercialTitle
+   {
+
+   }
+   variable P_SubbuildingValuationResultCommercial refers to SubbuildingValuationResultCommercial
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_WeightedAverageLeaseExpiry refers to WeightedAverageLeaseExpiry
+   {
+
+   }
+   variable P_MarketValuePerSquareMeter refers to MarketValuePerSquareMeter
+   {
+
+   }
+   variable P_SubbuildingValuationComparableTitle refers to SubbuildingValuationComparableTitle
+   {
+
+   }
+   variable P_SubbuildingValuationComparableRentTransactions refers to SubbuildingValuationComparableRentTransactions
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_ComparableRentTransactionAxis refers to ComparableRentTransactionAxis
+   {
+
+   }
+   variable P_ComparableRentTransactionTypedMember refers to ComparableRentTransactionTypedMember
+   {
+
+   }
+   variable P_CommentRentComparable refers to CommentRentComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_SubbuildingValuationComparableSaleReferences refers to SubbuildingValuationComparableSaleReferences
+   {
+
+   }
+   variable P_SaleReferenceAxis refers to SaleReferenceAxis
+   {
+
+   }
+   variable P_SaleReferenceTypedMember refers to SaleReferenceTypedMember
+   {
+
+   }
+   variable P_InternalIDSubFacilityAxis refers to InternalIDSubFacilityAxis
+   {
+
+   }
+   variable P_InternalIDSubFacilityTypedMember refers to InternalIDSubFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_InternalIDCollateralAxis refers to InternalIDCollateralAxis
+   {
+
+   }
+   variable P_InternalIDCollateralTypedMember refers to InternalIDCollateralTypedMember
+   {
+
+   }
+   variable P_CommentSaleComparable refers to CommentSaleComparable
+   {
+
+   }
+   variable P_TransactionDate refers to TransactionDate
+   {
+
+   }
+   variable P_ReportInformationTitle refers to ReportInformationTitle
+   {
+
+   }
+   variable P_DocumentInformationRealEstate refers to DocumentInformationRealEstate
+   {
+
+   }
+   variable P_DocumentCreationDate refers to DocumentCreationDate
+   {
+
+   }
+   variable P_DocumentPresentationCurrency refers to DocumentPresentationCurrency
+   {
+
+   }
+   variable P_EntityInformationRealEstate refers to EntityInformationRealEstate
+   {
+
+   }
+   variable P_ChamberOfCommerceRegistrationNumber refers to ChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_LegalEntityName refers to LegalEntityName
+   {
+
+   }
+   variable P_LegalEntityLegalFormBanks refers to LegalEntityLegalFormBanks
+   {
+
+   }
+   variable P_BusinessNames refers to BusinessNames
+   {
+
+   }
+   variable P_LegalEntityRegisteredOffice refers to LegalEntityRegisteredOffice
+   {
+
+   }
+   variable P_HouseNumberNL refers to HouseNumberNL
+   {
+
+   }
+   variable P_HouseNumberAddition refers to HouseNumberAddition
+   {
+
+   }
+   variable P_PostalCodeNL refers to PostalCodeNL
+   {
+
+   }
+   variable P_PlaceOfResidenceNL refers to PlaceOfResidenceNL
+   {
+
+   }
+   variable P_ContactForDocumentPresentationRealEstate refers to ContactForDocumentPresentationRealEstate
+   {
+
+   }
+   variable P_ContactType refers to ContactType
+   {
+
+   }
+   variable P_FirstName refers to FirstName
+   {
+
+   }
+   variable P_Prefix refers to Prefix
+   {
+
+   }
+   variable P_FamilyName refers to FamilyName
+   {
+
+   }
+   variable P_OrganisationName refers to OrganisationName
+   {
+
+   }
+   variable P_TelephoneNumber refers to TelephoneNumber
+   {
+
+   }
+   variable P_EmailAddressContact refers to EmailAddressContact
+   {
+
+   }
+   variable P_LeaseInformationTitle refers to LeaseInformationTitle
+   {
+
+   }
+   variable P_AQRDetailsGeneralLeaseInformation refers to AQRDetailsGeneralLeaseInformation
+   {
+
+   }
+   variable P_LeaseAxis refers to LeaseAxis
+   {
+
+   }
+   variable P_LeaseTypedMember refers to LeaseTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_CreditQualityAnchorTenant refers to CreditQualityAnchorTenant
+   {
+
+   }
+   variable P_MedianCreditQualityTenants refers to MedianCreditQualityTenants
+   {
+
+   }
+   variable P_AnchorTenant refers to AnchorTenant
+   {
+
+   }
+   variable P_AreaLeased refers to AreaLeased
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_EstimateHeadlineRentDate refers to EstimateHeadlineRentDate
+   {
+
+   }
+   variable P_UpwardOnlyRentReview refers to UpwardOnlyRentReview
+   {
+
+   }
+   variable P_TimeToNextBreak refers to TimeToNextBreak
+   {
+
+   }
+   variable P_AQRDetailsLeaseCharges refers to AQRDetailsLeaseCharges
+   {
+
+   }
+   variable P_LeaseChargesAxis refers to LeaseChargesAxis
+   {
+
+   }
+   variable P_LeaseChargeTypedMember refers to LeaseChargeTypedMember
+   {
+
+   }
+   variable P_InternalIDFacilityAxis refers to InternalIDFacilityAxis
+   {
+
+   }
+   variable P_InternalIDFacilityTypedMember refers to InternalIDFacilityTypedMember
+   {
+
+   }
+   variable P_ContractRentPerYear refers to ContractRentPerYear
+   {
+
+   }
+   variable P_LeaseArea refers to LeaseArea
+   {
+
+   }
+   variable P_SourceType refers to SourceType
+   {
+
+   }
+   variable P_EstimateHeadlineRentDate refers to EstimateHeadlineRentDate
+   {
+
+   }
+   variable P_ValuationAssignmentTitle refers to ValuationAssignmentTitle
+   {
+
+   }
+   variable P_ValuationAssignmentInformationTitle refers to ValuationAssignmentInformationTitle
+   {
+
+   }
+   variable P_ValuationAssignmentInformation refers to ValuationAssignmentInformation
+   {
+
+   }
+   variable P_ValuatorTitle refers to ValuatorTitle
+   {
+
+   }
+   variable P_ValuatorOrganisation refers to ValuatorOrganisation
+   {
+
+   }
+   variable P_Valuator refers to Valuator
+   {
+
+   }
+   variable P_ValuatorReference refers to ValuatorReference
+   {
+
+   }
+   variable P_ValuatorRegister refers to ValuatorRegister
+   {
+
+   }
+   variable P_ValuatorAssociation refers to ValuatorAssociation
+   {
+
+   }
+   variable P_ValuationInstructorTitle refers to ValuationInstructorTitle
+   {
+
+   }
+   variable P_ValuationInstructor refers to ValuationInstructor
+   {
+
+   }
+   variable P_ValuationInstructorReference refers to ValuationInstructorReference
+   {
+
+   }
+   variable P_ValuationRemunerationTitle refers to ValuationRemunerationTitle
+   {
+
+   }
+   variable P_ValuationRemuneration refers to ValuationRemuneration
+   {
+
+   }
+   variable P_ValuationRelevantValuationDatesTitle refers to ValuationRelevantValuationDatesTitle
+   {
+
+   }
+   variable P_ValuationRelevantValuationDates refers to ValuationRelevantValuationDates
+   {
+
+   }
+   variable P_ValuationDeclarations refers to ValuationDeclarations
+   {
+
+   }
+   variable P_ValuationDeclarations refers to ValuationDeclarations
+   {
+
+   }
+   variable P_ValuationInspection refers to ValuationInspection
+   {
+
+   }
+   variable P_ValuationInspection refers to ValuationInspection
+   {
+
+   }
+   variable P_ValuationAssignmentTitle refers to ValuationAssignmentTitle
+   {
+
+   }
+   variable P_ValuationAssignmentInformationTitle refers to ValuationAssignmentInformationTitle
+   {
+
+   }
+   variable P_ValuationAssignmentInformation refers to ValuationAssignmentInformation
+   {
+
+   }
+   variable P_AssignmentDate refers to AssignmentDate
+   {
+
+   }
+   variable P_AssignmentAgreed refers to AssignmentAgreed
+   {
+
+   }
+   variable P_AssignmentTermsAgreed refers to AssignmentTermsAgreed
+   {
+
+   }
+   variable P_ValuatorTitle refers to ValuatorTitle
+   {
+
+   }
+   variable P_ValuatorOrganisation refers to ValuatorOrganisation
+   {
+
+   }
+   variable P_Name refers to Name
+   {
+
+   }
+   variable P_ShortName refers to ShortName
+   {
+
+   }
+   variable P_ChamberOfCommerceRegistrationNumber refers to ChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_PlaceOfRegistration refers to PlaceOfRegistration
+   {
+
+   }
+   variable P_Valuator refers to Valuator
+   {
+
+   }
+   variable P_InternalIDValuatorAxis refers to InternalIDValuatorAxis
+   {
+
+   }
+   variable P_InternalIDValuatorTypedMember refers to InternalIDValuatorTypedMember
+   {
+
+   }
+   variable P_Name refers to Name
+   {
+
+   }
+   variable P_TitlesPrefix refers to TitlesPrefix
+   {
+
+   }
+   variable P_TitlesSuffix refers to TitlesSuffix
+   {
+
+   }
+   variable P_JobTitle refers to JobTitle
+   {
+
+   }
+   variable P_Salutation refers to Salutation
+   {
+
+   }
+   variable P_ContactPerson refers to ContactPerson
+   {
+
+   }
+   variable P_NRVTNumber refers to NRVTNumber
+   {
+
+   }
+   variable P_Email refers to Email
+   {
+
+   }
+   variable P_TelephoneNumber refers to TelephoneNumber
+   {
+
+   }
+   variable P_Specialisation refers to Specialisation
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_ValuatorReference refers to ValuatorReference
+   {
+
+   }
+   variable P_InternalIDValuatorAxis refers to InternalIDValuatorAxis
+   {
+
+   }
+   variable P_InternalIDValuatorTypedMember refers to InternalIDValuatorTypedMember
+   {
+
+   }
+   variable P_ValuatorReferenceAllocatedBy refers to ValuatorReferenceAllocatedBy
+   {
+
+   }
+   variable P_ValuatorReferenceAllocatedByDescription refers to ValuatorReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_ValuatorReferenceDescription refers to ValuatorReferenceDescription
+   {
+
+   }
+   variable P_ValuatorRegister refers to ValuatorRegister
+   {
+
+   }
+   variable P_InternalIDValuatorAxis refers to InternalIDValuatorAxis
+   {
+
+   }
+   variable P_InternalIDValuatorTypedMember refers to InternalIDValuatorTypedMember
+   {
+
+   }
+   variable P_RegistrationNumber refers to RegistrationNumber
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_ValuatorAssociation refers to ValuatorAssociation
+   {
+
+   }
+   variable P_InternalIDValuatorAxis refers to InternalIDValuatorAxis
+   {
+
+   }
+   variable P_InternalIDValuatorTypedMember refers to InternalIDValuatorTypedMember
+   {
+
+   }
+   variable P_RegistrationNumber refers to RegistrationNumber
+   {
+
+   }
+   variable P_PresentationOrder refers to PresentationOrder
+   {
+
+   }
+   variable P_ValuationInstructorTitle refers to ValuationInstructorTitle
+   {
+
+   }
+   variable P_ValuationInstructor refers to ValuationInstructor
+   {
+
+   }
+   variable P_TypeOfInstructor refers to TypeOfInstructor
+   {
+
+   }
+   variable P_ObjectValuationInstructorOrganisationTitle refers to ObjectValuationInstructorOrganisationTitle
+   {
+
+   }
+   variable P_InstructorName refers to InstructorName
+   {
+
+   }
+   variable P_ShortName refers to ShortName
+   {
+
+   }
+   variable P_ChamberOfCommerceRegistrationNumber refers to ChamberOfCommerceRegistrationNumber
+   {
+
+   }
+   variable P_PlaceOfRegistration refers to PlaceOfRegistration
+   {
+
+   }
+   variable P_ObjectValuationInstructorContactPersonTitle refers to ObjectValuationInstructorContactPersonTitle
+   {
+
+   }
+   variable P_ContactName refers to ContactName
+   {
+
+   }
+   variable P_TitlesPrefix refers to TitlesPrefix
+   {
+
+   }
+   variable P_TitlesSuffix refers to TitlesSuffix
+   {
+
+   }
+   variable P_JobTitle refers to JobTitle
+   {
+
+   }
+   variable P_Salutation refers to Salutation
+   {
+
+   }
+   variable P_ContactPerson refers to ContactPerson
+   {
+
+   }
+   variable P_ObjectValuationInstructorAddressTitle refers to ObjectValuationInstructorAddressTitle
+   {
+
+   }
+   variable P_DepartmentName refers to DepartmentName
+   {
+
+   }
+   variable P_ValuationInstructorReference refers to ValuationInstructorReference
+   {
+
+   }
+   variable P_InstructorReferenceAllocatedBy refers to InstructorReferenceAllocatedBy
+   {
+
+   }
+   variable P_InstructorReferenceAllocatedByDescription refers to InstructorReferenceAllocatedByDescription
+   {
+
+   }
+   variable P_InstructorReferenceDescription refers to InstructorReferenceDescription
+   {
+
+   }
+   variable P_ValuationRemunerationTitle refers to ValuationRemunerationTitle
+   {
+
+   }
+   variable P_ValuationRemuneration refers to ValuationRemuneration
+   {
+
+   }
+   variable P_ValuationRelevantValuationDatesTitle refers to ValuationRelevantValuationDatesTitle
+   {
+
+   }
+   variable P_ValuationRelevantValuationDates refers to ValuationRelevantValuationDates
+   {
+
+   }
+   variable P_ValuationDate refers to ValuationDate
+   {
+
+   }
+   variable P_InspectionDate refers to InspectionDate
+   {
+
+   }
+   variable P_DateAssignmentAccepted refers to DateAssignmentAccepted
+   {
+
+   }
+   variable P_DateAssignmentComplete refers to DateAssignmentComplete
+   {
+
+   }
+   variable P_DateSignedSecondValuator refers to DateSignedSecondValuator
+   {
+
+   }
+   variable P_ValuationDeclarations refers to ValuationDeclarations
+   {
+
+   }
+   variable P_ValuationDeclarations refers to ValuationDeclarations
+   {
+
+   }
+   variable P_EarlierInvolvement refers to EarlierInvolvement
+   {
+
+   }
+   variable P_BusinessInterest refers to BusinessInterest
+   {
+
+   }
+   variable P_SizeAssignment refers to SizeAssignment
+   {
+
+   }
+   variable P_QualityControl refers to QualityControl
+   {
+
+   }
+   variable P_PlausibilityCheck refers to PlausibilityCheck
+   {
+
+   }
+   variable P_PlausbilitySecondValuator refers to PlausbilitySecondValuator
+   {
+
+   }
+   variable P_DisciplinaryLaw refers to DisciplinaryLaw
+   {
+
+   }
+   variable P_OtherDeclarations refers to OtherDeclarations
+   {
+
+   }
+   variable P_ValuationInspection refers to ValuationInspection
+   {
+
+   }
+   variable P_ValuationInspection refers to ValuationInspection
+   {
+
+   }
+   variable P_InspectionDate refers to InspectionDate
+   {
+
+   }
+   variable P_InspectionDoneby refers to InspectionDoneby
+   {
+
+   }
+   variable P_InspectionDegree refers to InspectionDegree
+   {
+
+   }
+  }
  }
 }

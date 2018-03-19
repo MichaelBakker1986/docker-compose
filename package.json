@@ -5,6 +5,7 @@
   "description": "lme-all",
   "main": "index.js",
   "dependencies": {
+    "babelify": "^8.0.0",
     "concurrently": "^3.5.0",
     "jstat": "^1.7.1",
     "xhr2": "^0.1.4"
@@ -29,7 +30,14 @@
     "type": "git",
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
-  "transform": [["babelify", { "comments": false }]],
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
   "presets": [
     "env"
   ],
