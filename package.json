@@ -29,7 +29,14 @@
     "type": "git",
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
-  "transform": [["babelify", { "comments": false }]],
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
   "presets": [
     "env"
   ],

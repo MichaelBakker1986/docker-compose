@@ -31,7 +31,14 @@
     "xsd2jsonschema": "0.0.5",
     "yamljs": "^0.3.0"
   },
-  "transform": [["babelify", { "comments": false }]],
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
   "presets": [
     "env"
   ],
