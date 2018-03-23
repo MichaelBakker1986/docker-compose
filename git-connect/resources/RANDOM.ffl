@@ -1,0 +1,6171 @@
+model RANDOM uses BaseModel
+{
+ title: "Presentation root variable";
+ display_options: scorecard;
+ variable P_ObjectGeneralInformationTitle
+ {
+  title: "Algemene objectinformatie [titel]";
+  variable P_ObjectInformation
+  {
+   title: "Algemene objectinformatie";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_ActualUse
+  {
+   title: "Feitelijk gebruik van het pand";
+   required: On;
+  }
+  variable P_LeasedOrUsedByOwner
+  {
+   title: "Huursituatie van het pand";
+   required: On;
+  }
+  variable P_ConstructionYear
+  {
+   title: "Bouwjaar";
+   required: On;
+  }
+  variable P_RenovationYear
+  {
+   title: "Laatste renovatiejaar";
+   visible: Off;
+  }
+  variable P_DaysToNextBreak
+  {
+   title: "Aantal dagen tot het volgende break-moment";
+  }
+  variable P_AreaForLease
+  {
+   title: "Theoretische beschikbare verhuurbare vloeroppervlakte";
+   required: On;
+  }
+  variable P_AreaForLeaseMethod
+  {
+   title: "Methode theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte";
+   visible: Off;
+  }
+  variable P_CountyLandRegister
+  {
+   title: "Kadastrale gemeente";
+   visible: Off;
+  }
+  variable P_GroundInterest
+  {
+   title: "Type eigendomsrecht";
+   visible: Off;
+  }
+  variable P_LandRegisterComments
+  {
+   title: "Opmerkingen ten aanzien van de kadastrale registratie";
+   visible: Off;
+  }
+  variable P_OwnershipPercentage
+  {
+   title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+   visible: Off;
+  }
+  variable P_LandRegisterArea
+  {
+   title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+   required: On;
+  }
+  variable P_ObjectInformationReference
+  {
+   title: "Informatie over objectreferentie";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_ObjectReferenceAllocatedBy
+  {
+   title: "Object referentie toegekend door";
+   visible: Off;
+  }
+  variable P_ObjectReferenceAllocatedByDescription
+  {
+   title: "Object referentie toegekend door (beschrijving)";
+   visible: Off;
+  }
+  variable P_ObjectReferenceDescription
+  {
+   title: "Omschrijving unieke object referentie";
+   visible: Off;
+  }
+  variable P_ObjectTyping
+  {
+   title: "Typering van het object";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_TypingDescription
+  {
+   title: "Een beschrijving van het pand";
+   required: On;
+  }
+  variable P_IPDtype
+  {
+   title: "Sector type";
+   required: On;
+  }
+  variable P_IPDSubtype
+  {
+   title: "Subsector type";
+   visible: Off;
+  }
+  variable P_ObjectAddress
+  {
+   title: "Adres van het object";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_DescriptionLocationNL
+  {
+   title: "Locatieomschrijving NL";
+   required: On;
+  }
+  variable P_StreetNameNL
+  {
+   title: "Straatnaam NL";
+   required: On;
+  }
+  variable P_HouseNumberNL
+  {
+   title: "Huisnummer NL";
+   required: On;
+  }
+  variable P_HouseNumberAddition
+  {
+   title: "Huisnummer toevoeging";
+  }
+  variable P_PlaceOfResidenceNL
+  {
+   title: "Plaats";
+   required: On;
+  }
+  variable P_Borough
+  {
+   title: "Stadsdeel";
+   visible: Off;
+  }
+  variable P_PostalCodeNL
+  {
+   title: "Postcode NL";
+   required: On;
+  }
+  variable P_Municipality
+  {
+   title: "Gemeente";
+   visible: Off;
+  }
+  variable P_NameRegion
+  {
+   title: "Provincie";
+   visible: Off;
+  }
+  variable P_CountryName
+  {
+   title: "Landnaam, ISO";
+   required: On;
+  }
+  variable P_BAGPandID
+  {
+   title: "Pandindentificatie";
+   visible: Off;
+  }
+  variable P_BAGVBOID
+  {
+   title: "Verblijfsobject-identificatie";
+   visible: Off;
+  }
+  variable P_PresentationOrder
+  {
+   title: "Presentatievolgorde";
+   visible: Off;
+  }
+  variable P_ObjectEnvironmentalPollution
+  {
+   title: "Milieuverontreiniging";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_GroundPollution
+  {
+   title: "Bodem verontreiniging";
+   visible: Off;
+  }
+  variable P_ObjectPollution
+  {
+   title: "Object verontreiniging";
+   visible: Off;
+  }
+  variable P_RemovalPollutionCost
+  {
+   title: "Kosten verwijdering van de verontreiniging";
+   visible: Off;
+  }
+  variable P_SoundPollution
+  {
+   title: "Geluidsverontreiniging";
+   visible: Off;
+  }
+  variable P_AirPollution
+  {
+   title: "Luchtverontreiniging";
+   visible: Off;
+  }
+  variable P_ObjectEnvironmentalAssesment
+  {
+   title: "Duurzaamheid meting";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralAxis
+  {
+   title: "Interne id van het onderpand / object [as]";
+   visible: Off;
+  }
+  variable P_InternalIDCollateralTypedMember
+  {
+   title: "Interne id van het onderpand / object [typed member]";
+   visible: Off;
+  }
+  variable P_EPCScore
+  {
+   title: "EPC-score (energieprestatiecertificaat)";
+   visible: Off;
+  }
+  variable P_EnergyLabel
+  {
+   title: "Energielabel";
+   required: On;
+  }
+  variable P_BREAAMlabel
+  {
+   title: "BREAAM (Building Research Establishment Environmental Assessment Method) label";
+   visible: Off;
+  }
+  variable P_ObjectInformationTitle
+  {
+   title: "Object informatie [titel]";
+   variable P_ObjectLegalInformationTitle
+   {
+    title: "Juridische informatie van het object [titel]";
+    variable P_ObjectLegalInformation
+    {
+     title: "Juridische informatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_RightOfResidence
+    {
+     title: "Recht van opstal";
+    }
+    variable P_NationalMonument
+    {
+     title: "Rijksmonument";
+     visible: Off;
+    }
+    variable P_ProvinceMonument
+    {
+     title: "Provinciaal monument";
+     visible: Off;
+    }
+    variable P_CountyMonument
+    {
+     title: "Gemeentelijk monument";
+     visible: Off;
+    }
+    variable P_ProtectedCountyView
+    {
+     title: "Beschermde stads/dorpsgezicht";
+     visible: Off;
+    }
+    variable P_ObjectLandRegisterParcels
+    {
+     title: "Kadastrale aanduiding percelen object";
+     visible: Off;
+    }
+    variable P_InternalIDParcelAxis
+    {
+     title: "Interne id van het perceel [as]";
+     visible: Off;
+    }
+    variable P_InternalIDParcelTypedMember
+    {
+     title: "Interne id van het perceel [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_OwnerAccordingToLandRegister
+    {
+     title: "Kadastrale eigenaar";
+    }
+    variable P_OwnerChamberOfCommerceRegistrationNumber
+    {
+     title: "Registratienummer bij de Kamer van Koophandel van de eigenaar";
+    }
+    variable P_CountyLandRegister
+    {
+     title: "Kadastrale gemeente";
+     visible: Off;
+    }
+    variable P_CountyLandRegisterSection
+    {
+     title: "Kadastrale gemeente sectie";
+     visible: Off;
+    }
+    variable P_CountyLandRegisterNumber
+    {
+     title: "Kadastrale gemeente nummer";
+     visible: Off;
+    }
+    variable P_CountyLandRegisterIndexNumberAppartmentRight
+    {
+     title: "Kadastrale gemeente index appartements nummer";
+     visible: Off;
+    }
+    variable P_GroundInterest
+    {
+     title: "Type eigendomsrecht";
+    }
+    variable P_OwnershipPercentage
+    {
+     title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+    }
+    variable P_LandRegisterArea
+    {
+     title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+    }
+    variable P_ObjectLandRegisterParcelSalesInformation
+    {
+     title: "Kadastrale aanduiding percelen verkoopinformatie object";
+     visible: Off;
+    }
+    variable P_InternalIDParcelAxis
+    {
+     title: "Interne id van het perceel [as]";
+     visible: Off;
+    }
+    variable P_InternalIDParcelTypedMember
+    {
+     title: "Interne id van het perceel [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_LandRegisterParcelSalesDate
+    {
+     title: "Kadastrale verkoopdatum";
+     visible: Off;
+    }
+    variable P_LandRegisterParcelSalesPrice
+    {
+     title: "Kadastrale verkoopprijs";
+     visible: Off;
+    }
+    variable P_ObjectGroundLeaseAgreements
+    {
+     title: "Erfpachtcontracten van het object";
+     visible: Off;
+    }
+    variable P_InternalIDParcelAxis
+    {
+     title: "Interne id van het perceel [as]";
+     visible: Off;
+    }
+    variable P_InternalIDParcelTypedMember
+    {
+     title: "Interne id van het perceel [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_FirstYearOfUse
+    {
+     title: "Jaar van eerste ingebruikname";
+     visible: Off;
+    }
+   }
+   variable P_ObjectUsageTitle
+   {
+    title: "Gebruikssituatie van het object [titel]";
+    variable P_ObjectUsage
+    {
+     title: "Gebruikssituatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_AreaLeased
+    {
+     title: "Verhuurde oppervlakte";
+     required: On;
+    }
+    variable P_OccupancyRate
+    {
+     title: "Bezettingspercentage";
+     required: On;
+    }
+    variable P_ContractRentPerYear
+    {
+     title: "Basishuur per jaar";
+     required: On;
+    }
+    variable P_EstimateHeadlineRentDate
+    {
+     title: "Datum van basishuur schatting";
+     visible: Off;
+    }
+    variable P_CreditQualityAnchorTenant
+    {
+     title: "Kredietkwaliteit hoofdhuurder";
+     required: On;
+    }
+    variable P_MedianCreditQualityTenants
+    {
+     title: "Mediaan kredietkwaliteit huurders";
+     visible: Off;
+    }
+    variable P_NumberOfTenants
+    {
+     title: "Aantal huurders";
+    }
+    variable P_ObjectGeneralLeaseInformation
+    {
+     title: "Algemene huurinformatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_TenantName
+    {
+     title: "Naam huurder";
+     required: On;
+    }
+    variable P_TenantType
+    {
+     title: "Soort huurder";
+    }
+    variable P_TenantChamberOfCommerceRegistrationNumber
+    {
+     title: "Registratienummer bij de Kamer van Koophandel van de huurder";
+     visible: Off;
+    }
+    variable P_AnchorTenant
+    {
+     title: "Hoofdhuurder";
+     visible: Off;
+    }
+    variable P_CreditQualityAnchorTenant
+    {
+     title: "Kredietkwaliteit hoofdhuurder";
+     required: On;
+    }
+    variable P_CreditQualityTenant
+    {
+     title: "Kredietkwaliteit huurder";
+     visible: Off;
+    }
+    variable P_NAICSCode
+    {
+     title: "NAICS-code";
+     visible: Off;
+    }
+    variable P_ObjectLeaseCharges
+    {
+     title: "Huurregels van het object";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_IncomeCategory
+    {
+     title: "Inkomenscategorie";
+     visible: Off;
+    }
+    variable P_PaymentFrequency
+    {
+     title: "Betalingsfrequentie";
+     visible: Off;
+    }
+    variable P_LeaseVATChargeable
+    {
+     title: "Huur is BTW-belast";
+     visible: Off;
+    }
+    variable P_LeaseVAT
+    {
+     title: "BTW-percentage van toepassing op huurregel";
+     visible: Off;
+    }
+    variable P_LeaseInterestChargeable
+    {
+     title: "Huur is rentedragend";
+     visible: Off;
+    }
+    variable P_RentCommissionAuthorityCase
+    {
+     title: "Huurcommissiezaak op huurprijs";
+     visible: Off;
+    }
+    variable P_AmountInvoiced
+    {
+     title: "Te facturereren bedrag";
+    }
+    variable P_StartingRent
+    {
+     title: "Huur op startdatum";
+    }
+    variable P_StartPaymentSchedule
+    {
+     title: "Start betalingsschema";
+    }
+    variable P_EndPaymentSchedule
+    {
+     title: "Einde betalingsschema";
+    }
+    variable P_AdvancePayment
+    {
+     title: "Voorschot";
+     visible: Off;
+    }
+    variable P_ObjectLeaseChargeInformationReference
+    {
+     title: "Informatie over huurregelreferentie";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_LeaseChargeReferenceAllocatedBy
+    {
+     title: "Huurregel referentie toegekend door";
+     visible: Off;
+    }
+    variable P_LeaseChargeReferenceAllocatedByDescription
+    {
+     title: "Huurregel referentie toegekend door (beschrijving)";
+     visible: Off;
+    }
+    variable P_LeaseChargeReferenceDescription
+    {
+     title: "Omschrijving unieke huurregel referentie";
+     visible: Off;
+    }
+    variable P_ObjectLeaseChargesBreak
+    {
+     title: "Breakregels van het object";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_BreakDate
+    {
+     title: "Datum break optie in huurovereenkomst";
+     required: On;
+    }
+    variable P_FirstNoticeDate
+    {
+     title: "Eerste mogelijke opzegdatum";
+    }
+    variable P_LastNoticeDate
+    {
+     title: "Laatste mogelijke opzegdatum";
+    }
+    variable P_BreakParty
+    {
+     title: "Partij(en) die de break mogen uitoefenen";
+     visible: Off;
+    }
+    variable P_BreakPenalty
+    {
+     title: "Bedrag gemoeid met het uitoefenen van een break-optie";
+     visible: Off;
+    }
+    variable P_BreakPenaltyParty
+    {
+     title: "Partij die bij het uitoefenen van een break-optie het bedrag betaalt";
+     visible: Off;
+    }
+    variable P_BreakRollingOption
+    {
+     title: "Rollende break-optie";
+     visible: Off;
+    }
+    variable P_ObjectRentMeasurement
+    {
+     title: "Object huurbedrag";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ContractRent
+    {
+     title: "Contracthuur";
+    }
+    variable P_ContractRentMethod
+    {
+     title: "Methode berekenen huurbedrag";
+     visible: Off;
+    }
+    variable P_ContractRentSourceType
+    {
+     title: "Brontype huurgegevens / huurlijsten";
+     visible: Off;
+    }
+    variable P_ContractRentDate
+    {
+     title: "Datum huurbedrag";
+     visible: Off;
+    }
+    variable P_ContractRentPerYear
+    {
+     title: "Basishuur per jaar";
+    }
+    variable P_ObjectMarketMeasurement
+    {
+     title: "Object markthuur";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_MarketRent
+    {
+     title: "Markthuur";
+    }
+    variable P_MarketRentSourceType
+    {
+     title: "Brontype markthuurwaarde";
+     visible: Off;
+    }
+    variable P_EstimateMarketRentDate
+    {
+     title: "Datum van markthuurschatting";
+     visible: Off;
+    }
+    variable P_ObjectAreaMeasurement
+    {
+     title: "Object oppervlakte";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_AreaLeased
+    {
+     title: "Verhuurde oppervlakte";
+     required: On;
+    }
+    variable P_AreaLeasedMethod
+    {
+     title: "Opgemeten verhuurde oppervlakte methode";
+     required: On;
+    }
+    variable P_AreaSourceType
+    {
+     title: "Brontype oppervlakte";
+     visible: Off;
+    }
+    variable P_AreaMeasuredDate
+    {
+     title: "Datum opgemete oppervlakte";
+     visible: Off;
+    }
+    variable P_ObjectIndexation
+    {
+     title: "Objectindexering";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesAxis
+    {
+     title: "Interne id van de huurregels [as]";
+     visible: Off;
+    }
+    variable P_InternalIDLeaseChargesTypedMember
+    {
+     title: "Interne id van de huurregels [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_IndexUsed
+    {
+     title: "Gebruikte index";
+     visible: Off;
+    }
+    variable P_IndexUsedDescription
+    {
+     title: "Beschrijving van de gebruikte index";
+     visible: Off;
+    }
+    variable P_DenominationMethod
+    {
+     title: "Noemer methode";
+     visible: Off;
+    }
+    variable P_IndexDelayNominator
+    {
+     title: "Aantal vertragingsmaanden als index teller";
+     visible: Off;
+    }
+    variable P_IndexDelayDenominator
+    {
+     title: "Aantal vertragingsmaanden als index noemer";
+     visible: Off;
+    }
+    variable P_IndexEffectiveDate
+    {
+     title: "Index effectieve datum";
+     visible: Off;
+    }
+    variable P_IndexFrequency
+    {
+     title: "Index frequentie";
+     visible: Off;
+    }
+    variable P_IndexStartYear
+    {
+     title: "Index startjaar";
+     visible: Off;
+    }
+    variable P_MaxRentIncrease
+    {
+     title: "Maximale toegestane huurverhoging";
+     visible: Off;
+    }
+    variable P_MinRentIncrease
+    {
+     title: "Minimale toegestane huurverhoging";
+     visible: Off;
+    }
+   }
+   variable P_ObjectAreaAdministrationTitle
+   {
+    title: "Ruimteboek van het object [titel]";
+    variable P_ObjectUnitInformation
+    {
+     title: "Ruimteinformatie object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_IPDSubtype
+    {
+     title: "Subsector type";
+     visible: Off;
+    }
+    variable P_PreSold
+    {
+     title: "Verkocht eenheid voor afbouw";
+     visible: Off;
+    }
+    variable P_PreSoldArea
+    {
+     title: "Percentage verkochte objecten voor afbouw";
+     visible: Off;
+    }
+    variable P_SalesPrice
+    {
+     title: "Verkoopprijs van verkochte unit";
+     visible: Off;
+    }
+    variable P_TransactionDate
+    {
+     title: "Transactiedatum";
+     visible: Off;
+    }
+    variable P_PreLet
+    {
+     title: "Verhuurt eenheid voor afbouw";
+     visible: Off;
+    }
+    variable P_ValuePreLet
+    {
+     title: "Waarde verhuurde objecten voor afbouw";
+     visible: Off;
+    }
+    variable P_ObjectAreaInformation
+    {
+     title: "Oppervlakteinformatie object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_LeaseArea
+    {
+     title: "Leaseoppervlakte";
+     required: On;
+    }
+    variable P_AreaForLeaseMethod
+    {
+     title: "Methode theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte";
+     visible: Off;
+    }
+    variable P_LeaseAreaSourceType
+    {
+     title: "Brontype verhuurbaar oppervlak";
+     visible: Off;
+    }
+    variable P_LeaseAreaMeasurementDate
+    {
+     title: "Meetdatum leaseoppervlakte";
+     visible: Off;
+    }
+    variable P_ObjectMarketValue
+    {
+     title: "Marktwaarde object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_MarketValue
+    {
+     title: "Marktwaarde";
+     required: On;
+    }
+    variable P_MarketValueSourceType
+    {
+     title: "Brontype marktwaarde";
+     visible: Off;
+    }
+    variable P_MarketValueMeasurementDate
+    {
+     title: "Meetdatum marktwaarde";
+     visible: Off;
+    }
+   }
+   variable P_ObjectValuationTitle
+   {
+    title: "Taxatie van het object [titel]";
+    variable P_ObjectValuationInformationReferenceTitle
+    {
+     title: "Informatie over object taxatie referentie [titel]";
+    }
+    variable P_ObjectValuationInformationReference
+    {
+     title: "Informatie over object taxatie referentie";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ObjectValuationReferenceAllocatedBy
+    {
+     title: "Object taxatie referentie toegekend door";
+     visible: Off;
+    }
+    variable P_ObjectValuationReferenceAllocatedByDescription
+    {
+     title: "Object taxatie referentie toegekend door (beschrijving)";
+     visible: Off;
+    }
+    variable P_ObjectValuationReferenceDescription
+    {
+     title: "Omschrijving unieke object taxatie referentie";
+     visible: Off;
+    }
+    variable P_ObjectValuationAppraisalTitle
+    {
+     title: "Oordeel van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationAppraisalMarketAppraissal
+    {
+     title: "Marktoordeel van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_MarketabilityOverall
+    {
+     title: "Oordeel courantheid";
+    }
+    variable P_MarketabilitySales
+    {
+     title: "Verkoopbaarheid";
+    }
+    variable P_MarketabilityRent
+    {
+     title: "Verhuurbaarheid";
+    }
+    variable P_AlternativeUseMarket
+    {
+     title: "Alternatieven qua markt";
+     visible: Off;
+    }
+    variable P_HighestAndBestUseDescription
+    {
+     title: "Beste aanwending";
+     visible: Off;
+    }
+    variable P_MarketabilitySalesUnit
+    {
+     title: "Uitpondbaarheid";
+     visible: Off;
+    }
+    variable P_MarketvisionCountry
+    {
+     title: "Marktvisie algemeen";
+     visible: Off;
+    }
+    variable P_MarketvisionLocal
+    {
+     title: "Marktvisie lokaal";
+     visible: Off;
+    }
+    variable P_ObjectValuationAppraisalObjectAssessment
+    {
+     title: "Object beoordeling van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ObjectOverallAssessment
+    {
+     title: "Algeheel oordeel over het object";
+     required: On;
+    }
+    variable P_ConstructionState
+    {
+     title: "Bouwkundige staat";
+     required: On;
+    }
+    variable P_MaintenanceStateInterior
+    {
+     title: "Onderhoud binnen";
+    }
+    variable P_MaintenanceStateExterior
+    {
+     title: "Onderhoud buiten";
+    }
+    variable P_MaintenanceGeneralAssesment
+    {
+     title: "Algemeen oordeel onderhoud";
+    }
+    variable P_Functionality
+    {
+     title: "Functionaliteit";
+    }
+    variable P_AlternativeUseObject
+    {
+     title: "Alternatieve aanwendbaarheid";
+    }
+    variable P_ParkingOnSite
+    {
+     title: "Parkeren op eigen terrein";
+     required: On;
+    }
+    variable P_ObjectValuationAppraisalLocationAssessment
+    {
+     title: "Lokatie oordeel van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_LocationOverallAssessment
+    {
+     title: "Algeheel oordeel over de locatie";
+     required: On;
+    }
+    variable P_AccessibilityGeneral
+    {
+     title: "Algemene bereikbaarheid";
+     required: On;
+    }
+    variable P_AccessibilityCars
+    {
+     title: "Bereikbaarheid per auto";
+    }
+    variable P_AccessibilityPublicTransport
+    {
+     title: "Bereikbaarheid per openbaar vervoer";
+    }
+    variable P_AccessibilityTrucks
+    {
+     title: "Bereikbaarheid per vrachtvervoer";
+    }
+    variable P_ParkingPublic
+    {
+     title: "Openbaar parkeren";
+    }
+    variable P_Site
+    {
+     title: "Ligging";
+     required: On;
+    }
+    variable P_ObjectValuationAppraisalSWOTAnalysis
+    {
+     title: "SWOT analyse van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_Strengths
+    {
+     title: "Sterkten";
+     visible: Off;
+    }
+    variable P_Weaknesses
+    {
+     title: "Zwaktes";
+     visible: Off;
+    }
+    variable P_Opportunities
+    {
+     title: "Kansen";
+     visible: Off;
+    }
+    variable P_Threats
+    {
+     title: "Bedreigingen";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsTitle
+    {
+     title: "Aannames bij de taxatie van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsExternalValuation
+    {
+     title: "Externe waardering van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_LocalTaxInformationTitle
+    {
+     title: "WOZ waarde [titel]";
+     visible: Off;
+    }
+    variable P_Value
+    {
+     title: "Waarde";
+     required: On;
+    }
+    variable P_ReferenceDate
+    {
+     title: "Peildatum van de WOZ bepaling";
+    }
+    variable P_RebuildValueTitle
+    {
+     title: "Herbouwwaarde [titel]";
+     visible: Off;
+    }
+    variable P_RebuildValueInsurance
+    {
+     title: "Herbouwwaarde";
+     visible: Off;
+    }
+    variable P_AssesmentDateRebuildValue
+    {
+     title: "Herbouwwaarde peildatum";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsPreviousValuation
+    {
+     title: "Eerdere taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_ValueConcept
+    {
+     title: "Waarde begrip";
+    }
+    variable P_Amount
+    {
+     title: "Bedrag (markthuur)";
+    }
+    variable P_ValuationDate
+    {
+     title: "Peildatum";
+     visible: Off;
+    }
+    variable P_ValuationType
+    {
+     title: "Taxatie type";
+    }
+    variable P_Remarks
+    {
+     title: "Opmerkingen";
+    }
+    variable P_ObjectValuationAssumptionsIndices
+    {
+     title: "Indices gebruikt bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_IndexSource
+    {
+     title: "Bron index";
+     visible: Off;
+    }
+    variable P_FinancialCode
+    {
+     title: "Rekening nummer";
+     visible: Off;
+    }
+    variable P_IndexMeasurementTitle
+    {
+     title: "Beschrijving index [titel]";
+     visible: Off;
+    }
+    variable P_Index
+    {
+     title: "Index";
+     visible: Off;
+    }
+    variable P_PeriodTitle
+    {
+     title: "Periode [titel]";
+     visible: Off;
+    }
+    variable P_Start
+    {
+     title: "Start";
+     visible: Off;
+    }
+    variable P_End
+    {
+     title: "Einde";
+     visible: Off;
+    }
+    variable P_PeriodNumber
+    {
+     title: "Periodenummer";
+     visible: Off;
+    }
+    variable P_Description
+    {
+     title: "Omschrijving unieke referentie";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsGeneralAssumptions
+    {
+     title: "Algemene uitgangspunten bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_ValuedInterest
+    {
+     title: "Te taxeren belang";
+     visible: Off;
+    }
+    variable P_Principles
+    {
+     title: "Uitgangspunten";
+    }
+    variable P_SpecialPrinciples
+    {
+     title: "Bijzondere uitgangspunten";
+     visible: Off;
+    }
+    variable P_AssumptionExplanation
+    {
+     title: "Toelichting bij de aanname";
+     visible: Off;
+    }
+    variable P_Disclaimer
+    {
+     title: "Vrijwaring van aansprakelijkheid";
+     visible: Off;
+    }
+    variable P_MarketRentUsedExplination
+    {
+     title: "Verklaring gebruikte/toegekende markthuur";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsDiscountedCashFlowAssumptions
+    {
+     title: "Uitgangspunten discounted cashflow bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_ValuationPeriod
+    {
+     title: "Beschouwingsperiode";
+     required: On;
+    }
+    variable P_DiscountRateDiscountedCashFlow
+    {
+     title: "Disconteringspercentage discounted cashflow";
+     required: On;
+    }
+    variable P_DiscountRateGroundLease
+    {
+     title: "Disconteringspercentage erfpacht";
+     required: On;
+    }
+    variable P_DiscountRateCorrectionsDiscountedCashFlowAssumptions
+    {
+     title: "Disconteringspercentage correcties (discounted cash flow aannames)";
+     required: On;
+    }
+    variable P_ExitYieldNetMarketRentBeforeTransferCost
+    {
+     title: "Exit yield netto markthuur vrij op naam";
+     required: On;
+    }
+    variable P_TransferCostPercentageDiscountedCashFlowAssumptions
+    {
+     title: "Percentage kosten koper (discounted cash flow aannames)";
+     required: On;
+    }
+    variable P_VAT
+    {
+     title: "BTW (%)";
+     required: On;
+    }
+    variable P_TimingRentIncome
+    {
+     title: "Timing huurinkomsten";
+    }
+    variable P_TimingOperatingExpenses
+    {
+     title: "Timing uitgaven";
+    }
+    variable P_ObjectValuationAssumptionsGrossYieldAssumptions
+    {
+     title: "Uitgangspunten bruto aanvangsrendement bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_MarketRentGrossYieldAssumptions
+    {
+     title: "Markthuur (bruto aanvangsrendement aannames)";
+     required: On;
+    }
+    variable P_GrossCapRateAfterTransferCostContractRentPerYear
+    {
+     title: "Bruto aanvangsrendement markthuur kosten koper";
+     required: On;
+    }
+    variable P_DiscountRateCorrectionsGrossYieldAssumptions
+    {
+     title: "Disconteringspercentage correcties (bruto aanvangsrendement aannames)";
+     required: On;
+    }
+    variable P_TransferCostPercentageGrossYieldAssumptions
+    {
+     title: "Percentage kosten koper (bruto aanvangsrendement aannames)";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsNetYieldAssumptions
+    {
+     title: "Uitgangspunten netto aanvangsrendement bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_MarketRentNetYieldAssumptions
+    {
+     title: "Markthuur (netto aanvangsrendement aannames)";
+     required: On;
+    }
+    variable P_EternityTotalCost
+    {
+     title: "Totale kosten (eeuwigdurend)";
+     required: On;
+    }
+    variable P_EternityFixedCostPerYear
+    {
+     title: "Vaste lasten per jaar";
+     required: On;
+    }
+    variable P_EternityMaintenancePerYear
+    {
+     title: "Onderhoudskosten per jaar";
+     required: On;
+    }
+    variable P_EternityGroundLeasePerYear
+    {
+     title: "Erfpacht per jaar";
+     required: On;
+    }
+    variable P_EternityPropertyManagementPerYear
+    {
+     title: "Beheerkosten per jaar";
+     required: On;
+    }
+    variable P_EternityOtherCostPerYear
+    {
+     title: "Overige kosten per jaar";
+     required: On;
+    }
+    variable P_NetMarketRent
+    {
+     title: "Netto markthuur";
+     required: On;
+    }
+    variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+    {
+     title: "Markthuur netto aanvangsrendement vrij op naam voor correcties";
+     required: On;
+    }
+    variable P_DiscountRateCorrectionsNetYieldAssumptions
+    {
+     title: "Disconteringspercentage correcties (netto aanvangsrendement aannames)";
+     required: On;
+    }
+    variable P_TransferCostPercentageNetYieldAssumptions
+    {
+     title: "Percentage kosten koper (netto aanvangsrendement aannames)";
+     required: On;
+    }
+    variable P_ObjectValuationAssumptionsGrossNetYieldCorrections
+    {
+     title: "Bruto en netto aanvangsrendement correcties bij de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_TotalCorrections
+    {
+     title: "Totaal correcties";
+     visible: Off;
+    }
+    variable P_CorrectionRevisionaryPotential
+    {
+     title: "Meer- / minder huur (correctie)";
+    }
+    variable P_CorrectionMutationVacancy
+    {
+     title: "Mutatie leegstand (correctie)";
+    }
+    variable P_CorrectionInitialVacancy
+    {
+     title: "Initiële leegstand (correctie)";
+    }
+    variable P_CorrectionMutationExpenses
+    {
+     title: "Mutatie kosten (correctie)";
+    }
+    variable P_CorrectionVATCompensation
+    {
+     title: "BTW compensatie (correctie)";
+    }
+    variable P_CorrectionNonDeductableVAT
+    {
+     title: "Niet terugvorderbare BTW (correctie)";
+    }
+    variable P_CorrectionDeferredMaintenance
+    {
+     title: "Achterstallig onderhoud (correctie)";
+    }
+    variable P_CorrectionGroundLease
+    {
+     title: "Erfpacht (correctie)";
+    }
+    variable P_CorrectionOtherIncomeExpenses
+    {
+     title: "Overige baten / lasten (correctie)";
+    }
+    variable P_ObjectValuationAssumptionsCashFlow
+    {
+     title: "Kasstromen van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_TypeFinancialCode
+    {
+     title: "Type rekening nummer";
+     visible: Off;
+    }
+    variable P_FinancialCode
+    {
+     title: "Rekening nummer";
+     visible: Off;
+    }
+    variable P_AmountMeasurementTitle
+    {
+     title: "Beschrijving bedrag [titel]";
+     visible: Off;
+    }
+    variable P_Amount
+    {
+     title: "Bedrag (markthuur)";
+     required: On;
+    }
+    variable P_SourceType
+    {
+     title: "Brontype";
+     visible: Off;
+    }
+    variable P_PeriodTitle
+    {
+     title: "Periode [titel]";
+     visible: Off;
+    }
+    variable P_Start
+    {
+     title: "Start";
+     required: On;
+    }
+    variable P_End
+    {
+     title: "Einde";
+     required: On;
+    }
+    variable P_PeriodNumber
+    {
+     title: "Periodenummer";
+     required: On;
+    }
+    variable P_Description
+    {
+     title: "Omschrijving unieke referentie";
+     visible: Off;
+    }
+    variable P_ObjectValuationAssumptionsOtherValueComponents
+    {
+     title: "Overige waarde componenten van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionAxis
+    {
+     title: "Interne id van de aanname [as]";
+     visible: Off;
+    }
+    variable P_InternalIDAssumptionTypedMember
+    {
+     title: "Interne id van de aanname [typed member]";
+     visible: Off;
+    }
+    variable P_ComponentType
+    {
+     title: "Type waarde component";
+     required: On;
+    }
+    variable P_DescriptionOtherValueComponents
+    {
+     title: "Omschrijving additionele waardecomponenten";
+     visible: Off;
+    }
+    variable P_TypeOfTransferCost
+    {
+     title: "Type transactiekosten";
+     required: On;
+    }
+    variable P_Amount
+    {
+     title: "Bedrag (markthuur)";
+     required: On;
+    }
+   }
+   variable P_ObjectValuationResultTitle
+   {
+    title: "Taxatie resultaat van het object [titel]";
+    visible: Off;
+    variable P_ObjectValuationResultValueTitle
+    {
+     title: "Waarde van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationResultValue
+    {
+     title: "Waarde van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ValueConcept
+    {
+     title: "Waarde begrip";
+     visible: Off;
+    }
+    variable P_TypeOfTransferCost
+    {
+     title: "Type transactiekosten";
+     visible: Off;
+    }
+    variable P_Amount
+    {
+     title: "Bedrag (markthuur)";
+     required: On;
+    }
+    variable P_AmountInLetters
+    {
+     title: "Bedrag uitgeschreven";
+     visible: Off;
+    }
+    variable P_ObjectValuationResultValueDescriptionCalculationModelUsedTitle
+    {
+     title: "Beschrijving rekenmodel [titel]";
+     visible: Off;
+    }
+    variable P_CalculationModelUsed
+    {
+     title: "Rekenmodel";
+     visible: Off;
+    }
+    variable P_OwnExcelModel
+    {
+     title: "Eigen Excel model";
+     visible: Off;
+    }
+    variable P_ObjectValuationResultKPITitle
+    {
+     title: "KPI's van het taxatieresultaat van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationResultKPI
+    {
+     title: "KPI's van het taxatieresultaat van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_MarketValueBeforeCorrectionBeforeTransferCost
+    {
+     title: "Marktwaarde voor correcties vrij op naam";
+     visible: Off;
+    }
+    variable P_TransferCost
+    {
+     title: "Transactiekosten";
+    }
+    variable P_MarketValueBeforeTransferCost
+    {
+     title: "Marktwaarde vrij op naam";
+    }
+    variable P_MarketValueAfterTransferCost
+    {
+     title: "Marktwaarde kosten koper";
+    }
+    variable P_MarketValueAfterTransferCostRounded
+    {
+     title: "Markwaarde koper afgerond";
+    }
+    variable P_DiscountRateDiscountedCashFlow
+    {
+     title: "Disconteringspercentage discounted cashflow";
+     required: On;
+    }
+    variable P_NetPresentValueCashFlows
+    {
+     title: "Netto contante waarde kasstromen";
+     required: On;
+    }
+    variable P_ExitYieldMarketRentBeforeTransferCost
+    {
+     title: "Exit yield markthuur vrij op naam";
+     required: On;
+    }
+    variable P_ExitYieldNetMarketRentBeforeTransferCost
+    {
+     title: "Exit yield netto markthuur vrij op naam";
+     required: On;
+    }
+    variable P_NetPresentValueExitValueAfterTransferCost
+    {
+     title: "Netto contante waarde eindwaarde kosten koper";
+     required: On;
+    }
+    variable P_GrossYieldAfterTransferCostContractRentPerYear
+    {
+     title: "Bruto aanvangsrendement huuropbrengst kosten koper";
+     required: On;
+    }
+    variable P_GrossYieldAfterTransferCostMarketRentPerYear
+    {
+     title: "Bruto aanvangsrendement markthuur kosten koper";
+     required: On;
+    }
+    variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+    {
+     title: "Markthuur netto aanvangsrendement vrij op naam voor correcties";
+     required: On;
+    }
+    variable P_NetYieldMarketRentBeforeTransferCost
+    {
+     title: "Markthuur netto aanvangsrendement vrij op naam";
+     required: On;
+    }
+    variable P_NetYieldRentalIncomeBeforeTransferCost
+    {
+     title: "Huuropbrengst netto aanvangsrendement vrij op naam";
+     required: On;
+    }
+    variable P_InternalRateOfReturn
+    {
+     title: "IRR";
+     required: On;
+    }
+    variable P_OperatingExpensesPercentageMarketRentPerYear
+    {
+     title: "Exploitatielastenpercentage van de markthuur op jaarbasis";
+     required: On;
+    }
+    variable P_VacancyPercentageMarketRentPerYear
+    {
+     title: "Leegstandpercentage markthuur op jaarbasis";
+     required: On;
+    }
+    variable P_ObjectValuationResultCommercialTitle
+    {
+     title: "Commerciële uitkomsten van de taxatie van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationResultCommercial
+    {
+     title: "Commerciële uitkomsten van de taxatie van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_WeightedAverageLeaseExpiry
+    {
+     title: "Gemmidelde gewogen looptijd (WALE)";
+    }
+    variable P_MarketValuePerSquareMeter
+    {
+     title: "Marktwaarde kosten koper m2";
+    }
+    variable P_ObjectValuationComparableTitle
+    {
+     title: "Referenties van het object [titel]";
+     visible: Off;
+    }
+    variable P_ObjectValuationComparableRentTransactions
+    {
+     title: "Huur referenties van het object";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ComparableRentTransactionAxis
+    {
+     title: "Huurreferentie [as]";
+     visible: Off;
+    }
+    variable P_ComparableRentTransactionTypedMember
+    {
+     title: "Huurreferentie [typed member]";
+     visible: Off;
+    }
+    variable P_CommentRentComparable
+    {
+     title: "Opmerking huur referenties";
+     visible: Off;
+    }
+    variable P_TransactionDate
+    {
+     title: "Transactiedatum";
+     visible: Off;
+    }
+    variable P_ObjectValuationComparableSaleReferences
+    {
+     title: "Koop- / beleggingsreferenties van het object";
+     visible: Off;
+    }
+    variable P_SaleReferenceAxis
+    {
+     title: "Koop- / beleggingsreferenties [as]";
+     visible: Off;
+    }
+    variable P_SaleReferenceTypedMember
+    {
+     title: "Koop- / beleggingsreferenties [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_CommentSaleComparable
+    {
+     title: "Opmerking koop referenties";
+     visible: Off;
+    }
+    variable P_TransactionDate
+    {
+     title: "Transactiedatum";
+     visible: Off;
+    }
+   }
+   variable P_aqr
+   {
+    title: "#N/A";
+    required: On;
+    variable P_AQRDetailsGeneralPropertyInformation
+    {
+     title: "AQR details: Algemene pandinformatie";
+     required: On;
+    }
+    variable P_PropertyAxis
+    {
+     title: "#N/A";
+     visible: Off;
+    }
+    variable P_PropertyTypedMember
+    {
+     title: "#N/A";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_TimeToNextBreak
+    {
+     title: "Tijd tot eerstvolgende opzegmogelijkheid (gewogen op basis van bezetting)";
+     required: On;
+    }
+    variable P_AQRCollateralData
+    {
+     title: "AQR: Onderpand informatie";
+     required: On;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     required: On;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityAxis
+    {
+     title: "Interne id van het gebouw / subobject [as]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityTypedMember
+    {
+     title: "Interne id van het gebouw / subobject [typed member]";
+     visible: Off;
+    }
+    variable P_ExercisingPotential
+    {
+     title: "Uitoefeningspotentieel";
+    }
+    variable P_AQRDetailsValuation
+    {
+     title: "AQR details: Taxatie";
+     visible: Off;
+    }
+    variable P_PropertyAxis
+    {
+     title: "#N/A";
+     visible: Off;
+    }
+    variable P_PropertyTypedMember
+    {
+     title: "#N/A";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_AQRCondition
+    {
+     title: "Staat van het object";
+     required: On;
+    }
+    variable P_SignificantBankLastInternalValuationValue
+    {
+     title: "Significante bank laatste interne taxatie";
+     required: On;
+    }
+    variable P_SignificantBankLastInternalValuationDate
+    {
+     title: "Significante bank laatste interne taxatie datum";
+     required: On;
+    }
+    variable P_LastInternalValuationType
+    {
+     title: "Soort interne validatie";
+     required: On;
+    }
+    variable P_LastInternalValuationTypeIfOther
+    {
+     title: "Specificering op interne validatie wanneer "overig" is gekozen";
+     required: On;
+    }
+    variable P_FirstValuationValue
+    {
+     title: "Oorspronkelijke waardering";
+     required: On;
+    }
+    variable P_FirstValuationDate
+    {
+     title: "Datum oorspronkelijke waardering";
+     required: On;
+    }
+    variable P_AQRTimeToCompletion
+    {
+     title: "Tijd tot voltooiing";
+     required: On;
+    }
+    variable P_FinanceNeededToCompletion
+    {
+     title: "Verwachte noodzakelijke financiering om project af te ronden";
+     required: On;
+    }
+    variable P_PlanningPermissionStatus
+    {
+     title: "Is de bouwvergunning voor wijzigingen aan het object verleend";
+     required: On;
+    }
+   }
+  }
+  variable P_gebouw1
+  {
+   title: "Gebouw 1";
+   variable P_BuildingInfoTitle
+   {
+    title: "Gebouw- / subobjectinformatie [titel]";
+   }
+   variable P_BuildingGeneralInformationTitle
+   {
+    title: "Algemene gebouw- /subobjectinformatie [titel]";
+   }
+   variable P_BuildingInformation
+   {
+    title: "Algemene gebouw- / subobjectinformatie";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityAxis
+   {
+    title: "Interne id van het gebouw / subobject [as]";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityTypedMember
+   {
+    title: "Interne id van het gebouw / subobject [typed member]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralAxis
+   {
+    title: "Interne id van het onderpand / object [as]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralTypedMember
+   {
+    title: "Interne id van het onderpand / object [typed member]";
+    visible: Off;
+   }
+   variable P_ActualUse
+   {
+    title: "Feitelijk gebruik van het pand";
+    required: On;
+   }
+   variable P_LeasedOrUsedByOwner
+   {
+    title: "Huursituatie van het pand";
+    required: On;
+   }
+   variable P_ConstructionYear
+   {
+    title: "Bouwjaar";
+    visible: Off;
+   }
+   variable P_RenovationYear
+   {
+    title: "Laatste renovatiejaar";
+    visible: Off;
+   }
+   variable P_DaysToNextBreak
+   {
+    title: "Aantal dagen tot het volgende break-moment";
+   }
+   variable P_AreaForLease
+   {
+    title: "Theoretische beschikbare verhuurbare vloeroppervlakte";
+    required: On;
+   }
+   variable P_AreaForLeaseMethod
+   {
+    title: "Methode theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte";
+    visible: Off;
+   }
+   variable P_CountyLandRegister
+   {
+    title: "Kadastrale gemeente";
+    visible: Off;
+   }
+   variable P_GroundInterest
+   {
+    title: "Type eigendomsrecht";
+    visible: Off;
+   }
+   variable P_LandRegisterComments
+   {
+    title: "Opmerkingen ten aanzien van de kadastrale registratie";
+    visible: Off;
+   }
+   variable P_OwnershipPercentage
+   {
+    title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+    visible: Off;
+   }
+   variable P_LandRegisterArea
+   {
+    title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+    required: On;
+   }
+   variable P_BuildingInformationReference
+   {
+    title: "Informatie over gebouw- /subobjectreferentie";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityAxis
+   {
+    title: "Interne id van het gebouw / subobject [as]";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityTypedMember
+   {
+    title: "Interne id van het gebouw / subobject [typed member]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralAxis
+   {
+    title: "Interne id van het onderpand / object [as]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralTypedMember
+   {
+    title: "Interne id van het onderpand / object [typed member]";
+    visible: Off;
+   }
+   variable P_BuildingReferenceAllocatedBy
+   {
+    title: "Gebouw- / subobjectreferentie toegekend door";
+    visible: Off;
+   }
+   variable P_BuildingReferenceAllocatedByDescription
+   {
+    title: "Gebouw- /subobjectreferentie toegekend door (beschrijving)";
+    visible: Off;
+   }
+   variable P_BuildingReferenceDescription
+   {
+    title: "Omschrijving unieke gebouw- / subobjectreferentie";
+    visible: Off;
+   }
+   variable P_BuildingTyping
+   {
+    title: "Typering van het gebouw / subobject";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityAxis
+   {
+    title: "Interne id van het gebouw / subobject [as]";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityTypedMember
+   {
+    title: "Interne id van het gebouw / subobject [typed member]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralAxis
+   {
+    title: "Interne id van het onderpand / object [as]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralTypedMember
+   {
+    title: "Interne id van het onderpand / object [typed member]";
+    visible: Off;
+   }
+   variable P_TypingDescription
+   {
+    title: "Een beschrijving van het pand";
+    required: On;
+   }
+   variable P_IPDtype
+   {
+    title: "Sector type";
+    required: On;
+   }
+   variable P_IPDSubtype
+   {
+    title: "Subsector type";
+    visible: Off;
+   }
+   variable P_BuildingAddress
+   {
+    title: "Adres van het gebouw / subobject";
+    required: On;
+   }
+   variable P_InternalIDFacilityAxis
+   {
+    title: "Interne id van het gebouw / subobject [as]";
+    visible: Off;
+   }
+   variable P_InternalIDFacilityTypedMember
+   {
+    title: "Interne id van het gebouw / subobject [typed member]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralAxis
+   {
+    title: "Interne id van het onderpand / object [as]";
+    visible: Off;
+   }
+   variable P_InternalIDCollateralTypedMember
+   {
+    title: "Interne id van het onderpand / object [typed member]";
+    visible: Off;
+   }
+   variable P_DescriptionLocationNL
+   {
+    title: "Locatieomschrijving NL";
+    visible: Off;
+   }
+   variable P_StreetNameNL
+   {
+    title: "Straatnaam NL";
+    required: On;
+   }
+   variable P_HouseNumberNL
+   {
+    title: "Huisnummer NL";
+    required: On;
+   }
+   variable P_HouseNumberAddition
+   {
+    title: "Huisnummer toevoeging";
+   }
+   variable P_PlaceOfResidenceNL
+   {
+    title: "Plaats";
+    required: On;
+   }
+   variable P_Borough
+   {
+    title: "Stadsdeel";
+    visible: Off;
+   }
+   variable P_PostalCodeNL
+   {
+    title: "Postcode NL";
+    required: On;
+   }
+   variable P_Municipality
+   {
+    title: "Gemeente";
+    visible: Off;
+   }
+   variable P_NameRegion
+   {
+    title: "Provincie";
+    visible: Off;
+   }
+   variable P_CountryName
+   {
+    title: "Landnaam, ISO";
+    required: On;
+   }
+   variable P_BAGVBOID
+   {
+    title: "Verblijfsobject-identificatie";
+    visible: Off;
+   }
+   variable P_BAGPandID
+   {
+    title: "Pandindentificatie";
+    visible: Off;
+   }
+   variable P_PresentationOrder
+   {
+    title: "Presentatievolgorde";
+    visible: Off;
+   }
+   variable P_BuildingInfoTitle
+   {
+    title: "Gebouw- / subobjectinformatie [titel]";
+    variable P_BuildingLegalInfoTitle
+    {
+     title: "Juridische information van het gebouw / subobject [titel]";
+     variable P_BuildingLegalInformation
+     {
+      title: "Juridische informatie gebouw / subobject";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityAxis
+     {
+      title: "Interne id van het gebouw / subobject [as]";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityTypedMember
+     {
+      title: "Interne id van het gebouw / subobject [typed member]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralAxis
+     {
+      title: "Interne id van het onderpand / object [as]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralTypedMember
+     {
+      title: "Interne id van het onderpand / object [typed member]";
+      visible: Off;
+     }
+     variable P_RightOfResidence
+     {
+      title: "Recht van opstal";
+     }
+     variable P_NationalMonument
+     {
+      title: "Rijksmonument";
+     }
+     variable P_ProvinceMonument
+     {
+      title: "Provinciaal monument";
+     }
+     variable P_CountyMonument
+     {
+      title: "Gemeentelijk monument";
+     }
+     variable P_ProtectedCountyView
+     {
+      title: "Beschermde stads/dorpsgezicht";
+      visible: Off;
+     }
+     variable P_BuildingLandRegisterParcels
+     {
+      title: "Kadastrale aanduiding percelen gebouw / subobject";
+      visible: Off;
+     }
+     variable P_InternalIDParcelAxis
+     {
+      title: "Interne id van het perceel [as]";
+      visible: Off;
+     }
+     variable P_InternalIDParcelTypedMember
+     {
+      title: "Interne id van het perceel [typed member]";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityAxis
+     {
+      title: "Interne id van het gebouw / subobject [as]";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityTypedMember
+     {
+      title: "Interne id van het gebouw / subobject [typed member]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralAxis
+     {
+      title: "Interne id van het onderpand / object [as]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralTypedMember
+     {
+      title: "Interne id van het onderpand / object [typed member]";
+      visible: Off;
+     }
+     variable P_OwnerAccordingToLandRegister
+     {
+      title: "Kadastrale eigenaar";
+     }
+     variable P_OwnerChamberOfCommerceRegistrationNumber
+     {
+      title: "Registratienummer bij de Kamer van Koophandel van de eigenaar";
+     }
+     variable P_CountyLandRegister
+     {
+      title: "Kadastrale gemeente";
+      visible: Off;
+     }
+     variable P_CountyLandRegisterSection
+     {
+      title: "Kadastrale gemeente sectie";
+      visible: Off;
+     }
+     variable P_CountyLandRegisterNumber
+     {
+      title: "Kadastrale gemeente nummer";
+      visible: Off;
+     }
+     variable P_CountyLandRegisterIndexNumberAppartmentRight
+     {
+      title: "Kadastrale gemeente index appartements nummer";
+      visible: Off;
+     }
+     variable P_GroundInterest
+     {
+      title: "Type eigendomsrecht";
+     }
+     variable P_OwnershipPercentage
+     {
+      title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+     }
+     variable P_LandRegisterArea
+     {
+      title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+      required: On;
+     }
+     variable P_BuildingLandRegisterParcelSalesInformation
+     {
+      title: "Kadastrale aanduiding percelen verkoopinformatie gebouw / subobject";
+      visible: Off;
+     }
+     variable P_InternalIDParcelAxis
+     {
+      title: "Interne id van het perceel [as]";
+      visible: Off;
+     }
+     variable P_InternalIDParcelTypedMember
+     {
+      title: "Interne id van het perceel [typed member]";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityAxis
+     {
+      title: "Interne id van het gebouw / subobject [as]";
+      visible: Off;
+     }
+     variable P_InternalIDFacilityTypedMember
+     {
+      title: "Interne id van het gebouw / subobject [typed member]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralAxis
+     {
+      title: "Interne id van het onderpand / object [as]";
+      visible: Off;
+     }
+     variable P_InternalIDCollateralTypedMember
+     {
+      title: "Interne id van het onderpand / object [typed member]";
+      visible: Off;
+     }
+     variable P_LandRegisterParcelSalesDate
+     {
+      title: "Kadastrale verkoopdatum";
+      visible: Off;
+     }
+     variable P_LandRegisterParcelSalesPrice
+     {
+      title: "Kadastrale verkoopprijs";
+      visible: Off;
+     }
+    }
+    variable P_BuildingUsageTitle
+    {
+     title: "Gebruikssituatie van het gebouw / subobject [titel]";
+    }
+    variable P_BuidlingAreaAdministrationTitle
+    {
+     title: "Ruimteboek van het gebouw / subobject [titel]";
+    }
+    variable P_BuildingValuationTitle
+    {
+     title: "Taxatie van het gebouw / subobject [titel]";
+    }
+    variable P_BuildingValuationResultTitle
+    {
+     title: "Taxatieresultaat van het gebouw / subobject [titel]";
+     visible: Off;
+    }
+   }
+   variable P_SubbuildingInfoTitle
+   {
+    title: "ruimte 1";
+    variable P_SubbuildingGeneralInformationTitle
+    {
+     title: "Algemene subgebouw- /ruimte-informatie [titel]";
+    }
+    variable P_SubbuildingInformation
+    {
+     title: "Algemene subgebouw- / ruimte-informatie";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityAxis
+    {
+     title: "Interne id van het subgebouw / ruimte [as]";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityTypedMember
+    {
+     title: "Interne id van het subgebouw / ruimte [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityAxis
+    {
+     title: "Interne id van het gebouw / subobject [as]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityTypedMember
+    {
+     title: "Interne id van het gebouw / subobject [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_ActualUse
+    {
+     title: "Feitelijk gebruik van het pand";
+     required: On;
+    }
+    variable P_LeasedOrUsedByOwner
+    {
+     title: "Huursituatie van het pand";
+     required: On;
+    }
+    variable P_ConstructionYear
+    {
+     title: "Bouwjaar";
+     visible: Off;
+    }
+    variable P_RenovationYear
+    {
+     title: "Laatste renovatiejaar";
+     visible: Off;
+    }
+    variable P_DaysToNextBreak
+    {
+     title: "Aantal dagen tot het volgende break-moment";
+     required: On;
+    }
+    variable P_AreaForLease
+    {
+     title: "Theoretische beschikbare verhuurbare vloeroppervlakte";
+     required: On;
+    }
+    variable P_AreaForLeaseMethod
+    {
+     title: "Methode theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte";
+     visible: Off;
+    }
+    variable P_CountyLandRegister
+    {
+     title: "Kadastrale gemeente";
+     visible: Off;
+    }
+    variable P_GroundInterest
+    {
+     title: "Type eigendomsrecht";
+     visible: Off;
+    }
+    variable P_LandRegisterComments
+    {
+     title: "Opmerkingen ten aanzien van de kadastrale registratie";
+     visible: Off;
+    }
+    variable P_OwnershipPercentage
+    {
+     title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+     visible: Off;
+    }
+    variable P_LandRegisterArea
+    {
+     title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+     visible: Off;
+    }
+    variable P_SubbuildingInformationReference
+    {
+     title: "Informatie over subgebouw / ruimte referentie";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityAxis
+    {
+     title: "Interne id van het subgebouw / ruimte [as]";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityTypedMember
+    {
+     title: "Interne id van het subgebouw / ruimte [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityAxis
+    {
+     title: "Interne id van het gebouw / subobject [as]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityTypedMember
+    {
+     title: "Interne id van het gebouw / subobject [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_SubbuildingReferenceAllocatedBy
+    {
+     title: "Subgebouw / ruimte referentie toegekend door";
+     visible: Off;
+    }
+    variable P_SubbuildingReferenceAllocatedByDescription
+    {
+     title: "Subgebouw / ruimte referentie toegekend door (beschrijving)";
+     visible: Off;
+    }
+    variable P_SubbuildingReferenceDescription
+    {
+     title: "Omschrijving unieke subgebouw / ruimte referentie";
+     visible: Off;
+    }
+    variable P_SubbuildingTyping
+    {
+     title: "Typering van het subgebouw / ruimte";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityAxis
+    {
+     title: "Interne id van het subgebouw / ruimte [as]";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityTypedMember
+    {
+     title: "Interne id van het subgebouw / ruimte [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityAxis
+    {
+     title: "Interne id van het gebouw / subobject [as]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityTypedMember
+    {
+     title: "Interne id van het gebouw / subobject [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_TypingDescription
+    {
+     title: "Een beschrijving van het pand";
+    }
+    variable P_IPDtype
+    {
+     title: "Sector type";
+    }
+    variable P_IPDSubtype
+    {
+     title: "Subsector type";
+     visible: Off;
+    }
+    variable P_SubbuildingAddress
+    {
+     title: "Adres van het subgebouw / ruimte";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityAxis
+    {
+     title: "Interne id van het subgebouw / ruimte [as]";
+     visible: Off;
+    }
+    variable P_InternalIDSubFacilityTypedMember
+    {
+     title: "Interne id van het subgebouw / ruimte [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityAxis
+    {
+     title: "Interne id van het gebouw / subobject [as]";
+     visible: Off;
+    }
+    variable P_InternalIDFacilityTypedMember
+    {
+     title: "Interne id van het gebouw / subobject [typed member]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralAxis
+    {
+     title: "Interne id van het onderpand / object [as]";
+     visible: Off;
+    }
+    variable P_InternalIDCollateralTypedMember
+    {
+     title: "Interne id van het onderpand / object [typed member]";
+     visible: Off;
+    }
+    variable P_DescriptionLocationNL
+    {
+     title: "Locatieomschrijving NL";
+     required: On;
+    }
+    variable P_StreetNameNL
+    {
+     title: "Straatnaam NL";
+     visible: Off;
+    }
+    variable P_HouseNumberNL
+    {
+     title: "Huisnummer NL";
+     required: On;
+    }
+    variable P_HouseNumberAddition
+    {
+     title: "Huisnummer toevoeging";
+     required: On;
+    }
+    variable P_PlaceOfResidenceNL
+    {
+     title: "Plaats";
+    }
+    variable P_Borough
+    {
+     title: "Stadsdeel";
+     visible: Off;
+    }
+    variable P_PostalCodeNL
+    {
+     title: "Postcode NL";
+     visible: Off;
+    }
+    variable P_Municipality
+    {
+     title: "Gemeente";
+     visible: Off;
+    }
+    variable P_NameRegion
+    {
+     title: "Provincie";
+     visible: Off;
+    }
+    variable P_CountryName
+    {
+     title: "Landnaam, ISO";
+     visible: Off;
+    }
+    variable P_BAGPandID
+    {
+     title: "Pandindentificatie";
+     visible: Off;
+    }
+    variable P_BAGVBOID
+    {
+     title: "Verblijfsobject-identificatie";
+     visible: Off;
+    }
+    variable P_PresentationOrder
+    {
+     title: "Presentatievolgorde";
+     visible: Off;
+    }
+    variable P_SubbuildingGeneralInformationTitle
+    {
+     title: "algemene informatie ruimte";
+     variable P_SubbuidlingLegalInformationTitle
+     {
+      title: "Juridische informatie subgebouw / ruimte [titel]";
+      visible: Off;
+      variable P_SubbuildingLegalInformation
+      {
+       title: "Juridische informatie subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_RightOfResidence
+      {
+       title: "Recht van opstal";
+       visible: Off;
+      }
+      variable P_NationalMonument
+      {
+       title: "Rijksmonument";
+       visible: Off;
+      }
+      variable P_ProvinceMonument
+      {
+       title: "Provinciaal monument";
+       visible: Off;
+      }
+      variable P_CountyMonument
+      {
+       title: "Gemeentelijk monument";
+       visible: Off;
+      }
+      variable P_ProtectedCountyView
+      {
+       title: "Beschermde stads/dorpsgezicht";
+       visible: Off;
+      }
+      variable P_SubbuildingLandRegisterParcels
+      {
+       title: "Kadastrale aanduiding percelen subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDParcelAxis
+      {
+       title: "Interne id van het perceel [as]";
+       visible: Off;
+      }
+      variable P_InternalIDParcelTypedMember
+      {
+       title: "Interne id van het perceel [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_OwnerAccordingToLandRegister
+      {
+       title: "Kadastrale eigenaar";
+       visible: Off;
+      }
+      variable P_OwnerChamberOfCommerceRegistrationNumber
+      {
+       title: "Registratienummer bij de Kamer van Koophandel van de eigenaar";
+       visible: Off;
+      }
+      variable P_CountyLandRegister
+      {
+       title: "Kadastrale gemeente";
+       visible: Off;
+      }
+      variable P_CountyLandRegisterSection
+      {
+       title: "Kadastrale gemeente sectie";
+       visible: Off;
+      }
+      variable P_CountyLandRegisterNumber
+      {
+       title: "Kadastrale gemeente nummer";
+       visible: Off;
+      }
+      variable P_CountyLandRegisterIndexNumberAppartmentRight
+      {
+       title: "Kadastrale gemeente index appartements nummer";
+       visible: Off;
+      }
+      variable P_GroundInterest
+      {
+       title: "Type eigendomsrecht";
+       visible: Off;
+      }
+      variable P_OwnershipPercentage
+      {
+       title: "Een grondstuk kan meerdere eigenaren hebben, alleen het percentage van de gerapporteerde eigenaar wordt opgenomen. Op gebouwniveau wordt het oppervlakte gewogen met de oppervlakte van de percelen.";
+       visible: Off;
+      }
+      variable P_LandRegisterArea
+      {
+       title: "Het perceel oppervlakte zoals bekend bij het kadaster";
+       visible: Off;
+      }
+      variable P_SubbuildingLandRegisterParcelSalesInformation
+      {
+       title: "Kadastrale aanduiding percelen verkoopinformatie subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDParcelAxis
+      {
+       title: "Interne id van het perceel [as]";
+       visible: Off;
+      }
+      variable P_InternalIDParcelTypedMember
+      {
+       title: "Interne id van het perceel [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_LandRegisterParcelSalesDate
+      {
+       title: "Kadastrale verkoopdatum";
+       visible: Off;
+      }
+      variable P_LandRegisterParcelSalesPrice
+      {
+       title: "Kadastrale verkoopprijs";
+       visible: Off;
+      }
+     }
+     variable P_SubbuildingUsageTitle
+     {
+      title: "Gebruikssituatie van het subgebouw / ruimte [titel]";
+      variable P_SubbuildingUsage
+      {
+       title: "Gebruikssituatie van het subgebouw / ruimte";
+       required: On;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_AreaLeased
+      {
+       title: "Verhuurde oppervlakte";
+       required: On;
+      }
+      variable P_OccupancyRate
+      {
+       title: "Bezettingspercentage";
+      }
+      variable P_ContractRentPerYear
+      {
+       title: "Basishuur per jaar";
+       visible: Off;
+      }
+      variable P_EstimateHeadlineRentDate
+      {
+       title: "Datum van basishuur schatting";
+       visible: Off;
+      }
+      variable P_CreditQualityAnchorTenant
+      {
+       title: "Kredietkwaliteit hoofdhuurder";
+       visible: Off;
+      }
+      variable P_MedianCreditQualityTenants
+      {
+       title: "Mediaan kredietkwaliteit huurders";
+       visible: Off;
+      }
+      variable P_NumberOfTenants
+      {
+       title: "Aantal huurders";
+       visible: Off;
+      }
+      variable P_SubbuildingGeneralLeaseInformation
+      {
+       title: "Algemene huurinformatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_TenantName
+      {
+       title: "Naam huurder";
+       visible: Off;
+      }
+      variable P_TenantChamberOfCommerceRegistrationNumber
+      {
+       title: "Registratienummer bij de Kamer van Koophandel van de huurder";
+       visible: Off;
+      }
+      variable P_CreditQualityAnchorTenant
+      {
+       title: "Kredietkwaliteit hoofdhuurder";
+       visible: Off;
+      }
+      variable P_CreditQualityTenant
+      {
+       title: "Kredietkwaliteit huurder";
+       visible: Off;
+      }
+      variable P_AnchorTenant
+      {
+       title: "Hoofdhuurder";
+       visible: Off;
+      }
+      variable P_NAICSCode
+      {
+       title: "NAICS-code";
+       visible: Off;
+      }
+      variable P_SubbuildingLeaseCharges
+      {
+       title: "Huurregels van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_IncomeCategory
+      {
+       title: "Inkomenscategorie";
+       required: On;
+      }
+      variable P_PaymentFrequency
+      {
+       title: "Betalingsfrequentie";
+       visible: Off;
+      }
+      variable P_LeaseVATChargeable
+      {
+       title: "Huur is BTW-belast";
+       visible: Off;
+      }
+      variable P_LeaseVAT
+      {
+       title: "BTW-percentage van toepassing op huurregel";
+       required: On;
+      }
+      variable P_LeaseInterestChargeable
+      {
+       title: "Huur is rentedragend";
+       required: On;
+      }
+      variable P_RentCommissionAuthorityCase
+      {
+       title: "Huurcommissiezaak op huurprijs";
+       visible: Off;
+      }
+      variable P_AmountInvoiced
+      {
+       title: "Te facturereren bedrag";
+       visible: Off;
+      }
+      variable P_StartingRent
+      {
+       title: "Huur op startdatum";
+       visible: Off;
+      }
+      variable P_StartPaymentSchedule
+      {
+       title: "Start betalingsschema";
+       visible: Off;
+      }
+      variable P_EndPaymentSchedule
+      {
+       title: "Einde betalingsschema";
+       visible: Off;
+      }
+      variable P_AdvancePayment
+      {
+       title: "Voorschot";
+       visible: Off;
+      }
+      variable P_SubbuildingLeaseChargesBreak
+      {
+       title: "Breakregels van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_BreakDate
+      {
+       title: "Datum break optie in huurovereenkomst";
+       required: On;
+      }
+      variable P_FirstNoticeDate
+      {
+       title: "Eerste mogelijke opzegdatum";
+      }
+      variable P_LastNoticeDate
+      {
+       title: "Laatste mogelijke opzegdatum";
+      }
+      variable P_BreakParty
+      {
+       title: "Partij(en) die de break mogen uitoefenen";
+       visible: Off;
+      }
+      variable P_BreakPenalty
+      {
+       title: "Bedrag gemoeid met het uitoefenen van een break-optie";
+       visible: Off;
+      }
+      variable P_BreakPenaltyParty
+      {
+       title: "Partij die bij het uitoefenen van een break-optie het bedrag betaalt";
+       visible: Off;
+      }
+      variable P_BreakRollingOption
+      {
+       title: "Rollende break-optie";
+       visible: Off;
+      }
+      variable P_SubbuildingRentMeasurement
+      {
+       title: "Subgebouw / ruimte huurbedrag";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_ContractRent
+      {
+       title: "Contracthuur";
+      }
+      variable P_ContractRentMethod
+      {
+       title: "Methode berekenen huurbedrag";
+       visible: Off;
+      }
+      variable P_ContractRentSourceType
+      {
+       title: "Brontype huurgegevens / huurlijsten";
+       visible: Off;
+      }
+      variable P_ContractRentDate
+      {
+       title: "Datum huurbedrag";
+       visible: Off;
+      }
+      variable P_ContractRentPerYear
+      {
+       title: "Basishuur per jaar";
+      }
+      variable P_SubbuildingMarketMeasurement
+      {
+       title: "Subgebouw / ruimte markthuur";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_MarketRent
+      {
+       title: "Markthuur";
+      }
+      variable P_MarketRentSourceType
+      {
+       title: "Brontype markthuurwaarde";
+       visible: Off;
+      }
+      variable P_EstimateMarketRentDate
+      {
+       title: "Datum van markthuurschatting";
+       visible: Off;
+      }
+      variable P_SubbuildingAreaMeasurement
+      {
+       title: "Subgebouw / ruimte oppervlakte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_AreaLeased
+      {
+       title: "Verhuurde oppervlakte";
+       required: On;
+      }
+      variable P_AreaLeasedMethod
+      {
+       title: "Opgemeten verhuurde oppervlakte methode";
+       required: On;
+      }
+      variable P_AreaSourceType
+      {
+       title: "Brontype oppervlakte";
+       visible: Off;
+      }
+      variable P_AreaMeasuredDate
+      {
+       title: "Datum opgemete oppervlakte";
+       visible: Off;
+      }
+      variable P_SubbuildingIndexation
+      {
+       title: "Subgebouw- / ruimte-indexering";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesAxis
+      {
+       title: "Interne id van de huurregels [as]";
+       visible: Off;
+      }
+      variable P_InternalIDLeaseChargesTypedMember
+      {
+       title: "Interne id van de huurregels [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_IndexUsed
+      {
+       title: "Gebruikte index";
+       visible: Off;
+      }
+      variable P_IndexUsedDescription
+      {
+       title: "Beschrijving van de gebruikte index";
+       visible: Off;
+      }
+      variable P_DenominationMethod
+      {
+       title: "Noemer methode";
+       visible: Off;
+      }
+      variable P_IndexDelayNominator
+      {
+       title: "Aantal vertragingsmaanden als index teller";
+       visible: Off;
+      }
+      variable P_IndexDelayDenominator
+      {
+       title: "Aantal vertragingsmaanden als index noemer";
+       visible: Off;
+      }
+      variable P_IndexEffectiveDate
+      {
+       title: "Index effectieve datum";
+       visible: Off;
+      }
+      variable P_IndexFrequency
+      {
+       title: "Index frequentie";
+       visible: Off;
+      }
+      variable P_IndexStartYear
+      {
+       title: "Index startjaar";
+       visible: Off;
+      }
+      variable P_MaxRentIncrease
+      {
+       title: "Maximale toegestane huurverhoging";
+       visible: Off;
+      }
+      variable P_MinRentIncrease
+      {
+       title: "Minimale toegestane huurverhoging";
+       visible: Off;
+      }
+     }
+     variable P_SubbuidlingAreaAdministrationTitle
+     {
+      title: "Ruimteboek van het subgebouw / ruimte [titel]";
+      variable P_SubbuildingAreaInformation
+      {
+       title: "Oppervlakteinformatie subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_LeaseArea
+      {
+       title: "Leaseoppervlakte";
+       visible: Off;
+      }
+      variable P_AreaForLeaseMethod
+      {
+       title: "Methode theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte";
+      }
+      variable P_LeaseAreaSourceType
+      {
+       title: "Brontype verhuurbaar oppervlak";
+       visible: Off;
+      }
+      variable P_LeaseAreaMeasurementDate
+      {
+       title: "Meetdatum leaseoppervlakte";
+      }
+      variable P_SubbuildingMarketValue
+      {
+       title: "Marktwaarde subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_MarketValue
+      {
+       title: "Marktwaarde";
+       required: On;
+      }
+      variable P_MarketValueSourceType
+      {
+       title: "Brontype marktwaarde";
+       visible: Off;
+      }
+      variable P_MarketValueMeasurementDate
+      {
+       title: "Meetdatum marktwaarde";
+       visible: Off;
+      }
+      variable P_SubbuildingUnitInformation
+      {
+       title: "Ruimteinformatie subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_IPDSubtype
+      {
+       title: "Subsector type";
+      }
+      variable P_PreSold
+      {
+       title: "Verkocht eenheid voor afbouw";
+      }
+      variable P_PreSoldArea
+      {
+       title: "Percentage verkochte objecten voor afbouw";
+      }
+      variable P_SalesPrice
+      {
+       title: "Verkoopprijs van verkochte unit";
+      }
+      variable P_TransactionDate
+      {
+       title: "Transactiedatum";
+      }
+      variable P_PreLet
+      {
+       title: "Verhuurt eenheid voor afbouw";
+      }
+      variable P_ValuePreLet
+      {
+       title: "Waarde verhuurde objecten voor afbouw";
+      }
+     }
+     variable P_SubbuildingValuationTitle
+     {
+      title: "Taxatie van het subgebouw / ruimte [titel]";
+      variable P_SubbuildingValuationInformationReferenceTitle
+      {
+       title: "Informatie over subgebouw / ruimte taxatie referentie [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationInformationReference
+      {
+       title: "Informatie over subgebouw / ruimte taxatie referentie";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationReferenceAllocatedBy
+      {
+       title: "Subgebouw / ruimte taxatie referentie toegekend door";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationReferenceAllocatedByDescription
+      {
+       title: "Subgebouw / ruimte taxatie referentie toegekend door (beschrijving)";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationReferenceDescription
+      {
+       title: "Omschrijving unieke subgebouw / ruimte taxatie referentie";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAppraisalTitle
+      {
+       title: "Oordeel van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAppraisalMarketAppraissal
+      {
+       title: "Marktoordeel van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_MarketabilityOverall
+      {
+       title: "Oordeel courantheid";
+       visible: Off;
+      }
+      variable P_MarketabilitySales
+      {
+       title: "Verkoopbaarheid";
+       visible: Off;
+      }
+      variable P_MarketabilityRent
+      {
+       title: "Verhuurbaarheid";
+       visible: Off;
+      }
+      variable P_AlternativeUseMarket
+      {
+       title: "Alternatieven qua markt";
+       visible: Off;
+      }
+      variable P_HighestAndBestUseDescription
+      {
+       title: "Beste aanwending";
+       visible: Off;
+      }
+      variable P_MarketabilitySalesUnit
+      {
+       title: "Uitpondbaarheid";
+       visible: Off;
+      }
+      variable P_MarketvisionCountry
+      {
+       title: "Marktvisie algemeen";
+       visible: Off;
+      }
+      variable P_MarketvisionLocal
+      {
+       title: "Marktvisie lokaal";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAppraisalObjectAssessment
+      {
+       title: "Object beoordeling van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_ObjectOverallAssessment
+      {
+       title: "Algeheel oordeel over het object";
+       visible: Off;
+      }
+      variable P_ConstructionState
+      {
+       title: "Bouwkundige staat";
+       visible: Off;
+      }
+      variable P_MaintenanceStateInterior
+      {
+       title: "Onderhoud binnen";
+       visible: Off;
+      }
+      variable P_MaintenanceStateExterior
+      {
+       title: "Onderhoud buiten";
+       visible: Off;
+      }
+      variable P_MaintenanceGeneralAssesment
+      {
+       title: "Algemeen oordeel onderhoud";
+       visible: Off;
+      }
+      variable P_Functionality
+      {
+       title: "Functionaliteit";
+       visible: Off;
+      }
+      variable P_AlternativeUseObject
+      {
+       title: "Alternatieve aanwendbaarheid";
+       visible: Off;
+      }
+      variable P_ParkingOnSite
+      {
+       title: "Parkeren op eigen terrein";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAppraisalLocationAssessment
+      {
+       title: "Lokatie oordeel van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_LocationOverallAssessment
+      {
+       title: "Algeheel oordeel over de locatie";
+       visible: Off;
+      }
+      variable P_AccessibilityGeneral
+      {
+       title: "Algemene bereikbaarheid";
+       visible: Off;
+      }
+      variable P_AccessibilityCars
+      {
+       title: "Bereikbaarheid per auto";
+       visible: Off;
+      }
+      variable P_AccessibilityPublicTransport
+      {
+       title: "Bereikbaarheid per openbaar vervoer";
+       visible: Off;
+      }
+      variable P_AccessibilityTrucks
+      {
+       title: "Bereikbaarheid per vrachtvervoer";
+       visible: Off;
+      }
+      variable P_ParkingPublic
+      {
+       title: "Openbaar parkeren";
+       visible: Off;
+      }
+      variable P_Site
+      {
+       title: "Ligging";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAppraisalSWOTAnalysis
+      {
+       title: "SWOT analyse van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_Strengths
+      {
+       title: "Sterkten";
+       visible: Off;
+      }
+      variable P_Weaknesses
+      {
+       title: "Zwaktes";
+       visible: Off;
+      }
+      variable P_Opportunities
+      {
+       title: "Kansen";
+       visible: Off;
+      }
+      variable P_Threats
+      {
+       title: "Bedreigingen";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsTitle
+      {
+       title: "Aannames bij de taxatie van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsExternalValuation
+      {
+       title: "Externe waardering van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_LocalTaxInformationTitle
+      {
+       title: "WOZ waarde [titel]";
+       visible: Off;
+      }
+      variable P_Value
+      {
+       title: "Waarde";
+       required: On;
+      }
+      variable P_ReferenceDate
+      {
+       title: "Peildatum van de WOZ bepaling";
+      }
+      variable P_RebuildValueTitle
+      {
+       title: "Herbouwwaarde [titel]";
+       visible: Off;
+      }
+      variable P_RebuildValueInsurance
+      {
+       title: "Herbouwwaarde";
+       visible: Off;
+      }
+      variable P_AssesmentDateRebuildValue
+      {
+       title: "Herbouwwaarde peildatum";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsPreviousValuation
+      {
+       title: "Eerdere taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_ValueConcept
+      {
+       title: "Waarde begrip";
+       visible: Off;
+      }
+      variable P_Amount
+      {
+       title: "Bedrag (markthuur)";
+       visible: Off;
+      }
+      variable P_ValuationDate
+      {
+       title: "Peildatum";
+       visible: Off;
+      }
+      variable P_ValuationType
+      {
+       title: "Taxatie type";
+       visible: Off;
+      }
+      variable P_Remarks
+      {
+       title: "Opmerkingen";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsIndices
+      {
+       title: "Indices gebruikt bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_IndexSource
+      {
+       title: "Bron index";
+       visible: Off;
+      }
+      variable P_FinancialCode
+      {
+       title: "Rekening nummer";
+       visible: Off;
+      }
+      variable P_IndexMeasurementTitle
+      {
+       title: "Beschrijving index [titel]";
+       visible: Off;
+      }
+      variable P_Index
+      {
+       title: "Index";
+       visible: Off;
+      }
+      variable P_PeriodTitle
+      {
+       title: "Periode [titel]";
+       visible: Off;
+      }
+      variable P_Start
+      {
+       title: "Start";
+       visible: Off;
+      }
+      variable P_End
+      {
+       title: "Einde";
+       visible: Off;
+      }
+      variable P_PeriodNumber
+      {
+       title: "Periodenummer";
+       visible: Off;
+      }
+      variable P_Description
+      {
+       title: "Omschrijving unieke referentie";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsGeneralAssumptions
+      {
+       title: "Algemene uitgangspunten bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_ValuedInterest
+      {
+       title: "Te taxeren belang";
+       visible: Off;
+      }
+      variable P_Principles
+      {
+       title: "Uitgangspunten";
+       visible: Off;
+      }
+      variable P_SpecialPrinciples
+      {
+       title: "Bijzondere uitgangspunten";
+       visible: Off;
+      }
+      variable P_AssumptionExplanation
+      {
+       title: "Toelichting bij de aanname";
+       visible: Off;
+      }
+      variable P_Disclaimer
+      {
+       title: "Vrijwaring van aansprakelijkheid";
+       visible: Off;
+      }
+      variable P_MarketRentUsedExplination
+      {
+       title: "Verklaring gebruikte/toegekende markthuur";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsDiscountedCashFlowAssumptions
+      {
+       title: "Uitgangspunten discounted cashflow bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_ValuationPeriod
+      {
+       title: "Beschouwingsperiode";
+       visible: Off;
+      }
+      variable P_DiscountRateDiscountedCashFlow
+      {
+       title: "Disconteringspercentage discounted cashflow";
+       visible: Off;
+      }
+      variable P_DiscountRateGroundLease
+      {
+       title: "Disconteringspercentage erfpacht";
+       visible: Off;
+      }
+      variable P_DiscountRateCorrectionsDiscountedCashFlowAssumptions
+      {
+       title: "Disconteringspercentage correcties (discounted cash flow aannames)";
+       visible: Off;
+      }
+      variable P_ExitYieldNetMarketRentBeforeTransferCost
+      {
+       title: "Exit yield netto markthuur vrij op naam";
+       visible: Off;
+      }
+      variable P_TransferCostPercentageDiscountedCashFlowAssumptions
+      {
+       title: "Percentage kosten koper (discounted cash flow aannames)";
+       visible: Off;
+      }
+      variable P_VAT
+      {
+       title: "BTW (%)";
+       visible: Off;
+      }
+      variable P_TimingRentIncome
+      {
+       title: "Timing huurinkomsten";
+       visible: Off;
+      }
+      variable P_TimingOperatingExpenses
+      {
+       title: "Timing uitgaven";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsGrossYieldAssumptions
+      {
+       title: "Uitgangspunten bruto aanvangsrendement bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_MarketRentGrossYieldAssumptions
+      {
+       title: "Markthuur (bruto aanvangsrendement aannames)";
+       visible: Off;
+      }
+      variable P_GrossCapRateAfterTransferCostContractRentPerYear
+      {
+       title: "Bruto aanvangsrendement markthuur kosten koper";
+       visible: Off;
+      }
+      variable P_DiscountRateCorrectionsGrossYieldAssumptions
+      {
+       title: "Disconteringspercentage correcties (bruto aanvangsrendement aannames)";
+       visible: Off;
+      }
+      variable P_TransferCostPercentageGrossYieldAssumptions
+      {
+       title: "Percentage kosten koper (bruto aanvangsrendement aannames)";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationAssumptionsNetYieldAssumptions
+      {
+       title: "Uitgangspunten netto aanvangsrendement bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_MarketRentNetYieldAssumptions
+      {
+       title: "Markthuur (netto aanvangsrendement aannames)";
+       required: On;
+      }
+      variable P_EternityTotalCost
+      {
+       title: "Totale kosten (eeuwigdurend)";
+       required: On;
+      }
+      variable P_EternityFixedCostPerYear
+      {
+       title: "Vaste lasten per jaar";
+       required: On;
+      }
+      variable P_EternityMaintenancePerYear
+      {
+       title: "Onderhoudskosten per jaar";
+       required: On;
+      }
+      variable P_EternityGroundLeasePerYear
+      {
+       title: "Erfpacht per jaar";
+       visible: Off;
+      }
+      variable P_EternityPropertyManagementPerYear
+      {
+       title: "Beheerkosten per jaar";
+       required: On;
+      }
+      variable P_EternityOtherCostPerYear
+      {
+       title: "Overige kosten per jaar";
+       required: On;
+      }
+      variable P_NetMarketRent
+      {
+       title: "Netto markthuur";
+       required: On;
+      }
+      variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+      {
+       title: "Markthuur netto aanvangsrendement vrij op naam voor correcties";
+      }
+      variable P_DiscountRateCorrectionsNetYieldAssumptions
+      {
+       title: "Disconteringspercentage correcties (netto aanvangsrendement aannames)";
+      }
+      variable P_TransferCostPercentageNetYieldAssumptions
+      {
+       title: "Percentage kosten koper (netto aanvangsrendement aannames)";
+      }
+      variable P_SubbuildingValuationAssumptionsGrossNetYieldCorrections
+      {
+       title: "Bruto en netto aanvangsrendement correcties bij de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_TotalCorrections
+      {
+       title: "Totaal correcties";
+      }
+      variable P_CorrectionRevisionaryPotential
+      {
+       title: "Meer- / minder huur (correctie)";
+      }
+      variable P_CorrectionMutationVacancy
+      {
+       title: "Mutatie leegstand (correctie)";
+      }
+      variable P_CorrectionInitialVacancy
+      {
+       title: "Initiële leegstand (correctie)";
+      }
+      variable P_CorrectionMutationExpenses
+      {
+       title: "Mutatie kosten (correctie)";
+      }
+      variable P_CorrectionVATCompensation
+      {
+       title: "BTW compensatie (correctie)";
+      }
+      variable P_CorrectionNonDeductableVAT
+      {
+       title: "Niet terugvorderbare BTW (correctie)";
+      }
+      variable P_CorrectionDeferredMaintenance
+      {
+       title: "Achterstallig onderhoud (correctie)";
+      }
+      variable P_CorrectionGroundLease
+      {
+       title: "Erfpacht (correctie)";
+      }
+      variable P_CorrectionOtherIncomeExpenses
+      {
+       title: "Overige baten / lasten (correctie)";
+      }
+      variable P_SubbuildingValuationAssumptionsCashFlow
+      {
+       title: "Kasstromen van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_TypeFinancialCode
+      {
+       title: "Type rekening nummer";
+      }
+      variable P_FinancialCode
+      {
+       title: "Rekening nummer";
+      }
+      variable P_AmountMeasurementTitle
+      {
+       title: "Beschrijving bedrag [titel]";
+       visible: Off;
+      }
+      variable P_Amount
+      {
+       title: "Bedrag (markthuur)";
+      }
+      variable P_SourceType
+      {
+       title: "Brontype";
+      }
+      variable P_PeriodTitle
+      {
+       title: "Periode [titel]";
+       visible: Off;
+      }
+      variable P_Start
+      {
+       title: "Start";
+      }
+      variable P_End
+      {
+       title: "Einde";
+      }
+      variable P_PeriodNumber
+      {
+       title: "Periodenummer";
+      }
+      variable P_Description
+      {
+       title: "Omschrijving unieke referentie";
+      }
+      variable P_SubbuildingValuationAssumptionsOtherValueComponents
+      {
+       title: "Overige waarde componenten van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionAxis
+      {
+       title: "Interne id van de aanname [as]";
+       visible: Off;
+      }
+      variable P_InternalIDAssumptionTypedMember
+      {
+       title: "Interne id van de aanname [typed member]";
+       visible: Off;
+      }
+      variable P_ComponentType
+      {
+       title: "Type waarde component";
+      }
+      variable P_DescriptionOtherValueComponents
+      {
+       title: "Omschrijving additionele waardecomponenten";
+      }
+      variable P_TypeOfTransferCost
+      {
+       title: "Type transactiekosten";
+      }
+      variable P_Amount
+      {
+       title: "Bedrag (markthuur)";
+      }
+     }
+     variable P_SubbuildingValuationResultTitle
+     {
+      title: "Taxatie resultaat van het subgebouw / ruimte [titel]";
+      visible: Off;
+      variable P_SubbuildingValuationResultValueTitle
+      {
+       title: "Waarde van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationResultValue
+      {
+       title: "Waarde van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_ValueConcept
+      {
+       title: "Waarde begrip";
+       required: On;
+      }
+      variable P_TypeOfTransferCost
+      {
+       title: "Type transactiekosten";
+       visible: Off;
+      }
+      variable P_Amount
+      {
+       title: "Bedrag (markthuur)";
+       visible: Off;
+      }
+      variable P_AmountInLetters
+      {
+       title: "Bedrag uitgeschreven";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationResultValueDescriptionCalculationModelUsedTitle
+      {
+       title: "Beschrijving rekenmodel [titel]";
+       visible: Off;
+      }
+      variable P_CalculationModelUsed
+      {
+       title: "Rekenmodel";
+      }
+      variable P_OwnExcelModel
+      {
+       title: "Eigen Excel model";
+      }
+      variable P_SubbuildingValuationResultKPITitle
+      {
+       title: "KPI's van het taxatieresultaat van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationResultKPI
+      {
+       title: "KPI's van het taxatieresultaat van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_MarketValueBeforeCorrectionBeforeTransferCost
+      {
+       title: "Marktwaarde voor correcties vrij op naam";
+       visible: Off;
+      }
+      variable P_TransferCost
+      {
+       title: "Transactiekosten";
+      }
+      variable P_MarketValueBeforeTransferCost
+      {
+       title: "Marktwaarde vrij op naam";
+      }
+      variable P_MarketValueAfterTransferCost
+      {
+       title: "Marktwaarde kosten koper";
+      }
+      variable P_MarketValueAfterTransferCostRounded
+      {
+       title: "Markwaarde koper afgerond";
+      }
+      variable P_DiscountRateDiscountedCashFlow
+      {
+       title: "Disconteringspercentage discounted cashflow";
+       required: On;
+      }
+      variable P_NetPresentValueCashFlows
+      {
+       title: "Netto contante waarde kasstromen";
+       required: On;
+      }
+      variable P_ExitYieldMarketRentBeforeTransferCost
+      {
+       title: "Exit yield markthuur vrij op naam";
+       required: On;
+      }
+      variable P_ExitYieldNetMarketRentBeforeTransferCost
+      {
+       title: "Exit yield netto markthuur vrij op naam";
+       required: On;
+      }
+      variable P_NetPresentValueExitValueAfterTransferCost
+      {
+       title: "Netto contante waarde eindwaarde kosten koper";
+       required: On;
+      }
+      variable P_GrossYieldAfterTransferCostContractRentPerYear
+      {
+       title: "Bruto aanvangsrendement huuropbrengst kosten koper";
+       required: On;
+      }
+      variable P_GrossYieldAfterTransferCostMarketRentPerYear
+      {
+       title: "Bruto aanvangsrendement markthuur kosten koper";
+       required: On;
+      }
+      variable P_NetYieldBeforeCorrectionMarketRentBeforeTransferCost
+      {
+       title: "Markthuur netto aanvangsrendement vrij op naam voor correcties";
+       required: On;
+      }
+      variable P_NetYieldMarketRentBeforeTransferCost
+      {
+       title: "Markthuur netto aanvangsrendement vrij op naam";
+       required: On;
+      }
+      variable P_NetYieldRentalIncomeBeforeTransferCost
+      {
+       title: "Huuropbrengst netto aanvangsrendement vrij op naam";
+       required: On;
+      }
+      variable P_InternalRateOfReturn
+      {
+       title: "IRR";
+       required: On;
+      }
+      variable P_OperatingExpensesPercentageMarketRentPerYear
+      {
+       title: "Exploitatielastenpercentage van de markthuur op jaarbasis";
+       required: On;
+      }
+      variable P_VacancyPercentageMarketRentPerYear
+      {
+       title: "Leegstandpercentage markthuur op jaarbasis";
+       required: On;
+      }
+      variable P_SubbuildingValuationResultCommercialTitle
+      {
+       title: "Commerciële uitkomsten van de taxatie van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationResultCommercial
+      {
+       title: "Commerciële uitkomsten van de taxatie van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_WeightedAverageLeaseExpiry
+      {
+       title: "Gemmidelde gewogen looptijd (WALE)";
+       visible: Off;
+      }
+      variable P_MarketValuePerSquareMeter
+      {
+       title: "Marktwaarde kosten koper m2";
+       required: On;
+      }
+      variable P_SubbuildingValuationComparableTitle
+      {
+       title: "Referenties van het subgebouw / ruimte [titel]";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationComparableRentTransactions
+      {
+       title: "Huur referenties van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_ComparableRentTransactionAxis
+      {
+       title: "Huurreferentie [as]";
+       visible: Off;
+      }
+      variable P_ComparableRentTransactionTypedMember
+      {
+       title: "Huurreferentie [typed member]";
+       visible: Off;
+      }
+      variable P_CommentRentComparable
+      {
+       title: "Opmerking huur referenties";
+       visible: Off;
+      }
+      variable P_TransactionDate
+      {
+       title: "Transactiedatum";
+       visible: Off;
+      }
+      variable P_SubbuildingValuationComparableSaleReferences
+      {
+       title: "Koop-/beleggingsreferenties van het subgebouw / ruimte";
+       visible: Off;
+      }
+      variable P_SaleReferenceAxis
+      {
+       title: "Koop- / beleggingsreferenties [as]";
+       visible: Off;
+      }
+      variable P_SaleReferenceTypedMember
+      {
+       title: "Koop- / beleggingsreferenties [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityAxis
+      {
+       title: "Interne id van het subgebouw / ruimte [as]";
+       visible: Off;
+      }
+      variable P_InternalIDSubFacilityTypedMember
+      {
+       title: "Interne id van het subgebouw / ruimte [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityAxis
+      {
+       title: "Interne id van het gebouw / subobject [as]";
+       visible: Off;
+      }
+      variable P_InternalIDFacilityTypedMember
+      {
+       title: "Interne id van het gebouw / subobject [typed member]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralAxis
+      {
+       title: "Interne id van het onderpand / object [as]";
+       visible: Off;
+      }
+      variable P_InternalIDCollateralTypedMember
+      {
+       title: "Interne id van het onderpand / object [typed member]";
+       visible: Off;
+      }
+      variable P_CommentSaleComparable
+      {
+       title: "Opmerking koop referenties";
+       visible: Off;
+      }
+      variable P_TransactionDate
+      {
+       title: "Transactiedatum";
+       visible: Off;
+      }
+     }
+    }
+   }
+  }
+ }
+ variable P_InternalIDCollateralTypedMember
+ {
+  title: "Interne id van het onderpand / object [typed member]";
+  visible: Off;
+ }
+ variable P_TypeFinancialCode
+ {
+  title: "Type rekening nummer";
+  visible: Off;
+ }
+ variable P_ReportInformationTitle
+ {
+  title: "Rapport informatie [titel]";
+  variable P_DocumentInformationRealEstate
+  {
+   title: "Informatie ten behoeve van het deponeren van de rapportage";
+   visible: Off;
+  }
+  variable P_DocumentCreationDate
+  {
+   title: "Datum van opmaak van het document";
+   required: On;
+  }
+  variable P_DocumentPresentationCurrency
+  {
+   title: "Rapporteringsvaluta van het document";
+   required: On;
+  }
+  variable P_EntityInformationRealEstate
+  {
+   title: "Informatie over de rechtspersoon die rapportage deponeert";
+   visible: Off;
+  }
+  variable P_ChamberOfCommerceRegistrationNumber
+  {
+   title: "Registratienummer bij de Kamer van Koophandel";
+   required: On;
+  }
+  variable P_LegalEntityName
+  {
+   title: "Naam van de rechtspersoon";
+   required: On;
+  }
+  variable P_LegalEntityLegalFormBanks
+  {
+   title: "Rechtsvorm van de rechtspersoon";
+   required: On;
+  }
+  variable P_BusinessNames
+  {
+   title: "Handelsnamen";
+   required: On;
+  }
+  variable P_LegalEntityRegisteredOffice
+  {
+   title: "Zetel van de rechtspersoon";
+   required: On;
+  }
+  variable P_HouseNumberNL
+  {
+   title: "Huisnummer NL";
+   required: On;
+  }
+  variable P_HouseNumberAddition
+  {
+   title: "Huisnummer toevoeging";
+   required: On;
+  }
+  variable P_PostalCodeNL
+  {
+   title: "Postcode NL";
+   required: On;
+  }
+  variable P_PlaceOfResidenceNL
+  {
+   title: "Plaats";
+   required: On;
+  }
+  variable P_ContactForDocumentPresentationRealEstate
+  {
+   title: "Contactpersoon voor deze rapportage";
+   visible: Off;
+  }
+  variable P_ContactType
+  {
+   title: "Soort contactpersoon";
+   visible: Off;
+  }
+  variable P_FirstName
+  {
+   title: "Voornamen";
+   required: On;
+  }
+  variable P_Prefix
+  {
+   title: "Voorvoegsel geslachtsnaam";
+   visible: Off;
+  }
+  variable P_FamilyName
+  {
+   title: "Geslachtsnaam";
+   visible: Off;
+  }
+  variable P_OrganisationName
+  {
+   title: "Naam van de organisatie vertegenwoordigd door de contactpersoon";
+   required: On;
+  }
+  variable P_TelephoneNumber
+  {
+   title: "Telefoonnummer";
+   required: On;
+  }
+  variable P_EmailAddressContact
+  {
+   title: "E-mailadres van de contactpersoon voor deze rapportage";
+   required: On;
+  }
+ }
+ variable P_LeaseInformationTitle
+ {
+  title: "Lease-informatie ";
+  variable P_AQRDetailsGeneralLeaseInformation
+  {
+   title: "AQR details: Algemene leaseinformatie";
+   required: On;
+  }
+  variable P_LeaseAxis
+  {
+   title: "Leasecontract [as]";
+   visible: Off;
+  }
+  variable P_LeaseTypedMember
+  {
+   title: "Leasecontract [typed member]";
+   visible: Off;
+  }
+  variable P_InternalIDFacilityAxis
+  {
+   title: "Interne id van het gebouw / subobject [as]";
+   visible: Off;
+  }
+  variable P_InternalIDFacilityTypedMember
+  {
+   title: "Interne id van het gebouw / subobject [typed member]";
+   visible: Off;
+  }
+  variable P_CreditQualityAnchorTenant
+  {
+   title: "Kredietkwaliteit hoofdhuurder";
+   required: On;
+  }
+  variable P_MedianCreditQualityTenants
+  {
+   title: "Mediaan kredietkwaliteit huurders";
+   visible: Off;
+  }
+  variable P_AnchorTenant
+  {
+   title: "Hoofdhuurder";
+   visible: Off;
+  }
+  variable P_AreaLeased
+  {
+   title: "Verhuurde oppervlakte";
+  }
+  variable P_ContractRentPerYear
+  {
+   title: "Basishuur per jaar";
+   visible: Off;
+  }
+  variable P_EstimateHeadlineRentDate
+  {
+   title: "Datum van basishuur schatting";
+   required: On;
+  }
+  variable P_UpwardOnlyRentReview
+  {
+   title: "Opwaartse huurherziening";
+   required: On;
+  }
+  variable P_TimeToNextBreak
+  {
+   title: "Tijd tot eerstvolgende opzegmogelijkheid (gewogen op basis van bezetting)";
+   visible: Off;
+  }
+  variable P_AQRDetailsLeaseCharges
+  {
+   title: "AQR details: Leasebetalingen";
+   required: On;
+  }
+  variable P_LeaseChargesAxis
+  {
+   title: "Leasebetalingen [as]";
+   visible: Off;
+  }
+  variable P_LeaseChargeTypedMember
+  {
+   title: "Leasebetalingen [typed member]";
+   visible: Off;
+  }
+  variable P_InternalIDFacilityAxis
+  {
+   title: "Interne id van het gebouw / subobject [as]";
+   visible: Off;
+   variable P_InternalIDFacilityTypedMember
+   {
+    title: "Interne id van het gebouw / subobject [typed member]";
+    visible: Off;
+   }
+  }
+  variable P_InternalIDFacilityTypedMember
+  {
+   title: "Interne id van het gebouw / subobject [typed member]";
+   visible: Off;
+  }
+  variable P_ContractRentPerYear
+  {
+   title: "Basishuur per jaar";
+   required: On;
+  }
+  variable P_LeaseArea
+  {
+   title: "Leaseoppervlakte";
+   required: On;
+  }
+  variable P_SourceType
+  {
+   title: "Brontype";
+   required: On;
+  }
+  variable P_EstimateHeadlineRentDate
+  {
+   title: "Datum van basishuur schatting";
+   required: On;
+  }
+  variable P_ValuationAssignmentTitle
+  {
+   title: "Taxatie-opdracht informatie [titel]";
+   visible: Off;
+  }
+  variable P_ValuationAssignmentInformationTitle
+  {
+   title: "Informatie over de taxatie-opdracht [titel]";
+   visible: Off;
+  }
+  variable P_ValuationAssignmentInformation
+  {
+   title: "Informatie over de taxatie-opdracht";
+   required: On;
+  }
+  variable P_ValuatorTitle
+  {
+   title: "Taxateur [titel]";
+   visible: Off;
+  }
+  variable P_ValuatorOrganisation
+  {
+   title: "Taxateur (organisatie)";
+   required: On;
+  }
+  variable P_Valuator
+  {
+   title: "Taxateur";
+   required: On;
+  }
+  variable P_ValuatorReference
+  {
+   title: "Taxateur referentie";
+  }
+  variable P_ValuatorRegister
+  {
+   title: "Lidmaatschap taxateur register";
+  }
+  variable P_ValuatorAssociation
+  {
+   title: "Lidmaatschap branche vereniging";
+  }
+  variable P_ValuationInstructorTitle
+  {
+   title: "Opdrachtgever [titel]";
+   visible: Off;
+  }
+  variable P_ValuationInstructor
+  {
+   title: "Opdrachtgever";
+   required: On;
+  }
+  variable P_ValuationInstructorReference
+  {
+   title: "Opdrachtgever referentie";
+  }
+  variable P_ValuationRemunerationTitle
+  {
+   title: "Honorarium [titel]";
+   visible: Off;
+  }
+  variable P_ValuationRemuneration
+  {
+   title: "Honorarium";
+   visible: Off;
+  }
+  variable P_ValuationRelevantValuationDatesTitle
+  {
+   title: "Taxatiedatum [titel]";
+   visible: Off;
+  }
+  variable P_ValuationRelevantValuationDates
+  {
+   title: "Taxatiedatum";
+  }
+  variable P_ValuationDeclarations
+  {
+   title: "Overige verklaringen [titel]";
+   visible: Off;
+  }
+  variable P_ValuationDeclarations
+  {
+   title: "Overige verklaringen";
+  }
+  variable P_ValuationInspection
+  {
+   title: "Inspectie [titel]";
+   visible: Off;
+  }
+  variable P_ValuationInspection
+  {
+   title: "Inspectie";
+  }
+ }
+ variable P_ValuationAssignmentTitle
+ {
+  title: "Taxatie-opdracht informatie";
+  variable P_ValuationAssignmentInformationTitle
+  {
+   title: "Informatie over de taxatie-opdracht [titel]";
+   visible: Off;
+   variable P_ValuationAssignmentInformation
+   {
+    title: "Informatie over de taxatie-opdracht";
+    required: On;
+   }
+   variable P_AssignmentDate
+   {
+    title: "Datum opdracht";
+    required: On;
+   }
+   variable P_AssignmentAgreed
+   {
+    title: "Opdrachtverstrekking";
+    required: On;
+   }
+   variable P_AssignmentTermsAgreed
+   {
+    title: "Opdracht voorwaarden";
+    visible: Off;
+   }
+  }
+  variable P_ValuatorTitle
+  {
+   title: "Taxateur [titel]";
+   visible: Off;
+   variable P_ValuatorOrganisation
+   {
+    title: "Taxateur (organisatie)";
+    required: On;
+   }
+   variable P_Name
+   {
+    title: "Naam";
+    visible: Off;
+   }
+   variable P_ShortName
+   {
+    title: "Verkorte naam";
+    visible: Off;
+   }
+   variable P_ChamberOfCommerceRegistrationNumber
+   {
+    title: "Registratienummer bij de Kamer van Koophandel";
+    visible: Off;
+   }
+   variable P_PlaceOfRegistration
+   {
+    title: "KVK standplaats";
+    visible: Off;
+   }
+   variable P_Valuator
+   {
+    title: "Taxateur";
+    required: On;
+   }
+   variable P_InternalIDValuatorAxis
+   {
+    title: "Interne id van de taxateur [as]";
+    visible: Off;
+   }
+   variable P_InternalIDValuatorTypedMember
+   {
+    title: "Interne id van de taxateur [typed member]";
+    visible: Off;
+   }
+   variable P_Name
+   {
+    title: "Naam";
+    visible: Off;
+   }
+   variable P_TitlesPrefix
+   {
+    title: "Titels voor naam";
+    visible: Off;
+   }
+   variable P_TitlesSuffix
+   {
+    title: "Titels achter naam";
+    visible: Off;
+   }
+   variable P_JobTitle
+   {
+    title: "Functienaam";
+    visible: Off;
+   }
+   variable P_Salutation
+   {
+    title: "Aanspreektitel";
+    visible: Off;
+   }
+   variable P_ContactPerson
+   {
+    title: "Contact persoon";
+   }
+   variable P_NRVTNumber
+   {
+    title: "NRVT nummer";
+    visible: Off;
+   }
+   variable P_Email
+   {
+    title: "Email";
+   }
+   variable P_TelephoneNumber
+   {
+    title: "Telefoonnummer";
+   }
+   variable P_Specialisation
+   {
+    title: "Specialisatie / deskundigheid & educatie";
+    visible: Off;
+   }
+  }
+  variable P_PresentationOrder
+  {
+   title: "Presentatievolgorde";
+   visible: Off;
+  }
+  variable P_ValuationInstructorTitle
+  {
+   title: "Opdrachtgever [titel]";
+   visible: Off;
+   variable P_ValuationInstructor
+   {
+    title: "Opdrachtgever";
+    visible: Off;
+   }
+   variable P_TypeOfInstructor
+   {
+    title: "Type opdrachtgever";
+    visible: Off;
+   }
+   variable P_ObjectValuationInstructorOrganisationTitle
+   {
+    title: "Organisatie [titel]";
+    visible: Off;
+   }
+  }
+  variable P_InstructorName
+  {
+   title: "Naam";
+   required: On;
+   variable P_ShortName
+   {
+    title: "Verkorte naam";
+    visible: Off;
+   }
+  }
+  variable P_ChamberOfCommerceRegistrationNumber
+  {
+   title: "Registratienummer bij de Kamer van Koophandel";
+   visible: Off;
+   variable P_PlaceOfRegistration
+   {
+    title: "KVK standplaats";
+    visible: Off;
+   }
+   variable P_ObjectValuationInstructorContactPersonTitle
+   {
+    title: "Contactpersoon [titel]";
+    visible: Off;
+   }
+   variable P_ContactName
+   {
+    title: "Naam";
+   }
+   variable P_TitlesPrefix
+   {
+    title: "Titels voor naam";
+    visible: Off;
+   }
+   variable P_TitlesSuffix
+   {
+    title: "Titels achter naam";
+    visible: Off;
+   }
+   variable P_JobTitle
+   {
+    title: "Functienaam";
+    visible: Off;
+   }
+  }
+  variable P_Salutation
+  {
+   title: "Aanspreektitel";
+   visible: Off;
+   variable P_ContactPerson
+   {
+    title: "Contact persoon";
+    visible: Off;
+   }
+   variable P_ObjectValuationInstructorAddressTitle
+   {
+    title: "Adres [titel]";
+    visible: Off;
+   }
+   variable P_DepartmentName
+   {
+    title: "Afdelingsnaam";
+    visible: Off;
+   }
+   variable P_ValuationInstructorReference
+   {
+    title: "Opdrachtgever referentie";
+    visible: Off;
+   }
+   variable P_InstructorReferenceAllocatedBy
+   {
+    title: "Opdrachtgever referentie toegekend door";
+    visible: Off;
+   }
+   variable P_InstructorReferenceAllocatedByDescription
+   {
+    title: "Opdrachtgever referentie toegekend door (beschrijving)";
+    visible: Off;
+   }
+   variable P_InstructorReferenceDescription
+   {
+    title: "Omschrijving unieke opdrachtgever referentie";
+    visible: Off;
+   }
+  }
+  variable P_ValuationRemunerationTitle
+  {
+   title: "Honorarium [titel]";
+   visible: Off;
+   variable P_ValuationRemuneration
+   {
+    title: "Honorarium";
+    visible: Off;
+   }
+  }
+  variable P_ValuationRelevantValuationDatesTitle
+  {
+   title: "Taxatiedatum [titel]";
+   visible: Off;
+   variable P_ValuationRelevantValuationDates
+   {
+    title: "Taxatiedatum";
+    visible: Off;
+   }
+   variable P_ValuationDate
+   {
+    title: "Peildatum";
+   }
+   variable P_InspectionDate
+   {
+    title: "Inspectie datum";
+   }
+   variable P_DateAssignmentAccepted
+   {
+    title: "Datum acceptatie";
+   }
+   variable P_DateAssignmentComplete
+   {
+    title: "Datum gereed";
+    visible: Off;
+   }
+   variable P_DateSignedSecondValuator
+   {
+    title: "Datum ondertekening controle";
+    visible: Off;
+   }
+  }
+  variable P_ValuationDeclarations
+  {
+   title: "Overige verklaringen [titel]";
+   visible: Off;
+  }
+  variable P_ValuationInspection
+  {
+   title: "Inspectie [titel]";
+   visible: Off;
+  }
+ }
+}

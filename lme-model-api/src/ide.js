@@ -38,6 +38,7 @@ angular.module('lmeapp', ['angular.filter'])
 
         const modelEngine = new LMEModelEngine()
         $scope.LMEMETA = modelEngine;
+        global.LME = modelEngine
         modelEngine.loadData(function(response) {
         })
 

@@ -8,7 +8,7 @@ const SolutionFacade = require('../lme-core/src/SolutionFacade');
 require('../lme-core/exchange_modules/swagger/swaggerParser');
 const ModelListener = require('../git-connect').ModelListener;
 const modelLoadListener = new ModelListener();
-const APIDefinition = require(__dirname + '/api/AuthenticatedSwaggerDefinition.json');
+const APIDefinition = require(__dirname + '/resources/AuthenticatedSwaggerDefinition.json');
 const log = require('log6')
 const excelPlugin = require('../excel-connect');
 LMEFacade.addFunctions(excelPlugin);

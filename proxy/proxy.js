@@ -47,17 +47,17 @@ app.use(require('method-override')())
 app.use(errorHandler)
 app.use(clientErrorHandler)
 
-app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
 
 function errorHandler(err, req, res, next) {
     if (res.headersSent) return next(err)
     res.status(500)
-    res.render('error', {error: err})
+    res.render('error', { error: err })
 }
 
 function clientErrorHandler(err, req, res, next) {
-    if (req.xhr) res.status(500).send({error: 'Something failed!'})
+    if (req.xhr) res.status(500).send({ error: 'Something failed!' })
     else next(err)
 }
 
@@ -77,12 +77,12 @@ app.get('/register/service/:name/:host/:port/*', function(req, res) {
     for (var i = 0; i < routes.length; i++) {
         const route = routes[i]
         app[req.params.type || 'all'](route, proxy({
-            target: 'http://' + targetProxyHost + ':' + targetProxyPort,
+            target      : 'http://' + targetProxyHost + ':' + targetProxyPort,
             changeOrigin: true,
-            logLevel: proxyLogLevel,
-            limit: '50mb',
-            onProxyReq: restream,
-            onProxyRes: onProxyRes
+            logLevel    : proxyLogLevel,
+            limit       : '50mb',
+            onProxyReq  : restream,
+            onProxyRes  : onProxyRes
         }));
     }
     if (log.DEBUG) log.debug('service registered [' + name + '] http://' + host + ':' + internal_proxy_port + '/' + routes + '] ~ > ' + ' http://' + targetProxyHost + ':' + targetProxyPort)
@@ -105,15 +105,15 @@ async function onProxyRes(proxyRes, req, res) {
      */
     var end = now()
     const message = {
-        host: host,
-        lenght: res['Content-Length'],
-        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        status: res.statusCode,
+        host        : host,
+        lenght      : res['Content-Length'],
+        ip          : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        status      : res.statusCode,
         '@timestamp': new Date(),
         responsetime: (end - res['X-Response-Time-start']).toFixed(3),
-        url: req.originalUrl,
-        agent: req.headers['user-agent'],
-        level: 'info'
+        url         : req.originalUrl,
+        agent       : req.headers['user-agent'],
+        level       : 'info'
     };
     logstash.send(message);
     /**
@@ -126,22 +126,20 @@ async function onProxyRes(proxyRes, req, res) {
         proxyRes.on('data', (dataBuffer) => content += dataBuffer);
         proxyRes.on('end', function() {
             logstash.send({
-                host: host,
-                lenght: proxyRes['Content-Length'],
-                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-                status: proxyRes.statusCode,
+                host        : host,
+                lenght      : proxyRes['Content-Length'],
+                ip          : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                status      : proxyRes.statusCode,
                 '@timestamp': new Date(),
                 responsetime: (end - res['X-Response-Time-start']).toFixed(3),
-                url: req.originalUrl,
-                agent: req.headers['user-agent'],
-                input: req.body,
-                output: JSON.parse(content),
-                level: 'info'
+                url         : req.originalUrl,
+                agent       : req.headers['user-agent'],
+                input       : req.body,
+                output      : JSON.parse(content),
+                level       : 'info'
             });
         });
     }
 }
 
-app.listen(internal_proxy_port, () => {
-    log.info('<a href="http://blfif-tv-tr03.finance.lab:5601"> Kibana logstash</a><span> deployed.</span>');
-});
+app.listen(internal_proxy_port, () => log.info('<a href="http://blfif-tv-tr03.finance.lab:5601"> Kibana logstash</a><span> deployed.</span>'));

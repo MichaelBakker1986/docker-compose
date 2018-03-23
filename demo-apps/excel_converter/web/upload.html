@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Excel FFL Converter </title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-big-counter.min.css"/>
+
+</head>
+<body>
+
+<style type="text/css" media="screen">
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    h1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: #272822;
+        color: antiquewhite;
+        border: 2px solid black;
+        text-align: center;
+    }
+
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .btn {
+        border: 2px solid gray;
+        color: gray;
+        cursor: pointer;
+        background-color: white;
+        padding: 4px 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .header {
+        color: gray;
+        position: absolute;
+        background-color: white;
+        padding: 7px 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 25px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    section {
+        display: -webkit-flex; /* Safari */
+        display: flex;
+        width: 100%;
+    }
+
+    #editor-section {
+        position: absolute;
+        top: 36px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    div.left, div.right {
+        outline: solid 1px #ccc;
+        overflow: auto;
+    }
+
+    div.left {
+        width: 50%;
+        resize: both;
+    }
+
+    div.right {
+        -webkit-flex: 1; /* Safari 6.1+ */
+        -ms-flex: 1; /* IE 10 */
+        flex: 1;
+    }
+
+    /*
+ * Made by Erik Terwan
+ * 24th of November 2015
+ * All rights reserved
+ *
+ *
+ * If you are thinking of using this in
+ * production code, beware of the browser
+ * prefixes.
+ */
+
+    #menuToggle {
+        display: block;
+        position: relative;
+        top: 50px;
+        left: 50px;
+
+        z-index: 1;
+
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    #menuToggle input {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+
+        cursor: pointer;
+
+        opacity: 0; /* hide this */
+        z-index: 2; /* and place it over the hamburger */
+
+        -webkit-touch-callout: none;
+    }
+
+    /*
+     * Just a quick hamburger
+     */
+    #menuToggle span {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+
+        background: #cdcdcd;
+        border-radius: 3px;
+
+        z-index: 1;
+
+        transform-origin: 4px 0px;
+
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        opacity 0.55s ease;
+    }
+
+    #menuToggle span:first-child {
+        transform-origin: 0% 0%;
+    }
+
+    #menuToggle span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+    }
+
+    /*
+     * Transform all the slices of hamburger
+     * into a crossmark.
+     */
+    #menuToggle input:checked ~ span {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: #232323;
+    }
+
+    /*
+     * But let's hide the middle one.
+     */
+    #menuToggle input:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    /*
+     * Ohyeah and the last one should go the other direction
+     */
+    #menuToggle input:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) translate(0, -1px);
+    }
+
+    /*
+     * Make this absolute positioned
+     * at the top left of the screen
+     */
+    #menu {
+        position: absolute;
+        width: 300px;
+        margin: -100px 0 0 -50px;
+        padding: 50px;
+        padding-top: 125px;
+
+        background: #ededed;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        /* to stop flickering of text in safari */
+
+        transform-origin: 0% 0%;
+        transform: translate(-100%, 0);
+
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    }
+
+    #menu li {
+        padding: 10px 0;
+        font-size: 22px;
+    }
+
+    /*
+     * And let's slide it in from the left
+     */
+    #menuToggle input:checked ~ ul {
+        transform: none;
+    }
+</style>
+
+<div class="build-wrap"></div>
+<script>
+    jQuery(function($) {
+        $('.build-wrap').formBuilder();
+    });
+</script>
+
+<form style="height: 34px;">
+    <div class="upload-btn-wrapper">
+        <button class="btn">Upload the excel file</button>
+        <input id="uploadfiles" type="file" name="presentation"/>
+    </div>
+    <span class="header">* | description | level | name | check | type |* | * | * | * | * | * | * | * | * | * | * | importance</span>
+    <a style="position: absolute; right: 0px" href="testfile.xlsx" class="btn" download>Test file</a>
+</form>
+<!--    Made by Erik Terwan    -->
+<!--   24th of November 2015   -->
+<!--    All rights reserved    -->
+<nav style="display: none" role="navigation">
+    <div id="menuToggle">
+        <!--
+        A fake / hidden checkbox is used as click reciever,
+        so you can use the :checked selector on it.
+        -->
+        <input type="checkbox"/>
+
+        <!--
+        Some spans to act as a hamburger.
+
+        They are acting like a real hamburger,
+        not that McDonalds stuff.
+        -->
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <!--
+        Too bad the menu has to be inside of the button
+        but hey, it's pure CSS magic.
+        -->
+        <ul id="menu">
+            <a href="#">
+                <li>Home</li>
+            </a>
+            <a href="#">
+                <li>About</li>
+            </a>
+            <a href="#">
+                <li>Info</li>
+            </a>
+            <a href="#">
+                <li>Contact</li>
+            </a>
+            <a href="https://erikterwan.com/" target="_blank">
+                <li>Show me more</li>
+            </a>
+        </ul>
+    </div>
+</nav>
+<section id="editor-section" class="grid">
+    <div id="left_editor" class="left"></div>
+    <div id="right_top_editor" class="right"></div>
+    <div id="right_bottom_editor" class="right"></div>
+</section>
+
+<script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+</body>
+</html>

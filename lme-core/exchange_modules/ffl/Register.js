@@ -49,13 +49,34 @@ Register.prototype.addColumn = function(name) {
         this.schema.push(name)
     }
 }
+Register.prototype.removeColumn = function(name) {
+    if (this.schemaIndexes[name] != null) {
+        const index = this.schemaIndexes[name];
+        for (var i = 0; i < this.i.length; i++) {
+            var obj = this.i[i];
+            obj.splice(index, 1);
+        }
+        delete this.schemaIndexes[name]
+        this.schema.splice(index, 1)
+        this.schema.forEach((el, i) => this.schemaIndexes[el] = i)
+    }
+}
+Register.prototype.flush = function() {
+    for (var i = 0; i < this.i.length; i++) this.i[i].length = this.schema.length
+}
 Register.prototype.value = function(idx, key, value) {
     this.i[idx][this.schemaIndexes[key]] = value
+}
+Register.prototype.findStream = function(key, value, start) {
+    return this.find(key, value, this.mark)
 }
 Register.prototype.find = function(key, value, start) {
     const result = []
     for (var i = (start || 0); i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
     return result;
+}
+Register.prototype.distinct = function(schema, start) {
+    return this.distinctArr(this.i, schema, start || this.mark)
 }
 Register.prototype.distinctArr = function(arr, schema, start) {
     const result = []
@@ -164,7 +185,7 @@ Register.prototype.printArr = function(arr, idxMap, start, filter) {
     }
     for (var i = (start || 0); i < arr.length; i++) {
         const el = arr[i];
-        tout.push((filter ? el.filter(f) : el).map(function(innerEl, idx) {
+        tout.push((filter.length > 0 ? el.filter(f) : el).map(function(innerEl, idx) {
             const v = self.formatters[idx] ? self.formatters[idx](innerEl) : innerEl
             const prefix = [];
             prefix.length = Math.max(idxMap[idx] - String(v).length, 0);
@@ -177,7 +198,7 @@ Register.prototype.translateKeys = function(formula) {
     const self = this;
     return formula.replace(/__(\d+)/gm, function($1, $2) {
         return self.constants[parseInt($2)]
-    })
+    }) || ''
 }
 /** * mark current moment as last checkpoint */
 Register.prototype.markNow = function() {

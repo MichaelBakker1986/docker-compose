@@ -13,7 +13,7 @@ module.exports.setup = function(app) {
     app.get('*/data-api-docs', function(req, res) {
         //TODO: check authorization role for fire-grained definiton. For now privacy > rest
         //maybe via filename, maybe life-generated.
-        let swaggerData = require(__dirname + '/AuthenticatedSwaggerDefinition.json');
+        let swaggerData = require(__dirname + '/../resources/AuthenticatedSwaggerDefinition.json');
         swaggerData.host = req.headers["x-forwarded-host"];
         res.json(swaggerData)
     });

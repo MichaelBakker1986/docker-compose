@@ -1,12 +1,13 @@
 const passport = require('passport');
-const Strategy = require('passport-facebook').Strategy;
+const FaceBookStrategy = require('passport-facebook').Strategy;
 
 class Authentication {
     constructor(app) {
 
-        passport.use(new Strategy({
-                clientID: '180467995863988',
-                clientSecret: 'b10828749578d1bd1402e8c57b72b01d',
+        passport.use(new FaceBookStrategy({
+                clientID         : '180467995863988',
+                clientSecret     : 'b10828749578d1bd1402e8c57b72b01d',
+                redirect_uri     : "http://94.213.30.5:8082",
                 passReqToCallback: true
             },
             function(req, refreshToken, accessToken, profile, cb) {
@@ -28,12 +29,13 @@ class Authentication {
 
     resolveId(targetUrl) {
         return passport.authenticate('facebook', {
-            failureRedirect: '/fail',
-            redirect_uri: targetUrl,
-            successRedirect: targetUrl,
-            callbackURL: targetUrl,
+            failureRedirect  : '/fail',
+            redirect_uri     : targetUrl,
+            successRedirect  : targetUrl,
+            callbackURL      : targetUrl,
             passReqToCallback: true
         })
     }
 }
+
 module.exports = Authentication
