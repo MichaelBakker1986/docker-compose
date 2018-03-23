@@ -368,10 +368,10 @@ display_options: scorecard;
 variable P0_frcvtabstrReportInformationTitle refers to frcvtabstrReportInformationTitle
 {
   title: "Rapportinformatie [titel]";
-  variable P1_frcvtlrDocumentInformationRealEstate refers to frcvtlrDocumentInformationRealEstate
+  variable MAPP1_frcvtlrDocumentInformationRealEstate_PARAGRAAF1 refers to frcvtlrDocumentInformationRealEstate
   {
    title: "Informatie ten behoeve van het deponeren van de rapportage";
-   visible: Off;
+   visible: On;
   }
   variable P2_nlcdDocumentCreationDate refers to nlcdDocumentCreationDate
   {
@@ -383,10 +383,10 @@ variable P0_frcvtabstrReportInformationTitle refers to frcvtabstrReportInformati
    title: "Rapporteringsvaluta van het document";
    required: On;
   }
-  variable P4_frcvtlrEntityInformationRealEstate refers to frcvtlrEntityInformationRealEstate
+  variable MAPP4_frcvtlrEntityInformationRealEstate_PARAGRAAF2 refers to frcvtlrEntityInformationRealEstate
   {
    title: "Informatie over de rechtspersoon die rapportage deponeert";
-   visible: Off;
+   visible: On;
   }
   variable P5_venjbw2iChamberOfCommerceRegistrationNumber refers to venjbw2iChamberOfCommerceRegistrationNumber
   {
@@ -480,7 +480,7 @@ variable P22_frcvtabstrValuationAssignmentTitle refers to frcvtabstrValuationAss
   variable P23_frcvtabstrValuationAssignmentInformationTitle refers to frcvtabstrValuationAssignmentInformationTitle
   {
    title: "Informatie over de taxatie-opdracht [titel]";
-   variable P24_frcvtlrValuationAssignmentInformation refers to frcvtlrValuationAssignmentInformation
+   variable MAPP24_frcvtlrValuationAssignmentInformation_PARAGRAAF1 refers to frcvtlrValuationAssignmentInformation
    {
     title: "Informatie over de taxatie-opdracht";
     required: On;
