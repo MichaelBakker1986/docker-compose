@@ -6,10 +6,10 @@ import BaseModel.*;
 
 model VASTGOED uses BaseModel
 {
- version: "0.1";
- ffl_version: "1.2";
- root
- {
+version: "0.1";
+ffl_version: "1.2";
+root
+{
   variable RootSub1
   {
    datatype: none;
@@ -153,7 +153,7 @@ model VASTGOED uses BaseModel
     data_options: unscalable;
     displaytype: select;
     fixed_decimals: 0;
-    title: "Column Type";
+   title: "Column Type";
     visible: 1;
     choices: "0:History|1:Projection";
     options_title: locked;
@@ -360,355 +360,190 @@ model VASTGOED uses BaseModel
     }
    }
   }
-  variable Q_ROOT
+
+variable Q_ROOT
+{
+title: "Presentation root variable";
+display_options: scorecard;
+variable P0_frcvtabstrReportInformationTitle refers to frcvtabstrReportInformationTitle
+{
+  title: "Rapportinformatie [titel]";
+  variable P1_frcvtlrDocumentInformationRealEstate refers to frcvtlrDocumentInformationRealEstate
   {
-   datatype: number;
-   frequency: document;
-   display_options: scorecard;
-   data_options: unscalable;
-   displaytype: select;
-   title: "Scorecard Vastgoedexploitatie";
-   hint: "Dit is een model om globaal de mogelijkheden van een vastgoedmodel voor de kasstromen uit verhuur te tonen.";
-   locked: 1;
-   visible: 1;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-   options_title: locked;
-   options: locked;
-   variable Q_MAP01
+   title: "Informatie ten behoeve van het deponeren van de rapportage";
+   visible: Off;
+  }
+  variable P2_nlcdDocumentCreationDate refers to nlcdDocumentCreationDate
+  {
+   title: "Datum van opmaak van het document";
+   required: On;
+  }
+  variable P3_rjiDocumentPresentationCurrency refers to rjiDocumentPresentationCurrency
+  {
+   title: "Rapporteringsvaluta van het document";
+   required: On;
+  }
+  variable P4_frcvtlrEntityInformationRealEstate refers to frcvtlrEntityInformationRealEstate
+  {
+   title: "Informatie over de rechtspersoon die rapportage deponeert";
+   visible: Off;
+  }
+  variable P5_venjbw2iChamberOfCommerceRegistrationNumber refers to venjbw2iChamberOfCommerceRegistrationNumber
+  {
+   title: "Registratienummer bij de Kamer van Koophandel";
+   required: On;
+  }
+  variable P6_venjbw2iLegalEntityName refers to venjbw2iLegalEntityName
+  {
+   title: "Naam van de rechtspersoon";
+   required: On;
+  }
+  variable P7_frciLegalEntityLegalFormBanks refers to frciLegalEntityLegalFormBanks
+  {
+   title: "Rechtsvorm van de rechtspersoon";
+   required: On;
+  }
+  variable P8_rjiBusinessNames refers to rjiBusinessNames
+  {
+   title: "Handelsnamen";
+   required: On;
+  }
+  variable P9_venjbw2iLegalEntityRegisteredOffice refers to venjbw2iLegalEntityRegisteredOffice
+  {
+   title: "Zetel van de rechtspersoon";
+   required: On;
+  }
+  variable P10_nlcdHouseNumberNL refers to nlcdHouseNumberNL
+  {
+   title: "Huisnummer NL";
+   required: On;
+  }
+  variable P11_nlcdHouseNumberAddition refers to nlcdHouseNumberAddition
+  {
+   title: "Huisnummer toevoeging";
+   required: On;
+  }
+  variable P12_nlcdPostalCodeNL refers to nlcdPostalCodeNL
+  {
+   title: "Postcode NL";
+   required: On;
+  }
+  variable P13_nlcdPlaceOfResidenceNL refers to nlcdPlaceOfResidenceNL
+  {
+   title: "Plaats";
+   required: On;
+  }
+  variable P14_frcvtlrContactForDocumentPresentationRealEstate refers to frcvtlrContactForDocumentPresentationRealEstate
+  {
+   title: "Contactpersoon voor deze rapportage";
+   visible: Off;
+  }
+  variable P15_frciContactType refers to frciContactType
+  {
+   title: "Soort contactpersoon";
+   visible: Off;
+  }
+  variable P16_nlcdFirstName refers to nlcdFirstName
+  {
+   title: "Voornamen";
+   required: On;
+  }
+  variable P17_nlcdPrefix refers to nlcdPrefix
+  {
+   title: "Voorvoegsel geslachtsnaam";
+   visible: Off;
+  }
+  variable P18_nlcdFamilyName refers to nlcdFamilyName
+  {
+   title: "Geslachtsnaam";
+   visible: Off;
+  }
+  variable P19_frciOrganisationName refers to frciOrganisationName
+  {
+   title: "Naam van de organisatie vertegenwoordigd door de contactpersoon";
+   required: On;
+  }
+  variable P20_nlcdTelephoneNumber refers to nlcdTelephoneNumber
+  {
+   title: "Telefoonnummer";
+   required: On;
+  }
+  variable P21_kvkiEmailAddressContact refers to kvkiEmailAddressContact
+  {
+   title: "E-mailadres van de contactpersoon voor deze rapportage";
+   required: On;
+  }
+}
+variable P22_frcvtabstrValuationAssignmentTitle refers to frcvtabstrValuationAssignmentTitle
+{
+  title: "Taxatie-opdracht [titel]";
+  variable P23_frcvtabstrValuationAssignmentInformationTitle refers to frcvtabstrValuationAssignmentInformationTitle
+  {
+   title: "Informatie over de taxatie-opdracht [titel]";
+   variable P24_frcvtlrValuationAssignmentInformation refers to frcvtlrValuationAssignmentInformation
    {
-    datatype: number;
-    frequency: document;
-    formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
-    data_options: unscalable;
-    displaytype: select;
-    title: "Locaties, verhuurobjecten en huurders";
-    top_blanklines: 1;
-    display_options: showColumnTitlesAboveSubVars;
-    locked: 1;
-    visible: 1;
-    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-    options_title: locked;
-    options: locked;
-    variable Q_MAP01_WARNING
-    {
-     datatype: string;
-     frequency: document;
-     formula: String("");
-     data_options: unscalable;
-     title: "Warning voor map 1";
-     top_blanklines: 1;
-     locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_INFO
-    {
-     datatype: string;
-     frequency: document;
-     formula: String(If(Q_MAP01[1]=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-     data_options: unscalable;
-     title: "Info bij stap 1";
-     locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_VALIDATION
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Validatie stap 1";
-     locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_HINT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Hinttekst stap 1";
-     locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-    }
-    variable Q_MAP01_PARAGRAAF01
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Locaties";
-     hint: "Locaties kunnen worden toegevoegd. Een locatie betreft een geheel aan verhuurobjecten die als één geheel worden geëxploiteerd.";
-     visible: 1;
-     options_title: locked;
-    }
-    variable Q_MAP01SUB6 refers to venjbw2iLegalEntityName
-    {
-     datatype: string;
-     frequency: column;
-     aggregation: flow;
-     data_options: unscalable;
-     length: >=1 and <= 100000;
-     namespaceuri: "http://www.nltaxonomie.nl/nt12/venj/20171213/dictionary/venj-bw2-data";
-     namespaceprefix: "venj-bw2-i";
-     elementname: "LegalEntityName";
-     elementtype: "nl-types:string100000ItemType";
-     periodtype: "Duration";
-     title: "Naam";
-     hint: "De statutaire naam van de rechtspersoon.";
-     top_separator: 1;
-     bottom_separator: 1;
-     visible: 1;
-     options_title: locked;
-     options_trend: locked, invisible;
-    }
-    variable Q_MAP01_HULPVARIABELEN
-    {
-     datatype: number;
-     frequency: document;
-     displaytype: currency;
-     title: "Hulpvariabelen";
-     locked: 1;
-     visible: 0;
-     options_title: locked, invisible;
-     options: locked, invisible;
-     variable Q_MAP01_STATUS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Q_MAP01;
-      data_options: unscalable;
-      displaytype: select;
-      title: "Status van de stap";
-      top_blanklines: 1;
-      locked: 1;
-      visible: 1;
-      choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_REQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal verplichte velden (1)";
-      locked: 1;
-      visible: 1;
-      options_title: locked;
-      options: locked;
-     }
-     variable Q_MAP01_ENTEREDREQUIREDVARS
-     {
-      datatype: number;
-      frequency: document;
-      formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) and DataAvailable(X));
-      data_options: unscalable;
-      fixed_decimals: 0;
-      title: "Aantal ingevulde verplichte velden (1)";
-      locked: 1;
-      visible: 1;
-      options_title: locked;
-      options: locked;
-     }
-    }
+    title: "Informatie over de taxatie-opdracht";
+    required: On;
    }
-   variable Q_RESULT
+   variable P25_frcvtiAssignmentDate refers to frcvtiAssignmentDate
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_ROOT[1]=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]"));
-    data_options: unscalable;
-    title: "Resultaat";
-    top_blanklines: 1;
-    locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
-    variable Q_RESULTSUB1 refers to Q_RESULT
-    {
-     datatype: string;
-     frequency: document;
-     data_options: unscalable;
-     title: "Resultaat";
-     top_blanklines: 1;
-     locked: 1;
-     visible: 1;
-     options_title: locked;
-     options: locked;
-    }
+    title: "Datum opdracht";
+    required: On;
    }
-   variable Q_STATUS
+   variable P26_frcvtiAssignmentAgreed refers to frcvtiAssignmentAgreed
    {
-    datatype: number;
-    frequency: document;
-    formula: 0;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Status";
-    top_blanklines: 1;
-    visible: 1;
-    choices: "0:Actief|1:Defintief";
-    options_title: locked;
+    title: "Opdrachtverstrekking";
+    required: On;
    }
-   variable Q_STATUS_FINAL_ON
+   variable P27_frcvtiAssignmentTermsAgreed refers to frcvtiAssignmentTermsAgreed
    {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: date;
-    title: "Definitief gemaakt op:";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_STATUS_FINAL_BY
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Definitief gemaakt door (gebruikersnaam):";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_STATUS_FINAL_BY_NAME
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Definitief gemaakt door (volledige naam):";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_ON
-   {
-    datatype: number;
-    frequency: document;
-    data_options: unscalable;
-    displaytype: date;
-    title: "Aangemaakt op:";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_BY
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Aangemaakt door (gebruikersnaam):";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_STATUS_STARTED_BY_NAME
-   {
-    datatype: string;
-    frequency: document;
-    data_options: unscalable;
-    title: "Aangemaakt door (volledige naam):";
-    visible: 1;
-    options_title: locked;
-   }
-   variable ModelVersion
-   {
-    datatype: string;
-    frequency: document;
-    formula: "00.01.000.000";
-    data_options: saveCalculatedValue,unscalable;
-    title: "Modelversie";
-    locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
-   }
-   variable ModelType
-   {
-    datatype: string;
-    frequency: document;
-    formula: "TEST";
-    data_options: saveCalculatedValue,unscalable;
-    title: "Modeltype";
-    locked: 1;
-    visible: 1;
-    options_title: locked;
-    options: locked;
-   }
-   variable MatrixVersion
-   {
-    datatype: string;
-    frequency: document;
-    formula: String("");
-    data_options: saveCalculatedValue,unscalable;
-    title: "Parametersversie";
-    hint: "Bij het definitief maken wordt de waarde 'vastgezet'.";
-    visible: 1;
-    options_title: locked;
-   }
-   variable Q_PREVIOUS_BUTTON_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 2;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Vorige";
-    visible: 1;
-    choices: "0:Nooit|2:Altijd";
-    options_title: locked;
-   }
-   variable Q_NEXT_BUTTON_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 2;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Volgende";
-    visible: 1;
-    choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
-    options_title: locked;
-   }
-   variable Q_CONCEPT_REPORT_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 1;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Concept rapport";
-    visible: 1;
-    choices: "1:Ja|0:Nee";
-    options_title: locked;
-   }
-   variable Q_MAKE_FINAL_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 1;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Definitief maken";
-    visible: 1;
-    choices: "1:Ja|0:Nee";
-    options_title: locked;
-   }
-   variable Q_FINAL_REPORT_VISIBLE
-   {
-    datatype: number;
-    frequency: document;
-    formula: 1;
-    data_options: unscalable;
-    displaytype: select;
-    title: "Definitief rapport";
-    visible: 1;
-    choices: "1:Ja|0:Nee";
-    options_title: locked;
+    title: "Opdracht voorwaarden";
+    visible: Off;
    }
   }
+  variable P28_frcvtabstrValuatorTitle refers to frcvtabstrValuatorTitle
+  {
+   title: "Taxateur [titel]";
+   variable P29_frcvtlrValuatorOrganisation refers to frcvtlrValuatorOrganisation
+   {
+    title: "Taxateur (organisatie)";
+    required: On;
+   }
+   variable P30_frcvtiName refers to frcvtiName
+   {
+    title: "Naam";
+    visible: Off;
+   }
+   variable P31_frcvtiShortName refers to frcvtiShortName
+   {
+    title: "Verkorte naam";
+    visible: Off;
+   }
+   variable P32_venjbw2iChamberOfCommerceRegistrationNumber refers to venjbw2iChamberOfCommerceRegistrationNumber
+   {
+    title: "Registratienummer bij de Kamer van Koophandel";
+    visible: Off;
+   }
+   variable P33_frcvtiPlaceOfRegistration refers to frcvtiPlaceOfRegistration
+   {
+    title: "KVK standplaats";
+    visible: Off;
+   }
+   variable P34_frcvtlrValuator refers to frcvtlrValuator
+   {
+    title: "Taxateur";
+    required: On;
+   }
+   variable P35_frcvtdimInternalIDValuatorAxis refers to frcvtdimInternalIDValuatorAxis
+   {
+    title: "Interne id van de taxateur [as]";
+    visible: Off;
+   }
+  }
+}
+}
+
+
   variable RootSub4
   {
    datatype: number;
@@ -974,7 +809,7 @@ model VASTGOED uses BaseModel
        elementname: "LegalEntityName";
        elementtype: "nl-types:string100000ItemType";
        periodtype: "Duration";
-       displaytype: memo;
+      displaytype: memo;
        title: "Naam";
        hint: "De statutaire naam van de rechtspersoon.";
        visible: 1;
@@ -983,7 +818,7 @@ model VASTGOED uses BaseModel
       }
       variable frciLegalEntityLegalFormBanks
       {
-       datatype: number;
+      datatype: number;
        frequency: column;
        aggregation: balance;
        data_options: unscalable;
@@ -1066,7 +901,7 @@ model VASTGOED uses BaseModel
        length: >=1 and <= 1000;
        namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
        namespaceprefix: "nl-cd";
-       elementname: "HouseNumberAddition";
+      elementname: "HouseNumberAddition";
        elementtype: "nl-types:string1000ItemType";
        periodtype: "Duration";
        title: "Huisnummer toevoeging";
@@ -1086,7 +921,7 @@ model VASTGOED uses BaseModel
        namespaceprefix: "nl-cd";
        elementname: "PostalCodeNL";
        elementtype: "nl-types:nlzipItemType";
-       periodtype: "Duration";
+      periodtype: "Duration";
        title: "Postcode";
        hint: "De offici?le codering van PostNL voor een Nederlands postadres, bestaande uit een numeriek deel en een alfabetisch deel.";
        visible: 1;
@@ -1306,7 +1141,7 @@ model VASTGOED uses BaseModel
         datatype: string;
         frequency: column;
         aggregation: balance;
-        data_options: unscalable;
+       data_options: unscalable;
         length: >=1 and <= 100000;
         namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
         namespaceprefix: "frc-vt-i";
@@ -1579,7 +1414,7 @@ model VASTGOED uses BaseModel
          options_title: locked;
          options_trend: locked, invisible;
         }
-        variable frcvtdimInternalIDValuatorAxis_tpfrcvtiSalutation
+       variable frcvtdimInternalIDValuatorAxis_tpfrcvtiSalutation
         {
          datatype: string;
          frequency: column;
@@ -1702,7 +1537,7 @@ model VASTGOED uses BaseModel
          hint: "Het nummer wat de presentatie volgorde aangeeft.";
          visible: 1;
          options_title: locked;
-         options_trend: locked, invisible;
+        options_trend: locked, invisible;
         }
        }
       }
@@ -1767,12 +1602,12 @@ model VASTGOED uses BaseModel
          frequency: column;
          aggregation: flow;
          data_options: unscalable;
-         range: >=0;
+        range: >=0;
          namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
          namespaceprefix: "nl-cd";
          elementname: "PresentationOrder";
          elementtype: "nl-types:nonNegativeDecimalItemType";
-         periodtype: "Duration";
+        periodtype: "Duration";
          title: "Presentatievolgorde";
          hint: "Het nummer wat de presentatie volgorde aangeeft.";
          visible: 1;
@@ -2088,7 +1923,7 @@ model VASTGOED uses BaseModel
         {
          datatype: string;
          frequency: column;
-         aggregation: flow;
+        aggregation: flow;
          data_options: unscalable;
          length: >=1 and <= 100000;
          namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
@@ -2324,7 +2159,7 @@ model VASTGOED uses BaseModel
         title: "Eerdere betrokkenheid";
         hint: "Organisatie heeft geen eerdere betrokkenheid bij het object (< 2jaar).";
         top_blanklines: 1;
-        visible: 1;
+       visible: 1;
         choices: "0|1";
         options_title: locked;
         options_trend: locked, invisible;
@@ -2464,7 +2299,7 @@ model VASTGOED uses BaseModel
        }
       }
      }
-     variable frcvtabstrValuationInspection
+    variable frcvtabstrValuationInspection
      {
       datatype: none;
       frequency: none;
@@ -2944,7 +2779,7 @@ model VASTGOED uses BaseModel
          title: "Sector type";
          hint: "IPD Code voor sector type";
          visible: 1;
-         choices: "10|20|30|40|50|60";
+        choices: "10|20|30|40|50|60";
          options_title: locked;
          options_trend: locked, invisible;
         }
@@ -3382,7 +3217,7 @@ model VASTGOED uses BaseModel
        frequency: none;
        namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-linkroles";
        namespaceprefix: "frc-vt-lr";
-       elementname: "ObjectEnvironmentalAssesment";
+      elementname: "ObjectEnvironmentalAssesment";
        periodtype: "Other";
        title: "Duurzaamheidsmeting van het object";
        locked: 1;
@@ -3784,7 +3619,7 @@ model VASTGOED uses BaseModel
           data_options: unscalable;
           length: >=1 and <= 100000;
           namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
-          namespaceprefix: "frc-vt-i";
+         namespaceprefix: "frc-vt-i";
           elementname: "CountyLandRegister";
           elementtype: "nl-types:string100000ItemType";
           periodtype: "Instant";
@@ -4003,7 +3838,7 @@ model VASTGOED uses BaseModel
          }
          variable frcvtdimInternalIDLotAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiLandRegisterLotSalePrice
          {
-          datatype: number;
+         datatype: number;
           frequency: column;
           aggregation: balance;
           digits: 20;
@@ -4042,7 +3877,7 @@ model VASTGOED uses BaseModel
         visible: 1;
         options_title: locked;
         variable PfrcvtdimInternalIDLotAxis_tpfrcvtdmInternalIDLotTypedMember2 refers to frcvtdimInternalIDLotAxis_tpfrcvtdmInternalIDLotTypedMember
-        {
+       {
          datatype: string;
          frequency: column;
          aggregation: flow;
@@ -4283,7 +4118,7 @@ model VASTGOED uses BaseModel
         }
         variable frcvtdimInternalIDCollateralAxis_tpfrcvtiMedianCreditQualityTenants
         {
-         datatype: number;
+        datatype: number;
          frequency: column;
          aggregation: balance;
          data_options: unscalable;
@@ -5912,7 +5747,7 @@ model VASTGOED uses BaseModel
           options_title: locked;
           options_trend: locked, invisible;
          }
-         variable frcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiDenominationMethod
+        variable frcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiDenominationMethod
          {
           datatype: string;
           frequency: column;
@@ -6169,7 +6004,7 @@ model VASTGOED uses BaseModel
          aggregation: balance;
          data_options: unscalable;
          namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
-         namespaceprefix: "frc-vt-i";
+        namespaceprefix: "frc-vt-i";
          elementname: "PreSoldArea";
          elementtype: "num:areaItemType";
          periodtype: "Instant";
@@ -6673,7 +6508,7 @@ model VASTGOED uses BaseModel
           datatype: number;
           frequency: column;
           aggregation: balance;
-          data_options: unscalable;
+         data_options: unscalable;
           namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
           namespaceprefix: "frc-vt-i";
           elementname: "MarketabilityOfUnits";
@@ -6712,7 +6547,7 @@ model VASTGOED uses BaseModel
           data_options: unscalable;
           length: >=1 and <= 100000;
           namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
-          namespaceprefix: "frc-vt-i";
+         namespaceprefix: "frc-vt-i";
           elementname: "MarketvisionLocal";
           elementtype: "nl-types:string100000ItemType";
           periodtype: "Instant";
@@ -6751,7 +6586,7 @@ model VASTGOED uses BaseModel
           aggregation: flow;
           inputRequired: 1;
           data_options: unscalable;
-          namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
+         namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
           namespaceprefix: "frc-vt-dm";
           elementname: "InternalIDCollateralTypedMember";
           elementtype: "nl-types:string255";
@@ -7231,7 +7066,7 @@ model VASTGOED uses BaseModel
           elementname: "Threats";
           elementtype: "nl-types:string100000ItemType";
           periodtype: "Instant";
-          title: "Bedreigingen";
+         title: "Bedreigingen";
           hint: "Beschrijving van de bedreigingen in de SWOT analyse van het object";
           visible: 1;
           options_title: locked;
@@ -7240,7 +7075,7 @@ model VASTGOED uses BaseModel
         }
        }
       }
-      variable frcvtabstrObjectValuationAssumptionsTitle
+     variable frcvtabstrObjectValuationAssumptionsTitle
       {
        datatype: none;
        frequency: none;
@@ -7277,7 +7112,7 @@ model VASTGOED uses BaseModel
          options_title: locked;
          variable PfrcvtdimInternalIDCollateralAxis_tpfrcvtdmInternalIDCollateralTypedMember15 refers to frcvtdimInternalIDCollateralAxis_tpfrcvtdmInternalIDCollateralTypedMember
          {
-          datatype: string;
+         datatype: string;
           frequency: column;
           aggregation: flow;
           inputRequired: 1;
@@ -7335,7 +7170,7 @@ model VASTGOED uses BaseModel
            title: "WOZ waarde [titel]";
            display_options: showColumnTitlesAboveSubVars;
            locked: 1;
-           visible: 1;
+          visible: 1;
            options_title: locked;
            options: locked, invisible;
            variable frcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiValue
@@ -7383,7 +7218,7 @@ model VASTGOED uses BaseModel
            range: >=0;
            namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
            namespaceprefix: "nl-cd";
-           elementname: "PresentationOrder";
+          elementname: "PresentationOrder";
            elementtype: "nl-types:nonNegativeDecimalItemType";
            periodtype: "Duration";
            title: "Presentatievolgorde";
@@ -7475,7 +7310,7 @@ model VASTGOED uses BaseModel
           aggregation: flow;
           inputRequired: 1;
           data_options: unscalable;
-          namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
+         namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
           namespaceprefix: "frc-vt-dm";
           elementname: "InternalIDCollateralTypedMember";
           elementtype: "nl-types:string255";
@@ -7570,7 +7405,7 @@ model VASTGOED uses BaseModel
            aggregation: balance;
            data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
-           namespaceprefix: "frc-vt-i";
+          namespaceprefix: "frc-vt-i";
            elementname: "ValuationDate";
            elementtype: "xbrli:dateItemType";
            periodtype: "Instant";
@@ -7771,7 +7606,7 @@ model VASTGOED uses BaseModel
             options_trend: locked, invisible;
            }
           }
-          variable frcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtabstrPeriodTitle
+         variable frcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtabstrPeriodTitle
           {
            datatype: none;
            frequency: none;
@@ -8615,7 +8450,7 @@ model VASTGOED uses BaseModel
             elementname: "EternityGroundLeasePerYear";
             elementtype: "nl-types:string100000ItemType";
             periodtype: "Instant";
-            title: "Erfpacht per jaar";
+           title: "Erfpacht per jaar";
             hint: "De jaarlijks (tot in de eeuwigheid) terugkerende erfpacht. Discontinue kasstromen opnemen onder correcties of verwerken in het rendement.";
             visible: 1;
             options_title: locked;
@@ -8751,7 +8586,7 @@ model VASTGOED uses BaseModel
          title: "Interne id van het onderpand / object [as]";
          display_options: showColumnTitlesAboveSubVars;
          visible: 1;
-         options_title: locked;
+        options_title: locked;
          variable PfrcvtdimInternalIDCollateralAxis_tpfrcvtdmInternalIDCollateralTypedMember22 refers to frcvtdimInternalIDCollateralAxis_tpfrcvtdmInternalIDCollateralTypedMember
          {
           datatype: string;
@@ -8975,7 +8810,7 @@ model VASTGOED uses BaseModel
            range: >=0;
            namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
            namespaceprefix: "nl-cd";
-           elementname: "PresentationOrder";
+          elementname: "PresentationOrder";
            elementtype: "nl-types:nonNegativeDecimalItemType";
            periodtype: "Duration";
            title: "Presentatievolgorde";
@@ -9130,7 +8965,7 @@ model VASTGOED uses BaseModel
             elementname: "Amount";
             elementtype: "nl-types:monetary20ItemType";
             periodtype: "Instant";
-            title: "Bedrag (markthuur)";
+           title: "Bedrag (markthuur)";
             hint: "Bedrag (markthuur)";
             visible: 1;
             options_title: locked;
@@ -9328,7 +9163,7 @@ model VASTGOED uses BaseModel
            range: >=0;
            namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
            namespaceprefix: "nl-cd";
-           elementname: "PresentationOrder";
+          elementname: "PresentationOrder";
            elementtype: "nl-types:nonNegativeDecimalItemType";
            periodtype: "Duration";
            title: "Presentatievolgorde";
@@ -10007,7 +9842,7 @@ model VASTGOED uses BaseModel
         elementtype: "xbrli:stringItemType";
         periodtype: "Duration";
         title: "Commerci?le uitkomsten van de taxatie van het object [titel]";
-        locked: 1;
+       locked: 1;
         visible: 1;
         options_title: locked;
         options: locked, invisible;
@@ -10076,7 +9911,7 @@ model VASTGOED uses BaseModel
            range: >=0;
            namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
            namespaceprefix: "nl-cd";
-           elementname: "PresentationOrder";
+          elementname: "PresentationOrder";
            elementtype: "nl-types:nonNegativeDecimalItemType";
            periodtype: "Duration";
            title: "Presentatievolgorde";
@@ -10234,7 +10069,7 @@ model VASTGOED uses BaseModel
            namespaceprefix: "nl-cd";
            elementname: "StreetNameNL";
            elementtype: "nl-types:string1000ItemType";
-           periodtype: "Duration";
+          periodtype: "Duration";
            hint: "De offici?le door de gemeente vastgestelde naam van een straat.";
            visible: 1;
            options_title: locked;
@@ -10501,7 +10336,7 @@ model VASTGOED uses BaseModel
            namespaceprefix: "frc-vt-dm";
            elementname: "InternalIDCollateralTypedMember";
            elementtype: "nl-types:string255";
-           periodtype: "Other";
+          periodtype: "Other";
            title: "Interne id van het onderpand / object [typed member]";
            top_blanklines: 1;
            visible: 1;
@@ -10819,7 +10654,7 @@ model VASTGOED uses BaseModel
       namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/presentation/frc-vt-abstracts";
       namespaceprefix: "frc-vt-abstr";
       elementname: "BuildingInfoTitle";
-      elementtype: "xbrli:stringItemType";
+     elementtype: "xbrli:stringItemType";
       periodtype: "Duration";
       title: "Informatie van het gebouw / subobject [titel]";
       locked: 1;
@@ -10965,7 +10800,7 @@ model VASTGOED uses BaseModel
            hint: "Bepaling of er sprake is van huur of eigen gebruik";
            visible: 1;
            choices: "0|1";
-           options_title: locked;
+          options_title: locked;
            options_trend: locked, invisible;
           }
           variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiConstructionYear
@@ -11030,7 +10865,7 @@ model VASTGOED uses BaseModel
            namespaceprefix: "frc-vt-i";
            elementname: "AreaForLease";
            elementtype: "num:areaItemType";
-           periodtype: "Instant";
+          periodtype: "Instant";
            title: "Theoretisch beschikbare VVO";
            hint: "De som van alle theoretisch beschikbare hoeveelheid verhuurbare vloer oppervlakte ongeacht het ruimtetype. Het bevat op zijn minst alle oppervlakte die al verhuurd is en de oppervlakte die leeg is, maar exclusief de oppervlakte van ruimtes die structureel leeg staan.";
            visible: 1;
@@ -11221,7 +11056,7 @@ model VASTGOED uses BaseModel
            elementname: "TypingDescription";
            elementtype: "nl-types:string100000ItemType";
            periodtype: "Instant";
-           title: "Een beschrijving van het pand";
+          title: "Een beschrijving van het pand";
            hint: "Beschrijving van het object";
            visible: 1;
            options_title: locked;
@@ -11466,7 +11301,7 @@ model VASTGOED uses BaseModel
            options_title: locked;
            options_trend: locked, invisible;
           }
-          variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiMunicipality
+         variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiMunicipality
           {
            datatype: string;
            frequency: column;
@@ -11804,7 +11639,7 @@ model VASTGOED uses BaseModel
           frequency: none;
           namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-axes";
           namespaceprefix: "frc-vt-dim";
-          elementname: "InternalIDFacilityAxis";
+         elementname: "InternalIDFacilityAxis";
           elementtype: "xbrli:stringItemType";
           periodtype: "Duration";
           display_options: showColumnTitlesAboveSubVars;
@@ -12378,11 +12213,11 @@ model VASTGOED uses BaseModel
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
            namespaceprefix: "frc-vt-i";
            elementname: "MedianCreditQualityTenants";
-           elementtype: "frc-vt-codes:aqrCreditQualityItemType";
+          elementtype: "frc-vt-codes:aqrCreditQualityItemType";
            periodtype: "Instant";
            title: "Mediaan kredietkwaliteit huurders";
            hint: "De middelste waarneming bij de bepaling van de kredietwaardigheid van de huurders";
-           visible: 1;
+          visible: 1;
            choices: "10|20|30|40|50";
            options_title: locked;
            options_trend: locked, invisible;
@@ -12416,7 +12251,7 @@ model VASTGOED uses BaseModel
         periodtype: "Other";
         title: "Algemene huurinformatie van het gebouw / subobject";
         locked: 1;
-        visible: 1;
+       visible: 1;
         options_title: locked;
         options: locked, invisible;
         tuple PfrcvtdimInternalIDFacilityAxis5
@@ -12714,7 +12549,7 @@ model VASTGOED uses BaseModel
            options_title: locked;
            options_trend: locked, invisible;
           }
-          variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiAnchorTenant
+         variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiAnchorTenant
           {
            datatype: string;
            frequency: column;
@@ -12725,7 +12560,7 @@ model VASTGOED uses BaseModel
            namespaceprefix: "frc-vt-i";
            elementname: "AnchorTenant";
            elementtype: "nl-types:string1000ItemType";
-           periodtype: "Instant";
+          periodtype: "Instant";
            hint: "Bepaling of de huurder aantrekkelijk is waardoor andere huurders aangetrokken kunnen worden";
            visible: 1;
            options_title: locked;
@@ -12839,7 +12674,7 @@ model VASTGOED uses BaseModel
            datatype: number;
            frequency: column;
            aggregation: balance;
-           data_options: unscalable;
+          data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
            namespaceprefix: "frc-vt-i";
            elementname: "VATOpted";
@@ -13003,7 +12838,7 @@ model VASTGOED uses BaseModel
           frequency: none;
           namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-axes";
           namespaceprefix: "frc-vt-dim";
-          elementname: "InternalIDFacilityAxis";
+         elementname: "InternalIDFacilityAxis";
           elementtype: "xbrli:stringItemType";
           periodtype: "Duration";
           display_options: showColumnTitlesAboveSubVars;
@@ -13140,7 +12975,7 @@ model VASTGOED uses BaseModel
             periodtype: "Instant";
             fixed_decimals: 1;
             title: "BTW-percentage van toepassing op de huurregel";
-            hint: "BTW-percentage van toepassing op huurregel";
+           hint: "BTW-percentage van toepassing op huurregel";
             visible: 1;
             options_title: locked;
             options_trend: locked, invisible;
@@ -13269,7 +13104,7 @@ model VASTGOED uses BaseModel
            }
           }
          }
-        }
+       }
        }
        variable frcvtlrBuildingLeaseChargesBreak
        {
@@ -13409,7 +13244,7 @@ model VASTGOED uses BaseModel
             visible: 1;
             options_title: locked;
             options_trend: locked, invisible;
-           }
+          }
            variable frcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiLastNoticeDate
            {
             datatype: number;
@@ -14699,7 +14534,7 @@ model VASTGOED uses BaseModel
            datatype: number;
            frequency: column;
            aggregation: balance;
-           data_options: unscalable;
+          data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
            namespaceprefix: "frc-vt-i";
            elementname: "IPDSubtype";
@@ -15388,7 +15223,7 @@ model VASTGOED uses BaseModel
             options_title: locked;
             options_trend: locked, invisible;
            }
-           variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiLocationOverallAssessment
+          variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiLocationOverallAssessment
            {
             datatype: number;
             frequency: column;
@@ -15862,7 +15697,7 @@ model VASTGOED uses BaseModel
              namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
              namespaceprefix: "nl-cd";
              elementname: "PresentationOrder";
-             elementtype: "nl-types:nonNegativeDecimalItemType";
+            elementtype: "nl-types:nonNegativeDecimalItemType";
              periodtype: "Duration";
              title: "Presentatievolgorde";
              hint: "Het nummer wat de presentatie volgorde aangeeft.";
@@ -15982,7 +15817,7 @@ model VASTGOED uses BaseModel
             namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
             namespaceprefix: "frc-vt-dm";
             elementname: "InternalIDCollateralTypedMember";
-            elementtype: "nl-types:string255";
+           elementtype: "nl-types:string255";
             periodtype: "Other";
             title: "Interne id van het onderpand / object [typed member]";
             bottom_separator: 1;
@@ -16591,7 +16426,7 @@ model VASTGOED uses BaseModel
             {
              datatype: string;
              frequency: column;
-             aggregation: balance;
+            aggregation: balance;
              data_options: unscalable;
              length: >=1 and <= 100000;
              namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
@@ -16804,7 +16639,7 @@ model VASTGOED uses BaseModel
              options_title: locked;
              options_trend: locked, invisible;
             }
-            variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiTransferCostPercentageDiscountedCashFlowAssumptions
+           variable frcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiTransferCostPercentageDiscountedCashFlowAssumptions
             {
              datatype: number;
              frequency: column;
@@ -17211,7 +17046,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "frc-vt-i";
               elementname: "EternityFixedCostPerYear";
               elementtype: "nl-types:string100000ItemType";
-              periodtype: "Instant";
+             periodtype: "Instant";
               title: "Vaste lasten per jaar";
               hint: "De jaarlijks (tot in de eeuwigheid) terugkerende vaste lasten. Discontinue kasstromen opnemen onder correcties of verwerken in het rendement.";
               top_blanklines: 1;
@@ -18022,7 +17857,7 @@ model VASTGOED uses BaseModel
              namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
              namespaceprefix: "frc-vt-i";
              elementname: "ComponentType";
-             elementtype: "frc-vt-codes:otherValueComponentsItemType";
+            elementtype: "frc-vt-codes:otherValueComponentsItemType";
              periodtype: "Instant";
              title: "Type waarde component";
              hint: "Een waarde uit de lijst (grond, woning, overig)";
@@ -18328,7 +18163,7 @@ model VASTGOED uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: balance;
-              data_options: unscalable;
+             data_options: unscalable;
               namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
               namespaceprefix: "frc-vt-i";
               elementname: "OwnExcelModel";
@@ -18773,7 +18608,7 @@ model VASTGOED uses BaseModel
          periodtype: "Duration";
          title: "Commerci?le uitkomsten van de taxatie van het gebouw / subobject [titel]";
          locked: 1;
-         visible: 1;
+        visible: 1;
          options_title: locked;
          options: locked, invisible;
          variable frcvtlrBuildingValuationResultCommercial
@@ -19153,7 +18988,7 @@ model VASTGOED uses BaseModel
              data_options: unscalable;
              pattern: "([1-9]{1}[0-9]{3}[A-Z]{2})";
              namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
-             namespaceprefix: "nl-cd";
+            namespaceprefix: "nl-cd";
              elementname: "PostalCodeNL";
              elementtype: "nl-types:nlzipItemType";
              periodtype: "Duration";
@@ -19652,7 +19487,7 @@ model VASTGOED uses BaseModel
            }
           }
          }
-        }
+       }
        }
       }
       variable frcvtabstrSubBuildingInfoTitle
@@ -19897,7 +19732,7 @@ model VASTGOED uses BaseModel
             {
              datatype: string;
              frequency: column;
-             aggregation: balance;
+            aggregation: balance;
              data_options: unscalable;
              namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
              namespaceprefix: "frc-vt-i";
@@ -20111,7 +19946,7 @@ model VASTGOED uses BaseModel
             variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiTypingDescription
             {
              datatype: string;
-             frequency: column;
+            frequency: column;
              aggregation: balance;
              data_options: unscalable;
              length: >=1 and <= 100000;
@@ -21855,7 +21690,7 @@ model VASTGOED uses BaseModel
              elementname: "HouseNumberNL";
              elementtype: "nl-types:nonNegative20ItemType";
              periodtype: "Duration";
-             hint: "De numerieke aanduiding zoals deze door de gemeente aan het object is toegekend.";
+            hint: "De numerieke aanduiding zoals deze door de gemeente aan het object is toegekend.";
              visible: 1;
              options_title: locked;
              options_trend: locked, invisible;
@@ -21975,7 +21810,7 @@ model VASTGOED uses BaseModel
              elementname: "ContractRentPerYear";
              elementtype: "nl-types:monetaryNoDecimals20ItemType";
              periodtype: "Instant";
-             fixed_decimals: 0;
+            fixed_decimals: 0;
              title: "Basishuur per jaar";
              hint: "Huurbedrag zoals vastgelegd in het contract per jaar";
              visible: 1;
@@ -22151,7 +21986,7 @@ model VASTGOED uses BaseModel
               elementtype: "nl-types:string1000ItemType";
               periodtype: "Instant";
               hint: "Categorie van inkomen";
-              visible: 1;
+             visible: 1;
               options_title: locked;
               options_trend: locked, invisible;
              }
@@ -22166,7 +22001,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "nl-cd";
               elementname: "PresentationOrder";
               elementtype: "nl-types:nonNegativeDecimalItemType";
-              periodtype: "Duration";
+             periodtype: "Duration";
               title: "Presentatievolgorde";
               hint: "Het nummer wat de presentatie volgorde aangeeft.";
               visible: 1;
@@ -22260,7 +22095,7 @@ model VASTGOED uses BaseModel
               visible: 1;
               choices: "Ja|Nee";
               options_title: locked;
-              options_trend: locked, invisible;
+             options_trend: locked, invisible;
              }
              variable frcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDSubFacilityAxis_tpfrcvtiAmountInvoiced
              {
@@ -22494,7 +22329,7 @@ model VASTGOED uses BaseModel
               title: "Datum break optie in huurovereenkomst";
               hint: "Datum voor tussentijdse opzegging van het huurcontract";
               visible: 1;
-              options_title: locked;
+             options_title: locked;
               options_trend: locked, invisible;
              }
              variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpnlcdPresentationOrder
@@ -22647,7 +22482,7 @@ model VASTGOED uses BaseModel
           {
            datatype: string;
            frequency: column;
-           aggregation: flow;
+          aggregation: flow;
            inputRequired: 1;
            data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
@@ -22678,7 +22513,7 @@ model VASTGOED uses BaseModel
             namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
             namespaceprefix: "frc-vt-dm";
             elementname: "InternalIDLeaseChargesTypedMember";
-            elementtype: "nl-types:string255";
+           elementtype: "nl-types:string255";
             periodtype: "Other";
             title: "Interne id van de huurregels [typed member]";
             bottom_separator: 1;
@@ -22759,7 +22594,7 @@ model VASTGOED uses BaseModel
               datatype: number;
               frequency: column;
               aggregation: flow;
-              data_options: unscalable;
+             data_options: unscalable;
               range: >=0;
               namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
               namespaceprefix: "nl-cd";
@@ -23047,7 +22882,7 @@ model VASTGOED uses BaseModel
          elementname: "SubBuildingAreaMeasurement";
          periodtype: "Other";
          title: "Oppervlakte van het subgebouw / ruimte";
-         locked: 1;
+        locked: 1;
          visible: 1;
          options_title: locked;
          options: locked, invisible;
@@ -23267,7 +23102,7 @@ model VASTGOED uses BaseModel
           {
            datatype: string;
            frequency: column;
-           aggregation: flow;
+          aggregation: flow;
            inputRequired: 1;
            data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
@@ -23316,7 +23151,7 @@ model VASTGOED uses BaseModel
             variable PfrcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdmInternalIDFacilityTypedMember4 refers to frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDLeaseChargesAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdmInternalIDFacilityTypedMember
             {
              datatype: string;
-             frequency: column;
+            frequency: column;
              aggregation: flow;
              inputRequired: 1;
              data_options: unscalable;
@@ -23383,7 +23218,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "nl-cd";
               elementname: "PresentationOrder";
               elementtype: "nl-types:nonNegativeDecimalItemType";
-              periodtype: "Duration";
+             periodtype: "Duration";
               title: "Presentatievolgorde";
               hint: "Het nummer wat de presentatie volgorde aangeeft.";
               visible: 1;
@@ -23935,7 +23770,7 @@ model VASTGOED uses BaseModel
           {
            datatype: string;
            frequency: column;
-           aggregation: flow;
+          aggregation: flow;
            inputRequired: 1;
            data_options: unscalable;
            namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
@@ -24199,7 +24034,7 @@ model VASTGOED uses BaseModel
            options_title: locked;
            variable PfrcvtdimInternalIDSubFacilityAxis_tpfrcvtdmInternalIDSubFacilityTypedMember16 refers to frcvtdimInternalIDSubFacilityAxis_tpfrcvtdmInternalIDSubFacilityTypedMember
            {
-            datatype: string;
+           datatype: string;
             frequency: column;
             aggregation: flow;
             inputRequired: 1;
@@ -24546,7 +24381,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "nl-cd";
               elementname: "PresentationOrder";
               elementtype: "nl-types:nonNegativeDecimalItemType";
-              periodtype: "Duration";
+             periodtype: "Duration";
               title: "Presentatievolgorde";
               hint: "Het nummer wat de presentatie volgorde aangeeft.";
               visible: 1;
@@ -25443,7 +25278,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "frc-vt-dm";
               elementname: "InternalIDCollateralTypedMember";
               elementtype: "nl-types:string255";
-              periodtype: "Other";
+             periodtype: "Other";
               title: "Interne id van het onderpand / object [typed member]";
               bottom_separator: 1;
               visible: 1;
@@ -25795,7 +25630,7 @@ model VASTGOED uses BaseModel
                namespaceprefix: "frc-vt-abstr";
                elementname: "PeriodTitle";
                elementtype: "xbrli:stringItemType";
-               periodtype: "Duration";
+              periodtype: "Duration";
                title: "Periode [titel]";
                display_options: showColumnTitlesAboveSubVars;
                locked: 1;
@@ -26268,7 +26103,7 @@ model VASTGOED uses BaseModel
                hint: "Het nummer wat de presentatie volgorde aangeeft.";
                visible: 1;
                options_title: locked;
-               options_trend: locked, invisible;
+              options_trend: locked, invisible;
               }
               variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiDiscountRateDiscountedCashFlow
               {
@@ -26655,7 +26490,7 @@ model VASTGOED uses BaseModel
             namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-domains";
             namespaceprefix: "frc-vt-dm";
             elementname: "InternalIDSubFacilityTypedMember";
-            elementtype: "nl-types:string255";
+           elementtype: "nl-types:string255";
             periodtype: "Other";
             title: "Interne id van het subgebouw / ruimte [typed member]";
             bottom_separator: 1;
@@ -26853,7 +26688,7 @@ model VASTGOED uses BaseModel
                 data_options: unscalable;
                 length: >=1 and <= 100000;
                 namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
-                namespaceprefix: "frc-vt-i";
+               namespaceprefix: "frc-vt-i";
                 elementname: "EternityPropertyManagementPerYear";
                 elementtype: "nl-types:string100000ItemType";
                 periodtype: "Instant";
@@ -27039,7 +26874,7 @@ model VASTGOED uses BaseModel
               namespaceprefix: "frc-vt-dm";
               elementname: "InternalIDCollateralTypedMember";
               elementtype: "nl-types:string255";
-              periodtype: "Other";
+             periodtype: "Other";
               title: "Interne id van het onderpand / object [typed member]";
               bottom_separator: 1;
               visible: 1;
@@ -27513,7 +27348,7 @@ model VASTGOED uses BaseModel
                variable PfrcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiEnd refers to frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimInternalIDAssumptionAxis_tpfrcvtiEnd
                {
                 datatype: number;
-                frequency: column;
+               frequency: column;
                 aggregation: balance;
                 data_options: unscalable;
                 namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
@@ -27979,7 +27814,7 @@ model VASTGOED uses BaseModel
                title: "Bedrag uitgeschreven";
                hint: "Bedrag uitgeschreven";
                bottom_separator: 1;
-               visible: 1;
+              visible: 1;
                options_title: locked;
                options_trend: locked, invisible;
               }
@@ -28075,7 +27910,7 @@ model VASTGOED uses BaseModel
             title: "Interne id van het subgebouw / ruimte [as]";
             display_options: showColumnTitlesAboveSubVars;
             visible: 1;
-            options_title: locked;
+           options_title: locked;
             variable PfrcvtdimInternalIDSubFacilityAxis_tpfrcvtdmInternalIDSubFacilityTypedMember31 refers to frcvtdimInternalIDSubFacilityAxis_tpfrcvtdmInternalIDSubFacilityTypedMember
             {
              datatype: string;
@@ -28314,7 +28149,7 @@ model VASTGOED uses BaseModel
                title: "Exit yield netto markthuur v.o.n.";
                hint: "De exit yield gedefinieerd als de netto markthuur in het eerste jaar na de beschouwingsperiode gedeeld door de (niet verdisconteerde) exit waarde aan het einde van de beschouwingsperiode. De netto markthuur wordt gedefinieerd als de ongecorrigeerde markthuur minus de structurele leegstand en incentives minus de jaarlijks terugkerende kosten (tot in de eeuwigheid).";
                visible: 1;
-               options_title: locked;
+              options_title: locked;
                options_trend: locked, invisible;
               }
               variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtiNetPresentValueExitValueAfterTransferCost
@@ -28609,7 +28444,7 @@ model VASTGOED uses BaseModel
                frequency: column;
                aggregation: flow;
                data_options: unscalable;
-               range: >=0;
+              range: >=0;
                namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
                namespaceprefix: "nl-cd";
                elementname: "PresentationOrder";
@@ -28820,7 +28655,7 @@ model VASTGOED uses BaseModel
                length: >=1 and <= 1000;
                namespaceuri: "http://www.nltaxonomie.nl/nt12/sbr/20170515/dictionary/nl-common-data";
                namespaceprefix: "nl-cd";
-               elementname: "StreetNameNL";
+              elementname: "StreetNameNL";
                elementtype: "nl-types:string1000ItemType";
                periodtype: "Duration";
                hint: "De offici?le door de gemeente vastgestelde naam van een straat.";
@@ -28881,7 +28716,7 @@ model VASTGOED uses BaseModel
                options_trend: locked, invisible;
               }
               variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimComparableRentTransactionAxis_tpnlcdHouseNumberNL
-              {
+             {
                datatype: string;
                frequency: column;
                aggregation: flow;
@@ -28955,7 +28790,7 @@ model VASTGOED uses BaseModel
               variable frcvtdimInternalIDSubFacilityAxis_tpfrcvtdimInternalIDFacilityAxis_tpfrcvtdimInternalIDCollateralAxis_tpfrcvtdimComparableRentTransactionAxis_tpnlcdPlaceOfResidenceNL
               {
                datatype: string;
-               frequency: column;
+              frequency: column;
                aggregation: flow;
                data_options: unscalable;
                length: >=1 and <= 1000;
@@ -29317,7 +29152,7 @@ model VASTGOED uses BaseModel
                frequency: column;
                aggregation: balance;
                digits: 20;
-               namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
+              namespaceuri: "https://www.sbrbanken.nl/vt12/frc/20180316/dictionary/frc-vt-data";
                namespaceprefix: "frc-vt-i";
                elementname: "PurchasePriceAfterTransferCost";
                elementtype: "nl-types:monetary20ItemType";
@@ -29464,5 +29299,5 @@ model VASTGOED uses BaseModel
     }
    }
   }
- }
+}
 }
