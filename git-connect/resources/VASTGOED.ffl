@@ -542,8 +542,6 @@ variable P22_frcvtabstrValuationAssignmentTitle refers to frcvtabstrValuationAss
   }
 }
 }
-
-
   variable RootSub4
   {
    datatype: number;
