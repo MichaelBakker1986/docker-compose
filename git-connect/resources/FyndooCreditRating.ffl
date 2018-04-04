@@ -21,7 +21,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeGoodWill
    {
-    title: "test test 54";
+    title: "Goodwill";
     displaytype: currency;
    }
    variable RaboTest
