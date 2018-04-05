@@ -20,8 +20,8 @@ const user_session = {
     page                : 'scorecard',
     fflModel            : '',
     column_size         : 6,
-    version             : '0.0.7',
-    author              : "michael.bakker@topicus.nl",
+    version             : '0.0.8',
+    author              : "topicus.nl",
     user                : {
         name: params[1] || 'DEMO'
     },
