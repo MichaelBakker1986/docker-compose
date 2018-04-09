@@ -16853,14 +16853,41 @@ Register.prototype.addColumn = function (name) {
         this.schema.push(name);
     }
 };
+Register.prototype.removeColumn = function (name) {
+    var _this = this;
+
+    if (this.schemaIndexes[name] != null) {
+        var index = this.schemaIndexes[name];
+        for (var i = 0; i < this.i.length; i++) {
+            var obj = this.i[i];
+            obj.splice(index, 1);
+        }
+        delete this.schemaIndexes[name];
+        this.schema.splice(index, 1);
+        this.schema.forEach(function (el, i) {
+            return _this.schemaIndexes[el] = i;
+        });
+    }
+};
+Register.prototype.flush = function () {
+    for (var i = 0; i < this.i.length; i++) {
+        this.i[i].length = this.schema.length;
+    }
+};
 Register.prototype.value = function (idx, key, value) {
     this.i[idx][this.schemaIndexes[key]] = value;
+};
+Register.prototype.findStream = function (key, value, start) {
+    return this.find(key, value, this.mark);
 };
 Register.prototype.find = function (key, value, start) {
     var result = [];
     for (var i = start || 0; i < this.i.length; i++) {
         if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i]);
     }return result;
+};
+Register.prototype.distinct = function (schema, start) {
+    return this.distinctArr(this.i, schema, start || this.mark);
 };
 Register.prototype.distinctArr = function (arr, schema, start) {
     var result = [];
@@ -16977,7 +17004,7 @@ Register.prototype.printArr = function (arr, idxMap, start, filter) {
     };
     for (var i = start || 0; i < arr.length; i++) {
         var el = arr[i];
-        tout.push((filter ? el.filter(f) : el).map(function (innerEl, idx) {
+        tout.push((filter.length > 0 ? el.filter(f) : el).map(function (innerEl, idx) {
             var v = self.formatters[idx] ? self.formatters[idx](innerEl) : innerEl;
             var prefix = [];
             prefix.length = Math.max(idxMap[idx] - String(v).length, 0);
@@ -16990,7 +17017,7 @@ Register.prototype.translateKeys = function (formula) {
     var self = this;
     return formula.replace(/__(\d+)/gm, function ($1, $2) {
         return self.constants[parseInt($2)];
-    });
+    }) || '';
 };
 /** * mark current moment as last checkpoint */
 Register.prototype.markNow = function () {
@@ -25383,6 +25410,7 @@ var logger = require('log6');
 var jsMath = {"Length":{"args":"v1","body":"return String(v1).length"},"OnER":{"args":"v,onerrv","body":"return isNaN(v) ? onerrv : v"},"Oner":{"args":"v,onerrv","body":"return isNaN(v) ? onerrv : v"},"OnEr":{"args":"v,onerrv","body":"return isNaN(v) ? onerrv : v"},"OnZero":{"args":"v,onzerov","body":"return v > 0 ? v : onzerov"},"SUM":{"args":"values","body":"var returnValue = 0; for (var i = 0; i < values.length; i++) { returnValue += values[i]; } return returnValue;"},"OnNeg":{"args":"arg0,arg1","body":"if (arg0 < 0) { return arg1; } return arg0"},"OnZeroOrNA":{"args":"arg0,arg1","body":"return (arg0 == undefined || isNaN(arg0)) ? arg1 : arg0"},"OnZeroOrNa":{"args":"v,arg1","body":"return (v == undefined || isNaN(v)) ? arg1 : v"},"OnERorNA":{"args":"v,onerrornav","body":"if (v == undefined || isNaN(v)) { return onerrornav; } return v"},"Round":{"args":"v,decimals","body":"var pow = Math.pow(10, decimals); return Math.round(v * pow) / pow"},"AVG":{"args":"vs","body":"EJS.AVERAGE(vs)"},"MATCH":{"args":"v,p","body":"return v === undefined? false : v.match(p);"},"ZeroOnNaN":{"args":"v","body":"return parseFloat(isNaN(v) ? 0 : v)"},"VALIDDATE":{"args":"d","body":"if (Object.prototype.toString.call(d) === '[object Date]' ) {if ( isNaN( d.getTime() ) ) {  return false; } else { return true; } }else { return false; }"},"GET":{"args":"url,name","body":"{ $.getJSON( 'js/data.json', function( data ) { CACHE[name] = data; }); }"},"EvaluateAsString":{"args":"value","body":"return String(value)"},"FirstUC":{"args":"value","body":"return value.charAt(0).toUpperCase() + value.slice(1)"},"AddMonth":{"args":"value,ammount","body":"{ return 1 }"},"ForAll":{"args":"elements","body":"for (var i = 0; i < elements.length; i++) { if (elements[i] ){ return 1 } } return 0"},"PROXY":{"args":"proxy","body":"{ return proxy }"},"Pos":{"args":"one,two","body":"{ return (two==null) ? -1 : two.indexOf(one); }"},"Count":{"args":"elements","body":"{ var counter = 0; for (var i = 0; i < elements.length; i++) { if (elements[i] ){ counter++ } } return counter; }"},"ValueT":{"args":"one","body":"{ var retrunValue = 1; while(one.prev.hash){ retrunValue++;one=one.prev } return retrunValue }"},"FirstValueT":{"args":"x,values,first,last","body":"{ return x }"},"LastValueT":{"args":"one","body":"{ return 1 }"},"DMYtoDate":{"args":"d,m,y","body":"return new Date(y,m-1,d)"},"FirstDateInT":{"args":"one","body":"return 1"},"TableLookup":{"args":"row,col","body":"{ return row + col }"},"GetFrac":{"args":"one","body":"{ return 1 }"},"VSum":{"args":"one","body":"{ return 1 }"},"FormulasetInT":{"args":"one","body":"{ return 1 }"},"RelMut":{"args":"one","body":"{ return 1 }"},"YearInT":{"args":"v,x","body":"{ v.absolute_start_year + x.bkyr.index }"},"YearToT":{"args":"one","body":"{ return 1 }"},"GetT":{"args":"one","body":"{ return 1 }"},"FirstTInYear":{"args":"one","body":"{ return 1 }"},"FirstTinYear":{"args":"one","body":"{ return 1 }"},"FirstTinformulaset":{"args":"one","body":"{ return 1 }"},"PeriodInT":{"args":"one","body":"{ return 1 }"},"LastDateInT":{"args":"one","body":"return 2016"},"FirstTinFormulaset":{"args":"one","body":"return 1"},"FesExpression":{"args":"one","body":"return one"},"RoundUp":{"args":"num,precision","body":"return Math.ceil(num * precision) / precision"},"Mut":{"args":"one","body":"return 1"},"VSUM":{"args":"one","body":"{ return 1 }"},"GetPoint":{"args":"one","body":"return 1"},"Exists":{"args":"one","body":"return 1"},"DateToMonth":{"args":"value","body":"return new Date(value).getMonth()"},"HAvg":{"args":"one","body":"return 1"},"HOVR":{"args":"one","body":"return 1"},"BaseCurrencyValue":{"args":"one","body":"return 1"},"LastTinFormulaset":{"args":"one","body":"return one"},"FirstLC":{"args":"value","body":"return value.charAt(0).toLowerCase() + value.slice(1)"},"ExpandFraction":{"args":"one","body":"return 1"},"ExpandLevel":{"args":"one","body":"return 1"},"MaxValueT":{"args":"one","body":"return 1"},"ValueOfT":{"args":"one","body":"return 1"},"GuessTerm":{"args":"one","body":"return 1"},"ExpandOriginalValue":{"args":"one","body":"return 1"},"Datetot":{"args":"one","body":"return x"},"DateToT":{"args":"x","body":"return x"},"Not":{"args":"one","body":"return !one"},"not":{"args":"one","body":"return !one"},"Str":{"args":"one","body":"return String(one)"},"DateToYear":{"args":"one","body":"return new Date(one).getYear()"},"DateToDay":{"args":"one","body":"return new Date(one).getDay()"},"CumNormal":{"args":"one","body":"return 1"},"SubStr":{"args":"value,from,to","body":"return String(value).substring(from,to)"},"Val":{"args":"input","body":"return isNaN(input) ? Number(input) : NA"},"SumFor":{"args":"one,two,three,fours","body":"return 1"},"MinMax":{"args":"value,min,max,fallback","body":"return isNaN(value) ? fallback : value < min ? min : value > max ? max : value"},"LN":{"args":"value","body":"return Math.log(Number(value))"},"BivarNormal":{"args":"one","body":"return 1"},"GoalSeek":{"args":"one","body":"return 1"},"OnNEG":{"args":"a,b","body":"return a < 0 ? a : b"},"OnError":{"args":"a,b","body":"return isNaN(a) ? b : a"},"DateStr":{"args":"date","body":"return new Date(date).toString()"},"DateToYearNum":{"args":"value","body":"return new Date(value).getYear()"},"VAL":{"args":"input","body":"return isNaN(input) ? Number(input) : NA"},"BeforeStr":{"args":"input,before","body":"return String(input).substring(0,String(input).indexOf(String(before)))"},"AfterStr":{"args":"input,after","body":"return String(input).substring(String(input).indexOf(String(after)))"},"MutCalc":1,"CalculatedInBaseCurrency":1,"ScaleFactor":1,"NoTrend":1,"Trend":1,"ApplicationStartDateTime":1,"Values":1,"X":1,"MaxT":1,"NumberOfyears":17,"NA":1e-100,"On":1,"No":0,"Off":0,"True":1,"False":0,"ViewScaleFactor":1,"Backward":1,"Decimals":2};
 var Solver = require('js-solver');
 var ema = require('exponential-moving-average');
+var regression = require('regression');
 var jStat = require('jStat').jStat;
 var entries = {};
 if (!global.MatrixLookup) {
@@ -25400,6 +25428,80 @@ if (!Array.prototype.stdev) Object.defineProperty(Array.prototype, 'stdev', {
         return jStat.stdev(this, true);
     }
 });
+if (!Array.prototype.max) Object.defineProperty(Array.prototype, 'max', {
+    enumerable: false,
+    value: function value() {
+        return Math.max.apply(null, this);
+    }
+});
+if (!Array.prototype.sentiment) Object.defineProperty(Array.prototype, 'sentiment', {
+    enumerable: false,
+    value: function value() {
+        var avg = this.reduce(function (a, b, i, arr) {
+            a[i] = arr[i] - arr[i - 1];
+            return a;
+        }, []).splice(1).avg();
+
+        return {
+            avg: avg,
+            raising: avg > 0
+        };
+    }
+});
+if (!Array.prototype.maxProfit) Object.defineProperty(Array.prototype, 'maxProfit', {
+    enumerable: false,
+    value: function value() {
+        var _this = this;
+
+        return this.reduce(function (current, b, i) {
+            return Math.max(current, b.distance(_this.slice(i).max()));
+        });
+    }
+});
+if (!Array.prototype.groupBy) Object.defineProperty(Array.prototype, 'groupBy', {
+    enumerable: false,
+    value: function value(key) {
+        return this.reduce(function (rv, x) {
+            (rv[x[key]] = rv[x[key]] || []).push(x);
+            return rv;
+        }, {});
+    }
+});
+if (!Array.prototype.linearPredict) Object.defineProperty(Array.prototype, 'linearPredict', {
+    enumerable: false,
+    value: function value(ammount) {
+        var r = [];
+        var predictor = this.linearPredictor();
+        for (var i = 0; i < ammount; i++) {
+            r.push(predictor(this.length + i));
+        }
+        return r;
+    }
+});
+
+if (!Array.prototype.linearPredictor) Object.defineProperty(Array.prototype, 'linearPredictor', {
+    enumerable: false,
+    value: function value() {
+        var _this2 = this;
+
+        var linear = regression.linear(this.map(function (v, i) {
+            return [i, v];
+        }), { precision: 8 });
+
+        return function (offset) {
+            return linear.predict(_this2.length + offset)[1];
+        };
+    }
+});
+/*if (!Array.prototype.regressR2)
+    Object.defineProperty(Array.prototype, 'regressR2', {
+        enumerable: false,
+        value     : function() {
+            return regression.linear(this.map((v, i) => [i, v]), { precision: 8 });
+
+        }
+    });*/
+
 if (!Array.prototype.select) Object.defineProperty(Array.prototype, 'select', {
     enumerable: false,
     value: function value(name) {
@@ -25412,8 +25514,8 @@ if (!Array.prototype.select) Object.defineProperty(Array.prototype, 'select', {
 });
 if (!Array.prototype.ema) Object.defineProperty(Array.prototype, 'ema', {
     enumerable: false,
-    value: function value(length) {
-        return ema(this, length);
+    value: function value(opts) {
+        return ema(this, opts).last();
     }
 });
 if (!Array.prototype.avg) Object.defineProperty(Array.prototype, 'avg', {
@@ -25428,9 +25530,17 @@ if (!Array.prototype.sum) Object.defineProperty(Array.prototype, 'sum', {
         var nl = this.length;
         var n = this;
         var a = 0;
-        for (var j = nl - 1; j > 0; j--) {
+        for (var j = nl - 1; j >= 0; j--) {
             a = a + n[j];
         }return a;
+    }
+});
+if (!Array.prototype.column) Object.defineProperty(Array.prototype, 'column', {
+    enumerable: false,
+    value: function value(i) {
+        return this.map(function (el) {
+            return el[i];
+        });
     }
 });
 //distance between two numbers
@@ -25438,6 +25548,12 @@ if (!Number.prototype.distance) Object.defineProperty(Number.prototype, 'distanc
     enumerable: false,
     value: function value(other) {
         return this > other ? this - other : other - this;
+    }
+});
+if (!Number.prototype.round) Object.defineProperty(Number.prototype, 'round', {
+    enumerable: false,
+    value: function value(decimals) {
+        return Number(this.toFixed(decimals));
     }
 });
 if (!Array.prototype.first) Object.defineProperty(Array.prototype, 'first', {
@@ -25596,7 +25712,7 @@ exports.mathJs = {
 };
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../math/ff-math.js","/../math",undefined)
-},{"_process":40,"buffer":38,"exponential-moving-average":47,"jStat":50,"js-solver":51,"log6":37}],47:[function(require,module,exports){
+},{"_process":40,"buffer":38,"exponential-moving-average":47,"jStat":50,"js-solver":51,"log6":37,"regression":52}],47:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
 'use strict';
 
@@ -30468,4 +30584,392 @@ var Solver = (function () {
 
 if (typeof module !== 'undefined') module.exports = Solver;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../math/node_modules/js-solver/js-solver.js","/../math/node_modules/js-solver",undefined)
+},{"_process":40,"buffer":38}],52:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname,JSON_MODEL){
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(['module'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(module);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod);
+    global.regression = mod.exports;
+  }
+})(this, function (module) {
+  'use strict';
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  var DEFAULT_OPTIONS = { order: 2, precision: 2, period: null };
+
+  /**
+  * Determine the coefficient of determination (r^2) of a fit from the observations
+  * and predictions.
+  *
+  * @param {Array<Array<number>>} data - Pairs of observed x-y values
+  * @param {Array<Array<number>>} results - Pairs of observed predicted x-y values
+  *
+  * @return {number} - The r^2 value, or NaN if one cannot be calculated.
+  */
+  function determinationCoefficient(data, results) {
+    var predictions = [];
+    var observations = [];
+
+    data.forEach(function (d, i) {
+      if (d[1] !== null) {
+        observations.push(d);
+        predictions.push(results[i]);
+      }
+    });
+
+    var sum = observations.reduce(function (a, observation) {
+      return a + observation[1];
+    }, 0);
+    var mean = sum / observations.length;
+
+    var ssyy = observations.reduce(function (a, observation) {
+      var difference = observation[1] - mean;
+      return a + difference * difference;
+    }, 0);
+
+    var sse = observations.reduce(function (accum, observation, index) {
+      var prediction = predictions[index];
+      var residual = observation[1] - prediction[1];
+      return accum + residual * residual;
+    }, 0);
+
+    return 1 - sse / ssyy;
+  }
+
+  /**
+  * Determine the solution of a system of linear equations A * x = b using
+  * Gaussian elimination.
+  *
+  * @param {Array<Array<number>>} input - A 2-d matrix of data in row-major form [ A | b ]
+  * @param {number} order - How many degrees to solve for
+  *
+  * @return {Array<number>} - Vector of normalized solution coefficients matrix (x)
+  */
+  function gaussianElimination(input, order) {
+    var matrix = input;
+    var n = input.length - 1;
+    var coefficients = [order];
+
+    for (var i = 0; i < n; i++) {
+      var maxrow = i;
+      for (var j = i + 1; j < n; j++) {
+        if (Math.abs(matrix[i][j]) > Math.abs(matrix[i][maxrow])) {
+          maxrow = j;
+        }
+      }
+
+      for (var k = i; k < n + 1; k++) {
+        var tmp = matrix[k][i];
+        matrix[k][i] = matrix[k][maxrow];
+        matrix[k][maxrow] = tmp;
+      }
+
+      for (var _j = i + 1; _j < n; _j++) {
+        for (var _k = n; _k >= i; _k--) {
+          matrix[_k][_j] -= matrix[_k][i] * matrix[i][_j] / matrix[i][i];
+        }
+      }
+    }
+
+    for (var _j2 = n - 1; _j2 >= 0; _j2--) {
+      var total = 0;
+      for (var _k2 = _j2 + 1; _k2 < n; _k2++) {
+        total += matrix[_k2][_j2] * coefficients[_k2];
+      }
+
+      coefficients[_j2] = (matrix[n][_j2] - total) / matrix[_j2][_j2];
+    }
+
+    return coefficients;
+  }
+
+  /**
+  * Round a number to a precision, specificed in number of decimal places
+  *
+  * @param {number} number - The number to round
+  * @param {number} precision - The number of decimal places to round to:
+  *                             > 0 means decimals, < 0 means powers of 10
+  *
+  *
+  * @return {numbr} - The number, rounded
+  */
+  function round(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+  }
+
+  /**
+  * The set of all fitting methods
+  *
+  * @namespace
+  */
+  var methods = {
+    linear: function linear(data, options) {
+      var sum = [0, 0, 0, 0, 0];
+      var len = 0;
+
+      for (var n = 0; n < data.length; n++) {
+        if (data[n][1] !== null) {
+          len++;
+          sum[0] += data[n][0];
+          sum[1] += data[n][1];
+          sum[2] += data[n][0] * data[n][0];
+          sum[3] += data[n][0] * data[n][1];
+          sum[4] += data[n][1] * data[n][1];
+        }
+      }
+
+      var run = len * sum[2] - sum[0] * sum[0];
+      var rise = len * sum[3] - sum[0] * sum[1];
+      var gradient = run === 0 ? 0 : round(rise / run, options.precision);
+      var intercept = round(sum[1] / len - gradient * sum[0] / len, options.precision);
+
+      var predict = function predict(x) {
+        return [round(x, options.precision), round(gradient * x + intercept, options.precision)];
+      };
+
+      var points = data.map(function (point) {
+        return predict(point[0]);
+      });
+
+      return {
+        points: points,
+        predict: predict,
+        equation: [gradient, intercept],
+        r2: round(determinationCoefficient(data, points), options.precision),
+        string: intercept === 0 ? 'y = ' + gradient + 'x' : 'y = ' + gradient + 'x + ' + intercept
+      };
+    },
+    exponential: function exponential(data, options) {
+      var sum = [0, 0, 0, 0, 0, 0];
+
+      for (var n = 0; n < data.length; n++) {
+        if (data[n][1] !== null) {
+          sum[0] += data[n][0];
+          sum[1] += data[n][1];
+          sum[2] += data[n][0] * data[n][0] * data[n][1];
+          sum[3] += data[n][1] * Math.log(data[n][1]);
+          sum[4] += data[n][0] * data[n][1] * Math.log(data[n][1]);
+          sum[5] += data[n][0] * data[n][1];
+        }
+      }
+
+      var denominator = sum[1] * sum[2] - sum[5] * sum[5];
+      var a = Math.exp((sum[2] * sum[3] - sum[5] * sum[4]) / denominator);
+      var b = (sum[1] * sum[4] - sum[5] * sum[3]) / denominator;
+      var coeffA = round(a, options.precision);
+      var coeffB = round(b, options.precision);
+      var predict = function predict(x) {
+        return [round(x, options.precision), round(coeffA * Math.exp(coeffB * x), options.precision)];
+      };
+
+      var points = data.map(function (point) {
+        return predict(point[0]);
+      });
+
+      return {
+        points: points,
+        predict: predict,
+        equation: [coeffA, coeffB],
+        string: 'y = ' + coeffA + 'e^(' + coeffB + 'x)',
+        r2: round(determinationCoefficient(data, points), options.precision)
+      };
+    },
+    logarithmic: function logarithmic(data, options) {
+      var sum = [0, 0, 0, 0];
+      var len = data.length;
+
+      for (var n = 0; n < len; n++) {
+        if (data[n][1] !== null) {
+          sum[0] += Math.log(data[n][0]);
+          sum[1] += data[n][1] * Math.log(data[n][0]);
+          sum[2] += data[n][1];
+          sum[3] += Math.pow(Math.log(data[n][0]), 2);
+        }
+      }
+
+      var a = (len * sum[1] - sum[2] * sum[0]) / (len * sum[3] - sum[0] * sum[0]);
+      var coeffB = round(a, options.precision);
+      var coeffA = round((sum[2] - coeffB * sum[0]) / len, options.precision);
+
+      var predict = function predict(x) {
+        return [round(x, options.precision), round(round(coeffA + coeffB * Math.log(x), options.precision), options.precision)];
+      };
+
+      var points = data.map(function (point) {
+        return predict(point[0]);
+      });
+
+      return {
+        points: points,
+        predict: predict,
+        equation: [coeffA, coeffB],
+        string: 'y = ' + coeffA + ' + ' + coeffB + ' ln(x)',
+        r2: round(determinationCoefficient(data, points), options.precision)
+      };
+    },
+    power: function power(data, options) {
+      var sum = [0, 0, 0, 0, 0];
+      var len = data.length;
+
+      for (var n = 0; n < len; n++) {
+        if (data[n][1] !== null) {
+          sum[0] += Math.log(data[n][0]);
+          sum[1] += Math.log(data[n][1]) * Math.log(data[n][0]);
+          sum[2] += Math.log(data[n][1]);
+          sum[3] += Math.pow(Math.log(data[n][0]), 2);
+        }
+      }
+
+      var b = (len * sum[1] - sum[0] * sum[2]) / (len * sum[3] - Math.pow(sum[0], 2));
+      var a = (sum[2] - b * sum[0]) / len;
+      var coeffA = round(Math.exp(a), options.precision);
+      var coeffB = round(b, options.precision);
+
+      var predict = function predict(x) {
+        return [round(x, options.precision), round(round(coeffA * Math.pow(x, coeffB), options.precision), options.precision)];
+      };
+
+      var points = data.map(function (point) {
+        return predict(point[0]);
+      });
+
+      return {
+        points: points,
+        predict: predict,
+        equation: [coeffA, coeffB],
+        string: 'y = ' + coeffA + 'x^' + coeffB,
+        r2: round(determinationCoefficient(data, points), options.precision)
+      };
+    },
+    polynomial: function polynomial(data, options) {
+      var lhs = [];
+      var rhs = [];
+      var a = 0;
+      var b = 0;
+      var len = data.length;
+      var k = options.order + 1;
+
+      for (var i = 0; i < k; i++) {
+        for (var l = 0; l < len; l++) {
+          if (data[l][1] !== null) {
+            a += Math.pow(data[l][0], i) * data[l][1];
+          }
+        }
+
+        lhs.push(a);
+        a = 0;
+
+        var c = [];
+        for (var j = 0; j < k; j++) {
+          for (var _l = 0; _l < len; _l++) {
+            if (data[_l][1] !== null) {
+              b += Math.pow(data[_l][0], i + j);
+            }
+          }
+          c.push(b);
+          b = 0;
+        }
+        rhs.push(c);
+      }
+      rhs.push(lhs);
+
+      var coefficients = gaussianElimination(rhs, k).map(function (v) {
+        return round(v, options.precision);
+      });
+
+      var predict = function predict(x) {
+        return [round(x, options.precision), round(coefficients.reduce(function (sum, coeff, power) {
+          return sum + coeff * Math.pow(x, power);
+        }, 0), options.precision)];
+      };
+
+      var points = data.map(function (point) {
+        return predict(point[0]);
+      });
+
+      var string = 'y = ';
+      for (var _i = coefficients.length - 1; _i >= 0; _i--) {
+        if (_i > 1) {
+          string += coefficients[_i] + 'x^' + _i + ' + ';
+        } else if (_i === 1) {
+          string += coefficients[_i] + 'x + ';
+        } else {
+          string += coefficients[_i];
+        }
+      }
+
+      return {
+        string: string,
+        points: points,
+        predict: predict,
+        equation: [].concat(_toConsumableArray(coefficients)).reverse(),
+        r2: round(determinationCoefficient(data, points), options.precision)
+      };
+    }
+  };
+
+  function createWrapper() {
+    var reduce = function reduce(accumulator, name) {
+      return _extends({
+        _round: round
+      }, accumulator, _defineProperty({}, name, function (data, supplied) {
+        return methods[name](data, _extends({}, DEFAULT_OPTIONS, supplied));
+      }));
+    };
+
+    return Object.keys(methods).reduce(reduce, {});
+  }
+
+  module.exports = createWrapper();
+});
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../math/node_modules/regression/dist/regression.js","/../math/node_modules/regression/dist",undefined)
 },{"_process":40,"buffer":38}]},{},[18,45]);
