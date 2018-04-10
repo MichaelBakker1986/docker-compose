@@ -26,7 +26,7 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeReceivablesShareholders
    {
-    title: "Vorderingen op aandeelhouders, groepsmaatschappijen, enz..";
+    title: "Vorderingen op aandeelhouders, groepsmaatschappijen, enz";
     displaytype: currency;
    }
    variable sdeDeferredTaxesAssets
