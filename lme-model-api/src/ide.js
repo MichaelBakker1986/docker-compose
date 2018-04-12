@@ -1,4 +1,6 @@
 /** * editor variable is set to the window. */
+const LocalStorage = require('./LocalStoreMagic').LocalStorage
+
 require('../../lme-core/exchange_modules/presentation/webexport');
 require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
 const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL
@@ -16,7 +18,7 @@ var params = window.location.href.split('#')[1].split('&')
 
 const user_session = {
     disablePreviewButton: true,
-    fflModelPath        : params[0] || 'SCORECARDTESTMODEL',
+    fflModelPath        : () => params[0] || 'SCORECARDTESTMODEL',
     page                : 'scorecard',
     fflModel            : '',
     column_size         : 6,
@@ -33,6 +35,8 @@ const user_session = {
         ]
     }
 }
+global.session = new LocalStorage(user_session)
+
 angular.module('lmeapp', ['angular.filter'])
     .controller('ideController', function($scope, $http, $timeout) {
 

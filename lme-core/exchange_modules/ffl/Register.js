@@ -50,15 +50,18 @@ Register.prototype.addColumn = function(name) {
     }
 }
 Register.prototype.removeColumn = function(name) {
-    if (this.schemaIndexes[name] != null) {
-        const index = this.schemaIndexes[name];
+    const schemaIds = this.schemaIndexes;
+    if (schemaIds[name] != null) {
+        const index = schemaIds[name];
         for (var i = 0; i < this.i.length; i++) {
             var obj = this.i[i];
             obj.splice(index, 1);
         }
-        delete this.schemaIndexes[name]
+        delete schemaIds[name]
         this.schema.splice(index, 1)
-        this.schema.forEach((el, i) => this.schemaIndexes[el] = i)
+        this.schema.forEach(function(el, i) {
+            schemaIds[el] = i
+        })
     }
 }
 Register.prototype.flush = function() {

@@ -1,6 +1,5 @@
 const log = require('log6')
 const ORM = require('./ModelProperty');
-if (!ORM.orm) return;//exit-early for non-db setups
 exports.started = ORM.orm.then(function() {
     exports.insertProperties = ORM.ModelProperty.insertModelProperties;
     exports.getFFLModelPropertyChanges = ORM.ModelProperty.getFFLModelPropertyChanges;

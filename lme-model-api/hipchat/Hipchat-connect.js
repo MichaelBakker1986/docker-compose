@@ -9,19 +9,15 @@ const developer = (host === 'localhost');
 
 class HipchatConnect {
     constructor() {
-        if (!hipchatapikey) {
-            log.warn('No communication with the HipChat server is possible, because environment variable HIPCHAT_API_KEY is not set.')
-        }
-        if (!host_environment_variable) {
-            log.info('Not communicating with the HipChat server, because environment variable HOST is not set. Assume developer build.')
-        }
+        if (!hipchatapikey) log.warn('No communication with the HipChat server is possible, because environment variable HIPCHAT_API_KEY is not set.')
+        if (!host_environment_variable) log.info('Not communicating with the HipChat server, because environment variable HOST is not set. Assume developer build.')
     }
 
     send(text, level) {
         request.post({
-                url: hipchat_endpoint,
+                url : hipchat_endpoint,
                 json: {
-                    "color": level,
+                    "color"  : level,
                     "message": "[" + domain + "] " + text
                 }
             }, (err, res, body) => {
@@ -37,5 +33,4 @@ class HipchatConnect {
         log.info(message);
     }
 }
-
 module.exports = new HipchatConnect()

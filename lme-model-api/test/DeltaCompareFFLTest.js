@@ -5,9 +5,12 @@ const Register = require('../../lme-core/exchange_modules/ffl/Register').Registe
 const DeltaCompareRegister = require('../../lme-core/exchange_modules/ffl/DeltaCompareRegister').DeltaCompareRegister
 const FFLFormatter = require('../../lme-core/exchange_modules/ffl/FFLFormatter').Formatter
 
-
 const modelRegister = new Register();
-var fflformat = new FFLFormatter(modelRegister, require('fs').readFileSync(__dirname + '/../../model-tests/LGD/LGD.ffl', 'utf8'))
+//var fflformat = new FFLFormatter(modelRegister, require('fs').readFileSync(__dirname + '/../../model-tests/LGD/LGD.ffl', 'utf8'))
+
+const header = "model VASTGOED uses BaseModel\n{\nroot\n{\n" + require('fs').readFileSync('./testfile.ffl', 'utf8') + "\n}\n}"
+
+var fflformat = new FFLFormatter(modelRegister, header)
 fflformat.parseProperties()
 const otherModelRegister = new Register();
 const otherFFLFormat = new FFLFormatter(otherModelRegister, require('fs').readFileSync(__dirname + '/../../model-tests/LGD/LGD_v2.ffl', 'utf8'))

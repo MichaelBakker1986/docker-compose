@@ -7,7 +7,6 @@ class Authentication {
         passport.use(new FaceBookStrategy({
                 clientID         : '180467995863988',
                 clientSecret     : 'b10828749578d1bd1402e8c57b72b01d',
-                redirect_uri     : "http://94.213.30.5:8082",
                 passReqToCallback: true
             },
             function(req, refreshToken, accessToken, profile, cb) {

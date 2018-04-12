@@ -21,7 +21,7 @@ let busyRedeploying = false;
 const childProcesses = {}
 
 const debug = process.env.NODE_ENV !== 'production';
-const HipchatConnect = require('./Hipchat-connect')
+const HipchatConnect = require('./hipchat/Hipchat-connect')
 
 function spawnChildProcess(appname, args) {
     const childProcess = spawn('node', [appname], {maxBuffer: 1024 * 500, capture: ['stdout', 'stderr']})

@@ -1,0 +1,14 @@
+{
+  "name": "ffl-pack",
+  "version": "6.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "log6": "^1.0.26"
+  },
+  "author": "michael.bakker1986@gmail.com",
+  "license": "BSD-2-Clause"
+}

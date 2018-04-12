@@ -15,7 +15,6 @@
  * dev1   |usr2
  */
 const dbConnectString = process.env.FIGURE_DB_STRING;// || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
-if (!dbConnectString) return;//early exit (no db)
 const orm = require("orm");
 const log = require('log6')
 exports.orm = Promise.all([
