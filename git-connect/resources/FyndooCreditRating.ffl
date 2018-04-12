@@ -21,17 +21,12 @@ model FyndooCreditRating uses BaseModel
    }
    variable sdeGoodWill
    {
-    title: "test test 54";
-    displaytype: currency;
-   }
-   variable RaboTest
-   {
-    title: "Rabo Tesvariabele";
+    title: "ING example2";
     displaytype: currency;
    }
    variable sdeReceivablesShareholders
    {
-    title: "Vorderingen op aandeelhouders, groepsmaatschappijen, enz.";
+    title: "Vorderingen op aandeelhouders, groepsmaatschappijen, enz";
     displaytype: currency;
    }
    variable sdeDeferredTaxesAssets
