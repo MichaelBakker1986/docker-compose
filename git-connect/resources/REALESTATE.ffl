@@ -298,7 +298,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple VtDocumentEntityInformation_kvktContactForDocumentPresentation
+            variable VtDocumentEntityInformation_kvktContactForDocumentPresentation
             {
               frequency: none;
               neptuple_size: 1;
@@ -308,7 +308,7 @@ model REALESTATE uses BaseModel
               periodtype: "Other";
               metadata: "<![CDATA[<data><tuplePropertyElements><ref>kvk-i:ContactType</ref><ref>nl-cd:FirstName</ref><ref>nl-cd:FamilyName</ref><ref>kvk-i:OrganisationName</ref><ref>nl-cd:TelephoneNumber</ref><ref>nl-cd:EmailAddressFull</ref></tuplePropertyElements></data>]]>";
               title: "Contactpersoon voor deze rapportage [presentatie]";
-              hint: "Deze tuple is bedoeld voor het opnemen van de contactgegevens van de contactpersoon van deze rapportage. Deze contactpersoon kan van de organisatie zelf zijn of van haar intermediair.";
+              hint: "Deze variable is bedoeld voor het opnemen van de contactgegevens van de contactpersoon van deze rapportage. Deze contactpersoon kan van de organisatie zelf zijn of van haar intermediair.";
               display_options: showColumnTitlesAboveSubVars;
               visible: 1;
               options_title: locked;
@@ -592,7 +592,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If((Q_STEP01_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99%) and (Q_STEP01_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          formula: String(If((Q_STEP01_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99%) and (Q_STEP01_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
           data_options: unscalable;
           title: "Waarschuwing bij stap 1";
           top_blanklines: 1;
@@ -605,7 +605,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_STEP01_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          formula: String(If(Q_STEP01_ACCEPTED[1]=1 , "\r\nDeze stap is afgerond",""));
           data_options: unscalable;
           title: "Info bij stap 1";
           locked: 1;
@@ -617,7 +617,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_STEP01_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP01_VALIDATIONMESSAGE[1],""));
+          formula: String(If(Q_STEP01_OPENVALIDATION[1]=1 , "\r\n"&Q_STEP01_VALIDATIONMESSAGE[1],""));
           data_options: unscalable;
           title: "Validatie stap 1";
           locked: 1;
@@ -733,7 +733,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrCollateralData_frcvtdimInternalIDCollateralAxis
+          variable AqrCollateralData_frcvtdimInternalIDCollateralAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -767,7 +767,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrCollateralData_frcvtdimInternalIDDebtorAxis
+            variable AqrCollateralData_frcvtdimInternalIDDebtorAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -878,7 +878,7 @@ model REALESTATE uses BaseModel
                 options_title: locked;
                 options_trend: locked, invisible;
               }
-              tuple AqrCollateralData_rjtEntityAddressPresentation
+              variable AqrCollateralData_rjtEntityAddressPresentation
               {
                 frequency: none;
                 neptuple_size: 1;
@@ -2051,7 +2051,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsGeneralPropertyInformation_frcvtdimPropertyAxis
+          variable AqrDetailsGeneralPropertyInformation_frcvtdimPropertyAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -2085,7 +2085,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsGeneralPropertyInformation_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsGeneralPropertyInformation_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -2137,7 +2137,7 @@ model REALESTATE uses BaseModel
                 options_title: locked;
                 options_trend: locked, invisible;
               }
-              tuple AqrDetailsGeneralPropertyInformation_rjtEntityAddressPresentation
+              variable AqrDetailsGeneralPropertyInformation_rjtEntityAddressPresentation
               {
                 frequency: none;
                 neptuple_size: 1;
@@ -2834,7 +2834,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsGeneralUnitInformation_frcvtdimUnitAxis
+          variable AqrDetailsGeneralUnitInformation_frcvtdimUnitAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -2868,7 +2868,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsGeneralUnitInformation_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsGeneralUnitInformation_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3287,7 +3287,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsAreaUnitInformation_frcvtdimUnitAxis
+          variable AqrDetailsAreaUnitInformation_frcvtdimUnitAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3321,7 +3321,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsAreaUnitInformation_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsAreaUnitInformation_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3424,7 +3424,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsCadastreInformation_frcvtdimInternalIDFacilityAxis
+          variable AqrDetailsCadastreInformation_frcvtdimInternalIDFacilityAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3458,7 +3458,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsCadastreInformation_frcvtdimCadastrialPlotNumberAxis
+            variable AqrDetailsCadastreInformation_frcvtdimCadastrialPlotNumberAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3626,7 +3626,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsGeneralLeaseInformation_frcvtdimLeaseAxis
+          variable AqrDetailsGeneralLeaseInformation_frcvtdimLeaseAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3660,7 +3660,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsGeneralLeaseInformation_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsGeneralLeaseInformation_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3860,7 +3860,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsLeaseCharges_frcvtdimLeaseChargesAxis
+          variable AqrDetailsLeaseCharges_frcvtdimLeaseChargesAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -3894,7 +3894,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsLeaseCharges_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsLeaseCharges_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -4018,7 +4018,7 @@ model REALESTATE uses BaseModel
           visible: 1;
           options_title: locked;
           options: locked, invisible;
-          tuple AqrDetailsValuation_frcvtdimPropertyAxis
+          variable AqrDetailsValuation_frcvtdimPropertyAxis
           {
             frequency: none;
             namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -4052,7 +4052,7 @@ model REALESTATE uses BaseModel
               options_title: locked;
               options_trend: locked, invisible;
             }
-            tuple AqrDetailsValuation_frcvtdimInternalIDFacilityAxis
+            variable AqrDetailsValuation_frcvtdimInternalIDFacilityAxis
             {
               frequency: none;
               namespaceuri: "https://www.sbrbanken.nl/vt11/frc/20161209/dictionary/frc-vt-axes";
@@ -4283,7 +4283,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If((Q_STEP02_PROGRESS[1]<1),&"Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99%) and (Q_STEP02_ACCEPTED[1]=0),&"\r\nDeze stap moet nog worden geaccordeerd",""));
+          formula: String(If((Q_STEP02_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99%) and (Q_STEP02_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
           data_options: unscalable;
           title: "Waarschuwing bij stap 2";
           top_blanklines: 1;
@@ -4296,7 +4296,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_STEP02_ACCEPTED[1]=1,&"\r\nDeze stap is afgerond",""));
+          formula: String(If(Q_STEP02_ACCEPTED[1]=1 , "\r\nDeze stap is afgerond",""));
           data_options: unscalable;
           title: "Info bij stap 2";
           locked: 1;
@@ -4308,7 +4308,7 @@ model REALESTATE uses BaseModel
         {
           datatype: string;
           frequency: document;
-          formula: EvaluateAsString(If(Q_STEP02_OPENVALIDATION[1]=1,&"\r\n"&Q_STEP02_VALIDATIONMESSAGE[1],""));
+          formula: String(If(Q_STEP02_OPENVALIDATION[1]=1 , "\r\n"&Q_STEP02_VALIDATIONMESSAGE[1],""));
           data_options: unscalable;
           title: "Validatie stap 2";
           locked: 1;
