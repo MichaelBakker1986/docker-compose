@@ -312,8 +312,6 @@ model REALESTATE uses BaseModel
               display_options: showColumnTitlesAboveSubVars;
               visible: 1;
               options_title: locked;
-              tuple_instance_minimum: 1;
-              tuple_instance_maximum: 1;
               variable VtDocumentEntityInformation_kvkiContactType
               {
                 datatype: number;
@@ -892,8 +890,6 @@ model REALESTATE uses BaseModel
                 display_options: showColumnTitlesAboveSubVars;
                 visible: 1;
                 options_title: locked;
-                tuple_instance_minimum: 1;
-                tuple_instance_maximum: 1;
                 variable AqrCollateralData_nlcdDescriptionLocationNL
                 {
                   datatype: string;
@@ -2151,8 +2147,6 @@ model REALESTATE uses BaseModel
                 display_options: showColumnTitlesAboveSubVars;
                 visible: 1;
                 options_title: locked;
-                tuple_instance_minimum: 1;
-                tuple_instance_maximum: 1;
                 variable AqrDetailsGeneralPropertyInformation_nlcdDescriptionLocationNL
                 {
                   datatype: string;
