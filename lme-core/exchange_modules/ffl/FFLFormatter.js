@@ -101,7 +101,7 @@ FFLFormatter.prototype.walk = function(visit) {
     this.extractVars();
     var firstVar = this.register.lastRowIndex();
     const firstRow = this.vars[firstVar];
-    firstRow[0] = firstRow[0].replace(/^\s*root /gi, 'variable root ').trim()
+    firstRow[0] = firstRow[0].replace(/^\s*root\s*/gi, 'variable root ').trim()
 
     //this is a trick, not wrong!. parent and child index are the same to start with root.
     firstRow.push('root', firstVar, null, null, null, null, 0, [])

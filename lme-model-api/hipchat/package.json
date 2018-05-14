@@ -1,0 +1,15 @@
+{
+  "name": "lme-hipchat-connect",
+  "version": "2.0.0",
+  "description": "",
+  "main": "Hipchat-connect.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michael.bakker1986@gmail.com",
+  "license": "ISC"
+}

@@ -106,6 +106,15 @@ RegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName) {
     this.output = lines.join(this.line_delimiter);
     return this.output;
 }
+RegisterToFFL.prototype.toCSV = function(rooNodeName) {
+    const delimiter = this.delimiter;
+    const hidden = this.hiddenProperties;
+    const lines = []
+    const rootNode = this.vars[rooNodeName || 'root']
+    lines.push(this.schema.filter((value, index) => hidden.indexOf(index) == -1).join(delimiter))
+    this.walk(rootNode, 0, (variable, depth) => lines.push(variable.filter((value, index) => hidden.indexOf(index) == -1).join(delimiter)))
+    return lines;
+}
 RegisterToFFL.prototype.walk = function(node, depth, visitor) {
     visitor(node, depth)
     const childs = node[this.childIndex];

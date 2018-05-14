@@ -1,5 +1,4 @@
 const dbConnectString = process.env.FIGURE_DB_STRING;
-if (!dbConnectString) return;//exit-early for non-db setups
 const orm = require("orm");
 const log = require('log6')
 exports.orm = Promise.all([
