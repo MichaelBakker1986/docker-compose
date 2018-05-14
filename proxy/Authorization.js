@@ -46,6 +46,7 @@ const HildeFBId = '1551240648324836';
 const DeborahFacebookID = '1694508597275660';
 const RonaldFacebookID = '107330810108163';
 const FYNDOOCREDITRATING = 'FyndooCreditRating'
+const HACKATHON = 'HACKATHON'
 const MVO = "MVO";
 const VIEW_RULE = 'view';
 const GUEST_ROLE = 'guest';
@@ -66,10 +67,11 @@ class Authorization {
 
          '/figure/KinderSpaarPlan',
          '/figure/LGDCalculationOutputContainer',
-         '/figure/PRESCAN/v2',
+         '/figure/PRESCAN/v2',f
          '/figure/PRESCAN/v1',
          '/figure/PRESCAN/v3',
          '/figure/' + FYNDOOCREDITRATING,
+         '/figure/' + HACKATHON,
 
          '/basic_example.html',
          '/extended_controller.html',
@@ -167,7 +169,9 @@ class Authorization {
          this.allow(rule.id, rule.resource, rule.role)
       }
       this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
-
+      this.addModelPrivileges(MichaelFaceBookID, HACKATHON, true);
+      this.addModelPrivileges(MonliFacebookID, HACKATHON, true);
+     
       this.addModelPrivileges(RamonFBId, MVO, true);
       this.addModelPrivileges(HildeFBId, MVO, true);
       this.addModelPrivileges(RamonFBId, "REALESTATE", true);
