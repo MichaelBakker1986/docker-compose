@@ -3,7 +3,7 @@ model HACKATHON uses BaseModel
  version: "1.3";
  variable Q_ROOT
  {
-  title: "Stap 1";
+  title: "Hackathon app";
   displaytype: scorecard;
   variable ChildFunding
   {
