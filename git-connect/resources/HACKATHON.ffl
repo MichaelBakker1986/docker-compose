@@ -180,16 +180,22 @@ model HACKATHON uses BaseModel
   {
    variable HANormPremium1Person
    {
-    formula: 0.0199*HAMinimumIncome+Max(0,0.1349*ApplicantTotalIncome-HAMinimumIncome));
+    formula: 0.0199*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome-HAMinimumIncome)));
     frequency: document;
    }
    variable HANormPremium2Persons
    {
+    formula: 0.0475*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome+PartnerTotalIncome-HAMinimumIncome)));
     frequency: document;
    }
    variable HealthCareAllowancePerYear1Person
    {
-    formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
+    formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0);
+    frequency: document;
+   }
+      variable HealthCareAllowancePerYear2Persons
+   {
+    formula: If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0);
     frequency: document;
    }
   }
