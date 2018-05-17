@@ -147,5 +147,30 @@ model HACKATHON uses BaseModel
    formula: 35996;
    locked: 1;
   }
+  variable HAMinimumIncome
+  {
+   formula: 20451;
+   locked: 1;
+  }
+  variable HAmaximumAssets1person
+  {
+   formula: 113415;
+   locked: 1;
+  }
+  variable HAmaximumAssets2persons
+  {
+   formula: 143415;
+   locked: 1;
+  }
+  variable HAMaximumHA1person
+  {
+   formula: 1139;
+   locked: 1;
+  }
+  variable HAMaximumHA2persons
+  {
+   formula: 2121;
+   locked: 1;
+  }
  }
 }
