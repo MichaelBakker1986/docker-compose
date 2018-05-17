@@ -58,6 +58,10 @@ model HACKATHON uses BaseModel
    title: "Partner";
    frequency: document;
    datatype: string;
+   variable HasPartner
+   {
+    formula: 0;
+   }
    variable BirthdatePartner
    {
     title: "GeboortedatumPartner";
@@ -171,6 +175,36 @@ model HACKATHON uses BaseModel
   {
    formula: 2121;
    locked: 1;
+  }
+ }
+ variable InputZorgToeslag
+ {
+
+ }
+ variable import
+ {
+  variable GebDatumAangever
+  {
+   datatype: date;
+   displaytype: date;
+  }
+  tuple Relaties
+  {
+   variable Relatie
+   {
+    variable NaamRelatie
+    {
+     datatype: string;
+    }
+    variable Relatiecode
+    {
+    }
+    variable GebDatumRelatie
+    {
+     datatype: date;
+     displaytype: date;
+    }
+   }
   }
  }
 }
