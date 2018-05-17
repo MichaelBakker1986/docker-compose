@@ -88,12 +88,21 @@ model HACKATHON uses BaseModel
  }
  tuple Children
  {
-  title: Kinderen;
+  title: "Kinderen";
   frequency: document;
   variable Child
   {
-   title: Kind;
+   title: "Kind";
    frequency: column;
+   variable BirthdateChild
+   {
+    title: "GeboortedatumKind";
+    datatype: date;
+    variable ChildAge
+    {
+     title: "LeeftijdKind";
+    }
+   }
   }
  }
 }
