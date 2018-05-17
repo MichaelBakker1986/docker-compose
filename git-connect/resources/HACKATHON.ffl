@@ -5,16 +5,39 @@ model HACKATHON uses BaseModel
  {
   title: "Hackathon app";
   displaytype: scorecard;
-  variable ChildFunding
+  variable Household
   {
-   title: "Stap 1";
+   title: "Huishouding";
    hint: "Informatie over de stap";
-   variable Q_MAP01_VRAAG0
+   variable Applicant
    {
-    title: "TestVraag";
+    title: "Aanvrager";
     frequency: document;
-    datatype: number;
-    formula: 100+1002;
+    datatype: string;
+    variable BirthdateApplicant
+    {
+     title: "Geboortedatum";
+     frequency: document;
+     datatype: date;
+    }
+        variable ApplicantTotalGrossIncome
+    {
+     title: "AanvragerTotaalBrutoInkomen";
+     frequency: document;
+     datatype: number;
+    }
+   }
+   variable ApplicantPartner
+   {
+    title: "Partner";
+    frequency: document;
+    datatype: string;
+    variable BirthdatePartner
+    {
+     title: "Geboortedatum";
+     frequency: document;
+     datatype: date;
+    }
    }
   }
  }
