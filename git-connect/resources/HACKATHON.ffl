@@ -1,6 +1,6 @@
 model HACKATHON uses BaseModel
 {
- variable q_root
+ variable Q_ROOT
  {
   title: "Huishouding";
   display_options: scorecard;
@@ -102,22 +102,24 @@ model HACKATHON uses BaseModel
     }
    }
   }
-  tuple Children
+  variable Children
   {
-   title: "Kinderen";
-   frequency: document;
-   variable Child
+   tuple TChildren
    {
-    title: "Kind";
-    frequency: column;
-    variable BirthdateChild
+    variable Child
     {
-     title: "GeboortedatumKind";
-     datatype: date;
-     displaytype: date;
-     variable ChildAge
+     title: "Kind";
+     frequency: column;
+     variable BirthdateChild
      {
-      title: "LeeftijdKind";
+      title: "GeboortedatumKind";
+      datatype: date;
+      displaytype: date;
+      variable ChildAge
+      {
+       title: "LeeftijdKind";
+       formula: DateToYear(NOW())-DateToYear(BirthdateChild);
+      }
      }
     }
    }
