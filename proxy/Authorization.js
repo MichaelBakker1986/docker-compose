@@ -29,6 +29,7 @@ const Acl = require('acl');
 const rules = require('./Auth.json').rules;
 
 const MichaelFaceBookID = '1683958891676092';
+const TempUser = '106351446914011'
 const JorisNijboerFaceBookID = '10213615561315841';
 const MonliFacebookID = '369400500137629';
 const LGDFacebookID = '10213076901574578';
@@ -172,6 +173,7 @@ class Authorization {
       this.addModelPrivileges(MichaelFaceBookID, "TUPLETEST", true);
       this.addModelPrivileges(MichaelFaceBookID, HACKATHON, true);
       this.addModelPrivileges(MonliFacebookID, HACKATHON, true);
+      this.addModelPrivileges(TempUser, HACKATHON, true);
      
       this.addModelPrivileges(RamonFBId, MVO, true);
       this.addModelPrivileges(HildeFBId, MVO, true);
