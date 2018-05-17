@@ -61,7 +61,9 @@ model HACKATHON uses BaseModel
    variable HasPartner
    {
     frequency: document;
-    formula: 1;
+    formula: 0;
+    displaytype: select;
+    choices: "0:Nee|1:Ja";
    }
    variable BirthdatePartner
    {
