@@ -189,7 +189,7 @@ model HACKATHON uses BaseModel
   }
   variable HealthCareAllowancePerYear1Person
   {
-   formula: If(ApplicantTotalAssets<=HAMaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
+   formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
   }
   variable import
   {
