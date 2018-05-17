@@ -14,7 +14,7 @@ model HACKATHON uses BaseModel
     title: "TestVraag";
     frequency: document;
     datatype: number;
-    formula: 100+100;
+    formula: 100+1002;
    }
   }
  }
