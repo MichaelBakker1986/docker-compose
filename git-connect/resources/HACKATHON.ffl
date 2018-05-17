@@ -1,7 +1,7 @@
 model HACKATHON uses BaseModel
 {
  title: "Huishouding";
- hint: "Informatie over de stap";
+ display_options: scorecard;
  variable Applicant
  {
   title: "Aanvrager";
@@ -18,11 +18,13 @@ model HACKATHON uses BaseModel
    title: "AanvragerTotaalInkomen";
    frequency: document;
    formula: TSUM(ApplicantIncome);
-   tuple ApplicantIncome
+   tuple ApplicantIncomes
    {
-    title: "AanvragerInkomen";
-    frequency: column;
-    formula: 0;
+    variable ApplicantIncome
+    {
+     title: "AanvragerInkomen";
+     formula: 0;
+    }
    }
   }
   variable ApplicantTotalAssets
@@ -30,17 +32,21 @@ model HACKATHON uses BaseModel
    title: "AanvragerTotaalVermogen";
    frequency: document;
    formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount;
-   tuple ApplicantBankAccountAmount
+   tuple ApplicantBankAccounts
    {
-    title: "AanvragerBankSaldo";
-    frequency: column;
-    formula: 0;
+    variable ApplicantBankAccountAmount
+    {
+     title: "AanvragerBankSaldo";
+     formula: 0;
+    }
    }
-   tuple ApplicantEffectAccountAmount
+   tuple ApplicantEffectAccounts
    {
-    title: "AanvragerEffectenSaldo";
-    frequency: column;
-    formula: 0;
+    variable ApplicantEffectAccountAmount
+    {
+     title: "AanvragerEffectenRekeningSaldo";
+     formula: 0;
+    }
    }
   }
  }
@@ -60,11 +66,13 @@ model HACKATHON uses BaseModel
    title: "PartnerTotaalInkomen";
    frequency: document;
    formula: TSUM(PartnerIncome);
-   tuple PartnerIncome
+   tuple PartnerIncomes
    {
-    title: "PartnerInkomen";
-    frequency: column;
-    formula: 0;
+    variable PartnerIncome
+    {
+     title: "PartnerInkomen";
+     formula: 0;
+    }
    }
   }
   variable PartnerTotalAssets
@@ -72,17 +80,21 @@ model HACKATHON uses BaseModel
    title: "PartnerTotaalVermogen";
    frequency: document;
    formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount;
-   tuple PartnerBankAccountAmount
+   tuple PartnerBankAccounts
    {
-    title: "PartnerBankSaldo";
-    frequency: column;
-    formula: 0;
+    variable PartnerBankAccountAmount
+    {
+     title: "PartnerBankRekeningSaldo";
+     formula: 0;
+    }
    }
-   tuple PartnerEffectAccountAmount
+   tuple PartnerEffectAccounts
    {
-    title: "PartnerEffectenSaldo";
-    frequency: column;
-    formula: 0;
+    variable PartnerEffectAccountAmount
+    {
+     title: "PartnerEffectAccountSaldo";
+     formula: 0;
+    }
    }
   }
  }
