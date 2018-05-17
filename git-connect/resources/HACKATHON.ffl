@@ -128,68 +128,70 @@ model HACKATHON uses BaseModel
     }
    }
   }
- }
- variable constantsZorgToeslag
- {
-  variable HAdefaultpremium1person
+  variable constantsZorgToeslag
   {
-   formula: 1546;
-   locked: 1;
+   variable HAdefaultpremium1person
+   {
+    formula: 1546;
+    locked: 1;
+   }
+   variable HAdefaultpremium2persons
+   {
+    formula: 3092;
+    locked: 1;
+   }
+   variable HAmaximumincome1person
+   {
+    formula: 28720;
+    locked: 1;
+   }
+   variable HAmaximumincome2persons
+   {
+    formula: 35996;
+    locked: 1;
+   }
+   variable HAMinimumIncome
+   {
+    formula: 20451;
+    locked: 1;
+   }
+   variable HAmaximumAssets1person
+   {
+    formula: 113415;
+    locked: 1;
+   }
+   variable HAmaximumAssets2persons
+   {
+    formula: 143415;
+    locked: 1;
+   }
+   variable HAMaximumHA1person
+   {
+    formula: 1139;
+    locked: 1;
+   }
+   variable HAMaximumHA2persons
+   {
+    formula: 2121;
+    locked: 1;
+   }
   }
-  variable HAdefaultpremium2persons
+  variable CalculationZorgToeslag
   {
-   formula: 3092;
-   locked: 1;
-  }
-  variable HAmaximumincome1person
-  {
-   formula: 28720;
-   locked: 1;
-  }
-  variable HAmaximumincome2persons
-  {
-   formula: 35996;
-   locked: 1;
-  }
-  variable HAMinimumIncome
-  {
-   formula: 20451;
-   locked: 1;
-  }
-  variable HAmaximumAssets1person
-  {
-   formula: 113415;
-   locked: 1;
-  }
-  variable HAmaximumAssets2persons
-  {
-   formula: 143415;
-   locked: 1;
-  }
-  variable HAMaximumHA1person
-  {
-   formula: 1139;
-   locked: 1;
-  }
-  variable HAMaximumHA2persons
-  {
-   formula: 2121;
-   locked: 1;
-  }
- }
- variable CalculationZorgToeslag
- {
-  variable HANormPremium1Person
-  {
-   formula: 0.0199*HAMinimumIncome+Max(0,0.1349*ApplicantTotalIncome-HAMinimumIncome));
-  }
-  variable HANormPremium2Persons
-  {
-
-  }
-  variable HealthCareAllowancePerYear1Person
-  {
-   formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
+   variable HANormPremium1Person
+   {
+    formula: 0.0199*HAMinimumIncome+Max(0,0.1349*ApplicantTotalIncome-HAMinimumIncome));
+    frequency: document;
+   }
+   variable HANormPremium2Persons
+   {
+    frequency: document;
+   }
+   variable HealthCareAllowancePerYear1Person
+   {
+    formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
+    frequency: document;
+   }
   }
   variable import
   {
