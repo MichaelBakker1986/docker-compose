@@ -14,29 +14,59 @@ model HACKATHON uses BaseModel
     title: "Aanvrager";
     frequency: document;
     datatype: string;
-    variable BirthdateApplicant
+    variable ApplicantBirthdate
     {
-     title: "Geboortedatum";
+     title: "GeboortedatumAanvrager";
      frequency: document;
      datatype: date;
     }
-        variable ApplicantTotalGrossIncome
+    variable ApplicantTotalAssets
     {
-     title: "AanvragerTotaalBrutoInkomen";
+     title: "AanvragerTotaalVermogen";
      frequency: document;
-     datatype: number;
+     formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount;
+     tuple ApplicantBankAccountAmount
+     {
+      title: "AanvragerBankSaldo";
+      frequency: column;
+      formula: 0;
+     }
+     tuple ApplicantEffectAccountAmount
+     {
+      title: "AanvragerEffectenSaldo";
+      frequency: column;
+      formula: 0;
+     }
     }
    }
-   variable ApplicantPartner
+   variable Partner
    {
     title: "Partner";
     frequency: document;
     datatype: string;
     variable BirthdatePartner
     {
-     title: "Geboortedatum";
+     title: "GeboortedatumPartner";
      frequency: document;
      datatype: date;
+    }
+    variable PartnerTotalAssets
+    {
+     title: "PartnerTotaalVermogen";
+     frequency: document;
+     formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount;
+     tuple PartnerBankAccountAmount
+     {
+      title: "PartnerBankSaldo";
+      frequency: column;
+      formula: 0;
+     }
+     tuple PartnerEffectAccountAmount
+     {
+      title: "PartnerEffectenSaldo";
+      frequency: column;
+      formula: 0;
+     }
     }
    }
   }
