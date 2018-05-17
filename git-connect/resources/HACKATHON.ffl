@@ -177,32 +177,58 @@ model HACKATHON uses BaseModel
    locked: 1;
   }
  }
- variable InputZorgToeslag
+ variable CalculationZorgToeslag
  {
-
- }
- variable import
- {
-  variable GebDatumAangever
+  variable HANormPremium1Person
   {
-   datatype: date;
-   displaytype: date;
+   formula: 0.0199*HAMinimumIncome+Max(0,0.1349*ApplicantTotalIncome-HAMinimumIncome));
   }
-  tuple Relaties
+  variable HANormPremium2Persons
   {
-   variable Relatie
+
+  }
+  variable HealthCareAllowancePerYear1Person
+  {
+   formula: If(ApplicantTotalAssets<=HAMaximumAssets1person,Min(ApplicantTotalAssets,(HAdefaultpremium1person-HANormPremium1Person)),0);
+  }
+  variable import
+  {
+   variable GebDatumAangever
    {
-    variable NaamRelatie
+    datatype: date;
+    displaytype: date;
+   }
+   tuple Relaties
+   {
+    variable Relatie
     {
-     datatype: string;
+     variable NaamRelatie
+     {
+      datatype: string;
+     }
+     variable Relatiecode
+     {
+
+     }
+     variable GebDatumRelatie
+     {
+      datatype: date;
+      displaytype: date;
+     }
     }
-    variable Relatiecode
+    tuple InkomensTegenArbeid
     {
-    }
-    variable GebDatumRelatie
-    {
-     datatype: date;
-     displaytype: date;
+     variable InkomenTegenArbeid
+     {
+      variable NaamWerkgeverTegenwArbeid
+      {
+       datatype: string;
+      }
+      variable LoonTegenwArbeid
+      {
+
+      }
+     }
     }
    }
   }
