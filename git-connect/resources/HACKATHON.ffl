@@ -1,74 +1,99 @@
 model HACKATHON uses BaseModel
 {
- version: "1.3";
- variable Q_ROOT
+ title: "Huishouding";
+ hint: "Informatie over de stap";
+ variable Applicant
  {
-  title: "Hackathon app";
-  displaytype: scorecard;
-  variable Household
+  title: "Aanvrager";
+  frequency: document;
+  datatype: string;
+  variable ApplicantBirthdate
   {
-   title: "Huishouding";
-   hint: "Informatie over de stap";
-   variable Applicant
+   title: "GeboortedatumAanvrager";
+   frequency: document;
+   datatype: date;
+  }
+  variable ApplicantTotalIncome
+  {
+   title: "AanvragerTotaalInkomen";
+   frequency: document;
+   formula: TSUM(ApplicantIncome);
+   tuple ApplicantIncome
    {
-    title: "Aanvrager";
-    frequency: document;
-    datatype: string;
-    variable ApplicantBirthdate
-    {
-     title: "GeboortedatumAanvrager";
-     frequency: document;
-     datatype: date;
-    }
-    variable ApplicantTotalAssets
-    {
-     title: "AanvragerTotaalVermogen";
-     frequency: document;
-     formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount;
-     tuple ApplicantBankAccountAmount
-     {
-      title: "AanvragerBankSaldo";
-      frequency: column;
-      formula: 0;
-     }
-     tuple ApplicantEffectAccountAmount
-     {
-      title: "AanvragerEffectenSaldo";
-      frequency: column;
-      formula: 0;
-     }
-    }
+    title: "AanvragerInkomen";
+    frequency: column;
+    formula: 0;
    }
-   variable Partner
+  }
+  variable ApplicantTotalAssets
+  {
+   title: "AanvragerTotaalVermogen";
+   frequency: document;
+   formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount;
+   tuple ApplicantBankAccountAmount
    {
-    title: "Partner";
-    frequency: document;
-    datatype: string;
-    variable BirthdatePartner
-    {
-     title: "GeboortedatumPartner";
-     frequency: document;
-     datatype: date;
-    }
-    variable PartnerTotalAssets
-    {
-     title: "PartnerTotaalVermogen";
-     frequency: document;
-     formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount;
-     tuple PartnerBankAccountAmount
-     {
-      title: "PartnerBankSaldo";
-      frequency: column;
-      formula: 0;
-     }
-     tuple PartnerEffectAccountAmount
-     {
-      title: "PartnerEffectenSaldo";
-      frequency: column;
-      formula: 0;
-     }
-    }
+    title: "AanvragerBankSaldo";
+    frequency: column;
+    formula: 0;
    }
+   tuple ApplicantEffectAccountAmount
+   {
+    title: "AanvragerEffectenSaldo";
+    frequency: column;
+    formula: 0;
+   }
+  }
+ }
+ variable Partner
+ {
+  title: "Partner";
+  frequency: document;
+  datatype: string;
+  variable BirthdatePartner
+  {
+   title: "GeboortedatumPartner";
+   frequency: document;
+   datatype: date;
+  }
+  variable PartnerTotalIncome
+  {
+   title: "PartnerTotaalInkomen";
+   frequency: document;
+   formula: TSUM(PartnerIncome);
+   tuple PartnerIncome
+   {
+    title: "PartnerInkomen";
+    frequency: column;
+    formula: 0;
+   }
+  }
+  variable PartnerTotalAssets
+  {
+   title: "PartnerTotaalVermogen";
+   frequency: document;
+   formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount;
+   tuple PartnerBankAccountAmount
+   {
+    title: "PartnerBankSaldo";
+    frequency: column;
+    formula: 0;
+   }
+   tuple PartnerEffectAccountAmount
+   {
+    title: "PartnerEffectenSaldo";
+    frequency: column;
+    formula: 0;
+   }
+  }
+ }
+ tuple Children
+ {
+  title: Kinderen;
+  frequency: document;
+  variable Child
+  {
+   title: Kind;
+   frequency: column;
   }
  }
 }
