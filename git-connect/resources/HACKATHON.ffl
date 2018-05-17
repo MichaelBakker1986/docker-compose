@@ -60,7 +60,8 @@ model HACKATHON uses BaseModel
    datatype: string;
    variable HasPartner
    {
-    formula: 0;
+    frequency: document;
+    formula: 1;
    }
    variable BirthdatePartner
    {
@@ -188,14 +189,19 @@ model HACKATHON uses BaseModel
     formula: 0.0475*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome+PartnerTotalIncome-HAMinimumIncome)));
     frequency: document;
    }
-   variable HealthCareAllowancePerYear1Person
+   variable CalculatedHealthCareAllowancePerYear1Person
    {
     formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0);
     frequency: document;
    }
-      variable HealthCareAllowancePerYear2Persons
+   variable CalculatedHealthCareAllowancePerYear2Persons
    {
     formula: If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0);
+    frequency: document;
+   }
+   variable RelevantHealthCareAllowance
+   {
+    formula: If(HasPartner=0,CalculatedHealthCareAllowancePerYear1Person,CalculatedHealthCareAllowancePerYear2Persons) ;
     frequency: document;
    }
   }
