@@ -4,8 +4,47 @@ model HACKATHON uses BaseModel
  {
   title: "Huishouding";
   display_options: scorecard;
+  variable VolksbankRekeningGegevens
+  {
+   variable OntvangenZorgtoeslag
+   {
+    title: "Uw ontvangen zorgtoeslag";
+    frequency: document;
+    formula: 20;
+   }
+   variable OntvangenHuurToeslag
+   {
+    title: "Uw ontvangen huurtoeslag";
+    frequency: document;
+    formula: 130;
+   }
+  }
   variable HuishoudingInvoer
   {
+   variable YoungestParent
+   {
+    title: "Jongste ouder";
+    frequency: document;
+    formula: Min(ApplicantAge,PartnerAge);
+   }
+   variable NumberOfChildren
+   {
+    title: "Aantal kinderen";
+    formula: TCOUNT(TChildren);
+    frequency: document;
+   }
+   variable MonthlyRent
+   {
+    title: "Maandelijkse huur";
+    formula: 650;
+    frequency: document;
+   }
+   variable NumberOfPeopleInHouseHold
+   {
+    title: "Aantal mensen in het huishouden";
+    formula: 1+NumberOfChildren+PartnerCount;
+    frequency: document;
+   }
    variable Applicant
    {
     title: "Aanvrager";
@@ -18,17 +57,24 @@ model HACKATHON uses BaseModel
      datatype: date;
      displaytype: date;
     }
+    variable ApplicantAge
+    {
+     formula: DateToYear(NOW())-DateToYear(ApplicantBirthdate);
+     frequency: document;
+    }
     variable ApplicantTotalIncome
     {
      title: "AanvragerTotaalInkomen";
      frequency: document;
      formula: TSUM(ApplicantIncome);
+     locked: 1;
      tuple ApplicantIncomes
      {
       variable ApplicantIncome
       {
        title: "AanvragerInkomen";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -37,12 +83,14 @@ model HACKATHON uses BaseModel
      title: "AanvragerTotaalVermogen";
      frequency: document;
      formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount);
+     locked: 1;
      tuple ApplicantBankAccounts
      {
       variable ApplicantBankAccountAmount
       {
        title: "AanvragerBankSaldo";
        formula: 0;
+       frequency: document;
       }
      }
      tuple ApplicantEffectAccounts
@@ -51,6 +99,7 @@ model HACKATHON uses BaseModel
       {
        title: "AanvragerEffectenRekeningSaldo";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -67,6 +116,12 @@ model HACKATHON uses BaseModel
      displaytype: select;
      choices: "0:Nee|1:Ja";
     }
+    variable PartnerCount
+    {
+     visible: 1;
+     frequency: document;
+     formula: Case(HasPartner,[0: 0 | 1: 1]);
+    }
     variable BirthdatePartner
     {
      title: "GeboortedatumPartner";
@@ -74,17 +129,24 @@ model HACKATHON uses BaseModel
      datatype: date;
      displaytype: date;
     }
+    variable PartnerAge
+    {
+     formula: DateToYear(NOW())-DateToYear(BirthdatePartner);
+     frequency: document;
+    }
     variable PartnerTotalIncome
     {
      title: "PartnerTotaalInkomen";
      frequency: document;
      formula: TSUM(PartnerIncome);
+     locked: 1;
      tuple PartnerIncomes
      {
       variable PartnerIncome
       {
        title: "PartnerInkomen";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -93,12 +155,14 @@ model HACKATHON uses BaseModel
      title: "PartnerTotaalVermogen";
      frequency: document;
      formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount);
+     locked: 1;
      tuple PartnerBankAccounts
      {
       variable PartnerBankAccountAmount
       {
        title: "PartnerBankRekeningSaldo";
        formula: 0;
+       frequency: document;
       }
      }
      tuple PartnerEffectAccounts
@@ -107,6 +171,7 @@ model HACKATHON uses BaseModel
       {
        title: "PartnerEffectAccountSaldo";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -118,16 +183,18 @@ model HACKATHON uses BaseModel
      variable Child
      {
       title: "Kind";
-      frequency: column;
+      frequency: document;
       variable BirthdateChild
       {
        title: "GeboortedatumKind";
        datatype: date;
        displaytype: date;
+       frequency: document;
        variable ChildAge
        {
         title: "LeeftijdKind";
         formula: DateToYear(NOW())-DateToYear(BirthdateChild);
+        frequency: document;
        }
       }
      }
@@ -182,32 +249,202 @@ model HACKATHON uses BaseModel
     locked: 1;
    }
   }
-  variable CalculationZorgToeslag
+  variable CalculationToeslag
   {
    variable HANormPremium1Person
    {
     formula: 0.0199*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome-HAMinimumIncome)));
     frequency: document;
+    visible: 0;
    }
    variable HANormPremium2Persons
    {
     formula: 0.0475*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome+PartnerTotalIncome-HAMinimumIncome)));
     frequency: document;
+    visible: 0;
    }
    variable CalculatedHealthCareAllowancePerYear1Person
    {
-    formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0);
+    formula: Max(0,If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0));
     frequency: document;
+    visible: 0;
    }
    variable CalculatedHealthCareAllowancePerYear2Persons
    {
-    formula: If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0);
+    formula: Max(0,If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0));
     frequency: document;
+    visible: 0;
    }
    variable RelevantHealthCareAllowance
    {
     formula: If(HasPartner=0,CalculatedHealthCareAllowancePerYear1Person,CalculatedHealthCareAllowancePerYear2Persons) ;
     frequency: document;
+    visible: 0;
+   }
+   variable RelevantHealthCareAllowancePerMonth
+   {
+    title: "Uw recht op zorgtoeslag per maand";
+    formula: RelevantHealthCareAllowance/12;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable ActualReceivedHealthCareAllowancePerMonth
+   {
+    title: "Uw daadwerkelijk ontvangen zorgtoeslag per maand";
+    formula: OntvangenZorgtoeslag;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable DeviationHAActualFromShould
+   {
+    title: "Verschil zorgtoeslag";
+    formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealthCareAllowancePerMonth;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable HealthCareAllowanceConclusion
+   {
+    title: "Conclusie";
+    frequency: document;
+    visible: 1;
+    formula: If(DeviationHAActualFromShould<0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(DeviationHAActualFromShould>0,"U ontvangt meer zorgtoeslag dan u recht op heeft",If(DeviationHAActualFromShould=0,"U krijgt exact de zorgtoeslag waar u recht op heeft!",0)));
+    datatype: string;
+   }
+   variable TotalRightOfRentAllowancePerMonth
+   {
+    title: "Uw recht op huurtoeslag per maand";
+    formula: If(ApplicantTotalIncome<=30390,130,0);
+    frequency: document;
+   }
+   variable ActualReceivedRentAllowancePerMonth
+   {
+    title: "Uw daadwerkelijk ontvangen huurtoeslag per maand";
+    formula: OntvangenHuurToeslag;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable DeviationRAActualFromShould
+   {
+    title: "Verschil";
+    formula: ActualReceivedRentAllowancePerMonth-TotalRightOfRentAllowancePerMonth;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable RentAllowanceConclusion
+   {
+    title: "Conclusie";
+    frequency: document;
+    visible: 1;
+    formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
+    datatype: string;
+   }
+  }
+  variable constantsHuurToeslag
+  {
+   variable RAMaximumAssetAmount1Person
+   {
+    formula: 30000;
+   }
+   variable RAMaximumAssetAmount2Persons
+   {
+    formula: 60000;
+   }
+   variable RAMaxRentYoungerThan23
+   {
+    formula: 417.34;
+   }
+   variable RAMaxRentEqualOrOlderThan23
+   {
+    formula: 710.68;
+   }
+   variable FactorA
+   {
+    variable RAFactorA1Person
+    {
+     formula: 0.000000684366;
+    }
+    variable RAFactorAMultiplePersons
+    {
+     formula: 0.000000387746;
+    }
+    variable RAFactorB1Person
+    {
+     formula: 0.002171484;
+    }
+    variable RAFactorBMultiplePersons
+    {
+     formula: 0.002116315615;
+    }
+    variable RATaakstellingsbedrag
+    {
+     variable: 16.94;
+    }
+    variable RAMinimumNormRent
+    {
+     variable: 208.14;
+    }
+    variable RAMinimumBaseRent
+    {
+     variable: 225.08;
+    }
+    variable RAQualityDiscountMargin
+    {
+     variable: 417.34;
+    }
+    variable RATopOffMargin1or2Persons
+    {
+     variable: 597.3;
+    }
+    variable RATopOffMargin3orMorePersons
+    {
+     variable: 640.14;
+    }
+    variable RAMaxIncome1Person
+    {
+     variable: 22400;
+    }
+    variable RAMaxIncomeMultiplePersons
+    {
+     variable: 30400;
+    }
+   }
+  }
+  variable CalculationHuurToeslag
+  {
+   variable RA23YearsOrOlderOrChildren
+   {
+    frequency: document;
+    formula: If(YoungestParent>=23,1,If(NumberOfChildren>1,0));
+   }
+   variable RAMaxAssetAmount
+   {
+    frequency: document;
+    formula: If(PartnerCount=0,RAMaximumAssetAmount1Person,RAMaximumAssetAmount2Persons);
+   }
+   variable RAUnderMaxAssetAmount
+   {
+    formula: If((ApplicantTotalAssets+PartnerTotalAssets)<=RAMaxAssetAmount,1,0);
+    frequency: document;
+   }
+   variable RAMaxRentAmount
+   {
+    formula: If(RA23YearsOrOlderOrChildren=0,RAMaxRentYoungerThan23,RAMaxRentEqualOrOlderThan23);
+    frequency: document;
+   }
+   variable RAUnderMaxRentAmount
+   {
+    frequency: document;
+    formula: If(MonthlyRent<=RAMaxRentAmount,1,0);
+   }
+   variable UnderMaxIncomeAmount
+   {
+    frequency: document;
+    formula: If(NumberOfPeopleInHouseHold>1,If(ApplicantTotalIncome+PartnerTotalIncome<RAMaxIncomeMultiplePersons,1,0),If(ApplicantTotalIncome<RAMaxIncome1Person,1,0));
+   }
+   variable RightOfRentAllowance
+   {
+    frequency: document;
+    formula: If(RAUnderMaxRentAmount+RAUnderMaxAssetAmount+UnderMaxIncomeAmount=3,1,0);
    }
   }
  }
