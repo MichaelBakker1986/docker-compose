@@ -196,26 +196,53 @@ model HACKATHON uses BaseModel
    {
     formula: 0.0199*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome-HAMinimumIncome)));
     frequency: document;
+    visible: 0;
    }
    variable HANormPremium2Persons
    {
     formula: 0.0475*HAMinimumIncome+Max(0,0.1349*max(0,(ApplicantTotalIncome+PartnerTotalIncome-HAMinimumIncome)));
     frequency: document;
+    visible: 0;
    }
    variable CalculatedHealthCareAllowancePerYear1Person
    {
-    formula: If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0);
+    formula: Max(0,If(ApplicantTotalAssets<=HAmaximumAssets1person,Min(HAMaximumHA1person,(HAdefaultpremium1person-HANormPremium1Person)),0));
     frequency: document;
+    visible: 0;
    }
    variable CalculatedHealthCareAllowancePerYear2Persons
    {
-    formula: If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0);
+    formula: Max(0,If(ApplicantTotalAssets+PartnerTotalAssets<=HAmaximumAssets2persons,Min(HAMaximumHA2persons,(HAdefaultpremium2persons-HANormPremium2Persons)),0));
     frequency: document;
+    visible: 0;
    }
    variable RelevantHealthCareAllowance
    {
     formula: If(HasPartner=0,CalculatedHealthCareAllowancePerYear1Person,CalculatedHealthCareAllowancePerYear2Persons) ;
     frequency: document;
+    visible: 0;
+   }
+   variable RelevantHealhCareAllowancePerMonth
+   {
+    title: "Uw recht op zorgtoeslag per maand";
+    formula: RelevantHealthCareAllowance/12;
+   }
+   variable ActualReceivedHealthCareAllowancePerMonth
+   {
+    title: "Uw daadwerkelijk ontvangen zorgtoeslag per maand";
+    formula: OntvangenZorgtoeslag;
+   }
+   variable DeviationActualFromShould
+   {
+   title: "Verschil";
+   formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth;
+   }
+   variable HealthCareAllowanceConclusion
+   {
+    title: "Conclusie";
+    frequency: document;
+    visible: 0;
+    formula: If(ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth>0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth<0,"U ontvangt meer zorgtoeslag dan u recht op heeft","U krijgt exact de toeslag waar u recht op heeft!"));
    }
   }
   variable constantsHuurToeslag
