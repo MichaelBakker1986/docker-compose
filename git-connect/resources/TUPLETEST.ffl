@@ -3,87 +3,84 @@ import BaseModel.*;
 
 model TUPLETEST uses BaseModel
 {
- root
+ variable QQ
  {
-  variable QQ
+  displaytype: scorecard;
+  tuple Tuple
   {
-   displaytype: scorecard;
-   tuple Tuple
+   title: "TupleDefinition";
+   formula: 101;
+   datatype: string;
+   frequency: document;
+   hint: "test";
+   variable Inkomen
    {
-    title: "TupleDefinition";
-    formula: 101;
+    title: "Inkomen";
+    formula: 123;
+    datatype: number;
+    frequency: document;
+   }
+   variable EntityScore
+   {
+    title: "EntityScore";
+    formula: 1234;
+    datatype: number;
+    frequency: document;
+   }
+   variable OptelSubTotal
+   {
+    title: "TSUM";
+    formula: TSUM(SubTotal);
+    datatype: number;
+    frequency: document;
+   }
+   tuple NestedTuple
+   {
+    title: "NestedTuple";
     datatype: string;
     frequency: document;
-    hint: "test";
-    variable Inkomen
+    variable TOTALLOAN
     {
-     title: "Inkomen";
-     formula: 123;
+     title: "TOTALLOAN";
+     formula: TSUM(LoanPart);
      datatype: number;
      frequency: document;
     }
-    variable EntityScore
+    variable SubTotal
     {
-     title: "EntityScore";
-     formula: 1234;
+     title: "SubTotal";
+     formula: 12349;
      datatype: number;
      frequency: document;
-    }
-    variable OptelSubTotal
-    {
-     title: "TSUM";
-     formula: TSUM(SubTotal);
-     datatype: number;
-     frequency: document;
-    }
-    tuple NestedTuple
-    {
-     title: "NestedTuple";
-     datatype: string;
-     frequency: document;
-     variable TOTALLOAN
+     tuple Loan
      {
-      title: "TOTALLOAN";
-      formula: TSUM(LoanPart);
-      datatype: number;
+      title: "Loan";
+      datatype: string;
       frequency: document;
-     }
-     variable SubTotal
-     {
-      title: "SubTotal";
-      formula: 12349;
-      datatype: number;
-      frequency: document;
-      tuple Loan
+      variable LoanPart
       {
-       title: "Loan";
-       datatype: string;
+       title: "LoanPart";
+       formula: 0;
+       datatype: number;
        frequency: document;
-       variable LoanPart
-       {
-        title: "LoanPart";
-        formula: 0;
-        datatype: number;
-        frequency: document;
-       }
-       variable LoanInkomenReference
-       {
-        title: "LoanInkomenReference";
-        formula: Inkomen;
-        datatype: number;
-        frequency: document;
-       }
+      }
+      variable LoanInkomenReference
+      {
+       title: "LoanInkomenReference";
+       formula: Inkomen;
+       datatype: number;
+       frequency: document;
       }
      }
     }
    }
   }
-  variable Balance
-  {
-   title: "Balance";
-   formula: TSUM(OptelSubTotal);
-   datatype: number;
-   frequency: document;
-  }
+ }
+ variable Balance
+ {
+  title: "Balance";
+  formula: TSUM(OptelSubTotal);
+  datatype: number;
+  frequency: document;
  }
 }
