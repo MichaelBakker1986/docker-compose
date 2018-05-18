@@ -4,128 +4,131 @@ model HACKATHON uses BaseModel
  {
   title: "Huishouding";
   display_options: scorecard;
-  variable Applicant
+  variable HuishoudingInvoer
   {
-   title: "Aanvrager";
-   frequency: document;
-   datatype: string;
-   variable ApplicantBirthdate
+   variable Applicant
    {
-    title: "GeboortedatumAanvrager";
+    title: "Aanvrager";
     frequency: document;
-    datatype: date;
-    displaytype: date;
-   }
-   variable ApplicantTotalIncome
-   {
-    title: "AanvragerTotaalInkomen";
-    frequency: document;
-    formula: TSUM(ApplicantIncome);
-    tuple ApplicantIncomes
+    datatype: string;
+    variable ApplicantBirthdate
     {
-     variable ApplicantIncome
-     {
-      title: "AanvragerInkomen";
-      formula: 0;
-     }
+     title: "GeboortedatumAanvrager";
+     frequency: document;
+     datatype: date;
+     displaytype: date;
     }
-   }
-   variable ApplicantTotalAssets
-   {
-    title: "AanvragerTotaalVermogen";
-    frequency: document;
-    formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount);
-    tuple ApplicantBankAccounts
+    variable ApplicantTotalIncome
     {
-     variable ApplicantBankAccountAmount
+     title: "AanvragerTotaalInkomen";
+     frequency: document;
+     formula: TSUM(ApplicantIncome);
+     tuple ApplicantIncomes
      {
-      title: "AanvragerBankSaldo";
-      formula: 0;
-     }
-    }
-    tuple ApplicantEffectAccounts
-    {
-     variable ApplicantEffectAccountAmount
-     {
-      title: "AanvragerEffectenRekeningSaldo";
-      formula: 0;
-     }
-    }
-   }
-  }
-  variable Partner
-  {
-   title: "Partner";
-   frequency: document;
-   datatype: string;
-   variable HasPartner
-   {
-    frequency: document;
-    formula: 0;
-    displaytype: select;
-    choices: "0:Nee|1:Ja";
-   }
-   variable BirthdatePartner
-   {
-    title: "GeboortedatumPartner";
-    frequency: document;
-    datatype: date;
-    displaytype: date;
-   }
-   variable PartnerTotalIncome
-   {
-    title: "PartnerTotaalInkomen";
-    frequency: document;
-    formula: TSUM(PartnerIncome);
-    tuple PartnerIncomes
-    {
-     variable PartnerIncome
-     {
-      title: "PartnerInkomen";
-      formula: 0;
-     }
-    }
-   }
-   variable PartnerTotalAssets
-   {
-    title: "PartnerTotaalVermogen";
-    frequency: document;
-    formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount);
-    tuple PartnerBankAccounts
-    {
-     variable PartnerBankAccountAmount
-     {
-      title: "PartnerBankRekeningSaldo";
-      formula: 0;
-     }
-    }
-    tuple PartnerEffectAccounts
-    {
-     variable PartnerEffectAccountAmount
-     {
-      title: "PartnerEffectAccountSaldo";
-      formula: 0;
-     }
-    }
-   }
-  }
-  variable Children
-  {
-   tuple TChildren
-   {
-    variable Child
-    {
-     title: "Kind";
-     frequency: column;
-     variable BirthdateChild
-     {
-      title: "GeboortedatumKind";
-      datatype: date;
-      displaytype: date;
-      variable ChildAge
+      variable ApplicantIncome
       {
-       title: "LeeftijdKind";
-       formula: DateToYear(NOW())-DateToYear(BirthdateChild);
+       title: "AanvragerInkomen";
+       formula: 0;
+      }
+     }
+    }
+    variable ApplicantTotalAssets
+    {
+     title: "AanvragerTotaalVermogen";
+     frequency: document;
+     formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount);
+     tuple ApplicantBankAccounts
+     {
+      variable ApplicantBankAccountAmount
+      {
+       title: "AanvragerBankSaldo";
+       formula: 0;
+      }
+     }
+     tuple ApplicantEffectAccounts
+     {
+      variable ApplicantEffectAccountAmount
+      {
+       title: "AanvragerEffectenRekeningSaldo";
+       formula: 0;
+      }
+     }
+    }
+   }
+   variable Partner
+   {
+    title: "Partner";
+    frequency: document;
+    datatype: string;
+    variable HasPartner
+    {
+     frequency: document;
+     formula: 0;
+     displaytype: select;
+     choices: "0:Nee|1:Ja";
+    }
+    variable BirthdatePartner
+    {
+     title: "GeboortedatumPartner";
+     frequency: document;
+     datatype: date;
+     displaytype: date;
+    }
+    variable PartnerTotalIncome
+    {
+     title: "PartnerTotaalInkomen";
+     frequency: document;
+     formula: TSUM(PartnerIncome);
+     tuple PartnerIncomes
+     {
+      variable PartnerIncome
+      {
+       title: "PartnerInkomen";
+       formula: 0;
+      }
+     }
+    }
+    variable PartnerTotalAssets
+    {
+     title: "PartnerTotaalVermogen";
+     frequency: document;
+     formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount);
+     tuple PartnerBankAccounts
+     {
+      variable PartnerBankAccountAmount
+      {
+       title: "PartnerBankRekeningSaldo";
+       formula: 0;
+      }
+     }
+     tuple PartnerEffectAccounts
+     {
+      variable PartnerEffectAccountAmount
+      {
+       title: "PartnerEffectAccountSaldo";
+       formula: 0;
+      }
+     }
+    }
+   }
+   variable Children
+   {
+    tuple TChildren
+    {
+     variable Child
+     {
+      title: "Kind";
+      frequency: column;
+      variable BirthdateChild
+      {
+       title: "GeboortedatumKind";
+       datatype: date;
+       displaytype: date;
+       variable ChildAge
+       {
+        title: "LeeftijdKind";
+        formula: DateToYear(NOW())-DateToYear(BirthdateChild);
+       }
       }
      }
     }
@@ -207,43 +210,43 @@ model HACKATHON uses BaseModel
     frequency: document;
    }
   }
-  variable import
+ }
+ variable import
+ {
+  variable GebDatumAangever
   {
-   variable GebDatumAangever
+   datatype: date;
+   displaytype: date;
+  }
+  tuple Relaties
+  {
+   variable Relatie
    {
-    datatype: date;
-    displaytype: date;
-   }
-   tuple Relaties
-   {
-    variable Relatie
+    variable NaamRelatie
     {
-     variable NaamRelatie
+     datatype: string;
+    }
+    variable Relatiecode
+    {
+
+    }
+    variable GebDatumRelatie
+    {
+     datatype: date;
+     displaytype: date;
+    }
+   }
+   tuple InkomensTegenArbeid
+   {
+    variable InkomenTegenArbeid
+    {
+     variable NaamWerkgeverTegenwArbeid
      {
       datatype: string;
      }
-     variable Relatiecode
+     variable LoonTegenwArbeid
      {
 
-     }
-     variable GebDatumRelatie
-     {
-      datatype: date;
-      displaytype: date;
-     }
-    }
-    tuple InkomensTegenArbeid
-    {
-     variable InkomenTegenArbeid
-     {
-      variable NaamWerkgeverTegenwArbeid
-      {
-       datatype: string;
-      }
-      variable LoonTegenwArbeid
-      {
-
-      }
      }
     }
    }
