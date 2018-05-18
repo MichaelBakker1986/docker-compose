@@ -12,7 +12,7 @@ model HACKATHON uses BaseModel
     frequency: document;
     formula: 20;
    }
-      variable OntvangenHuurToeslag
+   variable OntvangenHuurToeslag
    {
     title: "Uw ontvangen huurtoeslag";
     frequency: document;
@@ -35,9 +35,9 @@ model HACKATHON uses BaseModel
    }
    variable MonthlyRent
    {
-   title: "Maandelijkse huur";
-   formula: 400;
-   frequency: document;
+    title: "Maandelijkse huur";
+    formula: 650;
+    frequency: document;
    }
    variable NumberOfPeopleInHouseHold
    {
@@ -67,6 +67,7 @@ model HACKATHON uses BaseModel
      title: "AanvragerTotaalInkomen";
      frequency: document;
      formula: TSUM(ApplicantIncome);
+     locked: 1;
      tuple ApplicantIncomes
      {
       variable ApplicantIncome
@@ -82,12 +83,14 @@ model HACKATHON uses BaseModel
      title: "AanvragerTotaalVermogen";
      frequency: document;
      formula: TSUM(ApplicantBankAccountAmount)+TSUM(ApplicantEffectAccountAmount);
+     locked: 1;
      tuple ApplicantBankAccounts
      {
       variable ApplicantBankAccountAmount
       {
        title: "AanvragerBankSaldo";
        formula: 0;
+       frequency: document;
       }
      }
      tuple ApplicantEffectAccounts
@@ -96,6 +99,7 @@ model HACKATHON uses BaseModel
       {
        title: "AanvragerEffectenRekeningSaldo";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -135,12 +139,14 @@ model HACKATHON uses BaseModel
      title: "PartnerTotaalInkomen";
      frequency: document;
      formula: TSUM(PartnerIncome);
+     locked: 1;
      tuple PartnerIncomes
      {
       variable PartnerIncome
       {
        title: "PartnerInkomen";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -149,12 +155,14 @@ model HACKATHON uses BaseModel
      title: "PartnerTotaalVermogen";
      frequency: document;
      formula: TSUM(PartnerBankAccountAmount)+TSUM(PartnerEffectAccountAmount);
+     locked: 1;
      tuple PartnerBankAccounts
      {
       variable PartnerBankAccountAmount
       {
        title: "PartnerBankRekeningSaldo";
        formula: 0;
+       frequency: document;
       }
      }
      tuple PartnerEffectAccounts
@@ -163,6 +171,7 @@ model HACKATHON uses BaseModel
       {
        title: "PartnerEffectAccountSaldo";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -174,16 +183,18 @@ model HACKATHON uses BaseModel
      variable Child
      {
       title: "Kind";
-      frequency: column;
+      frequency: document;
       variable BirthdateChild
       {
        title: "GeboortedatumKind";
        datatype: date;
        displaytype: date;
+       frequency: document;
        variable ChildAge
        {
         title: "LeeftijdKind";
         formula: DateToYear(NOW())-DateToYear(BirthdateChild);
+        frequency: document;
        }
       }
      }
@@ -301,11 +312,11 @@ model HACKATHON uses BaseModel
    }
    variable TotalRightOfRentAllowancePerMonth
    {
-   title: "Uw recht op huurtoeslag per maand";
-   formula: If(ApplicantTotalIncome<=30390,130,0);
-   frequency: document;
+    title: "Uw recht op huurtoeslag per maand";
+    formula: If(ApplicantTotalIncome<=30390,130,0);
+    frequency: document;
    }
-      variable ActualReceivedRentAllowancePerMonth
+   variable ActualReceivedRentAllowancePerMonth
    {
     title: "Uw daadwerkelijk ontvangen huurtoeslag per maand";
     formula: OntvangenHuurToeslag;
@@ -326,7 +337,7 @@ model HACKATHON uses BaseModel
     visible: 1;
     formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
     datatype: string;
-   }   
+   }
   }
   variable constantsHuurToeslag
   {
@@ -412,15 +423,15 @@ model HACKATHON uses BaseModel
    }
    variable RAUnderMaxAssetAmount
    {
-   formula: If((ApplicantTotalAssets+PartnerTotalAssets)<=RAMaxAssetAmount,1,0);
-   frequency: document;
+    formula: If((ApplicantTotalAssets+PartnerTotalAssets)<=RAMaxAssetAmount,1,0);
+    frequency: document;
    }
-      variable RAMaxRentAmount
-      {
-      formula: If(RA23YearsOrOlderOrChildren=0,RAMaxRentYoungerThan23,RAMaxRentEqualOrOlderThan23);
-      frequency: document;
-      }
-      variable RAUnderMaxRentAmount
+   variable RAMaxRentAmount
+   {
+    formula: If(RA23YearsOrOlderOrChildren=0,RAMaxRentYoungerThan23,RAMaxRentEqualOrOlderThan23);
+    frequency: document;
+   }
+   variable RAUnderMaxRentAmount
    {
     frequency: document;
     formula: If(MonthlyRent<=RAMaxRentAmount,1,0);
@@ -432,8 +443,8 @@ model HACKATHON uses BaseModel
    }
    variable RightOfRentAllowance
    {
-   frequency: document;
-   formula: If(RAUnderMaxRentAmount+RAUnderMaxAssetAmount+UnderMaxIncomeAmount=3,1,0);
+    frequency: document;
+    formula: If(RAUnderMaxRentAmount+RAUnderMaxAssetAmount+UnderMaxIncomeAmount=3,1,0);
    }
   }
  }
