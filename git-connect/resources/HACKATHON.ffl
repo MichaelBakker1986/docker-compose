@@ -465,6 +465,12 @@ model HACKATHON uses BaseModel
    variable RATopOffMargin
    {
    formula: If(NumberOfPeopleInHouseHold>2,RATopOffMargin3orMorePersons,RATopOffMargin1or2Persons);
+   frequency: document;
+   }
+   variable RAAllowancePartA
+   {
+   formula: Max(0,(Min(MonthlyRent,RAQualityDiscountMargin))-CalculatedBaseRent));
+   frequency: document;
    }
   }
  }
