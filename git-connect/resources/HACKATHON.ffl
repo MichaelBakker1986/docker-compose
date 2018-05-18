@@ -479,8 +479,19 @@ model HACKATHON uses BaseModel
    }
    variable RAAllowancePartC
    {
-   formula: If(MonthlyRent>RATopOffMargin,If(NumberOfPeopleInHouseHold<=1,(MonthlyRent-(Max(CalculatedBaseRent,RATopOffMargin))*0.4),0),0);
+   formula: If(MonthlyRent>RATopOffMargin,If(NumberOfPeopleInHouseHold=1,(MonthlyRent-Max(CalculatedBaseRent,RATopOffMargin))*0.4,0),0);
+   frequency: document;
    }
+   variable Helper
+   {
+   formula: (MonthlyRent-Max(CalculatedBaseRent,RATopOffMargin))*0.4;
+   frequency: document;
+   }
+   variable Helper 
+   {
+   
+   }
+   
   }
  }
  variable import
