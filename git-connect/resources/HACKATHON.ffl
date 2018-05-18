@@ -472,6 +472,11 @@ model HACKATHON uses BaseModel
    formula: Max(0,(Min(MonthlyRent,RAQualityDiscountMargin))-CalculatedBaseRent));
    frequency: document;
    }
+   variable RAAllowancePartB
+   {
+   formula: If(MonthlyRent>RAQualityDiscountMargin,0.65*(Min(MonthlyRent,RATopOffMargin)-Max(CalculatedBaseRent,RAQualityDiscountMargin)),0);
+   frequency: document;
+   }
   }
  }
  variable import
