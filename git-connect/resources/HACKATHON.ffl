@@ -337,6 +337,7 @@ model HACKATHON uses BaseModel
     visible: 1;
     formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
     datatype: string;
+    valid: If(DeviationRAActualFromShould>1,"U ontvangt te weinig huurtoeslag!","U ontvangt te veel huurtoeslag!");
    }
   }
   variable constantsHuurToeslag
@@ -460,6 +461,10 @@ model HACKATHON uses BaseModel
    {
     formula: (ApplicableFactorA*POW((ApplicantTotalIncome+PartnerTotalIncome),2))+ApplicableFactorB*(ApplicantTotalIncome+PartnerTotalIncome)+RATaakstellingsbedrag;
     frequency: document;
+   }
+   variable RATopOffMargin
+   {
+   formula: If(NumberOfPeopleInHouseHold>2,RATopOffMargin3orMorePersons,RATopOffMargin1or2Persons);
    }
   }
  }
