@@ -337,6 +337,7 @@ model HACKATHON uses BaseModel
     visible: 1;
     formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
     datatype: string;
+    valid: If(DeviationRAActualFromShould>1,"Always returning a trigger","Always returning a trigger2");
    }
   }
   variable constantsHuurToeslag
