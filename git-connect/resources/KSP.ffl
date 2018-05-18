@@ -26,6 +26,11 @@ model HACKATHON uses BaseModel
     formula: TCOUNT(TChildren);
     frequency: document;
    }
+   variable MonthlyRent
+   {
+   title: "Maandelijkse huur";
+   formula: 400;
+   }
    variable NumberOfPeopleInHouseHold
    {
     title: "Aantal mensen in het huishouden";
@@ -358,7 +363,41 @@ model HACKATHON uses BaseModel
   }
   variable CalculationHuurToeslag
   {
-
+   variable RA23YearsOrOlderOrChildren
+   {
+    frequency: document;
+    formula: If(YoungestParent>=23,1,If(NumberOfChildren>1,0));
+   }
+   variable RAMaxAssetAmount
+   {
+    frequency: document;
+    formula: If(PartnerCount=0,RAMaximumAssetAmount1Person,RAMaximumAssetAmount2Persons);
+   }
+   variable RAUnderMaxAssetAmount
+   {
+   formula: If((ApplicantTotalAssets+PartnerTotalAssets)<=RAMaxAssetAmount,1,0);
+   frequency: document;
+   }
+      variable RAMaxRentAmount
+      {
+      formula: If(RA23YearsOrOlderOrChildren=0,RAMaxRentYoungerThan23,RAMaxRentEqualOrOlderThan23);
+      frequency: document;
+      }
+      variable RAUnderMaxRentAmount
+   {
+    frequency: document;
+    formula: If(MonthlyRent<=RAMaxRentAmount,1,0);
+   }
+   variable UnderMaxIncomeAmount
+   {
+    frequency: document;
+    formula: If(NumberOfPeopleInHouseHold>1,If(ApplicantTotalIncome+PartnerTotalIncome<RAMaxIncomeMultiplePersons,1,0),If(ApplicantTotalIncome<RAMaxIncome1Person,1,0));
+   }
+   variable RightOfRentAllowance
+   {
+   frequency: document;
+   formula: If(RAUnderMaxRentAmount+RAUnderMaxAssetAmount+UnderMaxIncomeAmount=3,1,0);
+   }
   }
  }
  variable import
