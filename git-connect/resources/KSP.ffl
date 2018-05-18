@@ -14,6 +14,11 @@ model HACKATHON uses BaseModel
   }
   variable HuishoudingInvoer
   {
+  variable YoungestParent
+  {
+  frequency: document
+  formula: Min(ApplicantAge,PartnerAge);
+  }
    variable Applicant
    {
     title: "Aanvrager";
@@ -25,6 +30,11 @@ model HACKATHON uses BaseModel
      frequency: document;
      datatype: date;
      displaytype: date;
+    }
+    variable ApplicantAge
+    {
+     formula: DateToYear(NOW())-DateToYear(ApplicantBirthdate);
+     frequency: document;
     }
     variable ApplicantTotalIncome
     {
@@ -81,6 +91,11 @@ model HACKATHON uses BaseModel
      frequency: document;
      datatype: date;
      displaytype: date;
+    }
+    variable PartnerAge
+    {
+     formula: DateToYear(NOW())-DateToYear(BirthdatePartner);
+     frequency: document;
     }
     variable PartnerTotalIncome
     {
@@ -284,36 +299,39 @@ model HACKATHON uses BaseModel
     {
      formula: 0.002171484;
     }
-        variable RAFactorBMultiplePersons
+    variable RAFactorBMultiplePersons
     {
      formula: 0.002116315615;
     }
     variable RATaakstellingsbedrag
     {
-    variable: 16.94;
+     variable: 16.94;
     }
     variable RAMinimumNormRent
     {
-    variable: 208.14;
-    }    
-        variable RAMinimumBaseRent
+     variable: 208.14;
+    }
+    variable RAMinimumBaseRent
     {
-    variable: 225.08;
-    }    
-            variable QualityDiscountMargin
+     variable: 225.08;
+    }
+    variable QualityDiscountMargin
     {
-    variable: 417.34;
-    }    
-                variable TopOffMargin1or2Persons
+     variable: 417.34;
+    }
+    variable TopOffMargin1or2Persons
     {
-    variable: 597.3;
-    }    
-                    variable TopOffMargin3orMorePersons
+     variable: 597.3;
+    }
+    variable TopOffMargin3orMorePersons
     {
-    variable: 640.14;
-    }    
-    
+     variable: 640.14;
+    }
    }
+  }
+  variable CalculationHuurToeslag
+  {
+
   }
  }
  variable import
