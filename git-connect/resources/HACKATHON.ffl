@@ -337,7 +337,6 @@ model HACKATHON uses BaseModel
     visible: 1;
     formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
     datatype: string;
-    valid: If(DeviationRAActualFromShould>1,"Always returning a trigger","Always returning a trigger2");
    }
   }
   variable constantsHuurToeslag
@@ -378,35 +377,35 @@ model HACKATHON uses BaseModel
     }
     variable RATaakstellingsbedrag
     {
-     variable: 16.94;
+     formula: 16.94;
     }
     variable RAMinimumNormRent
     {
-     variable: 208.14;
+     formula: 208.14;
     }
     variable RAMinimumBaseRent
     {
-     variable: 225.08;
+     formula: 225.08;
     }
     variable RAQualityDiscountMargin
     {
-     variable: 417.34;
+     formula: 417.34;
     }
     variable RATopOffMargin1or2Persons
     {
-     variable: 597.3;
+     formula: 597.3;
     }
     variable RATopOffMargin3orMorePersons
     {
-     variable: 640.14;
+     formula: 640.14;
     }
     variable RAMaxIncome1Person
     {
-     variable: 22400;
+     formula: 22400;
     }
     variable RAMaxIncomeMultiplePersons
     {
-     variable: 30400;
+     formula: 30400;
     }
    }
   }
@@ -446,6 +445,21 @@ model HACKATHON uses BaseModel
    {
     frequency: document;
     formula: If(RAUnderMaxRentAmount+RAUnderMaxAssetAmount+UnderMaxIncomeAmount=3,1,0);
+   }
+   variable ApplicableFactorA
+   {
+    formula: If(NumberOfPeopleInHouseHold>1,RAFactorAMultiplePersons,RAFactorA1Person);
+    frequency: document;
+   }
+   variable ApplicableFactorB
+   {
+    formula: If(NumberOfPeopleInHouseHold>1,RAFactorBMultiplePersons,RAFactorB1Person);
+    frequency: document;
+   }
+   variable CalculatedBaseRent
+   {
+    formula: (ApplicableFactorA*POW((ApplicantTotalIncome+PartnerTotalIncome),2))+ApplicableFactorB*(ApplicantTotalIncome+PartnerTotalIncome)+RATaakstellingsbedrag;
+    frequency: document;
    }
   }
  }
