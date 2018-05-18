@@ -8,8 +8,15 @@ model HACKATHON uses BaseModel
   {
    variable OntvangenZorgtoeslag
    {
+    title: "Uw ontvangen zorgtoeslag";
     frequency: document;
     formula: 20;
+   }
+      variable OntvangenHuurToeslag
+   {
+    title: "Uw ontvangen huurtoeslag";
+    frequency: document;
+    formula: 147;
    }
   }
   variable HuishoudingInvoer
@@ -30,6 +37,7 @@ model HACKATHON uses BaseModel
    {
    title: "Maandelijkse huur";
    formula: 400;
+   frequency: document;
    }
    variable NumberOfPeopleInHouseHold
    {
@@ -65,6 +73,7 @@ model HACKATHON uses BaseModel
       {
        title: "AanvragerInkomen";
        formula: 0;
+       frequency: document;
       }
      }
     }
@@ -229,7 +238,7 @@ model HACKATHON uses BaseModel
     locked: 1;
    }
   }
-  variable CalculationZorgToeslag
+  variable CalculationToeslag
   {
    variable HANormPremium1Person
    {
@@ -261,7 +270,7 @@ model HACKATHON uses BaseModel
     frequency: document;
     visible: 0;
    }
-   variable RelevantHealhCareAllowancePerMonth
+   variable RelevantHealthCareAllowancePerMonth
    {
     title: "Uw recht op zorgtoeslag per maand";
     formula: RelevantHealthCareAllowance/12;
@@ -275,10 +284,10 @@ model HACKATHON uses BaseModel
     frequency: document;
     fixed_decimals: 2;
    }
-   variable DeviationActualFromShould
+   variable DeviationHAActualFromShould
    {
-    title: "Verschil";
-    formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth;
+    title: "Verschil zorgtoeslag";
+    formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealthCareAllowancePerMonth;
     frequency: document;
     fixed_decimals: 2;
    }
@@ -287,9 +296,37 @@ model HACKATHON uses BaseModel
     title: "Conclusie";
     frequency: document;
     visible: 1;
-    formula: If(DeviationActualFromShould<0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(DeviationActualFromShould>0,"U ontvangt meer zorgtoeslag dan u recht op heeft",If(DeviationActualFromShould=0,"U krijgt exact de toeslag waar u recht op heeft!",0)));
+    formula: If(DeviationHAActualFromShould<0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(DeviationHAActualFromShould>0,"U ontvangt meer zorgtoeslag dan u recht op heeft",If(DeviationHAActualFromShould=0,"U krijgt exact de zorgtoeslag waar u recht op heeft!",0)));
     datatype: string;
    }
+   variable TotalRightOfRentAllowancePerMonth
+   {
+   title: "Uw recht op huurtoeslag per maand";
+   formula: If(ApplicantTotalIncome<=22391,147,0);
+   frequency: document;
+   }
+      variable ActualReceivedRentAllowancePerMonth
+   {
+    title: "Uw daadwerkelijk ontvangen huurtoeslag per maand";
+    formula: OntvangenHuurToeslag;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable DeviationRAActualFromShould
+   {
+    title: "Verschil";
+    formula: ActualReceivedRentAllowancePerMonth-TotalRightOfRentAllowancePerMonth;
+    frequency: document;
+    fixed_decimals: 2;
+   }
+   variable RentAllowanceConclusion
+   {
+    title: "Conclusie";
+    frequency: document;
+    visible: 1;
+    formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
+    datatype: string;
+   }   
   }
   variable constantsHuurToeslag
   {
