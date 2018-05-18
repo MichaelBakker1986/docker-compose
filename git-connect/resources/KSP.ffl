@@ -226,23 +226,30 @@ model HACKATHON uses BaseModel
    {
     title: "Uw recht op zorgtoeslag per maand";
     formula: RelevantHealthCareAllowance/12;
+    frequency: document;
+    fixed_decimals: 2;
    }
    variable ActualReceivedHealthCareAllowancePerMonth
    {
     title: "Uw daadwerkelijk ontvangen zorgtoeslag per maand";
     formula: OntvangenZorgtoeslag;
+    frequency: document;
+    fixed_decimals: 2;
    }
    variable DeviationActualFromShould
    {
-   title: "Verschil";
-   formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth;
+    title: "Verschil";
+    formula: ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth;
+    frequency: document;
+    fixed_decimals: 2;
    }
    variable HealthCareAllowanceConclusion
    {
     title: "Conclusie";
     frequency: document;
-    visible: 0;
-    formula: If(ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth>0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(ActualReceivedHealthCareAllowancePerMonth-RelevantHealhCareAllowancePerMonth<0,"U ontvangt meer zorgtoeslag dan u recht op heeft","U krijgt exact de toeslag waar u recht op heeft!"));
+    visible: 1;
+    formula: If(DeviationActualFromShould<0,"U ontvangt minder zorgtoeslag dan waar u recht op heeft",If(DeviationActualFromShould>0,"U ontvangt meer zorgtoeslag dan u recht op heeft",If(DeviationActualFromShould=0,"U krijgt exact de toeslag waar u recht op heeft!",0)));
+    datatype: string;
    }
   }
   variable constantsHuurToeslag
@@ -267,8 +274,45 @@ model HACKATHON uses BaseModel
    {
     variable RAFactorA1Person
     {
-
+     formula: 0.000000684366;
     }
+    variable RAFactorAMultiplePersons
+    {
+     formula: 0.000000387746;
+    }
+    variable RAFactorB1Person
+    {
+     formula: 0.002171484;
+    }
+        variable RAFactorBMultiplePersons
+    {
+     formula: 0.002116315615;
+    }
+    variable RATaakstellingsbedrag
+    {
+    variable: 16.94;
+    }
+    variable RAMinimumNormRent
+    {
+    variable: 208.14;
+    }    
+        variable RAMinimumBaseRent
+    {
+    variable: 225.08;
+    }    
+            variable QualityDiscountMargin
+    {
+    variable: 417.34;
+    }    
+                variable TopOffMargin1or2Persons
+    {
+    variable: 597.3;
+    }    
+                    variable TopOffMargin3orMorePersons
+    {
+    variable: 640.14;
+    }    
+    
    }
   }
  }
