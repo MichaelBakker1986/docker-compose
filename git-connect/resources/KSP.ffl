@@ -14,24 +14,24 @@ model HACKATHON uses BaseModel
   }
   variable HuishoudingInvoer
   {
-  variable YoungestParent
-  {
-  title: "Jongste ouder";
-  frequency: document;
-  formula: Min(ApplicantAge,PartnerAge);
-  }
-  variable NumberOfChildren
-  {
-  title: "Aantal kinderen";
-  formula: TCOUNT(TChildren);
-  frequency: document;
-  }
-    variable NumberOfPeopleInHouseHold
-  {
-  title: "Aantal mensen in het huishouden";
-  formula: 1+NumberOfChildren+PartnerCount;
-  frequency: document;
-  }
+   variable YoungestParent
+   {
+    title: "Jongste ouder";
+    frequency: document;
+    formula: Min(ApplicantAge,PartnerAge);
+   }
+   variable NumberOfChildren
+   {
+    title: "Aantal kinderen";
+    formula: TCOUNT(TChildren);
+    frequency: document;
+   }
+   variable NumberOfPeopleInHouseHold
+   {
+    title: "Aantal mensen in het huishouden";
+    formula: 1+NumberOfChildren+PartnerCount;
+    frequency: document;
+   }
    variable Applicant
    {
     title: "Aanvrager";
@@ -98,11 +98,11 @@ model HACKATHON uses BaseModel
      displaytype: select;
      choices: "0:Nee|1:Ja";
     }
-    variable PartnerCount 
+    variable PartnerCount
     {
-    visible: 1;
-    frequency: document;
-    formula: Case(HasPartner,[0: 0 | 1: 1]);
+     visible: 1;
+     frequency: document;
+     formula: Case(HasPartner,[0: 0 | 1: 1]);
     }
     variable BirthdatePartner
     {
@@ -334,17 +334,25 @@ model HACKATHON uses BaseModel
     {
      variable: 225.08;
     }
-    variable QualityDiscountMargin
+    variable RAQualityDiscountMargin
     {
      variable: 417.34;
     }
-    variable TopOffMargin1or2Persons
+    variable RATopOffMargin1or2Persons
     {
      variable: 597.3;
     }
-    variable TopOffMargin3orMorePersons
+    variable RATopOffMargin3orMorePersons
     {
      variable: 640.14;
+    }
+    variable RAMaxIncome1Person
+    {
+     variable: 22400;
+    }
+    variable RAMaxIncomeMultiplePersons
+    {
+     variable: 30400;
     }
    }
   }
