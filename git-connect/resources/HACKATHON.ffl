@@ -335,7 +335,7 @@ model HACKATHON uses BaseModel
     title: "Conclusie";
     frequency: document;
     visible: 1;
-    formula: If(DeviationRAActualFromShould<0,"U ontvangt minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
+    formula: If(DeviationRAActualFromShould<0,"U ontvangt "+DeviationRAActualFromShould+" minder huurtoeslag dan waar u recht op heeft",If(DeviationRAActualFromShould>0,"U ontvangt "++DeviationRAActualFromShould++" meer huurtoeslag dan u recht op heeft!",If(DeviationRAActualFromShould=0,"U krijgt exact de huurtoeslag waar u recht op heeft!",0)));
     datatype: string;
     valid: If(DeviationRAActualFromShould>1,"U ontvangt te weinig huurtoeslag!","U ontvangt te veel huurtoeslag!");
    }
