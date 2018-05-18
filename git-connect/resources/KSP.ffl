@@ -16,8 +16,15 @@ model HACKATHON uses BaseModel
   {
   variable YoungestParent
   {
-  frequency: document
+  title: "Jongste ouder";
+  frequency: document;
   formula: Min(ApplicantAge,PartnerAge);
+  }
+  variable NumberOfChildren
+  {
+  title: "Aantal kinderen";
+  formula: TCOUNT(TChildren);
+  frequency: document;
   }
    variable Applicant
    {
