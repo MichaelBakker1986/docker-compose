@@ -16,7 +16,7 @@ model HACKATHON uses BaseModel
    {
     title: "Uw ontvangen huurtoeslag";
     frequency: document;
-    formula: 147;
+    formula: 130;
    }
   }
   variable HuishoudingInvoer
@@ -302,7 +302,7 @@ model HACKATHON uses BaseModel
    variable TotalRightOfRentAllowancePerMonth
    {
    title: "Uw recht op huurtoeslag per maand";
-   formula: If(ApplicantTotalIncome<=22391,147,0);
+   formula: If(ApplicantTotalIncome<=30390,130,0);
    frequency: document;
    }
       variable ActualReceivedRentAllowancePerMonth
