@@ -26,6 +26,12 @@ model HACKATHON uses BaseModel
   formula: TCOUNT(TChildren);
   frequency: document;
   }
+    variable NumberOfPeopleInHouseHold
+  {
+  title: "Aantal mensen in het huishouden";
+  formula: 1+NumberOfChildren+PartnerCount;
+  frequency: document;
+  }
    variable Applicant
    {
     title: "Aanvrager";
@@ -91,6 +97,12 @@ model HACKATHON uses BaseModel
      formula: 0;
      displaytype: select;
      choices: "0:Nee|1:Ja";
+    }
+    variable PartnerCount 
+    {
+    visible: 1;
+    frequency: document;
+    formula: Case(HasPartner,[0: 0 | 1: 1]);
     }
     variable BirthdatePartner
     {
