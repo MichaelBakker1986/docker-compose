@@ -201,13 +201,15 @@ class Authorization {
       this.addModelPrivileges(MichaelFaceBookID, "LGD", true);
       this.addModelPrivileges(LGDFacebookID, "LGD", true);
       this.addModelPrivileges(RuudFacebookID, "LGD", true);
+     
       this.addModelPrivileges(MarcoFacebookID, "LGD", true);
       this.addModelPrivileges(MonliFacebookID, "KSP", true);
       this.addModelPrivileges(MichaelFaceBookID, MVO, true);
       this.addModelPrivileges(MichaelFaceBookID, "VASTGOED", true);
       this.addModelPrivileges(DeborahFacebookID, "VASTGOED", true);
       this.addModelPrivileges(RonaldFacebookID, "VASTGOED", true);
-
+      this.addModelPrivileges(MonliFacebookID, "INTERESTSERVICE", true);
+      this.addModelPrivileges(MichaelFaceBookID, "INTERESTSERVICE", true);
       this.addModelPrivileges(MichaelFaceBookID, 'V05', true);
       this.addModelPrivileges(MichaelFaceBookID, 'PRICING', true);
       this.addModelPrivileges(RamonFBId, "V05", true);
