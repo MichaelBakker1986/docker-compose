@@ -72,7 +72,6 @@ FFLFormatter.prototype.extractVars = function() {
     while (noneexit) {
         noneexit = false;
         data = data.replace(/{([^}{]*?)}/gm, function($0, $1, $2) {
-            //this happens to many times...
             noneexit = true;
             const index = register.addRow([$1, $2, $0.length + $2])
             return '___' + index
